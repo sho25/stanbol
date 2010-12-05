@@ -455,6 +455,24 @@ name|iksproject
 operator|.
 name|rick
 operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
+name|rdf
+operator|.
+name|RdfResourceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|rick
+operator|.
 name|yard
 operator|.
 name|solr
@@ -633,6 +651,36 @@ name|int
 name|LRU_MAPPINGS_CACHE_SIZE
 init|=
 literal|1024
+decl_stmt|;
+comment|/**      * The IndexField for the Solr score. This field is mapped to the field       * {@link RdfResourceEnum#resultScore} and uses {@link IndexDataTypeEnum#FLOAT}      */
+specifier|private
+specifier|static
+specifier|final
+name|IndexField
+name|scoreField
+init|=
+operator|new
+name|IndexField
+argument_list|(
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+name|RdfResourceEnum
+operator|.
+name|resultScore
+operator|.
+name|getUri
+argument_list|()
+argument_list|)
+argument_list|,
+name|IndexDataTypeEnum
+operator|.
+name|FLOAT
+operator|.
+name|getIndexType
+argument_list|()
+argument_list|)
 decl_stmt|;
 comment|/**      * Internally used as LRU Cache with {@link SolrFieldMapper#LRU_MAPPINGS_CACHE_SIZE}      * elements. This subclass of {@link LinkedHashMap} overrides the      * {@link LinkedHashMap#removeEldestEntry(Entry)} as suggested by the java      * doc. It also uses the constructor that activates the ordering based on      * access time rather tan insertion time.      *       * @author Rupert Westenthaler      *      * @param<K> generic type of the key      * @param<V> generic type of the value      */
 specifier|private
@@ -855,6 +903,23 @@ comment|//   meaning, that this index document field does not represent
 comment|//   an logical IndexField and should be ignored
 return|return
 literal|null
+return|;
+block|}
+elseif|else
+if|if
+condition|(
+name|SolrConst
+operator|.
+name|SCORE_FIELD
+operator|.
+name|equals
+argument_list|(
+name|fieldName
+argument_list|)
+condition|)
+block|{
+return|return
+name|scoreField
 return|;
 block|}
 comment|//parse the prefix and suffix
@@ -2400,7 +2465,7 @@ return|return
 name|__prefixMap
 return|;
 block|}
-comment|/** 	 * Getter for the full name based on the short name. The short name is defined 	 * as the prefix followed by the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} and 	 * the local name of the field. The returned field name is defined as the 	 * namespace followed by the local name.<p> 	 * If the parsed short field name does not contain the  	 * {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} this method returns the parsed 	 * String.<p> 	 * The local name may contain the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}  	 * Ô{@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}'. The prefix MUST NOT contain 	 * this char, because {@link String#indexOf(int)} is used to split prefix 	 * and local name. 	 * @param shortFieldName the short name 	 * @return the full name 	 * @throws IllegalArgumentException if<code>null</code> is parsed as shortFieldName 	 * @throws IllegalStateException if the found prefix is not contained in the configuration 	 */
+comment|/** 	 * Getter for the full name based on the short name. The short name is defined 	 * as the prefix followed by the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} and 	 * the local name of the field. The returned field name is defined as the 	 * namespace followed by the local name.<p> 	 * If the parsed short field name does not contain the  	 * {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} this method returns the parsed 	 * String.<p> 	 * The local name may contain the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}  	 * {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}'. The prefix MUST NOT contain 	 * this char, because {@link String#indexOf(int)} is used to split prefix 	 * and local name. 	 * @param shortFieldName the short name 	 * @return the full name 	 * @throws IllegalArgumentException if<code>null</code> is parsed as shortFieldName 	 * @throws IllegalStateException if the found prefix is not contained in the configuration 	 */
 specifier|protected
 specifier|final
 name|String

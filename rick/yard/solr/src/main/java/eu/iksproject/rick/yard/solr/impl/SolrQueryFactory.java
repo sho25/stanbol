@@ -1308,6 +1308,14 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+comment|//add the select for the score
+name|query
+operator|.
+name|addField
+argument_list|(
+literal|"score"
+argument_list|)
+expr_stmt|;
 block|}
 specifier|private
 name|IndexConstraint

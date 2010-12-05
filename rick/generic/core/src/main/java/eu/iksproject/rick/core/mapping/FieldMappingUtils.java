@@ -511,7 +511,9 @@ decl_stmt|;
 name|String
 name|fieldPattern
 init|=
-name|getFullUri
+name|NamespaceEnum
+operator|.
+name|getFullName
 argument_list|(
 name|parts
 index|[
@@ -661,78 +663,17 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-specifier|private
-specifier|static
-name|String
-name|getFullUri
-parameter_list|(
-name|String
-name|value
-parameter_list|)
-block|{
-name|int
-name|index
-init|=
-name|value
-operator|.
-name|indexOf
-argument_list|(
-literal|':'
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|index
-operator|>
-literal|0
-condition|)
-block|{
-name|NamespaceEnum
-name|namespace
-init|=
-name|NamespaceEnum
-operator|.
-name|forPrefix
-argument_list|(
-name|value
-operator|.
-name|substring
-argument_list|(
-literal|0
-argument_list|,
-name|index
-argument_list|)
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|namespace
-operator|!=
-literal|null
-condition|)
-block|{
-name|value
-operator|=
-name|namespace
-operator|.
-name|getNamespace
-argument_list|()
-operator|+
-name|value
-operator|.
-name|substring
-argument_list|(
-name|index
-operator|+
-literal|1
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-return|return
-name|value
-return|;
-block|}
+comment|//moved to NamespaceEnum
+comment|//	private static String getFullUri(String value){
+comment|//		int index = value.indexOf(':');
+comment|//		if(index>0){
+comment|//			NamespaceEnum namespace = NamespaceEnum.forPrefix(value.substring(0, index));
+comment|//			if(namespace!= null){
+comment|//				value = namespace.getNamespace()+value.substring(index+1);
+comment|//			}
+comment|//		}
+comment|//		return value;
+comment|//	}
 specifier|private
 specifier|static
 name|List
@@ -788,7 +729,9 @@ block|{
 name|String
 name|act
 init|=
-name|getFullUri
+name|NamespaceEnum
+operator|.
+name|getFullName
 argument_list|(
 name|parts
 index|[

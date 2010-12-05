@@ -48,6 +48,9 @@ block|,
 comment|/** 	 * The site that defines/manages a sign 	 */
 name|signSite
 block|,
+comment|/** 	 * The ranking of the entity by this site in the value range of [0..1] 	 * A sign with the rank 1 would be (one of) the most important entities 	 * managed by this Site. A sign with rank 0 has no relevance. Even that this 	 * is still within the value range one could wonder why this site does 	 * even manage a representation about that entity. 	 */
+name|signRank
+block|,
 comment|/** 	 * The representation of the Sign (domain=Sign, range=Representation). 	 */
 name|signRepresentation
 block|,
@@ -169,12 +172,14 @@ comment|/** 	 * The property used to link from the {@link #QueryResultSet} to th
 constructor|queryResult(NamespaceEnum.rickQuery
 block|)
 enum|,
-comment|/** 	 * The ranking of the result, optimally the page rank or if not available the 	 * number of incoming relations 	 */
-name|resultRank
+comment|/** 	 * The score of the result in respect to the parsed query. 	 */
+name|resultScore
 argument_list|(
 name|NamespaceEnum
 operator|.
 name|rickQuery
+argument_list|,
+literal|"score"
 argument_list|)
 operator|,
 comment|/** 	 * The id of the site the result was found 	 */

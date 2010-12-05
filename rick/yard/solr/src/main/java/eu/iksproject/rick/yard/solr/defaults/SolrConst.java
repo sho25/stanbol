@@ -127,6 +127,15 @@ name|SPECIAL_FIELD_PREFIX
 operator|+
 literal|"domain"
 decl_stmt|;
+comment|/** 	 * The field name used by Solr for the score of query results 	 */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SCORE_FIELD
+init|=
+literal|"score"
+decl_stmt|;
 block|}
 end_class
 

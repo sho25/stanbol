@@ -131,6 +131,22 @@ name|servicesapi
 operator|.
 name|query
 operator|.
+name|FieldQueryFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|rick
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
 name|QueryResultList
 import|;
 end_import
@@ -223,6 +239,11 @@ function_decl|;
 comment|/** 	 * Getter for the FieldMappings configured for this Site 	 * @return The {@link FieldMapping} present for this Site. 	 */
 name|FieldMapper
 name|getFieldMapper
+parameter_list|()
+function_decl|;
+comment|/** 	 * Getter for the QueryFactory implementation preferable used with this Site. 	 * Note that Site MUST support query instances regardless of there specific 	 * implementation. However specific implementations might have performance 	 * advantages for query processing and may be even execution. Therefore 	 * if one creates queries that are specifically executed on this specific 	 * site, that it is best practice to use the instance provided by this 	 * method. 	 * @return The query factory of this site. 	 */
+name|FieldQueryFactory
+name|getQueryFactory
 parameter_list|()
 function_decl|;
 block|}

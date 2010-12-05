@@ -305,7 +305,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/"
+literal|"/rick"
 argument_list|)
 specifier|public
 specifier|static
@@ -313,14 +313,14 @@ specifier|final
 name|String
 name|ALIAS_PROPERTY
 init|=
-literal|"eu.iksproject.fise.jersey.alias"
+literal|"eu.iksproject.rick.jersey.alias"
 decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/static"
+literal|"/rick/static"
 argument_list|)
 specifier|public
 specifier|static
@@ -328,14 +328,14 @@ specifier|final
 name|String
 name|STATIC_RESOURCES_URL_ROOT_PROPERTY
 init|=
-literal|"eu.iksproject.fise.jersey.static.url"
+literal|"eu.iksproject.rick.jersey.static.url"
 decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/META-INF/static"
+literal|"/rick/META-INF/static"
 argument_list|)
 specifier|public
 specifier|static
@@ -343,10 +343,10 @@ specifier|final
 name|String
 name|STATIC_RESOURCES_CLASSPATH_PROPERTY
 init|=
-literal|"eu.iksproject.fise.jersey.static.classpath"
+literal|"eu.iksproject.rick.jersey.static.classpath"
 decl_stmt|;
 comment|//@Property(value = "/META-INF/templates")
-comment|//public static final String FREEMARKER_TEMPLATE_CLASSPATH_PROPERTY = "eu.iksproject.fise.jersey.templates.classpath";
+comment|//public static final String FREEMARKER_TEMPLATE_CLASSPATH_PROPERTY = "eu.iksproject.rick.jersey.templates.classpath";
 annotation|@
 name|Reference
 name|TcManager

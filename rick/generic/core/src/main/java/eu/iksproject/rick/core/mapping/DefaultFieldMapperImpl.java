@@ -1068,7 +1068,7 @@ block|}
 block|}
 comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#applyMappings(eu.iksproject.rick.servicesapi.model.Representation, eu.iksproject.rick.servicesapi.model.Representation) 	 */
 specifier|public
-name|void
+name|Representation
 name|applyMappings
 parameter_list|(
 name|Representation
@@ -1444,6 +1444,9 @@ block|}
 block|}
 block|}
 comment|/* 		 * TODO: return a "MappingReport" 		 * All mapping activities should be documented and stored with the 		 * MappedEntity as MappingActivity! 		 */
+return|return
+name|target
+return|;
 block|}
 comment|/** 	 *  	 * @param mapping 	 * @param field 	 * @param values 	 * @param globalFiltered 	 * @param targets 	 */
 specifier|private
@@ -1643,13 +1646,6 @@ argument_list|)
 expr_stmt|;
 break|break;
 block|}
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"TODO: Filters are currently not supported by this Implementation"
-argument_list|)
-expr_stmt|;
 comment|/* 			 * TODO: add general purpose functionality to apply Constraints. 			 * Currently this is done by the specific Query Implementations :( 			 *  - use the constraint to filter the values collection! 			 */
 block|}
 comment|//nothing to do
