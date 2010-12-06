@@ -85,6 +85,26 @@ begin_import
 import|import
 name|java
 operator|.
+name|net
+operator|.
+name|SocketTimeoutException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|UnknownHostException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Date
@@ -233,19 +253,21 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|slf4j
 operator|.
-name|fise
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|engines
+name|slf4j
 operator|.
-name|geonames
-operator|.
-name|impl
-operator|.
-name|MockComponentContext
+name|LoggerFactory
 import|;
 end_import
 
@@ -260,6 +282,20 @@ operator|.
 name|servicesapi
 operator|.
 name|ContentItem
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|EngineException
 import|;
 end_import
 
@@ -346,6 +382,19 @@ specifier|public
 class|class
 name|TestLocationEnhancementEngine
 block|{
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|TestLocationEnhancementEngine
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|/** 	 * The context for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
 specifier|public
 specifier|static
@@ -705,9 +754,8 @@ specifier|public
 name|void
 name|testLocationEnhancementEngine
 parameter_list|()
-throws|throws
-name|Exception
 block|{
+comment|//throws Exception{
 comment|//create a content item
 name|ContentItem
 name|ci
@@ -760,6 +808,8 @@ name|DBPEDIA_PLACE
 argument_list|)
 expr_stmt|;
 comment|//perform the computation of the enhancements
+try|try
+block|{
 name|locationEnhancementEngine
 operator|.
 name|computeEnhancements
@@ -767,6 +817,63 @@ argument_list|(
 name|ci
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|EngineException
+name|e
+parameter_list|)
+block|{
+if|if
+condition|(
+name|e
+operator|.
+name|getCause
+argument_list|()
+operator|instanceof
+name|UnknownHostException
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to test LocationEnhancemetEngine when offline! -> skipping this test"
+argument_list|,
+name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
+elseif|else
+if|if
+condition|(
+name|e
+operator|.
+name|getCause
+argument_list|()
+operator|instanceof
+name|SocketTimeoutException
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Seams like the geonames.org webservice is currently unavailable -> skipping this test"
+argument_list|,
+name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
+block|}
 comment|// ... and test the results
 comment|/*     	 * TODO: rw 20100617      	 *  - Expected results depend on the used Index.     	 *  - Use an example where the Organisation, Person and Place is part     	 *    of the index     	 */
 name|int
