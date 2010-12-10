@@ -368,8 +368,7 @@ argument_list|(
 name|mimeType
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
+return|return
 name|factories
 operator|!=
 literal|null
@@ -379,14 +378,6 @@ name|factories
 operator|.
 name|isEmpty
 argument_list|()
-condition|)
-block|{
-return|return
-literal|true
-return|;
-block|}
-return|return
-literal|false
 return|;
 block|}
 comment|/**      * This returns a model containing all the metadata that could be extracted      * by reading the given input stream using the given MIME type.      *       * @param in      *            an {@link InputStream} where to read the document from      * @param docId      *            a {@link String} with the document URI      * @param mimeType      *            a {@link String} with the MIME type      * @return a {@link Model} containing the metadata or {@code null} if no      *         extractor is available for the given MIME type      * @throws ExtractorException      *             if there is an error when extracting the metadata      * @throws IOException      *             if there is an error when reading the input stream      */

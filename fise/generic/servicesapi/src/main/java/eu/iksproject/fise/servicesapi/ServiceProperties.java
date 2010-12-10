@@ -41,7 +41,7 @@ name|getServiceProperties
 parameter_list|()
 function_decl|;
 comment|//TODO review the definition of constants
-comment|/** 	 * Property Key used to define the order in which EhancementEngines are 	 * called by the {@link EnhancementJobManager}. This property expects a 	 * single {@link Integer} as value 	 */
+comment|/** 	 * Property Key used to define the order in which {@link EnhancementEngine}s are 	 * called by the {@link EnhancementJobManager}. This property expects a 	 * single {@link Integer} as value 	 */
 name|String
 name|ENHANCEMENT_ENGINE_ORDERING
 init|=
@@ -65,7 +65,7 @@ name|ORDERING_EXTRACTION_ENHANCEMENT
 init|=
 literal|1
 decl_stmt|;
-comment|/** 	 * The default ordering uses {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT} 	 *  -1 . So by default EnhancementEngines are called after all engines that 	 *  use an value within the ordering range defined by  	 *  {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT} 	 */
+comment|/** 	 * The default ordering uses {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT} 	 * -1 . So by default EnhancementEngines are called after all engines that 	 * use an value within the ordering range defined by 	 * {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT} 	 */
 name|Integer
 name|ORDERING_DEFAULT
 init|=

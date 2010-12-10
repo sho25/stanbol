@@ -170,6 +170,10 @@ specifier|public
 class|class
 name|EnhancementRDFUtils
 block|{
+specifier|private
+name|EnhancementRDFUtils
+parameter_list|()
+block|{     }
 comment|/** 	 * @param literalFactory the LiteralFactory to use  	 * @param graph the MGraph to use 	 * @param contentItemId the contentItemId the enhancement is extracted from 	 * @param relatedEnhancements enhancements this textAnnotation is related to 	 * @param tag the related entity 	 */
 specifier|public
 specifier|static

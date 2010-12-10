@@ -124,7 +124,7 @@ operator|=
 literal|"http://fise.iks-project.eu/ontology/selection-context"
 argument_list|)
 name|String
-name|getSeletionContext
+name|getSelectionContext
 parameter_list|()
 function_decl|;
 annotation|@

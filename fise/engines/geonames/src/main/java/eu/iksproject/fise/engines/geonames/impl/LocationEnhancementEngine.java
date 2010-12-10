@@ -81,6 +81,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|EnumMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|HashMap
 import|;
 end_import
@@ -545,15 +555,13 @@ name|EnhancementEngine
 implements|,
 name|ServiceProperties
 block|{
-comment|/**      * The default value for the Execution of this Engine. Currently set to       * {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT}      */
+comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT}      */
 specifier|public
 specifier|static
 specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_EXTRACTION_ENHANCEMENT
 decl_stmt|;
 specifier|private
@@ -571,7 +579,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * This maps geonames.org feature classes to dbPedia.org ontology classes 	 */
+comment|/**      * This maps geonames.org feature classes to dbPedia.org ontology classes      */
 specifier|public
 specifier|static
 specifier|final
@@ -600,7 +608,7 @@ argument_list|>
 argument_list|>
 name|FEATURE_TYPE_CONCEPT_MAPPINGS
 decl_stmt|;
-comment|/** 	 * Default value for minimum scores of search results are added to the  	 * metadata of the parsed ContentItem 	 */
+comment|/**      * Default value for minimum scores of search results are added to the      * metadata of the parsed ContentItem      */
 specifier|private
 specifier|static
 specifier|final
@@ -619,7 +627,7 @@ name|MIN_SCORE
 init|=
 literal|"eu.iksproject.fise.engines.geonames.locationEnhancementEngine.min-score"
 decl_stmt|;
-comment|/** 	 * Default values for the number of results returned by search requests 	 * to the geonames.org web service 	 */
+comment|/**      * Default values for the number of results returned by search requests      * to the geonames.org web service      */
 specifier|private
 specifier|static
 specifier|final
@@ -638,7 +646,7 @@ name|MAX_LOCATION_ENHANCEMENTS
 init|=
 literal|"eu.iksproject.fise.engines.geonames.locationEnhancementEngine.max-location-enhancements"
 decl_stmt|;
-comment|/** 	 * Default value for the minimum score of search results used to also add 	 * the hierarchy 	 */
+comment|/**      * Default value for the minimum score of search results used to also add      * the hierarchy      */
 specifier|private
 specifier|static
 specifier|final
@@ -690,10 +698,6 @@ argument_list|>
 name|mappings
 init|=
 operator|new
-name|java
-operator|.
-name|util
-operator|.
 name|EnumMap
 argument_list|<
 name|FeatureClass
@@ -2197,7 +2201,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-comment|/*     			 * TODO: Review if it makes sense to catch here for each name, or     			 * to catch the whole loop.     			 * This depends if single requests can result in Exceptions     			 * (e.g. because of encoding problems) or if usually Exceptions     			 * are thrown because of general things like connection issues     			 * or service unavailability.     			 */
+comment|/*                      * TODO: Review if it makes sense to catch here for each name, or                      * to catch the whole loop.                      * This depends if single requests can result in Exceptions                      * (e.g. because of encoding problems) or if usually Exceptions                      * are thrown because of general things like connection issues                      * or service unavailability.                      */
 throw|throw
 operator|new
 name|EngineException
@@ -2327,7 +2331,7 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|/* 						 * NOTE: If score is not present all suggestions are 						 * added as enhancements to the metadata of the content 						 * item. 						 */
+comment|/*                                * NOTE: If score is not present all suggestions are                                * added as enhancements to the metadata of the content                                * item.                                */
 block|}
 comment|//write the enhancement!
 name|NonLiteral
@@ -2482,7 +2486,7 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|/* 									 * The hierarchy service dose not provide a score, because it would be 1.0 									 * so we need to set the score to this value. 									 * Currently is is set to the value of the suggested entry 									 */
+comment|/*                                               * The hierarchy service dose not provide a score, because it would be 1.0                                               * so we need to set the score to this value.                                               * Currently is is set to the value of the suggested entry                                               */
 name|hierarchyEntry
 operator|.
 name|setScore
@@ -2546,7 +2550,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/** 	 * Getter for the socre in a range from [0..1]<p> 	 * NOTE (2010.11.16, rw): GeoNames previously returned the score in the 	 *   range from [0..1]. It looks like that up from now they use the 	 *   range [0..100]. Therefore I created this method to make the necessary 	 *   adaptation. 	 * see also http://code.google.com/p/iks-project/issues/detail?id=89  	 * @param toponym the toponym 	 * @return the score in a range [0..1] 	 * @throws InsufficientStyleException 	 */
+comment|/**      * Getter for the socre in a range from [0..1]<p>      * NOTE (2010.11.16, rw): GeoNames previously returned the score in the      * range from [0..1]. It looks like that up from now they use the      * range [0..100]. Therefore I created this method to make the necessary      * adaptation.      * see also http://code.google.com/p/iks-project/issues/detail?id=89      *      * @param toponym the toponym      * @return the score in a range [0..1]      * @throws InsufficientStyleException      */
 specifier|private
 name|Double
 name|getToponymScore
@@ -2566,7 +2570,7 @@ operator|/
 literal|100
 return|;
 block|}
-comment|/** 	 * Returns the hierarchy for the parsed toponym. The planet Earth will be 	 * at the first position of the list and the parsed toponum represents the 	 * last element of the list 	 * @param toponym the toponym 	 * @return The list containing the hierarchy 	 * @throws Exception on any error while accessing the webservice 	 */
+comment|/**      * Returns the hierarchy for the parsed toponym. The planet Earth will be      * at the first position of the list and the parsed toponum represents the      * last element of the list      *      * @param toponym the toponym      * @return The list containing the hierarchy      * @throws Exception on any error while accessing the webservice      */
 specifier|protected
 name|Collection
 argument_list|<
@@ -2598,7 +2602,7 @@ name|FULL
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Writes an entity enhancement for the content item in the parsed graph 	 * based on the parsed toponym. 	 * @param contentItemId The id of the contentItem 	 * @param graph The graph used to write the triples 	 * @param literalFactory the literal factory used to create literals 	 * @param toponym the toponym 	 * @param relatedEnhancements related enhancements 	 * @param requiresEnhancements required enhancements 	 * @return The UriRef of the created entity enhancement 	 */
+comment|/**      * Writes an entity enhancement for the content item in the parsed graph      * based on the parsed toponym.      *      * @param contentItemId The id of the contentItem      * @param graph The graph used to write the triples      * @param literalFactory the literal factory used to create literals      * @param toponym the toponym      * @param relatedEnhancements related enhancements      * @param requiresEnhancements required enhancements      * @return The UriRef of the created entity enhancement      */
 specifier|private
 name|UriRef
 name|writeEntityEnhancement
@@ -3040,7 +3044,7 @@ name|criteria
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Getter for the maximum number of enhancements added for a single 	 * TextAnnoation. 	 * @return The maximum number of location enhancements added for a single 	 * text annotation 	 */
+comment|/**      * Getter for the maximum number of enhancements added for a single      * TextAnnotation.      *      * @return The maximum number of location enhancements added for a single      *         text annotation      */
 specifier|public
 specifier|final
 name|Integer
@@ -3051,7 +3055,7 @@ return|return
 name|maxLocationEnhancements
 return|;
 block|}
-comment|/** 	 * Setter for the maximum number of enhancements added for a single 	 * TextAnnoation. If the parsed value is<code>null</code> or< 1, than the 	 * value is set to {@link LocationEnhancementEngine#DEFAULT_MAX_LOCATION_ENHANCEMENTS}. 	 * @param maxNumber the maximum number of enhancements added to a singel 	 * text annotation 	 */
+comment|/**      * Setter for the maximum number of enhancements added for a single      * TextAnnotation. If the parsed value is<code>null</code> or< 1, than the      * value is set to {@link LocationEnhancementEngine#DEFAULT_MAX_LOCATION_ENHANCEMENTS}.      *      * @param maxNumber the maximum number of enhancements added to a singel      * text annotation      */
 specifier|public
 specifier|final
 name|void
@@ -3113,8 +3117,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(
@@ -3125,7 +3127,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Setter for the minimum score used to decide if results of geoname.org 	 * search results are added as EntityEnhancements to the ContentItem. 	 * If<code>null</code> is parsed the value is set to   	 * {@link LocationEnhancementEngine#DEFAULT_MIN_SCORE}. For values> 1 the 	 * value is set to 1 and for values< 0 the value is set to 0. 	 * @param minScore the minScore to set 	 */
+comment|/**      * Setter for the minimum score used to decide if results of geoname.org      * search results are added as EntityEnhancements to the ContentItem.      * If<code>null</code> is parsed the value is set to      * {@link LocationEnhancementEngine#DEFAULT_MIN_SCORE}. For values> 1 the      * value is set to 1 and for values< 0 the value is set to 0.      *      * @param minScore the minScore to set      */
 specifier|public
 name|void
 name|setMinScore
@@ -3189,7 +3191,7 @@ operator|=
 name|minScore
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the minimum score used to decide if results of geoname.org 	 * search results are added as EntityEnhancements to the ContentItem 	 * @return the minScore 	 */
+comment|/**      * Getter for the minimum score used to decide if results of geoname.org      * search results are added as EntityEnhancements to the ContentItem      *      * @return the minScore      */
 specifier|public
 name|Double
 name|getMinScore
@@ -3199,7 +3201,7 @@ return|return
 name|minScore
 return|;
 block|}
-comment|/** 	 * Setter for the minimum value used to decide based on the score of  	 * locations returned by the geonames.org web service if also the hierarchy 	 * of that point should be added as enhancements to the analysed 	 * content item.<br> 	 * If<code>null</code> is parsed the value is set to   	 * {@link LocationEnhancementEngine#DEFAULT_MIN_HIERARCHY_SCORE}.  	 * For values> 1 the value is set to 1 and for values< 0 the value  	 * is set to 0. 	 * @param minHierarchyScore the minHierarchyScore to set 	 */
+comment|/**      * Setter for the minimum value used to decide based on the score of      * locations returned by the geonames.org web service if also the hierarchy      * of that point should be added as enhancements to the analysed      * content item.<br>      * If<code>null</code> is parsed the value is set to      * {@link LocationEnhancementEngine#DEFAULT_MIN_HIERARCHY_SCORE}.      * For values> 1 the value is set to 1 and for values< 0 the value      * is set to 0.      *      * @param minHierarchyScore the minHierarchyScore to set      */
 specifier|public
 name|void
 name|setMinHierarchyScore
@@ -3263,7 +3265,7 @@ operator|=
 name|minHierarchyScore
 expr_stmt|;
 block|}
-comment|/** 	 * Setter for the minimum value used to decide based on the score of  	 * locations returned by the geonames.org web service if also the hierarchy 	 * of that point should be added as enhancements to the analysed 	 * content item. 	 * @return the minHierarchyScore 	 */
+comment|/**      * Setter for the minimum value used to decide based on the score of      * locations returned by the geonames.org web service if also the hierarchy      * of that point should be added as enhancements to the analysed      * content item.      *      * @return the minHierarchyScore      */
 specifier|public
 name|Double
 name|getMinHierarchyScore

@@ -21,16 +21,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
-operator|.
-name|InputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|net
 operator|.
 name|URI
@@ -130,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * BundleURIResolver.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * BundleURIResolver.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -140,6 +130,11 @@ name|BundleURIResolver
 implements|implements
 name|URIResolver
 block|{
+specifier|public
+specifier|static
+name|Bundle
+name|BUNDLE
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -154,11 +149,6 @@ name|BundleURIResolver
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-specifier|public
-specifier|static
-name|Bundle
-name|BUNDLE
 decl_stmt|;
 specifier|public
 name|Source
@@ -198,13 +188,6 @@ return|;
 block|}
 name|String
 name|resource
-init|=
-name|href
-decl_stmt|;
-name|URL
-name|newUrl
-init|=
-literal|null
 decl_stmt|;
 try|try
 block|{
@@ -221,6 +204,11 @@ operator|+
 name|href
 argument_list|)
 expr_stmt|;
+name|URL
+name|newUrl
+init|=
+literal|null
+decl_stmt|;
 if|if
 condition|(
 name|base
@@ -310,9 +298,11 @@ argument_list|)
 return|;
 block|}
 else|else
+block|{
 return|return
 literal|null
 return|;
+block|}
 block|}
 comment|// for non-bundles assume that we have a normal URL as base
 name|resource

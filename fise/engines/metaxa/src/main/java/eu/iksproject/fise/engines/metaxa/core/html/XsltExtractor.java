@@ -370,7 +370,7 @@ decl_stmt|;
 specifier|public
 name|XsltExtractor
 parameter_list|()
-block|{      }
+block|{     }
 specifier|public
 name|XsltExtractor
 parameter_list|(

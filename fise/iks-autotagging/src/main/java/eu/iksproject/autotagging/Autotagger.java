@@ -832,7 +832,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Suggest entities that are fuzzy matching the given name and/or textually      * similar to the given context. Further restrict the results to match the      * field values given in the fieldFilter      *      * @param text the textual content used for similarity search      * @param fieldFilters      * @return entities info that best match the text      * @throws CorruptIndexException      * @throws IOException      */
+comment|/**      * Suggest entities that are fuzzy matching the given name and/or textually      * similar to the given context. Further restrict the results to match the      * field values given in the fieldFilter      *      * @param text the textual content used for similarity search      * @param fieldFilters      *      * @return entities info that best match the text      * @throws CorruptIndexException      * @throws IOException      */
 specifier|public
 name|List
 argument_list|<
@@ -1391,7 +1391,7 @@ return|return
 name|suggestions
 return|;
 block|}
-comment|/**      * Suggest entities that are fuzzy matching the given text (if short) or      * textually similar to the text (if long). Further restrict the results to      * match the type given either as full URI or DBpedia class name.      *      * @param name      * @param context      * @param type      * @return ranked entities info that best match      * @throws CorruptIndexException      * @throws IOException      */
+comment|/**      * Suggest entities that are fuzzy matching the given text (if short) or      * textually similar to the text (if long). Further restrict the results to      * match the type given either as full URI or DBpedia class name.      *      * @param text      * @param type      * @return ranked entities info that best match      * @throws CorruptIndexException      * @throws IOException      */
 specifier|public
 name|List
 argument_list|<

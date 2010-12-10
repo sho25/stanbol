@@ -344,7 +344,7 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -356,11 +356,31 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+operator|.
+name|DC_LANGUAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|NIE_PLAINTEXTCONTENT
 import|;
 end_import
 
 begin_comment
-comment|/**  * {@link LangIdEnhancementEngine} provides functionality to enhance document  * with their language.  *   * @author Joerg Steffen, DFKI  * @version $Id$  */
+comment|/**  * {@link LangIdEnhancementEngine} provides functionality to enhance document  * with their language.  *  * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
 
 begin_class
@@ -385,15 +405,13 @@ name|EnhancementEngine
 implements|,
 name|ServiceProperties
 block|{
-comment|/**    * The default value for the Execution of this Engine. Currently set to    * {@link ServiceProperties#ORDERING_PRE_PROCESSING}    */
+comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_PRE_PROCESSING}      */
 specifier|public
 specifier|static
 specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_PRE_PROCESSING
 operator|-
 literal|2
@@ -410,6 +428,7 @@ decl_stmt|;
 comment|/**      * This contains the logger.      */
 specifier|private
 specifier|static
+specifier|final
 name|Logger
 name|log
 init|=
@@ -452,7 +471,7 @@ name|probeLength
 init|=
 name|PROBE_LENGTH_DEFAULT
 decl_stmt|;
-comment|/**      * The activate method.      *       * @param ce      *            the {@link ComponentContext}      */
+comment|/**      * The activate method.      *      * @param ce the {@link ComponentContext}      */
 specifier|protected
 name|void
 name|activate
@@ -496,8 +515,8 @@ argument_list|(
 name|PROBE_LENGTH_PROP
 argument_list|)
 decl_stmt|;
-name|setProbeLength
-argument_list|(
+name|probeLength
+operator|=
 name|lengthVal
 operator|==
 literal|null
@@ -510,11 +529,8 @@ name|parseInt
 argument_list|(
 name|lengthVal
 argument_list|)
-argument_list|)
 expr_stmt|;
 block|}
-name|this
-operator|.
 name|languageIdentifier
 operator|=
 operator|new
@@ -522,7 +538,7 @@ name|TextCategorizer
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * The deactivate method.      *       * @param ce      *            the {@link ComponentContext}      */
+comment|/**      * The deactivate method.      *      * @param ce the {@link ComponentContext}      */
 specifier|protected
 name|void
 name|deactivate
@@ -536,14 +552,11 @@ name|ComponentContext
 name|ce
 parameter_list|)
 block|{
-name|this
-operator|.
 name|languageIdentifier
 operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * {@inheritDoc}      */
 specifier|public
 name|int
 name|canEnhance
@@ -586,8 +599,6 @@ return|return
 name|ENHANCE_SYNCHRONOUS
 return|;
 block|}
-else|else
-block|{
 comment|// TODO: check whether there is the graph contains the text
 name|UriRef
 name|subj
@@ -616,8 +627,6 @@ name|filter
 argument_list|(
 name|subj
 argument_list|,
-name|Properties
-operator|.
 name|NIE_PLAINTEXTCONTENT
 argument_list|,
 literal|null
@@ -635,12 +644,10 @@ return|return
 name|ENHANCE_SYNCHRONOUS
 return|;
 block|}
-block|}
 return|return
 name|CANNOT_ENHANCE
 return|;
 block|}
-comment|/**      * {@inheritDoc}      */
 specifier|public
 name|void
 name|computeEnhancements
@@ -705,8 +712,6 @@ block|}
 block|}
 else|else
 block|{
-for|for
-control|(
 name|Iterator
 argument_list|<
 name|Triple
@@ -729,19 +734,18 @@ name|getId
 argument_list|()
 argument_list|)
 argument_list|,
-name|Properties
-operator|.
 name|NIE_PLAINTEXTCONTENT
 argument_list|,
 literal|null
 argument_list|)
-init|;
+decl_stmt|;
+while|while
+condition|(
 name|it
 operator|.
 name|hasNext
 argument_list|()
-condition|;
-control|)
+condition|)
 block|{
 name|text
 operator|+=
@@ -777,12 +781,11 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-comment|// truncate text to some piece from the middle if probeLenght> 0
+comment|// truncate text to some piece from the middle if probeLength> 0
 name|int
 name|checkLength
 init|=
-name|getProbeLength
-argument_list|()
+name|probeLength
 decl_stmt|;
 if|if
 condition|(
@@ -831,8 +834,6 @@ block|}
 name|String
 name|language
 init|=
-name|this
-operator|.
 name|languageIdentifier
 operator|.
 name|categorize
@@ -879,8 +880,6 @@ name|TripleImpl
 argument_list|(
 name|textEnhancement
 argument_list|,
-name|Properties
-operator|.
 name|DC_LANGUAGE
 argument_list|,
 operator|new
@@ -892,7 +891,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @return the probeLength      */
 specifier|public
 name|int
 name|getProbeLength
@@ -902,7 +900,6 @@ return|return
 name|probeLength
 return|;
 block|}
-comment|/**      * @param probeLength the probeLength to set      */
 specifier|public
 name|void
 name|setProbeLength
@@ -937,8 +934,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(

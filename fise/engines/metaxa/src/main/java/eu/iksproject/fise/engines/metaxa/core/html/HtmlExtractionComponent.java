@@ -76,7 +76,6 @@ specifier|public
 interface|interface
 name|HtmlExtractionComponent
 block|{
-specifier|public
 name|void
 name|extract
 parameter_list|(

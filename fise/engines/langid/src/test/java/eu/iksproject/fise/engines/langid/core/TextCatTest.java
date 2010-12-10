@@ -93,6 +93,30 @@ name|TextCategorizer
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * {@link TextCatTest} is a test class for {@link TextCategorizer}.  *   * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
@@ -155,8 +179,6 @@ argument_list|(
 name|testFileName
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -176,8 +198,6 @@ argument_list|(
 name|in
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"en"

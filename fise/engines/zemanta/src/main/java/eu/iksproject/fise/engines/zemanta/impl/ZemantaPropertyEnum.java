@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration that contains all property definitions for the Zemanta  * Web Service. This contains also properties such as required default  * configurations as well as possible values. There are also utility  * methods to check parsed parameters  * @author Rupert Westenthaler  *  */
+comment|/**  * Enumeration that contains all property definitions for the Zemanta  * Web Service. This contains also properties such as required default  * configurations as well as possible values. There are also utility  * methods to check parsed parameters  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_enum
@@ -64,7 +64,7 @@ specifier|public
 enum|enum
 name|ZemantaPropertyEnum
 block|{
-comment|/** 	 * the request type to be used e.g. 'zemanta.suggest' 	 */
+comment|/**      * the request type to be used e.g. 'zemanta.suggest'      */
 name|method
 argument_list|(
 literal|"zemanta.suggest"
@@ -72,7 +72,7 @@ argument_list|,
 literal|"zemanta.suggest"
 argument_list|)
 block|,
-comment|/** 	 * the format used to encode results. Zemanta supports "xml", "json",  	 * "wnjson" and "rdfxml" but this implementation only allows rdfxml! 	 */
+comment|/**      * the format used to encode results. Zemanta supports "xml", "json",      * "wnjson" and "rdfxml" but this implementation only allows rdfxml!      */
 name|format
 argument_list|(
 literal|"rdfxml"
@@ -80,7 +80,7 @@ argument_list|,
 literal|"rdfxml"
 argument_list|)
 block|,
-comment|/** 	 * enable/disable URIs of Linking Open Data entities 	 */
+comment|/**      * enable/disable URIs of Linking Open Data entities      */
 name|return_rdf_links
 argument_list|(
 literal|"1"
@@ -90,7 +90,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 block|,
-comment|/** 	 * if set to 'demoz' suggested dmoz categories are returned. Set this 	 * parameter to '0' to deactivate this feature 	 */
+comment|/**      * if set to 'demoz' suggested dmoz categories are returned. Set this      * parameter to '0' to deactivate this feature      */
 name|return_categories
 argument_list|(
 literal|"dmoz"
@@ -100,7 +100,7 @@ argument_list|,
 literal|"0"
 argument_list|)
 block|,
-comment|/** 	 * enable/disable links to images 	 */
+comment|/**      * enable/disable links to images      */
 name|return_images
 argument_list|(
 literal|"0"
@@ -110,7 +110,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 block|,
-comment|/** 	 * enable/disable personalised search (based on the api_key) 	 */
+comment|/**      * enable/disable personalised search (based on the api_key)      */
 name|personal_scope
 argument_list|(
 literal|"0"
@@ -120,24 +120,24 @@ argument_list|,
 literal|"1"
 argument_list|)
 block|,
-comment|/** 	 * Number of in-text links. the default depending on the number of input 	 * words, 1 per each 10 words, and it maxes out at 10 	 */
+comment|/**      * Number of in-text links. the default depending on the number of input      * words, 1 per each 10 words, and it maxes out at 10      */
 name|markup_limit
 argument_list|(
 literal|false
 argument_list|)
 block|,
-comment|/** 	 * The api_key needed to use the service (required) 	 */
+comment|/**      * The api_key needed to use the service (required)      */
 name|api_key
 argument_list|(
 literal|true
 argument_list|)
 block|,
-comment|/** 	 * The text to analyse use UTF-8 encoding (required) 	 */
+comment|/**      * The text to analyse use UTF-8 encoding (required)      */
 name|text
 argument_list|(
 literal|true
 argument_list|)
-block|, 	;
+block|,;
 specifier|private
 name|boolean
 name|required
@@ -157,7 +157,7 @@ specifier|private
 name|String
 name|toString
 decl_stmt|;
-comment|/** 	 * A required property with no default configuration and no value list 	 */
+comment|/**      * A required property with no default configuration and no value list      */
 name|ZemantaPropertyEnum
 parameter_list|()
 block|{
@@ -167,7 +167,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new property without an default value or a value list 	 * @param optional if the property is required or optional 	 */
+comment|/**      * Creates a new property without an default value or a value list      *      * @param optional if the property is required or optional      */
 name|ZemantaPropertyEnum
 parameter_list|(
 name|boolean
@@ -182,7 +182,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * A optional property with a default configuration and a list of allowed values 	 * @param defaultValue the value used if this parameter is not parsed. 	 *<code>null</code> indicates no default configuration. This does not 	 * mean, that Zemanta does not use an default value for requests that 	 * do not contain this parameter 	 * @param valueList the list of allowed values for this parameter. 	 *<code>null</code> or an empty array indicate that there are no 	 * restrictions on possible values. Note that this list only contains 	 * values supported by this API Wrapper. This may exclude some options 	 * that would be supported by Zemanta! 	 */
+comment|/**      * A optional property with a default configuration and a list of allowed values      *      * @param defaultValue the value used if this parameter is not parsed.      *<code>null</code> indicates no default configuration. This does not      * mean, that Zemanta does not use an default value for requests that      * do not contain this parameter      * @param valueList the list of allowed values for this parameter.      *<code>null</code> or an empty array indicate that there are no      * restrictions on possible values. Note that this list only contains      * values supported by this API Wrapper. This may exclude some options      * that would be supported by Zemanta!      */
 name|ZemantaPropertyEnum
 parameter_list|(
 name|String
@@ -203,7 +203,7 @@ name|valueList
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * A general property definition 	 * @param required defines if the property is optional or required 	 * @param defaultValue the value used if this parameter is not parsed. 	 *<code>null</code> indicates no default configuration. This does not 	 * mean, that Zemanta does not use an default value for requests that 	 * do not contain this parameter 	 * @param valueList the list of allowed values for this parameter. 	 *<code>null</code> or an empty array indicate that there are no 	 * restrictions on possible values. Note that this list only contains 	 * values supported by this API Wrapper. This may exclude some options 	 * that would be supported by Zemanta! 	 */
+comment|/**      * A general property definition.      *      * @param required defines if the property is optional or required      * @param defaultValue the value used if this parameter is not parsed.      *<code>null</code> indicates no default configuration. This does not      * mean, that Zemanta does not use an default value for requests that      * do not contain this parameter      * @param valueList the list of allowed values for this parameter.      *<code>null</code> or an empty array indicate that there are no      * restrictions on possible values. Note that this list only contains      * values supported by this API Wrapper. This may exclude some options      * that would be supported by Zemanta!      */
 name|ZemantaPropertyEnum
 parameter_list|(
 name|boolean

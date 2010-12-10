@@ -591,9 +591,10 @@ name|EnhancementEngine
 implements|,
 name|ServiceProperties
 block|{
-comment|/**    * This contains the logger.    */
+comment|/**      * This contains the logger.      */
 specifier|private
 specifier|static
+specifier|final
 name|Logger
 name|log
 init|=
@@ -606,23 +607,21 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**    * The default value for the Execution of this Engine. Currently set to    * {@link ServiceProperties#ORDERING_PRE_PROCESSING}    */
+comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_PRE_PROCESSING}      */
 specifier|public
 specifier|static
 specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_PRE_PROCESSING
 decl_stmt|;
-comment|/**    * This contains the Aperture extractor.    */
+comment|/**      * This contains the Aperture extractor.      */
 specifier|private
 name|MetaxaCore
 name|extractor
 decl_stmt|;
-comment|/**    * The activate method.    *    * @param ce    *          the {@link ComponentContext}    * @throws IOException    *           if initializing fails    */
+comment|/**      * The activate method.      *      * @param ce the {@link ComponentContext}      * @throws IOException if initializing fails      */
 specifier|protected
 name|void
 name|activate
@@ -681,7 +680,7 @@ name|e
 throw|;
 block|}
 block|}
-comment|/**    * The deactivate method.    *    * @param ce    *          the {@link ComponentContext}    */
+comment|/**      * The deactivate method.      *      * @param ce the {@link ComponentContext}      */
 specifier|protected
 name|void
 name|deactivate
@@ -702,7 +701,6 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**    * {@inheritDoc}    */
 specifier|public
 name|int
 name|canEnhance
@@ -751,7 +749,6 @@ return|return
 name|CANNOT_ENHANCE
 return|;
 block|}
-comment|/**    * {@inheritDoc}    */
 specifier|public
 name|void
 name|computeEnhancements
@@ -851,7 +848,7 @@ operator|!=
 name|m
 condition|)
 block|{
-comment|/*             String text = MetaxaCore.getText(m);             log.info(text);              */
+comment|/*                String text = MetaxaCore.getText(m);                log.info(text);                 */
 name|RDF2GoUtils
 operator|.
 name|urifyBlankNodes
@@ -906,20 +903,6 @@ decl_stmt|;
 name|NonLiteral
 name|fiseSubject
 init|=
-literal|null
-decl_stmt|;
-name|UriRef
-name|fisePredicate
-init|=
-literal|null
-decl_stmt|;
-name|Resource
-name|fiseObject
-init|=
-literal|null
-decl_stmt|;
-name|fiseSubject
-operator|=
 operator|(
 name|NonLiteral
 operator|)
@@ -932,9 +915,10 @@ argument_list|()
 argument_list|,
 name|blankNodeMap
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+name|UriRef
 name|fisePredicate
-operator|=
+init|=
 operator|(
 name|UriRef
 operator|)
@@ -947,9 +931,10 @@ argument_list|()
 argument_list|,
 name|blankNodeMap
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+name|Resource
 name|fiseObject
-operator|=
+init|=
 name|asFiseResource
 argument_list|(
 name|oneStmt
@@ -959,7 +944,7 @@ argument_list|()
 argument_list|,
 name|blankNodeMap
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 literal|null
@@ -1055,7 +1040,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * This converts the given RDF2Go node into a corresponding FISE object.     *    * @param node a {@link Node}    * @return a {@link Resource}    */
+comment|/**      * This converts the given RDF2Go node into a corresponding FISE object.      *      * @param node a {@link Node}      * @return a {@link Resource}      */
 specifier|public
 specifier|static
 name|Resource
@@ -1229,8 +1214,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(

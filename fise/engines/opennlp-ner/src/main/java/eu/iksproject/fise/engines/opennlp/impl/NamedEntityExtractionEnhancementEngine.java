@@ -618,8 +618,6 @@ specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_CONTENT_EXTRACTION
 decl_stmt|;
 specifier|protected
@@ -1562,7 +1560,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// add the subsumption relationship among occurences of the same
+comment|// add the subsumption relationship among occurrences of the same
 comment|// name
 if|if
 condition|(
@@ -1659,7 +1657,7 @@ block|}
 block|}
 else|else
 block|{
-comment|// I am refering to a most specific first occurence of the
+comment|// I am referring to a most specific first occurrence of the
 comment|// same name
 name|g
 operator|.
@@ -2339,9 +2337,7 @@ condition|)
 block|{
 comment|/*                      * NOTE (rw, issue 19, 20100615) Here we need to set the new                      * start position, by adding the current start to the                      * lastStartPosion. we need also to use the                      * lastStartPosition to calculate the start of the element.                      * The old code had not worked if names contains more than a                      * single element!                      */
 name|lastStartPosition
-operator|=
-name|lastStartPosition
-operator|+
+operator|+=
 name|start
 expr_stmt|;
 name|absoluteStart
@@ -2543,8 +2539,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(

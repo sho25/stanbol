@@ -217,6 +217,114 @@ end_import
 
 begin_import
 import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_ORGANISATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_PERSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_PLACE
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|FISE_ENTITYANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|FISE_TEXTANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -348,7 +456,7 @@ specifier|public
 class|class
 name|TestEntityMentionEnhancementEngine
 block|{
-comment|/** 	 * The context for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The context for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -359,7 +467,7 @@ literal|"Dr. Patrick Marshall (1869 - November 1950) was a"
 operator|+
 literal|" geologist who lived in New Zealand and worked at the University of Otago."
 decl_stmt|;
-comment|/** 	 * The person for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The person for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -368,7 +476,7 @@ name|PERSON
 init|=
 literal|"Patrick Marshall"
 decl_stmt|;
-comment|/** 	 * The organisation for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The organisation for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -377,7 +485,7 @@ name|ORGANISATION
 init|=
 literal|"University of Otago"
 decl_stmt|;
-comment|/** 	 * The place for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The place for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -781,8 +889,6 @@ name|PERSON
 argument_list|,
 name|CONTEXT
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_PERSON
 argument_list|)
 expr_stmt|;
@@ -794,8 +900,6 @@ name|ORGANISATION
 argument_list|,
 name|CONTEXT
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_ORGANISATION
 argument_list|)
 expr_stmt|;
@@ -807,8 +911,6 @@ name|PLACE
 argument_list|,
 name|CONTEXT
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_PLACE
 argument_list|)
 expr_stmt|;
@@ -821,7 +923,7 @@ name|ci
 argument_list|)
 expr_stmt|;
 comment|// ... and test the results
-comment|/*     	 * TODO: rw 20100617      	 *  - Expected results depend on the used Index.     	 *  - Use an example where the Organisation, Person and Place is part     	 *    of the index     	 */
+comment|/*            * TODO: rw 20100617            *  - Expected results depend on the used Index.            *  - Use an example where the Organisation, Person and Place is part            *    of the index            */
 name|int
 name|entityAnnotationCount
 init|=
@@ -841,7 +943,7 @@ name|entityAnnotationCount
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * -----------------------------------------------------------------------      * Helper Methods to check Text and EntityAnnotations      * -----------------------------------------------------------------------      */
+comment|/*     * -----------------------------------------------------------------------     * Helper Methods to check Text and EntityAnnotations     * -----------------------------------------------------------------------     */
 comment|/**      * @param g      * @return      */
 specifier|private
 name|int
@@ -863,12 +965,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_ENTITYANNOTATION
 argument_list|)
 decl_stmt|;
@@ -939,8 +1037,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 literal|null
@@ -986,12 +1082,8 @@ name|filter
 argument_list|(
 name|referredTextAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 operator|.
@@ -1013,8 +1105,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_REFERENCE
 argument_list|,
 literal|null
@@ -1064,8 +1154,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_LABEL
 argument_list|,
 literal|null

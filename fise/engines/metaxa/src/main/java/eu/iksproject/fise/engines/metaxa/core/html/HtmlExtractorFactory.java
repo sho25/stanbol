@@ -52,7 +52,6 @@ name|html
 operator|.
 name|HtmlExtractorFactory
 block|{
-comment|/** {@inheritDoc} */
 annotation|@
 name|Override
 specifier|public

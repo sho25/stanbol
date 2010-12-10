@@ -453,8 +453,6 @@ specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_EXTRACTION_ENHANCEMENT
 decl_stmt|;
 specifier|public
@@ -1124,8 +1122,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(

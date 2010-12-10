@@ -47,12 +47,10 @@ interface|interface
 name|AutotaggerProvider
 block|{
 comment|/**      * @return the autotagger instance or null if none is configured      */
-specifier|public
 name|Autotagger
 name|getAutotagger
 parameter_list|()
 function_decl|;
-specifier|public
 name|BundleContext
 name|getBundleContext
 parameter_list|()

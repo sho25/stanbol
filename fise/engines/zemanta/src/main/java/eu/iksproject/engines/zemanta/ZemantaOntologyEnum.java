@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Holds concepts, properties and instances found in the Zemanta ontology.  * See also {@linkplain http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine}  * for an overview on Zemanta annotations.  * @author Rupert Westenthaler  *  */
+comment|/**  * Holds concepts, properties and instances found in the Zemanta ontology.  * See also {@linkplain http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine}  * for an overview on Zemanta annotations.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_enum
@@ -112,11 +112,11 @@ block|,
 name|name
 block|,
 name|schema
-block|, 	;
+block|,;
 name|UriRef
 name|uri
 decl_stmt|;
-comment|/** 	 * Creates n new entity of this Enum by using the parsed namespace and 	 * local name. 	 * @param ns The namespace or<code>null</code> to use the default 	 * @param local The local name or<code>null</code> to use the default 	 */
+comment|/**      * Creates n new entity of this Enum by using the parsed namespace and      * local name.      *      * @param ns    The namespace or<code>null</code> to use the default      * @param local The local name or<code>null</code> to use the default      */
 specifier|private
 name|ZemantaOntologyEnum
 parameter_list|(
@@ -155,7 +155,7 @@ operator|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new entry of this Enum by using the parsed local name and the 	 * default Zemanta namespace 	 * @param local the local name or<code>null</code> to use the name() of the 	 * element 	 */
+comment|/**      * Creates a new entry of this Enum by using the parsed local name and the      * default Zemanta namespace      *      * @param local the local name or<code>null</code> to use the name() of the      *              element      */
 specifier|private
 name|ZemantaOntologyEnum
 parameter_list|(
@@ -171,7 +171,7 @@ name|local
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new entry of this Enum by using the default Zemanta namespace  	 * and the name() of this element as lecal name 	 */
+comment|/**      * Creates a new entry of this Enum by using the default Zemanta namespace      * and the name() of this element as lecal name      */
 specifier|private
 name|ZemantaOntologyEnum
 parameter_list|()
@@ -184,7 +184,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * The unicode name of the URI 	 * @return the unicode name of the URI 	 */
+comment|/**      * The unicode name of the URI      *      * @return the unicode name of the URI      */
 annotation|@
 name|Override
 specifier|public
@@ -199,7 +199,7 @@ name|getUnicodeString
 argument_list|()
 return|;
 block|}
-comment|/** 	 * The URI of the element of this Enum 	 * @return the URI of the element as Clerezza UriRef 	 */
+comment|/**      * The URI of the element of this Enum      *      * @return the URI of the element as Clerezza UriRef      */
 specifier|public
 name|UriRef
 name|getUri

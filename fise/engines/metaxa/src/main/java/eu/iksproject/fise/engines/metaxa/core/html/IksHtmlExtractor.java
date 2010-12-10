@@ -334,7 +334,7 @@ block|}
 specifier|public
 name|IksHtmlExtractor
 parameter_list|()
-block|{      }
+block|{     }
 specifier|public
 name|IksHtmlExtractor
 parameter_list|(

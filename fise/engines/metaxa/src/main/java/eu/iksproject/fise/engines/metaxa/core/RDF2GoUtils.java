@@ -176,7 +176,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RDF2GoUtils.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * RDF2GoUtils.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
