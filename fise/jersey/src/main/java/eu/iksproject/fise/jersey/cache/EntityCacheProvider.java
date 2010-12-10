@@ -34,7 +34,6 @@ specifier|public
 interface|interface
 name|EntityCacheProvider
 block|{
-specifier|public
 name|MGraph
 name|getEntityCache
 parameter_list|()

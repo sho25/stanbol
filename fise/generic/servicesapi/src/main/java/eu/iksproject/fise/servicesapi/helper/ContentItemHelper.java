@@ -576,9 +576,7 @@ argument_list|)
 condition|)
 block|{
 name|baseUri
-operator|=
-name|baseUri
-operator|+
+operator|+=
 literal|"/"
 expr_stmt|;
 block|}

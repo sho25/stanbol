@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Super interface for all interfaces using the {@link RdfEntityFactory} to  * create proxy objects.  * @author Rupert Westenthaler  *  */
+comment|/**  * Super interface for all interfaces using the {@link RdfEntityFactory} to  * create proxy objects.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -70,7 +70,7 @@ specifier|public
 interface|interface
 name|RdfEntity
 block|{
-comment|/** 	 * Getter for the RDF node represented by the proxy 	 * @return the node representing the proxy. Typically an {@link UriRef} but 	 * could be also a {@link BNode} 	 */
+comment|/** 	 * Getter for the RDF node represented by the proxy.      * 	 * @return the node representing the proxy. Typically an {@link UriRef} but 	 * could be also a {@link BNode} 	 */
 name|NonLiteral
 name|getId
 parameter_list|()

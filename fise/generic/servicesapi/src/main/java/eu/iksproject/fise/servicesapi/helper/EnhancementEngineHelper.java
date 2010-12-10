@@ -325,7 +325,7 @@ name|seed
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Create a new instance with the types fise:Enhancement and      * fise:TextAnnotation in the metadata-graph of the content      * item along with default properties (dc:creator and dc:created) and return      * the UriRef of the extraction so that engines can further add      *      * @param ci the ContentItem being under analysis      * @param engine the Engine performing the analysis      * @return the URI of the new enhancement instance      */
+comment|/**      * Create a new instance with the types fise:Enhancement and      * fise:TextAnnotation in the metadata-graph of the content      * item along with default properties (dc:creator and dc:created) and return      * the UriRef of the extraction so that engines can further add.      *      * @param ci the ContentItem being under analysis      * @param engine the Engine performing the analysis      *      * @return the URI of the new enhancement instance      */
 specifier|public
 specifier|static
 name|UriRef
@@ -359,7 +359,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Create a new instance with the types fise:Enhancement and      * fise:TextAnnotation in the parsed graph along with default properties      * (dc:creator, dc:created and fise:extracted-form) and return      * the UriRef of the extraction so that engines can further add      * @param metadata the graph      * @param engine the engine      * @param contentItemId the id      * @return the URI of the new enhancement instance      */
+comment|/**      * Create a new instance with the types fise:Enhancement and      * fise:TextAnnotation in the parsed graph along with default properties      * (dc:creator, dc:created and fise:extracted-form) and return      * the UriRef of the extraction so that engines can further add.      *      * @param metadata the graph      * @param engine the engine      * @param contentItemId the id      *      * @return the URI of the new enhancement instance      */
 specifier|public
 specifier|static
 name|UriRef
@@ -445,7 +445,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Create a new instance with the types fise:Enhancement and      * fise:EntityAnnotation in the parsed graph along with default properties      * (dc:creator, dc:created and fise:extracted-form) and return      * the UriRef of the extraction so that engines can further add      * @param metadata the graph      * @param engine the engine      * @param contentItemId the id      * @return the URI of the new enhancement instance      */
+comment|/**      * Create a new instance with the types fise:Enhancement and      * fise:EntityAnnotation in the parsed graph along with default properties      * (dc:creator, dc:created and fise:extracted-form) and return      * the UriRef of the extraction so that engines can further add.      *      * @param metadata the graph      * @param engine the engine      * @param contentItemId the id      *      * @return the URI of the new enhancement instance      */
 specifier|public
 specifier|static
 name|UriRef
@@ -496,7 +496,7 @@ return|return
 name|enhancement
 return|;
 block|}
-comment|/**      * Create a new enhancement instance in the metadata-graph of the content      * item along with default properties (dc:creator and dc:created) and return      * the UriRef of the extraction so that engines can further add      *      * @param ci the ContentItem being under analysis      * @param engine the Engine performing the analysis      * @return the URI of the new enhancement instance      */
+comment|/**      * Create a new enhancement instance in the metadata-graph of the content      * item along with default properties (dc:creator and dc:created) and return      * the UriRef of the extraction so that engines can further add.      *      * @param ci the ContentItem being under analysis      * @param engine the Engine performing the analysis      *      * @return the URI of the new enhancement instance      */
 specifier|protected
 specifier|static
 name|UriRef
@@ -807,7 +807,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Getter for the first typed literal value of the property for a resource      * @param<T> the java class the literal value needs to be converted to.      * Note that the parsed LiteralFactory needs to support this conversion      * @param graph the graph used to query for the property value      * @param resource the resource      * @param property the property      * @param type the type the literal needs to be converted to      * @param literalFactory the literalFactory      * @return the value      */
+comment|/**      * Getter for the first typed literal value of the property for a resource.      *      * @param<T> the java class the literal value needs to be converted to.      * Note that the parsed LiteralFactory needs to support this conversion      * @param graph the graph used to query for the property value      * @param resource the resource      * @param property the property      * @param type the type the literal needs to be converted to      * @param literalFactory the literalFactory      * @return the value      */
 specifier|public
 specifier|static
 parameter_list|<

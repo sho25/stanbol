@@ -123,16 +123,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Collection
 import|;
 end_import
@@ -896,7 +886,7 @@ name|RdfEntity
 operator|.
 name|class
 operator|+
-literal|". This RdfWrapperInvocationHandler implementations only work for proxis implementing this interface!"
+literal|". This RdfWrapperInvocationHandler implementations only work for proxies implementing this interface!"
 argument_list|)
 throw|;
 block|}
@@ -2335,10 +2325,6 @@ parameter_list|<
 name|T
 parameter_list|>
 extends|extends
-name|java
-operator|.
-name|util
-operator|.
 name|AbstractCollection
 argument_list|<
 name|T

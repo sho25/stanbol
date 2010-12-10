@@ -15,16 +15,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URI
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Collection
@@ -53,41 +43,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|SimpleMGraph
 import|;
 end_import
 
@@ -123,24 +79,8 @@ name|RdfEntity
 import|;
 end_import
 
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|fise
-operator|.
-name|servicesapi
-operator|.
-name|helper
-operator|.
-name|RdfEntityFactory
-import|;
-end_import
-
 begin_comment
-comment|/**  * This Interface represents a Fise enhancement.  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  * 	MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *	String enhancementId = "http://wwww.example.com/iks-project/fise/example-enhancement";  *	UriRef enhancementNode = new UriRef(enhancementId);  *	Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *	enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  * @author Rupert Westenthaler  *  */
+comment|/**  * This Interface represents a Fise enhancement.  *  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  * 	MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *	String enhancementId = "http://wwww.example.com/iks-project/fise/example-enhancement";  *	UriRef enhancementNode = new UriRef(enhancementId);  *	Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *	enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface

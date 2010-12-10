@@ -162,7 +162,6 @@ name|getInstance
 argument_list|()
 expr_stmt|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.fise.servicesapi.helper.RdfEntityFactory#getWrapper(org.apache.clerezza.rdf.core.NonLiteral, java.lang.Class, java.lang.Class) 	 */
 annotation|@
 name|SuppressWarnings
 argument_list|(

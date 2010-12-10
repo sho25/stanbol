@@ -18,6 +18,7 @@ specifier|public
 enum|enum
 name|NamespaceEnum
 block|{
+comment|// TODO: use capital for constants instead of lower-case
 name|fise
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/"
@@ -81,7 +82,6 @@ decl_stmt|;
 name|String
 name|prefix
 decl_stmt|;
-specifier|private
 name|NamespaceEnum
 parameter_list|(
 name|String
@@ -110,7 +110,6 @@ operator|=
 name|ns
 expr_stmt|;
 block|}
-specifier|private
 name|NamespaceEnum
 parameter_list|(
 name|String

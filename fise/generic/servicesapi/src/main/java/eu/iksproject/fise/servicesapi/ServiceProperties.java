@@ -22,7 +22,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * FISE components might implement this interface to parse additional  * properties to other components  * @author Rupert Westenthaler  *  */
+comment|/**  * FISE components might implement this interface to parse additional  * properties to other components.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -30,7 +30,7 @@ specifier|public
 interface|interface
 name|ServiceProperties
 block|{
-comment|/** 	 * Getter for the properties defined by this service 	 * @return An unmodifiable map of properties defined by this service 	 */
+comment|/** 	 * Getter for the properties defined by this service. 	 * @return An unmodifiable map of properties defined by this service 	 */
 name|Map
 argument_list|<
 name|String
