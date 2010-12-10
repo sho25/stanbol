@@ -326,7 +326,7 @@ specifier|static
 name|MetaxaCore
 name|extractor
 decl_stmt|;
-comment|/**      * This initializes the Aperture extractor.      *       * @throws IOException      *             if an error occurs      */
+comment|/**      * This initializes the Aperture extractor.      */
 annotation|@
 name|BeforeClass
 specifier|public
@@ -354,9 +354,7 @@ name|void
 name|testPdfExtraction
 parameter_list|()
 throws|throws
-name|ExtractorException
-throws|,
-name|IOException
+name|Exception
 block|{
 name|String
 name|testFile
@@ -507,9 +505,7 @@ name|void
 name|testHtmlExtraction
 parameter_list|()
 throws|throws
-name|ExtractorException
-throws|,
-name|IOException
+name|Exception
 block|{
 name|String
 name|testFile
@@ -660,9 +656,7 @@ name|void
 name|testRdfaExtraction
 parameter_list|()
 throws|throws
-name|ExtractorException
-throws|,
-name|IOException
+name|Exception
 block|{
 name|String
 name|testFile
@@ -866,20 +860,6 @@ decl_stmt|;
 name|NonLiteral
 name|fiseSubject
 init|=
-literal|null
-decl_stmt|;
-name|UriRef
-name|fisePredicate
-init|=
-literal|null
-decl_stmt|;
-name|Resource
-name|fiseObject
-init|=
-literal|null
-decl_stmt|;
-name|fiseSubject
-operator|=
 operator|(
 name|NonLiteral
 operator|)
@@ -894,9 +874,10 @@ argument_list|()
 argument_list|,
 name|blankNodeMap
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+name|UriRef
 name|fisePredicate
-operator|=
+init|=
 operator|(
 name|UriRef
 operator|)
@@ -911,9 +892,10 @@ argument_list|()
 argument_list|,
 name|blankNodeMap
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+name|Resource
 name|fiseObject
-operator|=
+init|=
 name|MetaxaEngine
 operator|.
 name|asFiseResource
@@ -925,7 +907,7 @@ argument_list|()
 argument_list|,
 name|blankNodeMap
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 literal|null

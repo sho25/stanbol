@@ -286,6 +286,7 @@ name|indent
 operator|==
 literal|0
 condition|)
+block|{
 name|sb
 operator|.
 name|append
@@ -293,7 +294,9 @@ argument_list|(
 literal|':'
 argument_list|)
 expr_stmt|;
+block|}
 else|else
+block|{
 name|sb
 operator|.
 name|append
@@ -301,6 +304,7 @@ argument_list|(
 literal|": "
 argument_list|)
 expr_stmt|;
+block|}
 name|appendValueOf
 argument_list|(
 name|jsonMap

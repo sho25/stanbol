@@ -34,7 +34,7 @@ specifier|public
 interface|interface
 name|EnhancementJobManager
 block|{
-comment|/**      * Create relevant asynchronous requests or enhance content immediately. The      * result is not persisted right now. The caller is responsible to call the      * {@link Store#put(ContentItem)} afterwards in case persistence is      * required.      *<p>      * TODO: define the expected semantics if asynchronous enhancements were to      * get implemented.      *      * @throws EngineException if the enhancement process failed      */
+comment|/**      * Create relevant asynchronous requests or enhance content immediately. The      * result is not persisted right now. The caller is responsible for calling the      * {@link Store#put(ContentItem)} afterwards in case persistence is      * required.      *<p>      * TODO: define the expected semantics if asynchronous enhancements were to      * get implemented.      *      * @throws EngineException if the enhancement process failed      */
 name|void
 name|enhanceContent
 parameter_list|(

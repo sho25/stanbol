@@ -128,8 +128,6 @@ name|String
 name|type
 parameter_list|)
 block|{
-name|this
-operator|.
 name|types
 operator|.
 name|add
@@ -205,8 +203,6 @@ name|Object
 name|value
 parameter_list|)
 block|{
-name|this
-operator|.
 name|propertyMap
 operator|.
 name|put
@@ -228,8 +224,6 @@ name|getPropertyMap
 parameter_list|()
 block|{
 return|return
-name|this
-operator|.
 name|propertyMap
 return|;
 block|}

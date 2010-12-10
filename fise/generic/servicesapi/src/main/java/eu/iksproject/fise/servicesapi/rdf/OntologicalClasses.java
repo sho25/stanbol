@@ -33,9 +33,9 @@ begin_comment
 comment|/**  * Common entity types, a.k.a. ontological classes to be used as valuation of  * the rdf:type ({@link Properties#RDF_TYPE}) property in the metadata graph of  * content items.  *  * Copy and paste the URLs of the classes in a browser to get the definition of  * the class.  *  * @author ogrisel@nuxeo.com  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
+class|class
 name|OntologicalClasses
 block|{
 specifier|public
@@ -86,8 +86,12 @@ operator|+
 literal|"Organisation"
 argument_list|)
 decl_stmt|;
+specifier|private
+name|OntologicalClasses
+parameter_list|()
+block|{     }
 block|}
-end_interface
+end_class
 
 end_unit
 

@@ -199,15 +199,15 @@ literal|"base: "
 operator|+
 name|base
 operator|+
-literal|"\nhref: "
+literal|"\n"
+operator|+
+literal|"href: "
 operator|+
 name|href
 argument_list|)
 expr_stmt|;
 name|URL
 name|newUrl
-init|=
-literal|null
 decl_stmt|;
 if|if
 condition|(

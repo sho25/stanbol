@@ -322,7 +322,7 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -334,11 +334,13 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+operator|.
+name|*
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -350,6 +352,8 @@ operator|.
 name|rdf
 operator|.
 name|TechnicalClasses
+operator|.
+name|FISE_TEXTANNOTATION
 import|;
 end_import
 
@@ -374,7 +378,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|MULTI_SENCTENCES
+name|MULTI_SENTENCES
 init|=
 literal|"The life of Patrick Marshall\n\n"
 operator|+
@@ -584,7 +588,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPersonNameOccurencesExtraction
+name|testPersonNameOccurrencesExtraction
 parameter_list|()
 block|{
 name|Map
@@ -602,7 +606,7 @@ name|nerEngine
 operator|.
 name|extractPersonNameOccurrences
 argument_list|(
-name|MULTI_SENCTENCES
+name|MULTI_SENTENCES
 argument_list|)
 decl_stmt|;
 name|assertEquals
@@ -619,7 +623,7 @@ name|List
 argument_list|<
 name|NameOccurrence
 argument_list|>
-name|pmOccurences
+name|pmOccurrences
 init|=
 name|nameOccurrences
 operator|.
@@ -630,23 +634,23 @@ argument_list|)
 decl_stmt|;
 name|assertNotNull
 argument_list|(
-name|pmOccurences
+name|pmOccurrences
 argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
 literal|2
 argument_list|,
-name|pmOccurences
+name|pmOccurrences
 operator|.
 name|size
 argument_list|()
 argument_list|)
 expr_stmt|;
 name|NameOccurrence
-name|firstOccurence
+name|firstOccurrence
 init|=
-name|pmOccurences
+name|pmOccurrences
 operator|.
 name|get
 argument_list|(
@@ -657,7 +661,7 @@ name|assertEquals
 argument_list|(
 literal|"Patrick Marshall"
 argument_list|,
-name|firstOccurence
+name|firstOccurrence
 operator|.
 name|name
 argument_list|)
@@ -666,7 +670,7 @@ name|assertEquals
 argument_list|(
 literal|12
 argument_list|,
-name|firstOccurence
+name|firstOccurrence
 operator|.
 name|start
 operator|.
@@ -678,7 +682,7 @@ name|assertEquals
 argument_list|(
 literal|28
 argument_list|,
-name|firstOccurence
+name|firstOccurrence
 operator|.
 name|end
 operator|.
@@ -690,7 +694,7 @@ name|assertEquals
 argument_list|(
 literal|0.98
 argument_list|,
-name|firstOccurence
+name|firstOccurrence
 operator|.
 name|confidence
 argument_list|,
@@ -700,7 +704,7 @@ expr_stmt|;
 name|NameOccurrence
 name|secondOccurrence
 init|=
-name|pmOccurences
+name|pmOccurrences
 operator|.
 name|get
 argument_list|(
@@ -849,7 +853,6 @@ comment|//        int entityAnnotationCount = checkAllEntityAnnotations(g);
 comment|//        assertEquals(2, entityAnnotationCount);
 block|}
 comment|/*      * -----------------------------------------------------------------------      * Helper Methods to check Text and EntityAnnotations      * -----------------------------------------------------------------------      */
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllTextAnnotations
@@ -873,12 +876,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 decl_stmt|;
@@ -936,7 +935,7 @@ return|return
 name|textAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if a text annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if a text annotation is valid      */
 specifier|private
 name|void
 name|checkTextAnnotation
@@ -963,8 +962,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 argument_list|,
 literal|null
@@ -1014,15 +1011,13 @@ name|assertTrue
 argument_list|(
 name|SINGLE_SENTENCE
 operator|.
-name|indexOf
+name|contains
 argument_list|(
 name|selectedText
 operator|.
 name|getLexicalForm
 argument_list|()
 argument_list|)
-operator|>=
-literal|0
 argument_list|)
 expr_stmt|;
 comment|// test if context is added
@@ -1038,8 +1033,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTION_CONTEXT
 argument_list|,
 literal|null
@@ -1075,7 +1068,7 @@ name|assertTrue
 argument_list|(
 name|SINGLE_SENTENCE
 operator|.
-name|indexOf
+name|contains
 argument_list|(
 operator|(
 operator|(
@@ -1087,8 +1080,6 @@ operator|.
 name|getLexicalForm
 argument_list|()
 argument_list|)
-operator|>=
-literal|0
 argument_list|)
 expr_stmt|;
 name|object
@@ -1108,8 +1099,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_START
 argument_list|,
 literal|null
@@ -1127,8 +1116,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_END
 argument_list|,
 literal|null
@@ -1276,7 +1263,7 @@ literal|null
 expr_stmt|;
 comment|//check for equality of the selected text and the text on the selected position in the content
 comment|//System.out.println("TA ["+start+"|"+end+"]"+selectedText.getLexicalForm()+"<->"+content.substring(start,end));
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|content
 operator|.
@@ -1286,14 +1273,11 @@ name|start
 argument_list|,
 name|end
 argument_list|)
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|selectedText
 operator|.
 name|getLexicalForm
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

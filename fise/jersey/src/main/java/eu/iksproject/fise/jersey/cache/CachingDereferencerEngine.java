@@ -323,24 +323,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|SupportedFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|felix
 operator|.
 name|scr
@@ -517,8 +499,28 @@ name|Properties
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|RDF_XML
+import|;
+end_import
+
 begin_comment
-comment|/**  * Simple engine that does not enhance content items but fetches resources  * metadata from remote sites to cache them locally for the sole purpose of  * displaying up to date data in the user interface.  *  * This engine might be replaced by a proper dereferencer engine in a future  * version of fise.  *  * @author Olivier Grisel  */
+comment|/**  * Simple engine that does not enhance content items but fetches resources  * metadata from remote sites to cache them locally for the sole purpose of  * displaying up to date data in the user interface.  *<p>  * This engine might be replaced by a proper dereferencer engine in a future  * version of fise.  *  * @author Olivier Grisel  */
 end_comment
 
 begin_class
@@ -535,7 +537,6 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
-argument_list|()
 specifier|public
 class|class
 name|CachingDereferencerEngine
@@ -574,8 +575,6 @@ specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_POST_PROCESSING
 decl_stmt|;
 annotation|@
@@ -743,7 +742,7 @@ expr_stmt|;
 block|}
 specifier|protected
 name|void
-name|disactivate
+name|deactivate
 parameter_list|(
 name|ComponentContext
 name|ce
@@ -1047,8 +1046,6 @@ name|addRequestProperty
 argument_list|(
 literal|"Accept"
 argument_list|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 argument_list|)
 expr_stmt|;
@@ -1062,8 +1059,6 @@ operator|.
 name|getInputStream
 argument_list|()
 argument_list|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 argument_list|)
 return|;
@@ -1126,8 +1121,6 @@ expr_stmt|;
 name|String
 name|format
 init|=
-name|SupportedFormat
-operator|.
 name|RDF_XML
 decl_stmt|;
 specifier|final
@@ -1291,8 +1284,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(

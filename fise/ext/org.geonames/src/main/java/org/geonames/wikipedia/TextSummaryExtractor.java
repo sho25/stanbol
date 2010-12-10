@@ -1105,7 +1105,7 @@ return|return
 name|idx
 return|;
 block|}
-comment|/** 	 * removes sequences of whitespace and keeps only one whitespace character 	 *  	 * @param pString 	 * @return 	 */
+comment|/** 	 * Removes sequences of whitespace and keeps only one whitespace character. 	 */
 specifier|public
 specifier|static
 name|String
@@ -1115,11 +1115,11 @@ name|String
 name|pString
 parameter_list|)
 block|{
-name|StringBuffer
+name|StringBuilder
 name|buf
 init|=
 operator|new
-name|StringBuffer
+name|StringBuilder
 argument_list|()
 decl_stmt|;
 name|char
@@ -1138,27 +1138,15 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|char
+name|c
+range|:
 name|chars
-operator|.
-name|length
-condition|;
-name|i
-operator|++
 control|)
 block|{
 if|if
 condition|(
-name|chars
-index|[
-name|i
-index|]
+name|c
 operator|==
 literal|' '
 condition|)
@@ -1174,10 +1162,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|chars
-index|[
-name|i
-index|]
+literal|' '
 argument_list|)
 expr_stmt|;
 block|}
@@ -1191,10 +1176,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|chars
-index|[
-name|i
-index|]
+name|c
 argument_list|)
 expr_stmt|;
 name|counter

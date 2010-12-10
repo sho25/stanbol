@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Standalone (OSGi independent) Jetty-based server with the FISE Jersey  * endpoint. The OSGi component need be injected manually to the ServletContext  * to make them available to the resources.  *  * This class is mainly useful for testing the JAX-RS resources without faking a  * complete OSGI runtime.  *  * For seamless OSGi deployments the JerseyEndpoint component should be  * automatically registered in the container and registers the JAXRS resources  * automatically.  */
+comment|/**  * Standalone (OSGi independent) Jetty-based server with the FISE Jersey  * endpoint. The OSGi component need be injected manually to the ServletContext  * to make them available to the resources.  *<p>  * This class is mainly useful for testing the JAX-RS resources without faking a  * complete OSGI runtime.  *<p>  * For seamless OSGi deployments the JerseyEndpoint component should be  * automatically registered in the container and registers the JAXRS resources  * automatically.  */
 end_comment
 
 begin_class
@@ -144,7 +144,7 @@ decl_stmt|;
 specifier|public
 specifier|static
 name|String
-name|DEFAUL_BASE_URI
+name|DEFAULT_BASE_URI
 init|=
 literal|"http://localhost:9998/"
 decl_stmt|;
@@ -444,7 +444,7 @@ name|server
 operator|.
 name|start
 argument_list|(
-name|DEFAUL_BASE_URI
+name|DEFAULT_BASE_URI
 argument_list|)
 expr_stmt|;
 name|System

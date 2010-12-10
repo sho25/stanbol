@@ -158,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Statically define the list of available resources and providers to be used by  * the FISE JAX-RS Endpoint.  *  * The jersey auto-scan mechanism does not seem to work when deployed through  * OSGi's HttpService initialization.  *  * In the future this class might get refactored as an OSGi service to allow for  * dynamic configuration and deployment of additional JAX-RS resources and  * providers.  */
+comment|/**  * Statically define the list of available resources and providers to be used by  * the FISE JAX-RS Endpoint.  *<p>  * The jersey auto-scan mechanism does not seem to work when deployed through  * OSGi's HttpService initialization.  *<p>  * In the future this class might get refactored as an OSGi service to allow for  * dynamic configuration and deployment of additional JAX-RS resources and  * providers.  */
 end_comment
 
 begin_class

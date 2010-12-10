@@ -279,8 +279,6 @@ name|void
 name|setup
 parameter_list|()
 block|{
-name|this
-operator|.
 name|jsonldProvider
 operator|=
 operator|new
@@ -298,7 +296,9 @@ block|{
 name|String
 name|context
 init|=
-literal|"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago."
+literal|"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived "
+operator|+
+literal|"in New Zealand and worked at the University of Otago."
 decl_stmt|;
 name|ContentItem
 name|ci
@@ -342,7 +342,9 @@ block|{
 name|String
 name|context
 init|=
-literal|"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago."
+literal|"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived "
+operator|+
+literal|"in New Zealand and worked at the University of Otago."
 decl_stmt|;
 name|ContentItem
 name|ci
@@ -376,8 +378,6 @@ operator|new
 name|ByteArrayOutputStream
 argument_list|()
 decl_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|setIndentation
@@ -385,8 +385,6 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|serialize
@@ -468,8 +466,6 @@ operator|new
 name|ByteArrayOutputStream
 argument_list|()
 decl_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|serialize
@@ -604,8 +600,6 @@ argument_list|,
 literal|"dcterms"
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|setIndentation
@@ -613,8 +607,6 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|setNamespacePrefixMap
@@ -622,8 +614,6 @@ argument_list|(
 name|nsMap
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|serialize
@@ -758,8 +748,6 @@ argument_list|,
 literal|"dcterms"
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|setIndentation
@@ -767,8 +755,6 @@ argument_list|(
 literal|4
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|setNamespacePrefixMap
@@ -776,8 +762,6 @@ argument_list|(
 name|nsMap
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|jsonldProvider
 operator|.
 name|serialize

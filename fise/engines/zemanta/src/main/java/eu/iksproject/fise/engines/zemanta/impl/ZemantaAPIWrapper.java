@@ -188,7 +188,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class wraps the Zemanta API into one method.  * Zemanta is able to return RDF-XML so parsing the response into  * a Graph object is simple.  *   * @author michaelmarth  * @author westei (Rupert Westenthaler)  *  */
+comment|/**  * This class wraps the Zemanta API into one method.  * Zemanta is able to return RDF-XML so parsing the response into  * a Graph object is simple.  *   * @author michaelmarth  * @author westei (Rupert Westenthaler)  */
 end_comment
 
 begin_class

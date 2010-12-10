@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** A unit of content that FISE can enhance.  *    *  Gives access to the binary content that  *  was registered, and the Graph that represents its metadata  *  (provided by client and/or generated).     */
+comment|/**  * A unit of content that FISE can enhance.  *<p>  * Gives access to the binary content that  * was registered, and the Graph that represents its metadata  * (provided by client and/or generated).  */
 end_comment
 
 begin_interface

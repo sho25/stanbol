@@ -354,29 +354,29 @@ name|InvocationHandler
 block|{
 comment|/** 	 * The getID method of the RdfEntity Interface 	 */
 specifier|protected
-specifier|final
 specifier|static
+specifier|final
 name|Method
 name|getIDMethod
 decl_stmt|;
 comment|/** 	 * The toString Method of {@link Object} 	 */
 specifier|protected
-specifier|final
 specifier|static
+specifier|final
 name|Method
 name|toString
 decl_stmt|;
 comment|/** 	 * The equals Method of {@link Object} 	 */
 specifier|protected
-specifier|final
 specifier|static
+specifier|final
 name|Method
 name|equals
 decl_stmt|;
 comment|/** 	 * The hashCode Method of {@link Object} 	 */
 specifier|protected
-specifier|final
 specifier|static
+specifier|final
 name|Method
 name|hashCode
 decl_stmt|;
@@ -2329,11 +2329,6 @@ name|AbstractCollection
 argument_list|<
 name|T
 argument_list|>
-implements|implements
-name|Collection
-argument_list|<
-name|T
-argument_list|>
 block|{
 comment|//private final NonLiteral resource;
 specifier|private
@@ -2791,7 +2786,6 @@ name|value
 argument_list|)
 return|;
 block|}
-empty_stmt|;
 annotation|@
 name|Override
 specifier|public

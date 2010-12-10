@@ -44,6 +44,7 @@ name|EventManager
 block|{
 specifier|private
 specifier|static
+specifier|final
 name|Set
 argument_list|<
 name|EventListener

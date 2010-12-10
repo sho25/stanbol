@@ -311,8 +311,44 @@ name|RdfResourceEnum
 import|;
 end_import
 
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|RDFS_LABEL
+import|;
+end_import
+
 begin_comment
-comment|/**  * Utility taken form the engine.autotagging bundle and adapted from  * using TagInfo to {@link Sign}.  * @author Rupert Westenthaler  * @author ogrisel (original utility)  *  */
+comment|/**  * Utility taken form the engine.autotagging bundle and adapted from  * using TagInfo to {@link Sign}.  *  * @author Rupert Westenthaler  * @author ogrisel (original utility)  */
 end_comment
 
 begin_class
@@ -370,8 +406,6 @@ argument_list|()
 operator|.
 name|getText
 argument_list|(
-name|Properties
-operator|.
 name|RDFS_LABEL
 operator|.
 name|getUnicodeString
@@ -427,9 +461,6 @@ expr_stmt|;
 block|}
 block|}
 block|}
-name|Literal
-name|literal
-decl_stmt|;
 if|if
 condition|(
 name|label
@@ -441,6 +472,9 @@ return|return
 literal|null
 return|;
 block|}
+name|Literal
+name|literal
+decl_stmt|;
 if|if
 condition|(
 name|label
@@ -519,8 +553,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|enhancement
@@ -550,8 +582,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_REFERENCE
 argument_list|,
 name|entityUri
@@ -568,8 +598,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_LABEL
 argument_list|,
 name|literal
@@ -648,8 +676,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_CONFIDENCE
 argument_list|,
 name|literalFactory
@@ -676,8 +702,6 @@ argument_list|()
 operator|.
 name|getReferences
 argument_list|(
-name|Properties
-operator|.
 name|RDF_TYPE
 operator|.
 name|getUnicodeString
@@ -700,8 +724,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_TYPE
 argument_list|,
 operator|new

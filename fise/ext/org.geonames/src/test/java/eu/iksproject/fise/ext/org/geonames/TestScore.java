@@ -135,16 +135,50 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
 begin_comment
-comment|/**  * This test only correct values for score (set/getScore).  * An extension to the web service client for geonames.org implemented to  * be able to write fise:confidence values for fise:EntityAnnotations.  * @author Rupert Westenthaler  *  */
+comment|/**  * This test only correct values for score (set/getScore).  * An extension to the web service client for geonames.org implemented to  * be able to write fise:confidence values for fise:EntityAnnotations.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|TestScore
-extends|extends
-name|Assert
 block|{
 specifier|private
 specifier|static
@@ -254,14 +288,12 @@ name|getScore
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertNotNull
 argument_list|(
 name|toponym
 operator|.
 name|getScore
 argument_list|()
-operator|!=
-literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -439,31 +471,26 @@ argument_list|)
 control|)
 block|{
 comment|//this service does not provide an score, so test if 1.0 is returned
-name|assertTrue
+name|assertNotNull
 argument_list|(
 name|hierarchy
 operator|.
 name|getScore
 argument_list|()
-operator|!=
-literal|null
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|hierarchy
 operator|.
 name|getScore
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|Double
 operator|.
 name|valueOf
 argument_list|(
 literal|1.0
-argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -512,7 +512,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * FISE Zemanta enhancement engine.  * This enhancement engine uses the the Zemanta API for enhancing content.  * See http://developer.zemanta.com  * To run this engine you need a Zemanta API key configured (see README)  *<p/>  * For detailed information on the mappings of Zemanta annotations to FISE  * enhancements see<a>http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine</a>  *<p>This implementation currently only provides FISE enhancements for  * Zemanta Recognitions.  *  * @author michaelmarth  * @author Rupert Westenthaler  */
+comment|/**  * FISE Zemanta enhancement engine.  * This enhancement engine uses the the Zemanta API for enhancing content.  * See http://developer.zemanta.com  * To run this engine you need a Zemanta API key configured (see README)  *<p>  * For detailed information on the mappings of Zemanta annotations to FISE  * enhancements see<a>http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine</a>  *<p>  * This implementation currently only provides FISE enhancements for  * Zemanta Recognitions.  *  * @author michaelmarth  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -1897,7 +1897,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Helper method to parse the confidence property for an resource. Zemanta      * does not the the xsd data type, because of that we need to parse the      * double value based on the string.      *      * @param tc       the graph used to query for confidence value      * @param resource the resource holding the confidence property      * @return the confidence of<code>null</code> if no confidence property is      *         present for the parsed resource of the value can not be converted to a      *         double value.      * @see ZemantaOntologyEnum#confidence      */
+comment|/**      * Helper method to parse the confidence property for an resource. Zemanta      * does not the the xsd data type, because of that we need to parse the      * double value based on the string.      *      * @param tc       the graph used to query for confidence value      * @param resource the resource holding the confidence property      *      * @return the confidence of<code>null</code> if no confidence property is      *         present for the parsed resource of the value can not be converted to a      *         double value.      * @see ZemantaOntologyEnum#confidence      */
 specifier|private
 specifier|static
 name|Double
@@ -1985,7 +1985,7 @@ return|return
 name|confidence
 return|;
 block|}
-comment|/**      * This Methods searches/creates text annotations for anchor points of Zemanta      * extractions.<br>      * First this method searches for text annotations that do use the anchor as      * selected text. Second it searches for occurrences of the anchor within the      * content of the content and checks if there is an text annotation for that      * occurrence. If not it creates an new one.      *      * @param enhancements the graph containing the meta data      * @param text         the content as string      * @param ciId         the ID of the content item      * @param anchor       the anchor text      * @param confidence   the confidence to be used for newly created text annotations      * @return a collection of all existing/created text annotations for the parsed anchor      */
+comment|/**      * This Methods searches/creates text annotations for anchor points of Zemanta      * extractions.<br>      * First this method searches for text annotations that do use the anchor as      * selected text. Second it searches for occurrences of the anchor within the      * content of the content and checks if there is an text annotation for that      * occurrence. If not it creates an new one.      *      * @param enhancements the graph containing the meta data      * @param text         the content as string      * @param ciId         the ID of the content item      * @param anchor       the anchor text      * @param confidence   the confidence to be used for newly created text annotations      *      * @return a collection of all existing/created text annotations for the parsed anchor      */
 specifier|private
 name|Collection
 argument_list|<
@@ -2246,7 +2246,7 @@ return|return
 name|textAnnotations
 return|;
 block|}
-comment|/**      * Search for existing TextAnnotations for an given selected text and      * returns an Map that uses the start position as an key and a list of      * text annotations as an value.      *      * @param enhancements  the graph containing the enhancements to be searched      * @param anchorLiteral the Literal representing the selected text      * @return Map that uses the start position as an key and a list of      *         text annotations as an value.      */
+comment|/**      * Search for existing TextAnnotations for an given selected text and      * returns an Map that uses the start position as an key and a list of      * text annotations as an value.      *      * @param enhancements  the graph containing the enhancements to be searched      * @param anchorLiteral the Literal representing the selected text      *      * @return Map that uses the start position as an key and a list of      *         text annotations as an value.      */
 specifier|private
 name|Map
 argument_list|<

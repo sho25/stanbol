@@ -467,8 +467,6 @@ parameter_list|)
 block|{
 name|ContentItem
 name|result
-init|=
-literal|null
 decl_stmt|;
 synchronized|synchronized
 init|(

@@ -284,6 +284,15 @@ specifier|public
 class|class
 name|EnhancementEngineHelper
 block|{
+specifier|protected
+specifier|static
+name|Random
+name|rng
+init|=
+operator|new
+name|Random
+argument_list|()
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -298,15 +307,6 @@ name|EnhancementEngineHelper
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-specifier|protected
-specifier|static
-name|Random
-name|rng
-init|=
-operator|new
-name|Random
-argument_list|()
 decl_stmt|;
 specifier|public
 specifier|static
@@ -1376,7 +1376,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Getter for the values of the data type property for a resource      * @param graph the graph used to query for the property value      * @param resource the resource      * @param property the property      * @return The iterator over all the values (      */
+comment|/**      * Getter for the values of the data type property for a resource.      *      * @param graph the graph used to query for the property value      * @param resource the resource      * @param property the property      * @return The iterator over all the values (      */
 specifier|public
 specifier|static
 name|Iterator

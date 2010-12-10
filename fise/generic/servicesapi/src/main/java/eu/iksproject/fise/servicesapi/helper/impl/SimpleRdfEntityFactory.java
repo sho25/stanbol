@@ -152,8 +152,6 @@ name|graph
 operator|=
 name|graph
 expr_stmt|;
-name|this
-operator|.
 name|literalFactory
 operator|=
 name|LiteralFactory

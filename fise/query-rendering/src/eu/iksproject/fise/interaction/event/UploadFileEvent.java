@@ -21,10 +21,12 @@ extends|extends
 name|Event
 block|{
 specifier|private
+specifier|final
 name|String
 name|filename
 decl_stmt|;
 specifier|private
+specifier|final
 name|String
 name|uri
 decl_stmt|;

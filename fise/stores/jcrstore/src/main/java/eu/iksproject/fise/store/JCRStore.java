@@ -388,8 +388,8 @@ implements|implements
 name|Store
 block|{
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|Logger
 name|log
 init|=

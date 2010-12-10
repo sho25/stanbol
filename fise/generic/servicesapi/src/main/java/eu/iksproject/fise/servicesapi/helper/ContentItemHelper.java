@@ -124,7 +124,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Helper class to factorize common code for ContentItem handling.  *  * @author ogrisel  *  */
+comment|/**  * Helper class to factorize common code for ContentItem handling.  *  * @author ogrisel  */
 end_comment
 
 begin_class
@@ -177,7 +177,7 @@ decl_stmt|;
 comment|// TODO: instead of using a static helper, build an OSGi component with a
 comment|// configurable site-wide URI namespace for ids that are local to the
 comment|// server.
-comment|/**      * Check that ContentItem#getId returns a valid URI or make an urn out of      * it.      *      * @param ci      * @return      */
+comment|/**      * Check that ContentItem#getId returns a valid URI or make an urn out of      * it.      */
 specifier|public
 specifier|static
 name|UriRef
@@ -551,11 +551,6 @@ name|content
 parameter_list|)
 block|{
 comment|// calculate an ID based on the digest of the content
-name|String
-name|hexDigest
-init|=
-literal|""
-decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -580,12 +575,15 @@ operator|+=
 literal|"/"
 expr_stmt|;
 block|}
+name|String
+name|hexDigest
+init|=
+literal|""
+decl_stmt|;
 try|try
 block|{
 name|hexDigest
 operator|=
-name|ContentItemHelper
-operator|.
 name|streamDigest
 argument_list|(
 operator|new

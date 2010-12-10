@@ -603,6 +603,78 @@ name|ReferencedSiteManager
 import|;
 end_import
 
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_ORGANISATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|DC_TYPE
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|FISE_SELECTED_TEXT
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|RDF_TYPE
+import|;
+end_import
+
 begin_comment
 comment|/**  * Engine that uses a {@link ReferencedSite} to search for entities for  * existing TextAnnotations of an Content Item.  *  * @author ogrisel, rwesten  */
 end_comment
@@ -636,7 +708,6 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
-argument_list|()
 specifier|public
 class|class
 name|ReferencedSiteEntityTaggingEnhancementEngine
@@ -797,8 +868,6 @@ specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ServiceProperties
-operator|.
 name|ORDERING_EXTRACTION_ENHANCEMENT
 decl_stmt|;
 comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_PERSON}      * are enhanced by this engine      */
@@ -900,8 +969,6 @@ literal|"The ID of the Referenced Site is a required Parameter and MUST NOT be N
 argument_list|)
 throw|;
 block|}
-else|else
-block|{
 name|this
 operator|.
 name|referencedSiteID
@@ -931,7 +998,6 @@ literal|"The ID of the Referenced Site is a required Parameter and MUST NOT be a
 argument_list|)
 throw|;
 block|}
-block|}
 name|Object
 name|state
 init|=
@@ -942,8 +1008,6 @@ argument_list|(
 name|PERSON_STATE
 argument_list|)
 decl_stmt|;
-name|this
-operator|.
 name|personState
 operator|=
 name|state
@@ -971,8 +1035,6 @@ argument_list|(
 name|ORG_STATE
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|orgState
 operator|=
 name|state
@@ -1000,8 +1062,6 @@ argument_list|(
 name|PLACE_STATE
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|placeState
 operator|=
 name|state
@@ -1030,8 +1090,6 @@ argument_list|(
 name|PERSON_TYPE
 argument_list|)
 decl_stmt|;
-name|this
-operator|.
 name|personType
 operator|=
 name|type
@@ -1067,8 +1125,6 @@ argument_list|(
 name|ORG_TYPE
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|orgType
 operator|=
 name|type
@@ -1104,8 +1160,6 @@ argument_list|(
 name|PLACE_TYPE
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
 name|placeType
 operator|=
 name|type
@@ -1185,32 +1239,22 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-name|this
-operator|.
 name|referencedSiteID
 operator|=
 literal|null
 expr_stmt|;
-name|this
-operator|.
 name|personType
 operator|=
 literal|null
 expr_stmt|;
-name|this
-operator|.
 name|orgType
 operator|=
 literal|null
 expr_stmt|;
-name|this
-operator|.
 name|placeType
 operator|=
 literal|null
 expr_stmt|;
-name|this
-operator|.
 name|nameField
 operator|=
 literal|null
@@ -1338,8 +1382,6 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
 name|TechnicalClasses
@@ -1569,8 +1611,6 @@ name|graph
 argument_list|,
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 argument_list|)
 decl_stmt|;
@@ -1591,8 +1631,6 @@ name|textAnnotation
 operator|+
 literal|" because property"
 operator|+
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 operator|+
 literal|" is not present"
@@ -1616,8 +1654,6 @@ name|graph
 argument_list|,
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_TYPE
 argument_list|)
 decl_stmt|;
@@ -1638,8 +1674,6 @@ name|textAnnotation
 operator|+
 literal|" because property"
 operator|+
-name|Properties
-operator|.
 name|DC_TYPE
 operator|+
 literal|" is not present"
@@ -1681,8 +1715,6 @@ name|query
 operator|.
 name|setConstraint
 argument_list|(
-name|this
-operator|.
 name|nameField
 argument_list|,
 operator|new
@@ -1713,15 +1745,11 @@ condition|)
 block|{
 if|if
 condition|(
-name|this
-operator|.
 name|personState
 condition|)
 block|{
 if|if
 condition|(
-name|this
-operator|.
 name|personType
 operator|!=
 literal|null
@@ -1731,8 +1759,6 @@ name|query
 operator|.
 name|setConstraint
 argument_list|(
-name|Properties
-operator|.
 name|RDF_TYPE
 operator|.
 name|getUnicodeString
@@ -1762,8 +1788,6 @@ block|}
 elseif|else
 if|if
 condition|(
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_ORGANISATION
 operator|.
 name|equals
@@ -1774,15 +1798,11 @@ condition|)
 block|{
 if|if
 condition|(
-name|this
-operator|.
 name|orgState
 condition|)
 block|{
 if|if
 condition|(
-name|this
-operator|.
 name|orgType
 operator|!=
 literal|null
@@ -1792,8 +1812,6 @@ name|query
 operator|.
 name|setConstraint
 argument_list|(
-name|Properties
-operator|.
 name|RDF_TYPE
 operator|.
 name|getUnicodeString
@@ -1853,8 +1871,6 @@ name|query
 operator|.
 name|setConstraint
 argument_list|(
-name|Properties
-operator|.
 name|RDF_TYPE
 operator|.
 name|getUnicodeString
@@ -1994,8 +2010,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(

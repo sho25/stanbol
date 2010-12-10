@@ -125,14 +125,17 @@ implements|implements
 name|ContentItem
 block|{
 specifier|private
+specifier|final
 name|GraphNode
 name|idNode
 decl_stmt|;
 specifier|private
+specifier|final
 name|DiscobitsHandler
 name|handler
 decl_stmt|;
 specifier|private
+specifier|final
 name|MGraph
 name|metadataGraph
 decl_stmt|;
@@ -218,7 +221,6 @@ name|getMimeType
 parameter_list|()
 block|{
 return|return
-operator|(
 name|handler
 operator|.
 name|getMediaType
@@ -231,7 +233,6 @@ operator|.
 name|getNode
 argument_list|()
 argument_list|)
-operator|)
 operator|.
 name|toString
 argument_list|()

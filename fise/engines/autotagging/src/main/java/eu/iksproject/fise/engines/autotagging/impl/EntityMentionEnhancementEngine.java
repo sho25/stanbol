@@ -370,7 +370,7 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -382,11 +382,13 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+operator|.
+name|*
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -398,6 +400,8 @@ operator|.
 name|rdf
 operator|.
 name|TechnicalClasses
+operator|.
+name|FISE_TEXTANNOTATION
 import|;
 end_import
 
@@ -419,7 +423,6 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
-argument_list|()
 specifier|public
 class|class
 name|EntityMentionEnhancementEngine
@@ -566,12 +569,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 init|;
@@ -604,8 +603,6 @@ name|filter
 argument_list|(
 name|uri
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 literal|null
@@ -646,8 +643,6 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|uri
@@ -710,7 +705,7 @@ control|)
 block|{
 try|try
 block|{
-name|computeEntityRecommentations
+name|computeEntityRecommendations
 argument_list|(
 name|autotagger
 argument_list|,
@@ -758,7 +753,7 @@ name|Collection
 argument_list|<
 name|TagInfo
 argument_list|>
-name|computeEntityRecommentations
+name|computeEntityRecommendations
 parameter_list|(
 name|Autotagger
 name|autotagger
@@ -797,8 +792,6 @@ name|graph
 argument_list|,
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 argument_list|)
 decl_stmt|;
@@ -819,8 +812,6 @@ name|textAnnotation
 operator|+
 literal|" because property"
 operator|+
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 operator|+
 literal|" is not present"
@@ -844,8 +835,6 @@ name|graph
 argument_list|,
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTION_CONTEXT
 argument_list|)
 decl_stmt|;
@@ -866,8 +855,6 @@ name|textAnnotation
 operator|+
 literal|" because property"
 operator|+
-name|Properties
-operator|.
 name|FISE_SELECTION_CONTEXT
 operator|+
 literal|" is not present"
@@ -884,7 +871,7 @@ comment|// aggregate context from subsumed entries:
 for|for
 control|(
 name|NonLiteral
-name|subsumendAnnotation
+name|subsumedAnnotation
 range|:
 name|subsumedAnnotations
 control|)
@@ -898,10 +885,8 @@ name|getString
 argument_list|(
 name|graph
 argument_list|,
-name|subsumendAnnotation
+name|subsumedAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTION_CONTEXT
 argument_list|)
 decl_stmt|;
@@ -931,8 +916,6 @@ name|graph
 argument_list|,
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_TYPE
 argument_list|)
 decl_stmt|;
@@ -953,8 +936,6 @@ name|textAnnotation
 operator|+
 literal|" because property"
 operator|+
-name|Properties
-operator|.
 name|DC_TYPE
 operator|+
 literal|" is not present"

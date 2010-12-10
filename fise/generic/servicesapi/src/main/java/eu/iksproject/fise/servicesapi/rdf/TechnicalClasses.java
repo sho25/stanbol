@@ -33,9 +33,9 @@ begin_comment
 comment|/**  * Classes to be used as types for resources that are not real life entities but  * technical data modeling for FISE components.  *  * @author ogrisel  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
+class|class
 name|TechnicalClasses
 block|{
 comment|/**      * Type used for all enhancement created by Fise      */
@@ -153,8 +153,12 @@ operator|+
 literal|"Category"
 argument_list|)
 decl_stmt|;
+specifier|private
+name|TechnicalClasses
+parameter_list|()
+block|{     }
 block|}
-end_interface
+end_class
 
 end_unit
 

@@ -763,6 +763,22 @@ name|Properties
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Resource to provide a CRU[D] REST API for content items and there related  * enhancements.  *  * Creation is achieved using either POST requests on the root of the store or  * as PUT requests on the expected content item URI.  *  * Retrieval is achieved using simple GET requests on the content item or  * enhancement public URIs.  *  * Update is achieved by issue a PUT request on an existing content item public  * URI.  *  * The Delete operation is not implemented yet.  */
 end_comment
@@ -780,6 +796,7 @@ extends|extends
 name|NavigationMixin
 block|{
 specifier|private
+specifier|static
 specifier|final
 name|Logger
 name|log
@@ -788,8 +805,9 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|getClass
-argument_list|()
+name|StoreRootResource
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1538,8 +1556,6 @@ name|GET
 annotation|@
 name|Produces
 argument_list|(
-name|MediaType
-operator|.
 name|TEXT_HTML
 operator|+
 literal|";qs=2"
@@ -1644,8 +1660,6 @@ argument_list|()
 operator|.
 name|startsWith
 argument_list|(
-name|MediaType
-operator|.
 name|TEXT_HTML
 argument_list|)
 condition|)
@@ -1831,8 +1845,6 @@ argument_list|)
 annotation|@
 name|Produces
 argument_list|(
-name|MediaType
-operator|.
 name|TEXT_HTML
 argument_list|)
 specifier|public
@@ -1978,8 +1990,6 @@ name|POST
 annotation|@
 name|Consumes
 argument_list|(
-name|MediaType
-operator|.
 name|WILDCARD
 operator|+
 literal|";qs=0.5"
@@ -2033,14 +2043,10 @@ annotation|@
 name|Consumes
 argument_list|(
 block|{
-name|MediaType
-operator|.
 name|APPLICATION_FORM_URLENCODED
 operator|+
 literal|";qs=1.0"
 block|,
-name|MediaType
-operator|.
 name|MULTIPART_FORM_DATA
 operator|+
 literal|";qs=0.9"
@@ -2134,8 +2140,6 @@ argument_list|()
 expr_stmt|;
 name|mt
 operator|=
-name|MediaType
-operator|.
 name|TEXT_PLAIN_TYPE
 expr_stmt|;
 block|}
@@ -2260,8 +2264,6 @@ else|else
 block|{
 name|mt
 operator|=
-name|MediaType
-operator|.
 name|APPLICATION_OCTET_STREAM_TYPE
 expr_stmt|;
 block|}
@@ -2331,8 +2333,6 @@ argument_list|)
 annotation|@
 name|Consumes
 argument_list|(
-name|MediaType
-operator|.
 name|WILDCARD
 argument_list|)
 specifier|public

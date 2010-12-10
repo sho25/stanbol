@@ -443,7 +443,6 @@ name|factory
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @return the uriParameter      */
 specifier|public
 name|String
 name|getUriParameter
@@ -453,7 +452,6 @@ return|return
 name|uriParameter
 return|;
 block|}
-comment|/**      * @param uriParameter      *            the uriParameter to set      */
 specifier|public
 name|void
 name|setUriParameter
@@ -469,7 +467,6 @@ operator|=
 name|uriParameter
 expr_stmt|;
 block|}
-comment|/**      * @return the syntax      */
 specifier|public
 name|Syntax
 name|getSyntax
@@ -479,7 +476,6 @@ return|return
 name|syntax
 return|;
 block|}
-comment|/**      * @param syntax      *            the syntax to set      */
 specifier|public
 name|void
 name|setSyntax
@@ -495,7 +491,6 @@ operator|=
 name|syntax
 expr_stmt|;
 block|}
-comment|/**      * @return the transformer      */
 specifier|public
 name|Transformer
 name|getTransformer
@@ -505,7 +500,6 @@ return|return
 name|transformer
 return|;
 block|}
-comment|/**      * @param transformer      *            the transformer to set      */
 specifier|public
 name|void
 name|setTransformer
@@ -521,7 +515,6 @@ operator|=
 name|transformer
 expr_stmt|;
 block|}
-comment|/**      * @return the id      */
 specifier|public
 name|String
 name|getId
@@ -531,7 +524,6 @@ return|return
 name|id
 return|;
 block|}
-comment|/**      * @param id      *            the id to set      */
 specifier|public
 name|void
 name|setId
@@ -547,7 +539,6 @@ operator|=
 name|id
 expr_stmt|;
 block|}
-comment|/**      * @return the source      */
 specifier|public
 name|URI
 name|getSource
@@ -557,7 +548,6 @@ return|return
 name|source
 return|;
 block|}
-comment|/**      * @param source      *            the source to set      */
 specifier|public
 name|void
 name|setSource
@@ -851,8 +841,6 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
-name|this
-operator|.
 name|transformer
 operator|=
 name|factory
@@ -896,8 +884,6 @@ argument_list|>
 name|params
 parameter_list|)
 block|{
-name|this
-operator|.
 name|transformer
 operator|.
 name|clearParameters
@@ -929,8 +915,6 @@ range|:
 name|parms
 control|)
 block|{
-name|this
-operator|.
 name|transformer
 operator|.
 name|setParameter

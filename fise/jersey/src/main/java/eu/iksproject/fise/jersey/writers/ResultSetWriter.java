@@ -256,7 +256,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** MessageBodyWriter for a ResultSet.  * 	Clerezza does provide such a writer, but it seems to require  * 	quite a lot of Clerezza dependencies that we don't really need.  */
+comment|/**  * MessageBodyWriter for a ResultSet.  * Clerezza does provide such a writer, but it seems to require  * quite a lot of Clerezza dependencies that we don't really need.  */
 end_comment
 
 begin_class
@@ -396,15 +396,11 @@ name|IOException
 throws|,
 name|WebApplicationException
 block|{
+try|try
+block|{
 name|Document
 name|doc
 init|=
-literal|null
-decl_stmt|;
-try|try
-block|{
-name|doc
-operator|=
 operator|new
 name|ResultSetToXml
 argument_list|()
@@ -413,7 +409,7 @@ name|toDocument
 argument_list|(
 name|resultSet
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|DOMSource
 name|domSource
 init|=

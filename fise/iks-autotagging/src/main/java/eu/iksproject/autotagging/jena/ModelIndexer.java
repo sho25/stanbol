@@ -436,7 +436,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Build a Lucene index out of a Jena model  *  * @author ogrisel  *  */
+comment|/**  * Build a Lucene index out of a Jena model.  *  * @author ogrisel  */
 end_comment
 
 begin_class
@@ -1581,8 +1581,6 @@ throws|,
 name|IOException
 block|{
 return|return
-name|ModelIndexer
-operator|.
 name|buildDefaultIndex
 argument_list|(
 literal|null
@@ -1739,8 +1737,6 @@ argument_list|,
 literal|"N-TRIPLE"
 argument_list|)
 expr_stmt|;
-name|ModelIndexer
-operator|.
 name|index
 argument_list|(
 name|model

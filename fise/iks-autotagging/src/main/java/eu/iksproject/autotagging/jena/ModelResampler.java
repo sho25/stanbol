@@ -419,8 +419,6 @@ name|File
 name|tsvRanksFile
 parameter_list|)
 block|{
-name|this
-operator|.
 name|tsvScoreFile
 operator|=
 name|tsvRanksFile

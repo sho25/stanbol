@@ -109,39 +109,7 @@ name|scr
 operator|.
 name|annotations
 operator|.
-name|Component
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|felix
-operator|.
-name|scr
-operator|.
-name|annotations
-operator|.
-name|Property
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|felix
-operator|.
-name|scr
-operator|.
-name|annotations
-operator|.
-name|Reference
+name|*
 import|;
 end_import
 
@@ -312,7 +280,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Jersey-based RESTful endpoint for the FISE engines and store.  *  * This OSGi component serves as a bridge between the OSGi context and the  * Servlet context available to JAX-RS resources.  */
+comment|/**  * Jersey-based RESTful endpoint for the FISE engines and store.  *<p>  * This OSGi component serves as a bridge between the OSGi context and the  * Servlet context available to JAX-RS resources.  */
 end_comment
 
 begin_class
@@ -502,6 +470,8 @@ return|return
 name|initParams
 return|;
 block|}
+annotation|@
+name|Activate
 specifier|protected
 name|void
 name|activate
@@ -806,6 +776,8 @@ name|alias
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Deactivate
 specifier|protected
 name|void
 name|deactivate

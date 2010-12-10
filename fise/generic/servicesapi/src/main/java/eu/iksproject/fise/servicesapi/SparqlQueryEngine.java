@@ -38,8 +38,6 @@ specifier|public
 interface|interface
 name|SparqlQueryEngine
 block|{
-specifier|public
-specifier|static
 class|class
 name|SparqlQueryEngineException
 extends|extends

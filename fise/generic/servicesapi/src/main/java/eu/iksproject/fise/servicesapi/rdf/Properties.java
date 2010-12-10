@@ -33,9 +33,9 @@ begin_comment
 comment|/**  * Namespace of standard properties to be used as typed metadata by  * EnhancementEngine.  *  * Copy and paste the URLs in a browser to access the official definitions (RDF  * schema) of those properties to.  *  * @author ogrisel  *  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
+class|class
 name|Properties
 block|{
 comment|/**      * The canonical way to give the type of a resource. It is very common that      * the target of this property is an owl:Class such as the ones defined is      * {@link OntologyClass}      */
@@ -565,7 +565,7 @@ literal|"http://iksproject.eu/ns/extraction/mention/occurence"
 argument_list|)
 decl_stmt|;
 block|}
-end_interface
+end_class
 
 end_unit
 

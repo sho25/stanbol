@@ -305,8 +305,6 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|isEmpty
@@ -318,8 +316,6 @@ control|(
 name|String
 name|subject
 range|:
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|keySet
@@ -350,14 +346,11 @@ decl_stmt|;
 comment|// put the namespaces
 if|if
 condition|(
-name|this
-operator|.
+operator|!
 name|namespacePrefixMap
 operator|.
-name|size
+name|isEmpty
 argument_list|()
-operator|>
-literal|0
 condition|)
 block|{
 name|Map
@@ -386,8 +379,6 @@ control|(
 name|String
 name|ns
 range|:
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|keySet
@@ -398,8 +389,6 @@ name|nsObject
 operator|.
 name|put
 argument_list|(
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|get
@@ -424,8 +413,6 @@ block|}
 name|JsonLdResource
 name|resource
 init|=
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|get
@@ -526,8 +513,6 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|isEmpty
@@ -552,8 +537,6 @@ control|(
 name|String
 name|subject
 range|:
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|keySet
@@ -585,8 +568,6 @@ decl_stmt|;
 name|JsonLdResource
 name|resource
 init|=
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|get
@@ -699,8 +680,6 @@ comment|// put the namespaces
 if|if
 condition|(
 operator|!
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|isEmpty
@@ -733,8 +712,6 @@ control|(
 name|String
 name|ns
 range|:
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|keySet
@@ -745,8 +722,6 @@ name|nsObject
 operator|.
 name|put
 argument_list|(
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|get
@@ -828,8 +803,6 @@ name|types
 operator|.
 name|add
 argument_list|(
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
 name|type
@@ -966,8 +939,6 @@ condition|)
 block|{
 name|value
 operator|=
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
 operator|(
@@ -980,8 +951,6 @@ name|jsonObject
 operator|.
 name|put
 argument_list|(
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
 name|property
@@ -1025,33 +994,19 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|String
+name|uri
+range|:
 name|stringArray
-operator|.
-name|length
-condition|;
-name|i
-operator|++
 control|)
 block|{
 name|valueList
 operator|.
 name|add
 argument_list|(
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
-name|stringArray
-index|[
-name|i
-index|]
+name|uri
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1075,8 +1030,6 @@ name|jsonObject
 operator|.
 name|put
 argument_list|(
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
 name|property
@@ -1138,8 +1091,6 @@ name|jsonObject
 operator|.
 name|put
 argument_list|(
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
 name|property
@@ -1155,8 +1106,6 @@ name|jsonObject
 operator|.
 name|put
 argument_list|(
-name|this
-operator|.
 name|applyNamespace
 argument_list|(
 name|property
@@ -1178,8 +1127,6 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|this
-operator|.
 name|applyNamespaces
 condition|)
 block|{
@@ -1188,8 +1135,6 @@ control|(
 name|String
 name|namespace
 range|:
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|keySet
@@ -1199,8 +1144,6 @@ block|{
 name|String
 name|prefix
 init|=
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|get
@@ -1227,7 +1170,7 @@ return|return
 name|uri
 return|;
 block|}
-comment|/** 	 * Return the JSON-LD Resource for the given subject. 	 *  	 * @param subject 	 * @return 	 */
+comment|/** 	 * Return the JSON-LD Resource for the given subject. 	 */
 specifier|public
 name|JsonLdResource
 name|getResource
@@ -1237,8 +1180,6 @@ name|subject
 parameter_list|)
 block|{
 return|return
-name|this
-operator|.
 name|resourceMap
 operator|.
 name|get
@@ -1247,7 +1188,7 @@ name|subject
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Get the known namespace to prefix mapping. 	 *  	 * @return A {@link java.util.Map} from namespace String to prefix String. 	 */
+comment|/** 	 * Get the known namespace to prefix mapping. 	 *  	 * @return A {@link Map} from namespace String to prefix String. 	 */
 specifier|public
 name|Map
 argument_list|<
@@ -1262,7 +1203,7 @@ return|return
 name|namespacePrefixMap
 return|;
 block|}
-comment|/** 	 * Sets the known namespaces for the serializer. 	 *  	 * @param namespacePrefixMap 	 *            A {@link java.util.Map} from namespace String to prefix 	 *            String. 	 */
+comment|/** 	 * Sets the known namespaces for the serializer. 	 *  	 * @param namespacePrefixMap 	 *            A {@link Map} from namespace String to prefix 	 *            String. 	 */
 specifier|public
 name|void
 name|setNamespacePrefixMap
@@ -1295,8 +1236,6 @@ name|String
 name|prefix
 parameter_list|)
 block|{
-name|this
-operator|.
 name|namespacePrefixMap
 operator|.
 name|put
@@ -1333,7 +1272,7 @@ operator|=
 name|useJointGraphs
 expr_stmt|;
 block|}
-comment|/** 	 * Flag to control whether the namespace prefix map should be used 	 * to shorten IRIs to prefix notation during serialization. Default 	 * value is<code>true</code>.<br /> 	 *<br /> 	 * If you already put values into this JSON-LD instance with prefix 	 * notation, you should set this to<code>false</code> before starting 	 * the serialization. 	 * 	 * @return<code>True</code> if namespaces are applied during serialization,<code>false</code> otherwise. 	 */
+comment|/** 	 * Flag to control whether the namespace prefix map should be used 	 * to shorten IRIs to prefix notation during serialization. Default 	 * value is<code>true</code>.      *<p> 	 * If you already put values into this JSON-LD instance with prefix 	 * notation, you should set this to<code>false</code> before starting 	 * the serialization. 	 * 	 * @return<code>True</code> if namespaces are applied during serialization,<code>false</code> otherwise. 	 */
 specifier|public
 name|boolean
 name|isApplyNamespaces
@@ -1343,7 +1282,7 @@ return|return
 name|applyNamespaces
 return|;
 block|}
-comment|/** 	 * Control whether namespaces from the namespace prefix map are 	 * applied to URLs during serialization.<br /> 	 *<br /> 	 * Set this to<code>false</code> if you already have shortened IRIs 	 * with prefixes. 	 *  	 * @param applyNamespaces 	 */
+comment|/** 	 * Control whether namespaces from the namespace prefix map are 	 * applied to URLs during serialization.      *<p> 	 * Set this to<code>false</code> if you already have shortened IRIs 	 * with prefixes. 	 *  	 * @param applyNamespaces 	 */
 specifier|public
 name|void
 name|setApplyNamespaces

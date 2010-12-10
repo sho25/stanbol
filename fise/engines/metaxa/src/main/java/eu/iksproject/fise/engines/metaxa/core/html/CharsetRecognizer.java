@@ -495,9 +495,11 @@ name|result
 operator|!=
 literal|null
 condition|)
+block|{
 return|return
 name|result
 return|;
+block|}
 block|}
 comment|// in case of HTML or XML check whether there is a charset
 comment|// specification; might be too fragile
@@ -558,7 +560,6 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * @param args      */
 specifier|public
 specifier|static
 name|void

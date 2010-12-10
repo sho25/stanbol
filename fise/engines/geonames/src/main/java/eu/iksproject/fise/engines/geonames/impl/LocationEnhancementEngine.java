@@ -484,7 +484,25 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|NamespaceEnum
+operator|.
+name|dbpedia_ont
+import|;
+end_import
+
+begin_import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -496,11 +514,13 @@ operator|.
 name|rdf
 operator|.
 name|OntologicalClasses
+operator|.
+name|DBPEDIA_PLACE
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -512,11 +532,13 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+operator|.
+name|*
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -528,6 +550,8 @@ operator|.
 name|rdf
 operator|.
 name|TechnicalClasses
+operator|.
+name|FISE_TEXTANNOTATION
 import|;
 end_import
 
@@ -545,7 +569,6 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
-argument_list|()
 comment|//@Property(name="service.ranking",intValue=5)
 specifier|public
 class|class
@@ -563,21 +586,6 @@ name|Integer
 name|defaultOrder
 init|=
 name|ORDERING_EXTRACTION_ENHANCEMENT
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|EnhancementEngineHelper
-operator|.
-name|class
-argument_list|)
 decl_stmt|;
 comment|/**      * This maps geonames.org feature classes to dbPedia.org ontology classes      */
 specifier|public
@@ -607,6 +615,21 @@ name|UriRef
 argument_list|>
 argument_list|>
 name|FEATURE_TYPE_CONCEPT_MAPPINGS
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|EnhancementEngineHelper
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 comment|/**      * Default value for minimum scores of search results are added to the      * metadata of the parsed ContentItem      */
 specifier|private
@@ -750,8 +773,6 @@ name|conceptMappings
 operator|.
 name|add
 argument_list|(
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_PLACE
 argument_list|)
 expr_stmt|;
@@ -773,8 +794,6 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"PopulatedPlace"
@@ -800,8 +819,6 @@ argument_list|,
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Settlement"
@@ -829,8 +846,6 @@ argument_list|,
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"AdministrativeRegion"
@@ -852,8 +867,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"BodyOfWater"
@@ -874,8 +887,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Infrastructure"
@@ -896,8 +907,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Building"
@@ -918,8 +927,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Mountain"
@@ -973,8 +980,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Lake"
@@ -1131,8 +1136,6 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|" Stream"
@@ -1153,8 +1156,6 @@ argument_list|,
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Canal"
@@ -1257,8 +1258,6 @@ argument_list|,
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"River"
@@ -1422,8 +1421,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Cave"
@@ -1479,8 +1476,6 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Country"
@@ -1502,8 +1497,6 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Settlement"
@@ -1524,8 +1517,6 @@ argument_list|,
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"City"
@@ -1547,8 +1538,6 @@ argument_list|,
 operator|new
 name|UriRef
 argument_list|(
-name|NamespaceEnum
-operator|.
 name|dbpedia_ont
 operator|+
 literal|"Village"
@@ -1642,9 +1631,6 @@ operator|.
 name|getProperties
 argument_list|()
 decl_stmt|;
-name|String
-name|value
-decl_stmt|;
 name|log
 operator|.
 name|debug
@@ -1652,6 +1638,9 @@ argument_list|(
 literal|"activating ..."
 argument_list|)
 expr_stmt|;
+name|String
+name|value
+decl_stmt|;
 try|try
 block|{
 name|value
@@ -1702,8 +1691,7 @@ name|MIN_SCORE
 operator|+
 literal|"="
 operator|+
-name|getMinScore
-argument_list|()
+name|minScore
 argument_list|)
 expr_stmt|;
 block|}
@@ -1778,8 +1766,7 @@ name|MAX_LOCATION_ENHANCEMENTS
 operator|+
 literal|"="
 operator|+
-name|getMaxLocationEnhancements
-argument_list|()
+name|maxLocationEnhancements
 argument_list|)
 expr_stmt|;
 block|}
@@ -1854,8 +1841,7 @@ name|MIN_HIERARCHY_SCORE
 operator|+
 literal|"="
 operator|+
-name|getMinHierarchyScore
-argument_list|()
+name|minHierarchyScore
 argument_list|)
 expr_stmt|;
 block|}
@@ -1918,8 +1904,6 @@ throws|throws
 name|EngineException
 block|{
 return|return
-name|EnhancementEngine
-operator|.
 name|ENHANCE_SYNCHRONOUS
 return|;
 block|}
@@ -1988,13 +1972,11 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-for|for
-control|(
 name|Iterator
 argument_list|<
 name|Triple
 argument_list|>
-name|it
+name|iterator
 init|=
 name|graph
 operator|.
@@ -2002,26 +1984,23 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|DC_TYPE
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_PLACE
 argument_list|)
-init|;
-name|it
+decl_stmt|;
+while|while
+condition|(
+name|iterator
 operator|.
 name|hasNext
 argument_list|()
-condition|;
-control|)
+condition|)
 block|{
 name|NonLiteral
 name|placeEnhancement
 init|=
-name|it
+name|iterator
 operator|.
 name|next
 argument_list|()
@@ -2040,12 +2019,8 @@ name|TripleImpl
 argument_list|(
 name|placeEnhancement
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 decl_stmt|;
@@ -2071,8 +2046,6 @@ name|graph
 argument_list|,
 name|placeEnhancement
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 argument_list|)
 decl_stmt|;
@@ -2093,8 +2066,6 @@ name|placeEnhancement
 operator|+
 literal|" because property"
 operator|+
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 operator|+
 literal|" is not present"
@@ -2299,9 +2270,6 @@ block|{
 if|if
 condition|(
 name|score
-operator|.
-name|doubleValue
-argument_list|()
 operator|<
 name|minScore
 condition|)
@@ -2331,7 +2299,7 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|/*                                * NOTE: If score is not present all suggestions are                                * added as enhancements to the metadata of the content                                * item.                                */
+comment|/*                          * NOTE: If score is not present all suggestions are                          * added as enhancements to the metadata of the content                          * item.                          */
 block|}
 comment|//write the enhancement!
 name|NonLiteral
@@ -2486,7 +2454,7 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|/*                                               * The hierarchy service dose not provide a score, because it would be 1.0                                               * so we need to set the score to this value.                                               * Currently is is set to the value of the suggested entry                                               */
+comment|/*                                      * The hierarchy service dose not provide a score, because it would be 1.0                                      * so we need to set the score to this value.                                      * Currently is is set to the value of the suggested entry                                      */
 name|hierarchyEntry
 operator|.
 name|setScore
@@ -2704,8 +2672,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|related
@@ -2738,8 +2704,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_REQUIRES
 argument_list|,
 name|requires
@@ -2757,8 +2721,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_REFERENCE
 argument_list|,
 name|entityRef
@@ -2786,8 +2748,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_LABEL
 argument_list|,
 name|literalFactory
@@ -2830,8 +2790,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_CONFIDENCE
 argument_list|,
 name|literalFactory
@@ -2974,8 +2932,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_TYPE
 argument_list|,
 name|entityType

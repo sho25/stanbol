@@ -213,6 +213,38 @@ name|SupportedFormat
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|TEXT_PLAIN
+import|;
+end_import
+
 begin_class
 annotation|@
 name|Provider
@@ -220,8 +252,6 @@ annotation|@
 name|Produces
 argument_list|(
 block|{
-name|MediaType
-operator|.
 name|TEXT_PLAIN
 block|,
 name|SupportedFormat
@@ -248,8 +278,6 @@ name|SupportedFormat
 operator|.
 name|RDF_JSON
 block|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 block|}
 argument_list|)
@@ -401,8 +429,6 @@ operator|.
 name|isWildcardType
 argument_list|()
 operator|||
-name|MediaType
-operator|.
 name|TEXT_PLAIN
 operator|.
 name|equals
@@ -423,8 +449,6 @@ name|entityStream
 argument_list|,
 name|t
 argument_list|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 argument_list|)
 expr_stmt|;

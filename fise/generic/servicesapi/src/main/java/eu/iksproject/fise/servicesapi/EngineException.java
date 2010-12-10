@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Base exception raised by EnhancementEngine implementations when they fail to  * process the provided content item.  *  * If the failure is imputable to a malformed input in the  * {@link ContentItem#getStream()} or {@link ContentItem#getMetadata()} one  * should throw the subclass {@link InvalidContentException} instead.  *  * @author ogrisel  */
+comment|/**  * Base exception thrown by EnhancementEngine implementations when they fail to  * process the provided content item.  *<p>  * If the failure is imputable to a malformed input in the  * {@link ContentItem#getStream()} or {@link ContentItem#getMetadata()} one  * should throw the subclass {@link InvalidContentException} instead.  *  * @author ogrisel  */
 end_comment
 
 begin_class

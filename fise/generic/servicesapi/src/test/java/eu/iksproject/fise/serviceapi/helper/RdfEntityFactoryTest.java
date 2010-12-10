@@ -21,6 +21,18 @@ name|junit
 operator|.
 name|Assert
 operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
 name|assertTrue
 import|;
 end_import
@@ -282,7 +294,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests the Factory, basic RdfEntity Methods and all features supported for  * Interfaces.  * @author Rupert Westenthaler  *  */
+comment|/**  * Tests the Factory, basic RdfEntity Methods and all features supported for  * Interfaces.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -346,17 +358,14 @@ argument_list|)
 decl_stmt|;
 comment|//TODO: Test type statement
 comment|//TODO: test getID Method
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|rdfEntity
 operator|.
 name|getId
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|node
-argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//TODO: Test equals
@@ -374,24 +383,21 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|rdfEntity
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|rdfEntity2
-argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//TODO: Test hashCode
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|rdfEntity
 operator|.
 name|hashCode
 argument_list|()
-operator|==
+argument_list|,
 name|rdfEntity2
 operator|.
 name|hashCode
@@ -475,21 +481,18 @@ argument_list|(
 literal|10
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 operator|new
 name|Integer
 argument_list|(
 literal|10
 argument_list|)
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|testEntity
 operator|.
 name|getInteger
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|testEntity
@@ -499,21 +502,18 @@ argument_list|(
 literal|20l
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 operator|new
 name|Long
 argument_list|(
 literal|20
 argument_list|)
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|testEntity
 operator|.
 name|getLong
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//TODO: Not supported by org.apache.clerezza.rdf.core.impl.SimpleLiteralFactory!
@@ -526,21 +526,18 @@ argument_list|(
 literal|0.2
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 operator|new
 name|Double
 argument_list|(
 literal|0.2
 argument_list|)
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|testEntity
 operator|.
 name|getDouble
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|testEntity
@@ -550,17 +547,14 @@ argument_list|(
 literal|"Test!"
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 literal|"Test!"
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|testEntity
 operator|.
 name|getString
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|Date
@@ -577,17 +571,14 @@ argument_list|(
 name|currentDate
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|currentDate
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|testEntity
 operator|.
 name|getDate
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|testEntity
@@ -1219,17 +1210,14 @@ argument_list|(
 name|testURI
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|testURI
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|entity
 operator|.
 name|getURI
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|URL
@@ -1248,17 +1236,14 @@ argument_list|(
 name|testURL
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|testURL
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|entity
 operator|.
 name|getURL
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|entity
@@ -1268,17 +1253,14 @@ argument_list|(
 name|node2
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|node2
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|entity
 operator|.
 name|getUriRef
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|entity2
@@ -1288,17 +1270,14 @@ argument_list|(
 name|entity
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
 name|entity
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|entity2
 operator|.
 name|getTestEntity
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|Collection
@@ -1885,10 +1864,6 @@ expr_stmt|;
 block|}
 end_class
 
-begin_comment
-comment|/** 	 * @param graph 	 * @param node 	 * @return 	 */
-end_comment
-
 begin_function
 specifier|private
 specifier|static
@@ -1986,7 +1961,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * Interface to test primitive Datatypes and Uri links 	 * @author westei 	 * 	 */
+comment|/** 	 * Interface to test primitive Datatypes and Uri links.      * 	 * @author westei 	 */
 end_comment
 
 begin_interface
@@ -2314,7 +2289,7 @@ block|}
 end_interface
 
 begin_comment
-comment|/** 	 * Interface to test relations to other RdfEntities 	 * @author westei 	 * 	 */
+comment|/** 	 * Interface to test relations to other RdfEntities.      * 	 * @author westei 	 */
 end_comment
 
 begin_interface
@@ -2392,7 +2367,7 @@ block|}
 end_interface
 
 begin_comment
-comment|/** 	 * Interface to test extends relations between Interfaces 	 * @author westei 	 * 	 */
+comment|/** 	 * Interface to test extends relations between Interfaces.      * 	 * @author westei 	 */
 end_comment
 
 begin_interface

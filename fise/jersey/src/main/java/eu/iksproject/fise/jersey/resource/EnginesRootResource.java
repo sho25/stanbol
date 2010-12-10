@@ -185,20 +185,6 @@ name|rs
 operator|.
 name|core
 operator|.
-name|MediaType
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
 name|Response
 import|;
 end_import
@@ -282,24 +268,6 @@ operator|.
 name|serializedform
 operator|.
 name|Serializer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|SupportedFormat
 import|;
 end_import
 
@@ -457,8 +425,64 @@ name|InMemoryContentItem
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|RDF_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|RDF_XML
+import|;
+end_import
+
 begin_comment
-comment|/**  * RESTful interface to browse the list of available engines and allow to call  * them in a stateless, synchronous way.  *  * If you need the content of the extractions to be stored on the server, use  * the StoreRootResource API instead.  *  */
+comment|/**  * RESTful interface to browse the list of available engines and allow to call  * them in a stateless, synchronous way.  *<p>  * If you need the content of the extractions to be stored on the server, use  * the StoreRootResource API instead.  */
 end_comment
 
 begin_class
@@ -470,8 +494,6 @@ argument_list|)
 annotation|@
 name|ImplicitProduces
 argument_list|(
-name|MediaType
-operator|.
 name|TEXT_HTML
 operator|+
 literal|";qs=2"
@@ -648,8 +670,6 @@ name|GET
 annotation|@
 name|Produces
 argument_list|(
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 argument_list|)
 specifier|public
@@ -786,14 +806,12 @@ name|toLowerCase
 argument_list|()
 return|;
 block|}
-comment|/**      * Form based OpenCalais-compatible interface      *      * TODO: should we parse the OpenCalais paramsXML and find the closest FISE      * semantics too?      *      * Note: the format parameter is not part of the official API      *      * @throws EngineException      * @throws IOException      */
+comment|/**      * Form based OpenCalais-compatible interface      *      * TODO: should we parse the OpenCalais paramsXML and find the closest FISE      * semantics too?      *      * Note: the format parameter is not part of the official API      *      * @throws EngineException if the content is somehow corrupted      * @throws IOException      */
 annotation|@
 name|POST
 annotation|@
 name|Consumes
 argument_list|(
-name|MediaType
-operator|.
 name|APPLICATION_FORM_URLENCODED
 argument_list|)
 specifier|public
@@ -845,8 +863,6 @@ operator|.
 name|getBytes
 argument_list|()
 argument_list|,
-name|MediaType
-operator|.
 name|TEXT_PLAIN
 argument_list|)
 decl_stmt|;
@@ -869,8 +885,6 @@ name|POST
 annotation|@
 name|Consumes
 argument_list|(
-name|MediaType
-operator|.
 name|WILDCARD
 argument_list|)
 specifier|public
@@ -904,8 +918,6 @@ block|{
 name|String
 name|format
 init|=
-name|MediaType
-operator|.
 name|TEXT_PLAIN
 decl_stmt|;
 if|if
@@ -1069,8 +1081,6 @@ argument_list|)
 operator|.
 name|type
 argument_list|(
-name|MediaType
-operator|.
 name|TEXT_HTML
 argument_list|)
 operator|.
@@ -1109,8 +1119,6 @@ argument_list|()
 operator|.
 name|contains
 argument_list|(
-name|MediaType
-operator|.
 name|APPLICATION_JSON_TYPE
 argument_list|)
 condition|)
@@ -1123,8 +1131,6 @@ name|ok
 argument_list|(
 name|graph
 argument_list|,
-name|SupportedFormat
-operator|.
 name|RDF_JSON
 argument_list|)
 operator|.
@@ -1140,10 +1146,8 @@ operator|.
 name|getAcceptableMediaTypes
 argument_list|()
 operator|.
-name|size
+name|isEmpty
 argument_list|()
-operator|==
-literal|0
 condition|)
 block|{
 comment|// use RDF/XML as default format to keep compat with OpenCalais
@@ -1155,8 +1159,6 @@ name|ok
 argument_list|(
 name|graph
 argument_list|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 argument_list|)
 operator|.

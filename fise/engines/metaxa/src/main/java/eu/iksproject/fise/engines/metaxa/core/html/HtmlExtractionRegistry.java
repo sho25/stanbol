@@ -59,6 +59,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|javax
 operator|.
 name|xml
@@ -260,7 +270,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HtmlExtractionRegistry.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * HtmlExtractionRegistry.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -304,8 +314,6 @@ specifier|public
 name|HtmlExtractionRegistry
 parameter_list|()
 block|{
-name|this
-operator|.
 name|registry
 operator|=
 operator|new
@@ -317,8 +325,6 @@ name|HtmlExtractionComponent
 argument_list|>
 argument_list|()
 expr_stmt|;
-name|this
-operator|.
 name|activeExtractors
 operator|=
 operator|new
@@ -1056,7 +1062,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return the registry      */
 specifier|public
 name|HashMap
 argument_list|<
@@ -1071,7 +1076,6 @@ return|return
 name|registry
 return|;
 block|}
-comment|/**      * @param registry      *            the registry to set      */
 specifier|public
 name|void
 name|setRegistry
@@ -1092,9 +1096,8 @@ operator|=
 name|registry
 expr_stmt|;
 block|}
-comment|/**      * @return the activeExtractors      */
 specifier|public
-name|HashSet
+name|Set
 argument_list|<
 name|String
 argument_list|>
@@ -1105,7 +1108,6 @@ return|return
 name|activeExtractors
 return|;
 block|}
-comment|/**      * @param activeExtractors      *            the activeExtractors to set      */
 specifier|public
 name|void
 name|setActiveExtractors
@@ -1205,7 +1207,7 @@ name|type
 parameter_list|)
 throws|throws
 name|InitializationException
-block|{      }
+block|{     }
 specifier|public
 name|void
 name|remove
@@ -1213,7 +1215,7 @@ parameter_list|(
 name|String
 name|id
 parameter_list|)
-block|{      }
+block|{     }
 specifier|public
 name|void
 name|activate
@@ -1221,7 +1223,7 @@ parameter_list|(
 name|String
 name|id
 parameter_list|)
-block|{      }
+block|{     }
 specifier|public
 name|void
 name|deactivate
@@ -1229,7 +1231,7 @@ parameter_list|(
 name|String
 name|id
 parameter_list|)
-block|{      }
+block|{     }
 block|}
 end_class
 

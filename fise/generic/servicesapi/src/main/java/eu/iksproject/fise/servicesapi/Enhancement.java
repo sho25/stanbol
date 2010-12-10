@@ -80,7 +80,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Interface represents a Fise enhancement.  *  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  * 	MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *	String enhancementId = "http://wwww.example.com/iks-project/fise/example-enhancement";  *	UriRef enhancementNode = new UriRef(enhancementId);  *	Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *	enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
+comment|/**  * This Interface represents a FISE enhancement.  *<p>  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  * 	MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *	String enhancementId = "http://wwww.example.com/iks-project/fise/example-enhancement";  *	UriRef enhancementNode = new UriRef(enhancementId);  *	Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *	enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface

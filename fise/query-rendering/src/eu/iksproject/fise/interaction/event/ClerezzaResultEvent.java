@@ -25,6 +25,7 @@ extends|extends
 name|Event
 block|{
 specifier|private
+specifier|final
 name|String
 name|result
 decl_stmt|;

@@ -150,7 +150,7 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -162,6 +162,8 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+operator|.
+name|*
 import|;
 end_import
 
@@ -234,8 +236,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|enhancement
@@ -265,8 +265,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_REFERENCE
 argument_list|,
 name|entityUri
@@ -282,8 +280,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_LABEL
 argument_list|,
 name|literalFactory
@@ -307,8 +303,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_CONFIDENCE
 argument_list|,
 name|literalFactory
@@ -343,8 +337,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_TYPE
 argument_list|,
 operator|new

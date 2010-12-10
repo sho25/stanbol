@@ -549,8 +549,6 @@ parameter_list|)
 block|{
 name|Element
 name|value
-init|=
-literal|null
 decl_stmt|;
 if|if
 condition|(

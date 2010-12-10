@@ -15,6 +15,54 @@ end_package
 
 begin_import
 import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|FISE_TEXTANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -54,16 +102,6 @@ operator|.
 name|io
 operator|.
 name|InputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|net
-operator|.
-name|URI
 import|;
 end_import
 
@@ -291,28 +329,12 @@ name|servicesapi
 operator|.
 name|rdf
 operator|.
-name|Properties
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|fise
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
 name|TechnicalClasses
 import|;
 end_import
 
 begin_comment
-comment|/**  * Tests if the enhancement interfaces can be used to write valid enhancement  * @author westei  *  */
+comment|/**  * Tests if the enhancement interfaces can be used to write valid enhancement.  *  * @author westei  */
 end_comment
 
 begin_class
@@ -339,7 +361,7 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-literal|"urn:test:dummyEnhancemenEngine"
+literal|"urn:test:dummyEnhancementEngine"
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1211,11 +1233,11 @@ name|getMetadata
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
-name|numberOfTextAnnotations
-operator|==
 literal|3
+argument_list|,
+name|numberOfTextAnnotations
 argument_list|)
 expr_stmt|;
 name|int
@@ -1229,25 +1251,23 @@ name|getMetadata
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
-name|numberOfEntityAnnotations
-operator|==
 literal|3
+argument_list|,
+name|numberOfEntityAnnotations
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * @return 	 */
 specifier|private
+specifier|static
 name|UriRef
 name|createEnhancementURI
 parameter_list|()
 block|{
 comment|//TODO: add some Utility to create Instances to the RdfEntityFactory
 comment|//      this should create a new URI by some default Algorithm
-name|UriRef
-name|enhancementNode
-init|=
+return|return
 operator|new
 name|UriRef
 argument_list|(
@@ -1258,13 +1278,9 @@ operator|.
 name|randomUUID
 argument_list|()
 argument_list|)
-decl_stmt|;
-return|return
-name|enhancementNode
 return|;
 block|}
 comment|/*      * -----------------------------------------------------------------------      * Helper Methods to check Text and EntityAnnotations      * -----------------------------------------------------------------------      */
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllEntityAnnotations
@@ -1285,8 +1301,6 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
 name|TechnicalClasses
@@ -1337,7 +1351,6 @@ return|return
 name|entityAnnotationCount
 return|;
 block|}
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllTextAnnotations
@@ -1358,12 +1371,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 decl_stmt|;
@@ -1421,7 +1430,7 @@ return|return
 name|textAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if a text annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if a text annotation is valid.      */
 specifier|private
 name|void
 name|checkTextAnnotation
@@ -1445,8 +1454,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 argument_list|,
 literal|null
@@ -1484,7 +1491,7 @@ name|assertTrue
 argument_list|(
 name|SINGLE_SENTENCE
 operator|.
-name|indexOf
+name|contains
 argument_list|(
 operator|(
 operator|(
@@ -1496,8 +1503,6 @@ operator|.
 name|getLexicalForm
 argument_list|()
 argument_list|)
-operator|>=
-literal|0
 argument_list|)
 expr_stmt|;
 comment|// test if context is added
@@ -1513,8 +1518,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTION_CONTEXT
 argument_list|,
 literal|null
@@ -1550,7 +1553,7 @@ name|assertTrue
 argument_list|(
 name|SINGLE_SENTENCE
 operator|.
-name|indexOf
+name|contains
 argument_list|(
 operator|(
 operator|(
@@ -1562,12 +1565,10 @@ operator|.
 name|getLexicalForm
 argument_list|()
 argument_list|)
-operator|>=
-literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks if an entity annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if an entity annotation is valid.      */
 specifier|private
 name|void
 name|checkEntityAnnotation
@@ -1591,8 +1592,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 literal|null
@@ -1638,12 +1637,8 @@ name|filter
 argument_list|(
 name|referredTextAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 operator|.
@@ -1665,8 +1660,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_REFERENCE
 argument_list|,
 literal|null
@@ -1716,8 +1709,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_LABEL
 argument_list|,
 literal|null

@@ -22,7 +22,6 @@ specifier|public
 interface|interface
 name|EventListener
 block|{
-specifier|public
 name|void
 name|eventOccurred
 parameter_list|(

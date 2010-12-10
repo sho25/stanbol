@@ -774,7 +774,7 @@ return|return
 name|subjects
 return|;
 block|}
-comment|/** 	 * Get the known namespace to prefix mapping. 	 *  	 * @return A {@link java.util.Map} from namespace String to prefix String. 	 */
+comment|/** 	 * Get the known namespace to prefix mapping. 	 *  	 * @return A {@link Map} from namespace String to prefix String. 	 */
 specifier|public
 name|Map
 argument_list|<
@@ -789,7 +789,7 @@ return|return
 name|namespacePrefixMap
 return|;
 block|}
-comment|/** 	 * Sets the known namespaces for the serializer. 	 *  	 * @param knownNamespaces A {@link java.util.Map} from namespace String to prefix String. 	 */
+comment|/** 	 * Sets the known namespaces for the serializer. 	 *  	 * @param knownNamespaces A {@link Map} from namespace String to prefix String. 	 */
 specifier|public
 name|void
 name|setNamespacePrefixMap

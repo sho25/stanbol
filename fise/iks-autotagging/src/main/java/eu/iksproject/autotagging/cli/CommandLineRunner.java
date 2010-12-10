@@ -1670,7 +1670,7 @@ name|err
 operator|.
 name|append
 argument_list|(
-literal|"unknow command: "
+literal|"Unknown command: "
 operator|+
 name|args
 index|[

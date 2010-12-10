@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base content item implementation that holds a complete copy of the data in  * memory.  *  * This implementation can be used independently of any store implementation and  * is suitable for stateless processing.  */
+comment|/**  * Base content item implementation that holds a complete copy of the data in  * memory.  *<p>  * This implementation can be used independently of any store implementation and  * is suitable for stateless processing.  */
 end_comment
 
 begin_class

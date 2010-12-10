@@ -321,7 +321,7 @@ name|LOG
 operator|.
 name|error
 argument_list|(
-literal|"Registration Initalization Error: "
+literal|"Registration Initialization Error: "
 operator|+
 name|e
 operator|.

@@ -36,6 +36,7 @@ specifier|public
 enum|enum
 name|ZemantaOntologyEnum
 block|{
+comment|// TODO: use capitals for constant names
 name|Recognition
 block|,
 name|anchor
@@ -171,7 +172,7 @@ name|local
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a new entry of this Enum by using the default Zemanta namespace      * and the name() of this element as lecal name      */
+comment|/**      * Creates a new entry of this Enum by using the default Zemanta namespace      * and the name() of this element as lecal name.      */
 specifier|private
 name|ZemantaOntologyEnum
 parameter_list|()
@@ -184,7 +185,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * The unicode name of the URI      *      * @return the unicode name of the URI      */
+comment|/**      * The unicode name of the URI.      *      * @return the unicode name of the URI      */
 annotation|@
 name|Override
 specifier|public
@@ -199,7 +200,7 @@ name|getUnicodeString
 argument_list|()
 return|;
 block|}
-comment|/**      * The URI of the element of this Enum      *      * @return the URI of the element as Clerezza UriRef      */
+comment|/**      * The URI of the element of this Enum.      *      * @return the URI of the element as Clerezza UriRef      */
 specifier|public
 name|UriRef
 name|getUri

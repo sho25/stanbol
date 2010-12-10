@@ -570,7 +570,7 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|eu
 operator|.
 name|iksproject
@@ -582,6 +582,8 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+operator|.
+name|*
 import|;
 end_import
 
@@ -1418,8 +1420,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTED_TEXT
 argument_list|,
 name|literalFactory
@@ -1440,8 +1440,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_SELECTION_CONTEXT
 argument_list|,
 name|literalFactory
@@ -1464,8 +1462,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_TYPE
 argument_list|,
 name|typeUri
@@ -1481,8 +1477,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_CONFIDENCE
 argument_list|,
 name|literalFactory
@@ -1520,8 +1514,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_START
 argument_list|,
 name|literalFactory
@@ -1544,8 +1536,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_END
 argument_list|,
 name|literalFactory
@@ -1620,8 +1610,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|firstOccurrenceAnnotation
@@ -1668,8 +1656,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|firstOccurrenceAnnotation
