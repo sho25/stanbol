@@ -65,13 +65,13 @@ specifier|static
 enum|enum
 name|PatternType
 block|{
-comment|/** 		 * Simple checks if the parsed constraint equals the value 		 */
+comment|/**          * Simple checks if the parsed constraint equals the value          */
 name|none
 block|,
-comment|/** 		 * All kind of REGEX Patterns 		 */
+comment|/**          * All kind of REGEX Patterns          */
 name|regex
 block|,
-comment|/** 		 * WildCard based queries using * and ? 		 */
+comment|/**          * WildCard based queries using * and ?          */
 name|wildcard
 comment|//TODO maybe add Prefix as additional type
 block|}
@@ -98,7 +98,7 @@ specifier|final
 name|String
 name|text
 decl_stmt|;
-comment|/** 	 * Creates a TextConstraint for a text and languages.  	 * @param text the text or<code>null</code> to search for any text in active languages 	 * @param languages the set of active languages. 	 */
+comment|/**      * Creates a TextConstraint for a text and languages.      * @param text the text or<code>null</code> to search for any text in active languages      * @param languages the set of active languages.      */
 specifier|public
 name|TextConstraint
 parameter_list|(
@@ -260,7 +260,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|/* 			 * Implementation NOTE: 			 *   We need to use a LinkedHashSet here to 			 *    1) ensure that there are no duplicates and 			 *    2) ensure ordering of the parsed constraints 			 *   Both is important: Duplicates might result in necessary calculations 			 *   and ordering might be important for users that expect that the  			 *   language parsed first is used as the preferred one 			 */
+comment|/*              * Implementation NOTE:              *   We need to use a LinkedHashSet here to              *    1) ensure that there are no duplicates and              *    2) ensure ordering of the parsed constraints              *   Both is important: Duplicates might result in necessary calculations              *   and ordering might be important for users that expect that the              *   language parsed first is used as the preferred one              */
 name|this
 operator|.
 name|languages
@@ -292,7 +292,7 @@ operator|=
 name|caseSensitive
 expr_stmt|;
 block|}
-comment|/** 	 * @return the wildcardType 	 */
+comment|/**      * @return the wildcardType      */
 specifier|public
 specifier|final
 name|PatternType
@@ -303,7 +303,7 @@ return|return
 name|wildcardType
 return|;
 block|}
-comment|/** 	 * @return the languages 	 */
+comment|/**      * @return the languages      */
 specifier|public
 specifier|final
 name|Set
@@ -317,7 +317,7 @@ return|return
 name|languages
 return|;
 block|}
-comment|/** 	 * @return the caseSensitive 	 */
+comment|/**      * @return the caseSensitive      */
 specifier|public
 specifier|final
 name|boolean
@@ -328,7 +328,7 @@ return|return
 name|caseSensitive
 return|;
 block|}
-comment|/** 	 * @return the text 	 */
+comment|/**      * @return the text      */
 specifier|public
 specifier|final
 name|String

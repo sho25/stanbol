@@ -262,7 +262,6 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#addSelectedFields(java.lang.String) 	 */
 specifier|public
 name|void
 name|addSelectedField
@@ -287,7 +286,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#addSelectedFields(java.util.Collection) 	 */
 specifier|public
 name|void
 name|addSelectedFields
@@ -315,7 +313,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#removeSelectedFields(java.lang.String) 	 */
 specifier|public
 name|void
 name|removeSelectedField
@@ -340,7 +337,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#removeSelectedFields(java.util.Collection) 	 */
 specifier|public
 name|void
 name|removeSelectedFields
@@ -368,7 +364,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#getSelectedFields() 	 */
 specifier|public
 specifier|final
 name|Set
@@ -382,7 +377,6 @@ return|return
 name|unmodSelected
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#setConstraint(java.lang.String, eu.iksproject.rick.core.query.Constraint) 	 */
 specifier|public
 name|void
 name|setConstraint
@@ -446,7 +440,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**  	 * Calls {@link #setConstraint(String, Constraint)} with<code>null</code> 	 * as {@link Constraint}. So overwrite the setConstraint Method if needed. 	 * @see eu.iksproject.rick.core.query.FieldConstraint#removeConstraint(java.lang.String) 	 */
+comment|/**      * Calls {@link #setConstraint(String, Constraint)} with<code>null</code>      * as {@link Constraint}. So overwrite the setConstraint Method if needed.      * @see eu.iksproject.rick.core.query.FieldConstraint#removeConstraint(java.lang.String)      */
 specifier|public
 specifier|final
 name|void
@@ -464,7 +458,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#isConstraint(java.lang.String) 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQuery#isConstraint(java.lang.String)      */
 specifier|public
 specifier|final
 name|boolean
@@ -483,7 +477,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#getConstraint(java.lang.String) 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQuery#getConstraint(java.lang.String)      */
 specifier|public
 specifier|final
 name|Constraint
@@ -502,7 +496,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQuery#getConstraints() 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQuery#getConstraints()      */
 annotation|@
 name|Override
 specifier|public
@@ -584,7 +578,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Uses the public API to clone the state of this instance to the instance 	 * provided as parameter. 	 * @param<C> An implementation of the FieldQuery interface 	 * @param copyTo An instance to copy the state of this on. 	 * @return The parsed instance 	 */
+comment|/**      * Uses the public API to clone the state of this instance to the instance      * provided as parameter.      * @param<C> An implementation of the FieldQuery interface      * @param copyTo An instance to copy the state of this on.      * @return The parsed instance      */
 specifier|public
 parameter_list|<
 name|C

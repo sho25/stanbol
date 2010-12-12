@@ -135,7 +135,7 @@ specifier|final
 name|ValueFactory
 name|valueFactory
 decl_stmt|;
-comment|/** 	 * Creates an instance that iterates over values and returns {@link Text} 	 * instances that confirm to the active languages. If no languages are parsed 	 * or<code>null</code> is parsed as a language, this Iterator also creates 	 * and returns {@link Text} instances for {@link String} values. 	 * @param valueFactory the factory used to create text instances for String values 	 * @param it the iterator 	 * @param languages The active languages or no values to accept all languages 	 */
+comment|/**      * Creates an instance that iterates over values and returns {@link Text}      * instances that confirm to the active languages. If no languages are parsed      * or<code>null</code> is parsed as a language, this Iterator also creates      * and returns {@link Text} instances for {@link String} values.      * @param valueFactory the factory used to create text instances for String values      * @param it the iterator      * @param languages The active languages or no values to accept all languages      */
 specifier|public
 name|TextIterator
 parameter_list|(

@@ -25,7 +25,7 @@ argument_list|(
 literal|"http://www.iks-project.eu/ontology/rick"
 argument_list|)
 block|,
-comment|//	dbpedia_ont("dbpedia-ont","http://dbpedia.org/ontology/"),
+comment|//    dbpedia_ont("dbpedia-ont","http://dbpedia.org/ontology/"),
 name|rdf
 argument_list|(
 literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -46,7 +46,7 @@ argument_list|(
 literal|"http://www.w3.org/2004/02/skos/core#"
 argument_list|)
 block|,
-comment|//	foaf("http://xmlns.com/foaf/0.1/"),
+comment|//    foaf("http://xmlns.com/foaf/0.1/"),
 name|geonames
 argument_list|(
 literal|"http://www.geonames.org/ontology#"

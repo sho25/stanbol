@@ -34,7 +34,7 @@ name|ReferencedSiteException
 extends|extends
 name|RickException
 block|{
-comment|/** 	 * Default serial version id 	 */
+comment|/**      * Default serial version id      */
 specifier|private
 specifier|static
 specifier|final

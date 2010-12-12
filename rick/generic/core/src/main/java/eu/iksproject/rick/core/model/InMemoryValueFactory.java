@@ -238,7 +238,7 @@ name|Serializable
 implements|,
 name|Cloneable
 block|{
-comment|/** 		 * serialVersionUID 		 */
+comment|/**          * serialVersionUID          */
 specifier|private
 specifier|static
 specifier|final
@@ -398,7 +398,7 @@ name|Serializable
 implements|,
 name|Cloneable
 block|{
-comment|/** 		 * serialVersionUID 		 */
+comment|/**          * serialVersionUID          */
 specifier|private
 specifier|static
 specifier|final
@@ -683,11 +683,11 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|//	@Override
-comment|//	public Object createValue(String dataTypeUri, Object value) throws UnsupportedTypeException, UnsupportedDataTypeException {
+comment|//    @Override
+comment|//    public Object createValue(String dataTypeUri, Object value) throws UnsupportedTypeException, UnsupportedDataTypeException {
 comment|//
-comment|//		return null;
-comment|//	}
+comment|//        return null;
+comment|//    }
 block|}
 end_class
 

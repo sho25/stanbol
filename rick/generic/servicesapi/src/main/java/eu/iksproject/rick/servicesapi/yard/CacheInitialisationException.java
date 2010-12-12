@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Indicates an Exception while the initialisation of a cache. This is usually  * the case if the cache is configured to use a Yard that does not include the  * required configuration meta data needed to correctly configure the cache.<p>  * For errors while performing CRUD operations on the Cache {@link YardException}s  * are used.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Indicates an Exception while the initialisation of a cache. This is usually  * the case if the cache is configured to use a Yard that does not include the  * required configuration meta data needed to correctly configure the cache.<p>  * For errors while performing CRUD operations on the Cache {@link YardException}s  * are used.  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -55,7 +55,7 @@ name|cause
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 *  	 */
+comment|/**      *      */
 specifier|private
 specifier|static
 specifier|final

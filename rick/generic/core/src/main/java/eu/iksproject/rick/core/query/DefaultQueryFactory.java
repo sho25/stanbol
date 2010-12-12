@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simple {@link FieldQueryFactory} implementation that uses the singleton  * pattern and returns for each call to {@link #createFieldQuery()} a new  * instance of {@link FieldQueryImpl}.  * @author Rupert Westenthaler  *  */
+comment|/**  * Simple {@link FieldQueryFactory} implementation that uses the singleton  * pattern and returns for each call to {@link #createFieldQuery()} a new  * instance of {@link FieldQueryImpl}.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class

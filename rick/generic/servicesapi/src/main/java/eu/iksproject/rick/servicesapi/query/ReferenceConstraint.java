@@ -86,7 +86,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * Getter for the Reference 	 * @return the reference 	 */
+comment|/**      * Getter for the Reference      * @return the reference      */
 specifier|public
 name|String
 name|getReference

@@ -593,7 +593,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/** 	 * Default Implementation based on the configured EntityPrefixes that 	 * executes in O(log n) by using a binary search  	 * {@link Collections#binarySearch(List, Object)} in the list of prefixes 	 * and than checking if the parsed uri starts with the prefix of the  	 * "insertion point-1" as returned by the binary search 	 */
+comment|/**      * Default Implementation based on the configured EntityPrefixes that      * executes in O(log n) by using a binary search      * {@link Collections#binarySearch(List, Object)} in the list of prefixes      * and than checking if the parsed uri starts with the prefix of the      * "insertion point-1" as returned by the binary search      */
 annotation|@
 name|Override
 specifier|public
@@ -638,7 +638,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** 	 * The prefixes as configured for this dereferencer as unmodifiable and 	 * sorted list guaranteed to implementing {@link RandomAccess}. 	 * @return the prefixes in an unmodifiable and sorted list that implements  	 *  {@link RandomAccess}. 	 */
+comment|/**      * The prefixes as configured for this dereferencer as unmodifiable and      * sorted list guaranteed to implementing {@link RandomAccess}.      *      * @return the prefixes in an unmodifiable and sorted list that implements      *         {@link RandomAccess}.      */
 specifier|protected
 specifier|final
 name|List
@@ -652,7 +652,7 @@ return|return
 name|prefixes
 return|;
 block|}
-comment|/** 	 * The OSGI configuration as provided by the activate method 	 * @return 	 */
+comment|/**      * The OSGI configuration as provided by the activate method      *      * @return      */
 specifier|protected
 specifier|final
 name|Dictionary

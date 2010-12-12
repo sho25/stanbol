@@ -74,7 +74,7 @@ specifier|public
 interface|interface
 name|QueryService
 block|{
-comment|/** 	 * Searches for entities based on the parsed {@link FieldQuery} and returns 	 * the references (ids). Note that selected fields of the query are ignored. 	 * @param query the query 	 * @return the references of the found entities 	 * @throws IOException If the referenced Site is not accessible 	 * @throws UnsupportedQueryTypeException if the type of the parsed query is 	 * not supported by this query service. Or in other words if the value of 	 * {@link Query#getQueryType()} is not part of the collections returned by 	 * {@link QueryService#getSupportedQueryTypes()}. 	 */
+comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * the references (ids). Note that selected fields of the query are ignored.      * @param query the query      * @return the references of the found entities      * @throws IOException If the referenced Site is not accessible      * @throws UnsupportedQueryTypeException if the type of the parsed query is      * not supported by this query service. Or in other words if the value of      * {@link Query#getQueryType()} is not part of the collections returned by      * {@link QueryService#getSupportedQueryTypes()}.      */
 name|QueryResultList
 argument_list|<
 name|String
@@ -89,7 +89,7 @@ name|IOException
 throws|,
 name|UnsupportedQueryTypeException
 function_decl|;
-comment|/** 	 * Searches for entities based on the parsed {@link FieldQuery} and returns 	 * representations as defined by the selected fields of the query. Note that 	 * if the query defines also {@link Constraint}s for selected fields, that 	 * the returned representation will only contain values selected by such 	 * constraints. 	 * @param query the query 	 * @return the found entities as representation containing only the selected 	 * fields and there values. 	 * @throws IOException If the referenced Site is not accessible 	 * @throws UnsupportedQueryTypeException if the type of the parsed query is 	 * not supported by this query service. Or in other words if the value of 	 * {@link Query#getQueryType()} is not part of the collections returned by 	 * {@link QueryService#getSupportedQueryTypes()}. 	 */
+comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * representations as defined by the selected fields of the query. Note that      * if the query defines also {@link Constraint}s for selected fields, that      * the returned representation will only contain values selected by such      * constraints.      * @param query the query      * @return the found entities as representation containing only the selected      * fields and there values.      * @throws IOException If the referenced Site is not accessible      * @throws UnsupportedQueryTypeException if the type of the parsed query is      * not supported by this query service. Or in other words if the value of      * {@link Query#getQueryType()} is not part of the collections returned by      * {@link QueryService#getSupportedQueryTypes()}.      */
 name|QueryResultList
 argument_list|<
 name|?
@@ -106,7 +106,7 @@ name|IOException
 throws|,
 name|UnsupportedQueryTypeException
 function_decl|;
-comment|/** 	 * Searches for Signs based on the parsed {@link FieldQuery} and returns 	 * the selected Signs including the whole representation. Note that selected  	 * fields of the query are ignored. 	 * @param query the query 	 * @return All Entities selected by the Query. 	 * @throws IOException If the referenced Site is not accessible 	 * @throws UnsupportedQueryTypeException if the type of the parsed query is 	 * not supported by this query service. Or in other words if the value of 	 * {@link Query#getQueryType()} is not part of the collections returned by 	 * {@link QueryService#getSupportedQueryTypes()}. 	 */
+comment|/**      * Searches for Signs based on the parsed {@link FieldQuery} and returns      * the selected Signs including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws IOException If the referenced Site is not accessible      * @throws UnsupportedQueryTypeException if the type of the parsed query is      * not supported by this query service. Or in other words if the value of      * {@link Query#getQueryType()} is not part of the collections returned by      * {@link QueryService#getSupportedQueryTypes()}.      */
 name|QueryResultList
 argument_list|<
 name|?
@@ -123,7 +123,7 @@ name|IOException
 throws|,
 name|UnsupportedQueryTypeException
 function_decl|;
-comment|/** 	 * Getter for the types of queries supported by this implementation. 	 * {@link Query#getQueryType()} is used to check if a query is supported. 	 * @return the ids of the supported query types. 	 */
+comment|/**      * Getter for the types of queries supported by this implementation.      * {@link Query#getQueryType()} is used to check if a query is supported.      * @return the ids of the supported query types.      */
 name|Collection
 argument_list|<
 name|String

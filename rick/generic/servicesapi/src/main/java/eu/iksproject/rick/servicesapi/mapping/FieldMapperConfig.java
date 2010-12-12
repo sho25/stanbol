@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Intended to define the configuration of the fieldMapper.  *   * @author Rupert Westenthaler  * @deprecated unsure - Currently the functionality of this service is part of   * the {@link RickConfig} and the {@link ConfiguredSite} interfaces. Access  * Methods for the {@link FieldMapper} are defined by the {@link Rick} and  * the {@link ReferencedSite} interfaces  */
+comment|/**  * Intended to define the configuration of the fieldMapper.  *  * @author Rupert Westenthaler  * @deprecated unsure - Currently the functionality of this service is part of  * the {@link RickConfig} and the {@link ConfiguredSite} interfaces. Access  * Methods for the {@link FieldMapper} are defined by the {@link Rick} and  * the {@link ReferencedSite} interfaces  */
 end_comment
 
 begin_interface
@@ -70,13 +70,13 @@ specifier|public
 interface|interface
 name|FieldMapperConfig
 block|{
-comment|/** 	 * The property used to configure the default mappings used by all  	 * {@link ReferencedSite} instances active within the Rick 	 */
+comment|/**      * The property used to configure the default mappings used by all      * {@link ReferencedSite} instances active within the Rick      */
 name|String
 name|DEFAULT_MAPPINGS
 init|=
 literal|"eu.iksproject.rick.mapping.default"
 decl_stmt|;
-comment|/** 	 * The Property used to configure mappings that are only used for 	 * representation of a specific Site. 	 */
+comment|/**      * The Property used to configure mappings that are only used for      * representation of a specific Site.      */
 name|String
 name|SITE_MAPPINGS
 init|=

@@ -38,7 +38,7 @@ name|YardException
 extends|extends
 name|RickException
 block|{
-comment|/** 	 * The default serial version UIR 	 */
+comment|/**      * The default serial version UIR      */
 specifier|private
 specifier|static
 specifier|final
@@ -47,7 +47,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
-comment|/** 	 * Creates an exception with a message and a cause 	 * @param reason the message describing the reason for the error 	 * @param cause the parent 	 */
+comment|/**      * Creates an exception with a message and a cause      * @param reason the message describing the reason for the error      * @param cause the parent      */
 specifier|public
 name|YardException
 parameter_list|(
@@ -66,7 +66,7 @@ name|cause
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates an exception with a message and a cause 	 * @param reason the message describing the reason for the error 	 */
+comment|/**      * Creates an exception with a message and a cause      * @param reason the message describing the reason for the error      */
 specifier|public
 name|YardException
 parameter_list|(

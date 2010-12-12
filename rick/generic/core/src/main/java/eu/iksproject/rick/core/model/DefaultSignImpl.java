@@ -124,15 +124,15 @@ specifier|final
 name|String
 name|signSite
 decl_stmt|;
-comment|//	public DefaultSignImpl(Representation representation) {
-comment|//		if(representation == null){
-comment|//			throw new IllegalArgumentException("NULL value ist not allowed for the Representation");
-comment|//		}
-comment|//		if(representation.getFirstReference(SIGN_SITE) == null){
-comment|//			throw new IllegalStateException("Parsed Representation does not define the required field"+SIGN_SITE+"!");
-comment|//		}
-comment|//		this.representation = representation;
-comment|//	}
+comment|//    public DefaultSignImpl(Representation representation) {
+comment|//        if(representation == null){
+comment|//            throw new IllegalArgumentException("NULL value ist not allowed for the Representation");
+comment|//        }
+comment|//        if(representation.getFirstReference(SIGN_SITE) == null){
+comment|//            throw new IllegalStateException("Parsed Representation does not define the required field"+SIGN_SITE+"!");
+comment|//        }
+comment|//        this.representation = representation;
+comment|//    }
 specifier|public
 name|DefaultSignImpl
 parameter_list|(
@@ -227,21 +227,21 @@ return|return
 name|representation
 return|;
 block|}
-comment|//	@Override
-comment|//	public SignTypeEnum getType() {
-comment|//		Reference ref = representation.getFirstReference(TYPE);
-comment|//		if(ref == null){
-comment|//			return DEFAULT_SIGN_TYPE;
-comment|//		} else {
-comment|//			SignTypeEnum type = ModelUtils.getSignType(ref.getReference());
-comment|//			if(type == null){
-comment|//				log.warn("Sign "+getId()+" is set to an unknown SignType "+ref.getReference()+"! -> return default type (value is not reseted)");
-comment|//				return DEFAULT_SIGN_TYPE;
-comment|//			} else {
-comment|//				return type;
-comment|//			}
-comment|//		}
-comment|//	}
+comment|//    @Override
+comment|//    public SignTypeEnum getType() {
+comment|//        Reference ref = representation.getFirstReference(TYPE);
+comment|//        if(ref == null){
+comment|//            return DEFAULT_SIGN_TYPE;
+comment|//        } else {
+comment|//            SignTypeEnum type = ModelUtils.getSignType(ref.getReference());
+comment|//            if(type == null){
+comment|//                log.warn("Sign "+getId()+" is set to an unknown SignType "+ref.getReference()+"! -> return default type (value is not reseted)");
+comment|//                return DEFAULT_SIGN_TYPE;
+comment|//            } else {
+comment|//                return type;
+comment|//            }
+comment|//        }
+comment|//    }
 block|}
 end_class
 

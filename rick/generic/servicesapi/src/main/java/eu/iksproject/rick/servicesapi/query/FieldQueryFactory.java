@@ -22,7 +22,7 @@ specifier|public
 interface|interface
 name|FieldQueryFactory
 block|{
-comment|/** 	 * Creates a new field query instance without any constraints or selected 	 * fields 	 * @return a new and empty field query instance 	 */
+comment|/**      * Creates a new field query instance without any constraints or selected      * fields      * @return a new and empty field query instance      */
 name|FieldQuery
 name|createFieldQuery
 parameter_list|()

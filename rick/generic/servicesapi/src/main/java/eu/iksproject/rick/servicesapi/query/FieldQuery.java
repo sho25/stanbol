@@ -66,13 +66,13 @@ name|Constraint
 argument_list|>
 argument_list|>
 block|{
-comment|/** 	 * The value used as result for {@link Query#getQueryType()} of this query 	 * type. 	 */
+comment|/**      * The value used as result for {@link Query#getQueryType()} of this query      * type.      */
 name|String
 name|TYPE
 init|=
 literal|"fieldQuery"
 decl_stmt|;
-comment|/** 	 * Adds Fields to be selected by this Query 	 * @param fields the fields to be selected by this query 	 */
+comment|/**      * Adds Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
 specifier|public
 specifier|abstract
 name|void
@@ -82,7 +82,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Adds Fields to be selected by this Query 	 * @param fields the fields to be selected by this query 	 */
+comment|/**      * Adds Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
 specifier|public
 specifier|abstract
 name|void
@@ -95,7 +95,7 @@ argument_list|>
 name|fields
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes Fields to be selected by this Query 	 * @param fields the fields to be selected by this query 	 */
+comment|/**      * Removes Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
 specifier|public
 specifier|abstract
 name|void
@@ -105,7 +105,7 @@ name|String
 name|fields
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes Fields to be selected by this Query 	 * @param fields the fields to be selected by this query 	 */
+comment|/**      * Removes Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
 specifier|public
 specifier|abstract
 name|void
@@ -118,7 +118,7 @@ argument_list|>
 name|fields
 parameter_list|)
 function_decl|;
-comment|/** 	 * Unmodifiable set with all the fields to be selected by this query 	 * @return the fields to be selected by this query 	 */
+comment|/**      * Unmodifiable set with all the fields to be selected by this query      * @return the fields to be selected by this query      */
 specifier|public
 specifier|abstract
 name|Set
@@ -128,7 +128,7 @@ argument_list|>
 name|getSelectedFields
 parameter_list|()
 function_decl|;
-comment|/** 	 * Sets/replaces the constraint for a field of the representation. If 	 *<code>null</code> is parsed as constraint this method removes any existing 	 * constraint for the field 	 * @param field the field 	 * @param constraint the Constraint 	 */
+comment|/**      * Sets/replaces the constraint for a field of the representation. If      *<code>null</code> is parsed as constraint this method removes any existing      * constraint for the field      * @param field the field      * @param constraint the Constraint      */
 specifier|public
 specifier|abstract
 name|void
@@ -141,7 +141,7 @@ name|Constraint
 name|constraint
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes the constraint for the parse field 	 * @param field 	 */
+comment|/**      * Removes the constraint for the parse field      * @param field      */
 specifier|public
 specifier|abstract
 name|void
@@ -151,7 +151,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Checks if there is a constraint for the given field 	 * @param field the field 	 * @return the state 	 */
+comment|/**      * Checks if there is a constraint for the given field      * @param field the field      * @return the state      */
 specifier|public
 specifier|abstract
 name|boolean
@@ -161,7 +161,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the Constraint of a field 	 * @param field the field 	 * @return the constraint or<code>null</code> if none is defined.  	 */
+comment|/**      * Getter for the Constraint of a field      * @param field the field      * @return the constraint or<code>null</code> if none is defined.      */
 specifier|public
 specifier|abstract
 name|Constraint
@@ -171,7 +171,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the unmodifiable list of query elements for the given Path. Use 	 * the add/remove constraint methods to change query elements for an path 	 * @param path the path 	 * @return the list of query elements for a path 	 */
+comment|/**      * Getter for the unmodifiable list of query elements for the given Path. Use      * the add/remove constraint methods to change query elements for an path      * @param path the path      * @return the list of query elements for a path      */
 specifier|public
 specifier|abstract
 name|Set
@@ -186,17 +186,17 @@ argument_list|>
 name|getConstraints
 parameter_list|()
 function_decl|;
-comment|/** 	 * Removes all constraints form the query 	 */
+comment|/**      * Removes all constraints form the query      */
 name|void
 name|removeAllConstraints
 parameter_list|()
 function_decl|;
-comment|/** 	 * Removes all selected fields 	 */
+comment|/**      * Removes all selected fields      */
 name|void
 name|removeAllSelectedFields
 parameter_list|()
 function_decl|;
-comment|/** 	 * Copies the state of this instance to the parsed one 	 * @param<T> the {@link FieldQuery} implementation 	 * @param copyTo the instance to copy the state 	 * @return the parsed instance with the exact same state as this one 	 */
+comment|/**      * Copies the state of this instance to the parsed one      * @param<T> the {@link FieldQuery} implementation      * @param copyTo the instance to copy the state      * @return the parsed instance with the exact same state as this one      */
 parameter_list|<
 name|T
 extends|extends

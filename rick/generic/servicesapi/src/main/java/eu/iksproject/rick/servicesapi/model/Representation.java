@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This interface is used by the RICK to define representations. It is used for  * any kind of CRUD operations on the {@link Yard} (the storage of the Rick).<br>  * The goal if this interface is to allow implementation based on different storage  * solutions such as CMS, full text indices, triple stores, noSQL data stores ...<br>  *  * TODO: handling the differences between "NaturalLanguageText", "References" and  *       "normal" values feels to complex! Need to reevaluate if this differentiation  *       is needed or can be done in a more easy way!  * TODO: add an API that allows to attach Content!   * TODO: Review this interface during the definition of a Query Language for the  * Rick (or IKS in general)  * TODO: Do we need subNodes or are "references" enough.   *   * TODO: Check to use also Wrappers for fields and values (in analogy to   *       {@link Reference} and {@link Text}. PRO: clearer API CON: more Objects  *       to be garbage collected.  *         * @author Rupert Westenthaler  */
+comment|/**  * This interface is used by the RICK to define representations. It is used for  * any kind of CRUD operations on the {@link Yard} (the storage of the Rick).<br>  * The goal if this interface is to allow implementation based on different storage  * solutions such as CMS, full text indices, triple stores, noSQL data stores ...<br>  *  * TODO: handling the differences between "NaturalLanguageText", "References" and  *       "normal" values feels to complex! Need to reevaluate if this differentiation  *       is needed or can be done in a more easy way!  * TODO: add an API that allows to attach Content!  * TODO: Review this interface during the definition of a Query Language for the  * Rick (or IKS in general)  * TODO: Do we need subNodes or are "references" enough.  *  * TODO: Check to use also Wrappers for fields and values (in analogy to  *       {@link Reference} and {@link Text}. PRO: clearer API CON: more Objects  *       to be garbage collected.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -48,12 +48,12 @@ specifier|public
 interface|interface
 name|Representation
 block|{
-comment|/** 	 * Getter for the identifier. 	 * @return the identifier 	 */
+comment|/**      * Getter for the identifier.      * @return the identifier      */
 name|String
 name|getId
 parameter_list|()
 function_decl|;
-comment|/** 	 * Getter for a single Value for a field 	 * @param<T> the generic type the returned value 	 * @param field the field 	 * @param type the type of the values 	 * @return the (first) value of that field 	 * @throws IllegalArgumentException if the type is not supported 	 */
+comment|/**      * Getter for a single Value for a field      * @param<T> the generic type the returned value      * @param field the field      * @param type the type of the values      * @return the (first) value of that field      * @throws IllegalArgumentException if the type is not supported      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -72,7 +72,7 @@ parameter_list|)
 throws|throws
 name|UnsupportedTypeException
 function_decl|;
-comment|/** 	 * Getter for all values of a field 	 * @param<T> the generic type of the returned values 	 * @param field the field 	 * @param type the type 	 * @return the values of the field 	 * @throws UnsupportedTypeException if the parsed type is not supported 	 */
+comment|/**      * Getter for all values of a field      * @param<T> the generic type of the returned values      * @param field the field      * @param type the type      * @return the values of the field      * @throws UnsupportedTypeException if the parsed type is not supported      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -94,7 +94,7 @@ parameter_list|)
 throws|throws
 name|UnsupportedTypeException
 function_decl|;
-comment|/** 	 * Getter for the (first) value for a field 	 * @param field the field 	 * @return the first value of a field 	 */
+comment|/**      * Getter for the (first) value for a field      * @param field the field      * @return the first value of a field      */
 name|Object
 name|getFirst
 parameter_list|(
@@ -102,7 +102,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the first reference value for a field 	 * @param field the field  	 * @return the reference or null of the field has no reference as value 	 */
+comment|/**      * Getter for the first reference value for a field      * @param field the field      * @return the reference or null of the field has no reference as value      */
 name|Reference
 name|getFirstReference
 parameter_list|(
@@ -110,7 +110,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the first natural language text value of a specific language 	 * @param field the field 	 * @param language the language(s) of the natural language text value  	 * 			(If<code>null</code> is parsed as language, than also labels  	 * 			without language tag are included in the Result) 	 * @return the first natural language text found for the parsed field 	 */
+comment|/**      * Getter for the first natural language text value of a specific language      * @param field the field      * @param language the language(s) of the natural language text value      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag are included in the Result)      * @return the first natural language text found for the parsed field      */
 name|Text
 name|getFirst
 parameter_list|(
@@ -122,7 +122,7 @@ modifier|...
 name|language
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for all values for the requested field 	 * @param field the field 	 * @return the values of the field 	 */
+comment|/**      * Getter for all values for the requested field      * @param field the field      * @return the values of the field      */
 name|Iterator
 argument_list|<
 name|Object
@@ -133,7 +133,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for all natural language text values of a field 	 * @param field the field 	 * @return the natural text values 	 */
+comment|/**      * Getter for all natural language text values of a field      * @param field the field      * @return the natural text values      */
 name|Iterator
 argument_list|<
 name|Text
@@ -144,7 +144,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for all natural language text values of a field 	 * @param field the field 	 * @param language the language(s) of the natural language text value  	 * 			(If<code>null</code> is parsed as language, than also labels  	 * 			without language tag are included in the Result) 	 * @return iterator over all natural language text values in the requested 	 * 			language. 	 */
+comment|/**      * Getter for all natural language text values of a field      * @param field the field      * @param language the language(s) of the natural language text value      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag are included in the Result)      * @return iterator over all natural language text values in the requested      *             language.      */
 name|Iterator
 argument_list|<
 name|Text
@@ -159,7 +159,7 @@ modifier|...
 name|language
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for all reference values of a field 	 * @param field the field 	 * @return Iterator over all reference values of a field 	 */
+comment|/**      * Getter for all reference values of a field      * @param field the field      * @return Iterator over all reference values of a field      */
 name|Iterator
 argument_list|<
 name|Reference
@@ -170,7 +170,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Adds the object as value to the field.  	 *<p>The type of the value is inferred based on the type of the Object.<br> 	 * Supported Types are:</p> 	 *<ul> 	 *<li>{@link Reference} 	 *<li>URL, URI: {@link Reference} instances are created for such values</li> 	 *<li>Boolean, Integer, Long, Double and Float as primitive data types</li> 	 *<li>{@link Text} 	 *<li>String[]{text,language}: text and language (further entries are ignored)</li> 	 *<li>String: mapped to {@link Text} with the<code>language=null</code></li> 	 *<li>Collection are used for adding multiple values 	 *<li>For other types the toString() method is used</li> 	 *</ul> 	 * @param field the field 	 * @param value the value to add 	 */
+comment|/**      * Adds the object as value to the field.      *<p>The type of the value is inferred based on the type of the Object.<br>      * Supported Types are:</p>      *<ul>      *<li>{@link Reference}      *<li>URL, URI: {@link Reference} instances are created for such values</li>      *<li>Boolean, Integer, Long, Double and Float as primitive data types</li>      *<li>{@link Text}      *<li>String[]{text,language}: text and language (further entries are ignored)</li>      *<li>String: mapped to {@link Text} with the<code>language=null</code></li>      *<li>Collection are used for adding multiple values      *<li>For other types the toString() method is used</li>      *</ul>      * @param field the field      * @param value the value to add      */
 name|void
 name|add
 parameter_list|(
@@ -181,7 +181,7 @@ name|Object
 name|value
 parameter_list|)
 function_decl|;
-comment|/** 	 * Adds an reference to the field. 	 * @param field the field 	 * @param reference the string representation of the reference. Note that 	 * the value will be interpreted as a "reference" so there might apply 	 * some rules about the format of the string. Regardless of the implementation 	 * any valid URI and URL need to be accepted as a valid reference value 	 */
+comment|/**      * Adds an reference to the field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      */
 name|void
 name|addReference
 parameter_list|(
@@ -192,7 +192,7 @@ name|String
 name|reference
 parameter_list|)
 function_decl|;
-comment|/** 	 * Adds a natural language text as value for one or more languages 	 * @param field the field to add the text as value 	 * @param text the natural language text 	 * @param language the text is set for all the parsed languages. Parse 	 *<code>null</code> to set the text also without any language  	 * 			information. 	 */
+comment|/**      * Adds a natural language text as value for one or more languages      * @param field the field to add the text as value      * @param text the natural language text      * @param language the text is set for all the parsed languages. Parse      *<code>null</code> to set the text also without any language      *             information.      */
 name|void
 name|addNaturalText
 parameter_list|(
@@ -207,7 +207,7 @@ modifier|...
 name|languages
 parameter_list|)
 function_decl|;
-comment|/** 	 * Sets the value of the field to the parsed object. If the parsed value 	 * is<code>null</code> than this method removes all values for the given 	 * field 	 *<p>The type of the value is inferred based on the type of the Object.<br> 	 * Supported Types are:</p> 	 *<ul> 	 *<li>{@link Reference} 	 *<li>URL, URI: {@link Reference} instances are created for such values</li> 	 *<li>Boolean, Integer, Long, Double and Float as primitive data types</li> 	 *<li>{@link Text} 	 *<li>String[]{text,language}: text and language (further entries are ignored)</li> 	 *<li>String: mapped to {@link Text} with the<code>language=null</code></li> 	 *<li>Collection are used for adding multiple values 	 *<li>For other types the toString() method is used</li> 	 *</ul> 	 * @param field the field 	 * @param value the new value for the field 	 */
+comment|/**      * Sets the value of the field to the parsed object. If the parsed value      * is<code>null</code> than this method removes all values for the given      * field      *<p>The type of the value is inferred based on the type of the Object.<br>      * Supported Types are:</p>      *<ul>      *<li>{@link Reference}      *<li>URL, URI: {@link Reference} instances are created for such values</li>      *<li>Boolean, Integer, Long, Double and Float as primitive data types</li>      *<li>{@link Text}      *<li>String[]{text,language}: text and language (further entries are ignored)</li>      *<li>String: mapped to {@link Text} with the<code>language=null</code></li>      *<li>Collection are used for adding multiple values      *<li>For other types the toString() method is used</li>      *</ul>      * @param field the field      * @param value the new value for the field      */
 name|void
 name|set
 parameter_list|(
@@ -218,7 +218,7 @@ name|Object
 name|value
 parameter_list|)
 function_decl|;
-comment|/** 	 * Setter for the reference of a field. If the parsed value 	 * is<code>null</code> than this method removes all values for the given 	 * field. 	 * @param field the field 	 * @param reference the string representation of the reference. Note that 	 * the value will be interpreted as a "reference" so there might apply 	 * some rules about the format of the string. Regardless of the implementation 	 * any valid URI and URL need to be accepted as a valid reference value 	 */
+comment|/**      * Setter for the reference of a field. If the parsed value      * is<code>null</code> than this method removes all values for the given      * field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      */
 name|void
 name|setReference
 parameter_list|(
@@ -229,7 +229,7 @@ name|String
 name|reference
 parameter_list|)
 function_decl|;
-comment|/** 	 * Setter for the natural language text value of a field in the given 	 * languages. If<code>null</code> is parsed as text, all present values 	 * for the parsed languages are removed (values of other languages are 	 * not removed) 	 * @param field the field 	 * @param text the natural language text 	 * @param language the languages of the parsed text. Parse 	 *<code>null</code> to set the text also without any language  	 * 			information. 	 */
+comment|/**      * Setter for the natural language text value of a field in the given      * languages. If<code>null</code> is parsed as text, all present values      * for the parsed languages are removed (values of other languages are      * not removed)      * @param field the field      * @param text the natural language text      * @param language the languages of the parsed text. Parse      *<code>null</code> to set the text also without any language      *             information.      */
 name|void
 name|setNaturalText
 parameter_list|(
@@ -244,7 +244,7 @@ modifier|...
 name|language
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes the parsed value form the field 	 * @param field the field 	 * @param value the value to remove 	 */
+comment|/**      * Removes the parsed value form the field      * @param field the field      * @param value the value to remove      */
 name|void
 name|remove
 parameter_list|(
@@ -255,7 +255,7 @@ name|Object
 name|value
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes to parsed reference as value for the given field. 	 * @param field the field 	 * @param reference the string representation of the reference. Note that 	 * the value will be interpreted as a "reference" so there might apply 	 * some rules about the format of the string. Regardless of the implementation 	 * any valid URI and URL need to be accepted as a valid reference value 	 */
+comment|/**      * Removes to parsed reference as value for the given field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      */
 name|void
 name|removeReference
 parameter_list|(
@@ -266,7 +266,7 @@ name|String
 name|reference
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes a natural language text in given languages form a field 	 * @param field the field 	 * @param text the natural language text 	 * @param language the language(s) of the natural language text  	 * 			(If<code>null</code> is parsed as language, than also labels  	 * 			without language tag might be removed) 	 */
+comment|/**      * Removes a natural language text in given languages form a field      * @param field the field      * @param text the natural language text      * @param language the language(s) of the natural language text      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag might be removed)      */
 name|void
 name|removeNaturalText
 parameter_list|(
@@ -281,7 +281,7 @@ modifier|...
 name|languages
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes all values of the field 	 * @param field the field 	 */
+comment|/**      * Removes all values of the field      * @param field the field      */
 name|void
 name|removeAll
 parameter_list|(
@@ -289,7 +289,7 @@ name|String
 name|field
 parameter_list|)
 function_decl|;
-comment|/** 	 * Removes all natural language texts for the given languages 	 * @param field the field 	 * @param language the language(s) of the natural language text  	 * 			(If<code>null</code> is parsed as language, than also all labels  	 * 			without language tag are removed) 	 */
+comment|/**      * Removes all natural language texts for the given languages      * @param field the field      * @param language the language(s) of the natural language text      *             (If<code>null</code> is parsed as language, than also all labels      *             without language tag are removed)      */
 name|void
 name|removeAllNaturalText
 parameter_list|(
@@ -301,7 +301,7 @@ modifier|...
 name|languages
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for all the present fields 	 * @return the fields 	 */
+comment|/**      * Getter for all the present fields      * @return the fields      */
 name|Iterator
 argument_list|<
 name|String

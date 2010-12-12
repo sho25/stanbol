@@ -692,23 +692,23 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * The OSGI component context of the Rick 	 */
+comment|/**      * The OSGI component context of the Rick      */
 specifier|private
 name|ComponentContext
 name|context
 decl_stmt|;
-comment|/** 	 * The field mapper holding global mappings that are used for mapping  	 * representations of entities for any referenced sites 	 */
+comment|/**      * The field mapper holding global mappings that are used for mapping      * representations of entities for any referenced sites      */
 specifier|protected
 name|FieldMapper
 name|fieldMapper
 decl_stmt|;
-comment|/** 	 * The yard where this Rick instance stores its data 	 * TODO: this reference is currently initialised in the activate method. 	 * however there are some issues with that. 	 *<ul> 	 *<li> If this Component is activated, before this yard is active, the 	 *      activate method throws an Exception and is therefore in the  	 *      "unsatisfied" state. 	 *<li> If now the needed Yard is configured this component gets not notified 	 *<li> However defining a Reference is also not possible, because it would 	 *      be nice to be able to change the Rick-Yard (e.g. to change the data 	 *      set of the Rick at runtime) 	 *<li> I could register a {@link ServiceListener} in the activate method. 	 *      But I am not sure if it is allowed to have an active Service Listener  	 *      on an component that is in the "unsatisfied" state. 	 *</ul> 	 */
+comment|/**      * The yard where this Rick instance stores its data      * TODO: this reference is currently initialised in the activate method.      * however there are some issues with that.      *<ul>      *<li> If this Component is activated, before this yard is active, the      *      activate method throws an Exception and is therefore in the      *      "unsatisfied" state.      *<li> If now the needed Yard is configured this component gets not notified      *<li> However defining a Reference is also not possible, because it would      *      be nice to be able to change the Rick-Yard (e.g. to change the data      *      set of the Rick at runtime)      *<li> I could register a {@link ServiceListener} in the activate method.      *      But I am not sure if it is allowed to have an active Service Listener      *      on an component that is in the "unsatisfied" state.      *</ul>      */
 specifier|protected
 name|Yard
 name|rickYard
 decl_stmt|;
 comment|//reference initialised in the activate method
-comment|/* 	 * TODO: The YardManager is currently not used.  	 */
+comment|/*      * TODO: The YardManager is currently not used.      */
 annotation|@
 name|Reference
 comment|// 1..1, static
@@ -716,7 +716,7 @@ specifier|protected
 name|YardManager
 name|yardManager
 decl_stmt|;
-comment|/** 	 * The Configuration of the Rick 	 * TODO: Maybe refactor this implementation to implement this interface or 	 * to extend the {@link RickConfigurationImpl}. 	 */
+comment|/**      * The Configuration of the Rick      * TODO: Maybe refactor this implementation to implement this interface or      * to extend the {@link RickConfigurationImpl}.      */
 annotation|@
 name|Reference
 comment|// 1..1, static
@@ -724,7 +724,7 @@ specifier|protected
 name|RickConfiguration
 name|config
 decl_stmt|;
-comment|/** 	 * The site manager is used to search for entities within the Rick framework 	 */
+comment|/**      * The site manager is used to search for entities within the Rick framework      */
 annotation|@
 name|Reference
 comment|// 1..1, static
@@ -744,7 +744,7 @@ name|DEFAULT_MAPPING_PREFIX
 init|=
 literal|"mapping"
 decl_stmt|;
-comment|/** 	 * Activates the Rick (OSGI Lifecycle method) 	 * @param context the OSGI component context (stored in {@link #context}) 	 * @throws ConfigurationException On any error during the activation of 	 * the Rick 	 */
+comment|/**      * Activates the Rick (OSGI Lifecycle method)      * @param context the OSGI component context (stored in {@link #context})      * @throws ConfigurationException On any error during the activation of      * the Rick      */
 annotation|@
 name|Activate
 specifier|protected
@@ -988,30 +988,30 @@ argument_list|(
 literal|" ... init RickYard"
 argument_list|)
 expr_stmt|;
-comment|//		final ServiceReference[] refs;
-comment|//		log.info("   - search for services for "+Yard.class+" with Filter "+rickYardFilterString);
-comment|//		try {
-comment|//			refs = context.getBundleContext().getServiceReferences(
-comment|//					Yard.class.getName(),
-comment|//					rickYardFilterString);
+comment|//        final ServiceReference[] refs;
+comment|//        log.info("   - search for services for "+Yard.class+" with Filter "+rickYardFilterString);
+comment|//        try {
+comment|//            refs = context.getBundleContext().getServiceReferences(
+comment|//                    Yard.class.getName(),
+comment|//                    rickYardFilterString);
 comment|//
-comment|//		} catch (InvalidSyntaxException e) {
-comment|//			throw new ConfigurationException(RickConfiguration.RICK_YARD_ID, "Unable to create Filter for the RickYard based on the parsed vlaue "+config.getRickYardId(),e);
-comment|//		}
-comment|//		if(refs != null&& refs.length>0){
-comment|//			log.debug("   - found "+refs.length+" Services");
-comment|//			Yard rickYard = null;
-comment|//			ServiceReference rickYardReference = null;
-comment|//			for(int i=0;i<refs.length&& rickYard == null;i++){
-comment|//				rickYardReference =  refs[i];
-comment|//				// I trust the OSGI framework, that the returned service implements the requested Interface
-comment|//				rickYard = (Yard)context.getBundleContext().getService(rickYardReference);
-comment|//				log.info("   + RickYard "+rickYard.getName()+" (id: "+rickYard.getId()+")");
-comment|//			}
-comment|//			//configured Yard not present -> unable to activate!
-comment|//			if(rickYard == null){
-comment|//				throw new ConfigurationException(RickConfiguration.RICK_YARD_ID, "Unable to get Yard Service for the parsed value "+config.getRickYardId());
-comment|//			}
+comment|//        } catch (InvalidSyntaxException e) {
+comment|//            throw new ConfigurationException(RickConfiguration.RICK_YARD_ID, "Unable to create Filter for the RickYard based on the parsed vlaue "+config.getRickYardId(),e);
+comment|//        }
+comment|//        if(refs != null&& refs.length>0){
+comment|//            log.debug("   - found "+refs.length+" Services");
+comment|//            Yard rickYard = null;
+comment|//            ServiceReference rickYardReference = null;
+comment|//            for(int i=0;i<refs.length&& rickYard == null;i++){
+comment|//                rickYardReference =  refs[i];
+comment|//                // I trust the OSGI framework, that the returned service implements the requested Interface
+comment|//                rickYard = (Yard)context.getBundleContext().getService(rickYardReference);
+comment|//                log.info("   + RickYard "+rickYard.getName()+" (id: "+rickYard.getId()+")");
+comment|//            }
+comment|//            //configured Yard not present -> unable to activate!
+comment|//            if(rickYard == null){
+comment|//                throw new ConfigurationException(RickConfiguration.RICK_YARD_ID, "Unable to get Yard Service for the parsed value "+config.getRickYardId());
+comment|//            }
 if|if
 condition|(
 name|yardManager
@@ -1199,7 +1199,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** 	 * TODO: currently only for debugging. Intended to be used for tracking 	 * the state of dependencies 	 */
+comment|/**      * TODO: currently only for debugging. Intended to be used for tracking      * the state of dependencies      */
 annotation|@
 name|Override
 specifier|public
@@ -1318,10 +1318,10 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|//	@Override
-comment|//	public RickConfiguration getRickConfiguration() {
-comment|//		return config;
-comment|//	}
+comment|//    @Override
+comment|//    public RickConfiguration getRickConfiguration() {
+comment|//        return config;
+comment|//    }
 annotation|@
 name|Override
 specifier|public
@@ -1606,7 +1606,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * Recovers an symbol based on the available {@link EntityMapping}s 	 * @param symbolId the id of the Symbol 	 * @return the Symbol or<code>null</code> if the recovering is unsucessfull. 	 */
+comment|/**      * Recovers an symbol based on the available {@link EntityMapping}s      * @param symbolId the id of the Symbol      * @return the Symbol or<code>null</code> if the recovering is unsucessfull.      */
 specifier|private
 name|Symbol
 name|recoverSymbol
@@ -1615,12 +1615,12 @@ name|String
 name|symbolId
 parameter_list|)
 block|{
-comment|/* 		 * TODO: recover the Symbol by recreating it based on the available 		 *       mapped Entities 		 * 1) search for all EntityMappings with this SymbolId 		 * 2) get all mapped Entities 		 * 3) apply the FieldMappings 		 * 4) store the Symbol 		 * 5) return the recovered Symbol 		 */
+comment|/*          * TODO: recover the Symbol by recreating it based on the available          *       mapped Entities          * 1) search for all EntityMappings with this SymbolId          * 2) get all mapped Entities          * 3) apply the FieldMappings          * 4) store the Symbol          * 5) return the recovered Symbol          */
 return|return
 literal|null
 return|;
 block|}
-comment|/* 	 * @throws IllegalArgumentException if a {@link Representation} for the parsed ID is present in the 	 *  {@link #rickYard}, but the representation can not be wrapped by an {@link Symbol}. 	 */
+comment|/*      * @throws IllegalArgumentException if a {@link Representation} for the parsed ID is present in the      *  {@link #rickYard}, but the representation can not be wrapped by an {@link Symbol}.      */
 annotation|@
 name|Override
 specifier|public
@@ -2070,7 +2070,7 @@ name|symbol
 return|;
 comment|//we need to set the label and the description!
 block|}
-comment|/** 	 * Uses the Prefix as configured by the {@link #config} and the parsed 	 * prefix for the type to create an unique ID for a resource. 	 * @param typePrefix the prefix of the type 	 * @return An id in the form<code> {@link RickConfiguration#getRickPrefix()} 	 *  + typePrefix + '.' + {@link ModelUtils#randomUUID()}</code>. Note that between 	 *  the rick prefix and the type prefix a separation chars are added  	 *  if it is not already defined by the {@link RickConfiguration#getRickPrefix()} 	 *  value. 	 */
+comment|/**      * Uses the Prefix as configured by the {@link #config} and the parsed      * prefix for the type to create an unique ID for a resource.      * @param typePrefix the prefix of the type      * @return An id in the form<code> {@link RickConfiguration#getRickPrefix()}      *  + typePrefix + '.' + {@link ModelUtils#randomUUID()}</code>. Note that between      *  the rick prefix and the type prefix a separation chars are added      *  if it is not already defined by the {@link RickConfiguration#getRickPrefix()}      *  value.      */
 specifier|private
 name|String
 name|constructResourceId
@@ -2534,7 +2534,7 @@ return|return
 name|mappings
 return|;
 block|}
-comment|/** 	 * Getter for the EntityMapping by ID 	 * @param id the ID 	 * @return the EntityMapping or<code>null</code> if no Sign is present within the RickYard for the parsed ID 	 * @throws IllegalArgumentException if the Sign referenced by the parsed ID is not an valid {@link EntityMapping}. 	 */
+comment|/**      * Getter for the EntityMapping by ID      * @param id the ID      * @return the EntityMapping or<code>null</code> if no Sign is present within the RickYard for the parsed ID      * @throws IllegalArgumentException if the Sign referenced by the parsed ID is not an valid {@link EntityMapping}.      */
 specifier|protected
 name|EntityMapping
 name|getEntityMappingFromRickYard

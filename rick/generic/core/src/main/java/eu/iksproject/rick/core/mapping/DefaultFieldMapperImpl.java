@@ -336,8 +336,8 @@ name|FieldMapping
 argument_list|>
 name|mappings
 decl_stmt|;
-comment|//	private final Map<String,Collection<FieldMapping>> ignoreFieldMap;
-comment|//	private final Map<Pattern,Collection<FieldMapping>> ignoreWildcardMap;
+comment|//    private final Map<String,Collection<FieldMapping>> ignoreFieldMap;
+comment|//    private final Map<Pattern,Collection<FieldMapping>> ignoreWildcardMap;
 specifier|private
 specifier|final
 name|Map
@@ -452,10 +452,10 @@ name|valueConverter
 operator|=
 name|valueConverter
 expr_stmt|;
-comment|//		ignoreFieldMap = new HashMap<String, Collection<FieldMapping>>();
-comment|//		ignoreWildcardMap = new HashMap<Pattern, Collection<FieldMapping>>();
+comment|//        ignoreFieldMap = new HashMap<String, Collection<FieldMapping>>();
+comment|//        ignoreWildcardMap = new HashMap<Pattern, Collection<FieldMapping>>();
 block|}
-comment|/** 	 * Internally used by clone 	 * @param fieldMap 	 * @param wildcardMap 	 */
+comment|/**      * Internally used by clone      * @param fieldMap      * @param wildcardMap      */
 specifier|private
 name|DefaultFieldMapperImpl
 parameter_list|(
@@ -524,7 +524,7 @@ name|wildcardMap
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for all the defined Mappings for a given field name 	 * @param field the name of the field 	 * @return all the active Mappings 	 */
+comment|/**      * Getter for all the defined Mappings for a given field name      * @param field the name of the field      * @return all the active Mappings      */
 specifier|protected
 name|List
 argument_list|<
@@ -642,7 +642,7 @@ return|return
 name|mappings
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#addMapping(eu.iksproject.rick.servicesapi.mapping.FieldMapping) 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#addMapping(eu.iksproject.rick.servicesapi.mapping.FieldMapping)      */
 specifier|public
 name|void
 name|addMapping
@@ -819,10 +819,10 @@ return|return
 name|unmodMappings
 return|;
 block|}
-comment|//	private static String getPrefix(String fieldPattern){
-comment|//		return fieldPattern.split("[\\?\\*]")[0];
-comment|//	}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#removeFieldMapping(eu.iksproject.rick.servicesapi.mapping.FieldMapping) 	 */
+comment|//    private static String getPrefix(String fieldPattern){
+comment|//        return fieldPattern.split("[\\?\\*]")[0];
+comment|//    }
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#removeFieldMapping(eu.iksproject.rick.servicesapi.mapping.FieldMapping)      */
 specifier|public
 name|void
 name|removeFieldMapping
@@ -983,7 +983,7 @@ block|}
 block|}
 comment|//else nothing todo
 block|}
-comment|/** 	 * Removes the FieldMapping based on the fieldPattern 	 * @param fieldPattern the field pattern 	 */
+comment|/**      * Removes the FieldMapping based on the fieldPattern      * @param fieldPattern the field pattern      */
 specifier|public
 name|void
 name|removeFieldMapping
@@ -1066,7 +1066,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#applyMappings(eu.iksproject.rick.servicesapi.model.Representation, eu.iksproject.rick.servicesapi.model.Representation) 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.servicesapi.mapping.FieldMapper#applyMappings(eu.iksproject.rick.servicesapi.model.Representation, eu.iksproject.rick.servicesapi.model.Representation)      */
 specifier|public
 name|Representation
 name|applyMappings
@@ -1130,7 +1130,7 @@ range|:
 name|fields
 control|)
 block|{
-comment|//			log.info("> process field: "+field);
+comment|//            log.info("> process field: "+field);
 comment|//get the active Mappings
 name|List
 argument_list|<
@@ -1209,7 +1209,7 @@ argument_list|(
 name|values
 argument_list|)
 expr_stmt|;
-comment|/* 				 * (1) Before working with the values first analyse the active  				 * mappings and filters. Two things 				 * a) Init Wildcard Filters: 				 *    Language filters set on namespaces are executed on all field 				 *    mappings that define no language filter 				 * b) calculate the mapped fields. Possible there are no mappings 				 *    left. Than we need not to process all the values 				 */
+comment|/*                  * (1) Before working with the values first analyse the active                  * mappings and filters. Two things                  * a) Init Wildcard Filters:                  *    Language filters set on namespaces are executed on all field                  *    mappings that define no language filter                  * b) calculate the mapped fields. Possible there are no mappings                  *    left. Than we need not to process all the values                  */
 name|Set
 argument_list|<
 name|String
@@ -1236,7 +1236,7 @@ name|globalFiltered
 init|=
 literal|null
 decl_stmt|;
-comment|/* 				 * NOTE: the mappings are sorted in the way, that the most 				 *   prominent one will be at index 0. The wildcard "*" will 				 *   be always the last. 				 *   So we need to parse backwards because than more prominent 				 *   things will overwrite and win! 				 */
+comment|/*                  * NOTE: the mappings are sorted in the way, that the most                  *   prominent one will be at index 0. The wildcard "*" will                  *   be always the last.                  *   So we need to parse backwards because than more prominent                  *   things will overwrite and win!                  */
 for|for
 control|(
 name|int
@@ -1357,8 +1357,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//				log.info("    o targets: "+targetFields);
-comment|//				log.info("    o global text filter: "+globalFilter);
+comment|//                log.info("    o targets: "+targetFields);
+comment|//                log.info("    o global text filter: "+globalFilter);
 if|if
 condition|(
 name|globalFilter
@@ -1435,20 +1435,20 @@ argument_list|,
 name|target
 argument_list|)
 expr_stmt|;
-comment|//					} else if(!mapping.ignoreField()) {
-comment|//						log.info(String.format("<< ignore mapping %s ",mapping));
-comment|//					} else {
-comment|//						log.info(String.format("<< %s ",mapping));
+comment|//                    } else if(!mapping.ignoreField()) {
+comment|//                        log.info(String.format("<< ignore mapping %s ",mapping));
+comment|//                    } else {
+comment|//                        log.info(String.format("<< %s ",mapping));
 block|}
 block|}
 block|}
 block|}
-comment|/* 		 * TODO: return a "MappingReport" 		 * All mapping activities should be documented and stored with the 		 * MappedEntity as MappingActivity! 		 */
+comment|/*          * TODO: return a "MappingReport"          * All mapping activities should be documented and stored with the          * MappedEntity as MappingActivity!          */
 return|return
 name|target
 return|;
 block|}
-comment|/** 	 *  	 * @param mapping 	 * @param field 	 * @param values 	 * @param globalFiltered 	 * @param targets 	 */
+comment|/**      *      * @param mapping      * @param field      * @param values      * @param globalFiltered      * @param targets      */
 specifier|private
 name|void
 name|processMapping
@@ -1646,7 +1646,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 block|}
-comment|/* 			 * TODO: add general purpose functionality to apply Constraints. 			 * Currently this is done by the specific Query Implementations :( 			 *  - use the constraint to filter the values collection! 			 */
+comment|/*              * TODO: add general purpose functionality to apply Constraints.              * Currently this is done by the specific Query Implementations :(              *  - use the constraint to filter the values collection!              */
 block|}
 comment|//nothing to do
 for|for
@@ -1686,8 +1686,8 @@ operator|=
 name|field
 expr_stmt|;
 block|}
-comment|//				log.info(String.format(">> copy%s to %s&d values",
-comment|//						mappedField.equals(field)?"":" from "+field,mappedField,filtered.size()));
+comment|//                log.info(String.format(">> copy%s to %s&d values",
+comment|//                        mappedField.equals(field)?"":" from "+field,mappedField,filtered.size()));
 name|targetRepresentation
 operator|.
 name|add
@@ -1697,13 +1697,13 @@ argument_list|,
 name|filtered
 argument_list|)
 expr_stmt|;
-comment|//			} else {
-comment|//				log.info(String.format("<< ignore%s %s",
-comment|//						mappedField.equals(field)?"":"mapping from "+field+"to",mappedField));
+comment|//            } else {
+comment|//                log.info(String.format("<< ignore%s %s",
+comment|//                        mappedField.equals(field)?"":"mapping from "+field+"to",mappedField));
 block|}
 block|}
 block|}
-comment|/** 	 * This method filters the parsed {@link Text} values based on the languages 	 * parsed in the {@link TextConstraint}. 	 * This method modifies the parsed collection by using the  	 * {@link Iterator#remove()} method. 	 * @param textConstraint the text constraint containing the active languages 	 * @param values the values to filter. This method modifies this collection 	 * @return the modified collection to allow nested calls 	 */
+comment|/**      * This method filters the parsed {@link Text} values based on the languages      * parsed in the {@link TextConstraint}.      * This method modifies the parsed collection by using the      * {@link Iterator#remove()} method.      * @param textConstraint the text constraint containing the active languages      * @param values the values to filter. This method modifies this collection      * @return the modified collection to allow nested calls      */
 specifier|private
 name|Collection
 argument_list|<
@@ -1742,7 +1742,7 @@ literal|"Filtering based on values is not implemented"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 		 * TODO: If filterNonTextValues=true and acceptDefaultLanguate=true  		 *       we could also try to convert non-Text values to Text (by using 		 *       the valueConverter. 		 */
+comment|/*          * TODO: If filterNonTextValues=true and acceptDefaultLanguate=true          *       we could also try to convert non-Text values to Text (by using          *       the valueConverter.          */
 name|Set
 argument_list|<
 name|String
@@ -1826,9 +1826,9 @@ operator|.
 name|remove
 argument_list|()
 expr_stmt|;
-comment|//					log.info(String.format("   - value %s(type:%s) rejected by text filter",value,value.getClass()));
-comment|//				} else {
-comment|//					log.info(String.format("   + value %s(type:%s) accepted by text filter",value,value.getClass()));
+comment|//                    log.info(String.format("   - value %s(type:%s) rejected by text filter",value,value.getClass()));
+comment|//                } else {
+comment|//                    log.info(String.format("   + value %s(type:%s) accepted by text filter",value,value.getClass()));
 block|}
 block|}
 elseif|else
@@ -1853,9 +1853,9 @@ operator|.
 name|remove
 argument_list|()
 expr_stmt|;
-comment|//					log.info(String.format("   - value %s(type:%s) rejected by text filter",value,value.getClass()));
-comment|//				} else {
-comment|//					log.info(String.format("   + value %s(type:%s) accepted by text filter",value,value.getClass()));
+comment|//                    log.info(String.format("   - value %s(type:%s) rejected by text filter",value,value.getClass()));
+comment|//                } else {
+comment|//                    log.info(String.format("   + value %s(type:%s) accepted by text filter",value,value.getClass()));
 block|}
 block|}
 elseif|else
@@ -1869,7 +1869,7 @@ operator|.
 name|remove
 argument_list|()
 expr_stmt|;
-comment|//				log.info(String.format("   - value %s(type:%s) rejected by text filter",value,value.getClass()));
+comment|//                log.info(String.format("   - value %s(type:%s) rejected by text filter",value,value.getClass()));
 block|}
 comment|//else non text value and filterNonTextValues=false -> nothing to do
 block|}
@@ -1877,7 +1877,7 @@ return|return
 name|values
 return|;
 block|}
-comment|/** 	 * This method converts - or if not possible filters the parsed values based 	 * on the parsed constraint 	 * @param valueConstraint 	 * @param values 	 * @return 	 */
+comment|/**      * This method converts - or if not possible filters the parsed values based      * on the parsed constraint      * @param valueConstraint      * @param values      * @return      */
 specifier|private
 name|Collection
 argument_list|<
@@ -2020,7 +2020,7 @@ block|}
 block|}
 block|}
 comment|//2) now process the values
-comment|//		log.info(" --- Filter values ---");
+comment|//        log.info(" --- Filter values ---");
 comment|//calculating acceptable and not acceptable types needs some processing time
 comment|//and usually values will be only of very less different types.
 comment|//Therefore it makes sense to cache accepted and rejected types!
@@ -2117,7 +2117,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//				log.info(String.format("   + value %s(type:%s) accepted by value filter",value,value.getClass()));
+comment|//                log.info(String.format("   + value %s(type:%s) accepted by value filter",value,value.getClass()));
 comment|//nothing to do
 block|}
 elseif|else
@@ -2148,7 +2148,7 @@ name|value
 argument_list|)
 expr_stmt|;
 comment|//save as value that need to be converted
-comment|//				log.info(String.format("   - value %s(type:%s) rejected by value filter",value,value.getClass()));
+comment|//                log.info(String.format("   - value %s(type:%s) rejected by value filter",value,value.getClass()));
 block|}
 else|else
 block|{
@@ -2189,7 +2189,7 @@ name|getClass
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//					log.info(String.format("   + value %s(type:%s) accepted by value filter",value,value.getClass()));
+comment|//                    log.info(String.format("   + value %s(type:%s) accepted by value filter",value,value.getClass()));
 block|}
 else|else
 block|{
@@ -2215,12 +2215,12 @@ name|value
 argument_list|)
 expr_stmt|;
 comment|//save as value that need to be converted
-comment|//					log.info(String.format("   - value %s(type:%s) rejected by value filter",value,value.getClass()));
+comment|//                    log.info(String.format("   - value %s(type:%s) rejected by value filter",value,value.getClass()));
 block|}
 block|}
 block|}
 comment|//3) try to convert values to the active dataTypes
-comment|//		log.info(" --- Try to Convert rejected values ---");
+comment|//        log.info(" --- Try to Convert rejected values ---");
 for|for
 control|(
 name|Object
@@ -2295,8 +2295,8 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//				log.info(String.format("   + value %s(javaType=%s) successfully converted to %s(datatype=%s)",
-comment|//						value,value.getClass().getSimpleName(),converted,convertedTo.getShortName()));
+comment|//                log.info(String.format("   + value %s(javaType=%s) successfully converted to %s(datatype=%s)",
+comment|//                        value,value.getClass().getSimpleName(),converted,convertedTo.getShortName()));
 name|values
 operator|.
 name|add
@@ -2304,9 +2304,9 @@ argument_list|(
 name|converted
 argument_list|)
 expr_stmt|;
-comment|//			} else {
-comment|//				log.info(String.format("   - value %s(javaType=%s) could not be converted"),
-comment|//						value,value.getClass().getSimpleName());
+comment|//            } else {
+comment|//                log.info(String.format("   - value %s(javaType=%s) could not be converted"),
+comment|//                        value,value.getClass().getSimpleName());
 block|}
 block|}
 return|return

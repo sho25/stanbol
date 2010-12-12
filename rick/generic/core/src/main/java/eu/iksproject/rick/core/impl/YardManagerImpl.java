@@ -344,17 +344,17 @@ name|emptyMap
 argument_list|()
 decl_stmt|;
 comment|// stat with a empty map!
-comment|//	private ComponentContext context;
-comment|//	@Activate
-comment|//	protected void activate(ComponentContext context){
-comment|//		log.debug("activating "+getClass()+" with "+context);
-comment|//		//nothing to do for now!
-comment|//		this.context = context;
-comment|//	}
-comment|//	@Deactivate
-comment|//	protected void deactivate(ComponentContext context){
-comment|//		context = null;
-comment|//	}
+comment|//    private ComponentContext context;
+comment|//    @Activate
+comment|//    protected void activate(ComponentContext context){
+comment|//        log.debug("activating "+getClass()+" with "+context);
+comment|//        //nothing to do for now!
+comment|//        this.context = context;
+comment|//    }
+comment|//    @Deactivate
+comment|//    protected void deactivate(ComponentContext context){
+comment|//        context = null;
+comment|//    }
 specifier|protected
 name|void
 name|bindYard

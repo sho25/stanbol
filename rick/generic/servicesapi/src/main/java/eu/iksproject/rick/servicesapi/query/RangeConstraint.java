@@ -94,7 +94,7 @@ operator|=
 name|inclusive
 expr_stmt|;
 block|}
-comment|/** 	 * @return the lowerBound 	 */
+comment|/**      * @return the lowerBound      */
 specifier|public
 name|Object
 name|getLowerBound
@@ -104,7 +104,7 @@ return|return
 name|lowerBound
 return|;
 block|}
-comment|/** 	 * @return the upperBound 	 */
+comment|/**      * @return the upperBound      */
 specifier|public
 name|Object
 name|getUpperBound
@@ -114,7 +114,7 @@ return|return
 name|upperBound
 return|;
 block|}
-comment|/** 	 * @return the inclusive 	 */
+comment|/**      * @return the inclusive      */
 specifier|public
 name|boolean
 name|isInclusive

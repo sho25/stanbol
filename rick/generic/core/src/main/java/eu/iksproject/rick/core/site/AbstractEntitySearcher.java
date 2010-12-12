@@ -423,7 +423,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/** 	 * The OSGI configuration as provided by the activate method 	 * @return 	 */
+comment|/**      * The OSGI configuration as provided by the activate method      * @return      */
 specifier|protected
 specifier|final
 name|Dictionary

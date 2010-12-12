@@ -213,7 +213,7 @@ name|tmp
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new EntityMapping between the parsed symbol and entity 	 * @param rickId The ID of the Rick that defines this mapping 	 * @param symbol the ID of the symbol 	 * @param entity the ID of the entity 	 * @param state the state or<code>null</code> to use the {@link EntityMapping#DEFAULT_MAPPING_STATE} 	 * @param representation The representation to store the information of this EntityMapping 	 * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter. 	 * This includes<ul> 	 *<li> the Rick ID is<code>null</code> or empty 	 *<li> the symbol ID is<code>null</code> or empty 	 *<li> the entity ID is<code>null</code> or empty 	 *<li> the representation is<code>null</code> 	 *</ul> 	 * TODO: Maybe also add an valid {@link MappingState} value for the {@link EntityMapping#STATE} 	 *       to the requirements 	 */
+comment|/**      * Creates a new EntityMapping between the parsed symbol and entity      * @param rickId The ID of the Rick that defines this mapping      * @param symbol the ID of the symbol      * @param entity the ID of the entity      * @param state the state or<code>null</code> to use the {@link EntityMapping#DEFAULT_MAPPING_STATE}      * @param representation The representation to store the information of this EntityMapping      * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter.      * This includes<ul>      *<li> the Rick ID is<code>null</code> or empty      *<li> the symbol ID is<code>null</code> or empty      *<li> the entity ID is<code>null</code> or empty      *<li> the representation is<code>null</code>      *</ul>      * TODO: Maybe also add an valid {@link MappingState} value for the {@link EntityMapping#STATE}      *       to the requirements      */
 specifier|public
 name|DefaultEntityMappingImpl
 parameter_list|(
@@ -333,7 +333,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 *  	 * @param siteId 	 * @param representation The representation that holds the state for the new EntityMapping instance 	 * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter. 	 * This includes<ul> 	 *<li> the Rick ID is<code>null</code> or empty 	 *<li> the parsed representation does not define a link to an entity  	 *      (provide a value for the {@link EntityMapping#ENTITY_ID} field) 	 *<li> the parsed representation does not define a link to a symbol  	 *      (provide a value for the {@link EntityMapping#SYMBOL_ID} field) 	 *<li> the representation is<code>null</code> 	 *</ul> 	 */
+comment|/**      *      * @param siteId      * @param representation The representation that holds the state for the new EntityMapping instance      * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter.      * This includes<ul>      *<li> the Rick ID is<code>null</code> or empty      *<li> the parsed representation does not define a link to an entity      *      (provide a value for the {@link EntityMapping#ENTITY_ID} field)      *<li> the parsed representation does not define a link to a symbol      *      (provide a value for the {@link EntityMapping#SYMBOL_ID} field)      *<li> the representation is<code>null</code>      *</ul>      */
 specifier|public
 name|DefaultEntityMappingImpl
 parameter_list|(

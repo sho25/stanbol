@@ -30,7 +30,7 @@ specifier|public
 class|class
 name|PatternUtils
 block|{
-comment|/** 	 * Converts a Wildcard search string to REGEX. If strict is enabled, than 	 * the REGEX pattern searches only full labels ("^Patt?er.*$") otherwise 	 * it searches the whole text ("Patt?er.*") 	 * @param wildcard the wildcard pattern 	 * @param strict if<code>true</code> than the REGEX pattern searches 	 * whole words. 	 * @return the pattern 	 */
+comment|/**      * Converts a Wildcard search string to REGEX. If strict is enabled, than      * the REGEX pattern searches only full labels ("^Patt?er.*$") otherwise      * it searches the whole text ("Patt?er.*")      * @param wildcard the wildcard pattern      * @param strict if<code>true</code> than the REGEX pattern searches      * whole words.      * @return the pattern      */
 specifier|public
 specifier|static
 name|String
@@ -306,7 +306,7 @@ argument_list|(
 literal|"[\\?\\*]"
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Returns<code>true</code> if the parsed value contains an '?' or '*' 	 * @param value the value to check 	 * @return<code>true</code> if the parsed value contains an '?' or '*' 	 */
+comment|/**      * Returns<code>true</code> if the parsed value contains an '?' or '*'      * @param value the value to check      * @return<code>true</code> if the parsed value contains an '?' or '*'      */
 specifier|public
 specifier|static
 name|boolean

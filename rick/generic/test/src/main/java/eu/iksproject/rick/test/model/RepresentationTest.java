@@ -35,7 +35,7 @@ specifier|abstract
 class|class
 name|RepresentationTest
 block|{
-comment|/** 	 * Subclasses implement this method to provide implementation instances of 	 * {@link Representation}. This method may be called an arbitrary amount of time, 	 * independently whether previously returned MGraph are still in use or not. 	 * 	 * @return an empty {@link Representation} of the implementation to be tested 	 */
+comment|/**      * Subclasses implement this method to provide implementation instances of      * {@link Representation}. This method may be called an arbitrary amount of time,      * independently whether previously returned MGraph are still in use or not.      *      * @return an empty {@link Representation} of the implementation to be tested      */
 specifier|protected
 specifier|abstract
 name|Representation

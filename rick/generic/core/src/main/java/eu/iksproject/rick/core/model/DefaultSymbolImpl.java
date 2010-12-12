@@ -154,7 +154,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the Symbol Interface based on the parsed {@link Representation}.<br>  * Specific implementations of the RICK models might want to use this implementation  * so that they need only to implement the {@link Representation} interface.  * However implementations might also decides to provide its own implementation  * of the {@link Symbol} as well as the other interfaces defined by the   * RICK model  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the Symbol Interface based on the parsed {@link Representation}.<br>  * Specific implementations of the RICK models might want to use this implementation  * so that they need only to implement the {@link Representation} interface.  * However implementations might also decides to provide its own implementation  * of the {@link Symbol} as well as the other interfaces defined by the  * RICK model  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -265,7 +265,7 @@ name|tmp
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a Symbol Wrapper over the parsed representation with  	 *<code>null</code> as default language 	 * @param rickId the ID of the Rick that manages this Symbol 	 * @param representation the representation holding the state of the symbol 	 * @throws IllegalArgumentException If the Symbol instance can not be initialised based on the parsed parameter. 	 * This includes:<ul> 	 *<li> the Rick ID is<code>null</code> or empty 	 *<li> the parsed representation does not define a label  	 *      (provide a value for the {@link Symbol#LABEL} field) 	 *<li> the parsed representation does not define a valid symbol state 	 *      (provide a value of {@link SymbolState} for the {@link Symbol#STATE} field) 	 *<li> the representation is<code>null</code> 	 *</ul> 	 */
+comment|/**      * Creates a Symbol Wrapper over the parsed representation with      *<code>null</code> as default language      * @param rickId the ID of the Rick that manages this Symbol      * @param representation the representation holding the state of the symbol      * @throws IllegalArgumentException If the Symbol instance can not be initialised based on the parsed parameter.      * This includes:<ul>      *<li> the Rick ID is<code>null</code> or empty      *<li> the parsed representation does not define a label      *      (provide a value for the {@link Symbol#LABEL} field)      *<li> the parsed representation does not define a valid symbol state      *      (provide a value of {@link SymbolState} for the {@link Symbol#STATE} field)      *<li> the representation is<code>null</code>      *</ul>      */
 specifier|public
 name|DefaultSymbolImpl
 parameter_list|(
@@ -286,7 +286,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a Symbol Wrapper over the parsed representation 	 * @param rickId the ID of the Rick that manages this Symbol 	 * @param representation the representation holding the state of the symbol 	 * @param defaultLanguage the language for requests without an language  	 * (e.g. methods like {@link #getLabel()}) 	 * @throws IllegalArgumentException If the Symbol instance can not be initialised based on the parsed parameter. 	 * This includes:<ul> 	 *<li> the Rick ID is<code>null</code> or empty 	 *<li> the parsed representation does not define a label  	 *      (provide a value for the {@link Symbol#LABEL} field) 	 *<li> the parsed representation does not define a valid symbol state 	 *      (provide a value of {@link SymbolState} for the {@link Symbol#STATE} field) 	 *<li> the representation is<code>null</code> 	 *</ul> 	 */
+comment|/**      * Creates a Symbol Wrapper over the parsed representation      * @param rickId the ID of the Rick that manages this Symbol      * @param representation the representation holding the state of the symbol      * @param defaultLanguage the language for requests without an language      * (e.g. methods like {@link #getLabel()})      * @throws IllegalArgumentException If the Symbol instance can not be initialised based on the parsed parameter.      * This includes:<ul>      *<li> the Rick ID is<code>null</code> or empty      *<li> the parsed representation does not define a label      *      (provide a value for the {@link Symbol#LABEL} field)      *<li> the parsed representation does not define a valid symbol state      *      (provide a value of {@link SymbolState} for the {@link Symbol#STATE} field)      *<li> the representation is<code>null</code>      *</ul>      */
 specifier|public
 name|DefaultSymbolImpl
 parameter_list|(

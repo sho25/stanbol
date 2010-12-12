@@ -360,7 +360,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Holds the uri->RepresentationTypeEnum mappings 	 */
+comment|/**      * Holds the uri->RepresentationTypeEnum mappings      */
 specifier|public
 specifier|static
 specifier|final
@@ -425,7 +425,7 @@ name|repTypeMapping
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the {@link SignTypeEnum} based on the reference 	 * @param referece The reference as defined by {@link SignTypeEnum#getUri()} 	 * @return the type or<code>null</code> if no mapping is present for the parsed 	 * reference. 	 */
+comment|/**      * Getter for the {@link SignTypeEnum} based on the reference      * @param referece The reference as defined by {@link SignTypeEnum#getUri()}      * @return the type or<code>null</code> if no mapping is present for the parsed      * reference.      */
 specifier|public
 specifier|static
 name|SignTypeEnum
@@ -451,7 +451,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Getter for the {@link SignTypeEnum} based on the uri 	 * @param uri The uri as defined by {@link SignTypeEnum#getUri()} 	 * @return the type or<code>null</code> if no mapping is present for the parsed 	 * uri. 	 */
+comment|/**      * Getter for the {@link SignTypeEnum} based on the uri      * @param uri The uri as defined by {@link SignTypeEnum#getUri()}      * @return the type or<code>null</code> if no mapping is present for the parsed      * uri.      */
 specifier|public
 specifier|static
 name|SignTypeEnum
@@ -470,7 +470,7 @@ name|uri
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Random UUID generator with re-seedable RNG for the tests. 	 * 	 * @return a new Random UUID 	 */
+comment|/**      * Random UUID generator with re-seedable RNG for the tests.      *      * @return a new Random UUID      */
 specifier|protected
 specifier|static
 name|Random
@@ -480,12 +480,12 @@ operator|new
 name|Random
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Do not allow instances of this class 	 */
+comment|/**      * Do not allow instances of this class      */
 specifier|private
 name|ModelUtils
 parameter_list|()
 block|{}
-comment|/** 	 * TODO: Maybe we need a better way to generate unique IDs 	 * @return 	 */
+comment|/**      * TODO: Maybe we need a better way to generate unique IDs      * @return      */
 specifier|public
 specifier|static
 name|UUID
@@ -525,7 +525,7 @@ name|seed
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Processes a value parsed as object to the representation. 	 * This processing includes: 	 *<ul> 	 *<li> Converting URIs and URLs to {@link Reference} 	 *<li> Converting String[] with at least a single entry where the first 	 * entry is not null to {@link Text} (the second entry is used as language. 	 * Further entries are ignored. 	 *<li> Recursive calling of this Method if a {@link Iterable} (any Array or 	 *      {@link Collection}), {@link Iterator} or {@link Enumeration} is parsed. 	 *<li> All other Objects are added to the result list 	 *</ul> 	 * @param value the value to parse 	 * @param results the collections the results of the parsing are added to.  	 */
+comment|/**      * Processes a value parsed as object to the representation.      * This processing includes:      *<ul>      *<li> Converting URIs and URLs to {@link Reference}      *<li> Converting String[] with at least a single entry where the first      * entry is not null to {@link Text} (the second entry is used as language.      * Further entries are ignored.      *<li> Recursive calling of this Method if a {@link Iterable} (any Array or      *      {@link Collection}), {@link Iterator} or {@link Enumeration} is parsed.      *<li> All other Objects are added to the result list      *</ul>      * @param value the value to parse      * @param results the collections the results of the parsing are added to.      */
 specifier|public
 specifier|static
 name|void
@@ -822,7 +822,7 @@ block|}
 end_if
 
 begin_function
-unit|} 	public
+unit|}     public
 specifier|static
 name|String
 name|getRepresentationInfo
@@ -1060,7 +1060,7 @@ empty_stmt|;
 end_empty_stmt
 
 begin_comment
-comment|/** 	 * Splits up a URI in local name and namespace based on the following rules 	 *<ul> 	 *<li> If URI starts with "urn:" and last index of ':' == 3 than the there 	 *      is no namespace and the whole URI is a local name 	 *<li> if the uri starts with "urn:" and the last index of ':' ia> 3, than 	 *      the last index ':' is used. 	 *<li> split by the last index of '#' if index>= 0 	 *<li> split by the last index of '/' if index>= 0 	 *<li> return after the first split 	 *<li> return the whole URI as local name if no split was performed. 	 *</ul> 	 * @param uri The uri 	 * @return A array with two fields. In the first the namespace is stored ( 	 * might be<code>null</code>. In the second the local name is stored. 	 */
+comment|/**      * Splits up a URI in local name and namespace based on the following rules      *<ul>      *<li> If URI starts with "urn:" and last index of ':' == 3 than the there      *      is no namespace and the whole URI is a local name      *<li> if the uri starts with "urn:" and the last index of ':' ia> 3, than      *      the last index ':' is used.      *<li> split by the last index of '#' if index>= 0      *<li> split by the last index of '/' if index>= 0      *<li> return after the first split      *<li> return the whole URI as local name if no split was performed.      *</ul>      * @param uri The uri      * @return A array with two fields. In the first the namespace is stored (      * might be<code>null</code>. In the second the local name is stored.      */
 end_comment
 
 begin_function
@@ -1297,7 +1297,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * This Method uses {@link #getNamespaceLocalName(String)} to split up 	 * namespace and local name. It uses also the Data in the  	 * {@link NamespaceEnum} to retrieve prefixes for Namespaces. 	 * @param uri the URI 	 * @return the QName 	 */
+comment|/**      * This Method uses {@link #getNamespaceLocalName(String)} to split up      * namespace and local name. It uses also the Data in the      * {@link NamespaceEnum} to retrieve prefixes for Namespaces.      * @param uri the URI      * @return the QName      */
 end_comment
 
 begin_function
@@ -1406,7 +1406,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * Getter for the SignType for a Representation. If the Representation does 	 * not define a value part of the {@link SignTypeEnum} for the field 	 * {@link RdfResourceEnum#signType} ({@value RdfResourceEnum#signType}), that 	 * the default sign type {@link Sign#DEFAULT_SIGN_TYPE} is returned. 	 * @param representation The representation 	 * @return the sign type 	 * @throws IllegalArgumentException if<code>null</code> is parsed as representation! 	 */
+comment|/**      * Getter for the SignType for a Representation. If the Representation does      * not define a value part of the {@link SignTypeEnum} for the field      * {@link RdfResourceEnum#signType} ({@value RdfResourceEnum#signType}), that      * the default sign type {@link Sign#DEFAULT_SIGN_TYPE} is returned.      * @param representation The representation      * @return the sign type      * @throws IllegalArgumentException if<code>null</code> is parsed as representation!      */
 end_comment
 
 begin_function
@@ -1524,7 +1524,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * Creates a Sign for the parsed Representation and the signSite id 	 * @param rep the Represetnation 	 * @param signSite the id of the site for the sign 	 * @return the sign 	 * @throws IllegalArgumentException if any of the two parameter is<code>null</code>. 	 */
+comment|/**      * Creates a Sign for the parsed Representation and the signSite id      * @param rep the Represetnation      * @param signSite the id of the site for the sign      * @return the sign      * @throws IllegalArgumentException if any of the two parameter is<code>null</code>.      */
 end_comment
 
 begin_function
@@ -1597,7 +1597,7 @@ comment|//instantiate the correct Sign Implementation
 name|Sign
 name|sign
 decl_stmt|;
-comment|/* 		 * TODO: change this part to separate the implementation of the 		 * ReferencedSite with the instantiation of Sign Type Implementations 		 * Maybe introduce an SignFactory or add such Methods to the 		 * existing ValueFactory 		 */
+comment|/*          * TODO: change this part to separate the implementation of the          * ReferencedSite with the instantiation of Sign Type Implementations          * Maybe introduce an SignFactory or add such Methods to the          * existing ValueFactory          */
 switch|switch
 condition|(
 name|signType

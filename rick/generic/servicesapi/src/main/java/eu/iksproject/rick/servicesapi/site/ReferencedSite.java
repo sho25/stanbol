@@ -174,7 +174,7 @@ name|ReferencedSite
 extends|extends
 name|ConfiguredSite
 block|{
-comment|/** 	 * Searches for entities based on the parsed {@link FieldQuery} and returns 	 * the references (ids). Note that selected fields of the query are ignored. 	 * @param query the query 	 * @return the references of the found entities 	 * @throws ReferencedSiteException If the request can not be executed both on 	 * the {@link Cache} and by using the {@link EntityDereferencer}/ 	 * {@link EntitySearcher} accessing the remote site. For errors with the 	 * remote site the cause will always be a Yard Exceptions. Errors for remote 	 * Sites are usually IOExceptions. 	 */
+comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * the references (ids). Note that selected fields of the query are ignored.      * @param query the query      * @return the references of the found entities      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
 name|String
@@ -187,7 +187,7 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/** 	 * Searches for entities based on the parsed {@link FieldQuery} and returns 	 * representations as defined by the selected fields of the query. Note that 	 * if the query defines also {@link Constraint}s for selected fields, that 	 * the returned representation will only contain values selected by such 	 * constraints. 	 * @param query the query 	 * @return the found entities as representation containing only the selected 	 * fields and there values. 	 * @throws ReferencedSiteException If the request can not be executed both on 	 * the {@link Cache} and by using the {@link EntityDereferencer}/ 	 * {@link EntitySearcher} accessing the remote site. For errors with the 	 * remote site the cause will always be a Yard Exceptions. Errors for remote 	 * Sites are usually IOExceptions. 	 */
+comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * representations as defined by the selected fields of the query. Note that      * if the query defines also {@link Constraint}s for selected fields, that      * the returned representation will only contain values selected by such      * constraints.      * @param query the query      * @return the found entities as representation containing only the selected      * fields and there values.      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -200,7 +200,7 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/** 	 * Searches for Signs based on the parsed {@link FieldQuery} and returns 	 * the selected Signs including the whole representation. Note that selected  	 * fields of the query are ignored. 	 * @param query the query 	 * @return All Entities selected by the Query. 	 * @throws ReferencedSiteException If the request can not be executed both on 	 * the {@link Cache} and by using the {@link EntityDereferencer}/ 	 * {@link EntitySearcher} accessing the remote site. For errors with the 	 * remote site the cause will always be a Yard Exceptions. Errors for remote 	 * Sites are usually IOExceptions. 	 */
+comment|/**      * Searches for Signs based on the parsed {@link FieldQuery} and returns      * the selected Signs including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
 name|Sign
@@ -213,7 +213,7 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/** 	 * Getter for the Sign by the id  	 * @param id the id of the entity 	 * @return the entity or<code>null</code> if not found 	 * @throws ReferencedSiteException If the request can not be executed both on 	 * the {@link Cache} and by using the {@link EntityDereferencer}/ 	 * {@link EntitySearcher} accessing the remote site. For errors with the 	 * remote site the cause will always be a Yard Exceptions. Errors for remote 	 * Sites are usually IOExceptions. 	 */
+comment|/**      * Getter for the Sign by the id      * @param id the id of the entity      * @return the entity or<code>null</code> if not found      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|Sign
 name|getSign
 parameter_list|(
@@ -223,7 +223,7 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/** 	 * Getter for the Content of the Entity 	 * @param id the id of the Entity 	 * @param contentType the requested contentType 	 * @return the content or<code>null</code> if no entity with the parsed id 	 * was found or the parsed ContentType is not supported for this Entity 	 * @throws ReferencedSiteException If the request can not be executed both on 	 * the {@link Cache} and by using the {@link EntityDereferencer}/ 	 * {@link EntitySearcher} accessing the remote site. For errors with the 	 * remote site the cause will always be a Yard Exceptions. Errors for remote 	 * Sites are usually IOExceptions. 	 */
+comment|/**      * Getter for the Content of the Entity      * @param id the id of the Entity      * @param contentType the requested contentType      * @return the content or<code>null</code> if no entity with the parsed id      * was found or the parsed ContentType is not supported for this Entity      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|InputStream
 name|getContent
 parameter_list|(
@@ -236,12 +236,12 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/** 	 * Getter for the FieldMappings configured for this Site 	 * @return The {@link FieldMapping} present for this Site. 	 */
+comment|/**      * Getter for the FieldMappings configured for this Site      * @return The {@link FieldMapping} present for this Site.      */
 name|FieldMapper
 name|getFieldMapper
 parameter_list|()
 function_decl|;
-comment|/** 	 * Getter for the QueryFactory implementation preferable used with this Site. 	 * Note that Site MUST support query instances regardless of there specific 	 * implementation. However specific implementations might have performance 	 * advantages for query processing and may be even execution. Therefore 	 * if one creates queries that are specifically executed on this specific 	 * site, that it is best practice to use the instance provided by this 	 * method. 	 * @return The query factory of this site. 	 */
+comment|/**      * Getter for the QueryFactory implementation preferable used with this Site.      * Note that Site MUST support query instances regardless of there specific      * implementation. However specific implementations might have performance      * advantages for query processing and may be even execution. Therefore      * if one creates queries that are specifically executed on this specific      * site, that it is best practice to use the instance provided by this      * method.      * @return The query factory of this site.      */
 name|FieldQueryFactory
 name|getQueryFactory
 parameter_list|()

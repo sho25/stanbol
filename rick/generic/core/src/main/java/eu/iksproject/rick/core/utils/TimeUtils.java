@@ -190,7 +190,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utilities to parse/format Date and Time values for java {@link Date} objects.<p>  * Note that<ul>  *<li> all toString(..) methods format the parsed date in with time zone UTC  *<li> all toDate(..) methods correctly parse dates in any time zone   *<li> for {@link DataTypeEnum#DateTime} a parser with Date + optional Time is  *      used. Meaning that also dates with missing Time Element are excepted  *</ul>  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Utilities to parse/format Date and Time values for java {@link Date} objects.<p>  * Note that<ul>  *<li> all toString(..) methods format the parsed date in with time zone UTC  *<li> all toDate(..) methods correctly parse dates in any time zone  *<li> for {@link DataTypeEnum#DateTime} a parser with Date + optional Time is  *      used. Meaning that also dates with missing Time Element are excepted  *</ul>  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -213,7 +213,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Holds all the data types that represent a date or a time! 	 */
+comment|/**      * Holds all the data types that represent a date or a time!      */
 specifier|private
 specifier|static
 specifier|final
@@ -240,7 +240,7 @@ operator|.
 name|Date
 argument_list|)
 decl_stmt|;
-comment|/** 	 * ShortNames of the supported date or time dataTypes. Only used to write 	 * meaning full error messages if unsupported data types are parsed! 	 */
+comment|/**      * ShortNames of the supported date or time dataTypes. Only used to write      * meaning full error messages if unsupported data types are parsed!      */
 specifier|private
 specifier|static
 specifier|final
@@ -284,7 +284,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Used to encode XML DateTime strings with UTC time zone as used for 	 * {@link DataTypeEnum#DateTime} 	 */
+comment|/**      * Used to encode XML DateTime strings with UTC time zone as used for      * {@link DataTypeEnum#DateTime}      */
 specifier|protected
 specifier|static
 specifier|final
@@ -303,7 +303,7 @@ operator|.
 name|UTC
 argument_list|)
 decl_stmt|;
-comment|/** 	 * The strict xsd:dateTime parser. It accepts only dateTimes that define 	 * all elements. Only the "fraction of second" part and the time zone 	 * are optional.<p> 	 * This parser is used for {@link DataTypeEnum#DateTime} if 	 *<code>strict=true</code> (default is<code>false</code>) 	 */
+comment|/**      * The strict xsd:dateTime parser. It accepts only dateTimes that define      * all elements. Only the "fraction of second" part and the time zone      * are optional.<p>      * This parser is used for {@link DataTypeEnum#DateTime} if      *<code>strict=true</code> (default is<code>false</code>)      */
 specifier|protected
 specifier|static
 specifier|final
@@ -315,7 +315,7 @@ operator|.
 name|basicDateTime
 argument_list|()
 decl_stmt|;
-comment|/** 	 * The default parser for {@link DataTypeEnum#DateTime}.<p> 	 * This parser not confirm to xsd:dateTime - that requires both date and time  	 * to be present - however the parsed value will be the beginning of the  	 * period (e.g. 2010-05-05 will be parsed to 2010-05-05T00:00:00.000Z).  	 * This is usually the intension of users that uses dateTimes with a missing  	 * time. One can parse<code>strict=true</code> to use the 	 * {@link #XML_DATE_TIME_PARSER_STRICT} instead. 	 */
+comment|/**      * The default parser for {@link DataTypeEnum#DateTime}.<p>      * This parser not confirm to xsd:dateTime - that requires both date and time      * to be present - however the parsed value will be the beginning of the      * period (e.g. 2010-05-05 will be parsed to 2010-05-05T00:00:00.000Z).      * This is usually the intension of users that uses dateTimes with a missing      * time. One can parse<code>strict=true</code> to use the      * {@link #XML_DATE_TIME_PARSER_STRICT} instead.      */
 specifier|protected
 specifier|static
 specifier|final
@@ -327,7 +327,7 @@ operator|.
 name|dateOptionalTimeParser
 argument_list|()
 decl_stmt|;
-comment|/**      * Used to parse dateTime, date or time from a string<p>      * Based on the documentation of JodaTime this accepts all possible XML DateTimes      *<code><pre>      * 	 datetime          = time | date-opt-time 	 *	 time              = 'T' time-element [offset] 	 *	 date-opt-time     = date-element ['T' [time-element] [offset]] 	 *	 date-element      = std-date-element | ord-date-element | week-date-element 	 *	 std-date-element  = yyyy ['-' MM ['-' dd]] 	 *	 ord-date-element  = yyyy ['-' DDD] 	 *	 week-date-element = xxxx '-W' ww ['-' e] 	 *	 time-element      = HH [minute-element] | [fraction] 	 *	 minute-element    = ':' mm [second-element] | [fraction] 	 *	 second-element    = ':' ss [fraction] 	 *	 fraction          = ('.' | ',') digit+ 	 *	 offset            = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])      *<pre><code>      */
+comment|/**      * Used to parse dateTime, date or time from a string<p>      * Based on the documentation of JodaTime this accepts all possible XML DateTimes      *<code><pre>      *      datetime          = time | date-opt-time      *     time              = 'T' time-element [offset]      *     date-opt-time     = date-element ['T' [time-element] [offset]]      *     date-element      = std-date-element | ord-date-element | week-date-element      *     std-date-element  = yyyy ['-' MM ['-' dd]]      *     ord-date-element  = yyyy ['-' DDD]      *     week-date-element = xxxx '-W' ww ['-' e]      *     time-element      = HH [minute-element] | [fraction]      *     minute-element    = ':' mm [second-element] | [fraction]      *     second-element    = ':' ss [fraction]      *     fraction          = ('.' | ',') digit+      *     offset            = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])      *<pre><code>      */
 specifier|protected
 specifier|static
 specifier|final
@@ -339,7 +339,7 @@ operator|.
 name|dateTimeParser
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Used to encode XML DateTime strings without milliseconds with UTC time zone.<p> 	 * This can be use full if writing MPEG-7 times, because this std. uses a 	 * Format that allows fractions other than milliseconds 	 */
+comment|/**      * Used to encode XML DateTime strings without milliseconds with UTC time zone.<p>      * This can be use full if writing MPEG-7 times, because this std. uses a      * Format that allows fractions other than milliseconds      */
 specifier|protected
 specifier|static
 specifier|final
@@ -377,7 +377,7 @@ operator|.
 name|UTC
 argument_list|)
 decl_stmt|;
-comment|/**      * Used to parse String claiming to be of type {@link DataTypeEnum#Time}<p>      * Based on the Joda Time documentation this parser accepts:      *<code><pre>      *   time           = ['T'] time-element [offset] 	 *   time-element   = HH [minute-element] | [fraction] 	 *   minute-element = ':' mm [second-element] | [fraction] 	 *   second-element = ':' ss [fraction] 	 *   fraction       = ('.' | ',') digit+ 	 *   offset         = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])      *</pre><code>      */
+comment|/**      * Used to parse String claiming to be of type {@link DataTypeEnum#Time}<p>      * Based on the Joda Time documentation this parser accepts:      *<code><pre>      *   time           = ['T'] time-element [offset]      *   time-element   = HH [minute-element] | [fraction]      *   minute-element = ':' mm [second-element] | [fraction]      *   second-element = ':' ss [fraction]      *   fraction       = ('.' | ',') digit+      *   offset         = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])      *</pre><code>      */
 specifier|protected
 specifier|static
 specifier|final
@@ -408,7 +408,7 @@ operator|.
 name|UTC
 argument_list|)
 decl_stmt|;
-comment|/**      * Used to parse String claiming to be of type {@link DataTypeEnum#Date}<p>      * Based on the Joda Time documentation this parser accepts:      *<code><pre> 	 *   date              = date-element ['T' offset] 	 *   date-element      = std-date-element | ord-date-element | week-date-element 	 *   std-date-element  = yyyy ['-' MM ['-' dd]] 	 *   ord-date-element  = yyyy ['-' DDD] 	 *   week-date-element = xxxx '-W' ww ['-' e] 	 *   offset            = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])      *</pre><code>      */
+comment|/**      * Used to parse String claiming to be of type {@link DataTypeEnum#Date}<p>      * Based on the Joda Time documentation this parser accepts:      *<code><pre>      *   date              = date-element ['T' offset]      *   date-element      = std-date-element | ord-date-element | week-date-element      *   std-date-element  = yyyy ['-' MM ['-' dd]]      *   ord-date-element  = yyyy ['-' DDD]      *   week-date-element = xxxx '-W' ww ['-' e]      *   offset            = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])      *</pre><code>      */
 specifier|protected
 specifier|static
 specifier|final
@@ -429,7 +429,7 @@ specifier|static
 name|DatatypeFactory
 name|__xmlDatatypeFactory
 decl_stmt|;
-comment|/** 	 * Inits the {@link #__xmlDatatypeFactory} if not already done.<p> 	 * @return the XML datatype factory 	 * @throws IllegalStateException if a {@link DatatypeConfigurationException} 	 * is encountered during {@link DatatypeFactory#newInstance()} 	 */
+comment|/**      * Inits the {@link #__xmlDatatypeFactory} if not already done.<p>      * @return the XML datatype factory      * @throws IllegalStateException if a {@link DatatypeConfigurationException}      * is encountered during {@link DatatypeFactory#newInstance()}      */
 specifier|private
 specifier|static
 name|DatatypeFactory

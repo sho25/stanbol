@@ -143,7 +143,7 @@ name|T
 argument_list|>
 name|type
 decl_stmt|;
-comment|/** 	 * Constructs an QueryResultList by iterating over all elements in the parsed 	 * {@link Iterator} and storing all elements that are NOT<code>null</code>. 	 * @param query The query uses to select the results 	 * @param resultIterator The Iterator containing the results of the Query 	 * @throws IllegalArgumentException if the parsed {@link FieldQuery} is<code>null</code> 	 */
+comment|/**      * Constructs an QueryResultList by iterating over all elements in the parsed      * {@link Iterator} and storing all elements that are NOT<code>null</code>.      * @param query The query uses to select the results      * @param resultIterator The Iterator containing the results of the Query      * @throws IllegalArgumentException if the parsed {@link FieldQuery} is<code>null</code>      */
 specifier|public
 name|QueryResultListImpl
 parameter_list|(
@@ -165,9 +165,9 @@ parameter_list|)
 throws|throws
 name|IllegalArgumentException
 block|{
-comment|//		if(query == null){
-comment|//			throw new IllegalArgumentException("Query MUST NOT be NULL");
-comment|//		}
+comment|//        if(query == null){
+comment|//            throw new IllegalArgumentException("Query MUST NOT be NULL");
+comment|//        }
 name|this
 operator|.
 name|query
@@ -279,7 +279,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/** 	 * Constructs an QueryResultList with the parsed Query and Results 	 * @param query The query uses to select the results 	 * @param results The results of the query 	 * @throws IllegalArgumentException if the parsed {@link FieldQuery} is<code>null</code> 	 */
+comment|/**      * Constructs an QueryResultList with the parsed Query and Results      * @param query The query uses to select the results      * @param results The results of the query      * @throws IllegalArgumentException if the parsed {@link FieldQuery} is<code>null</code>      */
 specifier|public
 name|QueryResultListImpl
 parameter_list|(
@@ -301,9 +301,9 @@ parameter_list|)
 throws|throws
 name|IllegalArgumentException
 block|{
-comment|//		if(query == null){
-comment|//			throw new IllegalArgumentException("Query MUST NOT be NULL");
-comment|//		}
+comment|//        if(query == null){
+comment|//            throw new IllegalArgumentException("Query MUST NOT be NULL");
+comment|//        }
 name|this
 operator|.
 name|query
@@ -363,7 +363,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.ResultList#getQuery() 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.ResultList#getQuery()      */
 specifier|public
 name|FieldQuery
 name|getQuery
@@ -373,7 +373,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.ResultList#getSelectedFields() 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.ResultList#getSelectedFields()      */
 specifier|public
 name|Set
 argument_list|<
@@ -389,7 +389,7 @@ name|getSelectedFields
 argument_list|()
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.ResultList#iterator() 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.ResultList#iterator()      */
 annotation|@
 name|Override
 specifier|public
@@ -407,7 +407,7 @@ name|iterator
 argument_list|()
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.ResultList#isEmpty() 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.ResultList#isEmpty()      */
 specifier|public
 name|boolean
 name|isEmpty
@@ -420,7 +420,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/* (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.ResultList#size() 	 */
+comment|/* (non-Javadoc)      * @see eu.iksproject.rick.core.query.ResultList#size()      */
 specifier|public
 name|int
 name|size

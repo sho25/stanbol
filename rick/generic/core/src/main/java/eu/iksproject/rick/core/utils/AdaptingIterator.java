@@ -42,7 +42,7 @@ argument_list|<
 name|A
 argument_list|>
 block|{
-comment|/** 	 * Adapts values of type T to values of type A. 	 * @author westei 	 * 	 * @param<T> 	 * @param<A> 	 */
+comment|/**      * Adapts values of type T to values of type A.      * @author westei      *      * @param<T>      * @param<A>      */
 specifier|public
 specifier|static
 interface|interface
@@ -53,7 +53,7 @@ parameter_list|,
 name|A
 parameter_list|>
 block|{
-comment|/** 		 * Converts the value of type T to a value of type A. If an instance of  		 * T can not be converted to A, than<code>null</code> is returned  		 * @param value the incoming value 		 * @param type the target type 		 * @return the converted value or<code>null</code> if the parsed value 		 * is<code>null</code> or the parsed value can not be converted 		 */
+comment|/**          * Converts the value of type T to a value of type A. If an instance of          * T can not be converted to A, than<code>null</code> is returned          * @param value the incoming value          * @param type the target type          * @return the converted value or<code>null</code> if the parsed value          * is<code>null</code> or the parsed value can not be converted          */
 name|A
 name|adapt
 parameter_list|(
@@ -98,7 +98,7 @@ specifier|private
 name|A
 name|next
 decl_stmt|;
-comment|/** 	 * Constructs an instance based on an iterator of type T, an adapter and the 	 * target type 	 * @param it the base iterator 	 * @param adapter the adapter 	 * @param type the target type 	 */
+comment|/**      * Constructs an instance based on an iterator of type T, an adapter and the      * target type      * @param it the base iterator      * @param adapter the adapter      * @param type the target type      */
 specifier|public
 name|AdaptingIterator
 parameter_list|(

@@ -238,7 +238,7 @@ name|geonames
 argument_list|(
 literal|"http://www.geonames.org/ontology#"
 argument_list|)
-block|, 	;
+block|,     ;
 name|String
 name|ns
 decl_stmt|;
@@ -332,7 +332,7 @@ return|return
 name|ns
 return|;
 block|}
-comment|/* 	 * ==== Code for Lookup Methods based on Prefix and Namespace ==== 	 */
+comment|/*      * ==== Code for Lookup Methods based on Prefix and Namespace ====      */
 specifier|private
 specifier|static
 name|Map
@@ -544,7 +544,7 @@ name|n2p
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the {@link NamespaceEnum} entry based on the string namespace 	 * @param namespace the name space  	 * @return the {@link NamespaceEnum} entry or<code>null</code> if the prased 	 *    namespace is not present 	 */
+comment|/**      * Getter for the {@link NamespaceEnum} entry based on the string namespace      * @param namespace the name space      * @return the {@link NamespaceEnum} entry or<code>null</code> if the prased      *    namespace is not present      */
 specifier|public
 specifier|static
 name|NamespaceEnum
@@ -563,7 +563,7 @@ name|namespace
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Getter for the {@link NamespaceEnum} entry based on the prefix 	 * @param prefix the prefix 	 * @return the {@link NamespaceEnum} entry or<code>null</code> if the prased 	 *    prefix is not present 	 */
+comment|/**      * Getter for the {@link NamespaceEnum} entry based on the prefix      * @param prefix the prefix      * @return the {@link NamespaceEnum} entry or<code>null</code> if the prased      *    prefix is not present      */
 specifier|public
 specifier|static
 name|NamespaceEnum
@@ -582,7 +582,7 @@ name|prefix
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Lookup if the parsed URI uses one of the registered prefixes of this 	 * Enumeration. If this is the case, the prefix is replaced by the namespace 	 * and the full URI is returned. If no prefix is returned, the 	 * parsed URI is returned 	 * @param shortUri the short URI 	 * @return the full URI if the parsed shortUri uses a prefix defined by this 	 * Enumeration. Otherwise the parsed value. 	 */
+comment|/**      * Lookup if the parsed URI uses one of the registered prefixes of this      * Enumeration. If this is the case, the prefix is replaced by the namespace      * and the full URI is returned. If no prefix is returned, the      * parsed URI is returned      * @param shortUri the short URI      * @return the full URI if the parsed shortUri uses a prefix defined by this      * Enumeration. Otherwise the parsed value.      */
 specifier|public
 specifier|static
 name|String

@@ -164,7 +164,7 @@ specifier|final
 name|boolean
 name|global
 decl_stmt|;
-comment|/** 	 * Returns<code>true</code> if fields that match the pattern are ignored. 	 * This is can only be the case if no Filter is defined ({@link #getFilter()} 	 * returns<code>null</code>). 	 * @return the ignore field state 	 */
+comment|/**      * Returns<code>true</code> if fields that match the pattern are ignored.      * This is can only be the case if no Filter is defined ({@link #getFilter()}      * returns<code>null</code>).      * @return the ignore field state      */
 specifier|public
 specifier|final
 name|boolean
@@ -179,7 +179,7 @@ operator|==
 literal|null
 return|;
 block|}
-comment|/** 	 * Creates a FieldMapping that matches all fields but does not map any field. 	 * However it applies the filter to all other mappings if there is no more 	 * specific Filter applied. 	 * @param globalFilter The global filter. Typically a {@link TextConstraint}. 	 * @throws IllegalArgumentException if the parsed Filter is<code>null</code> 	 */
+comment|/**      * Creates a FieldMapping that matches all fields but does not map any field.      * However it applies the filter to all other mappings if there is no more      * specific Filter applied.      * @param globalFilter The global filter. Typically a {@link TextConstraint}.      * @throws IllegalArgumentException if the parsed Filter is<code>null</code>      */
 specifier|public
 name|FieldMapping
 parameter_list|(
@@ -199,7 +199,7 @@ name|globalFilter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates an 1:1 mapping for all values of fields that confirm the the 	 * defined pattern.<p> 	 * NOTE<ul> 	 *<li> mappings are ignored if the fieldPattern uses a wildcard 	 *<li> parsing<code>null</code> as fieldPattern matches any field, but does 	 *      not map anything. This can be used to define global language filters- 	 *</ul> 	 * @param fieldPattern the pattern (typically the names pace followed by an *) 	 * @param mappedTo the list of target fields (if the mappings contain<code>null</code>  	 *    filtered values of the current field in the source {@link Representation} 	 *    are copied to the same field name in the target {@link Representation}. 	 * @throws IllegalArgumentException if<code>null</code> or an empty string is parsed as pattern 	 */
+comment|/**      * Creates an 1:1 mapping for all values of fields that confirm the the      * defined pattern.<p>      * NOTE<ul>      *<li> mappings are ignored if the fieldPattern uses a wildcard      *<li> parsing<code>null</code> as fieldPattern matches any field, but does      *      not map anything. This can be used to define global language filters-      *</ul>      * @param fieldPattern the pattern (typically the names pace followed by an *)      * @param mappedTo the list of target fields (if the mappings contain<code>null</code>      *    filtered values of the current field in the source {@link Representation}      *    are copied to the same field name in the target {@link Representation}.      * @throws IllegalArgumentException if<code>null</code> or an empty string is parsed as pattern      */
 specifier|public
 name|FieldMapping
 parameter_list|(
@@ -223,7 +223,7 @@ name|mappedTo
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a Mapping the maps (<code>ignore = false)</code>) or ignores ( 	 *<code>ignore = true</code>) fields that match the defined pattern. 	 * @param fieldPattern the pattern used to match field names 	 * @param ignoreField if<code>false</code> (the default) than fields that match 	 *   the parsed pattern are processed. If<code>true</code> than fields that 	 *   match the pattern are ignored. 	 * @param mappedTo the list of target fields (if the mappings contain<code>null</code>  	 *    filtered values of the current field in the source {@link Representation} 	 *    are copied to the same field name in the target {@link Representation}. 	 * @throws IllegalArgumentException if<code>null</code> or an empty string is parsed as pattern 	 */
+comment|/**      * Creates a Mapping the maps (<code>ignore = false)</code>) or ignores (      *<code>ignore = true</code>) fields that match the defined pattern.      * @param fieldPattern the pattern used to match field names      * @param ignoreField if<code>false</code> (the default) than fields that match      *   the parsed pattern are processed. If<code>true</code> than fields that      *   match the pattern are ignored.      * @param mappedTo the list of target fields (if the mappings contain<code>null</code>      *    filtered values of the current field in the source {@link Representation}      *    are copied to the same field name in the target {@link Representation}.      * @throws IllegalArgumentException if<code>null</code> or an empty string is parsed as pattern      */
 specifier|public
 name|FieldMapping
 parameter_list|(
@@ -252,7 +252,7 @@ name|mappedTo
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates an mapping based on the parsed parameter 	 * @param fieldPattern the pattern used to select fields of the source representation 	 * @param filter the constraint used to filter values of selected fields  	 * @param mappedTo the list of target fields (if the mappings contain<code>null</code>  	 *    filtered values of the current field in the source {@link Representation} 	 *    are copied to the same field name in the target {@link Representation}. 	 * @throws IllegalArgumentException if<code>null</code> or an empty string is parsed as pattern 	 */
+comment|/**      * Creates an mapping based on the parsed parameter      * @param fieldPattern the pattern used to select fields of the source representation      * @param filter the constraint used to filter values of selected fields      * @param mappedTo the list of target fields (if the mappings contain<code>null</code>      *    filtered values of the current field in the source {@link Representation}      *    are copied to the same field name in the target {@link Representation}.      * @throws IllegalArgumentException if<code>null</code> or an empty string is parsed as pattern      */
 specifier|public
 name|FieldMapping
 parameter_list|(
@@ -281,7 +281,7 @@ name|mappedTo
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Private internal constructor that does all the initialisation stuff. This 	 * is private because some combinations would not result in valid mappings! 	 * The public constructors can only create valid field mappings. 	 * See documentation of the public variants! 	 */
+comment|/**      * Private internal constructor that does all the initialisation stuff. This      * is private because some combinations would not result in valid mappings!      * The public constructors can only create valid field mappings.      * See documentation of the public variants!      */
 specifier|private
 name|FieldMapping
 parameter_list|(
@@ -495,7 +495,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Returns<code>true</code> if this fieldMapping maps any field. This 	 * means that the {@link #getFieldPattern()}<code>.equals("*")</code> 	 * @return if this is a global field mapping 	 */
+comment|/**      * Returns<code>true</code> if this fieldMapping maps any field. This      * means that the {@link #getFieldPattern()}<code>.equals("*")</code>      * @return if this is a global field mapping      */
 specifier|public
 specifier|final
 name|boolean
@@ -506,7 +506,7 @@ return|return
 name|global
 return|;
 block|}
-comment|/** 	 * Getter for the RegexPettern representing the parsed wildcard. 	 * @return The regex pattern or<code>null</code> if this mapping does not 	 *     use wildcards within the field pattern. 	 */
+comment|/**      * Getter for the RegexPettern representing the parsed wildcard.      * @return The regex pattern or<code>null</code> if this mapping does not      *     use wildcards within the field pattern.      */
 specifier|public
 specifier|final
 name|Pattern
@@ -517,7 +517,7 @@ return|return
 name|regex
 return|;
 block|}
-comment|/** 	 * Returns<code>true</code> if the fieldPattern uses wildcards (? or *) 	 * @return Returns<code>true</code> if the fieldPattern uses wildcards 	 */
+comment|/**      * Returns<code>true</code> if the fieldPattern uses wildcards (? or *)      * @return Returns<code>true</code> if the fieldPattern uses wildcards      */
 specifier|public
 specifier|final
 name|boolean
@@ -528,7 +528,7 @@ return|return
 name|usesWildcard
 return|;
 block|}
-comment|/** 	 * The Wildcard Pattern (*,?) used to match field name against.  	 * @return the pattern 	 */
+comment|/**      * The Wildcard Pattern (*,?) used to match field name against.      * @return the pattern      */
 specifier|public
 name|String
 name|getFieldPattern
@@ -538,7 +538,7 @@ return|return
 name|pattern
 return|;
 block|}
-comment|/** 	 * The target fields values of the source fields are copied to 	 * @return the target fields 	 */
+comment|/**      * The target fields values of the source fields are copied to      * @return the target fields      */
 specifier|public
 name|Set
 argument_list|<
@@ -551,7 +551,7 @@ return|return
 name|mappings
 return|;
 block|}
-comment|/** 	 * The constraint used to filter values of the source field 	 * @return the constraint used to filter values of the source field 	 */
+comment|/**      * The constraint used to filter values of the source field      * @return the constraint used to filter values of the source field      */
 specifier|public
 name|Constraint
 name|getFilter
@@ -561,7 +561,7 @@ return|return
 name|filter
 return|;
 block|}
-comment|/** 	 * Setter for the filter used for values. If<code>null</code> is parsed 	 * the filter is removed. 	 * @param constraint the constraint or<code>null</code> to deactivate any 	 *     filtering. 	 */
+comment|/**      * Setter for the filter used for values. If<code>null</code> is parsed      * the filter is removed.      * @param constraint the constraint or<code>null</code> to deactivate any      *     filtering.      */
 specifier|public
 name|void
 name|setFilter
@@ -577,7 +577,7 @@ operator|=
 name|constraint
 expr_stmt|;
 block|}
-comment|/** 	 * Removes any specified filter 	 */
+comment|/**      * Removes any specified filter      */
 specifier|public
 name|void
 name|removeFilter
@@ -589,7 +589,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Adds a mapping 	 * @param mapping the Mapping (use<code>null</code> to configure a 1:1 Mapping) 	 */
+comment|/**      * Adds a mapping      * @param mapping the Mapping (use<code>null</code> to configure a 1:1 Mapping)      */
 specifier|public
 name|void
 name|addMapping
@@ -606,7 +606,7 @@ name|mapping
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Removes the mapping from the list. Please note, that if the last mapping 	 * is removed, the<code>null</code> mapping is added to the list to preserve 	 * the default 1:1 mapping. 	 * @param mapping The mapping to remove 	 */
+comment|/**      * Removes the mapping from the list. Please note, that if the last mapping      * is removed, the<code>null</code> mapping is added to the list to preserve      * the default 1:1 mapping.      * @param mapping The mapping to remove      */
 specifier|public
 name|void
 name|removeMapping

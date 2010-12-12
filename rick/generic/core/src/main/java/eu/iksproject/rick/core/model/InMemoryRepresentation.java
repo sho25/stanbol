@@ -322,7 +322,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Initialise a new InMemoryRepresenation that contains already some data. 	 * @param id 	 * @param representation 	 */
+comment|/**      * Initialise a new InMemoryRepresenation that contains already some data.      * @param id      * @param representation      */
 specifier|protected
 name|InMemoryRepresentation
 parameter_list|(
@@ -601,7 +601,7 @@ name|Object
 argument_list|>
 name|values
 parameter_list|)
-block|{ 		 	}
+block|{      }
 annotation|@
 name|Override
 specifier|public
@@ -701,7 +701,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the values of the field as Collections. If the field is not 	 * present it returns an empty Collections! 	 * @param field the field 	 * @return A read only collection with the values of the field 	 */
+comment|/**      * Getter for the values of the field as Collections. If the field is not      * present it returns an empty Collections!      * @param field the field      * @return A read only collection with the values of the field      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1448,7 +1448,7 @@ comment|//else there is a single value that does not fit -> nothing todo
 end_comment
 
 begin_expr_stmt
-unit|}  	@
+unit|}      @
 name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
@@ -1684,7 +1684,7 @@ comment|//else there is a single value that does not fit -> nothing todo
 end_comment
 
 begin_function
-unit|}  	@
+unit|}      @
 name|Override
 specifier|public
 name|void
@@ -2297,7 +2297,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * @param check 	 * @param languages 	 * @return 	 */
+comment|/**      * @param check      * @param languages      * @return      */
 end_comment
 
 begin_function

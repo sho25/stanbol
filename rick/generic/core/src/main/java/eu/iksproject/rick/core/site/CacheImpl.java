@@ -538,7 +538,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This is the Implementation of the {@link Cache} Interface as defined by the  * RICK services API.<p>  * Currently the dependency to the Cache is managed vial a {@link ServiceTracker}.  * This means that the Cache is activated/keeps active even if the Yard is not  * available or is disabled.  * If the Yard is not available all Yard related methods like get/store/remove/  * find(..) throw {@link YardException}s.<p>  * TODO This is not the intended way to do it, but because I have no Idea how  * to start/stop a OSGI Component from within a class :(  *   * @see Cache  * @author Rupert Westenthaler  *  */
+comment|/**  * This is the Implementation of the {@link Cache} Interface as defined by the  * RICK services API.<p>  * Currently the dependency to the Cache is managed vial a {@link ServiceTracker}.  * This means that the Cache is activated/keeps active even if the Yard is not  * available or is disabled.  * If the Yard is not available all Yard related methods like get/store/remove/  * find(..) throw {@link YardException}s.<p>  * TODO This is not the intended way to do it, but because I have no Idea how  * to start/stop a OSGI Component from within a class :(  *  * @author Rupert Westenthaler  * @see Cache  */
 end_comment
 
 begin_class
@@ -798,7 +798,7 @@ name|open
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 	 * Lazy initialisation of the yard the first time the yard is ued by this 	 * cache 	 * @param yard the yard instance. MUST NOT be NULL! 	 * @throws YardException 	 */
+comment|/**      * Lazy initialisation of the yard the first time the yard is ued by this      * cache      *      * @param yard the yard instance. MUST NOT be NULL!      * @throws YardException      */
 specifier|protected
 name|void
 name|initWithCacheYard
@@ -1020,7 +1020,7 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-comment|//		context.getBundleContext().removeServiceListener(this);
+comment|//        context.getBundleContext().removeServiceListener(this);
 name|this
 operator|.
 name|yardTracker
@@ -1124,25 +1124,25 @@ literal|null
 return|;
 block|}
 comment|// Currently not needed, because instances are created and disposed by the YardManagerImpl!
-comment|//	@Override
-comment|//	public void serviceChanged(ServiceEvent event) {
-comment|//		log.info("Print Service Event for "+event.getSource());
-comment|//		for(String key : event.getServiceReference().getPropertyKeys()){
-comment|//			log.info("> "+key+"="+event.getServiceReference().getProperty(key));
-comment|//		}
-comment|//		Object cacheYardPropertyValue = event.getServiceReference().getProperty(CACHE_YARD);
-comment|//		//TODO: check the type of the Service provided by the Reference!
-comment|//		if(cacheYardPropertyValue != null&& yardId.equals(cacheYardPropertyValue.toString())){
-comment|//			//process the Event
-comment|//			if(event.getType() == ServiceEvent.REGISTERED){
+comment|//    @Override
+comment|//    public void serviceChanged(ServiceEvent event) {
+comment|//        log.info("Print Service Event for "+event.getSource());
+comment|//        for(String key : event.getServiceReference().getPropertyKeys()){
+comment|//            log.info("> "+key+"="+event.getServiceReference().getProperty(key));
+comment|//        }
+comment|//        Object cacheYardPropertyValue = event.getServiceReference().getProperty(CACHE_YARD);
+comment|//        //TODO: check the type of the Service provided by the Reference!
+comment|//        if(cacheYardPropertyValue != null&& yardId.equals(cacheYardPropertyValue.toString())){
+comment|//            //process the Event
+comment|//            if(event.getType() == ServiceEvent.REGISTERED){
 comment|//
-comment|//			} else if(event.getType() == ServiceEvent.UNREGISTERING){
+comment|//            } else if(event.getType() == ServiceEvent.UNREGISTERING){
 comment|//
-comment|//			}
+comment|//            }
 comment|//
-comment|//		}
-comment|//	}
-comment|/** 	 * Getter for the Yard used by this Cache. 	 * @return the Yard used by this Cache or<code>null</code> if currently not 	 * available. 	 */
+comment|//        }
+comment|//    }
+comment|/**      * Getter for the Yard used by this Cache.      *      * @return the Yard used by this Cache or<code>null</code> if currently not      *         available.      */
 specifier|public
 name|Yard
 name|getCacheYard
@@ -1204,7 +1204,7 @@ return|return
 name|yard
 return|;
 block|}
-comment|/*-------------------------------------------------------------------------- 	 * Store and Update calls MUST respect the mappings configured for the 	 * Cache! 	 * -------------------------------------------------------------------------- 	 */
+comment|/*--------------------------------------------------------------------------      * Store and Update calls MUST respect the mappings configured for the      * Cache!      * --------------------------------------------------------------------------      */
 annotation|@
 name|Override
 specifier|public
@@ -1323,7 +1323,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** 	 * Applies the mappings defined by the {@link #baseMapper} and the {@link #additionalMapper} 	 * to the parsed Representation. 	 * @param yard The yard (local reference to avoid syncronization) 	 * @param representation The representation to map 	 * @return the mapped representation 	 */
+comment|/**      * Applies the mappings defined by the {@link #baseMapper} and the {@link #additionalMapper}      * to the parsed Representation.      *      * @param yard The yard (local reference to avoid syncronization)      * @param representation The representation to map      * @return the mapped representation      */
 specifier|private
 name|Representation
 name|applyCacheMappings
@@ -1449,7 +1449,7 @@ else|:
 name|representation
 return|;
 block|}
-comment|/*-------------------------------------------------------------------------- 	 * Methods that forward calls to the Yard configured for this Cache 	 * -------------------------------------------------------------------------- 	 */
+comment|/*--------------------------------------------------------------------------      * Methods that forward calls to the Yard configured for this Cache      * --------------------------------------------------------------------------      */
 annotation|@
 name|Override
 specifier|public
@@ -1533,7 +1533,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** 	 * Only used to create a representation if the Yard is currently not available 	 * @param id the id or<code>null</code> if a random one should be generated 	 * @return the created Representation 	 */
+comment|/**      * Only used to create a representation if the Yard is currently not available      *      * @param id the id or<code>null</code> if a random one should be generated      * @return the created Representation      */
 specifier|private
 name|Representation
 name|createRepresentation
@@ -2035,8 +2035,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/*-------------------------------------------------------------------------- 	 * Methods for reading and storing and changing the cache configuration 	 * -------------------------------------------------------------------------- 	 */
-comment|/** 	 * Getter for the base mappings used by this Cache. Modifications on the 	 * returned object do not have any influence on the mappings, because this 	 * method returns a clone. Use {@link #setBaseMappings(FieldMapper)} to 	 * change the used base mappings. However make sure you understand the 	 * implications of changing the base mappings as described in the 	 * documentation of the setter method 	 * @return A clone of the base mappings or<code>null</code> if no base 	 * mappings are defined 	 */
+comment|/*--------------------------------------------------------------------------      * Methods for reading and storing and changing the cache configuration      * --------------------------------------------------------------------------      */
+comment|/**      * Getter for the base mappings used by this Cache. Modifications on the      * returned object do not have any influence on the mappings, because this      * method returns a clone. Use {@link #setBaseMappings(FieldMapper)} to      * change the used base mappings. However make sure you understand the      * implications of changing the base mappings as described in the      * documentation of the setter method      *      * @return A clone of the base mappings or<code>null</code> if no base      *         mappings are defined      */
 annotation|@
 name|Override
 specifier|public
@@ -2058,7 +2058,7 @@ name|clone
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Getter for the additional mappings used by this Cache. Modifications on the 	 * returned object do not have any influence on the mappings, because this 	 * method returns a clone. Use {@link #setAdditionalMappings(FieldMapper)} to 	 * change the used additional mappings. However make sure you understand the 	 * implications of changing the base mappings as described in the 	 * documentation of the setter method 	 * @return A clone of the additional mappings or<code>null</code> if no 	 * additional mappings are defined 	 */
+comment|/**      * Getter for the additional mappings used by this Cache. Modifications on the      * returned object do not have any influence on the mappings, because this      * method returns a clone. Use {@link #setAdditionalMappings(FieldMapper)} to      * change the used additional mappings. However make sure you understand the      * implications of changing the base mappings as described in the      * documentation of the setter method      *      * @return A clone of the additional mappings or<code>null</code> if no      *         additional mappings are defined      */
 annotation|@
 name|Override
 specifier|public
@@ -2131,7 +2131,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Internally used in the initialisation to be able to parse the Yard instance 	 * @param yard the yard used to set the configured additional mappings 	 * @param fieldMapper the configuration 	 * @throws YardException on any error while accessing the yard 	 */
+comment|/**      * Internally used in the initialisation to be able to parse the Yard instance      *      * @param yard the yard used to set the configured additional mappings      * @param fieldMapper the configuration      * @throws YardException on any error while accessing the yard      */
 specifier|protected
 name|void
 name|setAdditionalMappings
@@ -2408,7 +2408,7 @@ name|Iterable
 argument_list|<
 name|Representation
 argument_list|>
-name|represnetations
+name|representations
 parameter_list|)
 throws|throws
 name|YardException
@@ -2450,7 +2450,7 @@ name|yard
 operator|.
 name|update
 argument_list|(
-name|represnetations
+name|representations
 argument_list|)
 return|;
 block|}

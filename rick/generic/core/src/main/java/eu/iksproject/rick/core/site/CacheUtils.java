@@ -244,7 +244,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Loads the base mappings form the parsed Yard 	 * @param yard The yard 	 * @return The baseMappings 	 * @throws YardException on any Error while getting the Representation holding 	 * the Configuration from the Yard. 	 * @throws CacheInitialisationException if the configuration is found but not 	 * valid. 	 * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard} 	 */
+comment|/**      * Loads the base mappings form the parsed Yard      * @param yard The yard      * @return The baseMappings      * @throws YardException on any Error while getting the Representation holding      * the Configuration from the Yard.      * @throws CacheInitialisationException if the configuration is found but not      * valid.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}      */
 specifier|public
 specifier|static
 name|FieldMapper
@@ -369,7 +369,7 @@ return|;
 comment|//throw new CacheInitialisationException("Base Configuration not present");
 block|}
 block|}
-comment|/** 	 * Loads the additional field mappings used by this cache from the yard. 	 * This method sets the {@link #baseMapper} field during initialisation. 	 * @param yard The yard 	 * @return The parsed mappings or<code>null</code> if no found 	 * @throws YardException on any Error while reading the {@link Representation} 	 * holding the configuration from the {@link Yard}. 	 * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}. 	 */
+comment|/**      * Loads the additional field mappings used by this cache from the yard.      * This method sets the {@link #baseMapper} field during initialisation.      * @param yard The yard      * @return The parsed mappings or<code>null</code> if no found      * @throws YardException on any Error while reading the {@link Representation}      * holding the configuration from the {@link Yard}.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}.      */
 specifier|protected
 specifier|static
 name|FieldMapper
@@ -478,7 +478,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** 	 * Reads the field mapping config from an document 	 * @param yard the yard of the parsed Representation 	 * @param config the configuration MUST NOT be<code>null</code> 	 * @return A field mapper configured based on the configuration in the parsed {@link Representation} 	 * @throws if the parsed {@link Representation} does not contain a value for {@value CacheConstants.FIELD_MAPPING_CONFIG_FIELD}. 	 */
+comment|/**      * Reads the field mapping config from an document      * @param yard the yard of the parsed Representation      * @param config the configuration MUST NOT be<code>null</code>      * @return A field mapper configured based on the configuration in the parsed {@link Representation}      * @throws if the parsed {@link Representation} does not contain a value for {@value CacheConstants.FIELD_MAPPING_CONFIG_FIELD}.      */
 specifier|private
 specifier|static
 name|FieldMapper
@@ -589,7 +589,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** 	 * Stores the baseMappings to the {@link Yard}. This may cause unexpected  	 * behaviour for subsequest calls of the stored configuration does not 	 * correspond with the actual data stored within the cache.<p> 	 * Typically this is only used at the start or end of the creation of a 	 * full Cache ({@link CacheStrategy#all}) of an referenced site (entity source).<p> 	 * Note also that if the {@link #baseMapper} is<code>null</code> this 	 * method removes any existing configuration from the yard. 	 * @throws YardException an any error while storing the config to the yard. 	 * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}. 	 */
+comment|/**      * Stores the baseMappings to the {@link Yard}. This may cause unexpected      * behaviour for subsequest calls of the stored configuration does not      * correspond with the actual data stored within the cache.<p>      * Typically this is only used at the start or end of the creation of a      * full Cache ({@link CacheStrategy#all}) of an referenced site (entity source).<p>      * Note also that if the {@link #baseMapper} is<code>null</code> this      * method removes any existing configuration from the yard.      * @throws YardException an any error while storing the config to the yard.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}.      */
 specifier|public
 specifier|static
 name|void
@@ -671,7 +671,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Stores the current configuration used for caching documents back to the 	 * {@link Yard}. This configuration is present in the  {@link #additionalMapper}). 	 * If this field is<code>null</code> than any existing configuration is 	 * removed form the index. 	 * @throws YardException on any error while changing the configuration in the 	 * yard. 	 * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}. 	 */
+comment|/**      * Stores the current configuration used for caching documents back to the      * {@link Yard}. This configuration is present in the  {@link #additionalMapper}).      * If this field is<code>null</code> than any existing configuration is      * removed form the index.      * @throws YardException on any error while changing the configuration in the      * yard.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}.      */
 specifier|protected
 specifier|static
 name|void
@@ -753,7 +753,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Serialises all {@link FieldMapping}s of the parsed {@link FieldMapper} 	 * and stores them in the {@value Cache#FIELD_MAPPING_CONFIG_FIELD} of the 	 * parsed {@link Representation} 	 * @param config the representation to store the field mapping configuration 	 * @param mapper the field mapper with the configuration to store 	 */
+comment|/**      * Serialises all {@link FieldMapping}s of the parsed {@link FieldMapper}      * and stores them in the {@value Cache#FIELD_MAPPING_CONFIG_FIELD} of the      * parsed {@link Representation}      * @param config the representation to store the field mapping configuration      * @param mapper the field mapper with the configuration to store      */
 specifier|private
 specifier|static
 name|void

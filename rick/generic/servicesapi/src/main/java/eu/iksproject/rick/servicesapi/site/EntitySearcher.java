@@ -80,7 +80,7 @@ specifier|public
 interface|interface
 name|EntitySearcher
 block|{
-comment|/** 	 * The key used to define the baseUri of the query service used for the  	 * implementation of this interface.<br> 	 * This constants actually uses the value of {@link ConfiguredSite#QUERY_URI} 	 */
+comment|/**      * The key used to define the baseUri of the query service used for the      * implementation of this interface.<br>      * This constants actually uses the value of {@link ConfiguredSite#QUERY_URI}      */
 name|String
 name|QUERY_URI
 init|=
@@ -88,7 +88,7 @@ name|ConfiguredSite
 operator|.
 name|QUERY_URI
 decl_stmt|;
-comment|/** 	 * Searches for Entities based on the parsed {@link FieldQuery} 	 * @param query the query 	 * @return the result of the query 	 */
+comment|/**      * Searches for Entities based on the parsed {@link FieldQuery}      * @param query the query      * @return the result of the query      */
 name|QueryResultList
 argument_list|<
 name|String
@@ -101,7 +101,7 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
-comment|/** 	 * Searches for Entities based on the parsed {@link FieldQuery} and returns 	 * for each entity an Representation over the selected fields and values 	 * @param query the query 	 * @return the found entities as representation containing only the selected 	 * fields and there values. 	 */
+comment|/**      * Searches for Entities based on the parsed {@link FieldQuery} and returns      * for each entity an Representation over the selected fields and values      * @param query the query      * @return the found entities as representation containing only the selected      * fields and there values.      */
 name|QueryResultList
 argument_list|<
 name|Representation

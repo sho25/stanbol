@@ -202,7 +202,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Holds data types used by Rick. Uses the xsd data types where possible.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Holds data types used by Rick. Uses the xsd data types where possible.  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_enum
@@ -240,7 +240,7 @@ name|class
 argument_list|)
 block|,
 comment|//xsd types
-comment|/** 	 * currently URIs are preferable mapped to {@link Reference}, because there 	 * may be RDF URIs that are not valid {@link URI}s nor {@link URL}s. However 	 * existing URI and URL instances are also accepted. 	 */
+comment|/**      * currently URIs are preferable mapped to {@link Reference}, because there      * may be RDF URIs that are not valid {@link URI}s nor {@link URL}s. However      * existing URI and URL instances are also accepted.      */
 name|AnyUri
 argument_list|(
 literal|"anyURI"
@@ -388,7 +388,7 @@ name|Duration
 operator|.
 name|class
 argument_list|)
-block|, 	;
+block|,     ;
 specifier|final
 name|Class
 argument_list|<
@@ -1664,10 +1664,10 @@ return|return
 name|all
 return|;
 block|}
-comment|//	public static DataTypeEnum getDataType(Class<?> javaClass){
-comment|//		List<DataTypeEnum> dataTypes = getAllDataTypes(javaClass);
-comment|//		return dataTypes.isEmpty()?null:dataTypes.get(0);
-comment|//	}
+comment|//    public static DataTypeEnum getDataType(Class<?> javaClass){
+comment|//        List<DataTypeEnum> dataTypes = getAllDataTypes(javaClass);
+comment|//        return dataTypes.isEmpty()?null:dataTypes.get(0);
+comment|//    }
 specifier|public
 specifier|static
 name|DataTypeEnum

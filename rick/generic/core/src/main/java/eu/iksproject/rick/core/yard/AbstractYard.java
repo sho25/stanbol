@@ -285,7 +285,7 @@ name|AbstractYard
 implements|implements
 name|Yard
 block|{
-comment|/** 	 * Key used to configure maximum number of query results supported by  	 * this yard.<br> 	 * The default (if not set) is set to {@link #SolrQueryFactoy#MAX_QUERY_RESULT_NUMBER} 	 * ({@value #SolrQueryFactoy#MAX_QUERY_RESULT_NUMBER}) 	 */
+comment|/**      * Key used to configure maximum number of query results supported by      * this yard.<br>      * The default (if not set) is set to {@link #SolrQueryFactoy#MAX_QUERY_RESULT_NUMBER}      * ({@value #SolrQueryFactoy#MAX_QUERY_RESULT_NUMBER})      */
 specifier|public
 specifier|static
 specifier|final
@@ -294,7 +294,7 @@ name|MAX_QUERY_RESULT_NUMBER
 init|=
 literal|"eu.iksproject.rick.yard.maxQueryResultNumber"
 decl_stmt|;
-comment|/** 	 * Key used to configure the default number of query results supported by 	 * this yard.<br> 	 * The default (if not set) is set to {@link #SolrQueryFactoy#DEFAULT_QUERY_RESULT_NUMBER} 	 * ({@value #SolrQueryFactoy#DEFAULT_QUERY_RESULT_NUMBER}) 	 */
+comment|/**      * Key used to configure the default number of query results supported by      * this yard.<br>      * The default (if not set) is set to {@link #SolrQueryFactoy#DEFAULT_QUERY_RESULT_NUMBER}      * ({@value #SolrQueryFactoy#DEFAULT_QUERY_RESULT_NUMBER})      */
 specifier|public
 specifier|static
 specifier|final
@@ -303,37 +303,37 @@ name|DEFAULT_QUERY_RESULT_NUMBER
 init|=
 literal|"eu.iksproject.rick.yard.defaultQueryResultNumber"
 decl_stmt|;
-comment|/** 	 * This Yard uses the default in-memory implementation of the RICK model. 	 */
+comment|/**      * This Yard uses the default in-memory implementation of the RICK model.      */
 specifier|protected
 name|ValueFactory
 name|valueFactory
 decl_stmt|;
-comment|/** 	 * The QueryFactory as required by {@link Yard#getQueryFactory()}. This 	 * Yard uses the default implementation as provided by the 	 * {@link DefaultQueryFactory}. 	 */
+comment|/**      * The QueryFactory as required by {@link Yard#getQueryFactory()}. This      * Yard uses the default implementation as provided by the      * {@link DefaultQueryFactory}.      */
 specifier|protected
 name|FieldQueryFactory
 name|queryFactory
 decl_stmt|;
-comment|/** 	 * Holds the configuration of the Yard.  	 */
+comment|/**      * Holds the configuration of the Yard.      */
 specifier|protected
 name|YardConfig
 name|config
 decl_stmt|;
-comment|/** 	 * Default constructor to create an uninitialised Yard. Typically used 	 * within an OSGI environment 	 */
+comment|/**      * Default constructor to create an uninitialised Yard. Typically used      * within an OSGI environment      */
 specifier|protected
 name|AbstractYard
 parameter_list|()
 block|{}
-comment|//	/**
-comment|//	 * Constructor to create an initialised Yard.
-comment|//	 * @param valueFactory The value factory for the yard
-comment|//	 * @param queryFactory The query factory for the yard
-comment|//	 * @param config The configuration of the yard
-comment|//	 * @throws IllegalArgumentException if any of the three parameter is<code>null</code>
-comment|//	 */
-comment|//	protected AbstractYard(ValueFactory valueFactory,FieldQueryFactory queryFactory, YardConfig config) throws IllegalArgumentException{
-comment|//		activate(valueFactory, queryFactory, config);
-comment|//	}
-comment|/** 	 * Activates the Yard based on the parsed parameter. Typically called within 	 * an OSGI environment by the activate method. Internally called by the 	 * {@link #AbstractYard(ValueFactory, FieldQueryFactory, YardConfig)}  	 * constructor. 	 * @param valueFactory The value factory for the yard 	 * @param queryFactory The query factory for the yard 	 * @param config The configuration of the yard 	 */
+comment|//    /**
+comment|//     * Constructor to create an initialised Yard.
+comment|//     * @param valueFactory The value factory for the yard
+comment|//     * @param queryFactory The query factory for the yard
+comment|//     * @param config The configuration of the yard
+comment|//     * @throws IllegalArgumentException if any of the three parameter is<code>null</code>
+comment|//     */
+comment|//    protected AbstractYard(ValueFactory valueFactory,FieldQueryFactory queryFactory, YardConfig config) throws IllegalArgumentException{
+comment|//        activate(valueFactory, queryFactory, config);
+comment|//    }
+comment|/**      * Activates the Yard based on the parsed parameter. Typically called within      * an OSGI environment by the activate method. Internally called by the      * {@link #AbstractYard(ValueFactory, FieldQueryFactory, YardConfig)}      * constructor.      * @param valueFactory The value factory for the yard      * @param queryFactory The query factory for the yard      * @param config The configuration of the yard      */
 specifier|protected
 specifier|final
 name|void
@@ -413,7 +413,7 @@ operator|=
 name|config
 expr_stmt|;
 block|}
-comment|/** 	 * Deactivates this yard instance. Typically called within an OSGI environment 	 * by the deacivate method. 	 *  	 */
+comment|/**      * Deactivates this yard instance. Typically called within an OSGI environment      * by the deacivate method.      *      */
 specifier|protected
 specifier|final
 name|void
@@ -439,7 +439,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new representation with a random uuid by using the pattern: 	 *<code><pre> 	 *   urn:eu.iksproject:rick.yard.&lt;getClass().getSimpleName()&gt;:&lt;getId()&gt;.&lt;uuid&gt; 	 *</pre></code> 	 * @see Yard#create() 	 */
+comment|/**      * Creates a new representation with a random uuid by using the pattern:      *<code><pre>      *   urn:eu.iksproject:rick.yard.&lt;getClass().getSimpleName()&gt;:&lt;getId()&gt;.&lt;uuid&gt;      *</pre></code>      * @see Yard#create()      */
 annotation|@
 name|Override
 specifier|public
@@ -455,7 +455,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Creates a representation with the parsed ID. If<code>null</code> is 	 * parsed a random UUID is generated as describe in {@link #create()}. 	 * @param id The id or<code>null</code> to create a random uuid 	 * @see Yard#create(String) 	 */
+comment|/**      * Creates a representation with the parsed ID. If<code>null</code> is      * parsed a random UUID is generated as describe in {@link #create()}.      * @param id The id or<code>null</code> to create a random uuid      * @see Yard#create(String)      */
 annotation|@
 name|Override
 specifier|public
@@ -673,23 +673,23 @@ return|return
 name|valueFactory
 return|;
 block|}
-comment|/** ------------------------------------------------------------------------ 	 *    Methods that need to be implemented by Sub-Classes 	 *  ------------------------------------------------------------------------ 	 */
-comment|//	@Override
-comment|//	public abstract QueryResultList<Representation> find(FieldQuery query);
-comment|//	@Override
-comment|//	public abstract QueryResultList<String> findReferences(FieldQuery query);
-comment|//	@Override
-comment|//	public abstract QueryResultList<Representation> findRepresentation(FieldQuery query);
-comment|//	@Override
-comment|//	public abstract Representation getRepresentation(String id);
-comment|//	@Override
-comment|//	public abstract boolean isRepresentation(String id);
-comment|//	@Override
-comment|//	public abstract void remove(String id) throws IllegalArgumentException;
-comment|//	@Override
-comment|//	public abstract void store(Representation representation) throws IllegalArgumentException;
-comment|//	@Override
-comment|//	public abstract void update(Representation represnetation) throws IllegalArgumentException;
+comment|/** ------------------------------------------------------------------------      *    Methods that need to be implemented by Sub-Classes      *  ------------------------------------------------------------------------      */
+comment|//    @Override
+comment|//    public abstract QueryResultList<Representation> find(FieldQuery query);
+comment|//    @Override
+comment|//    public abstract QueryResultList<String> findReferences(FieldQuery query);
+comment|//    @Override
+comment|//    public abstract QueryResultList<Representation> findRepresentation(FieldQuery query);
+comment|//    @Override
+comment|//    public abstract Representation getRepresentation(String id);
+comment|//    @Override
+comment|//    public abstract boolean isRepresentation(String id);
+comment|//    @Override
+comment|//    public abstract void remove(String id) throws IllegalArgumentException;
+comment|//    @Override
+comment|//    public abstract void store(Representation representation) throws IllegalArgumentException;
+comment|//    @Override
+comment|//    public abstract void update(Representation represnetation) throws IllegalArgumentException;
 specifier|public
 specifier|static
 specifier|abstract
@@ -706,7 +706,7 @@ name|Object
 argument_list|>
 name|config
 decl_stmt|;
-comment|/** 		 * Creates a new config with the minimal set of required properties 		 * @param id the ID of the Yard 		 * @throws IllegalArgumentException if the parsed valued do not fulfil the 		 * requirements. 		 */
+comment|/**          * Creates a new config with the minimal set of required properties          * @param id the ID of the Yard          * @throws IllegalArgumentException if the parsed valued do not fulfil the          * requirements.          */
 specifier|protected
 name|YardConfig
 parameter_list|(
@@ -735,7 +735,7 @@ name|id
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 		 * Initialise the Yard configuration based on a parsed configuration. Usually 		 * used on the context of an OSGI environment in the activate method. 		 * @param config the configuration usually parsed within an OSGI activate 		 * method 		 * @throws ConfigurationException if the configuration is incomplete of 		 * some values are not valid 		 * @throws IllegalArgumentException if<code>null</code> is parsed as 		 * configuration 		 */
+comment|/**          * Initialise the Yard configuration based on a parsed configuration. Usually          * used on the context of an OSGI environment in the activate method.          * @param config the configuration usually parsed within an OSGI activate          * method          * @throws ConfigurationException if the configuration is incomplete of          * some values are not valid          * @throws IllegalArgumentException if<code>null</code> is parsed as          * configuration          */
 specifier|protected
 name|YardConfig
 parameter_list|(
@@ -777,7 +777,7 @@ name|isValid
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 		 * Setter for the ID of the yard. The id is usually a sort name such as 		 * "dbPedia", "freebase", "geonames.org", "my.projects" ...<p> 		 * If {@link #isMultiYardIndexLayout()} than this ID is used to identify 		 * Representations of this Yard within the SolrIndex. 		 * @param the id of the yard. Required, not null, not empty! 		 */
+comment|/**          * Setter for the ID of the yard. The id is usually a sort name such as          * "dbPedia", "freebase", "geonames.org", "my.projects" ...<p>          * If {@link #isMultiYardIndexLayout()} than this ID is used to identify          * Representations of this Yard within the SolrIndex.          * @param the id of the yard. Required, not null, not empty!          */
 specifier|public
 name|void
 name|setId
@@ -818,7 +818,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 		 * Getter for the ID of the yard 		 * @return the id of the yard 		 */
+comment|/**          * Getter for the ID of the yard          * @return the id of the yard          */
 specifier|public
 name|String
 name|getId
@@ -849,7 +849,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 		 * Setter for the name of this yard. If not set the {@link #getId(String)}  		 * is used as default 		 * @param name The name or<code>null</code> to use {@link #getId()}. 		 */
+comment|/**          * Setter for the name of this yard. If not set the {@link #getId(String)}          * is used as default          * @param name The name or<code>null</code> to use {@link #getId()}.          */
 specifier|public
 name|void
 name|setName
@@ -890,7 +890,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 		 * Getter for the human readable name of the Yard  		 * @return the name 		 */
+comment|/**          * Getter for the human readable name of the Yard          * @return the name          */
 specifier|public
 name|String
 name|getName
@@ -922,7 +922,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 		 * Setter for the description of this Yard 		 * @param description the description. Optional parameter 		 */
+comment|/**          * Setter for the description of this Yard          * @param description the description. Optional parameter          */
 specifier|public
 name|void
 name|setDescription
@@ -963,7 +963,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 		 * Getter for the description 		 * @return description The description or<code>null</code> if not defined 		 */
+comment|/**          * Getter for the description          * @return description The description or<code>null</code> if not defined          */
 specifier|public
 name|String
 name|getDescription
@@ -994,7 +994,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 		 * Setter for the default number of query results. This is used if parsed 		 * queries do not define a limit for the maximum number of results. 		 * @param defaultQueryResults the default number of query results. 		 *<code>null</code> or a negative number to use the default value defined 		 * by the Yard. 		 */
+comment|/**          * Setter for the default number of query results. This is used if parsed          * queries do not define a limit for the maximum number of results.          * @param defaultQueryResults the default number of query results.          *<code>null</code> or a negative number to use the default value defined          * by the Yard.          */
 specifier|public
 name|void
 name|setDefaultQueryResultNumber
@@ -1031,7 +1031,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 		 * Getter for the default number of query results. This is used if parsed 		 * queries do not define a limit for the maximum number of results.<p> 		 * If {@link #getMaxQueryResultNumber()} is defines (>0), than this 		 * method returns the minimum of the two configured values. 		 * @return the default number used as the maximum number of results per 		 * query if not otherwise set by the parsed query. Returns<code>0</code> 		 * if the value was set to a number lower or equals 0 and -1 if the 		 * value is not configured at all. 		 */
+comment|/**          * Getter for the default number of query results. This is used if parsed          * queries do not define a limit for the maximum number of results.<p>          * If {@link #getMaxQueryResultNumber()} is defines (>0), than this          * method returns the minimum of the two configured values.          * @return the default number used as the maximum number of results per          * query if not otherwise set by the parsed query. Returns<code>0</code>          * if the value was set to a number lower or equals 0 and -1 if the          * value is not configured at all.          */
 specifier|public
 name|int
 name|getDefaultQueryResultNumber
@@ -1154,7 +1154,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/** 		 * Setter for the maximum number of query results. This is used to limit the 		 * maximum number of results when parsed queries define limits that are  		 * greater this value. 		 * @param maxQueryResults The maximum number of results for queries. 		 *<code>null</code> or a negative number to use the default as defined by 		 * the Yard implementation.  		 */
+comment|/**          * Setter for the maximum number of query results. This is used to limit the          * maximum number of results when parsed queries define limits that are          * greater this value.          * @param maxQueryResults The maximum number of results for queries.          *<code>null</code> or a negative number to use the default as defined by          * the Yard implementation.          */
 specifier|public
 name|void
 name|setMaxQueryResultNumber
@@ -1191,7 +1191,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 		 * Getter for the maximum number of query results.This is used to limit the 		 * maximum number of results when parsed queries define limits that are  		 * greater this value. 		 * @return the maximum number of query results. Returns<code>0</code> 		 * if the value was set to a number lower or equals 0 and -1 if the 		 * value is not configured at all. 		 */
+comment|/**          * Getter for the maximum number of query results.This is used to limit the          * maximum number of results when parsed queries define limits that are          * greater this value.          * @return the maximum number of query results. Returns<code>0</code>          * if the value was set to a number lower or equals 0 and -1 if the          * value is not configured at all.          */
 specifier|public
 name|int
 name|getMaxQueryResultNumber
@@ -1289,7 +1289,7 @@ name|number
 return|;
 block|}
 block|}
-comment|/** 		 * Checks if the configuration is valid and throws a {@link ConfigurationException} 		 * if not.<p> 		 * This method checks the {@link Yard#ID} property and than calls 		 * {@link #validateConfig()} to check additional constraints of specific 		 * Yard configurations (subclasses of this class) 		 * @return returns true if valid 		 * @throws ConfigurationException 		 */
+comment|/**          * Checks if the configuration is valid and throws a {@link ConfigurationException}          * if not.<p>          * This method checks the {@link Yard#ID} property and than calls          * {@link #validateConfig()} to check additional constraints of specific          * Yard configurations (subclasses of this class)          * @return returns true if valid          * @throws ConfigurationException          */
 specifier|protected
 specifier|final
 name|boolean
@@ -1335,7 +1335,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** 		 * Needs to be implemented by Subclasses to check required configurations of 		 * specific Yard Implementations. 		 * @throws ConfigurationException In case of a missing or invalid configuration 		 * for one of the properties. 		 */
+comment|/**          * Needs to be implemented by Subclasses to check required configurations of          * specific Yard Implementations.          * @throws ConfigurationException In case of a missing or invalid configuration          * for one of the properties.          */
 specifier|protected
 specifier|abstract
 name|void

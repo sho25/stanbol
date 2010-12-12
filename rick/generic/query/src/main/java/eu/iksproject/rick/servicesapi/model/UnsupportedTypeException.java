@@ -20,7 +20,7 @@ name|UnsupportedTypeException
 extends|extends
 name|RuntimeException
 block|{
-comment|/** 	 * uses the default serialVersionUID 	 */
+comment|/**      * uses the default serialVersionUID      */
 specifier|private
 specifier|static
 specifier|final

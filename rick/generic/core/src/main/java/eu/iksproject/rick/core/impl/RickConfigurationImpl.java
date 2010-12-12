@@ -270,7 +270,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the Rick Configuration as an own component.  * TODO: Currently the {@link RickImpl} has a 1..1 dependency to this one.  * One could also just extend the {@link RickImpl} from this class.   * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the Rick Configuration as an own component.  * TODO: Currently the {@link RickImpl} has a 1..1 dependency to this one.  * One could also just extend the {@link RickImpl} from this class.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -468,23 +468,23 @@ literal|"skos:narrower | d=rick:ref"
 block|,
 literal|"skos:related | d=rick:ref"
 block|,
-comment|//				"skos:member | d=rick:ref",
+comment|//                "skos:member | d=rick:ref",
 literal|"skos:subject | d=rick:ref"
 block|,
 literal|"skos:inScheme | d=rick:ref"
 block|,
-comment|//				"skos:hasTopConcept | d=rick:ref",
-comment|//				"skos:topConceptOf | d=rick:ref",
+comment|//                "skos:hasTopConcept | d=rick:ref",
+comment|//                "skos:topConceptOf | d=rick:ref",
 comment|// --- Social Networks (via foaf) ---
 literal|"foaf:*"
 block|,
 comment|//The Friend of a Friend schema often used to describe social relations between people
 literal|"foaf:name> rick:label"
 block|,
-comment|//				"foaf:knows | d=rick:ref",
-comment|//				"foaf:made | d=rick:ref",
-comment|//				"foaf:maker | d=rick:ref",
-comment|//				"foaf:member | d=rick:ref",
+comment|//                "foaf:knows | d=rick:ref",
+comment|//                "foaf:made | d=rick:ref",
+comment|//                "foaf:maker | d=rick:ref",
+comment|//                "foaf:member | d=rick:ref",
 literal|"foaf:homepage | d=xsd:anyURI"
 block|,
 literal|"foaf:depiction | d=xsd:anyURI"

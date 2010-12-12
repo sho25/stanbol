@@ -806,7 +806,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This in the Default implementation of the {@link ReferencedSite} interface.  * However this implementation forwards calls to methods defined within the  * {@link EntityDereferencer} and {@link EntitySearcher} to sub components   * (See the detailed description below).<p>  * Each {@link ReferencedSite} with an {@link CacheStrategy} other than  * {@link CacheStrategy#none} needs an associated {@link Cache}.  *<p>   * The Initialisation of the sub-components:  *<ul>  *<li><b>{@link EntityDereferencer}:</b> Implementations of this interface are  *      specific to the used protocol/technology of the referenced site.  *      Because of that calls to methods defined in this interface are forwarded  *      to an site specific instance of the {@link EntityDereferencer} interface  *      as configured by the {@link ConfiguredSite#DEREFERENCER_TYPE} property.<br>  *      During activation the the {@link BundleContext} is used to  *      search for {@link ComponentFactory} with the configuration<code>  *      "component.name= {@link ComponentContext#getProperties()}.get(  *      {@link ConfiguredSite#DEREFERENCER_TYPE})</code>. This factory is used  *      to create an instance of {@link EntityDereferencer}.<br>  *      Note also, that the configuration of this instance that is covered   *      by the {@link ConfiguredSite} interface are parsed to the   *      {@link EntityDereferencer} instance.  *<li><b> {@link EntitySearcher}:</b> Implementations of this interface are  *      also specific to the used protocol/technology of the referenced site.  *      Because of that calls to methods defined in this interface are forwarded  *      to an site specific instance of the {@link EntitySearcher} interface  *      as configured by the {@link ConfiguredSite#SEARCHER_TYPE} property.<br>  *      The initialisation of this instance works similar as described for the  *      {@link EntityDereferencer}. However if the value of the {@link ConfiguredSite#SEARCHER_TYPE}  *      is equals to {@link ConfiguredSite#DEREFERENCER_TYPE} or the   *      {@link ConfiguredSite#SEARCHER_TYPE} is not defined at all, than the  *      Dereferencer Instance is also used as {@link EntitySearcher}. If the   *      according cast does not succeed, an {@link ConfigurationException} for the  *      {@link ConfiguredSite#SEARCHER_TYPE} property is thrown.  *<li><b>{@link Cache}:</b> An instance of a {@link Cache} is used to  *      cache {@link Representation}s loaded form the Site. A cache is a wrapper  *      over a {@link Yard} instance that allows to configure what data are  *      stored for each representation cached form this referenced site. A  *      {@link ServiceTracker} is used for managing the dependency with the cache.  *      So if a cache is no longer available a referenced site can still be used -  *      only the local cache can not be used to retrieve entity representations.  *</ul>  *   * TODO: implement {@link MetaTypeProvider} for this Component!  * The Goal is to dynamically provide the PropertyOptions for  *  - Properties that use Enumerations  *  - available EntityDereferencer Types  *  - available EntitySearcher Types  * @author Rupert Westenthaler  *  */
+comment|/**  * This in the Default implementation of the {@link ReferencedSite} interface.  * However this implementation forwards calls to methods defined within the  * {@link EntityDereferencer} and {@link EntitySearcher} to sub components  * (See the detailed description below).<p>  * Each {@link ReferencedSite} with an {@link CacheStrategy} other than  * {@link CacheStrategy#none} needs an associated {@link Cache}.  *<p>  * The Initialisation of the sub-components:  *<ul>  *<li><b>{@link EntityDereferencer}:</b> Implementations of this interface are  *      specific to the used protocol/technology of the referenced site.  *      Because of that calls to methods defined in this interface are forwarded  *      to an site specific instance of the {@link EntityDereferencer} interface  *      as configured by the {@link ConfiguredSite#DEREFERENCER_TYPE} property.<br>  *      During activation the the {@link BundleContext} is used to  *      search for {@link ComponentFactory} with the configuration<code>  *      "component.name= {@link ComponentContext#getProperties()}.get(  *      {@link ConfiguredSite#DEREFERENCER_TYPE})</code>. This factory is used  *      to create an instance of {@link EntityDereferencer}.<br>  *      Note also, that the configuration of this instance that is covered  *      by the {@link ConfiguredSite} interface are parsed to the  *      {@link EntityDereferencer} instance.  *<li><b> {@link EntitySearcher}:</b> Implementations of this interface are  *      also specific to the used protocol/technology of the referenced site.  *      Because of that calls to methods defined in this interface are forwarded  *      to an site specific instance of the {@link EntitySearcher} interface  *      as configured by the {@link ConfiguredSite#SEARCHER_TYPE} property.<br>  *      The initialisation of this instance works similar as described for the  *      {@link EntityDereferencer}. However if the value of the {@link ConfiguredSite#SEARCHER_TYPE}  *      is equals to {@link ConfiguredSite#DEREFERENCER_TYPE} or the  *      {@link ConfiguredSite#SEARCHER_TYPE} is not defined at all, than the  *      Dereferencer Instance is also used as {@link EntitySearcher}. If the  *      according cast does not succeed, an {@link ConfigurationException} for the  *      {@link ConfiguredSite#SEARCHER_TYPE} property is thrown.  *<li><b>{@link Cache}:</b> An instance of a {@link Cache} is used to  *      cache {@link Representation}s loaded form the Site. A cache is a wrapper  *      over a {@link Yard} instance that allows to configure what data are  *      stored for each representation cached form this referenced site. A  *      {@link ServiceTracker} is used for managing the dependency with the cache.  *      So if a cache is no longer available a referenced site can still be used -  *      only the local cache can not be used to retrieve entity representations.  *</ul>  *  * TODO: implement {@link MetaTypeProvider} for this Component!  * The Goal is to dynamically provide the PropertyOptions for  *  - Properties that use Enumerations  *  - available EntityDereferencer Types  *  - available EntitySearcher Types  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_decl_stmt
@@ -854,7 +854,7 @@ name|Properties
 argument_list|(
 name|value
 operator|=
-block|{ 		@
+block|{         @
 name|Property
 argument_list|(
 name|name
@@ -867,7 +867,7 @@ name|value
 operator|=
 literal|"dbPedia"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -880,7 +880,7 @@ name|value
 operator|=
 literal|"DB Pedia"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -894,7 +894,7 @@ operator|=
 literal|"The OLD Endpoint for Wikipedia"
 argument_list|)
 block|,
-comment|/* 		 * TODO: can't use Integer.MAX_VALUE here, because I get a NumberFormatException 		 * in den maven scr plugin. For now use a big number instead 		 */
+comment|/*          * TODO: can't use Integer.MAX_VALUE here, because I get a NumberFormatException          * in den maven scr plugin. For now use a big number instead          */
 block|@
 name|Property
 argument_list|(
@@ -916,7 +916,7 @@ block|,
 literal|"http://dbpedia.org/ontology/"
 block|}
 argument_list|)
-block|,  		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -929,7 +929,7 @@ name|value
 operator|=
 literal|"http://dbpedia.org/sparql/"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -940,7 +940,7 @@ name|DEREFERENCER_TYPE
 argument_list|,
 name|options
 operator|=
-block|{ 				@
+block|{                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -957,7 +957,7 @@ name|name
 operator|=
 literal|""
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -974,7 +974,7 @@ name|name
 operator|=
 literal|"eu.iksproject.rick.site.SparqlDereferencer"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -997,7 +997,7 @@ name|value
 operator|=
 literal|"eu.iksproject.rick.site.SparqlDereferencer"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1023,7 +1023,7 @@ name|SEARCHER_TYPE
 argument_list|,
 name|options
 operator|=
-block|{ 				@
+block|{                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1040,7 +1040,7 @@ name|name
 operator|=
 literal|""
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1057,7 +1057,7 @@ name|name
 operator|=
 literal|"eu.iksproject.rick.site.SparqlSearcher"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1074,7 +1074,7 @@ name|name
 operator|=
 literal|"eu.iksproject.rick.site.VirtuosoSearcher"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1097,7 +1097,7 @@ name|value
 operator|=
 literal|"eu.iksproject.rick.site.VirtuosoSearcher"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1108,7 +1108,7 @@ name|DEFAULT_SYMBOL_STATE
 argument_list|,
 name|options
 operator|=
-block|{ 				@
+block|{                 @
 name|PropertyOption
 argument_list|(
 comment|//seems, that name and value are exchanged ...
@@ -1126,7 +1126,7 @@ name|name
 operator|=
 literal|"proposed"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1150,7 +1150,7 @@ name|value
 operator|=
 literal|"proposed"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1161,7 +1161,7 @@ name|DEFAULT_MAPEED_ENTITY_STATE
 argument_list|,
 name|options
 operator|=
-block|{ 				@
+block|{                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1178,7 +1178,7 @@ name|name
 operator|=
 literal|"proposed"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1202,7 +1202,7 @@ name|value
 operator|=
 literal|"proposed"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1213,7 +1213,7 @@ name|DEFAULT_EXPIRE_DURATION
 argument_list|,
 name|options
 operator|=
-block|{ 				@
+block|{                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1242,7 +1242,7 @@ operator|*
 literal|30
 operator|)
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1271,7 +1271,7 @@ operator|*
 literal|183
 operator|)
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1300,7 +1300,7 @@ operator|*
 literal|365
 operator|)
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1323,7 +1323,7 @@ name|value
 operator|=
 literal|"0"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1334,7 +1334,7 @@ name|CACHE_STRATEGY
 argument_list|,
 name|options
 operator|=
-block|{ 				@
+block|{                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1351,7 +1351,7 @@ name|name
 operator|=
 literal|"none"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1368,7 +1368,7 @@ name|name
 operator|=
 literal|"used"
 argument_list|)
-block|, 				@
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1391,7 +1391,7 @@ name|value
 operator|=
 literal|"none"
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1400,7 +1400,7 @@ name|ConfiguredSite
 operator|.
 name|CACHE_ID
 argument_list|)
-block|, 		@
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1604,7 +1604,7 @@ return|return
 name|cacheStrategy
 return|;
 block|}
-comment|/** 	 * This implementation returns the ExpireDuration. 0 as default if no 	 * configuration is present. -1 in case the configuration can not be converted 	 * to a number. 	 */
+comment|/**      * This implementation returns the ExpireDuration. 0 as default if no      * configuration is present. -1 in case the configuration can not be converted      * to a number.      */
 annotation|@
 name|Override
 specifier|public
@@ -3480,7 +3480,7 @@ return|return
 name|cacheId
 return|;
 block|}
-comment|/** 	 * In case {@link CacheStrategy#all} this Method returns the 	 * query factory of the Cache. 	 * Otherwise it returns {@link DefaultQueryFactory#getInstance()}. 	 */
+comment|/**      * In case {@link CacheStrategy#all} this Method returns the      * query factory of the Cache.      * Otherwise it returns {@link DefaultQueryFactory#getInstance()}.      */
 annotation|@
 name|Override
 specifier|public
@@ -3543,7 +3543,7 @@ return|return
 name|factory
 return|;
 block|}
-comment|/** 	 * Internally used to get the Cache for this site. If  	 * {@link CacheStrategy#none}, this methods always returns<code>null</code>, 	 * otherwise it returns the Cache for the configured Yard or<code>null</code> 	 * if no such Cache is available. 	 * @return the cache or<code>null</code> if {@link CacheStrategy#none} or 	 * the configured cache instance is not available. 	 */
+comment|/**      * Internally used to get the Cache for this site. If      * {@link CacheStrategy#none}, this methods always returns<code>null</code>,      * otherwise it returns the Cache for the configured Yard or<code>null</code>      * if no such Cache is available.      * @return the cache or<code>null</code> if {@link CacheStrategy#none} or      * the configured cache instance is not available.      */
 specifier|protected
 name|Cache
 name|getCache
@@ -3567,7 +3567,7 @@ name|getService
 argument_list|()
 return|;
 block|}
-comment|/*-------------------------------------------------------------------------- 	 *  OSGI LIFECYCLE and LISTENER METHODS 	 *-------------------------------------------------------------------------- 	 */
+comment|/*--------------------------------------------------------------------------      *  OSGI LIFECYCLE and LISTENER METHODS      *--------------------------------------------------------------------------      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -3974,7 +3974,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * @param context 	 * @throws ConfigurationException 	 * @throws InvalidSyntaxException 	 */
+comment|/**      * @param context      * @throws ConfigurationException      * @throws InvalidSyntaxException      */
 specifier|private
 name|void
 name|initFieldmappings
@@ -4116,7 +4116,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Initialise the dereferencer and searcher component as soon as the according 	 * {@link ComponentFactory} gets registered.<p> 	 * First this Methods tries to find the according {@link ServiceReference}s 	 * directly. If they are not available (e.g. because the component factories 	 * are not yet started) than it adds a {@link ServiceListener} for the missing 	 * {@link ComponentFactory} that calls the {@link #createDereferencerComponent(ComponentFactory)} 	 * and {@link #createEntitySearcherComponent(ComponentFactory)} as soon as 	 * the factory gets registered. 	 * @throws InvalidSyntaxException if the #entitySearcherComponentName or the 	 * {@link #dereferencerComponentName} somehow cause an invalid formated string 	 * that can not be used to parse a {@link Filter}. 	 */
+comment|/**      * Initialise the dereferencer and searcher component as soon as the according      * {@link ComponentFactory} gets registered.<p>      * First this Methods tries to find the according {@link ServiceReference}s      * directly. If they are not available (e.g. because the component factories      * are not yet started) than it adds a {@link ServiceListener} for the missing      * {@link ComponentFactory} that calls the {@link #createDereferencerComponent(ComponentFactory)}      * and {@link #createEntitySearcherComponent(ComponentFactory)} as soon as      * the factory gets registered.      * @throws InvalidSyntaxException if the #entitySearcherComponentName or the      * {@link #dereferencerComponentName} somehow cause an invalid formated string      * that can not be used to parse a {@link Filter}.      */
 specifier|private
 name|void
 name|initDereferencerAndEntitySearcher
@@ -4396,7 +4396,7 @@ comment|//NOTE: here the filter MUST include also the objectClass!
 block|}
 block|}
 block|}
-comment|/** 	 * Creates the entity searcher component used by this {@link ReferencedSite} 	 * (and configured via the {@link ConfiguredSite#SEARCHER_TYPE} property).<p> 	 * If the {@link ConfiguredSite#DEREFERENCER_TYPE} is set to the same vale 	 * and the {@link #accessUri} also equals the {@link #queryUri}, than the 	 * component created for the entity searcher is also used as dereferencer. 	 * @param factory The component factory used to create the  	 * {@link #entitySearcherComponentInstace} 	 */
+comment|/**      * Creates the entity searcher component used by this {@link ReferencedSite}      * (and configured via the {@link ConfiguredSite#SEARCHER_TYPE} property).<p>      * If the {@link ConfiguredSite#DEREFERENCER_TYPE} is set to the same vale      * and the {@link #accessUri} also equals the {@link #queryUri}, than the      * component created for the entity searcher is also used as dereferencer.      * @param factory The component factory used to create the      * {@link #entitySearcherComponentInstace}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -4475,7 +4475,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** 	 * Creates the entity dereferencer component used by this {@link ReferencedSite}. 	 * The implementation used as the dereferencer is configured by the 	 * {@link ConfiguredSite#DEREFERENCER_TYPE} property. 	 * @param factory the component factory used to create the {@link #dereferencer} 	 */
+comment|/**      * Creates the entity dereferencer component used by this {@link ReferencedSite}.      * The implementation used as the dereferencer is configured by the      * {@link ConfiguredSite#DEREFERENCER_TYPE} property.      * @param factory the component factory used to create the {@link #dereferencer}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -4537,7 +4537,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** 	 * Simple {@link ServiceListener} implementation that is used to get notified 	 * if one of the {@link ComponentFactory component factories} for the 	 * configured implementation of the {@link EntityDereferencer} or  	 * {@link EntitySearcher} interfaces get registered. 	 * @author Rupert Westenthaler 	 * 	 */
+comment|/**      * Simple {@link ServiceListener} implementation that is used to get notified      * if one of the {@link ComponentFactory component factories} for the      * configured implementation of the {@link EntityDereferencer} or      * {@link EntitySearcher} interfaces get registered.      * @author Rupert Westenthaler      *      */
 specifier|private
 class|class
 name|ComponentFactoryListener

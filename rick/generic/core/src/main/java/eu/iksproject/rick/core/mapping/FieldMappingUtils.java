@@ -282,7 +282,7 @@ specifier|public
 class|class
 name|FieldMappingUtils
 block|{
-comment|/** 	 * Comparator that sorts field mappings in a way that optimises the 	 * processing. 	 */
+comment|/**      * Comparator that sorts field mappings in a way that optimises the      * processing.      */
 specifier|public
 specifier|static
 specifier|final
@@ -293,7 +293,7 @@ operator|new
 name|FieldMappingComparator
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Sorts FieldMappings by the following order: 	 *<ol> 	 *<li> mappings that use no wildcard are ranked first than 	 *<li> mappings that ignore Fields ({@link FieldMapping#ignoreField()}=true) 	 *</ol> 	 * @author Rupert Westenthaler 	 * 	 */
+comment|/**      * Sorts FieldMappings by the following order:      *<ol>      *<li> mappings that use no wildcard are ranked first than      *<li> mappings that ignore Fields ({@link FieldMapping#ignoreField()}=true)      *</ol>      * @author Rupert Westenthaler      *      */
 specifier|public
 specifier|static
 class|class
@@ -408,7 +408,7 @@ parameter_list|()
 block|{
 comment|/* Do not create Instances of Util Classes*/
 block|}
-comment|/** 	 * Parses fieldMappings from a String formated like follows 	 *<code><pre> 	 *    fieldPattern&gt; mapping_1 mapping_2 ... mapping_n 	 *</pre></code> 	 * Parsing is done like follows: 	 *<ul> 	 *<li> The elements of the parsed string are split by spaces. Leading and  	 *      tailing spaces are ignored. 	 *<li> the<code>fieldPattern</code> supports {@link PatternType#wildcard}. 	 *      '*' and '?' within this part are interpreted accordingly 	 *<li> Each mapping can have an optional Filter. The filter section starts with 	 *<code>" | "</code> and ends with the next space.<br> 	 *      Currently two types of Filters are supported.<br> 	 *<b>Language Filter:</b> Syntax:<code>@=&lt;lang-1&gt;,&lt;lang-2&gt;,  	 *      ... ,&lt;lang-n&gt;</code>.<br>The default language can be activated by 	 *      using an empty String (e.g.<code> "@=en,,de"</code>) or null  	 *      (e.g.<code>"@=en,null,de</code>).<br> 	 *<b>Data Type Filter:</b> Syntax:<code>d=&lt;type-1&gt;,&lt;type-2&gt;,  	 *      ... ,&lt;type-n&gt;</code>. Types can be specified by the full URI 	 *      however the preferred way is to use the prefix and the local name 	 *      (e.g.to allow all kind of floating point values one could use a 	 *      filter like<code>"d=xsd:decimal,xsd:float,xsd:double"</code>). 	 *<li> If the field should be mapped to one or more other fields, than the 	 *      second element of the field MUST BE equals to<code>'&gt'</code> 	 *<li> If the second element equals to '&gt', than all further Elements are 	 *      interpreted as mapping target by field names that match the 	 *      FieldPattern define in the first element. 	 *</ul> 	 * Examples: 	 *<ul> 	 *<li> To copy all fields define the Mapping<br> 	 *<code><pre>*</pre></code> 	 *<li> This pattern copy all fields of the foaf namespace<br> 	 *<code><pre>http://xmlns.com/foaf/0.1/*</pre></code> 	 *<li> The following Pattern uses the values of the foaf:name field as  	 *      RICK symbol label<br> 	 *<code><pre>http://xmlns.com/foaf/0.1/name&gt; http://www.iks-project.eu/ontology/rick/model/label</pre></code> 	 *</ul> 	 * Notes: 	 *<ul> 	 *<li> The combination of patterns for the source field and the definition of 	 *      mappings is possible, but typically results in situations where all 	 *      field names matched by the defined pattern are copied as values of the 	 *      mapped field. 	 *</ul> 	 * TODO: Add Support for {@link Constraint}s on the field values. 	 * @param mapping The mapping 	 * @return the parsed {@link FieldMapping} or<code>null</code> if the parsed 	 *    String can not be parsed. 	 */
+comment|/**      * Parses fieldMappings from a String formated like follows      *<code><pre>      *    fieldPattern&gt; mapping_1 mapping_2 ... mapping_n      *</pre></code>      * Parsing is done like follows:      *<ul>      *<li> The elements of the parsed string are split by spaces. Leading and      *      tailing spaces are ignored.      *<li> the<code>fieldPattern</code> supports {@link PatternType#wildcard}.      *      '*' and '?' within this part are interpreted accordingly      *<li> Each mapping can have an optional Filter. The filter section starts with      *<code>" | "</code> and ends with the next space.<br>      *      Currently two types of Filters are supported.<br>      *<b>Language Filter:</b> Syntax:<code>@=&lt;lang-1&gt;,&lt;lang-2&gt;,      *      ... ,&lt;lang-n&gt;</code>.<br>The default language can be activated by      *      using an empty String (e.g.<code> "@=en,,de"</code>) or null      *      (e.g.<code>"@=en,null,de</code>).<br>      *<b>Data Type Filter:</b> Syntax:<code>d=&lt;type-1&gt;,&lt;type-2&gt;,      *      ... ,&lt;type-n&gt;</code>. Types can be specified by the full URI      *      however the preferred way is to use the prefix and the local name      *      (e.g.to allow all kind of floating point values one could use a      *      filter like<code>"d=xsd:decimal,xsd:float,xsd:double"</code>).      *<li> If the field should be mapped to one or more other fields, than the      *      second element of the field MUST BE equals to<code>'&gt'</code>      *<li> If the second element equals to '&gt', than all further Elements are      *      interpreted as mapping target by field names that match the      *      FieldPattern define in the first element.      *</ul>      * Examples:      *<ul>      *<li> To copy all fields define the Mapping<br>      *<code><pre>*</pre></code>      *<li> This pattern copy all fields of the foaf namespace<br>      *<code><pre>http://xmlns.com/foaf/0.1/*</pre></code>      *<li> The following Pattern uses the values of the foaf:name field as      *      RICK symbol label<br>      *<code><pre>http://xmlns.com/foaf/0.1/name&gt; http://www.iks-project.eu/ontology/rick/model/label</pre></code>      *</ul>      * Notes:      *<ul>      *<li> The combination of patterns for the source field and the definition of      *      mappings is possible, but typically results in situations where all      *      field names matched by the defined pattern are copied as values of the      *      mapped field.      *</ul>      * TODO: Add Support for {@link Constraint}s on the field values.      * @param mapping The mapping      * @return the parsed {@link FieldMapping} or<code>null</code> if the parsed      *    String can not be parsed.      */
 specifier|public
 specifier|static
 name|FieldMapping
@@ -664,16 +664,16 @@ argument_list|)
 return|;
 block|}
 comment|//moved to NamespaceEnum
-comment|//	private static String getFullUri(String value){
-comment|//		int index = value.indexOf(':');
-comment|//		if(index>0){
-comment|//			NamespaceEnum namespace = NamespaceEnum.forPrefix(value.substring(0, index));
-comment|//			if(namespace!= null){
-comment|//				value = namespace.getNamespace()+value.substring(index+1);
-comment|//			}
-comment|//		}
-comment|//		return value;
-comment|//	}
+comment|//    private static String getFullUri(String value){
+comment|//        int index = value.indexOf(':');
+comment|//        if(index>0){
+comment|//            NamespaceEnum namespace = NamespaceEnum.forPrefix(value.substring(0, index));
+comment|//            if(namespace!= null){
+comment|//                value = namespace.getNamespace()+value.substring(index+1);
+comment|//            }
+comment|//        }
+comment|//        return value;
+comment|//    }
 specifier|private
 specifier|static
 name|List
@@ -1532,11 +1532,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//	public static void main(String[] args) {
-comment|//		String test = "foaf:*";
-comment|//		System.out.println(parseFieldMapping(" | @=;de"));
-comment|//	}
-comment|/** 	 * Appends an URI if possible by using prefix:localName 	 * @param builder the StringBuilder to add the URI MUST NOT be NULL 	 * @param uri the URI to add MUST NOT be NULL 	 */
+comment|//    public static void main(String[] args) {
+comment|//        String test = "foaf:*";
+comment|//        System.out.println(parseFieldMapping(" | @=;de"));
+comment|//    }
+comment|/**      * Appends an URI if possible by using prefix:localName      * @param builder the StringBuilder to add the URI MUST NOT be NULL      * @param uri the URI to add MUST NOT be NULL      */
 specifier|private
 specifier|static
 name|void

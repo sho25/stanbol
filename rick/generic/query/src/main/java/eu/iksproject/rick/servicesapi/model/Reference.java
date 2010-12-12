@@ -22,12 +22,12 @@ specifier|public
 interface|interface
 name|Reference
 block|{
-comment|/** 	 * Getter for the reference (not<code>null</code>) 	 * @return the reference 	 */
+comment|/**      * Getter for the reference (not<code>null</code>)      * @return the reference      */
 name|String
 name|getReference
 parameter_list|()
 function_decl|;
-comment|/** 	 * The lexical representation of the reference (usually the same value 	 * as returned by {@link #getReference()} 	 * @return the reference 	 */
+comment|/**      * The lexical representation of the reference (usually the same value      * as returned by {@link #getReference()}      * @return the reference      */
 name|String
 name|toString
 parameter_list|()

@@ -112,7 +112,7 @@ specifier|public
 interface|interface
 name|ReferencedSiteManager
 block|{
-comment|/** 	 * Returns if a site with the parsed id is referenced 	 * @param baseUri the base URI 	 * @return<code>true</code> if a site with the parsed ID is present.  	 * Otherwise<code>false</code>. 	 */
+comment|/**      * Returns if a site with the parsed id is referenced      * @param baseUri the base URI      * @return<code>true</code> if a site with the parsed ID is present.      * Otherwise<code>false</code>.      */
 name|boolean
 name|isReferred
 parameter_list|(
@@ -120,7 +120,7 @@ name|String
 name|id
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the referenced site based on the id 	 * @param baseUri the base URI of the referred Site 	 * @return the {@link ReferencedSite} or<code>null</code> if no site is  	 * present for the parsed base ID. 	 */
+comment|/**      * Getter for the referenced site based on the id      * @param baseUri the base URI of the referred Site      * @return the {@link ReferencedSite} or<code>null</code> if no site is      * present for the parsed base ID.      */
 name|ReferencedSite
 name|getReferencedSite
 parameter_list|(
@@ -128,7 +128,7 @@ name|String
 name|id
 parameter_list|)
 function_decl|;
-comment|/** 	 * TODO's: 	 *<ul>  	 *<li> use the ReferenceManager specific Exception to this Method 	 *<li> maybe use an own data structure instead of the generic Dictionary class 	 *<li> review the API based creation of Sites 	 *</ul> 	 * @param baseUri 	 * @param properties 	 * @deprecated Not yet clear how to add referred sites via an API 	 */
+comment|/**      * TODO's:      *<ul>      *<li> use the ReferenceManager specific Exception to this Method      *<li> maybe use an own data structure instead of the generic Dictionary class      *<li> review the API based creation of Sites      *</ul>      * @param baseUri      * @param properties      * @deprecated Not yet clear how to add referred sites via an API      */
 name|void
 name|addReferredSite
 parameter_list|(
@@ -144,7 +144,7 @@ argument_list|>
 name|properties
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for Sites that manages entities with the given ID. A Site can  	 * define a list of prefixes of Entities ID it manages. This method can 	 * be used to retrieve all the Site that may be able to dereference the 	 * parsed entity id 	 * @param entityUri the ID of the entity 	 * @return A list of referenced sites that may manage the entity in question. 	 */
+comment|/**      * Getter for Sites that manages entities with the given ID. A Site can      * define a list of prefixes of Entities ID it manages. This method can      * be used to retrieve all the Site that may be able to dereference the      * parsed entity id      * @param entityUri the ID of the entity      * @return A list of referenced sites that may manage the entity in question.      */
 name|Collection
 argument_list|<
 name|ReferencedSite
@@ -155,7 +155,7 @@ name|String
 name|entityUri
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the the Sign referenced by the parsed ID 	 * @param id the id of the entity 	 * @return the Sign or<code>null</code> if not found 	 */
+comment|/**      * Getter for the the Sign referenced by the parsed ID      * @param id the id of the entity      * @return the Sign or<code>null</code> if not found      */
 name|Sign
 name|getSign
 parameter_list|(
@@ -163,7 +163,7 @@ name|String
 name|reference
 parameter_list|)
 function_decl|;
-comment|/** 	 * Returns the Entities that confirm to the parsed Query 	 * @param query the query 	 * @return the id's of Entities 	 */
+comment|/**      * Returns the Entities that confirm to the parsed Query      * @param query the query      * @return the id's of Entities      */
 name|QueryResultList
 argument_list|<
 name|Sign
@@ -174,7 +174,7 @@ name|FieldQuery
 name|query
 parameter_list|)
 function_decl|;
-comment|/** 	 * Searches for Entities based on the parsed query and returns representations 	 * including the selected fields and filtered values 	 * @param query The query 	 * @return The representations including selected fields/values 	 */
+comment|/**      * Searches for Entities based on the parsed query and returns representations      * including the selected fields and filtered values      * @param query The query      * @return The representations including selected fields/values      */
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -185,7 +185,7 @@ name|FieldQuery
 name|query
 parameter_list|)
 function_decl|;
-comment|/** 	 * Searches for Entities based on the parsed query and returns the ids. 	 * @param query The query 	 * @return the ids of the selected entities 	 */
+comment|/**      * Searches for Entities based on the parsed query and returns the ids.      * @param query The query      * @return the ids of the selected entities      */
 name|QueryResultList
 argument_list|<
 name|String
@@ -196,7 +196,7 @@ name|FieldQuery
 name|query
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the content of the entity 	 * @param entity the id of the entity 	 * @param contentType the content type 	 * @return the content as {@link InputStream} or<code>null</code> if no 	 * entity with this ID is known by the RICK or no representation for the 	 * requested entity is available for the parsed content type 	 */
+comment|/**      * Getter for the content of the entity      * @param entity the id of the entity      * @param contentType the content type      * @return the content as {@link InputStream} or<code>null</code> if no      * entity with this ID is known by the RICK or no representation for the      * requested entity is available for the parsed content type      */
 name|InputStream
 name|getContent
 parameter_list|(
@@ -207,7 +207,7 @@ name|String
 name|contentType
 parameter_list|)
 function_decl|;
-comment|/** 	 * Getter for the Id's of all active referenced sites 	 * @return Unmodifiable collections of the id#s of all referenced sites 	 */
+comment|/**      * Getter for the Id's of all active referenced sites      * @return Unmodifiable collections of the id#s of all referenced sites      */
 name|Collection
 argument_list|<
 name|String
@@ -215,7 +215,7 @@ argument_list|>
 name|getReferencedSiteIds
 parameter_list|()
 function_decl|;
-comment|/* 	 * NOTE: We need a way to add/remove referred sites. But this may be done 	 * via the OSGI ManagedServiceFactory interface. Implementations of the 	 * Site Interface would than also implement the ManagedService interface 	 */
+comment|/*      * NOTE: We need a way to add/remove referred sites. But this may be done      * via the OSGI ManagedServiceFactory interface. Implementations of the      * Site Interface would than also implement the ManagedService interface      */
 block|}
 end_interface
 

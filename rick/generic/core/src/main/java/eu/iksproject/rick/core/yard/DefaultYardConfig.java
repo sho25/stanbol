@@ -83,7 +83,7 @@ name|DefaultYardConfig
 extends|extends
 name|YardConfig
 block|{
-comment|/** 	 * Creates a new configuration with the minimal set of required properties 	 * @param id the ID of the Yard 	 * @throws IllegalArgumentException if the parsed valued do not fulfil the 	 * requirements. 	 */
+comment|/**      * Creates a new configuration with the minimal set of required properties      * @param id the ID of the Yard      * @throws IllegalArgumentException if the parsed valued do not fulfil the      * requirements.      */
 specifier|public
 name|DefaultYardConfig
 parameter_list|(
@@ -124,7 +124,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * Initialise the Yard configuration based on a parsed configuration. Usually 	 * used on the context of an OSGI environment in the activate method. 	 * @param config the configuration usually parsed within an OSGI activate 	 * method 	 * @throws ConfigurationException if the configuration is incomplete of 	 * some values are not valid 	 * @throws IllegalArgumentException if<code>null</code> is parsed as 	 * configuration 	 */
+comment|/**      * Initialise the Yard configuration based on a parsed configuration. Usually      * used on the context of an OSGI environment in the activate method.      * @param config the configuration usually parsed within an OSGI activate      * method      * @throws ConfigurationException if the configuration is incomplete of      * some values are not valid      * @throws IllegalArgumentException if<code>null</code> is parsed as      * configuration      */
 specifier|public
 name|DefaultYardConfig
 parameter_list|(
@@ -155,7 +155,7 @@ name|validateConfig
 parameter_list|()
 throws|throws
 name|ConfigurationException
-block|{ 	}
+block|{     }
 block|}
 end_class
 

@@ -98,7 +98,7 @@ name|value
 operator|=
 name|value
 expr_stmt|;
-comment|/* 		 * Implementation NOTE: 		 *   We need to use a LinkedHashSet here to 		 *    1) ensure that there are no duplicates and 		 *    2) ensure ordering of the parsed constraints 		 *   Both is important: Duplicates might result in necessary calculations 		 *   and ordering might be important for users that expect that the  		 *   dataType parsed as first is the first used for processing (e.g. 		 *   when specifying acceptable data types for a field, one would expect 		 *   that values that need to be converted are preferable converted to  		 *   the datatype specified as first) 		 */
+comment|/*          * Implementation NOTE:          *   We need to use a LinkedHashSet here to          *    1) ensure that there are no duplicates and          *    2) ensure ordering of the parsed constraints          *   Both is important: Duplicates might result in necessary calculations          *   and ordering might be important for users that expect that the          *   dataType parsed as first is the first used for processing (e.g.          *   when specifying acceptable data types for a field, one would expect          *   that values that need to be converted are preferable converted to          *   the datatype specified as first)          */
 name|this
 operator|.
 name|dataTypeUris
@@ -172,13 +172,13 @@ comment|//it's questionable if we should do that at this position, because
 comment|//components that process that constraint might have better ways to
 comment|//do that and than they can not know if the user parsed a data type or
 comment|//this code has calculated it based on the java type of the value!
-comment|//		if(dataTypeUris.isEmpty()){ //meaning value != null
-comment|//			for(DataTypeEnum dataType : DataTypeEnum.getAllDataTypes(value.getClass())){
-comment|//				dataTypeUris.add(dataType.getUri());
-comment|//			}
-comment|//		}
+comment|//        if(dataTypeUris.isEmpty()){ //meaning value != null
+comment|//            for(DataTypeEnum dataType : DataTypeEnum.getAllDataTypes(value.getClass())){
+comment|//                dataTypeUris.add(dataType.getUri());
+comment|//            }
+comment|//        }
 block|}
-comment|/** 	 * Getter for the value 	 * @return the value or<code>null</code> if the value is not constraint 	 */
+comment|/**      * Getter for the value      * @return the value or<code>null</code> if the value is not constraint      */
 specifier|public
 specifier|final
 name|Object
@@ -189,7 +189,7 @@ return|return
 name|value
 return|;
 block|}
-comment|/** 	 * Getter for the list of the parsed data types URIs 	 * @return the list of dataType URIs or an empty list if not defined. 	 */
+comment|/**      * Getter for the list of the parsed data types URIs      * @return the list of dataType URIs or an empty list if not defined.      */
 specifier|public
 specifier|final
 name|Collection

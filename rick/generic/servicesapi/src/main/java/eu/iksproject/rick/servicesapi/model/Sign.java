@@ -40,13 +40,13 @@ specifier|public
 interface|interface
 name|Sign
 block|{
-comment|/** 	 * Enumeration over the different types of Signs defined by the RICK 	 * @author Rupert Westenthaler 	 * 	 */
+comment|/**      * Enumeration over the different types of Signs defined by the RICK      * @author Rupert Westenthaler      *      */
 specifier|public
 specifier|static
 enum|enum
 name|SignTypeEnum
 block|{
-comment|/** 		 * The Sign - the default - type 		 */
+comment|/**          * The Sign - the default - type          */
 name|Sign
 argument_list|(
 name|RdfResourceEnum
@@ -57,7 +57,7 @@ name|getUri
 argument_list|()
 argument_list|)
 block|,
-comment|/**  		 *  Symbols are Signs defined by this Rick instance 		 */
+comment|/**          *  Symbols are Signs defined by this Rick instance          */
 name|Symbol
 argument_list|(
 name|RdfResourceEnum
@@ -68,7 +68,7 @@ name|getUri
 argument_list|()
 argument_list|)
 block|,
-comment|/** 		 * EntityMappings are signs that do map Signs defined/managed by referenced 		 * Sites to Symbols. 		 */
+comment|/**          * EntityMappings are signs that do map Signs defined/managed by referenced          * Sites to Symbols.          */
 name|EntityMapping
 argument_list|(
 name|RdfResourceEnum
@@ -78,7 +78,7 @@ operator|.
 name|getUri
 argument_list|()
 argument_list|)
-block|, 		;
+block|,         ;
 specifier|private
 name|String
 name|uri
@@ -88,7 +88,7 @@ parameter_list|(
 name|String
 name|uri
 parameter_list|)
-block|{ 			 		}
+block|{          }
 specifier|public
 name|String
 name|getUri
@@ -110,7 +110,7 @@ name|uri
 return|;
 block|}
 block|}
-comment|/** 	 * The default type of a {@link Sign} (set to {@link SignTypeEnum#Sign}) 	 */
+comment|/**      * The default type of a {@link Sign} (set to {@link SignTypeEnum#Sign})      */
 name|SignTypeEnum
 name|DEFAULT_SIGN_TYPE
 init|=
@@ -118,7 +118,7 @@ name|SignTypeEnum
 operator|.
 name|Sign
 decl_stmt|;
-comment|/** 	 * The id (signifier) of this  sign. 	 * @return the id 	 */
+comment|/**      * The id (signifier) of this  sign.      * @return the id      */
 name|String
 name|getId
 parameter_list|()
@@ -133,19 +133,19 @@ operator|.
 name|getUri
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Getter for the id of the referenced Site that defines/manages this sign.<br> 	 * Note that the Rick allows that different referenced Sites  	 * provide representations for the same id ({@link Sign#getId()}).  	 * Therefore there may be different entity instances of {@link Sign} with  	 * the same id but different representations.<br> 	 * In other word different referenced Sites may manage representations by 	 * using the same id.<br> 	 * Note also, that the RICK assumes that all such representations 	 * are equivalent and interchangeable. Therefore Methods that searches for 	 * Entities on different Sites will return the first hit without searching 	 * for any others. 	 * @return the site of this Sign 	 */
+comment|/**      * Getter for the id of the referenced Site that defines/manages this sign.<br>      * Note that the Rick allows that different referenced Sites      * provide representations for the same id ({@link Sign#getId()}).      * Therefore there may be different entity instances of {@link Sign} with      * the same id but different representations.<br>      * In other word different referenced Sites may manage representations by      * using the same id.<br>      * Note also, that the RICK assumes that all such representations      * are equivalent and interchangeable. Therefore Methods that searches for      * Entities on different Sites will return the first hit without searching      * for any others.      * @return the site of this Sign      */
 name|String
 name|getSignSite
 parameter_list|()
 function_decl|;
-comment|//	/**
-comment|//	 * Getter for the type of a sign. Subclasses may restrict values of this
-comment|//	 * property. (e.g. {@link #getType()} for {@link Symbol} always returns
-comment|//	 * {@link SignTypeEnum#Symbol})
-comment|//	 * @return the type
-comment|//	 */
-comment|//	SignTypeEnum getType();
-comment|/** 	 * Getter for the {@link Representation} of that sign as defined/managed by the site 	 * @return the representation 	 */
+comment|//    /**
+comment|//     * Getter for the type of a sign. Subclasses may restrict values of this
+comment|//     * property. (e.g. {@link #getType()} for {@link Symbol} always returns
+comment|//     * {@link SignTypeEnum#Symbol})
+comment|//     * @return the type
+comment|//     */
+comment|//    SignTypeEnum getType();
+comment|/**      * Getter for the {@link Representation} of that sign as defined/managed by the site      * @return the representation      */
 name|Representation
 name|getRepresentation
 parameter_list|()

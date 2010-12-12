@@ -34,7 +34,7 @@ name|UnsupportedQueryTypeException
 extends|extends
 name|IllegalArgumentException
 block|{
-comment|/** 	 * Default serial version id 	 */
+comment|/**      * Default serial version id      */
 specifier|private
 specifier|static
 specifier|final

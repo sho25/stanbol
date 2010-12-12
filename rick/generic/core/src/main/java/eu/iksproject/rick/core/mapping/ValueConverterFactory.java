@@ -250,7 +250,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is used to convert values to a specific dataType. By default the  * Factory comes initialised with converters for all dataTypes defined in the  * {@link DataTypeEnum}.<p>  * When the default configuration is sufficient, than one should use the  * static {@link #getInstance()} methods. When one needs to change the configuration  * it is advised to create an own instance by using the   * {@link #ValueConverterFactory(ValueFactory)}.<p>   * Calling {@link #registerConverter(ValueConverter)} on an instance created by  * the static {@link #getInstance()} methods will result in an  * {@link IllegalStateException}.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * This class is used to convert values to a specific dataType. By default the  * Factory comes initialised with converters for all dataTypes defined in the  * {@link DataTypeEnum}.<p>  * When the default configuration is sufficient, than one should use the  * static {@link #getInstance()} methods. When one needs to change the configuration  * it is advised to create an own instance by using the  * {@link #ValueConverterFactory(ValueFactory)}.<p>  * Calling {@link #registerConverter(ValueConverter)} on an instance created by  * the static {@link #getInstance()} methods will result in an  * {@link IllegalStateException}.  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -258,7 +258,7 @@ specifier|public
 class|class
 name|ValueConverterFactory
 block|{
-comment|/** 	 * Map with the instances. Weak references are used for both keys and values. 	 */
+comment|/**      * Map with the instances. Weak references are used for both keys and values.      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -293,7 +293,7 @@ literal|true
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Getter for the ValueConverterFactory instance using the default {@link ValueFactory} 	 * @return the default ValueConverterFactory instance 	 */
+comment|/**      * Getter for the ValueConverterFactory instance using the default {@link ValueFactory}      * @return the default ValueConverterFactory instance      */
 specifier|public
 specifier|static
 name|ValueConverterFactory
@@ -307,7 +307,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Getter for the ValueConverterFactory instance using a specific 	 * {@link ValueFactory}.  	 * @param valueFactory the valueFatory 	 * @return the ValueConverterFactory for the parsed {@link ValueFactory}. 	 */
+comment|/**      * Getter for the ValueConverterFactory instance using a specific      * {@link ValueFactory}.      * @param valueFactory the valueFatory      * @return the ValueConverterFactory for the parsed {@link ValueFactory}.      */
 specifier|public
 specifier|static
 name|ValueConverterFactory
@@ -380,7 +380,7 @@ name|converter
 return|;
 block|}
 block|}
-comment|/** 	 * The {@link ValueFactory} used by converters to create instances for converted 	 * values. 	 */
+comment|/**      * The {@link ValueFactory} used by converters to create instances for converted      * values.      */
 specifier|protected
 specifier|final
 name|ValueFactory
@@ -392,7 +392,7 @@ name|readonly
 init|=
 literal|false
 decl_stmt|;
-comment|/** 	 * Creates a new factory instance that supports conversions for all 	 * datatypes defines in {@link DataTypeEnum}.<p> 	 * Please note the static {@link #getInstance(ValueFactory)} methods that 	 * should be used instead if one do not plan to change the configuration of 	 * the created instance. 	 * @param valueFactory the {@link ValueFactory} instance to be used to 	 * create {@link Text} and {@link Reference} instances. If<code>null</code> 	 * the {@link InMemoryValueFactory} is used. 	 */
+comment|/**      * Creates a new factory instance that supports conversions for all      * datatypes defines in {@link DataTypeEnum}.<p>      * Please note the static {@link #getInstance(ValueFactory)} methods that      * should be used instead if one do not plan to change the configuration of      * the created instance.      * @param valueFactory the {@link ValueFactory} instance to be used to      * create {@link Text} and {@link Reference} instances. If<code>null</code>      * the {@link InMemoryValueFactory} is used.      */
 specifier|public
 name|ValueConverterFactory
 parameter_list|(
@@ -408,7 +408,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Internally used to ensure readonly state for instances created by the 	 * static {@link #getInstance(ValueFactory)} methods. 	 * @see #ValueConverterFactory(ValueFactory) 	 */
+comment|/**      * Internally used to ensure readonly state for instances created by the      * static {@link #getInstance(ValueFactory)} methods.      * @see #ValueConverterFactory(ValueFactory)      */
 specifier|private
 name|ValueConverterFactory
 parameter_list|(
@@ -455,7 +455,7 @@ operator|=
 name|readonly
 expr_stmt|;
 block|}
-comment|/** 	 * Populates the factory with the default configuration that supports all 	 * {@link DataTypeEnum} entries. 	 */
+comment|/**      * Populates the factory with the default configuration that supports all      * {@link DataTypeEnum} entries.      */
 specifier|private
 name|void
 name|init
@@ -604,8 +604,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//	Map<Class<?>,ValueConverter<?>> type2converter = new HashMap<Class<?>, ValueConverter<?>>();
-comment|/** 	 * Registers a converter for the {@link ValueConverter#getDataType()}. If 	 * a converter for this datatype is already present, than it is replaced by 	 * this one. 	 */
+comment|//    Map<Class<?>,ValueConverter<?>> type2converter = new HashMap<Class<?>, ValueConverter<?>>();
+comment|/**      * Registers a converter for the {@link ValueConverter#getDataType()}. If      * a converter for this datatype is already present, than it is replaced by      * this one.      */
 specifier|protected
 name|void
 name|registerConverter
@@ -645,10 +645,10 @@ name|converter
 argument_list|)
 expr_stmt|;
 block|}
-comment|//	public<T> ValueConverter<T> getConverter(Class<T> javaType){
-comment|//		return null;
-comment|//	}
-comment|/** 	 * Getter for the converter of the parsed datatype uri. 	 * @param the uri of the datatype. For datatypes registered in the  	 *   {@link DataTypeEnum} the {@link DataTypeEnum#getUri()} should be used. 	 * @return the converter or<code>null</code> if no converter is present for 	 * the parsed datatype uri. 	 */
+comment|//    public<T> ValueConverter<T> getConverter(Class<T> javaType){
+comment|//        return null;
+comment|//    }
+comment|/**      * Getter for the converter of the parsed datatype uri.      * @param the uri of the datatype. For datatypes registered in the      *   {@link DataTypeEnum} the {@link DataTypeEnum#getUri()} should be used.      * @return the converter or<code>null</code> if no converter is present for      * the parsed datatype uri.      */
 specifier|public
 name|ValueConverter
 argument_list|<
@@ -669,7 +669,7 @@ name|dataTypeUri
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Converts the parsed value to the specified dataType. 	 * @param value the value to convert.<code>null</code> is parsed to the 	 *    converter and may be supported for some datatypes. If not supported, 	 *    than parsing<code>null</code> results in<code>null</code> to be 	 *    returned. 	 * @param dataTypeUri the URI of the dataType 	 * @return the converted value or<code>null</code> if no conversion was 	 * possible. 	 * @throws IllegalArgumentException if the parsed dataTyeUri is<code>null</code> 	 */
+comment|/**      * Converts the parsed value to the specified dataType.      * @param value the value to convert.<code>null</code> is parsed to the      *    converter and may be supported for some datatypes. If not supported,      *    than parsing<code>null</code> results in<code>null</code> to be      *    returned.      * @param dataTypeUri the URI of the dataType      * @return the converted value or<code>null</code> if no conversion was      * possible.      * @throws IllegalArgumentException if the parsed dataTyeUri is<code>null</code>      */
 specifier|public
 name|Object
 name|convert
@@ -726,8 +726,8 @@ else|:
 literal|null
 return|;
 block|}
-comment|/*-------------------------------------------------------------------------- 	 *    Implementation of the ValueConverters for the dataTypes defined by 	 *    DataTypeEnum 	 * ------------------------------------------------------------------------- 	 */
-comment|/** 	 * This Interface defines an simple converter interface that allows a 	 * registry to get metadata about the type the converter can create and 	 * second the {@link #convert(Object)} method that is called to convert 	 * to the target type. 	 * @author Rupert Westenthaler 	 * 	 * @param<T> the type of created objects 	 */
+comment|/*--------------------------------------------------------------------------      *    Implementation of the ValueConverters for the dataTypes defined by      *    DataTypeEnum      * -------------------------------------------------------------------------      */
+comment|/**      * This Interface defines an simple converter interface that allows a      * registry to get metadata about the type the converter can create and      * second the {@link #convert(Object)} method that is called to convert      * to the target type.      * @author Rupert Westenthaler      *      * @param<T> the type of created objects      */
 specifier|public
 specifier|static
 interface|interface
@@ -736,12 +736,12 @@ parameter_list|<
 name|T
 parameter_list|>
 block|{
-comment|/** 		 * The URI of the dataType created by this converter 		 * @return the data type 		 */
+comment|/**          * The URI of the dataType created by this converter          * @return the data type          */
 name|String
 name|getDataType
 parameter_list|()
 function_decl|;
-comment|/** 		 * Converts the Value or returns<code>null</code> if the conversion was not 		 * possible. 		 * @param value the value to convert.<code>null</code> is parsed to the 		 *    converter and may be supported for some datatypes. If not supported, 		 *    than parsing<code>null</code> results in<code>null</code> to be 		 *    returned. 		 * @return the converted value or<code>null</code> if the conversion was not 		 * possible 		 */
+comment|/**          * Converts the Value or returns<code>null</code> if the conversion was not          * possible.          * @param value the value to convert.<code>null</code> is parsed to the          *    converter and may be supported for some datatypes. If not supported,          *    than parsing<code>null</code> results in<code>null</code> to be          *    returned.          * @return the converted value or<code>null</code> if the conversion was not          * possible          */
 name|T
 name|convert
 parameter_list|(
@@ -2020,7 +2020,7 @@ specifier|private
 name|boolean
 name|nullAsZeroLengthDuration
 decl_stmt|;
-comment|/** 		 * Creates a converter for durations 		 */
+comment|/**          * Creates a converter for durations          */
 specifier|public
 name|DurationConverter
 parameter_list|()
@@ -2031,7 +2031,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 		 * Creates a converter for durations 		 * @param nullAsZeroLengthDuration if true, than null values parsed to the 		 * {@link #convert(Object)} are interpreted as durations with zero length. 		 */
+comment|/**          * Creates a converter for durations          * @param nullAsZeroLengthDuration if true, than null values parsed to the          * {@link #convert(Object)} are interpreted as durations with zero length.          */
 specifier|public
 name|DurationConverter
 parameter_list|(
@@ -2126,7 +2126,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/** 		 * Getter for the state if a null value should be interpreted as a 		 * duration with zero length. 		 * @return the state 		 */
+comment|/**          * Getter for the state if a null value should be interpreted as a          * duration with zero length.          * @return the state          */
 specifier|public
 specifier|final
 name|boolean
@@ -2137,7 +2137,7 @@ return|return
 name|nullAsZeroLengthDuration
 return|;
 block|}
-comment|/** 		 * Setter for the state if a null value should be interpreted as a 		 * duration with zero length. 		 * @param nullAsZeroLengthDuration the new state 		 */
+comment|/**          * Setter for the state if a null value should be interpreted as a          * duration with zero length.          * @param nullAsZeroLengthDuration the new state          */
 specifier|public
 specifier|final
 name|void

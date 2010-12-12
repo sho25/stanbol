@@ -551,7 +551,7 @@ name|ReferencedSite
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Map holding the mapping of the site ID to the referencedSite Object 	 * TODO: in principle it could be possible that two instances of  	 * {@link ReferencedSite} could be configured to use the same ID 	 */
+comment|/**      * Map holding the mapping of the site ID to the referencedSite Object      * TODO: in principle it could be possible that two instances of      * {@link ReferencedSite} could be configured to use the same ID      */
 specifier|private
 specifier|final
 name|Map
@@ -576,7 +576,7 @@ argument_list|>
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Map holding the mappings between entityPrefixes and referenced sites 	 */
+comment|/**      * Map holding the mappings between entityPrefixes and referenced sites      */
 specifier|private
 specifier|final
 name|Map
@@ -607,7 +607,7 @@ argument_list|>
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * This List is used for binary searches within the prefixes to find the 	 * {@link ReferencedSite} to search for a {@link #getSign(String)} 	 * request.<b> 	 * NOTE: Every access to this list MUST BE synchronised to {@link #prefixMap} 	 * TODO: I am quite sure, that there is some ioUtils class that provides 	 * both a Map and an sorted List over the keys! 	 */
+comment|/**      * This List is used for binary searches within the prefixes to find the      * {@link ReferencedSite} to search for a {@link #getSign(String)}      * request.<b>      * NOTE: Every access to this list MUST BE synchronised to {@link #prefixMap}      * TODO: I am quite sure, that there is some ioUtils class that provides      * both a Map and an sorted List over the keys!      */
 specifier|private
 specifier|final
 name|List
@@ -815,7 +815,7 @@ name|referencedSite
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Adds the prefixes of the parsed Site to the Map holding the according mappings 	 * @param referencedSite 	 */
+comment|/**      * Adds the prefixes of the parsed Site to the Map holding the according mappings      * @param referencedSite      */
 specifier|private
 name|void
 name|addEntityPrefixes
@@ -945,7 +945,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** 	 * Removes the prefixes of the parsed Site to the Map holding the according mappings 	 * @param referencedSite 	 */
+comment|/**      * Removes the prefixes of the parsed Site to the Map holding the according mappings      * @param referencedSite      */
 specifier|private
 name|void
 name|removeEntityPrefixes
@@ -1149,7 +1149,7 @@ operator|<
 literal|0
 condition|)
 block|{
-comment|/** 				 * Example: 				 * ["a","b"]<- "bc" 				 * binary search returns -3 (because insert point would be +2) 				 * to find the prefix we need the insert point-1 -> pos 1 				 *  				 * Example2: 				 * []<- "bc" 				 * binary search returns -1 (because insert point would be 0) 				 * to find the prefix we need the insert point-1 -> pos -1 				 * therefore we need to check for negative prefixPos and return 				 * an empty list! 				 */
+comment|/**                  * Example:                  * ["a","b"]<- "bc"                  * binary search returns -3 (because insert point would be +2)                  * to find the prefix we need the insert point-1 -> pos 1                  *                  * Example2:                  * []<- "bc"                  * binary search returns -1 (because insert point would be 0)                  * to find the prefix we need the insert point-1 -> pos -1                  * therefore we need to check for negative prefixPos and return                  * an empty list!                  */
 name|prefixPos
 operator|=
 name|Math

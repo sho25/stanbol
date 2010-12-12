@@ -60,7 +60,7 @@ specifier|private
 name|T
 name|next
 decl_stmt|;
-comment|/** 	 * Constructs an iterator that selects only elements of the parsed iterator  	 * that are assignable to the parse type 	 * @param it the base iterator 	 * @param type the type all elements of this Iterator need to be assignable to. 	 */
+comment|/**      * Constructs an iterator that selects only elements of the parsed iterator      * that are assignable to the parse type      * @param it the base iterator      * @param type the type all elements of this Iterator need to be assignable to.      */
 specifier|public
 name|TypeSaveIterator
 parameter_list|(
