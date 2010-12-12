@@ -940,7 +940,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Class indexes Entities based on Information provided in a RDF Graph  *   * Features (currently Brainstorming)<ul>  *<li> Parse also Archive Files (nobody likes to extract such stuff)  *<li> Parse different RDF formats (esay with Clerezza)  *<li> Replace/Append Mode: In replace Mode existing data for an Entity are  *      replaced in the Yard. In the Append Mode first Data for a found Entity  *      are loaded and than new data are added. The Append Mode is important when  *      working with dumps that split up data not by entity but by properties  *<li> Support for the RICK Representation Mapping Infrastructure (currently  *      this means using the {@link FieldMapper}  *<li> Support for filtering Entities based on rdf:type (will be in future   *      version supported by the RICK Representation Mapping Infrastructure)  *<li> Entity Rank support: It is not feasible to calculate the rankings in a  *      generic fashion. Therefore this implementation supports two different  *      ways. First it uses {@link RdfResourceEnum#signRank} relations in the  *      parsed RDF Data and secondly it allows to provide entity rank information  *      by parsing a map with the id as key and the rank as value by using the  *      {@link #KEY_ENTITY_RANKINGS} in the configuration. Mappings parsed by the  *      map will override mappings in the RDF data.  *<li>  *<li>  *<li>  *</ul>  *  Implementation Notes:<ul>  *<li> The Idea was to use the Clerezza TdbTcProvider and the JenaParserProvider  *      outside of an OSGI Environment and than use the Clerezza Yard to  *      access Resources to be indexed directly as Representations to perform  *      the field mappings by using the parsed {@link FieldMapper}.  *<li> I am a bit worried with the ParsingProvide} because the interface  *      allows no streaming. One needs to check if this causes problems for  *      very big RDF files.<br>  *    	After looking into the source code of Clerezza, I am even more worried!  *      The Parser creates an SimpleMGraph and wrapped it with an  *      Jena Adapter. Than all Triples are parsed into memory. So I do not only  *      have the triples in memory but also the instances of the jena adapter.  *<li> Maybe it is better to directly use Jena, because Clerezza does not support  *      COUNT(..) for SPARQL queries. Without that feature it would be hard to  *      support page ranks!<br>  *      Maybe I can use both, because using a Clerezza wrapper over Jena would  *      have the advantage to directly use the ClerezzaYard for creating  *      RDF Representations for resource to be indexed!<br>  *      Parsing and especially SPARQL queries would be better to do directly  *      via the Jena API!<p>  *      This should be no problem, because indexing is a read only operation!  *<li> However based on this findings I plan now to implement the loading of the   *      RDF data to directly use the Jena TDB API because Clerezza seams not to  *      be designed to handle the loading of RDF datasets that can not be   *      kept in memory.<br>  *</ul>  *   * @author Rupert Westenthaler  * @author ogrisel (as parts of that code is taken from iks-autotagger)  *  */
+comment|/**  * This Class indexes Entities based on Information provided in a RDF Graph  *  * Features (currently Brainstorming)<ul>  *<li> Parse also Archive Files (nobody likes to extract such stuff)  *<li> Parse different RDF formats (esay with Clerezza)  *<li> Replace/Append Mode: In replace Mode existing data for an Entity are  *      replaced in the Yard. In the Append Mode first Data for a found Entity  *      are loaded and than new data are added. The Append Mode is important when  *      working with dumps that split up data not by entity but by properties  *<li> Support for the RICK Representation Mapping Infrastructure (currently  *      this means using the {@link FieldMapper}  *<li> Support for filtering Entities based on rdf:type (will be in future  *      version supported by the RICK Representation Mapping Infrastructure)  *<li> Entity Rank support: It is not feasible to calculate the rankings in a  *      generic fashion. Therefore this implementation supports two different  *      ways. First it uses {@link RdfResourceEnum#signRank} relations in the  *      parsed RDF Data and secondly it allows to provide entity rank information  *      by parsing a map with the id as key and the rank as value by using the  *      {@link #KEY_ENTITY_RANKINGS} in the configuration. Mappings parsed by the  *      map will override mappings in the RDF data.  *<li>  *<li>  *<li>  *</ul>  *  Implementation Notes:<ul>  *<li> The Idea was to use the Clerezza TdbTcProvider and the JenaParserProvider  *      outside of an OSGI Environment and than use the Clerezza Yard to  *      access Resources to be indexed directly as Representations to perform  *      the field mappings by using the parsed {@link FieldMapper}.  *<li> I am a bit worried with the ParsingProvide} because the interface  *      allows no streaming. One needs to check if this causes problems for  *      very big RDF files.<br>  *        After looking into the source code of Clerezza, I am even more worried!  *      The Parser creates an SimpleMGraph and wrapped it with an  *      Jena Adapter. Than all Triples are parsed into memory. So I do not only  *      have the triples in memory but also the instances of the jena adapter.  *<li> Maybe it is better to directly use Jena, because Clerezza does not support  *      COUNT(..) for SPARQL queries. Without that feature it would be hard to  *      support page ranks!<br>  *      Maybe I can use both, because using a Clerezza wrapper over Jena would  *      have the advantage to directly use the ClerezzaYard for creating  *      RDF Representations for resource to be indexed!<br>  *      Parsing and especially SPARQL queries would be better to do directly  *      via the Jena API!<p>  *      This should be no problem, because indexing is a read only operation!  *<li> However based on this findings I plan now to implement the loading of the  *      RDF data to directly use the Jena TDB API because Clerezza seams not to  *      be designed to handle the loading of RDF datasets that can not be  *      kept in memory.<br>  *</ul>  *  * @author Rupert Westenthaler  * @author ogrisel (as parts of that code is taken from iks-autotagger)  *  */
 end_comment
 
 begin_class
@@ -948,7 +948,7 @@ specifier|public
 class|class
 name|RdfIndexer
 block|{
-comment|/** 	 * The indexing mode defines if the RDF data are appended to existing 	 * {@link Representation}s in the target {@link Yard} or if {@link Representation} 	 * are replaced with RDF data used for indexing! 	 * @author Rupert Westenthaler 	 * 	 */
+comment|/**      * The indexing mode defines if the RDF data are appended to existing      * {@link Representation}s in the target {@link Yard} or if {@link Representation}      * are replaced with RDF data used for indexing!      * @author Rupert Westenthaler      *      */
 specifier|public
 specifier|static
 enum|enum
@@ -1060,7 +1060,7 @@ argument_list|(
 literal|"<%s> ?field ?value ."
 argument_list|)
 expr_stmt|;
-comment|//	    cqb.append("  OPTIONAL {?incoming ?relationship<%s> . } .");
+comment|//        cqb.append("  OPTIONAL {?incoming ?relationship<%s> . } .");
 name|cqb
 operator|.
 name|append
@@ -1088,7 +1088,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Key used to parse the Yard used for indexing 	 */
+comment|/**      * Key used to parse the Yard used for indexing      */
 specifier|public
 specifier|static
 specifier|final
@@ -1097,7 +1097,7 @@ name|KEY_YARD
 init|=
 literal|"eu.iksproject.rick.indexing.yard"
 decl_stmt|;
-comment|/** 	 * Key used to parse reference(s) to the RDF files to be indexed!<p> 	 * This supports both single values as well as {@link Iterable}s over several 	 * values. All parsed sources are loaded within one TripleStore and are 	 * indexed at once! Use several {@link RdfIndexer} instances to index them 	 * one after the other. 	 */
+comment|/**      * Key used to parse reference(s) to the RDF files to be indexed!<p>      * This supports both single values as well as {@link Iterable}s over several      * values. All parsed sources are loaded within one TripleStore and are      * indexed at once! Use several {@link RdfIndexer} instances to index them      * one after the other.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1106,7 +1106,7 @@ name|KEY_RDF_FILES
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.rdfFiles"
 decl_stmt|;
-comment|/** 	 * Key used to configure the fieldMappings used to determine what properties 	 * are indexed for entities. Values must implement {@link Iterable} and the 	 * {@link Object#toString()} is used to parse the different mappings. 	 */
+comment|/**      * Key used to configure the fieldMappings used to determine what properties      * are indexed for entities. Values must implement {@link Iterable} and the      * {@link Object#toString()} is used to parse the different mappings.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1115,7 +1115,7 @@ name|KEY_FIELD_MAPPINGS
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.fieldMappings"
 decl_stmt|;
-comment|/** 	 * Key used to configure the directory to store RDF data needed during the 	 * indexing process. This data might be reused when resuming an indexing 	 * process. 	 */
+comment|/**      * Key used to configure the directory to store RDF data needed during the      * indexing process. This data might be reused when resuming an indexing      * process.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1124,7 +1124,7 @@ name|KEY_RDF_STORE_DIR
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.indexingDir"
 decl_stmt|;
-comment|/** 	 * Key used to configure the name of the model used to store the parsed 	 * RDF data before the indexing process. Parsing this name can be used to 	 * resume indexing based on previously parsed RDF data. 	 */
+comment|/**      * Key used to configure the name of the model used to store the parsed      * RDF data before the indexing process. Parsing this name can be used to      * resume indexing based on previously parsed RDF data.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1133,7 +1133,7 @@ name|KEY_MODEL_NAME
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.modelName"
 decl_stmt|;
-comment|/** 	 * Key used to parse the Iterable over all the rdf:types to be indexed. If 	 * not parsed or set to<code>null</code> or an empty list, than all Resources are 	 * accepted! 	 * The {@link Object#toString()} method is used on elements to get the actual type! 	 */
+comment|/**      * Key used to parse the Iterable over all the rdf:types to be indexed. If      * not parsed or set to<code>null</code> or an empty list, than all Resources are      * accepted!      * The {@link Object#toString()} method is used on elements to get the actual type!      */
 specifier|public
 specifier|static
 specifier|final
@@ -1142,7 +1142,7 @@ name|KEY_RDF_TYPES
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.indexedTypes"
 decl_stmt|;
-comment|/** 	 * Key used to parse the indexing mode. Values should be of instance {@link IndexingMode} 	 * or the {@link Object#toString()} value should be a member of this enum! 	 */
+comment|/**      * Key used to parse the indexing mode. Values should be of instance {@link IndexingMode}      * or the {@link Object#toString()} value should be a member of this enum!      */
 specifier|public
 specifier|static
 specifier|final
@@ -1151,7 +1151,7 @@ name|KEY_INDEXING_MODE
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.indexingMode"
 decl_stmt|;
-comment|/** 	 * If<code>true</code> than no RDF data are loaded. Instead it is assumed, that 	 * the Graph of the parsed {@link #KEY_MODEL_NAME} already contains all the needed 	 * data!<p> 	 * This can be useful if one first wants to index rdf:type A and than rdf:type B 	 * based on the same set of data 	 */
+comment|/**      * If<code>true</code> than no RDF data are loaded. Instead it is assumed, that      * the Graph of the parsed {@link #KEY_MODEL_NAME} already contains all the needed      * data!<p>      * This can be useful if one first wants to index rdf:type A and than rdf:type B      * based on the same set of data      */
 specifier|public
 specifier|static
 specifier|final
@@ -1160,7 +1160,7 @@ name|KEY_SKIP_READ
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.skipRead"
 decl_stmt|;
-comment|/** 	 * The number of {@link Representation}s stored at once in the SolrYard! 	 */
+comment|/**      * The number of {@link Representation}s stored at once in the SolrYard!      */
 specifier|public
 specifier|static
 specifier|final
@@ -1169,7 +1169,7 @@ name|KEY_CHUNK_SIZE
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.chunkSize"
 decl_stmt|;
-comment|/** 	 * Can be used to parse a map with {@link String} entity id, {@link Float} rank 	 * for entities.<p> 	 * Such values are added to Representations for the {@link RdfResourceEnum#signRank} 	 * field. 	 */
+comment|/**      * Can be used to parse a map with {@link String} entity id, {@link Float} rank      * for entities.<p>      * Such values are added to Representations for the {@link RdfResourceEnum#signRank}      * field.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1178,7 +1178,7 @@ name|KEY_ENTITY_RANKINGS
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.entityRankings"
 decl_stmt|;
-comment|/** 	 * Can be used to activate ignoring of Entities without a page rank 	 */
+comment|/**      * Can be used to activate ignoring of Entities without a page rank      */
 specifier|public
 specifier|static
 specifier|final
@@ -1187,7 +1187,7 @@ name|KEY_IGNORE_ENTITIES_WITHOUT_ENTITY_RANKING
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.ignoreEntitiesWithoutRankings"
 decl_stmt|;
-comment|/** 	 * If set to a value>= 0 this is used to exclude Entities with a lower or  	 * missing entity rank 	 */
+comment|/**      * If set to a value>= 0 this is used to exclude Entities with a lower or      * missing entity rank      */
 specifier|public
 specifier|static
 specifier|final
@@ -1196,7 +1196,7 @@ name|KEY_REQUIRED_ENTITY_RANKING
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.requiredRanking"
 decl_stmt|;
-comment|/** 	 * The rank for entities with a missing rank. This takes only effect if 	 * {@link #KEY_IGNORE_ENTITIES_WITHOUT_ENTITY_RANKING} is set to<code>false</code> 	 * (the default) 	 */
+comment|/**      * The rank for entities with a missing rank. This takes only effect if      * {@link #KEY_IGNORE_ENTITIES_WITHOUT_ENTITY_RANKING} is set to<code>false</code>      * (the default)      */
 specifier|public
 specifier|static
 specifier|final
@@ -1205,7 +1205,7 @@ name|KEY_DEFAULT_ENTITY_RANKING
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.defaultRanking"
 decl_stmt|;
-comment|/** 	 * Expert only: This allows to enable indexing based on the keys in the map parsed with the 	 * entity rankings. This will only index entities that are keys in that map. 	 * If no Map is parsed by {@link #KEY_ENTITY_RANKINGS}, than activating this mode 	 * will not be successful and a warning will be written.<p> 	 * This mode is about 50% slower than the usual indexing mode. Therefore this 	 * mode makes only sense id less than 50% of the entities are indexed. 	 */
+comment|/**      * Expert only: This allows to enable indexing based on the keys in the map parsed with the      * entity rankings. This will only index entities that are keys in that map.      * If no Map is parsed by {@link #KEY_ENTITY_RANKINGS}, than activating this mode      * will not be successful and a warning will be written.<p>      * This mode is about 50% slower than the usual indexing mode. Therefore this      * mode makes only sense id less than 50% of the entities are indexed.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1214,7 +1214,7 @@ name|KEY_ENTITY_RANKING_BASED_INDEXING_MODE
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.rankingBasedIndexingMode"
 decl_stmt|;
-comment|/** 	 * The resume Mode first checks if a Resource is already present in the parsed 	 * Yard. If this is the case, than the representation is not indexes again.<p> 	 * This mode is intended to resume indexing after stopping a previous call before 	 * finished. The default value = false. 	 */
+comment|/**      * The resume Mode first checks if a Resource is already present in the parsed      * Yard. If this is the case, than the representation is not indexes again.<p>      * This mode is intended to resume indexing after stopping a previous call before      * finished. The default value = false.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1256,7 +1256,7 @@ specifier|final
 name|String
 name|modelName
 decl_stmt|;
-comment|//	private final ParsingProvider parser = new JenaParserProvider();
+comment|//    private final ParsingProvider parser = new JenaParserProvider();
 comment|//private final WeightedTcProvider provider;
 specifier|private
 specifier|final
@@ -2653,7 +2653,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * This Method is used to process the RDF Data if all Resource can be indexed, 	 * because it provides the best performance. Mainly because it reads everything 	 * from a single stream and therefore gives the OS the best opportunities to 	 * optimise file access. 	 * @throws YardException 	 */
+comment|/**      * This Method is used to process the RDF Data if all Resource can be indexed,      * because it provides the best performance. Mainly because it reads everything      * from a single stream and therefore gives the OS the best opportunities to      * optimise file access.      * @throws YardException      */
 end_comment
 
 begin_function
@@ -4210,7 +4210,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * This method imports the data from an input stream. The name is used to 	 * guess the RDF format used. The stream may be come directly form a file, 	 * an archive, an URL or an entry in an ZIP file 	 * @param is 	 * @param name 	 */
+comment|/**      * This method imports the data from an input stream. The name is used to      * guess the RDF format used. The stream may be come directly form a file,      * an archive, an URL or an entry in an ZIP file      * @param is      * @param name      */
 end_comment
 
 begin_function
@@ -4349,13 +4349,13 @@ argument_list|(
 name|name
 argument_list|)
 decl_stmt|;
-comment|//		if (name.endsWith(".nt")) {
-comment|//			format = Lang.NTRIPLES;
-comment|//		} else if (name.endsWith(".n3")) {
-comment|//		    format = Lang.N3;
-comment|//		} else {// XML is the default format
-comment|//			format = Lang.RDFXML;
-comment|//		}
+comment|//        if (name.endsWith(".nt")) {
+comment|//            format = Lang.NTRIPLES;
+comment|//        } else if (name.endsWith(".n3")) {
+comment|//            format = Lang.N3;
+comment|//        } else {// XML is the default format
+comment|//            format = Lang.RDFXML;
+comment|//        }
 comment|//For N-Triple we can use the TDBLoader
 if|if
 condition|(
@@ -4468,7 +4468,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * Creates a triple destination for the default dataset of the  	 * {@link #indexingDataset}. 	 * This code is based on how Destinations are created in the {@link BulkLoader}, 	 * implementation. Note that  	 * {@link BulkLoader#loadDefaultGraph(DatasetGraphTDB, InputStream, boolean)} 	 * can not be used for formats other than {@link Lang#NTRIPLES} because it 	 * hard codes this format for loading data form the parsed InputStream. 	 * @return the destination! 	 */
+comment|/**      * Creates a triple destination for the default dataset of the      * {@link #indexingDataset}.      * This code is based on how Destinations are created in the {@link BulkLoader},      * implementation. Note that      * {@link BulkLoader#loadDefaultGraph(DatasetGraphTDB, InputStream, boolean)}      * can not be used for formats other than {@link Lang#NTRIPLES} because it      * hard codes this format for loading data form the parsed InputStream.      * @return the destination!      */
 end_comment
 
 begin_function
@@ -4632,7 +4632,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * The List used to cache up to {@link #indexingChunkSize} Representations 	 * before they are stored in the Yard.  	 */
+comment|/**      * The List used to cache up to {@link #indexingChunkSize} Representations      * before they are stored in the Yard.      */
 end_comment
 
 begin_decl_stmt
@@ -4732,7 +4732,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * As the last step we need to create the baseMappings configuration 	 * needed to used the Index as RICK full cache! 	 * @throws YardException would be really bad if after successfully indexing 	 * about 8 millions of documents we get an error from the yard at the 	 * last possible opportunity :( 	 */
+comment|/**      * As the last step we need to create the baseMappings configuration      * needed to used the Index as RICK full cache!      * @throws YardException would be really bad if after successfully indexing      * about 8 millions of documents we get an error from the yard at the      * last possible opportunity :(      */
 end_comment
 
 begin_function
@@ -4790,7 +4790,7 @@ comment|//----------------------------------------------------------------------
 end_comment
 
 begin_comment
-comment|//	private void indexResource2(Resource resource){
+comment|//    private void indexResource2(Resource resource){
 end_comment
 
 begin_comment
@@ -4802,147 +4802,147 @@ comment|//        final ResultSet resultSet = QueryExecutionFactory.create(q, in
 end_comment
 
 begin_comment
-comment|//		Representation source = vf.createRepresentation(resource.getURI());
+comment|//        Representation source = vf.createRepresentation(resource.getURI());
 end_comment
 
 begin_comment
-comment|//		while(resultSet.hasNext()){
+comment|//        while(resultSet.hasNext()){
 end_comment
 
 begin_comment
-comment|//			QuerySolution solution =resultSet.next();
+comment|//            QuerySolution solution =resultSet.next();
 end_comment
 
 begin_comment
-comment|//			RDFNode fieldNode = solution.get("field");
+comment|//            RDFNode fieldNode = solution.get("field");
 end_comment
 
 begin_comment
-comment|//			if(fieldNode.isURIResource()){
+comment|//            if(fieldNode.isURIResource()){
 end_comment
 
 begin_comment
-comment|//				String field = fieldNode.asResource().getURI();
+comment|//                String field = fieldNode.asResource().getURI();
 end_comment
 
 begin_comment
-comment|//				RDFNode value = solution.get("value");
+comment|//                RDFNode value = solution.get("value");
 end_comment
 
 begin_comment
-comment|//				if(value.isURIResource()){
+comment|//                if(value.isURIResource()){
 end_comment
 
 begin_comment
-comment|//					source.addReference(field, value.asResource().getURI());
+comment|//                    source.addReference(field, value.asResource().getURI());
 end_comment
 
 begin_comment
-comment|//				} else if(value.isLiteral()){
+comment|//                } else if(value.isLiteral()){
 end_comment
 
 begin_comment
-comment|//					Literal literal = value.asLiteral();
+comment|//                    Literal literal = value.asLiteral();
 end_comment
 
 begin_comment
-comment|//					if(literal.getDatatype() != null){
+comment|//                    if(literal.getDatatype() != null){
 end_comment
 
 begin_comment
-comment|//						Object literalValue;
+comment|//                        Object literalValue;
 end_comment
 
 begin_comment
-comment|//						try {
+comment|//                        try {
 end_comment
 
 begin_comment
-comment|//							literalValue = literal.getValue();
+comment|//                            literalValue = literal.getValue();
 end_comment
 
 begin_comment
-comment|//						} catch (DatatypeFormatException e) {
+comment|//                        } catch (DatatypeFormatException e) {
 end_comment
 
 begin_comment
-comment|//							log.warn(" Unable to convert "+literal.getLexicalForm()+" to "+literal.getDatatype()+"-> use lecicalForm");
+comment|//                            log.warn(" Unable to convert "+literal.getLexicalForm()+" to "+literal.getDatatype()+"-> use lecicalForm");
 end_comment
 
 begin_comment
-comment|//							literalValue = literal.getLexicalForm();
+comment|//                            literalValue = literal.getLexicalForm();
 end_comment
 
 begin_comment
-comment|//						}
+comment|//                        }
 end_comment
 
 begin_comment
-comment|//						if(literalValue instanceof BaseDatatype.TypedValue){
+comment|//                        if(literalValue instanceof BaseDatatype.TypedValue){
 end_comment
 
 begin_comment
-comment|//							source.add(field, literal.getLexicalForm());
+comment|//                            source.add(field, literal.getLexicalForm());
 end_comment
 
 begin_comment
-comment|//						} else {
+comment|//                        } else {
 end_comment
 
 begin_comment
-comment|//							source.add(field, literal.getValue());
+comment|//                            source.add(field, literal.getValue());
 end_comment
 
 begin_comment
-comment|//						}
+comment|//                        }
 end_comment
 
 begin_comment
-comment|//					} else {
+comment|//                    } else {
 end_comment
 
 begin_comment
-comment|//						String lang = literal.getLanguage();
+comment|//                        String lang = literal.getLanguage();
 end_comment
 
 begin_comment
-comment|//						if(lang != null&& lang.isEmpty()){
+comment|//                        if(lang != null&& lang.isEmpty()){
 end_comment
 
 begin_comment
-comment|//							lang = null;
+comment|//                            lang = null;
 end_comment
 
 begin_comment
-comment|//						}
+comment|//                        }
 end_comment
 
 begin_comment
-comment|//						source.addNaturalText(field, literal.getLexicalForm(),lang);
+comment|//                        source.addNaturalText(field, literal.getLexicalForm(),lang);
 end_comment
 
 begin_comment
-comment|//					}
+comment|//                    }
 end_comment
 
 begin_comment
-comment|//				}
+comment|//                }
 end_comment
 
 begin_comment
-comment|//			}
+comment|//            }
 end_comment
 
 begin_comment
-comment|//		}
+comment|//        }
 end_comment
 
 begin_comment
-comment|//		//log.info("S<source Resource:\n"+ModelUtils.getRepresentationInfo(source));
+comment|//        //log.info("S<source Resource:\n"+ModelUtils.getRepresentationInfo(source));
 end_comment
 
 begin_comment
-comment|//	}
+comment|//    }
 end_comment
 
 begin_function

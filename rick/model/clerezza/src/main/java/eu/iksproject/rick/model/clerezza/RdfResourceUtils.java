@@ -312,7 +312,7 @@ parameter_list|()
 block|{
 comment|/*do not create instances of Util Classes*/
 block|}
-comment|/** 	 * Defines Mappings for the DataTypes supported by the Clerezza {@link SimpleLiteralFactory}. 	 * If a xsd data type is mapped to<code>null</code> the string representation 	 * should be returnd as String (bypassing the {@link LiteralFactory}) 	 * TODO Replace this code with our own implementation of the {@link LiteralFactory}  	 *      and implement mappings for all DataTypes in {@link DataTypeEnum} 	 *      (Rupert Westenthaler, 2010-11-12) 	 * @author Rupert Westenthaler 	 */
+comment|/**      * Defines Mappings for the DataTypes supported by the Clerezza {@link SimpleLiteralFactory}.      * If a xsd data type is mapped to<code>null</code> the string representation      * should be returnd as String (bypassing the {@link LiteralFactory})      * TODO Replace this code with our own implementation of the {@link LiteralFactory}      *      and implement mappings for all DataTypes in {@link DataTypeEnum}      *      (Rupert Westenthaler, 2010-11-12)      * @author Rupert Westenthaler      */
 specifier|public
 specifier|static
 enum|enum
@@ -425,7 +425,7 @@ name|String
 operator|.
 name|class
 argument_list|)
-block|, 		;
+block|,         ;
 specifier|private
 specifier|static
 specifier|final
@@ -505,7 +505,7 @@ name|clazz
 return|;
 block|}
 block|}
-comment|/** 	 * Unmodifiable map containing the supported xsd data type mappings as defined 	 * by the {@link XsdDataTypeEnum}. 	 */
+comment|/**      * Unmodifiable map containing the supported xsd data type mappings as defined      * by the {@link XsdDataTypeEnum}.      */
 specifier|public
 specifier|static
 specifier|final
@@ -517,7 +517,7 @@ name|XsdDataTypeEnum
 argument_list|>
 name|XSD_DATATYPE_VALUE_MAPPING
 decl_stmt|;
-comment|/** 	 * Unmodifiable containing all xsd data types that can be converted to 	 * {@link Text} (without language). 	 */
+comment|/**      * Unmodifiable containing all xsd data types that can be converted to      * {@link Text} (without language).      */
 specifier|public
 specifier|static
 specifier|final
@@ -744,7 +744,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Creates a {@link Language} instance based on the parsed language string. 	 * @param lang the language (<code>null</code> is supported) 	 * @return the {@link Language} or<code>null</code> if<code>null</code> 	 * was parsed as language. 	 */
+comment|/**      * Creates a {@link Language} instance based on the parsed language string.      *      * @param lang the language (<code>null</code> is supported)      * @return the {@link Language} or<code>null</code> if<code>null</code>      * was parsed as language.      */
 specifier|public
 specifier|static
 name|Language
@@ -792,7 +792,7 @@ return|return
 name|parsedLanguage
 return|;
 block|}
-comment|/** 	 * Extracts the literal values for {@link Literal} instances 	 * @param literals the Iterator holding the literals 	 * @return The collection with the literal values 	 */
+comment|/**      * Extracts the literal values for {@link Literal} instances.      *      * @param literals the Iterator holding the literals      * @return The collection with the literal values      */
 specifier|public
 specifier|static
 name|Collection
@@ -852,7 +852,7 @@ return|return
 name|results
 return|;
 block|}
-comment|/** 	 * Extracts the literal values for the given list of languages (<code>null</code> 	 * is supported).<br> 	 * Multiple languages are supported by this method to allow parsing 	 *<code>null</code> in addition to a language. This is often used by applications 	 * to search for literals in a given language in addition to literals with no 	 * defined language.<br> 	 * As a convenience this methods adds literals with a language tag to the 	 * front of the list and literals with no language tag to the end. 	 * @param literals the iterator over the literals 	 * @param languages the array of languages (<code>null</code> is supported). 	 * @return The collection with all the literal values. 	 */
+comment|/**      * Extracts the literal values for the given list of languages (<code>null</code>      * is supported).      *<p>      * Multiple languages are supported by this method to allow parsing      *<code>null</code> in addition to a language. This is often used by applications      * to search for literals in a given language in addition to literals with no      * defined language.      *<p>      * As a convenience this methods adds literals with a language tag to the      * front of the list and literals with no language tag to the end.      *      * @param literals the iterator over the literals      * @param languages the array of languages (<code>null</code> is supported).      * @return The collection with all the literal values.      */
 specifier|public
 specifier|static
 name|List
@@ -1011,7 +1011,7 @@ return|return
 name|results
 return|;
 block|}
-comment|/** 	 * Extracts the unicode representation of URIs 	 * @param uriRefObjects iterator over URIs 	 * @return the unicode representation 	 */
+comment|/**      * Extracts the unicode representation of URIs.      *      * @param uriRefObjects iterator over URIs      * @return the unicode representation      */
 specifier|public
 specifier|static
 name|Collection
@@ -1066,7 +1066,7 @@ return|return
 name|results
 return|;
 block|}
-comment|/** 	 * Creates a {@link PlainLiteral} for the given literal value and language. 	 * This method creates an instance of {@link PlainLiteralImpl}.<br> 	 * TODO: It would be better to use something like the {@link LiteralFactory} 	 * to create {@link PlainLiteral} instances. However it seams there is no 	 * such functionality present. 	 * @param literalValue the value of the literal 	 * @param lang the language of the literal 	 * @return the Literal 	 */
+comment|/**      * Creates a {@link PlainLiteral} for the given literal value and language.      * This method creates an instance of {@link PlainLiteralImpl}.<br>      * TODO: It would be better to use something like the {@link LiteralFactory}      * to create {@link PlainLiteral} instances. However it seams there is no      * such functionality present.      *      * @param literalValue the value of the literal      * @param lang the language of the literal      * @return the Literal      */
 specifier|public
 specifier|static
 name|PlainLiteral
@@ -1079,12 +1079,9 @@ name|String
 name|lang
 parameter_list|)
 block|{
-return|return
-operator|new
-name|PlainLiteralImpl
-argument_list|(
-name|literalValue
-argument_list|,
+name|Language
+name|language
+init|=
 operator|(
 name|lang
 operator|!=
@@ -1105,6 +1102,14 @@ name|lang
 argument_list|)
 else|:
 literal|null
+decl_stmt|;
+return|return
+operator|new
+name|PlainLiteralImpl
+argument_list|(
+name|literalValue
+argument_list|,
+name|language
 argument_list|)
 return|;
 block|}

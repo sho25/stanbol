@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is used to define index types. It is only used to provide an unique  * ID and an human readable name for such types.<p>  * This type is necessary, because we assume that indices only support string   * values. Therefore any java type needs to be converted to its string  * representation. This type is used to preserve the type information.<p>  * How types are encoded within the index depends on the actual full text index  * used. The functionality of mapping of this index data types to the actual   * types as supported by the index is provided by the used {@link FieldMapper}    * implementation.<p>  * It is suggested to use the XSD Datatypes as id's for instances where suitable.  * see<a herf=http://www.w3.org/TR/xmlschema-2/#built-in-datatypes> XSD built in  * datatypes</a> for more information.  *  * @author Rupert Westenthaler  *  */
+comment|/**  * This class is used to define index types. It is only used to provide an unique  * ID and an human readable name for such types.<p>  * This type is necessary, because we assume that indices only support string  * values. Therefore any java type needs to be converted to its string  * representation. This type is used to preserve the type information.<p>  * How types are encoded within the index depends on the actual full text index  * used. The functionality of mapping of this index data types to the actual  * types as supported by the index is provided by the used {@link FieldMapper}  * implementation.<p>  * It is suggested to use the XSD Datatypes as id's for instances where suitable.  * see<a herf=http://www.w3.org/TR/xmlschema-2/#built-in-datatypes> XSD built in  * datatypes</a> for more information.  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -41,7 +41,7 @@ specifier|final
 class|class
 name|IndexDataType
 block|{
-comment|/** 	 * The default index type is defined as xsd:string (http://www.w3.org/2001/XMLSchema/string) 	 */
+comment|/**      * The default index type is defined as xsd:string (http://www.w3.org/2001/XMLSchema/string)      */
 specifier|public
 specifier|static
 specifier|final
@@ -58,13 +58,13 @@ operator|+
 literal|"string"
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Prefix used by this type 	 */
+comment|/**      * Prefix used by this type      */
 specifier|private
 specifier|final
 name|String
 name|id
 decl_stmt|;
-comment|/** 	 * Suffix used by this type 	 */
+comment|/**      * Suffix used by this type      */
 specifier|private
 specifier|final
 name|String
@@ -85,7 +85,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new index data type, by defining it's id and name. The id MUST NOT 	 * be<code>null</code> nor empty. If the name is<code>null</code>, than the 	 * name is generated based on the id by searching the last index of '#', '/' or 	 * ':'. 	 * @param id the unique id used for this data type. Values MUST NOT be 	 *<code>null</code> nor empty. 	 * @param name the name for this data type. 	 *  	 */
+comment|/**      * Creates a new index data type, by defining it's id and name. The id MUST NOT      * be<code>null</code> nor empty. If the name is<code>null</code>, than the      * name is generated based on the id by searching the last index of '#', '/' or      * ':'.      * @param id the unique id used for this data type. Values MUST NOT be      *<code>null</code> nor empty.      * @param name the name for this data type.      *      */
 specifier|public
 name|IndexDataType
 parameter_list|(
@@ -235,7 +235,7 @@ operator|=
 name|name
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the prefix 	 * @return the prefix used by this type or<code>null</code> if this 	 * type does not use a prefix. 	 */
+comment|/**      * Getter for the prefix      * @return the prefix used by this type or<code>null</code> if this      * type does not use a prefix.      */
 specifier|public
 specifier|final
 name|String
@@ -246,7 +246,7 @@ return|return
 name|id
 return|;
 block|}
-comment|/** 	 * Getter for the name 	 * @return the name of this dataType 	 */
+comment|/**      * Getter for the name      * @return the name of this dataType      */
 specifier|public
 specifier|final
 name|String
@@ -305,7 +305,7 @@ name|id
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Returns the id of the dataType. Use {@link #getName()} if you need a 	 * short variant 	 * @return the id of the dataType 	 */
+comment|/**      * Returns the id of the dataType. Use {@link #getName()} if you need a      * short variant      * @return the id of the dataType      */
 annotation|@
 name|Override
 specifier|public

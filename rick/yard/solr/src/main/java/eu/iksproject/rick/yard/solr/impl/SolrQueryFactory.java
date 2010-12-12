@@ -710,7 +710,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is responsible of converting the queries used by Rick to  * queries that can be executed via the Solr RESTfull interface.<p>  * For this conversion the {@link IndexValueFactory} and the {@link FieldMapper}  * as used to index the documents in the index must be parsed.<p>  * TODO: This class currently contains the<ul>  *<li> general usable functionality to convert {@link Query} instances to  * the according representation in index constraints (see   * {@link IndexConstraintTypeEnum} and {@link IndexConstraint}  *<li> general usable functionality to combine the constraints to an tree of  * AND and OR constraints  *<li> SolrSpecific configuration of {@link IndexConstraintTypeEncoder}. This  * need to be made generic to allow different encoder implementations for other  * Document Stores  *<li> the Solr Specific encodings of the AND and OR tree  *</ul>  * Splitting such things up in several different components should make it easy  * to add support for other DocumentStores!  *   * @author Rupert Westenthaler  *  */
+comment|/**  * This class is responsible of converting the queries used by Rick to  * queries that can be executed via the Solr RESTfull interface.<p>  * For this conversion the {@link IndexValueFactory} and the {@link FieldMapper}  * as used to index the documents in the index must be parsed.<p>  * TODO: This class currently contains the<ul>  *<li> general usable functionality to convert {@link Query} instances to  * the according representation in index constraints (see  * {@link IndexConstraintTypeEnum} and {@link IndexConstraint}  *<li> general usable functionality to combine the constraints to an tree of  * AND and OR constraints  *<li> SolrSpecific configuration of {@link IndexConstraintTypeEncoder}. This  * need to be made generic to allow different encoder implementations for other  * Document Stores  *<li> the Solr Specific encodings of the AND and OR tree  *</ul>  * Splitting such things up in several different components should make it easy  * to add support for other DocumentStores!  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -718,7 +718,7 @@ specifier|public
 class|class
 name|SolrQueryFactory
 block|{
-comment|/** 	 * Allows to limit the maximum Numbers of Query Results for any kind of Query. 	 * For now it is set to 1024. 	 */
+comment|/**      * Allows to limit the maximum Numbers of Query Results for any kind of Query.      * For now it is set to 1024.      */
 specifier|public
 specifier|static
 specifier|final
@@ -727,7 +727,7 @@ name|MAX_QUERY_RESULTS
 init|=
 literal|1024
 decl_stmt|;
-comment|/** 	 * The default limit of results for queries 	 */
+comment|/**      * The default limit of results for queries      */
 specifier|public
 specifier|static
 specifier|final
@@ -1205,7 +1205,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/** 	 * TODO: Currently I have no Idea how to determine all the fields to be 	 * selected, because There are any number of possibilities for field 	 * names in the index (different data types, different languages ...). 	 * Therefore currently I select all fields and apply the filter when 	 * converting the {@link SolrDocument}s in the result to the  	 * {@link Representation}.<p> 	 * The only thing I can do is to select only the ID if an empty list is 	 * parsed as selected. 	 * @param query 	 * @param selected 	 */
+comment|/**      * TODO: Currently I have no Idea how to determine all the fields to be      * selected, because There are any number of possibilities for field      * names in the index (different data types, different languages ...).      * Therefore currently I select all fields and apply the filter when      * converting the {@link SolrDocument}s in the result to the      * {@link Representation}.<p>      * The only thing I can do is to select only the ID if an empty list is      * parsed as selected.      * @param query      * @param selected      */
 specifier|private
 name|void
 name|setSelected
@@ -1274,11 +1274,11 @@ literal|"*"
 argument_list|)
 expr_stmt|;
 comment|//See to do in java doc of this method
-comment|//				for(String field : selected){
-comment|//					if(field != null&& !field.isEmpty()){
-comment|//						fieldMapper.getFieldNames(new IndexField(Arrays.asList(field), null, null));
-comment|//					}
-comment|//				}
+comment|//                for(String field : selected){
+comment|//                    if(field != null&& !field.isEmpty()){
+comment|//                        fieldMapper.getFieldNames(new IndexField(Arrays.asList(field), null, null));
+comment|//                    }
+comment|//                }
 block|}
 break|break;
 case|case
@@ -1435,7 +1435,7 @@ return|return
 name|indexConstraint
 return|;
 block|}
-comment|/** 	 * @param indexConstraint 	 * @param rangeConstraint 	 */
+comment|/**      * @param indexConstraint      * @param rangeConstraint      */
 specifier|private
 name|void
 name|initIndexConstraint
@@ -1653,7 +1653,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * @param indexConstraint 	 * @param textConstraint 	 */
+comment|/**      * @param indexConstraint      * @param textConstraint      */
 specifier|private
 name|void
 name|initIndexConstraint
@@ -1782,7 +1782,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * @param indexConstraint 	 * @param refConstraint 	 */
+comment|/**      * @param indexConstraint      * @param refConstraint      */
 specifier|private
 name|void
 name|initIndexConstraint
@@ -1996,7 +1996,7 @@ name|indexDataType
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 				 * NOTE: add only a single EQ constraints, because if different 				 *       dataTypes would result in different representations of 				 *       the parsed value this code would not work altogether! 				 */
+comment|/*                  * NOTE: add only a single EQ constraints, because if different                  *       dataTypes would result in different representations of                  *       the parsed value this code would not work altogether!                  */
 name|IndexValue
 name|indexValue
 decl_stmt|;
@@ -2228,7 +2228,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/** 	 * Getter for the domain set as FilterQuery to all generated SolrQueries 	 * @return the domain or<code>null</code> if no domain is set 	 */
+comment|/**      * Getter for the domain set as FilterQuery to all generated SolrQueries      * @return the domain or<code>null</code> if no domain is set      */
 specifier|public
 specifier|final
 name|String
@@ -2239,7 +2239,7 @@ return|return
 name|domain
 return|;
 block|}
-comment|/** 	 * Setter for the domain. If an empty string is parsed, than the domain is 	 * set to<code>null</code>, otherwise the parsed value is set. Parse 	 *<code>null</code> to deactivated the usage of domains 	 * @param domain the domain or<code>null</code> if no domain is active 	 */
+comment|/**      * Setter for the domain. If an empty string is parsed, than the domain is      * set to<code>null</code>, otherwise the parsed value is set. Parse      *<code>null</code> to deactivated the usage of domains      * @param domain the domain or<code>null</code> if no domain is active      */
 specifier|public
 specifier|final
 name|void
@@ -2278,7 +2278,7 @@ name|domain
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * getter for the maximum number of results allowed 	 * @return the maximum number of results that can be set 	 */
+comment|/**      * getter for the maximum number of results allowed      * @return the maximum number of results that can be set      */
 specifier|public
 specifier|final
 name|Integer
@@ -2289,7 +2289,7 @@ return|return
 name|maxQueryResults
 return|;
 block|}
-comment|/** 	 * Setter for the maximum number of results allowed. If<code>null</code> is 	 * parsed than the value is set to {@link #MAX_QUERY_RESULTS}. If a value 	 * smaller than {@link #getDefaultQueryResults()} is parsed, than the 	 * value is set to {@link #getDefaultQueryResults()}. 	 * @param maxQueryResults The maximum number of queries allowed 	 */
+comment|/**      * Setter for the maximum number of results allowed. If<code>null</code> is      * parsed than the value is set to {@link #MAX_QUERY_RESULTS}. If a value      * smaller than {@link #getDefaultQueryResults()} is parsed, than the      * value is set to {@link #getDefaultQueryResults()}.      * @param maxQueryResults The maximum number of queries allowed      */
 specifier|public
 specifier|final
 name|void
@@ -2343,7 +2343,7 @@ name|maxQueryResults
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Getter for the default number of query results. This is used if a parsed 	 * Query does not define the number of results. 	 * @return the default value for the number of query results 	 */
+comment|/**      * Getter for the default number of query results. This is used if a parsed      * Query does not define the number of results.      * @return the default value for the number of query results      */
 specifier|public
 specifier|final
 name|Integer
@@ -2354,7 +2354,7 @@ return|return
 name|defaultQueryResults
 return|;
 block|}
-comment|/** 	 * Setter for the default number of query results. This is used if a parsed 	 * Query does not define the number of results. If<code>null</code> or a  	 * value<code><= 0</code>is parsed, than the value is set to the lower value  	 * of {@link #DEFAULT_QUERY_RESULTS} ({@value #DEFAULT_QUERY_RESULTS}) and 	 * {@link #getMaxQueryResults()}. If a value<code>>=</code>  	 * {@link #getMaxQueryResults()} is parsed, than the value is set to 	 * {@link #getMaxQueryResults()}. 	 * @param defaultQueryResults the default number of results for queries 	 */
+comment|/**      * Setter for the default number of query results. This is used if a parsed      * Query does not define the number of results. If<code>null</code> or a      * value<code><= 0</code>is parsed, than the value is set to the lower value      * of {@link #DEFAULT_QUERY_RESULTS} ({@value #DEFAULT_QUERY_RESULTS}) and      * {@link #getMaxQueryResults()}. If a value<code>>=</code>      * {@link #getMaxQueryResults()} is parsed, than the value is set to      * {@link #getMaxQueryResults()}.      * @param defaultQueryResults the default number of results for queries      */
 specifier|public
 specifier|final
 name|void
@@ -2422,7 +2422,7 @@ name|defaultQueryResults
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Class internally used to process FieldConstraint. This class accesses 	 * the {@link SolrQueryFactory#constraintEncoders} map. 	 * @author Rupert Westenthaler 	 * 	 */
+comment|/**      * Class internally used to process FieldConstraint. This class accesses      * the {@link SolrQueryFactory#constraintEncoders} map.      * @author Rupert Westenthaler      *      */
 specifier|private
 class|class
 name|IndexConstraint
@@ -2464,7 +2464,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** 		 * Creates a Field Term for the parsed path 		 * @param path the path 		 * @throws IllegalArgumentException If the path is<code>null</code> empty. 		 */
+comment|/**          * Creates a Field Term for the parsed path          * @param path the path          * @throws IllegalArgumentException If the path is<code>null</code> empty.          */
 specifier|public
 name|IndexConstraint
 parameter_list|(
@@ -2509,7 +2509,7 @@ name|field
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 		 * Set to<code>true</code> to indicate, that this IndexConstraint can not 		 * be used. e.g. if the conversion of a {@link Constraint } to an 		 * {@link IndexConstraint} was unsuccessful! 		 * @param state the state 		 */
+comment|/**          * Set to<code>true</code> to indicate, that this IndexConstraint can not          * be used. e.g. if the conversion of a {@link Constraint } to an          * {@link IndexConstraint} was unsuccessful!          * @param state the state          */
 specifier|public
 name|void
 name|setInvalied
@@ -2528,7 +2528,7 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 		 * Returns<code>true</code> if this index constraint is invalid and 		 * can not be used for the IndexQuery. If the state is<code>true</code> 		 * it indicates, that the conversion to a {@link Constraint } to an 		 * {@link IndexConstraint} was not successful! 		 * @return the state 		 */
+comment|/**          * Returns<code>true</code> if this index constraint is invalid and          * can not be used for the IndexQuery. If the state is<code>true</code>          * it indicates, that the conversion to a {@link Constraint } to an          * {@link IndexConstraint} was not successful!          * @return the state          */
 specifier|public
 name|boolean
 name|isInvalied
@@ -2542,7 +2542,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/** 		 * Getter for the Messages why this index constraint is not valid 		 * @return the messages. An empty List if {@link #isInvalied()} returns 		 *<code>false</code> 		 */
+comment|/**          * Getter for the Messages why this index constraint is not valid          * @return the messages. An empty List if {@link #isInvalied()} returns          *<code>false</code>          */
 specifier|public
 name|List
 argument_list|<
@@ -2555,7 +2555,7 @@ return|return
 name|invaliedMessages
 return|;
 block|}
-comment|/** 		 * Sets an IndexConstraintType to a specific value 		 * @param constraintType the type of the constraint 		 * @param value the value.<code>null</code> is permitted, but usually it is 		 * not needed to add<code>null</code> constraints, because they are automatically 		 * added if needed (e.g. a range constraint with an open lower bound) 		 * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type 		 */
+comment|/**          * Sets an IndexConstraintType to a specific value          * @param constraintType the type of the constraint          * @param value the value.<code>null</code> is permitted, but usually it is          * not needed to add<code>null</code> constraints, because they are automatically          * added if needed (e.g. a range constraint with an open lower bound)          * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type          */
 specifier|public
 name|void
 name|setFieldConstraint
@@ -3078,21 +3078,21 @@ return|return
 name|queryString
 return|;
 block|}
-comment|//		/**
-comment|//		 * NOTE: removed, because currently not needed. If re-added, this Method needs also
-comment|//		 *       to remove (recursively) dependent with the default value
-comment|//		 * Removes the according index constraint if present
-comment|//		 * @param constraintType the constraint to remove
-comment|//		 * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type
-comment|//		 */
-comment|//		public void removeFieldConstraint(IndexConstraintTypeEnum constraintType) throws IllegalArgumentException {
-comment|//			if(constraintType == null){
-comment|//				//just returning here would also be OK, but better to find errors early by
-comment|//				//looking at stack traces
-comment|//				throw new IllegalArgumentException("Parameter IndexConstraintTypeEnum MUST NOT be NULL");
-comment|//			}
-comment|//			this.fieldConstraints.remove(constraintType);
-comment|//		}
+comment|//        /**
+comment|//         * NOTE: removed, because currently not needed. If re-added, this Method needs also
+comment|//         *       to remove (recursively) dependent with the default value
+comment|//         * Removes the according index constraint if present
+comment|//         * @param constraintType the constraint to remove
+comment|//         * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type
+comment|//         */
+comment|//        public void removeFieldConstraint(IndexConstraintTypeEnum constraintType) throws IllegalArgumentException {
+comment|//            if(constraintType == null){
+comment|//                //just returning here would also be OK, but better to find errors early by
+comment|//                //looking at stack traces
+comment|//                throw new IllegalArgumentException("Parameter IndexConstraintTypeEnum MUST NOT be NULL");
+comment|//            }
+comment|//            this.fieldConstraints.remove(constraintType);
+comment|//        }
 block|}
 block|}
 end_class

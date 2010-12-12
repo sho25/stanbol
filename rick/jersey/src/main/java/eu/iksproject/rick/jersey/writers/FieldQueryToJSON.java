@@ -192,7 +192,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Converts a {@link FieldQuery} to it's JSON representation 	 * @param query the Query 	 * @return the {@link JSONObject} 	 * @throws JSONException 	 */
+comment|/**      * Converts a {@link FieldQuery} to it's JSON representation      *      * @param query the Query      * @return the {@link JSONObject}      * @throws JSONException      */
 specifier|static
 name|JSONObject
 name|toJSON
@@ -292,7 +292,7 @@ return|return
 name|jQuery
 return|;
 block|}
-comment|/** 	 * Converts a {@link Constraint} to JSON 	 * @param constraint the {@link Constraint} 	 * @return the JSON representation 	 * @throws JSONException 	 */
+comment|/**      * Converts a {@link Constraint} to JSON      *      * @param constraint the {@link Constraint}      * @return the JSON representation      * @throws JSONException      */
 specifier|private
 specifier|static
 name|JSONObject

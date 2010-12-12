@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Needed because UriRefs and Literals use the RDF representation for the  * toString Method  *   * @author Rupert Westenthaler  *  * @param<T>  */
+comment|/**  * Needed because UriRefs and Literals use the RDF representation for the  * toString Method  *  * @author Rupert Westenthaler  *  * @param<T>  */
 end_comment
 
 begin_class

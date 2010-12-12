@@ -216,7 +216,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Adapter supports:  *<ul>  *<li> String: Converts all Literal to there lexical form  *<li> Text: Converts {@link PlainLiteral}s and {@link TypedLiteral}s with a  * data type constrained in {@link RdfResourceUtils#STRING_DATATYPES} to Text instances  *<li> Int, Long, UriRef ... : Converts {@link TypedLiteral}s to the according  * Java Object by using the Clerezza {@link LiteralFactory} (see {@link SimpleLiteralFactory})  * @author Rupert Westenthaler  *  * @param<T> All types of Literals  * @param<A> See above documentation  */
+comment|/**  * This Adapter supports:  *<ul>  *<li> String: Converts all Literal to there lexical form  *<li> Text: Converts {@link PlainLiteral}s and {@link TypedLiteral}s with a  * data type constrained in {@link RdfResourceUtils#STRING_DATATYPES} to Text instances  *<li> Int, Long, UriRef ... : Converts {@link TypedLiteral}s to the according  * Java Object by using the Clerezza {@link LiteralFactory} (see {@link SimpleLiteralFactory})  *</ul>  *  * @author Rupert Westenthaler  *  * @param<T> All types of Literals  * @param<A> See above documentation  */
 end_comment
 
 begin_class

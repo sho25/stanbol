@@ -27,7 +27,7 @@ parameter_list|<
 name|T
 parameter_list|>
 block|{
-comment|/** 	 * Converts the parsed java instance to an index value 	 * @param value the java instance 	 * @return the index value representing the parsed java instance 	 */
+comment|/**      * Converts the parsed java instance to an index value      * @param value the java instance      * @return the index value representing the parsed java instance      */
 name|IndexValue
 name|createIndexValue
 parameter_list|(
@@ -35,7 +35,7 @@ name|T
 name|value
 parameter_list|)
 function_decl|;
-comment|/** 	 * Creates an java instance representing the parsed<code>IndexValue</code> 	 * @param value the index value 	 * @return the java instance representing the parsed index value 	 * @throws if the<code>IndexType</code> of the parsed value is not compatible 	 * with this converter. 	 */
+comment|/**      * Creates an java instance representing the parsed<code>IndexValue</code>      * @param value the index value      * @return the java instance representing the parsed index value      * @throws if the<code>IndexType</code> of the parsed value is not compatible      * with this converter.      */
 name|T
 name|createObject
 parameter_list|(
@@ -47,7 +47,7 @@ name|UnsupportedIndexTypeException
 throws|,
 name|UnsupportedValueException
 function_decl|;
-comment|/** 	 * Creates an java instance representing the parsed value as returned by the 	 * index. 	 * @param type the index data type of the value. MUST NOT be<code>null</code> 	 * @param value the value within the index. If<code>null</code> this method returns<code>null</code>. 	 * @param lang the language 	 * @return the java instance representing the parsed index value 	 * @throws UnsupportedValueException if the value can not be processed by the 	 * Converter 	 */
+comment|/**      * Creates an java instance representing the parsed value as returned by the      * index.      * @param type the index data type of the value. MUST NOT be<code>null</code>      * @param value the value within the index. If<code>null</code> this method returns<code>null</code>.      * @param lang the language      * @return the java instance representing the parsed index value      * @throws UnsupportedValueException if the value can not be processed by the      * Converter      */
 name|T
 name|createObject
 parameter_list|(
@@ -65,7 +65,7 @@ name|UnsupportedIndexTypeException
 throws|,
 name|UnsupportedValueException
 function_decl|;
-comment|/** 	 * Getter for the java type 	 * @return the java class of the instances created by this converter 	 */
+comment|/**      * Getter for the java type      * @return the java class of the instances created by this converter      */
 name|Class
 argument_list|<
 name|T
@@ -73,7 +73,7 @@ argument_list|>
 name|getJavaType
 parameter_list|()
 function_decl|;
-comment|/** 	 * Getter for the index type 	 * @return the index type of index values created by this converter 	 */
+comment|/**      * Getter for the index type      * @return the index type of index values created by this converter      */
 name|IndexDataType
 name|getIndexType
 parameter_list|()

@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is used to store the encoded parts of the index field constraints  * created by the {@link IndexConstraintTypeEncoder}.<p>  * The processing of this parts is specific to the used Index, therefore such  * processing is not implemented by this Class.<p>  * Constraints parts can be encoded in the following part of an index field:  *<code><per>  *&lt;prefix&gt;.field.&lt;prefix&gt;&lt;assignment&gt;&lt;value&gt;  *</pre></code>  * The:<ul>   *<li><code>prefix</code> is used for the data type and language constraints  *<li><code>field</code> is predefined by by the field of the constraint  *<li><code>suffix</code> is currently unused  *<li><code>assignment</code> is used for checking static values or just adding  *      ':' in the case that values of that field are filtered.  *<li><code>value</code> is used to define filters like value ranges or  *      wildcard searches.    *</ul>   * The {@link ConstraintTypePosition} defines such position in ordinal numbers  * from left to right. This ordinal numbers are also used sort the elements  * of the {@link Iterable} interface implemented by this class.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * This class is used to store the encoded parts of the index field constraints  * created by the {@link IndexConstraintTypeEncoder}.<p>  * The processing of this parts is specific to the used Index, therefore such  * processing is not implemented by this Class.<p>  * Constraints parts can be encoded in the following part of an index field:  *<code><per>  *&lt;prefix&gt;.field.&lt;prefix&gt;&lt;assignment&gt;&lt;value&gt;  *</pre></code>  * The:<ul>  *<li><code>prefix</code> is used for the data type and language constraints  *<li><code>field</code> is predefined by by the field of the constraint  *<li><code>suffix</code> is currently unused  *<li><code>assignment</code> is used for checking static values or just adding  *      ':' in the case that values of that field are filtered.  *<li><code>value</code> is used to define filters like value ranges or  *      wildcard searches.  *</ul>  * The {@link ConstraintTypePosition} defines such position in ordinal numbers  * from left to right. This ordinal numbers are also used sort the elements  * of the {@link Iterable} interface implemented by this class.  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -109,7 +109,7 @@ argument_list|>
 argument_list|>
 argument_list|>
 block|{
-comment|/** 	 * This maps contains all the encoded parts of the query. 	 */
+comment|/**      * This maps contains all the encoded parts of the query.      */
 specifier|private
 name|SortedMap
 argument_list|<
@@ -134,7 +134,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Adds an constraint type 	 * @param pos 	 * @param values 	 */
+comment|/**      * Adds an constraint type      * @param pos      * @param values      */
 specifier|public
 name|void
 name|addEncoded

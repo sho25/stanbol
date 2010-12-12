@@ -79,8 +79,8 @@ block|{
 specifier|protected
 name|NavigationMixin
 parameter_list|()
-block|{ 	}
-comment|/** 	 * Some subclasses set the uriInfo property. If that is necessary, than it's 	 * best to do it when calling the super constructor (rw, 20101015) 	 * @param uriInfo 	 */
+block|{     }
+comment|/**      * Some subclasses set the uriInfo property. If that is necessary, than it's      * best to do it when calling the super constructor (rw, 20101015)      *      * @param uriInfo      */
 specifier|protected
 name|NavigationMixin
 parameter_list|(

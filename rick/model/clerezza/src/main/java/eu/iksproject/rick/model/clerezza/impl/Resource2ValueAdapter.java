@@ -421,7 +421,7 @@ block|}
 else|else
 block|{
 comment|//if dataType is not supported
-comment|/* 					 * this could indicate two things: 					 * 1) the SimpleLiteralFactory supports a new DataType and 					 *    because of that it creates Literals with this Type 					 * 2) Literals with this data type where created by other 					 *    applications. 					 * In the first case one need to update the enumeration. In 					 * the second case using the LexicalForm should be OK 					 * Rupert Westenthaler 2010.10.28 					 */
+comment|/*                      * this could indicate two things:                      * 1) the SimpleLiteralFactory supports a new DataType and                      *    because of that it creates Literals with this Type                      * 2) Literals with this data type where created by other                      *    applications.                      * In the first case one need to update the enumeration. In                      * the second case using the LexicalForm should be OK                      * Rupert Westenthaler 2010.10.28                      */
 name|log
 operator|.
 name|warn

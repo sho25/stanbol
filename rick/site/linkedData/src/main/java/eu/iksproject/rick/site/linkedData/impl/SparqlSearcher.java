@@ -560,7 +560,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Extracts the values of the Query. Also used by {@link VirtuosoSearcher} 	 * and {@link LarqSearcher} 	 * @param rootVariable the name of the variable to extract 	 * @param in the input stream with the data 	 * @return the extracted results 	 * @throws IOException if the input streams decides to explode 	 */
+comment|/**      * Extracts the values of the Query. Also used by {@link VirtuosoSearcher}      * and {@link LarqSearcher}      * @param rootVariable the name of the variable to extract      * @param in the input stream with the data      * @return the extracted results      * @throws IOException if the input streams decides to explode      */
 specifier|protected
 specifier|static
 name|List

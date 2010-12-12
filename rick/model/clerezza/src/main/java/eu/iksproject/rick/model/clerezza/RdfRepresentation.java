@@ -522,7 +522,7 @@ name|graph
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the read only view onto the RDF data of this representation  	 * @return The RDF graph of this Representation 	 */
+comment|/**      * Getter for the read only view onto the RDF data of this representation.      *      * @return The RDF graph of this Representation      */
 specifier|public
 name|TripleCollection
 name|getRdfGraph
@@ -1559,7 +1559,7 @@ name|debug
 argument_list|(
 literal|"NULL parsed as languages -> replacing with \"new String []{null}\""
 operator|+
-literal|" -> assuming a missing explicit cast to (Stirng) in the var arg"
+literal|" -> assuming a missing explicit cast to (String) in the var arg"
 argument_list|)
 expr_stmt|;
 name|languages
@@ -1805,7 +1805,7 @@ name|debug
 argument_list|(
 literal|"NULL parsed as languages -> replacing with \"new String []{null}\""
 operator|+
-literal|" -> assuming a missing explicit cast to (Stirng) in the var arg"
+literal|" -> assuming a missing explicit cast to (String) in the var arg"
 argument_list|)
 expr_stmt|;
 name|languages

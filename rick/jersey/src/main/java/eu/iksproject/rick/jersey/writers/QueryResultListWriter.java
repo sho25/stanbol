@@ -293,8 +293,102 @@ name|QueryResultList
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|INTERNAL_SERVER_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|RDF_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|X_TURTLE
+import|;
+end_import
+
 begin_comment
-comment|/**   * TODO: Replace with Serializer infrastructure similar to {@link Serializer}  */
+comment|/**  * TODO: Replace with Serializer infrastructure similar to {@link Serializer}  */
 end_comment
 
 begin_class
@@ -304,32 +398,18 @@ annotation|@
 name|Produces
 argument_list|(
 block|{
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|N3
 block|,
-name|SupportedFormat
-operator|.
 name|N_TRIPLE
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 block|,
-name|SupportedFormat
-operator|.
 name|TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|X_TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_JSON
 block|}
 argument_list|)
@@ -457,22 +537,22 @@ name|type
 argument_list|)
 return|;
 comment|//       if(QueryResultList.class.isAssignableFrom(type)&&
-comment|//    		   genericType != null&&  //QueryResult is always a generic Type
-comment|//    		   genericType instanceof Class<?>){ //and such types do not use generics
-comment|//    	   //This writer supports String, Representation and all types of Signs
-comment|//		   Class<?> genericClass  = (Class<?>) genericType;
+comment|//               genericType != null&&  //QueryResult is always a generic Type
+comment|//               genericType instanceof Class<?>){ //and such types do not use generics
+comment|//           //This writer supports String, Representation and all types of Signs
+comment|//           Class<?> genericClass  = (Class<?>) genericType;
 comment|//
-comment|//    	   if(String.class.isAssignableFrom(genericClass) ||
-comment|//    			   Representation.class.isAssignableFrom(genericClass) ||
-comment|//    			   Sign.class.isAssignableFrom(genericClass)){
-comment|//    		   //maybe we need further checks if we do not support all data types
-comment|//    		   //for all generic types! But currently all different types of
-comment|//    		   //QueryResultList support all the different MediaTypes!
-comment|//    		   return true;
-comment|//    	   }
+comment|//           if(String.class.isAssignableFrom(genericClass) ||
+comment|//                   Representation.class.isAssignableFrom(genericClass) ||
+comment|//                   Sign.class.isAssignableFrom(genericClass)){
+comment|//               //maybe we need further checks if we do not support all data types
+comment|//               //for all generic types! But currently all different types of
+comment|//               //QueryResultList support all the different MediaTypes!
+comment|//               return true;
+comment|//           }
 comment|//       }
-comment|//	   log.info("Request for not writeable combination: type="+type+"|genericType="+genericType+"|mediaType="+mediaType);
-comment|//	   return false;
+comment|//       log.info("Request for not writeable combination: type="+type+"|genericType="+genericType+"|mediaType="+mediaType);
+comment|//       return false;
 block|}
 annotation|@
 name|Override
@@ -534,8 +614,6 @@ name|genericType
 decl_stmt|;
 if|if
 condition|(
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 operator|.
 name|equals
@@ -581,8 +659,6 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
@@ -591,7 +667,7 @@ block|}
 else|else
 block|{
 comment|//RDF
-comment|/* 			 * TODO: We would need to add the query to the RDF Result. 			 *       Currently not implemented, because I do not want to create 			 *       a triple version of the query and there is not yet String 			 *       representation defined for FieldQuery 			 */
+comment|/*              * TODO: We would need to add the query to the RDF Result.              *       Currently not implemented, because I do not want to create              *       a triple version of the query and there is not yet String              *       representation defined for FieldQuery              */
 name|MGraph
 name|resultGraph
 init|=

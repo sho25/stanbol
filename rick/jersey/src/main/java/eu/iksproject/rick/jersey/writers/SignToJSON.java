@@ -504,7 +504,7 @@ return|return
 name|jEntityMapping
 return|;
 block|}
-comment|/** 	 * @param sign 	 * @return 	 * @throws JSONException 	 */
+comment|/**      * @param sign      * @return      * @throws JSONException      */
 specifier|private
 specifier|static
 name|JSONObject
@@ -573,7 +573,7 @@ return|return
 name|jSign
 return|;
 block|}
-comment|/** 	 * Converts the {@link Representation} to JSON 	 * @param jSign 	 * @param rep 	 * @throws JSONException 	 */
+comment|/**      * Converts the {@link Representation} to JSON      *      * @param jSign      * @param rep      * @throws JSONException      */
 specifier|static
 name|JSONObject
 name|toJSON
@@ -670,7 +670,7 @@ return|return
 name|jRep
 return|;
 block|}
-comment|/** 	 * @param values Iterator over all the values to add 	 * @return The {@link JSONArray} with all the values as {@link JSONObject} 	 * @throws JSONException 	 */
+comment|/**      * @param values Iterator over all the values to add      * @return The {@link JSONArray} with all the values as {@link JSONObject}      * @throws JSONException      */
 specifier|private
 specifier|static
 name|JSONArray
@@ -718,7 +718,7 @@ return|return
 name|jValues
 return|;
 block|}
-comment|/** 	 * The value to write. Special support for  {@link Reference} and {@link Text}. 	 * The {@link #toString()} Method is used to write the "value" key. 	 * @param value the value 	 * @return the {@link JSONObject} representing the value 	 * @throws JSONException 	 */
+comment|/**      * The value to write. Special support for  {@link Reference} and {@link Text}.      * The {@link #toString()} Method is used to write the "value" key.      *      * @param value the value      * @return the {@link JSONObject} representing the value      * @throws JSONException      */
 specifier|private
 specifier|static
 name|JSONObject

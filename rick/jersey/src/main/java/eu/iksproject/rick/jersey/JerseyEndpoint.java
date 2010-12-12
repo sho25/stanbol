@@ -268,7 +268,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Jersey-based RESTful endpoint for the Rick  *  * This OSGi component serves as a bridge between the OSGi context and the  * Servlet context available to JAX-RS resources.  *   * NOTE: Original Code taken from the FISE   * @author Rupert Westenthaler   */
+comment|/**  * Jersey-based RESTful endpoint for the Rick  *  * This OSGi component serves as a bridge between the OSGi context and the  * Servlet context available to JAX-RS resources.  *  * NOTE: Original Code taken from the FISE  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class

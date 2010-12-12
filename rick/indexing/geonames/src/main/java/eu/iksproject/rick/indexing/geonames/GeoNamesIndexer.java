@@ -1169,7 +1169,7 @@ name|Integer
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Key used to parse the Yard used for indexing 	 */
+comment|/**      * Key used to parse the Yard used for indexing      */
 specifier|public
 specifier|static
 specifier|final
@@ -1178,7 +1178,7 @@ name|KEY_YARD
 init|=
 literal|"eu.iksproject.rick.indexing.yard"
 decl_stmt|;
-comment|/** 	 * Used to parse the ID of the Item to start/resume the indexing 	 */
+comment|/**      * Used to parse the ID of the Item to start/resume the indexing      */
 specifier|public
 specifier|static
 specifier|final
@@ -1187,7 +1187,7 @@ name|KEY_START_INDEX
 init|=
 literal|"eu.iksproject.rick.indexing.startIndex"
 decl_stmt|;
-comment|/** 	 * State used to config if the geonames.org thesaurus should be included in the index. 	 */
+comment|/**      * State used to config if the geonames.org thesaurus should be included in the index.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1196,7 +1196,7 @@ name|KEY_INDEX_ONTOLOGY_STATE
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.indexOntology"
 decl_stmt|;
-comment|/** 	 * Key used to configure the directory that contains all the data needed 	 * for indexing geonames.org 	 */
+comment|/**      * Key used to configure the directory that contains all the data needed      * for indexing geonames.org      */
 specifier|public
 specifier|static
 specifier|final
@@ -1205,7 +1205,7 @@ name|KEY_DATA_DIR
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.dataDir"
 decl_stmt|;
-comment|/** 	 * key used to parse the name of the zip archive with the geonames.org dump. 	 * Typically the allcountry dump. 	 */
+comment|/**      * key used to parse the name of the zip archive with the geonames.org dump.      * Typically the allcountry dump.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1214,7 +1214,7 @@ name|KEY_GEONAMES_ARCHIVE
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.dbdumpArchive"
 decl_stmt|;
-comment|/** 	 * Key used to parse the name of the file with the country informations  	 */
+comment|/**      * Key used to parse the name of the file with the country informations      */
 specifier|public
 specifier|static
 specifier|final
@@ -1223,7 +1223,7 @@ name|KEY_COUNTRY_INFOS
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.countryInfoFile"
 decl_stmt|;
-comment|/** 	 * Key used to parse the name of the file with the admin level1 codes 	 */
+comment|/**      * Key used to parse the name of the file with the admin level1 codes      */
 specifier|public
 specifier|static
 specifier|final
@@ -1232,7 +1232,7 @@ name|KEY_ADMIN1_CODES
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.admin1CodesFile"
 decl_stmt|;
-comment|/** 	 * Key used to parse the name of the file with the admin level2 codes 	 */
+comment|/**      * Key used to parse the name of the file with the admin level2 codes      */
 specifier|public
 specifier|static
 specifier|final
@@ -1241,7 +1241,7 @@ name|KEY_ADMIN2_CODES
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.admin2CodesFile"
 decl_stmt|;
-comment|/** 	 * Key used to parse the name of the file with the alternate names 	 */
+comment|/**      * Key used to parse the name of the file with the alternate names      */
 specifier|public
 specifier|static
 specifier|final
@@ -1250,7 +1250,7 @@ name|KEY_ALTERNATE_NAMES
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.alternateNamesFile"
 decl_stmt|;
-comment|/** 	 * Key used to parse the name of the file with the geonames ontology 	 */
+comment|/**      * Key used to parse the name of the file with the geonames ontology      */
 specifier|public
 specifier|static
 specifier|final
@@ -1267,7 +1267,7 @@ name|KEY_CHUNK_SIZE
 init|=
 literal|"eu.iksproject.rick.indexing.geonames.chunkSize"
 decl_stmt|;
-comment|/** 	 * Key used to parse the hierarchy file 	 */
+comment|/**      * Key used to parse the hierarchy file      */
 specifier|public
 specifier|static
 specifier|final
@@ -1769,7 +1769,7 @@ argument_list|()
 argument_list|,
 literal|"related"
 argument_list|)
-block|, 		;
+block|,         ;
 name|String
 name|uri
 decl_stmt|;
@@ -2148,7 +2148,7 @@ literal|"alternateNames.zip"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Create the index based on the parsed configuration 	 * @throws IOException On any error while reading one of the configuration files 	 * @throws YardException On any error while storing index features within the Yard 	 */
+comment|/**      * Create the index based on the parsed configuration      * @throws IOException On any error while reading one of the configuration files      * @throws YardException On any error while storing index features within the Yard      */
 specifier|public
 name|void
 name|index
@@ -2174,7 +2174,7 @@ name|writeCacheBaseConfiguration
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 	 * As the last step we need to create the baseMappings configuration 	 * needed to used the Index as RICK full cache! 	 * @throws YardException would be really bad if after successfully indexing 	 * about 8 millions of documents we get an error from the yard at the 	 * last possible opportunity :( 	 */
+comment|/**      * As the last step we need to create the baseMappings configuration      * needed to used the Index as RICK full cache!      * @throws YardException would be really bad if after successfully indexing      * about 8 millions of documents we get an error from the yard at the      * last possible opportunity :(      */
 specifier|private
 name|void
 name|writeCacheBaseConfiguration
@@ -2259,7 +2259,7 @@ literal|"< completed"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * @param config 	 */
+comment|/**      * @param config      */
 specifier|private
 name|File
 name|checkFile
@@ -4513,7 +4513,7 @@ index|]
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * This Method combines the information of<ul> 	 *<li> the adminIds originating form the information in the main feature table of geonames 	 *<li> hierarchy information originating from the hierarchy table. 	 *</ul> 	 * and combines them to the full admin regions hierarchy.<br> 	 * This code would be much simpler if one would trust one of the two data source. 	 * However first tests have shown, that both structures contain some errors! 	 * @param doc The doc to add the data 	 * @param property the property used for the level 	 * @param parents the parent->child mappings for the current geonames feature 	 * @param parentLevel the regions of the parent level (should be only one, but sometimes there are more). 	 *   This data are based on the hierarchy table. 	 * @param adminId the region as stored in the geonames main table (only available for level 1 and 2) 	 * @return the regions of this level (should be only one, but sometimes there are more) 	 */
+comment|/**      * This Method combines the information of<ul>      *<li> the adminIds originating form the information in the main feature table of geonames      *<li> hierarchy information originating from the hierarchy table.      *</ul>      * and combines them to the full admin regions hierarchy.<br>      * This code would be much simpler if one would trust one of the two data source.      * However first tests have shown, that both structures contain some errors!      * @param doc The doc to add the data      * @param property the property used for the level      * @param parents the parent->child mappings for the current geonames feature      * @param parentLevel the regions of the parent level (should be only one, but sometimes there are more).      *   This data are based on the hierarchy table.      * @param adminId the region as stored in the geonames main table (only available for level 1 and 2)      * @return the regions of this level (should be only one, but sometimes there are more)      */
 specifier|private
 name|Set
 argument_list|<
@@ -4684,7 +4684,7 @@ return|return
 name|currentLevel
 return|;
 block|}
-comment|/** 	 * Recursive method the finds all parents and adds the childs of the current 	 * node (not all childs, but only those of the current tree)  	 * @param id the id of the lower level 	 * @param parents the set used to add all the parents/child mappings 	 */
+comment|/**      * Recursive method the finds all parents and adds the childs of the current      * node (not all childs, but only those of the current tree)      * @param id the id of the lower level      * @param parents the set used to add all the parents/child mappings      */
 specifier|private
 name|void
 name|getParents
@@ -5078,7 +5078,7 @@ return|return
 name|lineCount
 return|;
 block|}
-comment|/** 	 * There are two sources of hierarchy in the geonames.org dumps.<p> 	 * First the Admin Region Codes stored in the main table in combination with  	 * the CountryInfo and the AdminRegion infos for the first two levels. This  	 * uses  the ISO country code and the additional number for linking the  	 * Regions. Second the Hierarchy table providing parentID, childId, [type] 	 * information. This uses featureIDs for linking.<p> 	 * This Method reads the first data source into memory. For the country 	 * related information it calls {@link #readCountryInfos()}. 	 * @throws IOException 	 */
+comment|/**      * There are two sources of hierarchy in the geonames.org dumps.<p>      * First the Admin Region Codes stored in the main table in combination with      * the CountryInfo and the AdminRegion infos for the first two levels. This      * uses  the ISO country code and the additional number for linking the      * Regions. Second the Hierarchy table providing parentID, childId, [type]      * information. This uses featureIDs for linking.<p>      * This Method reads the first data source into memory. For the country      * related information it calls {@link #readCountryInfos()}.      * @throws IOException      */
 specifier|private
 name|void
 name|readAdminCodes
@@ -5256,7 +5256,7 @@ literal|"ms"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * This Method loads the alternate labels of geonames.org. Such labels are 	 * used for multiple language support but also include postal codes, links 	 * to wikipedia, airport codes ... see {@link NameType} for details. 	 * TODO: This loads a lot of stuff into memory. Maybe one should consider to 	 * use some caching framework like OSCache. Features are anyway sorted by 	 * Country so often used labels would be in memory and all the labels that 	 * are only used once can be serialised to the cache if in low memory 	 * environments! 	 * @throws IOException 	 */
+comment|/**      * This Method loads the alternate labels of geonames.org. Such labels are      * used for multiple language support but also include postal codes, links      * to wikipedia, airport codes ... see {@link NameType} for details.      * TODO: This loads a lot of stuff into memory. Maybe one should consider to      * use some caching framework like OSCache. Features are anyway sorted by      * Country so often used labels would be in memory and all the labels that      * are only used once can be serialised to the cache if in low memory      * environments!      * @throws IOException      */
 specifier|private
 name|void
 name|readAlternateNames
@@ -5754,7 +5754,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * There are two sources of hierarchy in the geonames.org dumps.<p> 	 * First the Admin Region Codes stored in the main table in combination with  	 * the CountryInfo and the AdminRegion infos for the first two levels. This  	 * uses  the ISO country code and the additional number for linking the  	 * Regions. Second the Hierarchy table providing parentID, childId, [type] 	 * information. This uses featureIDs for linking.<p> 	 * This Method processes the second datasource and stores the child -&gt; 	 * parents mappings in memory. Administrative hierarchies are stored in a 	 * different map. Note also that also for Administrative regions there are 	 * some cases where a child has more than one parent. 	 * @throws IOException 	 */
+comment|/**      * There are two sources of hierarchy in the geonames.org dumps.<p>      * First the Admin Region Codes stored in the main table in combination with      * the CountryInfo and the AdminRegion infos for the first two levels. This      * uses  the ISO country code and the additional number for linking the      * Regions. Second the Hierarchy table providing parentID, childId, [type]      * information. This uses featureIDs for linking.<p>      * This Method processes the second datasource and stores the child -&gt;      * parents mappings in memory. Administrative hierarchies are stored in a      * different map. Note also that also for Administrative regions there are      * some cases where a child has more than one parent.      * @throws IOException      */
 specifier|private
 name|void
 name|readHierarchy
@@ -6177,48 +6177,48 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//	private static void indexGeonamesOntology() throws RepositoryException, RDFParseException, IOException, SemanticSearchProviderException{
-comment|//		Repository ontRepository = new SailRepository(new MemoryStore());
-comment|//		ontRepository.initialize();
-comment|//		RepositoryConnection con = ontRepository.getConnection();
-comment|//		File geonamesOnt = new File(GeoNamesIndexer.geonamesOntFile);
-comment|//		System.out.println("Geonames Ontology: ");
-comment|//		System.out.println("> name   : "+geonamesOnt.getAbsolutePath());
-comment|//		System.out.println("> exists : "+geonamesOnt.exists());
-comment|//		System.out.println("> isFile : "+geonamesOnt.isFile());
-comment|//		//add the geonames Ont to the Repository
-comment|//		con.add(geonamesOnt, geonamesOntBase, RDFFormat.RDFXML);
-comment|//		RepositoryResult<Statement> results = con.getStatements(null, org.openrdf.model.vocabulary.RDF.TYPE, null, false);
-comment|//		Map<Resource,IndexInputDocument> geonamesOntResources = new HashMap<Resource,IndexInputDocument>();
-comment|//		log.info("Process Ontology:");
-comment|//		for(Statement stm: results.asList()){
-comment|//			log.debug(" Statement : "+stm.getSubject());
-comment|//			//check for contains to avaoid multiple processing if a resource has two types
-comment|//			if(!geonamesOntResources.containsKey(stm.getSubject())){
-comment|//				log.info("> "+stm.getSubject());
-comment|//				geonamesOntResources.put(stm.getSubject(), getResourceValues(manager.getPathRegistry(), con, stm));
-comment|//			}
-comment|//		}
-comment|//		log.info("Index Geonames Ontology ("+geonamesOntResources.size()+" Resources)");
-comment|//		manager.getIndexProvider().indexDocuments(geonamesOntResources.values());
-comment|//		con.close();
-comment|//		con = null;
+comment|//    private static void indexGeonamesOntology() throws RepositoryException, RDFParseException, IOException, SemanticSearchProviderException{
+comment|//        Repository ontRepository = new SailRepository(new MemoryStore());
+comment|//        ontRepository.initialize();
+comment|//        RepositoryConnection con = ontRepository.getConnection();
+comment|//        File geonamesOnt = new File(GeoNamesIndexer.geonamesOntFile);
+comment|//        System.out.println("Geonames Ontology: ");
+comment|//        System.out.println("> name   : "+geonamesOnt.getAbsolutePath());
+comment|//        System.out.println("> exists : "+geonamesOnt.exists());
+comment|//        System.out.println("> isFile : "+geonamesOnt.isFile());
+comment|//        //add the geonames Ont to the Repository
+comment|//        con.add(geonamesOnt, geonamesOntBase, RDFFormat.RDFXML);
+comment|//        RepositoryResult<Statement> results = con.getStatements(null, org.openrdf.model.vocabulary.RDF.TYPE, null, false);
+comment|//        Map<Resource,IndexInputDocument> geonamesOntResources = new HashMap<Resource,IndexInputDocument>();
+comment|//        log.info("Process Ontology:");
+comment|//        for(Statement stm: results.asList()){
+comment|//            log.debug(" Statement : "+stm.getSubject());
+comment|//            //check for contains to avaoid multiple processing if a resource has two types
+comment|//            if(!geonamesOntResources.containsKey(stm.getSubject())){
+comment|//                log.info("> "+stm.getSubject());
+comment|//                geonamesOntResources.put(stm.getSubject(), getResourceValues(manager.getPathRegistry(), con, stm));
+comment|//            }
+comment|//        }
+comment|//        log.info("Index Geonames Ontology ("+geonamesOntResources.size()+" Resources)");
+comment|//        manager.getIndexProvider().indexDocuments(geonamesOntResources.values());
+comment|//        con.close();
+comment|//        con = null;
 comment|//
-comment|//	}
-comment|//	private static IndexInputDocument getResourceValues(PathRegistry pathRegistry,
-comment|//			RepositoryConnection con, Statement stm) throws RepositoryException {
-comment|//		IndexInputDocument inputDoc = new IndexInputDocument(stm.getSubject().stringValue());
-comment|//		RepositoryResult<Statement> designValues = con.getStatements(stm.getSubject(),null,null,false);
-comment|//		for(Statement value: designValues.asList()){
-comment|//			log.debug("   "+value.getPredicate()+"="+value.getObject());
-comment|//			PathElement pathElement = pathRegistry.getPathElement(value.getPredicate().stringValue());
-comment|//			//in the geonames Data the lat/lon/alt are not marked with the dataType
-comment|//			// -> therefore try to parse the dataType from the String value!
-comment|//			inputDoc.add(pathElement, value.getObject());
-comment|//		}
-comment|//		debugInputDoc(inputDoc);
-comment|//		return inputDoc;
-comment|//	}
+comment|//    }
+comment|//    private static IndexInputDocument getResourceValues(PathRegistry pathRegistry,
+comment|//            RepositoryConnection con, Statement stm) throws RepositoryException {
+comment|//        IndexInputDocument inputDoc = new IndexInputDocument(stm.getSubject().stringValue());
+comment|//        RepositoryResult<Statement> designValues = con.getStatements(stm.getSubject(),null,null,false);
+comment|//        for(Statement value: designValues.asList()){
+comment|//            log.debug("   "+value.getPredicate()+"="+value.getObject());
+comment|//            PathElement pathElement = pathRegistry.getPathElement(value.getPredicate().stringValue());
+comment|//            //in the geonames Data the lat/lon/alt are not marked with the dataType
+comment|//            // -> therefore try to parse the dataType from the String value!
+comment|//            inputDoc.add(pathElement, value.getObject());
+comment|//        }
+comment|//        debugInputDoc(inputDoc);
+comment|//        return inputDoc;
+comment|//    }
 specifier|public
 specifier|static
 specifier|final

@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/**  *   */
+comment|/**  *  */
 end_comment
 
 begin_package
@@ -247,18 +247,9 @@ name|Object
 name|clone
 parameter_list|()
 block|{
-return|return
-operator|new
-name|RdfText
-argument_list|(
-operator|new
-name|PlainLiteralImpl
-argument_list|(
-name|literal
-operator|.
-name|getLexicalForm
-argument_list|()
-argument_list|,
+name|Language
+name|language
+init|=
 name|isPlain
 condition|?
 operator|(
@@ -272,6 +263,20 @@ name|getLanguage
 argument_list|()
 else|:
 literal|null
+decl_stmt|;
+return|return
+operator|new
+name|RdfText
+argument_list|(
+operator|new
+name|PlainLiteralImpl
+argument_list|(
+name|literal
+operator|.
+name|getLexicalForm
+argument_list|()
+argument_list|,
+name|language
 argument_list|)
 argument_list|)
 return|;

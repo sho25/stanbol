@@ -115,7 +115,7 @@ name|SolrYardConfig
 extends|extends
 name|YardConfig
 block|{
-comment|/** 	 * Creates a new config with the minimal set of required properties 	 * @param id the ID of the Yard 	 * @param solrServer the base URL of the {@link SolrServer} 	 * @throws IllegalArgumentException if the parsed valued do not fulfil the 	 * requirements. 	 */
+comment|/**      * Creates a new config with the minimal set of required properties      * @param id the ID of the Yard      * @param solrServer the base URL of the {@link SolrServer}      * @throws IllegalArgumentException if the parsed valued do not fulfil the      * requirements.      */
 specifier|public
 name|SolrYardConfig
 parameter_list|(
@@ -164,7 +164,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * Initialise the Yard configuration based on a parsed configuration. Usually 	 * used on the context of an OSGI environment in the activate method. 	 * @param config the configuration usually parsed within an OSGI activate 	 * method 	 * @throws ConfigurationException if the configuration is incomplete of 	 * some values are not valid 	 * @throws IllegalArgumentException if<code>null</code> is parsed as 	 * configuration 	 */
+comment|/**      * Initialise the Yard configuration based on a parsed configuration. Usually      * used on the context of an OSGI environment in the activate method.      * @param config the configuration usually parsed within an OSGI activate      * method      * @throws ConfigurationException if the configuration is incomplete of      * some values are not valid      * @throws IllegalArgumentException if<code>null</code> is parsed as      * configuration      */
 specifier|protected
 name|SolrYardConfig
 parameter_list|(
@@ -187,7 +187,7 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Setter for the base URL of the SolrServer 	 * @param url the base URL of the SolrServer. Required, NOT NULL. 	 */
+comment|/**      * Setter for the base URL of the SolrServer      * @param url the base URL of the SolrServer. Required, NOT NULL.      */
 specifier|public
 name|void
 name|setSolrServerUrl
@@ -228,7 +228,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Getter for the base URL of the SolrServer 	 * @return the base URL of the configured SolrServer 	 * @throws IllegalStateException Internally a Object is used to store values 	 *   and if the configuration is provided by the OSGI environment the URL 	 *   is configured by using a {@link String}. When it fails to parse a 	 *   {@link URL} object based on the provided string, than the 	 *   {@link MalformedURLException} is wrapped by  	 *   an {@link IllegalStateException}. 	 */
+comment|/**      * Getter for the base URL of the SolrServer      * @return the base URL of the configured SolrServer      * @throws IllegalStateException Internally a Object is used to store values      *   and if the configuration is provided by the OSGI environment the URL      *   is configured by using a {@link String}. When it fails to parse a      *   {@link URL} object based on the provided string, than the      *   {@link MalformedURLException} is wrapped by      *   an {@link IllegalStateException}.      */
 specifier|public
 name|URL
 name|getSolrServerUrl
@@ -311,7 +311,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** 	 * Setter for the multi yard index layout state.<p> 	 * The multi layout state. If data of multiple yards are stored in the same 	 * Solr Index, than the YardID MUST be stored within all indexed documents. 	 * In addition the to all queries a fq (filterQuery) must be added that 	 * restricts results to the current yard 	 */
+comment|/**      * Setter for the multi yard index layout state.<p>      * The multi layout state. If data of multiple yards are stored in the same      * Solr Index, than the YardID MUST be stored within all indexed documents.      * In addition the to all queries a fq (filterQuery) must be added that      * restricts results to the current yard      */
 specifier|public
 name|void
 name|setMultiYardIndexLayout
@@ -352,7 +352,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Getter for the multi yard index layout state.<p> 	 * If data of multiple yards are stored in the same 	 * Solr Index, than the YardID MUST be stored within all indexed documents. 	 * In addition the to all queries a fq (filterQuery) must be added that 	 * restricts results to the current yard.<p> 	 * The default value is<code>false</code> 	 * @return the multi yard index layout state 	 */
+comment|/**      * Getter for the multi yard index layout state.<p>      * If data of multiple yards are stored in the same      * Solr Index, than the YardID MUST be stored within all indexed documents.      * In addition the to all queries a fq (filterQuery) must be added that      * restricts results to the current yard.<p>      * The default value is<code>false</code>      * @return the multi yard index layout state      */
 specifier|public
 name|boolean
 name|isMultiYardIndexLayout
@@ -413,7 +413,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/** 	 * Getter for the maximum number of boolean clauses allowed for queries 	 * @return The configured number of<code>null</code> if not configured or 	 * the configured value is not an valid Integer. 	 */
+comment|/**      * Getter for the maximum number of boolean clauses allowed for queries      * @return The configured number of<code>null</code> if not configured or      * the configured value is not an valid Integer.      */
 specifier|public
 name|Integer
 name|getMaxBooleanClauses
@@ -720,7 +720,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** 	 * checks for the {@link SolrYard#SOLR_SERVER_URI} 	 */
+comment|/**      * checks for the {@link SolrYard#SOLR_SERVER_URI}      */
 annotation|@
 name|Override
 specifier|protected

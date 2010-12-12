@@ -472,7 +472,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}  *  * TODO: add description  *  */
+comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}  *<p/>  * TODO: add description  */
 end_comment
 
 begin_class
@@ -559,7 +559,7 @@ operator|.
 name|getUnicodeString
 argument_list|()
 decl_stmt|;
-comment|/** 	 * The Field used as default as selected fields for find requests      * TODO: Make configurable via the {@link ConfiguredSite} interface! 	 */
+comment|/**      * The Field used as default as selected fields for find requests      * TODO: Make configurable via the {@link ConfiguredSite} interface!      */
 specifier|private
 specifier|static
 specifier|final
@@ -581,7 +581,7 @@ name|getUnicodeString
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * The default number of maximal results.   	 */
+comment|/**      * The default number of maximal results.      */
 specifier|private
 specifier|static
 specifier|final
@@ -804,7 +804,7 @@ operator|+
 literal|":</h1></body></html>"
 return|;
 block|}
-comment|/**      * Cool URI handler for Signs.       *      * @param siteId A specific {@link ReferencedSite} to search the parsed id or       *<code>null</code> to search all referenced sites for the requested      *     entity id. The {@link ReferencedSite#getId()} property is used to map      *     the path to the site!   	 * @param id The id of the entity (required)      * @param headers the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the      *         raw binary content      */
+comment|/**      * Cool URI handler for Signs.      *      * @param siteId A specific {@link ReferencedSite} to search the parsed id or      *<code>null</code> to search all referenced sites for the requested      * entity id. The {@link ReferencedSite#getId()} property is used to map      * the path to the site!      * @param id The id of the entity (required)      * @param headers the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the      *         raw binary content      */
 annotation|@
 name|GET
 annotation|@
@@ -1380,15 +1380,15 @@ name|field
 argument_list|)
 expr_stmt|;
 comment|//select also the field used to find entities
-comment|//    	if(select == null ||select.isEmpty()){
-comment|//    		selectedFields.addAll(DEFAULT_FIND_SELECTED_FIELDS);
-comment|//    	} else {
-comment|//    		for(String selected : select.trim().split(" ")){
-comment|//    			if(selected != null&& !selected.isEmpty()){
-comment|//    				selectedFields.add(selected);
-comment|//    			}
-comment|//    		}
-comment|//    	}
+comment|//        if(select == null ||select.isEmpty()){
+comment|//            selectedFields.addAll(DEFAULT_FIND_SELECTED_FIELDS);
+comment|//        } else {
+comment|//            for(String selected : select.trim().split(" ")){
+comment|//                if(selected != null&& !selected.isEmpty()){
+comment|//                    selectedFields.add(selected);
+comment|//                }
+comment|//            }
+comment|//        }
 name|query
 operator|.
 name|addSelectedFields

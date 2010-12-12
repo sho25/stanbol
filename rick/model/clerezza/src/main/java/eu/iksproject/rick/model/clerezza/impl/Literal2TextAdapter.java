@@ -170,7 +170,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Adapter does two things:  *<ol>  *<li> It filters {@link Literal}s based on the languages parsed in the   *      constructor. If no languages are parsed, than all languages are accepted  *<li> It converts {@link Literal}s to {@link Text}. Only {@link PlainLiteral}  *      and {@link TypedLiteral} with an xsd data type present in the   *      {@link RdfResourceUtils#STRING_DATATYPES} are converted. All other literals are  *      filtered (meaning that<code>null</code> is returned)  *</ol>  * The difference of this Adapter to the {@link LiteralAdapter} with the generic  * type {@link Text} is that the LiteralAdapter can not be used to filter  * literals based on there language.  * @author Rupert Westenthaler  *  */
+comment|/**  * This Adapter does two things:  *<ol>  *<li> It filters {@link Literal}s based on the languages parsed in the  *      constructor. If no languages are parsed, than all languages are accepted  *<li> It converts {@link Literal}s to {@link Text}. Only {@link PlainLiteral}  *      and {@link TypedLiteral} with an xsd data type present in the  *      {@link RdfResourceUtils#STRING_DATATYPES} are converted. All other literals are  *      filtered (meaning that<code>null</code> is returned)  *</ol>  * The difference of this Adapter to the {@link LiteralAdapter} with the generic  * type {@link Text} is that the LiteralAdapter can not be used to filter  * literals based on there language.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -190,7 +190,7 @@ argument_list|,
 name|Text
 argument_list|>
 block|{
-comment|/** 	 * Unmodifiable set of the active languages  	 */
+comment|/**      * Unmodifiable set of the active languages      */
 specifier|protected
 specifier|final
 name|Set
@@ -214,7 +214,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Filters Literals in the parsed Iterator based on the parsed languages and 	 * convert matching Literals to Text 	 * @param it the iterator 	 * @param lang the active languages. If<code>null</code> or empty, all 	 * languages are active. If<code>null</code> is parsed as an element, that 	 * also Literals without a language are returned 	 */
+comment|/**      * Filters Literals in the parsed Iterator based on the parsed languages and      * convert matching Literals to Text      * @param it the iterator      * @param lang the active languages. If<code>null</code> or empty, all      * languages are active. If<code>null</code> is parsed as an element, that      * also Literals without a language are returned      */
 specifier|public
 name|Literal2TextAdapter
 parameter_list|(
@@ -350,7 +350,7 @@ condition|(
 name|containsNull
 condition|)
 block|{
-comment|/* 			 * if the null language is active, than we can also return 			 * "normal" literals (with no known language). 			 * But first we need to check the Datatype! 			 */
+comment|/*              * if the null language is active, than we can also return              * "normal" literals (with no known language).              * But first we need to check the Datatype!              */
 return|return
 name|valueFactory
 operator|.

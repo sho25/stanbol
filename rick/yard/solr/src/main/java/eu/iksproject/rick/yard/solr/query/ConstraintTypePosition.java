@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/**  *   */
+comment|/**  *  */
 end_comment
 
 begin_package
@@ -33,7 +33,7 @@ argument_list|<
 name|ConstraintTypePosition
 argument_list|>
 block|{
-comment|/** 	 * The possible positions of constraints within a Index Constraint.<p> 	 * The ordinal number of the elements is used to sort the constraints in the 	 * {@link EncodedConstraintParts}. So ensure, that the ordering in this 	 * enumeration corresponds with the ordering in a constraint within the 	 * index 	 * @author Rupert Westenthaler 	 * 	 */
+comment|/**      * The possible positions of constraints within a Index Constraint.<p>      * The ordinal number of the elements is used to sort the constraints in the      * {@link EncodedConstraintParts}. So ensure, that the ordering in this      * enumeration corresponds with the ordering in a constraint within the      * index      * @author Rupert Westenthaler      *      */
 specifier|public
 specifier|static
 enum|enum
@@ -48,7 +48,7 @@ block|,
 name|assignment
 block|,
 name|value
-block|; 	}
+block|;     }
 specifier|private
 name|PositionType
 name|type

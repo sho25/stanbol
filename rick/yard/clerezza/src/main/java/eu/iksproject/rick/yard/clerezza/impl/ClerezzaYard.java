@@ -800,7 +800,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the Yard Interface based on a RDF Triple Store. This  * Implementation uses Clerezza as RDF Framework. The actual Triple Store used  * to store the data depends on the configuration of Clerezza.<p>  * This implementation uses {@link LockableMGraph} interface for write locks   * when updating the graph. SPARQL queries are not within a write lock.<p>  *  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the Yard Interface based on a RDF Triple Store. This  * Implementation uses Clerezza as RDF Framework. The actual Triple Store used  * to store the data depends on the configuration of Clerezza.<p>  * This implementation uses {@link LockableMGraph} interface for write locks  * when updating the graph. SPARQL queries are not within a write lock.<p>  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -831,9 +831,9 @@ argument_list|)
 annotation|@
 name|Service
 comment|//@Properties(value={
-comment|//		@Property(name=Yard.ID,value="rickYard"),
-comment|//		@Property(name=Yard.NAME,value="Rick Yard"),
-comment|//		@Property(name=Yard.DESCRIPTION,value="Default values for configuring the RickYard without editing")
+comment|//        @Property(name=Yard.ID,value="rickYard"),
+comment|//        @Property(name=Yard.NAME,value="Rick Yard"),
+comment|//        @Property(name=Yard.DESCRIPTION,value="Default values for configuring the RickYard without editing")
 comment|//})
 specifier|public
 class|class
@@ -880,7 +880,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * This property is used to check if a URI in the graph represents a representation by 	 * calling {@link TripleCollection#filter(org.apache.clerezza.rdf.core.NonLiteral, UriRef, Resource)} 	 * with the reuqested ID as subject, this {@link UriRef} as property and 	 *<code>null</code> as value.<p> 	 * This is the easiest way to do that, because each representation MUST HAVE 	 * a rick:label. If this is requirements is changed in future, than the code 	 * using this property MUST BE changed accordingly! 	 */
+comment|/**      * This property is used to check if a URI in the graph represents a representation by      * calling {@link TripleCollection#filter(org.apache.clerezza.rdf.core.NonLiteral, UriRef, Resource)}      * with the reuqested ID as subject, this {@link UriRef} as property and      *<code>null</code> as value.<p>      * This is the easiest way to do that, because each representation MUST HAVE      * a rick:label. If this is requirements is changed in future, than the code      * using this property MUST BE changed accordingly!      */
 specifier|private
 specifier|static
 name|UriRef
@@ -897,8 +897,8 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//	protected ComponentContext context;
-comment|//	protected Dictionary<String,?> properties;
+comment|//    protected ComponentContext context;
+comment|//    protected Dictionary<String,?> properties;
 annotation|@
 name|Reference
 specifier|private
@@ -1163,7 +1163,7 @@ name|deactivate
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 	 * Getter for the URI used for the named graph. The returned value is 	 * {@link #YARD_URI_PREFIX}+{@link #getId()}. 	 * @return the URI used for the RDF graph that stores all the data of this 	 * yard. 	 */
+comment|/**      * Getter for the URI used for the named graph. The returned value is      * {@link #YARD_URI_PREFIX}+{@link #getId()}.      * @return the URI used for the RDF graph that stores all the data of this      * yard.      */
 specifier|public
 name|String
 name|getYardGraphUri
@@ -1210,7 +1210,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Internally used to create Representations for URIs 	 * @param uri the uri 	 * @param check if<code>false</code> than there is no check if the URI 	 *     refers to a Resource in the graph that is of type {@link #REPRESENTATION} 	 * @return the Representation 	 */
+comment|/**      * Internally used to create Representations for URIs      * @param uri the uri      * @param check if<code>false</code> than there is no check if the URI      *     refers to a Resource in the graph that is of type {@link #REPRESENTATION}      * @return the Representation      */
 specifier|protected
 name|Representation
 name|getRepresentation
@@ -1242,7 +1242,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-comment|/* 			 * We need to use an own graph for the Representation, because 			 * changes to the Representation should not be reflected in the 			 * Yard until a store() or update(). 			 * Currently the GraphNode.getNodeContext() functionality is used 			 * to calculate the graph included for the Representation. 			 */
+comment|/*              * We need to use an own graph for the Representation, because              * changes to the Representation should not be reflected in the              * Yard until a store() or update().              * Currently the GraphNode.getNodeContext() functionality is used              * to calculate the graph included for the Representation.              */
 name|GraphNode
 name|node
 init|=
@@ -1404,7 +1404,7 @@ argument_list|,
 name|graph
 argument_list|)
 decl_stmt|;
-comment|/* 				 * Currently the "context" of the Clerezza GraphNode implementation 				 * is used for CRUD operations on Representations. 				 * This includes incoming and outgoing relations the resource and 				 * recursively bNodes. 				 */
+comment|/*                  * Currently the "context" of the Clerezza GraphNode implementation                  * is used for CRUD operations on Representations.                  * This includes incoming and outgoing relations the resource and                  * recursively bNodes.                  */
 name|node
 operator|.
 name|deleteNodeContext
@@ -1700,7 +1700,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//		log.info("> rick size: "+graph.size());
+comment|//        log.info("> rick size: "+graph.size());
 if|if
 condition|(
 name|representation
@@ -1721,7 +1721,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//			log.info("> remove previous version");
+comment|//            log.info("> remove previous version");
 name|remove
 argument_list|(
 name|representation
@@ -1730,7 +1730,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//			log.info("> rick size: "+graph.size());
+comment|//            log.info("> rick size: "+graph.size());
 block|}
 elseif|else
 if|if
@@ -1792,7 +1792,7 @@ argument_list|(
 name|representation
 argument_list|)
 decl_stmt|;
-comment|//		log.info("> add "+toAdd.size()+" triples to Yard "+getId());
+comment|//        log.info("> add "+toAdd.size()+" triples to Yard "+getId());
 name|Lock
 name|writeLock
 init|=
@@ -1830,7 +1830,7 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
-comment|//		log.info("> currently "+graph.size()+" triples in Yard "+getId());
+comment|//        log.info("> currently "+graph.size()+" triples in Yard "+getId());
 return|return
 name|toAdd
 return|;
@@ -2379,7 +2379,7 @@ name|Representation
 argument_list|>
 argument_list|()
 block|{
-comment|/** 					 * Adapter that gets the rootVariable of the Query (selecting the ID) 					 * and creates a Representation for it. 					 * @param solution a solution of the query 					 * @param type the type (no generics here) 					 * @return the representation or<code>null</code> if result is 					 * not an UriRef or there is no Representation for the result. 					 */
+comment|/**                      * Adapter that gets the rootVariable of the Query (selecting the ID)                      * and creates a Representation for it.                      * @param solution a solution of the query                      * @param type the type (no generics here)                      * @return the representation or<code>null</code> if result is                      * not an UriRef or there is no Representation for the result.                      */
 annotation|@
 name|Override
 specifier|public

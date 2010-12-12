@@ -61,7 +61,7 @@ name|REPLACEMENT_STRING
 init|=
 literal|"\\\\$0"
 decl_stmt|;
-comment|/** 	 * Escapes all special chars in an string (field name or constraint) to be 	 * used in an SolrQuery. 	 * @param string the string to be escaped 	 * @return the escaped string 	 */
+comment|/**      * Escapes all special chars in an string (field name or constraint) to be      * used in an SolrQuery.      * @param string the string to be escaped      * @return the escaped string      */
 specifier|public
 specifier|static
 name|String

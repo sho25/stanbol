@@ -488,7 +488,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/** 	 * {@link UriRef} constant for {@link RdfResourceEnum#queryResult} 	 * @see RdfResourceEnum.fieldQueryResult 	 */
+comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#queryResult}      * @see RdfResourceEnum.fieldQueryResult      */
 specifier|public
 specifier|static
 specifier|final
@@ -506,7 +506,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * {@link UriRef} constant for {@link RdfResourceEnum#QueryResultSet} 	 * @see RdfResourceEnum.FieldQueryResultSet 	 */
+comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#QueryResultSet}      * @see RdfResourceEnum.FieldQueryResultSet      */
 specifier|public
 specifier|static
 specifier|final
@@ -528,7 +528,7 @@ specifier|private
 name|SparqlQueryUtils
 parameter_list|()
 block|{}
-comment|/** 	 * Creates a SPARWL CONSTRUCT query that creates triples for all the selected 	 * fields of representations in the result set.<p> 	 * In addition the query also constructs<code>rick-query:ieldQueryResultSet  	 * rick-query:fieldQueryResult ?representation</code> triples that can be 	 * used to create an iterator over the results of the query 	 * @param query the field query 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 * @param additionalFields This allows to parse additional fields that are  	 *    optionally selected in the data set and added to the CONSTRUCT part 	 *    of the query  	 * @return the SPARQL CONSTRUCT Query 	 */
+comment|/**      * Creates a SPARWL CONSTRUCT query that creates triples for all the selected      * fields of representations in the result set.<p>      * In addition the query also constructs<code>rick-query:ieldQueryResultSet      * rick-query:fieldQueryResult ?representation</code> triples that can be      * used to create an iterator over the results of the query      * @param query the field query      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @param additionalFields This allows to parse additional fields that are      *    optionally selected in the data set and added to the CONSTRUCT part      *    of the query      * @return the SPARQL CONSTRUCT Query      */
 specifier|public
 specifier|static
 name|String
@@ -559,7 +559,7 @@ name|additionalFields
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Creates a SPARWL CONSTRUCT query that creates triples for all the selected 	 * fields of representations in the result set.<p> 	 * In addition the query also constructs<code>rick-query:ieldQueryResultSet  	 * rick-query:fieldQueryResult ?representation</code> triples that can be 	 * used to create an iterator over the results of the query 	 * @param query the field query 	 * @param limit if a value> 0 is parsed, than this value overwrites the limit 	 *    defined by the query. 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 * @param additionalFields This allows to parse additional fields that are  	 *    optionally selected in the data set and added to the CONSTRUCT part 	 *    of the query  	 * @return the SPARQL CONSTRUCT Query 	 */
+comment|/**      * Creates a SPARWL CONSTRUCT query that creates triples for all the selected      * fields of representations in the result set.<p>      * In addition the query also constructs<code>rick-query:ieldQueryResultSet      * rick-query:fieldQueryResult ?representation</code> triples that can be      * used to create an iterator over the results of the query      * @param query the field query      * @param limit if a value> 0 is parsed, than this value overwrites the limit      *    defined by the query.      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @param additionalFields This allows to parse additional fields that are      *    optionally selected in the data set and added to the CONSTRUCT part      *    of the query      * @return the SPARQL CONSTRUCT Query      */
 specifier|public
 specifier|static
 name|String
@@ -804,7 +804,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Creates the CONSTRUCT part of the query including the  	 *<code>rick-query:ieldQueryResultSet rick-query:fieldQueryResult ?representation</code> 	 * triples that are used to build the iterator over the results 	 * @param queryString The query to add the construct fields 	 * @param selectedFields the field name 2 variable name mapping used by the 	 *    query. This mapping MUST also contain the<code>null</code> key that 	 *    is mapped to the variable name used for the representations to be selected 	 */
+comment|/**      * Creates the CONSTRUCT part of the query including the      *<code>rick-query:ieldQueryResultSet rick-query:fieldQueryResult ?representation</code>      * triples that are used to build the iterator over the results      * @param queryString The query to add the construct fields      * @param selectedFields the field name 2 variable name mapping used by the      *    query. This mapping MUST also contain the<code>null</code> key that      *    is mapped to the variable name used for the representations to be selected      */
 specifier|private
 specifier|static
 name|void
@@ -972,7 +972,7 @@ literal|"} \n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Creates the SPARQL representation of the parse field query. 	 * @param query A field query implementation that additionally supports a field 	 *    to variable mapping 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 * @return the SPARQL query as String 	 */
+comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -999,7 +999,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Creates the SPARQL representation of the parse field query. 	 * @param query A field query implementation that additionally supports a field 	 *    to variable mapping 	 * @param limit If> 0, than the limit parsed by the query is overriden by this 	 *    value 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 * @return the SPARQL query as String 	 */
+comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param limit If> 0, than the limit parsed by the query is overriden by this      *    value      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1028,7 +1028,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Creates the SPARQL representation of the parse field query. 	 * @param query A field query implementation that additionally supports a field 	 *    to variable mapping 	 * @param includeFields if<code>false</code> only the root is selected (selected fields are ignored) 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 * @return the SPARQL query as String 	 */
+comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param includeFields if<code>false</code> only the root is selected (selected fields are ignored)      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1058,7 +1058,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Creates the SPARQL representation of the parse field query. 	 * @param query A field query implementation that additionally supports a field 	 *    to variable mapping 	 * @param includeFields if<code>false</code> only the root is selected (selected fields are ignored) 	 * @param limit if> 0 than the limit defined by the query is overridden by 	 *    the parsed value 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 * @return the SPARQL query as String 	 */
+comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param includeFields if<code>false</code> only the root is selected (selected fields are ignored)      * @param limit if> 0 than the limit defined by the query is overridden by      *    the parsed value      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1248,7 +1248,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 	 * @param endpointType 	 * @param queryString 	 * @param selectedFields 	 */
+comment|/**      * @param endpointType      * @param queryString      * @param selectedFields      */
 specifier|private
 specifier|static
 name|void
@@ -1300,7 +1300,7 @@ comment|//else ... for Virtuoso we need not count incoming links, because it has
 comment|//page rank like feature we can use to rank entities!
 comment|//all others do not support sorting
 block|}
-comment|/** 	 * @param endpointType 	 * @param queryString 	 */
+comment|/**      * @param endpointType      * @param queryString      */
 specifier|private
 specifier|static
 name|void
@@ -1370,7 +1370,7 @@ expr_stmt|;
 block|}
 comment|//else not supported ... add nothing
 block|}
-comment|/** 	 * @param query 	 * @param queryString 	 */
+comment|/**      * @param query      * @param queryString      */
 specifier|private
 specifier|static
 name|void
@@ -1413,7 +1413,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * @param query 	 * @param queryString 	 */
+comment|/**      * @param query      * @param queryString      */
 specifier|private
 specifier|static
 name|void
@@ -1450,7 +1450,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * @param queryString 	 * @param query 	 * @param includeFields 	 * @param selectedFields 	 */
+comment|/**      * @param queryString      * @param query      * @param includeFields      * @param selectedFields      */
 specifier|private
 specifier|static
 name|void
@@ -1537,7 +1537,7 @@ literal|" \n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * @param queryString 	 * @param query 	 * @param selectedFields 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 */
+comment|/**      * @param queryString      * @param query      * @param selectedFields      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      */
 specifier|private
 specifier|static
 name|void
@@ -2163,7 +2163,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** 	 * Adds a filter that restricts the data type to an variable 	 * @param queryString the query String to add the filter. MUST NOT be<code>null</code> 	 * @param var the variable to add the filter. MUST NOT be<code>null</code> 	 * @param dataTypes the data type uri for the filter. MUST NOT be<code>null</code> 	 */
+comment|/**      * Adds a filter that restricts the data type to an variable      * @param queryString the query String to add the filter. MUST NOT be<code>null</code>      * @param var the variable to add the filter. MUST NOT be<code>null</code>      * @param dataTypes the data type uri for the filter. MUST NOT be<code>null</code>      */
 specifier|private
 specifier|static
 name|void
@@ -2196,7 +2196,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Adds a value constraint for a field including the dataType 	 * @param queryString the query string to add the constraint.  MUST NOT be<code>null</code> 	 * @param rootVarName the variable name of the subject.  MUST NOT be<code>null</code> 	 * @param field the property name of the field. MUST NOT be<code>null</code> 	 * @param dataType the dataType constraint or<code>null</code> if none 	 * @param value the value. MUST NOT be<code>null</code>. 	 */
+comment|/**      * Adds a value constraint for a field including the dataType      * @param queryString the query string to add the constraint.  MUST NOT be<code>null</code>      * @param rootVarName the variable name of the subject.  MUST NOT be<code>null</code>      * @param field the property name of the field. MUST NOT be<code>null</code>      * @param dataType the dataType constraint or<code>null</code> if none      * @param value the value. MUST NOT be<code>null</code>.      */
 specifier|private
 specifier|static
 name|void
@@ -2293,7 +2293,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Adds an text constraint to the SPARQL query string 	 * @param queryString the query string to add the constraint 	 * @param var the variable name to constrain 	 * @param constraint the constraint 	 * @param endpointType The type of the Endpoint (used to write optimized  	 *    queries for endpoint type specific extensions 	 */
+comment|/**      * Adds an text constraint to the SPARQL query string      * @param queryString the query string to add the constraint      * @param var the variable name to constrain      * @param constraint the constraint      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      */
 specifier|private
 specifier|static
 name|void
@@ -2758,7 +2758,7 @@ expr_stmt|;
 comment|//close the FILTER and the graph pattern
 block|}
 block|}
-comment|/** 	 * Adds a SPARQL regex filter to the parsed query string 	 * @param queryString the string builder to add the constraint 	 * @param var the variable to constrain 	 * @param regexQueryText the regex encoded search string 	 * @param isCasesensitive if the constraint is case sensitive or not 	 */
+comment|/**      * Adds a SPARQL regex filter to the parsed query string      * @param queryString the string builder to add the constraint      * @param var the variable to constrain      * @param regexQueryText the regex encoded search string      * @param isCasesensitive if the constraint is case sensitive or not      */
 specifier|private
 specifier|static
 name|void
@@ -2800,7 +2800,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Adds an RangeConstraint to the parsed query String 	 * @param queryString the query to add the constraint 	 * @param var the variable to constrain 	 * @param constraint the constraint 	 */
+comment|/**      * Adds an RangeConstraint to the parsed query String      * @param queryString the query to add the constraint      * @param var the variable to constrain      * @param constraint the constraint      */
 specifier|private
 specifier|static
 name|void
@@ -2942,7 +2942,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Adds a lower/upper bound constraint to the query String 	 * @param queryString the query string 	 * @param var the variable 	 * @param lowerBound<code>true</code> to add the lower bound and  	 *<code>false</code> to add the upper bound 	 * @param inclusive if the bound is inclusive (>= or<=) 	 * @param value the value representing the bound. 	 */
+comment|/**      * Adds a lower/upper bound constraint to the query String      * @param queryString the query string      * @param var the variable      * @param lowerBound<code>true</code> to add the lower bound and      *<code>false</code> to add the upper bound      * @param inclusive if the bound is inclusive (>= or<=)      * @param value the value representing the bound.      */
 specifier|private
 specifier|static
 name|void
@@ -3038,7 +3038,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Adds a S P O pattern to the query by using the root as subject, the parsed 	 * field as predicate and the returned variable as object. This method doese 	 * not open a '{' nor close the pattern with any of '.', ',' or ';' 	 * @param queryString the {@link StringBuilder} to add the pattern 	 * @param field the field 	 * @param selectedFields the map field -> var of the selected variables. If 	 *    the parsed field is selected, the field is removed from the list and 	 *    the mapped variable name is returned 	 * @param varPrefix the default prefix for newly created variable names 	 * @param varNum The first element of the array is used to get the number of 	 *    the created variable. If one is created the value of the first element is 	 *    increased by one 	 * @return The variable name used for the object of the pattern 	 */
+comment|/**      * Adds a S P O pattern to the query by using the root as subject, the parsed      * field as predicate and the returned variable as object. This method doese      * not open a '{' nor close the pattern with any of '.', ',' or ';'      * @param queryString the {@link StringBuilder} to add the pattern      * @param field the field      * @param selectedFields the map field -> var of the selected variables. If      *    the parsed field is selected, the field is removed from the list and      *    the mapped variable name is returned      * @param varPrefix the default prefix for newly created variable names      * @param varNum The first element of the array is used to get the number of      *    the created variable. If one is created the value of the first element is      *    increased by one      * @return The variable name used for the object of the pattern      */
 specifier|private
 specifier|static
 name|String
@@ -3129,7 +3129,7 @@ return|return
 name|var
 return|;
 block|}
-comment|/** 	 * Writes the SPARQL FILTER for the parsed languages. 	 * This Method writes 	 *<code><pre> 	 *      prefix ((lang(?var) = "lang1") [|| (lang(?var) = "lang2..n")]) 	 *</pre></code> 	 * @param queryString the query string to add the FILTER 	 * @param languages the languages to filter for (may contain<code>null</code> as element) 	 * @param var the name of the variable to filter. 	 * @param prefix The prefix is written in front of the filter expression (if any is created). 	 *        Typically this will be<ul> 	 *<li> FILTER if this is the only filter for an variable 	 *<li>&& if this filter is combined with AND to an other filter or 	 *<li> || if this filter is combined wit OR to an other filter 	 *</ul> 	 */
+comment|/**      * Writes the SPARQL FILTER for the parsed languages.      * This Method writes      *<code><pre>      *      prefix ((lang(?var) = "lang1") [|| (lang(?var) = "lang2..n")])      *</pre></code>      * @param queryString the query string to add the FILTER      * @param languages the languages to filter for (may contain<code>null</code> as element)      * @param var the name of the variable to filter.      * @param prefix The prefix is written in front of the filter expression (if any is created).      *        Typically this will be<ul>      *<li> FILTER if this is the only filter for an variable      *<li>&& if this filter is combined with AND to an other filter or      *<li> || if this filter is combined wit OR to an other filter      *</ul>      */
 specifier|private
 specifier|static
 name|void
@@ -3252,7 +3252,7 @@ literal|""
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|/* 				 * NOTE: the lang() returns "" for literals without an language 				 *       tag. Because of that if the language == null we need 				 *       to parse "" as an argument  				 */
+comment|/*                  * NOTE: the lang() returns "" for literals without an language                  *       tag. Because of that if the language == null we need                  *       to parse "" as an argument                  */
 block|}
 if|if
 condition|(
@@ -3436,22 +3436,22 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//		query.setConstraint("urn:field2", new TextConstraint("test value"));
-comment|//		query.setConstraint("urn:field3", new TextConstraint("text value",true));
-comment|//		query.setConstraint("urn:field2a", new TextConstraint(":-]")); //tests escaping of REGEX
-comment|//		query.setConstraint("urn:field3", new TextConstraint("language text","en"));
-comment|//		query.setConstraint("urn:field4", new TextConstraint("multi language text","en","de",null));
-comment|//		query.setConstraint("urn:field5", new TextConstraint("wildcar*",PatternType.wildcard,false,"en"));
-comment|//		query.setConstraint("urn:field6", new TextConstraint("^regex",PatternType.REGEX,true));
-comment|//		query.setConstraint("urn:field7", new TextConstraint("par*",PatternType.WildCard,false,"en","de",null));
-comment|//		query.setConstraint("urn:field8", new TextConstraint(null,"en","de",null));
-comment|//		query.setConstraint("urn:field9", new RangeConstraint((int)5, (int)10, true));
-comment|//		query.setConstraint("urn:field10", new RangeConstraint((int)5, (int)10, false));
-comment|//		query.setConstraint("urn:field11", new RangeConstraint(null, (int)10, true));
-comment|//		query.setConstraint("urn:field12", new RangeConstraint((int)5, null, true));
-comment|//		query.setConstraint("urn:field12", new RangeConstraint(new Date(), null, true));
-comment|//		query.addSelectedField("urn:field2a");
-comment|//		query.addSelectedField("urn:field3");
+comment|//        query.setConstraint("urn:field2", new TextConstraint("test value"));
+comment|//        query.setConstraint("urn:field3", new TextConstraint("text value",true));
+comment|//        query.setConstraint("urn:field2a", new TextConstraint(":-]")); //tests escaping of REGEX
+comment|//        query.setConstraint("urn:field3", new TextConstraint("language text","en"));
+comment|//        query.setConstraint("urn:field4", new TextConstraint("multi language text","en","de",null));
+comment|//        query.setConstraint("urn:field5", new TextConstraint("wildcar*",PatternType.wildcard,false,"en"));
+comment|//        query.setConstraint("urn:field6", new TextConstraint("^regex",PatternType.REGEX,true));
+comment|//        query.setConstraint("urn:field7", new TextConstraint("par*",PatternType.WildCard,false,"en","de",null));
+comment|//        query.setConstraint("urn:field8", new TextConstraint(null,"en","de",null));
+comment|//        query.setConstraint("urn:field9", new RangeConstraint((int)5, (int)10, true));
+comment|//        query.setConstraint("urn:field10", new RangeConstraint((int)5, (int)10, false));
+comment|//        query.setConstraint("urn:field11", new RangeConstraint(null, (int)10, true));
+comment|//        query.setConstraint("urn:field12", new RangeConstraint((int)5, null, true));
+comment|//        query.setConstraint("urn:field12", new RangeConstraint(new Date(), null, true));
+comment|//        query.addSelectedField("urn:field2a");
+comment|//        query.addSelectedField("urn:field3");
 name|query
 operator|.
 name|setLimit
@@ -3566,7 +3566,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * @param query 	 * @param resultGraph 	 * @return 	 */
+comment|/**      * @param query      * @param resultGraph      * @return      */
 specifier|public
 specifier|static
 name|Iterator
@@ -3624,7 +3624,7 @@ name|RdfRepresentation
 argument_list|>
 argument_list|()
 block|{
-comment|/* 					 * Anonymous implementation of an Adapter that converts the filtered 					 * Triples of the resulting graph to RdfRepresentations 					 */
+comment|/*                      * Anonymous implementation of an Adapter that converts the filtered                      * Triples of the resulting graph to RdfRepresentations                      */
 annotation|@
 name|Override
 specifier|public

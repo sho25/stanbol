@@ -118,7 +118,7 @@ name|FieldQuery
 implements|,
 name|Cloneable
 block|{
-comment|/** 	 * String used as prefix for variables generated for fields 	 */
+comment|/**      * String used as prefix for variables generated for fields      */
 specifier|private
 specifier|static
 specifier|final
@@ -248,7 +248,7 @@ operator|=
 name|endpointType
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQueryImpl#addSelectedField(java.lang.String) 	 */
+comment|/*      * (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQueryImpl#addSelectedField(java.lang.String)      */
 annotation|@
 name|Override
 specifier|public
@@ -277,7 +277,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQueryImpl#addSelectedFields(java.util.Collection) 	 */
+comment|/*      * (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQueryImpl#addSelectedFields(java.util.Collection)      */
 annotation|@
 name|Override
 specifier|public
@@ -318,7 +318,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQueryImpl#removeSelectedField(java.lang.String) 	 */
+comment|/*      * (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQueryImpl#removeSelectedField(java.lang.String)      */
 annotation|@
 name|Override
 specifier|public
@@ -344,7 +344,7 @@ name|field
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.rick.core.query.FieldQueryImpl#removeSelectedFields(java.util.Collection) 	 */
+comment|/*      * (non-Javadoc)      * @see eu.iksproject.rick.core.query.FieldQueryImpl#removeSelectedFields(java.util.Collection)      */
 annotation|@
 name|Override
 specifier|public
@@ -382,7 +382,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Getter for the variable name for a selected field 	 * @param field the selected field 	 * @return the variable name or<code>null</code> if the parsed field is not selected. 	 */
+comment|/**      * Getter for the variable name for a selected field      * @param field the selected field      * @return the variable name or<code>null</code> if the parsed field is not selected.      */
 specifier|public
 name|String
 name|getVariableName
@@ -400,7 +400,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Getter for the unmodifiable field name to variable name mapping. 	 * @return 	 */
+comment|/**      * Getter for the unmodifiable field name to variable name mapping.      * @return      */
 specifier|public
 name|Map
 argument_list|<
@@ -438,7 +438,7 @@ return|return
 name|ROOT_VAR_NAME
 return|;
 block|}
-comment|/** 	 * Clones the query (including the field to var name mapping) 	 */
+comment|/**      * Clones the query (including the field to var name mapping)      */
 annotation|@
 name|Override
 specifier|public
@@ -495,7 +495,7 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Removes also the field to var name mappings 	 * @see eu.iksproject.rick.core.query.FieldQueryImpl#removeAllSelectedFields() 	 */
+comment|/**      * Removes also the field to var name mappings      * @see eu.iksproject.rick.core.query.FieldQueryImpl#removeAllSelectedFields()      */
 annotation|@
 name|Override
 specifier|public
@@ -566,7 +566,7 @@ operator|==
 name|varNum
 return|;
 block|}
-comment|/** 	 * Getter for the SPARQL SELECT representation of this FieldQuery 	 * @return the SPARQL SELECT query 	 */
+comment|/**      * Getter for the SPARQL SELECT representation of this FieldQuery      * @return the SPARQL SELECT query      */
 specifier|public
 name|String
 name|toSparqlSelect
@@ -588,7 +588,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Getter for the SPARQL CONSTRUCT representation of this FieldQuery 	 * @return the SPARQL CONSTRUCT query 	 */
+comment|/**      * Getter for the SPARQL CONSTRUCT representation of this FieldQuery      * @return the SPARQL CONSTRUCT query      */
 specifier|public
 name|String
 name|toSparqlConstruct

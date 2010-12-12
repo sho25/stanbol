@@ -103,7 +103,7 @@ name|SparqlFieldQuery
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Utility Method to create an {@link SparqlFieldQuery} based on the parse {@link FieldQuery}      * @param parsedQuery the parsed Query 	 */
+comment|/**      * Utility Method to create an {@link SparqlFieldQuery} based on the parse {@link FieldQuery}      * @param parsedQuery the parsed Query      */
 specifier|public
 specifier|static
 name|SparqlFieldQuery

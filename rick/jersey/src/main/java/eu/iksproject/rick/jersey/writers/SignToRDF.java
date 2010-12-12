@@ -456,7 +456,7 @@ name|sign
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Adds the Triples that represent the Sign to the parsed graph. Note that 	 * this method does not add triples for the representation. However it adds  	 * the triple (sign,singRepresentation,representation) 	 * @param graph the graph to add the triples 	 * @param sign the sign 	 */
+comment|/**      * Adds the Triples that represent the Sign to the parsed graph. Note that      * this method does not add triples for the representation. However it adds      * the triple (sign,singRepresentation,representation)      *      * @param graph the graph to add the triples      * @param sign the sign      */
 specifier|static
 name|void
 name|addSignTriplesToGraph
@@ -495,7 +495,7 @@ name|getId
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/* 		 * TODO: change to URI as soon as the paths are defined 		 *  e.g: 		 *   - Sign:<URLofRICK>/site/<sing.getSignSite> 		 *   - Symbol:<URLofRICK>/symbol/<sing.getSignSite> 		 *   - EntityMapping:<URLofRICK>/mapping/<sing.getSignSite> 		 * For now write a Literal with the ID of the Site 		 */
+comment|/*          * TODO: change to URI as soon as the paths are defined          *  e.g:          *   - Sign:<URLofRICK>/site/<sing.getSignSite>          *   - Symbol:<URLofRICK>/symbol/<sing.getSignSite>          *   - EntityMapping:<URLofRICK>/mapping/<sing.getSignSite>          * For now write a Literal with the ID of the Site          */
 name|TypedLiteral
 name|siteName
 init|=

@@ -138,7 +138,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for creating instances of the RDF implementation of the Rick model   * based on Clerezza.  * TODO: Check if it makes sense to add a instance cache for {@link RdfReference}  *       instances.  * @author Rupert Westenthaler  *  */
+comment|/**  * Factory for creating instances of the RDF implementation of the Rick model  * based on Clerezza.  * TODO: Check if it makes sense to add a instance cache for {@link RdfReference}  *       instances.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -153,7 +153,7 @@ specifier|static
 name|RdfValueFactory
 name|instance
 decl_stmt|;
-comment|/** 	 * TODO:Currently implements the singleton pattern. This might change in the 	 * future if ValueFactoy becomes an own OSGI Service 	 * @return 	 */
+comment|/**      * TODO:Currently implements the singleton pattern. This might change in the      * future if ValueFactoy becomes an own OSGI Service      * @return      */
 specifier|public
 specifier|static
 name|RdfValueFactory
@@ -371,7 +371,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** 	 * {@link RdfRepresentation} specific create Method based on an existing 	 * RDF Graph 	 * @param node The node of the node used for the representation. If this 	 *     node is not part of the parsed graph, the resulting representation 	 *     will be empty 	 * @param graph the graph. 	 * @return The representation based on the state of the parsed graph 	 */
+comment|/**      * {@link RdfRepresentation} specific create Method based on an existing      * RDF Graph.      *      * @param node The node of the node used for the representation. If this      *     node is not part of the parsed graph, the resulting representation      *     will be empty      * @param graph the graph.      * @return The representation based on the state of the parsed graph      */
 specifier|public
 name|RdfRepresentation
 name|createRdfRepresentation
@@ -408,7 +408,7 @@ name|graph
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Extracts the Graph for {@link RdfRepresentation} or creates a {@link Graph} 	 * for all other implementations of {@link Representation} 	 * @param representation the representation 	 * @return the read only RDF Graph. 	 */
+comment|/**      * Extracts the Graph for {@link RdfRepresentation} or creates a {@link Graph}      * for all other implementations of {@link Representation}.      *      * @param representation the representation      * @return the read only RDF Graph.      */
 specifier|public
 name|RdfRepresentation
 name|toRdfRepresentation

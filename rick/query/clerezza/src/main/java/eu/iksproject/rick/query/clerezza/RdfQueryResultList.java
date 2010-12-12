@@ -380,7 +380,7 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Getter for the RDF Graph holding the Results of the Query 	 * @return the RDF Graph with the Results 	 */
+comment|/**      * Getter for the RDF Graph holding the Results of the Query      * @return the RDF Graph with the Results      */
 specifier|public
 name|MGraph
 name|getResultGraph

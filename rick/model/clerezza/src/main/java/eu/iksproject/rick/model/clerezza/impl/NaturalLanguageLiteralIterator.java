@@ -129,7 +129,7 @@ argument_list|<
 name|Literal
 argument_list|>
 block|{
-comment|/** 	 * Unmodifiable set of the active languages  	 */
+comment|/**      * Unmodifiable set of the active languages      */
 specifier|protected
 specifier|final
 name|Set
@@ -316,9 +316,6 @@ name|Literal
 name|prepareNext
 parameter_list|()
 block|{
-name|Literal
-name|current
-decl_stmt|;
 while|while
 condition|(
 name|it
@@ -327,13 +324,14 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+name|Literal
 name|current
-operator|=
+init|=
 name|it
 operator|.
 name|next
 argument_list|()
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 name|current
@@ -371,7 +369,7 @@ condition|(
 name|containsNull
 condition|)
 block|{
-comment|/* 				 * if the null language is active, than we can also return 				 * "normal" literals (with no known language) 				 */
+comment|/*                  * if the null language is active, than we can also return                  * "normal" literals (with no known language)                  */
 return|return
 name|current
 return|;

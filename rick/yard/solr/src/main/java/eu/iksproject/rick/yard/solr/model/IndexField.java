@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a logical field within the index.<p>  * A logical field consists of the following parts:  *<ul>  *<li> The path, a list of path elements (URIs parsed as String)   *<li> The {@link IndexDataType}  *<li> The language  *</ul>  *<p>  * Logical fields are than mapped with an 1..n mapping to actual fields in the  * Index Documents. This functionality is provided by the {@link FieldMapper}  * @author Rupert Westenthaler  *  */
+comment|/**  * Represents a logical field within the index.<p>  * A logical field consists of the following parts:  *<ul>  *<li> The path, a list of path elements (URIs parsed as String)  *<li> The {@link IndexDataType}  *<li> The language  *</ul>  *<p>  * Logical fields are than mapped with an 1..n mapping to actual fields in the  * Index Documents. This functionality is provided by the {@link FieldMapper}  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -110,7 +110,7 @@ specifier|final
 name|int
 name|_hash
 decl_stmt|;
-comment|/** 	 * Constructs a new IndexField 	 * @param path 	 * @param indexType 	 * @param language 	 * @throws IllegalArgumentException 	 */
+comment|/**      * Constructs a new IndexField      * @param path      * @param indexType      * @param language      * @throws IllegalArgumentException      */
 specifier|public
 name|IndexField
 parameter_list|(
@@ -295,7 +295,7 @@ name|hashCode
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 	 * Checks if the path is not<code>null</code>, empty and does not contain 	 * a<code>null</code> or empty element. 	 * @param path the path to validate 	 * @throws IllegalArgumentException if the parsed path in not valid 	 */
+comment|/**      * Checks if the path is not<code>null</code>, empty and does not contain      * a<code>null</code> or empty element.      * @param path the path to validate      * @throws IllegalArgumentException if the parsed path in not valid      */
 specifier|public
 specifier|static
 name|void
@@ -363,7 +363,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * Getter for the Path 	 * @return the path. Unmodifiable list, guaranteed to contain at lest one 	 * element. All elements are guaranteed NOT<code>null</code> and NOT empty. 	 */
+comment|/**      * Getter for the Path      * @return the path. Unmodifiable list, guaranteed to contain at lest one      * element. All elements are guaranteed NOT<code>null</code> and NOT empty.      */
 specifier|public
 specifier|final
 name|List
@@ -377,7 +377,7 @@ return|return
 name|path
 return|;
 block|}
-comment|/** 	 * Getter for the index data type 	 * @return the index data type. Guaranteed to be NOT<code>null</code> 	 */
+comment|/**      * Getter for the index data type      * @return the index data type. Guaranteed to be NOT<code>null</code>      */
 specifier|public
 specifier|final
 name|IndexDataType
@@ -388,7 +388,7 @@ return|return
 name|indexType
 return|;
 block|}
-comment|/** 	 * Checks if this field defines any language 	 * @return<code>true</code> if a language is defined for this field. Note 	 * that<code>true</code> is returned if the language is<code>null</code>. 	 */
+comment|/**      * Checks if this field defines any language      * @return<code>true</code> if a language is defined for this field. Note      * that<code>true</code> is returned if the language is<code>null</code>.      */
 specifier|public
 specifier|final
 name|boolean
@@ -403,7 +403,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Getter for the Languages.  	 * @return the languages. Unmodifiable collection, guaranteed to contain at  	 * least one element. May contain the<code>null</code> value (used for the  	 * default language). 	 */
+comment|/**      * Getter for the Languages.      * @return the languages. Unmodifiable collection, guaranteed to contain at      * least one element. May contain the<code>null</code> value (used for the      * default language).      */
 specifier|public
 specifier|final
 name|Collection

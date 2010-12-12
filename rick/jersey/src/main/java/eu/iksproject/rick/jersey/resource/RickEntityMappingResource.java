@@ -331,8 +331,136 @@ name|QueryResultList
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON_TYPE
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|BAD_REQUEST
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|INTERNAL_SERVER_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|N_TRIPLE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|RDF_JSON
+import|;
+end_import
+
 begin_comment
-comment|/**  * RESTful interface for the {@link EntityMapping}s defined by the  {@link Rick}.  * @author Rupert Westenthaler  */
+comment|/**  * RESTful interface for the {@link EntityMapping}s defined by the  {@link Rick}.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -352,10 +480,10 @@ comment|//    /**
 comment|//     * The default result fields for /find queries is the reference to the
 comment|//     * mapped symbol and the mapped entity
 comment|//     */
-comment|//	private static final Collection<? extends String> DEFAULT_FIND_SELECTED_FIELDS =
-comment|//		Arrays.asList(
-comment|//				RdfResourceEnum.mappedEntity.getUri(),
-comment|//				RdfResourceEnum.mappedSymbol.getUri());
+comment|//    private static final Collection<? extends String> DEFAULT_FIND_SELECTED_FIELDS =
+comment|//        Arrays.asList(
+comment|//                RdfResourceEnum.mappedEntity.getUri(),
+comment|//                RdfResourceEnum.mappedSymbol.getUri());
 specifier|private
 specifier|final
 name|Logger
@@ -461,32 +589,18 @@ annotation|@
 name|Produces
 argument_list|(
 block|{
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 block|,
-name|SupportedFormat
-operator|.
 name|N3
 block|,
-name|SupportedFormat
-operator|.
 name|TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|X_TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|N_TRIPLE
 block|}
 argument_list|)
@@ -555,10 +669,6 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 throw|;
@@ -590,10 +700,6 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Response
-operator|.
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
@@ -624,8 +730,6 @@ name|getAcceptableMediaType
 argument_list|(
 name|headers
 argument_list|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON_TYPE
 argument_list|)
 decl_stmt|;
@@ -655,32 +759,18 @@ annotation|@
 name|Produces
 argument_list|(
 block|{
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 block|,
-name|SupportedFormat
-operator|.
 name|N3
 block|,
-name|SupportedFormat
-operator|.
 name|TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|X_TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|N_TRIPLE
 block|}
 argument_list|)
@@ -749,10 +839,6 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 throw|;
@@ -784,10 +870,6 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Response
-operator|.
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
@@ -818,8 +900,6 @@ name|getAcceptableMediaType
 argument_list|(
 name|headers
 argument_list|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON_TYPE
 argument_list|)
 decl_stmt|;
@@ -849,32 +929,18 @@ annotation|@
 name|Produces
 argument_list|(
 block|{
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 block|,
-name|SupportedFormat
-operator|.
 name|N3
 block|,
-name|SupportedFormat
-operator|.
 name|TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|X_TURTLE
 block|,
-name|SupportedFormat
-operator|.
 name|RDF_JSON
 block|,
-name|SupportedFormat
-operator|.
 name|N_TRIPLE
 block|}
 argument_list|)
@@ -943,10 +1009,6 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 throw|;
@@ -981,10 +1043,6 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Response
-operator|.
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
@@ -1020,8 +1078,6 @@ name|getAcceptableMediaType
 argument_list|(
 name|headers
 argument_list|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON_TYPE
 argument_list|)
 decl_stmt|;

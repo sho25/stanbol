@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/**  *   */
+comment|/**  *  */
 end_comment
 
 begin_package
@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Constraint Types defined for IndexFields<p>  * This could be replaced by a more flexible way to register supported   * constraint types in future versions  * @author Rupert Westenthaler  */
+comment|/**  * Constraint Types defined for IndexFields<p>  * This could be replaced by a more flexible way to register supported  * constraint types in future versions  * @author Rupert Westenthaler  */
 end_comment
 
 begin_enum
@@ -46,34 +46,34 @@ specifier|public
 enum|enum
 name|IndexConstraintTypeEnum
 block|{
-comment|/** 	 * constraints the DataType of values 	 * @see IndexDataType 	 */
+comment|/**      * constraints the DataType of values      * @see IndexDataType      */
 name|DATATYPE
 block|,
-comment|/** 	 * Constraints the language of values 	 */
+comment|/**      * Constraints the language of values      */
 name|LANG
 block|,
-comment|/** 	 * Constraints the field 	 */
+comment|/**      * Constraints the field      */
 name|FIELD
 block|,
-comment|/** 	 * Constraints the Value 	 */
+comment|/**      * Constraints the Value      */
 name|EQ
 block|,
-comment|/** 	 * REGEX based filter on values 	 */
+comment|/**      * REGEX based filter on values      */
 name|REGEX
 block|,
-comment|/** 	 * Wildcard based filter on values 	 */
+comment|/**      * Wildcard based filter on values      */
 name|WILDCARD
 block|,
-comment|/** 	 * Greater than constraint 	 */
+comment|/**      * Greater than constraint      */
 name|GT
 block|,
-comment|/** 	 * Lower than constraint 	 */
+comment|/**      * Lower than constraint      */
 name|LT
 block|,
-comment|/** 	 * Greater else constraint 	 */
+comment|/**      * Greater else constraint      */
 name|GE
 block|,
-comment|/** 	 * Lower else constraint 	 */
+comment|/**      * Lower else constraint      */
 name|LE
 block|, }
 end_enum

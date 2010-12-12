@@ -41,7 +41,7 @@ specifier|final
 name|boolean
 name|hasLanguage
 decl_stmt|;
-comment|/** 	 * Calculate the hash only once 	 */
+comment|/**      * Calculate the hash only once      */
 specifier|private
 specifier|final
 name|int

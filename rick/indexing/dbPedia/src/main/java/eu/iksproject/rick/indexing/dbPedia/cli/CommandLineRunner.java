@@ -467,8 +467,8 @@ literal|"dbp-ont:*"
 block|,
 literal|"dbp-ont:thumbnail | d=xsd:anyURI> foaf:depiction"
 block|,
-comment|//		"dbp-prop:latitude | d=xsd:decimal> geo:lat",
-comment|//		"dbp-prop:longitude | d=xsd:decimal> geo:long",
+comment|//        "dbp-prop:latitude | d=xsd:decimal> geo:lat",
+comment|//        "dbp-prop:longitude | d=xsd:decimal> geo:long",
 literal|"dbp-prop:population | d=xsd:integer"
 block|,
 literal|"dbp-prop:website | d=xsd:anyURI> foaf:homepage"

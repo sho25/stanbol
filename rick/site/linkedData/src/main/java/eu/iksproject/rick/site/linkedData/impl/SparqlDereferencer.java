@@ -228,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author Rupert Westenthaler  *  */
+comment|/**  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -287,7 +287,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * The key used to define the baseUri for instances of this Service 	 * TODO: Maybe define this constants in the ReferenceManager Interface 	 */
+comment|/**      * The key used to define the baseUri for instances of this Service      * TODO: Maybe define this constants in the ReferenceManager Interface      */
 specifier|public
 specifier|static
 specifier|final
@@ -302,7 +302,7 @@ specifier|protected
 name|Parser
 name|parser
 decl_stmt|;
-comment|/* 	 * TODO: Supports only Triple serialisations as content types. 	 * To support other types one would need to create a select query and 	 * format the output accordingly. 	 * However it is not clear if such a functionality is needed. 	 */
+comment|/*      * TODO: Supports only Triple serialisations as content types.      * To support other types one would need to create a select query and      * format the output accordingly.      * However it is not clear if such a functionality is needed.      */
 annotation|@
 name|Override
 specifier|public
@@ -520,21 +520,21 @@ literal|null
 return|;
 block|}
 block|}
-comment|//	/**
-comment|//	 * We need also to check for the endpointURI of the SPARQL service. So override
-comment|//	 * the default implementation and check for the additional property!
-comment|//	 */
-comment|//	@Activate
-comment|//	@Override
-comment|//	public void activate(ComponentContext context) {
-comment|//		//super config
-comment|//		super.activate(context);
-comment|//		log.info("  init sparql endpoint property");
-comment|//	}
-comment|//	@Deactivate
-comment|//	@Override
-comment|//	protected void deactivate(ComponentContext context) {
-comment|//		super.deactivate(context);
+comment|//    /**
+comment|//     * We need also to check for the endpointURI of the SPARQL service. So override
+comment|//     * the default implementation and check for the additional property!
+comment|//     */
+comment|//    @Activate
+comment|//    @Override
+comment|//    public void activate(ComponentContext context) {
+comment|//        //super config
+comment|//        super.activate(context);
+comment|//        log.info("  init sparql endpoint property");
+comment|//    }
+comment|//    @Deactivate
+comment|//    @Override
+comment|//    protected void deactivate(ComponentContext context) {
+comment|//        super.deactivate(context);
 comment|//    }
 block|}
 end_class

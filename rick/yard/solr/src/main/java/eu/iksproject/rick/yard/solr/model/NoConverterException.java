@@ -38,7 +38,7 @@ name|NoConverterException
 extends|extends
 name|RuntimeException
 block|{
-comment|/** 	 * default serialVersionUID 	 */
+comment|/**      * default serialVersionUID      */
 specifier|private
 specifier|static
 specifier|final
@@ -47,7 +47,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
-comment|/** 	 * Create an instance of<code>NoAdapterException</code> 	 * indicating that no adapter is available for the type. 	 * 	 * @param type the type for which no adapter is available 	 */
+comment|/**      * Create an instance of<code>NoAdapterException</code>      * indicating that no adapter is available for the type.      *      * @param type the type for which no adapter is available      */
 specifier|public
 name|NoConverterException
 parameter_list|(

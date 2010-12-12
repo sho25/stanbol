@@ -267,24 +267,6 @@ name|clerezza
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|SupportedFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
 name|ontologies
 operator|.
 name|RDFS
@@ -439,8 +421,96 @@ name|ReferencedSiteManager
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON_TYPE
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|BAD_REQUEST
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|NOT_FOUND
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}  *  * TODO: add description  *  */
+comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}.  *  * TODO: add description  */
 end_comment
 
 begin_class
@@ -487,28 +557,16 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-name|SupportedFormat
-operator|.
 name|N3
 argument_list|,
-name|SupportedFormat
-operator|.
 name|N_TRIPLE
 argument_list|,
-name|SupportedFormat
-operator|.
 name|RDF_XML
 argument_list|,
-name|SupportedFormat
-operator|.
 name|TURTLE
 argument_list|,
-name|SupportedFormat
-operator|.
 name|X_TURTLE
 argument_list|,
-name|SupportedFormat
-operator|.
 name|RDF_JSON
 argument_list|)
 argument_list|)
@@ -527,7 +585,7 @@ operator|.
 name|getUnicodeString
 argument_list|()
 decl_stmt|;
-comment|/** 	 * The default number of maximal results of searched sites.   	 */
+comment|/**      * The default number of maximal results of searched sites.      */
 specifier|private
 specifier|static
 specifier|final
@@ -617,16 +675,12 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
 name|NOT_FOUND
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Getter for the id's of all referenced sites      * @return the id's of all referenced sites.      */
+comment|/**      * Getter for the id's of all referenced sites      *      * @return the id's of all referenced sites.      */
 annotation|@
 name|GET
 annotation|@
@@ -639,8 +693,6 @@ argument_list|)
 annotation|@
 name|Produces
 argument_list|(
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 argument_list|)
 specifier|public
@@ -714,7 +766,7 @@ return|return
 name|referencedSites
 return|;
 block|}
-comment|/**      * Cool URI handler for Signs.       *   	 * @param id The id of the entity (required)      * @param headers the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the      *         raw binary content      */
+comment|/**      * Cool URI handler for Signs.      *      * @param id The id of the entity (required)      * @param headers the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the      *         raw binary content      */
 annotation|@
 name|GET
 annotation|@
@@ -798,7 +850,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"No or emptpy ID was parsd as query parameter (id={})"
+literal|"No or emptpy ID was parsed as query parameter (id={})"
 argument_list|,
 name|id
 argument_list|)
@@ -807,10 +859,6 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 throw|;
@@ -818,7 +866,7 @@ block|}
 name|Sign
 name|sign
 decl_stmt|;
-comment|//		try {
+comment|//        try {
 name|sign
 operator|=
 name|referencedSiteManager
@@ -828,10 +876,10 @@ argument_list|(
 name|id
 argument_list|)
 expr_stmt|;
-comment|//		} catch (IOException e) {
-comment|//			log.error("IOException while accessing ReferencedSiteManager",e);
-comment|//			throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
-comment|//		}
+comment|//        } catch (IOException e) {
+comment|//            log.error("IOException while accessing ReferencedSiteManager",e);
+comment|//            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+comment|//        }
 specifier|final
 name|MediaType
 name|acceptedMediaType
@@ -842,8 +890,6 @@ name|getAcceptableMediaType
 argument_list|(
 name|headers
 argument_list|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON_TYPE
 argument_list|)
 decl_stmt|;
@@ -883,10 +929,6 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
 name|NOT_FOUND
 argument_list|)
 throw|;
@@ -1124,7 +1166,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"/find Request with invalied name={}!"
+literal|"/find Request with invalid name={}!"
 argument_list|,
 name|name
 argument_list|)
@@ -1214,15 +1256,15 @@ name|field
 argument_list|)
 expr_stmt|;
 comment|//select also the field used to find entities
-comment|//    	if(select == null ||select.isEmpty()){
-comment|//    		selectedFields.addAll(DEFAULT_FIND_SELECTED_FIELDS);
-comment|//    	} else {
-comment|//    		for(String selected : select.trim().split(" ")){
-comment|//    			if(selected != null&& !selected.isEmpty()){
-comment|//    				selectedFields.add(selected);
-comment|//    			}
-comment|//    		}
-comment|//    	}
+comment|//        if(select == null ||select.isEmpty()){
+comment|//            selectedFields.addAll(DEFAULT_FIND_SELECTED_FIELDS);
+comment|//        } else {
+comment|//            for(String selected : select.trim().split(" ")){
+comment|//                if(selected != null&& !selected.isEmpty()){
+comment|//                    selectedFields.add(selected);
+comment|//                }
+comment|//            }
+comment|//        }
 name|query
 operator|.
 name|addSelectedFields
@@ -1266,12 +1308,10 @@ name|getAcceptableMediaType
 argument_list|(
 name|headers
 argument_list|,
-name|MediaType
-operator|.
 name|APPLICATION_JSON_TYPE
 argument_list|)
 decl_stmt|;
-comment|//    	try {
+comment|//        try {
 return|return
 name|Response
 operator|.
@@ -1290,10 +1330,10 @@ operator|.
 name|build
 argument_list|()
 return|;
-comment|//		} catch (IOException e) {
-comment|//			log.error("IOException while accessing Referenced Site Manager",e);
-comment|//			throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
-comment|//		}
+comment|//        } catch (IOException e) {
+comment|//            log.error("IOException while accessing Referenced Site Manager",e);
+comment|//            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+comment|//        }
 block|}
 block|}
 end_class

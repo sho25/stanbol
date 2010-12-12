@@ -144,7 +144,7 @@ decl_stmt|;
 specifier|public
 specifier|static
 name|String
-name|DEFAUL_BASE_URI
+name|DEFAULT_BASE_URI
 init|=
 literal|"http://localhost:9998/"
 decl_stmt|;
@@ -444,7 +444,7 @@ name|server
 operator|.
 name|start
 argument_list|(
-name|DEFAUL_BASE_URI
+name|DEFAULT_BASE_URI
 argument_list|)
 expr_stmt|;
 name|System
