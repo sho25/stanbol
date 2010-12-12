@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * search criteria for web services returning postal codes  *   * @author marc@geonames  *   */
+comment|/**  * search criteria for web services returning postal codes  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -70,7 +70,7 @@ name|isOROperator
 init|=
 literal|false
 decl_stmt|;
-comment|/** 	 * @return Returns the style. 	 */
+comment|/**      * @return Returns the style.      */
 specifier|public
 name|Style
 name|getStyle
@@ -80,7 +80,7 @@ return|return
 name|style
 return|;
 block|}
-comment|/** 	 * @param style 	 *            The style to set. 	 */
+comment|/**      * @param style      *            The style to set.      */
 specifier|public
 name|void
 name|setStyle
@@ -96,7 +96,7 @@ operator|=
 name|style
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the ISO 3166-1-alpha-2 countryCode. 	 */
+comment|/**      * @return Returns the ISO 3166-1-alpha-2 countryCode.      */
 specifier|public
 name|String
 name|getCountryCode
@@ -106,7 +106,7 @@ return|return
 name|countryCode
 return|;
 block|}
-comment|/** 	 * @param countryCode 	 *            The ISO 3166-1-alpha-2 countryCode to set. 	 */
+comment|/**      * @param countryCode      *            The ISO 3166-1-alpha-2 countryCode to set.      */
 specifier|public
 name|void
 name|setCountryCode
@@ -148,7 +148,7 @@ operator|=
 name|countryCode
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the latitude. 	 */
+comment|/**      * @return Returns the latitude.      */
 specifier|public
 name|Double
 name|getLatitude
@@ -158,7 +158,7 @@ return|return
 name|latitude
 return|;
 block|}
-comment|/** 	 * @param latitude 	 *            The latitude to set. 	 */
+comment|/**      * @param latitude      *            The latitude to set.      */
 specifier|public
 name|void
 name|setLatitude
@@ -202,7 +202,7 @@ name|latitude
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the longitude. 	 */
+comment|/**      * @return Returns the longitude.      */
 specifier|public
 name|Double
 name|getLongitude
@@ -212,7 +212,7 @@ return|return
 name|longitude
 return|;
 block|}
-comment|/** 	 * @param longitude 	 *            The longitude to set. 	 */
+comment|/**      * @param longitude      *            The longitude to set.      */
 specifier|public
 name|void
 name|setLongitude
@@ -256,7 +256,7 @@ name|longitude
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the placeName. 	 */
+comment|/**      * @return Returns the placeName.      */
 specifier|public
 name|String
 name|getPlaceName
@@ -266,7 +266,7 @@ return|return
 name|placeName
 return|;
 block|}
-comment|/** 	 * @param placeName 	 *            The placeName to set. 	 */
+comment|/**      * @param placeName      *            The placeName to set.      */
 specifier|public
 name|void
 name|setPlaceName
@@ -282,7 +282,7 @@ operator|=
 name|placeName
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the postalCode. 	 */
+comment|/**      * @return Returns the postalCode.      */
 specifier|public
 name|String
 name|getPostalCode
@@ -292,7 +292,7 @@ return|return
 name|postalCode
 return|;
 block|}
-comment|/** 	 * @param postalCode 	 *            The postalCode to set. 	 */
+comment|/**      * @param postalCode      *            The postalCode to set.      */
 specifier|public
 name|void
 name|setPostalCode
@@ -308,7 +308,7 @@ operator|=
 name|postalCode
 expr_stmt|;
 block|}
-comment|/** 	 * @return the maxRows 	 */
+comment|/**      * @return the maxRows      */
 specifier|public
 name|int
 name|getMaxRows
@@ -318,7 +318,7 @@ return|return
 name|maxRows
 return|;
 block|}
-comment|/** 	 * @param maxRows 	 *            the maxRows to set 	 */
+comment|/**      * @param maxRows      *            the maxRows to set      */
 specifier|public
 name|void
 name|setMaxRows
@@ -334,7 +334,7 @@ operator|=
 name|maxRows
 expr_stmt|;
 block|}
-comment|/** 	 * @param isOROperator 	 *            the isOROperator to set 	 */
+comment|/**      * @param isOROperator      *            the isOROperator to set      */
 specifier|public
 name|void
 name|setOROperator
@@ -350,7 +350,7 @@ operator|=
 name|isOROperator
 expr_stmt|;
 block|}
-comment|/** 	 * @return the isOROperator 	 */
+comment|/**      * @return the isOROperator      */
 specifier|public
 name|boolean
 name|isOROperator
@@ -360,7 +360,7 @@ return|return
 name|isOROperator
 return|;
 block|}
-comment|/** 	 * @return the adminCode1 	 */
+comment|/**      * @return the adminCode1      */
 specifier|public
 name|String
 name|getAdminCode1
@@ -370,7 +370,7 @@ return|return
 name|adminCode1
 return|;
 block|}
-comment|/** 	 * @param adminCode1 	 *            the adminCode1 to set 	 */
+comment|/**      * @param adminCode1      *            the adminCode1 to set      */
 specifier|public
 name|void
 name|setAdminCode1
@@ -386,7 +386,7 @@ operator|=
 name|adminCode1
 expr_stmt|;
 block|}
-comment|/** 	 * the radius in km to be used for reverse geocoding. 	 *  	 * @param radius 	 *            the radius to set 	 */
+comment|/**      * the radius in km to be used for reverse geocoding.      *      * @param radius      *            the radius to set      */
 specifier|public
 name|void
 name|setRadius
@@ -402,7 +402,7 @@ operator|=
 name|radius
 expr_stmt|;
 block|}
-comment|/** 	 * @return the radius 	 */
+comment|/**      * @return the radius      */
 specifier|public
 name|double
 name|getRadius
@@ -412,7 +412,7 @@ return|return
 name|radius
 return|;
 block|}
-comment|/** 	 * @return the countryBias 	 */
+comment|/**      * @return the countryBias      */
 specifier|public
 name|String
 name|getCountryBias
@@ -422,7 +422,7 @@ return|return
 name|countryBias
 return|;
 block|}
-comment|/** 	 * @param countryBias 	 *            the countryBias to set 	 */
+comment|/**      * @param countryBias      *            the countryBias to set      */
 specifier|public
 name|void
 name|setCountryBias
@@ -438,7 +438,7 @@ operator|=
 name|countryBias
 expr_stmt|;
 block|}
-comment|/** 	 * @return the startRow 	 */
+comment|/**      * @return the startRow      */
 specifier|public
 name|int
 name|getStartRow
@@ -448,7 +448,7 @@ return|return
 name|startRow
 return|;
 block|}
-comment|/** 	 * @param startRow 	 *            the startRow to set 	 */
+comment|/**      * @param startRow      *            the startRow to set      */
 specifier|public
 name|void
 name|setStartRow

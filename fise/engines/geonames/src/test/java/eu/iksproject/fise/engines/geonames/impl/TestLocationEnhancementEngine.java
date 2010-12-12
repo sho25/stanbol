@@ -395,7 +395,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * The context for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The context for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -406,7 +406,7 @@ literal|"Dr. Patrick Marshall (1869 - November 1950) was a"
 operator|+
 literal|" geologist who lived in New Zealand and worked at the University of Otago."
 decl_stmt|;
-comment|/** 	 * The person for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The person for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -415,7 +415,7 @@ name|PERSON
 init|=
 literal|"Patrick Marshall"
 decl_stmt|;
-comment|/** 	 * The organisation for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The organisation for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -424,7 +424,7 @@ name|ORGANISATION
 init|=
 literal|"University of Otago"
 decl_stmt|;
-comment|/** 	 * The place for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The place for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -875,7 +875,7 @@ return|return;
 block|}
 block|}
 comment|// ... and test the results
-comment|/*     	 * TODO: rw 20100617      	 *  - Expected results depend on the used Index.     	 *  - Use an example where the Organisation, Person and Place is part     	 *    of the index     	 */
+comment|/*          * TODO: rw 20100617          *  - Expected results depend on the used Index.          *  - Use an example where the Organisation, Person and Place is part          *    of the index          */
 name|int
 name|entityAnnotationCount
 init|=

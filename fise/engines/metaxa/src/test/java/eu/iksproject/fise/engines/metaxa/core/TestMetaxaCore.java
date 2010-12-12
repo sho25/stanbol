@@ -296,7 +296,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link TestMetaxaCore} is a test class for {@link MetaxaCore}.  *   * @author Joerg Steffen, DFKI  * @version $Id$  */
+comment|/**  * {@link TestMetaxaCore} is a test class for {@link MetaxaCore}.  *  * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
 
 begin_class
@@ -346,7 +346,7 @@ literal|"extractionregistry.xml"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests the pdf extraction.      *       * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
+comment|/**      * This tests the pdf extraction.      *      * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
 annotation|@
 name|Test
 specifier|public
@@ -497,7 +497,7 @@ name|tripleCounter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests the html extraction.      *       * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
+comment|/**      * This tests the html extraction.      *      * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
 annotation|@
 name|Test
 specifier|public
@@ -648,7 +648,7 @@ name|tripleCounter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests the html extraction.      *       * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
+comment|/**      * This tests the html extraction.      *      * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
 annotation|@
 name|Test
 specifier|public
@@ -799,7 +799,7 @@ name|tripleCounter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This prints out the FISE triples that would be created for the metadata      * contained in the given model.      *       * @param m      *            a {@link Model}      * @return an {@code int} with the number of added triples      */
+comment|/**      * This prints out the FISE triples that would be created for the metadata      * contained in the given model.      *      * @param m      *            a {@link Model}      * @return an {@code int} with the number of added triples      */
 specifier|private
 name|int
 name|printTriples
@@ -974,7 +974,7 @@ return|return
 name|tripleCounter
 return|;
 block|}
-comment|/**      * Cleanup strings for comparison, by removing non-printable chars.      *       * @param txt      *            a {@link String} with the text to clean      * @return a {@link String} with the result      */
+comment|/**      * Cleanup strings for comparison, by removing non-printable chars.      *      * @param txt      *            a {@link String} with the text to clean      * @return a {@link String} with the result      */
 specifier|private
 name|String
 name|cleanup

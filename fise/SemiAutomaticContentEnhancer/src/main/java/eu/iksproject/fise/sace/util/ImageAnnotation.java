@@ -64,7 +64,7 @@ name|ImageAnnotation
 implements|implements
 name|IAnnotation
 block|{
-comment|/** 	 *  	 */
+comment|/**      *      */
 specifier|private
 specifier|static
 specifier|final

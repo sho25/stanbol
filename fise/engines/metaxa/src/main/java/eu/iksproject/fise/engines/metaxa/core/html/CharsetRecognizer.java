@@ -130,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * EncodingDetector.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * EncodingDetector.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *  */
 end_comment
 
 begin_class

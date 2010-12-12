@@ -294,7 +294,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link MetaxaCore} provides the functionality to extract metadata and text  * for a number of different document formats (pdf, html, etc.).  *   * @author Joerg Steffen, DFKI  * @version $Id$  */
+comment|/**  * {@link MetaxaCore} provides the functionality to extract metadata and text  * for a number of different document formats (pdf, html, etc.).  *  * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
 
 begin_class
@@ -307,7 +307,7 @@ specifier|private
 name|ExtractorRegistry
 name|extractorRegistry
 decl_stmt|;
-comment|/**      * This creates a new instance of {@code ApertureExtractor} using the given      * configuration.      *       * @param configFileName      *            a {@link String} with the config file name.      * @throws IOException      *             if there is an error during initialization      */
+comment|/**      * This creates a new instance of {@code ApertureExtractor} using the given      * configuration.      *      * @param configFileName      *            a {@link String} with the config file name.      * @throws IOException      *             if there is an error during initialization      */
 specifier|public
 name|MetaxaCore
 parameter_list|(
@@ -342,7 +342,7 @@ name|in
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This return {@code true} if the given MIME type is supported by the      * extractor.      *       * @param mimeType      *            a {@link String} with the MIME type      * @return a {@code boolean}      */
+comment|/**      * This return {@code true} if the given MIME type is supported by the      * extractor.      *      * @param mimeType      *            a {@link String} with the MIME type      * @return a {@code boolean}      */
 specifier|public
 name|boolean
 name|isSupported
@@ -380,7 +380,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**      * This returns a model containing all the metadata that could be extracted      * by reading the given input stream using the given MIME type.      *       * @param in      *            an {@link InputStream} where to read the document from      * @param docId      *            a {@link String} with the document URI      * @param mimeType      *            a {@link String} with the MIME type      * @return a {@link Model} containing the metadata or {@code null} if no      *         extractor is available for the given MIME type      * @throws ExtractorException      *             if there is an error when extracting the metadata      * @throws IOException      *             if there is an error when reading the input stream      */
+comment|/**      * This returns a model containing all the metadata that could be extracted      * by reading the given input stream using the given MIME type.      *      * @param in      *            an {@link InputStream} where to read the document from      * @param docId      *            a {@link String} with the document URI      * @param mimeType      *            a {@link String} with the MIME type      * @return a {@link Model} containing the metadata or {@code null} if no      *         extractor is available for the given MIME type      * @throws ExtractorException      *             if there is an error when extracting the metadata      * @throws IOException      *             if there is an error when reading the input stream      */
 specifier|public
 name|Model
 name|extract
@@ -519,7 +519,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * This returns a documents plain text if contained in the given extracted      * metadata.      *       * @param model      *            a {@link Model} with the extracted metadata      * @return a {@link String} with the plain text content or {@code null} if      *         no plain text was contained in the extracted metadata      */
+comment|/**      * This returns a documents plain text if contained in the given extracted      * metadata.      *      * @param model      *            a {@link Model} with the extracted metadata      * @return a {@link String} with the plain text content or {@code null} if      *         no plain text was contained in the extracted metadata      */
 specifier|public
 specifier|static
 name|String

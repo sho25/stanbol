@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * a wikipedia article  *   * @author marc@geonames  *   */
+comment|/**  * a wikipedia article  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -60,7 +60,7 @@ specifier|private
 name|String
 name|thumbnailImg
 decl_stmt|;
-comment|/** 	 * @return Returns the elevation. 	 */
+comment|/**      * @return Returns the elevation.      */
 specifier|public
 name|int
 name|getElevation
@@ -70,7 +70,7 @@ return|return
 name|elevation
 return|;
 block|}
-comment|/** 	 * @param elevation 	 *            The elevation to set. 	 */
+comment|/**      * @param elevation      *            The elevation to set.      */
 specifier|public
 name|void
 name|setElevation
@@ -86,7 +86,7 @@ operator|=
 name|elevation
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the feature. 	 */
+comment|/**      * @return Returns the feature.      */
 specifier|public
 name|String
 name|getFeature
@@ -96,7 +96,7 @@ return|return
 name|feature
 return|;
 block|}
-comment|/** 	 * @param feature 	 *            The feature to set. 	 */
+comment|/**      * @param feature      *            The feature to set.      */
 specifier|public
 name|void
 name|setFeature
@@ -112,7 +112,7 @@ operator|=
 name|feature
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the language. 	 */
+comment|/**      * @return Returns the language.      */
 specifier|public
 name|String
 name|getLanguage
@@ -122,7 +122,7 @@ return|return
 name|language
 return|;
 block|}
-comment|/** 	 * @param language 	 *            The language to set. 	 */
+comment|/**      * @param language      *            The language to set.      */
 specifier|public
 name|void
 name|setLanguage
@@ -138,7 +138,7 @@ operator|=
 name|language
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the latitude. 	 */
+comment|/**      * @return Returns the latitude.      */
 specifier|public
 name|double
 name|getLatitude
@@ -148,7 +148,7 @@ return|return
 name|latitude
 return|;
 block|}
-comment|/** 	 * @param latitude 	 *            The latitude to set. 	 */
+comment|/**      * @param latitude      *            The latitude to set.      */
 specifier|public
 name|void
 name|setLatitude
@@ -164,7 +164,7 @@ operator|=
 name|latitude
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the longitude. 	 */
+comment|/**      * @return Returns the longitude.      */
 specifier|public
 name|double
 name|getLongitude
@@ -174,7 +174,7 @@ return|return
 name|longitude
 return|;
 block|}
-comment|/** 	 * @param longitude 	 *            The longitude to set. 	 */
+comment|/**      * @param longitude      *            The longitude to set.      */
 specifier|public
 name|void
 name|setLongitude
@@ -190,7 +190,7 @@ operator|=
 name|longitude
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the population. 	 */
+comment|/**      * @return Returns the population.      */
 specifier|public
 name|int
 name|getPopulation
@@ -200,7 +200,7 @@ return|return
 name|population
 return|;
 block|}
-comment|/** 	 * @param population 	 *            The population to set. 	 */
+comment|/**      * @param population      *            The population to set.      */
 specifier|public
 name|void
 name|setPopulation
@@ -216,7 +216,7 @@ operator|=
 name|population
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the summary. 	 */
+comment|/**      * @return Returns the summary.      */
 specifier|public
 name|String
 name|getSummary
@@ -226,7 +226,7 @@ return|return
 name|summary
 return|;
 block|}
-comment|/** 	 * @param summary 	 *            The summary to set. 	 */
+comment|/**      * @param summary      *            The summary to set.      */
 specifier|public
 name|void
 name|setSummary
@@ -242,7 +242,7 @@ operator|=
 name|summary
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the title. 	 */
+comment|/**      * @return Returns the title.      */
 specifier|public
 name|String
 name|getTitle
@@ -252,7 +252,7 @@ return|return
 name|title
 return|;
 block|}
-comment|/** 	 * @param title 	 *            The title to set. 	 */
+comment|/**      * @param title      *            The title to set.      */
 specifier|public
 name|void
 name|setTitle
@@ -268,7 +268,7 @@ operator|=
 name|title
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the wikipediaUrl. 	 */
+comment|/**      * @return Returns the wikipediaUrl.      */
 specifier|public
 name|String
 name|getWikipediaUrl
@@ -278,7 +278,7 @@ return|return
 name|wikipediaUrl
 return|;
 block|}
-comment|/** 	 * @param wikipediaUrl 	 *            The wikipediaUrl to set. 	 */
+comment|/**      * @param wikipediaUrl      *            The wikipediaUrl to set.      */
 specifier|public
 name|void
 name|setWikipediaUrl
@@ -294,7 +294,7 @@ operator|=
 name|wikipediaURL
 expr_stmt|;
 block|}
-comment|/** 	 * @return the thumbnailImg 	 */
+comment|/**      * @return the thumbnailImg      */
 specifier|public
 name|String
 name|getThumbnailImg
@@ -304,7 +304,7 @@ return|return
 name|thumbnailImg
 return|;
 block|}
-comment|/** 	 * @param thumbnailImg the thumbnailImg to set 	 */
+comment|/**      * @param thumbnailImg the thumbnailImg to set      */
 specifier|public
 name|void
 name|setThumbnailImg

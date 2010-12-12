@@ -158,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * provides static methods to access the<a  * href="http://www.geonames.org/export/ws-overview.html">GeoNames web  * services</a>.  *<p>  * Note : values for some fields are only returned with sufficient {@link Style}  * . Accessing these fields (admin codes and admin names, elevation,population)  * will throw an {@link InsufficientStyleException} if the {@link Style} was not  * sufficient.<p>  *   * NOTE (Rupert Westenthaler) added parsing of score in method  *<code>Toponym getToponymFromElement(Element toponymElement)</code>  * @author marc@geonames  *   */
+comment|/**  * provides static methods to access the<a  * href="http://www.geonames.org/export/ws-overview.html">GeoNames web  * services</a>.  *<p>  * Note : values for some fields are only returned with sufficient {@link Style}  * . Accessing these fields (admin codes and admin names, elevation,population)  * will throw an {@link InsufficientStyleException} if the {@link Style} was not  * sufficient.<p>  *  * NOTE (Rupert Westenthaler) added parsing of score in method  *<code>Toponym getToponymFromElement(Element toponymElement)</code>  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -227,19 +227,19 @@ name|connectTimeOut
 init|=
 literal|10000
 decl_stmt|;
-comment|/** 	 * user name to pass to commercial web services for authentication and 	 * authorization 	 */
+comment|/**      * user name to pass to commercial web services for authentication and      * authorization      */
 specifier|private
 specifier|static
 name|String
 name|userName
 decl_stmt|;
-comment|/** 	 * token to pass to as optional authentication parameter to the commercial 	 * web services. 	 */
+comment|/**      * token to pass to as optional authentication parameter to the commercial      * web services.      */
 specifier|private
 specifier|static
 name|String
 name|token
 decl_stmt|;
-comment|/** 	 * adds the username stored in a static variable to the url. It also adds a 	 * token if one has been set with the static setter previously. 	 *  	 * @param url 	 * @return url with the username appended 	 */
+comment|/**      * adds the username stored in a static variable to the url. It also adds a      * token if one has been set with the static setter previously.      *      * @param url      * @return url with the username appended      */
 specifier|private
 specifier|static
 name|String
@@ -285,7 +285,7 @@ return|return
 name|url
 return|;
 block|}
-comment|/** 	 * adds the default style to the url. The default style can be set with the 	 * static setter. It is 'MEDIUM' if not set. 	 *  	 * @param url 	 * @return url with the style parameter appended 	 */
+comment|/**      * adds the default style to the url. The default style can be set with the      * static setter. It is 'MEDIUM' if not set.      *      * @param url      * @return url with the style parameter appended      */
 specifier|private
 specifier|static
 name|String
@@ -320,7 +320,7 @@ return|return
 name|url
 return|;
 block|}
-comment|/** 	 * returns the currently active server. Normally this is the main server, if 	 * the main server recently failed then the failover server is returned. If 	 * the main server is not available we don't want to try with every request 	 * whether it is available again. We switch to the failover server and try 	 * from time to time whether the main server is again accessible. 	 *  	 * @return 	 */
+comment|/**      * returns the currently active server. Normally this is the main server, if      * the main server recently failed then the failover server is returned. If      * the main server is not available we don't want to try with every request      * whether it is available again. We switch to the failover server and try      * from time to time whether the main server is again accessible.      *      * @return      */
 specifier|private
 specifier|static
 name|String
@@ -401,7 +401,7 @@ return|return
 name|geoNamesServer
 return|;
 block|}
-comment|/** 	 * opens the connection to the url and sets the user agent. In case of an 	 * IOException it checks whether a failover server is set and connects to 	 * the failover server if it has been defined and if it is different from 	 * the normal server. 	 *  	 * @param url 	 *            the url to connect to 	 * @return returns the inputstream for the connection 	 * @throws IOException 	 */
+comment|/**      * opens the connection to the url and sets the user agent. In case of an      * IOException it checks whether a failover server is set and connects to      * the failover server if it has been defined and if it is different from      * the normal server.      *      * @param url      *            the url to connect to      * @return returns the inputstream for the connection      * @throws IOException      */
 specifier|private
 specifier|static
 name|InputStream
@@ -1224,7 +1224,7 @@ return|return
 name|wikipediaArticle
 return|;
 block|}
-comment|/** 	 * returns a list of postal codes for the given parameters. This method is 	 * for convenience. 	 *  	 * @param postalCode 	 * @param placeName 	 * @param countryCode 	 * @return 	 * @throws Exception 	 */
+comment|/**      * returns a list of postal codes for the given parameters. This method is      * for convenience.      *      * @param postalCode      * @param placeName      * @param countryCode      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -1280,7 +1280,7 @@ name|postalCodeSearchCriteria
 argument_list|)
 return|;
 block|}
-comment|/** 	 * returns a list of postal codes for the given search criteria matching a 	 * full text search on the GeoNames postal codes database. 	 *  	 * @param postalCodeSearchCriteria 	 * @return 	 * @throws Exception 	 */
+comment|/**      * returns a list of postal codes for the given search criteria matching a      * full text search on the GeoNames postal codes database.      *      * @param postalCodeSearchCriteria      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -1750,7 +1750,7 @@ return|return
 name|postalCodes
 return|;
 block|}
-comment|/** 	 * returns a list of postal codes 	 *  	 * @param postalCodeSearchCriteria 	 * @return 	 * @throws Exception 	 */
+comment|/**      * returns a list of postal codes      *      * @param postalCodeSearchCriteria      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -2196,7 +2196,7 @@ return|return
 name|postalCodes
 return|;
 block|}
-comment|/** 	 * convenience method for 	 * {@link #findNearbyPlaceName(double,double,double,int)} 	 *  	 * @param latitude 	 * @param longitude 	 * @return 	 * @throws IOException 	 * @throws Exception 	 */
+comment|/**      * convenience method for      * {@link #findNearbyPlaceName(double,double,double,int)}      *      * @param latitude      * @param longitude      * @return      * @throws IOException      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -2449,7 +2449,7 @@ argument_list|)
 return|;
 block|}
 comment|/* Overload function to allow backward compatibility */
-comment|/** 	 * Based on the following inforamtion: Webservice Type : REST 	 * ws.geonames.org/findNearbyWikipedia? Parameters : lang : language code 	 * (around 240 languages) (default = en) lat,lng, radius (in km), maxRows 	 * (default = 10) featureClass featureCode Example: 	 * http://ws.geonames.org/findNearby?lat=47.3&lng=9 	 *  	 * @param: latitude 	 * @param: longitude 	 * @param: radius 	 * @param: feature Class 	 * @param: feature Codes 	 * @param: language 	 * @param: maxRows 	 * @return: list of wikipedia articles 	 * @throws: Exception 	 */
+comment|/**      * Based on the following inforamtion: Webservice Type : REST      * ws.geonames.org/findNearbyWikipedia? Parameters : lang : language code      * (around 240 languages) (default = en) lat,lng, radius (in km), maxRows      * (default = 10) featureClass featureCode Example:      * http://ws.geonames.org/findNearby?lat=47.3&lng=9      *      * @param: latitude      * @param: longitude      * @param: radius      * @param: feature Class      * @param: feature Codes      * @param: language      * @param: maxRows      * @return: list of wikipedia articles      * @throws: Exception      */
 specifier|public
 specifier|static
 name|List
@@ -3253,7 +3253,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** 	 *  	 * @see<a * href="http://www.geonames.org/maps/reverse-geocoder.html#findNearbyStreets"> web service documentation</a> 	 *  	 * @param latitude 	 * @param longitude 	 * @param radius 	 * @return 	 * @throws Exception 	 */
+comment|/**      *      * @see<a * href="http://www.geonames.org/maps/reverse-geocoder.html#findNearbyStreets"> web service documentation</a>      *      * @param latitude      * @param longitude      * @param radius      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -3650,7 +3650,7 @@ return|return
 name|segments
 return|;
 block|}
-comment|/** 	 * convenience method for {@link #search(ToponymSearchCriteria)} 	 *  	 * @see<a href="http://www.geonames.org/export/geonames-search.html">search 	 *  web service documentation</a> 	 *  	 * @param q 	 * @param countryCode 	 * @param name 	 * @param featureCodes 	 * @param startRow 	 * @return 	 * @throws Exception 	 */
+comment|/**      * convenience method for {@link #search(ToponymSearchCriteria)}      *      * @see<a href="http://www.geonames.org/export/geonames-search.html">search      *  web service documentation</a>      *      * @param q      * @param countryCode      * @param name      * @param featureCodes      * @param startRow      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|ToponymSearchResult
@@ -3696,7 +3696,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** 	 * convenience method for {@link #search(ToponymSearchCriteria)} 	 *  	 * The string fields will be transparently utf8 encoded within the call. 	 *  	 * @see<a href="http://www.geonames.org/export/geonames-search.html">search 	 *  web service documentation</a> 	 *  	 * @param q 	 *            search over all fields 	 * @param countryCode 	 * @param name 	 *            search over name only 	 * @param featureCodes 	 * @param startRow 	 * @param language 	 * @param style 	 * @param exactName 	 * @return 	 * @throws Exception 	 */
+comment|/**      * convenience method for {@link #search(ToponymSearchCriteria)}      *      * The string fields will be transparently utf8 encoded within the call.      *      * @see<a href="http://www.geonames.org/export/geonames-search.html">search      *  web service documentation</a>      *      * @param q      *            search over all fields      * @param countryCode      * @param name      *            search over name only      * @param featureCodes      * @param startRow      * @param language      * @param style      * @param exactName      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|ToponymSearchResult
@@ -3800,7 +3800,7 @@ name|searchCriteria
 argument_list|)
 return|;
 block|}
-comment|/** 	 * full text search on the GeoNames database. 	 *  	 * This service gets the number of toponyms defined by the 'maxRows' 	 * parameter. The parameter 'style' determines which fields are returned by 	 * the service. 	 *  	 * @see<a href="http://www.geonames.org/export/geonames-search.html">search 	 *  web service documentation</a> 	 *  	 *<br> 	 *  	 *<pre> 	 * ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria(); 	 * searchCriteria.setQ(&quot;z&uuml;rich&quot;); 	 * ToponymSearchResult searchResult = WebService.search(searchCriteria); 	 * for (Toponym toponym : searchResult.toponyms) { 	 * 	System.out.println(toponym.getName() +&quot;&quot; + toponym.getCountryName()); 	 * } 	 *</pre> 	 *  	 *  	 * @param searchCriteria 	 * @return 	 * @throws Exception 	 */
+comment|/**      * full text search on the GeoNames database.      *      * This service gets the number of toponyms defined by the 'maxRows'      * parameter. The parameter 'style' determines which fields are returned by      * the service.      *      * @see<a href="http://www.geonames.org/export/geonames-search.html">search      *  web service documentation</a>      *      *<br>      *      *<pre>      * ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();      * searchCriteria.setQ(&quot;z&uuml;rich&quot;);      * ToponymSearchResult searchResult = WebService.search(searchCriteria);      * for (Toponym toponym : searchResult.toponyms) {      *     System.out.println(toponym.getName() +&quot;&quot; + toponym.getCountryName());      * }      *</pre>      *      *      * @param searchCriteria      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|ToponymSearchResult
@@ -4406,7 +4406,7 @@ return|return
 name|searchResult
 return|;
 block|}
-comment|/** 	 * returns the children in the administrative hierarchy of a toponym. 	 *  	 * @param geonameId 	 * @param language 	 * @param style 	 * @return 	 * @throws Exception 	 */
+comment|/**      * returns the children in the administrative hierarchy of a toponym.      *      * @param geonameId      * @param language      * @param style      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|ToponymSearchResult
@@ -4602,7 +4602,7 @@ return|return
 name|searchResult
 return|;
 block|}
-comment|/** 	 * returns the neighbours of a toponym. 	 *  	 * @param geonameId 	 * @param language 	 * @param style 	 * @return 	 * @throws Exception 	 */
+comment|/**      * returns the neighbours of a toponym.      *      * @param geonameId      * @param language      * @param style      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|ToponymSearchResult
@@ -4798,7 +4798,7 @@ return|return
 name|searchResult
 return|;
 block|}
-comment|/** 	 * returns the hierarchy for a geonameId 	 *  	 * @see<a 	 *      href="http://www.geonames.org/export/place-hierarchy.html#hierarchy">Hierarchy 	 *      service description</a> 	 *  	 * @param geonameId 	 * @param language 	 * @param style 	 * @return 	 * @throws Exception 	 */
+comment|/**      * returns the hierarchy for a geonameId      *      * @see<a      *      href="http://www.geonames.org/export/place-hierarchy.html#hierarchy">Hierarchy      *      service description</a>      *      * @param geonameId      * @param language      * @param style      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -5140,7 +5140,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * full text search on geolocated wikipedia articles. 	 *  	 * @param q 	 * @param language 	 * @return 	 * @throws Exception 	 */
+comment|/**      * full text search on geolocated wikipedia articles.      *      * @param q      * @param language      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -5283,7 +5283,7 @@ return|return
 name|articles
 return|;
 block|}
-comment|/** 	 * full text search on geolocated wikipedia articles. 	 *  	 * @param title 	 * @param language 	 * @return 	 * @throws Exception 	 */
+comment|/**      * full text search on geolocated wikipedia articles.      *      * @param title      * @param language      * @return      * @throws Exception      */
 specifier|public
 specifier|static
 name|List
@@ -5462,7 +5462,7 @@ argument_list|)
 return|;
 block|}
 comment|/* Overload function to allow backward compatibility */
-comment|/** 	 * Based on the following inform: Webservice Type : REST 	 * ws.geonames.org/findNearbyWikipedia? Parameters : lang : language code 	 * (around 240 languages) (default = en) lat,lng, radius (in km), maxRows 	 * (default = 5) Example: 	 * http://ws.geonames.org/findNearbyWikipedia?lat=47&lng=9 	 *  	 * @param: latitude 	 * @param: longitude 	 * @param: radius 	 * @param: language 	 * @param: maxRows 	 * @return: list of wikipedia articles 	 * @throws: Exception 	 */
+comment|/**      * Based on the following inform: Webservice Type : REST      * ws.geonames.org/findNearbyWikipedia? Parameters : lang : language code      * (around 240 languages) (default = en) lat,lng, radius (in km), maxRows      * (default = 5) Example:      * http://ws.geonames.org/findNearbyWikipedia?lat=47&lng=9      *      * @param: latitude      * @param: longitude      * @param: radius      * @param: language      * @param: maxRows      * @return: list of wikipedia articles      * @throws: Exception      */
 specifier|public
 specifier|static
 name|List
@@ -5647,7 +5647,7 @@ return|return
 name|articles
 return|;
 block|}
-comment|/** 	 * GTOPO30 is a global digital elevation model (DEM) with a horizontal grid 	 * spacing of 30 arc seconds (approximately 1 kilometer). GTOPO30 was 	 * derived from several raster and vector sources of topographic 	 * information. 	 *  	 * @param latitude 	 * @param longitude 	 * @return a single number giving the elevation in meters according to 	 *         gtopo30, ocean areas have been masked as "no data" and have been 	 *         assigned a value of -9999 	 * @throws IOException 	 */
+comment|/**      * GTOPO30 is a global digital elevation model (DEM) with a horizontal grid      * spacing of 30 arc seconds (approximately 1 kilometer). GTOPO30 was      * derived from several raster and vector sources of topographic      * information.      *      * @param latitude      * @param longitude      * @return a single number giving the elevation in meters according to      *         gtopo30, ocean areas have been masked as "no data" and have been      *         assigned a value of -9999      * @throws IOException      */
 specifier|public
 specifier|static
 name|int
@@ -5718,7 +5718,7 @@ name|gtopo30
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Shuttle Radar Topography Mission (SRTM) elevation data. SRTM consisted of 	 * a specially modified radar system that flew onboard the Space Shuttle 	 * Endeavour during an 11-day mission in February of 2000. The dataset 	 * covers land areas between 60 degrees north and 56 degrees south. This web 	 * service is using SRTM3 data with data points located every 3-arc-second 	 * (approximately 90 meters) on a latitude/longitude grid. 	 *  	 * @param latitude 	 * @param longitude 	 * @return elevation or -32768 if unknown 	 * @throws IOException 	 */
+comment|/**      * Shuttle Radar Topography Mission (SRTM) elevation data. SRTM consisted of      * a specially modified radar system that flew onboard the Space Shuttle      * Endeavour during an 11-day mission in February of 2000. The dataset      * covers land areas between 60 degrees north and 56 degrees south. This web      * service is using SRTM3 data with data points located every 3-arc-second      * (approximately 90 meters) on a latitude/longitude grid.      *      * @param latitude      * @param longitude      * @return elevation or -32768 if unknown      * @throws IOException      */
 specifier|public
 specifier|static
 name|int
@@ -6209,7 +6209,7 @@ return|return
 name|elevation
 return|;
 block|}
-comment|/** 	 * The iso country code of any given point. It is calling 	 * {@link #countryCode(double, double, double)} with radius=0.0 	 *  	 * @param latitude 	 * @param longitude 	 * @return 	 * @throws IOException 	 */
+comment|/**      * The iso country code of any given point. It is calling      * {@link #countryCode(double, double, double)} with radius=0.0      *      * @param latitude      * @param longitude      * @return      * @throws IOException      */
 specifier|public
 specifier|static
 name|String
@@ -6235,7 +6235,7 @@ literal|0
 argument_list|)
 return|;
 block|}
-comment|/** 	 * The iso country code of any given point with radius for coastal areas. 	 *  	 * @param latitude 	 * @param longitude 	 * @param radius 	 *  	 * @return iso country code for the given latitude/longitude 	 * @throws IOException 	 */
+comment|/**      * The iso country code of any given point with radius for coastal areas.      *      * @param latitude      * @param longitude      * @param radius      *      * @return iso country code for the given latitude/longitude      * @throws IOException      */
 specifier|public
 specifier|static
 name|String
@@ -6336,7 +6336,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** 	 * get the timezone for a given location 	 *  	 * @param latitude 	 * @param longitude 	 * @return timezone at the given location 	 * @throws IOException 	 * @throws Exception 	 */
+comment|/**      * get the timezone for a given location      *      * @param latitude      * @param longitude      * @return timezone at the given location      * @throws IOException      * @throws Exception      */
 specifier|public
 specifier|static
 name|Timezone
@@ -6491,7 +6491,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** 	 * @return the geoNamesServer, default is http://ws.geonames.org 	 */
+comment|/**      * @return the geoNamesServer, default is http://ws.geonames.org      */
 specifier|public
 specifier|static
 name|String
@@ -6502,7 +6502,7 @@ return|return
 name|geoNamesServer
 return|;
 block|}
-comment|/** 	 * @return the geoNamesServerFailover 	 */
+comment|/**      * @return the geoNamesServerFailover      */
 specifier|public
 specifier|static
 name|String
@@ -6513,7 +6513,7 @@ return|return
 name|geoNamesServerFailover
 return|;
 block|}
-comment|/** 	 * sets the server name for the GeoNames server to be used for the requests. 	 * Default is ws.geonames.org 	 *  	 * @param geoNamesServer 	 *            the geonamesServer to set 	 */
+comment|/**      * sets the server name for the GeoNames server to be used for the requests.      * Default is ws.geonames.org      *      * @param geoNamesServer      *            the geonamesServer to set      */
 specifier|public
 specifier|static
 name|void
@@ -6580,7 +6580,7 @@ operator|=
 name|pGeoNamesServer
 expr_stmt|;
 block|}
-comment|/** 	 * sets the default failover server for requests in case the main server is 	 * not accessible. Default is ws.geonames.org<br> 	 * The failover server is only called if it is different from the main 	 * server.<br> 	 * The failover server is used for commercial GeoNames web service users. 	 *  	 * @param geoNamesServerFailover 	 *            the geoNamesServerFailover to set 	 */
+comment|/**      * sets the default failover server for requests in case the main server is      * not accessible. Default is ws.geonames.org<br>      * The failover server is only called if it is different from the main      * server.<br>      * The failover server is used for commercial GeoNames web service users.      *      * @param geoNamesServerFailover      *            the geoNamesServerFailover to set      */
 specifier|public
 specifier|static
 name|void
@@ -6633,7 +6633,7 @@ operator|=
 name|geoNamesServerFailover
 expr_stmt|;
 block|}
-comment|/** 	 * @return the userName 	 */
+comment|/**      * @return the userName      */
 specifier|public
 specifier|static
 name|String
@@ -6644,7 +6644,7 @@ return|return
 name|userName
 return|;
 block|}
-comment|/** 	 * Sets the user name to be used for the requests. Needed to access the 	 * commercial GeoNames web services. 	 *  	 * @param userName 	 *            the userName to set 	 */
+comment|/**      * Sets the user name to be used for the requests. Needed to access the      * commercial GeoNames web services.      *      * @param userName      *            the userName to set      */
 specifier|public
 specifier|static
 name|void
@@ -6661,7 +6661,7 @@ operator|=
 name|userName
 expr_stmt|;
 block|}
-comment|/** 	 * @return the token 	 */
+comment|/**      * @return the token      */
 specifier|public
 specifier|static
 name|String
@@ -6672,7 +6672,7 @@ return|return
 name|token
 return|;
 block|}
-comment|/** 	 * sets the token to be used to authenticate the requests. This is an 	 * optional parameter for the commercial version of the GeoNames web 	 * services. 	 *  	 * @param token 	 *            the token to set 	 */
+comment|/**      * sets the token to be used to authenticate the requests. This is an      * optional parameter for the commercial version of the GeoNames web      * services.      *      * @param token      *            the token to set      */
 specifier|public
 specifier|static
 name|void
@@ -6689,7 +6689,7 @@ operator|=
 name|token
 expr_stmt|;
 block|}
-comment|/** 	 * @return the defaultStyle 	 */
+comment|/**      * @return the defaultStyle      */
 specifier|public
 specifier|static
 name|Style
@@ -6700,7 +6700,7 @@ return|return
 name|defaultStyle
 return|;
 block|}
-comment|/** 	 * @param defaultStyle 	 *            the defaultStyle to set 	 */
+comment|/**      * @param defaultStyle      *            the defaultStyle to set      */
 specifier|public
 specifier|static
 name|void
@@ -6717,7 +6717,7 @@ operator|=
 name|defaultStyle
 expr_stmt|;
 block|}
-comment|/** 	 * @return the readTimeOut 	 */
+comment|/**      * @return the readTimeOut      */
 specifier|public
 specifier|static
 name|int
@@ -6728,7 +6728,7 @@ return|return
 name|readTimeOut
 return|;
 block|}
-comment|/** 	 * @param readTimeOut 	 *            the readTimeOut to set 	 */
+comment|/**      * @param readTimeOut      *            the readTimeOut to set      */
 specifier|public
 specifier|static
 name|void
@@ -6745,7 +6745,7 @@ operator|=
 name|readTimeOut
 expr_stmt|;
 block|}
-comment|/** 	 * @return the connectTimeOut 	 */
+comment|/**      * @return the connectTimeOut      */
 specifier|public
 specifier|static
 name|int
@@ -6756,7 +6756,7 @@ return|return
 name|connectTimeOut
 return|;
 block|}
-comment|/** 	 * @param connectTimeOut 	 *            the connectTimeOut to set 	 */
+comment|/**      * @param connectTimeOut      *            the connectTimeOut to set      */
 specifier|public
 specifier|static
 name|void

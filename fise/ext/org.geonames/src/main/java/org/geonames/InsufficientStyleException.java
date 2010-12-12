@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Is thrown when trying to access a field that has not been set as the style  * for the request was not sufficiently verbose to return this information.  *   * @author marc  *   */
+comment|/**  * Is thrown when trying to access a field that has not been set as the style  * for the request was not sufficiently verbose to return this information.  *  * @author marc  *  */
 end_comment
 
 begin_class

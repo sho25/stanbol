@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * search criteria for web services returning toponyms.  *   * The string parameters do not have to be utf8 encoded. The encoding is done  * transparently in the call to the web service.  *   * The main parameter for the search over all fields is the 'q' parameter.  *   * @see WebService#search  *   * @see<a href="http://www.geonames.org/export/geonames-search.html">search webservice documentation< /a>  *   * @author marc@geonames  *   */
+comment|/**  * search criteria for web services returning toponyms.  *  * The string parameters do not have to be utf8 encoded. The encoding is done  * transparently in the call to the web service.  *  * The main parameter for the search over all fields is the 'q' parameter.  *  * @see WebService#search  *  * @see<a href="http://www.geonames.org/export/geonames-search.html">search webservice documentation< /a>  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -89,7 +89,7 @@ specifier|private
 name|int
 name|startRow
 decl_stmt|;
-comment|/** 	 * @return Returns the ISO 3166-1-alpha-2 countryCode. 	 */
+comment|/**      * @return Returns the ISO 3166-1-alpha-2 countryCode.      */
 specifier|public
 name|String
 name|getCountryCode
@@ -99,7 +99,7 @@ return|return
 name|countryCode
 return|;
 block|}
-comment|/** 	 * @param countryCode 	 *            The ISO 3166-1-alpha-2 countryCode to set. 	 */
+comment|/**      * @param countryCode      *            The ISO 3166-1-alpha-2 countryCode to set.      */
 specifier|public
 name|void
 name|setCountryCode
@@ -141,7 +141,7 @@ operator|=
 name|countryCode
 expr_stmt|;
 block|}
-comment|/** 	 * @return the continentCode 	 */
+comment|/**      * @return the continentCode      */
 specifier|public
 name|String
 name|getContinentCode
@@ -151,7 +151,7 @@ return|return
 name|continentCode
 return|;
 block|}
-comment|/** 	 * @param continentCode the continentCode to set 	 */
+comment|/**      * @param continentCode the continentCode to set      */
 specifier|public
 name|void
 name|setContinentCode
@@ -167,7 +167,7 @@ operator|=
 name|continentCode
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the nameEquals. 	 */
+comment|/**      * @return Returns the nameEquals.      */
 specifier|public
 name|String
 name|getNameEquals
@@ -177,7 +177,7 @@ return|return
 name|nameEquals
 return|;
 block|}
-comment|/** 	 * @param nameEquals 	 *            The nameEquals to set. 	 */
+comment|/**      * @param nameEquals      *            The nameEquals to set.      */
 specifier|public
 name|void
 name|setNameEquals
@@ -193,7 +193,7 @@ operator|=
 name|exactName
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the featureCodes. 	 */
+comment|/**      * @return Returns the featureCodes.      */
 specifier|public
 name|String
 index|[]
@@ -204,7 +204,7 @@ return|return
 name|featureCodes
 return|;
 block|}
-comment|/** 	 * @param featureCodes 	 *            The featureCodes to set. 	 */
+comment|/**      * @param featureCodes      *            The featureCodes to set.      */
 specifier|public
 name|void
 name|setFeatureCodes
@@ -241,7 +241,7 @@ name|featureCode
 block|}
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the language. 	 */
+comment|/**      * @return Returns the language.      */
 specifier|public
 name|String
 name|getLanguage
@@ -251,7 +251,7 @@ return|return
 name|language
 return|;
 block|}
-comment|/** 	 * @param language 	 *            The language to set. 	 */
+comment|/**      * @param language      *            The language to set.      */
 specifier|public
 name|void
 name|setLanguage
@@ -267,7 +267,7 @@ operator|=
 name|language
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the maxRows. 	 */
+comment|/**      * @return Returns the maxRows.      */
 specifier|public
 name|int
 name|getMaxRows
@@ -277,7 +277,7 @@ return|return
 name|maxRows
 return|;
 block|}
-comment|/** 	 * @param maxRows 	 *            The maxRows to set. 	 */
+comment|/**      * @param maxRows      *            The maxRows to set.      */
 specifier|public
 name|void
 name|setMaxRows
@@ -293,7 +293,7 @@ operator|=
 name|maxRows
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the name. 	 */
+comment|/**      * @return Returns the name.      */
 specifier|public
 name|String
 name|getName
@@ -303,7 +303,7 @@ return|return
 name|name
 return|;
 block|}
-comment|/** 	 * search over the name field only. 	 *  	 * @param name 	 *            The name to set. 	 */
+comment|/**      * search over the name field only.      *      * @param name      *            The name to set.      */
 specifier|public
 name|void
 name|setName
@@ -319,7 +319,7 @@ operator|=
 name|name
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the q. 	 */
+comment|/**      * @return Returns the q.      */
 specifier|public
 name|String
 name|getQ
@@ -329,7 +329,7 @@ return|return
 name|q
 return|;
 block|}
-comment|/** 	 * The main search term. The search is executed over all fields (place name, 	 * country name, admin names, etc) 	 *  	 * @param q 	 *            The q to set. 	 */
+comment|/**      * The main search term. The search is executed over all fields (place name,      * country name, admin names, etc)      *      * @param q      *            The q to set.      */
 specifier|public
 name|void
 name|setQ
@@ -345,7 +345,7 @@ operator|=
 name|q
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the startRow. 	 */
+comment|/**      * @return Returns the startRow.      */
 specifier|public
 name|int
 name|getStartRow
@@ -355,7 +355,7 @@ return|return
 name|startRow
 return|;
 block|}
-comment|/** 	 * @param startRow 	 *            The startRow to set. 	 */
+comment|/**      * @param startRow      *            The startRow to set.      */
 specifier|public
 name|void
 name|setStartRow
@@ -371,7 +371,7 @@ operator|=
 name|startRow
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the style. 	 */
+comment|/**      * @return Returns the style.      */
 specifier|public
 name|Style
 name|getStyle
@@ -381,7 +381,7 @@ return|return
 name|style
 return|;
 block|}
-comment|/** 	 * @param style 	 *            The style to set. 	 */
+comment|/**      * @param style      *            The style to set.      */
 specifier|public
 name|void
 name|setStyle
@@ -397,7 +397,7 @@ operator|=
 name|style
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the tag. 	 */
+comment|/**      * @return Returns the tag.      */
 specifier|public
 name|String
 name|getTag
@@ -407,7 +407,7 @@ return|return
 name|tag
 return|;
 block|}
-comment|/** 	 * @param tag 	 *            The tag to set. 	 */
+comment|/**      * @param tag      *            The tag to set.      */
 specifier|public
 name|void
 name|setTag
@@ -423,7 +423,7 @@ operator|=
 name|tag
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the nameStartsWith. 	 */
+comment|/**      * @return Returns the nameStartsWith.      */
 specifier|public
 name|String
 name|getNameStartsWith
@@ -433,7 +433,7 @@ return|return
 name|nameStartsWith
 return|;
 block|}
-comment|/** 	 * @param nameStartsWith 	 *            The nameStartsWith to set. 	 */
+comment|/**      * @param nameStartsWith      *            The nameStartsWith to set.      */
 specifier|public
 name|void
 name|setNameStartsWith
@@ -449,7 +449,7 @@ operator|=
 name|nameStartsWith
 expr_stmt|;
 block|}
-comment|/** 	 * @return the featureClass 	 */
+comment|/**      * @return the featureClass      */
 specifier|public
 name|FeatureClass
 name|getFeatureClass
@@ -459,7 +459,7 @@ return|return
 name|featureClass
 return|;
 block|}
-comment|/** 	 * @param featureClass 	 *            the featureClass to set 	 */
+comment|/**      * @param featureClass      *            the featureClass to set      */
 specifier|public
 name|void
 name|setFeatureClass
@@ -475,7 +475,7 @@ operator|=
 name|featureClass
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminCode1 	 */
+comment|/**      * @return the adminCode1      */
 specifier|public
 name|String
 name|getAdminCode1
@@ -485,7 +485,7 @@ return|return
 name|adminCode1
 return|;
 block|}
-comment|/** 	 * @param adminCode1 	 *            the adminCode1 to set 	 */
+comment|/**      * @param adminCode1      *            the adminCode1 to set      */
 specifier|public
 name|void
 name|setAdminCode1
@@ -501,7 +501,7 @@ operator|=
 name|adminCode1
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminCode2 	 */
+comment|/**      * @return the adminCode2      */
 specifier|public
 name|String
 name|getAdminCode2
@@ -511,7 +511,7 @@ return|return
 name|adminCode2
 return|;
 block|}
-comment|/** 	 * @param adminCode2 	 *            the adminCode2 to set 	 */
+comment|/**      * @param adminCode2      *            the adminCode2 to set      */
 specifier|public
 name|void
 name|setAdminCode2
@@ -527,7 +527,7 @@ operator|=
 name|adminCode2
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminCode3 	 */
+comment|/**      * @return the adminCode3      */
 specifier|public
 name|String
 name|getAdminCode3
@@ -537,7 +537,7 @@ return|return
 name|adminCode3
 return|;
 block|}
-comment|/** 	 * @param adminCode3 	 *            the adminCode3 to set 	 */
+comment|/**      * @param adminCode3      *            the adminCode3 to set      */
 specifier|public
 name|void
 name|setAdminCode3

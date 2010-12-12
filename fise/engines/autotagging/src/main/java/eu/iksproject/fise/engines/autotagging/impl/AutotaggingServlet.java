@@ -724,11 +724,11 @@ argument_list|(
 literal|"type"
 argument_list|)
 decl_stmt|;
-comment|//    	if(result == null){
-comment|//    		return null;
-comment|//    	} else {
-comment|//    		//convert the Type to the Ontology
-comment|//    	}
+comment|//        if(result == null){
+comment|//            return null;
+comment|//        } else {
+comment|//            //convert the Type to the Ontology
+comment|//        }
 return|return
 name|result
 return|;

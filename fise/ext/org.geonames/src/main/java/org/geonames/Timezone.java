@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * gmtOffset and dstOffset are computed on the server with the  * {@link java.util.TimeZone} and included in the web service as not all  * geonames users are using java.  *   * @author marc  *   */
+comment|/**  * gmtOffset and dstOffset are computed on the server with the  * {@link java.util.TimeZone} and included in the web service as not all  * geonames users are using java.  *  * @author marc  *  */
 end_comment
 
 begin_class
@@ -32,7 +32,7 @@ specifier|private
 name|double
 name|dstOffset
 decl_stmt|;
-comment|/** 	 * the dstOffset as of first of July of current year 	 *  	 * @return the dstOffset 	 */
+comment|/**      * the dstOffset as of first of July of current year      *      * @return the dstOffset      */
 specifier|public
 name|double
 name|getDstOffset
@@ -42,7 +42,7 @@ return|return
 name|dstOffset
 return|;
 block|}
-comment|/** 	 * @param dstOffset 	 *            the dstOffset to set 	 */
+comment|/**      * @param dstOffset      *            the dstOffset to set      */
 specifier|public
 name|void
 name|setDstOffset
@@ -58,7 +58,7 @@ operator|=
 name|dstOffset
 expr_stmt|;
 block|}
-comment|/** 	 * the gmtOffset as of first of January of current year 	 *  	 * @return the gmtOffset 	 */
+comment|/**      * the gmtOffset as of first of January of current year      *      * @return the gmtOffset      */
 specifier|public
 name|double
 name|getGmtOffset
@@ -68,7 +68,7 @@ return|return
 name|gmtOffset
 return|;
 block|}
-comment|/** 	 * @param gmtOffset 	 *            the gmtOffset to set 	 */
+comment|/**      * @param gmtOffset      *            the gmtOffset to set      */
 specifier|public
 name|void
 name|setGmtOffset
@@ -84,7 +84,7 @@ operator|=
 name|gmtOffset
 expr_stmt|;
 block|}
-comment|/** 	 * the timezoneId (example : "Pacific/Honolulu") 	 *  	 * see also {@link java.util.TimeZone} and 	 * http://www.twinsun.com/tz/tz-link.htm 	 *  	 * @return the timezoneId 	 */
+comment|/**      * the timezoneId (example : "Pacific/Honolulu")      *      * see also {@link java.util.TimeZone} and      * http://www.twinsun.com/tz/tz-link.htm      *      * @return the timezoneId      */
 specifier|public
 name|String
 name|getTimezoneId
@@ -94,7 +94,7 @@ return|return
 name|timezoneId
 return|;
 block|}
-comment|/** 	 * @param timezoneId 	 *            the timezoneId to set 	 */
+comment|/**      * @param timezoneId      *            the timezoneId to set      */
 specifier|public
 name|void
 name|setTimezoneId

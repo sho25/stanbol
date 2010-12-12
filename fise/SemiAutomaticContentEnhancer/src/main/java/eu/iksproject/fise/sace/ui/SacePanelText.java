@@ -584,7 +584,7 @@ parameter_list|(
 name|MouseEvent
 name|e
 parameter_list|)
-block|{ 			}
+block|{             }
 specifier|public
 name|void
 name|mouseExited
@@ -592,7 +592,7 @@ parameter_list|(
 name|MouseEvent
 name|e
 parameter_list|)
-block|{ 			}
+block|{             }
 specifier|public
 name|void
 name|mousePressed
@@ -694,7 +694,7 @@ parameter_list|(
 name|MouseEvent
 name|e
 parameter_list|)
-block|{ 			}
+block|{             }
 block|}
 argument_list|)
 expr_stmt|;
@@ -1532,7 +1532,7 @@ name|MyTransferHandler
 extends|extends
 name|TransferHandler
 block|{
-comment|/** 		 *  		 */
+comment|/**          *          */
 specifier|private
 specifier|static
 specifier|final
@@ -1642,7 +1642,7 @@ specifier|public
 name|void
 name|finalizeText
 parameter_list|()
-block|{ 	}
+block|{     }
 block|}
 end_class
 

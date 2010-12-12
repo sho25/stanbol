@@ -188,7 +188,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class wraps the Zemanta API into one method.  * Zemanta is able to return RDF-XML so parsing the response into  * a Graph object is simple.  *   * @author michaelmarth  * @author westei (Rupert Westenthaler)  */
+comment|/**  * This class wraps the Zemanta API into one method.  * Zemanta is able to return RDF-XML so parsing the response into  * a Graph object is simple.  *  * @author michaelmarth  * @author westei (Rupert Westenthaler)  */
 end_comment
 
 begin_class
@@ -367,11 +367,11 @@ argument_list|(
 name|requestProperties
 argument_list|)
 decl_stmt|;
-comment|//			StringBuilder data = new StringBuilder();
-comment|//			data.append("method=zemanta.suggest&").append("api_key=").append(
-comment|//					apiKey).append("&").append("format=rdfxml&").append(
-comment|//					"freebase=1").append("&text=").append(
-comment|//					URLEncoder.encode(textToAnalyze, "UTF8"));
+comment|//            StringBuilder data = new StringBuilder();
+comment|//            data.append("method=zemanta.suggest&").append("api_key=").append(
+comment|//                    apiKey).append("&").append("format=rdfxml&").append(
+comment|//                    "freebase=1").append("&text=").append(
+comment|//                    URLEncoder.encode(textToAnalyze, "UTF8"));
 name|httpURLConnection
 operator|.
 name|addRequestProperty

@@ -368,7 +368,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JCR Store for standalone FISE server  *   * @scr.property name="service.ranking" type=Integer value=10000  */
+comment|/**  * JCR Store for standalone FISE server  *  * @scr.property name="service.ranking" type=Integer value=10000  */
 end_comment
 
 begin_class

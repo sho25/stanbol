@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/*  * Copyright 2010  * German Research Center for Artificial Intelligence (DFKI)  * Department of Intelligent User Interfaces  * Germany  *   *     http://www.dfki.de/web/forschung/iui  *   * Licensed under the Apache License, Version 2.0 (the "License");  * you may not use this file except in compliance with the License.  * You may obtain a copy of the License at  *   *     http://www.apache.org/licenses/LICENSE-2.0  *   * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  *   * Authors:  *     Sebastian Germesin  *     Massimo Romanelli  *     Tilman Becker  */
+comment|/*  * Copyright 2010  * German Research Center for Artificial Intelligence (DFKI)  * Department of Intelligent User Interfaces  * Germany  *  *     http://www.dfki.de/web/forschung/iui  *  * Licensed under the Apache License, Version 2.0 (the "License");  * you may not use this file except in compliance with the License.  * You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  *  * Authors:  *     Sebastian Germesin  *     Massimo Romanelli  *     Tilman Becker  */
 end_comment
 
 begin_import
@@ -136,7 +136,7 @@ name|NL2Sparql
 implements|implements
 name|EventListener
 block|{
-comment|/*  SELECT ?tag ?content WHERE {    ?content<http://rdfs.org/sioc/ns#related_to> ?tag .    ?tag<http://www.w3.org/2000/01/rdf-schema#label> ?label     FILTER REGEX(?label,".*Jimi Hendrix.*") . } 	 */
+comment|/*  SELECT ?tag ?content WHERE {    ?content<http://rdfs.org/sioc/ns#related_to> ?tag .    ?tag<http://www.w3.org/2000/01/rdf-schema#label> ?label    FILTER REGEX(?label,".*Jimi Hendrix.*") . }      */
 specifier|private
 name|String
 name|nl2Sparql
@@ -209,7 +209,7 @@ name|String
 name|sparqlQuery
 parameter_list|)
 block|{
-comment|/*if (sparqlQuery.matches("SELECT ?content ?tag ?type\n" + 				"WHERE {\n" + 				"   ?content<http://rdfs.org/sioc/ns#related_to> ?tag.\n" + 				"   ?tag<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type.\n" + 				"   ?tag<http://www.w3.org/2000/01/rdf-schema#label> ?label\n" + 				"   REGEX(?label,\"[a-zA-Z ]?\")\n" + 				"}")) { 			String person = sparqlQuery.replaceAll("SELECT ?content ?tag ?type\n" + 				"WHERE {\n" + 				"   ?content<http://rdfs.org/sioc/ns#related_to> ?tag.\n" + 				"   ?tag<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type.\n" + 				"   ?tag<http://www.w3.org/2000/01/rdf-schema#label> ?label\n" + 				"   REGEX\\(?label,\"([a-zA-Z ]?)\"\\)\n" + 				"}", "$1"); 			return "Show me information regarding " + person + "!"; 		}*/
+comment|/*if (sparqlQuery.matches("SELECT ?content ?tag ?type\n" +                 "WHERE {\n" +                 "   ?content<http://rdfs.org/sioc/ns#related_to> ?tag.\n" +                 "   ?tag<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type.\n" +                 "   ?tag<http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +                 "   REGEX(?label,\"[a-zA-Z ]?\")\n" +                 "}")) {             String person = sparqlQuery.replaceAll("SELECT ?content ?tag ?type\n" +                 "WHERE {\n" +                 "   ?content<http://rdfs.org/sioc/ns#related_to> ?tag.\n" +                 "   ?tag<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type.\n" +                 "   ?tag<http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +                 "   REGEX\\(?label,\"([a-zA-Z ]?)\"\\)\n" +                 "}", "$1");             return "Show me information regarding " + person + "!";         }*/
 return|return
 literal|"TODO: SPARQL2TEXT"
 return|;

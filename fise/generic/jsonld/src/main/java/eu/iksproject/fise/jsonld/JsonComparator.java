@@ -22,7 +22,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A comparator for JSON-LD maps to ensure the order of certain key elements  * like '#', '@', 'a' in JSON-LD output.  *   * @author Fabian Christ  */
+comment|/**  * A comparator for JSON-LD maps to ensure the order of certain key elements  * like '#', '@', 'a' in JSON-LD output.  *  * @author Fabian Christ  */
 end_comment
 
 begin_class

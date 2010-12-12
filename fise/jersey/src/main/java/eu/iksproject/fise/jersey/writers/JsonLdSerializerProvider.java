@@ -262,7 +262,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implements a<a href="http://json-ld.org/">JSON-LD</a> serialization of a Clerezza  * {@link TripleCollection}.<br>  *<br>  * Note: This implementation is based on<a href="http://json-ld.org/spec/">JSON-LD  * specification</a> draft from 25 October 2010.  *   * @author Fabian Christ  *   * @scr.component immediate="true"  * @scr.service   * 				interface="org.apache.clerezza.rdf.core.serializedform.SerializingProvider"  */
+comment|/**  * Implements a<a href="http://json-ld.org/">JSON-LD</a> serialization of a Clerezza  * {@link TripleCollection}.<br>  *<br>  * Note: This implementation is based on<a href="http://json-ld.org/spec/">JSON-LD  * specification</a> draft from 25 October 2010.  *  * @author Fabian Christ  *  * @scr.component immediate="true"  * @scr.service  *                 interface="org.apache.clerezza.rdf.core.serializedform.SerializingProvider"  */
 end_comment
 
 begin_class
@@ -774,7 +774,7 @@ return|return
 name|subjects
 return|;
 block|}
-comment|/** 	 * Get the known namespace to prefix mapping. 	 *  	 * @return A {@link Map} from namespace String to prefix String. 	 */
+comment|/**      * Get the known namespace to prefix mapping.      *      * @return A {@link Map} from namespace String to prefix String.      */
 specifier|public
 name|Map
 argument_list|<
@@ -789,7 +789,7 @@ return|return
 name|namespacePrefixMap
 return|;
 block|}
-comment|/** 	 * Sets the known namespaces for the serializer. 	 *  	 * @param knownNamespaces A {@link Map} from namespace String to prefix String. 	 */
+comment|/**      * Sets the known namespaces for the serializer.      *      * @param knownNamespaces A {@link Map} from namespace String to prefix String.      */
 specifier|public
 name|void
 name|setNamespacePrefixMap
@@ -810,7 +810,7 @@ operator|=
 name|knownNamespaces
 expr_stmt|;
 block|}
-comment|/** 	 * Returns the current number of space characters which are used 	 * to indent the serialized output. 	 *  	 * @return Number of space characters used for indentation. 	 */
+comment|/**      * Returns the current number of space characters which are used      * to indent the serialized output.      *      * @return Number of space characters used for indentation.      */
 specifier|public
 name|int
 name|getIndentation
@@ -820,7 +820,7 @@ return|return
 name|indentation
 return|;
 block|}
-comment|/** 	 * Sets the number of characters used per indentation level for the serialized output.<br /> 	 * Set this value to zero (0) if you don't want indentation. Default value is 2. 	 *  	 * @param indentation Number of space characters used for indentation. 	 */
+comment|/**      * Sets the number of characters used per indentation level for the serialized output.<br />      * Set this value to zero (0) if you don't want indentation. Default value is 2.      *      * @param indentation Number of space characters used for indentation.      */
 specifier|public
 name|void
 name|setIndentation

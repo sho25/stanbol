@@ -1707,7 +1707,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** 	 * For now this handles only cases when triples are added, but not removed 	 */
+comment|/**      * For now this handles only cases when triples are added, but not removed      */
 specifier|public
 name|void
 name|graphChanged

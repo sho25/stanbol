@@ -1961,7 +1961,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * Interface to test primitive Datatypes and Uri links.      * 	 * @author westei 	 */
+comment|/**      * Interface to test primitive Datatypes and Uri links.      *      * @author westei      */
 end_comment
 
 begin_interface
@@ -2289,7 +2289,7 @@ block|}
 end_interface
 
 begin_comment
-comment|/** 	 * Interface to test relations to other RdfEntities.      * 	 * @author westei 	 */
+comment|/**      * Interface to test relations to other RdfEntities.      *      * @author westei      */
 end_comment
 
 begin_interface
@@ -2367,7 +2367,7 @@ block|}
 end_interface
 
 begin_comment
-comment|/** 	 * Interface to test extends relations between Interfaces.      * 	 * @author westei 	 */
+comment|/**      * Interface to test extends relations between Interfaces.      *      * @author westei      */
 end_comment
 
 begin_interface
@@ -2414,15 +2414,15 @@ block|}
 end_interface
 
 begin_comment
-comment|//	public static void main(String[] args) throws Exception{
+comment|//    public static void main(String[] args) throws Exception{
 end_comment
 
 begin_comment
-comment|//		new RdfEntityFactoryTest().testTypeStatements();
+comment|//        new RdfEntityFactoryTest().testTypeStatements();
 end_comment
 
 begin_comment
-comment|//	}
+comment|//    }
 end_comment
 
 unit|}

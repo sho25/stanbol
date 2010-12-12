@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * a street address  *   * @author Mark Thomas  *   */
+comment|/**  * a street address  *  * @author Mark Thomas  *  */
 end_comment
 
 begin_class
@@ -30,7 +30,7 @@ specifier|private
 name|String
 name|streetNumber
 decl_stmt|;
-comment|/** 	 * @return the street 	 */
+comment|/**      * @return the street      */
 specifier|public
 name|String
 name|getStreet
@@ -40,7 +40,7 @@ return|return
 name|street
 return|;
 block|}
-comment|/** 	 * @param street 	 *            the street to set 	 */
+comment|/**      * @param street      *            the street to set      */
 specifier|public
 name|void
 name|setStreet
@@ -56,7 +56,7 @@ operator|=
 name|street
 expr_stmt|;
 block|}
-comment|/** 	 * @return the streetNumber 	 */
+comment|/**      * @return the streetNumber      */
 specifier|public
 name|String
 name|getStreetNumber
@@ -66,7 +66,7 @@ return|return
 name|streetNumber
 return|;
 block|}
-comment|/** 	 * @param streetNumber 	 *            the streetNumber to set 	 */
+comment|/**      * @param streetNumber      *            the streetNumber to set      */
 specifier|public
 name|void
 name|setStreetNumber

@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * is thrown when the search criteria is initialized with obviously invalid parameters,  * such as an invalid country code.  *   * @author marc  *   */
+comment|/**  * is thrown when the search criteria is initialized with obviously invalid parameters,  * such as an invalid country code.  *  * @author marc  *  */
 end_comment
 
 begin_class

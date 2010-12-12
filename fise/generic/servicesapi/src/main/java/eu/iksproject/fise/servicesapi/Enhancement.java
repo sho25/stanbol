@@ -80,7 +80,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Interface represents a FISE enhancement.  *<p>  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  * 	MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *	String enhancementId = "http://wwww.example.com/iks-project/fise/example-enhancement";  *	UriRef enhancementNode = new UriRef(enhancementId);  *	Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *	enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
+comment|/**  * This Interface represents a FISE enhancement.  *<p>  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  *     MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *    String enhancementId = "http://wwww.example.com/iks-project/fise/example-enhancement";  *    UriRef enhancementNode = new UriRef(enhancementId);  *    Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *    enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -147,8 +147,8 @@ name|Date
 name|getCreated
 parameter_list|()
 function_decl|;
-comment|//	@Rdf(id="http://purl.org/dc/terms/type")
-comment|//	void setDcType(Collection<URI> types);
+comment|//    @Rdf(id="http://purl.org/dc/terms/type")
+comment|//    void setDcType(Collection<URI> types);
 annotation|@
 name|Rdf
 argument_list|(
@@ -227,8 +227,8 @@ argument_list|>
 name|getRequires
 parameter_list|()
 function_decl|;
-comment|//	@Rdf(id="http://purl.org/dc/terms/requires")
-comment|//	void setRequires(Collection<Enhancement> required);
+comment|//    @Rdf(id="http://purl.org/dc/terms/requires")
+comment|//    void setRequires(Collection<Enhancement> required);
 annotation|@
 name|Rdf
 argument_list|(
@@ -243,8 +243,8 @@ argument_list|>
 name|getRelations
 parameter_list|()
 function_decl|;
-comment|//	@Rdf(id="http://purl.org/dc/terms/relation")
-comment|//	void setRelation(Collection<Enhancement> related);
+comment|//    @Rdf(id="http://purl.org/dc/terms/relation")
+comment|//    void setRelation(Collection<Enhancement> related);
 block|}
 end_interface
 

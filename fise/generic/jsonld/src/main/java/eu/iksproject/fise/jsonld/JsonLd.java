@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author Fabian Christ  *   */
+comment|/**  * @author Fabian Christ  *  */
 end_comment
 
 begin_class
@@ -132,21 +132,21 @@ name|JsonComparator
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Flag to control whether the namespace prefix map should be used 	 * to shorten IRIs to prefix notation during serialization. Default 	 * value is<code>true</code>.<br /> 	 *<br /> 	 * If you already put values into this JSON-LD instance with prefix 	 * notation, you should set this to<code>false</code> before starting 	 * the serialization. 	 */
+comment|/**      * Flag to control whether the namespace prefix map should be used      * to shorten IRIs to prefix notation during serialization. Default      * value is<code>true</code>.<br />      *<br />      * If you already put values into this JSON-LD instance with prefix      * notation, you should set this to<code>false</code> before starting      * the serialization.      */
 specifier|private
 name|boolean
 name|applyNamespaces
 init|=
 literal|true
 decl_stmt|;
-comment|/** 	 * Flag to control whether the serialized JSON-LD output will use 	 * joint or disjoint graphs for subjects and namespaces.  Default 	 * value is<code>true</code>. 	 */
+comment|/**      * Flag to control whether the serialized JSON-LD output will use      * joint or disjoint graphs for subjects and namespaces.  Default      * value is<code>true</code>.      */
 specifier|private
 name|boolean
 name|useJointGraphs
 init|=
 literal|true
 decl_stmt|;
-comment|/** 	 * Add the given resource to this JsonLd object using the resourceId 	 * as key. 	 *  	 * @param resourceId 	 * @param resource 	 */
+comment|/**      * Add the given resource to this JsonLd object using the resourceId      * as key.      *      * @param resourceId      * @param resource      */
 specifier|public
 name|void
 name|put
@@ -1170,7 +1170,7 @@ return|return
 name|uri
 return|;
 block|}
-comment|/** 	 * Return the JSON-LD Resource for the given subject. 	 */
+comment|/**      * Return the JSON-LD Resource for the given subject.      */
 specifier|public
 name|JsonLdResource
 name|getResource
@@ -1188,7 +1188,7 @@ name|subject
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Get the known namespace to prefix mapping. 	 *  	 * @return A {@link Map} from namespace String to prefix String. 	 */
+comment|/**      * Get the known namespace to prefix mapping.      *      * @return A {@link Map} from namespace String to prefix String.      */
 specifier|public
 name|Map
 argument_list|<
@@ -1203,7 +1203,7 @@ return|return
 name|namespacePrefixMap
 return|;
 block|}
-comment|/** 	 * Sets the known namespaces for the serializer. 	 *  	 * @param namespacePrefixMap 	 *            A {@link Map} from namespace String to prefix 	 *            String. 	 */
+comment|/**      * Sets the known namespaces for the serializer.      *      * @param namespacePrefixMap      *            A {@link Map} from namespace String to prefix      *            String.      */
 specifier|public
 name|void
 name|setNamespacePrefixMap
@@ -1224,7 +1224,7 @@ operator|=
 name|namespacePrefixMap
 expr_stmt|;
 block|}
-comment|/** 	 * Adds a new namespace and its prefix to the list of used namespaces for this 	 * JSON-LD instance. 	 *  	 * @param namespace A namespace IRI. 	 * @param prefix A prefix to use and identify this namespace in serialized JSON-LD. 	 */
+comment|/**      * Adds a new namespace and its prefix to the list of used namespaces for this      * JSON-LD instance.      *      * @param namespace A namespace IRI.      * @param prefix A prefix to use and identify this namespace in serialized JSON-LD.      */
 specifier|public
 name|void
 name|addNamespacePrefix
@@ -1246,7 +1246,7 @@ name|prefix
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Determine whether currently joint or disjoint graphs are serialized with this JSON-LD instance. 	 *  	 * @return<code>True</code> if joint graphs are used,<code>False</code>otherwise. 	 */
+comment|/**      * Determine whether currently joint or disjoint graphs are serialized with this JSON-LD instance.      *      * @return<code>True</code> if joint graphs are used,<code>False</code>otherwise.      */
 specifier|public
 name|boolean
 name|isUseJointGraphs
@@ -1256,7 +1256,7 @@ return|return
 name|useJointGraphs
 return|;
 block|}
-comment|/** 	 * Set to<code>true</code> if you want to use joint graphs (default) or<code>false</code> otherwise. 	 *  	 * @param useJointGraphs 	 */
+comment|/**      * Set to<code>true</code> if you want to use joint graphs (default) or<code>false</code> otherwise.      *      * @param useJointGraphs      */
 specifier|public
 name|void
 name|setUseJointGraphs
@@ -1272,7 +1272,7 @@ operator|=
 name|useJointGraphs
 expr_stmt|;
 block|}
-comment|/** 	 * Flag to control whether the namespace prefix map should be used 	 * to shorten IRIs to prefix notation during serialization. Default 	 * value is<code>true</code>.      *<p> 	 * If you already put values into this JSON-LD instance with prefix 	 * notation, you should set this to<code>false</code> before starting 	 * the serialization. 	 * 	 * @return<code>True</code> if namespaces are applied during serialization,<code>false</code> otherwise. 	 */
+comment|/**      * Flag to control whether the namespace prefix map should be used      * to shorten IRIs to prefix notation during serialization. Default      * value is<code>true</code>.      *<p>      * If you already put values into this JSON-LD instance with prefix      * notation, you should set this to<code>false</code> before starting      * the serialization.      *      * @return<code>True</code> if namespaces are applied during serialization,<code>false</code> otherwise.      */
 specifier|public
 name|boolean
 name|isApplyNamespaces
@@ -1282,7 +1282,7 @@ return|return
 name|applyNamespaces
 return|;
 block|}
-comment|/** 	 * Control whether namespaces from the namespace prefix map are 	 * applied to URLs during serialization.      *<p> 	 * Set this to<code>false</code> if you already have shortened IRIs 	 * with prefixes. 	 *  	 * @param applyNamespaces 	 */
+comment|/**      * Control whether namespaces from the namespace prefix map are      * applied to URLs during serialization.      *<p>      * Set this to<code>false</code> if you already have shortened IRIs      * with prefixes.      *      * @param applyNamespaces      */
 specifier|public
 name|void
 name|setApplyNamespaces

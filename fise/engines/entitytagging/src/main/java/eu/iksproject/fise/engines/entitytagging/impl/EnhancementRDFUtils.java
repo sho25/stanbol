@@ -203,54 +203,6 @@ name|eu
 operator|.
 name|iksproject
 operator|.
-name|fise
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|rick
-operator|.
-name|model
-operator|.
-name|clerezza
-operator|.
-name|RdfRepresentation
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|rick
-operator|.
-name|model
-operator|.
-name|clerezza
-operator|.
-name|RdfValueFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
 name|rick
 operator|.
 name|servicesapi
@@ -329,24 +281,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import static
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|fise
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-operator|.
-name|RDFS_LABEL
-import|;
-end_import
-
 begin_comment
 comment|/**  * Utility taken form the engine.autotagging bundle and adapted from  * using TagInfo to {@link Sign}.  *  * @author Rupert Westenthaler  * @author ogrisel (original utility)  */
 end_comment
@@ -356,7 +290,7 @@ specifier|public
 class|class
 name|EnhancementRDFUtils
 block|{
-comment|/** 	 * @param literalFactory the LiteralFactory to use  	 * @param graph the MGraph to use 	 * @param contentItemId the contentItemId the enhancement is extracted from 	 * @param relatedEnhancements enhancements this textAnnotation is related to 	 * @param entity the related entity 	 */
+comment|/**      * @param literalFactory the LiteralFactory to use      * @param graph the MGraph to use      * @param contentItemId the contentItemId the enhancement is extracted from      * @param relatedEnhancements enhancements this textAnnotation is related to      * @param entity the related entity      */
 specifier|public
 specifier|static
 name|UriRef
@@ -391,8 +325,6 @@ name|label
 init|=
 literal|null
 decl_stmt|;
-for|for
-control|(
 name|Iterator
 argument_list|<
 name|Text
@@ -411,13 +343,14 @@ operator|.
 name|getUnicodeString
 argument_list|()
 argument_list|)
-init|;
+decl_stmt|;
+while|while
+condition|(
 name|labels
 operator|.
 name|hasNext
 argument_list|()
-condition|;
-control|)
+condition|)
 block|{
 name|Text
 name|actLabel
@@ -687,8 +620,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-for|for
-control|(
 name|Iterator
 argument_list|<
 name|Reference
@@ -707,13 +638,14 @@ operator|.
 name|getUnicodeString
 argument_list|()
 argument_list|)
-init|;
+decl_stmt|;
+while|while
+condition|(
 name|types
 operator|.
 name|hasNext
 argument_list|()
-condition|;
-control|)
+condition|)
 block|{
 name|graph
 operator|.
@@ -743,9 +675,9 @@ expr_stmt|;
 block|}
 comment|//TODO: for now add the information about this entity to the graph
 comment|// -> this might be replaced by some additional engine at the end
-comment|//		RdfValueFactory rdfValueFactory = RdfValueFactory.getInstance();
-comment|//		RdfRepresentation representation = rdfValueFactory.toRdfRepresentation(entity.getRepresentation());
-comment|//		graph.addAll(representation.getRdfGraph());
+comment|//        RdfValueFactory rdfValueFactory = RdfValueFactory.getInstance();
+comment|//        RdfRepresentation representation = rdfValueFactory.toRdfRepresentation(entity.getRepresentation());
+comment|//        graph.addAll(representation.getRdfGraph());
 return|return
 name|entityAnnotation
 return|;

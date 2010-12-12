@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/**  *   */
+comment|/**  *  */
 end_comment
 
 begin_package
@@ -352,28 +352,28 @@ name|RdfProxyInvocationHandler
 implements|implements
 name|InvocationHandler
 block|{
-comment|/** 	 * The getID method of the RdfEntity Interface 	 */
+comment|/**      * The getID method of the RdfEntity Interface      */
 specifier|protected
 specifier|static
 specifier|final
 name|Method
 name|getIDMethod
 decl_stmt|;
-comment|/** 	 * The toString Method of {@link Object} 	 */
+comment|/**      * The toString Method of {@link Object}      */
 specifier|protected
 specifier|static
 specifier|final
 name|Method
 name|toString
 decl_stmt|;
-comment|/** 	 * The equals Method of {@link Object} 	 */
+comment|/**      * The equals Method of {@link Object}      */
 specifier|protected
 specifier|static
 specifier|final
 name|Method
 name|equals
 decl_stmt|;
-comment|/** 	 * The hashCode Method of {@link Object} 	 */
+comment|/**      * The hashCode Method of {@link Object}      */
 specifier|protected
 specifier|static
 specifier|final
@@ -493,7 +493,7 @@ literal|" Interface"
 argument_list|,
 name|e
 argument_list|)
-block|; 		}
+block|;         }
 end_expr_stmt
 
 begin_catch
@@ -523,7 +523,7 @@ end_catch
 
 begin_comment
 unit|}
-comment|/** 	 * The logger TODO: Question: How to get the dependencies for logging working with maven :( 	 */
+comment|/**      * The logger TODO: Question: How to get the dependencies for logging working with maven :(      */
 end_comment
 
 begin_comment
@@ -731,7 +731,7 @@ name|classAnnotation
 operator|==
 literal|null
 condition|)
-block|{ 			}
+block|{             }
 else|else
 block|{
 comment|//check of the type statement is present
@@ -2314,7 +2314,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** 	 * We need this class to apply changes in the collection to the MGraph. 	 * This collection implementation is a stateless wrapper over the 	 * triples selected by the subject,property pair over the MGraph!<br> 	 * Default implementation of {@link AbstractCollection} are very poor 	 * performance. Because of that this class overrides some methods 	 * already implemented by its abstract super class. 	 * @author westei 	 * 	 * @param<T> 	 */
+comment|/**      * We need this class to apply changes in the collection to the MGraph.      * This collection implementation is a stateless wrapper over the      * triples selected by the subject,property pair over the MGraph!<br>      * Default implementation of {@link AbstractCollection} are very poor      * performance. Because of that this class overrides some methods      * already implemented by its abstract super class.      * @author westei      *      * @param<T>      */
 end_comment
 
 begin_class

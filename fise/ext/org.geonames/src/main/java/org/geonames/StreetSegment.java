@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * a street line segment. Includes house number information for the beginning  * and end of the line as well as right and left hand side of the line.  *   * @author marc@geonames  *   */
+comment|/**  * a street line segment. Includes house number information for the beginning  * and end of the line as well as right and left hand side of the line.  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -32,7 +32,7 @@ name|double
 index|[]
 name|lngArray
 decl_stmt|;
-comment|/** 	 * census feature class codes see 	 * http://www.geonames.org/maps/Census-Feature-Class-Codes.txt 	 */
+comment|/**      * census feature class codes see      * http://www.geonames.org/maps/Census-Feature-Class-Codes.txt      */
 specifier|private
 name|String
 name|cfcc
@@ -41,27 +41,27 @@ specifier|private
 name|String
 name|name
 decl_stmt|;
-comment|/** 	 * from address left 	 */
+comment|/**      * from address left      */
 specifier|private
 name|String
 name|fraddl
 decl_stmt|;
-comment|/** 	 * from address right 	 */
+comment|/**      * from address right      */
 specifier|private
 name|String
 name|fraddr
 decl_stmt|;
-comment|/** 	 * to address left 	 */
+comment|/**      * to address left      */
 specifier|private
 name|String
 name|toaddl
 decl_stmt|;
-comment|/** 	 * to address right 	 */
+comment|/**      * to address right      */
 specifier|private
 name|String
 name|toaddr
 decl_stmt|;
-comment|/** 	 * @return the latArray 	 */
+comment|/**      * @return the latArray      */
 specifier|public
 name|double
 index|[]
@@ -72,7 +72,7 @@ return|return
 name|latArray
 return|;
 block|}
-comment|/** 	 * @param latArray 	 *            the latArray to set 	 */
+comment|/**      * @param latArray      *            the latArray to set      */
 specifier|public
 name|void
 name|setLatArray
@@ -89,7 +89,7 @@ operator|=
 name|latArray
 expr_stmt|;
 block|}
-comment|/** 	 * @return the lngArray 	 */
+comment|/**      * @return the lngArray      */
 specifier|public
 name|double
 index|[]
@@ -100,7 +100,7 @@ return|return
 name|lngArray
 return|;
 block|}
-comment|/** 	 * @param lngArray 	 *            the lngArray to set 	 */
+comment|/**      * @param lngArray      *            the lngArray to set      */
 specifier|public
 name|void
 name|setLngArray
@@ -117,7 +117,7 @@ operator|=
 name|lngArray
 expr_stmt|;
 block|}
-comment|/** 	 * @return the cfcc 	 */
+comment|/**      * @return the cfcc      */
 specifier|public
 name|String
 name|getCfcc
@@ -127,7 +127,7 @@ return|return
 name|cfcc
 return|;
 block|}
-comment|/** 	 * @param cfcc 	 *            the cfcc to set 	 */
+comment|/**      * @param cfcc      *            the cfcc to set      */
 specifier|public
 name|void
 name|setCfcc
@@ -143,7 +143,7 @@ operator|=
 name|cfcc
 expr_stmt|;
 block|}
-comment|/** 	 * @return the name 	 */
+comment|/**      * @return the name      */
 specifier|public
 name|String
 name|getName
@@ -153,7 +153,7 @@ return|return
 name|name
 return|;
 block|}
-comment|/** 	 * @param name 	 *            the name to set 	 */
+comment|/**      * @param name      *            the name to set      */
 specifier|public
 name|void
 name|setName
@@ -169,7 +169,7 @@ operator|=
 name|name
 expr_stmt|;
 block|}
-comment|/** 	 * @return the fraddl 	 */
+comment|/**      * @return the fraddl      */
 specifier|public
 name|String
 name|getFraddl
@@ -179,7 +179,7 @@ return|return
 name|fraddl
 return|;
 block|}
-comment|/** 	 * @param fraddl 	 *            the fraddl to set 	 */
+comment|/**      * @param fraddl      *            the fraddl to set      */
 specifier|public
 name|void
 name|setFraddl
@@ -195,7 +195,7 @@ operator|=
 name|fraddl
 expr_stmt|;
 block|}
-comment|/** 	 * @return the fraddr 	 */
+comment|/**      * @return the fraddr      */
 specifier|public
 name|String
 name|getFraddr
@@ -205,7 +205,7 @@ return|return
 name|fraddr
 return|;
 block|}
-comment|/** 	 * @param fraddr 	 *            the fraddr to set 	 */
+comment|/**      * @param fraddr      *            the fraddr to set      */
 specifier|public
 name|void
 name|setFraddr
@@ -221,7 +221,7 @@ operator|=
 name|fraddr
 expr_stmt|;
 block|}
-comment|/** 	 * @return the toaddl 	 */
+comment|/**      * @return the toaddl      */
 specifier|public
 name|String
 name|getToaddl
@@ -231,7 +231,7 @@ return|return
 name|toaddl
 return|;
 block|}
-comment|/** 	 * @param toaddl 	 *            the toaddl to set 	 */
+comment|/**      * @param toaddl      *            the toaddl to set      */
 specifier|public
 name|void
 name|setToaddl
@@ -247,7 +247,7 @@ operator|=
 name|toaddl
 expr_stmt|;
 block|}
-comment|/** 	 * @return the toaddr 	 */
+comment|/**      * @return the toaddr      */
 specifier|public
 name|String
 name|getToaddr
@@ -257,7 +257,7 @@ return|return
 name|toaddr
 return|;
 block|}
-comment|/** 	 * @param toaddr 	 *            the toaddr to set 	 */
+comment|/**      * @param toaddr      *            the toaddr to set      */
 specifier|public
 name|void
 name|setToaddr

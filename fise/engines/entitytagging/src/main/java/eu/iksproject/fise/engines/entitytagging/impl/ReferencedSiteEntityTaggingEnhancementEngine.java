@@ -905,7 +905,7 @@ specifier|private
 name|String
 name|nameField
 decl_stmt|;
-comment|/** 	 * The number of Suggestions to be added 	 */
+comment|/**      * The number of Suggestions to be added      */
 specifier|public
 name|Integer
 name|numSuggestions

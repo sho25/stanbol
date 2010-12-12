@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * a postal code  *   * @author marc@geonames  *   */
+comment|/**  * a postal code  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -60,7 +60,7 @@ specifier|private
 name|double
 name|distance
 decl_stmt|;
-comment|/** 	 * @return Returns the distance. 	 */
+comment|/**      * @return Returns the distance.      */
 specifier|public
 name|double
 name|getDistance
@@ -70,7 +70,7 @@ return|return
 name|distance
 return|;
 block|}
-comment|/** 	 * @param distance 	 *            The distance to set. 	 */
+comment|/**      * @param distance      *            The distance to set.      */
 specifier|public
 name|void
 name|setDistance
@@ -86,7 +86,7 @@ operator|=
 name|distance
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the adminCode1. 	 */
+comment|/**      * @return Returns the adminCode1.      */
 specifier|public
 name|String
 name|getAdminCode1
@@ -96,7 +96,7 @@ return|return
 name|adminCode1
 return|;
 block|}
-comment|/** 	 * @param adminCode1 	 *            The adminCode1 to set. 	 */
+comment|/**      * @param adminCode1      *            The adminCode1 to set.      */
 specifier|public
 name|void
 name|setAdminCode1
@@ -112,7 +112,7 @@ operator|=
 name|adminCode1
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the adminCode2. 	 */
+comment|/**      * @return Returns the adminCode2.      */
 specifier|public
 name|String
 name|getAdminCode2
@@ -122,7 +122,7 @@ return|return
 name|adminCode2
 return|;
 block|}
-comment|/** 	 * @param adminCode2 	 *            The adminCode2 to set. 	 */
+comment|/**      * @param adminCode2      *            The adminCode2 to set.      */
 specifier|public
 name|void
 name|setAdminCode2
@@ -138,7 +138,7 @@ operator|=
 name|adminCode2
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the adminName1. 	 */
+comment|/**      * @return Returns the adminName1.      */
 specifier|public
 name|String
 name|getAdminName1
@@ -148,7 +148,7 @@ return|return
 name|adminName1
 return|;
 block|}
-comment|/** 	 * @param adminName1 	 *            The adminName1 to set. 	 */
+comment|/**      * @param adminName1      *            The adminName1 to set.      */
 specifier|public
 name|void
 name|setAdminName1
@@ -164,7 +164,7 @@ operator|=
 name|adminName1
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the adminName2. 	 */
+comment|/**      * @return Returns the adminName2.      */
 specifier|public
 name|String
 name|getAdminName2
@@ -174,7 +174,7 @@ return|return
 name|adminName2
 return|;
 block|}
-comment|/** 	 * @param adminName2 	 *            The adminName2 to set. 	 */
+comment|/**      * @param adminName2      *            The adminName2 to set.      */
 specifier|public
 name|void
 name|setAdminName2
@@ -190,7 +190,7 @@ operator|=
 name|adminName2
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the ISO 3166-1-alpha-2 countryCode. 	 */
+comment|/**      * @return Returns the ISO 3166-1-alpha-2 countryCode.      */
 specifier|public
 name|String
 name|getCountryCode
@@ -200,7 +200,7 @@ return|return
 name|countryCode
 return|;
 block|}
-comment|/** 	 * @param countryCode 	 *            The ISO 3166-1-alpha-2 countryCode to set. 	 */
+comment|/**      * @param countryCode      *            The ISO 3166-1-alpha-2 countryCode to set.      */
 specifier|public
 name|void
 name|setCountryCode
@@ -216,7 +216,7 @@ operator|=
 name|countryCode
 expr_stmt|;
 block|}
-comment|/** 	 * latitude in WGS84 	 *  	 * @return Returns the latitude. 	 */
+comment|/**      * latitude in WGS84      *      * @return Returns the latitude.      */
 specifier|public
 name|double
 name|getLatitude
@@ -226,7 +226,7 @@ return|return
 name|latitude
 return|;
 block|}
-comment|/** 	 * @param latitude 	 *            The latitude to set. 	 */
+comment|/**      * @param latitude      *            The latitude to set.      */
 specifier|public
 name|void
 name|setLatitude
@@ -242,7 +242,7 @@ operator|=
 name|latitude
 expr_stmt|;
 block|}
-comment|/** 	 * longitude in WGS84 	 *  	 * @return Returns the longitude. 	 */
+comment|/**      * longitude in WGS84      *      * @return Returns the longitude.      */
 specifier|public
 name|double
 name|getLongitude
@@ -252,7 +252,7 @@ return|return
 name|longitude
 return|;
 block|}
-comment|/** 	 * @param longitude 	 *            The longitude to set. 	 */
+comment|/**      * @param longitude      *            The longitude to set.      */
 specifier|public
 name|void
 name|setLongitude
@@ -268,7 +268,7 @@ operator|=
 name|longitude
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the placeName. 	 */
+comment|/**      * @return Returns the placeName.      */
 specifier|public
 name|String
 name|getPlaceName
@@ -278,7 +278,7 @@ return|return
 name|placeName
 return|;
 block|}
-comment|/** 	 * @param placeName 	 *            The placeName to set. 	 */
+comment|/**      * @param placeName      *            The placeName to set.      */
 specifier|public
 name|void
 name|setPlaceName
@@ -294,7 +294,7 @@ operator|=
 name|placeName
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the postalCode. 	 */
+comment|/**      * @return Returns the postalCode.      */
 specifier|public
 name|String
 name|getPostalCode
@@ -304,7 +304,7 @@ return|return
 name|postalCode
 return|;
 block|}
-comment|/** 	 * @param postalCode 	 *            The postalCode to set. 	 */
+comment|/**      * @param postalCode      *            The postalCode to set.      */
 specifier|public
 name|void
 name|setPostalCode

@@ -30,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** SPARQL query engine interface.  *   * 	TODO we might want to use a more flexible interface where the  * 	query language can be specified, and which can return different  * 	object types.  */
+comment|/** SPARQL query engine interface.  *  *     TODO we might want to use a more flexible interface where the  *     query language can be specified, and which can return different  *     object types.  */
 end_comment
 
 begin_interface

@@ -324,7 +324,7 @@ name|SacePanelImage
 extends|extends
 name|JPanel
 block|{
-comment|/** 	 *  	 */
+comment|/**      *      */
 specifier|private
 specifier|static
 specifier|final
@@ -563,7 +563,7 @@ argument_list|(
 literal|"<drop image here>"
 argument_list|)
 block|{
-comment|/** 			 *  			 */
+comment|/**              *              */
 specifier|private
 specifier|static
 specifier|final
@@ -833,7 +833,7 @@ parameter_list|(
 name|MouseEvent
 name|e
 parameter_list|)
-block|{  			}
+block|{              }
 specifier|public
 name|void
 name|mouseEntered
@@ -1029,7 +1029,7 @@ parameter_list|(
 name|MouseEvent
 name|e
 parameter_list|)
-block|{ 			}
+block|{             }
 block|}
 argument_list|)
 expr_stmt|;
@@ -1219,7 +1219,7 @@ name|AnnotationTransferHandler
 extends|extends
 name|TransferHandler
 block|{
-comment|/** 		 *  		 */
+comment|/**          *          */
 specifier|private
 specifier|static
 specifier|final
@@ -1392,7 +1392,7 @@ name|FileTransferHandler
 extends|extends
 name|TransferHandler
 block|{
-comment|/** 		 *  		 */
+comment|/**          *          */
 specifier|private
 specifier|static
 specifier|final

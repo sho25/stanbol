@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Distance calculations.  *   * @author marc@geonames  *   */
+comment|/**  * Distance calculations.  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -22,7 +22,7 @@ specifier|public
 class|class
 name|Distance
 block|{
-comment|/** 	 * mean radius = 6372.0 	 *  	 * The Earth's equatorial radius = 6335.437 km. 	 *  	 * The Earth's polar radius = 6399.592 km. 	 *  	 *  	 */
+comment|/**      * mean radius = 6372.0      *      * The Earth's equatorial radius = 6335.437 km.      *      * The Earth's polar radius = 6399.592 km.      *      *      */
 specifier|public
 specifier|static
 specifier|final
@@ -31,7 +31,7 @@ name|EARTH_RADIUS_KM
 init|=
 literal|6372.0
 decl_stmt|;
-comment|/** 	 * statute miles 	 */
+comment|/**      * statute miles      */
 specifier|public
 specifier|static
 specifier|final
@@ -40,7 +40,7 @@ name|EARTH_RADIUS_MILES
 init|=
 literal|3963.0
 decl_stmt|;
-comment|/** 	 * http://mathworld.wolfram.com/GreatCircle.html 	 *  	 * and 	 *  	 * http://www.mathforum.com/library/drmath/view/51711.html 	 *  	 * @return 	 */
+comment|/**      * http://mathworld.wolfram.com/GreatCircle.html      *      * and      *      * http://www.mathforum.com/library/drmath/view/51711.html      *      * @return      */
 specifier|public
 specifier|static
 name|double

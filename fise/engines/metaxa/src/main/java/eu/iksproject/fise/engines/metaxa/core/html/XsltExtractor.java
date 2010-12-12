@@ -23,16 +23,6 @@ name|java
 operator|.
 name|io
 operator|.
-name|File
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 import|;
 end_import
@@ -298,7 +288,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * XsltExtractor.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * XsltExtractor.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -411,8 +401,6 @@ operator|.
 name|toURI
 argument_list|()
 decl_stmt|;
-name|this
-operator|.
 name|source
 operator|=
 name|location

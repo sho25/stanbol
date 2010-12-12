@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/*  * Copyright 2002 Sun Microsystems, Inc. All rights reserved.  *   * Redistribution and use in source and binary forms, with or without  * modification, are permitted provided that the following conditions are met: -  * Redistributions of source code must retain the above copyright notice, this  * list of conditions and the following disclaimer. - Redistribution in binary  * form must reproduce the above copyright notice, this list of conditions and  * the following disclaimer in the documentation and/or other materials provided  * with the distribution.  *   * Neither the name of Sun Microsystems, Inc. or the names of contributors may  * be used to endorse or promote products derived from this software without  * specific prior written permission.  *   * This software is provided "AS IS," without a warranty of any kind. ALL  * EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY  * IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR  * NON-INFRINGEMENT, ARE HEREBY EXCLUDED. SUN AND ITS LICENSORS SHALL NOT BE  * LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING  * OR DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES. IN NO EVENT WILL SUN OR ITS  * LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR DIRECT,  * INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER  * CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF THE USE OF  * OR INABILITY TO USE SOFTWARE, EVEN IF SUN HAS BEEN ADVISED OF THE POSSIBILITY  * OF SUCH DAMAGES.  *   * You acknowledge that Software is not designed, licensed or intended for use  * in the design, construction, operation or maintenance of any nuclear  * facility.  */
+comment|/*  * Copyright 2002 Sun Microsystems, Inc. All rights reserved.  *  * Redistribution and use in source and binary forms, with or without  * modification, are permitted provided that the following conditions are met: -  * Redistributions of source code must retain the above copyright notice, this  * list of conditions and the following disclaimer. - Redistribution in binary  * form must reproduce the above copyright notice, this list of conditions and  * the following disclaimer in the documentation and/or other materials provided  * with the distribution.  *  * Neither the name of Sun Microsystems, Inc. or the names of contributors may  * be used to endorse or promote products derived from this software without  * specific prior written permission.  *  * This software is provided "AS IS," without a warranty of any kind. ALL  * EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY  * IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR  * NON-INFRINGEMENT, ARE HEREBY EXCLUDED. SUN AND ITS LICENSORS SHALL NOT BE  * LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING  * OR DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES. IN NO EVENT WILL SUN OR ITS  * LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR DIRECT,  * INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER  * CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF THE USE OF  * OR INABILITY TO USE SOFTWARE, EVEN IF SUN HAS BEEN ADVISED OF THE POSSIBILITY  * OF SUCH DAMAGES.  *  * You acknowledge that Software is not designed, licensed or intended for use  * in the design, construction, operation or maintenance of any nuclear  * facility.  */
 end_comment
 
 begin_comment
@@ -338,7 +338,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>DOMUtils</code> provides convenience methods for working with DOM  * documents.  *   * @author Walter Kasper, DFKI  * @author Joerg Steffen, DFKI  * @version $Id$  */
+comment|/**  *<code>DOMUtils</code> provides convenience methods for working with DOM  * documents.  *  * @author Walter Kasper, DFKI  * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
 
 begin_class
@@ -352,7 +352,7 @@ specifier|private
 name|DOMUtils
 parameter_list|()
 block|{      }
-comment|/**      * This prints the specified node and all of its children to System.out.      *       * @param node      *            a DOM<code>Node</code>      */
+comment|/**      * This prints the specified node and all of its children to System.out.      *      * @param node      *            a DOM<code>Node</code>      */
 specifier|public
 specifier|static
 name|void
@@ -793,7 +793,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * This prints the given DOM document to System.out with indentation and      * iso-8859 encoding.      *       * @param doc      *            a DOM<code>Document</code>      */
+comment|/**      * This prints the given DOM document to System.out with indentation and      * iso-8859 encoding.      *      * @param doc      *            a DOM<code>Document</code>      */
 specifier|public
 specifier|static
 name|void
@@ -992,7 +992,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * This returns a string representation of the given document.      *       * @param doc      *            an XML<code>Document</code>      * @param encoding      *            a<code>String</code> with the encoding to use      * @param docTypeDef      *            a<code>String</code> with the DTD name; use<code>null</code>      *            for no DTD      * @return a<code>String</code> with the XML string      */
+comment|/**      * This returns a string representation of the given document.      *      * @param doc      *            an XML<code>Document</code>      * @param encoding      *            a<code>String</code> with the encoding to use      * @param docTypeDef      *            a<code>String</code> with the DTD name; use<code>null</code>      *            for no DTD      * @return a<code>String</code> with the XML string      */
 specifier|public
 specifier|static
 name|String
@@ -1253,7 +1253,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * This method writes a DOM document to the given output stream.      *       * @param doc      *            a DOM<code>Document</code>      * @param encoding      *            a<code>String</code> with the encoding to use      * @param docTypeDef      *            a<code>String</code> with the DTD name; use<code>null</code>      *            for no DTD      * @param out      *            an<code>OutputStream</code> where to write the DOM document      */
+comment|/**      * This method writes a DOM document to the given output stream.      *      * @param doc      *            a DOM<code>Document</code>      * @param encoding      *            a<code>String</code> with the encoding to use      * @param docTypeDef      *            a<code>String</code> with the DTD name; use<code>null</code>      *            for no DTD      * @param out      *            an<code>OutputStream</code> where to write the DOM document      */
 specifier|public
 specifier|static
 name|void
@@ -1478,7 +1478,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * This parses the given XML string and creates a DOM Document.      *       * @param fileName      *            a<code>String</code> with the source file name      * @param encoding      *            a<code>String</code> denoting the encoding of the XML string      * @return Document a DOM<code>Document</code>,<code>null</code> if      *         parsing fails      */
+comment|/**      * This parses the given XML string and creates a DOM Document.      *      * @param fileName      *            a<code>String</code> with the source file name      * @param encoding      *            a<code>String</code> denoting the encoding of the XML string      * @return Document a DOM<code>Document</code>,<code>null</code> if      *         parsing fails      */
 specifier|public
 specifier|static
 name|Document
@@ -1621,7 +1621,7 @@ return|return
 name|document
 return|;
 block|}
-comment|/**      * This parses the given XML file and creates a DOM Document.      *       * @param fileName      *            a<code>String</code> with the source file name      * @param validation      *            a<code>boolean</code> indicatiing if the parsing uses DTD      *            valudation      * @return Document a DOM<code>Document</code>,<code>null</code> if      *         parsing fails      */
+comment|/**      * This parses the given XML file and creates a DOM Document.      *      * @param fileName      *            a<code>String</code> with the source file name      * @param validation      *            a<code>boolean</code> indicatiing if the parsing uses DTD      *            valudation      * @return Document a DOM<code>Document</code>,<code>null</code> if      *         parsing fails      */
 specifier|public
 specifier|static
 name|Document
@@ -1875,7 +1875,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * This counts the elements in the given document by tag name.      *       * @param tag      *            a<code>String</code> with a tag name      * @param doc      *            a DOM<code>Document</code>      * @return number an<code>int</code> with the number of elements by tag      *         name      */
+comment|/**      * This counts the elements in the given document by tag name.      *      * @param tag      *            a<code>String</code> with a tag name      * @param doc      *            a DOM<code>Document</code>      * @return number an<code>int</code> with the number of elements by tag      *         name      */
 specifier|public
 specifier|static
 name|int
@@ -1905,7 +1905,7 @@ name|getLength
 argument_list|()
 return|;
 block|}
-comment|/**      * This realizes the<code>indexOf</code> method of the      *<code>java.util.List</code> interface for<code>NodeList</code>.      *       * @param list      *            a<code>NodeList</code> value      * @param node      *            a<code>Node</code> value      * @return an<code>int</code> value, giving the position of      *<code>node</code> in<code>list</code> or -1, if node is not      *         contained in the list      */
+comment|/**      * This realizes the<code>indexOf</code> method of the      *<code>java.util.List</code> interface for<code>NodeList</code>.      *      * @param list      *            a<code>NodeList</code> value      * @param node      *            a<code>Node</code> value      * @return an<code>int</code> value, giving the position of      *<code>node</code> in<code>list</code> or -1, if node is not      *         contained in the list      */
 specifier|public
 specifier|static
 name|int
@@ -1962,7 +1962,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * This concatenates the string values of all text nodes which are direct      * children of the given node. If<code>node</code> is a text or attribute      * node, its value is returned. Otherwise<code>null</code> is returned      * (improvement potential!).      *       * @param node      *            a<code>Node</code> value      * @return a<code>String</code> with the concatenated text      */
+comment|/**      * This concatenates the string values of all text nodes which are direct      * children of the given node. If<code>node</code> is a text or attribute      * node, its value is returned. Otherwise<code>null</code> is returned      * (improvement potential!).      *      * @param node      *            a<code>Node</code> value      * @return a<code>String</code> with the concatenated text      */
 specifier|public
 specifier|static
 name|String
@@ -2115,7 +2115,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * This selects all direct children of the given element with the given      * name. If the name is<code>null</code>, all children are returned.      *       * @param ele      *            an<code>Element</code> value      * @param name      *            a<code>String</code> with the children's name      * @return a<code>List</code> of<code>Node</code>s with the children      */
+comment|/**      * This selects all direct children of the given element with the given      * name. If the name is<code>null</code>, all children are returned.      *      * @param ele      *            an<code>Element</code> value      * @param name      *            a<code>String</code> with the children's name      * @return a<code>List</code> of<code>Node</code>s with the children      */
 specifier|public
 specifier|static
 name|List
@@ -2238,7 +2238,7 @@ return|return
 name|eles
 return|;
 block|}
-comment|/**      * This selects all direct children of type 'Element' of the given element.      *       * @param ele      *            an<code>Element</code> value      * @return a<code>List</code> of<code>Elmenet</code>s with the element      *         children      */
+comment|/**      * This selects all direct children of type 'Element' of the given element.      *      * @param ele      *            an<code>Element</code> value      * @return a<code>List</code> of<code>Elmenet</code>s with the element      *         children      */
 specifier|public
 specifier|static
 name|List
@@ -2338,7 +2338,7 @@ return|return
 name|eles
 return|;
 block|}
-comment|/**      * This returns the first child element with the given name found at the      * given element.      *       * @param ele      *            an<code>Element</code> value      * @param name      *            a<code>String</code> with the name of the child element      * @return a<code>Element</code> with the child or<code>null</code> if no      *         such child was found      */
+comment|/**      * This returns the first child element with the given name found at the      * given element.      *      * @param ele      *            an<code>Element</code> value      * @param name      *            a<code>String</code> with the name of the child element      * @return a<code>Element</code> with the child or<code>null</code> if no      *         such child was found      */
 specifier|public
 specifier|static
 name|Element
@@ -2422,7 +2422,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * This adds a new child with the given name to the given element.      *       * @param ele      *            an<code>Element</code>      * @param name      *            a<code>String</code> with the name of the child      * @return a<code>Element</code> with the newly created child      */
+comment|/**      * This adds a new child with the given name to the given element.      *      * @param ele      *            an<code>Element</code>      * @param name      *            a<code>String</code> with the name of the child      * @return a<code>Element</code> with the newly created child      */
 specifier|public
 specifier|static
 name|Element

@@ -397,7 +397,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/** 	 * This key was generated to support testing only. Please do only use it 	 * for testing. For real usages of the engine you need to create your own 	 * key! 	 */
+comment|/**      * This key was generated to support testing only. Please do only use it      * for testing. For real usages of the engine you need to create your own      * key!      */
 specifier|private
 specifier|static
 specifier|final
@@ -406,7 +406,7 @@ name|ZEMANTA_FISE_TEST_APPLICATION_KEY
 init|=
 literal|"2qsvcvkut8rhnqbhm35znn76"
 decl_stmt|;
-comment|/** 	 * found on this Blog {@linkplain http://bcbio.wordpress.com/2009/01/04/extracting-keywords-from-biological-text-using-zemanta/} 	 */
+comment|/**      * found on this Blog {@linkplain http://bcbio.wordpress.com/2009/01/04/extracting-keywords-from-biological-text-using-zemanta/}      */
 specifier|public
 specifier|static
 specifier|final

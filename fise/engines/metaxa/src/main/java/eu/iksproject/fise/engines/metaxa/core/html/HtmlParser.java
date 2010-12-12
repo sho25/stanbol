@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HtmlParser.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * HtmlParser.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *  */
 end_comment
 
 begin_class

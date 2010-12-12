@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * an intersection between two streets  *   * @author Mark Thomas  *   */
+comment|/**  * an intersection between two streets  *  * @author Mark Thomas  *  */
 end_comment
 
 begin_class

@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Class to serialize a JSON object structure whereby the JSON structure is  * defined by the basic data types Map and List.  *   * @author Fabian Christ  */
+comment|/**  * Class to serialize a JSON object structure whereby the JSON structure is  * defined by the basic data types Map and List.  *  * @author Fabian Christ  */
 end_comment
 
 begin_class

@@ -412,7 +412,7 @@ operator|+
 literal|"language"
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Plain text content of a content item. 	  */
+comment|/**      * Plain text content of a content item.       */
 specifier|public
 specifier|static
 specifier|final

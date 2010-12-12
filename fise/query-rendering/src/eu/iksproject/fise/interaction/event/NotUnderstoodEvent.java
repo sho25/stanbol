@@ -19,7 +19,7 @@ class|class
 name|NotUnderstoodEvent
 extends|extends
 name|Event
-block|{	  }
+block|{  }
 end_class
 
 end_unit

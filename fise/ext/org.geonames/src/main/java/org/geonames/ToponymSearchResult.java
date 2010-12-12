@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * a toponym search result as returned by the geonames webservice.  *   * @author marc@geonames  *   */
+comment|/**  * a toponym search result as returned by the geonames webservice.  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -59,7 +59,7 @@ decl_stmt|;
 name|Style
 name|style
 decl_stmt|;
-comment|/** 	 * @return Returns the toponyms. 	 */
+comment|/**      * @return Returns the toponyms.      */
 specifier|public
 name|List
 argument_list|<
@@ -72,7 +72,7 @@ return|return
 name|toponyms
 return|;
 block|}
-comment|/** 	 * @param toponyms 	 *            The toponyms to set. 	 */
+comment|/**      * @param toponyms      *            The toponyms to set.      */
 specifier|public
 name|void
 name|setToponyms
@@ -91,7 +91,7 @@ operator|=
 name|toponyms
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the totalResultsCount. 	 */
+comment|/**      * @return Returns the totalResultsCount.      */
 specifier|public
 name|int
 name|getTotalResultsCount
@@ -101,7 +101,7 @@ return|return
 name|totalResultsCount
 return|;
 block|}
-comment|/** 	 * @param totalResultsCount 	 *            The totalResultsCount to set. 	 */
+comment|/**      * @param totalResultsCount      *            The totalResultsCount to set.      */
 specifier|public
 name|void
 name|setTotalResultsCount
@@ -117,7 +117,7 @@ operator|=
 name|totalResultsCount
 expr_stmt|;
 block|}
-comment|/** 	 * @return the style 	 */
+comment|/**      * @return the style      */
 specifier|public
 name|Style
 name|getStyle
@@ -127,7 +127,7 @@ return|return
 name|style
 return|;
 block|}
-comment|/** 	 * @param style the style to set 	 */
+comment|/**      * @param style the style to set      */
 specifier|public
 name|void
 name|setStyle

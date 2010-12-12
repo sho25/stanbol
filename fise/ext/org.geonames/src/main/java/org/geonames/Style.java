@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration for style parameter specifying the verbosity of geonames web  * services  *   * @author marc@geonames  *   */
+comment|/**  * Enumeration for style parameter specifying the verbosity of geonames web  * services  *  * @author marc@geonames  *  */
 end_comment
 
 begin_enum

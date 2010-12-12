@@ -70,7 +70,7 @@ name|setUp
 parameter_list|()
 throws|throws
 name|Exception
-block|{ 	}
+block|{     }
 annotation|@
 name|After
 specifier|public
@@ -79,7 +79,7 @@ name|tearDown
 parameter_list|()
 throws|throws
 name|Exception
-block|{ 	}
+block|{     }
 annotation|@
 name|Test
 specifier|public

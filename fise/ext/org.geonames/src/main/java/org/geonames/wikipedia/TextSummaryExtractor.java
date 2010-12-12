@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * @author marc  *   */
+comment|/**  * @author marc  *  */
 end_comment
 
 begin_class
@@ -22,7 +22,7 @@ specifier|public
 class|class
 name|TextSummaryExtractor
 block|{
-comment|/** 	 * extract a text summary from a wikipedia article. The wikipedia markup is 	 * removed. The length of the summary is equal or lower the length of the 	 * parameter. The extractor tries to end the summary at a fullstop. 	 *  	 * @param pText 	 * @param length 	 * @return 	 */
+comment|/**      * extract a text summary from a wikipedia article. The wikipedia markup is      * removed. The length of the summary is equal or lower the length of the      * parameter. The extractor tries to end the summary at a fullstop.      *      * @param pText      * @param length      * @return      */
 specifier|public
 specifier|static
 name|String
@@ -556,7 +556,7 @@ name|trim
 argument_list|()
 return|;
 block|}
-comment|/** 	 * skips templates in wikipedia markup. Templates are enclosed within braces 	 * {}. There might be nested templates within an other template. 	 *  	 * @param pText 	 *            : the wikipedia text with templates 	 * @param pIdx 	 *            , pos in text to start with, MUST be a { 	 * @return the idx into the text where the template ends, or the last 	 *         character in the text if it does not properly end. 	 */
+comment|/**      * skips templates in wikipedia markup. Templates are enclosed within braces      * {}. There might be nested templates within an other template.      *      * @param pText      *            : the wikipedia text with templates      * @param pIdx      *            , pos in text to start with, MUST be a {      * @return the idx into the text where the template ends, or the last      *         character in the text if it does not properly end.      */
 specifier|static
 name|int
 name|skipTemplate
@@ -658,7 +658,7 @@ return|return
 name|idx
 return|;
 block|}
-comment|/** 	 * @param pText 	 * @param pIdx 	 *            , pos in text to start with, MUST be a { 	 * @return 	 */
+comment|/**      * @param pText      * @param pIdx      *            , pos in text to start with, MUST be a {      * @return      */
 specifier|static
 name|int
 name|skipHTMLElement
@@ -753,7 +753,7 @@ return|return
 name|idx
 return|;
 block|}
-comment|/** 	 * @param pText 	 * @param pIdx, 	 *            pos in text to start with, MUST be a '<' 	 * @return 	 */
+comment|/**      * @param pText      * @param pIdx,      *            pos in text to start with, MUST be a '<'      * @return      */
 specifier|static
 name|int
 name|skipHTMLComment
@@ -1105,7 +1105,7 @@ return|return
 name|idx
 return|;
 block|}
-comment|/** 	 * Removes sequences of whitespace and keeps only one whitespace character. 	 */
+comment|/**      * Removes sequences of whitespace and keeps only one whitespace character.      */
 specifier|public
 specifier|static
 name|String

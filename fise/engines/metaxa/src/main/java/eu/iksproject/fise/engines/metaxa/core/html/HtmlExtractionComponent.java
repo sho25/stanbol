@@ -68,7 +68,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HtmlExtractionComponent.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * HtmlExtractionComponent.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *  */
 end_comment
 
 begin_interface

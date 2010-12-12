@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration for the GeoNames feature classes A,H,L,P,R,S,T,U,V  *   * @author marc  *   */
+comment|/**  * Enumeration for the GeoNames feature classes A,H,L,P,R,S,T,U,V  *  * @author marc  *  */
 end_comment
 
 begin_enum
@@ -20,31 +20,31 @@ specifier|public
 enum|enum
 name|FeatureClass
 block|{
-comment|/** 	 * Administrative Boundary Features 	 */
+comment|/**      * Administrative Boundary Features      */
 name|A
 block|,
-comment|/** 	 * Hydrographic Features 	 */
+comment|/**      * Hydrographic Features      */
 name|H
 block|,
-comment|/** 	 * Area Features 	 */
+comment|/**      * Area Features      */
 name|L
 block|,
-comment|/** 	 * Populated Place Features 	 */
+comment|/**      * Populated Place Features      */
 name|P
 block|,
-comment|/** 	 * Road / Railroad Features 	 */
+comment|/**      * Road / Railroad Features      */
 name|R
 block|,
-comment|/** 	 * Spot Features 	 */
+comment|/**      * Spot Features      */
 name|S
 block|,
-comment|/** 	 * Hypsographic Features 	 */
+comment|/**      * Hypsographic Features      */
 name|T
 block|,
-comment|/** 	 * Undersea Features 	 */
+comment|/**      * Undersea Features      */
 name|U
 block|,
-comment|/** 	 * Vegetation Features 	 */
+comment|/**      * Vegetation Features      */
 name|V
 block|;
 specifier|public

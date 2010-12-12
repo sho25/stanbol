@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * compass bearing from the first point to the second point in degrees.  *   * @author Mark Thomas  */
+comment|/**  * compass bearing from the first point to the second point in degrees.  *  * @author Mark Thomas  */
 end_comment
 
 begin_class
@@ -82,7 +82,7 @@ specifier|public
 class|class
 name|Bearing
 block|{
-comment|/** 	 * Returns the direction from the first point to the second point in 	 * degrees. The direction is the clockwise angle between the magnetic north 	 * and the direction from point1 to point2 	 *  	 * @param lat1 	 * @param lng1 	 * @param lat2 	 * @param lng2 	 * @return 	 */
+comment|/**      * Returns the direction from the first point to the second point in      * degrees. The direction is the clockwise angle between the magnetic north      * and the direction from point1 to point2      *      * @param lat1      * @param lng1      * @param lat2      * @param lng2      * @return      */
 specifier|public
 specifier|static
 name|double

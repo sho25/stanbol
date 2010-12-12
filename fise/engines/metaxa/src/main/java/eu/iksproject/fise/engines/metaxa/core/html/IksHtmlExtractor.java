@@ -248,7 +248,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * IksHtmlExtractor.java  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *   */
+comment|/**  * IksHtmlExtractor.java  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -258,7 +258,6 @@ name|IksHtmlExtractor
 implements|implements
 name|Extractor
 block|{
-comment|/**      * This contains the logger.      */
 specifier|private
 specifier|static
 specifier|final
@@ -347,8 +346,6 @@ block|{
 name|this
 argument_list|()
 expr_stmt|;
-name|this
-operator|.
 name|registry
 operator|=
 operator|new

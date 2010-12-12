@@ -12,7 +12,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * a GeoNames toponym  *<p>  * NOTE (Rupert Westenthaler) added get/set for score and DEFAULT_SCORE  *   * @author marc@geonames  *   */
+comment|/**  * a GeoNames toponym  *<p>  * NOTE (Rupert Westenthaler) added get/set for score and DEFAULT_SCORE  *  * @author marc@geonames  *  */
 end_comment
 
 begin_class
@@ -108,7 +108,7 @@ specifier|private
 name|Double
 name|score
 decl_stmt|;
-comment|/** 	 * Not all services returning toponyms provide a score. For such services 	 * (e.g. hierarchy) it is assumed, that the score is 1.0.<br> 	 * This default score is only returned if no score information is available 	 * AND ({@link Style}<code> == null</code> OR ( 	 * {@link Style} NOT<code>null</code> AND {@link Style} EQUALS  	 * {@link Style#FULL}))<br> 	 * Otherwise a {@link InsufficientStyleException} is thrown if no score 	 * information is available. 	 */
+comment|/**      * Not all services returning toponyms provide a score. For such services      * (e.g. hierarchy) it is assumed, that the score is 1.0.<br>      * This default score is only returned if no score information is available      * AND ({@link Style}<code> == null</code> OR (      * {@link Style} NOT<code>null</code> AND {@link Style} EQUALS      * {@link Style#FULL}))<br>      * Otherwise a {@link InsufficientStyleException} is thrown if no score      * information is available.      */
 specifier|private
 specifier|static
 specifier|final
@@ -117,7 +117,7 @@ name|DEFAULT_SCORE
 init|=
 literal|1.0
 decl_stmt|;
-comment|/** 	 * @return Returns the score of this result 	 * @throws InsufficientStyleException The style is only available with 	 *     {@link Style#FULL}.  	 */
+comment|/**      * @return Returns the score of this result      * @throws InsufficientStyleException The style is only available with      *     {@link Style#FULL}.      */
 specifier|public
 name|Double
 name|getScore
@@ -170,7 +170,7 @@ else|:
 name|DEFAULT_SCORE
 return|;
 block|}
-comment|/** 	 * @param score 	 *            The score of the result 	 */
+comment|/**      * @param score      *            The score of the result      */
 specifier|public
 name|void
 name|setScore
@@ -186,7 +186,7 @@ operator|=
 name|score
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the ISO 3166-1-alpha-2 countryCode. 	 */
+comment|/**      * @return Returns the ISO 3166-1-alpha-2 countryCode.      */
 specifier|public
 name|String
 name|getCountryCode
@@ -196,7 +196,7 @@ return|return
 name|countryCode
 return|;
 block|}
-comment|/** 	 * @param countryCode 	 *            The ISO 3166-1-alpha-2 countryCode to set. 	 */
+comment|/**      * @param countryCode      *            The ISO 3166-1-alpha-2 countryCode to set.      */
 specifier|public
 name|void
 name|setCountryCode
@@ -212,7 +212,7 @@ operator|=
 name|countryCode
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the elevation in meter. 	 */
+comment|/**      * @return Returns the elevation in meter.      */
 specifier|public
 name|Integer
 name|getElevation
@@ -259,7 +259,7 @@ return|return
 name|elevation
 return|;
 block|}
-comment|/** 	 * @param elevation 	 *            The elevation im meter to set. 	 */
+comment|/**      * @param elevation      *            The elevation im meter to set.      */
 specifier|public
 name|void
 name|setElevation
@@ -275,7 +275,7 @@ operator|=
 name|elevation
 expr_stmt|;
 block|}
-comment|/** 	 * the feature class {@link FeatureClass} 	 *  	 * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature 	 *      Codes</a> 	 * @return Returns the featureClass. 	 */
+comment|/**      * the feature class {@link FeatureClass}      *      * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature      *      Codes</a>      * @return Returns the featureClass.      */
 specifier|public
 name|FeatureClass
 name|getFeatureClass
@@ -285,7 +285,7 @@ return|return
 name|featureClass
 return|;
 block|}
-comment|/** 	 * @param featureClass 	 *            The featureClass to set. 	 */
+comment|/**      * @param featureClass      *            The featureClass to set.      */
 specifier|public
 name|void
 name|setFeatureClass
@@ -301,7 +301,7 @@ operator|=
 name|featureClass
 expr_stmt|;
 block|}
-comment|/** 	 * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature 	 *      Codes</a> 	 * @return Returns the featureCode. 	 */
+comment|/**      * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature      *      Codes</a>      * @return Returns the featureCode.      */
 specifier|public
 name|String
 name|getFeatureCode
@@ -311,7 +311,7 @@ return|return
 name|featureCode
 return|;
 block|}
-comment|/** 	 * @param featureCode 	 *            The featureCode to set. 	 */
+comment|/**      * @param featureCode      *            The featureCode to set.      */
 specifier|public
 name|void
 name|setFeatureCode
@@ -327,7 +327,7 @@ operator|=
 name|featureCode
 expr_stmt|;
 block|}
-comment|/** 	 * latitude in decimal degrees (wgs84) 	 *  	 * @return Returns the latitude. 	 */
+comment|/**      * latitude in decimal degrees (wgs84)      *      * @return Returns the latitude.      */
 specifier|public
 name|double
 name|getLatitude
@@ -337,7 +337,7 @@ return|return
 name|latitude
 return|;
 block|}
-comment|/** 	 * @param latitude 	 *            The latitude to set. 	 */
+comment|/**      * @param latitude      *            The latitude to set.      */
 specifier|public
 name|void
 name|setLatitude
@@ -353,7 +353,7 @@ operator|=
 name|latitude
 expr_stmt|;
 block|}
-comment|/** 	 * longitude in decimal degrees (wgs84) 	 *  	 * @return Returns the longitude. 	 */
+comment|/**      * longitude in decimal degrees (wgs84)      *      * @return Returns the longitude.      */
 specifier|public
 name|double
 name|getLongitude
@@ -363,7 +363,7 @@ return|return
 name|longitude
 return|;
 block|}
-comment|/** 	 * @param longitude 	 *            The longitude to set. 	 */
+comment|/**      * @param longitude      *            The longitude to set.      */
 specifier|public
 name|void
 name|setLongitude
@@ -379,7 +379,7 @@ operator|=
 name|longitude
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the name. 	 */
+comment|/**      * @return Returns the name.      */
 specifier|public
 name|String
 name|getName
@@ -389,7 +389,7 @@ return|return
 name|name
 return|;
 block|}
-comment|/** 	 * @param name 	 *            The name to set. 	 */
+comment|/**      * @param name      *            The name to set.      */
 specifier|public
 name|void
 name|setName
@@ -405,7 +405,7 @@ operator|=
 name|name
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the population. 	 */
+comment|/**      * @return Returns the population.      */
 specifier|public
 name|Long
 name|getPopulation
@@ -452,7 +452,7 @@ return|return
 name|population
 return|;
 block|}
-comment|/** 	 * @param population 	 *            The population to set. 	 */
+comment|/**      * @param population      *            The population to set.      */
 specifier|public
 name|void
 name|setPopulation
@@ -468,7 +468,7 @@ operator|=
 name|population
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the geoNameId. 	 */
+comment|/**      * @return Returns the geoNameId.      */
 specifier|public
 name|int
 name|getGeoNameId
@@ -478,7 +478,7 @@ return|return
 name|geoNameId
 return|;
 block|}
-comment|/** 	 * @param geoNameId 	 *            The geoNameId to set. 	 */
+comment|/**      * @param geoNameId      *            The geoNameId to set.      */
 specifier|public
 name|void
 name|setGeoNameId
@@ -494,7 +494,7 @@ operator|=
 name|geonameId
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the featureClassName. 	 */
+comment|/**      * @return Returns the featureClassName.      */
 specifier|public
 name|String
 name|getFeatureClassName
@@ -504,7 +504,7 @@ return|return
 name|featureClassName
 return|;
 block|}
-comment|/** 	 * @param featureClassName 	 *            The featureClassName to set. 	 */
+comment|/**      * @param featureClassName      *            The featureClassName to set.      */
 specifier|public
 name|void
 name|setFeatureClassName
@@ -520,7 +520,7 @@ operator|=
 name|featureClassName
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the featureCodeName. 	 */
+comment|/**      * @return Returns the featureCodeName.      */
 specifier|public
 name|String
 name|getFeatureCodeName
@@ -530,7 +530,7 @@ return|return
 name|featureCodeName
 return|;
 block|}
-comment|/** 	 * @param featureCodeName 	 *            The featureCodeName to set. 	 */
+comment|/**      * @param featureCodeName      *            The featureCodeName to set.      */
 specifier|public
 name|void
 name|setFeatureCodeName
@@ -546,7 +546,7 @@ operator|=
 name|featureCodeName
 expr_stmt|;
 block|}
-comment|/** 	 * @return Returns the countryName. 	 */
+comment|/**      * @return Returns the countryName.      */
 specifier|public
 name|String
 name|getCountryName
@@ -556,7 +556,7 @@ return|return
 name|countryName
 return|;
 block|}
-comment|/** 	 * @param countryName 	 *            The countryName to set. 	 */
+comment|/**      * @param countryName      *            The countryName to set.      */
 specifier|public
 name|void
 name|setCountryName
@@ -572,7 +572,7 @@ operator|=
 name|countryName
 expr_stmt|;
 block|}
-comment|/** 	 * alternate names of this place as comma separated list 	 *  	 * @return the alternateNames as comma separated list 	 */
+comment|/**      * alternate names of this place as comma separated list      *      * @return the alternateNames as comma separated list      */
 specifier|public
 name|String
 name|getAlternateNames
@@ -619,7 +619,7 @@ return|return
 name|alternateNames
 return|;
 block|}
-comment|/** 	 * @param alternateNames 	 *            the alternateNames to set 	 */
+comment|/**      * @param alternateNames      *            the alternateNames to set      */
 specifier|public
 name|void
 name|setAlternateNames
@@ -770,7 +770,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 	 * @return the adminCode1 	 */
+comment|/**      * @return the adminCode1      */
 specifier|public
 name|String
 name|getAdminCode1
@@ -817,7 +817,7 @@ return|return
 name|adminCode1
 return|;
 block|}
-comment|/** 	 * @param adminCode1 	 *            the adminCode1 to set 	 */
+comment|/**      * @param adminCode1      *            the adminCode1 to set      */
 specifier|public
 name|void
 name|setAdminCode1
@@ -833,7 +833,7 @@ operator|=
 name|adminCode1
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminCode2 	 */
+comment|/**      * @return the adminCode2      */
 specifier|public
 name|String
 name|getAdminCode2
@@ -880,7 +880,7 @@ return|return
 name|adminCode2
 return|;
 block|}
-comment|/** 	 * @param adminCode2 	 *            the adminCode2 to set 	 */
+comment|/**      * @param adminCode2      *            the adminCode2 to set      */
 specifier|public
 name|void
 name|setAdminCode2
@@ -896,7 +896,7 @@ operator|=
 name|adminCode2
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminCode3 	 */
+comment|/**      * @return the adminCode3      */
 specifier|public
 name|String
 name|getAdminCode3
@@ -943,7 +943,7 @@ return|return
 name|adminCode3
 return|;
 block|}
-comment|/** 	 * @param adminCode3 	 *            the adminCode3 to set 	 */
+comment|/**      * @param adminCode3      *            the adminCode3 to set      */
 specifier|public
 name|void
 name|setAdminCode3
@@ -959,7 +959,7 @@ operator|=
 name|adminCode3
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminCode4 	 */
+comment|/**      * @return the adminCode4      */
 specifier|public
 name|String
 name|getAdminCode4
@@ -1006,7 +1006,7 @@ return|return
 name|adminCode4
 return|;
 block|}
-comment|/** 	 * @param adminCode4 	 *            the adminCode4 to set 	 */
+comment|/**      * @param adminCode4      *            the adminCode4 to set      */
 specifier|public
 name|void
 name|setAdminCode4
@@ -1022,7 +1022,7 @@ operator|=
 name|adminCode4
 expr_stmt|;
 block|}
-comment|/** 	 * @return the timezone 	 */
+comment|/**      * @return the timezone      */
 specifier|public
 name|Timezone
 name|getTimezone
@@ -1069,7 +1069,7 @@ return|return
 name|timezone
 return|;
 block|}
-comment|/** 	 * @param timezone 	 *            the timezone to set 	 */
+comment|/**      * @param timezone      *            the timezone to set      */
 specifier|public
 name|void
 name|setTimezone
@@ -1085,7 +1085,7 @@ operator|=
 name|timezone
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminName1 	 */
+comment|/**      * @return the adminName1      */
 specifier|public
 name|String
 name|getAdminName1
@@ -1132,7 +1132,7 @@ return|return
 name|adminName1
 return|;
 block|}
-comment|/** 	 * @param adminName1 	 *            the adminName1 to set 	 */
+comment|/**      * @param adminName1      *            the adminName1 to set      */
 specifier|public
 name|void
 name|setAdminName1
@@ -1148,7 +1148,7 @@ operator|=
 name|adminName1
 expr_stmt|;
 block|}
-comment|/** 	 * @return the adminName2 	 */
+comment|/**      * @return the adminName2      */
 specifier|public
 name|String
 name|getAdminName2
@@ -1195,7 +1195,7 @@ return|return
 name|adminName2
 return|;
 block|}
-comment|/** 	 * @param adminName2 	 *            the adminName2 to set 	 */
+comment|/**      * @param adminName2      *            the adminName2 to set      */
 specifier|public
 name|void
 name|setAdminName2
@@ -1211,7 +1211,7 @@ operator|=
 name|adminName2
 expr_stmt|;
 block|}
-comment|/** 	 * @return the style used when calling the web service that returned this 	 *         toponym. 	 */
+comment|/**      * @return the style used when calling the web service that returned this      *         toponym.      */
 specifier|public
 name|Style
 name|getStyle
@@ -1221,7 +1221,7 @@ return|return
 name|style
 return|;
 block|}
-comment|/** 	 * @param style 	 *            the style to set 	 */
+comment|/**      * @param style      *            the style to set      */
 specifier|public
 name|void
 name|setStyle

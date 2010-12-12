@@ -146,7 +146,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  *    *  TODO: move to a commons/testing library?  */
+comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  *  *  TODO: move to a commons/testing library?  */
 end_comment
 
 begin_class

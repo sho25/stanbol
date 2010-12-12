@@ -17,6 +17,60 @@ end_package
 
 begin_import
 import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|FISE_ENTITYANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|fise
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|FISE_TEXTANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -227,24 +281,6 @@ name|iksproject
 operator|.
 name|fise
 operator|.
-name|engines
-operator|.
-name|entitytagging
-operator|.
-name|impl
-operator|.
-name|ReferencedSiteEntityTaggingEnhancementEngine
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|fise
-operator|.
 name|servicesapi
 operator|.
 name|ContentItem
@@ -281,44 +317,12 @@ name|RdfEntityFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|fise
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|fise
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|TechnicalClasses
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
 name|TestEntityLinkingEnhancementEngine
 block|{
-comment|/** 	 * The context for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The context for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -329,7 +333,7 @@ literal|"Dr. Patrick Marshall (1869 - November 1950) was a"
 operator|+
 literal|" geologist who lived in New Zealand and worked at the University of Otago."
 decl_stmt|;
-comment|/** 	 * The person for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The person for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -338,7 +342,7 @@ name|PERSON
 init|=
 literal|"Patrick Marshall"
 decl_stmt|;
-comment|/** 	 * The organisation for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The organisation for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -347,7 +351,7 @@ name|ORGANISATION
 init|=
 literal|"University of Otago"
 decl_stmt|;
-comment|/** 	 * The place for the tests (same as in TestOpenNLPEnhancementEngine) 	 */
+comment|/**      * The place for the tests (same as in TestOpenNLPEnhancementEngine)      */
 specifier|public
 specifier|static
 specifier|final
@@ -382,14 +386,14 @@ name|bindServices
 parameter_list|()
 throws|throws
 name|IOException
-block|{ 	  }
+block|{     }
 annotation|@
 name|After
 specifier|public
 name|void
 name|unbindServices
 parameter_list|()
-block|{ 	  }
+block|{     }
 annotation|@
 name|AfterClass
 specifier|public
@@ -657,19 +661,18 @@ block|{
 comment|//TODO: adapt this test to work with this engine
 comment|// -> here the problem is mainly to fake the needed infrastructure
 return|return;
-comment|//    	//create a content item
-comment|//    	ContentItem ci = getContentItem("urn:iks-project:fise:text:content-item:person", CONTEXT);
-comment|//    	//add three text annotations to be consumed by this test
-comment|//    	getTextAnnotation(ci, PERSON, CONTEXT, OntologicalClasses.DBPEDIA_PERSON);
-comment|//    	getTextAnnotation(ci, ORGANISATION, CONTEXT, OntologicalClasses.DBPEDIA_ORGANISATION);
-comment|//    	getTextAnnotation(ci, PLACE, CONTEXT, OntologicalClasses.DBPEDIA_PLACE);
-comment|//    	//perform the computation of the enhancements
-comment|//    	entityLinkingEngine.computeEnhancements(ci);
-comment|//    	int entityAnnotationCount = checkAllEntityAnnotations(ci.getMetadata());
-comment|//    	assertEquals(2, entityAnnotationCount);
+comment|//        //create a content item
+comment|//        ContentItem ci = getContentItem("urn:iks-project:fise:text:content-item:person", CONTEXT);
+comment|//        //add three text annotations to be consumed by this test
+comment|//        getTextAnnotation(ci, PERSON, CONTEXT, OntologicalClasses.DBPEDIA_PERSON);
+comment|//        getTextAnnotation(ci, ORGANISATION, CONTEXT, OntologicalClasses.DBPEDIA_ORGANISATION);
+comment|//        getTextAnnotation(ci, PLACE, CONTEXT, OntologicalClasses.DBPEDIA_PLACE);
+comment|//        //perform the computation of the enhancements
+comment|//        entityLinkingEngine.computeEnhancements(ci);
+comment|//        int entityAnnotationCount = checkAllEntityAnnotations(ci.getMetadata());
+comment|//        assertEquals(2, entityAnnotationCount);
 block|}
 comment|/*      * -----------------------------------------------------------------------      * Helper Methods to check Text and EntityAnnotations      * -----------------------------------------------------------------------      */
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllEntityAnnotations
@@ -690,12 +693,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_ENTITYANNOTATION
 argument_list|)
 decl_stmt|;
@@ -742,7 +741,7 @@ return|return
 name|entityAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if an entity annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if an entity annotation is valid.      */
 specifier|private
 name|void
 name|checkEntityAnnotation
@@ -766,8 +765,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 literal|null
@@ -813,12 +810,8 @@ name|filter
 argument_list|(
 name|referredTextAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|FISE_TEXTANNOTATION
 argument_list|)
 operator|.
@@ -840,8 +833,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_REFERENCE
 argument_list|,
 literal|null
@@ -891,8 +882,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|FISE_ENTITY_LABEL
 argument_list|,
 literal|null

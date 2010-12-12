@@ -1948,7 +1948,7 @@ name|getInstance
 argument_list|()
 decl_stmt|;
 comment|//get all the textAnnotations
-comment|/*           * this Map holds the name as key and all the text annotations of           * dc:type dbPedia:Place that select this name as value          * this map is used to avoid multiple lookups for text annotations          * selecting the same name.          */
+comment|/*          * this Map holds the name as key and all the text annotations of          * dc:type dbPedia:Place that select this name as value          * this map is used to avoid multiple lookups for text annotations          * selecting the same name.          */
 name|Map
 argument_list|<
 name|String
