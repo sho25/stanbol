@@ -37,6 +37,34 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLImportsDeclaration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntology
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -284,6 +312,14 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologySpaceException
 block|{
+name|OWLOntology
+name|o
+init|=
+name|coreSpace
+operator|.
+name|getTopOntology
+argument_list|()
+decl_stmt|;
 comment|// This does the append thingy
 name|log
 operator|.
@@ -291,10 +327,7 @@ name|debug
 argument_list|(
 literal|"Attaching "
 operator|+
-name|coreSpace
-operator|.
-name|getTopOntology
-argument_list|()
+name|o
 operator|+
 literal|" TO "
 operator|+
@@ -306,27 +339,20 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
+comment|// It is in fact the addition of the core space top ontology to the
+comment|// custom space, with import statements and all.
 name|addOntology
 argument_list|(
 operator|new
 name|RootOntologySource
 argument_list|(
-name|coreSpace
-operator|.
-name|getTopOntology
-argument_list|()
+name|o
 argument_list|,
 literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"ok"
-argument_list|)
-expr_stmt|;
+comment|// log.debug("ok");
 block|}
 catch|catch
 parameter_list|(

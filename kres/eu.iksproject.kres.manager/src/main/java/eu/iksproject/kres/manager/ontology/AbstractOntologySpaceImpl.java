@@ -490,7 +490,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of an ontology space. While it still leaves it up to  * developers to decide what locking policies to adopt for subclasses (in the  *<code>setUp()</code> method), it provides default implementations of all  * other interface methods.<br>  *<br>  * NOTE: By default, an ontology space is NOT write-locked. Developers need to  * set the<code>locked</code> variable to true to make the space read-only.  *   * @author alessandro  *   */
+comment|/**  * Abstract implementation of an ontology space. While it still leaves it up to  * developers to decide what locking policies to adopt for subclasses (in the  *<code>setUp()</code> method), it provides default implementations of all  * other interface methods.<br>  *<br>  * NOTE: By default, an ontology space is NOT write-locked. Developers need to  * set the<code>locked</code> variable to true to make the space read-only.  *   *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -625,7 +625,7 @@ name|parentID
 expr_stmt|;
 comment|// FIXME: ensure that this is not null
 name|OntologyScope
-name|ps
+name|parentScope
 init|=
 name|ONManager
 operator|.
@@ -642,11 +642,11 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|ps
+name|parentScope
 operator|!=
 literal|null
 operator|&&
-name|ps
+name|parentScope
 operator|instanceof
 name|OntologySpaceListener
 condition|)
@@ -657,7 +657,7 @@ argument_list|(
 operator|(
 name|OntologySpaceListener
 operator|)
-name|ps
+name|parentScope
 argument_list|)
 expr_stmt|;
 name|this
@@ -968,13 +968,13 @@ operator|.
 name|getOntologyID
 argument_list|()
 decl_stmt|;
-try|try
-block|{
 comment|// if (ontologySource != null&& parentID != null)
 comment|// // rewrite the source
 comment|// ontologySource = new ScopeOntologySource(parentID,
 comment|// ontologySource.getRootOntology(), ontologySource
 comment|// .getPhysicalIRI());
+comment|// Should not modify the child ontology in any way.
+comment|// TODO implement transaction control.
 name|OntologyUtils
 operator|.
 name|appendOntology
@@ -1001,6 +1001,8 @@ operator|new
 name|StringDocumentTarget
 argument_list|()
 decl_stmt|;
+try|try
+block|{
 name|ontologyManager
 operator|.
 name|saveOntology
@@ -1012,6 +1014,37 @@ name|RDFXMLOntologyFormat
 argument_list|()
 argument_list|,
 name|tgt
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyStorageException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"KReS : [FATAL] Failed to store ontology "
+operator|+
+name|id
+operator|+
+literal|" in memory."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
+try|try
+block|{
+name|ontologyManager
+operator|.
+name|removeOntology
+argument_list|(
+name|ontology
 argument_list|)
 expr_stmt|;
 name|ontologyManager
@@ -1028,6 +1061,48 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyAlreadyExistsException
+name|e
+parameter_list|)
+block|{
+comment|// Could happen if we supplied an ontology manager that already
+comment|// knows this ontology. Nothing to do then.
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"KReS : [NONFATAL] Tried to copy ontology "
+operator|+
+name|id
+operator|+
+literal|" to existing one."
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyCreationException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unexpected exception caught while copying ontology "
+operator|+
+name|id
+operator|+
+literal|" across managers"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 try|try
 block|{
 comment|// Store the top ontology
@@ -1073,6 +1148,7 @@ literal|" will be stored in-memory only."
 argument_list|)
 expr_stmt|;
 else|else
+block|{
 name|storage
 operator|.
 name|store
@@ -1080,6 +1156,7 @@ argument_list|(
 name|ontology
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|// ONManager.get().getOntologyStore().load(rootOntology.getOntologyID().getOntologyIRI());
 block|}
@@ -1111,65 +1188,6 @@ name|getOntologyIRI
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyAlreadyExistsException
-name|e
-parameter_list|)
-block|{
-comment|// Could happen if we supplied an ontology manager that already
-comment|// knows this ontology. Nothing to do then.
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"KReS : [NONFATAL] Tried to copy ontology "
-operator|+
-name|id
-operator|+
-literal|" to existing one."
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Unexpected exception caught while copying ontology "
-operator|+
-name|id
-operator|+
-literal|" across managers"
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"KReS : [FATAL] Failed to store ontology "
-operator|+
-name|id
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 block|}
 annotation|@
@@ -2023,6 +2041,7 @@ literal|" will be stored in-memory only."
 argument_list|)
 expr_stmt|;
 else|else
+block|{
 name|storage
 operator|.
 name|store
@@ -2030,6 +2049,7 @@ argument_list|(
 name|rootOntology
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 catch|catch

@@ -728,7 +728,7 @@ name|FUNCTIONAL_OWL
 block|,
 name|KReSFormat
 operator|.
-name|MANCHERSTER_OWL
+name|MANCHESTER_OWL
 block|,
 name|KReSFormat
 operator|.

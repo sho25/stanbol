@@ -743,7 +743,7 @@ name|IRI
 name|addedOntology
 parameter_list|)
 block|{
-comment|// Propagate events
+comment|// Propagate events to scope listeners
 name|fireOntologyAdded
 argument_list|(
 name|addedOntology
@@ -764,7 +764,7 @@ name|IRI
 name|removedOntology
 parameter_list|)
 block|{
-comment|// Propagate events
+comment|// Propagate events to scope listeners
 name|fireOntologyRemoved
 argument_list|(
 name|removedOntology
@@ -878,7 +878,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#bringUp() 	 */
+comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#setUp() 	 */
 annotation|@
 name|Override
 specifier|public
@@ -1006,6 +1006,15 @@ operator|.
 name|toString
 argument_list|()
 return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|synchronizeSpaces
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
 block|}
 block|}
 end_class

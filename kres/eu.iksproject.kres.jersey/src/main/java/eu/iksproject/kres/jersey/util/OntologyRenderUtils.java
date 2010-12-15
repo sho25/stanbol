@@ -1019,7 +1019,7 @@ name|equals
 argument_list|(
 name|KReSFormat
 operator|.
-name|MANCHERSTER_OWL
+name|MANCHESTER_OWL
 argument_list|)
 condition|)
 block|{

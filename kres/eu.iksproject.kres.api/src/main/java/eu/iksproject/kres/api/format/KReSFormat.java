@@ -82,7 +82,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|MANCHERSTER_OWL
+name|MANCHESTER_OWL
 init|=
 literal|"application/manchester+owl"
 decl_stmt|;
@@ -90,7 +90,7 @@ specifier|public
 specifier|static
 specifier|final
 name|MediaType
-name|MANCHERSTER_OWL_TYPE
+name|MANCHESTER_OWL_TYPE
 init|=
 operator|new
 name|MediaType

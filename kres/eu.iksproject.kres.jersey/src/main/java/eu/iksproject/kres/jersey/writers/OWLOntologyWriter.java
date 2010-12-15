@@ -19,16 +19,6 @@ name|java
 operator|.
 name|io
 operator|.
-name|ByteArrayOutputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 import|;
 end_import
@@ -40,26 +30,6 @@ operator|.
 name|io
 operator|.
 name|OutputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|OutputStreamWriter
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|PrintWriter
 import|;
 end_import
 
@@ -84,16 +54,6 @@ operator|.
 name|reflect
 operator|.
 name|Type
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Iterator
 import|;
 end_import
 
@@ -229,22 +189,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Triple
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|serializedform
 operator|.
 name|Serializer
@@ -279,43 +223,11 @@ name|clerezza
 operator|.
 name|rdf
 operator|.
-name|jena
-operator|.
-name|serializer
-operator|.
-name|JenaSerializerProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
 name|rdfjson
 operator|.
 name|serializer
 operator|.
 name|RdfJsonSerializingProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|lang
-operator|.
-name|SystemUtils
 import|;
 end_import
 
@@ -344,18 +256,6 @@ operator|.
 name|turtle
 operator|.
 name|TurtleOntologyFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|json
-operator|.
-name|simple
-operator|.
-name|JSONArray
 import|;
 end_import
 
@@ -459,19 +359,21 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|hp
+name|slf4j
 operator|.
-name|hpl
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|jena
+name|slf4j
 operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|Model
+name|LoggerFactory
 import|;
 end_import
 
@@ -488,22 +390,6 @@ operator|.
 name|format
 operator|.
 name|KReSFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|shared
-operator|.
-name|transformation
-operator|.
-name|JenaToOwlConvert
 import|;
 end_import
 
@@ -540,7 +426,7 @@ name|OWL_XML
 block|,
 name|KReSFormat
 operator|.
-name|MANCHERSTER_OWL
+name|MANCHESTER_OWL
 block|,
 name|KReSFormat
 operator|.
@@ -581,19 +467,28 @@ name|ServletContext
 name|servletContext
 parameter_list|)
 block|{
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|this
 operator|.
 name|servletContext
 operator|=
 name|servletContext
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"setted context "
+literal|"Setting context to "
 operator|+
 name|servletContext
 argument_list|)
@@ -624,13 +519,11 @@ operator|==
 literal|null
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"Serializer not found in ServletContext"
+literal|"Serializer not found in Servlet context."
 argument_list|)
 expr_stmt|;
 name|serializer
@@ -748,6 +641,17 @@ name|IOException
 throws|,
 name|WebApplicationException
 block|{
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|OWLOntologyManager
 name|manager
 init|=
@@ -756,29 +660,20 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|"KReS FORMAT!!! : "
+literal|"Rendering ontology "
 operator|+
-name|mediaType
-argument_list|)
-expr_stmt|;
-name|System
+name|ontology
 operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"KReS FORMAT 2!!! : "
-operator|+
-name|mediaType
-operator|.
-name|getType
+name|getOntologyID
 argument_list|()
+operator|+
+literal|"to KReS format "
+operator|+
+name|mediaType
 argument_list|)
 expr_stmt|;
 if|if
@@ -798,15 +693,6 @@ condition|)
 block|{
 try|try
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"RDF/XML!!!"
-argument_list|)
-expr_stmt|;
 name|manager
 operator|.
 name|saveOntology
@@ -827,11 +713,14 @@ name|OWLOntologyStorageException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to store ontology for rendering."
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 block|}
@@ -873,11 +762,14 @@ name|OWLOntologyStorageException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to store ontology for rendering."
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 block|}
@@ -893,7 +785,7 @@ name|equals
 argument_list|(
 name|KReSFormat
 operator|.
-name|MANCHERSTER_OWL
+name|MANCHESTER_OWL
 argument_list|)
 condition|)
 block|{
@@ -919,11 +811,14 @@ name|OWLOntologyStorageException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to store ontology for rendering."
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 block|}
@@ -965,11 +860,14 @@ name|OWLOntologyStorageException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to store ontology for rendering."
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 block|}
@@ -1011,11 +909,14 @@ name|OWLOntologyStorageException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to store ontology for rendering."
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 block|}

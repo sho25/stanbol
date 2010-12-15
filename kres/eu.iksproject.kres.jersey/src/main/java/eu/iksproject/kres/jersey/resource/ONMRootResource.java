@@ -19,26 +19,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -98,6 +78,18 @@ operator|.
 name|rs
 operator|.
 name|Path
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|PathParam
 import|;
 end_import
 
@@ -362,20 +354,95 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|/** 	 * RESTful DELETE method that clears the entire scope registry and managed 	 * ontology store. 	 */
+annotation|@
+name|DELETE
+specifier|public
+name|void
+name|clearOntologies
+parameter_list|()
+block|{
+comment|// First clear the registry...
+name|ScopeRegistry
+name|reg
+init|=
+name|onm
+operator|.
+name|getScopeRegistry
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|OntologyScope
+name|scope
+range|:
+name|reg
+operator|.
+name|getRegisteredScopes
+argument_list|()
+control|)
+name|reg
+operator|.
+name|deregisterScope
+argument_list|(
+name|scope
+argument_list|)
+expr_stmt|;
+comment|// ...then clear the store.
+comment|// TODO : the other way around?
+name|onm
+operator|.
+name|getOntologyStore
+argument_list|()
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|GET
+annotation|@
+name|Path
+argument_list|(
+literal|"/{param:.+}"
+argument_list|)
+specifier|public
+name|Response
+name|echo
+parameter_list|(
+annotation|@
+name|PathParam
+argument_list|(
+literal|"param"
+argument_list|)
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+name|Response
+operator|.
+name|ok
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
 comment|/** 	 * Default GET method for obtaining the set of (both active and, optionally, 	 * inactive) ontology scopes currently registered with this instance of 	 * KReS. 	 *  	 * @param inactive 	 *            if true, both active and inactive scopes will be included. 	 *            Default is false. 	 * @param headers 	 *            the HTTP headers, supplied by the REST call. 	 * @param servletContext 	 *            the servlet context, supplied by the REST call. 	 * @return a string representation of the requested scope set, in a format 	 *         acceptable by the client. 	 */
 annotation|@
 name|GET
 annotation|@
 name|Produces
 argument_list|(
+name|value
+operator|=
 block|{
 name|KReSFormat
 operator|.
-name|FUNCTIONAL_OWL
-block|,
-name|KReSFormat
-operator|.
-name|MANCHERSTER_OWL
+name|RDF_XML
 block|,
 name|KReSFormat
 operator|.
@@ -383,11 +450,15 @@ name|OWL_XML
 block|,
 name|KReSFormat
 operator|.
-name|RDF_XML
+name|TURTLE
 block|,
 name|KReSFormat
 operator|.
-name|TURTLE
+name|FUNCTIONAL_OWL
+block|,
+name|KReSFormat
+operator|.
+name|MANCHESTER_OWL
 block|,
 name|KReSFormat
 operator|.
@@ -470,51 +541,61 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** 	 * RESTful DELETE method that clears the entire scope registry and managed 	 * ontology store. 	 */
-annotation|@
-name|DELETE
-specifier|public
-name|void
-name|clearOntologies
-parameter_list|()
-block|{
-comment|// First clear the registry...
-name|ScopeRegistry
-name|reg
-init|=
-name|onm
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|OntologyScope
-name|scope
-range|:
-name|reg
-operator|.
-name|getRegisteredScopes
-argument_list|()
-control|)
-name|reg
-operator|.
-name|deregisterScope
-argument_list|(
-name|scope
-argument_list|)
-expr_stmt|;
-comment|// ...then clear the store.
-comment|// TODO : the other way around?
-name|onm
-operator|.
-name|getOntologyStore
-argument_list|()
-operator|.
-name|clear
-argument_list|()
-expr_stmt|;
-block|}
+comment|// @Path("upload")
+comment|// @Consumes(MediaType.MULTIPART_FORM_DATA)
+comment|// @POST
+comment|// public void uploadDumb(@FormParam("file") InputStream is) {
+comment|// Writer writer = new StringWriter();
+comment|//
+comment|// char[] buffer = new char[1024];
+comment|//
+comment|// try {
+comment|//
+comment|// Reader reader = new BufferedReader(
+comment|//
+comment|// new InputStreamReader(is, "UTF-8"));
+comment|//
+comment|// int n;
+comment|//
+comment|// while ((n = reader.read(buffer)) != -1) {
+comment|//
+comment|// writer.write(buffer, 0, n);
+comment|//
+comment|// }
+comment|// } catch (IOException ex) {
+comment|// throw new WebApplicationException(ex);
+comment|// } finally {
+comment|//
+comment|// try {
+comment|// is.close();
+comment|// } catch (IOException e) {
+comment|// throw new WebApplicationException(e);
+comment|// }
+comment|//
+comment|// }
+comment|// System.out.println(writer.toString());
+comment|// }
+comment|//
+comment|// @Path("formdata")
+comment|// @Consumes(MediaType.MULTIPART_FORM_DATA)
+comment|// @POST
+comment|// public void uploadUrlFormData(
+comment|// @FormDataParam("file") List<FormDataBodyPart> parts,
+comment|// @FormDataParam("submit") FormDataBodyPart submit)
+comment|// throws IOException, ParseException {
+comment|//
+comment|// System.out.println("XXXX: " + submit.getMediaType());
+comment|// System.out.println("XXXX: "
+comment|// + submit.getHeaders().getFirst("Content-Type"));
+comment|//
+comment|// for (FormDataBodyPart bp : parts) {
+comment|// System.out.println(bp.getMediaType());
+comment|// System.out.println(bp.getHeaders().get("Content-Disposition"));
+comment|// System.out.println(bp.getParameterizedHeaders().getFirst(
+comment|// "Content-Disposition").getParameters().get("name"));
+comment|// bp.cleanup();
+comment|// }
+comment|// }
 block|}
 end_class
 

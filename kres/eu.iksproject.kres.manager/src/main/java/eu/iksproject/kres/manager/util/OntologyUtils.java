@@ -384,7 +384,60 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** 	 * This method appends one ontology (the child) to another (the parent) by 	 * proceeding as follows. If a physical URI can be obtained from the child 	 * source, an import statement using that physical URI will be added to the 	 * parent ontology, otherwise all the axioms from the child ontology will be 	 * copied to the parent.<br> 	 * Note: the ontology manager does not load ontologies. 	 *  	 * @param parentSrc 	 *            must exist! 	 * @param childSrc 	 * @param ontologyManager 	 * @return the parent with the appended child 	 */
+specifier|public
+specifier|static
+name|OWLOntology
+name|appendOntology
+parameter_list|(
+name|OntologyInputSource
+name|parentSrc
+parameter_list|,
+name|OntologyInputSource
+name|childSrc
+parameter_list|)
+block|{
+return|return
+name|appendOntology
+argument_list|(
+name|parentSrc
+argument_list|,
+name|childSrc
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+return|;
+block|}
+specifier|public
+specifier|static
+name|OWLOntology
+name|appendOntology
+parameter_list|(
+name|OntologyInputSource
+name|parentSrc
+parameter_list|,
+name|OntologyInputSource
+name|childSrc
+parameter_list|,
+name|IRI
+name|rewritePrefix
+parameter_list|)
+block|{
+return|return
+name|appendOntology
+argument_list|(
+name|parentSrc
+argument_list|,
+name|childSrc
+argument_list|,
+literal|null
+argument_list|,
+name|rewritePrefix
+argument_list|)
+return|;
+block|}
+comment|/** 	 * This method appends one ontology (the child) to another (the parent) by 	 * proceeding as follows. If a physical URI can be obtained from the child 	 * source, an import statement using that physical URI will be added to the 	 * parent ontology, otherwise all the axioms from the child ontology will be 	 * copied to the parent.<br> 	 * Note: the ontology manager will not load additional ontologies. 	 *  	 * @param parentSrc 	 *            must exist! 	 * @param childSrc 	 * @param ontologyManager 	 *            can be null (e.g. when one does not want changes to be 	 *            immediately reflected in their ontology manager), in which 	 *            case a temporary ontology manager will be used. 	 * @param rewritePrefix 	 *            . if not null, import statements will be generated in the form 	 *<tt>rewritePrefix/child_ontology_logical_IRI</tt>. It can be 	 *            used for relocating the ontology document file elsewhere. 	 * @return the parent with the appended child 	 */
 specifier|public
 specifier|static
 name|OWLOntology
@@ -403,6 +456,19 @@ name|IRI
 name|rewritePrefix
 parameter_list|)
 block|{
+if|if
+condition|(
+name|ontologyManager
+operator|==
+literal|null
+condition|)
+name|ontologyManager
+operator|=
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+expr_stmt|;
 name|OWLDataFactory
 name|factory
 init|=
@@ -427,8 +493,8 @@ operator|.
 name|getRootOntology
 argument_list|()
 decl_stmt|;
-comment|// If we can obtain a physical IRI from source, add the import.
-comment|// Named
+comment|// Named ontology with a provided absolute prefix. Use name and prefix
+comment|// for creating an new import statement.
 name|OWLOntology
 name|child
 init|=
@@ -448,6 +514,7 @@ operator|&&
 name|rewritePrefix
 operator|!=
 literal|null
+comment|/*&& rewritePrefix.isAbsolute() */
 condition|)
 block|{
 name|IRI
@@ -494,7 +561,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Anonymous, with physicalIRI
+comment|// Anonymous, with physicalIRI. A plain import statement is added.
 elseif|else
 if|if
 condition|(
@@ -531,8 +598,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Otherwise just copy all its axioms and imports.
-comment|// Anonymous and no physical IRI
+comment|// Anonymous and no physical IRI (e.g. in memory). Copy all axioms and
+comment|// import statements.
 else|else
 block|{
 name|ontologyManager

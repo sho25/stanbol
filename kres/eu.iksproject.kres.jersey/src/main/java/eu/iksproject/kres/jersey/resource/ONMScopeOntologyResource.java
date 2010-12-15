@@ -14,6 +14,24 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -111,18 +129,6 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|QueryParam
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
 name|WebApplicationException
 import|;
 end_import
@@ -180,20 +186,6 @@ operator|.
 name|core
 operator|.
 name|UriInfo
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|coode
-operator|.
-name|owlapi
-operator|.
-name|turtle
-operator|.
-name|TurtleOntologyFormat
 import|;
 end_import
 
@@ -435,11 +427,11 @@ name|iksproject
 operator|.
 name|kres
 operator|.
-name|manager
+name|jersey
 operator|.
-name|io
+name|util
 operator|.
-name|RootOntologySource
+name|OntologyRenderUtils
 import|;
 end_import
 
@@ -451,11 +443,11 @@ name|iksproject
 operator|.
 name|kres
 operator|.
-name|jersey
+name|manager
 operator|.
-name|util
+name|io
 operator|.
-name|OntologyRenderUtils
+name|RootOntologySource
 import|;
 end_import
 
@@ -534,7 +526,11 @@ name|RDF_XML
 block|,
 name|KReSFormat
 operator|.
-name|RDF_JSON
+name|OWL_XML
+block|,
+name|KReSFormat
+operator|.
+name|TURTLE
 block|,
 name|KReSFormat
 operator|.
@@ -542,11 +538,11 @@ name|FUNCTIONAL_OWL
 block|,
 name|KReSFormat
 operator|.
-name|MANCHERSTER_OWL
+name|MANCHESTER_OWL
 block|,
 name|KReSFormat
 operator|.
-name|TURTLE
+name|RDF_JSON
 block|}
 argument_list|)
 specifier|public
@@ -630,8 +626,24 @@ argument_list|(
 name|ontologyid
 argument_list|)
 decl_stmt|;
-comment|//		System.err.println("Looking for ontology with id " + ontiri
-comment|//				+ " in scope " + sciri + " ...");
+comment|// TODO: hack (ma anche no)
+if|if
+condition|(
+operator|!
+name|ontiri
+operator|.
+name|isAbsolute
+argument_list|()
+condition|)
+name|ontiri
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|absur
+argument_list|)
+expr_stmt|;
 name|ScopeRegistry
 name|reg
 init|=
@@ -661,73 +673,66 @@ name|Response
 operator|.
 name|status
 argument_list|(
-literal|404
+name|NOT_FOUND
 argument_list|)
 operator|.
 name|build
 argument_list|()
 return|;
-name|OntologySpace
-name|cs
-init|=
-name|scope
-operator|.
-name|getCustomSpace
-argument_list|()
-decl_stmt|;
-comment|//		System.err.println("check custom");
-comment|//		for (OWLOntology o : cs.getOntologies()) {
-comment|//			System.err.println("\thas "+o);
-comment|//		}
-comment|//		System.err.println("check core");
-comment|//		for (OWLOntology o : scope.getCoreSpace().getOntologies()) {
-comment|//			System.err.println("\thas "+o);
-comment|//		}
+comment|/* BEGIN debug code, uncomment only for local testing */
+comment|// OWLOntology test = null, top = null;
+comment|// test = scope.getCustomSpace().getOntology(ontiri);
+comment|// System.out.println("Ontology " + ontiri);
+comment|// for (OWLImportsDeclaration imp : test.getImportsDeclarations())
+comment|// System.out.println("\timports " + imp.getIRI());
+comment|// top = scope.getCoreSpace().getTopOntology();
+comment|// System.out.println("Core root for scope " + scopeid);
+comment|// for (OWLImportsDeclaration imp : top.getImportsDeclarations())
+comment|// System.out.println("\timports " + imp.getIRI());
+comment|/* END debug code */
 name|OWLOntology
 name|ont
 init|=
 literal|null
 decl_stmt|;
-if|if
-condition|(
-name|cs
-operator|!=
-literal|null
-condition|)
-block|{
-name|ont
-operator|=
+comment|// By default, always try retrieving the ontology from the custom space
+comment|// first.
+name|OntologySpace
+name|space
+init|=
 name|scope
 operator|.
 name|getCustomSpace
 argument_list|()
-operator|.
-name|getOntology
-argument_list|(
-name|ontiri
-argument_list|)
-expr_stmt|;
-block|}
+decl_stmt|;
 if|if
 condition|(
-name|ont
+name|space
 operator|==
 literal|null
 condition|)
-block|{
-name|ont
+name|space
 operator|=
 name|scope
 operator|.
 name|getCoreSpace
 argument_list|()
+expr_stmt|;
+if|if
+condition|(
+name|space
+operator|!=
+literal|null
+condition|)
+name|ont
+operator|=
+name|space
 operator|.
 name|getOntology
 argument_list|(
 name|ontiri
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 name|ont
@@ -777,17 +782,7 @@ argument_list|>
 name|getOntologies
 parameter_list|()
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"ID SPACE : "
-operator|+
-name|ontologies
-argument_list|)
-expr_stmt|;
+comment|// System.out.println("ID SPACE : " + ontologies);
 return|return
 name|ontologies
 return|;
@@ -803,7 +798,7 @@ argument_list|(
 name|provider
 argument_list|)
 decl_stmt|;
-comment|/*Set<OntologySpace> spaces = scope.getSessionSpaces(); 			for(OntologySpace space : spaces){ 				System.out.println("ID SPACE : "+space.getID()); 			}*/
+comment|/* 			 * Set<OntologySpace> spaces = scope.getSessionSpaces(); 			 * for(OntologySpace space : spaces){ 			 * System.out.println("ID SPACE : "+space.getID()); } 			 */
 try|try
 block|{
 name|ont
@@ -824,12 +819,15 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|,
+name|INTERNAL_SERVER_ERROR
+argument_list|)
+throw|;
 block|}
 block|}
 if|if
@@ -844,7 +842,7 @@ name|Response
 operator|.
 name|status
 argument_list|(
-literal|404
+name|NOT_FOUND
 argument_list|)
 operator|.
 name|build
@@ -885,22 +883,15 @@ name|OWLOntologyStorageException
 name|e
 parameter_list|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-return|return
-name|Response
-operator|.
-name|status
+throw|throw
+operator|new
+name|WebApplicationException
 argument_list|(
-literal|500
+name|e
+argument_list|,
+name|INTERNAL_SERVER_ERROR
 argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
+throw|;
 block|}
 return|return
 name|Response
@@ -953,7 +944,7 @@ condition|(
 name|ontologyid
 operator|!=
 literal|null
-operator|||
+operator|&&
 operator|!
 name|ontologyid
 operator|.
@@ -1128,7 +1119,7 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-literal|500
+name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
