@@ -344,6 +344,10 @@ expr_stmt|;
 if|if
 condition|(
 name|TEST_LICENSE_KEY
+operator|!=
+literal|null
+operator|&&
+name|TEST_LICENSE_KEY
 operator|.
 name|matches
 argument_list|(
@@ -566,7 +570,10 @@ name|Assume
 operator|.
 name|assumeNotNull
 argument_list|(
-name|TEST_LICENSE_KEY
+name|calaisExtractor
+operator|.
+name|getLicenseKey
+argument_list|()
 argument_list|)
 expr_stmt|;
 try|try
