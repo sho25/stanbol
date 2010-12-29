@@ -207,11 +207,7 @@ name|IRI
 name|libraryID
 parameter_list|)
 function_decl|;
-specifier|public
-name|boolean
-name|isPrintingLoadedOntologies
-parameter_list|()
-function_decl|;
+comment|//	public boolean isPrintingLoadedOntologies();
 specifier|public
 name|void
 name|loadLocations
@@ -231,14 +227,7 @@ name|IRI
 name|physicalIRI
 parameter_list|)
 function_decl|;
-specifier|public
-name|void
-name|setPrintLoadedOntologies
-parameter_list|(
-name|boolean
-name|doPrint
-parameter_list|)
-function_decl|;
+comment|//	public void setPrintLoadedOntologies(boolean doPrint);
 block|}
 end_interface
 

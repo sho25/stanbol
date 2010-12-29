@@ -19,7 +19,17 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|fail
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Hashtable
 import|;
 end_import
 
@@ -45,15 +55,17 @@ end_import
 
 begin_import
 import|import
-name|org
+name|eu
 operator|.
-name|semanticweb
+name|iksproject
 operator|.
-name|owlapi
+name|kres
 operator|.
-name|apibinding
+name|api
 operator|.
-name|OWLManager
+name|manager
+operator|.
+name|KReSONManager
 import|;
 end_import
 
@@ -62,9 +74,10 @@ specifier|public
 class|class
 name|Namespace
 block|{
+specifier|private
 specifier|static
-name|ONManager
-name|onManager
+name|KReSONManager
+name|onm
 decl_stmt|;
 annotation|@
 name|BeforeClass
@@ -74,22 +87,41 @@ name|void
 name|setUp
 parameter_list|()
 block|{
-name|onManager
+comment|// An ONManager with no store and default settings
+name|onm
 operator|=
+operator|new
 name|ONManager
-operator|.
-name|get
+argument_list|(
+literal|null
+argument_list|,
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
 argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
 specifier|public
-specifier|static
 name|void
 name|getNamespace
 parameter_list|()
-block|{ 		 	}
+block|{
+name|assertNotNull
+argument_list|(
+name|onm
+operator|.
+name|getKReSNamespace
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

@@ -27,6 +27,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Hashtable
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -72,6 +82,22 @@ operator|.
 name|manager
 operator|.
 name|DuplicateIDException
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|KReSONManager
 import|;
 end_import
 
@@ -184,8 +210,8 @@ name|TestRegistry
 block|{
 specifier|private
 specifier|static
-name|ONManager
-name|context
+name|KReSONManager
+name|onm
 decl_stmt|;
 specifier|private
 specifier|static
@@ -224,15 +250,24 @@ name|void
 name|setup
 parameter_list|()
 block|{
-name|context
+comment|// An ONManager with no store and default settings
+name|onm
 operator|=
+operator|new
 name|ONManager
-operator|.
-name|get
+argument_list|(
+literal|null
+argument_list|,
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
 argument_list|()
+argument_list|)
 expr_stmt|;
-comment|// Uncomment next line for verbose output.
-comment|// context.getRegistryLoader().setPrintLoadedOntologies(true);
 block|}
 annotation|@
 name|Test
@@ -258,7 +293,7 @@ literal|null
 decl_stmt|;
 name|space
 operator|=
-name|context
+name|onm
 operator|.
 name|getOntologySpaceFactory
 argument_list|()
@@ -283,6 +318,16 @@ operator|new
 name|OntologyRegistryIRISource
 argument_list|(
 name|testRegistryIri
+argument_list|,
+name|onm
+operator|.
+name|getOwlCacheManager
+argument_list|()
+argument_list|,
+name|onm
+operator|.
+name|getRegistryLoader
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -356,7 +401,7 @@ try|try
 block|{
 name|scope
 operator|=
-name|context
+name|onm
 operator|.
 name|getOntologyScopeFactory
 argument_list|()
@@ -369,6 +414,16 @@ operator|new
 name|OntologyRegistryIRISource
 argument_list|(
 name|testRegistryIri
+argument_list|,
+name|onm
+operator|.
+name|getOwlCacheManager
+argument_list|()
+argument_list|,
+name|onm
+operator|.
+name|getRegistryLoader
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -431,7 +486,7 @@ comment|// The factory call also invokes loadRegistriesEager() and
 comment|// gatherOntologies() so no need to test them individually.
 name|space
 operator|=
-name|context
+name|onm
 operator|.
 name|getOntologySpaceFactory
 argument_list|()
@@ -444,6 +499,16 @@ operator|new
 name|OntologyRegistryIRISource
 argument_list|(
 name|testRegistryIri
+argument_list|,
+name|onm
+operator|.
+name|getOwlCacheManager
+argument_list|()
+argument_list|,
+name|onm
+operator|.
+name|getRegistryLoader
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;

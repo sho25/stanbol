@@ -2584,6 +2584,7 @@ literal|true
 expr_stmt|;
 block|}
 comment|//Add single rule
+comment|/*               * BUGFIX - previously the check was done on rules.size()-1.              *               */
 for|for
 control|(
 name|int
@@ -2597,8 +2598,6 @@ name|rules
 operator|.
 name|size
 argument_list|()
-operator|-
-literal|1
 condition|;
 name|r
 operator|++
@@ -2663,14 +2662,6 @@ operator|=
 literal|true
 expr_stmt|;
 comment|//Add precedes
-name|int
-name|size
-init|=
-name|rules
-operator|.
-name|size
-argument_list|()
-decl_stmt|;
 name|OWLNamedIndividual
 name|indf
 init|=

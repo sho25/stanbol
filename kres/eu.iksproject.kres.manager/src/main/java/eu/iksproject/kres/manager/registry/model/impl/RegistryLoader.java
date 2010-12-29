@@ -585,6 +585,22 @@ name|api
 operator|.
 name|manager
 operator|.
+name|KReSONManager
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
 name|registry
 operator|.
 name|KReSRegistryLoader
@@ -688,8 +704,12 @@ name|OWLClass
 name|cRegistryLibrary
 decl_stmt|;
 specifier|private
+name|KReSONManager
+name|onm
+decl_stmt|;
+specifier|private
 name|Logger
-name|logger
+name|log
 init|=
 name|LoggerFactory
 operator|.
@@ -698,12 +718,6 @@ argument_list|(
 name|getClass
 argument_list|()
 argument_list|)
-decl_stmt|;
-specifier|private
-name|boolean
-name|doPrint
-init|=
-literal|false
 decl_stmt|;
 specifier|private
 specifier|final
@@ -727,14 +741,6 @@ name|REPOSITORY_MERGED_ONTOLOGY
 argument_list|)
 decl_stmt|;
 specifier|private
-name|OWLOntologyLoaderListener
-name|printer
-init|=
-operator|new
-name|OntologyLoaderPrinter
-argument_list|()
-decl_stmt|;
-specifier|private
 name|Map
 argument_list|<
 name|URI
@@ -755,8 +761,17 @@ decl_stmt|;
 comment|/** 	 */
 specifier|public
 name|RegistryLoader
-parameter_list|()
+parameter_list|(
+name|KReSONManager
+name|onm
+parameter_list|)
 block|{
+name|this
+operator|.
+name|onm
+operator|=
+name|onm
+expr_stmt|;
 name|OWLDataFactory
 name|factory
 init|=
@@ -890,7 +905,7 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-name|logger
+name|log
 operator|.
 name|warn
 argument_list|(
@@ -981,7 +996,7 @@ name|URISyntaxException
 name|e
 parameter_list|)
 block|{
-name|logger
+name|log
 operator|.
 name|warn
 argument_list|(
@@ -1139,7 +1154,7 @@ name|MalformedURLException
 name|e
 parameter_list|)
 block|{
-name|logger
+name|log
 operator|.
 name|warn
 argument_list|(
@@ -1620,13 +1635,7 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2025,13 +2034,7 @@ name|getLocalizedMessage
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2061,13 +2064,7 @@ name|registry1
 argument_list|)
 expr_stmt|;
 else|else
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2307,13 +2304,7 @@ name|MalformedURLException
 name|e
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2520,48 +2511,14 @@ operator|)
 return|;
 block|}
 specifier|public
-name|boolean
-name|isPrintingLoadedOntologies
-parameter_list|()
-block|{
-return|return
-name|doPrint
-return|;
-block|}
-specifier|public
 name|void
 name|loadLocations
 parameter_list|()
 throws|throws
 name|RegistryContentException
 block|{
-comment|// String jobDescription = "ODP Registry updating...";
-comment|// Job initViewJob = new Job(jobDescription) {
-comment|// private void checkCanceled(IProgressMonitor monitor)
-comment|// throws InterruptedException {
-comment|// if (monitor.isCanceled())
-comment|// throw new InterruptedException(
-comment|// "Registry updating has been interrupted by the user.");
-comment|// }
-comment|//
-comment|// @Override
-comment|// protected IStatus run(IProgressMonitor monitor) {
 try|try
 block|{
-comment|// checkCanceled(monitor);
-comment|// initialize();
-comment|// checkCanceled(monitor);
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
-decl_stmt|;
 name|registryOntologiesCache
 operator|.
 name|clear
@@ -2576,7 +2533,6 @@ init|=
 name|getRegistries
 argument_list|()
 decl_stmt|;
-comment|// checkCanceled(monitor);
 name|int
 name|regsize
 init|=
@@ -2585,10 +2541,6 @@ operator|.
 name|size
 argument_list|()
 decl_stmt|;
-comment|// int tasks = (regsize * 2) + 5;
-comment|// monitor.beginTask("Loading registries", tasks);
-comment|// int worked = 0;
-comment|// monitor.worked(worked);
 name|int
 name|c
 init|=
@@ -2602,7 +2554,6 @@ range|:
 name|registries
 control|)
 block|{
-comment|// checkCanceled(monitor);
 name|c
 operator|++
 expr_stmt|;
@@ -2662,33 +2613,6 @@ name|toURI
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// ODPRegistryCacheManager.getManager()
-comment|// .addOntologyLoaderListener(
-comment|// new OWLOntologyLoaderListener() {
-comment|//
-comment|// @Override
-comment|// public void finishedLoadingOntology(
-comment|// LoadingFinishedEvent event) {
-comment|// System.out
-comment|// .println("Finished loading: "
-comment|// + event
-comment|// .getDocumentIRI()
-comment|// + " Error? "
-comment|// + event
-comment|// .getException());
-comment|// }
-comment|//
-comment|// @Override
-comment|// public void startedLoadingOntology(
-comment|// LoadingStartedEvent event) {
-comment|// System.out
-comment|// .println("Start loading: "
-comment|// + event
-comment|// .getDocumentIRI()
-comment|// + " ");
-comment|// }
-comment|//
-comment|// });
 name|registryOntologiesCache
 operator|.
 name|put
@@ -2722,13 +2646,7 @@ name|URIUnresolvableException
 name|e
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2767,13 +2685,7 @@ name|ODPRegistryCacheException
 name|e
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2807,9 +2719,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// worked++;
-comment|// monitor.worked(worked);
-comment|// checkCanceled(monitor);
 block|}
 name|c
 operator|=
@@ -2823,12 +2732,9 @@ range|:
 name|registries
 control|)
 block|{
-comment|// checkCanceled(monitor);
 name|c
 operator|++
 expr_stmt|;
-comment|// monitor.setTaskName("Setup: " + registry.getName()
-comment|// + " [" + c + "/" + regsize + "]");
 try|try
 block|{
 name|registry
@@ -2863,10 +2769,6 @@ literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
-comment|// invisibleRoot.addChild(registry);
-comment|// worked++;
-comment|// monitor.worked(worked);
-comment|// checkCanceled(monitor);
 block|}
 block|}
 catch|catch
@@ -2875,13 +2777,7 @@ name|Throwable
 name|th
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -2920,10 +2816,7 @@ decl_stmt|;
 name|OWLOntologyManager
 name|mgr
 init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
+name|onm
 operator|.
 name|getOwlCacheManager
 argument_list|()
@@ -3014,13 +2907,7 @@ parameter_list|)
 block|{
 comment|// Why should a well-formed IRI be a malformed URL
 comment|// anyway ?
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|warn
 argument_list|(
@@ -3099,13 +2986,7 @@ name|OWLOntologyAlreadyExistsException
 name|e
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|warn
 argument_list|(
@@ -3129,13 +3010,7 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|log
 operator|.
 name|error
 argument_list|(
@@ -3154,51 +3029,6 @@ block|{ 		}
 return|return
 name|results
 return|;
-block|}
-specifier|public
-name|void
-name|setPrintLoadedOntologies
-parameter_list|(
-name|boolean
-name|doPrint
-parameter_list|)
-block|{
-name|OWLOntologyManager
-name|manager
-init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
-operator|.
-name|getOwlCacheManager
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|doPrint
-condition|)
-name|manager
-operator|.
-name|addOntologyLoaderListener
-argument_list|(
-name|printer
-argument_list|)
-expr_stmt|;
-else|else
-name|manager
-operator|.
-name|removeOntologyLoaderListener
-argument_list|(
-name|printer
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|doPrint
-operator|=
-name|doPrint
-expr_stmt|;
 block|}
 comment|/** 	 * Requires that Registry objects are created earlier. Problem is, we might 	 * not know their names a priori. 	 *  	 * @param registry 	 * @return 	 * @throws RegistryContentException 	 */
 specifier|private

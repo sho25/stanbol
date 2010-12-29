@@ -37,20 +37,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLImportsDeclaration
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntology
 import|;
 end_import
@@ -66,16 +52,6 @@ operator|.
 name|model
 operator|.
 name|OWLOntologyManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -147,6 +123,24 @@ name|manager
 operator|.
 name|ontology
 operator|.
+name|SpaceType
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|ontology
+operator|.
 name|UnmodifiableOntologySpaceException
 import|;
 end_import
@@ -159,9 +153,11 @@ name|iksproject
 operator|.
 name|kres
 operator|.
-name|manager
+name|api
 operator|.
-name|ONManager
+name|storage
+operator|.
+name|OntologyStorage
 import|;
 end_import
 
@@ -206,32 +202,30 @@ name|AbstractOntologySpaceImpl
 implements|implements
 name|CustomOntologySpace
 block|{
-name|Logger
-name|log
-init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
-operator|.
-name|log
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|String
 name|SUFFIX
 init|=
-literal|"custom"
+name|SpaceType
+operator|.
+name|CUSTOM
+operator|.
+name|getIRISuffix
+argument_list|()
 decl_stmt|;
+comment|//	static {
+comment|//		SUFFIX = SpaceType.CUSTOM.getIRISuffix();
+comment|//	}
 specifier|public
 name|CustomOntologySpaceImpl
 parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|OntologyInputSource
-name|topOntology
+name|OntologyStorage
+name|storage
 parameter_list|)
 block|{
 name|super
@@ -249,12 +243,20 @@ argument_list|)
 operator|+
 literal|"/"
 operator|+
-name|SUFFIX
+name|SpaceType
+operator|.
+name|CUSTOM
+operator|.
+name|getIRISuffix
+argument_list|()
 argument_list|)
 argument_list|,
-name|scopeID
+name|SpaceType
+operator|.
+name|CUSTOM
+comment|/*, scopeID*/
 argument_list|,
-name|topOntology
+name|storage
 argument_list|)
 expr_stmt|;
 block|}
@@ -264,8 +266,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|OntologyInputSource
-name|topOntology
+name|OntologyStorage
+name|storage
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -286,17 +288,37 @@ argument_list|)
 operator|+
 literal|"/"
 operator|+
-name|SUFFIX
+name|SpaceType
+operator|.
+name|CUSTOM
+operator|.
+name|getIRISuffix
+argument_list|()
 argument_list|)
 argument_list|,
-name|scopeID
+name|SpaceType
+operator|.
+name|CUSTOM
 argument_list|,
+name|storage
+argument_list|,
+comment|/*scopeID,*/
 name|ontologyManager
-argument_list|,
-name|topOntology
 argument_list|)
 expr_stmt|;
 block|}
+comment|//	public CustomOntologySpaceImpl(IRI scopeID, OntologyInputSource topOntology) {
+comment|//	super(IRI.create(StringUtils.stripIRITerminator(scopeID) + "/"
+comment|//			+ SpaceType.CUSTOM.getIRISuffix()), SpaceType.CUSTOM, scopeID,
+comment|//			topOntology);
+comment|//}
+comment|//
+comment|//public CustomOntologySpaceImpl(IRI scopeID,
+comment|//		OntologyInputSource topOntology, OWLOntologyManager ontologyManager) {
+comment|//	super(IRI.create(StringUtils.stripIRITerminator(scopeID) + "/"
+comment|//			+ SpaceType.CUSTOM.getIRISuffix()), SpaceType.CUSTOM, scopeID,
+comment|//			ontologyManager, topOntology);
+comment|//}
 annotation|@
 name|Override
 specifier|public

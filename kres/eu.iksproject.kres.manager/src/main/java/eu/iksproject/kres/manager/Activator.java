@@ -124,23 +124,8 @@ argument_list|(
 literal|"KReS :: Instantiating ONM static context..."
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|ONManager
-operator|.
-name|get
-argument_list|()
-operator|!=
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"KReS :: ONM static context instantiated."
-argument_list|)
-expr_stmt|;
+comment|//		if (ONManager.get() != null) {
+comment|//			log.debug("KReS :: ONM static context instantiated.");
 name|log
 operator|.
 name|info
@@ -148,7 +133,7 @@ argument_list|(
 literal|"KReS :: Ontology Network Manager set up."
 argument_list|)
 expr_stmt|;
-block|}
+comment|//		}
 block|}
 annotation|@
 name|Override

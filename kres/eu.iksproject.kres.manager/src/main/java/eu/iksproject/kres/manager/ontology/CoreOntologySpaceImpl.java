@@ -85,6 +85,40 @@ name|iksproject
 operator|.
 name|kres
 operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|ontology
+operator|.
+name|SpaceType
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|storage
+operator|.
+name|OntologyStorage
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
 name|manager
 operator|.
 name|util
@@ -108,16 +142,24 @@ specifier|final
 name|String
 name|SUFFIX
 init|=
-literal|"core"
+name|SpaceType
+operator|.
+name|CORE
+operator|.
+name|getIRISuffix
+argument_list|()
 decl_stmt|;
+comment|//	static {
+comment|//		SUFFIX = SpaceType.CORE.getIRISuffix();
+comment|//	}
 specifier|public
 name|CoreOntologySpaceImpl
 parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|OntologyInputSource
-name|topOntology
+name|OntologyStorage
+name|storage
 parameter_list|)
 block|{
 name|super
@@ -135,12 +177,20 @@ argument_list|)
 operator|+
 literal|"/"
 operator|+
-name|SUFFIX
+name|SpaceType
+operator|.
+name|CORE
+operator|.
+name|getIRISuffix
+argument_list|()
 argument_list|)
 argument_list|,
-name|scopeID
+name|SpaceType
+operator|.
+name|CORE
+comment|/*, scopeID*/
 argument_list|,
-name|topOntology
+name|storage
 argument_list|)
 expr_stmt|;
 block|}
@@ -150,8 +200,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|OntologyInputSource
-name|topOntology
+name|OntologyStorage
+name|storage
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -172,17 +222,37 @@ argument_list|)
 operator|+
 literal|"/"
 operator|+
-name|SUFFIX
+name|SpaceType
+operator|.
+name|CORE
+operator|.
+name|getIRISuffix
+argument_list|()
 argument_list|)
 argument_list|,
-name|scopeID
+name|SpaceType
+operator|.
+name|CORE
+argument_list|,
+comment|/*scopeID,*/
+name|storage
 argument_list|,
 name|ontologyManager
-argument_list|,
-name|topOntology
 argument_list|)
 expr_stmt|;
 block|}
+comment|//	public CoreOntologySpaceImpl(IRI scopeID, OntologyInputSource topOntology) {
+comment|//		super(IRI.create(StringUtils.stripIRITerminator(scopeID) + "/"
+comment|//				+ SpaceType.CORE.getIRISuffix()), SpaceType.CORE, scopeID,
+comment|//				topOntology);
+comment|//	}
+comment|//
+comment|//	public CoreOntologySpaceImpl(IRI scopeID, OntologyInputSource topOntology,
+comment|//			OWLOntologyManager ontologyManager) {
+comment|//		super(IRI.create(StringUtils.stripIRITerminator(scopeID) + "/"
+comment|//				+ SpaceType.CORE.getIRISuffix()), SpaceType.CORE, scopeID,
+comment|//				ontologyManager, topOntology);
+comment|//	}
 comment|/** 	 * When set up, a core space is write-locked. 	 */
 annotation|@
 name|Override

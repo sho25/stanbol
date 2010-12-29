@@ -275,6 +275,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|eu
 operator|.
 name|iksproject
@@ -288,20 +298,6 @@ operator|.
 name|ontology
 operator|.
 name|OntologyInputSource
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|manager
-operator|.
-name|ONManager
 import|;
 end_import
 
@@ -330,6 +326,21 @@ specifier|public
 class|class
 name|OntologyUtils
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|logger
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|OntologyUtils
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|// /**
 comment|// * Creates an ontology with the specified IRI and only the import
 comment|// statements
@@ -495,18 +506,10 @@ argument_list|()
 decl_stmt|;
 comment|// Named ontology with a provided absolute prefix. Use name and prefix
 comment|// for creating an new import statement.
-name|OWLOntology
-name|child
-init|=
-name|childSrc
-operator|.
-name|getRootOntology
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
 operator|!
-name|child
+name|oChild
 operator|.
 name|isAnonymous
 argument_list|()
@@ -528,7 +531,7 @@ name|rewritePrefix
 operator|+
 literal|"/"
 operator|+
-name|child
+name|oChild
 operator|.
 name|getOntologyID
 argument_list|()
@@ -811,16 +814,6 @@ argument_list|<
 name|OWLOntologyChange
 argument_list|>
 argument_list|()
-decl_stmt|;
-name|Logger
-name|logger
-init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
-operator|.
-name|log
 decl_stmt|;
 for|for
 control|(

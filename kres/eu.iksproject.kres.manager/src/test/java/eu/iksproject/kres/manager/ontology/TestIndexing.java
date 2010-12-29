@@ -27,6 +27,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Hashtable
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -128,6 +138,22 @@ operator|.
 name|manager
 operator|.
 name|DuplicateIDException
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|KReSONManager
 import|;
 end_import
 
@@ -288,8 +314,8 @@ name|TestIndexing
 block|{
 specifier|private
 specifier|static
-name|ONManager
-name|context
+name|KReSONManager
+name|onm
 decl_stmt|;
 specifier|private
 specifier|static
@@ -375,15 +401,24 @@ name|void
 name|setup
 parameter_list|()
 block|{
-name|context
+comment|// An ONManager with no store and default settings
+name|onm
 operator|=
+operator|new
 name|ONManager
-operator|.
-name|get
+argument_list|(
+literal|null
+argument_list|,
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
 argument_list|()
+argument_list|)
 expr_stmt|;
-comment|// Uncomment next line for verbose output.
-comment|// context.getRegistryLoader().setPrintLoadedOntologies(true);
 comment|// Since it is registered, this scope must be unique, or subsequent
 comment|// tests will fail on duplicate ID exceptions!
 name|scopeIri
@@ -443,7 +478,7 @@ try|try
 block|{
 name|scope
 operator|=
-name|context
+name|onm
 operator|.
 name|getOntologyScopeFactory
 argument_list|()
@@ -457,12 +492,22 @@ name|OntologyRegistryIRISource
 argument_list|(
 name|testRegistryIri
 argument_list|,
+name|onm
+operator|.
+name|getOwlCacheManager
+argument_list|()
+argument_list|,
+name|onm
+operator|.
+name|getRegistryLoader
+argument_list|()
+argument_list|,
 literal|null
 comment|// new RootOntologySource(oParent)
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|context
+name|onm
 operator|.
 name|getScopeRegistry
 argument_list|()
@@ -498,10 +543,7 @@ block|{
 name|OntologyIndex
 name|index
 init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
+name|onm
 operator|.
 name|getOntologyIndex
 argument_list|()
@@ -656,7 +698,7 @@ block|}
 name|OntologyIndex
 name|index
 init|=
-name|context
+name|onm
 operator|.
 name|getOntologyIndex
 argument_list|()
@@ -695,7 +737,7 @@ block|{
 name|OntologyIndex
 name|index
 init|=
-name|context
+name|onm
 operator|.
 name|getOntologyIndex
 argument_list|()

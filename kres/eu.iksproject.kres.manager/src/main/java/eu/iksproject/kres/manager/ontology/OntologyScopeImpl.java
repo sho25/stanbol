@@ -267,20 +267,6 @@ name|UnmodifiableOntologySpaceException
 import|;
 end_import
 
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|manager
-operator|.
-name|ONManager
-import|;
-end_import
-
 begin_comment
 comment|/**  * The default implementation of an ontology scope.  *   * @author alessandro  *   */
 end_comment
@@ -348,6 +334,9 @@ parameter_list|(
 name|IRI
 name|id
 parameter_list|,
+name|OntologySpaceFactory
+name|factory
+parameter_list|,
 name|OntologyInputSource
 name|coreRoot
 parameter_list|)
@@ -355,6 +344,8 @@ block|{
 name|this
 argument_list|(
 name|id
+argument_list|,
+name|factory
 argument_list|,
 name|coreRoot
 argument_list|,
@@ -367,6 +358,9 @@ name|OntologyScopeImpl
 parameter_list|(
 name|IRI
 name|id
+parameter_list|,
+name|OntologySpaceFactory
+name|factory
 parameter_list|,
 name|OntologyInputSource
 name|coreRoot
@@ -388,17 +382,6 @@ argument_list|(
 literal|"Ontology scope must be identified by a non-null IRI."
 argument_list|)
 throw|;
-name|OntologySpaceFactory
-name|factory
-init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-decl_stmt|;
 name|this
 operator|.
 name|id

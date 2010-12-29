@@ -83,6 +83,22 @@ name|api
 operator|.
 name|manager
 operator|.
+name|KReSONManager
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
 name|ontology
 operator|.
 name|OntologyScope
@@ -217,6 +233,22 @@ name|iksproject
 operator|.
 name|kres
 operator|.
+name|api
+operator|.
+name|storage
+operator|.
+name|OntologyStoreProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
 name|manager
 operator|.
 name|ONManager
@@ -313,6 +345,22 @@ end_import
 
 begin_import
 import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|storage
+operator|.
+name|provider
+operator|.
+name|OntologyStorageProviderImpl
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -328,6 +376,16 @@ operator|.
 name|net
 operator|.
 name|URL
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Hashtable
 import|;
 end_import
 
@@ -707,6 +765,26 @@ name|InconsistentOntologyException
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  *  *   */
 end_comment
@@ -733,7 +811,27 @@ specifier|private
 name|OWLOntology
 name|scopeowl
 decl_stmt|;
-comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      *      * @param servletContext {To get the context where the REST service is running.}      */
+specifier|protected
+name|KReSONManager
+name|onm
+decl_stmt|;
+specifier|protected
+name|OntologyStoreProvider
+name|storeProvider
+decl_stmt|;
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
 specifier|public
 name|Enrichment
 parameter_list|(
@@ -743,6 +841,7 @@ name|ServletContext
 name|servletContext
 parameter_list|)
 block|{
+comment|// Retrieve the rule store
 name|this
 operator|.
 name|kresRuleStore
@@ -762,6 +861,103 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// Retrieve the ontology network manager
+name|this
+operator|.
+name|onm
+operator|=
+operator|(
+name|KReSONManager
+operator|)
+name|servletContext
+operator|.
+name|getAttribute
+argument_list|(
+name|KReSONManager
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|storeProvider
+operator|=
+operator|(
+name|OntologyStoreProvider
+operator|)
+name|servletContext
+operator|.
+name|getAttribute
+argument_list|(
+name|OntologyStoreProvider
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|// Contingency code for missing components follows.
+comment|/* 		 * FIXME! The following code is required only for the tests. This should 		 * be removed and the test should work without this code. 		 */
+if|if
+condition|(
+name|storeProvider
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"No OntologyStoreProvider in servlet context. Instantiating manually..."
+argument_list|)
+expr_stmt|;
+name|storeProvider
+operator|=
+operator|new
+name|OntologyStorageProviderImpl
+argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|onm
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"No KReSONManager in servlet context. Instantiating manually..."
+argument_list|)
+expr_stmt|;
+name|onm
+operator|=
+operator|new
+name|ONManager
+argument_list|(
+name|storeProvider
+operator|.
+name|getActiveOntologyStorage
+argument_list|()
+argument_list|,
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|kresRuleStore
@@ -769,13 +965,11 @@ operator|==
 literal|null
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|warn
 argument_list|(
-literal|"WARNING: KReSRuleStore with stored rules and recipes is missing in ServletContext. A new instance has been created."
+literal|"No KReSRuleStore with stored rules and recipes found in servlet context. Instantiating manually with default values..."
 argument_list|)
 expr_stmt|;
 name|this
@@ -785,14 +979,23 @@ operator|=
 operator|new
 name|KReSRuleStore
 argument_list|(
+name|onm
+argument_list|,
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"PATH TO OWL FILE LOADED: "
 operator|+
@@ -802,11 +1005,9 @@ name|getFilePath
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//            throw new IllegalStateException(
-comment|//                    "KReSRuleStore with stored rules and recipes is missing in ServletContext");
 block|}
 block|}
-comment|/**      * To trasform a sequence of rules to a Jena Model      * @param owl {OWLOntology object contains a single recipe}      * @return {A jena rdf model contains the SWRL rule.}      */
+comment|/**      * To trasform a sequence of rules to a Jena Model 	 *  	 * @param owl 	 *            {OWLOntology object contains a single recipe}      * @return {A jena rdf model contains the SWRL rule.}      */
 specifier|private
 name|Model
 name|fromRecipeToModel
@@ -817,12 +1018,24 @@ parameter_list|)
 throws|throws
 name|NoSuchRecipeException
 block|{
+comment|// FIXME: why the heck is this method re-instantiating a rule store?!?
 name|RuleStore
 name|store
 init|=
 operator|new
 name|KReSRuleStore
 argument_list|(
+name|onm
+argument_list|,
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+argument_list|,
 name|owl
 argument_list|)
 decl_stmt|;
@@ -1077,7 +1290,7 @@ return|return
 name|jenamodel
 return|;
 block|}
-comment|/**      * To perform a rule based reasoning with a given recipe and scope (or an ontology) to a RDF input specify via its IRI.      * @param session {A string contains the session IRI used to inference the input.}      * @param scope {A string contains either ontology or the scope IRI used to inference the input.}      * @param recipe {A string contains the recipe IRI from the service http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to inference.}      * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or OWL) to inference.}      * @Param owllink_endpoint {A string contains the reasoner server end-point URL.}      * @return Return:<br/>      *          200 Returns a graph with the enrichments<br/>      *          204 No enrichments have been produced from the given graph<br/>      *          400 To run the session is needed the scope<br/>      *          404 The recipe/ontology/scope/input doesn't exist in the network<br/>      *          409 Too much RDF inputs<br/>      *          500 Some error occurred      */
+comment|/** 	 * To perform a rule based reasoning with a given recipe and scope (or an 	 * ontology) to a RDF input specify via its IRI. 	 *  	 * @param session 	 *            {A string contains the session IRI used to inference the 	 *            input.} 	 * @param scope 	 *            {A string contains either ontology or the scope IRI used to 	 *            inference the input.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to inference.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to inference.} 	 * @Param owllink_endpoint {A string contains the reasoner server end-point 	 *        URL.}      * @return Return:<br/>      *          200 Returns a graph with the enrichments<br/>      *          204 No enrichments have been produced from the given graph<br/>      *          400 To run the session is needed the scope<br/>      *          404 The recipe/ontology/scope/input doesn't exist in the network<br/>      *          409 Too much RDF inputs<br/>      *          500 Some error occurred      */
 annotation|@
 name|POST
 annotation|@
@@ -1370,10 +1583,7 @@ decl_stmt|;
 name|ScopeRegistry
 name|reg
 init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
+name|onm
 operator|.
 name|getScopeRegistry
 argument_list|()
@@ -1419,7 +1629,8 @@ operator|.
 name|iterator
 argument_list|()
 decl_stmt|;
-comment|//Add ontology as import form scope, if it is anonymus we try to add single axioms.
+comment|// Add ontology as import form scope, if it is anonymus we
+comment|// try to add single axioms.
 while|while
 condition|(
 name|importscope
@@ -1655,10 +1866,7 @@ decl_stmt|;
 name|ScopeRegistry
 name|reg
 init|=
-name|ONManager
-operator|.
-name|get
-argument_list|()
+name|onm
 operator|.
 name|getScopeRegistry
 argument_list|()
@@ -1713,7 +1921,8 @@ operator|.
 name|iterator
 argument_list|()
 decl_stmt|;
-comment|//Add session ontologies as import, if it is anonymus we try to add single axioms.
+comment|// Add session ontologies as import, if it is anonymus we
+comment|// try to add single axioms.
 while|while
 condition|(
 name|iteronto
@@ -1821,7 +2030,8 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
-comment|//After gathered the all ontology as imported now we apply the changes
+comment|// After gathered the all ontology as imported now we apply the
+comment|// changes
 if|if
 condition|(
 name|additions
@@ -1873,7 +2083,8 @@ name|recipe
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//Get Jea RDF model of SWRL rule contained in the recipe
+comment|// Get Jea RDF model of SWRL rule contained in the
+comment|// recipe
 name|Model
 name|swrlmodel
 init|=
@@ -1882,7 +2093,8 @@ argument_list|(
 name|recipeowl
 argument_list|)
 decl_stmt|;
-comment|//Create a reasoner to run rules contained in the recipe
+comment|// Create a reasoner to run rules contained in the
+comment|// recipe
 name|KReSRunRules
 name|rulereasoner
 init|=
@@ -1894,7 +2106,8 @@ argument_list|,
 name|inputowl
 argument_list|)
 decl_stmt|;
-comment|//Run the rule reasoner to the input RDF with the added top-ontology
+comment|// Run the rule reasoner to the input RDF with the added
+comment|// top-ontology
 name|inputowl
 operator|=
 name|rulereasoner
@@ -1913,7 +2126,8 @@ argument_list|(
 name|inputowl
 argument_list|)
 decl_stmt|;
-comment|//Prepare and start the reasoner to enrich ontology's resources
+comment|// Prepare and start the reasoner to enrich ontology's
+comment|// resources
 name|KReSRunReasoner
 name|reasoner
 init|=
@@ -1926,7 +2140,8 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Create a new OWLOntology model where to put the inferred axioms
+comment|// Create a new OWLOntology model where to put the inferred
+comment|// axioms
 name|OWLOntology
 name|output
 init|=
@@ -2042,7 +2257,8 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//If there is an owl-link server end-point specified in the form
+comment|// If there is an owl-link server end-point specified in the
+comment|// form
 block|}
 else|else
 block|{
@@ -2073,7 +2289,8 @@ name|recipe
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//Get Jea RDF model of SWRL rule contained in the recipe
+comment|// Get Jea RDF model of SWRL rule contained in the
+comment|// recipe
 name|Model
 name|swrlmodel
 init|=
@@ -2082,7 +2299,8 @@ argument_list|(
 name|recipeowl
 argument_list|)
 decl_stmt|;
-comment|//Create a reasoner to run rules contained in the recipe by using the server and-point
+comment|// Create a reasoner to run rules contained in the
+comment|// recipe by using the server and-point
 name|KReSRunRules
 name|rulereasoner
 init|=
@@ -2100,7 +2318,8 @@ name|owllink_endpoint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//Run the rule reasoner to the input RDF with the added top-ontology
+comment|// Run the rule reasoner to the input RDF with the added
+comment|// top-ontology
 name|inputowl
 operator|=
 name|rulereasoner
@@ -2109,7 +2328,8 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|//Create a new OWLOntology model where to put the inferred axioms
+comment|// Create a new OWLOntology model where to put the inferred
+comment|// axioms
 name|OWLOntology
 name|output
 init|=
@@ -2142,7 +2362,8 @@ name|owllink_endpoint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//Prepare and start the reasoner to enrich ontology's resources
+comment|// Prepare and start the reasoner to enrich ontology's
+comment|// resources
 name|KReSRunReasoner
 name|reasoner
 init|=
