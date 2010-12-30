@@ -867,12 +867,16 @@ operator|=
 block|{
 literal|"peopleTypeRule[is(dbpedia:Person%2C?x) -> is(google:Person%2C?x)]"
 block|,
-literal|"peopleFISEStartRule [ has(fise:entity-reference%2C ?y%2C ?x) . values(fise:entity-label%2C ?y%2C ?z) . values(fise:selected-text%2C ?t%2C ?z) . values(fise:start%2C ?t%2C ?start) -> values(fise:start-position%2C ?x%2C ?start) ]"
+comment|//"myRule[has(fise:entity-reference%2C ?y%2C ?x) . has(<http://purl.org/dc/terms/relation>%2C ?y%2C ?r) ->  has(<http://purl.org/dc/terms/relation>%2C ?x%2C ?r)]",
+literal|"fiseStartRul1[has(fise:entity-reference%2C ?y%2C ?x) . has(<http://purl.org/dc/terms/relation>%2C ?y%2C ?r) . values(fise:selected-text%2C ?r%2C ?t) . values(fise:start%2C ?r%2C ?start) -> is(fise:enhancementContext%2C ?t) . values(fise:start-position%2C ?r%2C ?start) . has(fise:hasEnhancementContext%2C ?x%2C ?r)]"
 block|,
-literal|"peopleFISEEndRule [ has(fise:entity-reference%2C ?y%2C ?x) . values(fise:entity-label%2C ?y%2C ?z) . values(fise:selected-text%2C ?t%2C ?z) . values(fise:end%2C ?t%2C ?end) -> values(fise:end-position%2C ?x%2C ?end) ]"
+literal|"fiseEndRule1[has(fise:entity-reference%2C ?y%2C ?x) . has(<http://purl.org/dc/terms/relation>%2C ?y%2C ?r) . values(fise:selected-text%2C ?r%2C ?t) . values(fise:end%2C ?r%2C ?end) -> is(fise:enhancementContext%2C ?t) . values(fise:end-position%2C ?r%2C ?end) . has(fise:hasEnhancementContext%2C ?x%2C ?r) ]"
 block|,
-literal|"peopleFISEContextRule [ has(fise:entity-reference%2C ?y%2C ?x) . values(fise:entity-label%2C ?y%2C ?z) . values(fise:selected-text%2C ?t%2C ?z) . values(fise:selection-context%2C ?t%2C ?context) -> values(fise:context%2C ?x%2C ?context) ]"
+literal|"fiseContextRule1[has(fise:entity-reference%2C ?y%2C ?x) . has(<http://purl.org/dc/terms/relation>%2C ?y%2C ?r) . values(fise:selected-text%2C ?r%2C ?t) . values(fise:selection-context%2C ?r%2C ?context) -> is(fise:enhancementContext%2C ?t) . values(fise:context%2C ?r%2C ?context) . has(fise:hasEnhancementContext%2C ?x%2C ?r)]"
 block|,
+comment|//"fiseStartRul[has(fise:entity-reference%2C ?y%2C ?x) . values(fise:entity-label%2C ?y%2C ?z) . values(fise:selected-text%2C ?t%2C ?z) . values(fise:start%2C ?t%2C ?start) -> is(fise:enhancementContext%2C ?t) . values(fise:start-position%2C ?t%2C ?start) . has(fise:hasEnhancementContext%2C ?x%2C ?t)]",
+comment|//"fiseEndRule[has(fise:entity-reference%2C ?y%2C ?x) . values(fise:entity-label%2C ?y%2C ?z) . values(fise:selected-text%2C ?t%2C ?z) . values(fise:end%2C ?t%2C ?end) -> is(fise:enhancementContext%2C ?t) . values(fise:end-position%2C ?t%2C ?end) . has(fise:hasEnhancementContext%2C ?x%2C ?t) ]",
+comment|//"fiseContextRule[has(fise:entity-reference%2C ?y%2C ?x) . values(fise:entity-label%2C ?y%2C ?z) . values(fise:selected-text%2C ?t%2C ?z) . values(fise:selection-context%2C ?t%2C ?context) -> is(fise:enhancementContext%2C ?t) . values(fise:context%2C ?t%2C ?context) . has(fise:hasEnhancementContext%2C ?x%2C ?t)]",
 literal|"peopleNameRule[is(dbpedia:Person%2C?x) . values(foaf:name%2C?x%2C?y) -> values(google:name%2C?x%2C?y)]"
 block|,
 literal|"peopleNickRule[is(dbpedia:Person%2C?x) . values(foaf:nick%2C?x%2C?y) -> values(google:nickname%2C?x%2C?y)]"
@@ -892,6 +896,10 @@ block|,
 literal|"peopleKnowsRule[is(dbpedia:Person%2C?x) . has(foaf:knows%2C?x%2C?y) -> has(google:friend%2C?x%2C?y)]"
 block|,
 literal|"peopleAddressRule[is(dbpedia:Person%2C?x) . values(dbpedia:address%2C?x%2C?y) -> values(google:address%2C?x%2C?y)]"
+block|,
+literal|"peopleOccupationRule2[is(dbpedia:Person%2C?x) . has(dc:description%2C?x%2C?y) -> has(google:title%2C?x%2C?y)]"
+block|,
+literal|"peopleOccupationRule3[is(dbpedia:Person%2C?x) . has(skos:subject%2C?x%2C?y) -> has(google:affiliation%2C?x%2C?y)]"
 block|,
 literal|"productTypeRule[is(dbpedia:Organisation%2C?x) . has(dbpedia:product%2C?x%2C?y) -> is(google:Product%2C?y)]"
 block|,
@@ -923,13 +931,13 @@ literal|"organizationRegionRule[is(dbpedia:Organisation%2C?x) . has(dbpedia:regi
 block|,
 literal|"organizationCountryRule[is(dbpedia:Organisation%2C?x) . has(dbpedia:locationCountry%2C?x%2C?y) -> has(google:country-name%2C?x%2C?y)]"
 block|,
-literal|"organizationAddressRule[is(dbpedia:Organisation%2C?x) . values(dbpprop:address%2C?x%2C?y) -> values(google:address%2C?x%2C?y)]"
+literal|"organizationAddressRule[is(dbpedia:Organisation%2C?x) . values(dbprop:address%2C?x%2C?y) -> values(google:address%2C?x%2C?y)]"
 block|,
-literal|"organizationStreetAddressRule[is(dbpedia:Organisation%2C?x) . values(dbpprop:streetaddress%2C?x%2C?y) -> values(google:street-address%2C?x%2C?y)]"
+literal|"organizationStreetAddressRule[is(dbpedia:Organisation%2C?x) . values(dbprop:streetaddress%2C?x%2C?y) -> values(google:street-address%2C?x%2C?y)]"
 block|,
 literal|"organizationLocationRule[is(dbpedia:Organisation%2C?x) . has(dbpedia:location%2C?x%2C?y) -> has(google:locality%2C?x%2C?y)]"
 block|,
-literal|"organizationTelephoneRule[is(dbpedia:Organisation%2C?x) . values(dbpprop:telephon%2C?x%2C?y) -> values(google:tel%2C?x%2C?y)]"
+literal|"organizationTelephoneRule[is(dbpedia:Organisation%2C?x) . values(dbprop:telephon%2C?x%2C?y) -> values(google:tel%2C?x%2C?y)]"
 block|,
 literal|"organizationPostalCodeRule[is(dbpedia:Organisation%2C?x) . values(dbpedia:postalCode%2C?x%2C?y) -> has(google:postal-code%2C?x%2C?y)]"
 block|,
@@ -945,7 +953,7 @@ literal|"eventURLRule[is(dbpedia:Event%2C?x) . has(foaf:page%2C?x%2C?y) -> has(g
 block|,
 literal|"eventLocationRule1[is(dbpedia:Event%2C?x) . has(dbpedia:place%2C?x%2C?y) -> has(google:location%2C?x%2C?y)]"
 block|,
-literal|"eventLocationRule2[is(dbpedia:Event%2C?x) . has(dbpedia:place%2C?x%2C?y) . has(owl:sameAs%2C?y%2C?z) . is(gn:Feature%2C?z) . values(wgs84_pos:lat%2C?z%2C?lat) . values(wgs84_pos:long%2C?z%2C?long) -> is(google:geo%2C?z) . has(goole:location%2C?x%2C?y) . has(google:geo%2C?y%2C?z) . values(goole:latitude%2C?z%2C?lat) . values(google:longitude%2C?z%2C?long)]"
+literal|"eventLocationRule2[is(dbpedia:Event%2C?x) . has(dbpedia:place%2C?x%2C?y) . has(owl:sameAs%2C?y%2C?z) . is(gn:Feature%2C?z) . values(wgs84_pos:lat%2C?z%2C?lat) . values(wgs84_pos:long%2C?z%2C?long) -> is(google:geo%2C?z) . has(google:location%2C?x%2C?y) . has(google:geo%2C?y%2C?z) . values(google:latitude%2C?z%2C?lat) . values(google:longitude%2C?z%2C?long)]"
 block|,
 literal|"eventDateRule1[is(dbpedia:Event%2C?x) . values(dbpedia:date%2C?x%2C?y) -> values(google:startDate%2C?x%2C?y)]"
 block|,
@@ -957,9 +965,9 @@ literal|"recipeClassAssertionRule[has(skos:subject%2C?x%2C<http://dbpedia.org/pa
 block|,
 literal|"recipeTypeRule[has(skos:subject%2C?x%2C<http://dbpedia.org/page/Category:World_cuisine>) . has(skos:subject%2C?x%2C?y) -> has(google:recipeType%2C?x%2C?y)]"
 block|,
-literal|"recipePhotoRule[has(skos:subject%2C?x%2C<http://dbpedia.org/page/Category:World_cuisine>) . has(dbpedia:thumbnail%2C?x%2C?y) -> has(google:photo%2C?x%2C?y)]"
+literal|"recipePhotoRule1[has(skos:subject%2C?x%2C<http://dbpedia.org/page/Category:World_cuisine>) . has(dbpedia:thumbnail%2C?x%2C?y) -> has(google:photo%2C?x%2C?y)]"
 block|,
-literal|"recipePhotoRule[has(skos:subject%2C?x%2C<http://dbpedia.org/page/Category:World_cuisine>) . values(dbpedia:abstract%2C?x%2C?y) -> values(google:summary%2C?x%2C?y)]"
+literal|"recipePhotoRule2[has(skos:subject%2C?x%2C<http://dbpedia.org/page/Category:World_cuisine>) . values(dbpedia:abstract%2C?x%2C?y) -> values(google:summary%2C?x%2C?y)]"
 block|}
 argument_list|,
 name|cardinality
@@ -986,7 +994,7 @@ operator|=
 block|{
 literal|"dbpedia =<http://dbpedia.org/ontology/>"
 block|,
-literal|"dbpprop =<http://dbpedia.org/property/>"
+literal|"dbprop =<http://dbpedia.org/property/>"
 block|,
 literal|"google =<http://rdf.data-vocabulary.org/#>"
 block|,
@@ -1001,6 +1009,10 @@ block|,
 literal|"gn =<http://www.geonames.org/ontology#>"
 block|,
 literal|"fise =<http://fise.iks-project.eu/ontology/>"
+block|,
+literal|"owl =<http://www.w3.org/2002/07/owl#>"
+block|,
+literal|"dc =<http://purl.org/dc/elements/1.1/>"
 block|}
 argument_list|,
 name|cardinality
@@ -1051,7 +1063,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"false"
+literal|"true"
 argument_list|,
 name|description
 operator|=
@@ -1570,37 +1582,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|/** 			 * To perform the refactoring of the ontology to the google 			 * vocabulary we need to get the instance of the refactorer through 			 * the Semion Manager. 			 */
-try|try
-block|{
-name|man
-operator|.
-name|saveOntology
-argument_list|(
-name|ontology
-argument_list|,
-operator|new
-name|RDFXMLOntologyFormat
-argument_list|()
-argument_list|,
-name|System
-operator|.
-name|out
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e1
-parameter_list|)
-block|{
-comment|// TODO Auto-generated catch block
-name|e1
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
 name|SemionRefactorer
 name|refactorer
 init|=
@@ -2520,44 +2501,26 @@ name|aux
 expr_stmt|;
 block|}
 name|String
-name|auxruleprefix
+name|kReSRuleSyntax
 init|=
 literal|""
 decl_stmt|;
+comment|/**          * We add the prefixes in the rules head.          * The syntax used for expressing the rules is the KReSRule syntax.          */
 for|for
 control|(
-name|int
-name|p
-init|=
-literal|0
-init|;
-name|p
-operator|<
+name|String
+name|auxruleprefix
+range|:
 name|ruleBasePrefix
-operator|.
-name|length
-condition|;
-name|p
-operator|++
 control|)
 block|{
+name|kReSRuleSyntax
+operator|+=
 name|auxruleprefix
-operator|=
-name|auxruleprefix
-operator|+
-name|ruleBasePrefix
-index|[
-name|p
-index|]
 operator|+
 literal|" . "
 expr_stmt|;
 block|}
-name|String
-name|kReSRulePrefixDef
-init|=
-name|auxruleprefix
-decl_stmt|;
 comment|/**          * step 2.2          */
 name|obj
 operator|=
@@ -2619,36 +2582,17 @@ operator|=
 name|aux
 expr_stmt|;
 block|}
-name|String
-name|auxrule
-init|=
-literal|""
-decl_stmt|;
 for|for
 control|(
-name|int
-name|p
-init|=
-literal|0
-init|;
-name|p
-operator|<
+name|String
+name|auxrule
+range|:
 name|ruleSyntax
-operator|.
-name|length
-condition|;
-name|p
-operator|++
 control|)
 block|{
+name|kReSRuleSyntax
+operator|+=
 name|auxrule
-operator|=
-name|auxrule
-operator|+
-name|ruleSyntax
-index|[
-name|p
-index|]
 operator|.
 name|replaceAll
 argument_list|(
@@ -2662,22 +2606,22 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|auxrule
+name|kReSRuleSyntax
 operator|.
 name|endsWith
 argument_list|(
 literal|" . "
 argument_list|)
 condition|)
-name|auxrule
+name|kReSRuleSyntax
 operator|=
-name|auxrule
+name|kReSRuleSyntax
 operator|.
 name|substring
 argument_list|(
 literal|0
 argument_list|,
-name|auxrule
+name|kReSRuleSyntax
 operator|.
 name|lastIndexOf
 argument_list|(
@@ -2687,16 +2631,9 @@ operator|+
 literal|1
 argument_list|)
 expr_stmt|;
-name|String
-name|kReSRuleBodyAndHead
-init|=
-name|kReSRulePrefixDef
-operator|+
-name|auxrule
-decl_stmt|;
-name|kReSRuleBodyAndHead
+name|kReSRuleSyntax
 operator|=
-name|kReSRuleBodyAndHead
+name|kReSRuleSyntax
 operator|.
 name|trim
 argument_list|()
@@ -2707,7 +2644,7 @@ name|debug
 argument_list|(
 literal|"The complete rule to be added is: "
 operator|+
-name|kReSRuleBodyAndHead
+name|kReSRuleSyntax
 argument_list|)
 expr_stmt|;
 comment|//String kReSRulePerson = "dbpedia =<http://dbpedia.org/ontology/> . google =<http://rdf.data-vocabulary.org#> . foaf =<http://xmlns.com/foaf/0.1/homepage> . typeRule [is(dbpedia:Person, ?x) -> is(google:Person, ?x)] . nameRule [ values(foaf:name, ?x, ?y) -> values(google:name, ?x, ?y) ] . nickRule [ values(foaf:nick, ?x, ?y) -> values(google:nickname, ?x, ?y) ] . photoRule [ has(dbpedia:thumbnail, ?x, ?y) -> has(google:photo, ?x, ?y) ] . professionRule [has(dbpedia:profession, ?x, ?y) -> has(google:title, ?x, ?y)] . occupationRule [has(dbpedia:occupation, ?x, ?y) -> has(google:title, ?x, ?y)] . roleRule [values(dbpedia:role, ?x, ?y) -> values(google:role, ?x, ?y)] . homepageRule [has(foaf:homepage, ?x, ?y) -> has(google:url, ?x, ?y)] . affiliationRule [has(dbpedia:employer, ?x, ?y) -> has(google:affiliation, ?x, ?y)] . knowsRule [has(foaf:knows, ?x, ?y) -> has(google:friend, ?x, ?y)] . addressRule [values(dbpedia:address, ?x, ?y) -> values(google:address, ?x, ?y)]";
@@ -2723,7 +2660,7 @@ operator|.
 name|toString
 argument_list|()
 argument_list|,
-name|kReSRuleBodyAndHead
+name|kReSRuleSyntax
 argument_list|)
 expr_stmt|;
 name|log
