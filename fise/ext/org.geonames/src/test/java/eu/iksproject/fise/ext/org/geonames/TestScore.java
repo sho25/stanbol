@@ -162,7 +162,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This test only correct values for score (set/getScore).  * An extension to the web service client for geonames.org implemented to  * be able to write fise:confidence values for fise:EntityAnnotations.  *  * @author Rupert Westenthaler  */
+comment|/**  * This test only correct values for score (set/getScore). An extension to the  * web service client for geonames.org implemented to be able to write  * fise:confidence values for fise:EntityAnnotations.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -365,6 +365,33 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+elseif|else
+if|if
+condition|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"overloaded with requests"
+argument_list|)
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Seams like the geonames.org webservice is currently unavailable -> skipping this test"
+argument_list|,
+name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 else|else
 block|{
 throw|throw
@@ -460,7 +487,8 @@ name|FULL
 argument_list|)
 control|)
 block|{
-comment|//this service does not provide an score, so test if 1.0 is returned
+comment|// this service does not provide an score, so test if 1.0 is
+comment|// returned
 name|assertNotNull
 argument_list|(
 name|hierarchy
@@ -518,6 +546,33 @@ condition|(
 name|e
 operator|instanceof
 name|SocketTimeoutException
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Seams like the geonames.org webservice is currently unavailable -> skipping this test"
+argument_list|,
+name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"overloaded with requests"
+argument_list|)
 condition|)
 block|{
 name|log

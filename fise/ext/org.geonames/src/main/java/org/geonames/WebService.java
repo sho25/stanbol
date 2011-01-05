@@ -5128,7 +5128,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|Exception
+name|IOException
 argument_list|(
 name|message
 operator|.

@@ -873,6 +873,34 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+elseif|else
+if|if
+condition|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"overloaded with requests"
+argument_list|)
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Seams like the geonames.org webservice is currently unavailable -> skipping this test"
+argument_list|,
+name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 block|}
 comment|// ... and test the results
 comment|/*          * TODO: rw 20100617          *  - Expected results depend on the used Index.          *  - Use an example where the Organisation, Person and Place is part          *    of the index          */
