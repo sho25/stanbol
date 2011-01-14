@@ -23,6 +23,10 @@ name|Iterator
 import|;
 end_import
 
+begin_comment
+comment|/**  * Implementation of an Iterator over {@link String} values, that uses the   * {@link Object#toString()} on elements of the parent Iterator for the   * conversion.<p>  * This Implementation does not use {@link AdaptingIterator}s implementation,   * because the {@link Object#toString()} method can be used to create a string  * representation for every object and therefore there is no need for the  * filtering functionality provided by the {@link AdaptingIterator}.  *   * @author Rupert Westenthaler  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -41,6 +45,7 @@ name|?
 argument_list|>
 name|it
 decl_stmt|;
+comment|/**      * Creates an string iterator over parsed parent      * @param it the parent iterator      * @throws NullPointerException if<code>null</code> is parsed as parent      * iterator      */
 specifier|public
 name|ToStringIterator
 parameter_list|(
@@ -50,6 +55,8 @@ name|?
 argument_list|>
 name|it
 parameter_list|)
+throws|throws
+name|NullPointerException
 block|{
 if|if
 condition|(
@@ -60,7 +67,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"Parsed iterator MUST NOT be NULL!"
 argument_list|)

@@ -288,29 +288,15 @@ argument_list|>
 name|type
 parameter_list|)
 block|{
-if|if
-condition|(
-name|type
-operator|.
-name|equals
-argument_list|(
-name|String
-operator|.
-name|class
-argument_list|)
-condition|)
-block|{
-return|return
-operator|(
-name|A
-operator|)
-name|value
-operator|.
-name|getLexicalForm
-argument_list|()
-return|;
-block|}
-elseif|else
+comment|// NOTE: (Rupert Westenthaler 12.01.2011)
+comment|//      Converting everything to String is not an intended functionality. When
+comment|//      someone parsed String.class he rather assumes that he gets only string
+comment|//      values and not also string representations for Dates, Integer ...
+comment|//      If someone needs this kind of functionality he can anyway use the
+comment|//      the Resource2StringAdapter.
+comment|//        if(type.equals(String.class)){
+comment|//            return (A) value.getLexicalForm();
+comment|//        } else
 if|if
 condition|(
 name|Text

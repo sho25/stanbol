@@ -1635,11 +1635,11 @@ name|indexingConfig
 operator|.
 name|put
 argument_list|(
-name|KEY_ENTITY_RANKING_BASED_INDEXING_MODE
+name|KEY_INDEXING_MODE
 argument_list|,
-name|Boolean
+name|IndexingMode
 operator|.
-name|TRUE
+name|RANKING_MAP_BASED
 argument_list|)
 expr_stmt|;
 comment|//set the RESUME MODE

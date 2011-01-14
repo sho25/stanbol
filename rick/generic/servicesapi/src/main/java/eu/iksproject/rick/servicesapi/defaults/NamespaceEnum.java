@@ -43,6 +43,10 @@ name|Map
 import|;
 end_import
 
+begin_comment
+comment|/**  * Defines commonly used name spaces to prevent multiple definitions in several  * classes  * @author Rupert Westenthaler  *  */
+end_comment
+
 begin_enum
 specifier|public
 enum|enum
@@ -66,17 +70,17 @@ block|,
 comment|//First the XML Namespaces
 name|xsd
 argument_list|(
-literal|"http://www.w3.org/2001/XMLSchema/"
+literal|"http://www.w3.org/2001/XMLSchema#"
 argument_list|)
 block|,
 name|xsi
 argument_list|(
-literal|"http://www.w3.org/2001/XMLSchema-instance/"
+literal|"http://www.w3.org/2001/XMLSchema-instance#"
 argument_list|)
 block|,
 name|xml
 argument_list|(
-literal|"http://www.w3.org/XML/1998/namespace/"
+literal|"http://www.w3.org/XML/1998/namespace#"
 argument_list|)
 block|,
 comment|//Start with the semantic Web Namespaces

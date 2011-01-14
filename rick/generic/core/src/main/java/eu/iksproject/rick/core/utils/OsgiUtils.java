@@ -101,145 +101,11 @@ name|org
 operator|.
 name|osgi
 operator|.
-name|framework
-operator|.
-name|InvalidSyntaxException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|framework
-operator|.
-name|ServiceReference
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
 name|service
 operator|.
 name|cm
 operator|.
 name|ConfigurationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|service
-operator|.
-name|component
-operator|.
-name|ComponentContext
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|service
-operator|.
-name|component
-operator|.
-name|ComponentFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|service
-operator|.
-name|component
-operator|.
-name|ComponentInstance
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|Logger
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|LoggerFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|rick
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
-name|ConfiguredSite
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|rick
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
-name|EntityDereferencer
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|rick
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
-name|ReferencedSite
 import|;
 end_import
 
@@ -253,21 +119,7 @@ specifier|final
 class|class
 name|OsgiUtils
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|OsgiUtils
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
+comment|//private static final Logger log = LoggerFactory.getLogger(OsgiUtils.class);
 specifier|private
 name|OsgiUtils
 parameter_list|()
@@ -596,298 +448,67 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * search for a {@link ComponentFactory} that has the component.name property      * as configured by {@link ConfiguredSite#DEREFERENCER_TYPE}. Than creates      * an new instance of an {@link EntityDereferencer} and configures it with      * all the properties present for this instance of {@link ReferencedSite} (      * only component.* and service.* properties are ignored).<br>      * The {@link ComponentInstance} and the {@link EntityDereferencer} are      * stored in the according memeber variables.      * @return the ComponentInstance of<code>null</code> if no ComponentFactory      *    was found for the parsed componentService      * @throws ConfigurationException if the {@link ConfiguredSite#DEREFERENCER_TYPE}      * is not present or it's value does not allow to create a {@link EntityDereferencer}      * instance.      */
-specifier|public
-specifier|static
-name|ComponentInstance
-name|createComonentInstance
-parameter_list|(
-name|ComponentContext
-name|context
-parameter_list|,
-name|String
-name|property
-parameter_list|,
-name|Object
-name|componentName
-parameter_list|,
-name|Class
-argument_list|<
-name|?
-argument_list|>
-name|componentService
-parameter_list|)
-throws|throws
-name|ConfigurationException
-block|{
-comment|//Object value = checkProperty(DEREFERENCER_TYPE);
-specifier|final
-name|ServiceReference
-index|[]
-name|refs
-decl_stmt|;
-try|try
-block|{
-name|refs
-operator|=
-name|context
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|getServiceReferences
-argument_list|(
-name|ComponentFactory
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-literal|"(component.name="
-operator|+
-name|componentName
-operator|+
-literal|")"
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|InvalidSyntaxException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|ConfigurationException
-argument_list|(
-name|property
-argument_list|,
-literal|"Unable to get ComponentFactory for parsed value "
-operator|+
-name|componentName
-operator|.
-name|toString
-argument_list|()
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|refs
-operator|!=
-literal|null
-operator|&&
-name|refs
-operator|.
-name|length
-operator|>
-literal|0
-condition|)
-block|{
-if|if
-condition|(
-name|refs
-operator|.
-name|length
-operator|>
-literal|1
-condition|)
-block|{
-comment|//log some warning if more than one Service Reference was found by the query!
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Multiple ComponentFactories found for the property "
-operator|+
-name|property
-operator|+
-literal|"="
-operator|+
-name|componentName
-operator|+
-literal|"! -> First one was used to instantiate the "
-operator|+
-name|componentService
-operator|+
-literal|" Service"
-argument_list|)
-expr_stmt|;
-block|}
-name|Object
-name|dereferencerFactorySerivceObject
-init|=
-name|context
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|getService
-argument_list|(
-name|refs
-index|[
-literal|0
-index|]
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|dereferencerFactorySerivceObject
-operator|!=
-literal|null
-condition|)
-block|{
-try|try
-block|{
-comment|// I trust the OSGI framework, that the returned service implements the requested Interface
-name|ComponentFactory
-name|dereferencerFactory
-init|=
-operator|(
-name|ComponentFactory
-operator|)
-name|dereferencerFactorySerivceObject
-decl_stmt|;
-comment|//log.debug("build configuration for "+EntityDereferencer.class.getSimpleName()+" "+componentName.toString());
-name|Dictionary
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-name|config
-init|=
-name|copyConfig
-argument_list|(
-name|context
-operator|.
-name|getProperties
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|ComponentInstance
-name|dereferencerComponentInstance
-init|=
-name|dereferencerFactory
-operator|.
-name|newInstance
-argument_list|(
-name|config
-argument_list|)
-decl_stmt|;
-name|dereferencerFactory
-operator|=
-literal|null
-expr_stmt|;
-comment|//now
-if|if
-condition|(
-name|dereferencerComponentInstance
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Unable to create ComponentInstance for Property value "
-operator|+
-name|componentName
-operator|+
-literal|"!"
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|componentService
-operator|.
-name|isAssignableFrom
-argument_list|(
-name|dereferencerComponentInstance
-operator|.
-name|getInstance
-argument_list|()
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-condition|)
-block|{
-return|return
-name|dereferencerComponentInstance
-return|;
-block|}
-else|else
-block|{
-name|dereferencerComponentInstance
-operator|.
-name|dispose
-argument_list|()
-expr_stmt|;
-comment|//we can not use it -> so dispose it!
-name|dereferencerComponentInstance
-operator|=
-literal|null
-expr_stmt|;
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"ComponentInstance created for Property value "
-operator|+
-name|componentName
-operator|+
-literal|" does not provide the "
-operator|+
-name|componentService
-operator|+
-literal|" Service!"
-argument_list|)
-throw|;
-block|}
-block|}
-finally|finally
-block|{
-comment|//we need to unget the ComponentFactory!
-name|context
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|ungetService
-argument_list|(
-name|refs
-index|[
-literal|0
-index|]
-argument_list|)
-expr_stmt|;
-name|dereferencerFactorySerivceObject
-operator|=
-literal|null
-expr_stmt|;
-block|}
-block|}
-else|else
-block|{
-return|return
-literal|null
-return|;
-block|}
-block|}
-else|else
-block|{
-return|return
-literal|null
-return|;
-block|}
-block|}
+comment|//    /**
+comment|//     * search for a {@link ComponentFactory} that has the component.name property
+comment|//     * as configured by {@link ConfiguredSite#DEREFERENCER_TYPE}. Than creates
+comment|//     * an new instance of an {@link EntityDereferencer} and configures it with
+comment|//     * all the properties present for this instance of {@link ReferencedSite} (
+comment|//     * only component.* and service.* properties are ignored).<br>
+comment|//     * The {@link ComponentInstance} and the {@link EntityDereferencer} are
+comment|//     * stored in the according memeber variables.
+comment|//     * @return the ComponentInstance of<code>null</code> if no ComponentFactory
+comment|//     *    was found for the parsed componentService
+comment|//     * @throws ConfigurationException if the {@link ConfiguredSite#DEREFERENCER_TYPE}
+comment|//     * is not present or it's value does not allow to create a {@link EntityDereferencer}
+comment|//     * instance.
+comment|//     */
+comment|//    public static ComponentInstance createComonentInstance(ComponentContext context, String property,Object componentName,Class<?> componentService) throws ConfigurationException {
+comment|//        //Object value = checkProperty(DEREFERENCER_TYPE);
+comment|//        final ServiceReference[] refs;
+comment|//        try {
+comment|//            refs = context.getBundleContext().getServiceReferences(
+comment|//                    ComponentFactory.class.getName(),
+comment|//                    "(component.name="+componentName+")");
+comment|//
+comment|//        } catch (InvalidSyntaxException e) {
+comment|//            throw new ConfigurationException(property, "Unable to get ComponentFactory for parsed value "+componentName.toString(),e);
+comment|//        }
+comment|//        if(refs != null&& refs.length>0){
+comment|//            if(refs.length>1){ //log some warning if more than one Service Reference was found by the query!
+comment|//                log.warn("Multiple ComponentFactories found for the property "+property+"="+componentName+"! -> First one was used to instantiate the "+componentService+" Service");
+comment|//            }
+comment|//            Object dereferencerFactorySerivceObject = context.getBundleContext().getService(refs[0]);
+comment|//            if(dereferencerFactorySerivceObject != null){
+comment|//                try {
+comment|//                    // I trust the OSGI framework, that the returned service implements the requested Interface
+comment|//                    ComponentFactory dereferencerFactory = (ComponentFactory)dereferencerFactorySerivceObject;
+comment|//                    //log.debug("build configuration for "+EntityDereferencer.class.getSimpleName()+" "+componentName.toString());
+comment|//                    Dictionary<String, Object> config = copyConfig(context.getProperties());
+comment|//                    ComponentInstance dereferencerComponentInstance = dereferencerFactory.newInstance(config);
+comment|//                    dereferencerFactory = null;
+comment|//                    //now
+comment|//                    if(dereferencerComponentInstance == null){
+comment|//                        throw new IllegalStateException("Unable to create ComponentInstance for Property value "+componentName+"!");
+comment|//                    }
+comment|//                    if(componentService.isAssignableFrom(dereferencerComponentInstance.getInstance().getClass())){
+comment|//                        return dereferencerComponentInstance;
+comment|//                    } else {
+comment|//                        dereferencerComponentInstance.dispose(); //we can not use it -> so dispose it!
+comment|//                        dereferencerComponentInstance = null;
+comment|//                        throw new IllegalStateException("ComponentInstance created for Property value "+componentName+" does not provide the "+componentService+" Service!");
+comment|//                    }
+comment|//                } finally {
+comment|//                    //we need to unget the ComponentFactory!
+comment|//                    context.getBundleContext().ungetService(refs[0]);
+comment|//                    dereferencerFactorySerivceObject=null;
+comment|//                }
+comment|//            } else {
+comment|//                return null;
+comment|//            }
+comment|//        } else {
+comment|//            return null;
+comment|//        }
+comment|//    }
 comment|/**      * Copy all properties excluding "{@value Constants#OBJECTCLASS}",      * "component.*" and "service.*" to the returned Dictionary      * @param source the source      * @return the target      */
 specifier|public
 specifier|static

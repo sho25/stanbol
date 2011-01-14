@@ -954,9 +954,9 @@ specifier|static
 enum|enum
 name|IndexingMode
 block|{
-name|REPLACE
+name|NORMAL
 block|,
-name|APPEND
+name|RANKING_MAP_BASED
 block|}
 specifier|public
 specifier|static
@@ -1142,7 +1142,7 @@ name|KEY_RDF_TYPES
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.indexedTypes"
 decl_stmt|;
-comment|/**      * Key used to parse the indexing mode. Values should be of instance {@link IndexingMode}      * or the {@link Object#toString()} value should be a member of this enum!      */
+comment|/** 	 * Expert only: This allows to set the indexing based on the keys in the map parsed with the 	 * entity rankings. This will only index entities that are keys in that map. 	 * If no Map is parsed by {@link #KEY_ENTITY_RANKINGS}, than activating this mode 	 * will not be successful and a warning will be written.<p> 	 * This mode is about 50% slower than the usual indexing mode. Therefore this 	 * mode makes only sense id less than 50% of the entities are indexed. 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1151,7 +1151,7 @@ name|KEY_INDEXING_MODE
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.indexingMode"
 decl_stmt|;
-comment|/**      * If<code>true</code> than no RDF data are loaded. Instead it is assumed, that      * the Graph of the parsed {@link #KEY_MODEL_NAME} already contains all the needed      * data!<p>      * This can be useful if one first wants to index rdf:type A and than rdf:type B      * based on the same set of data      */
+comment|/** 	 * If<code>true</code> than no RDF data are loaded. Instead it is assumed, that 	 * the Graph of the parsed {@link #KEY_MODEL_NAME} already contains all the needed 	 * data!<p> 	 * This can be useful if one first wants to index rdf:type A and than rdf:type B 	 * based on the same set of data 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1160,7 +1160,7 @@ name|KEY_SKIP_READ
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.skipRead"
 decl_stmt|;
-comment|/**      * The number of {@link Representation}s stored at once in the SolrYard!      */
+comment|/** 	 * The number of {@link Representation}s stored at once in the SolrYard! 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1169,7 +1169,7 @@ name|KEY_CHUNK_SIZE
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.chunkSize"
 decl_stmt|;
-comment|/**      * Can be used to parse a map with {@link String} entity id, {@link Float} rank      * for entities.<p>      * Such values are added to Representations for the {@link RdfResourceEnum#signRank}      * field.      */
+comment|/** 	 * Can be used to parse a map with {@link String} entity id, {@link Float} rank 	 * for entities.<p> 	 * Such values are added to Representations for the {@link RdfResourceEnum#signRank} 	 * field. 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1178,7 +1178,7 @@ name|KEY_ENTITY_RANKINGS
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.entityRankings"
 decl_stmt|;
-comment|/**      * Can be used to activate ignoring of Entities without a page rank      */
+comment|/** 	 * Can be used to activate ignoring of Entities without a page rank 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1187,7 +1187,7 @@ name|KEY_IGNORE_ENTITIES_WITHOUT_ENTITY_RANKING
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.ignoreEntitiesWithoutRankings"
 decl_stmt|;
-comment|/**      * If set to a value>= 0 this is used to exclude Entities with a lower or      * missing entity rank      */
+comment|/** 	 * If set to a value>= 0 this is used to exclude Entities with a lower or  	 * missing entity rank 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1196,7 +1196,7 @@ name|KEY_REQUIRED_ENTITY_RANKING
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.requiredRanking"
 decl_stmt|;
-comment|/**      * The rank for entities with a missing rank. This takes only effect if      * {@link #KEY_IGNORE_ENTITIES_WITHOUT_ENTITY_RANKING} is set to<code>false</code>      * (the default)      */
+comment|/** 	 * The rank for entities with a missing rank. This takes only effect if 	 * {@link #KEY_IGNORE_ENTITIES_WITHOUT_ENTITY_RANKING} is set to<code>false</code> 	 * (the default) 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1205,16 +1205,7 @@ name|KEY_DEFAULT_ENTITY_RANKING
 init|=
 literal|"eu.iksproject.rick.indexing.rdf.defaultRanking"
 decl_stmt|;
-comment|/**      * Expert only: This allows to enable indexing based on the keys in the map parsed with the      * entity rankings. This will only index entities that are keys in that map.      * If no Map is parsed by {@link #KEY_ENTITY_RANKINGS}, than activating this mode      * will not be successful and a warning will be written.<p>      * This mode is about 50% slower than the usual indexing mode. Therefore this      * mode makes only sense id less than 50% of the entities are indexed.      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|KEY_ENTITY_RANKING_BASED_INDEXING_MODE
-init|=
-literal|"eu.iksproject.rick.indexing.rdf.rankingBasedIndexingMode"
-decl_stmt|;
-comment|/**      * The resume Mode first checks if a Resource is already present in the parsed      * Yard. If this is the case, than the representation is not indexes again.<p>      * This mode is intended to resume indexing after stopping a previous call before      * finished. The default value = false.      */
+comment|/** 	 * The resume Mode first checks if a Resource is already present in the parsed 	 * Yard. If this is the case, than the representation is not indexes again.<p> 	 * This mode is intended to resume indexing after stopping a previous call before 	 * finished. The default value = false. 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1256,7 +1247,7 @@ specifier|final
 name|String
 name|modelName
 decl_stmt|;
-comment|//    private final ParsingProvider parser = new JenaParserProvider();
+comment|//	private final ParsingProvider parser = new JenaParserProvider();
 comment|//private final WeightedTcProvider provider;
 specifier|private
 specifier|final
@@ -1334,10 +1325,6 @@ name|minimumRequiredEntityRanking
 init|=
 operator|-
 literal|1
-decl_stmt|;
-specifier|private
-name|boolean
-name|rankingMode
 decl_stmt|;
 specifier|private
 name|boolean
@@ -1748,7 +1735,7 @@ name|indexingMode
 operator|=
 name|IndexingMode
 operator|.
-name|REPLACE
+name|NORMAL
 expr_stmt|;
 comment|//default to replace
 block|}
@@ -1814,7 +1801,7 @@ name|class
 argument_list|,
 name|IndexingMode
 operator|.
-name|REPLACE
+name|NORMAL
 argument_list|)
 argument_list|,
 name|e
@@ -2454,85 +2441,6 @@ name|minRanking
 expr_stmt|;
 block|}
 name|Object
-name|rankingMode
-init|=
-name|config
-operator|.
-name|get
-argument_list|(
-name|KEY_ENTITY_RANKING_BASED_INDEXING_MODE
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|rankingMode
-operator|!=
-literal|null
-condition|)
-block|{
-if|if
-condition|(
-name|rankingMode
-operator|instanceof
-name|Boolean
-condition|)
-block|{
-name|this
-operator|.
-name|rankingMode
-operator|=
-operator|(
-name|Boolean
-operator|)
-name|rankingMode
-expr_stmt|;
-block|}
-else|else
-block|{
-name|this
-operator|.
-name|rankingMode
-operator|=
-name|Boolean
-operator|.
-name|parseBoolean
-argument_list|(
-name|rankingMode
-operator|.
-name|toString
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-if|if
-condition|(
-name|this
-operator|.
-name|rankingMode
-operator|&&
-name|this
-operator|.
-name|entityRankings
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"The Entity Ranking based Indexing Mode can not be activated if no EntityRankings are parsed! -> deactivate Ranking Mode (intertes over all Resources in the RDF Data)"
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|rankingMode
-operator|=
-literal|false
-expr_stmt|;
-block|}
-name|Object
 name|resumeMode
 init|=
 name|config
@@ -2633,7 +2541,11 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|rankingMode
+name|indexingMode
+operator|==
+name|IndexingMode
+operator|.
+name|RANKING_MAP_BASED
 condition|)
 block|{
 name|indexRanked
@@ -2653,7 +2565,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**      * This Method is used to process the RDF Data if all Resource can be indexed,      * because it provides the best performance. Mainly because it reads everything      * from a single stream and therefore gives the OS the best opportunities to      * optimise file access.      * @throws YardException      */
+comment|/** 	 * This Method is used to process the RDF Data if all Resource can be indexed, 	 * because it provides the best performance. Mainly because it reads everything 	 * from a single stream and therefore gives the OS the best opportunities to 	 * optimise file access. 	 * @throws YardException 	 */
 end_comment
 
 begin_function

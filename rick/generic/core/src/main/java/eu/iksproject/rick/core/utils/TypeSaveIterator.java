@@ -34,33 +34,29 @@ name|TypeSaveIterator
 parameter_list|<
 name|T
 parameter_list|>
+extends|extends
+name|AdaptingIterator
+argument_list|<
+name|Object
+argument_list|,
+name|T
+argument_list|>
 implements|implements
 name|Iterator
 argument_list|<
 name|T
 argument_list|>
 block|{
-specifier|protected
-specifier|final
-name|Iterator
-argument_list|<
-name|?
-argument_list|>
-name|it
-decl_stmt|;
-specifier|protected
-specifier|final
-name|Class
-argument_list|<
-name|T
-argument_list|>
-name|type
-decl_stmt|;
-specifier|private
-name|T
-name|next
-decl_stmt|;
+comment|//    protected final Iterator<?> it;
+comment|//    protected final Class<T> type;
+comment|//    private T next;
+comment|//    private Boolean hasNext;
 comment|/**      * Constructs an iterator that selects only elements of the parsed iterator      * that are assignable to the parse type      * @param it the base iterator      * @param type the type all elements of this Iterator need to be assignable to.      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|public
 name|TypeSaveIterator
 parameter_list|(
@@ -77,140 +73,140 @@ argument_list|>
 name|type
 parameter_list|)
 block|{
-if|if
-condition|(
-name|it
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
+name|super
 argument_list|(
-literal|"Parsed iterator MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|type
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
+operator|(
+name|Iterator
+argument_list|<
+name|Object
+argument_list|>
+operator|)
+name|it
+argument_list|,
 operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Parsed type MUST NOT be NULL!"
+name|AssignableFormAdapter
+argument_list|<
+name|T
+argument_list|>
+argument_list|()
+argument_list|,
+name|type
 argument_list|)
-throw|;
+expr_stmt|;
+comment|//        if(it == null){
+comment|//            throw new IllegalArgumentException("Parsed iterator MUST NOT be NULL!");
+comment|//        }
+comment|//        if(type == null){
+comment|//            throw new IllegalArgumentException("Parsed type MUST NOT be NULL!");
+comment|//        }
+comment|//        this.it = it;
+comment|//        this.type = type;
 block|}
-name|this
-operator|.
-name|it
-operator|=
-name|it
-expr_stmt|;
-name|this
-operator|.
-name|type
-operator|=
-name|type
-expr_stmt|;
-comment|//init next ...
-name|next
-operator|=
-name|prepareNext
-argument_list|()
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-specifier|final
-name|void
-name|remove
-parameter_list|()
-block|{
-name|it
-operator|.
-name|remove
-argument_list|()
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-specifier|final
+comment|//    @Override
+comment|//    public final void remove() {
+comment|//        /*
+comment|//         * TODO: Any Iterator that filters elements of the underlying Iterator
+comment|//         * needs to call Iterator#next() in the underlying Iterator to get the
+comment|//         * next element that confirms with the filter.
+comment|//         * However the Iterator#remove() is defined as removing the last element
+comment|//         * to be returned by Iterator#next(). Therefore calling hasNext would
+comment|//         * change the element to be removed by this method.
+comment|//         * Currently I do not know a way around that but I would also like to
+comment|//         * keep the remove functionality for Iterator that filter elements of an
+comment|//         * underlying Iterator. To prevent unpredictable behaviour in such cases
+comment|//         * I throw an IllegalStateException in such cases.
+comment|//         * This decision assumes, that in most usage scenarios hasNext will not
+comment|//         * likely be called before calling remove and even in such cases
+comment|//         * it will be most likely be possible to refactor the code to confirm
+comment|//         * with this restriction.
+comment|//         * I hope this will help developers that encounter this exception to
+comment|//         * modify there code!
+comment|//         * If someone has a better Idea how to solve this please let me know!
+comment|//         * best
+comment|//         * Rupert Westenthaler
+comment|//         */
+comment|//        if(hasNext!= null){
+comment|//            throw new IllegalStateException("Remove can not be called after calling hasNext() because this Method needs to call next() on the underlying Interator and therefore would change the element to be removed :(");
+comment|//        }
+comment|//        it.remove();
+comment|//    }
+comment|//
+comment|//    @Override
+comment|//    public final T next() {
+comment|//        hasNext(); //call hasNext (to init next Element if not already done)
+comment|//        if(!hasNext){
+comment|//            throw new NoSuchElementException();
+comment|//        } else {
+comment|//            T current = next;
+comment|//            next = null;
+comment|//            hasNext = null;
+comment|//            return current;
+comment|//        }
+comment|//    }
+comment|//
+comment|//    @Override
+comment|//    public final boolean hasNext() {
+comment|//        if(hasNext == null){ // only once even with multiple calls
+comment|//            next = prepareNext();
+comment|//            hasNext = next != null;
+comment|//        }
+comment|//        return hasNext;
+comment|//    }
+comment|//    @SuppressWarnings("unchecked")
+comment|//    protected T prepareNext(){
+comment|//        Object check;
+comment|//        while(it.hasNext()){
+comment|//            check = it.next();
+comment|//            if(type.isAssignableFrom(check.getClass())){
+comment|//                return (T)check;
+comment|//            }
+comment|//        }
+comment|//        return null;
+comment|//    }
+comment|/**      * Adapter implementation that uses {@link Class#isAssignableFrom(Class)}      * to check whether a value can be casted to the requested type      */
+specifier|private
+specifier|static
+class|class
+name|AssignableFormAdapter
+parameter_list|<
 name|T
-name|next
-parameter_list|()
-block|{
+parameter_list|>
+implements|implements
+name|Adapter
+argument_list|<
+name|Object
+argument_list|,
 name|T
-name|current
-init|=
-name|next
-decl_stmt|;
-name|next
-operator|=
-name|prepareNext
-argument_list|()
-expr_stmt|;
-return|return
-name|current
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-specifier|final
-name|boolean
-name|hasNext
-parameter_list|()
+argument_list|>
 block|{
-return|return
-name|next
-operator|!=
-literal|null
-return|;
-block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
-specifier|protected
+annotation|@
+name|Override
+specifier|public
 name|T
-name|prepareNext
-parameter_list|()
-block|{
+name|adapt
+parameter_list|(
 name|Object
-name|check
-decl_stmt|;
-while|while
-condition|(
-name|it
-operator|.
-name|hasNext
-argument_list|()
-condition|)
+name|value
+parameter_list|,
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|type
+parameter_list|)
 block|{
-name|check
-operator|=
-name|it
-operator|.
-name|next
-argument_list|()
-expr_stmt|;
 if|if
 condition|(
 name|type
 operator|.
 name|isAssignableFrom
 argument_list|(
-name|check
+name|value
 operator|.
 name|getClass
 argument_list|()
@@ -221,13 +217,16 @@ return|return
 operator|(
 name|T
 operator|)
-name|check
+name|value
 return|;
 block|}
-block|}
+else|else
+block|{
 return|return
 literal|null
 return|;
+block|}
+block|}
 block|}
 block|}
 end_class

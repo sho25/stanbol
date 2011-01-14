@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Defines a reference to an other entity  * @author Rupert Westenthaler  *  */
+comment|/**  * Defines a reference to an other entity<p>  * Implementations of that interface MUST BE immutable  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface

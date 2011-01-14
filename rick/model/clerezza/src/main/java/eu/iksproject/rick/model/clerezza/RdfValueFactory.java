@@ -205,7 +205,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -263,7 +263,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -341,7 +341,19 @@ condition|(
 name|id
 operator|==
 literal|null
-operator|||
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed id MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
 name|id
 operator|.
 name|isEmpty
@@ -352,10 +364,12 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"The parsed id MUST NOT be NULL nor empty!"
+literal|"The parsed id MUST NOT be empty!"
 argument_list|)
 throw|;
 block|}
+else|else
+block|{
 return|return
 name|createRdfRepresentation
 argument_list|(
@@ -370,6 +384,7 @@ name|SimpleMGraph
 argument_list|()
 argument_list|)
 return|;
+block|}
 block|}
 comment|/**      * {@link RdfRepresentation} specific create Method based on an existing      * RDF Graph.      *      * @param node The node of the node used for the representation. If this      *     node is not part of the parsed graph, the resulting representation      *     will be empty      * @param graph the graph.      * @return The representation based on the state of the parsed graph      */
 specifier|public
@@ -392,9 +407,24 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed id MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|graph
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed graph MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}

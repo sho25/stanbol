@@ -1684,10 +1684,17 @@ block|{
 comment|//if query set the fields to add to the result Representations
 name|selected
 operator|=
+operator|new
+name|HashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
 name|parsedQuery
 operator|.
 name|getSelectedFields
 argument_list|()
+argument_list|)
 expr_stmt|;
 comment|//add the score to query results!
 name|selected

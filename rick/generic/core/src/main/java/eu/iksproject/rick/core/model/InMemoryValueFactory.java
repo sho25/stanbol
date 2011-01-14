@@ -150,7 +150,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -186,7 +186,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -424,6 +424,8 @@ parameter_list|(
 name|String
 name|value
 parameter_list|)
+throws|throws
+name|NullPointerException
 block|{
 name|this
 argument_list|(
@@ -442,6 +444,8 @@ parameter_list|,
 name|String
 name|language
 parameter_list|)
+throws|throws
+name|NullPointerException
 block|{
 name|super
 argument_list|()
@@ -455,7 +459,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The value of the Text MUST NOT be NULL!"
 argument_list|)
@@ -660,9 +664,36 @@ block|{
 if|if
 condition|(
 name|id
-operator|!=
+operator|==
 literal|null
 condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed id MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|id
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed id MUST NOT be empty!"
+argument_list|)
+throw|;
+block|}
+else|else
 block|{
 return|return
 operator|new
@@ -671,16 +702,6 @@ argument_list|(
 name|id
 argument_list|)
 return|;
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed id MUST NOT be NULL"
-argument_list|)
-throw|;
 block|}
 block|}
 comment|//    @Override

@@ -23,8 +23,18 @@ name|Iterator
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|NoSuchElementException
+import|;
+end_import
+
 begin_comment
-comment|/**  * Uses the parsed Adapter to convert values of type T to values of type  * A. If an instance of T can not be converted to A, than such values are  * filtered in the Iteration.  * @author Rupert Westenthaler  *  * @param<T> The type of the incoming elements  * @param<A> The type of the elements returned by this iterator  */
+comment|/**  * Uses the parsed Adapter to convert values of type T to values of type  * A. If an instance of T can not be converted to A, than such values are  * filtered. This means that this implementation can be used for both filtering  * and converting of values of the base iterator. In fact the   * FilteringIterator is implemented based on this class.<p>  * Note that {@link Iterator#remove()} only works as long as   * {@link Iterator#hasNext()} was not called to determine if there are  * further elements. The reason for that is, that in order to filter elements  * of the parent iterator {@link Iterator#next()} has to be called to check  * weather any further element is valid against the used Filter.  * This call to {@link Iterator#next()} causes the parent Iterator to switch  * to the next element, meaning that after that the<code>remove()</code>  * method would delete a different element. To avoid that this Iterator  * throws an {@link IllegalStateException} in such cases. If the parent  * Iterator does not support<code>remove()</code> at all an  * {@link UnsupportedOperationException} is thrown.<p>  *   * @author Rupert Westenthaler  *  * @param<T> The type of the incoming elements  * @param<A> The type of the elements returned by this iterator  */
 end_comment
 
 begin_class
@@ -42,7 +52,7 @@ argument_list|<
 name|A
 argument_list|>
 block|{
-comment|/**      * Adapts values of type T to values of type A.      * @author westei      *      * @param<T>      * @param<A>      */
+comment|/**      * Adapts values of type T to values of type A.<code>null</code> indicated      * that the adaption is not possible for the current value of T      *       * @author Rupert Westenthaler      *      * @param<T>      * @param<A>      */
 specifier|public
 specifier|static
 interface|interface
@@ -97,6 +107,10 @@ decl_stmt|;
 specifier|private
 name|A
 name|next
+decl_stmt|;
+specifier|private
+name|Boolean
+name|hasNext
 decl_stmt|;
 comment|/**      * Constructs an instance based on an iterator of type T, an adapter and the      * target type      * @param it the base iterator      * @param adapter the adapter      * @param type the target type      */
 specifier|public
@@ -186,12 +200,6 @@ name|type
 operator|=
 name|type
 expr_stmt|;
-comment|//init next
-name|next
-operator|=
-name|prepareNext
-argument_list|()
-expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -201,10 +209,28 @@ name|boolean
 name|hasNext
 parameter_list|()
 block|{
-return|return
+if|if
+condition|(
+name|hasNext
+operator|==
+literal|null
+condition|)
+block|{
+comment|// only once even with multiple calls
+name|next
+operator|=
+name|prepareNext
+argument_list|()
+expr_stmt|;
+name|hasNext
+operator|=
 name|next
 operator|!=
 literal|null
+expr_stmt|;
+block|}
+return|return
+name|hasNext
 return|;
 block|}
 annotation|@
@@ -214,6 +240,24 @@ specifier|final
 name|A
 name|next
 parameter_list|()
+block|{
+name|hasNext
+argument_list|()
+expr_stmt|;
+comment|//call hasNext (to init next Element if not already done)
+if|if
+condition|(
+operator|!
+name|hasNext
+condition|)
+block|{
+throw|throw
+operator|new
+name|NoSuchElementException
+argument_list|()
+throw|;
+block|}
+else|else
 block|{
 name|A
 name|current
@@ -222,13 +266,18 @@ name|next
 decl_stmt|;
 name|next
 operator|=
-name|prepareNext
-argument_list|()
+literal|null
+expr_stmt|;
+name|hasNext
+operator|=
+literal|null
 expr_stmt|;
 return|return
 name|current
 return|;
 block|}
+block|}
+comment|/**      * This implementation of remove does have an additional restriction. It      * is only able to remove the current element of the parent Iterator (parsed      * in the constructor) if {@link #hasNext()} was not yet called. This is      * because {@link #hasNext()} needs to call {@link Iterator#next()} on the      * parent iterator to check if there are further elements that can be      * adapted successfully. This causes that the current element of this      * Iterator (stored in an local variable) is no longer the current element      * of the parent iterator and therefore calls to {@link #remove()} would      * delete an other object within the collection holding the elements used      * for this iteration. To prevent this this method throws an      * {@link IllegalStateException} ins such cases. Users of this method need      * therefore to ensure, that there are no calls to remove between a call      * to {@link #hasNext()} and {@link #next()} (what is not the case in      * typical use cases).      * @see Iterator#remove()      */
 annotation|@
 name|Override
 specifier|public
@@ -237,6 +286,22 @@ name|void
 name|remove
 parameter_list|()
 block|{
+comment|/*          * TODO: See java doc for a detailed description!           * If someone has a better Idea how to solve this please let me know!          * all the best           * Rupert Westenthaler          */
+if|if
+condition|(
+name|hasNext
+operator|!=
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Remove can not be called after calling hasNext()! See java doc for more information."
+argument_list|)
+throw|;
+block|}
 name|it
 operator|.
 name|remove

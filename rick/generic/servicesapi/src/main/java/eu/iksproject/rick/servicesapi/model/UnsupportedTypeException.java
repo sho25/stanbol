@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Indicates, that the type of a source value is not compatible with the requested  * DataType of the requested target value.  * @author Rupert Westenthaler  *  */
+comment|/**  * Indicates, that the requested type is not supported.<p>  * The definition of the model requires some types to be supported.  * Implementation may support additional types. Components that use a specific  * implementation may therefore use types that are not required to be supported.  * However such components should also be able to deal with this kind of  * exceptions.  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -22,7 +22,7 @@ specifier|public
 class|class
 name|UnsupportedTypeException
 extends|extends
-name|RuntimeException
+name|IllegalArgumentException
 block|{
 comment|/**      * uses the default serialVersionUID      */
 specifier|private
@@ -33,7 +33,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
-specifier|protected
+specifier|public
 name|UnsupportedTypeException
 parameter_list|(
 name|Class
@@ -56,7 +56,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-specifier|protected
+specifier|public
 name|UnsupportedTypeException
 parameter_list|(
 name|Class

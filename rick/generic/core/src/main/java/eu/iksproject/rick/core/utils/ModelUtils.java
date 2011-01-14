@@ -49,6 +49,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collection
 import|;
 end_import
@@ -525,7 +535,7 @@ name|seed
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Processes a value parsed as object to the representation.      * This processing includes:      *<ul>      *<li> Converting URIs and URLs to {@link Reference}      *<li> Converting String[] with at least a single entry where the first      * entry is not null to {@link Text} (the second entry is used as language.      * Further entries are ignored.      *<li> Recursive calling of this Method if a {@link Iterable} (any Array or      *      {@link Collection}), {@link Iterator} or {@link Enumeration} is parsed.      *<li> All other Objects are added to the result list      *</ul>      * @param value the value to parse      * @param results the collections the results of the parsing are added to.      */
+comment|/**      * Processes a value parsed as object to the representation.      * This processing includes:      *<ul>      *<li> Removal of<code>null</code> values      *<li> Converting URIs and URLs to {@link Reference}      *<li> Converting String[] with at least a single entry where the first      * entry is not null to {@link Text} (the second entry is used as language.      * Further entries are ignored.      *<li> Recursive calling of this Method if a {@link Iterable} (any Array or      *      {@link Collection}), {@link Iterator} or {@link Enumeration} is parsed.      *<li> All other Objects are added to the result list      *</ul>      * TODO: Maybe we need to enable an option to throw {@link IllegalArgumentException}      * in case any of the parsed values is invalid. Currently invalid values are      * just ignored.      * @param value the value to parse      * @param results the collections the results of the parsing are added to.      */
 specifier|public
 specifier|static
 name|void
@@ -544,6 +554,16 @@ argument_list|>
 name|results
 parameter_list|)
 block|{
+if|if
+condition|(
+name|value
+operator|==
+literal|null
+condition|)
+block|{
+return|return;
+block|}
+elseif|else
 if|if
 condition|(
 name|value
@@ -802,7 +822,16 @@ name|warn
 argument_list|(
 literal|"String[] "
 operator|+
+name|Arrays
+operator|.
+name|toString
+argument_list|(
+operator|(
+name|String
+index|[]
+operator|)
 name|value
+argument_list|)
 operator|+
 literal|" is not a valied natural language array! -> ignore value"
 argument_list|)

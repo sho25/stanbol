@@ -307,7 +307,8 @@ specifier|final
 name|String
 name|id
 decl_stmt|;
-specifier|public
+comment|/**      * creates a new InMemoryRepresentation for the parsed ID      * @param id the id of the representation      */
+specifier|protected
 name|InMemoryRepresentation
 parameter_list|(
 name|String
@@ -322,7 +323,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Initialise a new InMemoryRepresenation that contains already some data.      * @param id      * @param representation      */
+comment|/**      * Initialise a new InMemoryRepresenation with the parsed map. Note that the      * parsed map is directly used to store the data. That means that callers      * MUST keep in minds that changes to that map will influence the internal      * state of this instance.<br>      * The intension of this constructor is to allow also to define the actual      * map implementation used to store the data.      * If one also wants to directly parse data already contained within an      * other representation one MUST first create deep copy of the according      * map!      * @param id the id for the Representation      * @param representation the map used by this representation to store it's data      */
 specifier|protected
 name|InMemoryRepresentation
 parameter_list|(
@@ -419,11 +420,53 @@ name|Object
 name|parsedValue
 parameter_list|)
 block|{
-comment|//TODO:add processing of values
-comment|// URI, URL -> Reference
-comment|// String[] -> Text
-comment|// check Collections!
-comment|// The rest should be added as Objects
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|parsedValue
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"NULL values are not supported by Representations"
+argument_list|)
+throw|;
+block|}
 name|Collection
 argument_list|<
 name|Object
@@ -588,20 +631,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-specifier|protected
-name|void
-name|addValues
-parameter_list|(
-name|String
-name|field
-parameter_list|,
-name|Collection
-argument_list|<
-name|Object
-argument_list|>
-name|values
-parameter_list|)
-block|{      }
 annotation|@
 name|Override
 specifier|public
@@ -619,6 +648,21 @@ modifier|...
 name|languages
 parameter_list|)
 block|{
+if|if
+condition|(
+name|text
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"NULL was parsed for the text! NULL values are not supported by Representations"
+argument_list|)
+throw|;
+block|}
 if|if
 condition|(
 name|languages
@@ -688,6 +732,21 @@ name|String
 name|reference
 parameter_list|)
 block|{
+if|if
+condition|(
+name|reference
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"NULL values are not supported by Representations"
+argument_list|)
+throw|;
+block|}
 name|add
 argument_list|(
 name|field
@@ -718,6 +777,38 @@ name|String
 name|field
 parameter_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
 name|Object
 name|value
 init|=
@@ -839,6 +930,38 @@ name|String
 name|field
 parameter_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
 return|return
 name|getValuesAsCollection
 argument_list|(
@@ -1106,9 +1229,65 @@ name|String
 name|field
 parameter_list|,
 name|Object
-name|value
+name|parsedValue
 parameter_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
+name|Collection
+argument_list|<
+name|Object
+argument_list|>
+name|removeValues
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|Object
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|ModelUtils
+operator|.
+name|checkValues
+argument_list|(
+name|valueFactory
+argument_list|,
+name|parsedValue
+argument_list|,
+name|removeValues
+argument_list|)
+expr_stmt|;
 name|Object
 name|values
 init|=
@@ -1125,17 +1304,22 @@ name|values
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
+elseif|else
 if|if
 condition|(
-name|value
+name|removeValues
 operator|.
-name|equals
+name|contains
 argument_list|(
-name|value
+name|values
 argument_list|)
 condition|)
 block|{
+comment|//in case this field has a single value and this values is part of
+comment|//the values to remove -> remove the whole field
 name|representation
 operator|.
 name|remove
@@ -1167,12 +1351,12 @@ operator|)
 name|values
 operator|)
 operator|.
-name|remove
+name|removeAll
 argument_list|(
-name|value
+name|removeValues
 argument_list|)
 operator|&&
-comment|//remove the Element
+comment|//remove all Elements
 operator|(
 operator|(
 name|Collection
@@ -1190,7 +1374,25 @@ literal|2
 condition|)
 block|{
 comment|//if removed check for size
-comment|//it only one element remaining -> replace the collection with a Object
+if|if
+condition|(
+operator|(
+operator|(
+name|Collection
+argument_list|<
+name|Object
+argument_list|>
+operator|)
+name|values
+operator|)
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+condition|)
+block|{
+comment|//only one element remaining -> replace the collection with a Object
 name|representation
 operator|.
 name|put
@@ -1215,8 +1417,20 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+else|else
+block|{
+comment|//if no element remains, remove the field
+name|representation
+operator|.
+name|remove
+argument_list|(
+name|field
+argument_list|)
+expr_stmt|;
 block|}
-comment|//else ignore
+block|}
+block|}
+comment|//else ignore (single value for field&& value not to be removed)
 block|}
 end_class
 
@@ -1231,6 +1445,38 @@ name|String
 name|field
 parameter_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
 name|representation
 operator|.
 name|remove
@@ -1261,6 +1507,38 @@ modifier|...
 name|languages
 parameter_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
 name|Object
 name|values
 init|=
@@ -1470,16 +1748,57 @@ operator|...
 name|languages
 argument_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+end_expr_stmt
+
+begin_elseif
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
+end_elseif
+
+begin_decl_stmt
 name|Object
 name|values
-operator|=
+init|=
 name|representation
 operator|.
 name|get
 argument_list|(
 name|field
 argument_list|)
-block|;
+decl_stmt|;
+end_decl_stmt
+
+begin_if
 if|if
 condition|(
 name|values
@@ -1487,7 +1806,7 @@ operator|==
 literal|null
 condition|)
 return|return;
-end_expr_stmt
+end_if
 
 begin_if
 if|if
@@ -1744,6 +2063,38 @@ name|Object
 name|value
 parameter_list|)
 block|{
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed field MUST NOT be NULL"
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|field
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed field MUST NOT be Empty"
+argument_list|)
+throw|;
+block|}
 name|representation
 operator|.
 name|remove
@@ -1751,6 +2102,13 @@ argument_list|(
 name|field
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+condition|)
+block|{
 name|add
 argument_list|(
 name|field
@@ -1758,6 +2116,7 @@ argument_list|,
 name|value
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 end_function
 
@@ -2126,7 +2485,7 @@ block|}
 end_function
 
 begin_function
-specifier|private
+specifier|protected
 specifier|static
 name|String
 name|getNaturalLanguageValue
@@ -2211,7 +2570,7 @@ block|}
 end_function
 
 begin_function
-specifier|public
+specifier|protected
 specifier|static
 name|String
 name|getNaturalLanguageValue
@@ -2301,7 +2660,7 @@ comment|/**      * @param check      * @param languages      * @return      */
 end_comment
 
 begin_function
-specifier|public
+specifier|protected
 specifier|static
 name|boolean
 name|isNaturalLanguageValue
