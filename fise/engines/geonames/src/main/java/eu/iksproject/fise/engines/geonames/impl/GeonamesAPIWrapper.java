@@ -279,7 +279,7 @@ comment|//         * enable/disable URIs of Linking Open Data entities
 comment|//         */
 comment|//        name_equals,
 comment|/**          * the maximum number of results (must be< 1000). Default is set to 5          */
-name|maxRow
+name|maxRows
 argument_list|(
 literal|"5"
 argument_list|)
