@@ -902,8 +902,7 @@ expr_stmt|;
 return|return;
 block|}
 block|}
-comment|// ... and test the results
-comment|/*          * TODO: rw 20100617          *  - Expected results depend on the used Index.          *  - Use an example where the Organisation, Person and Place is part          *    of the index          */
+comment|/*          * Note:          *  - Expected results depend on the geonames.org data. So if the test          *    fails it may also mean that the data provided by geonames.org have          *    changed          */
 name|int
 name|entityAnnotationCount
 init|=
