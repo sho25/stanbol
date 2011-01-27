@@ -370,7 +370,7 @@ name|Pattern
 operator|.
 name|compile
 argument_list|(
-literal|"eu.iksproject.*full.*jar$"
+literal|"org.apache.stanbol.*full.*jar$"
 argument_list|)
 decl_stmt|;
 comment|// Find executable jar

@@ -1,11 +1,13 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_package
 package|package
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -79,11 +81,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -93,11 +97,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -109,11 +115,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -125,11 +133,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -141,11 +151,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -157,11 +169,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -173,11 +187,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
@@ -189,11 +205,13 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|fise
+name|stanbol
+operator|.
+name|enhancer
 operator|.
 name|interaction
 operator|.
