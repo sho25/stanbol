@@ -249,6 +249,25 @@ operator|=
 literal|"application/octet-stream"
 expr_stmt|;
 block|}
+else|else
+block|{
+comment|// Keep only first part of content-types like text/plain ; charset=UTF-8
+name|mimeType
+operator|=
+name|mimeType
+operator|.
+name|split
+argument_list|(
+literal|";"
+argument_list|)
+index|[
+literal|0
+index|]
+operator|.
+name|trim
+argument_list|()
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|content
