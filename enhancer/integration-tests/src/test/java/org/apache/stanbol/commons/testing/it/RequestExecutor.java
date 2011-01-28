@@ -314,6 +314,54 @@ return|return
 name|this
 return|;
 block|}
+comment|/** Verify that response matches supplied content type */
+specifier|public
+name|RequestExecutor
+name|assertContentType
+parameter_list|(
+name|String
+name|expected
+parameter_list|)
+block|{
+name|assertNotNull
+argument_list|(
+name|response
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|entity
+operator|==
+literal|null
+condition|)
+block|{
+name|fail
+argument_list|(
+literal|"No entity in response, cannot check content type"
+argument_list|)
+expr_stmt|;
+block|}
+name|assertEquals
+argument_list|(
+literal|"Expecting content type "
+operator|+
+name|expected
+argument_list|,
+name|expected
+argument_list|,
+name|entity
+operator|.
+name|getContentType
+argument_list|()
+operator|.
+name|getValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
 comment|/** For each supplied regexp, fail unless content contains at       *  least one line that matches.      *  Regexps are automatically prefixed/suffixed with .* so as      *  to have match partial lines.      */
 specifier|public
 name|RequestExecutor
