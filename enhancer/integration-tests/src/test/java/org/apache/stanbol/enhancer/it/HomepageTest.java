@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Simple test of the enhancer homepage, mostly  *  to show how simple a test can be */
+comment|/** Test the enhancer homepage and demonstrate the test classes */
 end_comment
 
 begin_class
@@ -42,7 +42,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testHomepageHasCss
+name|testHomepageExamples
 parameter_list|()
 throws|throws
 name|Exception
@@ -57,6 +57,13 @@ name|buildRequest
 argument_list|(
 literal|"/"
 argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/html"
+argument_list|)
 argument_list|)
 operator|.
 name|assertStatus
@@ -64,11 +71,23 @@ argument_list|(
 literal|200
 argument_list|)
 operator|.
+name|assertContentType
+argument_list|(
+literal|"text/html"
+argument_list|)
+operator|.
 name|assertContentContains
 argument_list|(
 literal|"/static/style/stanbol.css"
 argument_list|,
 literal|"The RESTful Semantic Engine"
+argument_list|)
+operator|.
+name|assertContentRegexp
+argument_list|(
+literal|"stylesheet.*stanbol.css"
+argument_list|,
+literal|"<title.*[Ss]tanbol"
 argument_list|)
 expr_stmt|;
 block|}
