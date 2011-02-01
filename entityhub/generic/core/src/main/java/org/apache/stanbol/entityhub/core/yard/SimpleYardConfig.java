@@ -85,13 +85,13 @@ begin_class
 specifier|public
 specifier|final
 class|class
-name|DefaultYardConfig
+name|SimpleYardConfig
 extends|extends
 name|YardConfig
 block|{
 comment|/**      * Creates a new configuration with the minimal set of required properties      * @param id the ID of the Yard      * @throws IllegalArgumentException if the parsed valued do not fulfil the      * requirements.      */
 specifier|public
-name|DefaultYardConfig
+name|SimpleYardConfig
 parameter_list|(
 name|String
 name|id
@@ -132,7 +132,7 @@ block|}
 block|}
 comment|/**      * Initialise the Yard configuration based on a parsed configuration. Usually      * used on the context of an OSGI environment in the activate method.      * @param config the configuration usually parsed within an OSGI activate      * method      * @throws ConfigurationException if the configuration is incomplete of      * some values are not valid      * @throws IllegalArgumentException if<code>null</code> is parsed as      * configuration      */
 specifier|public
-name|DefaultYardConfig
+name|SimpleYardConfig
 parameter_list|(
 name|Dictionary
 argument_list|<

@@ -195,6 +195,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|yard
+operator|.
+name|YardException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|service
@@ -332,6 +350,11 @@ specifier|protected
 name|YardConfig
 name|config
 decl_stmt|;
+comment|/**      * The default prefix used for created URIs.      * @see #getUriPrefix()      */
+specifier|private
+name|String
+name|defaultPrefix
+decl_stmt|;
 comment|/**      * Default constructor to create an uninitialised Yard. Typically used      * within an OSGI environment      */
 specifier|protected
 name|AbstractYard
@@ -372,7 +395,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"Unable to activate: The ValueFactory MUST NOT be NULL!"
 argument_list|)
@@ -387,7 +410,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"Unable to activate: The QueryFactory MUST NOT be NULL!"
 argument_list|)
@@ -402,7 +425,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"Unable to activate: The YardConfig MUST NOT be NULL!"
 argument_list|)
@@ -425,6 +448,28 @@ operator|.
 name|config
 operator|=
 name|config
+expr_stmt|;
+name|this
+operator|.
+name|defaultPrefix
+operator|=
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"urn:org.apache.stanbol:entityhub.yard.%s:%s."
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|,
+name|config
+operator|.
+name|getId
+argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Deactivates this yard instance. Typically called within an OSGI environment      * by the deacivate method.      *      */
@@ -452,6 +497,12 @@ name|config
 operator|=
 literal|null
 expr_stmt|;
+name|this
+operator|.
+name|defaultPrefix
+operator|=
+literal|null
+expr_stmt|;
 block|}
 comment|/**      * Creates a new representation with a random uuid by using the pattern:      *<code><pre>      *   urn:org.apache.stanbol:entityhub.yard.&lt;getClass().getSimpleName()&gt;:&lt;getId()&gt;.&lt;uuid&gt;      *</pre></code>      * @see Yard#create()      */
 annotation|@
@@ -461,6 +512,10 @@ specifier|final
 name|Representation
 name|create
 parameter_list|()
+throws|throws
+name|IllegalArgumentException
+throws|,
+name|YardException
 block|{
 return|return
 name|create
@@ -469,7 +524,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a representation with the parsed ID. If<code>null</code> is      * parsed a random UUID is generated as describe in {@link #create()}.      * @param id The id or<code>null</code> to create a random uuid      * @see Yard#create(String)      */
+comment|/**      * Creates a representation with the parsed ID. If<code>null</code> is      * parsed a random UUID is generated as describe in {@link #create()}.<p>      * Note that {@link #store(Representation)} is called for the newly created      * representation and the Representation returned by this Method is returned.      * @param id The id or<code>null</code> to create a random uuid.      * @return The newly created, empty and stored representation      * @see Yard#create(String)      * @see Yard#store(Representation)      */
 annotation|@
 name|Override
 specifier|public
@@ -482,6 +537,8 @@ name|id
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
+throws|,
+name|YardException
 block|{
 if|if
 condition|(
@@ -505,41 +562,57 @@ operator|==
 literal|null
 condition|)
 block|{
+comment|//create a new ID
+do|do
+block|{
 name|id
 operator|=
+name|createRandomEntityUri
+argument_list|()
+expr_stmt|;
+block|}
+do|while
+condition|(
+name|isRepresentation
+argument_list|(
+name|id
+argument_list|)
+condition|)
+do|;
+block|}
+elseif|else
+if|if
+condition|(
+name|isRepresentation
+argument_list|(
+name|id
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
 name|String
 operator|.
 name|format
 argument_list|(
-literal|"urn:org.apache.stanbol:entityhub.yard.%s:%s.%s"
+literal|"An representation with the parsed ID %s is already present in this Yard"
 argument_list|,
-name|getClass
-argument_list|()
-operator|.
-name|getSimpleName
-argument_list|()
-argument_list|,
-name|config
-operator|.
-name|getId
-argument_list|()
-argument_list|,
-name|ModelUtils
-operator|.
-name|randomUUID
-argument_list|()
-operator|.
-name|toString
-argument_list|()
+name|id
 argument_list|)
-expr_stmt|;
+argument_list|)
+throw|;
 block|}
 return|return
+name|store
+argument_list|(
 name|valueFactory
 operator|.
 name|createRepresentation
 argument_list|(
 name|id
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -685,6 +758,36 @@ throw|;
 block|}
 return|return
 name|valueFactory
+return|;
+block|}
+comment|/**      * This provides the prefix for URIs created by this Yard. This is used for      * creating new unique URIs for Representation if {@link #create()} is      * called.<p>      * By default this implementation uses:<br>      *<code>"urn:org.apache.stanbol:entityhub.yard."+this.getClass.getSimpleName()+":"+getId()+"."</code>      *<p>      * Subclasses can override this Method to use a different namespace for entities.      * @return The UriPrefix used by this Yard instance for creating URIs      */
+specifier|protected
+name|String
+name|getUriPrefix
+parameter_list|()
+block|{
+return|return
+name|defaultPrefix
+return|;
+block|}
+comment|/**      * Creates an unique ID by using the {@link #getUriPrefix()} the parsed      * separator (non if<code>null</code>) and an uuid created by using       * {@link ModelUtils#randomUUID()}.      *<p>      * This Method is used for the {@link #create()} and the {@link #create(String)}      * - if<code>null</code> is parsed - to generate an unique URI for the      * created Representation.      *<p>      * Subclasses can override this Method to use other algorithms for generating      * URIs for entities.      * @return the created URI as string.      */
+specifier|protected
+specifier|final
+name|String
+name|createRandomEntityUri
+parameter_list|()
+block|{
+return|return
+name|getUriPrefix
+argument_list|()
+operator|+
+name|ModelUtils
+operator|.
+name|randomUUID
+argument_list|()
+operator|.
+name|toString
+argument_list|()
 return|;
 block|}
 comment|/** ------------------------------------------------------------------------      *    Methods that need to be implemented by Sub-Classes      *  ------------------------------------------------------------------------      */

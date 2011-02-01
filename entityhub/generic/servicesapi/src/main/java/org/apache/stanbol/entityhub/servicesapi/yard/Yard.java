@@ -230,12 +230,14 @@ name|String
 name|getDescription
 parameter_list|()
 function_decl|;
-comment|/**      * Creates a new representation. The Yard is responsible to assign a valid      * ID.      *      * @return the created Representation initialised with a valid ID      */
+comment|/**      * Creates a new empty representation and stores it in the Yard.       * The Yard is responsible to assign a valid ID.      *      * @return the created Representation initialised with a valid ID      * @throws YardException On any error while creating or storing the       * representation      */
 name|Representation
 name|create
 parameter_list|()
+throws|throws
+name|YardException
 function_decl|;
-comment|/**      * Creates a new representation for the given id      *      * @param id the id for the new representation or<code>null</code> to      * indicate that the Yard should assign an id.      * @return the created Representation      * @throws IllegalArgumentException if the parsed id is not valid or there      * exists already a representation with the parsed id.      */
+comment|/**      * Creates a new representation for the given id      *      * @param id the id for the new representation or<code>null</code> to      * indicate that the Yard should assign an id.      * @return the created Representation      * @throws IllegalArgumentException if the parsed id is not valid (especially      * if an empty string is parsed as ID) or there      * exists already a representation with the parsed id.      * @throws YardException On any error while creating or storing the       * representation      */
 name|Representation
 name|create
 parameter_list|(
@@ -244,8 +246,10 @@ name|id
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
+throws|,
+name|YardException
 function_decl|;
-comment|/**      * Stores the representation in the Yard. if the parsed representation is      * not present in the Yard it will add it to the Yard.      *      * @param representation the representation      * @return the representation as stored      * @throws IllegalArgumentException if<code>null</code> is parsed as argument or      * the representation is not managed (e.g was not created by using this yard).      * @throws YardException On any error related to the Yard      */
+comment|/**      * Stores the representation in the Yard. if the parsed representation is      * not present in the Yard it will add it to the Yard.      *      * @param representation the representation      * @return the representation as stored      * @throws NullPointerException if<code>null</code> is parsed as argument.      * @throws YardException On any error related to the Yard      */
 name|Representation
 name|store
 parameter_list|(
@@ -253,11 +257,11 @@ name|Representation
 name|representation
 parameter_list|)
 throws|throws
-name|IllegalArgumentException
+name|NullPointerException
 throws|,
 name|YardException
 function_decl|;
-comment|/**      * Stores all the parsed representation in a single chunk in the Yard. This      * can improve performance, because it does not require multiple commits.<br>      *<code>null</code> values are ignored and added as<code>null</code> in      * the returned Iterable.      * Otherwise same as {@link #store(Representation)}.      *      * @param representations all the representations to store      * @return the stored representations in the same iteration order      * @throws IllegalArgumentException if<code>null</code> is parsed as Iterable      * @throws YardException On any error related to the Yard      */
+comment|/**      * Stores all the parsed representation in a single chunk in the Yard. This      * can improve performance, because it does not require multiple commits.<br>      *<code>null</code> values are ignored and added as<code>null</code> in      * the returned Iterable.      * Otherwise same as {@link #store(Representation)}.      *      * @param representations all the representations to store.<code>null</code>      * values are ignored and MUST NOT throw any exceptions. Parsing an {@link Iterable}      * without any element will have none effect but also MUST NOT throw an exception.      * @return the stored representations in the same iteration order      * @throws NullPointerException if<code>null</code> is parsed as Iterable,      * but NOT if the parsed Iterable does not contain any Elements or the      *<code>null</code> value.      * @throws YardException On any error related to the Yard      */
 name|Iterable
 argument_list|<
 name|Representation
@@ -271,7 +275,7 @@ argument_list|>
 name|representations
 parameter_list|)
 throws|throws
-name|IllegalArgumentException
+name|NullPointerException
 throws|,
 name|YardException
 function_decl|;
@@ -302,7 +306,7 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 function_decl|;
-comment|/**      * checks if a representation with the given id is present in the Yard      *      * @param id the id. Calls with<code>null</code> are ignored      * @return<code>true</code> if a representation with the id is present in      *         the Yard. Otherwise<code>false</code>.      * @throws IllegalArgumentException if the parsed ID is not valid      * formatted      * @throws YardException On any error related to the Yard      */
+comment|/**      * checks if a representation with the given id is present in the Yard      *      * @param id the id. Calls with<code>null</code> are ignored      * @return<code>true</code> if a representation with the id is present in      *         the Yard. Otherwise<code>false</code>.      * @throws NullPointerException if<code>null</code> is parsed as ID      * @throws IllegalArgumentException if the parsed ID is not valid      * formatted (especially if an empty String is parsed as ID      * @throws YardException On any error related to the Yard      */
 name|boolean
 name|isRepresentation
 parameter_list|(
@@ -314,7 +318,7 @@ name|YardException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for the representation based on the id. Calls with      *<code>id = null</code> should return null.      *      * @param id the id.      * @return The representation with the parsed id or<code>null</code> if      *         no representation with this id is present in the Yard      * @throws IllegalArgumentException if the parsed ID is not valid      * formatted      * @throws YardException On any error related to the Yard      */
+comment|/**      * Getter for the representation based on the id. Calls with      *<code>id = null</code> should return null.      *      * @param id the id.      * @return The representation with the parsed id or<code>null</code> if      *         no representation with this id is present in the Yard      * @throws NullPointerException if<code>null</code> is parsed as id      * @throws IllegalArgumentException if the parsed ID is not valid formatted      * @throws YardException On any error related to the Yard      */
 name|Representation
 name|getRepresentation
 parameter_list|(
@@ -326,7 +330,7 @@ name|YardException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Updates the store with the new state of the parsed representation      *      * @param represnetation the representation      * @return the representation as stored      * @throws IllegalArgumentException if the parsed representation<code>null</code>      * or not present in the Yard      * @throws YardException On any error related to the Yard      */
+comment|/**      * Updates the store with the new state of the parsed representation      *      * @param represnetation the representation      * @return the representation as stored      * @throws NullPointerException If<code>null</code> is parsed as representation      * @throws IllegalArgumentException if the parsed representation is not present       * in the Yard (and can not be updated therefore). TODO: evaluate if this should      * really throw only a {@link RuntimeException}.      * @throws YardException On any error related to the Yard      */
 name|Representation
 name|update
 parameter_list|(

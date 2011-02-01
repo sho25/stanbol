@@ -1457,7 +1457,7 @@ name|Representation
 name|create
 parameter_list|()
 throws|throws
-name|IllegalArgumentException
+name|YardException
 block|{
 name|Yard
 name|yard
@@ -1500,6 +1500,8 @@ name|id
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
+throws|,
+name|YardException
 block|{
 name|Yard
 name|yard
