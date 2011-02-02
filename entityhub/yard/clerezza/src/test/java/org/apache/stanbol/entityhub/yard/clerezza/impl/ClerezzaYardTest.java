@@ -229,20 +229,6 @@ name|Test
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|source
-operator|.
-name|tree
-operator|.
-name|AssertTree
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
