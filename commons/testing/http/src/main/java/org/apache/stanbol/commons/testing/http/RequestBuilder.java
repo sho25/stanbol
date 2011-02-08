@@ -97,7 +97,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|Request
-name|buildRequest
+name|buildGetRequest
 parameter_list|(
 name|String
 name|path

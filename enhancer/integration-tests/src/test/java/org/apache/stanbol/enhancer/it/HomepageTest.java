@@ -71,7 +71,7 @@ name|execute
 argument_list|(
 name|builder
 operator|.
-name|buildRequest
+name|buildGetRequest
 argument_list|(
 literal|"/"
 argument_list|)
