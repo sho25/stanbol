@@ -15,7 +15,7 @@ name|commons
 operator|.
 name|testing
 operator|.
-name|it
+name|jarexec
 package|;
 end_package
 
@@ -146,7 +146,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  *  *  TODO: move to a commons/testing library?  */
+comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  */
 end_comment
 
 begin_class

@@ -15,7 +15,7 @@ name|commons
 operator|.
 name|testing
 operator|.
-name|it
+name|http
 package|;
 end_package
 
