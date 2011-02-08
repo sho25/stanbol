@@ -29,6 +29,24 @@ name|commons
 operator|.
 name|testing
 operator|.
+name|http
+operator|.
+name|RequestDocumentor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|testing
+operator|.
 name|stanbol
 operator|.
 name|StanbolTestBase
@@ -56,6 +74,21 @@ name|StatelessEngineTest
 extends|extends
 name|StanbolTestBase
 block|{
+specifier|private
+specifier|final
+name|RequestDocumentor
+name|documentor
+init|=
+operator|new
+name|RequestDocumentor
+argument_list|(
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+decl_stmt|;
 annotation|@
 name|Test
 specifier|public
@@ -109,6 +142,21 @@ argument_list|,
 literal|"http://purl.org/dc/terms/creator.*NamedEntityExtractionEnhancementEngine"
 argument_list|,
 literal|"http://fise.iks-project.eu/ontology/entity-label.*Bob Marley"
+argument_list|)
+operator|.
+name|generateDocumentation
+argument_list|(
+name|documentor
+argument_list|,
+literal|"title"
+argument_list|,
+literal|"Stateless text analysis"
+argument_list|,
+literal|"description"
+argument_list|,
+literal|"A POST request to ${request.path} (TODO should be replaced by actual path) returns triples representing enhancements "
+operator|+
+literal|" of the POSTed text. Output format is defined by the Accept header."
 argument_list|)
 expr_stmt|;
 block|}
@@ -227,6 +275,31 @@ name|i
 operator|+
 literal|2
 index|]
+argument_list|)
+operator|.
+name|generateDocumentation
+argument_list|(
+name|documentor
+argument_list|,
+literal|"title"
+argument_list|,
+literal|"Output format: "
+operator|+
+name|formats
+index|[
+name|i
+index|]
+argument_list|,
+literal|"description"
+argument_list|,
+literal|"Demonstrate "
+operator|+
+name|formats
+index|[
+name|i
+index|]
+operator|+
+literal|" output"
 argument_list|)
 expr_stmt|;
 block|}
