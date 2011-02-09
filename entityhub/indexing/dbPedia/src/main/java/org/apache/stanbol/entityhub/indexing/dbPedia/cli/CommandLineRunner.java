@@ -1237,21 +1237,6 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//first the SolrServer used to store the index
-name|URL
-name|solrServer
-init|=
-operator|new
-name|URL
-argument_list|(
-name|line
-operator|.
-name|getArgs
-argument_list|()
-index|[
-literal|0
-index|]
-argument_list|)
-decl_stmt|;
 name|SolrYardConfig
 name|yardConfig
 init|=
@@ -1260,7 +1245,13 @@ name|SolrYardConfig
 argument_list|(
 name|yardName
 argument_list|,
-name|solrServer
+name|line
+operator|.
+name|getArgs
+argument_list|()
+index|[
+literal|0
+index|]
 argument_list|)
 decl_stmt|;
 comment|//use the signRank as default for document Boosts

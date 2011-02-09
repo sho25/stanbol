@@ -253,6 +253,22 @@ name|scr
 operator|.
 name|annotations
 operator|.
+name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
 name|Service
 import|;
 end_import
@@ -302,24 +318,6 @@ operator|.
 name|solrj
 operator|.
 name|SolrServerException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|client
-operator|.
-name|solrj
-operator|.
-name|impl
-operator|.
-name|CommonsHttpSolrServer
 import|;
 end_import
 
@@ -512,6 +510,24 @@ operator|.
 name|rdf
 operator|.
 name|RdfResourceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
+name|Constraint
 import|;
 end_import
 
@@ -723,6 +739,48 @@ name|yard
 operator|.
 name|solr
 operator|.
+name|provider
+operator|.
+name|SolrServerProviderManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
+name|provider
+operator|.
+name|SolrServerProvider
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
 name|query
 operator|.
 name|IndexConstraintTypeEnum
@@ -819,7 +877,7 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|//the ID and SOLR_SERVER_URI are required!
+comment|//the ID and SOLR_SERVER_LOCATION are required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -913,7 +971,7 @@ name|name
 operator|=
 name|SolrYard
 operator|.
-name|SOLR_SERVER_URI
+name|SOLR_SERVER_LOCATION
 argument_list|,
 name|value
 operator|=
@@ -992,7 +1050,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|SOLR_SERVER_URI
+name|SOLR_SERVER_LOCATION
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.solrUri"
 decl_stmt|;
@@ -1031,6 +1089,15 @@ name|String
 name|FIELD_BOOST_MAPPINGS
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.fieldBoosts"
+decl_stmt|;
+comment|/**      * Key used to configure the implementation of the {@link SolrServer} to      * be used by this SolrYard implementation. The default value is determined      * by the type of the value configured by the {@link #SOLR_SERVER_LOCATION}.      * In case a path of a File URI is used, the type is set to      * {@link Type#EMBEDDED} otherwise {@link Type#HTTP} is used as default.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SOLR_SERVER_TYPE
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.solrServerType"
 decl_stmt|;
 comment|/**      * The default value for the maxBooleanClauses of SolrQueries. Set to      * {@value #defaultMaxBooleanClauses} the default of Slor 1.4      */
 specifier|protected
@@ -1090,6 +1157,13 @@ name|Float
 argument_list|>
 name|fieldBoostMap
 decl_stmt|;
+comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard.      */
+annotation|@
+name|Reference
+specifier|private
+name|SolrServerProviderManager
+name|solrServerProviderManager
+decl_stmt|;
 comment|/**      * Default constructor as used by the OSGI environment.<p> DO NOT USE to      * manually create instances! The SolrYard instances do need to be configured.      * YOU NEED TO USE {@link #SolrYard(SolrYardConfig)} to parse the configuration      * and the initialise the Yard if running outside a OSGI environment.      */
 specifier|public
 name|SolrYard
@@ -1134,7 +1208,7 @@ literal|"Unable to access SolrServer"
 operator|+
 name|config
 operator|.
-name|getSolrServerUrl
+name|getSolrServerLocation
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1152,7 +1226,7 @@ literal|"Unable to initialize SolrServer"
 operator|+
 name|config
 operator|.
-name|getSolrServerUrl
+name|getSolrServerLocation
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1284,10 +1358,27 @@ argument_list|,
 name|config
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|solrServerProviderManager
+operator|==
+literal|null
+condition|)
+block|{
+comment|//not within an OSGI environment
+name|solrServerProviderManager
+operator|=
+name|SolrServerProviderManager
+operator|.
+name|getInstance
+argument_list|()
+expr_stmt|;
+block|}
 name|server
 operator|=
-operator|new
-name|CommonsHttpSolrServer
+name|solrServerProviderManager
+operator|.
+name|getSolrServer
 argument_list|(
 operator|(
 operator|(
@@ -1298,7 +1389,22 @@ operator|.
 name|config
 operator|)
 operator|.
-name|getSolrServerUrl
+name|getSolrServerType
+argument_list|()
+argument_list|,
+operator|(
+operator|(
+name|SolrYardConfig
+operator|)
+name|this
+operator|.
+name|config
+operator|)
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|.
+name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1323,7 +1429,7 @@ literal|"Successful ping for SolrServer %s ( %d ms) Details: %s"
 argument_list|,
 name|config
 operator|.
-name|getSolrServerUrl
+name|getSolrServerLocation
 argument_list|()
 argument_list|,
 name|pingResponse
@@ -1499,7 +1605,7 @@ operator|.
 name|config
 operator|)
 operator|.
-name|getSolrServerUrl
+name|getSolrServerLocation
 argument_list|()
 argument_list|)
 argument_list|,
@@ -1532,7 +1638,7 @@ operator|.
 name|config
 operator|)
 operator|.
-name|getSolrServerUrl
+name|getSolrServerLocation
 argument_list|()
 argument_list|)
 argument_list|,
@@ -2073,6 +2179,37 @@ parameter_list|)
 throws|throws
 name|YardException
 block|{
+if|if
+condition|(
+name|id
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed Representation id MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|id
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed Representation id MUST NOT be empty!"
+argument_list|)
+throw|;
+block|}
 name|SolrDocument
 name|doc
 decl_stmt|;
@@ -2571,6 +2708,37 @@ parameter_list|)
 throws|throws
 name|YardException
 block|{
+if|if
+condition|(
+name|id
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed Representation id MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|id
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed Representation id MUST NOT be empty!"
+argument_list|)
+throw|;
+block|}
 try|try
 block|{
 return|return
@@ -2732,6 +2900,37 @@ name|YardException
 throws|,
 name|IllegalArgumentException
 block|{
+if|if
+condition|(
+name|id
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed Representation id MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|id
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed Representation id MUST NOT be empty!"
+argument_list|)
+throw|;
+block|}
 try|try
 block|{
 name|server
@@ -2783,7 +2982,10 @@ name|e
 argument_list|)
 throw|;
 block|}
-comment|//TODO: maybe we need also to update all Documents that refer this ID
+comment|//NOTE: We do not need to update all Documents that refer this ID, because
+comment|//      only the representation of the Entity is deleted and not the
+comment|//      Entity itself. So even that we do no longer have an representation
+comment|//      the entity still exists and might be referenced by others!
 block|}
 annotation|@
 name|Override
@@ -2811,7 +3013,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed IDs MUST NOT be NULL"
 argument_list|)
@@ -2821,7 +3023,7 @@ name|List
 argument_list|<
 name|String
 argument_list|>
-name|remove
+name|toRemove
 init|=
 operator|new
 name|ArrayList
@@ -2843,9 +3045,15 @@ condition|(
 name|id
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|id
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
-name|remove
+name|toRemove
 operator|.
 name|add
 argument_list|(
@@ -2860,8 +3068,13 @@ name|server
 operator|.
 name|deleteById
 argument_list|(
-name|remove
+name|toRemove
 argument_list|)
+expr_stmt|;
+name|server
+operator|.
+name|commit
+argument_list|()
 expr_stmt|;
 block|}
 catch|catch
@@ -2896,7 +3109,10 @@ name|e
 argument_list|)
 throw|;
 block|}
-comment|//TODO: maybe we need also to update all Documents that refer this ID
+comment|//NOTE: We do not need to update all Documents that refer this ID, because
+comment|//      only the representation of the Entity is deleted and not the
+comment|//      Entity itself. So even that we do no longer have an representation
+comment|//      the entity still exists and might be referenced by others!
 block|}
 annotation|@
 name|Override
@@ -2942,9 +3158,13 @@ operator|==
 literal|null
 condition|)
 block|{
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed Representation MUST NOT be NULL!"
+argument_list|)
+throw|;
 block|}
 name|long
 name|start
@@ -3098,12 +3318,25 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed Representations MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
+name|Collection
+argument_list|<
+name|Representation
+argument_list|>
+name|added
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|Representation
+argument_list|>
+argument_list|()
+decl_stmt|;
 name|long
 name|start
 init|=
@@ -3112,14 +3345,14 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
-name|List
+name|Collection
 argument_list|<
 name|SolrInputDocument
 argument_list|>
 name|inputDocs
 init|=
 operator|new
-name|ArrayList
+name|HashSet
 argument_list|<
 name|SolrInputDocument
 argument_list|>
@@ -3148,6 +3381,13 @@ name|createSolrInputDocument
 argument_list|(
 name|representation
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|added
+operator|.
+name|add
+argument_list|(
+name|representation
 argument_list|)
 expr_stmt|;
 block|}
@@ -3245,7 +3485,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
-name|representations
+name|added
 return|;
 block|}
 comment|/**      * boost if present!      * @param representation      * @return      */
@@ -3659,6 +3899,10 @@ name|Representation
 name|representation
 parameter_list|)
 throws|throws
+name|IllegalArgumentException
+throws|,
+name|NullPointerException
+throws|,
 name|YardException
 block|{
 if|if
@@ -3668,9 +3912,13 @@ operator|==
 literal|null
 condition|)
 block|{
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed Representation MUST NOT be NULL!"
+argument_list|)
+throw|;
 block|}
 name|boolean
 name|found
@@ -3700,7 +3948,7 @@ else|else
 block|{
 throw|throw
 operator|new
-name|YardException
+name|IllegalArgumentException
 argument_list|(
 literal|"Parsed Representation "
 operator|+
@@ -3743,7 +3991,24 @@ throws|throws
 name|YardException
 throws|,
 name|IllegalArgumentException
+throws|,
+name|NullPointerException
 block|{
+if|if
+condition|(
+name|representations
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed Iterable over Representations MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
 name|long
 name|start
 init|=
@@ -3894,10 +4159,9 @@ block|{
 if|if
 condition|(
 name|representation
-operator|==
+operator|!=
 literal|null
-operator|||
-operator|!
+operator|&&
 name|ids
 operator|.
 name|contains
@@ -3910,18 +4174,6 @@ argument_list|)
 condition|)
 block|{
 comment|//null parsed or not already present
-name|updated
-operator|.
-name|add
-argument_list|(
-literal|null
-argument_list|)
-expr_stmt|;
-comment|//we need to add null values to the output
-block|}
-else|else
-block|{
-comment|//present in the yard -> perform the update
 name|inputDocs
 operator|.
 name|add
@@ -3949,6 +4201,15 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+operator|!
+name|inputDocs
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 try|try
 block|{
 name|server
@@ -3996,6 +4257,7 @@ name|e
 argument_list|)
 throw|;
 block|}
+block|}
 name|long
 name|ready
 init|=
@@ -4006,17 +4268,25 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
 name|String
 operator|.
 name|format
 argument_list|(
-literal|"Processed updateRequest for %d documents (%d updated) in %dms (checked %dms|created %dms| stored%dms)"
+literal|"Processed updateRequest for %d documents (%d in index | %d updated) in %dms (checked %dms|created %dms| stored%dms)"
 argument_list|,
 name|numDocs
 argument_list|,
 name|ids
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|updated
+operator|.
+name|size
+argument_list|()
 argument_list|,
 name|ready
 operator|-
@@ -4327,12 +4597,19 @@ operator|++
 expr_stmt|;
 block|}
 block|}
-comment|//no more items or all boolean clauses used -> send a request
-name|num
-operator|=
-literal|0
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Get SolrDocuments for Query: "
+operator|+
+name|queryBuilder
+operator|.
+name|toString
+argument_list|()
+argument_list|)
 expr_stmt|;
-comment|//reset to 0
+comment|//no more items or all boolean clauses used -> send a request
 name|solrQuery
 operator|.
 name|setQuery
@@ -4350,6 +4627,7 @@ name|StringBuilder
 argument_list|()
 expr_stmt|;
 comment|// and a new StringBuilder
+comment|//set the number of results to the number of parsed IDs.
 name|solrQuery
 operator|.
 name|setRows
@@ -4357,6 +4635,11 @@ argument_list|(
 name|num
 argument_list|)
 expr_stmt|;
+name|num
+operator|=
+literal|0
+expr_stmt|;
+comment|//reset to 0
 name|QueryResponse
 name|queryResponse
 init|=

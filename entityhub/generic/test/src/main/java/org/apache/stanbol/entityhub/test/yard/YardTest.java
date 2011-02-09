@@ -155,6 +155,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|AfterClass
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -174,6 +184,7 @@ parameter_list|()
 function_decl|;
 comment|/**      * Stores all the IDs of Representations created by the create(..) methods.      * This collection is used to clean up the store after all the unit tests       * are executed.      */
 specifier|protected
+specifier|static
 name|Collection
 argument_list|<
 name|String
@@ -2740,26 +2751,6 @@ comment|//and that there are only these two values
 name|values
 operator|=
 literal|null
-expr_stmt|;
-block|}
-comment|/**      * This Method removes all Representations create via {@link #create()} or      * {@link #create(String, boolean)} from the tested {@link Yard}.      * It also removes all Representations there ID was manually added to the      * {@link #representationIds} list.      */
-annotation|@
-name|After
-specifier|public
-specifier|final
-name|void
-name|clearUpRepresentations
-parameter_list|()
-throws|throws
-name|YardException
-block|{
-name|getYard
-argument_list|()
-operator|.
-name|remove
-argument_list|(
-name|representationIds
-argument_list|)
 expr_stmt|;
 block|}
 block|}
