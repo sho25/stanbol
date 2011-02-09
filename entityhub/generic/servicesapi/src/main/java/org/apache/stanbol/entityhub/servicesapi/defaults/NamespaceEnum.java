@@ -59,14 +59,14 @@ name|entityhubModel
 argument_list|(
 literal|"entityhub"
 argument_list|,
-literal|"http://www.iks-project.eu/ontology/entityhub/model/"
+literal|"http://www.iks-project.eu/ontology/rick/model/"
 argument_list|)
 block|,
 name|entityhubQuery
 argument_list|(
 literal|"entityhub-query"
 argument_list|,
-literal|"http://www.iks-project.eu/ontology/entityhub/query/"
+literal|"http://www.iks-project.eu/ontology/rick/query/"
 argument_list|)
 block|,
 comment|//First the XML Namespaces
