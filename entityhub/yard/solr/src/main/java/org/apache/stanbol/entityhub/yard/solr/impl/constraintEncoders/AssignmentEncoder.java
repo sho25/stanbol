@@ -339,11 +339,9 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|eqConstraint
-operator|=
-name|EQ
-operator|+
-operator|(
+name|String
+name|escapedValue
+init|=
 name|SolrUtil
 operator|.
 name|escapeSolrSpecialChars
@@ -353,7 +351,21 @@ operator|.
 name|getValue
 argument_list|()
 argument_list|)
-operator|)
+decl_stmt|;
+comment|//now we need to replace spaces with '+' because only than the query
+comment|//is treated as EQUALS by solr
+name|eqConstraint
+operator|=
+name|EQ
+operator|+
+name|escapedValue
+operator|.
+name|replace
+argument_list|(
+literal|' '
+argument_list|,
+literal|'+'
+argument_list|)
 expr_stmt|;
 block|}
 name|constraint

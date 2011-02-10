@@ -1771,16 +1771,10 @@ operator|new
 name|TextConstraint
 argument_list|(
 name|name
-operator|.
-name|replace
-argument_list|(
-literal|' '
-argument_list|,
-literal|'+'
-argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//name.replace(' ', '+')));
 if|if
 condition|(
 name|OntologicalClasses
