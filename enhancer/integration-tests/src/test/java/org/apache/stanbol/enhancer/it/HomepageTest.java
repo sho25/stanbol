@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Test the enhancer homepage and demonstrate the test classes */
+comment|/** Test the enhancer homepage and demonstrate the test classes.  *  Does not inherit from EnhancerTestBase as we don't care  *  at this stage if engines are ready or not.  */
 end_comment
 
 begin_class
