@@ -145,6 +145,22 @@ name|ShutdownHookProcessDestroyer
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|exec
+operator|.
+name|util
+operator|.
+name|StringUtils
+import|;
+end_import
+
 begin_comment
 comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  */
 end_comment
@@ -679,13 +695,31 @@ operator|>
 literal|0
 condition|)
 block|{
+comment|// TODO: this will fail if one of the vm options as a quoted value with a space in it, but this is
+comment|// not the case for common usage patterns
+for|for
+control|(
+name|String
+name|option
+range|:
+name|StringUtils
+operator|.
+name|split
+argument_list|(
+name|vmOptions
+argument_list|,
+literal|" "
+argument_list|)
+control|)
+block|{
 name|cl
 operator|.
 name|addArgument
 argument_list|(
-name|vmOptions
+name|option
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 name|cl
 operator|.
