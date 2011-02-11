@@ -553,6 +553,36 @@ name|client
 expr_stmt|;
 block|}
 specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+if|if
+condition|(
+name|request
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|"Request"
+return|;
+block|}
+return|return
+name|request
+operator|.
+name|getMethod
+argument_list|()
+operator|+
+literal|" request to "
+operator|+
+name|request
+operator|.
+name|getURI
+argument_list|()
+return|;
+block|}
+specifier|public
 name|RequestExecutor
 name|execute
 parameter_list|(
@@ -728,12 +758,19 @@ parameter_list|)
 block|{
 name|assertNotNull
 argument_list|(
+name|this
+operator|.
+name|toString
+argument_list|()
+argument_list|,
 name|response
 argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"Expecting status "
+name|this
+operator|+
+literal|": expecting status "
 operator|+
 name|expected
 argument_list|,
@@ -763,6 +800,11 @@ parameter_list|)
 block|{
 name|assertNotNull
 argument_list|(
+name|this
+operator|.
+name|toString
+argument_list|()
+argument_list|,
 name|response
 argument_list|)
 expr_stmt|;
@@ -775,13 +817,17 @@ condition|)
 block|{
 name|fail
 argument_list|(
-literal|"No entity in response, cannot check content type"
+name|this
+operator|+
+literal|": no entity in response, cannot check content type"
 argument_list|)
 expr_stmt|;
 block|}
 name|assertEquals
 argument_list|(
-literal|"Expecting content type "
+name|this
+operator|+
+literal|": expecting content type "
 operator|+
 name|expected
 argument_list|,
@@ -812,6 +858,11 @@ parameter_list|)
 block|{
 name|assertNotNull
 argument_list|(
+name|this
+operator|.
+name|toString
+argument_list|()
+argument_list|,
 name|response
 argument_list|)
 expr_stmt|;
@@ -891,7 +942,9 @@ block|}
 block|}
 name|fail
 argument_list|(
-literal|"No match for regexp '"
+name|this
+operator|+
+literal|": no match for regexp '"
 operator|+
 name|expr
 operator|+
@@ -921,6 +974,11 @@ name|IOException
 block|{
 name|assertNotNull
 argument_list|(
+name|this
+operator|.
+name|toString
+argument_list|()
+argument_list|,
 name|response
 argument_list|)
 expr_stmt|;
@@ -945,7 +1003,9 @@ condition|)
 block|{
 name|fail
 argument_list|(
-literal|"Content does not contain '"
+name|this
+operator|+
+literal|": content does not contain '"
 operator|+
 name|exp
 operator|+
