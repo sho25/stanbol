@@ -161,11 +161,17 @@ name|org
 operator|.
 name|apache
 operator|.
-name|commons
+name|clerezza
 operator|.
-name|io
+name|rdf
 operator|.
-name|IOUtils
+name|core
+operator|.
+name|impl
+operator|.
+name|util
+operator|.
+name|W3CDateFormat
 import|;
 end_import
 
@@ -175,15 +181,11 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|commons
 operator|.
-name|enhancer
+name|io
 operator|.
-name|jersey
-operator|.
-name|writers
-operator|.
-name|JsonLdSerializerProvider
+name|IOUtils
 import|;
 end_import
 
@@ -299,6 +301,10 @@ name|String
 name|formatIdentifier
 init|=
 literal|"application/json"
+decl_stmt|;
+specifier|private
+name|String
+name|expectedW3CFormattedDate
 decl_stmt|;
 annotation|@
 name|Before
@@ -430,7 +436,13 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@\":\"<urn:iks-project:enhancer:test:text-annotation:Person>\",\"a\":[\"<http:\\/\\/fise.iks-project.eu\\/ontology\\/Enhancement>\",\"<http:\\/\\/fise.iks-project.eu\\/ontology\\/TextAnnotation>\"],\"http:\\/\\/fise.iks-project.eu\\/ontology\\/end\":\"\\\"20\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\"http:\\/\\/fise.iks-project.eu\\/ontology\\/selected-text\":\"\\\"Patrick Marshall\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\"http:\\/\\/fise.iks-project.eu\\/ontology\\/selection-context\":\"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\"http:\\/\\/fise.iks-project.eu\\/ontology\\/start\":\"\\\"4\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\"http:\\/\\/purl.org\\/dc\\/terms\\/created\":\"\\\"2010-10-27T14:00:00+02:00\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#dateTime>\",\"http:\\/\\/purl.org\\/dc\\/terms\\/creator\":\"<urn:iks-project:enhancer:test:dummyEngine>\",\"http:\\/\\/purl.org\\/dc\\/terms\\/type\":\"<http:\\/\\/dbpedia.org\\/ontology\\/Person>\"}"
+literal|"{\"@\":\"<urn:iks-project:enhancer:test:text-annotation:Person>\",\"a\":[\"<http:\\/\\/fise.iks-project.eu\\/ontology\\/Enhancement>\",\"<http:\\/\\/fise.iks-project.eu\\/ontology\\/TextAnnotation>\"],\"http:\\/\\/fise.iks-project.eu\\/ontology\\/end\":\"\\\"20\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\"http:\\/\\/fise.iks-project.eu\\/ontology\\/selected-text\":\"\\\"Patrick Marshall\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\"http:\\/\\/fise.iks-project.eu\\/ontology\\/selection-context\":\"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\"http:\\/\\/fise.iks-project.eu\\/ontology\\/start\":\"\\\"4\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\"http:\\/\\/purl.org\\/dc\\/terms\\/created\":\"\\\""
+operator|+
+name|this
+operator|.
+name|expectedW3CFormattedDate
+operator|+
+literal|"\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#dateTime>\",\"http:\\/\\/purl.org\\/dc\\/terms\\/creator\":\"<urn:iks-project:enhancer:test:dummyEngine>\",\"http:\\/\\/purl.org\\/dc\\/terms\\/type\":\"<http:\\/\\/dbpedia.org\\/ontology\\/Person>\"}"
 decl_stmt|;
 name|String
 name|result
@@ -511,7 +523,13 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n  \"@\": \"<urn:iks-project:enhancer:test:text-annotation:Person>\",\n  \"a\": [\n    \"<http:\\/\\/fise.iks-project.eu\\/ontology\\/Enhancement>\",\n    \"<http:\\/\\/fise.iks-project.eu\\/ontology\\/TextAnnotation>\"\n  ],\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/end\": \"\\\"20\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/selected-text\": \"\\\"Patrick Marshall\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/selection-context\": \"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/start\": \"\\\"4\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\n  \"http:\\/\\/purl.org\\/dc\\/terms\\/created\": \"\\\"2010-10-27T14:00:00+02:00\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#dateTime>\",\n  \"http:\\/\\/purl.org\\/dc\\/terms\\/creator\": \"<urn:iks-project:enhancer:test:dummyEngine>\",\n  \"http:\\/\\/purl.org\\/dc\\/terms\\/type\": \"<http:\\/\\/dbpedia.org\\/ontology\\/Person>\"\n}"
+literal|"{\n  \"@\": \"<urn:iks-project:enhancer:test:text-annotation:Person>\",\n  \"a\": [\n    \"<http:\\/\\/fise.iks-project.eu\\/ontology\\/Enhancement>\",\n    \"<http:\\/\\/fise.iks-project.eu\\/ontology\\/TextAnnotation>\"\n  ],\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/end\": \"\\\"20\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/selected-text\": \"\\\"Patrick Marshall\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/selection-context\": \"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string>\",\n  \"http:\\/\\/fise.iks-project.eu\\/ontology\\/start\": \"\\\"4\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#int>\",\n  \"http:\\/\\/purl.org\\/dc\\/terms\\/created\": \"\\\""
+operator|+
+name|this
+operator|.
+name|expectedW3CFormattedDate
+operator|+
+literal|"\\\"^^<http:\\/\\/www.w3.org\\/2001\\/XMLSchema#dateTime>\",\n  \"http:\\/\\/purl.org\\/dc\\/terms\\/creator\": \"<urn:iks-project:enhancer:test:dummyEngine>\",\n  \"http:\\/\\/purl.org\\/dc\\/terms\\/type\": \"<http:\\/\\/dbpedia.org\\/ontology\\/Person>\"\n}"
 decl_stmt|;
 name|String
 name|result
@@ -659,7 +677,13 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"#\":{\"dbpedia\":\"http:\\/\\/dbpedia.org\\/ontology\\/\",\"dcterms\":\"http:\\/\\/purl.org\\/dc\\/terms\",\"enhancer\":\"http:\\/\\/fise.iks-project.eu\\/ontology\\/\",\"xmlns\":\"http:\\/\\/www.w3.org\\/2001\\/XMLSchema#\"},\"@\":\"<urn:iks-project:enhancer:test:text-annotation:Person>\",\"a\":[\"<enhancer:Enhancement>\",\"<enhancer:TextAnnotation>\"],\"dcterms:\\/created\":\"\\\"2010-10-27T14:00:00+02:00\\\"^^<xmlns:dateTime>\",\"dcterms:\\/creator\":\"<urn:iks-project:enhancer:test:dummyEngine>\",\"dcterms:\\/type\":\"<dbpedia:Person>\",\"enhancer:end\":\"\\\"20\\\"^^<xmlns:int>\",\"enhancer:selected-text\":\"\\\"Patrick Marshall\\\"^^<xmlns:string>\",\"enhancer:selection-context\":\"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<xmlns:string>\",\"enhancer:start\":\"\\\"4\\\"^^<xmlns:int>\"}"
+literal|"{\"#\":{\"dbpedia\":\"http:\\/\\/dbpedia.org\\/ontology\\/\",\"dcterms\":\"http:\\/\\/purl.org\\/dc\\/terms\",\"enhancer\":\"http:\\/\\/fise.iks-project.eu\\/ontology\\/\",\"xmlns\":\"http:\\/\\/www.w3.org\\/2001\\/XMLSchema#\"},\"@\":\"<urn:iks-project:enhancer:test:text-annotation:Person>\",\"a\":[\"<enhancer:Enhancement>\",\"<enhancer:TextAnnotation>\"],\"dcterms:\\/created\":\"\\\""
+operator|+
+name|this
+operator|.
+name|expectedW3CFormattedDate
+operator|+
+literal|"\\\"^^<xmlns:dateTime>\",\"dcterms:\\/creator\":\"<urn:iks-project:enhancer:test:dummyEngine>\",\"dcterms:\\/type\":\"<dbpedia:Person>\",\"enhancer:end\":\"\\\"20\\\"^^<xmlns:int>\",\"enhancer:selected-text\":\"\\\"Patrick Marshall\\\"^^<xmlns:string>\",\"enhancer:selection-context\":\"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<xmlns:string>\",\"enhancer:start\":\"\\\"4\\\"^^<xmlns:int>\"}"
 decl_stmt|;
 name|String
 name|result
@@ -807,7 +831,13 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n    \"#\": {\n        \"dbpedia\": \"http:\\/\\/dbpedia.org\\/ontology\\/\",\n        \"dcterms\": \"http:\\/\\/purl.org\\/dc\\/terms\",\n        \"enhancer\": \"http:\\/\\/fise.iks-project.eu\\/ontology\\/\",\n        \"xmlns\": \"http:\\/\\/www.w3.org\\/2001\\/XMLSchema#\"\n    },\n    \"@\": \"<urn:iks-project:enhancer:test:text-annotation:Person>\",\n    \"a\": [\n        \"<enhancer:Enhancement>\",\n        \"<enhancer:TextAnnotation>\"\n    ],\n    \"dcterms:\\/created\": \"\\\"2010-10-27T14:00:00+02:00\\\"^^<xmlns:dateTime>\",\n    \"dcterms:\\/creator\": \"<urn:iks-project:enhancer:test:dummyEngine>\",\n    \"dcterms:\\/type\": \"<dbpedia:Person>\",\n    \"enhancer:end\": \"\\\"20\\\"^^<xmlns:int>\",\n    \"enhancer:selected-text\": \"\\\"Patrick Marshall\\\"^^<xmlns:string>\",\n    \"enhancer:selection-context\": \"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<xmlns:string>\",\n    \"enhancer:start\": \"\\\"4\\\"^^<xmlns:int>\"\n}"
+literal|"{\n    \"#\": {\n        \"dbpedia\": \"http:\\/\\/dbpedia.org\\/ontology\\/\",\n        \"dcterms\": \"http:\\/\\/purl.org\\/dc\\/terms\",\n        \"enhancer\": \"http:\\/\\/fise.iks-project.eu\\/ontology\\/\",\n        \"xmlns\": \"http:\\/\\/www.w3.org\\/2001\\/XMLSchema#\"\n    },\n    \"@\": \"<urn:iks-project:enhancer:test:text-annotation:Person>\",\n    \"a\": [\n        \"<enhancer:Enhancement>\",\n        \"<enhancer:TextAnnotation>\"\n    ],\n    \"dcterms:\\/created\": \"\\\""
+operator|+
+name|this
+operator|.
+name|expectedW3CFormattedDate
+operator|+
+literal|"\\\"^^<xmlns:dateTime>\",\n    \"dcterms:\\/creator\": \"<urn:iks-project:enhancer:test:dummyEngine>\",\n    \"dcterms:\\/type\": \"<dbpedia:Person>\",\n    \"enhancer:end\": \"\\\"20\\\"^^<xmlns:int>\",\n    \"enhancer:selected-text\": \"\\\"Patrick Marshall\\\"^^<xmlns:string>\",\n    \"enhancer:selection-context\": \"\\\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\\\"^^<xmlns:string>\",\n    \"enhancer:start\": \"\\\"4\\\"^^<xmlns:int>\"\n}"
 decl_stmt|;
 name|String
 name|result
@@ -1043,6 +1073,22 @@ expr_stmt|;
 name|testAnnotation
 operator|.
 name|setCreated
+argument_list|(
+name|myCal
+operator|.
+name|getTime
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|expectedW3CFormattedDate
+operator|=
+operator|new
+name|W3CDateFormat
+argument_list|()
+operator|.
+name|format
 argument_list|(
 name|myCal
 operator|.
