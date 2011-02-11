@@ -1036,7 +1036,7 @@ name|TimeZone
 operator|.
 name|getTimeZone
 argument_list|(
-literal|"Germany/Berlin"
+literal|"UTC"
 argument_list|)
 argument_list|)
 expr_stmt|;
