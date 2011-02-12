@@ -198,6 +198,25 @@ block|{
 comment|//TODO: Use toLoverCase here, because I had problems with Solr that
 comment|//     Queries where not converted to lower case even that the
 comment|//     LowerCaseFilterFactory was present in the query analyser :(
+name|value
+operator|=
+name|value
+operator|.
+name|toLowerCase
+argument_list|()
+expr_stmt|;
+comment|/* NOTE:              *   When searching for multiple words we assume that we need to find              *   the exact pattern e.g. "best pract*" because of that we replace              *   spaces with '+'              */
+name|value
+operator|=
+name|value
+operator|.
+name|replace
+argument_list|(
+literal|' '
+argument_list|,
+literal|'+'
+argument_list|)
+expr_stmt|;
 name|constraint
 operator|.
 name|addEncoded
@@ -205,9 +224,6 @@ argument_list|(
 name|POS
 argument_list|,
 name|value
-operator|.
-name|toLowerCase
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
