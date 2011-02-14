@@ -141,6 +141,20 @@ name|commons
 operator|.
 name|exec
 operator|.
+name|PumpStreamHandler
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|exec
+operator|.
 name|ShutdownHookProcessDestroyer
 import|;
 end_import
@@ -757,6 +771,15 @@ argument_list|(
 literal|"Executing "
 operator|+
 name|cl
+argument_list|)
+expr_stmt|;
+name|e
+operator|.
+name|setStreamHandler
+argument_list|(
+operator|new
+name|PumpStreamHandler
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|e
