@@ -205,8 +205,6 @@ literal|"org.apache.stanbol.*OpenCalaisEngine"
 argument_list|,
 literal|"org.apache.stanbol.*EntityMentionEnhancementEngine"
 argument_list|,
-literal|"org.apache.stanbol.*LocationEnhancementEngine"
-argument_list|,
 literal|"org.apache.stanbol.*RelatedTopicEnhancementEngine"
 argument_list|,
 literal|"org.apache.stanbol.*CachingDereferencerEngine"

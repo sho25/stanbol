@@ -117,8 +117,6 @@ literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
-literal|"http://purl.org/dc/terms/creator.*LocationEnhancementEngine"
-argument_list|,
 literal|"http://fise.iks-project.eu/ontology/entity-label.*Paris"
 argument_list|,
 literal|"http://purl.org/dc/terms/creator.*NamedEntityExtractionEnhancementEngine"
