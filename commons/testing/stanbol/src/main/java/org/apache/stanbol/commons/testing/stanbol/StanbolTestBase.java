@@ -283,23 +283,22 @@ name|KEEP_JAR_RUNNING_PROP
 init|=
 literal|"keepJarRunning"
 decl_stmt|;
-specifier|private
-specifier|static
-name|boolean
-name|serverReady
-decl_stmt|;
 specifier|protected
 specifier|static
 name|String
 name|serverBaseUrl
 decl_stmt|;
 specifier|protected
-specifier|static
+name|boolean
+name|serverReady
+init|=
+literal|false
+decl_stmt|;
+specifier|protected
 name|RequestBuilder
 name|builder
 decl_stmt|;
 specifier|protected
-specifier|static
 name|DefaultHttpClient
 name|httpClient
 init|=
@@ -308,7 +307,6 @@ name|DefaultHttpClient
 argument_list|()
 decl_stmt|;
 specifier|protected
-specifier|static
 name|RequestExecutor
 name|executor
 init|=
@@ -321,6 +319,7 @@ decl_stmt|;
 annotation|@
 name|BeforeClass
 specifier|public
+specifier|synchronized
 specifier|static
 name|void
 name|startRunnableJar
@@ -328,6 +327,16 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+if|if
+condition|(
+name|serverBaseUrl
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// concurrent initialization
+return|return;
+block|}
 specifier|final
 name|String
 name|configuredUrl
@@ -394,6 +403,15 @@ operator|.
 name|getServerPort
 argument_list|()
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Forked subprocess server listening to: "
+operator|+
+name|serverBaseUrl
+argument_list|)
+expr_stmt|;
 comment|// Optionally block here so that the runnable jar stays up - we can
 comment|// then run tests against it from another VM
 if|if
@@ -437,14 +455,6 @@ expr_stmt|;
 block|}
 block|}
 block|}
-name|builder
-operator|=
-operator|new
-name|RequestBuilder
-argument_list|(
-name|serverBaseUrl
-argument_list|)
-expr_stmt|;
 block|}
 annotation|@
 name|Before
@@ -455,6 +465,29 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+comment|// initialize instance request builder and HTTP client
+name|builder
+operator|=
+operator|new
+name|RequestBuilder
+argument_list|(
+name|serverBaseUrl
+argument_list|)
+expr_stmt|;
+name|httpClient
+operator|=
+operator|new
+name|DefaultHttpClient
+argument_list|()
+expr_stmt|;
+name|executor
+operator|=
+operator|new
+name|RequestExecutor
+argument_list|(
+name|httpClient
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|serverReady
@@ -604,7 +637,7 @@ comment|// that matches the regexp supplied with the path
 name|long
 name|sleepTime
 init|=
-literal|50
+literal|100
 decl_stmt|;
 name|readyLoop
 label|:
@@ -635,7 +668,7 @@ name|Math
 operator|.
 name|min
 argument_list|(
-literal|2000L
+literal|5000L
 argument_list|,
 name|sleepTime
 operator|*
