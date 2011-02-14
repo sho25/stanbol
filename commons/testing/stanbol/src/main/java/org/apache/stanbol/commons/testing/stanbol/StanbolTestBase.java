@@ -207,6 +207,26 @@ name|BeforeClass
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/** Base class for Stanbol integration tests - starts the runnable jar  *  to test if needed, and waits until server is ready before executing  *  the tests.  */
 end_comment
@@ -216,6 +236,21 @@ specifier|public
 class|class
 name|StanbolTestBase
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|StanbolTestBase
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -315,15 +350,13 @@ name|serverBaseUrl
 operator|=
 name|configuredUrl
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 name|TEST_SERVER_URL_PROP
 operator|+
-literal|" is set, not starting server jar ("
+literal|" is set: not starting server jar ("
 operator|+
 name|serverBaseUrl
 operator|+
@@ -378,11 +411,9 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 name|KEEP_JAR_RUNNING_PROP
 operator|+
@@ -431,7 +462,7 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// Timeout for readyness test
+comment|// Timeout for readiness test
 specifier|final
 name|String
 name|sec
@@ -460,11 +491,9 @@ argument_list|(
 name|sec
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Will wait up to "
 operator|+
@@ -725,14 +754,12 @@ if|if
 condition|(
 name|status
 operator|!=
-literal|200
+literal|1000
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Got "
 operator|+
@@ -742,7 +769,7 @@ literal|" at "
 operator|+
 name|url
 operator|+
-literal|", will retry"
+literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
@@ -763,17 +790,15 @@ operator|==
 literal|null
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"No entity returned for "
 operator|+
 name|url
 operator|+
-literal|", will retry"
+literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
@@ -802,11 +827,9 @@ name|substring
 argument_list|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Returned content for "
 operator|+
@@ -816,7 +839,7 @@ literal|" does not contain "
 operator|+
 name|substring
 operator|+
-literal|", will retry"
+literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
@@ -831,17 +854,15 @@ name|HttpHostConnectException
 name|e
 parameter_list|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Got HttpHostConnectException at "
 operator|+
 name|url
 operator|+
-literal|", will retry"
+literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
@@ -857,10 +878,12 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|entity
+name|EntityUtils
 operator|.
-name|consumeContent
-argument_list|()
+name|consume
+argument_list|(
+name|entity
+argument_list|)
 expr_stmt|;
 block|}
 block|}
@@ -869,11 +892,9 @@ name|serverReady
 operator|=
 literal|true
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Got expected content for all configured requests, server is ready"
 argument_list|)
