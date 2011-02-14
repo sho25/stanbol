@@ -754,7 +754,7 @@ if|if
 condition|(
 name|status
 operator|!=
-literal|1000
+literal|200
 condition|)
 block|{
 name|log
@@ -878,12 +878,10 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|EntityUtils
-operator|.
-name|consume
-argument_list|(
 name|entity
-argument_list|)
+operator|.
+name|consumeContent
+argument_list|()
 expr_stmt|;
 block|}
 block|}
