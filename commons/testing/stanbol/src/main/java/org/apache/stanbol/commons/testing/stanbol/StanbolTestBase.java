@@ -334,7 +334,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// concurrent initialization
+comment|// concurrent initialization by loading subclasses
 return|return;
 block|}
 specifier|final
