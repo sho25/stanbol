@@ -75,6 +75,26 @@ name|Before
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/** Inherit from this to wait for all default enhancement   *  engines to be up before running tests.  */
 end_comment
@@ -86,6 +106,19 @@ name|EnhancerTestBase
 extends|extends
 name|StanbolTestBase
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|// TODO configurable via system properties??
 specifier|public
 specifier|static
@@ -210,12 +243,9 @@ argument_list|,
 literal|"org.apache.stanbol.*CachingDereferencerEngine"
 argument_list|)
 expr_stmt|;
-comment|// TODO use a log
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Enhancement engines checked, all present"
 argument_list|)
@@ -257,12 +287,9 @@ name|Throwable
 name|t
 parameter_list|)
 block|{
-comment|// TODO use a log??
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Exception in RetryLoop, will retry for up to "
 operator|+
