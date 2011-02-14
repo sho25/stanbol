@@ -175,6 +175,26 @@ name|StringUtils
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  */
 end_comment
@@ -203,6 +223,19 @@ specifier|private
 specifier|final
 name|int
 name|serverPort
+decl_stmt|;
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
@@ -633,10 +666,14 @@ name|ExecuteException
 name|ex
 parameter_list|)
 block|{
-name|info
+name|log
+operator|.
+name|error
 argument_list|(
 literal|"Process execution failed:"
 operator|+
+name|ex
+argument_list|,
 name|ex
 argument_list|)
 expr_stmt|;
@@ -651,6 +688,8 @@ name|int
 name|result
 parameter_list|)
 block|{
+name|log
+operator|.
 name|info
 argument_list|(
 literal|"Process execution complete, exit code="
@@ -766,6 +805,8 @@ name|serverPort
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
 name|info
 argument_list|(
 literal|"Executing "
@@ -798,32 +839,6 @@ argument_list|(
 name|cl
 argument_list|,
 name|h
-argument_list|)
-expr_stmt|;
-block|}
-specifier|protected
-name|void
-name|info
-parameter_list|(
-name|String
-name|msg
-parameter_list|)
-block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|": "
-operator|+
-name|msg
 argument_list|)
 expr_stmt|;
 block|}
