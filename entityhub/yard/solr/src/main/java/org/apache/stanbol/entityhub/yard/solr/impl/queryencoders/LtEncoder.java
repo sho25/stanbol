@@ -19,7 +19,7 @@ name|solr
 operator|.
 name|impl
 operator|.
-name|constraintencoders
+name|queryencoders
 package|;
 end_package
 
@@ -188,7 +188,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|GtEncoder
+name|LtEncoder
 implements|implements
 name|IndexConstraintTypeEncoder
 argument_list|<
@@ -208,7 +208,7 @@ name|PositionType
 operator|.
 name|value
 argument_list|,
-literal|1
+literal|2
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -224,7 +224,7 @@ name|IndexValueFactory
 name|indexValueFactory
 decl_stmt|;
 specifier|public
-name|GtEncoder
+name|LtEncoder
 parameter_list|(
 name|IndexValueFactory
 name|indexValueFactory
@@ -316,7 +316,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"{%s "
+literal|"TO %s}"
 argument_list|,
 name|indexValue
 operator|!=
@@ -333,9 +333,6 @@ operator|!
 name|indexValue
 operator|.
 name|getValue
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 operator|.
 name|isEmpty
@@ -387,11 +384,7 @@ name|asList
 argument_list|(
 name|IndexConstraintTypeEnum
 operator|.
-name|EQ
-argument_list|,
-name|IndexConstraintTypeEnum
-operator|.
-name|LT
+name|GT
 argument_list|)
 return|;
 block|}
@@ -405,7 +398,7 @@ block|{
 return|return
 name|IndexConstraintTypeEnum
 operator|.
-name|GT
+name|LT
 return|;
 block|}
 annotation|@
