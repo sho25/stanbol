@@ -19,7 +19,7 @@ name|solr
 operator|.
 name|impl
 operator|.
-name|constraintEncoders
+name|constraintencoders
 package|;
 end_package
 
@@ -264,22 +264,9 @@ operator|.
 name|suffux
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|IndexDataType
-name|STRING_DATATYPE
-init|=
-operator|new
-name|IndexDataType
-argument_list|(
-name|NamespaceEnum
-operator|.
-name|xsd
-operator|+
-literal|"string"
-argument_list|)
-decl_stmt|;
+comment|//deactivated, because xsd:string values are now also included in the language
+comment|//merger field (the name returned by fieldMapper.getLanguageMergerField(null)).
+comment|//private static final IndexDataType STRING_DATATYPE =  new IndexDataType(NamespaceEnum.xsd+"string");
 specifier|private
 name|FieldMapper
 name|fieldMapper
@@ -380,81 +367,13 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|String
-index|[]
-name|prefixSuffix
-init|=
-name|fieldMapper
-operator|.
-name|encodeDataType
-argument_list|(
-name|STRING_DATATYPE
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|prefixSuffix
-index|[
-literal|0
-index|]
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|prefixSuffix
-index|[
-literal|0
-index|]
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-name|constraint
-operator|.
-name|addEncoded
-argument_list|(
-name|PREFIX
-argument_list|,
-name|prefixSuffix
-index|[
-literal|0
-index|]
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|prefixSuffix
-index|[
-literal|1
-index|]
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|prefixSuffix
-index|[
-literal|1
-index|]
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-name|constraint
-operator|.
-name|addEncoded
-argument_list|(
-name|SUFFIX
-argument_list|,
-name|prefixSuffix
-index|[
-literal|1
-index|]
-argument_list|)
-expr_stmt|;
-block|}
+comment|//            String[] prefixSuffix = fieldMapper.encodeDataType(STRING_DATATYPE);
+comment|//            if(prefixSuffix[0] != null&& !prefixSuffix[0].isEmpty()){
+comment|//                constraint.addEncoded(PREFIX, prefixSuffix[0]);
+comment|//            }
+comment|//            if(prefixSuffix[1] != null&& !prefixSuffix[1].isEmpty()){
+comment|//                constraint.addEncoded(SUFFIX, prefixSuffix[1]);
+comment|//            }
 block|}
 block|}
 annotation|@

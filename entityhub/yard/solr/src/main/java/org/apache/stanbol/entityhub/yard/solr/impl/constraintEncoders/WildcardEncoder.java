@@ -19,7 +19,7 @@ name|solr
 operator|.
 name|impl
 operator|.
-name|constraintEncoders
+name|constraintencoders
 package|;
 end_package
 
