@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific languageType governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -344,9 +344,11 @@ argument_list|,
 name|Text
 operator|.
 name|class
+argument_list|,
+literal|true
 argument_list|)
 block|,
-comment|//no type prefix, but typically language prefixes
+comment|//no type prefix, but typically languageType prefixes
 name|STR
 argument_list|(
 name|NamespaceEnum
@@ -360,9 +362,11 @@ argument_list|,
 name|String
 operator|.
 name|class
+argument_list|,
+literal|true
 argument_list|)
 block|,
-comment|//string values (not used for language)
+comment|//string values (not used for languageType)
 name|ID
 argument_list|(
 name|NamespaceEnum
@@ -397,6 +401,11 @@ specifier|private
 name|String
 name|suffix
 decl_stmt|;
+comment|/**      * if true, values of this dataType should be treated as natural languageType       * texts and added to the {@link SolrConst#LANG_MERGER_FIELD}       */
+specifier|private
+name|boolean
+name|languageType
+decl_stmt|;
 specifier|private
 name|IndexDataTypeEnum
 parameter_list|(
@@ -422,6 +431,41 @@ argument_list|,
 literal|null
 argument_list|,
 name|type
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|IndexDataTypeEnum
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|String
+name|prefix
+parameter_list|,
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|type
+parameter_list|,
+name|boolean
+name|language
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|name
+argument_list|,
+name|prefix
+argument_list|,
+literal|null
+argument_list|,
+name|type
+argument_list|,
+name|language
 argument_list|)
 expr_stmt|;
 block|}
@@ -442,6 +486,9 @@ argument_list|<
 name|?
 argument_list|>
 name|type
+parameter_list|,
+name|boolean
+name|language
 parameter_list|)
 block|{
 name|this
@@ -471,6 +518,12 @@ operator|.
 name|javaType
 operator|=
 name|type
+expr_stmt|;
+name|this
+operator|.
+name|languageType
+operator|=
+name|language
 expr_stmt|;
 block|}
 comment|/**      * The prefix to be used for index fields of that type      * @return the prefix      */
@@ -515,6 +568,16 @@ parameter_list|()
 block|{
 return|return
 name|javaType
+return|;
+block|}
+comment|/**      * Returns<code>true</code> if values of this dataType should be included      * in searches for natural language texts. This means that such values are      * added to the {@link SolrConst#LANG_MERGER_FIELD}       * @return the languageType      */
+specifier|public
+name|boolean
+name|isLanguageType
+parameter_list|()
+block|{
+return|return
+name|languageType
 return|;
 block|}
 comment|/*--------------------------------------------------------------------------      * Code that reads the config and inits lookup tables (also checks config)      * --------------------------------------------------------------------------      */
