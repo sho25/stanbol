@@ -2921,10 +2921,13 @@ name|source
 argument_list|)
 condition|)
 block|{
+comment|//add if !resummode or the representation is not yet in the yard
 if|if
 condition|(
+operator|!
 name|resumeMode
-operator|&&
+operator|||
+operator|!
 name|yard
 operator|.
 name|isRepresentation
@@ -2936,7 +2939,6 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//resume mode check
 comment|//log.info("S<source Resource:\n"+ModelUtils.getRepresentationInfo(source));
 name|indexed
 operator|++
@@ -4164,9 +4166,37 @@ name|InputStream
 name|is
 parameter_list|,
 name|String
-name|name
+name|parsedName
 parameter_list|)
 block|{
+name|String
+name|name
+init|=
+name|parsedName
+decl_stmt|;
+if|if
+condition|(
+name|name
+operator|.
+name|startsWith
+argument_list|(
+literal|"."
+argument_list|)
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"> Ignore hidden file "
+operator|+
+name|parsedName
+operator|+
+literal|"!"
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 if|if
 condition|(
 name|name
@@ -4299,6 +4329,24 @@ comment|//        } else {// XML is the default format
 comment|//            format = Lang.RDFXML;
 comment|//        }
 comment|//For N-Triple we can use the TDBLoader
+if|if
+condition|(
+name|format
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"> ignore File with unknown extension "
+operator|+
+name|parsedName
+argument_list|)
+expr_stmt|;
+block|}
+elseif|else
 if|if
 condition|(
 name|format
@@ -4689,7 +4737,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Write BaseMappings for geonames.org Cache"
+literal|"Write BaseMappings for Cache"
 argument_list|)
 expr_stmt|;
 if|if

@@ -229,6 +229,12 @@ argument_list|,
 literal|"http://purl.org/goodrelations/v1#"
 argument_list|)
 block|,
+name|swrc
+argument_list|(
+literal|"http://swrc.ontoware.org/ontology#"
+argument_list|)
+block|,
+comment|//The Semantic Web for Research Communities Ontology
 comment|//Linked Data Ontologies
 name|dbpediaOnt
 argument_list|(
