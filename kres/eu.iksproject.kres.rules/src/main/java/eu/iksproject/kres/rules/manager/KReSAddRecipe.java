@@ -2584,7 +2584,7 @@ literal|true
 expr_stmt|;
 block|}
 comment|//Add single rule
-comment|/*               * BUGFIX - previously the check was done on rules.size()-1.              *               */
+comment|/*               * BUGFIX - previously the check was done on rules.size()-1.              * The right code is rules.size(). Moreover is need also a control "if(r+1>(rules.size()-1)) break;" because the last rule has not successive rules.              *               */
 for|for
 control|(
 name|int
@@ -2662,6 +2662,22 @@ operator|=
 literal|true
 expr_stmt|;
 comment|//Add precedes
+if|if
+condition|(
+name|r
+operator|+
+literal|1
+operator|>
+operator|(
+name|rules
+operator|.
+name|size
+argument_list|()
+operator|-
+literal|1
+operator|)
+condition|)
+break|break;
 name|OWLNamedIndividual
 name|indf
 init|=
