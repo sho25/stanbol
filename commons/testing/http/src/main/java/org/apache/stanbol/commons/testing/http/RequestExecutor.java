@@ -295,6 +295,22 @@ name|http
 operator|.
 name|client
 operator|.
+name|params
+operator|.
+name|ClientPNames
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|http
+operator|.
+name|client
+operator|.
 name|protocol
 operator|.
 name|ClientContext
@@ -604,6 +620,7 @@ operator|.
 name|getRequest
 argument_list|()
 expr_stmt|;
+comment|// Optionally setup for basic authentication
 if|if
 condition|(
 name|r
@@ -614,7 +631,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// Setup for basic authentication
 name|httpClient
 operator|.
 name|getCredentialsProvider
@@ -680,6 +696,25 @@ name|class
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Setup redirects
+name|httpClient
+operator|.
+name|getParams
+argument_list|()
+operator|.
+name|setBooleanParameter
+argument_list|(
+name|ClientPNames
+operator|.
+name|HANDLE_REDIRECTS
+argument_list|,
+name|r
+operator|.
+name|getRedirects
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|// Execute request
 name|response
 operator|=
 name|httpClient
