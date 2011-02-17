@@ -777,7 +777,7 @@ name|getObjectPropertyValues
 argument_list|(
 name|objectProperty
 argument_list|,
-name|ontology
+name|recipeModel
 argument_list|)
 decl_stmt|;
 name|String
@@ -823,7 +823,7 @@ name|getDataPropertyValues
 argument_list|(
 name|hasBodyAndHead
 argument_list|,
-name|ontology
+name|recipeModel
 argument_list|)
 decl_stmt|;
 for|for
