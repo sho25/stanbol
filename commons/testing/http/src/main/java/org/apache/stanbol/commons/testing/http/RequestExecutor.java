@@ -1103,6 +1103,7 @@ return|return
 name|entity
 return|;
 block|}
+specifier|public
 name|String
 name|getContent
 parameter_list|()
