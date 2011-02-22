@@ -253,26 +253,6 @@ name|enhancer
 operator|.
 name|engines
 operator|.
-name|autotagging
-operator|.
-name|impl
-operator|.
-name|ConfiguredAutotaggerProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|engines
-operator|.
 name|opennlp
 operator|.
 name|impl
@@ -426,7 +406,7 @@ specifier|final
 name|String
 name|SINGLE_SENTENCE
 init|=
-literal|"Dr. Patrick Marshall (1869 - November 1950) was a"
+literal|"Dr Patrick Marshall (1869 - November 1950) was a"
 operator|+
 literal|" geologist who lived in New Zealand and worked at the University of Otago."
 decl_stmt|;
@@ -483,17 +463,6 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|properties
-operator|.
-name|put
-argument_list|(
-name|ConfiguredAutotaggerProvider
-operator|.
-name|LUCENE_INDEX_PATH
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
 name|MockComponentContext
 name|context
 init|=
@@ -748,7 +717,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|0.98
+literal|0.998
 argument_list|,
 name|firstOccurrence
 operator|.
@@ -802,7 +771,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|0.97
+literal|0.85
 argument_list|,
 name|secondOccurrence
 operator|.
