@@ -834,7 +834,7 @@ specifier|final
 name|int
 name|DEFAULT_MAX_LOCATION_ENHANCEMENTS
 init|=
-literal|5
+literal|3
 decl_stmt|;
 annotation|@
 name|Property
@@ -1977,6 +1977,22 @@ argument_list|(
 name|GEONAMES_TOKEN
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"create Geonames Client for server: %s and user: %s (token not logged)"
+argument_list|,
+name|serverUrl
+argument_list|,
+name|userName
+argument_list|)
+argument_list|)
+expr_stmt|;
 name|geonamesService
 operator|=
 operator|new
