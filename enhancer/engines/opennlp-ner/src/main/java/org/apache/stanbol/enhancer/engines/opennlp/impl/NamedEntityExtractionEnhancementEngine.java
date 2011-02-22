@@ -1945,7 +1945,39 @@ expr_stmt|;
 name|String
 index|[]
 name|sentences
-init|=
+decl_stmt|;
+if|if
+condition|(
+name|sentenceEndings
+operator|.
+name|length
+operator|<
+literal|1
+condition|)
+block|{
+comment|//STANBOL-60: if no sentence is detected treat the whole text as
+comment|//one sentence.
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"No sentence detected -> use whole text as one element"
+argument_list|)
+expr_stmt|;
+name|sentences
+operator|=
+operator|new
+name|String
+index|[]
+block|{
+name|text
+block|}
+expr_stmt|;
+block|}
+else|else
+block|{
+name|sentences
+operator|=
 operator|new
 name|String
 index|[
@@ -1953,7 +1985,7 @@ name|sentenceEndings
 operator|.
 name|length
 index|]
-decl_stmt|;
+expr_stmt|;
 for|for
 control|(
 name|int
@@ -2031,6 +2063,7 @@ name|i
 index|]
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 name|NameFinderME
 name|finder
