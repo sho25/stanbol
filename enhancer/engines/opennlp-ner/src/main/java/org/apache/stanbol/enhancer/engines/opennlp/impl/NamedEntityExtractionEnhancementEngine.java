@@ -678,7 +678,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Apache Stanbol Enhancer Named Entity Recognition enhancement engine based on opennlp's Maximum Entropy  * models and a DBpedia index for optionally matching them to well know DBpedia entities.  */
+comment|/**  * Apache Stanbol Enhancer Named Entity Recognition enhancement engine based on opennlp's Maximum Entropy  * models.  */
 end_comment
 
 begin_class
@@ -692,6 +692,14 @@ argument_list|,
 name|metatype
 operator|=
 literal|true
+argument_list|,
+name|label
+operator|=
+literal|"%stanbol.NamedEntityExtractionEnhancementEngine.name"
+argument_list|,
+name|description
+operator|=
+literal|"%stanbol.NamedEntityExtractionEnhancementEngine.description"
 argument_list|)
 annotation|@
 name|Service
@@ -728,7 +736,7 @@ specifier|final
 name|String
 name|MODELS_PATH
 init|=
-literal|"org.apache.stanbol.enhancer.engines.opennlp.models.path"
+literal|"stanbol.opennlp.models.path"
 decl_stmt|;
 specifier|public
 specifier|static
