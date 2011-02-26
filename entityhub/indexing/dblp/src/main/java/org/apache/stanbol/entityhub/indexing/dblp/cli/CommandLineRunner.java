@@ -1020,6 +1020,19 @@ argument_list|,
 literal|"resume a previous canceled indexing session (usually used with -s)"
 argument_list|)
 expr_stmt|;
+name|options
+operator|.
+name|addOption
+argument_list|(
+literal|"my"
+argument_list|,
+literal|"multiYardLayout"
+argument_list|,
+literal|false
+argument_list|,
+literal|"If present the multi yard layout is used by the SolrYard"
+argument_list|)
+expr_stmt|;
 block|}
 specifier|private
 specifier|static
@@ -1242,6 +1255,24 @@ name|getUri
 argument_list|()
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|line
+operator|.
+name|hasOption
+argument_list|(
+literal|"my"
+argument_list|)
+condition|)
+block|{
+name|yardConfig
+operator|.
+name|setMultiYardIndexLayout
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 comment|//increase the boost for fields that are usually used as labels
 name|yardConfig
 operator|.

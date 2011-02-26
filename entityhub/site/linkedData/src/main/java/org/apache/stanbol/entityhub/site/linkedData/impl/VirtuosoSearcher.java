@@ -365,11 +365,11 @@ name|Component
 argument_list|(
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.VirtuosoSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcher"
 argument_list|,
 name|factory
 operator|=
-literal|"org.apache.stanbol.entityhub.site.VirtuosoSearcherFactory"
+literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcherFactory"
 argument_list|,
 name|policy
 operator|=

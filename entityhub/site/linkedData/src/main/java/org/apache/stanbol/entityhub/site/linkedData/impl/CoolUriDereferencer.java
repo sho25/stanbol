@@ -283,11 +283,11 @@ name|Component
 argument_list|(
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.CoolUriDereferencer"
+literal|"org.apache.stanbol.entityhub.dereferencer.CoolUriDereferencer"
 argument_list|,
 name|factory
 operator|=
-literal|"org.apache.stanbol.entityhub.site.CoolUriDereferencerFactory"
+literal|"org.apache.stanbol.entityhub.dereferencer.CoolUriDereferencerFactory"
 argument_list|,
 name|policy
 operator|=

@@ -1030,7 +1030,7 @@ literal|".option.sparql"
 argument_list|,
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.SparqlDereferencer"
+literal|"org.apache.stanbol.entityhub.dereferencer.SparqlDereferencer"
 argument_list|)
 block|,                 @
 name|PropertyOption
@@ -1047,13 +1047,13 @@ literal|".option.coolUri"
 argument_list|,
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.CoolUriDereferencer"
+literal|"org.apache.stanbol.entityhub.dereferencer.CoolUriDereferencer"
 argument_list|)
 block|}
 argument_list|,
 name|value
 operator|=
-literal|"org.apache.stanbol.entityhub.site.SparqlDereferencer"
+literal|"org.apache.stanbol.entityhub.dereferencer.SparqlDereferencer"
 argument_list|)
 block|,         @
 name|Property
@@ -1113,7 +1113,7 @@ literal|".option.sparql"
 argument_list|,
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.SparqlSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|)
 block|,                 @
 name|PropertyOption
@@ -1130,7 +1130,7 @@ literal|".option.sparql-virtuoso"
 argument_list|,
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.VirtuosoSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcher"
 argument_list|)
 block|,                 @
 name|PropertyOption
@@ -1147,13 +1147,13 @@ literal|".option.sparql-larq"
 argument_list|,
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.LarqSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.LarqSearcher"
 argument_list|)
 block|}
 argument_list|,
 name|value
 operator|=
-literal|"org.apache.stanbol.entityhub.site.VirtuosoSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcher"
 argument_list|)
 block|,         @
 name|Property
@@ -1215,7 +1215,7 @@ name|name
 operator|=
 name|ConfiguredSite
 operator|.
-name|DEFAULT_MAPEED_ENTITY_STATE
+name|DEFAULT_MAPPING_STATE
 argument_list|,
 name|options
 operator|=
@@ -1228,7 +1228,7 @@ literal|'%'
 operator|+
 name|ConfiguredSite
 operator|.
-name|DEFAULT_MAPEED_ENTITY_STATE
+name|DEFAULT_MAPPING_STATE
 operator|+
 literal|".option.proposed"
 argument_list|,
@@ -1245,7 +1245,7 @@ literal|'%'
 operator|+
 name|ConfiguredSite
 operator|.
-name|DEFAULT_MAPEED_ENTITY_STATE
+name|DEFAULT_MAPPING_STATE
 operator|+
 literal|".option.confirmed"
 argument_list|,
@@ -1755,7 +1755,7 @@ name|properties
 operator|.
 name|get
 argument_list|(
-name|DEFAULT_MAPEED_ENTITY_STATE
+name|DEFAULT_MAPPING_STATE
 argument_list|)
 decl_stmt|;
 if|if
@@ -1801,7 +1801,7 @@ name|warn
 argument_list|(
 literal|"Configuration "
 operator|+
-name|DEFAULT_MAPEED_ENTITY_STATE
+name|DEFAULT_MAPPING_STATE
 operator|+
 literal|"="
 operator|+
@@ -4751,7 +4751,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Ignore ServceEvent for ComponentFactory %s and state %s"
+literal|"Ignore ServiceEvent for ComponentFactory %s and state %s"
 argument_list|,
 name|eventComponentName
 argument_list|,

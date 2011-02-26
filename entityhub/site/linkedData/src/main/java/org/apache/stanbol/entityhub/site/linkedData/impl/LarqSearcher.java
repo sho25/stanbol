@@ -365,11 +365,11 @@ name|Component
 argument_list|(
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.LarqSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.LarqSearcher"
 argument_list|,
 name|factory
 operator|=
-literal|"org.apache.stanbol.entityhub.site.LarqSearcherFactory"
+literal|"org.apache.stanbol.entityhub.searcher.LarqSearcherFactory"
 argument_list|,
 name|policy
 operator|=

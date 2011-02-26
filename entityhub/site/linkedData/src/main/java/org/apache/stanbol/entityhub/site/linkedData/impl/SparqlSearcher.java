@@ -427,11 +427,11 @@ name|Component
 argument_list|(
 name|name
 operator|=
-literal|"org.apache.stanbol.entityhub.site.SparqlSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|,
 name|factory
 operator|=
-literal|"org.apache.stanbol.entityhub.site.SparqlSearcherFactory"
+literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcherFactory"
 argument_list|,
 name|policy
 operator|=

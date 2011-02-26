@@ -248,7 +248,7 @@ parameter_list|()
 function_decl|;
 comment|/**      * Key used for the configuration of the default {@link EntityMapping} state      * ({@link EntityMapping.MappingState} for a site      */
 name|String
-name|DEFAULT_MAPEED_ENTITY_STATE
+name|DEFAULT_MAPPING_STATE
 init|=
 literal|"org.apache.stanbol.entityhub.site.defaultMappedEntityState"
 decl_stmt|;
