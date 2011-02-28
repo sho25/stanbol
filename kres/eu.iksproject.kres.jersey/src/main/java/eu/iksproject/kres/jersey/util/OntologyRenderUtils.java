@@ -337,9 +337,9 @@ name|kres
 operator|.
 name|api
 operator|.
-name|format
+name|manager
 operator|.
-name|KReSFormat
+name|KReSONManager
 import|;
 end_import
 
@@ -351,11 +351,11 @@ name|iksproject
 operator|.
 name|kres
 operator|.
-name|api
+name|jersey
 operator|.
-name|manager
+name|format
 operator|.
-name|KReSONManager
+name|KReSFormat
 import|;
 end_import
 

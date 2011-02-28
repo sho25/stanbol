@@ -15,29 +15,15 @@ end_package
 
 begin_import
 import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Context
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|osgi
+name|semanticweb
 operator|.
-name|service
+name|owlapi
 operator|.
-name|component
+name|model
 operator|.
-name|ComponentContext
+name|OWLDataFactory
 import|;
 end_import
 
@@ -51,7 +37,7 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLDataFactory
+name|OWLOntologyAlreadyExistsException
 import|;
 end_import
 

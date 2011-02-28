@@ -189,7 +189,7 @@ name|iksproject
 operator|.
 name|kres
 operator|.
-name|api
+name|jersey
 operator|.
 name|format
 operator|.
