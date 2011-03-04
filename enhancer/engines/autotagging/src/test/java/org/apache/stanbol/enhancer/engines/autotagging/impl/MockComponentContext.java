@@ -343,6 +343,11 @@ parameter_list|,
 name|Object
 name|service
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"rawtypes"
+argument_list|)
 name|Dictionary
 name|properties
 parameter_list|)
@@ -364,6 +369,11 @@ parameter_list|,
 name|Object
 name|service
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"rawtypes"
+argument_list|)
 name|Dictionary
 name|properties
 parameter_list|)
