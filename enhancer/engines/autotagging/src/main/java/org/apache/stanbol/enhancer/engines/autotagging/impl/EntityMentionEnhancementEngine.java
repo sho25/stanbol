@@ -873,27 +873,10 @@ operator|==
 literal|null
 condition|)
 block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unable to process TextAnnotation "
-operator|+
-name|textAnnotation
-operator|+
-literal|" because property"
-operator|+
-name|ENHANCER_SELECTION_CONTEXT
-operator|+
-literal|" is not present"
-argument_list|)
+name|context
+operator|=
+literal|""
 expr_stmt|;
-return|return
-name|Collections
-operator|.
-name|emptyList
-argument_list|()
-return|;
 block|}
 comment|// aggregate context from subsumed entries:
 for|for
@@ -1003,6 +986,9 @@ argument_list|(
 name|name
 argument_list|,
 name|context
+operator|.
+name|trim
+argument_list|()
 argument_list|,
 name|type
 operator|.
