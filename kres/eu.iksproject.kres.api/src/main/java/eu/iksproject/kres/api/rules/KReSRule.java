@@ -176,6 +176,37 @@ name|String
 name|toKReSSyntax
 parameter_list|()
 function_decl|;
+comment|/** 	 * If the variable forwardChain is set true than the forward chain mechanism is ebled for that rule. 	 * @return {@link boolean}. 	 */
+specifier|public
+name|boolean
+name|isForwardChain
+parameter_list|()
+function_decl|;
+specifier|public
+name|boolean
+name|isSPARQLConstruct
+parameter_list|()
+function_decl|;
+specifier|public
+name|boolean
+name|isSPARQLDelete
+parameter_list|()
+function_decl|;
+specifier|public
+name|boolean
+name|isSPARQLDeleteData
+parameter_list|()
+function_decl|;
+specifier|public
+name|boolean
+name|isReflexive
+parameter_list|()
+function_decl|;
+specifier|public
+name|KReSRuleExpressiveness
+name|getExpressiveness
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
