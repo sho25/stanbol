@@ -228,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Base class for Stanbol integration tests - starts the runnable jar  *  to test if needed, and waits until server is ready before executing  *  the tests.  */
+comment|/**  * Base class for Stanbol integration tests - starts the runnable jar  * to test if needed, and waits until server is ready before executing  * the tests.  */
 end_comment
 
 begin_class
@@ -236,21 +236,6 @@ specifier|public
 class|class
 name|StanbolTestBase
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|StanbolTestBase
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -288,6 +273,21 @@ specifier|static
 name|String
 name|serverBaseUrl
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|StanbolTestBase
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|protected
 name|boolean
 name|serverReady
@@ -319,8 +319,8 @@ decl_stmt|;
 annotation|@
 name|BeforeClass
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|void
 name|startRunnableJar
 parameter_list|()
@@ -743,11 +743,6 @@ argument_list|(
 name|url
 argument_list|)
 decl_stmt|;
-name|HttpResponse
-name|response
-init|=
-literal|null
-decl_stmt|;
 name|HttpEntity
 name|entity
 init|=
@@ -755,15 +750,16 @@ literal|null
 decl_stmt|;
 try|try
 block|{
+name|HttpResponse
 name|response
-operator|=
+init|=
 name|httpClient
 operator|.
 name|execute
 argument_list|(
 name|get
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|entity
 operator|=
 name|response

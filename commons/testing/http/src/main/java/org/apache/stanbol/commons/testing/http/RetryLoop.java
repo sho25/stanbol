@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Convenience class for retrying tests  *  until timeout or success.  */
+comment|/**  * Convenience class for retrying tests  * until timeout or success.  */
 end_comment
 
 begin_class
@@ -45,18 +45,18 @@ specifier|final
 name|long
 name|timeout
 decl_stmt|;
-comment|/** Interface for conditions to check, isTrue will be called      *  repeatedly until success or timeout */
-specifier|static
+comment|/**      * Interface for conditions to check, isTrue will be called      * repeatedly until success or timeout      */
 specifier|public
+specifier|static
 interface|interface
 name|Condition
 block|{
-comment|/** Used in failure messages to describe what was expected */
+comment|/**          * Used in failure messages to describe what was expected          */
 name|String
 name|getDescription
 parameter_list|()
 function_decl|;
-comment|/** If true we stop retrying. The RetryLoop retries on AssertionError,           *  so if tests fail in this method they are not reported as           *  failures but retried.          */
+comment|/**          * If true we stop retrying. The RetryLoop retries on AssertionError,          * so if tests fail in this method they are not reported as          * failures but retried.          */
 name|boolean
 name|isTrue
 parameter_list|()
@@ -64,7 +64,7 @@ throws|throws
 name|Exception
 function_decl|;
 block|}
-comment|/** Retry Condition c until it returns true or timeout. See {@link Condition}      *  for isTrue semantics.      */
+comment|/**      * Retry Condition c until it returns true or timeout. See {@link Condition}      * for isTrue semantics.      */
 specifier|public
 name|RetryLoop
 parameter_list|(
@@ -172,7 +172,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Can be overridden to report Exceptions that happen in the retry loop */
+comment|/**      * Can be overridden to report Exceptions that happen in the retry loop      */
 specifier|protected
 name|void
 name|reportException
@@ -181,7 +181,7 @@ name|Throwable
 name|t
 parameter_list|)
 block|{     }
-comment|/** Called if the loop times out without success, just before failing */
+comment|/**      * Called if the loop times out without success, just before failing      */
 specifier|protected
 name|void
 name|onTimeout

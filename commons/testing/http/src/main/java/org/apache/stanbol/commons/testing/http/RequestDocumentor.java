@@ -118,7 +118,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Generate RESTful API documentation based on actual requests  *  executed during integration tests, enhanced with user-supplied  *  bits of documentation.   */
+comment|/**  * Generate RESTful API documentation based on actual requests  * executed during integration tests, enhanced with user-supplied  * bits of documentation.  */
 end_comment
 
 begin_class

@@ -196,7 +196,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Start a runnable jar by forking a JVM process,  *  and terminate the process when this VM exits.  */
+comment|/**  * Start a runnable jar by forking a JVM process,  * and terminate the process when this VM exits.  */
 end_comment
 
 begin_class
@@ -397,7 +397,7 @@ return|return
 name|instance
 return|;
 block|}
-comment|/** Build a JarExecutor, locate the jar to run, etc */
+comment|/**      * Build a JarExecutor, locate the jar to run, etc      */
 specifier|private
 name|JarExecutor
 parameter_list|(
@@ -640,7 +640,7 @@ operator|=
 name|f
 expr_stmt|;
 block|}
-comment|/** Start the jar if not done yet, and setup runtime hook      *  to stop it.      */
+comment|/**      * Start the jar if not done yet, and setup runtime hook      * to stop it.      */
 specifier|public
 name|void
 name|start

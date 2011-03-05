@@ -130,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Convenience builder for Request objects */
+comment|/**  * Convenience builder for Request objects.  */
 end_comment
 
 begin_class
@@ -157,7 +157,7 @@ operator|=
 name|baseUrl
 expr_stmt|;
 block|}
-comment|/** Build a GET request to specified path with optional query      *  parameters. See {@link #buildUrl(String, String...)} for      *  queryParameters semantics.      */
+comment|/**      * Build a GET request to specified path with optional query      * parameters. See {@link #buildUrl(String, String...)} for      * queryParameters semantics.      */
 specifier|public
 name|Request
 name|buildGetRequest
@@ -187,7 +187,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Build a POST request to specified path with optional query      *  parameters. See {@link #buildUrl(String, String...)} for      *  queryParameters semantics.      */
+comment|/**      * Build a POST request to specified path with optional query      * parameters. See {@link #buildUrl(String, String...)} for      * queryParameters semantics.      */
 specifier|public
 name|Request
 name|buildPostRequest
@@ -211,7 +211,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Wrap supplied HTTP request */
+comment|/**      * Wrap supplied HTTP request      */
 specifier|public
 name|Request
 name|buildOtherRequest
@@ -228,7 +228,7 @@ name|r
 argument_list|)
 return|;
 block|}
-comment|/** Build an URL from our base path, supplied path and optional      *  query parameters.      *  @param queryParameters an even number of Strings, each pair      *  of values represents the key and value of a query parameter.      *  Keys and values are encoded by this method.      */
+comment|/**      * Build an URL from our base path, supplied path and optional      * query parameters.      *      * @param queryParameters an even number of Strings, each pair      * of values represents the key and value of a query parameter.      * Keys and values are encoded by this method.      */
 specifier|public
 name|String
 name|buildUrl

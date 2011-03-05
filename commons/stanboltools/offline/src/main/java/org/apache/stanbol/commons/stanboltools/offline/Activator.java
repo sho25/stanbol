@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Activator for the offline mnode bundle */
+comment|/**  * Activator for the offline mode bundle  */
 end_comment
 
 begin_class
@@ -110,8 +110,6 @@ decl_stmt|;
 specifier|private
 name|ServiceRegistration
 name|serviceReg
-init|=
-literal|null
 decl_stmt|;
 annotation|@
 name|Override

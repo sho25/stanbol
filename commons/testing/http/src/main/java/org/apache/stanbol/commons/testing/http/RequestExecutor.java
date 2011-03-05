@@ -392,7 +392,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Executes a Request and provides convenience methods  *  to validate the results.  */
+comment|/**  * Executes a Request and provides convenience methods  * to validate the results.  */
 end_comment
 
 begin_class
@@ -782,7 +782,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/** Verify that response matches supplied status */
+comment|/**      * Verify that response matches supplied status      */
 specifier|public
 name|RequestExecutor
 name|assertStatus
@@ -824,7 +824,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Verify that response matches supplied content type */
+comment|/**      * Verify that response matches supplied content type      */
 specifier|public
 name|RequestExecutor
 name|assertContentType
@@ -911,7 +911,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** For each supplied regexp, fail unless content contains at       *  least one line that matches.      *  Regexps are automatically prefixed/suffixed with .* so as      *  to have match partial lines.      */
+comment|/**      * For each supplied regexp, fail unless content contains at      * least one line that matches.      * Regexps are automatically prefixed/suffixed with .* so as      * to have match partial lines.      */
 specifier|public
 name|RequestExecutor
 name|assertContentRegexp
@@ -1023,7 +1023,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** For each supplied string, fail unless content contains it */
+comment|/**      * For each supplied string, fail unless content contains it      */
 specifier|public
 name|RequestExecutor
 name|assertContentContains
@@ -1034,8 +1034,6 @@ name|expected
 parameter_list|)
 throws|throws
 name|ParseException
-throws|,
-name|IOException
 block|{
 name|assertNotNull
 argument_list|(

@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Request class with convenience with... methods to   *  add headers, parameters etc.  */
+comment|/**  * Request class with convenience withXxx methods to  * add headers, parameters, etc.  */
 end_comment
 
 begin_class
@@ -270,8 +270,6 @@ parameter_list|(
 name|HttpEntity
 name|e
 parameter_list|)
-throws|throws
-name|UnsupportedEncodingException
 block|{
 name|getHttpEntityEnclosingRequestBase
 argument_list|()
