@@ -178,6 +178,7 @@ name|os
 operator|==
 literal|null
 condition|)
+block|{
 name|os
 operator|=
 name|connection
@@ -185,6 +186,7 @@ operator|.
 name|getOutputStream
 argument_list|()
 expr_stmt|;
+block|}
 block|}
 specifier|protected
 name|void
@@ -330,7 +332,7 @@ name|boundary
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a new multipart POST HTTP request on a freshly opened URLConnection    *    * @param connection an already open URL connection    * @throws IOException    */
+comment|/**      * Creates a new multipart POST HTTP request on a freshly opened URLConnection      *      * @param connection an already open URL connection      *      * @throws IOException      */
 specifier|public
 name|ClientHttpRequest
 parameter_list|(
@@ -430,7 +432,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a new multipart POST HTTP request for a specified URL    *    * @param url the URL to send request to    * @throws IOException    */
+comment|/**      * Creates a new multipart POST HTTP request for a specified URL      *      * @param url the URL to send request to      *      * @throws IOException      */
 specifier|public
 name|ClientHttpRequest
 parameter_list|(
@@ -449,7 +451,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a new multipart POST HTTP request for a specified URL string    *    * @param urlString the string representation of the URL to send request to    * @throws IOException    */
+comment|/**      * Creates a new multipart POST HTTP request for a specified URL string      *      * @param urlString the string representation of the URL to send request to      *      * @throws IOException      */
 specifier|public
 name|ClientHttpRequest
 parameter_list|(
@@ -579,7 +581,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * adds a cookie to the requst    * @param name cookie name    * @param value cookie value    * @throws IOException    */
+comment|/**      * Adds a cookie to the request.      *      * @param name cookie name      * @param value cookie value      *      * @throws IOException      */
 specifier|public
 name|void
 name|setCookie
@@ -603,7 +605,7 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * adds cookies to the request    * @param cookies the cookie "name-to-value" map    * @throws IOException    */
+comment|/**      * Adds cookies to the request.      *      * @param cookies the cookie "name-to-value" map      *      * @throws IOException      */
 specifier|public
 name|void
 name|setCookies
@@ -620,7 +622,9 @@ name|cookies
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
 name|this
 operator|.
 name|cookies
@@ -631,7 +635,7 @@ name|cookies
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * adds cookies to the request    * @param cookies array of cookie names and values (cookies[2*i] is a name, cookies[2*i + 1] is a value)    * @throws IOException    */
+comment|/**      * Adds cookies to the request.      *      * @param cookies array of cookie names and values (cookies[2*i] is a name, cookies[2*i + 1] is a value)      *      * @throws IOException      */
 specifier|public
 name|void
 name|setCookies
@@ -649,7 +653,9 @@ name|cookies
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
 for|for
 control|(
 name|int
@@ -716,7 +722,7 @@ literal|'"'
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * adds a string parameter to the request    * @param name parameter name    * @param value parameter value    * @throws IOException    */
+comment|/**      * Adds a string parameter to the request.      *      * @param name parameter name      * @param value parameter value      *      * @throws IOException      */
 specifier|public
 name|void
 name|setParameter
@@ -775,21 +781,21 @@ literal|500000
 index|]
 decl_stmt|;
 name|int
-name|nread
-decl_stmt|;
-name|int
 name|navailable
-decl_stmt|;
-name|int
-name|total
-init|=
-literal|0
 decl_stmt|;
 synchronized|synchronized
 init|(
 name|in
 init|)
 block|{
+name|int
+name|nread
+decl_stmt|;
+name|int
+name|total
+init|=
+literal|0
+decl_stmt|;
 while|while
 condition|(
 operator|(
@@ -839,7 +845,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**    * adds a file parameter to the request    * @param name parameter name    * @param filename the name of the file    * @param is input stream to read the contents of the file from    * @throws IOException    */
+comment|/**      * Adds a file parameter to the request.      *      * @param name parameter name      * @param filename the name of the file      * @param is input stream to read the contents of the file from      *      * @throws IOException      */
 specifier|public
 name|void
 name|setParameter
@@ -903,10 +909,12 @@ name|type
 operator|==
 literal|null
 condition|)
+block|{
 name|type
 operator|=
 literal|"application/octet-stream"
 expr_stmt|;
+block|}
 name|writeln
 argument_list|(
 name|type
@@ -926,7 +934,7 @@ name|newline
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * adds a file parameter to the request    * @param name parameter name    * @param file the file to upload    * @throws IOException    */
+comment|/**      * Adds a file parameter to the request.      *      * @param name parameter name      * @param file the file to upload      *      * @throws IOException      */
 specifier|public
 name|void
 name|setParameter
@@ -957,7 +965,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * adds a parameter to the request; if the parameter is a File, the file is uploaded, otherwise the string value of the parameter is passed in the request    * @param name parameter name    * @param object parameter value, a File or anything else that can be stringified    * @throws IOException    */
+comment|/**      * Adds a parameter to the request; if the parameter is a File, the file is uploaded,      * otherwise the string value of the parameter is passed in the request.      *      * @param name parameter name      * @param object parameter value, a File or anything else that can be stringified      *      * @throws IOException      */
 specifier|public
 name|void
 name|setParameter
@@ -1003,7 +1011,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * adds parameters to the request    * @param parameters "name-to-value" map of parameters; if a value is a file, the file is uploaded, otherwise it is stringified and sent in the request    * @throws IOException    */
+comment|/**      * Adds parameters to the request.      *      * @param parameters "name-to-value" map of parameters;      * if a value is a file, the file is uploaded, otherwise it is stringified and sent in the request      *      * @throws IOException      */
 specifier|public
 name|void
 name|setParameters
@@ -1020,7 +1028,9 @@ name|parameters
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
 for|for
 control|(
 name|Iterator
@@ -1074,7 +1084,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * adds parameters to the request    * @param parameters array of parameter names and values (parameters[2*i] is a name, parameters[2*i + 1] is a value); if a value is a file, the file is uploaded, otherwise it is stringified and sent in the request    * @throws IOException    */
+comment|/**      * Adds parameters to the request.      *      * @param parameters array of parameter names and values (parameters[2*i] is a name,      * parameters[2*i + 1] is a value); if a value is a file, the file is uploaded,      * otherwise it is stringified and sent in the request      *      * @throws IOException      */
 specifier|public
 name|void
 name|setParameters
@@ -1092,7 +1102,9 @@ name|parameters
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
 for|for
 control|(
 name|int
@@ -1133,7 +1145,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * posts the requests to the server, with all the cookies and parameters that were added    * @return input stream with the server response    * @throws IOException    */
+comment|/**      * Posts the requests to the server, with all the cookies and parameters that were added.      *      * @return input stream with the server response      *      * @throws IOException      */
 specifier|public
 name|InputStream
 name|post
@@ -1161,7 +1173,7 @@ name|getInputStream
 argument_list|()
 return|;
 block|}
-comment|/**    * posts the requests to the server, with all the cookies and parameters that were added before (if any), and with parameters that are passed in the argument    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setParameters    */
+comment|/**      * Posts the requests to the server, with all the cookies and parameters      * that were added before (if any), and with parameters that are passed in the argument.      *      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameters      */
 specifier|public
 name|InputStream
 name|post
@@ -1182,7 +1194,7 @@ name|post
 argument_list|()
 return|;
 block|}
-comment|/**    * posts the requests to the server, with all the cookies and parameters that were added before (if any), and with parameters that are passed in the argument    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setParameters    */
+comment|/**      * Posts the requests to the server, with all the cookies and parameters      * that were added before (if any), and with parameters that are passed in the argument.      *      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameters      */
 specifier|public
 name|InputStream
 name|post
@@ -1204,7 +1216,7 @@ name|post
 argument_list|()
 return|;
 block|}
-comment|/**    * posts the requests to the server, with all the cookies and parameters that were added before (if any), and with cookies and parameters that are passed in the arguments    * @param cookies request cookies    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setParameters    * @see setCookies    */
+comment|/**      * Posts the requests to the server, with all the cookies and parameters      * that were added before (if any), and with cookies and parameters that are passed in the arguments.      *      * @param cookies request cookies      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameters      * @see setCookies      */
 specifier|public
 name|InputStream
 name|post
@@ -1233,7 +1245,7 @@ name|post
 argument_list|()
 return|;
 block|}
-comment|/**    * posts the requests to the server, with all the cookies and parameters that were added before (if any), and with cookies and parameters that are passed in the arguments    * @param cookies request cookies    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setParameters    * @see setCookies    */
+comment|/**      * Posts the requests to the server, with all the cookies and parameters      * that were added before (if any), and with cookies and parameters that are passed in the arguments.      *      * @param cookies request cookies      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameters      * @see setCookies      */
 specifier|public
 name|InputStream
 name|post
@@ -1264,7 +1276,7 @@ name|post
 argument_list|()
 return|;
 block|}
-comment|/**    * post the POST request to the server, with the specified parameter    * @param name parameter name    * @param value parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to the server, with the specified parameter.      *      * @param name parameter name      * @param value parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 name|InputStream
 name|post
@@ -1290,7 +1302,7 @@ name|post
 argument_list|()
 return|;
 block|}
-comment|/**    * post the POST request to the server, with the specified parameters    * @param name1 first parameter name    * @param value1 first parameter value    * @param name2 second parameter name    * @param value2 second parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to the server, with the specified parameters.      *      * @param name1 first parameter name      * @param value1 first parameter value      * @param name2 second parameter name      * @param value2 second parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 name|InputStream
 name|post
@@ -1326,7 +1338,7 @@ name|value2
 argument_list|)
 return|;
 block|}
-comment|/**    * post the POST request to the server, with the specified parameters    * @param name1 first parameter name    * @param value1 first parameter value    * @param name2 second parameter name    * @param value2 second parameter value    * @param name3 third parameter name    * @param value3 third parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to the server, with the specified parameters.      *      * @param name1 first parameter name      * @param value1 first parameter value      * @param name2 second parameter name      * @param value2 second parameter value      * @param name3 third parameter name      * @param value3 third parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 name|InputStream
 name|post
@@ -1372,7 +1384,7 @@ name|value3
 argument_list|)
 return|;
 block|}
-comment|/**    * post the POST request to the server, with the specified parameters    * @param name1 first parameter name    * @param value1 first parameter value    * @param name2 second parameter name    * @param value2 second parameter value    * @param name3 third parameter name    * @param value3 third parameter value    * @param name4 fourth parameter name    * @param value4 fourth parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to the server, with the specified parameters.      *      * @param name1 first parameter name      * @param value1 first parameter value      * @param name2 second parameter name      * @param value2 second parameter value      * @param name3 third parameter name      * @param value3 third parameter value      * @param name4 fourth parameter name      * @param value4 fourth parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 name|InputStream
 name|post
@@ -1428,7 +1440,7 @@ name|value4
 argument_list|)
 return|;
 block|}
-comment|/**    * posts a new request to specified URL, with parameters that are passed in the argument    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setParameters    */
+comment|/**      * Posts a new request to specified URL, with parameters that are passed in the argument.      *      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameters      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1456,7 +1468,7 @@ name|parameters
 argument_list|)
 return|;
 block|}
-comment|/**    * posts a new request to specified URL, with parameters that are passed in the argument    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setParameters    */
+comment|/**      * Posts a new request to specified URL, with parameters that are passed in the argument.      *      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameters      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1485,7 +1497,7 @@ name|parameters
 argument_list|)
 return|;
 block|}
-comment|/**    * posts a new request to specified URL, with cookies and parameters that are passed in the argument    * @param cookies request cookies    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setCookies    * @see setParameters    */
+comment|/**      * Posts a new request to specified URL, with cookies and parameters that are passed in the argument.      *      * @param cookies request cookies      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setCookies      * @see setParameters      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1518,7 +1530,7 @@ name|parameters
 argument_list|)
 return|;
 block|}
-comment|/**    * posts a new request to specified URL, with cookies and parameters that are passed in the argument    * @param cookies request cookies    * @param parameters request parameters    * @return input stream with the server response    * @throws IOException    * @see setCookies    * @see setParameters    */
+comment|/**      * Posts a new request to specified URL, with cookies and parameters that are passed in the argument.      *      * @param cookies request cookies      * @param parameters request parameters      *      * @return input stream with the server response      *      * @throws IOException      * @see setCookies      * @see setParameters      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1553,7 +1565,7 @@ name|parameters
 argument_list|)
 return|;
 block|}
-comment|/**    * post the POST request specified URL, with the specified parameter    * @param name parameter name    * @param value parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request specified URL, with the specified parameter.      *      * @param name parameter name      * @param value parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1586,7 +1598,7 @@ name|value1
 argument_list|)
 return|;
 block|}
-comment|/**    * post the POST request to specified URL, with the specified parameters    * @param name1 first parameter name    * @param value1 first parameter value    * @param name2 second parameter name    * @param value2 second parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to specified URL, with the specified parameters.      *      * @param name1 first parameter name      * @param value1 first parameter value      * @param name2 second parameter name      * @param value2 second parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1629,7 +1641,7 @@ name|value2
 argument_list|)
 return|;
 block|}
-comment|/**    * post the POST request to specified URL, with the specified parameters    * @param name1 first parameter name    * @param value1 first parameter value    * @param name2 second parameter name    * @param value2 second parameter value    * @param name3 third parameter name    * @param value3 third parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to specified URL, with the specified parameters.      *      * @param name1 first parameter name      * @param value1 first parameter value      * @param name2 second parameter name      * @param value2 second parameter value      * @param name3 third parameter name      * @param value3 third parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 specifier|static
 name|InputStream
@@ -1682,7 +1694,7 @@ name|value3
 argument_list|)
 return|;
 block|}
-comment|/**    * post the POST request to specified URL, with the specified parameters    * @param name1 first parameter name    * @param value1 first parameter value    * @param name2 second parameter name    * @param value2 second parameter value    * @param name3 third parameter name    * @param value3 third parameter value    * @param name4 fourth parameter name    * @param value4 fourth parameter value    * @return input stream with the server response    * @throws IOException    * @see setParameter    */
+comment|/**      * Post the POST request to specified URL, with the specified parameters.      *      * @param name1 first parameter name      * @param value1 first parameter value      * @param name2 second parameter name      * @param value2 second parameter value      * @param name3 third parameter name      * @param value3 third parameter value      * @param name4 fourth parameter name      * @param value4 fourth parameter value      *      * @return input stream with the server response      *      * @throws IOException      * @see setParameter      */
 specifier|public
 specifier|static
 name|InputStream

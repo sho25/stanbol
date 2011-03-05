@@ -363,10 +363,14 @@ argument_list|()
 throw|;
 block|}
 else|else
+block|{
+block|{
 name|playbackInProgress
 operator|=
 literal|true
 expr_stmt|;
+block|}
+block|}
 block|}
 synchronized|synchronized
 init|(
@@ -402,8 +406,8 @@ name|getFrameSize
 argument_list|()
 decl_stmt|;
 name|byte
-name|buffer
 index|[]
+name|buffer
 init|=
 operator|new
 name|byte
@@ -548,7 +552,11 @@ if|if
 condition|(
 name|stopPlayback
 condition|)
+block|{
+block|{
 break|break;
+block|}
+block|}
 block|}
 block|}
 name|line

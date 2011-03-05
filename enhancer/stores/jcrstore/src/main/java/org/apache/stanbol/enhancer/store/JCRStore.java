@@ -484,13 +484,11 @@ name|id
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|ContentItem
-name|node
-decl_stmt|;
 try|try
 block|{
+name|ContentItem
 name|node
-operator|=
+init|=
 operator|new
 name|JCRContentItem
 argument_list|(
@@ -505,7 +503,7 @@ argument_list|,
 name|getParentNode
 argument_list|()
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 return|return
 name|node
 return|;
@@ -652,6 +650,8 @@ name|ContentItem
 name|ci
 parameter_list|)
 block|{
+try|try
+block|{
 name|byte
 index|[]
 name|bytes
@@ -665,11 +665,7 @@ decl_stmt|;
 comment|// ci.getStream();
 name|ContentItem
 name|result
-decl_stmt|;
-try|try
-block|{
-name|result
-operator|=
+init|=
 operator|new
 name|JCRContentItem
 argument_list|(
@@ -693,7 +689,7 @@ argument_list|,
 name|getParentNode
 argument_list|()
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 return|return
 name|result
 operator|.

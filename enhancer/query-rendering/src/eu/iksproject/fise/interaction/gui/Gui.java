@@ -2048,6 +2048,7 @@ argument_list|(
 name|uri
 argument_list|)
 condition|)
+block|{
 name|retVal
 operator|.
 name|add
@@ -2055,6 +2056,7 @@ argument_list|(
 name|uri
 argument_list|)
 expr_stmt|;
+block|}
 name|result
 operator|=
 name|result

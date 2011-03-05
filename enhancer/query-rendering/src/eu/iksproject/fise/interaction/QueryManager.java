@@ -624,11 +624,6 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|String
-name|resultText
-init|=
-literal|""
-decl_stmt|;
 comment|// Construct data
 name|String
 name|data
@@ -729,6 +724,11 @@ argument_list|)
 decl_stmt|;
 name|String
 name|line
+decl_stmt|;
+name|String
+name|resultText
+init|=
+literal|""
 decl_stmt|;
 while|while
 condition|(

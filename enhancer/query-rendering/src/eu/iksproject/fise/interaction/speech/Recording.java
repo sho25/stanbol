@@ -361,10 +361,12 @@ argument_list|()
 throw|;
 block|}
 else|else
+block|{
 name|recordingInProgress
 operator|=
 literal|true
 expr_stmt|;
+block|}
 block|}
 synchronized|synchronized
 init|(
@@ -416,8 +418,8 @@ name|getFrameSize
 argument_list|()
 decl_stmt|;
 name|byte
-name|buffer
 index|[]
+name|buffer
 init|=
 operator|new
 name|byte
@@ -520,7 +522,9 @@ if|if
 condition|(
 name|stopRecording
 condition|)
+block|{
 break|break;
+block|}
 block|}
 block|}
 do|while
