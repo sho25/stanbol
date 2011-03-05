@@ -735,8 +735,28 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * This class provides an interface to the OpenCalais service for Named Entity Recognition.   * It uses the OpenCalais REST service with the 'paramsXML' structures for passing  * parameters {@link http://www.opencalais.com/documentation/calais-web-service-api/api-invocation/rest-using-paramsxml)}.  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
+comment|/**  * This class provides an interface to the OpenCalais service for Named Entity Recognition.  * It uses the OpenCalais REST service with the 'paramsXML' structures for passing  * parameters {@link http://www.opencalais.com/documentation/calais-web-service-api/api-invocation/rest-using-paramsxml)}.  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -775,7 +795,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**    * This contains the directly supported MIME types of this enhancement engine. For handling other mime-types the plain text must be contained in the metadata as by Metaxa.    */
+comment|/**      * This contains the directly supported MIME types of this enhancement engine.      * For handling other mime-types the plain text must be contained in the metadata as by Metaxa.      */
 specifier|protected
 specifier|static
 specifier|final
@@ -799,7 +819,7 @@ literal|"text/html"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**    * This contains a list of languages supported by OpenCalais.    * If the metadata don't contain a value for the language as the value of the {@link Property.DC_LANG property}    * it is left to the grace of the OpenCalais whether it accepts the text.    * OpenCalais uses its own language identifcation anyway.    */
+comment|/**      * This contains a list of languages supported by OpenCalais.      * If the metadata don't contain a value for the language as the value of the {@link Property.DC_LANG property}      * it is left to the grace of the OpenCalais whether it accepts the text.      * OpenCalais uses its own language identifcation anyway.      */
 specifier|protected
 specifier|static
 specifier|final
@@ -825,7 +845,7 @@ literal|"es"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**    * The default value for the Execution of this Engine. Currently set to    * {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT} + 10. It should run after Metaxa and LangId.    */
+comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT} + 10. It should run after Metaxa and LangId.      */
 specifier|public
 specifier|static
 specifier|final
@@ -863,14 +883,14 @@ name|CALAIS_URL_KEY
 init|=
 literal|"org.apache.stanbol.enhancer.engines.opencalais.url"
 decl_stmt|;
-comment|/**    * the URL for the Calais REST Service    */
+comment|/**      * the URL for the Calais REST Service      */
 specifier|private
 name|String
 name|calaisUrl
 init|=
 literal|"http://api.opencalais.com/enlighten/rest/"
 decl_stmt|;
-comment|/**    * the license key from OpenCalais for using the service    */
+comment|/**      * the license key from OpenCalais for using the service      */
 specifier|private
 name|String
 name|licenseKey
@@ -965,7 +985,6 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * {@inheritDoc}    */
 specifier|public
 name|int
 name|canEnhance
@@ -1114,8 +1133,6 @@ name|filter
 argument_list|(
 name|subj
 argument_list|,
-name|Properties
-operator|.
 name|NIE_PLAINTEXTCONTENT
 argument_list|,
 literal|null
@@ -1138,7 +1155,6 @@ return|return
 name|CANNOT_ENHANCE
 return|;
 block|}
-comment|/**    * {@inheritDoc}    */
 specifier|public
 name|void
 name|computeEnhancements
@@ -1281,7 +1297,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * This generates enhancement structures for the entities from OpenCalais and adds them to the content item's metadata. For each entity a TextAnnotation and an EntityAnnotation are created. An EntityAnnotation can relate to several TextAnnotations.    *     * @param occs a Collection of entity information    * @param ci the content item    */
+comment|/**      * This generates enhancement structures for the entities from OpenCalais      * and adds them to the content item's metadata.      * For each entity a TextAnnotation and an EntityAnnotation are created.      * An EntityAnnotation can relate to several TextAnnotations.      *      * @param occs a Collection of entity information      * @param ci the content item      */
 specifier|public
 name|void
 name|createEnhancements
@@ -1359,8 +1375,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_TYPE
 argument_list|,
 name|occ
@@ -1378,8 +1392,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_SELECTED_TEXT
 argument_list|,
 name|occ
@@ -1397,8 +1409,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_START
 argument_list|,
 name|literalFactory
@@ -1421,8 +1431,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_END
 argument_list|,
 name|literalFactory
@@ -1449,8 +1457,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_SELECTED_TEXT
 argument_list|,
 name|occ
@@ -1468,8 +1474,6 @@ name|TripleImpl
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_SELECTION_CONTEXT
 argument_list|,
 name|literalFactory
@@ -1512,8 +1516,6 @@ operator|.
 name|id
 argument_list|)
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|textAnnotation
@@ -1555,8 +1557,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 name|textAnnotation
@@ -1572,8 +1572,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_LABEL
 argument_list|,
 name|occ
@@ -1591,8 +1589,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_TYPE
 argument_list|,
 name|occ
@@ -1610,8 +1606,6 @@ name|TripleImpl
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 name|occ
@@ -1623,7 +1617,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * This retrieves the annotations from OpenCalais as RDF/XML. From that an MGraph is created.    * @param text the text to send to OpenCalais    * @return an MGraph with all annotations    * @throws EngineException    */
+comment|/**      * This retrieves the annotations from OpenCalais as RDF/XML. From that an MGraph is created.      *      * @param text the text to send to OpenCalais      *      * @return an MGraph with all annotations      *      * @throws EngineException      */
 specifier|public
 name|MGraph
 name|getCalaisAnalysis
@@ -1865,7 +1859,7 @@ return|return
 name|model
 return|;
 block|}
-comment|/**    * This parses an InputStream of RDF data and produces an MGraph from them    * @param in The InputStream of RDF data    * @param format the format of the RDF data    * @return the resulting MGraph or null if the RDF serialization format is not supported by the parser    */
+comment|/**      * This parses an InputStream of RDF data and produces an MGraph from them      *      * @param in The InputStream of RDF data      * @param format the format of the RDF data      *      * @return the resulting MGraph or null if the RDF serialization format is not supported by the parser      */
 specifier|public
 name|MGraph
 name|readModel
@@ -1944,7 +1938,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * This extracts the relevant entity information from the Calais RDF data. The entities and the relted information is extracted by a Sparql query.    * @param model the MGraph representing the Calais data    * @return a Collection of entity information    */
+comment|/**      * This extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the MGraph representing the Calais data      *      * @return a Collection of entity information      */
 specifier|public
 name|Collection
 argument_list|<
@@ -2293,7 +2287,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * This sends a POST request to the given url.     *    * @param targetUrl a<code>String</code> with the target url    * @param params a<code>Map<String,String></code> object containing the url parameters; use<code>null</code> if there are no parameters     * @param body a<code>String</code> with the body of the post request; use    *<code>null</code> if the body is empty    * @param contentType a<code>String</code> with the content type of the post    * request; use<code>null</code> for the default content type     *<code>text/xml; charset=utf-8</code>    * @param responseEncoding a<code>String</code> with the encoding used to    * read the server response; use<code>null</code> for the default charset    * @return a<code>String</code> with the server response    * @throws IOException if an error occurs    */
+comment|/**      * This sends a POST request to the given url.      *      * @param targetUrl a<code>String</code> with the target url      * @param params a<code>Map<String,String></code> object containing the url parameters;      *        use<code>null</code> if there are no parameters      * @param body a<code>String</code> with the body of the post request; use      *<code>null</code> if the body is empty      * @param contentType a<code>String</code> with the content type of the post      *        request; use<code>null</code> for the default content type      *<code>text/xml; charset=utf-8</code>      * @param responseEncoding a<code>String</code> with the encoding used to      *        read the server response; use<code>null</code> for the default charset      *      * @return a<code>String</code> with the server response      *      * @throws IOException if an error occurs      */
 specifier|public
 specifier|static
 name|String
@@ -2642,8 +2636,6 @@ name|filter
 argument_list|(
 name|subj
 argument_list|,
-name|Properties
-operator|.
 name|NIE_PLAINTEXTCONTENT
 argument_list|,
 literal|null
@@ -2714,8 +2706,6 @@ name|filter
 argument_list|(
 name|subj
 argument_list|,
-name|Properties
-operator|.
 name|DC_LANGUAGE
 argument_list|,
 literal|null
@@ -2791,6 +2781,7 @@ argument_list|()
 return|;
 block|}
 else|else
+block|{
 return|return
 name|res
 operator|.
@@ -2798,7 +2789,8 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * The activate method.    *     * @param ce    *            the {@link ComponentContext}    */
+block|}
+comment|/**      * The activate method.      *      * @param ce the {@link ComponentContext}      */
 specifier|protected
 name|void
 name|activate
@@ -2875,7 +2867,7 @@ expr_stmt|;
 comment|//      this.tcManager = TcManager.getInstance();
 block|}
 block|}
-comment|/**    * The deactivate method.    *     * @param ce    *            the {@link ComponentContext}    */
+comment|/**      * The deactivate method.      *      * @param ce the {@link ComponentContext}      */
 specifier|protected
 name|void
 name|deactivate
@@ -2888,7 +2880,7 @@ argument_list|)
 name|ComponentContext
 name|ce
 parameter_list|)
-block|{    }
+block|{      }
 block|}
 end_class
 

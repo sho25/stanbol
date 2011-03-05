@@ -410,6 +410,10 @@ specifier|public
 class|class
 name|AutotaggingTest
 block|{
+specifier|protected
+name|File
+name|defaultIndexDirectory
+decl_stmt|;
 specifier|private
 name|Model
 name|model
@@ -425,10 +429,6 @@ decl_stmt|;
 specifier|private
 name|IndexWriter
 name|writer
-decl_stmt|;
-specifier|protected
-name|File
-name|defaultIndexDirectory
 decl_stmt|;
 specifier|public
 specifier|static

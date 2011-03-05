@@ -186,6 +186,7 @@ specifier|public
 class|class
 name|EnhancementRDFUtils
 block|{
+comment|// Utility class.
 specifier|private
 name|EnhancementRDFUtils
 parameter_list|()

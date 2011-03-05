@@ -266,7 +266,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * test  * @author andreas  */
+comment|/**  * test  *  * @author andreas  */
 end_comment
 
 begin_class

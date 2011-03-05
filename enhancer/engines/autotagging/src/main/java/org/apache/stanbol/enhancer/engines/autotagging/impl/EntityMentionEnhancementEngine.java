@@ -460,6 +460,7 @@ implements|,
 name|ServiceProperties
 block|{
 specifier|private
+specifier|static
 specifier|final
 name|Logger
 name|log
@@ -468,8 +469,9 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|getClass
-argument_list|()
+name|EntityMentionEnhancementEngine
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 annotation|@
