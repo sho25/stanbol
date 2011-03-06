@@ -931,7 +931,7 @@ name|GEONAMES_TOKEN
 init|=
 literal|"org.apache.stanbol.enhancer.engines.geonames.locationEnhancementEngine.token"
 decl_stmt|;
-comment|/** Only activate this engine in online mode */
+comment|/**      * Only activate this engine in online mode      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -2711,7 +2711,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Getter for the socre in a range from [0..1]<p>      * NOTE (2010.11.16, rw): GeoNames previously returned the score in the      * range from [0..1]. It looks like that up from now they use the      * range [0..100]. Therefore I created this method to make the necessary      * adaptation.      * see also http://code.google.com/p/iks-project/issues/detail?id=89      *      * @param toponym the toponym      * @return the score in a range [0..1]      * @throws InsufficientStyleException      */
+comment|/**      * Getter for the socre in a range from [0..1]<p>      * NOTE (2010.11.16, rw): GeoNames previously returned the score in the      * range from [0..1]. It looks like that up from now they use the      * range [0..100]. Therefore I created this method to make the necessary      * adaptation.      * see also http://code.google.com/p/iks-project/issues/detail?id=89      *      * @param toponym the toponym      *      * @return the score in a range [0..1]      */
 specifier|private
 name|Double
 name|getToponymScore
@@ -2738,7 +2738,7 @@ operator|/
 literal|100
 return|;
 block|}
-comment|/**      * Returns the hierarchy for the parsed toponym. The planet Earth will be      * at the first position of the list and the parsed toponum represents the      * last element of the list      *      * @param toponym the toponym      * @return The list containing the hierarchy      * @throws Exception on any error while accessing the webservice      */
+comment|/**      * Returns the hierarchy for the parsed toponym. The planet Earth will be      * at the first position of the list and the parsed toponum represents the      * last element of the list.      *      * @param toponym the toponym      *      * @return The list containing the hierarchy      *      * @throws Exception on any error while accessing the webservice      */
 specifier|protected
 name|Collection
 argument_list|<
@@ -2764,7 +2764,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Writes an entity enhancement for the content item in the parsed graph      * based on the parsed toponym.      *      * @param contentItemId The id of the contentItem      * @param graph The graph used to write the triples      * @param literalFactory the literal factory used to create literals      * @param toponym the toponym      * @param relatedEnhancements related enhancements      * @param requiresEnhancements required enhancements      * @param defaultScore the score used as default id not present. This is      * used to parse the score of the Toponym if this method is used to add a      * parent Toponym.      * @return The UriRef of the created entity enhancement      */
+comment|/**      * Writes an entity enhancement for the content item in the parsed graph      * based on the parsed toponym.      *      * @param contentItemId The id of the contentItem      * @param graph The graph used to write the triples      * @param literalFactory the literal factory used to create literals      * @param toponym the toponym      * @param relatedEnhancements related enhancements      * @param requiresEnhancements required enhancements      * @param defaultScore the score used as default id not present. This is      * used to parse the score of the Toponym if this method is used to add a      * parent Toponym.      *      * @return The UriRef of the created entity enhancement      */
 specifier|private
 name|UriRef
 name|writeEntityEnhancement

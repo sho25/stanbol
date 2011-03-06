@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Defines the Feature Classes as defined by geonmaes.org  * @author Rupert Westenthaler  */
+comment|/**  * Defines the Feature Classes as defined by geonmaes.org  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_enum

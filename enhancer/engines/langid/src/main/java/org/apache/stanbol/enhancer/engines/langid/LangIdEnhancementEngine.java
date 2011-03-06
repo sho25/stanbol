@@ -447,6 +447,28 @@ name|EnhancementEngine
 implements|,
 name|ServiceProperties
 block|{
+comment|/**      * a configurable value of the text segment length to check      */
+annotation|@
+name|Property
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PROBE_LENGTH_PROP
+init|=
+literal|"org.apache.stanbol.enhancer.engines.langid.probe-length"
+decl_stmt|;
+comment|/**      * this allows to specify the path to a configuration file that specifies      * the language models and how they map to language labels.      */
+annotation|@
+name|Property
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|MODEL_CONFIGURATION_FILE_PROP
+init|=
+literal|"org.apache.stanbol.enhancer.engines.langid.model-configuration-file"
+decl_stmt|;
 comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_PRE_PROCESSING}      */
 specifier|public
 specifier|static
@@ -512,29 +534,7 @@ name|PROBE_LENGTH_DEFAULT
 init|=
 literal|400
 decl_stmt|;
-comment|/**      * a configurable value of the text segment length to check      */
-annotation|@
-name|Property
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|PROBE_LENGTH_PROP
-init|=
-literal|"org.apache.stanbol.enhancer.engines.langid.probe-length"
-decl_stmt|;
-comment|/**      * this allows to specify the path to a configuration file that specifies the language models and how they map to language labels      */
-annotation|@
-name|Property
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|MODEL_CONFIGURATION_FILE_PROP
-init|=
-literal|"org.apache.stanbol.enhancer.engines.langid.model-configuration-file"
-decl_stmt|;
-comment|/**      * How much text should be used for testing: If the value is 0 or smaller, the complete text will be used. Otherwise a text probe of the given length is taken from the middle of the text. The default length is 400 characters.      */
+comment|/**      * How much text should be used for testing: If the value is 0 or smaller,      * the complete text will be used. Otherwise a text probe of the given length      * is taken from the middle of the text. The default length is 400 characters.      */
 specifier|private
 name|int
 name|probeLength

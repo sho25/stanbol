@@ -188,7 +188,7 @@ name|in
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This test the language identification.      *      * @throws IOException      *             if there is an error when reading the text      */
+comment|/**      * Tests the language identification.      *      * @throws IOException if there is an error when reading the text      */
 annotation|@
 name|Test
 specifier|public

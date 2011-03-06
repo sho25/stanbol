@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class stores the values extracted from the Calais entity data.  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  *  */
+comment|/**  * Stores the values extracted from the Calais entity data.  *  * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -84,7 +84,7 @@ decl_stmt|;
 specifier|public
 name|CalaisEntityOccurrence
 parameter_list|()
-block|{}
+block|{     }
 specifier|public
 name|String
 name|getTypeName

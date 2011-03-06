@@ -243,12 +243,12 @@ name|HIERARCHY_SERVICE_PATH
 init|=
 literal|"hierarchy"
 decl_stmt|;
-comment|/**      * The access url for the search service. As default       * {@link #GEONAMES_ORG_WEBSERVICE_URL}+{@link #SEARCH_SERVICE_PATH}      * ({@value #GEONAMES_ORG_WEBSERVICE_URL}{@value #SEARCH_SERVICE_PATH})       * is used. Users with a premium account including an own sub domain       * might need to change this.      */
+comment|/**      * The access url for the search service. As default      * {@link #GEONAMES_ORG_WEBSERVICE_URL}+{@link #SEARCH_SERVICE_PATH}      * ({@value #GEONAMES_ORG_WEBSERVICE_URL}{@value #SEARCH_SERVICE_PATH})      * is used. Users with a premium account including an own sub domain      * might need to change this.      */
 specifier|protected
 name|String
 name|searchServiceUrl
 decl_stmt|;
-comment|/**      * The access url for the hierarchy service. As default       * {@link #GEONAMES_ORG_WEBSERVICE_URL}+{@link #HIERARCHY_SERVICE_PATH}      * ({@value #GEONAMES_ORG_WEBSERVICE_URL}{@value #HIERARCHY_SERVICE_PATH})       * is used. Users with a premium account including an own sub domain       * might need to change this.      */
+comment|/**      * The access url for the hierarchy service. As default      * {@link #GEONAMES_ORG_WEBSERVICE_URL}+{@link #HIERARCHY_SERVICE_PATH}      * ({@value #GEONAMES_ORG_WEBSERVICE_URL}{@value #HIERARCHY_SERVICE_PATH})      * is used. Users with a premium account including an own sub domain      * might need to change this.      */
 specifier|protected
 name|String
 name|hierarchyServiceUrl
@@ -263,7 +263,7 @@ specifier|private
 name|String
 name|token
 decl_stmt|;
-comment|/**      * Enumeration that contains the property definitions used by the LocationEnhancementEngine. This enum      * does not define all properties defined by geonames.org      *       * @author Rupert Westenthaler      */
+comment|/**      * Enumeration that contains the property definitions used by the LocationEnhancementEngine. This enum      * does not define all properties defined by geonames.org      *      * @author Rupert Westenthaler      */
 specifier|public
 specifier|static
 enum|enum
@@ -403,7 +403,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * a required or optional property          * @param required<code>true</code> if the property is a required one          * or<code>false</code> for an optional property (in this case one can          * also use the default constructor)          */
+comment|/**          * a required or optional property          *          * @param required<code>true</code> if the property is a required one          * or<code>false</code> for an optional property (in this case one can          * also use the default constructor)          */
 name|SearchRequestPropertyEnum
 parameter_list|(
 name|boolean
@@ -418,7 +418,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * A optional property with a default configuration and a list of           * allowed values          * @param defaultValue the value used if this parameter is not parsed or          *<code>null</code> if there is no default value.          * @param valueListthe list of allowed values for this parameter.          */
+comment|/**          * A optional property with a default configuration and a list of          * allowed values          *          * @param defaultValue the value used if this parameter is not parsed or          *<code>null</code> if there is no default value.          * @param valueListthe list of allowed values for this parameter.          */
 name|SearchRequestPropertyEnum
 parameter_list|(
 name|String
@@ -552,7 +552,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * A required or optional property          * @param required<code>true</code> if the property is a required one          * or<code>false</code> for an optional property (in this case one can          * also use the default constructor)          */
+comment|/**          * A required or optional property          *          * @param required<code>true</code> if the property is a required one          * or<code>false</code> for an optional property (in this case one can          * also use the default constructor)          */
 name|HierarchyRequestPorpertyEnum
 parameter_list|(
 name|boolean
@@ -567,7 +567,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * A optional property with a default configuration and a list of           * allowed values          * @param defaultValue the value used if this parameter is not parsed or          *<code>null</code> if there is no default value.          * @param valueListthe list of allowed values for this parameter.          */
+comment|/**          * A optional property with a default configuration and a list of          * allowed values          *          * @param defaultValue the value used if this parameter is not parsed or          *<code>null</code> if there is no default value.          * @param valueListthe list of allowed values for this parameter.          */
 name|HierarchyRequestPorpertyEnum
 parameter_list|(
 name|String
@@ -664,7 +664,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Initialise the geonames API wrapper for a given server, username and      * token. Parsing<code>null</code> for any of the parameter will use the      * default values. If an empty string is parsed as user name it will be      * ignored. Token is only accepted if a valid user name is prased.      * @param serverURL The url of the geonames server to use or<code>null</code>      * to use the default      * @param userName The user name to use or<code>null</code> to use the      * default. The user name MUST NOT be empty.      * @param token The token to use or<code>null</code> to use the default.      * If no valid user name is parsed the token will be ignored.      */
+comment|/**      * Initialise the geonames API wrapper for a given server, username and      * token. Parsing<code>null</code> for any of the parameter will use the      * default values. If an empty string is parsed as user name it will be      * ignored. Token is only accepted if a valid user name is prased.      *      * @param serverURL The url of the geonames server to use or<code>null</code>      * to use the default      * @param userName The user name to use or<code>null</code> to use the      * default. The user name MUST NOT be empty.      * @param token The token to use or<code>null</code> to use the default.      * If no valid user name is parsed the token will be ignored.      */
 specifier|public
 name|GeonamesAPIWrapper
 parameter_list|(
@@ -738,7 +738,7 @@ name|token
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Initialise the geonames API wrapper for a given search and hierarchy      * service, username and token. Parsing<code>null</code> for any of the       * parameter will use the default values. If an empty string is parsed as       * user name it will be ignored. Token is only accepted if a valid user name      * is prased.<br>      * The parsed user name and token will be used for both the search and the      * hierarchy service.      * @param searchService The url of the search service to use or<code>null</code>      * to use the default      * @param hierarchyService The url of the hierarchy service to use or       *<code>null</code> to use the default      * @param userName The user name to use or<code>null</code> to use the      * default. The user name MUST NOT be empty.      * @param token The token to use or<code>null</code> to use the default.      * If no valid user name is parsed the token will be ignored.      */
+comment|/**      * Initialise the geonames API wrapper for a given search and hierarchy      * service, username and token. Parsing<code>null</code> for any of the      * parameter will use the default values. If an empty string is parsed as      * user name it will be ignored. Token is only accepted if a valid user name      * is prased.      *<p>      * The parsed user name and token will be used for both the search and the      * hierarchy service.      *      * @param searchService The url of the search service to use or<code>null</code>      * to use the default      * @param hierarchyService The url of the hierarchy service to use or      *<code>null</code> to use the default      * @param userName The user name to use or<code>null</code> to use the      * default. The user name MUST NOT be empty.      * @param token The token to use or<code>null</code> to use the default.      * If no valid user name is parsed the token will be ignored.      */
 specifier|public
 name|GeonamesAPIWrapper
 parameter_list|(

@@ -185,36 +185,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|engines
-operator|.
-name|metaxa
-operator|.
-name|core
-operator|.
-name|MetaxaCore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|BeforeClass
@@ -323,6 +293,30 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * {@link TestMetaxaCore} is a test class for {@link MetaxaCore}.  *  * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
@@ -374,7 +368,7 @@ literal|"extractionregistry.xml"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests the pdf extraction.      *      * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
+comment|/**      * This tests the pdf extraction.      *      * @throws ExtractorException if there is an error during extraction      * @throws IOException if there is an error when reading the document      */
 annotation|@
 name|Test
 specifier|public
@@ -398,21 +392,11 @@ comment|// extract text from pdf
 name|InputStream
 name|in
 init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
 name|getResourceAsStream
 argument_list|(
 name|testFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -452,21 +436,11 @@ comment|// get expected result
 name|InputStream
 name|in2
 init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
 name|getResourceAsStream
 argument_list|(
 name|testResultFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -489,8 +463,6 @@ literal|"utf-8"
 argument_list|)
 decl_stmt|;
 comment|// test
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|cleanup
@@ -515,8 +487,6 @@ argument_list|(
 name|m
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|11
@@ -525,7 +495,7 @@ name|tripleCounter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests the html extraction.      *      * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
+comment|/**      * This tests the html extraction.      *      * @throws ExtractorException if there is an error during extraction      * @throws IOException if there is an error when reading the document      */
 annotation|@
 name|Test
 specifier|public
@@ -549,21 +519,11 @@ comment|// extract text from html
 name|InputStream
 name|in
 init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
 name|getResourceAsStream
 argument_list|(
 name|testFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -603,21 +563,11 @@ comment|// get expected result
 name|InputStream
 name|in2
 init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
 name|getResourceAsStream
 argument_list|(
 name|testResultFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -640,8 +590,6 @@ literal|"utf-8"
 argument_list|)
 decl_stmt|;
 comment|// test
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|cleanup
@@ -666,8 +614,6 @@ argument_list|(
 name|m
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|28
@@ -676,7 +622,7 @@ name|tripleCounter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests the html extraction.      *      * @throws ExtractorException      *             if there is an error during extraction      * @throws IOException      *             if there is an error when reading the document      */
+comment|/**      * This tests the html extraction.      *      * @throws ExtractorException if there is an error during extraction      * @throws IOException if there is an error when reading the document      */
 annotation|@
 name|Test
 specifier|public
@@ -700,21 +646,11 @@ comment|// extract text from RDFa annotated html
 name|InputStream
 name|in
 init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
 name|getResourceAsStream
 argument_list|(
 name|testFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -754,21 +690,11 @@ comment|// get expected result
 name|InputStream
 name|in2
 init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
 name|getResourceAsStream
 argument_list|(
 name|testResultFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"failed to load resource "
@@ -791,8 +717,6 @@ literal|"utf-8"
 argument_list|)
 decl_stmt|;
 comment|// test
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|cleanup
@@ -817,8 +741,6 @@ argument_list|(
 name|m
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|10
@@ -827,7 +749,7 @@ name|tripleCounter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This prints out the Stanbol Enhancer triples that would be created for the metadata      * contained in the given model.      *      * @param m      *            a {@link Model}      * @return an {@code int} with the number of added triples      */
+comment|/**      * This prints out the Stanbol Enhancer triples that would be created for the metadata      * contained in the given model.      *      * @param m a {@link Model}      *      * @return an {@code int} with the number of added triples      */
 specifier|private
 name|int
 name|printTriples
@@ -1002,7 +924,7 @@ return|return
 name|tripleCounter
 return|;
 block|}
-comment|/**      * Cleanup strings for comparison, by removing non-printable chars.      *      * @param txt      *            a {@link String} with the text to clean      * @return a {@link String} with the result      */
+comment|/**      * Cleanup strings for comparison, by removing non-printable chars.      *      * @param txt a {@link String} with the text to clean      *      * @return a {@link String} with the result      */
 specifier|private
 name|String
 name|cleanup
@@ -1069,6 +991,29 @@ name|sb
 operator|.
 name|toString
 argument_list|()
+return|;
+block|}
+specifier|private
+name|InputStream
+name|getResourceAsStream
+parameter_list|(
+name|String
+name|testResultFile
+parameter_list|)
+block|{
+return|return
+name|this
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getClassLoader
+argument_list|()
+operator|.
+name|getResourceAsStream
+argument_list|(
+name|testResultFile
+argument_list|)
 return|;
 block|}
 block|}

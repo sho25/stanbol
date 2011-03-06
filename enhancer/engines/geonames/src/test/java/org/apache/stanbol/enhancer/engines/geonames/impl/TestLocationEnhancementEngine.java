@@ -25,6 +25,126 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_ORGANISATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_PERSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_PLACE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|ENHANCER_ENTITYANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|ENHANCER_TEXTANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -423,6 +543,8 @@ class|class
 name|TestLocationEnhancementEngine
 block|{
 specifier|private
+specifier|static
+specifier|final
 name|Logger
 name|log
 init|=
@@ -816,8 +938,6 @@ name|PERSON
 argument_list|,
 name|CONTEXT
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_PERSON
 argument_list|)
 expr_stmt|;
@@ -829,8 +949,6 @@ name|ORGANISATION
 argument_list|,
 name|CONTEXT
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_ORGANISATION
 argument_list|)
 expr_stmt|;
@@ -842,8 +960,6 @@ name|PLACE
 argument_list|,
 name|CONTEXT
 argument_list|,
-name|OntologicalClasses
-operator|.
 name|DBPEDIA_PLACE
 argument_list|)
 expr_stmt|;
@@ -965,7 +1081,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/*      * -----------------------------------------------------------------------      * Helper Methods to check Text and EntityAnnotations      * -----------------------------------------------------------------------      */
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllEntityAnnotations
@@ -986,12 +1101,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|ENHANCER_ENTITYANNOTATION
 argument_list|)
 decl_stmt|;
@@ -1038,7 +1149,7 @@ return|return
 name|entityAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if an entity annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if an entity annotation is valid      */
 specifier|private
 name|void
 name|checkEntityAnnotation
@@ -1062,8 +1173,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 literal|null
@@ -1081,8 +1190,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_REQUIRES
 argument_list|,
 literal|null
@@ -1133,12 +1240,8 @@ name|filter
 argument_list|(
 name|referredTextAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|ENHANCER_TEXTANNOTATION
 argument_list|)
 operator|.
@@ -1160,8 +1263,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 literal|null
@@ -1211,8 +1312,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_LABEL
 argument_list|,
 literal|null

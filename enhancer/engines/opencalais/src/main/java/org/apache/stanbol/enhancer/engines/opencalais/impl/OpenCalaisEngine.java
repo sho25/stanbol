@@ -747,6 +747,24 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
+name|ServiceProperties
+operator|.
+name|ENHANCEMENT_ENGINE_ORDERING
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
 name|rdf
 operator|.
 name|Properties
@@ -973,8 +991,6 @@ name|Collections
 operator|.
 name|singletonMap
 argument_list|(
-name|ServiceProperties
-operator|.
 name|ENHANCEMENT_ENGINE_ORDERING
 argument_list|,
 operator|(
@@ -1617,7 +1633,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * This retrieves the annotations from OpenCalais as RDF/XML. From that an MGraph is created.      *      * @param text the text to send to OpenCalais      *      * @return an MGraph with all annotations      *      * @throws EngineException      */
+comment|/**      * Retrieves the annotations from OpenCalais as RDF/XML. From that an MGraph is created.      *      * @param text the text to send to OpenCalais      *      * @return an MGraph with all annotations      *      * @throws EngineException      */
 specifier|public
 name|MGraph
 name|getCalaisAnalysis
@@ -1859,7 +1875,7 @@ return|return
 name|model
 return|;
 block|}
-comment|/**      * This parses an InputStream of RDF data and produces an MGraph from them      *      * @param in The InputStream of RDF data      * @param format the format of the RDF data      *      * @return the resulting MGraph or null if the RDF serialization format is not supported by the parser      */
+comment|/**      * Parses an InputStream of RDF data and produces an MGraph from them      *      * @param in The InputStream of RDF data      * @param format the format of the RDF data      *      * @return the resulting MGraph or null if the RDF serialization format is not supported by the parser      */
 specifier|public
 name|MGraph
 name|readModel
@@ -1938,7 +1954,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * This extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the MGraph representing the Calais data      *      * @return a Collection of entity information      */
+comment|/**      * Extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the MGraph representing the Calais data      *      * @return a Collection of entity information      */
 specifier|public
 name|Collection
 argument_list|<
@@ -2287,7 +2303,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * This sends a POST request to the given url.      *      * @param targetUrl a<code>String</code> with the target url      * @param params a<code>Map<String,String></code> object containing the url parameters;      *        use<code>null</code> if there are no parameters      * @param body a<code>String</code> with the body of the post request; use      *<code>null</code> if the body is empty      * @param contentType a<code>String</code> with the content type of the post      *        request; use<code>null</code> for the default content type      *<code>text/xml; charset=utf-8</code>      * @param responseEncoding a<code>String</code> with the encoding used to      *        read the server response; use<code>null</code> for the default charset      *      * @return a<code>String</code> with the server response      *      * @throws IOException if an error occurs      */
+comment|/**      * Sends a POST request to the given url.      *      * @param targetUrl a<code>String</code> with the target url      * @param params a<code>Map<String,String></code> object containing the url parameters;      *        use<code>null</code> if there are no parameters      * @param body a<code>String</code> with the body of the post request; use      *<code>null</code> if the body is empty      * @param contentType a<code>String</code> with the content type of the post      *        request; use<code>null</code> for the default content type      *<code>text/xml; charset=utf-8</code>      * @param responseEncoding a<code>String</code> with the encoding used to      *        read the server response; use<code>null</code> for the default charset      *      * @return a<code>String</code> with the server response      *      * @throws IOException if an error occurs      */
 specifier|public
 specifier|static
 name|String

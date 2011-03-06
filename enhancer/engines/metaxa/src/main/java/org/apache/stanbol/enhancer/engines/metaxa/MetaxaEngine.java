@@ -1064,7 +1064,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * This converts the given RDF2Go node into a corresponding Clerezza object.      *      * @param node a {@link Node}      * @return a {@link Resource}      */
+comment|/**      * Converts the given RDF2Go node into a corresponding Clerezza object.      *      * @param node a {@link Node}      * @return a {@link Resource}      */
 specifier|public
 specifier|static
 name|Resource

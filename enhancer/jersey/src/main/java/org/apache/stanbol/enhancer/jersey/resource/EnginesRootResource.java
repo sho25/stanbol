@@ -988,7 +988,7 @@ name|toLowerCase
 argument_list|()
 return|;
 block|}
-comment|/**      * Form based OpenCalais-compatible interface      *      * TODO: should we parse the OpenCalais paramsXML and find the closest       * Stanbol Enhancer semantics too?      *      * Note: the format parameter is not part of the official API      *      * @throws EngineException if the content is somehow corrupted      * @throws IOException      */
+comment|/**      * Form-based OpenCalais-compatible interface      *      * TODO: should we parse the OpenCalais paramsXML and find the closest       * Stanbol Enhancer semantics too?      *      * Note: the format parameter is not part of the official API      *      * @throws EngineException if the content is somehow corrupted      * @throws IOException      */
 annotation|@
 name|POST
 annotation|@

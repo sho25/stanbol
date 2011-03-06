@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines information for a Property of an GET or POST request such as the name, required or optional,  * default values and a list of possible values.  *<p>  * This class is intended to allow to define meta data about a used web service (e.g. within an  * Enumeration)  *   * @author Rupert Westenthaler  *   */
+comment|/**  * Defines information for a Property of an GET or POST request such as the name, required or optional,  * default values and a list of possible values.  *<p>  * This class is intended to allow to define meta data about a used web service (e.g. within an  * Enumeration)  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -128,7 +128,7 @@ specifier|final
 name|String
 name|toString
 decl_stmt|;
-comment|/**      * Constructs a Property definition for a (RESTful) web service.      *       * @param name the name of the property (MUST NOT be<code>null</code>)      * @param required defines if the property is optional or required      * @param defaultValue the value used if this parameter is not parsed.       *<code>null</code> indicates no default configuration.      * @param valueList the list of allowed values for this parameter.       *<code>null</code> or an empty array indicate that there are no       * restrictions on possible values.      */
+comment|/**      * Constructs a Property definition for a (RESTful) web service.      *      * @param name the name of the property (MUST NOT be<code>null</code>)      * @param required defines if the property is optional or required      * @param defaultValue the value used if this parameter is not parsed.      *<code>null</code> indicates no default configuration.      * @param valueList the list of allowed values for this parameter.      *<code>null</code> or an empty array indicate that there are no      * restrictions on possible values.      */
 specifier|protected
 name|RequestProperty
 parameter_list|(
@@ -462,7 +462,7 @@ operator|!
 name|required
 return|;
 block|}
-comment|/**      * Encodes the Property for the given parameters.      *       * @param requestString      *            The string builder used to create the request      * @param first      *            if the property is the first property added to the request      * @param values      *            the value(s) for the property. If<code>null</code> or an empty list, than the      *            {@link #defaultValue()} is added if present. Also if the parsed collection contains the      *<code>null</code> value the {@link #defaultValue()} is added instead.      * @return<code>true</code> if the parsed request string was modified as a result of this call -      *         meaning that parameter was added to the request.      */
+comment|/**      * Encodes the Property for the given parameters.      *      * @param requestString The string builder used to create the request      * @param first if the property is the first property added to the request      * @param values the value(s) for the property. If<code>null</code> or an empty list, than the      * {@link #defaultValue()} is added if present. Also if the parsed collection contains the      *<code>null</code> value the {@link #defaultValue()} is added instead.      *      * @return<code>true</code> if the parsed request string was modified as a result of this call -      *         meaning that parameter was added to the request.      */
 specifier|public
 name|boolean
 name|encode

@@ -25,6 +25,128 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|TURTLE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|engines
+operator|.
+name|zemanta
+operator|.
+name|impl
+operator|.
+name|ZemantaEnhancementEngine
+operator|.
+name|API_KEY_PROPERTY
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|ENHANCER_CATEGORY
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|ENHANCER_ENTITYANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|ENHANCER_TEXTANNOTATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -416,30 +538,6 @@ specifier|public
 class|class
 name|ZemantaEnhancementEngineTest
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|ZemantaEnhancementEngineTest
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
-comment|/**      * This key was generated to support testing only. Please do only use it      * for testing. For real usages of the engine you need to create your own      * key!      */
-specifier|private
-specifier|static
-specifier|final
-name|String
-name|ZEMANTA_TEST_APPLICATION_KEY
-init|=
-literal|"2qsvcvkut8rhnqbhm35znn76"
-decl_stmt|;
 comment|/**      * found on this Blog {@linkplain http://bcbio.wordpress.com/2009/01/04/extracting-keywords-from-biological-text-using-zemanta/}      */
 specifier|public
 specifier|static
@@ -477,6 +575,30 @@ operator|new
 name|ZemantaEnhancementEngine
 argument_list|()
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|ZemantaEnhancementEngineTest
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+comment|/**      * This key was generated to support testing only. Please do only use it      * for testing. For real usages of the engine you need to create your own      * key!      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|ZEMANTA_TEST_APPLICATION_KEY
+init|=
+literal|"2qsvcvkut8rhnqbhm35znn76"
+decl_stmt|;
 annotation|@
 name|BeforeClass
 specifier|public
@@ -508,8 +630,6 @@ name|properties
 operator|.
 name|put
 argument_list|(
-name|ZemantaEnhancementEngine
-operator|.
 name|API_KEY_PROPERTY
 argument_list|,
 name|ZEMANTA_TEST_APPLICATION_KEY
@@ -673,8 +793,6 @@ operator|.
 name|getMetadata
 argument_list|()
 argument_list|,
-name|SupportedFormat
-operator|.
 name|TURTLE
 argument_list|)
 expr_stmt|;
@@ -722,7 +840,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/*      * -----------------------------------------------------------------------      * Helper Methods to check Text and EntityAnnotations      * -----------------------------------------------------------------------      */
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllEntityAnnotations
@@ -743,12 +860,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|ENHANCER_ENTITYANNOTATION
 argument_list|)
 decl_stmt|;
@@ -795,7 +908,7 @@ return|return
 name|entityAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if an entity annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if an entity annotation is valid.      */
 specifier|private
 name|void
 name|checkEntityAnnotation
@@ -819,8 +932,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_RELATION
 argument_list|,
 literal|null
@@ -838,8 +949,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_REQUIRES
 argument_list|,
 literal|null
@@ -857,12 +966,8 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|DC_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|ENHANCER_CATEGORY
 argument_list|)
 decl_stmt|;
@@ -918,12 +1023,8 @@ name|filter
 argument_list|(
 name|referredTextAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|ENHANCER_TEXTANNOTATION
 argument_list|)
 operator|.
@@ -945,8 +1046,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 literal|null
@@ -991,8 +1090,6 @@ name|filter
 argument_list|(
 name|entityAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_ENTITY_LABEL
 argument_list|,
 literal|null
@@ -1007,7 +1104,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @param g      * @return      */
 specifier|private
 name|int
 name|checkAllTextAnnotations
@@ -1031,12 +1127,8 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|Properties
-operator|.
 name|RDF_TYPE
 argument_list|,
-name|TechnicalClasses
-operator|.
 name|ENHANCER_TEXTANNOTATION
 argument_list|)
 decl_stmt|;
@@ -1094,7 +1186,7 @@ return|return
 name|textAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if a text annotation is valid      *      * @param g      * @param textAnnotation      */
+comment|/**      * Checks if a text annotation is valid.      */
 specifier|private
 name|void
 name|checkTextAnnotation
@@ -1206,8 +1298,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_START
 argument_list|,
 literal|null
@@ -1225,8 +1315,6 @@ name|filter
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|Properties
-operator|.
 name|ENHANCER_END
 argument_list|,
 literal|null

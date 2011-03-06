@@ -98,7 +98,7 @@ specifier|public
 class|class
 name|Toponym
 block|{
-comment|/**      * JSON property names  keys used for Toponyms by geonames.org      * (may not be complete)      * @author Rupert Westenthaler      */
+comment|/**      * JSON property names  keys used for Toponyms by geonames.org      * (may not be complete)      *      * @author Rupert Westenthaler      */
 enum|enum
 name|ToponymProperty
 block|{
@@ -185,7 +185,7 @@ operator|=
 name|jsonData
 expr_stmt|;
 block|}
-comment|/**      * @return Returns the ISO 3166-1-alpha-2 countryCode.      */
+comment|/**      * @return the ISO 3166-1-alpha-2 countryCode.      */
 specifier|public
 name|String
 name|getCountryCode
@@ -233,7 +233,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the elevation in meter.      */
+comment|/**      * @return the elevation in meter.      */
 specifier|public
 name|Integer
 name|getElevation
@@ -303,7 +303,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * the feature class {@link FeatureClass}      *      * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature      *      Codes</a>      * @return Returns the featureClass.      */
+comment|/**      * the feature class {@link FeatureClass}      *      * @return the featureClass.      *      * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature      *      Codes</a>      */
 specifier|public
 name|FeatureClass
 name|getFeatureClass
@@ -367,7 +367,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature      *      Codes</a>      * @return Returns the featureCode.      */
+comment|/**      * @return the featureCode.      *      * @see<a href="http://www.geonames.org/export/codes.html">GeoNames Feature      *      Codes</a>      */
 specifier|public
 name|String
 name|getFeatureCode
@@ -415,7 +415,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * latitude in decimal degrees (wgs84)      *      * @return Returns the latitude.      */
+comment|/**      * latitude in decimal degrees (wgs84)      *      * @return the latitude.      */
 specifier|public
 name|double
 name|getLatitude
@@ -463,7 +463,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * longitude in decimal degrees (wgs84)      *      * @return Returns the longitude.      */
+comment|/**      * longitude in decimal degrees (wgs84)      *      * @return the longitude.      */
 specifier|public
 name|double
 name|getLongitude
@@ -511,7 +511,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the name.      */
+comment|/**      * @return the name.      */
 specifier|public
 name|String
 name|getName
@@ -559,7 +559,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the population.      */
+comment|/**      * @return the population.      */
 specifier|public
 name|Long
 name|getPopulation
@@ -629,7 +629,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the geoNameId.      */
+comment|/**      * @return the geoNameId.      */
 specifier|public
 name|int
 name|getGeoNameId
@@ -677,7 +677,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the featureClassName.      */
+comment|/**      * @return the featureClassName.      */
 specifier|public
 name|String
 name|getFeatureClassName
@@ -725,7 +725,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the featureCodeName.      */
+comment|/**      * @return the featureCodeName.      */
 specifier|public
 name|String
 name|getFeatureCodeName
@@ -773,7 +773,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return Returns the countryName.      */
+comment|/**      * @return the countryName.      */
 specifier|public
 name|String
 name|getCountryName
@@ -1196,7 +1196,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * The time zone is a complex Object encoded like       *<code><pre>      * timezone: {      *     dstOffset: -5      *     gmtOffset: -6      *     timeZoneId: "America/Chicago"      * }      *</pre></code>      * This mehtod does not further parse this data.      * @return the {@link JSONObject} with the time zone information      */
+comment|/**      * The time zone is a complex Object encoded like      *<code><pre>      * timezone: {      *     dstOffset: -5      *     gmtOffset: -6      *     timeZoneId: "America/Chicago"      * }      *</pre></code>      * This mehtod does not further parse this data.      *      * @return the {@link JSONObject} with the time zone information      */
 specifier|public
 name|JSONObject
 name|getTimezone

@@ -263,6 +263,22 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_JSON
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implements a<a href="http://json-ld.org/">JSON-LD</a> serialization of a Clerezza  * {@link TripleCollection}.<br>  *<br>  * Note: This implementation is based on<a href="http://json-ld.org/spec/">JSON-LD  * specification</a> draft from 25 October 2010.  *  * @author Fabian Christ  *  * @scr.component immediate="true"  * @scr.service  *                 interface="org.apache.clerezza.rdf.core.serializedform.SerializingProvider"  */
 end_comment
@@ -287,8 +303,6 @@ specifier|final
 name|String
 name|SUPPORTED_FORMAT
 init|=
-name|MediaType
-operator|.
 name|APPLICATION_JSON
 decl_stmt|;
 specifier|private
