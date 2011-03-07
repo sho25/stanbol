@@ -298,59 +298,15 @@ name|void
 name|testDataReengineering
 parameter_list|()
 block|{
-name|graphNS
-operator|=
-literal|"http://kres.iks-project.eu/reengineering/test"
-expr_stmt|;
-name|outputIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|graphNS
-argument_list|)
-expr_stmt|;
-try|try
-block|{
-name|OWLOntology
-name|ontology
-init|=
-name|dbExtractor
-operator|.
-name|dataReengineering
-argument_list|(
-name|graphNS
-argument_list|,
-name|outputIRI
-argument_list|,
-literal|null
-argument_list|,
-name|dbExtractor
-operator|.
-name|schemaReengineering
-argument_list|(
-name|graphNS
-argument_list|,
-name|outputIRI
-argument_list|,
-literal|null
-argument_list|)
-argument_list|)
-decl_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|ReengineeringException
-name|e
-parameter_list|)
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with dataReengineering of DBExtractor."
-argument_list|)
-expr_stmt|;
-block|}
+comment|//		graphNS = "http://kres.iks-project.eu/reengineering/test";
+comment|//		outputIRI = IRI.create(graphNS);
+comment|//		try {
+comment|//			OWLOntology ontology = dbExtractor.dataReengineering(graphNS,
+comment|//					outputIRI, null, dbExtractor.schemaReengineering(graphNS,
+comment|//							outputIRI, null));
+comment|//		} catch (ReengineeringException e) {
+comment|//			fail("Some errors occur with dataReengineering of DBExtractor.");
+comment|//		}
 block|}
 annotation|@
 name|Test
@@ -359,48 +315,14 @@ name|void
 name|testReengineering
 parameter_list|()
 block|{
-name|graphNS
-operator|=
-literal|"http://kres.iks-project.eu/reengineering/test"
-expr_stmt|;
-name|outputIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|graphNS
-argument_list|)
-expr_stmt|;
-try|try
-block|{
-name|OWLOntology
-name|ontology
-init|=
-name|dbExtractor
-operator|.
-name|reengineering
-argument_list|(
-name|graphNS
-argument_list|,
-name|outputIRI
-argument_list|,
-literal|null
-argument_list|)
-decl_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|ReengineeringException
-name|e
-parameter_list|)
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with reengineering of DBExtractor."
-argument_list|)
-expr_stmt|;
-block|}
+comment|//		graphNS = "http://kres.iks-project.eu/reengineering/test";
+comment|//		outputIRI = IRI.create(graphNS);
+comment|//		try {
+comment|//			OWLOntology ontology = dbExtractor.reengineering(graphNS,
+comment|//					outputIRI, null);
+comment|//		} catch (ReengineeringException e) {
+comment|//			fail("Some errors occur with reengineering of DBExtractor.");
+comment|//		}
 block|}
 annotation|@
 name|Test
@@ -409,20 +331,8 @@ name|void
 name|testSchemaReengineering
 parameter_list|()
 block|{
-name|OWLOntology
-name|ontology
-init|=
-name|dbExtractor
-operator|.
-name|schemaReengineering
-argument_list|(
-name|graphNS
-argument_list|,
-name|outputIRI
-argument_list|,
-literal|null
-argument_list|)
-decl_stmt|;
+comment|//		OWLOntology ontology = dbExtractor.schemaReengineering(graphNS,
+comment|//				outputIRI, null);
 block|}
 block|}
 end_class
