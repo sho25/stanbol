@@ -328,7 +328,17 @@ name|dataReengineering
 argument_list|(
 name|graphNS
 argument_list|,
+name|IRI
+operator|.
+name|create
+argument_list|(
 name|outputIRI
+operator|.
+name|toString
+argument_list|()
+operator|+
+literal|"_new"
+argument_list|)
 argument_list|,
 name|dataSource
 argument_list|,
