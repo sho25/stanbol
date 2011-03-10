@@ -3226,6 +3226,7 @@ block|}
 try|try
 block|{
 comment|//Whitepace
+comment|/* This line, sometimes, generates an exception when try to get simple type definition for white space.                                 However, even if there is the exception, the line returns the ZERO value, so in the catch block is perfomed the                                 option with ZERO value that is WS_PRESERVE.*/
 name|short
 name|whitespace
 init|=
@@ -3364,10 +3365,41 @@ name|e
 parameter_list|)
 block|{
 comment|// TODO Auto-generated catch block
-name|e
+comment|/*In case of exception is run the option that preserves the simple type.*/
+name|manager
 operator|.
-name|printStackTrace
-argument_list|()
+name|applyChange
+argument_list|(
+operator|new
+name|AddAxiom
+argument_list|(
+name|schemaOntology
+argument_list|,
+name|createOWLObjectPropertyAssertionAxiom
+argument_list|(
+name|factory
+argument_list|,
+name|XSD_OWL
+operator|.
+name|hasWhitespace
+argument_list|,
+name|simpleType
+argument_list|,
+name|XSD_OWL
+operator|.
+name|PRESERVE
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"PROBLEM TO GET WHITE SPACE FROM SIMPLE TYPE DEFINITION"
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 comment|//ADD BASE TYPE
@@ -4074,6 +4106,9 @@ init|=
 operator|new
 name|PSVIDocumentImpl
 argument_list|()
+decl_stmt|;
+name|XSSimpleTypeDecl
+name|m
 decl_stmt|;
 if|if
 condition|(
