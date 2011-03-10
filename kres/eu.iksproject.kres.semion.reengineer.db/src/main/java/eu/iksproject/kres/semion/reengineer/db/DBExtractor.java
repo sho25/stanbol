@@ -555,24 +555,6 @@ name|semion
 operator|.
 name|util
 operator|.
-name|OntologyInputSourceDBS_L1
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|semion
-operator|.
-name|util
-operator|.
 name|ReengineerType
 import|;
 end_import
@@ -609,22 +591,8 @@ name|DBS_L1
 import|;
 end_import
 
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|ontologies
-operator|.
-name|XML_OWL
-import|;
-end_import
-
 begin_comment
-comment|/**  * The {@code DBExtractor} is an implementation of the {@link SemionReengineer}  * for relational databases.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * The {@code DBExtractor} is an implementation of the {@link SemionReengineer} for relational databases.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -871,12 +839,12 @@ name|Reference
 name|WeightedTcProvider
 name|weightedTcProvider
 decl_stmt|;
-comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the DBExtractor instances do 	 * need to be configured! YOU NEED TO USE 	 * {@link #DBExtractor(KReSONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the DBExtractor instances do need to be configured! YOU NEED      * TO USE {@link #DBExtractor(KReSONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|DBExtractor
 parameter_list|()
-block|{  	}
-comment|/** 	 *  	 * Create a new {@link DBExtractor} that is formally a 	 * {@link SemionReengineer}. 	 *  	 */
+block|{      }
+comment|/**      *       * Create a new {@link DBExtractor} that is formally a {@link SemionReengineer}.      *       */
 specifier|public
 name|DBExtractor
 parameter_list|(
@@ -934,7 +902,7 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Create a new {@link DBExtractor} that is formally a 	 * {@link SemionReengineer}. 	 *  	 * @param databaseURI 	 *            {@link String} 	 * @param schemaGraph 	 *            {@link MGraph} 	 * @param connectionSettings 	 *            {@link ConnectionSettings} 	 */
+comment|/**      * Create a new {@link DBExtractor} that is formally a {@link SemionReengineer}.      *       * @param databaseURI      *            {@link String}      * @param schemaGraph      *            {@link MGraph}      * @param connectionSettings      *            {@link ConnectionSettings}      */
 specifier|public
 name|DBExtractor
 parameter_list|(
@@ -1021,7 +989,7 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Used to configure an instance within an OSGi container. 	 *  	 * @throws IOException 	 */
+comment|/**      * Used to configure an instance within an OSGi container.      *       * @throws IOException      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1308,7 +1276,6 @@ operator|.
 name|URI
 argument_list|)
 argument_list|)
-comment|/* 												 * new 												 * OntologyInputSourceDBS_L1() 												 */
 argument_list|)
 expr_stmt|;
 comment|// scope.setUp();
