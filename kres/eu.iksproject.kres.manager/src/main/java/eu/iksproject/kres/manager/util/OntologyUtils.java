@@ -295,7 +295,7 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
 name|OntologyInputSource
 import|;
@@ -308,6 +308,8 @@ operator|.
 name|iksproject
 operator|.
 name|kres
+operator|.
+name|api
 operator|.
 name|manager
 operator|.

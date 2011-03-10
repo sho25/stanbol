@@ -345,6 +345,24 @@ name|api
 operator|.
 name|manager
 operator|.
+name|io
+operator|.
+name|RootOntologyIRISource
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
 name|ontology
 operator|.
 name|OntologyScope
@@ -591,8 +609,22 @@ name|DBS_L1
 import|;
 end_import
 
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|ontologies
+operator|.
+name|XML_OWL
+import|;
+end_import
+
 begin_comment
-comment|/**  * The {@code DBExtractor} is an implementation of the {@link SemionReengineer}  * for relational databases.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * The {@code DBExtractor} is an implementation of the {@link SemionReengineer}  * for relational databases.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -843,7 +875,7 @@ comment|/** 	 * This default constructor is<b>only</b> intended to be used by th
 specifier|public
 name|DBExtractor
 parameter_list|()
-block|{ 	 	}
+block|{  	}
 comment|/** 	 *  	 * Create a new {@link DBExtractor} that is formally a 	 * {@link SemionReengineer}. 	 *  	 */
 specifier|public
 name|DBExtractor
@@ -1265,11 +1297,21 @@ argument_list|(
 name|reengineeringScopeIRI
 argument_list|,
 operator|new
-name|OntologyInputSourceDBS_L1
-argument_list|()
+name|RootOntologyIRISource
+argument_list|(
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|DBS_L1
+operator|.
+name|URI
+argument_list|)
+argument_list|)
+comment|/* 												 * new 												 * OntologyInputSourceDBS_L1() 												 */
 argument_list|)
 expr_stmt|;
-comment|//scope.setUp();
+comment|// scope.setUp();
 name|scopeRegistry
 operator|.
 name|registerScope

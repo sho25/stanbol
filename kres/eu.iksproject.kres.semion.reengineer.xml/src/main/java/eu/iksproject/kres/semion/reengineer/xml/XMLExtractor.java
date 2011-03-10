@@ -635,6 +635,24 @@ name|api
 operator|.
 name|manager
 operator|.
+name|io
+operator|.
+name|RootOntologyIRISource
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
 name|ontology
 operator|.
 name|OntologyScope
@@ -910,7 +928,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code XMLExtractor} extends of the {@link XSDExtractor} that implements  * the {@link SemionReengineer} for XML data sources.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * The {@code XMLExtractor} extends of the {@link XSDExtractor} that implements  * the {@link SemionReengineer} for XML data sources.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -1052,7 +1070,7 @@ comment|/** 	 * This default constructor is<b>only</b> intended to be used by th
 specifier|public
 name|XMLExtractor
 parameter_list|()
-block|{ 		 	}
+block|{  	}
 specifier|public
 name|XMLExtractor
 parameter_list|(
@@ -1364,8 +1382,18 @@ argument_list|(
 name|scopeIRI
 argument_list|,
 operator|new
-name|OntologyInputSourceOXML
-argument_list|()
+name|RootOntologyIRISource
+argument_list|(
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|XML_OWL
+operator|.
+name|URI
+argument_list|)
+argument_list|)
+comment|/* new OntologyInputSourceOXML() */
 argument_list|)
 expr_stmt|;
 comment|// scope.setUp();

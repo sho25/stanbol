@@ -29,6 +29,24 @@ name|IRI
 import|;
 end_import
 
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|io
+operator|.
+name|OntologyInputSource
+import|;
+end_import
+
 begin_comment
 comment|/**  * An ontology space factory is responsible for the creation of new, readily  * specialized ontology spaces from supplied ontology input sources.  *   * Implementations should not call the setup method of the ontology space once  * it is created, so that it is not locked from editing since creation time.  *   * @author alessandro  *   */
 end_comment

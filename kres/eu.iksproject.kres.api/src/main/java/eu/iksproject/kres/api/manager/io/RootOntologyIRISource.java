@@ -7,6 +7,8 @@ name|iksproject
 operator|.
 name|kres
 operator|.
+name|api
+operator|.
 name|manager
 operator|.
 name|io

@@ -371,9 +371,27 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
 name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|io
+operator|.
+name|RootOntologyIRISource
 import|;
 end_import
 
@@ -537,22 +555,6 @@ name|iksproject
 operator|.
 name|kres
 operator|.
-name|manager
-operator|.
-name|io
-operator|.
-name|RootOntologyIRISource
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
 name|storage
 operator|.
 name|provider
@@ -652,7 +654,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Contingency code for missing components follows.
-comment|/*  * FIXME! The following code is required only for the tests. This should  * be removed and the test should work without this code.  */
+comment|/* 		 * FIXME! The following code is required only for the tests. This should 		 * be removed and the test should work without this code. 		 */
 if|if
 condition|(
 name|storeProvider
@@ -1362,15 +1364,7 @@ name|e2
 parameter_list|)
 block|{
 comment|// If this fails too, throw a bad request.
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"1.1"
-argument_list|)
-expr_stmt|;
+comment|// System.out.println("1.1");
 name|e2
 operator|.
 name|printStackTrace
@@ -1456,15 +1450,7 @@ name|e2
 parameter_list|)
 block|{
 comment|// If this fails too, throw a bad request.
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"1.2"
-argument_list|)
-expr_stmt|;
+comment|// System.out.println("1.2");
 name|e2
 operator|.
 name|printStackTrace
@@ -1490,15 +1476,7 @@ operator|==
 literal|null
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"1.3"
-argument_list|)
-expr_stmt|;
+comment|// System.out.println("1.3");
 throw|throw
 operator|new
 name|WebApplicationException

@@ -63,6 +63,24 @@ name|OWLOntology
 import|;
 end_import
 
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|io
+operator|.
+name|OntologyInputSource
+import|;
+end_import
+
 begin_comment
 comment|/**  * An ontology space identifies the set of OWL ontologies that should be  * "active" in a given context, e.g. for a certain user session or a specific  * reasoning service. Each ontology space has an ID and a top ontology that can  * be used as a shared resource for mutual exclusion and locking strategies.  *   * @author alessandro  *   */
 end_comment

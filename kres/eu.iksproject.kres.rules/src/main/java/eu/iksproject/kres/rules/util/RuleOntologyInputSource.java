@@ -219,23 +219,9 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
 name|OntologyInputSource
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|ontologies
-operator|.
-name|DBS_L1
 import|;
 end_import
 

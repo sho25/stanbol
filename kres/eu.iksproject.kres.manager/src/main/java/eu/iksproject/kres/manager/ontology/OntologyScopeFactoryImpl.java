@@ -85,7 +85,7 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
 name|OntologyInputSource
 import|;

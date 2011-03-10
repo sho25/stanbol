@@ -45,6 +45,24 @@ name|DuplicateIDException
 import|;
 end_import
 
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|api
+operator|.
+name|manager
+operator|.
+name|io
+operator|.
+name|OntologyInputSource
+import|;
+end_import
+
 begin_comment
 comment|/**  * An ontology scope factory is responsible for the creation of new ontology  * scopes from supplied ontology input sources for their core and custom spaces.<br>  *<br>  * Factory implementations should not call the setup method of the ontology  * scope once it is created, so that its spaces are not locked from editing  * since creation time.  *   * @author alessandro  *   */
 end_comment

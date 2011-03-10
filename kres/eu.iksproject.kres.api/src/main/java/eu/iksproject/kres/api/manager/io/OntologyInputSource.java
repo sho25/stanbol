@@ -11,7 +11,7 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 package|;
 end_package
 

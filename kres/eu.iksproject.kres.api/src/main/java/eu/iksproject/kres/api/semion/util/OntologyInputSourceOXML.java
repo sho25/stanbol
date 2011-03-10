@@ -83,7 +83,7 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
 name|OntologyInputSource
 import|;
@@ -104,6 +104,8 @@ import|;
 end_import
 
 begin_class
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|OntologyInputSourceOXML

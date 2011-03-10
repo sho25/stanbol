@@ -67,20 +67,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLOntologyCreationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -97,7 +83,7 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
 name|OntologyInputSource
 import|;
@@ -118,6 +104,8 @@ import|;
 end_import
 
 begin_class
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|OntologyInputSourceDBS_L1

@@ -7,6 +7,8 @@ name|iksproject
 operator|.
 name|kres
 operator|.
+name|api
+operator|.
 name|manager
 operator|.
 name|io
@@ -38,24 +40,6 @@ operator|.
 name|model
 operator|.
 name|OWLOntology
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|manager
-operator|.
-name|ontology
-operator|.
-name|OntologyInputSource
 import|;
 end_import
 

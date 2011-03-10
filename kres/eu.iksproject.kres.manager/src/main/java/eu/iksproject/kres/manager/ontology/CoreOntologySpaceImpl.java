@@ -53,9 +53,9 @@ name|api
 operator|.
 name|manager
 operator|.
-name|ontology
+name|io
 operator|.
-name|CoreOntologySpace
+name|OntologyInputSource
 import|;
 end_import
 
@@ -73,7 +73,7 @@ name|manager
 operator|.
 name|ontology
 operator|.
-name|OntologyInputSource
+name|CoreOntologySpace
 import|;
 end_import
 
