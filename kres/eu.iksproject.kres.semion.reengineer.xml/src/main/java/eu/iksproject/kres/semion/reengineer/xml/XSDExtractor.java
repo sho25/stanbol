@@ -979,24 +979,6 @@ name|XSD_OWL
 import|;
 end_import
 
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|semion
-operator|.
-name|reengineer
-operator|.
-name|parsers
-operator|.
-name|KReSDocumentBuilderFactoryImpl
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
@@ -4213,8 +4195,9 @@ block|{
 name|DocumentBuilderFactory
 name|dbf
 init|=
-operator|new
-name|KReSDocumentBuilderFactoryImpl
+name|DocumentBuilderFactory
+operator|.
+name|newInstance
 argument_list|()
 decl_stmt|;
 name|dbf
