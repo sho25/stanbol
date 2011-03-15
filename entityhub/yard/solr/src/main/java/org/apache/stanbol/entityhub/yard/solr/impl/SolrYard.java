@@ -952,7 +952,7 @@ name|DESCRIPTION
 argument_list|,
 name|value
 operator|=
-literal|"Default values for configuring the RickYard without editing"
+literal|"The Yard used by the Entityhub to store the data"
 argument_list|)
 block|,
 annotation|@
@@ -997,7 +997,7 @@ name|SOLR_SERVER_LOCATION
 argument_list|,
 name|value
 operator|=
-literal|"http://localhost:8181/solr/entityhub"
+literal|"entityhub"
 argument_list|)
 block|,
 annotation|@

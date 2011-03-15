@@ -1034,6 +1034,15 @@ name|EngineException
 throws|,
 name|IOException
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"enhance from From: "
+operator|+
+name|content
+argument_list|)
+expr_stmt|;
 name|ContentItem
 name|ci
 init|=
@@ -1043,7 +1052,9 @@ argument_list|(
 name|content
 operator|.
 name|getBytes
-argument_list|()
+argument_list|(
+literal|"UTF-8"
+argument_list|)
 argument_list|,
 name|TEXT_PLAIN
 argument_list|)
