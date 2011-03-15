@@ -27,15 +27,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|api
+name|reengineer
 operator|.
-name|semion
+name|base
 operator|.
 name|IdentifiedDataSource
 import|;
@@ -43,15 +43,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|api
+name|reengineer
 operator|.
-name|semion
+name|base
 operator|.
 name|util
 operator|.

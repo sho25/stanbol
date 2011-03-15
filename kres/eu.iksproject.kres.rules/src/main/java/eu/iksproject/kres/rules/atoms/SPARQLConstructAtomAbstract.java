@@ -15,15 +15,17 @@ end_package
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
-operator|.
-name|api
+name|stanbol
 operator|.
 name|rules
+operator|.
+name|base
+operator|.
+name|api
 operator|.
 name|KReSRuleAtom
 import|;

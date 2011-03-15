@@ -19,7 +19,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertNotNull
 import|;
 end_import
 
@@ -30,6 +30,24 @@ operator|.
 name|util
 operator|.
 name|Hashtable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|KReSONManager
 import|;
 end_import
 
@@ -50,22 +68,6 @@ operator|.
 name|junit
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|manager
-operator|.
-name|KReSONManager
 import|;
 end_import
 

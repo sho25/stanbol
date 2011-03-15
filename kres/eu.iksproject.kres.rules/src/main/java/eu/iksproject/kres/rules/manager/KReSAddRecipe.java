@@ -19,22 +19,6 @@ end_package
 
 begin_import
 import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|rules
-operator|.
-name|RuleStore
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -87,13 +71,17 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
+name|apache
 operator|.
-name|owlapi
+name|stanbol
 operator|.
-name|apibinding
+name|rules
 operator|.
-name|OWLManager
+name|base
+operator|.
+name|api
+operator|.
+name|RuleStore
 import|;
 end_import
 
@@ -105,9 +93,9 @@ name|semanticweb
 operator|.
 name|owlapi
 operator|.
-name|io
+name|apibinding
 operator|.
-name|RDFXMLOntologyFormat
+name|OWLManager
 import|;
 end_import
 
@@ -318,20 +306,6 @@ operator|.
 name|model
 operator|.
 name|OWLOntologyManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyStorageException
 import|;
 end_import
 

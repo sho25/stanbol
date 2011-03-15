@@ -25,6 +25,24 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|base
+operator|.
+name|api
+operator|.
+name|URIResource
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|hp
@@ -56,22 +74,6 @@ operator|.
 name|model
 operator|.
 name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|rules
-operator|.
-name|URIResource
 import|;
 end_import
 

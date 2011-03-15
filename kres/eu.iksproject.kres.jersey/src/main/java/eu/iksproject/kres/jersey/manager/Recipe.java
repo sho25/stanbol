@@ -279,6 +279,78 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|KReSONManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|store
+operator|.
+name|api
+operator|.
+name|OntologyStoreProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|store
+operator|.
+name|impl
+operator|.
+name|OntologyStorageProviderImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|base
+operator|.
+name|api
+operator|.
+name|RuleStore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -419,20 +491,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyStorageException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -446,54 +504,6 @@ operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|manager
-operator|.
-name|KReSONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|rules
-operator|.
-name|RuleStore
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|api
-operator|.
-name|storage
-operator|.
-name|OntologyStoreProvider
 import|;
 end_import
 
@@ -604,22 +614,6 @@ operator|.
 name|manager
 operator|.
 name|KReSRuleStore
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|storage
-operator|.
-name|provider
-operator|.
-name|OntologyStorageProviderImpl
 import|;
 end_import
 
@@ -1144,46 +1138,16 @@ name|ax
 argument_list|)
 expr_stmt|;
 block|}
-try|try
-block|{
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-operator|.
-name|saveOntology
-argument_list|(
-name|newmodel
-argument_list|,
-name|newmodel
-operator|.
-name|getOWLOntologyManager
-argument_list|()
-operator|.
-name|getOntologyFormat
-argument_list|(
-name|newmodel
-argument_list|)
-argument_list|,
-name|System
-operator|.
-name|out
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e
-parameter_list|)
-block|{
-comment|// TODO Auto-generated catch block
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
+comment|//            try {
+comment|//						OWLManager.createOWLOntologyManager().saveOntology(
+comment|//								newmodel,
+comment|//								newmodel.getOWLOntologyManager()
+comment|//										.getOntologyFormat(newmodel),
+comment|//								System.out);
+comment|//    		} catch (OWLOntologyStorageException e) {
+comment|//    			// TODO Auto-generated catch block
+comment|//    			e.printStackTrace();
+comment|//    		}
 return|return
 name|Response
 operator|.
@@ -1500,46 +1464,16 @@ name|ax
 argument_list|)
 expr_stmt|;
 block|}
-try|try
-block|{
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-operator|.
-name|saveOntology
-argument_list|(
-name|newmodel
-argument_list|,
-name|newmodel
-operator|.
-name|getOWLOntologyManager
-argument_list|()
-operator|.
-name|getOntologyFormat
-argument_list|(
-name|newmodel
-argument_list|)
-argument_list|,
-name|System
-operator|.
-name|out
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e
-parameter_list|)
-block|{
-comment|// TODO Auto-generated catch block
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
+comment|//            try {
+comment|//						OWLManager.createOWLOntologyManager().saveOntology(
+comment|//								newmodel,
+comment|//								newmodel.getOWLOntologyManager()
+comment|//										.getOntologyFormat(newmodel),
+comment|//								System.out);
+comment|//    		} catch (OWLOntologyStorageException e) {
+comment|//    			// TODO Auto-generated catch block
+comment|//    			e.printStackTrace();
+comment|//    		}
 return|return
 name|Response
 operator|.

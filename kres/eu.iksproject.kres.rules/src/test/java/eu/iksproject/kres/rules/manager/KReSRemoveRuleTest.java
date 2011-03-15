@@ -18,6 +18,30 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -41,27 +65,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
+name|apache
 operator|.
-name|owlapi
+name|stanbol
 operator|.
-name|model
+name|ontologymanager
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
+name|ontonet
 operator|.
 name|api
-operator|.
-name|manager
 operator|.
 name|KReSONManager
 import|;
@@ -69,31 +81,19 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
-operator|.
-name|api
+name|stanbol
 operator|.
 name|rules
 operator|.
+name|base
+operator|.
+name|api
+operator|.
 name|RuleStore
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|manager
-operator|.
-name|ONManager
 import|;
 end_import
 
@@ -148,14 +148,16 @@ import|;
 end_import
 
 begin_import
-import|import static
+import|import
 name|org
 operator|.
-name|junit
+name|semanticweb
 operator|.
-name|Assert
+name|owlapi
 operator|.
-name|*
+name|model
+operator|.
+name|IRI
 import|;
 end_import
 
@@ -170,6 +172,20 @@ operator|.
 name|model
 operator|.
 name|OWLOntologyStorageException
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|manager
+operator|.
+name|ONManager
 import|;
 end_import
 
