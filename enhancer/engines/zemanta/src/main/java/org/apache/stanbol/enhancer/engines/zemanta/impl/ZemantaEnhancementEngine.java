@@ -974,6 +974,8 @@ argument_list|(
 name|key
 argument_list|)
 decl_stmt|;
+try|try
+block|{
 name|results
 operator|.
 name|addAll
@@ -986,6 +988,23 @@ name|text
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|EngineException
+argument_list|(
+literal|"Unable to get Enhancement from remote Zemanta Service"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
 comment|//now we need to process the results and convert them into the Enhancer
 comment|//annotation structure
 name|processRecognition

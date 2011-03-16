@@ -516,8 +516,9 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|getClass
-argument_list|()
+name|JCRContentItem
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 specifier|private
