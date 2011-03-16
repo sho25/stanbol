@@ -122,6 +122,7 @@ decl_stmt|;
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Reference
 name|adapt
 parameter_list|(

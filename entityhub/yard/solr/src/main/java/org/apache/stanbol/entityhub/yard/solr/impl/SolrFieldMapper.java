@@ -105,28 +105,6 @@ name|defaults
 operator|.
 name|SolrConst
 operator|.
-name|LANG_MERGER_FIELD
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|yard
-operator|.
-name|solr
-operator|.
-name|defaults
-operator|.
-name|SolrConst
-operator|.
 name|PATH_SEPERATOR
 import|;
 end_import
@@ -642,6 +620,8 @@ name|SolrFieldMapper
 implements|implements
 name|FieldMapper
 block|{
+specifier|private
+specifier|static
 name|Logger
 name|log
 init|=
@@ -722,6 +702,12 @@ name|getIndexType
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * The Solr Server of this FieldMapper      */
+specifier|protected
+specifier|final
+name|SolrServer
+name|server
+decl_stmt|;
 comment|/**      * Internally used as LRU Cache with {@link SolrFieldMapper#LRU_MAPPINGS_CACHE_SIZE}      * elements. This subclass of {@link LinkedHashMap} overrides the      * {@link LinkedHashMap#removeEldestEntry(Entry)} as suggested by the java      * doc. It also uses the constructor that activates the ordering based on      * access time rather tan insertion time.      *      * @author Rupert Westenthaler      *      * @param<K> generic type of the key      * @param<V> generic type of the value      */
 specifier|private
 specifier|static
@@ -792,7 +778,7 @@ block|}
 comment|/**      * The assumption is, that only a handful of {@link IndexField}s are used      * very often.<p>      * So it makes sense to keep some mappings within a cache rather than calculating      * them again and again.      * @see LinkedHashMap#      */
 specifier|private
 specifier|final
-name|LinkedHashMap
+name|LRU
 argument_list|<
 name|IndexField
 argument_list|,
@@ -818,7 +804,7 @@ decl_stmt|;
 comment|/**      * The assumption is, that only a handful of fields appear in index documents.      * So it makes sense to keep some mappings within a cache rather than calculating      * them again and again.      */
 specifier|private
 specifier|final
-name|LinkedHashMap
+name|LRU
 argument_list|<
 name|String
 argument_list|,
@@ -834,11 +820,6 @@ argument_list|,
 name|IndexField
 argument_list|>
 argument_list|()
-decl_stmt|;
-specifier|protected
-specifier|final
-name|SolrServer
-name|server
 decl_stmt|;
 specifier|public
 name|SolrFieldMapper

@@ -401,26 +401,6 @@ name|JSONException
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|Logger
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|LoggerFactory
-import|;
-end_import
-
 begin_comment
 comment|/**  * TODO: Replace with Serializer infrastructure similar to {@link Serializer}  */
 end_comment
@@ -459,23 +439,10 @@ name|?
 argument_list|>
 argument_list|>
 block|{
-specifier|private
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|QueryResultListWriter
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
+comment|//    private final Logger log = LoggerFactory.getLogger(QueryResultListWriter.class);
 annotation|@
 name|Context
-specifier|protected
+specifier|private
 name|ServletContext
 name|servletContext
 decl_stmt|;
@@ -558,8 +525,6 @@ name|MediaType
 name|mediaType
 parameter_list|)
 block|{
-comment|//TODO: The type is also parsed as genericType ... so we can only check
-comment|//for the type :(
 return|return
 name|QueryResultList
 operator|.
@@ -570,23 +535,6 @@ argument_list|(
 name|type
 argument_list|)
 return|;
-comment|//       if(QueryResultList.class.isAssignableFrom(type)&&
-comment|//               genericType != null&&  //QueryResult is always a generic Type
-comment|//               genericType instanceof Class<?>){ //and such types do not use generics
-comment|//           //This writer supports String, Representation and all types of Signs
-comment|//           Class<?> genericClass  = (Class<?>) genericType;
-comment|//
-comment|//           if(String.class.isAssignableFrom(genericClass) ||
-comment|//                   Representation.class.isAssignableFrom(genericClass) ||
-comment|//                   Sign.class.isAssignableFrom(genericClass)){
-comment|//               //maybe we need further checks if we do not support all data types
-comment|//               //for all generic types! But currently all different types of
-comment|//               //QueryResultList support all the different MediaTypes!
-comment|//               return true;
-comment|//           }
-comment|//       }
-comment|//       log.info("Request for not writeable combination: type="+type+"|genericType="+genericType+"|mediaType="+mediaType);
-comment|//       return false;
 block|}
 annotation|@
 name|Override
@@ -604,7 +552,7 @@ name|Class
 argument_list|<
 name|?
 argument_list|>
-name|__doNotUse
+name|doNotUse
 parameter_list|,
 name|Type
 name|genericType
@@ -632,20 +580,7 @@ name|IOException
 throws|,
 name|WebApplicationException
 block|{
-name|Class
-argument_list|<
-name|?
-argument_list|>
-name|genericClass
-init|=
-operator|(
-name|Class
-argument_list|<
-name|?
-argument_list|>
-operator|)
-name|genericType
-decl_stmt|;
+comment|//        Class<?> genericClass = (Class<?>) genericType;
 if|if
 condition|(
 name|APPLICATION_JSON

@@ -659,6 +659,7 @@ specifier|private
 name|String
 name|yardId
 decl_stmt|;
+specifier|private
 name|boolean
 name|initWithYard
 init|=
@@ -672,7 +673,7 @@ specifier|private
 name|FieldMapper
 name|additionalMapper
 decl_stmt|;
-specifier|protected
+specifier|private
 name|ComponentContext
 name|context
 decl_stmt|;
@@ -848,10 +849,6 @@ literal|null
 decl_stmt|;
 if|if
 condition|(
-name|mappings
-operator|!=
-literal|null
-operator|&&
 name|mappings
 operator|instanceof
 name|String

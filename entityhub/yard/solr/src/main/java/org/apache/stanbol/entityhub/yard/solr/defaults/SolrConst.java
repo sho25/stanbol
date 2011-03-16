@@ -27,9 +27,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|SolrConst
 block|{
+specifier|private
+name|SolrConst
+parameter_list|()
+block|{}
 comment|/**      * Char used to mark special fields. Special fields are internally used      * fields that do not represent a value that was present in the original      * resource. They are used to store configurations, to collect values of      * different fields (e.g. labels with different languages)      */
 specifier|public
 specifier|static

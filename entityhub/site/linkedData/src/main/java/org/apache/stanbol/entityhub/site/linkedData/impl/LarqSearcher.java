@@ -409,13 +409,14 @@ expr_stmt|;
 block|}
 annotation|@
 name|Reference
-specifier|protected
+specifier|private
 name|Parser
 name|parser
 decl_stmt|;
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -623,6 +624,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|String

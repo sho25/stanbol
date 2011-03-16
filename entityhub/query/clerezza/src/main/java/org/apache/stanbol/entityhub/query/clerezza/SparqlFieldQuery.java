@@ -151,7 +151,7 @@ specifier|private
 name|int
 name|varNum
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Map
 argument_list|<
@@ -171,7 +171,7 @@ name|String
 argument_list|>
 name|unmodField2VarMappings
 decl_stmt|;
-specifier|protected
+specifier|private
 name|EndpointTypeEnum
 name|endpointType
 decl_stmt|;
@@ -505,6 +505,18 @@ name|super
 operator|.
 name|hashCode
 argument_list|()
+operator|+
+name|field2VarMappings
+operator|.
+name|hashCode
+argument_list|()
+operator|+
+name|varNum
+operator|+
+name|endpointType
+operator|.
+name|ordinal
+argument_list|()
 return|;
 block|}
 comment|/**      * Removes also the field to var name mappings      * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeAllSelectedFields()      */
@@ -576,6 +588,17 @@ operator|.
 name|varNum
 operator|==
 name|varNum
+operator|&&
+operator|(
+operator|(
+name|SparqlFieldQuery
+operator|)
+name|obj
+operator|)
+operator|.
+name|endpointType
+operator|==
+name|endpointType
 return|;
 block|}
 comment|/**      * Getter for the SPARQL SELECT representation of this FieldQuery      * @return the SPARQL SELECT query      */

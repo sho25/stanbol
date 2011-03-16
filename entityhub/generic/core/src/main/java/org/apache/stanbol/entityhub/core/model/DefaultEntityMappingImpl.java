@@ -418,6 +418,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|getEntityId
 parameter_list|()
@@ -450,6 +451,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Date
 name|getExpires
 parameter_list|()
@@ -472,6 +474,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|MappingState
 name|getState
 parameter_list|()
@@ -556,6 +559,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|getSymbolId
 parameter_list|()
@@ -588,6 +592,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|setExpires
 parameter_list|(
@@ -610,6 +615,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|setState
 parameter_list|(

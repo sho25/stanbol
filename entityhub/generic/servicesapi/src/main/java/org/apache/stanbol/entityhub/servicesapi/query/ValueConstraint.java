@@ -50,12 +50,12 @@ name|ValueConstraint
 extends|extends
 name|Constraint
 block|{
-specifier|protected
+specifier|private
 specifier|final
 name|Object
 name|value
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Collection
 argument_list|<

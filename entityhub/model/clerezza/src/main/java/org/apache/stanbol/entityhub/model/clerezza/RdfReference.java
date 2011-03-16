@@ -83,7 +83,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Reference MUST NOT be NULL!"
 argument_list|)
@@ -136,7 +136,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Reference MUST NOT be NULL!"
 argument_list|)
@@ -247,10 +247,6 @@ name|obj
 parameter_list|)
 block|{
 return|return
-name|obj
-operator|!=
-literal|null
-operator|&&
 name|obj
 operator|instanceof
 name|Reference

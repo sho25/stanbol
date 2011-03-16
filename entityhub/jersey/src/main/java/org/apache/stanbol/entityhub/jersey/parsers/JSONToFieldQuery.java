@@ -283,9 +283,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|JSONToFieldQuery
 block|{
+specifier|private
+name|JSONToFieldQuery
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final
@@ -324,7 +329,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed JSON object MUST NOT be NULL!"
 argument_list|)

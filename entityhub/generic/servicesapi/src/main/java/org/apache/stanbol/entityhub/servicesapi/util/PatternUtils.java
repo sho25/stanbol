@@ -33,9 +33,14 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|PatternUtils
 block|{
+specifier|private
+name|PatternUtils
+parameter_list|()
+block|{}
 comment|/**      * Converts a Wildcard search string to REGEX. If strict is enabled, than      * the REGEX pattern searches only full labels ("^Patt?er.*$") otherwise      * it searches the whole text ("Patt?er.*")      * @param wildcard the wildcard pattern      * @param strict if<code>true</code> than the REGEX pattern searches      * whole words.      * @return the pattern      */
 specifier|public
 specifier|static

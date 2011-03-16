@@ -100,7 +100,7 @@ argument_list|>
 name|supportedTypes
 parameter_list|()
 function_decl|;
-comment|/**      * Getter for the {@link SolrServer} instance for the provided URI or path      * (in case of an embedded server)      * @param type The type of the requested SolrServer instance or<code>null</code>      * for the default type      * @param uriOrPath the URI (in case of an remote SolrServer that is accessed      * via RESTfull services) or the Path (in case of an embedded SolrServer)      * @param additional This allows to parse additional SolrServers. This may be      * ignored if the requested type does not support the usage of multiple      * servers.      * @return the configured SolrServer client for the parsed parameter      * @throws NullPointerException if<code>null</code> is parsed as uriOrPath.      * @throws IllegalArgumentException if the parsed URI or path is not valid      * for the requested {@link Type} or the parsed type is not supported by      * this provider      */
+comment|/**      * Getter for the {@link SolrServer} instance for the provided URI or path      * (in case of an embedded server)      * @param type The type of the requested SolrServer instance or<code>null</code>      * for the default type      * @param uriOrPath the URI (in case of an remote SolrServer that is accessed      * via RESTfull services) or the Path (in case of an embedded SolrServer)      * @param additional This allows to parse additional SolrServers. This may be      * ignored if the requested type does not support the usage of multiple      * servers.      * @return the configured SolrServer client for the parsed parameter      * @throws NullPointerException       * @throws IllegalArgumentException if<code>null</code> is parsed as uriOrPath      * or if the parsed URI or path is not valid for the requested {@link Type}       * or the parsed type is not supported by this provider      */
 name|SolrServer
 name|getSolrServer
 parameter_list|(
@@ -115,8 +115,6 @@ modifier|...
 name|additional
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
 block|}

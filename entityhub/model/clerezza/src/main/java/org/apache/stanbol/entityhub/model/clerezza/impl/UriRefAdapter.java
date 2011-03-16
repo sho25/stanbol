@@ -132,6 +132,7 @@ argument_list|,
 name|A
 argument_list|>
 block|{
+specifier|private
 specifier|static
 name|Logger
 name|log
@@ -153,6 +154,7 @@ argument_list|)
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|A
 name|adapt
 parameter_list|(

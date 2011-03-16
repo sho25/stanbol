@@ -443,7 +443,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Context
-specifier|protected
+specifier|private
 name|ServletContext
 name|servletContext
 decl_stmt|;
@@ -476,7 +476,7 @@ name|long
 name|getSize
 parameter_list|(
 name|Sign
-name|Sign
+name|sign
 parameter_list|,
 name|Class
 argument_list|<

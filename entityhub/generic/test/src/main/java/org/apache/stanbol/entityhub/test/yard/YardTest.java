@@ -27,7 +27,67 @@ name|framework
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+operator|.
+name|assertNotSame
+import|;
+end_import
+
+begin_import
+import|import static
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+operator|.
+name|assertNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
@@ -140,26 +200,6 @@ operator|.
 name|yard
 operator|.
 name|YardException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|After
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|AfterClass
 import|;
 end_import
 
@@ -634,7 +674,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -684,7 +724,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -712,7 +752,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -1061,7 +1101,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -1486,7 +1526,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -1555,7 +1595,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -1970,7 +2010,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -2142,7 +2182,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)

@@ -122,12 +122,6 @@ argument_list|<
 name|Text
 argument_list|>
 block|{
-comment|//    protected final Iterator<?> it;
-comment|//    private Text next;
-comment|//    private Boolean hasNext;
-comment|//    protected final Set<String> languages;
-comment|//    private final boolean isNullLanguage;
-comment|//    protected final ValueFactory valueFactory;
 comment|/**      * Creates an instance that iterates over values and returns {@link Text}      * instances that confirm to the active languages. If no languages are parsed      * or<code>null</code> is parsed as a language, this Iterator also creates      * and returns {@link Text} instances for {@link String} values.      * @param valueFactory the factory used to create text instances for String values      * @param it the iterator      * @param languages The active languages or no values to accept all languages      */
 specifier|public
 name|TextIterator
@@ -163,21 +157,6 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-comment|//        if(it == null){
-comment|//            throw new IllegalArgumentException("Parsed iterator MUST NOT be NULL!");
-comment|//        }
-comment|//        this.it = it;
-comment|//        if(valueFactory == null){
-comment|//            throw new IllegalArgumentException("Parsed ValueFactory MUST NOT be NULL!");
-comment|//        }
-comment|//        this.valueFactory = valueFactory;
-comment|//        if(languages != null&& languages.length>0){
-comment|//            this.languages = Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(languages)));
-comment|//            isNullLanguage = this.languages.contains(null);
-comment|//        } else {
-comment|//            this.languages = null;
-comment|//            isNullLanguage = true;
-comment|//        }
 block|}
 specifier|private
 specifier|static
@@ -191,7 +170,7 @@ argument_list|,
 name|Text
 argument_list|>
 block|{
-specifier|protected
+specifier|private
 specifier|final
 name|Set
 argument_list|<
@@ -204,7 +183,7 @@ specifier|final
 name|boolean
 name|isNullLanguage
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|ValueFactory
 name|valueFactory

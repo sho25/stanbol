@@ -53,10 +53,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|//    protected final Iterator<?> it;
-comment|//    protected final Class<T> type;
-comment|//    private T next;
-comment|//    private Boolean hasNext;
 comment|/**      * Constructs an iterator that selects only elements of the parsed iterator      * that are assignable to the parse type      * @param it the base iterator      * @param type the type all elements of this Iterator need to be assignable to.      */
 annotation|@
 name|SuppressWarnings
@@ -99,76 +95,7 @@ argument_list|,
 name|type
 argument_list|)
 expr_stmt|;
-comment|//        if(it == null){
-comment|//            throw new IllegalArgumentException("Parsed iterator MUST NOT be NULL!");
-comment|//        }
-comment|//        if(type == null){
-comment|//            throw new IllegalArgumentException("Parsed type MUST NOT be NULL!");
-comment|//        }
-comment|//        this.it = it;
-comment|//        this.type = type;
 block|}
-comment|//    @Override
-comment|//    public final void remove() {
-comment|//        /*
-comment|//         * TODO: Any Iterator that filters elements of the underlying Iterator
-comment|//         * needs to call Iterator#next() in the underlying Iterator to get the
-comment|//         * next element that confirms with the filter.
-comment|//         * However the Iterator#remove() is defined as removing the last element
-comment|//         * to be returned by Iterator#next(). Therefore calling hasNext would
-comment|//         * change the element to be removed by this method.
-comment|//         * Currently I do not know a way around that but I would also like to
-comment|//         * keep the remove functionality for Iterator that filter elements of an
-comment|//         * underlying Iterator. To prevent unpredictable behaviour in such cases
-comment|//         * I throw an IllegalStateException in such cases.
-comment|//         * This decision assumes, that in most usage scenarios hasNext will not
-comment|//         * likely be called before calling remove and even in such cases
-comment|//         * it will be most likely be possible to refactor the code to confirm
-comment|//         * with this restriction.
-comment|//         * I hope this will help developers that encounter this exception to
-comment|//         * modify there code!
-comment|//         * If someone has a better Idea how to solve this please let me know!
-comment|//         * best
-comment|//         * Rupert Westenthaler
-comment|//         */
-comment|//        if(hasNext!= null){
-comment|//            throw new IllegalStateException("Remove can not be called after calling hasNext() because this Method needs to call next() on the underlying Interator and therefore would change the element to be removed :(");
-comment|//        }
-comment|//        it.remove();
-comment|//    }
-comment|//
-comment|//    @Override
-comment|//    public final T next() {
-comment|//        hasNext(); //call hasNext (to init next Element if not already done)
-comment|//        if(!hasNext){
-comment|//            throw new NoSuchElementException();
-comment|//        } else {
-comment|//            T current = next;
-comment|//            next = null;
-comment|//            hasNext = null;
-comment|//            return current;
-comment|//        }
-comment|//    }
-comment|//
-comment|//    @Override
-comment|//    public final boolean hasNext() {
-comment|//        if(hasNext == null){ // only once even with multiple calls
-comment|//            next = prepareNext();
-comment|//            hasNext = next != null;
-comment|//        }
-comment|//        return hasNext;
-comment|//    }
-comment|//    @SuppressWarnings("unchecked")
-comment|//    protected T prepareNext(){
-comment|//        Object check;
-comment|//        while(it.hasNext()){
-comment|//            check = it.next();
-comment|//            if(type.isAssignableFrom(check.getClass())){
-comment|//                return (T)check;
-comment|//            }
-comment|//        }
-comment|//        return null;
-comment|//    }
 comment|/**      * Adapter implementation that uses {@link Class#isAssignableFrom(Class)}      * to check whether a value can be casted to the requested type      */
 specifier|private
 specifier|static

@@ -141,7 +141,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed text MUST NOT be NULL"
 argument_list|)
@@ -297,7 +297,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Object
+name|RdfText
 name|clone
 parameter_list|()
 block|{
@@ -364,10 +364,6 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|obj
-operator|!=
-literal|null
-operator|&&
 name|obj
 operator|instanceof
 name|Text

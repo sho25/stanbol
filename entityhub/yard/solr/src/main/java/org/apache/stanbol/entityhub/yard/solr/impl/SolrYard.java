@@ -1150,12 +1150,12 @@ name|SolrServer
 name|server
 decl_stmt|;
 comment|/**      * The {@link FieldMapper} is responsible for converting fields of      * {@link Representation} to fields in the {@link SolrInputDocument} and      * vice versa      */
-specifier|protected
+specifier|private
 name|FieldMapper
 name|fieldMapper
 decl_stmt|;
 comment|/**      * The {@link IndexValueFactory} is responsible for converting values of      * fields in the {@link Representation} to the according {@link IndexValue}.      * One should note, that some properties of the {@link IndexValue} such as      * the language ({@link IndexValue#getLanguage()}) and the dataType      * ({@link IndexValue#getType()}) are encoded within the field name inside      * the {@link SolrInputDocument} and {@link SolrDocument}. This is done by      * the configured {@link FieldMapper}.      */
-specifier|protected
+specifier|private
 name|IndexValueFactory
 name|indexValueFactory
 decl_stmt|;
@@ -1277,6 +1277,7 @@ argument_list|)
 annotation|@
 name|Activate
 specifier|protected
+specifier|final
 name|void
 name|activate
 parameter_list|(
@@ -1380,6 +1381,17 @@ argument_list|,
 name|config
 argument_list|)
 expr_stmt|;
+comment|//mayby the super activate has updated the configuration
+name|config
+operator|=
+operator|(
+name|SolrYardConfig
+operator|)
+name|this
+operator|.
+name|getConfig
+argument_list|()
+expr_stmt|;
 if|if
 condition|(
 name|solrServerProviderManager
@@ -1402,26 +1414,12 @@ name|solrServerProviderManager
 operator|.
 name|getSolrServer
 argument_list|(
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
-name|this
-operator|.
 name|config
-operator|)
 operator|.
 name|getSolrServerType
 argument_list|()
 argument_list|,
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
-name|this
-operator|.
 name|config
-operator|)
 operator|.
 name|getSolrServerLocation
 argument_list|()
@@ -1490,7 +1488,8 @@ operator|=
 operator|new
 name|SolrQueryFactory
 argument_list|(
-name|valueFactory
+name|getValueFactory
+argument_list|()
 argument_list|,
 name|indexValueFactory
 argument_list|,
@@ -1499,14 +1498,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
-name|this
-operator|.
 name|config
-operator|)
 operator|.
 name|isMultiYardIndexLayout
 argument_list|()
@@ -1528,8 +1520,6 @@ name|solrQueryFactoy
 operator|.
 name|setDefaultQueryResults
 argument_list|(
-name|this
-operator|.
 name|config
 operator|.
 name|getDefaultQueryResultNumber
@@ -1540,8 +1530,6 @@ name|solrQueryFactoy
 operator|.
 name|setMaxQueryResults
 argument_list|(
-name|this
-operator|.
 name|config
 operator|.
 name|getMaxQueryResultNumber
@@ -1570,6 +1558,7 @@ block|}
 annotation|@
 name|Deactivate
 specifier|protected
+specifier|final
 name|void
 name|deactivate
 parameter_list|(
@@ -1592,6 +1581,15 @@ operator|+
 name|context
 argument_list|)
 expr_stmt|;
+name|SolrYardConfig
+name|config
+init|=
+operator|(
+name|SolrYardConfig
+operator|)
+name|getConfig
+argument_list|()
+decl_stmt|;
 try|try
 block|{
 name|this
@@ -1618,14 +1616,7 @@ name|format
 argument_list|(
 literal|"Unable to commit unsaved changes to SolrServer %s during deactivate!"
 argument_list|,
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
-name|this
-operator|.
 name|config
-operator|)
 operator|.
 name|getSolrServerLocation
 argument_list|()
@@ -1651,14 +1642,7 @@ name|format
 argument_list|(
 literal|"Unable to commit unsaved changes to SolrServer %s during deactivate!"
 argument_list|,
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
-name|this
-operator|.
 name|config
-operator|)
 operator|.
 name|getSolrServerLocation
 argument_list|()
@@ -1714,6 +1698,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -2026,6 +2011,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|String
@@ -2174,6 +2160,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -2200,6 +2187,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|getRepresentation
 parameter_list|(
@@ -2218,7 +2206,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representation id MUST NOT be NULL!"
 argument_list|)
@@ -2405,6 +2393,7 @@ return|;
 block|}
 comment|/**      * Creates the Representation for the parsed SolrDocument!      * @param doc The Solr Document to convert      * @param fields if NOT NULL only this fields are added to the Representation      * @return the Representation      */
 specifier|protected
+specifier|final
 name|Representation
 name|createRepresentation
 parameter_list|(
@@ -2459,7 +2448,8 @@ block|}
 name|Representation
 name|rep
 init|=
-name|valueFactory
+name|getValueFactory
+argument_list|()
 operator|.
 name|createRepresentation
 argument_list|(
@@ -2729,6 +2719,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|boolean
 name|isRepresentation
 parameter_list|(
@@ -2747,7 +2738,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representation id MUST NOT be NULL!"
 argument_list|)
@@ -2827,6 +2818,7 @@ block|}
 block|}
 comment|/**      * Checks what of the documents referenced by the parsed IDs are present      * in the Solr Server      * @param ids the ids of the documents to check      * @return the ids of the found documents      * @throws SolrServerException on any exception of the SolrServer      * @throws IOException an any IO exception while accessing the SolrServer      */
 specifier|protected
+specifier|final
 name|Set
 argument_list|<
 name|String
@@ -2919,6 +2911,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|remove
 parameter_list|(
@@ -2939,7 +2932,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representation id MUST NOT be NULL!"
 argument_list|)
@@ -3020,6 +3013,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|remove
 parameter_list|(
@@ -3043,7 +3037,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IDs MUST NOT be NULL"
 argument_list|)
@@ -3147,6 +3141,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|store
 parameter_list|(
@@ -3190,7 +3185,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representation MUST NOT be NULL!"
 argument_list|)
@@ -3322,6 +3317,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterable
 argument_list|<
 name|Representation
@@ -3348,7 +3344,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representations MUST NOT be NULL!"
 argument_list|)
@@ -3520,6 +3516,7 @@ return|;
 block|}
 comment|/**      * boost if present!      * @param representation      * @return      */
 specifier|protected
+specifier|final
 name|SolrInputDocument
 name|createSolrInputDocument
 parameter_list|(
@@ -3527,6 +3524,15 @@ name|Representation
 name|representation
 parameter_list|)
 block|{
+name|SolrYardConfig
+name|config
+init|=
+operator|(
+name|SolrYardConfig
+operator|)
+name|getConfig
+argument_list|()
+decl_stmt|;
 name|SolrInputDocument
 name|inputDocument
 init|=
@@ -3538,14 +3544,7 @@ comment|// If multiYardLayout is active, than we need to add the YardId as
 comment|// domain for all added documents!
 if|if
 condition|(
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
-name|this
-operator|.
 name|config
-operator|)
 operator|.
 name|isMultiYardIndexLayout
 argument_list|()
@@ -3922,6 +3921,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|update
 parameter_list|(
@@ -3944,7 +3944,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representation MUST NOT be NULL!"
 argument_list|)
@@ -4005,6 +4005,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterable
 argument_list|<
 name|Representation
@@ -4033,7 +4034,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Iterable over Representations MUST NOT be NULL!"
 argument_list|)
@@ -4342,6 +4343,7 @@ return|;
 block|}
 comment|/**      * Stores the parsed document within the Index. This Method is also used by      * other classes within this package to store configurations directly within      * the index      * @param inputDoc the document to store      */
 specifier|protected
+specifier|final
 name|void
 name|storeSolrDocument
 parameter_list|(
@@ -4363,6 +4365,7 @@ expr_stmt|;
 block|}
 comment|/**      * Getter for a SolrDocument based on the ID. This Method is also used by      * other classes within this package to load configurations directly from      * the index      * @param inputDoc the document to store      */
 specifier|public
+specifier|final
 name|SolrDocument
 name|getSolrDocument
 parameter_list|(
@@ -4384,6 +4387,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
+specifier|final
 name|Collection
 argument_list|<
 name|SolrDocument
@@ -4407,6 +4411,15 @@ name|SolrServerException
 throws|,
 name|IOException
 block|{
+name|SolrYardConfig
+name|config
+init|=
+operator|(
+name|SolrYardConfig
+operator|)
+name|getConfig
+argument_list|()
+decl_stmt|;
 name|SolrQuery
 name|solrQuery
 init|=
@@ -4487,12 +4500,7 @@ decl_stmt|;
 name|Integer
 name|configuredMaxClauses
 init|=
-operator|(
-operator|(
-name|SolrYardConfig
-operator|)
 name|config
-operator|)
 operator|.
 name|getMaxBooleanClauses
 argument_list|()
@@ -4703,9 +4711,8 @@ else|else
 block|{
 if|if
 condition|(
+operator|!
 name|myList
-operator|==
-literal|false
 condition|)
 block|{
 comment|//most of the time there will be only one request, so only
@@ -4744,6 +4751,7 @@ name|resultDocs
 return|;
 block|}
 specifier|protected
+specifier|final
 name|SolrDocument
 name|getSolrDocument
 parameter_list|(

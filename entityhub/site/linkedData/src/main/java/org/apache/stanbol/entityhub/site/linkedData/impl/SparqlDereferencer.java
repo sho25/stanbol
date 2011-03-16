@@ -344,7 +344,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Reference
-specifier|protected
+specifier|private
 name|Parser
 name|parser
 decl_stmt|;
@@ -352,6 +352,7 @@ comment|/*      * TODO: Supports only Triple serialisations as content types.   
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|InputStream
 name|dereference
 parameter_list|(
@@ -445,6 +446,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
+specifier|final
 name|Representation
 name|dereference
 parameter_list|(

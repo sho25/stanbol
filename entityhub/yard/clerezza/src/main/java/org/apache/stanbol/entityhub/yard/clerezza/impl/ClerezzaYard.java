@@ -673,7 +673,7 @@ name|model
 operator|.
 name|clerezza
 operator|.
-name|utils
+name|impl
 operator|.
 name|Resource2StringAdapter
 import|;
@@ -973,6 +973,8 @@ name|AbstractYard
 implements|implements
 name|Yard
 block|{
+specifier|private
+specifier|static
 name|Logger
 name|log
 init|=
@@ -988,6 +990,7 @@ decl_stmt|;
 comment|/**      * Property used to mark empty Representations managed by this Graph. This is      * needed to workaround the fact, that the Entityhub supports the storage of      * empty Representations but this Yard uses the search for any outgoing      * relation (triple with the id of the representation as Subject) for the       * implementation of {@link #isRepresentation(String)}. Therefore for an      * empty Representation {@link #isRepresentation(String)} would return false      * even if the representation was {@link #store(Representation)} previously.      *<p>      * Adding the Triple<br>      *<code> ?representationId<{@value #MANAGED_REPRESENTATION}> true^^xsd:boolean</code>      *<br> for any empty Representation avoids this unwanted behaviour.      */
 specifier|public
 specifier|static
+specifier|final
 name|UriRef
 name|MANAGED_REPRESENTATION
 init|=
@@ -1000,6 +1003,7 @@ decl_stmt|;
 comment|/**      * The TRUE value used as object for the property {@link #MANAGED_REPRESENTATION}.      */
 specifier|private
 specifier|static
+specifier|final
 name|Literal
 name|TRUE_LITERAL
 init|=
@@ -1065,6 +1069,7 @@ argument_list|)
 annotation|@
 name|Activate
 specifier|protected
+specifier|final
 name|void
 name|activate
 parameter_list|(
@@ -1130,7 +1135,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Internally used to activate the Yard. In case the Yard runs within a      * OSGI container it is called by the {@link #activate(ComponentContext)}      * Method. In case the Yard runs outside of an OSGI Container it is called      * by the Constructor taking the {@link YardConfig} as parameter      * @param config The configuration for the new Yard instance      * @throws NullPointerException In case<code>null</code> is parsed as configuration      * @throws IllegalArgumentException In case the configuration is invalid      */
+comment|/**      * Internally used to activate the Yard. In case the Yard runs within a      * OSGI container it is called by the {@link #activate(ComponentContext)}      * Method. In case the Yard runs outside of an OSGI Container it is called      * by the Constructor taking the {@link YardConfig} as parameter      * @param config The configuration for the new Yard instance      * @throws IllegalArgumentException In case<code>null</code> is parsed as       * configuration or the configuration is invalid      */
 specifier|private
 specifier|final
 name|void
@@ -1141,8 +1146,6 @@ name|config
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
-throws|,
-name|NullPointerException
 block|{
 name|super
 operator|.
@@ -1277,6 +1280,7 @@ block|}
 annotation|@
 name|Deactivate
 specifier|protected
+specifier|final
 name|void
 name|deactivate
 parameter_list|(
@@ -1322,6 +1326,7 @@ expr_stmt|;
 block|}
 comment|/**      * Getter for the URI used for the named graph. The returned value is      * {@link #YARD_URI_PREFIX}+{@link #getId()}.      * @return the URI used for the RDF graph that stores all the data of this      * yard.      */
 specifier|public
+specifier|final
 name|String
 name|getYardGraphUri
 parameter_list|()
@@ -1352,7 +1357,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed representation id MUST NOT be NULL!"
 argument_list|)
@@ -1389,6 +1394,7 @@ return|;
 block|}
 comment|/**      * Internally used to create Representations for URIs      * @param uri the uri      * @param check if<code>false</code> than there is no check if the URI      *     refers to a Resource in the graph that is of type {@link #REPRESENTATION}      * @return the Representation      */
 specifier|protected
+specifier|final
 name|Representation
 name|getRepresentation
 parameter_list|(
@@ -1461,7 +1467,8 @@ operator|(
 operator|(
 name|RdfValueFactory
 operator|)
-name|valueFactory
+name|getValueFactory
+argument_list|()
 operator|)
 operator|.
 name|createRdfRepresentation
@@ -1653,7 +1660,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed id MUST NOT be NULL!"
 argument_list|)
@@ -1689,6 +1696,7 @@ return|;
 block|}
 comment|/**      * Internally used to check if a URI resource represents an representation      * @param resource the resource to check      * @return the state      */
 specifier|protected
+specifier|final
 name|boolean
 name|isRepresentation
 parameter_list|(
@@ -1733,7 +1741,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Representation id MUST NOT be NULL!"
 argument_list|)
@@ -1801,6 +1809,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|remove
 parameter_list|(
@@ -1824,7 +1833,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Iterable over the IDs to remove MUST NOT be NULL!"
 argument_list|)
@@ -1857,6 +1866,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|store
 parameter_list|(
@@ -1868,6 +1878,21 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 block|{
+if|if
+condition|(
+name|representation
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed Representation MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
 return|return
 name|store
 argument_list|(
@@ -1882,6 +1907,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterable
 argument_list|<
 name|Representation
@@ -1908,7 +1934,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Iterable over the Representations to store MUST NOT be NULL!"
 argument_list|)
@@ -1926,6 +1952,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|update
 parameter_list|(
@@ -1937,6 +1964,21 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 block|{
+if|if
+condition|(
+name|representation
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed Representation MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
 return|return
 name|store
 argument_list|(
@@ -1951,6 +1993,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterable
 argument_list|<
 name|Representation
@@ -1977,7 +2020,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Iterable over the Representations to update MUST NOT be NULL!"
 argument_list|)
@@ -2140,9 +2183,11 @@ name|representation
 operator|==
 literal|null
 condition|)
+block|{
 return|return
 literal|null
 return|;
+block|}
 if|if
 condition|(
 name|isRepresentation
@@ -2217,7 +2262,8 @@ operator|(
 operator|(
 name|RdfValueFactory
 operator|)
-name|valueFactory
+name|getValueFactory
+argument_list|()
 operator|)
 operator|.
 name|toRdfRepresentation
@@ -2357,165 +2403,13 @@ argument_list|(
 name|parsedQuery
 argument_list|)
 decl_stmt|;
-name|int
-name|limit
-init|=
-name|QueryUtils
-operator|.
-name|getLimit
-argument_list|(
-name|query
-argument_list|,
-name|config
-operator|.
-name|getDefaultQueryResultNumber
-argument_list|()
-argument_list|,
-name|config
-operator|.
-name|getMaxQueryResultNumber
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|SelectQuery
-name|sparqlQuery
-decl_stmt|;
-name|String
-name|sparqlQueryString
-init|=
-name|SparqlQueryUtils
-operator|.
-name|createSparqlSelectQuery
-argument_list|(
-name|query
-argument_list|,
-literal|false
-argument_list|,
-name|limit
-argument_list|,
-name|EndpointTypeEnum
-operator|.
-name|Standard
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|sparqlQuery
-operator|=
-operator|(
-name|SelectQuery
-operator|)
-name|QueryParser
-operator|.
-name|getInstance
-argument_list|()
-operator|.
-name|parse
-argument_list|(
-name|sparqlQueryString
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|ParseException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"ParseException for SPARQL Query in findRepresentation"
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"FieldQuery: "
-operator|+
-name|query
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"SPARQL Query: "
-operator|+
-name|sparqlQueryString
-argument_list|)
-expr_stmt|;
-throw|throw
-operator|new
-name|YardException
-argument_list|(
-literal|"Unable to parse SPARQL query generated for the parse FieldQuery"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|ClassCastException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"ClassCastExeption because parsed SPARQL Query is not of Type "
-operator|+
-name|SelectQuery
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"FieldQuery: "
-operator|+
-name|query
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"SPARQL Query: "
-operator|+
-name|sparqlQueryString
-argument_list|)
-expr_stmt|;
-throw|throw
-operator|new
-name|YardException
-argument_list|(
-literal|"Unable to parse SPARQL SELECT query generated for the parse FieldQuery"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
 specifier|final
 name|ResultSet
 name|result
 init|=
-name|tcManager
-operator|.
-name|executeSparqlQuery
+name|executeSparqlFieldQuery
 argument_list|(
-operator|(
-name|SelectQuery
-operator|)
-name|sparqlQuery
-argument_list|,
-name|graph
+name|query
 argument_list|)
 decl_stmt|;
 comment|//A little bit complex construct ...
@@ -2623,49 +2517,18 @@ name|class
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|QueryResultList
-argument_list|<
-name|Representation
-argument_list|>
-name|findRepresentation
+comment|/**      * Returns the SPARQL result set for a given {@link SparqlFieldQuery} that      * was executed on this yard      * @param query the SparqlFieldQuery instance      * @return the results of the SPARQL query in the yard      * @throws YardException in case the generated SPARQL query could not be parsed      * or the generated Query is not an SPARQL SELECT query.      */
+specifier|private
+name|ResultSet
+name|executeSparqlFieldQuery
 parameter_list|(
-name|FieldQuery
-name|parsedQuery
-parameter_list|)
-throws|throws
-name|YardException
-throws|,
-name|IllegalArgumentException
-block|{
-if|if
-condition|(
-name|parsedQuery
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed query MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
 specifier|final
 name|SparqlFieldQuery
 name|query
-init|=
-name|SparqlFieldQueryFactory
-operator|.
-name|getSparqlFieldQuery
-argument_list|(
-name|parsedQuery
-argument_list|)
-decl_stmt|;
+parameter_list|)
+throws|throws
+name|YardException
+block|{
 name|int
 name|limit
 init|=
@@ -2675,12 +2538,14 @@ name|getLimit
 argument_list|(
 name|query
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getDefaultQueryResultNumber
 argument_list|()
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getMaxQueryResultNumber
 argument_list|()
@@ -2811,10 +2676,7 @@ name|e
 argument_list|)
 throw|;
 block|}
-specifier|final
-name|ResultSet
-name|result
-init|=
+return|return
 name|tcManager
 operator|.
 name|executeSparqlQuery
@@ -2825,6 +2687,59 @@ operator|)
 name|sparqlQuery
 argument_list|,
 name|graph
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|QueryResultList
+argument_list|<
+name|Representation
+argument_list|>
+name|findRepresentation
+parameter_list|(
+name|FieldQuery
+name|parsedQuery
+parameter_list|)
+throws|throws
+name|YardException
+throws|,
+name|IllegalArgumentException
+block|{
+if|if
+condition|(
+name|parsedQuery
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed query MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+specifier|final
+name|SparqlFieldQuery
+name|query
+init|=
+name|SparqlFieldQueryFactory
+operator|.
+name|getSparqlFieldQuery
+argument_list|(
+name|parsedQuery
+argument_list|)
+decl_stmt|;
+specifier|final
+name|ResultSet
+name|result
+init|=
+name|executeSparqlFieldQuery
+argument_list|(
+name|query
 argument_list|)
 decl_stmt|;
 comment|//Note: An other possibility would be to first iterate over all results and add it to
@@ -2890,10 +2805,6 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|resource
-operator|!=
-literal|null
-operator|&&
 name|resource
 operator|instanceof
 name|UriRef
@@ -2972,6 +2883,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -3021,12 +2933,14 @@ name|getLimit
 argument_list|(
 name|query
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getDefaultQueryResultNumber
 argument_list|()
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getMaxQueryResultNumber
 argument_list|()

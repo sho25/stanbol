@@ -253,7 +253,7 @@ name|Class
 argument_list|<
 name|?
 argument_list|>
-name|__doNotUse
+name|doNotUse
 parameter_list|,
 name|Type
 name|genericType

@@ -338,7 +338,7 @@ name|value
 operator|=
 literal|"entityhub"
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|entityhubID
 decl_stmt|;
@@ -355,7 +355,7 @@ name|value
 operator|=
 literal|"<organisations> Entityhub"
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|entityhubName
 decl_stmt|;
@@ -372,7 +372,7 @@ name|value
 operator|=
 literal|"The entityhub holding all entities of<organisation>"
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|entityhubDescription
 decl_stmt|;
@@ -389,7 +389,7 @@ name|value
 operator|=
 literal|"urn:org.apache.stanbol:entityhub:"
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|entityhubPrefix
 decl_stmt|;
@@ -408,7 +408,7 @@ name|EntityhubConfiguration
 operator|.
 name|DEFAULT_ENTITYHUB_YARD_ID
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|entityhubYardId
 decl_stmt|;
@@ -515,7 +515,7 @@ literal|"foaf:page | d=xsd:anyURI"
 comment|//page about the entity
 block|}
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 index|[]
 name|fieldMappingConfig
@@ -575,7 +575,7 @@ name|value
 operator|=
 literal|"proposed"
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|defaultMappingStateString
 decl_stmt|;
@@ -633,7 +633,7 @@ name|value
 operator|=
 literal|"proposed"
 argument_list|)
-specifier|protected
+specifier|private
 name|String
 name|defaultSymblStateString
 decl_stmt|;
@@ -729,7 +729,7 @@ name|toString
 argument_list|()
 expr_stmt|;
 name|Object
-name|entityhubDescription
+name|entityhubDescriptionObject
 init|=
 name|properties
 operator|.
@@ -744,13 +744,13 @@ name|this
 operator|.
 name|entityhubDescription
 operator|=
-name|entityhubDescription
+name|entityhubDescriptionObject
 operator|==
 literal|null
 condition|?
 literal|null
 else|:
-name|entityhubDescription
+name|entityhubDescriptionObject
 operator|.
 name|toString
 argument_list|()
@@ -878,7 +878,7 @@ argument_list|()
 expr_stmt|;
 block|}
 name|Object
-name|fieldMappingConfig
+name|fieldMappingConfigObject
 init|=
 name|OsgiUtils
 operator|.
@@ -893,7 +893,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|fieldMappingConfig
+name|fieldMappingConfigObject
 operator|instanceof
 name|String
 index|[]
@@ -907,7 +907,7 @@ operator|(
 name|String
 index|[]
 operator|)
-name|fieldMappingConfig
+name|fieldMappingConfigObject
 expr_stmt|;
 block|}
 else|else
@@ -966,7 +966,7 @@ name|getEntityhubPrefix
 parameter_list|()
 block|{
 return|return
-name|entityhubID
+name|entityhubPrefix
 return|;
 block|}
 annotation|@

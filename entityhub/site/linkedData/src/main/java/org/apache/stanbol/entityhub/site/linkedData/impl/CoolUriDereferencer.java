@@ -310,7 +310,7 @@ name|EntityDereferencer
 block|{
 annotation|@
 name|Reference
-specifier|protected
+specifier|private
 name|Parser
 name|parser
 decl_stmt|;
@@ -344,6 +344,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|InputStream
 name|dereference
 parameter_list|(
@@ -408,6 +409,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|dereference
 parameter_list|(

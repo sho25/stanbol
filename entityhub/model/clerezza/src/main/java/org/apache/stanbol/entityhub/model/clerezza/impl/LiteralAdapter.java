@@ -252,6 +252,7 @@ argument_list|,
 name|A
 argument_list|>
 block|{
+specifier|private
 specifier|static
 name|Logger
 name|log
@@ -265,6 +266,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+specifier|private
 name|LiteralFactory
 name|lf
 init|=
@@ -273,6 +275,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
+specifier|private
 name|RdfValueFactory
 name|valueFactory
 init|=
@@ -289,6 +292,7 @@ argument_list|)
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|A
 name|adapt
 parameter_list|(

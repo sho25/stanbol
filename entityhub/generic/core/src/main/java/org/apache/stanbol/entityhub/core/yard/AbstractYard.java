@@ -340,17 +340,17 @@ init|=
 literal|"org.apache.stanbol.entityhub.yard.defaultQueryResultNumber"
 decl_stmt|;
 comment|/**      * This Yard uses the default in-memory implementation of the Entityhub model.      */
-specifier|protected
+specifier|private
 name|ValueFactory
 name|valueFactory
 decl_stmt|;
 comment|/**      * The QueryFactory as required by {@link Yard#getQueryFactory()}. This      * Yard uses the default implementation as provided by the      * {@link DefaultQueryFactory}.      */
-specifier|protected
+specifier|private
 name|FieldQueryFactory
 name|queryFactory
 decl_stmt|;
 comment|/**      * Holds the configuration of the Yard.      */
-specifier|protected
+specifier|private
 name|YardConfig
 name|config
 decl_stmt|;
@@ -399,7 +399,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"Unable to activate: The ValueFactory MUST NOT be NULL!"
 argument_list|)
@@ -414,7 +414,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"Unable to activate: The QueryFactory MUST NOT be NULL!"
 argument_list|)
@@ -429,7 +429,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"Unable to activate: The YardConfig MUST NOT be NULL!"
 argument_list|)
@@ -774,6 +774,32 @@ return|return
 name|defaultPrefix
 return|;
 block|}
+specifier|protected
+specifier|final
+name|YardConfig
+name|getConfig
+parameter_list|()
+block|{
+return|return
+name|config
+return|;
+block|}
+specifier|protected
+specifier|final
+name|void
+name|setConfig
+parameter_list|(
+name|YardConfig
+name|config
+parameter_list|)
+block|{
+name|this
+operator|.
+name|config
+operator|=
+name|config
+expr_stmt|;
+block|}
 comment|/**      * Creates an unique ID by using the {@link #getUriPrefix()} the parsed      * separator (non if<code>null</code>) and an uuid created by using       * {@link ModelUtils#randomUUID()}.      *<p>      * This Method is used for the {@link #create()} and the {@link #create(String)}      * - if<code>null</code> is parsed - to generate an unique URI for the      * created Representation.      *<p>      * Subclasses can override this Method to use other algorithms for generating      * URIs for entities.      * @return the created URI as string.      */
 specifier|protected
 specifier|final
@@ -900,6 +926,7 @@ expr_stmt|;
 block|}
 comment|/**          * Setter for the ID of the yard. The id is usually a sort name such as          * "dbPedia", "freebase", "geonames.org", "my.projects" ...<p>          * If {@link #isMultiYardIndexLayout()} than this ID is used to identify          * Representations of this Yard within the SolrIndex.          * @param the id of the yard. Required, not null, not empty!          */
 specifier|public
+specifier|final
 name|void
 name|setId
 parameter_list|(
@@ -941,6 +968,7 @@ block|}
 block|}
 comment|/**          * Getter for the ID of the yard          * @return the id of the yard          */
 specifier|public
+specifier|final
 name|String
 name|getId
 parameter_list|()
@@ -972,6 +1000,7 @@ return|;
 block|}
 comment|/**          * Setter for the name of this yard. If not set the {@link #getId(String)}          * is used as default          * @param name The name or<code>null</code> to use {@link #getId()}.          */
 specifier|public
+specifier|final
 name|void
 name|setName
 parameter_list|(
@@ -1013,6 +1042,7 @@ block|}
 block|}
 comment|/**          * Getter for the human readable name of the Yard          * @return the name          */
 specifier|public
+specifier|final
 name|String
 name|getName
 parameter_list|()
@@ -1045,6 +1075,7 @@ return|;
 block|}
 comment|/**          * Setter for the description of this Yard          * @param description the description. Optional parameter          */
 specifier|public
+specifier|final
 name|void
 name|setDescription
 parameter_list|(
@@ -1086,6 +1117,7 @@ block|}
 block|}
 comment|/**          * Getter for the description          * @return description The description or<code>null</code> if not defined          */
 specifier|public
+specifier|final
 name|String
 name|getDescription
 parameter_list|()
@@ -1117,6 +1149,7 @@ return|;
 block|}
 comment|/**          * Setter for the default number of query results. This is used if parsed          * queries do not define a limit for the maximum number of results.          * @param defaultQueryResults the default number of query results.          *<code>null</code> or a negative number to use the default value defined          * by the Yard.          */
 specifier|public
+specifier|final
 name|void
 name|setDefaultQueryResultNumber
 parameter_list|(
@@ -1154,6 +1187,7 @@ block|}
 block|}
 comment|/**          * Getter for the default number of query results. This is used if parsed          * queries do not define a limit for the maximum number of results.<p>          * If {@link #getMaxQueryResultNumber()} is defines (>0), than this          * method returns the minimum of the two configured values.          * @return the default number used as the maximum number of results per          * query if not otherwise set by the parsed query. Returns<code>0</code>          * if the value was set to a number lower or equals 0 and -1 if the          * value is not configured at all.          */
 specifier|public
+specifier|final
 name|int
 name|getDefaultQueryResultNumber
 parameter_list|()
@@ -1201,8 +1235,9 @@ try|try
 block|{
 name|number
 operator|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|value
 operator|.
@@ -1277,6 +1312,7 @@ block|}
 block|}
 comment|/**          * Setter for the maximum number of query results. This is used to limit the          * maximum number of results when parsed queries define limits that are          * greater this value.          * @param maxQueryResults The maximum number of results for queries.          *<code>null</code> or a negative number to use the default as defined by          * the Yard implementation.          */
 specifier|public
+specifier|final
 name|void
 name|setMaxQueryResultNumber
 parameter_list|(
@@ -1314,6 +1350,7 @@ block|}
 block|}
 comment|/**          * Getter for the maximum number of query results.This is used to limit the          * maximum number of results when parsed queries define limits that are          * greater this value.          * @return the maximum number of query results. Returns<code>0</code>          * if the value was set to a number lower or equals 0 and -1 if the          * value is not configured at all.          */
 specifier|public
+specifier|final
 name|int
 name|getMaxQueryResultNumber
 parameter_list|()
@@ -1359,8 +1396,9 @@ try|try
 block|{
 name|number
 operator|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|value
 operator|.

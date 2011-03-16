@@ -385,6 +385,10 @@ begin_import
 import|import
 name|org
 operator|.
+name|codehaus
+operator|.
+name|jettison
+operator|.
 name|json
 operator|.
 name|JSONArray
@@ -395,6 +399,10 @@ begin_import
 import|import
 name|org
 operator|.
+name|codehaus
+operator|.
+name|jettison
+operator|.
 name|json
 operator|.
 name|JSONException
@@ -404,6 +412,10 @@ end_import
 begin_import
 import|import
 name|org
+operator|.
+name|codehaus
+operator|.
+name|jettison
 operator|.
 name|json
 operator|.
@@ -471,7 +483,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Reference
-specifier|protected
+specifier|private
 name|Parser
 name|parser
 decl_stmt|;
@@ -498,6 +510,7 @@ decl_stmt|;
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|String
@@ -812,6 +825,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Representation

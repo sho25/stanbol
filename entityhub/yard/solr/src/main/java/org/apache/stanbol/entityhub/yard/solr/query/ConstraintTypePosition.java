@@ -176,10 +176,6 @@ parameter_list|)
 block|{
 return|return
 name|obj
-operator|!=
-literal|null
-operator|&&
-name|obj
 operator|instanceof
 name|ConstraintTypePosition
 operator|&&

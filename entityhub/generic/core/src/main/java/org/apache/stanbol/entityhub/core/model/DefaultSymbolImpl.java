@@ -385,6 +385,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|addDescription
 parameter_list|(
@@ -409,6 +410,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|addDescription
 parameter_list|(
@@ -436,6 +438,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|addPredecessor
 parameter_list|(
@@ -458,6 +461,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|addSuccessor
 parameter_list|(
@@ -480,6 +484,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterator
 argument_list|<
 name|Text
@@ -501,6 +506,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterator
 argument_list|<
 name|Text
@@ -527,6 +533,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|getLabel
 parameter_list|()
@@ -624,6 +631,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|getLabel
 parameter_list|(
@@ -661,6 +669,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterator
 argument_list|<
 name|String
@@ -686,6 +695,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|SymbolState
 name|getState
 parameter_list|()
@@ -770,6 +780,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterator
 argument_list|<
 name|String
@@ -795,6 +806,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|boolean
 name|isPredecessors
 parameter_list|()
@@ -810,6 +822,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|boolean
 name|isSuccessor
 parameter_list|()
@@ -825,6 +838,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|removeDescription
 parameter_list|(
@@ -849,6 +863,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|removeDescription
 parameter_list|(
@@ -876,6 +891,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|removePredecessor
 parameter_list|(
@@ -898,6 +914,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|removeSuccessor
 parameter_list|(
@@ -920,6 +937,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|setLabel
 parameter_list|(
@@ -944,6 +962,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|setLabel
 parameter_list|(
@@ -971,6 +990,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|setState
 parameter_list|(

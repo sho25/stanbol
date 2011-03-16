@@ -87,9 +87,16 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|SparqlEndpointUtils
 block|{
+specifier|private
+name|SparqlEndpointUtils
+parameter_list|()
+block|{
+comment|/* Do not create instances of utility classes*/
+block|}
 specifier|public
 specifier|static
 specifier|final
@@ -98,12 +105,6 @@ name|SPARQL_RESULT_JSON
 init|=
 literal|"application/sparql-results+json"
 decl_stmt|;
-specifier|public
-name|SparqlEndpointUtils
-parameter_list|()
-block|{
-comment|/* Do not create instances of utility classes*/
-block|}
 comment|/**      * Sends an SPARQL Request to the accessUri. Please note that based on the      * type of the SPARQL query different content are supported by the Site      * @param accessUri the uri of the SPARQL endpoint      * @param contentType the contentType of the returned RDF graph      * @param query the SPARQL Construct query      * @return the results as input stream      * @throws IOException      * @throws MalformedURLException      */
 specifier|public
 specifier|static
@@ -152,9 +153,6 @@ operator|.
 name|build
 argument_list|(
 name|query
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|contentType
 argument_list|)

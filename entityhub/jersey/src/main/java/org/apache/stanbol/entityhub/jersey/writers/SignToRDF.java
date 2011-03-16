@@ -272,6 +272,7 @@ parameter_list|()
 block|{
 comment|/* do not create instances of utility classes */
 block|}
+specifier|private
 specifier|static
 name|UriRef
 name|signRepresentation
@@ -287,6 +288,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|private
 specifier|static
 name|UriRef
 name|signSite
@@ -302,6 +304,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|private
 specifier|static
 name|UriRef
 name|sign
@@ -317,6 +320,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|private
 specifier|static
 name|UriRef
 name|entityMapping
@@ -332,6 +336,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|private
 specifier|static
 name|UriRef
 name|symbol
@@ -347,6 +352,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|private
 specifier|static
 name|RdfValueFactory
 name|valueFactory
@@ -356,6 +362,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
+specifier|private
 specifier|static
 name|LiteralFactory
 name|literalFactory

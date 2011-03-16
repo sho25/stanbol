@@ -142,6 +142,7 @@ name|getUri
 argument_list|()
 argument_list|)
 block|,         ;
+specifier|private
 name|String
 name|uri
 decl_stmt|;
@@ -179,6 +180,7 @@ name|uri
 return|;
 block|}
 comment|// ---- reverse Mapping based on URI ----
+specifier|private
 specifier|static
 name|Map
 argument_list|<

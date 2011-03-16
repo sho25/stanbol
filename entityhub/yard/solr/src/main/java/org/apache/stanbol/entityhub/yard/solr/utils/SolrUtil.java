@@ -35,9 +35,14 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|SolrUtil
 block|{
+specifier|private
+name|SolrUtil
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

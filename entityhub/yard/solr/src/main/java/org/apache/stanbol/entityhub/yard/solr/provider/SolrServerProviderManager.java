@@ -373,7 +373,7 @@ name|unbind
 operator|=
 literal|"removeSolrProvider"
 argument_list|)
-specifier|protected
+specifier|private
 name|Map
 argument_list|<
 name|Type

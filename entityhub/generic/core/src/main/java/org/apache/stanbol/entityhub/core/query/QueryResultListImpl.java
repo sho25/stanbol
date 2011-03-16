@@ -234,7 +234,7 @@ name|List
 argument_list|<
 name|T
 argument_list|>
-name|results
+name|resultList
 init|=
 operator|new
 name|ArrayList
@@ -251,7 +251,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|results
+name|resultList
 operator|.
 name|add
 argument_list|(
@@ -270,7 +270,7 @@ name|Collections
 operator|.
 name|unmodifiableList
 argument_list|(
-name|results
+name|resultList
 argument_list|)
 expr_stmt|;
 block|}
@@ -278,6 +278,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Class
 argument_list|<
 name|T
@@ -374,7 +375,10 @@ expr_stmt|;
 block|}
 block|}
 comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.ResultList#getQuery()      */
+annotation|@
+name|Override
 specifier|public
+specifier|final
 name|FieldQuery
 name|getQuery
 parameter_list|()
@@ -384,7 +388,10 @@ name|query
 return|;
 block|}
 comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.ResultList#getSelectedFields()      */
+annotation|@
+name|Override
 specifier|public
+specifier|final
 name|Set
 argument_list|<
 name|String
@@ -403,6 +410,7 @@ comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.Res
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterator
 argument_list|<
 name|T
@@ -419,6 +427,7 @@ return|;
 block|}
 comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.ResultList#isEmpty()      */
 specifier|public
+specifier|final
 name|boolean
 name|isEmpty
 parameter_list|()
@@ -432,6 +441,7 @@ return|;
 block|}
 comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.ResultList#size()      */
 specifier|public
+specifier|final
 name|int
 name|size
 parameter_list|()

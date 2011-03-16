@@ -257,9 +257,14 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|CacheUtils
 block|{
+specifier|private
+name|CacheUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 name|Logger

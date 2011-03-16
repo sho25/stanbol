@@ -164,7 +164,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -200,7 +200,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -350,10 +350,6 @@ parameter_list|)
 block|{
 return|return
 name|obj
-operator|!=
-literal|null
-operator|&&
-name|obj
 operator|instanceof
 name|ReferenceImpl
 operator|&&
@@ -439,7 +435,7 @@ name|String
 name|value
 parameter_list|)
 throws|throws
-name|NullPointerException
+name|IllegalArgumentException
 block|{
 name|this
 argument_list|(
@@ -459,7 +455,7 @@ name|String
 name|language
 parameter_list|)
 throws|throws
-name|NullPointerException
+name|IllegalArgumentException
 block|{
 name|super
 argument_list|()
@@ -473,7 +469,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The value of the Text MUST NOT be NULL!"
 argument_list|)
@@ -576,10 +572,6 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|obj
-operator|!=
-literal|null
-operator|&&
 name|obj
 operator|instanceof
 name|TextImpl
@@ -684,7 +676,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed id MUST NOT be NULL!"
 argument_list|)

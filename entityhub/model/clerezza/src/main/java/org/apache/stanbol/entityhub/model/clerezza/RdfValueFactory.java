@@ -153,6 +153,7 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|RdfValueFactory
 implements|implements
@@ -215,7 +216,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -273,7 +274,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed value MUST NOT be NULL"
 argument_list|)
@@ -355,7 +356,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed id MUST NOT be NULL!"
 argument_list|)
@@ -417,7 +418,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed id MUST NOT be NULL!"
 argument_list|)
@@ -432,7 +433,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed graph MUST NOT be NULL!"
 argument_list|)

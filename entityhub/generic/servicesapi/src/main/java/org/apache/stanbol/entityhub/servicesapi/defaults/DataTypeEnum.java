@@ -397,6 +397,7 @@ operator|.
 name|class
 argument_list|)
 block|,     ;
+specifier|private
 specifier|final
 name|Class
 argument_list|<
@@ -404,18 +405,22 @@ name|?
 argument_list|>
 name|javaType
 decl_stmt|;
+specifier|private
 specifier|final
 name|QName
 name|qName
 decl_stmt|;
+specifier|private
 specifier|final
 name|String
 name|shortName
 decl_stmt|;
+specifier|private
 specifier|final
 name|String
 name|uri
 decl_stmt|;
+specifier|private
 specifier|final
 name|Set
 argument_list|<

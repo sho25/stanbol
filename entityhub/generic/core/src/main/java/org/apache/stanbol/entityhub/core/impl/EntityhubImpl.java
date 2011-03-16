@@ -756,12 +756,12 @@ name|ComponentContext
 name|context
 decl_stmt|;
 comment|/**      * The field mapper holding global mappings that are used for mapping      * representations of entities for any referenced sites      */
-specifier|protected
+specifier|private
 name|FieldMapper
 name|fieldMapper
 decl_stmt|;
 comment|/**      * The yard where this Entityhub instance stores its data      * TODO: this reference is currently initialised in the activate method.      * however there are some issues with that.      *<ul>      *<li> If this Component is activated, before this yard is active, the      *      activate method throws an Exception and is therefore in the      *      "unsatisfied" state.      *<li> If now the needed Yard is configured this component gets not notified      *<li> However defining a Reference is also not possible, because it would      *      be nice to be able to change the Entityhub-Yard (e.g. to change the data      *      set of the Entityhub at runtime)      *<li> I could register a {@link ServiceListener} in the activate method.      *      But I am not sure if it is allowed to have an active Service Listener      *      on an component that is in the "unsatisfied" state.      *</ul>      */
-specifier|protected
+specifier|private
 name|Yard
 name|entityhubYard
 decl_stmt|;
@@ -770,7 +770,7 @@ comment|/*      * TODO: The YardManager is currently not used.      */
 annotation|@
 name|Reference
 comment|// 1..1, static
-specifier|protected
+specifier|private
 name|YardManager
 name|yardManager
 decl_stmt|;
@@ -778,7 +778,7 @@ comment|/**      * The Configuration of the Entityhub      * TODO: Maybe refacto
 annotation|@
 name|Reference
 comment|// 1..1, static
-specifier|protected
+specifier|private
 name|EntityhubConfiguration
 name|config
 decl_stmt|;
@@ -786,17 +786,21 @@ comment|/**      * The site manager is used to search for entities within the En
 annotation|@
 name|Reference
 comment|// 1..1, static
-specifier|protected
+specifier|private
 name|ReferencedSiteManager
 name|siteManager
 decl_stmt|;
 specifier|private
+specifier|static
+specifier|final
 name|String
 name|DEFAULT_SYMBOL_PREFIX
 init|=
 literal|"symbol"
 decl_stmt|;
 specifier|private
+specifier|static
+specifier|final
 name|String
 name|DEFAULT_MAPPING_PREFIX
 init|=

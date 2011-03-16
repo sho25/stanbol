@@ -636,6 +636,7 @@ block|}
 block|}
 comment|/**      * Adds the parsed source files. Checks for {@link File#exists()}, {@link File#isFile()} and      * {@link File#canRead()}. Files that do not pase this test are ignored.      *       * @param sourceFiles      *            the source files to add      */
 specifier|public
+specifier|final
 name|void
 name|addSourceFile
 parameter_list|(
@@ -669,6 +670,7 @@ block|}
 block|}
 comment|/**      * Remove the parsed source files      *       * @param sourceFile      *            the source files to remove      */
 specifier|public
+specifier|final
 name|void
 name|removeSourceFile
 parameter_list|(
@@ -728,6 +730,7 @@ block|}
 block|}
 comment|/**      * Getter for the list of RDF files used as source for indexing.      *       * @return the unmodifiable list of files or<code>null</code>if no source files are present.      */
 specifier|public
+specifier|final
 name|Collection
 argument_list|<
 name|File
@@ -782,6 +785,7 @@ return|;
 block|}
 comment|/**      * Setter for the directory used to store the data of the RDF triple store used for indexing.      *       * @param file      *            the directory used to store the data (created if not exist)      * @return<code>true</code> if the parsed file can be used as indexing      *     directory (exists and is a directory or !exists)       */
 specifier|public
+specifier|final
 name|boolean
 name|setIndexingDir
 parameter_list|(
@@ -826,6 +830,7 @@ block|}
 block|}
 comment|/**      * Getter for the indexing directory      * @return the directory used for indexing      */
 specifier|public
+specifier|final
 name|File
 name|getIndexingDir
 parameter_list|()
@@ -844,6 +849,7 @@ return|;
 block|}
 comment|/**      * Setter for the RDF model name used to store/access the RDF data used      * for indexing      * @param modelName the RDF model name      */
 specifier|public
+specifier|final
 name|void
 name|setModelName
 parameter_list|(
@@ -887,6 +893,7 @@ block|}
 block|}
 comment|/**      * Getter for the RDF model name used to store/access the RDF data used      * for indexing      * @return the RDF model name      */
 specifier|public
+specifier|final
 name|String
 name|getModelName
 parameter_list|()
@@ -905,6 +912,7 @@ return|;
 block|}
 comment|/**      * Setter for the (optional) map that uses entity ids as key and there       * ranking as value. see {@link RdfResourceEnum#signRank} for more information      * about ranking of entities)      * @param entityRankings the entity ranking map      */
 specifier|public
+specifier|final
 name|void
 name|setEntityRankings
 parameter_list|(
@@ -947,6 +955,7 @@ block|}
 block|}
 comment|/**      * Getter for the (optional) map that uses entity ids as key and there       * ranking as value. see {@link RdfResourceEnum#signRank} for more information      * about ranking of entities)      * @return the entity rankings or<code>null</code> if no entity rankings      * are present      */
 specifier|public
+specifier|final
 name|Map
 argument_list|<
 name|String
@@ -975,6 +984,7 @@ return|;
 block|}
 comment|/**      * Setter for the indexing mode (expert use only). Please carefully read      * {@link RdfIndexer#KEY_INDEXING_MODE} before setting this property.      * @param mode the indexing mode      */
 specifier|public
+specifier|final
 name|void
 name|setIndexingMode
 parameter_list|(
@@ -1012,6 +1022,7 @@ block|}
 block|}
 comment|/**      * Getter for the Indexing Mode      * @return the indexing mode or<code>null</code> if not set by this      * configuration.      */
 specifier|public
+specifier|final
 name|IndexingMode
 name|getIndexingMode
 parameter_list|()
@@ -1030,6 +1041,7 @@ return|;
 block|}
 comment|/**      * Setter for the skip reading mode. If set to<code>true</code> no RDF      * data are read. This can be useful if the RDF data are      * already available as an Jena TDB store (e.g. when interrupting an      * indexing session that has already completed with reading the RDF data.      * @param state the state or<code>null</code> to remove any present config      */
 specifier|public
+specifier|final
 name|void
 name|setSkipRead
 parameter_list|(
@@ -1067,6 +1079,7 @@ block|}
 block|}
 comment|/**      * Getter for the skip reading state.      * @return the state or<code>null</code> if not set      */
 specifier|public
+specifier|final
 name|Boolean
 name|getSkipRead
 parameter_list|()
@@ -1085,6 +1098,7 @@ return|;
 block|}
 comment|/**      * This is the number of documents stored in the {@link Yard} at once. During      * indexing {@link Representation} are created based on the RDF data of the      * configured RDF source files. As soon as chink size Representations are      * created they are stored by a single call to {@link Yard#store(Iterable)}.      * @param size the number of {@link Representation} stored at in the {@link Yard}      * at once. Parse<code>null</code> or a value smaller equals zero to remove      * this optional configuration.      */
 specifier|public
+specifier|final
 name|void
 name|setChunkSize
 parameter_list|(
@@ -1126,6 +1140,7 @@ block|}
 block|}
 comment|/**      * Getter for the chunk size (number of {@link Representation} sotred at once      * in the {@link Yard}.      * @return the chunk size or<code>null</code> if not present      */
 specifier|public
+specifier|final
 name|Integer
 name|getChunkSize
 parameter_list|()
@@ -1144,6 +1159,7 @@ return|;
 block|}
 comment|/**      * Allows to set the state if Entities without ranking information should be      * ignored by the indexer.      * @param state the state or<code>null</code> to remove the configuration      * and go with the default.      */
 specifier|public
+specifier|final
 name|void
 name|setIgnoreEntitiesWithoutRanking
 parameter_list|(
@@ -1181,6 +1197,7 @@ block|}
 block|}
 comment|/**      * Getter for the state if entities without available ranking should be      * ignored.      * @return the state or<code>null</code> if not present      */
 specifier|public
+specifier|final
 name|Boolean
 name|getIgnoreEntitiesWithoutRanking
 parameter_list|()
@@ -1199,6 +1216,7 @@ return|;
 block|}
 comment|/**      * Setter for the minimal ranking required by an entity to be processed      * by the indexer.      * @param minRanking the minimum ranking. Parsed<code>null</code> or a      * value smaller equals 0 to remove this configuration and go with the      * default.      */
 specifier|public
+specifier|final
 name|void
 name|setMinEntityRanking
 parameter_list|(
@@ -1240,6 +1258,7 @@ block|}
 block|}
 comment|/**      * The minimum required ranking required by an entity to be indexed.      * @return the minimum required ranking or<code>null</code> if not defined      * by this configuration      */
 specifier|public
+specifier|final
 name|Float
 name|getMinEntityRanking
 parameter_list|()
@@ -1258,6 +1277,7 @@ return|;
 block|}
 comment|/**      * Setter for the ranking used for entities for them no ranking is      * available. The value need to be greater than zero to be accepted.      * @param defaultRanking the ranking used for entities without ranking      * information. Parse<code>null</code> or a value smaller equals zero to      * remove this configuration.      */
 specifier|public
+specifier|final
 name|void
 name|setDefaultEntityRanking
 parameter_list|(
@@ -1299,6 +1319,7 @@ block|}
 block|}
 comment|/**      * Getter for the default ranking value that is used for entities no ranking      * information are available.      * @return the default ranking or<code>null</code> if not present within      * this configuration.      */
 specifier|public
+specifier|final
 name|Float
 name|getDefaultEntityRanking
 parameter_list|()
@@ -1317,6 +1338,7 @@ return|;
 block|}
 comment|/**      * Tests if a RDF source file is valid (exists, isFile and canRead) and      * if OK add them to the configuration.      * @param sourceFile the file to add      */
 specifier|private
+specifier|final
 name|void
 name|checkAndAddSrouceFile
 parameter_list|(
@@ -1401,6 +1423,7 @@ block|}
 block|}
 comment|/**      * Setter for the field mappings used by the indexer to create the      * {@link Representation}s based on the RDF input.<br>      * Parsd strings must represent valid field mappings.      * @param mappings A collection field mappings in the string representation.      * If<code>null</code> or an empty collection is parsed the configuration      * is removed.      */
 specifier|public
+specifier|final
 name|void
 name|setMappings
 parameter_list|(
@@ -1446,6 +1469,7 @@ block|}
 block|}
 comment|/**      * Setter for the field mappings that allows to parse an existing      * {@link FieldMapper} instance. Note that the string representation of all      * the {@link FieldMapping}s part of the FieldMapper will be stored within      * the configuration      * @param mapper the FieldMapper instance with the FieldMappings to be used      * for the configuration of the indexer.      */
 specifier|public
+specifier|final
 name|void
 name|setMappings
 parameter_list|(
@@ -1505,6 +1529,7 @@ block|}
 block|}
 comment|/**      * Getter for the field mappings      * @return the field mappings or<code>null</code> if no are defined for      * this configuration.      */
 specifier|public
+specifier|final
 name|Collection
 argument_list|<
 name|String
@@ -1548,6 +1573,7 @@ return|;
 block|}
 comment|/**      * checks a files against the parsed parameter      * @param file the file to check      * @param isFile if<code>true</code> than the parsed {@link File} is tested      * to be a file, otherwise it is test to be a directory      * @param exists if<code>null</code> it is indicated that the file/directory      * can bee created if necessary.<code>true</code> indicated that the parsed      * file must exist where<code>false</code> indicate that the file MUST NOT      * exists.      * @return<code>true</code> if the parsed {@link File} fulfils the stated      * requirements.      */
 specifier|private
+specifier|final
 name|boolean
 name|checkFile
 parameter_list|(

@@ -143,16 +143,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Arrays
 import|;
 end_import
@@ -327,13 +317,13 @@ name|Object
 name|getUnsupportedValueInstance
 parameter_list|()
 function_decl|;
-comment|/*--------------------------------------------------------------------------      * Set of Tests that check if all Methods correctly throw a NullPointerException      * when parsing null as field!      *  - important to prevent NULL fields within the Entityhub      *--------------------------------------------------------------------------      */
+comment|/*--------------------------------------------------------------------------      * Set of Tests that check if all Methods correctly throw an IllegalArgumentException      * when parsing null as field!      *  - important to prevent NULL fields within the Entityhub      *--------------------------------------------------------------------------      */
 annotation|@
 name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -365,7 +355,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -397,7 +387,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -429,7 +419,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -459,7 +449,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -493,7 +483,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -525,7 +515,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -555,7 +545,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -585,7 +575,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -619,7 +609,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -651,7 +641,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -681,7 +671,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -711,7 +701,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -743,7 +733,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -773,7 +763,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -805,7 +795,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -837,7 +827,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -869,7 +859,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -901,7 +891,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -933,7 +923,7 @@ name|Test
 argument_list|(
 name|expected
 operator|=
-name|NullPointerException
+name|IllegalArgumentException
 operator|.
 name|class
 argument_list|)
@@ -5594,17 +5584,6 @@ name|size
 argument_list|()
 operator|==
 literal|1
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"TextSet: "
-operator|+
-name|textSet
 argument_list|)
 expr_stmt|;
 name|assertTrue

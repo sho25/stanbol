@@ -215,6 +215,7 @@ argument_list|<
 name|Literal
 argument_list|>
 block|{
+specifier|private
 name|Logger
 name|log
 init|=
@@ -244,7 +245,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Set
 argument_list|<
@@ -362,6 +363,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|boolean
 name|isValid
 parameter_list|(

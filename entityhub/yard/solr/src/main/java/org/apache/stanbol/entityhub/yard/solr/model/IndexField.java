@@ -114,7 +114,7 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|int
-name|_hash
+name|hash
 decl_stmt|;
 comment|/**      * Constructs a new IndexField      * @param path      * @param indexType      * @param language      * @throws IllegalArgumentException      */
 specifier|public
@@ -277,7 +277,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//calculate the hash of is immutable class only once
-name|_hash
+name|hash
 operator|=
 name|this
 operator|.
@@ -435,10 +435,6 @@ parameter_list|)
 block|{
 return|return
 name|obj
-operator|!=
-literal|null
-operator|&&
-name|obj
 operator|instanceof
 name|IndexField
 operator|&&
@@ -493,7 +489,7 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|_hash
+name|hash
 return|;
 block|}
 annotation|@

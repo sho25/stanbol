@@ -68,7 +68,7 @@ specifier|public
 interface|interface
 name|ValueFactory
 block|{
-comment|/**      * Creates a Text instance without an language      * @param value The value if the text. Implementations might support special      * support for specific classes. As an default the {@link Object#toString()}      * method is used to get the lexical form of the text from the parsed value      * and<code>null</code> should be used as language.      * @return the Text instance for the parsed object      * @throws UnsupportedTypeException if the type of the parsed object is not      * can not be used to create Text instances      * @throws IllegalArgumentException If the parsed instance type is supported, but      * the parsed instance can not be used to create a text instance      * @throws NullPointerException If<code>null</code> is parsed      */
+comment|/**      * Creates a Text instance without an language      * @param value The value if the text. Implementations might support special      * support for specific classes. As an default the {@link Object#toString()}      * method is used to get the lexical form of the text from the parsed value      * and<code>null</code> should be used as language.      * @return the Text instance for the parsed object      * @throws UnsupportedTypeException if the type of the parsed object is not      * can not be used to create Text instances      * @throws IllegalArgumentException If<code>null</code> is parsed or if the       * parsed instance type is supported, but      * the parsed instance can not be used to create a text instance      */
 name|Text
 name|createText
 parameter_list|(
@@ -79,10 +79,8 @@ throws|throws
 name|UnsupportedTypeException
 throws|,
 name|IllegalArgumentException
-throws|,
-name|NullPointerException
 function_decl|;
-comment|/**      * Creates a Text instance for a language      * @param text the text      * @param language the language or<code>null</code>.      * @return the Text instance      * @throws IllegalArgumentException if the parsed parameter can not be used to create a Text instance      * @throws NullPointerException if<code>null</code> is parsed as text.      */
+comment|/**      * Creates a Text instance for a language      * @param text the text      * @param language the language or<code>null</code>.      * @return the Text instance      * @throws IllegalArgumentException if<code>null</code> is parsed as text or      * if the parsed parameter can not be used to create a Text instance      */
 name|Text
 name|createText
 parameter_list|(
@@ -94,10 +92,8 @@ name|language
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
-throws|,
-name|NullPointerException
 function_decl|;
-comment|/**      * Creates a reference instance for the parsed value. Implementations might      * support special support for specific classes. As an default the      * {@link Object#toString()} method is used to get the unicode representation      * of the reference.<p>      * Implementation MUST support at least the following types:<ul>      *<li> {@link String}: The parsed string need not be be checked for a valid      *      IRI, URI or URL in any form. However in case of an empty String a       *      {@link IllegalArgumentException} MUST BE thrown)      *<li> {@link URI}: Any valid URI MUST BE accepted      *<li> {@link URL}: any valid URL MUST BE accepted      *</ul>      * @param value the unicode representation of the reference      * @return the reference instance      * @throws UnsupportedTypeException if the type of the parsed object can      * not be converted to a Reference.      * @throws IllegalArgumentException if the parsed value can not be used to      * create a valid Reference (e.g. when parsing an empty String)      * @throws NullPointerException if the parsed value is<code>null</code>      */
+comment|/**      * Creates a reference instance for the parsed value. Implementations might      * support special support for specific classes. As an default the      * {@link Object#toString()} method is used to get the unicode representation      * of the reference.<p>      * Implementation MUST support at least the following types:<ul>      *<li> {@link String}: The parsed string need not be be checked for a valid      *      IRI, URI or URL in any form. However in case of an empty String a       *      {@link IllegalArgumentException} MUST BE thrown)      *<li> {@link URI}: Any valid URI MUST BE accepted      *<li> {@link URL}: any valid URL MUST BE accepted      *</ul>      * @param value the unicode representation of the reference      * @return the reference instance      * @throws UnsupportedTypeException if the type of the parsed object can      * not be converted to a Reference.      * @throws IllegalArgumentException if the parsed value is<code>null</code>       * or if the parsed value can not be used to      * create a valid Reference (e.g. when parsing an empty String)      */
 name|Reference
 name|createReference
 parameter_list|(
@@ -108,10 +104,8 @@ throws|throws
 name|UnsupportedTypeException
 throws|,
 name|IllegalArgumentException
-throws|,
-name|NullPointerException
 function_decl|;
-comment|/**      * Creates an empty representation instance of with the type {@link SignTypeEnum#Sign}      * for the parsed ID. The id MUST not be<code>null</code> nor empty      * @param id The id of the representation      * @return the representation      * @throws NullPointerException If<code>null</code> is parsed as ID      * @throws IllegalArgumentException if an empty string is parsed as ID      */
+comment|/**      * Creates an empty representation instance of with the type {@link SignTypeEnum#Sign}      * for the parsed ID. The id MUST not be<code>null</code> nor empty      * @param id The id of the representation      * @return the representation      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as ID      */
 name|Representation
 name|createRepresentation
 parameter_list|(
@@ -119,8 +113,6 @@ name|String
 name|id
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
 comment|//    /**

@@ -283,7 +283,7 @@ name|getProperties
 argument_list|()
 decl_stmt|;
 name|Object
-name|queryUri
+name|queryUriObject
 init|=
 name|properties
 operator|.
@@ -295,7 +295,7 @@ name|QUERY_URI
 argument_list|)
 decl_stmt|;
 name|Object
-name|accessUri
+name|accessUriObject
 init|=
 name|properties
 operator|.
@@ -309,7 +309,7 @@ decl_stmt|;
 comment|//use as an fallback
 if|if
 condition|(
-name|queryUri
+name|queryUriObject
 operator|!=
 literal|null
 condition|)
@@ -318,7 +318,7 @@ name|this
 operator|.
 name|queryUri
 operator|=
-name|queryUri
+name|queryUriObject
 operator|.
 name|toString
 argument_list|()
@@ -328,7 +328,7 @@ block|}
 elseif|else
 if|if
 condition|(
-name|accessUri
+name|accessUriObject
 operator|!=
 literal|null
 condition|)
@@ -339,14 +339,14 @@ name|info
 argument_list|(
 literal|"Using AccessUri as fallback for missing QueryUri Proerty (accessUri="
 operator|+
-name|accessUri
+name|accessUriObject
 argument_list|)
 expr_stmt|;
 name|this
 operator|.
 name|queryUri
 operator|=
-name|accessUri
+name|accessUriObject
 operator|.
 name|toString
 argument_list|()

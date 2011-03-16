@@ -255,9 +255,11 @@ argument_list|(
 literal|"http://www.geonames.org/ontology#"
 argument_list|)
 block|,     ;
+specifier|private
 name|String
 name|ns
 decl_stmt|;
+specifier|private
 name|String
 name|prefix
 decl_stmt|;
@@ -614,9 +616,11 @@ name|shortUri
 operator|==
 literal|null
 condition|)
+block|{
 return|return
 literal|null
 return|;
+block|}
 name|int
 name|index
 init|=

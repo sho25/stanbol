@@ -313,6 +313,26 @@ name|clerezza
 operator|.
 name|impl
 operator|.
+name|Resource2StringAdapter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|model
+operator|.
+name|clerezza
+operator|.
+name|impl
+operator|.
 name|Resource2ValueAdapter
 import|;
 end_import
@@ -354,26 +374,6 @@ operator|.
 name|impl
 operator|.
 name|UriRefAdapter
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|model
-operator|.
-name|clerezza
-operator|.
-name|utils
-operator|.
-name|Resource2StringAdapter
 import|;
 end_import
 
@@ -645,7 +645,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -976,7 +976,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1075,7 +1075,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1232,7 +1232,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1503,7 +1503,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1578,7 +1578,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1656,7 +1656,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1738,7 +1738,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1863,7 +1863,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1940,7 +1940,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2015,7 +2015,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2086,7 +2086,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2223,7 +2223,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2487,7 +2487,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2653,7 +2653,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2804,7 +2804,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2862,7 +2862,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -3134,10 +3134,6 @@ name|obj
 parameter_list|)
 block|{
 return|return
-name|obj
-operator|!=
-literal|null
-operator|&&
 name|obj
 operator|instanceof
 name|Representation

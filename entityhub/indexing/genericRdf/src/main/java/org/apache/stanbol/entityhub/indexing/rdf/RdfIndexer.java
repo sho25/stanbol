@@ -1302,6 +1302,12 @@ specifier|final
 name|FieldMapper
 name|mapper
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+comment|//TODO: Implement filtering based on rdf:type
 specifier|private
 specifier|final
 name|Set
@@ -1458,7 +1464,7 @@ name|getValueFactory
 argument_list|()
 expr_stmt|;
 name|Object
-name|rdfFiles
+name|rdfFilesObject
 init|=
 name|config
 operator|.
@@ -1469,7 +1475,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|rdfFiles
+name|rdfFilesObject
 operator|instanceof
 name|Iterable
 argument_list|<
@@ -1499,7 +1505,7 @@ argument_list|<
 name|?
 argument_list|>
 operator|)
-name|rdfFiles
+name|rdfFilesObject
 control|)
 block|{
 name|this
@@ -1531,7 +1537,7 @@ name|singletonList
 argument_list|(
 name|checkFile
 argument_list|(
-name|rdfFiles
+name|rdfFilesObject
 operator|.
 name|toString
 argument_list|()
@@ -1540,7 +1546,7 @@ argument_list|)
 expr_stmt|;
 block|}
 name|Object
-name|indexingDir
+name|indexingDirObject
 init|=
 name|config
 operator|.
@@ -1551,12 +1557,12 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|indexingDir
+name|indexingDirObject
 operator|==
 literal|null
 condition|)
 block|{
-name|indexingDir
+name|indexingDirObject
 operator|=
 literal|"indexingData"
 expr_stmt|;
@@ -1566,7 +1572,7 @@ name|put
 argument_list|(
 name|KEY_RDF_STORE_DIR
 argument_list|,
-name|indexingDir
+name|indexingDirObject
 argument_list|)
 expr_stmt|;
 block|}
@@ -1576,7 +1582,7 @@ name|indexingDir
 operator|=
 name|checkFile
 argument_list|(
-name|indexingDir
+name|indexingDirObject
 operator|.
 name|toString
 argument_list|()
@@ -1587,7 +1593,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 name|Object
-name|modelName
+name|modelNameObject
 init|=
 name|config
 operator|.
@@ -1598,12 +1604,12 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|modelName
+name|modelNameObject
 operator|==
 literal|null
 condition|)
 block|{
-name|modelName
+name|modelNameObject
 operator|=
 literal|"indexingModel-"
 operator|+
@@ -1621,7 +1627,7 @@ name|put
 argument_list|(
 name|KEY_MODEL_NAME
 argument_list|,
-name|modelName
+name|modelNameObject
 argument_list|)
 expr_stmt|;
 block|}
@@ -1629,7 +1635,7 @@ name|this
 operator|.
 name|modelName
 operator|=
-name|modelName
+name|modelNameObject
 operator|.
 name|toString
 argument_list|()
@@ -1639,7 +1645,7 @@ name|Iterable
 argument_list|<
 name|?
 argument_list|>
-name|types
+name|typeIterator
 init|=
 operator|(
 name|Iterable
@@ -1656,7 +1662,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|types
+name|typeIterator
 operator|!=
 literal|null
 condition|)
@@ -1677,14 +1683,14 @@ decl_stmt|;
 for|for
 control|(
 name|Object
-name|type
+name|typeObject
 range|:
-name|types
+name|typeIterator
 control|)
 block|{
 if|if
 condition|(
-name|type
+name|typeObject
 operator|!=
 literal|null
 condition|)
@@ -1693,7 +1699,7 @@ name|typeSet
 operator|.
 name|add
 argument_list|(
-name|type
+name|typeObject
 operator|.
 name|toString
 argument_list|()
@@ -1705,7 +1711,7 @@ name|info
 argument_list|(
 literal|"  - adding Resoures with rdf:type "
 operator|+
-name|type
+name|typeObject
 argument_list|)
 expr_stmt|;
 block|}
@@ -1761,7 +1767,7 @@ comment|//null or an iterable with one or more elements!
 block|}
 comment|//init the indexing mode
 name|Object
-name|indexingMode
+name|indexingModeObject
 init|=
 name|config
 operator|.
@@ -1772,7 +1778,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|indexingMode
+name|indexingModeObject
 operator|==
 literal|null
 condition|)
@@ -1790,7 +1796,7 @@ block|}
 elseif|else
 if|if
 condition|(
-name|indexingMode
+name|indexingModeObject
 operator|instanceof
 name|IndexingMode
 condition|)
@@ -1802,7 +1808,7 @@ operator|=
 operator|(
 name|IndexingMode
 operator|)
-name|indexingMode
+name|indexingModeObject
 expr_stmt|;
 block|}
 else|else
@@ -1817,7 +1823,7 @@ name|IndexingMode
 operator|.
 name|valueOf
 argument_list|(
-name|indexingMode
+name|indexingModeObject
 operator|.
 name|toString
 argument_list|()
@@ -1862,7 +1868,7 @@ name|Iterable
 argument_list|<
 name|?
 argument_list|>
-name|mappings
+name|mappingIterator
 init|=
 operator|(
 name|Iterable
@@ -1885,7 +1891,7 @@ name|fieldMappings
 decl_stmt|;
 if|if
 condition|(
-name|mappings
+name|mappingIterator
 operator|!=
 literal|null
 condition|)
@@ -1904,7 +1910,7 @@ control|(
 name|Object
 name|mappingString
 range|:
-name|mappings
+name|mappingIterator
 control|)
 block|{
 if|if
@@ -2078,7 +2084,7 @@ throw|;
 block|}
 comment|//else exists and is a dir -> nothing to do
 name|Object
-name|skipRead
+name|skipReadObject
 init|=
 name|config
 operator|.
@@ -2089,14 +2095,14 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|skipRead
+name|skipReadObject
 operator|!=
 literal|null
 condition|)
 block|{
 if|if
 condition|(
-name|skipRead
+name|skipReadObject
 operator|instanceof
 name|Boolean
 condition|)
@@ -2109,7 +2115,7 @@ operator|(
 operator|(
 name|Boolean
 operator|)
-name|skipRead
+name|skipReadObject
 operator|)
 operator|.
 name|booleanValue
@@ -2126,7 +2132,7 @@ name|Boolean
 operator|.
 name|parseBoolean
 argument_list|(
-name|skipRead
+name|skipReadObject
 operator|.
 name|toString
 argument_list|()
@@ -2489,7 +2495,7 @@ name|minRanking
 expr_stmt|;
 block|}
 name|Object
-name|resumeMode
+name|resumeModeObject
 init|=
 name|config
 operator|.
@@ -2500,14 +2506,14 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|resumeMode
+name|resumeModeObject
 operator|!=
 literal|null
 condition|)
 block|{
 if|if
 condition|(
-name|resumeMode
+name|resumeModeObject
 operator|instanceof
 name|Boolean
 condition|)
@@ -2519,7 +2525,7 @@ operator|=
 operator|(
 name|Boolean
 operator|)
-name|resumeMode
+name|resumeModeObject
 expr_stmt|;
 block|}
 else|else
@@ -2532,7 +2538,7 @@ name|Boolean
 operator|.
 name|parseBoolean
 argument_list|(
-name|resumeMode
+name|resumeModeObject
 operator|.
 name|toString
 argument_list|()
@@ -3373,6 +3379,7 @@ operator|.
 name|isEmpty
 argument_list|()
 condition|)
+block|{
 name|source
 operator|.
 name|add
@@ -3382,6 +3389,7 @@ argument_list|,
 name|literalValue
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -3896,9 +3904,6 @@ operator|new
 name|File
 argument_list|(
 name|value
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if

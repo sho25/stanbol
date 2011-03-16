@@ -289,7 +289,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|/**      * Unmodifiable set of the active languages      */
-specifier|protected
+specifier|private
 specifier|final
 name|Set
 argument_list|<
@@ -302,7 +302,7 @@ specifier|final
 name|boolean
 name|containsNull
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|RdfValueFactory
 name|valueFactory
@@ -389,6 +389,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Text
 name|adapt
 parameter_list|(

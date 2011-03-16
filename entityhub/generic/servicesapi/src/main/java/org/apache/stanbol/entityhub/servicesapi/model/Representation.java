@@ -91,7 +91,7 @@ name|String
 name|getId
 parameter_list|()
 function_decl|;
-comment|/**      * Getter for a single Value for a field      * @param<T> the generic type the returned value      * @param field the field      * @param type the type of the values      * @return the (first) value of that field      * @throws IllegalArgumentException if the type is not supported      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for a single Value for a field      * @param<T> the generic type the returned value      * @param field the field      * @param type the type of the values      * @return the (first) value of that field      * @throws IllegalArgumentException if the type is not supported      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -110,11 +110,9 @@ parameter_list|)
 throws|throws
 name|UnsupportedTypeException
 throws|,
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all values of a field      * @param<T> the generic type of the returned values      * @param field the field      * @param type the type      * @return the values of the field      * @throws UnsupportedTypeException if the parsed type is not supported      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for all values of a field      * @param<T> the generic type of the returned values      * @param field the field      * @param type the type      * @return the values of the field      * @throws UnsupportedTypeException if the parsed type is not supported      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -136,11 +134,9 @@ parameter_list|)
 throws|throws
 name|UnsupportedTypeException
 throws|,
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for the (first) value for a field      * @param field the field      * @return the first value of a field      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for the (first) value for a field      * @param field the field      * @return the first value of a field      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|Object
 name|getFirst
 parameter_list|(
@@ -148,11 +144,9 @@ name|String
 name|field
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for the first reference value for a field      * @param field the field      * @return the reference or null of the field has no reference as value      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for the first reference value for a field      * @param field the field      * @return the reference or null of the field has no reference as value      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|Reference
 name|getFirstReference
 parameter_list|(
@@ -160,11 +154,9 @@ name|String
 name|field
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for the first natural language text value of a specific language      * @param field the field      * @param language the language(s) of the natural language text value      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag are included in the Result)      * @return the first natural language text found for the parsed field      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field     */
+comment|/**      * Getter for the first natural language text value of a specific language      * @param field the field      * @param language the language(s) of the natural language text value      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag are included in the Result)      * @return the first natural language text found for the parsed field      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field     */
 name|Text
 name|getFirst
 parameter_list|(
@@ -176,11 +168,9 @@ modifier|...
 name|language
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all values for the requested field      * @param field the field      * @return the values of the field      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for all values for the requested field      * @param field the field      * @return the values of the field      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|Iterator
 argument_list|<
 name|Object
@@ -191,11 +181,9 @@ name|String
 name|field
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all natural language text values of a field      * @param field the field      * @return the natural text values      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for all natural language text values of a field      * @param field the field      * @return the natural text values      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|Iterator
 argument_list|<
 name|Text
@@ -206,11 +194,9 @@ name|String
 name|field
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all natural language text values of a field      * @param field the field      * @param language the language(s) of the natural language text value      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag are included in the Result)      * @return iterator over all natural language text values in the requested      *             language.      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for all natural language text values of a field      * @param field the field      * @param language the language(s) of the natural language text value      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag are included in the Result)      * @return iterator over all natural language text values in the requested      *             language.      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|Iterator
 argument_list|<
 name|Text
@@ -225,11 +211,9 @@ modifier|...
 name|language
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all reference values of a field      * @param field the field      * @return Iterator over all reference values of a field      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Getter for all reference values of a field      * @param field the field      * @return Iterator over all reference values of a field      * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|Iterator
 argument_list|<
 name|Reference
@@ -240,11 +224,9 @@ name|String
 name|field
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Adds the object as value to the field.      *<p>The type of the value is inferred based on the type of the Object.<br>      * Supported Types are:</p>      *<ul>      *<li>{@link Reference}      *<li>URL, URI: {@link Reference} instances are created for such values</li>      *<li>Boolean, Integer, Long, Double and Float as primitive data types</li>      *<li>{@link Date}       *<li>{@link Text}      *<li>String[]{text,language}: text and language (further entries are ignored)</li>      *<li>String: mapped to {@link Text} with the<code>language=null</code></li>      *<li>{@link Collection}s, {@link Enumeration}s and {@link Iterator}s are       *     can be used to parse multiple values      *<li>For unsupported types it MUSST be assured the the toString() value      *     of the stored Object is equals to the toString() value of the parsed      *     object.</li>      *</ul>       * @param field the field      * @param value the value to add      * @throws NullPointerException if<code>null</code> is parsed as field or      * value      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Adds the object as value to the field.      *<p>The type of the value is inferred based on the type of the Object.<br>      * Supported Types are:</p>      *<ul>      *<li>{@link Reference}      *<li>URL, URI: {@link Reference} instances are created for such values</li>      *<li>Boolean, Integer, Long, Double and Float as primitive data types</li>      *<li>{@link Date}       *<li>{@link Text}      *<li>String[]{text,language}: text and language (further entries are ignored)</li>      *<li>String: mapped to {@link Text} with the<code>language=null</code></li>      *<li>{@link Collection}s, {@link Enumeration}s and {@link Iterator}s are       *     can be used to parse multiple values      *<li>For unsupported types it MUSST be assured the the toString() value      *     of the stored Object is equals to the toString() value of the parsed      *     object.</li>      *</ul>       * @param field the field      * @param value the value to add      * @throws NullPointerException       * @throws IllegalArgumentException if<code>null</code> is parsed as field or      * value and/or if an empty string is parsed as field      */
 name|void
 name|add
 parameter_list|(
@@ -255,11 +237,9 @@ name|Object
 name|value
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Adds an reference to the field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      * @throws NullPointerException if<code>null</code> is parsed as field or      * reference      * @throws IllegalArgumentException if an empty string is parsed as field      * or reference and/or<code>null</code> is parsed as value.      */
+comment|/**      * Adds an reference to the field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      * @throws NullPointerException       * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field or reference      */
 name|void
 name|addReference
 parameter_list|(
@@ -270,11 +250,9 @@ name|String
 name|reference
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Adds a natural language text as value for one or more languages      * @param field the field to add the text as value      * @param text the natural language text      * @param language the text is set for all the parsed languages. Parse      *<code>null</code> to set the text also without any language      *             information.      * @throws NullPointerException if<code>null</code> is parsed as field.      * @throws IllegalArgumentException if an empty string is parsed as field      * and/or<code>null</code> is parsed as text. NOTE that<code>null</code>       * is supported for languages.      */
+comment|/**      * Adds a natural language text as value for one or more languages      * @param field the field to add the text as value      * @param text the natural language text      * @param language the text is set for all the parsed languages. Parse      *<code>null</code> to set the text also without any language      *             information.      * @throws NullPointerException       * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field; if<code>null</code> is parsed as text.       * NOTE that<code>null</code> is supported for languages.      */
 name|void
 name|addNaturalText
 parameter_list|(
@@ -289,11 +267,9 @@ modifier|...
 name|languages
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Sets the value of the field to the parsed object. If the parsed value      * is<code>null</code> than this method removes all values for the given      * field<br>      * This Method supports collections as well as value conversions for some      * types. Please see the documentation of {@link #add(String, Object)} for      * details.      * @param field the field      * @param value the new value for the field      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Sets the value of the field to the parsed object. If the parsed value      * is<code>null</code> than this method removes all values for the given      * field<br>      * This Method supports collections as well as value conversions for some      * types. Please see the documentation of {@link #add(String, Object)} for      * details.      * @param field the field      * @param value the new value for the field      * @throws NullPointerException       * @throws IllegalArgumentException if<code>null</code> or an empty string       * is parsed as field      */
 name|void
 name|set
 parameter_list|(
@@ -304,11 +280,9 @@ name|Object
 name|value
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Setter for the reference of a field. If the parsed value      * is<code>null</code> than this method removes all values for the given      * field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Setter for the reference of a field. If the parsed value      * is<code>null</code> than this method removes all values for the given      * field.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      * @throws IllegalArgumentException if<code>null</code>or an emtpy string is      * parsed as field      */
 name|void
 name|setReference
 parameter_list|(
@@ -319,11 +293,9 @@ name|String
 name|reference
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Setter for the natural language text value of a field in the given      * languages. If<code>null</code> is parsed as text, all present values      * for the parsed languages are removed (values of other languages are      * not removed)      * @param field the field      * @param text the natural language text      * @param language the languages of the parsed text. Parse      *<code>null</code> to set the text also without any language      *             information.      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Setter for the natural language text value of a field in the given      * languages. If<code>null</code> is parsed as text, all present values      * for the parsed languages are removed (values of other languages are      * not removed)      * @param field the field      * @param text the natural language text      * @param language the languages of the parsed text. Parse      *<code>null</code> to set the text also without any language      *             information.      * @throws IllegalArgumentException if<code>null</code>or an emtpy string is      * parsed as field      */
 name|void
 name|setNaturalText
 parameter_list|(
@@ -338,11 +310,9 @@ modifier|...
 name|language
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Removes the parsed value form the field. If<code>null</code> is parsed      * as value than the call is ignored.<p>      * This methods follows the same conventions as {@link #add(String, Object)}      * (e.g. parsing a {@link Collection} will cause all values within this      * collection to be removed). See the documentation of {@link #add(String, Object)}      * for details.      * @param field the field      * @param value the value to remove      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Removes the parsed value form the field. If<code>null</code> is parsed      * as value than the call is ignored.<p>      * This methods follows the same conventions as {@link #add(String, Object)}      * (e.g. parsing a {@link Collection} will cause all values within this      * collection to be removed). See the documentation of {@link #add(String, Object)}      * for details.      * @param field the field      * @param value the value to remove      * @throws IllegalArgumentException if<code>null</code>or an emtpy string is      * parsed as field      */
 name|void
 name|remove
 parameter_list|(
@@ -353,8 +323,6 @@ name|Object
 name|value
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
 comment|/**      * Removes to parsed reference as value for the given field. If<code>null</code>      * is parsed as reference, that the call is ignored.      * @param field the field      * @param reference the string representation of the reference. Note that      * the value will be interpreted as a "reference" so there might apply      * some rules about the format of the string. Regardless of the implementation      * any valid URI and URL need to be accepted as a valid reference value      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
@@ -372,7 +340,7 @@ name|NullPointerException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Removes a natural language text in given languages form a field      * @param field the field      * @param text the natural language text      * @param language the language(s) of the natural language text      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag might be removed)      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Removes a natural language text in given languages form a field      * @param field the field      * @param text the natural language text      * @param language the language(s) of the natural language text      *             (If<code>null</code> is parsed as language, than also labels      *             without language tag might be removed)      * @throws IllegalArgumentException if<code>null</code>or an emtpy string is      * parsed as field      */
 name|void
 name|removeNaturalText
 parameter_list|(
@@ -387,11 +355,9 @@ modifier|...
 name|languages
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Removes all values of the field      * @param field the field      * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Removes all values of the field      * @param field the field      * @throws IllegalArgumentException if<code>null</code>or an emtpy string is      * parsed as field      */
 name|void
 name|removeAll
 parameter_list|(
@@ -399,11 +365,9 @@ name|String
 name|field
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Removes all natural language texts for the given languages or all natural      * language labels of no language or an empty array is parsed as language.      * To remove values with no language, parse<code>null</code> as entry of the      * languages array.      * @param field the field.      * @param languages the language(s) of the natural language text. If      *<code>null</code> or an empty array is parsed, than all      *             natural language label are removed. To remove only labels with      *             no language,<code>null</code> needs to be parsed as entry of      *             this array.       * @throws NullPointerException if<code>null</code> is parsed as field      * @throws IllegalArgumentException if an empty string is parsed as field      */
+comment|/**      * Removes all natural language texts for the given languages or all natural      * language labels of no language or an empty array is parsed as language.      * To remove values with no language, parse<code>null</code> as entry of the      * languages array.      * @param field the field.      * @param languages the language(s) of the natural language text. If      *<code>null</code> or an empty array is parsed, than all      *             natural language label are removed. To remove only labels with      *             no language,<code>null</code> needs to be parsed as entry of      *             this array.       * @throws IllegalArgumentException if<code>null</code>or an emtpy string is      * parsed as field      */
 name|void
 name|removeAllNaturalText
 parameter_list|(
@@ -415,8 +379,6 @@ modifier|...
 name|languages
 parameter_list|)
 throws|throws
-name|NullPointerException
-throws|,
 name|IllegalArgumentException
 function_decl|;
 comment|/**      * Getter for all the present fields      * @return the fields      */

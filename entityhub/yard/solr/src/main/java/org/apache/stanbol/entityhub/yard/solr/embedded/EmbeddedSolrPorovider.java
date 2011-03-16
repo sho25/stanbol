@@ -445,7 +445,7 @@ name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
-specifier|protected
+specifier|private
 name|Map
 argument_list|<
 name|String
@@ -531,7 +531,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The Path to the Index MUST NOT be NULL!"
 argument_list|)

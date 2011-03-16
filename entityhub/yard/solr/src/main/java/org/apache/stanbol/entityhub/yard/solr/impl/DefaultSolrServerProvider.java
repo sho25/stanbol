@@ -297,7 +297,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed SolrServer URI MUST NOT be NULL!"
 argument_list|)

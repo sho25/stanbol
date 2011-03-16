@@ -337,6 +337,8 @@ class|class
 name|DefaultFieldMapperImpl
 implements|implements
 name|FieldMapper
+implements|,
+name|Cloneable
 block|{
 specifier|private
 specifier|final
@@ -395,6 +397,7 @@ name|FieldMapping
 argument_list|>
 name|unmodMappings
 decl_stmt|;
+specifier|private
 name|ValueConverterFactory
 name|valueConverter
 decl_stmt|;
@@ -565,7 +568,7 @@ name|List
 argument_list|<
 name|FieldMapping
 argument_list|>
-name|mappings
+name|fieldMappings
 init|=
 operator|new
 name|ArrayList
@@ -595,7 +598,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|mappings
+name|fieldMappings
 operator|.
 name|addAll
 argument_list|(
@@ -639,7 +642,7 @@ name|find
 argument_list|()
 condition|)
 block|{
-name|mappings
+name|fieldMappings
 operator|.
 name|addAll
 argument_list|(
@@ -655,7 +658,7 @@ name|Collections
 operator|.
 name|sort
 argument_list|(
-name|mappings
+name|fieldMappings
 argument_list|,
 name|FieldMappingUtils
 operator|.
@@ -663,7 +666,7 @@ name|FIELD_MAPPING_COMPARATOR
 argument_list|)
 expr_stmt|;
 return|return
-name|mappings
+name|fieldMappings
 return|;
 block|}
 comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.servicesapi.mapping.FieldMapper#addMapping(org.apache.stanbol.entityhub.servicesapi.mapping.FieldMapping)      */
@@ -2128,23 +2131,10 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|accepted
-operator|.
-name|contains
-argument_list|(
-name|value
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-condition|)
-block|{
+comment|//            if(accepted.contains(value.getClass())){
 comment|//                log.info(String.format("   + value %s(type:%s) accepted by value filter",value,value.getClass()));
 comment|//nothing to do
-block|}
-elseif|else
+comment|//            } else
 if|if
 condition|(
 name|rejected
@@ -2391,10 +2381,6 @@ name|o
 parameter_list|)
 block|{
 return|return
-name|o
-operator|!=
-literal|null
-operator|&&
 name|o
 operator|instanceof
 name|DefaultFieldMapperImpl

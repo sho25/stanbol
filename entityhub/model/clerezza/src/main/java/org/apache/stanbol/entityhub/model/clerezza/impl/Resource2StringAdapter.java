@@ -17,7 +17,7 @@ name|model
 operator|.
 name|clerezza
 operator|.
-name|utils
+name|impl
 package|;
 end_package
 
@@ -113,6 +113,7 @@ block|{
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|adapt
 parameter_list|(

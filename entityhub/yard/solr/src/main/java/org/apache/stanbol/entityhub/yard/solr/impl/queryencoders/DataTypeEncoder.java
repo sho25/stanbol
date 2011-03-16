@@ -307,12 +307,12 @@ operator|.
 name|suffux
 argument_list|)
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|FieldMapper
 name|fieldMapper
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|IndexValueFactory
 name|indexValueFactory

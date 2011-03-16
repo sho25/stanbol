@@ -84,7 +84,7 @@ name|type
 parameter_list|)
 function_decl|;
 block|}
-specifier|protected
+specifier|private
 specifier|final
 name|Adapter
 argument_list|<
@@ -94,7 +94,7 @@ name|A
 argument_list|>
 name|adapter
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Iterator
 argument_list|<
@@ -102,7 +102,7 @@ name|T
 argument_list|>
 name|it
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Class
 argument_list|<

@@ -53,24 +53,6 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|servicesapi
-operator|.
-name|defaults
-operator|.
-name|NamespaceEnum
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
 name|yard
 operator|.
 name|solr
@@ -78,26 +60,6 @@ operator|.
 name|model
 operator|.
 name|FieldMapper
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|yard
-operator|.
-name|solr
-operator|.
-name|model
-operator|.
-name|IndexDataType
 import|;
 end_import
 
@@ -250,20 +212,7 @@ operator|.
 name|prefix
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|ConstraintTypePosition
-name|SUFFIX
-init|=
-operator|new
-name|ConstraintTypePosition
-argument_list|(
-name|PositionType
-operator|.
-name|suffux
-argument_list|)
-decl_stmt|;
+comment|//    private static final ConstraintTypePosition SUFFIX = new ConstraintTypePosition(PositionType.suffux);
 comment|//deactivated, because xsd:string values are now also included in the language
 comment|//merger field (the name returned by fieldMapper.getLanguageMergerField(null)).
 comment|//private static final IndexDataType STRING_DATATYPE =  new IndexDataType(NamespaceEnum.xsd+"string");

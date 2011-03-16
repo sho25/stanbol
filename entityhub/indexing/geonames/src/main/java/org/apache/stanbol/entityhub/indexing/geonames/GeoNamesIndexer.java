@@ -197,6 +197,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -996,6 +1006,9 @@ index|]
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+specifier|static
+specifier|final
 name|Logger
 name|log
 init|=
@@ -1036,6 +1049,12 @@ specifier|private
 name|File
 name|dataDir
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+comment|//TODO implement indexing of Ontology
 specifier|private
 name|File
 name|geonamesOntFile
@@ -1070,13 +1089,7 @@ specifier|private
 name|File
 name|geonamesArchiveFile
 decl_stmt|;
-specifier|private
-specifier|final
-name|String
-name|geonamesOntBase
-init|=
-literal|"http://www.geonames.org/ontology/"
-decl_stmt|;
+comment|//private final String geonamesOntBase = "http://www.geonames.org/ontology/";
 specifier|private
 specifier|final
 name|String
@@ -1084,13 +1097,7 @@ name|geonamesFeatureBase
 init|=
 literal|"http://sws.geonames.org/"
 decl_stmt|;
-specifier|private
-specifier|final
-name|String
-name|geonamesCountryBase
-init|=
-literal|"http://www.geonames.org/countries/"
-decl_stmt|;
+comment|//private final String geonamesCountryBase = "http://www.geonames.org/countries/";
 comment|//for date processing we use joda time!
 specifier|private
 specifier|final
@@ -1806,6 +1813,7 @@ argument_list|,
 literal|"related"
 argument_list|)
 block|,         ;
+specifier|private
 name|String
 name|uri
 decl_stmt|;
@@ -2000,7 +2008,7 @@ name|startPosition
 argument_list|)
 expr_stmt|;
 name|Boolean
-name|indexOntology
+name|indexOntologyState
 init|=
 operator|(
 name|Boolean
@@ -2014,7 +2022,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|indexOntology
+name|indexOntologyState
 operator|!=
 literal|null
 condition|)
@@ -2023,7 +2031,7 @@ name|this
 operator|.
 name|indexOntology
 operator|=
-name|indexOntology
+name|indexOntologyState
 expr_stmt|;
 block|}
 else|else
@@ -2041,7 +2049,7 @@ name|info
 argument_list|(
 literal|" ... indexing geonames.org thesaurus="
 operator|+
-name|indexOntology
+name|indexOntologyState
 argument_list|)
 expr_stmt|;
 name|this
@@ -2915,8 +2923,9 @@ comment|//remove alternate labels from the inMemoryMap for the ID to save memory
 name|Integer
 name|id
 init|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|line
 operator|.
@@ -3151,7 +3160,7 @@ name|id
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 name|Integer
@@ -3218,7 +3227,7 @@ name|utf8Label
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 name|doc
@@ -3241,7 +3250,7 @@ name|askiiLabel
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
@@ -3274,7 +3283,7 @@ expr_stmt|;
 comment|//alternate Names (alternate names also include Airport codes, postal codes and Wikipedia links!
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 comment|//consume this Element and use the alternateNames Map instead
@@ -3679,7 +3688,7 @@ name|BigDecimal
 argument_list|(
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 argument_list|)
@@ -3701,7 +3710,7 @@ name|BigDecimal
 argument_list|(
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 argument_list|)
@@ -3722,7 +3731,7 @@ name|geonames
 argument_list|,
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -3767,7 +3776,7 @@ name|featureClass
 argument_list|,
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 argument_list|)
@@ -3795,7 +3804,7 @@ name|countryCode
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
@@ -3839,7 +3848,7 @@ name|altCc
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
@@ -3934,25 +3943,25 @@ block|,
 comment|//country
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 block|,
 comment|//ADM1
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 block|,
 comment|//ADM2
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 block|,
 comment|//ADM3
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 block|}
 decl_stmt|;
@@ -4006,7 +4015,7 @@ name|populationString
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
@@ -4054,25 +4063,25 @@ block|}
 block|}
 comment|//elevation
 name|String
-name|latString
+name|altString
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|latString
+name|altString
 operator|==
 literal|null
 condition|)
 block|{
-name|latString
+name|altString
 operator|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 comment|//if no elevation than use the gtopo30
@@ -4081,7 +4090,7 @@ else|else
 block|{
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 comment|//if there is already en elevation, than consume these entry
@@ -4089,10 +4098,11 @@ block|}
 name|Integer
 name|alt
 init|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
-name|latString
+name|altString
 argument_list|)
 decl_stmt|;
 if|if
@@ -4125,7 +4135,7 @@ block|}
 comment|//time zone
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 comment|//not used
@@ -4135,7 +4145,7 @@ name|modDateString
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
@@ -5016,7 +5026,7 @@ control|(
 init|;
 name|t
 operator|.
-name|hasMoreElements
+name|hasNext
 argument_list|()
 condition|;
 name|i
@@ -5028,7 +5038,7 @@ name|actToken
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
@@ -5052,8 +5062,9 @@ condition|)
 block|{
 name|geonamesId
 operator|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|actToken
 argument_list|)
@@ -5233,8 +5244,9 @@ decl_stmt|;
 name|Integer
 name|geonamesId
 init|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|line
 operator|.
@@ -6035,24 +6047,26 @@ decl_stmt|;
 name|Integer
 name|parent
 init|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 decl_stmt|;
 name|Integer
 name|child
 init|=
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -6063,7 +6077,7 @@ if|if
 condition|(
 name|t
 operator|.
-name|hasMoreElements
+name|hasNext
 argument_list|()
 condition|)
 block|{
@@ -6071,7 +6085,7 @@ name|type
 operator|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 block|}
@@ -6346,7 +6360,7 @@ name|parseInt
 argument_list|(
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -6359,33 +6373,33 @@ name|parseInt
 argument_list|(
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 argument_list|)
 expr_stmt|;
 name|String
-name|lang
+name|language
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|lang
+name|language
 operator|!=
 literal|null
 operator|&&
 operator|(
-name|lang
+name|language
 operator|.
 name|length
 argument_list|()
 operator|==
 literal|2
 operator|||
-name|lang
+name|language
 operator|.
 name|length
 argument_list|()
@@ -6398,7 +6412,7 @@ name|this
 operator|.
 name|lang
 operator|=
-name|lang
+name|language
 expr_stmt|;
 block|}
 else|else
@@ -6413,11 +6427,11 @@ comment|//no valied lang Code
 block|}
 if|if
 condition|(
-name|lang
+name|language
 operator|==
 literal|null
 operator|||
-name|lang
+name|language
 operator|.
 name|length
 argument_list|()
@@ -6439,7 +6453,7 @@ literal|"post"
 operator|.
 name|equals
 argument_list|(
-name|lang
+name|language
 argument_list|)
 condition|)
 block|{
@@ -6457,7 +6471,7 @@ literal|"link"
 operator|.
 name|equals
 argument_list|(
-name|lang
+name|language
 argument_list|)
 condition|)
 block|{
@@ -6475,7 +6489,7 @@ literal|"abbr"
 operator|.
 name|equals
 argument_list|(
-name|lang
+name|language
 argument_list|)
 condition|)
 block|{
@@ -6493,21 +6507,21 @@ literal|"iata"
 operator|.
 name|equals
 argument_list|(
-name|lang
+name|language
 argument_list|)
 operator|||
 literal|"icao"
 operator|.
 name|equals
 argument_list|(
-name|lang
+name|language
 argument_list|)
 operator|||
 literal|"faac"
 operator|.
 name|equals
 argument_list|(
-name|lang
+name|language
 argument_list|)
 condition|)
 block|{
@@ -6532,7 +6546,7 @@ name|name
 operator|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 if|if
@@ -6557,7 +6571,7 @@ name|act
 init|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 decl_stmt|;
 name|this
@@ -6579,7 +6593,7 @@ name|act
 operator|=
 name|t
 operator|.
-name|nextElement
+name|next
 argument_list|()
 expr_stmt|;
 name|this
@@ -6685,10 +6699,6 @@ parameter_list|)
 block|{
 return|return
 name|obj
-operator|!=
-literal|null
-operator|&&
-name|obj
 operator|instanceof
 name|FeatureName
 operator|&&
@@ -6746,7 +6756,7 @@ specifier|static
 class|class
 name|Tokenizer
 implements|implements
-name|Enumeration
+name|Iterator
 argument_list|<
 name|String
 argument_list|>
@@ -6764,6 +6774,7 @@ specifier|final
 name|StringTokenizer
 name|t
 decl_stmt|;
+specifier|private
 name|boolean
 name|prevElementWasNull
 init|=
@@ -6793,7 +6804,7 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|hasMoreElements
+name|hasNext
 parameter_list|()
 block|{
 return|return
@@ -6807,7 +6818,7 @@ annotation|@
 name|Override
 specifier|public
 name|String
-name|nextElement
+name|next
 parameter_list|()
 block|{
 if|if
@@ -6882,6 +6893,19 @@ name|act
 return|;
 block|}
 block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|remove
+parameter_list|()
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
 block|}
 block|}
 block|}

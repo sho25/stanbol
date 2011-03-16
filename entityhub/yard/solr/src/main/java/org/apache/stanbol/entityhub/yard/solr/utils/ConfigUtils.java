@@ -57,16 +57,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Enumeration
 import|;
 end_import
@@ -97,59 +87,9 @@ name|client
 operator|.
 name|solrj
 operator|.
-name|SolrServer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|client
-operator|.
-name|solrj
-operator|.
-name|SolrServerException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|client
-operator|.
-name|solrj
-operator|.
 name|embedded
 operator|.
 name|EmbeddedSolrServer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|client
-operator|.
-name|solrj
-operator|.
-name|request
-operator|.
-name|CoreAdminRequest
 import|;
 end_import
 
@@ -211,9 +151,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ConfigUtils
 block|{
+specifier|private
+name|ConfigUtils
+parameter_list|()
+block|{}
 comment|/**      * The logger      */
 specifier|private
 specifier|static
@@ -287,7 +232,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Bundle MUST NOT be NULL!"
 argument_list|)
@@ -302,7 +247,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed root directory MUST NOT be NULL!"
 argument_list|)
@@ -745,7 +690,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed Bundle MUST NOT be NULL!"
 argument_list|)
@@ -760,7 +705,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed core directory MUST NOT be NULL!"
 argument_list|)

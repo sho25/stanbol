@@ -275,16 +275,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URL
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Arrays
@@ -615,9 +605,14 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|CommandLineRunner
 block|{
+specifier|private
+name|CommandLineRunner
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 specifier|final

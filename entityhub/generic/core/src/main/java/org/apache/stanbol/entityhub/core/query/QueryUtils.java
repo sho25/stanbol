@@ -43,9 +43,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|QueryUtils
 block|{
+specifier|private
+name|QueryUtils
+parameter_list|()
+block|{}
 comment|/**      * Getter for the Limit calculated bye on the limit defined by the query      * and the configuration of the default results (for queries that do not      * define a limit) and the maximum number of Results.<p>      * Configurations for defaultResults and maxResults<= 0 are ignored. Return      * values< = 0 should be interpreted as no constraints.      * @param query the query      * @param defaultResults the default number of results      * @param maxResults the maximum number of queries      * @return if> 0, than the value represents the number of results for the      * query. Otherwise no constraint.      */
 specifier|public
 specifier|static

@@ -43,7 +43,7 @@ argument_list|<
 name|String
 argument_list|>
 block|{
-specifier|protected
+specifier|private
 specifier|final
 name|Iterator
 argument_list|<
@@ -73,7 +73,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"Parsed iterator MUST NOT be NULL!"
 argument_list|)

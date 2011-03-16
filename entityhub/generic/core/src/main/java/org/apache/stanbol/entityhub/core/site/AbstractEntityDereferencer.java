@@ -360,7 +360,7 @@ name|getProperties
 argument_list|()
 decl_stmt|;
 name|Object
-name|baseUri
+name|baseUriObject
 init|=
 name|properties
 operator|.
@@ -373,7 +373,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|baseUri
+name|baseUriObject
 operator|!=
 literal|null
 condition|)
@@ -382,7 +382,7 @@ name|this
 operator|.
 name|baseUri
 operator|=
-name|baseUri
+name|baseUriObject
 operator|.
 name|toString
 argument_list|()
@@ -429,7 +429,7 @@ name|ArrayList
 argument_list|<
 name|String
 argument_list|>
-name|prefixes
+name|prefixList
 init|=
 operator|new
 name|ArrayList
@@ -445,7 +445,7 @@ operator|==
 literal|null
 condition|)
 block|{
-name|prefixes
+name|prefixList
 operator|=
 literal|null
 expr_stmt|;
@@ -462,7 +462,7 @@ name|isArray
 argument_list|()
 condition|)
 block|{
-name|prefixes
+name|prefixList
 operator|.
 name|addAll
 argument_list|(
@@ -490,7 +490,7 @@ name|?
 argument_list|>
 condition|)
 block|{
-name|prefixes
+name|prefixList
 operator|.
 name|addAll
 argument_list|(
@@ -507,7 +507,7 @@ block|}
 else|else
 block|{
 comment|//assuming a single value
-name|prefixes
+name|prefixList
 operator|.
 name|add
 argument_list|(
@@ -522,7 +522,7 @@ name|Collections
 operator|.
 name|sort
 argument_list|(
-name|prefixes
+name|prefixList
 argument_list|)
 expr_stmt|;
 comment|//sort the prefixes List
@@ -534,7 +534,7 @@ name|Collections
 operator|.
 name|unmodifiableList
 argument_list|(
-name|prefixes
+name|prefixList
 argument_list|)
 expr_stmt|;
 comment|//use an unmodifiable wrapper for the member variable

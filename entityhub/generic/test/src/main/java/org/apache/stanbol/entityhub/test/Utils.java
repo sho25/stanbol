@@ -49,9 +49,14 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Utils
 block|{
+specifier|private
+name|Utils
+parameter_list|()
+block|{}
 comment|/**      * Converts an Iterator to a Collection by iterating over all elements and      * adding them to a List.      * @param<T>      * @param it the iterator      * @return the collection containing all elements of the iterator      */
 specifier|public
 specifier|static

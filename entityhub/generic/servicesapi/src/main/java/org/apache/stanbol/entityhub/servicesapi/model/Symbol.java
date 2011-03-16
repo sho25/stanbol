@@ -112,6 +112,7 @@ name|getUri
 argument_list|()
 argument_list|)
 block|,         ;
+specifier|private
 name|String
 name|uri
 decl_stmt|;

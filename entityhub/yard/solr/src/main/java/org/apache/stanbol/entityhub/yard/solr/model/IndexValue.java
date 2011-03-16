@@ -51,7 +51,7 @@ comment|/**      * Calculate the hash only once      */
 specifier|private
 specifier|final
 name|int
-name|_hash
+name|hash
 decl_stmt|;
 specifier|public
 name|IndexValue
@@ -194,7 +194,7 @@ expr_stmt|;
 block|}
 name|this
 operator|.
-name|_hash
+name|hash
 operator|=
 name|type
 operator|.
@@ -268,7 +268,7 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|_hash
+name|hash
 return|;
 block|}
 annotation|@
@@ -282,10 +282,6 @@ name|obj
 parameter_list|)
 block|{
 return|return
-name|obj
-operator|!=
-literal|null
-operator|&&
 name|obj
 operator|instanceof
 name|IndexValue

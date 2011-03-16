@@ -491,7 +491,7 @@ argument_list|)
 return|;
 block|}
 comment|/**      * Random UUID generator with re-seedable RNG for the tests.      *      * @return a new Random UUID      */
-specifier|protected
+specifier|private
 specifier|static
 name|Random
 name|rng
@@ -1158,7 +1158,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|":"
+literal|':'
 argument_list|)
 operator|+
 literal|1
@@ -1179,7 +1179,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|":"
+literal|':'
 argument_list|)
 operator|+
 literal|1
@@ -1211,7 +1211,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|"#"
+literal|'#'
 argument_list|)
 operator|>=
 literal|0
@@ -1230,7 +1230,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|"#"
+literal|'#'
 argument_list|)
 operator|+
 literal|1
@@ -1251,7 +1251,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|"#"
+literal|'#'
 argument_list|)
 operator|+
 literal|1
@@ -1265,7 +1265,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|"/"
+literal|'/'
 argument_list|)
 operator|>=
 literal|0
@@ -1284,7 +1284,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|"/"
+literal|'/'
 argument_list|)
 operator|+
 literal|1
@@ -1305,7 +1305,7 @@ name|uri
 operator|.
 name|lastIndexOf
 argument_list|(
-literal|"/"
+literal|'/'
 argument_list|)
 operator|+
 literal|1

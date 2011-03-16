@@ -592,7 +592,7 @@ argument_list|<
 name|?
 argument_list|>
 argument_list|>
-name|javaInterfaceConverters
+name|javaInterfaceConverterMap
 init|=
 operator|new
 name|HashMap
@@ -613,7 +613,7 @@ operator|.
 name|javaInterfaceConverters
 argument_list|)
 decl_stmt|;
-name|javaInterfaceConverters
+name|javaInterfaceConverterMap
 operator|.
 name|put
 argument_list|(
@@ -627,7 +627,7 @@ name|this
 operator|.
 name|javaInterfaceConverters
 operator|=
-name|javaInterfaceConverters
+name|javaInterfaceConverterMap
 expr_stmt|;
 block|}
 else|else
@@ -716,7 +716,7 @@ argument_list|<
 name|?
 argument_list|>
 argument_list|>
-name|javaInterfaceConverters
+name|javaInterfaceConverterMap
 init|=
 operator|new
 name|HashMap
@@ -745,7 +745,7 @@ argument_list|<
 name|T
 argument_list|>
 operator|)
-name|javaInterfaceConverters
+name|javaInterfaceConverterMap
 operator|.
 name|remove
 argument_list|(
@@ -756,7 +756,7 @@ name|this
 operator|.
 name|javaInterfaceConverters
 operator|=
-name|javaInterfaceConverters
+name|javaInterfaceConverterMap
 expr_stmt|;
 block|}
 else|else
@@ -1301,7 +1301,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -1615,7 +1615,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -1877,7 +1877,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -2108,7 +2108,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -2155,8 +2155,9 @@ block|{
 try|try
 block|{
 return|return
-operator|new
 name|Integer
+operator|.
+name|valueOf
 argument_list|(
 name|value
 operator|.
@@ -2510,7 +2511,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -2654,6 +2655,7 @@ argument_list|()
 decl_stmt|;
 specifier|private
 specifier|static
+specifier|final
 name|Set
 argument_list|<
 name|IndexDataType
@@ -2828,7 +2830,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -3068,6 +3070,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
+specifier|final
 name|void
 name|setAcceptDoubleAndLongIndexTypes
 parameter_list|(
@@ -3232,7 +3235,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -3513,7 +3516,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -3620,6 +3623,7 @@ argument_list|()
 decl_stmt|;
 specifier|private
 specifier|static
+specifier|final
 name|Set
 argument_list|<
 name|IndexDataType
@@ -3756,7 +3760,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -3892,7 +3896,7 @@ operator|.
 name|getIndexType
 argument_list|()
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|ValueFactory
 name|valueFactory
@@ -4066,7 +4070,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)
@@ -4151,7 +4155,7 @@ operator|.
 name|getIndexType
 argument_list|()
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|ValueFactory
 name|valueFactory
@@ -4320,7 +4324,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed IndexDataType MUST NOT be null"
 argument_list|)

@@ -304,7 +304,7 @@ operator|new
 name|InMemoryValueFactory
 argument_list|()
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Map
 argument_list|<
@@ -314,7 +314,7 @@ name|Object
 argument_list|>
 name|representation
 decl_stmt|;
-specifier|protected
+specifier|private
 specifier|final
 name|Map
 argument_list|<
@@ -451,7 +451,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -808,7 +808,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -961,7 +961,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1263,7 +1263,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1476,7 +1476,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1538,7 +1538,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1577,7 +1577,9 @@ name|values
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
 if|if
 condition|(
 name|values
@@ -1779,7 +1781,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -1827,7 +1829,9 @@ name|values
 operator|==
 literal|null
 condition|)
+block|{
 return|return;
+block|}
 end_if
 
 begin_if
@@ -2094,7 +2098,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|NullPointerException
+name|IllegalArgumentException
 argument_list|(
 literal|"The parsed field MUST NOT be NULL"
 argument_list|)
@@ -2760,10 +2764,6 @@ name|obj
 parameter_list|)
 block|{
 return|return
-name|obj
-operator|!=
-literal|null
-operator|&&
 name|obj
 operator|instanceof
 name|Representation

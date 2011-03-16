@@ -203,9 +203,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|TimeUtils
 block|{
+specifier|private
+name|TimeUtils
+parameter_list|()
+block|{}
 specifier|protected
 specifier|static
 specifier|final
@@ -431,13 +436,13 @@ decl_stmt|;
 comment|// TODO Future support for all XML date and time formats
 comment|//    protected static final DateTimeFormatter XML_gYear_FORMAT = ISODateTimeFormat.year().withZone(DateTimeZone.UTC);
 comment|//    protected static final DateTimeFormatter XML_gYearMonth_FORMAT = ISODateTimeFormat.yearMonth().withZone(DateTimeZone.UTC);
-comment|/**      * Lazy initialisation to avoid Exceptions if {@link DatatypeConfigurationException}      * is thrown during initialisation of the Utility class.<p>      */
+comment|/**      * Lazy initialisation to avoid Exceptions if {@link DatatypeConfigurationException}      * is thrown during initialisation of the Utility class.<p>      * Do not access directly! Use {@link #getXmlDataTypeFactory()} instead.      */
 specifier|private
 specifier|static
 name|DatatypeFactory
-name|__xmlDatatypeFactory
+name|xmlDatatypeFactory
 decl_stmt|;
-comment|/**      * Inits the {@link #__xmlDatatypeFactory} if not already done.<p>      * @return the XML datatype factory      * @throws IllegalStateException if a {@link DatatypeConfigurationException}      * is encountered during {@link DatatypeFactory#newInstance()}      */
+comment|/**      * Inits the {@link #xmlDatatypeFactory} if not already done.<p>      * @return the XML datatype factory      * @throws IllegalStateException if a {@link DatatypeConfigurationException}      * is encountered during {@link DatatypeFactory#newInstance()}      */
 specifier|private
 specifier|static
 name|DatatypeFactory
@@ -448,14 +453,14 @@ name|IllegalStateException
 block|{
 if|if
 condition|(
-name|__xmlDatatypeFactory
+name|xmlDatatypeFactory
 operator|==
 literal|null
 condition|)
 block|{
 try|try
 block|{
-name|__xmlDatatypeFactory
+name|xmlDatatypeFactory
 operator|=
 name|DatatypeFactory
 operator|.
@@ -481,7 +486,7 @@ throw|;
 block|}
 block|}
 return|return
-name|__xmlDatatypeFactory
+name|xmlDatatypeFactory
 return|;
 block|}
 specifier|public

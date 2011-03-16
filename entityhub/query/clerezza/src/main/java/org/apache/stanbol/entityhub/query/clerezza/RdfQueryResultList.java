@@ -270,6 +270,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|FieldQuery
 name|getQuery
 parameter_list|()
@@ -281,6 +282,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Set
 argument_list|<
 name|String
@@ -298,6 +300,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|boolean
 name|isEmpty
 parameter_list|()
@@ -312,6 +315,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Iterator
 argument_list|<
 name|Representation
@@ -327,6 +331,7 @@ name|Representation
 argument_list|>
 argument_list|()
 block|{
+specifier|private
 name|Iterator
 argument_list|<
 name|RdfRepresentation
@@ -385,6 +390,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|int
 name|size
 parameter_list|()
@@ -398,6 +404,7 @@ return|;
 block|}
 comment|/**      * Getter for the RDF Graph holding the Results of the Query      * @return the RDF Graph with the Results      */
 specifier|public
+specifier|final
 name|MGraph
 name|getResultGraph
 parameter_list|()
@@ -409,6 +416,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Class
 argument_list|<
 name|Representation

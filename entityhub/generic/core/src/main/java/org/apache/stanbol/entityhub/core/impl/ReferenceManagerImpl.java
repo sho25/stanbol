@@ -486,15 +486,12 @@ name|ReferenceManagerImpl
 implements|implements
 name|ReferencedSiteManager
 block|{
-specifier|protected
+specifier|private
 specifier|final
 name|Logger
 name|log
 decl_stmt|;
-specifier|protected
-name|ComponentContext
-name|context
-decl_stmt|;
+comment|//    private ComponentContext context;
 specifier|public
 name|ReferenceManagerImpl
 parameter_list|()
@@ -655,12 +652,7 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-name|this
-operator|.
-name|context
-operator|=
-name|context
-expr_stmt|;
+comment|//        this.context = context;
 name|log
 operator|.
 name|info
@@ -690,12 +682,7 @@ operator|+
 name|context
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|context
-operator|=
-literal|null
-expr_stmt|;
+comment|//        this.context = null;
 synchronized|synchronized
 init|(
 name|prefixMap

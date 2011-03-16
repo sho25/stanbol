@@ -218,6 +218,7 @@ enum|;
 end_enum
 
 begin_decl_stmt
+specifier|private
 name|String
 name|uri
 decl_stmt|;
@@ -408,9 +409,6 @@ parameter_list|()
 block|{
 return|return
 name|uri
-operator|.
-name|toString
-argument_list|()
 return|;
 block|}
 end_function
