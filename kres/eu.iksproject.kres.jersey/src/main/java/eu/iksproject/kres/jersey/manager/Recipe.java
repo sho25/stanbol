@@ -303,6 +303,24 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|ONManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|store
 operator|.
 name|api
@@ -344,6 +362,78 @@ operator|.
 name|api
 operator|.
 name|RuleStore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|manager
+operator|.
+name|changes
+operator|.
+name|KReSAddRecipe
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|manager
+operator|.
+name|changes
+operator|.
+name|KReSGetRecipe
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|manager
+operator|.
+name|changes
+operator|.
+name|KReSRemoveRecipe
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|manager
+operator|.
+name|changes
+operator|.
+name|KReSRuleStore
 import|;
 end_import
 
@@ -539,86 +629,8 @@ name|NavigationMixin
 import|;
 end_import
 
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|manager
-operator|.
-name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|rules
-operator|.
-name|manager
-operator|.
-name|KReSAddRecipe
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|rules
-operator|.
-name|manager
-operator|.
-name|KReSGetRecipe
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|rules
-operator|.
-name|manager
-operator|.
-name|KReSRemoveRecipe
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|rules
-operator|.
-name|manager
-operator|.
-name|KReSRuleStore
-import|;
-end_import
-
 begin_comment
-comment|/**  *  * @author elvio  */
+comment|/**  *   * @author elvio  */
 end_comment
 
 begin_class
@@ -628,7 +640,7 @@ argument_list|(
 literal|"/recipe"
 argument_list|)
 comment|// /{uri:.+}")
-comment|//@ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
+comment|// @ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
 specifier|public
 class|class
 name|Recipe
@@ -659,7 +671,7 @@ specifier|private
 name|OntologyStoreProvider
 name|storeProvider
 decl_stmt|;
-comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
+comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
 specifier|public
 name|Recipe
 parameter_list|(
@@ -727,7 +739,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Contingency code for missing components follows.
-comment|/* 		 * FIXME! The following code is required only for the tests. This should 		 * be removed and the test should work without this code. 		 */
+comment|/*          * FIXME! The following code is required only for the tests. This should be removed and the test          * should work without this code.          */
 if|if
 condition|(
 name|storeProvider
@@ -798,6 +810,15 @@ argument_list|(
 literal|"No KReSRuleStore with stored rules and recipes found in servlet context. Instantiating manually with default values..."
 argument_list|)
 expr_stmt|;
+comment|//            String iri = "http://www.ontologydesignpatterns.org/ont/iks/kres/rmi_config.owl";
+comment|//            OWLOntology o;
+comment|//            try {
+comment|//                o = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(IRI.create(iri));
+comment|//                this.kresRuleStore = new KReSRuleStore(onm, new Hashtable<String,Object>(), "");
+comment|//                log.debug("PATH TO OWL FILE LOADED: " + kresRuleStore.getFilePath());
+comment|//            } catch (OWLOntologyCreationException e) {
+comment|//
+comment|//            }
 name|this
 operator|.
 name|kresRuleStore
@@ -819,21 +840,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"PATH TO OWL FILE LOADED: "
-operator|+
-name|kresRuleStore
-operator|.
-name|getFilePath
-argument_list|()
-argument_list|)
-expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Get a recipe with its rules from the rule base (that is the ontology that 	 * contains the rules and the recipe).      * 	 * @param uri 	 *            {A string contains the IRI full name of the recipe.}      * @return Return:<br/> 	 *         200 The recipe is retrieved (import declarations point to KReS 	 *         Services)<br/>      *       404 The recipe does not exists in the manager<br/>      *       500 Some error occurred       *      */
+comment|/**      * Get a recipe with its rules from the rule base (that is the ontology that contains the rules and the      * recipe).      *       * @param uri      *            {A string contains the IRI full name of the recipe.}      * @return Return:<br/>      *         200 The recipe is retrieved (import declarations point to KReS Services)<br/>      *         404 The recipe does not exists in the manager<br/>      *         500 Some error occurred      *       */
 annotation|@
 name|GET
 annotation|@
@@ -926,7 +935,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//The recipe does not exists in the manager
+comment|// The recipe does not exists in the manager
 return|return
 name|Response
 operator|.
@@ -1138,16 +1147,16 @@ name|ax
 argument_list|)
 expr_stmt|;
 block|}
-comment|//            try {
-comment|//						OWLManager.createOWLOntologyManager().saveOntology(
-comment|//								newmodel,
-comment|//								newmodel.getOWLOntologyManager()
-comment|//										.getOntologyFormat(newmodel),
-comment|//								System.out);
-comment|//    		} catch (OWLOntologyStorageException e) {
-comment|//    			// TODO Auto-generated catch block
-comment|//    			e.printStackTrace();
-comment|//    		}
+comment|// try {
+comment|// OWLManager.createOWLOntologyManager().saveOntology(
+comment|// newmodel,
+comment|// newmodel.getOWLOntologyManager()
+comment|// .getOntologyFormat(newmodel),
+comment|// System.out);
+comment|// } catch (OWLOntologyStorageException e) {
+comment|// // TODO Auto-generated catch block
+comment|// e.printStackTrace();
+comment|// }
 return|return
 name|Response
 operator|.
@@ -1190,7 +1199,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//The recipe deos not exists in the manager
+comment|// The recipe deos not exists in the manager
 return|return
 name|Response
 operator|.
@@ -1464,16 +1473,16 @@ name|ax
 argument_list|)
 expr_stmt|;
 block|}
-comment|//            try {
-comment|//						OWLManager.createOWLOntologyManager().saveOntology(
-comment|//								newmodel,
-comment|//								newmodel.getOWLOntologyManager()
-comment|//										.getOntologyFormat(newmodel),
-comment|//								System.out);
-comment|//    		} catch (OWLOntologyStorageException e) {
-comment|//    			// TODO Auto-generated catch block
-comment|//    			e.printStackTrace();
-comment|//    		}
+comment|// try {
+comment|// OWLManager.createOWLOntologyManager().saveOntology(
+comment|// newmodel,
+comment|// newmodel.getOWLOntologyManager()
+comment|// .getOntologyFormat(newmodel),
+comment|// System.out);
+comment|// } catch (OWLOntologyStorageException e) {
+comment|// // TODO Auto-generated catch block
+comment|// e.printStackTrace();
+comment|// }
 return|return
 name|Response
 operator|.
@@ -1494,7 +1503,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-comment|//Some error occurred
+comment|// Some error occurred
 throw|throw
 operator|new
 name|WebApplicationException
@@ -1508,7 +1517,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * To add a recipe without rules. 	 *  	 * @param recipe 	 *            {A string contains the IRI of the recipe to be added} 	 * @param description 	 *            {A string contains a description of the rule}      * @return Return:<br/>      *      200 The recipe has been added<br/>      *      409 The recipe has not been added<br/>      *      500 Some error occurred      */
+comment|/**      * To add a recipe without rules.      *       * @param recipe      *            {A string contains the IRI of the recipe to be added}      * @param description      *            {A string contains a description of the rule}      * @return Return:<br/>      *         200 The recipe has been added<br/>      *         409 The recipe has not been added<br/>      *         500 Some error occurred      */
 annotation|@
 name|POST
 annotation|@
@@ -1665,10 +1674,10 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * To delete a recipe 	 *  	 * @param recipe 	 *            {A tring contains an IRI of the recipe} 	 * @return 200 The recipe has been deleted<br/>      *      409 The recipe has not been deleted<br/>      *      500 Some error occurred      */
+comment|/**      * To delete a recipe      *       * @param recipe      *            {A tring contains an IRI of the recipe}      * @return 200 The recipe has been deleted<br/>      *         409 The recipe has not been deleted<br/>      *         500 Some error occurred      */
 annotation|@
 name|DELETE
-comment|//@Consumes(MediaType.TEXT_PLAIN)
+comment|// @Consumes(MediaType.TEXT_PLAIN)
 annotation|@
 name|Produces
 argument_list|(
