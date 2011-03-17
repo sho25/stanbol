@@ -597,13 +597,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|ontologies
+name|reengineer
+operator|.
+name|db
 operator|.
 name|DBS_L1
 import|;
