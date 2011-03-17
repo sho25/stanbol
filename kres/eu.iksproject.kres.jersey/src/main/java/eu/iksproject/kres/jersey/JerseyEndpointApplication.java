@@ -55,9 +55,9 @@ name|kres
 operator|.
 name|jersey
 operator|.
-name|processors
+name|manager
 operator|.
-name|KReSViewProcessor
+name|Recipe
 import|;
 end_import
 
@@ -71,9 +71,25 @@ name|kres
 operator|.
 name|jersey
 operator|.
-name|reasoners
+name|manager
 operator|.
-name|ConsistencyCheck
+name|Rule
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|jersey
+operator|.
+name|processors
+operator|.
+name|KReSViewProcessor
 import|;
 end_import
 
@@ -105,39 +121,23 @@ name|jersey
 operator|.
 name|reasoners
 operator|.
+name|ConsistencyCheck
+import|;
+end_import
+
+begin_import
+import|import
+name|eu
+operator|.
+name|iksproject
+operator|.
+name|kres
+operator|.
+name|jersey
+operator|.
+name|reasoners
+operator|.
 name|Enrichment
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|manager
-operator|.
-name|Recipe
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|manager
-operator|.
-name|Rule
 import|;
 end_import
 
@@ -237,42 +237,6 @@ name|ONMOntResource
 import|;
 end_import
 
-begin_comment
-comment|//import eu.iksproject.kres.jersey.resource.LinkDiscoveryResource;
-end_comment
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|resource
-operator|.
-name|ProvaResource
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|resource
-operator|.
-name|RESTfulResource
-import|;
-end_import
-
 begin_import
 import|import
 name|eu
@@ -333,7 +297,7 @@ name|jersey
 operator|.
 name|resource
 operator|.
-name|OntologyStorageResource
+name|RESTfulResource
 import|;
 end_import
 
@@ -429,28 +393,12 @@ name|jersey
 operator|.
 name|writers
 operator|.
-name|OwlModelWriter
-import|;
-end_import
-
-begin_import
-import|import
-name|eu
-operator|.
-name|iksproject
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|writers
-operator|.
 name|ResultSetWriter
 import|;
 end_import
 
 begin_comment
-comment|/**  * Statically define the list of available resources and providers to be used by  * the KReS JAX-RS Endpoint.  *   * The jersey auto-scan mechanism does not seem to work when deployed through  * OSGi's HttpService initialization.  *   * In the future this class might get refactored as an OSGi service to allow for  * dynamic configuration and deployment of additional JAX-RS resources and  * providers.  *   * @author andrea.nuzzolese  */
+comment|/**  * Statically define the list of available resources and providers to be used by the KReS JAX-RS Endpoint.  *   * The jersey auto-scan mechanism does not seem to work when deployed through OSGi's HttpService  * initialization.  *   * In the future this class might get refactored as an OSGi service to allow for dynamic configuration and  * deployment of additional JAX-RS resources and providers.  *   * @author andrea.nuzzolese  */
 end_comment
 
 begin_class
@@ -576,7 +524,7 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-comment|//		classes.add(LinkDiscoveryResource.class);
+comment|// classes.add(LinkDiscoveryResource.class);
 name|classes
 operator|.
 name|add
@@ -649,15 +597,6 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|ProvaResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
 comment|/* REST services */
 name|classes
 operator|.
@@ -688,7 +627,7 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-comment|//classes.add(OwlModelWriter.class);
+comment|// classes.add(OwlModelWriter.class);
 name|classes
 operator|.
 name|add

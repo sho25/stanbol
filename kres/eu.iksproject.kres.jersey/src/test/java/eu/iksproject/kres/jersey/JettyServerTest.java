@@ -397,34 +397,6 @@ name|SCOPE2_URI
 argument_list|)
 expr_stmt|;
 block|}
-comment|// // Useless, doesn't really test anything of use yet and cause binding problems
-comment|//	@Test
-comment|//	public void testEcho() throws Exception {
-comment|//
-comment|//		boolean eq = true;
-comment|//
-comment|//		Client client = Client.create();
-comment|//		WebResource resUpload = client.resource(__TEST_URI + "prova");
-comment|//
-comment|//		resUpload.get(String.class);
-comment|//		ClientResponse head = resUpload.head();
-comment|//		int status = head.getStatus();
-comment|//		head.close();
-comment|//		eq&= status == Status.OK.getStatusCode();
-comment|//
-comment|//		resUpload = client.resource(__TEST_URI + "prova/saluto");
-comment|//
-comment|//		resUpload.get(String.class);
-comment|//		head = resUpload.head();
-comment|//		status = head.getStatus();
-comment|//		head.close();
-comment|//		eq&= status == Status.OK.getStatusCode();
-comment|//
-comment|//		client.destroy();
-comment|//
-comment|//		assertTrue(eq);
-comment|//
-comment|//	}
 specifier|public
 name|void
 name|testOntologyUpload
@@ -464,14 +436,14 @@ literal|"./src/main/resources/TestFile/ProvaParent.owl"
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//resUpload.type(MediaType.MULTIPART_FORM_DATA).post();
+comment|// resUpload.type(MediaType.MULTIPART_FORM_DATA).post();
 name|assertTrue
 argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Tests that the creation of active and inactive scopes is reflected in the 	 * RDF version of the scope set, whether it is set to display all scopes or 	 * only the active ones. 	 *  	 * @throws Exception 	 */
+comment|/**      * Tests that the creation of active and inactive scopes is reflected in the RDF version of the scope set,      * whether it is set to display all scopes or only the active ones.      *       * @throws Exception      */
 comment|// @Test
 specifier|public
 name|void
