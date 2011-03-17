@@ -887,13 +887,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|ontologies
+name|reengineer
+operator|.
+name|base
 operator|.
 name|Semion_OWL
 import|;
@@ -901,13 +903,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|ontologies
+name|reengineer
+operator|.
+name|xml
 operator|.
 name|XML_OWL
 import|;
@@ -915,13 +919,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|ontologies
+name|reengineer
+operator|.
+name|xml
 operator|.
 name|XSD_OWL
 import|;
