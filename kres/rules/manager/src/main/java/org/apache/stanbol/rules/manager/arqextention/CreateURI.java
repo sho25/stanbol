@@ -27,6 +27,8 @@ name|reengineer
 operator|.
 name|xml
 operator|.
+name|vocab
+operator|.
 name|XML_OWL
 import|;
 end_import

@@ -193,6 +193,8 @@ name|reengineer
 operator|.
 name|base
 operator|.
+name|api
+operator|.
 name|SemionManager
 import|;
 end_import
@@ -208,6 +210,8 @@ operator|.
 name|reengineer
 operator|.
 name|base
+operator|.
+name|api
 operator|.
 name|SemionReengineer
 import|;
