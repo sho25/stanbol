@@ -673,7 +673,7 @@ name|model
 operator|.
 name|clerezza
 operator|.
-name|impl
+name|utils
 operator|.
 name|Resource2StringAdapter
 import|;

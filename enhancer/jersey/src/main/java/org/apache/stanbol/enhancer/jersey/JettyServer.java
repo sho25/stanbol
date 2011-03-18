@@ -145,12 +145,13 @@ argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
+specifier|final
 name|String
 name|DEFAULT_BASE_URI
 init|=
 literal|"http://localhost:9998/"
 decl_stmt|;
-specifier|protected
+specifier|private
 name|Server
 name|server
 init|=

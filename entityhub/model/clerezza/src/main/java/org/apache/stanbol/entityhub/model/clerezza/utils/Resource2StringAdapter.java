@@ -17,7 +17,7 @@ name|model
 operator|.
 name|clerezza
 operator|.
-name|impl
+name|utils
 package|;
 end_package
 
