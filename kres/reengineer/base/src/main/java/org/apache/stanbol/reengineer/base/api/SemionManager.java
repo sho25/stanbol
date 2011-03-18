@@ -47,24 +47,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|rules
-operator|.
-name|refactor
-operator|.
-name|api
-operator|.
-name|SemionRefactorer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -125,27 +107,24 @@ name|int
 name|reenginnerType
 parameter_list|)
 function_decl|;
-comment|/** 	 * The {@link SemionManager} can register a single instance of {@link SemionRefactorer}. 	 *  	 * @param semionRefactorer {@link SemionRefactorer} 	 */
-specifier|public
-name|void
-name|registerRefactorer
-parameter_list|(
-name|SemionRefactorer
-name|semionRefactorer
-parameter_list|)
-function_decl|;
-comment|/** 	 * Unregisters the instance of {@link SemionRefactorer}. After the call of this method Semion has no refactorer. 	 */
-specifier|public
-name|void
-name|unregisterRefactorer
-parameter_list|()
-function_decl|;
-comment|/** 	 * The instance of the refactored is returned back if it exists. 	 *  	 * @return the active {@link SemionRefactorer} 	 */
-specifier|public
-name|SemionRefactorer
-name|getRegisteredRefactorer
-parameter_list|()
-function_decl|;
+comment|//	/**
+comment|//	 * The {@link SemionManager} can register a single instance of {@link SemionRefactorer}.
+comment|//	 *
+comment|//	 * @param semionRefactorer {@link SemionRefactorer}
+comment|//	 */
+comment|//	public void registerRefactorer(SemionRefactorer semionRefactorer);
+comment|//
+comment|//	/**
+comment|//	 * Unregisters the instance of {@link SemionRefactorer}. After the call of this method Semion has no refactorer.
+comment|//	 */
+comment|//	public void unregisterRefactorer();
+comment|//
+comment|//	/**
+comment|//	 * The instance of the refactored is returned back if it exists.
+comment|//	 *
+comment|//	 * @return the active {@link SemionRefactorer}
+comment|//	 */
+comment|//	public SemionRefactorer getRegisteredRefactorer();
 comment|/** 	 * Gets the active reengineers of KReS. 	 *  	 * @return the {@link Collection< SemionReengineer>} of active reengineers.  	 */
 specifier|public
 name|Collection

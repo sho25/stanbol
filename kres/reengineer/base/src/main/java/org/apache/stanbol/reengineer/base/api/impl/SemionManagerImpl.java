@@ -287,24 +287,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|rules
-operator|.
-name|refactor
-operator|.
-name|api
-operator|.
-name|SemionRefactorer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|osgi
 operator|.
 name|service
@@ -417,10 +399,8 @@ name|SemionReengineer
 argument_list|>
 name|reengineers
 decl_stmt|;
-specifier|private
-name|SemionRefactorer
-name|semionRefactorer
-decl_stmt|;
+comment|//
+comment|//	private SemionRefactorer semionRefactorer;
 comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the SemionManagerImpl instances 	 * do need to be configured! YOU NEED TO USE 	 * {@link #SemionManagerImpl(KReSONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
 specifier|public
 name|SemionManagerImpl
@@ -719,17 +699,10 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|SemionRefactorer
-name|getRegisteredRefactorer
-parameter_list|()
-block|{
-return|return
-name|semionRefactorer
-return|;
-block|}
+comment|//	@Override
+comment|//	public SemionRefactorer getRegisteredRefactorer() {
+comment|//		return semionRefactorer;
+comment|//		}
 annotation|@
 name|Override
 specifier|public
@@ -1198,23 +1171,10 @@ return|return
 name|reengineeredSchemaOntology
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|registerRefactorer
-parameter_list|(
-name|SemionRefactorer
-name|semionRefactorer
-parameter_list|)
-block|{
-name|this
-operator|.
-name|semionRefactorer
-operator|=
-name|semionRefactorer
-expr_stmt|;
-block|}
+comment|//	@Override
+comment|//	public void registerRefactorer(SemionRefactorer semionRefactorer) {
+comment|//		this.semionRefactorer = semionRefactorer;
+comment|//	}
 annotation|@
 name|Override
 specifier|public
@@ -1364,20 +1324,10 @@ return|return
 name|found
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|unregisterRefactorer
-parameter_list|()
-block|{
-name|this
-operator|.
-name|semionRefactorer
-operator|=
-literal|null
-expr_stmt|;
-block|}
+comment|//	@Override
+comment|//	public void unregisterRefactorer() {
+comment|//		this.semionRefactorer = null;
+comment|//	}
 block|}
 end_class
 
