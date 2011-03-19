@@ -145,9 +145,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|store
+name|ontonet
 operator|.
-name|api
+name|impl
+operator|.
+name|ontology
 operator|.
 name|OntologyStorage
 import|;

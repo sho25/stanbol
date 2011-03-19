@@ -33,11 +33,11 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
+name|reengineer
 operator|.
-name|store
+name|base
 operator|.
-name|api
+name|impl
 operator|.
 name|NoSuchOntologyInStoreException
 import|;

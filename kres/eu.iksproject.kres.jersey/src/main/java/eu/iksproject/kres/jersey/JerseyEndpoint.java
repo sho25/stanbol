@@ -171,24 +171,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|store
-operator|.
-name|api
-operator|.
-name|OntologyStoreProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|reengineer
 operator|.
 name|base
@@ -486,11 +468,10 @@ name|reengineeringManager
 decl_stmt|;
 comment|//    @Reference
 comment|//    LinkDiscovery linkDiscovery;
-annotation|@
-name|Reference
-name|OntologyStoreProvider
-name|ontologyStoreProvider
-decl_stmt|;
+comment|//    @Reference
+comment|//    OntologyStoreProvider ontologyStoreProvider;
+comment|//    @Reference
+comment|//    OntologyStorage ontologyStorage;
 annotation|@
 name|Reference
 name|RuleStore
@@ -840,20 +821,8 @@ argument_list|,
 name|onm
 argument_list|)
 expr_stmt|;
-name|servletContext
-operator|.
-name|setAttribute
-argument_list|(
-name|OntologyStoreProvider
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-name|ontologyStoreProvider
-argument_list|)
-expr_stmt|;
+comment|//		servletContext.setAttribute(OntologyStoreProvider.class.getName(), ontologyStoreProvider);
+comment|//		servletContext.setAttribute(OntologyStorage.class.getName(), ontologyStorage);
 name|servletContext
 operator|.
 name|setAttribute

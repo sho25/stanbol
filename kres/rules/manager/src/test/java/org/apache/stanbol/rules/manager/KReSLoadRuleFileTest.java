@@ -499,6 +499,8 @@ name|ONManager
 argument_list|(
 literal|null
 argument_list|,
+literal|null
+argument_list|,
 name|configuration
 argument_list|)
 decl_stmt|;
@@ -553,6 +555,8 @@ argument_list|(
 operator|new
 name|ONManager
 argument_list|(
+literal|null
+argument_list|,
 literal|null
 argument_list|,
 name|configuration

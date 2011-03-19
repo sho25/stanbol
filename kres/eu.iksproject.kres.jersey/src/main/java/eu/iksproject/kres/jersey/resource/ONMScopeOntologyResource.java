@@ -223,6 +223,24 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|TcManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|ontologymanager
@@ -363,29 +381,13 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|store
-operator|.
-name|api
-operator|.
-name|OntologyStoreProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|store
+name|ontonet
 operator|.
 name|impl
 operator|.
-name|OntologyStorageProviderImpl
+name|ontology
+operator|.
+name|OntologyStorage
 import|;
 end_import
 
@@ -609,14 +611,14 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/* 	 * Placeholder for the KReSONManager to be fetched from the servlet context. 	 */
+comment|/*      * Placeholder for the KReSONManager to be fetched from the servlet context.      */
 specifier|protected
 name|KReSONManager
 name|onm
 decl_stmt|;
 specifier|protected
-name|OntologyStoreProvider
-name|storeProvider
+name|OntologyStorage
+name|storage
 decl_stmt|;
 specifier|protected
 name|ServletContext
@@ -656,48 +658,10 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|storeProvider
-operator|=
-operator|(
-name|OntologyStoreProvider
-operator|)
-name|servletContext
-operator|.
-name|getAttribute
-argument_list|(
-name|OntologyStoreProvider
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|//      this.storage = (OntologyStorage) servletContext
+comment|//      .getAttribute(OntologyStorage.class.getName());
 comment|// Contingency code for missing components follows.
 comment|/*  * FIXME! The following code is required only for the tests. This should  * be removed and the test should work without this code.  */
-if|if
-condition|(
-name|storeProvider
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"No OntologyStoreProvider in servlet context. Instantiating manually..."
-argument_list|)
-expr_stmt|;
-name|storeProvider
-operator|=
-operator|new
-name|OntologyStorageProviderImpl
-argument_list|()
-expr_stmt|;
-block|}
 if|if
 condition|(
 name|onm
@@ -717,10 +681,11 @@ operator|=
 operator|new
 name|ONManager
 argument_list|(
-name|storeProvider
-operator|.
-name|getActiveOntologyStorage
+operator|new
+name|TcManager
 argument_list|()
+argument_list|,
+literal|null
 argument_list|,
 operator|new
 name|Hashtable
@@ -733,8 +698,44 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+name|this
+operator|.
+name|storage
+operator|=
+name|onm
+operator|.
+name|getOntologyStore
+argument_list|()
+expr_stmt|;
+if|if
+condition|(
+name|storage
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"No OntologyStorage in servlet context. Instantiating manually..."
+argument_list|)
+expr_stmt|;
+name|storage
+operator|=
+operator|new
+name|OntologyStorage
+argument_list|(
+operator|new
+name|TcManager
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 block|}
-comment|/** 	 * Returns an RDF/XML representation of the ontology identified by logical 	 * IRI<code>ontologyid</code>, if it is loaded within the scope 	 *<code>[baseUri]/scopeid</code>. 	 *  	 * @param scopeid 	 * @param ontologyid 	 * @param uriInfo 	 * @return, or a status 404 if either the scope is not registered or the 	 *          ontology is not loaded within that scope. 	 */
+block|}
+comment|/**      * Returns an RDF/XML representation of the ontology identified by logical IRI<code>ontologyid</code>, if      * it is loaded within the scope<code>[baseUri]/scopeid</code>.      *       * @param scopeid      * @param ontologyid      * @param uriInfo      * @return, or a status 404 if either the scope is not registered or the ontology is not loaded within      *          that scope.      */
 annotation|@
 name|GET
 annotation|@
@@ -1113,7 +1114,7 @@ argument_list|(
 name|provider
 argument_list|)
 decl_stmt|;
-comment|/* 			 * Set<OntologySpace> spaces = scope.getSessionSpaces(); 			 * for(OntologySpace space : spaces){ 			 * System.out.println("ID SPACE : "+space.getID()); } 			 */
+comment|/*              * Set<OntologySpace> spaces = scope.getSessionSpaces(); for(OntologySpace space : spaces){              * System.out.println("ID SPACE : "+space.getID()); }              */
 try|try
 block|{
 name|ont
@@ -1213,7 +1214,7 @@ name|Response
 operator|.
 name|ok
 argument_list|(
-comment|/*ont*/
+comment|/* ont */
 name|res
 argument_list|)
 operator|.
@@ -1221,7 +1222,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Unloads an ontology from an ontology scope. 	 *  	 * @param scopeId 	 * @param ontologyid 	 * @param uriInfo 	 * @param headers 	 */
+comment|/**      * Unloads an ontology from an ontology scope.      *       * @param scopeId      * @param ontologyid      * @param uriInfo      * @param headers      */
 annotation|@
 name|DELETE
 specifier|public

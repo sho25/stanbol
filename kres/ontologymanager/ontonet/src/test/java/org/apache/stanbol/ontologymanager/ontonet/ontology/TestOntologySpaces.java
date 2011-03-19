@@ -580,6 +580,8 @@ name|ONManager
 argument_list|(
 literal|null
 argument_list|,
+literal|null
+argument_list|,
 operator|new
 name|Hashtable
 argument_list|<

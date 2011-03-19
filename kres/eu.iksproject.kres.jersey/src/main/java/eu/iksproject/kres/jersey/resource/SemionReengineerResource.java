@@ -311,11 +311,13 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|store
+name|ontonet
 operator|.
-name|api
+name|impl
 operator|.
-name|OntologyStoreProvider
+name|ontology
+operator|.
+name|OntologyStorage
 import|;
 end_import
 
@@ -641,8 +643,8 @@ name|TcManager
 name|tcManager
 decl_stmt|;
 specifier|protected
-name|OntologyStoreProvider
-name|storeProvider
+name|OntologyStorage
+name|storage
 decl_stmt|;
 specifier|private
 specifier|final
@@ -683,16 +685,16 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|storeProvider
+name|storage
 operator|=
 operator|(
-name|OntologyStoreProvider
+name|OntologyStorage
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|OntologyStoreProvider
+name|OntologyStorage
 operator|.
 name|class
 operator|.
@@ -856,7 +858,7 @@ name|println
 argument_list|(
 literal|"STORE PROVIDER : "
 operator|+
-name|storeProvider
+name|storage
 argument_list|)
 expr_stmt|;
 name|System
@@ -963,10 +965,7 @@ argument_list|,
 name|dataSource
 argument_list|)
 expr_stmt|;
-name|storeProvider
-operator|.
-name|getActiveOntologyStorage
-argument_list|()
+name|storage
 operator|.
 name|store
 argument_list|(

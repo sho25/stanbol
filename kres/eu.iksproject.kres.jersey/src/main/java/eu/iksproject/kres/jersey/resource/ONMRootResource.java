@@ -175,6 +175,24 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|TcManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|ontologymanager
@@ -259,9 +277,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|renderers
+name|ontology
 operator|.
-name|ScopeSetRenderer
+name|OntologyStorage
 import|;
 end_import
 
@@ -275,29 +293,13 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|store
-operator|.
-name|api
-operator|.
-name|OntologyStoreProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|store
+name|ontonet
 operator|.
 name|impl
 operator|.
-name|OntologyStorageProviderImpl
+name|renderers
+operator|.
+name|ScopeSetRenderer
 import|;
 end_import
 
@@ -352,7 +354,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The main Web resource of the KReS ontology manager. All the scopes, sessions  * and ontologies are accessible as subresources of ONMRootResource.<br>  *<br>  * This resource allows a GET method for obtaining an RDF representation of the  * set of registered scopes and a DELETE method for clearing the scope set and  * ontology store accordingly.  *   * @author alessandro  *   */
+comment|/**  * The main Web resource of the KReS ontology manager. All the scopes, sessions and ontologies are accessible  * as subresources of ONMRootResource.<br>  *<br>  * This resource allows a GET method for obtaining an RDF representation of the set of registered scopes and a  * DELETE method for clearing the scope set and ontology store accordingly.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -379,14 +381,14 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/* 	 * Placeholder for the KReSONManager to be fetched from the servlet context. 	 */
+comment|/*      * Placeholder for the KReSONManager to be fetched from the servlet context.      */
 specifier|protected
 name|KReSONManager
 name|onm
 decl_stmt|;
 specifier|protected
-name|OntologyStoreProvider
-name|storeProvider
+name|OntologyStorage
+name|storage
 decl_stmt|;
 specifier|protected
 name|ServletContext
@@ -426,48 +428,10 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|storeProvider
-operator|=
-operator|(
-name|OntologyStoreProvider
-operator|)
-name|servletContext
-operator|.
-name|getAttribute
-argument_list|(
-name|OntologyStoreProvider
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|//      this.storage = (OntologyStorage) servletContext
+comment|//      .getAttribute(OntologyStorage.class.getName());
 comment|// Contingency code for missing components follows.
-comment|/* 		 * FIXME! The following code is required only for the tests. This should 		 * be removed and the test should work without this code. 		 */
-if|if
-condition|(
-name|storeProvider
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"No OntologyStoreProvider in servlet context. Instantiating manually..."
-argument_list|)
-expr_stmt|;
-name|storeProvider
-operator|=
-operator|new
-name|OntologyStorageProviderImpl
-argument_list|()
-expr_stmt|;
-block|}
+comment|/*  * FIXME! The following code is required only for the tests. This should  * be removed and the test should work without this code.  */
 if|if
 condition|(
 name|onm
@@ -487,10 +451,11 @@ operator|=
 operator|new
 name|ONManager
 argument_list|(
-name|storeProvider
-operator|.
-name|getActiveOntologyStorage
+operator|new
+name|TcManager
 argument_list|()
+argument_list|,
+literal|null
 argument_list|,
 operator|new
 name|Hashtable
@@ -503,8 +468,44 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+name|this
+operator|.
+name|storage
+operator|=
+name|onm
+operator|.
+name|getOntologyStore
+argument_list|()
+expr_stmt|;
+if|if
+condition|(
+name|storage
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"No OntologyStorage in servlet context. Instantiating manually..."
+argument_list|)
+expr_stmt|;
+name|storage
+operator|=
+operator|new
+name|OntologyStorage
+argument_list|(
+operator|new
+name|TcManager
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 block|}
-comment|/** 	 * RESTful DELETE method that clears the entire scope registry and managed 	 * ontology store. 	 */
+block|}
+comment|/**      * RESTful DELETE method that clears the entire scope registry and managed ontology store.      */
 annotation|@
 name|DELETE
 specifier|public
@@ -581,7 +582,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Default GET method for obtaining the set of (both active and, optionally, 	 * inactive) ontology scopes currently registered with this instance of 	 * KReS. 	 *  	 * @param inactive 	 *            if true, both active and inactive scopes will be included. 	 *            Default is false. 	 * @param headers 	 *            the HTTP headers, supplied by the REST call. 	 * @param servletContext 	 *            the servlet context, supplied by the REST call. 	 * @return a string representation of the requested scope set, in a format 	 *         acceptable by the client. 	 */
+comment|/**      * Default GET method for obtaining the set of (both active and, optionally, inactive) ontology scopes      * currently registered with this instance of KReS.      *       * @param inactive      *            if true, both active and inactive scopes will be included. Default is false.      * @param headers      *            the HTTP headers, supplied by the REST call.      * @param servletContext      *            the servlet context, supplied by the REST call.      * @return a string representation of the requested scope set, in a format acceptable by the client.      */
 annotation|@
 name|GET
 annotation|@

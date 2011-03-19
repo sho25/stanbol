@@ -61,6 +61,42 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|TcManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|WeightedTcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|felix
 operator|.
 name|scr
@@ -543,6 +579,26 @@ name|impl
 operator|.
 name|ontology
 operator|.
+name|OntologyStorage
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|ontology
+operator|.
 name|ScopeRegistryImpl
 import|;
 end_import
@@ -608,24 +664,6 @@ operator|.
 name|session
 operator|.
 name|ScopeSessionSynchronizer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|store
-operator|.
-name|api
-operator|.
-name|OntologyStorage
 import|;
 end_import
 
@@ -804,7 +842,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The running context of a KReS Ontology Network Manager instance. From this  * object it is possible to obtain factories, indices, registries and what have  * you.  *   * @author alessandro  *   */
+comment|/**  * The running context of a KReS Ontology Network Manager instance. From this object it is possible to obtain  * factories, indices, registries and what have you.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -971,10 +1009,20 @@ decl_stmt|;
 annotation|@
 name|Reference
 specifier|private
+name|TcManager
+name|tcm
+decl_stmt|;
+annotation|@
+name|Reference
+specifier|private
+name|WeightedTcProvider
+name|wtcp
+decl_stmt|;
+specifier|private
 name|OntologyStorage
 name|storage
 decl_stmt|;
-comment|/* 	 * The identifiers (not yet parsed as IRIs) of the ontology scopes that 	 * should be activated. 	 */
+comment|/*      * The identifiers (not yet parsed as IRIs) of the ontology scopes that should be activated.      */
 specifier|private
 name|String
 index|[]
@@ -1076,8 +1124,7 @@ argument_list|,
 name|getScopeRegistry
 argument_list|()
 argument_list|,
-name|getOntologyStore
-argument_list|()
+name|storage
 argument_list|)
 expr_stmt|;
 name|sessionManager
@@ -1092,12 +1139,15 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Instantiates all the default providers. 	 *  	 * TODO : Felix component constraints prevent this constructor from being 	 * private, find a way around... 	 */
+comment|/**      * Instantiates all the default providers.      *       * TODO : Felix component constraints prevent this constructor from being private, find a way around...      */
 specifier|public
 name|ONManager
 parameter_list|(
-name|OntologyStorage
-name|ontologyStorage
+name|TcManager
+name|tcm
+parameter_list|,
+name|WeightedTcProvider
+name|wtcp
 parameter_list|,
 name|Dictionary
 argument_list|<
@@ -1110,6 +1160,16 @@ parameter_list|)
 block|{
 name|this
 argument_list|()
+expr_stmt|;
+name|storage
+operator|=
+operator|new
+name|OntologyStorage
+argument_list|(
+name|tcm
+argument_list|,
+name|wtcp
+argument_list|)
 expr_stmt|;
 try|try
 block|{
@@ -1136,7 +1196,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Used to configure an instance within an OSGi container. 	 *  	 * @throws IOException 	 */
+comment|/**      * Used to configure an instance within an OSGi container.      *       * @throws IOException      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1226,6 +1286,26 @@ comment|// log.debug("KReS :: activating main component...");
 comment|//
 comment|// me = this;
 comment|// this.ce = ce;
+if|if
+condition|(
+name|storage
+operator|==
+literal|null
+condition|)
+name|storage
+operator|=
+operator|new
+name|OntologyStorage
+argument_list|(
+name|this
+operator|.
+name|tcm
+argument_list|,
+name|this
+operator|.
+name|wtcp
+argument_list|)
+expr_stmt|;
 name|String
 name|tfile
 init|=
@@ -1277,7 +1357,7 @@ operator|=
 name|tns
 expr_stmt|;
 comment|// configPath = (String) configuration.get(CONFIG_FILE_PATH);
-comment|/* 		 * If there is no configuration file, just start with an empty scope set 		 */
+comment|/*          * If there is no configuration file, just start with an empty scope set          */
 if|if
 condition|(
 name|configPath
@@ -1572,7 +1652,7 @@ return|return;
 block|}
 try|try
 block|{
-comment|/** 			 * We create and register the scopes before activating 			 */
+comment|/**              * We create and register the scopes before activating              */
 for|for
 control|(
 name|String
@@ -1805,7 +1885,7 @@ name|sc
 argument_list|)
 expr_stmt|;
 comment|// getScopeHelper().createScope(scopeIRI);
-comment|//				getScopeHelper().addToCoreSpace(scopeIRI, cores);
+comment|// getScopeHelper().addToCoreSpace(scopeIRI, cores);
 name|getScopeHelper
 argument_list|()
 operator|.
@@ -1817,7 +1897,7 @@ name|customs
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 			 * Try to get activation policies 			 */
+comment|/**              * Try to get activation policies              */
 name|toActivate
 operator|=
 name|ConfigurationManagement
@@ -1931,7 +2011,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Deactivation of the ONManager resets all its resources. 	 */
+comment|/**      * Deactivation of the ONManager resets all its resources.      */
 annotation|@
 name|Deactivate
 specifier|protected
@@ -1978,7 +2058,7 @@ return|return
 name|oIndex
 return|;
 block|}
-comment|/** 	 * Returns the ontology scope factory that was created along with the 	 * manager context. 	 *  	 * @return the ontology scope factory 	 */
+comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @return the ontology scope factory      */
 specifier|public
 name|OntologyScopeFactory
 name|getOntologyScopeFactory
@@ -1988,7 +2068,7 @@ return|return
 name|ontologyScopeFactory
 return|;
 block|}
-comment|/** 	 * Returns the ontology space factory that was created along with the 	 * manager context. 	 *  	 * @return the ontology space factory 	 */
+comment|/**      * Returns the ontology space factory that was created along with the manager context.      *       * @return the ontology space factory      */
 specifier|public
 name|OntologySpaceFactory
 name|getOntologySpaceFactory
@@ -1998,8 +2078,6 @@ return|return
 name|ontologySpaceFactory
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|OntologyStorage
 name|getOntologyStore
@@ -2019,7 +2097,7 @@ return|return
 name|owlCacheManager
 return|;
 block|}
-comment|/** 	 * Returns a factory object that can be used for obtaining OWL API objects. 	 *  	 * @return the default OWL data factory 	 */
+comment|/**      * Returns a factory object that can be used for obtaining OWL API objects.      *       * @return the default OWL data factory      */
 specifier|public
 name|OWLDataFactory
 name|getOwlFactory
@@ -2029,7 +2107,7 @@ return|return
 name|owlFactory
 return|;
 block|}
-comment|/** 	 * Returns the default ontology registry loader. 	 *  	 * @return the default ontology registry loader 	 */
+comment|/**      * Returns the default ontology registry loader.      *       * @return the default ontology registry loader      */
 specifier|public
 name|RegistryLoader
 name|getRegistryLoader
@@ -2039,7 +2117,7 @@ return|return
 name|registryLoader
 return|;
 block|}
-comment|/** 	 * Returns the unique ontology scope registry for this context. 	 *  	 * @return the ontology scope registry 	 */
+comment|/**      * Returns the unique ontology scope registry for this context.      *       * @return the ontology scope registry      */
 specifier|public
 name|ScopeRegistry
 name|getScopeRegistry
@@ -2104,8 +2182,8 @@ block|{
 specifier|private
 name|Helper
 parameter_list|()
-block|{ 		}
-comment|/** 		 * Create an empty scope. The scope is created, registered and activated 		 *  		 * @param scopeID 		 * @return 		 * @throws DuplicateIDException 		 */
+block|{}
+comment|/**          * Create an empty scope. The scope is created, registered and activated          *           * @param scopeID          * @return          * @throws DuplicateIDException          */
 specifier|public
 specifier|synchronized
 name|OntologyScope
@@ -2134,7 +2212,7 @@ argument_list|(
 name|scopeID
 argument_list|)
 decl_stmt|;
-comment|/* 			 * The scope is created by the ScopeFactory or loaded to the scope 			 * registry of KReS 			 */
+comment|/*              * The scope is created by the ScopeFactory or loaded to the scope registry of KReS              */
 name|OntologyScope
 name|scope
 decl_stmt|;
@@ -2178,7 +2256,7 @@ return|return
 name|scope
 return|;
 block|}
-comment|/** 		 * Adds the ontology from the given iri to the core space of the given 		 * scope 		 *  		 * @param scopeID 		 * @param locationIri 		 */
+comment|/**          * Adds the ontology from the given iri to the core space of the given scope          *           * @param scopeID          * @param locationIri          */
 specifier|public
 specifier|synchronized
 name|void
@@ -2328,7 +2406,7 @@ name|setUp
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 		 * Adds the ontology fromt he given iri to the custom space of the given 		 * scope 		 *  		 * @param scopeID 		 * @param locationIri 		 */
+comment|/**          * Adds the ontology fromt he given iri to the custom space of the given scope          *           * @param scopeID          * @param locationIri          */
 specifier|public
 specifier|synchronized
 name|void
@@ -2444,7 +2522,7 @@ name|String
 name|uri
 parameter_list|)
 block|{
-comment|/* 			 * The scope factory needs an OntologyInputSource as input for the 			 * core ontology space. We want to use the dbpedia ontology as core 			 * ontology of our scope. 			 */
+comment|/*              * The scope factory needs an OntologyInputSource as input for the core ontology space. We want to              * use the dbpedia ontology as core ontology of our scope.              */
 name|OntologyInputSource
 name|ois
 init|=

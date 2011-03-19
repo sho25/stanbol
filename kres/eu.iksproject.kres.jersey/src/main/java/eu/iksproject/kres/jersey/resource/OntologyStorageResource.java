@@ -95,11 +95,13 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|store
+name|ontonet
 operator|.
-name|api
+name|impl
 operator|.
-name|OntologyStoreProvider
+name|ontology
+operator|.
+name|OntologyStorage
 import|;
 end_import
 
@@ -149,8 +151,8 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
-name|OntologyStoreProvider
-name|ontologyStoreProvider
+name|OntologyStorage
+name|storage
 decl_stmt|;
 specifier|private
 name|KReSONManager
@@ -169,17 +171,17 @@ name|ServletContext
 name|servletContext
 parameter_list|)
 block|{
-name|ontologyStoreProvider
+name|storage
 operator|=
 call|(
-name|OntologyStoreProvider
+name|OntologyStorage
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|OntologyStoreProvider
+name|OntologyStorage
 operator|.
 name|class
 operator|.
@@ -228,7 +230,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|ontologyStoreProvider
+name|storage
 operator|==
 literal|null
 condition|)
