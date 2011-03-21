@@ -286,6 +286,7 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
+comment|// org.osgi.service.component.ComponentContext;
 annotation|@
 name|SuppressWarnings
 argument_list|(
