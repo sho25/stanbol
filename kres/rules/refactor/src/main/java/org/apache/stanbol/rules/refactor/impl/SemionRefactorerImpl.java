@@ -1019,15 +1019,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|shared
+name|owlapi
 operator|.
-name|transformation
+name|trasformation
 operator|.
 name|JenaToClerezzaConverter
 import|;
@@ -1035,15 +1035,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|shared
+name|owlapi
 operator|.
-name|transformation
+name|trasformation
 operator|.
 name|JenaToOwlConvert
 import|;
@@ -1051,15 +1051,15 @@ end_import
 
 begin_import
 import|import
-name|eu
+name|org
 operator|.
-name|iksproject
+name|apache
 operator|.
-name|kres
+name|stanbol
 operator|.
-name|shared
+name|owlapi
 operator|.
-name|transformation
+name|trasformation
 operator|.
 name|OWLAPIToClerezzaConverter
 import|;
