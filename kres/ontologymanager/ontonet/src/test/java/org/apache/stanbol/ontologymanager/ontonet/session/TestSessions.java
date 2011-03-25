@@ -325,7 +325,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -538,7 +538,7 @@ literal|null
 decl_stmt|;
 specifier|private
 specifier|static
-name|KReSSessionManager
+name|SessionManager
 name|sesmgr
 init|=
 literal|null

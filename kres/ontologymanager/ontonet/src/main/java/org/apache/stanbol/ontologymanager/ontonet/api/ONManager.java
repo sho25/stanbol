@@ -131,7 +131,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -256,7 +256,7 @@ parameter_list|()
 function_decl|;
 comment|/** 	 * Returns the unique KReS session manager for this context. 	 *  	 * @return the KreS session manager. 	 */
 specifier|public
-name|KReSSessionManager
+name|SessionManager
 name|getSessionManager
 parameter_list|()
 function_decl|;

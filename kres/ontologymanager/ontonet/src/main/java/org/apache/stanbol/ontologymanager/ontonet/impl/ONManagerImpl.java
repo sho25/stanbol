@@ -499,7 +499,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -1023,7 +1023,7 @@ name|ScopeRegistry
 name|scopeRegistry
 decl_stmt|;
 specifier|private
-name|KReSSessionManager
+name|SessionManager
 name|sessionManager
 decl_stmt|;
 annotation|@
@@ -2187,7 +2187,7 @@ name|scopeRegistry
 return|;
 block|}
 specifier|public
-name|KReSSessionManager
+name|SessionManager
 name|getSessionManager
 parameter_list|()
 block|{

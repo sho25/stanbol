@@ -443,7 +443,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -1600,7 +1600,7 @@ argument_list|(
 name|defaultRefactoringID
 argument_list|)
 expr_stmt|;
-name|KReSSessionManager
+name|SessionManager
 name|kReSSessionManager
 init|=
 name|onManager
@@ -2496,7 +2496,7 @@ operator|+
 name|context
 argument_list|)
 expr_stmt|;
-name|KReSSessionManager
+name|SessionManager
 name|kReSSessionManager
 init|=
 name|onManager

@@ -213,7 +213,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -398,7 +398,7 @@ specifier|public
 class|class
 name|SessionManagerImpl
 implements|implements
-name|KReSSessionManager
+name|SessionManager
 block|{
 specifier|private
 name|Map

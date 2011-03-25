@@ -353,7 +353,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -1189,7 +1189,7 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-name|KReSSessionManager
+name|SessionManager
 name|kReSSessionManager
 init|=
 name|onManager

@@ -199,7 +199,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionManager
+name|SessionManager
 import|;
 end_import
 
@@ -369,7 +369,7 @@ name|ses
 init|=
 literal|null
 decl_stmt|;
-name|KReSSessionManager
+name|SessionManager
 name|mgr
 init|=
 name|onm
