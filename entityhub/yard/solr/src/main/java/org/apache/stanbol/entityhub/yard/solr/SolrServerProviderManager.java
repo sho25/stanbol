@@ -16,8 +16,6 @@ operator|.
 name|yard
 operator|.
 name|solr
-operator|.
-name|provider
 package|;
 end_package
 
@@ -251,11 +249,49 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|provider
-operator|.
 name|SolrServerProvider
 operator|.
 name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
+name|impl
+operator|.
+name|DefaultSolrServerProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
+name|impl
+operator|.
+name|EmbeddedSolrPorovider
 import|;
 end_import
 
@@ -294,7 +330,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Manager for different {@link SolrServerProvider} present in the current  * environment.  * This manager works both within an OSGI Environment by defining an Reference  * and outside by using {@link #getInstance()}.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Manager for different {@link SolrServerProvider} present in the current  * environment.  * This manager works both within an OSGI Environment by defining an Reference  * and outside by using {@link #getInstance()}.  *<p>  *<b>TODO:</b> Race Condition (Rupert Westenthaler, 2011-03-21)  *   There are cases where the SolrYard requests a provider {@link Type} before  *   the actual {@link SolrServerProvider} instance that supports this type has  *   initialised. In such cases the {@link #getSolrServer(Type, String, String...)}  *   would return an {@link IllegalArgumentException} what causes the  *   initialisation of the SolrYard to fail.<br>  *   For now this problem is solved by declaring a dependency of this manager  *   implementation to both the {@link EmbeddedSolrPorovider} and the  *   {@link DefaultSolrServerProvider}. This ensures that this manager is only  *   activated after this two implementations are available.<br>  *   A different solution that could ensure that the SolrYard does not request  *   an SolrServer before all the internal {@link SolrServerProvider}  *   implementations are initialised would be favourable.  *     *     * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -323,6 +359,13 @@ specifier|static
 name|SolrServerProviderManager
 name|solrServerProviderManager
 decl_stmt|;
+comment|//    //TODO See Race Condition in class doc
+comment|//    @Reference
+comment|//    private EmbeddedSolrPorovider embeddedProvider;
+comment|//
+comment|//    //TODO See Race Condition in class doc
+comment|//    @Reference
+comment|//    private DefaultSolrServerProvider defaultProvider;
 specifier|private
 specifier|final
 specifier|static

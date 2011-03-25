@@ -91,8 +91,6 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|provider
-operator|.
 name|SolrServerProvider
 operator|.
 name|Type

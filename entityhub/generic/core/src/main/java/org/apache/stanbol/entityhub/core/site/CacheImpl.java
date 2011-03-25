@@ -874,13 +874,8 @@ name|DefaultFieldMapperImpl
 argument_list|(
 name|ValueConverterFactory
 operator|.
-name|getInstance
-argument_list|(
-name|yard
-operator|.
-name|getValueFactory
+name|getDefaultInstance
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 for|for
@@ -1349,7 +1344,12 @@ name|mapped
 init|=
 literal|null
 decl_stmt|;
-empty_stmt|;
+name|ValueFactory
+name|valueFactory
+init|=
+name|getValueFactory
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|baseMapper
@@ -1379,6 +1379,8 @@ argument_list|(
 name|representation
 argument_list|,
 name|mapped
+argument_list|,
+name|valueFactory
 argument_list|)
 expr_stmt|;
 block|}
@@ -1419,6 +1421,8 @@ argument_list|(
 name|representation
 argument_list|,
 name|mapped
+argument_list|,
+name|valueFactory
 argument_list|)
 expr_stmt|;
 block|}

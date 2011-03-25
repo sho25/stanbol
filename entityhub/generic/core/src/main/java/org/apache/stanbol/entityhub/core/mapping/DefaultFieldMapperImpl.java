@@ -245,6 +245,24 @@ name|entityhub
 operator|.
 name|servicesapi
 operator|.
+name|model
+operator|.
+name|ValueFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
 name|query
 operator|.
 name|TextConstraint
@@ -1103,6 +1121,9 @@ name|source
 parameter_list|,
 name|Representation
 name|target
+parameter_list|,
+name|ValueFactory
+name|valueFactory
 parameter_list|)
 block|{
 name|Collection
@@ -1451,6 +1472,8 @@ name|processMapping
 argument_list|(
 name|mapping
 argument_list|,
+name|valueFactory
+argument_list|,
 name|field
 argument_list|,
 name|values
@@ -1475,13 +1498,16 @@ return|return
 name|target
 return|;
 block|}
-comment|/**      *      * @param mapping      * @param field      * @param values      * @param globalFiltered      * @param targets      */
+comment|/**      *      * @param mapping      * @param valueFactory The value factory used to create converted values      * @param field      * @param values      * @param globalFiltered      * @param targets      */
 specifier|private
 name|void
 name|processMapping
 parameter_list|(
 name|FieldMapping
 name|mapping
+parameter_list|,
+name|ValueFactory
+name|valueFactory
 parameter_list|,
 name|String
 name|field
@@ -1612,6 +1638,8 @@ argument_list|(
 name|valueConstraint
 argument_list|,
 name|filtered
+argument_list|,
+name|valueFactory
 argument_list|)
 expr_stmt|;
 break|break;
@@ -1920,6 +1948,9 @@ argument_list|<
 name|Object
 argument_list|>
 name|values
+parameter_list|,
+name|ValueFactory
+name|valueFactory
 parameter_list|)
 block|{
 if|if
@@ -2298,6 +2329,8 @@ name|convertedTo
 operator|.
 name|getUri
 argument_list|()
+argument_list|,
+name|valueFactory
 argument_list|)
 expr_stmt|;
 comment|//try the conversion

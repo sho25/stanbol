@@ -2234,10 +2234,8 @@ name|DefaultFieldMapperImpl
 argument_list|(
 name|ValueConverterFactory
 operator|.
-name|getInstance
-argument_list|(
-name|vf
-argument_list|)
+name|getDefaultInstance
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|log

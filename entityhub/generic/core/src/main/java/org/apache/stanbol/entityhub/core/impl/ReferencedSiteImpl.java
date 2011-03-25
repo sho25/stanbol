@@ -4105,7 +4105,7 @@ name|DefaultFieldMapperImpl
 argument_list|(
 name|ValueConverterFactory
 operator|.
-name|getInstance
+name|getDefaultInstance
 argument_list|()
 argument_list|)
 expr_stmt|;

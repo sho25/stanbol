@@ -1968,10 +1968,8 @@ name|DefaultFieldMapperImpl
 argument_list|(
 name|ValueConverterFactory
 operator|.
-name|getInstance
-argument_list|(
-name|vf
-argument_list|)
+name|getDefaultInstance
+argument_list|()
 argument_list|)
 expr_stmt|;
 for|for
@@ -4906,6 +4904,8 @@ operator|.
 name|getId
 argument_list|()
 argument_list|)
+argument_list|,
+name|vf
 argument_list|)
 argument_list|)
 expr_stmt|;

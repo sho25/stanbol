@@ -16,8 +16,6 @@ operator|.
 name|yard
 operator|.
 name|solr
-operator|.
-name|provider
 package|;
 end_package
 

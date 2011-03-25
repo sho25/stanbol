@@ -97,26 +97,6 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|embedded
-operator|.
-name|EmbeddedSolrPorovider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|yard
-operator|.
-name|solr
-operator|.
 name|impl
 operator|.
 name|SolrYard
@@ -194,7 +174,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This test uses the system property "basedir" to configure an embedded Solr  * Server. This property is set by the mvn surefire plugin. When using this  * Unit Test within a build environment that does not set this property one need  * to set it manually to the base directory of this module.  * @author Rupert Westenthaler  *  */
+comment|/**  * This test uses the system property "basedir" to configure an embedded Solr  * Server. This property is set by the mvn surefire plugin. When using this  * Unit Test within a build environment that does not set this property one need  * to set it manually to the base directory of this module.<p>  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -204,11 +184,13 @@ name|SolrYardTest
 extends|extends
 name|YardTest
 block|{
+comment|/**      * The SolrYard used for the tests      */
 specifier|private
 specifier|static
 name|Yard
 name|yard
 decl_stmt|;
+comment|/**      * The SolrDirectoryManager also tested within this unit test      */
 specifier|public
 specifier|static
 specifier|final
@@ -225,7 +207,7 @@ name|TEST_SOLR_CORE_NAME
 init|=
 literal|"test"
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|static
 specifier|final
 name|String
@@ -241,7 +223,7 @@ name|File
 operator|.
 name|separatorChar
 operator|+
-name|EmbeddedSolrPorovider
+name|SolrDirectoryManager
 operator|.
 name|DEFAULT_SOLR_DATA_DIR
 decl_stmt|;
@@ -293,9 +275,9 @@ name|System
 operator|.
 name|setProperty
 argument_list|(
-name|EmbeddedSolrPorovider
+name|SolrDirectoryManager
 operator|.
-name|SOLR_DATA_DIR_PROPERTY
+name|MANAGED_SOLR_DIR_PROPERTY
 argument_list|,
 name|solrServerDir
 argument_list|)
@@ -325,6 +307,7 @@ argument_list|(
 literal|"The Solr Yard instance used to execute the Unit Tests defined for the Yard Interface"
 argument_list|)
 expr_stmt|;
+comment|//create the Yard used for the tests
 name|yard
 operator|=
 operator|new

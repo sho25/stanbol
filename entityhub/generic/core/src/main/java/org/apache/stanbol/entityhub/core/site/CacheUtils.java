@@ -553,13 +553,8 @@ name|DefaultFieldMapperImpl
 argument_list|(
 name|ValueConverterFactory
 operator|.
-name|getInstance
-argument_list|(
-name|yard
-operator|.
-name|getValueFactory
+name|getDefaultInstance
 argument_list|()
-argument_list|)
 argument_list|)
 decl_stmt|;
 for|for

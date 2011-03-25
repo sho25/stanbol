@@ -1006,7 +1006,6 @@ argument_list|(
 name|referencedSite
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 name|sites
@@ -1031,6 +1030,7 @@ argument_list|(
 name|prefix
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
