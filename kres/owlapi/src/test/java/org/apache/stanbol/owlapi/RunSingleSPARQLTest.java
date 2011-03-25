@@ -57,7 +57,7 @@ name|stanbol
 operator|.
 name|owlapi
 operator|.
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 import|;
 end_import
 
@@ -190,7 +190,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRunSPARQLTest
+name|RunSingleSPARQLTest
 block|{
 specifier|public
 name|OWLOntologyManager
@@ -210,7 +210,7 @@ argument_list|>
 name|sparqlprefix
 decl_stmt|;
 specifier|public
-name|KReSRunSPARQLTest
+name|RunSingleSPARQLTest
 parameter_list|()
 throws|throws
 name|OWLOntologyCreationException
@@ -274,7 +274,7 @@ name|void
 name|tearDown
 parameter_list|()
 block|{     }
-comment|/**      * Test of getSPARQLprefix method, of class KReSRunSPARQL.      */
+comment|/**      * Test of getSPARQLprefix method, of class RunSingleSPARQL.      */
 annotation|@
 name|Test
 specifier|public
@@ -339,11 +339,11 @@ argument_list|,
 literal|"<http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 argument_list|)
 expr_stmt|;
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 name|instance
 init|=
 operator|new
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 argument_list|(
 name|owl
 argument_list|,
@@ -390,7 +390,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of addSPARQLprefix method, of class KReSRunSPARQL.      */
+comment|/**      * Test of addSPARQLprefix method, of class RunSingleSPARQL.      */
 annotation|@
 name|Test
 specifier|public
@@ -465,11 +465,11 @@ argument_list|,
 literal|"<http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 argument_list|)
 expr_stmt|;
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 name|instance
 init|=
 operator|new
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 argument_list|(
 name|owl
 argument_list|,
@@ -529,7 +529,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of removeSPARQLprefix method, of class KReSRunSPARQL.      */
+comment|/**      * Test of removeSPARQLprefix method, of class RunSingleSPARQL.      */
 annotation|@
 name|Test
 specifier|public
@@ -594,11 +594,11 @@ argument_list|,
 literal|"<http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 argument_list|)
 expr_stmt|;
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 name|instance
 init|=
 operator|new
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 argument_list|(
 name|owl
 argument_list|,
@@ -656,7 +656,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runSPARQL method, of class KReSRunSPARQL.      */
+comment|/**      * Test of runSPARQL method, of class RunSingleSPARQL.      */
 annotation|@
 name|Test
 specifier|public
@@ -726,11 +726,11 @@ name|query
 init|=
 literal|"SELECT * WHERE {?p rdf:type ex:Person .}"
 decl_stmt|;
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 name|instance
 init|=
 operator|new
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 argument_list|(
 name|owl
 argument_list|,

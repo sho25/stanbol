@@ -146,7 +146,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 block|{
 specifier|private
 name|OWLOntology
@@ -167,7 +167,7 @@ name|sparqlprefix
 decl_stmt|;
 comment|/**      * Constructor to create an OWLOntology object where run the SPARQL query.      *      * @param owl {The OWLOntology to be querying.}      */
 specifier|public
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 parameter_list|(
 name|OWLOntology
 name|owl
@@ -345,7 +345,7 @@ block|}
 block|}
 comment|/**      * Constructor to create an OWLOntology object where run the SPARQL query.      *      * @param owl {The OWLOntology to be querying}      * @param prefix {The map where the keys are the prefix label and the value the IRI of the prefix on the form: http://www.w3.org/2000/01/rdf-schema#.}      */
 specifier|public
-name|KReSRunSPARQL
+name|RunSingleSPARQL
 parameter_list|(
 name|OWLOntology
 name|owl
