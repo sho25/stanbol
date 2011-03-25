@@ -85,7 +85,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -126,9 +126,9 @@ specifier|public
 interface|interface
 name|Recipe
 block|{
-comment|/** 	 * Get the rule of the recipe identified by the ruleURI. The rule is returned as 	 * a {@link KReSRule} object.  	 *  	 * @param ruleURI 	 * @return the object that represents a {@link KReSRule} 	 */
+comment|/** 	 * Get the rule of the recipe identified by the ruleURI. The rule is returned as 	 * a {@link Rule} object. 	 *  	 * @param ruleURI 	 * @return the object that represents a {@link Rule} 	 */
 specifier|public
-name|KReSRule
+name|Rule
 name|getRule
 parameter_list|(
 name|String
@@ -148,15 +148,15 @@ name|Model
 name|getRecipeAsRDFModel
 parameter_list|()
 function_decl|;
-comment|/** 	 * Serialize the rules contained in the recipe to KReSRule Syntax. 	 * @return the {@link String} containing the serialization of the recipe's rules 	 * in KReSRule Syntax. 	 */
+comment|/** 	 * Serialize the rules contained in the recipe to Rule Syntax. 	 * @return the {@link String} containing the serialization of the recipe's rules 	 * in Rule Syntax. 	 */
 specifier|public
 name|String
 name|getRulesInKReSSyntax
 parameter_list|()
 function_decl|;
-comment|/** 	 * Get the list of the {@link KReSRule} contained in the recipe. 	 * @return the {@link KReSRuleList}. 	 */
+comment|/** 	 * Get the list of the {@link Rule} contained in the recipe. 	 * @return the {@link RuleList}. 	 */
 specifier|public
-name|KReSRuleList
+name|RuleList
 name|getkReSRuleList
 parameter_list|()
 function_decl|;
@@ -172,12 +172,12 @@ name|String
 name|getRecipeDescription
 parameter_list|()
 function_decl|;
-comment|/** 	 * Add a KReSRule to the recipe. 	 * This operation does not effect a change on recipe in the rule store, but only in the in-memory 	 * representation of a specific recipe. To permanently change the recipe use {@link RuleStore#addRuleToRecipe(IRI, String)}. 	 * @param kReSRule the {@link KReSRule}. 	 */
+comment|/** 	 * Add a Rule to the recipe. 	 * This operation does not effect a change on recipe in the rule store, but only in the in-memory 	 * representation of a specific recipe. To permanently change the recipe use {@link RuleStore#addRuleToRecipe(IRI, String)}. 	 * @param kReSRule the {@link Rule}. 	 */
 specifier|public
 name|void
 name|addKReSRule
 parameter_list|(
-name|KReSRule
+name|Rule
 name|kReSRule
 parameter_list|)
 function_decl|;

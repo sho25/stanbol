@@ -41,7 +41,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -59,7 +59,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -70,7 +70,7 @@ name|AtomIterator
 implements|implements
 name|Iterator
 argument_list|<
-name|KReSRuleAtom
+name|RuleAtom
 argument_list|>
 block|{
 specifier|private
@@ -82,7 +82,7 @@ name|int
 name|listSize
 decl_stmt|;
 specifier|private
-name|KReSRuleAtom
+name|RuleAtom
 index|[]
 name|kReSRuleAtoms
 decl_stmt|;
@@ -107,7 +107,7 @@ operator|.
 name|kReSRuleAtoms
 operator|=
 operator|new
-name|KReSRuleAtom
+name|RuleAtom
 index|[
 name|listSize
 index|]
@@ -156,11 +156,11 @@ return|;
 block|}
 block|}
 specifier|public
-name|KReSRuleAtom
+name|RuleAtom
 name|next
 parameter_list|()
 block|{
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 init|=
 name|kReSRuleAtoms

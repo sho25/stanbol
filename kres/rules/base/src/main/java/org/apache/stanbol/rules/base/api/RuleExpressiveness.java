@@ -18,7 +18,7 @@ end_package
 begin_enum
 specifier|public
 enum|enum
-name|KReSRuleExpressiveness
+name|RuleExpressiveness
 block|{
 name|KReSCore
 block|,

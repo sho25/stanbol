@@ -100,13 +100,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A KReSRule is a Java object that represent a rule in KReS. It contains methods to transform a rule both in SWRL and in KReSRule  * syntax.   *   * @author andrea.nuzzolese  *  */
+comment|/**  * A Rule is a Java object that represent a rule in KReS. It contains methods to transform a rule both in SWRL and in Rule  * syntax.   *   * @author andrea.nuzzolese  *  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|KReSRule
+name|Rule
 block|{
 comment|/** 	 * Gets the name of the rule. 	 *  	 * @return the {@link String} representing the name of the rule. 	 */
 specifier|public
@@ -123,13 +123,13 @@ name|String
 name|ruleName
 parameter_list|)
 function_decl|;
-comment|/** 	 * Returns the representation of the rule in KReSRule syntax. 	 *  	 * @return the {@link String} of the rule in KReSRule syntax. 	 */
+comment|/** 	 * Returns the representation of the rule in Rule syntax. 	 *  	 * @return the {@link String} of the rule in Rule syntax. 	 */
 specifier|public
 name|String
 name|getRule
 parameter_list|()
 function_decl|;
-comment|/** 	 * Sets the rule expressed in KReSRule syntax 	 *  	 * @param rule {@link String} 	 */
+comment|/** 	 * Sets the rule expressed in Rule syntax 	 *  	 * @param rule {@link String} 	 */
 specifier|public
 name|void
 name|setRule
@@ -138,7 +138,7 @@ name|String
 name|rule
 parameter_list|)
 function_decl|;
-comment|/** 	 * Maps a {@code KReSRule} to a Jena {@link Resource} object in a given Jena {@link Model}. 	 * @param model {@link Model} 	 * @return the {@link Resource} containing the rule. 	 */
+comment|/** 	 * Maps a {@code Rule} to a Jena {@link Resource} object in a given Jena {@link Model}. 	 * @param model {@link Model} 	 * @return the {@link Resource} containing the rule. 	 */
 specifier|public
 name|Resource
 name|toSWRL
@@ -147,7 +147,7 @@ name|Model
 name|model
 parameter_list|)
 function_decl|;
-comment|/** 	 * Maps a {@code KReSRule} to an OWL-API {@link SWRLRule}. 	 * @param factory {@link OWLDataFactory} 	 * @return the {@link SWRLRule} containing the rule. 	 */
+comment|/** 	 * Maps a {@code Rule} to an OWL-API {@link SWRLRule}. 	 * @param factory {@link OWLDataFactory} 	 * @return the {@link SWRLRule} containing the rule. 	 */
 specifier|public
 name|SWRLRule
 name|toSWRL
@@ -174,7 +174,7 @@ name|AtomList
 name|getBody
 parameter_list|()
 function_decl|;
-comment|/** 	 * Retunr the KReS syntax representation of the rule. 	 * @return the string of the rule in KReSRule syntax. 	 */
+comment|/** 	 * Retunr the KReS syntax representation of the rule. 	 * @return the string of the rule in Rule syntax. 	 */
 specifier|public
 name|String
 name|toKReSSyntax
@@ -207,7 +207,7 @@ name|isReflexive
 parameter_list|()
 function_decl|;
 specifier|public
-name|KReSRuleExpressiveness
+name|RuleExpressiveness
 name|getExpressiveness
 parameter_list|()
 function_decl|;

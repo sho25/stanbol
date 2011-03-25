@@ -82,7 +82,7 @@ end_import
 begin_interface
 specifier|public
 interface|interface
-name|KReSRuleAtom
+name|RuleAtom
 block|{
 specifier|public
 name|Resource

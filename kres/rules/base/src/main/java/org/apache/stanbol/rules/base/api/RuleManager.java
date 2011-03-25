@@ -46,9 +46,9 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|KReSRuleManager
+name|RuleManager
 block|{
-comment|/** 	 * Adds one or more rules to the rule ontology of KReS. Rules are passed as {@link String} contantining rules in KReSRule format 	 * @param kReSRuleString {@link String} 	 * @return true if the rule is added, false otherwise. 	 */
+comment|/** 	 * Adds one or more rules to the rule ontology of KReS. Rules are passed as {@link String} contantining rules in Rule format 	 * @param kReSRuleString {@link String} 	 * @return true if the rule is added, false otherwise. 	 */
 specifier|public
 name|boolean
 name|addRules
@@ -114,9 +114,9 @@ name|IRI
 name|recipeIRI
 parameter_list|)
 function_decl|;
-comment|/** 	 * Gets the selected rule from the rule base. 	 *  	 * @param ruleIRI {@link IRI} 	 * @return the {@link KReSRule}. 	 */
+comment|/** 	 * Gets the selected rule from the rule base. 	 *  	 * @param ruleIRI {@link IRI} 	 * @return the {@link Rule}. 	 */
 specifier|public
-name|KReSRule
+name|Rule
 name|getRule
 parameter_list|(
 name|IRI

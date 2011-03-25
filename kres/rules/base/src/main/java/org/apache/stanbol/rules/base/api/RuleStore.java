@@ -211,7 +211,7 @@ specifier|public
 name|boolean
 name|removeRule
 parameter_list|(
-name|KReSRule
+name|Rule
 name|rule
 parameter_list|)
 function_decl|;
