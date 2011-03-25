@@ -105,7 +105,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -123,7 +123,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -159,7 +159,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSGetRule
+name|GetRule
 import|;
 end_import
 
@@ -177,7 +177,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSLoadRuleFile
+name|LoadRuleFile
 import|;
 end_import
 
@@ -195,7 +195,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -284,10 +284,10 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSGetRuleTest
+name|GetRuleTest
 block|{
 specifier|public
-name|KReSGetRuleTest
+name|GetRuleTest
 parameter_list|()
 block|{     }
 annotation|@
@@ -337,7 +337,7 @@ decl_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -356,7 +356,7 @@ expr_stmt|;
 name|store
 operator|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -389,12 +389,12 @@ init|=
 literal|null
 decl_stmt|;
 specifier|public
-name|KReSONManager
+name|ONManager
 name|onm
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Test of getRule method, of class KReSGetRule.      */
+comment|/**      * Test of getRule method, of class GetRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -402,7 +402,7 @@ name|void
 name|testGetRule
 parameter_list|()
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -439,11 +439,11 @@ operator|+
 literal|"#"
 decl_stmt|;
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,
@@ -460,11 +460,11 @@ operator|.
 name|getOntology
 argument_list|()
 expr_stmt|;
-name|KReSGetRule
+name|GetRule
 name|rule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|store
 argument_list|)
@@ -537,7 +537,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of getAllRule method, of class KReSGetRule.      */
+comment|/**      * Test of getAllRule method, of class GetRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -545,7 +545,7 @@ name|void
 name|testGetAllRule
 parameter_list|()
 block|{
-comment|//        KReSRuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStoreImpl store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -582,11 +582,11 @@ operator|+
 literal|"#"
 decl_stmt|;
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,
@@ -603,11 +603,11 @@ operator|.
 name|getOntology
 argument_list|()
 expr_stmt|;
-name|KReSGetRule
+name|GetRule
 name|rule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|store
 argument_list|)
@@ -859,7 +859,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of getRule method, of class KReSGetRule.      */
+comment|/**      * Test of getRule method, of class GetRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -867,7 +867,7 @@ name|void
 name|testGetRuleUsage
 parameter_list|()
 block|{
-comment|//        KReSRuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStoreImpl store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -904,11 +904,11 @@ operator|+
 literal|"#"
 decl_stmt|;
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,
@@ -925,11 +925,11 @@ operator|.
 name|getOntology
 argument_list|()
 expr_stmt|;
-name|KReSGetRule
+name|GetRule
 name|rule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|store
 argument_list|)
@@ -989,7 +989,7 @@ name|void
 name|testGetRulesOfRecipe
 parameter_list|()
 block|{
-comment|//        KReSRuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStoreImpl store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -1026,11 +1026,11 @@ operator|+
 literal|"#"
 decl_stmt|;
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,
@@ -1047,11 +1047,11 @@ operator|.
 name|getOntology
 argument_list|()
 expr_stmt|;
-name|KReSGetRule
+name|GetRule
 name|rule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|store
 argument_list|)

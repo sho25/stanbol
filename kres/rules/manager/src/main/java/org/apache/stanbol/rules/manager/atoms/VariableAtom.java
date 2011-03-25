@@ -98,7 +98,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|KReSVariable
+name|VariableAtom
 implements|implements
 name|URIResource
 block|{
@@ -111,7 +111,7 @@ name|boolean
 name|negative
 decl_stmt|;
 specifier|public
-name|KReSVariable
+name|VariableAtom
 parameter_list|(
 name|URI
 name|uri

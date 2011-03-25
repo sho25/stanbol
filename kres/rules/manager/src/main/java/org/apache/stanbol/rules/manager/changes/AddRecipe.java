@@ -318,7 +318,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSAddRecipe
+name|AddRecipe
 block|{
 specifier|private
 name|OWLOntology
@@ -618,7 +618,7 @@ block|}
 block|}
 comment|/**     * Constructor, the input is a KReSRuleStore object.<br/>     * N.B. To get the new KReSRuleStore object there is the method getStore();<br/>     * @param store {The KReSRuleStore where to add the recipe.}     */
 specifier|public
-name|KReSAddRecipe
+name|AddRecipe
 parameter_list|(
 name|RuleStore
 name|store
@@ -684,7 +684,7 @@ expr_stmt|;
 block|}
 comment|/**     * Constructor, the input is a KReSRuleStore object and a string contains the base iri of the resource.<br/>     * N.B. To get the new KReSRuleStore object there is the method getStore();<br/>     * @param store {The KReSRuleStore where to add the recipe.}     * @param owlid {The base iri of resource}     */
 specifier|public
-name|KReSAddRecipe
+name|AddRecipe
 parameter_list|(
 name|RuleStore
 name|store

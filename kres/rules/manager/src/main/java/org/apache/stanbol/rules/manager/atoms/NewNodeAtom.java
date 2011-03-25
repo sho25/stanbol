@@ -29,7 +29,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -154,7 +154,7 @@ specifier|public
 class|class
 name|NewNodeAtom
 implements|implements
-name|KReSRuleAtom
+name|RuleAtom
 block|{
 specifier|private
 name|URIResource
@@ -240,7 +240,7 @@ if|if
 condition|(
 name|binding
 operator|instanceof
-name|KReSVariable
+name|VariableAtom
 condition|)
 block|{
 name|bindingString
@@ -339,7 +339,7 @@ if|if
 condition|(
 name|binding
 operator|instanceof
-name|KReSVariable
+name|VariableAtom
 condition|)
 block|{
 name|bindingString

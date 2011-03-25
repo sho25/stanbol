@@ -280,7 +280,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSAddRule
+name|AddRule
 block|{
 specifier|private
 name|OWLOntology
@@ -580,7 +580,7 @@ block|}
 block|}
 comment|/**     * Constructor, the input is a KReSRuleStore object.<br/>     * N.B. To get the new KReSRuleStore object there is the method getStore().     * @param store {The KReSRuleStore where to add the rule.}     */
 specifier|public
-name|KReSAddRule
+name|AddRule
 parameter_list|(
 name|RuleStore
 name|store
@@ -635,7 +635,7 @@ expr_stmt|;
 block|}
 comment|/**     * Constructor, the input is a KReSRuleStore object and a string contains the base iri of the resource.<br/>     * N.B. To get the new KReSRuleStore object there is the method getStore().     * @param owlid {The base iri of resource}     * @param store {The KReSRuleStore where to add the rule.}     */
 specifier|public
-name|KReSAddRule
+name|AddRule
 parameter_list|(
 name|RuleStore
 name|store

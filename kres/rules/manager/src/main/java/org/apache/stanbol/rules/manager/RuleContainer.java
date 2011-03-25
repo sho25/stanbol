@@ -46,7 +46,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|KReSRuleContainer
+name|RuleContainer
 block|{
 specifier|private
 name|Hashtable
@@ -58,7 +58,7 @@ argument_list|>
 name|semionRules
 decl_stmt|;
 specifier|public
-name|KReSRuleContainer
+name|RuleContainer
 parameter_list|()
 block|{
 name|semionRules

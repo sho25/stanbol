@@ -29,7 +29,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -37,9 +37,9 @@ begin_class
 specifier|public
 specifier|abstract
 class|class
-name|KReSCoreAtom
+name|CoreAtom
 implements|implements
-name|KReSRuleAtom
+name|RuleAtom
 block|{
 annotation|@
 name|Override

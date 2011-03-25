@@ -95,7 +95,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -113,7 +113,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -149,7 +149,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSAddRule
+name|AddRule
 import|;
 end_import
 
@@ -167,7 +167,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -270,10 +270,10 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSAddRuleTest
+name|AddRuleTest
 block|{
 specifier|public
-name|KReSAddRuleTest
+name|AddRuleTest
 parameter_list|()
 block|{     }
 annotation|@
@@ -323,7 +323,7 @@ decl_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -342,7 +342,7 @@ expr_stmt|;
 name|store
 operator|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -375,12 +375,12 @@ init|=
 literal|null
 decl_stmt|;
 specifier|public
-name|KReSONManager
+name|ONManager
 name|onm
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Test of addRule method, of class KReSAddRule.      */
+comment|/**      * Test of addRule method, of class AddRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -388,7 +388,7 @@ name|void
 name|testAddRule_3args_1
 parameter_list|()
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|String
 name|ruleName
 init|=
@@ -404,11 +404,11 @@ name|ruleDescription
 init|=
 literal|"My comment to the rule A"
 decl_stmt|;
-name|KReSAddRule
+name|AddRule
 name|instance
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|store
 argument_list|)
@@ -524,7 +524,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of addRule method, of class KReSAddRule.      */
+comment|/**      * Test of addRule method, of class AddRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -532,7 +532,7 @@ name|void
 name|testAddRule_3args_2
 parameter_list|()
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -590,11 +590,11 @@ name|ruleDescription
 init|=
 literal|"My comment to the rule A"
 decl_stmt|;
-name|KReSAddRule
+name|AddRule
 name|instance
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|store
 argument_list|)
@@ -676,7 +676,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of addRuleMap method, of class KReSAddRule.      */
+comment|/**      * Test of addRuleMap method, of class AddRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -684,7 +684,7 @@ name|void
 name|testAddRuleMap
 parameter_list|()
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -780,11 +780,11 @@ argument_list|,
 literal|"My comment to the rule B"
 argument_list|)
 expr_stmt|;
-name|KReSAddRule
+name|AddRule
 name|instance
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|store
 argument_list|)
@@ -903,7 +903,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of addRuleMapIRI method, of class KReSAddRule.      */
+comment|/**      * Test of addRuleMapIRI method, of class AddRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -911,7 +911,7 @@ name|void
 name|testAddRuleMapIRI
 parameter_list|()
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|OWLOntology
 name|owl
 init|=
@@ -1035,11 +1035,11 @@ argument_list|,
 literal|"My comment to the rule B"
 argument_list|)
 expr_stmt|;
-name|KReSAddRule
+name|AddRule
 name|instance
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|store
 argument_list|)

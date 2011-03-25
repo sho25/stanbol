@@ -360,7 +360,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|KReSRuleParser
+name|RuleParser
 block|{
 specifier|public
 specifier|static
@@ -382,7 +382,7 @@ name|OntModel
 name|ruleOntology
 decl_stmt|;
 specifier|public
-name|KReSRuleParser
+name|RuleParser
 parameter_list|(
 name|Model
 name|sourceModel
@@ -423,7 +423,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|KReSRuleParser
+name|RuleParser
 parameter_list|(
 name|OntModel
 name|inputOntology
@@ -521,7 +521,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
-name|KReSRuleParser
+name|RuleParser
 parameter_list|(
 name|OntModel
 name|inputOntology

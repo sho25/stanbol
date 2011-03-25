@@ -67,7 +67,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -87,7 +87,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -134,7 +134,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSKB
+name|KB
 block|{
 specifier|private
 specifier|final
@@ -169,11 +169,11 @@ argument_list|>
 name|ontologies
 decl_stmt|;
 specifier|private
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 decl_stmt|;
 specifier|public
-name|KReSKB
+name|KB
 parameter_list|()
 block|{
 name|log
@@ -206,7 +206,7 @@ expr_stmt|;
 name|kReSRuleList
 operator|=
 operator|new
-name|KReSRuleList
+name|RuleList
 argument_list|()
 expr_stmt|;
 block|}
@@ -252,7 +252,7 @@ specifier|public
 name|void
 name|addRule
 parameter_list|(
-name|KReSRule
+name|Rule
 name|kReSRule
 parameter_list|)
 block|{
@@ -274,7 +274,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|KReSRuleList
+name|RuleList
 name|getkReSRuleList
 parameter_list|()
 block|{
@@ -306,7 +306,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -359,7 +359,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -438,7 +438,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList

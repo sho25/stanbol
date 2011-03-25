@@ -306,7 +306,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSLoadRuleFile
+name|LoadRuleFile
 block|{
 specifier|private
 name|OWLOntology
@@ -342,7 +342,7 @@ name|owlIDrmi
 decl_stmt|;
 comment|/**      * This class reads an ad hoc file contains all the rules and recipes:<br/>      *  - All the rows that start with # will be ignored<br/>      *  - All the rows that start with $ identify a class or a Recipe or a KReSRule<br/>      *  - All the rows that start with @ identify a name<br/>      *  - All the rows that start with * identify a comment      *      * @param filepath {Path of the file contains thr rules and the recipes}      * @param store {The KReSRuleStore where the rules will be storage}      */
 specifier|public
-name|KReSLoadRuleFile
+name|LoadRuleFile
 parameter_list|(
 name|String
 name|filepath

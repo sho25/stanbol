@@ -29,7 +29,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -156,7 +156,7 @@ specifier|public
 class|class
 name|UnionAtom
 implements|implements
-name|KReSRuleAtom
+name|RuleAtom
 block|{
 specifier|private
 name|AtomList
@@ -218,7 +218,7 @@ literal|""
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 range|:
 name|atomList1
@@ -256,7 +256,7 @@ literal|""
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 range|:
 name|atomList2
@@ -337,7 +337,7 @@ literal|""
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 range|:
 name|atomList1
@@ -372,7 +372,7 @@ literal|""
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 range|:
 name|atomList2

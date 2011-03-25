@@ -169,7 +169,7 @@ if|if
 condition|(
 name|argument
 operator|instanceof
-name|KReSVariable
+name|VariableAtom
 condition|)
 block|{
 name|actualType

@@ -89,7 +89,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -127,7 +127,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -185,7 +185,7 @@ name|String
 name|recipeDescription
 decl_stmt|;
 specifier|private
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 decl_stmt|;
 comment|/** 	 *  	 * Create a new {@code RecipeImpl} from a set of rule expressed in KReS rule syntax. 	 *  	 *  	 * @param recipeID 	 * @param recipeDescription 	 * @param kReSRuleList 	 */
@@ -198,7 +198,7 @@ parameter_list|,
 name|String
 name|recipeDescription
 parameter_list|,
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 parameter_list|)
 block|{
@@ -222,7 +222,7 @@ name|kReSRuleList
 expr_stmt|;
 block|}
 specifier|public
-name|KReSRuleList
+name|RuleList
 name|getkReSRuleList
 parameter_list|()
 block|{
@@ -258,7 +258,7 @@ literal|null
 return|;
 block|}
 specifier|public
-name|KReSRule
+name|Rule
 name|getRule
 parameter_list|(
 name|String
@@ -430,7 +430,7 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -473,7 +473,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -515,7 +515,7 @@ specifier|public
 name|void
 name|addKReSRule
 parameter_list|(
-name|KReSRule
+name|Rule
 name|kReSRule
 parameter_list|)
 block|{
@@ -529,7 +529,7 @@ block|{
 name|kReSRuleList
 operator|=
 operator|new
-name|KReSRuleList
+name|RuleList
 argument_list|()
 expr_stmt|;
 block|}

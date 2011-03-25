@@ -67,7 +67,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -85,7 +85,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -103,7 +103,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleExpressiveness
+name|RuleExpressiveness
 import|;
 end_import
 
@@ -292,9 +292,9 @@ end_import
 begin_class
 specifier|public
 class|class
-name|KReSRuleImpl
+name|RuleImpl
 implements|implements
-name|KReSRule
+name|Rule
 block|{
 specifier|private
 name|String
@@ -328,11 +328,11 @@ specifier|private
 name|boolean
 name|sparqlD
 decl_stmt|;
-name|KReSRuleExpressiveness
+name|RuleExpressiveness
 name|expressiveness
 decl_stmt|;
 specifier|public
-name|KReSRuleImpl
+name|RuleImpl
 parameter_list|(
 name|String
 name|ruleURI
@@ -343,7 +343,7 @@ parameter_list|,
 name|AtomList
 name|head
 parameter_list|,
-name|KReSRuleExpressiveness
+name|RuleExpressiveness
 name|expressiveness
 parameter_list|)
 block|{
@@ -446,7 +446,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|KReSRuleAtom
+name|RuleAtom
 argument_list|>
 name|it
 init|=
@@ -466,7 +466,7 @@ operator|!
 name|found
 condition|)
 block|{
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 init|=
 name|it
@@ -503,7 +503,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 range|:
 name|head
@@ -562,7 +562,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 range|:
 name|body
@@ -881,7 +881,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|body
@@ -923,7 +923,7 @@ argument_list|()
 expr_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|head
@@ -996,7 +996,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|body
@@ -1017,7 +1017,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|head
@@ -1115,7 +1115,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|body
@@ -1174,7 +1174,7 @@ literal|false
 expr_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|head
@@ -1289,7 +1289,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|KReSRuleAtom
+name|RuleAtom
 argument_list|>
 name|it
 init|=
@@ -1309,7 +1309,7 @@ operator|!
 name|found
 condition|)
 block|{
-name|KReSRuleAtom
+name|RuleAtom
 name|kReSRuleAtom
 init|=
 name|it
@@ -1342,7 +1342,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|body
@@ -1391,7 +1391,7 @@ literal|true
 expr_stmt|;
 for|for
 control|(
-name|KReSRuleAtom
+name|RuleAtom
 name|atom
 range|:
 name|head
@@ -1556,7 +1556,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|KReSRuleExpressiveness
+name|RuleExpressiveness
 name|getExpressiveness
 parameter_list|()
 block|{

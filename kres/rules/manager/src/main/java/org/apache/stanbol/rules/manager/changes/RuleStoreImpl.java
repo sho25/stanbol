@@ -259,7 +259,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -277,7 +277,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -351,7 +351,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -387,7 +387,7 @@ name|rules
 operator|.
 name|manager
 operator|.
-name|KReSKB
+name|KB
 import|;
 end_import
 
@@ -405,7 +405,7 @@ name|manager
 operator|.
 name|parse
 operator|.
-name|KReSRuleParser
+name|RuleParserImpl
 import|;
 end_import
 
@@ -706,13 +706,13 @@ name|class
 argument_list|)
 specifier|public
 class|class
-name|KReSRuleStore
+name|RuleStoreImpl
 implements|implements
 name|RuleStore
 block|{
 annotation|@
 name|Reference
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 annotation|@
@@ -783,20 +783,20 @@ name|String
 name|ruleOntologyNS
 decl_stmt|;
 specifier|private
-name|KReSRuleParser
+name|RuleParserImpl
 name|kReSRuleParser
 decl_stmt|;
-comment|/**      * This construct returns KReSRuleStore object with inside an ontology where to store the rules.      *       * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the KReSRuleStore instances do need to be configured! YOU      * NEED TO USE {@link #KReSRuleStore(KReSONManager, Dictionary)} or its overloads, to parse the      * configuration and then initialise the rule store if running outside a OSGI environment.      */
+comment|/**      * This construct returns RuleStoreImpl object with inside an ontology where to store the rules.      *       * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RuleStoreImpl instances do need to be configured! YOU      * NEED TO USE {@link #RuleStoreImpl(ONManager, Dictionary)} or its overloads, to parse the      * configuration and then initialise the rule store if running outside a OSGI environment.      */
 specifier|public
-name|KReSRuleStore
+name|RuleStoreImpl
 parameter_list|()
 block|{
-comment|/*      * The constructor should be empty as some issue derives from a filled one. The old version can be invoked      * with KReSRuleStore(null)      */
+comment|/*      * The constructor should be empty as some issue derives from a filled one. The old version can be invoked      * with RuleStoreImpl(null)      */
 block|}
 specifier|public
-name|KReSRuleStore
+name|RuleStoreImpl
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|,
 name|Dictionary
@@ -825,9 +825,9 @@ expr_stmt|;
 block|}
 comment|/**      * This construct returns an ontology where to store the rules.      *       * @param filepath      *            {Ontology file path previously stored.}      */
 specifier|public
-name|KReSRuleStore
+name|RuleStoreImpl
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|,
 name|Dictionary
@@ -1055,9 +1055,9 @@ comment|// activate(configuration);
 block|}
 comment|/**      * This construct returns an ontology where to store the rules.      *       * @param owl      *            {OWLOntology object contains rules and recipe}      */
 specifier|public
-name|KReSRuleStore
+name|RuleStoreImpl
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|,
 name|Dictionary
@@ -1173,7 +1173,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|KReSRuleStore
+name|RuleStoreImpl
 operator|.
 name|class
 operator|+
@@ -1518,7 +1518,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|KReSRuleStore
+name|RuleStoreImpl
 operator|.
 name|class
 operator|+
@@ -1858,7 +1858,7 @@ operator|+
 literal|" rules."
 argument_list|)
 expr_stmt|;
-comment|/**                  * Fetch the rule content expressed as a literal in KReSRule Syntax.                  */
+comment|/**                  * Fetch the rule content expressed as a literal in Rule Syntax.                  */
 name|boolean
 name|firstLoop
 init|=
@@ -1995,7 +1995,7 @@ operator|+
 name|kReSRulesInKReSSyntax
 argument_list|)
 expr_stmt|;
-name|KReSRuleList
+name|RuleList
 name|ruleList
 init|=
 literal|null
@@ -2281,7 +2281,7 @@ operator|+
 literal|"#"
 return|;
 block|}
-comment|/*      * Moved form KReSAddRecipe class. The KReSAddRecipe should not be used anymore.      */
+comment|/*      * Moved form AddRecipe class. The AddRecipe should not be used anymore.      */
 annotation|@
 name|Override
 specifier|public
@@ -2539,7 +2539,7 @@ name|ok
 operator|)
 return|;
 block|}
-comment|/**      *       * @param recipeIRI      *            the IRI of the recipe      * @param kReSRule      *            the rule in KReSRule syntax      */
+comment|/**      *       * @param recipeIRI      *            the IRI of the recipe      * @param kReSRule      *            the rule in Rule syntax      */
 annotation|@
 name|Override
 specifier|public
@@ -2577,7 +2577,7 @@ name|kReSRuleInKReSSyntax
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param recipe      *            the recipe      * @param kReSRule      *            the rule in KReSRule syntax      *       * @return the recipe we the new rule.      */
+comment|/**      *       * @param recipe      *            the recipe      * @param kReSRule      *            the rule in Rule syntax      *       * @return the recipe we the new rule.      */
 annotation|@
 name|Override
 specifier|public
@@ -2609,7 +2609,7 @@ operator|.
 name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
-comment|/**          * Add the rule to the recipe in the rule ontology managed by the RuleStore. First we define the          * object property hasRule and then we add the literal that contains the rule in KReSRule Syntax to          * the recipe individual.          */
+comment|/**          * Add the rule to the recipe in the rule ontology managed by the RuleStore. First we define the          * object property hasRule and then we add the literal that contains the rule in Rule Syntax to          * the recipe individual.          */
 name|String
 name|ruleNS
 init|=
@@ -2677,17 +2677,17 @@ name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
 comment|/**          * Finally also the in-memory representation of the Recipe passed as input is modified.          */
-name|KReSKB
+name|KB
 name|kReSKB
 init|=
-name|KReSRuleParser
+name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
 name|kReSRuleInKReSSyntax
 argument_list|)
 decl_stmt|;
-name|KReSRuleList
+name|RuleList
 name|ruleList
 init|=
 name|kReSKB
@@ -2697,7 +2697,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|rule
 range|:
 name|ruleList
@@ -2778,7 +2778,7 @@ argument_list|,
 name|hasRuleAxiom
 argument_list|)
 expr_stmt|;
-comment|/**              * The KReSRule is added to the Recipe in-memory object.              */
+comment|/**              * The Rule is added to the Recipe in-memory object.              */
 name|recipe
 operator|.
 name|addKReSRule
@@ -2819,17 +2819,17 @@ argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
-name|KReSKB
+name|KB
 name|kb
 init|=
-name|KReSRuleParser
+name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
 name|rulesInKReSSyntax
 argument_list|)
 decl_stmt|;
-name|KReSRuleList
+name|RuleList
 name|rules
 init|=
 name|kb
@@ -2837,11 +2837,11 @@ operator|.
 name|getkReSRuleList
 argument_list|()
 decl_stmt|;
-name|KReSAddRule
+name|AddRule
 name|addRule
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|this
 argument_list|)
@@ -2873,7 +2873,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|rule
 range|:
 name|rules
@@ -2965,11 +2965,11 @@ name|size
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|KReSAddRecipe
+name|AddRecipe
 name|addRecipe
 init|=
 operator|new
-name|KReSAddRecipe
+name|AddRecipe
 argument_list|(
 name|this
 argument_list|)
@@ -2993,17 +2993,17 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
-name|KReSRuleList
+name|RuleList
 name|generateKnowledgeBase
 parameter_list|(
 name|String
 name|kReSRulesInKReSSyntax
 parameter_list|)
 block|{
-name|KReSKB
+name|KB
 name|kb
 init|=
-name|KReSRuleParser
+name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
@@ -3173,7 +3173,7 @@ specifier|public
 name|boolean
 name|removeRule
 parameter_list|(
-name|KReSRule
+name|Rule
 name|rule
 parameter_list|)
 block|{

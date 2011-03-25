@@ -136,7 +136,7 @@ specifier|public
 class|class
 name|BlankNodeAtom
 extends|extends
-name|KReSCoreAtom
+name|CoreAtom
 block|{
 specifier|private
 name|URIResource

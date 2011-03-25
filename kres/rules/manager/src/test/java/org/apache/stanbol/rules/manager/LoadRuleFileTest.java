@@ -95,7 +95,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -113,7 +113,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -149,7 +149,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSLoadRuleFile
+name|LoadRuleFile
 import|;
 end_import
 
@@ -167,7 +167,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -424,10 +424,10 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSLoadRuleFileTest
+name|LoadRuleFileTest
 block|{
 specifier|public
-name|KReSLoadRuleFileTest
+name|LoadRuleFileTest
 parameter_list|()
 block|{     }
 annotation|@
@@ -464,7 +464,7 @@ name|void
 name|tearDown
 parameter_list|()
 block|{     }
-comment|/**      * Test of KReSLoadRuleFile method, of class KReSLoadRuleFile.      */
+comment|/**      * Test of LoadRuleFile method, of class LoadRuleFile.      */
 annotation|@
 name|Test
 specifier|public
@@ -491,11 +491,11 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|KReSONManager
+name|ONManager
 name|onm
 init|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -521,12 +521,12 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//    	configuration2.put(KReSRuleStore.RULE_ONTOLOGY, "");
+comment|//    	configuration2.put(RuleStoreImpl.RULE_ONTOLOGY, "");
 name|configuration2
 operator|.
 name|put
 argument_list|(
-name|KReSRuleStore
+name|RuleStoreImpl
 operator|.
 name|RULE_ONTOLOGY_NAMESPACE
 argument_list|,
@@ -537,7 +537,7 @@ name|RuleStore
 name|store
 init|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -550,10 +550,10 @@ name|RuleStore
 name|newstore
 init|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -571,11 +571,11 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,

@@ -29,7 +29,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -39,7 +39,7 @@ specifier|abstract
 class|class
 name|SPARQLDeleteDataAtomAbstract
 implements|implements
-name|KReSRuleAtom
+name|RuleAtom
 block|{
 annotation|@
 name|Override

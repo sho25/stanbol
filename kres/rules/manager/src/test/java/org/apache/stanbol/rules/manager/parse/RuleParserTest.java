@@ -29,7 +29,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -49,7 +49,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -65,7 +65,7 @@ name|rules
 operator|.
 name|manager
 operator|.
-name|KReSKB
+name|KB
 import|;
 end_import
 
@@ -83,7 +83,7 @@ name|manager
 operator|.
 name|parse
 operator|.
-name|KReSRuleParser
+name|RuleParserImpl
 import|;
 end_import
 
@@ -114,7 +114,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRuleParserTest
+name|RuleParserTest
 block|{
 specifier|private
 specifier|static
@@ -147,10 +147,10 @@ parameter_list|()
 block|{
 try|try
 block|{
-name|KReSKB
+name|KB
 name|kReSKB
 init|=
-name|KReSRuleParser
+name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
@@ -164,7 +164,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 init|=
 name|kReSKB
@@ -181,7 +181,7 @@ condition|)
 block|{
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList

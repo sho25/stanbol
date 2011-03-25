@@ -75,7 +75,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -93,7 +93,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -129,7 +129,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSAddRule
+name|AddRule
 import|;
 end_import
 
@@ -147,7 +147,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSLoadRuleFile
+name|LoadRuleFile
 import|;
 end_import
 
@@ -165,7 +165,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRemoveRule
+name|RemoveRule
 import|;
 end_import
 
@@ -183,7 +183,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -272,10 +272,10 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRemoveRuleTest
+name|RemoveRuleTest
 block|{
 specifier|public
-name|KReSRemoveRuleTest
+name|RemoveRuleTest
 parameter_list|()
 block|{     }
 annotation|@
@@ -325,7 +325,7 @@ decl_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -344,7 +344,7 @@ expr_stmt|;
 name|store
 operator|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -377,12 +377,12 @@ init|=
 literal|null
 decl_stmt|;
 specifier|public
-name|KReSONManager
+name|ONManager
 name|onm
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Test of removeRule method, of class KReSRemoveRule.      */
+comment|/**      * Test of removeRule method, of class RemoveRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -390,24 +390,24 @@ name|void
 name|testRemoveRule
 parameter_list|()
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,
 name|store
 argument_list|)
 decl_stmt|;
-name|KReSAddRule
+name|AddRule
 name|rule
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|load
 operator|.
@@ -431,11 +431,11 @@ name|ruleName
 init|=
 literal|"MyRuleProva"
 decl_stmt|;
-name|KReSRemoveRule
+name|RemoveRule
 name|instance
 init|=
 operator|new
-name|KReSRemoveRule
+name|RemoveRule
 argument_list|(
 name|rule
 operator|.
@@ -481,7 +481,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of removeRule method, of class KReSRemoveRule.      */
+comment|/**      * Test of removeRule method, of class RemoveRule.      */
 annotation|@
 name|Test
 specifier|public
@@ -491,7 +491,7 @@ parameter_list|()
 throws|throws
 name|OWLOntologyStorageException
 block|{
-comment|//        RuleStore store  = new KReSRuleStore("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
+comment|//        RuleStore store  = new RuleStoreImpl("./src/main/resources/RuleOntology/TestKReSOntologyRules.owl");
 name|String
 name|owlID
 init|=
@@ -523,11 +523,11 @@ operator|+
 literal|"#"
 decl_stmt|;
 comment|//Load the example file
-name|KReSLoadRuleFile
+name|LoadRuleFile
 name|load
 init|=
 operator|new
-name|KReSLoadRuleFile
+name|LoadRuleFile
 argument_list|(
 literal|"./src/main/resources/RuleOntology/TestRuleFileExample.txt"
 argument_list|,
@@ -558,11 +558,11 @@ operator|+
 literal|"MyRecipe"
 argument_list|)
 decl_stmt|;
-name|KReSRemoveRule
+name|RemoveRule
 name|instance
 init|=
 operator|new
-name|KReSRemoveRule
+name|RemoveRule
 argument_list|(
 name|load
 operator|.

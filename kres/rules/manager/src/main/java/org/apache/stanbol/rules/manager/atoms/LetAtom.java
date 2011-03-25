@@ -29,7 +29,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRuleAtom
+name|RuleAtom
 import|;
 end_import
 
@@ -154,7 +154,7 @@ specifier|public
 class|class
 name|LetAtom
 implements|implements
-name|KReSRuleAtom
+name|RuleAtom
 block|{
 specifier|private
 name|URIResource
