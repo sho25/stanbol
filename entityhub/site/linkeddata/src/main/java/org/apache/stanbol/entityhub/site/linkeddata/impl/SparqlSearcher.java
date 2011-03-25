@@ -15,7 +15,7 @@ name|entityhub
 operator|.
 name|site
 operator|.
-name|linkedData
+name|linkeddata
 operator|.
 name|impl
 package|;
