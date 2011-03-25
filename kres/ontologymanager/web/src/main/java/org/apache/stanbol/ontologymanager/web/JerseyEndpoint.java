@@ -125,7 +125,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -339,7 +339,7 @@ name|httpService
 decl_stmt|;
 annotation|@
 name|Reference
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
@@ -599,7 +599,7 @@ name|servletContext
 operator|.
 name|setAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.

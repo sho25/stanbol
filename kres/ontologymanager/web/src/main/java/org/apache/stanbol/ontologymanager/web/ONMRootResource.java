@@ -201,7 +201,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -259,7 +259,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -401,9 +401,9 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/*      * Placeholder for the KReSONManager to be fetched from the servlet context.      */
+comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
@@ -434,13 +434,13 @@ operator|.
 name|onm
 operator|=
 operator|(
-name|KReSONManager
+name|ONManager
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.
@@ -469,7 +469,7 @@ expr_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 operator|new
 name|TcManager
