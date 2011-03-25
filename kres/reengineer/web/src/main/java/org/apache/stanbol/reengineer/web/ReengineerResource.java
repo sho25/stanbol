@@ -371,7 +371,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -389,7 +389,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -648,12 +648,12 @@ literal|"text/html"
 argument_list|)
 specifier|public
 class|class
-name|SemionReengineerResource
+name|ReengineerResource
 extends|extends
 name|NavigationMixin
 block|{
 specifier|protected
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 decl_stmt|;
 specifier|protected
@@ -678,7 +678,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|public
-name|SemionReengineerResource
+name|ReengineerResource
 parameter_list|(
 annotation|@
 name|Context
@@ -723,14 +723,14 @@ expr_stmt|;
 name|reengineeringManager
 operator|=
 call|(
-name|SemionManager
+name|ReengineerManager
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|SemionManager
+name|ReengineerManager
 operator|.
 name|class
 operator|.
@@ -1334,7 +1334,7 @@ parameter_list|)
 block|{
 name|Collection
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|reengineers
 init|=
@@ -1361,7 +1361,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 range|:
 name|reengineers

@@ -125,7 +125,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -143,7 +143,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -357,12 +357,12 @@ name|httpService
 decl_stmt|;
 annotation|@
 name|Reference
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 decl_stmt|;
 annotation|@
 name|Reference
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 decl_stmt|;
 specifier|protected
@@ -622,7 +622,7 @@ name|servletContext
 operator|.
 name|setAttribute
 argument_list|(
-name|SemionReengineer
+name|Reengineer
 operator|.
 name|class
 operator|.
@@ -638,7 +638,7 @@ name|servletContext
 operator|.
 name|setAttribute
 argument_list|(
-name|SemionManager
+name|ReengineerManager
 operator|.
 name|class
 operator|.

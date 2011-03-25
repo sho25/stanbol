@@ -166,7 +166,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|SemionReengineerResource
+name|ReengineerResource
 operator|.
 name|class
 argument_list|)
