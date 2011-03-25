@@ -165,7 +165,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -185,7 +185,7 @@ name|api
 operator|.
 name|registry
 operator|.
-name|KReSRegistryLoader
+name|RegistryLoader
 import|;
 end_import
 
@@ -724,9 +724,9 @@ end_import
 begin_class
 specifier|public
 class|class
-name|RegistryLoader
+name|RegistryLoaderImpl
 implements|implements
-name|KReSRegistryLoader
+name|RegistryLoader
 block|{
 specifier|private
 specifier|final
@@ -734,7 +734,7 @@ name|OWLClass
 name|cRegistryLibrary
 decl_stmt|;
 specifier|private
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|private
@@ -790,9 +790,9 @@ argument_list|()
 decl_stmt|;
 comment|/** 	 */
 specifier|public
-name|RegistryLoader
+name|RegistryLoaderImpl
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|)
 block|{

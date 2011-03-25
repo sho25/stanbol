@@ -111,7 +111,7 @@ name|api
 operator|.
 name|registry
 operator|.
-name|KReSRegistryLoader
+name|RegistryLoader
 import|;
 end_import
 
@@ -204,7 +204,7 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|KReSONManager
+name|ONManager
 block|{
 comment|/** 	 * Returns the default object that automatically indexes ontologies as they 	 * are loaded within scopes. 	 *  	 * @return the default ontology index. 	 */
 specifier|public
@@ -244,7 +244,7 @@ parameter_list|()
 function_decl|;
 comment|/** 	 * Returns the default ontology registry loader. 	 *  	 * @return the default ontology registry loader. 	 */
 specifier|public
-name|KReSRegistryLoader
+name|RegistryLoader
 name|getRegistryLoader
 parameter_list|()
 function_decl|;

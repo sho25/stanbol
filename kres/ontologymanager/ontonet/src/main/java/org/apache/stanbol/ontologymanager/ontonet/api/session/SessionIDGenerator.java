@@ -48,7 +48,7 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|KReSSessionIDGenerator
+name|SessionIDGenerator
 block|{
 comment|/** 	 * Generates a new context-free session ID. Whether this causes duplicate 	 * IDs, it should be care of the object that invoked this method to check 	 * it. 	 *  	 * @return the newly generated session ID. 	 */
 specifier|public

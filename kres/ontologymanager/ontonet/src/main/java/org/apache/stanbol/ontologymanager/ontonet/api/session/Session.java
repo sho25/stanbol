@@ -38,7 +38,7 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|KReSSession
+name|Session
 extends|extends
 name|SessionListenable
 block|{

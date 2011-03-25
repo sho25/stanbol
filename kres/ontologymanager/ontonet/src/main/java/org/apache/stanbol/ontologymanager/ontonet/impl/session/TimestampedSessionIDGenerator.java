@@ -53,7 +53,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionIDGenerator
+name|SessionIDGenerator
 import|;
 end_import
 
@@ -96,7 +96,7 @@ specifier|public
 class|class
 name|TimestampedSessionIDGenerator
 implements|implements
-name|KReSSessionIDGenerator
+name|SessionIDGenerator
 block|{
 specifier|private
 name|IRI

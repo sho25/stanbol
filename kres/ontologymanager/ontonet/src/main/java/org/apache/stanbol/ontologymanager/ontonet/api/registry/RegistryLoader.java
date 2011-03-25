@@ -174,7 +174,7 @@ end_import
 begin_interface
 specifier|public
 interface|interface
-name|KReSRegistryLoader
+name|RegistryLoader
 block|{
 specifier|public
 name|Set

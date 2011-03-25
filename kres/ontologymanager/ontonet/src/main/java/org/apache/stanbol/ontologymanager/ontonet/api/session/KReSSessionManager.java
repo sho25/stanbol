@@ -92,13 +92,13 @@ parameter_list|()
 function_decl|;
 comment|/** 	 * Generates AND REGISTERS a new KReS session and assigns a unique session 	 * ID generated internally. 	 *  	 * @return the generated KReS session 	 */
 specifier|public
-name|KReSSession
+name|Session
 name|createSession
 parameter_list|()
 function_decl|;
 comment|/** 	 * Generates AND REGISTERS a new KReS session and tries to assign it the 	 * supplied session ID. If a session with that ID is already registered, the 	 * new session is<i>not</i> created and a 	 *<code>DuplicateSessionIDException</code> is thrown. 	 *  	 * @param sessionID 	 *            the IRI that uniquely identifies the session 	 * @return the generated KReS session 	 * @throws DuplicateSessionIDException 	 *             if a KReS session with that sessionID is already registered 	 */
 specifier|public
-name|KReSSession
+name|Session
 name|createSession
 parameter_list|(
 name|IRI
@@ -118,7 +118,7 @@ parameter_list|)
 function_decl|;
 comment|/** 	 * Retrieves the unique KReS session identified by<code>sessionID</code>. 	 *  	 * @param sessionID 	 *            the IRI that uniquely identifies the session 	 * @return the unique KReS session identified by<code>sessionID</code> 	 */
 specifier|public
-name|KReSSession
+name|Session
 name|getSession
 parameter_list|(
 name|IRI

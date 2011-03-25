@@ -53,7 +53,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -363,7 +363,7 @@ specifier|static
 name|String
 name|getSessionMetadataRDF
 parameter_list|(
-name|KReSSession
+name|Session
 name|session
 parameter_list|)
 block|{

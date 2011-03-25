@@ -165,7 +165,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -305,7 +305,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -365,7 +365,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 operator|.
 name|State
 import|;
@@ -385,7 +385,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -569,12 +569,12 @@ name|void
 name|setup
 parameter_list|()
 block|{
-comment|// An ONManager with no store and default settings
-name|KReSONManager
+comment|// An ONManagerImpl with no store and default settings
+name|ONManager
 name|onm
 init|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -754,7 +754,7 @@ argument_list|(
 name|scope
 argument_list|)
 expr_stmt|;
-name|KReSSession
+name|Session
 name|ses
 init|=
 name|sesmgr
@@ -931,7 +931,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|KReSSession
+name|Session
 name|ses
 init|=
 name|sesmgr
@@ -1018,7 +1018,7 @@ operator|.
 name|size
 argument_list|()
 decl_stmt|;
-name|KReSSession
+name|Session
 name|ses
 init|=
 name|sesmgr
@@ -1072,14 +1072,14 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|KReSSession
+name|Session
 argument_list|>
 name|sessions
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|KReSSession
+name|Session
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1104,7 +1104,7 @@ name|i
 operator|++
 control|)
 block|{
-name|KReSSession
+name|Session
 name|ses
 init|=
 name|sesmgr
@@ -1164,7 +1164,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSSession
+name|Session
 name|ses
 range|:
 name|sessions
@@ -1194,7 +1194,7 @@ init|)
 block|{
 for|for
 control|(
-name|KReSSession
+name|Session
 name|ses
 range|:
 name|sessions
@@ -1231,7 +1231,7 @@ literal|true
 decl_stmt|;
 for|for
 control|(
-name|KReSSession
+name|Session
 name|ses
 range|:
 name|sessions
@@ -1260,7 +1260,7 @@ literal|false
 decl_stmt|;
 for|for
 control|(
-name|KReSSession
+name|Session
 name|ses
 range|:
 name|sessions

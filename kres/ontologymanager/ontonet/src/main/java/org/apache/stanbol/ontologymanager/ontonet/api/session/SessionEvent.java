@@ -46,7 +46,7 @@ block|; 	}
 empty_stmt|;
 comment|/** 	 * The KReS session affected by this event. 	 */
 specifier|private
-name|KReSSession
+name|Session
 name|affectedSession
 decl_stmt|;
 specifier|private
@@ -66,7 +66,7 @@ comment|/** 	 * Creates a new instance of SessionEvent. 	 *  	 * @param session 
 specifier|public
 name|SessionEvent
 parameter_list|(
-name|KReSSession
+name|Session
 name|session
 parameter_list|,
 name|OperationType
@@ -116,7 +116,7 @@ expr_stmt|;
 block|}
 comment|/** 	 * Returns the KReS session affected by this event. 	 *  	 * @return the affected KReS session 	 */
 specifier|public
-name|KReSSession
+name|Session
 name|getSession
 parameter_list|()
 block|{

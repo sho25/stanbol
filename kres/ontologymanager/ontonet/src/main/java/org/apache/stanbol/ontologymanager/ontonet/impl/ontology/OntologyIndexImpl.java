@@ -71,7 +71,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -241,13 +241,13 @@ name|ScopeRegistry
 name|scopeRegistry
 decl_stmt|;
 specifier|private
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|public
 name|OntologyIndexImpl
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|)
 block|{

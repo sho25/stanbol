@@ -103,7 +103,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -301,7 +301,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -538,7 +538,7 @@ literal|null
 decl_stmt|;
 specifier|private
 specifier|static
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|private
@@ -572,11 +572,11 @@ name|void
 name|setup
 parameter_list|()
 block|{
-comment|// An ONManager with no store and default settings
+comment|// An ONManagerImpl with no store and default settings
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 literal|null
 argument_list|,

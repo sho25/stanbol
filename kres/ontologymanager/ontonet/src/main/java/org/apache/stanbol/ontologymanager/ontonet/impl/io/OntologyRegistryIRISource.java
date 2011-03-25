@@ -93,7 +93,7 @@ name|api
 operator|.
 name|registry
 operator|.
-name|KReSRegistryLoader
+name|RegistryLoader
 import|;
 end_import
 
@@ -277,7 +277,7 @@ parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
 parameter_list|,
-name|KReSRegistryLoader
+name|RegistryLoader
 name|loader
 parameter_list|)
 block|{
@@ -303,7 +303,7 @@ parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
 parameter_list|,
-name|KReSRegistryLoader
+name|RegistryLoader
 name|loader
 parameter_list|,
 name|OntologyInputSource

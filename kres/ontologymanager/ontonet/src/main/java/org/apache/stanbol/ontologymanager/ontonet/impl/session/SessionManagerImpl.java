@@ -173,7 +173,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -193,7 +193,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSessionIDGenerator
+name|SessionIDGenerator
 import|;
 end_import
 
@@ -293,7 +293,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 operator|.
 name|State
 import|;
@@ -396,7 +396,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSSessionManagerImpl
+name|SessionManagerImpl
 implements|implements
 name|KReSSessionManager
 block|{
@@ -405,7 +405,7 @@ name|Map
 argument_list|<
 name|IRI
 argument_list|,
-name|KReSSession
+name|Session
 argument_list|>
 name|sessionsByID
 decl_stmt|;
@@ -429,7 +429,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|protected
-name|KReSSessionIDGenerator
+name|SessionIDGenerator
 name|idgen
 decl_stmt|;
 specifier|protected
@@ -441,7 +441,7 @@ name|OntologyStorage
 name|store
 decl_stmt|;
 specifier|public
-name|KReSSessionManagerImpl
+name|SessionManagerImpl
 parameter_list|(
 name|IRI
 name|baseIri
@@ -477,7 +477,7 @@ name|HashMap
 argument_list|<
 name|IRI
 argument_list|,
-name|KReSSession
+name|Session
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -531,7 +531,7 @@ comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.se
 annotation|@
 name|Override
 specifier|public
-name|KReSSession
+name|Session
 name|createSession
 parameter_list|()
 block|{
@@ -544,7 +544,7 @@ init|=
 name|getRegisteredSessionIDs
 argument_list|()
 decl_stmt|;
-name|KReSSession
+name|Session
 name|session
 init|=
 literal|null
@@ -596,7 +596,7 @@ comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.se
 annotation|@
 name|Override
 specifier|public
-name|KReSSession
+name|Session
 name|createSession
 parameter_list|(
 name|IRI
@@ -621,11 +621,11 @@ argument_list|(
 name|sessionID
 argument_list|)
 throw|;
-name|KReSSession
+name|Session
 name|session
 init|=
 operator|new
-name|KReSSessionImpl
+name|SessionImpl
 argument_list|(
 name|sessionID
 argument_list|)
@@ -657,7 +657,7 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|KReSSession
+name|Session
 name|ses
 init|=
 name|sessionsByID
@@ -676,11 +676,11 @@ if|if
 condition|(
 name|ses
 operator|instanceof
-name|KReSSessionImpl
+name|SessionImpl
 condition|)
 operator|(
 operator|(
-name|KReSSessionImpl
+name|SessionImpl
 operator|)
 name|ses
 operator|)
@@ -728,7 +728,7 @@ comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.se
 annotation|@
 name|Override
 specifier|public
-name|KReSSession
+name|Session
 name|getSession
 parameter_list|(
 name|IRI
@@ -765,7 +765,7 @@ specifier|protected
 name|void
 name|fireSessionCreated
 parameter_list|(
-name|KReSSession
+name|Session
 name|session
 parameter_list|)
 block|{
@@ -834,7 +834,7 @@ specifier|protected
 name|void
 name|fireSessionDestroyed
 parameter_list|(
-name|KReSSession
+name|Session
 name|session
 parameter_list|)
 block|{
@@ -903,7 +903,7 @@ specifier|protected
 name|void
 name|addSession
 parameter_list|(
-name|KReSSession
+name|Session
 name|session
 parameter_list|)
 block|{
@@ -924,7 +924,7 @@ specifier|protected
 name|void
 name|removeSession
 parameter_list|(
-name|KReSSession
+name|Session
 name|session
 parameter_list|)
 block|{
@@ -936,7 +936,7 @@ operator|.
 name|getID
 argument_list|()
 decl_stmt|;
-name|KReSSession
+name|Session
 name|s2
 init|=
 name|sessionsByID

@@ -63,7 +63,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -143,7 +143,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 operator|.
 name|State
 import|;
@@ -196,15 +196,15 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Standard implementation of the {@link KReSSession} interface. A  * KReSSessionImpl is initially inactive and creates its own identifier.  *   * @author alessandro  *   */
+comment|/**  * Standard implementation of the {@link Session} interface. A  * SessionImpl is initially inactive and creates its own identifier.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|KReSSessionImpl
+name|SessionImpl
 implements|implements
-name|KReSSession
+name|Session
 block|{
 comment|/** 	 * A KReS session knows about its own ID. 	 */
 specifier|protected
@@ -230,7 +230,7 @@ name|HALTED
 decl_stmt|;
 comment|/** 	 * Utility constructor for enforcing a given IRI as a session ID. It will 	 * not throw duplication exceptions, since a KReS session does not know 	 * about other sessions. 	 *  	 * @param sessionID 	 *            the IRI to be set as unique identifier for this session 	 */
 specifier|public
-name|KReSSessionImpl
+name|SessionImpl
 parameter_list|(
 name|IRI
 name|sessionID
@@ -253,7 +253,7 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|public
-name|KReSSessionImpl
+name|SessionImpl
 parameter_list|(
 name|IRI
 name|sessionID
@@ -326,7 +326,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.KReSSession#close() 	 */
+comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#close() 	 */
 annotation|@
 name|Override
 specifier|public
@@ -347,7 +347,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.KReSSession#getID() 	 */
+comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#getID() 	 */
 annotation|@
 name|Override
 specifier|public
@@ -374,7 +374,7 @@ return|return
 name|listeners
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.KReSSession#getSessionState() 	 */
+comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#getSessionState() 	 */
 annotation|@
 name|Override
 specifier|public
@@ -386,7 +386,7 @@ return|return
 name|state
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.KReSSession#isActive() 	 */
+comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#isActive() 	 */
 annotation|@
 name|Override
 specifier|public
@@ -420,7 +420,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.KReSSession#setActive(boolean) 	 */
+comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.Session#setActive(boolean) 	 */
 annotation|@
 name|Override
 specifier|public

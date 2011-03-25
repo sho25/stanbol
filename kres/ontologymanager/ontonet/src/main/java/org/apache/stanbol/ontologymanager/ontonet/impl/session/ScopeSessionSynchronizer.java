@@ -31,7 +31,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -91,7 +91,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -157,13 +157,13 @@ implements|implements
 name|SessionListener
 block|{
 specifier|private
-name|KReSONManager
+name|ONManager
 name|manager
 decl_stmt|;
 specifier|public
 name|ScopeSessionSynchronizer
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|manager
 parameter_list|)
 block|{
@@ -237,7 +237,7 @@ parameter_list|)
 block|{
 comment|// System.err.println("Session " + event.getSession() + " has been "
 comment|// + event.getOperationType());
-name|KReSSession
+name|Session
 name|ses
 init|=
 name|event

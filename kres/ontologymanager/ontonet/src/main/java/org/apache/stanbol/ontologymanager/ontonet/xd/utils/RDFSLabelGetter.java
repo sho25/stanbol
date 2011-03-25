@@ -93,7 +93,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 

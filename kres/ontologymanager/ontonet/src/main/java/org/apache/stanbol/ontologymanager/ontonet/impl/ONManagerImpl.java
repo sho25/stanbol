@@ -219,7 +219,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -623,7 +623,7 @@ name|model
 operator|.
 name|impl
 operator|.
-name|RegistryLoader
+name|RegistryLoaderImpl
 import|;
 end_import
 
@@ -643,7 +643,7 @@ name|impl
 operator|.
 name|session
 operator|.
-name|KReSSessionManagerImpl
+name|SessionManagerImpl
 import|;
 end_import
 
@@ -860,16 +860,16 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 argument_list|)
 comment|// @Property(name="service.ranking",intValue=5)
 specifier|public
 class|class
-name|ONManager
+name|ONManagerImpl
 implements|implements
-name|KReSONManager
+name|ONManager
 block|{
 specifier|public
 specifier|static
@@ -902,7 +902,7 @@ specifier|final
 name|String
 name|ALIAS
 init|=
-literal|"eu.iksproject.kres.manager.ontologyNetworkManager.alias"
+literal|"org.apache.stanbol.ontologyNetworkManager.alias"
 decl_stmt|;
 annotation|@
 name|Property
@@ -916,7 +916,7 @@ specifier|static
 name|String
 name|CONFIG_FILE_PATH
 init|=
-literal|"eu.iksproject.kres.manager.ontologyNetworkManager.config_ont"
+literal|"org.apache.stanbol.ontologyNetworkManager.config_ont"
 decl_stmt|;
 annotation|@
 name|Property
@@ -955,9 +955,9 @@ name|kresNs
 init|=
 name|_KRES_NAMESPACE_DEFAULT
 decl_stmt|;
-comment|// private static ONManager me = new ONManager();
+comment|// private static ONManagerImpl me = new ONManagerImpl();
 comment|//
-comment|// public static ONManager get() {
+comment|// public static ONManagerImpl get() {
 comment|// return me;
 comment|// }
 comment|// private ComponentContext ce;
@@ -995,7 +995,7 @@ name|OWLDataFactory
 name|owlFactory
 decl_stmt|;
 specifier|private
-name|RegistryLoader
+name|RegistryLoaderImpl
 name|registryLoader
 decl_stmt|;
 specifier|private
@@ -1034,7 +1034,7 @@ index|[]
 block|{}
 decl_stmt|;
 specifier|public
-name|ONManager
+name|ONManagerImpl
 parameter_list|()
 block|{
 name|super
@@ -1101,7 +1101,7 @@ comment|// This requires the OWL cache manager
 name|registryLoader
 operator|=
 operator|new
-name|RegistryLoader
+name|RegistryLoaderImpl
 argument_list|(
 name|this
 argument_list|)
@@ -1112,7 +1112,7 @@ comment|// storage = new FISEPersistenceStorage();
 name|sessionManager
 operator|=
 operator|new
-name|KReSSessionManagerImpl
+name|SessionManagerImpl
 argument_list|(
 name|IRI
 operator|.
@@ -1141,7 +1141,7 @@ expr_stmt|;
 block|}
 comment|/**      * Instantiates all the default providers.      *       * TODO : Felix component constraints prevent this constructor from being private, find a way around...      */
 specifier|public
-name|ONManager
+name|ONManagerImpl
 parameter_list|(
 name|TcManager
 name|tcm
@@ -1220,7 +1220,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|ONManager
+name|ONManagerImpl
 operator|.
 name|class
 operator|+
@@ -2011,7 +2011,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Deactivation of the ONManager resets all its resources.      */
+comment|/**      * Deactivation of the ONManagerImpl resets all its resources.      */
 annotation|@
 name|Deactivate
 specifier|protected
@@ -2028,7 +2028,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|ONManager
+name|ONManagerImpl
 operator|.
 name|class
 operator|+
@@ -2109,7 +2109,7 @@ return|;
 block|}
 comment|/**      * Returns the default ontology registry loader.      *       * @return the default ontology registry loader      */
 specifier|public
-name|RegistryLoader
+name|RegistryLoaderImpl
 name|getRegistryLoader
 parameter_list|()
 block|{
