@@ -77,7 +77,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -115,7 +115,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 import|;
 end_import
 
@@ -488,12 +488,12 @@ end_import
 begin_class
 specifier|public
 class|class
-name|SemionDBDataTransformer
+name|DBDataTransformer
 extends|extends
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 block|{
 specifier|private
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 specifier|private
@@ -505,9 +505,9 @@ name|DatabaseConnection
 name|databaseConnection
 decl_stmt|;
 specifier|public
-name|SemionDBDataTransformer
+name|DBDataTransformer
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onManager
 parameter_list|,
 name|OWLOntology

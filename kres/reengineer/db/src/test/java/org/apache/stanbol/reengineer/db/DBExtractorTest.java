@@ -137,7 +137,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -155,7 +155,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -173,7 +173,7 @@ name|base
 operator|.
 name|impl
 operator|.
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 import|;
 end_import
 
@@ -235,7 +235,7 @@ name|String
 name|graphNS
 decl_stmt|;
 specifier|static
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 specifier|static
@@ -326,7 +326,7 @@ comment|// Two different ontology storagez, the same sparql engine and tcprovide
 name|onManager
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 name|tcm
 argument_list|,
@@ -341,7 +341,7 @@ operator|new
 name|DBExtractor
 argument_list|(
 operator|new
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 argument_list|(
 name|tcm
 argument_list|,

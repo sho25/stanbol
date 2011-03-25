@@ -213,7 +213,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -333,7 +333,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -407,7 +407,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -425,7 +425,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -626,7 +626,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code DBExtractor} is an implementation of the {@link SemionReengineer} for relational databases.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * The {@code DBExtractor} is an implementation of the {@link Reengineer} for relational databases.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -644,7 +644,7 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|SemionReengineer
+name|Reengineer
 operator|.
 name|class
 argument_list|)
@@ -652,7 +652,7 @@ specifier|public
 class|class
 name|DBExtractor
 implements|implements
-name|SemionReengineer
+name|Reengineer
 block|{
 specifier|public
 specifier|static
@@ -723,7 +723,7 @@ specifier|final
 name|String
 name|DB_DATA_REENGINEERING_SESSION
 init|=
-literal|"eu.iksproject.kres.semion.reengineer.db.data"
+literal|"org.apache.stanbol.reengineer.db.data"
 decl_stmt|;
 annotation|@
 name|Property
@@ -738,7 +738,7 @@ specifier|final
 name|String
 name|DB_DATA_REENGINEERING_SESSION_SPACE
 init|=
-literal|"eu.iksproject.kres.semion.reengineer.space.db.data"
+literal|"org.apache.stanbol.reengineer.space.db.data"
 decl_stmt|;
 annotation|@
 name|Property
@@ -768,7 +768,7 @@ specifier|final
 name|String
 name|DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE
 init|=
-literal|"eu.iksproject.kres.semion.reengineer.ontology.space.db"
+literal|"org.apache.stanbol.reengineer.ontology.space.db"
 decl_stmt|;
 annotation|@
 name|Property
@@ -783,7 +783,7 @@ specifier|final
 name|String
 name|DB_SCHEMA_REENGINEERING_SESSION
 init|=
-literal|"eu.iksproject.kres.semion.reengineer.db.schema"
+literal|"org.apache.stanbol.reengineer.db.schema"
 decl_stmt|;
 annotation|@
 name|Property
@@ -840,12 +840,12 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Reference
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 annotation|@
 name|Reference
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 decl_stmt|;
 specifier|private
@@ -873,19 +873,19 @@ name|Reference
 name|WeightedTcProvider
 name|weightedTcProvider
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the DBExtractor instances do need to be configured! YOU NEED      * TO USE {@link #DBExtractor(KReSONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the DBExtractor instances do need to be configured! YOU NEED      * TO USE {@link #DBExtractor(ONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|DBExtractor
 parameter_list|()
 block|{      }
-comment|/**      *       * Create a new {@link DBExtractor} that is formally a {@link SemionReengineer}.      *       */
+comment|/**      *       * Create a new {@link DBExtractor} that is formally a {@link Reengineer}.      *       */
 specifier|public
 name|DBExtractor
 parameter_list|(
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 parameter_list|,
-name|KReSONManager
+name|ONManager
 name|onManager
 parameter_list|,
 name|TcManager
@@ -936,14 +936,14 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Create a new {@link DBExtractor} that is formally a {@link SemionReengineer}.      *       * @param databaseURI      *            {@link String}      * @param schemaGraph      *            {@link MGraph}      * @param connectionSettings      *            {@link ConnectionSettings}      */
+comment|/**      * Create a new {@link DBExtractor} that is formally a {@link Reengineer}.      *       * @param databaseURI      *            {@link String}      * @param schemaGraph      *            {@link MGraph}      * @param connectionSettings      *            {@link ConnectionSettings}      */
 specifier|public
 name|DBExtractor
 parameter_list|(
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 parameter_list|,
-name|KReSONManager
+name|ONManager
 name|onManager
 parameter_list|,
 name|TcManager
@@ -1168,7 +1168,7 @@ name|create
 argument_list|(
 name|hostNameAndPort
 operator|+
-literal|"/kres/ontology/"
+literal|"/kres/ontoman/ontology/ontology/"
 operator|+
 name|reengineeringScopeID
 argument_list|)
@@ -1197,7 +1197,7 @@ operator|.
 name|getSessionManager
 argument_list|()
 decl_stmt|;
-name|KReSSession
+name|Session
 name|kReSSession
 init|=
 name|kReSSessionManager
@@ -1536,11 +1536,11 @@ parameter_list|)
 throws|throws
 name|ReengineeringException
 block|{
-name|SemionDBDataTransformer
+name|DBDataTransformer
 name|semionDBDataTransformer
 init|=
 operator|new
-name|SemionDBDataTransformer
+name|DBDataTransformer
 argument_list|(
 name|onManager
 argument_list|,
@@ -1805,11 +1805,11 @@ operator|.
 name|getDataSource
 argument_list|()
 decl_stmt|;
-name|SemionDBSchemaGenerator
+name|DBSchemaGenerator
 name|schemaGenerator
 init|=
 operator|new
-name|SemionDBSchemaGenerator
+name|DBSchemaGenerator
 argument_list|(
 name|outputIRI
 argument_list|,

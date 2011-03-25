@@ -145,7 +145,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 import|;
 end_import
 
@@ -266,15 +266,15 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code SemionDBSchemaGenerator} is responsible of the generation of the RDF of the schema of a relational database.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * The {@code DBSchemaGenerator} is responsible of the generation of the RDF of the schema of a relational database.  *   * @author andrea.nuzzolese  *  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SemionDBSchemaGenerator
+name|DBSchemaGenerator
 extends|extends
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 implements|implements
 name|Serializable
 block|{
@@ -290,14 +290,14 @@ specifier|private
 name|ConnectionSettings
 name|connectionSettings
 decl_stmt|;
-comment|/** 	 * Creates a new standard {@code SemionDBSchemaGenerator}  	 */
+comment|/** 	 * Creates a new standard {@code DBSchemaGenerator} 	 */
 specifier|public
-name|SemionDBSchemaGenerator
+name|DBSchemaGenerator
 parameter_list|()
 block|{ 		 	}
-comment|/** 	 * Creates a new {@code SemionDBSchemaGenerator} that can generate the RDF of the database's schema. The database is available 	 * thanks to the {@code connectionSettings} passed as input. The URI of the RDF will be that one passed as actual parameter to the 	 * formal parameter {@code databaseURI}. 	 *  	 * @param databaseURI {@link String} 	 * @param connectionSettings {@link ConnectionSettings} 	 */
+comment|/** 	 * Creates a new {@code DBSchemaGenerator} that can generate the RDF of the database's schema. The database is available 	 * thanks to the {@code connectionSettings} passed as input. The URI of the RDF will be that one passed as actual parameter to the 	 * formal parameter {@code databaseURI}. 	 *  	 * @param databaseURI {@link String} 	 * @param connectionSettings {@link ConnectionSettings} 	 */
 specifier|public
-name|SemionDBSchemaGenerator
+name|DBSchemaGenerator
 parameter_list|(
 name|IRI
 name|outputIRI
