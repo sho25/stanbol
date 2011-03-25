@@ -307,7 +307,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -325,7 +325,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -381,7 +381,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSAddRecipe
+name|AddRecipe
 import|;
 end_import
 
@@ -399,7 +399,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSGetRecipe
+name|GetRecipe
 import|;
 end_import
 
@@ -417,7 +417,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRemoveRecipe
+name|RemoveRecipe
 import|;
 end_import
 
@@ -435,7 +435,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -649,12 +649,12 @@ comment|// /{uri:.+}")
 comment|// @ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
 specifier|public
 class|class
-name|Recipe
+name|RestRecipe
 extends|extends
 name|NavigationMixin
 block|{
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|private
@@ -677,9 +677,9 @@ specifier|private
 name|OntologyStorage
 name|storage
 decl_stmt|;
-comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
+comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
 specifier|public
-name|Recipe
+name|RestRecipe
 parameter_list|(
 annotation|@
 name|Context
@@ -711,13 +711,13 @@ operator|.
 name|onm
 operator|=
 operator|(
-name|KReSONManager
+name|ONManager
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.
@@ -746,7 +746,7 @@ expr_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 operator|new
 name|TcManager
@@ -819,7 +819,7 @@ comment|//            String iri = "http://www.ontologydesignpatterns.org/ont/ik
 comment|//            OWLOntology o;
 comment|//            try {
 comment|//                o = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(IRI.create(iri));
-comment|//                this.kresRuleStore = new KReSRuleStore(onm, new Hashtable<String,Object>(), "");
+comment|//                this.kresRuleStore = new RuleStoreImpl(onm, new Hashtable<String,Object>(), "");
 comment|//                log.debug("PATH TO OWL FILE LOADED: " + kresRuleStore.getFilePath());
 comment|//            } catch (OWLOntologyCreationException e) {
 comment|//
@@ -829,7 +829,7 @@ operator|.
 name|kresRuleStore
 operator|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -901,11 +901,11 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|KReSGetRecipe
+name|GetRecipe
 name|rule
 init|=
 operator|new
-name|KReSGetRecipe
+name|GetRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -1590,11 +1590,11 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|KReSAddRecipe
+name|AddRecipe
 name|instance
 init|=
 operator|new
-name|KReSAddRecipe
+name|AddRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -1705,11 +1705,11 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|KReSRemoveRecipe
+name|RemoveRecipe
 name|instance
 init|=
 operator|new
-name|KReSRemoveRecipe
+name|RemoveRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)

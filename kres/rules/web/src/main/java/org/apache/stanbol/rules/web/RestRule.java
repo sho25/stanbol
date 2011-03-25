@@ -327,7 +327,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -345,7 +345,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -401,7 +401,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSAddRecipe
+name|AddRecipe
 import|;
 end_import
 
@@ -419,7 +419,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSAddRule
+name|AddRule
 import|;
 end_import
 
@@ -437,7 +437,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSGetRecipe
+name|GetRecipe
 import|;
 end_import
 
@@ -455,7 +455,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSGetRule
+name|GetRule
 import|;
 end_import
 
@@ -473,7 +473,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRemoveRecipe
+name|RemoveRecipe
 import|;
 end_import
 
@@ -491,7 +491,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRemoveRule
+name|RemoveRule
 import|;
 end_import
 
@@ -509,7 +509,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -693,12 +693,12 @@ literal|"/rule"
 argument_list|)
 specifier|public
 class|class
-name|Rule
+name|RestRule
 extends|extends
 name|NavigationMixin
 block|{
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
@@ -734,9 +734,9 @@ specifier|private
 name|String
 name|desc
 decl_stmt|;
-comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
+comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
 specifier|public
-name|Rule
+name|RestRule
 parameter_list|(
 annotation|@
 name|Context
@@ -768,13 +768,13 @@ operator|.
 name|onm
 operator|=
 operator|(
-name|KReSONManager
+name|ONManager
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.
@@ -803,7 +803,7 @@ expr_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 operator|new
 name|TcManager
@@ -877,7 +877,7 @@ operator|.
 name|kresRuleStore
 operator|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -949,11 +949,11 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|KReSGetRule
+name|GetRule
 name|recipe
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -1520,11 +1520,11 @@ name|String
 name|recipeURI
 parameter_list|)
 block|{
-name|KReSGetRule
+name|GetRule
 name|kReSGetRule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -1747,11 +1747,11 @@ operator|)
 condition|)
 block|{
 comment|//Get the rule
-name|KReSGetRule
+name|GetRule
 name|inrule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -1794,11 +1794,11 @@ argument_list|()
 return|;
 block|}
 comment|//Get the recipe
-name|KReSGetRecipe
+name|GetRecipe
 name|getrecipe
 init|=
 operator|new
-name|KReSGetRecipe
+name|GetRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -1962,11 +1962,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//Remove the old recipe
-name|KReSRemoveRecipe
+name|RemoveRecipe
 name|remove
 init|=
 operator|new
-name|KReSRemoveRecipe
+name|RemoveRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2005,11 +2005,11 @@ name|build
 argument_list|()
 return|;
 comment|//Add the recipe with the new rule
-name|KReSAddRecipe
+name|AddRecipe
 name|newadd
 init|=
 operator|new
-name|KReSAddRecipe
+name|AddRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2086,11 +2086,11 @@ operator|)
 condition|)
 block|{
 comment|//Get the rule
-name|KReSAddRule
+name|AddRule
 name|inrule
 init|=
 operator|new
-name|KReSAddRule
+name|AddRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2146,11 +2146,11 @@ argument_list|()
 return|;
 block|}
 comment|//Get the recipe
-name|KReSGetRecipe
+name|GetRecipe
 name|getrecipe
 init|=
 operator|new
-name|KReSGetRecipe
+name|GetRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2326,11 +2326,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//Remove the old recipe
-name|KReSRemoveRecipe
+name|RemoveRecipe
 name|remove
 init|=
 operator|new
-name|KReSRemoveRecipe
+name|RemoveRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2381,11 +2381,11 @@ argument_list|()
 return|;
 block|}
 comment|//Add the recipe with the new rule
-name|KReSAddRecipe
+name|AddRecipe
 name|newadd
 init|=
 operator|new
-name|KReSAddRecipe
+name|AddRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2567,11 +2567,11 @@ name|trim
 argument_list|()
 expr_stmt|;
 comment|//Get the rule
-name|KReSGetRule
+name|GetRule
 name|getrule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2614,11 +2614,11 @@ argument_list|()
 return|;
 block|}
 comment|//Get the recipe
-name|KReSGetRecipe
+name|GetRecipe
 name|getrecipe
 init|=
 operator|new
-name|KReSGetRecipe
+name|GetRecipe
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2699,11 +2699,11 @@ name|build
 argument_list|()
 return|;
 block|}
-name|KReSRemoveRule
+name|RemoveRule
 name|remove
 init|=
 operator|new
-name|KReSRemoveRule
+name|RemoveRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2801,11 +2801,11 @@ name|trim
 argument_list|()
 expr_stmt|;
 comment|//Get the rule
-name|KReSGetRule
+name|GetRule
 name|getrule
 init|=
 operator|new
-name|KReSGetRule
+name|GetRule
 argument_list|(
 name|kresRuleStore
 argument_list|)
@@ -2848,11 +2848,11 @@ argument_list|()
 return|;
 block|}
 comment|//Remove the old recipe
-name|KReSRemoveRule
+name|RemoveRule
 name|remove
 init|=
 operator|new
-name|KReSRemoveRule
+name|RemoveRule
 argument_list|(
 name|kresRuleStore
 argument_list|)

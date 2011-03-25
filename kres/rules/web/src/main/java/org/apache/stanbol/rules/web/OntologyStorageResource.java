@@ -99,7 +99,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -173,7 +173,7 @@ name|OntologyStorage
 name|storage
 decl_stmt|;
 specifier|private
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 specifier|private
@@ -211,14 +211,14 @@ expr_stmt|;
 name|onManager
 operator|=
 call|(
-name|KReSONManager
+name|ONManager
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.

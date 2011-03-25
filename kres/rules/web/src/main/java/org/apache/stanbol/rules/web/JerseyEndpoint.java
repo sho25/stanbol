@@ -143,7 +143,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactorer
+name|Refactorer
 import|;
 end_import
 
@@ -357,7 +357,7 @@ name|httpService
 decl_stmt|;
 annotation|@
 name|Reference
-name|SemionRefactorer
+name|Refactorer
 name|semionRefactorer
 decl_stmt|;
 comment|//    @Reference
@@ -629,7 +629,7 @@ name|servletContext
 operator|.
 name|setAttribute
 argument_list|(
-name|SemionRefactorer
+name|Refactorer
 operator|.
 name|class
 operator|.

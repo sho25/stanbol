@@ -176,7 +176,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|Recipe
+name|RestRecipe
 operator|.
 name|class
 argument_list|)
@@ -185,7 +185,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|Rule
+name|RestRule
 operator|.
 name|class
 argument_list|)
@@ -194,7 +194,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|SemionRefactorerResource
+name|RefactorerResource
 operator|.
 name|class
 argument_list|)

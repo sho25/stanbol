@@ -191,7 +191,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -245,7 +245,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactorer
+name|Refactorer
 import|;
 end_import
 
@@ -263,7 +263,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactoringException
+name|RefactoringException
 import|;
 end_import
 
@@ -410,12 +410,12 @@ literal|";qs=2"
 argument_list|)
 specifier|public
 class|class
-name|SemionRefactorerResource
+name|RefactorerResource
 extends|extends
 name|NavigationMixin
 block|{
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 comment|// protected SemionManager semionManager;
@@ -424,11 +424,11 @@ name|TcManager
 name|tcManager
 decl_stmt|;
 specifier|protected
-name|SemionRefactorer
+name|Refactorer
 name|semionRefactorer
 decl_stmt|;
 specifier|public
-name|SemionRefactorerResource
+name|RefactorerResource
 parameter_list|(
 annotation|@
 name|Context
@@ -439,14 +439,14 @@ block|{
 name|semionRefactorer
 operator|=
 call|(
-name|SemionRefactorer
+name|Refactorer
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|SemionRefactorer
+name|Refactorer
 operator|.
 name|class
 operator|.
@@ -458,14 +458,14 @@ expr_stmt|;
 name|onManager
 operator|=
 call|(
-name|KReSONManager
+name|ONManager
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.
@@ -608,7 +608,7 @@ argument_list|(
 name|outputGraph
 argument_list|)
 decl_stmt|;
-comment|// SemionRefactorer semionRefactorer = semionManager.getRegisteredRefactorer();
+comment|// Refactorer semionRefactorer = semionManager.getRegisteredRefactorer();
 try|try
 block|{
 name|semionRefactorer
@@ -634,7 +634,7 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|SemionRefactoringException
+name|RefactoringException
 name|e
 parameter_list|)
 block|{
@@ -735,7 +735,7 @@ name|InputStream
 name|input
 parameter_list|)
 block|{
-comment|// SemionRefactorer semionRefactorer = semionManager.getRegisteredRefactorer();
+comment|// Refactorer semionRefactorer = semionManager.getRegisteredRefactorer();
 name|IRI
 name|recipeIRI
 init|=
@@ -787,7 +787,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|SemionRefactoringException
+name|RefactoringException
 name|e
 parameter_list|)
 block|{
@@ -928,7 +928,7 @@ argument_list|(
 name|outputGraph
 argument_list|)
 decl_stmt|;
-comment|// SemionRefactorer semionRefactorer = semionManager.getRegisteredRefactorer();
+comment|// Refactorer semionRefactorer = semionManager.getRegisteredRefactorer();
 try|try
 block|{
 name|semionRefactorer
@@ -954,7 +954,7 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|SemionRefactoringException
+name|RefactoringException
 name|e
 parameter_list|)
 block|{
@@ -1081,7 +1081,7 @@ argument_list|(
 name|recipe
 argument_list|)
 decl_stmt|;
-comment|// SemionRefactorer semionRefactorer = semionManager.getRegisteredRefactorer();
+comment|// Refactorer semionRefactorer = semionManager.getRegisteredRefactorer();
 name|OWLOntologyManager
 name|manager
 init|=
@@ -1123,7 +1123,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|SemionRefactoringException
+name|RefactoringException
 name|e
 parameter_list|)
 block|{

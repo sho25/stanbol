@@ -105,7 +105,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -124,10 +124,10 @@ class|class
 name|RuleStoreResource
 block|{
 specifier|private
-name|KReSRuleStore
+name|RuleStoreImpl
 name|kresRuleStore
 decl_stmt|;
-comment|/**      * To get the KReSRuleStore where are stored the rules and the recipes      *      * @param servletContext {To get the context where the REST service is running.}      */
+comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *      * @param servletContext {To get the context where the REST service is running.}      */
 specifier|public
 name|RuleStoreResource
 parameter_list|(
@@ -142,13 +142,13 @@ operator|.
 name|kresRuleStore
 operator|=
 operator|(
-name|KReSRuleStore
+name|RuleStoreImpl
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSRuleStore
+name|RuleStoreImpl
 operator|.
 name|class
 operator|.
@@ -172,7 +172,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * To get the KReSRuleStore in the serveletContext.      * @return {An object of type KReSRuleStore.}      */
+comment|/**      * To get the RuleStoreImpl in the serveletContext.      * @return {An object of type RuleStoreImpl.}      */
 annotation|@
 name|GET
 comment|//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
