@@ -64,13 +64,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * A SemionReengineer provides methods for transforming in KReS both the schema and the data of a non-RDF data source into RDF.  *<br>  *<br>  * Accepted data sources are:  *<ul>  *<li> 0 - Relational Databases  *<li> 1 - XML  *<li> 2 - iCalendar  *<li> 3 - RSS  *</ul>  *   * @author andrea.nuzzolese  *  */
+comment|/**  *   * A Reengineer provides methods for transforming in KReS both the schema and the data of a non-RDF data source into RDF.  *<br>  *<br>  * Accepted data sources are:  *<ul>  *<li> 0 - Relational Databases  *<li> 1 - XML  *<li> 2 - iCalendar  *<li> 3 - RSS  *</ul>  *   * @author andrea.nuzzolese  *  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SemionReengineer
+name|Reengineer
 block|{
 comment|/** 	 * The method returns one of the following values related to a particular data souce: 	 *<li> 0 - Relational Databases 	 *<li> 1 - XML 	 *<li> 2 - iCalendar 	 *<li> 3 - RSS 	 *</ul> 	 *  	 * @return {@code int} 	 */
 specifier|public

@@ -32,7 +32,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|Semion_OWL
+name|Reengineer_OWL
 block|{
 specifier|public
 specifier|static

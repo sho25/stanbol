@@ -75,7 +75,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -93,7 +93,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -151,7 +151,7 @@ name|base
 operator|.
 name|impl
 operator|.
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 import|;
 end_import
 
@@ -206,11 +206,11 @@ end_import
 begin_class
 specifier|public
 class|class
-name|SemionManagerTest
+name|ReengineerManagerTest
 block|{
 specifier|public
 specifier|static
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 decl_stmt|;
 annotation|@
@@ -224,7 +224,7 @@ block|{
 name|semionReengineer
 operator|=
 operator|new
-name|SemionReengineer
+name|Reengineer
 argument_list|()
 block|{
 annotation|@
@@ -395,11 +395,11 @@ name|void
 name|bindTest
 parameter_list|()
 block|{
-name|SemionManager
+name|ReengineerManager
 name|semionManager
 init|=
 operator|new
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 argument_list|()
 decl_stmt|;
 if|if
@@ -427,11 +427,11 @@ name|void
 name|unbindByReengineerTypeTest
 parameter_list|()
 block|{
-name|SemionManager
+name|ReengineerManager
 name|semionManager
 init|=
 operator|new
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 argument_list|()
 decl_stmt|;
 name|semionManager
@@ -468,11 +468,11 @@ name|void
 name|unbindByReengineerInstanceTest
 parameter_list|()
 block|{
-name|SemionManager
+name|ReengineerManager
 name|semionManager
 init|=
 operator|new
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 argument_list|()
 decl_stmt|;
 name|semionManager

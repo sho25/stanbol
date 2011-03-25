@@ -72,33 +72,33 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * The {@code SemionManager} is responsible of the coordination of all the tasks performed by Semion in KReS  *   * @author andrea.nuzzolese  *  */
+comment|/**  *   * The {@code ReengineerManager} is responsible of the coordination of all the tasks performed by Semion in KReS  *   * @author andrea.nuzzolese  *  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SemionManager
+name|ReengineerManager
 block|{
-comment|/** 	 * The {@link SemionManager} can add a new reengineer to the list of available reengineers. This is performed through the method 	 * {@cod bindReengineer}. 	 *  	 * @param semionReengineer {@link SemionReengineer} 	 * @return true if the reengineer is bound, false otherwise 	 */
+comment|/** 	 * The {@link ReengineerManager} can add a new reengineer to the list of available reengineers. This is performed through the method 	 * {@cod bindReengineer}. 	 *  	 * @param semionReengineer {@link Reengineer} 	 * @return true if the reengineer is bound, false otherwise 	 */
 specifier|public
 name|boolean
 name|bindReengineer
 parameter_list|(
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 parameter_list|)
 function_decl|;
-comment|/** 	 * The {@link SemionManager} can remove a reengineer from the list of available reengineers. This is performed through the method 	 * {@cod unbindReengineer}. 	 *  	 * @param semionReengineer {@link SemionReengineer} 	 * @return true if the reengineer is unbound, false otherwise 	 */
+comment|/** 	 * The {@link ReengineerManager} can remove a reengineer from the list of available reengineers. This is performed through the method 	 * {@cod unbindReengineer}. 	 *  	 * @param semionReengineer {@link Reengineer} 	 * @return true if the reengineer is unbound, false otherwise 	 */
 specifier|public
 name|boolean
 name|unbindReengineer
 parameter_list|(
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 parameter_list|)
 function_decl|;
-comment|/** 	 * The {@link SemionManager} can remove a reengineer from the list of available reengineers. This is performed through the method 	 * {@cod unbindReengineer}. 	 *  	 * @param reenginnerType {@code int} 	 * @return true if the reengineer is unbound, false otherwise 	 */
+comment|/** 	 * The {@link ReengineerManager} can remove a reengineer from the list of available reengineers. This is performed through the method 	 * {@cod unbindReengineer}. 	 *  	 * @param reenginnerType {@code int} 	 * @return true if the reengineer is unbound, false otherwise 	 */
 specifier|public
 name|boolean
 name|unbindReengineer
@@ -108,7 +108,7 @@ name|reenginnerType
 parameter_list|)
 function_decl|;
 comment|//	/**
-comment|//	 * The {@link SemionManager} can register a single instance of {@link SemionRefactorer}.
+comment|//	 * The {@link ReengineerManager} can register a single instance of {@link SemionRefactorer}.
 comment|//	 *
 comment|//	 * @param semionRefactorer {@link SemionRefactorer}
 comment|//	 */
@@ -125,11 +125,11 @@ comment|//	 *
 comment|//	 * @return the active {@link SemionRefactorer}
 comment|//	 */
 comment|//	public SemionRefactorer getRegisteredRefactorer();
-comment|/** 	 * Gets the active reengineers of KReS. 	 *  	 * @return the {@link Collection< SemionReengineer>} of active reengineers.  	 */
+comment|/** 	 * Gets the active reengineers of KReS. 	 *  	 * @return the {@link Collection< Reengineer>} of active reengineers. 	 */
 specifier|public
 name|Collection
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|listReengineers
 parameter_list|()

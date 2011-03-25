@@ -205,7 +205,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -279,7 +279,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -297,7 +297,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -364,7 +364,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete implementation of the  * {@link eu.iksproject.kres.api.semion.SemionManager} interface defined in the  * KReS APIs.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * Concrete implementation of the  * {@link org.apache.stanbol.reengineer.base.api.ReengineerManager} interface defined in the  * KReS APIs.  *   * @author andrea.nuzzolese  *  */
 end_comment
 
 begin_class
@@ -382,15 +382,15 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|SemionManager
+name|ReengineerManager
 operator|.
 name|class
 argument_list|)
 specifier|public
 class|class
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 implements|implements
-name|SemionManager
+name|ReengineerManager
 block|{
 specifier|private
 specifier|final
@@ -424,15 +424,15 @@ decl_stmt|;
 specifier|private
 name|ArrayList
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|reengineers
 decl_stmt|;
 comment|//
 comment|//	private SemionRefactorer semionRefactorer;
-comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the SemionManagerImpl instances 	 * do need to be configured! YOU NEED TO USE 	 * {@link #SemionManagerImpl(KReSONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
+comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the ReengineerManagerImpl instances 	 * do need to be configured! YOU NEED TO USE 	 * {@link #ReengineerManagerImpl(ONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
 specifier|public
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 parameter_list|()
 block|{
 name|reengineers
@@ -440,14 +440,14 @@ operator|=
 operator|new
 name|ArrayList
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
 comment|/** 	 * Basic constructor to be used if outside of an OSGi environment. Invokes 	 * default constructor. 	 *  	 * @param onm 	 */
 specifier|public
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 parameter_list|(
 name|TcManager
 name|tcm
@@ -506,7 +506,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 operator|.
 name|class
 operator|+
@@ -591,19 +591,19 @@ operator|=
 operator|new
 name|ArrayList
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 	 * @param semionReengineer 	 *            {@link eu.iksproject.kres.api.semion.SemionReengineer} 	 * @return true if the reengineer is bound, false otherwise 	 */
+comment|/** 	 * @param semionReengineer 	 *            {@link org.apache.stanbol.reengineer.base.api.Reengineer} 	 * @return true if the reengineer is bound, false otherwise 	 */
 annotation|@
 name|Override
 specifier|public
 name|boolean
 name|bindReengineer
 parameter_list|(
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 parameter_list|)
 block|{
@@ -614,7 +614,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|it
 init|=
@@ -634,7 +634,7 @@ operator|!
 name|found
 condition|)
 block|{
-name|SemionReengineer
+name|Reengineer
 name|reengineer
 init|=
 name|it
@@ -741,7 +741,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 operator|.
 name|class
 operator|+
@@ -764,7 +764,7 @@ name|Override
 specifier|public
 name|Collection
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|listReengineers
 parameter_list|()
@@ -836,7 +836,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|it
 init|=
@@ -856,7 +856,7 @@ operator|!
 name|reengineered
 condition|)
 block|{
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 init|=
 name|it
@@ -933,7 +933,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|it
 init|=
@@ -953,7 +953,7 @@ operator|!
 name|reengineered
 condition|)
 block|{
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 init|=
 name|it
@@ -1024,7 +1024,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|it
 init|=
@@ -1044,7 +1044,7 @@ operator|!
 name|reengineered
 condition|)
 block|{
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 init|=
 name|it
@@ -1146,7 +1146,7 @@ literal|false
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|SemionReengineer
+name|Reengineer
 argument_list|>
 name|it
 init|=
@@ -1166,7 +1166,7 @@ operator|!
 name|reengineered
 condition|)
 block|{
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 init|=
 name|it
@@ -1264,7 +1264,7 @@ name|i
 operator|++
 control|)
 block|{
-name|SemionReengineer
+name|Reengineer
 name|reengineer
 init|=
 name|reengineers
@@ -1307,7 +1307,7 @@ specifier|public
 name|boolean
 name|unbindReengineer
 parameter_list|(
-name|SemionReengineer
+name|Reengineer
 name|semionReengineer
 parameter_list|)
 block|{

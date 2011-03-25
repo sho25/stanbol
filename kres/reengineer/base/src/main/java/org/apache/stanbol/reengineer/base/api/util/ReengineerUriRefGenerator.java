@@ -146,7 +146,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 block|{
 comment|// // Unused protected method that relies on a specific reengineer implementation
 comment|// protected UriRef createTypedResource(MGraph mGraph, String resourceURI, UriRef type){
