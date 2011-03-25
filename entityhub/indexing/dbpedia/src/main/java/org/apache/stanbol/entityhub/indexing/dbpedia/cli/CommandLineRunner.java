@@ -1962,11 +1962,6 @@ name|lineNumber
 init|=
 literal|0
 decl_stmt|;
-name|int
-name|maxIncommung
-init|=
-literal|0
-decl_stmt|;
 name|float
 name|maxScore
 init|=
@@ -2038,7 +2033,7 @@ argument_list|)
 expr_stmt|;
 block|}
 name|int
-name|incomming
+name|incoming
 init|=
 name|Integer
 operator|.
@@ -2066,7 +2061,7 @@ name|Math
 operator|.
 name|log1p
 argument_list|(
-name|incomming
+name|incoming
 argument_list|)
 decl_stmt|;
 if|if
@@ -2080,10 +2075,6 @@ operator|>
 literal|0
 condition|)
 block|{
-name|maxIncommung
-operator|=
-name|incomming
-expr_stmt|;
 name|maxScore
 operator|=
 name|score
