@@ -323,7 +323,7 @@ begin_class
 specifier|public
 specifier|final
 class|class
-name|KReSRunRules
+name|RunRules
 block|{
 specifier|private
 name|OWLOntology
@@ -613,7 +613,7 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-name|KReSRunRules
+name|RunRules
 operator|.
 name|class
 operator|.
@@ -636,7 +636,7 @@ block|}
 block|}
 comment|/**      * Constructor where inputs are the OWLOntology models contains the rules and the target ontology where to perform the reasoning (HermiT).      *      * @param SWRLruleOntology {The OWLOntology contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      */
 specifier|public
-name|KReSRunRules
+name|RunRules
 parameter_list|(
 name|OWLOntology
 name|SWRLruleOntology
@@ -713,7 +713,7 @@ name|reasoner
 operator|=
 operator|(
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|originalowl
 argument_list|)
@@ -733,7 +733,7 @@ expr_stmt|;
 block|}
 comment|/**      * Constructor where the inputs are the OWLOntology models contains the rules, the target ontology where to perform the reasoning and the url of reasoner server end-point.      *      * @param SWRLruleOntology {The OWLOntology contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      * @param reasonerurl {The url of reasoner server end-point.}      */
 specifier|public
-name|KReSRunRules
+name|RunRules
 parameter_list|(
 name|OWLOntology
 name|SWRLruleOntology
@@ -813,7 +813,7 @@ name|reasoner
 operator|=
 operator|(
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|originalowl
 argument_list|,
@@ -835,7 +835,7 @@ expr_stmt|;
 block|}
 comment|/**      * Construct where the inputs are the: Model of type jena.rdf.model.Model that contains the SWRL rules and a target OWLOntology where to perform the reasoning.      *      * @param SWRLruleOntology {The Jena Model contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      */
 specifier|public
-name|KReSRunRules
+name|RunRules
 parameter_list|(
 name|Model
 name|SWRLruleOntology
@@ -946,7 +946,7 @@ name|reasoner
 operator|=
 operator|(
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|originalowl
 argument_list|)
@@ -966,7 +966,7 @@ expr_stmt|;
 block|}
 comment|/**      * Construct where the inputs are the: Model of type jena.rdf.model.Model that contains the SWRL rules and a target OWLOntology where to perform the reasoning.      *      * @param SWRLruleOntology {The Jena Model contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      * @param reasonerurl {The url of the the reasoner server end-point.}      */
 specifier|public
-name|KReSRunRules
+name|RunRules
 parameter_list|(
 name|Model
 name|SWRLruleOntology
@@ -1080,7 +1080,7 @@ name|reasoner
 operator|=
 operator|(
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|originalowl
 argument_list|,

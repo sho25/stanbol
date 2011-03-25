@@ -103,7 +103,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSReasoner
+name|Reasoner
 import|;
 end_import
 
@@ -121,7 +121,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSCreateReasoner
+name|CreateReasoner
 import|;
 end_import
 
@@ -139,7 +139,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunReasoner
+name|RunReasoner
 import|;
 end_import
 
@@ -157,7 +157,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunRules
+name|RunRules
 import|;
 end_import
 
@@ -238,15 +238,15 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|KReSReasoner
+name|Reasoner
 operator|.
 name|class
 argument_list|)
 specifier|public
 class|class
-name|KReSReasonerImpl
+name|ReasonerImpl
 implements|implements
-name|KReSReasoner
+name|Reasoner
 block|{
 specifier|private
 specifier|final
@@ -261,14 +261,14 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the KReSRuleStore instances do 	 * need to be configured! YOU NEED TO USE 	 * {@link #KReSReasonerImpl(Dictionary)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
+comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the KReSRuleStore instances do 	 * need to be configured! YOU NEED TO USE 	 * {@link #ReasonerImpl(Dictionary)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
 specifier|public
-name|KReSReasonerImpl
+name|ReasonerImpl
 parameter_list|()
 block|{ 	}
 comment|/** 	 * Basic constructor to be used if outside of an OSGi environment. Invokes 	 * default constructor. 	 *  	 */
 specifier|public
-name|KReSReasonerImpl
+name|ReasonerImpl
 parameter_list|(
 name|Dictionary
 argument_list|<
@@ -308,7 +308,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|KReSReasonerImpl
+name|ReasonerImpl
 operator|.
 name|class
 operator|+
@@ -368,7 +368,7 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{  	}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.reasoners.KReSReasoner#consistencyCheck(org.semanticweb.owlapi.reasoner.OWLReasoner) 	 */
+comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.reasoners.Reasoner#consistencyCheck(org.semanticweb.owlapi.reasoner.OWLReasoner) 	 */
 specifier|public
 name|boolean
 name|consistencyCheck
@@ -377,11 +377,11 @@ name|OWLReasoner
 name|owlReasoner
 parameter_list|)
 block|{
-name|KReSRunReasoner
+name|RunReasoner
 name|kReSRunReasoner
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|owlReasoner
 argument_list|)
@@ -409,7 +409,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|KReSReasonerImpl
+name|ReasonerImpl
 operator|.
 name|class
 operator|+
@@ -419,7 +419,7 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.reasoners.KReSReasoner#getReasoner(org.semanticweb.owlapi.model.OWLOntology) 	 */
+comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.reasoners.Reasoner#getReasoner(org.semanticweb.owlapi.model.OWLOntology) 	 */
 specifier|public
 name|OWLReasoner
 name|getReasoner
@@ -428,11 +428,11 @@ name|OWLOntology
 name|ontology
 parameter_list|)
 block|{
-name|KReSCreateReasoner
+name|CreateReasoner
 name|kReSCreateReasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|ontology
 argument_list|)
@@ -444,7 +444,7 @@ name|getReasoner
 argument_list|()
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.reasoners.KReSReasoner#runRules(org.semanticweb.owlapi.model.OWLOntology, org.semanticweb.owlapi.model.OWLOntology) 	 */
+comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.reasoners.Reasoner#runRules(org.semanticweb.owlapi.model.OWLOntology, org.semanticweb.owlapi.model.OWLOntology) 	 */
 annotation|@
 name|Override
 specifier|public
@@ -458,11 +458,11 @@ name|OWLOntology
 name|ruleOntology
 parameter_list|)
 block|{
-name|KReSRunRules
+name|RunRules
 name|kReSRunRules
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|ruleOntology
 argument_list|,

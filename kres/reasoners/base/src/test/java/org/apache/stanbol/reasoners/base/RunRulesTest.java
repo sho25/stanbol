@@ -73,7 +73,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSCreateReasoner
+name|CreateReasoner
 import|;
 end_import
 
@@ -91,7 +91,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunReasoner
+name|RunReasoner
 import|;
 end_import
 
@@ -109,7 +109,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunRules
+name|RunRules
 import|;
 end_import
 
@@ -274,7 +274,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRunRulesTest
+name|RunRulesTest
 block|{
 specifier|public
 name|OWLOntologyManager
@@ -297,7 +297,7 @@ name|OntModel
 name|jenaswrl
 decl_stmt|;
 specifier|public
-name|KReSRunRulesTest
+name|RunRulesTest
 parameter_list|()
 throws|throws
 name|OWLOntologyCreationException
@@ -413,7 +413,7 @@ name|void
 name|tearDown
 parameter_list|()
 block|{     }
-comment|/**      * Test of runRulesReasoner method, of class KReSRunRules.      */
+comment|/**      * Test of runRulesReasoner method, of class RunRules.      */
 annotation|@
 name|Test
 specifier|public
@@ -439,11 +439,11 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|KReSRunRules
+name|RunRules
 name|instance
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|owlswrl
 argument_list|,
@@ -459,20 +459,20 @@ argument_list|(
 name|newmodel
 argument_list|)
 expr_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|newmodel
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
@@ -636,7 +636,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runRulesReasoner method, of class KReSRunRules.      */
+comment|/**      * Test of runRulesReasoner method, of class RunRules.      */
 annotation|@
 name|Test
 specifier|public
@@ -644,11 +644,11 @@ name|void
 name|testRunRulesReasoner_0args_1
 parameter_list|()
 block|{
-name|KReSRunRules
+name|RunRules
 name|instance
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|owlswrl
 argument_list|,
@@ -663,20 +663,20 @@ operator|.
 name|runRulesReasoner
 argument_list|()
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|newmodel
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
@@ -776,7 +776,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runRulesReasoner method, of class KReSRunRules.      */
+comment|/**      * Test of runRulesReasoner method, of class RunRules.      */
 annotation|@
 name|Test
 specifier|public
@@ -802,11 +802,11 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|KReSRunRules
+name|RunRules
 name|instance
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|jenaswrl
 operator|.
@@ -825,20 +825,20 @@ argument_list|(
 name|newmodel
 argument_list|)
 expr_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|newmodel
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
@@ -1002,7 +1002,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runRulesReasoner method, of class KReSRunRules.      */
+comment|/**      * Test of runRulesReasoner method, of class RunRules.      */
 annotation|@
 name|Test
 specifier|public
@@ -1010,11 +1010,11 @@ name|void
 name|testRunRulesReasoner_0args_2
 parameter_list|()
 block|{
-name|KReSRunRules
+name|RunRules
 name|instance
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|jenaswrl
 argument_list|,
@@ -1029,20 +1029,20 @@ operator|.
 name|runRulesReasoner
 argument_list|()
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|newmodel
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.

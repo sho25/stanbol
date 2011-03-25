@@ -244,7 +244,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRunReasoner
+name|RunReasoner
 block|{
 specifier|private
 name|OWLOntology
@@ -260,7 +260,7 @@ name|owlmanager
 decl_stmt|;
 comment|/**      * This create an object where to perform reasoner tasks as consistency check, classification and general inference.      *      * @param reasoner {The OWLReasoner object containing the ontology to be inferred.}      */
 specifier|public
-name|KReSRunReasoner
+name|RunReasoner
 parameter_list|(
 name|OWLReasoner
 name|reasoner

@@ -50,7 +50,7 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|KReSReasoner
+name|Reasoner
 block|{
 comment|/** 	 * Gets the reasoner. 	 *  	 * @param ontology {@link OWLOntology} 	 * @return the reasoner {@link OWLReasoner}. 	 */
 specifier|public

@@ -134,7 +134,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSCreateReasoner
+name|CreateReasoner
 block|{
 specifier|private
 name|OWLReasoner
@@ -142,7 +142,7 @@ name|reasoner
 decl_stmt|;
 comment|/**      * To create an HermiT OWLReasoner object with the input ontology.      *      * @param owl {An OWLOntology object where to perform the inferences.}      */
 specifier|public
-name|KReSCreateReasoner
+name|CreateReasoner
 parameter_list|(
 name|OWLOntology
 name|owl
@@ -179,7 +179,7 @@ expr_stmt|;
 block|}
 comment|/**      * To create an HermiT OWLReasoner object with the input ontology.      *      * @param owl {An OWLOntology object where to perform the inferences.}      * @param owlrc {An OWLReasonerConfiguration object contains particular configuration to set the resaoner.}      */
 specifier|public
-name|KReSCreateReasoner
+name|CreateReasoner
 parameter_list|(
 name|OWLOntology
 name|owl
@@ -211,7 +211,7 @@ expr_stmt|;
 block|}
 comment|/**      * To create an OWLReasoner object by using online reasoner with the input ontology.      *      * @param owl {An OWLOntology object where to perform the inferences.}      * @param reasonerurl {The url of the reasoner server end-point.}      */
 specifier|public
-name|KReSCreateReasoner
+name|CreateReasoner
 parameter_list|(
 name|OWLOntology
 name|owl

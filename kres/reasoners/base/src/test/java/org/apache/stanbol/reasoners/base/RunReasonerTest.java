@@ -73,7 +73,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSCreateReasoner
+name|CreateReasoner
 import|;
 end_import
 
@@ -91,7 +91,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunReasoner
+name|RunReasoner
 import|;
 end_import
 
@@ -264,7 +264,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|KReSRunReasonerTest
+name|RunReasonerTest
 block|{
 specifier|public
 name|OWLOntologyManager
@@ -275,7 +275,7 @@ name|OWLOntology
 name|owl
 decl_stmt|;
 specifier|public
-name|KReSRunReasonerTest
+name|RunReasonerTest
 parameter_list|()
 throws|throws
 name|OWLOntologyCreationException
@@ -339,7 +339,7 @@ name|void
 name|tearDown
 parameter_list|()
 block|{     }
-comment|/**      * Test of runClassifyInference method, of class KReSRunReasoner.      */
+comment|/**      * Test of runClassifyInference method, of class RunReasoner.      */
 annotation|@
 name|Test
 specifier|public
@@ -365,20 +365,20 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|instance
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasoner
 operator|.
@@ -395,20 +395,20 @@ argument_list|(
 name|inf
 argument_list|)
 expr_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|inf
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
@@ -463,7 +463,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runClassifyInference method, of class KReSRunReasoner.      */
+comment|/**      * Test of runClassifyInference method, of class RunReasoner.      */
 annotation|@
 name|Test
 specifier|public
@@ -481,20 +481,20 @@ operator|.
 name|getAxiomCount
 argument_list|()
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|instance
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasoner
 operator|.
@@ -511,20 +511,20 @@ argument_list|(
 name|owl
 argument_list|)
 expr_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
@@ -583,7 +583,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of isConsistence method, of class KReSRunReasoner.      */
+comment|/**      * Test of isConsistence method, of class RunReasoner.      */
 annotation|@
 name|Test
 specifier|public
@@ -610,20 +610,20 @@ operator|.
 name|prepareReasoner
 argument_list|()
 expr_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|instance
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasoner
 operator|.
@@ -670,7 +670,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runGeneralInference method, of class KReSRunReasoner.      */
+comment|/**      * Test of runGeneralInference method, of class RunReasoner.      */
 annotation|@
 name|Test
 specifier|public
@@ -678,20 +678,20 @@ name|void
 name|testRunGeneralInference_0args
 parameter_list|()
 block|{
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|instance
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasoner
 operator|.
@@ -707,20 +707,20 @@ operator|.
 name|runGeneralInference
 argument_list|()
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|result
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
@@ -869,7 +869,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runGeneralInference method, of class KReSRunReasoner.      */
+comment|/**      * Test of runGeneralInference method, of class RunReasoner.      */
 annotation|@
 name|Test
 specifier|public
@@ -895,20 +895,20 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|instance
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasoner
 operator|.
@@ -926,20 +926,20 @@ argument_list|(
 name|newmodel
 argument_list|)
 decl_stmt|;
-name|KReSCreateReasoner
+name|CreateReasoner
 name|reasonerforcheck
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|result
 argument_list|)
 decl_stmt|;
-name|KReSRunReasoner
+name|RunReasoner
 name|run
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|reasonerforcheck
 operator|.
