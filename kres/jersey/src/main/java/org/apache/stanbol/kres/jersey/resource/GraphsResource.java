@@ -269,9 +269,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|NoSuchStoreException
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -291,7 +291,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OntologyStorage
+name|NoSuchStoreException
 import|;
 end_import
 
@@ -519,7 +519,7 @@ name|ONManager
 name|onManager
 decl_stmt|;
 specifier|protected
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|private
@@ -547,14 +547,14 @@ block|{
 name|storage
 operator|=
 call|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|.
 name|class
 operator|.

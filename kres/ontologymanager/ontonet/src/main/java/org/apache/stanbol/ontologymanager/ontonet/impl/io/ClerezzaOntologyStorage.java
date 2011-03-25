@@ -13,7 +13,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 package|;
 end_package
 
@@ -371,6 +371,26 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|ontology
+operator|.
+name|NoSuchStoreException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|owlapi
 operator|.
 name|trasformation
@@ -398,7 +418,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 block|{
 specifier|private
 specifier|static
@@ -409,7 +429,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|.
 name|class
 argument_list|)
@@ -429,13 +449,13 @@ name|WeightedTcProvider
 name|weightedTcProvider
 decl_stmt|;
 comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the ClerezzaStorage instances 	 * do need to be configured! YOU NEED TO USE 	 * {@link #ClerezzaStorage(TcManager, WeightedTcProvider, OntologyStoreProvider)} 	 * or its overloads, to parse the configuration and then initialise the rule 	 * store if running outside a OSGI environment. 	 */
-specifier|private
-name|OntologyStorage
+specifier|protected
+name|ClerezzaOntologyStorage
 parameter_list|()
 block|{  	}
 comment|/** 	 * Basic constructor to be used if outside of an OSGi environment. Invokes 	 * default constructor. 	 *  	 * @param tcManager 	 * @param wtcProvider 	 * @param osProvider 	 */
 specifier|public
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 parameter_list|(
 name|TcManager
 name|tcManager
@@ -491,7 +511,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|.
 name|class
 operator|+
@@ -572,7 +592,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|.
 name|class
 operator|+

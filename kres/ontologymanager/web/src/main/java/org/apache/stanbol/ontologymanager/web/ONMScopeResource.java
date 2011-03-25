@@ -529,7 +529,7 @@ name|impl
 operator|.
 name|io
 operator|.
-name|OntologyRegistryIRISource
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -547,9 +547,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|OntologyRegistryIRISource
 import|;
 end_import
 
@@ -681,7 +681,7 @@ name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|protected
@@ -727,13 +727,13 @@ operator|.
 name|storage
 operator|=
 operator|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|.
 name|class
 operator|.
@@ -807,7 +807,7 @@ expr_stmt|;
 name|storage
 operator|=
 operator|new
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 argument_list|(
 operator|new
 name|TcManager

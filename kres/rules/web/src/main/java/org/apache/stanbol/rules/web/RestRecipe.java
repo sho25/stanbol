@@ -343,9 +343,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -674,7 +674,7 @@ name|RuleStore
 name|kresRuleStore
 decl_stmt|;
 specifier|private
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
@@ -791,7 +791,7 @@ expr_stmt|;
 name|storage
 operator|=
 operator|new
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 argument_list|(
 operator|new
 name|TcManager

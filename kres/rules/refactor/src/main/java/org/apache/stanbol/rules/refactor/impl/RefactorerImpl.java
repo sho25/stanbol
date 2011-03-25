@@ -461,9 +461,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -1851,7 +1851,7 @@ name|refactoredOntology
 init|=
 literal|null
 decl_stmt|;
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|ontologyStorage
 init|=
 name|onManager
@@ -2593,7 +2593,7 @@ name|refactoredOntology
 init|=
 literal|null
 decl_stmt|;
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|ontologyStorage
 init|=
 name|onManager

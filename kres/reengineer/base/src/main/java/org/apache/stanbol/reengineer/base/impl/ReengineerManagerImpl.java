@@ -223,9 +223,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -418,7 +418,7 @@ name|WeightedTcProvider
 name|wtcp
 decl_stmt|;
 specifier|private
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|private
@@ -462,7 +462,7 @@ expr_stmt|;
 name|storage
 operator|=
 operator|new
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 argument_list|(
 name|tcm
 argument_list|,
@@ -575,7 +575,7 @@ condition|)
 name|storage
 operator|=
 operator|new
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 argument_list|(
 name|this
 operator|.

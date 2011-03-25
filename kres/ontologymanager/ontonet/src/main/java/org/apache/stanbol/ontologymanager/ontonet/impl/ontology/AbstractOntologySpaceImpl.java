@@ -261,6 +261,26 @@ name|ontonet
 operator|.
 name|impl
 operator|.
+name|io
+operator|.
+name|ClerezzaOntologyStorage
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
 name|util
 operator|.
 name|OntologyUtils
@@ -560,7 +580,7 @@ name|OWLOntologyManager
 name|ontologyManager
 decl_stmt|;
 specifier|protected
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|protected
@@ -592,7 +612,7 @@ name|SpaceType
 name|type
 comment|/*, IRI parentID*/
 parameter_list|,
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 parameter_list|)
 block|{
@@ -632,7 +652,7 @@ parameter_list|,
 name|SpaceType
 name|type
 parameter_list|,
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 parameter_list|,
 comment|/*IRI parentID,*/

@@ -335,9 +335,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -437,7 +437,7 @@ name|ScopeRegistry
 name|scopeRegistry
 decl_stmt|;
 specifier|protected
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|store
 decl_stmt|;
 specifier|public
@@ -449,7 +449,7 @@ parameter_list|,
 name|ScopeRegistry
 name|scopeRegistry
 parameter_list|,
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|store
 parameter_list|)
 block|{

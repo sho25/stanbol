@@ -117,9 +117,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -169,7 +169,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|private
@@ -192,14 +192,14 @@ block|{
 name|storage
 operator|=
 call|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 operator|.
 name|class
 operator|.

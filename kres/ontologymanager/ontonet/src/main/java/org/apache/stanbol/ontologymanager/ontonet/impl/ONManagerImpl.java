@@ -517,6 +517,46 @@ name|ontonet
 operator|.
 name|impl
 operator|.
+name|io
+operator|.
+name|ClerezzaOntologyStorage
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|io
+operator|.
+name|InMemoryOntologyStorage
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
 name|ontology
 operator|.
 name|OntologyIndexImpl
@@ -560,26 +600,6 @@ operator|.
 name|ontology
 operator|.
 name|OntologySpaceFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|ontology
-operator|.
-name|OntologyStorage
 import|;
 end_import
 
@@ -1019,7 +1039,7 @@ name|WeightedTcProvider
 name|wtcp
 decl_stmt|;
 specifier|private
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 comment|/*      * The identifiers (not yet parsed as IRIs) of the ontology scopes that should be activated.      */
@@ -1033,6 +1053,7 @@ name|String
 index|[]
 block|{}
 decl_stmt|;
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ReengineerManagerImpl instances do need to be configured!      * YOU NEED TO USE {@link #ONManagerImpl(TcManager, WeightedTcProvider, Dictionary)} or its overloads, to      * parse the configuration and then initialise the rule store if running outside an OSGI environment.      */
 specifier|public
 name|ONManagerImpl
 parameter_list|()
@@ -1069,6 +1090,52 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
+comment|// Defer the call to the bindResources() method to the activator.
+block|}
+specifier|protected
+name|void
+name|bindResources
+parameter_list|(
+name|TcManager
+name|tcm
+parameter_list|,
+name|WeightedTcProvider
+name|wtcp
+parameter_list|)
+block|{
+comment|// At this stage we know if tcm and wtcp have been provided or not.
+comment|/*          * With the current implementation of OntologyStorage, we cannot live with either component being          * null. So create the object only if both are not null.          */
+if|if
+condition|(
+name|tcm
+operator|!=
+literal|null
+operator|&&
+name|wtcp
+operator|!=
+literal|null
+condition|)
+name|storage
+operator|=
+operator|new
+name|ClerezzaOntologyStorage
+argument_list|(
+name|tcm
+argument_list|,
+name|wtcp
+argument_list|)
+expr_stmt|;
+comment|// Manage this in-memory, so it won't have to be null.
+else|else
+block|{
+name|storage
+operator|=
+operator|new
+name|InMemoryOntologyStorage
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Now create everything that depends on the Storage object.
 comment|// These may require the OWL cache manager
 name|ontologySpaceFactory
 operator|=
@@ -1139,7 +1206,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Instantiates all the default providers.      *       * TODO : Felix component constraints prevent this constructor from being private, find a way around...      */
+comment|/**      * To be invoked by non-OSGi environments.      *       * @param tcm      * @param wtcp      * @param configuration      */
 specifier|public
 name|ONManagerImpl
 parameter_list|(
@@ -1161,15 +1228,18 @@ block|{
 name|this
 argument_list|()
 expr_stmt|;
-name|storage
-operator|=
-operator|new
-name|OntologyStorage
-argument_list|(
+comment|// Assume this.tcm and this.wtcp were not filled in by OSGi-DS.
+name|this
+operator|.
 name|tcm
-argument_list|,
+operator|=
+name|tcm
+expr_stmt|;
+name|this
+operator|.
 name|wtcp
-argument_list|)
+operator|=
+name|wtcp
 expr_stmt|;
 try|try
 block|{
@@ -1267,6 +1337,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Called within both OSGi and non-OSGi environments.      *       * @param configuration      * @throws IOException      */
 specifier|protected
 name|void
 name|activate
@@ -1282,20 +1353,8 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-comment|// log.debug("KReS :: activating main component...");
-comment|//
-comment|// me = this;
-comment|// this.ce = ce;
-if|if
-condition|(
-name|storage
-operator|==
-literal|null
-condition|)
-name|storage
-operator|=
-operator|new
-name|OntologyStorage
+comment|//        if (storage == null) storage = new OntologyStorage(this.tcm, this.wtcp);
+name|bindResources
 argument_list|(
 name|this
 operator|.
@@ -2079,7 +2138,7 @@ name|ontologySpaceFactory
 return|;
 block|}
 specifier|public
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|getOntologyStore
 parameter_list|()
 block|{

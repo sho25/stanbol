@@ -149,9 +149,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|io
 operator|.
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -226,7 +226,7 @@ parameter_list|()
 function_decl|;
 comment|/** 	 * Returns the default ontology storage system for this KReS instance. 	 *  	 * @return the default ontology store. 	 */
 specifier|public
-name|OntologyStorage
+name|ClerezzaOntologyStorage
 name|getOntologyStore
 parameter_list|()
 function_decl|;
