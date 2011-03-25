@@ -36,7 +36,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|SemionRefactoringException
+name|RefactoringException
 extends|extends
 name|Exception
 block|{
@@ -53,9 +53,9 @@ specifier|protected
 name|IRI
 name|recipeIRI
 decl_stmt|;
-comment|/** 	 * Creates a new instance of SemionRefactoringException. 	 */
+comment|/** 	 * Creates a new instance of RefactoringException. 	 */
 specifier|public
-name|SemionRefactoringException
+name|RefactoringException
 parameter_list|()
 block|{ 		 	}
 block|}

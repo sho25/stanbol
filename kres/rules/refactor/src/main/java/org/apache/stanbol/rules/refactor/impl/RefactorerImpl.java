@@ -303,7 +303,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -423,7 +423,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -499,7 +499,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSReasoner
+name|Reasoner
 import|;
 end_import
 
@@ -517,7 +517,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -591,7 +591,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -663,7 +663,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactorer
+name|Refactorer
 import|;
 end_import
 
@@ -681,7 +681,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactoringException
+name|RefactoringException
 import|;
 end_import
 
@@ -1066,7 +1066,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The SemionRefactorerImpl is the concrete implementation of the SemionRefactorer interface defined in the  * KReS APIs. A SemionRefacter is able to perform ontology refactorings and mappings.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * The RefactorerImpl is the concrete implementation of the Refactorer interface defined in the  * KReS APIs. A SemionRefacter is able to perform ontology refactorings and mappings.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -1084,15 +1084,15 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|SemionRefactorer
+name|Refactorer
 operator|.
 name|class
 argument_list|)
 specifier|public
 class|class
-name|SemionRefactorerImpl
+name|RefactorerImpl
 implements|implements
-name|SemionRefactorer
+name|Refactorer
 block|{
 specifier|public
 specifier|static
@@ -1147,7 +1147,7 @@ specifier|final
 name|String
 name|AUTO_GENERATED_ONTOLOGY_IRI
 init|=
-literal|"eu.iksproject.kres.semion.default"
+literal|"org.apache.stanbol.reengineer.default"
 decl_stmt|;
 annotation|@
 name|Property
@@ -1175,7 +1175,7 @@ specifier|final
 name|String
 name|REFACTORING_SCOPE
 init|=
-literal|"eu.iksproject.kres.scope.refactoring"
+literal|"org.apache.stanbol.ontologymanager.scope.refactoring"
 decl_stmt|;
 annotation|@
 name|Property
@@ -1190,7 +1190,7 @@ specifier|final
 name|String
 name|REFACTORING_SESSION_ID
 init|=
-literal|"eu.iksproject.kres.session.refactoring"
+literal|"org.apache.stanbol.ontlogymanager.session.refactoring"
 decl_stmt|;
 annotation|@
 name|Property
@@ -1205,7 +1205,7 @@ specifier|final
 name|String
 name|REFACTORING_SPACE
 init|=
-literal|"eu.iksproject.kres.space.refactoring"
+literal|"org.apache.stanbol.reengineer.space.refactoring"
 decl_stmt|;
 specifier|private
 name|IRI
@@ -1242,12 +1242,12 @@ name|scope
 decl_stmt|;
 annotation|@
 name|Reference
-name|KReSReasoner
+name|Reasoner
 name|kReSReasoner
 decl_stmt|;
 annotation|@
 name|Reference
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 annotation|@
@@ -1275,14 +1275,14 @@ specifier|protected
 name|WeightedTcProvider
 name|weightedTcProvider
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the SemionRefactorerImpl instances do need to be configured!      * YOU NEED TO USE      * {@link #SemionRefactorerImpl(WeightedTcProvider, Serializer, TcManager, KReSONManager, SemionManager, RuleStore, KReSReasoner, Dictionary)}      * or its overloads, to parse the configuration and then initialise the rule store if running outside a      * OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RefactorerImpl instances do need to be configured!      * YOU NEED TO USE      * {@link #RefactorerImpl(WeightedTcProvider, Serializer, TcManager, ONManager, SemionManager, RuleStore, Reasoner, Dictionary)}      * or its overloads, to parse the configuration and then initialise the rule store if running outside a      * OSGI environment.      */
 specifier|public
-name|SemionRefactorerImpl
+name|RefactorerImpl
 parameter_list|()
 block|{      }
 comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      *       * @param weightedTcProvider      * @param serializer      * @param tcManager      * @param onManager      * @param semionManager      * @param ruleStore      * @param kReSReasoner      * @param configuration      */
 specifier|public
-name|SemionRefactorerImpl
+name|RefactorerImpl
 parameter_list|(
 name|WeightedTcProvider
 name|weightedTcProvider
@@ -1293,14 +1293,14 @@ parameter_list|,
 name|TcManager
 name|tcManager
 parameter_list|,
-name|KReSONManager
+name|ONManager
 name|onManager
 parameter_list|,
 comment|/* SemionManager semionManager, */
 name|RuleStore
 name|ruleStore
 parameter_list|,
-name|KReSReasoner
+name|Reasoner
 name|kReSReasoner
 parameter_list|,
 name|Dictionary
@@ -1382,7 +1382,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|SemionRefactorerImpl
+name|RefactorerImpl
 operator|.
 name|class
 operator|+
@@ -1429,7 +1429,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * public void consistentOntologyRefactoring(IRI refactoredOntologyIRI, IRI datasetURI, IRI recipeIRI)      * throws SemionRefactoringException, NoSuchRecipeException, InconcistencyException {      *       *       *       * OWLOntology refactoredOntology = null;      *       * OntologyStorage ontologyStorage = onManager.getOntologyStore();      *       * OWLOntology owlOntology = ontologyStorage.load(datasetURI);      *       * JenaToOwlConvert jenaToOwlConvert = new JenaToOwlConvert();      *       * OntModel ontModel = jenaToOwlConvert.ModelOwlToJenaConvert(owlOntology, "RDF/XML");      *       * Recipe recipe; try { recipe = ruleStore.getRecipe(recipeIRI);      *       * KReSRuleList kReSRuleList = recipe.getkReSRuleList();      *       * OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();      *       * for(KReSRule kReSRule : kReSRuleList){ String sparql = kReSRule.toSPARQL();      *       * Query sparqlQuery = QueryFactory.create(sparql); QueryExecution qexec =      * QueryExecutionFactory.create(sparqlQuery, ontModel) ; Model refactoredModel = qexec.execConstruct();      *       *       * OWLOntology refactoredDataSet = jenaToOwlConvert.ModelJenaToOwlConvert(refactoredModel, "RDF/XML");      *       * ByteArrayOutputStream out = new ByteArrayOutputStream(); try {      * ontologyManager.saveOntology(refactoredDataSet, new RDFXMLOntologyFormat(), out); } catch      * (OWLOntologyStorageException e) { // TODO Auto-generated catch block e.printStackTrace(); }      *       * ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());      *       * try { ontologyManager.loadOntologyFromOntologyDocument(in); } catch (OWLOntologyCreationException e) {      * // TODO Auto-generated catch block e.printStackTrace(); }      *       * }      *       * OWLOntologyMerger merger = new OWLOntologyMerger(ontologyManager);      *       * try { refactoredOntology = merger.createMergedOntology(ontologyManager, refactoredOntologyIRI);      *       *       *       *       *       *       *       *       *       * if(!kReSReasoner.consistencyCheck(kReSReasoner.getReasoner(refactoredOntology ))){ throw      * newInconcistencyException( "Semion Refactorer : the refactored data set seems to be inconsistent"); }      * else{ ontologyStorage.store(refactoredOntology); } } catch (OWLOntologyCreationException e) { // TODO      * Auto-generated catch block e.printStackTrace(); }      *       *       *       * } catch (NoSuchRecipeException e1) {      * log.error("SemionRefactorer : No Such recipe in the KReS Rule Store", e1); throw e1; }      *       * if(refactoredOntology == null){ throw new SemionRefactoringException(); }      *       * }      */
+comment|/*      * public void consistentOntologyRefactoring(IRI refactoredOntologyIRI, IRI datasetURI, IRI recipeIRI)      * throws RefactoringException, NoSuchRecipeException, InconcistencyException {      *       *       *       * OWLOntology refactoredOntology = null;      *       * OntologyStorage ontologyStorage = onManager.getOntologyStore();      *       * OWLOntology owlOntology = ontologyStorage.load(datasetURI);      *       * JenaToOwlConvert jenaToOwlConvert = new JenaToOwlConvert();      *       * OntModel ontModel = jenaToOwlConvert.ModelOwlToJenaConvert(owlOntology, "RDF/XML");      *       * Recipe recipe; try { recipe = ruleStore.getRecipe(recipeIRI);      *       * RuleList kReSRuleList = recipe.getkReSRuleList();      *       * OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();      *       * for(Rule kReSRule : kReSRuleList){ String sparql = kReSRule.toSPARQL();      *       * Query sparqlQuery = QueryFactory.create(sparql); QueryExecution qexec =      * QueryExecutionFactory.create(sparqlQuery, ontModel) ; Model refactoredModel = qexec.execConstruct();      *       *       * OWLOntology refactoredDataSet = jenaToOwlConvert.ModelJenaToOwlConvert(refactoredModel, "RDF/XML");      *       * ByteArrayOutputStream out = new ByteArrayOutputStream(); try {      * ontologyManager.saveOntology(refactoredDataSet, new RDFXMLOntologyFormat(), out); } catch      * (OWLOntologyStorageException e) { // TODO Auto-generated catch block e.printStackTrace(); }      *       * ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());      *       * try { ontologyManager.loadOntologyFromOntologyDocument(in); } catch (OWLOntologyCreationException e) {      * // TODO Auto-generated catch block e.printStackTrace(); }      *       * }      *       * OWLOntologyMerger merger = new OWLOntologyMerger(ontologyManager);      *       * try { refactoredOntology = merger.createMergedOntology(ontologyManager, refactoredOntologyIRI);      *       *       *       *       *       *       *       *       *       * if(!kReSReasoner.consistencyCheck(kReSReasoner.getReasoner(refactoredOntology ))){ throw      * newInconcistencyException( "Semion Refactorer : the refactored data set seems to be inconsistent"); }      * else{ ontologyStorage.store(refactoredOntology); } } catch (OWLOntologyCreationException e) { // TODO      * Auto-generated catch block e.printStackTrace(); }      *       *       *       * } catch (NoSuchRecipeException e1) {      * log.error("Refactorer : No Such recipe in the KReS Rule Store", e1); throw e1; }      *       * if(refactoredOntology == null){ throw new RefactoringException(); }      *       * }      */
 specifier|protected
 name|void
 name|activate
@@ -1608,7 +1608,7 @@ operator|.
 name|getSessionManager
 argument_list|()
 decl_stmt|;
-name|KReSSession
+name|Session
 name|kReSSession
 init|=
 name|kReSSessionManager
@@ -1840,7 +1840,7 @@ name|IRI
 name|recipeIRI
 parameter_list|)
 throws|throws
-name|SemionRefactoringException
+name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 throws|,
@@ -1873,7 +1873,7 @@ argument_list|(
 name|recipeIRI
 argument_list|)
 expr_stmt|;
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 init|=
 name|recipe
@@ -1896,7 +1896,7 @@ literal|""
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -2152,11 +2152,11 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|SemionRefactoringException
+name|RefactoringException
 argument_list|()
 throw|;
 block|}
-comment|/*          * UriRef uriRef = new UriRef(refactoredDataSetURI);          *           * MGraph mGraph = weightedTcProvider.createMGraph(datasetURI);          *           * Set<IRI> ruleIRIs = kReSRuleManager.getRecipe(recipeIRI);          *           * for(IRI ruleIRI : ruleIRIs){ KReSRule kReSRule = kReSRuleManager.getRule(ruleIRI);          *           * String sparql = kReSRule.toSPARQL();          *           * Query query; try { query = QueryParser.getInstance().parse(sparql); MGraph dataset =          * weightedTcProvider.getMGraph(datasetURI); mGraph.addAll((SimpleGraph)          * tcManager.executeSparqlQuery(query, dataset));          *           * } catch (ParseException e) { // TODO Auto-generated catch block e.printStackTrace(); } }          *           * ByteArrayOutputStream out = new ByteArrayOutputStream();          *           * SerializingProvider serializingProvider = new JenaSerializerProvider();          *           * serializingProvider.serialize(out, mGraph, SupportedFormat.RDF_XML);          *           * ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());          *           * OWLOntologyManager owlOntologyManager = onManager.getOwlCacheManager();          *           * OWLOntology owlmodel; try { owlmodel = owlOntologyManager.loadOntologyFromOntologyDocument(in);          * if(kReSReasoner .consistencyCheck(kReSReasoner.getReasoner(owlmodel))){ return uriRef; } else{          * throw newInconcistencyException(          * "Semion Refactorer : the refactored data set seems to be inconsistent" ); } } catch          * (OWLOntologyCreationException e) { throw new InconcistencyException          * ("Semion Refactorer : the refactored data set seems to be invalid"); }          */
+comment|/*          * UriRef uriRef = new UriRef(refactoredDataSetURI);          *           * MGraph mGraph = weightedTcProvider.createMGraph(datasetURI);          *           * Set<IRI> ruleIRIs = kReSRuleManager.getRecipe(recipeIRI);          *           * for(IRI ruleIRI : ruleIRIs){ Rule kReSRule = kReSRuleManager.getRule(ruleIRI);          *           * String sparql = kReSRule.toSPARQL();          *           * Query query; try { query = QueryParser.getInstance().parse(sparql); MGraph dataset =          * weightedTcProvider.getMGraph(datasetURI); mGraph.addAll((SimpleGraph)          * tcManager.executeSparqlQuery(query, dataset));          *           * } catch (ParseException e) { // TODO Auto-generated catch block e.printStackTrace(); } }          *           * ByteArrayOutputStream out = new ByteArrayOutputStream();          *           * SerializingProvider serializingProvider = new JenaSerializerProvider();          *           * serializingProvider.serialize(out, mGraph, SupportedFormat.RDF_XML);          *           * ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());          *           * OWLOntologyManager owlOntologyManager = onManager.getOwlCacheManager();          *           * OWLOntology owlmodel; try { owlmodel = owlOntologyManager.loadOntologyFromOntologyDocument(in);          * if(kReSReasoner .consistencyCheck(kReSReasoner.getReasoner(owlmodel))){ return uriRef; } else{          * throw newInconcistencyException(          * "Semion Refactorer : the refactored data set seems to be inconsistent" ); } } catch          * (OWLOntologyCreationException e) { throw new InconcistencyException          * ("Semion Refactorer : the refactored data set seems to be invalid"); }          */
 block|}
 annotation|@
 name|Override
@@ -2171,7 +2171,7 @@ name|IRI
 name|recipeIRI
 parameter_list|)
 throws|throws
-name|SemionRefactoringException
+name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 throws|,
@@ -2215,7 +2215,7 @@ argument_list|(
 name|recipeIRI
 argument_list|)
 expr_stmt|;
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 init|=
 name|recipe
@@ -2233,7 +2233,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -2460,7 +2460,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|SemionRefactoringException
+name|RefactoringException
 argument_list|()
 throw|;
 block|}
@@ -2487,7 +2487,7 @@ name|info
 argument_list|(
 literal|"in "
 operator|+
-name|SemionRefactorerImpl
+name|RefactorerImpl
 operator|.
 name|class
 operator|+
@@ -2584,7 +2584,7 @@ name|IRI
 name|recipeIRI
 parameter_list|)
 throws|throws
-name|SemionRefactoringException
+name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 block|{
@@ -2615,7 +2615,7 @@ argument_list|(
 name|recipeIRI
 argument_list|)
 expr_stmt|;
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 init|=
 name|recipe
@@ -2638,7 +2638,7 @@ literal|""
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -2867,7 +2867,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|SemionRefactoringException
+name|RefactoringException
 argument_list|()
 throw|;
 block|}
@@ -2885,7 +2885,7 @@ name|IRI
 name|recipeIRI
 parameter_list|)
 throws|throws
-name|SemionRefactoringException
+name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 block|{
@@ -2919,7 +2919,7 @@ argument_list|(
 name|recipeIRI
 argument_list|)
 expr_stmt|;
-name|KReSRuleList
+name|RuleList
 name|kReSRuleList
 init|=
 name|recipe
@@ -2974,7 +2974,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|KReSRule
+name|Rule
 name|kReSRule
 range|:
 name|kReSRuleList
@@ -3165,7 +3165,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|SemionRefactoringException
+name|RefactoringException
 argument_list|()
 throw|;
 block|}

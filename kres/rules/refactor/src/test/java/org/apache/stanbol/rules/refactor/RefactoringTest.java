@@ -187,7 +187,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -205,7 +205,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -223,7 +223,7 @@ name|base
 operator|.
 name|impl
 operator|.
-name|KReSReasonerImpl
+name|ReasonerImpl
 import|;
 end_import
 
@@ -241,7 +241,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -315,7 +315,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -371,7 +371,7 @@ name|manager
 operator|.
 name|parse
 operator|.
-name|KReSRuleParser
+name|RuleParserImpl
 import|;
 end_import
 
@@ -389,7 +389,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactorer
+name|Refactorer
 import|;
 end_import
 
@@ -407,7 +407,7 @@ name|refactor
 operator|.
 name|api
 operator|.
-name|SemionRefactoringException
+name|RefactoringException
 import|;
 end_import
 
@@ -425,7 +425,7 @@ name|refactor
 operator|.
 name|impl
 operator|.
-name|SemionRefactorerImpl
+name|RefactorerImpl
 import|;
 end_import
 
@@ -592,7 +592,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|SemionRefactoringTest
+name|RefactoringTest
 block|{
 specifier|static
 name|RuleStore
@@ -626,7 +626,7 @@ expr_stmt|;
 name|InputStream
 name|ontologyStream
 init|=
-name|SemionRefactoringTest
+name|RefactoringTest
 operator|.
 name|class
 operator|.
@@ -638,7 +638,7 @@ decl_stmt|;
 name|InputStream
 name|recipeStream
 init|=
-name|SemionRefactoringTest
+name|RefactoringTest
 operator|.
 name|class
 operator|.
@@ -889,7 +889,7 @@ name|kReSRulesInKReSSyntax
 init|=
 literal|""
 decl_stmt|;
-comment|/** 							 * Fetch the rule content expressed as a literal in 							 * KReSRule Syntax. 							 */
+comment|/** 							 * Fetch the rule content expressed as a literal in 							 * Rule Syntax. 							 */
 name|OWLDataProperty
 name|hasBodyAndHead
 init|=
@@ -978,10 +978,10 @@ expr_stmt|;
 block|}
 block|}
 comment|/** 							 * Create the Recipe object. 							 */
-name|KReSRuleList
+name|RuleList
 name|ruleList
 init|=
-name|KReSRuleParser
+name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
@@ -1155,7 +1155,7 @@ specifier|public
 name|boolean
 name|removeRule
 parameter_list|(
-name|KReSRule
+name|Rule
 name|rule
 parameter_list|)
 block|{
@@ -1265,11 +1265,11 @@ argument_list|,
 name|wtcp
 argument_list|)
 decl_stmt|;
-name|KReSONManager
+name|ONManager
 name|onm
 init|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 name|tcm
 argument_list|,
@@ -1278,11 +1278,11 @@ argument_list|,
 name|emptyConfig
 argument_list|)
 decl_stmt|;
-name|SemionRefactorer
+name|Refactorer
 name|refactorer
 init|=
 operator|new
-name|SemionRefactorerImpl
+name|RefactorerImpl
 argument_list|(
 literal|null
 argument_list|,
@@ -1297,7 +1297,7 @@ argument_list|,
 name|ruleStore
 argument_list|,
 operator|new
-name|KReSReasonerImpl
+name|ReasonerImpl
 argument_list|(
 name|emptyConfig
 argument_list|)
@@ -1319,7 +1319,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|SemionRefactoringException
+name|RefactoringException
 name|e
 parameter_list|)
 block|{
