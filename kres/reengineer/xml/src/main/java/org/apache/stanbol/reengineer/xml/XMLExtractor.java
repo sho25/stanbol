@@ -277,7 +277,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -397,7 +397,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -471,7 +471,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -489,7 +489,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -507,7 +507,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Semion_OWL
+name|Reengineer_OWL
 import|;
 end_import
 
@@ -547,7 +547,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 import|;
 end_import
 
@@ -952,7 +952,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code XMLExtractor} extends of the {@link XSDExtractor} that implements  * the {@link SemionReengineer} for XML data sources.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * The {@code XMLExtractor} extends of the {@link XSDExtractor} that implements  * the {@link Reengineer} for XML data sources.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -970,7 +970,7 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|SemionReengineer
+name|Reengineer
 operator|.
 name|class
 argument_list|)
@@ -978,9 +978,9 @@ specifier|public
 class|class
 name|XMLExtractor
 extends|extends
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 implements|implements
-name|SemionReengineer
+name|Reengineer
 block|{
 specifier|public
 specifier|static
@@ -1070,12 +1070,12 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Reference
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 annotation|@
 name|Reference
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 decl_stmt|;
 specifier|private
@@ -1090,7 +1090,7 @@ specifier|private
 name|IRI
 name|spaceIRI
 decl_stmt|;
-comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the XMLExtractor instances do 	 * need to be configured! YOU NEED TO USE 	 * {@link #XMLExtractor(KReSONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
+comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the XMLExtractor instances do 	 * need to be configured! YOU NEED TO USE 	 * {@link #XMLExtractor(ONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
 specifier|public
 name|XMLExtractor
 parameter_list|()
@@ -1098,10 +1098,10 @@ block|{  	}
 specifier|public
 name|XMLExtractor
 parameter_list|(
-name|SemionManager
+name|ReengineerManager
 name|reengineeringManager
 parameter_list|,
-name|KReSONManager
+name|ONManager
 name|onManager
 parameter_list|,
 name|Dictionary
@@ -1304,7 +1304,7 @@ operator|.
 name|getSessionManager
 argument_list|()
 decl_stmt|;
-name|KReSSession
+name|Session
 name|kReSSession
 init|=
 name|kReSSessionManager
@@ -1611,7 +1611,7 @@ name|factory
 operator|.
 name|getOWLClass
 argument_list|(
-name|Semion_OWL
+name|Reengineer_OWL
 operator|.
 name|DataSource
 argument_list|)
@@ -1664,7 +1664,7 @@ name|factory
 operator|.
 name|getOWLDataProperty
 argument_list|(
-name|Semion_OWL
+name|Reengineer_OWL
 operator|.
 name|hasDataSourceType
 argument_list|)
@@ -2425,7 +2425,7 @@ name|factory
 operator|.
 name|getOWLClass
 argument_list|(
-name|Semion_OWL
+name|Reengineer_OWL
 operator|.
 name|DataSource
 argument_list|)
@@ -2845,7 +2845,7 @@ name|factory
 operator|.
 name|getOWLClass
 argument_list|(
-name|Semion_OWL
+name|Reengineer_OWL
 operator|.
 name|DataSource
 argument_list|)

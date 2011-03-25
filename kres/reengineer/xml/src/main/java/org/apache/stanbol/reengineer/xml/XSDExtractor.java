@@ -101,7 +101,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -139,7 +139,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 import|;
 end_import
 
@@ -806,14 +806,14 @@ specifier|public
 class|class
 name|XSDExtractor
 extends|extends
-name|SemionUriRefGenerator
+name|ReengineerUriRefGenerator
 block|{
 specifier|private
 name|WeightedTcProvider
 name|weightedTcProvider
 decl_stmt|;
 specifier|private
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 specifier|public
@@ -846,7 +846,7 @@ block|}
 specifier|public
 name|XSDExtractor
 parameter_list|(
-name|KReSONManager
+name|ONManager
 name|onManager
 parameter_list|)
 block|{

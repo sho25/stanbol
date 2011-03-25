@@ -147,7 +147,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -165,7 +165,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -201,7 +201,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -239,7 +239,7 @@ name|base
 operator|.
 name|impl
 operator|.
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 import|;
 end_import
 
@@ -319,7 +319,7 @@ name|IRI
 name|outputIRI
 decl_stmt|;
 specifier|static
-name|SemionReengineer
+name|Reengineer
 name|xmlExtractor
 decl_stmt|;
 annotation|@
@@ -570,11 +570,11 @@ name|wtcp
 argument_list|)
 decl_stmt|;
 comment|// Two different ontology storagez, the same sparql engine and tcprovider
-name|KReSONManager
+name|ONManager
 name|onManager
 init|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 name|tcm
 argument_list|,
@@ -589,7 +589,7 @@ operator|new
 name|XMLExtractor
 argument_list|(
 operator|new
-name|SemionManagerImpl
+name|ReengineerManagerImpl
 argument_list|(
 name|tcm
 argument_list|,
