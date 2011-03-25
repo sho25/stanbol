@@ -759,7 +759,7 @@ name|defaultOrder
 init|=
 name|ORDERING_EXTRACTION_ENHANCEMENT
 decl_stmt|;
-comment|/**      * This maps geonames.org feature classes to dbPedia.org ontology classes      */
+comment|/**      * This maps geonames.org feature classes to dbpedia.org ontology classes      */
 specifier|public
 specifier|static
 specifier|final
@@ -1017,7 +1017,7 @@ argument_list|(
 name|DBPEDIA_PLACE
 argument_list|)
 expr_stmt|;
-comment|//all things are dbPedia places
+comment|//all things are dbpedia places
 name|mappings
 operator|.
 name|put
@@ -1028,7 +1028,7 @@ name|conceptMappings
 argument_list|)
 expr_stmt|;
 block|}
-comment|//now add additional mappings to the dbPedia Ontology
+comment|//now add additional mappings to the dbpedia Ontology
 name|UriRef
 name|populatedPlace
 init|=
@@ -2091,7 +2091,7 @@ name|getInstance
 argument_list|()
 decl_stmt|;
 comment|//get all the textAnnotations
-comment|/*          * this Map holds the name as key and all the text annotations of          * dc:type dbPedia:Place that select this name as value          * this map is used to avoid multiple lookups for text annotations          * selecting the same name.          */
+comment|/*          * this Map holds the name as key and all the text annotations of          * dc:type dbpedia:Place that select this name as value          * this map is used to avoid multiple lookups for text annotations          * selecting the same name.          */
 name|Map
 argument_list|<
 name|String
@@ -2267,7 +2267,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//TODO: if we also ant to process EntityAnnotations with the dc:type dbPedia:Place
+comment|//TODO: if we also ant to process EntityAnnotations with the dc:type dbpedia:Place
 comment|//      than we need to parse the name based on the enhancer:entity-name property
 block|}
 block|}

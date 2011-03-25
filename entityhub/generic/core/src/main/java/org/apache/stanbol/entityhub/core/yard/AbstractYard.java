@@ -924,7 +924,7 @@ name|isValid
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**          * Setter for the ID of the yard. The id is usually a sort name such as          * "dbPedia", "freebase", "geonames.org", "my.projects" ...<p>          * If {@link #isMultiYardIndexLayout()} than this ID is used to identify          * Representations of this Yard within the SolrIndex.          * @param the id of the yard. Required, not null, not empty!          */
+comment|/**          * Setter for the ID of the yard. The id is usually a sort name such as          * "dbpedia", "freebase", "geonames.org", "my.projects" ...<p>          * If {@link #isMultiYardIndexLayout()} than this ID is used to identify          * Representations of this Yard within the SolrIndex.          * @param the id of the yard. Required, not null, not empty!          */
 specifier|public
 specifier|final
 name|void

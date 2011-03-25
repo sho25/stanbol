@@ -15,7 +15,7 @@ name|entityhub
 operator|.
 name|indexing
 operator|.
-name|dbPedia
+name|dbpedia
 operator|.
 name|cli
 package|;
@@ -697,7 +697,7 @@ block|,
 literal|"foaf:page | d=xsd:anyURI"
 block|,
 comment|//page about the entity
-comment|// --- dbPedia specific
+comment|// --- dbpedia specific
 literal|"dbp-ont:*"
 block|,
 literal|"dbp-ont:thumbnail | d=xsd:anyURI> foaf:depiction"
@@ -861,7 +861,7 @@ name|builder
 operator|.
 name|append
 argument_list|(
-literal|"Description:\nThis Utility creates a full Yard for dbPedia.org by using the SolrYard implementation.\n"
+literal|"Description:\nThis Utility creates a full Yard for dbpedia.org by using the SolrYard implementation.\n"
 argument_list|)
 expr_stmt|;
 name|builder
@@ -889,7 +889,7 @@ name|builder
 operator|.
 name|append
 argument_list|(
-literal|" - dbPediaDumpDir: The relative or absolute path to the Dir with the source RDF files to be used for indexing. You can direcly use the compressed archives. All files in that directory are used to create the index\n"
+literal|" - dbpediaDumpDir: The relative or absolute path to the Dir with the source RDF files to be used for indexing. You can direcly use the compressed archives. All files in that directory are used to create the index\n"
 argument_list|)
 expr_stmt|;
 name|builder
@@ -963,7 +963,7 @@ literal|"name"
 argument_list|,
 literal|true
 argument_list|,
-literal|"the id and name used for the Yard (default: 'dbPedia')"
+literal|"the id and name used for the Yard (default: 'dbpedia')"
 argument_list|)
 expr_stmt|;
 name|options
@@ -1179,7 +1179,7 @@ name|formatter
 operator|.
 name|printHelp
 argument_list|(
-literal|"java -Xmx1024M -jar org.apache.stanbol.indexing.dbPedia-0.1-SNAPSHOT-jar-with-dependencies.jar [options] solrServerUri dbPediaDataDumpDir"
+literal|"java -Xmx1024M -jar org.apache.stanbol.indexing.dbpedia-0.1-SNAPSHOT-jar-with-dependencies.jar [options] solrServerUri dbpediaDataDumpDir"
 argument_list|,
 name|header
 argument_list|,
@@ -1215,7 +1215,7 @@ condition|)
 block|{
 name|yardName
 operator|=
-literal|"dbPedia"
+literal|"dbpedia"
 expr_stmt|;
 block|}
 name|Dictionary
@@ -1421,7 +1421,7 @@ name|put
 argument_list|(
 name|KEY_RDF_STORE_DIR
 argument_list|,
-literal|"dbPedia-rdf-data"
+literal|"dbpedia-rdf-data"
 argument_list|)
 expr_stmt|;
 name|Integer

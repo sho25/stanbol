@@ -784,7 +784,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"dbPedia"
+literal|"dbpedia"
 argument_list|)
 specifier|public
 specifier|static

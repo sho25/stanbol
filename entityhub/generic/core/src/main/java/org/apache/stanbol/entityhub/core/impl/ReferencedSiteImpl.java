@@ -943,7 +943,7 @@ name|ID
 argument_list|,
 name|value
 operator|=
-literal|"dbPedia"
+literal|"dbpedia"
 argument_list|)
 block|,         @
 name|Property

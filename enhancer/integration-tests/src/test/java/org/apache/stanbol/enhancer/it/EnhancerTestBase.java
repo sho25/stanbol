@@ -278,7 +278,7 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"http:\\\\/\\\\/.*\\\\/entityhub\\\\/site\\\\/dbPedia\\\\/"
+literal|"http:\\\\/\\\\/.*\\\\/entityhub\\\\/site\\\\/dbpedia\\\\/"
 argument_list|)
 expr_stmt|;
 name|log

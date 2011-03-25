@@ -1163,7 +1163,7 @@ name|formatter
 operator|.
 name|printHelp
 argument_list|(
-literal|"java -Xmx1024M -jar org.apache.stanbol.indexing.dbPedia-0.1-SNAPSHOT-jar-with-dependencies.jar [options] solrServerUri rdfDump"
+literal|"java -Xmx1024M -jar org.apache.stanbol.indexing.dbpedia-0.1-SNAPSHOT-jar-with-dependencies.jar [options] solrServerUri rdfDump"
 argument_list|,
 name|header
 argument_list|,
