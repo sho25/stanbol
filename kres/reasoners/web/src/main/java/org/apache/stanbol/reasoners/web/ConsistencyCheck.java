@@ -267,7 +267,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -383,7 +383,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -421,7 +421,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSCreateReasoner
+name|CreateReasoner
 import|;
 end_import
 
@@ -439,7 +439,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunReasoner
+name|RunReasoner
 import|;
 end_import
 
@@ -457,7 +457,7 @@ name|base
 operator|.
 name|commands
 operator|.
-name|KReSRunRules
+name|RunRules
 import|;
 end_import
 
@@ -475,7 +475,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|KReSRule
+name|Rule
 import|;
 end_import
 
@@ -531,7 +531,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|KReSRuleList
+name|RuleList
 import|;
 end_import
 
@@ -547,7 +547,7 @@ name|rules
 operator|.
 name|manager
 operator|.
-name|KReSKB
+name|KB
 import|;
 end_import
 
@@ -565,7 +565,7 @@ name|manager
 operator|.
 name|changes
 operator|.
-name|KReSRuleStore
+name|RuleStoreImpl
 import|;
 end_import
 
@@ -583,7 +583,7 @@ name|manager
 operator|.
 name|parse
 operator|.
-name|KReSRuleParser
+name|RuleParserImpl
 import|;
 end_import
 
@@ -921,7 +921,7 @@ name|OWLDuplicateSafeLoader
 argument_list|()
 decl_stmt|;
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
@@ -976,13 +976,13 @@ operator|.
 name|onm
 operator|=
 operator|(
-name|KReSONManager
+name|ONManager
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.
@@ -1011,7 +1011,7 @@ expr_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|(
 operator|new
 name|TcManager
@@ -1085,7 +1085,7 @@ operator|.
 name|kresRuleStore
 operator|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -1133,7 +1133,7 @@ name|RuleStore
 name|store
 init|=
 operator|new
-name|KReSRuleStore
+name|RuleStoreImpl
 argument_list|(
 name|onm
 argument_list|,
@@ -1341,17 +1341,17 @@ block|}
 block|}
 comment|// kReSRules =
 comment|// "ProvaParent =<http://www.semanticweb.org/ontologies/2010/6/ProvaParent.owl#> . rule1[ has(ProvaParent:hasParent, ?x, ?y) . has(ProvaParent:hasBrother, ?y, ?z) -> has(ProvaParent:hasUncle, ?x, ?z) ]";
-name|KReSKB
+name|KB
 name|kReSKB
 init|=
-name|KReSRuleParser
+name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
 name|kReSRules
 argument_list|)
 decl_stmt|;
-name|KReSRuleList
+name|RuleList
 name|listrules
 init|=
 name|kReSKB
@@ -1361,7 +1361,7 @@ argument_list|()
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|KReSRule
+name|Rule
 argument_list|>
 name|iterule
 init|=
@@ -1378,7 +1378,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|KReSRule
+name|Rule
 name|singlerule
 init|=
 name|iterule
@@ -1539,11 +1539,11 @@ name|build
 argument_list|()
 return|;
 block|}
-name|KReSCreateReasoner
+name|CreateReasoner
 name|newreasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|owl
 argument_list|)
@@ -1551,11 +1551,11 @@ decl_stmt|;
 comment|// KReSReasonerImpl reasoner = new KReSReasonerImpl();
 try|try
 block|{
-name|KReSRunReasoner
+name|RunReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|newreasoner
 operator|.
@@ -2518,11 +2518,11 @@ argument_list|)
 decl_stmt|;
 comment|// Create a reasoner to run rules contained in the
 comment|// recipe
-name|KReSRunRules
+name|RunRules
 name|rulereasoner
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|swrlmodel
 argument_list|,
@@ -2539,21 +2539,21 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-name|KReSCreateReasoner
+name|CreateReasoner
 name|newreasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|inputowl
 argument_list|)
 decl_stmt|;
 comment|// Prepare and start the reasoner to check the consistence
-name|KReSRunReasoner
+name|RunReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|newreasoner
 operator|.
@@ -2663,11 +2663,11 @@ argument_list|)
 decl_stmt|;
 comment|// Create a reasoner to run rules contained in the
 comment|// recipe by using the server and-point
-name|KReSRunRules
+name|RunRules
 name|rulereasoner
 init|=
 operator|new
-name|KReSRunRules
+name|RunRules
 argument_list|(
 name|swrlmodel
 argument_list|,
@@ -2690,11 +2690,11 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-name|KReSCreateReasoner
+name|CreateReasoner
 name|newreasoner
 init|=
 operator|new
-name|KReSCreateReasoner
+name|CreateReasoner
 argument_list|(
 name|inputowl
 argument_list|,
@@ -2706,11 +2706,11 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Prepare and start the reasoner to check the consistence
-name|KReSRunReasoner
+name|RunReasoner
 name|reasoner
 init|=
 operator|new
-name|KReSRunReasoner
+name|RunReasoner
 argument_list|(
 name|newreasoner
 operator|.
