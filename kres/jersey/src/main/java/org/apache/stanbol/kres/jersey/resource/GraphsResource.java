@@ -251,7 +251,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -515,7 +515,7 @@ name|TcManager
 name|tcManager
 decl_stmt|;
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onManager
 decl_stmt|;
 specifier|protected
@@ -583,14 +583,14 @@ expr_stmt|;
 name|onManager
 operator|=
 call|(
-name|KReSONManager
+name|ONManager
 call|)
 argument_list|(
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.

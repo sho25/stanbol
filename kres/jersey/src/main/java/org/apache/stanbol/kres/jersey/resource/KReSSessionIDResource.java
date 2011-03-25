@@ -159,7 +159,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -179,7 +179,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|KReSSession
+name|Session
 import|;
 end_import
 
@@ -217,7 +217,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManager
+name|ONManagerImpl
 import|;
 end_import
 
@@ -267,9 +267,9 @@ name|KReSSessionIDResource
 extends|extends
 name|NavigationMixin
 block|{
-comment|/* 	 * Placeholder for the KReSONManager to be fetched from the servlet context. 	 */
+comment|/* 	 * Placeholder for the ONManager to be fetched from the servlet context. 	 */
 specifier|protected
-name|KReSONManager
+name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
@@ -294,7 +294,7 @@ expr_stmt|;
 name|onm
 operator|=
 operator|(
-name|KReSONManager
+name|ONManager
 operator|)
 name|this
 operator|.
@@ -302,7 +302,7 @@ name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|KReSONManager
+name|ONManager
 operator|.
 name|class
 operator|.
@@ -329,7 +329,7 @@ expr_stmt|;
 name|onm
 operator|=
 operator|new
-name|ONManager
+name|ONManagerImpl
 argument_list|()
 expr_stmt|;
 block|}
@@ -364,7 +364,7 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
-name|KReSSession
+name|Session
 name|ses
 init|=
 literal|null

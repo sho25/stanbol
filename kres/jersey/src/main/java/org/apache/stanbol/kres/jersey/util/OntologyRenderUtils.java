@@ -49,7 +49,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -357,7 +357,7 @@ parameter_list|,
 name|String
 name|rewritePrefix
 parameter_list|,
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|)
 throws|throws
@@ -646,7 +646,7 @@ parameter_list|,
 name|String
 name|rewritePrefix
 parameter_list|,
-name|KReSONManager
+name|ONManager
 name|onm
 parameter_list|)
 throws|throws

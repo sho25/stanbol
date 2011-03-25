@@ -161,7 +161,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|KReSONManager
+name|ONManager
 import|;
 end_import
 
@@ -179,7 +179,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionManager
+name|ReengineerManager
 import|;
 end_import
 
@@ -197,7 +197,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|SemionReengineer
+name|Reengineer
 import|;
 end_import
 
@@ -387,7 +387,7 @@ specifier|final
 name|String
 name|STATIC_RESOURCES_CLASSPATH_PROPERTY
 init|=
-literal|"eu.iksproject.kres.jersey.static.classpath"
+literal|"org.apache.stanbol.kres.jersey.static.classpath"
 decl_stmt|;
 annotation|@
 name|Property
@@ -402,7 +402,7 @@ specifier|final
 name|String
 name|FREEMARKER_TEMPLATE_CLASSPATH_PROPERTY
 init|=
-literal|"eu.iksproject.kres.jersey.templates.classpath"
+literal|"org.apache.stanbol.kres.jersey.templates.classpath"
 decl_stmt|;
 annotation|@
 name|Reference
