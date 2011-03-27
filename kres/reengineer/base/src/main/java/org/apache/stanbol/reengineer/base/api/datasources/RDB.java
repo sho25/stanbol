@@ -83,9 +83,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|rules
+name|reengineer
 operator|.
-name|refactor
+name|base
 operator|.
 name|api
 operator|.

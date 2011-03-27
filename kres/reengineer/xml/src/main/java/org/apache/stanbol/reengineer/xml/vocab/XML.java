@@ -35,24 +35,6 @@ name|UriRef
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * Vocabulary definitions from http://ontologydesignpatterns.org/ont/iks/xml.owl   * @author andrea.nuzzolese   */
 end_comment
