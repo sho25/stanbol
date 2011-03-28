@@ -7,11 +7,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|ontologymanager
 operator|.
-name|jersey
-operator|.
-name|resource
+name|web
 package|;
 end_package
 
@@ -565,6 +563,24 @@ name|KReSFormat
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|kres
+operator|.
+name|jersey
+operator|.
+name|resource
+operator|.
+name|NavigationMixin
+import|;
+end_import
+
 begin_class
 annotation|@
 name|Path
@@ -573,7 +589,7 @@ literal|"/session"
 argument_list|)
 specifier|public
 class|class
-name|KReSSessionResource
+name|SessionResource
 extends|extends
 name|NavigationMixin
 block|{
@@ -587,7 +603,7 @@ name|ServletContext
 name|servletContext
 decl_stmt|;
 specifier|public
-name|KReSSessionResource
+name|SessionResource
 parameter_list|(
 annotation|@
 name|Context

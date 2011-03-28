@@ -60,7 +60,7 @@ literal|"text/html"
 argument_list|)
 specifier|public
 class|class
-name|KReSResource
+name|RootResource
 extends|extends
 name|NavigationMixin
 block|{  }
