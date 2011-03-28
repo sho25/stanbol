@@ -7,9 +7,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|ontologymanager
 operator|.
-name|jersey
+name|web
 operator|.
 name|util
 package|;
@@ -336,6 +336,10 @@ operator|.
 name|KReSFormat
 import|;
 end_import
+
+begin_comment
+comment|/**  * Contains hacks to regular ontology renderers with replacements for input statements.  *   * @author alessandro  *  */
+end_comment
 
 begin_class
 specifier|public

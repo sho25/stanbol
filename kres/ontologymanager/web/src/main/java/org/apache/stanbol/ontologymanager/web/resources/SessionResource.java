@@ -10,6 +10,8 @@ operator|.
 name|ontologymanager
 operator|.
 name|web
+operator|.
+name|resources
 package|;
 end_package
 
