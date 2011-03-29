@@ -61,7 +61,7 @@ name|jersey
 operator|.
 name|processors
 operator|.
-name|KReSViewProcessor
+name|ViewProcessorImpl
 import|;
 end_import
 
@@ -413,7 +413,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|KReSViewProcessor
+name|ViewProcessorImpl
 argument_list|()
 argument_list|)
 expr_stmt|;

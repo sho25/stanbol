@@ -242,7 +242,7 @@ annotation|@
 name|Provider
 specifier|public
 class|class
-name|KReSViewProcessor
+name|ViewProcessorImpl
 implements|implements
 name|ViewProcessor
 argument_list|<
@@ -285,7 +285,7 @@ name|ServletContext
 name|context
 decl_stmt|;
 specifier|public
-name|KReSViewProcessor
+name|ViewProcessorImpl
 parameter_list|()
 block|{     }
 comment|/**      * @return extension for templates, ".ftl" by default; if we don't see this      *         at the end of your view we'll append it so we can find the      *         template resource      */

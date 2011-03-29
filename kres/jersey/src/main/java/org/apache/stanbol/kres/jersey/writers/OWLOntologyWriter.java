@@ -393,7 +393,7 @@ name|jersey
 operator|.
 name|format
 operator|.
-name|KReSFormat
+name|KRFormat
 import|;
 end_import
 
@@ -420,27 +420,27 @@ annotation|@
 name|Produces
 argument_list|(
 block|{
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|OWL_XML
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|MANCHESTER_OWL
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|FUNCTIONAL_OWL
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|TURTLE
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_JSON
 block|}
@@ -689,7 +689,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -738,7 +738,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|OWL_XML
 argument_list|)
@@ -787,7 +787,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|MANCHESTER_OWL
 argument_list|)
@@ -836,7 +836,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|FUNCTIONAL_OWL
 argument_list|)
@@ -885,7 +885,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|TURTLE
 argument_list|)
@@ -934,7 +934,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_JSON
 argument_list|)

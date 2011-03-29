@@ -333,7 +333,7 @@ name|jersey
 operator|.
 name|format
 operator|.
-name|KReSFormat
+name|KRFormat
 import|;
 end_import
 
@@ -913,7 +913,7 @@ name|format
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -956,7 +956,7 @@ name|format
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|OWL_XML
 argument_list|)
@@ -999,7 +999,7 @@ name|format
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|MANCHESTER_OWL
 argument_list|)
@@ -1042,7 +1042,7 @@ name|format
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|FUNCTIONAL_OWL
 argument_list|)
@@ -1085,7 +1085,7 @@ name|format
 operator|.
 name|equals
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|TURTLE
 argument_list|)

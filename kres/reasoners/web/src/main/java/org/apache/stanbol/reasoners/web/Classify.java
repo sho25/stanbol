@@ -845,7 +845,7 @@ name|jersey
 operator|.
 name|format
 operator|.
-name|KReSFormat
+name|KRFormat
 import|;
 end_import
 
@@ -1367,15 +1367,15 @@ argument_list|(
 name|value
 operator|=
 block|{
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|TURTLE
 block|,
-name|KReSFormat
+name|KRFormat
 operator|.
 name|OWL_XML
 block|}

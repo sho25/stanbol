@@ -29,10 +29,14 @@ name|MediaType
 import|;
 end_import
 
+begin_comment
+comment|/**  * Additional MIME types for knowledge representation formats.  *   * @author andrea.nuzzolese  * @author alessandro  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
-name|KReSFormat
+name|KRFormat
 extends|extends
 name|MediaType
 block|{

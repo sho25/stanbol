@@ -181,7 +181,7 @@ name|jersey
 operator|.
 name|format
 operator|.
-name|KReSFormat
+name|KRFormat
 import|;
 end_import
 
@@ -722,7 +722,7 @@ name|scopeResourceTest2
 operator|.
 name|accept
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -780,7 +780,7 @@ name|scopeResourceTest2
 operator|.
 name|accept
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -850,7 +850,7 @@ name|resource
 operator|.
 name|accept
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -918,7 +918,7 @@ name|ontologyResource
 operator|.
 name|accept
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -955,7 +955,7 @@ name|scopeResourceTest1
 operator|.
 name|accept
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)
@@ -1031,7 +1031,7 @@ name|scopeResourceTest1
 operator|.
 name|accept
 argument_list|(
-name|KReSFormat
+name|KRFormat
 operator|.
 name|RDF_XML
 argument_list|)

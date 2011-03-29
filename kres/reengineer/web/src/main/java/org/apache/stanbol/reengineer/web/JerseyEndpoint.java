@@ -253,7 +253,7 @@ name|jersey
 operator|.
 name|processors
 operator|.
-name|KReSViewProcessor
+name|ViewProcessorImpl
 import|;
 end_import
 
@@ -661,7 +661,7 @@ name|servletContext
 operator|.
 name|setAttribute
 argument_list|(
-name|KReSViewProcessor
+name|ViewProcessorImpl
 operator|.
 name|FREEMARKER_TEMPLATE_PATH_INIT_PARAM
 argument_list|,
