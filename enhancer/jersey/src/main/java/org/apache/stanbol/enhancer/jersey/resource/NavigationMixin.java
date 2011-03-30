@@ -114,7 +114,7 @@ name|MenuItem
 argument_list|(
 literal|"/engines"
 argument_list|,
-literal|"/engines"
+literal|"engines"
 argument_list|,
 name|uriInfo
 argument_list|)
@@ -124,7 +124,7 @@ name|MenuItem
 argument_list|(
 literal|"/store"
 argument_list|,
-literal|"/store"
+literal|"store"
 argument_list|,
 name|uriInfo
 argument_list|)
@@ -134,7 +134,7 @@ name|MenuItem
 argument_list|(
 literal|"/sparql"
 argument_list|,
-literal|"/sparql"
+literal|"sparql"
 argument_list|,
 name|uriInfo
 argument_list|)
@@ -169,6 +169,11 @@ name|this
 operator|.
 name|link
 operator|=
+name|uriInfo
+operator|.
+name|getBaseUri
+argument_list|()
+operator|+
 name|link
 expr_stmt|;
 name|cssClass

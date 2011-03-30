@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author Fabian Christ  *  */
+comment|/**  * JSON-LD serialization API.  *   * @author fabianc  */
 end_comment
 
 begin_class
@@ -132,7 +132,7 @@ name|JsonComparator
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * Flag to control whether the namespace prefix map should be used      * to shorten IRIs to prefix notation during serialization. Default      * value is<code>true</code>.<br />      *<br />      * If you already put values into this JSON-LD instance with prefix      * notation, you should set this to<code>false</code> before starting      * the serialization.      */
+comment|/**      * Flag to control whether the namespace prefix map should be used      * to shorten IRIs to prefix notation during serialization. Default      * value is<code>true</code>.<br />      *<br />      *<b>Note:</b> If you already put values into this JSON-LD instance with prefix      * notation, you should set this to<code>false</code> before starting      * the serialization.      */
 specifier|private
 name|boolean
 name|applyNamespaces
@@ -143,6 +143,13 @@ comment|/**      * Flag to control whether the serialized JSON-LD output will us
 specifier|private
 name|boolean
 name|useJointGraphs
+init|=
+literal|true
+decl_stmt|;
+comment|/**      * Flag to control whether type coercion should be applied. Default      * value is<code>true</code>.      */
+specifier|private
+name|boolean
+name|useTypeCoercion
 init|=
 literal|true
 decl_stmt|;
@@ -1296,6 +1303,32 @@ operator|.
 name|applyNamespaces
 operator|=
 name|applyNamespaces
+expr_stmt|;
+block|}
+comment|/**      * Flag to control whether type coercion is applied or not.      *       * @return<code>True</code> if type coercion is applied,<code>false</code> otherwise.      */
+specifier|public
+name|boolean
+name|isUseTypeCoercion
+parameter_list|()
+block|{
+return|return
+name|useTypeCoercion
+return|;
+block|}
+comment|/**      * Control whether type coercion should be applied. Set this to<code>false</code>      * if you don't want to use type coercion in the output.      *       * @param useTypeCoercion      */
+specifier|public
+name|void
+name|setUseTypeCoercion
+parameter_list|(
+name|boolean
+name|useTypeCoercion
+parameter_list|)
+block|{
+name|this
+operator|.
+name|useTypeCoercion
+operator|=
+name|useTypeCoercion
 expr_stmt|;
 block|}
 block|}
