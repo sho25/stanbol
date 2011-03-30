@@ -1,8 +1,4 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
-begin_comment
-comment|/*  * To change this template, choose Tools | Templates  * and open the template in the editor.  */
-end_comment
-
 begin_package
 package|package
 name|org
@@ -14,6 +10,8 @@ operator|.
 name|reasoners
 operator|.
 name|web
+operator|.
+name|resources
 package|;
 end_package
 
@@ -129,6 +127,18 @@ name|ws
 operator|.
 name|rs
 operator|.
+name|GET
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
 name|POST
 import|;
 end_import
@@ -153,7 +163,7 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|Produces
+name|PathParam
 import|;
 end_import
 
@@ -260,6 +270,24 @@ operator|.
 name|api
 operator|.
 name|ONManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|OWLDuplicateSafeLoader
 import|;
 end_import
 
@@ -739,7 +767,35 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLOntologyCreationException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|UnloadableImportException
 import|;
 end_import
 
@@ -832,18 +888,18 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  *   */
+comment|/**  * This class implements the REST interface for the /check-consistency service  * of KReS.  *   * @author elvio  */
 end_comment
 
 begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/enrichment"
+literal|"/check-consistency"
 argument_list|)
 specifier|public
 class|class
-name|Enrichment
+name|ConsistencyCheck
 block|{
 specifier|private
 name|RuleStore
@@ -856,6 +912,15 @@ decl_stmt|;
 specifier|private
 name|OWLOntology
 name|scopeowl
+decl_stmt|;
+specifier|private
+specifier|final
+name|OWLDuplicateSafeLoader
+name|loader
+init|=
+operator|new
+name|OWLDuplicateSafeLoader
+argument_list|()
 decl_stmt|;
 specifier|protected
 name|ONManager
@@ -877,9 +942,9 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
+comment|/** 	 * The constructor. 	 *  	 * @param servletContext 	 *            {To get the context where the REST service is running.} 	 */
 specifier|public
-name|Enrichment
+name|ConsistencyCheck
 parameter_list|(
 annotation|@
 name|Context
@@ -1052,7 +1117,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * To trasform a sequence of rules to a Jena Model 	 *  	 * @param owl 	 *            {OWLOntology object contains a single recipe}      * @return {A jena rdf model contains the SWRL rule.}      */
+comment|/** 	 * To trasform a sequence of rules to a Jena Model 	 *  	 * @param owl 	 *            {OWLOntology object contains a single recipe} 	 * @return {A jena rdf model contains the SWRL rule.} 	 */
 specifier|private
 name|Model
 name|fromRecipeToModel
@@ -1062,6 +1127,8 @@ name|owl
 parameter_list|)
 throws|throws
 name|NoSuchRecipeException
+throws|,
+name|OWLOntologyCreationException
 block|{
 comment|// FIXME: why the heck is this method re-instantiating a rule store?!?
 name|RuleStore
@@ -1274,7 +1341,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//"ProvaParent =<http://www.semanticweb.org/ontologies/2010/6/ProvaParent.owl#> . rule1[ has(ProvaParent:hasParent, ?x, ?y) . has(ProvaParent:hasBrother, ?y, ?z) -> has(ProvaParent:hasUncle, ?x, ?z) ]");
+comment|// kReSRules =
+comment|// "ProvaParent =<http://www.semanticweb.org/ontologies/2010/6/ProvaParent.owl#> . rule1[ has(ProvaParent:hasParent, ?x, ?y) . has(ProvaParent:hasBrother, ?y, ?z) -> has(ProvaParent:hasUncle, ?x, ?z) ]";
 name|KB
 name|kReSKB
 init|=
@@ -1335,7 +1403,264 @@ return|return
 name|jenamodel
 return|;
 block|}
-comment|/** 	 * To perform a rule based reasoning with a given recipe and scope (or an 	 * ontology) to a RDF input specify via its IRI. 	 *  	 * @param session 	 *            {A string contains the session IRI used to inference the 	 *            input.} 	 * @param scope 	 *            {A string contains either ontology or the scope IRI used to 	 *            inference the input.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to inference.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to inference.} 	 * @Param owllink_endpoint {A string contains the reasoner server end-point 	 *        URL.}      * @return Return:<br/>      *          200 Returns a graph with the enrichments<br/>      *          204 No enrichments have been produced from the given graph<br/>      *          400 To run the session is needed the scope<br/>      *          404 The recipe/ontology/scope/input doesn't exist in the network<br/>      *          409 Too much RDF inputs<br/>      *          500 Some error occurred      */
+comment|/** 	 * To check the consistency of an Ontology or a Scope (as top ontology) 	 * using the default reasoner 	 *  	 * @param uri 	 *            {A string contains the IRI of RDF (either RDF/XML or owl or 	 *            scope) to be checked.} 	 * @return Return:<br/> 	 *         200 No data is retrieved, the graph IS consistent<br/> 	 *         204 No data is retrieved, the graph IS NOT consistent<br/> 	 *         404 File not found. The ontology cannot be retrieved.<br/> 	 *         412 Precondition failed. The ontology cannot be checked. This 	 *         happens, for example, if the ontology includes missing imports.<br/> 	 *         500 Some error occurred. 	 */
+annotation|@
+name|GET
+annotation|@
+name|Path
+argument_list|(
+literal|"/{uri:.+}"
+argument_list|)
+specifier|public
+name|Response
+name|GetSimpleConsistencyCheck
+parameter_list|(
+annotation|@
+name|PathParam
+argument_list|(
+name|value
+operator|=
+literal|"uri"
+argument_list|)
+name|String
+name|uri
+parameter_list|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Start simple consistency check with input: "
+operator|+
+name|uri
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|boolean
+name|ok
+init|=
+literal|false
+decl_stmt|;
+name|OWLOntology
+name|owl
+decl_stmt|;
+try|try
+block|{
+comment|// First create a manager
+name|OWLOntologyManager
+name|mng
+init|=
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+decl_stmt|;
+comment|/** 				 * We use the loader to support duplicate owl:imports 				 */
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Loading "
+operator|+
+name|uri
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
+name|owl
+operator|=
+name|loader
+operator|.
+name|load
+argument_list|(
+name|mng
+argument_list|,
+name|uri
+argument_list|)
+expr_stmt|;
+comment|// owl = mng.loadOntologyFromOntologyDocument(IRI.create(uri));
+block|}
+catch|catch
+parameter_list|(
+name|UnloadableImportException
+name|uu
+parameter_list|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Some ontology import failed. Cannot continue."
+argument_list|,
+name|uu
+argument_list|)
+expr_stmt|;
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|PRECONDITION_FAILED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|ee
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Cannot fetch the ontology. Some error occurred. Cannot continue."
+argument_list|,
+name|ee
+argument_list|)
+expr_stmt|;
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|NOT_FOUND
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+name|CreateReasoner
+name|newreasoner
+init|=
+operator|new
+name|CreateReasoner
+argument_list|(
+name|owl
+argument_list|)
+decl_stmt|;
+comment|// KReSReasonerImpl reasoner = new KReSReasonerImpl();
+try|try
+block|{
+name|RunReasoner
+name|reasoner
+init|=
+operator|new
+name|RunReasoner
+argument_list|(
+name|newreasoner
+operator|.
+name|getReasoner
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|ok
+operator|=
+name|reasoner
+operator|.
+name|isConsistent
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|InconsistentOntologyException
+name|exc
+parameter_list|)
+block|{
+name|ok
+operator|=
+literal|false
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|ok
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"The give graph is consistent."
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
+comment|// No data is retrieved, the graph IS consistent
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|OK
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"The give graph is NOT consistent."
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
+comment|// No data is retrieved, the graph IS NOT consistent
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|NO_CONTENT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+comment|// Some error occurred
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
+name|e
+argument_list|,
+name|Status
+operator|.
+name|INTERNAL_SERVER_ERROR
+argument_list|)
+throw|;
+block|}
+block|}
+comment|/** 	 * To check the consistency of a RDF input File or IRI on the base of a 	 * Scope (or an ontology) and a recipe. Can be used either HermiT or an 	 * owl-link server reasoner end-point 	 *  	 * @param session 	 *            {A string contains the session IRI used to check the 	 *            consistency.} 	 * @param scope 	 *            {A string contains either a specific scope's ontology or the 	 *            scope IRI used to check the consistency.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.} 	 * @Param file {A file in a RDF (eihter RDF/XML or owl) to be checked.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to be checked.} 	 * @Param owllink_endpoint {A string contains the reasoner server end-point 	 *        URL.} 	 * @return Return:<br/> 	 *         200 No data is retrieved, the graph IS consistent<br/> 	 *         204 No data is retrieved, the graph IS NOT consistent<br/> 	 *         400 To run the session is needed the scope<br/> 	 *         404 Scope either Ontology or recipe or RDF input not found<br/> 	 *         409 Too much RDF input<br/> 	 *         500 Some error occurred 	 */
 annotation|@
 name|POST
 annotation|@
@@ -1345,14 +1670,9 @@ name|MediaType
 operator|.
 name|MULTIPART_FORM_DATA
 argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-literal|"application/rdf+xml"
-argument_list|)
 specifier|public
 name|Response
-name|ontologyEnrichment
+name|getConsistencyCheck
 parameter_list|(
 annotation|@
 name|FormParam
@@ -1432,13 +1752,13 @@ literal|null
 operator|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"ERROR: Cannot load session without scope."
+literal|"Cannot load session without scope."
+argument_list|,
+name|this
 argument_list|)
 expr_stmt|;
 return|return
@@ -1455,7 +1775,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Check for input conflict. Only one input at once is allowed
+comment|// Check for input conflict. Only one input at once is allowed
 if|if
 condition|(
 operator|(
@@ -1471,13 +1791,13 @@ literal|null
 operator|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"ERROR: To much RDF input"
+literal|"To much RDF input"
+argument_list|,
+name|this
 argument_list|)
 expr_stmt|;
 return|return
@@ -1494,7 +1814,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Load input file or graph
+comment|// Load input file or graph
 if|if
 condition|(
 name|file
@@ -1545,6 +1865,16 @@ condition|(
 name|inputowl
 operator|==
 literal|null
+operator|&&
+operator|(
+name|session
+operator|==
+literal|null
+operator|||
+name|scope
+operator|==
+literal|null
+operator|)
 condition|)
 return|return
 name|Response
@@ -1559,7 +1889,48 @@ operator|.
 name|build
 argument_list|()
 return|;
-comment|//Create list to add ontologies as imported
+if|if
+condition|(
+name|inputowl
+operator|==
+literal|null
+condition|)
+block|{
+if|if
+condition|(
+name|scope
+operator|!=
+literal|null
+condition|)
+name|this
+operator|.
+name|inputowl
+operator|=
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+operator|.
+name|createOntology
+argument_list|()
+expr_stmt|;
+else|else
+block|{
+name|this
+operator|.
+name|inputowl
+operator|=
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+operator|.
+name|createOntology
+argument_list|()
+expr_stmt|;
+block|}
+block|}
+comment|// Create list to add ontologies as imported
 name|OWLOntologyManager
 name|mgr
 init|=
@@ -1597,8 +1968,8 @@ name|ok
 init|=
 literal|false
 decl_stmt|;
-comment|//Load ontologies from scope, RDF input and recipe
-comment|//Try to resolve scope IRI
+comment|// Load ontologies from scope, RDF input and recipe
+comment|// Try to resolve scope IRI
 if|if
 condition|(
 operator|(
@@ -1747,7 +2118,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//Add ontology form sessions
+comment|// Add ontology form sessions
 while|while
 condition|(
 name|importsession
@@ -1852,21 +2223,25 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"ERROR: Problem with scope: "
+literal|"Problem with scope: "
 operator|+
 name|scope
+argument_list|,
+name|this
 argument_list|)
 expr_stmt|;
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|debug
+argument_list|(
+literal|"Exception is "
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 name|Response
 operator|.
@@ -1881,7 +2256,7 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
-comment|//Get Ontologies from session
+comment|// Get Ontologies from session
 if|if
 condition|(
 operator|(
@@ -2046,21 +2421,25 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"ERROR: Problem with session: "
+literal|"Problem with session: "
 operator|+
 name|session
+argument_list|,
+name|this
 argument_list|)
 expr_stmt|;
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|debug
+argument_list|(
+literal|"Exception is"
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 name|Response
 operator|.
@@ -2093,7 +2472,7 @@ argument_list|(
 name|additions
 argument_list|)
 expr_stmt|;
-comment|//Run HermiT if the reasonerURL is null;
+comment|// Run HermiT if the reasonerURL is null;
 if|if
 condition|(
 name|owllink_endpoint
@@ -2101,6 +2480,7 @@ operator|==
 literal|null
 condition|)
 block|{
+comment|// Create the reasoner for the consistency check
 try|try
 block|{
 if|if
@@ -2161,7 +2541,6 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|//Create the reasoner for the enrichment
 name|CreateReasoner
 name|newreasoner
 init|=
@@ -2171,8 +2550,7 @@ argument_list|(
 name|inputowl
 argument_list|)
 decl_stmt|;
-comment|// Prepare and start the reasoner to enrich ontology's
-comment|// resources
+comment|// Prepare and start the reasoner to check the consistence
 name|RunReasoner
 name|reasoner
 init|=
@@ -2185,70 +2563,39 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// Create a new OWLOntology model where to put the inferred
-comment|// axioms
-name|OWLOntology
-name|output
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-operator|.
-name|createOntology
-argument_list|(
-name|inputowl
-operator|.
-name|getOntologyID
-argument_list|()
-argument_list|)
-decl_stmt|;
-comment|//Initial input axioms count
-name|int
-name|startax
-init|=
-name|output
-operator|.
-name|getAxiomCount
-argument_list|()
-decl_stmt|;
-comment|//Run the classification
-name|output
+name|ok
 operator|=
 name|reasoner
 operator|.
-name|runGeneralInference
-argument_list|(
-name|output
-argument_list|)
-expr_stmt|;
-comment|//End output axioms count
-name|int
-name|endax
-init|=
-name|output
-operator|.
-name|getAxiomCount
+name|isConsistent
 argument_list|()
-decl_stmt|;
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|InconsistentOntologyException
+name|exc
+parameter_list|)
+block|{
+name|ok
+operator|=
+literal|false
+expr_stmt|;
+block|}
 if|if
 condition|(
-operator|(
-name|endax
-operator|-
-name|startax
-operator|)
-operator|>
-literal|0
+name|ok
 condition|)
 block|{
-comment|//Some inference is retrieved
+comment|// No data is retrieved, the graph IS consistent
 return|return
 name|Response
 operator|.
-name|ok
+name|status
 argument_list|(
-name|output
+name|Status
+operator|.
+name|OK
 argument_list|)
 operator|.
 name|build
@@ -2257,7 +2604,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//No data is retrieved
+comment|// No data is retrieved, the graph IS NOT consistent
 return|return
 name|Response
 operator|.
@@ -2265,37 +2612,7 @@ name|status
 argument_list|(
 name|Status
 operator|.
-name|NOT_FOUND
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-block|}
-catch|catch
-parameter_list|(
-name|InconsistentOntologyException
-name|exc
-parameter_list|)
-block|{
-name|System
-operator|.
-name|err
-operator|.
-name|println
-argument_list|(
-literal|"CHECK ONTOLOGY CONSISTENCE"
-argument_list|)
-expr_stmt|;
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
+name|NO_CONTENT
 argument_list|)
 operator|.
 name|build
@@ -2307,6 +2624,8 @@ comment|// form
 block|}
 else|else
 block|{
+comment|// Create the reasoner for the consistency check by using the
+comment|// server and-point
 try|try
 block|{
 if|if
@@ -2373,25 +2692,6 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|// Create a new OWLOntology model where to put the inferred
-comment|// axioms
-name|OWLOntology
-name|output
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-operator|.
-name|createOntology
-argument_list|(
-name|inputowl
-operator|.
-name|getOntologyID
-argument_list|()
-argument_list|)
-decl_stmt|;
-comment|//Create the reasoner for the enrichment
 name|CreateReasoner
 name|newreasoner
 init|=
@@ -2407,8 +2707,7 @@ name|owllink_endpoint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Prepare and start the reasoner to enrich ontology's
-comment|// resources
+comment|// Prepare and start the reasoner to check the consistence
 name|RunReasoner
 name|reasoner
 init|=
@@ -2421,52 +2720,39 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Initial input axioms count
-name|int
-name|startax
-init|=
-name|output
-operator|.
-name|getAxiomCount
-argument_list|()
-decl_stmt|;
-comment|//Run the rule reasoner
-name|output
+name|ok
 operator|=
 name|reasoner
 operator|.
-name|runGeneralInference
-argument_list|(
-name|output
-argument_list|)
-expr_stmt|;
-comment|//End output axioms count
-name|int
-name|endax
-init|=
-name|output
-operator|.
-name|getAxiomCount
+name|isConsistent
 argument_list|()
-decl_stmt|;
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|InconsistentOntologyException
+name|exc
+parameter_list|)
+block|{
+name|ok
+operator|=
+literal|false
+expr_stmt|;
+block|}
 if|if
 condition|(
-operator|(
-name|endax
-operator|-
-name|startax
-operator|)
-operator|>
-literal|0
+name|ok
 condition|)
 block|{
-comment|//No data is retrieved, the graph IS consistent
+comment|// No data is retrieved, the graph IS consistent
 return|return
 name|Response
 operator|.
-name|ok
+name|status
 argument_list|(
-name|output
+name|Status
+operator|.
+name|OK
 argument_list|)
 operator|.
 name|build
@@ -2475,7 +2761,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//No data is retrieved, the graph IS NOT consistent
+comment|// No data is retrieved, the graph IS NOT consistent
 return|return
 name|Response
 operator|.
@@ -2484,36 +2770,6 @@ argument_list|(
 name|Status
 operator|.
 name|NO_CONTENT
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-block|}
-catch|catch
-parameter_list|(
-name|InconsistentOntologyException
-name|exc
-parameter_list|)
-block|{
-name|System
-operator|.
-name|err
-operator|.
-name|println
-argument_list|(
-literal|"CHECK ONTOLOGY CONSISTENCE"
-argument_list|)
-expr_stmt|;
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
 argument_list|)
 operator|.
 name|build

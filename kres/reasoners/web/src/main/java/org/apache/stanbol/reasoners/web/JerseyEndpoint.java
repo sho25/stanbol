@@ -115,6 +115,42 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|kres
+operator|.
+name|jersey
+operator|.
+name|processors
+operator|.
+name|ViewProcessorImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|reasoners
+operator|.
+name|base
+operator|.
+name|api
+operator|.
+name|ConsistentRefactorer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|framework
@@ -203,26 +239,8 @@ name|ServletContainer
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|processors
-operator|.
-name|ViewProcessorImpl
-import|;
-end_import
-
 begin_comment
-comment|/**  * Jersey-based RESTful endpoint for KReS.  *  * This OSGi component serves as a bridge between the OSGi context and the  * Servlet context available to JAX-RS resources.  *   * @author andrea.nuzzolese  */
+comment|/**  * Jersey-based RESTful endpoint for KReS.  *   * This OSGi component serves as a bridge between the OSGi context and the Servlet context available to JAX-RS  * resources.  *   * @author andrea.nuzzolese  */
 end_comment
 
 begin_class
@@ -318,6 +336,11 @@ annotation|@
 name|Reference
 name|HttpService
 name|httpService
+decl_stmt|;
+annotation|@
+name|Reference
+name|ConsistentRefactorer
+name|consistentRefactorer
 decl_stmt|;
 specifier|protected
 name|ServletContext
@@ -572,6 +595,22 @@ name|getBundleContext
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// Register components
+name|servletContext
+operator|.
+name|setAttribute
+argument_list|(
+name|ConsistentRefactorer
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|consistentRefactorer
+argument_list|)
+expr_stmt|;
+comment|// Register templates
 name|servletContext
 operator|.
 name|setAttribute

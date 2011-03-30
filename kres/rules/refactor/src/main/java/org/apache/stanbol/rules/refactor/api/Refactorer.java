@@ -55,24 +55,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|reasoners
-operator|.
-name|base
-operator|.
-name|api
-operator|.
-name|InconcistencyException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|rules
 operator|.
 name|base
@@ -112,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A SemionReengineer provides methods for performing ontology refactorings.  * Refactoring are performed using recipes that contain sets of rules that describe the refactoring to do.  * Rules are expressed using the both the SWRL model and the KReS rules language.   *   * @author andrea.nuzzolese  *  */
+comment|/**  * A SemionReengineer provides methods for performing ontology refactorings. Refactoring are performed using  * recipes that contain sets of rules that describe the refactoring to do. Rules are expressed using the both  * the SWRL model and the KReS rules language.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_interface
@@ -120,7 +102,7 @@ specifier|public
 interface|interface
 name|Refactorer
 block|{
-comment|/** 	 * Fetch the mgraph with the selected uri from the storage. 	 *   	 * @param uriRef {@link UriRef} 	 * @return the {@link MGraph}. 	 */
+comment|/**      * Fetch the mgraph with the selected uri from the storage.      *       * @param uriRef      *            {@link UriRef}      * @return the {@link MGraph}.      */
 specifier|public
 name|MGraph
 name|getRefactoredDataSet
@@ -129,7 +111,7 @@ name|UriRef
 name|uriRef
 parameter_list|)
 function_decl|;
-comment|/** 	 * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI} is the {@link IRI} 	 * of an IKS ontology and the {@code recipe} is the recipe that needs to be applied to ontology in order to perform the refactoring.  	 *  	 * @param refactoredDataSetURI {@link IRI} 	 * @param datasetURI {@link IRI}  	 * @param recipeIRI {@link IRI} 	 */
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the {@link IRI} of an IKS ontology and the {@code recipe} is the recipe that needs to be applied to      * ontology in order to perform the refactoring.      *       * @param refactoredDataSetURI      *            {@link IRI}      * @param datasetURI      *            {@link IRI}      * @param recipeIRI      *            {@link IRI}      */
 specifier|public
 name|void
 name|ontologyRefactoring
@@ -148,7 +130,7 @@ name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 function_decl|;
-comment|/** 	 * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI} is the URI 	 * of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF graph in order to obtain the refactoring.  	 *  	 * @param datasetURI {@link UriRef}  	 * @param recipe {@link UriRef} 	 * @return the refactored {@link MGraph} 	 * @throws RefactoringException 	 * @throws NoSuchRecipeException 	 */
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetURI      *            {@link UriRef}      * @param recipe      *            {@link UriRef}      * @return the refactored {@link MGraph}      * @throws RefactoringException      * @throws NoSuchRecipeException      */
 specifier|public
 name|OWLOntology
 name|ontologyRefactoring
@@ -163,45 +145,6 @@ throws|throws
 name|RefactoringException
 throws|,
 name|NoSuchRecipeException
-function_decl|;
-comment|/** 	 * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI} is the {@link IRI} 	 * of an IKS ontology and the {@code recipe} is the recipe that needs to be applied to ontology in order to perform the refactoring. 	 * After the refactoring a consistency check is invoked on the data set.  	 *  	 * @param refactoredDataSetURI {@link IRI} 	 * @param datasetURI {@link IRI}  	 * @param recipeIRI {@link IRI} 	 * @throws RefactoringException 	 * @throws NoSuchRecipeException 	 * @throws InconcistencyException 	 */
-specifier|public
-name|void
-name|consistentOntologyRefactoring
-parameter_list|(
-name|IRI
-name|refactoredOntologyIRI
-parameter_list|,
-name|IRI
-name|datasetURI
-parameter_list|,
-name|IRI
-name|recipeIRI
-parameter_list|)
-throws|throws
-name|RefactoringException
-throws|,
-name|NoSuchRecipeException
-throws|,
-name|InconcistencyException
-function_decl|;
-comment|/** 	 * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI} is the URI 	 * of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF graph in order to obtain the refactoring. 	 * After the refactoring a consistency check is invoked on the data set.  	 *  	 * @param datasetURI {@link UriRef}  	 * @param recipe {@link UriRef} 	 * @return the refactored {@link MGraph} 	 * @throws InconcistencyException 	 * @throws NoSuchRecipeException 	 * @throws RefactoringException 	 */
-specifier|public
-name|OWLOntology
-name|consistentOntologyRefactoring
-parameter_list|(
-name|OWLOntology
-name|inputOntology
-parameter_list|,
-name|IRI
-name|recipeIRI
-parameter_list|)
-throws|throws
-name|RefactoringException
-throws|,
-name|NoSuchRecipeException
-throws|,
-name|InconcistencyException
 function_decl|;
 block|}
 end_interface

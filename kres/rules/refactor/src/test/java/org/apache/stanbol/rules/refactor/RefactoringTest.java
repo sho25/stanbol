@@ -217,42 +217,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|reasoners
-operator|.
-name|base
-operator|.
-name|impl
-operator|.
-name|ReasonerImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|rules
-operator|.
-name|base
-operator|.
-name|api
-operator|.
-name|Rule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|rules
 operator|.
 name|base
@@ -295,6 +259,24 @@ name|base
 operator|.
 name|api
 operator|.
+name|Rule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|base
+operator|.
+name|api
+operator|.
 name|RuleStore
 import|;
 end_import
@@ -315,7 +297,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|RuleList
+name|RecipeList
 import|;
 end_import
 
@@ -335,7 +317,7 @@ name|api
 operator|.
 name|util
 operator|.
-name|RecipeList
+name|RuleList
 import|;
 end_import
 
@@ -797,7 +779,7 @@ name|ruleNS
 init|=
 literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
 decl_stmt|;
-comment|/** 							 * First get the recipe description in the 							 * rule/recipe ontology. 							 */
+comment|/**                              * First get the recipe description in the rule/recipe ontology.                              */
 name|OWLDataProperty
 name|hasDescription
 init|=
@@ -851,7 +833,7 @@ name|getLiteral
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 							 * Then retrieve the rules associated to the recipe 							 * in the rule store. 							 */
+comment|/**                              * Then retrieve the rules associated to the recipe in the rule store.                              */
 name|OWLObjectProperty
 name|objectProperty
 init|=
@@ -889,7 +871,7 @@ name|kReSRulesInKReSSyntax
 init|=
 literal|""
 decl_stmt|;
-comment|/** 							 * Fetch the rule content expressed as a literal in 							 * Rule Syntax. 							 */
+comment|/**                              * Fetch the rule content expressed as a literal in Rule Syntax.                              */
 name|OWLDataProperty
 name|hasBodyAndHead
 init|=
@@ -977,7 +959,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 							 * Create the Recipe object. 							 */
+comment|/**                              * Create the Recipe object.                              */
 name|RuleList
 name|ruleList
 init|=
@@ -1295,12 +1277,6 @@ argument_list|,
 name|onm
 argument_list|,
 name|ruleStore
-argument_list|,
-operator|new
-name|ReasonerImpl
-argument_list|(
-name|emptyConfig
-argument_list|)
 argument_list|,
 name|emptyConfig
 argument_list|)

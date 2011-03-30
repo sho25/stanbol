@@ -14,6 +14,8 @@ operator|.
 name|reasoners
 operator|.
 name|web
+operator|.
+name|resources
 package|;
 end_package
 
@@ -831,37 +833,19 @@ name|Resource
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|format
-operator|.
-name|KRFormat
-import|;
-end_import
-
 begin_comment
-comment|/**  *  * @author elvio  */
+comment|/**  *  *   */
 end_comment
 
 begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/classify"
+literal|"/enrichment"
 argument_list|)
 specifier|public
 class|class
-name|Classify
+name|Enrichment
 block|{
 specifier|private
 name|RuleStore
@@ -897,7 +881,7 @@ argument_list|)
 decl_stmt|;
 comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
 specifier|public
-name|Classify
+name|Enrichment
 parameter_list|(
 annotation|@
 name|Context
@@ -905,6 +889,7 @@ name|ServletContext
 name|servletContext
 parameter_list|)
 block|{
+comment|// Retrieve the rule store
 name|this
 operator|.
 name|kresRuleStore
@@ -924,6 +909,7 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// Retrieve the ontology network manager
 name|this
 operator|.
 name|onm
@@ -1351,7 +1337,7 @@ return|return
 name|jenamodel
 return|;
 block|}
-comment|/** 	 * To run a classifying reasoner on a RDF input File or IRI on the base of a 	 * Scope (or an ontology) and a recipe. Can be used either HermiT or an 	 * owl-link server reasoner end-point 	 *  	 * @param session 	 *            {A string contains the session IRI used to classify the 	 *            input.} 	 * @param scope 	 *            {A string contains either a specific scope's ontology or the 	 *            scope IRI used to classify the input.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to be classified.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to be classified.} 	 * @Param owllink_endpoint {A string contains the ressoner server end-point 	 *        URL.}      * @return Return:<br/>      *          200 The ontology is retrieved, containing only class axioms<br/>      *          400 To run the session is needed the scope<br/>      *          404 No data is retrieved<br/>      *          409 Too much RDF inputs<br/>      *          500 Some error occurred      */
+comment|/** 	 * To perform a rule based reasoning with a given recipe and scope (or an 	 * ontology) to a RDF input specify via its IRI. 	 *  	 * @param session 	 *            {A string contains the session IRI used to inference the 	 *            input.} 	 * @param scope 	 *            {A string contains either ontology or the scope IRI used to 	 *            inference the input.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to inference.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to inference.} 	 * @Param owllink_endpoint {A string contains the reasoner server end-point 	 *        URL.}      * @return Return:<br/>      *          200 Returns a graph with the enrichments<br/>      *          204 No enrichments have been produced from the given graph<br/>      *          400 To run the session is needed the scope<br/>      *          404 The recipe/ontology/scope/input doesn't exist in the network<br/>      *          409 Too much RDF inputs<br/>      *          500 Some error occurred      */
 annotation|@
 name|POST
 annotation|@
@@ -1364,25 +1350,11 @@ argument_list|)
 annotation|@
 name|Produces
 argument_list|(
-name|value
-operator|=
-block|{
-name|KRFormat
-operator|.
-name|RDF_XML
-block|,
-name|KRFormat
-operator|.
-name|TURTLE
-block|,
-name|KRFormat
-operator|.
-name|OWL_XML
-block|}
+literal|"application/rdf+xml"
 argument_list|)
 specifier|public
 name|Response
-name|ontologyClassify
+name|ontologyEnrichment
 parameter_list|(
 annotation|@
 name|FormParam
@@ -1575,16 +1547,6 @@ condition|(
 name|inputowl
 operator|==
 literal|null
-operator|&&
-operator|(
-name|session
-operator|==
-literal|null
-operator|||
-name|scope
-operator|==
-literal|null
-operator|)
 condition|)
 return|return
 name|Response
@@ -1599,47 +1561,6 @@ operator|.
 name|build
 argument_list|()
 return|;
-if|if
-condition|(
-name|inputowl
-operator|==
-literal|null
-condition|)
-block|{
-if|if
-condition|(
-name|scope
-operator|!=
-literal|null
-condition|)
-name|this
-operator|.
-name|inputowl
-operator|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-operator|.
-name|createOntology
-argument_list|()
-expr_stmt|;
-else|else
-block|{
-name|this
-operator|.
-name|inputowl
-operator|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-operator|.
-name|createOntology
-argument_list|()
-expr_stmt|;
-block|}
-block|}
 comment|//Create list to add ontologies as imported
 name|OWLOntologyManager
 name|mgr
@@ -2242,7 +2163,7 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|//Create the reasoner for the classification
+comment|//Create the reasoner for the enrichment
 name|CreateReasoner
 name|newreasoner
 init|=
@@ -2252,7 +2173,7 @@ argument_list|(
 name|inputowl
 argument_list|)
 decl_stmt|;
-comment|// Prepare and start the reasoner to classify ontology's
+comment|// Prepare and start the reasoner to enrich ontology's
 comment|// resources
 name|RunReasoner
 name|reasoner
@@ -2298,7 +2219,7 @@ name|output
 operator|=
 name|reasoner
 operator|.
-name|runClassifyInference
+name|runGeneralInference
 argument_list|(
 name|output
 argument_list|)
@@ -2454,37 +2375,6 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|// Create the reasoner for the consistency check by using
-comment|// the server and-point
-name|CreateReasoner
-name|newreasoner
-init|=
-operator|new
-name|CreateReasoner
-argument_list|(
-name|inputowl
-argument_list|,
-operator|new
-name|URL
-argument_list|(
-name|owllink_endpoint
-argument_list|)
-argument_list|)
-decl_stmt|;
-comment|// Prepare and start the reasoner to classify ontology's
-comment|// resources
-name|RunReasoner
-name|reasoner
-init|=
-operator|new
-name|RunReasoner
-argument_list|(
-name|newreasoner
-operator|.
-name|getReasoner
-argument_list|()
-argument_list|)
-decl_stmt|;
 comment|// Create a new OWLOntology model where to put the inferred
 comment|// axioms
 name|OWLOntology
@@ -2503,6 +2393,36 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|//Create the reasoner for the enrichment
+name|CreateReasoner
+name|newreasoner
+init|=
+operator|new
+name|CreateReasoner
+argument_list|(
+name|inputowl
+argument_list|,
+operator|new
+name|URL
+argument_list|(
+name|owllink_endpoint
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Prepare and start the reasoner to enrich ontology's
+comment|// resources
+name|RunReasoner
+name|reasoner
+init|=
+operator|new
+name|RunReasoner
+argument_list|(
+name|newreasoner
+operator|.
+name|getReasoner
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|//Initial input axioms count
 name|int
 name|startax
@@ -2512,12 +2432,12 @@ operator|.
 name|getAxiomCount
 argument_list|()
 decl_stmt|;
-comment|//Run the classification
+comment|//Run the rule reasoner
 name|output
 operator|=
 name|reasoner
 operator|.
-name|runClassifyInference
+name|runGeneralInference
 argument_list|(
 name|output
 argument_list|)
@@ -2542,7 +2462,7 @@ operator|>
 literal|0
 condition|)
 block|{
-comment|//Some inference is retrieved
+comment|//No data is retrieved, the graph IS consistent
 return|return
 name|Response
 operator|.
@@ -2557,7 +2477,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//No data is retrieved
+comment|//No data is retrieved, the graph IS NOT consistent
 return|return
 name|Response
 operator|.
@@ -2565,7 +2485,7 @@ name|status
 argument_list|(
 name|Status
 operator|.
-name|NOT_FOUND
+name|NO_CONTENT
 argument_list|)
 operator|.
 name|build
