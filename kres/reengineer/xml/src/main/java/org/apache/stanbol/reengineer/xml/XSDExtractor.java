@@ -1183,7 +1183,7 @@ name|simpleType
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//ADD SIMPLE TYPE DEFINITION TO THE RDF
+comment|// ADD SIMPLE TYPE DEFINITION TO THE RDF
 name|addSimpleType
 argument_list|(
 name|schemaNS
@@ -1368,7 +1368,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"DOCUMENTATION : "
 operator|+
@@ -1434,7 +1434,7 @@ operator|.
 name|getProhibitedSubstitutions
 argument_list|()
 decl_stmt|;
-comment|//Derivation restriction
+comment|// Derivation restriction
 if|if
 condition|(
 name|prohibitedSubstitution
@@ -1444,7 +1444,7 @@ operator|.
 name|DERIVATION_RESTRICTION
 condition|)
 block|{
-comment|//Prohibited restriction
+comment|// Prohibited restriction
 name|manager
 operator|.
 name|applyChange
@@ -1482,7 +1482,7 @@ operator|.
 name|DERIVATION_EXTENSION
 condition|)
 block|{
-comment|//Prohibited extension
+comment|// Prohibited extension
 name|manager
 operator|.
 name|applyChange
@@ -1520,7 +1520,7 @@ operator|.
 name|DERIVATION_NONE
 condition|)
 block|{
-comment|//Prohibited none
+comment|// Prohibited none
 name|manager
 operator|.
 name|applyChange
@@ -1548,7 +1548,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//Abstract
+comment|// Abstract
 name|boolean
 name|abstractProperty
 init|=
@@ -1581,7 +1581,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Final value
+comment|// Final value
 name|short
 name|finalValue
 init|=
@@ -1599,7 +1599,7 @@ operator|.
 name|DERIVATION_EXTENSION
 condition|)
 block|{
-comment|//Derivation extension
+comment|// Derivation extension
 name|manager
 operator|.
 name|applyChange
@@ -1637,7 +1637,7 @@ operator|.
 name|DERIVATION_RESTRICTION
 condition|)
 block|{
-comment|//Derivation restriction
+comment|// Derivation restriction
 name|manager
 operator|.
 name|applyChange
@@ -1675,7 +1675,7 @@ operator|.
 name|DERIVATION_NONE
 condition|)
 block|{
-comment|//Derivation none
+comment|// Derivation none
 name|manager
 operator|.
 name|applyChange
@@ -1730,7 +1730,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"CONTENTTYPE_EMPTY"
 argument_list|)
@@ -1748,7 +1748,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"CONTENTTYPE_ELEMENT"
 argument_list|)
@@ -1766,7 +1766,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"CONTENTTYPE_MIXED"
 argument_list|)
@@ -1784,7 +1784,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"CONTENTTYPE_SIMPLE"
 argument_list|)
@@ -1800,7 +1800,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"XSOBJECT SIZE: "
 operator|+
@@ -1986,7 +1986,7 @@ name|simpleType
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//ADD SIMPLE TYPE DEFINITION TO THE RDF
+comment|// ADD SIMPLE TYPE DEFINITION TO THE RDF
 name|addSimpleType
 argument_list|(
 name|schemaNS
@@ -2037,7 +2037,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"ATTRIBUTE USES REQUIRED "
 operator|+
@@ -2510,7 +2510,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"SIMPLE TYPE"
 argument_list|)
@@ -2551,7 +2551,7 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"COMPLEX TYPE"
 argument_list|)
@@ -2627,7 +2627,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"OBJ "
 operator|+
@@ -2645,7 +2645,7 @@ block|}
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"COMPOSITOR : "
 operator|+
@@ -2657,7 +2657,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"COMPOSITOR_SEQUENCE : "
 operator|+
@@ -2669,7 +2669,7 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"TERM: "
 operator|+
@@ -2687,7 +2687,7 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"NO PARTICLE"
 argument_list|)
@@ -2717,7 +2717,7 @@ name|XSSimpleTypeDecl
 name|xsSimpleTypeDefinition
 parameter_list|)
 block|{
-comment|//NAME
+comment|// NAME
 name|String
 name|name
 init|=
@@ -2728,14 +2728,14 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"NAME OF SIMPLE TYPE : "
 operator|+
 name|name
 argument_list|)
 expr_stmt|;
-comment|//add name literal to the simple type declaration
+comment|// add name literal to the simple type declaration
 name|manager
 operator|.
 name|applyChange
@@ -2760,7 +2760,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//FINAL
+comment|// FINAL
 name|short
 name|finalValue
 init|=
@@ -2778,7 +2778,7 @@ operator|.
 name|DERIVATION_EXTENSION
 condition|)
 block|{
-comment|//Derivation extension
+comment|// Derivation extension
 name|manager
 operator|.
 name|applyChange
@@ -2816,7 +2816,7 @@ operator|.
 name|DERIVATION_RESTRICTION
 condition|)
 block|{
-comment|//Derivation restriction
+comment|// Derivation restriction
 name|manager
 operator|.
 name|applyChange
@@ -2854,7 +2854,7 @@ operator|.
 name|DERIVATION_NONE
 condition|)
 block|{
-comment|//Derivation none
+comment|// Derivation none
 name|manager
 operator|.
 name|applyChange
@@ -2945,7 +2945,7 @@ name|enumeration
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//add value property to enumeration UriRef
+comment|// add value property to enumeration UriRef
 for|for
 control|(
 name|int
@@ -3001,7 +3001,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//add triple asserting that a simple type has an enumeration
+comment|// add triple asserting that a simple type has an enumeration
 name|manager
 operator|.
 name|applyChange
@@ -3029,8 +3029,8 @@ expr_stmt|;
 block|}
 try|try
 block|{
-comment|//Whitepace
-comment|/* This line, sometimes, generates an exception when try to get simple type definition for white space.                                 However, even if there is the exception, the line returns the ZERO value, so in the catch block is perfomed the                                 option with ZERO value that is WS_PRESERVE.*/
+comment|// Whitepace
+comment|/*              * This line, sometimes, generates an exception when try to get simple type definition for white              * space. However, even if there is the exception, the line returns the ZERO value, so in the              * catch block is perfomed the option with ZERO value that is WS_PRESERVE.              */
 name|short
 name|whitespace
 init|=
@@ -3048,7 +3048,7 @@ operator|.
 name|WS_COLLAPSE
 condition|)
 block|{
-comment|//Collapse
+comment|// Collapse
 name|manager
 operator|.
 name|applyChange
@@ -3086,7 +3086,7 @@ operator|.
 name|WS_PRESERVE
 condition|)
 block|{
-comment|//Preserve
+comment|// Preserve
 name|manager
 operator|.
 name|applyChange
@@ -3124,7 +3124,7 @@ operator|.
 name|WS_REPLACE
 condition|)
 block|{
-comment|//Replace
+comment|// Replace
 name|manager
 operator|.
 name|applyChange
@@ -3154,7 +3154,7 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"WHITESPACE : "
 operator|+
@@ -3169,7 +3169,7 @@ name|e
 parameter_list|)
 block|{
 comment|// TODO Auto-generated catch block
-comment|/*In case of exception is run the option that preserves the simple type.*/
+comment|/* In case of exception is run the option that preserves the simple type. */
 name|manager
 operator|.
 name|applyChange
@@ -3206,7 +3206,7 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-comment|//ADD BASE TYPE
+comment|// ADD BASE TYPE
 name|XSTypeDefinition
 name|baseTypeDefinition
 init|=
@@ -3231,7 +3231,7 @@ operator|.
 name|getName
 argument_list|()
 decl_stmt|;
-comment|//add base type
+comment|// add base type
 name|manager
 operator|.
 name|applyChange
@@ -3265,7 +3265,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//ADD MAX ECLUSIVE VALUE
+comment|// ADD MAX ECLUSIVE VALUE
 name|Object
 name|obj
 init|=
@@ -3350,7 +3350,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//ADD MIN ECLUSIVE VALUE
+comment|// ADD MIN ECLUSIVE VALUE
 name|obj
 operator|=
 name|xsSimpleTypeDefinition
@@ -3434,7 +3434,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//ADD MAX INCLUSIVE VALUE
+comment|// ADD MAX INCLUSIVE VALUE
 name|obj
 operator|=
 name|xsSimpleTypeDefinition
@@ -3518,7 +3518,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//ADD MIN INCLUSIVE VALUE
+comment|// ADD MIN INCLUSIVE VALUE
 name|obj
 operator|=
 name|xsSimpleTypeDefinition
@@ -3602,7 +3602,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//ADD PATTERNS
+comment|// ADD PATTERNS
 name|StringList
 name|stringList
 init|=
@@ -3786,7 +3786,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"PATTERN : "
 operator|+
@@ -3832,15 +3832,6 @@ operator|+=
 literal|"#"
 expr_stmt|;
 block|}
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"GET ONTOLOGY SCHEMA"
-argument_list|)
-expr_stmt|;
 name|OWLOntology
 name|dataSourceSchemaOntology
 init|=
@@ -3937,11 +3928,9 @@ operator|.
 name|getOwlFactory
 argument_list|()
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"XSD output IRI : "
 operator|+
@@ -4082,13 +4071,13 @@ name|IllegalArgumentException
 name|e
 parameter_list|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"could not set parser property"
+literal|"Could not set parser property"
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 block|}
@@ -4130,13 +4119,11 @@ operator|.
 name|getDocumentElement
 argument_list|()
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|"ROOT IS : "
+literal|"Root is : "
 operator|+
 name|root
 operator|.
@@ -4163,13 +4150,11 @@ operator|.
 name|getSchemaInformation
 argument_list|()
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|"SCHEMA MODEL  : "
+literal|"Schema model : "
 operator|+
 name|xsModel
 operator|.
@@ -4405,7 +4390,7 @@ name|typeResource
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"SIMPLE TYPE PRINT "
 operator|+
@@ -4416,7 +4401,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"COMPLEX TYPE PRINT "
 operator|+
@@ -4446,7 +4431,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"SIMPLE TYPE"
 argument_list|)
@@ -4485,11 +4470,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"COMPLEX TYPE"
 argument_list|)
@@ -4539,23 +4522,19 @@ name|typeResource
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//add the type property to the element declaration
-name|System
+comment|// add the type property to the element declaration
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"---- graph NS : "
 operator|+
 name|graphNS
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"---- type IRI : "
 operator|+
@@ -4594,7 +4573,7 @@ name|hasType
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//add the scope property to the element declaration
+comment|// add the scope property to the element declaration
 name|short
 name|scope
 init|=
@@ -4615,7 +4594,7 @@ operator|.
 name|SCOPE_ABSENT
 condition|)
 block|{
-comment|//Scope absent
+comment|// Scope absent
 name|scopeAxiom
 operator|=
 name|createOWLObjectPropertyAssertionAxiom
@@ -4695,7 +4674,7 @@ name|scopeAxiom
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//add the constraint type property to the element declaration
+comment|// add the constraint type property to the element declaration
 name|short
 name|constraingType
 init|=
@@ -4716,7 +4695,7 @@ operator|.
 name|VC_NONE
 condition|)
 block|{
-comment|//Value constraint none
+comment|// Value constraint none
 name|constraintAxiom
 operator|=
 name|createOWLObjectPropertyAssertionAxiom
@@ -4765,7 +4744,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//Value constraint fixed
+comment|// Value constraint fixed
 name|constraintAxiom
 operator|=
 name|createOWLObjectPropertyAssertionAxiom
@@ -4797,7 +4776,7 @@ name|constraintAxiom
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//add the constraint value literal to the element delcaration
+comment|// add the constraint value literal to the element delcaration
 name|String
 name|contstraintValue
 init|=

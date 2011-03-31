@@ -453,7 +453,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|ReengineeringException
+name|Reengineer
 import|;
 end_import
 
@@ -489,7 +489,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Reengineer
+name|Reengineer_OWL
 import|;
 end_import
 
@@ -507,7 +507,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Reengineer_OWL
+name|ReengineeringException
 import|;
 end_import
 
@@ -839,20 +839,6 @@ name|semanticweb
 operator|.
 name|owlapi
 operator|.
-name|model
-operator|.
-name|OWLOntologyStorageException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
 name|util
 operator|.
 name|OWLOntologyMerger
@@ -952,7 +938,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code XMLExtractor} extends of the {@link XSDExtractor} that implements  * the {@link Reengineer} for XML data sources.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * The {@code XMLExtractor} extends of the {@link XSDExtractor} that implements the {@link Reengineer} for XML  * data sources.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -1090,11 +1076,11 @@ specifier|private
 name|IRI
 name|spaceIRI
 decl_stmt|;
-comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the XMLExtractor instances do 	 * need to be configured! YOU NEED TO USE 	 * {@link #XMLExtractor(ONManager)} or its overloads, to parse the 	 * configuration and then initialise the rule store if running outside a 	 * OSGI environment. 	 */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the XMLExtractor instances do need to be configured! YOU NEED      * TO USE {@link #XMLExtractor(ONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|XMLExtractor
 parameter_list|()
-block|{  	}
+block|{      }
 specifier|public
 name|XMLExtractor
 parameter_list|(
@@ -1134,7 +1120,7 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Used to configure an instance within an OSGi container. 	 *  	 * @throws IOException 	 */
+comment|/**      * Used to configure an instance within an OSGi container.      *       * @throws IOException      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1388,13 +1374,13 @@ argument_list|(
 name|iri
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"Created ONTOLOGY OWL"
+literal|"Created OWL Ontology "
+operator|+
+name|iri
 argument_list|)
 expr_stmt|;
 name|scope
@@ -1734,7 +1720,7 @@ parameter_list|(
 name|NumberFormatException
 name|e
 parameter_list|)
-block|{  						}
+block|{                          }
 block|}
 block|}
 block|}
@@ -2068,11 +2054,9 @@ operator|+
 name|attributeName
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"Attribute: "
 operator|+
@@ -2235,11 +2219,9 @@ name|ontology
 init|=
 literal|null
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
 literal|"Starting XML Reengineering"
 argument_list|)
@@ -2276,11 +2258,9 @@ name|localDataOntology
 init|=
 literal|null
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"XML output IRI: "
 operator|+
@@ -3309,7 +3289,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"VALUE : "
 operator|+
@@ -3738,11 +3718,9 @@ decl_stmt|;
 name|OWLOntology
 name|schemaOntology
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"XML outputIRI : "
 operator|+
@@ -3823,36 +3801,13 @@ argument_list|,
 name|schemaOntology
 argument_list|)
 decl_stmt|;
-try|try
-block|{
-name|onManager
-operator|.
-name|getOwlCacheManager
-argument_list|()
-operator|.
-name|saveOntology
-argument_list|(
-name|ontology
-argument_list|,
-name|System
-operator|.
-name|out
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e
-parameter_list|)
-block|{
-comment|// TODO Auto-generated catch block
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
+comment|// // NO WAY!
+comment|// try {
+comment|// onManager.getOwlCacheManager().saveOntology(ontology, System.out);
+comment|// } catch (OWLOntologyStorageException e) {
+comment|// // TODO Auto-generated catch block
+comment|// e.printStackTrace();
+comment|// }
 return|return
 name|ontology
 return|;
