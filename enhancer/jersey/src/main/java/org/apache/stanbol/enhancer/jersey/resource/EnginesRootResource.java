@@ -1034,6 +1034,21 @@ name|EngineException
 throws|,
 name|IOException
 block|{
+if|if
+condition|(
+name|content
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Content is null"
+argument_list|)
+throw|;
+block|}
 name|log
 operator|.
 name|info
