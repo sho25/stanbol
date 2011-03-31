@@ -11,7 +11,7 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|owlapi
+name|owl
 package|;
 end_package
 
@@ -131,7 +131,7 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|owlapi
+name|owl
 operator|.
 name|trasformation
 operator|.
