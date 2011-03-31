@@ -91,11 +91,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|owl
 operator|.
-name|jersey
-operator|.
-name|writers
+name|web
 operator|.
 name|OWLOntologyWriter
 import|;
