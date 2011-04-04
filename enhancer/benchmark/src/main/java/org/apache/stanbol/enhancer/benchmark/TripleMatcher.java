@@ -42,12 +42,18 @@ specifier|public
 interface|interface
 name|TripleMatcher
 block|{
+comment|/** True if this matches suppplied Triple */
 name|boolean
 name|matches
 parameter_list|(
 name|Triple
 name|t
 parameter_list|)
+function_decl|;
+comment|/** Get the expression used to build this matcher */
+name|String
+name|getExpression
+parameter_list|()
 function_decl|;
 block|}
 end_interface

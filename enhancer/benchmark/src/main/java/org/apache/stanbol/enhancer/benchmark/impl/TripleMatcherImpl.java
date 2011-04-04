@@ -205,6 +205,19 @@ argument_list|()
 operator|+
 literal|" ("
 operator|+
+name|getExpression
+argument_list|()
+operator|+
+literal|")"
+return|;
+block|}
+comment|/** Get the expression used to build this matcher */
+specifier|public
+name|String
+name|getExpression
+parameter_list|()
+block|{
+return|return
 name|predicateUri
 operator|+
 literal|" "
@@ -214,8 +227,6 @@ operator|+
 literal|" "
 operator|+
 name|objectUri
-operator|+
-literal|")"
 return|;
 block|}
 annotation|@
