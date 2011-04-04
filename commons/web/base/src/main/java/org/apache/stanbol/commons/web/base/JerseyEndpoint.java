@@ -920,6 +920,13 @@ name|ComponentContext
 name|ctx
 parameter_list|)
 block|{
+if|if
+condition|(
+name|registeredAliases
+operator|!=
+literal|null
+condition|)
+block|{
 for|for
 control|(
 name|String
@@ -935,6 +942,7 @@ argument_list|(
 name|alias
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 name|servletContext
 operator|=
