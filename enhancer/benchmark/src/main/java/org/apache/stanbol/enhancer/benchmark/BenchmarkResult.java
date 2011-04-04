@@ -21,29 +21,59 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
+name|util
 operator|.
-name|Writer
+name|Set
 import|;
 end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
+import|;
+end_import
+
+begin_comment
+comment|/** Benchmark result for a single TripleMatcherGroup */
+end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|BenchmarkEngine
+name|BenchmarkResult
 block|{
-comment|/** Run supplied benchmarks and write results to output */
-name|void
-name|runBenchmark
-parameter_list|(
+comment|/** The TripleMatcherGroup that was evaluated */
+name|TripleMatcherGroup
+name|getTripleMatcherGroup
+parameter_list|()
+function_decl|;
+comment|/** Was the benchmark successful? */
+name|boolean
+name|successful
+parameter_list|()
+function_decl|;
+comment|/** More info about success or failure */
 name|String
-name|benchmarks
-parameter_list|,
-name|Writer
-name|output
-parameter_list|)
-throws|throws
-name|Exception
+name|getInfo
+parameter_list|()
+function_decl|;
+comment|/** Set of subjects that match our TripleMatcherGroup */
+name|Set
+argument_list|<
+name|UriRef
+argument_list|>
+name|getMatchingSubjects
+parameter_list|()
 function_decl|;
 block|}
 end_interface
