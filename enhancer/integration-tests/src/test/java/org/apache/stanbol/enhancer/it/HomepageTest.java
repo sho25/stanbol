@@ -96,7 +96,7 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"/static/style/stanbol.css"
+literal|"/static/home/style/stanbol.css"
 argument_list|,
 literal|"The RESTful Semantic Engine"
 argument_list|)

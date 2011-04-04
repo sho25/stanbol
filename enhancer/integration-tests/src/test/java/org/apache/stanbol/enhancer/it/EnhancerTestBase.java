@@ -212,7 +212,7 @@ name|withHeader
 argument_list|(
 literal|"Accept"
 argument_list|,
-literal|"text/plain"
+literal|"text/html"
 argument_list|)
 argument_list|)
 operator|.
@@ -223,7 +223,7 @@ argument_list|)
 operator|.
 name|assertContentType
 argument_list|(
-literal|"text/plain"
+literal|"text/html"
 argument_list|)
 operator|.
 name|assertContentRegexp
