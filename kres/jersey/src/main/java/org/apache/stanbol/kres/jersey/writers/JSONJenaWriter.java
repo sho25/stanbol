@@ -333,8 +333,8 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-specifier|static
 specifier|protected
+specifier|static
 specifier|final
 name|String
 name|propBase

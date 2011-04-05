@@ -23,22 +23,6 @@ end_comment
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|owl
-operator|.
-name|trasformation
-operator|.
-name|JenaToOwlConvert
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|hp

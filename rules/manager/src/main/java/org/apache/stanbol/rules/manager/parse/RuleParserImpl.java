@@ -1184,8 +1184,8 @@ literal|null
 return|;
 block|}
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|start
 parameter_list|()
@@ -1199,8 +1199,8 @@ name|expressionCont
 argument_list|()
 expr_stmt|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|expressionCont
 parameter_list|()
@@ -1244,8 +1244,8 @@ name|jj_gen
 expr_stmt|;
 block|}
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|expression
 parameter_list|()
@@ -1262,8 +1262,8 @@ name|expressionCont
 argument_list|()
 expr_stmt|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|prefix
 parameter_list|()
@@ -1810,8 +1810,8 @@ argument_list|()
 throw|;
 block|}
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|String
 name|equality
 parameter_list|()
@@ -1848,8 +1848,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|AtomList
 index|[]
 name|rule
@@ -1893,8 +1893,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|AtomList
 index|[]
 name|ruleDefinition
@@ -2226,8 +2226,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|AtomList
 name|atomList
 parameter_list|()
@@ -2354,8 +2354,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|AtomList
 name|atomListRest
 parameter_list|()
@@ -2436,8 +2436,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|RuleAtom
 name|atom
 parameter_list|()
@@ -2637,8 +2637,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|RuleAtom
 name|unionAtom
 parameter_list|()
@@ -2704,8 +2704,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|StringFunctionAtom
 name|createLabelAtom
 parameter_list|()
@@ -2756,8 +2756,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|StringFunctionAtom
 name|propStringAtom
 parameter_list|()
@@ -2823,8 +2823,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ComparisonAtom
 name|endsWithAtom
 parameter_list|()
@@ -2893,8 +2893,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ComparisonAtom
 name|startsWithAtom
 parameter_list|()
@@ -2963,8 +2963,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|StringFunctionAtom
 name|stringFunctionAtom
 parameter_list|()
@@ -3137,8 +3137,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|StrAtom
 name|strAtom
 parameter_list|()
@@ -3189,8 +3189,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|NamespaceAtom
 name|namespaceAtom
 parameter_list|()
@@ -3241,8 +3241,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|LocalNameAtom
 name|localnameAtom
 parameter_list|()
@@ -3293,8 +3293,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|StringAtom
 name|stringAtom
 parameter_list|()
@@ -3336,8 +3336,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ConcatAtom
 name|concatAtom
 parameter_list|()
@@ -3403,8 +3403,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|UpperCaseAtom
 name|upperCaseAtom
 parameter_list|()
@@ -3455,8 +3455,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|LowerCaseAtom
 name|lowerCaseAtom
 parameter_list|()
@@ -3507,8 +3507,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|SubstringAtom
 name|substringAtom
 parameter_list|()
@@ -3589,8 +3589,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|NumericFunctionAtom
 name|numericFunctionAtom
 parameter_list|()
@@ -3691,8 +3691,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|LengthAtom
 name|lengthAtom
 parameter_list|()
@@ -3743,8 +3743,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|SumAtom
 name|sumAtom
 parameter_list|()
@@ -3810,8 +3810,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|SubtractionAtom
 name|subtractionAtom
 parameter_list|()
@@ -3877,8 +3877,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|NumericFunctionAtom
 name|numberAtom
 parameter_list|()
@@ -3968,8 +3968,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ClassAtom
 name|classAtom
 parameter_list|()
@@ -4035,8 +4035,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|NewNodeAtom
 name|newNodeAtom
 parameter_list|()
@@ -4102,8 +4102,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|LetAtom
 name|letAtom
 parameter_list|()
@@ -4169,8 +4169,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|IndividualPropertyAtom
 name|individualPropertyAtom
 parameter_list|()
@@ -4251,8 +4251,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|DatavaluedPropertyAtom
 name|datavaluedPropertyAtom
 parameter_list|()
@@ -4333,8 +4333,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|SameAtom
 name|sameAsAtom
 parameter_list|()
@@ -4400,8 +4400,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|LessThanAtom
 name|lessThanAtom
 parameter_list|()
@@ -4467,8 +4467,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|GreaterThanAtom
 name|greaterThanAtom
 parameter_list|()
@@ -4534,8 +4534,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|DifferentAtom
 name|differentFromAtom
 parameter_list|()
@@ -4601,8 +4601,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|URIResource
 name|reference
 parameter_list|()
@@ -4761,8 +4761,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|URIResource
 name|varReference
 parameter_list|()
@@ -4905,8 +4905,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|String
 name|getURI
 parameter_list|()
@@ -4942,8 +4942,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|String
 name|getVariable
 parameter_list|()
@@ -4979,8 +4979,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|String
 name|getString
 parameter_list|()
@@ -5016,8 +5016,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|Integer
 name|getInt
 parameter_list|()
@@ -5058,8 +5058,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|Object
 name|uObject
 parameter_list|()
@@ -5166,8 +5166,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|URIResource
 name|iObject
 parameter_list|()
@@ -5265,8 +5265,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|Object
 name|dObject
 parameter_list|()
@@ -5355,8 +5355,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|Object
 name|literal
 parameter_list|()
@@ -5475,8 +5475,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|URIResource
 name|typedLiteral
 parameter_list|()
@@ -5548,8 +5548,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|URIResource
 name|variable
 parameter_list|()
@@ -5802,8 +5802,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ComparisonAtom
 name|notAtom
 parameter_list|()
@@ -5854,8 +5854,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ComparisonAtom
 name|isBlankAtom
 parameter_list|()
@@ -5906,8 +5906,8 @@ literal|"Missing return statement in function"
 argument_list|)
 throw|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|ComparisonAtom
 name|comparisonAtom
 parameter_list|()
@@ -6067,8 +6067,8 @@ specifier|private
 name|int
 name|jj_gen
 decl_stmt|;
-specifier|final
 specifier|private
+specifier|final
 name|int
 index|[]
 name|jj_la1
@@ -6079,14 +6079,14 @@ index|[
 literal|19
 index|]
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|int
 index|[]
 name|jj_la1_0
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|int
 index|[]
 name|jj_la1_1
@@ -6754,8 +6754,8 @@ argument_list|()
 throw|;
 block|}
 comment|/** Get the next Token. */
-specifier|final
 specifier|public
+specifier|final
 name|Token
 name|getNextToken
 parameter_list|()
@@ -6799,8 +6799,8 @@ name|token
 return|;
 block|}
 comment|/** Get the specific Token. */
-specifier|final
 specifier|public
+specifier|final
 name|Token
 name|getToken
 parameter_list|(
@@ -7185,15 +7185,15 @@ argument_list|)
 return|;
 block|}
 comment|/** Enable tracing. */
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|enable_tracing
 parameter_list|()
 block|{   }
 comment|/** Disable tracing. */
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|disable_tracing
 parameter_list|()

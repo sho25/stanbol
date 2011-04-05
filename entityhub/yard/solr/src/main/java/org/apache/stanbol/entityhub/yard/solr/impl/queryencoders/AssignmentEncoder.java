@@ -206,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Encodes the Assignment of the field to an value. If a value is parsed, than  * it encodes that the field must be equals to this value.  * @author Rupert Westenthaler  *  */
+comment|/**  * Encodes the Assignment of the field to an value. If a value is parsed, than  * it encodes that the field must be equals to this value.  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -220,8 +220,8 @@ name|Object
 argument_list|>
 block|{
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|ConstraintTypePosition
 name|POS
 init|=
@@ -234,8 +234,8 @@ name|assignment
 argument_list|)
 decl_stmt|;
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|String
 name|EQ
 init|=

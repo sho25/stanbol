@@ -786,8 +786,8 @@ name|getUri
 argument_list|()
 return|;
 block|}
-specifier|static
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|Class
@@ -802,8 +802,8 @@ argument_list|>
 argument_list|>
 name|class2DataTypeMap
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|Class
@@ -818,8 +818,8 @@ argument_list|>
 argument_list|>
 name|interface2DataTypeMap
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|Class
@@ -834,8 +834,8 @@ argument_list|>
 argument_list|>
 name|allClass2DataTypeMap
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|Class
@@ -850,8 +850,8 @@ argument_list|>
 argument_list|>
 name|allInterface2DataTypeMap
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|String
@@ -860,8 +860,8 @@ name|DataTypeEnum
 argument_list|>
 name|uri2DataType
 decl_stmt|;
-specifier|static
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|String

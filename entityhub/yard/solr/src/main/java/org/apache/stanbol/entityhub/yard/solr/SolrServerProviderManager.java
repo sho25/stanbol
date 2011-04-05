@@ -367,8 +367,8 @@ comment|//    //TODO See Race Condition in class doc
 comment|//    @Reference
 comment|//    private DefaultSolrServerProvider defaultProvider;
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|Logger
 name|log
 init|=

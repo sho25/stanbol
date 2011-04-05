@@ -838,8 +838,8 @@ comment|//    public abstract void store(Representation representation) throws I
 comment|//    @Override
 comment|//    public abstract void update(Representation represnetation) throws IllegalArgumentException;
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|YardConfig
 block|{

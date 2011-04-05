@@ -729,7 +729,7 @@ operator|=
 name|owlid
 expr_stmt|;
 block|}
-comment|/**     * Method to add a Recipe. The inputs are: a recipe name string that doesn't exist in the ontology, a string vector with the IRI of each rule and eventualy a description of the recipe.     *     * @param recipeName {A string variable contains a name}     * @param rules {A string vector variable contains the IRI of each rule}     * @param recipeDescription {A briefly description of the rule}     * @return {A boolean that is true if the operation is ok}     */
+comment|/**     * Adds a Recipe.     * The inputs are: a recipe name string that doesn't exist in the ontology,     * a string vector with the IRI of each rule and eventualy a description of the recipe.     *     * @param recipeName {A string variable contains a name}     * @param rules {A string vector variable contains the IRI of each rule}     * @param recipeDescription {A briefly description of the rule}     * @return {A boolean that is true if the operation is ok}     */
 specifier|public
 name|boolean
 name|addRecipe
@@ -1572,6 +1572,7 @@ if|if
 condition|(
 name|ok
 condition|)
+block|{
 name|storeaux
 operator|.
 name|setStore
@@ -1579,13 +1580,14 @@ argument_list|(
 name|owlmodel
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 operator|(
 name|ok
 operator|)
 return|;
 block|}
-comment|/**     * Method to add a simple Recipe without rules. The inputs are: a recipe name string that doesn't exist in the ontology and eventualy a description of the recipe.     *     * @param recipeName {A string variable contains a name}     * @param recipeDescription {A briefly description of the rule}     * @return {A boolean that is true if the operation is ok}     */
+comment|/**      * Adds a simple Recipe without rules.      * The inputs are: a recipe name string that doesn't exist in the ontology      * and eventualy a description of the recipe.      *      * @param recipeName {A string variable contains a name}      * @param recipeDescription {A briefly description of the rule}      *      * @return {A boolean that is true if the operation is ok}      */
 specifier|public
 name|boolean
 name|addSimpleRecipe
@@ -1833,12 +1835,10 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-operator|(
 name|ok
-operator|)
 return|;
 block|}
-comment|/**     * Method to add a simple Recipe without rules. The inputs are: a recipe name string that doesn't exist in the ontology and eventualy a description of the recipe.     *     * @param recipeIRI {An IRI contains the full recipe name}     * @param recipeDescription {A briefly description of the rule}     * @return {A boolean that is true if the operation is ok}     */
+comment|/**      * Add a simple Recipe without rules.      * The inputs are: a recipe name string that doesn't exist in the ontology and eventualy a description of the recipe.      *      * @param recipeIRI {An IRI contains the full recipe name}      * @param recipeDescription {A briefly description of the rule}      *      * @return {A boolean that is true if the operation is ok}      */
 specifier|public
 name|boolean
 name|addSimpleRecipe
@@ -2047,6 +2047,7 @@ if|if
 condition|(
 name|ok
 condition|)
+block|{
 name|storeaux
 operator|.
 name|setStore
@@ -2054,13 +2055,14 @@ argument_list|(
 name|owlmodel
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 operator|(
 name|ok
 operator|)
 return|;
 block|}
-comment|/**     * Method to add a Recipe. The inputs are: a recipe name string that doesn't exist in the ontology, a string vector with the IRI of each rule and eventualy a description of the recipe.     *     * @param recipeName {An IRI variable contains the complete recipe name}     * @param rules {A string vector variable contains the IRI of each rule}     * @param recipeDescription {A briefly description of the rule}     * @return {A boolean that is true if the operation is ok}     */
+comment|/**     * Adds a Recipe.     * The inputs are: a recipe name string that doesn't exist in the ontology, a string vector with the IRI of each rule and eventualy a description of the recipe.     *     * @param recipeName {An IRI variable contains the complete recipe name}     * @param rules {A string vector variable contains the IRI of each rule}     * @param recipeDescription {A briefly description of the rule}     * @return {A boolean that is true if the operation is ok}     */
 specifier|public
 name|boolean
 name|addRecipe
@@ -2560,7 +2562,7 @@ literal|true
 expr_stmt|;
 block|}
 comment|//Add single rule
-comment|/*               * BUGFIX - previously the check was done on rules.size()-1.              * The right code is rules.size(). Moreover is need also a control "if(r+1>(rules.size()-1)) break;" because the last rule has not successive rules.              *               */
+comment|/*                * BUGFIX - previously the check was done on rules.size()-1.                * The right code is rules.size(). Moreover is need also a control "if(r+1>(rules.size()-1)) break;" because the last rule has not successive rules.                *                */
 for|for
 control|(
 name|int
@@ -2653,7 +2655,9 @@ operator|-
 literal|1
 operator|)
 condition|)
+block|{
 break|break;
+block|}
 name|OWLNamedIndividual
 name|indf
 init|=
@@ -2911,6 +2915,7 @@ if|if
 condition|(
 name|ok
 condition|)
+block|{
 name|this
 operator|.
 name|storeaux
@@ -2920,13 +2925,12 @@ argument_list|(
 name|owlmodel
 argument_list|)
 expr_stmt|;
+block|}
 return|return
-operator|(
 name|ok
-operator|)
 return|;
 block|}
-comment|/**     * Method to add a Recipe. The inputs are two HashMap with the key the recipe name and the value is a vector of IRI contains the rule's sequence; the second map contains the description.     *     * @param recipeMap {An HashMap variable contains string recipe name as key and an IRI vector contains the rules of the sequence as value}     * @param recipeDescriptionMap {An HashMap variable contains string recipe name as key and the recipe's description as value}     * @return {A boolean that is true if the operation is ok}     */
+comment|/**      * Adds a Recipe.      * The inputs are two HashMap with the key the recipe name and the value is a vector of IRI contains the rule's sequence; the second map contains the description.      *      * @param recipeMap {An HashMap variable contains string recipe name as key and an IRI vector contains the rules of the sequence as value}      * @param recipeDescriptionMap {An HashMap variable contains string recipe name as key and the recipe's description as value}      *      * @return {A boolean that is true if the operation is ok}      */
 specifier|public
 name|boolean
 name|addRecipeMap
@@ -3882,7 +3886,7 @@ name|ok
 operator|)
 return|;
 block|}
-comment|/**     * Method to add a Recipe. The inputs are two HashMap with the key the recipe IRI name and the value is a vector IRI contains the rule's sequence; the second map contains the description.     *     * @param recipeMap {An HashMap variable contains the recipe IRI name as key and an IRI vector contains the rules of the sequence as value}     * @param recipeDescriptionMap {An HashMap variable contains the recipe IRI name as key and the recipe's description as value}     * @return {A boolean that is true if the operation is ok}     */
+comment|/**      * Methods to add a Recipe.      * The inputs are two HashMap with the key the recipe IRI name and the value is a vector IRI contains the rule's sequence; the second map contains the description.      *      * @param recipeMap {An HashMap variable contains the recipe IRI name as key and an IRI vector contains the rules of the sequence as value}      * @param recipeDescriptionMap {An HashMap variable contains the recipe IRI name as key and the recipe's description as value}      *      * @return {A boolean that is true if the operation is ok}      */
 specifier|public
 name|boolean
 name|addRecipeMapIRI
@@ -4822,12 +4826,10 @@ name|owlmodel
 argument_list|)
 expr_stmt|;
 return|return
-operator|(
 name|ok
-operator|)
 return|;
 block|}
-comment|/**      * Get the KReSRuleStore filled with rules and recipes     *      * @return {A KReSRuleStore object with the stored rules and recipes.}      */
+comment|/**      * Gets the KReSRuleStore filled with rules and recipes.      *      * @return {A KReSRuleStore object with the stored rules and recipes.}      */
 specifier|public
 name|RuleStore
 name|getStore

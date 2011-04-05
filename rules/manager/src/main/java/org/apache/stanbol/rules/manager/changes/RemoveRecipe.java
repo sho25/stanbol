@@ -1858,7 +1858,7 @@ return|return
 name|ok
 return|;
 block|}
-comment|/**      * Get the KReSRuleStore filled with rules and recipes     *      * @return {A KReSRuleStore object with the stored rules and recipes.}      */
+comment|/**      * Get the KReSRuleStore filled with rules and recipes      *      * @return {A KReSRuleStore object with the stored rules and recipes.}      */
 specifier|public
 name|RuleStore
 name|getStore

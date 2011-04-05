@@ -1320,8 +1320,8 @@ init|=
 literal|"org.apache.stanbol.entityhub.indexing.geonames.hierarchyFile"
 decl_stmt|;
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|Map
 argument_list|<
 name|String
@@ -6327,8 +6327,8 @@ name|boolean
 name|shortName
 decl_stmt|;
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|String
 name|TRUE
 init|=

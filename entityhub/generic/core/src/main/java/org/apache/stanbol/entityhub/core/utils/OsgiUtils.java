@@ -134,8 +134,8 @@ comment|/* do not create instances of utility classes*/
 block|}
 comment|/**      * Checks if a value is present      * @param propertyName The key for the property      * @return the value      * @throws ConfigurationException if the property is not present      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|Object
 name|checkProperty
 parameter_list|(
@@ -166,8 +166,8 @@ return|;
 block|}
 comment|/**      * Checks if the value is present. If not it returns the parse defaultValue.      * If the value and the default value is null, it throws an {@link ConfigurationException}      * @param properties the properties to search      * @param propertyName the name of the proeprty      * @param defaultValue the default value or<code>null</code> if none      * @return the value of the property (guaranteed NOT<code>null</code>)      * @throws ConfigurationException In case the property is not present and no default value was parsed      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|Object
 name|checkProperty
 parameter_list|(
@@ -238,8 +238,8 @@ block|}
 block|}
 comment|/**      * Checks if the property is present and the value can be converted to an {@link URI}      * @param propertyName The key for the property      * @return the value      * @throws ConfigurationException if the property is not present or the      * configured value is no valid URI      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|URI
 name|checkUriProperty
 parameter_list|(
@@ -301,8 +301,8 @@ block|}
 block|}
 comment|/**      * Checks if the property is present and the value can be converted to an {@link URL}      * @param propertyName The key for the property      * @return the value      * @throws ConfigurationException if the property is not present or the      * configured value is no valid URL      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|URL
 name|checkUrlProperty
 parameter_list|(
@@ -364,8 +364,8 @@ block|}
 block|}
 comment|/**      * Checks if the value of a property is a member of the parsed Enumeration      * @param<T> the Enumeration      * @param enumeration the class of the enumeration      * @param properties the configuration      * @param propertyName the name of the property to check      * @return the member of the enumeration      * @throws ConfigurationException if the property is missing or the value is      * not a member of the parsed enumeration      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 parameter_list|<
 name|T
 extends|extends

@@ -569,8 +569,8 @@ comment|// uris.put(virtualPhysicalURI, file);
 block|}
 comment|/** 	 * uri is the physical uri 	 *  	 * @param uri 	 * @return 	 * @throws ODPRegistryCacheException 	 * @throws URIUnresolvableException 	 */
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|OWLOntology
 name|getOntology
 parameter_list|(
@@ -666,8 +666,8 @@ throw|;
 block|}
 block|}
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|OWLOntologyDocumentSource
 name|getOntologyInputSource
 parameter_list|(
@@ -901,8 +901,8 @@ name|file
 return|;
 block|}
 specifier|private
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|OWLOntology
 name|retrieveLocalResource
 parameter_list|(
@@ -1073,8 +1073,8 @@ return|;
 block|}
 comment|/** 	 * Gets the remote ontology and saves it locally 	 *  	 * @param uri 	 * @return 	 * @throws OWLOntologyCreationException 	 * @throws UnknownOWLOntologyException 	 * @throws OWLOntologyStorageException 	 */
 specifier|private
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|OWLOntology
 name|retrieveRemoteResource
 parameter_list|(
@@ -1470,8 +1470,8 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|boolean
 name|save
 parameter_list|()
@@ -1580,8 +1580,8 @@ literal|true
 return|;
 block|}
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|boolean
 name|load
 parameter_list|()
@@ -1782,8 +1782,8 @@ literal|true
 return|;
 block|}
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|boolean
 name|clean
 parameter_list|()

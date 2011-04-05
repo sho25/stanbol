@@ -55,26 +55,6 @@ name|RuleAtom
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|rules
-operator|.
-name|base
-operator|.
-name|api
-operator|.
-name|util
-operator|.
-name|AtomIterator
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class

@@ -258,8 +258,8 @@ decl_stmt|;
 annotation|@
 name|BeforeClass
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|void
 name|initYard
 parameter_list|()
@@ -394,8 +394,8 @@ comment|/**      * This Method removes all Representations create via {@link #cr
 annotation|@
 name|AfterClass
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|void
 name|clearUpRepresentations
 parameter_list|()

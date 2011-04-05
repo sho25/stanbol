@@ -167,8 +167,8 @@ name|currentGroup
 decl_stmt|;
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|State
 block|{

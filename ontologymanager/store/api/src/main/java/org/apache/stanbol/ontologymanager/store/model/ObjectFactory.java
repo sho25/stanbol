@@ -103,8 +103,8 @@ class|class
 name|ObjectFactory
 block|{
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|QName
 name|_URI_QNAME
 init|=
@@ -117,8 +117,8 @@ literal|"URI"
 argument_list|)
 decl_stmt|;
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|QName
 name|_Description_QNAME
 init|=

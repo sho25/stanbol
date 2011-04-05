@@ -4738,8 +4738,8 @@ name|count
 init|=
 literal|0
 decl_stmt|;
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|start
 parameter_list|()
@@ -4755,8 +4755,8 @@ name|loadDataStart
 argument_list|()
 expr_stmt|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|send
 parameter_list|(
@@ -4788,8 +4788,8 @@ name|count
 operator|++
 expr_stmt|;
 block|}
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|flush
 parameter_list|()
@@ -4799,8 +4799,8 @@ name|void
 name|close
 parameter_list|()
 block|{ }
-specifier|final
 specifier|public
+specifier|final
 name|void
 name|finish
 parameter_list|()

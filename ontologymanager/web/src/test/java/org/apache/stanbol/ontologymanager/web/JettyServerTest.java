@@ -479,7 +479,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that the creation of active and inactive scopes is reflected in the RDF version of the scope set,      * whether it is set to display all scopes or only the active ones.      *       * @throws Exception      */
+comment|/**      * Tests that the creation of active and inactive scopes is reflected in the RDF version of the scope set,      * whether it is set to display all scopes or only the active ones.      */
 comment|// @Test
 specifier|public
 name|void
