@@ -24,16 +24,12 @@ specifier|public
 interface|interface
 name|LockManager
 block|{
-specifier|public
-specifier|static
 name|String
 name|GLOBAL_SPACE
 init|=
 literal|"GLOBAL_SPACE"
 decl_stmt|;
 comment|/**      * Obtain a read lock for specified ontology      *       * @param ontologyURI      *            URI of the ontology      */
-specifier|public
-specifier|abstract
 name|void
 name|obtainReadLockFor
 parameter_list|(
@@ -42,8 +38,6 @@ name|ontologyURI
 parameter_list|)
 function_decl|;
 comment|/**      * Release read lock for specified ontology      *       * @param ontologyURI      *            URI of the ontology      */
-specifier|public
-specifier|abstract
 name|void
 name|releaseReadLockFor
 parameter_list|(
@@ -52,8 +46,6 @@ name|ontologyURI
 parameter_list|)
 function_decl|;
 comment|/**      * Obtain a write lock for specified ontology      *       * @param ontologyURI      *            URI of the ontology      */
-specifier|public
-specifier|abstract
 name|void
 name|obtainWriteLockFor
 parameter_list|(
@@ -62,8 +54,6 @@ name|ontologyURI
 parameter_list|)
 function_decl|;
 comment|/**      * Release write lock for specified ontology      *       * @param ontologyURI      */
-specifier|public
-specifier|abstract
 name|void
 name|releaseWriteLockFor
 parameter_list|(

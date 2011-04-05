@@ -49,8 +49,6 @@ interface|interface
 name|Sign
 block|{
 comment|/**      * Enumeration over the different types of Signs defined by the Entityhub      * @author Rupert Westenthaler      *      */
-specifier|public
-specifier|static
 enum|enum
 name|SignTypeEnum
 block|{

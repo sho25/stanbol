@@ -431,7 +431,6 @@ argument_list|>
 argument_list|>
 name|additional
 decl_stmt|;
-specifier|private
 name|DataTypeEnum
 parameter_list|(
 name|Class
@@ -460,7 +459,6 @@ name|additional
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
 name|DataTypeEnum
 parameter_list|(
 name|String
@@ -492,7 +490,6 @@ name|additional
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
 name|DataTypeEnum
 parameter_list|(
 name|NamespaceEnum
@@ -524,7 +521,6 @@ name|additional
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
 name|DataTypeEnum
 parameter_list|(
 name|NamespaceEnum

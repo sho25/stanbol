@@ -112,7 +112,6 @@ return|return
 name|c
 return|;
 block|}
-empty_stmt|;
 block|}
 end_class
 

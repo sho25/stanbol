@@ -375,7 +375,6 @@ throws|throws
 name|IOException
 function_decl|;
 block|}
-empty_stmt|;
 specifier|private
 specifier|static
 class|class
@@ -408,7 +407,6 @@ name|this
 return|;
 block|}
 block|}
-empty_stmt|;
 specifier|private
 specifier|static
 class|class
@@ -506,7 +504,6 @@ name|this
 return|;
 block|}
 block|}
-empty_stmt|;
 specifier|private
 specifier|static
 class|class

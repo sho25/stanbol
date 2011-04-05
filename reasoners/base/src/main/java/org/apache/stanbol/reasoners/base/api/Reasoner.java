@@ -53,7 +53,6 @@ interface|interface
 name|Reasoner
 block|{
 comment|/** 	 * Gets the reasoner. 	 *  	 * @param ontology {@link OWLOntology} 	 * @return the reasoner {@link OWLReasoner}. 	 */
-specifier|public
 name|OWLReasoner
 name|getReasoner
 parameter_list|(
@@ -62,7 +61,6 @@ name|ontology
 parameter_list|)
 function_decl|;
 comment|/** 	 * Runs a consistency check on the ontology. 	 *  	 * @param owlReasoner {@link OWLReasoner} 	 * @return true if the ontology is consistent, false otherwise. 	 */
-specifier|public
 name|boolean
 name|consistencyCheck
 parameter_list|(
@@ -71,7 +69,6 @@ name|owlReasoner
 parameter_list|)
 function_decl|;
 comment|/** 	 * Launch the reasoning on a set of rules applied to a gien ontology. 	 * @param ontology 	 * @param ruleOntology 	 * @return the inferred ontology 	 */
-specifier|public
 name|OWLOntology
 name|runRules
 parameter_list|(

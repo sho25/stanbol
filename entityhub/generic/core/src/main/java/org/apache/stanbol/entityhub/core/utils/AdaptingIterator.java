@@ -60,7 +60,6 @@ argument_list|>
 block|{
 comment|/**      * Adapts values of type T to values of type A.<code>null</code> indicated      * that the adaption is not possible for the current value of T      *       * @author Rupert Westenthaler      *      * @param<T>      * @param<A>      */
 specifier|public
-specifier|static
 interface|interface
 name|Adapter
 parameter_list|<

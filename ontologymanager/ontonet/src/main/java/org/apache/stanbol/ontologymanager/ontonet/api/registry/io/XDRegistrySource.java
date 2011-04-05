@@ -59,28 +59,23 @@ interface|interface
 name|XDRegistrySource
 block|{
 comment|/** 	 * Each invocation will return a new InputStream. 	 *  	 * @return 	 */
-specifier|public
 name|InputStream
 name|getInputStream
 parameter_list|()
 function_decl|;
-specifier|public
 name|IRI
 name|getPhysicalIRI
 parameter_list|()
 function_decl|;
 comment|/** 	 * Each invocation will return a new Reader. 	 *  	 * @return 	 */
-specifier|public
 name|Reader
 name|getReader
 parameter_list|()
 function_decl|;
-specifier|public
 name|boolean
 name|isInputStreamAvailable
 parameter_list|()
 function_decl|;
-specifier|public
 name|boolean
 name|isReaderAvailable
 parameter_list|()

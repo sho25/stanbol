@@ -48,14 +48,10 @@ specifier|public
 interface|interface
 name|JenaPersistenceProvider
 block|{
-specifier|public
-specifier|abstract
 name|boolean
 name|clear
 parameter_list|()
 function_decl|;
-specifier|public
-specifier|abstract
 name|List
 argument_list|<
 name|String
@@ -63,8 +59,6 @@ argument_list|>
 name|listModels
 parameter_list|()
 function_decl|;
-specifier|public
-specifier|abstract
 name|Model
 name|createModel
 parameter_list|(
@@ -72,8 +66,6 @@ name|String
 name|ontologyURI
 parameter_list|)
 function_decl|;
-specifier|public
-specifier|abstract
 name|boolean
 name|hasModel
 parameter_list|(
@@ -81,8 +73,6 @@ name|String
 name|ontologyURI
 parameter_list|)
 function_decl|;
-specifier|public
-specifier|abstract
 name|Model
 name|getModel
 parameter_list|(
@@ -90,8 +80,6 @@ name|String
 name|ontologyURI
 parameter_list|)
 function_decl|;
-specifier|public
-specifier|abstract
 name|void
 name|removeModel
 parameter_list|(
@@ -99,8 +87,6 @@ name|String
 name|ontologyURI
 parameter_list|)
 function_decl|;
-specifier|public
-specifier|abstract
 name|boolean
 name|commit
 parameter_list|(

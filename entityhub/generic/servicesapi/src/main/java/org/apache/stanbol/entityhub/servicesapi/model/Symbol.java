@@ -150,7 +150,6 @@ name|uri
 return|;
 block|}
 block|}
-empty_stmt|;
 comment|/**      * The property to be used for the symbol label      */
 name|String
 name|LABEL

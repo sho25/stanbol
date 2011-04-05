@@ -66,12 +66,10 @@ specifier|public
 interface|interface
 name|URIResource
 block|{
-specifier|public
 name|URI
 name|getURI
 parameter_list|()
 function_decl|;
-specifier|public
 name|Resource
 name|createJenaResource
 parameter_list|(

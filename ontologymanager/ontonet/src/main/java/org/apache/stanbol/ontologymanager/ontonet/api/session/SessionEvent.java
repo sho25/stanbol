@@ -27,7 +27,6 @@ class|class
 name|SessionEvent
 block|{
 specifier|public
-specifier|static
 enum|enum
 name|OperationType
 block|{
@@ -42,8 +41,7 @@ block|,
 name|KILL
 block|,
 name|STORE
-block|; 	}
-empty_stmt|;
+block|}
 comment|/** 	 * The KReS session affected by this event. 	 */
 specifier|private
 name|Session

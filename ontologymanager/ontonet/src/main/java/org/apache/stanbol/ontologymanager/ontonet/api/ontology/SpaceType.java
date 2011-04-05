@@ -37,7 +37,6 @@ argument_list|(
 literal|"session"
 argument_list|)
 block|;
-specifier|private
 name|SpaceType
 parameter_list|(
 name|String

@@ -406,7 +406,6 @@ specifier|private
 name|boolean
 name|languageType
 decl_stmt|;
-specifier|private
 name|IndexDataTypeEnum
 parameter_list|(
 name|String
@@ -436,7 +435,6 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
 name|IndexDataTypeEnum
 parameter_list|(
 name|String
@@ -469,7 +467,6 @@ name|language
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
 name|IndexDataTypeEnum
 parameter_list|(
 name|String

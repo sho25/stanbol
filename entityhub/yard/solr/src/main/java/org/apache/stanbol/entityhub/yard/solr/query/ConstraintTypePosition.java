@@ -37,7 +37,6 @@ argument_list|>
 block|{
 comment|/**      * The possible positions of constraints within a Index Constraint.<p>      * The ordinal number of the elements is used to sort the constraints in the      * {@link EncodedConstraintParts}. So ensure, that the ordering in this      * enumeration corresponds with the ordering in a constraint within the      * index      * @author Rupert Westenthaler      *      */
 specifier|public
-specifier|static
 enum|enum
 name|PositionType
 block|{
@@ -50,7 +49,7 @@ block|,
 name|assignment
 block|,
 name|value
-block|;     }
+block|}
 specifier|private
 name|PositionType
 name|type

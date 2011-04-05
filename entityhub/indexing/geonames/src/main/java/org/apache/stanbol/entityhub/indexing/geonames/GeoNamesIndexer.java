@@ -1340,7 +1340,6 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|private
-specifier|static
 enum|enum
 name|Properties
 block|{

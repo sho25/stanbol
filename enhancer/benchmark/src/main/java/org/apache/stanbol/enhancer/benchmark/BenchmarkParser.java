@@ -53,43 +53,31 @@ interface|interface
 name|BenchmarkParser
 block|{
 comment|// Marker strings in the benchmark text input
-specifier|static
-specifier|final
 name|String
 name|COMMENT_MARKER
 init|=
 literal|"#"
 decl_stmt|;
-specifier|static
-specifier|final
 name|String
 name|FIELD_SEPARATOR
 init|=
 literal|":"
 decl_stmt|;
-specifier|static
-specifier|final
 name|String
 name|INPUT_SECTION_MARKER
 init|=
 literal|"= INPUT ="
 decl_stmt|;
-specifier|static
-specifier|final
 name|String
 name|EXPECT_SECTION_MARKER
 init|=
 literal|"= EXPECT ="
 decl_stmt|;
-specifier|static
-specifier|final
 name|String
 name|COMPLAIN_SECTION_MARKER
 init|=
 literal|"= COMPLAIN ="
 decl_stmt|;
-specifier|static
-specifier|final
 name|String
 name|DESCRIPTION_FIELD
 init|=

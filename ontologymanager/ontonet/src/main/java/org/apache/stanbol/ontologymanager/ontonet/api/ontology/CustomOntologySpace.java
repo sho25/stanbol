@@ -29,7 +29,6 @@ extends|extends
 name|OntologySpace
 block|{
 comment|/** 	 * Logically links this custom space with the supplied core ontology space, 	 * so that the top ontology in the former will import those in the latter.<br> 	 *<br> 	 * This relationship is expected to hold at all times once the space is 	 * active, however the method to set it is available in case implementations 	 * require to perform other operations between the creation of ontology 	 * spaces and their linking. 	 *  	 * @param coreSpace 	 *            the core ontology space to be linked 	 * @param skipRoot 	 *            if true, the custom root ontology will not import the core 	 *            root ontology straight away, but instead all of its axioms and 	 *            import statements will be copied. Useful for implementations 	 *            that construct root ontologies in memory but do not store 	 *            them. 	 */
-specifier|public
 name|void
 name|attachCoreSpace
 parameter_list|(

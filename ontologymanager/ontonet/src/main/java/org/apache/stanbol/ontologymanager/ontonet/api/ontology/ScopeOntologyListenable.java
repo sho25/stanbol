@@ -36,7 +36,6 @@ specifier|public
 interface|interface
 name|ScopeOntologyListenable
 block|{
-specifier|public
 name|void
 name|addOntologyScopeListener
 parameter_list|(
@@ -44,12 +43,10 @@ name|ScopeOntologyListener
 name|listener
 parameter_list|)
 function_decl|;
-specifier|public
 name|void
 name|clearOntologyScopeListeners
 parameter_list|()
 function_decl|;
-specifier|public
 name|Collection
 argument_list|<
 name|ScopeOntologyListener
@@ -57,7 +54,6 @@ argument_list|>
 name|getOntologyScopeListeners
 parameter_list|()
 function_decl|;
-specifier|public
 name|void
 name|removeOntologyScopeListener
 parameter_list|(

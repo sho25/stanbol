@@ -47,7 +47,6 @@ name|timeout
 decl_stmt|;
 comment|/**      * Interface for conditions to check, isTrue will be called      * repeatedly until success or timeout      */
 specifier|public
-specifier|static
 interface|interface
 name|Condition
 block|{

@@ -20,7 +20,6 @@ specifier|public
 interface|interface
 name|SPARQLObject
 block|{
-specifier|public
 name|String
 name|getObject
 parameter_list|()

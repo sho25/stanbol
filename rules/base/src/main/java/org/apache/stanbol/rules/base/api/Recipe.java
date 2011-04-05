@@ -73,7 +73,6 @@ interface|interface
 name|Recipe
 block|{
 comment|/** 	 * Get the rule of the recipe identified by the ruleURI. The rule is returned as 	 * a {@link Rule} object. 	 *  	 * @param ruleURI 	 * @return the object that represents a {@link Rule} 	 */
-specifier|public
 name|Rule
 name|getRule
 parameter_list|(
@@ -82,44 +81,37 @@ name|ruleURI
 parameter_list|)
 function_decl|;
 comment|/** 	 * Trasnform the rules contained in the recipe in a set of SPARQL CONSTRUCT queries. 	 *  	 * @return the {@link String} array that contains the SPARQL CONSTRUCT queries. 	 */
-specifier|public
 name|String
 index|[]
 name|toSPARQL
 parameter_list|()
 function_decl|;
 comment|/** 	 * Serialize the {@link Recipe} into a Jena {@link Model}. 	 *  	 * @return the {@link Model} of the Recipe. 	 */
-specifier|public
 name|Model
 name|getRecipeAsRDFModel
 parameter_list|()
 function_decl|;
 comment|/** 	 * Serialize the rules contained in the recipe to Rule Syntax. 	 * @return the {@link String} containing the serialization of the recipe's rules 	 * in Rule Syntax. 	 */
-specifier|public
 name|String
 name|getRulesInKReSSyntax
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the list of the {@link Rule} contained in the recipe. 	 * @return the {@link RuleList}. 	 */
-specifier|public
 name|RuleList
 name|getkReSRuleList
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the ID of the recipe in the {@link RuleStore}. 	 * @return the {@link IRI} expressing the recipe's ID. 	 */
-specifier|public
 name|IRI
 name|getRecipeID
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the description about the recipe. 	 * @return the {@link String} about the recipe's description. 	 */
-specifier|public
 name|String
 name|getRecipeDescription
 parameter_list|()
 function_decl|;
 comment|/** 	 * Add a Rule to the recipe. 	 * This operation does not effect a change on recipe in the rule store, but only in the in-memory 	 * representation of a specific recipe. To permanently change the recipe use {@link RuleStore#addRuleToRecipe(IRI, String)}. 	 * @param kReSRule the {@link Rule}. 	 */
-specifier|public
 name|void
 name|addKReSRule
 parameter_list|(

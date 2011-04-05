@@ -47,7 +47,7 @@ block|,
 name|U
 block|,
 name|V
-block|; }
+block|}
 end_enum
 
 end_unit

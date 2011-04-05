@@ -1983,7 +1983,6 @@ operator|=
 literal|"urn:test:TestRdfEntity"
 argument_list|)
 specifier|public
-specifier|static
 interface|interface
 name|TestRdfEntity
 extends|extends
@@ -2311,7 +2310,6 @@ operator|=
 literal|"urn:test:TestRdfEntity2"
 argument_list|)
 specifier|public
-specifier|static
 interface|interface
 name|TestRdfEntity2
 extends|extends
@@ -2389,7 +2387,6 @@ operator|=
 literal|"urn:test:SubTestRdfEntity"
 argument_list|)
 specifier|public
-specifier|static
 interface|interface
 name|SubTestRdfEntity
 extends|extends

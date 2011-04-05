@@ -27,7 +27,6 @@ interface|interface
 name|ScopeEventListener
 block|{
 comment|/** 	 * Called<i>after</i> an ontology scope, assuming it is already registered 	 * somewhere, is activated. 	 *  	 * @param scope 	 *            the activated ontology scope 	 */
-specifier|public
 name|void
 name|scopeActivated
 parameter_list|(
@@ -36,7 +35,6 @@ name|scope
 parameter_list|)
 function_decl|;
 comment|/** 	 * Called<i>after</i> a new ontology scope has been created. 	 *  	 * @param scope 	 *            the created ontology scope 	 */
-specifier|public
 name|void
 name|scopeCreated
 parameter_list|(
@@ -45,7 +43,6 @@ name|scope
 parameter_list|)
 function_decl|;
 comment|/** 	 * Called<i>after</i> an ontology scope, assuming it is already registered 	 * somewhere, is deactivated. If the deactivation of a scope implies 	 * deregistering of it, a separate event should be fired for deregistration. 	 *  	 * @param scope 	 *            the deactivated ontology scope 	 */
-specifier|public
 name|void
 name|scopeDeactivated
 parameter_list|(
@@ -54,7 +51,6 @@ name|scope
 parameter_list|)
 function_decl|;
 comment|/** 	 * Called<i>after</i> an ontology scope is removed from the scope registry. 	 *  	 * @param scope 	 *            the deregistered ontology scope 	 */
-specifier|public
 name|void
 name|scopeDeregistered
 parameter_list|(
@@ -63,7 +59,6 @@ name|scope
 parameter_list|)
 function_decl|;
 comment|/** 	 * Called<i>after</i> an ontology scope is added to the scope registry. 	 *  	 * @param scope 	 *            the registered ontology scope 	 */
-specifier|public
 name|void
 name|scopeRegistered
 parameter_list|(

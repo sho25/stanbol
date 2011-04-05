@@ -50,7 +50,6 @@ argument_list|>
 block|{
 comment|/**      * Interface used by the {@link FilteringIterator} to check if an element      * of the parent Iterator should be filtered or not. If {@link #isValid(Object)}      * returns true the element of the parent iterator is also returned by this      * Iterator. Otherwise the element is filtered.<p>       * @author Rupert Westenthaler      *      * @param<T>      */
 specifier|public
-specifier|static
 interface|interface
 name|Filter
 parameter_list|<

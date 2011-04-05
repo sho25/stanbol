@@ -67,7 +67,6 @@ extends|extends
 name|Constraint
 block|{
 specifier|public
-specifier|static
 enum|enum
 name|PatternType
 block|{

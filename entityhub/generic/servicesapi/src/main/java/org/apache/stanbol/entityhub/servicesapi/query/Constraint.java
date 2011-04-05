@@ -31,7 +31,6 @@ name|Constraint
 block|{
 comment|/**      * Defines the enumeration of available Constraints.      * TODO Maybe we need a more "extensible" way to define different constraints      * in future      * @author Rupert Westenthaler      *      */
 specifier|public
-specifier|static
 enum|enum
 name|ConstraintType
 block|{

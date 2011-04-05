@@ -73,13 +73,11 @@ interface|interface
 name|Reengineer
 block|{
 comment|/** 	 * The method returns one of the following values related to a particular data souce: 	 *<li> 0 - Relational Databases 	 *<li> 1 - XML 	 *<li> 2 - iCalendar 	 *<li> 3 - RSS 	 *</ul> 	 *  	 * @return {@code int} 	 */
-specifier|public
 name|int
 name|getReengineerType
 parameter_list|()
 function_decl|;
 comment|/** 	 * The method enables to test if the Reengineer can perform the reengineering of a particular data source given as input. 	 *  	 * @param dataSource {@link DataSource} 	 * @return true if the Reengineer can perform the reengineering, false otherwise 	 */
-specifier|public
 name|boolean
 name|canPerformReengineering
 parameter_list|(
@@ -88,7 +86,6 @@ name|dataSource
 parameter_list|)
 function_decl|;
 comment|/** 	 * The method enables to test if the Reengineer can perform the reengineering of a particular data source type given as input. 	 *  	 * @param the data source type {@code int} 	 * @return true if the Reengineer can perform the reengineering, false otherwise 	 */
-specifier|public
 name|boolean
 name|canPerformReengineering
 parameter_list|(
@@ -96,7 +93,6 @@ name|int
 name|dataSourceType
 parameter_list|)
 function_decl|;
-specifier|public
 name|boolean
 name|canPerformReengineering
 parameter_list|(
@@ -105,7 +101,6 @@ name|schemaOntology
 parameter_list|)
 function_decl|;
 comment|/** 	 * The method enables to test if the Reengineer can perform the reengineering of a particular data source type given as input. 	 *  	 * @param the data source type {@code String} 	 * @return true if the Reengineer can perform the reengineering, false otherwise 	 */
-specifier|public
 name|boolean
 name|canPerformReengineering
 parameter_list|(
@@ -116,7 +111,6 @@ throws|throws
 name|UnsupportedReengineerException
 function_decl|;
 comment|/** 	 * The data source (non-RDF) provided is reengineered to RDF. This operation produces an RDF data set that contains information 	 * both about the data and about the schema of the original data source. 	 *  	 * @param graphNS {@link String} 	 * @param outputIRI {@link IRI} 	 * @param dataSource {@link DataSource} 	 * @return the reengineered data set - {@link OWLOntology} 	 */
-specifier|public
 name|OWLOntology
 name|reengineering
 parameter_list|(
@@ -133,7 +127,6 @@ throws|throws
 name|ReengineeringException
 function_decl|;
 comment|/** 	 * The generation of the RDF containing the information about the schema of the data source is obtained passing to this method 	 * the data source object as it is represented in Semion (i.e. {@link DataSource}). An {@link OWLOntology} is returned 	 *  	 * @param graphNS {@link String} 	 * @param outputIRI {@link IRI} 	 * @param dataSource {@link DataSource} 	 * @return the {@link OWLOntology} of the data source shema 	 */
-specifier|public
 name|OWLOntology
 name|schemaReengineering
 parameter_list|(
@@ -148,7 +141,6 @@ name|dataSource
 parameter_list|)
 function_decl|;
 comment|/** 	 * The generation of the RDF containing the information about the data of the data source is obtained passing to this method 	 * the data source object as it is represented in Semion (i.e. {@link DataSource}). An {@link OWLOntology} is returned 	 *  	 * @param graphNS {@link String} 	 * @param outputIRI {@link IRI} 	 * @param dataSource {@link DataSource} 	 * @return the {@link OWLOntology} of the data source shema 	 */
-specifier|public
 name|OWLOntology
 name|dataReengineering
 parameter_list|(

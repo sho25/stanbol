@@ -84,7 +84,6 @@ specifier|public
 interface|interface
 name|RuleAtom
 block|{
-specifier|public
 name|Resource
 name|toSWRL
 parameter_list|(
@@ -92,12 +91,10 @@ name|Model
 name|model
 parameter_list|)
 function_decl|;
-specifier|public
 name|SPARQLObject
 name|toSPARQL
 parameter_list|()
 function_decl|;
-specifier|public
 name|SWRLAtom
 name|toSWRL
 parameter_list|(
@@ -106,22 +103,18 @@ name|factory
 parameter_list|)
 function_decl|;
 comment|/** 	 * Retunr the KReS syntax representation of the atom. 	 * @return the string of the atom in KReSRule syntax. 	 */
-specifier|public
 name|String
 name|toKReSSyntax
 parameter_list|()
 function_decl|;
-specifier|public
 name|boolean
 name|isSPARQLConstruct
 parameter_list|()
 function_decl|;
-specifier|public
 name|boolean
 name|isSPARQLDelete
 parameter_list|()
 function_decl|;
-specifier|public
 name|boolean
 name|isSPARQLDeleteData
 parameter_list|()

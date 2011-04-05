@@ -1103,7 +1103,6 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-specifier|static
 enum|enum
 name|SELECT
 block|{

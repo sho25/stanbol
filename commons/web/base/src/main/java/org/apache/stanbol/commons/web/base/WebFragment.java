@@ -67,19 +67,16 @@ interface|interface
 name|WebFragment
 block|{
 comment|/**      * Name of the fragment. Should be a lowercase short name without any kind of special character, so as to      * be used as a path component in the URL of the static resources.      */
-specifier|public
 name|String
 name|getName
 parameter_list|()
 function_decl|;
 comment|/**      * Java package name that is the classloading root of the static resources of the fragment to be published      * by the OSGi HttpService under /static-url-root/fragment-name/      *       * Note: this package should be exported by the bundle.      */
-specifier|public
 name|String
 name|getStaticResourceClassPath
 parameter_list|()
 function_decl|;
 comment|/**      * Set of JAX-RS resources provided as classes.      *       * Note: those classes should be visible: use the Export-Package bundle declaration to export their      * packages.      */
-specifier|public
 name|Set
 argument_list|<
 name|Class
@@ -91,7 +88,6 @@ name|getJaxrsResourceClasses
 parameter_list|()
 function_decl|;
 comment|/**      * Set of JAX-RS resources provided as singleton instances.      *       * Note: those objects should be visible: use the Export-Package bundle declaration to export their      * packages.      */
-specifier|public
 name|Set
 argument_list|<
 name|Object
@@ -100,13 +96,11 @@ name|getJaxrsResourceSingletons
 parameter_list|()
 function_decl|;
 comment|/**      * @return a template load instance that can be used by the FreemarkerViewProcessor for building the HTML      *         UI incrementally. If this is an instance of ClassTemplateLoader, the class path visibility      *         should be exported using the Export-Package bundle declaration.      */
-specifier|public
 name|TemplateLoader
 name|getTemplateLoader
 parameter_list|()
 function_decl|;
 comment|/**      * CSS and favicon resources to be linked in the head of all HTML pages controlled by the NavigationMixin      * abstract resource. The resources will be published under:      *       * ${it.staticRootUrl}/${link.fragmentName}/${link.relativePath}      */
-specifier|public
 name|List
 argument_list|<
 name|LinkResource
@@ -115,7 +109,6 @@ name|getLinkResources
 parameter_list|()
 function_decl|;
 comment|/**      * Javascript resources to be linked in the head of all HTML pages controlled by the NavigationMixin      * abstract resource. The resources will be published under:      *       * ${it.staticRootUrl}/${script.fragmentName}/${script.relativePath}      */
-specifier|public
 name|List
 argument_list|<
 name|ScriptResource
@@ -124,7 +117,6 @@ name|getScriptResources
 parameter_list|()
 function_decl|;
 comment|/**      * List of link descriptions to contribute to the main navigation menu.      */
-specifier|public
 name|List
 argument_list|<
 name|NavigationLink
@@ -133,7 +125,6 @@ name|getNavigationLinks
 parameter_list|()
 function_decl|;
 comment|/**      * @return the bundle context who contributed this fragment (useful for loading the resources from the      *         right classloading context)      */
-specifier|public
 name|BundleContext
 name|getBundleContext
 parameter_list|()

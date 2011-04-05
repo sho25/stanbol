@@ -263,7 +263,6 @@ specifier|private
 name|String
 name|prefix
 decl_stmt|;
-specifier|private
 name|NamespaceEnum
 parameter_list|(
 name|String
@@ -292,7 +291,6 @@ operator|=
 name|ns
 expr_stmt|;
 block|}
-specifier|private
 name|NamespaceEnum
 parameter_list|(
 name|String

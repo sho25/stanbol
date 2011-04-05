@@ -303,7 +303,6 @@ comment|/*do not create instances of Util Classes*/
 block|}
 comment|/**      * Defines Mappings for the DataTypes supported by the Clerezza {@link SimpleLiteralFactory}.      * If a xsd data type is mapped to<code>null</code> the string representation      * should be returnd as String (bypassing the {@link LiteralFactory})      * TODO Replace this code with our own implementation of the {@link LiteralFactory}      *      and implement mappings for all DataTypes in {@link DataTypeEnum}      *      (Rupert Westenthaler, 2010-11-12)      * @author Rupert Westenthaler      */
 specifier|public
-specifier|static
 enum|enum
 name|XsdDataTypeEnum
 block|{

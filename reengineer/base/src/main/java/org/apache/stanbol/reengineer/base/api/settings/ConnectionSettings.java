@@ -39,49 +39,41 @@ extends|extends
 name|Serializable
 block|{
 comment|/** 	 * Get the URL of the connection. 	 *  	 * @return the URL of the connection as a {@link String}. 	 */
-specifier|public
 name|String
 name|getUrl
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the name of the server on which the DB is running. 	 *  	 * @return the name of the server as a {@link String}. 	 */
-specifier|public
 name|String
 name|getServerName
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the port of the server on which the DB is running. 	 *  	 * @return the port of the server as a {@link String}. 	 */
-specifier|public
 name|String
 name|getPortNumber
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the name of the database. 	 *  	 * @return the port of the server as a {@link String}. 	 */
-specifier|public
 name|String
 name|getDatabaseName
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the user name for the autenthication. 	 *  	 * @return the user name as a {@link String}. 	 */
-specifier|public
 name|String
 name|getUserName
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the password for the autenthication. 	 *  	 * @return the password as a {@link String}. 	 */
-specifier|public
 name|String
 name|getPassword
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the select method for querying. 	 *  	 * @return the select method as a {@link String}. 	 */
-specifier|public
 name|String
 name|getSelectMethod
 parameter_list|()
 function_decl|;
 comment|/** 	 * Get the JDBC driver of the database. 	 *  	 * @return the JDBC driver as a {@link String}. 	 */
-specifier|public
 name|String
 name|getJDBCDriver
 parameter_list|()

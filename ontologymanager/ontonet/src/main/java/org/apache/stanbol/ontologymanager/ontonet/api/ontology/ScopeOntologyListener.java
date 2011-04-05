@@ -36,7 +36,6 @@ specifier|public
 interface|interface
 name|ScopeOntologyListener
 block|{
-specifier|public
 name|void
 name|onOntologyAdded
 parameter_list|(
@@ -47,7 +46,6 @@ name|IRI
 name|addedOntology
 parameter_list|)
 function_decl|;
-specifier|public
 name|void
 name|onOntologyRemoved
 parameter_list|(

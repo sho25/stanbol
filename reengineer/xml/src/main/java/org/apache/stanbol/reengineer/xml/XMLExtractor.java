@@ -2390,7 +2390,6 @@ name|graphNS
 operator|+
 literal|"/schema#"
 decl_stmt|;
-empty_stmt|;
 name|String
 name|dataNS
 init|=
@@ -2809,7 +2808,6 @@ name|graphNS
 operator|+
 literal|"/schema#"
 decl_stmt|;
-empty_stmt|;
 name|String
 name|dataNS
 init|=
@@ -2817,7 +2815,6 @@ name|graphNS
 operator|+
 literal|"#"
 decl_stmt|;
-empty_stmt|;
 name|OWLClass
 name|dataSourceOwlClass
 init|=

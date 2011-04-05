@@ -92,12 +92,10 @@ specifier|public
 interface|interface
 name|RuleStore
 block|{
-specifier|public
 name|OWLOntology
 name|getOntology
 parameter_list|()
 function_decl|;
-specifier|public
 name|void
 name|setStore
 parameter_list|(
@@ -105,7 +103,6 @@ name|OWLOntology
 name|owl
 parameter_list|)
 function_decl|;
-specifier|public
 name|Set
 argument_list|<
 name|IRI
@@ -113,12 +110,10 @@ argument_list|>
 name|listIRIRecipes
 parameter_list|()
 function_decl|;
-specifier|public
 name|RecipeList
 name|listRecipes
 parameter_list|()
 function_decl|;
-specifier|public
 name|Recipe
 name|getRecipe
 parameter_list|(
@@ -128,24 +123,20 @@ parameter_list|)
 throws|throws
 name|NoSuchRecipeException
 function_decl|;
-specifier|public
 name|String
 name|getFilePath
 parameter_list|()
 function_decl|;
-specifier|public
 name|void
 name|saveOntology
 parameter_list|()
 throws|throws
 name|OWLOntologyStorageException
 function_decl|;
-specifier|public
 name|String
 name|getRuleStoreNamespace
 parameter_list|()
 function_decl|;
-specifier|public
 name|boolean
 name|addRecipe
 parameter_list|(
@@ -156,7 +147,6 @@ name|String
 name|recipeDescription
 parameter_list|)
 function_decl|;
-specifier|public
 name|Recipe
 name|addRuleToRecipe
 parameter_list|(
@@ -169,7 +159,6 @@ parameter_list|)
 throws|throws
 name|NoSuchRecipeException
 function_decl|;
-specifier|public
 name|Recipe
 name|addRuleToRecipe
 parameter_list|(
@@ -180,7 +169,6 @@ name|String
 name|kReSRuleInKReSSyntax
 parameter_list|)
 function_decl|;
-specifier|public
 name|void
 name|createRecipe
 parameter_list|(
@@ -191,7 +179,6 @@ name|String
 name|rulesInKReSSyntax
 parameter_list|)
 function_decl|;
-specifier|public
 name|boolean
 name|removeRecipe
 parameter_list|(
@@ -199,7 +186,6 @@ name|Recipe
 name|recipe
 parameter_list|)
 function_decl|;
-specifier|public
 name|boolean
 name|removeRecipe
 parameter_list|(
@@ -207,7 +193,6 @@ name|IRI
 name|recipeIRI
 parameter_list|)
 function_decl|;
-specifier|public
 name|boolean
 name|removeRule
 parameter_list|(

@@ -27,7 +27,6 @@ interface|interface
 name|SessionListener
 block|{
 comment|/** 	 * Called whenever an event affecting a KReS session is fired. 	 *  	 * @param event 	 *            the session event. 	 */
-specifier|public
 name|void
 name|sessionChanged
 parameter_list|(

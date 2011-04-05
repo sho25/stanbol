@@ -1094,10 +1094,6 @@ return|;
 block|}
 end_function
 
-begin_empty_stmt
-empty_stmt|;
-end_empty_stmt
-
 begin_comment
 comment|/**      * Splits up a URI in local name and namespace based on the following rules      *<ul>      *<li> If URI starts with "urn:" and last index of ':' == 3 than the there      *      is no namespace and the whole URI is a local name      *<li> if the uri starts with "urn:" and the last index of ':' ia> 3, than      *      the last index ':' is used.      *<li> split by the last index of '#' if index>= 0      *<li> split by the last index of '/' if index>= 0      *<li> return after the first split      *<li> return the whole URI as local name if no split was performed.      *</ul>      * @param uri The uri      * @return A array with two fields. In the first the namespace is stored (      * might be<code>null</code>. In the second the local name is stored.      */
 end_comment

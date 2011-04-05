@@ -61,7 +61,6 @@ interface|interface
 name|OntologySpaceFactory
 block|{
 comment|/** 	 * Creates and sets up a default core ontology space. 	 *  	 * @param scopeID 	 *            the unique identifier of the ontology scope that will 	 *            reference this space. It can be used for generating the 	 *            identifier for this ontology space. 	 * @param coreSource 	 *            the input source for the ontologies in this space. 	 * @return the generated ontology space. 	 */
-specifier|public
 name|CoreOntologySpace
 name|createCoreOntologySpace
 parameter_list|(
@@ -73,7 +72,6 @@ name|coreSource
 parameter_list|)
 function_decl|;
 comment|/** 	 * Creates and sets up a default custom ontology space. 	 *  	 * @param scopeID 	 *            the unique identifier of the ontology scope that will 	 *            reference this space. It can be used for generating the 	 *            identifier for this ontology space. 	 * @param customSource 	 *            the input source for the ontologies in this space. 	 * @return the generated ontology space. 	 */
-specifier|public
 name|CustomOntologySpace
 name|createCustomOntologySpace
 parameter_list|(
@@ -85,7 +83,6 @@ name|customSource
 parameter_list|)
 function_decl|;
 comment|/** 	 * Creates and sets up a default session ontology space. 	 *  	 * @param scopeID 	 *            the unique identifier of the ontology scope that will 	 *            reference this space. It can be used for generating the 	 *            identifier for this ontology space. 	 * @return the generated ontology space. 	 */
-specifier|public
 name|SessionOntologySpace
 name|createSessionOntologySpace
 parameter_list|(

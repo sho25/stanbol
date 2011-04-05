@@ -622,7 +622,6 @@ block|}
 comment|/*--------------------------------------------------------------------------      *    Implementation of the ValueConverters for the dataTypes defined by      *    DataTypeEnum      * -------------------------------------------------------------------------      */
 comment|/**      * This Interface defines an simple converter interface that allows a      * registry to get metadata about the type the converter can create and      * second the {@link #convert(Object)} method that is called to convert      * to the target type.      * @author Rupert Westenthaler      *      * @param<T> the type of created objects      */
 specifier|public
-specifier|static
 interface|interface
 name|ValueConverter
 parameter_list|<

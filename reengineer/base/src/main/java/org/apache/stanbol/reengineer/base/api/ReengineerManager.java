@@ -81,7 +81,6 @@ interface|interface
 name|ReengineerManager
 block|{
 comment|/** 	 * The {@link ReengineerManager} can add a new reengineer to the list of available reengineers. This is performed through the method 	 * {@cod bindReengineer}. 	 *  	 * @param semionReengineer {@link Reengineer} 	 * @return true if the reengineer is bound, false otherwise 	 */
-specifier|public
 name|boolean
 name|bindReengineer
 parameter_list|(
@@ -90,7 +89,6 @@ name|semionReengineer
 parameter_list|)
 function_decl|;
 comment|/** 	 * The {@link ReengineerManager} can remove a reengineer from the list of available reengineers. This is performed through the method 	 * {@cod unbindReengineer}. 	 *  	 * @param semionReengineer {@link Reengineer} 	 * @return true if the reengineer is unbound, false otherwise 	 */
-specifier|public
 name|boolean
 name|unbindReengineer
 parameter_list|(
@@ -99,7 +97,6 @@ name|semionReengineer
 parameter_list|)
 function_decl|;
 comment|/** 	 * The {@link ReengineerManager} can remove a reengineer from the list of available reengineers. This is performed through the method 	 * {@cod unbindReengineer}. 	 *  	 * @param reenginnerType {@code int} 	 * @return true if the reengineer is unbound, false otherwise 	 */
-specifier|public
 name|boolean
 name|unbindReengineer
 parameter_list|(
@@ -126,7 +123,6 @@ comment|//	 * @return the active {@link SemionRefactorer}
 comment|//	 */
 comment|//	public SemionRefactorer getRegisteredRefactorer();
 comment|/** 	 * Gets the active reengineers of KReS. 	 *  	 * @return the {@link Collection< Reengineer>} of active reengineers. 	 */
-specifier|public
 name|Collection
 argument_list|<
 name|Reengineer
@@ -135,12 +131,10 @@ name|listReengineers
 parameter_list|()
 function_decl|;
 comment|/** 	 * Gets the number of active reengineers. 	 *  	 * @return the number of active reengineers. 	 */
-specifier|public
 name|int
 name|countReengineers
 parameter_list|()
 function_decl|;
-specifier|public
 name|OWLOntology
 name|performReengineering
 parameter_list|(
@@ -156,7 +150,6 @@ parameter_list|)
 throws|throws
 name|ReengineeringException
 function_decl|;
-specifier|public
 name|OWLOntology
 name|performSchemaReengineering
 parameter_list|(
@@ -172,7 +165,6 @@ parameter_list|)
 throws|throws
 name|ReengineeringException
 function_decl|;
-specifier|public
 name|OWLOntology
 name|performDataReengineering
 parameter_list|(
@@ -193,7 +185,6 @@ name|ReengineeringException
 throws|,
 name|NoSuchOntologyInStoreException
 function_decl|;
-specifier|public
 name|OWLOntology
 name|performDataReengineering
 parameter_list|(

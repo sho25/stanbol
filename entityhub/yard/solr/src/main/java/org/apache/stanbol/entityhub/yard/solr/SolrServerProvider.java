@@ -73,8 +73,6 @@ interface|interface
 name|SolrServerProvider
 block|{
 comment|/**      * SolrServer types defined here to avoid java dependencies to the according      * java classes      * @author Rupert Westenthaler      *      */
-specifier|public
-specifier|static
 enum|enum
 name|Type
 block|{

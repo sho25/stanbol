@@ -33,7 +33,6 @@ interface|interface
 name|SessionListenable
 block|{
 comment|/** 	 * Adds the given SessionListener to the pool of registered listeners. 	 *  	 * @param listener 	 *            the session listener to be added 	 */
-specifier|public
 name|void
 name|addSessionListener
 parameter_list|(
@@ -42,13 +41,11 @@ name|listener
 parameter_list|)
 function_decl|;
 comment|/** 	 * Clears the pool of registered session listeners. 	 */
-specifier|public
 name|void
 name|clearSessionListeners
 parameter_list|()
 function_decl|;
 comment|/** 	 * Returns all the registered session listeners. It is up to developers to 	 * decide whether implementations should return sets (unordered but without 	 * redundancy), lists (e.g. in the order they wer registered but potentially 	 * redundant) or other data structures that implement {@link Collection}. 	 *  	 * @return a collection of registered session listeners. 	 */
-specifier|public
 name|Collection
 argument_list|<
 name|SessionListener
@@ -57,7 +54,6 @@ name|getSessionListeners
 parameter_list|()
 function_decl|;
 comment|/** 	 * Removes the given SessionListener from the pool of active listeners. 	 *  	 * @param listener 	 *            the session listener to be removed 	 */
-specifier|public
 name|void
 name|removeSessionListener
 parameter_list|(

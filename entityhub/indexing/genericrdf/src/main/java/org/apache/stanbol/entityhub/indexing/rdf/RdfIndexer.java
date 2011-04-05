@@ -998,7 +998,6 @@ name|RdfIndexer
 block|{
 comment|/**      * The indexing mode defines if the RDF data are appended to existing      * {@link Representation}s in the target {@link Yard} or if {@link Representation}      * are replaced with RDF data used for indexing!      * @author Rupert Westenthaler      *      */
 specifier|public
-specifier|static
 enum|enum
 name|IndexingMode
 block|{
@@ -2757,7 +2756,6 @@ name|repStdCount
 init|=
 literal|0
 decl_stmt|;
-empty_stmt|;
 name|long
 name|start
 init|=

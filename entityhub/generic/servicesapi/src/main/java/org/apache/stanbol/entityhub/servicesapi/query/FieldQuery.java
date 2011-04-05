@@ -79,8 +79,6 @@ init|=
 literal|"fieldQuery"
 decl_stmt|;
 comment|/**      * Adds Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
-specifier|public
-specifier|abstract
 name|void
 name|addSelectedField
 parameter_list|(
@@ -89,8 +87,6 @@ name|field
 parameter_list|)
 function_decl|;
 comment|/**      * Adds Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
-specifier|public
-specifier|abstract
 name|void
 name|addSelectedFields
 parameter_list|(
@@ -102,8 +98,6 @@ name|fields
 parameter_list|)
 function_decl|;
 comment|/**      * Removes Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
-specifier|public
-specifier|abstract
 name|void
 name|removeSelectedField
 parameter_list|(
@@ -112,8 +106,6 @@ name|fields
 parameter_list|)
 function_decl|;
 comment|/**      * Removes Fields to be selected by this Query      * @param fields the fields to be selected by this query      */
-specifier|public
-specifier|abstract
 name|void
 name|removeSelectedFields
 parameter_list|(
@@ -125,8 +117,6 @@ name|fields
 parameter_list|)
 function_decl|;
 comment|/**      * Unmodifiable set with all the fields to be selected by this query      * @return the fields to be selected by this query      */
-specifier|public
-specifier|abstract
 name|Set
 argument_list|<
 name|String
@@ -135,8 +125,6 @@ name|getSelectedFields
 parameter_list|()
 function_decl|;
 comment|/**      * Sets/replaces the constraint for a field of the representation. If      *<code>null</code> is parsed as constraint this method removes any existing      * constraint for the field      * @param field the field      * @param constraint the Constraint      */
-specifier|public
-specifier|abstract
 name|void
 name|setConstraint
 parameter_list|(
@@ -148,8 +136,6 @@ name|constraint
 parameter_list|)
 function_decl|;
 comment|/**      * Removes the constraint for the parse field      * @param field      */
-specifier|public
-specifier|abstract
 name|void
 name|removeConstraint
 parameter_list|(
@@ -158,8 +144,6 @@ name|field
 parameter_list|)
 function_decl|;
 comment|/**      * Checks if there is a constraint for the given field      * @param field the field      * @return the state      */
-specifier|public
-specifier|abstract
 name|boolean
 name|isConstraint
 parameter_list|(
@@ -168,8 +152,6 @@ name|field
 parameter_list|)
 function_decl|;
 comment|/**      * Getter for the Constraint of a field      * @param field the field      * @return the constraint or<code>null</code> if none is defined.      */
-specifier|public
-specifier|abstract
 name|Constraint
 name|getConstraint
 parameter_list|(
@@ -178,8 +160,6 @@ name|field
 parameter_list|)
 function_decl|;
 comment|/**      * Getter for the unmodifiable list of query elements for the given Path. Use      * the add/remove constraint methods to change query elements for an path      * @param path the path      * @return the list of query elements for a path      */
-specifier|public
-specifier|abstract
 name|Set
 argument_list|<
 name|Entry

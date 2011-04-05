@@ -145,26 +145,18 @@ interface|interface
 name|SolrDirectoryManager
 block|{
 comment|/**      * This property can be used to configure the location of the internally      * managed EmbeddedSolrServer.<p>      * Configuring an absolute path (starting with {@link File#separatorChar})       * will cause the index to be initialised in this directory.<p>      * Configuring an relative value will use<ul>      *<li> the working directory (<code>Systen.getProperty("user.dir")</code>)      *      outside of an OSGI environment      *<li> the data directory provided by the SolrYard bundle (by calling      *      {@link BundleContext#getDataFile(String)} with the relative path.      *</ul>      * In case this property is not present the {@link #DEFAULT_SOLR_DATA_DIR}      * (an relative path) is used.      */
-specifier|public
-specifier|static
-specifier|final
 name|String
 name|MANAGED_SOLR_DIR_PROPERTY
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.managedSolrDir"
 decl_stmt|;
 comment|/**      * Default value for the relative path used if the {@link #MANAGED_SOLR_DIR_PROPERTY}      * is not present. It is not required that implementations use this as default.      */
-specifier|public
-specifier|static
-specifier|final
 name|String
 name|DEFAULT_SOLR_DATA_DIR
 init|=
 literal|"indexes"
 decl_stmt|;
 comment|/**      * Checks if a solrIndex with the parsed name is managed or not.      * @param solrIndexName the name of the Solr index to check      * @return<code>true</code> only if a Solr index with the parsed name is      * already present within the manages Solr directory.      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated)      * @throws IllegalArgumentException In case<code>null</code> or an empty       * string is parsed as solrIndexName      */
-specifier|public
-specifier|abstract
 name|boolean
 name|isManagedIndex
 parameter_list|(
@@ -175,8 +167,6 @@ throws|throws
 name|IllegalStateException
 function_decl|;
 comment|/**      * Getter for all the indexes currently available in the managed solr directory.      * The key is the name of the index and the value is the File pointing to the      * directory.      * @return map containing all the currently available indexes      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated) or initialised.      */
-specifier|public
-specifier|abstract
 name|Map
 argument_list|<
 name|String
@@ -189,8 +179,6 @@ throws|throws
 name|IllegalStateException
 function_decl|;
 comment|/**      * Getter for the directory of the parsed index. In case the requested index      * does not already exist (in the managed solr directory) it is initialised      * by using the default solr core configuration contained in this bundle.<p>      * Directories returned by this method are typically used as second parameter      * of {@link SolrServerProvider#getSolrServer(Type, String, String...)} to      * create an {@link SolrServer} instance.      * @param solrPathOrUri the name of the requested solr index. If no index      * with that name does exist a new one will be initialised base on the      * default core configuration part of this bundle.      * @return the directory (instanceDir) of the index.      * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
-specifier|public
-specifier|abstract
 name|File
 name|getSolrDirectory
 parameter_list|(
@@ -202,8 +190,6 @@ throws|throws
 name|IllegalArgumentException
 function_decl|;
 comment|/**      * Getter for the managed Solr Directory.      * @return the directory of the Solr Home used for the internally managed      * {@link CoreContainer} or<code>null</code> if running within an OSGI      * Environment and this component is deactivated.      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated) or initialised.      */
-specifier|public
-specifier|abstract
 name|File
 name|getManagedDirectory
 parameter_list|()

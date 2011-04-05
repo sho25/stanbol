@@ -55,25 +55,21 @@ interface|interface
 name|OntologyInputSource
 block|{
 comment|/** 	 * Returns the IRI by dereferencing which it should be possible to obtain 	 * the ontology. This method is supposed to return null if the ontology 	 * lives in-memory and was not or is not going to be stored publicly. 	 *  	 * @return the physical location for this ontology source, or null if 	 *         unknown. 	 */
-specifier|public
 name|IRI
 name|getPhysicalIRI
 parameter_list|()
 function_decl|;
 comment|/** 	 * Returns the OWL Ontology that imports the whole ontology network 	 * addressed by this input source. 	 *  	 * @return the ontology network root. 	 */
-specifier|public
 name|OWLOntology
 name|getRootOntology
 parameter_list|()
 function_decl|;
 comment|/** 	 * Determines if a physical IRI is known for this ontology source. Note that 	 * an anonymous ontology may have been fetched from a physical location, 	 * just as a named ontology may have been stored in memory and have no 	 * physical location. 	 *  	 * @return true if a physical location is known for this ontology source. 	 */
-specifier|public
 name|boolean
 name|hasPhysicalIRI
 parameter_list|()
 function_decl|;
 comment|/** 	 * Determines if a root ontology that imports the entire network is 	 * available. 	 *  	 * @return true if a root ontology is available, false otherwise. 	 */
-specifier|public
 name|boolean
 name|hasRootOntology
 parameter_list|()

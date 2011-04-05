@@ -24,7 +24,6 @@ specifier|public
 interface|interface
 name|SetRuleStore
 block|{
-specifier|public
 name|RuleStore
 name|returnStore
 parameter_list|()

@@ -265,7 +265,6 @@ name|token
 decl_stmt|;
 comment|/**      * Enumeration that contains the property definitions used by the LocationEnhancementEngine. This enum      * does not define all properties defined by geonames.org      *      * @author Rupert Westenthaler      */
 specifier|public
-specifier|static
 enum|enum
 name|SearchRequestPropertyEnum
 block|{
@@ -495,7 +494,6 @@ return|;
 block|}
 block|}
 specifier|public
-specifier|static
 enum|enum
 name|HierarchyRequestPorpertyEnum
 block|{

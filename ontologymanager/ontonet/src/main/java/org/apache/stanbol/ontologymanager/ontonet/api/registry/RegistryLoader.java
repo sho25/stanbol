@@ -176,7 +176,6 @@ specifier|public
 interface|interface
 name|RegistryLoader
 block|{
-specifier|public
 name|Set
 argument_list|<
 name|OWLOntology
@@ -195,7 +194,6 @@ parameter_list|)
 throws|throws
 name|OWLOntologyCreationException
 function_decl|;
-specifier|public
 name|RegistryLibrary
 name|getLibrary
 parameter_list|(
@@ -206,7 +204,6 @@ name|IRI
 name|libraryID
 parameter_list|)
 function_decl|;
-specifier|public
 name|Object
 name|getParent
 parameter_list|(
@@ -214,7 +211,6 @@ name|Object
 name|child
 parameter_list|)
 function_decl|;
-specifier|public
 name|boolean
 name|hasChildren
 parameter_list|(
@@ -222,7 +218,6 @@ name|Object
 name|parent
 parameter_list|)
 function_decl|;
-specifier|public
 name|boolean
 name|hasLibrary
 parameter_list|(
@@ -234,7 +229,6 @@ name|libraryID
 parameter_list|)
 function_decl|;
 comment|//	public boolean isPrintingLoadedOntologies();
-specifier|public
 name|void
 name|loadLocations
 parameter_list|()
@@ -242,7 +236,6 @@ throws|throws
 name|RegistryContentException
 function_decl|;
 comment|/** 	 * The ontology at<code>physicalIRI</code> may in turn include more than 	 * one registry. 	 *  	 * @param physicalIRI 	 * @return 	 */
-specifier|public
 name|Set
 argument_list|<
 name|Registry

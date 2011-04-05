@@ -280,7 +280,6 @@ argument_list|)
 return|;
 block|}
 block|}
-empty_stmt|;
 comment|//    /**
 comment|//     * Getter for the identifier.
 comment|//     * @return the identifier
@@ -297,7 +296,6 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-empty_stmt|;
 comment|/**      * Getter for the ID of the entity      * @return the mapped entity      */
 name|String
 name|getEntityId
@@ -330,7 +328,6 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-empty_stmt|;
 comment|/**      * The state of this mapping      * @return the state      */
 name|MappingState
 name|getState

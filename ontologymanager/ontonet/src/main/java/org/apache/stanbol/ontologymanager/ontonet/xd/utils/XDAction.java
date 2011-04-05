@@ -39,7 +39,7 @@ block|,
 name|QUICK_SEARCH
 block|,
 name|FILTER
-block|; }
+block|}
 end_enum
 
 end_unit

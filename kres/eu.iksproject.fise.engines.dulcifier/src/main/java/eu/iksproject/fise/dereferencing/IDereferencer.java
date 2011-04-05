@@ -41,7 +41,6 @@ interface|interface
 name|IDereferencer
 block|{
 comment|/** 	 *  	 * The resolve method dereferences location and returns input streams. 	 *  	 * @param location 	 * @return {@link InputStream} if the location is resolved. Otherwise a {@link FileNotFoundException} is thrown. 	 * @throws FileNotFoundException 	 */
-specifier|public
 name|InputStream
 name|resolve
 parameter_list|(

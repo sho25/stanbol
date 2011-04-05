@@ -126,7 +126,6 @@ name|UriRef
 name|uri
 decl_stmt|;
 comment|/**      * Creates n new entity of this Enum by using the parsed namespace and      * local name.      *      * @param ns    The namespace or<code>null</code> to use the default      * @param local The local name or<code>null</code> to use the default      */
-specifier|private
 name|ZemantaOntologyEnum
 parameter_list|(
 name|String
@@ -165,7 +164,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Creates a new entry of this Enum by using the parsed local name and the      * default Zemanta namespace      *      * @param local the local name or<code>null</code> to use the name() of the      *              element      */
-specifier|private
 name|ZemantaOntologyEnum
 parameter_list|(
 name|String
@@ -181,7 +179,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Creates a new entry of this Enum by using the default Zemanta namespace      * and the name() of this element as lecal name.      */
-specifier|private
 name|ZemantaOntologyEnum
 parameter_list|()
 block|{

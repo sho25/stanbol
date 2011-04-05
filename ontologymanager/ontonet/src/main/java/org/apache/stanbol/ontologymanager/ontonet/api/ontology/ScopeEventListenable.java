@@ -36,7 +36,6 @@ specifier|public
 interface|interface
 name|ScopeEventListenable
 block|{
-specifier|public
 name|void
 name|addScopeEventListener
 parameter_list|(
@@ -44,12 +43,10 @@ name|ScopeEventListener
 name|listener
 parameter_list|)
 function_decl|;
-specifier|public
 name|void
 name|clearScopeEventListeners
 parameter_list|()
 function_decl|;
-specifier|public
 name|Collection
 argument_list|<
 name|ScopeEventListener
@@ -57,7 +54,6 @@ argument_list|>
 name|getScopeEventListeners
 parameter_list|()
 function_decl|;
-specifier|public
 name|void
 name|removeScopeEventListener
 parameter_list|(

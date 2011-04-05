@@ -266,7 +266,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code DBSchemaGenerator} is responsible of the generation of the RDF of the schema of a relational database.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * The {@code DBSchemaGenerator} is responsible of the generation of the RDF of the schema of a relational database.  *   * @author andrea.nuzzolese  */
 end_comment
 
 begin_class
@@ -1017,12 +1017,8 @@ decl_stmt|;
 name|nullable
 operator|=
 name|nullableInt
-operator|==
+operator|!=
 literal|0
-condition|?
-literal|false
-else|:
-literal|true
 expr_stmt|;
 block|}
 catch|catch

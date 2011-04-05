@@ -81,7 +81,6 @@ extends|extends
 name|ScopeEventListenable
 block|{
 comment|/** 	 * Creates and returns a new ontology scope with the core space ontologies 	 * obtained from<code>coreSource</code> and the custom space not set. 	 *  	 * @param scopeID 	 *            the desired unique identifier for the ontology scope. 	 * @param coreSource 	 *            the input source that provides the top ontology for the core 	 *            space. 	 * @return the newly created ontology scope. 	 * @throws DuplicateIDException 	 *             if an ontology scope with the given identifier is already 	 *<i>registered</i>. The exception is not thrown if another 	 *             scope with the same ID has been created but not registered. 	 */
-specifier|public
 name|OntologyScope
 name|createOntologyScope
 parameter_list|(
@@ -95,7 +94,6 @@ throws|throws
 name|DuplicateIDException
 function_decl|;
 comment|/** 	 * Creates and returns a new ontology scope with the core space ontologies 	 * obtained from<code>coreSource</code> and the custom ontologies obtained 	 * from<code>customSource</code>. 	 *  	 * @param scopeID 	 *            the desired unique identifier for the ontology scope. 	 * @param coreSource 	 *            the input source that provides the top ontology for the core 	 *            space. 	 * @param customSource 	 *            the input source that provides the top ontology for the custom 	 *            space. If null, no custom space should be created at all. 	 * @return the newly created ontology scope. 	 * @throws DuplicateIDException 	 *             if an ontology scope with the given identifier is already 	 *<i>registered</i>. The exception is not thrown if another 	 *             scope with the same ID has been created but not registered. 	 */
-specifier|public
 name|OntologyScope
 name|createOntologyScope
 parameter_list|(

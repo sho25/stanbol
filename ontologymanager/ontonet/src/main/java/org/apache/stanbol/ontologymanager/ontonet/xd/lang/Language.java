@@ -81,7 +81,6 @@ name|value
 init|=
 literal|""
 decl_stmt|;
-specifier|private
 name|Language
 parameter_list|(
 name|String

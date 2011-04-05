@@ -43,7 +43,6 @@ extends|extends
 name|OntologySpace
 block|{
 comment|/** 	 * Returns the OWL ontology manager associated to this scope. 	 *  	 * @return the associated ontology manager 	 */
-specifier|public
 name|OWLOntologyManager
 name|getOntologyManager
 parameter_list|()
