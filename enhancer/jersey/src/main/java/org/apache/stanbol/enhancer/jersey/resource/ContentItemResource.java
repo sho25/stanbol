@@ -1127,7 +1127,7 @@ argument_list|,
 name|getStaticRootUrl
 argument_list|()
 operator|+
-literal|"/home/organization_48.png"
+literal|"/home/images/organization_48.png"
 argument_list|)
 expr_stmt|;
 name|defaultThumbnails
