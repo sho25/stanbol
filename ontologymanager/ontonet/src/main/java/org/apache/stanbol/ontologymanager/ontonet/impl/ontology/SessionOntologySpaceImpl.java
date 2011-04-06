@@ -151,6 +151,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|store
+operator|.
+name|api
+operator|.
+name|PersistenceStore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -240,8 +258,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
+name|PersistenceStore
+name|persistenceStore
 parameter_list|)
 block|{
 comment|// FIXME : sync session id with session space ID
@@ -281,7 +299,7 @@ name|SpaceType
 operator|.
 name|SESSION
 argument_list|,
-name|storage
+name|persistenceStore
 comment|/*, scopeID*/
 argument_list|)
 expr_stmt|;
@@ -370,8 +388,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
+name|PersistenceStore
+name|persistenceStore
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -414,7 +432,7 @@ name|SpaceType
 operator|.
 name|SESSION
 argument_list|,
-name|storage
+name|persistenceStore
 argument_list|,
 comment|/*scopeID,*/
 name|ontologyManager

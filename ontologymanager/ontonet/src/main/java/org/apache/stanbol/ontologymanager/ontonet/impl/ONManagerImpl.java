@@ -691,6 +691,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|store
+operator|.
+name|api
+operator|.
+name|PersistenceStore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|service
@@ -1038,10 +1056,13 @@ specifier|private
 name|WeightedTcProvider
 name|wtcp
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|private
-name|ClerezzaOntologyStorage
-name|storage
+name|PersistenceStore
+name|persistenceStore
 decl_stmt|;
+comment|//private ClerezzaOntologyStorage storage;
 comment|/*      * The identifiers (not yet parsed as IRIs) of the ontology scopes that should be activated.      */
 specifier|private
 name|String
@@ -1105,36 +1126,7 @@ parameter_list|)
 block|{
 comment|// At this stage we know if tcm and wtcp have been provided or not.
 comment|/*          * With the current implementation of OntologyStorage, we cannot live with either component being          * null. So create the object only if both are not null.          */
-if|if
-condition|(
-name|tcm
-operator|!=
-literal|null
-operator|&&
-name|wtcp
-operator|!=
-literal|null
-condition|)
-name|storage
-operator|=
-operator|new
-name|ClerezzaOntologyStorage
-argument_list|(
-name|tcm
-argument_list|,
-name|wtcp
-argument_list|)
-expr_stmt|;
-comment|// Manage this in-memory, so it won't have to be null.
-else|else
-block|{
-name|storage
-operator|=
-operator|new
-name|InMemoryOntologyStorage
-argument_list|()
-expr_stmt|;
-block|}
+comment|/*     	 * NOW WE USE THE STANBOL PERSISTENCE STORE.     	 *      	if (tcm != null&& wtcp != null) storage = new ClerezzaOntologyStorage(tcm, wtcp);         // Manage this in-memory, so it won't have to be null.         else {             storage = new InMemoryOntologyStorage();         }                  */
 comment|// Now create everything that depends on the Storage object.
 comment|// These may require the OWL cache manager
 name|ontologySpaceFactory
@@ -1144,7 +1136,7 @@ name|OntologySpaceFactoryImpl
 argument_list|(
 name|scopeRegistry
 argument_list|,
-name|storage
+name|persistenceStore
 argument_list|)
 expr_stmt|;
 name|ontologyScopeFactory
@@ -1191,7 +1183,7 @@ argument_list|,
 name|getScopeRegistry
 argument_list|()
 argument_list|,
-name|storage
+name|persistenceStore
 argument_list|)
 expr_stmt|;
 name|sessionManager
@@ -2138,12 +2130,12 @@ name|ontologySpaceFactory
 return|;
 block|}
 specifier|public
-name|ClerezzaOntologyStorage
+name|PersistenceStore
 name|getOntologyStore
 parameter_list|()
 block|{
 return|return
-name|storage
+name|persistenceStore
 return|;
 block|}
 specifier|public

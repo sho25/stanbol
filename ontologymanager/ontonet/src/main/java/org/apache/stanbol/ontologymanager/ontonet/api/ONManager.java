@@ -145,13 +145,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
+name|store
 operator|.
-name|impl
+name|api
 operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
+name|PersistenceStore
 import|;
 end_import
 
@@ -222,7 +220,8 @@ name|getOntologySpaceFactory
 parameter_list|()
 function_decl|;
 comment|/** 	 * Returns the default ontology storage system for this KReS instance. 	 *  	 * @return the default ontology store. 	 */
-name|ClerezzaOntologyStorage
+specifier|public
+name|PersistenceStore
 name|getOntologyStore
 parameter_list|()
 function_decl|;

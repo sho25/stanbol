@@ -71,6 +71,20 @@ name|IRI
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyStorageException
+import|;
+end_import
+
 begin_comment
 comment|/**  * Manages KReS session objects via CRUD-like operations. A  *<code>SessionManager</code> maintains in-memory storage of KReS sessions,  * creates new ones and either destroys or stores existing ones persistently.  * All KReS sessions are managed via unique identifiers of the  *<code>org.semanticweb.owlapi.model.IRI</code> type.<br>  *<br>  * NOTE: implementations should be synchronized, or document whenever they are  * not.  *   * @author alessandro  *   */
 end_comment
@@ -133,7 +147,7 @@ parameter_list|)
 throws|throws
 name|NonReferenceableSessionException
 function_decl|;
-comment|/** 	 * Stores the KReS session identified by<code>sessionID</code> using the 	 * output stream<code>out</code>. 	 *  	 * @param sessionID 	 *            the IRI that uniquely identifies the session 	 * @param out 	 *            the output stream to store the session 	 */
+comment|/** 	 * Stores the KReS session identified by<code>sessionID</code> using the 	 * output stream<code>out</code>. 	 *  	 * @param sessionID 	 *            the IRI that uniquely identifies the session 	 * @param out 	 *            the output stream to store the session 	 * @throws OWLOntologyStorageException  	 */
 name|void
 name|storeSession
 parameter_list|(
@@ -145,6 +159,8 @@ name|out
 parameter_list|)
 throws|throws
 name|NonReferenceableSessionException
+throws|,
+name|OWLOntologyStorageException
 function_decl|;
 block|}
 end_interface

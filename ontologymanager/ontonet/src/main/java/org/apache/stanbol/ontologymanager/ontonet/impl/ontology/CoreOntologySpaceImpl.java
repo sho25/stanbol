@@ -101,6 +101,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|store
+operator|.
+name|api
+operator|.
+name|PersistenceStore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -156,8 +174,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
+name|PersistenceStore
+name|persistenceStore
 parameter_list|)
 block|{
 name|super
@@ -188,7 +206,7 @@ operator|.
 name|CORE
 comment|/*, scopeID*/
 argument_list|,
-name|storage
+name|persistenceStore
 argument_list|)
 expr_stmt|;
 block|}
@@ -198,8 +216,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
+name|PersistenceStore
+name|persistenceStore
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -233,7 +251,7 @@ operator|.
 name|CORE
 argument_list|,
 comment|/*scopeID,*/
-name|storage
+name|persistenceStore
 argument_list|,
 name|ontologyManager
 argument_list|)
