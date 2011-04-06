@@ -590,11 +590,7 @@ name|XMLExtractor
 argument_list|(
 operator|new
 name|ReengineerManagerImpl
-argument_list|(
-name|tcm
-argument_list|,
-name|wtcp
-argument_list|)
+argument_list|()
 argument_list|,
 name|onManager
 argument_list|,
