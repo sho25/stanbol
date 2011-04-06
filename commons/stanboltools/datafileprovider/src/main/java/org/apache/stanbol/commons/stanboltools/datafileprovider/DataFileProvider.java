@@ -39,6 +39,16 @@ name|InputStream
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * Used to provide read-only data files (indexes, models etc.) from various  * locations (bundle resources, filesystem folders etc.) allowing users to  * overrides default data files with their own.  *   * See STANBOL-146 for requirements.  */
 end_comment
@@ -48,7 +58,7 @@ specifier|public
 interface|interface
 name|DataFileProvider
 block|{
-comment|/** Get the InputStream of the specified      *  data file, according to this provider's      *  priority rules.      *        *  @param bundleSymbolicName can be used to differentiate       *      between files which have the same name      *  @param filename name of the file to open      *  @param downloadExplanation explains how to get the "full"      *      version of the data file, in case we don't find it or in      *      case we supply a default small variant.      * @return InputStream to read the file, must be closed by       *      caller when done      * @throws IOException problem finding or reading the file      */
+comment|/** Get the InputStream of the specified      *  data file, according to this provider's      *  priority rules.      *        *  @param bundleSymbolicName can be used to differentiate       *      between files which have the same name      *  @param filename name of the file to open      *  @param comments Optional - how to get a more complete version      *          of the data file, licensing information, etc.      * @return InputStream to read the file, must be closed by       *      caller when done      * @throws IOException problem finding or reading the file      */
 name|InputStream
 name|getInputStream
 parameter_list|(
@@ -58,8 +68,13 @@ parameter_list|,
 name|String
 name|filename
 parameter_list|,
+name|Map
+argument_list|<
 name|String
-name|downloadExplanation
+argument_list|,
+name|String
+argument_list|>
+name|comments
 parameter_list|)
 throws|throws
 name|IOException

@@ -123,6 +123,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -762,8 +772,13 @@ parameter_list|,
 name|String
 name|filename
 parameter_list|,
+name|Map
+argument_list|<
 name|String
-name|downloadExplanation
+argument_list|,
+name|String
+argument_list|>
+name|comments
 parameter_list|)
 throws|throws
 name|IOException
@@ -950,7 +965,7 @@ name|bundleSymbolicName
 argument_list|,
 name|filename
 argument_list|,
-name|downloadExplanation
+name|comments
 argument_list|)
 expr_stmt|;
 if|if
@@ -1003,7 +1018,7 @@ name|bundleSymbolicName
 argument_list|,
 name|filename
 argument_list|,
-name|downloadExplanation
+name|comments
 argument_list|,
 name|fileUrl
 argument_list|)

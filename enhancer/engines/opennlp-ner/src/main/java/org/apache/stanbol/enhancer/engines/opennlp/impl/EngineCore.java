@@ -661,15 +661,41 @@ index|[]
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** Explain where to get more models */
+comment|/** Comments about our models */
 specifier|public
 specifier|static
 specifier|final
+name|Map
+argument_list|<
 name|String
-name|MODEL_DOWNLOAD_EXPLANATION
-init|=
-literal|"Ask on the Apache Stanbol mailing list"
+argument_list|,
+name|String
+argument_list|>
+name|DATA_FILE_COMMENTS
 decl_stmt|;
+static|static
+block|{
+name|DATA_FILE_COMMENTS
+operator|=
+operator|new
+name|HashMap
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+argument_list|()
+expr_stmt|;
+name|DATA_FILE_COMMENTS
+operator|.
+name|put
+argument_list|(
+literal|"Default data files"
+argument_list|,
+literal|"provided by the org.apache.stanbol.defaultdata bundle"
+argument_list|)
+expr_stmt|;
+block|}
 name|EngineCore
 parameter_list|(
 name|DataFileProvider
@@ -757,7 +783,7 @@ name|bundleSymbolicName
 argument_list|,
 name|modelRelativePath
 argument_list|,
-name|MODEL_DOWNLOAD_EXPLANATION
+name|DATA_FILE_COMMENTS
 argument_list|)
 return|;
 block|}
