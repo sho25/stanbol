@@ -778,11 +778,6 @@ name|fileUrl
 init|=
 literal|null
 decl_stmt|;
-name|String
-name|loadingClass
-init|=
-literal|null
-decl_stmt|;
 comment|// First look for the file in our data folder,
 comment|// with and without bundle symbolic name prefix
 specifier|final
@@ -869,16 +864,6 @@ operator|+
 name|f
 operator|.
 name|getAbsolutePath
-argument_list|()
-expr_stmt|;
-name|loadingClass
-operator|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
 argument_list|()
 expr_stmt|;
 break|break;
@@ -1003,16 +988,6 @@ literal|"://"
 operator|+
 name|filename
 expr_stmt|;
-name|loadingClass
-operator|=
-name|dfp
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 block|}
@@ -1029,8 +1004,6 @@ argument_list|,
 name|filename
 argument_list|,
 name|downloadExplanation
-argument_list|,
-name|loadingClass
 argument_list|,
 name|fileUrl
 argument_list|)

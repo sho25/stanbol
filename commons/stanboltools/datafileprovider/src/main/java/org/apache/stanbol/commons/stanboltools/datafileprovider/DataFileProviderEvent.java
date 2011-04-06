@@ -61,11 +61,6 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|String
-name|loadingClass
-decl_stmt|;
-specifier|private
-specifier|final
-name|String
 name|actualFileLocation
 decl_stmt|;
 specifier|public
@@ -79,9 +74,6 @@ name|filename
 parameter_list|,
 name|String
 name|downloadExplanation
-parameter_list|,
-name|String
-name|loadingClass
 parameter_list|,
 name|String
 name|actualFileLocation
@@ -112,12 +104,6 @@ operator|.
 name|downloadExplanation
 operator|=
 name|downloadExplanation
-expr_stmt|;
-name|this
-operator|.
-name|loadingClass
-operator|=
-name|loadingClass
 expr_stmt|;
 name|this
 operator|.
@@ -184,20 +170,6 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|", loadingClass="
-argument_list|)
-expr_stmt|;
-name|sb
-operator|.
-name|append
-argument_list|(
-name|loadingClass
-argument_list|)
-expr_stmt|;
-name|sb
-operator|.
-name|append
-argument_list|(
 literal|", actualFileLocation="
 argument_list|)
 expr_stmt|;
@@ -255,17 +227,7 @@ return|return
 name|downloadExplanation
 return|;
 block|}
-comment|/** @return the name of the class which provided the file */
-specifier|public
-name|String
-name|getLoadingClass
-parameter_list|()
-block|{
-return|return
-name|loadingClass
-return|;
-block|}
-comment|/** @return the actual location of the file that was loaded, empty if file was not found */
+comment|/** @return the actual location of the file that was loaded,       *      null if file was not found */
 specifier|public
 name|String
 name|getActualFileLocation
