@@ -61,53 +61,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Hashtable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Iterator
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|WeightedTcProvider
 import|;
 end_import
 
@@ -171,61 +125,7 @@ name|scr
 operator|.
 name|annotations
 operator|.
-name|Reference
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|felix
-operator|.
-name|scr
-operator|.
-name|annotations
-operator|.
 name|Service
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -261,7 +161,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|ReengineeringException
+name|Reengineer
 import|;
 end_import
 
@@ -297,7 +197,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Reengineer
+name|ReengineeringException
 import|;
 end_import
 
@@ -364,7 +264,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete implementation of the  * {@link org.apache.stanbol.reengineer.base.api.ReengineerManager} interface defined in the  * KReS APIs.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * Concrete implementation of the {@link org.apache.stanbol.reengineer.base.api.ReengineerManager} interface.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -412,25 +312,31 @@ name|Reengineer
 argument_list|>
 name|reengineers
 decl_stmt|;
-comment|/** 	 * Basic constructor to be used if outside of an OSGi environment. Invokes 	 * default constructor. 	 *  	 * @param onm 	 */
+comment|/**      * Default constructor EXCLUSIVE to OSGi environments with declarative services.      */
 specifier|public
 name|ReengineerManagerImpl
 parameter_list|()
-block|{
-name|activate
-argument_list|(
-operator|new
-name|Hashtable
+block|{}
+comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      */
+specifier|public
+name|ReengineerManagerImpl
+parameter_list|(
+name|Dictionary
 argument_list|<
 name|String
 argument_list|,
 name|Object
 argument_list|>
-argument_list|()
+name|configuration
+parameter_list|)
+block|{
+name|activate
+argument_list|(
+name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Used to configure an instance within an OSGi container. 	 *  	 * @throws IOException 	 */
+comment|/**      * Used to configure an instance within an OSGi container.      *       * @throws IOException      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -524,7 +430,7 @@ argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** 	 * @param semionReengineer 	 *            {@link org.apache.stanbol.reengineer.base.api.Reengineer} 	 * @return true if the reengineer is bound, false otherwise 	 */
+comment|/**      * @param semionReengineer      *            {@link org.apache.stanbol.reengineer.base.api.Reengineer}      * @return true if the reengineer is bound, false otherwise      */
 annotation|@
 name|Override
 specifier|public
@@ -683,10 +589,6 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|//	@Override
-comment|//	public SemionRefactorer getRegisteredRefactorer() {
-comment|//		return semionRefactorer;
-comment|//		}
 annotation|@
 name|Override
 specifier|public
@@ -1021,10 +923,6 @@ return|return
 name|reengineeredSchemaOntology
 return|;
 block|}
-comment|//	@Override
-comment|//	public void registerRefactorer(SemionRefactorer semionRefactorer) {
-comment|//		this.semionRefactorer = semionRefactorer;
-comment|//	}
 annotation|@
 name|Override
 specifier|public
@@ -1174,10 +1072,6 @@ return|return
 name|found
 return|;
 block|}
-comment|//	@Override
-comment|//	public void unregisterRefactorer() {
-comment|//		this.semionRefactorer = null;
-comment|//	}
 block|}
 end_class
 

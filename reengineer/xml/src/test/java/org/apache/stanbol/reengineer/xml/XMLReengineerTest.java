@@ -590,7 +590,16 @@ name|XMLExtractor
 argument_list|(
 operator|new
 name|ReengineerManagerImpl
+argument_list|(
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
 argument_list|()
+argument_list|)
 argument_list|,
 name|onManager
 argument_list|,
