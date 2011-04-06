@@ -185,9 +185,11 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|commons
 operator|.
-name|jersey
+name|web
+operator|.
+name|base
 operator|.
 name|format
 operator|.
@@ -203,13 +205,15 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|commons
 operator|.
-name|jersey
+name|web
+operator|.
+name|base
 operator|.
 name|resource
 operator|.
-name|NavigationMixin
+name|BaseStanbolResource
 import|;
 end_import
 
@@ -394,7 +398,7 @@ specifier|public
 class|class
 name|RefactorerResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
 specifier|protected
 name|ONManager

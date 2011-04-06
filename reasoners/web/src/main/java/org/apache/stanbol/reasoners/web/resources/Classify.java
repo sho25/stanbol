@@ -841,9 +841,11 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|commons
 operator|.
-name|jersey
+name|web
+operator|.
+name|base
 operator|.
 name|format
 operator|.

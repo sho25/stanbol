@@ -125,7 +125,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|ReengineerManager
+name|Reengineer
 import|;
 end_import
 
@@ -143,7 +143,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Reengineer
+name|ReengineerManager
 import|;
 end_import
 
@@ -236,24 +236,6 @@ operator|.
 name|servlet
 operator|.
 name|ServletContainer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|processors
-operator|.
-name|ViewProcessorImpl
 import|;
 end_import
 
@@ -657,17 +639,9 @@ argument_list|,
 name|staticUrlRoot
 argument_list|)
 expr_stmt|;
-name|servletContext
-operator|.
-name|setAttribute
-argument_list|(
-name|ViewProcessorImpl
-operator|.
-name|FREEMARKER_TEMPLATE_PATH_INIT_PARAM
-argument_list|,
-name|freemakerTemplates
-argument_list|)
-expr_stmt|;
+comment|//        servletContext.setAttribute(
+comment|//                ViewProcessorImpl.FREEMARKER_TEMPLATE_PATH_INIT_PARAM,
+comment|//                freemakerTemplates);
 name|log
 operator|.
 name|info

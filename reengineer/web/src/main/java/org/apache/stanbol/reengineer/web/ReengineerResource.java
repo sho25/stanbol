@@ -309,6 +309,26 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|ontologymanager
 operator|.
 name|ontonet
@@ -353,7 +373,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|ReengineeringException
+name|Reengineer
 import|;
 end_import
 
@@ -389,7 +409,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Reengineer
+name|ReengineeringException
 import|;
 end_import
 
@@ -617,24 +637,6 @@ name|ImplicitProduces
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|resource
-operator|.
-name|NavigationMixin
-import|;
-end_import
-
 begin_class
 annotation|@
 name|Path
@@ -650,7 +652,7 @@ specifier|public
 class|class
 name|ReengineerResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
 specifier|protected
 name|ReengineerManager

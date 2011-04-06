@@ -239,24 +239,6 @@ name|ServletContainer
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|processors
-operator|.
-name|ViewProcessorImpl
-import|;
-end_import
-
 begin_comment
 comment|/**  * Jersey-based RESTful endpoint for KReS.  *  * This OSGi component serves as a bridge between the OSGi context and the  * Servlet context available to JAX-RS resources.  *   * @author andrea.nuzzolese  */
 end_comment
@@ -656,17 +638,9 @@ argument_list|,
 name|staticUrlRoot
 argument_list|)
 expr_stmt|;
-name|servletContext
-operator|.
-name|setAttribute
-argument_list|(
-name|ViewProcessorImpl
-operator|.
-name|FREEMARKER_TEMPLATE_PATH_INIT_PARAM
-argument_list|,
-name|freemakerTemplates
-argument_list|)
-expr_stmt|;
+comment|//        servletContext.setAttribute(
+comment|//                ViewProcessorImpl.FREEMARKER_TEMPLATE_PATH_INIT_PARAM,
+comment|//                freemakerTemplates);
 comment|//Rule manager
 name|servletContext
 operator|.

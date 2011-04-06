@@ -55,13 +55,15 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|commons
 operator|.
-name|jersey
+name|web
 operator|.
-name|processors
+name|base
 operator|.
-name|ViewProcessorImpl
+name|writers
+operator|.
+name|GraphWriter
 import|;
 end_import
 
@@ -73,13 +75,15 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|kres
+name|commons
 operator|.
-name|jersey
+name|web
+operator|.
+name|base
 operator|.
 name|writers
 operator|.
-name|GraphWriter
+name|ResultSetWriter
 import|;
 end_import
 
@@ -96,24 +100,6 @@ operator|.
 name|web
 operator|.
 name|OWLOntologyWriter
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|kres
-operator|.
-name|jersey
-operator|.
-name|writers
-operator|.
-name|ResultSetWriter
 import|;
 end_import
 
@@ -226,15 +212,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|// view processors
-name|singletons
-operator|.
-name|add
-argument_list|(
-operator|new
-name|ViewProcessorImpl
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|//        singletons.add(new ViewProcessorImpl());
 return|return
 name|singletons
 return|;
