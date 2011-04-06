@@ -271,6 +271,24 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|ContextHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|servicesapi
@@ -296,7 +314,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TODO: Replace with Serializer infrastrucutre similar to  * {@link Serializer}  * @author Rupert Westenthaler  *  */
+comment|/**  * TODO: Replace with Serializer infrastrucutre similar to {@link Serializer}  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -443,7 +461,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Context
-specifier|private
+specifier|protected
 name|ServletContext
 name|servletContext
 decl_stmt|;
@@ -453,19 +471,15 @@ name|getSerializer
 parameter_list|()
 block|{
 return|return
-operator|(
-name|Serializer
-operator|)
-name|servletContext
+name|ContextHelper
 operator|.
-name|getAttribute
+name|getServiceFromContext
 argument_list|(
 name|Serializer
 operator|.
 name|class
-operator|.
-name|getName
-argument_list|()
+argument_list|,
+name|servletContext
 argument_list|)
 return|;
 block|}
@@ -499,7 +513,7 @@ return|return
 operator|-
 literal|1
 return|;
-comment|//to hard to calculate
+comment|// to hard to calculate
 block|}
 annotation|@
 name|Override
@@ -648,7 +662,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//RDF
+comment|// RDF
 name|getSerializer
 argument_list|()
 operator|.

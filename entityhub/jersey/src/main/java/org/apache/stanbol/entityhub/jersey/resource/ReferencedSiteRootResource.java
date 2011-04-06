@@ -52,26 +52,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|JerseyUtils
-operator|.
-name|getService
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -339,13 +319,33 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|entityhub
+name|commons
 operator|.
-name|jersey
+name|web
 operator|.
-name|utils
+name|base
 operator|.
-name|JerseyUtils
+name|ContextHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
 import|;
 end_import
 
@@ -359,9 +359,11 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|servicesapi
+name|jersey
 operator|.
-name|Entityhub
+name|utils
+operator|.
+name|JerseyUtils
 import|;
 end_import
 
@@ -483,13 +485,13 @@ begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/site/{site}"
+literal|"/entityhub/site/{site}"
 argument_list|)
 specifier|public
 class|class
 name|ReferencedSiteRootResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
 specifier|private
 specifier|final
@@ -549,7 +551,7 @@ name|RDF_JSON
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The Field used for find requests if not specified      * TODO: This will be replaced by the EntitySearch. With this search the      *       Site is responsible to decide what properties to use for label      *       based searches.      */
+comment|/**      * The Field used for find requests if not specified TODO: This will be replaced by the EntitySearch. With      * this search the Site is responsible to decide what properties to use for label based searches.      */
 specifier|private
 specifier|static
 specifier|final
@@ -563,8 +565,9 @@ operator|.
 name|getUnicodeString
 argument_list|()
 decl_stmt|;
-comment|/**      * The Field used as default as selected fields for find requests      * TODO: Make configurable via the {@link ConfiguredSite} interface!      * NOTE: This feature is deactivated, because OPTIONAL selects do have very      * weak performance when using SPARQL endpoints      */
-comment|//    private static final Collection<String> DEFAULT_FIND_SELECTED_FIELDS = Arrays.asList(RDFS.comment.getUnicodeString());
+comment|/**      * The Field used as default as selected fields for find requests TODO: Make configurable via the      * {@link ConfiguredSite} interface! NOTE: This feature is deactivated, because OPTIONAL selects do have      * very weak performance when using SPARQL endpoints      */
+comment|// private static final Collection<String> DEFAULT_FIND_SELECTED_FIELDS =
+comment|// Arrays.asList(RDFS.comment.getUnicodeString());
 comment|/**      * The default number of maximal results.      */
 specifier|private
 specifier|static
@@ -612,7 +615,9 @@ expr_stmt|;
 name|ReferencedSiteManager
 name|referencedSiteManager
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|ReferencedSiteManager
 operator|.
@@ -733,7 +738,7 @@ operator|+
 literal|":</h1></body></html>"
 return|;
 block|}
-comment|/**      * Cool URI handler for Signs.      *      * @param siteId A specific {@link ReferencedSite} to search the parsed id or      *<code>null</code> to search all referenced sites for the requested      * entity id. The {@link ReferencedSite#getId()} property is used to map      * the path to the site!      * @param id The id of the entity (required)      * @param headers the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the      *         raw binary content      */
+comment|/**      * Cool URI handler for Signs.      *       * @param siteId      *            A specific {@link ReferencedSite} to search the parsed id or<code>null</code> to search all      *            referenced sites for the requested entity id. The {@link ReferencedSite#getId()} property is      *            used to map the path to the site!      * @param id      *            The id of the entity (required)      * @param headers      *            the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the raw binary content      */
 annotation|@
 name|GET
 annotation|@
@@ -951,7 +956,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//TODO: How to parse an ErrorMessage?
+comment|// TODO: How to parse an ErrorMessage?
 comment|// create an Response with the the Error?
 name|log
 operator|.
@@ -1021,7 +1026,7 @@ argument_list|)
 name|String
 name|language
 parameter_list|,
-comment|//@QueryParam(value="select") String select,
+comment|// @QueryParam(value="select") String select,
 annotation|@
 name|QueryParam
 argument_list|(
@@ -1120,7 +1125,7 @@ argument_list|)
 name|String
 name|language
 parameter_list|,
-comment|//@FormParam(value="select") String select,
+comment|// @FormParam(value="select") String select,
 annotation|@
 name|FormParam
 argument_list|(
@@ -1161,7 +1166,7 @@ operator|+
 literal|"/find Request"
 argument_list|)
 expr_stmt|;
-comment|//process the optional search field parameter
+comment|// process the optional search field parameter
 if|if
 condition|(
 name|field
@@ -1229,7 +1234,7 @@ name|headers
 argument_list|)
 return|;
 block|}
-comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation.      * Note that the maximum number of results (limit) and the offset of the      * first result (offset) are parsed as seperate parameters and are not      * part of the field query as in the java API.<p>      * TODO: as soon as the entityhub supports multiple query types this need      *       to be refactored. The idea is that this dynamically detects query      *       types and than redirects them to the referenced site implementation.      * @param query The field query in JSON format      * @param limit the maximum number of results starting at offset      * @param offset the offset of the first result      * @param headers the header information of the request      * @return the results of the query      */
+comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation. Note that the maximum number      * of results (limit) and the offset of the first result (offset) are parsed as seperate parameters and      * are not part of the field query as in the java API.      *<p>      * TODO: as soon as the entityhub supports multiple query types this need to be refactored. The idea is      * that this dynamically detects query types and than redirects them to the referenced site      * implementation.      *       * @param query      *            The field query in JSON format      * @param limit      *            the maximum number of results starting at offset      * @param offset      *            the offset of the first result      * @param headers      *            the header information of the request      * @return the results of the query      */
 annotation|@
 name|POST
 annotation|@
@@ -1292,7 +1297,7 @@ name|headers
 argument_list|)
 return|;
 block|}
-comment|/**      * Executes the query parsed by {@link #queryEntities(String, File, HttpHeaders)}      * or created based {@link #findEntity(String, String, String, int, int, HttpHeaders)}      * @param query The query to execute      * @param headers The headers used to determine the media types      * @return the response (results of error)      */
+comment|/**      * Executes the query parsed by {@link #queryEntities(String, File, HttpHeaders)} or created based      * {@link #findEntity(String, String, String, int, int, HttpHeaders)}      *       * @param query      *            The query to execute      * @param headers      *            The headers used to determine the media types      * @return the response (results of error)      */
 specifier|private
 name|Response
 name|executeQuery

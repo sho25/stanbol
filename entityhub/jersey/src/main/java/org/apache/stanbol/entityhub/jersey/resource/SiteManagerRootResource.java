@@ -240,26 +240,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|JerseyUtils
-operator|.
-name|getService
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -511,6 +491,44 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|ContextHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|jersey
@@ -610,20 +628,20 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}.  *  * TODO: add description  */
+comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}.  *   * TODO: add description  */
 end_comment
 
 begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/sites"
+literal|"/entityhub/sites"
 argument_list|)
 specifier|public
 class|class
 name|SiteManagerRootResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
 specifier|private
 specifier|final
@@ -671,7 +689,7 @@ name|RDF_JSON
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The Field used for find requests if not specified      * TODO: Will be depreciated as soon as EntityQuery is implemented      */
+comment|/**      * The Field used for find requests if not specified TODO: Will be depreciated as soon as EntityQuery is      * implemented      */
 specifier|private
 specifier|static
 specifier|final
@@ -717,7 +735,7 @@ operator|=
 name|context
 expr_stmt|;
 block|}
-comment|/**      * Getter for the id's of all referenced sites      *      * @return the id's of all referenced sites.      */
+comment|/**      * Getter for the id's of all referenced sites      *       * @return the id's of all referenced sites.      */
 annotation|@
 name|GET
 annotation|@
@@ -759,7 +777,9 @@ decl_stmt|;
 name|ReferencedSiteManager
 name|referencedSiteManager
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|ReferencedSiteManager
 operator|.
@@ -787,7 +807,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%ssite/%s/"
+literal|"%sentityhub/site/%s/"
 argument_list|,
 name|uriInfo
 operator|.
@@ -815,7 +835,7 @@ return|return
 name|referencedSites
 return|;
 block|}
-comment|/**      * Cool URI handler for Signs.      *      * @param id The id of the entity (required)      * @param headers the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the      *         raw binary content      */
+comment|/**      * Cool URI handler for Signs.      *       * @param id      *            The id of the entity (required)      * @param headers      *            the request headers used to get the requested {@link MediaType}      * @return a redirection to either a browser view, the RDF meta data or the raw binary content      */
 annotation|@
 name|GET
 annotation|@
@@ -915,7 +935,9 @@ block|}
 name|ReferencedSiteManager
 name|referencedSiteManager
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|ReferencedSiteManager
 operator|.
@@ -927,7 +949,7 @@ decl_stmt|;
 name|Sign
 name|sign
 decl_stmt|;
-comment|//        try {
+comment|// try {
 name|sign
 operator|=
 name|referencedSiteManager
@@ -937,10 +959,10 @@ argument_list|(
 name|id
 argument_list|)
 expr_stmt|;
-comment|//        } catch (IOException e) {
-comment|//            log.error("IOException while accessing ReferencedSiteManager",e);
-comment|//            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
-comment|//        }
+comment|// } catch (IOException e) {
+comment|// log.error("IOException while accessing ReferencedSiteManager",e);
+comment|// throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+comment|// }
 specifier|final
 name|MediaType
 name|acceptedMediaType
@@ -977,7 +999,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//TODO: How to parse an ErrorMessage?
+comment|// TODO: How to parse an ErrorMessage?
 comment|// create an Response with the the Error?
 name|log
 operator|.
@@ -1036,7 +1058,7 @@ argument_list|)
 name|String
 name|language
 parameter_list|,
-comment|//@FormParam(value="select") String select,
+comment|// @FormParam(value="select") String select,
 annotation|@
 name|QueryParam
 argument_list|(
@@ -1135,7 +1157,7 @@ argument_list|)
 name|String
 name|language
 parameter_list|,
-comment|//@FormParam(value="select") String select,
+comment|// @FormParam(value="select") String select,
 annotation|@
 name|FormParam
 argument_list|(
@@ -1207,7 +1229,9 @@ block|}
 name|ReferencedSiteManager
 name|referencedSiteManager
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|ReferencedSiteManager
 operator|.
@@ -1276,7 +1300,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation.      * Note that the maximum number of results (limit) and the offset of the      * first result (offset) are parsed as seperate parameters and are not      * part of the field query as in the java API.<p>      * TODO: as soon as the entityhub supports multiple query types this need      *       to be refactored. The idea is that this dynamically detects query      *       types and than redirects them to the referenced site implementation.      * @param query The field query in JSON format      * @param limit the maximum number of results starting at offset      * @param offset the offset of the first result      * @param headers the header information of the request      * @return the results of the query      */
+comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation. Note that the maximum number      * of results (limit) and the offset of the first result (offset) are parsed as seperate parameters and      * are not part of the field query as in the java API.      *<p>      * TODO: as soon as the entityhub supports multiple query types this need to be refactored. The idea is      * that this dynamically detects query types and than redirects them to the referenced site      * implementation.      *       * @param query      *            The field query in JSON format      * @param limit      *            the maximum number of results starting at offset      * @param offset      *            the offset of the first result      * @param headers      *            the header information of the request      * @return the results of the query      */
 annotation|@
 name|POST
 annotation|@
@@ -1326,7 +1350,9 @@ block|{
 name|ReferencedSiteManager
 name|referencedSiteManager
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|ReferencedSiteManager
 operator|.

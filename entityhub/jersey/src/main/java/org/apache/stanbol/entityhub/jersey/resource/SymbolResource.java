@@ -258,26 +258,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|JerseyUtils
-operator|.
-name|getService
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -499,6 +479,44 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|ContextHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|jersey
@@ -618,21 +636,20 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RESTful interface for The {@link Entityhub}. To access referenced sites directly  * see {@link ReferencedSiteRootResource}.  */
+comment|/**  * RESTful interface for The {@link Entityhub}. To access referenced sites directly see  * {@link ReferencedSiteRootResource}.  */
 end_comment
 
 begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/symbol"
+literal|"/entityhub/symbol"
 argument_list|)
-comment|//@ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
 specifier|public
 class|class
 name|SymbolResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
 comment|/**      * The default search field for /find queries is the entityhub-maodel:label      */
 specifier|private
@@ -656,6 +673,19 @@ name|int
 name|DEFAULT_FIND_RESULT_LIMIT
 init|=
 literal|5
+decl_stmt|;
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
 decl_stmt|;
 comment|/**      * The default result fields for /find queries is the entityhub-maodel:label and the      * entityhub-maodel:description.      */
 specifier|private
@@ -685,19 +715,6 @@ operator|.
 name|description
 operator|.
 name|getUri
-argument_list|()
-argument_list|)
-decl_stmt|;
-specifier|private
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -811,7 +828,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//TODO: how to parse an error message
+comment|// TODO: how to parse an error message
 throw|throw
 operator|new
 name|WebApplicationException
@@ -823,7 +840,9 @@ block|}
 name|Entityhub
 name|entityhub
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|Entityhub
 operator|.
@@ -1010,7 +1029,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//TODO: how to parse an error message
+comment|// TODO: how to parse an error message
 throw|throw
 operator|new
 name|WebApplicationException
@@ -1022,7 +1041,9 @@ block|}
 name|Entityhub
 name|entityhub
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|Entityhub
 operator|.
@@ -1188,9 +1209,9 @@ argument_list|)
 name|Integer
 name|offset
 parameter_list|,
-comment|//TODO: Jersey supports parsing multiple values in Collections.
-comment|//      Use this feature here instead of using this hand crafted
-comment|//      solution!
+comment|// TODO: Jersey supports parsing multiple values in Collections.
+comment|// Use this feature here instead of using this hand crafted
+comment|// solution!
 annotation|@
 name|FormParam
 argument_list|(
@@ -1401,7 +1422,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation.      * Note that the maximum number of results (limit) and the offset of the      * first result (offset) are parsed as seperate parameters and are not      * part of the field query as in the java API.<p>      * TODO: as soon as the entityhub supports multiple query types this need      *       to be refactored. The idea is that this dynamically detects query      *       types and than redirects them to the referenced site implementation.      * @param query The field query in JSON format      * @param limit the maximum number of results starting at offset      * @param offset the offset of the first result      * @param headers the header information of the request      * @return the results of the query      */
+comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation. Note that the maximum number      * of results (limit) and the offset of the first result (offset) are parsed as seperate parameters and      * are not part of the field query as in the java API.      *<p>      * TODO: as soon as the entityhub supports multiple query types this need to be refactored. The idea is      * that this dynamically detects query types and than redirects them to the referenced site      * implementation.      *       * @param query      *            The field query in JSON format      * @param limit      *            the maximum number of results starting at offset      * @param offset      *            the offset of the first result      * @param headers      *            the header information of the request      * @return the results of the query      */
 annotation|@
 name|POST
 annotation|@
@@ -1496,7 +1517,9 @@ decl_stmt|;
 name|Entityhub
 name|entityhub
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|Entityhub
 operator|.

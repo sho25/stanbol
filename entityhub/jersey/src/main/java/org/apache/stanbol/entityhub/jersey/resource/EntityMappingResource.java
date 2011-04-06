@@ -208,26 +208,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|JerseyUtils
-operator|.
-name|getService
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -371,6 +351,44 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|ContextHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|core
@@ -488,30 +506,21 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RESTful interface for the {@link EntityMapping}s defined by the  {@link Entityhub}.  *  * @author Rupert Westenthaler  */
+comment|/**  * RESTful interface for the {@link EntityMapping}s defined by the {@link Entityhub}.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/mapping"
+literal|"/entityhub/mapping"
 argument_list|)
-comment|//@ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
 specifier|public
 class|class
 name|EntityMappingResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
-comment|//    /**
-comment|//     * The default result fields for /find queries is the reference to the
-comment|//     * mapped symbol and the mapped entity
-comment|//     */
-comment|//    private static final Collection<? extends String> DEFAULT_FIND_SELECTED_FIELDS =
-comment|//        Arrays.asList(
-comment|//                RdfResourceEnum.mappedEntity.getUri(),
-comment|//                RdfResourceEnum.mappedSymbol.getUri());
 specifier|private
 specifier|final
 name|Logger
@@ -635,7 +644,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//TODO: how to parse an error message
+comment|// TODO: how to parse an error message
 throw|throw
 operator|new
 name|WebApplicationException
@@ -647,7 +656,9 @@ block|}
 name|Entityhub
 name|entityhub
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|Entityhub
 operator|.
@@ -817,7 +828,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//TODO: how to parse an error message
+comment|// TODO: how to parse an error message
 throw|throw
 operator|new
 name|WebApplicationException
@@ -829,7 +840,9 @@ block|}
 name|Entityhub
 name|entityhub
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|Entityhub
 operator|.
@@ -999,7 +1012,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//TODO: how to parse an error message
+comment|// TODO: how to parse an error message
 throw|throw
 operator|new
 name|WebApplicationException
@@ -1011,7 +1024,9 @@ block|}
 name|Entityhub
 name|entityhub
 init|=
-name|getService
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
 name|Entityhub
 operator|.
@@ -1088,8 +1103,8 @@ argument_list|,
 name|APPLICATION_JSON_TYPE
 argument_list|)
 decl_stmt|;
-comment|//TODO: Implement Support for list of Signs, Representations and Strings
-comment|//      For now use a pseudo QueryResultList
+comment|// TODO: Implement Support for list of Signs, Representations and Strings
+comment|// For now use a pseudo QueryResultList
 name|QueryResultList
 argument_list|<
 name|EntityMapping
