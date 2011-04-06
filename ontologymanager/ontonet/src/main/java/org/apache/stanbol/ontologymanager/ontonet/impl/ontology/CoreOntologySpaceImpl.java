@@ -174,8 +174,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|PersistenceStore
-name|persistenceStore
+name|ClerezzaOntologyStorage
+name|storage
 parameter_list|)
 block|{
 name|super
@@ -206,7 +206,7 @@ operator|.
 name|CORE
 comment|/*, scopeID*/
 argument_list|,
-name|persistenceStore
+name|storage
 argument_list|)
 expr_stmt|;
 block|}
@@ -216,8 +216,8 @@ parameter_list|(
 name|IRI
 name|scopeID
 parameter_list|,
-name|PersistenceStore
-name|persistenceStore
+name|ClerezzaOntologyStorage
+name|storage
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -251,7 +251,7 @@ operator|.
 name|CORE
 argument_list|,
 comment|/*scopeID,*/
-name|persistenceStore
+name|storage
 argument_list|,
 name|ontologyManager
 argument_list|)

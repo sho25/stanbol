@@ -319,8 +319,8 @@ decl_stmt|;
 comment|/*  	 * The ClerezzaOntologyStorage (local to OntoNet) has been changed with 	 * PersistenceStore (general from Stanbol) 	 * 	 */
 comment|//protected ClerezzaOntologyStorage storage;
 specifier|protected
-name|PersistenceStore
-name|persistenceStore
+name|ClerezzaOntologyStorage
+name|storage
 decl_stmt|;
 specifier|public
 name|OntologySpaceFactoryImpl
@@ -328,8 +328,8 @@ parameter_list|(
 name|ScopeRegistry
 name|registry
 parameter_list|,
-name|PersistenceStore
-name|persistenceStore
+name|ClerezzaOntologyStorage
+name|storage
 parameter_list|)
 block|{
 name|this
@@ -340,9 +340,9 @@ name|registry
 expr_stmt|;
 name|this
 operator|.
-name|persistenceStore
+name|storage
 operator|=
-name|persistenceStore
+name|storage
 expr_stmt|;
 block|}
 comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologySpaceFactory#createCoreOntologySpace(org.semanticweb.owlapi.model.IRI, eu.iksproject.kres.api.manager.ontology.OntologyInputSource) 	 */
@@ -367,7 +367,7 @@ name|CoreOntologySpaceImpl
 argument_list|(
 name|scopeID
 argument_list|,
-name|persistenceStore
+name|storage
 argument_list|)
 decl_stmt|;
 name|setupSpace
@@ -405,7 +405,7 @@ name|CustomOntologySpaceImpl
 argument_list|(
 name|scopeID
 argument_list|,
-name|persistenceStore
+name|storage
 argument_list|)
 decl_stmt|;
 name|setupSpace
@@ -440,7 +440,7 @@ name|SessionOntologySpaceImpl
 argument_list|(
 name|scopeID
 argument_list|,
-name|persistenceStore
+name|storage
 argument_list|)
 decl_stmt|;
 comment|// s.setUp();
