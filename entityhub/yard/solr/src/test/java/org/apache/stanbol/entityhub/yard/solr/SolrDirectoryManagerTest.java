@@ -398,6 +398,8 @@ operator|.
 name|getSolrDirectory
 argument_list|(
 literal|null
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -420,6 +422,8 @@ operator|.
 name|getSolrDirectory
 argument_list|(
 literal|""
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -556,7 +560,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testIndexInitialisation
+name|testDefaultIndexInitialisation
 parameter_list|()
 block|{
 comment|//this is actually tested already by the initialisation of the
@@ -579,6 +583,8 @@ operator|.
 name|getSolrDirectory
 argument_list|(
 name|indexName
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 name|assertEquals

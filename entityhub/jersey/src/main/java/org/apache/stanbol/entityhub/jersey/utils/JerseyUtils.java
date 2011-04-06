@@ -484,6 +484,8 @@ argument_list|(
 literal|"unable to parse FieldQuery from \"application/x-www-form-urlencoded\" encoded query string "
 operator|+
 name|query
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 name|fieldQuery
@@ -564,6 +566,8 @@ argument_list|(
 literal|"unable to parse FieldQuery from \"multipart/form-data\" encoded query string "
 operator|+
 name|query
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 name|exception
@@ -587,7 +591,7 @@ argument_list|(
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Unable to parse FieldQuery for the parsed query\n"
+literal|"Unable to parse FieldQuery form the parsed query String:"
 operator|+
 name|query
 argument_list|,

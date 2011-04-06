@@ -375,6 +375,42 @@ name|client
 operator|.
 name|solrj
 operator|.
+name|impl
+operator|.
+name|CommonsHttpSolrServer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|solr
+operator|.
+name|client
+operator|.
+name|solrj
+operator|.
+name|impl
+operator|.
+name|StreamingUpdateSolrServer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|solr
+operator|.
+name|client
+operator|.
+name|solrj
+operator|.
 name|response
 operator|.
 name|QueryResponse
@@ -859,26 +895,6 @@ name|solr
 operator|.
 name|utils
 operator|.
-name|ConfigUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|yard
-operator|.
-name|solr
-operator|.
-name|utils
-operator|.
 name|SolrUtil
 import|;
 end_import
@@ -1233,13 +1249,14 @@ name|Float
 argument_list|>
 name|fieldBoostMap
 decl_stmt|;
-comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard.      */
+comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard.      * Supports also {@link Type#STREAMING} and {@link Type#LOAD_BALANCE} type      * of servers.      * TODO: In case a remove SolrServer is configured by the      * {@link SolrYardConfig#getSolrServerLocation()}, than it would be possible      * to create both an {@link StreamingUpdateSolrServer} (by parsing       * {@link Type#STREAMING}) and an normal {@link CommonsHttpSolrServer}. The      * streaming update one should be used for indexing requests and the      * commons http one for all other requests. This would provide performance      * advantages when updating {@link Representation}s stored in a SolrYard      * using an remote SolrServer.      */
 annotation|@
 name|Reference
 specifier|private
 name|SolrServerProviderManager
 name|solrServerProviderManager
 decl_stmt|;
+comment|/**      * Used to retrieve (and init if not already present) the Solr Index directory      * for relative paths parsed for {@link SolrYardConfig#getSolrServerLocation()}.      * Note that the {@link SolrDirectoryManager} only provides the path to the      * files. The {@link SolrServer} instance is created by the      * {@link SolrServerProviderManager}!      */
 annotation|@
 name|Reference
 specifier|private
@@ -1329,6 +1346,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**      * Builds an {@link SolrYardConfig} instance based on the parsed {@link ComponentContext}      * and forwards to {@link #activate(SolrYardConfig)}.      * @param context The component context only used to create the {@link SolrYardConfig}      * based on {@link ComponentContext#getProperties()}.      * @throws ConfigurationException If the configuration is not valid      * @throws IOException In case the initialisation of the Solr index was not      * possible      * @throws SolrServerException Indicates that the referenced SolrServer has      * some problems (usually an invalid configuration).      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1411,7 +1429,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Internally used to configure an instance (within and without an OSGI      * container      * @param config The configuration      * @throws ConfigurationException      * @throws IOException      * @throws SolrServerException      */
+comment|/**      * Internally used to configure an instance (within and without an OSGI      * container      * @param config The configuration      * @throws ConfigurationException If the configuration is not valid      * @throws IOException In case the initialisation of the Solr index was not      * possible      * @throws SolrServerException Indicates that the referenced SolrServer has      * some problems (usually an invalid configuration).      */
 specifier|private
 name|void
 name|activate
@@ -1589,6 +1607,9 @@ condition|)
 block|{
 comment|//relative paths
 comment|// need to be resolved based on the internally managed Solr directory
+comment|//TODO: for now parse TRUE to allow automatic creation if the index
+comment|//      does not already exist. We might add this as an additional
+comment|//      parameter to the SolrIndexConfig
 name|indexDirectory
 operator|=
 name|solrDirectoryManager
@@ -1599,6 +1620,8 @@ name|indexDirectory
 operator|.
 name|toString
 argument_list|()
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -1761,6 +1784,7 @@ name|getFieldBoosts
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**      * Deactivates this SolrYard instance after committing remaining changes      * @param context      */
 annotation|@
 name|Deactivate
 specifier|protected
@@ -1772,21 +1796,6 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"in "
-operator|+
-name|SolrYard
-operator|.
-name|class
-operator|+
-literal|" deactivate with context "
-operator|+
-name|context
-argument_list|)
-expr_stmt|;
 name|SolrYardConfig
 name|config
 init|=
@@ -1796,6 +1805,27 @@ operator|)
 name|getConfig
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"... deactivating SolrYard "
+operator|+
+name|config
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|" (id="
+operator|+
+name|config
+operator|.
+name|getId
+argument_list|()
+operator|+
+literal|")"
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 name|this
@@ -1901,6 +1931,27 @@ argument_list|()
 expr_stmt|;
 comment|//deactivate the super implementation
 block|}
+comment|/**      * Calls the {@link #deactivate(ComponentContext)} with<code>null</code>      * as component context      */
+annotation|@
+name|Override
+specifier|protected
+name|void
+name|finalize
+parameter_list|()
+throws|throws
+name|Throwable
+block|{
+name|deactivate
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+name|super
+operator|.
+name|finalize
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -1950,14 +2001,9 @@ name|log
 operator|.
 name|debug
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"find %s"
-argument_list|,
+literal|"find "
+operator|+
 name|parsedQuery
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|long
@@ -2676,7 +2722,6 @@ name|getFieldNames
 argument_list|()
 control|)
 block|{
-comment|//            log.debug(String.format("> process SolrDocument.field: %s",fieldName));
 name|IndexField
 name|indexField
 init|=
@@ -2750,7 +2795,6 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-comment|//                    log.debug(String.format("   -> process IndexField %s ...",indexField));
 for|for
 control|(
 name|Object
@@ -2764,7 +2808,6 @@ name|fieldName
 argument_list|)
 control|)
 block|{
-comment|//                        log.debug(String.format("   -> index value %s (type=%s)",value,value!=null?value.getClass():"---"));
 if|if
 condition|(
 name|value
@@ -2821,7 +2864,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//                                    log.debug(String.format("<- java value %s (type=%s)",javaValue,javaValue.getClass()));
 name|rep
 operator|.
 name|add
@@ -2883,8 +2925,6 @@ block|}
 comment|//else index value == null -> ignore
 block|}
 comment|//end for all values
-comment|//                } else {
-comment|//                    log.debug(String.format("   - IndexField %s filtered, because Path is not selected",indexField));
 block|}
 block|}
 else|else
@@ -2912,8 +2952,6 @@ name|fieldName
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//                } else {
-comment|//                    log.debug(String.format("IndexDocument Field %s does not represent a IndexField", fieldName));
 block|}
 block|}
 block|}
@@ -3720,7 +3758,7 @@ return|return
 name|added
 return|;
 block|}
-comment|/**      * boost if present!      * @param representation      * @return      */
+comment|/**      * Internally used to create Solr input documents for parsed representations.<p>      * This method supports boosting of fields. The boost is calculated by combining<ol>      *<li> the boot for the whole representation - by calling       * {@link #getDocumentBoost(Representation)}      *<li> the boost of each field - by using the configured {@link #fieldBoostMap}      *</ol>      * @param representation the representation      * @return the Solr document for indexing      */
 specifier|protected
 specifier|final
 name|SolrInputDocument
@@ -3825,6 +3863,8 @@ control|)
 block|{
 comment|//TODO: maybe add some functionality to prevent indexing of the
 comment|//      field configured as documentBoostFieldName!
+comment|//      But this would also prevent the possibility to intentionally
+comment|//      override the boost.
 name|String
 name|field
 init|=
@@ -3868,7 +3908,6 @@ name|documentBoost
 else|:
 name|documentBoost
 decl_stmt|;
-comment|//            log.debug(String.format("> Process Representation Field %s",field));
 for|for
 control|(
 name|Iterator
@@ -3934,7 +3973,6 @@ name|value
 argument_list|)
 control|)
 block|{
-comment|//                        log.debug(String.format("  - add: %s=%s",fieldName,value));
 name|inputDocument
 operator|.
 name|addField
