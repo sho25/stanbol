@@ -2721,12 +2721,13 @@ name|toString
 parameter_list|()
 block|{
 return|return
-name|InMemoryRepresentation
-operator|.
-name|class
+name|getClass
+argument_list|()
 operator|.
 name|getSimpleName
 argument_list|()
+operator|+
+literal|" "
 operator|+
 name|getId
 argument_list|()

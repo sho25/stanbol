@@ -1963,6 +1963,20 @@ argument_list|(
 name|query
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"{} results returned by query {}"
+argument_list|,
+name|results
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
 name|List
 argument_list|<
 name|NonLiteral
@@ -1998,6 +2012,17 @@ range|:
 name|results
 control|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Adding {} to ContentItem {}"
+argument_list|,
+name|guess
+argument_list|,
+name|contentItemId
+argument_list|)
+expr_stmt|;
 name|EnhancementRDFUtils
 operator|.
 name|writeEntityAnnotation
