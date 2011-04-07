@@ -1003,6 +1003,8 @@ literal|"://"
 operator|+
 name|filename
 expr_stmt|;
+break|break;
+comment|//break as soon as a resource was found
 block|}
 block|}
 block|}
