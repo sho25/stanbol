@@ -135,11 +135,9 @@ name|solr
 operator|.
 name|impl
 operator|.
-name|install
+name|ConfigUtils
 operator|.
-name|IndexInstallerConstants
-operator|.
-name|SUPPORTED_COMPRESSION_FORMAT
+name|SUPPORTED_SOLR_ARCHIVE_FORMAT
 import|;
 end_import
 
@@ -836,7 +834,7 @@ decl_stmt|;
 name|String
 name|archiveFormat
 init|=
-name|SUPPORTED_COMPRESSION_FORMAT
+name|SUPPORTED_SOLR_ARCHIVE_FORMAT
 operator|.
 name|get
 argument_list|(
@@ -867,7 +865,7 @@ name|extension
 operator|+
 literal|"\" (supported are "
 operator|+
-name|SUPPORTED_COMPRESSION_FORMAT
+name|SUPPORTED_SOLR_ARCHIVE_FORMAT
 operator|.
 name|keySet
 argument_list|()

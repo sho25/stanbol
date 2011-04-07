@@ -103,6 +103,24 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|stanboltools
+operator|.
+name|datafileprovider
+operator|.
+name|DataFileProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|yard
@@ -218,9 +236,9 @@ parameter_list|)
 throws|throws
 name|IllegalArgumentException
 function_decl|;
-comment|/**      *       * @param solrIndexName the name of the index to create      * @param ais the stream providing the data for the new index      * @return the directory (instanceDir) of the index.      * @throws IOException On any error while reading from the parsed input stream      * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
+comment|/**      * Creates a new Solr Index based on the data in the provided {@link ArchiveInputStream}      * @param solrIndexName the name of the index to create      * @param ais the stream providing the data for the new index      * @return the directory (instanceDir) of the index.      * @throws IOException On any error while reading from the parsed input stream      * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
 name|File
-name|createSolrDirectory
+name|createSolrIndex
 parameter_list|(
 specifier|final
 name|String
@@ -228,6 +246,30 @@ name|solrIndexName
 parameter_list|,
 name|ArchiveInputStream
 name|ais
+parameter_list|)
+throws|throws
+name|IllegalArgumentException
+throws|,
+name|IOException
+function_decl|;
+comment|/**      * Creates a new Solr Index based on looking up the Index data via the      * {@link DataFileProvider} service      * @param solrIndexName The name of the solrIndex to create      * @param indexPath the name of the dataFile looked up via the {@link DataFileProvider}      * @param comments The comments describing the data on how to get the index      * @return the directory (instanceDir) of the index or null if the index       * data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
+name|File
+name|createSolrDirectory
+parameter_list|(
+specifier|final
+name|String
+name|solrIndexName
+parameter_list|,
+name|String
+name|indexPath
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|comments
 parameter_list|)
 throws|throws
 name|IllegalArgumentException

@@ -1191,6 +1191,15 @@ name|SOLR_SERVER_TYPE
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.solrServerType"
 decl_stmt|;
+comment|/**      * Key used to to enable/disable the use of the default configuration when       * initialising the SolrYard. The default value MUST BE<code>true</code>      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SOLR_INDEX_DEFAULT_CONFIG
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.allowDefaultConfig"
+decl_stmt|;
 comment|/**      * The default value for the maxBooleanClauses of SolrQueries. Set to      * {@value #defaultMaxBooleanClauses} the default of Slor 1.4      */
 specifier|protected
 specifier|static
@@ -1607,9 +1616,6 @@ condition|)
 block|{
 comment|//relative paths
 comment|// need to be resolved based on the internally managed Solr directory
-comment|//TODO: for now parse TRUE to allow automatic creation if the index
-comment|//      does not already exist. We might add this as an additional
-comment|//      parameter to the SolrIndexConfig
 name|indexDirectory
 operator|=
 name|solrDirectoryManager
@@ -1621,9 +1627,49 @@ operator|.
 name|toString
 argument_list|()
 argument_list|,
-literal|true
+name|config
+operator|.
+name|isDefaultInitialisation
+argument_list|()
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|indexDirectory
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|ConfigurationException
+argument_list|(
+name|SolrYard
+operator|.
+name|SOLR_SERVER_LOCATION
+argument_list|,
+literal|"SolrIndex "
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|" is not available"
+operator|+
+operator|(
+name|config
+operator|.
+name|isDefaultInitialisation
+argument_list|()
+condition|?
+literal|" and could not be initialised!"
+else|:
+literal|". The necessary Index is not yet installed."
+operator|)
+argument_list|)
+throw|;
+block|}
 block|}
 name|solrIndexLocation
 operator|=
