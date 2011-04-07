@@ -297,7 +297,7 @@ name|tools
 operator|.
 name|tokenize
 operator|.
-name|Tokenizer
+name|SimpleTokenizer
 import|;
 end_import
 
@@ -309,7 +309,7 @@ name|tools
 operator|.
 name|tokenize
 operator|.
-name|WhitespaceTokenizer
+name|Tokenizer
 import|;
 end_import
 
@@ -578,7 +578,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Core of our EnhancementEngine, separated from the OSGi service  *  to make it easier to test this.  */
+comment|/**  * Core of our EnhancementEngine, separated from the OSGi service to make it easier to test this.  */
 end_comment
 
 begin_class
@@ -1670,6 +1670,13 @@ argument_list|(
 name|nameFinderModel
 argument_list|)
 decl_stmt|;
+name|Tokenizer
+name|tokenizer
+init|=
+name|SimpleTokenizer
+operator|.
+name|INSTANCE
+decl_stmt|;
 name|Map
 argument_list|<
 name|String
@@ -1692,13 +1699,6 @@ name|NameOccurrence
 argument_list|>
 argument_list|>
 argument_list|()
-decl_stmt|;
-name|Tokenizer
-name|tokenizer
-init|=
-name|WhitespaceTokenizer
-operator|.
-name|INSTANCE
 decl_stmt|;
 for|for
 control|(
