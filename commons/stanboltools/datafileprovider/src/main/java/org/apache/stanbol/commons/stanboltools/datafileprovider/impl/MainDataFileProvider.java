@@ -131,6 +131,20 @@ name|Map
 import|;
 end_import
 
+begin_comment
+comment|// DO NOT REMOVE - workaround for FELIX-2906
+end_comment
+
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|Integer
+import|;
+end_import
+
 begin_import
 import|import
 name|org
@@ -352,7 +366,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** The main DatafileProvider, delegates to other DataFileProvider if   *  the requested file is not found in its datafiles folder.  *    *  Must have the lowest service ranking of all DatafileProvider, so  *  that this is the default one which delegates to others.   */
+comment|/** The main DatafileProvider, delegates to other DataFileProvider if   *  the requested file is not found in its datafiles folder.  *    *  Must have the highest service ranking of all DatafileProvider, so  *  that this is the default one which delegates to others.  */
 end_comment
 
 begin_class
@@ -380,7 +394,9 @@ name|SERVICE_RANKING
 argument_list|,
 name|intValue
 operator|=
-literal|0
+name|Integer
+operator|.
+name|MAX_VALUE
 argument_list|)
 specifier|public
 class|class
@@ -408,7 +424,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"./datafiles"
+literal|"datafiles"
 argument_list|)
 specifier|public
 specifier|static
@@ -1084,6 +1100,14 @@ argument_list|)
 expr_stmt|;
 return|return
 name|result
+return|;
+block|}
+name|File
+name|getDataFilesFolder
+parameter_list|()
+block|{
+return|return
+name|dataFilesFolder
 return|;
 block|}
 block|}
