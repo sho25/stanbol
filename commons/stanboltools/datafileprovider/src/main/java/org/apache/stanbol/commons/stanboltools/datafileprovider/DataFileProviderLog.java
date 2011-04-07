@@ -20,7 +20,7 @@ package|;
 end_package
 
 begin_comment
-comment|/** Holds the {@link DataFileProviderEvent}s generated  *  by the main {@link DataFileProvider}  */
+comment|/**  * Holds the {@link DataFileProviderEvent}s generated  * by the main {@link DataFileProvider}.  */
 end_comment
 
 begin_interface
@@ -33,12 +33,12 @@ argument_list|<
 name|DataFileProviderEvent
 argument_list|>
 block|{
-comment|/** @return the maximum number of events that this service holds.      *      If the current size() is greater or equal than this, events      *      might have been discarded.       */
+comment|/**      * @return the maximum number of events that this service holds.      *         If the current size() is greater or equal than this, events      *         might have been discarded.      */
 name|int
 name|maxEventsCount
 parameter_list|()
 function_decl|;
-comment|/** @return the actual number of events stored */
+comment|/**      * @return the actual number of events stored      */
 name|int
 name|size
 parameter_list|()

@@ -124,7 +124,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simple {@link BundleActivator} that also listens to the {@link OsgiInstaller}  * service.  * If the Bundle is active and the {@link OsgiInstaller} is available the  * {@link BundleInstaller} is created. If the bundle is stopped or the  * {@link OsgiInstaller} goes away the {@link BundleInstaller} is closed.   * @author Rupert Westenthaler  *  */
+comment|/**  * Simple {@link BundleActivator} that also listens to the {@link OsgiInstaller}  * service.  *<p>  * If the Bundle is active and the {@link OsgiInstaller} is available the  * {@link BundleInstaller} is created. If the bundle is stopped or the  * {@link OsgiInstaller} goes away the {@link BundleInstaller} is closed.   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -136,10 +136,6 @@ name|BundleActivator
 implements|,
 name|ServiceTrackerCustomizer
 block|{
-specifier|private
-name|ServiceTracker
-name|installerTracker
-decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -154,6 +150,10 @@ name|Activator
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+specifier|private
+name|ServiceTracker
+name|installerTracker
 decl_stmt|;
 specifier|private
 name|BundleContext

@@ -406,19 +406,6 @@ name|DataFileProvider
 implements|,
 name|DataFileProviderLog
 block|{
-specifier|private
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
-decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
@@ -434,10 +421,6 @@ name|DATA_FILES_FOLDER_PROP
 init|=
 literal|"data.files.folder"
 decl_stmt|;
-specifier|private
-name|File
-name|dataFilesFolder
-decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
@@ -452,6 +435,25 @@ name|String
 name|MAX_EVENTS_PROP
 init|=
 literal|"max.events"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|MainDataFileProvider
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+specifier|private
+name|File
+name|dataFilesFolder
 decl_stmt|;
 specifier|private
 name|int
@@ -473,7 +475,7 @@ name|DataFileProviderEvent
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** Track providers to which we can delegate */
+comment|/** Tracks providers to which we can delegate */
 specifier|private
 name|ServiceTracker
 name|providersTracker

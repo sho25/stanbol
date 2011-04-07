@@ -71,12 +71,12 @@ name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/**      * Java package name that is the classloading root of the static resources of the fragment to be published      * by the OSGi HttpService under /static-url-root/fragment-name/      *       * Note: this package should be exported by the bundle.      */
+comment|/**      * Java package name that is the classloading root of the static resources of the fragment to be published      * by the OSGi HttpService under {@code /static-url-root/fragment-name/}      *<p>      * Note: this package should be exported by the bundle.      */
 name|String
 name|getStaticResourceClassPath
 parameter_list|()
 function_decl|;
-comment|/**      * Set of JAX-RS resources provided as classes.      *       * Note: those classes should be visible: use the Export-Package bundle declaration to export their      * packages.      */
+comment|/**      * Set of JAX-RS resources provided as classes.      *<p>      * Note: those classes should be visible: use the Export-Package bundle declaration to export their      * packages.      */
 name|Set
 argument_list|<
 name|Class
@@ -87,7 +87,7 @@ argument_list|>
 name|getJaxrsResourceClasses
 parameter_list|()
 function_decl|;
-comment|/**      * Set of JAX-RS resources provided as singleton instances.      *       * Note: those objects should be visible: use the Export-Package bundle declaration to export their      * packages.      */
+comment|/**      * Set of JAX-RS resources provided as singleton instances.      *<p>      * Note: those objects should be visible: use the Export-Package bundle declaration to export their      * packages.      */
 name|Set
 argument_list|<
 name|Object

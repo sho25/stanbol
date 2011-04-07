@@ -38,12 +38,12 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Constants used by the BundleInstaller  * @author Rupert Westenthaler  *  */
+comment|/**  * Constants used by the BundleInstaller.  *  * @author Rupert Westenthaler  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
+class|class
 name|BundleInstallerConstants
 block|{
 comment|/**      * The name of the header field used for the       *<a href="http://www.aqute.biz/Snippets/Extender"> The OSGi extender       * pattern</a>.      */
@@ -65,7 +65,7 @@ init|=
 literal|"bundleinstall"
 decl_stmt|;
 block|}
-end_interface
+end_class
 
 end_unit
 
