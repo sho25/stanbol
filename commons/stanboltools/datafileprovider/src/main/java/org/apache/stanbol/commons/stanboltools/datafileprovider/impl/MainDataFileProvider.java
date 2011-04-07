@@ -411,7 +411,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"datafiles"
+literal|"sling/datafiles"
 argument_list|)
 specifier|public
 specifier|static
@@ -512,6 +512,62 @@ name|class
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|dataFilesFolder
+operator|.
+name|exists
+argument_list|()
+condition|)
+block|{
+if|if
+condition|(
+operator|!
+name|dataFilesFolder
+operator|.
+name|mkdirs
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|ConfigurationException
+argument_list|(
+name|DATA_FILES_FOLDER_PROP
+argument_list|,
+literal|"Unable to create the configured Directory "
+operator|+
+name|dataFilesFolder
+argument_list|)
+throw|;
+block|}
+block|}
+elseif|else
+if|if
+condition|(
+operator|!
+name|dataFilesFolder
+operator|.
+name|isDirectory
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|ConfigurationException
+argument_list|(
+name|DATA_FILES_FOLDER_PROP
+argument_list|,
+literal|"The configured DataFile directory "
+operator|+
+name|dataFilesFolder
+operator|+
+literal|" does already exists but is not a directory!"
+argument_list|)
+throw|;
+block|}
+comment|//else exists and is a directory!
 name|maxEvents
 operator|=
 name|requireProperty
@@ -973,6 +1029,8 @@ name|DataFileProvider
 operator|)
 name|o
 decl_stmt|;
+try|try
+block|{
 name|result
 operator|=
 name|dfp
@@ -986,6 +1044,34 @@ argument_list|,
 name|comments
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+comment|//Exceptions thrown by an implementation should never
+comment|//affect the MainDataFileProvider
+name|log
+operator|.
+name|debug
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Eception while searching DataFile %s by using provider %s (ignore)"
+argument_list|,
+name|filename
+argument_list|,
+name|dfp
+argument_list|)
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|result
