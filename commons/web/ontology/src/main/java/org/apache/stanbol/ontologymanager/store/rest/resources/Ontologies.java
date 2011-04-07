@@ -709,6 +709,7 @@ name|ontologyContent
 operator|!=
 literal|null
 operator|&&
+operator|!
 name|ontologyContent
 operator|.
 name|isEmpty
@@ -736,6 +737,7 @@ name|ontologyURL
 operator|!=
 literal|null
 operator|&&
+operator|!
 name|ontologyURL
 operator|.
 name|isEmpty
