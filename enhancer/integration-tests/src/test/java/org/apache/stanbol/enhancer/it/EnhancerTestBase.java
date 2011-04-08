@@ -238,11 +238,8 @@ literal|"org.apache.stanbol.*OpenCalaisEngine"
 argument_list|,
 literal|"org.apache.stanbol.*EntityMentionEnhancementEngine"
 argument_list|,
-literal|"org.apache.stanbol.*RelatedTopicEnhancementEngine"
-argument_list|,
 literal|"org.apache.stanbol.*CachingDereferencerEngine"
 argument_list|,
-comment|//added by rwesten
 literal|"org.apache.stanbol.*ReferencedSiteEntityTaggingEnhancementEngine"
 argument_list|)
 expr_stmt|;

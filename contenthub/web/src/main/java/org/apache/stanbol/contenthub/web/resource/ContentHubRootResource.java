@@ -7,9 +7,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|enhancer
+name|contenthub
 operator|.
-name|jersey
+name|web
 operator|.
 name|resource
 package|;
@@ -846,6 +846,24 @@ operator|.
 name|cache
 operator|.
 name|EntityCacheProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|jersey
+operator|.
+name|resource
+operator|.
+name|ContentItemResource
 import|;
 end_import
 
