@@ -217,7 +217,7 @@ name|jersey
 operator|.
 name|resource
 operator|.
-name|StoreRootResource
+name|ContentHubRootResource
 import|;
 end_import
 
@@ -396,7 +396,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|StoreRootResource
+name|ContentHubRootResource
 operator|.
 name|class
 argument_list|)
@@ -637,11 +637,11 @@ argument_list|(
 operator|new
 name|NavigationLink
 argument_list|(
-literal|"store"
+literal|"contenthub"
 argument_list|,
-literal|"/store"
+literal|"/contenthub"
 argument_list|,
-literal|"/imports/storeDescription.ftl"
+literal|"/imports/contenthubDescription.ftl"
 argument_list|,
 literal|20
 argument_list|)

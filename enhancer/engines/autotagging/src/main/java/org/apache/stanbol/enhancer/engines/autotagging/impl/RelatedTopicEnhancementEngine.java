@@ -318,7 +318,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * OSGi wrapper for the iks-autotagging library. Uses a lucene index of DBpedia  * to suggest related related topics out of the text content of the  * content item.  *  * @author ogrisel  */
+comment|/**  * OSGi wrapper for the iks-autotagging library. Uses a lucene index of DBpedia to suggest related related  * topics out of the text content of the content item.  *  * Note: this engine does not works as it requires a dedicated lucene index that does not work yet. It will be  * replaced by a matching engine that uses the EntityHub instead of the iks-autotaggin lib.  *  * @author ogrisel  */
 end_comment
 
 begin_class
@@ -327,7 +327,7 @@ name|Component
 argument_list|(
 name|immediate
 operator|=
-literal|true
+literal|false
 argument_list|,
 name|metatype
 operator|=

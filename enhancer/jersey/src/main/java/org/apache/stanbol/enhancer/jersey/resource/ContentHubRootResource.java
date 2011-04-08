@@ -1009,11 +1009,11 @@ begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/store"
+literal|"/contenthub"
 argument_list|)
 specifier|public
 class|class
-name|StoreRootResource
+name|ContentHubRootResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -1060,7 +1060,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|StoreRootResource
+name|ContentHubRootResource
 operator|.
 name|class
 argument_list|)
@@ -1221,7 +1221,7 @@ return|;
 block|}
 block|}
 specifier|public
-name|StoreRootResource
+name|ContentHubRootResource
 parameter_list|(
 annotation|@
 name|Context
@@ -1711,7 +1711,7 @@ operator|.
 name|getBaseUri
 argument_list|()
 operator|+
-literal|"store/content/"
+literal|"contenthub/content/"
 argument_list|,
 name|data
 argument_list|)
@@ -1735,7 +1735,7 @@ operator|.
 name|getBaseUri
 argument_list|()
 operator|+
-literal|"store/content/"
+literal|"contenthub/content/"
 operator|+
 name|localId
 argument_list|)
@@ -1864,7 +1864,7 @@ argument_list|()
 operator|.
 name|path
 argument_list|(
-literal|"/store/page"
+literal|"/contenthub/page"
 argument_list|)
 operator|.
 name|path
@@ -1923,7 +1923,7 @@ argument_list|()
 operator|.
 name|path
 argument_list|(
-literal|"/store/metadata"
+literal|"/contenthub/metadata"
 argument_list|)
 operator|.
 name|path
@@ -1957,7 +1957,7 @@ argument_list|()
 operator|.
 name|path
 argument_list|(
-literal|"/store/raw"
+literal|"/contenthub/raw"
 argument_list|)
 operator|.
 name|path
