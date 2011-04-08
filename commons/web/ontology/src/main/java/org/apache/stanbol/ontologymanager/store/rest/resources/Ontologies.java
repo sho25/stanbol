@@ -657,14 +657,6 @@ literal|"ontologyContent"
 argument_list|)
 name|String
 name|ontologyContent
-parameter_list|,
-annotation|@
-name|FormParam
-argument_list|(
-literal|"ontologyURL"
-argument_list|)
-name|String
-name|ontologyURL
 parameter_list|)
 block|{
 name|Response
@@ -733,12 +725,12 @@ block|}
 elseif|else
 if|if
 condition|(
-name|ontologyURL
+name|ontologyURI
 operator|!=
 literal|null
 operator|&&
 operator|!
-name|ontologyURL
+name|ontologyURI
 operator|.
 name|isEmpty
 argument_list|()
@@ -755,7 +747,7 @@ argument_list|(
 operator|new
 name|URL
 argument_list|(
-name|ontologyURL
+name|ontologyURI
 argument_list|)
 argument_list|,
 name|ontologyURI
@@ -792,7 +784,7 @@ argument_list|(
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Ontology Content or URL can not be both null"
+literal|"Ontology Content or URI can not be both null"
 argument_list|)
 argument_list|,
 name|Status
@@ -1021,14 +1013,6 @@ literal|"ontologyContent"
 argument_list|)
 name|String
 name|ontologyContent
-parameter_list|,
-annotation|@
-name|FormParam
-argument_list|(
-literal|"ontologyURL"
-argument_list|)
-name|String
-name|ontologyURL
 parameter_list|)
 block|{
 name|Response
@@ -1041,8 +1025,6 @@ argument_list|(
 name|ontologyURI
 argument_list|,
 name|ontologyContent
-argument_list|,
-name|ontologyURL
 argument_list|)
 decl_stmt|;
 name|OntologyMetaInformation
