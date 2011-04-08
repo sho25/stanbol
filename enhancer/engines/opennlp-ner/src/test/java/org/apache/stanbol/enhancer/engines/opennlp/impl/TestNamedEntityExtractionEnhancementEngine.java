@@ -439,7 +439,7 @@ operator|+
 literal|"A new paragraph is being written. This paragraph has two sentences."
 decl_stmt|;
 specifier|static
-name|EngineCore
+name|NEREngineCore
 name|nerEngine
 decl_stmt|;
 specifier|public
@@ -463,7 +463,7 @@ block|{
 name|nerEngine
 operator|=
 operator|new
-name|EngineCore
+name|NEREngineCore
 argument_list|(
 operator|new
 name|ClasspathDataFileProvider

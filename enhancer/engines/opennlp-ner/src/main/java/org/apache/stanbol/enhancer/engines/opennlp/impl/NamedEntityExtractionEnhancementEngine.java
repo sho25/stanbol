@@ -312,7 +312,7 @@ expr_stmt|;
 name|engineCore
 operator|=
 operator|new
-name|EngineCore
+name|NEREngineCore
 argument_list|(
 name|dataFileProvider
 argument_list|,

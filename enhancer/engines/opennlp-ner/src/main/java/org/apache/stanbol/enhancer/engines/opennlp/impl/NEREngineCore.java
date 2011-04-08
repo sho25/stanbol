@@ -576,7 +576,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|EngineCore
+name|NEREngineCore
 implements|implements
 name|EnhancementEngine
 block|{
@@ -686,7 +686,7 @@ literal|"provided by the org.apache.stanbol.defaultdata bundle"
 argument_list|)
 expr_stmt|;
 block|}
-name|EngineCore
+name|NEREngineCore
 parameter_list|(
 name|DataFileProvider
 name|dfp
