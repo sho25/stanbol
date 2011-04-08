@@ -183,6 +183,18 @@ name|DatatypePropertyContext
 argument_list|()
 return|;
 block|}
+comment|/**      * Create an instance of {@link ImportsForOntology}      */
+specifier|public
+name|ImportsForOntology
+name|createImportsForOntology
+parameter_list|()
+block|{
+return|return
+operator|new
+name|ImportsForOntology
+argument_list|()
+return|;
+block|}
 comment|/**      * Create an instance of {@link IndividualsForOntology }      *       */
 specifier|public
 name|IndividualsForOntology
@@ -264,6 +276,18 @@ block|{
 return|return
 operator|new
 name|ObjectPropertiesForOntology
+argument_list|()
+return|;
+block|}
+comment|/**      * Create an instance of {@link OntologyImport }      *       */
+specifier|public
+name|OntologyImport
+name|createOntologyImport
+parameter_list|()
+block|{
+return|return
+operator|new
+name|OntologyImport
 argument_list|()
 return|;
 block|}
