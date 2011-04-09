@@ -551,6 +551,8 @@ operator|=
 literal|"application/rdf+xml"
 expr_stmt|;
 block|}
+comment|// TODO: remove dependency on the "store" service and make it possible to select the default graph
+comment|// instead
 name|Object
 name|result
 init|=
