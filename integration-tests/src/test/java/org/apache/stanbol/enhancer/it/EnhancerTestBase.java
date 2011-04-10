@@ -239,8 +239,8 @@ argument_list|,
 literal|"org.apache.stanbol.*EntityMentionEnhancementEngine"
 argument_list|,
 literal|"org.apache.stanbol.*CachingDereferencerEngine"
-argument_list|,
-literal|"org.apache.stanbol.*ReferencedSiteEntityTaggingEnhancementEngine"
+comment|//removed because not available in offline mode
+comment|//"org.apache.stanbol.*ReferencedSiteEntityTaggingEnhancementEngine"
 argument_list|)
 expr_stmt|;
 comment|/*  List of expected referencedSites could also be made                   *  configurable via system properties, but we don't expect it                   *  to change often.                   */
