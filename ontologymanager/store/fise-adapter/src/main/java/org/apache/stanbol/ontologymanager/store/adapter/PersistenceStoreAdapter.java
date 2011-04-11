@@ -801,8 +801,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Previous ontology deleted:"
-operator|+
+literal|"Previous ontology deleted: {}"
+argument_list|,
 name|deleted
 operator|.
 name|toString

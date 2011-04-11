@@ -188,15 +188,13 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Completed Synchronizing in "
-operator|+
+literal|"Completed Synchronizing in {} ms"
+argument_list|,
 operator|(
 name|t2
 operator|-
 name|t1
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 block|}

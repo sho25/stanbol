@@ -146,8 +146,6 @@ name|String
 name|resourceURI
 parameter_list|)
 function_decl|;
-comment|// FIXME:: make sure that this method returns the reference to the imported
-comment|// class!!!
 name|String
 name|resolveOntologyURIFromResourceURI
 parameter_list|(

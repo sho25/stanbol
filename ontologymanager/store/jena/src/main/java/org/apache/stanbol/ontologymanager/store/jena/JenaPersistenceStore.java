@@ -191,6 +191,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|UUID
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Vector
 import|;
 end_import
@@ -2740,14 +2750,14 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Invalid URL for reasoner : "
-operator|+
+literal|"Invalid URL for reasoner {} "
+argument_list|,
 name|reasonerUrl
 argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// Get IStoreSycnhronizer from component factory
+comment|// Get StoreSycnhronizer from component factory
 if|if
 condition|(
 name|this
@@ -2777,6 +2787,20 @@ name|getName
 argument_list|()
 argument_list|,
 name|resourceManager
+argument_list|)
+expr_stmt|;
+name|props
+operator|.
+name|put
+argument_list|(
+name|PersistenceStore
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|this
 argument_list|)
 expr_stmt|;
 name|ComponentInstance
@@ -3621,6 +3645,29 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|ontologyURI
+operator|==
+literal|null
+operator|||
+name|ontologyURI
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|ontologyURI
+operator|=
+name|UUID
+operator|.
+name|randomUUID
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
+block|}
 try|try
 block|{
 if|if
@@ -3637,11 +3684,9 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Ontology store for: "
-operator|+
+literal|"Ontology store for {}   already exists: Updating ontology"
+argument_list|,
 name|ontologyURI
-operator|+
-literal|" already exists: Updating ontology"
 argument_list|)
 expr_stmt|;
 name|deleteOntology
@@ -3662,12 +3707,11 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Creating a new ontology store for: "
-operator|+
+literal|"Creating a new ontology store for: {} "
+argument_list|,
 name|ontologyURI
 argument_list|)
 expr_stmt|;
-comment|// InputStream is = new ByteArrayInputStream(ontologyContent.getBytes(encoding));
 name|long
 name|st2
 init|=
@@ -3676,7 +3720,6 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
-comment|// ModelMaker modelMaker = getModelMaker();
 name|OntModelSpec
 name|oms
 init|=
@@ -3693,7 +3736,6 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
-comment|// oms.setDocumentManager(new DbAwareDocumentManager(modelMaker));
 name|long
 name|st4
 init|=
@@ -3795,9 +3837,9 @@ name|logger
 operator|.
 name|info
 argument_list|(
+literal|"{} read as RDF/XML"
+argument_list|,
 name|ontologyURI
-operator|+
-literal|"model read as RDF/XML"
 argument_list|)
 expr_stmt|;
 name|long
@@ -3812,8 +3854,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Create input stream: "
-operator|+
+literal|" Create input stream: {} ms"
+argument_list|,
 operator|(
 name|st2
 operator|-
@@ -3825,8 +3867,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Get Model Spec: "
-operator|+
+literal|" Get Model Spec: {} ms"
+argument_list|,
 operator|(
 name|st3
 operator|-
@@ -3838,8 +3880,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Create Base Model: "
-operator|+
+literal|" Create Base Model: {} ms"
+argument_list|,
 operator|(
 name|st5
 operator|-
@@ -3851,8 +3893,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Create Ont Model: "
-operator|+
+literal|" Create Ont Model: {} ms"
+argument_list|,
 operator|(
 name|st6
 operator|-
@@ -3864,8 +3906,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Read Model: "
-operator|+
+literal|" Read Model: {} ms"
+argument_list|,
 operator|(
 name|st7
 operator|-
@@ -3877,8 +3919,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Total Creation: "
-operator|+
+literal|" Total Creation: {} ms"
+argument_list|,
 operator|(
 name|st7
 operator|-
@@ -4023,17 +4065,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// XXX Get referenced properties from OWL.Restrictions
-comment|// StmtIterator stmts = om.listStatements(null, OWL.onProperty,
-comment|// (RDFNode) null);
-comment|// List<Statement> stmtsToBeAdded = new ArrayList<Statement>();
-comment|// while (stmts.hasNext()) {
-comment|// RDFNode node = stmts.next().getObject();
-comment|// if (node.isURIResource()) {
-comment|// stmtsToBeAdded.add(new StatementImpl(node.asResource(),
-comment|// RDF.type, RDF.Property));
-comment|// }
-comment|// }
 name|long
 name|t6
 init|=
@@ -4218,8 +4249,6 @@ argument_list|(
 name|importedOntologyURI
 argument_list|)
 decl_stmt|;
-comment|// Model baseModel =
-comment|// modelMaker.getModel(importedOntologyURI);
 name|OntModel
 name|imported_om
 init|=
@@ -4473,7 +4502,7 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Error at importing ontology: "
+literal|"Error at importing ontology "
 operator|+
 name|importedOntologyURI
 argument_list|,
@@ -4509,135 +4538,117 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Get Connection: "
-operator|+
+literal|" Get Connection: {} ms"
+argument_list|,
 operator|(
 name|t2
 operator|-
 name|t1
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Create Ontology Model : "
-operator|+
+literal|" Create Ontology Model: {} ms"
+argument_list|,
 operator|(
 name|t3
 operator|-
 name|t2
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Classes : "
-operator|+
+literal|" Classes: {} ms"
+argument_list|,
 operator|(
 name|t5
 operator|-
 name|t4
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Datatype Properties : "
-operator|+
+literal|" Datatype Properties: {} ms"
+argument_list|,
 operator|(
 name|t6
 operator|-
 name|t5
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Object Props : "
-operator|+
+literal|" Object Props: {} ms "
+argument_list|,
 operator|(
 name|t7
 operator|-
 name|t6
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Individuals : "
-operator|+
+literal|" Individuals: {} ms "
+argument_list|,
 operator|(
 name|t8
 operator|-
 name|t7
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Imports : "
-operator|+
+literal|" Imports: {} ms"
+argument_list|,
 operator|(
 name|t9
 operator|-
 name|t8
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" MetaInf : "
-operator|+
+literal|" MetaInf: {} ms"
+argument_list|,
 operator|(
 name|t10
 operator|-
 name|t9
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|" Total Save Time "
-operator|+
+literal|" Total Save Time {} ms "
+argument_list|,
 operator|(
 name|t10
 operator|-
 name|t1
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5032,8 +5043,6 @@ literal|null
 decl_stmt|;
 try|try
 block|{
-comment|// System.out.println(ontologyURI);
-comment|// System.out.println(classURI);
 if|if
 condition|(
 name|persistenceProvider
@@ -7452,7 +7461,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// FIXME:: check if fix works
 name|List
 argument_list|<
 name|Statement
@@ -7505,7 +7513,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// FIXME:: check if fix works
 name|List
 argument_list|<
 name|Statement
@@ -7558,7 +7565,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// FIXME:: check if fix works
 name|List
 argument_list|<
 name|Statement
@@ -7611,7 +7617,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// FIXME:: check if fix works
 name|List
 argument_list|<
 name|Statement
@@ -7803,8 +7808,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// System.out.println("individualAsValueURI==="
-comment|// + individualAsValueURI);
 name|String
 name|ontologyFor_arg2
 init|=
@@ -10154,8 +10157,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"super class without uri, localName="
-operator|+
+literal|"super class without uri, localName {}"
+argument_list|,
 name|curClass
 operator|.
 name|getLocalName
@@ -10254,8 +10257,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"equivalent class without uri, localName="
-operator|+
+literal|"equivalent class without uri, localName {}"
+argument_list|,
 name|curClass
 operator|.
 name|getLocalName
@@ -10445,8 +10448,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"disjoint class without uri, localName="
-operator|+
+literal|"disjoint class without uri, localName {}"
+argument_list|,
 name|curClass
 operator|.
 name|getLocalName
@@ -10953,8 +10956,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"equivalent class without uri, localName="
-operator|+
+literal|"equivalent class without uri, localName {}"
+argument_list|,
 name|curClass
 operator|.
 name|getLocalName
@@ -11298,8 +11301,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Unable to resolve property value = "
-operator|+
+literal|"Unable to resolve property value {}"
+argument_list|,
 name|curValue
 operator|.
 name|toString
@@ -11629,8 +11632,6 @@ argument_list|(
 name|datatypePropertyURI
 argument_list|)
 decl_stmt|;
-comment|// FIXME(Cihan) Domain and Range of a property can have multiple
-comment|// class values which is not handled in our current schema
 if|if
 condition|(
 name|this
@@ -12152,14 +12153,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"domain for datatypeProperty ="
-operator|+
+literal|"domain for datatypeProperty {}  is resolved to OntClass but it does not have URI"
+argument_list|,
 name|datatypeProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" is resolved to OntClass but it does not have URI"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12170,14 +12169,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"domain for datatypeProperty ="
-operator|+
+literal|"domain for datatypeProperty {} cannot be resolved to OntClass"
+argument_list|,
 name|datatypeProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" cannot be resolved to OntClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12453,14 +12450,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"range for datatypeProperty ="
-operator|+
+literal|"range for datatypeProperty {}  is resolved to OntClass but it does not have URI"
+argument_list|,
 name|datatypeProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" is resolved to OntClass but it does not have URI"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12471,14 +12466,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"domain for datatypeProperty ="
-operator|+
+literal|"domain for datatypeProperty {}  cannot be resolved to OntClass"
+argument_list|,
 name|datatypeProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" cannot be resolved to OntClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12572,8 +12565,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"equivalent property with uri, localName="
-operator|+
+literal|"equivalent property with uri, localName {}"
+argument_list|,
 name|curEquivalentProperty
 operator|.
 name|getLocalName
@@ -12745,8 +12738,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"equivalent property with uri, localName="
-operator|+
+literal|"equivalent property with uri, localName {}"
+argument_list|,
 name|curSuperProperty
 operator|.
 name|getLocalName
@@ -12985,9 +12978,6 @@ name|objectPropertyURI
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// Domain
-comment|// FIXME Current Schema can not handle multiple domains and
-comment|// ranges
 name|Domain
 name|domain
 init|=
@@ -13500,14 +13490,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"domain for datatypeProperty ="
-operator|+
+literal|"domain for datatypeProperty {} is resolved to OntClass but it does not have URI"
+argument_list|,
 name|objectProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" is resolved to OntClass but it does not have URI"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13518,14 +13506,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"domain for datatypeProperty ="
-operator|+
+literal|"domain for datatypeProperty {} cannot be resolved to OntClass"
+argument_list|,
 name|objectProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" cannot be resolved to OntClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13801,14 +13787,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"range for datatypeProperty ="
-operator|+
+literal|"range for datatypeProperty {}  is resolved to OntClass but it does not have URI"
+argument_list|,
 name|objectProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" is resolved to OntClass but it does not have URI"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13819,14 +13803,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"domain for datatypeProperty ="
-operator|+
+literal|"domain for datatypeProperty {}  cannot be resolved to OntClass"
+argument_list|,
 name|objectProperty
 operator|.
 name|getURI
 argument_list|()
-operator|+
-literal|" cannot be resolved to OntClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14039,8 +14021,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"equivalent property with uri, localName="
-operator|+
+literal|"equivalent property with uri, localName {}"
+argument_list|,
 name|curEquivalentProperty
 operator|.
 name|getLocalName
@@ -14212,8 +14194,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"equivalent property with uri, localName="
-operator|+
+literal|"equivalent property with uri, localName {}"
+argument_list|,
 name|curSuperProperty
 operator|.
 name|getLocalName
@@ -14447,10 +14429,6 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-finally|finally
-block|{
-comment|// closeDBConnection(m_conn);
-block|}
 return|return
 literal|false
 return|;
@@ -14599,10 +14577,6 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-finally|finally
-block|{
-comment|// closeDBConnection(m_conn);
-block|}
 return|return
 literal|false
 return|;
@@ -14750,10 +14724,6 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-block|}
-finally|finally
-block|{
-comment|// closeDBConnection(m_conn);
 block|}
 return|return
 literal|false
@@ -14902,10 +14872,6 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-block|}
-finally|finally
-block|{
-comment|// closeDBConnection(m_conn);
 block|}
 return|return
 literal|false
@@ -15703,9 +15669,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Assumes individualURI1 and objectPropertyURI are in the same ontology      *       * @param individualURI1      * @param objectPropertyURI      * @param individualURI2      * @return      */
-comment|/*      * public boolean externallyAnnotateIndividual(String individualURI1, String objectPropertyURI, String      * individualURI2) {      *       * try { String ontologyURI1 = resourceManager .resolveOntologyURIFromResourceURI(individualURI1); if      * (ontologyURI1 != null) { Model baseModel1 = persistenceProvider.getModel(ontologyURI1); OntModel      * ontModel1 = ModelFactory.createOntologyModel( getOntModelSpec(false), baseModel1); Individual      * individual1 = ontModel1 .getIndividual(individualURI1); ObjectProperty objectProperty = ontModel1      * .createObjectProperty(objectPropertyURI); resourceManager.registerObjectProperty(ontologyURI1,      * objectProperty.getURI());      *       * DBPediaClient dbPediaClientInstance = DBPediaClient .getInstance(); dbPediaClientInstance      * .populateWithObjectPropertyValues(individualURI2);      *       * String ontologyURI2 = resourceManager .resolveOntologyURIFromResourceURI(individualURI2); if      * (ontologyURI2 != null) { Model baseModel2 = persistenceProvider .getModel(ontologyURI2); OntModel      * ontModel2 = ModelFactory.createOntologyModel( getOntModelSpec(false), baseModel2); Individual      * individual2 = ontModel2 .getIndividual(individualURI2); if (individual1 != null&& objectProperty !=      * null&& individual2 != null) { individual1.setPropertyValue(objectProperty, individual2); return true;      * } } } } catch (Exception e) { logger.error("Error ", e); } finally { // closeDBConnection(m_conn); }      * return false; }      */
-comment|/**      * Non-Interface Functions *      *       * @throws SQLException      */
+comment|/**      * Non-Interface Functions *      *       *       */
 specifier|private
 name|List
 argument_list|<
@@ -16330,7 +16294,6 @@ name|OntClass
 name|ontClass
 parameter_list|)
 block|{
-comment|// System.out.println("resolveOntClass");
 name|List
 argument_list|<
 name|ClassConstraint
@@ -16351,8 +16314,6 @@ operator|new
 name|ObjectFactory
 argument_list|()
 decl_stmt|;
-comment|// ClassConstraint classConstraint =
-comment|// objectFactory.createClassConstraint();
 name|List
 argument_list|<
 name|OntClass
@@ -16403,7 +16364,6 @@ name|isComplementClass
 argument_list|()
 condition|)
 block|{
-comment|// System.out.println("complement");
 name|ClassConstraint
 name|classConstraint
 init|=
@@ -16550,14 +16510,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"error in resolve OntClass "
-operator|+
+literal|"error in resolve OntClass {}  proceeding with next input."
+argument_list|,
 name|restrictionClass
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" proceeding with next input."
 argument_list|)
 expr_stmt|;
 block|}
@@ -16578,7 +16536,6 @@ name|isEnumeratedClass
 argument_list|()
 condition|)
 block|{
-comment|// System.out.println("enumerated");
 name|ClassConstraint
 name|classConstraint
 init|=
@@ -16732,14 +16689,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"error in resolve OntClass "
-operator|+
+literal|"error in resolve OntClass {}  proceeding with next input."
+argument_list|,
 name|restrictionClass
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" proceeding with next input."
 argument_list|)
 expr_stmt|;
 block|}
@@ -16760,7 +16715,6 @@ name|isIntersectionClass
 argument_list|()
 condition|)
 block|{
-comment|// System.out.println("intersection");
 name|ClassConstraint
 name|classConstraint
 init|=
@@ -16907,14 +16861,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"error in resolve OntClass "
-operator|+
+literal|"error in resolve OntClass {} proceeding with next input."
+argument_list|,
 name|restrictionClass
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" proceeding with next input."
 argument_list|)
 expr_stmt|;
 block|}
@@ -17079,14 +17031,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Can not convert "
-operator|+
+literal|"Can not convert {}  to OntClass"
+argument_list|,
 name|resource
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" to OntClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17110,14 +17060,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Can not convert "
-operator|+
+literal|"Can not convert {} to DataRange"
+argument_list|,
 name|resource
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" to DataRange"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17262,14 +17210,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Can not convert "
-operator|+
+literal|"Can not convert {} to OntClass"
+argument_list|,
 name|resource
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" to OntClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17293,14 +17239,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Can not convert "
-operator|+
+literal|"Can not convert {} to DataRange"
+argument_list|,
 name|resource
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" to DataRange"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17346,7 +17290,6 @@ operator|.
 name|asHasValueRestriction
 argument_list|()
 decl_stmt|;
-comment|// FIXME:: has values are on properties
 name|organizePropertyReference
 argument_list|(
 name|classConstraint
@@ -17628,14 +17571,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"error in resolve OntClass "
-operator|+
+literal|"error in resolve OntClass {}  proceeding with next input."
+argument_list|,
 name|restrictionClass
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" proceeding with next input."
 argument_list|)
 expr_stmt|;
 block|}
@@ -17648,7 +17589,6 @@ name|isUnionClass
 argument_list|()
 condition|)
 block|{
-comment|// System.out.println("union");
 name|ClassConstraint
 name|classConstraint
 init|=
@@ -17682,7 +17622,6 @@ operator|.
 name|listOperands
 argument_list|()
 decl_stmt|;
-comment|// System.out.println("before while loop");
 while|while
 condition|(
 name|operandsItr
@@ -17691,7 +17630,6 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-comment|// System.out.println("in while loop");
 try|try
 block|{
 name|OntClass
@@ -17715,8 +17653,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// System.out.println("IN UNION_OF :: "
-comment|// + nextClass.getURI());
 name|ClassMetaInformation
 name|classMetaInformation
 init|=
@@ -17741,7 +17677,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// System.out.println("IN UNION_OF nextClassURI null:: ");
 name|List
 argument_list|<
 name|ClassConstraint
@@ -17805,14 +17740,12 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"error in resolve OntClass "
-operator|+
+literal|"error in resolve OntClass {} proceeding with next input."
+argument_list|,
 name|restrictionClass
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" proceeding with next input."
 argument_list|)
 expr_stmt|;
 block|}
@@ -17933,14 +17866,12 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"RDFNode "
-operator|+
+literal|"RDFNode {}  is neither Literal nor URI Resource"
+argument_list|,
 name|node
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" is neither Literal nor URI Resource"
 argument_list|)
 expr_stmt|;
 block|}
@@ -18014,241 +17945,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-comment|// (Cihan)
-comment|// Query Type = SELECT | CONSTRUCT | DESCRIBE | ASK
-specifier|public
-name|String
-name|sparqlQuery
-parameter_list|(
-name|String
-name|ontologyURI
-parameter_list|,
-name|String
-name|queryString
-parameter_list|,
-name|String
-name|queryType
-parameter_list|)
-block|{
-name|Query
-name|query
-init|=
-name|QueryFactory
-operator|.
-name|create
-argument_list|(
-name|queryString
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-if|if
-condition|(
-name|persistenceProvider
-operator|.
-name|hasModel
-argument_list|(
-name|ontologyURI
-argument_list|)
-condition|)
-block|{
-name|Model
-name|baseModel
-init|=
-name|persistenceProvider
-operator|.
-name|getModel
-argument_list|(
-name|ontologyURI
-argument_list|)
-decl_stmt|;
-name|OntModel
-name|ontModel
-init|=
-name|ModelFactory
-operator|.
-name|createOntologyModel
-argument_list|(
-name|getOntModelSpec
-argument_list|(
-literal|true
-argument_list|)
-argument_list|,
-name|baseModel
-argument_list|)
-decl_stmt|;
-name|QueryExecution
-name|exec
-init|=
-name|QueryExecutionFactory
-operator|.
-name|create
-argument_list|(
-name|query
-argument_list|,
-name|ontModel
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-literal|"SELECT"
-operator|.
-name|equals
-argument_list|(
-name|queryType
-argument_list|)
-condition|)
-block|{
-name|ResultSet
-name|results
-init|=
-name|exec
-operator|.
-name|execSelect
-argument_list|()
-decl_stmt|;
-return|return
-name|ResultSetFormatter
-operator|.
-name|asXMLString
-argument_list|(
-name|results
-argument_list|)
-return|;
-block|}
-elseif|else
-if|if
-condition|(
-literal|"CONSTRUCT"
-operator|.
-name|equals
-argument_list|(
-name|queryType
-argument_list|)
-condition|)
-block|{
-name|Model
-name|model
-init|=
-name|exec
-operator|.
-name|execConstruct
-argument_list|()
-decl_stmt|;
-name|Writer
-name|wr
-init|=
-operator|new
-name|StringWriter
-argument_list|()
-decl_stmt|;
-name|model
-operator|.
-name|write
-argument_list|(
-name|wr
-argument_list|)
-expr_stmt|;
-return|return
-name|wr
-operator|.
-name|toString
-argument_list|()
-return|;
-block|}
-elseif|else
-if|if
-condition|(
-literal|"DESCRIBE"
-operator|.
-name|equals
-argument_list|(
-name|queryType
-argument_list|)
-condition|)
-block|{
-name|Model
-name|model
-init|=
-name|exec
-operator|.
-name|execDescribe
-argument_list|()
-decl_stmt|;
-name|Writer
-name|wr
-init|=
-operator|new
-name|StringWriter
-argument_list|()
-decl_stmt|;
-name|model
-operator|.
-name|write
-argument_list|(
-name|wr
-argument_list|)
-expr_stmt|;
-return|return
-name|wr
-operator|.
-name|toString
-argument_list|()
-return|;
-block|}
-elseif|else
-if|if
-condition|(
-literal|"ASK"
-operator|.
-name|equals
-argument_list|(
-name|queryType
-argument_list|)
-condition|)
-block|{
-name|boolean
-name|ans
-init|=
-name|exec
-operator|.
-name|execAsk
-argument_list|()
-decl_stmt|;
-return|return
-name|String
-operator|.
-name|valueOf
-argument_list|(
-name|ans
-argument_list|)
-return|;
-block|}
-block|}
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-name|logger
-operator|.
-name|error
-argument_list|(
-literal|"Error "
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-return|return
-literal|"An error occured"
-return|;
-block|}
-return|return
-literal|"Query Type Not Specified"
-return|;
 block|}
 specifier|private
 name|OntModelSpec
@@ -18521,75 +18217,65 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Jena -> OWlapi "
-operator|+
+literal|"Jena -> OWlapi {} ms"
+argument_list|,
 operator|(
 name|t1
 operator|-
 name|start
 operator|)
-operator|+
-literal|" ms"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Inferring Statements "
-operator|+
+literal|"Inferring Statements {} ms "
+argument_list|,
 operator|(
 name|t2
 operator|-
 name|t1
 operator|)
-operator|+
-literal|" ms"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Prepare inferred model "
-operator|+
+literal|"Prepare inferred model {} ms "
+argument_list|,
 operator|(
 name|t3
 operator|-
 name|t2
 operator|)
-operator|+
-literal|" ms"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Owlapi -> Jena "
-operator|+
+literal|"Owlapi -> Jena {} ms "
+argument_list|,
 operator|(
 name|end
 operator|-
 name|t3
 operator|)
-operator|+
-literal|" ms"
 argument_list|)
 expr_stmt|;
 name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Inferred statements are computed in "
-operator|+
+literal|"Inferred statements are computed in {} ms "
+argument_list|,
 operator|(
 name|end
 operator|-
 name|start
 operator|)
-operator|+
-literal|" ms"
 argument_list|)
 expr_stmt|;
 name|returnModel
@@ -18749,7 +18435,6 @@ argument_list|,
 name|ontologyURI
 argument_list|)
 expr_stmt|;
-comment|// model.write(bos, "RDF/XML", null);
 name|OWLOntologyManager
 name|manager
 init|=
@@ -18984,8 +18669,8 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Can not compute inferred statements: "
-operator|+
+literal|"Can not compute inferred statements {} "
+argument_list|,
 name|e
 operator|.
 name|getMessage

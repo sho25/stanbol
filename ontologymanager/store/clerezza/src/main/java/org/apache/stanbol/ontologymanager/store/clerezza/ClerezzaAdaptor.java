@@ -628,7 +628,6 @@ name|String
 name|ontologyURI
 parameter_list|)
 block|{
-comment|// tcManager.getMGraph(new UriRef(ontologyURI)).clear();
 name|tcManager
 operator|.
 name|deleteTripleCollection

@@ -372,8 +372,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Synchronizing: "
-operator|+
+literal|"Synchronizing: {}"
+argument_list|,
 name|graphURI
 argument_list|)
 expr_stmt|;
@@ -464,8 +464,8 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Resource not found:"
-operator|+
+literal|"Resource not found:{} "
+argument_list|,
 name|individualURI
 argument_list|)
 expr_stmt|;
@@ -482,12 +482,10 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Resource registered:"
-operator|+
+literal|"Resource registered:{} on ontology {}"
+argument_list|,
 name|individualURI
-operator|+
-literal|"on ontology "
-operator|+
+argument_list|,
 name|graphURI
 argument_list|)
 expr_stmt|;
@@ -507,8 +505,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Resource already registered: "
-operator|+
+literal|"Resource already registered:{} "
+argument_list|,
 name|individualURI
 argument_list|)
 expr_stmt|;
@@ -588,8 +586,8 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Resource not found:"
-operator|+
+literal|"Resource not found:{} "
+argument_list|,
 name|propertyURI
 argument_list|)
 expr_stmt|;
@@ -606,12 +604,10 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Resource registered:"
-operator|+
+literal|"Resource registered:{} on ontology {}"
+argument_list|,
 name|propertyURI
-operator|+
-literal|"on ontology "
-operator|+
+argument_list|,
 name|graphURI
 argument_list|)
 expr_stmt|;
@@ -631,8 +627,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Resource already registered: "
-operator|+
+literal|"Resource already registered:{} "
+argument_list|,
 name|propertyURI
 argument_list|)
 expr_stmt|;
@@ -712,8 +708,8 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Resource not found:"
-operator|+
+literal|"Resource not found: {}"
+argument_list|,
 name|propertyURI
 argument_list|)
 expr_stmt|;
@@ -730,12 +726,10 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Resource registered:"
-operator|+
+literal|"Resource registered:{} on ontology {}"
+argument_list|,
 name|propertyURI
-operator|+
-literal|"on ontology "
-operator|+
+argument_list|,
 name|graphURI
 argument_list|)
 expr_stmt|;
@@ -755,8 +749,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Resource already registered: "
-operator|+
+literal|"Resource already registered:{} "
+argument_list|,
 name|propertyURI
 argument_list|)
 expr_stmt|;
@@ -836,8 +830,8 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Resource not found:"
-operator|+
+literal|"Resource not found: {}"
+argument_list|,
 name|classURI
 argument_list|)
 expr_stmt|;
@@ -854,12 +848,10 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Resource registered:"
-operator|+
+literal|"Resource registered: {} on ontology {}"
+argument_list|,
 name|classURI
-operator|+
-literal|"on ontology "
-operator|+
+argument_list|,
 name|graphURI
 argument_list|)
 expr_stmt|;
@@ -879,8 +871,8 @@ name|logger
 operator|.
 name|debug
 argument_list|(
-literal|"Resource already registered: "
-operator|+
+literal|"Resource already registered: {}"
+argument_list|,
 name|classURI
 argument_list|)
 expr_stmt|;

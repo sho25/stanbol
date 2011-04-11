@@ -206,7 +206,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|LOGGER
+name|log
 init|=
 name|LoggerFactory
 operator|.
@@ -301,7 +301,7 @@ expr_stmt|;
 name|checkContentFolder
 argument_list|()
 expr_stmt|;
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
@@ -313,7 +313,7 @@ operator|=
 name|getIndexFile
 argument_list|()
 expr_stmt|;
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
@@ -325,7 +325,7 @@ argument_list|(
 name|indexFile
 argument_list|)
 expr_stmt|;
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
@@ -408,12 +408,12 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Overriding previous content for: "
-operator|+
+literal|"Overriding previous content for: {}"
+argument_list|,
 name|id
 argument_list|)
 expr_stmt|;
@@ -492,12 +492,12 @@ name|IOException
 name|e
 parameter_list|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|error
 argument_list|(
-literal|"Unable to create file: "
-operator|+
+literal|"Unable to create file: {}"
+argument_list|,
 name|f
 operator|.
 name|getAbsolutePath
@@ -727,12 +727,12 @@ name|exists
 argument_list|()
 condition|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Content file for "
-operator|+
+literal|"Content file for {}  does not exist. Sycnhronizing ..."
+argument_list|,
 name|item
 operator|.
 name|getValue
@@ -740,8 +740,6 @@ argument_list|()
 operator|.
 name|getEntry1
 argument_list|()
-operator|+
-literal|" does not exist. Sycnhronizing ..."
 argument_list|)
 expr_stmt|;
 name|ioUtil
@@ -759,7 +757,7 @@ name|getEntry2
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
@@ -775,7 +773,7 @@ name|FileNotFoundException
 name|e
 parameter_list|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|error
 argument_list|(
@@ -791,7 +789,7 @@ name|IOException
 name|e
 parameter_list|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|error
 argument_list|(
@@ -852,7 +850,7 @@ name|FileNotFoundException
 name|e
 parameter_list|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|error
 argument_list|(
@@ -866,7 +864,7 @@ name|IOException
 name|e
 parameter_list|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|error
 argument_list|(
@@ -1033,12 +1031,12 @@ argument_list|(
 name|di
 argument_list|)
 expr_stmt|;
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
-literal|"Dangling Item Removed: "
-operator|+
+literal|"Dangling Item Removed: {}"
+argument_list|,
 name|di
 argument_list|)
 expr_stmt|;
@@ -1088,12 +1086,12 @@ name|IOException
 name|e
 parameter_list|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|error
 argument_list|(
-literal|"Can not create index file: "
-operator|+
+literal|"Can not create index file: {}"
+argument_list|,
 name|e
 operator|.
 name|getMessage
@@ -1160,7 +1158,7 @@ name|void
 name|printContentMap
 parameter_list|()
 block|{
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
@@ -1193,19 +1191,21 @@ name|entrySet
 argument_list|()
 control|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|info
 argument_list|(
-literal|"Item: "
-operator|+
+literal|"Item: {}, {}, {}."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
 name|entry
 operator|.
 name|getKey
 argument_list|()
-operator|+
-literal|","
-operator|+
+block|,
 name|entry
 operator|.
 name|getValue
@@ -1213,9 +1213,7 @@ argument_list|()
 operator|.
 name|getEntry1
 argument_list|()
-operator|+
-literal|"  "
-operator|+
+block|,                          ,
 name|entry
 operator|.
 name|getValue
@@ -1225,6 +1223,7 @@ name|getEntry2
 argument_list|()
 operator|.
 name|length
+block|}
 argument_list|)
 expr_stmt|;
 block|}

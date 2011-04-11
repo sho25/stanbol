@@ -340,14 +340,12 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Subject "
-operator|+
+literal|"Subject {} is a blank node."
+argument_list|,
 name|subject
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" is a blanknode"
 argument_list|)
 expr_stmt|;
 block|}
@@ -434,15 +432,13 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Listener: "
-operator|+
+literal|"Listener {} starts synchronization on URIs {}"
+argument_list|,
 name|this
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|"URIs:"
-operator|+
+argument_list|,
 name|resourceURIs
 argument_list|)
 expr_stmt|;

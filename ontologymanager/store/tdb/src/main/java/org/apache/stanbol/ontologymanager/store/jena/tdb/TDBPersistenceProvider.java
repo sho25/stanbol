@@ -320,15 +320,13 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Dataset restored in "
-operator|+
+literal|"Dataset restored in {} ms "
+argument_list|,
 operator|(
 name|end
 operator|-
 name|start
 operator|)
-operator|+
-literal|" miliseconds"
 argument_list|)
 expr_stmt|;
 block|}
@@ -419,8 +417,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Deleted TDB Store at "
-operator|+
+literal|"Deleted TDB Store at {} "
+argument_list|,
 name|datasetPath
 argument_list|)
 expr_stmt|;
@@ -431,8 +429,8 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Can not delete TDB Store at "
-operator|+
+literal|"Can not delete TDB Store at {} "
+argument_list|,
 name|datasetPath
 argument_list|)
 expr_stmt|;
@@ -489,8 +487,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Deleted model at "
-operator|+
+literal|"Deleted model at  {}"
+argument_list|,
 name|ontologyURI
 argument_list|)
 expr_stmt|;

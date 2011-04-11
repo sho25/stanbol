@@ -325,7 +325,6 @@ argument_list|(
 name|resourceURI
 argument_list|)
 operator|||
-comment|// resourceURI.equalsIgnoreCase((XSD.ENTITIES).getURI()) ||
 operator|(
 name|XSD
 operator|.
@@ -452,7 +451,6 @@ argument_list|(
 name|resourceURI
 argument_list|)
 operator|||
-comment|// resourceURI.equalsIgnoreCase((XSD.IDREFS).getURI()) ||
 operator|(
 name|XSD
 operator|.
@@ -537,7 +535,6 @@ argument_list|(
 name|resourceURI
 argument_list|)
 operator|||
-comment|// resourceURI.equalsIgnoreCase((XSD.NMTOKENS).getURI()) ||
 operator|(
 name|XSD
 operator|.
@@ -961,7 +958,6 @@ name|XSD
 operator|.
 name|duration
 return|;
-comment|// resourceURI.equalsIgnoreCase((XSD.ENTITIES).getURI())
 if|if
 condition|(
 operator|(
@@ -1151,7 +1147,6 @@ name|XSD
 operator|.
 name|IDREF
 return|;
-comment|// resourceURI.equalsIgnoreCase((XSD.IDREFS).getURI())
 if|if
 condition|(
 operator|(
@@ -1278,7 +1273,6 @@ name|XSD
 operator|.
 name|NMTOKEN
 return|;
-comment|// resourceURI.equalsIgnoreCase((XSD.NMTOKENS).getURI())
 if|if
 condition|(
 operator|(
@@ -1729,9 +1723,7 @@ parameter_list|,
 name|Exception
 name|e
 parameter_list|)
-block|{
-comment|// TODO Auto-generated method stub
-block|}
+block|{              }
 annotation|@
 name|Override
 specifier|public
@@ -1741,9 +1733,7 @@ parameter_list|(
 name|String
 name|s
 parameter_list|)
-block|{
-comment|// TODO Auto-generated method stub
-block|}
+block|{              }
 block|}
 decl_stmt|;
 name|BaseXMLWriter

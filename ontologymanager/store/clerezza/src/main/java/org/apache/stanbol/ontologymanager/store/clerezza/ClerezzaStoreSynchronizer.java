@@ -663,8 +663,6 @@ argument_list|>
 name|properties
 parameter_list|)
 block|{
-comment|// this.persistenceProvider = (IJenaPersistenceProvider) properties
-comment|// .get(IJenaPersistenceProvider.class.getName());
 name|this
 operator|.
 name|resourceManager
@@ -798,15 +796,13 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Added listener to the mgraph  "
-operator|+
+literal|"Added listener to the mgraph {} : {} "
+argument_list|,
 name|graphURI
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" : "
-operator|+
+argument_list|,
 name|listener
 argument_list|)
 expr_stmt|;
@@ -845,17 +841,15 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Removing graph listener "
-operator|+
+literal|"Removing graph listener {}  on {} "
+argument_list|,
 name|listeningMGraph
 operator|.
 name|get
 argument_list|(
 name|graphUri
 argument_list|)
-operator|+
-literal|" on "
-operator|+
+argument_list|,
 name|graphUri
 operator|.
 name|toString
@@ -909,17 +903,15 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Removing graph listener "
-operator|+
+literal|"Removing graph listener {} on "
+argument_list|,
 name|listeningMGraph
 operator|.
 name|get
 argument_list|(
 name|graphUri
 argument_list|)
-operator|+
-literal|" on "
-operator|+
+argument_list|,
 name|graphUri
 operator|.
 name|toString
@@ -1135,20 +1127,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Stopped Listening MGraph: "
-operator|+
-name|graphURI
-operator|.
-name|getUnicodeString
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|logger
-operator|.
-name|info
-argument_list|(
-literal|"Stopped Listening MGraph: "
-operator|+
+literal|"Stopped Listening MGraph: {}"
+argument_list|,
 name|graphURI
 operator|.
 name|getUnicodeString
@@ -1250,15 +1230,13 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Added listener to the mgraph  "
-operator|+
+literal|"Added listener to the mgraph  {} : {}"
+argument_list|,
 name|graphURI
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" : "
-operator|+
+argument_list|,
 name|listener
 argument_list|)
 expr_stmt|;
@@ -1502,8 +1480,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Added Class "
-operator|+
+literal|"Added Class {}"
+argument_list|,
 name|resourceURI
 argument_list|)
 expr_stmt|;
@@ -1529,8 +1507,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Added ObjectProperty "
-operator|+
+literal|"Added ObjectProperty {}"
+argument_list|,
 name|resourceURI
 argument_list|)
 expr_stmt|;
@@ -1556,8 +1534,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Added DataProperty "
-operator|+
+literal|"Added DataProperty {}"
+argument_list|,
 name|resourceURI
 argument_list|)
 expr_stmt|;
@@ -1583,8 +1561,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Added Individual"
-operator|+
+literal|"Added Individual {}"
+argument_list|,
 name|resourceURI
 argument_list|)
 expr_stmt|;
@@ -1696,8 +1674,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Removed Resource"
-operator|+
+literal|"Removed Resource {}"
+argument_list|,
 name|resourceURI
 argument_list|)
 expr_stmt|;
@@ -1743,8 +1721,8 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Registering ontology: "
-operator|+
+literal|"Registering ontology: {}"
+argument_list|,
 name|graphURI
 argument_list|)
 expr_stmt|;

@@ -721,14 +721,6 @@ name|model
 argument_list|)
 expr_stmt|;
 block|}
-comment|// List<String> URIs = TDBProvider.listModels();
-comment|// for(String URI : URIs){
-comment|// TDBProvider.getModel(URI).write(System.out);
-comment|// }
-comment|//
-comment|// for (String uri : testURIs) {
-comment|// createAndLoadOntology(uri);
-comment|// }
 block|}
 block|}
 end_class

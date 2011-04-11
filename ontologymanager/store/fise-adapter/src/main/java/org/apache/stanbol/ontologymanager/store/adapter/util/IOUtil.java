@@ -149,7 +149,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|LOGGER
+name|log
 init|=
 name|LoggerFactory
 operator|.
@@ -200,12 +200,12 @@ operator|.
 name|MAX_VALUE
 condition|)
 block|{
-name|LOGGER
+name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Content too long for file: "
-operator|+
+literal|"Content too long for file: {}"
+argument_list|,
 name|file
 operator|.
 name|getAbsolutePath
