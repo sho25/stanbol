@@ -1041,10 +1041,7 @@ operator|new
 name|ResourceManagerImp
 argument_list|()
 expr_stmt|;
-comment|// logger.warn("Creating Resource Manager: Properties must be set");
 block|}
-else|else
-block|{}
 return|return
 name|INSTANCE
 return|;
@@ -1327,7 +1324,6 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|// logger.info("Connection Closed");
 block|}
 block|}
 catch|catch
@@ -1520,7 +1516,6 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|// logger.info("Connection Closed");
 block|}
 block|}
 catch|catch
@@ -2331,11 +2326,9 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Ontology "
-operator|+
+literal|"Ontology {} already deleted "
+argument_list|,
 name|ontologyURI
-operator|+
-literal|" already deleted"
 argument_list|)
 expr_stmt|;
 return|return;
@@ -2854,7 +2847,6 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|// logger.info("Connection Closed");
 block|}
 catch|catch
 parameter_list|(
@@ -2906,11 +2898,9 @@ name|logger
 operator|.
 name|warn
 argument_list|(
-literal|"Resource"
-operator|+
+literal|"Resource {} not found"
+argument_list|,
 name|resourceURI
-operator|+
-literal|"not found"
 argument_list|)
 expr_stmt|;
 return|return;
@@ -3033,8 +3023,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// FIXME:: make sure that this method returns the reference to the imported
-comment|// class!!!
 comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.fise.stores.persistencestore.rest.IResourceManager#      * resolveOntologyURIFromResourceURI(java.lang.String)      */
 specifier|public
 name|String
@@ -3245,7 +3233,6 @@ argument_list|(
 name|DB_URL
 argument_list|)
 return|;
-comment|// , DB_USER, DB_PW);
 block|}
 specifier|private
 name|String
