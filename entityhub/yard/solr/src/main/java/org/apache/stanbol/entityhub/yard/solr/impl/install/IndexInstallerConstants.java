@@ -69,15 +69,6 @@ parameter_list|()
 block|{
 comment|/* do not create instances*/
 block|}
-comment|/**      * Use&lt;indexName&gt;.solrindex[.&lt;archiveType&gt;] as file name      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|SOLR_INDEX_ARCHIVE_EXTENSION
-init|=
-literal|"solrindex"
-decl_stmt|;
 comment|/**      * The schema used for transformed resources.      */
 specifier|public
 specifier|static
@@ -94,6 +85,15 @@ name|String
 name|PROPERTY_PREFIX
 init|=
 literal|"org.apache.stanbol.yard.solr.installer."
+decl_stmt|;
+comment|/**      * The key used to configure the name of the Index-Archive      * The default name is \"&lt;indexName&gt;.solrarchive\".      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PROPERTY_INDEX_ARCHIVE
+init|=
+literal|"Index-Archive"
 decl_stmt|;
 comment|/**      * The key used for the name of the index      */
 specifier|public
@@ -116,15 +116,6 @@ init|=
 name|PROPERTY_PREFIX
 operator|+
 literal|"archive.format"
-decl_stmt|;
-comment|/**      * The key used to configure the name of the Index-Archive      * The default name is \"&lt;indexName&gt;.solrarchive\".      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|PROPERTY_INDEX_ARCHIVE
-init|=
-literal|"Index-Archive"
 decl_stmt|;
 block|}
 end_class

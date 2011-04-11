@@ -1620,7 +1620,7 @@ name|indexDirectory
 operator|=
 name|solrDirectoryManager
 operator|.
-name|getSolrDirectory
+name|getSolrIndexDirectory
 argument_list|(
 name|indexDirectory
 operator|.

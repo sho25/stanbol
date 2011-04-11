@@ -51,6 +51,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -200,7 +210,7 @@ name|DEFAULT_SOLR_DATA_DIR
 init|=
 literal|"indexes"
 decl_stmt|;
-comment|/**      * Checks if a solrIndex with the parsed name is managed or not.      * @param solrIndexName the name of the Solr index to check      * @return<code>true</code> only if a Solr index with the parsed name is      * already present within the manages Solr directory.      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated)      * @throws IllegalArgumentException In case<code>null</code> or an empty       * string is parsed as solrIndexName      */
+comment|/**      * Checks if a solrIndex with the parsed name is managed or not. Note that      * an Index might be managed, but not yet be initialised. To check if an      * index is managed and can be used use {@link #isInitialisedIndex(String)      * @param solrIndexName the name of the Solr index to check      * @return<code>true</code> only if a Solr index with the parsed name is      * already present within the manages Solr directory.      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated)      * @throws IllegalArgumentException In case<code>null</code> or an empty       * string is parsed as solrIndexName      */
 name|boolean
 name|isManagedIndex
 parameter_list|(
@@ -209,8 +219,22 @@ name|solrIndexName
 parameter_list|)
 throws|throws
 name|IllegalStateException
+throws|,
+name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all the indexes currently available in the managed solr directory.      * The key is the name of the index and the value is the File pointing to the      * directory.      * @return map containing all the currently available indexes      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated) or initialised.      */
+comment|/**      * Checks if the managed index is also initialised and ready to be used.<p>      * Indexes are managed as soon as they are announced to the       * SolrDirectoryManager. However when using the       * {@link #createSolrDirectory(String, String, Properties)} it can not be      * assured that the archive with the actual data is already available.<p>      * @param indexName the name of the index      * @return      * @throws IllegalStateException      * @throws IllegalArgumentException      */
+name|boolean
+name|isInitialisedIndex
+parameter_list|(
+name|String
+name|indexName
+parameter_list|)
+throws|throws
+name|IllegalStateException
+throws|,
+name|IllegalArgumentException
+function_decl|;
+comment|/**      * Getter for all the indexes currently available in the managed solr directory.      * The key is the name of the index and the value is the File pointing to the      * directory. For uninitialised indexes the value will be<code>null</code>.      * @return map containing all the currently available indexes      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated) or initialised.      */
 name|Map
 argument_list|<
 name|String
@@ -222,16 +246,16 @@ parameter_list|()
 throws|throws
 name|IllegalStateException
 function_decl|;
-comment|/**      * Getter for the directory of the parsed index. Implementations need to       * ensure that returned directories are valid Solr indices (or Solr Cores)<p>      * Directories returned by this method are typically used as second parameter      * of {@link SolrServerProvider#getSolrServer(Type, String, String...)} to      * create an {@link SolrServer} instance.      * @param solrPathOrUri the name of the requested solr index. If no index      * with that name does exist a new one will be initialised base on the      * default core configuration part of this bundle.      * @param If<code>true</code> the Solr directory is created  and initialised      * with the default configuration if it does not already exist.      * @return the directory (instanceDir) of the index or<code>null</code> if      *<code>false</code> was parsed as create and the index does not already      * exist.       * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
+comment|/**      * Getter for the directory of the parsed index. Implementations need to       * ensure that returned directories are valid Solr indices (or Solr Cores)<p>      * Directories returned by this method are typically used as second parameter      * of {@link SolrServerProvider#getSolrServer(Type, String, String...)} to      * create an {@link SolrServer} instance.<p>      * This method may trigger the initialisation of the SolrIndex if not already      * done.<p>      * This method needs to wait until the initialisation of the index i      * completed (even in multi threaded environments)<p>      * @param solrPathOrUri the name of the requested solr index. If no index      * with that name does exist a new one will be initialised base on the      * default core configuration part of this bundle.      * @param allowDefaultInit If<code>true</code> the Solr Index can be initialised      * with the default configuration if not already present.      * @return the directory (instanceDir) of the index or<code>null</code> if      *<code>false</code> was parsed as allowDefaultInit and the data for the index      * are not yet available.      * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
 name|File
-name|getSolrDirectory
+name|getSolrIndexDirectory
 parameter_list|(
 specifier|final
 name|String
 name|solrIndexName
 parameter_list|,
 name|boolean
-name|create
+name|allowDefaultInit
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
@@ -252,7 +276,7 @@ name|IllegalArgumentException
 throws|,
 name|IOException
 function_decl|;
-comment|/**      * Creates a new Solr Index based on looking up the Index data via the      * {@link DataFileProvider} service      * @param solrIndexName The name of the solrIndex to create      * @param indexPath the name of the dataFile looked up via the {@link DataFileProvider}      * @param comments The comments describing the data on how to get the index      * @return the directory (instanceDir) of the index or null if the index       * data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
+comment|/**      * Creates a new Solr Index based on looking up the Index data via the      * {@link DataFileProvider} service      * @param solrIndexName The name of the solrIndex to create      * @param indexPath the name of the dataFile looked up via the {@link DataFileProvider}      * @param propergies Additional properties describing the index      * @return the directory (instanceDir) of the index or null if the index       * data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
 name|File
 name|createSolrDirectory
 parameter_list|(
@@ -263,13 +287,8 @@ parameter_list|,
 name|String
 name|indexPath
 parameter_list|,
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-name|comments
+name|Properties
+name|propergies
 parameter_list|)
 throws|throws
 name|IllegalArgumentException

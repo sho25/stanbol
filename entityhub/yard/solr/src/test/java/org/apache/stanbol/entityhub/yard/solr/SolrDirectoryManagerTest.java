@@ -395,7 +395,7 @@ parameter_list|()
 block|{
 name|solrDirectoryManager
 operator|.
-name|getSolrDirectory
+name|getSolrIndexDirectory
 argument_list|(
 literal|null
 argument_list|,
@@ -419,7 +419,7 @@ parameter_list|()
 block|{
 name|solrDirectoryManager
 operator|.
-name|getSolrDirectory
+name|getSolrIndexDirectory
 argument_list|(
 literal|""
 argument_list|,
@@ -580,7 +580,7 @@ name|indexDir
 init|=
 name|solrDirectoryManager
 operator|.
-name|getSolrDirectory
+name|getSolrIndexDirectory
 argument_list|(
 name|indexName
 argument_list|,
