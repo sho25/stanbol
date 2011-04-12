@@ -652,14 +652,11 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-comment|//        this.context = context;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"Activate ReferenceManager with context"
-operator|+
-name|context
+literal|"Activate ReferenceManager"
 argument_list|)
 expr_stmt|;
 block|}
@@ -675,14 +672,11 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"Deactivate ReferenceManager with context"
-operator|+
-name|context
+literal|"Deactivate ReferenceManager"
 argument_list|)
 expr_stmt|;
-comment|//        this.context = null;
 synchronized|synchronized
 init|(
 name|prefixMap
@@ -746,10 +740,10 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|" ... binding ReferencedSite "
-operator|+
+literal|" ... binding ReferencedSite {}"
+argument_list|,
 name|referencedSite
 operator|.
 name|getId
@@ -791,10 +785,10 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|" ... unbinding ReferencedSite "
-operator|+
+literal|" ... unbinding ReferencedSite {}"
+argument_list|,
 name|referencedSite
 operator|.
 name|getId
@@ -839,6 +833,9 @@ name|String
 name|prefix
 range|:
 name|referencedSite
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getEntityPrefixes
 argument_list|()
@@ -969,6 +966,9 @@ name|String
 name|prefix
 range|:
 name|referencedSite
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getEntityPrefixes
 argument_list|()
@@ -1219,12 +1219,10 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Found prefix "
-operator|+
+literal|"Found prefix {} for Entity {}"
+argument_list|,
 name|prefix
-operator|+
-literal|" for Entity "
-operator|+
+argument_list|,
 name|entityUri
 argument_list|)
 expr_stmt|;
@@ -1245,8 +1243,8 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"No registered prefix for entity "
-operator|+
+literal|"No registered prefix for entity {}"
+argument_list|,
 name|entityUri
 argument_list|)
 expr_stmt|;
@@ -1330,14 +1328,17 @@ literal|"Unable to access Site "
 operator|+
 name|site
 operator|.
+name|getConfiguration
+argument_list|()
+operator|.
 name|getName
 argument_list|()
 operator|+
-literal|" (url = "
+literal|" (id = "
 operator|+
 name|site
 operator|.
-name|getAccessUri
+name|getId
 argument_list|()
 operator|+
 literal|")"
@@ -1442,21 +1443,22 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Entity "
+literal|"Entity {} found on more than one Referenced Site"
 operator|+
+literal|" -> Representation of Site {} is ignored"
+argument_list|,
 name|rep
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|" found on more than one Referenced Site -> Representation of Site "
-operator|+
+argument_list|,
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()
-operator|+
-literal|" is ignored"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1476,14 +1478,17 @@ literal|"Unable to access Site "
 operator|+
 name|site
 operator|.
+name|getConfiguration
+argument_list|()
+operator|.
 name|getName
 argument_list|()
 operator|+
-literal|" (url = "
+literal|" (id = "
 operator|+
 name|site
 operator|.
-name|getAccessUri
+name|getId
 argument_list|()
 operator|+
 literal|")"
@@ -1585,21 +1590,22 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Entity "
+literal|"Entity {} found on more than one Referenced Site"
 operator|+
+literal|" -> Representation of Site {} is ignored"
+argument_list|,
 name|rep
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|" found on more than one Referenced Site -> Representation of Site "
-operator|+
+argument_list|,
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()
-operator|+
-literal|" is ignored"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1619,14 +1625,17 @@ literal|"Unable to access Site "
 operator|+
 name|site
 operator|.
+name|getConfiguration
+argument_list|()
+operator|.
 name|getName
 argument_list|()
 operator|+
-literal|" (url = "
+literal|" (id = "
 operator|+
 name|site
 operator|.
-name|getAccessUri
+name|getId
 argument_list|()
 operator|+
 literal|")"
@@ -1689,19 +1698,17 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"No Referenced Site registered for Entity "
-operator|+
+literal|"No Referenced Site registered for Entity {}"
+argument_list|,
 name|entityId
-operator|+
-literal|""
 argument_list|)
 expr_stmt|;
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Registered Prefixes "
-operator|+
+literal|"Registered Prefixes {}"
+argument_list|,
 name|prefixList
 argument_list|)
 expr_stmt|;
@@ -1744,20 +1751,24 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Return Content of type "
-operator|+
+literal|"Return Content of type {} for Entity {} from referenced site {}"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
 name|contentType
-operator|+
-literal|" for Entity "
-operator|+
+block|,
 name|entityId
-operator|+
-literal|" from referenced site "
-operator|+
+block|,
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()
+block|}
 argument_list|)
 expr_stmt|;
 return|return
@@ -1779,14 +1790,17 @@ literal|"Unable to access Site "
 operator|+
 name|site
 operator|.
+name|getConfiguration
+argument_list|()
+operator|.
 name|getName
 argument_list|()
 operator|+
-literal|" (url = "
+literal|" (id = "
 operator|+
 name|site
 operator|.
-name|getAccessUri
+name|getId
 argument_list|()
 operator|+
 literal|")"
@@ -1800,12 +1814,10 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Entity "
-operator|+
+literal|"Entity {} not found on any of the following Sites {}"
+argument_list|,
 name|entityId
-operator|+
-literal|" not found on any of the following Sites "
-operator|+
+argument_list|,
 name|sites
 argument_list|)
 expr_stmt|;
@@ -1846,19 +1858,17 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"No Referenced Site registered for Entity "
-operator|+
+literal|"No Referenced Site registered for Entity {}"
+argument_list|,
 name|entityId
-operator|+
-literal|""
 argument_list|)
 expr_stmt|;
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Registered Prefixes "
-operator|+
+literal|"Registered Prefixes {}"
+argument_list|,
 name|prefixList
 argument_list|)
 expr_stmt|;
@@ -1899,15 +1909,16 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Return Representation of Site "
-operator|+
+literal|"Return Representation of Site {} for Entity {}"
+argument_list|,
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()
-operator|+
-literal|" for Entity "
-operator|+
+argument_list|,
 name|entityId
 argument_list|)
 expr_stmt|;
@@ -1930,14 +1941,17 @@ literal|"Unable to access Site "
 operator|+
 name|site
 operator|.
+name|getConfiguration
+argument_list|()
+operator|.
 name|getName
 argument_list|()
 operator|+
-literal|" (url = "
+literal|" (id = "
 operator|+
 name|site
 operator|.
-name|getAccessUri
+name|getId
 argument_list|()
 operator|+
 literal|")"
@@ -1951,12 +1965,10 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Entity "
-operator|+
+literal|"Entity {} not found on any of the following Sites {}"
+argument_list|,
 name|entityId
-operator|+
-literal|" not found on any of the following Sites "
-operator|+
+argument_list|,
 name|sites
 argument_list|)
 expr_stmt|;

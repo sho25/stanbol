@@ -159,9 +159,12 @@ begin_interface
 specifier|public
 interface|interface
 name|ReferencedSite
-extends|extends
-name|ConfiguredSite
 block|{
+comment|/**      * The Id of this site. This Method MUST return the same value as      *<code>{@link #getConfiguration()}.getId()</code>. It is only there to      * make it more easy to access the Id of the site      * @return the ID of this site      */
+name|String
+name|getId
+parameter_list|()
+function_decl|;
 comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * the references (ids). Note that selected fields of the query are ignored.      * @param query the query      * @return the references of the found entities      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
@@ -232,6 +235,11 @@ function_decl|;
 comment|/**      * Getter for the QueryFactory implementation preferable used with this Site.      * Note that Site MUST support query instances regardless of there specific      * implementation. However specific implementations might have performance      * advantages for query processing and may be even execution. Therefore      * if one creates queries that are specifically executed on this specific      * site, that it is best practice to use the instance provided by this      * method.      * @return The query factory of this site.      */
 name|FieldQueryFactory
 name|getQueryFactory
+parameter_list|()
+function_decl|;
+comment|/**      * Getter for the configuration of this referenced site      * @return the configuration       */
+name|SiteConfiguration
+name|getConfiguration
 parameter_list|()
 function_decl|;
 block|}

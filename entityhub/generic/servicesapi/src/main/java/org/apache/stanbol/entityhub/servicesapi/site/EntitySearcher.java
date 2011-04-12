@@ -92,11 +92,11 @@ specifier|public
 interface|interface
 name|EntitySearcher
 block|{
-comment|/**      * The key used to define the baseUri of the query service used for the      * implementation of this interface.<br>      * This constants actually uses the value of {@link ConfiguredSite#QUERY_URI}      */
+comment|/**      * The key used to define the baseUri of the query service used for the      * implementation of this interface.<br>      * This constants actually uses the value of {@link SiteConfiguration#QUERY_URI}      */
 name|String
 name|QUERY_URI
 init|=
-name|ConfiguredSite
+name|SiteConfiguration
 operator|.
 name|QUERY_URI
 decl_stmt|;

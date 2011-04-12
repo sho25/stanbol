@@ -91,7 +91,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ConfiguredSite
+name|SiteConfiguration
 import|;
 end_import
 
@@ -143,7 +143,7 @@ name|Property
 argument_list|(
 name|name
 operator|=
-name|ConfiguredSite
+name|SiteConfiguration
 operator|.
 name|QUERY_URI
 argument_list|)
@@ -301,7 +301,7 @@ name|properties
 operator|.
 name|get
 argument_list|(
-name|ConfiguredSite
+name|SiteConfiguration
 operator|.
 name|ACCESS_URI
 argument_list|)

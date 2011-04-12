@@ -151,7 +151,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ConfiguredSite
+name|SiteConfiguration
 import|;
 end_import
 
@@ -420,7 +420,7 @@ name|properties
 operator|.
 name|get
 argument_list|(
-name|ConfiguredSite
+name|SiteConfiguration
 operator|.
 name|ENTITY_PREFIX
 argument_list|)

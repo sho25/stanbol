@@ -66,11 +66,11 @@ specifier|public
 interface|interface
 name|EntityDereferencer
 block|{
-comment|/**      * The key used to define the baseUri of the service used for the      * implementation of this interface.<br>      * This constants actually uses the value of {@link ConfiguredSite#ACCESS_URI}      */
+comment|/**      * The key used to define the baseUri of the service used for the      * implementation of this interface.<br>      * This constants actually uses the value of {@link SiteConfiguration#ACCESS_URI}      */
 name|String
 name|ACCESS_URI
 init|=
-name|ConfiguredSite
+name|SiteConfiguration
 operator|.
 name|ACCESS_URI
 decl_stmt|;

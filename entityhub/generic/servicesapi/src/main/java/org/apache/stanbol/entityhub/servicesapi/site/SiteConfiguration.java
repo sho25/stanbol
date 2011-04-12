@@ -31,9 +31,7 @@ name|entityhub
 operator|.
 name|servicesapi
 operator|.
-name|mapping
-operator|.
-name|FieldMapper
+name|EntityhubConfiguration
 import|;
 end_import
 
@@ -148,13 +146,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This interface defines the getter as well as the property keys for the  * configuration of a {@link ReferencedSite}.<p>  *  * TODO: No Idea how to handle that in an OSGI context.  * @author Rupert Westenthaler  *  */
+comment|/**  * This interface defines the getter as well as the keys used to configure  * such properties when parsing an configuration for a {@link ReferencedSite}.<p>  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|ConfiguredSite
+name|SiteConfiguration
 block|{
 comment|/**      * The key to be used for the site id      */
 name|String
@@ -162,7 +160,7 @@ name|ID
 init|=
 literal|"org.apache.stanbol.entityhub.site.id"
 decl_stmt|;
-comment|/**      * Getter for the id of this site      * @return      */
+comment|/**      * Getter for the id of this site.      * @return The id of the Site      */
 name|String
 name|getId
 parameter_list|()
@@ -202,13 +200,13 @@ parameter_list|()
 function_decl|;
 comment|/**      * Key used for the configuration of the name of the dereferencer type to be      * used for this site      */
 name|String
-name|DEREFERENCER_TYPE
+name|ENTITY_DEREFERENCER_TYPE
 init|=
 literal|"org.apache.stanbol.entityhub.site.dereferencerType"
 decl_stmt|;
 comment|/**      * The name of the {@link EntityDereferencer} to be used for accessing      * representations of entities managed by this Site      * @return the id of the entity dereferencer implementation      */
 name|String
-name|getDereferencerType
+name|getEntityDereferencerType
 parameter_list|()
 function_decl|;
 comment|/**      * Key used for the configuration of the uri to access the query service of      * the site      */
@@ -217,20 +215,20 @@ name|QUERY_URI
 init|=
 literal|"org.apache.stanbol.entityhub.site.queryUri"
 decl_stmt|;
-comment|/**      * Getter for the queryUri of the site. IF not defined the {@link #ACCESS_URI}      * is used.      * @return the uri to access the query service of this site      */
+comment|/**      * Getter for the queryUri of the site.      * @return the uri to access the query service of this site      */
 name|String
 name|getQueryUri
 parameter_list|()
 function_decl|;
 comment|/**      * Key used for the configuration of the type of the query      */
 name|String
-name|SEARCHER_TYPE
+name|ENTITY_SEARCHER_TYPE
 init|=
 literal|"org.apache.stanbol.entityhub.site.searcherType"
 decl_stmt|;
-comment|/**      * The name of the {@link EntitySearcher} to be used to query for      * representations of entities managed by this Site.      * @return the id of the entity searcher implementation.      */
+comment|/**      * The type of the {@link EntitySearcher} to be used to query for      * representations of entities managed by this Site.      * @return the id of the entity searcher implementation.      */
 name|String
-name|getQueryType
+name|getEntitySearcherType
 parameter_list|()
 function_decl|;
 comment|/**      * Key used for the configuration of the default {@link SymbolState} for a site      */
@@ -310,9 +308,54 @@ name|SITE_FIELD_MAPPINGS
 init|=
 literal|"org.apache.stanbol.entityhub.site.fieldMappings"
 decl_stmt|;
-comment|/**      * The {@link FieldMapper} as configured for this Site.      * @return the FieldMappings      */
-name|FieldMapper
-name|getFieldMapper
+comment|/**      * Getter for the field mappings used for this site when importing entities      * to the Entityhub.<p>      * Note that this field mappings are used in addition to the field mappings      * defined by the {@link EntityhubConfiguration}.      * @return the FieldMappings or<code>null</code> if none.      */
+name|String
+index|[]
+name|getFieldMappings
+parameter_list|()
+function_decl|;
+comment|/**      * The key used to configure the name of License used by a referenced Site      */
+name|String
+name|SITE_LICENCE_NAME
+init|=
+literal|"org.apache.stanbol.entityhub.site.licenseName"
+decl_stmt|;
+comment|/**      * Getter for the Name of the License used for the data provided by this site.       * @return The name of the license      */
+name|String
+name|getLicenseName
+parameter_list|()
+function_decl|;
+comment|/**      * The key used to configure the License of a referenced Site      */
+name|String
+name|SITE_LICENCE_TEXT
+init|=
+literal|"org.apache.stanbol.entityhub.site.licenseText"
+decl_stmt|;
+comment|/**      * Getter for the full text of the License used for the data provided by      * this site      * @return the license      */
+name|String
+name|getLicenseText
+parameter_list|()
+function_decl|;
+comment|/**      * The key used to configure the link to the License used by a referenced Site      */
+name|String
+name|SITE_LICENCE_URL
+init|=
+literal|"org.apache.stanbol.entityhub.site.licenseUrl"
+decl_stmt|;
+comment|/**      * The URL pointing to a site that provides additional information of the      * License      * @return the licenseUrl      */
+name|String
+name|getLicenseUrl
+parameter_list|()
+function_decl|;
+comment|/**      * The attribution for the data provided by this referenced site      */
+name|String
+name|SITE_ATTRIBUTION
+init|=
+literal|"org.apache.stanbol.entityhub.site.attribution"
+decl_stmt|;
+comment|/**      * The Attribution for all data provided by this site      * @return the attribution      */
+name|String
+name|getAttribution
 parameter_list|()
 function_decl|;
 block|}

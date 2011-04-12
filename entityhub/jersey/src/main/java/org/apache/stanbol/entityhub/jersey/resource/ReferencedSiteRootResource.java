@@ -723,6 +723,9 @@ literal|"<html><head>"
 operator|+
 name|site
 operator|.
+name|getConfiguration
+argument_list|()
+operator|.
 name|getName
 argument_list|()
 operator|+
@@ -731,6 +734,9 @@ operator|+
 literal|"<h1>Referenced Site "
 operator|+
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()
@@ -770,14 +776,12 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"site/"
-operator|+
+literal|"site/{}/entity Request"
+argument_list|,
 name|site
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|"/entity Request"
 argument_list|)
 expr_stmt|;
 name|log
@@ -888,6 +892,9 @@ argument_list|(
 literal|"ReferencedSiteException while accessing Site "
 operator|+
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()
@@ -1156,14 +1163,12 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"site/"
-operator|+
+literal|"site/{}/find Request"
+argument_list|,
 name|site
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|"/find Request"
 argument_list|)
 expr_stmt|;
 comment|// process the optional search field parameter
@@ -1360,6 +1365,9 @@ argument_list|(
 literal|"ReferencedSiteException while accessing Site "
 operator|+
 name|site
+operator|.
+name|getConfiguration
+argument_list|()
 operator|.
 name|getName
 argument_list|()

@@ -65,7 +65,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ConfiguredSite
+name|SiteConfiguration
 import|;
 end_import
 
@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Intended to define the configuration of the fieldMapper.  *  * @author Rupert Westenthaler  * @deprecated unsure - Currently the functionality of this service is part of  * the {@link EntityhubConfiguration} and the {@link ConfiguredSite} interfaces.   * Access Methods for the {@link FieldMapper} are defined by the   * {@link Entityhub} and the {@link ReferencedSite} interfaces  */
+comment|/**  * Intended to define the configuration of the fieldMapper.  *  * @author Rupert Westenthaler  * @deprecated unsure - Currently the functionality of this service is part of  * the {@link EntityhubConfiguration} and the {@link SiteConfiguration} interfaces.   * Access Methods for the {@link FieldMapper} are defined by the   * {@link Entityhub} and the {@link ReferencedSite} interfaces  */
 end_comment
 
 begin_interface
