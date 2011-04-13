@@ -149,6 +149,26 @@ name|Service
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  *   * @author andrea.nuzzolese  *  */
 end_comment
@@ -178,6 +198,19 @@ name|Dereferencer
 implements|implements
 name|IDereferencer
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 annotation|@
 name|Override
 specifier|public
@@ -214,13 +247,13 @@ name|isAbsolute
 argument_list|()
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"URL : absolute"
+literal|"The Refactor is fecthing on-line the graph associated to the resource "
+operator|+
+name|location
 argument_list|)
 expr_stmt|;
 name|URL
@@ -240,6 +273,15 @@ operator|.
 name|openConnection
 argument_list|()
 decl_stmt|;
+name|connection
+operator|.
+name|addRequestProperty
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"application/rdf+xml"
+argument_list|)
+expr_stmt|;
 name|inputStream
 operator|=
 name|connection
@@ -250,13 +292,11 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"URL : not absolute "
+literal|"The Refactor is fecthing on your local machine the graph associated to the resource "
 operator|+
 name|location
 argument_list|)
