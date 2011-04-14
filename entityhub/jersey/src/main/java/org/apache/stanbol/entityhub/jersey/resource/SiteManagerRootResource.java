@@ -762,9 +762,9 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"sites/referenced Request"
+literal|"getReferencedSites() request"
 argument_list|)
 expr_stmt|;
 name|JSONArray
@@ -821,10 +821,10 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"  ... return "
-operator|+
+literal|"getReferencedSites() returns {}"
+argument_list|,
 name|referencedSites
 operator|.
 name|toString
@@ -865,42 +865,26 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"sites/entity Request"
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> id       : "
-operator|+
+literal|"getSignById() request\n\t> id       : {}\n\t> accept   : {}\n\t> mediaType: {}"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
 name|id
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> accept   : "
-operator|+
+block|,
 name|headers
 operator|.
 name|getAcceptableMediaTypes
 argument_list|()
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> mediaType: "
-operator|+
+block|,
 name|headers
 operator|.
 name|getMediaType
 argument_list|()
+block|}
 argument_list|)
 expr_stmt|;
 if|if
@@ -919,7 +903,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"No or emptpy ID was parsed as query parameter (id={})"
+literal|"getSignById() No or emptpy ID was parsed as query parameter (id={})"
 argument_list|,
 name|id
 argument_list|)
@@ -1005,7 +989,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|" ... Entity {} not found on any referenced site"
+literal|"getSignById() entity {} not found on any referenced site"
 argument_list|)
 expr_stmt|;
 throw|throw
@@ -1188,7 +1172,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"sites/find Request"
+literal|"findEntity() Request"
 argument_list|)
 expr_stmt|;
 if|if

@@ -606,26 +606,12 @@ name|WebApplicationException
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"/symbol/ POST Request"
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> id    : "
-operator|+
+literal|"getMapping() POST Request> id : {}> accept: {}"
+argument_list|,
 name|reference
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> accept: "
-operator|+
+argument_list|,
 name|headers
 operator|.
 name|getAcceptableMediaTypes
@@ -790,26 +776,12 @@ name|WebApplicationException
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"/symbol/ POST Request"
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> entity: "
-operator|+
+literal|"getEntityMapping() POST Request> entity: {}> accept: {}"
+argument_list|,
 name|entity
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> accept: "
-operator|+
+argument_list|,
 name|headers
 operator|.
 name|getAcceptableMediaTypes
@@ -974,26 +946,12 @@ name|WebApplicationException
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"/symbol/ POST Request"
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> symbol: "
-operator|+
+literal|"getSymbolMappings() POST Request> symbol: {}> accept: {}"
+argument_list|,
 name|symbol
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> accept: "
-operator|+
+argument_list|,
 name|headers
 operator|.
 name|getAcceptableMediaTypes

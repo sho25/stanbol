@@ -607,7 +607,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"... init ReferencedSiteRootResource for Site {}"
+literal|"<init> with site {}"
 argument_list|,
 name|siteId
 argument_list|)
@@ -679,7 +679,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Site {} not found (No referenced site with that ID is present within the Entityhub"
+literal|"Site {} not found (no referenced site with that ID is present within the Entityhub"
 argument_list|,
 name|siteId
 argument_list|)
