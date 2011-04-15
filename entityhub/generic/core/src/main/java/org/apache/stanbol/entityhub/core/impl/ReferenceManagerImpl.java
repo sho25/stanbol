@@ -1268,6 +1268,15 @@ name|FieldQuery
 name|query
 parameter_list|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"findIds for query{}"
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
 comment|// We need to search all referenced Sites
 name|Set
 argument_list|<
@@ -1290,6 +1299,26 @@ range|:
 name|referencedSites
 control|)
 block|{
+if|if
+condition|(
+name|site
+operator|.
+name|supportsSearch
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> query site {}"
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 for|for
@@ -1348,6 +1377,22 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> Site {} does not support queries"
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 return|return
 operator|new
 name|QueryResultListImpl
@@ -1381,6 +1426,15 @@ name|FieldQuery
 name|query
 parameter_list|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"find with query{}"
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
 name|Set
 argument_list|<
 name|Representation
@@ -1402,6 +1456,26 @@ range|:
 name|referencedSites
 control|)
 block|{
+if|if
+condition|(
+name|site
+operator|.
+name|supportsSearch
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> query site {}"
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 for|for
@@ -1498,6 +1572,22 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> Site {} does not support queries"
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 return|return
 operator|new
 name|QueryResultListImpl
@@ -1528,6 +1618,15 @@ name|FieldQuery
 name|query
 parameter_list|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"findEntities for query{}"
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
 name|Set
 argument_list|<
 name|Sign
@@ -1549,6 +1648,27 @@ range|:
 name|referencedSites
 control|)
 block|{
+if|if
+condition|(
+name|site
+operator|.
+name|supportsSearch
+argument_list|()
+condition|)
+block|{
+comment|//do not search on sites that do not support it
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> query site {}"
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 for|for
@@ -1586,6 +1706,8 @@ expr_stmt|;
 block|}
 else|else
 block|{
+comment|//TODO: find a solution for this problem
+comment|//      e.g. allow to add the site for entities
 name|log
 operator|.
 name|info
@@ -1641,6 +1763,22 @@ operator|+
 literal|")"
 argument_list|,
 name|e
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> Site {} does not support queries"
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

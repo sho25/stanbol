@@ -129,6 +129,22 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|TripleCollection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|commons
 operator|.
 name|io
@@ -170,6 +186,96 @@ operator|.
 name|parsers
 operator|.
 name|JSONToFieldQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|jersey
+operator|.
+name|resource
+operator|.
+name|ReferencedSiteRootResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|model
+operator|.
+name|clerezza
+operator|.
+name|RdfRepresentation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|model
+operator|.
+name|clerezza
+operator|.
+name|RdfValueFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|NamespaceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
+name|Representation
 import|;
 end_import
 
@@ -244,6 +350,78 @@ operator|.
 name|TextConstraint
 operator|.
 name|PatternType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
+name|ReferencedSite
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
+name|ReferencedSiteManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
+name|SiteConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|yard
+operator|.
+name|CacheStrategy
 import|;
 end_import
 
@@ -899,7 +1077,20 @@ return|return
 name|query
 return|;
 block|}
-comment|/**      * Getter for a Service from the {@link ServletContext} by using the      * {@link Class#getName()} as key for {@link ServletContext#getAttribute(String)}.      * In case the Service can not be found a {@link WebApplicationException} is      * thrown with the message that the Service is currently not available.      * @param<T> The type of the Service      * @param service the Service interface      * @param context the context used to search the service      * @return the Service instance      * @throws WebApplicationException in case the service instance was not found       * in the parsed servlet context      * @throws IllegalArgumentException if<code>null</code> is parsed as      * service or context      */
+comment|//    /**
+comment|//     * Getter for a Service from the {@link ServletContext} by using the
+comment|//     * {@link Class#getName()} as key for {@link ServletContext#getAttribute(String)}.
+comment|//     * In case the Service can not be found a {@link WebApplicationException} is
+comment|//     * thrown with the message that the Service is currently not available.
+comment|//     * @param<T> The type of the Service
+comment|//     * @param service the Service interface
+comment|//     * @param context the context used to search the service
+comment|//     * @return the Service instance
+comment|//     * @throws WebApplicationException in case the service instance was not found
+comment|//     * in the parsed servlet context
+comment|//     * @throws IllegalArgumentException if<code>null</code> is parsed as
+comment|//     * service or context
+comment|//     */
 comment|//    @SuppressWarnings("unchecked")
 comment|//    public static<T> T getService(Class<T> service, ServletContext context) throws WebApplicationException, IllegalArgumentException {
 comment|//        if(service == null){

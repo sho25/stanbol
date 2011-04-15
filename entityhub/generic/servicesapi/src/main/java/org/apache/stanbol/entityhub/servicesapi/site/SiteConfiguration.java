@@ -320,31 +320,22 @@ name|SITE_LICENCE_NAME
 init|=
 literal|"org.apache.stanbol.entityhub.site.licenseName"
 decl_stmt|;
-comment|/**      * Getter for the Name of the License used for the data provided by this site.       * @return The name of the license      */
-name|String
-name|getLicenseName
-parameter_list|()
-function_decl|;
 comment|/**      * The key used to configure the License of a referenced Site      */
 name|String
 name|SITE_LICENCE_TEXT
 init|=
 literal|"org.apache.stanbol.entityhub.site.licenseText"
 decl_stmt|;
-comment|/**      * Getter for the full text of the License used for the data provided by      * this site      * @return the license      */
-name|String
-name|getLicenseText
-parameter_list|()
-function_decl|;
 comment|/**      * The key used to configure the link to the License used by a referenced Site      */
 name|String
 name|SITE_LICENCE_URL
 init|=
 literal|"org.apache.stanbol.entityhub.site.licenseUrl"
 decl_stmt|;
-comment|/**      * The URL pointing to a site that provides additional information of the      * License      * @return the licenseUrl      */
-name|String
-name|getLicenseUrl
+comment|/**      * Getter for the the License(s) used for the data provided by this       * site. If multiple Liceneses are given it is assumed that any of them can      * be used.<p>      * Licenses are defined by the name ({@link #SITE_LICENCE_NAME}),      * the text ({@link #SITE_LICENCE_TEXT}) and the url       * ({@link #SITE_LICENCE_URL}) to the page of the license. This three keys      * are combined to the {@link License} object.<p>      * It is recommended to use "cc:license" to link those licenses to the      * page.      * @return The name of the license      */
+name|License
+index|[]
+name|getLicenses
 parameter_list|()
 function_decl|;
 comment|/**      * The attribution for the data provided by this referenced site      */
@@ -353,9 +344,20 @@ name|SITE_ATTRIBUTION
 init|=
 literal|"org.apache.stanbol.entityhub.site.attribution"
 decl_stmt|;
-comment|/**      * The Attribution for all data provided by this site      * @return the attribution      */
+comment|/**      * The name the creator of the Work (representations in case of referenced      * sites) would like used when attributing re-use.<code>null</code> if      * none is required by the license.<p>      * It is recommended to use "cc:attributionName" to represent this in      * RDF graphs      * @return the attribution name      */
 name|String
 name|getAttribution
+parameter_list|()
+function_decl|;
+comment|/**      * The URL to the attribution for the data provided by this referenced site      */
+name|String
+name|SITE_ATTRIBUTION_URL
+init|=
+literal|"org.apache.stanbol.entityhub.site.attributionUrl"
+decl_stmt|;
+comment|/**      * The URL the creator of a Work (representations in case of referenced      * sites) would like used when attributing re-use.<code>null</code> if      * none is required by the license.<p>      * It is recommended to use "cc:attributionURL" to represent this in      * RDF graphs      * @return the link to the URL providing the full attribution      */
+name|String
+name|getAttributionUrl
 parameter_list|()
 function_decl|;
 block|}

@@ -254,6 +254,12 @@ name|geonames
 argument_list|(
 literal|"http://www.geonames.org/ontology#"
 argument_list|)
+block|,
+comment|//copyright and license
+name|cc
+argument_list|(
+literal|"http://creativecommons.org/ns#"
+argument_list|)
 block|,     ;
 specifier|private
 name|String
