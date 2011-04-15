@@ -492,7 +492,23 @@ name|ScriptResource
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|// resources.add(new ScriptResource("text/javascript", "scripts/jquery-1.4.2.js", this, 0));
+name|resources
+operator|.
+name|add
+argument_list|(
+operator|new
+name|ScriptResource
+argument_list|(
+literal|"text/javascript"
+argument_list|,
+literal|"scripts/jquery-1.4.2.js"
+argument_list|,
+name|this
+argument_list|,
+literal|0
+argument_list|)
+argument_list|)
+expr_stmt|;
 return|return
 name|resources
 return|;
