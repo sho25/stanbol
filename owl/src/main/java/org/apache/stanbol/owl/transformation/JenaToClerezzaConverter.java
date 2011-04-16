@@ -9,7 +9,7 @@ name|stanbol
 operator|.
 name|owl
 operator|.
-name|trasformation
+name|transformation
 package|;
 end_package
 

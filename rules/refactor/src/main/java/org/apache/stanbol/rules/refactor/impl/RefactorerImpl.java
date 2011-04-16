@@ -477,7 +477,7 @@ name|stanbol
 operator|.
 name|owl
 operator|.
-name|trasformation
+name|transformation
 operator|.
 name|JenaToClerezzaConverter
 import|;
@@ -493,7 +493,7 @@ name|stanbol
 operator|.
 name|owl
 operator|.
-name|trasformation
+name|transformation
 operator|.
 name|OWLAPIToClerezzaConverter
 import|;
@@ -2175,14 +2175,6 @@ decl_stmt|;
 comment|// JenaToOwlConvert jenaToOwlConvert = new JenaToOwlConvert();
 comment|// OntModel ontModel =
 comment|// jenaToOwlConvert.ModelOwlToJenaConvert(inputOntology, "RDF/XML");
-name|OWLOntologyManager
-name|manager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
 name|Recipe
 name|recipe
 decl_stmt|;
@@ -2217,22 +2209,6 @@ name|size
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|OWLOntologyManager
-name|ontologyManager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
-name|OWLOntologyManager
-name|ontologyManager2
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
 name|MGraph
 name|unionMGraph
 init|=

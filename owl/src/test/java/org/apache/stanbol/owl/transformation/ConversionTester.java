@@ -13,7 +13,7 @@ name|stanbol
 operator|.
 name|owl
 operator|.
-name|trasformation
+name|transformation
 package|;
 end_package
 
@@ -82,6 +82,22 @@ operator|.
 name|framework
 operator|.
 name|TestCase
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|owl
+operator|.
+name|transformation
+operator|.
+name|JenaToOwlConvert
 import|;
 end_import
 

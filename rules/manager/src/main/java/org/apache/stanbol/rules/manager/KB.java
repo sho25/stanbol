@@ -256,15 +256,6 @@ name|Rule
 name|kReSRule
 parameter_list|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Adding rule to Head"
-argument_list|)
-expr_stmt|;
 name|kReSRuleList
 operator|.
 name|add

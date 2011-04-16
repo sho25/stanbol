@@ -187,28 +187,6 @@ operator|=
 name|semionRulesCopy
 expr_stmt|;
 block|}
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Added rule "
-operator|+
-name|semionRule
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Added rule "
-operator|+
-name|semionRule
-argument_list|)
-expr_stmt|;
 return|return
 literal|true
 return|;
@@ -289,28 +267,6 @@ operator|=
 name|semionRulesCopy
 expr_stmt|;
 block|}
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Added to HEAD rule "
-operator|+
-name|semionRule
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Added to HEAD rule "
-operator|+
-name|semionRule
-argument_list|)
-expr_stmt|;
 return|return
 literal|true
 return|;
@@ -421,17 +377,6 @@ operator|=
 name|semionRulesCopy
 expr_stmt|;
 block|}
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Added all rules : "
-operator|+
-name|c
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
 return|return
 literal|true
 return|;

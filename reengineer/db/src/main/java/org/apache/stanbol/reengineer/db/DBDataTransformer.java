@@ -479,7 +479,7 @@ name|stanbol
 operator|.
 name|owl
 operator|.
-name|trasformation
+name|transformation
 operator|.
 name|JenaToOwlConvert
 import|;
