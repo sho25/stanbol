@@ -25,37 +25,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Date
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -161,192 +131,39 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|MappingState
-argument_list|>
-name|MAPPING_STATE_MAP
-decl_stmt|;
-static|static
-block|{
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|MappingState
-argument_list|>
-name|tmp
-init|=
-operator|new
-name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|MappingState
-argument_list|>
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|MappingState
-name|state
-range|:
-name|MappingState
-operator|.
-name|values
-argument_list|()
-control|)
-block|{
-name|tmp
-operator|.
-name|put
-argument_list|(
-name|state
-operator|.
-name|getUri
-argument_list|()
-argument_list|,
-name|state
-argument_list|)
-expr_stmt|;
-block|}
-name|MAPPING_STATE_MAP
-operator|=
-name|Collections
-operator|.
-name|unmodifiableMap
-argument_list|(
-name|tmp
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**      * Creates a new EntityMapping between the parsed symbol and entity      * @param entityhubId The ID of the Entityhub that defines this mapping      * @param symbol the ID of the symbol      * @param entity the ID of the entity      * @param state the state or<code>null</code> to use the {@link EntityMapping#DEFAULT_MAPPING_STATE}      * @param representation The representation to store the information of this EntityMapping      * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter.      * This includes<ul>      *<li> the Entityhub ID is<code>null</code> or empty      *<li> the symbol ID is<code>null</code> or empty      *<li> the entity ID is<code>null</code> or empty      *<li> the representation is<code>null</code>      *</ul>      * TODO: Maybe also add an valid {@link MappingState} value for the {@link EntityMapping#STATE}      *       to the requirements      */
-specifier|public
-name|DefaultEntityMappingImpl
-parameter_list|(
-name|String
-name|entityhubId
-parameter_list|,
-name|String
-name|symbol
-parameter_list|,
-name|String
-name|entity
-parameter_list|,
-name|MappingState
-name|state
-parameter_list|,
-name|Representation
-name|representation
-parameter_list|)
-throws|throws
-name|IllegalArgumentException
-block|{
-name|super
-argument_list|(
-name|entityhubId
-argument_list|,
-name|representation
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|symbol
-operator|==
-literal|null
-operator|||
-name|symbol
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Parsed symbol ID MUST NOT be NULL nor empty"
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|entity
-operator|==
-literal|null
-operator|||
-name|entity
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Parsed entity ID MUST NOT be NULL nor empty"
-argument_list|)
-throw|;
-block|}
-name|representation
-operator|.
-name|setReference
-argument_list|(
-name|EntityMapping
-operator|.
-name|SYMBOL_ID
-argument_list|,
-name|symbol
-argument_list|)
-expr_stmt|;
-name|representation
-operator|.
-name|setReference
-argument_list|(
-name|EntityMapping
-operator|.
-name|ENTITY_ID
-argument_list|,
-name|entity
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|state
-operator|==
-literal|null
-condition|)
-block|{
-name|state
-operator|=
-name|EntityMapping
-operator|.
-name|DEFAULT_MAPPING_STATE
-expr_stmt|;
-block|}
-name|representation
-operator|.
-name|setReference
-argument_list|(
-name|EntityMapping
-operator|.
-name|STATE
-argument_list|,
-name|state
-operator|.
-name|getUri
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
+comment|// NOTE: No longer used after switching to the DefaultSignFactory
+comment|//    /**
+comment|//     * Creates a new EntityMapping between the parsed symbol and entity
+comment|//     * @param entityhubId The ID of the Entityhub that defines this mapping
+comment|//     * @param symbol the ID of the symbol
+comment|//     * @param entity the ID of the entity
+comment|//     * @param state the state or<code>null</code> to use the {@link EntityMapping#DEFAULT_MAPPING_STATE}
+comment|//     * @param representation The representation to store the information of this EntityMapping
+comment|//     * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter.
+comment|//     * This includes<ul>
+comment|//     *<li> the Entityhub ID is<code>null</code> or empty
+comment|//     *<li> the symbol ID is<code>null</code> or empty
+comment|//     *<li> the entity ID is<code>null</code> or empty
+comment|//     *<li> the representation is<code>null</code>
+comment|//     *</ul>
+comment|//     */
+comment|//    protected DefaultEntityMappingImpl(String entityhubId, String symbol,String entity,MappingState state,Representation representation) throws IllegalArgumentException {
+comment|//        super(entityhubId,representation);
+comment|//        if(symbol == null || symbol.isEmpty()){
+comment|//            throw new IllegalArgumentException("Parsed symbol ID MUST NOT be NULL nor empty");
+comment|//        }
+comment|//        if(entity == null || entity.isEmpty()){
+comment|//            throw new IllegalArgumentException("Parsed entity ID MUST NOT be NULL nor empty");
+comment|//        }
+comment|//        representation.setReference(EntityMapping.SYMBOL_ID, symbol);
+comment|//        representation.setReference(EntityMapping.ENTITY_ID, entity);
+comment|//        if(state == null){
+comment|//            state = EntityMapping.DEFAULT_MAPPING_STATE;
+comment|//        }
+comment|//        representation.setReference(EntityMapping.STATE, state.getUri());
+comment|//    }
 comment|/**      *      * @param siteId      * @param representation The representation that holds the state for the new EntityMapping instance      * @throws IllegalArgumentException If the EntityMapping Instance can not be created based on the parsed parameter.      * This includes<ul>      *<li> the Entityhub ID is<code>null</code> or empty      *<li> the parsed representation does not define a link to an entity      *      (provide a value for the {@link EntityMapping#ENTITY_ID} field)      *<li> the parsed representation does not define a link to a symbol      *      (provide a value for the {@link EntityMapping#SYMBOL_ID} field)      *<li> the representation is<code>null</code>      *</ul>      */
-specifier|public
+specifier|protected
 name|DefaultEntityMappingImpl
 parameter_list|(
 name|String
@@ -363,57 +180,13 @@ argument_list|,
 name|representation
 argument_list|)
 expr_stmt|;
-comment|//check required fields
-if|if
-condition|(
-name|getEntityId
-argument_list|()
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Representation "
-operator|+
-name|getId
-argument_list|()
-operator|+
-literal|" does not define required field "
-operator|+
-name|EntityMapping
-operator|.
-name|ENTITY_ID
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|getSymbolId
-argument_list|()
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Representation "
-operator|+
-name|getId
-argument_list|()
-operator|+
-literal|" does not define required field "
-operator|+
-name|EntityMapping
-operator|.
-name|SYMBOL_ID
-argument_list|)
-throw|;
-block|}
+comment|//check no longer required -> allows to set values after creation ...
+comment|//        if(getEntityId() == null){
+comment|//            throw new IllegalArgumentException("Representation "+getId()+" does not define required field "+EntityMapping.ENTITY_ID);
+comment|//        }
+comment|//        if(getSymbolId() == null){
+comment|//            throw new IllegalArgumentException("Representation "+getId()+" does not define required field "+EntityMapping.SYMBOL_ID);
+comment|//        }
 block|}
 annotation|@
 name|Override
@@ -491,9 +264,6 @@ operator|.
 name|STATE
 argument_list|)
 decl_stmt|;
-name|MappingState
-name|state
-decl_stmt|;
 if|if
 condition|(
 name|stateUri
@@ -501,58 +271,55 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|state
-operator|=
-name|MAPPING_STATE_MAP
+if|if
+condition|(
+name|MappingState
 operator|.
-name|get
+name|isState
 argument_list|(
 name|stateUri
 operator|.
 name|getReference
 argument_list|()
 argument_list|)
-expr_stmt|;
+condition|)
+block|{
+return|return
+name|MappingState
+operator|.
+name|getState
+argument_list|(
+name|stateUri
+operator|.
+name|getReference
+argument_list|()
+argument_list|)
+return|;
 block|}
 else|else
-block|{
-name|state
-operator|=
-literal|null
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|state
-operator|==
-literal|null
-condition|)
 block|{
 name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Value "
-operator|+
+literal|"Value {} for field {} is not a valied MappingState! -> return null"
+argument_list|,
 name|stateUri
-operator|+
-literal|" for field "
-operator|+
+argument_list|,
 name|EntityMapping
 operator|.
 name|STATE
-operator|+
-literal|" is not a valied MappingState! -> return null"
 argument_list|)
 expr_stmt|;
 return|return
 literal|null
 return|;
 block|}
+block|}
 else|else
 block|{
 return|return
-name|state
+literal|null
 return|;
 block|}
 block|}

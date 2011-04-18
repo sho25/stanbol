@@ -33,6 +33,24 @@ name|servicesapi
 operator|.
 name|model
 operator|.
+name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
 name|Representation
 import|;
 end_import
@@ -99,7 +117,6 @@ specifier|final
 name|Representation
 name|representation
 decl_stmt|;
-comment|//    private final String TYPE = RdfResourceEnum.signType.getUri();
 specifier|private
 specifier|final
 name|String
@@ -114,7 +131,7 @@ comment|//            throw new IllegalStateException("Parsed Representation doe
 comment|//        }
 comment|//        this.representation = representation;
 comment|//    }
-specifier|public
+specifier|protected
 name|DefaultSignImpl
 parameter_list|(
 name|String
@@ -124,6 +141,9 @@ name|Representation
 name|representation
 parameter_list|)
 block|{
+name|super
+argument_list|()
+expr_stmt|;
 if|if
 condition|(
 name|representation
@@ -253,6 +273,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|getSignSite
 parameter_list|()
@@ -264,6 +285,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|String
 name|getId
 parameter_list|()
@@ -278,6 +300,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Representation
 name|getRepresentation
 parameter_list|()
@@ -286,21 +309,92 @@ return|return
 name|representation
 return|;
 block|}
-comment|//    @Override
-comment|//    public SignTypeEnum getType() {
-comment|//        Reference ref = representation.getFirstReference(TYPE);
-comment|//        if(ref == null){
-comment|//            return DEFAULT_SIGN_TYPE;
-comment|//        } else {
-comment|//            SignTypeEnum type = ModelUtils.getSignType(ref.getReference());
-comment|//            if(type == null){
-comment|//                log.warn("Sign "+getId()+" is set to an unknown SignType "+ref.getReference()+"! -> return default type (value is not reseted)");
-comment|//                return DEFAULT_SIGN_TYPE;
-comment|//            } else {
-comment|//                return type;
-comment|//            }
-comment|//        }
-comment|//    }
+annotation|@
+name|Override
+specifier|public
+specifier|final
+name|SignTypeEnum
+name|getType
+parameter_list|()
+block|{
+name|SignTypeEnum
+name|type
+init|=
+name|parseSignType
+argument_list|(
+name|representation
+argument_list|)
+decl_stmt|;
+return|return
+name|type
+operator|==
+literal|null
+condition|?
+name|SignTypeEnum
+operator|.
+name|Sign
+else|:
+name|type
+return|;
+block|}
+comment|/**      * Parses the SignType from the parsed Representation      * @param rep the representation      * @return the type of the sign or<code>null</code> if the representation      * does not contain the necessary information      * @throws IllegalArgumentException if the parsed Representation contains an      * {@link Sign#SIGN_TYPE} value that is not an valid URI for       * {@link SignTypeEnum#getType(String)}.      */
+specifier|public
+specifier|static
+name|SignTypeEnum
+name|parseSignType
+parameter_list|(
+name|Representation
+name|rep
+parameter_list|)
+throws|throws
+name|IllegalArgumentException
+block|{
+name|SignTypeEnum
+name|signType
+decl_stmt|;
+name|Reference
+name|typeRef
+init|=
+name|rep
+operator|.
+name|getFirstReference
+argument_list|(
+name|Sign
+operator|.
+name|SIGN_TYPE
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|typeRef
+operator|!=
+literal|null
+condition|)
+block|{
+name|signType
+operator|=
+name|SignTypeEnum
+operator|.
+name|getType
+argument_list|(
+name|typeRef
+operator|.
+name|getReference
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|signType
+operator|=
+literal|null
+expr_stmt|;
+block|}
+return|return
+name|signType
+return|;
+block|}
 block|}
 end_class
 

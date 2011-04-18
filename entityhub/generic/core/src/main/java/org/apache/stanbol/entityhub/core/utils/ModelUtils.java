@@ -161,60 +161,6 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|core
-operator|.
-name|model
-operator|.
-name|DefaultEntityMappingImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|core
-operator|.
-name|model
-operator|.
-name|DefaultSignImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|core
-operator|.
-name|model
-operator|.
-name|DefaultSymbolImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
 name|servicesapi
 operator|.
 name|defaults
@@ -1559,159 +1505,172 @@ block|}
 end_function
 
 begin_comment
-comment|/**      * Creates a Sign for the parsed Representation and the signSite id      * @param rep the Represetnation      * @param signSite the id of the site for the sign      * @return the sign      * @throws IllegalArgumentException if any of the two parameter is<code>null</code>.      */
+comment|//No longer needed after the introduction of the DefaultSignFactory!
 end_comment
 
-begin_function
-specifier|public
-specifier|static
-name|Sign
-name|createSign
-parameter_list|(
-name|Representation
-name|rep
-parameter_list|,
-name|String
-name|signSite
-parameter_list|)
-throws|throws
-name|IllegalArgumentException
-block|{
-if|if
-condition|(
-name|rep
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed Representation MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|signSite
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed ID of the SignSite MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
-name|rep
-operator|.
-name|setReference
-argument_list|(
-name|Sign
-operator|.
-name|SIGN_SITE
-argument_list|,
-name|signSite
-argument_list|)
-expr_stmt|;
-name|SignTypeEnum
-name|signType
-init|=
-name|ModelUtils
-operator|.
-name|getSignType
-argument_list|(
-name|rep
-argument_list|)
-decl_stmt|;
-comment|//instantiate the correct Sign Implementation
-name|Sign
-name|sign
-decl_stmt|;
-comment|/*          * TODO: change this part to separate the implementation of the          * ReferencedSite with the instantiation of Sign Type Implementations          * Maybe introduce an SignFactory or add such Methods to the          * existing ValueFactory          */
-switch|switch
-condition|(
-name|signType
-condition|)
-block|{
-case|case
-name|Symbol
-case|:
-name|sign
-operator|=
-operator|new
-name|DefaultSymbolImpl
-argument_list|(
-name|signSite
-argument_list|,
-name|rep
-argument_list|)
-expr_stmt|;
-break|break;
-case|case
-name|EntityMapping
-case|:
-name|sign
-operator|=
-operator|new
-name|DefaultEntityMappingImpl
-argument_list|(
-name|signSite
-argument_list|,
-name|rep
-argument_list|)
-expr_stmt|;
-break|break;
-case|case
-name|Sign
-case|:
-name|sign
-operator|=
-operator|new
-name|DefaultSignImpl
-argument_list|(
-name|signSite
-argument_list|,
-name|rep
-argument_list|)
-expr_stmt|;
-break|break;
-default|default:
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unsupported SignType "
-operator|+
-name|signType
-operator|.
-name|getUri
-argument_list|()
-operator|+
-literal|" (create Sign instance). Please adapt this implementation!"
-argument_list|)
-expr_stmt|;
-name|sign
-operator|=
-operator|new
-name|DefaultSignImpl
-argument_list|(
-name|signSite
-argument_list|,
-name|rep
-argument_list|)
-expr_stmt|;
-break|break;
-block|}
-return|return
-name|sign
-return|;
-block|}
-end_function
+begin_comment
+comment|//    /**
+end_comment
+
+begin_comment
+comment|//     * Creates a Sign for the parsed Representation and the signSite id
+end_comment
+
+begin_comment
+comment|//     * @param rep the Represetnation
+end_comment
+
+begin_comment
+comment|//     * @param signSite the id of the site for the sign
+end_comment
+
+begin_comment
+comment|//     * @return the sign
+end_comment
+
+begin_comment
+comment|//     * @throws IllegalArgumentException if any of the two parameter is<code>null</code>.
+end_comment
+
+begin_comment
+comment|//     */
+end_comment
+
+begin_comment
+comment|//    public static Sign createSign(Representation rep,String signSite) throws IllegalArgumentException {
+end_comment
+
+begin_comment
+comment|//        if(rep == null){
+end_comment
+
+begin_comment
+comment|//            throw new IllegalArgumentException("The parsed Representation MUST NOT be NULL!");
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//        if(signSite == null){
+end_comment
+
+begin_comment
+comment|//            throw new IllegalArgumentException("The parsed ID of the SignSite MUST NOT be NULL!");
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//        rep.setReference(Sign.SIGN_SITE, signSite);
+end_comment
+
+begin_comment
+comment|//        SignTypeEnum signType = ModelUtils.getSignType(rep);
+end_comment
+
+begin_comment
+comment|//        //instantiate the correct Sign Implementation
+end_comment
+
+begin_comment
+comment|//        Sign sign;
+end_comment
+
+begin_comment
+comment|//        /*
+end_comment
+
+begin_comment
+comment|//         * TODO: change this part to separate the implementation of the
+end_comment
+
+begin_comment
+comment|//         * ReferencedSite with the instantiation of Sign Type Implementations
+end_comment
+
+begin_comment
+comment|//         * Maybe introduce an SignFactory or add such Methods to the
+end_comment
+
+begin_comment
+comment|//         * existing ValueFactory
+end_comment
+
+begin_comment
+comment|//         */
+end_comment
+
+begin_comment
+comment|//        switch (signType) {
+end_comment
+
+begin_comment
+comment|//        case Symbol:
+end_comment
+
+begin_comment
+comment|//            sign = new DefaultSymbolImpl(signSite,rep);
+end_comment
+
+begin_comment
+comment|//            break;
+end_comment
+
+begin_comment
+comment|//        case EntityMapping:
+end_comment
+
+begin_comment
+comment|//            sign = new DefaultEntityMappingImpl(signSite,rep);
+end_comment
+
+begin_comment
+comment|//            break;
+end_comment
+
+begin_comment
+comment|//        case Sign:
+end_comment
+
+begin_comment
+comment|//            sign = new DefaultSignImpl(signSite,rep);
+end_comment
+
+begin_comment
+comment|//            break;
+end_comment
+
+begin_comment
+comment|//        default:
+end_comment
+
+begin_comment
+comment|//            log.warn("Unsupported SignType "+signType.getUri()+" (create Sign instance). Please adapt this implementation!");
+end_comment
+
+begin_comment
+comment|//            sign = new DefaultSignImpl(signSite,rep);
+end_comment
+
+begin_comment
+comment|//            break;
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//        return sign;
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
 
 unit|}
 end_unit

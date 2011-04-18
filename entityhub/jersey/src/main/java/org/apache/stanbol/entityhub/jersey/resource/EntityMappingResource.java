@@ -63,7 +63,7 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|TEXT_HTML
+name|*
 import|;
 end_import
 
@@ -211,7 +211,37 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
@@ -222,6 +252,18 @@ operator|.
 name|servlet
 operator|.
 name|ServletContext
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|Consumes
 import|;
 end_import
 
@@ -536,7 +578,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RESTful interface for the {@link EntityMapping}s defined by the {@link Entityhub}.  *   * @author Rupert Westenthaler  */
+comment|/**  * RESTful interface for the {@link EntityMapping}s defined by the {@link Entityhub}.  *   * NOTE to RESTful Service Documentation in the header:  *   Removed all Methods used to provide the RESTful Service documentation and  *   incorporated them to the methods using the same path but with the id  *   parameter. The reason for that was that the documentation methods where  *   called even if an id parameter was provided if the "Accept:" header was  *   not specified in requests.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -588,45 +630,13 @@ operator|=
 name|context
 expr_stmt|;
 block|}
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"/"
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|MediaType
-operator|.
-name|TEXT_HTML
-argument_list|)
-specifier|public
-name|Response
-name|getMappingPage
-parameter_list|()
-block|{
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|(
-operator|new
-name|Viewable
-argument_list|(
-literal|"index"
-argument_list|,
-name|this
-argument_list|)
-argument_list|,
-name|TEXT_HTML
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
+comment|// see NOTE to RESTful Service Documentation in the header
+comment|//    @GET
+comment|//    @Path("/")
+comment|//    @Produces(MediaType.TEXT_HTML)
+comment|//    public Response getMappingPage() {
+comment|//        return Response.ok(new Viewable("index", this), TEXT_HTML).build();
+comment|//    }
 annotation|@
 name|GET
 annotation|@
@@ -651,6 +661,8 @@ block|,
 name|RDF_JSON
 block|,
 name|N_TRIPLE
+block|,
+name|TEXT_HTML
 block|}
 argument_list|)
 specifier|public
@@ -687,6 +699,30 @@ name|getAcceptableMediaTypes
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|supported
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
+name|JerseyUtils
+operator|.
+name|REPRESENTATION_SUPPORTED_MEDIA_TYPES
+argument_list|)
+decl_stmt|;
+name|supported
+operator|.
+name|add
+argument_list|(
+name|TEXT_HTML
+argument_list|)
+expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
@@ -695,6 +731,8 @@ operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
+argument_list|,
+name|supported
 argument_list|,
 name|APPLICATION_JSON_TYPE
 argument_list|)
@@ -711,6 +749,39 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|//if HTML -> print the docu of the restfull service
+if|if
+condition|(
+name|TEXT_HTML_TYPE
+operator|.
+name|isCompatible
+argument_list|(
+name|acceptedMediaType
+argument_list|)
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|ok
+argument_list|(
+operator|new
+name|Viewable
+argument_list|(
+literal|"index"
+argument_list|,
+name|this
+argument_list|)
+argument_list|,
+name|TEXT_HTML
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+else|else
+block|{
 return|return
 name|Response
 operator|.
@@ -723,7 +794,7 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"The mapping ID (URI) is missing."
+literal|"The mapping id (URI) is missing.\n"
 argument_list|)
 operator|.
 name|header
@@ -738,6 +809,7 @@ operator|.
 name|build
 argument_list|()
 return|;
+block|}
 block|}
 name|Entityhub
 name|entityhub
@@ -822,7 +894,7 @@ literal|"No mapping found for '"
 operator|+
 name|reference
 operator|+
-literal|"'."
+literal|"'.\n"
 argument_list|)
 operator|.
 name|header
@@ -855,45 +927,13 @@ argument_list|()
 return|;
 block|}
 block|}
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"/entity"
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|MediaType
-operator|.
-name|TEXT_HTML
-argument_list|)
-specifier|public
-name|Response
-name|getEntityMappingPage
-parameter_list|()
-block|{
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|(
-operator|new
-name|Viewable
-argument_list|(
-literal|"entity"
-argument_list|,
-name|this
-argument_list|)
-argument_list|,
-name|TEXT_HTML
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
+comment|// see NOTE to RESTful Service Documentation in the header
+comment|//    @GET
+comment|//    @Path("/entity")
+comment|//    @Produces(MediaType.TEXT_HTML)
+comment|//    public Response getEntityMappingPage() {
+comment|//        return Response.ok(new Viewable("entity", this), TEXT_HTML).build();
+comment|//    }
 annotation|@
 name|GET
 annotation|@
@@ -918,6 +958,8 @@ block|,
 name|RDF_JSON
 block|,
 name|N_TRIPLE
+block|,
+name|TEXT_HTML
 block|}
 argument_list|)
 specifier|public
@@ -954,6 +996,30 @@ name|getAcceptableMediaTypes
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|supported
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
+name|JerseyUtils
+operator|.
+name|REPRESENTATION_SUPPORTED_MEDIA_TYPES
+argument_list|)
+decl_stmt|;
+name|supported
+operator|.
+name|add
+argument_list|(
+name|TEXT_HTML
+argument_list|)
+expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
@@ -962,6 +1028,8 @@ operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
+argument_list|,
+name|supported
 argument_list|,
 name|APPLICATION_JSON_TYPE
 argument_list|)
@@ -978,6 +1046,39 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|//if HTML -> print the docu of the restfull service
+if|if
+condition|(
+name|TEXT_HTML_TYPE
+operator|.
+name|isCompatible
+argument_list|(
+name|acceptedMediaType
+argument_list|)
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|ok
+argument_list|(
+operator|new
+name|Viewable
+argument_list|(
+literal|"entity"
+argument_list|,
+name|this
+argument_list|)
+argument_list|,
+name|TEXT_HTML
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+else|else
+block|{
 return|return
 name|Response
 operator|.
@@ -990,7 +1091,7 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"No entity given. Missing parameter ID."
+literal|"No entity given. Missing parameter id.\n"
 argument_list|)
 operator|.
 name|header
@@ -1005,6 +1106,7 @@ operator|.
 name|build
 argument_list|()
 return|;
+block|}
 block|}
 name|Entityhub
 name|entityhub
@@ -1074,7 +1176,7 @@ literal|"No mapping found for entity '"
 operator|+
 name|entity
 operator|+
-literal|"'."
+literal|"'.\n"
 argument_list|)
 operator|.
 name|header
@@ -1107,45 +1209,13 @@ argument_list|()
 return|;
 block|}
 block|}
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"/symbol"
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|MediaType
-operator|.
-name|TEXT_HTML
-argument_list|)
-specifier|public
-name|Response
-name|getSymbolMappingPage
-parameter_list|()
-block|{
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|(
-operator|new
-name|Viewable
-argument_list|(
-literal|"symbol"
-argument_list|,
-name|this
-argument_list|)
-argument_list|,
-name|TEXT_HTML
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
+comment|// see NOTE to RESTful Service Documentation in the header
+comment|//    @GET
+comment|//    @Path("/symbol")
+comment|//    @Produces(MediaType.TEXT_HTML)
+comment|//    public Response getSymbolMappingPage() {
+comment|//        return Response.ok(new Viewable("symbol", this), TEXT_HTML).build();
+comment|//    }
 annotation|@
 name|GET
 annotation|@
@@ -1170,6 +1240,8 @@ block|,
 name|RDF_JSON
 block|,
 name|N_TRIPLE
+block|,
+name|TEXT_HTML
 block|}
 argument_list|)
 specifier|public
@@ -1206,6 +1278,30 @@ name|getAcceptableMediaTypes
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|supported
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
+name|JerseyUtils
+operator|.
+name|REPRESENTATION_SUPPORTED_MEDIA_TYPES
+argument_list|)
+decl_stmt|;
+name|supported
+operator|.
+name|add
+argument_list|(
+name|TEXT_HTML
+argument_list|)
+expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
@@ -1214,6 +1310,8 @@ operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
+argument_list|,
+name|supported
 argument_list|,
 name|APPLICATION_JSON_TYPE
 argument_list|)
@@ -1230,6 +1328,39 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|//if HTML -> print the docu of the restfull service
+if|if
+condition|(
+name|TEXT_HTML_TYPE
+operator|.
+name|isCompatible
+argument_list|(
+name|acceptedMediaType
+argument_list|)
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|ok
+argument_list|(
+operator|new
+name|Viewable
+argument_list|(
+literal|"symbol"
+argument_list|,
+name|this
+argument_list|)
+argument_list|,
+name|TEXT_HTML
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+else|else
+block|{
 return|return
 name|Response
 operator|.
@@ -1242,7 +1373,7 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"No symbol given. Missing parameter ID."
+literal|"No symbol given. Missing parameter id.\n"
 argument_list|)
 operator|.
 name|header
@@ -1257,6 +1388,7 @@ operator|.
 name|build
 argument_list|()
 return|;
+block|}
 block|}
 name|Entityhub
 name|entityhub
@@ -1334,7 +1466,7 @@ literal|"No mapping found for symbol '"
 operator|+
 name|symbol
 operator|+
-literal|"'."
+literal|"'.\n"
 argument_list|)
 operator|.
 name|header
