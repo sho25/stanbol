@@ -702,7 +702,7 @@ name|firstOccurrence
 operator|.
 name|confidence
 argument_list|,
-literal|0.005
+literal|0.05
 argument_list|)
 expr_stmt|;
 name|NameOccurrence
@@ -756,7 +756,7 @@ name|secondOccurrence
 operator|.
 name|confidence
 argument_list|,
-literal|0.005
+literal|0.05
 argument_list|)
 expr_stmt|;
 block|}
