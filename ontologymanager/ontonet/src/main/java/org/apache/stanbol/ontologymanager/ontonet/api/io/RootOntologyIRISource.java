@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An input source that provides the OWL Ontology loaded from the supplied  * physical IRI, as well as the physical IRI itself for consumers that need to  * load the ontology themselves.<br>  *<br>  * For convenience, an existing OWL ontology manager can be supplied for loading  * the ontology.  *   * @author alessandro  *   */
+comment|/**  * An input source that provides the OWL Ontology loaded from the supplied physical IRI, as well as the  * physical IRI itself for consumers that need to load the ontology themselves.<br>  *<br>  * For convenience, an existing OWL ontology manager can be supplied for loading the ontology.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -130,7 +130,7 @@ name|rootPhysicalIri
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.manager.io.AbstractOntologyInputSource#toString() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.manager.io.AbstractOntologyInputSource#toString()      */
 annotation|@
 name|Override
 specifier|public

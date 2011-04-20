@@ -19,6 +19,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|semanticweb
@@ -46,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link OntologyInputSource} with the basic methods  * for obtaining root ontologies and their physical IRIs where applicable.  *   * @author alessandro  *   */
+comment|/**  * Abstract implementation of {@link OntologyInputSource} with the basic methods for obtaining root ontologies  * and their physical IRIs where applicable.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -69,7 +79,7 @@ name|rootOntology
 init|=
 literal|null
 decl_stmt|;
-comment|/* 	 * (non-Javadoc) 	 * @see java.lang.Object#equals(java.lang.Object) 	 */
+comment|/*      * (non-Javadoc)      *       * @see java.lang.Object#equals(java.lang.Object)      */
 annotation|@
 name|Override
 specifier|public
@@ -126,7 +136,29 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#getPhysicalIRI() 	 */
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|getClosure
+parameter_list|()
+block|{
+return|return
+name|rootOntology
+operator|.
+name|getOWLOntologyManager
+argument_list|()
+operator|.
+name|getImportsClosure
+argument_list|(
+name|rootOntology
+argument_list|)
+return|;
+block|}
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#getPhysicalIRI()      */
 annotation|@
 name|Override
 specifier|public
@@ -138,7 +170,7 @@ return|return
 name|physicalIri
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#getRootOntology() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#getRootOntology()      */
 annotation|@
 name|Override
 specifier|public
@@ -150,7 +182,7 @@ return|return
 name|rootOntology
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#hasPhysicalIRI() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#hasPhysicalIRI()      */
 annotation|@
 name|Override
 specifier|public
@@ -164,7 +196,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#hasRootOntology() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyInputSource#hasRootOntology()      */
 annotation|@
 name|Override
 specifier|public
@@ -178,7 +210,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see java.lang.Object#toString() 	 */
+comment|/*      * (non-Javadoc)      *       * @see java.lang.Object#toString()      */
 annotation|@
 name|Override
 specifier|public

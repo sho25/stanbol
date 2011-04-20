@@ -24,7 +24,7 @@ specifier|final
 name|String
 name|base
 init|=
-literal|"http://kres.iks-project.eu/ontology/peanuts/maincharacters.owl"
+literal|"http://stanbol.apache.org/ontologies/peanuts/maincharacters.owl"
 decl_stmt|;
 specifier|public
 specifier|static
@@ -32,7 +32,7 @@ specifier|final
 name|String
 name|base2
 init|=
-literal|"http://kres.iks-project.eu/ontology/minorcharacters.owl"
+literal|"http://stanbol.apache.org/ontologies/peanuts/minorcharacters.owl"
 decl_stmt|;
 specifier|public
 specifier|static

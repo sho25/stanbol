@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology source that rewrites the physical IRI by appending the logical  * one to the scope ID. If the ontology is anonymous, the original physical IRI  * is retained.  *   * @author alessandro  *   */
+comment|/**  * An ontology source that rewrites the physical IRI by appending the logical one to the scope ID. If the  * ontology is anonymous, the original physical IRI is retained.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -94,16 +94,16 @@ argument_list|)
 operator|.
 name|debug
 argument_list|(
-literal|"[KReS] :: REWRITING "
-operator|+
+literal|"Rewriting {} to {}/{}"
+argument_list|,
+operator|new
+name|IRI
+index|[]
+block|{
 name|origin
-operator|+
-literal|" TO "
-operator|+
+block|,
 name|scopeIri
-operator|+
-literal|"/"
-operator|+
+block|,
 name|ontology
 operator|.
 name|getOntologyID
@@ -111,6 +111,7 @@ argument_list|()
 operator|.
 name|getOntologyIRI
 argument_list|()
+block|}
 argument_list|)
 expr_stmt|;
 name|physicalIri

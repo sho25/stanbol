@@ -663,7 +663,7 @@ name|impl
 operator|.
 name|session
 operator|.
-name|SessionManagerImpl
+name|ScopeSessionSynchronizer
 import|;
 end_import
 
@@ -683,7 +683,7 @@ name|impl
 operator|.
 name|session
 operator|.
-name|ScopeSessionSynchronizer
+name|SessionManagerImpl
 import|;
 end_import
 
@@ -2582,57 +2582,11 @@ name|String
 name|uri
 parameter_list|)
 block|{
-comment|/*              * The scope factory needs an OntologyInputSource as input for the core ontology space. We want to              * use the dbpedia ontology as core ontology of our scope.              */
-name|OntologyInputSource
-name|ois
-init|=
-operator|new
-name|OntologyInputSource
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|hasRootOntology
-parameter_list|()
-block|{
-return|return
-literal|true
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|hasPhysicalIRI
-parameter_list|()
-block|{
-return|return
-literal|false
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|OWLOntology
-name|getRootOntology
-parameter_list|()
-block|{
 try|try
 block|{
-name|OWLOntologyManager
-name|manager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
 return|return
-name|manager
-operator|.
-name|loadOntologyFromOntologyDocument
+operator|new
+name|RootOntologyIRISource
 argument_list|(
 name|IRI
 operator|.
@@ -2653,13 +2607,16 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Cannot load the ontology "
-operator|+
+literal|"Cannot load the ontology {}"
+argument_list|,
 name|uri
 argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
+return|return
+literal|null
+return|;
 block|}
 catch|catch
 parameter_list|(
@@ -2671,35 +2628,17 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Cannot load the ontology "
-operator|+
+literal|"Cannot load the ontology {}"
+argument_list|,
 name|uri
 argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-block|}
-comment|/** If some errors occur **/
 return|return
 literal|null
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|IRI
-name|getPhysicalIRI
-parameter_list|()
-block|{
-return|return
-literal|null
-return|;
-block|}
-block|}
-decl_stmt|;
-return|return
-name|ois
-return|;
 block|}
 block|}
 block|}
