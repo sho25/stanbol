@@ -385,7 +385,7 @@ begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/refactorer"
+literal|"/refactor"
 argument_list|)
 annotation|@
 name|ImplicitProduces
@@ -511,11 +511,6 @@ return|;
 block|}
 annotation|@
 name|POST
-annotation|@
-name|Path
-argument_list|(
-literal|"/lazy"
-argument_list|)
 annotation|@
 name|Consumes
 argument_list|(

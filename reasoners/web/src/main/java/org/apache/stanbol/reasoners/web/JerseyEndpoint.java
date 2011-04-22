@@ -259,7 +259,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/kres/reasoners"
+literal|"/reasoner"
 argument_list|)
 specifier|public
 specifier|static
@@ -267,14 +267,14 @@ specifier|final
 name|String
 name|ALIAS_PROPERTY
 init|=
-literal|"org.apache.stanbol.reasoners.web.jersey.alias"
+literal|"org.apache.stanbol.reasoner.web.jersey.alias"
 decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/kres/reasoners/static"
+literal|"/reasoner/static"
 argument_list|)
 specifier|public
 specifier|static
@@ -282,7 +282,7 @@ specifier|final
 name|String
 name|STATIC_RESOURCES_URL_ROOT_PROPERTY
 init|=
-literal|"org.apache.stanbol.reasoners.web.jersey.static.url"
+literal|"org.apache.stanbol.reasoner.web.jersey.static.url"
 decl_stmt|;
 annotation|@
 name|Property
@@ -297,7 +297,7 @@ specifier|final
 name|String
 name|STATIC_RESOURCES_CLASSPATH_PROPERTY
 init|=
-literal|"org.apache.stanbol.reasoners.web.jersey.static.classpath"
+literal|"org.apache.stanbol.reasoner.web.jersey.static.classpath"
 decl_stmt|;
 annotation|@
 name|Property
@@ -312,7 +312,7 @@ specifier|final
 name|String
 name|FREEMARKER_TEMPLATE_CLASSPATH_PROPERTY
 init|=
-literal|"org.apache.stanbol.reasoners.web.jersey.templates.classpath"
+literal|"org.apache.stanbol.reasoner.web.jersey.templates.classpath"
 decl_stmt|;
 annotation|@
 name|Reference

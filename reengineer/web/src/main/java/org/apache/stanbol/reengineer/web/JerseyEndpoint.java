@@ -277,7 +277,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/kres/reengineer"
+literal|"/reengineer"
 argument_list|)
 specifier|public
 specifier|static
@@ -292,7 +292,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/kres/reengineer/static"
+literal|"/reengineer/static"
 argument_list|)
 specifier|public
 specifier|static

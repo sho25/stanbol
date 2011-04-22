@@ -277,7 +277,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/ontomgr"
+literal|"/ontonet"
 argument_list|)
 specifier|public
 specifier|static
@@ -292,7 +292,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"/kres/static"
+literal|"/ontonet/static"
 argument_list|)
 specifier|public
 specifier|static
