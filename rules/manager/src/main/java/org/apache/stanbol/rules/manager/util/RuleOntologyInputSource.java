@@ -37,6 +37,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -430,6 +440,21 @@ block|{
 return|return
 name|rootOntology
 operator|!=
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|getClosure
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
 literal|null
 return|;
 block|}
