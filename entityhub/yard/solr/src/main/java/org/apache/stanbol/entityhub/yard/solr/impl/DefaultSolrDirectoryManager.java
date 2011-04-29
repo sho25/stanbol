@@ -1794,10 +1794,22 @@ name|configuredDataDir
 argument_list|)
 expr_stmt|;
 block|}
+comment|//check if the "solr.xml" file exists in the directory
+name|File
+name|solrConf
+init|=
+operator|new
+name|File
+argument_list|(
+name|solrDataDir
+argument_list|,
+literal|"solr.xml"
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 operator|!
-name|solrDataDir
+name|solrConf
 operator|.
 name|exists
 argument_list|()

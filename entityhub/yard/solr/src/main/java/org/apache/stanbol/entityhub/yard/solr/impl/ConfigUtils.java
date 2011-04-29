@@ -471,6 +471,15 @@ specifier|private
 name|ConfigUtils
 parameter_list|()
 block|{}
+comment|/**      * Use&lt;indexName&gt;.solrindex[.&lt;archiveType&gt;] as file name      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SOLR_INDEX_ARCHIVE_EXTENSION
+init|=
+literal|"solrindex"
+decl_stmt|;
 comment|/**      * Supported archive types.      */
 specifier|public
 specifier|static
@@ -506,7 +515,7 @@ name|cfm
 operator|.
 name|put
 argument_list|(
-literal|"SOLR_INDEX_ARCHIVE_EXTENSION"
+name|SOLR_INDEX_ARCHIVE_EXTENSION
 argument_list|,
 literal|"zip"
 argument_list|)
@@ -578,15 +587,6 @@ name|cfm
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Use&lt;indexName&gt;.solrindex[.&lt;archiveType&gt;] as file name      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|SOLR_INDEX_ARCHIVE_EXTENSION
-init|=
-literal|"solrindex"
-decl_stmt|;
 specifier|public
 specifier|static
 name|ArchiveInputStream
@@ -1291,6 +1291,78 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|//if we can not convert it to an URI, try directly with the URL
+comment|//URLs with jar:file:/{jarPath}!{classPath} can cause problems
+comment|//so try to parse manually by using the substring from the first
+comment|//'/' to (including '!')
+name|String
+name|urlString
+init|=
+name|classLocation
+operator|.
+name|toString
+argument_list|()
+decl_stmt|;
+name|int
+name|slashIndex
+init|=
+name|urlString
+operator|.
+name|indexOf
+argument_list|(
+literal|'/'
+argument_list|)
+decl_stmt|;
+name|int
+name|exclamationIndex
+init|=
+name|urlString
+operator|.
+name|indexOf
+argument_list|(
+literal|'!'
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|slashIndex
+operator|>=
+literal|0
+operator|&&
+name|exclamationIndex
+operator|>
+literal|0
+condition|)
+block|{
+name|classPath
+operator|=
+name|urlString
+operator|.
+name|substring
+argument_list|(
+name|slashIndex
+argument_list|,
+name|exclamationIndex
+operator|+
+literal|1
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"manually parsed plassPath: {} from {}"
+argument_list|,
+name|classPath
+argument_list|,
+name|classLocation
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|//looks like there is an other reason than an URL as described above
+comment|//so better to throw an exception than to guess ...
 throw|throw
 operator|new
 name|IOException
@@ -1302,6 +1374,7 @@ argument_list|,
 name|e
 argument_list|)
 throw|;
+block|}
 block|}
 if|if
 condition|(

@@ -142,6 +142,15 @@ specifier|public
 class|class
 name|FieldMapping
 block|{
+comment|/**      * The '#' char is used for comments      */
+specifier|public
+specifier|static
+specifier|final
+name|char
+name|COMMENT_CHAR
+init|=
+literal|'#'
+decl_stmt|;
 specifier|private
 specifier|final
 name|String
