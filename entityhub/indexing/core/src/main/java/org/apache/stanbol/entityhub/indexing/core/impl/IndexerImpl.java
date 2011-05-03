@@ -587,14 +587,6 @@ name|IndexingListener
 argument_list|>
 name|listeners
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|DEFAULT_CHUNK_SIZE
-init|=
-literal|10
-decl_stmt|;
 specifier|private
 name|int
 name|chunkSize

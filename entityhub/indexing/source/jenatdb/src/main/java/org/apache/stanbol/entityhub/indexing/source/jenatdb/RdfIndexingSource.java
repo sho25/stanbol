@@ -875,7 +875,21 @@ name|this
 operator|.
 name|loader
 operator|=
-name|createResourceLoader
+operator|new
+name|ResourceLoader
+argument_list|(
+operator|new
+name|RdfResourceImporter
+argument_list|(
+name|indexingDataset
+argument_list|)
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|loader
+operator|.
+name|addResource
 argument_list|(
 name|sourceFileOrDirectory
 argument_list|)
@@ -975,16 +989,23 @@ name|modelLocation
 argument_list|)
 expr_stmt|;
 comment|//second we need to check if we need to import RDF files to the RDF model
+comment|//create the ResourceLoader
 name|this
 operator|.
 name|loader
 operator|=
-name|createResourceLoader
+operator|new
+name|ResourceLoader
 argument_list|(
-literal|null
+operator|new
+name|RdfResourceImporter
+argument_list|(
+name|indexingDataset
+argument_list|)
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
-comment|//create the ResourceLoader
 comment|//check if importing is deactivated
 name|boolean
 name|importSource
@@ -1075,14 +1096,10 @@ block|{
 name|File
 name|sourceFileOrDirectory
 init|=
-operator|new
-name|File
-argument_list|(
 name|indexingConfig
 operator|.
-name|getSourceFolder
-argument_list|()
-argument_list|,
+name|getSourceFile
+argument_list|(
 name|source
 argument_list|)
 decl_stmt|;
@@ -1172,33 +1189,6 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-comment|/**      * @param sourceFileOrDirectory      */
-specifier|private
-name|ResourceLoader
-name|createResourceLoader
-parameter_list|(
-name|File
-name|sourceFileOrDirectory
-parameter_list|)
-block|{
-return|return
-name|loader
-operator|=
-operator|new
-name|ResourceLoader
-argument_list|(
-operator|new
-name|RdfResourceImporter
-argument_list|(
-name|indexingDataset
-argument_list|)
-argument_list|,
-literal|true
-argument_list|,
-name|sourceFileOrDirectory
-argument_list|)
-return|;
 block|}
 comment|/**      * @param modelLocation      */
 specifier|private

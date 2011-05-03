@@ -68,6 +68,15 @@ comment|/**          * Indicates that the indexing has finished and the {@link I
 name|FINISHED
 block|}
 empty_stmt|;
+comment|/**      * The default number of documents sent in one chunk to the {@link Yard}       * provided by the configured {@link IndexingDestination}      */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|DEFAULT_CHUNK_SIZE
+init|=
+literal|10
+decl_stmt|;
 comment|/**      * Setter for the chunk size. parsing values&lt;= 0 results in the      * chunk size to be set to {@link #DEFAULT_CHUNK_SIZE}.       * @param chunkSize the chunkSize to set      * @throws IllegalStateException if {@link #getState()}&gt;       * {@link State#INITIALISED}      */
 name|void
 name|setChunkSize

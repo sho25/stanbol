@@ -233,6 +233,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|AfterClass
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|BeforeClass
 import|;
 end_import
@@ -303,30 +313,42 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * mvn copies the resources in "src/test/resources" to target/test-classes      */
 specifier|private
 specifier|static
 specifier|final
 name|String
-name|TEST_CONFIGS_ROOT
+name|CONFIG_ROOT
 init|=
-literal|"/target/test-classes/testConfigs/"
+literal|"testConfigs/"
 decl_stmt|;
-comment|/**      * The path to the folder used as root for the tests      */
+comment|/**      * mvn copies the resources in "src/test/resources" to target/test-classes.      * This folder is than used as classpath.<p>      * "/target/test-files/" does not exist, but is created by the      * {@link IndexingConfig}.      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|TEST_ROOT
+init|=
+literal|"/target/test-files"
+decl_stmt|;
+specifier|private
+specifier|static
+name|String
+name|userDir
+decl_stmt|;
 specifier|private
 specifier|static
 name|String
 name|testRoot
 decl_stmt|;
+comment|/**      * The methods resets the "user.dir" system property      */
 annotation|@
 name|BeforeClass
 specifier|public
 specifier|static
 name|void
-name|init
+name|initTestRootFolder
 parameter_list|()
 block|{
-comment|//initialise based on basedir or user.dir
 name|String
 name|baseDir
 init|=
@@ -354,19 +376,60 @@ literal|"user.dir"
 argument_list|)
 expr_stmt|;
 block|}
+comment|//store the current user.dir
+name|userDir
+operator|=
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"user.dir"
+argument_list|)
+expr_stmt|;
 name|testRoot
 operator|=
 name|baseDir
 operator|+
-name|TEST_CONFIGS_ROOT
+name|TEST_ROOT
 expr_stmt|;
 name|log
 operator|.
 name|info
 argument_list|(
-literal|"Test Root ="
+literal|"ConfigTest Root : "
 operator|+
 name|testRoot
+argument_list|)
+expr_stmt|;
+comment|//set the user.dir to the testRoot (needed to test loading of missing
+comment|//configurations via classpath
+comment|//store the current user.dir and reset it after the tests
+name|System
+operator|.
+name|setProperty
+argument_list|(
+literal|"user.dir"
+argument_list|,
+name|testRoot
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * resets the "user.dir" system property the the original value      */
+annotation|@
+name|AfterClass
+specifier|public
+specifier|static
+name|void
+name|cleanup
+parameter_list|()
+block|{
+name|System
+operator|.
+name|setProperty
+argument_list|(
+literal|"user.dir"
+argument_list|,
+name|userDir
 argument_list|)
 expr_stmt|;
 block|}
@@ -390,7 +453,7 @@ init|=
 operator|new
 name|IndexingConfig
 argument_list|(
-name|testRoot
+name|CONFIG_ROOT
 operator|+
 literal|"missingBoostConfig"
 argument_list|)
@@ -421,7 +484,7 @@ init|=
 operator|new
 name|IndexingConfig
 argument_list|(
-name|testRoot
+name|CONFIG_ROOT
 operator|+
 literal|"invalidBoostConfig"
 argument_list|)
@@ -453,7 +516,7 @@ init|=
 operator|new
 name|IndexingConfig
 argument_list|(
-name|testRoot
+name|CONFIG_ROOT
 operator|+
 literal|"missingDefaultSolrConf"
 argument_list|)
@@ -485,7 +548,7 @@ init|=
 operator|new
 name|IndexingConfig
 argument_list|(
-name|testRoot
+name|CONFIG_ROOT
 operator|+
 literal|"missingSolrConf"
 argument_list|)
@@ -513,7 +576,7 @@ init|=
 operator|new
 name|IndexingConfig
 argument_list|(
-name|testRoot
+name|CONFIG_ROOT
 operator|+
 literal|"simple"
 argument_list|)
@@ -541,7 +604,7 @@ init|=
 operator|new
 name|IndexingConfig
 argument_list|(
-name|testRoot
+name|CONFIG_ROOT
 operator|+
 literal|"withSolrConf"
 argument_list|)
