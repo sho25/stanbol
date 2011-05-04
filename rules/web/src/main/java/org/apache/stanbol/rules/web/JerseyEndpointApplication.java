@@ -117,7 +117,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|RefactorerResource
+name|RefactorResource
 import|;
 end_import
 
@@ -250,7 +250,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|RefactorerResource
+name|RefactorResource
 operator|.
 name|class
 argument_list|)
