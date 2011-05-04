@@ -57,7 +57,7 @@ init|=
 literal|"entityDataProvider"
 decl_stmt|;
 name|String
-name|KEY_ENTITY_ID_ITERATPR
+name|KEY_ENTITY_ID_ITERATOR
 init|=
 literal|"entityIdIterator"
 decl_stmt|;

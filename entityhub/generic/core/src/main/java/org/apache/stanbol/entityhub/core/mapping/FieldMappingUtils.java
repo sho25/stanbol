@@ -1178,6 +1178,11 @@ operator|.
 name|format
 argument_list|(
 literal|"DataType %s not supported! Datatype get not used by this Filter"
+argument_list|,
+name|dataTypeStrings
+index|[
+name|i
+index|]
 argument_list|)
 argument_list|)
 expr_stmt|;

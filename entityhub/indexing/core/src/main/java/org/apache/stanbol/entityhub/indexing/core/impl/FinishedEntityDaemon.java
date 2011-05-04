@@ -914,7 +914,7 @@ name|countedAll
 operator|>
 literal|0
 condition|?
-name|sourceDurationAll
+name|storeDurationAll
 operator|/
 name|countedAll
 else|:
