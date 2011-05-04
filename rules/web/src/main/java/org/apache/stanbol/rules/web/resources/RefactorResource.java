@@ -488,7 +488,7 @@ literal|";qs=2"
 argument_list|)
 specifier|public
 class|class
-name|RefactorerResource
+name|RefactorResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -506,7 +506,7 @@ name|TcManager
 name|tcManager
 decl_stmt|;
 specifier|public
-name|RefactorerResource
+name|RefactorResource
 parameter_list|(
 annotation|@
 name|Context
@@ -1019,11 +1019,33 @@ block|}
 else|else
 block|{
 comment|/**     			 * TODO     			 * ADD A RESPONSE FOR THIS CASE     			 */
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+literal|404
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
 block|}
 block|}
 else|else
 block|{
 comment|/** 			 * TODO 			 * ADD A RESPONSE FOR THIS CASE 			 */
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+literal|404
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
 block|}
 block|}
 annotation|@
