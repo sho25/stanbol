@@ -1570,6 +1570,16 @@ name|expected
 init|=
 literal|"{\"#\":{\"foaf\":\"http:\\/\\/xmlns.com\\/foaf\\/0.1\\/\",\"xsd\":\"http:\\/\\/www.w3.org\\/2001\\/XMLSchema#\"},\"@\":\"<http:\\/\\/example.org\\/people#joebob>\",\"http:\\/\\/xmlns.com\\/foaf\\/0.1\\/nick\":[\"\\\"stu\\\"^^http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string\",\"\\\"groknar\\\"^^http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string\",\"\\\"radface\\\"^^http:\\/\\/www.w3.org\\/2001\\/XMLSchema#string\"]}"
 decl_stmt|;
+name|toConsole
+argument_list|(
+name|actual
+argument_list|)
+expr_stmt|;
+name|toConsole
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expected

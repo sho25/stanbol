@@ -363,11 +363,6 @@ decl_stmt|;
 comment|// put the namespaces
 if|if
 condition|(
-operator|(
-name|this
-operator|.
-name|applyNamespaces
-operator|&&
 operator|!
 name|this
 operator|.
@@ -375,7 +370,6 @@ name|namespacePrefixMap
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 operator|||
 name|this
 operator|.
@@ -759,11 +753,6 @@ block|}
 comment|// put the namespaces
 if|if
 condition|(
-operator|(
-name|this
-operator|.
-name|applyNamespaces
-operator|&&
 operator|!
 name|this
 operator|.
@@ -771,7 +760,6 @@ name|namespacePrefixMap
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 operator|||
 operator|(
 name|this
@@ -1277,7 +1265,10 @@ name|valueList
 operator|.
 name|add
 argument_list|(
+name|applyNamespace
+argument_list|(
 name|uri
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1423,6 +1414,21 @@ name|applyNamespace
 argument_list|(
 name|strValue
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|jsonObject
+operator|.
+name|put
+argument_list|(
+name|applyNamespace
+argument_list|(
+name|property
+argument_list|)
+argument_list|,
+name|value
 argument_list|)
 expr_stmt|;
 block|}
