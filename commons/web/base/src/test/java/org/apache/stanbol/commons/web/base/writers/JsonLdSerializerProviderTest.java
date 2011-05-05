@@ -482,11 +482,6 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-name|toConsole
-argument_list|(
-name|result
-argument_list|)
-expr_stmt|;
 name|Assert
 operator|.
 name|assertEquals
