@@ -1007,6 +1007,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**      * During the serialization there are added ',' and line breaks '\n' by      * default that need to be deleted when not needed, e.g. at the end      * of a list.      *       * @param sb      * @param indent      */
 specifier|private
 specifier|static
 name|void
@@ -1018,6 +1019,16 @@ parameter_list|,
 name|int
 name|indent
 parameter_list|)
+block|{
+if|if
+condition|(
+name|sb
+operator|.
+name|length
+argument_list|()
+operator|>
+literal|2
+condition|)
 block|{
 name|sb
 operator|.
@@ -1050,6 +1061,7 @@ operator|-
 literal|1
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
