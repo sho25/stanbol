@@ -100,12 +100,14 @@ name|PropType
 name|getType
 parameter_list|()
 function_decl|;
+comment|/**      *       * @return Property definition of property, null if<b>STRICT_OFFLINE</b> mode.      * @throws RepositoryAccessException if can not access repository in<b>ONLINE</> mode.      */
 name|DPropertyDefinition
 name|getDefinition
 parameter_list|()
 throws|throws
 name|RepositoryAccessException
 function_decl|;
+comment|/**      *       * @return source object of property, null if<b>STRICT_OFFLINE</b> mode.      * @throws RepositoryAccessException if can not access repository in<b>ONLINE</> mode.      */
 name|DObject
 name|getSourceObject
 parameter_list|()

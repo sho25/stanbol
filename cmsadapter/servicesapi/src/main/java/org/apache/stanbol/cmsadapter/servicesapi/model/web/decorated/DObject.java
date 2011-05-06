@@ -101,14 +101,14 @@ parameter_list|()
 throws|throws
 name|RepositoryAccessException
 function_decl|;
-comment|//Make list?
+comment|/** 	 * Fetches parent of the item from CMS repository. 	 * @return parent of the object, null in<b>OFFLINE</b> mode.  	 * @throws RepositoryAccessException If repository can not be accessed in<b>ONLINE</b> mode. 	 */
 name|DObject
 name|getParent
 parameter_list|()
 throws|throws
 name|RepositoryAccessException
 function_decl|;
-comment|//Make list?
+comment|/** 	 * Fetches object type of the item from CMS repository. 	 * @return Object type of the object, null in<b>OFFLINE</b> mode.  	 * @throws RepositoryAccessException If repository can not be accessed in<b>ONLINE</b> mode. 	 */
 name|DObjectType
 name|getObjectType
 parameter_list|()

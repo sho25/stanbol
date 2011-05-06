@@ -66,6 +66,7 @@ name|boolean
 name|isRequired
 parameter_list|()
 function_decl|;
+comment|/**      *       * @return Allowed object type declerations, null if in<b>STRICT_OFFLINE</b> mode.      * @throws RepositoryAccessException if can not access CMS repository in<b>ONLINE</b> mode.      */
 name|DObjectType
 name|getAllowedObjectDefinitions
 parameter_list|()

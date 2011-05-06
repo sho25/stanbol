@@ -35,7 +35,7 @@ name|model
 operator|.
 name|web
 operator|.
-name|ChildObjectDefinition
+name|CMSObject
 import|;
 end_import
 
@@ -55,7 +55,7 @@ name|model
 operator|.
 name|web
 operator|.
-name|CMSObject
+name|ChildObjectDefinition
 import|;
 end_import
 
@@ -161,6 +161,18 @@ parameter_list|)
 function_decl|;
 name|Object
 name|getSession
+parameter_list|()
+function_decl|;
+comment|/** 	 * Mode must be set before fetching an object from CMS. 	 * Otherwise inconsistent/erroneous behavior can be faced.  	 * @param mode 	 * @return 	 */
+name|void
+name|setMode
+parameter_list|(
+name|AdapterMode
+name|mode
+parameter_list|)
+function_decl|;
+name|AdapterMode
+name|getMode
 parameter_list|()
 function_decl|;
 block|}
