@@ -523,7 +523,47 @@ name|api
 operator|.
 name|io
 operator|.
+name|BlankOntologySource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
 name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|RootOntologyIRISource
 import|;
 end_import
 
@@ -982,7 +1022,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * This an engine to post-process the enhancements. Its main goal is to  * refactor the RDF produced by the enhancement applying some vocabulary related  * to a specific task.  *   * To do that, exploit a Refactor recipe and an ontology scope of OntoNet.  *   * The first implementation is targeted to SEO use case. * It retrieves data by  * dereferencing the entities, * includes the DBpedia ontology * refactor the  * data using the google rich snippets vocabulary.  *   * @author andrea.nuzzolese  *   */
+comment|/**  *   * This an engine to post-process the enhancements. Its main goal is to refactor the RDF produced by the  * enhancement applying some vocabulary related to a specific task.  *   * To do that, exploit a Refactor recipe and an ontology scope of OntoNet.  *   * The first implementation is targeted to SEO use case. * It retrieves data by dereferencing the entities, *  * includes the DBpedia ontology * refactor the data using the google rich snippets vocabulary.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -1012,7 +1052,7 @@ name|EnhancementEngine
 implements|,
 name|ServiceProperties
 block|{
-comment|/* 	 * TODO This are the scope and recipe IDs to be used by this implementation 	 * In future implementation this will be configurable 	 */
+comment|/*      * TODO This are the scope and recipe IDs to be used by this implementation In future implementation this      * will be configurable      */
 annotation|@
 name|Property
 argument_list|(
@@ -1174,7 +1214,7 @@ parameter_list|)
 throws|throws
 name|EngineException
 block|{
-comment|/* 		 * Dulcifier can enhance only content items that are previously enhanced 		 * by other enhancement engines, as it must be the last engine in the chain. 		 *  		 * Works only if some enhancement has been produced. 		 */
+comment|/*          * Dulcifier can enhance only content items that are previously enhanced by other enhancement engines,          * as it must be the last engine in the chain.          *           * Works only if some enhancement has been produced.          */
 name|MGraph
 name|mGraph
 init|=
@@ -1213,7 +1253,7 @@ parameter_list|)
 throws|throws
 name|EngineException
 block|{
-comment|/* 		 * Retrieve the graph 		 */
+comment|/*          * Retrieve the graph          */
 specifier|final
 name|MGraph
 name|mGraph
@@ -1223,7 +1263,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-comment|/* 		 * We filter the entities recognized by the engines 		 */
+comment|/*          * We filter the entities recognized by the engines          */
 name|UriRef
 name|fiseEntityReference
 init|=
@@ -1250,7 +1290,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Now we prepare the OntoNet environment. First we create the OntoNet session 		 * in which run the whole 		 */
+comment|/*          * Now we prepare the OntoNet environment. First we create the OntoNet session in which run the whole          */
 specifier|final
 name|IRI
 name|sessionIRI
@@ -1258,7 +1298,7 @@ init|=
 name|createAndAddSessionSpaceToScope
 argument_list|()
 decl_stmt|;
-comment|/* 		 * We retrieve the session space 		 */
+comment|/*          * We retrieve the session space          */
 name|OntologySpace
 name|sessionSpace
 init|=
@@ -1293,7 +1333,7 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-comment|/* 			 * the entity uri 			 */
+comment|/*              * the entity uri              */
 specifier|final
 name|String
 name|entityReferenceString
@@ -1326,7 +1366,7 @@ operator|+
 name|entityReferenceString
 argument_list|)
 expr_stmt|;
-comment|/** 			 * We fetch the entity in the OntologyInputSource object 			 */
+comment|/**              * We fetch the entity in the OntologyInputSource object              */
 try|try
 block|{
 specifier|final
@@ -1340,7 +1380,7 @@ argument_list|(
 name|entityReferenceString
 argument_list|)
 decl_stmt|;
-comment|/* 				 * The RDF graph of an entity is fetched via the EntityHub. 				 * The getEntityOntology is a method the do the job of asking 				 * the entity to the EntityHub and wrap the RDF graph into 				 * an OWLOntology. 				 */
+comment|/*                  * The RDF graph of an entity is fetched via the EntityHub. The getEntityOntology is a method                  * the do the job of asking the entity to the EntityHub and wrap the RDF graph into an                  * OWLOntology.                  */
 name|OWLOntology
 name|fetched
 init|=
@@ -1491,6 +1531,28 @@ return|return
 name|fetchedIri
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|getClosure
+parameter_list|()
+block|{
+return|return
+name|fetchedFinal
+operator|.
+name|getOWLOntologyManager
+argument_list|()
+operator|.
+name|getImportsClosure
+argument_list|(
+name|fetchedFinal
+argument_list|)
+return|;
+block|}
 block|}
 decl_stmt|;
 name|sessionSpace
@@ -1540,7 +1602,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* 		 * Now we merge the RDF from the T-box - the ontologies - and the A-box 		 * - the RDF data fetched 		 *  		 */
+comment|/*          * Now we merge the RDF from the T-box - the ontologies - and the A-box - the RDF data fetched          */
 specifier|final
 name|OWLOntologyManager
 name|man
@@ -1600,7 +1662,7 @@ name|getOntologies
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|/* 				 * We add to the set the graph containing the metadata generated by previous 				 * enhancement engines. It is important becaus we want to menage during the refactoring 				 * also some information fron that graph. 				 * As the graph is provided as a Clerezza MGraph, we first need to convert it to an OWLAPI 				 * OWLOntology. 				 * There is no chance that the mGraph could be null as it was previously controlled by the JobManager 				 * through the canEnhance method and the computeEnhancement is always called iff the former returns true.   				 */
+comment|/*                  * We add to the set the graph containing the metadata generated by previous enhancement                  * engines. It is important becaus we want to menage during the refactoring also some                  * information fron that graph. As the graph is provided as a Clerezza MGraph, we first need                  * to convert it to an OWLAPI OWLOntology. There is no chance that the mGraph could be null as                  * it was previously controlled by the JobManager through the canEnhance method and the                  * computeEnhancement is always called iff the former returns true.                  */
 name|OWLOntology
 name|fiseMetadataOntology
 init|=
@@ -1624,7 +1686,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/* 		 * We merge all the ontologies from the session space of the scope into 		 * a single ontology that will be used for the refactoring. 		 */
+comment|/*          * We merge all the ontologies from the session space of the scope into a single ontology that will be          * used for the refactoring.          */
 name|OWLOntologyMerger
 name|merger
 init|=
@@ -1655,7 +1717,7 @@ literal|"http://fise.iks-project.eu/dulcifier/integrity-check"
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|/* 			 * To perform the refactoring of the ontology to a given 			 * vocabulary we use the Stanbol Refactor. 			 */
+comment|/*              * To perform the refactoring of the ontology to a given vocabulary we use the Stanbol Refactor.              */
 name|log
 operator|.
 name|debug
@@ -1665,7 +1727,7 @@ operator|+
 name|recipeIRI
 argument_list|)
 expr_stmt|;
-comment|/* 			 * We pass the ontology and the recipe IRI to the Refactor that 			 * returns the refactored graph expressed by using the given 			 * vocabulary. 			 */
+comment|/*              * We pass the ontology and the recipe IRI to the Refactor that returns the refactored graph              * expressed by using the given vocabulary.              */
 try|try
 block|{
 name|Recipe
@@ -1763,7 +1825,7 @@ operator|+
 name|ontology
 argument_list|)
 expr_stmt|;
-comment|/*          	 * The new generated ontology is converted to Clarezza format and than added os substitued to the old mGraph.          	 */
+comment|/*              * The new generated ontology is converted to Clarezza format and than added os substitued to the              * old mGraph.              */
 if|if
 condition|(
 name|graph_append
@@ -1822,7 +1884,7 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 			 * The session needs to be destroyed, as it is no more useful. 			 */
+comment|/*              * The session needs to be destroyed, as it is no more useful.              */
 name|onManager
 operator|.
 name|getSessionManager
@@ -1851,13 +1913,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Setup the KReS session 	 *  	 * @return 	 */
+comment|/**      * Setup the KReS session      *       * @return      */
 specifier|private
 name|IRI
 name|createAndAddSessionSpaceToScope
 parameter_list|()
 block|{
-comment|/* 		 * Retrieve the session manager 		 */
+comment|/*          * Retrieve the session manager          */
 name|SessionManager
 name|sessionManager
 init|=
@@ -1873,7 +1935,7 @@ argument_list|(
 literal|"Starting create session for the dulcifier"
 argument_list|)
 expr_stmt|;
-comment|/* 		 * Create and setup the session. TODO FIXME This is an operation that 		 * should be made easier for developers to do through the API 		 */
+comment|/*          * Create and setup the session. TODO FIXME This is an operation that should be made easier for          * developers to do through the API          */
 name|Session
 name|session
 init|=
@@ -1915,7 +1977,7 @@ name|getID
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|/* 		 * Finally, we return the session ID to be used by the caller 		 */
+comment|/*          * Finally, we return the session ID to be used by the caller          */
 name|log
 operator|.
 name|debug
@@ -1939,7 +2001,7 @@ name|getID
 argument_list|()
 return|;
 block|}
-comment|/**      * To create the input source necesary to load the ontology inside the scope.      * @param uri -- A resolvable string uri.      * @return An OntologyInputSource      */
+comment|/**      * To create the input source necesary to load the ontology inside the scope.      *       * @param uri      *            -- A resolvable string uri.      * @return An OntologyInputSource      */
 specifier|private
 name|OntologyInputSource
 name|oisForScope
@@ -1949,62 +2011,11 @@ name|String
 name|uri
 parameter_list|)
 block|{
-comment|/* 		 * The scope factory needs an OntologyInputSource as input for the core 		 * ontology space. We want to use the dbpedia ontology as core ontology 		 * of our scope. 		 */
-name|OntologyInputSource
-name|ois
-init|=
-operator|new
-name|OntologyInputSource
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|hasRootOntology
-parameter_list|()
-block|{
-return|return
-literal|true
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|hasPhysicalIRI
-parameter_list|()
-block|{
-return|return
-literal|false
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|OWLOntology
-name|getRootOntology
-parameter_list|()
-block|{
-name|InputStream
-name|inputStream
-decl_stmt|;
 try|try
 block|{
-comment|/* 					 * The input stream for the dbpedia ontology is obtained 					 * through the dereferencer component. 					 */
-comment|//inputStream = dereferencer.resolve(uri);
-name|OWLOntologyManager
-name|manager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
 return|return
-name|manager
-operator|.
-name|loadOntologyFromOntologyDocument
+operator|new
+name|RootOntologyIRISource
 argument_list|(
 name|IRI
 operator|.
@@ -2014,11 +2025,10 @@ name|uri
 argument_list|)
 argument_list|)
 return|;
-comment|//return getEntityOntology(uri);
 block|}
 catch|catch
 parameter_list|(
-name|Exception
+name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
@@ -2026,37 +2036,19 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Cannot load the ontology "
-operator|+
+literal|"Failed to load scope ontology {}"
+argument_list|,
 name|uri
 argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-block|}
-comment|/** If some errors occur **/
-return|return
-literal|null
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|IRI
-name|getPhysicalIRI
-parameter_list|()
-block|{
 return|return
 literal|null
 return|;
 block|}
 block|}
-decl_stmt|;
-return|return
-name|ois
-return|;
-block|}
-comment|/**      * Activating the component      * @param context      */
+comment|/**      * Activating the component      *       * @param context      */
 specifier|protected
 name|void
 name|activate
@@ -2065,7 +2057,7 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-comment|/*      	 * Read property to indicate if the the new eanchment metada must be append to the existing mGraph       	 */
+comment|/*          * Read property to indicate if the the new eanchment metada must be append to the existing mGraph          */
 name|graph_append
 operator|=
 operator|(
@@ -2106,7 +2098,7 @@ operator|.
 name|booleanValue
 argument_list|()
 expr_stmt|;
-comment|/* 		 * Get the Scope Factory from the ONM of KReS that allows to create new 		 * scopes 		 */
+comment|/*          * Get the Scope Factory from the ONM of KReS that allows to create new scopes          */
 name|OntologyScopeFactory
 name|scopeFactory
 init|=
@@ -2115,8 +2107,8 @@ operator|.
 name|getOntologyScopeFactory
 argument_list|()
 decl_stmt|;
-comment|/*     	 * Adding ontologies to the scope core ontology.     	 * 1) Get all the ontologies from the property.     	 * 2) Create a base scope with an empity ontology.     	 * 3) Retrieve the ontology space from the scope.      	 * 4) Add the ontologies to the scope via ontology space.      	 */
-comment|//Step 1
+comment|/*          * Adding ontologies to the scope core ontology. 1) Get all the ontologies from the property. 2)          * Create a base scope with an empity ontology. 3) Retrieve the ontology space from the scope. 4) Add          * the ontologies to the scope via ontology space.          */
+comment|// Step 1
 name|Object
 name|obj
 init|=
@@ -2178,110 +2170,13 @@ operator|=
 name|aux
 expr_stmt|;
 block|}
-comment|//Step 2
+comment|// Step 2
 name|OntologyInputSource
 name|oisbase
 init|=
 operator|new
-name|OntologyInputSource
+name|BlankOntologySource
 argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|hasRootOntology
-parameter_list|()
-block|{
-return|return
-literal|true
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|hasPhysicalIRI
-parameter_list|()
-block|{
-return|return
-literal|false
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|OWLOntology
-name|getRootOntology
-parameter_list|()
-block|{
-try|try
-block|{
-comment|/* 					 * The input stream for the dbpedia ontology is obtained 					 * through the dereferencer component. 					 */
-name|OWLOntologyManager
-name|manager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
-return|return
-name|manager
-operator|.
-name|createOntology
-argument_list|()
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Cannot create the scope with empity ontology."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Cannot create the scope with empity ontology."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** If some errors occur **/
-return|return
-literal|null
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|IRI
-name|getPhysicalIRI
-parameter_list|()
-block|{
-return|return
-literal|null
-return|;
-block|}
-block|}
 decl_stmt|;
 name|IRI
 name|dulcifierScopeIRI
@@ -2304,7 +2199,7 @@ name|SCOPE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/* 		 * The scope is created by the ScopeFactory or loaded from the scope 		 * registry of KReS 		 */
+comment|/*          * The scope is created by the ScopeFactory or loaded from the scope registry of KReS          */
 try|try
 block|{
 name|scope
@@ -2343,7 +2238,7 @@ name|dulcifierScopeIRI
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*          * Step 3          */
+comment|// Step 3
 name|OntologySpace
 name|ontologySpace
 init|=
@@ -2352,7 +2247,7 @@ operator|.
 name|getCoreSpace
 argument_list|()
 decl_stmt|;
-comment|/*          * Step 4          */
+comment|// Step 4
 name|ontologySpace
 operator|.
 name|tearDown
@@ -2432,7 +2327,7 @@ operator|+
 literal|"\nN.B. The root.owl ontology is the first (on the list) ontology added when the scope is created."
 argument_list|)
 expr_stmt|;
-comment|/*          * The first thing to do is to create a recipe in the rule store that can be used          * by the engine to refactor the enhancement graphs.           */
+comment|/*          * The first thing to do is to create a recipe in the rule store that can be used by the engine to          * refactor the enhancement graphs.          */
 name|recipeIRI
 operator|=
 name|IRI
@@ -2457,7 +2352,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Start create the Recipe"
+literal|"Start creating the Recipe"
 argument_list|,
 name|this
 argument_list|)
@@ -2480,7 +2375,7 @@ argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
-comment|/*  		 * The set of rule to put in the recipe can be provided by the user. 		 * A default set of rules is provided in /META-INF/default/seo_rules.sem. 		 * Use the property engine.refactor in the felix console to pass to the engine 		 * your set of rules.            *           */
+comment|/*          * The set of rule to put in the recipe can be provided by the user. A default set of rules is          * provided in /META-INF/default/seo_rules.sem. Use the property engine.refactor in the felix console          * to pass to the engine your set of rules.          */
 name|String
 name|recipeURI
 init|=
@@ -2646,7 +2541,7 @@ block|}
 comment|/*          * step 3          */
 try|try
 block|{
-comment|//ruleStore.addRuleToRecipe(recipeIRI.toString(), kReSRuleSyntax);
+comment|// ruleStore.addRuleToRecipe(recipeIRI.toString(), kReSRuleSyntax);
 name|ruleStore
 operator|.
 name|addRuleToRecipe
@@ -2704,10 +2599,10 @@ name|ComponentContext
 name|context
 parameter_list|)
 block|{
-comment|/* Deactivating the dulcifier. The procedure require: 		 * 1) get all the rules from the recipe 		 * 2) remove the recipe. 		 * 3) remove the single rule. 		 * 4) tear down the scope ontologySpace and the scope itself. 		 */
+comment|/*          * Deactivating the dulcifier. The procedure require: 1) get all the rules from the recipe 2) remove          * the recipe. 3) remove the single rule. 4) tear down the scope ontologySpace and the scope itself.          */
 try|try
 block|{
-comment|/* 			 * step 1: get all the rule 			 */
+comment|/*              * step 1: get all the rule              */
 name|RuleList
 name|recipeRuleList
 init|=
@@ -2721,7 +2616,7 @@ operator|.
 name|getkReSRuleList
 argument_list|()
 decl_stmt|;
-comment|/* 			 * step 2: remove the recipe 			 */
+comment|/*              * step 2: remove the recipe              */
 if|if
 condition|(
 name|ruleStore
@@ -2758,7 +2653,7 @@ literal|" can not be removed"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*     		 * step 3: remove the rules     		 */
+comment|/*              * step 3: remove the rules              */
 for|for
 control|(
 name|Rule
@@ -2810,7 +2705,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/*     		 * step 4:     		 */
+comment|/*              * step 4:              */
 name|scope
 operator|.
 name|getCoreSpace
@@ -2888,7 +2783,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Fetch the OWLOntology containing the graph associated to an entity from Linked Data. 	 * It uses the Entity Hub for accessing LOD and fetching entities. 	 *  	 * @param entityURI {@link String} 	 * @return the {@link OWLOntology} of the entity 	 */
+comment|/**      * Fetch the OWLOntology containing the graph associated to an entity from Linked Data. It uses the Entity      * Hub for accessing LOD and fetching entities.      *       * @param entityURI      *            {@link String}      * @return the {@link OWLOntology} of the entity      */
 specifier|private
 name|OWLOntology
 name|getEntityOntology
@@ -2911,7 +2806,7 @@ operator|+
 name|entityURI
 argument_list|)
 expr_stmt|;
-comment|/* 		 * Ask to the entityhub the fetch the entity. 		 */
+comment|/*          * Ask to the entityhub the fetch the entity.          */
 name|Sign
 name|entitySign
 init|=
@@ -2922,7 +2817,7 @@ argument_list|(
 name|entityURI
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Wrap the entity graph into an owl ontology. 		 *  		 */
+comment|/*          * Wrap the entity graph into an owl ontology.          */
 name|MGraph
 name|entityMGraph
 init|=
@@ -2985,7 +2880,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|/* 			 * OWLOntologyManager manager = OWLManager.createOWLOntologyManager(); 			 * final OWLOntology fetched = manager.loadOntologyFromOntologyDocument(dereferencer.resolve(entityReferenceString)); 			 */
+comment|/*              * OWLOntologyManager manager = OWLManager.createOWLOntologyManager(); final OWLOntology fetched =              * manager.loadOntologyFromOntologyDocument(dereferencer.resolve(entityReferenceString));              */
 name|fetchedOntology
 operator|=
 name|OWLAPIToClerezzaConverter
