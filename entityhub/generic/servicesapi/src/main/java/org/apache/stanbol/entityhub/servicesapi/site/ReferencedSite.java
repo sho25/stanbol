@@ -115,6 +115,24 @@ name|servicesapi
 operator|.
 name|query
 operator|.
+name|Constraint
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
 name|FieldQuery
 import|;
 end_import
@@ -169,7 +187,7 @@ name|servicesapi
 operator|.
 name|yard
 operator|.
-name|CacheStrategy
+name|Cache
 import|;
 end_import
 
