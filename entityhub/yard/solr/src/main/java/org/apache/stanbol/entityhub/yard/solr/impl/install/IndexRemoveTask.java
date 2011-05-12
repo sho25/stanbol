@@ -147,11 +147,6 @@ name|CONFIG_INSTALL_ORDER
 init|=
 literal|"11-"
 decl_stmt|;
-specifier|private
-specifier|final
-name|SolrDirectoryManager
-name|solrDirectoryManager
-decl_stmt|;
 specifier|public
 name|IndexRemoveTask
 parameter_list|(
@@ -166,12 +161,6 @@ name|super
 argument_list|(
 name|trg
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|solrDirectoryManager
-operator|=
-name|solrDirectoryManager
 expr_stmt|;
 block|}
 annotation|@
