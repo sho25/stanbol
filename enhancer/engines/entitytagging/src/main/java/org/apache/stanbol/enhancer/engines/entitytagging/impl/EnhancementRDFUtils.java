@@ -22,6 +22,146 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|DC_RELATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|ENHANCER_ENTITY_LABEL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|ENHANCER_ENTITY_REFERENCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|ENHANCER_ENTITY_TYPE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|RDFS_LABEL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|RDF_TYPE
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -281,28 +421,8 @@ name|RdfResourceEnum
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * Utility taken form the engine.autotagging bundle and adapted from  * using TagInfo to {@link Sign}.  *  * @author Rupert Westenthaler  * @author ogrisel (original utility)  */
+comment|/**  * Utility taken form the engine.autotagging bundle and adapted from using TagInfo to {@link Sign}.  *   * @author Rupert Westenthaler  * @author ogrisel (original utility)  */
 end_comment
 
 begin_class
@@ -310,7 +430,7 @@ specifier|public
 class|class
 name|EnhancementRDFUtils
 block|{
-comment|/**      * @param literalFactory the LiteralFactory to use      * @param graph the MGraph to use      * @param contentItemId the contentItemId the enhancement is extracted from      * @param relatedEnhancements enhancements this textAnnotation is related to      * @param entity the related entity      */
+comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param entity      *            the related entity      */
 specifier|public
 specifier|static
 name|UriRef
@@ -338,8 +458,8 @@ name|Sign
 name|entity
 parameter_list|)
 block|{
-comment|//1. check if the returned Entity does has a label -> if not return null
-comment|//add labels (set only a single label. Use "en" if available!
+comment|// 1. check if the returned Entity does has a label -> if not return null
+comment|// add labels (set only a single label. Use "en" if available!
 name|Text
 name|label
 init|=
@@ -473,7 +593,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//Now create the entityAnnotation
+comment|// Now create the entityAnnotation
 name|UriRef
 name|entityAnnotation
 init|=
@@ -541,7 +661,7 @@ name|entityUri
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//add the label parsed above
+comment|// add the label parsed above
 name|graph
 operator|.
 name|add
@@ -557,7 +677,7 @@ name|literal
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//TODO: add real confidence values!
+comment|// TODO: add real confidence values!
 comment|// -> in case of SolrYards this will be a Lucene score and not within the range [0..1]
 comment|// -> in case of SPARQL there will be no score information at all.
 name|Object
@@ -588,7 +708,7 @@ operator|-
 literal|1
 argument_list|)
 decl_stmt|;
-comment|//use -1 if no score is available!
+comment|// use -1 if no score is available!
 if|if
 condition|(
 name|score
@@ -617,7 +737,7 @@ name|NumberFormatException
 name|e
 parameter_list|)
 block|{
-comment|//ignore
+comment|// ignore
 block|}
 block|}
 name|graph
@@ -693,11 +813,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//TODO: for now add the information about this entity to the graph
+comment|// TODO: for now add the information about this entity to the graph
 comment|// -> this might be replaced by some additional engine at the end
-comment|//        RdfValueFactory rdfValueFactory = RdfValueFactory.getInstance();
-comment|//        RdfRepresentation representation = rdfValueFactory.toRdfRepresentation(entity.getRepresentation());
-comment|//        graph.addAll(representation.getRdfGraph());
+comment|// RdfValueFactory rdfValueFactory = RdfValueFactory.getInstance();
+comment|// RdfRepresentation representation = rdfValueFactory.toRdfRepresentation(entity.getRepresentation());
+comment|// graph.addAll(representation.getRdfGraph());
 return|return
 name|entityAnnotation
 return|;

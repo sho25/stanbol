@@ -22,6 +22,86 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_ORGANISATION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|DC_TYPE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|ENHANCER_SELECTED_TEXT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|RDF_TYPE
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -357,24 +437,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|commons
-operator|.
-name|stanboltools
-operator|.
-name|offline
-operator|.
-name|OnlineMode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|enhancer
 operator|.
 name|servicesapi
@@ -641,42 +703,6 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|EntityDereferencer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
-name|EntitySearcher
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
 name|ReferencedSite
 import|;
 end_import
@@ -765,88 +791,8 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|OntologicalClasses
-operator|.
-name|DBPEDIA_ORGANISATION
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-operator|.
-name|DC_TYPE
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-operator|.
-name|ENHANCER_SELECTED_TEXT
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-operator|.
-name|RDF_TYPE
-import|;
-end_import
-
 begin_comment
-comment|/**  * Engine that uses a {@link ReferencedSite} to search for entities for  * existing TextAnnotations of an Content Item.  *  * @author ogrisel, rwesten  */
+comment|/**  * Engine that uses a {@link ReferencedSite} to search for entities for existing TextAnnotations of an Content  * Item.  *   * @author ogrisel, rwesten  */
 end_comment
 
 begin_class
@@ -863,7 +809,7 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|//the baseUri is required!
+comment|// the baseUri is required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -1019,14 +965,14 @@ name|NAME_FIELD
 init|=
 literal|"org.apache.stanbol.enhancer.engines.entitytagging.nameField"
 decl_stmt|;
-comment|/**      * Service of the RICK that manages all the active referenced Site.      * This Service is used to lookup the configured Referenced Site when we      * need to enhance a content item.      */
+comment|/**      * Service of the RICK that manages all the active referenced Site. This Service is used to lookup the      * configured Referenced Site when we need to enhance a content item.      */
 annotation|@
 name|Reference
 specifier|protected
 name|ReferencedSiteManager
 name|siteManager
 decl_stmt|;
-comment|/**      * This is the configured name of the referenced Site used to find entities.      * The {@link ReferencedSiteManager} service of the RICK is used to      * get the actual {@link ReferencedSite} instance for each request to this      * Engine.      */
+comment|/**      * This is the configured name of the referenced Site used to find entities. The      * {@link ReferencedSiteManager} service of the RICK is used to get the actual {@link ReferencedSite}      * instance for each request to this Engine.      */
 specifier|protected
 name|String
 name|referencedSiteID
@@ -1040,32 +986,32 @@ name|defaultOrder
 init|=
 name|ORDERING_EXTRACTION_ENHANCEMENT
 decl_stmt|;
-comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_PERSON}      * are enhanced by this engine      */
+comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_PERSON} are enhanced by this engine      */
 specifier|protected
 name|boolean
 name|personState
 decl_stmt|;
-comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_ORGANISATION}      * are enhanced by this engine      */
+comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_ORGANISATION} are enhanced by this      * engine      */
 specifier|protected
 name|boolean
 name|orgState
 decl_stmt|;
-comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_PLACE}      * are enhanced by this engine      */
+comment|/**      * State if text annotations of type {@link OntologicalClasses#DBPEDIA_PLACE} are enhanced by this engine      */
 specifier|protected
 name|boolean
 name|placeState
 decl_stmt|;
-comment|/**      * The rdf:type constraint used to search for persons or<code>null</code>      * if no type constraint should be used      */
+comment|/**      * The rdf:type constraint used to search for persons or<code>null</code> if no type constraint should be      * used      */
 specifier|protected
 name|String
 name|personType
 decl_stmt|;
-comment|/**      * The rdf:type constraint used to search for organisations or<code>null</code>      * if no type constraint should be used      */
+comment|/**      * The rdf:type constraint used to search for organisations or<code>null</code> if no type constraint      * should be used      */
 specifier|protected
 name|String
 name|orgType
 decl_stmt|;
-comment|/**      * The rdf:type constraint used to search for places or<code>null</code>      * if no type constraint should be used      */
+comment|/**      * The rdf:type constraint used to search for places or<code>null</code> if no type constraint should be      * used      */
 specifier|protected
 name|String
 name|placeType
@@ -1082,7 +1028,7 @@ name|numSuggestions
 init|=
 literal|3
 decl_stmt|;
-comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external      * service should be referenced. For this engine that means it is necessary      * to check if the used {@link ReferencedSite} can operate offline or not.      * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
+comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link ReferencedSite} can operate      * offline or not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
 annotation|@
 name|Reference
 argument_list|(
@@ -1116,7 +1062,7 @@ specifier|private
 name|OfflineMode
 name|offlineMode
 decl_stmt|;
-comment|/**      * Called by the ConfigurationAdmin to bind the {@link #offlineMode} if the      * service becomes available      * @param mode       */
+comment|/**      * Called by the ConfigurationAdmin to bind the {@link #offlineMode} if the service becomes available      *       * @param mode      */
 specifier|protected
 specifier|final
 name|void
@@ -1133,7 +1079,7 @@ operator|=
 name|mode
 expr_stmt|;
 block|}
-comment|/**      * Called by the ConfigurationAdmin to unbind the {@link #offlineMode} if the      * service becomes unavailable      * @param mode      */
+comment|/**      * Called by the ConfigurationAdmin to unbind the {@link #offlineMode} if the service becomes unavailable      *       * @param mode      */
 specifier|protected
 specifier|final
 name|void
@@ -1150,7 +1096,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode}.      * @return the offline state      */
+comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode}.      *       * @return the offline state      */
 specifier|protected
 specifier|final
 name|boolean
@@ -1562,9 +1508,9 @@ argument_list|(
 name|msg
 argument_list|)
 expr_stmt|;
-comment|//TODO: throwing Exceptions is currently deactivated. We need a more clear
-comment|//policy what do to in such situations
-comment|//throw new EngineException(msg);
+comment|// TODO: throwing Exceptions is currently deactivated. We need a more clear
+comment|// policy what do to in such situations
+comment|// throw new EngineException(msg);
 return|return;
 block|}
 if|if
@@ -1968,7 +1914,7 @@ name|emptyList
 argument_list|()
 return|;
 block|}
-comment|//remove punctations form the search string
+comment|// remove punctations form the search string
 name|name
 operator|=
 name|cleanupKeywords
@@ -2000,7 +1946,7 @@ operator|.
 name|createFieldQuery
 argument_list|()
 decl_stmt|;
-comment|//replace spaces with plus to create an AND search for all words in the name!
+comment|// replace spaces with plus to create an AND search for all words in the name!
 name|query
 operator|.
 name|setConstraint
@@ -2014,7 +1960,7 @@ name|name
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//name.replace(' ', '+')));
+comment|// name.replace(' ', '+')));
 if|if
 condition|(
 name|OntologicalClasses
@@ -2060,7 +2006,7 @@ comment|// else no type constraint
 block|}
 else|else
 block|{
-comment|//ignore people
+comment|// ignore people
 return|return
 name|Collections
 operator|.
@@ -2113,7 +2059,7 @@ comment|// else no type constraint
 block|}
 else|else
 block|{
-comment|//ignore people
+comment|// ignore people
 return|return
 name|Collections
 operator|.
@@ -2172,7 +2118,7 @@ comment|// else no type constraint
 block|}
 else|else
 block|{
-comment|//ignore people
+comment|// ignore people
 return|return
 name|Collections
 operator|.
@@ -2293,7 +2239,7 @@ name|ContentItem
 name|ci
 parameter_list|)
 block|{
-comment|/*          * This engine consumes existing enhancements because of that it can          * enhance any type of ci! TODO: It would also be possible to check here          * if there is an TextAnnotation and use that as result!          */
+comment|/*          * This engine consumes existing enhancements because of that it can enhance any type of ci! TODO: It          * would also be possible to check here if there is an TextAnnotation and use that as result!          */
 return|return
 name|ENHANCE_SYNCHRONOUS
 return|;
@@ -2329,7 +2275,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Removes punctuations form a parsed string       * @param keywords       * @return      */
+comment|/**      * Removes punctuations form a parsed string      *       * @param keywords      * @return      */
 specifier|private
 specifier|static
 name|String
