@@ -2275,7 +2275,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Removes punctuations form a parsed string      *       * @param keywords      * @return      */
+comment|/**      * Removes punctuations form a parsed string      */
 specifier|private
 specifier|static
 name|String
