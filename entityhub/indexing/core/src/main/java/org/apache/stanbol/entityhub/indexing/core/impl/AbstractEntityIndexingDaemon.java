@@ -186,19 +186,11 @@ argument_list|,
 name|Representation
 argument_list|>
 block|{
-specifier|private
-specifier|final
-name|ScoreNormaliser
-name|normaliser
-decl_stmt|;
 specifier|protected
 name|AbstractEntityIndexingDaemon
 parameter_list|(
 name|String
 name|name
-parameter_list|,
-name|ScoreNormaliser
-name|scoreNormaliser
 parameter_list|,
 name|BlockingQueue
 argument_list|<
@@ -234,14 +226,8 @@ argument_list|,
 name|error
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|normaliser
-operator|=
-name|scoreNormaliser
-expr_stmt|;
 block|}
-comment|/**      * Used to produce Representations by both variants of EnityIndexingDeamons      * @param rep the {@link Representation} extracted from the       *  {@link IndexingComponent}s      * @param score The score for the Representation      */
+comment|/**      * Used to produce Representations by both variants of EnityIndexingDeamons      * @param rep the {@link Representation} extracted from the       *  {@link IndexingComponent}s      * @param notNormalisedScore The score for the Representation      */
 specifier|protected
 specifier|final
 name|void
@@ -251,7 +237,7 @@ name|Representation
 name|rep
 parameter_list|,
 name|Float
-name|score
+name|normalisedScore
 parameter_list|,
 name|Long
 name|started
@@ -265,28 +251,6 @@ literal|null
 condition|)
 block|{
 return|return;
-block|}
-comment|//normalise the score if both score and a normaliser are present
-if|if
-condition|(
-name|score
-operator|!=
-literal|null
-operator|&&
-name|normaliser
-operator|!=
-literal|null
-condition|)
-block|{
-name|score
-operator|=
-name|normaliser
-operator|.
-name|normalise
-argument_list|(
-name|score
-argument_list|)
-expr_stmt|;
 block|}
 comment|//first set the score of the representation
 name|QueueItem
@@ -308,11 +272,11 @@ comment|//set the score as additional property to the QueueItem, because
 comment|//it needs to be added to the Representation after the processing completes
 if|if
 condition|(
-name|score
+name|normalisedScore
 operator|!=
 literal|null
 operator|&&
-name|score
+name|normalisedScore
 operator|.
 name|compareTo
 argument_list|(
@@ -330,7 +294,7 @@ name|setProperty
 argument_list|(
 name|SCORE_FIELD
 argument_list|,
-name|score
+name|normalisedScore
 argument_list|)
 expr_stmt|;
 block|}

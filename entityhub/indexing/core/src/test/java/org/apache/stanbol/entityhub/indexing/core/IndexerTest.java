@@ -133,6 +133,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|commons
+operator|.
+name|io
+operator|.
+name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|entityhub
@@ -540,7 +554,12 @@ specifier|final
 name|String
 name|CONFIG_ROOT
 init|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
 literal|"indexerTests/"
+argument_list|)
 decl_stmt|;
 comment|/**      * mvn copies the resources in "src/test/resources" to target/test-classes.      * This folder is than used as classpath.<p>      * "/target/test-files/" does not exist, but is created by the      * {@link IndexingConfig}.      */
 specifier|private
@@ -549,7 +568,12 @@ specifier|final
 name|String
 name|TEST_ROOT
 init|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
 literal|"/target/test-files"
+argument_list|)
 decl_stmt|;
 specifier|private
 specifier|static

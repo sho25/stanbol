@@ -379,11 +379,21 @@ expr_stmt|;
 block|}
 block|}
 comment|//process the remaining
+if|if
+condition|(
+operator|!
+name|toStore
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 name|process
 argument_list|(
 name|toStore
 argument_list|)
 expr_stmt|;
+block|}
 name|setFinished
 argument_list|()
 expr_stmt|;

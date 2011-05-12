@@ -985,6 +985,9 @@ condition|(
 operator|!
 name|configDir
 operator|.
+name|getAbsoluteFile
+argument_list|()
+operator|.
 name|isDirectory
 argument_list|()
 condition|)
@@ -1002,6 +1005,9 @@ if|if
 condition|(
 operator|!
 name|configDir
+operator|.
+name|getAbsoluteFile
+argument_list|()
 operator|.
 name|mkdirs
 argument_list|()
@@ -1050,6 +1056,9 @@ condition|(
 operator|!
 name|sourceDir
 operator|.
+name|getAbsoluteFile
+argument_list|()
+operator|.
 name|exists
 argument_list|()
 condition|)
@@ -1067,6 +1076,9 @@ if|if
 condition|(
 operator|!
 name|sourceDir
+operator|.
+name|getAbsoluteFile
+argument_list|()
 operator|.
 name|mkdirs
 argument_list|()
@@ -1115,6 +1127,9 @@ condition|(
 operator|!
 name|destinationDir
 operator|.
+name|getAbsoluteFile
+argument_list|()
+operator|.
 name|exists
 argument_list|()
 condition|)
@@ -1132,6 +1147,9 @@ if|if
 condition|(
 operator|!
 name|destinationDir
+operator|.
+name|getAbsoluteFile
+argument_list|()
 operator|.
 name|mkdirs
 argument_list|()
@@ -1180,6 +1198,9 @@ condition|(
 operator|!
 name|distributionDir
 operator|.
+name|getAbsoluteFile
+argument_list|()
+operator|.
 name|exists
 argument_list|()
 condition|)
@@ -1197,6 +1218,9 @@ if|if
 condition|(
 operator|!
 name|distributionDir
+operator|.
+name|getAbsoluteFile
+argument_list|()
 operator|.
 name|mkdirs
 argument_list|()

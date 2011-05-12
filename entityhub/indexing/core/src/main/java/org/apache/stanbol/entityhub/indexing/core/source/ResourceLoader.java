@@ -1062,6 +1062,19 @@ block|{
 comment|//during init it is checked that files exists and are files
 comment|//and there is read access so this can only happen if
 comment|//someone deletes the file in between
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unable to load resource "
+operator|+
+name|file
+operator|+
+literal|"!"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|setResourceState
 argument_list|(
 name|file
@@ -1080,6 +1093,50 @@ name|IOException
 name|e
 parameter_list|)
 block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unable to load resource "
+operator|+
+name|file
+operator|+
+literal|"!"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+name|setResourceState
+argument_list|(
+name|file
+argument_list|,
+name|ResourceState
+operator|.
+name|ERROR
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unable to load resource "
+operator|+
+name|file
+operator|+
+literal|"!"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|setResourceState
 argument_list|(
 name|file

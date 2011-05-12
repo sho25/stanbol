@@ -774,25 +774,25 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"    - %d items in %fsec (last %d in %7.3fsec | %7.3fms/item | %7.3fms in queue)"
+literal|"    - %d items in %dsec (last %d in %dsec | %7.3fms/item | %7.3fms in queue)"
 argument_list|,
 name|count
 argument_list|,
 operator|(
-name|float
+name|int
 operator|)
 name|interval
 operator|/
-literal|1000f
+literal|1000
 argument_list|,
 name|minor
 argument_list|,
 operator|(
-name|float
+name|int
 operator|)
 name|intervalMinor
 operator|/
-literal|1000f
+literal|1000
 argument_list|,
 name|itemDurationMinor
 argument_list|,
@@ -971,16 +971,23 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"+ %d items in %fsec | %7.3fms/item | %7.3fms in queue"
+literal|"+ %d items in %dsec (%7.3fms/item): processing: %7.3fms/item | queue: %7.3fms"
 argument_list|,
 name|count
+argument_list|,
+operator|(
+name|int
+operator|)
+name|interval
+operator|/
+literal|1000
 argument_list|,
 operator|(
 name|float
 operator|)
 name|interval
 operator|/
-literal|1000f
+name|count
 argument_list|,
 name|itemDurationAll
 argument_list|,
@@ -996,16 +1003,23 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"  last %d items in %fsec | %7.3fms/item | %7.3fms in queue"
+literal|"  last %d items in %dsec (%7.3fms/item): processing %7.3fms/item | queue: %7.3fms"
 argument_list|,
 name|major
+argument_list|,
+operator|(
+name|int
+operator|)
+name|intervalMajor
+operator|/
+literal|1000
 argument_list|,
 operator|(
 name|float
 operator|)
 name|intervalMajor
 operator|/
-literal|1000f
+name|major
 argument_list|,
 name|itemDurationMajor
 argument_list|,
@@ -1155,16 +1169,23 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Indexed %d items in %fsec | %7.3fms/item | %7.3fdms in queue"
+literal|"Indexed %d items in %dsec (%7.3fms/item): processing: %7.3fms/item | queue: %7.3fms"
 argument_list|,
 name|count
+argument_list|,
+operator|(
+name|int
+operator|)
+name|interval
+operator|/
+literal|1000
 argument_list|,
 operator|(
 name|float
 operator|)
 name|interval
 operator|/
-literal|1000f
+name|count
 argument_list|,
 name|itemDurationAll
 argument_list|,

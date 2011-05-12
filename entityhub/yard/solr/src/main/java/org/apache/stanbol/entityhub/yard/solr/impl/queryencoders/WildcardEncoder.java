@@ -423,6 +423,8 @@ operator|.
 name|encodeQueryValue
 argument_list|(
 name|value
+argument_list|,
+literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -227,7 +227,12 @@ specifier|final
 name|String
 name|TEST_CONFIGS_ROOT
 init|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
 literal|"/target/test-classes/resourceLoaderTest/"
+argument_list|)
 decl_stmt|;
 specifier|private
 specifier|static
@@ -235,7 +240,12 @@ specifier|final
 name|String
 name|TEST_FOLDER_NAME
 init|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
 literal|"testFolder/"
+argument_list|)
 decl_stmt|;
 specifier|protected
 specifier|static
