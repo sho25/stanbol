@@ -1100,6 +1100,11 @@ try|try
 block|{
 for|for
 control|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 name|Enumeration
 argument_list|<
 name|ZipArchiveEntry
@@ -2569,6 +2574,11 @@ try|try
 block|{
 for|for
 control|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 name|Enumeration
 argument_list|<
 name|ZipArchiveEntry

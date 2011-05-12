@@ -900,35 +900,6 @@ name|IOException
 throws|,
 name|IllegalStateException
 block|{
-name|String
-name|archiveName
-init|=
-name|properties
-operator|.
-name|getProperty
-argument_list|(
-name|UNINITIALISED_INDEX_ARCHIVE_NAME_KEY
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|archiveName
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Found uninitialised index config that does not contain the required "
-operator|+
-name|UNINITIALISED_INDEX_ARCHIVE_NAME_KEY
-operator|+
-literal|" property!"
-argument_list|)
-throw|;
-block|}
 comment|//we need to copy the properties to a map
 name|Map
 argument_list|<
@@ -1021,6 +992,35 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+name|String
+name|archiveName
+init|=
+name|properties
+operator|.
+name|getProperty
+argument_list|(
+name|UNINITIALISED_INDEX_ARCHIVE_NAME_KEY
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|archiveName
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Found uninitialised index config that does not contain the required "
+operator|+
+name|UNINITIALISED_INDEX_ARCHIVE_NAME_KEY
+operator|+
+literal|" property!"
+argument_list|)
+throw|;
 block|}
 name|propMap
 operator|.
@@ -1298,19 +1298,6 @@ argument_list|(
 name|context
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|solrIndexName
-operator|==
-literal|null
-condition|)
-block|{
-comment|//if the indexName is null
-return|return
-name|managedCoreContainerDirectory
-return|;
-comment|//return the root directory
-block|}
 name|File
 name|coreDir
 init|=
@@ -2077,18 +2064,6 @@ name|withinOSGI
 operator|=
 literal|true
 expr_stmt|;
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|java
-operator|.
-name|util
-operator|.
-name|Properties
-argument_list|>
-name|uninitIndexes
-decl_stmt|;
 synchronized|synchronized
 init|(
 name|uninitialisedCores

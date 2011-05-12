@@ -3009,12 +3009,6 @@ name|i
 operator|++
 expr_stmt|;
 comment|//add the and constraints to all or
-name|List
-argument_list|<
-name|StringBuilder
-argument_list|>
-name|andConstaints
-decl_stmt|;
 if|if
 condition|(
 name|i
@@ -3101,7 +3095,6 @@ argument_list|,
 name|additional
 argument_list|)
 expr_stmt|;
-comment|//                            additional.append(part);
 name|constraints
 operator|.
 name|add
