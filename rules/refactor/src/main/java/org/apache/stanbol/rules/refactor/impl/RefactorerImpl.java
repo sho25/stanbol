@@ -2453,14 +2453,7 @@ decl_stmt|;
 comment|// JenaToOwlConvert jenaToOwlConvert = new JenaToOwlConvert();
 comment|// OntModel ontModel =
 comment|// jenaToOwlConvert.ModelOwlToJenaConvert(inputOntology, "RDF/XML");
-name|OWLOntologyManager
-name|manager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
+comment|//        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 name|RuleList
 name|ruleList
 init|=
@@ -2481,22 +2474,8 @@ name|size
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|OWLOntologyManager
-name|ontologyManager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
-name|OWLOntologyManager
-name|ontologyManager2
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
+comment|//        OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
+comment|//        OWLOntologyManager ontologyManager2 = OWLManager.createOWLOntologyManager();
 name|MGraph
 name|unionMGraph
 init|=

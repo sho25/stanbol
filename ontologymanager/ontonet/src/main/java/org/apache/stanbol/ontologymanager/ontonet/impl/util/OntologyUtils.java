@@ -458,7 +458,7 @@ name|rewritePrefix
 argument_list|)
 return|;
 block|}
-comment|/** 	 * This method appends one ontology (the child) to another (the parent) by 	 * proceeding as follows. If a physical URI can be obtained from the child 	 * source, an import statement using that physical URI will be added to the 	 * parent ontology, otherwise all the axioms from the child ontology will be 	 * copied to the parent.<br> 	 * Note: the ontology manager will not load additional ontologies. 	 *  	 * @param parentSrc 	 *            must exist! 	 * @param childSrc 	 * @param ontologyManager 	 *            can be null (e.g. when one does not want changes to be 	 *            immediately reflected in their ontology manager), in which 	 *            case a temporary ontology manager will be used. 	 * @param rewritePrefix 	 *            . if not null, import statements will be generated in the form 	 *<tt>rewritePrefix/child_ontology_logical_IRI</tt>. It can be 	 *            used for relocating the ontology document file elsewhere. 	 * @return the parent with the appended child 	 */
+comment|/**      * This method appends one ontology (the child) to another (the parent) by proceeding as follows. If a      * physical URI can be obtained from the child source, an import statement using that physical URI will be      * added to the parent ontology, otherwise all the axioms from the child ontology will be copied to the      * parent.<br>      * Note: the ontology manager will not load additional ontologies.      *       * @param parentSrc      *            must exist!      * @param childSrc      * @param ontologyManager      *            can be null (e.g. when one does not want changes to be immediately reflected in their      *            ontology manager), in which case a temporary ontology manager will be used.      * @param rewritePrefix      *            . if not null, import statements will be generated in the form      *<tt>rewritePrefix/child_ontology_logical_IRI</tt>. It can be used for relocating the      *            ontology document file elsewhere.      * @return the parent with the appended child      */
 specifier|public
 specifier|static
 name|OWLOntology
@@ -695,7 +695,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** 	 *  	 * @param rootSrc 	 * @param subtrees 	 * @param mgr 	 * @return 	 */
+comment|/**      *       * @param rootSrc      * @param subtrees      * @param mgr      * @return      */
 specifier|public
 specifier|static
 name|OWLOntology
@@ -728,7 +728,7 @@ name|mgr
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Non-recursively adds import statements to the root ontology so that it is 	 * directly linked to all the ontologies in the subtrees set. 	 *  	 * @param root 	 *            the ontology to which import subtrees should be appended. If 	 *            null, a runtime exception will be thrown. 	 * @param subtrees 	 *            the set of target ontologies for import statements. These can 	 *            in turn be importing other ontologies, hence the 	 *&quot;subtree&quot; notation. A single statement will be added 	 *            for each member of this set. 	 * @return the same input ontology as defined in<code>root</code>, but with 	 *         the added import statements. 	 */
+comment|/**      * Non-recursively adds import statements to the root ontology so that it is directly linked to all the      * ontologies in the subtrees set.      *       * @param root      *            the ontology to which import subtrees should be appended. If null, a runtime exception will      *            be thrown.      * @param subtrees      *            the set of target ontologies for import statements. These can in turn be importing other      *            ontologies, hence the&quot;subtree&quot; notation. A single statement will be added for      *            each member of this set.      * @return the same input ontology as defined in<code>root</code>, but with the added import statements.      */
 specifier|public
 specifier|static
 name|OWLOntology
@@ -758,7 +758,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Non-recursively adds import statements to the root ontology so that it is 	 * directly linked to all the ontologies in the subtrees set. 	 *  	 * @param parent 	 *            the ontology to which import subtrees should be appended. If 	 *            null, a runtime exception will be thrown. 	 * @param subtrees 	 *            the set of target ontologies for import statements. These can 	 *            in turn be importing other ontologies, hence the 	 *&quot;subtree&quot; notation. A single statement will be added 	 *            for each member of this set. 	 * @param mgr 	 *            the OWL ontology manager to use for constructing the import 	 *            tree. If null, an internal one will be used instead, otherwise 	 *            an existing ontology manager can be used e.g. for extracting 	 *            import statements from its IRI mappers or known ontologies. 	 *            Note that the supplied manager will<i>never</i> try to load 	 *            any ontologies, even when they are unknown. 	 * @return the same input ontology as defined in<code>root</code>, but with 	 *         the added import statements. 	 */
+comment|/**      * Non-recursively adds import statements to the root ontology so that it is directly linked to all the      * ontologies in the subtrees set.      *       * @param parent      *            the ontology to which import subtrees should be appended. If null, a runtime exception will      *            be thrown.      * @param subtrees      *            the set of target ontologies for import statements. These can in turn be importing other      *            ontologies, hence the&quot;subtree&quot; notation. A single statement will be added for      *            each member of this set.      * @param mgr      *            the OWL ontology manager to use for constructing the import tree. If null, an internal one      *            will be used instead, otherwise an existing ontology manager can be used e.g. for extracting      *            import statements from its IRI mappers or known ontologies. Note that the supplied manager      *            will<i>never</i> try to load any ontologies, even when they are unknown.      * @return the same input ontology as defined in<code>root</code>, but with the added import statements.      */
 specifier|public
 specifier|static
 name|OWLOntology
@@ -840,7 +840,7 @@ literal|null
 decl_stmt|;
 try|try
 block|{
-comment|/* 				 * First query the manager, as it could know the physical 				 * location of anonymous ontologies, if previously loaded or 				 * IRI-mapped. 				 */
+comment|/*                  * First query the manager, as it could know the physical location of anonymous ontologies, if                  * previously loaded or IRI-mapped.                  */
 name|importIri
 operator|=
 name|mgr
@@ -857,7 +857,7 @@ name|UnknownOWLOntologyException
 name|ex
 parameter_list|)
 block|{
-comment|/* 				 * Otherwise, ask the ontology itself (the location of an 				 * anonymous ontology may have been known at creation/loading 				 * time, even if another manager built it.) 				 */
+comment|/*                  * Otherwise, ask the ontology itself (the location of an anonymous ontology may have been                  * known at creation/loading time, even if another manager built it.)                  */
 name|importIri
 operator|=
 name|o
@@ -892,7 +892,7 @@ expr_stmt|;
 block|}
 finally|finally
 block|{
-comment|/* 				 * It is still possible that an imported ontology is anonymous 				 * but has no physical document IRI (for example, because it was 				 * only generated in-memory but not stored). In this case it is 				 * necessary (and generally safe) to copy all its axioms and 				 * import statements to the parent ontology, or else it is lost. 				 */
+comment|/*                  * It is still possible that an imported ontology is anonymous but has no physical document                  * IRI (for example, because it was only generated in-memory but not stored). In this case it                  * is necessary (and generally safe) to copy all its axioms and import statements to the                  * parent ontology, or else it is lost.                  */
 if|if
 condition|(
 name|o

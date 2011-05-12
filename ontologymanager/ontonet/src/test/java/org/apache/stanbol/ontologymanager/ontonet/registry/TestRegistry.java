@@ -177,9 +177,13 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|impl
+name|api
 operator|.
-name|ONManagerImpl
+name|registry
+operator|.
+name|io
+operator|.
+name|OntologyRegistryIRISource
 import|;
 end_import
 
@@ -197,9 +201,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|io
-operator|.
-name|OntologyRegistryIRISource
+name|ONManagerImpl
 import|;
 end_import
 

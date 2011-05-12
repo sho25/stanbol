@@ -221,9 +221,6 @@ operator|.
 name|getIRISuffix
 argument_list|()
 decl_stmt|;
-comment|//	static {
-comment|//		SUFFIX = SpaceType.CUSTOM.getIRISuffix();
-comment|//	}
 specifier|public
 name|CustomOntologySpaceImpl
 parameter_list|(
@@ -260,7 +257,6 @@ argument_list|,
 name|SpaceType
 operator|.
 name|CUSTOM
-comment|/*, scopeID*/
 argument_list|,
 name|storage
 argument_list|)
@@ -308,23 +304,10 @@ name|CUSTOM
 argument_list|,
 name|storage
 argument_list|,
-comment|/*scopeID,*/
 name|ontologyManager
 argument_list|)
 expr_stmt|;
 block|}
-comment|//	public CustomOntologySpaceImpl(IRI scopeID, OntologyInputSource topOntology) {
-comment|//	super(IRI.create(StringUtils.stripIRITerminator(scopeID) + "/"
-comment|//			+ SpaceType.CUSTOM.getIRISuffix()), SpaceType.CUSTOM, scopeID,
-comment|//			topOntology);
-comment|//}
-comment|//
-comment|//public CustomOntologySpaceImpl(IRI scopeID,
-comment|//		OntologyInputSource topOntology, OWLOntologyManager ontologyManager) {
-comment|//	super(IRI.create(StringUtils.stripIRITerminator(scopeID) + "/"
-comment|//			+ SpaceType.CUSTOM.getIRISuffix()), SpaceType.CUSTOM, scopeID,
-comment|//			ontologyManager, topOntology);
-comment|//}
 annotation|@
 name|Override
 specifier|public
@@ -399,7 +382,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Once it is set up, a custom space is write-locked. 	 */
+comment|/**      * Once it is set up, a custom space is write-locked.      */
 annotation|@
 name|Override
 specifier|public

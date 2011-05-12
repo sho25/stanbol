@@ -272,7 +272,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility class that generates default implementations of the three types of  * ontology scope.  *   * @author alessandro  *   */
+comment|/**  * Utility class that generates default implementations of the three types of ontology scope.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -298,11 +298,14 @@ specifier|protected
 name|ScopeRegistry
 name|registry
 decl_stmt|;
-comment|/*  	 * The ClerezzaOntologyStorage (local to OntoNet) has been changed with 	 * PersistenceStore (general from Stanbol) 	 * 	 */
-comment|//protected ClerezzaOntologyStorage storage;
+comment|/*      * The ClerezzaOntologyStorage (local to OntoNet) has been changed with PersistenceStore (general from      * Stanbol)      */
 specifier|protected
 name|ClerezzaOntologyStorage
 name|storage
+decl_stmt|;
+specifier|protected
+name|OntologyManagerFactory
+name|mgrFactory
 decl_stmt|;
 specifier|public
 name|OntologySpaceFactoryImpl
@@ -312,6 +315,9 @@ name|registry
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
+parameter_list|,
+name|OntologyManagerFactory
+name|mgrFactory
 parameter_list|)
 block|{
 name|this
@@ -326,8 +332,14 @@ name|storage
 operator|=
 name|storage
 expr_stmt|;
+name|this
+operator|.
+name|mgrFactory
+operator|=
+name|mgrFactory
+expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologySpaceFactory#createCoreOntologySpace(org.semanticweb.owlapi.model.IRI, eu.iksproject.kres.api.manager.ontology.OntologyInputSource) 	 */
+comment|/*      * (non-Javadoc)      *       * @see      * org.apache.stanbol.ontologymanager.ontonet.api.ontology.OntologySpaceFactory#createCoreOntologySpace      * (org.semanticweb.owlapi.model.IRI,      * org.apache.stanbol.ontologymanager.ontonet.api.io.OntologyInputSource)      */
 annotation|@
 name|Override
 specifier|public
@@ -350,9 +362,16 @@ argument_list|(
 name|scopeID
 argument_list|,
 name|storage
+argument_list|,
+name|mgrFactory
+operator|.
+name|createOntologyManager
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 decl_stmt|;
-name|setupSpace
+name|configureSpace
 argument_list|(
 name|s
 argument_list|,
@@ -365,7 +384,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologySpaceFactory#createCustomOntologySpace(org.semanticweb.owlapi.model.IRI, eu.iksproject.kres.api.manager.ontology.OntologyInputSource) 	 */
+comment|/*      * (non-Javadoc)      *       * @see      * org.apache.stanbol.ontologymanager.ontonet.api.ontology.OntologySpaceFactory#createCustomOntologySpace      * (org.semanticweb.owlapi.model.IRI,      * org.apache.stanbol.ontologymanager.ontonet.api.io.OntologyInputSource)      */
 annotation|@
 name|Override
 specifier|public
@@ -388,9 +407,16 @@ argument_list|(
 name|scopeID
 argument_list|,
 name|storage
+argument_list|,
+name|mgrFactory
+operator|.
+name|createOntologyManager
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 decl_stmt|;
-name|setupSpace
+name|configureSpace
 argument_list|(
 name|s
 argument_list|,
@@ -403,7 +429,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 * @see eu.iksproject.kres.api.manager.ontology.OntologySpaceFactory#createSessionOntologySpace(org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see      * org.apache.stanbol.ontologymanager.ontonet.api.ontology.OntologySpaceFactory#createSessionOntologySpace      * (org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -423,6 +449,13 @@ argument_list|(
 name|scopeID
 argument_list|,
 name|storage
+argument_list|,
+name|mgrFactory
+operator|.
+name|createOntologyManager
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// s.setUp();
@@ -430,9 +463,10 @@ return|return
 name|s
 return|;
 block|}
+comment|/**      * Utility method for configuring ontology spaces after creating them.      *       * @param s      * @param scopeID      * @param rootSource      */
 specifier|private
 name|void
-name|setupSpace
+name|configureSpace
 parameter_list|(
 name|OntologySpace
 name|s
@@ -498,14 +532,14 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Ontology space "
+literal|"Ontology space "
 operator|+
 name|s
 operator|.
 name|getID
 argument_list|()
 operator|+
-literal|" found locked at creation time!"
+literal|" was found locked at creation time!"
 argument_list|,
 name|e
 argument_list|)

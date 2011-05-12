@@ -33,6 +33,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|HashSet
 import|;
 end_import
@@ -457,20 +467,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLOntologyLoaderListener
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -524,7 +520,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of an ontology space. While it still leaves it up to  * developers to decide what locking policies to adopt for subclasses (in the  *<code>setUp()</code> method), it provides default implementations of all  * other interface methods.<br>  *<br>  * NOTE: By default, an ontology space is NOT write-locked. Developers need to  * set the<code>locked</code> variable to true to make the space read-only.  *   *   * @author alessandro  *   */
+comment|/**  * Abstract implementation of an ontology space. While it still leaves it up to developers to decide what  * locking policies to adopt for subclasses (in the<code>setUp()</code> method), it provides default  * implementations of all other interface methods.<br>  *<br>  * NOTE: By default, an ontology space is NOT write-locked. Developers need to set the<code>locked</code>  * variable to true to make the space read-only.  *   *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -555,7 +551,7 @@ name|OntologySpaceListener
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** 	 * Indicates whether this ontology space is marked as read-only. Default 	 * value is false. 	 */
+comment|/**      * Indicates whether this ontology space is marked as read-only. Default value is false.      */
 specifier|protected
 name|boolean
 name|locked
@@ -574,7 +570,7 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * Each ontology space comes with its OWL ontology manager. By default, it 	 * is not available to the outside world, unless subclasses implement 	 * methods to return it. 	 */
+comment|/**      * Each ontology space comes with its OWL ontology manager. By default, it is not available to the outside      * world, unless subclasses implement methods to return it.      */
 specifier|protected
 name|OWLOntologyManager
 name|ontologyManager
@@ -589,7 +585,7 @@ name|parentID
 init|=
 literal|null
 decl_stmt|;
-comment|//	public static String SUFFIX = "";
+comment|// public static String SUFFIX = "";
 specifier|protected
 name|OWLOntology
 name|rootOntology
@@ -610,7 +606,6 @@ name|spaceID
 parameter_list|,
 name|SpaceType
 name|type
-comment|/*, IRI parentID*/
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
@@ -622,7 +617,6 @@ name|spaceID
 argument_list|,
 name|type
 argument_list|,
-comment|/*parentID,*/
 name|storage
 argument_list|,
 name|OWLManager
@@ -632,17 +626,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//	/**
-comment|//	 * TODO: manage IDs properly
-comment|//	 *
-comment|//	 * @param rootOntology
-comment|//	 */
-comment|//	public AbstractOntologySpaceImpl(IRI spaceID, SpaceType type, IRI parentID,
-comment|//			OntologyInputSource rootOntology) {
-comment|//		this(spaceID, type, parentID, OWLManager.createOWLOntologyManager(),
-comment|//				rootOntology);
-comment|//	}
-comment|/** 	 * Creates a new ontology space with the supplied ontology manager as the 	 * default manager for this space. 	 *  	 * @param spaceID 	 *            the IRI that will uniquely identify this space. 	 	 * @param parentID 	 *             IRI of the parent scope (TODO: get rid of it). 	 * @param ontologyManager 	 *            the default ontology manager for this space. 	 */
+comment|/**      * Creates a new ontology space with the supplied ontology manager as the default manager for this space.      *       * @param spaceID      *            the IRI that will uniquely identify this space.      * @param parentID      *            IRI of the parent scope (TODO: get rid of it).      * @param ontologyManager      *            the default ontology manager for this space.      */
 specifier|protected
 name|AbstractOntologySpaceImpl
 parameter_list|(
@@ -655,19 +639,18 @@ parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
 parameter_list|,
-comment|/*IRI parentID,*/
 name|OWLOntologyManager
 name|ontologyManager
 parameter_list|)
 block|{
-comment|//		this.parentID = parentID;
-comment|//		SUFFIX = type.getIRISuffix();
-comment|//		// FIXME: ensure that this is not null
-comment|//		OntologyScope parentScope = ONManager.get().getScopeRegistry()
-comment|//				.getScope(parentID);
+comment|// this.parentID = parentID;
+comment|// SUFFIX = type.getIRISuffix();
+comment|// // FIXME: ensure that this is not null
+comment|// OntologyScope parentScope = ONManager.get().getScopeRegistry()
+comment|// .getScope(parentID);
 comment|//
-comment|//		if (parentScope != null&& parentScope instanceof OntologySpaceListener)
-comment|//			this.addOntologySpaceListener((OntologySpaceListener) parentScope);
+comment|// if (parentScope != null&& parentScope instanceof OntologySpaceListener)
+comment|// this.addOntologySpaceListener((OntologySpaceListener) parentScope);
 name|this
 operator|.
 name|storage
@@ -702,87 +685,8 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 expr_stmt|;
-name|this
-operator|.
-name|ontologyManager
-operator|.
-name|addOntologyLoaderListener
-argument_list|(
-operator|new
-name|OWLOntologyLoaderListener
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|void
-name|finishedLoadingOntology
-parameter_list|(
-name|LoadingFinishedEvent
-name|arg0
-parameter_list|)
-block|{
-if|if
-condition|(
-name|arg0
-operator|.
-name|isSuccessful
-argument_list|()
-condition|)
-block|{
-name|fireOntologyAdded
-argument_list|(
-name|arg0
-operator|.
-name|getOntologyID
-argument_list|()
-operator|.
-name|getOntologyIRI
-argument_list|()
-argument_list|)
-expr_stmt|;
 block|}
-block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|startedLoadingOntology
-parameter_list|(
-name|LoadingStartedEvent
-name|arg0
-parameter_list|)
-block|{
-comment|// TODO Auto-generated method stub
-block|}
-block|}
-argument_list|)
-expr_stmt|;
-block|}
-comment|//	/**
-comment|//	 * Creates a new ontology space with the supplied ontology set as its top
-comment|//	 * ontology and the supplied ontology manager as the default manager for
-comment|//	 * this space.
-comment|//	 *
-comment|//	 * @param spaceID
-comment|//	 *            the IRI that will uniquely identify this space.
-comment|//	 * @param ontologyManager
-comment|//	 *            the default ontology manager for this space.
-comment|//	 * @param rootSource
-comment|//	 *            the root ontology for this space.
-comment|//	 */
-comment|//	public AbstractOntologySpaceImpl(IRI spaceID,SpaceType type, IRI parentID,
-comment|//			OWLOntologyManager ontologyManager, OntologyInputSource rootSource) {
-comment|//		this(spaceID, type,parentID, ontologyManager);
-comment|//		// Set the supplied ontology's parent as the root for this space.
-comment|//		try {
-comment|//			this.setTopOntology(rootSource, true);
-comment|//		} catch (UnmodifiableOntologySpaceException e) {
-comment|//			log.error("KReS :: Ontology space " + spaceID
-comment|//					+ " found locked at creation time!", e);
-comment|//		}
-comment|//	}
-comment|/** 	 * TODO: manage import statements 	 *  	 * TODO 2 : manage anonymous ontologies. 	 */
+comment|/**      * TODO: manage import statements      *       * TODO 2 : manage anonymous ontologies.      */
 annotation|@
 name|Override
 specifier|public
@@ -908,7 +812,7 @@ name|hasRootOntology
 argument_list|()
 condition|)
 block|{
-comment|// Remember that this method also fores the event
+comment|// Remember that this method also fires the event
 name|performAdd
 argument_list|(
 name|ontologySource
@@ -1180,118 +1084,44 @@ argument_list|,
 name|ontSrc
 argument_list|,
 name|ontologyManager
-comment|/* ,parentID */
 argument_list|)
 expr_stmt|;
-name|StringDocumentTarget
-name|tgt
-init|=
-operator|new
-name|StringDocumentTarget
-argument_list|()
-decl_stmt|;
-try|try
-block|{
-name|ontologyManager
-operator|.
-name|saveOntology
+comment|// StringDocumentTarget tgt = new StringDocumentTarget();
+comment|// try {
+comment|// ontologyManager.saveOntology(ontology, new RDFXMLOntologyFormat(), tgt);
+comment|// } catch (OWLOntologyStorageException e) {
+comment|// log.error("KReS : [FATAL] Failed to store ontology " + id + " in memory.", e);
+comment|// return;
+comment|// }
+name|reload
 argument_list|(
 name|ontology
 argument_list|,
-operator|new
-name|RDFXMLOntologyFormat
-argument_list|()
-argument_list|,
-name|tgt
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"KReS : [FATAL] Failed to store ontology "
-operator|+
-name|id
-operator|+
-literal|" in memory."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-return|return;
-block|}
-try|try
-block|{
 name|ontologyManager
-operator|.
-name|removeOntology
-argument_list|(
-name|ontology
-argument_list|)
-expr_stmt|;
-name|ontologyManager
-operator|.
-name|loadOntologyFromOntologyDocument
-argument_list|(
-operator|new
-name|StringDocumentSource
-argument_list|(
-name|tgt
-operator|.
-name|toString
-argument_list|()
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyAlreadyExistsException
-name|e
-parameter_list|)
-block|{
-comment|// Could happen if we supplied an ontology manager that already
-comment|// knows this ontology. Nothing to do then.
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"KReS : [NONFATAL] Tried to copy ontology "
-operator|+
-name|id
-operator|+
-literal|" to existing one."
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Unexpected exception caught while copying ontology "
-operator|+
-name|id
-operator|+
-literal|" across managers"
 argument_list|,
-name|e
+literal|true
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
-return|return;
-block|}
+comment|// try {
+comment|// ontologyManager.removeOntology(ontology);
+comment|//
+comment|// // FIXME : this is not memory-efficient.
+comment|// Set<OWLOntology> closure = ontology.getOWLOntologyManager().getImportsClosure(ontology);
+comment|// ontologyManager.createOntology(ontology.getOntologyID().getOntologyIRI(), closure);
+comment|// // FIXME : this on the other hand is neither time-efficient nor network-safe
+comment|// // ontologyManager
+comment|// // .loadOntologyFromOntologyDocument(new StringDocumentSource(
+comment|// // tgt.toString()));
+comment|// } catch (OWLOntologyAlreadyExistsException e) {
+comment|// // Could happen if we supplied an ontology manager that already
+comment|// // knows this ontology. Nothing to do then.
+comment|// log.warn("KReS : [NONFATAL] Tried to copy ontology " + id + " to existing one.");
+comment|// } catch (OWLOntologyCreationException e) {
+comment|// log.error("Unexpected exception caught while copying ontology " + id + " across managers", e);
+comment|// return;
+comment|// }
 try|try
 block|{
 comment|// Store the top ontology
@@ -1327,7 +1157,7 @@ argument_list|)
 expr_stmt|;
 else|else
 block|{
-comment|//storage = new ClerezzaOntologyStorage(tcManager, wtcProvider)
+comment|// storage = new ClerezzaOntologyStorage(tcManager, wtcProvider)
 name|storage
 operator|.
 name|store
@@ -1368,7 +1198,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * TODO 1 : optimize addition/removal<br> 	 * TODO 2 : set import statements 	 */
+comment|/**      * TODO 1 : optimize addition/removal<br>      * TODO 2 : set import statements      */
 annotation|@
 name|Override
 specifier|public
@@ -1566,6 +1396,260 @@ throw|;
 block|}
 block|}
 block|}
+comment|/**      * Utility method to copy an ontology (or ontology network) across ontology managers without having it go      * online to reload it.      *       * @param ontology      *            the ontology to copy from its own manager to the supplied one.      * @param mgr      *            the ontology manager where the ontology will be copied to. If null, the space's default      *            ontology manager will be used.      * @param withClosure      *            if true, the whole imports closure will be reloaded, otherwise only the root ontology will      *            be reloaded. However, import statements and other non-logical axioms will still be copied.      * @param merge      *            if true, all the axioms from the ontology closure will be merged in the new ontology maned      *            after<code>ontology</code>. This parameter has virtually no effect if      *<code>withClosure</code> is set to false.      */
+specifier|protected
+name|void
+name|reload
+parameter_list|(
+name|OWLOntology
+name|ontology
+parameter_list|,
+name|OWLOntologyManager
+name|mgr
+parameter_list|,
+name|boolean
+name|withClosure
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|)
+block|{
+if|if
+condition|(
+name|mgr
+operator|==
+literal|null
+condition|)
+name|mgr
+operator|=
+name|ontologyManager
+expr_stmt|;
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|closure
+init|=
+name|withClosure
+condition|?
+name|ontology
+operator|.
+name|getOWLOntologyManager
+argument_list|()
+operator|.
+name|getImportsClosure
+argument_list|(
+name|ontology
+argument_list|)
+else|:
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+name|ontology
+argument_list|)
+decl_stmt|;
+name|mgr
+operator|.
+name|removeOntology
+argument_list|(
+name|ontology
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|merge
+condition|)
+try|try
+block|{
+name|mgr
+operator|.
+name|createOntology
+argument_list|(
+name|ontology
+operator|.
+name|getOntologyID
+argument_list|()
+operator|.
+name|getOntologyIRI
+argument_list|()
+argument_list|,
+name|closure
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyCreationException
+name|e1
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unexpected exception caught while copying ontology "
+operator|+
+name|ontology
+operator|.
+name|getOntologyID
+argument_list|()
+operator|+
+literal|" across managers"
+argument_list|,
+name|e1
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+for|for
+control|(
+name|OWLOntology
+name|o
+range|:
+name|closure
+control|)
+block|{
+name|OWLOntologyID
+name|id
+init|=
+name|o
+operator|.
+name|getOntologyID
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|mgr
+operator|.
+name|contains
+argument_list|(
+name|id
+argument_list|)
+condition|)
+name|mgr
+operator|.
+name|removeOntology
+argument_list|(
+name|mgr
+operator|.
+name|getOntology
+argument_list|(
+name|id
+argument_list|)
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|mgr
+operator|.
+name|createOntology
+argument_list|(
+name|id
+operator|.
+name|getOntologyIRI
+argument_list|()
+argument_list|,
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+name|o
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyAlreadyExistsException
+name|e
+parameter_list|)
+block|{
+if|if
+condition|(
+name|o
+operator|.
+name|getOWLOntologyManager
+argument_list|()
+operator|!=
+name|mgr
+condition|)
+block|{
+name|mgr
+operator|.
+name|removeOntology
+argument_list|(
+name|o
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|mgr
+operator|.
+name|createOntology
+argument_list|(
+name|id
+operator|.
+name|getOntologyIRI
+argument_list|()
+argument_list|,
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+name|o
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyCreationException
+name|e1
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unexpected exception caught while copying ontology "
+operator|+
+name|ontology
+operator|.
+name|getOntologyID
+argument_list|()
+operator|+
+literal|" across managers"
+argument_list|,
+name|e1
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyCreationException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Failed to re-create ontology {} for ontology space {} . Continuing..."
+argument_list|,
+name|id
+argument_list|,
+name|getID
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -1622,7 +1706,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * TODO 1 : Attention: ontology is NOT added to ontology manager! 	 */
+comment|/**      * TODO 1 : Attention: the ontology from<code>ontologySource</code> is NOT added to the ontology manager!      */
 annotation|@
 name|Override
 specifier|public
@@ -1639,8 +1723,7 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologySpaceException
 block|{
-comment|// TODO : implement or avoid passing of OWLOntology objects across
-comment|// managers
+comment|// TODO : implement or avoid passing of OWLOntology objects across managers
 comment|// Clear the ontology manager
 for|for
 control|(
@@ -1713,14 +1796,13 @@ name|getRootOntology
 argument_list|()
 expr_stmt|;
 block|}
+comment|// Placeholder for the parent ontology (can be either the space root or the supplied ontology).
 name|OWLOntology
-comment|/* oTarget = null, */
 name|oParent
 init|=
 literal|null
 decl_stmt|;
-comment|// If set to create a parent ontology or this one is anonymous, create
-comment|// the parent
+comment|// If set to create a parent ontology or this one is anonymous, create the parent
 if|if
 condition|(
 name|createParent
@@ -1753,6 +1835,7 @@ name|OWLOntologyAlreadyExistsException
 name|e
 parameter_list|)
 block|{
+comment|// Should not happen since the manager was cleared, but anyway.
 name|oParent
 operator|=
 name|ontologyManager
@@ -1789,8 +1872,7 @@ block|}
 block|}
 else|else
 block|{
-comment|// If we don't have to create a parent, assign the original ontology
-comment|// to it.
+comment|// If we don't have to create a parent, set the original ontology to be the parent.
 name|oParent
 operator|=
 name|ontology
@@ -1822,7 +1904,6 @@ argument_list|,
 name|ontologySource
 argument_list|,
 name|ontologyManager
-comment|/* 																		 * ,parentID 																		 */
 argument_list|)
 expr_stmt|;
 comment|// Save and reload it to make sure the whole import closure is
@@ -1868,6 +1949,9 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// // FIXME why doesnt this work?
+comment|// // ontologyManager.removeOntology(oParent);
+comment|// reload(oParent, ontologyManager, true, false);
 block|}
 catch|catch
 parameter_list|(

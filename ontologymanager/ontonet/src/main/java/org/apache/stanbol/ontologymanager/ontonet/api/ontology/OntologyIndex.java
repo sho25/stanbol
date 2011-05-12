@@ -68,6 +68,13 @@ name|ScopeOntologyListener
 extends|,
 name|ScopeEventListener
 block|{
+name|Set
+argument_list|<
+name|IRI
+argument_list|>
+name|getIndexedOntologyIRIs
+parameter_list|()
+function_decl|;
 comment|/** 	 * Returns an ontology having the specified IRI as its identifier, or null 	 * if no such ontology is indexed.<br> 	 *<br> 	 * Which ontology is returned in case more ontologies with this IRI are 	 * registered in different scopes is at the discretion of implementors. 	 *  	 * @param ontologyIri 	 * @return 	 */
 name|OWLOntology
 name|getOntology

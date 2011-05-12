@@ -299,6 +299,26 @@ name|impl
 operator|.
 name|ontology
 operator|.
+name|OntologyManagerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|ontology
+operator|.
 name|OntologyScopeFactoryImpl
 import|;
 end_import
@@ -330,20 +350,6 @@ operator|.
 name|junit
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|apibinding
-operator|.
-name|OWLManager
 import|;
 end_import
 
@@ -405,7 +411,7 @@ name|create
 argument_list|(
 name|Constants
 operator|.
-name|base
+name|PEANUTS_MAIN_BASE
 argument_list|)
 decl_stmt|,
 name|baseIri2
@@ -416,7 +422,7 @@ name|create
 argument_list|(
 name|Constants
 operator|.
-name|base2
+name|PEANUTS_MINOR_BASE
 argument_list|)
 decl_stmt|,
 name|scopeIriBlank
@@ -446,7 +452,7 @@ argument_list|(
 literal|"http://kres.iks-project.eu/scope/CalvinAndHobbes"
 argument_list|)
 decl_stmt|;
-comment|/** 	 * An ontology scope that initially contains no ontologies, and is rebuilt 	 * from scratch before each test method. 	 */
+comment|/**      * An ontology scope that initially contains no ontologies, and is rebuilt from scratch before each test      * method.      */
 specifier|private
 specifier|static
 name|OntologyScope
@@ -454,15 +460,15 @@ name|blankScope
 decl_stmt|;
 specifier|private
 specifier|static
-name|ONManager
-name|onm
-decl_stmt|;
-specifier|private
-specifier|static
 name|OntologyScopeFactory
 name|factory
 init|=
 literal|null
+decl_stmt|;
+specifier|private
+specifier|static
+name|ONManager
+name|onm
 decl_stmt|;
 specifier|private
 specifier|static
@@ -475,33 +481,6 @@ name|src2
 init|=
 literal|null
 decl_stmt|;
-annotation|@
-name|Before
-specifier|public
-name|void
-name|cleaup
-parameter_list|()
-throws|throws
-name|DuplicateIDException
-block|{
-if|if
-condition|(
-name|factory
-operator|!=
-literal|null
-condition|)
-name|blankScope
-operator|=
-name|factory
-operator|.
-name|createOntologyScope
-argument_list|(
-name|scopeIriBlank
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
 annotation|@
 name|BeforeClass
 specifier|public
@@ -551,10 +530,15 @@ expr_stmt|;
 name|OWLOntologyManager
 name|mgr
 init|=
-name|OWLManager
+name|onm
 operator|.
-name|createOWLOntologyManager
+name|getOntologyManagerFactory
 argument_list|()
+operator|.
+name|createOntologyManager
+argument_list|(
+literal|true
+argument_list|)
 decl_stmt|;
 try|try
 block|{
@@ -601,12 +585,39 @@ literal|"Could not setup ontology with base IRI "
 operator|+
 name|Constants
 operator|.
-name|base
+name|PEANUTS_MAIN_BASE
 argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * Tests that a scope is generated with the expected identifiers for both 	 * itself and its core and custom spaces. 	 */
+annotation|@
+name|Before
+specifier|public
+name|void
+name|cleaup
+parameter_list|()
+throws|throws
+name|DuplicateIDException
+block|{
+if|if
+condition|(
+name|factory
+operator|!=
+literal|null
+condition|)
+name|blankScope
+operator|=
+name|factory
+operator|.
+name|createOntologyScope
+argument_list|(
+name|scopeIriBlank
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Tests that a scope is generated with the expected identifiers for both itself and its core and custom      * spaces.      */
 annotation|@
 name|Test
 specifier|public
@@ -725,7 +736,7 @@ name|condition
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Tests that creating an ontology scope with null identifier fails to 	 * generate the scope at all. 	 */
+comment|/**      * Tests that creating an ontology scope with null identifier fails to generate the scope at all.      */
 annotation|@
 name|Test
 specifier|public
@@ -780,7 +791,7 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Tests that an ontology scope is correctly generated with both a core 	 * space and a custom space. The scope is set up but not registered. 	 */
+comment|/**      * Tests that an ontology scope is correctly generated with both a core space and a custom space. The      * scope is set up but not registered.      */
 annotation|@
 name|Test
 specifier|public
@@ -837,7 +848,7 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Tests that an ontology scope is correctly generated even when missing a 	 * custom space. The scope is set up but not registered. 	 */
+comment|/**      * Tests that an ontology scope is correctly generated even when missing a custom space. The scope is set      * up but not registered.      */
 annotation|@
 name|Test
 specifier|public

@@ -95,6 +95,10 @@ name|OWLOntology
 import|;
 end_import
 
+begin_comment
+comment|/**  * A hack that stores ontologies in volatile memory (e.g. for unit tests) but prevents the incessant logging  * of related error messages.  *   * @author alessandro  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -240,9 +244,15 @@ name|String
 name|arg1
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
-literal|null
+name|super
+operator|.
+name|sparqlConstruct
+argument_list|(
+name|arg0
+argument_list|,
+name|arg1
+argument_list|)
 return|;
 block|}
 specifier|public

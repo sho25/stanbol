@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Called upon OSGi bundle startup and shutdown, it constructs and releases the  * resources required by the KReS Ontology Network Manager during its activity.  *   * @author alessandro  *   */
+comment|/**  * Called upon OSGi bundle startup and shutdown, it constructs and releases the resources required by the KReS  * Ontology Network Manager during its activity.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -128,8 +128,8 @@ argument_list|(
 literal|"KReS :: Instantiating ONM static context..."
 argument_list|)
 expr_stmt|;
-comment|//		if (ONManager.get() != null) {
-comment|//			log.debug("KReS :: ONM static context instantiated.");
+comment|// if (ONManager.get() != null) {
+comment|// log.debug("KReS :: ONM static context instantiated.");
 name|log
 operator|.
 name|info
@@ -137,7 +137,7 @@ argument_list|(
 literal|"KReS :: Ontology Network Manager set up."
 argument_list|)
 expr_stmt|;
-comment|//		}
+comment|// }
 block|}
 annotation|@
 name|Override

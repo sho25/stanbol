@@ -22,7 +22,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|base
+name|PEANUTS_MAIN_BASE
 init|=
 literal|"http://stanbol.apache.org/ontologies/peanuts/maincharacters.owl"
 decl_stmt|;
@@ -30,7 +30,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|base2
+name|PEANUTS_MINOR_BASE
 init|=
 literal|"http://stanbol.apache.org/ontologies/peanuts/minorcharacters.owl"
 decl_stmt|;

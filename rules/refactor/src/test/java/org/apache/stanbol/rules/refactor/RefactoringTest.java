@@ -21,7 +21,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|fail
+name|*
 import|;
 end_import
 

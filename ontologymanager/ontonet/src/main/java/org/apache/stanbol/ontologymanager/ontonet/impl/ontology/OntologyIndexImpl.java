@@ -223,7 +223,11 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/* 	 * We only use IRIs, so the actual scopes can get garbage-collected once 	 * they are deregistered. 	 */
+specifier|private
+name|ONManager
+name|onm
+decl_stmt|;
+comment|/*      * We only use IRIs, so the actual scopes can get garbage-collected once they are deregistered.      */
 specifier|private
 name|Map
 argument_list|<
@@ -239,10 +243,6 @@ decl_stmt|;
 specifier|private
 name|ScopeRegistry
 name|scopeRegistry
-decl_stmt|;
-specifier|private
-name|ONManager
-name|onm
 decl_stmt|;
 specifier|public
 name|OntologyIndexImpl
@@ -307,7 +307,7 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * Given a scope, puts its ontologies in its scopeMap 	 *  	 * @param scope 	 */
+comment|/**      * Given a scope, puts its ontologies in its scopeMap      *       * @param scope      */
 specifier|private
 name|void
 name|addScopeOntologies
@@ -387,6 +387,23 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|IRI
+argument_list|>
+name|getIndexedOntologyIRIs
+parameter_list|()
+block|{
+return|return
+name|ontScopeMap
+operator|.
+name|keySet
+argument_list|()
+return|;
+block|}
 specifier|private
 name|Set
 argument_list|<
@@ -433,7 +450,7 @@ parameter_list|(
 name|Exception
 name|ex
 parameter_list|)
-block|{ 		}
+block|{}
 try|try
 block|{
 name|ontologies
@@ -455,7 +472,7 @@ parameter_list|(
 name|Exception
 name|ex
 parameter_list|)
-block|{ 		}
+block|{}
 comment|// for (OWLOntology o : ontologies) {
 comment|// System.out.println(o.getOntologyID());
 comment|// for (OWLImportsDeclaration im: o.getImportsDeclarations())
@@ -552,7 +569,7 @@ parameter_list|(
 name|Exception
 name|ex
 parameter_list|)
-block|{ 		}
+block|{}
 try|try
 block|{
 name|ont
@@ -582,7 +599,7 @@ parameter_list|(
 name|Exception
 name|ex
 parameter_list|)
-block|{ 		}
+block|{}
 return|return
 name|ont
 return|;
@@ -644,7 +661,7 @@ parameter_list|(
 name|Exception
 name|ex
 parameter_list|)
-block|{ 		}
+block|{}
 try|try
 block|{
 name|ont
@@ -674,7 +691,7 @@ parameter_list|(
 name|Exception
 name|ex
 parameter_list|)
-block|{ 		}
+block|{}
 return|return
 name|ont
 return|;
@@ -904,7 +921,6 @@ argument_list|)
 expr_stmt|;
 else|else
 block|{
-comment|//				System.out.println("...but it was not indexed!");
 name|log
 operator|.
 name|warn
@@ -939,7 +955,7 @@ argument_list|(
 name|scopeId
 argument_list|)
 condition|)
-comment|/** 				 * FIXME 				 * This message is obscure 				 */
+comment|/**              * FIXME This message is obscure              */
 name|log
 operator|.
 name|warn
@@ -1310,26 +1326,26 @@ continue|continue;
 block|}
 block|}
 comment|// Stop deactivating other scopes
-comment|//		for (OntologyScope scopp : scopez) {
-comment|//			IRI scopeId = scopp.getID();
-comment|//			try {
-comment|//				if (scopeRegistry.isScopeActive(scopeId)) {
-comment|//					scopeRegistry.setScopeActive(scopeId, false);
-comment|//					System.out.println("KReS :: Ontology scope " + scopeId
-comment|//							+ " " + " deactivated.");
-comment|//				}
-comment|//			} catch (NoSuchScopeException ex) {
-comment|//				// Shouldn't happen because we already have the scope handle,
-comment|//				// however exceptions could be thrown erroneously...
-comment|//				System.err
-comment|//						.println("KReS :: Tried to deactivate unavailable scope "
-comment|//								+ scopeId + ".");
-comment|//			} catch (Exception ex) {
-comment|//				System.err.println("Exception caught while deactivating scope "
-comment|//						+ scope.getID() + " " + ex.getClass());
-comment|//				continue;
-comment|//			}
-comment|//		}
+comment|// for (OntologyScope scopp : scopez) {
+comment|// IRI scopeId = scopp.getID();
+comment|// try {
+comment|// if (scopeRegistry.isScopeActive(scopeId)) {
+comment|// scopeRegistry.setScopeActive(scopeId, false);
+comment|// System.out.println("KReS :: Ontology scope " + scopeId
+comment|// + " " + " deactivated.");
+comment|// }
+comment|// } catch (NoSuchScopeException ex) {
+comment|// // Shouldn't happen because we already have the scope handle,
+comment|// // however exceptions could be thrown erroneously...
+comment|// System.err
+comment|// .println("KReS :: Tried to deactivate unavailable scope "
+comment|// + scopeId + ".");
+comment|// } catch (Exception ex) {
+comment|// System.err.println("Exception caught while deactivating scope "
+comment|// + scope.getID() + " " + ex.getClass());
+comment|// continue;
+comment|// }
+comment|// }
 name|addScopeOntologies
 argument_list|(
 name|scope

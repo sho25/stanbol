@@ -358,6 +358,8 @@ argument_list|)
 decl_stmt|;
 static|static
 block|{  	}
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 name|String

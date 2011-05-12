@@ -11,7 +11,9 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|impl
+name|api
+operator|.
+name|registry
 operator|.
 name|io
 package|;

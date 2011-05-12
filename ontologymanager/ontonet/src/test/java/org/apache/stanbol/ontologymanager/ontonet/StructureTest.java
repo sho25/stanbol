@@ -117,7 +117,7 @@ name|create
 argument_list|(
 name|Constants
 operator|.
-name|base
+name|PEANUTS_MAIN_BASE
 argument_list|)
 decl_stmt|;
 specifier|private

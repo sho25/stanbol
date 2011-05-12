@@ -171,6 +171,10 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_comment
+comment|/**  * A registry loader is a toolkit for loading all ontologies indexed by an ontology registry, or those  * referenced by one of the libraries within a registry.  *   * @author alessandro  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
@@ -228,14 +232,13 @@ name|IRI
 name|libraryID
 parameter_list|)
 function_decl|;
-comment|//	public boolean isPrintingLoadedOntologies();
 name|void
 name|loadLocations
 parameter_list|()
 throws|throws
 name|RegistryContentException
 function_decl|;
-comment|/** 	 * The ontology at<code>physicalIRI</code> may in turn include more than 	 * one registry. 	 *  	 * @param physicalIRI 	 * @return 	 */
+comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one registry.      *       * @param physicalIRI      * @return      */
 name|Set
 argument_list|<
 name|Registry
@@ -246,7 +249,6 @@ name|IRI
 name|physicalIRI
 parameter_list|)
 function_decl|;
-comment|//	public void setPrintLoadedOntologies(boolean doPrint);
 block|}
 end_interface
 

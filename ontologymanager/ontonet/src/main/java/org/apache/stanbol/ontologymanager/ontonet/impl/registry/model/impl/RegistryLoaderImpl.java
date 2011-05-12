@@ -357,6 +357,26 @@ name|ontonet
 operator|.
 name|impl
 operator|.
+name|ontology
+operator|.
+name|OntologyManagerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
 name|registry
 operator|.
 name|cache
@@ -734,8 +754,11 @@ name|OWLClass
 name|cRegistryLibrary
 decl_stmt|;
 specifier|private
-name|ONManager
-name|onm
+specifier|final
+name|OWLObjectProperty
+name|isPartOf
+decl_stmt|,
+name|isOntologyOf
 decl_stmt|;
 specifier|private
 name|Logger
@@ -751,13 +774,6 @@ argument_list|)
 decl_stmt|;
 specifier|private
 specifier|final
-name|OWLObjectProperty
-name|isPartOf
-decl_stmt|,
-name|isOntologyOf
-decl_stmt|;
-specifier|private
-specifier|final
 name|IRI
 name|mergedOntologyIRI
 init|=
@@ -769,6 +785,10 @@ name|CODOVocabulary
 operator|.
 name|REPOSITORY_MERGED_ONTOLOGY
 argument_list|)
+decl_stmt|;
+specifier|private
+name|ONManager
+name|onm
 decl_stmt|;
 specifier|private
 name|Map
@@ -939,7 +959,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: [NONFATAL] Could not gather ontologies for registry "
+literal|"[NONFATAL] Could not gather ontologies for registry "
 operator|+
 name|registryItem
 operator|.
@@ -969,7 +989,7 @@ name|add
 argument_list|(
 name|manager
 operator|.
-name|loadOntologyFromOntologyDocument
+name|loadOntology
 argument_list|(
 name|IRI
 operator|.
@@ -1030,7 +1050,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: [NONFATAL] Malformed URI for ontology "
+literal|"[NONFATAL] Malformed URI for ontology "
 operator|+
 name|registryItem
 operator|.
@@ -1640,8 +1660,46 @@ name|URI
 name|location
 parameter_list|)
 block|{
+name|OntologyManagerFactory
+name|factory
+init|=
+name|onm
+operator|.
+name|getOntologyManagerFactory
+argument_list|()
+decl_stmt|;
+name|IRI
+name|iri
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|location
+argument_list|)
+decl_stmt|;
 try|try
 block|{
+if|if
+condition|(
+name|factory
+operator|!=
+literal|null
+condition|)
+return|return
+name|factory
+operator|.
+name|createOntologyManager
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|loadOntologyFromOntologyDocument
+argument_list|(
+name|iri
+argument_list|)
+return|;
+else|else
 return|return
 name|OWLManager
 operator|.
@@ -1650,12 +1708,7 @@ argument_list|()
 operator|.
 name|loadOntologyFromOntologyDocument
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|location
-argument_list|)
+name|iri
 argument_list|)
 return|;
 block|}
@@ -1981,7 +2034,7 @@ operator|new
 name|String
 index|[]
 block|{}
-comment|/* 										 * URLListEditor 										 * .parsePreferenceStoreValue 										 * (storedStringValue) 										 */
+comment|/*                                         * URLListEditor .parsePreferenceStoreValue (storedStringValue)                                         */
 decl_stmt|;
 for|for
 control|(
@@ -2012,14 +2065,14 @@ name|String
 name|registryName
 init|=
 literal|""
-comment|/* 										 * URLListEditor 										 * .parseNameValueString(regs[i])[0] 										 */
+comment|/*                                          * URLListEditor .parseNameValueString(regs[i])[0]                                          */
 decl_stmt|;
 comment|// TODO Find a way to obtain registry locations
 name|String
 name|registryLocation
 init|=
 literal|""
-comment|/* 											 * URLListEditor 											 * .parseNameValueString(regs[i])[1] 											 */
+comment|/*                                              * URLListEditor .parseNameValueString(regs[i])[1]                                              */
 decl_stmt|;
 name|registry1
 operator|=
@@ -2144,7 +2197,7 @@ argument_list|()
 operator|!=
 literal|null
 condition|)
-block|{  		}
+block|{          }
 elseif|else
 if|if
 condition|(
@@ -2153,7 +2206,7 @@ operator|.
 name|isInputStreamAvailable
 argument_list|()
 condition|)
-block|{  		}
+block|{          }
 elseif|else
 if|if
 condition|(
@@ -2162,7 +2215,7 @@ operator|.
 name|isReaderAvailable
 argument_list|()
 condition|)
-block|{  		}
+block|{          }
 return|return
 name|registries
 return|;
@@ -2818,7 +2871,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * The ontology at<code>physicalIRI</code> may in turn include more than 	 * one registry. 	 *  	 * @param physicalIRI 	 * @return 	 */
+comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one registry.      *       * @param physicalIRI      * @return      */
 specifier|public
 name|Set
 argument_list|<
@@ -3055,12 +3108,12 @@ argument_list|)
 expr_stmt|;
 block|}
 finally|finally
-block|{ 		}
+block|{}
 return|return
 name|results
 return|;
 block|}
-comment|/** 	 * Requires that Registry objects are created earlier. Problem is, we might 	 * not know their names a priori. 	 *  	 * @param registry 	 * @return 	 * @throws RegistryContentException 	 */
+comment|/**      * Requires that Registry objects are created earlier. Problem is, we might not know their names a priori.      *       * @param registry      * @return      * @throws RegistryContentException      */
 specifier|private
 name|Registry
 name|setupRegistry
