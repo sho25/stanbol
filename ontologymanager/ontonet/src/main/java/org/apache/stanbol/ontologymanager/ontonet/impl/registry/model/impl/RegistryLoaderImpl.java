@@ -989,7 +989,7 @@ name|add
 argument_list|(
 name|manager
 operator|.
-name|loadOntology
+name|loadOntologyFromOntologyDocument
 argument_list|(
 name|IRI
 operator|.

@@ -59,16 +59,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URISyntaxException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Dictionary
@@ -1604,7 +1594,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|URISyntaxException
+name|Exception
 name|e3
 parameter_list|)
 block|{
@@ -1612,9 +1602,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Could not add ontology resource."
-argument_list|,
-name|e3
+literal|"Could not add ontology resource /ontologies."
 argument_list|)
 expr_stmt|;
 block|}
