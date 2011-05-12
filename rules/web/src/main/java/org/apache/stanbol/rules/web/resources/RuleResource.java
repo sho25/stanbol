@@ -699,7 +699,7 @@ literal|"/rule"
 argument_list|)
 specifier|public
 class|class
-name|RestRule
+name|RuleResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -742,7 +742,7 @@ name|desc
 decl_stmt|;
 comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
 specifier|public
-name|RestRule
+name|RuleResource
 parameter_list|(
 annotation|@
 name|Context

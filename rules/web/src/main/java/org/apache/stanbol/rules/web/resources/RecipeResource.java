@@ -655,7 +655,7 @@ comment|// /{uri:.+}")
 comment|// @ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
 specifier|public
 class|class
-name|RestRecipe
+name|RecipeResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -685,7 +685,7 @@ name|storage
 decl_stmt|;
 comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
 specifier|public
-name|RestRecipe
+name|RecipeResource
 parameter_list|(
 annotation|@
 name|Context
@@ -734,7 +734,7 @@ expr_stmt|;
 comment|//      this.storage = (OntologyStorage) servletContext
 comment|//      .getAttribute(OntologyStorage.class.getName());
 comment|// Contingency code for missing components follows.
-comment|/*  * FIXME! The following code is required only for the tests. This should  * be removed and the test should work without this code.  */
+comment|/* 			 * FIXME! The following code is required only for the tests. This should 			 * be removed and the test should work without this code. 		 */
 if|if
 condition|(
 name|onm
@@ -746,7 +746,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"No KReSONManager in servlet context. Instantiating manually..."
+literal|"No ONManager in servlet context. Instantiating manually..."
 argument_list|)
 expr_stmt|;
 name|onm
@@ -818,18 +818,9 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"No KReSRuleStore with stored rules and recipes found in servlet context. Instantiating manually with default values..."
+literal|"No RuleStore with stored rules and recipes found in servlet context. Instantiating manually with default values..."
 argument_list|)
 expr_stmt|;
-comment|//            String iri = "http://www.ontologydesignpatterns.org/ont/iks/kres/rmi_config.owl";
-comment|//            OWLOntology o;
-comment|//            try {
-comment|//                o = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(IRI.create(iri));
-comment|//                this.kresRuleStore = new RuleStoreImpl(onm, new Hashtable<String,Object>(), "");
-comment|//                log.debug("PATH TO OWL FILE LOADED: " + kresRuleStore.getFilePath());
-comment|//            } catch (OWLOntologyCreationException e) {
-comment|//
-comment|//            }
 name|this
 operator|.
 name|kresRuleStore
