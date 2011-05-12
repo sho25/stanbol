@@ -371,6 +371,10 @@ name|TemplateLoader
 import|;
 end_import
 
+begin_comment
+comment|/**  * Implementation of WebFragment for the Stanbol Rules end-point.  *   * @author andrea.nuzzolese  *  */
+end_comment
+
 begin_class
 annotation|@
 name|Component

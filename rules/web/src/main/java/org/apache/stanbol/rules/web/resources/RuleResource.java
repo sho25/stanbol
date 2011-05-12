@@ -688,7 +688,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  * @author elvio  * @author andrea.nuzzolese  *   */
+comment|/**  *  * @author elvio, andrea.nuzzolese  *   */
 end_comment
 
 begin_class
