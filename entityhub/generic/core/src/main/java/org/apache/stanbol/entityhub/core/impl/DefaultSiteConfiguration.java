@@ -233,6 +233,11 @@ implements|implements
 name|SiteConfiguration
 block|{
 comment|/**      * The logger      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 specifier|static
