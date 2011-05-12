@@ -2164,6 +2164,17 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 block|{
+if|if
+condition|(
+name|representation
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 name|log
 operator|.
 name|info
@@ -2176,18 +2187,6 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//        log.info("> entityhub size: "+graph.size());
-if|if
-condition|(
-name|representation
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 if|if
 condition|(
 name|isRepresentation
@@ -2199,7 +2198,6 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//            log.info("> remove previous version");
 name|remove
 argument_list|(
 name|representation
@@ -2208,7 +2206,6 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//            log.info("> entityhub size: "+graph.size());
 block|}
 elseif|else
 if|if
