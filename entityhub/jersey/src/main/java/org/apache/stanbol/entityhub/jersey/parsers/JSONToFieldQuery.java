@@ -474,7 +474,7 @@ if|if
 condition|(
 name|query
 operator|.
-name|isConstraint
+name|isConstrained
 argument_list|(
 name|field
 argument_list|)

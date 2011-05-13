@@ -145,7 +145,7 @@ parameter_list|)
 function_decl|;
 comment|/**      * Checks if there is a constraint for the given field      * @param field the field      * @return the state      */
 name|boolean
-name|isConstraint
+name|isConstrained
 parameter_list|(
 name|String
 name|field

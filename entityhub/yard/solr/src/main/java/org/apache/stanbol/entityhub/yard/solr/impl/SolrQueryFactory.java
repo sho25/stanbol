@@ -1175,7 +1175,7 @@ if|if
 condition|(
 name|indexConstraint
 operator|.
-name|isInvalied
+name|isInvalid
 argument_list|()
 condition|)
 block|{
@@ -1477,7 +1477,7 @@ break|break;
 default|default:
 name|indexConstraint
 operator|.
-name|setInvalied
+name|setInvalid
 argument_list|(
 name|String
 operator|.
@@ -1597,7 +1597,7 @@ condition|)
 block|{
 name|indexConstraint
 operator|.
-name|setInvalied
+name|setInvalid
 argument_list|(
 name|String
 operator|.
@@ -1633,7 +1633,7 @@ condition|)
 block|{
 name|indexConstraint
 operator|.
-name|setInvalied
+name|setInvalid
 argument_list|(
 literal|"A Range Constraint MUST define at least a lower or an upper bound!"
 argument_list|)
@@ -1838,7 +1838,7 @@ break|break;
 default|default:
 name|indexConstraint
 operator|.
-name|setInvalied
+name|setInvalid
 argument_list|(
 name|String
 operator|.
@@ -1879,7 +1879,7 @@ condition|)
 block|{
 name|indexConstraint
 operator|.
-name|setInvalied
+name|setInvalid
 argument_list|(
 name|String
 operator|.
@@ -2036,7 +2036,7 @@ parameter_list|)
 block|{
 name|indexConstraint
 operator|.
-name|setInvalied
+name|setInvalid
 argument_list|(
 name|e
 operator|.
@@ -2528,7 +2528,7 @@ name|List
 argument_list|<
 name|String
 argument_list|>
-name|invaliedMessages
+name|invalidMessages
 init|=
 operator|new
 name|ArrayList
@@ -2582,10 +2582,10 @@ name|field
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Set to<code>true</code> to indicate, that this IndexConstraint can not be used. e.g. if the          * conversion of a {@link Constraint } to an {@link IndexConstraint} was unsuccessful!          *           * @param state          *            the state          */
+comment|/**          * Set an explanatory error message to tell that this IndexConstraint cannot be used. e.g. if the          * conversion of a {@link Constraint} to an {@link IndexConstraint} was unsuccessful.          *           * @param message          *            an message to explain why the constraint is not valid          */
 specifier|public
 name|void
-name|setInvalied
+name|setInvalid
 parameter_list|(
 name|String
 name|message
@@ -2593,7 +2593,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|invaliedMessages
+name|invalidMessages
 operator|.
 name|add
 argument_list|(
@@ -2604,18 +2604,18 @@ block|}
 comment|/**          * Returns<code>true</code> if this index constraint is invalid and can not be used for the          * IndexQuery. If the state is<code>true</code> it indicates, that the conversion to a          * {@link Constraint } to an {@link IndexConstraint} was not successful!          *           * @return the state          */
 specifier|public
 name|boolean
-name|isInvalied
+name|isInvalid
 parameter_list|()
 block|{
 return|return
 operator|!
-name|invaliedMessages
+name|invalidMessages
 operator|.
 name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**          * Getter for the Messages why this index constraint is not valid          *           * @return the messages. An empty List if {@link #isInvalied()} returns<code>false</code>          */
+comment|/**          * Getter for the Messages why this index constraint is not valid          *           * @return the messages. An empty List if {@link #isInvalid()} returns<code>false</code>          */
 specifier|public
 name|List
 argument_list|<
@@ -2625,7 +2625,7 @@ name|getInvalidMessages
 parameter_list|()
 block|{
 return|return
-name|invaliedMessages
+name|invalidMessages
 return|;
 block|}
 comment|/**          * Sets an IndexConstraintType to a specific value          *           * @param constraintType          *            the type of the constraint          * @param value          *            the value.<code>null</code> is permitted, but usually it is not needed to add          *<code>null</code> constraints, because they are automatically added if needed (e.g. a          *            range constraint with an open lower bound)          * @throws IllegalArgumentException          *             if<code>null</code> is parsed as constraint type          */
@@ -2809,7 +2809,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|isInvalied
+name|isInvalid
 argument_list|()
 condition|)
 block|{

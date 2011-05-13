@@ -472,7 +472,7 @@ comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.Fie
 specifier|public
 specifier|final
 name|boolean
-name|isConstraint
+name|isConstrained
 parameter_list|(
 name|String
 name|field
