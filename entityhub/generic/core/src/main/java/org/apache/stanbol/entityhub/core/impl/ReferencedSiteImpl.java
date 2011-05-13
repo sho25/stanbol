@@ -1619,7 +1619,7 @@ name|entitySearcher
 decl_stmt|;
 specifier|private
 name|ComponentInstance
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 decl_stmt|;
 specifier|private
 name|ServiceTracker
@@ -4258,7 +4258,7 @@ comment|//NOTE: here the filter MUST include also the objectClass!
 block|}
 block|}
 block|}
-comment|/**      * Creates the entity searcher component used by this {@link ReferencedSite}      * (and configured via the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property).<p>      * If the {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} is set to the same vale      * and the {@link #accessUri} also equals the {@link #queryUri}, than the      * component created for the entity searcher is also used as dereferencer.      * @param factory The component factory used to create the      * {@link #entitySearcherComponentInstace}      */
+comment|/**      * Creates the entity searcher component used by this {@link ReferencedSite}      * (and configured via the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property).<p>      * If the {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} is set to the same vale      * and the {@link #accessUri} also equals the {@link #queryUri}, than the      * component created for the entity searcher is also used as dereferencer.      * @param factory The component factory used to create the      * {@link #entitySearcherComponentInstance}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -4283,14 +4283,14 @@ init|)
 block|{
 if|if
 condition|(
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 operator|==
 literal|null
 condition|)
 block|{
 name|this
 operator|.
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 operator|=
 name|factory
 operator|.
@@ -4314,7 +4314,7 @@ operator|=
 operator|(
 name|EntitySearcher
 operator|)
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 operator|.
 name|getInstance
 argument_list|()
@@ -4661,21 +4661,21 @@ if|if
 condition|(
 name|this
 operator|.
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 operator|!=
 literal|null
 condition|)
 block|{
 name|this
 operator|.
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 operator|.
 name|dispose
 argument_list|()
 expr_stmt|;
 name|this
 operator|.
-name|entitySearcherComponentInstace
+name|entitySearcherComponentInstance
 operator|=
 literal|null
 expr_stmt|;
