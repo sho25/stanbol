@@ -256,9 +256,25 @@ block|{
 comment|// get the working directory
 comment|// use property substitution to test this feature!
 name|String
+name|prefix
+init|=
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"basedir"
+argument_list|)
+operator|==
+literal|null
+condition|?
+literal|"."
+else|:
+literal|"${basedir}"
+decl_stmt|;
+name|String
 name|solrServerDir
 init|=
-literal|"${basedir}"
+name|prefix
 operator|+
 name|TEST_INDEX_REL_PATH
 decl_stmt|;
