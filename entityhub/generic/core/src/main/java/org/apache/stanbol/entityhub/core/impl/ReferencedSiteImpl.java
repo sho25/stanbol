@@ -3840,7 +3840,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"> Initialise configured FieldMappungs"
+literal|"> Initialise configured field mappings"
 argument_list|)
 expr_stmt|;
 for|for
