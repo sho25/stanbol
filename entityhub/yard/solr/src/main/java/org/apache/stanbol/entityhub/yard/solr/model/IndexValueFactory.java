@@ -308,7 +308,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class provides methods to convert java objects to {@link IndexValue} and  * vice versa.  *<p>  * Implementation Note: This class needs to be thread save.  *  * @author Rupert Westenthaler  */
+comment|/**  * This class provides methods to convert java objects to {@link IndexValue} and vice versa.  *<p>  * Implementation Note: This class needs to be thread save.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -351,7 +351,7 @@ argument_list|()
 decl_stmt|;
 static|static
 block|{
-comment|//register the default converters
+comment|// register the default converters
 name|instance
 operator|.
 name|registerConverter
@@ -456,7 +456,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Get a<code>IndexValueFactory</code>.      *      * @return the<code>IndexValueFactory</code> instance      */
+comment|/**      * Get a<code>IndexValueFactory</code>.      *       * @return the<code>IndexValueFactory</code> instance      */
 specifier|public
 specifier|static
 name|IndexValueFactory
@@ -467,10 +467,10 @@ return|return
 name|instance
 return|;
 block|}
-comment|//TODO: add support for IndexTypeConverter
-comment|//    private Map<IndexType,TypeConverter<?>> indexTypeConverters =
-comment|//        new HashMap<IndexType, TypeConverter<?>>();
-comment|/**      * Holds the java class to {@link TypeConverter} mapping for all converters      * registered for a Java Class.<p>      * NOTE: this implementation distinguishes between classed and interfaces,      * because for Classes a simple get lookup in the Map can be used while for      * Interfaces we need to Iterate over the entries of the Map and check with      * {@link Class#isAssignableFrom(Class)}.      */
+comment|// TODO: add support for IndexTypeConverter
+comment|// private Map<IndexType,TypeConverter<?>> indexTypeConverters =
+comment|// new HashMap<IndexType, TypeConverter<?>>();
+comment|/**      * Holds the java class to {@link TypeConverter} mapping for all converters registered for a Java Class.      *<p>      * NOTE: this implementation distinguishes between classed and interfaces, because for Classes a simple      * get lookup in the Map can be used while for Interfaces we need to Iterate over the entries of the Map      * and check with {@link Class#isAssignableFrom(Class)}.      */
 specifier|private
 name|Map
 argument_list|<
@@ -506,7 +506,7 @@ argument_list|>
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * Holds the java interface to {@link TypeConverter} mappings for all      * converters registered for a Java Interface<p>      * NOTE: this implementation distinguishes between classed and interfaces,      * because for Classes a simple get lookup in the Map can be used while for      * Interfaces we need to Iterate over the entries of the Map and check with      * {@link Class#isAssignableFrom(Class)}.      */
+comment|/**      * Holds the java interface to {@link TypeConverter} mappings for all converters registered for a Java      * Interface      *<p>      * NOTE: this implementation distinguishes between classed and interfaces, because for Classes a simple      * get lookup in the Map can be used while for Interfaces we need to Iterate over the entries of the Map      * and check with {@link Class#isAssignableFrom(Class)}.      */
 specifier|private
 name|Map
 argument_list|<
@@ -537,7 +537,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Registers a converter to this factory. Note that only one converter per      * java type can be registered      * @see TypeConverter#getJavaType()      * @param converter the converter to be registered      */
+comment|/**      * Registers a converter to this factory. Note that only one converter per java type can be registered      *       * @see TypeConverter#getJavaType()      * @param converter      *            the converter to be registered      */
 specifier|public
 name|void
 name|registerConverter
@@ -577,8 +577,8 @@ name|isInterface
 argument_list|()
 condition|)
 block|{
-comment|//NOTE: To ensure thread save iterations over Entries of this Map
-comment|//create new map instance, add to the new instance and replace reference
+comment|// NOTE: To ensure thread save iterations over Entries of this Map
+comment|// create new map instance, add to the new instance and replace reference
 comment|// ... i know this is slow, but such calls are very uncommon
 name|Map
 argument_list|<
@@ -622,7 +622,7 @@ argument_list|,
 name|converter
 argument_list|)
 expr_stmt|;
-comment|//TODO: add support for IndexTypeConverter
+comment|// TODO: add support for IndexTypeConverter
 name|this
 operator|.
 name|javaInterfaceConverters
@@ -632,7 +632,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//there are no Iterations over this Map!
+comment|// there are no Iterations over this Map!
 name|javaClassConverters
 operator|.
 name|put
@@ -644,7 +644,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Removes the converter for the parsed java type      * @param type the java type      * @return the removed converter or<code>null</code> if none was registered      * for the parsed type.      */
+comment|/**      * Removes the converter for the parsed java type      *       * @param type      *            the java type      * @return the removed converter or<code>null</code> if none was registered for the parsed type.      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -702,7 +702,7 @@ name|type
 argument_list|)
 condition|)
 block|{
-comment|//create new map instance, remove to the converter and replace reference
+comment|// create new map instance, remove to the converter and replace reference
 comment|// ... i know this is slow, but such calls are very uncommon
 name|Map
 argument_list|<
@@ -789,7 +789,7 @@ return|return
 name|converter
 return|;
 block|}
-comment|/**      * Creates the value as used to index the parsed object      *      * @param value the value to be indexed      * @return the index representation of the parsed value      * @throws NoConverterException thrown if<code>value</code> is of an invalid type      * @throws IllegalArgumentException if the parsed value is null      */
+comment|/**      * Creates the value as used to index the parsed object      *       * @param value      *            the value to be indexed      * @return the index representation of the parsed value      * @throws NoConverterException      *             thrown if<code>value</code> is of an invalid type      * @throws IllegalArgumentException      *             if the parsed value is null      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -822,7 +822,7 @@ literal|"Parameter value MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-comment|//first try to get the class and find a converter registered for a class
+comment|// first try to get the class and find a converter registered for a class
 name|TypeConverter
 argument_list|<
 name|Object
@@ -861,7 +861,7 @@ name|value
 argument_list|)
 return|;
 block|}
-comment|//if not successful we need still to search for converters registered for interfaces
+comment|// if not successful we need still to search for converters registered for interfaces
 for|for
 control|(
 name|Entry
@@ -932,7 +932,7 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
-comment|/**      * Converts a IndexValue instance to an instance of the specified class      *      * @param<T>      * @param type the<code>Class</code> of the returned object      * @param indexValue the index value instance      * @return a java object representing the value of the index value      * @throws NoConverterException thrown if<code>type</code> is unsupported      * @throws UnsupportedIndexTypeException if the {@link IndexDataType} of the parsed      *    {@link IndexValue} is not supported by the registered converter      * @throws IllegalArgumentException if any of the two parameter is<code>null</code>      */
+comment|/**      * Converts a IndexValue instance to an instance of the specified class      *       * @param<T>      * @param type      *            the<code>Class</code> of the returned object      * @param indexValue      *            the index value instance      * @return a java object representing the value of the index value      * @throws NoConverterException      *             thrown if<code>type</code> is unsupported      * @throws UnsupportedIndexTypeException      *             if the {@link IndexDataType} of the parsed {@link IndexValue} is not supported by the      *             registered converter      * @throws IllegalArgumentException      *             if any of the two parameter is<code>null</code>      */
 specifier|public
 parameter_list|<
 name|T
@@ -978,7 +978,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a IndexValue instance to an instance of the specified class      *      * @param<T>      * @param javaType the requested java type      * @param indexType the index type      * @param indexValue the value in the index      * @param language the language of the value in the index      * @return a java object representing the value of the index value      * @throws NoConverterException thrown if<code>type</code> is unsupported      * @throws UnsupportedIndexTypeException if the {@link IndexDataType} of the parsed      *    {@link IndexValue} is not supported by the registered converter      * @throws IllegalArgumentException if any of the two parameter is<code>null</code>      */
+comment|/**      * Converts a IndexValue instance to an instance of the specified class      *       * @param<T>      * @param javaType      *            the requested java type      * @param indexType      *            the index type      * @param indexValue      *            the value in the index      * @param language      *            the language of the value in the index      * @return a java object representing the value of the index value      * @throws NoConverterException      *             thrown if<code>type</code> is unsupported      * @throws UnsupportedIndexTypeException      *             if the {@link IndexDataType} of the parsed {@link IndexValue} is not supported by the      *             registered converter      * @throws IllegalArgumentException      *             if any of the two parameter is<code>null</code>      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1043,7 +1043,7 @@ literal|"Parameter IndexValue MUST NOT be NULL"
 argument_list|)
 throw|;
 block|}
-comment|//search interface converter map if the parsed type is an interface
+comment|// search interface converter map if the parsed type is an interface
 name|TypeConverter
 argument_list|<
 name|T
@@ -1108,17 +1108,17 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|//TODO: add support for IndexTypeConverter
-comment|//    /**
-comment|//     * Converts a IndexValue instance to an java object. The type of the java
-comment|//     * object.
-comment|//     * @param indexValue the index value instance
-comment|//     * @return a java object representing the value of the index value
-comment|//     * @throws NoConverterException if no converter for the index value is registered
-comment|//     */
-comment|//    public Object createObject(IndexValue indexValue) throws NoConverterException {
+comment|// TODO: add support for IndexTypeConverter
+comment|// /**
+comment|// * Converts a IndexValue instance to an java object. The type of the java
+comment|// * object.
+comment|// * @param indexValue the index value instance
+comment|// * @return a java object representing the value of the index value
+comment|// * @throws NoConverterException if no converter for the index value is registered
+comment|// */
+comment|// public Object createObject(IndexValue indexValue) throws NoConverterException {
 comment|//
-comment|//    }
+comment|// }
 comment|/*      * ==== Internal Classes for the default converter Implementations ====      */
 specifier|public
 specifier|static
@@ -1380,7 +1380,7 @@ name|date
 decl_stmt|;
 try|try
 block|{
-comment|//NOTE: Solr only support UTC ... so we need to change the Timezone
+comment|// NOTE: Solr only support UTC ... so we need to change the Timezone
 name|date
 operator|=
 name|XML_DATE_TIME_FORMAT
@@ -1812,10 +1812,10 @@ return|return
 literal|null
 return|;
 block|}
-comment|//for now accept any IndexValue regardless of type
-comment|//            if(!value.getType().equals(INDEX_TYPE)){
-comment|//                new UnsupportedIndexTypeException(this, value);
-comment|//            }
+comment|// for now accept any IndexValue regardless of type
+comment|// if(!value.getType().equals(INDEX_TYPE)){
+comment|// new UnsupportedIndexTypeException(this, value);
+comment|// }
 return|return
 name|value
 operator|.
@@ -2131,7 +2131,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//move in here to ensure returning UnsupportedIndexTypeException on wrong types
+comment|// move in here to ensure returning UnsupportedIndexTypeException on
+comment|// wrong types
 return|return
 literal|null
 return|;
@@ -2213,7 +2214,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//move in here to ensure returning UnsupportedIndexTypeException on wrong types
+comment|// move in here to ensure returning UnsupportedIndexTypeException on
+comment|// wrong types
 return|return
 literal|null
 return|;
@@ -2308,7 +2310,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//parsed long value outside of the int range
+comment|// parsed long value outside of the int range
 throw|throw
 operator|new
 name|UnsupportedValueException

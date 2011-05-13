@@ -610,7 +610,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the FieldMapper for a Solr Index.  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the FieldMapper for a Solr Index.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -663,7 +663,7 @@ name|SolrConst
 operator|.
 name|LANG_INDICATOR
 decl_stmt|;
-comment|/**      * The size of the LRU cache for FieldName to IndexField as well as      * IndexField to collection of FieldNames mappings.<p>      * Note that both caches may have a maximum of elements as configured by this      * property.      */
+comment|/**      * The size of the LRU cache for FieldName to IndexField as well as IndexField to collection of FieldNames      * mappings.      *<p>      * Note that both caches may have a maximum of elements as configured by this property.      */
 specifier|private
 specifier|static
 specifier|final
@@ -708,7 +708,7 @@ specifier|final
 name|SolrServer
 name|server
 decl_stmt|;
-comment|/**      * Internally used as LRU Cache with {@link SolrFieldMapper#LRU_MAPPINGS_CACHE_SIZE}      * elements. This subclass of {@link LinkedHashMap} overrides the      * {@link LinkedHashMap#removeEldestEntry(Entry)} as suggested by the java      * doc. It also uses the constructor that activates the ordering based on      * access time rather tan insertion time.      *      * @author Rupert Westenthaler      *      * @param<K> generic type of the key      * @param<V> generic type of the value      */
+comment|/**      * Internally used as LRU Cache with {@link SolrFieldMapper#LRU_MAPPINGS_CACHE_SIZE} elements. This      * subclass of {@link LinkedHashMap} overrides the {@link LinkedHashMap#removeEldestEntry(Entry)} as      * suggested by the java doc. It also uses the constructor that activates the ordering based on access      * time rather tan insertion time.      *       * @author Rupert Westenthaler      *       * @param<K>      *            generic type of the key      * @param<V>      *            generic type of the value      */
 specifier|private
 specifier|static
 specifier|final
@@ -740,7 +740,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-comment|//access order!
+comment|// access order!
 block|}
 specifier|private
 specifier|static
@@ -775,7 +775,7 @@ name|LRU_MAPPINGS_CACHE_SIZE
 return|;
 block|}
 block|}
-comment|/**      * The assumption is, that only a handful of {@link IndexField}s are used      * very often.<p>      * So it makes sense to keep some mappings within a cache rather than calculating      * them again and again.      * @see LinkedHashMap#      */
+comment|/**      * The assumption is, that only a handful of {@link IndexField}s are used very often.      *<p>      * So it makes sense to keep some mappings within a cache rather than calculating them again and again.      *       * @see LinkedHashMap#      */
 specifier|private
 specifier|final
 name|LRU
@@ -801,7 +801,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * The assumption is, that only a handful of fields appear in index documents.      * So it makes sense to keep some mappings within a cache rather than calculating      * them again and again.      */
+comment|/**      * The assumption is, that only a handful of fields appear in index documents. So it makes sense to keep      * some mappings within a cache rather than calculating them again and again.      */
 specifier|private
 specifier|final
 name|LRU
@@ -919,9 +919,9 @@ operator|.
 name|SPECIAL_FIELD_PREFIX
 condition|)
 block|{
-comment|//in case of special field or the document ID, return null ->
-comment|//   meaning, that this index document field does not represent
-comment|//   an logical IndexField and should be ignored
+comment|// in case of special field or the document ID, return null ->
+comment|// meaning, that this index document field does not represent
+comment|// an logical IndexField and should be ignored
 return|return
 literal|null
 return|;
@@ -943,7 +943,7 @@ return|return
 name|scoreField
 return|;
 block|}
-comment|//parse the prefix and suffix
+comment|// parse the prefix and suffix
 name|String
 index|[]
 name|tokens
@@ -1031,7 +1031,7 @@ name|pathElements
 operator|--
 expr_stmt|;
 block|}
-comment|//parse the path
+comment|// parse the path
 name|String
 index|[]
 name|path
@@ -1067,7 +1067,7 @@ name|tokens
 operator|=
 literal|null
 expr_stmt|;
-comment|//process the parsed data
+comment|// process the parsed data
 name|field
 operator|=
 name|parseIndexField
@@ -1101,7 +1101,7 @@ return|return
 name|field
 return|;
 block|}
-comment|/**      * This method does the dirty work of parsing the different parts of the      * field in the SolrDocument to the logical field as used by the semantic      * indexing API.      * This method assumes the following encoding      *<code><pre>      *   .        ... path separator      *   _        ... special field indicator      *   __       ... escaped special field      *   !        ... merger - collected values of other fields.      *                Such fields do not have an mapping to logical IndexFields.      *                All mergers are created by copyField configurations within the      *                Solr Schema configuration      *   @        ... '@' indicates a field in a given language      *     _@.&lt;field&gt;: A value for a field with no language defined      *     _@en.&lt;field&gt;: A value for a field in English      *     _!@.&lt;field&gt;: Contains all labels regardless of language      *     _!@en.&lt;field&gt;: Contains all labels of languages that start with "en"      *&lt;prefix&gt; ... indicates an dataType that used this prefix      *     _str.&lt;field&gt;: A string field (containing no language)      *     _ref.&lt;field&gt;: A reference (similar to xsd:anyURI)      *     _bool.&lt;field&gt;: A boolean value      *      * NOTE: Prefixes/Suffixes can be used to define a hierarchy of data types      * e.g. use Prefixes for dataTypes:      *   _n   ... any kind of numeric value      *   _ni  ... any kind of integer value (BigInteger)      *   _nib ... a byte      *   _nii ... a integer      *   _nil ... a long      *   _nd  ... a decimal value      *   _ndf ... float      *   _ndd ... double      *   _s   ... any kind of string value      *   _si  ... an string based ID      *   _sr  ... a reference      * e.g. use Suffixes for semantic meanings      *   ._ct ... a tag      *   ._cr ... a category using a reference to an entity ID (xsd:anyURI)      *   ._ci ... a categorisation using an local id (e.g 2 letter country codes)      *      *  one can now create Solr copyField commands to support searches spanning      *  over multiple types      *  _!n  ... search for any kind of numbers      *  _!ni ... search for any kind of integers      *  _!s  ... search in all kind of string values      *  _!sc ... search for all categories of this document      *      *</pre><code>      * @param prefix      * @param suffix      * @param pathElements      * @return      */
+comment|/**      * This method does the dirty work of parsing the different parts of the field in the SolrDocument to the      * logical field as used by the semantic indexing API. This method assumes the following encoding      *<code><pre>      *   .        ... path separator      *   _        ... special field indicator      *   __       ... escaped special field      *   !        ... merger - collected values of other fields.      *                Such fields do not have an mapping to logical IndexFields.      *                All mergers are created by copyField configurations within the      *                Solr Schema configuration      *   @        ... '@' indicates a field in a given language      *     _@.&lt;field&gt;: A value for a field with no language defined      *     _@en.&lt;field&gt;: A value for a field in English      *     _!@.&lt;field&gt;: Contains all labels regardless of language      *     _!@en.&lt;field&gt;: Contains all labels of languages that start with "en"      *&lt;prefix&gt; ... indicates an dataType that used this prefix      *     _str.&lt;field&gt;: A string field (containing no language)      *     _ref.&lt;field&gt;: A reference (similar to xsd:anyURI)      *     _bool.&lt;field&gt;: A boolean value      *       * NOTE: Prefixes/Suffixes can be used to define a hierarchy of data types      * e.g. use Prefixes for dataTypes:      *   _n   ... any kind of numeric value      *   _ni  ... any kind of integer value (BigInteger)      *   _nib ... a byte      *   _nii ... a integer      *   _nil ... a long      *   _nd  ... a decimal value      *   _ndf ... float      *   _ndd ... double      *   _s   ... any kind of string value      *   _si  ... an string based ID      *   _sr  ... a reference      * e.g. use Suffixes for semantic meanings      *   ._ct ... a tag      *   ._cr ... a category using a reference to an entity ID (xsd:anyURI)      *   ._ci ... a categorisation using an local id (e.g 2 letter country codes)      *       *  one can now create Solr copyField commands to support searches spanning      *  over multiple types      *  _!n  ... search for any kind of numbers      *  _!ni ... search for any kind of integers      *  _!s  ... search in all kind of string values      *  _!sc ... search for all categories of this document      *       *</pre><code>      *       * @param prefix      * @param suffix      * @param pathElements      * @return      */
 specifier|private
 name|IndexField
 name|parseIndexField
@@ -1133,7 +1133,7 @@ specifier|final
 name|String
 name|dataTypePrefix
 decl_stmt|;
-comment|//first use the prefix to parse the language
+comment|// first use the prefix to parse the language
 comment|// -> note that the prefix might also be used for the data type!
 if|if
 condition|(
@@ -1166,8 +1166,8 @@ name|isLanguage
 operator|=
 literal|true
 expr_stmt|;
-comment|//it is a language prefix!
-comment|//set dataTypePrefix to null
+comment|// it is a language prefix!
+comment|// set dataTypePrefix to null
 name|dataTypePrefix
 operator|=
 literal|null
@@ -1194,7 +1194,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//it is a language prefix, but for the default language!
+comment|// it is a language prefix, but for the default language!
 name|language
 operator|=
 literal|null
@@ -1203,7 +1203,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//it is no language prefix
+comment|// it is no language prefix
 name|language
 operator|=
 literal|null
@@ -1220,8 +1220,8 @@ block|}
 block|}
 else|else
 block|{
-comment|//no prefix at all
-comment|//set no-language and the dataType prefix to null;
+comment|// no prefix at all
+comment|// set no-language and the dataType prefix to null;
 name|isLanguage
 operator|=
 literal|false
@@ -1235,7 +1235,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|//now parse the indexDataType!
+comment|// now parse the indexDataType!
 name|IndexDataTypeEnum
 name|dataTypeEnumEntry
 init|=
@@ -1283,7 +1283,7 @@ literal|null
 return|;
 comment|// we might also throw an exception at this point
 block|}
-comment|//parse the path
+comment|// parse the path
 name|List
 argument_list|<
 name|String
@@ -1636,8 +1636,8 @@ name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
-comment|//Three things need to be done
-comment|//1) Encode the Path
+comment|// Three things need to be done
+comment|// 1) Encode the Path
 name|String
 name|pathName
 init|=
@@ -1649,7 +1649,7 @@ name|getPath
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//2) Encode the DataType
+comment|// 2) Encode the DataType
 name|fieldNames
 operator|.
 name|addAll
@@ -1662,7 +1662,7 @@ name|dataTypeConfig
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//3) Encode the Languages
+comment|// 3) Encode the Languages
 if|if
 condition|(
 name|indexField
@@ -1687,8 +1687,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//4) add the language merger field (in case the dataType represent natural
-comment|//   language texts)
+comment|// 4) add the language merger field (in case the dataType represent natural
+comment|// language texts)
 if|if
 condition|(
 name|dataTypeConfig
@@ -1709,7 +1709,7 @@ name|pathName
 argument_list|)
 expr_stmt|;
 block|}
-comment|//cache the mappings
+comment|// cache the mappings
 name|indexFieldMappings
 operator|.
 name|put
@@ -1724,7 +1724,7 @@ return|return
 name|fieldNames
 return|;
 block|}
-comment|/**      * Getter for the string used to index a the parsed path. This method      * replaces the URI's of all elements within the path with      *<code>prefix+NAMESPACE_PREFIX_SEPERATOR_CHAR+localName</code>. In addition      * it places the<code>PATH_SEPERATOR</code> char between the elements.<p>      * NOTE: This Method assumes that both Parameters are not NULL and that      * the Path is not empty and contains no NULL nor emtpy element!      * @param path the path to encode      * @return the path name      */
+comment|/**      * Getter for the string used to index a the parsed path. This method replaces the URI's of all elements      * within the path with<code>prefix+NAMESPACE_PREFIX_SEPERATOR_CHAR+localName</code>. In addition it      * places the<code>PATH_SEPERATOR</code> char between the elements.      *<p>      * NOTE: This Method assumes that both Parameters are not NULL and that the Path is not empty and contains      * no NULL nor emtpy element!      *       * @param path      *            the path to encode      * @return the path name      */
 specifier|private
 name|String
 name|encodePathName
@@ -1743,7 +1743,7 @@ operator|new
 name|StringBuilder
 argument_list|()
 decl_stmt|;
-comment|//Now Iterate over the Path
+comment|// Now Iterate over the Path
 name|pathName
 operator|.
 name|append
@@ -1751,7 +1751,7 @@ argument_list|(
 name|PATH_SEPERATOR
 argument_list|)
 expr_stmt|;
-comment|//add the leading PathSeperator
+comment|// add the leading PathSeperator
 name|Iterator
 argument_list|<
 name|String
@@ -1779,7 +1779,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-comment|//PathElement element = it.next();
+comment|// PathElement element = it.next();
 name|String
 index|[]
 name|namespaceLocalName
@@ -1791,7 +1791,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//QName qName = getQName(field);
+comment|// QName qName = getQName(field);
 if|if
 condition|(
 name|namespaceLocalName
@@ -1826,7 +1826,7 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//second the local name
+comment|// second the local name
 name|pathName
 operator|.
 name|append
@@ -1845,7 +1845,7 @@ literal|1
 index|]
 argument_list|)
 expr_stmt|;
-comment|//third add Path Separator if there are additional Elements
+comment|// third add Path Separator if there are additional Elements
 if|if
 condition|(
 name|fields
@@ -1870,7 +1870,7 @@ argument_list|(
 name|PATH_SEPERATOR
 argument_list|)
 expr_stmt|;
-comment|//add the tailing PathSeperator
+comment|// add the tailing PathSeperator
 return|return
 name|pathName
 operator|.
@@ -1907,7 +1907,7 @@ name|path
 argument_list|)
 return|;
 block|}
-comment|/**      * Encodes the datatype by adding the prefix and the suffix to the parsed      * path name. If no prefix nor suffix is defined for the parsed data type,      * than this method returns an empty collection       * (indicating that no encoding is necessary)      * @param pathName the path name to add the prefix and the suffix.      * @param dataType the dataType to encode.      * @return The fields representing the encoded dataType for the parsed field.      */
+comment|/**      * Encodes the datatype by adding the prefix and the suffix to the parsed path name. If no prefix nor      * suffix is defined for the parsed data type, than this method returns an empty collection (indicating      * that no encoding is necessary)      *       * @param pathName      *            the path name to add the prefix and the suffix.      * @param dataType      *            the dataType to encode.      * @return The fields representing the encoded dataType for the parsed field.      */
 specifier|private
 name|Collection
 argument_list|<
@@ -1968,7 +1968,7 @@ argument_list|()
 operator|)
 condition|)
 block|{
-comment|//no prefix nor suffix defined -> return empty collection
+comment|// no prefix nor suffix defined -> return empty collection
 return|return
 name|Collections
 operator|.
@@ -1978,7 +1978,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//return prefix+fieldName+suffix
+comment|// return prefix+fieldName+suffix
 return|return
 name|Collections
 operator|.
@@ -2159,7 +2159,7 @@ return|return
 name|prefixSuffix
 return|;
 block|}
-comment|/**      * Encodes the prefixes for the parsed languages and returns the according      * field names for the languages.<p>      * Languages are encoded using the {@link SolrConst#LANG_INDICATOR} and the      * parsed language as field prefix.<p>      * Note that this implementation adds dataTypes that are marked as natural      * language text values ( all dataTypes where       *<code>{@link IndexDataTypeEnum#isLanguageType()} == true</code>) to the      * special {@link SolrConst#LANG_MERGER_FIELD}. This can be used to search      * for values of an field in any language.<p>      * In addition to that the default schema.xml also defines a copyField       * command that puts natural language values of all fields into the default      * search field "_text".<p>      * The collection returned by this method does not include      *<code>"{@link SolrConst#LANG_MERGER_FIELD}"+feildName</code>!      * @param fieldName the string representing the field without encoded languages      * @param languages the languages.      * @return      */
+comment|/**      * Encodes the prefixes for the parsed languages and returns the according field names for the languages.      *<p>      * Languages are encoded using the {@link SolrConst#LANG_INDICATOR} and the parsed language as field      * prefix.      *<p>      * Note that this implementation adds dataTypes that are marked as natural language text values ( all      * dataTypes where<code>{@link IndexDataTypeEnum#isLanguageType()} == true</code>) to the special      * {@link SolrConst#LANG_MERGER_FIELD}. This can be used to search for values of an field in any language.      *<p>      * In addition to that the default schema.xml also defines a copyField command that puts natural language      * values of all fields into the default search field "_text".      *<p>      * The collection returned by this method does not include      *<code>"{@link SolrConst#LANG_MERGER_FIELD}"+feildName</code>!      *       * @param fieldName      *            the string representing the field without encoded languages      * @param languages      *            the languages.      * @return      */
 specifier|private
 name|Collection
 argument_list|<
@@ -2189,7 +2189,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//no language
+comment|// no language
 return|return
 name|Collections
 operator|.
@@ -2198,11 +2198,11 @@ argument_list|(
 name|fieldName
 argument_list|)
 return|;
-comment|//just return the field
+comment|// just return the field
 block|}
 else|else
 block|{
-comment|//I assume that this will be the case in most of the calls
+comment|// I assume that this will be the case in most of the calls
 name|Collection
 argument_list|<
 name|String
@@ -2249,7 +2249,7 @@ name|fieldNames
 return|;
 block|}
 block|}
-comment|/**      * Internally used instead of {@link #encodeLanguages(String...)}      * @param languages the languages      * @return the prefixes      * @see FieldMapper#encodeLanguages(String...)      */
+comment|/**      * Internally used instead of {@link #encodeLanguages(String...)}      *       * @param languages      *            the languages      * @return the prefixes      * @see FieldMapper#encodeLanguages(String...)      */
 specifier|public
 name|Collection
 argument_list|<
@@ -2276,14 +2276,14 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//no language
+comment|// no language
 return|return
 name|Collections
 operator|.
 name|emptySet
 argument_list|()
 return|;
-comment|//just return the field
+comment|// just return the field
 block|}
 elseif|else
 if|if
@@ -2377,7 +2377,7 @@ literal|""
 operator|)
 return|;
 block|}
-comment|/**      * Encodes the language prefixes of for the parsed language      * @param lang the language      * @return the field with the encoded language      */
+comment|/**      * Encodes the language prefixes of for the parsed language      *       * @param lang      *            the language      * @return the field with the encoded language      */
 specifier|private
 name|String
 name|encodeLanguage
@@ -2473,7 +2473,7 @@ name|DEFAULT_NS_PREFIX_STRING
 init|=
 literal|"ns"
 decl_stmt|;
-comment|//private static final char NAMESPACE_PREFIX_SEPERATOR_CHAR = ':';
+comment|// private static final char NAMESPACE_PREFIX_SEPERATOR_CHAR = ':';
 comment|/**      * Do never access this Map directly! Use {@link #getNamespaceMap()}!      */
 specifier|private
 name|Map
@@ -2486,7 +2486,7 @@ name|__namespaceMap
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Getter for the namespace to prefix mapping      * @return the map holding the namespace to prefix mappings      */
+comment|/**      * Getter for the namespace to prefix mapping      *       * @return the map holding the namespace to prefix mappings      */
 specifier|private
 name|Map
 argument_list|<
@@ -2524,7 +2524,7 @@ name|__prefixMap
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Getter for the prefix to namespace mappings      * @return the map holding the prefix to namespace mappings      */
+comment|/**      * Getter for the prefix to namespace mappings      *       * @return the map holding the prefix to namespace mappings      */
 specifier|private
 name|Map
 argument_list|<
@@ -2550,7 +2550,7 @@ return|return
 name|__prefixMap
 return|;
 block|}
-comment|/**      * Getter for the full name based on the short name. The short name is defined      * as the prefix followed by the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} and      * the local name of the field. The returned field name is defined as the      * namespace followed by the local name.<p>      * If the parsed short field name does not contain the      * {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} this method returns the parsed      * String.<p>      * The local name may contain the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}      * {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}'. The prefix MUST NOT contain      * this char, because {@link String#indexOf(int)} is used to split prefix      * and local name.      * @param shortFieldName the short name      * @return the full name      * @throws IllegalArgumentException if<code>null</code> is parsed as shortFieldName      * @throws IllegalStateException if the found prefix is not contained in the configuration      */
+comment|/**      * Getter for the full name based on the short name. The short name is defined as the prefix followed by      * the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} and the local name of the field. The returned field name      * is defined as the namespace followed by the local name.      *<p>      * If the parsed short field name does not contain the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR} this      * method returns the parsed String.      *<p>      * The local name may contain the {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}      * {@link #NAMESPACE_PREFIX_SEPERATOR_CHAR}'. The prefix MUST NOT contain this char, because      * {@link String#indexOf(int)} is used to split prefix and local name.      *       * @param shortFieldName      *            the short name      * @return the full name      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as shortFieldName      * @throws IllegalStateException      *             if the found prefix is not contained in the configuration      */
 specifier|protected
 specifier|final
 name|String
@@ -2608,7 +2608,8 @@ argument_list|,
 name|seperatorIndex
 argument_list|)
 decl_stmt|;
-comment|//seperatorIndex does not include the separator char
+comment|// seperatorIndex does not include
+comment|// the separator char
 name|String
 name|namespace
 init|=
@@ -2682,16 +2683,16 @@ literal|"urn"
 argument_list|)
 condition|)
 block|{
-comment|//than the parsed URI is something like "urn:my.test.uuid-123"
+comment|// than the parsed URI is something like "urn:my.test.uuid-123"
 comment|// -> this is no real prefix, but an urn with only one ':'
-comment|//    we need to return "urn:" as namespace!
+comment|// we need to return "urn:" as namespace!
 return|return
 literal|"urn:"
 return|;
 block|}
 else|else
 block|{
-comment|//else we have an real namespace -> use the current mappings!
+comment|// else we have an real namespace -> use the current mappings!
 return|return
 name|getPrefixMap
 argument_list|()
@@ -2801,7 +2802,7 @@ condition|(
 name|create
 condition|)
 block|{
-comment|//only if not present and prefix is true
+comment|// only if not present and prefix is true
 name|NamespaceEnum
 name|defaultMapping
 init|=
@@ -2830,7 +2831,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|/*                  * NOTE: we need to check here also if the default prefix is not                  * yet taken, because the Solr Index used to store the prefixes                  * might be older than the latest change within the NamespaceEnum.                  * Therefore there might be cases where a default prefix configured                  * by this Enum is already assigned to a different namespace within                  * the Solr index!                  * In such cases, we need to create a new prefix for this namespace                  */
+comment|/*                  * NOTE: we need to check here also if the default prefix is not yet taken, because the Solr                  * Index used to store the prefixes might be older than the latest change within the                  * NamespaceEnum. Therefore there might be cases where a default prefix configured by this                  * Enum is already assigned to a different namespace within the Solr index! In such cases, we                  * need to create a new prefix for this namespace                  */
 name|prefix
 operator|=
 name|defaultMapping
@@ -2841,7 +2842,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//need to generate a default mapping
+comment|// need to generate a default mapping
 name|prefix
 operator|=
 name|createPrefix
@@ -2857,17 +2858,18 @@ argument_list|,
 name|namespace
 argument_list|)
 expr_stmt|;
-comment|//we need to add the new mapping
+comment|// we need to add the new mapping
 name|saveNamespaceConfig
 argument_list|()
 expr_stmt|;
-comment|//save the configuration
-comment|// (TODO: we do not make a flush here ... so maybe we need to ensure that a flush is called sometimes)
+comment|// save the configuration
+comment|// (TODO: we do not make a flush here ... so maybe we need to ensure that a flush is called
+comment|// sometimes)
 block|}
 return|return
 name|prefix
 return|;
-comment|//may return null if !create
+comment|// may return null if !create
 block|}
 specifier|private
 name|String
@@ -2887,7 +2889,8 @@ name|defaultPrefix
 decl_stmt|;
 do|do
 block|{
-comment|//as long an prefix is not any of the default prefixes or one of the prefixes defined by NamespaceEnum
+comment|// as long an prefix is not any of the default prefixes or one of the prefixes defined by
+comment|// NamespaceEnum
 name|defaultNsPrefixNumber
 operator|++
 expr_stmt|;
@@ -2953,7 +2956,7 @@ name|prefix
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Leads the prefix to namespace mappings from the configured Solr server      * and inits the two mapps holding the prefix&lt;-&gt; namespace mappings      */
+comment|/**      * Leads the prefix to namespace mappings from the configured Solr server and inits the two mapps holding      * the prefix&lt;-&gt; namespace mappings      */
 specifier|private
 name|void
 name|loadNamespaceConfig
@@ -3203,7 +3206,7 @@ argument_list|,
 name|prefix
 argument_list|)
 expr_stmt|;
-comment|//check for default NS
+comment|// check for default NS
 if|if
 condition|(
 name|prefix
@@ -3458,7 +3461,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for a SolrDocument based on the ID. Used to load the config from      * the index.      * @param inputDoc the document to store      */
+comment|/**      * Getter for a SolrDocument based on the ID. Used to load the config from the index.      *       * @param inputDoc      *            the document to store      */
 specifier|protected
 name|SolrDocument
 name|getSolrDocument
@@ -3485,7 +3488,7 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
-comment|//select all fields
+comment|// select all fields
 name|solrQuery
 operator|.
 name|setRows
@@ -3493,7 +3496,7 @@ argument_list|(
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//we query for the id, there is only one result
+comment|// we query for the id, there is only one result
 name|String
 name|queryString
 init|=

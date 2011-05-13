@@ -498,7 +498,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The main class implementing the two core interfaces of the Apache Sling  * Installer framework.<p>  * The {@link ResourceTransformer} is needed to check if installed files   * actually SolrIndexes. Currently this check is done by checking if   *<code>'.'+{@link IndexInstallerConstants#SOLR_INDEX_ARCHIVE_EXTENSION}</code>  * is contained in the filename. In addition it is checked of the archive type  * is hinted by the Filename. If not than ".zip" (works also for ".jar") is  * assumed. Note also that for ".gz" and ".bz2" it is assumed that ".tar" is  * used. File names such as "&lt;indexName&gt;.  * {@value IndexInstallerConstants#SOLR_INDEX_ARCHIVE_EXTENSION}  * [.&lt;archiveType&gt;]" are used by this implementation<p>  * The {@link InstallTaskFactory} interface is needed to create the actual  * install and remove task for transformed resources. Based on the requested  * activity instances of {@link IndexInstallTask} or {@link IndexRemoveTask} are  * created.<p>  * This implementation uses a {@link Constants#SERVICE_RANKING} of 100. This  * ensures that the this implementation is called before any   * {@link ResourceTransformer} directly part of the Apache Sling Installer  * framework. If {@link #transform(RegisteredResource)} returns<code>null</code>  * the Sling Installer framework will call the next registered   * {@link ResourceTransformer} instance. By returning a {@link TransformationResult}  * no further {@link ResourceTransformer} will be called.<p>  *   * TODO: This package should move to an own bundle supporting Sling Install  * capabilities for Solr. Even the current version only on the   * {@link SolrDirectoryManager}. The reason why it is still inside the SolrYard  * Bundle is that the remove functionality would also need to stop currently  * running SolrServers. this is currently not possible with the current  * architecture because {@link SolrServer} instances returned by the   * {@link SolrServerProviderManager} are no OSGI components.   *   *   * @author Rupert Westenthaler  *  */
+comment|/**  * The main class implementing the two core interfaces of the Apache Sling Installer framework.  *<p>  * The {@link ResourceTransformer} is needed to check if installed files actually SolrIndexes. Currently this  * check is done by checking if<code>'.'+{@link IndexInstallerConstants#SOLR_INDEX_ARCHIVE_EXTENSION}</code>  * is contained in the filename. In addition it is checked of the archive type is hinted by the Filename. If  * not than ".zip" (works also for ".jar") is assumed. Note also that for ".gz" and ".bz2" it is assumed that  * ".tar" is used. File names such as "&lt;indexName&gt;.  * {@value IndexInstallerConstants#SOLR_INDEX_ARCHIVE_EXTENSION} [.&lt;archiveType&gt;]" are used by this  * implementation  *<p>  * The {@link InstallTaskFactory} interface is needed to create the actual install and remove task for  * transformed resources. Based on the requested activity instances of {@link IndexInstallTask} or  * {@link IndexRemoveTask} are created.  *<p>  * This implementation uses a {@link Constants#SERVICE_RANKING} of 100. This ensures that the this  * implementation is called before any {@link ResourceTransformer} directly part of the Apache Sling Installer  * framework. If {@link #transform(RegisteredResource)} returns<code>null</code> the Sling Installer  * framework will call the next registered {@link ResourceTransformer} instance. By returning a  * {@link TransformationResult} no further {@link ResourceTransformer} will be called.  *<p>  *   * TODO: This package should move to an own bundle supporting Sling Install capabilities for Solr. Even the  * current version only on the {@link SolrDirectoryManager}. The reason why it is still inside the SolrYard  * Bundle is that the remove functionality would also need to stop currently running SolrServers. this is  * currently not possible with the current architecture because {@link SolrServer} instances returned by the  * {@link SolrServerProviderManager} are no OSGI components.  *   *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -549,7 +549,7 @@ name|intValue
 operator|=
 literal|100
 argument_list|)
-comment|//we need to be in front of the Sling Components
+comment|// we need to be in front of the Sling Components
 specifier|public
 class|class
 name|SolrIndexInstaller
@@ -573,7 +573,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * This service manages the SolrIndex Directory of the SolrYard. It is needed      * by the {@link IndexInstallTask} and {@link IndexRemoveTask} to do there      * work.      */
+comment|/**      * This service manages the SolrIndex Directory of the SolrYard. It is needed by the      * {@link IndexInstallTask} and {@link IndexRemoveTask} to do there work.      */
 annotation|@
 name|Reference
 specifier|private
@@ -686,13 +686,13 @@ return|;
 block|}
 else|else
 block|{
-comment|//this processes only files
+comment|// this processes only files
 return|return
 literal|null
 return|;
 block|}
 block|}
-comment|/**      * Checks if the installed resource is an Solr Index Archive      * @param registeredResource the registered resource parsed by the Apache      * Sling installer framework      * @return the transformed resource or<code>null</code> if the parsed      * resource is not an Solr Index Archive.      */
+comment|/**      * Checks if the installed resource is an Solr Index Archive      *       * @param registeredResource      *            the registered resource parsed by the Apache Sling installer framework      * @return the transformed resource or<code>null</code> if the parsed resource is not an Solr Index      *         Archive.      */
 specifier|private
 name|TransformationResult
 index|[]
@@ -702,7 +702,7 @@ name|RegisteredResource
 name|registeredResource
 parameter_list|)
 block|{
-comment|//the URL is<schema>:<filePath>
+comment|// the URL is<schema>:<filePath>
 comment|// where the schema is the provider that registered the resource
 name|Map
 argument_list|<
@@ -744,7 +744,7 @@ operator|+
 literal|1
 argument_list|)
 decl_stmt|;
-comment|//get the name of the index
+comment|// get the name of the index
 name|String
 name|indexName
 init|=
@@ -755,7 +755,7 @@ argument_list|(
 name|filePath
 argument_list|)
 decl_stmt|;
-comment|//only the String until the first '.' -> multiple endings (e.g. slrindex.zip) expected
+comment|// only the String until the first '.' -> multiple endings (e.g. slrindex.zip) expected
 name|indexName
 operator|=
 name|indexName
@@ -792,7 +792,7 @@ argument_list|,
 name|indexName
 argument_list|)
 expr_stmt|;
-comment|//now convert to lover case to ease the tests for file endings
+comment|// now convert to lover case to ease the tests for file endings
 name|filePath
 operator|=
 name|filePath
@@ -813,7 +813,7 @@ name|SOLR_INDEX_ARCHIVE_EXTENSION
 argument_list|)
 condition|)
 block|{
-comment|//not an solr index archive
+comment|// not an solr index archive
 return|return
 literal|null
 return|;
@@ -894,13 +894,13 @@ operator|new
 name|TransformationResult
 argument_list|()
 decl_stmt|;
-comment|//        try {
-comment|//            tr.setInputStream(registeredResource.getInputStream());
-comment|//        } catch (IOException e) {
-comment|//            log.error(String.format("Unable to transform RegisteredResource %s with type %s and scheme %s",
-comment|//                registeredResource.getURL(), registeredResource.getType(), registeredResource.getScheme()),e);
-comment|//            return null;
-comment|//        }
+comment|// try {
+comment|// tr.setInputStream(registeredResource.getInputStream());
+comment|// } catch (IOException e) {
+comment|// log.error(String.format("Unable to transform RegisteredResource %s with type %s and scheme %s",
+comment|// registeredResource.getURL(), registeredResource.getType(), registeredResource.getScheme()),e);
+comment|// return null;
+comment|// }
 name|tr
 operator|.
 name|setId

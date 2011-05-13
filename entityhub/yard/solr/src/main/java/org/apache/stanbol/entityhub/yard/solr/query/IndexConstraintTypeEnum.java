@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Constraint Types defined for IndexFields<p>  * This could be replaced by a more flexible way to register supported  * constraint types in future versions  * @author Rupert Westenthaler  */
+comment|/**  * Constraint Types defined for IndexFields  *<p>  * This could be replaced by a more flexible way to register supported constraint types in future versions  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_enum
@@ -50,7 +50,7 @@ specifier|public
 enum|enum
 name|IndexConstraintTypeEnum
 block|{
-comment|/**      * constraints the DataType of values      * @see IndexDataType      */
+comment|/**      * constraints the DataType of values      *       * @see IndexDataType      */
 name|DATATYPE
 block|,
 comment|/**      * Constraints the language of values      */

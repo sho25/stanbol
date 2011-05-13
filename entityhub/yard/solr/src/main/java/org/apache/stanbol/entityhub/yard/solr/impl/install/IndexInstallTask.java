@@ -327,7 +327,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * use 19 because the config install uses 20 and the files MUST be installed      * before the config triggering the initialisation of the services.       */
+comment|/**      * use 19 because the config install uses 20 and the files MUST be installed before the config triggering      * the initialisation of the services.      */
 specifier|private
 specifier|static
 specifier|final
@@ -410,7 +410,7 @@ name|indexName
 argument_list|)
 condition|)
 block|{
-comment|//an Index with that name already exists -> ignore
+comment|// an Index with that name already exists -> ignore
 name|ctx
 operator|.
 name|log
@@ -445,7 +445,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//this index does not exist
+comment|// this index does not exist
 name|String
 name|archiveFormat
 init|=
@@ -614,7 +614,7 @@ argument_list|,
 name|ais
 argument_list|)
 expr_stmt|;
-comment|//we are done ... set the state to installed!
+comment|// we are done ... set the state to installed!
 name|setFinishedState
 argument_list|(
 name|ResourceState
@@ -634,7 +634,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//now we can copy the core!
+comment|// now we can copy the core!
 block|}
 catch|catch
 parameter_list|(

@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown when a parsed object value can not be converted by the converter  *  * @author Rupert Westenthaler  */
+comment|/**  * Thrown when a parsed object value can not be converted by the converter  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -41,7 +41,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
-comment|/**      * Constructs the exception to be thrown if a converter does not support the      * the parsed value {@link IndexValue}.      * @param converter the converter (implement the {@link TypeConverter#toString()} method!)      * @param type the IndexDataType      * @param value the value      */
+comment|/**      * Constructs the exception to be thrown if a converter does not support the the parsed value      * {@link IndexValue}.      *       * @param converter      *            the converter (implement the {@link TypeConverter#toString()} method!)      * @param type      *            the IndexDataType      * @param value      *            the value      */
 specifier|public
 name|UnsupportedValueException
 parameter_list|(
@@ -70,7 +70,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs the exception to be thrown if a converter does not support the      * the parsed value {@link IndexValue}.      * @param converter the converter (implement the {@link TypeConverter#toString()} method!)      * @param type the IndexDataType      * @param value the value      * @param cause the cause      */
+comment|/**      * Constructs the exception to be thrown if a converter does not support the the parsed value      * {@link IndexValue}.      *       * @param converter      *            the converter (implement the {@link TypeConverter#toString()} method!)      * @param type      *            the IndexDataType      * @param value      *            the value      * @param cause      *            the cause      */
 specifier|public
 name|UnsupportedValueException
 parameter_list|(

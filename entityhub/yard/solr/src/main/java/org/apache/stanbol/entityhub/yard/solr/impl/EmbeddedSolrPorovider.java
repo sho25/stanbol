@@ -340,7 +340,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Support for the use of {@link EmbeddedSolrPorovider} in combination with the  * SolrYard implementation. This implements the {@link SolrServerProvider}  * interface for the {@link Type#EMBEDDED}.<p>  *   * TODO: add functionality to lookup the internally managed {@link CoreContainer}.  * Maybe this requires to add a second service  * @author Rupert Westenthaler  *  */
+comment|/**  * Support for the use of {@link EmbeddedSolrPorovider} in combination with the SolrYard implementation. This  * implements the {@link SolrServerProvider} interface for the {@link Type#EMBEDDED}.  *<p>  *   * TODO: add functionality to lookup the internally managed {@link CoreContainer}. Maybe this requires to add  * a second service  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -377,7 +377,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|//define the default values here because they are not accessible via the Solr API
+comment|// define the default values here because they are not accessible via the Solr API
 specifier|public
 specifier|static
 specifier|final
@@ -402,7 +402,7 @@ name|SOLR_SCHEMA_NAME
 init|=
 literal|"schema.xml"
 decl_stmt|;
-comment|/**      * internally used to keep track of active {@link CoreContainer}s for      * requested paths.      */
+comment|/**      * internally used to keep track of active {@link CoreContainer}s for requested paths.      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -424,7 +424,7 @@ decl_stmt|;
 specifier|public
 name|EmbeddedSolrPorovider
 parameter_list|()
-block|{     }
+block|{}
 annotation|@
 name|Override
 specifier|public
@@ -486,7 +486,7 @@ operator|+
 name|uriOrPath
 argument_list|)
 expr_stmt|;
-comment|//first try as file (but keep in mind it could also be an URI)
+comment|// first try as file (but keep in mind it could also be an URI)
 name|File
 name|index
 init|=
@@ -563,7 +563,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//in that case we assume that this is a single core installation
+comment|// in that case we assume that this is a single core installation
 name|coreName
 operator|=
 literal|""
@@ -590,7 +590,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//assume this is a multi core
+comment|// assume this is a multi core
 name|coreName
 operator|=
 name|index
@@ -609,7 +609,7 @@ operator|.
 name|getParentFile
 argument_list|()
 expr_stmt|;
-comment|//set the index dir to the parent
+comment|// set the index dir to the parent
 block|}
 else|else
 block|{
@@ -637,7 +637,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|//now init the EmbeddedSolrServer
+comment|// now init the EmbeddedSolrServer
 name|log
 operator|.
 name|info
@@ -670,7 +670,7 @@ argument_list|,
 name|solr
 argument_list|)
 decl_stmt|;
-comment|//if we have a multi core environment and the core is not yet registered
+comment|// if we have a multi core environment and the core is not yet registered
 if|if
 condition|(
 operator|!
@@ -691,8 +691,8 @@ name|coreName
 argument_list|)
 condition|)
 block|{
-comment|//register this core first
-comment|/*                  * NOTE:                  * We need to reset the ContextClassLoader to the one used for this                  * Bundle, because Solr uses this ClassLoader to load all the                  * plugins configured in the SOLR_XML_NAME and schema.xml.                  * The finally block resets the context class loader to the previous                  * value. (Rupert Westenthaler 20010209)                  */
+comment|// register this core first
+comment|/*                  * NOTE: We need to reset the ContextClassLoader to the one used for this Bundle, because Solr                  * uses this ClassLoader to load all the plugins configured in the SOLR_XML_NAME and                  * schema.xml. The finally block resets the context class loader to the previous value.                  * (Rupert Westenthaler 20010209)                  */
 name|ClassLoader
 name|classLoader
 init|=
@@ -721,7 +721,7 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
-comment|//SolrResourceLoader solrLoader = new SolrResourceLoader(coreDir.getAbsolutePath());
+comment|// SolrResourceLoader solrLoader = new SolrResourceLoader(coreDir.getAbsolutePath());
 name|CoreDescriptor
 name|coreDescriptor
 init|=
@@ -794,7 +794,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-comment|//persist the new core to have it available on the next start
+comment|// persist the new core to have it available on the next start
 name|coreContainer
 operator|.
 name|persist
@@ -915,7 +915,7 @@ argument_list|(
 name|solrDir
 argument_list|)
 expr_stmt|;
-comment|/*              * NOTE:              * We need to reset the ContextClassLoader to the one used for this              * Bundle, because Solr uses this ClassLoader to load all the              * plugins configured in the SOLR_XML_NAME and schema.xml.              * The finally block resets the context class loader to the previous              * value. (Rupert Westenthaler 20010209)              */
+comment|/*              * NOTE: We need to reset the ContextClassLoader to the one used for this Bundle, because Solr              * uses this ClassLoader to load all the plugins configured in the SOLR_XML_NAME and schema.xml.              * The finally block resets the context class loader to the previous value. (Rupert Westenthaler              * 20010209)              */
 name|ClassLoader
 name|loader
 init|=
@@ -1074,7 +1074,7 @@ name|getSimpleName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//currently not used
+comment|// currently not used
 block|}
 annotation|@
 name|Deactivate
@@ -1100,35 +1100,35 @@ name|getSimpleName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//currently not used
+comment|// currently not used
 block|}
-comment|//Keeping for now because this might be useful when checking for required files
-comment|//    /**
-comment|//     * Checks if the parsed directory contains a file that starts with the parsed
-comment|//     * name. Parsing "hallo" will find "hallo.all", "hallo.ween" as well as "hallo".
-comment|//     * @param dir the Directory. This assumes that the parsed File is not
-comment|//     *<code>null</code>, exists and is an directory
-comment|//     * @param name the name. If<code>null</code> any file is accepted, meaning
-comment|//     * that this will return true if the directory contains any file
-comment|//     * @return the state
-comment|//     */
-comment|//    private boolean hasFile(File dir, String name){
-comment|//        return dir.list(new NameFileFilter(name)).length>0;
-comment|//    }
-comment|//    /**
-comment|//     * Returns the first file that matches the parsed name.
-comment|//     * Parsing "hallo" will find "hallo.all", "hallo.ween" as well as "hallo".
-comment|//     * @param dir the Directory. This assumes that the parsed File is not
-comment|//     *<code>null</code>, exists and is an directory.
-comment|//     * @param name the name. If<code>null</code> any file is accepted, meaning
-comment|//     * that this will return true if the directory contains any file
-comment|//     * @return the first file matching the parsed prefix.
-comment|//     */
-comment|//    private File getFileByPrefix(File dir, String prefix){
-comment|//        String[] files =  dir.list(new PrefixFileFilter(prefix));
-comment|//        return files.length>0?new File(dir,files[0]):null;
-comment|//    }
-comment|/**      * Returns the first file that matches the parsed name (case sensitive)      * @param dir the Directory. This assumes that the parsed File is not      *<code>null</code>, exists and is an directory.      * @param name the name. If<code>null</code> any file is accepted, meaning      * that this will return true if the directory contains any file       * @return the first file matching the parsed name.      */
+comment|// Keeping for now because this might be useful when checking for required files
+comment|// /**
+comment|// * Checks if the parsed directory contains a file that starts with the parsed
+comment|// * name. Parsing "hallo" will find "hallo.all", "hallo.ween" as well as "hallo".
+comment|// * @param dir the Directory. This assumes that the parsed File is not
+comment|// *<code>null</code>, exists and is an directory
+comment|// * @param name the name. If<code>null</code> any file is accepted, meaning
+comment|// * that this will return true if the directory contains any file
+comment|// * @return the state
+comment|// */
+comment|// private boolean hasFile(File dir, String name){
+comment|// return dir.list(new NameFileFilter(name)).length>0;
+comment|// }
+comment|// /**
+comment|// * Returns the first file that matches the parsed name.
+comment|// * Parsing "hallo" will find "hallo.all", "hallo.ween" as well as "hallo".
+comment|// * @param dir the Directory. This assumes that the parsed File is not
+comment|// *<code>null</code>, exists and is an directory.
+comment|// * @param name the name. If<code>null</code> any file is accepted, meaning
+comment|// * that this will return true if the directory contains any file
+comment|// * @return the first file matching the parsed prefix.
+comment|// */
+comment|// private File getFileByPrefix(File dir, String prefix){
+comment|// String[] files = dir.list(new PrefixFileFilter(prefix));
+comment|// return files.length>0?new File(dir,files[0]):null;
+comment|// }
+comment|/**      * Returns the first file that matches the parsed name (case sensitive)      *       * @param dir      *            the Directory. This assumes that the parsed File is not<code>null</code>, exists and is an      *            directory.      * @param name      *            the name. If<code>null</code> any file is accepted, meaning that this will return true if      *            the directory contains any file      * @return the first file matching the parsed name.      */
 specifier|private
 name|File
 name|getFile

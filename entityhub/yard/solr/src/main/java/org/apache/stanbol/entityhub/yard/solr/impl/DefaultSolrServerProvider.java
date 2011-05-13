@@ -232,7 +232,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link SolrServerProvider} interface supporting all  * the types directly supported by the SolrJ library. This includes all Clients  * using an remote SolrServer.<p>  * This does not support an embedded SolrServer  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the {@link SolrServerProvider} interface supporting all the types directly supported by  * the SolrJ library. This includes all Clients using an remote SolrServer.  *<p>  * This does not support an embedded SolrServer  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -456,7 +456,7 @@ name|MalformedURLException
 name|e
 parameter_list|)
 block|{
-comment|//URL is already validated before!
+comment|// URL is already validated before!
 throw|throw
 operator|new
 name|IllegalArgumentException
@@ -493,8 +493,8 @@ argument_list|(
 name|uriOrPath
 argument_list|)
 expr_stmt|;
-comment|//the main server
-comment|//check the additional server locations
+comment|// the main server
+comment|// check the additional server locations
 if|if
 condition|(
 name|additional
@@ -557,7 +557,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//else ignore
+comment|// else ignore
 block|}
 block|}
 try|try
@@ -603,7 +603,7 @@ argument_list|)
 throw|;
 block|}
 default|default:
-comment|//write an error to clearly show that there is something wrong with this implementation
+comment|// write an error to clearly show that there is something wrong with this implementation
 name|log
 operator|.
 name|error

@@ -130,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used for the configuration of a SolrYard. Especially if the SolrYard is  * not running within an OSGI context, than an instance of this class must  * be configured and than parsed to the constructor of {@link SolrYard}.<p>  * When running within an OSGI context, the configuration is provided by the  * OSGI environment. I that case this class is used as a wrapper for easy  * access to the configuration.  * @author Rupert Westenthaler  *  */
+comment|/**  * Used for the configuration of a SolrYard. Especially if the SolrYard is not running within an OSGI context,  * than an instance of this class must be configured and than parsed to the constructor of {@link SolrYard}.  *<p>  * When running within an OSGI context, the configuration is provided by the OSGI environment. I that case  * this class is used as a wrapper for easy access to the configuration.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -141,7 +141,7 @@ name|SolrYardConfig
 extends|extends
 name|YardConfig
 block|{
-comment|/**      * Creates a new config with the minimal set of required properties      * @param id the ID of the Yard      * @param solrServer the base URL of the {@link SolrServer}      * @throws IllegalArgumentException if the parsed valued do not fulfil the      * requirements.      */
+comment|/**      * Creates a new config with the minimal set of required properties      *       * @param id      *            the ID of the Yard      * @param solrServer      *            the base URL of the {@link SolrServer}      * @throws IllegalArgumentException      *             if the parsed valued do not fulfil the requirements.      */
 specifier|public
 name|SolrYardConfig
 parameter_list|(
@@ -190,7 +190,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Initialise the Yard configuration based on a parsed configuration. Usually      * used on the context of an OSGI environment in the activate method.      * @param config the configuration usually parsed within an OSGI activate      * method      * @throws ConfigurationException if the configuration is incomplete of      * some values are not valid      * @throws IllegalArgumentException if<code>null</code> is parsed as      * configuration      */
+comment|/**      * Initialise the Yard configuration based on a parsed configuration. Usually used on the context of an      * OSGI environment in the activate method.      *       * @param config      *            the configuration usually parsed within an OSGI activate method      * @throws ConfigurationException      *             if the configuration is incomplete of some values are not valid      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as configuration      */
 specifier|protected
 name|SolrYardConfig
 parameter_list|(
@@ -213,7 +213,7 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Setter for the type of the SolrServer client to by used by the SolrYard.      * Setting the type to<code>null</code> will activate the default value.      * The default is determined based on the configured {@link #getSolrServerLocation()}      * @param type The type to use      */
+comment|/**      * Setter for the type of the SolrServer client to by used by the SolrYard. Setting the type to      *<code>null</code> will activate the default value. The default is determined based on the configured      * {@link #getSolrServerLocation()}      *       * @param type      *            The type to use      */
 specifier|public
 name|void
 name|setSolrServerType
@@ -314,7 +314,7 @@ name|IllegalArgumentException
 name|e
 parameter_list|)
 block|{
-comment|//invalid value set!
+comment|// invalid value set!
 name|config
 operator|.
 name|remove
@@ -327,14 +327,14 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//guess type based on Server Location
+comment|// guess type based on Server Location
 name|String
 name|serverLocation
 init|=
 name|getSolrServerLocation
 argument_list|()
 decl_stmt|;
-comment|//TODO: maybe we need to improve this detection code.
+comment|// TODO: maybe we need to improve this detection code.
 if|if
 condition|(
 name|serverLocation
@@ -360,7 +360,7 @@ name|EMBEDDED
 return|;
 block|}
 block|}
-comment|/**      * Setter for the location of the SolrServer. Might be a URL or a file.      * @param url the base URL of the SolrServer. Required, NOT NULL.      */
+comment|/**      * Setter for the location of the SolrServer. Might be a URL or a file.      *       * @param url      *            the base URL of the SolrServer. Required, NOT NULL.      */
 specifier|public
 name|void
 name|setSolrServerLocation
@@ -401,7 +401,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for the Location of the SolrServer. In case of an remote server      * this will be the base URL of the RESTful interface. In case of an      * embedded Server it is the directory containing the solr.xml or the      * directory of the core in case of a multi-core setup.      * @return the URL or path to the SolrServer      */
+comment|/**      * Getter for the Location of the SolrServer. In case of an remote server this will be the base URL of the      * RESTful interface. In case of an embedded Server it is the directory containing the solr.xml or the      * directory of the core in case of a multi-core setup.      *       * @return the URL or path to the SolrServer      */
 specifier|public
 name|String
 name|getSolrServerLocation
@@ -442,7 +442,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Setter for the multi yard index layout state.<p>      * The multi layout state. If data of multiple yards are stored in the same      * Solr Index, than the YardID MUST be stored within all indexed documents.      * In addition the to all queries a fq (filterQuery) must be added that      * restricts results to the current yard      */
+comment|/**      * Setter for the multi yard index layout state.      *<p>      * The multi layout state. If data of multiple yards are stored in the same Solr Index, than the YardID      * MUST be stored within all indexed documents. In addition the to all queries a fq (filterQuery) must be      * added that restricts results to the current yard      */
 specifier|public
 name|void
 name|setMultiYardIndexLayout
@@ -483,7 +483,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for the multi yard index layout state.<p>      * If data of multiple yards are stored in the same      * Solr Index, than the YardID MUST be stored within all indexed documents.      * In addition the to all queries a fq (filterQuery) must be added that      * restricts results to the current yard.<p>      * The default value is<code>false</code>      * @return the multi yard index layout state      */
+comment|/**      * Getter for the multi yard index layout state.      *<p>      * If data of multiple yards are stored in the same Solr Index, than the YardID MUST be stored within all      * indexed documents. In addition the to all queries a fq (filterQuery) must be added that restricts      * results to the current yard.      *<p>      * The default value is<code>false</code>      *       * @return the multi yard index layout state      */
 specifier|public
 name|boolean
 name|isMultiYardIndexLayout
@@ -544,7 +544,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Getter for the state if this SolrYard can be initialised by using the      * default configuration or if it is required to use a provided configuration.      * The default is set to<code>true</code>.<p>      * If this property is set to<code>false</code> than the SolrYard can only      * be initialised if the Index is already available or the initial      * configuration is provided to the {@link SolrDirectoryManager}.      * @return the state or<code>true</code> as default      */
+comment|/**      * Getter for the state if this SolrYard can be initialised by using the default configuration or if it is      * required to use a provided configuration. The default is set to<code>true</code>.      *<p>      * If this property is set to<code>false</code> than the SolrYard can only be initialised if the Index is      * already available or the initial configuration is provided to the {@link SolrDirectoryManager}.      *       * @return the state or<code>true</code> as default      */
 specifier|public
 name|boolean
 name|isDefaultInitialisation
@@ -605,7 +605,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Setter for the state if this SolrYard can be initialised by using the      * default configuration or if it is required to use a provided configuration.      * The default is set to<code>true</code>.<p>      * If this property is set to<code>false</code> than the SolrYard can only      * be initialised if the Index is already available or the initial      * configuration is provided to the {@link SolrDirectoryManager}.      * @param defaultInitialisationState the state or<code>null</code> to      * remove the current configuration. The default state is<code>true</code>.      */
+comment|/**      * Setter for the state if this SolrYard can be initialised by using the default configuration or if it is      * required to use a provided configuration. The default is set to<code>true</code>.      *<p>      * If this property is set to<code>false</code> than the SolrYard can only be initialised if the Index is      * already available or the initial configuration is provided to the {@link SolrDirectoryManager}.      *       * @param defaultInitialisationState      *            the state or<code>null</code> to remove the current configuration. The default state is      *<code>true</code>.      */
 specifier|public
 name|void
 name|setDefaultInitialisation
@@ -646,7 +646,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for the maximum number of boolean clauses allowed for queries      * @return The configured number of<code>null</code> if not configured or      * the configured value is not an valid Integer.      */
+comment|/**      * Getter for the maximum number of boolean clauses allowed for queries      *       * @return The configured number of<code>null</code> if not configured or the configured value is not an      *         valid Integer.      */
 specifier|public
 name|Integer
 name|getMaxBooleanClauses
@@ -1174,7 +1174,7 @@ return|;
 block|}
 else|else
 block|{
-comment|//TODO: add support for parsing from String[] and Collection<String>
+comment|// TODO: add support for parsing from String[] and Collection<String>
 return|return
 literal|null
 return|;

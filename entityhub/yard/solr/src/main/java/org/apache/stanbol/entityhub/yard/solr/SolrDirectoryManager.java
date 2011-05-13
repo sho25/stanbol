@@ -190,7 +190,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Service that provides access to an managed Solr directory - a directory that  * manages the files (configuration and data) needed to create a Solr Server.<p>  * Note that is only refers to the Files and not the Solr server (or   * EmbeddedSolrServer). Users need to use the   * {@link SolrServerProvider#getSolrServer(Type, String, String...)} to get an   * {@link SolrServer} instance based on the directory provided by this   * Interface.<p>  * The {@link #MANAGED_SOLR_DIR_PROPERTY} property can be used to define the location  * of the internally managed index. Implementations need to load this property  * by the {@link ComponentContext} if running within an OSGI container or   * otherwise use the system properties. In cases a relative path is configured  * the "user.dir" need to be used as base. Implementations need also to provide  * an default value in case no configuration is present.<br>  * Implementations need also support  property substitution based on the system  * properties for the {@link #MANAGED_SOLR_DIR_PROPERTY}. E.g. parsing the value   * "${user.home}/.stanbol/indexes" will create the managed solr indexes within   * the home directory of the user.<p>  * This Service is also useful if one needs to initialise an own Solr Core  * for the manage Solr Server. In this case the {@link #getManagedDirectory()}  * method can be used to get the managed Solr directory and new indices can be  * added as sub directories. Utility methods for initialising cores are available  * as part of the {@link ConfigUtils}.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Service that provides access to an managed Solr directory - a directory that manages the files  * (configuration and data) needed to create a Solr Server.  *<p>  * Note that is only refers to the Files and not the Solr server (or EmbeddedSolrServer). Users need to use  * the {@link SolrServerProvider#getSolrServer(Type, String, String...)} to get an {@link SolrServer} instance  * based on the directory provided by this Interface.  *<p>  * The {@link #MANAGED_SOLR_DIR_PROPERTY} property can be used to define the location of the internally  * managed index. Implementations need to load this property by the {@link ComponentContext} if running within  * an OSGI container or otherwise use the system properties. In cases a relative path is configured the  * "user.dir" need to be used as base. Implementations need also to provide an default value in case no  * configuration is present.<br>  * Implementations need also support property substitution based on the system properties for the  * {@link #MANAGED_SOLR_DIR_PROPERTY}. E.g. parsing the value "${user.home}/.stanbol/indexes" will create the  * managed solr indexes within the home directory of the user.  *<p>  * This Service is also useful if one needs to initialise an own Solr Core for the manage Solr Server. In this  * case the {@link #getManagedDirectory()} method can be used to get the managed Solr directory and new  * indices can be added as sub directories. Utility methods for initialising cores are available as part of  * the {@link ConfigUtils}.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_interface
@@ -198,13 +198,13 @@ specifier|public
 interface|interface
 name|SolrDirectoryManager
 block|{
-comment|/**      * This property can be used to configure the location of the internally      * managed EmbeddedSolrServer.<p>      * Configuring an absolute path (starting with {@link File#separatorChar})       * will cause the index to be initialised in this directory.<p>      * Configuring an relative value will use<ul>      *<li> the working directory (<code>Systen.getProperty("user.dir")</code>)      *      outside of an OSGI environment      *<li> the data directory provided by the SolrYard bundle (by calling      *      {@link BundleContext#getDataFile(String)} with the relative path.      *</ul>      * In case this property is not present the {@link #DEFAULT_SOLR_DATA_DIR}      * (an relative path) is used.      */
+comment|/**      * This property can be used to configure the location of the internally managed EmbeddedSolrServer.      *<p>      * Configuring an absolute path (starting with {@link File#separatorChar}) will cause the index to be      * initialised in this directory.      *<p>      * Configuring an relative value will use      *<ul>      *<li>the working directory (<code>Systen.getProperty("user.dir")</code>) outside of an OSGI environment      *<li>the data directory provided by the SolrYard bundle (by calling      * {@link BundleContext#getDataFile(String)} with the relative path.      *</ul>      * In case this property is not present the {@link #DEFAULT_SOLR_DATA_DIR} (an relative path) is used.      */
 name|String
 name|MANAGED_SOLR_DIR_PROPERTY
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.managedSolrDir"
 decl_stmt|;
-comment|/**      * Default value for the relative path used if the {@link #MANAGED_SOLR_DIR_PROPERTY}      * is not present. It is not required that implementations use this as default.      */
+comment|/**      * Default value for the relative path used if the {@link #MANAGED_SOLR_DIR_PROPERTY} is not present. It      * is not required that implementations use this as default.      */
 name|String
 name|DEFAULT_SOLR_DATA_DIR
 init|=
@@ -222,7 +222,7 @@ name|IllegalStateException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Checks if the managed index is also initialised and ready to be used.<p>      * Indexes are managed as soon as they are announced to the       * SolrDirectoryManager. However when using the       * {@link #createSolrDirectory(String, String, Properties)} it can not be      * assured that the archive with the actual data is already available.<p>      * @param indexName the name of the index      * @return      * @throws IllegalStateException      * @throws IllegalArgumentException      */
+comment|/**      * Checks if the managed index is also initialised and ready to be used.      *<p>      * Indexes are managed as soon as they are announced to the SolrDirectoryManager. However when using the      * {@link #createSolrDirectory(String, String, Properties)} it can not be assured that the archive with      * the actual data is already available.      *<p>      *       * @param indexName      *            the name of the index      * @return      * @throws IllegalStateException      * @throws IllegalArgumentException      */
 name|boolean
 name|isInitialisedIndex
 parameter_list|(
@@ -234,7 +234,7 @@ name|IllegalStateException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all the indexes currently available in the managed solr directory.      * The key is the name of the index and the value is the File pointing to the      * directory. For uninitialised indexes the value will be<code>null</code>.      * @return map containing all the currently available indexes      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated) or initialised.      */
+comment|/**      * Getter for all the indexes currently available in the managed solr directory. The key is the name of      * the index and the value is the File pointing to the directory. For uninitialised indexes the value will      * be<code>null</code>.      *       * @return map containing all the currently available indexes      * @throws IllegalStateException      *             In case the managed Solr directory can not be obtained (usually indicates that this      *             component is currently deactivated) or initialised.      */
 name|Map
 argument_list|<
 name|String
@@ -246,7 +246,7 @@ parameter_list|()
 throws|throws
 name|IllegalStateException
 function_decl|;
-comment|/**      * Getter for the directory of the parsed index. Implementations need to       * ensure that returned directories are valid Solr indices (or Solr Cores)<p>      * Directories returned by this method are typically used as second parameter      * of {@link SolrServerProvider#getSolrServer(Type, String, String...)} to      * create an {@link SolrServer} instance.<p>      * This method may trigger the initialisation of the SolrIndex if not already      * done.<p>      * This method needs to wait until the initialisation of the index i      * completed (even in multi threaded environments)<p>      * @param solrPathOrUri the name of the requested solr index. If no index      * with that name does exist a new one will be initialised base on the      * default core configuration part of this bundle.      * @param allowDefaultInit If<code>true</code> the Solr Index can be initialised      * with the default configuration if not already present.      * @return the directory (instanceDir) of the index or<code>null</code> if      *<code>false</code> was parsed as allowDefaultInit and the data for the index      * are not yet available.      * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
+comment|/**      * Getter for the directory of the parsed index. Implementations need to ensure that returned directories      * are valid Solr indices (or Solr Cores)      *<p>      * Directories returned by this method are typically used as second parameter of      * {@link SolrServerProvider#getSolrServer(Type, String, String...)} to create an {@link SolrServer}      * instance.      *<p>      * This method may trigger the initialisation of the SolrIndex if not already done.      *<p>      * This method needs to wait until the initialisation of the index i completed (even in multi threaded      * environments)      *<p>      *       * @param solrPathOrUri      *            the name of the requested solr index. If no index with that name does exist a new one will      *            be initialised base on the default core configuration part of this bundle.      * @param allowDefaultInit      *            If<code>true</code> the Solr Index can be initialised with the default configuration if not      *            already present.      * @return the directory (instanceDir) of the index or<code>null</code> if<code>false</code> was parsed      *         as allowDefaultInit and the data for the index are not yet available.      * @throws IllegalArgumentException      *             if the parsed solrIndexName is<code>null</code> or empty      */
 name|File
 name|getSolrIndexDirectory
 parameter_list|(
@@ -260,7 +260,7 @@ parameter_list|)
 throws|throws
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Creates a new Solr Index based on the data in the provided {@link ArchiveInputStream}      * @param solrIndexName the name of the index to create      * @param ais the stream providing the data for the new index      * @return the directory (instanceDir) of the index.      * @throws IOException On any error while reading from the parsed input stream      * @throws IllegalArgumentException if the parsed solrIndexName is       *<code>null</code> or empty      */
+comment|/**      * Creates a new Solr Index based on the data in the provided {@link ArchiveInputStream}      *       * @param solrIndexName      *            the name of the index to create      * @param ais      *            the stream providing the data for the new index      * @return the directory (instanceDir) of the index.      * @throws IOException      *             On any error while reading from the parsed input stream      * @throws IllegalArgumentException      *             if the parsed solrIndexName is<code>null</code> or empty      */
 name|File
 name|createSolrIndex
 parameter_list|(
@@ -276,7 +276,7 @@ name|IllegalArgumentException
 throws|,
 name|IOException
 function_decl|;
-comment|/**      * Creates a new Solr Index based on looking up the Index data via the      * {@link DataFileProvider} service      * @param solrIndexName The name of the solrIndex to create      * @param indexPath the name of the dataFile looked up via the {@link DataFileProvider}      * @param propergies Additional properties describing the index      * @return the directory (instanceDir) of the index or null if the index       * data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
+comment|/**      * Creates a new Solr Index based on looking up the Index data via the {@link DataFileProvider} service      *       * @param solrIndexName      *            The name of the solrIndex to create      * @param indexPath      *            the name of the dataFile looked up via the {@link DataFileProvider}      * @param propergies      *            Additional properties describing the index      * @return the directory (instanceDir) of the index or null if the index data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
 name|File
 name|createSolrDirectory
 parameter_list|(
@@ -295,7 +295,7 @@ name|IllegalArgumentException
 throws|,
 name|IOException
 function_decl|;
-comment|/**      * Getter for the managed Solr Directory.      * @return the directory of the Solr Home used for the internally managed      * {@link CoreContainer} or<code>null</code> if running within an OSGI      * Environment and this component is deactivated.      * @throws IllegalStateException In case the managed Solr directory can not      * be obtained (usually indicates that this component is currently       * deactivated) or initialised.      */
+comment|/**      * Getter for the managed Solr Directory.      *       * @return the directory of the Solr Home used for the internally managed {@link CoreContainer} or      *<code>null</code> if running within an OSGI Environment and this component is deactivated.      * @throws IllegalStateException      *             In case the managed Solr directory can not be obtained (usually indicates that this      *             component is currently deactivated) or initialised.      */
 name|File
 name|getManagedDirectory
 parameter_list|()

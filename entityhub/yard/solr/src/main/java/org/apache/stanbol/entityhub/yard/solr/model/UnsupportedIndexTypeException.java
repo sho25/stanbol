@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown when the index value type is not compatible with the converter  *  * @author Rupert Westenthaler  */
+comment|/**  * Thrown when the index value type is not compatible with the converter  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -41,7 +41,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
-comment|/**      * Constructs the exception to be thrown when a an IndexType is not supported      * by the current configuration of the {@link IndexValueFactory}      *      * @param indexType the unsupported<code>IndexType</code>      */
+comment|/**      * Constructs the exception to be thrown when a an IndexType is not supported by the current configuration      * of the {@link IndexValueFactory}      *       * @param indexType      *            the unsupported<code>IndexType</code>      */
 specifier|public
 name|UnsupportedIndexTypeException
 parameter_list|(
@@ -62,7 +62,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs the exception to be thrown if a converter does not support the      * {@link IndexDataType} of the parsed {@link IndexValue}.      * @param converter the converter (implement the {@link TypeConverter#toString()} method!)      * @param type the unsupported {@link IndexDataType}      */
+comment|/**      * Constructs the exception to be thrown if a converter does not support the {@link IndexDataType} of the      * parsed {@link IndexValue}.      *       * @param converter      *            the converter (implement the {@link TypeConverter#toString()} method!)      * @param type      *            the unsupported {@link IndexDataType}      */
 specifier|public
 name|UnsupportedIndexTypeException
 parameter_list|(

@@ -776,7 +776,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is responsible of converting the queries used by Entityhub to  * queries that can be executed via the Solr RESTfull interface.<p>  * For this conversion the {@link IndexValueFactory} and the {@link FieldMapper}  * as used to index the documents in the index must be parsed.<p>  * TODO: This class currently contains the<ul>  *<li> general usable functionality to convert {@link Query} instances to  * the according representation in index constraints (see  * {@link IndexConstraintTypeEnum} and {@link IndexConstraint}  *<li> general usable functionality to combine the constraints to an tree of  * AND and OR constraints  *<li> SolrSpecific configuration of {@link IndexConstraintTypeEncoder}. This  * need to be made generic to allow different encoder implementations for other  * Document Stores  *<li> the Solr Specific encodings of the AND and OR tree  *</ul>  * Splitting such things up in several different components should make it easy  * to add support for other DocumentStores!  *  * @author Rupert Westenthaler  *  */
+comment|/**  * This class is responsible of converting the queries used by Entityhub to queries that can be executed via  * the Solr RESTfull interface.  *<p>  * For this conversion the {@link IndexValueFactory} and the {@link FieldMapper} as used to index the  * documents in the index must be parsed.  *<p>  * TODO: This class currently contains the  *<ul>  *<li>general usable functionality to convert {@link Query} instances to the according representation in  * index constraints (see {@link IndexConstraintTypeEnum} and {@link IndexConstraint}  *<li>general usable functionality to combine the constraints to an tree of AND and OR constraints  *<li>SolrSpecific configuration of {@link IndexConstraintTypeEncoder}. This need to be made generic to allow  * different encoder implementations for other Document Stores  *<li>the Solr Specific encodings of the AND and OR tree  *</ul>  * Splitting such things up in several different components should make it easy to add support for other  * DocumentStores!  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -784,7 +784,7 @@ specifier|public
 class|class
 name|SolrQueryFactory
 block|{
-comment|/**      * Allows to limit the maximum Numbers of Query Results for any kind of Query.      * For now it is set to 1024.      */
+comment|/**      * Allows to limit the maximum Numbers of Query Results for any kind of Query. For now it is set to 1024.      */
 specifier|public
 specifier|static
 specifier|final
@@ -952,7 +952,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 expr_stmt|;
-comment|//TODO: Make this configuration more flexible!
+comment|// TODO: Make this configuration more flexible!
 name|constraintEncoders
 operator|.
 name|put
@@ -1270,7 +1270,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/**      * TODO: Currently I have no Idea how to determine all the fields to be      * selected, because There are any number of possibilities for field      * names in the index (different data types, different languages ...).      * Therefore currently I select all fields and apply the filter when      * converting the {@link SolrDocument}s in the result to the      * {@link Representation}.<p>      * The only thing I can do is to select only the ID if an empty list is      * parsed as selected.      * @param query      * @param selected      */
+comment|/**      * TODO: Currently I have no Idea how to determine all the fields to be selected, because There are any      * number of possibilities for field names in the index (different data types, different languages ...).      * Therefore currently I select all fields and apply the filter when converting the {@link SolrDocument}s      * in the result to the {@link Representation}.      *<p>      * The only thing I can do is to select only the ID if an empty list is parsed as selected.      *       * @param query      * @param selected      */
 specifier|private
 name|void
 name|setSelected
@@ -1338,12 +1338,12 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
-comment|//See to do in java doc of this method
-comment|//                for(String field : selected){
-comment|//                    if(field != null&& !field.isEmpty()){
-comment|//                        fieldMapper.getFieldNames(new IndexField(Arrays.asList(field), null, null));
-comment|//                    }
-comment|//                }
+comment|// See to do in java doc of this method
+comment|// for(String field : selected){
+comment|// if(field != null&& !field.isEmpty()){
+comment|// fieldMapper.getFieldNames(new IndexField(Arrays.asList(field), null, null));
+comment|// }
+comment|// }
 block|}
 break|break;
 case|case
@@ -1373,7 +1373,7 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-comment|//add the select for the score
+comment|// add the select for the score
 name|query
 operator|.
 name|addField
@@ -1512,7 +1512,7 @@ name|RangeConstraint
 name|rangeConstraint
 parameter_list|)
 block|{
-comment|//we need to find the Index DataType for the range query
+comment|// we need to find the Index DataType for the range query
 name|IndexDataType
 name|dataType
 init|=
@@ -1897,7 +1897,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//first process the parsed dataTypes to get the supported types
+comment|// first process the parsed dataTypes to get the supported types
 name|Collection
 argument_list|<
 name|IndexDataType
@@ -1962,7 +1962,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//TODO: Add possibility to add warnings to indexConstraints
+comment|// TODO: Add possibility to add warnings to indexConstraints
 name|log
 operator|.
 name|warn
@@ -1988,8 +1988,8 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//if no supported types are present
-comment|//get the dataType based on the type of the value
+comment|// if no supported types are present
+comment|// get the dataType based on the type of the value
 try|try
 block|{
 name|IndexValue
@@ -2048,7 +2048,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//one or more supported dataTypes are present
+comment|// one or more supported dataTypes are present
 for|for
 control|(
 name|IndexDataType
@@ -2069,13 +2069,13 @@ name|indexDataType
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*                  * NOTE: add only a single EQ constraints, because if different                  *       dataTypes would result in different representations of                  *       the parsed value this code would not work altogether!                  */
+comment|/*                  * NOTE: add only a single EQ constraints, because if different dataTypes would result in                  * different representations of the parsed value this code would not work altogether!                  */
 name|IndexValue
 name|indexValue
 decl_stmt|;
 try|try
 block|{
-comment|//use the default converter for the value
+comment|// use the default converter for the value
 name|indexValue
 operator|=
 name|indexValueFactory
@@ -2095,7 +2095,7 @@ name|NoConverterException
 name|e
 parameter_list|)
 block|{
-comment|//if not found use the toString() and the first parsed DataType
+comment|// if not found use the toString() and the first parsed DataType
 name|IndexDataType
 name|indexDataType
 init|=
@@ -2180,7 +2180,7 @@ operator|new
 name|SolrQuery
 argument_list|()
 decl_stmt|;
-comment|//first add a filterquery for the domain if present
+comment|// first add a filterquery for the domain if present
 if|if
 condition|(
 name|domain
@@ -2213,7 +2213,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//than add the offset
+comment|// than add the offset
 name|query
 operator|.
 name|setStart
@@ -2224,7 +2224,7 @@ name|getOffset
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//and the limit
+comment|// and the limit
 if|if
 condition|(
 name|entityhubQuery
@@ -2286,9 +2286,9 @@ block|}
 block|}
 else|else
 block|{
-comment|//maybe remove that to prevent to many results! But for now I would
-comment|//rather like to have a default value within the FieldQuery!
-comment|//e.g. set by the FieldQueryFactory when creating new queries!
+comment|// maybe remove that to prevent to many results! But for now I would
+comment|// rather like to have a default value within the FieldQuery!
+comment|// e.g. set by the FieldQueryFactory when creating new queries!
 name|query
 operator|.
 name|setRows
@@ -2301,7 +2301,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/**      * Getter for the domain set as FilterQuery to all generated SolrQueries      * @return the domain or<code>null</code> if no domain is set      */
+comment|/**      * Getter for the domain set as FilterQuery to all generated SolrQueries      *       * @return the domain or<code>null</code> if no domain is set      */
 specifier|public
 specifier|final
 name|String
@@ -2312,7 +2312,7 @@ return|return
 name|domain
 return|;
 block|}
-comment|/**      * Setter for the domain. If an empty string is parsed, than the domain is      * set to<code>null</code>, otherwise the parsed value is set. Parse      *<code>null</code> to deactivated the usage of domains      * @param domain the domain or<code>null</code> if no domain is active      */
+comment|/**      * Setter for the domain. If an empty string is parsed, than the domain is set to<code>null</code>,      * otherwise the parsed value is set. Parse<code>null</code> to deactivated the usage of domains      *       * @param domain      *            the domain or<code>null</code> if no domain is active      */
 specifier|public
 specifier|final
 name|void
@@ -2351,7 +2351,7 @@ name|domain
 expr_stmt|;
 block|}
 block|}
-comment|/**      * getter for the maximum number of results allowed      * @return the maximum number of results that can be set      */
+comment|/**      * getter for the maximum number of results allowed      *       * @return the maximum number of results that can be set      */
 specifier|public
 specifier|final
 name|Integer
@@ -2362,7 +2362,7 @@ return|return
 name|maxQueryResults
 return|;
 block|}
-comment|/**      * Setter for the maximum number of results allowed. If<code>null</code> is      * parsed than the value is set to {@link #MAX_QUERY_RESULTS}. If a value      * smaller than {@link #getDefaultQueryResults()} is parsed, than the      * value is set to {@link #getDefaultQueryResults()}.      * @param maxQueryResults The maximum number of queries allowed      */
+comment|/**      * Setter for the maximum number of results allowed. If<code>null</code> is parsed than the value is set      * to {@link #MAX_QUERY_RESULTS}. If a value smaller than {@link #getDefaultQueryResults()} is parsed,      * than the value is set to {@link #getDefaultQueryResults()}.      *       * @param maxQueryResults      *            The maximum number of queries allowed      */
 specifier|public
 specifier|final
 name|void
@@ -2416,7 +2416,7 @@ name|maxQueryResults
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for the default number of query results. This is used if a parsed      * Query does not define the number of results.      * @return the default value for the number of query results      */
+comment|/**      * Getter for the default number of query results. This is used if a parsed Query does not define the      * number of results.      *       * @return the default value for the number of query results      */
 specifier|public
 specifier|final
 name|Integer
@@ -2427,7 +2427,7 @@ return|return
 name|defaultQueryResults
 return|;
 block|}
-comment|/**      * Setter for the default number of query results. This is used if a parsed      * Query does not define the number of results. If<code>null</code> or a      * value<code><= 0</code>is parsed, than the value is set to the lower value      * of {@link #DEFAULT_QUERY_RESULTS} ({@value #DEFAULT_QUERY_RESULTS}) and      * {@link #getMaxQueryResults()}. If a value<code>>=</code>      * {@link #getMaxQueryResults()} is parsed, than the value is set to      * {@link #getMaxQueryResults()}.      * @param defaultQueryResults the default number of results for queries      */
+comment|/**      * Setter for the default number of query results. This is used if a parsed Query does not define the      * number of results. If<code>null</code> or a value<code><= 0</code>is parsed, than the value is set to      * the lower value of {@link #DEFAULT_QUERY_RESULTS} ({@value #DEFAULT_QUERY_RESULTS}) and      * {@link #getMaxQueryResults()}. If a value<code>>=</code> {@link #getMaxQueryResults()} is parsed, than      * the value is set to {@link #getMaxQueryResults()}.      *       * @param defaultQueryResults      *            the default number of results for queries      */
 specifier|public
 specifier|final
 name|void
@@ -2495,7 +2495,7 @@ name|defaultQueryResults
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Class internally used to process FieldConstraint. This class accesses      * the {@link SolrQueryFactory#constraintEncoders} map.      * @author Rupert Westenthaler      *      */
+comment|/**      * Class internally used to process FieldConstraint. This class accesses the      * {@link SolrQueryFactory#constraintEncoders} map.      *       * @author Rupert Westenthaler      *       */
 specifier|private
 class|class
 name|IndexConstraint
@@ -2537,7 +2537,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Creates a Field Term for the parsed path          * @param path the path          * @throws IllegalArgumentException If the path is<code>null</code> empty.          */
+comment|/**          * Creates a Field Term for the parsed path          *           * @param path          *            the path          * @throws IllegalArgumentException          *             If the path is<code>null</code> empty.          */
 specifier|public
 name|IndexConstraint
 parameter_list|(
@@ -2582,7 +2582,7 @@ name|field
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Set to<code>true</code> to indicate, that this IndexConstraint can not          * be used. e.g. if the conversion of a {@link Constraint } to an          * {@link IndexConstraint} was unsuccessful!          * @param state the state          */
+comment|/**          * Set to<code>true</code> to indicate, that this IndexConstraint can not be used. e.g. if the          * conversion of a {@link Constraint } to an {@link IndexConstraint} was unsuccessful!          *           * @param state          *            the state          */
 specifier|public
 name|void
 name|setInvalied
@@ -2601,7 +2601,7 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Returns<code>true</code> if this index constraint is invalid and          * can not be used for the IndexQuery. If the state is<code>true</code>          * it indicates, that the conversion to a {@link Constraint } to an          * {@link IndexConstraint} was not successful!          * @return the state          */
+comment|/**          * Returns<code>true</code> if this index constraint is invalid and can not be used for the          * IndexQuery. If the state is<code>true</code> it indicates, that the conversion to a          * {@link Constraint } to an {@link IndexConstraint} was not successful!          *           * @return the state          */
 specifier|public
 name|boolean
 name|isInvalied
@@ -2615,7 +2615,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**          * Getter for the Messages why this index constraint is not valid          * @return the messages. An empty List if {@link #isInvalied()} returns          *<code>false</code>          */
+comment|/**          * Getter for the Messages why this index constraint is not valid          *           * @return the messages. An empty List if {@link #isInvalied()} returns<code>false</code>          */
 specifier|public
 name|List
 argument_list|<
@@ -2628,7 +2628,7 @@ return|return
 name|invaliedMessages
 return|;
 block|}
-comment|/**          * Sets an IndexConstraintType to a specific value          * @param constraintType the type of the constraint          * @param value the value.<code>null</code> is permitted, but usually it is          * not needed to add<code>null</code> constraints, because they are automatically          * added if needed (e.g. a range constraint with an open lower bound)          * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type          */
+comment|/**          * Sets an IndexConstraintType to a specific value          *           * @param constraintType          *            the type of the constraint          * @param value          *            the value.<code>null</code> is permitted, but usually it is not needed to add          *<code>null</code> constraints, because they are automatically added if needed (e.g. a          *            range constraint with an open lower bound)          * @throws IllegalArgumentException          *             if<code>null</code> is parsed as constraint type          */
 specifier|public
 name|void
 name|setFieldConstraint
@@ -2649,8 +2649,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//just returning here would also be OK, but better to find errors early by
-comment|//looking at stack traces
+comment|// just returning here would also be OK, but better to find errors early by
+comment|// looking at stack traces
 throw|throw
 operator|new
 name|IllegalArgumentException
@@ -2694,7 +2694,7 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-comment|//accept null values and values that are supported by the encoder!
+comment|// accept null values and values that are supported by the encoder!
 if|if
 condition|(
 name|value
@@ -2726,7 +2726,7 @@ argument_list|,
 name|value
 argument_list|)
 expr_stmt|;
-comment|//we need also check the dependent types!
+comment|// we need also check the dependent types!
 for|for
 control|(
 name|IndexConstraintTypeEnum
@@ -2738,7 +2738,7 @@ name|dependsOn
 argument_list|()
 control|)
 block|{
-comment|//if a dependent type is missing, add it with the default value!
+comment|// if a dependent type is missing, add it with the default value!
 if|if
 condition|(
 operator|!
@@ -2750,7 +2750,7 @@ name|dependent
 argument_list|)
 condition|)
 block|{
-comment|//if missing, set the dependent to null (default value)
+comment|// if missing, set the dependent to null (default value)
 name|setFieldConstraint
 argument_list|(
 name|dependent
@@ -2854,7 +2854,7 @@ name|entrySet
 argument_list|()
 control|)
 block|{
-comment|//NOTE: type checks are already performed in the setFieldConstraint method!
+comment|// NOTE: type checks are already performed in the setFieldConstraint method!
 operator|(
 operator|(
 name|IndexConstraintTypeEncoder
@@ -2884,7 +2884,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//now take the parts and create the constraint!
+comment|// now take the parts and create the constraint!
 name|encodeSolrConstraint
 argument_list|(
 name|queryString
@@ -2905,7 +2905,7 @@ name|EncodedConstraintParts
 name|encodedConstraintParts
 parameter_list|)
 block|{
-comment|//list of all constraints that need to be connected with OR
+comment|// list of all constraints that need to be connected with OR
 name|List
 argument_list|<
 name|List
@@ -2925,7 +2925,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//init with a single constraint
+comment|// init with a single constraint
 name|constraints
 operator|.
 name|add
@@ -2966,7 +2966,7 @@ range|:
 name|encodedConstraintParts
 control|)
 block|{
-comment|//one position may contain multiple options that need to be connected with OR
+comment|// one position may contain multiple options that need to be connected with OR
 name|Set
 argument_list|<
 name|Set
@@ -3008,7 +3008,7 @@ block|{
 name|i
 operator|++
 expr_stmt|;
-comment|//add the and constraints to all or
+comment|// add the and constraints to all or
 if|if
 condition|(
 name|i
@@ -3019,7 +3019,7 @@ name|size
 argument_list|()
 condition|)
 block|{
-comment|//for the last iteration, append the part to the existing constraints
+comment|// for the last iteration, append the part to the existing constraints
 for|for
 control|(
 name|int
@@ -3051,8 +3051,8 @@ block|}
 block|}
 else|else
 block|{
-comment|//if there is more than one value, we need to generate new variants for
-comment|//every option other than the last.
+comment|// if there is more than one value, we need to generate new variants for
+comment|// every option other than the last.
 for|for
 control|(
 name|int
@@ -3106,7 +3106,7 @@ block|}
 block|}
 block|}
 block|}
-comment|//now combine the different options to a single query string
+comment|// now combine the different options to a single query string
 name|boolean
 name|firstOr
 init|=
@@ -3227,7 +3227,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//else ignore empty constraints
+comment|// else ignore empty constraints
 block|}
 name|queryString
 operator|.
@@ -3282,7 +3282,7 @@ block|{
 name|k
 operator|++
 expr_stmt|;
-comment|//add the AND part of this constraint position with all parts of the others
+comment|// add the AND part of this constraint position with all parts of the others
 if|if
 condition|(
 name|k
@@ -3293,7 +3293,7 @@ name|size
 argument_list|()
 condition|)
 block|{
-comment|//for the last iteration, append the part to the existing constraints
+comment|// for the last iteration, append the part to the existing constraints
 for|for
 control|(
 name|int
@@ -3325,8 +3325,8 @@ block|}
 block|}
 else|else
 block|{
-comment|//if there is more than one value, we need to generate new variants for
-comment|//every option other than the last.
+comment|// if there is more than one value, we need to generate new variants for
+comment|// every option other than the last.
 for|for
 control|(
 name|int
@@ -3374,21 +3374,22 @@ block|}
 block|}
 block|}
 block|}
-comment|//        /**
-comment|//         * NOTE: removed, because currently not needed. If re-added, this Method needs also
-comment|//         *       to remove (recursively) dependent with the default value
-comment|//         * Removes the according index constraint if present
-comment|//         * @param constraintType the constraint to remove
-comment|//         * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type
-comment|//         */
-comment|//        public void removeFieldConstraint(IndexConstraintTypeEnum constraintType) throws IllegalArgumentException {
-comment|//            if(constraintType == null){
-comment|//                //just returning here would also be OK, but better to find errors early by
-comment|//                //looking at stack traces
-comment|//                throw new IllegalArgumentException("Parameter IndexConstraintTypeEnum MUST NOT be NULL");
-comment|//            }
-comment|//            this.fieldConstraints.remove(constraintType);
-comment|//        }
+comment|// /**
+comment|// * NOTE: removed, because currently not needed. If re-added, this Method needs also
+comment|// * to remove (recursively) dependent with the default value
+comment|// * Removes the according index constraint if present
+comment|// * @param constraintType the constraint to remove
+comment|// * @throws IllegalArgumentException if<code>null</code> is parsed as constraint type
+comment|// */
+comment|// public void removeFieldConstraint(IndexConstraintTypeEnum constraintType) throws
+comment|// IllegalArgumentException {
+comment|// if(constraintType == null){
+comment|// //just returning here would also be OK, but better to find errors early by
+comment|// //looking at stack traces
+comment|// throw new IllegalArgumentException("Parameter IndexConstraintTypeEnum MUST NOT be NULL");
+comment|// }
+comment|// this.fieldConstraints.remove(constraintType);
+comment|// }
 block|}
 block|}
 end_class

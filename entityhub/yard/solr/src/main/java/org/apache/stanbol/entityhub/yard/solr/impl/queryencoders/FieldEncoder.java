@@ -368,7 +368,7 @@ argument_list|>
 name|acceptsValueType
 parameter_list|()
 block|{
-comment|//NOTE: Generic types are erased at compile time anyways!
+comment|// NOTE: Generic types are erased at compile time anyways!
 return|return
 call|(
 name|Class

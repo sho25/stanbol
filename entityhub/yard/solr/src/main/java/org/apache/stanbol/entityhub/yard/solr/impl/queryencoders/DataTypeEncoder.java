@@ -266,7 +266,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Encodes the DataType to the field name.  *  * @author Rupert Westenthaler  */
+comment|/**  * Encodes the DataType to the field name.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class

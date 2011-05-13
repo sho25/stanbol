@@ -112,7 +112,7 @@ name|REPLACEMENT_STRING
 init|=
 literal|"\\\\$0"
 decl_stmt|;
-comment|/**      * Escapes all special chars in an string (field name or constraint) to be      * used in an SolrQuery.      * @param string the string to be escaped      * @return the escaped string      */
+comment|/**      * Escapes all special chars in an string (field name or constraint) to be used in an SolrQuery.      *       * @param string      *            the string to be escaped      * @return the escaped string      */
 specifier|public
 specifier|static
 name|String
@@ -142,7 +142,7 @@ else|:
 literal|null
 return|;
 block|}
-comment|/**      * This method encodes a parsed index value as needed for queries.<p>       * In case of TXT it is assumed that a whitespace tokenizer is used      * by the index. Therefore values with multiple words need to be      * treated and connected with AND to find only values that contain all.      * In case of STR no whitespace is assumed. Therefore spaces need to      * be replaced with '+' to search for tokens with the exact name.      * In all other cases the string need not to be converted.      *       * Note also that text queries are converted to lower case      * @param value the index value      * @return the (possible multiple) values that need to be connected with AND      */
+comment|/**      * This method encodes a parsed index value as needed for queries.      *<p>      * In case of TXT it is assumed that a whitespace tokenizer is used by the index. Therefore values with      * multiple words need to be treated and connected with AND to find only values that contain all. In case      * of STR no whitespace is assumed. Therefore spaces need to be replaced with '+' to search for tokens      * with the exact name. In all other cases the string need not to be converted.      *       * Note also that text queries are converted to lower case      *       * @param value      *            the index value      * @return the (possible multiple) values that need to be connected with AND      */
 specifier|public
 specifier|static
 name|String

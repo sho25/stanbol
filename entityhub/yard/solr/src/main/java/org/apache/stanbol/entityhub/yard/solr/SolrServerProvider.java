@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The main function of this provider interface is to allow, that moving the  * support for an embedded {@link SolrServer} can be realised by an own bundle.<p>  * The reason for that is, that this requires to include a lot of dependencies  * to the Solr core and all the Lucene libraries one might not need in most of  * the useage cases of the SolrYard because typically one might want to run the  * SolrServer in an own virtual machine or even on an own server.<p>  * However for some usage scenarios and especially for testing it is very  * useful to have the possibility to use Solr as embedded service.  *   * @author Rupert Westenthaler  */
+comment|/**  * The main function of this provider interface is to allow, that moving the support for an embedded  * {@link SolrServer} can be realised by an own bundle.  *<p>  * The reason for that is, that this requires to include a lot of dependencies to the Solr core and all the  * Lucene libraries one might not need in most of the useage cases of the SolrYard because typically one might  * want to run the SolrServer in an own virtual machine or even on an own server.  *<p>  * However for some usage scenarios and especially for testing it is very useful to have the possibility to  * use Solr as embedded service.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -72,7 +72,7 @@ specifier|public
 interface|interface
 name|SolrServerProvider
 block|{
-comment|/**      * SolrServer types defined here to avoid java dependencies to the according      * java classes      * @author Rupert Westenthaler      *      */
+comment|/**      * SolrServer types defined here to avoid java dependencies to the according java classes      *       * @author Rupert Westenthaler      *       */
 enum|enum
 name|Type
 block|{
@@ -85,10 +85,10 @@ block|,
 comment|/**          * This server is preferable used for updates          */
 name|STREAMING
 block|,
-comment|/**          * This allows to use load balancing on multiple SolrServers via a round          * robin algorithm.          */
+comment|/**          * This allows to use load balancing on multiple SolrServers via a round robin algorithm.          */
 name|LOAD_BALANCE
 block|}
-comment|/**      * Getter for the supported types of this Provider      * @return the Types supported by this Provider      */
+comment|/**      * Getter for the supported types of this Provider      *       * @return the Types supported by this Provider      */
 name|Set
 argument_list|<
 name|Type
@@ -96,7 +96,7 @@ argument_list|>
 name|supportedTypes
 parameter_list|()
 function_decl|;
-comment|/**      * Getter for the {@link SolrServer} instance for the provided URI or path      * (in case of an embedded server)      * @param type The type of the requested SolrServer instance or<code>null</code>      * for the default type      * @param uriOrPath the URI (in case of an remote SolrServer that is accessed      * via RESTfull services) or the Path (in case of an embedded SolrServer)      * @param additional This allows to parse additional SolrServers. This may be      * ignored if the requested type does not support the usage of multiple      * servers.      * @return the configured SolrServer client for the parsed parameter      * @throws NullPointerException       * @throws IllegalArgumentException if<code>null</code> is parsed as uriOrPath      * or if the parsed URI or path is not valid for the requested {@link Type}       * or the parsed type is not supported by this provider      */
+comment|/**      * Getter for the {@link SolrServer} instance for the provided URI or path (in case of an embedded server)      *       * @param type      *            The type of the requested SolrServer instance or<code>null</code> for the default type      * @param uriOrPath      *            the URI (in case of an remote SolrServer that is accessed via RESTfull services) or the Path      *            (in case of an embedded SolrServer)      * @param additional      *            This allows to parse additional SolrServers. This may be ignored if the requested type does      *            not support the usage of multiple servers.      * @return the configured SolrServer client for the parsed parameter      * @throws NullPointerException      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as uriOrPath or if the parsed URI or path is not valid for      *             the requested {@link Type} or the parsed type is not supported by this provider      */
 name|SolrServer
 name|getSolrServer
 parameter_list|(

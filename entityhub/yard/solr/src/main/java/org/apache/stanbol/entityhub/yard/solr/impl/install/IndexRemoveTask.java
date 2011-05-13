@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TODO:  * To remove a SolrIndex one would need first to close the SolrCore or  * shutdown the SolrContainer. This is currently not possible be cause the current  * architecture was not intended to support that.<p>  * To implement this one would need access to the CoreContainer with the core  * running on top of the Core to remove. Than one would need to call  * {@link CoreContainer#remove(String)} with the core and   * {@link CoreContainer#persist()} to remove the core also from the solr.xml.  * After that one can remove the files from the disk.<p>  * This would still have the problem that other components using an   * {@link EmbeddedSolrServer} that is based on this core would not be notified  * about such a change.  * @author Rupert Westenthaler  *  */
+comment|/**  * TODO: To remove a SolrIndex one would need first to close the SolrCore or shutdown the SolrContainer. This  * is currently not possible be cause the current architecture was not intended to support that.  *<p>  * To implement this one would need access to the CoreContainer with the core running on top of the Core to  * remove. Than one would need to call {@link CoreContainer#remove(String)} with the core and  * {@link CoreContainer#persist()} to remove the core also from the solr.xml. After that one can remove the  * files from the disk.  *<p>  * This would still have the problem that other components using an {@link EmbeddedSolrServer} that is based  * on this core would not be notified about such a change.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -138,7 +138,7 @@ name|IndexRemoveTask
 extends|extends
 name|InstallTask
 block|{
-comment|/**      * Use 11 because the RemoveConfiguration uses 10 and we need to ensure that      * the files are removed after the services are shut down.      */
+comment|/**      * Use 11 because the RemoveConfiguration uses 10 and we need to ensure that the files are removed after      * the services are shut down.      */
 specifier|private
 specifier|static
 specifier|final

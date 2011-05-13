@@ -966,7 +966,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link Yard} interface based on a Solr Server.<p>  * This Yard implementation supports to store data of multiple yard instances  * within the same Solr index. The {@link FieldMapper#getDocumentDomainField()}  * with the value of the Yard ID ({@link #getId()}) is used to mark documents  * stored by the different Yards using the same Index. Queries are also restricted  * to documents stored by the actual Yard by adding a  *<a href="http://wiki.apache.org/solr/CommonQueryParameters#fq">FilterQuery</a>  *<code>fq=fieldMapper.getDocumentDomainField()+":"+getId()</code> to all  * queries. This feature can be activated by setting the  * {@link #MULTI_YARD_INDEX_LAYOUT} in the configuration. However this requires,  * that the documents in the index are already marked with the ID of the Yard.  * So setting this property makes usually only sense when the Solr index do not  * contain any data.<p>  * Also note, that the different Yards using the same index MUST NOT store  * Representations with the same ID. If that happens, that the Yard writing the  * Representation last will win and the Representation will be deleted for the  * other Yard!<p>  * The SolrJ library is used for the communication with the SolrServer.<p>  * TODO: There is still some refactoring needed, because a lot of the code  *       within this bundle is more generic and usable regardless what kind of  *       "document based" store is used. Currently the Solr specific stuff is in  *       the impl and the default packages. All the other classes are intended  *       to be generally useful. However there might be still some unwanted  *       dependencies.<p>  * TODO: It would be possible to support for multi cores (see  *       http://wiki.apache.org/solr/CoreAdmin for more Information)<br>  *       However it is not possible to create cores on the fly (at least not directly;  *       one would need to create first the needed directories and than call  *       CREATE via the CoreAdmin). As soon as Solr is directly started via  *       OSGI and we do know the Solr home, than it would be possible to  *       implement "on the fly" generation of new cores. this would also allow  *       a configuration where - as default - a new core is created automatically  *       on the integrated Solr Server for any configured SolrYard.  *  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the {@link Yard} interface based on a Solr Server.  *<p>  * This Yard implementation supports to store data of multiple yard instances within the same Solr index. The  * {@link FieldMapper#getDocumentDomainField()} with the value of the Yard ID ({@link #getId()}) is used to  * mark documents stored by the different Yards using the same Index. Queries are also restricted to documents  * stored by the actual Yard by adding a<a  * href="http://wiki.apache.org/solr/CommonQueryParameters#fq">FilterQuery</a>  *<code>fq=fieldMapper.getDocumentDomainField()+":"+getId()</code> to all queries. This feature can be  * activated by setting the {@link #MULTI_YARD_INDEX_LAYOUT} in the configuration. However this requires, that  * the documents in the index are already marked with the ID of the Yard. So setting this property makes  * usually only sense when the Solr index do not contain any data.  *<p>  * Also note, that the different Yards using the same index MUST NOT store Representations with the same ID.  * If that happens, that the Yard writing the Representation last will win and the Representation will be  * deleted for the other Yard!  *<p>  * The SolrJ library is used for the communication with the SolrServer.  *<p>  * TODO: There is still some refactoring needed, because a lot of the code within this bundle is more generic  * and usable regardless what kind of "document based" store is used. Currently the Solr specific stuff is in  * the impl and the default packages. All the other classes are intended to be generally useful. However there  * might be still some unwanted dependencies.  *<p>  * TODO: It would be possible to support for multi cores (see http://wiki.apache.org/solr/CoreAdmin for more  * Information)<br>  * However it is not possible to create cores on the fly (at least not directly; one would need to create  * first the needed directories and than call CREATE via the CoreAdmin). As soon as Solr is directly started  * via OSGI and we do know the Solr home, than it would be possible to implement "on the fly" generation of  * new cores. this would also allow a configuration where - as default - a new core is created automatically  * on the integrated Solr Server for any configured SolrYard.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -987,7 +987,10 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|//the ID and SOLR_SERVER_LOCATION are required!
+comment|// the ID and
+comment|// SOLR_SERVER_LOCATION
+comment|// are
+comment|// required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -1000,7 +1003,7 @@ argument_list|(
 name|value
 operator|=
 block|{
-comment|//TODO: Added propertied from AbstractYard to fix ordering!
+comment|// TODO: Added propertied from AbstractYard to fix ordering!
 annotation|@
 name|Property
 argument_list|(
@@ -1073,7 +1076,7 @@ operator|-
 literal|1
 argument_list|)
 block|,
-comment|//BEGIN SolrYard specific Properties
+comment|// BEGIN SolrYard specific Properties
 annotation|@
 name|Property
 argument_list|(
@@ -1164,7 +1167,7 @@ name|SOLR_SERVER_LOCATION
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.solrUri"
 decl_stmt|;
-comment|/**      * The key used to configure if data of multiple Yards are stored within the      * same index (<code>default=false</code>)      */
+comment|/**      * The key used to configure if data of multiple Yards are stored within the same index (      *<code>default=false</code>)      */
 specifier|public
 specifier|static
 specifier|final
@@ -1173,7 +1176,7 @@ name|MULTI_YARD_INDEX_LAYOUT
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.multiYardIndexLayout"
 decl_stmt|;
-comment|/**      * The maximum boolean clauses as configured in the solrconfig.xml of the      * SolrServer. The default value for this config in Solr 1.4 is 1024.<p>      * This value is important for generating queries that search for multiple      * documents, because it determines the maximum number of OR combination for      * the searched document ids.      */
+comment|/**      * The maximum boolean clauses as configured in the solrconfig.xml of the SolrServer. The default value      * for this config in Solr 1.4 is 1024.      *<p>      * This value is important for generating queries that search for multiple documents, because it      * determines the maximum number of OR combination for the searched document ids.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1182,7 +1185,7 @@ name|MAX_BOOLEAN_CLAUSES
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.maxBooleanClauses"
 decl_stmt|;
-comment|/**      * This property allows to define a field that is used to parse the boost      * for the parsed representation. Typically this will be the pageRank of      * that entity within the referenced site (e.g. {@link Math#log1p(double)}      * of the number of incoming links      */
+comment|/**      * This property allows to define a field that is used to parse the boost for the parsed representation.      * Typically this will be the pageRank of that entity within the referenced site (e.g.      * {@link Math#log1p(double)} of the number of incoming links      */
 specifier|public
 specifier|static
 specifier|final
@@ -1191,7 +1194,7 @@ name|DOCUMENT_BOOST_FIELD
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.documentBoost"
 decl_stmt|;
-comment|/**      * Key used to configure {@link Entry Entry&lt;String,Float&gt;} for fields      * with the boost. If no Map is configured or a field is not present in the      * Map, than 1.0f is used as Boost. If a Document boost is present than the      * boost of a Field is documentBoost*fieldBoost.      */
+comment|/**      * Key used to configure {@link Entry Entry&lt;String,Float&gt;} for fields with the boost. If no Map is      * configured or a field is not present in the Map, than 1.0f is used as Boost. If a Document boost is      * present than the boost of a Field is documentBoost*fieldBoost.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1200,7 +1203,7 @@ name|FIELD_BOOST_MAPPINGS
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.fieldBoosts"
 decl_stmt|;
-comment|/**      * Key used to configure the implementation of the {@link SolrServer} to      * be used by this SolrYard implementation. The default value is determined      * by the type of the value configured by the {@link #SOLR_SERVER_LOCATION}.      * In case a path of a File URI is used, the type is set to      * {@link Type#EMBEDDED} otherwise {@link Type#HTTP} is used as default.      */
+comment|/**      * Key used to configure the implementation of the {@link SolrServer} to be used by this SolrYard      * implementation. The default value is determined by the type of the value configured by the      * {@link #SOLR_SERVER_LOCATION}. In case a path of a File URI is used, the type is set to      * {@link Type#EMBEDDED} otherwise {@link Type#HTTP} is used as default.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1209,7 +1212,7 @@ name|SOLR_SERVER_TYPE
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.solrServerType"
 decl_stmt|;
-comment|/**      * Key used to to enable/disable the use of the default configuration when       * initialising the SolrYard. The default value MUST BE<code>true</code>      */
+comment|/**      * Key used to to enable/disable the use of the default configuration when initialising the SolrYard. The      * default value MUST BE<code>true</code>      */
 specifier|public
 specifier|static
 specifier|final
@@ -1218,7 +1221,7 @@ name|SOLR_INDEX_DEFAULT_CONFIG
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.allowDefaultConfig"
 decl_stmt|;
-comment|/**      * The default value for the maxBooleanClauses of SolrQueries. Set to      * {@value #defaultMaxBooleanClauses} the default of Slor 1.4      */
+comment|/**      * The default value for the maxBooleanClauses of SolrQueries. Set to {@value #defaultMaxBooleanClauses}      * the default of Slor 1.4      */
 specifier|protected
 specifier|static
 specifier|final
@@ -1227,7 +1230,7 @@ name|defaultMaxBooleanClauses
 init|=
 literal|1024
 decl_stmt|;
-comment|/**      * Key used to enable/disable committing of update(..) and      * store(..) operations. Enabling this ensures that indexed documents are      * immediately available for searches, but it will also decrease the      * performance for updates.      */
+comment|/**      * Key used to enable/disable committing of update(..) and store(..) operations. Enabling this ensures      * that indexed documents are immediately available for searches, but it will also decrease the      * performance for updates.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1245,7 +1248,7 @@ name|DEFAULT_IMMEDIATE_COMMIT_STATE
 init|=
 literal|true
 decl_stmt|;
-comment|/**      * If {@link #IMMEDIATE_COMMIT} is deactivated, than this time is parsed to      * update(..) and store(..) operations as the maximum time (in ms) until      * a commit.       */
+comment|/**      * If {@link #IMMEDIATE_COMMIT} is deactivated, than this time is parsed to update(..) and store(..)      * operations as the maximum time (in ms) until a commit.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1254,7 +1257,7 @@ name|COMMIT_WITHIN_DURATION
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.commitWithinDuration"
 decl_stmt|;
-comment|/**      * The default value for the {@link #COMMIT_WITHIN_DURATION} parameter is      * 10 sec.      */
+comment|/**      * The default value for the {@link #COMMIT_WITHIN_DURATION} parameter is 10 sec.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1279,32 +1282,32 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * The SolrServer used for this Yard. Initialisation is done based on the      * configured parameters in {@link #activate(ComponentContext)}.      */
+comment|/**      * The SolrServer used for this Yard. Initialisation is done based on the configured parameters in      * {@link #activate(ComponentContext)}.      */
 specifier|private
 name|SolrServer
 name|server
 decl_stmt|;
-comment|/**      * The {@link FieldMapper} is responsible for converting fields of      * {@link Representation} to fields in the {@link SolrInputDocument} and      * vice versa      */
+comment|/**      * The {@link FieldMapper} is responsible for converting fields of {@link Representation} to fields in the      * {@link SolrInputDocument} and vice versa      */
 specifier|private
 name|FieldMapper
 name|fieldMapper
 decl_stmt|;
-comment|/**      * The {@link IndexValueFactory} is responsible for converting values of      * fields in the {@link Representation} to the according {@link IndexValue}.      * One should note, that some properties of the {@link IndexValue} such as      * the language ({@link IndexValue#getLanguage()}) and the dataType      * ({@link IndexValue#getType()}) are encoded within the field name inside      * the {@link SolrInputDocument} and {@link SolrDocument}. This is done by      * the configured {@link FieldMapper}.      */
+comment|/**      * The {@link IndexValueFactory} is responsible for converting values of fields in the      * {@link Representation} to the according {@link IndexValue}. One should note, that some properties of      * the {@link IndexValue} such as the language ({@link IndexValue#getLanguage()}) and the dataType (      * {@link IndexValue#getType()}) are encoded within the field name inside the {@link SolrInputDocument}      * and {@link SolrDocument}. This is done by the configured {@link FieldMapper}.      */
 specifier|private
 name|IndexValueFactory
 name|indexValueFactory
 decl_stmt|;
-comment|/**      * The {@link SolrQueryFactory} is responsible for converting the      * {@link Constraint}s of a query to constraints in the index. This requires      * usually that a single {@link Constraint} is described by several      * constraints in the index (see {@link IndexConstraintTypeEnum}).<p>      * TODO: The encoding of such constraints is already designed correctly, the      * {@link SolrQueryFactory} that implements logic of converting the      * Incoming {@link Constraint}s and generating the {@link SolrQuery} needs      * to undergo some refactoring!      *      */
+comment|/**      * The {@link SolrQueryFactory} is responsible for converting the {@link Constraint}s of a query to      * constraints in the index. This requires usually that a single {@link Constraint} is described by      * several constraints in the index (see {@link IndexConstraintTypeEnum}).      *<p>      * TODO: The encoding of such constraints is already designed correctly, the {@link SolrQueryFactory} that      * implements logic of converting the Incoming {@link Constraint}s and generating the {@link SolrQuery}      * needs to undergo some refactoring!      *       */
 specifier|private
 name|SolrQueryFactory
 name|solrQueryFactoy
 decl_stmt|;
-comment|/**      * Used to store the name of the field used to get the      * {@link SolrInputDocument#setDocumentBoost(float)} for a Representation.      * This name is available via {@link SolrYardConfig#getDocumentBoostFieldName()}      * however it is stored here to prevent lookups for field of every      * stored {@link Representation}.      */
+comment|/**      * Used to store the name of the field used to get the {@link SolrInputDocument#setDocumentBoost(float)}      * for a Representation. This name is available via {@link SolrYardConfig#getDocumentBoostFieldName()}      * however it is stored here to prevent lookups for field of every stored {@link Representation}.      */
 specifier|private
 name|String
 name|documentBoostFieldName
 decl_stmt|;
-comment|/**      * Map used to store boost values for fields. The default Boost for fields      * is 1.0f. This is used if this map is<code>null</code>, a field is not      * a key in this map, the value of a field in that map is<code>null</code> or      * lower equals zero. Also NOTE that the boost for fields is multiplied with      * the boost for the Document if present.      */
+comment|/**      * Map used to store boost values for fields. The default Boost for fields is 1.0f. This is used if this      * map is<code>null</code>, a field is not a key in this map, the value of a field in that map is      *<code>null</code> or lower equals zero. Also NOTE that the boost for fields is multiplied with the      * boost for the Document if present.      */
 specifier|private
 name|Map
 argument_list|<
@@ -1314,14 +1317,14 @@ name|Float
 argument_list|>
 name|fieldBoostMap
 decl_stmt|;
-comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard.      * Supports also {@link Type#STREAMING} and {@link Type#LOAD_BALANCE} type      * of servers.      * TODO: In case a remove SolrServer is configured by the      * {@link SolrYardConfig#getSolrServerLocation()}, than it would be possible      * to create both an {@link StreamingUpdateSolrServer} (by parsing       * {@link Type#STREAMING}) and an normal {@link CommonsHttpSolrServer}. The      * streaming update one should be used for indexing requests and the      * commons http one for all other requests. This would provide performance      * advantages when updating {@link Representation}s stored in a SolrYard      * using an remote SolrServer.      */
+comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard. Supports also      * {@link Type#STREAMING} and {@link Type#LOAD_BALANCE} type of servers. TODO: In case a remove SolrServer      * is configured by the {@link SolrYardConfig#getSolrServerLocation()}, than it would be possible to      * create both an {@link StreamingUpdateSolrServer} (by parsing {@link Type#STREAMING}) and an normal      * {@link CommonsHttpSolrServer}. The streaming update one should be used for indexing requests and the      * commons http one for all other requests. This would provide performance advantages when updating      * {@link Representation}s stored in a SolrYard using an remote SolrServer.      */
 annotation|@
 name|Reference
 specifier|private
 name|SolrServerProviderManager
 name|solrServerProviderManager
 decl_stmt|;
-comment|/**      * Used to retrieve (and init if not already present) the Solr Index directory      * for relative paths parsed for {@link SolrYardConfig#getSolrServerLocation()}.      * Note that the {@link SolrDirectoryManager} only provides the path to the      * files. The {@link SolrServer} instance is created by the      * {@link SolrServerProviderManager}!      */
+comment|/**      * Used to retrieve (and init if not already present) the Solr Index directory for relative paths parsed      * for {@link SolrYardConfig#getSolrServerLocation()}. Note that the {@link SolrDirectoryManager} only      * provides the path to the files. The {@link SolrServer} instance is created by the      * {@link SolrServerProviderManager}!      */
 annotation|@
 name|Reference
 specifier|private
@@ -1335,14 +1338,14 @@ name|immediateCommit
 init|=
 name|DEFAULT_IMMEDIATE_COMMIT_STATE
 decl_stmt|;
-comment|/**      * If<code>{@link #immediateCommit} == false</code> this is the time in      * ms parsed to Solr until the documents parsed to update(..) and store(..)      * need to be committed.      */
+comment|/**      * If<code>{@link #immediateCommit} == false</code> this is the time in ms parsed to Solr until the      * documents parsed to update(..) and store(..) need to be committed.      */
 specifier|private
 name|int
 name|commitWithin
 init|=
 name|DEFAULT_COMMIT_WITHIN_DURATION
 decl_stmt|;
-comment|/**      * Default constructor as used by the OSGI environment.<p> DO NOT USE to      * manually create instances! The SolrYard instances do need to be configured.      * YOU NEED TO USE {@link #SolrYard(SolrYardConfig)} to parse the configuration      * and the initialise the Yard if running outside a OSGI environment.      */
+comment|/**      * Default constructor as used by the OSGI environment.      *<p>      * DO NOT USE to manually create instances! The SolrYard instances do need to be configured. YOU NEED TO      * USE {@link #SolrYard(SolrYardConfig)} to parse the configuration and the initialise the Yard if running      * outside a OSGI environment.      */
 specifier|public
 name|SolrYard
 parameter_list|()
@@ -1351,7 +1354,7 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Constructor to be used outside of an OSGI environment      * @param config the configuration for the SolrYard      * @throws IllegalArgumentException if the configuration is not valid      * @throws YardException on any Error while initialising the Solr Server for      * this Yard      */
+comment|/**      * Constructor to be used outside of an OSGI environment      *       * @param config      *            the configuration for the SolrYard      * @throws IllegalArgumentException      *             if the configuration is not valid      * @throws YardException      *             on any Error while initialising the Solr Server for this Yard      */
 specifier|public
 name|SolrYard
 parameter_list|(
@@ -1363,8 +1366,8 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 block|{
-comment|//we need to change the exceptions, because this will be called outside
-comment|//of an OSGI environment!
+comment|// we need to change the exceptions, because this will be called outside
+comment|// of an OSGI environment!
 try|try
 block|{
 name|activate
@@ -1425,7 +1428,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Builds an {@link SolrYardConfig} instance based on the parsed {@link ComponentContext}      * and forwards to {@link #activate(SolrYardConfig)}.      * @param context The component context only used to create the {@link SolrYardConfig}      * based on {@link ComponentContext#getProperties()}.      * @throws ConfigurationException If the configuration is not valid      * @throws IOException In case the initialisation of the Solr index was not      * possible      * @throws SolrServerException Indicates that the referenced SolrServer has      * some problems (usually an invalid configuration).      */
+comment|/**      * Builds an {@link SolrYardConfig} instance based on the parsed {@link ComponentContext} and forwards to      * {@link #activate(SolrYardConfig)}.      *       * @param context      *            The component context only used to create the {@link SolrYardConfig} based on      *            {@link ComponentContext#getProperties()}.      * @throws ConfigurationException      *             If the configuration is not valid      * @throws IOException      *             In case the initialisation of the Solr index was not possible      * @throws SolrServerException      *             Indicates that the referenced SolrServer has some problems (usually an invalid      *             configuration).      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1508,7 +1511,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Internally used to configure an instance (within and without an OSGI      * container      * @param config The configuration      * @throws ConfigurationException If the configuration is not valid      * @throws IOException In case the initialisation of the Solr index was not      * possible      * @throws SolrServerException Indicates that the referenced SolrServer has      * some problems (usually an invalid configuration).      */
+comment|/**      * Internally used to configure an instance (within and without an OSGI container      *       * @param config      *            The configuration      * @throws ConfigurationException      *             If the configuration is not valid      * @throws IOException      *             In case the initialisation of the Solr index was not possible      * @throws SolrServerException      *             Indicates that the referenced SolrServer has some problems (usually an invalid      *             configuration).      */
 specifier|private
 name|void
 name|activate
@@ -1523,7 +1526,7 @@ name|IOException
 throws|,
 name|SolrServerException
 block|{
-comment|//init with the default implementations of the ValueFactory and the QueryFactory
+comment|// init with the default implementations of the ValueFactory and the QueryFactory
 name|super
 operator|.
 name|activate
@@ -1541,7 +1544,7 @@ argument_list|,
 name|config
 argument_list|)
 expr_stmt|;
-comment|//mayby the super activate has updated the configuration
+comment|// mayby the super activate has updated the configuration
 name|config
 operator|=
 operator|(
@@ -1559,7 +1562,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//not within an OSGI environment
+comment|// not within an OSGI environment
 name|solrServerProviderManager
 operator|=
 name|SolrServerProviderManager
@@ -1575,8 +1578,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//not within an OSGI environment
-comment|//init via java.util.ServiceLoader
+comment|// not within an OSGI environment
+comment|// init via java.util.ServiceLoader
 name|Iterator
 argument_list|<
 name|SolrDirectoryManager
@@ -1684,7 +1687,7 @@ name|isAbsolute
 argument_list|()
 condition|)
 block|{
-comment|//relative paths
+comment|// relative paths
 comment|// need to be resolved based on the internally managed Solr directory
 name|indexDirectory
 operator|=
@@ -1773,7 +1776,7 @@ argument_list|,
 name|solrIndexLocation
 argument_list|)
 expr_stmt|;
-comment|//test the server
+comment|// test the server
 name|SolrPingResponse
 name|pingResponse
 init|=
@@ -1806,7 +1809,7 @@ name|pingResponse
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//check if immediateCommit is enable or disabled
+comment|// check if immediateCommit is enable or disabled
 if|if
 condition|(
 name|config
@@ -1835,7 +1838,7 @@ operator|=
 name|DEFAULT_IMMEDIATE_COMMIT_STATE
 expr_stmt|;
 block|}
-comment|//check the maximum duration until changes are commited
+comment|// check the maximum duration until changes are commited
 if|if
 condition|(
 name|config
@@ -1864,7 +1867,7 @@ operator|=
 name|DEFAULT_COMMIT_WITHIN_DURATION
 expr_stmt|;
 block|}
-comment|//the fieldMapper need the Server to store it's namespace prefix configuration
+comment|// the fieldMapper need the Server to store it's namespace prefix configuration
 name|this
 operator|.
 name|fieldMapper
@@ -1958,7 +1961,7 @@ name|getFieldBoosts
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Deactivates this SolrYard instance after committing remaining changes      * @param context      */
+comment|/**      * Deactivates this SolrYard instance after committing remaining changes      *       * @param context      */
 annotation|@
 name|Deactivate
 specifier|protected
@@ -2105,7 +2108,7 @@ name|fieldBoostMap
 operator|=
 literal|null
 expr_stmt|;
-comment|//reset the commitWithin and immediateCommit to the defaults
+comment|// reset the commitWithin and immediateCommit to the defaults
 name|this
 operator|.
 name|commitWithin
@@ -2123,9 +2126,9 @@ operator|.
 name|deactivate
 argument_list|()
 expr_stmt|;
-comment|//deactivate the super implementation
+comment|// deactivate the super implementation
 block|}
-comment|/**      * can be used outside of the OSGI environment to deactivate this instance.      * Thiw will cause the SolrIndex to be committed and optimised.      */
+comment|/**      * can be used outside of the OSGI environment to deactivate this instance. Thiw will cause the SolrIndex      * to be committed and optimised.      */
 specifier|public
 name|void
 name|close
@@ -2137,7 +2140,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Calls the {@link #deactivate(ComponentContext)} with<code>null</code>      * as component context      */
+comment|/**      * Calls the {@link #deactivate(ComponentContext)} with<code>null</code> as component context      */
 annotation|@
 name|Override
 specifier|protected
@@ -2256,7 +2259,7 @@ operator|.
 name|QUERY
 condition|)
 block|{
-comment|//if query set the fields to add to the result Representations
+comment|// if query set the fields to add to the result Representations
 name|selected
 operator|=
 operator|new
@@ -2271,7 +2274,7 @@ name|getSelectedFields
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//add the score to query results!
+comment|// add the score to query results!
 name|selected
 operator|.
 name|add
@@ -2287,7 +2290,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//otherwise add all fields
+comment|// otherwise add all fields
 name|selected
 operator|=
 literal|null
@@ -2336,7 +2339,7 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
-comment|//return a queryResultList
+comment|// return a queryResultList
 name|QueryResultListImpl
 argument_list|<
 name|Representation
@@ -2368,7 +2371,7 @@ operator|.
 name|iterator
 argument_list|()
 argument_list|,
-comment|//inline Adapter Implementation
+comment|// inline Adapter Implementation
 operator|new
 name|AdaptingIterator
 operator|.
@@ -2396,7 +2399,7 @@ argument_list|>
 name|type
 parameter_list|)
 block|{
-comment|//use this method for the conversion!
+comment|// use this method for the conversion!
 return|return
 name|createRepresentation
 argument_list|(
@@ -2531,7 +2534,7 @@ name|e
 argument_list|)
 throw|;
 block|}
-comment|//return a queryResultList
+comment|// return a queryResultList
 return|return
 operator|new
 name|QueryResultListImpl
@@ -2558,7 +2561,7 @@ operator|.
 name|iterator
 argument_list|()
 argument_list|,
-comment|//inline Adapter Implementation
+comment|// inline Adapter Implementation
 operator|new
 name|AdaptingIterator
 operator|.
@@ -2586,7 +2589,7 @@ argument_list|>
 name|type
 parameter_list|)
 block|{
-comment|//use this method for the conversion!
+comment|// use this method for the conversion!
 return|return
 name|doc
 operator|.
@@ -2759,7 +2762,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//create an Representation for the Doc! retrieve
+comment|// create an Representation for the Doc! retrieve
 name|log
 operator|.
 name|debug
@@ -2849,7 +2852,7 @@ return|return
 name|rep
 return|;
 block|}
-comment|/**      * Creates the Representation for the parsed SolrDocument!      * @param doc The Solr Document to convert      * @param fields if NOT NULL only this fields are added to the Representation      * @return the Representation      */
+comment|/**      * Creates the Representation for the parsed SolrDocument!      *       * @param doc      *            The Solr Document to convert      * @param fields      *            if NOT NULL only this fields are added to the Representation      * @return the Representation      */
 specifier|protected
 specifier|final
 name|Representation
@@ -3128,9 +3131,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//else index value == null -> ignore
+comment|// else index value == null -> ignore
 block|}
-comment|//end for all values
+comment|// end for all values
 block|}
 block|}
 else|else
@@ -3161,7 +3164,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//end for all fields
+comment|// end for all fields
 return|return
 name|rep
 return|;
@@ -3266,7 +3269,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Checks what of the documents referenced by the parsed IDs are present      * in the Solr Server      * @param ids the ids of the documents to check      * @return the ids of the found documents      * @throws SolrServerException on any exception of the SolrServer      * @throws IOException an any IO exception while accessing the SolrServer      */
+comment|/**      * Checks what of the documents referenced by the parsed IDs are present in the Solr Server      *       * @param ids      *            the ids of the documents to check      * @return the ids of the found documents      * @throws SolrServerException      *             on any exception of the SolrServer      * @throws IOException      *             an any IO exception while accessing the SolrServer      */
 specifier|protected
 specifier|final
 name|Set
@@ -3455,10 +3458,10 @@ name|e
 argument_list|)
 throw|;
 block|}
-comment|//NOTE: We do not need to update all Documents that refer this ID, because
-comment|//      only the representation of the Entity is deleted and not the
-comment|//      Entity itself. So even that we do no longer have an representation
-comment|//      the entity still exists and might be referenced by others!
+comment|// NOTE: We do not need to update all Documents that refer this ID, because
+comment|// only the representation of the Entity is deleted and not the
+comment|// Entity itself. So even that we do no longer have an representation
+comment|// the entity still exists and might be referenced by others!
 block|}
 annotation|@
 name|Override
@@ -3583,10 +3586,10 @@ name|e
 argument_list|)
 throw|;
 block|}
-comment|//NOTE: We do not need to update all Documents that refer this ID, because
-comment|//      only the representation of the Entity is deleted and not the
-comment|//      Entity itself. So even that we do no longer have an representation
-comment|//      the entity still exists and might be referenced by others!
+comment|// NOTE: We do not need to update all Documents that refer this ID, because
+comment|// only the representation of the Entity is deleted and not the
+comment|// Entity itself. So even that we do no longer have an representation
+comment|// the entity still exists and might be referenced by others!
 block|}
 annotation|@
 name|Override
@@ -4027,7 +4030,7 @@ return|return
 name|added
 return|;
 block|}
-comment|/**      * Internally used to create Solr input documents for parsed representations.<p>      * This method supports boosting of fields. The boost is calculated by combining<ol>      *<li> the boot for the whole representation - by calling       * {@link #getDocumentBoost(Representation)}      *<li> the boost of each field - by using the configured {@link #fieldBoostMap}      *</ol>      * @param representation the representation      * @return the Solr document for indexing      */
+comment|/**      * Internally used to create Solr input documents for parsed representations.      *<p>      * This method supports boosting of fields. The boost is calculated by combining      *<ol>      *<li>the boot for the whole representation - by calling {@link #getDocumentBoost(Representation)}      *<li>the boost of each field - by using the configured {@link #fieldBoostMap}      *</ol>      *       * @param representation      *            the representation      * @return the Solr document for indexing      */
 specifier|protected
 specifier|final
 name|SolrInputDocument
@@ -4095,7 +4098,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//first process the document boost
+comment|// first process the document boost
 name|float
 name|documentBoost
 init|=
@@ -4130,10 +4133,10 @@ argument_list|()
 condition|;
 control|)
 block|{
-comment|//TODO: maybe add some functionality to prevent indexing of the
-comment|//      field configured as documentBoostFieldName!
-comment|//      But this would also prevent the possibility to intentionally
-comment|//      override the boost.
+comment|// TODO: maybe add some functionality to prevent indexing of the
+comment|// field configured as documentBoostFieldName!
+comment|// But this would also prevent the possibility to intentionally
+comment|// override the boost.
 name|String
 name|field
 init|=
@@ -4199,7 +4202,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-comment|//now we need to get the indexField for the value
+comment|// now we need to get the indexField for the value
 name|Object
 name|next
 init|=
@@ -4294,7 +4297,7 @@ return|return
 name|inputDocument
 return|;
 block|}
-comment|/**      * Extracts the document boost from a {@link Representation}.      * @param representation the representation      * @return the Boost or<code>null</code> if not found or lower equals zero      */
+comment|/**      * Extracts the document boost from a {@link Representation}.      *       * @param representation      *            the representation      * @return the Boost or<code>null</code> if not found or lower equals zero      */
 specifier|private
 name|float
 name|getDocumentBoost
@@ -4485,7 +4488,7 @@ argument_list|(
 name|representation
 argument_list|)
 return|;
-comment|//there is no "update" for solr
+comment|// there is no "update" for solr
 block|}
 else|else
 block|{
@@ -4609,7 +4612,7 @@ operator|.
 name|size
 argument_list|()
 decl_stmt|;
-comment|//for debuging
+comment|// for debuging
 try|try
 block|{
 name|ids
@@ -4619,7 +4622,7 @@ argument_list|(
 name|ids
 argument_list|)
 expr_stmt|;
-comment|//returns the ids found in the solrIndex
+comment|// returns the ids found in the solrIndex
 block|}
 catch|catch
 parameter_list|(
@@ -4717,7 +4720,8 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//null parsed or not already present
+comment|// null parsed or not
+comment|// already present
 name|inputDocs
 operator|.
 name|add
@@ -4888,7 +4892,7 @@ return|return
 name|updated
 return|;
 block|}
-comment|/**      * Stores the parsed document within the Index. This Method is also used by      * other classes within this package to store configurations directly within      * the index      * @param inputDoc the document to store      */
+comment|/**      * Stores the parsed document within the Index. This Method is also used by other classes within this      * package to store configurations directly within the index      *       * @param inputDoc      *            the document to store      */
 specifier|protected
 specifier|final
 name|void
@@ -4910,7 +4914,7 @@ name|inputDoc
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Getter for a SolrDocument based on the ID. This Method is also used by      * other classes within this package to load configurations directly from      * the index      * @param inputDoc the document to store      */
+comment|/**      * Getter for a SolrDocument based on the ID. This Method is also used by other classes within this      * package to load configurations directly from the index      *       * @param inputDoc      *            the document to store      */
 specifier|public
 specifier|final
 name|SolrDocument
@@ -4993,7 +4997,7 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
-comment|//select all fields
+comment|// select all fields
 block|}
 else|else
 block|{
@@ -5028,8 +5032,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//NOTE: If there are more requested documents than allowed boolean
-comment|//      clauses in one query, than we need to send several requests!
+comment|// NOTE: If there are more requested documents than allowed boolean
+comment|// clauses in one query, than we need to send several requests!
 name|Iterator
 argument_list|<
 name|String
@@ -5100,7 +5104,7 @@ name|resultDocs
 init|=
 literal|null
 decl_stmt|;
-comment|//do while more uris
+comment|// do while more uris
 while|while
 condition|(
 name|uriIterator
@@ -5109,8 +5113,8 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-comment|//do while more uris and free boolean clauses
-comment|//num<= maxClauses because 1-items boolean clauses in the query!
+comment|// do while more uris and free boolean clauses
+comment|// num<= maxClauses because 1-items boolean clauses in the query!
 while|while
 condition|(
 name|uriIterator
@@ -5194,7 +5198,7 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//no more items or all boolean clauses used -> send a request
+comment|// no more items or all boolean clauses used -> send a request
 name|solrQuery
 operator|.
 name|setQuery
@@ -5212,7 +5216,7 @@ name|StringBuilder
 argument_list|()
 expr_stmt|;
 comment|// and a new StringBuilder
-comment|//set the number of results to the number of parsed IDs.
+comment|// set the number of results to the number of parsed IDs.
 name|solrQuery
 operator|.
 name|setRows
@@ -5224,7 +5228,7 @@ name|num
 operator|=
 literal|0
 expr_stmt|;
-comment|//reset to 0
+comment|// reset to 0
 name|QueryResponse
 name|queryResponse
 init|=
@@ -5262,8 +5266,8 @@ operator|!
 name|myList
 condition|)
 block|{
-comment|//most of the time there will be only one request, so only
-comment|//create my own list when the second response is processed
+comment|// most of the time there will be only one request, so only
+comment|// create my own list when the second response is processed
 name|resultDocs
 operator|=
 operator|new
@@ -5292,7 +5296,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//end while more uris
+comment|// end while more uris
 return|return
 name|resultDocs
 return|;
@@ -5342,7 +5346,7 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
-comment|//select all fields
+comment|// select all fields
 block|}
 else|else
 block|{
@@ -5384,7 +5388,7 @@ argument_list|(
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//we query for the id, there is only one result
+comment|// we query for the id, there is only one result
 name|String
 name|queryString
 init|=

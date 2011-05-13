@@ -174,7 +174,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This test uses the system property "basedir" to configure an embedded Solr  * Server. This property is set by the mvn surefire plugin. When using this  * Unit Test within a build environment that does not set this property one need  * to set it manually to the base directory of this module.<p>  * @author Rupert Westenthaler  *  */
+comment|/**  * This test uses the system property "basedir" to configure an embedded Solr Server. This property is set by  * the mvn surefire plugin. When using this Unit Test within a build environment that does not set this  * property one need to set it manually to the base directory of this module.  *<p>  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -253,8 +253,8 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//get the working directory
-comment|//use property substitution to test this feature!
+comment|// get the working directory
+comment|// use property substitution to test this feature!
 name|String
 name|solrServerDir
 init|=
@@ -307,7 +307,7 @@ argument_list|(
 literal|"The Solr Yard instance used to execute the Unit Tests defined for the Yard Interface"
 argument_list|)
 expr_stmt|;
-comment|//create the Yard used for the tests
+comment|// create the Yard used for the tests
 name|yard
 operator|=
 operator|new
@@ -328,7 +328,7 @@ return|return
 name|yard
 return|;
 block|}
-comment|/*      * Three unit tests that check that SolrYardConfig does throw      * IllegalArgumentExceptions when parsing an illegal parameters.      */
+comment|/*      * Three unit tests that check that SolrYardConfig does throw IllegalArgumentExceptions when parsing an      * illegal parameters.      */
 annotation|@
 name|Test
 argument_list|(
@@ -398,7 +398,7 @@ name|TEST_SOLR_CORE_NAME
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This Method removes all Representations create via {@link #create()} or      * {@link #create(String, boolean)} from the tested {@link Yard}.      * It also removes all Representations there ID was manually added to the      * {@link #representationIds} list.      */
+comment|/**      * This Method removes all Representations create via {@link #create()} or      * {@link #create(String, boolean)} from the tested {@link Yard}. It also removes all Representations      * there ID was manually added to the {@link #representationIds} list.      */
 annotation|@
 name|AfterClass
 specifier|public

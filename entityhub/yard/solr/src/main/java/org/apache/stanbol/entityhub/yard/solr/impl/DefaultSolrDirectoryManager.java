@@ -352,7 +352,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link SolrDirectoryManager} interface that supports  * the dynamic initialisation of new cores based on the default core configuration  * contained within the SolrYard bundle.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the {@link SolrDirectoryManager} interface that supports the dynamic initialisation of  * new cores based on the default core configuration contained within the SolrYard bundle.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -413,7 +413,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * This key is used to store the file name of the archive supposed to provide      * the data for the uninitialised index within the configuration the configuration      */
+comment|/**      * This key is used to store the file name of the archive supposed to provide the data for the      * uninitialised index within the configuration the configuration      */
 specifier|private
 specifier|static
 specifier|final
@@ -429,24 +429,24 @@ specifier|private
 name|DataFileProvider
 name|dataFileProvider
 decl_stmt|;
-comment|/**      * The directory used by the internally managed embedded solr server.       * Use {@link #lookupManagedSolrDir()} instead of using this member, because      * this member is not initialised within the constructor or the       * {@link #activate(ComponentContext)} method.      */
+comment|/**      * The directory used by the internally managed embedded solr server. Use {@link #lookupManagedSolrDir()}      * instead of using this member, because this member is not initialised within the constructor or the      * {@link #activate(ComponentContext)} method.      */
 specifier|private
 name|File
 name|solrDataDir
 decl_stmt|;
-comment|/**      * The component context. Only available when running within an OSGI       * Environment and the component is active.      */
+comment|/**      * The component context. Only available when running within an OSGI Environment and the component is      * active.      */
 specifier|private
 name|ComponentContext
 name|componentContext
 decl_stmt|;
-comment|/**      * For some functionality within this component it is important to track      * if this instance operates within or outside of an OSGI environment.      * because of this this boolean is set to true as soon as the first time      * {@link #activate(ComponentContext)} or {@link #deactivate(ComponentContext)}      * is called. If someone knows a better method to check that feel free to      * change!      */
+comment|/**      * For some functionality within this component it is important to track if this instance operates within      * or outside of an OSGI environment. because of this this boolean is set to true as soon as the first      * time {@link #activate(ComponentContext)} or {@link #deactivate(ComponentContext)} is called. If someone      * knows a better method to check that feel free to change!      */
 specifier|private
 name|boolean
 name|withinOSGI
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Initialising Solr Indexes with a lot of data may take some time. Especially      * if the data need to be copied to the managed directory. Therefore it is      * important to wait for the initialisation to be complete before opening      * an Solr Index on it.<p>      * To this set all cores that are currently initialised are added. As soon      * as an initialisation completed this set is notified.      */
+comment|/**      * Initialising Solr Indexes with a lot of data may take some time. Especially if the data need to be      * copied to the managed directory. Therefore it is important to wait for the initialisation to be      * complete before opening an Solr Index on it.      *<p>      * To this set all cores that are currently initialised are added. As soon as an initialisation completed      * this set is notified.      */
 specifier|private
 name|Set
 argument_list|<
@@ -461,7 +461,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Holds the list of cores that where installed by using       * {@link #createSolrDirectory(String, String, java.util.Properties)} but the      * {@link DataFileProvider} could not yet provide the necessary data for the      * initialisation.<p>      * The list of uninitialised cores is stored within the data folder of the      * bundle under {@link #UNINITIALISED_SITE_DIRECTORY_NAME} and loaded at      * activation.      *       */
+comment|/**      * Holds the list of cores that where installed by using      * {@link #createSolrDirectory(String, String, java.util.Properties)} but the {@link DataFileProvider}      * could not yet provide the necessary data for the initialisation.      *<p>      * The list of uninitialised cores is stored within the data folder of the bundle under      * {@link #UNINITIALISED_SITE_DIRECTORY_NAME} and loaded at activation.      *       */
 specifier|private
 name|Map
 argument_list|<
@@ -491,8 +491,8 @@ decl_stmt|;
 specifier|public
 name|DefaultSolrDirectoryManager
 parameter_list|()
-block|{     }
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#isSolrDir(java.lang.String)      */
+block|{}
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#isSolrDir(java.lang.String)      */
 specifier|public
 specifier|final
 name|boolean
@@ -535,7 +535,7 @@ literal|"The parsed name of the Solr index MUST NOT be empty"
 argument_list|)
 throw|;
 block|}
-comment|//first check if the directory for the parsed index exists
+comment|// first check if the directory for the parsed index exists
 name|boolean
 name|exists
 init|=
@@ -557,8 +557,8 @@ return|return
 operator|!
 name|exists
 condition|?
-comment|//if no directory exists
-comment|//check also if an uninitialised index was requested
+comment|// if no directory exists
+comment|// check also if an uninitialised index was requested
 name|uninitialisedCores
 operator|.
 name|containsKey
@@ -569,7 +569,7 @@ else|:
 literal|true
 return|;
 block|}
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#getManagedIndices()      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#getManagedIndices()      */
 specifier|public
 specifier|final
 name|Map
@@ -629,7 +629,7 @@ range|:
 name|indexNames
 control|)
 block|{
-comment|//TODO: validate that this is actually a SolrCore!
+comment|// TODO: validate that this is actually a SolrCore!
 name|indexes
 operator|.
 name|put
@@ -646,7 +646,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//we need also add the uninitialised indexes (with a null as value)
+comment|// we need also add the uninitialised indexes (with a null as value)
 for|for
 control|(
 name|String
@@ -733,15 +733,15 @@ name|solrIndexName
 argument_list|)
 condition|)
 block|{
-comment|//if it is currently initialised
+comment|// if it is currently initialised
 return|return
 literal|false
 return|;
-comment|//return false
+comment|// return false
 block|}
 else|else
 block|{
-comment|//check if the dir is there
+comment|// check if the dir is there
 return|return
 operator|new
 name|File
@@ -759,7 +759,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#getSolrDirectory(java.lang.String)      */
+comment|/*      * (non-Javadoc)      *       * @see      * org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#getSolrDirectory(java.lang.String)      */
 specifier|public
 specifier|final
 name|File
@@ -854,7 +854,7 @@ literal|"Creating an Index by using the DataFileProvider does only work when run
 argument_list|)
 throw|;
 block|}
-comment|//now add the index to the list of uninitialised
+comment|// now add the index to the list of uninitialised
 name|addUninitialisedIndex
 argument_list|(
 name|solrIndexName
@@ -877,7 +877,7 @@ name|componentContext
 argument_list|)
 return|;
 block|}
-comment|/**      * Tries to get the {@link ArchiveInputStream} for the index from the      * {@link DataFileProvider}.      * @param context the context used to perform the operations      * @param solrIndexName the name of the index to initialise      * @param properties the properties for this index. Must contain the       * {@link #UNINITIALISED_INDEX_ARCHIVE_NAME_KEY}.      * @return The {@link ArchiveInputStream} or<code>null</code> if the      * data are still not available      * @throws IOException on any IO related error while initialising the index      * @throws IllegalStateException if the parsed configuration does not provide      * a value for {@link #UNINITIALISED_INDEX_ARCHIVE_NAME_KEY}.      */
+comment|/**      * Tries to get the {@link ArchiveInputStream} for the index from the {@link DataFileProvider}.      *       * @param context      *            the context used to perform the operations      * @param solrIndexName      *            the name of the index to initialise      * @param properties      *            the properties for this index. Must contain the      *            {@link #UNINITIALISED_INDEX_ARCHIVE_NAME_KEY}.      * @return The {@link ArchiveInputStream} or<code>null</code> if the data are still not available      * @throws IOException      *             on any IO related error while initialising the index      * @throws IllegalStateException      *             if the parsed configuration does not provide a value for      *             {@link #UNINITIALISED_INDEX_ARCHIVE_NAME_KEY}.      */
 specifier|private
 name|ArchiveInputStream
 name|lookupIndexArchive
@@ -900,7 +900,7 @@ name|IOException
 throws|,
 name|IllegalStateException
 block|{
-comment|//we need to copy the properties to a map
+comment|// we need to copy the properties to a map
 name|Map
 argument_list|<
 name|String
@@ -926,7 +926,7 @@ operator|.
 name|Properties
 argument_list|()
 expr_stmt|;
-comment|//create an empty properties file
+comment|// create an empty properties file
 name|propMap
 operator|=
 literal|null
@@ -1029,7 +1029,7 @@ argument_list|(
 name|UNINITIALISED_INDEX_ARCHIVE_NAME_KEY
 argument_list|)
 expr_stmt|;
-comment|//do not parse this internal property
+comment|// do not parse this internal property
 name|InputStream
 name|is
 init|=
@@ -1163,7 +1163,7 @@ argument_list|,
 name|indexName
 argument_list|)
 expr_stmt|;
-comment|//remove the old version
+comment|// remove the old version
 block|}
 name|saveUninitialisedIndexConfig
 argument_list|(
@@ -1174,7 +1174,7 @@ argument_list|,
 name|config
 argument_list|)
 expr_stmt|;
-comment|//save the new version
+comment|// save the new version
 block|}
 block|}
 specifier|private
@@ -1214,10 +1214,10 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//check only for the context if we need actually to remove
-comment|//an entry, because this method is also called outside an
-comment|//OSGI environment (but will never remove something from
-comment|//uninitialisedCores)
+comment|// check only for the context if we need actually to remove
+comment|// an entry, because this method is also called outside an
+comment|// OSGI environment (but will never remove something from
+comment|// uninitialisedCores)
 throw|throw
 operator|new
 name|IllegalStateException
@@ -1233,11 +1233,11 @@ argument_list|,
 name|indexName
 argument_list|)
 expr_stmt|;
-comment|//remove the old version
+comment|// remove the old version
 block|}
 block|}
 block|}
-comment|/**      * Internally used to get/init the Solr directory of a SolrCore or the root      * Solr directory (if<code>null</code> is parsed)      * @param solrIndexName the name of the Core or<code>null</code> to get/init      * the root solr directory      * @param ais The Input stream of the Archive to load the index from or      *<code>null</code> to load the default core configuration.      * @param allowDefaultInitialisation If<code>true</code> a new core is       * initialised with the default configuration (empty index with the default      * Solr schema and configuration). If<code>false</code> the core is only      * created if a valid configuration is parsed.      * @param context A reference to the component context or<code>null</code> if      * running outside an OSGI container. This is needed to avoid that       * {@link #deactivate(ComponentContext)} sets the context to<code>null</code>       * during this method does its initialisation work.      * @return the Solr directory or<code>null</code> if the requested index      * could not be created (e.g. because of<code>false</code> was parsed as       * create) or in case this component is deactivated      * @throws IllegalStateException in case this method is called when this      * component is running within an OSGI environment and it is deactivated or      * the initialisation for the parsed index failed.      * @throws IllegalArgumentException if the parsed solrIndexName is<code>null</code> or      * empty.      */
+comment|/**      * Internally used to get/init the Solr directory of a SolrCore or the root Solr directory (if      *<code>null</code> is parsed)      *       * @param solrIndexName      *            the name of the Core or<code>null</code> to get/init the root solr directory      * @param ais      *            The Input stream of the Archive to load the index from or<code>null</code> to load the      *            default core configuration.      * @param allowDefaultInitialisation      *            If<code>true</code> a new core is initialised with the default configuration (empty index      *            with the default Solr schema and configuration). If<code>false</code> the core is only      *            created if a valid configuration is parsed.      * @param context      *            A reference to the component context or<code>null</code> if running outside an OSGI      *            container. This is needed to avoid that {@link #deactivate(ComponentContext)} sets the      *            context to<code>null</code> during this method does its initialisation work.      * @return the Solr directory or<code>null</code> if the requested index could not be created (e.g.      *         because of<code>false</code> was parsed as create) or in case this component is deactivated      * @throws IllegalStateException      *             in case this method is called when this component is running within an OSGI environment and      *             it is deactivated or the initialisation for the parsed index failed.      * @throws IllegalArgumentException      *             if the parsed solrIndexName is<code>null</code> or empty.      */
 specifier|private
 specifier|final
 name|File
@@ -1318,7 +1318,7 @@ name|exists
 argument_list|()
 condition|)
 block|{
-comment|//first add the index to the list of currently init cores
+comment|// first add the index to the list of currently init cores
 synchronized|synchronized
 init|(
 name|initCores
@@ -1341,8 +1341,8 @@ name|solrIndexName
 argument_list|)
 expr_stmt|;
 block|}
-comment|//second check if the Index is an uninitialised one and if this is the case
-comment|//try to get the ArchiveInputStream form the DataFileProvider
+comment|// second check if the Index is an uninitialised one and if this is the case
+comment|// try to get the ArchiveInputStream form the DataFileProvider
 name|java
 operator|.
 name|util
@@ -1371,9 +1371,9 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//NOTE: this may override an parsed ArchiveInputStream
+comment|// NOTE: this may override an parsed ArchiveInputStream
 comment|// -> this is an error by the implementation of this class
-comment|//    so throw an Exception to detect such errors early!
+comment|// so throw an Exception to detect such errors early!
 if|if
 condition|(
 name|ais
@@ -1423,7 +1423,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//third do the actual initialisation work
+comment|// third do the actual initialisation work
 try|try
 block|{
 if|if
@@ -1446,7 +1446,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-comment|//try to remove from uninitialised
+comment|// try to remove from uninitialised
 name|removeUninitialisedIndex
 argument_list|(
 name|solrIndexName
@@ -1459,9 +1459,9 @@ condition|(
 name|allowDefaultInitialisation
 condition|)
 block|{
-comment|//TODO: Refactor so that the lookup via Bundle and/or jar
-comment|//      file works via an internal implementation of an
-comment|//      FileDataProvider
+comment|// TODO: Refactor so that the lookup via Bundle and/or jar
+comment|// file works via an internal implementation of an
+comment|// FileDataProvider
 if|if
 condition|(
 name|context
@@ -1469,7 +1469,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//load via bundle
+comment|// load via bundle
 name|ConfigUtils
 operator|.
 name|copyCore
@@ -1492,7 +1492,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//load from jar
+comment|// load from jar
 name|ConfigUtils
 operator|.
 name|copyCore
@@ -1551,14 +1551,14 @@ throw|;
 block|}
 finally|finally
 block|{
-comment|//regardless what happened remove the index from the currently init
-comment|//indexes and notify all other waiting for the initialisation
+comment|// regardless what happened remove the index from the currently init
+comment|// indexes and notify all other waiting for the initialisation
 synchronized|synchronized
 init|(
 name|initCores
 init|)
 block|{
-comment|//initialisation done
+comment|// initialisation done
 name|initCores
 operator|.
 name|remove
@@ -1575,7 +1575,7 @@ operator|+
 name|solrIndexName
 argument_list|)
 expr_stmt|;
-comment|//notify that the initialisation completed or failed
+comment|// notify that the initialisation completed or failed
 name|initCores
 operator|.
 name|notifyAll
@@ -1586,9 +1586,9 @@ block|}
 block|}
 else|else
 block|{
-comment|//the dir exists
-comment|//check if still initialising ... and wait until the initialisation
-comment|//is complete
+comment|// the dir exists
+comment|// check if still initialising ... and wait until the initialisation
+comment|// is complete
 synchronized|synchronized
 init|(
 name|initCores
@@ -1636,7 +1636,7 @@ return|return
 name|coreDir
 return|;
 block|}
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#getManagedSolrDir()      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.yard.solr.impl.ManagedSolrDirectory#getManagedSolrDir()      */
 specifier|public
 name|File
 name|getManagedDirectory
@@ -1649,7 +1649,7 @@ name|componentContext
 argument_list|)
 return|;
 block|}
-comment|/**      * Lookup the location of the managed Solr directory. Also initialised the      * default configuration if the directory does not yet exist.      * @param context A reference to the component context or<code>null</code> if      * running outside an OSGI container. This is needed to avoid that       * {@link #deactivate(ComponentContext)} sets the context to<code>null</code>       * during this method does its initialisation work.      * @return the directory based on the current configuration      * @throws IllegalStateException in case this method is called when this      * component is running within an OSGI environment and it is deactivated.      */
+comment|/**      * Lookup the location of the managed Solr directory. Also initialised the default configuration if the      * directory does not yet exist.      *       * @param context      *            A reference to the component context or<code>null</code> if running outside an OSGI      *            container. This is needed to avoid that {@link #deactivate(ComponentContext)} sets the      *            context to<code>null</code> during this method does its initialisation work.      * @return the directory based on the current configuration      * @throws IllegalStateException      *             in case this method is called when this component is running within an OSGI environment and      *             it is deactivated.      */
 specifier|private
 name|File
 name|lookupManagedSolrDir
@@ -1677,7 +1677,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//load via system properties
+comment|// load via system properties
 name|configuredDataDir
 operator|=
 name|System
@@ -1692,7 +1692,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//load via OSGI config
+comment|// load via OSGI config
 name|Object
 name|value
 init|=
@@ -1729,7 +1729,7 @@ name|DEFAULT_SOLR_DATA_DIR
 expr_stmt|;
 block|}
 block|}
-comment|//property substitution
+comment|// property substitution
 name|configuredDataDir
 operator|=
 name|substituteProperty
@@ -1748,8 +1748,8 @@ else|:
 literal|null
 argument_list|)
 expr_stmt|;
-comment|//determine the directory holding the SolrIndex
-comment|/*              * NOTE:              * In case the configuredDataDir.isAbsolute()==false this code will              * initialise the index relative to the "user.dir" of the application.              */
+comment|// determine the directory holding the SolrIndex
+comment|/*              * NOTE: In case the configuredDataDir.isAbsolute()==false this code will initialise the index              * relative to the "user.dir" of the application.              */
 if|if
 condition|(
 name|withinOSGI
@@ -1759,8 +1759,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//ensure to do not set an solrDataDir if this component is
-comment|//running within an  OSGI environment and is deactivated
+comment|// ensure to do not set an solrDataDir if this component is
+comment|// running within an OSGI environment and is deactivated
 throw|throw
 operator|new
 name|IllegalStateException
@@ -1771,7 +1771,7 @@ throw|;
 block|}
 else|else
 block|{
-comment|//set the the absolute path
+comment|// set the the absolute path
 name|solrDataDir
 operator|=
 operator|new
@@ -1781,7 +1781,7 @@ name|configuredDataDir
 argument_list|)
 expr_stmt|;
 block|}
-comment|//check if the "solr.xml" file exists in the directory
+comment|// check if the "solr.xml" file exists in the directory
 name|File
 name|solrConf
 init|=
@@ -1811,7 +1811,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//load via bundle
+comment|// load via bundle
 name|solrDataDir
 operator|=
 name|ConfigUtils
@@ -1834,7 +1834,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//load from jar
+comment|// load from jar
 name|solrDataDir
 operator|=
 name|ConfigUtils
@@ -1888,7 +1888,7 @@ return|return
 name|solrDataDir
 return|;
 block|}
-comment|/**      * Substitutes ${property.name} with the values retrieved via      * {@link System#getProperty(String, String)}. An empty string is used as      * default<p>      * Nested substitutions are NOTE supported. However multiple substitutions      * are supported.<p>      * If someone knows a default implementation feel free to replace!      * @param value the value to substitute      * @param bundleContext If not<code>null</code> the       * {@link BundleContext#getProperty(String)} is used instead of the       * {@link System#getProperty(String)}. By that it is possible to use      * OSGI only properties for substitution.      * @return the substituted value      */
+comment|/**      * Substitutes ${property.name} with the values retrieved via {@link System#getProperty(String, String)}.      * An empty string is used as default      *<p>      * Nested substitutions are NOTE supported. However multiple substitutions are supported.      *<p>      * If someone knows a default implementation feel free to replace!      *       * @param value      *            the value to substitute      * @param bundleContext      *            If not<code>null</code> the {@link BundleContext#getProperty(String)} is used instead of      *            the {@link System#getProperty(String)}. By that it is possible to use OSGI only properties      *            for substitution.      * @return the substituted value      */
 specifier|private
 specifier|static
 name|String
@@ -1978,7 +1978,7 @@ name|bundleContext
 operator|==
 literal|null
 condition|?
-comment|//if no bundleContext is available
+comment|// if no bundleContext is available
 name|System
 operator|.
 name|getProperty
@@ -1986,7 +1986,7 @@ argument_list|(
 name|propertyName
 argument_list|)
 else|:
-comment|//use the System properties
+comment|// use the System properties
 name|bundleContext
 operator|.
 name|getProperty
@@ -2018,7 +2018,7 @@ argument_list|()
 operator|+
 literal|3
 expr_stmt|;
-comment|//+3 -> "${}".length
+comment|// +3 -> "${}".length
 block|}
 name|substitution
 operator|.

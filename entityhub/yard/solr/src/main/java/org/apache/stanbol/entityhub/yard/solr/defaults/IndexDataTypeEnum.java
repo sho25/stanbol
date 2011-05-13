@@ -198,7 +198,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Holds the default configuration for<ul>  *<li> {@link IndexDataType}s  *<li> Default mapping of {@link IndexDataType}s to Java Objects  *<li> Prefixes/Suffixes used to mark {@link IndexDataType}s in  *      SolrDocument fields  *</ul>  * This Enumeration may be replaced later on by a more flexible way to configure  * such things.  *  * @author Rupert Westenthaler  *  */
+comment|/**  * Holds the default configuration for  *<ul>  *<li> {@link IndexDataType}s  *<li>Default mapping of {@link IndexDataType}s to Java Objects  *<li>Prefixes/Suffixes used to mark {@link IndexDataType}s in SolrDocument fields  *</ul>  * This Enumeration may be replaced later on by a more flexible way to configure such things.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_enum
@@ -221,7 +221,7 @@ operator|.
 name|class
 argument_list|)
 block|,
-comment|//    BYTE("byt",Byte.class),
+comment|// BYTE("byt",Byte.class),
 name|INT
 argument_list|(
 name|NamespaceEnum
@@ -298,8 +298,9 @@ operator|.
 name|class
 argument_list|)
 block|,
-comment|//    URI(NamespaceEnum.xsd+"anyURI","uri",URI.class), //currently URIs are modelled as REF
-comment|//TODO: DATE& DUR to be removed. The plan is to add explicit support for ranged queries over time spans/points!
+comment|// URI(NamespaceEnum.xsd+"anyURI","uri",URI.class), //currently URIs are modelled as REF
+comment|// TODO: DATE& DUR to be removed. The plan is to add explicit support for ranged queries over time
+comment|// spans/points!
 name|DATE
 argument_list|(
 name|NamespaceEnum
@@ -348,7 +349,8 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
-comment|//no type prefix, but typically languageType prefixes
+comment|// no type prefix, but typically
+comment|// languageType prefixes
 name|STR
 argument_list|(
 name|NamespaceEnum
@@ -366,7 +368,7 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
-comment|//string values (not used for languageType)
+comment|// string values (not used for languageType)
 name|ID
 argument_list|(
 name|NamespaceEnum
@@ -381,7 +383,7 @@ name|UUID
 operator|.
 name|class
 argument_list|)
-block|,     ;
+block|, ;
 specifier|private
 name|IndexDataType
 name|indexType
@@ -401,7 +403,7 @@ specifier|private
 name|String
 name|suffix
 decl_stmt|;
-comment|/**      * if true, values of this dataType should be treated as natural languageType       * texts and added to the {@link SolrConst#LANG_MERGER_FIELD}       */
+comment|/**      * if true, values of this dataType should be treated as natural languageType texts and added to the      * {@link SolrConst#LANG_MERGER_FIELD}      */
 specifier|private
 name|boolean
 name|languageType
@@ -523,7 +525,7 @@ operator|=
 name|language
 expr_stmt|;
 block|}
-comment|/**      * The prefix to be used for index fields of that type      * @return the prefix      */
+comment|/**      * The prefix to be used for index fields of that type      *       * @return the prefix      */
 specifier|public
 name|String
 name|getPrefix
@@ -533,7 +535,7 @@ return|return
 name|prefix
 return|;
 block|}
-comment|/**      * The suffix to be used for index fields of that type      * @return      */
+comment|/**      * The suffix to be used for index fields of that type      *       * @return      */
 specifier|public
 name|String
 name|getSuffix
@@ -543,7 +545,7 @@ return|return
 name|suffix
 return|;
 block|}
-comment|/**      * The index type      * @return the indexType      */
+comment|/**      * The index type      *       * @return the indexType      */
 specifier|public
 name|IndexDataType
 name|getIndexType
@@ -553,7 +555,7 @@ return|return
 name|indexType
 return|;
 block|}
-comment|/**      * The java type      * @return the java class for the index type      */
+comment|/**      * The java type      *       * @return the java class for the index type      */
 specifier|public
 specifier|final
 name|Class
@@ -567,7 +569,7 @@ return|return
 name|javaType
 return|;
 block|}
-comment|/**      * Returns<code>true</code> if values of this dataType should be included      * in searches for natural language texts. This means that such values are      * added to the {@link SolrConst#LANG_MERGER_FIELD}       * @return the languageType      */
+comment|/**      * Returns<code>true</code> if values of this dataType should be included in searches for natural      * language texts. This means that such values are added to the {@link SolrConst#LANG_MERGER_FIELD}      *       * @return the languageType      */
 specifier|public
 name|boolean
 name|isLanguageType
@@ -626,7 +628,7 @@ name|uriMap
 decl_stmt|;
 static|static
 block|{
-comment|/*          * This inits the Mappings and also validates the configuration provided          * by the Enumeration!          */
+comment|/*          * This inits the Mappings and also validates the configuration provided by the Enumeration!          */
 name|Map
 argument_list|<
 name|Class
@@ -827,8 +829,8 @@ name|dt
 argument_list|)
 expr_stmt|;
 block|}
-comment|//NOTE: Do not use Arrays.asList(..) directly, because it does not
-comment|//      implement equals and hashCode!
+comment|// NOTE: Do not use Arrays.asList(..) directly, because it does not
+comment|// implement equals and hashCode!
 name|List
 argument_list|<
 name|String
@@ -985,7 +987,7 @@ name|um
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Lookup table for the IndexDataTypeEnum based on the java type      * @param type the java type      * @return the IndexDataTypeEnum for the parsed type or<code>null</code> if      * no IndexDataTypeEnum is configured for the parsed type.      */
+comment|/**      * Lookup table for the IndexDataTypeEnum based on the java type      *       * @param type      *            the java type      * @return the IndexDataTypeEnum for the parsed type or<code>null</code> if no IndexDataTypeEnum is      *         configured for the parsed type.      */
 specifier|public
 specifier|static
 name|IndexDataTypeEnum
@@ -1007,7 +1009,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * Lookup table for the IndexDataTypeEnum based on the IndexType.      * @param indexType the indexType      * @return the IndexDataTypeEnum for the parsed IndexTyep or<code>null</code>      * if no IndexDataTypeEnum is configured for the parsed IndexType.      */
+comment|/**      * Lookup table for the IndexDataTypeEnum based on the IndexType.      *       * @param indexType      *            the indexType      * @return the IndexDataTypeEnum for the parsed IndexTyep or<code>null</code> if no IndexDataTypeEnum is      *         configured for the parsed IndexType.      */
 specifier|public
 specifier|static
 name|IndexDataTypeEnum
@@ -1026,7 +1028,7 @@ name|indexType
 argument_list|)
 return|;
 block|}
-comment|/**      * Lookup table for the IndexDataTypeEnum based on the prefix and suffix      * @param prefix the prefix (might be<code>null</code>)      * @param suffix the suffix ( (might be<code>null</code>)      * @return the IndexDataTypeEnum for the parsed prefix and suffix or      *<code>null</code> if no IndexDataTypeEnum is configured for the parsed      * parameter.      */
+comment|/**      * Lookup table for the IndexDataTypeEnum based on the prefix and suffix      *       * @param prefix      *            the prefix (might be<code>null</code>)      * @param suffix      *            the suffix ( (might be<code>null</code>)      * @return the IndexDataTypeEnum for the parsed prefix and suffix or<code>null</code> if no      *         IndexDataTypeEnum is configured for the parsed parameter.      */
 specifier|public
 specifier|static
 name|IndexDataTypeEnum
@@ -1077,7 +1079,7 @@ name|ps
 argument_list|)
 return|;
 block|}
-comment|/**      * Lookup table for the IndexDataTypeEnum based on the data type uri      * as stored in the {@link IndexDataType#getName()} property.      * @param uri the uri of the dataType      * @return the IndexDataTypeEnum for the parsed uri or<code>null</code> if      * no IndexDataTypeEnum is configured for the parsed parameter.      */
+comment|/**      * Lookup table for the IndexDataTypeEnum based on the data type uri as stored in the      * {@link IndexDataType#getName()} property.      *       * @param uri      *            the uri of the dataType      * @return the IndexDataTypeEnum for the parsed uri or<code>null</code> if no IndexDataTypeEnum is      *         configured for the parsed parameter.      */
 specifier|public
 specifier|static
 name|IndexDataTypeEnum

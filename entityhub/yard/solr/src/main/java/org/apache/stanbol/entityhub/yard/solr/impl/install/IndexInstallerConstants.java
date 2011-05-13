@@ -24,7 +24,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Constants and static configuration used by the {@link SolrIndexInstaller}  * @author Rupert Westenthaler  *  */
+comment|/**  * Constants and static configuration used by the {@link SolrIndexInstaller}  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -37,7 +37,7 @@ specifier|private
 name|IndexInstallerConstants
 parameter_list|()
 block|{
-comment|/* do not create instances*/
+comment|/* do not create instances */
 block|}
 comment|/**      * The schema used for transformed resources.      */
 specifier|public
@@ -56,7 +56,7 @@ name|PROPERTY_PREFIX
 init|=
 literal|"org.apache.stanbol.yard.solr.installer."
 decl_stmt|;
-comment|/**      * The key used to configure the name of the Index-Archive      * The default name is \"&lt;indexName&gt;.solrarchive\".      */
+comment|/**      * The key used to configure the name of the Index-Archive The default name is      * \"&lt;indexName&gt;.solrarchive\".      */
 specifier|public
 specifier|static
 specifier|final

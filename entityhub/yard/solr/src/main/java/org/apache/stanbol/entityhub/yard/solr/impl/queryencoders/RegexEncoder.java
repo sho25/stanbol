@@ -236,7 +236,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TODO: This encoder is not functional! It would need to convert the REGEX  * Pattern to the according WildCard search!  * Need to look at http://lucene.apache.org/java/2_4_0/api/org/apache/lucene/search/regex/RegexQuery.html  * @author Rupert Westenthaler  *  */
+comment|/**  * TODO: This encoder is not functional! It would need to convert the REGEX Pattern to the according WildCard  * search! Need to look at  * http://lucene.apache.org/java/2_4_0/api/org/apache/lucene/search/regex/RegexQuery.html  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -386,7 +386,7 @@ throw|;
 block|}
 else|else
 block|{
-comment|//TODO: Implement some REGEX to WILDCard conversion for Solr
+comment|// TODO: Implement some REGEX to WILDCard conversion for Solr
 name|constraint
 operator|.
 name|addEncoded

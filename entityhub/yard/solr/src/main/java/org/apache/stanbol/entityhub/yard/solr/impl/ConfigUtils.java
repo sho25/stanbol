@@ -468,7 +468,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Utility provides Methods that copy a configuration from a {@link Bundle}  * and copy it to a directory.<p>  * This is currently used by the {@link EmbeddedSolrPorovider} to initialise the  * internally managed {@link EmbeddedSolrServer} and/or to add additional cores.  * There are always two variants of the methods. The one taking a bundle as  * parameter is supposed to be used when running within an OSGI environment. The  * variant taking a Class object works outside of an OSGI environment.  * @author Rupert Westenthaler  *  */
+comment|/**  * This Utility provides Methods that copy a configuration from a {@link Bundle} and copy it to a directory.  *<p>  * This is currently used by the {@link EmbeddedSolrPorovider} to initialise the internally managed  * {@link EmbeddedSolrServer} and/or to add additional cores. There are always two variants of the methods.  * The one taking a bundle as parameter is supposed to be used when running within an OSGI environment. The  * variant taking a Class object works outside of an OSGI environment.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -530,7 +530,7 @@ argument_list|,
 literal|"zip"
 argument_list|)
 expr_stmt|;
-comment|//the default if not specified
+comment|// the default if not specified
 name|cfm
 operator|.
 name|put
@@ -576,7 +576,7 @@ argument_list|,
 literal|"properties"
 argument_list|)
 expr_stmt|;
-comment|//reference
+comment|// reference
 name|cfm
 operator|.
 name|put
@@ -586,7 +586,7 @@ argument_list|,
 literal|"properties"
 argument_list|)
 expr_stmt|;
-comment|//also accept properties as references
+comment|// also accept properties as references
 name|SUPPORTED_SOLR_ARCHIVE_FORMAT
 operator|=
 name|Collections
@@ -640,7 +640,7 @@ name|archiveFormat
 operator|=
 name|solrArchiveName
 expr_stmt|;
-comment|//assume that the archiveExtension was parsed
+comment|// assume that the archiveExtension was parsed
 block|}
 else|else
 block|{
@@ -782,7 +782,7 @@ name|CONFIG_DIR
 init|=
 literal|"solr/conf"
 decl_stmt|;
-comment|/**      * The name of the root directoy used within an bundle to search for all cores      * that need to be added to an existing solr multi core configuration      */
+comment|/**      * The name of the root directoy used within an bundle to search for all cores that need to be added to an      * existing solr multi core configuration      */
 specifier|public
 specifier|static
 specifier|final
@@ -791,13 +791,13 @@ name|CORE_CONFIG_DIR
 init|=
 literal|"solr/core"
 decl_stmt|;
-comment|/**      * Initialises the default configuration for the SolrYard based on data in      * the parsed bundle. The configuration will be copied to the parsed root      * directory.      * @param bundle the bundle used to load the defaultConfiguration from the      * {@link #CONFIG_DIR} (value=" {@value #CONFIG_DIR}") directory.      * @param rootDir the target directory for the configuration.       * @param override if true existing configurations are overridden.      * @return the root directory of the solr configuration (same as parsed as       * rootDir)      * @throws IOException On any IO error while coping the configuration      * @throws IllegalStateException If the parsed bundle is in the       * {@link Bundle#UNINSTALLED}      * state, the parsed rootDir does exist but is not a directory.      * @throws IllegalArgumentException If<code>null</code> is parsed as bundle       * or rootDir or if the parsed bundle does not contain the required       * information to set up an configuration       */
+comment|/**      * Initialises the default configuration for the SolrYard based on data in the parsed bundle. The      * configuration will be copied to the parsed root directory.      *       * @param bundle      *            the bundle used to load the defaultConfiguration from the {@link #CONFIG_DIR} (value="      *            {@value #CONFIG_DIR}") directory.      * @param rootDir      *            the target directory for the configuration.      * @param override      *            if true existing configurations are overridden.      * @return the root directory of the solr configuration (same as parsed as rootDir)      * @throws IOException      *             On any IO error while coping the configuration      * @throws IllegalStateException      *             If the parsed bundle is in the {@link Bundle#UNINSTALLED} state, the parsed rootDir does      *             exist but is not a directory.      * @throws IllegalArgumentException      *             If<code>null</code> is parsed as bundle or rootDir or if the parsed bundle does not      *             contain the required information to set up an configuration      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
-comment|//Enumeration<URL> required by OSGI specification
+comment|// Enumeration<URL> required by OSGI specification
 specifier|public
 specifier|static
 name|File
@@ -925,7 +925,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//TODO: check validity of config and thorw IllegalArgumentException if not valid
+comment|// TODO: check validity of config and thorw IllegalArgumentException if not valid
 while|while
 condition|(
 name|resources
@@ -970,7 +970,7 @@ return|return
 name|rootDir
 return|;
 block|}
-comment|/**      * Initialises the default configuration for the SolrYard based on data in      * the parsed bundle. The configuration will be copied to the parsed root      * directory.      * @param clazzInArchive This class is used to identify the archive containing      * the default configuration. Parsing<code>null</code> causes this class to      * be used and therefore initialises the default configuration contained by      * the SolrYard bundle.      * @param rootDir the target directory for the configuration.       * @param override if true existing configurations are overridden.      * @return the root directory of the solr configuration (same as parsed as rootDir)      * @throws IOException On any IO error while coping the configuration      * @throws IllegalStateException If the parsed rootDir does exist but is not      * a directory.      * @throws IllegalArgumentException iIf<code>null</code> is parsed as       * rootDir or if the parsed bundle does not contain the required information       * to set up an configuration       */
+comment|/**      * Initialises the default configuration for the SolrYard based on data in the parsed bundle. The      * configuration will be copied to the parsed root directory.      *       * @param clazzInArchive      *            This class is used to identify the archive containing the default configuration. Parsing      *<code>null</code> causes this class to be used and therefore initialises the default      *            configuration contained by the SolrYard bundle.      * @param rootDir      *            the target directory for the configuration.      * @param override      *            if true existing configurations are overridden.      * @return the root directory of the solr configuration (same as parsed as rootDir)      * @throws IOException      *             On any IO error while coping the configuration      * @throws IllegalStateException      *             If the parsed rootDir does exist but is not a directory.      * @throws IllegalArgumentException      *             iIf<code>null</code> is parsed as rootDir or if the parsed bundle does not contain the      *             required information to set up an configuration      */
 specifier|public
 specifier|static
 name|File
@@ -1168,7 +1168,7 @@ block|}
 block|}
 finally|finally
 block|{
-comment|//regardless what happens we need to close the archive!
+comment|// regardless what happens we need to close the archive!
 name|ZipFile
 operator|.
 name|closeQuietly
@@ -1180,7 +1180,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//load from file
+comment|// load from file
 name|File
 name|source
 init|=
@@ -1235,7 +1235,7 @@ return|return
 name|rootDir
 return|;
 block|}
-comment|/**      * Uses the {@link ClassLoader} of the parsed {@link Class} instance to locate      * the jar file the class was loaded from.      * @param clazz the class used as context to find the jar file      * @return the archive the parsed class was loaded from      * @throws IOException In case the jar file can not be accessed.      */
+comment|/**      * Uses the {@link ClassLoader} of the parsed {@link Class} instance to locate the jar file the class was      * loaded from.      *       * @param clazz      *            the class used as context to find the jar file      * @return the archive the parsed class was loaded from      * @throws IOException      *             In case the jar file can not be accessed.      */
 specifier|private
 specifier|static
 name|File
@@ -1306,10 +1306,10 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-comment|//if we can not convert it to an URI, try directly with the URL
-comment|//URLs with jar:file:/{jarPath}!{classPath} can cause problems
-comment|//so try to parse manually by using the substring from the first
-comment|//'/' to (including '!')
+comment|// if we can not convert it to an URI, try directly with the URL
+comment|// URLs with jar:file:/{jarPath}!{classPath} can cause problems
+comment|// so try to parse manually by using the substring from the first
+comment|// '/' to (including '!')
 name|String
 name|urlString
 init|=
@@ -1383,8 +1383,8 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//looks like there is an other reason than an URL as described above
-comment|//so better to throw an exception than to guess ...
+comment|// looks like there is an other reason than an URL as described above
+comment|// so better to throw an exception than to guess ...
 throw|throw
 operator|new
 name|IOException
@@ -1456,7 +1456,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Copies a resource (URL of an resource within a Bundle) to a file      * @param rootDir the directory used as target      * @param resource the resource URL      * @param context the context used to search for the relative path within the URL      * @param override if resources in the target should be overridden if they already exist      * @throws IOException on any IO error      */
+comment|/**      * Copies a resource (URL of an resource within a Bundle) to a file      *       * @param rootDir      *            the directory used as target      * @param resource      *            the resource URL      * @param context      *            the context used to search for the relative path within the URL      * @param override      *            if resources in the target should be overridden if they already exist      * @throws IOException      *             on any IO error      */
 specifier|private
 specifier|static
 name|void
@@ -1571,9 +1571,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//else can not cppy logging already provided
+comment|// else can not cppy logging already provided
 block|}
-comment|/**      * Variant of the copyResource method that used an entry of an archive as      * source.      * @param rootDir the directory used as target      * @param archive the archive containing the parsed entry      * @param entry the entry to copy to the target directory      * @param context the context used to calculate the relative path of the      * resource within the target directory      * @param override if an existing resource within the target directory should      * be deleted      * @throws IOException in case of an error while reading or writing the resource      */
+comment|/**      * Variant of the copyResource method that used an entry of an archive as source.      *       * @param rootDir      *            the directory used as target      * @param archive      *            the archive containing the parsed entry      * @param entry      *            the entry to copy to the target directory      * @param context      *            the context used to calculate the relative path of the resource within the target directory      * @param override      *            if an existing resource within the target directory should be deleted      * @throws IOException      *             in case of an error while reading or writing the resource      */
 specifier|private
 specifier|static
 name|void
@@ -1734,9 +1734,9 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//else can not cppy logging already provided
+comment|// else can not cppy logging already provided
 block|}
-comment|/**      * Prepares the copying of a resource. The context is used to determine the      * relative path of the resource. Than missing sub-directories are created      * in the target directory. Finally the file instance representing this       * resource within the target directory is returned.       * @param resource The path to the resource. This need not be the full path.      * It must only be ensured that the parsed context is contained. e.g. the      * relative path of a resource within an archive provides enough context for      * this method to work      * @param targetDir the target directory      * @param context the context to determine the relative path of the resource      * within the target directory. The context MUST be part of the parsed      * resource name. Otherwise this method will return<code>null</code>      * @return the file representing the resource within the target directory.      * In cases the context can not be found in the parsed resource this method       * returns<code>null</code>      */
+comment|/**      * Prepares the copying of a resource. The context is used to determine the relative path of the resource.      * Than missing sub-directories are created in the target directory. Finally the file instance      * representing this resource within the target directory is returned.      *       * @param resource      *            The path to the resource. This need not be the full path. It must only be ensured that the      *            parsed context is contained. e.g. the relative path of a resource within an archive provides      *            enough context for this method to work      * @param targetDir      *            the target directory      * @param context      *            the context to determine the relative path of the resource within the target directory. The      *            context MUST be part of the parsed resource name. Otherwise this method will return      *<code>null</code>      * @return the file representing the resource within the target directory. In cases the context can not be      *         found in the parsed resource this method returns<code>null</code>      */
 specifier|private
 specifier|static
 name|File
@@ -1929,13 +1929,13 @@ return|return
 name|file
 return|;
 block|}
-comment|/**      * Copy the configuration of an core.      * @param bundle The bundle used to load the core      * @param coreDir the target directory for the core      * @param coreName the core name or<code>null</code> to directly load the      * configuration as present under {@value #CONFIG_DIR} in the bundle. This      * property can be used if a bundle needs to provide multiple core      * configurations      * @param override if files in the target directory should be overridden      * @throws IOException On any IO error while coping the configuration      * @throws IllegalStateException If the parsed bundle is in the {@link Bundle#UNINSTALLED}      * state, the parsed coreDir does exist but is not a directory.      * @throws IllegalArgumentException if<code>null</code> is parsed as bundle or coreDir      * or if the parsed bundle does not contain the required information to set       * up an configuration or the parsed coreName is empty.      */
+comment|/**      * Copy the configuration of an core.      *       * @param bundle      *            The bundle used to load the core      * @param coreDir      *            the target directory for the core      * @param coreName      *            the core name or<code>null</code> to directly load the configuration as present under      *            {@value #CONFIG_DIR} in the bundle. This property can be used if a bundle needs to provide      *            multiple core configurations      * @param override      *            if files in the target directory should be overridden      * @throws IOException      *             On any IO error while coping the configuration      * @throws IllegalStateException      *             If the parsed bundle is in the {@link Bundle#UNINSTALLED} state, the parsed coreDir does      *             exist but is not a directory.      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as bundle or coreDir or if the parsed bundle does not      *             contain the required information to set up an configuration or the parsed coreName is      *             empty.      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
-comment|//Enumeration<URL> required by OSGI specification
+comment|// Enumeration<URL> required by OSGI specification
 specifier|public
 specifier|static
 name|void
@@ -2108,7 +2108,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Copies a core from the parsed archive input stream to the target location      * @param ais The input stream of the archive (not closed by this method)      * @param coreDir the directory for the core      * @param coreName the name of the core (used as context when reading relative      * paths from the archive      * @param override if existing files should be overridden      * @throws IOException On any error while accessing the data of the archive      * @throws IllegalArgumentException if any of the parameter is<code>null</code>      * or if the coreDir exists but is not an directory or if the core name is      * empty      */
+comment|/**      * Copies a core from the parsed archive input stream to the target location      *       * @param ais      *            The input stream of the archive (not closed by this method)      * @param coreDir      *            the directory for the core      * @param coreName      *            the name of the core (used as context when reading relative paths from the archive      * @param override      *            if existing files should be overridden      * @throws IOException      *             On any error while accessing the data of the archive      * @throws IllegalArgumentException      *             if any of the parameter is<code>null</code> or if the coreDir exists but is not an      *             directory or if the core name is empty      */
 specifier|public
 specifier|static
 name|void
@@ -2247,12 +2247,12 @@ argument_list|,
 name|override
 argument_list|)
 expr_stmt|;
-comment|/*                  * NOTE: Here we use the coreName as context (last argument to                   * prepairCopy(..)). This ensures that it matter if the archive                   * contains the data directly in the root or within an folder                   * with the name of the core.                  */
+comment|/*                  * NOTE: Here we use the coreName as context (last argument to prepairCopy(..)). This ensures                  * that it matter if the archive contains the data directly in the root or within an folder                  * with the name of the core.                  */
 block|}
-comment|//else - directories are created automatically and empty directories are not needed
+comment|// else - directories are created automatically and empty directories are not needed
 block|}
 block|}
-comment|/**      * Copy an Entry of an Archive to the target (File) within the Core Directory      * @param ais the ArchiveInputStream      * @param entry The Entry to copy      * @param coreDir the root directory      * @param context the context used to calculate the relative path of the      * resource within the target directory      * @param override if an existing resource within the target directory should      * be deleted      * @throws IOException in case of an error while reading or writing the resource      */
+comment|/**      * Copy an Entry of an Archive to the target (File) within the Core Directory      *       * @param ais      *            the ArchiveInputStream      * @param entry      *            The Entry to copy      * @param coreDir      *            the root directory      * @param context      *            the context used to calculate the relative path of the resource within the target directory      * @param override      *            if an existing resource within the target directory should be deleted      * @throws IOException      *             in case of an error while reading or writing the resource      */
 specifier|private
 specifier|static
 name|void
@@ -2392,9 +2392,9 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//else can not cppy logging already provided
+comment|// else can not cppy logging already provided
 block|}
-comment|/**      * Copy the configuration of an core.      * @param clazzInArchive This class is used to identify the archive containing      * the default configuration. Parsing<code>null</code> causes this class to      * be used and therefore initialises the default core configuration contained by      * the SolrYard bundle.      * @param coreDir the target directory for the core      * @param coreName the core name or<code>null</code> to directly load the      * configuration as present under {@value #CONFIG_DIR} in the bundle. This      * property can be used if a bundle needs to provide multiple core      * configurations      * @param override if files in the target directory should be overridden      * @throws IOException On any IO error while coping the configuration      * @throws IllegalStateException If the parsed coreDir does exist but is not      * a directory.      * @throws IllegalArgumentException if<code>null</code> is parsed as coreDir      * or if the parsed bundle does not contain the required information to set       * up an configuration or the parsed coreName is empty.      */
+comment|/**      * Copy the configuration of an core.      *       * @param clazzInArchive      *            This class is used to identify the archive containing the default configuration. Parsing      *<code>null</code> causes this class to be used and therefore initialises the default core      *            configuration contained by the SolrYard bundle.      * @param coreDir      *            the target directory for the core      * @param coreName      *            the core name or<code>null</code> to directly load the configuration as present under      *            {@value #CONFIG_DIR} in the bundle. This property can be used if a bundle needs to provide      *            multiple core configurations      * @param override      *            if files in the target directory should be overridden      * @throws IOException      *             On any IO error while coping the configuration      * @throws IllegalStateException      *             If the parsed coreDir does exist but is not a directory.      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as coreDir or if the parsed bundle does not contain the      *             required information to set up an configuration or the parsed coreName is empty.      */
 specifier|public
 specifier|static
 name|void
@@ -2642,7 +2642,7 @@ block|}
 block|}
 finally|finally
 block|{
-comment|//regardless what happens we need to close the archive!
+comment|// regardless what happens we need to close the archive!
 name|ZipFile
 operator|.
 name|closeQuietly
@@ -2654,7 +2654,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//load from file
+comment|// load from file
 name|File
 name|source
 init|=
@@ -2706,7 +2706,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Converts a parsed String to a File instance. The parsed string can be      * formatted as file URL or as path      * @param uriOrPath the file location as URL or path      * @return the File      */
+comment|/**      * Converts a parsed String to a File instance. The parsed string can be formatted as file URL or as path      *       * @param uriOrPath      *            the file location as URL or path      * @return the File      */
 specifier|public
 specifier|static
 name|File
@@ -2747,7 +2747,7 @@ name|URISyntaxException
 name|e
 parameter_list|)
 block|{
-comment|//not an URI -> ignore
+comment|// not an URI -> ignore
 block|}
 catch|catch
 parameter_list|(
@@ -2755,8 +2755,8 @@ name|IllegalArgumentException
 name|e
 parameter_list|)
 block|{
-comment|//this happens if it is a URI but can not be converted to a file
-comment|//still we should try to work with the parsed file ...
+comment|// this happens if it is a URI but can not be converted to a file
+comment|// still we should try to work with the parsed file ...
 block|}
 if|if
 condition|(
@@ -2778,8 +2778,8 @@ return|return
 name|file
 return|;
 block|}
-comment|/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      * Methods for storing and loading configurations for uninitialised indexes      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      */
-comment|/**      * The path to the directory used to store properties of uninitialised      * referenced sites.<p>      * Such sites are one that are created by using       * {@link #createSolrDirectory(String, String, Map)} but the      * {@link DataFileProvider} does not yet provide the necessary data to      * initialise the index.<p>      * This directory will store properties files with the indexName as name,      * properties as extension and the properties as value      */
+comment|/*      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Methods for storing and      * loading configurations for uninitialised indexes - - - - - - - - - - - - - - - - - - - - - - - - - - -      * - - - - - - - - - -      */
+comment|/**      * The path to the directory used to store properties of uninitialised referenced sites.      *<p>      * Such sites are one that are created by using {@link #createSolrDirectory(String, String, Map)} but the      * {@link DataFileProvider} does not yet provide the necessary data to initialise the index.      *<p>      * This directory will store properties files with the indexName as name, properties as extension and the      * properties as value      */
 specifier|private
 specifier|static
 specifier|final
@@ -2788,7 +2788,7 @@ name|UNINITIALISED_INDEX_DIRECTORY
 init|=
 literal|"config/uninitialised-index"
 decl_stmt|;
-comment|/**      * Saves the configuration of an uninitialised index      * @param context the context used to get the data storage      * @param indexName the name of the uninitialised index      * @param properties the properties of the uninitialised index      * @throws IOException on any error while saving the configuration      */
+comment|/**      * Saves the configuration of an uninitialised index      *       * @param context      *            the context used to get the data storage      * @param indexName      *            the name of the uninitialised index      * @param properties      *            the properties of the uninitialised index      * @throws IOException      *             on any error while saving the configuration      */
 specifier|public
 specifier|static
 name|void
@@ -2851,7 +2851,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//if no config is provided
+comment|// if no config is provided
 name|properties
 operator|=
 operator|new
@@ -2862,7 +2862,7 @@ operator|.
 name|Properties
 argument_list|()
 expr_stmt|;
-comment|//save an empty one
+comment|// save an empty one
 block|}
 try|try
 block|{
@@ -2895,7 +2895,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns the directory used to store the configurations of uninitialised      * Solr Indexes      * @param init if<code>true</code> the directory is created if needed      * @return the directory       */
+comment|/**      * Returns the directory used to store the configurations of uninitialised Solr Indexes      *       * @param init      *            if<code>true</code> the directory is created if needed      * @return the directory      */
 specifier|public
 specifier|static
 name|File
@@ -2997,12 +2997,12 @@ literal|"but is not a directory!"
 argument_list|)
 throw|;
 block|}
-comment|//else -> it exists and is a dir -> nothing todo
+comment|// else -> it exists and is a dir -> nothing todo
 return|return
 name|uninstalledConfigDir
 return|;
 block|}
-comment|/**      * Loads the configurations of uninitialised Solr Indexes      * @return the map with the index name as key and the properties as values      * @throws IOException on any error while loading the configurations      */
+comment|/**      * Loads the configurations of uninitialised Solr Indexes      *       * @return the map with the index name as key and the properties as values      * @throws IOException      *             on any error while loading the configurations      */
 specifier|public
 specifier|static
 name|Map
@@ -3173,7 +3173,7 @@ return|return
 name|configs
 return|;
 block|}
-comment|/**      * Removes the configuration for the index with the parsed name form the      * list if uninitialised indexes      * @param indexName the name of the index      * @return if the file was deleted.      */
+comment|/**      * Removes the configuration for the index with the parsed name form the list if uninitialised indexes      *       * @param indexName      *            the name of the index      * @return if the file was deleted.      */
 specifier|public
 specifier|static
 name|boolean

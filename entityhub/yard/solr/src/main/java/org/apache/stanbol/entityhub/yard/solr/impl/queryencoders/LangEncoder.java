@@ -212,10 +212,10 @@ operator|.
 name|prefix
 argument_list|)
 decl_stmt|;
-comment|//    private static final ConstraintTypePosition SUFFIX = new ConstraintTypePosition(PositionType.suffux);
-comment|//deactivated, because xsd:string values are now also included in the language
-comment|//merger field (the name returned by fieldMapper.getLanguageMergerField(null)).
-comment|//private static final IndexDataType STRING_DATATYPE =  new IndexDataType(NamespaceEnum.xsd+"string");
+comment|// private static final ConstraintTypePosition SUFFIX = new ConstraintTypePosition(PositionType.suffux);
+comment|// deactivated, because xsd:string values are now also included in the language
+comment|// merger field (the name returned by fieldMapper.getLanguageMergerField(null)).
+comment|// private static final IndexDataType STRING_DATATYPE = new IndexDataType(NamespaceEnum.xsd+"string");
 specifier|private
 name|FieldMapper
 name|fieldMapper
@@ -263,7 +263,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//null indicates the default language!
+comment|// null indicates the default language!
 for|for
 control|(
 name|String
@@ -295,8 +295,8 @@ block|}
 block|}
 else|else
 block|{
-comment|//default
-comment|//search in the language merger field of the default language
+comment|// default
+comment|// search in the language merger field of the default language
 name|constraint
 operator|.
 name|addEncoded
@@ -316,13 +316,13 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//            String[] prefixSuffix = fieldMapper.encodeDataType(STRING_DATATYPE);
-comment|//            if(prefixSuffix[0] != null&& !prefixSuffix[0].isEmpty()){
-comment|//                constraint.addEncoded(PREFIX, prefixSuffix[0]);
-comment|//            }
-comment|//            if(prefixSuffix[1] != null&& !prefixSuffix[1].isEmpty()){
-comment|//                constraint.addEncoded(SUFFIX, prefixSuffix[1]);
-comment|//            }
+comment|// String[] prefixSuffix = fieldMapper.encodeDataType(STRING_DATATYPE);
+comment|// if(prefixSuffix[0] != null&& !prefixSuffix[0].isEmpty()){
+comment|// constraint.addEncoded(PREFIX, prefixSuffix[0]);
+comment|// }
+comment|// if(prefixSuffix[1] != null&& !prefixSuffix[1].isEmpty()){
+comment|// constraint.addEncoded(SUFFIX, prefixSuffix[1]);
+comment|// }
 block|}
 block|}
 annotation|@
@@ -388,7 +388,7 @@ argument_list|>
 name|acceptsValueType
 parameter_list|()
 block|{
-comment|//generic types are ereased anyway!
+comment|// generic types are ereased anyway!
 return|return
 call|(
 name|Class

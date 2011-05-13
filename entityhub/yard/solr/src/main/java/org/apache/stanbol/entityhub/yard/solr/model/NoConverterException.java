@@ -34,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This exception is thrown when no adapter is available to do a required  * java-object to {@link IndexValue} or {@link IndexValue} to java-object  * adapter is registered to the used {@link IndexValueFactory}.  *  * @author Rupert Westenthaler  */
+comment|/**  * This exception is thrown when no adapter is available to do a required java-object to {@link IndexValue} or  * {@link IndexValue} to java-object adapter is registered to the used {@link IndexValueFactory}.  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -53,7 +53,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
-comment|/**      * Create an instance of<code>NoAdapterException</code>      * indicating that no adapter is available for the type.      *      * @param type the type for which no adapter is available      */
+comment|/**      * Create an instance of<code>NoAdapterException</code> indicating that no adapter is available for the      * type.      *       * @param type      *            the type for which no adapter is available      */
 specifier|public
 name|NoConverterException
 parameter_list|(

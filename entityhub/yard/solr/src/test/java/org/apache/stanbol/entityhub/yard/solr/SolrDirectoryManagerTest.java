@@ -232,7 +232,7 @@ name|void
 name|init
 parameter_list|()
 block|{
-comment|//set to "${basedir}/some/rel/path" to test if property substitution works!
+comment|// set to "${basedir}/some/rel/path" to test if property substitution works!
 name|String
 name|solrServerDir
 init|=
@@ -262,7 +262,7 @@ argument_list|,
 name|solrServerDir
 argument_list|)
 expr_stmt|;
-comment|//store the expected managed directory for later testing
+comment|// store the expected managed directory for later testing
 name|expectedManagedDirectory
 operator|=
 operator|new
@@ -289,7 +289,7 @@ operator|+
 name|expectedManagedDirectory
 argument_list|)
 expr_stmt|;
-comment|//create the SolrDirectoryManager used for the tests
+comment|// create the SolrDirectoryManager used for the tests
 name|Iterator
 argument_list|<
 name|SolrDirectoryManager
@@ -367,7 +367,7 @@ name|void
 name|testManagedDirectoryInitialisation
 parameter_list|()
 block|{
-comment|//the managed directory must be set based on the
+comment|// the managed directory must be set based on the
 name|expectedManagedDirectory
 operator|.
 name|equals
@@ -478,7 +478,7 @@ name|getKey
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test that the index dir is the expected location
+comment|// test that the index dir is the expected location
 name|File
 name|expectedLocation
 init|=
@@ -504,7 +504,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//test that the expected indexes where returned
+comment|// test that the expected indexes where returned
 name|assertTrue
 argument_list|(
 name|expected
@@ -563,8 +563,8 @@ name|void
 name|testDefaultIndexInitialisation
 parameter_list|()
 block|{
-comment|//this is actually tested already by the initialisation of the
-comment|//SolrYardTest ...
+comment|// this is actually tested already by the initialisation of the
+comment|// SolrYardTest ...
 name|String
 name|indexName
 init|=

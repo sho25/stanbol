@@ -279,7 +279,7 @@ name|indexValue
 operator|=
 literal|null
 expr_stmt|;
-comment|//default value
+comment|// default value
 block|}
 elseif|else
 if|if
