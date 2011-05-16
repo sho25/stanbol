@@ -303,14 +303,14 @@ specifier|abstract
 class|class
 name|RepresentationTest
 block|{
-comment|/**      * Subclasses must implement this method and provide a {@link ValueFactory}      * instance that is used to test the actual model implementation      * @return the {@link ValueFactory} for the Entityhub model implementation       * to be tested      */
+comment|/**      * Subclasses must implement this method and provide a {@link ValueFactory} instance that is used to test      * the actual model implementation      *       * @return the {@link ValueFactory} for the Entityhub model implementation to be tested      */
 specifier|protected
 specifier|abstract
 name|ValueFactory
 name|getValueFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Getter for an instance of an unsupported type. For add/set operation such      * values are converted to the lexical form by using the      * {@link Object#toString()} method. For {@link Representation#get(String, Class)}      * and {@link Representation#getFirst(String, Class)} an       * {@link UnsupportedTypeException} need to be thrown when requesting values      * of the {@link Object#getClass()} of the returned instance.      * @return An instance of a class that is not supported by the       * tested {@link Representation} implementation or<code>null</code> if the      * tested implementation does support any type (this will deactivate such      * kind of tests).      */
+comment|/**      * Getter for an instance of an unsupported type. For add/set operation such values are converted to the      * lexical form by using the {@link Object#toString()} method. For      * {@link Representation#get(String, Class)} and {@link Representation#getFirst(String, Class)} an      * {@link UnsupportedTypeException} need to be thrown when requesting values of the      * {@link Object#getClass()} of the returned instance.      *       * @return An instance of a class that is not supported by the tested {@link Representation}      *         implementation or<code>null</code> if the tested implementation does support any type (this      *         will deactivate such kind of tests).      */
 specifier|protected
 specifier|abstract
 name|Object
@@ -1583,7 +1583,7 @@ literal|"urn:test"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests if value iterators for non existing fields return an Iterator      * with no elements (Here it is important, that in such cases methods do      * not return<code>null</code>).      */
+comment|/**      * Tests if value iterators for non existing fields return an Iterator with no elements (Here it is      * important, that in such cases methods do not return<code>null</code>).      */
 annotation|@
 name|Test
 specifier|public
@@ -1596,7 +1596,7 @@ name|field
 init|=
 literal|"urn:this.field:does.not:exist"
 decl_stmt|;
-comment|//Iterators MUST NOT be NULL but MUST NOT contain any element
+comment|// Iterators MUST NOT be NULL but MUST NOT contain any element
 name|Representation
 name|rep
 init|=
@@ -1827,7 +1827,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/*--------------------------------------------------------------------------      * Set of Tests that check if Methods correctly process UnsupportedTypes      * This means that the toString Method is used to get the lexical      * representation of such types      *--------------------------------------------------------------------------      */
-comment|/**      * Adding an unsupported type should use the {@link Object#toString()}      * to store the parsed instance      */
+comment|/**      * Adding an unsupported type should use the {@link Object#toString()} to store the parsed instance      */
 annotation|@
 name|Test
 specifier|public
@@ -1861,9 +1861,9 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//any type is supported by the representation
+comment|// any type is supported by the representation
 return|return;
-comment|//this test is not needed
+comment|// this test is not needed
 block|}
 name|rep
 operator|.
@@ -1955,9 +1955,9 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//any type is supported by the representation
+comment|// any type is supported by the representation
 return|return;
-comment|//this test is not needed
+comment|// this test is not needed
 block|}
 name|rep
 operator|.
@@ -1968,7 +1968,7 @@ argument_list|,
 name|value
 argument_list|)
 expr_stmt|;
-comment|//this does not test that set removes previous values
+comment|// this does not test that set removes previous values
 name|Iterator
 argument_list|<
 name|Object
@@ -2057,8 +2057,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//any type is supported by the representation
-comment|//this test is not needed therefore return an dummy Exception
+comment|// any type is supported by the representation
+comment|// this test is not needed therefore return an dummy Exception
 throw|throw
 operator|new
 name|UnsupportedTypeException
@@ -2135,8 +2135,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//any type is supported by the representation
-comment|//this test is not needed therefore return an dummy Exception
+comment|// any type is supported by the representation
+comment|// this test is not needed therefore return an dummy Exception
 throw|throw
 operator|new
 name|UnsupportedTypeException
@@ -2173,7 +2173,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * If<code>null</code> is parsed as value for any setter method, than all       * values need to be removed for the field. this means that      *<code>set**(field,null)</code> has the same effect as      *<code>{@link Representation#removeAll(String) removeAll(field)}</code>       */
+comment|/**      * If<code>null</code> is parsed as value for any setter method, than all values need to be removed for      * the field. this means that<code>set**(field,null)</code> has the same effect as      *<code>{@link Representation#removeAll(String) removeAll(field)}</code>      */
 annotation|@
 name|Test
 specifier|public
@@ -2247,7 +2247,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-comment|//need to remove all values
+comment|// need to remove all values
 name|Iterator
 argument_list|<
 name|Object
@@ -2274,7 +2274,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test specific setter (also specific setters need to remove all values)
+comment|// test specific setter (also specific setters need to remove all values)
 name|rep
 operator|.
 name|add
@@ -2406,7 +2406,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//Test removal for References
+comment|// Test removal for References
 name|String
 name|strRef
 init|=
@@ -2522,7 +2522,7 @@ name|field
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test removal for texts (with and without language)
+comment|// test removal for texts (with and without language)
 name|String
 name|strText
 init|=
@@ -2642,8 +2642,8 @@ name|field
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//there is also the possibility to explicitly parse null as language
-comment|//could internally case differences however externally this is the same
+comment|// there is also the possibility to explicitly parse null as language
+comment|// could internally case differences however externally this is the same
 name|rep
 operator|.
 name|addNaturalText
@@ -2766,7 +2766,7 @@ name|field
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Test a dataTypes values
+comment|// Test a dataTypes values
 name|Integer
 name|intValue
 init|=
@@ -2822,8 +2822,8 @@ name|field
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Some Values are converted by the add(String field,Object value) Method
-comment|//to other data types. This MUST also be assured for removal
+comment|// Some Values are converted by the add(String field,Object value) Method
+comment|// to other data types. This MUST also be assured for removal
 comment|// NOTE: testing the conversions is done in other test methods!
 name|URI
 name|testURI
@@ -2885,7 +2885,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests if {@link Reference} instances are correctly generated for {@link URI}.      * This test also depends on the correct implementation of the      * {@link Reference#equals(Object)} method      * @throws URISyntaxException      */
+comment|/**      * Tests if {@link Reference} instances are correctly generated for {@link URI}. This test also depends on      * the correct implementation of the {@link Reference#equals(Object)} method      *       * @throws URISyntaxException      */
 annotation|@
 name|Test
 specifier|public
@@ -2923,7 +2923,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//test conversion
+comment|// test conversion
 name|rep
 operator|.
 name|add
@@ -2978,7 +2978,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple adds do not generate duplicate References
+comment|// test multiple adds do not generate duplicate References
 name|rep
 operator|.
 name|add
@@ -3006,7 +3006,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test adding a equivalent reference
+comment|// test adding a equivalent reference
 name|rep
 operator|.
 name|add
@@ -3042,7 +3042,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test removing
+comment|// test removing
 name|rep
 operator|.
 name|remove
@@ -3066,7 +3066,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests if {@link Reference} instances are correctly generated for {@link URL}.      * This test also depends on the correct implementation of the      * {@link Reference#equals(Object)} method      * @throws MalformedURLException      */
+comment|/**      * Tests if {@link Reference} instances are correctly generated for {@link URL}. This test also depends on      * the correct implementation of the {@link Reference#equals(Object)} method      *       * @throws MalformedURLException      */
 annotation|@
 name|Test
 specifier|public
@@ -3104,7 +3104,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//test conversion
+comment|// test conversion
 name|rep
 operator|.
 name|add
@@ -3159,7 +3159,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple adds do not generate duplicate References
+comment|// test multiple adds do not generate duplicate References
 name|rep
 operator|.
 name|add
@@ -3187,7 +3187,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test adding a equivalent reference
+comment|// test adding a equivalent reference
 name|rep
 operator|.
 name|add
@@ -3223,7 +3223,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test removing
+comment|// test removing
 name|rep
 operator|.
 name|remove
@@ -3247,7 +3247,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Parsing a String Array with null as first element MUST NOT add a value      * (because null values are not supported by {@link Representation}).      */
+comment|/**      * Parsing a String Array with null as first element MUST NOT add a value (because null values are not      * supported by {@link Representation}).      */
 annotation|@
 name|Test
 specifier|public
@@ -3298,7 +3298,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks if {@link Text} instances are correctly generated for String[].      * This test depends also on the correct implementation of the      * {@link Text#equals(Object)} method      */
+comment|/**      * Checks if {@link Text} instances are correctly generated for String[]. This test depends also on the      * correct implementation of the {@link Text#equals(Object)} method      */
 annotation|@
 name|Test
 specifier|public
@@ -3325,7 +3325,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//test conversion of String[] with language as second element
+comment|// test conversion of String[] with language as second element
 name|String
 index|[]
 name|textWithLang
@@ -3417,7 +3417,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple adds do not generate duplicate References
+comment|// test multiple adds do not generate duplicate References
 name|rep
 operator|.
 name|add
@@ -3445,7 +3445,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test adding a equivalent reference
+comment|// test adding a equivalent reference
 name|rep
 operator|.
 name|add
@@ -3486,7 +3486,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test removing
+comment|// test removing
 name|rep
 operator|.
 name|remove
@@ -3509,7 +3509,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test conversion of String[] with only one element (default language)
+comment|// test conversion of String[] with only one element (default language)
 name|String
 index|[]
 name|textWithoutLang
@@ -3589,7 +3589,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple adds do not generate duplicate References
+comment|// test multiple adds do not generate duplicate References
 name|rep
 operator|.
 name|add
@@ -3617,7 +3617,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test adding a equivalent reference
+comment|// test adding a equivalent reference
 name|rep
 operator|.
 name|add
@@ -3653,7 +3653,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test removing
+comment|// test removing
 name|rep
 operator|.
 name|remove
@@ -3676,7 +3676,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test conversion of String[] with null as second element (default language)
+comment|// test conversion of String[] with null as second element (default language)
 name|String
 index|[]
 name|textWithDefaultLang
@@ -3758,7 +3758,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple adds do not generate duplicate References
+comment|// test multiple adds do not generate duplicate References
 name|rep
 operator|.
 name|add
@@ -3786,7 +3786,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test adding a equivalent reference
+comment|// test adding a equivalent reference
 name|rep
 operator|.
 name|add
@@ -3824,7 +3824,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test removing
+comment|// test removing
 name|rep
 operator|.
 name|remove
@@ -3847,7 +3847,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//finally test if additional Elements are correctly ignored
+comment|// finally test if additional Elements are correctly ignored
 name|String
 index|[]
 name|ignoreAdditionalElements
@@ -3955,7 +3955,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple adds do not generate duplicate References
+comment|// test multiple adds do not generate duplicate References
 name|rep
 operator|.
 name|add
@@ -3983,7 +3983,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test if an Array with only the first two elements generate the same Text
+comment|// test if an Array with only the first two elements generate the same Text
 name|rep
 operator|.
 name|add
@@ -4011,7 +4011,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//test removing
+comment|// test removing
 name|rep
 operator|.
 name|remove
@@ -4194,7 +4194,7 @@ argument_list|,
 name|textAsArray
 argument_list|)
 decl_stmt|;
-comment|//test adding of collections
+comment|// test adding of collections
 name|rep
 operator|.
 name|add
@@ -4244,7 +4244,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test adding of Iterators
+comment|// test adding of Iterators
 name|rep
 operator|.
 name|add
@@ -4300,7 +4300,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test adding of Enumerations
+comment|// test adding of Enumerations
 name|Vector
 argument_list|<
 name|Object
@@ -4371,7 +4371,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test adding and removing elements that need to be converted
+comment|// test adding and removing elements that need to be converted
 comment|// only for collections this time -> want to test only converting is
 comment|// applied for both add and remove
 name|rep
@@ -4423,7 +4423,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//a final test to ensure, that remove does not only delete all values
+comment|// a final test to ensure, that remove does not only delete all values
 name|rep
 operator|.
 name|add
@@ -4670,7 +4670,7 @@ argument_list|,
 name|NL_TEST_de_AT
 argument_list|)
 decl_stmt|;
-comment|/**      * Internally used to initialise the representation used for the various      * tests for natural language texts.      * Tests using this initialisation method expect the current configuration.       * If one changes the values one needs also do adapt the according tests.      * @param field the field used to add the test values      * @param valueSet if not<code>null</code> the added values are added to this set      * @return the initialised representation      */
+comment|/**      * Internally used to initialise the representation used for the various tests for natural language texts.      * Tests using this initialisation method expect the current configuration. If one changes the values one      * needs also do adapt the according tests.      *       * @param field      *            the field used to add the test values      * @param valueSet      *            if not<code>null</code> the added values are added to this set      * @return the initialised representation      */
 specifier|private
 name|Representation
 name|initNaturalLanguageTest
@@ -4773,7 +4773,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//Note that also String values need to be converted to texts with no language
+comment|// Note that also String values need to be converted to texts with no language
 name|Set
 argument_list|<
 name|String
@@ -4862,7 +4862,7 @@ operator|==
 literal|4
 argument_list|)
 expr_stmt|;
-comment|//check that both text where found
+comment|// check that both text where found
 block|}
 annotation|@
 name|Test
@@ -4884,7 +4884,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//test de texts
+comment|// test de texts
 name|Iterator
 argument_list|<
 name|Text
@@ -4913,7 +4913,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//there is one German text in the test set
+comment|// there is one German text in the test set
 name|Text
 name|text
 init|=
@@ -4932,7 +4932,7 @@ argument_list|,
 literal|"de"
 argument_list|)
 expr_stmt|;
-comment|//"de" lang
+comment|// "de" lang
 name|assertEquals
 argument_list|(
 name|text
@@ -4943,7 +4943,7 @@ argument_list|,
 name|NL_TEST_de
 argument_list|)
 expr_stmt|;
-comment|//the de lang text
+comment|// the de lang text
 name|assertFalse
 argument_list|(
 name|deTexts
@@ -4952,8 +4952,8 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//only one Result
-comment|//test en labels (2 results)
+comment|// only one Result
+comment|// test en labels (2 results)
 name|Iterator
 argument_list|<
 name|Text
@@ -5034,7 +5034,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//remove the found
+comment|// remove the found
 block|}
 name|assertTrue
 argument_list|(
@@ -5044,7 +5044,7 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//all texts found
+comment|// all texts found
 block|}
 annotation|@
 name|Test
@@ -5066,7 +5066,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//test multiple language query
+comment|// test multiple language query
 name|Iterator
 argument_list|<
 name|Text
@@ -5163,7 +5163,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//remove the found
+comment|// remove the found
 block|}
 name|assertTrue
 argument_list|(
@@ -5173,7 +5173,7 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//all texts found
+comment|// all texts found
 block|}
 annotation|@
 name|Test
@@ -5195,7 +5195,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//test not present language
+comment|// test not present language
 name|Iterator
 argument_list|<
 name|Text
@@ -5224,7 +5224,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test multiple not present languages
+comment|// test multiple not present languages
 name|Iterator
 argument_list|<
 name|Text
@@ -5276,7 +5276,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//test Iterator for any language (by parsing an empty list)
+comment|// test Iterator for any language (by parsing an empty list)
 name|Iterator
 argument_list|<
 name|Text
@@ -5337,7 +5337,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//test Iterator for any language (by parsing null)
+comment|// test Iterator for any language (by parsing null)
 name|Iterator
 argument_list|<
 name|Text
@@ -5399,8 +5399,8 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//Test removal of natural language
-comment|//remove a specific test, but wrong language -> no effect
+comment|// Test removal of natural language
+comment|// remove a specific test, but wrong language -> no effect
 name|rep
 operator|.
 name|removeNaturalText
@@ -5454,7 +5454,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//remove a specific text, but with wrong null language -> also no effect
+comment|// remove a specific text, but with wrong null language -> also no effect
 name|rep
 operator|.
 name|removeNaturalText
@@ -5511,7 +5511,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//remove a specific text, parse one correct and one wrong lang
+comment|// remove a specific text, parse one correct and one wrong lang
 name|rep
 operator|.
 name|removeNaturalText
@@ -5540,7 +5540,7 @@ argument_list|(
 name|NL_TEST_all
 argument_list|)
 decl_stmt|;
-comment|//remove all remaining values
+comment|// remove all remaining values
 for|for
 control|(
 name|Iterator
@@ -5575,7 +5575,7 @@ argument_list|()
 argument_list|)
 control|)
 empty_stmt|;
-comment|//and check that the value we expect to be removed is still in the set
+comment|// and check that the value we expect to be removed is still in the set
 name|assertTrue
 argument_list|(
 name|textSet
@@ -5597,7 +5597,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * String values are treated the same as natural language values with the      * default (<code>null</code>) language.<br>      * Removing a natural language value with parsing null as language MUST       * therefore also remove a string value with the parse same text.      */
+comment|/**      * String values are treated the same as natural language values with the default (<code>null</code>)      * language.<br>      * Removing a natural language value with parsing null as language MUST therefore also remove a string      * value with the parse same text.      */
 annotation|@
 name|Test
 specifier|public
@@ -5633,7 +5633,7 @@ argument_list|(
 name|NL_TEST_all
 argument_list|)
 decl_stmt|;
-comment|//remove a string value by parsing the text and null as language
+comment|// remove a string value by parsing the text and null as language
 name|rep
 operator|.
 name|removeNaturalText
@@ -5692,7 +5692,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//only one element should be removed
+comment|// only one element should be removed
 name|assertTrue
 argument_list|(
 name|textSet
@@ -5703,9 +5703,9 @@ name|NL_TEST_string
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//and this should be the stringTest
+comment|// and this should be the stringTest
 block|}
-comment|/**      * String values are treated the same as natural language values with the      * default (<code>null</code>) language.<br>      * Removing a natural language value with no defined language MUST       * therefore also remove a string value with the parse same text.      */
+comment|/**      * String values are treated the same as natural language values with the default (<code>null</code>)      * language.<br>      * Removing a natural language value with no defined language MUST therefore also remove a string value      * with the parse same text.      */
 annotation|@
 name|Test
 specifier|public
@@ -5741,7 +5741,7 @@ argument_list|(
 name|NL_TEST_all
 argument_list|)
 decl_stmt|;
-comment|//remove a string value by parsing only the text
+comment|// remove a string value by parsing only the text
 name|rep
 operator|.
 name|removeNaturalText
@@ -5817,7 +5817,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//only one element should be removed
+comment|// only one element should be removed
 name|assertTrue
 argument_list|(
 name|textSet
@@ -5828,9 +5828,9 @@ name|NL_TEST_string
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//and this should be the stringTest
+comment|// and this should be the stringTest
 block|}
-comment|/**      * String values are treated the same as natural language values with the      * default (<code>null</code>) language.<br>      * Removing a natural language value with an empty language array MUST be      * interpreted as default language and therefore remove the String value.      */
+comment|/**      * String values are treated the same as natural language values with the default (<code>null</code>)      * language.<br>      * Removing a natural language value with an empty language array MUST be interpreted as default language      * and therefore remove the String value.      */
 annotation|@
 name|Test
 specifier|public
@@ -5866,7 +5866,7 @@ argument_list|(
 name|NL_TEST_all
 argument_list|)
 decl_stmt|;
-comment|//remove a string value by parsing an empty list of languages
+comment|// remove a string value by parsing an empty list of languages
 name|rep
 operator|.
 name|removeNaturalText
@@ -5947,7 +5947,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-comment|//only one element should be removed
+comment|// only one element should be removed
 name|assertTrue
 argument_list|(
 name|textSet
@@ -5958,7 +5958,7 @@ name|NL_TEST_string
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//and this should be the stringTest
+comment|// and this should be the stringTest
 name|rep
 operator|.
 name|add
@@ -5968,9 +5968,9 @@ argument_list|,
 name|NL_TEST_string
 argument_list|)
 expr_stmt|;
-comment|//re add the value for further tests
+comment|// re add the value for further tests
 block|}
-comment|/**      * Tests the feature to add one and the same natural language text for      * multiple languages      */
+comment|/**      * Tests the feature to add one and the same natural language text for multiple languages      */
 specifier|public
 name|void
 name|testAddNaturalLanguageTextForMultipleLanguages
@@ -5989,7 +5989,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//add the same label for multiple language
+comment|// add the same label for multiple language
 name|String
 index|[]
 name|languageArray
@@ -6104,7 +6104,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the feature to remove one and the same natural language text for      * multiple languages      */
+comment|/**      * Tests the feature to remove one and the same natural language text for multiple languages      */
 specifier|public
 name|void
 name|testRemoveNaturalLanguageValueInMultipleLanguages
@@ -6123,7 +6123,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//add the same label for multiple languages
+comment|// add the same label for multiple languages
 name|rep
 operator|.
 name|addNaturalText
@@ -6251,7 +6251,7 @@ argument_list|(
 name|NL_TEST_all
 argument_list|)
 decl_stmt|;
-comment|//remove all texts of a specific language
+comment|// remove all texts of a specific language
 name|rep
 operator|.
 name|removeAllNaturalText
@@ -6333,7 +6333,7 @@ name|void
 name|testRemoveAllTextsOfMultipleLanguages
 parameter_list|()
 block|{
-comment|//remove all texts of multiple languages
+comment|// remove all texts of multiple languages
 name|String
 name|field
 init|=
@@ -6473,7 +6473,7 @@ argument_list|(
 name|NL_TEST_all
 argument_list|)
 decl_stmt|;
-comment|//test removal of null language
+comment|// test removal of null language
 name|rep
 operator|.
 name|removeAllNaturalText
@@ -6550,7 +6550,7 @@ name|NL_TEST_string
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//and this should be the stringTest
+comment|// and this should be the stringTest
 block|}
 annotation|@
 name|Test
@@ -6572,7 +6572,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//add a reference to ensure that only texts (and strings) are removed
+comment|// add a reference to ensure that only texts (and strings) are removed
 name|String
 name|testReference
 init|=
@@ -6587,7 +6587,7 @@ argument_list|,
 name|testReference
 argument_list|)
 expr_stmt|;
-comment|//test removal of all natural language values by parsing no languages
+comment|// test removal of all natural language values by parsing no languages
 name|rep
 operator|.
 name|removeAllNaturalText
@@ -6622,7 +6622,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//not texts any more
+comment|// not texts any more
 name|assertTrue
 argument_list|(
 name|rep
@@ -6636,7 +6636,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//but still a reference!
+comment|// but still a reference!
 block|}
 annotation|@
 name|Test
@@ -6658,7 +6658,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//add a reference to ensure that only texts (and strings) are removed
+comment|// add a reference to ensure that only texts (and strings) are removed
 name|String
 name|testReference
 init|=
@@ -6673,7 +6673,7 @@ argument_list|,
 name|testReference
 argument_list|)
 expr_stmt|;
-comment|//test removal of all natural language values by parsing an empty language array
+comment|// test removal of all natural language values by parsing an empty language array
 name|rep
 operator|.
 name|removeAllNaturalText
@@ -6726,7 +6726,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//text of the added reference is still present
+comment|// text of the added reference is still present
 block|}
 annotation|@
 name|Test
@@ -6748,7 +6748,7 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//add a reference to ensure that only texts (and strings) are removed
+comment|// add a reference to ensure that only texts (and strings) are removed
 name|String
 name|testReference
 init|=
@@ -6763,7 +6763,7 @@ argument_list|,
 name|testReference
 argument_list|)
 expr_stmt|;
-comment|//test removal of all natural language values by parsing only a single argument
+comment|// test removal of all natural language values by parsing only a single argument
 name|rep
 operator|.
 name|removeAllNaturalText
@@ -6811,7 +6811,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//text of the added reference is still present
+comment|// text of the added reference is still present
 block|}
 comment|/**      * Default ID for {@link Representation} used for testing      */
 specifier|private
@@ -6822,7 +6822,7 @@ name|DEFAULT_REPRESENTATION_ID
 init|=
 literal|"urm:test:representation.defaultId"
 decl_stmt|;
-comment|/**      * Creates a {@link Representation} instance by using the parsed ID or       * {@link RepresentationTest#DEFAULT_REPRESENTATION_ID} if<code>null</code>      * is parsed as ID.      * @param id The ID or<code>null</code> to use the default ID      * @return the Representation.      */
+comment|/**      * Creates a {@link Representation} instance by using the parsed ID or      * {@link RepresentationTest#DEFAULT_REPRESENTATION_ID} if<code>null</code> is parsed as ID.      *       * @param id      *            The ID or<code>null</code> to use the default ID      * @return the Representation.      */
 specifier|protected
 name|Representation
 name|createRepresentation

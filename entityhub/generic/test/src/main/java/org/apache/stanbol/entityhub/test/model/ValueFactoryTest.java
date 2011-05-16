@@ -226,7 +226,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * General tests for instantiation of model instances by using the different  * value factory methods.  * This also tests the construction of implementation of {@link Reference},  * {@link Text} and {@link Representation}.  * For the immutable {@link Text} and {@link Reference} this tests are sufficient.  * For Representations there is an own Test class  * @author Rupert Westenthaler  *  */
+comment|/**  * General tests for instantiation of model instances by using the different value factory methods. This also  * tests the construction of implementation of {@link Reference}, {@link Text} and {@link Representation}. For  * the immutable {@link Text} and {@link Reference} this tests are sufficient. For Representations there is an  * own Test class  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -235,21 +235,21 @@ specifier|abstract
 class|class
 name|ValueFactoryTest
 block|{
-comment|/**      * Subclasses must implement this method and provide a {@link ValueFactory}      * instance that is used to test the actual model implementation      * @return the {@link ValueFactory} for the Entityhub model implementation       * to be tested      */
+comment|/**      * Subclasses must implement this method and provide a {@link ValueFactory} instance that is used to test      * the actual model implementation      *       * @return the {@link ValueFactory} for the Entityhub model implementation to be tested      */
 specifier|protected
 specifier|abstract
 name|ValueFactory
 name|getValueFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns an instance of a unsupported Type to be parsed to       * {@link ValueFactory#createReference(Object)}. Used to check if this      * Method correctly throws an {@link UnsupportedTypeException}      * @return an instance of an unsupported type or<code>null</code> if all      * types are supported      */
+comment|/**      * Returns an instance of a unsupported Type to be parsed to {@link ValueFactory#createReference(Object)}.      * Used to check if this Method correctly throws an {@link UnsupportedTypeException}      *       * @return an instance of an unsupported type or<code>null</code> if all types are supported      */
 specifier|protected
 specifier|abstract
 name|Object
 name|getUnsupportedReferenceType
 parameter_list|()
 function_decl|;
-comment|/**      * Returns an instance of a unsupported Type to be parsed to      * {@link ValueFactory#createText(Object)}. Used to check if this Method      * correctly throws an {@link UnsupportedTypeException}      * @return an instance of an unsupported type or<code>null</code> if all      * types are supported      */
+comment|/**      * Returns an instance of a unsupported Type to be parsed to {@link ValueFactory#createText(Object)}. Used      * to check if this Method correctly throws an {@link UnsupportedTypeException}      *       * @return an instance of an unsupported type or<code>null</code> if all types are supported      */
 specifier|protected
 specifier|abstract
 name|Object
@@ -313,7 +313,7 @@ else|else
 block|{
 comment|// no unsupported types ... this test is not necessary
 comment|// -> create a dummy exception
-comment|//TODO: is there a way to deactivate a test if not valid
+comment|// TODO: is there a way to deactivate a test if not valid
 throw|throw
 operator|new
 name|UnsupportedTypeException
@@ -535,7 +535,7 @@ else|else
 block|{
 comment|// no unsupported types ... this test is not necessary
 comment|// -> create a dummy exception
-comment|//TODO: is there a way to deactivate a test if not valid
+comment|// TODO: is there a way to deactivate a test if not valid
 throw|throw
 operator|new
 name|UnsupportedTypeException
@@ -564,7 +564,7 @@ literal|"en"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Some Systems use an empty string for the default language,      * other use<code>null</code>. Text does currently not define that      *<code>null</code> need to be used as default language. However it does      * define that<code>null</code> is a valid value for the language!<p>      * Based on that Entityhub allows implementations to convert an empty       * language to<code>null</code> but does NOT allow to to convert       *<code>null</code> to an empty string.<p>      * This test currently assures, that parsing an empty string as language      * results in an empty string OR<code>null</code>. It also tests that      * parsing an empty string as language does not result in an Exception.      */
+comment|/**      * Some Systems use an empty string for the default language, other use<code>null</code>. Text does      * currently not define that<code>null</code> need to be used as default language. However it does define      * that<code>null</code> is a valid value for the language!      *<p>      * Based on that Entityhub allows implementations to convert an empty language to<code>null</code> but      * does NOT allow to to convert<code>null</code> to an empty string.      *<p>      * This test currently assures, that parsing an empty string as language results in an empty string OR      *<code>null</code>. It also tests that parsing an empty string as language does not result in an      * Exception.      */
 annotation|@
 name|Test
 specifier|public
@@ -580,7 +580,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * One can not create a Representation with<code>null</code> as ID.      * NOTE: automatic generation of IDs is supported by the {@link Yard#create()}      * but not by the {@link Representation} itself.      */
+comment|/**      * One can not create a Representation with<code>null</code> as ID. NOTE: automatic generation of IDs is      * supported by the {@link Yard#create()} but not by the {@link Representation} itself.      */
 annotation|@
 name|Test
 argument_list|(
@@ -645,9 +645,9 @@ argument_list|(
 literal|"urn:testSameId"
 argument_list|)
 decl_stmt|;
-comment|//check that multiple calls with the same ID create different instances
+comment|// check that multiple calls with the same ID create different instances
 comment|// -> this is very important to allow mapping of Representations (e.g.
-comment|//    when they are stored within a cache
+comment|// when they are stored within a cache
 name|assertNotSame
 argument_list|(
 name|rep
@@ -655,7 +655,7 @@ argument_list|,
 name|rep1
 argument_list|)
 expr_stmt|;
-comment|//if an ID is parsed, than the two instance should be equal
+comment|// if an ID is parsed, than the two instance should be equal
 name|assertTrue
 argument_list|(
 name|rep
@@ -679,7 +679,7 @@ name|hashCode
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//check the hash code
+comment|// check the hash code
 block|}
 specifier|private
 name|Representation
@@ -740,7 +740,7 @@ return|return
 name|rep
 return|;
 block|}
-comment|/**      * Internally used to create and text {@link Text}s for the different tests      * @param textString the natural language text as string      * @param language the language      * @return the created {@link Text} instance that can be used to perform      * further tests.      */
+comment|/**      * Internally used to create and text {@link Text}s for the different tests      *       * @param textString      *            the natural language text as string      * @param language      *            the language      * @return the created {@link Text} instance that can be used to perform further tests.      */
 specifier|private
 name|Text
 name|testText
@@ -823,8 +823,8 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//implementations are free to change an empty language string to null
-comment|//NOTE that it is not allowed to change NULL to an empty String!
+comment|// implementations are free to change an empty language string to null
+comment|// NOTE that it is not allowed to change NULL to an empty String!
 name|assertTrue
 argument_list|(
 name|text
@@ -869,7 +869,7 @@ return|return
 name|text
 return|;
 block|}
-comment|/**      * Internally used to create and test {@link Reference}s for the different tests      * @param refObject the object representing the reference      * @return the created {@link Reference} that can be used to perform further      * tests.      */
+comment|/**      * Internally used to create and test {@link Reference}s for the different tests      *       * @param refObject      *            the object representing the reference      * @return the created {@link Reference} that can be used to perform further tests.      */
 specifier|private
 name|Reference
 name|testRef
@@ -894,13 +894,13 @@ argument_list|(
 name|refObject
 argument_list|)
 decl_stmt|;
-comment|//check not null
+comment|// check not null
 name|assertNotNull
 argument_list|(
 name|ref
 argument_list|)
 expr_stmt|;
-comment|//check reference is not null
+comment|// check reference is not null
 name|assertNotNull
 argument_list|(
 name|ref

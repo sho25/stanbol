@@ -219,14 +219,14 @@ specifier|abstract
 class|class
 name|YardTest
 block|{
-comment|/**      * Getter for the {@link Yard} instance to be tested      * @return the {@link Yard} instance to be tested      */
+comment|/**      * Getter for the {@link Yard} instance to be tested      *       * @return the {@link Yard} instance to be tested      */
 specifier|protected
 specifier|abstract
 name|Yard
 name|getYard
 parameter_list|()
 function_decl|;
-comment|/**      * Stores all the IDs of Representations created by the create(..) methods.      * This collection is used to clean up the store after all the unit tests       * are executed.      */
+comment|/**      * Stores all the IDs of Representations created by the create(..) methods. This collection is used to      * clean up the store after all the unit tests are executed.      */
 specifier|protected
 specifier|static
 name|Collection
@@ -549,7 +549,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//add id to cleanup list
+comment|// add id to cleanup list
 name|Representation
 name|test2
 init|=
@@ -577,7 +577,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//add id to cleanup list
+comment|// add id to cleanup list
 name|assertNotSame
 argument_list|(
 name|test
@@ -622,7 +622,7 @@ argument_list|(
 literal|""
 argument_list|)
 expr_stmt|;
-comment|//throws an IllegalArgumentException
+comment|// throws an IllegalArgumentException
 block|}
 annotation|@
 name|Test
@@ -667,7 +667,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//throws an IllegalArgumentException
+comment|// throws an IllegalArgumentException
 block|}
 annotation|@
 name|Test
@@ -787,10 +787,10 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: this does not test if the updated view of the representation is
-comment|//      stored, but only that the store method works for representations
-comment|//      that are already in the Yard AND representations that are not yet
-comment|//      present within the yard
+comment|// NOTE: this does not test if the updated view of the representation is
+comment|// stored, but only that the store method works for representations
+comment|// that are already in the Yard AND representations that are not yet
+comment|// present within the yard
 name|String
 name|testId
 init|=
@@ -845,8 +845,8 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//this creates and adds the representation
-comment|//now test that the representation can also be updated
+comment|// this creates and adds the representation
+comment|// now test that the representation can also be updated
 name|added
 operator|=
 name|yard
@@ -873,10 +873,10 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: this does not test if the updated view of the representation is
-comment|//      stored, but only that the store method works for representations
-comment|//      that are already in the Yard AND representations that are not yet
-comment|//      present within the yard
+comment|// NOTE: this does not test if the updated view of the representation is
+comment|// stored, but only that the store method works for representations
+comment|// that are already in the Yard AND representations that are not yet
+comment|// present within the yard
 name|String
 name|testId
 init|=
@@ -918,11 +918,11 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//this creates and adds the representation
-comment|//now add both and mix Representations that are already present in the yard
-comment|//with an other that is not yet present in the yard
-comment|//change the representations to be sure to force an update even if the
-comment|//implementation checks for changes before updating a representation
+comment|// this creates and adds the representation
+comment|// now add both and mix Representations that are already present in the yard
+comment|// with an other that is not yet present in the yard
+comment|// change the representations to be sure to force an update even if the
+comment|// implementation checks for changes before updating a representation
 name|test2
 operator|.
 name|add
@@ -971,7 +971,7 @@ name|iterator
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//test that both the parsed Representations where stored (updated& created)
+comment|// test that both the parsed Representations where stored (updated& created)
 name|assertTrue
 argument_list|(
 name|added
@@ -1051,8 +1051,8 @@ literal|null
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//now test that only the valid representation was added and the null
-comment|//value was ignored
+comment|// now test that only the valid representation was added and the null
+comment|// value was ignored
 name|assertNotNull
 argument_list|(
 name|added
@@ -1172,7 +1172,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This tests that {@link Representation} retrieved from the Yard do not      * influence other {@link Representation} instances for the same ID. It is      * important, that when different {@link Representation} instances are      * returned to different caller, that these do not influence each other.<p>      * It also tests, that any update to the {@link Representation} as managed      * by the {@link Yard} does also not influence {@link Representation}      * instances that where created before the change.      * @throws YardException      */
+comment|/**      * This tests that {@link Representation} retrieved from the Yard do not influence other      * {@link Representation} instances for the same ID. It is important, that when different      * {@link Representation} instances are returned to different caller, that these do not influence each      * other.      *<p>      * It also tests, that any update to the {@link Representation} as managed by the {@link Yard} does also      * not influence {@link Representation} instances that where created before the change.      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -1203,8 +1203,8 @@ name|value1
 init|=
 literal|"this is a test"
 decl_stmt|;
-comment|//Representations created via the yard need to be created (as empty
-comment|//representation within the yard
+comment|// Representations created via the yard need to be created (as empty
+comment|// representation within the yard
 name|Representation
 name|test
 init|=
@@ -1215,7 +1215,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//retrieve the representation from the store
+comment|// retrieve the representation from the store
 name|Representation
 name|retrieved
 init|=
@@ -1231,10 +1231,10 @@ argument_list|(
 name|retrieved
 argument_list|)
 expr_stmt|;
-comment|//they MUST NOT be the same, but the MUST be equals
-comment|//Note:
-comment|//the fact that two representations with the same id are equals is tested
-comment|//by the unit tests for the representation interface
+comment|// they MUST NOT be the same, but the MUST be equals
+comment|// Note:
+comment|// the fact that two representations with the same id are equals is tested
+comment|// by the unit tests for the representation interface
 name|assertEquals
 argument_list|(
 name|test
@@ -1255,7 +1255,7 @@ argument_list|,
 name|retrieved
 argument_list|)
 expr_stmt|;
-comment|//now add a property to the original one
+comment|// now add a property to the original one
 name|test
 operator|.
 name|add
@@ -1265,7 +1265,7 @@ argument_list|,
 name|value1
 argument_list|)
 expr_stmt|;
-comment|//and check that the retrieved does not have the value
+comment|// and check that the retrieved does not have the value
 name|assertFalse
 argument_list|(
 name|retrieved
@@ -1279,8 +1279,8 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//now store the representation and check that updated are not reflected
-comment|//within the retrieved one
+comment|// now store the representation and check that updated are not reflected
+comment|// within the retrieved one
 name|yard
 operator|.
 name|store
@@ -1301,7 +1301,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//now retrieve again an representation
+comment|// now retrieve again an representation
 name|retrieved
 operator|=
 literal|null
@@ -1315,7 +1315,7 @@ argument_list|(
 name|id
 argument_list|)
 expr_stmt|;
-comment|//now the Representation MUST HAVE the new field
+comment|// now the Representation MUST HAVE the new field
 name|assertTrue
 argument_list|(
 name|retrieved
@@ -1341,7 +1341,7 @@ name|field
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//finally retrieve a second and perform the change test again
+comment|// finally retrieve a second and perform the change test again
 name|Representation
 name|retrieved2
 init|=
@@ -1359,7 +1359,7 @@ argument_list|(
 name|field
 argument_list|)
 expr_stmt|;
-comment|//check the value is still in retrieved2
+comment|// check the value is still in retrieved2
 name|assertTrue
 argument_list|(
 name|retrieved2
@@ -1406,8 +1406,8 @@ init|=
 name|getYard
 argument_list|()
 decl_stmt|;
-comment|//Representations created via the yard need to be created (as empty
-comment|//representation within the yard
+comment|// Representations created via the yard need to be created (as empty
+comment|// representation within the yard
 name|Representation
 name|test
 init|=
@@ -1427,8 +1427,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Representations created via the ValueFactory MUST NOT be added to the
-comment|//Yard
+comment|// Representations created via the ValueFactory MUST NOT be added to the
+comment|// Yard
 name|Representation
 name|test2
 init|=
@@ -1452,7 +1452,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//now store test2 and test again
+comment|// now store test2 and test again
 name|yard
 operator|.
 name|store
@@ -1473,7 +1473,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//now remove test and test again
+comment|// now remove test and test again
 name|yard
 operator|.
 name|remove
@@ -1588,7 +1588,7 @@ argument_list|(
 name|test
 argument_list|)
 expr_stmt|;
-comment|//throws an Exception because test is not part of the yard
+comment|// throws an Exception because test is not part of the yard
 block|}
 annotation|@
 name|Test
@@ -1630,8 +1630,8 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: this does not test if the updated view of the representation is
-comment|//      stored, but only that the update method works correctly
+comment|// NOTE: this does not test if the updated view of the representation is
+comment|// stored, but only that the update method works correctly
 name|Yard
 name|yard
 init|=
@@ -1673,8 +1673,8 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//change the representations to be sure to force an update even if the
-comment|//implementation checks for changes before updating a representation
+comment|// change the representations to be sure to force an update even if the
+comment|// implementation checks for changes before updating a representation
 name|test1
 operator|.
 name|add
@@ -1732,7 +1732,7 @@ name|iterator
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//test that both the parsed Representations where stored (updated& created)
+comment|// test that both the parsed Representations where stored (updated& created)
 name|assertTrue
 argument_list|(
 name|updated
@@ -1762,7 +1762,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * When updating multiple null values need to be ignored.      * @throws YardException      */
+comment|/**      * When updating multiple null values need to be ignored.      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -1772,8 +1772,8 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: this does not test if the updated view of the representation is
-comment|//      stored, but only that the update method works correctly
+comment|// NOTE: this does not test if the updated view of the representation is
+comment|// stored, but only that the update method works correctly
 name|Yard
 name|yard
 init|=
@@ -1800,8 +1800,8 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//change the representations to be sure to force an update even if the
-comment|//implementation checks for changes before updating a representation
+comment|// change the representations to be sure to force an update even if the
+comment|// implementation checks for changes before updating a representation
 name|test1
 operator|.
 name|add
@@ -1874,7 +1874,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * When updating multiple non present representations need to be ignored.      * @throws YardException      */
+comment|/**      * When updating multiple non present representations need to be ignored.      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -1884,8 +1884,8 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: this does not test if the updated view of the representation is
-comment|//      stored, but only that the update method works correctly
+comment|// NOTE: this does not test if the updated view of the representation is
+comment|// stored, but only that the update method works correctly
 name|Yard
 name|yard
 init|=
@@ -1917,8 +1917,8 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//change the representations to be sure to force an update even if the
-comment|//implementation checks for changes before updating a representation
+comment|// change the representations to be sure to force an update even if the
+comment|// implementation checks for changes before updating a representation
 name|test1
 operator|.
 name|add
@@ -1928,8 +1928,8 @@ argument_list|,
 literal|"test value 1"
 argument_list|)
 expr_stmt|;
-comment|//create a 2nd Representation by using the ValueFactory (will not add it
-comment|//to the yard!)
+comment|// create a 2nd Representation by using the ValueFactory (will not add it
+comment|// to the yard!)
 name|Representation
 name|test2
 init|=
@@ -1940,7 +1940,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|//now test1 is present and test2 is not.
+comment|// now test1 is present and test2 is not.
 name|Iterable
 argument_list|<
 name|Representation
@@ -1961,7 +1961,7 @@ name|test2
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//We expect that only test1 is updated and test2 is ignored
+comment|// We expect that only test1 is updated and test2 is ignored
 name|assertNotNull
 argument_list|(
 name|updated
@@ -2033,7 +2033,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests two things:<ol>      *<li> if representations are removed form the yard      *<li> if the representation instance is still valid after it is removed      *</ol>      * The second is very important, because Representations might still be      * used by other components after they are remove from the store they      * where created in      * @throws YardException      */
+comment|/**      * Tests two things:      *<ol>      *<li>if representations are removed form the yard      *<li>if the representation instance is still valid after it is removed      *</ol>      * The second is very important, because Representations might still be used by other components after      * they are remove from the store they where created in      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -2043,9 +2043,9 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: This test needs not to use the create(..) method, because we
-comment|//remove the created representation form the store anyway as part of the
-comment|//test
+comment|// NOTE: This test needs not to use the create(..) method, because we
+comment|// remove the created representation form the store anyway as part of the
+comment|// test
 name|String
 name|id
 init|=
@@ -2096,7 +2096,7 @@ argument_list|(
 name|test
 argument_list|)
 expr_stmt|;
-comment|//store the representation
+comment|// store the representation
 name|assertTrue
 argument_list|(
 name|yard
@@ -2110,13 +2110,13 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test if stored
+comment|// test if stored
 name|test
 operator|=
 literal|null
 expr_stmt|;
-comment|//free the initial
-comment|//create the instance form the store to test (2)
+comment|// free the initial
+comment|// create the instance form the store to test (2)
 name|test
 operator|=
 name|yard
@@ -2136,7 +2136,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//only to be sure ...
+comment|// only to be sure ...
 name|yard
 operator|.
 name|remove
@@ -2147,7 +2147,7 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//test (1) - the remove
+comment|// test (1) - the remove
 name|assertFalse
 argument_list|(
 name|yard
@@ -2161,9 +2161,9 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test if removed
-comment|//test if the test object is not destroyed by removing the representation
-comment|//it represents form the store (2)
+comment|// test if removed
+comment|// test if the test object is not destroyed by removing the representation
+comment|// it represents form the store (2)
 name|assertEquals
 argument_list|(
 name|testValue
@@ -2208,7 +2208,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that multiple Representations are removed.       * @throws YardException      */
+comment|/**      * Tests that multiple Representations are removed.      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -2218,9 +2218,9 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: This test needs not to use the create(..) method, because we
-comment|//remove the created representation form the store anyway as part of the
-comment|//test
+comment|// NOTE: This test needs not to use the create(..) method, because we
+comment|// remove the created representation form the store anyway as part of the
+comment|// test
 name|String
 name|id
 init|=
@@ -2247,8 +2247,8 @@ init|=
 name|getYard
 argument_list|()
 decl_stmt|;
-comment|//use both ways to add the two Representations (should make no differences,
-comment|//but one never can know ...
+comment|// use both ways to add the two Representations (should make no differences,
+comment|// but one never can know ...
 name|Representation
 name|test1
 init|=
@@ -2259,7 +2259,7 @@ argument_list|(
 name|id
 argument_list|)
 decl_stmt|;
-comment|//create and add
+comment|// create and add
 name|Representation
 name|test2
 init|=
@@ -2273,7 +2273,7 @@ argument_list|(
 name|id2
 argument_list|)
 decl_stmt|;
-comment|//create
+comment|// create
 name|test2
 operator|.
 name|add
@@ -2283,7 +2283,7 @@ argument_list|,
 name|testValue
 argument_list|)
 expr_stmt|;
-comment|//add value
+comment|// add value
 name|yard
 operator|.
 name|store
@@ -2291,7 +2291,7 @@ argument_list|(
 name|test2
 argument_list|)
 expr_stmt|;
-comment|//store
+comment|// store
 name|assertTrue
 argument_list|(
 name|yard
@@ -2305,7 +2305,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test if stored
+comment|// test if stored
 name|assertTrue
 argument_list|(
 name|yard
@@ -2339,7 +2339,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//remove
+comment|// remove
 name|assertFalse
 argument_list|(
 name|yard
@@ -2353,7 +2353,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test if removed
+comment|// test if removed
 name|assertFalse
 argument_list|(
 name|yard
@@ -2368,7 +2368,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests if<code>null</code> values within the Iterable are ignored and do      * not cause an Exception      * @throws YardException      */
+comment|/**      * Tests if<code>null</code> values within the Iterable are ignored and do not cause an Exception      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -2378,9 +2378,9 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: This test needs not to use the create(..) method, because we
-comment|//remove the created representation form the store anyway as part of the
-comment|//test
+comment|// NOTE: This test needs not to use the create(..) method, because we
+comment|// remove the created representation form the store anyway as part of the
+comment|// test
 name|String
 name|id
 init|=
@@ -2402,7 +2402,7 @@ argument_list|(
 name|id
 argument_list|)
 decl_stmt|;
-comment|//create and add
+comment|// create and add
 name|assertTrue
 argument_list|(
 name|yard
@@ -2447,7 +2447,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that {@link Representation} IDs that are not stored by the yard are      * ignored by the multiple remove method      * @throws YardException      */
+comment|/**      * Tests that {@link Representation} IDs that are not stored by the yard are ignored by the multiple      * remove method      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -2457,9 +2457,9 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-comment|//NOTE: This test needs not to use the create(..) method, because we
-comment|//remove the created representation form the store anyway as part of the
-comment|//test
+comment|// NOTE: This test needs not to use the create(..) method, because we
+comment|// remove the created representation form the store anyway as part of the
+comment|// test
 name|String
 name|id
 init|=
@@ -2486,7 +2486,7 @@ argument_list|(
 name|id
 argument_list|)
 decl_stmt|;
-comment|//create and add
+comment|// create and add
 name|assertTrue
 argument_list|(
 name|yard
@@ -2541,7 +2541,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * The {@link Representation} as stored in the Yard MUST NOT change if the      * source {@link Representation} stored to the {@link Yard} or an      * Representation retrieved from the Yard is changed. Only the      * {@link Yard#store(Representation))} and the {@link Yard#update(Representation)}      * methods are allowed to synchronised the Representation within the Yard with      * the state (changes) of the parsed value.      * @throws YardException      */
+comment|/**      * The {@link Representation} as stored in the Yard MUST NOT change if the source {@link Representation}      * stored to the {@link Yard} or an Representation retrieved from the Yard is changed. Only the      * {@link Yard#store(Representation))} and the {@link Yard#update(Representation)} methods are allowed to      * synchronised the Representation within the Yard with the state (changes) of the parsed value.      *       * @throws YardException      */
 annotation|@
 name|Test
 specifier|public
@@ -2572,8 +2572,8 @@ init|=
 name|getYard
 argument_list|()
 decl_stmt|;
-comment|//use the ValueFactory to create the representation to ensure that this
-comment|//instance has nothing to do with the store
+comment|// use the ValueFactory to create the representation to ensure that this
+comment|// instance has nothing to do with the store
 name|Representation
 name|test
 init|=
@@ -2584,7 +2584,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|//now store the empty Representation
+comment|// now store the empty Representation
 name|yard
 operator|.
 name|store
@@ -2592,7 +2592,7 @@ argument_list|(
 name|test
 argument_list|)
 expr_stmt|;
-comment|//now add a values
+comment|// now add a values
 name|test
 operator|.
 name|add
@@ -2602,7 +2602,7 @@ argument_list|,
 name|testValue
 argument_list|)
 expr_stmt|;
-comment|//now get the representation from the yard
+comment|// now get the representation from the yard
 name|Representation
 name|stored
 init|=
@@ -2613,7 +2613,7 @@ argument_list|(
 name|id
 argument_list|)
 decl_stmt|;
-comment|//test if the stored version does not contain the value
+comment|// test if the stored version does not contain the value
 name|assertFalse
 argument_list|(
 name|stored
@@ -2631,7 +2631,7 @@ name|stored
 operator|=
 literal|null
 expr_stmt|;
-comment|//now store the updated version
+comment|// now store the updated version
 name|yard
 operator|.
 name|store
@@ -2639,7 +2639,7 @@ argument_list|(
 name|test
 argument_list|)
 expr_stmt|;
-comment|//now check that the updated value is stored
+comment|// now check that the updated value is stored
 name|stored
 operator|=
 name|yard
@@ -2661,7 +2661,7 @@ name|field
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//now we need to test if modifications of an Representation returned
+comment|// now we need to test if modifications of an Representation returned
 name|test
 operator|=
 name|stored
@@ -2684,8 +2684,8 @@ argument_list|,
 name|testValue2
 argument_list|)
 expr_stmt|;
-comment|//now get the representation from the yard and check that it still has
-comment|//only one value
+comment|// now get the representation from the yard and check that it still has
+comment|// only one value
 name|stored
 operator|=
 name|yard
@@ -2721,7 +2721,7 @@ name|testValue
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test that it contains the value
+comment|// test that it contains the value
 name|assertTrue
 argument_list|(
 name|values
@@ -2730,12 +2730,12 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//and that there is only this value
+comment|// and that there is only this value
 name|values
 operator|=
 literal|null
 expr_stmt|;
-comment|//now update the stored version with the new state
+comment|// now update the stored version with the new state
 name|stored
 operator|=
 literal|null
@@ -2771,7 +2771,7 @@ name|testValue
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test that it contains the original
+comment|// test that it contains the original
 name|assertTrue
 argument_list|(
 name|values
@@ -2782,7 +2782,7 @@ name|testValue2
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//test that it contains the 2nd value
+comment|// test that it contains the 2nd value
 name|assertTrue
 argument_list|(
 name|values
@@ -2791,7 +2791,7 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//and that there are only these two values
+comment|// and that there are only these two values
 name|values
 operator|=
 literal|null
