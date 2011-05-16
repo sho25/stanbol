@@ -1125,11 +1125,6 @@ name|ruleStore
 decl_stmt|;
 annotation|@
 name|Reference
-name|Reasoner
-name|reasoner
-decl_stmt|;
-annotation|@
-name|Reference
 name|Refactorer
 name|refactorer
 decl_stmt|;
