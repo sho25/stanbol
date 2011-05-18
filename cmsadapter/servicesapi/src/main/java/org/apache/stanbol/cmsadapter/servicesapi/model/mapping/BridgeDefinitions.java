@@ -16,7 +16,7 @@ comment|// Any modifications to this file will be lost upon recompilation of the
 end_comment
 
 begin_comment
-comment|// Generated on: 2011.04.14 at 03:06:41 PM EEST
+comment|// Generated on: 2011.05.09 at 02:52:53 PM EEST
 end_comment
 
 begin_comment
@@ -146,7 +146,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<p>Java class for anonymous complex type.  *   *<p>The following schema fragment specifies the expected content contained within this class.  *   *<pre>  *&lt;complexType>  *&lt;complexContent>  *&lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">  *&lt;choice maxOccurs="unbounded">  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}ConceptBridge"/>  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}SubsumptionBridge"/>  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}PropertyBridge"/>  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}InstanceBridge"/>  *&lt;/choice>  *&lt;/restriction>  *&lt;/complexContent>  *&lt;/complexType>  *</pre>  *   *   */
+comment|/**  *<p>Java class for anonymous complex type.  *   *<p>The following schema fragment specifies the expected content contained within this class.  *   *<pre>  *&lt;complexType>  *&lt;complexContent>  *&lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">  *&lt;choice maxOccurs="unbounded">  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}ConceptBridge"/>  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}SubsumptionBridge"/>  *&lt;element ref="{mapping.model.servicesapi.cmsadapter.stanbol.apache.org}InstanceBridge"/>  *&lt;/choice>  *&lt;/restriction>  *&lt;/complexContent>  *&lt;/complexType>  *</pre>  *   *   */
 end_comment
 
 begin_class
@@ -167,7 +167,7 @@ argument_list|,
 name|propOrder
 operator|=
 block|{
-literal|"conceptBridgeOrSubsumptionBridgeOrPropertyBridge"
+literal|"conceptBridgeOrSubsumptionBridgeOrInstanceBridge"
 block|}
 argument_list|)
 annotation|@
@@ -204,39 +204,25 @@ name|XmlElement
 argument_list|(
 name|name
 operator|=
-literal|"ConceptBridge"
-argument_list|,
-name|type
-operator|=
-name|ConceptBridge
-operator|.
-name|class
-argument_list|)
-block|,
-annotation|@
-name|XmlElement
-argument_list|(
-name|name
-operator|=
-literal|"PropertyBridge"
-argument_list|,
-name|type
-operator|=
-name|PropertyBridge
-operator|.
-name|class
-argument_list|)
-block|,
-annotation|@
-name|XmlElement
-argument_list|(
-name|name
-operator|=
 literal|"InstanceBridge"
 argument_list|,
 name|type
 operator|=
 name|InstanceBridge
+operator|.
+name|class
+argument_list|)
+block|,
+annotation|@
+name|XmlElement
+argument_list|(
+name|name
+operator|=
+literal|"ConceptBridge"
+argument_list|,
+name|type
+operator|=
+name|ConceptBridge
 operator|.
 name|class
 argument_list|)
@@ -247,25 +233,25 @@ name|List
 argument_list|<
 name|Object
 argument_list|>
-name|conceptBridgeOrSubsumptionBridgeOrPropertyBridge
+name|conceptBridgeOrSubsumptionBridgeOrInstanceBridge
 decl_stmt|;
-comment|/**      * Gets the value of the conceptBridgeOrSubsumptionBridgeOrPropertyBridge property.      *       *<p>      * This accessor method returns a reference to the live list,      * not a snapshot. Therefore any modification you make to the      * returned list will be present inside the JAXB object.      * This is why there is not a<CODE>set</CODE> method for the conceptBridgeOrSubsumptionBridgeOrPropertyBridge property.      *       *<p>      * For example, to add a new item, do as follows:      *<pre>      *    getConceptBridgeOrSubsumptionBridgeOrPropertyBridge().add(newItem);      *</pre>      *       *       *<p>      * Objects of the following type(s) are allowed in the list      * {@link SubsumptionBridge }      * {@link ConceptBridge }      * {@link PropertyBridge }      * {@link InstanceBridge }      *       *       */
+comment|/**      * Gets the value of the conceptBridgeOrSubsumptionBridgeOrInstanceBridge property.      *       *<p>      * This accessor method returns a reference to the live list,      * not a snapshot. Therefore any modification you make to the      * returned list will be present inside the JAXB object.      * This is why there is not a<CODE>set</CODE> method for the conceptBridgeOrSubsumptionBridgeOrInstanceBridge property.      *       *<p>      * For example, to add a new item, do as follows:      *<pre>      *    getConceptBridgeOrSubsumptionBridgeOrInstanceBridge().add(newItem);      *</pre>      *       *       *<p>      * Objects of the following type(s) are allowed in the list      * {@link SubsumptionBridge }      * {@link InstanceBridge }      * {@link ConceptBridge }      *       *       */
 specifier|public
 name|List
 argument_list|<
 name|Object
 argument_list|>
-name|getConceptBridgeOrSubsumptionBridgeOrPropertyBridge
+name|getConceptBridgeOrSubsumptionBridgeOrInstanceBridge
 parameter_list|()
 block|{
 if|if
 condition|(
-name|conceptBridgeOrSubsumptionBridgeOrPropertyBridge
+name|conceptBridgeOrSubsumptionBridgeOrInstanceBridge
 operator|==
 literal|null
 condition|)
 block|{
-name|conceptBridgeOrSubsumptionBridgeOrPropertyBridge
+name|conceptBridgeOrSubsumptionBridgeOrInstanceBridge
 operator|=
 operator|new
 name|ArrayList
@@ -278,7 +264,7 @@ block|}
 return|return
 name|this
 operator|.
-name|conceptBridgeOrSubsumptionBridgeOrPropertyBridge
+name|conceptBridgeOrSubsumptionBridgeOrInstanceBridge
 return|;
 block|}
 block|}
