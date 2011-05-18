@@ -48,7 +48,9 @@ name|range
 block|,
 comment|/**          * Constraints a field to have a lexical value          */
 name|text
-comment|//TODO: value Type for checking non lexical values
+block|,
+comment|/**          * Constraints a field to have a lexical value along with statistics to be able to compute a          * similarity metric (e.g. using the MoreLikeThis Solr handler)          */
+name|similarity
 block|}
 specifier|private
 specifier|final
