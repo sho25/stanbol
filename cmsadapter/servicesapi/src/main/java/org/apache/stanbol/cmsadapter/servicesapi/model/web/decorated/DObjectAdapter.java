@@ -55,26 +55,6 @@ name|model
 operator|.
 name|web
 operator|.
-name|ChildObjectDefinition
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|cmsadapter
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|web
-operator|.
 name|ObjectTypeDefinition
 import|;
 end_import
@@ -145,13 +125,6 @@ name|PropertyDefinition
 name|propertyDefinition
 parameter_list|)
 function_decl|;
-name|DChildObjectType
-name|wrapAsDChildObjectType
-parameter_list|(
-name|ChildObjectDefinition
-name|childObjectDefinition
-parameter_list|)
-function_decl|;
 name|DProperty
 name|wrapAsDProperty
 parameter_list|(
@@ -163,7 +136,7 @@ name|Object
 name|getSession
 parameter_list|()
 function_decl|;
-comment|/** 	 * Mode must be set before fetching an object from CMS. 	 * Otherwise inconsistent/erroneous behavior can be faced.  	 * @param mode 	 * @return 	 */
+comment|/**      * Mode must be set before fetching an object from CMS. Otherwise inconsistent/erroneous behavior can be      * faced.      *       * @param mode      * @return      */
 name|void
 name|setMode
 parameter_list|(

@@ -104,7 +104,7 @@ name|RepositoryAccessException
 function_decl|;
 name|List
 argument_list|<
-name|DChildObjectType
+name|DObjectType
 argument_list|>
 name|getChildDefinitions
 parameter_list|()

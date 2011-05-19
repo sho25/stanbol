@@ -69,6 +69,10 @@ name|ResourceFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * This class contains necessary {@link Resource}s and {@link Property}ies that are used in the scope of CMS  * Adapter component.  *   * @author srdc  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -162,6 +166,28 @@ argument_list|(
 name|CMS_ADAPTER_VOCABULARY_URI
 argument_list|,
 name|CMSAD_RESOURCE_REF_PROP_NAME
+argument_list|)
+decl_stmt|;
+comment|/*      * Property to keep source object type definition of a datatype property or object property      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|CMSAD_PROPERTY_SOURCE_OBJECT_PROP_NAME
+init|=
+literal|"sourceObject"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|Property
+name|CMSAD_PROPERTY_SOURCE_OBJECT_PROP
+init|=
+name|property
+argument_list|(
+name|CMS_ADAPTER_VOCABULARY_URI
+argument_list|,
+name|CMSAD_PROPERTY_SOURCE_OBJECT_PROP_NAME
 argument_list|)
 decl_stmt|;
 comment|/*      * Properties to store connection info in the ontology      */

@@ -45,26 +45,6 @@ name|model
 operator|.
 name|web
 operator|.
-name|PropType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|cmsadapter
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|web
-operator|.
 name|Property
 import|;
 end_import
@@ -94,10 +74,6 @@ name|DProperty
 block|{
 name|String
 name|getName
-parameter_list|()
-function_decl|;
-name|PropType
-name|getType
 parameter_list|()
 function_decl|;
 comment|/**      *       * @return Property definition of property, null if<b>STRICT_OFFLINE</b> mode.      * @throws RepositoryAccessException if can not access repository in<b>ONLINE</> mode.      */
