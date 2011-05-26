@@ -71,7 +71,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -121,7 +121,7 @@ name|QueryResultList
 argument_list|<
 name|?
 extends|extends
-name|Sign
+name|Entity
 argument_list|>
 name|findSigns
 parameter_list|(

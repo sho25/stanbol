@@ -15,7 +15,7 @@ name|entityhub
 operator|.
 name|core
 operator|.
-name|model
+name|impl
 package|;
 end_package
 
@@ -61,6 +61,42 @@ name|servicesapi
 operator|.
 name|model
 operator|.
+name|Entity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
+name|ManagedEntityState
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
 name|Reference
 import|;
 end_import
@@ -97,7 +133,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Symbol
+name|Text
 import|;
 end_import
 
@@ -115,7 +151,9 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Text
+name|rdf
+operator|.
+name|RdfResourceEnum
 import|;
 end_import
 
@@ -140,17 +178,15 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the Symbol Interface based on the parsed {@link Representation}.<br>  * Specific implementations of the entity hub models might want to use this implementation  * so that they need only to implement the {@link Representation} interface.  * However implementations might also decides to provide its own implementation  * of the {@link Symbol} as well as the other interfaces defined by the  * entityhub model  * @author Rupert Westenthaler  *  */
+comment|/**  * wrapper over an Entity that allows API based read/write access  * to metadata typically needed by the Entityhub Implementation.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|DefaultSymbolImpl
+name|ManagedEntity
 extends|extends
-name|DefaultSignImpl
-implements|implements
-name|Symbol
+name|EntityWrapper
 block|{
 specifier|private
 specifier|static
@@ -162,10 +198,91 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|DefaultSymbolImpl
+name|ManagedEntity
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+comment|/**      * The default state for new symbols if not defined otherwise      */
+specifier|public
+specifier|static
+specifier|final
+name|ManagedEntityState
+name|DEFAULT_SYMBOL_STATE
+init|=
+name|ManagedEntityState
+operator|.
+name|proposed
+decl_stmt|;
+comment|/**      * The property to be used for the symbol label      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|LABEL
+init|=
+name|RdfResourceEnum
+operator|.
+name|label
+operator|.
+name|getUri
+argument_list|()
+decl_stmt|;
+comment|/**      * The property to be used for the symbol description      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DESCRIPTION
+init|=
+name|RdfResourceEnum
+operator|.
+name|description
+operator|.
+name|getUri
+argument_list|()
+decl_stmt|;
+comment|/**      * The property to be used for the symbol state      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|STATE
+init|=
+name|RdfResourceEnum
+operator|.
+name|hasState
+operator|.
+name|getUri
+argument_list|()
+decl_stmt|;
+comment|/**      * The property used for linking to successors      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SUCCESSOR
+init|=
+name|RdfResourceEnum
+operator|.
+name|successor
+operator|.
+name|getUri
+argument_list|()
+decl_stmt|;
+comment|/**      * The property used for linking to predecessors      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PREDECESSOR
+init|=
+name|RdfResourceEnum
+operator|.
+name|predecessor
+operator|.
+name|getUri
+argument_list|()
 decl_stmt|;
 specifier|private
 name|String
@@ -189,36 +306,209 @@ block|,
 literal|"en"
 block|}
 decl_stmt|;
-comment|/**      * Creates a Symbol Wrapper over the parsed representation      * @param entityhubId the ID of the Entityhub that manages this Symbol      * @param representation the representation holding the state of the symbol      * @throws IllegalArgumentException If the parsed ID is<code>null</code> or      * empty or the parsed Representation is<code>null</code>.      */
-specifier|protected
-name|DefaultSymbolImpl
-parameter_list|(
-name|String
-name|entityhubId
-parameter_list|,
+comment|/**      * Holds a reference to the {@link Entity#getMetadata()} of the      * wrapped entity      */
+specifier|private
+specifier|final
 name|Representation
-name|representation
+name|metadata
+decl_stmt|;
+comment|/**      * Creates a wrapper over an Entity that allows API based read/write access      * to metadata typically needed by the Entityhub Implementation.      * @param entity the wrapped entity      * @throws IllegalArgumentException if the parsed Entity is<code>null</code>      */
+specifier|public
+name|ManagedEntity
+parameter_list|(
+name|Entity
+name|entity
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
 block|{
-name|super
+name|this
 argument_list|(
-name|entityhubId
+name|entity
 argument_list|,
-name|representation
+literal|true
 argument_list|)
 expr_stmt|;
-comment|//checks no longer required,
-comment|//        if(getLabel() == null){
-comment|//            throw new IllegalArgumentException("Representation "+getId()+" does not define required field "+Symbol.LABEL);
-comment|//        }
-comment|//        if(getState() == null){
-comment|//            throw new IllegalArgumentException("Representation "+getId()+" does not define required field "+Symbol.STATE);
-comment|//        }
 block|}
-annotation|@
-name|Override
+comment|/**      * Internally used to allow parsing<code>validate == false</code> in cases      * the validation is not necessary.       * @param entity      * @param validate      */
+specifier|private
+name|ManagedEntity
+parameter_list|(
+name|Entity
+name|entity
+parameter_list|,
+name|boolean
+name|validate
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|entity
+argument_list|)
+expr_stmt|;
+comment|//        if(entity == null){
+comment|//            throw new IllegalArgumentException("The parsed Entity MUST NOT be NULL");
+comment|//        }
+if|if
+condition|(
+name|validate
+operator|&&
+operator|!
+name|canWrap
+argument_list|(
+name|entity
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Unable to wrap Entity %s"
+argument_list|,
+name|entity
+argument_list|)
+argument_list|)
+throw|;
+block|}
+name|this
+operator|.
+name|metadata
+operator|=
+name|wrappedEntity
+operator|.
+name|getMetadata
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**      * Checks if the parsed Entity can be wrapped as a locally managed entity.      * This checks currently of a {@link ManagedEntityState} is defined by the      * metadata.      * @param entity the entity to check      * @return the state      */
+specifier|public
+specifier|static
+name|boolean
+name|canWrap
+parameter_list|(
+name|Entity
+name|entity
+parameter_list|)
+block|{
+comment|//check the metadata for
+comment|//if the entity is managed locally
+comment|//if the entity has an state
+name|Reference
+name|stateUri
+init|=
+name|entity
+operator|.
+name|getMetadata
+argument_list|()
+operator|.
+name|getFirstReference
+argument_list|(
+name|STATE
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|stateUri
+operator|==
+literal|null
+operator|||
+operator|!
+name|ManagedEntityState
+operator|.
+name|isState
+argument_list|(
+name|stateUri
+operator|.
+name|getReference
+argument_list|()
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+comment|//passed all tests
+return|return
+literal|true
+return|;
+block|}
+comment|/**      * Sets the parsed default state to the metadata if no other one is already      * present and that wraps the entity as locally managed entity.      * @param entity the entity      * @param defaultState the default state used if no one is yet defined for      * this entity      * @return the wrapped entity      */
+specifier|public
+specifier|static
+name|ManagedEntity
+name|init
+parameter_list|(
+name|Entity
+name|entity
+parameter_list|,
+name|ManagedEntityState
+name|defaultState
+parameter_list|)
+block|{
+name|Reference
+name|stateUri
+init|=
+name|entity
+operator|.
+name|getMetadata
+argument_list|()
+operator|.
+name|getFirstReference
+argument_list|(
+name|STATE
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|stateUri
+operator|==
+literal|null
+operator|||
+operator|!
+name|ManagedEntityState
+operator|.
+name|isState
+argument_list|(
+name|stateUri
+operator|.
+name|getReference
+argument_list|()
+argument_list|)
+condition|)
+block|{
+name|entity
+operator|.
+name|getMetadata
+argument_list|()
+operator|.
+name|setReference
+argument_list|(
+name|STATE
+argument_list|,
+name|defaultState
+operator|.
+name|getUri
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+operator|new
+name|ManagedEntity
+argument_list|(
+name|entity
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
+comment|/**      * Adds a description in the default language to the Symbol      * @param description the description      */
 specifier|public
 specifier|final
 name|void
@@ -228,12 +518,10 @@ name|String
 name|description
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|addNaturalText
 argument_list|(
-name|Symbol
-operator|.
 name|DESCRIPTION
 argument_list|,
 name|description
@@ -242,8 +530,7 @@ name|defaultLanguage
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Adds a description in the parsed language to the Symbol      * @param description the description      * @param lanugage the language.<code>null</code> indicates to use no language tag      */
 specifier|public
 specifier|final
 name|void
@@ -256,12 +543,10 @@ name|String
 name|lanugage
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|addNaturalText
 argument_list|(
-name|Symbol
-operator|.
 name|DESCRIPTION
 argument_list|,
 name|description
@@ -270,8 +555,7 @@ name|lanugage
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Adds the symbol with the parsed ID as a predecessor      * @param predecessor the id of the predecessors      */
 specifier|public
 specifier|final
 name|void
@@ -281,20 +565,17 @@ name|String
 name|predecessor
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|addReference
 argument_list|(
-name|Symbol
-operator|.
 name|PREDECESSOR
 argument_list|,
 name|predecessor
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Adds the symbol with the parsed ID as a successor      * @param successor the id of the successor      */
 specifier|public
 specifier|final
 name|void
@@ -304,20 +585,17 @@ name|String
 name|successor
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|addReference
 argument_list|(
-name|Symbol
-operator|.
 name|SUCCESSOR
 argument_list|,
 name|successor
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Getter for the descriptions of this symbol in the default language.      * @return The descriptions or an empty collection.      */
 specifier|public
 specifier|final
 name|Iterator
@@ -328,18 +606,15 @@ name|getDescriptions
 parameter_list|()
 block|{
 return|return
-name|representation
+name|metadata
 operator|.
 name|getText
 argument_list|(
-name|Symbol
-operator|.
 name|DESCRIPTION
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Getter for the short description as defined for the parsed language.      * @param lang The language. Parse<code>null</code> for values without language tags      * @return The description or<code>null</code> if no description is defined      * for the parsed language.      */
 specifier|public
 specifier|final
 name|Iterator
@@ -353,20 +628,17 @@ name|lang
 parameter_list|)
 block|{
 return|return
-name|representation
+name|metadata
 operator|.
 name|get
 argument_list|(
-name|Symbol
-operator|.
 name|DESCRIPTION
 argument_list|,
 name|lang
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * The label of this Symbol in the default language      * @return the label      */
 specifier|public
 specifier|final
 name|String
@@ -393,12 +665,10 @@ comment|//search labels in other languages
 name|Text
 name|altLabel
 init|=
-name|representation
+name|metadata
 operator|.
 name|getFirst
 argument_list|(
-name|Symbol
-operator|.
 name|LABEL
 argument_list|,
 name|ALT_LABEL_LANGUAGES
@@ -417,12 +687,10 @@ name|Text
 argument_list|>
 name|labels
 init|=
-name|representation
+name|metadata
 operator|.
 name|getText
 argument_list|(
-name|Symbol
-operator|.
 name|LABEL
 argument_list|)
 decl_stmt|;
@@ -463,8 +731,7 @@ name|label
 return|;
 block|}
 block|}
-annotation|@
-name|Override
+comment|/**      * The preferred label of this Symbol in the given language or      *<code>null</code> if no label for this language is defined      * TODO: how to handle internationalisation.      * @param lang the language      * @return The preferred label of this Symbol in the given language or      *<code>null</code> if no label for this language is defined      */
 specifier|public
 specifier|final
 name|String
@@ -477,12 +744,10 @@ block|{
 name|Text
 name|label
 init|=
-name|representation
+name|metadata
 operator|.
 name|getFirst
 argument_list|(
-name|Symbol
-operator|.
 name|LABEL
 argument_list|,
 name|lang
@@ -501,8 +766,7 @@ else|:
 literal|null
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Getter for the ID's of the symbols defined as predecessors of this one.      * @return The id's of the symbols defined as predecessors of this one or an      * empty list if there are no predecessors are defined.      */
 specifier|public
 specifier|final
 name|Iterator
@@ -516,34 +780,29 @@ return|return
 operator|new
 name|ToStringIterator
 argument_list|(
-name|representation
+name|metadata
 operator|.
 name|get
 argument_list|(
-name|Symbol
-operator|.
 name|PREDECESSOR
 argument_list|)
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Getter for the state of this symbol      * @return the state      */
 specifier|public
 specifier|final
-name|SymbolState
+name|ManagedEntityState
 name|getState
 parameter_list|()
 block|{
 name|Reference
 name|stateUri
 init|=
-name|representation
+name|metadata
 operator|.
 name|getFirstReference
 argument_list|(
-name|Symbol
-operator|.
 name|STATE
 argument_list|)
 decl_stmt|;
@@ -556,7 +815,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|SymbolState
+name|ManagedEntityState
 operator|.
 name|isState
 argument_list|(
@@ -568,7 +827,7 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|SymbolState
+name|ManagedEntityState
 operator|.
 name|getState
 argument_list|(
@@ -589,8 +848,6 @@ literal|"Value {} for field {} is not a valied SymbolState! -> return null"
 argument_list|,
 name|stateUri
 argument_list|,
-name|Symbol
-operator|.
 name|STATE
 argument_list|)
 expr_stmt|;
@@ -606,8 +863,7 @@ literal|null
 return|;
 block|}
 block|}
-annotation|@
-name|Override
+comment|/**      * Getter for the ID's of the symbols defined as successors of this one.      * @return The id's of the symbols defined as successors of this one or an      * empty list if there are no successors are defined.      */
 specifier|public
 specifier|final
 name|Iterator
@@ -621,19 +877,16 @@ return|return
 operator|new
 name|ToStringIterator
 argument_list|(
-name|representation
+name|metadata
 operator|.
 name|get
 argument_list|(
-name|Symbol
-operator|.
 name|SUCCESSOR
 argument_list|)
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Returns if this Symbols does have any predecessors      * @return Returns<code>true</code> if predecessors are defined for this      * symbol; otherwise<code>false</code>.      */
 specifier|public
 specifier|final
 name|boolean
@@ -648,8 +901,7 @@ name|hasNext
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Returns if this Symbols does have any successors      * @return Returns<code>true</code> if successors are defined for this      * symbol; otherwise<code>false</code>.      */
 specifier|public
 specifier|final
 name|boolean
@@ -664,8 +916,7 @@ name|hasNext
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Removes the description in the default language from the Symbol      * @param description the description to remove      */
 specifier|public
 specifier|final
 name|void
@@ -675,12 +926,10 @@ name|String
 name|description
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|removeNaturalText
 argument_list|(
-name|Symbol
-operator|.
 name|DESCRIPTION
 argument_list|,
 name|description
@@ -689,8 +938,7 @@ name|defaultLanguage
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Removes the description in the parsed language from the Symbol      * @param description the description to remove      * @param language the language.<code>null</code> indicates to use no language tag      */
 specifier|public
 specifier|final
 name|void
@@ -703,12 +951,10 @@ name|String
 name|language
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|removeNaturalText
 argument_list|(
-name|Symbol
-operator|.
 name|DESCRIPTION
 argument_list|,
 name|description
@@ -717,8 +963,7 @@ name|language
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Removes the symbol with the parsed ID as a predecessor      * @param predecessor the id of the predecessor to remove      */
 specifier|public
 specifier|final
 name|void
@@ -728,20 +973,17 @@ name|String
 name|predecessor
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|removeReference
 argument_list|(
-name|Symbol
-operator|.
 name|PREDECESSOR
 argument_list|,
 name|predecessor
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Removes the symbol with the parsed ID as a successor      * @param successor the id of the successor to remove      */
 specifier|public
 specifier|final
 name|void
@@ -751,20 +993,17 @@ name|String
 name|successor
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|removeReference
 argument_list|(
-name|Symbol
-operator|.
 name|SUCCESSOR
 argument_list|,
 name|successor
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Setter for the Label in the default Language      * @param label      */
 specifier|public
 specifier|final
 name|void
@@ -774,12 +1013,10 @@ name|String
 name|label
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|setNaturalText
 argument_list|(
-name|Symbol
-operator|.
 name|LABEL
 argument_list|,
 name|label
@@ -788,8 +1025,7 @@ name|defaultLanguage
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Setter for a label of a specific language      * @param label the label      * @param language the language.<code>null</code> indicates to use no language tag      */
 specifier|public
 specifier|final
 name|void
@@ -802,12 +1038,10 @@ name|String
 name|language
 parameter_list|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|setNaturalText
 argument_list|(
-name|Symbol
-operator|.
 name|LABEL
 argument_list|,
 name|label
@@ -816,14 +1050,13 @@ name|language
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
+comment|/**      * Setter for the state of the Symbol      * @param state the new state      * @throws IllegalArgumentException if the parsed state is<code>null</code>      */
 specifier|public
 specifier|final
 name|void
 name|setState
 parameter_list|(
-name|SymbolState
+name|ManagedEntityState
 name|state
 parameter_list|)
 throws|throws
@@ -836,12 +1069,10 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|representation
+name|metadata
 operator|.
 name|setReference
 argument_list|(
-name|Symbol
-operator|.
 name|STATE
 argument_list|,
 name|state
@@ -890,6 +1121,23 @@ operator|=
 name|defaultLanguage
 expr_stmt|;
 block|}
+comment|//    /**
+comment|//     * Setter for the ID of the Metadata for this managed entity.
+comment|//     * @param id the id of the metadata of this entity
+comment|//     */
+comment|//    public final void setMetadataId(String id){
+comment|//        wrappedEntity.getRepresentation().setReference(
+comment|//            RdfResourceEnum.hasMetadata.getUri(), id);
+comment|//    }
+comment|//    /**
+comment|//     * Getter for the ID of the Metadata for this managed entity.
+comment|//     * @return the id of the metadata of entity
+comment|//     */
+comment|//    public final String getMetadataId(){
+comment|//        Reference ref = wrappedEntity.getRepresentation().getFirstReference(
+comment|//            RdfResourceEnum.hasMetadata.getUri());
+comment|//        return ref == null ? null : ref.getReference();
+comment|//    }
 block|}
 end_class
 

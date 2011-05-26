@@ -67,7 +67,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|EntityMapping
+name|ManagedEntityState
 import|;
 end_import
 
@@ -85,27 +85,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Symbol
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Symbol
-operator|.
-name|SymbolState
+name|MappingState
 import|;
 end_import
 
@@ -231,28 +211,24 @@ name|String
 name|getEntitySearcherType
 parameter_list|()
 function_decl|;
-comment|/**      * Key used for the configuration of the default {@link SymbolState} for a site      */
+comment|/**      * Key used for the configuration of the default {@link ManagedEntityState} for a site      */
 name|String
 name|DEFAULT_SYMBOL_STATE
 init|=
 literal|"org.apache.stanbol.entityhub.site.defaultSymbolState"
 decl_stmt|;
 comment|/**      * The initial state if a {@link Symbol} is created for an entity managed      * by this site      * @return the default state for new symbols      */
-name|Symbol
-operator|.
-name|SymbolState
-name|getDefaultSymbolState
+name|ManagedEntityState
+name|getDefaultManagedEntityState
 parameter_list|()
 function_decl|;
-comment|/**      * Key used for the configuration of the default {@link EntityMapping} state      * ({@link EntityMapping.MappingState} for a site      */
+comment|/**      * Key used for the configuration of the default {@link EntityMapping} state      * ({@link MappingState} for a site      */
 name|String
 name|DEFAULT_MAPPING_STATE
 init|=
 literal|"org.apache.stanbol.entityhub.site.defaultMappedEntityState"
 decl_stmt|;
 comment|/**      * The initial state for mappings of entities managed by this site      * @return the default state for mappings to entities of this site      */
-name|EntityMapping
-operator|.
 name|MappingState
 name|getDefaultMappedEntityState
 parameter_list|()

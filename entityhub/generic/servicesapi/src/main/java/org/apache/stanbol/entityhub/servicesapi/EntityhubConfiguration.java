@@ -59,7 +59,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|EntityMapping
+name|ManagedEntityState
 import|;
 end_import
 
@@ -76,26 +76,6 @@ operator|.
 name|servicesapi
 operator|.
 name|model
-operator|.
-name|Symbol
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|EntityMapping
 operator|.
 name|MappingState
 import|;
@@ -239,10 +219,8 @@ init|=
 literal|"org.apache.stanbol.entityhub.defaultSymbolState"
 decl_stmt|;
 comment|/**      * The initial (default) state for new {@link Symbol}s      * @return the default state for new {@link Symbol}s      */
-name|Symbol
-operator|.
-name|SymbolState
-name|getDefaultSymbolState
+name|ManagedEntityState
+name|getDefaultManagedEntityState
 parameter_list|()
 function_decl|;
 block|}

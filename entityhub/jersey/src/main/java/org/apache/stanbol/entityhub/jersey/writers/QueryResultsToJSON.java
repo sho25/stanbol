@@ -51,7 +51,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -282,7 +282,7 @@ name|jResults
 operator|.
 name|put
 argument_list|(
-name|SignToJSON
+name|EntityToJSON
 operator|.
 name|toJSON
 argument_list|(
@@ -298,7 +298,7 @@ block|}
 elseif|else
 if|if
 condition|(
-name|Sign
+name|Entity
 operator|.
 name|class
 operator|.
@@ -320,12 +320,12 @@ name|jResults
 operator|.
 name|put
 argument_list|(
-name|SignToJSON
+name|EntityToJSON
 operator|.
 name|toJSON
 argument_list|(
 operator|(
-name|Sign
+name|Entity
 operator|)
 name|result
 argument_list|)

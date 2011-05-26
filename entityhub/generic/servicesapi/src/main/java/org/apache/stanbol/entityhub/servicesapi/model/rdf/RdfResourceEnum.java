@@ -47,85 +47,100 @@ block|{
 comment|/**      * The representation concept      */
 name|Representation
 block|,
-comment|/**      * The Sign concept      */
-name|Sign
+comment|/**      * The Entity concept      */
+name|Entity
 block|,
-comment|/**      * The field used to store the type of the representation      */
-name|signType
-block|,
-comment|/**      * The site that defines/manages a sign      */
-name|signSite
+comment|/**      * The site that defines/manages an {@link RdfResourceEnum#Entity}      */
+name|site
 block|,
 comment|/**      * The ranking of the entity by this site in the value range of [0..1]      * A sign with the rank 1 would be (one of) the most important entities      * managed by this Site. A sign with rank 0 has no relevance. Even that this      * is still within the value range one could wonder why this site does      * even manage a representation about that entity.      */
-name|signRank
+name|entityRank
 block|,
-comment|/**      * The representation of the Sign (domain=Sign, range=Representation).      */
-name|signRepresentation
+comment|/**      * The rdf:type used for Metadata. Note that foaf:Document is used as Type       * for the Metadata      */
+name|Metadata
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|foaf
+argument_list|,
+literal|"Document"
+argument_list|)
 block|,
-comment|/**      * The Symbol concept      */
-name|Symbol
+comment|/**      * relation used to link from the       * {@link org.apache.stanbol.entityhub.servicesapi.model.Entity#getMetadata() metadata}      * to the {@link org.apache.stanbol.entityhub.servicesapi.model.Entity#getRepresentation() representation}      * of an {@link org.apache.stanbol.entityhub.servicesapi.model.Entity}.<p>      * Note that the foaf:primaryTopic relation is currently used for this      * purpose.      */
+name|aboutRepresentation
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|dcTerms
+argument_list|,
+literal|"subject"
+argument_list|)
 block|,
-comment|/**      * The label of a Symbol      */
+comment|//    /**
+comment|//     * The representation about an Entity (domain=Entity, range=Representation).
+comment|//     */
+comment|//    representation,
+comment|/**      * The label of an Entity      */
 name|label
 block|,
-comment|/**      * The description of a Symbol      */
+comment|/**      * The description of an Entity      */
 name|description
 block|,
-comment|/**      * Predecessors of a Symbol      */
+comment|/**      * Predecessors of an Entity      */
 name|predecessor
 block|,
-comment|/**      * Successors of a Symbol      */
+comment|/**      * Successors of an Entity      */
 name|successor
 block|,
-comment|/**      * The property used for the state of the symbol      */
-name|hasSymbolState
+comment|/**      * The property used for the state of locally managed Entities      */
+name|hasState
 block|,
-comment|/**      * The Concept used to type instances of SymbolStates      */
-name|SymbolState
+comment|/**      * The Concept used to type instances of EntityStates      */
+name|EntityState
 block|,
-comment|/**      * The Individual representing the active state of a Symbol      */
-name|symbolStateActive
+comment|/**      * The Individual representing the active state of a locally managed Entity      */
+name|entityStateActive
 argument_list|(
 literal|null
 argument_list|,
-literal|"symbolState-active"
+literal|"entityState-active"
 argument_list|)
 block|,
-comment|/**      * The Individual representing the depreciated state of a Symbol      */
-name|symbolStateDepreciated
+comment|/**      * The Individual representing the depreciated state of a locally managed Entity      */
+name|entityStateDepreciated
 argument_list|(
 literal|null
 argument_list|,
-literal|"symbolState-depreciated"
+literal|"entityState-depreciated"
 argument_list|)
 block|,
-comment|/**      * The Individual representing the proposed state of a Symbol      */
-name|symbolStateProposed
+comment|/**      * The Individual representing the proposed state of a locally managed Entity      */
+name|entityStateProposed
 argument_list|(
 literal|null
 argument_list|,
-literal|"symbolState-proposed"
+literal|"entityState-proposed"
 argument_list|)
 block|,
-comment|/**      * The Individual representing the removed state of a Symbol      */
-name|symbolStateRemoved
+comment|/**      * The Individual representing the removed state of a locally managed Entity      */
+name|entityStateRemoved
 argument_list|(
 literal|null
 argument_list|,
-literal|"symbolState-removed"
+literal|"entityState-removed"
 argument_list|)
 block|,
-comment|/**      * Property used to reference MappedEntites mapped to a Symbol      */
-name|hasMapping
+comment|/**      * Property used to refer to mapped entities. This directly links the       * mapped entity. To get the mapping information one needs to lookup the      * Entity mapping for the source and target of this relation.<p>      */
+name|mappedTo
 block|,
-comment|/**      * A EntityMapping that links an Entity to a Symbol      */
+comment|/**      * A directed mapping between two entities that holds additional       * information about the mapping      */
 name|EntityMapping
 block|,
-comment|/**      * Property used to reference the mapped entity.      */
-name|mappedEntity
+comment|/**      * Property used to reference the source of the mapping       */
+name|mappingSource
 block|,
-comment|/**      * Property used to reference the mapped symbol      */
-name|mappedSymbol
+comment|/**      * Property used to refer to the target of the mapping      */
+name|mappingTarget
 block|,
 comment|/**      * The property used for the state of the MappedEntity      */
 name|hasMappingState
@@ -213,6 +228,10 @@ literal|null
 argument_list|,
 literal|"text"
 argument_list|)
+operator|,
+comment|/*      * Metadata for Entities      */
+comment|/**      * Tells if an returned Entity represents an locally cached version      */
+name|isChached
 operator|,
 enum|;
 end_enum

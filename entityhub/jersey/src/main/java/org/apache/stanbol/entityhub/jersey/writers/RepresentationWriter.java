@@ -598,7 +598,7 @@ name|IOUtils
 operator|.
 name|write
 argument_list|(
-name|SignToJSON
+name|EntityToJSON
 operator|.
 name|toJSON
 argument_list|(
@@ -656,7 +656,7 @@ name|serialize
 argument_list|(
 name|entityStream
 argument_list|,
-name|SignToRDF
+name|EntityToRDF
 operator|.
 name|toRDF
 argument_list|(

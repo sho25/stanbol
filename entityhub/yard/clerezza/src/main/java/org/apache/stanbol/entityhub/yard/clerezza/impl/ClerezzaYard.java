@@ -2946,9 +2946,7 @@ decl_stmt|;
 name|Query
 name|sparqlQuery
 decl_stmt|;
-comment|//NOTE(s):
-comment|// - parse RdfResourceEnum.representationType as additional field, because
-comment|//   this info is needed to correctly init the Representations
+comment|//NOTE:
 comment|// - use the endpoint type standard, because we do not know what type of
 comment|//   SPARQL implementation is configured for Clerezza via OSGI
 name|String
@@ -2965,13 +2963,6 @@ argument_list|,
 name|EndpointTypeEnum
 operator|.
 name|Standard
-argument_list|,
-name|RdfResourceEnum
-operator|.
-name|signType
-operator|.
-name|getUri
-argument_list|()
 argument_list|)
 decl_stmt|;
 try|try

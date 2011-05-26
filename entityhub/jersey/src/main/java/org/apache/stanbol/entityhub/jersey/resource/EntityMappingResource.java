@@ -449,6 +449,24 @@ name|entityhub
 operator|.
 name|core
 operator|.
+name|impl
+operator|.
+name|EntityMapping
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|core
+operator|.
 name|query
 operator|.
 name|QueryResultListImpl
@@ -519,7 +537,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|EntityMapping
+name|Entity
 import|;
 end_import
 
@@ -825,7 +843,7 @@ argument_list|,
 name|context
 argument_list|)
 decl_stmt|;
-name|EntityMapping
+name|Entity
 name|mapping
 decl_stmt|;
 try|try
@@ -1122,7 +1140,7 @@ argument_list|,
 name|context
 argument_list|)
 decl_stmt|;
-name|EntityMapping
+name|Entity
 name|mapping
 decl_stmt|;
 try|try
@@ -1131,7 +1149,7 @@ name|mapping
 operator|=
 name|entityhub
 operator|.
-name|getMappingByEntity
+name|getMappingBySource
 argument_list|(
 name|entity
 argument_list|)
@@ -1406,7 +1424,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|EntityMapping
+name|Entity
 argument_list|>
 name|mappings
 decl_stmt|;
@@ -1416,7 +1434,7 @@ name|mappings
 operator|=
 name|entityhub
 operator|.
-name|getMappingsBySymbol
+name|getMappingsByTarget
 argument_list|(
 name|symbol
 argument_list|)
@@ -1488,21 +1506,21 @@ comment|// TODO: Implement Support for list of Signs, Representations and String
 comment|// For now use a pseudo QueryResultList
 name|QueryResultList
 argument_list|<
-name|EntityMapping
+name|Entity
 argument_list|>
 name|mappingResultList
 init|=
 operator|new
 name|QueryResultListImpl
 argument_list|<
-name|EntityMapping
+name|Entity
 argument_list|>
 argument_list|(
 literal|null
 argument_list|,
 name|mappings
 argument_list|,
-name|EntityMapping
+name|Entity
 operator|.
 name|class
 argument_list|)

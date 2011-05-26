@@ -89,9 +89,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|EntityMapping
-operator|.
-name|MappingState
+name|ManagedEntityState
 import|;
 end_import
 
@@ -109,9 +107,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Symbol
-operator|.
-name|SymbolState
+name|MappingState
 import|;
 end_import
 
@@ -497,7 +493,7 @@ try|try
 block|{
 name|setDefaultSymbolState
 argument_list|(
-name|getDefaultSymbolState
+name|getDefaultManagedEntityState
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -536,7 +532,7 @@ name|Arrays
 operator|.
 name|toString
 argument_list|(
-name|SymbolState
+name|ManagedEntityState
 operator|.
 name|values
 argument_list|()
@@ -1450,8 +1446,8 @@ annotation|@
 name|Override
 specifier|public
 specifier|final
-name|SymbolState
-name|getDefaultSymbolState
+name|ManagedEntityState
+name|getDefaultManagedEntityState
 parameter_list|()
 block|{
 name|Object
@@ -1480,12 +1476,12 @@ if|if
 condition|(
 name|defaultSymbolState
 operator|instanceof
-name|SymbolState
+name|ManagedEntityState
 condition|)
 block|{
 return|return
 operator|(
-name|SymbolState
+name|ManagedEntityState
 operator|)
 name|defaultSymbolState
 return|;
@@ -1493,7 +1489,7 @@ block|}
 else|else
 block|{
 return|return
-name|SymbolState
+name|ManagedEntityState
 operator|.
 name|valueOf
 argument_list|(
@@ -1505,13 +1501,13 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      *       * @param state      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDefaultSymbolState()      */
+comment|/**      *       * @param state      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDefaultManagedEntityState()      */
 specifier|public
 specifier|final
 name|void
 name|setDefaultSymbolState
 parameter_list|(
-name|SymbolState
+name|ManagedEntityState
 name|state
 parameter_list|)
 throws|throws

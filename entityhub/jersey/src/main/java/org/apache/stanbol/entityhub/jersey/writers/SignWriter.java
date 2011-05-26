@@ -295,7 +295,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -359,7 +359,7 @@ name|SignWriter
 implements|implements
 name|MessageBodyWriter
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 block|{
 specifier|public
@@ -489,7 +489,7 @@ specifier|public
 name|long
 name|getSize
 parameter_list|(
-name|Sign
+name|Entity
 name|sign
 parameter_list|,
 name|Class
@@ -539,7 +539,7 @@ name|mediaType
 parameter_list|)
 block|{
 return|return
-name|Sign
+name|Entity
 operator|.
 name|class
 operator|.
@@ -565,7 +565,7 @@ specifier|public
 name|void
 name|writeTo
 parameter_list|(
-name|Sign
+name|Entity
 name|sign
 parameter_list|,
 name|Class
@@ -625,7 +625,7 @@ name|IOUtils
 operator|.
 name|write
 argument_list|(
-name|SignToJSON
+name|EntityToJSON
 operator|.
 name|toJSON
 argument_list|(
@@ -670,7 +670,7 @@ name|serialize
 argument_list|(
 name|entityStream
 argument_list|,
-name|SignToRDF
+name|EntityToRDF
 operator|.
 name|toRDF
 argument_list|(

@@ -13,9 +13,9 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|core
+name|servicesapi
 operator|.
-name|utils
+name|util
 package|;
 end_package
 
@@ -75,16 +75,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Enumeration
 import|;
 end_import
@@ -95,7 +85,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
+name|HashSet
 import|;
 end_import
 
@@ -115,7 +105,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
+name|Random
 import|;
 end_import
 
@@ -125,7 +115,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Random
+name|Set
 import|;
 end_import
 
@@ -219,7 +209,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Text
 import|;
 end_import
 
@@ -238,46 +228,6 @@ operator|.
 name|model
 operator|.
 name|ValueFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Sign
-operator|.
-name|SignTypeEnum
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|rdf
-operator|.
-name|RdfResourceEnum
 import|;
 end_import
 
@@ -326,116 +276,6 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Holds the uri->RepresentationTypeEnum mappings      */
-specifier|public
-specifier|static
-specifier|final
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|SignTypeEnum
-argument_list|>
-name|REPRESENTATION_TYPE_MAPPING
-decl_stmt|;
-static|static
-block|{
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|SignTypeEnum
-argument_list|>
-name|repTypeMapping
-init|=
-operator|new
-name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|SignTypeEnum
-argument_list|>
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|SignTypeEnum
-name|type
-range|:
-name|SignTypeEnum
-operator|.
-name|values
-argument_list|()
-control|)
-block|{
-name|repTypeMapping
-operator|.
-name|put
-argument_list|(
-name|type
-operator|.
-name|getUri
-argument_list|()
-argument_list|,
-name|type
-argument_list|)
-expr_stmt|;
-block|}
-name|REPRESENTATION_TYPE_MAPPING
-operator|=
-name|Collections
-operator|.
-name|unmodifiableMap
-argument_list|(
-name|repTypeMapping
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**      * Getter for the {@link SignTypeEnum} based on the reference      * @param referece The reference as defined by {@link SignTypeEnum#getUri()}      * @return the type or<code>null</code> if no mapping is present for the parsed      * reference.      */
-specifier|public
-specifier|static
-name|SignTypeEnum
-name|getSignType
-parameter_list|(
-name|Reference
-name|reference
-parameter_list|)
-block|{
-return|return
-name|reference
-operator|==
-literal|null
-condition|?
-literal|null
-else|:
-name|getSignType
-argument_list|(
-name|reference
-operator|.
-name|getReference
-argument_list|()
-argument_list|)
-return|;
-block|}
-comment|/**      * Getter for the {@link SignTypeEnum} based on the uri      * @param uri The uri as defined by {@link SignTypeEnum#getUri()}      * @return the type or<code>null</code> if no mapping is present for the parsed      * uri.      */
-specifier|public
-specifier|static
-name|SignTypeEnum
-name|getSignType
-parameter_list|(
-name|String
-name|uri
-parameter_list|)
-block|{
-return|return
-name|REPRESENTATION_TYPE_MAPPING
-operator|.
-name|get
-argument_list|(
-name|uri
-argument_list|)
-return|;
-block|}
 comment|/**      * Random UUID generator with re-seedable RNG for the tests.      *      * @return a new Random UUID      */
 specifier|private
 specifier|static
@@ -1040,6 +880,63 @@ return|;
 block|}
 end_function
 
+begin_function
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|Set
+argument_list|<
+name|T
+argument_list|>
+name|asSet
+parameter_list|(
+name|Iterator
+argument_list|<
+name|T
+argument_list|>
+name|it
+parameter_list|)
+block|{
+name|Set
+argument_list|<
+name|T
+argument_list|>
+name|c
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|T
+argument_list|>
+argument_list|()
+decl_stmt|;
+while|while
+condition|(
+name|it
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
+name|c
+operator|.
+name|add
+argument_list|(
+name|it
+operator|.
+name|next
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|c
+return|;
+block|}
+end_function
+
 begin_comment
 comment|/**      * Splits up a URI in local name and namespace based on the following rules      *<ul>      *<li> If URI starts with "urn:" and last index of ':' == 3 than the there      *      is no namespace and the whole URI is a local name      *<li> if the uri starts with "urn:" and the last index of ':' ia> 3, than      *      the last index ':' is used.      *<li> split by the last index of '#' if index>= 0      *<li> split by the last index of '/' if index>= 0      *<li> return after the first split      *<li> return the whole URI as local name if no split was performed.      *</ul>      * @param uri The uri      * @return A array with two fields. In the first the namespace is stored (      * might be<code>null</code>. In the second the local name is stored.      */
 end_comment
@@ -1385,292 +1282,6 @@ return|;
 block|}
 block|}
 end_function
-
-begin_comment
-comment|/**      * Getter for the SignType for a Representation. If the Representation does      * not define a value part of the {@link SignTypeEnum} for the field      * {@link RdfResourceEnum#signType} ({@value RdfResourceEnum#signType}), that      * the default sign type {@link Sign#DEFAULT_SIGN_TYPE} is returned.      * @param representation The representation      * @return the sign type      * @throws IllegalArgumentException if<code>null</code> is parsed as representation!      */
-end_comment
-
-begin_function
-specifier|public
-specifier|static
-name|SignTypeEnum
-name|getSignType
-parameter_list|(
-name|Representation
-name|representation
-parameter_list|)
-throws|throws
-name|IllegalArgumentException
-block|{
-if|if
-condition|(
-name|representation
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Parameter represetnation MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
-name|Reference
-name|ref
-init|=
-name|representation
-operator|.
-name|getFirstReference
-argument_list|(
-name|RdfResourceEnum
-operator|.
-name|signType
-operator|.
-name|getUri
-argument_list|()
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|ref
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-name|Sign
-operator|.
-name|DEFAULT_SIGN_TYPE
-return|;
-block|}
-else|else
-block|{
-name|SignTypeEnum
-name|type
-init|=
-name|ModelUtils
-operator|.
-name|getSignType
-argument_list|(
-name|ref
-operator|.
-name|getReference
-argument_list|()
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|type
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Sign "
-operator|+
-name|representation
-operator|.
-name|getId
-argument_list|()
-operator|+
-literal|" is set to an unknown SignType "
-operator|+
-name|ref
-operator|.
-name|getReference
-argument_list|()
-operator|+
-literal|"! -> return default type (value is not reseted)"
-argument_list|)
-expr_stmt|;
-return|return
-name|Sign
-operator|.
-name|DEFAULT_SIGN_TYPE
-return|;
-block|}
-else|else
-block|{
-return|return
-name|type
-return|;
-block|}
-block|}
-block|}
-end_function
-
-begin_comment
-comment|//No longer needed after the introduction of the DefaultSignFactory!
-end_comment
-
-begin_comment
-comment|//    /**
-end_comment
-
-begin_comment
-comment|//     * Creates a Sign for the parsed Representation and the signSite id
-end_comment
-
-begin_comment
-comment|//     * @param rep the Represetnation
-end_comment
-
-begin_comment
-comment|//     * @param signSite the id of the site for the sign
-end_comment
-
-begin_comment
-comment|//     * @return the sign
-end_comment
-
-begin_comment
-comment|//     * @throws IllegalArgumentException if any of the two parameter is<code>null</code>.
-end_comment
-
-begin_comment
-comment|//     */
-end_comment
-
-begin_comment
-comment|//    public static Sign createSign(Representation rep,String signSite) throws IllegalArgumentException {
-end_comment
-
-begin_comment
-comment|//        if(rep == null){
-end_comment
-
-begin_comment
-comment|//            throw new IllegalArgumentException("The parsed Representation MUST NOT be NULL!");
-end_comment
-
-begin_comment
-comment|//        }
-end_comment
-
-begin_comment
-comment|//        if(signSite == null){
-end_comment
-
-begin_comment
-comment|//            throw new IllegalArgumentException("The parsed ID of the SignSite MUST NOT be NULL!");
-end_comment
-
-begin_comment
-comment|//        }
-end_comment
-
-begin_comment
-comment|//        rep.setReference(Sign.SIGN_SITE, signSite);
-end_comment
-
-begin_comment
-comment|//        SignTypeEnum signType = ModelUtils.getSignType(rep);
-end_comment
-
-begin_comment
-comment|//        //instantiate the correct Sign Implementation
-end_comment
-
-begin_comment
-comment|//        Sign sign;
-end_comment
-
-begin_comment
-comment|//        /*
-end_comment
-
-begin_comment
-comment|//         * TODO: change this part to separate the implementation of the
-end_comment
-
-begin_comment
-comment|//         * ReferencedSite with the instantiation of Sign Type Implementations
-end_comment
-
-begin_comment
-comment|//         * Maybe introduce an SignFactory or add such Methods to the
-end_comment
-
-begin_comment
-comment|//         * existing ValueFactory
-end_comment
-
-begin_comment
-comment|//         */
-end_comment
-
-begin_comment
-comment|//        switch (signType) {
-end_comment
-
-begin_comment
-comment|//        case Symbol:
-end_comment
-
-begin_comment
-comment|//            sign = new DefaultSymbolImpl(signSite,rep);
-end_comment
-
-begin_comment
-comment|//            break;
-end_comment
-
-begin_comment
-comment|//        case EntityMapping:
-end_comment
-
-begin_comment
-comment|//            sign = new DefaultEntityMappingImpl(signSite,rep);
-end_comment
-
-begin_comment
-comment|//            break;
-end_comment
-
-begin_comment
-comment|//        case Sign:
-end_comment
-
-begin_comment
-comment|//            sign = new DefaultSignImpl(signSite,rep);
-end_comment
-
-begin_comment
-comment|//            break;
-end_comment
-
-begin_comment
-comment|//        default:
-end_comment
-
-begin_comment
-comment|//            log.warn("Unsupported SignType "+signType.getUri()+" (create Sign instance). Please adapt this implementation!");
-end_comment
-
-begin_comment
-comment|//            sign = new DefaultSignImpl(signSite,rep);
-end_comment
-
-begin_comment
-comment|//            break;
-end_comment
-
-begin_comment
-comment|//        }
-end_comment
-
-begin_comment
-comment|//        return sign;
-end_comment
-
-begin_comment
-comment|//    }
-end_comment
 
 unit|}
 end_unit

@@ -335,7 +335,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -626,7 +626,7 @@ argument_list|>
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * This List is used for binary searches within the prefixes to find the      * {@link ReferencedSite} to search for a {@link #getSign(String)}      * request.<b>      * NOTE: Every access to this list MUST BE synchronised to {@link #prefixMap}      * TODO: I am quite sure, that there is some ioUtils class that provides      * both a Map and an sorted List over the keys!      */
+comment|/**      * This List is used for binary searches within the prefixes to find the      * {@link ReferencedSite} to search for a {@link #getEntity(String)}      * request.<b>      * NOTE: Every access to this list MUST BE synchronised to {@link #prefixMap}      * TODO: I am quite sure, that there is some ioUtils class that provides      * both a Map and an sorted List over the keys!      */
 specifier|private
 specifier|final
 name|List
@@ -1610,7 +1610,7 @@ name|Override
 specifier|public
 name|QueryResultList
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 name|findEntities
 parameter_list|(
@@ -1629,14 +1629,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 name|entities
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1673,12 +1673,12 @@ try|try
 block|{
 for|for
 control|(
-name|Sign
+name|Entity
 name|rep
 range|:
 name|site
 operator|.
-name|findSigns
+name|findEntities
 argument_list|(
 name|query
 argument_list|)
@@ -1787,14 +1787,14 @@ return|return
 operator|new
 name|QueryResultListImpl
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 argument_list|(
 name|query
 argument_list|,
 name|entities
 argument_list|,
-name|Sign
+name|Entity
 operator|.
 name|class
 argument_list|)
@@ -1966,8 +1966,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Sign
-name|getSign
+name|Entity
+name|getEntity
 parameter_list|(
 name|String
 name|entityId
@@ -2022,7 +2022,7 @@ range|:
 name|sites
 control|)
 block|{
-name|Sign
+name|Entity
 name|entity
 decl_stmt|;
 try|try
@@ -2031,7 +2031,7 @@ name|entity
 operator|=
 name|site
 operator|.
-name|getSign
+name|getEntity
 argument_list|(
 name|entityId
 argument_list|)

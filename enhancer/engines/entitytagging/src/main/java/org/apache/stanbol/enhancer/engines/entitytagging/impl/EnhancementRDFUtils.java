@@ -379,7 +379,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -422,7 +422,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility taken form the engine.autotagging bundle and adapted from using TagInfo to {@link Sign}.  *   * @author Rupert Westenthaler  * @author ogrisel (original utility)  */
+comment|/**  * Utility taken form the engine.autotagging bundle and adapted from using TagInfo to {@link Entity}.  *   * @author Rupert Westenthaler  * @author ogrisel (original utility)  */
 end_comment
 
 begin_class
@@ -454,7 +454,7 @@ name|NonLiteral
 argument_list|>
 name|relatedEnhancements
 parameter_list|,
-name|Sign
+name|Entity
 name|entity
 parameter_list|)
 block|{

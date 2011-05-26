@@ -493,7 +493,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -965,7 +965,7 @@ argument_list|>
 argument_list|(
 name|JerseyUtils
 operator|.
-name|SIGN_SUPPORTED_MEDIA_TYPES
+name|ENTITY_SUPPORTED_MEDIA_TYPES
 argument_list|)
 decl_stmt|;
 name|supported
@@ -1081,7 +1081,7 @@ argument_list|,
 name|context
 argument_list|)
 decl_stmt|;
-name|Sign
+name|Entity
 name|sign
 decl_stmt|;
 comment|// try {
@@ -1089,7 +1089,7 @@ name|sign
 operator|=
 name|referencedSiteManager
 operator|.
-name|getSign
+name|getEntity
 argument_list|(
 name|id
 argument_list|)
@@ -1357,7 +1357,7 @@ argument_list|>
 argument_list|(
 name|JerseyUtils
 operator|.
-name|SIGN_SUPPORTED_MEDIA_TYPES
+name|QUERY_RESULT_SUPPORTED_MEDIA_TYPES
 argument_list|)
 decl_stmt|;
 name|supported
@@ -1555,13 +1555,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//    @GET
-comment|//    @Path("/query")
-comment|//    @Produces(MediaType.TEXT_HTML)
-comment|//    public Response getQueryPage() {
-comment|//        return Response.ok(new Viewable("query", this), TEXT_HTML).build();
-comment|//    }
-comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation. Note that the maximum number      * of results (limit) and the offset of the first result (offset) are parsed as seperate parameters and      * are not part of the field query as in the java API.      *<p>      * TODO: as soon as the entityhub supports multiple query types this need to be refactored. The idea is      * that this dynamically detects query types and than redirects them to the referenced site      * implementation.      *       * @param query      *            The field query in JSON format      * @param limit      *            the maximum number of results starting at offset      * @param offset      *            the offset of the first result      * @param headers      *            the header information of the request      * @return the results of the query      */
+comment|/**      * Allows to parse any kind of {@link FieldQuery} in its JSON Representation.      *<p>      * TODO: as soon as the entityhub supports multiple query types this need to be refactored. The idea is      * that this dynamically detects query types and than redirects them to the referenced site      * implementation.      *       * @param query      *            The field query in JSON format      * @param headers      *            the header information of the request      * @return the results of the query      */
 annotation|@
 name|POST
 annotation|@
@@ -1595,16 +1589,8 @@ name|FormParam
 argument_list|(
 literal|"query"
 argument_list|)
-name|String
-name|queryString
-parameter_list|,
-annotation|@
-name|FormParam
-argument_list|(
-literal|"query"
-argument_list|)
-name|File
-name|file
+name|FieldQuery
+name|query
 parameter_list|,
 annotation|@
 name|Context
@@ -1640,7 +1626,7 @@ argument_list|>
 argument_list|(
 name|JerseyUtils
 operator|.
-name|SIGN_SUPPORTED_MEDIA_TYPES
+name|QUERY_RESULT_SUPPORTED_MEDIA_TYPES
 argument_list|)
 decl_stmt|;
 name|supported
@@ -1669,16 +1655,13 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|queryString
+name|query
 operator|==
 literal|null
-operator|||
-name|queryString
-operator|.
-name|isEmpty
-argument_list|()
 condition|)
 block|{
+comment|//if query is null nd the mediaType is HTML we need to print the
+comment|//Documentation of the RESTful API
 if|if
 condition|(
 name|MediaType
@@ -1742,18 +1725,8 @@ argument_list|()
 return|;
 block|}
 block|}
-name|FieldQuery
-name|query
-init|=
-name|JerseyUtils
-operator|.
-name|parseFieldQuery
-argument_list|(
-name|queryString
-argument_list|,
-name|file
-argument_list|)
-decl_stmt|;
+else|else
+block|{
 return|return
 name|Response
 operator|.
@@ -1772,6 +1745,7 @@ operator|.
 name|build
 argument_list|()
 return|;
+block|}
 block|}
 block|}
 end_class

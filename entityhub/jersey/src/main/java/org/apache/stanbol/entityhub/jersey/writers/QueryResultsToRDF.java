@@ -163,7 +163,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -464,7 +464,7 @@ name|UriRef
 argument_list|(
 operator|(
 operator|(
-name|Sign
+name|Entity
 operator|)
 name|result
 operator|)
@@ -473,14 +473,14 @@ name|getId
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|SignToRDF
+name|EntityToRDF
 operator|.
-name|addSignTriplesToGraph
+name|addEntityTriplesToGraph
 argument_list|(
 name|resultGraph
 argument_list|,
 operator|(
-name|Sign
+name|Entity
 operator|)
 name|result
 argument_list|)
@@ -542,7 +542,7 @@ operator|!
 name|isSignType
 condition|)
 block|{
-name|SignToRDF
+name|EntityToRDF
 operator|.
 name|addRDFTo
 argument_list|(
@@ -573,14 +573,14 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|SignToRDF
+name|EntityToRDF
 operator|.
 name|addRDFTo
 argument_list|(
 name|resultGraph
 argument_list|,
 operator|(
-name|Sign
+name|Entity
 operator|)
 name|result
 argument_list|)
@@ -592,7 +592,7 @@ name|UriRef
 argument_list|(
 operator|(
 operator|(
-name|Sign
+name|Entity
 operator|)
 name|result
 operator|)

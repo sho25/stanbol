@@ -77,24 +77,6 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|EntityMapping
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
 name|Representation
 import|;
 end_import
@@ -113,25 +95,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Symbol
+name|Entity
 import|;
 end_import
 
@@ -244,7 +208,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<p>The Entityhub defines an interface that allows to work with Content and  * Knowledge of referenced Entities. Entities managed by this Hub are called  * {@link Symbol}s and typically define {@link EntityMapping mappings} to  * information provided by other {@link ReferencedSite sites}.</p>  *<p>This interface allows to manage<ul>  *<li>{@link Symbol}: The {@link Representation} (Content and Knowledge)  *      available for entities managed by an entity hub</li>  *<li>{@link EntityMapping}: External Entities that are aligned to {@link Symbol}s  *      managed by this entity hub.</li>  *</ul>  * The entity hub also uses the {@link ReferencedSiteManager} to search/retrieve  * entities/entity representations form other {@link ReferencedSite}s.<p>  * Most of the functionality defined by this interface is also available via   * RESTful service.  * TODO's<ul>  *<li> How to deal with content (references, base62 encoded Strings,  *       {@link InputStream}s ...  *</ul>  * @author Rupert Westenthaler  *  */
+comment|/**  *<p>The Entityhub defines an interface that allows to manage Entities.   * Entities managed by the Entityhub are often referred by "locally managed  * Entities" to differentiate them form entities managed by   * {@link ReferencedSite}s.<p>  * The Entityhub supports full CRUD support for Entities and also allows to   * import Entities from Referenced sites.<p>  * In addition to Entities the Entityhub also allows to work with mappings  * between Entities of {@link ReferencedSite}s with locally managed Entities.  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface
@@ -257,14 +221,14 @@ name|DEFAUTL_ENTITYHUB_PREFIX
 init|=
 literal|"urn:org.apache.stanbol:entityhub"
 decl_stmt|;
-comment|/**      * Getter for the Yard storing the data (Symbols, MappedEntities) of the       * Entityhub.      * @return The yard instance used to store the data of the Entityhub      *  - the EntityhubYard      */
+comment|/**      * Getter for the Yard storing the Entities and Mappings managed by this      * Entityhub.<p>      * Note that the Yard can be reconfigured without restarting the      * Entityhub.      * @return The yard instance used to store the data of the Entityhub      *  - the EntityhubYard      */
 name|Yard
 name|getYard
 parameter_list|()
 function_decl|;
-comment|/**      * Getter for an Symbol for an reference to a {@link Sign}. If parsed      * reference refers a Symbol, than this Symbol is returned. In any other      * case this Method searches if the parsed reference is mapped to a      * Symbol and returns the Symbol instead. To check if the parsed reference      * is a {@link Symbol} simple check if {@link Symbol#getId()} equals to the      * parsed reference.      * @param reference the id of the referenced Sign      * @return the symbol representing the parsed entity or<code>null</code> if      * no symbol for the parsed entity is available      * @throws EntityhubException On any error while performing the operation      */
-name|Symbol
-name|lookupSymbol
+comment|/**      * Getter for the locally managed Entity based on a reference to a       * {@link Entity}. If a id of an locally managed Entity is parsed this      * Entity is returned. In any other case this Method searches if the parsed       * reference is mapped to a locally managed Entity and returns this Entity       * instead.      * @param reference the id of any Entity      * @return the locally managed Entity or<code>null</code> if      * no symbol for the parsed entity is available      * @throws EntityhubException On any error while performing the operation      */
+name|Entity
+name|lookupLocalEntity
 parameter_list|(
 name|String
 name|reference
@@ -272,9 +236,9 @@ parameter_list|)
 throws|throws
 name|EntityhubException
 function_decl|;
-comment|/**      * Getter for an Symbol for an reference to a {@link Sign}. If parsed      * reference refers a Symbol, than this Symbol is returned. In any other      * case this Method searches if the parsed reference is mapped to a      * Symbol and returns the Symbol instead. To check if the parsed reference      * is a {@link Symbol} simple check if {@link Symbol#getId()} equals to the      * parsed reference.<br>      * If<code>create=true</code> and no {@link EntityMapping} is present for      * the parsed reference, than a new Symbol is created and returned.      *      * @param reference the id of the referenced Sign      * @param create if<code>true</code> the {@link Entityhub} will try to create a      * {@link Symbol} if necessary      * @return the symbol or<code>null</code> if the parsed reference is not      * known by any referenced sites.      * @throws IllegalArgumentException If the referenced {@link Sign} was found, no      * existing {@link EntityMapping} is present, but it is not possible to      * create an {@link Symbol} for this {@link Sign} (normally because the      * {@link Representation} of the {@link Sign} provides insufficient data).      * @throws EntityhubException On any error while performing the operation      */
-name|Symbol
-name|lookupSymbol
+comment|/**      * Getter for the locally managed Entity based on a reference to a       * {@link Entity}. If a id of an locally managed Entity is parsed this      * Entity is returned. In any other case this Method searches if the parsed       * reference is mapped to a locally managed Entity and returns this Entity       * instead.<p>      * If<code>create=true</code> this method can imports Entities to the      * entityhub based on the definition(s) of referenced sites.      *      * @param reference the id of the referenced Entity      * @param create if<code>true</code> the {@link Entityhub} will try to create a      * new locally managed {@link Entity} by importing an Entity from       * referenced sites.      * @return the locally managed Entity or<code>null</code> if the parsed reference is not      * known by any referenced sites.      * @throws IllegalArgumentException If the referenced {@link Entity} was found, no      * existing {@link EntityMapping} is present, but it is not possible to      * create a locally managed {@link Entity} for the referenced {@link Entity}       * (normally this is because of insufficient/invalid information of the      * referenced Entity.      * @throws EntityhubException On any error while performing the operation      */
+name|Entity
+name|lookupLocalEntity
 parameter_list|(
 name|String
 name|reference
@@ -287,21 +251,21 @@ name|IllegalArgumentException
 throws|,
 name|EntityhubException
 function_decl|;
-comment|/**      * Getter for a Symbol by ID. This method does only work with IDs of      * Symbols managed by the Entityhub. To lookup Symbols by the ID of a Symbol,      * a mappedEntity or an Entity of an referenced site use the      * {@link #lookupSymbol(String, boolean)} method.      * @param symbolId the ID of the Symbol      * @return the Symbol or<code>null</code> if no {@link Symbol} with that      * ID is managed by the Entityhub.      * @throws IllegalArgumentException if<code>null</code> or an empty String      * is parsed as symbolId or if the parsed ID does not represent a      * {@link Symbol}      * @throws EntityhubException On any error while performing the operation      */
-name|Symbol
-name|getSymbol
+comment|/**      * Getter for an Entity managed by the Entityhub. This method does only work       * with references to locally managed Entities.      * @param entityId the ID of the locally managed Entity      * @return the Entity or<code>null</code> if no {@link Entity} with that      * ID is managed by the Entityhub.      * @throws IllegalArgumentException if<code>null</code> or an empty String      * is parsed as symbolId or if the parsed ID does not represent a      * {@link Entity}      * @throws EntityhubException On any error while performing the operation      */
+name|Entity
+name|getEntity
 parameter_list|(
 name|String
-name|symbolId
+name|entityId
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
 throws|,
 name|EntityhubException
 function_decl|;
-comment|/**      * Creates a Symbol for the parsed reference. If there is already a Symbol      * present for the parsed reference, than this Method throws an      * {@link IllegalStateException}. If no Sign can be found for the parsed      * Reference, than<code>null</code> is returned.      * If the referenced {@link Sign} provides      * insufficient data to create a {@link Symbol}, than an      * {@link IllegalArgumentException} is thrown.      * @param reference the id of the {@link Sign}      * @return the Symbol or<code>null</code> if the no {@link Sign} was found      * for the parsed reference.      * @throws IllegalStateException if there exists already a {@link Symbol} for      * the parsed reference      * @throws IllegalArgumentException  If the referenced {@link Sign} was found, no      * existing {@link EntityMapping} is present, but it is not possible to      * create an {@link Symbol} for this {@link Sign} (normally because the      * {@link Representation} of the {@link Sign} provides insufficient data).      * @throws EntityhubException On any error while performing the operation      */
-name|Symbol
-name|createSymbol
+comment|/**      * Imports an Entity from a referenced site to the Entityhub. If there is       * already an Entity present for the parsed reference, than this Method throws an      * {@link IllegalStateException}. If the referenced Entity is not found on      * any referenced site, than<code>null</code> is returned.      * If the referenced {@link Entity} provides insufficient data to create a       * locally managed Entity, than an {@link IllegalArgumentException} is thrown.      * @param reference the id of the {@link Entity} to import      * @return the imported Entity or<code>null</code> if the import was not      * successful.       * @throws IllegalStateException if there exists already a {@link Entity} for      * the parsed reference in the entityhub      * @throws IllegalArgumentException If an import is not possible (e.g.       * because the {@link Representation} of the {@link Entity} provides       * insufficient data or some configuration that importing Entities from this      * referenced site is not allowed).      * @throws EntityhubException On any error while performing the operation      */
+name|Entity
+name|importEntity
 parameter_list|(
 name|String
 name|reference
@@ -313,8 +277,8 @@ name|IllegalArgumentException
 throws|,
 name|EntityhubException
 function_decl|;
-comment|/**      * Getter for a MappedEntity based on the ID      * @param id the id of the mapped entity      * @return the MappedEntity or<code>null</code> if none was found      * @throws EntityhubException On any error while performing the operation      * @throws IllegalArgumentException If<code>null</code> or an empty string      * is parsed as ID or if the parsed ID does not represent an       * {@link EntityMapping}      */
-name|EntityMapping
+comment|/**      * Getter for a MappedEntity based on the ID of the mapping itself.      * @param id the id of the mapped entity      * @return the MappedEntity or<code>null</code> if none was found      * @throws EntityhubException On any error while performing the operation      * @throws IllegalArgumentException If<code>null</code> or an empty string      * is parsed as ID or if the parsed ID does not represent an       * {@link EntityMapping}      */
+name|Entity
 name|getMappingById
 parameter_list|(
 name|String
@@ -325,12 +289,12 @@ name|EntityhubException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Getter for all mappings for a entity      * TODO: check if an Entity can be mapped to more than one Symbol      * @param reference the ID of the referred entity      * @return Iterator over all the Mappings defined for this entity      * @throws EntityhubException On any error while performing the operation      */
-name|EntityMapping
-name|getMappingByEntity
+comment|/**      * Getter for all mappings by the ID of the source. The source is the id      * of an Entity managed by an referenced site.      * TODO: check if an Entity of an referenced site can be mapped to more than       * one locally managed Entity      * @param source the ID of the source (an entity managed by some referenced      * site)      * @return Iterator over all the Mappings defined for this entity      * @throws EntityhubException On any error while performing the operation      */
+name|Entity
+name|getMappingBySource
 parameter_list|(
 name|String
-name|reference
+name|source
 parameter_list|)
 throws|throws
 name|EntityhubException
@@ -350,15 +314,15 @@ comment|//     * Getter for the Configuration for the entity hub
 comment|//     * @return the configuration of the entity hub
 comment|//     */
 comment|//    EntityhubConfiguration getEntityhubConfiguration();
-comment|/**      * Getter for all the mappings of the parsed reference to a {@link Symbol}      * @param symbol the reference to the symbol      * @return the mappings for the parsed Symbol      * @throws EntityhubException On any error while performing the operation      */
+comment|/**      * Getter for all the mappings by the id of the target. The target is an      * locally managed entity.      * @param entityId the id of the target (a locally managed entity)      * @return the mappings for the parsed target      * @throws EntityhubException On any error while performing the operation      */
 name|Collection
 argument_list|<
-name|EntityMapping
+name|Entity
 argument_list|>
-name|getMappingsBySymbol
+name|getMappingsByTarget
 parameter_list|(
 name|String
-name|symbol
+name|entityId
 parameter_list|)
 throws|throws
 name|EntityhubException
@@ -368,7 +332,7 @@ name|QueryResultList
 argument_list|<
 name|String
 argument_list|>
-name|findSymbolReferences
+name|findEntityReferences
 parameter_list|(
 name|FieldQuery
 name|query
@@ -392,9 +356,9 @@ function_decl|;
 comment|/**      * Searches for Signs based on the parsed {@link FieldQuery} and returns      * the selected Signs including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws EntityhubException On any error while performing the operation      */
 name|QueryResultList
 argument_list|<
-name|Symbol
+name|Entity
 argument_list|>
-name|findSymbols
+name|findEntities
 parameter_list|(
 name|FieldQuery
 name|query

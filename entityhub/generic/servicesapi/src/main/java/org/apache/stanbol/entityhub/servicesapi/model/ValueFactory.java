@@ -39,26 +39,6 @@ name|URL
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Sign
-operator|.
-name|SignTypeEnum
-import|;
-end_import
-
 begin_comment
 comment|/**  * FactoryInterface for {@link Text} and {@link Reference} instances  * TODO: Still not sure if we need that  * @author Rupert Westenthaler  */
 end_comment

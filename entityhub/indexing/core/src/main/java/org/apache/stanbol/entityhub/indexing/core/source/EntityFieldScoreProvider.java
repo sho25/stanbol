@@ -106,7 +106,7 @@ name|DEFAULT_FIELD_NAME
 init|=
 name|RdfResourceEnum
 operator|.
-name|signRank
+name|entityRank
 operator|.
 name|getUri
 argument_list|()
@@ -115,7 +115,7 @@ specifier|private
 name|String
 name|fieldName
 decl_stmt|;
-comment|/**      * Creates an instance that uses the field as specified by      * {@link RdfResourceEnum#signRank} to retrieve the score for an entity      */
+comment|/**      * Creates an instance that uses the field as specified by      * {@link RdfResourceEnum#entityRank} to retrieve the score for an entity      */
 specifier|public
 name|EntityFieldScoreProvider
 parameter_list|()
@@ -126,7 +126,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates an instance that uses the parsed field to retrieve the score for       * an entity or {@link RdfResourceEnum#signRank} in case<code>null</code>      * is parsed.      * @param fieldName the field used to retrieve the score from parsed      * {@link Representation}s or<code>null</code> to use the      * {@link RdfResourceEnum#signRank} field.      */
+comment|/**      * Creates an instance that uses the parsed field to retrieve the score for       * an entity or {@link RdfResourceEnum#entityRank} in case<code>null</code>      * is parsed.      * @param fieldName the field used to retrieve the score from parsed      * {@link Representation}s or<code>null</code> to use the      * {@link RdfResourceEnum#entityRank} field.      */
 specifier|public
 name|EntityFieldScoreProvider
 parameter_list|(

@@ -110,6 +110,8 @@ name|getName
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|//TODO: returning the service will cause the service reference not to be
+comment|//  released bundleContext.ungetService(reference) will not be called!
 return|return
 operator|(
 name|T

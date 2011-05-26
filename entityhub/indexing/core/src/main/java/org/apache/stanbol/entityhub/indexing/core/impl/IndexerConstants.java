@@ -88,7 +88,7 @@ name|SCORE_FIELD
 init|=
 name|RdfResourceEnum
 operator|.
-name|signRank
+name|entityRank
 operator|.
 name|getUri
 argument_list|()

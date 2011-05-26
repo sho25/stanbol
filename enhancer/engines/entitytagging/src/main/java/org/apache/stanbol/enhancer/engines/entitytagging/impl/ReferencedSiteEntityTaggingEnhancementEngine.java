@@ -613,7 +613,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -1798,7 +1798,7 @@ specifier|protected
 specifier|final
 name|Iterable
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 name|computeEntityRecommentations
 parameter_list|(
@@ -2138,13 +2138,13 @@ argument_list|)
 expr_stmt|;
 name|QueryResultList
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 name|results
 init|=
 name|site
 operator|.
-name|findSigns
+name|findEntities
 argument_list|(
 name|query
 argument_list|)
@@ -2192,7 +2192,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|Sign
+name|Entity
 name|guess
 range|:
 name|results

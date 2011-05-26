@@ -81,7 +81,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -169,9 +169,9 @@ name|String
 name|entityUri
 parameter_list|)
 function_decl|;
-comment|/**      * Getter for the the Sign referenced by the parsed ID      * @param id the id of the entity      * @return the Sign or<code>null</code> if not found      */
-name|Sign
-name|getSign
+comment|/**      * Getter for the Entity referenced by the parsed ID. This method will search      * all referenced sites      * @param id the id of the entity      * @return the Sign or<code>null</code> if not found      */
+name|Entity
+name|getEntity
 parameter_list|(
 name|String
 name|reference
@@ -180,7 +180,7 @@ function_decl|;
 comment|/**      * Returns the Entities that confirm to the parsed Query      * @param query the query      * @return the id's of Entities      */
 name|QueryResultList
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
 name|findEntities
 parameter_list|(

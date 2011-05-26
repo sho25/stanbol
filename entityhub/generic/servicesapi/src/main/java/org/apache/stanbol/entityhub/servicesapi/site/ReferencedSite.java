@@ -97,7 +97,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Entity
 import|;
 end_import
 
@@ -227,12 +227,12 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/**      * Searches for Signs based on the parsed {@link FieldQuery} and returns      * the selected Signs including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+comment|/**      * Searches for Entities based on the parsed {@link FieldQuery} and returns      * the selected Entities including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
-name|Sign
+name|Entity
 argument_list|>
-name|findSigns
+name|findEntities
 parameter_list|(
 name|FieldQuery
 name|query
@@ -240,9 +240,9 @@ parameter_list|)
 throws|throws
 name|ReferencedSiteException
 function_decl|;
-comment|/**      * Getter for the Sign by the id      * @param id the id of the entity      * @return the entity or<code>null</code> if not found      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
-name|Sign
-name|getSign
+comment|/**      * Getter for the Entity by the id      * @param id the id of the entity      * @return the entity or<code>null</code> if not found      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+name|Entity
+name|getEntity
 parameter_list|(
 name|String
 name|id

@@ -146,7 +146,7 @@ name|getFirst
 argument_list|(
 name|RdfResourceEnum
 operator|.
-name|signRank
+name|entityRank
 operator|.
 name|getUri
 argument_list|()

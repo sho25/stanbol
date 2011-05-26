@@ -483,7 +483,7 @@ name|SolrDirectoryManager
 operator|.
 name|DEFAULT_SOLR_DATA_DIR
 decl_stmt|;
-comment|/**      * The field used to boost documents while indexing. This is set to      * {@link RdfResourceEnum#signRank}      */
+comment|/**      * The field used to boost documents while indexing. This is set to      * {@link RdfResourceEnum#entityRank}      */
 specifier|public
 specifier|static
 specifier|final
@@ -492,7 +492,7 @@ name|DOCUMENT_BOOST_FIELD
 init|=
 name|RdfResourceEnum
 operator|.
-name|signRank
+name|entityRank
 operator|.
 name|getUri
 argument_list|()
