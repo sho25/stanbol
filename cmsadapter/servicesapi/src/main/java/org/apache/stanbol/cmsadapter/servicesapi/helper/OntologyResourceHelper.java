@@ -2361,7 +2361,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-specifier|private
+specifier|public
 name|void
 name|deleteStatementsByResource
 parameter_list|(

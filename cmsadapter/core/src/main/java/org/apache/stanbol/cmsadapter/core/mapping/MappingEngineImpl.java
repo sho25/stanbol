@@ -735,7 +735,6 @@ operator|.
 name|iterator
 argument_list|()
 expr_stmt|;
-block|}
 while|while
 condition|(
 name|processorIterator
@@ -825,6 +824,7 @@ operator|-
 name|t1
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
