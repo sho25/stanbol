@@ -161,22 +161,6 @@ name|scr
 operator|.
 name|annotations
 operator|.
-name|Property
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|felix
-operator|.
-name|scr
-operator|.
-name|annotations
-operator|.
 name|Reference
 import|;
 end_import
@@ -193,7 +177,73 @@ name|scr
 operator|.
 name|annotations
 operator|.
+name|ReferenceCardinality
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|ReferencePolicy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|ReferenceStrategy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
 name|Service
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|stanboltools
+operator|.
+name|offline
+operator|.
+name|OfflineMode
 import|;
 end_import
 
@@ -230,6 +280,24 @@ operator|.
 name|api
 operator|.
 name|ONManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ONManagerConfiguration
 import|;
 end_import
 
@@ -957,15 +1025,12 @@ name|ONManagerImpl
 implements|implements
 name|ONManager
 block|{
-specifier|public
+comment|/**      * Utility class to speed up ontology network startup.<br>      * TODO: it's most likely useless, remove it.      *       * @author enrico      *       */
+specifier|private
 class|class
 name|Helper
 block|{
-specifier|private
-name|Helper
-parameter_list|()
-block|{}
-comment|/**          * Adds the ontology from the given iri to the core space of the given scope          *           * @param scopeID          * @param locationIri          */
+comment|/**          * Adds the ontology from the given iri to the core space of the given scope.          *           *           * @param scopeID          * @param locationIri          */
 specifier|public
 specifier|synchronized
 name|void
@@ -1363,101 +1428,17 @@ name|scope
 return|;
 block|}
 block|}
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_ALIAS_DEFAULT
-init|=
-literal|"/ontology"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_CONFIG_FILE_PATH_DEFAULT
-init|=
-literal|""
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_KRES_NAMESPACE_DEFAULT
-init|=
-literal|"http://kres.iksproject.eu/"
-decl_stmt|;
-comment|// @Property(value = _ALIAS_DEFAULT)
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|ALIAS
-init|=
-literal|"org.apache.stanbol.ontologyNetworkManager.alias"
-decl_stmt|;
 annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_CONFIG_FILE_PATH_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-name|String
-name|CONFIG_FILE_PATH
-init|=
-literal|"org.apache.stanbol.ontologyNetworkManager.config_ont"
-decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_KRES_NAMESPACE_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-name|String
-name|KRES_NAMESPACE
-init|=
-literal|"kres.namespace"
-decl_stmt|;
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
+name|Reference
 specifier|private
-name|String
-name|alias
-init|=
-name|_ALIAS_DEFAULT
+name|ONManagerConfiguration
+name|config
 decl_stmt|;
-specifier|private
-name|String
-name|configPath
-init|=
-name|_CONFIG_FILE_PATH_DEFAULT
-decl_stmt|;
-comment|// private static ONManagerImpl me = new ONManagerImpl();
-comment|//
-comment|// public static ONManagerImpl get() {
-comment|// return me;
-comment|// }
-comment|// private ComponentContext ce;
 specifier|private
 name|Helper
 name|helper
 init|=
 literal|null
-decl_stmt|;
-specifier|private
-name|String
-name|kresNs
-init|=
-name|_KRES_NAMESPACE_DEFAULT
 decl_stmt|;
 specifier|private
 specifier|final
@@ -1472,6 +1453,40 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link ReferencedSite} can operate      * offline or not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
+annotation|@
+name|Reference
+argument_list|(
+name|cardinality
+operator|=
+name|ReferenceCardinality
+operator|.
+name|OPTIONAL_UNARY
+argument_list|,
+name|policy
+operator|=
+name|ReferencePolicy
+operator|.
+name|DYNAMIC
+argument_list|,
+name|bind
+operator|=
+literal|"enableOfflineMode"
+argument_list|,
+name|unbind
+operator|=
+literal|"disableOfflineMode"
+argument_list|,
+name|strategy
+operator|=
+name|ReferenceStrategy
+operator|.
+name|EVENT
+argument_list|)
+specifier|private
+name|OfflineMode
+name|offlineMode
+decl_stmt|;
 specifier|private
 name|OntologyIndex
 name|oIndex
@@ -1480,15 +1495,6 @@ specifier|private
 name|OntologyManagerFactory
 name|omgrFactory
 decl_stmt|;
-specifier|public
-name|OntologyManagerFactory
-name|getOntologyManagerFactory
-parameter_list|()
-block|{
-return|return
-name|omgrFactory
-return|;
-block|}
 specifier|private
 name|OntologyScopeFactory
 name|ontologyScopeFactory
@@ -1545,7 +1551,7 @@ specifier|private
 name|WeightedTcProvider
 name|wtcp
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ReengineerManagerImpl instances do need to be configured!      * YOU NEED TO USE {@link #ONManagerImpl(TcManager, WeightedTcProvider, Dictionary)} or its overloads, to      * parse the configuration and then initialise the rule store if running outside an OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ReengineerManagerImpl instances do need to be configured!      * YOU NEED TO USE      * {@link #ONManagerImpl(TcManager, WeightedTcProvider, ONManagerConfiguration, Dictionary)} or its      * overloads, to parse the configuration and then initialise the rule store if running outside an OSGI      * environment.      */
 specifier|public
 name|ONManagerImpl
 parameter_list|()
@@ -1647,6 +1653,44 @@ argument_list|)
 expr_stmt|;
 comment|// Defer the call to the bindResources() method to the activator.
 block|}
+comment|/**      * @deprecated use      *             {@link #ONManagerImpl(TcManager, WeightedTcProvider, ONManagerConfiguration, Dictionary)}      *             instead. Note that if the deprecated method is used instead, it will copy the Dictionary      *             context to a new {@link ONManagerConfiguration} object.      * @param tcm      * @param wtcp      * @param configuration      */
+annotation|@
+name|Deprecated
+specifier|public
+name|ONManagerImpl
+parameter_list|(
+name|TcManager
+name|tcm
+parameter_list|,
+name|WeightedTcProvider
+name|wtcp
+parameter_list|,
+name|Dictionary
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|configuration
+parameter_list|)
+block|{
+comment|// Copy the same configuration to the ONManagerConfigurationImpl.
+name|this
+argument_list|(
+name|tcm
+argument_list|,
+name|wtcp
+argument_list|,
+operator|new
+name|ONManagerConfigurationImpl
+argument_list|(
+name|configuration
+argument_list|)
+argument_list|,
+name|configuration
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**      * To be invoked by non-OSGi environments.      *       * @param tcm      * @param wtcp      * @param configuration      */
 specifier|public
 name|ONManagerImpl
@@ -1656,6 +1700,9 @@ name|tcm
 parameter_list|,
 name|WeightedTcProvider
 name|wtcp
+parameter_list|,
+name|ONManagerConfiguration
+name|onmconfig
 parameter_list|,
 name|Dictionary
 argument_list|<
@@ -1681,6 +1728,12 @@ operator|.
 name|wtcp
 operator|=
 name|wtcp
+expr_stmt|;
+name|this
+operator|.
+name|config
+operator|=
+name|onmconfig
 expr_stmt|;
 try|try
 block|{
@@ -1794,16 +1847,68 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-comment|// Local directories first
-comment|// try {
-comment|// URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
-comment|// OfflineConfiguration.localDirs.add(new File(uri));
-comment|// } catch (URISyntaxException e3) {
-comment|// log.warn("Could not add ontology resource.", e3);
-comment|// } catch (NullPointerException e3) {
-comment|// log.warn("Could not add ontology resource.", e3);
+comment|// Parse configuration
+if|if
+condition|(
+name|config
+operator|.
+name|getID
+argument_list|()
+operator|==
+literal|null
+operator|||
+name|config
+operator|.
+name|getID
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"The Ontology Network Manager configuration does not define a ID for the Ontology Network Manager"
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"id: {}"
+argument_list|,
+name|config
+operator|.
+name|getID
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+comment|// if (config.getOntologySourceDirectories() != null) {
+comment|// for (String s : config.getOntologySourceDirectories()) {
+comment|// if (new File(s).exists()) System.out.println(s + " EXISTS");
+comment|// else System.out.println(s + " DOES NOT EXIST");
 comment|// }
-comment|// if (storage == null) storage = new OntologyStorage(this.tcm, this.wtcp);
+comment|// }
+comment|//
+comment|// // Local directories first
+comment|// // try {
+comment|// // URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
+comment|// // OfflineConfiguration.localDirs.add(new File(uri));
+comment|// // } catch (URISyntaxException e3) {
+comment|// // log.warn("Could not add ontology resource.", e3);
+comment|// // } catch (NullPointerException e3) {
+comment|// // log.warn("Could not add ontology resource.", e3);
+comment|// // }
+comment|//
+comment|// // if (storage == null) storage = new OntologyStorage(this.tcm, this.wtcp);
+comment|//
+comment|// if (isOfflineMode()) System.out.println("DIOCANE!");
 name|bindResources
 argument_list|(
 name|this
@@ -1815,58 +1920,20 @@ operator|.
 name|wtcp
 argument_list|)
 expr_stmt|;
-name|String
-name|tfile
-init|=
-operator|(
-name|String
-operator|)
-name|configuration
-operator|.
-name|get
-argument_list|(
-name|CONFIG_FILE_PATH
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|tfile
-operator|!=
-literal|null
-condition|)
-name|this
-operator|.
-name|configPath
-operator|=
-name|tfile
-expr_stmt|;
-name|String
-name|tns
-init|=
-operator|(
-name|String
-operator|)
-name|configuration
-operator|.
-name|get
-argument_list|(
-name|KRES_NAMESPACE
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|tns
-operator|!=
-literal|null
-condition|)
-name|this
-operator|.
-name|kresNs
-operator|=
-name|tns
-expr_stmt|;
+comment|// String tfile = (String) configuration.get(CONFIG_FILE_PATH);
+comment|// if (tfile != null) this.configPath = tfile;
+comment|// String tns = (String) configuration.get(KRES_NAMESPACE);
+comment|// if (tns != null) this.kresNs = tns;
 comment|// configPath = (String) configuration.get(CONFIG_FILE_PATH);
 comment|/*          * If there is no configuration file, just start with an empty scope set          */
+name|String
+name|configPath
+init|=
+name|config
+operator|.
+name|getOntologyNetworkConfigurationPath
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|configPath
@@ -2647,6 +2714,40 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Called by the ConfigurationAdmin to unbind the {@link #offlineMode} if the service becomes unavailable      *       * @param mode      */
+specifier|protected
+specifier|final
+name|void
+name|disableOfflineMode
+parameter_list|(
+name|OfflineMode
+name|mode
+parameter_list|)
+block|{
+name|this
+operator|.
+name|offlineMode
+operator|=
+literal|null
+expr_stmt|;
+block|}
+comment|/**      * Called by the ConfigurationAdmin to bind the {@link #offlineMode} if the service becomes available      *       * @param mode      */
+specifier|protected
+specifier|final
+name|void
+name|enableOfflineMode
+parameter_list|(
+name|OfflineMode
+name|mode
+parameter_list|)
+block|{
+name|this
+operator|.
+name|offlineMode
+operator|=
+name|mode
+expr_stmt|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -2655,7 +2756,10 @@ name|getKReSNamespace
 parameter_list|()
 block|{
 return|return
-name|kresNs
+name|config
+operator|.
+name|getOntologyNetworkNamespace
+argument_list|()
 return|;
 block|}
 specifier|public
@@ -2665,6 +2769,15 @@ parameter_list|()
 block|{
 return|return
 name|oIndex
+return|;
+block|}
+specifier|public
+name|OntologyManagerFactory
+name|getOntologyManagerFactory
+parameter_list|()
+block|{
+return|return
+name|omgrFactory
 return|;
 block|}
 comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @return the ontology scope factory      */
@@ -2776,6 +2889,19 @@ parameter_list|()
 block|{
 return|return
 name|toActivate
+return|;
+block|}
+comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode}.      *       * @return the offline state      */
+specifier|protected
+specifier|final
+name|boolean
+name|isOfflineMode
+parameter_list|()
+block|{
+return|return
+name|offlineMode
+operator|!=
+literal|null
 return|;
 block|}
 block|}
