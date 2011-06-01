@@ -1889,26 +1889,16 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|// if (config.getOntologySourceDirectories() != null) {
-comment|// for (String s : config.getOntologySourceDirectories()) {
-comment|// if (new File(s).exists()) System.out.println(s + " EXISTS");
-comment|// else System.out.println(s + " DOES NOT EXIST");
-comment|// }
-comment|// }
-comment|//
-comment|// // Local directories first
-comment|// // try {
-comment|// // URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
-comment|// // OfflineConfiguration.localDirs.add(new File(uri));
-comment|// // } catch (URISyntaxException e3) {
-comment|// // log.warn("Could not add ontology resource.", e3);
-comment|// // } catch (NullPointerException e3) {
-comment|// // log.warn("Could not add ontology resource.", e3);
-comment|// // }
-comment|//
+comment|// Local directories first
+comment|//          try {
+comment|//          URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
+comment|//          OfflineConfiguration.add(new File(uri));
+comment|//          } catch (URISyntaxException e3) {
+comment|//          log.warn("Could not add ontology resource.", e3);
+comment|//          } catch (NullPointerException e3) {
+comment|//          log.warn("Could not add ontology resource.", e3);
+comment|//          }
 comment|// // if (storage == null) storage = new OntologyStorage(this.tcm, this.wtcp);
-comment|//
-comment|// if (isOfflineMode()) System.out.println("DIOCANE!");
 name|bindResources
 argument_list|(
 name|this
