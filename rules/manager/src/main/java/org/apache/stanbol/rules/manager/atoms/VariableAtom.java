@@ -140,9 +140,8 @@ name|URI
 name|getURI
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
-literal|null
+name|uri
 return|;
 block|}
 annotation|@
