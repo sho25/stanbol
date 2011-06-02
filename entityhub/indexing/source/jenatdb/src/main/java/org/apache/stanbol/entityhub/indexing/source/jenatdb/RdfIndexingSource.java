@@ -83,6 +83,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|commons
+operator|.
+name|io
+operator|.
+name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|entityhub
@@ -724,7 +738,7 @@ specifier|final
 name|String
 name|DEFAULT_SOURCE_FOLDER_NAME
 init|=
-literal|"rdf"
+literal|"rdfdata"
 decl_stmt|;
 comment|/**      * The default name of the folder used to initialise the       * {@link DatasetGraphTDB Jena TDB dataset}.      */
 specifier|public
@@ -1104,6 +1118,63 @@ expr_stmt|;
 block|}
 else|else
 block|{
+if|if
+condition|(
+name|FilenameUtils
+operator|.
+name|getExtension
+argument_list|(
+name|source
+argument_list|)
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|//non existent directory -> create
+comment|//This is typically the case if this method is called to
+comment|//initialise the default configuration. So we will try
+comment|//to create the directory users need to copy the source
+comment|//RDF files.
+if|if
+condition|(
+operator|!
+name|sourceFileOrDirectory
+operator|.
+name|mkdirs
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to create directory {} configured to improt RDF data from. "
+operator|+
+literal|"You will need to create this directory manually before copying the"
+operator|+
+literal|"RDF files into it."
+argument_list|,
+name|sourceFileOrDirectory
+argument_list|)
+expr_stmt|;
+comment|//this would not be necessary because the directory will
+comment|//be empty - however I like to be consistent and have
+comment|//all configured and existent files& dirs added the the
+comment|//resource loader
+name|this
+operator|.
+name|loader
+operator|.
+name|addResource
+argument_list|(
+name|sourceFileOrDirectory
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
 name|log
 operator|.
 name|warn
@@ -1118,6 +1189,7 @@ name|getSourceFolder
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 if|if

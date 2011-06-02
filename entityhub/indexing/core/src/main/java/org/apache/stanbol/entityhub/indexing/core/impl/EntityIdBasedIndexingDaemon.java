@@ -362,7 +362,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"unable to get Data for Entity {} (score=norm:{}|orig:{})"
 argument_list|,

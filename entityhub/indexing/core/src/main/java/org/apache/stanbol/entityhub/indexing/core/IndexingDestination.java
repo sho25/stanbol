@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Dictionary
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -49,7 +59,7 @@ name|Yard
 name|getYard
 parameter_list|()
 function_decl|;
-comment|/**      * Called after the indexing is completed to allow some post processing and      * packaging of the stored data.      */
+comment|/**      * Called after the indexing is completed to allow some post processing and      * packaging the stored data and writing of the OSGI configuration used to      * initialise the Yard.      */
 name|void
 name|finalise
 parameter_list|()

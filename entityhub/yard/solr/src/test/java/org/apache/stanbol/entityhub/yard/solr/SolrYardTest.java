@@ -457,6 +457,14 @@ argument_list|(
 literal|"The Solr Yard instance used to execute the Unit Tests defined for the Yard Interface"
 argument_list|)
 expr_stmt|;
+comment|//use the default Solr Index configuration for this tests
+name|config
+operator|.
+name|setDefaultInitialisation
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
 comment|// create the Yard used for the tests
 name|yard
 operator|=

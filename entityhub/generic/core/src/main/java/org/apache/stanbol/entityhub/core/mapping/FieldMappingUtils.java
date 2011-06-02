@@ -685,6 +685,8 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
+try|try
+block|{
 return|return
 operator|new
 name|FieldMapping
@@ -708,6 +710,33 @@ index|]
 argument_list|)
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Unable to parse FieldMapping from Line '%s'"
+argument_list|,
+name|mapping
+argument_list|)
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
 block|}
 comment|/**      * Parses FieldMappings from the parsed strings      * @param mappings the mappings to parse      * @return the parsed mappings      */
 specifier|public

@@ -69,6 +69,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Arrays
@@ -134,6 +144,26 @@ operator|.
 name|Map
 operator|.
 name|Entry
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
+name|impl
+operator|.
+name|SolrYard
 import|;
 end_import
 
@@ -231,6 +261,8 @@ specifier|static
 name|void
 name|init
 parameter_list|()
+throws|throws
+name|IOException
 block|{
 comment|// set to "${basedir}/some/rel/path" to test if property substitution works!
 name|String
@@ -391,6 +423,33 @@ literal|"!"
 argument_list|)
 throw|;
 block|}
+comment|//setup the entityhub and the cache index (as it would be done by the Entityhub)
+comment|//to test this initialisation
+name|solrDirectoryManager
+operator|.
+name|createSolrDirectory
+argument_list|(
+literal|"entityhub"
+argument_list|,
+literal|"entityhub"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+comment|//for the cahce we use the default configuration
+name|solrDirectoryManager
+operator|.
+name|createSolrDirectory
+argument_list|(
+literal|"cache"
+argument_list|,
+name|SolrYard
+operator|.
+name|DEFAULT_SOLR_INDEX_CONFIGURATION_NAME
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -430,8 +489,6 @@ operator|.
 name|getSolrIndexDirectory
 argument_list|(
 literal|null
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -454,8 +511,6 @@ operator|.
 name|getSolrIndexDirectory
 argument_list|(
 literal|""
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -594,6 +649,8 @@ specifier|public
 name|void
 name|testDefaultIndexInitialisation
 parameter_list|()
+throws|throws
+name|IOException
 block|{
 comment|// this is actually tested already by the initialisation of the
 comment|// SolrYardTest ...
@@ -612,11 +669,15 @@ name|indexDir
 init|=
 name|solrDirectoryManager
 operator|.
-name|getSolrIndexDirectory
+name|createSolrDirectory
 argument_list|(
 name|indexName
 argument_list|,
-literal|true
+name|SolrYard
+operator|.
+name|DEFAULT_SOLR_INDEX_CONFIGURATION_NAME
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|assertEquals

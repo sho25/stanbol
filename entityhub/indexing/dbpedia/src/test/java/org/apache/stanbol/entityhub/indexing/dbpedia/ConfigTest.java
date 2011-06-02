@@ -476,7 +476,7 @@ operator|<
 literal|2
 condition|)
 block|{
-comment|//the value of "min-score" in minIncomming
+comment|//the value of "min-score" in minincoming
 name|log
 operator|.
 name|info

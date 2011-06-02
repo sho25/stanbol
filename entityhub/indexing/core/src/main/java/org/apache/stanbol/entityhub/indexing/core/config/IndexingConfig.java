@@ -651,6 +651,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
+name|SiteConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -1753,7 +1771,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"reauest for Resource {} (folder: {})"
+literal|"request for Resource {} (folder: {})"
 argument_list|,
 name|fileName
 argument_list|,
@@ -4591,6 +4609,24 @@ argument_list|,
 name|configDir
 argument_list|,
 name|required
+argument_list|)
+return|;
+block|}
+comment|/**      * Getter for configured properties directly by the key. Typically used      * to get Properties as defined by the {@link SiteConfiguration} interface      * @param key the key of the property      * @return the value or<code>null</code> if not present. Might also return      *<code>null</code> in case the value<code>null</code> is set for the      * requested property.      */
+specifier|public
+name|Object
+name|getProperty
+parameter_list|(
+name|String
+name|key
+parameter_list|)
+block|{
+return|return
+name|configuration
+operator|.
+name|get
+argument_list|(
+name|key
 argument_list|)
 return|;
 block|}

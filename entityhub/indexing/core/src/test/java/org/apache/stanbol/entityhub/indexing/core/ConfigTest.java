@@ -657,7 +657,7 @@ operator|.
 name|getConfigFolder
 argument_list|()
 argument_list|,
-literal|"minincoming.properties"
+literal|"minscore.properties"
 argument_list|)
 operator|.
 name|isFile

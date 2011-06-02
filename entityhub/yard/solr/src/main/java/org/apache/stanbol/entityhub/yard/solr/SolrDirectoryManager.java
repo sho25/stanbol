@@ -167,6 +167,26 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
+name|impl
+operator|.
+name|SolrYardConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|framework
@@ -246,16 +266,13 @@ parameter_list|()
 throws|throws
 name|IllegalStateException
 function_decl|;
-comment|/**      * Getter for the directory of the parsed index. Implementations need to ensure that returned directories      * are valid Solr indices (or Solr Cores)      *<p>      * Directories returned by this method are typically used as second parameter of      * {@link SolrServerProvider#getSolrServer(Type, String, String...)} to create an {@link SolrServer}      * instance.      *<p>      * This method may trigger the initialisation of the SolrIndex if not already done.      *<p>      * This method needs to wait until the initialisation of the index i completed (even in multi threaded      * environments)      *<p>      *       * @param solrPathOrUri      *            the name of the requested solr index. If no index with that name does exist a new one will      *            be initialised base on the default core configuration part of this bundle.      * @param allowDefaultInit      *            If<code>true</code> the Solr Index can be initialised with the default configuration if not      *            already present.      * @return the directory (instanceDir) of the index or<code>null</code> if<code>false</code> was parsed      *         as allowDefaultInit and the data for the index are not yet available.      * @throws IllegalArgumentException      *             if the parsed solrIndexName is<code>null</code> or empty      */
+comment|/**      * Getter for the directory of the parsed index. Implementations need to ensure that returned directories      * are valid Solr indices (or Solr Cores)      *<p>      * Directories returned by this method are typically used as second parameter of      * {@link SolrServerProvider#getSolrServer(Type, String, String...)} to create an {@link SolrServer}      * instance.      *<p>      * If the requested Index is currently initialising, than this method MUST      * wait until the initialisation is finished before returning.       *       * @param solrIndexName      *            the name of the requested solr index.       * @return the directory (instanceDir) of the index or<code>null</code> a      *         SolrIndex with that name is not managed.      * @throws IllegalArgumentException      *             if the parsed solrIndexName is<code>null</code> or empty      */
 name|File
 name|getSolrIndexDirectory
 parameter_list|(
 specifier|final
 name|String
 name|solrIndexName
-parameter_list|,
-name|boolean
-name|allowDefaultInit
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
@@ -276,7 +293,7 @@ name|IllegalArgumentException
 throws|,
 name|IOException
 function_decl|;
-comment|/**      * Creates a new Solr Index based on looking up the Index data via the {@link DataFileProvider} service      *       * @param solrIndexName      *            The name of the solrIndex to create      * @param indexPath      *            the name of the dataFile looked up via the {@link DataFileProvider}      * @param propergies      *            Additional properties describing the index      * @return the directory (instanceDir) of the index or null if the index data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
+comment|/**      * Creates a new Solr Index based on looking up the Index data via the {@link DataFileProvider} service      *       * @param solrIndexName      *            The name of the solrIndex to create      * @param indexPath      *            the name of the dataFile looked up via the {@link DataFileProvider}      * @param properties      *            Additional properties describing the index      * @return the directory (instanceDir) of the index or null if the index data could not be found      * @throws IllegalArgumentException      * @throws IOException      */
 name|File
 name|createSolrDirectory
 parameter_list|(
@@ -288,7 +305,7 @@ name|String
 name|indexPath
 parameter_list|,
 name|Properties
-name|propergies
+name|properties
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
