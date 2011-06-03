@@ -623,6 +623,15 @@ name|JSONException
 name|e
 parameter_list|)
 block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unable to parse Request "
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|String
 name|acceptedMediaType
 init|=

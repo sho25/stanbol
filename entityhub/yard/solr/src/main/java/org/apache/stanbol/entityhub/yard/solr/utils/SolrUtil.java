@@ -244,6 +244,9 @@ name|IndexDataTypeEnum
 operator|.
 name|STR
 operator|.
+name|getIndexType
+argument_list|()
+operator|.
 name|equals
 argument_list|(
 name|indexValue

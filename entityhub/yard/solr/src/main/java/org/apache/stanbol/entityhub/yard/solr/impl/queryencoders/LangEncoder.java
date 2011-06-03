@@ -45,6 +45,26 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -250,20 +270,79 @@ argument_list|>
 name|value
 parameter_list|)
 block|{
+comment|//We need to process languages, because one may parse null, or
+comment|//an empty list or a list that contains a single element "null"
+name|Collection
+argument_list|<
+name|String
+argument_list|>
+name|languages
+decl_stmt|;
 if|if
 condition|(
 name|value
-operator|!=
+operator|==
 literal|null
-operator|&&
-operator|!
+operator|||
 name|value
 operator|.
 name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|// null indicates the default language!
+name|languages
+operator|=
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+expr_stmt|;
+block|}
+else|else
+block|{
+name|languages
+operator|=
+operator|new
+name|HashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+expr_stmt|;
+for|for
+control|(
+name|String
+name|lang
+range|:
+name|value
+control|)
+block|{
+if|if
+condition|(
+name|lang
+operator|!=
+literal|null
+condition|)
+block|{
+name|languages
+operator|.
+name|add
+argument_list|(
+name|lang
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+if|if
+condition|(
+operator|!
+name|languages
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 for|for
 control|(
 name|String
@@ -316,13 +395,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// String[] prefixSuffix = fieldMapper.encodeDataType(STRING_DATATYPE);
-comment|// if(prefixSuffix[0] != null&& !prefixSuffix[0].isEmpty()){
-comment|// constraint.addEncoded(PREFIX, prefixSuffix[0]);
-comment|// }
-comment|// if(prefixSuffix[1] != null&& !prefixSuffix[1].isEmpty()){
-comment|// constraint.addEncoded(SUFFIX, prefixSuffix[1]);
-comment|// }
 block|}
 block|}
 annotation|@
