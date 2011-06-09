@@ -53,6 +53,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -345,6 +355,20 @@ operator|=
 operator|new
 name|OpenCalaisEngine
 argument_list|()
+expr_stmt|;
+name|calaisExtractor
+operator|.
+name|setCalaisTypeMap
+argument_list|(
+operator|new
+name|HashMap
+argument_list|<
+name|UriRef
+argument_list|,
+name|UriRef
+argument_list|>
+argument_list|()
+argument_list|)
 expr_stmt|;
 name|calaisExtractor
 operator|.

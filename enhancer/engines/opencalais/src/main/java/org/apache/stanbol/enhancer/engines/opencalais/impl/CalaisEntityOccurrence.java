@@ -55,7 +55,7 @@ name|Resource
 name|type
 decl_stmt|;
 specifier|public
-name|Resource
+name|String
 name|name
 decl_stmt|;
 specifier|public
@@ -67,7 +67,7 @@ name|Integer
 name|length
 decl_stmt|;
 specifier|public
-name|Resource
+name|String
 name|exact
 decl_stmt|;
 specifier|public
