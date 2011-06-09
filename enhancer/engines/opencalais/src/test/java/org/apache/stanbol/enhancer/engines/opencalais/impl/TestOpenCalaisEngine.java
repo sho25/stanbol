@@ -668,7 +668,7 @@ name|getCalaisAnalysis
 argument_list|(
 name|TEST_TEXT
 argument_list|,
-name|ci
+literal|"text/plain"
 argument_list|)
 decl_stmt|;
 name|Assert
