@@ -1275,9 +1275,9 @@ block|{
 if|if
 condition|(
 name|resource
-operator|==
+operator|!=
 literal|null
-operator|||
+operator|&&
 name|resource
 operator|.
 name|trim
