@@ -831,6 +831,15 @@ name|logger
 operator|.
 name|warn
 argument_list|(
+literal|"Error at processor"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+name|logger
+operator|.
+name|warn
+argument_list|(
 literal|"Failed to obtain CMS Objects for query {}"
 argument_list|,
 name|cb
