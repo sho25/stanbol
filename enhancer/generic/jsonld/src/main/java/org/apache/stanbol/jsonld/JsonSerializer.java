@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Class to serialize a JSON object structure whereby the JSON structure is  * defined by the basic data types Map and List.  *  * @author Fabian Christ  */
+comment|/**  * Class to serialize a JSON object structure whereby the JSON structure is defined by the basic data types  * Map and List.  *   * @author Fabian Christ  */
 end_comment
 
 begin_class
@@ -551,6 +551,13 @@ argument_list|(
 literal|','
 argument_list|)
 expr_stmt|;
+name|appendLinefeed
+argument_list|(
+name|sb
+argument_list|,
+name|indent
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 specifier|private
@@ -1007,7 +1014,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * During the serialization there are added ',' and line breaks '\n' by      * default that need to be deleted when not needed, e.g. at the end      * of a list.      *       * @param sb      * @param indent      */
+comment|/**      * During the serialization there are added ',' and line breaks '\n' by default that need to be deleted      * when not needed, e.g. at the end of a list.      *       * @param sb      * @param indent      */
 specifier|private
 specifier|static
 name|void
