@@ -401,24 +401,6 @@ name|stanbol
 operator|.
 name|rules
 operator|.
-name|base
-operator|.
-name|api
-operator|.
-name|RuleStore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|rules
-operator|.
 name|manager
 operator|.
 name|changes
@@ -625,6 +607,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyCreationException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -676,7 +672,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
-name|RuleStore
+name|RuleStoreImpl
 name|kresRuleStore
 decl_stmt|;
 specifier|private
@@ -698,13 +694,13 @@ operator|.
 name|kresRuleStore
 operator|=
 operator|(
-name|RuleStore
+name|RuleStoreImpl
 operator|)
 name|servletContext
 operator|.
 name|getAttribute
 argument_list|(
-name|RuleStore
+name|RuleStoreImpl
 operator|.
 name|class
 operator|.
@@ -864,7 +860,7 @@ name|RDF_XML
 block|,
 name|KRFormat
 operator|.
-name|TURTLE
+name|RDF_JSON
 block|,
 name|KRFormat
 operator|.
@@ -880,7 +876,7 @@ name|MANCHESTER_OWL
 block|,
 name|KRFormat
 operator|.
-name|RDF_JSON
+name|TURTLE
 block|}
 argument_list|)
 specifier|public
@@ -895,6 +891,8 @@ argument_list|)
 name|String
 name|uri
 parameter_list|)
+throws|throws
+name|OWLOntologyCreationException
 block|{
 try|try
 block|{
@@ -907,6 +905,7 @@ argument_list|(
 name|kresRuleStore
 argument_list|)
 decl_stmt|;
+empty_stmt|;
 comment|// String ID =
 comment|// kresRuleStore.getOntology().getOntologyID().toString().replace(">","").replace("<","")+"#";
 if|if
@@ -1527,7 +1526,7 @@ name|Consumes
 argument_list|(
 name|MediaType
 operator|.
-name|MULTIPART_FORM_DATA
+name|APPLICATION_FORM_URLENCODED
 argument_list|)
 annotation|@
 name|Produces

@@ -417,7 +417,7 @@ name|ok
 argument_list|(
 name|SessionRenderer
 operator|.
-name|getSessionMetadataRDF
+name|getSessionMetadataRDFasOntology
 argument_list|(
 name|ses
 argument_list|)
