@@ -853,6 +853,26 @@ name|KRFormat
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
 begin_comment
 comment|/**  *  * @author elvio  */
 end_comment
@@ -861,11 +881,13 @@ begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/classify"
+literal|"/reasoners/classify"
 argument_list|)
 specifier|public
 class|class
 name|Classify
+extends|extends
+name|BaseStanbolResource
 block|{
 specifier|private
 name|RuleStore

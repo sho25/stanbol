@@ -43,6 +43,26 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|sun
@@ -61,7 +81,7 @@ begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/documentation/restful"
+literal|"/ontonet/documentation/restful"
 argument_list|)
 annotation|@
 name|ImplicitProduces
@@ -76,7 +96,7 @@ specifier|public
 class|class
 name|RESTfulResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{  }
 end_class
 

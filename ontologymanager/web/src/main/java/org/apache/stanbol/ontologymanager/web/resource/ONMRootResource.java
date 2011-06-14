@@ -359,6 +359,26 @@ name|KRFormat
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
+import|;
+end_import
+
 begin_comment
 comment|/**  * The main Web resource of the KReS ontology manager. All the scopes, sessions and ontologies are accessible  * as subresources of ONMRootResource.<br>  *<br>  * This resource allows a GET method for obtaining an RDF representation of the set of registered scopes and a  * DELETE method for clearing the scope set and ontology store accordingly.  *   * @author alessandro  *   */
 end_comment
@@ -367,13 +387,13 @@ begin_class
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontology"
+literal|"/ontonet/ontology"
 argument_list|)
 specifier|public
 class|class
 name|ONMRootResource
 extends|extends
-name|NavigationMixin
+name|BaseStanbolResource
 block|{
 specifier|private
 name|Logger
