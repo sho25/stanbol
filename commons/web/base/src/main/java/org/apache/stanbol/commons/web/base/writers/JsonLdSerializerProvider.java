@@ -243,6 +243,8 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
 name|jsonld
 operator|.
 name|JsonLd
@@ -256,6 +258,8 @@ operator|.
 name|apache
 operator|.
 name|stanbol
+operator|.
+name|commons
 operator|.
 name|jsonld
 operator|.
