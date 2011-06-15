@@ -7,6 +7,8 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
 name|jsonld
 package|;
 end_package
