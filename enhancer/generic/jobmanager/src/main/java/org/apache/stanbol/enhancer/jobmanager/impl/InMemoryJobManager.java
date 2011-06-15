@@ -540,7 +540,7 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"getOrder "
 operator|+
@@ -556,7 +556,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|" ... implements ServiceProperties"
 argument_list|)
@@ -583,7 +583,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> value = "
 operator|+

@@ -145,7 +145,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Representation
+name|Entity
 import|;
 end_import
 
@@ -163,7 +163,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Entity
+name|Representation
 import|;
 end_import
 

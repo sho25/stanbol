@@ -646,7 +646,21 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//do not set a name, because the ID is used for the name if no name is defined
+comment|//also set the id as name
+name|config
+operator|.
+name|put
+argument_list|(
+name|SiteConfiguration
+operator|.
+name|NAME
+argument_list|,
+name|indexingConfig
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|//config.put(SiteConfiguration.NAME, indexingConfig.getName());
 if|if
 condition|(

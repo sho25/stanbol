@@ -609,17 +609,6 @@ argument_list|,
 name|cardinality
 operator|=
 literal|1000
-argument_list|,
-comment|//positive number to use an Array
-name|value
-operator|=
-block|{
-literal|"| @=null;en;de;fr;it;es"
-block|,
-comment|//restrict languages
-literal|"*"
-comment|//cache all fields
-block|}
 argument_list|)
 block|}
 argument_list|)

@@ -66,14 +66,12 @@ argument_list|,
 literal|"Document"
 argument_list|)
 block|,
-comment|/**      * relation used to link from the       * {@link org.apache.stanbol.entityhub.servicesapi.model.Entity#getMetadata() metadata}      * to the {@link org.apache.stanbol.entityhub.servicesapi.model.Entity#getRepresentation() representation}      * of an {@link org.apache.stanbol.entityhub.servicesapi.model.Entity}.<p>      * Note that the foaf:primaryTopic relation is currently used for this      * purpose.      */
+comment|/**      * relation used to link from the       * {@link org.apache.stanbol.entityhub.servicesapi.model.Entity#getMetadata() metadata}      * to the {@link org.apache.stanbol.entityhub.servicesapi.model.Entity#getRepresentation() representation}      * of an {@link org.apache.stanbol.entityhub.servicesapi.model.Entity}.<p>      * Note that this uses a property in the entityhub namespace to ensure that      * no other (external) Information does accidently use the same property.      */
 name|aboutRepresentation
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|dcTerms
+literal|null
 argument_list|,
-literal|"subject"
+literal|"about"
 argument_list|)
 block|,
 comment|//    /**

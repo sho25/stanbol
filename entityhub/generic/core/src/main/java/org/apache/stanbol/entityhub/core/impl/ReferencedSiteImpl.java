@@ -974,10 +974,6 @@ operator|=
 name|SiteConfiguration
 operator|.
 name|ID
-argument_list|,
-name|value
-operator|=
-literal|"dbpedia"
 argument_list|)
 block|,         @
 name|Property
@@ -987,10 +983,6 @@ operator|=
 name|SiteConfiguration
 operator|.
 name|NAME
-argument_list|,
-name|value
-operator|=
-literal|"DB Pedia"
 argument_list|)
 block|,         @
 name|Property
@@ -1000,10 +992,6 @@ operator|=
 name|SiteConfiguration
 operator|.
 name|DESCRIPTION
-argument_list|,
-name|value
-operator|=
-literal|"The OLD Endpoint for Wikipedia"
 argument_list|)
 block|,         @
 name|Property
@@ -1017,14 +1005,6 @@ argument_list|,
 name|cardinality
 operator|=
 literal|1000
-argument_list|,
-name|value
-operator|=
-block|{
-literal|"http://dbpedia.org/resource/"
-block|,
-literal|"http://dbpedia.org/ontology/"
-block|}
 argument_list|)
 block|,         @
 name|Property
@@ -1034,10 +1014,6 @@ operator|=
 name|SiteConfiguration
 operator|.
 name|ACCESS_URI
-argument_list|,
-name|value
-operator|=
-literal|"http://dbpedia.org/sparql/"
 argument_list|)
 block|,         @
 name|Property
@@ -1115,10 +1091,6 @@ operator|=
 name|SiteConfiguration
 operator|.
 name|QUERY_URI
-argument_list|,
-name|value
-operator|=
-literal|"http://dbpedia.org/sparql"
 argument_list|)
 block|,
 comment|//the deri server has better performance
@@ -1205,7 +1177,7 @@ block|}
 argument_list|,
 name|value
 operator|=
-literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcher"
+literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|)
 block|,         @
 name|Property
@@ -1522,22 +1494,6 @@ argument_list|,
 name|cardinality
 operator|=
 literal|1000
-argument_list|,
-name|value
-operator|=
-block|{
-literal|"dbp-ont:*"
-block|,
-literal|"dbp-ont:thumbnail | d=xsd:anyURI> foaf:depiction"
-block|,
-literal|"dbp-prop:latitude | d=xsd:decimal> geo:lat"
-block|,
-literal|"dbp-prop:longitude | d=xsd:decimal> geo:long"
-block|,
-literal|"dbp-prop:population | d=xsd:integer"
-block|,
-literal|"dbp-prop:website | d=xsd:anyURI> foaf:homepage"
-block|}
 argument_list|)
 block|}
 argument_list|)
@@ -4067,6 +4023,24 @@ if|if
 condition|(
 name|siteConfiguration
 operator|.
+name|getAccessUri
+argument_list|()
+operator|!=
+literal|null
+operator|&&
+comment|//initialise only if a accessUri
+operator|!
+name|siteConfiguration
+operator|.
+name|getAccessUri
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+comment|// is configured
+name|siteConfiguration
+operator|.
 name|getEntitySearcherType
 argument_list|()
 operator|!=
@@ -4204,6 +4178,24 @@ comment|//throw an exception to avoid an successful activation
 block|}
 if|if
 condition|(
+name|siteConfiguration
+operator|.
+name|getQueryUri
+argument_list|()
+operator|!=
+literal|null
+operator|&&
+comment|//initialise only if a query URI
+operator|!
+name|siteConfiguration
+operator|.
+name|getQueryUri
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+comment|// is configured
 name|siteConfiguration
 operator|.
 name|getEntityDereferencerType

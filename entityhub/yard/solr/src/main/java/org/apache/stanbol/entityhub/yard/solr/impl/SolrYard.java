@@ -1030,10 +1030,6 @@ operator|=
 name|Yard
 operator|.
 name|ID
-argument_list|,
-name|value
-operator|=
-literal|"entityhubYard"
 argument_list|)
 block|,
 annotation|@
@@ -1044,10 +1040,6 @@ operator|=
 name|Yard
 operator|.
 name|NAME
-argument_list|,
-name|value
-operator|=
-literal|"Entityhub Yard"
 argument_list|)
 block|,
 annotation|@
@@ -1058,10 +1050,6 @@ operator|=
 name|Yard
 operator|.
 name|DESCRIPTION
-argument_list|,
-name|value
-operator|=
-literal|"The Yard used by the Entityhub to store the data"
 argument_list|)
 block|,
 annotation|@
@@ -1103,10 +1091,6 @@ operator|=
 name|SolrYard
 operator|.
 name|SOLR_SERVER_LOCATION
-argument_list|,
-name|value
-operator|=
-literal|"entityhub"
 argument_list|)
 block|,
 annotation|@

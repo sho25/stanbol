@@ -937,8 +937,6 @@ begin_class
 annotation|@
 name|Component
 argument_list|(
-comment|//name="org.apache.stanbol.entityhub.yard.clerezzaYard",
-comment|//factory="org.apache.stanbol.entityhub.yard.clerezzaYardFactory",
 name|configurationFactory
 operator|=
 literal|true
@@ -960,11 +958,6 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
-comment|//@Properties(value={
-comment|//        @Property(name=Yard.ID,value="entityhubYard"),
-comment|//        @Property(name=Yard.NAME,value="Entityhub Yard"),
-comment|//        @Property(name=Yard.DESCRIPTION,value="Default values for configuring the Entityhub Yard without editing")
-comment|//})
 specifier|public
 class|class
 name|ClerezzaYard
