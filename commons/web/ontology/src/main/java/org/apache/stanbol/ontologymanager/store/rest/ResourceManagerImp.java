@@ -259,6 +259,14 @@ specifier|private
 specifier|static
 specifier|final
 name|String
+name|DELIMITER
+init|=
+literal|"|"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
 name|DB_URL
 init|=
 literal|"jdbc:derby:ps_db;create=true"
@@ -751,7 +759,7 @@ name|put
 argument_list|(
 name|ontologyURIForResource
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|,
@@ -764,7 +772,7 @@ name|put
 argument_list|(
 name|ontologyPathForResource
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourcePath
 argument_list|,
@@ -786,7 +794,7 @@ name|put
 argument_list|(
 name|ontologyURIForResource
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|,
@@ -1174,7 +1182,7 @@ name|containsKey
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|classURI
 argument_list|)
@@ -1194,7 +1202,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|classURI
 argument_list|,
@@ -1212,7 +1220,7 @@ argument_list|(
 name|ontologyURI
 argument_list|)
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|classPath
 argument_list|,
@@ -1234,7 +1242,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|classURI
 argument_list|,
@@ -1366,7 +1374,7 @@ name|containsKey
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|dataPropertyURI
 argument_list|)
@@ -1386,7 +1394,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|dataPropertyURI
 argument_list|,
@@ -1404,7 +1412,7 @@ argument_list|(
 name|ontologyURI
 argument_list|)
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|dataPropertyPath
 argument_list|,
@@ -1426,7 +1434,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|dataPropertyURI
 argument_list|,
@@ -1558,7 +1566,7 @@ name|containsKey
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|objectPropertyURI
 argument_list|)
@@ -1578,7 +1586,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|objectPropertyURI
 argument_list|,
@@ -1596,7 +1604,7 @@ argument_list|(
 name|ontologyURI
 argument_list|)
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|objectPropertyPath
 argument_list|,
@@ -1618,7 +1626,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|objectPropertyURI
 argument_list|,
@@ -1750,7 +1758,7 @@ name|containsKey
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|individualURI
 argument_list|)
@@ -1770,7 +1778,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|individualURI
 argument_list|,
@@ -1788,7 +1796,7 @@ argument_list|(
 name|ontologyURI
 argument_list|)
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|individualPath
 argument_list|,
@@ -1810,7 +1818,7 @@ name|put
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|individualURI
 argument_list|,
@@ -2064,7 +2072,7 @@ name|containsKey
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|)
@@ -2079,7 +2087,7 @@ name|get
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|)
@@ -2173,7 +2181,7 @@ name|get
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|)
@@ -2246,7 +2254,7 @@ name|containsKey
 argument_list|(
 name|ontologyPath
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourcePath
 argument_list|)
@@ -2260,7 +2268,7 @@ name|get
 argument_list|(
 name|ontologyPath
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourcePath
 argument_list|)
@@ -2398,11 +2406,22 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+comment|//FIXME were startswith
 if|if
 condition|(
 name|key
 operator|.
-name|startsWith
+name|split
+argument_list|(
+literal|"\\"
+operator|+
+name|DELIMITER
+argument_list|)
+index|[
+literal|0
+index|]
+operator|.
+name|contentEquals
 argument_list|(
 name|ontologyURI
 argument_list|)
@@ -2494,11 +2513,22 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+comment|//FIXME were startswith
 if|if
 condition|(
 name|key
 operator|.
-name|startsWith
+name|split
+argument_list|(
+literal|"\\"
+operator|+
+name|DELIMITER
+argument_list|)
+index|[
+literal|0
+index|]
+operator|.
+name|contentEquals
 argument_list|(
 name|ontologyURI
 argument_list|)
@@ -2586,11 +2616,22 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+comment|//FIXME were startswith
 if|if
 condition|(
 name|key
 operator|.
-name|startsWith
+name|split
+argument_list|(
+literal|"\\"
+operator|+
+name|DELIMITER
+argument_list|)
+index|[
+literal|0
+index|]
+operator|.
+name|contentEquals
 argument_list|(
 name|ontologyURI
 argument_list|)
@@ -2931,7 +2972,7 @@ name|remove
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|)
@@ -2942,7 +2983,7 @@ name|remove
 argument_list|(
 name|ontologyPath
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|classPath
 argument_list|)
@@ -2953,7 +2994,7 @@ name|remove
 argument_list|(
 name|ontologyURI
 operator|+
-literal|"#"
+name|DELIMITER
 operator|+
 name|resourceURI
 argument_list|)

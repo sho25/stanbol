@@ -529,7 +529,7 @@ name|DELETE
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontologymanager/store{containerClassPath:.+}"
+literal|"/{containerClassPath:.+}"
 argument_list|)
 specifier|public
 name|Response

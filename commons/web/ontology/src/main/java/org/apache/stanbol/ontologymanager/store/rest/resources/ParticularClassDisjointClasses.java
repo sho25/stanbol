@@ -493,7 +493,7 @@ name|DELETE
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontologymanager/store{disjointClassPath:.+}"
+literal|"/{disjointClassPath:.+}"
 argument_list|)
 specifier|public
 name|Response

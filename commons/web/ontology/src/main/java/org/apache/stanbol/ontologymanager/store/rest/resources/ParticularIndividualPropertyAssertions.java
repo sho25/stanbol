@@ -378,7 +378,7 @@ argument_list|)
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontologymanager/store{propertyPath:.+}"
+literal|"/{propertyPath:.+}"
 argument_list|)
 specifier|public
 name|Response
@@ -663,7 +663,7 @@ argument_list|)
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontologymanager/store{propertyPath:.+}/literals/"
+literal|"/{propertyPath:.+}/literals/"
 argument_list|)
 specifier|public
 name|Response
@@ -815,7 +815,7 @@ name|DELETE
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontologymanager/store{propertyPath:.+}/objects/{value:.+}"
+literal|"/{propertyPath:.+}/objects/{value:.+}"
 argument_list|)
 specifier|public
 name|Response

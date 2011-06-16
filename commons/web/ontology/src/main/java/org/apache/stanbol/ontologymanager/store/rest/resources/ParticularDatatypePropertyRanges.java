@@ -526,7 +526,7 @@ name|DELETE
 annotation|@
 name|Path
 argument_list|(
-literal|"/ontologymanager/store{rangePath:.+}"
+literal|"/{rangePath:.+}"
 argument_list|)
 specifier|public
 name|Response
