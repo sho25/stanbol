@@ -257,6 +257,10 @@ begin_import
 import|import
 name|org
 operator|.
+name|codehaus
+operator|.
+name|jettison
+operator|.
 name|json
 operator|.
 name|JSONException
@@ -266,6 +270,10 @@ end_import
 begin_import
 import|import
 name|org
+operator|.
+name|codehaus
+operator|.
+name|jettison
 operator|.
 name|json
 operator|.

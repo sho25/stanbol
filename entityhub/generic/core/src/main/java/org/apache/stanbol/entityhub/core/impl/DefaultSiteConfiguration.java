@@ -125,6 +125,42 @@ name|servicesapi
 operator|.
 name|site
 operator|.
+name|EntityDereferencer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
+name|EntitySearcher
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
 name|License
 import|;
 end_import
@@ -201,6 +237,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|osgi
+operator|.
+name|service
+operator|.
+name|component
+operator|.
+name|ComponentFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -248,15 +298,6 @@ name|DefaultSiteConfiguration
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-comment|/**      * Key internally used to store the {@link License}s object parsed based on      * the configured values for {@link SiteConfiguration#SITE_LICENCE_NAME},       * {@link SiteConfiguration#SITE_LICENCE_TEXT} and       * {@link SiteConfiguration#SITE_LICENCE_URL}.      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|LICENSES_KEY
-init|=
-literal|"org.apache.stanbol.entityhub.site.defaultSiteConfig.licenses"
 decl_stmt|;
 comment|/**      * Internally used to store the configuration.      */
 specifier|private
@@ -1402,7 +1443,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      *       * @param state      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDefaultMappedEntityState()      */
+comment|/**      * Setter for the default state of Mappings created between Entities of this      * Site and Entities managed by the Entityhub. If this configuration is not      * present created mappings will have the default state as configured by the      * Entityhub.      * @param state the default state for new Entity mappings.      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDefaultMappedEntityState()      */
 specifier|public
 specifier|final
 name|void
@@ -1501,7 +1542,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      *       * @param state      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDefaultManagedEntityState()      */
+comment|/**      * Setter for the default state of Entities after importing them into the      * Entityhub. If this configuration is not present Entities will have the      * default state set for the Entityhub.      * @param state the state or<code>null</code> to remove this configuration      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDefaultManagedEntityState()      */
 specifier|public
 specifier|final
 name|void
@@ -1580,7 +1621,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      *       * @param entityDereferencerType      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getEntityDereferencerType()      */
+comment|/**      * Setter for the type of the {@link EntityDereferencer} to be used by      * this site or<code>null</code> to remove the current configuration.<p>      * Note that the {@link EntityDereferencer} is only initialised of a valid      * {@link #getAccessUri() access URI} is configured. If the dereferencer is      * set to<code>null</code> dereferencing Entities will not be supported by      * this site. Entities might still be available form a local      * {@link #getCacheId() cache}.      * @param entityDereferencerType the key (OSGI name) of the component used      * to dereference Entities. This component must have an {@link ComponentFactory}      * and provide the {@link EntityDereferencer} service-      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getEntityDereferencerType()      */
 specifier|public
 specifier|final
 name|void
@@ -1659,7 +1700,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      *       * @param description      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDescription()      */
+comment|/**      * Setter for the description of the {@link ReferencedSite}. If set to      *<code>null</code> or an empty string this configuration will be removed.      * @param description the description      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getDescription()      */
 specifier|public
 specifier|final
 name|void
@@ -1676,6 +1717,11 @@ condition|(
 name|description
 operator|==
 literal|null
+operator|||
+name|description
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 name|config
@@ -1714,6 +1760,7 @@ name|SITE_FIELD_MAPPINGS
 argument_list|)
 return|;
 block|}
+comment|/**      * Setter for the mappings of a site. This mappings are used in case an       * Entity of this site is imported to the Entityhub. Parsing<code>null</code>      * or an empty array will cause all existing mappings to be removed.      * @param mappings the mappings      * @throws UnsupportedOperationException      */
 specifier|public
 specifier|final
 name|void
@@ -1731,6 +1778,12 @@ condition|(
 name|mappings
 operator|==
 literal|null
+operator|||
+name|mappings
+operator|.
+name|length
+operator|<
+literal|1
 condition|)
 block|{
 name|config
@@ -1770,7 +1823,7 @@ name|ENTITY_PREFIX
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param prefixes      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getEntityPrefixes()      */
+comment|/**      * Setter for the Entity prefixes (typically the namespace or the host name)      * of the entities provided by this site. Because Sites might provide Entities      * with different namespaces this site allows to parse an array. Setting the      * prefixes to<code>null</code> or an empty array will cause that this site      * is ask for all requested entities.      * @param prefixes The array with the prefixes or<code>null</code> to       * remove any configured prefixes      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getEntityPrefixes()      */
 specifier|public
 specifier|final
 name|void
@@ -1788,6 +1841,12 @@ condition|(
 name|prefixes
 operator|==
 literal|null
+operator|||
+name|prefixes
+operator|.
+name|length
+operator|<
+literal|1
 condition|)
 block|{
 name|config
@@ -1842,7 +1901,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      *       * @param id      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @throws IllegalArgumentException in case the parsed ID is NULL or an empty String      * @see #getId()      */
+comment|/**      * Setter for the id of the referenced site      * @param id the id      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @throws IllegalArgumentException in case the parsed ID is<code>null</code> or an empty String      * @see #getId()      */
 specifier|public
 specifier|final
 name|void
@@ -1910,33 +1969,7 @@ index|[]
 name|getLicenses
 parameter_list|()
 block|{
-name|Object
-name|licenses
-init|=
-name|config
-operator|.
-name|get
-argument_list|(
-name|LICENSES_KEY
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|licenses
-operator|instanceof
-name|License
-index|[]
-condition|)
-block|{
-return|return
-operator|(
-name|License
-index|[]
-operator|)
-name|licenses
-return|;
-block|}
-comment|// get based on related keys
+comment|//get Licenses based on related keys
 name|int
 name|elements
 init|=
@@ -2167,6 +2200,7 @@ index|]
 argument_list|)
 return|;
 block|}
+comment|/**      * Setter for the {@link License} information. This method stores the name,      * text and url of the license as strings in the according fields of the      * configuration.      * @param licenses the licenses to store.<code>null</code> or an empty      * array to remove existing values      * @throws IllegalArgumentException if the parsed array contains a<code>null</code>      * element      * @throws UnsupportedOperationException if the configuration is read-only      */
 specifier|public
 specifier|final
 name|void
@@ -2176,11 +2210,204 @@ name|License
 index|[]
 name|licenses
 parameter_list|)
+throws|throws
+name|IllegalArgumentException
+throws|,
+name|UnsupportedOperationException
 block|{
-comment|//TODO: implement
+if|if
+condition|(
+name|licenses
+operator|==
+literal|null
+operator|||
+name|licenses
+operator|.
+name|length
+operator|<
+literal|1
+condition|)
+block|{
+name|config
+operator|.
+name|remove
+argument_list|(
+name|SITE_LICENCE_NAME
+argument_list|)
+expr_stmt|;
+name|config
+operator|.
+name|remove
+argument_list|(
+name|SITE_LICENCE_TEXT
+argument_list|)
+expr_stmt|;
+name|config
+operator|.
+name|remove
+argument_list|(
+name|SITE_LICENCE_URL
+argument_list|)
+expr_stmt|;
 block|}
-specifier|protected
-specifier|final
+else|else
+block|{
+name|String
+index|[]
+name|names
+init|=
+operator|new
+name|String
+index|[
+name|licenses
+operator|.
+name|length
+index|]
+decl_stmt|;
+name|String
+index|[]
+name|texts
+init|=
+operator|new
+name|String
+index|[
+name|licenses
+operator|.
+name|length
+index|]
+decl_stmt|;
+name|String
+index|[]
+name|urls
+init|=
+operator|new
+name|String
+index|[
+name|licenses
+operator|.
+name|length
+index|]
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+name|licenses
+operator|.
+name|length
+condition|;
+name|i
+operator|++
+control|)
+block|{
+if|if
+condition|(
+name|licenses
+index|[
+name|i
+index|]
+operator|!=
+literal|null
+condition|)
+block|{
+name|names
+index|[
+name|i
+index|]
+operator|=
+name|licenses
+index|[
+name|i
+index|]
+operator|.
+name|getName
+argument_list|()
+expr_stmt|;
+name|texts
+index|[
+name|i
+index|]
+operator|=
+name|licenses
+index|[
+name|i
+index|]
+operator|.
+name|getText
+argument_list|()
+expr_stmt|;
+name|urls
+index|[
+name|i
+index|]
+operator|=
+name|licenses
+index|[
+name|i
+index|]
+operator|.
+name|getUrl
+argument_list|()
+expr_stmt|;
+block|}
+else|else
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed License array"
+operator|+
+literal|"MUST NOT contain a NULL element! (parsed: "
+operator|+
+name|Arrays
+operator|.
+name|toString
+argument_list|(
+name|licenses
+argument_list|)
+operator|+
+literal|")"
+argument_list|)
+throw|;
+block|}
+block|}
+name|config
+operator|.
+name|put
+argument_list|(
+name|SITE_LICENCE_NAME
+argument_list|,
+name|names
+argument_list|)
+expr_stmt|;
+name|config
+operator|.
+name|put
+argument_list|(
+name|SITE_LICENCE_TEXT
+argument_list|,
+name|texts
+argument_list|)
+expr_stmt|;
+name|config
+operator|.
+name|put
+argument_list|(
+name|SITE_LICENCE_URL
+argument_list|,
+name|urls
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+comment|/**      * Internally used to get the names of the licenses      * @return      */
+specifier|private
 name|String
 index|[]
 name|getLicenseName
@@ -2193,7 +2420,8 @@ name|SITE_LICENCE_NAME
 argument_list|)
 return|;
 block|}
-specifier|protected
+comment|/**      * Internally used to get the texts of the licenes      * @return      */
+specifier|private
 name|String
 index|[]
 name|getLicenseText
@@ -2206,7 +2434,8 @@ name|SITE_LICENCE_TEXT
 argument_list|)
 return|;
 block|}
-specifier|protected
+comment|/**      * Internally used to get the urls of the page describing the license      * @return      */
+specifier|private
 name|String
 index|[]
 name|getLicenseUrl
@@ -2259,7 +2488,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      *       * @param name      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getName()      */
+comment|/**      * Setter for the name of the Referenced Site. Note that if the name is not      * present the {@link #getId() id} will be used as name.      * @param name the name of the site or<code>null</code> to remove it (and      * use the {@link #getId() id} also as name      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getName()      */
 specifier|public
 specifier|final
 name|void
@@ -2337,7 +2566,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      *       * @param entitySearcherType      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getEntitySearcherType()      */
+comment|/**      * Setter for the type of the {@link EntitySearcher} used to query for      * Entities by accessing a external service available at       * {@link #getQueryUri()}.<p>      * Note that the {@link EntitySearcher} will only be initialised of the      * {@link #getQueryUri() Query URI} is defined.      * @param entitySearcherType The string representing the {@link EntitySearcher}      * (the name of the OSGI component) or<code>null</code> to remove this      * configuration. The referenced component MUST have an {@link ComponentFactory}      * and provide the {@link EntitySearcher} service.      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getEntitySearcherType()      */
 specifier|public
 specifier|final
 name|void
@@ -2415,7 +2644,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      *       * @param queryUri      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getQueryUri()      */
+comment|/**      * Setter for the uri of the remote service used to query for entities. If      * set to<code>null</code> this indicates that no such external service is      * available for this referenced site      * @param queryUri the uri of the external service used to query for entities      * or<code>null</code> if none.      * @throws UnsupportedOperationException in case this configuration is {@link #readonly}      * @see #getQueryUri()      */
 specifier|public
 specifier|final
 name|void

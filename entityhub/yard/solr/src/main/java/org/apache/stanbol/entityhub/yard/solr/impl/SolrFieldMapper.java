@@ -3111,7 +3111,7 @@ name|value
 init|=
 name|config
 operator|.
-name|getFieldValue
+name|getFirstValue
 argument_list|(
 name|fieldName
 argument_list|)

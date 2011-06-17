@@ -642,11 +642,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Create EmbeddedSolrServer for index %s and core %s"
+literal|"Create EmbeddedSolrServer for index {} and core {}"
 argument_list|,
 name|index
 operator|.
@@ -654,7 +650,6 @@ name|getAbsolutePath
 argument_list|()
 argument_list|,
 name|coreName
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|CoreContainer
