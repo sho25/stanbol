@@ -2355,7 +2355,7 @@ block|{
 name|FieldQuery
 name|fieldQuery
 init|=
-name|getQueryFavtory
+name|getQueryFactory
 argument_list|()
 operator|.
 name|createFieldQuery
@@ -2500,7 +2500,7 @@ block|{
 name|FieldQuery
 name|fieldQuery
 init|=
-name|getQueryFavtory
+name|getQueryFactory
 argument_list|()
 operator|.
 name|createFieldQuery
@@ -3199,7 +3199,7 @@ block|}
 name|FieldQuery
 name|fieldQuery
 init|=
-name|getQueryFavtory
+name|getQueryFactory
 argument_list|()
 operator|.
 name|createFieldQuery
@@ -3408,7 +3408,7 @@ block|}
 name|FieldQuery
 name|fieldQuery
 init|=
-name|getQueryFavtory
+name|getQueryFactory
 argument_list|()
 operator|.
 name|createFieldQuery
@@ -3884,7 +3884,7 @@ annotation|@
 name|Override
 specifier|public
 name|FieldQueryFactory
-name|getQueryFavtory
+name|getQueryFactory
 parameter_list|()
 block|{
 name|Yard

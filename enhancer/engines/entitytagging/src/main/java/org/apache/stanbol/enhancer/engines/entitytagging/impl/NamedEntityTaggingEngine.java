@@ -117,6 +117,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collections
 import|;
 end_import
@@ -147,6 +157,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Iterator
 import|;
 end_import
@@ -168,6 +188,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
@@ -593,6 +623,38 @@ name|entityhub
 operator|.
 name|servicesapi
 operator|.
+name|Entityhub
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|EntityhubException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
 name|defaults
 operator|.
 name|NamespaceEnum
@@ -826,7 +888,7 @@ annotation|@
 name|Service
 specifier|public
 class|class
-name|ReferencedSiteEntityTaggingEnhancementEngine
+name|NamedEntityTaggingEngine
 implements|implements
 name|EnhancementEngine
 implements|,
@@ -847,11 +909,7 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|value
-operator|=
-literal|"dbpedia"
-argument_list|)
+comment|//(value = "dbpedia")
 specifier|public
 specifier|static
 specifier|final
@@ -862,11 +920,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.referencedSiteId"
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|boolValue
-operator|=
-literal|true
-argument_list|)
+comment|//(boolValue = true)
 specifier|public
 specifier|static
 specifier|final
@@ -877,11 +931,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.personState"
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|value
-operator|=
-literal|"dbp-ont:Person"
-argument_list|)
+comment|//(value = "dbp-ont:Person")
 specifier|public
 specifier|static
 specifier|final
@@ -892,11 +942,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.personType"
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|boolValue
-operator|=
-literal|true
-argument_list|)
+comment|//(boolValue = true)
 specifier|public
 specifier|static
 specifier|final
@@ -907,11 +953,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.organisationState"
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|value
-operator|=
-literal|"dbp-ont:Organisation"
-argument_list|)
+comment|//(value = "dbp-ont:Organisation")
 specifier|public
 specifier|static
 specifier|final
@@ -922,11 +964,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.organisationType"
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|boolValue
-operator|=
-literal|true
-argument_list|)
+comment|//(boolValue = true)
 specifier|public
 specifier|static
 specifier|final
@@ -937,11 +975,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.placeState"
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|(
-name|value
-operator|=
-literal|"dbp-ont:Place"
-argument_list|)
+comment|//(value = "dbp-ont:Place")
 specifier|public
 specifier|static
 specifier|final
@@ -950,6 +984,7 @@ name|PLACE_TYPE
 init|=
 literal|"org.apache.stanbol.enhancer.engines.entitytagging.placeType"
 decl_stmt|;
+comment|/**      * Use the RDFS label as default      */
 annotation|@
 name|Property
 argument_list|(
@@ -965,14 +1000,21 @@ name|NAME_FIELD
 init|=
 literal|"org.apache.stanbol.enhancer.engines.entitytagging.nameField"
 decl_stmt|;
-comment|/**      * Service of the RICK that manages all the active referenced Site. This Service is used to lookup the      * configured Referenced Site when we need to enhance a content item.      */
+comment|/**      * Service of the Entityhub that manages all the active referenced Site. This Service is used to lookup the      * configured Referenced Site when we need to enhance a content item.      */
 annotation|@
 name|Reference
 specifier|protected
 name|ReferencedSiteManager
 name|siteManager
 decl_stmt|;
-comment|/**      * This is the configured name of the referenced Site used to find entities. The      * {@link ReferencedSiteManager} service of the RICK is used to get the actual {@link ReferencedSite}      * instance for each request to this Engine.      */
+comment|/**      * Used to lookup Entities if the {@link #REFERENCED_SITE_ID} property is      * set to "entityhub" or "local"      */
+annotation|@
+name|Reference
+specifier|protected
+name|Entityhub
+name|entityhub
+decl_stmt|;
+comment|/**      * This holds the id of the {@link ReferencedSite} used to lookup Entities      * or<code>null</code> if the {@link Entityhub} is used.       */
 specifier|protected
 name|String
 name|referencedSiteID
@@ -1194,6 +1236,37 @@ argument_list|,
 literal|"The ID of the Referenced Site is a required Parameter and MUST NOT be an empty String!"
 argument_list|)
 throw|;
+block|}
+if|if
+condition|(
+name|Entityhub
+operator|.
+name|ENTITYHUB_IDS
+operator|.
+name|contains
+argument_list|(
+name|this
+operator|.
+name|referencedSiteID
+operator|.
+name|toLowerCase
+argument_list|()
+argument_list|)
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Init NamedEntityTaggingEngine instance for the Entityhub"
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|referencedSiteID
+operator|=
+literal|null
+expr_stmt|;
 block|}
 name|Object
 name|state
@@ -1467,16 +1540,28 @@ parameter_list|)
 throws|throws
 name|EngineException
 block|{
+specifier|final
 name|ReferencedSite
 name|site
-init|=
+decl_stmt|;
+if|if
+condition|(
+name|referencedSiteID
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//lookup the referenced site
+name|site
+operator|=
 name|siteManager
 operator|.
 name|getReferencedSite
 argument_list|(
 name|referencedSiteID
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+comment|//ensure that it is present
 if|if
 condition|(
 name|site
@@ -1513,6 +1598,7 @@ comment|// policy what do to in such situations
 comment|// throw new EngineException(msg);
 return|return;
 block|}
+comment|//and that it supports offline mode if required
 if|if
 condition|(
 name|isOfflineMode
@@ -1543,6 +1629,15 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 return|return;
+block|}
+block|}
+else|else
+block|{
+comment|// null indicates to use the Entityhub to lookup Entities
+name|site
+operator|=
+literal|null
+expr_stmt|;
 block|}
 name|UriRef
 name|contentItemId
@@ -1776,7 +1871,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|EntityhubException
 name|e
 parameter_list|)
 block|{
@@ -1794,6 +1889,7 @@ throw|;
 block|}
 block|}
 block|}
+comment|/**      * Computes the Enhancements      * @param site The {@link ReferencedSiteException} id or<code>null</code> to      * use the {@link Entityhub}      * @param literalFactory the {@link LiteralFactory} used to create RDF Literals      * @param graph the graph to write the lined entities      * @param contentItemId the id of the contentItem      * @param textAnnotation the text annotation to enhance      * @param subsumedAnnotations other text annotations for the same entity       * @return the suggested {@link Entity entities}      * @throws EntityhubException On any Error while looking up Entities via      * the Entityhub      */
 specifier|protected
 specifier|final
 name|Iterable
@@ -1824,7 +1920,7 @@ argument_list|>
 name|subsumedAnnotations
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|EntityhubException
 block|{
 comment|// First get the required properties for the parsed textAnnotation
 comment|// ... and check the values
@@ -1938,6 +2034,19 @@ expr_stmt|;
 name|FieldQuery
 name|query
 init|=
+name|site
+operator|==
+literal|null
+condition|?
+comment|//if site is NULL use the Entityhub
+name|entityhub
+operator|.
+name|getQueryFactory
+argument_list|()
+operator|.
+name|createFieldQuery
+argument_list|()
+else|:
 name|site
 operator|.
 name|getQueryFactory
@@ -2143,12 +2252,26 @@ argument_list|>
 name|results
 init|=
 name|site
+operator|==
+literal|null
+condition|?
+comment|//if site is NULL
+name|entityhub
+operator|.
+name|findEntities
+argument_list|(
+name|query
+argument_list|)
+else|:
+comment|//use the Entityhub
+name|site
 operator|.
 name|findEntities
 argument_list|(
 name|query
 argument_list|)
 decl_stmt|;
+comment|//else the referenced site
 name|log
 operator|.
 name|debug
@@ -2224,6 +2347,8 @@ argument_list|,
 name|annotationsToRelate
 argument_list|,
 name|guess
+argument_list|,
+name|nameField
 argument_list|)
 expr_stmt|;
 block|}

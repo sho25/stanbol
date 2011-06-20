@@ -379,11 +379,11 @@ init|=
 literal|"New Zealand"
 decl_stmt|;
 specifier|static
-name|ReferencedSiteEntityTaggingEnhancementEngine
+name|NamedEntityTaggingEngine
 name|entityLinkingEngine
 init|=
 operator|new
-name|ReferencedSiteEntityTaggingEnhancementEngine
+name|NamedEntityTaggingEngine
 argument_list|()
 decl_stmt|;
 annotation|@

@@ -31,6 +31,32 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|Entityhub
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -196,7 +222,18 @@ specifier|public
 interface|interface
 name|ReferencedSite
 block|{
-comment|/**      * The Id of this site. This Method MUST return the same value as      *<code>{@link #getConfiguration()}.getId()</code>. It is only there to      * make it more easy to access the Id of the site      * @return the ID of this site      */
+comment|/**      * List of {@link #getId() ids} that are not allowed to be used (case      * insensitive) for referenced sites.      */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|PROHIBITED_SITE_IDS
+init|=
+name|Entityhub
+operator|.
+name|ENTITYHUB_IDS
+decl_stmt|;
+comment|/**      * The Id of this site. This Method MUST return the same value as      *<code>{@link #getConfiguration()}.getId()</code>.      * The configured ID MUST NOT be<code>null</code>, empty or one of the      * {@link #PROHIBITED_SITE_IDS}.      * @return the ID of this site      */
 name|String
 name|getId
 parameter_list|()
