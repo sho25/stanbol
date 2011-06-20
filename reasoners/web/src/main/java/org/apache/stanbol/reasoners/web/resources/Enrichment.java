@@ -119,18 +119,6 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|FormParam
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
 name|POST
 import|;
 end_import
@@ -853,6 +841,20 @@ name|Resource
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
 begin_comment
 comment|/**  *  *   */
 end_comment
@@ -1379,7 +1381,7 @@ name|Response
 name|ontologyEnrichment
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1389,7 +1391,7 @@ name|String
 name|session
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1399,7 +1401,7 @@ name|String
 name|scope
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1409,7 +1411,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1419,7 +1421,7 @@ name|String
 name|input_graph
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1429,7 +1431,7 @@ name|File
 name|file
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=

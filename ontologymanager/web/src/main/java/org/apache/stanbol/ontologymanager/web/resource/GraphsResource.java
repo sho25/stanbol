@@ -85,18 +85,6 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|FormParam
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
 name|GET
 import|;
 end_import
@@ -508,6 +496,20 @@ operator|.
 name|view
 operator|.
 name|ImplicitProduces
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
 import|;
 end_import
 
@@ -999,7 +1001,7 @@ name|Response
 name|storeGraph
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"graph"
 argument_list|)
@@ -1007,7 +1009,7 @@ name|InputStream
 name|graph
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"id"
 argument_list|)

@@ -683,6 +683,20 @@ name|Viewable
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
 begin_class
 annotation|@
 name|Path
@@ -853,7 +867,7 @@ name|Response
 name|reengineering
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"output-graph"
 argument_list|)
@@ -861,7 +875,7 @@ name|String
 name|outputGraph
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input-type"
 argument_list|)
@@ -869,7 +883,7 @@ name|String
 name|inputType
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input"
 argument_list|)
@@ -1167,7 +1181,7 @@ name|Response
 name|schemaReengineering
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"output-graph"
 argument_list|)
@@ -1175,7 +1189,7 @@ name|String
 name|outputGraph
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input-type"
 argument_list|)
@@ -1183,7 +1197,7 @@ name|String
 name|inputType
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input"
 argument_list|)

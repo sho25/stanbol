@@ -29,7 +29,25 @@ name|Response
 operator|.
 name|Status
 operator|.
-name|*
+name|INTERNAL_SERVER_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|NOT_FOUND
 import|;
 end_import
 
@@ -62,18 +80,6 @@ operator|.
 name|rs
 operator|.
 name|Consumes
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|FormParam
 import|;
 end_import
 
@@ -361,6 +367,20 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
 begin_comment
 comment|/**  * Special refactoring services that employ a DL reasoner for ensuring/checking consistency.  *   * @author alessandro  *   */
 end_comment
@@ -618,7 +638,7 @@ name|Response
 name|consistentRefactoringOfNewGraph
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"recipe"
 argument_list|)
@@ -626,7 +646,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input"
 argument_list|)

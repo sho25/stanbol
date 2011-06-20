@@ -907,6 +907,20 @@ name|Resource
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
 begin_comment
 comment|/**  * This class implements the REST interface for the /check-consistency service  * of KReS.  *   * @author elvio  */
 end_comment
@@ -1697,7 +1711,7 @@ name|Response
 name|getConsistencyCheck
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1707,7 +1721,7 @@ name|String
 name|session
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1717,7 +1731,7 @@ name|String
 name|scope
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1727,7 +1741,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1737,7 +1751,7 @@ name|String
 name|input_graph
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=
@@ -1747,7 +1761,7 @@ name|File
 name|file
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 name|value
 operator|=

@@ -553,6 +553,20 @@ name|ImplicitProduces
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
 begin_comment
 comment|/**  *   * @author andrea.nuzzolese  *   */
 end_comment
@@ -726,7 +740,7 @@ name|Response
 name|applyRefactoring
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"recipe"
 argument_list|)
@@ -734,7 +748,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input"
 argument_list|)
@@ -969,7 +983,7 @@ name|Response
 name|performRefactoring
 parameter_list|(
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"recipe"
 argument_list|)
@@ -977,7 +991,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormParam
+name|FormDataParam
 argument_list|(
 literal|"input"
 argument_list|)
