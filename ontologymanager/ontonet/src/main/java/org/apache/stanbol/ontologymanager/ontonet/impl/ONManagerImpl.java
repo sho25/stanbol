@@ -49,16 +49,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URI
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|ArrayList
@@ -615,24 +605,6 @@ name|ontonet
 operator|.
 name|conf
 operator|.
-name|OfflineConfiguration
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|conf
-operator|.
 name|OntologyNetworkConfigurationUtils
 import|;
 end_import
@@ -693,7 +665,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OntologyIndexImpl
+name|OWLOntologyManagerFactoryImpl
 import|;
 end_import
 
@@ -713,7 +685,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OWLOntologyManagerFactoryImpl
+name|OntologyIndexImpl
 import|;
 end_import
 
@@ -1579,29 +1551,7 @@ block|{
 name|super
 argument_list|()
 expr_stmt|;
-comment|//        OfflineConfiguration conf = new OfflineConfiguration();
-comment|//        try {
-comment|//            URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
-comment|//            conf.addDirectory(new File(uri));
-comment|//        } catch (Exception e3) {
-comment|//            log.warn("Could not add ontology resource /ontologies.");
-comment|//        }
-comment|//        List<String> dirs = new ArrayList<String>();
-comment|//        try {
-comment|//            dirs = config.getOntologySourceDirectories();
-comment|//        } catch (NullPointerException ex) {
-comment|//            // Ok, go empty
-comment|//        }
-comment|//        omgrFactory = new OntologyManagerFactory(dirs);
-comment|//
-comment|//        owlFactory = OWLManager.getOWLDataFactory();
-comment|//        owlCacheManager = omgrFactory.createOntologyManager(true);
-comment|//
-comment|//        // These depend on one another
-comment|//        scopeRegistry = new ScopeRegistryImpl();
-comment|//        oIndex = new OntologyIndexImpl(this);
-comment|//
-comment|//        // Defer the call to the bindResources() method to the activator.
+comment|// All bindings are deferred to the activator
 block|}
 comment|/**      * @deprecated use      *             {@link #ONManagerImpl(TcManager, WeightedTcProvider, ONManagerConfiguration, Dictionary)}      *             instead. Note that if the deprecated method is used instead, its effect will be to copy the      *             Dictionary context to a new {@link ONManagerConfiguration} object.      * @param tcm      * @param wtcp      * @param configuration      */
 annotation|@
@@ -1839,6 +1789,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Bind components, starting with the local directories.
 name|List
 argument_list|<
 name|String
@@ -1909,18 +1860,6 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-comment|// Defer the call to the bindResources() method to the activator.
-comment|// Get local directories
-comment|// Local directories first
-comment|// try {
-comment|// URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
-comment|// OfflineConfiguration.add(new File(uri));
-comment|// } catch (URISyntaxException e3) {
-comment|// log.warn("Could not add ontology resource.", e3);
-comment|// } catch (NullPointerException e3) {
-comment|// log.warn("Could not add ontology resource.", e3);
-comment|// }
-comment|// // if (storage == null) storage = new OntologyStorage(this.tcm, this.wtcp);
 name|bindResources
 argument_list|(
 name|this
