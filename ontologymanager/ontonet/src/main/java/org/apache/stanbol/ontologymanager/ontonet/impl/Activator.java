@@ -82,30 +82,6 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-comment|// context.addBundleListener(new BundleListener() {
-comment|//
-comment|// @Override
-comment|// public void bundleChanged(BundleEvent event) {
-comment|// System.err.println("BundleEvent has fired");
-comment|//
-comment|// }
-comment|// });
-comment|// context.addFrameworkListener(new FrameworkListener() {
-comment|//
-comment|// @Override
-comment|// public void frameworkEvent(FrameworkEvent event) {
-comment|// System.err.println("FrameworkEvent has fired");
-comment|//
-comment|// }
-comment|// });
-comment|// context.addServiceListener(new ServiceListener() {
-comment|//
-comment|// @Override
-comment|// public void serviceChanged(ServiceEvent event) {
-comment|// System.err.println("ServiceEvent has fired");
-comment|//
-comment|// }
-comment|// });
 comment|// context.getBundle().getLocation();
 comment|// Instantiate the static context for the KReS ONM
 name|Logger
@@ -128,8 +104,6 @@ argument_list|(
 literal|"KReS :: Instantiating ONM static context..."
 argument_list|)
 expr_stmt|;
-comment|// if (ONManager.get() != null) {
-comment|// log.debug("KReS :: ONM static context instantiated.");
 name|log
 operator|.
 name|info
@@ -137,7 +111,6 @@ argument_list|(
 literal|"KReS :: Ontology Network Manager set up."
 argument_list|)
 expr_stmt|;
-comment|// }
 block|}
 annotation|@
 name|Override

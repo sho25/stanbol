@@ -304,7 +304,7 @@ name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|protected
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 name|mgrFactory
 decl_stmt|;
 specifier|public
@@ -316,7 +316,7 @@ parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
 parameter_list|,
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 name|mgrFactory
 parameter_list|)
 block|{

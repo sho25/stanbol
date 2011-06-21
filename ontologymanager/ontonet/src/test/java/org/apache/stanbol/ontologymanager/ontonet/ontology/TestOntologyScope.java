@@ -299,7 +299,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 import|;
 end_import
 

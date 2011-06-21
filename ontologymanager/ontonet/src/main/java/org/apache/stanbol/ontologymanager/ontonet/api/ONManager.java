@@ -171,7 +171,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 import|;
 end_import
 
@@ -218,7 +218,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A KReS Ontology Network Manager.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_interface
@@ -227,72 +227,72 @@ interface|interface
 name|ONManager
 block|{
 specifier|public
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 name|getOntologyManagerFactory
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the default object that automatically indexes ontologies as they 	 * are loaded within scopes. 	 *  	 * @return the default ontology index. 	 */
+comment|/**      * Returns the default object that automatically indexes ontologies as they are loaded within scopes.      *       * @return the default ontology index.      */
 specifier|public
 name|OntologyIndex
 name|getOntologyIndex
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the ontology scope factory that was created along with the 	 * manager context. 	 *  	 * @return the default ontology scope factory 	 */
+comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @return the default ontology scope factory      */
 specifier|public
 name|OntologyScopeFactory
 name|getOntologyScopeFactory
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the ontology space factory that was created along with the 	 * manager context. 	 *  	 * @return the default ontology space factory. 	 */
+comment|/**      * Returns the ontology space factory that was created along with the manager context.      *       * @return the default ontology space factory.      */
 specifier|public
 name|OntologySpaceFactory
 name|getOntologySpaceFactory
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the default ontology storage system for this KReS instance. 	 *  	 * @return the default ontology store. 	 */
+comment|/**      * Returns the default ontology storage system for this KReS instance.      *       * @return the default ontology store.      */
 specifier|public
 name|ClerezzaOntologyStorage
 name|getOntologyStore
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns an OWL Ontology Manager that is never cleared of its ontologies, 	 * so it can be used for caching ontologies without having to reload them 	 * using other managers. It is sufficient to catch 	 * {@link OWLOntologyAlreadyExistsException}s and obtain the ontology with 	 * that same ID from this manager. 	 *  	 * @return the OWL Ontology Manager used for caching ontologies. 	 */
+comment|/**      * Returns an OWL Ontology Manager that is never cleared of its ontologies, so it can be used for caching      * ontologies without having to reload them using other managers. It is sufficient to catch      * {@link OWLOntologyAlreadyExistsException}s and obtain the ontology with that same ID from this manager.      *       * @return the OWL Ontology Manager used for caching ontologies.      */
 specifier|public
 name|OWLOntologyManager
 name|getOwlCacheManager
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns a factory object that can be used for obtaining OWL API objects. 	 *  	 * @return the default OWL data factory 	 */
+comment|/**      * Returns a factory object that can be used for obtaining OWL API objects.      *       * @return the default OWL data factory      */
 specifier|public
 name|OWLDataFactory
 name|getOwlFactory
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the default ontology registry loader. 	 *  	 * @return the default ontology registry loader. 	 */
+comment|/**      * Returns the default ontology registry loader.      *       * @return the default ontology registry loader.      */
 specifier|public
 name|RegistryLoader
 name|getRegistryLoader
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the unique ontology scope registry for this context. 	 *  	 * @return the ontology scope registry. 	 */
+comment|/**      * Returns the unique ontology scope registry for this context.      *       * @return the ontology scope registry.      */
 specifier|public
 name|ScopeRegistry
 name|getScopeRegistry
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the unique KReS session manager for this context. 	 *  	 * @return the KreS session manager. 	 */
+comment|/**      * Returns the unique KReS session manager for this context.      *       * @return the KreS session manager.      */
 specifier|public
 name|SessionManager
 name|getSessionManager
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the list of IRIs that identify scopes that should be activated on 	 * startup,<i>if they exist</i>. 	 *  	 * @return the list of scope IDs to activate. 	 */
+comment|/**      * Returns the list of IRIs that identify scopes that should be activated on startup,<i>if they      * exist</i>.      *       * @return the list of scope IDs to activate.      */
 specifier|public
 name|String
 index|[]
 name|getUrisToActivate
 parameter_list|()
 function_decl|;
-comment|/** 	 * Returns the String that represent the namespace used by KReS for its ontologies 	 *  	 * @return the namespace of KReS. 	 */
+comment|/**      * Returns the String that represent the namespace used by KReS for its ontologies      *       * @return the namespace of KReS.      */
 specifier|public
 name|String
 name|getKReSNamespace

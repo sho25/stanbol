@@ -269,7 +269,7 @@ operator|=
 block|{
 literal|"."
 block|,
-literal|"ontologies"
+literal|"/ontologies"
 block|}
 argument_list|)
 specifier|private
@@ -311,7 +311,7 @@ specifier|private
 name|String
 name|ontonetNS
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ReengineerManagerImpl instances do need to be configured!      * YOU NEED TO USE {@link #ONManagerConfigurationImpl(Dictionary)} or its overloads, to parse the      * configuration and then initialise the rule store if running outside an OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ONManagerConfigurationImpl instances do need to be configured!      * YOU NEED TO USE {@link #ONManagerConfigurationImpl(Dictionary)} or its overloads, to parse the      * configuration and then initialise the rule store if running outside an OSGI environment.      */
 specifier|public
 name|ONManagerConfigurationImpl
 parameter_list|()
@@ -470,7 +470,7 @@ index|[]
 block|{
 literal|"."
 block|,
-literal|"ontologies"
+literal|"/ontologies"
 block|}
 expr_stmt|;
 name|ontonetNS

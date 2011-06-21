@@ -248,7 +248,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|ConfigurationManagement
+name|OntologyNetworkConfigurationUtils
 block|{
 specifier|private
 specifier|static

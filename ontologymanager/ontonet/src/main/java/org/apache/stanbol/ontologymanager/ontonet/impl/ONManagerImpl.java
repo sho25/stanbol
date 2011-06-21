@@ -61,7 +61,27 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Dictionary
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -595,7 +615,7 @@ name|ontonet
 operator|.
 name|conf
 operator|.
-name|ConfigurationManagement
+name|OfflineConfiguration
 import|;
 end_import
 
@@ -613,7 +633,7 @@ name|ontonet
 operator|.
 name|conf
 operator|.
-name|OfflineConfiguration
+name|OntologyNetworkConfigurationUtils
 import|;
 end_import
 
@@ -693,7 +713,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 import|;
 end_import
 
@@ -1492,7 +1512,7 @@ name|OntologyIndex
 name|oIndex
 decl_stmt|;
 specifier|private
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 name|omgrFactory
 decl_stmt|;
 specifier|private
@@ -1559,101 +1579,31 @@ block|{
 name|super
 argument_list|()
 expr_stmt|;
-name|OfflineConfiguration
-name|conf
-init|=
-operator|new
-name|OfflineConfiguration
-argument_list|()
-decl_stmt|;
-try|try
-block|{
-name|URI
-name|uri
-init|=
-name|ONManagerImpl
-operator|.
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getResource
-argument_list|(
-literal|"/ontologies"
-argument_list|)
-operator|.
-name|toURI
-argument_list|()
-decl_stmt|;
-name|conf
-operator|.
-name|addDirectory
-argument_list|(
-operator|new
-name|File
-argument_list|(
-name|uri
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|//        OfflineConfiguration conf = new OfflineConfiguration();
+comment|//        try {
+comment|//            URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
+comment|//            conf.addDirectory(new File(uri));
+comment|//        } catch (Exception e3) {
+comment|//            log.warn("Could not add ontology resource /ontologies.");
+comment|//        }
+comment|//        List<String> dirs = new ArrayList<String>();
+comment|//        try {
+comment|//            dirs = config.getOntologySourceDirectories();
+comment|//        } catch (NullPointerException ex) {
+comment|//            // Ok, go empty
+comment|//        }
+comment|//        omgrFactory = new OntologyManagerFactory(dirs);
+comment|//
+comment|//        owlFactory = OWLManager.getOWLDataFactory();
+comment|//        owlCacheManager = omgrFactory.createOntologyManager(true);
+comment|//
+comment|//        // These depend on one another
+comment|//        scopeRegistry = new ScopeRegistryImpl();
+comment|//        oIndex = new OntologyIndexImpl(this);
+comment|//
+comment|//        // Defer the call to the bindResources() method to the activator.
 block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e3
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Could not add ontology resource /ontologies."
-argument_list|)
-expr_stmt|;
-block|}
-name|omgrFactory
-operator|=
-operator|new
-name|OntologyManagerFactory
-argument_list|(
-name|conf
-argument_list|)
-expr_stmt|;
-name|owlFactory
-operator|=
-name|OWLManager
-operator|.
-name|getOWLDataFactory
-argument_list|()
-expr_stmt|;
-name|owlCacheManager
-operator|=
-name|omgrFactory
-operator|.
-name|createOntologyManager
-argument_list|(
-literal|true
-argument_list|)
-expr_stmt|;
-comment|// These depend on one another
-name|scopeRegistry
-operator|=
-operator|new
-name|ScopeRegistryImpl
-argument_list|()
-expr_stmt|;
-name|oIndex
-operator|=
-operator|new
-name|OntologyIndexImpl
-argument_list|(
-name|this
-argument_list|)
-expr_stmt|;
-comment|// Defer the call to the bindResources() method to the activator.
-block|}
-comment|/**      * @deprecated use      *             {@link #ONManagerImpl(TcManager, WeightedTcProvider, ONManagerConfiguration, Dictionary)}      *             instead. Note that if the deprecated method is used instead, it will copy the Dictionary      *             context to a new {@link ONManagerConfiguration} object.      * @param tcm      * @param wtcp      * @param configuration      */
+comment|/**      * @deprecated use      *             {@link #ONManagerImpl(TcManager, WeightedTcProvider, ONManagerConfiguration, Dictionary)}      *             instead. Note that if the deprecated method is used instead, its effect will be to copy the      *             Dictionary context to a new {@link ONManagerConfiguration} object.      * @param tcm      * @param wtcp      * @param configuration      */
 annotation|@
 name|Deprecated
 specifier|public
@@ -1691,7 +1641,7 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * To be invoked by non-OSGi environments.      *       * @param tcm      * @param wtcp      * @param configuration      */
+comment|/**      * Constructor to be invoked by non-OSGi environments.      *       * @param tcm      * @param wtcp      * @param configuration      */
 specifier|public
 name|ONManagerImpl
 parameter_list|(
@@ -1889,15 +1839,87 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|dirs
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
+try|try
+block|{
+name|dirs
+operator|=
+name|config
+operator|.
+name|getOntologySourceDirectories
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|NullPointerException
+name|ex
+parameter_list|)
+block|{
+comment|// Ok, go empty
+block|}
+name|omgrFactory
+operator|=
+operator|new
+name|OWLOntologyManagerFactoryImpl
+argument_list|(
+name|dirs
+argument_list|)
+expr_stmt|;
+name|owlFactory
+operator|=
+name|OWLManager
+operator|.
+name|getOWLDataFactory
+argument_list|()
+expr_stmt|;
+name|owlCacheManager
+operator|=
+name|omgrFactory
+operator|.
+name|createOntologyManager
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// These depend on one another
+name|scopeRegistry
+operator|=
+operator|new
+name|ScopeRegistryImpl
+argument_list|()
+expr_stmt|;
+name|oIndex
+operator|=
+operator|new
+name|OntologyIndexImpl
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
+comment|// Defer the call to the bindResources() method to the activator.
+comment|// Get local directories
 comment|// Local directories first
-comment|//          try {
-comment|//          URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
-comment|//          OfflineConfiguration.add(new File(uri));
-comment|//          } catch (URISyntaxException e3) {
-comment|//          log.warn("Could not add ontology resource.", e3);
-comment|//          } catch (NullPointerException e3) {
-comment|//          log.warn("Could not add ontology resource.", e3);
-comment|//          }
+comment|// try {
+comment|// URI uri = ONManagerImpl.this.getClass().getResource("/ontologies").toURI();
+comment|// OfflineConfiguration.add(new File(uri));
+comment|// } catch (URISyntaxException e3) {
+comment|// log.warn("Could not add ontology resource.", e3);
+comment|// } catch (NullPointerException e3) {
+comment|// log.warn("Could not add ontology resource.", e3);
+comment|// }
 comment|// // if (storage == null) storage = new OntologyStorage(this.tcm, this.wtcp);
 name|bindResources
 argument_list|(
@@ -2324,7 +2346,7 @@ control|(
 name|String
 name|scopeIRI
 range|:
-name|ConfigurationManagement
+name|OntologyNetworkConfigurationUtils
 operator|.
 name|getScopes
 argument_list|(
@@ -2336,7 +2358,7 @@ name|String
 index|[]
 name|cores
 init|=
-name|ConfigurationManagement
+name|OntologyNetworkConfigurationUtils
 operator|.
 name|getCoreOntologies
 argument_list|(
@@ -2349,7 +2371,7 @@ name|String
 index|[]
 name|customs
 init|=
-name|ConfigurationManagement
+name|OntologyNetworkConfigurationUtils
 operator|.
 name|getCustomOntologies
 argument_list|(
@@ -2566,7 +2588,7 @@ block|}
 comment|/**              * Try to get activation policies              */
 name|toActivate
 operator|=
-name|ConfigurationManagement
+name|OntologyNetworkConfigurationUtils
 operator|.
 name|getScopesToActivate
 argument_list|(
@@ -2762,7 +2784,7 @@ name|oIndex
 return|;
 block|}
 specifier|public
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 name|getOntologyManagerFactory
 parameter_list|()
 block|{

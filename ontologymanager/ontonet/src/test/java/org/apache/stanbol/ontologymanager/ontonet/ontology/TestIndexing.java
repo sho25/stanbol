@@ -107,6 +107,24 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|ONManagerConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|io
 operator|.
 name|OntologyInputSource
@@ -229,6 +247,24 @@ name|ontonet
 operator|.
 name|impl
 operator|.
+name|ONManagerConfigurationImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
 name|ONManagerImpl
 import|;
 end_import
@@ -327,15 +363,6 @@ decl_stmt|;
 specifier|private
 specifier|static
 name|IRI
-name|semionXmlIri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://www.ontologydesignpatterns.org/ont/iks/oxml.owl"
-argument_list|)
-decl_stmt|,
 name|communitiesCpIri
 init|=
 name|IRI
@@ -343,15 +370,6 @@ operator|.
 name|create
 argument_list|(
 literal|"http://www.ontologydesignpatterns.org/cp/owl/communities.owl"
-argument_list|)
-decl_stmt|,
-name|topicCpIri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://www.ontologydesignpatterns.org/cp/owl/topic.owl"
 argument_list|)
 decl_stmt|,
 name|objrole
@@ -399,6 +417,22 @@ name|setup
 parameter_list|()
 block|{
 comment|// An ONManagerImpl with no store and default settings
+name|ONManagerConfiguration
+name|conf
+init|=
+operator|new
+name|ONManagerConfigurationImpl
+argument_list|(
+operator|new
+name|Hashtable
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|onm
 operator|=
 operator|new
@@ -407,6 +441,8 @@ argument_list|(
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+name|conf
 argument_list|,
 operator|new
 name|Hashtable
@@ -453,6 +489,11 @@ operator|+
 literal|"/core/root.owl"
 argument_list|)
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|OWLOntology
 name|oParent
 init|=
@@ -514,7 +555,7 @@ name|getRegistryLoader
 argument_list|()
 argument_list|,
 literal|null
-comment|//                 new RootOntologySource(oParent
+comment|// new RootOntologySource(oParent
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -742,11 +783,11 @@ name|oObjRole
 argument_list|)
 expr_stmt|;
 comment|// Compare it against the one indexed.
-comment|// FIXME reinstate these checks
-comment|//        OntologyIndex index = onm.getOntologyIndex();
-comment|//        assertNotNull(index.getOntology(objrole));
-comment|//        // assertSame() would fail.
-comment|//        assertEquals(index.getOntology(objrole), oObjRole);
+comment|//         FIXME reinstate these checks
+comment|// OntologyIndex index = onm.getOntologyIndex();
+comment|// assertNotNull(index.getOntology(objrole));
+comment|// // assertSame() would fail.
+comment|// assertEquals(index.getOntology(objrole), oObjRole);
 block|}
 annotation|@
 name|Test
@@ -796,8 +837,8 @@ literal|"http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl"
 argument_list|)
 decl_stmt|;
 comment|// FIXME reinstate these checks
-comment|//        assertTrue(index.isOntologyLoaded(coreroot));
-comment|//        assertTrue(index.isOntologyLoaded(objrole));
+comment|// assertTrue(index.isOntologyLoaded(coreroot));
+comment|// assertTrue(index.isOntologyLoaded(objrole));
 comment|// TODO : find a way to index anonymous ontologies
 name|assertTrue
 argument_list|(

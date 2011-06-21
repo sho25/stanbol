@@ -359,7 +359,7 @@ name|impl
 operator|.
 name|ontology
 operator|.
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 import|;
 end_import
 
@@ -1660,7 +1660,7 @@ name|URI
 name|location
 parameter_list|)
 block|{
-name|OntologyManagerFactory
+name|OWLOntologyManagerFactoryImpl
 name|factory
 init|=
 name|onm
