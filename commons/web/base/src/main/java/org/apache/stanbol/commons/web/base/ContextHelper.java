@@ -112,6 +112,13 @@ argument_list|)
 decl_stmt|;
 comment|//TODO: returning the service will cause the service reference not to be
 comment|//  released bundleContext.ungetService(reference) will not be called!
+if|if
+condition|(
+name|reference
+operator|!=
+literal|null
+condition|)
+block|{
 return|return
 operator|(
 name|T
@@ -123,6 +130,13 @@ argument_list|(
 name|reference
 argument_list|)
 return|;
+block|}
+else|else
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 block|}
 end_class
