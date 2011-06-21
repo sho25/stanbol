@@ -553,20 +553,6 @@ name|ImplicitProduces
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataParam
-import|;
-end_import
-
 begin_comment
 comment|/**  *   * @author andrea.nuzzolese  *   */
 end_comment
@@ -740,7 +726,7 @@ name|Response
 name|applyRefactoring
 parameter_list|(
 annotation|@
-name|FormDataParam
+name|FormParam
 argument_list|(
 literal|"recipe"
 argument_list|)
@@ -748,7 +734,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormDataParam
+name|FormParam
 argument_list|(
 literal|"input"
 argument_list|)
@@ -878,25 +864,6 @@ name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
-catch|catch
-parameter_list|(
-name|NoSuchRecipeException
-name|e
-parameter_list|)
-block|{
-comment|// missing recipes result in a status 404
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|NOT_FOUND
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
 return|return
 name|Response
 operator|.
@@ -983,7 +950,7 @@ name|Response
 name|performRefactoring
 parameter_list|(
 annotation|@
-name|FormDataParam
+name|FormParam
 argument_list|(
 literal|"recipe"
 argument_list|)
@@ -991,7 +958,7 @@ name|String
 name|recipe
 parameter_list|,
 annotation|@
-name|FormDataParam
+name|FormParam
 argument_list|(
 literal|"input"
 argument_list|)
