@@ -229,7 +229,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|DocumentationResource
 import|;
@@ -247,7 +247,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|GraphsResource
 import|;
@@ -265,7 +265,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|ONMOntResource
 import|;
@@ -283,7 +283,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|ONMRootResource
 import|;
@@ -301,7 +301,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|ONMScopeOntologyResource
 import|;
@@ -319,7 +319,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|ONMScopeResource
 import|;
@@ -337,7 +337,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|RESTfulResource
 import|;
@@ -355,7 +355,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|RootResource
 import|;
@@ -373,7 +373,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|SessionIDResource
 import|;
@@ -391,7 +391,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 operator|.
 name|SessionResource
 import|;
@@ -486,7 +486,7 @@ specifier|final
 name|String
 name|STATIC_RESOURCE_PATH
 init|=
-literal|"/org/apache/stanbol/ontonet/web/static"
+literal|"/org/apache/stanbol/ontologymanager/web/static"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -494,7 +494,7 @@ specifier|final
 name|String
 name|TEMPLATE_PATH
 init|=
-literal|"/org/apache/stanbol/ontonet/web/templates"
+literal|"/org/apache/stanbol/ontologymanager/web/templates"
 decl_stmt|;
 specifier|private
 name|BundleContext

@@ -11,7 +11,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 package|;
 end_package
 
@@ -587,6 +587,20 @@ name|BaseStanbolResource
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
 begin_class
 annotation|@
 name|Path
@@ -680,7 +694,7 @@ name|Response
 name|addOntology
 parameter_list|(
 annotation|@
-name|QueryParam
+name|FormDataParam
 argument_list|(
 literal|"scope"
 argument_list|)
@@ -688,7 +702,7 @@ name|String
 name|scope
 parameter_list|,
 annotation|@
-name|QueryParam
+name|FormDataParam
 argument_list|(
 literal|"import"
 argument_list|)
@@ -696,7 +710,7 @@ name|InputStream
 name|importOntology
 parameter_list|,
 annotation|@
-name|QueryParam
+name|FormDataParam
 argument_list|(
 literal|"session"
 argument_list|)
@@ -859,7 +873,7 @@ name|Response
 name|addOntology
 parameter_list|(
 annotation|@
-name|QueryParam
+name|FormParam
 argument_list|(
 literal|"scope"
 argument_list|)
@@ -867,7 +881,7 @@ name|String
 name|scope
 parameter_list|,
 annotation|@
-name|QueryParam
+name|FormParam
 argument_list|(
 literal|"session"
 argument_list|)
@@ -875,7 +889,7 @@ name|String
 name|session
 parameter_list|,
 annotation|@
-name|QueryParam
+name|FormParam
 argument_list|(
 literal|"location"
 argument_list|)

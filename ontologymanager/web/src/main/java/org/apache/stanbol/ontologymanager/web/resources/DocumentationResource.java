@@ -11,7 +11,7 @@ name|ontologymanager
 operator|.
 name|web
 operator|.
-name|resource
+name|resources
 package|;
 end_package
 
