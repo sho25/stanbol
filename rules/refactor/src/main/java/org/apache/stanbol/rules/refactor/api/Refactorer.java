@@ -161,7 +161,7 @@ name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 function_decl|;
-comment|/** 	 * The refactoring is perfomed by the {@code SemionRefactorer} by invoking this method. The {@code datasetURI} is the URI 	 * of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF graph in order to obtain the refactoring.  	 *  	 * @param datasetURI {@link UriRef}  	 * @param recipe {@link Recipe} 	 * @return the refactored {@link MGraph} 	 * @throws SemionRefactoringException 	 * @throws NoSuchRecipeException 	 */
+comment|/** 	 * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI} is the URI 	 * of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF graph in order to obtain the refactoring.  	 *  	 * @param datasetURI {@link UriRef}  	 * @param recipe {@link Recipe} 	 * @return the refactored {@link MGraph} 	 * @throws SemionRefactoringException 	 * @throws NoSuchRecipeException 	 */
 specifier|public
 name|OWLOntology
 name|ontologyRefactoring
@@ -174,8 +174,6 @@ name|recipe
 parameter_list|)
 throws|throws
 name|RefactoringException
-throws|,
-name|NoSuchRecipeException
 function_decl|;
 block|}
 end_interface

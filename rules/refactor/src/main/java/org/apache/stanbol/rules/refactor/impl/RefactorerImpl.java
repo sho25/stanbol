@@ -1013,6 +1013,22 @@ name|UpdateAction
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|util
+operator|.
+name|FileManager
+import|;
+end_import
+
 begin_comment
 comment|/**  * The RefactorerImpl is the concrete implementation of the Refactorer interface defined in the KReS APIs. A  * SemionRefacter is able to perform ontology refactorings and mappings.  *   * @author andrea.nuzzolese  *   */
 end_comment

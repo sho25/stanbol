@@ -932,6 +932,8 @@ parameter_list|(
 name|String
 name|inString
 parameter_list|)
+throws|throws
+name|IllegalStateException
 block|{
 block|{
 name|kReSKB
@@ -957,13 +959,6 @@ name|RuleParserImpl
 argument_list|(
 name|reader
 argument_list|)
-decl_stmt|;
-name|StringBuffer
-name|buffer
-init|=
-operator|new
-name|StringBuffer
-argument_list|()
 decl_stmt|;
 try|try
 block|{
