@@ -121,7 +121,7 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|AfterClass
 import|;
 end_import
 
@@ -178,7 +178,7 @@ name|class
 argument_list|)
 decl_stmt|;
 annotation|@
-name|BeforeClass
+name|AfterClass
 specifier|public
 specifier|static
 name|void
@@ -228,7 +228,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Preparing FactStore and deleting "
+literal|"Deleting integration test FactStore "
 operator|+
 name|factstore
 operator|.
