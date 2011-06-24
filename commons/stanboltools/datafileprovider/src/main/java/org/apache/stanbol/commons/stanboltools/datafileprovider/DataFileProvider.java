@@ -58,7 +58,7 @@ specifier|public
 interface|interface
 name|DataFileProvider
 block|{
-comment|/**      * Get the InputStream of the specified data file, according to this provider's      * priority rules.      *      * @param bundleSymbolicName can be used to differentiate      *        between files which have the same name      * @param filename name of the file to open      * @param comments Optional - how to get a more complete version      *        of the data file, licensing information, etc.      *      * @return InputStream to read the file, must be closed by      *         caller when done      *      * @throws IOException problem finding or reading the file      */
+comment|/**      * Get the InputStream of the specified data file, according to this provider's      * priority rules.      *      * @param bundleSymbolicName can be used to differentiate      *        between files which have the same name. It is also used by child      *        DataFileProvider to only process requests of there own bundle.       *        If<code>null</code> any file with the requested name is accepted      *        and any DataFileProvider processes the request      * @param filename name of the file to open      * @param comments Optional - how to get a more complete version      *        of the data file, licensing information, etc.      *      * @return InputStream to read the file, must be closed by      *         caller when done      *      * @throws IOException problem finding or reading the file      */
 name|InputStream
 name|getInputStream
 parameter_list|(

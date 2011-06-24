@@ -480,8 +480,6 @@ name|ClasspathDataFileProvider
 argument_list|(
 name|FAKE_BUNDLE_SYMBOLIC_NAME
 argument_list|)
-argument_list|,
-name|FAKE_BUNDLE_SYMBOLIC_NAME
 argument_list|)
 expr_stmt|;
 block|}

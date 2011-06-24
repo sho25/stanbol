@@ -691,7 +691,7 @@ name|content
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** content parameters: tags at even indexes, content at odd indexes */
+comment|/**       * Content parameters: tags at even indexes, content at odd indexes. If      * content is<code>null</code> than both tags and content are ignored.      */
 specifier|private
 specifier|static
 name|void
@@ -737,6 +737,11 @@ operator|new
 name|StringBuilder
 argument_list|()
 decl_stmt|;
+name|boolean
+name|first
+init|=
+literal|true
+decl_stmt|;
 for|for
 control|(
 name|int
@@ -757,9 +762,8 @@ control|)
 block|{
 if|if
 condition|(
-name|i
-operator|>
-literal|0
+operator|!
+name|first
 condition|)
 block|{
 name|sb
@@ -770,6 +774,23 @@ literal|"<br/>\n"
 argument_list|)
 expr_stmt|;
 block|}
+name|String
+name|value
+init|=
+name|content
+index|[
+name|i
+operator|+
+literal|1
+index|]
+decl_stmt|;
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+condition|)
+block|{
 specifier|final
 name|String
 name|lineTag
@@ -808,12 +829,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-name|content
-index|[
-name|i
-operator|+
-literal|1
-index|]
+name|value
 argument_list|)
 expr_stmt|;
 if|if
@@ -839,6 +855,11 @@ name|append
 argument_list|(
 literal|">"
 argument_list|)
+expr_stmt|;
+block|}
+name|first
+operator|=
+literal|false
 expr_stmt|;
 block|}
 block|}

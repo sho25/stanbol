@@ -194,6 +194,13 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|bundleSymbolicName
+operator|!=
+literal|null
+condition|)
+block|{
 name|sb
 operator|.
 name|append
@@ -208,6 +215,7 @@ argument_list|(
 name|bundleSymbolicName
 argument_list|)
 expr_stmt|;
+block|}
 name|sb
 operator|.
 name|append

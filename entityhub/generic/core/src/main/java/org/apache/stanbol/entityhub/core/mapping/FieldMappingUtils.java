@@ -344,7 +344,7 @@ name|FieldMapping
 name|fm33
 parameter_list|)
 block|{
-comment|//in my companies QM 9000 system
+comment|//in my company's QM 9000 system
 comment|//  ... fm17 stands for critical deviation and
 comment|//  ... fm33 stands for suggestion for improvement
 comment|// and the nested in-line if are good for code quality!

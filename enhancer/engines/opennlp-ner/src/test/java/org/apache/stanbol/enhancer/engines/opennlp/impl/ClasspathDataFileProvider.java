@@ -160,8 +160,14 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
+comment|//If the symbolic name is not null check that is equals to the symbolic
+comment|//name used to create this classpath data file provider
 if|if
 condition|(
+name|bundleSymbolicName
+operator|!=
+literal|null
+operator|&&
 operator|!
 name|symbolicName
 operator|.

@@ -139,35 +139,23 @@ name|ServiceProperties
 import|;
 end_import
 
+begin_comment
+comment|//removed annotations until engine actually does something
+end_comment
+
+begin_comment
+comment|//@Component(configurationFactory = true, policy = ConfigurationPolicy.REQUIRE, // the baseUri is required!
+end_comment
+
+begin_comment
+comment|//    specVersion = "1.1", metatype = true, immediate = true)
+end_comment
+
+begin_comment
+comment|//@Service
+end_comment
+
 begin_class
-annotation|@
-name|Component
-argument_list|(
-name|configurationFactory
-operator|=
-literal|true
-argument_list|,
-name|policy
-operator|=
-name|ConfigurationPolicy
-operator|.
-name|REQUIRE
-argument_list|,
-comment|// the baseUri is required!
-name|specVersion
-operator|=
-literal|"1.1"
-argument_list|,
-name|metatype
-operator|=
-literal|true
-argument_list|,
-name|immediate
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Service
 specifier|public
 class|class
 name|LabelBasedEntityTaggingEngine
