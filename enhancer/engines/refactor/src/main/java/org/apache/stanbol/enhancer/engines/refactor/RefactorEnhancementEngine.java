@@ -431,7 +431,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Representation
+name|Entity
 import|;
 end_import
 
@@ -449,7 +449,7 @@ name|servicesapi
 operator|.
 name|model
 operator|.
-name|Sign
+name|Representation
 import|;
 end_import
 
@@ -700,24 +700,6 @@ operator|.
 name|transformation
 operator|.
 name|OWLAPIToClerezzaConverter
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|reasoners
-operator|.
-name|base
-operator|.
-name|api
-operator|.
-name|Reasoner
 import|;
 end_import
 
@@ -1996,9 +1978,6 @@ name|OWLOntology
 name|getRootOntology
 parameter_list|()
 block|{
-name|InputStream
-name|inputStream
-decl_stmt|;
 try|try
 block|{
 comment|/* 					 * The input stream for the dbpedia ontology is obtained 					 * through the dereferencer component. 					 */
@@ -2952,12 +2931,12 @@ name|entityURI
 argument_list|)
 expr_stmt|;
 comment|/* 		 * Ask to the entityhub the fetch the entity. 		 */
-name|Sign
+name|Entity
 name|entitySign
 init|=
 name|referencedSiteManager
 operator|.
-name|getSign
+name|getEntity
 argument_list|(
 name|entityURI
 argument_list|)
