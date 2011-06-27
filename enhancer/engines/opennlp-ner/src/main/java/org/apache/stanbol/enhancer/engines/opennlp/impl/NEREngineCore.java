@@ -826,7 +826,7 @@ name|model
 init|=
 name|openNLP
 operator|.
-name|buildNameModel
+name|getNameModel
 argument_list|(
 name|name
 argument_list|,
@@ -869,8 +869,6 @@ index|]
 decl_stmt|;
 name|String
 name|text
-init|=
-literal|""
 decl_stmt|;
 if|if
 condition|(
@@ -920,6 +918,15 @@ block|}
 block|}
 else|else
 block|{
+comment|//TODO: change that as soon the Adapter Pattern is used for multiple
+comment|// mimetype support.
+name|StringBuilder
+name|textBuilder
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
 name|Iterator
 argument_list|<
 name|Triple
@@ -955,8 +962,10 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|text
-operator|+=
+name|textBuilder
+operator|.
+name|append
+argument_list|(
 name|it
 operator|.
 name|next
@@ -964,8 +973,16 @@ argument_list|()
 operator|.
 name|getObject
 argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
+name|text
+operator|=
+name|textBuilder
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
 block|}
 if|if
 condition|(
@@ -1056,7 +1073,7 @@ name|nameFinderModel
 init|=
 name|openNLP
 operator|.
-name|buildNameModel
+name|getNameModel
 argument_list|(
 name|typeLabel
 argument_list|,
@@ -1766,7 +1783,7 @@ name|model
 init|=
 name|openNLP
 operator|.
-name|buildNameModel
+name|getNameModel
 argument_list|(
 name|type
 argument_list|,
@@ -1872,7 +1889,7 @@ name|model
 init|=
 name|openNLP
 operator|.
-name|buildSentenceModel
+name|getSentenceModel
 argument_list|(
 name|language
 argument_list|)

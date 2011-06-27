@@ -326,6 +326,7 @@ specifier|public
 class|class
 name|OpenNLP
 block|{
+comment|/**      * added as link to the download location for requested model files      * Will show up in the DataFilePorivder tab in the Apache Felix Web Console      */
 specifier|private
 specifier|static
 specifier|final
@@ -373,17 +374,6 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//    /**
-comment|//     * Holds a map of {@link #registerModelLocation(BundleContext, String...) registered}
-comment|//     * model location. The bundle symbolic name is used as key to avoid a hard
-comment|//     * reference to the parsed {@link BundleContext}.
-comment|//     */
-comment|//    protected Map<String,ModelLocation> modelLocations = new HashMap<String,ModelLocation>();
-comment|//    private static class ModelLocation {
-comment|//        BundleContext bundleContext;
-comment|//        String[] paths;
-comment|//        BundleResourceProvider provider;
-comment|//    }
 comment|/**      * Default constructor      */
 specifier|public
 name|OpenNLP
@@ -411,10 +401,10 @@ operator|=
 name|dataFileProvider
 expr_stmt|;
 block|}
-comment|/**      * Builds a a model for the tokenizing sentenced in a text with the given      * language       * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
+comment|/**      * Getter for the sentence detection model of the parsed language.       * If the model is not yet available a new one is built. The required data      * are loaded by using the {@link DataFileProvider} service.        * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
 specifier|public
 name|SentenceModel
-name|buildSentenceModel
+name|getSentenceModel
 parameter_list|(
 name|String
 name|language
@@ -442,10 +432,10 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      * Build a named entity finder model for the parsed entity type and language      * @param type the type of the named entities to find (person, organization)      * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
+comment|/**      * Getter for the named entity finder model for the parsed entity type and language.      * If the model is not yet available a new one is built. The required data      * are loaded by using the {@link DataFileProvider} service.        * @param type the type of the named entities to find (person, organization)      * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
 specifier|public
 name|TokenNameFinderModel
-name|buildNameModel
+name|getNameModel
 parameter_list|(
 name|String
 name|type
@@ -478,10 +468,10 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      * Builds a tokenizer model for the parsed language      * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
+comment|/**      * Getter for the tokenizer model for the parsed language.      * If the model is not yet available a new one is built. The required data      * are loaded by using the {@link DataFileProvider} service.        * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
 specifier|public
 name|TokenizerModel
-name|buildTokenizerModel
+name|getTokenizerModel
 parameter_list|(
 name|String
 name|language
@@ -509,7 +499,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      * Tries to built a {@link TokenizerModel} for the parsed language. If this      * succeeds a {@link TokenizerME} instance is returned. If no model can be      * loaded the {@link SimpleTokenizer} instance is returned.      * @param language the language or<code>null</code> to build a       * {@link SimpleTokenizer}      * @return the {@link Tokenizer} for the parsed language.      */
+comment|/**      * Getter for the Tokenizer of a given language. This first tries to      * create an {@link TokenizerME} instance if the required       * {@link TokenizerModel} for the parsed language is available. if such a      * model is not available it returns the {@link SimpleTokenizer} instance.      * @param language the language or<code>null</code> to build a       * {@link SimpleTokenizer}      * @return the {@link Tokenizer} for the parsed language.      */
 specifier|public
 name|Tokenizer
 name|getTokenizer
@@ -537,7 +527,7 @@ operator|=
 operator|new
 name|TokenizerME
 argument_list|(
-name|buildTokenizerModel
+name|getTokenizerModel
 argument_list|(
 name|language
 argument_list|)
@@ -628,10 +618,10 @@ return|return
 name|tokenizer
 return|;
 block|}
-comment|/**      * Builds a "part-of-speach" model for the parsed language      * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
+comment|/**      * Getter for the "part-of-speach" model for the parsed language.      * If the model is not yet available a new one is built. The required data      * are loaded by using the {@link DataFileProvider} service.        * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
 specifier|public
 name|POSModel
-name|builtPartOfSpeachModel
+name|getPartOfSpeachModel
 parameter_list|(
 name|String
 name|language
@@ -766,10 +756,10 @@ return|return
 name|model
 return|;
 block|}
-comment|/**      * builds a chunker model for the parsed model      * @param language the language      * @return the model or<code>null</code> if no model data are present      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
+comment|/**      * Getter for the chunker model for the parsed language.      * If the model is not yet available a new one is built. The required data      * are loaded by using the {@link DataFileProvider} service.        * @param language the language      * @return the model or<code>null</code> if no model data are present      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
 specifier|public
 name|ChunkerModel
-name|builtChunkerModel
+name|getChunkerModel
 parameter_list|(
 name|String
 name|language
