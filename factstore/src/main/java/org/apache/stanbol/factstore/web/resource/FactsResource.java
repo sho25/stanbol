@@ -445,6 +445,15 @@ return|return
 name|validationResponse
 return|;
 block|}
+name|logger
+operator|.
+name|info
+argument_list|(
+literal|"Request for getting existing fact schema {}"
+argument_list|,
+name|factSchemaURN
+argument_list|)
+expr_stmt|;
 name|FactSchema
 name|factSchema
 init|=
@@ -559,6 +568,15 @@ return|return
 name|validationResponse
 return|;
 block|}
+name|logger
+operator|.
+name|info
+argument_list|(
+literal|"Request for putting new fact schema {}"
+argument_list|,
+name|factSchemaURN
+argument_list|)
+expr_stmt|;
 name|JsonLdProfile
 name|profile
 init|=
