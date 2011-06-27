@@ -234,8 +234,7 @@ literal|"org.apache.stanbol.*LangIdEnhancementEngine"
 argument_list|,
 literal|"org.apache.stanbol.*NamedEntityExtractionEnhancementEngine"
 argument_list|,
-literal|"org.apache.stanbol.*OpenCalaisEngine"
-argument_list|,
+comment|//"org.apache.stanbol.*OpenCalaisEngine", not available in offline mode
 literal|"org.apache.stanbol.*EntityMentionEnhancementEngine"
 argument_list|,
 literal|"org.apache.stanbol.*CachingDereferencerEngine"

@@ -799,6 +799,24 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|stanboltools
+operator|.
+name|offline
+operator|.
+name|OnlineMode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|enhancer
 operator|.
 name|servicesapi
@@ -898,6 +916,20 @@ operator|.
 name|framework
 operator|.
 name|BundleContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
+name|service
+operator|.
+name|cm
+operator|.
+name|ConfigurationException
 import|;
 end_import
 
@@ -1118,6 +1150,18 @@ name|Reference
 name|TcManager
 name|tcManager
 decl_stmt|;
+comment|/**      * Only activate this engine in online mode      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Reference
+specifier|private
+name|OnlineMode
+name|onlineMode
+decl_stmt|;
 name|BundleContext
 name|bundleContext
 decl_stmt|;
@@ -1156,7 +1200,44 @@ parameter_list|(
 name|String
 name|licenseKey
 parameter_list|)
+throws|throws
+name|ConfigurationException
 block|{
+if|if
+condition|(
+name|licenseKey
+operator|==
+literal|null
+operator|||
+name|licenseKey
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|ConfigurationException
+argument_list|(
+name|LICENSE_KEY
+argument_list|,
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"%s : please configure a OpenCalais License key to use this engine (e.g. by"
+operator|+
+literal|"using the 'Configuration' tab of the Apache Felix Web Console)."
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|licenseKey
@@ -1180,7 +1261,44 @@ parameter_list|(
 name|String
 name|calaisUrl
 parameter_list|)
+throws|throws
+name|ConfigurationException
 block|{
+if|if
+condition|(
+name|calaisUrl
+operator|==
+literal|null
+operator|||
+name|calaisUrl
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|ConfigurationException
+argument_list|(
+name|CALAIS_URL_KEY
+argument_list|,
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"%s : please configure the URL of the OpenCalais Webservice (e.g. by"
+operator|+
+literal|"using the 'Configuration' tab of the Apache Felix Web Console)."
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|calaisUrl
@@ -1441,37 +1559,12 @@ parameter_list|)
 throws|throws
 name|EngineException
 block|{
-if|if
-condition|(
-name|getLicenseKey
-argument_list|()
-operator|==
-literal|null
-operator|||
-name|getLicenseKey
-argument_list|()
-operator|.
-name|trim
-argument_list|()
-operator|.
-name|length
-argument_list|()
-operator|==
-literal|0
-condition|)
-block|{
-comment|//do nothing if no license key is defined
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"No license key defined. The engine will not work!"
-argument_list|)
-expr_stmt|;
-return|return
-name|CANNOT_ENHANCE
-return|;
-block|}
+comment|//Engine will no longer activate if no license key is set
+comment|//        if (getLicenseKey() == null || getLicenseKey().trim().length() == 0) {
+comment|//            //do nothing if no license key is defined
+comment|//            log.warn("No license key defined. The engine will not work!");
+comment|//            return CANNOT_ENHANCE;
+comment|//        }
 name|UriRef
 name|subj
 init|=
@@ -3367,14 +3460,11 @@ specifier|protected
 name|void
 name|activate
 parameter_list|(
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
 name|ComponentContext
 name|ce
 parameter_list|)
+throws|throws
+name|ConfigurationException
 block|{
 if|if
 condition|(
