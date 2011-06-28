@@ -71,13 +71,11 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|web
+name|testing
 operator|.
-name|base
+name|stanbol
 operator|.
-name|format
-operator|.
-name|KRFormat
+name|StanbolTestBase
 import|;
 end_import
 
@@ -86,7 +84,7 @@ specifier|public
 class|class
 name|SessionTest
 extends|extends
-name|OntonetTestBase
+name|StanbolTestBase
 block|{
 specifier|public
 specifier|static
