@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An {@link OntologyInputSource} that recursively tries to hijack all import declarations to the directory  * containing the input ontology (i.e. the parent of the file itself). It can be used for offline ontology  * loading, if one has the entire imports closure available in single directory.<br>  *<br>  * The behaviour of this class is inherited from the {@link AutoIRIMapper} in the OWL API, and so are its  * limitations and fallback policies.  *   * @author alessandro  *   */
+comment|/**  * An {@link OntologyInputSource} that recursively tries to hijack all import declarations to the directory  * containing the input ontology (i.e. to the parent directory of the file itself). It can be used for offline  * ontology loading, if one has the entire imports closure available in single directory.<br>  *<br>  * The behaviour of this class is inherited from the {@link AutoIRIMapper} in the OWL API, and so are its  * limitations and fallback policies.  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -122,6 +122,7 @@ name|ParentPathInputSource
 extends|extends
 name|AbstractOntologyInputSource
 block|{
+comment|/**      * Creates a new parent path ontology input source. When created using this constructor, the only active      * IRI mapper will be the one that maps to any ontology found in the parent directory of the supplied      * file.      *       * @param rootFile      *            the root ontology file. Must not be a directory.      * @throws OWLOntologyCreationException      *             if<code>rootFile</code> does not exist, is not an ontology or one of its imports failed to      *             load.      */
 specifier|public
 name|ParentPathInputSource
 parameter_list|(
@@ -142,7 +143,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * If the developer wishes to recycle an {@link OWLOntologyManager}, they can do so by passing it to the      * method. Please note that recycling ontology managers will increase the likelihood of      * {@link OWLOntologyAlreadyExistsException}s being thrown.      *       * @param rootFile      * @param mgr      *            the ontology manager to recycle. Note that an {@link AutoIRIMapper} will be added to it.      * @throws OWLOntologyCreationException      */
+comment|/**      * Creates a new parent path ontology input source. If the developer wishes to recycle an      * {@link OWLOntologyManager} (e.g. in order to keep the active IRI mappers attached to it), they can do      * so by passing it to the method. Please note that recycling ontology managers will increase the      * likelihood of {@link OWLOntologyAlreadyExistsException}s being thrown.      *       * @param rootFile      *            the root ontology file. Must not be a directory.      * @param mgr      *            the ontology manager to recycle. Note that an {@link AutoIRIMapper} will be added to it.      * @throws OWLOntologyCreationException      *             if<code>rootFile</code> does not exist, is not an ontology or one of its imports failed to      *             load.      */
 specifier|public
 name|ParentPathInputSource
 parameter_list|(
@@ -155,6 +156,25 @@ parameter_list|)
 throws|throws
 name|OWLOntologyCreationException
 block|{
+comment|// Directories are not allowed
+if|if
+condition|(
+name|rootFile
+operator|.
+name|isDirectory
+argument_list|()
+condition|)
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Could not determine root ontology : file "
+operator|+
+name|rootFile
+operator|+
+literal|" is a directory. Only regular files are allowed."
+argument_list|)
+throw|;
 name|AutoIRIMapper
 name|mapper
 init|=

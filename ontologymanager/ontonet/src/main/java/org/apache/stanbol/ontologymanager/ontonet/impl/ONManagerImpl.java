@@ -271,24 +271,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|DuplicateIDException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|ONManager
 import|;
 end_import
@@ -988,7 +970,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The running context of a KReS Ontology Network Manager instance. From this object it is possible to obtain  * factories, indices, registries and what have you.  *   * @author alessandro  *   */
+comment|/**  * The running context of a Stanbol Ontology Network Manager instance. From this object it is possible to obtain  * factories, indices, registries and what have you.  *   * @author alessandro  * @see ONManager  *   */
 end_comment
 
 begin_class
@@ -1010,7 +992,6 @@ name|ONManager
 operator|.
 name|class
 argument_list|)
-comment|// @Property(name="service.ranking",intValue=5)
 specifier|public
 class|class
 name|ONManagerImpl
@@ -1022,156 +1003,6 @@ specifier|private
 class|class
 name|Helper
 block|{
-comment|/**          * Adds the ontology from the given iri to the core space of the given scope.          *           *           * @param scopeID          * @param locationIri          */
-specifier|public
-specifier|synchronized
-name|void
-name|addToCoreSpace
-parameter_list|(
-name|String
-name|scopeID
-parameter_list|,
-name|String
-index|[]
-name|locationIris
-parameter_list|)
-block|{
-name|OntologyScope
-name|scope
-init|=
-name|getScopeRegistry
-argument_list|()
-operator|.
-name|getScope
-argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|scopeID
-argument_list|)
-argument_list|)
-decl_stmt|;
-name|OntologySpace
-name|corespc
-init|=
-name|scope
-operator|.
-name|getCoreSpace
-argument_list|()
-decl_stmt|;
-name|scope
-operator|.
-name|tearDown
-argument_list|()
-expr_stmt|;
-name|corespc
-operator|.
-name|tearDown
-argument_list|()
-expr_stmt|;
-for|for
-control|(
-name|String
-name|locationIri
-range|:
-name|locationIris
-control|)
-block|{
-try|try
-block|{
-name|corespc
-operator|.
-name|addOntology
-argument_list|(
-operator|new
-name|RootOntologyIRISource
-argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|locationIri
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-comment|//
-comment|// corespc.addOntology(
-comment|// createOntologyInputSource(locationIri));
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Added "
-operator|+
-name|locationIri
-operator|+
-literal|" to scope "
-operator|+
-name|scopeID
-operator|+
-literal|" in the core space."
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-comment|// OntologySpace cs = scope.getCustomSpace();
-comment|// if (cs instanceof CustomOntologySpace) {
-comment|// (
-comment|// (CustomOntologySpace)cs).attachCoreSpace((CoreOntologySpace)corespc,
-comment|// false);
-comment|// }
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Core space for scope "
-operator|+
-name|scopeID
-operator|+
-literal|" denied addition of ontology "
-operator|+
-name|locationIri
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Creation of ontology from source "
-operator|+
-name|locationIri
-operator|+
-literal|" failed."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-name|corespc
-operator|.
-name|setUp
-argument_list|()
-expr_stmt|;
-block|}
 comment|/**          * Adds the ontology fromt he given iri to the custom space of the given scope          *           * @param scopeID          * @param locationIri          */
 specifier|public
 specifier|synchronized
@@ -1346,79 +1177,6 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**          * Create an empty scope. The scope is created, registered and activated          *           * @param scopeID          * @return          * @throws DuplicateIDException          */
-specifier|public
-specifier|synchronized
-name|OntologyScope
-name|createScope
-parameter_list|(
-name|String
-name|scopeID
-parameter_list|)
-throws|throws
-name|DuplicateIDException
-block|{
-name|OntologyInputSource
-name|oisbase
-init|=
-operator|new
-name|BlankOntologySource
-argument_list|()
-decl_stmt|;
-name|IRI
-name|scopeIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|scopeID
-argument_list|)
-decl_stmt|;
-comment|/*              * The scope is created by the ScopeFactory or loaded to the scope registry of KReS              */
-name|OntologyScope
-name|scope
-decl_stmt|;
-name|scope
-operator|=
-name|ontologyScopeFactory
-operator|.
-name|createOntologyScope
-argument_list|(
-name|scopeIRI
-argument_list|,
-name|oisbase
-argument_list|)
-expr_stmt|;
-name|scope
-operator|.
-name|setUp
-argument_list|()
-expr_stmt|;
-name|scopeRegistry
-operator|.
-name|registerScope
-argument_list|(
-name|scope
-argument_list|,
-literal|true
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Created scope "
-operator|+
-name|scopeIRI
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-return|return
-name|scope
-return|;
-block|}
 block|}
 annotation|@
 name|Reference
@@ -1519,7 +1277,6 @@ specifier|private
 name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
-comment|// private ClerezzaOntologyStorage storage;
 annotation|@
 name|Reference
 specifier|private
@@ -1591,7 +1348,7 @@ name|configuration
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructor to be invoked by non-OSGi environments.      *       * @param tcm      * @param wtcp      * @param configuration      */
+comment|/**      * Constructor to be invoked by non-OSGi environments.      *       * @param tcm      *            the triple collection manager to be used for storing ontologies.      * @param wtcp      *            the triple collection provider to be used for storing ontologies.      * @param onmconfig      *            the configuration of this ontology network manager.      * @param configuration      *            additional parameters for the ONManager not included in {@link ONManagerConfiguration}.      */
 specifier|public
 name|ONManagerImpl
 parameter_list|(
@@ -1616,7 +1373,7 @@ block|{
 name|this
 argument_list|()
 expr_stmt|;
-comment|// Assume this.tcm and this.wtcp were not filled in by OSGi-DS.
+comment|// Assume this.tcm this.wtcp and this.wtcp were not filled in by OSGi-DS.
 name|this
 operator|.
 name|tcm
