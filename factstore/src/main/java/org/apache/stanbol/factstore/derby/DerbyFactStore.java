@@ -1812,13 +1812,7 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-operator|new
-name|Exception
-argument_list|(
-literal|"Error while inserting new fact"
-argument_list|,
 name|e
-argument_list|)
 throw|;
 block|}
 finally|finally

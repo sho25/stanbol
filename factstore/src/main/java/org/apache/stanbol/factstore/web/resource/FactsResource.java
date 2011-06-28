@@ -989,7 +989,10 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"Error while adding new fact to the database."
+name|e
+operator|.
+name|getMessage
+argument_list|()
 argument_list|)
 operator|.
 name|build
@@ -1088,7 +1091,10 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"Error while adding new facts to the database."
+name|e
+operator|.
+name|getMessage
+argument_list|()
 argument_list|)
 operator|.
 name|build
