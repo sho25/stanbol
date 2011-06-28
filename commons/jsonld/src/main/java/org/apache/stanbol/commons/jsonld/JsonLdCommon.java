@@ -244,6 +244,13 @@ name|String
 name|uri
 parameter_list|)
 block|{
+if|if
+condition|(
+name|uri
+operator|!=
+literal|null
+condition|)
+block|{
 for|for
 control|(
 name|String
@@ -291,6 +298,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 return|return
 name|uri
 return|;
@@ -302,6 +310,13 @@ parameter_list|(
 name|String
 name|uri
 parameter_list|)
+block|{
+if|if
+condition|(
+name|uri
+operator|!=
+literal|null
+condition|)
 block|{
 for|for
 control|(
@@ -347,6 +362,7 @@ argument_list|,
 name|namespace
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 return|return
