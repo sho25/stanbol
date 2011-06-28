@@ -917,6 +917,7 @@ name|registryItem
 operator|instanceof
 name|Registry
 condition|)
+block|{
 for|for
 control|(
 name|RegistryItem
@@ -973,6 +974,7 @@ argument_list|)
 expr_stmt|;
 continue|continue;
 block|}
+block|}
 elseif|else
 if|if
 condition|(
@@ -981,16 +983,16 @@ operator|.
 name|isOntology
 argument_list|()
 condition|)
+block|{
+name|IRI
+name|locationIri
+init|=
+literal|null
+decl_stmt|;
 try|try
 block|{
-name|result
-operator|.
-name|add
-argument_list|(
-name|manager
-operator|.
-name|loadOntologyFromOntologyDocument
-argument_list|(
+name|locationIri
+operator|=
 name|IRI
 operator|.
 name|create
@@ -1005,6 +1007,16 @@ operator|.
 name|getURL
 argument_list|()
 argument_list|)
+expr_stmt|;
+name|result
+operator|.
+name|add
+argument_list|(
+name|manager
+operator|.
+name|loadOntology
+argument_list|(
+name|locationIri
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1015,7 +1027,8 @@ name|OWLOntologyAlreadyExistsException
 name|ex
 parameter_list|)
 block|{
-comment|// E chissenefrega, ce la aggiungiamo lo stesso.
+comment|// We are trying to oad an alread existing ontology,
+comment|// we take it from the manager directly
 name|result
 operator|.
 name|add
@@ -1038,7 +1051,16 @@ name|OWLOntologyCreationIOException
 name|ex
 parameter_list|)
 block|{
-comment|// Che ce potemo fa'?
+comment|// FIXME Log error here
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"[NONFATAL] Cannot load ontology from "
+operator|+
+name|locationIri
+argument_list|)
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -1063,6 +1085,7 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 elseif|else
 if|if
 condition|(
@@ -1071,6 +1094,7 @@ operator|.
 name|isLibrary
 argument_list|()
 condition|)
+block|{
 for|for
 control|(
 name|RegistryItem
@@ -1101,6 +1125,7 @@ name|recurseRegistries
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 return|return
 name|result
@@ -2034,7 +2059,7 @@ operator|new
 name|String
 index|[]
 block|{}
-comment|/*                                         * URLListEditor .parsePreferenceStoreValue (storedStringValue)                                         */
+comment|/* 										 * URLListEditor 										 * .parsePreferenceStoreValue 										 * (storedStringValue) 										 */
 decl_stmt|;
 for|for
 control|(
@@ -2065,14 +2090,14 @@ name|String
 name|registryName
 init|=
 literal|""
-comment|/*                                          * URLListEditor .parseNameValueString(regs[i])[0]                                          */
+comment|/* 										 * URLListEditor 										 * .parseNameValueString(regs[i])[0] 										 */
 decl_stmt|;
 comment|// TODO Find a way to obtain registry locations
 name|String
 name|registryLocation
 init|=
 literal|""
-comment|/*                                              * URLListEditor .parseNameValueString(regs[i])[1]                                              */
+comment|/* 											 * URLListEditor 											 * .parseNameValueString(regs[i])[1] 											 */
 decl_stmt|;
 name|registry1
 operator|=
@@ -2197,7 +2222,7 @@ argument_list|()
 operator|!=
 literal|null
 condition|)
-block|{          }
+block|{  		}
 elseif|else
 if|if
 condition|(
@@ -2206,7 +2231,7 @@ operator|.
 name|isInputStreamAvailable
 argument_list|()
 condition|)
-block|{          }
+block|{  		}
 elseif|else
 if|if
 condition|(
@@ -2215,7 +2240,7 @@ operator|.
 name|isReaderAvailable
 argument_list|()
 condition|)
-block|{          }
+block|{  		}
 return|return
 name|registries
 return|;
@@ -2871,7 +2896,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one registry.      *       * @param physicalIRI      * @return      */
+comment|/** 	 * The ontology at<code>physicalIRI</code> may in turn include more than 	 * one registry. 	 *  	 * @param physicalIRI 	 * @return 	 */
 specifier|public
 name|Set
 argument_list|<
@@ -3108,12 +3133,12 @@ argument_list|)
 expr_stmt|;
 block|}
 finally|finally
-block|{}
+block|{ 		}
 return|return
 name|results
 return|;
 block|}
-comment|/**      * Requires that Registry objects are created earlier. Problem is, we might not know their names a priori.      *       * @param registry      * @return      * @throws RegistryContentException      */
+comment|/** 	 * Requires that Registry objects are created earlier. Problem is, we might 	 * not know their names a priori. 	 *  	 * @param registry 	 * @return 	 * @throws RegistryContentException 	 */
 specifier|private
 name|Registry
 name|setupRegistry
