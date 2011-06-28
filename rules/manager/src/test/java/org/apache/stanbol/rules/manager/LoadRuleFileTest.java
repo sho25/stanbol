@@ -526,9 +526,9 @@ name|configuration2
 operator|.
 name|put
 argument_list|(
-name|RuleStoreImpl
+name|RuleStore
 operator|.
-name|RULE_ONTOLOGY_NAMESPACE
+name|RULE_NAMESPACE
 argument_list|,
 literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
 argument_list|)

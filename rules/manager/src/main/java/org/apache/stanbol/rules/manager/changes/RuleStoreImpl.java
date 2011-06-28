@@ -718,6 +718,22 @@ name|RuleStoreImpl
 implements|implements
 name|RuleStore
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|_RULE_ONTOLOGY_DEFAULT
+init|=
+literal|""
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|_RULE_NAMESPACE_DEFAULT
+init|=
+literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+decl_stmt|;
 annotation|@
 name|Reference
 name|ONManager
@@ -726,33 +742,39 @@ decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
+name|name
+operator|=
+name|RuleStore
+operator|.
+name|RULE_ONTOLOGY
+argument_list|,
 name|value
 operator|=
-literal|""
+name|_RULE_ONTOLOGY_DEFAULT
 argument_list|)
-specifier|public
-specifier|static
-specifier|final
+specifier|private
 name|String
-name|RULE_ONTOLOGY
-init|=
-literal|"rule.ontology"
+name|ruleOntologyLocation
 decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
+name|name
+operator|=
+name|RuleStore
+operator|.
+name|RULE_NAMESPACE
+argument_list|,
 name|value
 operator|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+name|_RULE_NAMESPACE_DEFAULT
 argument_list|)
-specifier|public
-specifier|static
-specifier|final
+specifier|private
 name|String
-name|RULE_ONTOLOGY_NAMESPACE
-init|=
-literal|"rule.ontology.namespace"
+name|ruleNS
 decl_stmt|;
+comment|// @Property(value = "http://kres.iks-project.eu/ontology/meta/rmi.owl#")
+comment|// public static final String RULE_ONTOLOGY_NAMESPACE = "rule.ontology.namespace";
 specifier|private
 specifier|final
 name|Logger
@@ -769,10 +791,6 @@ decl_stmt|;
 specifier|private
 name|OWLOntology
 name|owlmodel
-decl_stmt|;
-specifier|private
-name|String
-name|file
 decl_stmt|;
 specifier|private
 name|String
@@ -794,13 +812,12 @@ specifier|private
 name|RuleParserImpl
 name|kReSRuleParser
 decl_stmt|;
-comment|/**      * This construct returns RuleStoreImpl object with inside an ontology where to store the rules.      *       * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RuleStoreImpl instances do need to be configured! YOU      * NEED TO USE {@link #RuleStoreImpl(ONManager, Dictionary)} or its overloads, to parse the      * configuration and then initialise the rule store if running outside a OSGI environment.      */
+comment|/**      * This construct returns RuleStoreImpl object with inside an ontology where to store the rules.      *       * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RuleStoreImpl instances do need to be configured! YOU      * NEED TO USE {@link #RuleStoreImpl(ONManager, Dictionary)} or its overloads, to parse the configuration      * and then initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|RuleStoreImpl
 parameter_list|()
-block|{
-comment|/*      * The constructor should be empty as some issue derives from a filled one. The old version can be invoked      * with RuleStoreImpl(null)      */
-block|}
+block|{}
+comment|/**      * To be invoked by non-OSGi environments.      *       * @param configuration      */
 specifier|public
 name|RuleStoreImpl
 parameter_list|(
@@ -825,7 +842,7 @@ name|onManager
 operator|=
 name|onm
 expr_stmt|;
-comment|//activate(configuration);
+comment|// activate(configuration);
 block|}
 comment|/**      * This construct returns an ontology where to store the rules.      *       * @param filepath      *            {Ontology file path previously stored.}      */
 specifier|public
@@ -846,8 +863,7 @@ name|String
 name|filepath
 parameter_list|)
 block|{
-comment|/*          * FIXME : This won't work if the activate() method is called at the end of the constructor, like it          * is for other components. Constructors should not override activate().          */
-comment|// This recursive constructor call will also invoke activate()
+comment|/*          * FIXME : This won't work if the activate() method is called at the end of the constructor, like it          * is for other components. Constructors should not override activate().          *           * Normally, this recursive constructor call should also invoke activate()          */
 name|this
 argument_list|(
 name|onm
@@ -889,21 +905,21 @@ name|respath
 init|=
 literal|"KReSConf/"
 decl_stmt|;
-comment|//"src/main/resources/";
+comment|// "src/main/resources/";
 name|String
 name|filepath2
 init|=
 literal|"rmi_config.owl"
 decl_stmt|;
-comment|//"RuleOntology/rmi_config.owl";
-comment|//                userdir = userdir.substring(0, userdir.lastIndexOf("kres.") + 5) + "rules/";
+comment|// "RuleOntology/rmi_config.owl";
+comment|// userdir = userdir.substring(0, userdir.lastIndexOf("kres.") + 5) + "rules/";
 name|userdir
 operator|+=
 literal|"/"
 expr_stmt|;
 name|this
 operator|.
-name|file
+name|ruleOntologyLocation
 operator|=
 name|userdir
 operator|+
@@ -918,7 +934,7 @@ operator|=
 operator|new
 name|File
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 expr_stmt|;
 name|owlfile
@@ -928,11 +944,11 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
-comment|//                InputStream is = this.getClass().getResourceAsStream("/RuleOntology/rmi_config.owl");
-comment|//                URL url = this.getClass().getResource("/RuleOntology/rmi_config.owl");
-comment|//                System.err.println("DIOCANE "+url.toURI());
-comment|//               this.owlfile = new File(url.toURI());
-comment|//               owlfile.setWritable(true);
+comment|// InputStream is = this.getClass().getResourceAsStream("/RuleOntology/rmi_config.owl");
+comment|// URL url = this.getClass().getResource("/RuleOntology/rmi_config.owl");
+comment|// System.err.println("DIOCANE "+url.toURI());
+comment|// this.owlfile = new File(url.toURI());
+comment|// owlfile.setWritable(true);
 name|OWLOntologyManager
 name|owlmanager
 init|=
@@ -1025,7 +1041,7 @@ else|else
 block|{
 name|this
 operator|.
-name|file
+name|ruleOntologyLocation
 operator|=
 name|filepath
 expr_stmt|;
@@ -1036,7 +1052,7 @@ operator|=
 operator|new
 name|File
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 expr_stmt|;
 name|owlfile
@@ -1276,9 +1292,8 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{
-name|this
-operator|.
-name|file
+comment|// TODO This bit is the "good" code, and any non-default constructor should call it.
+name|ruleOntologyLocation
 operator|=
 operator|(
 name|String
@@ -1287,11 +1302,21 @@ name|configuration
 operator|.
 name|get
 argument_list|(
+name|RuleStore
+operator|.
 name|RULE_ONTOLOGY
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
+if|if
+condition|(
+name|ruleOntologyLocation
+operator|==
+literal|null
+condition|)
+name|ruleOntologyLocation
+operator|=
+name|_RULE_ONTOLOGY_DEFAULT
+expr_stmt|;
 name|ruleOntologyNS
 operator|=
 operator|(
@@ -1301,16 +1326,31 @@ name|configuration
 operator|.
 name|get
 argument_list|(
-name|RULE_ONTOLOGY_NAMESPACE
+name|RuleStore
+operator|.
+name|RULE_NAMESPACE
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|file
+name|ruleOntologyNS
+operator|==
+literal|null
+condition|)
+name|ruleOntologyNS
+operator|=
+name|_RULE_NAMESPACE_DEFAULT
+expr_stmt|;
+comment|// this.file = (String) configuration.get(RULE_ONTOLOGY);
+comment|// this.ruleOntologyNS = (String) configuration.get(RULE_NAMESPACE);
+comment|// This about KReSConf is no good
+if|if
+condition|(
+name|ruleOntologyLocation
 operator|==
 literal|null
 operator|||
-name|file
+name|ruleOntologyLocation
 operator|.
 name|equals
 argument_list|(
@@ -1362,7 +1402,7 @@ condition|)
 block|{
 name|this
 operator|.
-name|file
+name|ruleOntologyLocation
 operator|=
 name|filedir
 expr_stmt|;
@@ -1380,7 +1420,7 @@ argument_list|(
 operator|new
 name|File
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1513,7 +1553,7 @@ operator|.
 name|mkdir
 argument_list|()
 expr_stmt|;
-name|file
+name|ruleOntologyLocation
 operator|=
 literal|"./KReSConf/rmi_config.owl"
 expr_stmt|;
@@ -1527,7 +1567,7 @@ operator|=
 operator|new
 name|FileOutputStream
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 expr_stmt|;
 name|OWLManager
@@ -1595,7 +1635,7 @@ init|=
 operator|new
 name|File
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 decl_stmt|;
 try|try
@@ -2291,7 +2331,7 @@ block|{
 return|return
 name|this
 operator|.
-name|file
+name|ruleOntologyLocation
 return|;
 block|}
 comment|/**      * To save some change to the ontology loaded in the store.      *       * FIXME: save using the Clerezza TcManager, or the KReS wrapper for it      */
@@ -2311,7 +2351,7 @@ if|if
 condition|(
 name|this
 operator|.
-name|file
+name|ruleOntologyLocation
 operator|.
 name|isEmpty
 argument_list|()
@@ -2329,7 +2369,7 @@ argument_list|)
 decl_stmt|;
 name|this
 operator|.
-name|file
+name|ruleOntologyLocation
 operator|=
 name|System
 operator|.
@@ -2353,7 +2393,7 @@ operator|=
 operator|new
 name|FileOutputStream
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 expr_stmt|;
 name|OWLManager
@@ -2419,7 +2459,7 @@ operator|=
 operator|new
 name|FileOutputStream
 argument_list|(
-name|file
+name|ruleOntologyLocation
 argument_list|)
 expr_stmt|;
 name|this
@@ -2818,7 +2858,7 @@ operator|.
 name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
-comment|/**          * Add the rule to the recipe in the rule ontology managed by the RuleStore. First we define the          * object property hasRule and then we add the literal that contains the rule in Rule Syntax to          * the recipe individual.          */
+comment|/**          * Add the rule to the recipe in the rule ontology managed by the RuleStore. First we define the          * object property hasRule and then we add the literal that contains the rule in Rule Syntax to the          * recipe individual.          */
 name|String
 name|ruleNS
 init|=
