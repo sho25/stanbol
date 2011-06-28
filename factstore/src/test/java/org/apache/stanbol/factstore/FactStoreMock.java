@@ -13,6 +13,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -40,6 +50,22 @@ operator|.
 name|api
 operator|.
 name|FactStore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|factstore
+operator|.
+name|model
+operator|.
+name|Fact
 import|;
 end_import
 
@@ -132,6 +158,37 @@ comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|addFact
+parameter_list|(
+name|Fact
+name|fact
+parameter_list|)
+throws|throws
+name|Exception
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|addFacts
+parameter_list|(
+name|Set
+argument_list|<
+name|Fact
+argument_list|>
+name|factSet
+parameter_list|)
+throws|throws
+name|Exception
+block|{
+comment|// TODO Auto-generated method stub
 block|}
 block|}
 end_class
