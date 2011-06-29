@@ -965,7 +965,7 @@ block|{
 name|parser
 operator|.
 name|start
-argument_list|( )
+argument_list|()
 expr_stmt|;
 block|}
 catch|catch
@@ -7185,14 +7185,14 @@ specifier|final
 name|void
 name|enable_tracing
 parameter_list|()
-block|{   }
+block|{}
 comment|/** Disable tracing. */
 specifier|public
 specifier|final
 name|void
 name|disable_tracing
 parameter_list|()
-block|{   }
+block|{}
 block|}
 end_class
 
