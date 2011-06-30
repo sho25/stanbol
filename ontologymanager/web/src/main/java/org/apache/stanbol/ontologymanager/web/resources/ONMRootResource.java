@@ -353,6 +353,24 @@ name|web
 operator|.
 name|base
 operator|.
+name|ContextHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
 name|format
 operator|.
 name|KRFormat
@@ -442,94 +460,35 @@ operator|=
 operator|(
 name|ONManager
 operator|)
-name|servletContext
+name|ContextHelper
 operator|.
-name|getAttribute
+name|getServiceFromContext
 argument_list|(
 name|ONManager
 operator|.
 name|class
-operator|.
-name|getName
-argument_list|()
+argument_list|,
+name|servletContext
 argument_list|)
 expr_stmt|;
-comment|//      this.storage = (OntologyStorage) servletContext
-comment|//      .getAttribute(OntologyStorage.class.getName());
-comment|// Contingency code for missing components follows.
-comment|/*  * FIXME! The following code is required only for the tests. This should  * be removed and the test should work without this code.  */
-if|if
-condition|(
-name|onm
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"No KReSONManager in servlet context. Instantiating manually..."
-argument_list|)
-expr_stmt|;
-name|onm
-operator|=
-operator|new
-name|ONManagerImpl
-argument_list|(
-operator|new
-name|TcManager
-argument_list|()
-argument_list|,
-literal|null
-argument_list|,
-operator|new
-name|Hashtable
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
 name|this
 operator|.
 name|storage
 operator|=
-name|onm
-operator|.
-name|getOntologyStore
-argument_list|()
-expr_stmt|;
-if|if
-condition|(
-name|storage
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"No OntologyStorage in servlet context. Instantiating manually..."
-argument_list|)
-expr_stmt|;
-name|storage
-operator|=
-operator|new
+operator|(
 name|ClerezzaOntologyStorage
+operator|)
+name|ContextHelper
+operator|.
+name|getServiceFromContext
 argument_list|(
-operator|new
-name|TcManager
-argument_list|()
+name|ClerezzaOntologyStorage
+operator|.
+name|class
 argument_list|,
-literal|null
+name|servletContext
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 comment|/**      * RESTful DELETE method that clears the entire scope registry and managed ontology store.      */
 annotation|@
@@ -718,61 +677,6 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|// @Path("upload")
-comment|// @Consumes(MediaType.MULTIPART_FORM_DATA)
-comment|// @POST
-comment|// public void uploadDumb(@FormParam("file") InputStream is) {
-comment|// Writer writer = new StringWriter();
-comment|//
-comment|// char[] buffer = new char[1024];
-comment|//
-comment|// try {
-comment|//
-comment|// Reader reader = new BufferedReader(
-comment|//
-comment|// new InputStreamReader(is, "UTF-8"));
-comment|//
-comment|// int n;
-comment|//
-comment|// while ((n = reader.read(buffer)) != -1) {
-comment|//
-comment|// writer.write(buffer, 0, n);
-comment|//
-comment|// }
-comment|// } catch (IOException ex) {
-comment|// throw new WebApplicationException(ex);
-comment|// } finally {
-comment|//
-comment|// try {
-comment|// is.close();
-comment|// } catch (IOException e) {
-comment|// throw new WebApplicationException(e);
-comment|// }
-comment|//
-comment|// }
-comment|// System.out.println(writer.toString());
-comment|// }
-comment|//
-comment|// @Path("formdata")
-comment|// @Consumes(MediaType.MULTIPART_FORM_DATA)
-comment|// @POST
-comment|// public void uploadUrlFormData(
-comment|// @FormDataParam("file") List<FormDataBodyPart> parts,
-comment|// @FormDataParam("submit") FormDataBodyPart submit)
-comment|// throws IOException, ParseException {
-comment|//
-comment|// System.out.println("XXXX: " + submit.getMediaType());
-comment|// System.out.println("XXXX: "
-comment|// + submit.getHeaders().getFirst("Content-Type"));
-comment|//
-comment|// for (FormDataBodyPart bp : parts) {
-comment|// System.out.println(bp.getMediaType());
-comment|// System.out.println(bp.getHeaders().get("Content-Disposition"));
-comment|// System.out.println(bp.getParameterizedHeaders().getFirst(
-comment|// "Content-Disposition").getParameters().get("name"));
-comment|// bp.cleanup();
-comment|// }
-comment|// }
 block|}
 end_class
 
