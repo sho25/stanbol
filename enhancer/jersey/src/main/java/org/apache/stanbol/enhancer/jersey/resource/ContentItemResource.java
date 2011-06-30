@@ -105,6 +105,26 @@ name|servicesapi
 operator|.
 name|rdf
 operator|.
+name|OntologicalClasses
+operator|.
+name|SKOS_CONCEPT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
 name|Properties
 operator|.
 name|GEO_LAT
@@ -949,6 +969,20 @@ name|EntityExtractionSummary
 argument_list|>
 name|places
 decl_stmt|;
+specifier|protected
+name|Collection
+argument_list|<
+name|EntityExtractionSummary
+argument_list|>
+name|concepts
+decl_stmt|;
+specifier|protected
+name|Collection
+argument_list|<
+name|EntityExtractionSummary
+argument_list|>
+name|others
+decl_stmt|;
 specifier|public
 name|ContentItemResource
 parameter_list|(
@@ -1221,6 +1255,30 @@ operator|+
 literal|"/home/images/compass_48.png"
 argument_list|)
 expr_stmt|;
+name|defaultThumbnails
+operator|.
+name|put
+argument_list|(
+name|SKOS_CONCEPT
+argument_list|,
+name|getStaticRootUrl
+argument_list|()
+operator|+
+literal|"/home/images/black_gear_48.png"
+argument_list|)
+expr_stmt|;
+name|defaultThumbnails
+operator|.
+name|put
+argument_list|(
+literal|null
+argument_list|,
+name|getStaticRootUrl
+argument_list|()
+operator|+
+literal|"/home/images/unknown_48.png"
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|String
@@ -1364,6 +1422,35 @@ name|Collection
 argument_list|<
 name|EntityExtractionSummary
 argument_list|>
+name|getOtherOccurrences
+parameter_list|()
+throws|throws
+name|ParseException
+block|{
+if|if
+condition|(
+name|others
+operator|==
+literal|null
+condition|)
+block|{
+name|others
+operator|=
+name|getOccurrences
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|others
+return|;
+block|}
+specifier|public
+name|Collection
+argument_list|<
+name|EntityExtractionSummary
+argument_list|>
 name|getOrganizationOccurrences
 parameter_list|()
 throws|throws
@@ -1422,6 +1509,35 @@ name|Collection
 argument_list|<
 name|EntityExtractionSummary
 argument_list|>
+name|getConceptOccurrences
+parameter_list|()
+throws|throws
+name|ParseException
+block|{
+if|if
+condition|(
+name|concepts
+operator|==
+literal|null
+condition|)
+block|{
+name|concepts
+operator|=
+name|getOccurrences
+argument_list|(
+name|SKOS_CONCEPT
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|concepts
+return|;
+block|}
+specifier|public
+name|Collection
+argument_list|<
+name|EntityExtractionSummary
+argument_list|>
 name|getOccurrences
 parameter_list|(
 name|UriRef
@@ -1438,46 +1554,141 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|String
-name|q
+name|StringBuilder
+name|queryBuilder
 init|=
-literal|"PREFIX enhancer:<http://fise.iks-project.eu/ontology/> "
-operator|+
-literal|"PREFIX dc:<http://purl.org/dc/terms/> "
-operator|+
-literal|"SELECT ?textAnnotation ?text ?entity ?entity_label ?confidence WHERE { "
-operator|+
-literal|"  ?textAnnotation a enhancer:TextAnnotation ."
-operator|+
-literal|"  ?textAnnotation dc:type %s ."
-operator|+
-literal|"  ?textAnnotation enhancer:selected-text ?text ."
-operator|+
-literal|" OPTIONAL {"
-operator|+
-literal|"   ?entityAnnotation dc:relation ?textAnnotation ."
-operator|+
-literal|"   ?entityAnnotation a enhancer:EntityAnnotation . "
-operator|+
-literal|"   ?entityAnnotation enhancer:entity-reference ?entity ."
-operator|+
-literal|"   ?entityAnnotation enhancer:entity-label ?entity_label ."
-operator|+
-literal|"   ?entityAnnotation enhancer:confidence ?confidence . }"
-operator|+
-literal|"} ORDER BY ?text "
+operator|new
+name|StringBuilder
+argument_list|()
 decl_stmt|;
-name|q
-operator|=
-name|String
+name|queryBuilder
 operator|.
-name|format
+name|append
 argument_list|(
-name|q
-argument_list|,
-name|type
+literal|"PREFIX enhancer:<http://fise.iks-project.eu/ontology/> "
 argument_list|)
 expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"PREFIX dc:<http://purl.org/dc/terms/> "
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"SELECT ?textAnnotation ?text ?entity ?entity_label ?confidence WHERE { "
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"  ?textAnnotation a enhancer:TextAnnotation ."
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|type
+operator|!=
+literal|null
+condition|)
+block|{
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"  ?textAnnotation dc:type "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|type
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" . "
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|//append a filter that this value needs to be non existent
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|" OPTIONAL { ?textAnnotation dc:type ?type } . "
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|" FILTER(!bound(?type)) "
+argument_list|)
+expr_stmt|;
+block|}
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"  ?textAnnotation enhancer:selected-text ?text ."
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|" OPTIONAL {"
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"   ?entityAnnotation dc:relation ?textAnnotation ."
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"   ?entityAnnotation a enhancer:EntityAnnotation . "
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"   ?entityAnnotation enhancer:entity-reference ?entity ."
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"   ?entityAnnotation enhancer:entity-label ?entity_label ."
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"   ?entityAnnotation enhancer:confidence ?confidence . }"
+argument_list|)
+expr_stmt|;
+name|queryBuilder
+operator|.
+name|append
+argument_list|(
+literal|"} ORDER BY ?text "
+argument_list|)
+expr_stmt|;
+comment|//        String queryString = String.format(queryBuilder.toString(), type);
 name|SelectQuery
 name|query
 init|=
@@ -1491,7 +1702,10 @@ argument_list|()
 operator|.
 name|parse
 argument_list|(
-name|q
+name|queryBuilder
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|ResultSet
@@ -1584,11 +1798,11 @@ continue|continue;
 block|}
 comment|// TODO: collect the selected text and contexts of subsumed
 comment|// annotations
-name|TypedLiteral
+name|Literal
 name|textLiteral
 init|=
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|mapping
 operator|.
@@ -1600,16 +1814,10 @@ decl_stmt|;
 name|String
 name|text
 init|=
-name|lf
-operator|.
-name|createObject
-argument_list|(
-name|String
-operator|.
-name|class
-argument_list|,
 name|textLiteral
-argument_list|)
+operator|.
+name|getLexicalForm
+argument_list|()
 decl_stmt|;
 name|EntityExtractionSummary
 name|entity
