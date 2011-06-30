@@ -1490,6 +1490,8 @@ operator|.
 name|error
 argument_list|(
 literal|"1 Rule Store: no rule ontology available."
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 block|}
@@ -1553,6 +1555,8 @@ operator|.
 name|error
 argument_list|(
 literal|"Rule Store: no rule ontology available."
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 block|}
@@ -1659,18 +1663,40 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|// Rule ontology location is set
+comment|// Rule ontology location is set. Prefer absolute IRIs to files.
 else|else
 block|{
-name|File
+name|IRI
 name|pathIri
 init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|ruleOntologyLocation
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|pathIri
+operator|.
+name|isAbsolute
+argument_list|()
+condition|)
+name|pathIri
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
 operator|new
 name|File
 argument_list|(
 name|ruleOntologyLocation
 argument_list|)
-decl_stmt|;
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 name|owlmodel
@@ -1678,7 +1704,7 @@ operator|=
 name|mgr
 comment|/* OWLManager.createOWLOntologyManager() */
 operator|.
-name|loadOntologyFromOntologyDocument
+name|loadOntology
 argument_list|(
 name|pathIri
 argument_list|)
@@ -1711,6 +1737,8 @@ operator|.
 name|error
 argument_list|(
 literal|"Rule Store: no rule ontology available."
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 block|}
