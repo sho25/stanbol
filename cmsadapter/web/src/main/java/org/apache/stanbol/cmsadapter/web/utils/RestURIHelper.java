@@ -107,6 +107,8 @@ name|ontologyURI
 parameter_list|)
 block|{
 return|return
+literal|"/"
+operator|+
 name|ONTOLOGY
 operator|+
 literal|"/"

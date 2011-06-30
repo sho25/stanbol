@@ -205,6 +205,26 @@ name|model
 operator|.
 name|mapping
 operator|.
+name|BridgeDefinitions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|cmsadapter
+operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
+name|mapping
+operator|.
 name|ConceptBridge
 import|;
 end_import
@@ -522,6 +542,10 @@ operator|.
 name|OntClass
 import|;
 end_import
+
+begin_comment
+comment|/**  * This processor can process {@link ClassificationObject}s. On  * {@link #createDecoratedObjects(List, MappingEngine)} call, for each CMS Object of type  * {@link ClassificationObject} an OWL Class is created. Also if there is a property mapping defined in  * {@link BridgeDefinitions} then an instance of {@link PropertyProcesser} will be used to process these  * definitions.<br/>  * If there is a {@link SubsumptionBridge} service available, children of any {@link ClassificationObject}  * will be processed by subsumption processer.  *   * On {@link #deleteObjects(List, MappingEngine)} call, for each CMS Object of the type  * {@link ClassificationObject} the previously created resource is found and all the triples of which the  * resource is the subject is deleted.  *   * @author Suat  *   */
+end_comment
 
 begin_class
 annotation|@

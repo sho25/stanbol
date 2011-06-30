@@ -247,6 +247,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|/**      * Parses an XML document and returns corresponding {@link BridgeDefinitions} instance.      * @param xmlContent String representation of XML Document.      * @return {@link BridgeDefinitions} instance or null if unsuccessful.      */
 specifier|public
 specifier|static
 name|BridgeDefinitions
@@ -341,6 +342,7 @@ return|return
 name|bridgeDefinitions
 return|;
 block|}
+comment|/**      * Converts an object to its XML form.      * @param object Any object that can be created by {@link ObjectFactory}       * @return XML Document as a string.      */
 specifier|public
 specifier|static
 name|String

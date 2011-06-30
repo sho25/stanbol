@@ -15,22 +15,11 @@ name|repository
 package|;
 end_package
 
-begin_comment
-comment|//Used for properties like cmis:localname, cmis:localnamespace
-end_comment
-
 begin_enum
 specifier|public
 enum|enum
 name|CMISProperty
 block|{
-comment|//    LOCAL_NAME("cmis:localname"),
-comment|//    LOCAL_NAMESPACE("cmis:localnamespace"),
-name|PATH
-argument_list|(
-literal|"cmis:path"
-argument_list|)
-block|,
 name|ID
 argument_list|(
 literal|"cmis:id"

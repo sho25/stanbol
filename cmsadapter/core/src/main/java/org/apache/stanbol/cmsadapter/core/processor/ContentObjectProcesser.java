@@ -471,6 +471,10 @@ name|OntClass
 import|;
 end_import
 
+begin_comment
+comment|/**  * This processor can process {@link ContentObject}s. On {@link #createDecoratedObjects(List, MappingEngine)}  * call, for each CMS Object of type {@link ContentObject} an OWL Individual is created. Also if there is a  * property mapping defined in {@link BridgeDefinitions} then an instance of {@link PropertyProcesser} will be  * used to process these definitions.<br/>  *   * On {@link #deleteObjects(List, MappingEngine)} call, for each CMS Object of the type {@link ContentObject}  * the previously created resource is found and all the triples of which the resource is the subject is  * deleted.  *   * @author Suat  *   */
+end_comment
+
 begin_class
 annotation|@
 name|Component

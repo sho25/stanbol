@@ -301,6 +301,10 @@ name|PropertyDefinition
 import|;
 end_import
 
+begin_comment
+comment|/**  * This class converts objects from {@linkplain org.apache.chemistry.opencmis.client.api} to objects from  * {@linkplain org.apache.stanbol.cmsadapter.servicesapi.model.web}  *   * @author cihan  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class

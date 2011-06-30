@@ -55,7 +55,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-name|CMIS_DOCUMENT_BY_NAME
+name|CMIS_FOLDER_BY_NAME
 argument_list|,
 name|name
 argument_list|)

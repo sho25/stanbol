@@ -35,6 +35,24 @@ name|org
 operator|.
 name|apache
 operator|.
+name|chemistry
+operator|.
+name|opencmis
+operator|.
+name|commons
+operator|.
+name|definitions
+operator|.
+name|TypeDefinition
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|cmsadapter
@@ -67,23 +85,31 @@ name|RepositoryAccessException
 import|;
 end_import
 
+begin_comment
+comment|/**  * Decorated form of {@link ObjectTypeDefinition}. While {@link ObjectTypeDefinition} is completely separated  * from the repository it is generated, {@link DObjectType} is able to reconnect to the repository and fetch  * any data that is not present in {@link ObjectTypeDefinition}.</br> Details of when the repository is  * determined by {@link AdapterMode}s. See {@link DObjectAdapter} and {@link AdapterMode} for more details.  *   * @author cihan  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
 name|DObjectType
 block|{
+comment|/**      *       * @return Unique identifier of underlying {@link ObjectTypeDefinition}      */
 name|String
 name|getID
 parameter_list|()
 function_decl|;
+comment|/**      *       * @return Localname of underlying {@link ObjectTypeDefinition}      *       */
 name|String
 name|getName
 parameter_list|()
 function_decl|;
+comment|/**      *       * @return Namespace of underlying {@link ObjectTypeDefinition}      */
 name|String
 name|getNamespace
 parameter_list|()
 function_decl|;
+comment|/**      *       * @return Property definitions of underlying {@link ObjectTypeDefinition}, wrapped as {@link DPropertyDefinition}       * @throws RepositoryAccessException      *             If repository can not be accessed in<b>ONLINE</b> mode.      */
 name|List
 argument_list|<
 name|DPropertyDefinition
@@ -93,6 +119,7 @@ parameter_list|()
 throws|throws
 name|RepositoryAccessException
 function_decl|;
+comment|/**      *       * @return Parent type definitions of underlying {@link ObjectTypeDefinition}, wrapped as {@link DObjectType}       * @throws RepositoryAccessException      *             If repository can not be accessed in<b>ONLINE</b> mode.      */
 name|List
 argument_list|<
 name|DObjectType
@@ -102,6 +129,7 @@ parameter_list|()
 throws|throws
 name|RepositoryAccessException
 function_decl|;
+comment|/**      *       * @return Child type definitions of underlying {@link ObjectTypeDefinition}, wrapped as {@link DObjectType}       * @throws RepositoryAccessException      *             If repository can not be accessed in<b>ONLINE</b> mode.      */
 name|List
 argument_list|<
 name|DObjectType
@@ -111,6 +139,7 @@ parameter_list|()
 throws|throws
 name|RepositoryAccessException
 function_decl|;
+comment|/**      *       * @return Underlying {@link ObjectTypeDefinition}      */
 name|ObjectTypeDefinition
 name|getInstance
 parameter_list|()

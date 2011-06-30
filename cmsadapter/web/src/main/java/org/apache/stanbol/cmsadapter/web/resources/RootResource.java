@@ -133,6 +133,7 @@ name|RootResource
 extends|extends
 name|BaseStanbolResource
 block|{
+comment|/**      * Simply redirects user to CMS Adapter's wiki page at IKS Wiki.       * @return        */
 annotation|@
 name|GET
 specifier|public

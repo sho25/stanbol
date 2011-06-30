@@ -99,6 +99,10 @@ name|PropertyDefinition
 import|;
 end_import
 
+begin_comment
+comment|/**  * Adapter Class for converting CMS model objects to Decorated CMS objects.  * The former group has no access to the original CMS repository they are extracted from.  * The latter can be configured to access to the repository if needed.  * @author cihan  *  */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
@@ -132,11 +136,12 @@ name|Property
 name|property
 parameter_list|)
 function_decl|;
+comment|/**      * Session object to connect Remote CMS repository.      * @return      */
 name|Object
 name|getSession
 parameter_list|()
 function_decl|;
-comment|/**      * Mode must be set before fetching an object from CMS. Otherwise inconsistent/erroneous behavior can be      * faced.      *       * @param mode      * @return      */
+comment|/**      * Mode must be set before fetching an object from CMS. Otherwise inconsistent/erroneous behavior can be      * faced.      *       * @param mode      */
 name|void
 name|setMode
 parameter_list|(

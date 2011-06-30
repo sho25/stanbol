@@ -734,7 +734,7 @@ return|return
 name|relTypes
 return|;
 block|}
-comment|/**      * Extracts semantics through CMIS interface using bridge definitions      *       * @param mappingFileContent      * @throws Exception      */
+comment|/**      * Extracts semantics through CMIS interface      *       * @param mappingFileContent      * @throws Exception      */
 specifier|public
 name|void
 name|liftNodes
@@ -1282,18 +1282,6 @@ operator|==
 name|PropType
 operator|.
 name|REFERENCE
-operator|||
-name|propType
-operator|==
-name|PropType
-operator|.
-name|PATH
-operator|||
-name|propType
-operator|==
-name|PropType
-operator|.
-name|NAME
 condition|)
 block|{
 return|return

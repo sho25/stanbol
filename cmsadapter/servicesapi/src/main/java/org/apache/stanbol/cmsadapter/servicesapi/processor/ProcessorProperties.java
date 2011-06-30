@@ -25,6 +25,10 @@ name|Map
 import|;
 end_import
 
+begin_comment
+comment|/**  * Implementors of this Interface can override their default processing order.  * @author cihan  *  */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface

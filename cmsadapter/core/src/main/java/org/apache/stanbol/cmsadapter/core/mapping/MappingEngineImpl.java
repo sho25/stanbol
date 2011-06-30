@@ -763,7 +763,7 @@ argument_list|>
 name|properties
 parameter_list|)
 block|{
-comment|//TODO need to do something here?
+comment|// TODO need to do something here?
 block|}
 specifier|private
 name|void
@@ -968,6 +968,16 @@ operator|.
 name|liftNodes
 argument_list|()
 expr_stmt|;
+block|}
+else|else
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Connection type must be one of JCR or CMIS."
+argument_list|)
+throw|;
 block|}
 block|}
 catch|catch

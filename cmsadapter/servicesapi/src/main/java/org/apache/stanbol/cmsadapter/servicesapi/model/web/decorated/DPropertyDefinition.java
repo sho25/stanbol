@@ -99,6 +99,10 @@ name|PropertyDefinition
 import|;
 end_import
 
+begin_comment
+comment|/**  *   * @author cihan  *  */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface

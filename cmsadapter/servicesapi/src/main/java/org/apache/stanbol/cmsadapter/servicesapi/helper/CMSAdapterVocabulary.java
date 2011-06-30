@@ -190,6 +190,28 @@ argument_list|,
 name|CMSAD_PROPERTY_SOURCE_OBJECT_PROP_NAME
 argument_list|)
 decl_stmt|;
+comment|/**      * Property to access metadata of a specific cms object.      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|CMSAD_PROPERTY_CONTENT_ITEM_REF_NAME
+init|=
+literal|"contentItemRef"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|Property
+name|CMSAD_PROPERTY_CONTENT_ITEM_REF
+init|=
+name|property
+argument_list|(
+name|CMS_ADAPTER_VOCABULARY_URI
+argument_list|,
+name|CMSAD_PROPERTY_CONTENT_ITEM_REF_NAME
+argument_list|)
+decl_stmt|;
 comment|/*      * Properties to store connection info in the ontology      */
 comment|// connection info resource
 specifier|private

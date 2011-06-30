@@ -227,6 +227,10 @@ name|RepositoryAccessException
 import|;
 end_import
 
+begin_comment
+comment|/**  * This class is used for mocking a {@link RepositoryAccess} service when there is not possible to access a  * remote CMS Repository. Instead when initialized with a list of CMS Objects, Offline Access acts as a  * repository, providing an implementation of {@link RepositoryAccess} so that there no separate interface for  * offline processing.  *   *   * @author cihan  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
