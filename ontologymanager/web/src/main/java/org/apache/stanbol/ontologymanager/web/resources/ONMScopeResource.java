@@ -29,53 +29,7 @@ name|Response
 operator|.
 name|Status
 operator|.
-name|BAD_REQUEST
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-operator|.
-name|CONFLICT
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-operator|.
-name|INTERNAL_SERVER_ERROR
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Hashtable
+name|*
 import|;
 end_import
 
@@ -309,24 +263,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|stanbol
 operator|.
 name|commons
@@ -531,26 +467,6 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|ScopeEventListener
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
 name|ScopeRegistry
 import|;
 end_import
@@ -594,24 +510,6 @@ operator|.
 name|io
 operator|.
 name|OntologyRegistryIRISource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|ONManagerImpl
 import|;
 end_import
 
@@ -1246,7 +1144,7 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-literal|404
+name|NOT_FOUND
 argument_list|)
 throw|;
 return|return
@@ -1429,12 +1327,6 @@ name|e2
 parameter_list|)
 block|{
 comment|// If this fails too, throw a bad request.
-comment|// System.out.println("1.1");
-name|e2
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 throw|throw
 operator|new
 name|WebApplicationException
@@ -1515,12 +1407,6 @@ name|e2
 parameter_list|)
 block|{
 comment|// If this fails too, throw a bad request.
-comment|// System.out.println("1.2");
-name|e2
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 throw|throw
 operator|new
 name|WebApplicationException
@@ -1532,23 +1418,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-block|}
-comment|// If we weren't able to build core source, throw bad request.
-if|if
-condition|(
-name|coreSrc
-operator|==
-literal|null
-condition|)
-block|{
-comment|// System.out.println("1.3");
-throw|throw
-operator|new
-name|WebApplicationException
-argument_list|(
-name|BAD_REQUEST
-argument_list|)
-throw|;
 block|}
 comment|// Now the creation.
 try|try

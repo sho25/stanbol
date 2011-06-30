@@ -29,25 +29,7 @@ name|Response
 operator|.
 name|Status
 operator|.
-name|INTERNAL_SERVER_ERROR
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-operator|.
-name|NOT_FOUND
+name|*
 import|;
 end_import
 
@@ -68,16 +50,6 @@ operator|.
 name|util
 operator|.
 name|HashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Hashtable
 import|;
 end_import
 
@@ -226,24 +198,6 @@ operator|.
 name|core
 operator|.
 name|UriInfo
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcManager
 import|;
 end_import
 
@@ -437,24 +391,6 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManagerImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
 name|io
 operator|.
 name|ClerezzaOntologyStorage
@@ -487,51 +423,23 @@ name|semanticweb
 operator|.
 name|owlapi
 operator|.
-name|io
-operator|.
-name|RDFXMLOntologyFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLImportsDeclaration
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyStorageException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
 name|apibinding
 operator|.
 name|OWLManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|io
+operator|.
+name|RDFXMLOntologyFormat
 import|;
 end_import
 
@@ -655,6 +563,20 @@ name|semanticweb
 operator|.
 name|owlapi
 operator|.
+name|model
+operator|.
+name|OWLOntologyStorageException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
 name|util
 operator|.
 name|OWLOntologyMerger
@@ -715,12 +637,12 @@ name|ONManager
 name|onm
 decl_stmt|;
 specifier|protected
-name|ClerezzaOntologyStorage
-name|storage
-decl_stmt|;
-specifier|protected
 name|ServletContext
 name|servletContext
+decl_stmt|;
+specifier|protected
+name|ClerezzaOntologyStorage
+name|storage
 decl_stmt|;
 specifier|public
 name|ONMScopeOntologyResource
@@ -953,7 +875,7 @@ operator|.
 name|build
 argument_list|()
 return|;
-comment|/* BEGIN debug code, uncomment only for local testing              OWLOntology test = null, top = null;             test = scope.getCustomSpace().getOntology(ontiri);             System.out.println("Ontology " + ontiri);             for (OWLImportsDeclaration imp : test.getImportsDeclarations())                 System.out.println("\timports " + imp.getIRI());             top = scope.getCoreSpace().getTopOntology();             System.out.println("Core root for scope " + scopeid);             for (OWLImportsDeclaration imp : top.getImportsDeclarations())                 System.out.println("\timports " + imp.getIRI());              END debug code */
+comment|/*              * BEGIN debug code, uncomment only for local testing OWLOntology test = null, top = null; test =              * scope.getCustomSpace().getOntology(ontiri); System.out.println("Ontology " + ontiri); for              * (OWLImportsDeclaration imp : test.getImportsDeclarations()) System.out.println("\timports " +              * imp.getIRI()); top = scope.getCoreSpace().getTopOntology();              * System.out.println("Core root for scope " + scopeid); for (OWLImportsDeclaration imp :              * top.getImportsDeclarations()) System.out.println("\timports " + imp.getIRI()); END debug code              */
 name|OWLOntology
 name|ont
 init|=
@@ -1051,7 +973,6 @@ argument_list|>
 name|getOntologies
 parameter_list|()
 block|{
-comment|// System.out.println("ID SPACE : " + ontologies);
 return|return
 name|ontologies
 return|;
@@ -1067,7 +988,6 @@ argument_list|(
 name|provider
 argument_list|)
 decl_stmt|;
-comment|/*                  * Set<OntologySpace> spaces = scope.getSessionSpaces(); for(OntologySpace space : spaces){                  * System.out.println("ID SPACE : "+space.getID()); }                  */
 try|try
 block|{
 name|ont
@@ -1286,7 +1206,7 @@ operator|.
 name|getSessionSpaces
 argument_list|()
 decl_stmt|;
-comment|//Creo un manager per gestire tutte le ontologie
+comment|// Creo un manager per gestire tutte le ontologie
 specifier|final
 name|OWLOntologyManager
 name|man
@@ -1304,7 +1224,7 @@ operator|.
 name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
-comment|//Creo un set con tutte le ontologie dello scope
+comment|// Creo un set con tutte le ontologie dello scope
 name|OWLOntologySetProvider
 name|provider
 init|=
@@ -1335,7 +1255,7 @@ name|OWLOntology
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//Inserisco le core ontologies
+comment|// Inserisco le core ontologies
 for|for
 control|(
 name|OWLOntology
@@ -1443,15 +1363,18 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|,
+name|INTERNAL_SERVER_ERROR
+argument_list|)
+throw|;
 block|}
 block|}
-comment|//Inserisco le custom ontology
+comment|// Inserisco le custom ontology
 for|for
 control|(
 name|OWLOntology
@@ -1559,15 +1482,18 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|,
+name|INTERNAL_SERVER_ERROR
+argument_list|)
+throw|;
 block|}
 block|}
-comment|//Inserisco le session ontologies;
+comment|// Inserisco le session ontologies;
 for|for
 control|(
 name|OntologySpace
@@ -1664,12 +1590,15 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|,
+name|INTERNAL_SERVER_ERROR
+argument_list|)
+throw|;
 block|}
 block|}
 block|}
@@ -1679,7 +1608,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|//Faccio il merger delle ontolgoie
+comment|// Faccio il merger delle ontolgoie
 name|OWLOntologyMerger
 name|merger
 init|=
@@ -1807,7 +1736,6 @@ argument_list|,
 literal|""
 argument_list|)
 decl_stmt|;
-comment|/* System.out                     .println("Received DELETE request for ontology " + ontologyid + " in scope " + scopeURI);             */
 name|IRI
 name|scopeIri
 init|=
@@ -1825,7 +1753,7 @@ operator|+
 name|scopeId
 argument_list|)
 decl_stmt|;
-comment|//System.out.println("SCOPE IRI : " + scopeIri);
+comment|// System.out.println("SCOPE IRI : " + scopeIri);
 name|IRI
 name|ontIri
 init|=

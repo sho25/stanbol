@@ -125,7 +125,9 @@ name|rs
 operator|.
 name|core
 operator|.
-name|UriInfo
+name|Response
+operator|.
+name|Status
 import|;
 end_import
 
@@ -139,9 +141,7 @@ name|rs
 operator|.
 name|core
 operator|.
-name|Response
-operator|.
-name|Status
+name|UriInfo
 import|;
 end_import
 
@@ -255,24 +255,6 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManagerImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
 name|renderers
 operator|.
 name|SessionRenderer
@@ -305,7 +287,7 @@ name|SessionIDResource
 extends|extends
 name|BaseStanbolResource
 block|{
-comment|/* 	 * Placeholder for the ONManager to be fetched from the servlet context. 	 */
+comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
 specifier|protected
 name|ONManager
 name|onm
@@ -431,7 +413,7 @@ name|ok
 argument_list|(
 name|SessionRenderer
 operator|.
-name|getSessionMetadataRDF
+name|getSessionMetadataRDFasOntology
 argument_list|(
 name|ses
 argument_list|)

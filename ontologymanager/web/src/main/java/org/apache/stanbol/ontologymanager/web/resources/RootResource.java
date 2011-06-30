@@ -172,7 +172,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author andrea.nuzzolese  *  */
+comment|/**  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -204,7 +204,7 @@ name|Context
 name|ServletContext
 name|servletContext
 parameter_list|)
-block|{               }
+block|{      }
 annotation|@
 name|GET
 annotation|@
