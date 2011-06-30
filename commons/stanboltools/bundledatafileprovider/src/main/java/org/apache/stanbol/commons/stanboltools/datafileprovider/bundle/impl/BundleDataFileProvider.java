@@ -443,6 +443,11 @@ condition|(
 name|resource
 operator|==
 literal|null
+operator|&&
+name|relativePathIterator
+operator|.
+name|hasNext
+argument_list|()
 condition|)
 block|{
 name|String
@@ -476,6 +481,7 @@ argument_list|(
 name|resourceName
 argument_list|)
 expr_stmt|;
+block|}
 name|log
 operator|.
 name|info
@@ -492,10 +498,9 @@ else|:
 literal|""
 operator|)
 argument_list|,
-name|resourceName
+name|filename
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|resource
 operator|!=

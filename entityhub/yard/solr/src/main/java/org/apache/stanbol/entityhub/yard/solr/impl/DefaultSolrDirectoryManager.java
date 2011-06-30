@@ -1234,6 +1234,8 @@ name|UNINITIALISED_INDEX_ARCHIVE_NAME_KEY
 argument_list|)
 expr_stmt|;
 comment|// do not parse this internal property
+comment|//we need to parse null as bundleSymbolic name, because we will accept
+comment|//index data from any bundle!
 name|InputStream
 name|is
 init|=
@@ -1242,7 +1244,7 @@ argument_list|()
 operator|.
 name|getInputStream
 argument_list|(
-name|symbolicName
+literal|null
 argument_list|,
 name|archiveName
 argument_list|,

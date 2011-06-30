@@ -154,16 +154,16 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-comment|//if the symbolicName is null accept any request
+comment|//if the parsed bundleSymbolicName is null accept any request
 comment|//if not, than check if the request is from the correct bundle.
 if|if
 condition|(
-name|symbolicName
+name|bundleSymbolicName
 operator|!=
 literal|null
 operator|&&
 operator|!
-name|symbolicName
+name|bundleSymbolicName
 operator|.
 name|equals
 argument_list|(

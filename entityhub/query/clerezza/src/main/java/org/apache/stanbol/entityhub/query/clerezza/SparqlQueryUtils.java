@@ -1530,7 +1530,7 @@ specifier|static
 name|void
 name|addLimit
 parameter_list|(
-name|int
+name|Integer
 name|limit
 parameter_list|,
 specifier|final
@@ -1540,6 +1540,10 @@ parameter_list|)
 block|{
 if|if
 condition|(
+name|limit
+operator|!=
+literal|null
+operator|&&
 name|limit
 operator|>
 literal|0

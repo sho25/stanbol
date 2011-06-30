@@ -995,6 +995,10 @@ name|metatype
 operator|=
 literal|true
 argument_list|,
+name|immediate
+operator|=
+literal|true
+argument_list|,
 name|configurationFactory
 operator|=
 literal|true
@@ -1005,10 +1009,6 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|// the ID and
-comment|// SOLR_SERVER_LOCATION
-comment|// are
-comment|// required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -4217,20 +4217,19 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// first process the document boost
-name|float
+name|Float
 name|documentBoost
 init|=
-name|documentBoostFieldName
-operator|==
-literal|null
-condition|?
-literal|1.0f
-else|:
 name|getDocumentBoost
 argument_list|(
 name|representation
 argument_list|)
 decl_stmt|;
+comment|//NOTE: Do not use DocumentBoost, because FieldBoost will override
+comment|//      document boosts and are not multiplied with with document boosts
+comment|//        if(documentBoost != null){
+comment|//            inputDocument.setDocumentBoost(documentBoost);
+comment|//        }
 for|for
 control|(
 name|Iterator
@@ -4263,6 +4262,9 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+name|float
+name|boost
+decl_stmt|;
 name|Float
 name|fieldBoost
 init|=
@@ -4279,25 +4281,53 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-name|float
-name|boost
-init|=
-name|fieldBoost
-operator|==
+if|if
+condition|(
+name|documentBoost
+operator|!=
 literal|null
-condition|?
+condition|)
+block|{
+name|boost
+operator|=
 name|documentBoost
-else|:
+expr_stmt|;
+if|if
+condition|(
 name|fieldBoost
-operator|>=
-literal|0
-condition|?
-name|fieldBoost
+operator|!=
+literal|null
+condition|)
+block|{
+name|boost
+operator|=
+name|boost
 operator|*
-name|documentBoost
-else|:
-name|documentBoost
-decl_stmt|;
+name|fieldBoost
+expr_stmt|;
+block|}
+block|}
+elseif|else
+if|if
+condition|(
+name|fieldBoost
+operator|!=
+literal|null
+condition|)
+block|{
+name|boost
+operator|=
+name|fieldBoost
+expr_stmt|;
+block|}
+else|else
+block|{
+name|boost
+operator|=
+operator|-
+literal|1
+expr_stmt|;
+block|}
 for|for
 control|(
 name|Iterator
@@ -4363,6 +4393,13 @@ name|value
 argument_list|)
 control|)
 block|{
+if|if
+condition|(
+name|boost
+operator|>
+literal|0
+condition|)
+block|{
 name|inputDocument
 operator|.
 name|addField
@@ -4377,6 +4414,22 @@ argument_list|,
 name|boost
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|inputDocument
+operator|.
+name|addField
+argument_list|(
+name|fieldName
+argument_list|,
+name|value
+operator|.
+name|getValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 catch|catch
@@ -4417,7 +4470,7 @@ return|;
 block|}
 comment|/**      * Extracts the document boost from a {@link Representation}.      *       * @param representation      *            the representation      * @return the Boost or<code>null</code> if not found or lower equals zero      */
 specifier|private
-name|float
+name|Float
 name|getDocumentBoost
 parameter_list|(
 name|Representation
@@ -4432,7 +4485,7 @@ literal|null
 condition|)
 block|{
 return|return
-literal|1.0f
+literal|null
 return|;
 block|}
 name|Float
@@ -4541,7 +4594,7 @@ name|documentBoost
 operator|==
 literal|null
 condition|?
-literal|1.0f
+literal|null
 else|:
 name|documentBoost
 operator|>=
@@ -4549,7 +4602,7 @@ literal|0
 condition|?
 name|documentBoost
 else|:
-literal|1.0f
+literal|null
 return|;
 block|}
 annotation|@
