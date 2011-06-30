@@ -203,6 +203,18 @@ name|ws
 operator|.
 name|rs
 operator|.
+name|QueryParam
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
 name|core
 operator|.
 name|Context
@@ -1208,7 +1220,7 @@ name|Response
 name|deleteSession
 parameter_list|(
 annotation|@
-name|PathParam
+name|QueryParam
 argument_list|(
 literal|"scope"
 argument_list|)
@@ -1216,7 +1228,7 @@ name|String
 name|scope
 parameter_list|,
 annotation|@
-name|PathParam
+name|QueryParam
 argument_list|(
 literal|"session"
 argument_list|)
@@ -1224,7 +1236,7 @@ name|String
 name|session
 parameter_list|,
 annotation|@
-name|PathParam
+name|QueryParam
 argument_list|(
 literal|"delete"
 argument_list|)
