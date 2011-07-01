@@ -404,7 +404,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * Calls to<code>getSessionListeners()</code> return a {@link Set} of  * listeners.  *   * TODO: implement storage (using persistence layer).  *   * @author alessandro  *   */
+comment|/**  *   * Calls to<code>getSessionListeners()</code> return a {@link Set} of listeners.  *   * TODO: implement storage (using persistence layer).  *   * @author alessandro  *   */
 end_comment
 
 begin_class
@@ -508,7 +508,7 @@ operator|=
 name|store
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#addSessionListener 	 * (eu.iksproject.kres.api.manager.session.SessionListener) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#addSessionListener      * (eu.iksproject.kres.api.manager.session.SessionListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -527,7 +527,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#clearSessionListeners 	 * () 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#clearSessionListeners ()      */
 annotation|@
 name|Override
 specifier|public
@@ -541,7 +541,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#createSession() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#createSession()      */
 annotation|@
 name|Override
 specifier|public
@@ -606,10 +606,11 @@ return|return
 name|session
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#createSession(org 	 * .semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#createSession(org      * .semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
+specifier|synchronized
 name|Session
 name|createSession
 parameter_list|(
@@ -658,10 +659,11 @@ return|return
 name|session
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#destroySession( 	 * org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#destroySession(      * org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
+specifier|synchronized
 name|void
 name|destroySession
 parameter_list|(
@@ -681,6 +683,23 @@ argument_list|(
 name|sessionID
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|ses
+operator|==
+literal|null
+condition|)
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Tried to destroy nonexisting session {} . Could it have been previously destroyed?"
+argument_list|,
+name|sessionID
+argument_list|)
+expr_stmt|;
+else|else
+block|{
 name|ses
 operator|.
 name|close
@@ -717,6 +736,7 @@ name|ses
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 catch|catch
 parameter_list|(
 name|NonReferenceableSessionException
@@ -738,7 +758,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#getSession(org. 	 * semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#getSession(org.      * semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -914,6 +934,7 @@ return|return;
 block|}
 block|}
 specifier|protected
+specifier|synchronized
 name|void
 name|addSession
 parameter_list|(
@@ -935,6 +956,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|protected
+specifier|synchronized
 name|void
 name|removeSession
 parameter_list|(
@@ -974,7 +996,7 @@ name|id
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#getSessionListeners 	 * () 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#getSessionListeners ()      */
 annotation|@
 name|Override
 specifier|public
@@ -989,7 +1011,7 @@ return|return
 name|listeners
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * TODO : optimize with indexing. 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#getSessionSpaces 	 * (org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * TODO : optimize with indexing.      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#getSessionSpaces      * (org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -1058,7 +1080,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#removeSessionListener 	 * (eu.iksproject.kres.api.manager.session.SessionListener) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#removeSessionListener      * (eu.iksproject.kres.api.manager.session.SessionListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -1077,7 +1099,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * TODO : storage not implemented yet 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionManager#storeSession(org 	 * .semanticweb.owlapi.model.IRI, java.io.OutputStream) 	 */
+comment|/*      * (non-Javadoc)      *       * TODO : storage not implemented yet      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#storeSession(org      * .semanticweb.owlapi.model.IRI, java.io.OutputStream)      */
 annotation|@
 name|Override
 specifier|public
@@ -1095,7 +1117,7 @@ name|NonReferenceableSessionException
 throws|,
 name|OWLOntologyStorageException
 block|{
-comment|/* 		 * For each gession space in the session save all the ontologies contained in the space. 		 */
+comment|/*          * For each gession space in the session save all the ontologies contained in the space.          */
 for|for
 control|(
 name|SessionOntologySpace
