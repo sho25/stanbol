@@ -292,13 +292,7 @@ operator|=
 name|reasoner
 expr_stmt|;
 comment|//Prepare the reasoner
-name|this
-operator|.
-name|loadreasoner
-operator|.
-name|prepareReasoner
-argument_list|()
-expr_stmt|;
+comment|//this.loadreasoner.prepareReasoner();
 block|}
 comment|/**      * To create a list of imported ontlogy to be added as import declarations      *      * @param inowl {Input ontology where to get the import declarations}      * @return {A list of declarations}      */
 specifier|private

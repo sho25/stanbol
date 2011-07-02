@@ -526,13 +526,6 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|l
-operator|.
-name|isOWLTypedLiteral
-argument_list|()
-condition|)
 name|doActivate
 operator||=
 name|Boolean
@@ -540,9 +533,6 @@ operator|.
 name|parseBoolean
 argument_list|(
 name|l
-operator|.
-name|asOWLTypedLiteral
-argument_list|()
 operator|.
 name|getLiteral
 argument_list|()

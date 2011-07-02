@@ -445,13 +445,7 @@ name|getReasoner
 argument_list|()
 expr_stmt|;
 comment|//Prepare the reasoner
-name|this
-operator|.
-name|reasoner
-operator|.
-name|prepareReasoner
-argument_list|()
-expr_stmt|;
+comment|//this.reasoner.prepareReasoner();
 block|}
 comment|/**      * Constructor where the inputs are the OWLOntology models contains the rules, the target ontology where to perform the reasoning and the url of reasoner server end-point.      *      * @param SWRLruleOntology {The OWLOntology contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      * @param reasonerurl {The url of reasoner server end-point.}      */
 specifier|public
@@ -600,13 +594,7 @@ name|getReasoner
 argument_list|()
 expr_stmt|;
 comment|//Prepare the reasoner
-name|this
-operator|.
-name|reasoner
-operator|.
-name|prepareReasoner
-argument_list|()
-expr_stmt|;
+comment|//this.reasoner.prepareReasoner();
 block|}
 comment|/**      * Construct where the inputs are the: Model of type jena.rdf.model.Model that contains the SWRL rules and a target OWLOntology where to perform the reasoning.      *      * @param SWRLruleOntology {The Jena Model contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      */
 specifier|public
@@ -799,13 +787,7 @@ name|getReasoner
 argument_list|()
 expr_stmt|;
 comment|//Prepare the reasoner
-name|this
-operator|.
-name|reasoner
-operator|.
-name|prepareReasoner
-argument_list|()
-expr_stmt|;
+comment|//this.reasoner.prepareReasoner();
 block|}
 comment|/**      * Construct where the inputs are the: Model of type jena.rdf.model.Model that contains the SWRL rules and a target OWLOntology where to perform the reasoning.      *      * @param SWRLruleOntology {The Jena Model contains the SWRL rules.}      * @param targetOntology {The OWLOntology model where to perform the SWRL rule reasoner.}      * @param reasonerurl {The url of the the reasoner server end-point.}      */
 specifier|public
@@ -994,13 +976,7 @@ name|getReasoner
 argument_list|()
 expr_stmt|;
 comment|//Prepare the reasoner
-name|this
-operator|.
-name|reasoner
-operator|.
-name|prepareReasoner
-argument_list|()
-expr_stmt|;
+comment|//this.reasoner.prepareReasoner();
 block|}
 comment|/**      * This method will run the reasoner and then save the inferred axioms with old axioms in a new ontology      *      * @param newmodel {The OWLOntology model where to save the inference.}      * @return {An OWLOntology object contains the ontology and the inferred axioms.}      */
 specifier|public
