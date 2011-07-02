@@ -1211,7 +1211,6 @@ argument_list|,
 name|owl
 argument_list|)
 decl_stmt|;
-comment|//Model jenamodel = ModelFactory.createDefaultModel();
 name|OWLDataFactory
 name|factory
 init|=
@@ -1223,7 +1222,6 @@ operator|.
 name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
-comment|/*OWLClass ontocls = factory 				.getOWLClass(IRI 						.create("http://kres.iks-project.eu/ontology/meta/rmi.owl#Recipe"));         Set<OWLClassAssertionAxiom> cls = owl.getClassAssertionAxioms(ontocls);         Iterator<OWLClassAssertionAxiom> iter = cls.iterator();         IRI recipeiri = IRI.create(iter.next().getIndividual().toStringID()); */
 name|IRI
 name|recipeclass
 init|=
@@ -1430,18 +1428,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//"ProvaParent =<http://www.semanticweb.org/ontologies/2010/6/ProvaParent.owl#> . rule1[ has(ProvaParent:hasParent, ?x, ?y) . has(ProvaParent:hasBrother, ?y, ?z) -> has(ProvaParent:hasUncle, ?x, ?z) ]");
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"KReS rule: "
-operator|+
-name|kReSRules
-argument_list|)
-expr_stmt|;
 name|KB
 name|kReSKB
 init|=
@@ -1500,50 +1486,9 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Single rule: "
-operator|+
-name|singlerule
-operator|.
-name|toSPARQL
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"To KReS Syntax: "
-operator|+
-name|singlerule
-operator|.
-name|toKReSSyntax
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Single OWLAPI SWRL: "
-operator|+
-name|singlerule
-operator|.
-name|toSWRL
-argument_list|(
-name|factory
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|//System.out.println("Single rule: "+singlerule.toSPARQL());
+comment|//System.out.println("To KReS Syntax: "+singlerule.toKReSSyntax());
+comment|//System.out.println("Single OWLAPI SWRL: "+singlerule.toSWRL(factory));
 comment|//Resource resource = singlerule.toSWRL(jenamodel);<-- FIXME This method does not work properly
 name|swrlrules
 operator|.
@@ -1760,15 +1705,6 @@ argument_list|(
 literal|"ERROR: Cannot load session without scope."
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
-name|err
-operator|.
-name|println
-argument_list|(
-literal|"ERROR: Cannot load session without scope."
-argument_list|)
-expr_stmt|;
 return|return
 name|Response
 operator|.
@@ -1805,7 +1741,7 @@ name|err
 operator|.
 name|println
 argument_list|(
-literal|"ERROR: To much RDF input"
+literal|"ERROR: Cannot handle both parameters: file and input graph"
 argument_list|)
 expr_stmt|;
 return|return
@@ -2320,6 +2256,35 @@ name|session
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|/* 					for(OWLOntology a:ontoscope.getCoreSpace().getOntologies()){	 						System.out.println("CORE ONTOLOGY: "+a); 					} 					*/
+for|for
+control|(
+name|OWLOntology
+name|a
+range|:
+name|ontoscope
+operator|.
+name|getCustomSpace
+argument_list|()
+operator|.
+name|getOntologies
+argument_list|()
+control|)
+block|{
+comment|//System.out.println("CUSTOM ONTOLOGY: "+a);
+name|mgr
+operator|.
+name|addAxioms
+argument_list|(
+name|inputowl
+argument_list|,
+name|a
+operator|.
+name|getAxioms
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 name|Set
 argument_list|<
 name|OWLOntology
@@ -2334,90 +2299,40 @@ operator|.
 name|getOntologies
 argument_list|()
 decl_stmt|;
-name|Iterator
-argument_list|<
+for|for
+control|(
 name|OWLOntology
-argument_list|>
-name|iteronto
-init|=
+name|a
+range|:
 name|ontos
-operator|.
-name|iterator
-argument_list|()
-decl_stmt|;
-comment|// Add session ontologies as import, if it is anonymus we
-comment|// try to add single axioms.
-while|while
-condition|(
-name|iteronto
-operator|.
-name|hasNext
-argument_list|()
-condition|)
+control|)
 block|{
-name|OWLOntology
-name|auxonto
-init|=
-name|iteronto
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-operator|!
-name|auxonto
-operator|.
-name|getOntologyID
-argument_list|()
-operator|.
-name|isAnonymous
-argument_list|()
-condition|)
-block|{
-name|additions
-operator|.
-name|add
-argument_list|(
-operator|new
-name|AddImport
-argument_list|(
-name|inputowl
-argument_list|,
-name|factory
-operator|.
-name|getOWLImportsDeclaration
-argument_list|(
-name|auxonto
-operator|.
-name|getOWLOntologyManager
-argument_list|()
-operator|.
-name|getOntologyDocumentIRI
-argument_list|(
-name|auxonto
-argument_list|)
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
+comment|//System.out.println("SESSION ONTOLOGY: "+a);
 name|mgr
 operator|.
 name|addAxioms
 argument_list|(
 name|inputowl
 argument_list|,
-name|auxonto
+name|a
 operator|.
 name|getAxioms
 argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-block|}
+name|inputowl
+operator|=
+name|mgr
+operator|.
+name|getOntology
+argument_list|(
+name|inputowl
+operator|.
+name|getOntologyID
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -2472,6 +2387,18 @@ argument_list|(
 name|additions
 argument_list|)
 expr_stmt|;
+name|inputowl
+operator|=
+name|mgr
+operator|.
+name|getOntology
+argument_list|(
+name|inputowl
+operator|.
+name|getOntologyID
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|//Run HermiT if the reasonerURL is null;
 if|if
 condition|(
@@ -2517,34 +2444,6 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|Set
-argument_list|<
-name|OWLDatatype
-argument_list|>
-name|datatypes
-init|=
-name|axiom
-operator|.
-name|getDatatypesInSignature
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|OWLDatatype
-name|datatype
-range|:
-name|datatypes
-control|)
-block|{
-if|if
-condition|(
-operator|!
-name|datatype
-operator|.
-name|isBuiltIn
-argument_list|()
-condition|)
-block|{
 name|removeThese
 operator|.
 name|add
@@ -2552,9 +2451,6 @@ argument_list|(
 name|axiom
 argument_list|)
 expr_stmt|;
-break|break;
-block|}
-block|}
 block|}
 block|}
 name|inputowl
@@ -2616,14 +2512,7 @@ name|recipe
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|OWLOntology
-name|rulesOntology
-init|=
-name|mngr
-operator|.
-name|createOntology
-argument_list|()
-decl_stmt|;
+comment|//OWLOntology rulesOntology = mngr.createOntology();
 name|Set
 argument_list|<
 name|SWRLRule
@@ -2635,48 +2524,32 @@ argument_list|(
 name|recipeowl
 argument_list|)
 decl_stmt|;
-name|mngr
+name|inputowl
+operator|.
+name|getOWLOntologyManager
+argument_list|()
 operator|.
 name|addAxioms
 argument_list|(
-name|rulesOntology
+name|inputowl
 argument_list|,
 name|swrlRules
 argument_list|)
 expr_stmt|;
-name|rulesOntology
+name|inputowl
 operator|=
-name|mngr
+name|inputowl
+operator|.
+name|getOWLOntologyManager
+argument_list|()
 operator|.
 name|getOntology
 argument_list|(
-name|rulesOntology
+name|inputowl
 operator|.
 name|getOntologyID
 argument_list|()
 argument_list|)
-expr_stmt|;
-comment|// Create a reasoner to run rules contained in the
-comment|// recipe
-name|RunRules
-name|rulereasoner
-init|=
-operator|new
-name|RunRules
-argument_list|(
-name|rulesOntology
-argument_list|,
-name|inputowl
-argument_list|)
-decl_stmt|;
-comment|// Run the rule reasoner to the input RDF with the added
-comment|// top-ontology
-name|inputowl
-operator|=
-name|rulereasoner
-operator|.
-name|runRulesReasoner
-argument_list|()
 expr_stmt|;
 block|}
 comment|//Create the reasoner for the classification
