@@ -302,7 +302,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TODO: This processer is not tested yet.  *   * This processor creates OWL object property assertions from CMIS {@link Relationship}s.  * Subject is the individual generated for the source object of the relationship.  * Property is the property generated for the type of the relationship.  * Object is the individual generated for the target object of the relationship.  *   * @author cihan  *  */
+comment|/**  * TODO: This processer is not tested yet.  *   * This processor creates OWL object property assertions from CMIS {@link Relationship}s. Subject is the  * individual generated for the source object of the relationship. Property is the property generated for the  * type of the relationship. Object is the individual generated for the target object of the relationship.  *   * @author cihan  *   */
 end_comment
 
 begin_class
@@ -344,14 +344,20 @@ name|canProcess
 parameter_list|(
 name|Object
 name|cmsObject
+parameter_list|,
+name|Object
+name|session
 parameter_list|)
 block|{
-comment|// TODO need to check the session too
 comment|// here we assume Document and Folder types of CMIS spec is converted to CMSObjects
 return|return
 name|cmsObject
 operator|instanceof
 name|CMSObject
+operator|&&
+name|session
+operator|instanceof
+name|Session
 return|;
 block|}
 annotation|@
@@ -370,6 +376,13 @@ name|MappingEngine
 name|engine
 parameter_list|)
 block|{
+if|if
+condition|(
+name|objects
+operator|!=
+literal|null
+condition|)
+block|{
 for|for
 control|(
 name|Object
@@ -380,31 +393,16 @@ control|)
 block|{
 if|if
 condition|(
-operator|!
-operator|(
-name|object
-operator|instanceof
-name|CMSObject
-operator|)
-condition|)
-block|{
-name|log
-operator|.
-name|info
+name|canProcess
 argument_list|(
-literal|"Incompatible type given as argument: {}. Skipping ..."
-argument_list|,
 name|object
+argument_list|,
+name|engine
 operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
+name|getSession
 argument_list|()
 argument_list|)
-expr_stmt|;
-block|}
-else|else
+condition|)
 block|{
 try|try
 block|{
@@ -453,7 +451,7 @@ operator|.
 name|getRelationships
 argument_list|()
 decl_stmt|;
-comment|//FIXME find a better way to reuse cmislifters' func.
+comment|// FIXME find a better way to reuse cmislifters' func.
 name|CMISNodeTypeLifter
 name|lifter
 init|=
@@ -531,6 +529,25 @@ argument_list|(
 literal|"Exception is "
 argument_list|,
 name|e
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Incompatible type given as argument: {}. Skipping ..."
+argument_list|,
+name|object
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

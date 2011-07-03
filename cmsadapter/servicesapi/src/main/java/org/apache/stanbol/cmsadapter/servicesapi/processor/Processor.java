@@ -52,12 +52,15 @@ specifier|public
 interface|interface
 name|Processor
 block|{
-comment|/**      * Method for determining if the processor can process the specified CMS object.      * @param cmsObject      * @return true if the CMS object can be processed.      */
+comment|/**      * Method for determining if the processor can process the specified CMS object.      * @param cmsObject      * @param session a JCR or CMIS Session object       * @return true if the CMS object can be processed.      */
 name|Boolean
 name|canProcess
 parameter_list|(
 name|Object
 name|cmsObject
+parameter_list|,
+name|Object
+name|session
 parameter_list|)
 function_decl|;
 comment|/**      * Creates extracted triples from the provided CMS objects.       * The ontology should be available through<b>engine</b> parameter.       * @param objects a list of CMS objects to process      * @param engine       */

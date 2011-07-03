@@ -828,6 +828,8 @@ name|cmsObject
 operator|.
 name|getInstance
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 condition|)
 block|{
@@ -1121,6 +1123,9 @@ name|canProcess
 parameter_list|(
 name|Object
 name|object
+parameter_list|,
+name|Object
+name|session
 parameter_list|)
 block|{
 return|return
@@ -1321,6 +1326,8 @@ name|cmsObject
 operator|.
 name|getInstance
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 condition|)
 block|{
@@ -1453,6 +1460,8 @@ condition|(
 name|canProcess
 argument_list|(
 name|o
+argument_list|,
+literal|null
 argument_list|)
 condition|)
 block|{

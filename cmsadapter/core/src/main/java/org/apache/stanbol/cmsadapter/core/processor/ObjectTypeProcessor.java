@@ -530,6 +530,9 @@ name|canProcess
 parameter_list|(
 name|Object
 name|cmsObject
+parameter_list|,
+name|Object
+name|session
 parameter_list|)
 block|{
 return|return
@@ -605,6 +608,8 @@ name|objectType
 operator|.
 name|getInstance
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 condition|)
 block|{
@@ -1417,6 +1422,8 @@ name|objectType
 operator|.
 name|getInstance
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 condition|)
 block|{
@@ -1574,6 +1581,8 @@ condition|(
 name|canProcess
 argument_list|(
 name|o
+argument_list|,
+literal|null
 argument_list|)
 condition|)
 block|{
