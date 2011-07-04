@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology scope for application use. There exists exactly one scope for  * each live (active or halted) KReS session.<br>  *<br>  * This is the only type of ontology scope that allows public access to its OWL  * ontology manager.  *   * @author alessandro  *   */
+comment|/**  * An ontology scope for application use. There exists exactly one scope for each live (active or halted) KReS  * session.<br>  *<br>  * This is the only type of ontology scope that allows public access to its OWL ontology manager.  *   * @author alessandro  *   */
 end_comment
 
 begin_interface
@@ -42,10 +42,22 @@ name|SessionOntologySpace
 extends|extends
 name|OntologySpace
 block|{
-comment|/** 	 * Returns the OWL ontology manager associated to this scope. 	 *  	 * @return the associated ontology manager 	 */
+comment|/**      * Returns the OWL ontology manager associated to this scope.      *       * @return the associated ontology manager      */
 name|OWLOntologyManager
 name|getOntologyManager
 parameter_list|()
+function_decl|;
+name|void
+name|attachSpace
+parameter_list|(
+name|OntologySpace
+name|space
+parameter_list|,
+name|boolean
+name|skipRoot
+parameter_list|)
+throws|throws
+name|UnmodifiableOntologySpaceException
 function_decl|;
 block|}
 end_interface

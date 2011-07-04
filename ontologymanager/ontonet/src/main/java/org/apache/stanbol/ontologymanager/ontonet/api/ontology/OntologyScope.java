@@ -52,7 +52,7 @@ name|OntologyScope
 extends|extends
 name|ScopeOntologyListenable
 block|{
-comment|/** 	 * Adds a new ontology space to the list of user session spaces for this 	 * scope. 	 *  	 * @param sessionSpace 	 *            the ontology space to be added. 	 */
+comment|/** 	 * Adds a new ontology space to the list of user session spaces for this 	 * scope. 	 *  	 * @param sessionSpace 	 *            the ontology space to be added. 	 * @throws UnmodifiableOntologySpaceException  	 */
 name|void
 name|addSessionSpace
 parameter_list|(
@@ -62,6 +62,8 @@ parameter_list|,
 name|IRI
 name|sessionID
 parameter_list|)
+throws|throws
+name|UnmodifiableOntologySpaceException
 function_decl|;
 comment|/** 	 * Returns the core ontology space for this ontology scope. The core space 	 * should never be null for any scope. 	 *  	 * @return the core ontology space 	 */
 name|OntologySpace

@@ -635,6 +635,8 @@ specifier|public
 name|void
 name|testCreateSessionSpaceManual
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 name|OntologyScope
 name|scope

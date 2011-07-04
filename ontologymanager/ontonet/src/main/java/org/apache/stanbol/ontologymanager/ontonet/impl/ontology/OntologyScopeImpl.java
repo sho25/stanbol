@@ -304,17 +304,17 @@ name|OntologyScope
 implements|,
 name|OntologySpaceListener
 block|{
-comment|/** 	 * The core ontology space for this scope, always set as default. 	 */
+comment|/**      * The core ontology space for this scope, always set as default.      */
 specifier|protected
 name|CoreOntologySpace
 name|coreSpace
 decl_stmt|;
-comment|/** 	 * The custom ontology space for this scope. This is optional, but cannot be 	 * set after the scope has been setup. 	 */
+comment|/**      * The custom ontology space for this scope. This is optional, but cannot be set after the scope has been      * setup.      */
 specifier|protected
 name|CustomOntologySpace
 name|customSpace
 decl_stmt|;
-comment|/** 	 * The unique identifier for this scope. 	 */
+comment|/**      * The unique identifier for this scope.      */
 specifier|protected
 name|IRI
 name|id
@@ -335,14 +335,14 @@ name|ScopeOntologyListener
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** 	 * An ontology scope knows whether it's write-locked or not. Initially it is 	 * not. 	 */
+comment|/**      * An ontology scope knows whether it's write-locked or not. Initially it is not.      */
 specifier|protected
 name|boolean
 name|locked
 init|=
 literal|false
 decl_stmt|;
-comment|/** 	 * Maps session IDs to ontology space. A single scope has at most one space 	 * per session. 	 */
+comment|/**      * Maps session IDs to ontology space. A single scope has at most one space per session.      */
 specifier|protected
 name|Map
 argument_list|<
@@ -508,7 +508,7 @@ argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @seeeu.iksproject.kres.api.manager.ontology.OntologyScope# 	 * addOntologyScopeListener 	 * (eu.iksproject.kres.api.manager.ontology.ScopeOntologyListener) 	 */
+comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.kres.api.manager.ontology.OntologyScope# addOntologyScopeListener      * (eu.iksproject.kres.api.manager.ontology.ScopeOntologyListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -527,7 +527,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.ontology.OntologyScope#addSessionSpace 	 * (eu.iksproject.kres.api.manager.ontology.OntologySpace, 	 * org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#addSessionSpace      * (eu.iksproject.kres.api.manager.ontology.OntologySpace, org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -541,6 +541,8 @@ parameter_list|,
 name|IRI
 name|sessionId
 parameter_list|)
+throws|throws
+name|UnmodifiableOntologySpaceException
 block|{
 if|if
 condition|(
@@ -568,9 +570,53 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|this
+operator|.
+name|getCustomSpace
+argument_list|()
+operator|!=
+literal|null
+condition|)
+operator|(
+operator|(
+name|SessionOntologySpace
+operator|)
+name|sessionSpace
+operator|)
+operator|.
+name|attachSpace
+argument_list|(
+name|this
+operator|.
+name|getCustomSpace
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+else|else
+operator|(
+operator|(
+name|SessionOntologySpace
+operator|)
+name|sessionSpace
+operator|)
+operator|.
+name|attachSpace
+argument_list|(
+name|this
+operator|.
+name|getCoreSpace
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 block|}
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @seeeu.iksproject.kres.api.manager.ontology.OntologyScope# 	 * clearOntologyScopeListeners() 	 */
+comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.kres.api.manager.ontology.OntologyScope# clearOntologyScopeListeners()      */
 annotation|@
 name|Override
 specifier|public
@@ -640,7 +686,7 @@ name|ontologyIri
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getCoreSpace() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getCoreSpace()      */
 annotation|@
 name|Override
 specifier|public
@@ -652,7 +698,7 @@ return|return
 name|coreSpace
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.ontology.OntologyScope#getCustomSpace() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getCustomSpace()      */
 annotation|@
 name|Override
 specifier|public
@@ -664,7 +710,7 @@ return|return
 name|customSpace
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getID() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getID()      */
 annotation|@
 name|Override
 specifier|public
@@ -676,7 +722,7 @@ return|return
 name|id
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @seeeu.iksproject.kres.api.manager.ontology.OntologyScope# 	 * getOntologyScopeListeners() 	 */
+comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.kres.api.manager.ontology.OntologyScope# getOntologyScopeListeners()      */
 annotation|@
 name|Override
 specifier|public
@@ -691,7 +737,7 @@ return|return
 name|listeners
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.ontology.OntologyScope#getSessionSpace 	 * (org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getSessionSpace      * (org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -711,7 +757,7 @@ name|sessionID
 argument_list|)
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.ontology.OntologyScope#getSessionSpaces() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#getSessionSpaces()      */
 annotation|@
 name|Override
 specifier|public
@@ -736,7 +782,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.ontology.OntologySpaceListener#onOntologyAdded 	 * (org.semanticweb.owlapi.model.IRI, org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologySpaceListener#onOntologyAdded      * (org.semanticweb.owlapi.model.IRI, org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -757,7 +803,7 @@ name|addedOntology
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @seeeu.iksproject.kres.api.manager.ontology.OntologySpaceListener# 	 * onOntologyRemoved(org.semanticweb.owlapi.model.IRI, 	 * org.semanticweb.owlapi.model.IRI) 	 */
+comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.kres.api.manager.ontology.OntologySpaceListener#      * onOntologyRemoved(org.semanticweb.owlapi.model.IRI, org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -796,7 +842,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.ontology.OntologyScope#setCustomSpace( 	 * eu.iksproject.kres.api.manager.ontology.OntologySpace) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#setCustomSpace(      * eu.iksproject.kres.api.manager.ontology.OntologySpace)      */
 annotation|@
 name|Override
 specifier|public
@@ -885,7 +931,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#setUp() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#setUp()      */
 annotation|@
 name|Override
 specifier|public
@@ -958,7 +1004,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#tearDown() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.OntologyScope#tearDown()      */
 annotation|@
 name|Override
 specifier|public
@@ -998,7 +1044,7 @@ operator|=
 literal|false
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see java.lang.Object#toString() 	 */
+comment|/*      * (non-Javadoc)      *       * @see java.lang.Object#toString()      */
 annotation|@
 name|Override
 specifier|public
