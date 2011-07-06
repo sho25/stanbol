@@ -1575,7 +1575,11 @@ init|=
 operator|new
 name|File
 argument_list|(
-literal|"./KReSConf"
+literal|"."
+operator|+
+name|sep
+operator|+
+literal|"KReSConf"
 argument_list|)
 decl_stmt|;
 if|if
