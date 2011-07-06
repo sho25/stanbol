@@ -1593,7 +1593,15 @@ argument_list|()
 expr_stmt|;
 name|ruleOntologyLocation
 operator|=
-literal|"./KReSConf/rmi_config.owl"
+literal|"."
+operator|+
+name|sep
+operator|+
+literal|"KReSConf"
+operator|+
+name|sep
+operator|+
+literal|"rmi_config.owl"
 expr_stmt|;
 name|FileOutputStream
 name|fos
