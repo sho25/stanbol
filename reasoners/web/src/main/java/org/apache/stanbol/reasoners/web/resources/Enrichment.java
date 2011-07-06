@@ -31,7 +31,25 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|TEXT_HTML
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|*
 import|;
 end_import
 
@@ -211,37 +229,7 @@ name|rs
 operator|.
 name|core
 operator|.
-name|MediaType
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
 name|Response
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
 import|;
 end_import
 
@@ -898,28 +886,12 @@ extends|extends
 name|BaseStanbolResource
 block|{
 specifier|private
-name|RuleStore
-name|kresRuleStore
-decl_stmt|;
-specifier|private
 name|OWLOntology
 name|inputowl
 decl_stmt|;
 specifier|private
-name|OWLOntology
-name|scopeowl
-decl_stmt|;
-specifier|protected
-name|ONManager
-name|onm
-decl_stmt|;
-specifier|protected
-name|ClerezzaOntologyStorage
-name|storage
-decl_stmt|;
-specifier|protected
-name|ServletContext
-name|servletContext
+name|RuleStore
+name|kresRuleStore
 decl_stmt|;
 specifier|private
 name|Logger
@@ -933,7 +905,19 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
+specifier|protected
+name|ONManager
+name|onm
+decl_stmt|;
+specifier|protected
+name|ServletContext
+name|servletContext
+decl_stmt|;
+specifier|protected
+name|ClerezzaOntologyStorage
+name|storage
+decl_stmt|;
+comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
 specifier|public
 name|Enrichment
 parameter_list|(
@@ -1054,7 +1038,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * To trasform a sequence of rules to a Jena Model 	 *  	 * @param owl 	 *            {OWLOntology object contains a single recipe}      * @return {A jena rdf model contains the SWRL rule.}      */
+comment|/**      * To trasform a sequence of rules to a Jena Model      *       * @param owl      *            {OWLOntology object contains a single recipe}      * @return {A jena rdf model contains the SWRL rule.}      */
 specifier|private
 name|Model
 name|fromRecipeToModel
@@ -1276,7 +1260,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//"ProvaParent =<http://www.semanticweb.org/ontologies/2010/6/ProvaParent.owl#> . rule1[ has(ProvaParent:hasParent, ?x, ?y) . has(ProvaParent:hasBrother, ?y, ?z) -> has(ProvaParent:hasUncle, ?x, ?z) ]");
+comment|// "ProvaParent =<http://www.semanticweb.org/ontologies/2010/6/ProvaParent.owl#> . rule1[ has(ProvaParent:hasParent, ?x, ?y) . has(ProvaParent:hasBrother, ?y, ?z) -> has(ProvaParent:hasUncle, ?x, ?z) ]");
 name|KB
 name|kReSKB
 init|=
@@ -1337,14 +1321,44 @@ return|return
 name|jenamodel
 return|;
 block|}
-comment|/** 	 * To perform a rule based reasoning with a given recipe and scope (or an 	 * ontology) to a RDF input specify via its IRI. 	 *  	 * @param session 	 *            {A string contains the session IRI used to inference the 	 *            input.} 	 * @param scope 	 *            {A string contains either ontology or the scope IRI used to 	 *            inference the input.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to inference.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to inference.} 	 * @Param owllink_endpoint {A string contains the reasoner server end-point 	 *        URL.}      * @return Return:<br/>      *          200 Returns a graph with the enrichments<br/>      *          204 No enrichments have been produced from the given graph<br/>      *          400 To run the session is needed the scope<br/>      *          404 The recipe/ontology/scope/input doesn't exist in the network<br/>      *          409 Too much RDF inputs<br/>      *          500 Some error occurred      */
+annotation|@
+name|GET
+annotation|@
+name|Produces
+argument_list|(
+name|TEXT_HTML
+argument_list|)
+specifier|public
+name|Response
+name|getView
+parameter_list|()
+block|{
+return|return
+name|Response
+operator|.
+name|ok
+argument_list|(
+operator|new
+name|Viewable
+argument_list|(
+literal|"index"
+argument_list|,
+name|this
+argument_list|)
+argument_list|,
+name|TEXT_HTML
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+comment|/**      * To perform a rule based reasoning with a given recipe and scope (or an ontology) to a RDF input specify      * via its IRI.      *       * @param session      *            {A string contains the session IRI used to inference the input.}      * @param scope      *            {A string contains either ontology or the scope IRI used to inference the input.}      * @param recipe      *            {A string contains the recipe IRI from the service      *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to inference.}      * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or OWL) to inference.}      * @Param owllink_endpoint {A string contains the reasoner server end-point URL.}      * @return Return:<br/>      *         200 Returns a graph with the enrichments<br/>      *         204 No enrichments have been produced from the given graph<br/>      *         400 To run the session is needed the scope<br/>      *         404 The recipe/ontology/scope/input doesn't exist in the network<br/>      *         409 Too much RDF inputs<br/>      *         500 Some error occurred      */
 annotation|@
 name|POST
 annotation|@
 name|Consumes
 argument_list|(
-name|MediaType
-operator|.
 name|MULTIPART_FORM_DATA
 argument_list|)
 annotation|@
@@ -1434,13 +1448,13 @@ literal|null
 operator|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"ERROR: Cannot load session without scope."
+literal|"Unspecified scope parameter for session {} , cannot classify."
+argument_list|,
+name|session
 argument_list|)
 expr_stmt|;
 return|return
@@ -1448,8 +1462,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 operator|.
@@ -1457,7 +1469,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Check for input conflict. Only one input at once is allowed
+comment|// Check for input conflict. Only one input at once is allowed
 if|if
 condition|(
 operator|(
@@ -1473,13 +1485,11 @@ literal|null
 operator|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"ERROR: To much RDF input"
+literal|"Parameters file and input-graph are mutually exclusive and cannot be specified together."
 argument_list|)
 expr_stmt|;
 return|return
@@ -1487,8 +1497,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|CONFLICT
 argument_list|)
 operator|.
@@ -1496,7 +1504,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Load input file or graph
+comment|// Load input file or graph
 if|if
 condition|(
 name|file
@@ -1553,15 +1561,13 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NOT_FOUND
 argument_list|)
 operator|.
 name|build
 argument_list|()
 return|;
-comment|//Create list to add ontologies as imported
+comment|// Create list to add ontologies as imported
 name|OWLOntologyManager
 name|mgr
 init|=
@@ -1594,13 +1600,8 @@ name|OWLOntologyChange
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|boolean
-name|ok
-init|=
-literal|false
-decl_stmt|;
-comment|//Load ontologies from scope, RDF input and recipe
-comment|//Try to resolve scope IRI
+comment|// Load ontologies from scope, RDF input and recipe
+comment|// Try to resolve scope IRI
 if|if
 condition|(
 operator|(
@@ -1749,7 +1750,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//Add ontology form sessions
+comment|// Add ontology form sessions
 while|while
 condition|(
 name|importsession
@@ -1854,36 +1855,17 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|System
-operator|.
-name|err
-operator|.
-name|println
+throw|throw
+operator|new
+name|WebApplicationException
 argument_list|(
-literal|"ERROR: Problem with scope: "
-operator|+
-name|scope
-argument_list|)
-expr_stmt|;
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
+argument_list|,
+name|INTERNAL_SERVER_ERROR
 argument_list|)
-operator|.
-name|build
-argument_list|()
-expr_stmt|;
+throw|;
 block|}
-comment|//Get Ontologies from session
+comment|// Get Ontologies from session
 if|if
 condition|(
 operator|(
@@ -1968,7 +1950,7 @@ operator|.
 name|iterator
 argument_list|()
 decl_stmt|;
-comment|// Add session ontologies as import, if it is anonymus we
+comment|// Add session ontologies as import, if it is anonymous we
 comment|// try to add single axioms.
 while|while
 condition|(
@@ -2048,37 +2030,17 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|System
-operator|.
-name|err
-operator|.
-name|println
+throw|throw
+operator|new
+name|WebApplicationException
 argument_list|(
-literal|"ERROR: Problem with session: "
-operator|+
-name|session
-argument_list|)
-expr_stmt|;
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
+argument_list|,
+name|INTERNAL_SERVER_ERROR
 argument_list|)
-operator|.
-name|build
-argument_list|()
-expr_stmt|;
+throw|;
 block|}
-comment|// After gathered the all ontology as imported now we apply the
-comment|// changes
+comment|// After gathered the all ontology as imported now we apply the changes
 if|if
 condition|(
 name|additions
@@ -2095,7 +2057,7 @@ argument_list|(
 name|additions
 argument_list|)
 expr_stmt|;
-comment|//Run HermiT if the reasonerURL is null;
+comment|// Run HermiT if the reasonerURL is null;
 if|if
 condition|(
 name|owllink_endpoint
@@ -2130,8 +2092,7 @@ name|recipe
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Get Jea RDF model of SWRL rule contained in the
-comment|// recipe
+comment|// Get Jea RDF model of SWRL rule contained in the recipe
 name|Model
 name|swrlmodel
 init|=
@@ -2140,8 +2101,7 @@ argument_list|(
 name|recipeowl
 argument_list|)
 decl_stmt|;
-comment|// Create a reasoner to run rules contained in the
-comment|// recipe
+comment|// Create a reasoner to run rules contained in the recipe
 name|RunRules
 name|rulereasoner
 init|=
@@ -2153,8 +2113,7 @@ argument_list|,
 name|inputowl
 argument_list|)
 decl_stmt|;
-comment|// Run the rule reasoner to the input RDF with the added
-comment|// top-ontology
+comment|// Run the rule reasoner to the input RDF with the added top-ontology
 name|inputowl
 operator|=
 name|rulereasoner
@@ -2163,7 +2122,7 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|//Create the reasoner for the enrichment
+comment|// Create the reasoner for the enrichment
 name|CreateReasoner
 name|newreasoner
 init|=
@@ -2173,8 +2132,7 @@ argument_list|(
 name|inputowl
 argument_list|)
 decl_stmt|;
-comment|// Prepare and start the reasoner to enrich ontology's
-comment|// resources
+comment|// Prepare and start the reasoner to enrich ontology's resources
 name|RunReasoner
 name|reasoner
 init|=
@@ -2187,8 +2145,7 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// Create a new OWLOntology model where to put the inferred
-comment|// axioms
+comment|// Create a new OWLOntology model where to put the inferred axioms
 name|OWLOntology
 name|output
 init|=
@@ -2205,7 +2162,7 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Initial input axioms count
+comment|// Initial input axioms count
 name|int
 name|startax
 init|=
@@ -2214,7 +2171,7 @@ operator|.
 name|getAxiomCount
 argument_list|()
 decl_stmt|;
-comment|//Run the classification
+comment|// Run the classification
 name|output
 operator|=
 name|reasoner
@@ -2224,7 +2181,7 @@ argument_list|(
 name|output
 argument_list|)
 expr_stmt|;
-comment|//End output axioms count
+comment|// End output axioms count
 name|int
 name|endax
 init|=
@@ -2244,7 +2201,7 @@ operator|>
 literal|0
 condition|)
 block|{
-comment|//Some inference is retrieved
+comment|// Some inference is retrieved
 return|return
 name|Response
 operator|.
@@ -2259,14 +2216,12 @@ return|;
 block|}
 else|else
 block|{
-comment|//No data is retrieved
+comment|// No data is retrieved
 return|return
 name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NOT_FOUND
 argument_list|)
 operator|.
@@ -2281,13 +2236,18 @@ name|InconsistentOntologyException
 name|exc
 parameter_list|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"CHECK ONTOLOGY CONSISTENCE"
+literal|"Cannot classify ionconsistent ontology "
+operator|+
+name|inputowl
+operator|.
+name|getOntologyID
+argument_list|()
+argument_list|,
+name|exc
 argument_list|)
 expr_stmt|;
 return|return
@@ -2295,17 +2255,14 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
+name|PRECONDITION_FAILED
 argument_list|)
 operator|.
 name|build
 argument_list|()
 return|;
 block|}
-comment|// If there is an owl-link server end-point specified in the
-comment|// form
+comment|// If there is an owl-link server end-point specified in the form
 block|}
 else|else
 block|{
@@ -2336,8 +2293,7 @@ name|recipe
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Get Jea RDF model of SWRL rule contained in the
-comment|// recipe
+comment|// Get Jea RDF model of SWRL rule contained in the recipe
 name|Model
 name|swrlmodel
 init|=
@@ -2346,8 +2302,8 @@ argument_list|(
 name|recipeowl
 argument_list|)
 decl_stmt|;
-comment|// Create a reasoner to run rules contained in the
-comment|// recipe by using the server and-point
+comment|// Create a reasoner to run rules contained in the recipe by using the server
+comment|// and-point
 name|RunRules
 name|rulereasoner
 init|=
@@ -2365,8 +2321,7 @@ name|owllink_endpoint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Run the rule reasoner to the input RDF with the added
-comment|// top-ontology
+comment|// Run the rule reasoner to the input RDF with the added top-ontology
 name|inputowl
 operator|=
 name|rulereasoner
@@ -2375,8 +2330,7 @@ name|runRulesReasoner
 argument_list|()
 expr_stmt|;
 block|}
-comment|// Create a new OWLOntology model where to put the inferred
-comment|// axioms
+comment|// Create a new OWLOntology model where to put the inferred axioms
 name|OWLOntology
 name|output
 init|=
@@ -2393,7 +2347,7 @@ name|getOntologyID
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Create the reasoner for the enrichment
+comment|// Create the reasoner for the enrichment
 name|CreateReasoner
 name|newreasoner
 init|=
@@ -2409,8 +2363,7 @@ name|owllink_endpoint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Prepare and start the reasoner to enrich ontology's
-comment|// resources
+comment|// Prepare and start the reasoner to enrich ontology resources
 name|RunReasoner
 name|reasoner
 init|=
@@ -2423,7 +2376,7 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Initial input axioms count
+comment|// Initial input axioms count
 name|int
 name|startax
 init|=
@@ -2432,7 +2385,7 @@ operator|.
 name|getAxiomCount
 argument_list|()
 decl_stmt|;
-comment|//Run the rule reasoner
+comment|// Run the rule reasoner
 name|output
 operator|=
 name|reasoner
@@ -2442,7 +2395,7 @@ argument_list|(
 name|output
 argument_list|)
 expr_stmt|;
-comment|//End output axioms count
+comment|// End output axioms count
 name|int
 name|endax
 init|=
@@ -2462,7 +2415,7 @@ operator|>
 literal|0
 condition|)
 block|{
-comment|//No data is retrieved, the graph IS consistent
+comment|// No data is retrieved, the graph IS consistent
 return|return
 name|Response
 operator|.
@@ -2477,14 +2430,12 @@ return|;
 block|}
 else|else
 block|{
-comment|//No data is retrieved, the graph IS NOT consistent
+comment|// No data is retrieved, the graph IS NOT consistent
 return|return
 name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NO_CONTENT
 argument_list|)
 operator|.
@@ -2499,13 +2450,18 @@ name|InconsistentOntologyException
 name|exc
 parameter_list|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
-literal|"CHECK ONTOLOGY CONSISTENCE"
+literal|"Cannot classify ionconsistent ontology "
+operator|+
+name|inputowl
+operator|.
+name|getOntologyID
+argument_list|()
+argument_list|,
+name|exc
 argument_list|)
 expr_stmt|;
 return|return
@@ -2513,9 +2469,7 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
+name|PRECONDITION_FAILED
 argument_list|)
 operator|.
 name|build
@@ -2536,44 +2490,10 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
-block|}
-annotation|@
-name|GET
-annotation|@
-name|Produces
-argument_list|(
-name|TEXT_HTML
-argument_list|)
-specifier|public
-name|Response
-name|getView
-parameter_list|()
-block|{
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|(
-operator|new
-name|Viewable
-argument_list|(
-literal|"index"
-argument_list|,
-name|this
-argument_list|)
-argument_list|,
-name|TEXT_HTML
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
 block|}
 block|}
 end_class

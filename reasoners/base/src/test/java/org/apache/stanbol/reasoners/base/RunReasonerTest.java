@@ -257,8 +257,28 @@ name|InferredOntologyGenerator
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
-comment|/**  *  * @author elvio  */
+comment|/**  *   * @author elvio  */
 end_comment
 
 begin_class
@@ -273,6 +293,18 @@ decl_stmt|;
 specifier|public
 name|OWLOntology
 name|owl
+decl_stmt|;
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|public
 name|RunReasonerTest
@@ -314,7 +346,7 @@ name|setUpClass
 parameter_list|()
 throws|throws
 name|Exception
-block|{     }
+block|{}
 annotation|@
 name|AfterClass
 specifier|public
@@ -324,21 +356,21 @@ name|tearDownClass
 parameter_list|()
 throws|throws
 name|Exception
-block|{     }
+block|{}
 annotation|@
 name|Before
 specifier|public
 name|void
 name|setUp
 parameter_list|()
-block|{     }
+block|{}
 annotation|@
 name|After
 specifier|public
 name|void
 name|tearDown
 parameter_list|()
-block|{     }
+block|{}
 comment|/**      * Test of runClassifyInference method, of class RunReasoner.      */
 annotation|@
 name|Test
@@ -416,18 +448,34 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
 argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|inf
+operator|.
+name|getOntologyID
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertNotNull
+argument_list|(
+name|inf
 argument_list|)
 expr_stmt|;
 name|int
@@ -438,13 +486,6 @@ operator|.
 name|getAxiomCount
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|inf
-operator|!=
-literal|null
-condition|)
-block|{
 name|assertEquals
 argument_list|(
 literal|10
@@ -452,16 +493,6 @@ argument_list|,
 name|ax
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runClassifyInference of KReSCreateReasoner."
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 comment|/**      * Test of runClassifyInference method, of class RunReasoner.      */
 annotation|@
@@ -532,18 +563,34 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
 argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|owl
+operator|.
+name|getOntologyID
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertNotNull
+argument_list|(
+name|owl
 argument_list|)
 expr_stmt|;
 name|int
@@ -554,34 +601,13 @@ operator|.
 name|getAxiomCount
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|owl
-operator|!=
-literal|null
-condition|)
-block|{
-name|assertEquals
+name|assertTrue
 argument_list|(
-literal|true
-argument_list|,
-operator|(
 name|ax
 operator|>
 name|contin
-operator|)
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runClassifyInference of KReSCreateReasoner."
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 comment|/**      * Test of isConsistence method, of class RunReasoner.      */
 annotation|@
@@ -605,7 +631,7 @@ argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-comment|//expris.prepareReasoner();
+comment|// expris.prepareReasoner();
 name|CreateReasoner
 name|reasoner
 init|=
@@ -643,11 +669,11 @@ operator|.
 name|isConsistent
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
+name|assertTrue
+argument_list|(
 name|result
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expResult
@@ -655,16 +681,6 @@ argument_list|,
 name|result
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with isConsistence of KReSCreateReasoner."
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 comment|/**      * Test of runGeneralInference method, of class RunReasoner.      */
 annotation|@
@@ -724,17 +740,28 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
+argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|owl
+operator|.
+name|getOntologyID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -752,7 +779,7 @@ argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-comment|//expris.prepareReasoner();
+comment|// expris.prepareReasoner();
 name|InferredOntologyGenerator
 name|iogpellet
 init|=
@@ -836,13 +863,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-if|if
-condition|(
+name|assertNotNull
+argument_list|(
 name|result
-operator|!=
-literal|null
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 name|owl
@@ -850,16 +875,6 @@ argument_list|,
 name|result
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with RunGeneralInference of KReSCreateReasoner."
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 comment|/**      * Test of runGeneralInference method, of class RunReasoner.      */
 annotation|@
@@ -939,17 +954,28 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
+argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|owl
+operator|.
+name|getOntologyID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -967,7 +993,7 @@ argument_list|(
 name|owl
 argument_list|)
 decl_stmt|;
-comment|//expris.prepareReasoner();
+comment|// expris.prepareReasoner();
 name|InferredOntologyGenerator
 name|iogpellet
 init|=
@@ -991,13 +1017,11 @@ name|expResult
 init|=
 name|owl
 decl_stmt|;
-if|if
-condition|(
+name|assertNotNull
+argument_list|(
 name|result
-operator|!=
-literal|null
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expResult
@@ -1005,16 +1029,6 @@ argument_list|,
 name|result
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with RunGeneralInference with new ontology of KReSCreateReasoner."
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 block|}
 end_class

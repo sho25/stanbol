@@ -27,7 +27,25 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|TEXT_HTML
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|*
 import|;
 end_import
 
@@ -219,37 +237,7 @@ name|rs
 operator|.
 name|core
 operator|.
-name|MediaType
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
 name|Response
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
 import|;
 end_import
 
@@ -936,7 +924,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class implements the REST interface for the /check-consistency service  * of KReS.  *   * @author elvio  */
+comment|/**  * This class implements the REST interface for the /check-consistency service of KReS.  *   * @author elvio  */
 end_comment
 
 begin_class
@@ -958,10 +946,6 @@ decl_stmt|;
 specifier|private
 name|OWLOntology
 name|inputowl
-decl_stmt|;
-specifier|private
-name|OWLOntology
-name|scopeowl
 decl_stmt|;
 specifier|private
 specifier|final
@@ -996,7 +980,7 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** 	 * The constructor. 	 *  	 * @param servletContext 	 *            {To get the context where the REST service is running.} 	 */
+comment|/**      * The constructor.      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
 specifier|public
 name|ConsistencyCheck
 parameter_list|(
@@ -1117,7 +1101,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * To trasform a sequence of rules to a Jena Model 	 *  	 * @param owl 	 *            {OWLOntology object contains a single recipe} 	 * @return {A jena rdf model contains the SWRL rule.} 	 */
+comment|/**      * To trasform a sequence of rules to a Jena Model      *       * @param owl      *            {OWLOntology object contains a single recipe}      * @return {A jena rdf model contains the SWRL rule.}      */
 specifier|private
 name|Model
 name|fromRecipeToModel
@@ -1403,10 +1387,10 @@ return|return
 name|jenamodel
 return|;
 block|}
-comment|/** 	 * To check the consistency of an Ontology or a Scope (as top ontology) 	 * using the default reasoner 	 *  	 * @param uri 	 *            {A string contains the IRI of RDF (either RDF/XML or owl or 	 *            scope) to be checked.} 	 * @return Return:<br/> 	 *         200 No data is retrieved, the graph IS consistent<br/> 	 *         204 No data is retrieved, the graph IS NOT consistent<br/> 	 *         404 File not found. The ontology cannot be retrieved.<br/> 	 *         412 Precondition failed. The ontology cannot be checked. This 	 *         happens, for example, if the ontology includes missing imports.<br/> 	 *         500 Some error occurred. 	 */
+comment|/**      * To check the consistency of an Ontology or a Scope (as top ontology) using the default reasoner      *       * @param uri      *            {A string contains the IRI of RDF (either RDF/XML or owl or scope) to be checked.}      * @return Return:<br/>      *         200 No data is retrieved, the graph IS consistent<br/>      *         204 No data is retrieved, the graph IS NOT consistent<br/>      *         404 File not found. The ontology cannot be retrieved.<br/>      *         412 Precondition failed. The ontology cannot be checked. This happens, for example, if the      *         ontology includes missing imports.<br/>      *         500 Some error occurred.      */
 annotation|@
 name|GET
-comment|//@Path("{uri:.+}")
+comment|// @Path("{uri:.+}")
 specifier|public
 name|Response
 name|GetSimpleConsistencyCheck
@@ -1443,8 +1427,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 operator|.
@@ -1473,7 +1455,7 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
-comment|/** 				 * We use the loader to support duplicate owl:imports 				 */
+comment|/**                  * We use the loader to support duplicate owl:imports                  */
 name|log
 operator|.
 name|debug
@@ -1518,8 +1500,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|PRECONDITION_FAILED
 argument_list|)
 operator|.
@@ -1547,8 +1527,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NOT_FOUND
 argument_list|)
 operator|.
@@ -1608,7 +1586,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"The give graph is consistent."
+literal|"The given graph is consistent."
 argument_list|,
 name|this
 argument_list|)
@@ -1617,12 +1595,8 @@ comment|// No data is retrieved, the graph IS consistent
 return|return
 name|Response
 operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|OK
-argument_list|)
+name|ok
+argument_list|()
 operator|.
 name|build
 argument_list|()
@@ -1634,7 +1608,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"The give graph is NOT consistent."
+literal|"The given graph is NOT consistent."
 argument_list|,
 name|this
 argument_list|)
@@ -1645,8 +1619,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NO_CONTENT
 argument_list|)
 operator|.
@@ -1668,21 +1640,17 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * To check the consistency of a RDF input File or IRI on the base of a 	 * Scope (or an ontology) and a recipe. Can be used either HermiT or an 	 * owl-link server reasoner end-point 	 *  	 * @param session 	 *            {A string contains the session IRI used to check the 	 *            consistency.} 	 * @param scope 	 *            {A string contains either a specific scope's ontology or the 	 *            scope IRI used to check the consistency.} 	 * @param recipe 	 *            {A string contains the recipe IRI from the service 	 *            http://localhost:port/kres/recipe/recipeName.} 	 * @Param file {A file in a RDF (eihter RDF/XML or owl) to be checked.} 	 * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or 	 *        OWL) to be checked.} 	 * @Param owllink_endpoint {A string contains the reasoner server end-point 	 *        URL.} 	 * @return Return:<br/> 	 *         200 No data is retrieved, the graph IS consistent<br/> 	 *         204 No data is retrieved, the graph IS NOT consistent<br/> 	 *         400 To run the session is needed the scope<br/> 	 *         404 Scope either Ontology or recipe or RDF input not found<br/> 	 *         409 Too much RDF input<br/> 	 *         500 Some error occurred 	 */
+comment|/**      * To check the consistency of a RDF input File or IRI on the base of a Scope (or an ontology) and a      * recipe. Can be used either HermiT or an owl-link server reasoner end-point      *       * @param session      *            {A string contains the session IRI used to check the consistency.}      * @param scope      *            {A string contains either a specific scope's ontology or the scope IRI used to check the      *            consistency.}      * @param recipe      *            {A string contains the recipe IRI from the service      *            http://localhost:port/kres/recipe/recipeName.}      * @Param file {A file in a RDF (eihter RDF/XML or owl) to be checked.}      * @Param input_graph {A string contains the IRI of RDF (either RDF/XML or OWL) to be checked.}      * @Param owllink_endpoint {A string contains the reasoner server end-point URL.}      * @return Return:<br/>      *         200 No data is retrieved, the graph IS consistent<br/>      *         204 No data is retrieved, the graph IS NOT consistent<br/>      *         400 To run the session is needed the scope<br/>      *         404 Scope either Ontology or recipe or RDF input not found<br/>      *         409 Too much RDF input<br/>      *         500 Some error occurred      */
 annotation|@
 name|POST
 annotation|@
 name|Consumes
 argument_list|(
-name|MediaType
-operator|.
 name|MULTIPART_FORM_DATA
 argument_list|)
 specifier|public
@@ -1790,8 +1758,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|BAD_REQUEST
 argument_list|)
 operator|.
@@ -1819,7 +1785,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"To much RDF input"
+literal|"Too much RDF input"
 argument_list|,
 name|this
 argument_list|)
@@ -1829,8 +1795,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|CONFLICT
 argument_list|)
 operator|.
@@ -1905,8 +1869,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NOT_FOUND
 argument_list|)
 operator|.
@@ -2247,38 +2209,15 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|log
-operator|.
-name|error
+throw|throw
+operator|new
+name|WebApplicationException
 argument_list|(
-literal|"Problem with scope: "
-operator|+
-name|scope
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Exception is "
-argument_list|,
 name|e
+argument_list|,
+name|INTERNAL_SERVER_ERROR
 argument_list|)
-expr_stmt|;
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
-argument_list|)
-operator|.
-name|build
-argument_list|()
-expr_stmt|;
+throw|;
 block|}
 comment|// Get Ontologies from session
 if|if
@@ -2445,38 +2384,15 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|log
-operator|.
-name|error
+throw|throw
+operator|new
+name|WebApplicationException
 argument_list|(
-literal|"Problem with session: "
-operator|+
-name|session
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Exception is"
-argument_list|,
 name|e
+argument_list|,
+name|INTERNAL_SERVER_ERROR
 argument_list|)
-expr_stmt|;
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
-argument_list|)
-operator|.
-name|build
-argument_list|()
-expr_stmt|;
+throw|;
 block|}
 comment|// After gathered the all ontology as imported now we apply the
 comment|// changes
@@ -2615,12 +2531,8 @@ comment|// No data is retrieved, the graph IS consistent
 return|return
 name|Response
 operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|OK
-argument_list|)
+name|ok
+argument_list|()
 operator|.
 name|build
 argument_list|()
@@ -2634,8 +2546,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NO_CONTENT
 argument_list|)
 operator|.
@@ -2774,8 +2684,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|OK
 argument_list|)
 operator|.
@@ -2791,8 +2699,6 @@ name|Response
 operator|.
 name|status
 argument_list|(
-name|Status
-operator|.
 name|NO_CONTENT
 argument_list|)
 operator|.
@@ -2814,8 +2720,6 @@ name|WebApplicationException
 argument_list|(
 name|e
 argument_list|,
-name|Status
-operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;

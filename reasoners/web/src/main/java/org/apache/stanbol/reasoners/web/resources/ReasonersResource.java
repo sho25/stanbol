@@ -200,7 +200,7 @@ name|Context
 name|ServletContext
 name|servletContext
 parameter_list|)
-block|{               }
+block|{}
 annotation|@
 name|GET
 annotation|@

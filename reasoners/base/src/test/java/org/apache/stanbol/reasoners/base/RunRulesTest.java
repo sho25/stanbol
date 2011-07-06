@@ -235,6 +235,26 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|hp
@@ -268,7 +288,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  * @author elvio  */
+comment|/**  *   * @author elvio  */
 end_comment
 
 begin_class
@@ -276,6 +296,18 @@ specifier|public
 class|class
 name|RunRulesTest
 block|{
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 specifier|public
 name|OWLOntologyManager
 name|owlmanagertarget
@@ -388,7 +420,7 @@ name|setUpClass
 parameter_list|()
 throws|throws
 name|Exception
-block|{     }
+block|{}
 annotation|@
 name|AfterClass
 specifier|public
@@ -398,21 +430,21 @@ name|tearDownClass
 parameter_list|()
 throws|throws
 name|Exception
-block|{     }
+block|{}
 annotation|@
 name|Before
 specifier|public
 name|void
 name|setUp
 parameter_list|()
-block|{     }
+block|{}
 annotation|@
 name|After
 specifier|public
 name|void
 name|tearDown
 parameter_list|()
-block|{     }
+block|{}
 comment|/**      * Test of runRulesReasoner method, of class RunRules.      */
 annotation|@
 name|Test
@@ -480,17 +512,28 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
+argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|newmodel
+operator|.
+name|getOntologyID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -530,13 +573,11 @@ decl_stmt|;
 name|String
 name|ax
 decl_stmt|;
-if|if
-condition|(
+name|assertNotNull
+argument_list|(
 name|newmodel
-operator|!=
-literal|null
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 while|while
 condition|(
 name|axt
@@ -569,24 +610,7 @@ argument_list|(
 literal|"Some errors occur with runRulesReasoner with new ontology in KReSRunRules."
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
 block|}
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runRulesReasoner with new ontology in KReSRunRules."
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|newmodel
-operator|!=
-literal|null
-condition|)
-block|{
 while|while
 condition|(
 name|axiom
@@ -622,16 +646,6 @@ name|ax
 operator|.
 name|toString
 argument_list|()
-argument_list|)
-expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runRulesReasoner with new ontology in KReSRunRules."
 argument_list|)
 expr_stmt|;
 block|}
@@ -684,17 +698,28 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
+argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|newmodel
+operator|.
+name|getOntologyID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -720,13 +745,11 @@ decl_stmt|;
 name|String
 name|ax
 decl_stmt|;
-if|if
-condition|(
+name|assertNotNull
+argument_list|(
 name|newmodel
-operator|!=
-literal|null
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 while|while
 condition|(
 name|axiom
@@ -762,16 +785,6 @@ name|ax
 operator|.
 name|toString
 argument_list|()
-argument_list|)
-expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runRulesReasoner in KReSRunRules."
 argument_list|)
 expr_stmt|;
 block|}
@@ -846,17 +859,28 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
+argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|newmodel
+operator|.
+name|getOntologyID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -896,13 +920,11 @@ decl_stmt|;
 name|String
 name|ax
 decl_stmt|;
-if|if
-condition|(
+name|assertNotNull
+argument_list|(
 name|newmodel
-operator|!=
-literal|null
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 while|while
 condition|(
 name|axt
@@ -935,24 +957,7 @@ argument_list|(
 literal|"Some errors occur with runRulesReasoner with new ontology in KReSRunRules."
 argument_list|)
 expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
 block|}
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runRulesReasoner with new ontology in KReSRunRules."
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|newmodel
-operator|!=
-literal|null
-condition|)
-block|{
 while|while
 condition|(
 name|axiom
@@ -988,16 +993,6 @@ name|ax
 operator|.
 name|toString
 argument_list|()
-argument_list|)
-expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runRulesReasoner with new ontology in KReSRunRules."
 argument_list|)
 expr_stmt|;
 block|}
@@ -1050,17 +1045,28 @@ name|getReasoner
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|":::::::::::::::: consistency check "
+literal|"Ontology {} is "
 operator|+
+operator|(
 name|run
 operator|.
 name|isConsistent
+argument_list|()
+condition|?
+literal|"consistent"
+else|:
+literal|"NOT consistent"
+operator|)
+operator|+
+literal|"."
+argument_list|,
+name|newmodel
+operator|.
+name|getOntologyID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1086,13 +1092,11 @@ decl_stmt|;
 name|String
 name|ax
 decl_stmt|;
-if|if
-condition|(
+name|assertNotNull
+argument_list|(
 name|newmodel
-operator|!=
-literal|null
-condition|)
-block|{
+argument_list|)
+expr_stmt|;
 while|while
 condition|(
 name|axiom
@@ -1128,16 +1132,6 @@ name|ax
 operator|.
 name|toString
 argument_list|()
-argument_list|)
-expr_stmt|;
-comment|// TODO review the generated test code and remove the default call to fail.
-block|}
-block|}
-else|else
-block|{
-name|fail
-argument_list|(
-literal|"Some errors occur with runRulesReasoner in KReSRunRules."
 argument_list|)
 expr_stmt|;
 block|}
