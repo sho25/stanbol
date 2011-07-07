@@ -834,6 +834,21 @@ name|respath
 operator|+
 name|filepath2
 expr_stmt|;
+comment|// The location string variable must be a valid uri
+name|location
+operator|=
+operator|new
+name|File
+argument_list|(
+name|location
+argument_list|)
+operator|.
+name|toURI
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
 block|}
 else|else
 name|location
