@@ -800,7 +800,14 @@ decl_stmt|;
 name|String
 name|respath
 init|=
-literal|"KReSConf/"
+literal|"KReSConf"
+operator|+
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"file.separator"
+argument_list|)
 decl_stmt|;
 comment|// "src/main/resources/";
 name|String
@@ -812,7 +819,12 @@ comment|// "RuleOntology/rmi_config.owl";
 comment|// userdir = userdir.substring(0, userdir.lastIndexOf("kres.") + 5) + "rules/";
 name|userdir
 operator|+=
-literal|"/"
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"file.separator"
+argument_list|)
 expr_stmt|;
 name|location
 operator|=
