@@ -213,6 +213,24 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|utils
+operator|.
+name|SolrUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|servicesapi
@@ -875,9 +893,9 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|utils
+name|query
 operator|.
-name|SolrUtil
+name|QueryUtils
 import|;
 end_import
 
