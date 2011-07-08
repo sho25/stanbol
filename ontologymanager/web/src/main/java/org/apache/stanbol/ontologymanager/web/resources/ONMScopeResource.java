@@ -931,11 +931,6 @@ block|}
 annotation|@
 name|POST
 comment|// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-annotation|@
-name|Produces
-argument_list|(
-literal|"text/plain"
-argument_list|)
 specifier|public
 name|Response
 name|loadCustomOntology
@@ -987,11 +982,6 @@ name|onm
 operator|.
 name|getScopeRegistry
 argument_list|()
-decl_stmt|;
-name|String
-name|res
-init|=
-literal|""
 decl_stmt|;
 name|IRI
 name|scopeiri
@@ -1054,10 +1044,6 @@ name|scopeiri
 argument_list|)
 condition|)
 block|{
-name|res
-operator|=
-literal|"Ok, scope is there"
-expr_stmt|;
 name|OntologyScope
 name|scope
 init|=
@@ -1171,9 +1157,7 @@ return|return
 name|Response
 operator|.
 name|ok
-argument_list|(
-name|res
-argument_list|)
+argument_list|()
 operator|.
 name|build
 argument_list|()
