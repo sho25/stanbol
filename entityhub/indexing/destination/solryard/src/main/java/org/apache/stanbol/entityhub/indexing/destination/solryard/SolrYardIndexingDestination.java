@@ -365,9 +365,7 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|entityhub
-operator|.
-name|yard
+name|commons
 operator|.
 name|solr
 operator|.

@@ -199,9 +199,9 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|utils
+name|query
 operator|.
-name|SolrUtil
+name|QueryUtils
 import|;
 end_import
 
@@ -336,7 +336,7 @@ name|String
 index|[]
 name|queryConstraints
 init|=
-name|SolrUtil
+name|QueryUtils
 operator|.
 name|encodeQueryValue
 argument_list|(

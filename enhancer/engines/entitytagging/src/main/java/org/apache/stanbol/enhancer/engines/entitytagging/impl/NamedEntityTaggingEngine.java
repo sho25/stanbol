@@ -1973,7 +1973,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|warn
+name|info
 argument_list|(
 literal|"Unable to process TextAnnotation "
 operator|+
@@ -1984,6 +1984,36 @@ operator|+
 name|ENHANCER_SELECTED_TEXT
 operator|+
 literal|" is not present"
+argument_list|)
+expr_stmt|;
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+return|;
+block|}
+if|if
+condition|(
+name|name
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Unable to process TextAnnotation "
+operator|+
+name|textAnnotation
+operator|+
+literal|" because an empty Stirng is selected by "
+operator|+
+name|ENHANCER_SELECTED_TEXT
+operator|+
+literal|""
 argument_list|)
 expr_stmt|;
 return|return

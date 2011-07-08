@@ -61,6 +61,24 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|utils
+operator|.
+name|SolrUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|yard
@@ -169,9 +187,7 @@ name|solr
 operator|.
 name|query
 operator|.
-name|ConstraintTypePosition
-operator|.
-name|PositionType
+name|QueryUtils
 import|;
 end_import
 
@@ -189,9 +205,11 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|utils
+name|query
 operator|.
-name|SolrUtil
+name|ConstraintTypePosition
+operator|.
+name|PositionType
 import|;
 end_import
 

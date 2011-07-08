@@ -249,9 +249,9 @@ name|yard
 operator|.
 name|solr
 operator|.
-name|utils
+name|query
 operator|.
-name|SolrUtil
+name|QueryUtils
 import|;
 end_import
 
@@ -408,7 +408,7 @@ name|addEncoded
 argument_list|(
 name|POS
 argument_list|,
-name|SolrUtil
+name|QueryUtils
 operator|.
 name|encodeQueryValue
 argument_list|(
