@@ -752,7 +752,7 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"  ... no Configuration to process"
 argument_list|)
@@ -776,36 +776,13 @@ parameter_list|)
 block|{
 comment|//define the id
 name|String
-name|id
-init|=
-name|bundleResource
-operator|.
-name|toString
-argument_list|()
-decl_stmt|;
-name|String
 name|relPath
 init|=
-name|id
-operator|.
-name|substring
-argument_list|(
-name|id
-operator|.
-name|lastIndexOf
+name|getInstallableResourceId
 argument_list|(
 name|path
-argument_list|)
-operator|+
-name|path
-operator|.
-name|length
-argument_list|()
 argument_list|,
-name|id
-operator|.
-name|length
-argument_list|()
+name|bundleResource
 argument_list|)
 decl_stmt|;
 name|String
@@ -840,18 +817,12 @@ name|resource
 decl_stmt|;
 try|try
 block|{
-comment|/*              * Notes:              *  - use bundleinstaller:<relativepath> as id              *  - parse null as type to enable autodetection for configs as              *    implemented by InternalReseouce.create(..)              *  - we use the modification date of the bundle as digest              *  - the Dictionary will be ignored if an input stream is present              *    so it is best to parse null              *  - No idea how the priority is used by the Sling Installer. For              *    now parse null than the default priority is used.              */
+comment|/*              * Notes:              *  - use<relativepath> as id              *  - parse null as type to enable autodetection for configs as              *    implemented by InternalReseouce.create(..)              *  - we use the symbolic name and the modification date of the bundle as digest              *  - the Dictionary will be ignored if an input stream is present              *    so it is best to parse null              *  - No idea how the priority is used by the Sling Installer. For              *    now parse null than the default priority is used.              */
 name|resource
 operator|=
 operator|new
 name|InstallableResource
 argument_list|(
-name|BundleInstallerConstants
-operator|.
-name|PROVIDER_SCHEME
-operator|+
-literal|':'
-operator|+
 name|relPath
 argument_list|,
 name|bundleResource
@@ -865,6 +836,11 @@ name|String
 operator|.
 name|valueOf
 argument_list|(
+name|bundle
+operator|.
+name|getSymbolicName
+argument_list|()
+operator|+
 name|bundle
 operator|.
 name|getLastModified
@@ -882,7 +858,7 @@ name|info
 argument_list|(
 literal|" ... found installable resource "
 operator|+
-name|id
+name|bundleResource
 argument_list|)
 expr_stmt|;
 block|}
@@ -902,7 +878,7 @@ name|format
 argument_list|(
 literal|"Unable to process configuration File %s from Bundle %s"
 argument_list|,
-name|id
+name|bundleResource
 argument_list|,
 name|bundle
 operator|.
@@ -921,6 +897,60 @@ return|return
 name|resource
 return|;
 block|}
+comment|/**      * @param path      * @param bundleResource      * @return      */
+specifier|private
+name|String
+name|getInstallableResourceId
+parameter_list|(
+name|String
+name|path
+parameter_list|,
+name|URL
+name|bundleResource
+parameter_list|)
+block|{
+name|String
+name|id
+init|=
+name|bundleResource
+operator|.
+name|toString
+argument_list|()
+decl_stmt|;
+name|String
+name|relPath
+init|=
+name|id
+operator|.
+name|substring
+argument_list|(
+name|id
+operator|.
+name|lastIndexOf
+argument_list|(
+name|path
+argument_list|)
+operator|+
+name|path
+operator|.
+name|length
+argument_list|()
+argument_list|,
+name|id
+operator|.
+name|length
+argument_list|()
+argument_list|)
+decl_stmt|;
+return|return
+name|relPath
+return|;
+block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|private
 name|void
 name|unregister
@@ -960,17 +990,10 @@ name|bundle
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|path
-operator|!=
-literal|null
-condition|)
-block|{
-comment|//remove the files ...
-comment|//TODO: Maybe removing installed stuff when the bundle is stopped is
-comment|//      not so a good Idea! Maybe it is ?!
-block|}
+comment|//TODO: This code does not yet work correctly if the bundle is restarted
+comment|//      and the resources need to be readded. Therefore uninstalling is
+comment|//      currently deactivated
+comment|/*        if (path != null) {             log.info(" ... remove configurations within path " + path);             ArrayList<String> removedResources = new ArrayList<String>();             for (Enumeration<URL> resources = (Enumeration<URL>) bundle.findEntries(path, null, true); resources.hasMoreElements();) {                 String installableResourceId = getInstallableResourceId(path, resources.nextElement());                 if (installableResourceId != null) {                     log.info("  ... remove Installable Resource {}",installableResourceId);                     removedResources.add(installableResourceId);                 }             }             installer.updateResources(PROVIDER_SCHEME, null, removedResources.toArray(new String[removedResources.size()]));         } else {             log.info("  ... no Configuration to process");         }    */
 block|}
 comment|/**      * removes the bundle listener      */
 specifier|public
