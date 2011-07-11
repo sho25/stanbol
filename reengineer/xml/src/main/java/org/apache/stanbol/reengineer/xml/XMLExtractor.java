@@ -395,6 +395,26 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|ontology
+operator|.
+name|UnmodifiableOntologySpaceException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|session
 operator|.
 name|Session
@@ -1378,8 +1398,8 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Created OWL Ontology "
-operator|+
+literal|"Ontology {} created."
+argument_list|,
 name|iri
 argument_list|)
 expr_stmt|;
@@ -1449,11 +1469,18 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to creare ontology "
+operator|+
+name|XML_OWL
+operator|.
+name|URI
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 catch|catch
@@ -1478,6 +1505,8 @@ name|scope
 operator|!=
 literal|null
 condition|)
+block|{
+try|try
 block|{
 name|scope
 operator|.
@@ -1505,6 +1534,29 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|UnmodifiableOntologySpaceException
+name|ex
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Cannot add session space "
+operator|+
+name|spaceIRI
+operator|+
+literal|" to unmodifiable scope "
+operator|+
+name|scope
+argument_list|,
+name|ex
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 name|log
 operator|.

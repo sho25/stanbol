@@ -331,6 +331,26 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|ontology
+operator|.
+name|UnmodifiableOntologySpaceException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|session
 operator|.
 name|Session
@@ -389,7 +409,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|ReengineeringException
+name|Reengineer
 import|;
 end_import
 
@@ -425,7 +445,7 @@ name|base
 operator|.
 name|api
 operator|.
-name|Reengineer
+name|ReengineeringException
 import|;
 end_import
 
@@ -546,20 +566,6 @@ operator|.
 name|model
 operator|.
 name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLDataFactory
 import|;
 end_import
 
@@ -863,7 +869,7 @@ specifier|protected
 name|OntologyScope
 name|scope
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the DBExtractor instances do need to be configured! YOU NEED      * TO USE {@link #DBExtractor(ONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the DBExtractor instances do need to be configured! YOU NEED      * TO USE {@link #DBExtractor(ONManager)} or its overloads, to parse the configuration and then initialise      * the rule store if running outside a OSGI environment.      */
 specifier|public
 name|DBExtractor
 parameter_list|()
@@ -1212,7 +1218,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Semion DBExtractor : created scope with IRI "
+literal|"Created scope with IRI "
 operator|+
 name|REENGINEERING_SCOPE
 argument_list|)
@@ -1247,13 +1253,13 @@ argument_list|(
 name|iri
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"Created ONTOLOGY OWL"
+literal|"Ontology {} created."
+argument_list|,
+name|iri
 argument_list|)
 expr_stmt|;
 name|scope
@@ -1318,11 +1324,18 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Failed to creare ontology "
+operator|+
+name|DBS_L1
+operator|.
+name|URI
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 catch|catch
@@ -1345,6 +1358,8 @@ name|scope
 operator|!=
 literal|null
 condition|)
+block|{
+try|try
 block|{
 name|scope
 operator|.
@@ -1372,6 +1387,29 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|UnmodifiableOntologySpaceException
+name|ex
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Cannot add session space "
+operator|+
+name|reengineeringSpaceIRI
+operator|+
+literal|" to unmodifiable scope "
+operator|+
+name|scope
+argument_list|,
+name|ex
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 name|log
 operator|.
