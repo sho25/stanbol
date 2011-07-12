@@ -89,13 +89,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|knallgrau
+name|apache
 operator|.
-name|utils
+name|tika
 operator|.
-name|textcat
+name|language
 operator|.
-name|TextCategorizer
+name|LanguageIdentifier
 import|;
 end_import
 
@@ -124,29 +124,15 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link TextCatTest} is a test class for {@link TextCategorizer}.  *  * @author Joerg Steffen, DFKI  * @version $Id$  */
+comment|/**  * {@link LangIdTest} is a test class for {@link TextCategorizer}.  *  * @author Joerg Steffen, DFKI  * @version $Id$  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|TextCatTest
+name|LangIdTest
 block|{
 comment|/**      * This contains the text categorizer to test.      */
-specifier|private
-specifier|static
-name|TextCategorizer
-name|tc
-decl_stmt|;
-specifier|private
-specifier|static
-name|Properties
-name|langMap
-init|=
-operator|new
-name|Properties
-argument_list|()
-decl_stmt|;
 comment|/**      * This initializes the text categorizer.      */
 annotation|@
 name|BeforeClass
@@ -158,34 +144,10 @@ parameter_list|()
 throws|throws
 name|IOException
 block|{
-name|tc
-operator|=
-operator|new
-name|TextCategorizer
+name|LanguageIdentifier
+operator|.
+name|initProfiles
 argument_list|()
-expr_stmt|;
-name|InputStream
-name|in
-init|=
-name|tc
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
-name|getResourceAsStream
-argument_list|(
-literal|"languageLabelsMap.txt"
-argument_list|)
-decl_stmt|;
-name|langMap
-operator|.
-name|load
-argument_list|(
-name|in
-argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the language identification.      *      * @throws IOException if there is an error when reading the text      */
@@ -193,7 +155,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTextCat
+name|testLangId
 parameter_list|()
 throws|throws
 name|IOException
@@ -238,28 +200,28 @@ argument_list|(
 name|in
 argument_list|)
 decl_stmt|;
+name|LanguageIdentifier
+name|tc
+init|=
+operator|new
+name|LanguageIdentifier
+argument_list|(
+name|text
+argument_list|)
+decl_stmt|;
 name|String
 name|language
 init|=
 name|tc
 operator|.
-name|categorize
-argument_list|(
-name|text
-argument_list|)
+name|getLanguage
+argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
 literal|"en"
 argument_list|,
-name|langMap
-operator|.
-name|getProperty
-argument_list|(
 name|language
-argument_list|,
-name|language
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
