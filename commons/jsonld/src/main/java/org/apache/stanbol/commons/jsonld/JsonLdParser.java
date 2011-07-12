@@ -19,7 +19,27 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -96,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The JsonLdParser can be used to parse a given JSON-LD String representation  * into a JSON-LD data structure.  *  * @author Fabian Christ  */
+comment|/**  * The JsonLdParser can be used to parse a given JSON-LD String representation  * into a JSON-LD data structure.  *   * @author Fabian Christ  */
 end_comment
 
 begin_class
@@ -120,7 +140,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Parse the given String into a JSON-LD data structure.      *       * @param jsonLdString A JSON-LD String.      * @return JSON-LD data structure.      */
+comment|/** 	 * Parse the given String into a JSON-LD data structure. 	 *  	 * @param jsonLdString 	 *            A JSON-LD String. 	 * @return JSON-LD data structure. 	 */
 specifier|public
 specifier|static
 name|JsonLd
@@ -174,7 +194,7 @@ return|return
 name|jld
 return|;
 block|}
-comment|/**      * Parses a single subject.      *       * @param jo      *            JSON object that holds the subject's data.      * @param jld      *            JsonLd object to add the created subject resource.      */
+comment|/** 	 * Parses a single subject. 	 *  	 * @param jo 	 *            JSON object that holds the subject's data. 	 * @param jld 	 *            JsonLd object to add the created subject resource. 	 */
 specifier|private
 specifier|static
 name|void
@@ -193,8 +213,10 @@ name|String
 name|profile
 parameter_list|)
 block|{
-comment|// The root subject is used for cases where no explicit subject is specified. We need
-comment|// at least one dummy subject (bnode) to support type coercion because types are assigned to
+comment|// The root subject is used for cases where no explicit subject is
+comment|// specified. We need
+comment|// at least one dummy subject (bnode) to support type coercion because
+comment|// types are assigned to
 comment|// subjects.
 name|JsonLdResource
 name|subject
@@ -372,7 +394,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// If there is a local profile specified for this subject, we
-comment|// use that one. Otherwise we assign the profile given by the parameter.
+comment|// use that one. Otherwise we assign the profile given by the
+comment|// parameter.
 if|if
 condition|(
 name|jo
@@ -571,7 +594,8 @@ name|subject
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Iterate through the rest of properties and unCURIE property values
+comment|// Iterate through the rest of properties and unCURIE property
+comment|// values
 comment|// depending on their type
 if|if
 condition|(
@@ -637,6 +661,60 @@ argument_list|(
 name|property
 argument_list|)
 decl_stmt|;
+name|handleProperty
+argument_list|(
+name|jld
+argument_list|,
+name|subject
+argument_list|,
+name|property
+argument_list|,
+name|valueObject
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|JSONException
+name|e
+parameter_list|)
+block|{
+name|logger
+operator|.
+name|error
+argument_list|(
+literal|"There were JSON problems when parsing the JSON-LD String"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+name|e
+operator|.
+name|printStackTrace
+argument_list|()
+expr_stmt|;
+block|}
+block|}
+specifier|private
+specifier|static
+name|void
+name|handleProperty
+parameter_list|(
+name|JsonLd
+name|jld
+parameter_list|,
+name|JsonLdResource
+name|subject
+parameter_list|,
+name|String
+name|property
+parameter_list|,
+name|Object
+name|valueObject
+parameter_list|)
+block|{
 if|if
 condition|(
 name|valueObject
@@ -661,6 +739,40 @@ argument_list|,
 name|convertToMapAndList
 argument_list|(
 name|jsonValue
+argument_list|,
+name|jld
+operator|.
+name|getNamespacePrefixMap
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|valueObject
+operator|instanceof
+name|JSONArray
+condition|)
+block|{
+name|JSONArray
+name|arrayValue
+init|=
+operator|(
+name|JSONArray
+operator|)
+name|valueObject
+decl_stmt|;
+name|subject
+operator|.
+name|putProperty
+argument_list|(
+name|property
+argument_list|,
+name|convertToMapAndList
+argument_list|(
+name|arrayValue
 argument_list|,
 name|jld
 operator|.
@@ -717,31 +829,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-block|}
-block|}
-catch|catch
-parameter_list|(
-name|JSONException
-name|e
-parameter_list|)
-block|{
-name|logger
-operator|.
-name|error
-argument_list|(
-literal|"There were JSON problems when parsing the JSON-LD String"
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
-block|}
-comment|/**      * Converts a JSON object into a Map or List data structure.      *       *<p>      * The JSON-LD implementation is based on Map and List data types. If the input is a JSONObject, it will      * be converted into a Map&lt;String, Object>. If the input is a JSONArray, it will be converted into a      * List&lt;Object>. Otherwise the input will be returned untouched.      *       * @param input      *            Object that will be converted.      * @return      */
+comment|/** 	 * Converts a JSON object into a Map or List data structure. 	 *  	 *<p> 	 * The JSON-LD implementation is based on Map and List data types. If the 	 * input is a JSONObject, it will be converted into a Map&lt;String, 	 * Object>. If the input is a JSONArray, it will be converted into a 	 * List&lt;Object>. Otherwise the input will be returned untouched. 	 *  	 * @param input 	 *            Object that will be converted. 	 * @return 	 */
 specifier|private
 specifier|static
 name|Object
@@ -838,6 +926,31 @@ if|if
 condition|(
 name|input
 operator|instanceof
+name|JSONArray
+condition|)
+block|{
+name|JSONArray
+name|ao
+init|=
+operator|(
+name|JSONArray
+operator|)
+name|input
+decl_stmt|;
+return|return
+name|convertToList
+argument_list|(
+name|ao
+argument_list|,
+name|namespacePrefixMap
+argument_list|)
+return|;
+block|}
+elseif|else
+if|if
+condition|(
+name|input
+operator|instanceof
 name|String
 condition|)
 block|{
@@ -860,7 +973,7 @@ name|input
 return|;
 block|}
 block|}
-comment|/**      * Converts a JSONOBject into a Map&lt;String, Object>.      *       * @param jo      *            JSONOBject to be converted.      * @return A Map that represents the same information as the JSONOBject.      */
+comment|/** 	 * Converts a JSONOBject into a Map&lt;String, Object>. 	 *  	 * @param jo 	 *            JSONOBject to be converted. 	 * @return A Map that represents the same information as the JSONOBject. 	 */
 specifier|private
 specifier|static
 name|Map
@@ -994,7 +1107,99 @@ return|return
 name|jsonMap
 return|;
 block|}
-comment|/**      * Replaces the CURIE prefixes with the namespace to create full qualified IRIs.      *       * @param curie      *            The CURIE to create an IRI from.      * @param namespacePrefixMap      *            A Map with known namespaces.      * @return      */
+specifier|private
+specifier|static
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|convertToList
+parameter_list|(
+name|JSONArray
+name|arrayValue
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|namespacePrefixMap
+parameter_list|)
+block|{
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|values
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|Object
+argument_list|>
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+name|arrayValue
+operator|.
+name|length
+argument_list|()
+condition|;
+name|i
+operator|++
+control|)
+block|{
+try|try
+block|{
+name|values
+operator|.
+name|add
+argument_list|(
+name|convertToMapAndList
+argument_list|(
+name|arrayValue
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+argument_list|,
+name|namespacePrefixMap
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|JSONException
+name|e
+parameter_list|)
+block|{
+name|logger
+operator|.
+name|error
+argument_list|(
+literal|"Error converting JSONArray to list"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+return|return
+name|values
+return|;
+block|}
+comment|/** 	 * Replaces the CURIE prefixes with the namespace to create full qualified 	 * IRIs. 	 *  	 * @param curie 	 *            The CURIE to create an IRI from. 	 * @param namespacePrefixMap 	 *            A Map with known namespaces. 	 * @return 	 */
 specifier|private
 specifier|static
 name|String
