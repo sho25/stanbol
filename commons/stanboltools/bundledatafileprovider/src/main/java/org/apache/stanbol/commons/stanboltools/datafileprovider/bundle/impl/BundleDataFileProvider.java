@@ -119,6 +119,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|commons
+operator|.
+name|io
+operator|.
+name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|commons
@@ -458,7 +472,6 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-specifier|final
 name|String
 name|resourceName
 init|=
@@ -472,6 +485,16 @@ name|filename
 else|:
 name|filename
 decl_stmt|;
+comment|//make the path platform independent (STANBOL-259)
+name|resourceName
+operator|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
+name|resourceName
+argument_list|)
+expr_stmt|;
 name|resource
 operator|=
 name|bundle
