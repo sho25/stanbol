@@ -83,7 +83,7 @@ name|factstore
 operator|.
 name|model
 operator|.
-name|ResultSet
+name|FactResultSet
 import|;
 end_import
 
@@ -149,12 +149,14 @@ throws|throws
 name|Exception
 function_decl|;
 specifier|public
-name|ResultSet
+name|FactResultSet
 name|query
 parameter_list|(
 name|Query
 name|query
 parameter_list|)
+throws|throws
+name|Exception
 function_decl|;
 block|}
 end_interface

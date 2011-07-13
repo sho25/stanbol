@@ -113,7 +113,7 @@ name|factstore
 operator|.
 name|model
 operator|.
-name|ResultSet
+name|FactResultSet
 import|;
 end_import
 
@@ -225,7 +225,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|ResultSet
+name|FactResultSet
 name|query
 parameter_list|(
 name|Query
