@@ -654,8 +654,12 @@ name|asList
 argument_list|(
 name|pathsString
 operator|.
-name|trim
-argument_list|()
+name|replaceAll
+argument_list|(
+literal|"\\s"
+argument_list|,
+literal|""
+argument_list|)
 operator|.
 name|split
 argument_list|(
