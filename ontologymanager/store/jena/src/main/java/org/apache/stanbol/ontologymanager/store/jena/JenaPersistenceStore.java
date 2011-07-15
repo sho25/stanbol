@@ -1091,6 +1091,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLClassExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLDataFactory
 import|;
 end_import
@@ -1148,6 +1162,20 @@ operator|.
 name|model
 operator|.
 name|OWLObjectProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLObjectPropertyExpression
 import|;
 end_import
 
@@ -10499,8 +10527,6 @@ operator|.
 name|getDisjointClasses
 argument_list|(
 name|owlClass
-argument_list|,
-literal|false
 argument_list|)
 operator|.
 name|getFlattened
@@ -14063,7 +14089,7 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|OWLObjectProperty
+name|OWLObjectPropertyExpression
 argument_list|>
 name|equiProperties
 init|=
@@ -14079,7 +14105,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|OWLObjectProperty
+name|OWLObjectPropertyExpression
 name|objectProp
 range|:
 name|equiProperties
@@ -14091,6 +14117,9 @@ init|=
 name|generatePropertyMetaInformation
 argument_list|(
 name|objectProp
+operator|.
+name|getNamedProperty
+argument_list|()
 operator|.
 name|getIRI
 argument_list|()
@@ -14236,7 +14265,7 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|OWLObjectProperty
+name|OWLObjectPropertyExpression
 argument_list|>
 name|supProperties
 init|=
@@ -14254,7 +14283,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|OWLObjectProperty
+name|OWLObjectPropertyExpression
 name|objectProp
 range|:
 name|supProperties
@@ -14266,6 +14295,9 @@ init|=
 name|generatePropertyMetaInformation
 argument_list|(
 name|objectProp
+operator|.
+name|getNamedProperty
+argument_list|()
 operator|.
 name|getIRI
 argument_list|()
