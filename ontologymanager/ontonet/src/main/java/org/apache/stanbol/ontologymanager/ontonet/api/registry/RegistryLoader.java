@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -176,7 +176,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A registry loader is a toolkit for loading all ontologies indexed by an ontology registry, or those  * referenced by one of the libraries within a registry.  *   * @author alessandro  *   */
+comment|/**  * A registry loader is a toolkit for loading all ontologies indexed by an ontology registry, or those  * referenced by one of the libraries within a registry.  */
 end_comment
 
 begin_interface
@@ -236,13 +236,24 @@ name|IRI
 name|libraryID
 parameter_list|)
 function_decl|;
+comment|/**      * Only extract the ontologies belonging to the library specified, if found in the registry at the      * supplied location.      *       * @param registryPhysicalRIRI      * @param libraryID      * @return      */
+name|Registry
+name|loadLibraryEager
+parameter_list|(
+name|IRI
+name|registryPhysicalIRI
+parameter_list|,
+name|IRI
+name|libraryID
+parameter_list|)
+function_decl|;
 name|void
 name|loadLocations
 parameter_list|()
 throws|throws
 name|RegistryContentException
 function_decl|;
-comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one registry.      *       * @param physicalIRI      * @return      */
+comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one library.      *       * @param physicalIRI      * @return      */
 name|Set
 argument_list|<
 name|Registry

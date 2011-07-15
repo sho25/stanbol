@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -665,6 +665,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLOntologyDocumentAlreadyExistsException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -964,7 +978,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"[NONFATAL] Could not gather ontologies for registry "
+literal|"Could not gather ontologies for registry "
 operator|+
 name|registryItem
 operator|.
@@ -1055,12 +1069,11 @@ name|OWLOntologyCreationIOException
 name|ex
 parameter_list|)
 block|{
-comment|// FIXME Log error here
 name|log
 operator|.
 name|error
 argument_list|(
-literal|"[NONFATAL] Cannot load ontology from "
+literal|"Cannot load ontology from "
 operator|+
 name|locationIri
 argument_list|)
@@ -1076,7 +1089,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"[NONFATAL] Malformed URI for ontology "
+literal|"Malformed URI for ontology "
 operator|+
 name|registryItem
 operator|.
@@ -1237,7 +1250,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: [NONFATAL] Malformed URI for merged ontology from registry "
+literal|"Malformed URI for merged ontology from registry "
 operator|+
 name|registryLocation
 argument_list|,
@@ -2063,7 +2076,7 @@ operator|new
 name|String
 index|[]
 block|{}
-comment|/* 										 * URLListEditor 										 * .parsePreferenceStoreValue 										 * (storedStringValue) 										 */
+comment|/*                                         * URLListEditor .parsePreferenceStoreValue (storedStringValue)                                         */
 decl_stmt|;
 for|for
 control|(
@@ -2094,14 +2107,14 @@ name|String
 name|registryName
 init|=
 literal|""
-comment|/* 										 * URLListEditor 										 * .parseNameValueString(regs[i])[0] 										 */
+comment|/*                                          * URLListEditor .parseNameValueString(regs[i])[0]                                          */
 decl_stmt|;
 comment|// TODO Find a way to obtain registry locations
 name|String
 name|registryLocation
 init|=
 literal|""
-comment|/* 											 * URLListEditor 											 * .parseNameValueString(regs[i])[1] 											 */
+comment|/*                                              * URLListEditor .parseNameValueString(regs[i])[1]                                              */
 decl_stmt|;
 name|registry1
 operator|=
@@ -2226,7 +2239,7 @@ argument_list|()
 operator|!=
 literal|null
 condition|)
-block|{  		}
+block|{          }
 elseif|else
 if|if
 condition|(
@@ -2235,7 +2248,7 @@ operator|.
 name|isInputStreamAvailable
 argument_list|()
 condition|)
-block|{  		}
+block|{          }
 elseif|else
 if|if
 condition|(
@@ -2244,7 +2257,7 @@ operator|.
 name|isReaderAvailable
 argument_list|()
 condition|)
-block|{  		}
+block|{          }
 return|return
 name|registries
 return|;
@@ -2342,6 +2355,22 @@ argument_list|,
 name|ontology
 argument_list|)
 decl_stmt|;
+name|t
+operator|.
+name|setURL
+argument_list|(
+name|childIndividual
+operator|.
+name|getIRI
+argument_list|()
+operator|.
+name|toURI
+argument_list|()
+operator|.
+name|toURL
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|to
 operator|.
 name|addChild
@@ -2622,6 +2651,265 @@ argument_list|)
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Registry
+name|loadLibraryEager
+parameter_list|(
+name|IRI
+name|registryPhysicalIRI
+parameter_list|,
+name|IRI
+name|libraryID
+parameter_list|)
+block|{
+name|Registry
+name|registry
+init|=
+literal|null
+decl_stmt|;
+name|OWLOntologyManager
+name|mgr
+init|=
+name|onm
+operator|.
+name|getOwlCacheManager
+argument_list|()
+decl_stmt|;
+comment|// getManager();
+try|try
+block|{
+name|OWLOntology
+name|ontology
+init|=
+name|mgr
+operator|.
+name|loadOntology
+argument_list|(
+name|registryPhysicalIRI
+argument_list|)
+decl_stmt|;
+for|for
+control|(
+name|OWLIndividual
+name|ind
+range|:
+name|cRegistryLibrary
+operator|.
+name|getIndividuals
+argument_list|(
+name|ontology
+argument_list|)
+control|)
+if|if
+condition|(
+name|ind
+operator|.
+name|isNamed
+argument_list|()
+condition|)
+block|{
+name|OWLNamedIndividual
+name|nind
+init|=
+name|ind
+operator|.
+name|asOWLNamedIndividual
+argument_list|()
+decl_stmt|;
+name|IRI
+name|regiri
+init|=
+name|nind
+operator|.
+name|getIRI
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|regiri
+operator|.
+name|equals
+argument_list|(
+name|libraryID
+argument_list|)
+condition|)
+continue|continue;
+name|registry
+operator|=
+operator|new
+name|Registry
+argument_list|(
+name|regiri
+operator|.
+name|getFragment
+argument_list|()
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+comment|// TODO: avoid using toURL crap
+name|registry
+operator|.
+name|setURL
+argument_list|(
+name|regiri
+operator|.
+name|toURI
+argument_list|()
+operator|.
+name|toURL
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|MalformedURLException
+name|e
+parameter_list|)
+block|{
+comment|// Why should a well-formed IRI be a malformed URL anyway ?
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Ontology document IRI "
+operator|+
+name|registryPhysicalIRI
+operator|+
+literal|" matches a malformed URI pattern."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+comment|// Find the ontologies in this registry. If this is individual is not "ontology of" or
+comment|// "part of", then proceed.
+if|if
+condition|(
+operator|!
+name|nind
+operator|.
+name|getObjectPropertyValues
+argument_list|(
+name|ontology
+argument_list|)
+operator|.
+name|containsKey
+argument_list|(
+name|isPartOf
+argument_list|)
+operator|&&
+operator|!
+name|nind
+operator|.
+name|getObjectPropertyValues
+argument_list|(
+name|ontology
+argument_list|)
+operator|.
+name|containsKey
+argument_list|(
+name|isOntologyOf
+argument_list|)
+condition|)
+block|{
+name|registry
+operator|.
+name|addChild
+argument_list|(
+name|this
+operator|.
+name|getTree
+argument_list|(
+operator|(
+name|OWLNamedIndividual
+operator|)
+name|nind
+argument_list|,
+name|ontology
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyDocumentAlreadyExistsException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Ontology document at "
+operator|+
+name|e
+operator|.
+name|getOntologyDocumentIRI
+argument_list|()
+operator|+
+literal|" exists and will not be reloaded."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyAlreadyExistsException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"KReS :: ontology "
+operator|+
+name|e
+operator|.
+name|getOntologyID
+argument_list|()
+operator|+
+literal|" exists and will not be reloaded."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+comment|// Do nothing. Existing ontologies are fine.
+block|}
+catch|catch
+parameter_list|(
+name|OWLOntologyCreationException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"KReS :: Could not load ontology "
+operator|+
+name|registryPhysicalIRI
+operator|+
+literal|" ."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{}
+return|return
+name|registry
+return|;
+block|}
 specifier|public
 name|void
 name|loadLocations
@@ -2900,7 +3188,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** 	 * The ontology at<code>physicalIRI</code> may in turn include more than 	 * one registry. 	 *  	 * @param physicalIRI 	 * @return 	 */
+comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one registry.      *       * @param physicalIRI      * @return      */
 specifier|public
 name|Set
 argument_list|<
@@ -3094,6 +3382,29 @@ block|}
 block|}
 catch|catch
 parameter_list|(
+name|OWLOntologyDocumentAlreadyExistsException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Ontology document at"
+operator|+
+name|e
+operator|.
+name|getOntologyDocumentIRI
+argument_list|()
+operator|+
+literal|" exists and will not be reloaded."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
 name|OWLOntologyAlreadyExistsException
 name|e
 parameter_list|)
@@ -3137,12 +3448,12 @@ argument_list|)
 expr_stmt|;
 block|}
 finally|finally
-block|{ 		}
+block|{}
 return|return
 name|results
 return|;
 block|}
-comment|/** 	 * Requires that Registry objects are created earlier. Problem is, we might 	 * not know their names a priori. 	 *  	 * @param registry 	 * @return 	 * @throws RegistryContentException 	 */
+comment|/**      * Requires that Registry objects are created earlier. Problem is, we might not know their names a priori.      *       * @param registry      * @return      * @throws RegistryContentException      */
 specifier|private
 name|Registry
 name|setupRegistry
