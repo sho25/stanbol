@@ -312,12 +312,22 @@ block|{
 comment|//null element is interpreted as the "" path
 name|path
 operator|=
-name|File
-operator|.
-name|separator
+literal|"/"
 expr_stmt|;
 block|}
-elseif|else
+else|else
+block|{
+comment|//we need Unix style '/' to search resources within bundles
+comment|//even on Windows! (see STANBOL-259)
+name|path
+operator|=
+name|FilenameUtils
+operator|.
+name|separatorsToUnix
+argument_list|(
+name|path
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
@@ -325,9 +335,7 @@ name|path
 operator|.
 name|endsWith
 argument_list|(
-name|File
-operator|.
-name|separator
+literal|"/"
 argument_list|)
 condition|)
 block|{
@@ -336,10 +344,9 @@ name|path
 operator|=
 name|path
 operator|+
-name|File
-operator|.
-name|separator
+literal|'/'
 expr_stmt|;
+block|}
 block|}
 if|if
 condition|(
@@ -485,16 +492,6 @@ name|filename
 else|:
 name|filename
 decl_stmt|;
-comment|//make the path platform independent (STANBOL-259)
-name|resourceName
-operator|=
-name|FilenameUtils
-operator|.
-name|separatorsToSystem
-argument_list|(
-name|resourceName
-argument_list|)
-expr_stmt|;
 name|resource
 operator|=
 name|bundle
