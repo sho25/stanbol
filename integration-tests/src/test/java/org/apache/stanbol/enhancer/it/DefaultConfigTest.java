@@ -88,7 +88,7 @@ literal|"anotherValue.*This is AnotherValue."
 argument_list|,
 literal|"message.*This test config should be loaded at startup"
 argument_list|,
-literal|"org.apache.sling.installer.osgi.path.*launchpad:resources/config/org.apache.stanbol.examples.ExampleBootstrapConfig.cfg"
+literal|"org.apache.stanbol.examples.ExampleBootstrapConfig.*launchpad:resources/config/org.apache.stanbol.examples.ExampleBootstrapConfig.cfg"
 argument_list|)
 expr_stmt|;
 block|}
