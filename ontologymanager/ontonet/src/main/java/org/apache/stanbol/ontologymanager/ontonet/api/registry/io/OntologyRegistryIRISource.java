@@ -121,7 +121,7 @@ name|registry
 operator|.
 name|models
 operator|.
-name|Registry
+name|RegistryItem
 import|;
 end_import
 
@@ -137,13 +137,13 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|api
+name|impl
 operator|.
 name|registry
 operator|.
-name|models
+name|model
 operator|.
-name|RegistryItem
+name|RegistryImpl
 import|;
 end_import
 
@@ -370,7 +370,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|Registry
+name|RegistryImpl
 name|reg
 range|:
 name|loader

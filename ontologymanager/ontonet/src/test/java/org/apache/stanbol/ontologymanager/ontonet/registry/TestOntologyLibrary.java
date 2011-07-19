@@ -221,28 +221,6 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|api
-operator|.
-name|registry
-operator|.
-name|models
-operator|.
-name|RegistryLibrary
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
 name|impl
 operator|.
 name|ONManagerConfigurationImpl
@@ -283,11 +261,29 @@ name|impl
 operator|.
 name|registry
 operator|.
-name|model
+name|RegistryLoaderImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
 operator|.
 name|impl
 operator|.
-name|RegistryLoaderImpl
+name|registry
+operator|.
+name|model
+operator|.
+name|RegistryImpl
 import|;
 end_import
 
@@ -367,6 +363,10 @@ name|AutoIRIMapper
 import|;
 end_import
 
+begin_comment
+comment|/**  * This class tests the correct loading of ontology libraries from an OWL repository. It also checks that  * ontologies referred to only by other libraries in the same repository are not loaded.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -386,7 +386,7 @@ specifier|private
 name|RegistryLoader
 name|loader
 decl_stmt|;
-comment|/**      * Reset the ontology network manager and registry loader.      */
+comment|/**      * Reset the ontology network manager and registry loader before running each test.      */
 annotation|@
 name|Before
 specifier|public
@@ -544,7 +544,7 @@ argument_list|()
 operator|||
 name|item
 operator|instanceof
-name|Registry
+name|RegistryImpl
 condition|)
 comment|// Inspect children
 for|for
@@ -554,7 +554,7 @@ name|child
 range|:
 operator|(
 operator|(
-name|RegistryLibrary
+name|RegistryItem
 operator|)
 name|item
 operator|)
@@ -608,7 +608,7 @@ name|registryResource
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|RegistryLibrary
+name|Registry
 name|lib
 init|=
 name|loader
@@ -665,6 +665,7 @@ name|hasTypes
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Tests the creation of an ontology input source from a single library. Because the test is run offline,      * import statements might be file URIs, so tests will not fail on this.      *       * @throws Exception      */
 annotation|@
 name|Test
 specifier|public

@@ -121,7 +121,7 @@ name|registry
 operator|.
 name|models
 operator|.
-name|Registry
+name|RegistryItem
 import|;
 end_import
 
@@ -137,13 +137,35 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|api
+name|impl
 operator|.
 name|registry
 operator|.
-name|models
+name|model
 operator|.
-name|RegistryItem
+name|RegistryImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|registry
+operator|.
+name|model
+operator|.
+name|RegistryLibraryImpl
 import|;
 end_import
 
@@ -287,6 +309,10 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * An ontology input source that loads all the ontologies in a given library and attaches them to a parent  * ontology, either new or supplied by the developer. This input source can either accept an already built  * {@link RegistryLibraryImpl} object, or parse a library OWL file from its logical URI.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -310,6 +336,7 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -330,6 +357,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library.      *       * @param libraryID      * @param registryLocation      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -350,6 +378,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryLocation      * @param ontologyManager      * @param loader      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -380,7 +409,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * The most complete constructor      *       * @param libraryID      * @param registryLocation      * @param ontologyManager      * @param loader      * @param parentSrc      */
+comment|/**      * Creates a new ontology source from a library.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryLocation      * @param ontologyManager      * @param loader      * @param parentSrc      *            the source of the ontology that will import all the ontologies in the registry. If null, a      *            new blank ontology will be used.      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -425,7 +454,7 @@ name|OWLOntology
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|Registry
+name|RegistryImpl
 name|reg
 init|=
 name|loader
@@ -578,6 +607,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**      * Creates a new ontology source from a library.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryLocation      * @param loader      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -606,6 +636,7 @@ name|loader
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryLocation      * @param loader      * @param parentSrc      *            the source of the ontology that will import all the ontologies in the registry. If null, a      *            new blank ontology will be used.      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -639,6 +670,7 @@ name|parentSrc
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param ontologyManager      * @param loader      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -669,6 +701,7 @@ name|loader
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param ontologyManager      * @param loader      * @param parentSrc      *            the source of the ontology that will import all the ontologies in the registry. If null, a      *            new blank ontology will be used.      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -704,6 +737,7 @@ name|parentSrc
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param loader      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -729,6 +763,7 @@ name|loader
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param loader      * @param parentSrc      *            the source of the ontology that will import all the ontologies in the registry. If null, a      *            new blank ontology will be used.      */
 specifier|public
 name|LibrarySource
 parameter_list|(
