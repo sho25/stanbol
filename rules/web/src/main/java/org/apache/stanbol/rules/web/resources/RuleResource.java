@@ -1486,13 +1486,11 @@ argument_list|,
 literal|"UTF-8"
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|"RECIPE : "
+literal|"Recipe: "
 operator|+
 name|recipeURIEnc
 argument_list|)
@@ -1511,13 +1509,11 @@ name|printStackTrace
 argument_list|()
 expr_stmt|;
 block|}
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
-literal|"RECIPE IRI : "
+literal|"Recipe IRI: "
 operator|+
 name|IRI
 operator|.
@@ -1525,9 +1521,6 @@ name|create
 argument_list|(
 name|recipeURI
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|OWLOntology
@@ -2092,6 +2085,15 @@ operator|!
 name|ok
 condition|)
 block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Problem to add: "
+operator|+
+name|rule
+argument_list|)
+expr_stmt|;
 name|System
 operator|.
 name|err
@@ -2141,17 +2143,6 @@ name|create
 argument_list|(
 name|recipe
 argument_list|)
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"RECIPE FOR RULE: "
-operator|+
-name|recipe
 argument_list|)
 expr_stmt|;
 if|if
