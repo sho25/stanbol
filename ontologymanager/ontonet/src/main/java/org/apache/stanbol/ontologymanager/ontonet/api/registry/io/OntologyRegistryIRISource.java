@@ -121,7 +121,7 @@ name|registry
 operator|.
 name|models
 operator|.
-name|RegistryItem
+name|Registry
 import|;
 end_import
 
@@ -137,13 +137,13 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|impl
+name|api
 operator|.
 name|registry
 operator|.
-name|model
+name|models
 operator|.
-name|RegistryImpl
+name|RegistryItem
 import|;
 end_import
 
@@ -368,19 +368,19 @@ name|OWLOntology
 argument_list|>
 argument_list|()
 decl_stmt|;
-for|for
-control|(
-name|RegistryImpl
+name|Registry
 name|reg
-range|:
+init|=
 name|loader
 operator|.
-name|loadRegistriesEager
+name|loadRegistry
 argument_list|(
 name|registryIRI
+argument_list|,
+name|ontologyManager
 argument_list|)
-control|)
-block|{
+decl_stmt|;
+comment|//        for (Registry reg : loader.loadRegistriesEager(registryIRI)) {
 for|for
 control|(
 name|RegistryItem
@@ -462,7 +462,7 @@ comment|// TODO : not entirely convinced of this step.
 continue|continue;
 block|}
 block|}
-block|}
+comment|//        }
 comment|// We always construct a new root now, even if there's just one subtree.
 comment|// Set<OWLOntology> subtrees = mgr.getOntologies();
 comment|// if (subtrees.size() == 1)

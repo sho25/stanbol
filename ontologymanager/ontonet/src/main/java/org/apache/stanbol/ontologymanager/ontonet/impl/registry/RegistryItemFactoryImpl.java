@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -38,16 +38,6 @@ operator|.
 name|net
 operator|.
 name|URISyntaxException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Set
 import|;
 end_import
 
@@ -155,7 +145,7 @@ name|registry
 operator|.
 name|model
 operator|.
-name|RegistryImpl
+name|LibraryImpl
 import|;
 end_import
 
@@ -177,7 +167,7 @@ name|registry
 operator|.
 name|model
 operator|.
-name|RegistryLibraryImpl
+name|RegistryImpl
 import|;
 end_import
 
@@ -247,35 +237,7 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|AxiomType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLAxiom
 import|;
 end_import
 
@@ -332,20 +294,6 @@ operator|.
 name|model
 operator|.
 name|OWLObjectProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLObjectPropertyAssertionAxiom
 import|;
 end_import
 
@@ -475,40 +423,11 @@ name|createLibrary
 parameter_list|(
 name|OWLNamedIndividual
 name|ind
-parameter_list|,
-name|Set
-argument_list|<
-name|OWLOntology
-argument_list|>
-name|ontologies
 parameter_list|)
 block|{
-if|if
-condition|(
-operator|!
-name|ind
-operator|.
-name|getTypes
-argument_list|(
-name|ontologies
-argument_list|)
-operator|.
-name|contains
-argument_list|(
-name|cRegistryLibrary
-argument_list|)
-condition|)
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Will not create a library from an individual not stated to be of type "
-operator|+
-name|REGISTRY_LIBRARY_ID
-operator|+
-literal|" in the supplied ontologies."
-argument_list|)
-throw|;
+comment|// if (!ind.getTypes(ontologies).contains(cRegistryLibrary)) throw new IllegalArgumentException(
+comment|// "Will not create a library from an individual not stated to be of type "
+comment|// + REGISTRY_LIBRARY_ID + " in the supplied ontologies.");
 name|Library
 name|l
 init|=
@@ -519,7 +438,7 @@ block|{
 name|l
 operator|=
 operator|new
-name|RegistryLibraryImpl
+name|LibraryImpl
 argument_list|(
 name|ind
 operator|.
@@ -541,76 +460,16 @@ name|toURL
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// recurse into its children
-for|for
-control|(
-name|OWLOntology
-name|o
-range|:
-name|ontologies
-control|)
-block|{
-for|for
-control|(
-name|OWLAxiom
-name|ax
-range|:
-name|ind
-operator|.
-name|getReferencingAxioms
-argument_list|(
-name|o
-argument_list|,
-literal|true
-argument_list|)
-control|)
-block|{
-if|if
-condition|(
-name|ax
-operator|.
-name|isOfType
-argument_list|(
-name|AxiomType
-operator|.
-name|OBJECT_PROPERTY_ASSERTION
-argument_list|)
-operator|&&
-operator|(
-name|isOntologyOf
-operator|.
-name|equals
-argument_list|(
-operator|(
-operator|(
-name|OWLObjectPropertyAssertionAxiom
-operator|)
-name|ax
-operator|)
-operator|.
-name|getProperty
-argument_list|()
-argument_list|)
-operator|||
-name|isPartOf
-operator|.
-name|equals
-argument_list|(
-operator|(
-operator|(
-name|OWLObjectPropertyAssertionAxiom
-operator|)
-name|ax
-operator|)
-operator|.
-name|getProperty
-argument_list|()
-argument_list|)
-operator|)
-condition|)
-block|{                      }
-block|}
-block|}
+comment|// // recurse into its children
+comment|// for (OWLOntology o : ontologies) {
+comment|// for (OWLAxiom ax : ind.getReferencingAxioms(o, true)) {
+comment|// if (ax.isOfType(AxiomType.OBJECT_PROPERTY_ASSERTION)
+comment|//&& (isOntologyOf.equals(((OWLObjectPropertyAssertionAxiom) ax).getProperty()) || isPartOf
+comment|// .equals(((OWLObjectPropertyAssertionAxiom) ax).getProperty()))) {
+comment|//
+comment|// }
+comment|// }
+comment|// }
 block|}
 catch|catch
 parameter_list|(
@@ -650,8 +509,8 @@ specifier|public
 name|Registry
 name|createRegistry
 parameter_list|(
-name|OWLNamedIndividual
-name|ind
+name|OWLOntology
+name|o
 parameter_list|)
 block|{
 try|try
@@ -660,17 +519,27 @@ return|return
 operator|new
 name|RegistryImpl
 argument_list|(
-name|ind
+name|o
 operator|.
-name|getIRI
+name|getOntologyID
 argument_list|()
 operator|.
-name|getFragment
+name|toString
 argument_list|()
 argument_list|,
-name|ind
+name|o
 operator|.
-name|getIRI
+name|isAnonymous
+argument_list|()
+condition|?
+literal|null
+else|:
+name|o
+operator|.
+name|getOntologyID
+argument_list|()
+operator|.
+name|getOntologyIRI
 argument_list|()
 operator|.
 name|toURI

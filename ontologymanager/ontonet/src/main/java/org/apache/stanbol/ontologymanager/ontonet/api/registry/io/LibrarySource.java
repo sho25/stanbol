@@ -121,6 +121,28 @@ name|registry
 operator|.
 name|models
 operator|.
+name|Registry
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|registry
+operator|.
+name|models
+operator|.
 name|RegistryItem
 import|;
 end_import
@@ -143,29 +165,7 @@ name|registry
 operator|.
 name|model
 operator|.
-name|RegistryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|registry
-operator|.
-name|model
-operator|.
-name|RegistryLibraryImpl
+name|LibraryImpl
 import|;
 end_import
 
@@ -310,7 +310,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology input source that loads all the ontologies in a given library and attaches them to a parent  * ontology, either new or supplied by the developer. This input source can either accept an already built  * {@link RegistryLibraryImpl} object, or parse a library OWL file from its logical URI.  */
+comment|/**  * An ontology input source that loads all the ontologies in a given library and attaches them to a parent  * ontology, either new or supplied by the developer. This input source can either accept an already built  * {@link LibraryImpl} object, or parse a library OWL file from its logical URI.  */
 end_comment
 
 begin_class
@@ -454,7 +454,7 @@ name|OWLOntology
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|RegistryImpl
+name|Registry
 name|reg
 init|=
 name|loader

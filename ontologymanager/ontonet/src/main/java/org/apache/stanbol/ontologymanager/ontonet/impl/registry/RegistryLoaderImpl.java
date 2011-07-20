@@ -205,9 +205,31 @@ name|api
 operator|.
 name|registry
 operator|.
-name|io
+name|models
 operator|.
-name|XDRegistrySource
+name|Library
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|registry
+operator|.
+name|models
+operator|.
+name|Registry
 import|;
 end_import
 
@@ -337,6 +359,28 @@ name|registry
 operator|.
 name|cache
 operator|.
+name|RegistryUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|registry
+operator|.
+name|cache
+operator|.
 name|URIUnresolvableException
 import|;
 end_import
@@ -381,7 +425,7 @@ name|registry
 operator|.
 name|model
 operator|.
-name|RegistryImpl
+name|LibraryImpl
 import|;
 end_import
 
@@ -403,7 +447,7 @@ name|registry
 operator|.
 name|model
 operator|.
-name|RegistryLibraryImpl
+name|RegistryImpl
 import|;
 end_import
 
@@ -755,6 +799,10 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * Default implementation of the registry loader.<br/>  *<br/>  * TODO will be dismissed along with its interface in favor of the new registry management.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -775,54 +823,6 @@ name|OWLObjectProperty
 name|isPartOf
 decl_stmt|,
 name|isOntologyOf
-decl_stmt|;
-specifier|private
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
-decl_stmt|;
-specifier|private
-specifier|final
-name|IRI
-name|mergedOntologyIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|CODOVocabulary
-operator|.
-name|REPOSITORY_MERGED_ONTOLOGY
-argument_list|)
-decl_stmt|;
-specifier|private
-name|ONManager
-name|onm
-decl_stmt|;
-specifier|private
-name|Map
-argument_list|<
-name|URI
-argument_list|,
-name|OWLOntology
-argument_list|>
-name|registryOntologiesCache
-init|=
-operator|new
-name|HashMap
-argument_list|<
-name|URI
-argument_list|,
-name|OWLOntology
-argument_list|>
-argument_list|()
 decl_stmt|;
 static|static
 block|{
@@ -883,6 +883,291 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+specifier|static
+name|Set
+argument_list|<
+name|OWLIndividual
+argument_list|>
+name|getParentContainer
+parameter_list|(
+name|OWLNamedIndividual
+name|child
+parameter_list|,
+name|OWLOntology
+name|ontology
+parameter_list|)
+block|{
+if|if
+condition|(
+name|child
+operator|.
+name|getObjectPropertyValues
+argument_list|(
+name|ontology
+argument_list|)
+operator|.
+name|containsKey
+argument_list|(
+name|isPartOf
+argument_list|)
+operator|||
+name|child
+operator|.
+name|getObjectPropertyValues
+argument_list|(
+name|ontology
+argument_list|)
+operator|.
+name|containsKey
+argument_list|(
+name|isOntologyOf
+argument_list|)
+condition|)
+block|{
+name|Set
+argument_list|<
+name|OWLIndividual
+argument_list|>
+name|partOfSet
+init|=
+name|child
+operator|.
+name|getObjectPropertyValues
+argument_list|(
+name|ontology
+argument_list|)
+operator|.
+name|get
+argument_list|(
+name|isPartOf
+argument_list|)
+decl_stmt|;
+name|Set
+argument_list|<
+name|OWLIndividual
+argument_list|>
+name|ontologyOfSet
+init|=
+name|child
+operator|.
+name|getObjectPropertyValues
+argument_list|(
+name|ontology
+argument_list|)
+operator|.
+name|get
+argument_list|(
+name|isOntologyOf
+argument_list|)
+decl_stmt|;
+name|Set
+argument_list|<
+name|OWLIndividual
+argument_list|>
+name|mergedSet
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|OWLIndividual
+argument_list|>
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|partOfSet
+operator|!=
+literal|null
+condition|)
+name|mergedSet
+operator|.
+name|addAll
+argument_list|(
+name|partOfSet
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|ontologyOfSet
+operator|!=
+literal|null
+condition|)
+name|mergedSet
+operator|.
+name|addAll
+argument_list|(
+name|ontologyOfSet
+argument_list|)
+expr_stmt|;
+return|return
+name|mergedSet
+return|;
+block|}
+else|else
+return|return
+operator|new
+name|HashSet
+argument_list|<
+name|OWLIndividual
+argument_list|>
+argument_list|()
+return|;
+block|}
+specifier|public
+specifier|static
+name|Set
+argument_list|<
+name|OWLNamedIndividual
+argument_list|>
+name|getParts
+parameter_list|(
+name|OWLIndividual
+name|parent
+parameter_list|,
+name|OWLOntology
+name|ontology
+parameter_list|)
+block|{
+name|Set
+argument_list|<
+name|OWLNamedIndividual
+argument_list|>
+name|indies
+init|=
+name|ontology
+operator|.
+name|getIndividualsInSignature
+argument_list|()
+decl_stmt|;
+name|Iterator
+argument_list|<
+name|OWLNamedIndividual
+argument_list|>
+name|iter
+init|=
+name|indies
+operator|.
+name|iterator
+argument_list|()
+decl_stmt|;
+name|Set
+argument_list|<
+name|OWLNamedIndividual
+argument_list|>
+name|tor
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|OWLNamedIndividual
+argument_list|>
+argument_list|()
+decl_stmt|;
+comment|// For each individual in this ontology
+while|while
+condition|(
+name|iter
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
+name|OWLNamedIndividual
+name|n
+init|=
+name|iter
+operator|.
+name|next
+argument_list|()
+decl_stmt|;
+comment|// Get its parent wrt to isPartOf or isOntologyOf relationships
+for|for
+control|(
+name|OWLIndividual
+name|i
+range|:
+name|getParentContainer
+argument_list|(
+name|n
+argument_list|,
+name|ontology
+argument_list|)
+control|)
+block|{
+if|if
+condition|(
+name|i
+operator|.
+name|equals
+argument_list|(
+name|parent
+argument_list|)
+condition|)
+block|{
+name|tor
+operator|.
+name|add
+argument_list|(
+name|n
+argument_list|)
+expr_stmt|;
+break|break;
+block|}
+block|}
+block|}
+return|return
+name|tor
+return|;
+block|}
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|final
+name|IRI
+name|mergedOntologyIRI
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|CODOVocabulary
+operator|.
+name|REPOSITORY_MERGED_ONTOLOGY
+argument_list|)
+decl_stmt|;
+specifier|private
+name|ONManager
+name|onm
+decl_stmt|;
+specifier|private
+name|Map
+argument_list|<
+name|URI
+argument_list|,
+name|OWLOntology
+argument_list|>
+name|registryOntologiesCache
+init|=
+operator|new
+name|HashMap
+argument_list|<
+name|URI
+argument_list|,
+name|OWLOntology
+argument_list|>
+argument_list|()
+decl_stmt|;
 comment|/** 	 */
 specifier|public
 name|RegistryLoaderImpl
@@ -897,11 +1182,15 @@ name|onm
 operator|=
 name|onm
 expr_stmt|;
-comment|// OWLDataFactory factory = OWLManager.getOWLDataFactory();
-comment|// cRegistryLibrary = factory.getOWLClass(IRI.create(CODOVocabulary.CODD_OntologyLibrary));
-comment|// isPartOf = factory.getOWLObjectProperty(IRI.create(CODOVocabulary.PARTOF_IsPartOf));
-comment|// isOntologyOf = factory.getOWLObjectProperty(IRI.create(CODOVocabulary.ODPM_IsOntologyOf));
 block|}
+comment|// private OWLOntology getMergedOntology(IRI registryLocation) throws RegistryContentException {
+comment|// try {
+comment|// return getMergedOntology(registryLocation.toURI().toURL());
+comment|// } catch (MalformedURLException e) {
+comment|// log.warn("Malformed URI for merged ontology from registry " + registryLocation, e);
+comment|// return null;
+comment|// }
+comment|// }
 specifier|public
 name|Set
 argument_list|<
@@ -938,7 +1227,7 @@ if|if
 condition|(
 name|registryItem
 operator|instanceof
-name|RegistryImpl
+name|Registry
 condition|)
 block|{
 for|for
@@ -948,7 +1237,7 @@ name|item
 range|:
 operator|(
 operator|(
-name|RegistryImpl
+name|Registry
 operator|)
 name|registryItem
 operator|)
@@ -1050,7 +1339,7 @@ name|OWLOntologyAlreadyExistsException
 name|ex
 parameter_list|)
 block|{
-comment|// We are trying to oad an alread existing ontology,
+comment|// We are trying to oad an already existing ontology,
 comment|// we take it from the manager directly
 name|result
 operator|.
@@ -1124,7 +1413,7 @@ name|item
 range|:
 operator|(
 operator|(
-name|RegistryLibraryImpl
+name|LibraryImpl
 operator|)
 name|registryItem
 operator|)
@@ -1153,11 +1442,14 @@ return|return
 name|result
 return|;
 block|}
+comment|// private OWLOntology getOntologyForRegistryLocation(URI location) {
+comment|// return registryOntologiesCache.get(location);
+comment|// }
 specifier|public
-name|RegistryLibraryImpl
+name|Library
 name|getLibrary
 parameter_list|(
-name|RegistryImpl
+name|Registry
 name|reg
 parameter_list|,
 name|IRI
@@ -1201,7 +1493,7 @@ argument_list|)
 condition|)
 return|return
 operator|(
-name|RegistryLibraryImpl
+name|LibraryImpl
 operator|)
 name|child
 return|;
@@ -1219,53 +1511,6 @@ block|}
 return|return
 literal|null
 return|;
-block|}
-specifier|private
-name|OWLOntology
-name|getMergedOntology
-parameter_list|(
-name|IRI
-name|registryLocation
-parameter_list|)
-throws|throws
-name|RegistryContentException
-block|{
-try|try
-block|{
-return|return
-name|getMergedOntology
-argument_list|(
-name|registryLocation
-operator|.
-name|toURI
-argument_list|()
-operator|.
-name|toURL
-argument_list|()
-argument_list|)
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|MalformedURLException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Malformed URI for merged ontology from registry "
-operator|+
-name|registryLocation
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
 block|}
 specifier|private
 name|OWLOntology
@@ -1684,23 +1929,6 @@ return|;
 block|}
 specifier|private
 name|OWLOntology
-name|getOntologyForRegistryLocation
-parameter_list|(
-name|URI
-name|location
-parameter_list|)
-block|{
-return|return
-name|registryOntologiesCache
-operator|.
-name|get
-argument_list|(
-name|location
-argument_list|)
-return|;
-block|}
-specifier|private
-name|OWLOntology
 name|getOntologyForRegistryLocationNoCached
 parameter_list|(
 name|URI
@@ -1804,269 +2032,32 @@ operator|)
 name|child
 operator|)
 operator|.
-name|getParent
+name|getContainers
 argument_list|()
 return|;
 block|}
 return|return
 literal|null
-return|;
-block|}
-specifier|public
-specifier|static
-name|Set
-argument_list|<
-name|OWLIndividual
-argument_list|>
-name|getParentContainer
-parameter_list|(
-name|OWLNamedIndividual
-name|child
-parameter_list|,
-name|OWLOntology
-name|ontology
-parameter_list|)
-block|{
-if|if
-condition|(
-name|child
-operator|.
-name|getObjectPropertyValues
-argument_list|(
-name|ontology
-argument_list|)
-operator|.
-name|containsKey
-argument_list|(
-name|isPartOf
-argument_list|)
-operator|||
-name|child
-operator|.
-name|getObjectPropertyValues
-argument_list|(
-name|ontology
-argument_list|)
-operator|.
-name|containsKey
-argument_list|(
-name|isOntologyOf
-argument_list|)
-condition|)
-block|{
-name|Set
-argument_list|<
-name|OWLIndividual
-argument_list|>
-name|partOfSet
-init|=
-name|child
-operator|.
-name|getObjectPropertyValues
-argument_list|(
-name|ontology
-argument_list|)
-operator|.
-name|get
-argument_list|(
-name|isPartOf
-argument_list|)
-decl_stmt|;
-name|Set
-argument_list|<
-name|OWLIndividual
-argument_list|>
-name|ontologyOfSet
-init|=
-name|child
-operator|.
-name|getObjectPropertyValues
-argument_list|(
-name|ontology
-argument_list|)
-operator|.
-name|get
-argument_list|(
-name|isOntologyOf
-argument_list|)
-decl_stmt|;
-name|Set
-argument_list|<
-name|OWLIndividual
-argument_list|>
-name|mergedSet
-init|=
-operator|new
-name|HashSet
-argument_list|<
-name|OWLIndividual
-argument_list|>
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|partOfSet
-operator|!=
-literal|null
-condition|)
-name|mergedSet
-operator|.
-name|addAll
-argument_list|(
-name|partOfSet
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|ontologyOfSet
-operator|!=
-literal|null
-condition|)
-name|mergedSet
-operator|.
-name|addAll
-argument_list|(
-name|ontologyOfSet
-argument_list|)
-expr_stmt|;
-return|return
-name|mergedSet
-return|;
-block|}
-else|else
-return|return
-operator|new
-name|HashSet
-argument_list|<
-name|OWLIndividual
-argument_list|>
-argument_list|()
-return|;
-block|}
-specifier|public
-specifier|static
-name|Set
-argument_list|<
-name|OWLNamedIndividual
-argument_list|>
-name|getParts
-parameter_list|(
-name|OWLIndividual
-name|parent
-parameter_list|,
-name|OWLOntology
-name|ontology
-parameter_list|)
-block|{
-name|Set
-argument_list|<
-name|OWLNamedIndividual
-argument_list|>
-name|indies
-init|=
-name|ontology
-operator|.
-name|getIndividualsInSignature
-argument_list|()
-decl_stmt|;
-name|Iterator
-argument_list|<
-name|OWLNamedIndividual
-argument_list|>
-name|iter
-init|=
-name|indies
-operator|.
-name|iterator
-argument_list|()
-decl_stmt|;
-name|Set
-argument_list|<
-name|OWLNamedIndividual
-argument_list|>
-name|tor
-init|=
-operator|new
-name|HashSet
-argument_list|<
-name|OWLNamedIndividual
-argument_list|>
-argument_list|()
-decl_stmt|;
-comment|// For each individual in this ontology
-while|while
-condition|(
-name|iter
-operator|.
-name|hasNext
-argument_list|()
-condition|)
-block|{
-name|OWLNamedIndividual
-name|n
-init|=
-name|iter
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
-comment|// Get its parent wrt to isPartOf or isOntologyOf relationships
-for|for
-control|(
-name|OWLIndividual
-name|i
-range|:
-name|getParentContainer
-argument_list|(
-name|n
-argument_list|,
-name|ontology
-argument_list|)
-control|)
-block|{
-if|if
-condition|(
-name|i
-operator|.
-name|equals
-argument_list|(
-name|parent
-argument_list|)
-condition|)
-block|{
-name|tor
-operator|.
-name|add
-argument_list|(
-name|n
-argument_list|)
-expr_stmt|;
-break|break;
-block|}
-block|}
-block|}
-return|return
-name|tor
 return|;
 block|}
 specifier|private
 name|List
 argument_list|<
-name|RegistryImpl
+name|Registry
 argument_list|>
 name|getRegistries
 parameter_list|()
 block|{
 name|List
 argument_list|<
-name|RegistryImpl
+name|Registry
 argument_list|>
 name|registries
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|RegistryImpl
+name|Registry
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2211,64 +2202,22 @@ return|return
 name|registries
 return|;
 block|}
+comment|// private List<Registry> getRegistries(XDRegistrySource source) {
+comment|//
+comment|// List<Registry> registries = new ArrayList<Registry>();
+comment|//
+comment|// if (source.getPhysicalIRI() != null) {
+comment|//
+comment|// } else if (source.isInputStreamAvailable()) {
+comment|//
+comment|// } else if (source.isReaderAvailable()) {
+comment|//
+comment|// }
+comment|//
+comment|// return registries;
+comment|// }
 specifier|private
-name|List
-argument_list|<
-name|RegistryImpl
-argument_list|>
-name|getRegistries
-parameter_list|(
-name|XDRegistrySource
-name|source
-parameter_list|)
-block|{
-name|List
-argument_list|<
-name|RegistryImpl
-argument_list|>
-name|registries
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RegistryImpl
-argument_list|>
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|source
-operator|.
-name|getPhysicalIRI
-argument_list|()
-operator|!=
-literal|null
-condition|)
-block|{          }
-elseif|else
-if|if
-condition|(
-name|source
-operator|.
-name|isInputStreamAvailable
-argument_list|()
-condition|)
-block|{          }
-elseif|else
-if|if
-condition|(
-name|source
-operator|.
-name|isReaderAvailable
-argument_list|()
-condition|)
-block|{          }
-return|return
-name|registries
-return|;
-block|}
-specifier|private
-name|RegistryLibraryImpl
+name|Library
 name|getTree
 parameter_list|(
 name|OWLNamedIndividual
@@ -2278,11 +2227,11 @@ name|OWLOntology
 name|ontology
 parameter_list|)
 block|{
-name|RegistryLibraryImpl
+name|Library
 name|to
 init|=
 operator|new
-name|RegistryLibraryImpl
+name|LibraryImpl
 argument_list|(
 operator|new
 name|RDFSLabelGetter
@@ -2309,8 +2258,6 @@ name|OWLNamedIndividual
 argument_list|>
 name|children
 init|=
-name|this
-operator|.
 name|getParts
 argument_list|(
 name|i
@@ -2348,7 +2295,7 @@ name|ontology
 argument_list|)
 condition|)
 block|{
-name|RegistryLibraryImpl
+name|Library
 name|t
 init|=
 name|this
@@ -2523,12 +2470,12 @@ if|if
 condition|(
 name|parent
 operator|instanceof
-name|RegistryLibraryImpl
+name|LibraryImpl
 condition|)
 return|return
 operator|(
 operator|(
-name|RegistryLibraryImpl
+name|LibraryImpl
 operator|)
 name|parent
 operator|)
@@ -2544,7 +2491,7 @@ specifier|public
 name|boolean
 name|hasLibrary
 parameter_list|(
-name|RegistryImpl
+name|Registry
 name|reg
 parameter_list|,
 name|IRI
@@ -2701,7 +2648,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|RegistryImpl
+name|Registry
 name|loadLibraryEager
 parameter_list|(
 name|IRI
@@ -2711,7 +2658,8 @@ name|IRI
 name|libraryID
 parameter_list|)
 block|{
-name|RegistryImpl
+comment|// FIXME! linbraryID unused
+name|Registry
 name|registry
 init|=
 literal|null
@@ -2724,7 +2672,6 @@ operator|.
 name|getOwlCacheManager
 argument_list|()
 decl_stmt|;
-comment|// getManager();
 try|try
 block|{
 name|OWLOntology
@@ -2737,184 +2684,15 @@ argument_list|(
 name|registryPhysicalIRI
 argument_list|)
 decl_stmt|;
-for|for
-control|(
-name|OWLIndividual
-name|ind
-range|:
-name|cRegistryLibrary
-operator|.
-name|getIndividuals
-argument_list|(
-name|ontology
-argument_list|)
-control|)
-if|if
-condition|(
-name|ind
-operator|.
-name|isNamed
-argument_list|()
-condition|)
-block|{
-name|OWLNamedIndividual
-name|nind
-init|=
-name|ind
-operator|.
-name|asOWLNamedIndividual
-argument_list|()
-decl_stmt|;
-name|IRI
-name|regiri
-init|=
-name|nind
-operator|.
-name|getIRI
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-operator|!
-name|regiri
-operator|.
-name|equals
-argument_list|(
-name|libraryID
-argument_list|)
-condition|)
-continue|continue;
-try|try
-block|{
 name|registry
 operator|=
-operator|new
-name|RegistryImpl
-argument_list|(
-name|regiri
+name|RegistryUtils
 operator|.
-name|getFragment
-argument_list|()
-argument_list|,
-name|regiri
-operator|.
-name|toURI
-argument_list|()
-operator|.
-name|toURL
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|MalformedURLException
-name|e1
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Ontology document IRI "
-operator|+
-name|registryPhysicalIRI
-operator|+
-literal|" matches a malformed URI pattern."
-argument_list|,
-name|e1
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|URISyntaxException
-name|e1
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Ontology document IRI "
-operator|+
-name|registryPhysicalIRI
-operator|+
-literal|" matches a malformed URI pattern."
-argument_list|,
-name|e1
-argument_list|)
-expr_stmt|;
-block|}
-comment|// Find the ontologies in this registry. If this is individual is not "ontology of" or
-comment|// "part of", then proceed.
-if|if
-condition|(
-operator|!
-name|nind
-operator|.
-name|getObjectPropertyValues
+name|populateRegistry
 argument_list|(
 name|ontology
 argument_list|)
-operator|.
-name|containsKey
-argument_list|(
-name|isPartOf
-argument_list|)
-operator|&&
-operator|!
-name|nind
-operator|.
-name|getObjectPropertyValues
-argument_list|(
-name|ontology
-argument_list|)
-operator|.
-name|containsKey
-argument_list|(
-name|isOntologyOf
-argument_list|)
-condition|)
-block|{
-try|try
-block|{
-name|registry
-operator|.
-name|addChild
-argument_list|(
-name|this
-operator|.
-name|getTree
-argument_list|(
-operator|(
-name|OWLNamedIndividual
-operator|)
-name|nind
-argument_list|,
-name|ontology
-argument_list|)
-argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|RegistryContentException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Illegal child addition detected. Skipping."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-block|}
 block|}
 catch|catch
 parameter_list|(
@@ -2949,7 +2727,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: ontology "
+literal|"Ontology "
 operator|+
 name|e
 operator|.
@@ -2973,7 +2751,27 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Could not load ontology "
+literal|"Could not load ontology "
+operator|+
+name|registryPhysicalIRI
+operator|+
+literal|" ."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RegistryContentException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Could not populate registry "
 operator|+
 name|registryPhysicalIRI
 operator|+
@@ -2989,6 +2787,53 @@ return|return
 name|registry
 return|;
 block|}
+comment|// /**
+comment|// * FIXME : this was a stupid idea : the meta-model construction should always be eager: it's the actual
+comment|// * loading of ontologies in the libraries that can be lazy.
+comment|// */
+comment|// // @Override
+comment|// public Registry loadLibraryEager2(IRI registryPhysicalIRI, IRI libraryID) {
+comment|// Registry registry = null;
+comment|// OWLOntologyManager mgr = onm.getOwlCacheManager();// getManager();
+comment|//
+comment|// try {
+comment|// OWLOntology ontology = mgr.loadOntology(registryPhysicalIRI);
+comment|// for (OWLIndividual ind : cRegistryLibrary.getIndividuals(ontology))
+comment|// if (ind.isNamed()) {
+comment|// OWLNamedIndividual nind = ind.asOWLNamedIndividual();
+comment|// IRI regiri = nind.getIRI();
+comment|// if (!regiri.equals(libraryID)) continue;
+comment|// try {
+comment|// registry = new RegistryImpl(regiri.getFragment(), regiri.toURI().toURL());
+comment|// } catch (MalformedURLException e1) {
+comment|// log.warn("Ontology document IRI " + registryPhysicalIRI
+comment|// + " matches a malformed URI pattern.", e1);
+comment|// } catch (URISyntaxException e1) {
+comment|// log.warn("Ontology document IRI " + registryPhysicalIRI
+comment|// + " matches a malformed URI pattern.", e1);
+comment|// }
+comment|// // Find the ontologies in this registry. If this is individual is not "ontology of" or
+comment|// // "part of", then proceed.
+comment|// if (!nind.getObjectPropertyValues(ontology).containsKey(isPartOf)
+comment|//&& !nind.getObjectPropertyValues(ontology).containsKey(isOntologyOf)) {
+comment|// try {
+comment|// registry.addChild(this.getTree((OWLNamedIndividual) nind, ontology));
+comment|// } catch (RegistryContentException e) {
+comment|// log.warn("Illegal child addition detected. Skipping.", e);
+comment|// }
+comment|// }
+comment|// }
+comment|// } catch (OWLOntologyDocumentAlreadyExistsException e) {
+comment|// log.warn("Ontology document at " + e.getOntologyDocumentIRI()
+comment|// + " exists and will not be reloaded.", e);
+comment|// } catch (OWLOntologyAlreadyExistsException e) {
+comment|// log.warn("KReS :: ontology " + e.getOntologyID() + " exists and will not be reloaded.", e);
+comment|// // Do nothing. Existing ontologies are fine.
+comment|// } catch (OWLOntologyCreationException e) {
+comment|// log.error("KReS :: Could not load ontology " + registryPhysicalIRI + " .", e);
+comment|// } finally {}
+comment|// return registry;
+comment|// }
 specifier|public
 name|void
 name|loadLocations
@@ -3005,7 +2850,7 @@ argument_list|()
 expr_stmt|;
 name|List
 argument_list|<
-name|RegistryImpl
+name|Registry
 argument_list|>
 name|registries
 init|=
@@ -3027,7 +2872,7 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|RegistryImpl
+name|Registry
 name|current
 range|:
 name|registries
@@ -3205,7 +3050,7 @@ literal|0
 expr_stmt|;
 for|for
 control|(
-name|RegistryImpl
+name|Registry
 name|registry
 range|:
 name|registries
@@ -3230,7 +3075,12 @@ name|RegistryContentException
 name|e
 parameter_list|)
 block|{
+operator|(
+operator|(
+name|RegistryImpl
+operator|)
 name|registry
+operator|)
 operator|.
 name|setError
 argument_list|(
@@ -3267,40 +3117,38 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one registry.      *       * @param physicalIRI      * @return      */
+annotation|@
+name|Override
 specifier|public
-name|Set
-argument_list|<
-name|RegistryImpl
-argument_list|>
-name|loadRegistriesEager
+name|Registry
+name|loadRegistry
 parameter_list|(
 name|IRI
-name|physicalIRI
-parameter_list|)
-block|{
-name|Set
-argument_list|<
-name|RegistryImpl
-argument_list|>
-name|results
-init|=
-operator|new
-name|HashSet
-argument_list|<
-name|RegistryImpl
-argument_list|>
-argument_list|()
-decl_stmt|;
+name|registryPhysicalIRI
+parameter_list|,
 name|OWLOntologyManager
 name|mgr
+parameter_list|)
+block|{
+comment|// FIXME! linbraryID unused
+name|Registry
+name|registry
 init|=
+literal|null
+decl_stmt|;
+if|if
+condition|(
+name|mgr
+operator|==
+literal|null
+condition|)
+name|mgr
+operator|=
 name|onm
 operator|.
 name|getOwlCacheManager
 argument_list|()
-decl_stmt|;
-comment|// getManager();
+expr_stmt|;
 try|try
 block|{
 name|OWLOntology
@@ -3310,202 +3158,18 @@ name|mgr
 operator|.
 name|loadOntology
 argument_list|(
-name|physicalIRI
+name|registryPhysicalIRI
 argument_list|)
 decl_stmt|;
-for|for
-control|(
-name|OWLIndividual
-name|ind
-range|:
-name|cRegistryLibrary
-operator|.
-name|getIndividuals
-argument_list|(
-name|ontology
-argument_list|)
-control|)
-if|if
-condition|(
-name|ind
-operator|.
-name|isNamed
-argument_list|()
-condition|)
-block|{
-name|OWLNamedIndividual
-name|nind
-init|=
-name|ind
-operator|.
-name|asOWLNamedIndividual
-argument_list|()
-decl_stmt|;
-name|IRI
-name|regiri
-init|=
-name|nind
-operator|.
-name|getIRI
-argument_list|()
-decl_stmt|;
-comment|// TODO: avoid using toURL crap
-name|RegistryImpl
-name|registry
-init|=
-literal|null
-decl_stmt|;
-try|try
-block|{
 name|registry
 operator|=
-operator|new
-name|RegistryImpl
-argument_list|(
-name|regiri
+name|RegistryUtils
 operator|.
-name|getFragment
-argument_list|()
-argument_list|,
-name|regiri
-operator|.
-name|toURI
-argument_list|()
-operator|.
-name|toURL
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|MalformedURLException
-name|e1
-parameter_list|)
-block|{
-comment|// Why should a well-formed IRI be a malformed URL
-comment|// anyway ?
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"KReS :: ontology document IRI "
-operator|+
-name|physicalIRI
-operator|+
-literal|" matches a malformed URI pattern."
-argument_list|,
-name|e1
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|URISyntaxException
-name|e1
-parameter_list|)
-block|{
-comment|// Why should a well-formed IRI be a malformed URL
-comment|// anyway ?
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"KReS :: ontology document IRI "
-operator|+
-name|physicalIRI
-operator|+
-literal|" matches a malformed URI pattern."
-argument_list|,
-name|e1
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|registry
-operator|!=
-literal|null
-condition|)
-block|{
-comment|// Find the ontologies in this registry
-comment|// If this is individual is not "ontology of" or "part of",
-comment|// then proceed.
-if|if
-condition|(
-operator|!
-name|nind
-operator|.
-name|getObjectPropertyValues
+name|populateRegistry
 argument_list|(
 name|ontology
 argument_list|)
-operator|.
-name|containsKey
-argument_list|(
-name|isPartOf
-argument_list|)
-operator|&&
-operator|!
-name|nind
-operator|.
-name|getObjectPropertyValues
-argument_list|(
-name|ontology
-argument_list|)
-operator|.
-name|containsKey
-argument_list|(
-name|isOntologyOf
-argument_list|)
-condition|)
-block|{
-try|try
-block|{
-name|registry
-operator|.
-name|addChild
-argument_list|(
-name|this
-operator|.
-name|getTree
-argument_list|(
-operator|(
-name|OWLNamedIndividual
-operator|)
-name|nind
-argument_list|,
-name|ontology
-argument_list|)
-argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|RegistryContentException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Illegal child addition detected. Skipping."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-name|results
-operator|.
-name|add
-argument_list|(
-name|registry
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 block|}
 catch|catch
 parameter_list|(
@@ -3517,7 +3181,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Ontology document at"
+literal|"Ontology document at "
 operator|+
 name|e
 operator|.
@@ -3540,7 +3204,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: ontology "
+literal|"Ontology "
 operator|+
 name|e
 operator|.
@@ -3564,9 +3228,29 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Could not load ontology "
+literal|"Could not load ontology "
 operator|+
-name|physicalIRI
+name|registryPhysicalIRI
+operator|+
+literal|" ."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RegistryContentException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Could not populate registry "
+operator|+
+name|registryPhysicalIRI
 operator|+
 literal|" ."
 argument_list|,
@@ -3577,15 +3261,73 @@ block|}
 finally|finally
 block|{}
 return|return
-name|results
+name|registry
 return|;
 block|}
+comment|// /**
+comment|// * The ontology at<code>physicalIRI</code> may in turn include more than one registry.
+comment|// *
+comment|// * @param physicalIRI
+comment|// * @return
+comment|// */
+comment|// public Set<Registry> loadRegistriesEager2(IRI physicalIRI) {
+comment|//
+comment|// Set<Registry> results = new HashSet<Registry>();
+comment|// OWLOntologyManager mgr = onm.getOwlCacheManager();// getManager();
+comment|//
+comment|// try {
+comment|// OWLOntology ontology = mgr.loadOntology(physicalIRI);
+comment|// for (OWLIndividual ind : cRegistryLibrary.getIndividuals(ontology))
+comment|// if (ind.isNamed()) {
+comment|// OWLNamedIndividual nind = ind.asOWLNamedIndividual();
+comment|// IRI regiri = nind.getIRI();
+comment|// // TODO: avoid using toURL crap
+comment|// Registry registry = null;
+comment|// try {
+comment|// registry = new RegistryImpl(regiri.getFragment(), regiri.toURI().toURL());
+comment|// } catch (MalformedURLException e1) {
+comment|// // Why should a well-formed IRI be a malformed URL
+comment|// // anyway ?
+comment|// log.warn("KReS :: ontology document IRI " + physicalIRI
+comment|// + " matches a malformed URI pattern.", e1);
+comment|// } catch (URISyntaxException e1) {
+comment|// // Why should a well-formed IRI be a malformed URL
+comment|// // anyway ?
+comment|// log.warn("KReS :: ontology document IRI " + physicalIRI
+comment|// + " matches a malformed URI pattern.", e1);
+comment|// }
+comment|// if (registry != null) {
+comment|// // Find the ontologies in this registry
+comment|// // If this is individual is not "ontology of" or "part of",
+comment|// // then proceed.
+comment|// if (!nind.getObjectPropertyValues(ontology).containsKey(isPartOf)
+comment|//&& !nind.getObjectPropertyValues(ontology).containsKey(isOntologyOf)) {
+comment|// try {
+comment|// registry.addChild(this.getTree((OWLNamedIndividual) nind, ontology));
+comment|// } catch (RegistryContentException e) {
+comment|// log.warn("Illegal child addition detected. Skipping.", e);
+comment|// }
+comment|// }
+comment|// results.add(registry);
+comment|// }
+comment|// }
+comment|// } catch (OWLOntologyDocumentAlreadyExistsException e) {
+comment|// log.warn("Ontology document at" + e.getOntologyDocumentIRI()
+comment|// + " exists and will not be reloaded.", e);
+comment|// } catch (OWLOntologyAlreadyExistsException e) {
+comment|// log.warn("KReS :: ontology " + e.getOntologyID() + " exists and will not be reloaded.", e);
+comment|// // Do nothing. Existing ontologies are fine.
+comment|// } catch (OWLOntologyCreationException e) {
+comment|// log.error("KReS :: Could not load ontology " + physicalIRI + " .", e);
+comment|// } finally {}
+comment|// return results;
+comment|// }
 comment|/**      * Requires that Registry objects are created earlier. Problem is, we might not know their names a priori.      *       * @param registry      * @return      * @throws RegistryContentException      */
 specifier|private
-name|RegistryImpl
+name|Registry
 name|setupRegistry
 parameter_list|(
-name|RegistryImpl
+name|Registry
 name|registry
 parameter_list|)
 throws|throws

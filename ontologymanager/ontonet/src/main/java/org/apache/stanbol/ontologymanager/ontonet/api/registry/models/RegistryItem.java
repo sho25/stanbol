@@ -48,6 +48,17 @@ specifier|public
 interface|interface
 name|RegistryItem
 block|{
+comment|/**      * The allowed types of registry item that a registry manager can handle.      */
+specifier|public
+enum|enum
+name|Type
+block|{
+name|LIBRARY
+block|,
+name|ONTOLOGY
+block|,
+name|REGISTRY
+block|;     }
 name|void
 name|addChild
 parameter_list|(
@@ -71,7 +82,8 @@ name|getName
 parameter_list|()
 function_decl|;
 name|RegistryItem
-name|getParent
+index|[]
+name|getContainers
 parameter_list|()
 function_decl|;
 name|URL
@@ -98,6 +110,13 @@ name|child
 parameter_list|)
 function_decl|;
 name|void
+name|removeContainer
+parameter_list|(
+name|RegistryItem
+name|container
+parameter_list|)
+function_decl|;
+name|void
 name|setName
 parameter_list|(
 name|String
@@ -105,10 +124,10 @@ name|string
 parameter_list|)
 function_decl|;
 name|void
-name|setParent
+name|addContainer
 parameter_list|(
 name|RegistryItem
-name|parent
+name|container
 parameter_list|)
 throws|throws
 name|RegistryContentException

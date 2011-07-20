@@ -101,6 +101,28 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|registry
+operator|.
+name|cache
+operator|.
+name|RegistryUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -125,33 +147,32 @@ name|OWLOntology
 import|;
 end_import
 
+begin_comment
+comment|/**  * A factory that creates the basic elements of the ontology registry metamodel, starting from OWL objects  * that are required not to be anonymous.<br/>  *<br/>  *<b>Note that implementations should not be aggressive</b>, in that they should<b>not</b> recursively  * create and/or append the parents and children of any generated object. Refer to the following static  * methods in the {@link RegistryUtils} class to recursively populate a registry item:  *<ul>  *<li>{@link RegistryUtils#populateLibrary(OWLNamedIndividual, Set)}</li>  *<li>{@link RegistryUtils#populateOntology(OWLNamedIndividual, Set)}</li>  *<li>{@link RegistryUtils#populateRegistry(OWLOntology)}</li>  *</ul>  */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
 name|RegistryItemFactory
 block|{
-comment|/**      * Implementations should recurse into factory method {@link #createRegistryOntology(OWLNamedIndividual)}      * for creating the ontology entries and setting them as children.      *       * @param ind      * @return      */
+comment|/**      * Creates a new {@link Library} object named after the ID of the supplied individual.      *       * @param ind      *            the named individual to extract the library model from.      * @return the library model.      */
 name|Library
 name|createLibrary
 parameter_list|(
 name|OWLNamedIndividual
 name|ind
-parameter_list|,
-name|Set
-argument_list|<
-name|OWLOntology
-argument_list|>
-name|ontologies
 parameter_list|)
 function_decl|;
-comment|/**      * Implementations should recurse into factory method {@link #createRegistry(OWLNamedIndividual)} for      * creating the referenced libraries and setting them as children.      *       * @param ind      * @return      */
+comment|/**      * Creates a new {@link Registry} object named after the ID of the supplied ontology.      *       * @param o      *            the ontology to extract the registry model from. Should be a named ontology, lest the method      *            return null.      * @return the registry model, or null if<code>o</code> is anonymous.      */
 name|Registry
 name|createRegistry
 parameter_list|(
-name|OWLNamedIndividual
-name|ind
+name|OWLOntology
+name|o
 parameter_list|)
 function_decl|;
+comment|/**      * Creates a new {@link RegistryOntology} object named after the ID of the supplied individual.      *       * @param ind      *            the named individual to extract the ontology model from.      * @return the ontology model.      */
 name|RegistryOntology
 name|createRegistryOntology
 parameter_list|(

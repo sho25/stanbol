@@ -68,14 +68,14 @@ end_import
 begin_class
 specifier|public
 class|class
-name|RegistryLibraryImpl
+name|LibraryImpl
 extends|extends
 name|AbstractRegistryItem
 implements|implements
 name|Library
 block|{
 specifier|public
-name|RegistryLibraryImpl
+name|LibraryImpl
 parameter_list|(
 name|String
 name|name
@@ -88,7 +88,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|RegistryLibraryImpl
+name|LibraryImpl
 parameter_list|(
 name|String
 name|name
