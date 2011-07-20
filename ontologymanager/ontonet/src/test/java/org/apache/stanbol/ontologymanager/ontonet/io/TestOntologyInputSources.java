@@ -862,7 +862,7 @@ argument_list|()
 operator|.
 name|getResource
 argument_list|(
-literal|"/ontologies/index.rdf"
+literal|"/ontologies/mockfoaf.rdf"
 argument_list|)
 decl_stmt|;
 name|assertNotNull

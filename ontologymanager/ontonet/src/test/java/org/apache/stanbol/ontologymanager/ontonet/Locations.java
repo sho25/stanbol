@@ -45,13 +45,13 @@ specifier|public
 specifier|static
 specifier|final
 name|IRI
-name|_CP_NAMESPACE
+name|_STANBOL_ONT_NAMESPACE
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://www.ontologydesignpatterns.org/cp/owl/"
+literal|"http://stanbol.apache.org/ontologies/"
 argument_list|)
 decl_stmt|;
 comment|/**      * Default physical location of the ontology registry for testing.      */
@@ -65,7 +65,9 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://www.ontologydesignpatterns.org/registry/krestest.owl"
+name|_STANBOL_ONT_NAMESPACE
+operator|+
+literal|"registries/onmtest.owl"
 argument_list|)
 decl_stmt|;
 comment|/**      * Identifier of test ontology library 1.      */
@@ -81,7 +83,7 @@ name|create
 argument_list|(
 name|_REGISTRY_TEST
 operator|+
-literal|"#TestRegistry"
+literal|"#Library1"
 argument_list|)
 decl_stmt|;
 comment|/**      * Identifier of test ontology library 2.      */
@@ -97,7 +99,7 @@ name|create
 argument_list|(
 name|_REGISTRY_TEST
 operator|+
-literal|"#TestLibrary2"
+literal|"#Library2"
 argument_list|)
 decl_stmt|;
 comment|/**      * An ontology in test libraries 1 and 2.      */
@@ -105,15 +107,15 @@ specifier|public
 specifier|static
 specifier|final
 name|IRI
-name|ODP_OBJECTROLE
+name|CHAR_MAIN
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-name|_CP_NAMESPACE
+name|_STANBOL_ONT_NAMESPACE
 operator|+
-literal|"objectrole.owl"
+literal|"pcomics/maincharacters.owl"
 argument_list|)
 decl_stmt|;
 comment|/**      * An ontology in test library 2 but not in test library 1.      */
@@ -121,15 +123,15 @@ specifier|public
 specifier|static
 specifier|final
 name|IRI
-name|ODP_SITUATION
+name|CHAR_DROPPED
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-name|_CP_NAMESPACE
+name|_STANBOL_ONT_NAMESPACE
 operator|+
-literal|"situation.owl"
+literal|"pcomics/droppedcharacters.owl"
 argument_list|)
 decl_stmt|;
 comment|/**      * An ontology in test library 1 but not in test library 2.      */
@@ -137,15 +139,15 @@ specifier|public
 specifier|static
 specifier|final
 name|IRI
-name|ODP_TYPESOFENTITIES
+name|CHAR_ACTIVE
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-name|_CP_NAMESPACE
+name|_STANBOL_ONT_NAMESPACE
 operator|+
-literal|"typesofentities.owl"
+literal|"pcomics/characters_all.owl"
 argument_list|)
 decl_stmt|;
 block|}

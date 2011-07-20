@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -485,7 +485,7 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://kres.iks-project.eu/scope/Peanuts"
+literal|"http://stanbol.apache.org/scope/Comics"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -516,11 +516,11 @@ specifier|static
 name|OntologyInputSource
 name|ontSrc
 decl_stmt|,
-name|ont2Src
+name|minorSrc
 decl_stmt|,
-name|pizzaSrc
+name|dropSrc
 decl_stmt|,
-name|colleSrc
+name|nonexSrc
 decl_stmt|;
 specifier|private
 specifier|static
@@ -755,7 +755,7 @@ argument_list|(
 name|baseIri2
 argument_list|)
 expr_stmt|;
-name|ont2Src
+name|minorSrc
 operator|=
 operator|new
 name|RootOntologySource
@@ -763,25 +763,25 @@ argument_list|(
 name|ont2
 argument_list|)
 expr_stmt|;
-name|pizzaSrc
+name|dropSrc
 operator|=
 name|getLocalSource
 argument_list|(
-literal|"/ontologies/pizza.owl"
+literal|"/ontologies/droppedcharacters.owl"
 argument_list|,
 name|mgr
 argument_list|)
 expr_stmt|;
-name|colleSrc
+name|nonexSrc
 operator|=
 name|getLocalSource
 argument_list|(
-literal|"/ontologies/odp/collectionentity.owl"
+literal|"/ontologies/nonexistentcharacters.owl"
 argument_list|,
 name|mgr
 argument_list|)
 expr_stmt|;
-name|ont2Src
+name|minorSrc
 operator|=
 operator|new
 name|RootOntologySource
@@ -798,6 +798,8 @@ specifier|public
 name|void
 name|testAddOntology
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 name|CustomOntologySpace
 name|space
@@ -807,7 +809,7 @@ decl_stmt|;
 name|IRI
 name|logicalId
 init|=
-name|colleSrc
+name|nonexSrc
 operator|.
 name|getRootOntology
 argument_list|()
@@ -818,8 +820,6 @@ operator|.
 name|getOntologyIRI
 argument_list|()
 decl_stmt|;
-try|try
-block|{
 name|space
 operator|=
 name|spaceFactory
@@ -828,40 +828,23 @@ name|createCustomOntologySpace
 argument_list|(
 name|scopeIri
 argument_list|,
-name|pizzaSrc
+name|dropSrc
 argument_list|)
 expr_stmt|;
 name|space
 operator|.
 name|addOntology
 argument_list|(
-name|ont2Src
+name|minorSrc
 argument_list|)
 expr_stmt|;
 name|space
 operator|.
 name|addOntology
 argument_list|(
-name|colleSrc
+name|nonexSrc
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-name|fail
-argument_list|(
-literal|"Add operation on "
-operator|+
-name|scopeIri
-operator|+
-literal|" custom space was denied due to unexpected lock."
-argument_list|)
-expr_stmt|;
-block|}
 name|assertTrue
 argument_list|(
 name|space
@@ -874,7 +857,7 @@ argument_list|)
 expr_stmt|;
 name|logicalId
 operator|=
-name|pizzaSrc
+name|dropSrc
 operator|.
 name|getRootOntology
 argument_list|()
@@ -902,6 +885,8 @@ specifier|public
 name|void
 name|testCoreLock
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 name|CoreOntologySpace
 name|space
@@ -926,7 +911,7 @@ name|space
 operator|.
 name|addOntology
 argument_list|(
-name|ont2Src
+name|minorSrc
 argument_list|)
 expr_stmt|;
 name|fail
@@ -971,13 +956,13 @@ name|createCustomOntologySpace
 argument_list|(
 name|scopeIri
 argument_list|,
-name|pizzaSrc
+name|dropSrc
 argument_list|)
 decl_stmt|;
 name|IRI
 name|logicalId
 init|=
-name|pizzaSrc
+name|dropSrc
 operator|.
 name|getRootOntology
 argument_list|()
@@ -1005,6 +990,8 @@ specifier|public
 name|void
 name|testCustomLock
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 name|CustomOntologySpace
 name|space
@@ -1029,7 +1016,7 @@ name|space
 operator|.
 name|addOntology
 argument_list|(
-name|ont2Src
+name|minorSrc
 argument_list|)
 expr_stmt|;
 name|fail
@@ -1062,6 +1049,8 @@ specifier|public
 name|void
 name|testRemoveCustomOntology
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 name|CustomOntologySpace
 name|space
@@ -1076,13 +1065,13 @@ name|createCustomOntologySpace
 argument_list|(
 name|scopeIri
 argument_list|,
-name|pizzaSrc
+name|dropSrc
 argument_list|)
 expr_stmt|;
 name|IRI
 name|pizzaId
 init|=
-name|pizzaSrc
+name|dropSrc
 operator|.
 name|getRootOntology
 argument_list|()
@@ -1096,7 +1085,7 @@ decl_stmt|;
 name|IRI
 name|wineId
 init|=
-name|colleSrc
+name|nonexSrc
 operator|.
 name|getRootOntology
 argument_list|()
@@ -1120,7 +1109,7 @@ name|space
 operator|.
 name|addOntology
 argument_list|(
-name|colleSrc
+name|nonexSrc
 argument_list|)
 expr_stmt|;
 comment|// The other remote ontologies may change base IRI...
@@ -1158,7 +1147,7 @@ name|space
 operator|.
 name|removeOntology
 argument_list|(
-name|pizzaSrc
+name|dropSrc
 argument_list|)
 expr_stmt|;
 name|assertFalse
@@ -1175,7 +1164,7 @@ name|space
 operator|.
 name|removeOntology
 argument_list|(
-name|colleSrc
+name|nonexSrc
 argument_list|)
 expr_stmt|;
 name|assertFalse
@@ -1229,6 +1218,8 @@ specifier|public
 name|void
 name|testSessionModification
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 name|SessionOntologySpace
 name|space
@@ -1260,7 +1251,7 @@ name|space
 operator|.
 name|addOntology
 argument_list|(
-name|pizzaSrc
+name|dropSrc
 argument_list|)
 expr_stmt|;
 comment|// The in-memory ontology must be in the space.

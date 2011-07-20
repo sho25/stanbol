@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -367,22 +367,22 @@ decl_stmt|;
 specifier|private
 specifier|static
 name|IRI
-name|communitiesCpIri
+name|iri_minor
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://www.ontologydesignpatterns.org/cp/owl/communities.owl"
+literal|"http://stanbol.apache.org/ontologies/pcomics/minorcharacters.owl"
 argument_list|)
 decl_stmt|,
-name|objrole
+name|iri_main
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl"
+literal|"http://stanbol.apache.org/ontologies/pcomics/maincharacters.owl"
 argument_list|)
 decl_stmt|,
 name|scopeIri
@@ -391,18 +391,16 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://fise.iks-project.eu/TestIndexing"
+literal|"http://stanbol.apache.org/scope/IndexingTest"
 argument_list|)
 decl_stmt|,
-comment|// submissionsIri = IRI
-comment|// .create("http://www.ontologydesignpatterns.org/registry/submissions.owl"),
 name|testRegistryIri
 init|=
 name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://www.ontologydesignpatterns.org/registry/krestest.owl"
+literal|"http://stanbol.apache.org/ontologies/registries/onmtest.owl"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -478,7 +476,7 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-literal|"http://fise.iks-project.eu/TestIndexing"
+literal|"http://stanbol.apache.org/scope/IndexingTest"
 argument_list|)
 expr_stmt|;
 name|IRI
@@ -615,7 +613,7 @@ argument_list|()
 operator|.
 name|getResource
 argument_list|(
-literal|"/ontologies/odp/communities.owl"
+literal|"/ontologies/characters_all.owl"
 argument_list|)
 decl_stmt|;
 name|assertNotNull
@@ -670,7 +668,7 @@ name|index
 operator|.
 name|isOntologyLoaded
 argument_list|(
-name|communitiesCpIri
+name|iri_minor
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -681,7 +679,7 @@ argument_list|()
 operator|.
 name|getResource
 argument_list|(
-literal|"/ontologies/odp/topic.owl"
+literal|"/ontologies/minorcharacters.owl"
 argument_list|)
 expr_stmt|;
 name|assertNotNull
@@ -707,7 +705,7 @@ argument_list|)
 expr_stmt|;
 name|cust
 operator|.
-name|addOntology
+name|removeOntology
 argument_list|(
 operator|new
 name|ParentPathInputSource
@@ -716,20 +714,14 @@ name|f
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|cust
-operator|.
-name|removeOntology
-argument_list|(
-name|commSrc
-argument_list|)
-expr_stmt|;
+comment|// cust.removeOntology(commSrc);
 name|assertFalse
 argument_list|(
 name|index
 operator|.
 name|isOntologyLoaded
 argument_list|(
-name|communitiesCpIri
+name|iri_minor
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -751,7 +743,7 @@ name|mgr
 operator|.
 name|loadOntology
 argument_list|(
-name|objrole
+name|iri_main
 argument_list|)
 decl_stmt|;
 name|assertNotNull
@@ -760,7 +752,7 @@ name|oObjRole
 argument_list|)
 expr_stmt|;
 comment|// Compare it against the one indexed.
-comment|//         FIXME reinstate these checks
+comment|// FIXME reinstate these checks
 comment|// OntologyIndex index = onm.getOntologyIndex();
 comment|// assertNotNull(index.getOntology(objrole));
 comment|// // assertSame() would fail.
