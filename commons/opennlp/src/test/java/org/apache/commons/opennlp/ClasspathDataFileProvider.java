@@ -107,13 +107,14 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/*      * NOTE: This path needs to be the same as the one used by the      *       org.apache.stanbol.data.opennlp.lang.en bundle to store the       *       OpenNLP models      */
 specifier|public
 specifier|static
 specifier|final
 name|String
 name|RESOURCE_BASE_PATH
 init|=
-literal|"org/apache/stanbol/defaultdata/opennlp/"
+literal|"org/apache/stanbol/data/opennlp/"
 decl_stmt|;
 specifier|private
 specifier|final
