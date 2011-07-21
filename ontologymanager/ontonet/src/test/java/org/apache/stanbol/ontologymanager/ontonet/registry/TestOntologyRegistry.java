@@ -27,7 +27,43 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -48,6 +84,16 @@ operator|.
 name|net
 operator|.
 name|URL
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Dictionary
 import|;
 end_import
 
@@ -247,6 +293,26 @@ name|api
 operator|.
 name|registry
 operator|.
+name|RegistryManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|registry
+operator|.
 name|io
 operator|.
 name|OntologyRegistryIRISource
@@ -349,9 +415,7 @@ name|impl
 operator|.
 name|registry
 operator|.
-name|cache
-operator|.
-name|RegistryUtils
+name|RegistryManagerImpl
 import|;
 end_import
 
@@ -448,7 +512,7 @@ end_import
 begin_class
 specifier|public
 class|class
-name|TestRegistry
+name|TestOntologyRegistry
 block|{
 specifier|private
 specifier|static
@@ -475,18 +539,6 @@ specifier|static
 name|ONManager
 name|onm
 decl_stmt|;
-specifier|private
-specifier|static
-name|IRI
-name|testRegistryIri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://www.ontologydesignpatterns.org/registry/krestest.owl"
-argument_list|)
-decl_stmt|;
 annotation|@
 name|BeforeClass
 specifier|public
@@ -495,12 +547,15 @@ name|void
 name|setup
 parameter_list|()
 block|{
-comment|// An ONManagerImpl with no store and default settings
-name|configuration
-operator|=
-operator|new
-name|ONManagerConfigurationImpl
-argument_list|(
+specifier|final
+name|Dictionary
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|emptyConfig
+init|=
 operator|new
 name|Hashtable
 argument_list|<
@@ -509,8 +564,25 @@ argument_list|,
 name|Object
 argument_list|>
 argument_list|()
+decl_stmt|;
+name|configuration
+operator|=
+operator|new
+name|ONManagerConfigurationImpl
+argument_list|(
+name|emptyConfig
 argument_list|)
 expr_stmt|;
+name|RegistryManager
+name|regman
+init|=
+operator|new
+name|RegistryManagerImpl
+argument_list|(
+name|emptyConfig
+argument_list|)
+decl_stmt|;
+comment|// An ONManagerImpl with no store and default settings
 name|onm
 operator|=
 operator|new
@@ -522,14 +594,9 @@ literal|null
 argument_list|,
 name|configuration
 argument_list|,
-operator|new
-name|Hashtable
-argument_list|<
-name|String
+name|regman
 argument_list|,
-name|Object
-argument_list|>
-argument_list|()
+name|emptyConfig
 argument_list|)
 expr_stmt|;
 name|ontologyManager
@@ -547,14 +614,14 @@ name|getRegistryLoader
 argument_list|()
 expr_stmt|;
 block|}
-comment|//    private static boolean mapperIsSet = false;
+comment|// private static boolean mapperIsSet = false;
 comment|//
-comment|//    public void setupOfflineMapper() {
-comment|//        if (mapperIsSet) {} else {
-comment|//            ontologySource = new OntologyRegistryIRISource(testRegistryIri, ontologyManager, loader);
-comment|//            mapperIsSet = true;
-comment|//        }
-comment|//    }
+comment|// public void setupOfflineMapper() {
+comment|// if (mapperIsSet) {} else {
+comment|// ontologySource = new OntologyRegistryIRISource(testRegistryIri, ontologyManager, loader);
+comment|// mapperIsSet = true;
+comment|// }
+comment|// }
 annotation|@
 name|Test
 specifier|public
@@ -624,7 +691,10 @@ decl_stmt|;
 name|Registry
 name|r
 init|=
-name|RegistryUtils
+name|onm
+operator|.
+name|getRegistryManager
+argument_list|()
 operator|.
 name|populateRegistry
 argument_list|(
@@ -636,9 +706,14 @@ argument_list|(
 name|r
 argument_list|)
 expr_stmt|;
+name|int
+name|count
+init|=
+literal|2
+decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|2
+name|count
 argument_list|,
 name|r
 operator|.
@@ -648,17 +723,145 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
+block|}
+comment|/**      * Verify that, when loading multiple registries that add library information to each other, the overall      * model reflects the union of these registries.      *       * @throws Exception      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRegistryUnion
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|OWLOntologyManager
+name|virginOntologyManager
+init|=
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+decl_stmt|;
+name|URL
+name|url
+init|=
+name|getClass
+argument_list|()
+operator|.
+name|getResource
+argument_list|(
+literal|"/ontologies/registry"
+argument_list|)
+decl_stmt|;
+name|assertNotNull
+argument_list|(
+name|url
+argument_list|)
+expr_stmt|;
+name|virginOntologyManager
+operator|.
+name|addIRIMapper
+argument_list|(
+operator|new
+name|AutoIRIMapper
+argument_list|(
+operator|new
+name|File
+argument_list|(
+name|url
+operator|.
+name|toURI
+argument_list|()
+argument_list|)
+argument_list|,
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Population is lazy; no need to add other mappers.
+name|OWLOntology
+name|oReg
+init|=
+name|virginOntologyManager
+operator|.
+name|loadOntology
+argument_list|(
+name|Locations
+operator|.
+name|_REGISTRY_TEST
+argument_list|)
+decl_stmt|;
+name|Registry
+name|r1
+init|=
+name|onm
+operator|.
+name|getRegistryManager
+argument_list|()
+operator|.
+name|populateRegistry
+argument_list|(
+name|oReg
+argument_list|)
+decl_stmt|;
+comment|// Now the second registry.
+name|oReg
+operator|=
+name|virginOntologyManager
+operator|.
+name|loadOntology
+argument_list|(
+name|Locations
+operator|.
+name|_REGISTRY_TEST_ADDITIONS
+argument_list|)
+expr_stmt|;
+name|Registry
+name|r2
+init|=
+name|onm
+operator|.
+name|getRegistryManager
+argument_list|()
+operator|.
+name|populateRegistry
+argument_list|(
+name|oReg
+argument_list|)
+decl_stmt|;
+name|assertNotNull
+argument_list|(
+name|r2
+argument_list|)
+expr_stmt|;
 name|int
 name|count
 init|=
 literal|2
 decl_stmt|;
-comment|//        System.err.println(r);
-comment|//        for (RegistryItem c1 : r.getChildren()) {
-comment|//            System.err.println("\t" + c1);
-comment|//            for (RegistryItem c2 : c1.getChildren())
-comment|//                System.err.println("\t\t" + c2);
-comment|//
+name|assertEquals
+argument_list|(
+name|count
+argument_list|,
+name|r1
+operator|.
+name|getChildren
+argument_list|()
+operator|.
+name|length
+argument_list|)
+expr_stmt|;
+comment|//        for (RegistryItem lib : r1.getChildren()) {
+comment|//            System.out.println("\t"+lib);
+comment|//            for (RegistryItem ont : lib.getChildren()) {
+comment|//                System.out.println("\t\t"+ont);
+comment|//            }
+comment|//        }
+comment|//        for (RegistryItem lib : r2.getChildren()) {
+comment|//            System.out.println("\t"+lib);
+comment|//            for (RegistryItem ont : lib.getChildren()) {
+comment|//                System.out.println("\t\t"+ont);
+comment|//            }
 comment|//        }
 block|}
 annotation|@
@@ -670,7 +873,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|//        setupOfflineMapper();
+comment|// setupOfflineMapper();
 name|IRI
 name|scopeIri
 init|=
@@ -763,7 +966,7 @@ name|void
 name|testScopeCreationWithRegistry
 parameter_list|()
 block|{
-comment|//        setupOfflineMapper();
+comment|// setupOfflineMapper();
 name|IRI
 name|scopeIri
 init|=
@@ -827,8 +1030,6 @@ operator|!=
 literal|null
 argument_list|)
 expr_stmt|;
-comment|// OntologyUtils.printOntology(scope.getCoreSpace().getTopOntology(),
-comment|// System.err);
 block|}
 annotation|@
 name|Test
@@ -837,7 +1038,7 @@ name|void
 name|testSpaceCreationWithRegistry
 parameter_list|()
 block|{
-comment|//        setupOfflineMapper();
+comment|// setupOfflineMapper();
 name|IRI
 name|scopeIri
 init|=

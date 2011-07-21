@@ -18,8 +18,6 @@ operator|.
 name|api
 operator|.
 name|registry
-operator|.
-name|models
 package|;
 end_package
 

@@ -333,14 +333,9 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-operator|new
-name|Hashtable
-argument_list|<
-name|String
+literal|null
 argument_list|,
-name|Object
-argument_list|>
-argument_list|()
+name|configuration
 argument_list|)
 expr_stmt|;
 name|store

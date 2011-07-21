@@ -1378,6 +1378,8 @@ name|tcm
 argument_list|,
 name|wtcp
 argument_list|,
+literal|null
+argument_list|,
 name|emptyConfig
 argument_list|)
 decl_stmt|;
@@ -1565,6 +1567,8 @@ argument_list|(
 name|tcm
 argument_list|,
 name|wtcp
+argument_list|,
+literal|null
 argument_list|,
 name|emptyConfig
 argument_list|)

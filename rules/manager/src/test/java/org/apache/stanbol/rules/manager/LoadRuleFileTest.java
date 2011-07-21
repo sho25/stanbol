@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_comment
@@ -422,7 +422,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  * @author elvio  */
+comment|/**  *   * @author elvio  */
 end_comment
 
 begin_class
@@ -433,7 +433,7 @@ block|{
 specifier|public
 name|LoadRuleFileTest
 parameter_list|()
-block|{     }
+block|{}
 annotation|@
 name|BeforeClass
 specifier|public
@@ -443,7 +443,7 @@ name|setUpClass
 parameter_list|()
 throws|throws
 name|Exception
-block|{     }
+block|{}
 annotation|@
 name|AfterClass
 specifier|public
@@ -453,21 +453,21 @@ name|tearDownClass
 parameter_list|()
 throws|throws
 name|Exception
-block|{     }
+block|{}
 annotation|@
 name|Before
 specifier|public
 name|void
 name|setUp
 parameter_list|()
-block|{     }
+block|{}
 annotation|@
 name|After
 specifier|public
 name|void
 name|tearDown
 parameter_list|()
-block|{     }
+block|{}
 comment|/**      * Test of LoadRuleFile method, of class LoadRuleFile.      */
 annotation|@
 name|Test
@@ -505,6 +505,8 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
+literal|null
+argument_list|,
 name|configuration
 argument_list|)
 decl_stmt|;
@@ -525,7 +527,7 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//    	configuration2.put(RuleStoreImpl.RULE_ONTOLOGY, "");
+comment|// configuration2.put(RuleStoreImpl.RULE_ONTOLOGY, "");
 name|configuration2
 operator|.
 name|put
@@ -563,6 +565,8 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
+literal|null
+argument_list|,
 name|configuration
 argument_list|)
 argument_list|,
@@ -574,7 +578,7 @@ name|getOntology
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Load the example file
+comment|// Load the example file
 name|LoadRuleFile
 name|load
 init|=
@@ -597,8 +601,8 @@ operator|.
 name|getOntology
 argument_list|()
 decl_stmt|;
-comment|////////////////////////////////////////////////////////////////////
-comment|//Create ontology
+comment|// //////////////////////////////////////////////////////////////////
+comment|// Create ontology
 name|OWLOntologyManager
 name|owlmanager
 init|=
@@ -659,7 +663,7 @@ argument_list|(
 name|ID
 argument_list|)
 expr_stmt|;
-comment|//KReSRule
+comment|// KReSRule
 name|OWLClass
 name|ontocls
 init|=
@@ -677,7 +681,7 @@ literal|"KReSRule"
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//MyRuleX
+comment|// MyRuleX
 name|String
 name|rule
 init|=
@@ -805,7 +809,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//MyRuleA
+comment|// MyRuleA
 name|ontoind
 operator|=
 name|factory
@@ -918,7 +922,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//MyRuleB
+comment|// MyRuleB
 name|ontoind
 operator|=
 name|factory
@@ -1031,7 +1035,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//MyRuleC
+comment|// MyRuleC
 name|ontoind
 operator|=
 name|factory
@@ -1144,7 +1148,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//MyRuleD
+comment|// MyRuleD
 name|ontoind
 operator|=
 name|factory
@@ -1257,7 +1261,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//MyRuleE
+comment|// MyRuleE
 name|ontoind
 operator|=
 name|factory
@@ -1370,7 +1374,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//MyRuleF
+comment|// MyRuleF
 name|ontoind
 operator|=
 name|factory
@@ -1483,7 +1487,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//Recipe
+comment|// Recipe
 name|ontocls
 operator|=
 name|factory
@@ -1500,7 +1504,7 @@ literal|"Recipe"
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Add sequence
+comment|// Add sequence
 name|ontoind
 operator|=
 name|factory
@@ -1974,7 +1978,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//Add sequence
+comment|// Add sequence
 name|ontoind
 operator|=
 name|factory
@@ -2351,7 +2355,7 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|//Add sequence
+comment|// Add sequence
 name|ontoind
 operator|=
 name|factory
@@ -2568,8 +2572,8 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
-comment|////////////////////////////////////////////////////////////////////
-comment|//Get axiom
+comment|// //////////////////////////////////////////////////////////////////
+comment|// Get axiom
 name|int
 name|numexp
 init|=
@@ -2684,7 +2688,7 @@ operator|-
 name|numres
 argument_list|)
 expr_stmt|;
-comment|//assertEquals(numexp,(numres+12));
+comment|// assertEquals(numexp,(numres+12));
 comment|// TODO review the generated test code and remove the default call to fail.
 block|}
 else|else

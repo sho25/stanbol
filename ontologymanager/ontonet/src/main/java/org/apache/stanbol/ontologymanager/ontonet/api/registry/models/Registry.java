@@ -23,6 +23,20 @@ name|models
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyManager
+import|;
+end_import
+
 begin_comment
 comment|/**  * An ontology registry can reference zero or more ontology libraries.  */
 end_comment
@@ -33,7 +47,29 @@ interface|interface
 name|Registry
 extends|extends
 name|RegistryItem
-block|{  }
+block|{
+specifier|final
+name|Type
+name|type
+init|=
+name|Type
+operator|.
+name|REGISTRY
+decl_stmt|;
+comment|/**      *       * @return      */
+name|OWLOntologyManager
+name|getCache
+parameter_list|()
+function_decl|;
+comment|/**      *       * @param cache      */
+name|void
+name|setCache
+parameter_list|(
+name|OWLOntologyManager
+name|cache
+parameter_list|)
+function_decl|;
+block|}
 end_interface
 
 end_unit
