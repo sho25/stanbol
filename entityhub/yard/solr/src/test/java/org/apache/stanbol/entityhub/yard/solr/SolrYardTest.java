@@ -689,7 +689,12 @@ argument_list|,
 operator|new
 name|TextConstraint
 argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 literal|"text content"
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -736,7 +741,12 @@ argument_list|,
 operator|new
 name|TextConstraint
 argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 literal|"value2"
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1130,7 +1140,12 @@ argument_list|,
 operator|new
 name|TextConstraint
 argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 literal|"other"
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

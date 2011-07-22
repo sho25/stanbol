@@ -69,7 +69,7 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|SolrServerProvider
+name|SolrServerTypeEnum
 import|;
 end_import
 
@@ -106,24 +106,6 @@ operator|.
 name|solr
 operator|.
 name|SolrDirectoryManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|SolrServerProvider
-operator|.
-name|Type
 import|;
 end_import
 
@@ -230,9 +212,7 @@ specifier|public
 name|void
 name|setSolrServerType
 parameter_list|(
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 name|type
 parameter_list|)
 block|{
@@ -269,9 +249,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 name|getSolrServerType
 parameter_list|()
 block|{
@@ -298,16 +276,12 @@ if|if
 condition|(
 name|serverType
 operator|instanceof
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 condition|)
 block|{
 return|return
 operator|(
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 operator|)
 name|serverType
 return|;
@@ -317,9 +291,7 @@ block|{
 try|try
 block|{
 return|return
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 operator|.
 name|valueOf
 argument_list|(
@@ -368,9 +340,7 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 operator|.
 name|HTTP
 return|;
@@ -378,9 +348,7 @@ block|}
 else|else
 block|{
 return|return
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 operator|.
 name|EMBEDDED
 return|;

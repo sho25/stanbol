@@ -853,13 +853,20 @@ operator|==
 literal|null
 condition|)
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
+name|log
+operator|.
+name|warn
 argument_list|(
-literal|"The parsed SolrServer MUST NOT be NULL"
+literal|"NULL parsed as SolrServer: Loading and Saving of the Namespace Prefix Settings will be deactivated!"
 argument_list|)
-throw|;
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"  This is OK for Unit Test but should not happen in productive use!"
+argument_list|)
+expr_stmt|;
 block|}
 name|this
 operator|.
@@ -3420,6 +3427,13 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|server
+operator|!=
+literal|null
+condition|)
+block|{
 try|try
 block|{
 name|server
@@ -3479,6 +3493,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 comment|/**      * Getter for a SolrDocument based on the ID. Used to load the config from the index.      *       * @param inputDoc      *            the document to store      */
 specifier|protected
 name|SolrDocument
@@ -3492,6 +3507,17 @@ name|SolrServerException
 throws|,
 name|IOException
 block|{
+if|if
+condition|(
+name|server
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 name|SolrQuery
 name|solrQuery
 init|=

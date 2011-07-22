@@ -1783,7 +1783,7 @@ if|if
 condition|(
 name|textConstraint
 operator|.
-name|getText
+name|getTexts
 argument_list|()
 operator|!=
 literal|null

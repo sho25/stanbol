@@ -525,7 +525,7 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|SolrServerProvider
+name|SolrServerProviderManager
 import|;
 end_import
 
@@ -541,7 +541,7 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|SolrServerProviderManager
+name|SolrServerTypeEnum
 import|;
 end_import
 
@@ -1229,7 +1229,7 @@ name|FIELD_BOOST_MAPPINGS
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.fieldBoosts"
 decl_stmt|;
-comment|/**      * Key used to configure the implementation of the {@link SolrServer} to be used by this SolrYard      * implementation. The default value is determined by the type of the value configured by the      * {@link #SOLR_SERVER_LOCATION}. In case a path of a File URI is used, the type is set to      * {@link Type#EMBEDDED} otherwise {@link Type#HTTP} is used as default.      */
+comment|/**      * Key used to configure the implementation of the {@link SolrServer} to be used by this SolrYard      * implementation. The default value is determined by the type of the value configured by the      * {@link #SOLR_SERVER_LOCATION}. In case a path of a File URI is used, the type is set to      * {@link SolrServerTypeEnum#EMBEDDED} otherwise {@link SolrServerTypeEnum#HTTP} is used as default.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1370,7 +1370,7 @@ name|Float
 argument_list|>
 name|fieldBoostMap
 decl_stmt|;
-comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard. Supports also      * {@link Type#STREAMING} and {@link Type#LOAD_BALANCE} type of servers. TODO: In case a remove SolrServer      * is configured by the {@link SolrYardConfig#getSolrServerLocation()}, than it would be possible to      * create both an {@link StreamingUpdateSolrServer} (by parsing {@link Type#STREAMING}) and an normal      * {@link CommonsHttpSolrServer}. The streaming update one should be used for indexing requests and the      * commons http one for all other requests. This would provide performance advantages when updating      * {@link Representation}s stored in a SolrYard using an remote SolrServer.      */
+comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard. Supports also      * {@link SolrServerTypeEnum#STREAMING} and {@link SolrServerTypeEnum#LOAD_BALANCE} type of servers. TODO: In case a remove SolrServer      * is configured by the {@link SolrYardConfig#getSolrServerLocation()}, than it would be possible to      * create both an {@link StreamingUpdateSolrServer} (by parsing {@link SolrServerTypeEnum#STREAMING}) and an normal      * {@link CommonsHttpSolrServer}. The streaming update one should be used for indexing requests and the      * commons http one for all other requests. This would provide performance advantages when updating      * {@link Representation}s stored in a SolrYard using an remote SolrServer.      */
 annotation|@
 name|Reference
 argument_list|(
@@ -1997,9 +1997,7 @@ operator|.
 name|getSolrServerType
 argument_list|()
 operator|==
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 operator|.
 name|EMBEDDED
 condition|)
