@@ -71,16 +71,6 @@ name|org
 operator|.
 name|htmlcleaner
 operator|.
-name|DomSerializer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|htmlcleaner
-operator|.
 name|HtmlCleaner
 import|;
 end_import
@@ -151,7 +141,7 @@ name|CleanerProperties
 name|parserProps
 decl_stmt|;
 specifier|private
-name|DomSerializer
+name|DomSerializer2
 name|domCreator
 decl_stmt|;
 specifier|public
@@ -195,7 +185,15 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
-comment|// this.parserProps.setAdvancedXmlEscape(true);
+name|this
+operator|.
+name|parserProps
+operator|.
+name|setAdvancedXmlEscape
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|parserProps
@@ -228,11 +226,13 @@ operator|.
 name|domCreator
 operator|=
 operator|new
-name|DomSerializer
+name|DomSerializer2
 argument_list|(
 name|this
 operator|.
 name|parserProps
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 comment|// TODO override otpions form config
