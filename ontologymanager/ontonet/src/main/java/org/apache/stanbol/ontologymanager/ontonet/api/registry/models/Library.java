@@ -81,6 +81,10 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_comment
+comment|/**  * An ontology library references one or more ontologies.  */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
@@ -88,6 +92,7 @@ name|Library
 extends|extends
 name|RegistryItem
 block|{
+comment|/**      * The type of this registry item is {@link Type#LIBRARY}.      */
 specifier|final
 name|Type
 name|type
@@ -96,7 +101,7 @@ name|Type
 operator|.
 name|LIBRARY
 decl_stmt|;
-comment|/**      * Upon invocation, this method immediately fires a registry content request event on itself. Note,      * however, that this method is in general not synchronized. Therefore, any listeners that react by      * invoking a load method may or may not cause the content to be available to this method.      *       * @return      * @throws RegistryContentException      */
+comment|/**      * Returns the OWL ontologies that have been loaded in this library, if any, otherwise an exception is      * thrown.<br/>      *<br/>      * Upon invocation, this method immediately fires a registry content request event on itself. Note,      * however, that this method is in general not synchronized. Therefore, any listeners that react by      * invoking a load method may or may not cause the content to be available to this method before it      * returns.      *       * @return the set of loaded OWL ontologies.      * @throws RegistryContentException      *             if the requested ontologies have not been loaded.      */
 name|Set
 argument_list|<
 name|OWLOntology
@@ -106,10 +111,12 @@ parameter_list|()
 throws|throws
 name|RegistryContentException
 function_decl|;
+comment|/**      * Determines if the contents of this library have been loaded and are up-to-date.      *       * @return true if the contents are loaded and up-to-date, false otherwise.      */
 name|boolean
 name|isLoaded
 parameter_list|()
 function_decl|;
+comment|/**      * Causes all the ontologies referenced by this library to be loaded, so that when      * {@link RegistryOntology#asOWLOntology()} is invoked on one of its children, it will return the      * corresponding OWL ontology, if a valid one was parsed from its location.      *       * @param mgr      *            the OWL ontology manager to use for loading the ontologies in the library. It must not be      *            null, lest an {@link IllegalArgumentException} be thrown.      */
 name|void
 name|loadOntologies
 parameter_list|(

@@ -39,9 +39,35 @@ name|registry
 operator|.
 name|models
 operator|.
+name|RegistryItem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|registry
+operator|.
+name|models
+operator|.
 name|RegistryOntology
 import|;
 end_import
+
+begin_comment
+comment|/**  * Thrown whenever there is a request for the raw OWL version of a registry ontology which has not been loaded  * yet (e.g. due to lazy loading policies). Developers who catch this exception may, for example, decide to  * load the ontology.<br/>  *<br/>  * Note that this exception is independent from calls to  * {@link RegistryContentListener#registryContentRequested(RegistryItem)}, although it can be expected to be  * thrown thereafter.  */
+end_comment
 
 begin_class
 specifier|public
@@ -63,6 +89,7 @@ specifier|private
 name|RegistryOntology
 name|ontology
 decl_stmt|;
+comment|/**      * Creates a new instance of {@link RegistryOntologyNotLoadedException}.      *       * @param library      *            the ontology that caused the exception.      */
 specifier|public
 name|RegistryOntologyNotLoadedException
 parameter_list|(
@@ -85,6 +112,7 @@ operator|=
 name|ontology
 expr_stmt|;
 block|}
+comment|/**      * Returns the requested ontology that is not loaded yet.      *       * @return the ontology that caused the exception.      */
 specifier|public
 name|RegistryOntology
 name|getOntology

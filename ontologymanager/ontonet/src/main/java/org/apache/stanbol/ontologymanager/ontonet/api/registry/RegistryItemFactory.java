@@ -101,28 +101,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|registry
-operator|.
-name|cache
-operator|.
-name|RegistryUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -148,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A factory that creates the basic elements of the ontology registry metamodel, starting from OWL objects  * that are required not to be anonymous.<br/>  *<br/>  *<b>Note that implementations should not be aggressive</b>, in that they should<b>not</b> recursively  * create and/or append the parents and children of any generated object. Refer to the following static  * methods in the {@link RegistryUtils} class to recursively populate a registry item:  *<ul>  *<li>{@link RegistryUtils#populateLibrary(OWLNamedIndividual, Set)}</li>  *<li>{@link RegistryUtils#populateOntology(OWLNamedIndividual, Set)}</li>  *<li>{@link RegistryUtils#populateRegistry(OWLOntology)}</li>  *</ul>  */
+comment|/**  * A factory that creates the basic elements of the ontology registry metamodel from OWL objects that are  * required not to be anonymous.<br/>  *<br/>  *<b>Note that implementations should not be aggressive</b>, in that they should<b>not</b> recursively  * create and/or append the parents and children of any generated object. Refer to  * {@link RegistryManager#createModel(Set)} to recursively populate registry item starting from a set of  * registries.  */
 end_comment
 
 begin_interface

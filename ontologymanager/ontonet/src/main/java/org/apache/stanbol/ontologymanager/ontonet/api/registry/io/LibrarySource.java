@@ -459,7 +459,7 @@ name|reg
 init|=
 name|loader
 operator|.
-name|loadLibraryEager
+name|loadLibrary
 argument_list|(
 name|registryLocation
 argument_list|,

@@ -27,6 +27,30 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|registry
+operator|.
+name|models
+operator|.
+name|RegistryItem
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -48,6 +72,7 @@ name|Registry
 extends|extends
 name|RegistryItem
 block|{
+comment|/**      * The type of this registry item is {@link Type#REGISTRY}.      */
 specifier|final
 name|Type
 name|type
@@ -56,12 +81,12 @@ name|Type
 operator|.
 name|REGISTRY
 decl_stmt|;
-comment|/**      *       * @return      */
+comment|/**      * Returns the OWL ontology manager that this registry is using as a cache of its ontologies.      *       * @return the ontology manager that is used as a cache.      */
 name|OWLOntologyManager
 name|getCache
 parameter_list|()
 function_decl|;
-comment|/**      *       * @param cache      */
+comment|/**      * Sets the OWL ontology manager that this registry will use as a cache of its ontologies. If null, if      * will create its own.      *       * @param cache      *            the ontology manager to be used as a cache.      */
 name|void
 name|setCache
 parameter_list|(

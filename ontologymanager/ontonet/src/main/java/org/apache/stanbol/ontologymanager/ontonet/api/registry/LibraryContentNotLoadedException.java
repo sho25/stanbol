@@ -63,6 +63,10 @@ name|serialVersionUID
 init|=
 literal|4442769260608567120L
 decl_stmt|;
+specifier|private
+name|Library
+name|library
+decl_stmt|;
 comment|/**      * Creates a new instance of {@link LibraryContentNotLoadedException}.      *       * @param library      *            the ontology library that caused the exception.      */
 specifier|public
 name|LibraryContentNotLoadedException
@@ -86,10 +90,6 @@ operator|=
 name|library
 expr_stmt|;
 block|}
-specifier|private
-name|Library
-name|library
-decl_stmt|;
 comment|/**      * Returns the library whose content was requested that is not loaded yet.      *       * @return the ontology library that caused the exception.      */
 specifier|public
 name|Library

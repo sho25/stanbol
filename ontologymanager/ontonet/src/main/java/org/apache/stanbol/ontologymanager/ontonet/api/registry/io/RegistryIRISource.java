@@ -278,7 +278,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 extends|extends
 name|AbstractOntologyInputSource
 block|{
@@ -302,7 +302,7 @@ literal|null
 decl_stmt|;
 comment|/**      * @param registryIRI      * @param ontologyManager      * @param loader      */
 specifier|public
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 parameter_list|(
 name|IRI
 name|registryIRI
@@ -328,7 +328,7 @@ expr_stmt|;
 block|}
 comment|/**      * Creates a new ontology input source by providing a new root ontology that imports the entire network      * addressed by the ontology registry at the supplied IRI.      *       * @param registryIRI      */
 specifier|public
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 parameter_list|(
 name|IRI
 name|registryIRI
@@ -380,7 +380,7 @@ argument_list|,
 name|ontologyManager
 argument_list|)
 decl_stmt|;
-comment|//        for (Registry reg : loader.loadRegistriesEager(registryIRI)) {
+comment|// for (Registry reg : loader.loadRegistriesEager(registryIRI)) {
 for|for
 control|(
 name|RegistryItem
@@ -462,7 +462,7 @@ comment|// TODO : not entirely convinced of this step.
 continue|continue;
 block|}
 block|}
-comment|//        }
+comment|// }
 comment|// We always construct a new root now, even if there's just one subtree.
 comment|// Set<OWLOntology> subtrees = mgr.getOntologies();
 comment|// if (subtrees.size() == 1)
@@ -524,7 +524,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 parameter_list|(
 name|IRI
 name|registryIRI
@@ -549,7 +549,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 parameter_list|(
 name|IRI
 name|registryIRI

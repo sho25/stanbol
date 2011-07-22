@@ -281,7 +281,7 @@ name|registry
 operator|.
 name|io
 operator|.
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 import|;
 end_import
 
@@ -620,7 +620,7 @@ argument_list|(
 name|scopeIri
 argument_list|,
 operator|new
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 argument_list|(
 name|testRegistryIri
 argument_list|,

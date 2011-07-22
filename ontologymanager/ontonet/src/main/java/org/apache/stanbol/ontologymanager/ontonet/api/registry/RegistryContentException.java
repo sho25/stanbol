@@ -21,6 +21,10 @@ name|registry
 package|;
 end_package
 
+begin_comment
+comment|/**  * Thrown when trying to process an invalid registry item. The reason why it is invalid can be specified by  * the cause, message or subclasses of this exception.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -28,7 +32,7 @@ name|RegistryContentException
 extends|extends
 name|Exception
 block|{
-comment|/** 	 *  	 */
+comment|/**      *       */
 specifier|private
 specifier|static
 specifier|final
@@ -37,6 +41,7 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
+comment|/**      * Creates a new instance of {@link RegistryContentException}.      *       * @param cause      *            the throwable that caused this exception to be thrown.      */
 specifier|public
 name|RegistryContentException
 parameter_list|(
@@ -50,6 +55,7 @@ name|cause
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new instance of {@link RegistryContentException}.      *       * @param message      *            the exception message.      */
 specifier|public
 name|RegistryContentException
 parameter_list|(

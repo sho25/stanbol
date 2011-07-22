@@ -27,89 +27,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URISyntaxException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|TreeMap
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|registry
-operator|.
-name|RegistryContentException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|registry
-operator|.
-name|RegistryItemFactory
 import|;
 end_import
 
@@ -237,26 +157,6 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|impl
-operator|.
-name|registry
-operator|.
-name|RegistryItemFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
 name|xd
 operator|.
 name|vocabulary
@@ -303,7 +203,49 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLAxiom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLAxiomVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLClass
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLClassAssertionAxiom
 import|;
 end_import
 
@@ -359,20 +301,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLNamedIndividual
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLObjectProperty
 import|;
 end_import
@@ -387,7 +315,49 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLObjectPropertyAssertionAxiom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLObjectPropertyExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntology
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|util
+operator|.
+name|OWLAxiomVisitorAdapter
 import|;
 end_import
 
@@ -436,6 +406,11 @@ name|isPartOf
 decl_stmt|,
 name|isOntologyOf
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 name|Logger
@@ -450,38 +425,8 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|static
-name|Map
-argument_list|<
-name|IRI
-argument_list|,
-name|RegistryItem
-argument_list|>
-name|population
-init|=
-operator|new
-name|TreeMap
-argument_list|<
-name|IRI
-argument_list|,
-name|RegistryItem
-argument_list|>
-argument_list|()
-decl_stmt|;
-specifier|private
-specifier|static
-name|RegistryItemFactory
-name|riFactory
-decl_stmt|;
 static|static
 block|{
-name|riFactory
-operator|=
-operator|new
-name|RegistryItemFactoryImpl
-argument_list|()
-expr_stmt|;
 name|OWLDataFactory
 name|factory
 init|=
@@ -618,15 +563,10 @@ block|{
 name|IRI
 name|iri
 init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
 name|item
 operator|.
-name|getURL
+name|getIRI
 argument_list|()
-argument_list|)
 decl_stmt|;
 name|result
 operator||=
@@ -696,12 +636,14 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Simulates a classifier.      *       * @param ind      * @param o      * @return      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 name|Type
 name|getType
 parameter_list|(
+specifier|final
 name|OWLIndividual
 name|ind
 parameter_list|,
@@ -712,161 +654,338 @@ argument_list|>
 name|ontologies
 parameter_list|)
 block|{
-comment|// TODO also use property values
-name|Set
-argument_list|<
-name|OWLClassExpression
-argument_list|>
-name|types
+comment|// 0 is for library, 1 is for ontology (more in the future?)
+specifier|final
+name|int
+index|[]
+name|pointsFor
 init|=
+operator|new
+name|int
+index|[]
+block|{
+literal|0
+block|,
+literal|0
+block|}
+decl_stmt|;
+specifier|final
+name|int
+index|[]
+name|pointsAgainst
+init|=
+operator|new
+name|int
+index|[]
+block|{
+literal|0
+block|,
+literal|0
+block|}
+decl_stmt|;
+name|OWLAxiomVisitor
+name|v
+init|=
+operator|new
+name|OWLAxiomVisitorAdapter
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|void
+name|visit
+parameter_list|(
+name|OWLClassAssertionAxiom
+name|axiom
+parameter_list|)
+block|{
+if|if
+condition|(
 name|ind
 operator|.
-name|getTypes
+name|equals
 argument_list|(
-name|ontologies
+name|axiom
+operator|.
+name|getIndividual
+argument_list|()
 argument_list|)
+condition|)
+block|{
+name|OWLClassExpression
+name|type
+init|=
+name|axiom
+operator|.
+name|getClassExpression
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|types
-operator|.
-name|contains
-argument_list|(
-name|cOntology
-argument_list|)
-operator|&&
-operator|!
-name|types
-operator|.
-name|contains
-argument_list|(
 name|cRegistryLibrary
+operator|.
+name|equals
+argument_list|(
+name|type
 argument_list|)
 condition|)
-return|return
-name|Type
-operator|.
-name|ONTOLOGY
-return|;
+block|{
+name|pointsFor
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+name|pointsAgainst
+index|[
+literal|1
+index|]
+operator|++
+expr_stmt|;
+block|}
+elseif|else
 if|if
 condition|(
-operator|!
-name|types
-operator|.
-name|contains
-argument_list|(
 name|cOntology
-argument_list|)
-operator|&&
-name|types
 operator|.
-name|contains
+name|equals
 argument_list|(
-name|cRegistryLibrary
+name|type
 argument_list|)
+condition|)
+block|{
+name|pointsFor
+index|[
+literal|1
+index|]
+operator|++
+expr_stmt|;
+name|pointsAgainst
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+block|}
+block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|visit
+parameter_list|(
+name|OWLObjectPropertyAssertionAxiom
+name|axiom
+parameter_list|)
+block|{
+name|OWLObjectPropertyExpression
+name|prop
+init|=
+name|axiom
+operator|.
+name|getProperty
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|ind
+operator|.
+name|equals
+argument_list|(
+name|axiom
+operator|.
+name|getSubject
+argument_list|()
+argument_list|)
+condition|)
+block|{
+if|if
+condition|(
+name|hasOntology
+operator|.
+name|equals
+argument_list|(
+name|prop
+argument_list|)
+condition|)
+block|{
+name|pointsFor
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+name|pointsAgainst
+index|[
+literal|1
+index|]
+operator|++
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|isOntologyOf
+operator|.
+name|equals
+argument_list|(
+name|prop
+argument_list|)
+condition|)
+block|{
+name|pointsFor
+index|[
+literal|1
+index|]
+operator|++
+expr_stmt|;
+name|pointsAgainst
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+block|}
+block|}
+elseif|else
+if|if
+condition|(
+name|ind
+operator|.
+name|equals
+argument_list|(
+name|axiom
+operator|.
+name|getObject
+argument_list|()
+argument_list|)
+condition|)
+block|{
+if|if
+condition|(
+name|isOntologyOf
+operator|.
+name|equals
+argument_list|(
+name|prop
+argument_list|)
+condition|)
+block|{
+name|pointsFor
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+name|pointsAgainst
+index|[
+literal|1
+index|]
+operator|++
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|hasOntology
+operator|.
+name|equals
+argument_list|(
+name|prop
+argument_list|)
+condition|)
+block|{
+name|pointsFor
+index|[
+literal|1
+index|]
+operator|++
+expr_stmt|;
+name|pointsAgainst
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+block|}
+block|}
+block|}
+block|}
+decl_stmt|;
+comment|// TODO use this strategy in the single pass algorithm for constructing the model.
+for|for
+control|(
+name|OWLOntology
+name|o
+range|:
+name|ontologies
+control|)
+for|for
+control|(
+name|OWLAxiom
+name|ax
+range|:
+name|o
+operator|.
+name|getAxioms
+argument_list|()
+control|)
+name|ax
+operator|.
+name|accept
+argument_list|(
+name|v
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|pointsFor
+index|[
+literal|0
+index|]
+operator|>
+literal|0
+operator|&&
+name|pointsAgainst
+index|[
+literal|0
+index|]
+operator|==
+literal|0
 condition|)
 return|return
 name|Type
 operator|.
 name|LIBRARY
 return|;
+if|if
+condition|(
+name|pointsFor
+index|[
+literal|1
+index|]
+operator|>
+literal|0
+operator|&&
+name|pointsAgainst
+index|[
+literal|1
+index|]
+operator|==
+literal|0
+condition|)
+return|return
+name|Type
+operator|.
+name|ONTOLOGY
+return|;
+comment|// Cannot determine registries, since they have no associated individual.
 return|return
 literal|null
 return|;
 block|}
-comment|//    public static Library populateLibrary(OWLNamedIndividual ind, Set<OWLOntology> registries) throws RegistryContentException {
-comment|//        IRI id = ind.getIRI();
-comment|//        RegistryItem lib = null;
-comment|//        if (population.containsKey(id)) {
-comment|//            // We are not allowing multityping either.
-comment|//            lib = population.get(id);
-comment|//            if (!(lib instanceof Library)) throw new RegistryContentException(
-comment|//                    "Inconsistent multityping: for item " + id + " : {" + Library.class + ", "
-comment|//                            + lib.getClass() + "}");
-comment|//        } else {
-comment|//            lib = riFactory.createLibrary(ind.asOWLNamedIndividual());
-comment|//            try {
-comment|//                population.put(IRI.create(lib.getURL()), lib);
-comment|//            } catch (URISyntaxException e) {
-comment|//                log.error("Invalid identifier for library item " + lib, e);
-comment|//                return null;
-comment|//            }
-comment|//        }
-comment|//        // EXIT nodes.
-comment|//        Set<OWLIndividual> ronts = new HashSet<OWLIndividual>();
-comment|//        for (OWLOntology o : registries)
-comment|//            ronts.addAll(ind.getObjectPropertyValues(hasOntology, o));
-comment|//        for (OWLIndividual iont : ronts) {
-comment|//            if (iont.isNamed())
-comment|//                lib.addChild(populateOntology(iont.asOWLNamedIndividual(), registries));
-comment|//        }
-comment|//        return (Library) lib;
-comment|//    }
-comment|//
-comment|//    public static RegistryOntology populateOntology(OWLNamedIndividual ind, Set<OWLOntology> registries) throws RegistryContentException {
-comment|//        IRI id = ind.getIRI();
-comment|//        RegistryItem ront = null;
-comment|//        if (population.containsKey(id)) {
-comment|//            // We are not allowing multityping either.
-comment|//            ront = population.get(id);
-comment|//            if (!(ront instanceof RegistryOntology)) throw new RegistryContentException(
-comment|//                    "Inconsistent multityping: for item " + id + " : {" + RegistryOntology.class + ", "
-comment|//                            + ront.getClass() + "}");
-comment|//        } else {
-comment|//            ront = riFactory.createRegistryOntology(ind);
-comment|//            try {
-comment|//                population.put(IRI.create(ront.getURL()), ront);
-comment|//            } catch (URISyntaxException e) {
-comment|//                log.error("Invalid identifier for library item " + ront, e);
-comment|//                return null;
-comment|//            }
-comment|//        }
-comment|//        // EXIT nodes.
-comment|//        Set<OWLIndividual> libs = new HashSet<OWLIndividual>();
-comment|//        for (OWLOntology o : registries)
-comment|//            libs.addAll(ind.getObjectPropertyValues(isOntologyOf, o));
-comment|//        for (OWLIndividual ilib : libs) {
-comment|//            if (ilib.isNamed())
-comment|//                ront.addContainer(populateLibrary(ilib.asOWLNamedIndividual(), registries));
-comment|//        }
-comment|//        return (RegistryOntology) ront;
-comment|//    }
-comment|//
-comment|//    public static Registry populateRegistry(OWLOntology registry) throws RegistryContentException {
-comment|//
-comment|//        Registry reg = riFactory.createRegistry(registry);
-comment|//        Set<OWLOntology> closure = registry.getOWLOntologyManager().getImportsClosure(registry);
-comment|//
-comment|//        // Just scan all individuals. Recurse in case the registry imports more registries.
-comment|//        for (OWLIndividual ind : registry.getIndividualsInSignature(true)) {
-comment|//            // We do not allow anonymous registry items.
-comment|//            if (ind.isAnonymous()) continue;
-comment|//            RegistryItem item = null;
-comment|//            // IRI id = ind.asOWLNamedIndividual().getIRI();
-comment|//            Type t = getType(ind, closure);
-comment|//            if (t==null) {
-comment|//                log.warn("Undetermined type for registry ontology individual {}",ind);
-comment|//                continue;
-comment|//            }
-comment|//            switch (getType(ind, closure)) {
-comment|//                case LIBRARY:
-comment|//                    // // Create the library and attach to parent and children
-comment|//                    item = populateLibrary(ind.asOWLNamedIndividual(), closure);
-comment|//                    reg.addChild(item);
-comment|//                    break;
-comment|//                case ONTOLOGY:
-comment|//                    // Create the ontology and attach to parent
-comment|//                    item = populateOntology(ind.asOWLNamedIndividual(), closure);
-comment|//                    // We don't know where to attach it to in this method.
-comment|//                    break;
-comment|//                default:
-comment|//                    break;
-comment|//            }
-comment|//        }
-comment|//
-comment|//        population = new TreeMap<IRI,RegistryItem>();
-comment|//        return reg;
-comment|//    }
 block|}
 end_class
 

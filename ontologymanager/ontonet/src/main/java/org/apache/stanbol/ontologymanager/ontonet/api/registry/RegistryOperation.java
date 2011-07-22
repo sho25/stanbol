@@ -21,47 +21,22 @@ name|registry
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|registry
-operator|.
-name|models
-operator|.
-name|RegistryItem
-import|;
-end_import
-
 begin_comment
-comment|/**  * Object that react to direct content requests to ontology registry items will implement this interface.  */
+comment|/**  * The possible types of operations that can be performed with registry items.  */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|RegistryContentListener
+enum|enum
+name|RegistryOperation
 block|{
-comment|/**      * Called when a registry item receives a request for some resource in its content, regardless whether the      * actual resource has been previously loaded.      *       * @param requestTarget      *            the registry item that was requested.      */
-name|void
-name|registryContentRequested
-parameter_list|(
-name|RegistryItem
-name|requestTarget
-parameter_list|)
-function_decl|;
-block|}
-end_interface
+comment|/**      * The addition of a registry item as a parent of another registry item.      */
+name|ADD_CHILD
+block|,
+comment|/**      * The addition of a registry item as a child of another registry item.      */
+name|ADD_PARENT
+block|;  }
+end_enum
 
 end_unit
 
