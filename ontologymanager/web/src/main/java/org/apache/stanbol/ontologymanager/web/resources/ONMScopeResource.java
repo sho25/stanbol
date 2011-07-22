@@ -533,7 +533,7 @@ name|registry
 operator|.
 name|io
 operator|.
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 import|;
 end_import
 
@@ -1302,7 +1302,7 @@ block|{
 name|coreSrc
 operator|=
 operator|new
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 argument_list|(
 name|IRI
 operator|.
@@ -1382,7 +1382,7 @@ block|{
 name|custSrc
 operator|=
 operator|new
-name|OntologyRegistryIRISource
+name|RegistryIRISource
 argument_list|(
 name|IRI
 operator|.
