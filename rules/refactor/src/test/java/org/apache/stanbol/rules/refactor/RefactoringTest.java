@@ -25,19 +25,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertTrue
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|fail
+name|*
 import|;
 end_import
 
@@ -582,20 +570,6 @@ operator|.
 name|model
 operator|.
 name|OWLOntology
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyCreationException
 import|;
 end_import
 

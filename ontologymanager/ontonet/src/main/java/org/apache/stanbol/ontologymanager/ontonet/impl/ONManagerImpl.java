@@ -1503,21 +1503,6 @@ literal|"The Ontology Network Manager configuration does not define a ID for the
 argument_list|)
 expr_stmt|;
 block|}
-else|else
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"id: {}"
-argument_list|,
-name|config
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
 comment|// Bind components, starting with the local directories.
 name|List
 argument_list|<
@@ -1812,7 +1797,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"[NONFATAL] No ONM configuration file found at path "
+literal|"No ONM configuration file found at path "
 operator|+
 name|configPath
 operator|+
@@ -2046,7 +2031,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"KReS :: Scope "
+literal|"Scope "
 operator|+
 name|scopeIRI
 argument_list|)
@@ -2063,7 +2048,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"\tKReS :: Core ontology "
+literal|"\tCore ontology "
 operator|+
 name|s
 argument_list|)
@@ -2081,7 +2066,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"\tKReS :: Custom ontology "
+literal|"\tCustom ontology "
 operator|+
 name|s
 argument_list|)
@@ -2292,7 +2277,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"KReS :: Ontology scope "
+literal|"Ontology scope "
 operator|+
 name|scopeID
 operator|+
@@ -2349,9 +2334,9 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|error
+name|warn
 argument_list|(
-literal|"[NONFATAL] Invalid ONM configuration file found. "
+literal|"Invalid ONM configuration file found. "
 operator|+
 literal|"Starting with blank scope set."
 argument_list|,
