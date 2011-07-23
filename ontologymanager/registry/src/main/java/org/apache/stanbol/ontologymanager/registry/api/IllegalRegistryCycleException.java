@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Thrown when an attempt to create an illegal cycle in the registry item model is detected. Examples of  * illegal cycle include being both a parent and a child of the same registry item, or a parent or child of  * itself.  */
+comment|/**  * Thrown when an attempt to create an illegal cycle in the registry item model is detected. Examples of  * illegal cycles include being both a parent and a child of the same registry item, or a parent or child of  * itself.  */
 end_comment
 
 begin_class
