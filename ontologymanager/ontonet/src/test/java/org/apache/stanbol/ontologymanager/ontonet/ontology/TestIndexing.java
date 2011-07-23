@@ -121,24 +121,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|DuplicateIDException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|ONManager
 import|;
 end_import
@@ -255,48 +237,6 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|api
-operator|.
-name|registry
-operator|.
-name|RegistryManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|registry
-operator|.
-name|io
-operator|.
-name|RegistryIRISource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
 name|impl
 operator|.
 name|ONManagerConfigurationImpl
@@ -325,39 +265,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|registry
-operator|.
-name|RegistryManagerImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|BeforeClass
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Test
 import|;
 end_import
 
@@ -504,15 +414,7 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|RegistryManager
-name|regman
-init|=
-operator|new
-name|RegistryManagerImpl
-argument_list|(
-name|emptyConfig
-argument_list|)
-decl_stmt|;
+comment|//        RegistryManager regman = new RegistryManagerImpl(emptyConfig);
 comment|// An ONManagerImpl with no store and default settings
 name|onm
 operator|=
@@ -528,8 +430,6 @@ name|ONManagerConfigurationImpl
 argument_list|(
 name|emptyConfig
 argument_list|)
-argument_list|,
-name|regman
 argument_list|,
 name|emptyConfig
 argument_list|)
@@ -606,67 +506,22 @@ expr_stmt|;
 block|}
 comment|// The factory call also invokes loadRegistriesEager() and
 comment|// gatherOntologies() so no need to test them individually.
-try|try
-block|{
-name|scope
-operator|=
-name|onm
-operator|.
-name|getOntologyScopeFactory
-argument_list|()
-operator|.
-name|createOntologyScope
-argument_list|(
-name|scopeIri
-argument_list|,
-operator|new
-name|RegistryIRISource
-argument_list|(
-name|testRegistryIri
-argument_list|,
-name|onm
-operator|.
-name|getOwlCacheManager
-argument_list|()
-argument_list|,
-name|onm
-operator|.
-name|getRegistryLoader
-argument_list|()
-argument_list|,
-literal|null
-comment|// new RootOntologySource(oParent
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|onm
-operator|.
-name|getScopeRegistry
-argument_list|()
-operator|.
-name|registerScope
-argument_list|(
-name|scope
-argument_list|)
-expr_stmt|;
+comment|//        try {
+comment|//            scope = onm.getOntologyScopeFactory().createOntologyScope(
+comment|//                scopeIri,
+comment|//                new RegistryIRISource(testRegistryIri, onm.getOwlCacheManager(), onm
+comment|//                        .getRegistryLoader(), null
+comment|//                // new RootOntologySource(oParent
+comment|//                ));
+comment|//
+comment|//            onm.getScopeRegistry().registerScope(scope);
+comment|//        } catch (DuplicateIDException e) {
+comment|//            // Uncomment if annotated with @BeforeClass instead of @Before ,
+comment|//            // comment otherwise.
+comment|//            fail("DuplicateID exception caught when creating test scope.");
+comment|//        }
 block|}
-catch|catch
-parameter_list|(
-name|DuplicateIDException
-name|e
-parameter_list|)
-block|{
-comment|// Uncomment if annotated with @BeforeClass instead of @Before ,
-comment|// comment otherwise.
-name|fail
-argument_list|(
-literal|"DuplicateID exception caught when creating test scope."
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-annotation|@
-name|Test
+comment|//    @Test
 specifier|public
 name|void
 name|testAddOntology
@@ -804,8 +659,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Test
+comment|//    @Test
 specifier|public
 name|void
 name|testGetOntology
@@ -836,8 +690,7 @@ comment|// assertNotNull(index.getOntology(objrole));
 comment|// // assertSame() would fail.
 comment|// assertEquals(index.getOntology(objrole), oObjRole);
 block|}
-annotation|@
-name|Test
+comment|//    @Test
 specifier|public
 name|void
 name|testIsOntologyLoaded

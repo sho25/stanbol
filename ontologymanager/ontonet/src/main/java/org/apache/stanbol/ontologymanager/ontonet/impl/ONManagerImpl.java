@@ -571,26 +571,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|registry
-operator|.
-name|RegistryManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|session
 operator|.
 name|SessionManager
@@ -752,26 +732,6 @@ operator|.
 name|ontology
 operator|.
 name|ScopeRegistryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|registry
-operator|.
-name|RegistryLoaderImpl
 import|;
 end_import
 
@@ -990,7 +950,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The running context of a Stanbol Ontology Network Manager instance. From this object it is possible to obtain  * factories, indices, registries and what have you.  *   * @see ONManager  *   */
+comment|/**  * The running context of a Stanbol Ontology Network Manager instance. From this object it is possible to  * obtain factories, indices, registries and what have you.  *   * @see ONManager  *   */
 end_comment
 
 begin_class
@@ -1200,12 +1160,6 @@ specifier|private
 name|ONManagerConfiguration
 name|config
 decl_stmt|;
-annotation|@
-name|Reference
-specifier|private
-name|RegistryManager
-name|regman
-decl_stmt|;
 specifier|private
 name|Helper
 name|helper
@@ -1284,10 +1238,6 @@ name|OWLDataFactory
 name|owlFactory
 decl_stmt|;
 specifier|private
-name|RegistryLoaderImpl
-name|registryLoader
-decl_stmt|;
-specifier|private
 name|ScopeRegistry
 name|scopeRegistry
 decl_stmt|;
@@ -1344,9 +1294,6 @@ parameter_list|,
 name|WeightedTcProvider
 name|wtcp
 parameter_list|,
-name|RegistryManager
-name|registryManager
-parameter_list|,
 name|Dictionary
 argument_list|<
 name|String
@@ -1369,8 +1316,6 @@ argument_list|(
 name|configuration
 argument_list|)
 argument_list|,
-name|registryManager
-argument_list|,
 name|configuration
 argument_list|)
 expr_stmt|;
@@ -1387,9 +1332,6 @@ name|wtcp
 parameter_list|,
 name|ONManagerConfiguration
 name|onmconfig
-parameter_list|,
-name|RegistryManager
-name|registryManager
 parameter_list|,
 name|Dictionary
 argument_list|<
@@ -1421,12 +1363,6 @@ operator|.
 name|config
 operator|=
 name|onmconfig
-expr_stmt|;
-name|this
-operator|.
-name|regman
-operator|=
-name|registryManager
 expr_stmt|;
 try|try
 block|{
@@ -2004,15 +1940,8 @@ argument_list|(
 name|oIndex
 argument_list|)
 expr_stmt|;
-comment|// This requires the OWL cache manager
-name|registryLoader
-operator|=
-operator|new
-name|RegistryLoaderImpl
-argument_list|(
-name|this
-argument_list|)
-expr_stmt|;
+comment|// // This requires the OWL cache manager
+comment|// registryLoader = new RegistryLoaderImpl(this);
 comment|// TODO : assign dynamically in case the FISE persistence store is not
 comment|// available.
 comment|// storage = new FISEPersistenceStorage();
@@ -2573,16 +2502,6 @@ return|return
 name|owlFactory
 return|;
 block|}
-comment|/**      * Returns the default ontology registry loader.      *       * @return the default ontology registry loader      */
-specifier|public
-name|RegistryLoaderImpl
-name|getRegistryLoader
-parameter_list|()
-block|{
-return|return
-name|registryLoader
-return|;
-block|}
 specifier|public
 name|Helper
 name|getScopeHelper
@@ -2646,17 +2565,6 @@ return|return
 name|offlineMode
 operator|!=
 literal|null
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|RegistryManager
-name|getRegistryManager
-parameter_list|()
-block|{
-return|return
-name|regman
 return|;
 block|}
 block|}

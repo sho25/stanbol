@@ -374,8 +374,6 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-literal|null
-argument_list|,
 name|configuration
 argument_list|)
 argument_list|,
@@ -392,8 +390,6 @@ argument_list|(
 operator|new
 name|ONManagerImpl
 argument_list|(
-literal|null
-argument_list|,
 literal|null
 argument_list|,
 literal|null

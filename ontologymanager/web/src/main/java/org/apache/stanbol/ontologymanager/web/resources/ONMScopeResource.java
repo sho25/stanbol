@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -527,13 +527,11 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|api
-operator|.
-name|registry
+name|impl
 operator|.
 name|io
 operator|.
-name|RegistryIRISource
+name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -547,13 +545,65 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
+name|registry
+operator|.
+name|api
+operator|.
+name|RegistryLoader
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|registry
+operator|.
+name|api
+operator|.
+name|RegistryManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|registry
 operator|.
 name|impl
 operator|.
+name|RegistryLoaderImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|registry
+operator|.
 name|io
 operator|.
-name|ClerezzaOntologyStorage
+name|RegistryIRISource
 import|;
 end_import
 
@@ -643,10 +693,19 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/* 	 * Placeholder for the ONManager to be fetched from the servlet context. 	 */
+comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
 specifier|protected
 name|ONManager
 name|onm
+decl_stmt|;
+comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
+specifier|protected
+name|RegistryManager
+name|regMgr
+decl_stmt|;
+specifier|protected
+name|RegistryLoader
+name|loader
 decl_stmt|;
 specifier|protected
 name|ClerezzaOntologyStorage
@@ -687,6 +746,34 @@ operator|.
 name|class
 argument_list|,
 name|servletContext
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|regMgr
+operator|=
+operator|(
+name|RegistryManager
+operator|)
+name|ContextHelper
+operator|.
+name|getServiceFromContext
+argument_list|(
+name|RegistryManager
+operator|.
+name|class
+argument_list|,
+name|servletContext
+argument_list|)
+expr_stmt|;
+name|loader
+operator|=
+operator|new
+name|RegistryLoaderImpl
+argument_list|(
+name|regMgr
+argument_list|,
+name|onm
 argument_list|)
 expr_stmt|;
 name|this
@@ -1167,7 +1254,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** 	 * At least one between corereg and coreont must be present. Registry iris 	 * supersede ontology iris. 	 *  	 * @param scopeid 	 * @param coreRegistry 	 *            a. If it is a well-formed IRI it supersedes 	 *<code>coreOntology</code>. 	 * @param coreOntology 	 * @param customRegistry 	 *            a. If it is a well-formed IRI it supersedes 	 *<code>customOntology</code>. 	 * @param customOntology 	 * @param activate 	 *            if true, the new scope will be activated upon creation. 	 * @param uriInfo 	 * @param headers 	 * @return 	 */
+comment|/**      * At least one between corereg and coreont must be present. Registry iris supersede ontology iris.      *       * @param scopeid      * @param coreRegistry      *            a. If it is a well-formed IRI it supersedes<code>coreOntology</code>.      * @param coreOntology      * @param customRegistry      *            a. If it is a well-formed IRI it supersedes<code>customOntology</code>.      * @param customOntology      * @param activate      *            if true, the new scope will be activated upon creation.      * @param uriInfo      * @param headers      * @return      */
 annotation|@
 name|PUT
 annotation|@
@@ -1316,10 +1403,7 @@ operator|.
 name|getOwlCacheManager
 argument_list|()
 argument_list|,
-name|onm
-operator|.
-name|getRegistryLoader
-argument_list|()
+name|loader
 argument_list|)
 expr_stmt|;
 block|}
@@ -1396,10 +1480,7 @@ operator|.
 name|getOwlCacheManager
 argument_list|()
 argument_list|,
-name|onm
-operator|.
-name|getRegistryLoader
-argument_list|()
+name|loader
 argument_list|)
 expr_stmt|;
 block|}

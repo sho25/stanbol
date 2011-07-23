@@ -580,8 +580,6 @@ name|tcm
 argument_list|,
 name|wtcp
 argument_list|,
-literal|null
-argument_list|,
 name|emptyConf
 argument_list|)
 decl_stmt|;
