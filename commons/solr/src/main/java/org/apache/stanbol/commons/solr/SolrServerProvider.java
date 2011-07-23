@@ -70,35 +70,19 @@ specifier|public
 interface|interface
 name|SolrServerProvider
 block|{
-comment|/**      * SolrServer types defined here to avoid java dependencies to the according java classes      *       * @author Rupert Westenthaler      *       */
-enum|enum
-name|Type
-block|{
-comment|/**          * Uses an embedded SolrServer that runs within the same virtual machine          */
-name|EMBEDDED
-block|,
-comment|/**          * The default type that can be used for query and updates          */
-name|HTTP
-block|,
-comment|/**          * This server is preferable used for updates          */
-name|STREAMING
-block|,
-comment|/**          * This allows to use load balancing on multiple SolrServers via a round robin algorithm.          */
-name|LOAD_BALANCE
-block|}
 comment|/**      * Getter for the supported types of this Provider      *       * @return the Types supported by this Provider      */
 name|Set
 argument_list|<
-name|Type
+name|SolrServerTypeEnum
 argument_list|>
 name|supportedTypes
 parameter_list|()
 function_decl|;
-comment|/**      * Getter for the {@link SolrServer} instance for the provided URI or path (in case of an embedded server)      *       * @param type      *            The type of the requested SolrServer instance or<code>null</code> for the default type      * @param uriOrPath      *            the URI (in case of an remote SolrServer that is accessed via RESTfull services) or the Path      *            (in case of an embedded SolrServer)      * @param additional      *            This allows to parse additional SolrServers. This may be ignored if the requested type does      *            not support the usage of multiple servers.      * @return the configured SolrServer client for the parsed parameter      * @throws NullPointerException      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as uriOrPath or if the parsed URI or path is not valid for      *             the requested {@link Type} or the parsed type is not supported by this provider      */
+comment|/**      * Getter for the {@link SolrServer} instance for the provided URI or path (in case of an embedded server)      *       * @param type      *            The type of the requested SolrServer instance or<code>null</code> for the default type      * @param uriOrPath      *            the URI (in case of an remote SolrServer that is accessed via RESTfull services) or the Path      *            (in case of an embedded SolrServer)      * @param additional      *            This allows to parse additional SolrServers. This may be ignored if the requested type does      *            not support the usage of multiple servers.      * @return the configured SolrServer client for the parsed parameter      * @throws NullPointerException      * @throws IllegalArgumentException      *             if<code>null</code> is parsed as uriOrPath or if the parsed URI or path is not valid for      *             the requested {@link SolrServerTypeEnum} or the parsed type is not supported by this provider      */
 name|SolrServer
 name|getSolrServer
 parameter_list|(
-name|Type
+name|SolrServerTypeEnum
 name|type
 parameter_list|,
 name|String

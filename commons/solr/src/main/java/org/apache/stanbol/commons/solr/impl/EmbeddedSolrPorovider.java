@@ -281,9 +281,7 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|SolrServerProvider
-operator|.
-name|Type
+name|SolrServerTypeEnum
 import|;
 end_import
 
@@ -352,7 +350,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Support for the use of {@link EmbeddedSolrPorovider} in combination with the SolrYard implementation. This  * implements the {@link SolrServerProvider} interface for the {@link Type#EMBEDDED}.  *<p>  *   * TODO: add functionality to lookup the internally managed {@link CoreContainer}. Maybe this requires to add  * a second service  *   * @author Rupert Westenthaler  *   */
+comment|/**  * Support for the use of {@link EmbeddedSolrPorovider} in combination with the SolrYard implementation. This  * implements the {@link SolrServerProvider} interface for the {@link SolrServerTypeEnum#EMBEDDED}.  *<p>  *   * TODO: add functionality to lookup the internally managed {@link CoreContainer}. Maybe this requires to add  * a second service  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -433,17 +431,32 @@ operator|new
 name|ReferenceMap
 argument_list|()
 decl_stmt|;
+comment|//    @Reference(cardinality=ReferenceCardinality.OPTIONAL_UNARY,
+comment|//        policy=ReferencePolicy.DYNAMIC,
+comment|//        strategy=ReferenceStrategy.EVENT,
+comment|//        bind="bindSolrDirectoryManager",
+comment|//        unbind="unbindSolrDirectoryManager")
+comment|//    private SolrDirectoryManager solrDirectoryManager;
 specifier|public
 name|EmbeddedSolrPorovider
 parameter_list|()
 block|{}
+comment|//    protected void bindSolrDirectoryManager(SolrDirectoryManager solrDirectoryManager){
+comment|//        this.solrDirectoryManager = solrDirectoryManager;
+comment|//    }
+comment|//    protected void unbindSolrDirectoryManager(SolrDirectoryManager solrDirectoryManager) {
+comment|//        this.solrDirectoryManager = null;
+comment|//    }
+comment|//    protected SolrDirectoryManager getSolrDirectoryManager(){
+comment|//        return this.solrDirectoryManager;
+comment|//    }
 annotation|@
 name|Override
 specifier|public
 name|SolrServer
 name|getSolrServer
 parameter_list|(
-name|Type
+name|SolrServerTypeEnum
 name|type
 parameter_list|,
 name|String
@@ -1044,7 +1057,7 @@ name|Override
 specifier|public
 name|Set
 argument_list|<
-name|Type
+name|SolrServerTypeEnum
 argument_list|>
 name|supportedTypes
 parameter_list|()
@@ -1054,7 +1067,7 @@ name|Collections
 operator|.
 name|singleton
 argument_list|(
-name|Type
+name|SolrServerTypeEnum
 operator|.
 name|EMBEDDED
 argument_list|)
