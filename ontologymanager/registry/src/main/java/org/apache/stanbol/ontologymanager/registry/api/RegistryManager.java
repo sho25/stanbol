@@ -45,6 +45,26 @@ name|api
 operator|.
 name|model
 operator|.
+name|CachingPolicy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|registry
+operator|.
+name|api
+operator|.
+name|model
+operator|.
 name|Library
 import|;
 end_import
@@ -173,6 +193,11 @@ name|OWLOntology
 argument_list|>
 name|registryOntologies
 parameter_list|)
+function_decl|;
+comment|/**      * Returns the ontology caching policy currently adopted by the registry manager.      *       * @return the caching policy.      */
+name|CachingPolicy
+name|getCachingPolicy
+parameter_list|()
 function_decl|;
 comment|/**      * Returns all the libraries that contain the ontology with the given identifier.      *       * @param ontologyID      *            the ontology identifier.      * @return the set of libraries that contain the ontology.      */
 name|Set
