@@ -774,6 +774,12 @@ name|isPartOf
 decl_stmt|,
 name|isOntologyOf
 decl_stmt|;
+specifier|private
+name|OWLOntologyManager
+name|cache
+init|=
+literal|null
+decl_stmt|;
 static|static
 block|{
 name|OWLDataFactory
@@ -1285,7 +1291,7 @@ name|toString
 argument_list|()
 expr_stmt|;
 block|}
-comment|// System.err.println(cachingPolicy);
+comment|// Used only for creating the registry model, do not use for caching.
 name|OWLOntologyManager
 name|mgr
 init|=
@@ -1378,12 +1384,96 @@ expr_stmt|;
 continue|continue;
 block|}
 block|}
-comment|// Build the model!
+comment|// Build the model.
 name|createModel
 argument_list|(
 name|regOnts
 argument_list|)
 expr_stmt|;
+comment|// Set the cache.
+if|if
+condition|(
+name|cachingPolicyString
+operator|.
+name|equals
+argument_list|(
+name|CachingPolicy
+operator|.
+name|CROSS_REGISTRY
+operator|.
+name|name
+argument_list|()
+argument_list|)
+condition|)
+block|{
+name|this
+operator|.
+name|cache
+operator|=
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+expr_stmt|;
+for|for
+control|(
+name|Registry
+name|reg
+range|:
+name|getRegistries
+argument_list|()
+control|)
+name|reg
+operator|.
+name|setCache
+argument_list|(
+name|this
+operator|.
+name|cache
+argument_list|)
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|cachingPolicyString
+operator|.
+name|equals
+argument_list|(
+name|CachingPolicy
+operator|.
+name|PER_REGISTRY
+operator|.
+name|name
+argument_list|()
+argument_list|)
+condition|)
+block|{
+for|for
+control|(
+name|Registry
+name|reg
+range|:
+name|getRegistries
+argument_list|()
+control|)
+name|reg
+operator|.
+name|setCache
+argument_list|(
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|cache
+operator|=
+literal|null
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -1545,6 +1635,7 @@ name|rego
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|/*          * For each value in this map, index 0 is the score of the library class, while 1 is the score of the          * ontology class.          */
 specifier|final
 name|Map
 argument_list|<
@@ -1565,13 +1656,15 @@ index|[]
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/*          * Scans class assertions and object property values and tries to determine the type of each          * individual it finds.          */
 name|OWLAxiomVisitor
-name|v
+name|scanner
 init|=
 operator|new
 name|OWLAxiomVisitorAdapter
 argument_list|()
 block|{
+comment|/*              * For a given identifier, returns the array of integers whose value determine the likelihood if              * the corresponding entity being a library or an ontology. If no such array exists, it is              * created.              */
 specifier|private
 name|int
 index|[]
@@ -1648,6 +1741,7 @@ operator|.
 name|getIndividual
 argument_list|()
 decl_stmt|;
+comment|// Do not accept anonymous registry items.
 if|if
 condition|(
 name|ind
@@ -1684,6 +1778,7 @@ operator|.
 name|getClassExpression
 argument_list|()
 decl_stmt|;
+comment|// If the type is stated to be a library, increase its library score.
 if|if
 condition|(
 name|cRegistryLibrary
@@ -1702,6 +1797,7 @@ operator|++
 expr_stmt|;
 block|}
 elseif|else
+comment|// If the type is stated to be an ontology, increase its ontology score.
 if|if
 condition|(
 name|cOntology
@@ -1751,6 +1847,7 @@ block|{
 name|IRI
 name|iri
 decl_stmt|;
+comment|// The axiom subject gets a +1 in its library score.
 name|OWLIndividual
 name|ind
 init|=
@@ -1788,6 +1885,7 @@ index|]
 operator|++
 expr_stmt|;
 block|}
+comment|// The axiom object gets a +1 in its ontology score.
 name|ind
 operator|=
 name|axiom
@@ -1839,6 +1937,7 @@ block|{
 name|IRI
 name|iri
 decl_stmt|;
+comment|// The axiom subject gets a +1 in its ontology score.
 name|OWLIndividual
 name|ind
 init|=
@@ -1876,6 +1975,7 @@ index|]
 operator|++
 expr_stmt|;
 block|}
+comment|// The axiom object gets a +1 in its library score.
 name|ind
 operator|=
 name|axiom
@@ -1938,7 +2038,7 @@ name|ax
 operator|.
 name|accept
 argument_list|(
-name|v
+name|scanner
 argument_list|)
 expr_stmt|;
 comment|// Then populate on the registry
