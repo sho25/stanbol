@@ -21,6 +21,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -202,7 +212,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.  */
 end_comment
 
 begin_interface
@@ -210,9 +220,27 @@ specifier|public
 interface|interface
 name|ONManager
 block|{
-comment|/**      * Returns the String that represent the namespace used by KReS for its ontologies      *       * @return the namespace of KReS.      */
+comment|/**      * The key used to configure the path of the ontology network configuration.      */
 name|String
-name|getKReSNamespace
+name|CONFIG_ONTOLOGY_PATH
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.onconfig"
+decl_stmt|;
+comment|/**      * The key used to configure the ID of the ontology network manager.      */
+name|String
+name|ID
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.id"
+decl_stmt|;
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
+name|String
+name|ONTOLOGY_NETWORK_NS
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.ns"
+decl_stmt|;
+comment|/**      * Returns the ID of the ontology network manager.      *       * @return the ID of the ontology network manager.      */
+name|String
+name|getID
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the default object that automatically indexes ontologies as they are loaded within scopes.      *       * @return the default ontology index.      */
@@ -222,6 +250,16 @@ parameter_list|()
 function_decl|;
 name|OWLOntologyManagerFactoryImpl
 name|getOntologyManagerFactory
+parameter_list|()
+function_decl|;
+comment|/**      * Implementations should be able to create a {@link File} object from this path.      *       * @return the local path of the ontology storing the ontology network configuration.      */
+name|String
+name|getOntologyNetworkConfigurationPath
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the base namespace to be used for the Stanbol ontology network (e.g. for the creation of new      * scopes). For convenience, it is returned as a string so that it can be concatenated to form IRIs.      *       * @return the base namespace of the Stanbol ontology network.      */
+name|String
+name|getOntologyNetworkNamespace
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @return the default ontology scope factory      */

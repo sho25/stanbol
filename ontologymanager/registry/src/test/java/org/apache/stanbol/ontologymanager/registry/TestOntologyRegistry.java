@@ -25,43 +25,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertNotNull
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertTrue
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|fail
+name|*
 import|;
 end_import
 
@@ -185,7 +149,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ONManagerConfiguration
+name|OfflineConfiguration
 import|;
 end_import
 
@@ -283,7 +247,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManagerConfigurationImpl
+name|ONManagerImpl
 import|;
 end_import
 
@@ -301,7 +265,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManagerImpl
+name|OfflineConfigurationImpl
 import|;
 end_import
 
@@ -521,11 +485,6 @@ name|ontologySource
 decl_stmt|;
 specifier|private
 specifier|static
-name|ONManagerConfiguration
-name|configuration
-decl_stmt|;
-specifier|private
-specifier|static
 name|ONManager
 name|onm
 decl_stmt|;
@@ -549,7 +508,7 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|emptyConfig
+name|config
 init|=
 operator|new
 name|Hashtable
@@ -560,23 +519,44 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|configuration
-operator|=
-operator|new
-name|ONManagerConfigurationImpl
+name|config
+operator|.
+name|put
 argument_list|(
-name|emptyConfig
+name|OfflineConfiguration
+operator|.
+name|ONTOLOGY_PATHS
+argument_list|,
+operator|new
+name|String
+index|[]
+block|{
+literal|"/ontologies"
+block|,
+literal|"/ontologies/registry"
+block|}
 argument_list|)
 expr_stmt|;
+name|OfflineConfiguration
+name|offline
+init|=
+operator|new
+name|OfflineConfigurationImpl
+argument_list|(
+name|config
+argument_list|)
+decl_stmt|;
 name|regman
 operator|=
 operator|new
 name|RegistryManagerImpl
 argument_list|(
-name|emptyConfig
+name|offline
+argument_list|,
+name|config
 argument_list|)
 expr_stmt|;
-comment|// An ONManagerImpl with no store and default settings
+comment|// An ONManagerImpl with no store and same offline settings as the registry manager.
 name|onm
 operator|=
 operator|new
@@ -586,9 +566,9 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|configuration
+name|offline
 argument_list|,
-name|emptyConfig
+name|config
 argument_list|)
 expr_stmt|;
 block|}

@@ -239,7 +239,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManagerConfigurationImpl
+name|OfflineConfigurationImpl
 import|;
 end_import
 
@@ -426,7 +426,7 @@ argument_list|,
 literal|null
 argument_list|,
 operator|new
-name|ONManagerConfigurationImpl
+name|OfflineConfigurationImpl
 argument_list|(
 name|emptyConfig
 argument_list|)

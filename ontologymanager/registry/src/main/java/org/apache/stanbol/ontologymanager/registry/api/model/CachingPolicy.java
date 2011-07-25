@@ -27,10 +27,10 @@ enum|enum
 name|CachingPolicy
 block|{
 comment|/**      * A single ontology manager will be used for all known registries, which implies that only one possible      * version of each ontology can be loaded at one time.      */
-name|CROSS_REGISTRY
+name|CENTRALISED
 block|,
 comment|/**      * Every registry is assigned its own ontology manager for caching ontologies once they are loaded. If a      * library is referenced across multiple registries, an ontology set will be instantiated for each.      */
-name|PER_REGISTRY
+name|DISTRIBUTED
 block|; }
 end_enum
 
