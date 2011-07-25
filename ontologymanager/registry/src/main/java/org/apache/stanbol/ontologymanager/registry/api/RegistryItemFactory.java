@@ -118,7 +118,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A factory that creates the basic elements of the ontology registry metamodel from OWL objects that are  * required not to be anonymous.<br/>  *<br/>  *<b>Note that implementations should not be aggressive</b>, in that they should<b>not</b> recursively  * create and/or append the parents and children of any generated object. Refer to  * {@link RegistryManager#createModel(Set)} to recursively populate registry item starting from a set of  * registries.  */
+comment|/**  * A factory that creates the basic elements of the ontology registry metamodel from OWL objects that are  * required not to be anonymous.<br/>  *<br/>  *<b>Note that implementations should not be aggressive</b>, in that they should<b>not</b> recursively  * create and/or append the parents and children of any generated object. Refer to  * {@link RegistryManager#createModel(Set)} to recursively populate a registry item starting from a set of  * registries.  */
 end_comment
 
 begin_interface

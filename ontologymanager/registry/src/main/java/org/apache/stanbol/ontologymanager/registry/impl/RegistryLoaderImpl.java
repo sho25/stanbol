@@ -2676,6 +2676,8 @@ comment|// log.error("KReS :: Could not load ontology " + registryPhysicalIRI + 
 comment|// } finally {}
 comment|// return registry;
 comment|// }
+annotation|@
+name|Override
 specifier|public
 name|void
 name|loadLocations
