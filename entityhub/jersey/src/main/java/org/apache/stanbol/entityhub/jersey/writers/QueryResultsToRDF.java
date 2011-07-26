@@ -41,6 +41,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|LiteralFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|MGraph
 import|;
 end_import
@@ -216,10 +232,11 @@ parameter_list|()
 block|{
 comment|/* do not create instances of utility classes */
 block|}
+comment|/**      * The URI used for the query result list (static for all responses)      */
 specifier|static
 specifier|final
 name|UriRef
-name|queryResultList
+name|QUERY_RESULT_LIST
 init|=
 operator|new
 name|UriRef
@@ -232,10 +249,11 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * The property used for all results      */
 specifier|static
 specifier|final
 name|UriRef
-name|queryResult
+name|QUERY_RESULT
 init|=
 operator|new
 name|UriRef
@@ -247,6 +265,33 @@ operator|.
 name|getUri
 argument_list|()
 argument_list|)
+decl_stmt|;
+comment|/**      * The property used for the JSON serialised FieldQuery (STANBOL-298)      */
+specifier|static
+specifier|final
+name|UriRef
+name|FIELD_QUERY
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|RdfResourceEnum
+operator|.
+name|queryResult
+operator|.
+name|getUri
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|/**      * The LiteralFactory retrieved from {@link EntityToRDF#literalFactory}      */
+specifier|static
+specifier|final
+name|LiteralFactory
+name|literalFactory
+init|=
+name|EntityToRDF
+operator|.
+name|literalFactory
 decl_stmt|;
 specifier|static
 name|MGraph
@@ -309,9 +354,9 @@ argument_list|(
 operator|new
 name|TripleImpl
 argument_list|(
-name|queryResultList
+name|QUERY_RESULT_LIST
 argument_list|,
-name|queryResult
+name|FIELD_QUERY
 argument_list|,
 operator|new
 name|UriRef
@@ -420,9 +465,9 @@ name|resultGraph
 operator|.
 name|filter
 argument_list|(
-name|queryResultList
+name|QUERY_RESULT_LIST
 argument_list|,
-name|queryResult
+name|FIELD_QUERY
 argument_list|,
 literal|null
 argument_list|)
@@ -492,9 +537,9 @@ argument_list|(
 operator|new
 name|TripleImpl
 argument_list|(
-name|queryResultList
+name|QUERY_RESULT_LIST
 argument_list|,
-name|queryResult
+name|FIELD_QUERY
 argument_list|,
 name|signId
 argument_list|)
@@ -612,9 +657,9 @@ argument_list|(
 operator|new
 name|TripleImpl
 argument_list|(
-name|queryResultList
+name|QUERY_RESULT_LIST
 argument_list|,
-name|queryResult
+name|FIELD_QUERY
 argument_list|,
 name|resultId
 argument_list|)

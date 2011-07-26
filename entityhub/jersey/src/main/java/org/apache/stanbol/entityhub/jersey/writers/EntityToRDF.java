@@ -257,6 +257,7 @@ block|{
 comment|/* do not create instances of utility classes */
 block|}
 specifier|private
+specifier|final
 specifier|static
 name|UriRef
 name|FOAF_DOCUMENT
@@ -266,6 +267,7 @@ operator|.
 name|Document
 decl_stmt|;
 specifier|private
+specifier|final
 specifier|static
 name|UriRef
 name|FOAF_PRIMARY_TOPIC
@@ -275,6 +277,7 @@ operator|.
 name|primaryTopic
 decl_stmt|;
 specifier|private
+specifier|final
 specifier|static
 name|UriRef
 name|FOAF_PRIMARY_TOPIC_OF
@@ -284,6 +287,7 @@ operator|.
 name|isPrimaryTopicOf
 decl_stmt|;
 specifier|private
+specifier|final
 specifier|static
 name|UriRef
 name|signSite
@@ -300,6 +304,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
+specifier|final
 specifier|static
 name|UriRef
 name|ENTITY_TYPE
@@ -316,6 +321,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
+specifier|final
 specifier|static
 name|RdfValueFactory
 name|valueFactory
@@ -325,8 +331,9 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-specifier|private
+comment|/**      * The literal factory used (currently {@link LiteralFactory#getInstance()},      * but we might use a custom one for Stanbol therefore it is better to      * have it as a field       */
 specifier|static
+specifier|final
 name|LiteralFactory
 name|literalFactory
 init|=
