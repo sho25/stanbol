@@ -436,13 +436,13 @@ expr_stmt|;
 comment|// All registries must have the same cache.
 name|Iterator
 argument_list|<
-name|Registry
+name|Library
 argument_list|>
 name|it
 init|=
 name|regman
 operator|.
-name|getRegistries
+name|getLibraries
 argument_list|()
 operator|.
 name|iterator
@@ -640,13 +640,13 @@ expr_stmt|;
 comment|// Each registry must have its own distinct cache.
 name|Iterator
 argument_list|<
-name|Registry
+name|Library
 argument_list|>
 name|it
 init|=
 name|regman
 operator|.
-name|getRegistries
+name|getLibraries
 argument_list|()
 operator|.
 name|iterator
@@ -707,7 +707,7 @@ name|CACHING_POLICY
 argument_list|,
 name|CachingPolicy
 operator|.
-name|CENTRALISED
+name|DISTRIBUTED
 argument_list|)
 expr_stmt|;
 name|configuration
@@ -769,7 +769,7 @@ argument_list|(
 name|reg
 argument_list|)
 expr_stmt|;
-comment|// There has to be at least one non-empty lib from the test ontologies.
+comment|// There has to be at least one non-empty library from the test registries...
 name|Library
 name|lib
 init|=
@@ -830,6 +830,7 @@ argument_list|(
 name|lib
 argument_list|)
 expr_stmt|;
+comment|// ...and its ontologies must already be loaded without having to request them.
 name|assertTrue
 argument_list|(
 name|lib
@@ -921,7 +922,7 @@ argument_list|(
 name|reg
 argument_list|)
 expr_stmt|;
-comment|// There has to be at least one non-empty lib from the test ontologies.
+comment|// There has to be at least one non-empty library from the test registries...
 name|Library
 name|lib
 init|=
@@ -982,6 +983,7 @@ argument_list|(
 name|lib
 argument_list|)
 expr_stmt|;
+comment|// ...but its ontologies must not be loaded yet.
 name|assertFalse
 argument_list|(
 name|lib

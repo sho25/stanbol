@@ -29,6 +29,20 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|IRI
+import|;
+end_import
+
 begin_comment
 comment|/**  * Provides the configuration needed for the {@link ONManager}. A configuration should only be handled  * internally by the {@link ONManager} implementation.  */
 end_comment
@@ -47,9 +61,9 @@ decl_stmt|;
 comment|/**      * Returns the paths of all the directories where the ontology network manager will try to locate      * ontologies. These directories will be prioritaire if the engine is set to run in offline mode. This      * list is ordered in that the higher-ordered directories generally override lower-ordered ones, that is,      * any ontologies found in the directories belonging to the tail of this list will supersede any      * ontologies with the same ID found in the directories belonging to its head.      *       * @return an ordered list of directory paths for offline ontologies.      */
 name|List
 argument_list|<
-name|String
+name|IRI
 argument_list|>
-name|getOntologySourceDirectories
+name|getOntologySourceLocations
 parameter_list|()
 function_decl|;
 block|}

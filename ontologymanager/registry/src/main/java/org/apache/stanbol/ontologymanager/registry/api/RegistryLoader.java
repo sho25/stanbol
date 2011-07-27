@@ -150,11 +150,13 @@ comment|/**  * A registry loader is a toolkit for loading all ontologies indexed
 end_comment
 
 begin_interface
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|RegistryLoader
 block|{
-comment|/**      * Loads all the OWL ontologies referenced by<code>registryItem</code>.      *       * @param registryItem      *            the parent registry item.      * @param manager      *            the OWL ontology manager to use for loading (e.g. to avoid reloading ontologies).      * @param recurse      *            if true, load also ontologies that are indirectly referenced (e.g. if      *<code>registryItem</code> is a {@link Registry}).      * @return      * @throws OWLOntologyCreationException      */
+comment|/**      * Loads all the OWL ontologies referenced by<code>registryItem</code>.      *       * @deprecated      *       * @param registryItem      *            the parent registry item.      * @param manager      *            the OWL ontology manager to use for loading (e.g. to avoid reloading ontologies).      * @param recurse      *            if true, load also ontologies that are indirectly referenced (e.g. if      *<code>registryItem</code> is a {@link Registry}).      * @return      * @throws OWLOntologyCreationException      */
 name|Set
 argument_list|<
 name|OWLOntology
@@ -211,7 +213,7 @@ name|IRI
 name|libraryID
 parameter_list|)
 function_decl|;
-comment|/**      * Only extracts the ontologies belonging to the library specified, if found in the registry at the      * supplied location.      *       * @param registryPhysicalRIRI      * @param libraryID      * @return      * @deprecated This method does not what is supposed to do (ontology loading is selective, not model      *             construction). Calls to this method should be replaced by the sequence:      *             {@link RegistryManager#createModel(Set)} and {@link RegistryManager#getRegistry(IRI)}.      */
+comment|/**      * Only extracts the ontologies belonging to the library specified, if found in the registry at the      * supplied location.      *       *       * @deprecated This method does not what is supposed to do (ontology loading is selective, not model      *             construction). Calls to this method should be replaced by the sequence:      *             {@link RegistryManager#createModel(Set)} and {@link RegistryManager#getRegistry(IRI)}.      *       * @param registryPhysicalRIRI      * @param libraryID      * @return      */
 name|Registry
 name|loadLibrary
 parameter_list|(
@@ -222,14 +224,14 @@ name|IRI
 name|libraryID
 parameter_list|)
 function_decl|;
-comment|/**      *       * @throws RegistryContentException      * @deprecated obsolete      */
+comment|/**      * @deprecated obsolete      * @throws RegistryContentException      */
 name|void
 name|loadLocations
 parameter_list|()
 throws|throws
 name|RegistryContentException
 function_decl|;
-comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one library.      *       * @param physicalIRI      * @return      * @deprecated Calls to this method should be replaced by the sequence:      *             {@link RegistryManager#createModel(Set)} and {@link RegistryManager#getRegistry(IRI)}.      */
+comment|/**      * The ontology at<code>physicalIRI</code> may in turn include more than one library.      *       * @deprecated Calls to this method should be replaced by the sequence:      *             {@link RegistryManager#createModel(Set)} and {@link RegistryManager#getRegistry(IRI)}.      *       * @param physicalIRI      * @return      */
 name|Registry
 name|loadRegistry
 parameter_list|(

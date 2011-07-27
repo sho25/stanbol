@@ -97,6 +97,11 @@ name|Type
 operator|.
 name|LIBRARY
 decl_stmt|;
+comment|/**      * Returns the OWL ontology manager that this library is using as a cache of its ontologies.      *       * @return the ontology manager that is used as a cache.      */
+name|OWLOntologyManager
+name|getCache
+parameter_list|()
+function_decl|;
 comment|/**      * Returns the OWL ontologies that have been loaded in this library, if any, otherwise an exception is      * thrown.<br/>      *<br/>      * Upon invocation, this method immediately fires a registry content request event on itself. Note,      * however, that this method is in general not synchronized. Therefore, any listeners that react by      * invoking a load method may or may not cause the content to be available to this method before it      * returns.      *       * @return the set of loaded OWL ontologies.      * @throws RegistryContentException      *             if the requested ontologies have not been loaded.      */
 name|Set
 argument_list|<
@@ -118,6 +123,14 @@ name|loadOntologies
 parameter_list|(
 name|OWLOntologyManager
 name|mgr
+parameter_list|)
+function_decl|;
+comment|/**      * Sets the OWL ontology manager that this library will use as a cache of its ontologies. If null, if will      * create its own.      *       * @param cache      *            the ontology manager to be used as a cache.      */
+name|void
+name|setCache
+parameter_list|(
+name|OWLOntologyManager
+name|cache
 parameter_list|)
 function_decl|;
 block|}

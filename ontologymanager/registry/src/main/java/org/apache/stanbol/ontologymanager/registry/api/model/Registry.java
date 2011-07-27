@@ -21,20 +21,6 @@ name|model
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyManager
-import|;
-end_import
-
 begin_comment
 comment|/**  * An ontology registry can reference zero or more ontology libraries.  */
 end_comment
@@ -55,19 +41,6 @@ name|Type
 operator|.
 name|REGISTRY
 decl_stmt|;
-comment|/**      * Returns the OWL ontology manager that this registry is using as a cache of its ontologies.      *       * @return the ontology manager that is used as a cache.      */
-name|OWLOntologyManager
-name|getCache
-parameter_list|()
-function_decl|;
-comment|/**      * Sets the OWL ontology manager that this registry will use as a cache of its ontologies. If null, if      * will create its own.      *       * @param cache      *            the ontology manager to be used as a cache.      */
-name|void
-name|setCache
-parameter_list|(
-name|OWLOntologyManager
-name|cache
-parameter_list|)
-function_decl|;
 block|}
 end_interface
 

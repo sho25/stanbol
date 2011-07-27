@@ -39,6 +39,24 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|OfflineConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|registry
 operator|.
 name|api
@@ -145,6 +163,8 @@ begin_interface
 specifier|public
 interface|interface
 name|RegistryManager
+extends|extends
+name|RegistryItemIndex
 block|{
 comment|/**      * The key used to configure the caching policy of the registry manager.      */
 specifier|public
@@ -199,43 +219,9 @@ name|CachingPolicy
 name|getCachingPolicy
 parameter_list|()
 function_decl|;
-comment|/**      * Returns all the libraries that contain the ontology with the given identifier.      *       * @param ontologyID      *            the ontology identifier.      * @return the set of libraries that contain the ontology.      */
-name|Set
-argument_list|<
-name|Library
-argument_list|>
-name|getLibraries
-parameter_list|(
-name|IRI
-name|ontologyID
-parameter_list|)
-function_decl|;
-comment|/**      * Returns the set of registries managed by this object.      *       * @return the set of all managed registries.      */
-name|Set
-argument_list|<
-name|Registry
-argument_list|>
-name|getRegistries
+name|OfflineConfiguration
+name|getOfflineConfiguration
 parameter_list|()
-function_decl|;
-comment|/**      * Returns all the registries that reference the library with the given identifier.      *       * @return the set of all managed registries.      */
-name|Set
-argument_list|<
-name|Registry
-argument_list|>
-name|getRegistries
-parameter_list|(
-name|IRI
-name|libraryID
-parameter_list|)
-function_decl|;
-comment|/**      * Returns the registry with the given identifier, if present.<br/>      *<br/>      * NOTE THAT IF THE REGISTRY ITEM EXIST BUT IS NOT A REGISTRY, THIS METHOD WILL RETURN NULL.      *       * @param id      *            the registry identifier.      * @return the registry with the given identifier, or null if not present.      */
-name|Registry
-name|getRegistry
-parameter_list|(
-name|IRI
-name|id
-parameter_list|)
 function_decl|;
 comment|/**      * Determines if the registry manager is set to load its resources only when a specific request for them      * (e.g. by a call to {@link RegistryOntology#asOWLOntology()} or {@link Library#getOntologies()} is      * issued).      *       * @return true if set to load resources only upon request, false if set to load all resources eagerly      *         when the model has been built.      */
 name|boolean

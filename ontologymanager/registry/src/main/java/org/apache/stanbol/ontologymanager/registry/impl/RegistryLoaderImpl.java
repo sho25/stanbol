@@ -752,6 +752,8 @@ comment|/**  * Default implementation of the registry loader.<br/>  *<br/>  * TO
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|RegistryLoaderImpl
@@ -2974,7 +2976,7 @@ name|OWLOntologyManager
 name|mgr
 parameter_list|)
 block|{
-comment|// FIXME! linbraryID unused
+comment|// FIXME! libraryID unused
 name|Registry
 name|registry
 init|=
