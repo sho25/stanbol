@@ -1452,6 +1452,21 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|//TODO: The QueryResultList expects that the query as executed is added
+comment|//to the response. However when executing queries on multiple site they
+comment|//might support a different set of features and therefore execute
+comment|//different variants. For now I return simple the query as executed by
+comment|//the first Site that contributes results
+name|FieldQuery
+name|processedQuery
+init|=
+literal|null
+decl_stmt|;
+name|FieldQuery
+name|queryWithResults
+init|=
+literal|null
+decl_stmt|;
 for|for
 control|(
 name|ReferencedSite
@@ -1482,17 +1497,61 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
-for|for
-control|(
+name|QueryResultList
+argument_list|<
 name|String
-name|entityId
-range|:
+argument_list|>
+name|results
+init|=
 name|site
 operator|.
 name|findReferences
 argument_list|(
 name|query
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|processedQuery
+operator|==
+literal|null
+condition|)
+block|{
+name|processedQuery
+operator|=
+name|results
+operator|.
+name|getQuery
+argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+operator|!
+name|results
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|queryWithResults
+operator|==
+literal|null
+condition|)
+block|{
+name|processedQuery
+operator|=
+name|results
+operator|.
+name|getQuery
+argument_list|()
+expr_stmt|;
+block|}
+for|for
+control|(
+name|String
+name|entityId
+range|:
+name|results
 control|)
 block|{
 name|entityIds
@@ -1561,8 +1620,23 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|(
+name|queryWithResults
+operator|!=
+literal|null
+condition|?
+name|queryWithResults
+else|:
+comment|//use the query with results
+name|processedQuery
+operator|!=
+literal|null
+condition|?
+name|processedQuery
+else|:
+comment|//if not a processed
 name|query
 argument_list|,
+comment|//else the parsed one
 name|entityIds
 operator|.
 name|iterator
@@ -1609,6 +1683,21 @@ name|Representation
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|//TODO: The QueryResultList expects that the query as executed is added
+comment|//to the response. However when executing queries on multiple site they
+comment|//might support a different set of features and therefore execute
+comment|//different variants. For now I return simple the query as executed by
+comment|//the first Site that contributes results
+name|FieldQuery
+name|processedQuery
+init|=
+literal|null
+decl_stmt|;
+name|FieldQuery
+name|queryWithResults
+init|=
+literal|null
+decl_stmt|;
 for|for
 control|(
 name|ReferencedSite
@@ -1639,17 +1728,61 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
-for|for
-control|(
+name|QueryResultList
+argument_list|<
 name|Representation
-name|rep
-range|:
+argument_list|>
+name|results
+init|=
 name|site
 operator|.
 name|find
 argument_list|(
 name|query
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|processedQuery
+operator|==
+literal|null
+condition|)
+block|{
+name|processedQuery
+operator|=
+name|results
+operator|.
+name|getQuery
+argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+operator|!
+name|results
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|queryWithResults
+operator|==
+literal|null
+condition|)
+block|{
+name|processedQuery
+operator|=
+name|results
+operator|.
+name|getQuery
+argument_list|()
+expr_stmt|;
+block|}
+for|for
+control|(
+name|Representation
+name|rep
+range|:
+name|results
 control|)
 block|{
 if|if
@@ -1756,8 +1889,23 @@ argument_list|<
 name|Representation
 argument_list|>
 argument_list|(
+name|queryWithResults
+operator|!=
+literal|null
+condition|?
+name|queryWithResults
+else|:
+comment|//use the query with results
+name|processedQuery
+operator|!=
+literal|null
+condition|?
+name|processedQuery
+else|:
+comment|//if not a processed
 name|query
 argument_list|,
+comment|//else the parsed one
 name|representations
 argument_list|,
 name|Representation
@@ -1788,6 +1936,21 @@ argument_list|,
 name|query
 argument_list|)
 expr_stmt|;
+comment|//TODO: The QueryResultList expects that the query as executed is added
+comment|//to the response. However when executing queries on multiple site they
+comment|//might support a different set of features and therefore execute
+comment|//different variants. For now I return simple the query as executed by
+comment|//the first Site that contributes results
+name|FieldQuery
+name|processedQuery
+init|=
+literal|null
+decl_stmt|;
+name|FieldQuery
+name|queryWithResults
+init|=
+literal|null
+decl_stmt|;
 name|Set
 argument_list|<
 name|Entity
@@ -1832,17 +1995,61 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
-for|for
-control|(
+name|QueryResultList
+argument_list|<
 name|Entity
-name|rep
-range|:
+argument_list|>
+name|results
+init|=
 name|site
 operator|.
 name|findEntities
 argument_list|(
 name|query
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|processedQuery
+operator|==
+literal|null
+condition|)
+block|{
+name|processedQuery
+operator|=
+name|results
+operator|.
+name|getQuery
+argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+operator|!
+name|results
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|queryWithResults
+operator|==
+literal|null
+condition|)
+block|{
+name|processedQuery
+operator|=
+name|results
+operator|.
+name|getQuery
+argument_list|()
+expr_stmt|;
+block|}
+for|for
+control|(
+name|Entity
+name|rep
+range|:
+name|results
 control|)
 block|{
 if|if
@@ -1951,8 +2158,23 @@ argument_list|<
 name|Entity
 argument_list|>
 argument_list|(
+name|queryWithResults
+operator|!=
+literal|null
+condition|?
+name|queryWithResults
+else|:
+comment|//use the query with results
+name|processedQuery
+operator|!=
+literal|null
+condition|?
+name|processedQuery
+else|:
+comment|//if not a processed
 name|query
 argument_list|,
+comment|//else the parsed one
 name|entities
 argument_list|,
 name|Entity

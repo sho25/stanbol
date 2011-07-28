@@ -421,16 +421,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|query
-operator|.
-name|getOffset
-argument_list|()
-operator|!=
-literal|0
-condition|)
-block|{
+comment|//if(query.getOffset() != 0){
 name|jQuery
 operator|.
 name|put
@@ -443,7 +434,7 @@ name|getOffset
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
+comment|//}
 return|return
 name|jQuery
 return|;

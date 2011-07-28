@@ -228,7 +228,7 @@ name|NamespaceEnum
 operator|.
 name|xsd
 operator|+
-literal|"integer"
+literal|"int"
 argument_list|,
 literal|"int"
 argument_list|,

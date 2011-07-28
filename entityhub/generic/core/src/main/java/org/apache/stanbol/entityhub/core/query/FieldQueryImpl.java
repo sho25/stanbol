@@ -677,7 +677,7 @@ name|void
 name|removeAllConstraints
 parameter_list|()
 block|{
-name|selected
+name|queryConstraint
 operator|.
 name|clear
 argument_list|()
@@ -690,7 +690,7 @@ name|void
 name|removeAllSelectedFields
 parameter_list|()
 block|{
-name|queryConstraint
+name|selected
 operator|.
 name|clear
 argument_list|()

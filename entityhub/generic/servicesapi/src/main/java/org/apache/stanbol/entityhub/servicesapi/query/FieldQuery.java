@@ -71,6 +71,8 @@ argument_list|,
 name|Constraint
 argument_list|>
 argument_list|>
+extends|,
+name|Cloneable
 block|{
 comment|/**      * The value used as result for {@link Query#getQueryType()} of this query      * type.      */
 name|String
@@ -194,6 +196,11 @@ parameter_list|(
 name|T
 name|copyTo
 parameter_list|)
+function_decl|;
+comment|/**      * Clones the FieldQuery      * @return the clone      */
+name|FieldQuery
+name|clone
+parameter_list|()
 function_decl|;
 block|}
 end_interface

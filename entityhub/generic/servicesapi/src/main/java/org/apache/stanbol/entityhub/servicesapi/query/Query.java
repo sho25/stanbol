@@ -63,6 +63,8 @@ begin_interface
 specifier|public
 interface|interface
 name|Query
+extends|extends
+name|Cloneable
 block|{
 comment|/**      * The type of the Query (e.g. "fieldQuery" or "entityQuery"). Typically the      * type should be defines as String constant in the java interface of the      * query type.      * @return return the name of the query (usually the the value as      *     returned by the {@link Class#getSimpleName()} class object of the      *     Java Interface for the query type but with a      *     {@link Character#toLowerCase(char)} for the first character.      */
 name|String
@@ -94,6 +96,11 @@ parameter_list|(
 name|int
 name|offset
 parameter_list|)
+function_decl|;
+comment|/**      * Clones the query.      * @return the clone      */
+name|Query
+name|clone
+parameter_list|()
 function_decl|;
 block|}
 end_interface

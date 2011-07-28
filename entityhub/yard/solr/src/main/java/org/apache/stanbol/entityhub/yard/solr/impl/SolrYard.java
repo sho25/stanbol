@@ -2687,13 +2687,23 @@ parameter_list|)
 throws|throws
 name|YardException
 block|{
+comment|//create a clone of the query, because we need to refine it because the
+comment|//query (as executed) needs to be included in the result set
+name|FieldQuery
+name|fieldQuery
+init|=
+name|parsedQuery
+operator|.
+name|clone
+argument_list|()
+decl_stmt|;
 name|log
 operator|.
 name|debug
 argument_list|(
 literal|"find "
 operator|+
-name|parsedQuery
+name|fieldQuery
 argument_list|)
 expr_stmt|;
 name|long
@@ -2729,7 +2739,7 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|(
-name|parsedQuery
+name|fieldQuery
 operator|.
 name|getSelectedFields
 argument_list|()
@@ -2765,7 +2775,7 @@ argument_list|()
 operator|.
 name|parseFieldQuery
 argument_list|(
-name|parsedQuery
+name|fieldQuery
 argument_list|,
 name|select
 argument_list|)
@@ -2875,7 +2885,7 @@ argument_list|<
 name|Representation
 argument_list|>
 argument_list|(
-name|parsedQuery
+name|fieldQuery
 argument_list|,
 comment|// by adapting SolrDocuments to Representations
 operator|new
@@ -3010,6 +3020,16 @@ parameter_list|)
 throws|throws
 name|YardException
 block|{
+comment|//create a clone of the query, because we need to refine it because the
+comment|//query (as executed) needs to be included in the result set
+name|FieldQuery
+name|fieldQuery
+init|=
+name|parsedQuery
+operator|.
+name|clone
+argument_list|()
+decl_stmt|;
 name|SolrQuery
 name|query
 init|=
@@ -3018,7 +3038,7 @@ argument_list|()
 operator|.
 name|parseFieldQuery
 argument_list|(
-name|parsedQuery
+name|fieldQuery
 argument_list|,
 name|SELECT
 operator|.
@@ -3076,7 +3096,7 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|(
-name|parsedQuery
+name|fieldQuery
 argument_list|,
 comment|// by adapting SolrDocuments to Representations
 operator|new
