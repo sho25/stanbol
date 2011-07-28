@@ -223,7 +223,7 @@ name|OfflineConfiguration
 name|getOfflineConfiguration
 parameter_list|()
 function_decl|;
-comment|/**      * Determines if the registry manager is set to load its resources only when a specific request for them      * (e.g. by a call to {@link RegistryOntology#asOWLOntology()} or {@link Library#getOntologies()} is      * issued).      *       * @return true if set to load resources only upon request, false if set to load all resources eagerly      *         when the model has been built.      */
+comment|/**      * Determines if the registry manager is set to load its resources only when a specific request for them      * (e.g. by a call to {@link RegistryOntology#getRawOntology(IRI)} or {@link Library#getOntologies()} is      * issued).      *       * @return true if set to load resources only upon request, false if set to load all resources eagerly      *         when the model has been built.      */
 name|boolean
 name|isLazyLoading
 parameter_list|()

@@ -59,6 +59,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|IRI
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntology
 import|;
 end_import
@@ -117,7 +131,7 @@ name|boolean
 name|isLoaded
 parameter_list|()
 function_decl|;
-comment|/**      * Causes all the ontologies referenced by this library to be loaded, so that when      * {@link RegistryOntology#asOWLOntology()} is invoked on one of its children, it will return the      * corresponding OWL ontology, if a valid one was parsed from its location.      *       * @param mgr      *            the OWL ontology manager to use for loading the ontologies in the library. It must not be      *            null, lest an {@link IllegalArgumentException} be thrown.      */
+comment|/**      * Causes all the ontologies referenced by this library to be loaded, so that when      * {@link RegistryOntology#getRawOntology(IRI)} is invoked on one of its children, it will return the      * corresponding OWL ontology, if a valid one was parsed from its location.      *       * @param mgr      *            the OWL ontology manager to use for loading the ontologies in the library. It must not be      *            null, lest an {@link IllegalArgumentException} be thrown.      */
 name|void
 name|loadOntologies
 parameter_list|(

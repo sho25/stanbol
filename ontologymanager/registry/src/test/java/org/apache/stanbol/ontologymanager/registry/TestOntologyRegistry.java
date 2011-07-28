@@ -850,6 +850,12 @@ name|rs
 control|)
 block|{
 comment|// The nonexistent library should also be included, if using the more powerful algorithm.
+name|int
+name|count
+init|=
+literal|3
+decl_stmt|;
+comment|// set to 2 if using the less powerful algorithm.
 if|if
 condition|(
 name|Locations
@@ -866,7 +872,7 @@ argument_list|)
 condition|)
 name|assertEquals
 argument_list|(
-literal|3
+name|count
 argument_list|,
 name|r
 operator|.
@@ -876,14 +882,6 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
-comment|// set
-comment|// to 2
-comment|// if
-comment|// using
-comment|// the
-comment|// less
-comment|// powerful
-comment|// algorithm.
 elseif|else
 if|if
 condition|(
