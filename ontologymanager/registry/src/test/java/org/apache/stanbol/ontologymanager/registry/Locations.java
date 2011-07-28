@@ -166,6 +166,22 @@ operator|+
 literal|"#Library2"
 argument_list|)
 decl_stmt|;
+comment|/**      * Non existing and not referenced by any library. Used for negative tests.      */
+specifier|public
+specifier|static
+specifier|final
+name|IRI
+name|ONT_BOGUS
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|__STANBOL_ONT_NAMESPACE
+operator|+
+literal|"bogus.owl"
+argument_list|)
+decl_stmt|;
 comment|/**      * Identifier of test ontology library 1.      */
 specifier|public
 specifier|static

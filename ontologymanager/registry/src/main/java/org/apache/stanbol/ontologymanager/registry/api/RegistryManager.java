@@ -219,6 +219,7 @@ name|CachingPolicy
 name|getCachingPolicy
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the offline configuration currently employed by this registry manager.      *       * @return the offline configuration in use.      */
 name|OfflineConfiguration
 name|getOfflineConfiguration
 parameter_list|()

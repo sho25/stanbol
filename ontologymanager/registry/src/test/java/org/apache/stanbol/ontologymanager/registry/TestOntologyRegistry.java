@@ -113,24 +113,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|DuplicateIDException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|ONManager
 import|;
 end_import
@@ -210,26 +192,6 @@ operator|.
 name|ontology
 operator|.
 name|SessionOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|UnmodifiableOntologySpaceException
 import|;
 end_import
 
@@ -389,6 +351,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Before
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|BeforeClass
 import|;
 end_import
@@ -473,16 +445,36 @@ name|AutoIRIMapper
 import|;
 end_import
 
+begin_comment
+comment|/**  * Verifies the correct setup of ontology registries.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
 name|TestOntologyRegistry
 block|{
 specifier|private
+name|IRI
+name|scopeIri
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|Locations
+operator|.
+name|__STANBOL_ONT_NAMESPACE
+operator|+
+literal|"Scope"
+argument_list|)
+decl_stmt|;
+specifier|private
 specifier|static
 name|RegistryIRISource
 name|ontologySource
 decl_stmt|;
+comment|// Null until the RegistryIRISource stays in place.
 specifier|private
 specifier|static
 name|ONManager
@@ -493,6 +485,11 @@ specifier|static
 name|RegistryManager
 name|regman
 decl_stmt|;
+specifier|private
+name|OWLOntologyManager
+name|virginOntologyManager
+decl_stmt|;
+comment|/**      * Sets the registry and ontology network managers, which are immutable across tests.      */
 annotation|@
 name|BeforeClass
 specifier|public
@@ -501,6 +498,7 @@ name|void
 name|setup
 parameter_list|()
 block|{
+comment|// We use a single Dictionary for storing all configurations.
 specifier|final
 name|Dictionary
 argument_list|<
@@ -546,6 +544,7 @@ argument_list|(
 name|config
 argument_list|)
 decl_stmt|;
+comment|// The registry manager can be updated via calls to createModel()
 name|regman
 operator|=
 operator|new
@@ -556,7 +555,7 @@ argument_list|,
 name|config
 argument_list|)
 expr_stmt|;
-comment|// An ONManagerImpl with no store and same offline settings as the registry manager.
+comment|// An ONManager with no storage support and same offline settings as the registry manager.
 name|onm
 operator|=
 operator|new
@@ -572,31 +571,23 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
-comment|// private static boolean mapperIsSet = false;
-comment|//
-comment|// public void setupOfflineMapper() {
-comment|// if (mapperIsSet) {} else {
-comment|// ontologySource = new OntologyRegistryIRISource(testRegistryIri, ontologyManager, loader);
-comment|// mapperIsSet = true;
-comment|// }
-comment|// }
+comment|/**      * Resets the virgin ontology manager for each test.      *       * @throws Exception      */
 annotation|@
-name|Test
+name|Before
 specifier|public
 name|void
-name|testPopulateRegistry
+name|setupSources
 parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OWLOntologyManager
 name|virginOntologyManager
-init|=
+operator|=
 name|OWLManager
 operator|.
 name|createOWLOntologyManager
 argument_list|()
-decl_stmt|;
+expr_stmt|;
 name|URL
 name|url
 init|=
@@ -634,6 +625,18 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Population is lazy; no need to add other mappers.
+block|}
+comment|/**      * Verifies that a call to {@link RegistryManager#createModel(Set)} with a registry location creates the      * object model accordingly.      *       * @throws Exception      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPopulateRegistry
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// Create the model from a single registry.
 name|OWLOntology
 name|oReg
 init|=
@@ -664,6 +667,7 @@ name|oReg
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|// There has to be a single registry, with the expected number of children.
 name|assertEquals
 argument_list|(
 literal|1
@@ -712,6 +716,7 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
+comment|// There are no libreries without ontologies in the test registry.
 for|for
 control|(
 name|RegistryItem
@@ -731,7 +736,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Verify that, when loading multiple registries that add library information to each other, the overall      * model reflects the union of these registries.      *       * @throws Exception      */
+comment|/**      * Verifies that, when loading multiple registries that add library information to each other, the overall      * model reflects the union of these registries.      *       * @throws Exception      */
 annotation|@
 name|Test
 specifier|public
@@ -741,51 +746,6 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OWLOntologyManager
-name|virginOntologyManager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
-argument_list|()
-decl_stmt|;
-name|URL
-name|url
-init|=
-name|getClass
-argument_list|()
-operator|.
-name|getResource
-argument_list|(
-literal|"/ontologies/registry"
-argument_list|)
-decl_stmt|;
-name|assertNotNull
-argument_list|(
-name|url
-argument_list|)
-expr_stmt|;
-name|virginOntologyManager
-operator|.
-name|addIRIMapper
-argument_list|(
-operator|new
-name|AutoIRIMapper
-argument_list|(
-operator|new
-name|File
-argument_list|(
-name|url
-operator|.
-name|toURI
-argument_list|()
-argument_list|)
-argument_list|,
-literal|true
-argument_list|)
-argument_list|)
-expr_stmt|;
-comment|// Population is lazy; no need to add other mappers.
 comment|// Create the model from two overlapping registries.
 name|Set
 argument_list|<
@@ -909,7 +869,7 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
-comment|// check
+comment|// Check that we find the expected ontology in the expected library.
 for|for
 control|(
 name|RegistryItem
@@ -988,6 +948,7 @@ block|}
 block|}
 block|}
 block|}
+comment|/**      * Verifies that the addition of a null or valid registry source to a session space works.      */
 annotation|@
 name|Test
 specifier|public
@@ -997,17 +958,6 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|// setupOfflineMapper();
-name|IRI
-name|scopeIri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://fise.iks-project.eu/scopone"
-argument_list|)
-decl_stmt|;
 name|SessionOntologySpace
 name|space
 init|=
@@ -1030,8 +980,6 @@ operator|.
 name|setUp
 argument_list|()
 expr_stmt|;
-try|try
-block|{
 comment|// space.addOntology(new
 comment|// OntologyRegistryIRISource(testRegistryIri,onm.getOwlCacheManager(),onm.getRegistryLoader()));
 name|space
@@ -1041,21 +989,6 @@ argument_list|(
 name|ontologySource
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-name|fail
-argument_list|(
-literal|"Adding libraries to session space failed. "
-operator|+
-literal|"This should not happen for active session spaces."
-argument_list|)
-expr_stmt|;
-block|}
 name|assertTrue
 argument_list|(
 name|space
@@ -1083,33 +1016,23 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Verifies that an ontology scope with a null or valid registry source is created correctly.      */
 annotation|@
 name|Test
 specifier|public
 name|void
 name|testScopeCreationWithRegistry
 parameter_list|()
+throws|throws
+name|Exception
 block|{
-comment|// setupOfflineMapper();
-name|IRI
-name|scopeIri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://fise.iks-project.eu/scopone"
-argument_list|)
-decl_stmt|;
 name|OntologyScope
 name|scope
 init|=
 literal|null
 decl_stmt|;
-comment|// The factory call also invokes loadRegistriesEager() and
-comment|// gatherOntologies() so no need to test them individually.
-try|try
-block|{
+comment|// The input source instantiation automatically loads the entire content of a registry, no need to
+comment|// test loading methods individually.
 name|scope
 operator|=
 name|onm
@@ -1124,19 +1047,6 @@ argument_list|,
 name|ontologySource
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|DuplicateIDException
-name|e
-parameter_list|)
-block|{
-name|fail
-argument_list|(
-literal|"DuplicateID exception caught when creating test scope."
-argument_list|)
-expr_stmt|;
-block|}
 name|assertTrue
 argument_list|(
 name|scope
@@ -1155,31 +1065,24 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Verifies that an ontology space with a null or valid registry source is created correctly.      */
 annotation|@
 name|Test
 specifier|public
 name|void
 name|testSpaceCreationWithRegistry
 parameter_list|()
+throws|throws
+name|Exception
 block|{
 comment|// setupOfflineMapper();
-name|IRI
-name|scopeIri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://fise.iks-project.eu/scopone"
-argument_list|)
-decl_stmt|;
 name|CoreOntologySpace
 name|space
 init|=
 literal|null
 decl_stmt|;
-comment|// The factory call also invokes loadRegistriesEager() and
-comment|// gatherOntologies() so no need to test them individually.
+comment|// The input source instantiation automatically loads the entire content of a registry, no need to
+comment|// test loading methods individually.
 name|space
 operator|=
 name|onm

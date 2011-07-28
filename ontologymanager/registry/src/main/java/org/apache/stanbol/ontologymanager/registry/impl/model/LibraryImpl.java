@@ -308,6 +308,7 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * Creates a new instance of {@link LibraryImpl}.      *       * @param iri      *            the library identifier and possible physical location.      */
 specifier|public
 name|LibraryImpl
 parameter_list|(
@@ -326,6 +327,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new instance of {@link LibraryImpl}.      *       * @param iri      *            the library identifier and possible physical location.      * @param cache      *            the {@link OWLOntologyManager} to be used for caching ontologies in-memory.      */
 specifier|public
 name|LibraryImpl
 parameter_list|(
@@ -347,6 +349,7 @@ name|cache
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new instance of {@link LibraryImpl}.      *       * @param iri      *            the library identifier and possible physical location.      * @param name      *            the short name of this library.      */
 specifier|public
 name|LibraryImpl
 parameter_list|(
@@ -370,6 +373,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Creates a new instance of {@link LibraryImpl}.      *       * @param iri      *            the library identifier and possible physical location.      * @param name      *            the short name of this library.      * @param cache      *            the {@link OWLOntologyManager} to be used for caching ontologies in-memory.      */
 specifier|public
 name|LibraryImpl
 parameter_list|(
@@ -542,46 +546,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|void
-name|removeChild
-parameter_list|(
-name|RegistryItem
-name|child
-parameter_list|)
-block|{
-name|super
-operator|.
-name|removeChild
-argument_list|(
-name|child
-argument_list|)
-expr_stmt|;
-comment|// Also unload the ontology version that comes from this library.
-if|if
-condition|(
-name|child
-operator|instanceof
-name|RegistryOntology
-condition|)
-operator|(
-operator|(
-name|RegistryOntology
-operator|)
-name|child
-operator|)
-operator|.
-name|setRawOntology
-argument_list|(
-name|getIRI
-argument_list|()
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
 specifier|synchronized
 name|void
 name|loadOntologies
@@ -726,6 +690,46 @@ block|}
 name|loaded
 operator|=
 literal|true
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|removeChild
+parameter_list|(
+name|RegistryItem
+name|child
+parameter_list|)
+block|{
+name|super
+operator|.
+name|removeChild
+argument_list|(
+name|child
+argument_list|)
+expr_stmt|;
+comment|// Also unload the ontology version that comes from this library.
+if|if
+condition|(
+name|child
+operator|instanceof
+name|RegistryOntology
+condition|)
+operator|(
+operator|(
+name|RegistryOntology
+operator|)
+name|child
+operator|)
+operator|.
+name|setRawOntology
+argument_list|(
+name|getIRI
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@

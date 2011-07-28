@@ -71,6 +71,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -397,7 +407,7 @@ specifier|static
 name|OfflineConfiguration
 name|offline
 decl_stmt|;
-comment|/**      * Sets the ontology network manager and registry loader before running the tests.      */
+comment|/**      * Sets the offline configuration (identical across tests) before running the tests.      *       * @throws Exception      *             if any error occurs;      */
 annotation|@
 name|BeforeClass
 specifier|public
@@ -455,7 +465,7 @@ expr_stmt|;
 block|}
 specifier|private
 name|String
-name|registryResource
+name|registryResourcePath
 init|=
 literal|"/ontologies/registry/onmtest.owl"
 decl_stmt|;
@@ -467,6 +477,7 @@ specifier|private
 name|OWLOntologyManager
 name|virginOntologyManager
 decl_stmt|;
+comment|/**      * Resets the registry manager, which each unit test needs to reconfigure individually.      */
 annotation|@
 name|After
 specifier|public
@@ -562,7 +573,7 @@ comment|// It seems the Maven surefire plugin won't copy them.
 comment|// url = getClass().getResource("/ontologies/odp");
 comment|// virginOntologyManager.addIRIMapper(new AutoIRIMapper(new File(url.toURI()), true));
 block|}
-comment|/**      * Uses a plain {@link RegistryLoader} to load a single ontology library and checks for its expected hits      * and misses.      *       * @throws Exception      */
+comment|/**      * Uses a plain {@link RegistryManager} to load a single ontology library and checks for its expected hits      * and misses.      *       * @throws Exception      *             if any error occurs;      */
 annotation|@
 name|Test
 specifier|public
@@ -584,7 +595,7 @@ argument_list|()
 operator|.
 name|getResource
 argument_list|(
-name|registryResource
+name|registryResourcePath
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -624,6 +635,7 @@ argument_list|()
 block|}
 argument_list|)
 expr_stmt|;
+comment|// Instantiating the registry manager will also load the registry data.
 name|regMgr
 operator|=
 operator|new
@@ -634,17 +646,26 @@ argument_list|,
 name|regmanConf
 argument_list|)
 expr_stmt|;
+comment|// The resulting manager must exist and have exactly one registry.
 name|assertNotNull
 argument_list|(
 name|regMgr
 argument_list|)
 expr_stmt|;
-name|assertFalse
-argument_list|(
+name|Set
+argument_list|<
+name|Registry
+argument_list|>
+name|registries
+init|=
 name|regMgr
 operator|.
 name|getRegistries
 argument_list|()
+decl_stmt|;
+name|assertFalse
+argument_list|(
+name|registries
 operator|.
 name|isEmpty
 argument_list|()
@@ -654,10 +675,7 @@ name|assertEquals
 argument_list|(
 literal|1
 argument_list|,
-name|regMgr
-operator|.
-name|getRegistries
-argument_list|()
+name|registries
 operator|.
 name|size
 argument_list|()
@@ -666,10 +684,7 @@ expr_stmt|;
 name|Registry
 name|reg
 init|=
-name|regMgr
-operator|.
-name|getRegistries
-argument_list|()
+name|registries
 operator|.
 name|iterator
 argument_list|()
@@ -795,7 +810,7 @@ argument_list|()
 operator|.
 name|getResource
 argument_list|(
-name|registryResource
+name|registryResourcePath
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -835,6 +850,7 @@ argument_list|()
 block|}
 argument_list|)
 expr_stmt|;
+comment|// Instantiating the registry manager will also load the registry data.
 name|regMgr
 operator|=
 operator|new
@@ -850,6 +866,7 @@ argument_list|(
 name|regMgr
 argument_list|)
 expr_stmt|;
+comment|// Now use this registry manager to instantiate an input source.
 name|OntologyInputSource
 name|src
 init|=
