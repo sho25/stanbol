@@ -45,6 +45,38 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
+name|it
+operator|.
+name|ReferencedSiteTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|it
+operator|.
+name|SitesManagerTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
 name|test
 operator|.
 name|query
@@ -124,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the "/query" (Field Query) and "/find" (label search)   * implementation of the Entityhub.<p>  * All the tests defined by this class assume the default data set for   * dbpedia as provided by the   *<code>org.apache.stanbol.data.sites.dbpedia.default</code> bundle.<p>  * This test cases are used to test both the ReferencedSiteManager and   * the ReferencedSite. This is also the reason why having this abstract super  * class defining the tests.  * @see ReferencedSiteFieldQueryTest  * @see SitesManagerFieldQueryTest  * @author Rupert Westenthaler  *  */
+comment|/**  * Tests for the "/query" (Field Query) and "/find" (label search)   * implementation of the Entityhub.<p>  * All the tests defined by this class assume the default data set for   * dbpedia as provided by the   *<code>org.apache.stanbol.data.sites.dbpedia.default</code> bundle.<p>  * This test cases are used to test both the ReferencedSiteManager and   * the ReferencedSite. This is also the reason why having this abstract super  * class defining the tests.  * @see ReferencedSiteTest  * @see SitesManagerTest  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -519,7 +551,7 @@ operator|=
 operator|new
 name|FindQueryTestCase
 argument_list|(
-literal|"ABC*"
+literal|"cia*"
 argument_list|,
 name|Arrays
 operator|.

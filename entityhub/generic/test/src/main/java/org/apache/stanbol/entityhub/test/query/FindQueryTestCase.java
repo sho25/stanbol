@@ -31,6 +31,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collection
 import|;
 end_import
@@ -42,6 +52,15 @@ name|FindQueryTestCase
 extends|extends
 name|QueryTestCase
 block|{
+comment|/**      * If {@link #getField()} set this field is expected to be used as default      * search field (rdfs:label)      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DEFAULT_SEARCH_FIELD
+init|=
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+decl_stmt|;
 specifier|private
 specifier|final
 name|String
@@ -216,6 +235,21 @@ name|text
 operator|=
 name|text
 expr_stmt|;
+comment|//For queries that should succeed
+if|if
+condition|(
+name|expectsSuccess
+argument_list|()
+condition|)
+block|{
+comment|//add the default search field (needed to correctly init that the
+comment|//default search field is required to be included in results
+name|setField
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 comment|/**      * @return the language      */
 specifier|public
@@ -271,6 +305,23 @@ operator|.
 name|field
 operator|=
 name|field
+expr_stmt|;
+comment|//set also the new field as required for results!
+name|setRequiredFields
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|field
+operator|==
+literal|null
+condition|?
+name|DEFAULT_SEARCH_FIELD
+else|:
+name|field
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Getter for the offset of this query      * @return the offset      */
@@ -387,7 +438,7 @@ name|addParam
 argument_list|(
 name|sb
 argument_list|,
-literal|"language"
+literal|"lang"
 argument_list|,
 name|language
 argument_list|)

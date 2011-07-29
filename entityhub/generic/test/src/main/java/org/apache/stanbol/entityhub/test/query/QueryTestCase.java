@@ -115,8 +115,6 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"id"
-argument_list|,
 literal|"http://www.iks-project.eu/ontology/rick/query/score"
 argument_list|)
 argument_list|)
@@ -329,7 +327,7 @@ name|DEFAULT_HEADER
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Setter for the required fields      * @param requiredFields      * @throws IllegalArgumentException In case a parsed required field is not      * contained in the {@link #getAllowedFields()} or the       * {@link #getExpectedStatus()} is not an 2xx code      */
+comment|/**      * Setter for the required fields      * @param requiredFields      * @throws IllegalArgumentException In case the       * {@link #getExpectedStatus()} is not an 2xx code      */
 specifier|protected
 specifier|final
 name|void
@@ -358,45 +356,6 @@ operator|+
 literal|"if the expected status of a test case has a 2xx code"
 argument_list|)
 throw|;
-block|}
-if|if
-condition|(
-name|requiredFields
-operator|!=
-literal|null
-condition|)
-block|{
-comment|//check if the required are in the list
-if|if
-condition|(
-operator|!
-name|allowedFields
-operator|.
-name|containsAll
-argument_list|(
-name|requiredFields
-argument_list|)
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Based on the parsed Query only the Fields %s are expected, but"
-operator|+
-literal|"%s are parsed as required one!"
-argument_list|,
-name|allowedFields
-argument_list|,
-name|requiredFields
-argument_list|)
-argument_list|)
-throw|;
-block|}
 block|}
 name|this
 operator|.
@@ -828,7 +787,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|super
+name|sb
 operator|.
 name|toString
 argument_list|()
