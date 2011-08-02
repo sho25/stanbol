@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -247,6 +247,10 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * Default implementation of the session ontology space.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -269,9 +273,6 @@ operator|.
 name|getIRISuffix
 argument_list|()
 decl_stmt|;
-comment|//	static {
-comment|//		SUFFIX = SpaceType.SESSION.getIRISuffix();
-comment|//	}
 specifier|public
 name|SessionOntologySpaceImpl
 parameter_list|(
@@ -320,7 +321,7 @@ operator|.
 name|SESSION
 argument_list|,
 name|store
-comment|/*, scopeID*/
+comment|/* , scopeID */
 argument_list|)
 expr_stmt|;
 name|IRI
@@ -372,7 +373,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Could not create session space root ontology "
+literal|"Could not create session space root ontology "
 operator|+
 name|iri
 argument_list|,
@@ -391,7 +392,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Session space ontology "
+literal|"Session space ontology "
 operator|+
 name|iri
 operator|+
@@ -454,7 +455,7 @@ name|SESSION
 argument_list|,
 name|store
 argument_list|,
-comment|/*scopeID,*/
+comment|/* scopeID, */
 name|ontologyManager
 argument_list|)
 expr_stmt|;
@@ -518,7 +519,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Could not create session space root ontology "
+literal|"Could not create session space root ontology "
 operator|+
 name|iri
 argument_list|,
@@ -537,7 +538,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"KReS :: Session space ontology "
+literal|"Session space ontology "
 operator|+
 name|iri
 operator|+
@@ -547,42 +548,6 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-comment|/** 	 * Session spaces expose their ontology managers. 	 */
-annotation|@
-name|Override
-specifier|public
-name|OWLOntologyManager
-name|getOntologyManager
-parameter_list|()
-block|{
-return|return
-name|ontologyManager
-return|;
-block|}
-comment|/** 	 * Once it is set up, a session space is write-enabled. 	 */
-annotation|@
-name|Override
-specifier|public
-specifier|synchronized
-name|void
-name|setUp
-parameter_list|()
-block|{
-name|locked
-operator|=
-literal|false
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-specifier|synchronized
-name|void
-name|tearDown
-parameter_list|()
-block|{
-comment|// TODO Auto-generated method stub
 block|}
 annotation|@
 name|Override
@@ -668,6 +633,42 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|OWLOntologyManager
+name|getOntologyManager
+parameter_list|()
+block|{
+comment|// Session spaces do expose their ontology managers.
+return|return
+name|ontologyManager
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+specifier|synchronized
+name|void
+name|setUp
+parameter_list|()
+block|{
+comment|// Once it is set up, a session space is write-enabled.
+name|locked
+operator|=
+literal|false
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+specifier|synchronized
+name|void
+name|tearDown
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
 block|}
 block|}
 end_class

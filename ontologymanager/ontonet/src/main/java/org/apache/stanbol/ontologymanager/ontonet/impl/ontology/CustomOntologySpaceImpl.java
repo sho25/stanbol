@@ -203,6 +203,10 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_comment
+comment|/**  * Default implementation of the custom ontology space.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
