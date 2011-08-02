@@ -681,6 +681,11 @@ name|ONMScopeResource
 extends|extends
 name|BaseStanbolResource
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|Logger
 name|log
