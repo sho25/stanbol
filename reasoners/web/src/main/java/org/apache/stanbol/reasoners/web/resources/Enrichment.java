@@ -1662,7 +1662,9 @@ name|getCustomSpace
 argument_list|()
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 operator|.
 name|iterator
 argument_list|()
@@ -1775,7 +1777,9 @@ name|next
 argument_list|()
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 operator|.
 name|iterator
 argument_list|()

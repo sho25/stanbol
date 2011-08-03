@@ -64,17 +64,6 @@ specifier|public
 interface|interface
 name|OntologySpaceFactory
 block|{
-comment|/**      * Creates and sets up a default core ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CORE, OntologyInputSource...)</code>.      *       * @deprecated Please use the varargs version of this method      *             {@link #createCoreOntologySpace(IRI, OntologyInputSource...)}.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param coreSource      *            the input source for the ontologies in this space.      * @return the generated ontology space.      */
-name|CoreOntologySpace
-name|createCoreOntologySpace
-parameter_list|(
-name|IRI
-name|scopeId
-parameter_list|,
-name|OntologyInputSource
-name|coreSource
-parameter_list|)
-function_decl|;
 comment|/**      * Creates and sets up a default core ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CORE, OntologyInputSource...)</code>.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param coreSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
 name|CoreOntologySpace
 name|createCoreOntologySpace
@@ -85,17 +74,6 @@ parameter_list|,
 name|OntologyInputSource
 modifier|...
 name|coreSources
-parameter_list|)
-function_decl|;
-comment|/**      * Creates and sets up a default custom ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CUSTOM, OntologyInputSource...)</code>.      *       * @deprecated Please use the varargs version of this method      *             {@link #createCustomOntologySpace(IRI, OntologyInputSource...)}.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param customSource      *            the input source for the ontologies in this space.      * @return the generated ontology space.      */
-name|CustomOntologySpace
-name|createCustomOntologySpace
-parameter_list|(
-name|IRI
-name|scopeId
-parameter_list|,
-name|OntologyInputSource
-name|customSource
 parameter_list|)
 function_decl|;
 comment|/**      * Creates and sets up a default custom ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CUSTOM, OntologyInputSource...)</code>.      *       *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param customSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
@@ -123,14 +101,6 @@ parameter_list|,
 name|OntologyInputSource
 modifier|...
 name|ontologySources
-parameter_list|)
-function_decl|;
-comment|/**      * Creates and sets up a default session ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.SESSION)</code>.      *       * @deprecated Please use the varargs version of this method      *             {@link #createSessionOntologySpace(IRI, OntologyInputSource...)}.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @return the generated ontology space.      */
-name|SessionOntologySpace
-name|createSessionOntologySpace
-parameter_list|(
-name|IRI
-name|scopeId
 parameter_list|)
 function_decl|;
 comment|/**      * Creates and sets up a default session ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.SESSION, OntologyInputSource...)</code>.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param sessionSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */

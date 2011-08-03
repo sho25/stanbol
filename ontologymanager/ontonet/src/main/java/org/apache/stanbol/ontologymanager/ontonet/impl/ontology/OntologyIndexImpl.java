@@ -445,7 +445,9 @@ name|getCoreSpace
 argument_list|()
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -467,7 +469,9 @@ name|getCustomSpace
 argument_list|()
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

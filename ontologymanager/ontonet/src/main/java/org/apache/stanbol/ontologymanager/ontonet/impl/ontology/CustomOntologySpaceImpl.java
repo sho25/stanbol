@@ -331,64 +331,18 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologySpaceException
 block|{
-name|OWLOntology
-name|o
-init|=
-name|coreSpace
-operator|.
-name|getTopOntology
-argument_list|()
-decl_stmt|;
-comment|// This does the append thingy
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Attaching "
-operator|+
-name|o
-operator|+
-literal|" TO "
-operator|+
-name|getTopOntology
-argument_list|()
-operator|+
-literal|" ..."
-argument_list|)
-expr_stmt|;
-try|try
-block|{
-comment|// It is in fact the addition of the core space top ontology to the
-comment|// custom space, with import statements and all.
-name|addOntology
-argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|o
-argument_list|,
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
-comment|// log.debug("ok");
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|ex
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"FAILED"
-argument_list|,
-name|ex
-argument_list|)
-expr_stmt|;
-block|}
+comment|// FIXME re-implement!
+comment|//        OWLOntology o = coreSpace.getTopOntology();
+comment|//        // This does the append thingy
+comment|//        log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
+comment|//        try {
+comment|//            // It is in fact the addition of the core space top ontology to the
+comment|//            // custom space, with import statements and all.
+comment|//            addOntology(new RootOntologySource(o, null));
+comment|//            // log.debug("ok");
+comment|//        } catch (Exception ex) {
+comment|//            log.error("FAILED", ex);
+comment|//        }
 block|}
 comment|/**      * Once it is set up, a custom space is write-locked.      */
 annotation|@

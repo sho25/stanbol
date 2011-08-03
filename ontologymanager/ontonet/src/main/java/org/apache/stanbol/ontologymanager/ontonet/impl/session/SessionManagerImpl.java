@@ -1141,7 +1141,9 @@ range|:
 name|so
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 control|)
 block|{
 name|store

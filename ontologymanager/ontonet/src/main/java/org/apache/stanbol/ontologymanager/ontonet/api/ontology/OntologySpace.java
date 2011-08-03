@@ -119,29 +119,32 @@ name|void
 name|clearOntologySpaceListeners
 parameter_list|()
 function_decl|;
-comment|/**      * Returns a Unique Resource Identifier (URI) that identifies this ontology space. For instance, this URI      * could be the parent of (some/most of) the base URIs for the ontologies within this space.<br/>      *<br/>      * A possible way to construct these IDs is by concatenating<code>/{spacetype}</code> (e.g.      *<code>/custom</code>) to the scope IRI. However, this is implementation-dependent.      *       * @return the URI that identifies this ontology space      */
-name|IRI
-name|getID
-parameter_list|()
-function_decl|;
-comment|/**      * Returns all the ontologies encompassed by this ontology space.      *       * @return the set of ontologies in the ontology space      */
-name|Set
-argument_list|<
-name|OWLOntology
-argument_list|>
-name|getOntologies
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the ontology identified by the supplied<i>logical</i> IRI, if such an ontology has been loaded      * in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return the requested ontology, or null if no ontology with this ID has been loaded.      */
-name|OWLOntology
-name|getOntology
+name|boolean
+name|containsOntology
 parameter_list|(
 name|IRI
 name|ontologyIri
 parameter_list|)
 function_decl|;
+comment|/**      * Returns a Unique Resource Identifier (URI) that identifies this ontology space. For instance, this URI      * could be the parent of (some/most of) the base URIs for the ontologies within this space.<br/>      *<br/>      * A possible way to construct these IDs is by concatenating<code>/{spacetype}</code> (e.g.      *<code>/custom</code>) to the scope IRI. However, this is implementation-dependent.      *       * @return the URI that identifies this ontology space      */
+name|IRI
+name|getID
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the ontologies managed by this ontology space.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|getOntologies
+parameter_list|(
 name|boolean
-name|containsOntology
+name|withClosure
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the ontology identified by the supplied<i>logical</i> IRI, if such an ontology has been loaded      * in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return the requested ontology, or null if no ontology with this ID has been loaded.      */
+name|OWLOntology
+name|getOntology
 parameter_list|(
 name|IRI
 name|ontologyIri
@@ -199,29 +202,6 @@ parameter_list|(
 name|boolean
 name|silent
 parameter_list|)
-function_decl|;
-comment|/**      * Sets the supplied ontology as the root ontology that (recursively) references the whole underlying      * ontology network. This actually<i>replaces</i> the ontology to be obtained by a call to      *<code>getTopOntology()</code> with this one, i.e. it is<code>not</code> equivalent to adding this      * ontology to a blank network!<br>      *<br>      * Implementations can arbitrarily behave with respect to the unset<code>createParent</code> parameter      * from the other method signature.      *       * @param ontology      *            the new top ontology.      * @throws OntologySpaceModificationException      *             if the ontology space is read-only or the ontology could not be removed.      */
-name|void
-name|setTopOntology
-parameter_list|(
-name|OntologyInputSource
-name|ontologySource
-parameter_list|)
-throws|throws
-name|UnmodifiableOntologySpaceException
-function_decl|;
-comment|/**      * Sets the supplied ontology as the root ontology that (recursively) references the whole underlying      * ontology network. This actually<i>replaces</i> the ontology to be obtained by a call to      *<code>getTopOntology()</code> with this one, i.e. it is<code>not</code> equivalent to adding this      * ontology to a blank network!      *       * @param ontology      *            the new top ontology.      * @param createParent      *            if true, a new ontology will be created and set as the top ontology that will import this      *            one.      * @throws UnmodifiableOntologySpaceException      *             if the ontology space is read-only.      */
-name|void
-name|setTopOntology
-parameter_list|(
-name|OntologyInputSource
-name|ontologySource
-parameter_list|,
-name|boolean
-name|createParent
-parameter_list|)
-throws|throws
-name|UnmodifiableOntologySpaceException
 function_decl|;
 comment|/**      * Bootstraps the ontology space. In some cases (such as with core and custom spaces) this also implies      * write-locking its ontologies.      */
 name|void

@@ -209,41 +209,7 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLOntologyCreationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologyManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|Logger
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|LoggerFactory
 import|;
 end_import
 
@@ -324,84 +290,16 @@ name|store
 comment|/* , scopeID */
 argument_list|)
 expr_stmt|;
-name|IRI
-name|iri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
-name|getID
-argument_list|()
-argument_list|)
-operator|+
-literal|"/root.owl"
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|setTopOntology
-argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|ontologyManager
-operator|.
-name|createOntology
-argument_list|(
-name|iri
-argument_list|)
-argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Could not create session space root ontology "
-operator|+
-name|iri
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-comment|// Should not happen...
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Session space ontology "
-operator|+
-name|iri
-operator|+
-literal|" was denied modification by the space itself. This should not happen."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
+comment|// IRI iri = IRI.create(StringUtils.stripIRITerminator(getID()) + "/root.owl");
+comment|// try {
+comment|// setTopOntology(new RootOntologySource(ontologyManager.createOntology(iri), null), false);
+comment|// } catch (OWLOntologyCreationException e) {
+comment|// log.error("Could not create session space root ontology " + iri, e);
+comment|// } catch (UnmodifiableOntologySpaceException e) {
+comment|// // Should not happen...
+comment|// log.error("Session space ontology " + iri
+comment|// + " was denied modification by the space itself. This should not happen.", e);
+comment|// }
 block|}
 specifier|public
 name|SessionOntologySpaceImpl
@@ -459,95 +357,17 @@ comment|/* scopeID, */
 name|ontologyManager
 argument_list|)
 expr_stmt|;
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|IRI
-name|iri
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
-name|getID
-argument_list|()
-argument_list|)
-operator|+
-literal|"/root.owl"
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|setTopOntology
-argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|ontologyManager
-operator|.
-name|createOntology
-argument_list|(
-name|iri
-argument_list|)
-argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Could not create session space root ontology "
-operator|+
-name|iri
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-comment|// Should not happen...
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Session space ontology "
-operator|+
-name|iri
-operator|+
-literal|" was denied modification by the space itself. This should not happen."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
+comment|// Logger log = LoggerFactory.getLogger(getClass());
+comment|// IRI iri = IRI.create(StringUtils.stripIRITerminator(getID()) + "/root.owl");
+comment|// try {
+comment|// setTopOntology(new RootOntologySource(ontologyManager.createOntology(iri), null), false);
+comment|// } catch (OWLOntologyCreationException e) {
+comment|// log.error("Could not create session space root ontology " + iri, e);
+comment|// } catch (UnmodifiableOntologySpaceException e) {
+comment|// // Should not happen...
+comment|// log.error("Session space ontology " + iri
+comment|// + " was denied modification by the space itself. This should not happen.", e);
+comment|// }
 block|}
 annotation|@
 name|Override
@@ -564,75 +384,20 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologySpaceException
 block|{
-if|if
-condition|(
-operator|!
-operator|(
-name|space
-operator|instanceof
-name|SessionOntologySpace
-operator|)
-condition|)
-block|{
-name|OWLOntology
-name|o
-init|=
-name|space
-operator|.
-name|getTopOntology
-argument_list|()
-decl_stmt|;
-comment|// This does the append thingy
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Attaching "
-operator|+
-name|o
-operator|+
-literal|" TO "
-operator|+
-name|getTopOntology
-argument_list|()
-operator|+
-literal|" ..."
-argument_list|)
-expr_stmt|;
-try|try
-block|{
-comment|// It is in fact the addition of the core space top ontology to the
-comment|// custom space, with import statements and all.
-name|addOntology
-argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|o
-argument_list|,
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
-comment|// log.debug("ok");
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|ex
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"FAILED"
-argument_list|,
-name|ex
-argument_list|)
-expr_stmt|;
-block|}
-block|}
+comment|// FIXME re-implement!
+comment|//        if (!(space instanceof SessionOntologySpace)) {
+comment|//            OWLOntology o = space.getTopOntology();
+comment|//            // This does the append thingy
+comment|//            log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
+comment|//            try {
+comment|//                // It is in fact the addition of the core space top ontology to the
+comment|//                // custom space, with import statements and all.
+comment|//                addOntology(new RootOntologySource(o, null));
+comment|//                // log.debug("ok");
+comment|//            } catch (Exception ex) {
+comment|//                log.error("FAILED", ex);
+comment|//            }
+comment|//        }
 block|}
 annotation|@
 name|Override

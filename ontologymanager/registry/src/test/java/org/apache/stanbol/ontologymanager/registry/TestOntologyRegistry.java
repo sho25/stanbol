@@ -989,6 +989,7 @@ argument_list|(
 name|ontologySource
 argument_list|)
 expr_stmt|;
+comment|// FIXME : no longer use the top ontology?
 name|assertTrue
 argument_list|(
 name|space
@@ -1004,7 +1005,9 @@ argument_list|(
 name|space
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 operator|.
 name|contains
 argument_list|(
