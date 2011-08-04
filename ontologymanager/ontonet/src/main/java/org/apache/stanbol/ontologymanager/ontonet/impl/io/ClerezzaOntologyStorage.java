@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -437,6 +437,22 @@ name|JenaToOwlConvert
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|owl
+operator|.
+name|util
+operator|.
+name|OWLUtils
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
@@ -470,12 +486,12 @@ decl_stmt|;
 name|WeightedTcProvider
 name|weightedTcProvider
 decl_stmt|;
-comment|/** 	 * This default constructor is<b>only</b> intended to be used by the OSGI 	 * environment with Service Component Runtime support. 	 *<p> 	 * DO NOT USE to manually create instances - the ClerezzaStorage instances 	 * do need to be configured! YOU NEED TO USE 	 * {@link #ClerezzaStorage(TcManager, WeightedTcProvider, OntologyStoreProvider)} 	 * or its overloads, to parse the configuration and then initialise the rule 	 * store if running outside a OSGI environment. 	 */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ClerezzaStorage instances do need to be configured! YOU      * NEED TO USE {@link #ClerezzaStorage(TcManager, WeightedTcProvider, OntologyStoreProvider)} or its      * overloads, to parse the configuration and then initialise the rule store if running outside a OSGI      * environment.      */
 specifier|protected
 name|ClerezzaOntologyStorage
 parameter_list|()
-block|{  	}
-comment|/** 	 * Basic constructor to be used if outside of an OSGi environment. Invokes 	 * default constructor. 	 *  	 * @param tcManager 	 * @param wtcProvider 	 * @param osProvider 	 */
+block|{      }
+comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      *       * @param tcManager      * @param wtcProvider      * @param osProvider      */
 specifier|public
 name|ClerezzaOntologyStorage
 parameter_list|(
@@ -592,7 +608,7 @@ name|Object
 argument_list|>
 name|configuration
 parameter_list|)
-block|{  	}
+block|{      }
 specifier|public
 name|void
 name|clear
@@ -969,11 +985,14 @@ name|ParseException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-name|e
+name|log
 operator|.
-name|printStackTrace
-argument_list|()
+name|error
+argument_list|(
+literal|"Unable to execute SPARQL. "
+argument_list|,
+name|e
+argument_list|)
 expr_stmt|;
 block|}
 name|Model
@@ -1047,19 +1066,23 @@ name|mg2
 init|=
 literal|null
 decl_stmt|;
+name|IRI
+name|iri
+init|=
+name|OWLUtils
+operator|.
+name|getIdentifyingIRI
+argument_list|(
+name|o
+argument_list|)
+decl_stmt|;
 name|UriRef
 name|ref
 init|=
 operator|new
 name|UriRef
 argument_list|(
-name|o
-operator|.
-name|getOntologyID
-argument_list|()
-operator|.
-name|getOntologyIRI
-argument_list|()
+name|iri
 operator|.
 name|toString
 argument_list|()

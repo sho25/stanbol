@@ -994,7 +994,7 @@ name|assertTrue
 argument_list|(
 name|space
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 operator|!=
 literal|null
@@ -1013,7 +1013,7 @@ name|contains
 argument_list|(
 name|space
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 argument_list|)
 argument_list|)
@@ -1061,7 +1061,7 @@ operator|.
 name|getCoreSpace
 argument_list|()
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 operator|!=
 literal|null
@@ -1108,7 +1108,7 @@ literal|null
 operator|&&
 name|space
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 operator|!=
 literal|null

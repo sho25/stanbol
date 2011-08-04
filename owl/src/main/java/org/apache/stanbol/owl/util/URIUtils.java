@@ -46,6 +46,7 @@ specifier|public
 class|class
 name|URIUtils
 block|{
+comment|/**      * Removes either the fragment, or query, or last path component from a URI, whatever it finds first.      *       * @param iri      * @return      */
 specifier|public
 specifier|static
 name|IRI

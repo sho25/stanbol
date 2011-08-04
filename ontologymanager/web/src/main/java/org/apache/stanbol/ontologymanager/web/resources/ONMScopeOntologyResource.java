@@ -939,7 +939,7 @@ operator|.
 name|getCoreSpace
 argument_list|()
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 argument_list|)
 operator|.
@@ -974,7 +974,7 @@ operator|.
 name|getCustomSpace
 argument_list|()
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 argument_list|)
 operator|.
@@ -1007,7 +1007,7 @@ argument_list|(
 name|ontiri
 argument_list|)
 operator|.
-name|getTopOntology
+name|asOWLOntology
 argument_list|()
 argument_list|)
 operator|.

@@ -115,6 +115,11 @@ name|OntologySpaceListener
 name|listener
 parameter_list|)
 function_decl|;
+comment|/**      * Returns the ontology that serves as a root module for this ontology space.      *       * @return the OWL form of this ontology space.      */
+name|OWLOntology
+name|asOWLOntology
+parameter_list|()
+function_decl|;
 name|void
 name|clearOntologySpaceListeners
 parameter_list|()
@@ -155,11 +160,6 @@ argument_list|<
 name|OntologySpaceListener
 argument_list|>
 name|getOntologyScopeListeners
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the ontology that serves as a root module for this ontology space.      *       * @return the root module of the ontology space      */
-name|OWLOntology
-name|getTopOntology
 parameter_list|()
 function_decl|;
 comment|/**      * Determines if the ontology identified by the supplied<i>logical</i> IRI has been loaded in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return true if an ontology with this ID has been loaded in this space.      */
