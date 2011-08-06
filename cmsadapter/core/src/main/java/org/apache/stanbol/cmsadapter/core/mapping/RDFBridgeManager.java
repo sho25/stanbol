@@ -330,7 +330,7 @@ name|cardinality
 operator|=
 name|ReferenceCardinality
 operator|.
-name|MANDATORY_MULTIPLE
+name|OPTIONAL_MULTIPLE
 argument_list|,
 name|referenceInterface
 operator|=
@@ -378,7 +378,7 @@ name|cardinality
 operator|=
 name|ReferenceCardinality
 operator|.
-name|MANDATORY_MULTIPLE
+name|OPTIONAL_MULTIPLE
 argument_list|,
 name|referenceInterface
 operator|=
@@ -437,6 +437,25 @@ parameter_list|)
 throws|throws
 name|RepositoryAccessException
 block|{
+if|if
+condition|(
+name|rdfBridges
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|0
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"There is no RDF Bridge to execute"
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 comment|// According to connection type get RDF mapper, repository accessor, session
 name|RDFMapper
 name|mapper
