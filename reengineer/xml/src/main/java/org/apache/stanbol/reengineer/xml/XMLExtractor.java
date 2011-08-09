@@ -1562,7 +1562,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Activated KReS Semion RDB Reengineer"
+literal|"Stanbol XML Reengineer active."
 argument_list|)
 expr_stmt|;
 block|}
