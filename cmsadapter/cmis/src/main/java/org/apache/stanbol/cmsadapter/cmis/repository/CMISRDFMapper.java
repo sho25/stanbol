@@ -602,6 +602,9 @@ parameter_list|(
 name|Object
 name|session
 parameter_list|,
+name|String
+name|rootPath
+parameter_list|,
 name|MGraph
 name|annotatedGraph
 parameter_list|)
@@ -630,22 +633,6 @@ name|rootObjects
 control|)
 block|{
 name|String
-name|documentPath
-init|=
-name|RDFBridgeHelper
-operator|.
-name|getResourceStringValue
-argument_list|(
-name|root
-argument_list|,
-name|CMSAdapterVocabulary
-operator|.
-name|CMS_OBJECT_PATH
-argument_list|,
-name|annotatedGraph
-argument_list|)
-decl_stmt|;
-name|String
 name|documentName
 init|=
 name|RDFBridgeHelper
@@ -666,7 +653,7 @@ name|rootFolder
 init|=
 name|checkCreateParentNodes
 argument_list|(
-name|documentPath
+name|rootPath
 argument_list|,
 operator|(
 name|Session
@@ -1276,13 +1263,13 @@ return|return
 name|documentMGraph
 return|;
 block|}
-comment|/**      * Takes path of a root object in the annotated RDF and tries to check parent folders. If parent folders      * do not exist, they are created.      *       * @param nodePath      *            path of a root object      * @param session      *            session to access repository      * @return      * @throws RDFBridgeException      *             when another object which is not a folder in the specified path      */
+comment|/**      * Takes a path and tries to check nodes that forms that path. If nodes do not exist, they are created.      *       * @param rootPath      *            path in which root objects will be created or existing one will be searched      * @param session      *            session to access repository      * @return      * @throws RDFBridgeException      *             when another object which is not a folder in the specified path      */
 specifier|private
 name|Folder
 name|checkCreateParentNodes
 parameter_list|(
 name|String
-name|nodePath
+name|rootPath
 parameter_list|,
 name|Session
 name|session
@@ -1302,7 +1289,7 @@ name|String
 index|[]
 name|pathSections
 init|=
-name|nodePath
+name|rootPath
 operator|.
 name|split
 argument_list|(
@@ -1326,8 +1313,6 @@ operator|<
 name|pathSections
 operator|.
 name|length
-operator|-
-literal|1
 condition|;
 name|i
 operator|++

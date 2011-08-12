@@ -53,6 +53,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|Graph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|MGraph
 import|;
 end_import
@@ -442,6 +458,7 @@ name|Reference
 name|RepositoryAccessManager
 name|accessManager
 decl_stmt|;
+comment|/**      * This method runs the collected {@link RDFBridge}s on the RDF data passed in a {@link Graph} instance.      * Afterwards, according to connection info, it tries to fetch related {@link RDFMapper} instance and      * delegates process to the related mapper.      *       * @param connectionInfo      *            credentials to access repository      * @param rootPath      *            path in which the root objects in the annotated graph will be stored      * @param rawRDFData      *            RDF to be annotated      * @throws RepositoryAccessException      * @throws RDFBridgeException      */
 specifier|public
 name|void
 name|storeRDFToRepository
@@ -449,7 +466,10 @@ parameter_list|(
 name|ConnectionInfo
 name|connectionInfo
 parameter_list|,
-name|MGraph
+name|String
+name|rootPath
+parameter_list|,
+name|Graph
 name|rawRDFData
 parameter_list|)
 throws|throws
@@ -476,7 +496,8 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-comment|// According to connection type get RDF mapper, repository accessor, session
+comment|// According to connection type get RDF mapper, repository accessor,
+comment|// session
 name|RDFMapper
 name|mapper
 init|=
@@ -506,19 +527,27 @@ name|connectionInfo
 argument_list|)
 decl_stmt|;
 comment|// Annotate raw RDF with CMS vocabulary annotations according to bridges
-name|CMSVocabularyAnnotator
-name|annotator
-init|=
-operator|new
-name|CMSVocabularyAnnotator
-argument_list|()
+name|MGraph
+name|annotatedGraph
 decl_stmt|;
-name|annotator
-operator|.
-name|addAnnotationsToGraph
-argument_list|(
+for|for
+control|(
+name|RDFBridge
+name|bridge
+range|:
 name|rdfBridges
-argument_list|,
+control|)
+block|{
+comment|// first annotate raw RDF with
+comment|// TODO: it may be better to expand annotated graph accumulatively.
+comment|// Each annotation operation would add new ones onto already
+comment|// existing ones
+name|annotatedGraph
+operator|=
+name|bridge
+operator|.
+name|annotateGraph
+argument_list|(
 name|rawRDFData
 argument_list|)
 expr_stmt|;
@@ -529,9 +558,12 @@ name|storeRDFinRepository
 argument_list|(
 name|session
 argument_list|,
-name|rawRDFData
+name|rootPath
+argument_list|,
+name|annotatedGraph
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 specifier|private
 name|RDFMapper

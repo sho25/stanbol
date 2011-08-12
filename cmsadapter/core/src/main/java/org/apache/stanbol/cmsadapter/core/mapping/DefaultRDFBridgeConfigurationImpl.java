@@ -159,7 +159,7 @@ name|servicesapi
 operator|.
 name|mapping
 operator|.
-name|RDFBridge
+name|RDFBridgeConfiguration
 import|;
 end_import
 
@@ -230,7 +230,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Main aim of this class is to provide ability to create {@code RDFBridge} instances through the  * configuration interface of Felix console. Currently there are 5 configuration field in this implementation  * of {@link RDFBridge}:  *   *<ul>  *<li><b>Resource selector:</b></li> This property is used to filter resources from the RDF data. It should  * have the following syntax:<br>  *<br>  * rdf:Type> skos:Concept<br>  *<br>  * This example states that triples having<b>rdf:Type</b> predicate and<b>skos:Concept</b> object will be  * filtered. And subject of selected triples indicates the resource to be created as node/object in the  * repository. It is also acceptable to pass full URIs such as<br>  * http://www.w3.org/1999/02/22-rdf-syntax-ns#Type> http://www.w3.org/2004/02/skos/core#Concept<br>  *<li><b>Name:</b></li> This property indicates the predicate which points to the name of node/object to be  * created in the repository. It should indicate a single URI such as<b>rdfs:label</b> or  *<b>http://www.w3.org/2000/01/rdf-schema#label</b>. Actually name value is obtained through the triple  * (s,p,o) where s is one of the subjects filtered by the "Resource Selector" configuration parameter, p is  * this parameter.<br>  *<li><b>Properties:</b></li> This property specifies the properties of nodes/objects to be created in the  * repository. Value of this configuration should be like<b>skos:Definition> definition</b> or  *<b>skos:Definition</b>. First option states that skos:Definition property of a filtered subject will be  * created as a property having name "repository" of repository object. In the second case the name of the  * property will directly be "skos:Definition".  *<li><b>Children:</b></li> This property specifies the children of nodes/objecs to be created in the  * repository. Value of this configuration should be like<b>skos:narrower> narrowerObject</b> or  *<b>skos:narrower> rdfs:label</b>. First option has same logic with the previous parameter. In the second  * case, rdfs:label of resource representing child object will be set as the name of child object/node in the  * repository. This option would be useful to create hierarchies.  *</ul>  *   * @author suat  *   */
+comment|/**  * Main aim of this class is to provide ability to create {@code RDFBridgeConfiguration}s through the  * configuration interface of Felix console. Currently there are 5 configuration field:  *   *<ul>  *<li><b>Resource selector:</b></li> This property is used to filter resources from the RDF data. It should  * have the following syntax:<br>  *<br>  * rdf:Type> skos:Concept<br>  *<br>  * This example states that triples having<b>rdf:Type</b> predicate and<b>skos:Concept</b> object will be  * filtered. And subject of selected triples indicates the resource to be created as node/object in the  * repository. It is also acceptable to pass full URIs such as<br>  * http://www.w3.org/1999/02/22-rdf-syntax-ns#Type> http://www.w3.org/2004/02/skos/core#Concept<br>  *<li><b>Name:</b></li> This property indicates the predicate which points to the name of node/object to be  * created in the repository. It should indicate a single URI such as<b>rdfs:label</b> or  *<b>http://www.w3.org/2000/01/rdf-schema#label</b>. Actually name value is obtained through the triple  * (s,p,o) where s is one of the subjects filtered by the "Resource Selector" configuration parameter, p is  * this parameter.<br>  *<li><b>Properties:</b></li> This property specifies the properties of nodes/objects to be created in the  * repository. Value of this configuration should be like<b>skos:Definition> definition</b> or  *<b>skos:Definition</b>. First option states that skos:Definition property of a filtered subject will be  * created as a property having name "definition" of repository object. In the second case the name of the  * property will directly be "skos:Definition".  *<li><b>Children:</b></li> This property specifies the children of nodes/objecs to be created in the  * repository. Value of this configuration should be like<b>skos:narrower> narrowerObject</b> or  *<b>skos:narrower> rdfs:label</b>. First option has same logic with the previous parameter. In the second  * case, rdfs:label of resource representing child object will be set as the name of child object/node in the  * repository. This option would be useful to create hierarchies.  *</ul>  *   * @author suat  *   */
 end_comment
 
 begin_class
@@ -254,7 +254,7 @@ name|Service
 argument_list|(
 name|value
 operator|=
-name|RDFBridge
+name|RDFBridgeConfiguration
 operator|.
 name|class
 argument_list|)
@@ -269,7 +269,7 @@ name|Property
 argument_list|(
 name|name
 operator|=
-name|RDFBridgeImpl
+name|DefaultRDFBridgeConfigurationImpl
 operator|.
 name|PROP_RESOURCE_SELECTOR
 argument_list|,
@@ -283,7 +283,7 @@ name|Property
 argument_list|(
 name|name
 operator|=
-name|RDFBridgeImpl
+name|DefaultRDFBridgeConfigurationImpl
 operator|.
 name|PROP_NAME
 argument_list|,
@@ -297,7 +297,7 @@ name|Property
 argument_list|(
 name|name
 operator|=
-name|RDFBridgeImpl
+name|DefaultRDFBridgeConfigurationImpl
 operator|.
 name|PROP_PROPERTIES
 argument_list|,
@@ -319,7 +319,7 @@ name|Property
 argument_list|(
 name|name
 operator|=
-name|RDFBridgeImpl
+name|DefaultRDFBridgeConfigurationImpl
 operator|.
 name|PROP_CHILDREN
 argument_list|,
@@ -333,23 +333,13 @@ block|{
 literal|"skos:narrower> narrowerConcept"
 block|}
 argument_list|)
-block|,
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|RDFBridgeImpl
-operator|.
-name|PROP_CMS_PATH
-argument_list|)
 block|}
 argument_list|)
 specifier|public
 class|class
-name|RDFBridgeImpl
+name|DefaultRDFBridgeConfigurationImpl
 implements|implements
-name|RDFBridge
+name|RDFBridgeConfiguration
 block|{
 specifier|public
 specifier|static
@@ -383,14 +373,6 @@ name|PROP_CHILDREN
 init|=
 literal|"org.apache.stanbol.cmsadapter.rdfbridge.children"
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|PROP_CMS_PATH
-init|=
-literal|"org.apaches.stanbol.cmsadapter.rdfbridge.cmsPath"
-decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -401,14 +383,10 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|RDFBridgeImpl
+name|DefaultRDFBridgeConfigurationImpl
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-specifier|private
-name|String
-name|targetCMSPath
 decl_stmt|;
 specifier|private
 name|UriRef
@@ -511,22 +489,6 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|targetCMSPath
-operator|=
-operator|(
-name|String
-operator|)
-name|checkProperty
-argument_list|(
-name|properties
-argument_list|,
-name|PROP_CMS_PATH
-argument_list|,
-literal|true
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
 name|nameResource
 operator|=
 name|parseUriRefFromConfig
@@ -544,19 +506,6 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getTargetCMSPath
-parameter_list|()
-block|{
-return|return
-name|this
-operator|.
-name|targetCMSPath
-return|;
 block|}
 annotation|@
 name|Override

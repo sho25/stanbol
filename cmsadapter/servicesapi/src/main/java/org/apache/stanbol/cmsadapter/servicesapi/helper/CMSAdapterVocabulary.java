@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class contains necessary {@link Resource}s and {@link Property}ies that are used in the scope of CMS  * Adapter component.  *   * @author srdc  *   */
+comment|/**  * This class contains necessary {@link Resource}s and {@link Property}ies that  * are used in the scope of CMS Adapter component.  *   * @author suat  *   */
 end_comment
 
 begin_class
@@ -134,7 +134,7 @@ name|PATH_DELIMITER
 operator|+
 name|CMS_ADAPTER_VOCABULARY_PREFIX
 decl_stmt|;
-comment|/*      * Property to represent the path of the CMS item      */
+comment|/* 	 * Property to represent the path of the CMS item 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -156,7 +156,7 @@ argument_list|,
 name|CMSAD_PATH_PROP_NAME
 argument_list|)
 decl_stmt|;
-comment|/*      * Property to keep mapping between resource name and its unique reference      */
+comment|/* 	 * Property to keep mapping between resource name and its unique reference 	 */
 specifier|private
 specifier|static
 specifier|final
@@ -178,7 +178,7 @@ argument_list|,
 name|CMSAD_RESOURCE_REF_PROP_NAME
 argument_list|)
 decl_stmt|;
-comment|/*      * Property to keep source object type definition of a datatype property or object property      */
+comment|/* 	 * Property to keep source object type definition of a datatype property or 	 * object property 	 */
 specifier|private
 specifier|static
 specifier|final
@@ -200,7 +200,7 @@ argument_list|,
 name|CMSAD_PROPERTY_SOURCE_OBJECT_PROP_NAME
 argument_list|)
 decl_stmt|;
-comment|/**      * Property to access metadata of a specific cms object.      */
+comment|/** 	 * Property to access metadata of a specific cms object. 	 */
 specifier|private
 specifier|static
 specifier|final
@@ -222,7 +222,7 @@ argument_list|,
 name|CMSAD_PROPERTY_CONTENT_ITEM_REF_NAME
 argument_list|)
 decl_stmt|;
-comment|/*      * Properties to store connection info in the ontology      */
+comment|/* 	 * Properties to store connection info in the ontology 	 */
 comment|// connection info resource
 specifier|private
 specifier|static
@@ -355,7 +355,7 @@ argument_list|,
 name|CONNECTION_TYPE_PROP_NAME
 argument_list|)
 decl_stmt|;
-comment|/*      * Properties to store bridge definitions      */
+comment|/* 	 * Properties to store bridge definitions 	 */
 comment|// bridge definitions resource
 specifier|private
 specifier|static
@@ -464,7 +464,8 @@ name|local
 argument_list|)
 return|;
 block|}
-comment|/**      * Represent the RDF type of CMS Object in the content management system      */
+comment|/* 	 * CMS Vocabulary Annotations: 	 *  	 * Below UriRef instances are used while annotating external RDF data. They 	 * form a standard vocabulary to consisting of content repository elements. 	 * Through this standard vocabulary, annotated RDF is reflected into the 	 * content repository. 	 */
+comment|/** 	 * Represent the RDF type of CMS Object in the content management system 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -481,7 +482,7 @@ operator|+
 literal|"CMSObject"
 argument_list|)
 decl_stmt|;
-comment|/**      * Represents a reference to name of a CMS Object      */
+comment|/** 	 * Represents a reference to name of a CMS Object 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -496,7 +497,7 @@ operator|+
 literal|"#name"
 argument_list|)
 decl_stmt|;
-comment|/**      * Represents a reference to path of a CMS Object      */
+comment|/** 	 * Represents a reference to path of a CMS Object 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -511,7 +512,7 @@ operator|+
 literal|"#path"
 argument_list|)
 decl_stmt|;
-comment|/**      * Represents a reference to parent of a CMS Object      */
+comment|/** 	 * Represents a reference to parent of a CMS Object 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -526,7 +527,7 @@ operator|+
 literal|"#parentRef"
 argument_list|)
 decl_stmt|;
-comment|/**      * Represents a reference to a property of a CMS Object      */
+comment|/** 	 * Represents a reference to a property of a CMS Object 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -541,7 +542,7 @@ operator|+
 literal|"#hasProperty"
 argument_list|)
 decl_stmt|;
-comment|/**      * Represents a reference to name of a property of a CMS Object      */
+comment|/** 	 * Represents a reference to name of a property of a CMS Object 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -556,7 +557,7 @@ operator|+
 literal|"#propertyName"
 argument_list|)
 decl_stmt|;
-comment|/**      * Represents a reference to URI of a property of a CMS Object      */
+comment|/** 	 * Represents a reference to URI of a property of a CMS Object 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -569,21 +570,6 @@ argument_list|(
 name|CMS_ADAPTER_VOCABULARY_URI
 operator|+
 literal|"#propertyURI"
-argument_list|)
-decl_stmt|;
-comment|/**      * Represents a reference to a child of a CMS Object      */
-specifier|public
-specifier|static
-specifier|final
-name|UriRef
-name|CMS_OBJECT_HAS_CHILD
-init|=
-operator|new
-name|UriRef
-argument_list|(
-name|CMS_ADAPTER_VOCABULARY_URI
-operator|+
-literal|"#childRef"
 argument_list|)
 decl_stmt|;
 block|}

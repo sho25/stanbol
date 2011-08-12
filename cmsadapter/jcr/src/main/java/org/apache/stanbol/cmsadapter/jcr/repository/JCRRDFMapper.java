@@ -321,6 +321,9 @@ parameter_list|(
 name|Object
 name|session
 parameter_list|,
+name|String
+name|rootPath
+parameter_list|,
 name|MGraph
 name|annotatedGraph
 parameter_list|)
@@ -347,22 +350,6 @@ name|rootObjects
 control|)
 block|{
 name|String
-name|nodePath
-init|=
-name|RDFBridgeHelper
-operator|.
-name|getResourceStringValue
-argument_list|(
-name|root
-argument_list|,
-name|CMSAdapterVocabulary
-operator|.
-name|CMS_OBJECT_PATH
-argument_list|,
-name|annotatedGraph
-argument_list|)
-decl_stmt|;
-name|String
 name|nodeName
 init|=
 name|RDFBridgeHelper
@@ -383,7 +370,7 @@ name|parent
 init|=
 name|checkCreateParentNodes
 argument_list|(
-name|nodePath
+name|rootPath
 argument_list|,
 operator|(
 name|Session
@@ -860,13 +847,13 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Takes path of a root object in the annotated RDF and tries to check parent nodes. If parent nodes do      * not exist, they are created.      *       * @param nodePath      *            path of a root object      * @param session      *            session to access repository      * @return the first level parent {@link Node} of the node specified with<code>nodePath</code> if there      *         is not any exception, otherwise returns<code>null</code>.      */
+comment|/**      * Takes a path and tries to check nodes that forms that path. If nodes do not exist, they are created.      *       * @param rootPath      *            path in which root objects will be created or existing one will be searched      * @param session      *            session to access repository      * @return the first level parent {@link Node} of the node specified with<code>nodePath</code> if there      *         is not any exception, otherwise returns<code>null</code>.      */
 specifier|private
 name|Node
 name|checkCreateParentNodes
 parameter_list|(
 name|String
-name|nodePath
+name|rootPath
 parameter_list|,
 name|Session
 name|session
@@ -907,7 +894,7 @@ name|warn
 argument_list|(
 literal|"Failed to get root node while trying to get Node for path: {}"
 argument_list|,
-name|nodePath
+name|rootPath
 argument_list|,
 name|e
 argument_list|)
@@ -920,7 +907,7 @@ name|String
 index|[]
 name|pathSections
 init|=
-name|nodePath
+name|rootPath
 operator|.
 name|split
 argument_list|(
@@ -939,8 +926,6 @@ operator|<
 name|pathSections
 operator|.
 name|length
-operator|-
-literal|1
 condition|;
 name|i
 operator|++
