@@ -3348,7 +3348,7 @@ comment|//close the FILTER and the graph pattern
 block|}
 block|}
 comment|/**      * (Creates AND Text) OR (Query AND String) like queries based on the      * parsed TextConstraint as used by {@link EndpointTypeEnum#LARQ LARQ} and      * {@link EndpointTypeEnum#Virtuoso VIRTUOSO} SPARQL endpoints to speed up      * full text queries.      * @param constraints the as returned by {@link TextConstraint#getTexts()}      * @return the full text query string       */
-specifier|private
+specifier|protected
 specifier|static
 name|String
 name|createFullTextQueryString
@@ -3493,6 +3493,20 @@ literal|" AND "
 argument_list|)
 expr_stmt|;
 block|}
+comment|// we need to double the backslashes because of replaceAll takes a regular expression
+comment|// as input.
+name|String
+name|escapedWord
+init|=
+name|word
+operator|.
+name|replaceAll
+argument_list|(
+literal|"\\\""
+argument_list|,
+literal|"\\\\\""
+argument_list|)
+decl_stmt|;
 name|textQuery
 operator|.
 name|append
@@ -3502,7 +3516,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|word
+name|escapedWord
 argument_list|)
 operator|.
 name|append
