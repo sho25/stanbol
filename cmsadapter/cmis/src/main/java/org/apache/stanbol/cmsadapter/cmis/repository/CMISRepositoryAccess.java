@@ -2608,7 +2608,7 @@ parameter_list|)
 block|{
 name|logger
 operator|.
-name|debug
+name|warn
 argument_list|(
 literal|"Error at trying to get session from connection info"
 argument_list|,
