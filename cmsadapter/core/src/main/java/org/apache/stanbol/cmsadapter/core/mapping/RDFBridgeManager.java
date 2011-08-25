@@ -79,6 +79,24 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|impl
+operator|.
+name|SimpleMGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|felix
 operator|.
 name|scr
@@ -318,7 +336,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This component keeps track of {@link RDFBridge}s and {@link RDFMapper}s in the environment and it provides  * a method to submit RDF data to be annotated according to<code>RDFBridge</code>s.<code>RDFMapper</code>s  * update repository based on the annotated RDF.  *   * @author suat  *   */
+comment|/**  * This component keeps track of {@link RDFBridge}s and {@link RDFMapper}s in the environment and it provides  * a method to submit RDF data to be annotated according to<code>RDFBridge</code>s. Then  *<code>RDFMapper</code>s update repository based on the annotated RDF. It also allows generating RDF from  * the content repository.  *   * @author suat  *   */
 end_comment
 
 begin_class
@@ -458,16 +476,13 @@ name|Reference
 name|RepositoryAccessManager
 name|accessManager
 decl_stmt|;
-comment|/**      * This method runs the collected {@link RDFBridge}s on the RDF data passed in a {@link Graph} instance.      * Afterwards, according to connection info, it tries to fetch related {@link RDFMapper} instance and      * delegates process to the related mapper.      *       * @param connectionInfo      *            credentials to access repository      * @param rootPath      *            path in which the root objects in the annotated graph will be stored      * @param rawRDFData      *            RDF to be annotated      * @throws RepositoryAccessException      * @throws RDFBridgeException      */
+comment|/**      * This method runs the collected {@link RDFBridge}s on the RDF data passed in a {@link Graph} instance.      * Afterwards, according to connection info, it tries to fetch related {@link RDFMapper} instance and      * delegates process to the related mapper.      *       * @param connectionInfo      *            credentials to access repository      * @param rawRDFData      *            RDF to be annotated      * @throws RepositoryAccessException      * @throws RDFBridgeException      */
 specifier|public
 name|void
 name|storeRDFToRepository
 parameter_list|(
 name|ConnectionInfo
 name|connectionInfo
-parameter_list|,
-name|String
-name|rootPath
 parameter_list|,
 name|Graph
 name|rawRDFData
@@ -516,6 +531,22 @@ argument_list|(
 name|connectionInfo
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|repositoryAccess
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Failed to retrieve a repository access with the specified connection info"
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 name|Object
 name|session
 init|=
@@ -529,6 +560,10 @@ decl_stmt|;
 comment|// Annotate raw RDF with CMS vocabulary annotations according to bridges
 name|MGraph
 name|annotatedGraph
+init|=
+operator|new
+name|SimpleMGraph
+argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -538,19 +573,19 @@ range|:
 name|rdfBridges
 control|)
 block|{
-comment|// first annotate raw RDF with
-comment|// TODO: it may be better to expand annotated graph accumulatively.
-comment|// Each annotation operation would add new ones onto already
-comment|// existing ones
 name|annotatedGraph
-operator|=
+operator|.
+name|addAll
+argument_list|(
 name|bridge
 operator|.
 name|annotateGraph
 argument_list|(
 name|rawRDFData
 argument_list|)
+argument_list|)
 expr_stmt|;
+block|}
 comment|// Store annotated RDF in repository
 name|mapper
 operator|.
@@ -558,12 +593,124 @@ name|storeRDFinRepository
 argument_list|(
 name|session
 argument_list|,
-name|rootPath
-argument_list|,
 name|annotatedGraph
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * This method gets the RDF from the content repository based on the path configurations of      * {@link RDFBridge}s and annotate them using {@link RDFBridge#annotateCMSGraph(MGraph)}.      *       * @param connectionInfo      *            is the object that holds all necessary information to connect repository.      * @return {@link MGraph} formed by the aggregation of generated RDF for each RDF bridge      * @throws RepositoryAccessException      * @throws RDFBridgeException      */
+specifier|public
+name|MGraph
+name|generateRDFFromRepository
+parameter_list|(
+name|ConnectionInfo
+name|connectionInfo
+parameter_list|)
+throws|throws
+name|RepositoryAccessException
+throws|,
+name|RDFBridgeException
+block|{
+if|if
+condition|(
+name|rdfBridges
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|0
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"There is no RDF Bridge to execute"
+argument_list|)
+expr_stmt|;
+return|return
+operator|new
+name|SimpleMGraph
+argument_list|()
+return|;
+block|}
+comment|// According to connection type get RDF mapper, repository accessor,
+comment|// session
+name|RDFMapper
+name|mapper
+init|=
+name|getRDFMapper
+argument_list|(
+name|connectionInfo
+argument_list|)
+decl_stmt|;
+name|RepositoryAccess
+name|repositoryAccess
+init|=
+name|accessManager
+operator|.
+name|getRepositoryAccessor
+argument_list|(
+name|connectionInfo
+argument_list|)
+decl_stmt|;
+name|Object
+name|session
+init|=
+name|repositoryAccess
+operator|.
+name|getSession
+argument_list|(
+name|connectionInfo
+argument_list|)
+decl_stmt|;
+name|MGraph
+name|cmsGraph
+init|=
+operator|new
+name|SimpleMGraph
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|RDFBridge
+name|bridge
+range|:
+name|rdfBridges
+control|)
+block|{
+name|MGraph
+name|generatedGraph
+init|=
+name|mapper
+operator|.
+name|generateRDFFromRepository
+argument_list|(
+name|session
+argument_list|,
+name|bridge
+operator|.
+name|getCMSPath
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|bridge
+operator|.
+name|annotateCMSGraph
+argument_list|(
+name|generatedGraph
+argument_list|)
+expr_stmt|;
+name|cmsGraph
+operator|.
+name|addAll
+argument_list|(
+name|generatedGraph
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|cmsGraph
+return|;
 block|}
 specifier|private
 name|RDFMapper
@@ -598,13 +745,7 @@ if|if
 condition|(
 name|rdfMapper
 operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getSimpleName
-argument_list|()
-operator|.
-name|startsWith
+name|canMap
 argument_list|(
 name|type
 argument_list|)
