@@ -303,7 +303,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -356,7 +356,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -414,7 +414,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -472,7 +472,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -515,7 +515,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -593,7 +593,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -663,7 +663,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -721,7 +721,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -842,7 +842,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -885,7 +885,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -943,7 +943,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -986,7 +986,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1044,7 +1044,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1087,7 +1087,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1145,7 +1145,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1193,7 +1193,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1236,7 +1236,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1294,7 +1294,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1342,7 +1342,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1385,7 +1385,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1443,7 +1443,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
@@ -1486,7 +1486,7 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
-literal|"Accept"
+literal|"Content-Type"
 argument_list|,
 literal|"application/json"
 argument_list|)
