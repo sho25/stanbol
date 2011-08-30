@@ -37,7 +37,19 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|GET
+name|Consumes
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|POST
 import|;
 end_import
 
@@ -62,18 +74,6 @@ operator|.
 name|rs
 operator|.
 name|Produces
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|QueryParam
 import|;
 end_import
 
@@ -233,7 +233,7 @@ name|factstore
 operator|.
 name|model
 operator|.
-name|Query
+name|FactResultSet
 import|;
 end_import
 
@@ -249,7 +249,7 @@ name|factstore
 operator|.
 name|model
 operator|.
-name|FactResultSet
+name|Query
 import|;
 end_import
 
@@ -330,7 +330,14 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|GET
+name|POST
+annotation|@
+name|Consumes
+argument_list|(
+name|MediaType
+operator|.
+name|APPLICATION_JSON
+argument_list|)
 annotation|@
 name|Produces
 argument_list|(
@@ -342,13 +349,8 @@ specifier|public
 name|Response
 name|query
 parameter_list|(
-annotation|@
-name|QueryParam
-argument_list|(
-literal|"q"
-argument_list|)
 name|String
-name|q
+name|queryString
 parameter_list|)
 block|{
 name|logger
@@ -357,7 +359,7 @@ name|info
 argument_list|(
 literal|"Query for fact: {}"
 argument_list|,
-name|q
+name|queryString
 argument_list|)
 expr_stmt|;
 if|if
@@ -390,11 +392,11 @@ return|;
 block|}
 if|if
 condition|(
-name|q
+name|queryString
 operator|==
 literal|null
 operator|||
-name|q
+name|queryString
 operator|.
 name|isEmpty
 argument_list|()
@@ -432,7 +434,7 @@ name|JsonLdParser
 operator|.
 name|parse
 argument_list|(
-name|q
+name|queryString
 argument_list|)
 expr_stmt|;
 block|}
