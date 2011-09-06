@@ -540,6 +540,24 @@ operator|+
 literal|"#hasURI"
 argument_list|)
 decl_stmt|;
+comment|/*      * CMIS Specific URI references      */
+comment|/**      * The predicate representing the base type of CMIS content repository objects      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|BASE_TYPE_ID
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|cmis
+operator|+
+literal|"baseTypeId"
+argument_list|)
+decl_stmt|;
 block|}
 end_class
 
