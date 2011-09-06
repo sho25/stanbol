@@ -540,13 +540,48 @@ operator|+
 literal|"#hasURI"
 argument_list|)
 decl_stmt|;
+comment|/*      * JCR Specific URI references      */
+comment|/**      * The predicate representing the primary type of JCR content repository objects      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|JCR_PRIMARY_TYPE
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|jcr
+operator|+
+literal|"primaryType"
+argument_list|)
+decl_stmt|;
+comment|/**      * The predicate representing mixin types of JCR content repository objects      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|JCR_MIXIN_TYPES
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|cmis
+operator|+
+literal|"mixinTypes"
+argument_list|)
+decl_stmt|;
 comment|/*      * CMIS Specific URI references      */
 comment|/**      * The predicate representing the base type of CMIS content repository objects      */
 specifier|public
 specifier|static
 specifier|final
 name|UriRef
-name|BASE_TYPE_ID
+name|CMIS_BASE_TYPE_ID
 init|=
 operator|new
 name|UriRef
