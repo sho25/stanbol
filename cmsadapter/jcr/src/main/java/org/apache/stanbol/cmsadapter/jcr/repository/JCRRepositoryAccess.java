@@ -678,14 +678,14 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|debug
+name|warn
 argument_list|(
 literal|"Failed to get JCR session by RMIRemoteRepository"
 argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|warn
 argument_list|(
 literal|"Error message: "
 operator|+
@@ -704,14 +704,14 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|debug
+name|warn
 argument_list|(
 literal|"Failed to get JCR session by RMIRemoteRepository"
 argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|warn
 argument_list|(
 literal|"Error message: "
 operator|+
