@@ -434,7 +434,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Engine that uses an AutotaggerProvider to process existing TextAnnotations of  * an Content Item and searches for related Entities by using the Autotagger  *  * @author ogrisel, rwesten  */
+comment|/**  * Engine that uses an AutotaggerProvider to process existing TextAnnotations of  * an Content Item and searches for related Entities by using the Autotagger  *  * @author ogrisel, rwesten  * @deprecated use NamedEntityTaggingEngine and the EntityHub instead  */
 end_comment
 
 begin_class
@@ -451,6 +451,8 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|EntityMentionEnhancementEngine

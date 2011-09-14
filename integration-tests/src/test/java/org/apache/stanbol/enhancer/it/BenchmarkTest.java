@@ -54,9 +54,9 @@ literal|"Bob Marley was born in Kingston, Jamaica. \n"
 operator|+
 literal|"= EXPECT = \n"
 operator|+
-literal|"Description: Kingston must be found \n"
+literal|"Description: Jamaica must be found \n"
 operator|+
-literal|"http://fise.iks-project.eu/ontology/entity-reference URI http://dbpedia.org/resource/Kingston%2C_Jamaica"
+literal|"http://fise.iks-project.eu/ontology/entity-reference URI http://dbpedia.org/resource/Jamaica"
 decl_stmt|;
 annotation|@
 name|Test
