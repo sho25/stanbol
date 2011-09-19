@@ -2066,7 +2066,7 @@ name|emptyList
 argument_list|()
 return|;
 block|}
-comment|// remove punctations form the search string
+comment|// remove punctuation form the search string
 name|name
 operator|=
 name|cleanupKeywords
@@ -2781,7 +2781,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Removes punctuations form a parsed string      */
+comment|/**      * Removes punctuation form a parsed string      */
 specifier|private
 specifier|static
 name|String
