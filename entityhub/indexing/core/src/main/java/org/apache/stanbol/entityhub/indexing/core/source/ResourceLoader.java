@@ -1068,13 +1068,11 @@ comment|//and there is read access so this can only happen if
 comment|//someone deletes the file in between
 name|log
 operator|.
-name|error
+name|warn
 argument_list|(
 literal|"Unable to load resource "
 operator|+
 name|file
-operator|+
-literal|"!"
 argument_list|,
 name|e
 argument_list|)
@@ -1104,8 +1102,6 @@ argument_list|(
 literal|"Unable to load resource "
 operator|+
 name|file
-operator|+
-literal|"!"
 argument_list|,
 name|e
 argument_list|)
@@ -1135,8 +1131,6 @@ argument_list|(
 literal|"Unable to load resource "
 operator|+
 name|file
-operator|+
-literal|"!"
 argument_list|,
 name|e
 argument_list|)
