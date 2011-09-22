@@ -234,6 +234,17 @@ name|DBPEDIA_SITE_ID
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|protected
+name|String
+name|getDefaultFindQueryField
+parameter_list|()
+block|{
+return|return
+name|RDFS_LABEL
+return|;
+block|}
 comment|/**      * Tests retrieval of Entities      * @throws IOException      * @throws JSONException      */
 annotation|@
 name|Test

@@ -857,6 +857,8 @@ name|asCollection
 parameter_list|(
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|T
 argument_list|>
 name|it

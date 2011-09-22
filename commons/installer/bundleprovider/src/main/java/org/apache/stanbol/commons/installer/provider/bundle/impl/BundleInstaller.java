@@ -569,16 +569,14 @@ block|}
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"Register Bundle "
-operator|+
+literal|"Register Bundle {} with BundleInstaller"
+argument_list|,
 name|bundle
 operator|.
 name|getSymbolicName
 argument_list|()
-operator|+
-literal|" with BundleInstaller"
 argument_list|)
 expr_stmt|;
 name|Dictionary
@@ -640,9 +638,14 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|" ... process configuration within path "
-operator|+
+literal|" ... process configuration within path {} for bundle {}"
+argument_list|,
 name|path
+argument_list|,
+name|bundle
+operator|.
+name|getSymbolicName
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|ArrayList
@@ -1001,8 +1004,8 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|" ... remove configurations within path "
-operator|+
+literal|" ... remove configurations within path {}"
+argument_list|,
 name|path
 argument_list|)
 expr_stmt|;
@@ -1117,7 +1120,7 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"  ... no Configuration to process"
 argument_list|)

@@ -25,6 +25,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Iterator
 import|;
 end_import
@@ -71,6 +81,16 @@ argument_list|<
 name|T
 argument_list|>
 name|iterator
+parameter_list|()
+function_decl|;
+comment|/**      * Unmodifiable collection of the results      * @return the resutls      */
+name|Collection
+argument_list|<
+name|?
+extends|extends
+name|T
+argument_list|>
+name|results
 parameter_list|()
 function_decl|;
 comment|/**      *<code>true</code> if the result set is empty      * @return<code>true</code> if the result set is empty. Otherwise<code>false</code>      */

@@ -1077,6 +1077,26 @@ return|return
 literal|null
 return|;
 block|}
+if|if
+condition|(
+name|modelDataStream
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Unable to load Resource {} via the DataFileProvider"
+argument_list|,
+name|name
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
 name|T
 name|built
 decl_stmt|;

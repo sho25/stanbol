@@ -269,6 +269,16 @@ name|Logger
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  *<p>  *  This tests do not depend on a specific dataset but only test  *</p>  *<ul>  *<li> Correct Errors on Illegal Requests  *<li> Missing but required parameter  *<li> Correct default values for optional parameters  *</ul>  *<p>  *  This set of tests should be tested against all service endpoints that  *  support queries. Typically this is done by extending this class  *  and configuring it to run against the according endpoint.  *</p><p>  *  Please make sure that the data set this tests are executed against does  *  not contain any information using the "http://www.test.org/test#"  *  namespace.  *</p>  * @author Rupert Westenthaler  *  */
 end_comment
@@ -281,6 +291,19 @@ name|QueryTestBase
 extends|extends
 name|EntityhubTestBase
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -303,9 +326,6 @@ name|servicePath
 parameter_list|,
 name|String
 name|referencedSiteId
-parameter_list|,
-name|Logger
-name|log
 parameter_list|)
 block|{
 name|super
@@ -322,8 +342,6 @@ name|singleton
 argument_list|(
 name|referencedSiteId
 argument_list|)
-argument_list|,
-name|log
 argument_list|)
 expr_stmt|;
 if|if
@@ -706,7 +724,8 @@ name|assertSelectedField
 argument_list|(
 name|jQuery
 argument_list|,
-name|RDFS_LABEL
+name|getDefaultFindQueryField
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|JSONArray
@@ -806,7 +825,12 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"The 'field' of the Constraint is not rdfs:label but "
+literal|"The 'field' of the Constraint is not "
+operator|+
+name|getDefaultFindQueryField
+argument_list|()
+operator|+
+literal|" but "
 operator|+
 name|constraint
 operator|.
@@ -815,7 +839,8 @@ argument_list|(
 literal|"field"
 argument_list|)
 argument_list|,
-name|RDFS_LABEL
+name|getDefaultFindQueryField
+argument_list|()
 argument_list|,
 name|constraint
 operator|.
@@ -826,6 +851,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Getter for the default field used for find queries of the 'field' parameter      * is not defined.<p>      * This default is different for the '/entityhub' and the other service      * endpoints that support find queries.      * @return the default field      */
+specifier|protected
+specifier|abstract
+name|String
+name|getDefaultFindQueryField
+parameter_list|()
+function_decl|;
 annotation|@
 name|Test
 specifier|public

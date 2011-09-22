@@ -172,6 +172,7 @@ literal|"Dr Patrick Marshall (1869 - November 1950) was a"
 operator|+
 literal|" geologist who lived in New Zealand and worked at the University of Otago."
 decl_stmt|;
+comment|//    public static final String SINGLE_SENTENCE = "John is interested in buying a new drums set for his son Joe.";
 specifier|public
 specifier|static
 specifier|final
@@ -247,6 +248,14 @@ operator|+
 literal|"in New Zealand and worked at the University of Otago. "
 operator|+
 literal|"This is another unrelated sentence without any name."
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|LANGUAGE
+init|=
+literal|"en"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -362,8 +371,6 @@ operator|new
 name|TextAnalyzer
 argument_list|(
 name|openNLP
-argument_list|,
-literal|"en"
 argument_list|)
 decl_stmt|;
 name|AnalysedText
@@ -374,6 +381,8 @@ operator|.
 name|analyseSentence
 argument_list|(
 name|SINGLE_SENTENCE
+argument_list|,
+name|LANGUAGE
 argument_list|)
 decl_stmt|;
 name|assertNotNull
@@ -382,7 +391,7 @@ name|analysed
 argument_list|)
 expr_stmt|;
 comment|//check the default config
-name|assertTrue
+name|assertFalse
 argument_list|(
 name|analyzer
 operator|.
@@ -448,8 +457,6 @@ operator|new
 name|TextAnalyzer
 argument_list|(
 name|openNLP
-argument_list|,
-literal|"en"
 argument_list|)
 decl_stmt|;
 name|analyzer
@@ -467,6 +474,8 @@ operator|.
 name|analyseSentence
 argument_list|(
 name|SINGLE_SENTENCE
+argument_list|,
+name|LANGUAGE
 argument_list|)
 decl_stmt|;
 name|assertNotNull
@@ -475,7 +484,7 @@ name|analysed
 argument_list|)
 expr_stmt|;
 comment|//check the default config
-name|assertTrue
+name|assertFalse
 argument_list|(
 name|analyzer
 operator|.
@@ -541,8 +550,6 @@ operator|new
 name|TextAnalyzer
 argument_list|(
 name|openNLP
-argument_list|,
-literal|"en"
 argument_list|)
 decl_stmt|;
 name|analyzer
@@ -560,6 +567,8 @@ operator|.
 name|analyseSentence
 argument_list|(
 name|SINGLE_SENTENCE
+argument_list|,
+name|LANGUAGE
 argument_list|)
 decl_stmt|;
 name|assertNotNull
@@ -568,7 +577,7 @@ name|analysed
 argument_list|)
 expr_stmt|;
 comment|//check the default config
-name|assertTrue
+name|assertFalse
 argument_list|(
 name|analyzer
 operator|.
@@ -634,8 +643,6 @@ operator|new
 name|TextAnalyzer
 argument_list|(
 name|openNLP
-argument_list|,
-literal|"en"
 argument_list|)
 decl_stmt|;
 name|analyzer
@@ -661,6 +668,8 @@ operator|.
 name|analyseSentence
 argument_list|(
 name|SINGLE_SENTENCE
+argument_list|,
+name|LANGUAGE
 argument_list|)
 decl_stmt|;
 name|assertNotNull
@@ -669,7 +678,7 @@ name|analysed
 argument_list|)
 expr_stmt|;
 comment|//check the default config
-name|assertTrue
+name|assertFalse
 argument_list|(
 name|analyzer
 operator|.
@@ -735,8 +744,6 @@ operator|new
 name|TextAnalyzer
 argument_list|(
 name|openNLP
-argument_list|,
-literal|"en"
 argument_list|)
 decl_stmt|;
 name|Iterator
@@ -750,6 +757,8 @@ operator|.
 name|analyse
 argument_list|(
 name|MULTI_SENTENCES
+argument_list|,
+name|LANGUAGE
 argument_list|)
 decl_stmt|;
 name|assertNotNull

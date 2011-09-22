@@ -425,6 +425,20 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Collection
+argument_list|<
+name|T
+argument_list|>
+name|results
+parameter_list|()
+block|{
+return|return
+name|results
+return|;
+block|}
 comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.ResultList#isEmpty()      */
 specifier|public
 specifier|final

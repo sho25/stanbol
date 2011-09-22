@@ -82,7 +82,7 @@ name|EntityProcessor
 extends|extends
 name|IndexingComponent
 block|{
-comment|/**      * Processes the source representation based on some processing rules.      * This interface is used by the {@link IndexerImpl} to process Entities      * retrieved from the Source before they are stored to the {@link Yard}      * @param source the source      * @return the processed/mapped representation      */
+comment|/**      * Processes the source representation based on some processing rules.      * This interface is used by the {@link IndexerImpl} to process Entities      * retrieved from the Source before they are stored to the {@link Yard}.      * If a processor returns<code>null</code> for an parsed source than this      * Entity is not indexed - filtered.      * @param source the source      * @return the processed/mapped representation or<code>null</code> to filter      * (do not index) the parsed Representation      */
 name|Representation
 name|process
 parameter_list|(

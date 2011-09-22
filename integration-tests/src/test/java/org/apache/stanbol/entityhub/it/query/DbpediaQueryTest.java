@@ -182,15 +182,6 @@ argument_list|(
 name|path
 argument_list|,
 name|referencedSite
-argument_list|,
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|DbpediaQueryTest
-operator|.
-name|class
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -219,12 +210,14 @@ name|asList
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|,
-literal|"http://dbpedia.org/resource/University_of_Paris"
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
 argument_list|,
-literal|"http://dbpedia.org/resource/Paris_Hilton"
+literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|//,
+comment|//"http://dbpedia.org/resource/Paris_Hilton"));
 name|executeQuery
 argument_list|(
 name|test
@@ -262,6 +255,8 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
+argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris_Hilton"
@@ -292,6 +287,8 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
+argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|)
 argument_list|,
@@ -309,7 +306,7 @@ name|test
 operator|.
 name|setLimit
 argument_list|(
-literal|1
+literal|2
 argument_list|)
 expr_stmt|;
 name|test
@@ -345,6 +342,8 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
+argument_list|,
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
 argument_list|)
@@ -360,7 +359,7 @@ name|test
 operator|.
 name|setOffset
 argument_list|(
-literal|1
+literal|2
 argument_list|)
 expr_stmt|;
 name|executeQuery
@@ -650,6 +649,8 @@ name|test
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFindSpecificFieldQuery
@@ -658,7 +659,10 @@ throws|throws
 name|IOException
 throws|,
 name|JSONException
-block|{              }
+block|{
+comment|//TODO: there is no other text field as rdfs:label in the dbpedia
+comment|//default dataset :(
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -924,6 +928,8 @@ operator|+
 literal|"'type': 'text', "
 operator|+
 literal|"'text': ['Frankfurt','Main','Flughafen'], "
+operator|+
+literal|"'language': 'de', "
 operator|+
 literal|"'field': 'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label' "
 operator|+

@@ -2602,6 +2602,62 @@ argument_list|()
 expr_stmt|;
 comment|// deactivate the super implementation
 block|}
+comment|/**      * This will case the SolrIndex to be optimised      * @throws YardException on any error while optimising      */
+specifier|public
+specifier|final
+name|void
+name|optimize
+parameter_list|()
+throws|throws
+name|YardException
+block|{
+name|SolrServer
+name|server
+init|=
+name|getServer
+argument_list|()
+decl_stmt|;
+try|try
+block|{
+name|server
+operator|.
+name|optimize
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SolrServerException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to optimise SolrIndex!"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to optimise SolrIndex!"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
 comment|/**      * can be used outside of the OSGI environment to deactivate this instance. Thiw will cause the SolrIndex      * to be committed and optimised.      */
 specifier|public
 name|void

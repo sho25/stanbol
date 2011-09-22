@@ -730,7 +730,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Parsed QueryString: \n{}"
 argument_list|,

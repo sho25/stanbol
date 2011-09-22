@@ -338,6 +338,15 @@ argument_list|(
 literal|"Missing Results for Query: \n "
 operator|+
 name|test
+operator|+
+literal|"\n Result:\n "
+operator|+
+name|results
+operator|.
+name|toString
+argument_list|(
+literal|4
+argument_list|)
 argument_list|,
 name|results
 operator|.
@@ -355,6 +364,15 @@ argument_list|(
 literal|"Unexpected Results for Query:\n "
 operator|+
 name|test
+operator|+
+literal|"\n Result:\n "
+operator|+
+name|results
+operator|.
+name|toString
+argument_list|(
+literal|4
+argument_list|)
 argument_list|,
 name|results
 operator|.

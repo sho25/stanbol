@@ -1525,17 +1525,17 @@ name|log
 operator|.
 name|warn
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Unable to create IndexConstraint for Constraint %s (type: %s) and Field %s (Reosens: %s)"
+literal|"Unable to create IndexConstraint for Constraint {} (type: {}) and Field {} (Reosens: {})"
 argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
 name|fieldConstraint
 operator|.
 name|getValue
 argument_list|()
-argument_list|,
+block|,
 name|fieldConstraint
 operator|.
 name|getValue
@@ -1543,17 +1543,17 @@ argument_list|()
 operator|.
 name|getType
 argument_list|()
-argument_list|,
+block|,
 name|fieldConstraint
 operator|.
 name|getKey
 argument_list|()
-argument_list|,
+block|,
 name|indexConstraint
 operator|.
 name|getInvalidMessages
 argument_list|()
-argument_list|)
+block|}
 argument_list|)
 expr_stmt|;
 block|}
@@ -1676,10 +1676,10 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"QueryString: "
-operator|+
+literal|"QueryString: {}"
+argument_list|,
 name|qs
 argument_list|)
 expr_stmt|;
@@ -2545,17 +2545,17 @@ name|log
 operator|.
 name|warn
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Unable to create IndexValue for value %s (type: %s). Create IndexValue manually by using the first parsed IndexDataType %s"
+literal|"Unable to create IndexValue for value {} (type: {}). Create IndexValue manually by using the first parsed IndexDataType {}"
 argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
 name|valueConstraint
 operator|.
 name|getValue
 argument_list|()
-argument_list|,
+block|,
 name|valueConstraint
 operator|.
 name|getValue
@@ -2563,14 +2563,14 @@ argument_list|()
 operator|.
 name|getClass
 argument_list|()
-argument_list|,
+block|,
 name|IndexDataTypeEnum
 operator|.
 name|STR
 operator|.
 name|getIndexType
 argument_list|()
-argument_list|)
+block|}
 argument_list|)
 expr_stmt|;
 name|constraintValue
@@ -2893,7 +2893,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Parsed Number of QueryResults %d is greater than the allowed maximum of %d!"
+literal|"Parsed Number of QueryResults {} is greater than the allowed maximum of {}!"
 argument_list|,
 name|entityhubQuery
 operator|.
@@ -3595,10 +3595,10 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"Constriants: "
-operator|+
+literal|"Constriants: {}"
+argument_list|,
 name|encodedConstraintParts
 argument_list|)
 expr_stmt|;

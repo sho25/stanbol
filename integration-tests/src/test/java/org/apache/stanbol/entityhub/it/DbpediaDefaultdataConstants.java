@@ -211,6 +211,13 @@ argument_list|(
 literal|"http://xmlns.com/foaf/0.1/homepage"
 argument_list|)
 expr_stmt|;
+name|optional
+operator|.
+name|add
+argument_list|(
+literal|"http://www.w3.org/2000/01/rdf-schema#comment"
+argument_list|)
+expr_stmt|;
 name|DBPEDIA_DEFAULTDATA_OPTIONAL_FIELDS
 operator|=
 name|Collections

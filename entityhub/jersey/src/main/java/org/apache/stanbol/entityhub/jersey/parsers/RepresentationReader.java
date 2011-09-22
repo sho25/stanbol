@@ -826,7 +826,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"isreadable: [genericType: {}| mediaType {}]"
 argument_list|,
@@ -978,7 +978,7 @@ operator|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> java-type: {}, media-type {}"
 argument_list|,

@@ -2984,6 +2984,24 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+elseif|else
+if|if
+condition|(
+name|siteConfiguration
+operator|.
+name|getCacheStrategy
+argument_list|()
+operator|==
+name|CacheStrategy
+operator|.
+name|all
+condition|)
+block|{
+return|return
+literal|null
+return|;
+comment|//do no remote lokkups on CacheStrategy.all!!
+block|}
 block|}
 catch|catch
 parameter_list|(
