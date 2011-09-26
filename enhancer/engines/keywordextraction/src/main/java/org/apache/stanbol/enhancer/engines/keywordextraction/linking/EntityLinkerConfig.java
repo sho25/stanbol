@@ -295,6 +295,15 @@ name|DEFAULT_REDIRECT_FIELD
 init|=
 literal|"rdfs:seeAlso"
 decl_stmt|;
+comment|/**      * The default language used to search for labels regardless of the language      * of the text. The default value is<code>null</code> causing to include      * labels that do not have a language assigned.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DEFAULT_LANGUAGE
+init|=
+literal|null
+decl_stmt|;
 comment|/**      * Default mapping for Concept types to dc:type values added for      * TextAnnotations.      */
 specifier|public
 specifier|static
@@ -583,6 +592,13 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|()
+decl_stmt|;
+comment|/**      * The language always included in searches (regardless of the language      * detected for the text.      */
+specifier|private
+name|String
+name|defaultLanguage
+init|=
+name|DEFAULT_LANGUAGE
 decl_stmt|;
 comment|/**      * Default constructor the initialises the configuration with the       * default values      */
 specifier|public
@@ -1062,6 +1078,32 @@ parameter_list|()
 block|{
 return|return
 name|unmodTypeMappings
+return|;
+block|}
+comment|/**      * Setter for the language of labels searched in addition to the current      * language of the text. Setting this to<code>null</code> (also the default)      * will cause to search labels without any defined language.<p>      * Changing this makes only sense if a dataset (such as dbpedia.org) adds      * language tags to labels even if they are typically used in any language.      * @param defaultLanguage the default language      */
+specifier|public
+name|void
+name|setDefaultLanguage
+parameter_list|(
+name|String
+name|defaultLanguage
+parameter_list|)
+block|{
+name|this
+operator|.
+name|defaultLanguage
+operator|=
+name|defaultLanguage
+expr_stmt|;
+block|}
+comment|/**      * Getter for the language of labels searched in addition to the current      * language of the text.      * @return the default language       */
+specifier|public
+name|String
+name|getDefaultLanguage
+parameter_list|()
+block|{
+return|return
+name|defaultLanguage
 return|;
 block|}
 block|}

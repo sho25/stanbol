@@ -1531,6 +1531,11 @@ argument_list|()
 operator|.
 name|getLanguage
 argument_list|()
+argument_list|,
+name|config
+operator|.
+name|getDefaultLanguage
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|List
@@ -1620,6 +1625,27 @@ name|Representation
 name|rep
 parameter_list|)
 block|{
+name|String
+name|curLang
+init|=
+name|state
+operator|.
+name|getLanguage
+argument_list|()
+decl_stmt|;
+comment|//language of the current sentence
+name|String
+name|defLang
+init|=
+name|config
+operator|.
+name|getDefaultLanguage
+argument_list|()
+decl_stmt|;
+comment|//configured default language
+comment|//        Iterator<Text> labels = rep.get(config.getNameField(), //get all labels
+comment|//            state.getLanguage(), //in the current language
+comment|//            config.getDefaultLanguage()); //and the default language
 name|Iterator
 argument_list|<
 name|Text
@@ -1661,33 +1687,74 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-comment|//NOTE: I use here startWith language because I want 'en-GB' labels accepted for 'en'
-if|if
-condition|(
+name|String
+name|lang
+init|=
 name|label
 operator|.
 name|getLanguage
 argument_list|()
+decl_stmt|;
+comment|//check the language of the current label
+comment|//NOTE: Stirng.startWith is used to match'en-GB' with 'en'
+if|if
+condition|(
+operator|(
+name|lang
+operator|==
+literal|null
+operator|&&
+operator|(
+comment|//if lang is null
+name|defLang
 operator|==
 literal|null
 operator|||
-name|label
-operator|.
-name|getLanguage
-argument_list|()
+comment|//default lang is null
+name|curLang
+operator|==
+literal|null
+operator|)
+operator|)
+comment|//or current lang is null
+operator|||
+operator|(
+name|lang
+operator|!=
+literal|null
+operator|&&
+operator|(
+comment|//if lang is not null
+comment|//NOTE: starsWith does not like parsing NULL
+name|curLang
+operator|!=
+literal|null
+operator|&&
+name|lang
 operator|.
 name|startsWith
 argument_list|(
-name|state
-operator|.
-name|getSentence
-argument_list|()
-operator|.
-name|getLanguage
-argument_list|()
+name|curLang
 argument_list|)
+operator|||
+comment|//match with default
+name|defLang
+operator|!=
+literal|null
+operator|&&
+name|lang
+operator|.
+name|startsWith
+argument_list|(
+name|defLang
+argument_list|)
+operator|)
+comment|//or match with current
+operator|)
+comment|//end or
 condition|)
 block|{
+comment|//end if
 name|String
 name|text
 init|=
@@ -1839,6 +1906,7 @@ operator|++
 expr_stmt|;
 comment|//only count processable Tokens
 block|}
+comment|//TODO: maybe move this also in the "isProcessable" ...
 name|foundInLabelIndex
 operator|=
 name|found

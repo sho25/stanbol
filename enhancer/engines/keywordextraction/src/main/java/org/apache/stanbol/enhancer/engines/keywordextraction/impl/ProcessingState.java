@@ -247,6 +247,20 @@ return|return
 name|token
 return|;
 block|}
+comment|/**      * Getter for the language of the current Token (based on the current      * sentence)      * @return the language      */
+specifier|public
+specifier|final
+name|String
+name|getLanguage
+parameter_list|()
+block|{
+return|return
+name|sentence
+operator|.
+name|getLanguage
+argument_list|()
+return|;
+block|}
 comment|/**      * The currently active chunk or<code>null</code> if no chunks are      * available. If chunks are present this can not be<code>null</code>      * because {@link Token}s outside of chunks are skiped.      * @return the chunk the current {@link Chunk} or<code>null</code> if      * no chunks are present.      */
 specifier|public
 specifier|final
