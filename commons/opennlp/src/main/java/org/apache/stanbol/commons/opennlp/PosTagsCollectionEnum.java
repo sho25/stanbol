@@ -396,7 +396,7 @@ argument_list|,
 literal|"Prep"
 argument_list|)
 block|,
-comment|/**      * POS types for Nouns for Swedish language based on       *<a href="http://w3.msi.vxu.se/users/nivre/research/MAMBAlex.html">      * Lexical categories in MAMBA</a>      * NOTE:<ul>      *<li> This includes all typical noun categories as defined by MAMBA      *<li> Unclassifiable part-of-speech and      *<li> Numerical ("RO" and "EN")       *</ul>      */
+comment|/**      * POS types for Nouns for Swedish language based on       *<a href="http://w3.msi.vxu.se/users/nivre/research/MAMBAlex.html">      * Lexical categories in MAMBA</a>      * NOTE:<ul>      *<li> This includes all typical noun categories as defined by MAMBA      *<li> Unclassifiable part-of-speech and      *<li> Numerical "RO"      *<li> EN is excluded       *</ul>      */
 name|SV_NOUN
 argument_list|(
 literal|"sv"
@@ -416,8 +416,6 @@ argument_list|,
 literal|"VN"
 argument_list|,
 literal|"XX"
-argument_list|,
-literal|"EN"
 argument_list|,
 literal|"RO"
 argument_list|)

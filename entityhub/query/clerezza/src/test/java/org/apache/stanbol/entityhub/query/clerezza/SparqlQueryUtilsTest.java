@@ -138,6 +138,27 @@ name|keywords
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|keywords
+operator|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"1 Alpha ? Numeric Test ."
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"(\"1\" AND \"Alpha\" AND \"Numeric\" AND \"Test\")"
+argument_list|,
+name|SparqlQueryUtils
+operator|.
+name|createFullTextQueryString
+argument_list|(
+name|keywords
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class
