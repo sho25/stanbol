@@ -238,6 +238,13 @@ operator|.
 name|getErrorStream
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|reason
+operator|!=
+literal|null
+condition|)
+block|{
 name|String
 name|errorMessage
 init|=
@@ -263,6 +270,13 @@ parameter_list|)
 block|{
 comment|//ignore ...
 block|}
+name|IOUtils
+operator|.
+name|closeQuietly
+argument_list|(
+name|reason
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|errorMessage
@@ -298,13 +312,7 @@ name|e
 argument_list|)
 throw|;
 block|}
-name|IOUtils
-operator|.
-name|closeQuietly
-argument_list|(
-name|reason
-argument_list|)
-expr_stmt|;
+block|}
 block|}
 comment|//if still here re-throw the original exception
 throw|throw
