@@ -401,6 +401,11 @@ name|AnalysedContent
 block|{
 specifier|private
 specifier|final
+name|double
+name|minPosTagProbability
+decl_stmt|;
+specifier|private
+specifier|final
 name|String
 name|language
 decl_stmt|;
@@ -480,6 +485,13 @@ argument_list|(
 name|lang
 argument_list|)
 expr_stmt|;
+name|minPosTagProbability
+operator|=
+name|textAnalyzer
+operator|.
+name|getMinPosTypeProbability
+argument_list|()
+expr_stmt|;
 block|}
 comment|/**          * Getter for the Iterator over the analysed sentences. This Method          * is expected to return always the same Iterator instance.          * @return the iterator over the analysed sentences          */
 specifier|public
@@ -494,7 +506,7 @@ return|return
 name|sentences
 return|;
 block|}
-comment|/**          * Called to check if a {@link Token} should be used to search for          * Concepts within the Taxonomy based on the POS tag of the Token.          * @param posTag the POS tag to check          * @return<code>true</code> if Tokens with this POS tag should be          * included in searches. Otherwise<code>false</code>. Also returns          *<code>true</code> if no POS type configuration is available for the          * language parsed in the constructor          */
+comment|/**          * Called to check if a {@link Token} should be used to search for          * Concepts within the Taxonomy based on the POS tag of the Token.          * @param posTag the POS tag to check          * @param posProb the probability of the parsed POS tag          * @return<code>true</code> if Tokens with this POS tag should be          * included in searches. Otherwise<code>false</code>. Also returns          *<code>true</code> if no POS type configuration is available for the          * language parsed in the constructor          */
 annotation|@
 name|Override
 specifier|public
@@ -503,12 +515,19 @@ name|processPOS
 parameter_list|(
 name|String
 name|posTag
+parameter_list|,
+name|double
+name|posProb
 parameter_list|)
 block|{
 return|return
 name|posTags
 operator|!=
 literal|null
+operator|&&
+name|posProb
+operator|>
+name|minPosTagProbability
 condition|?
 name|Boolean
 operator|.
@@ -525,7 +544,7 @@ else|:
 literal|null
 return|;
 block|}
-comment|/**          * Not yet implemented.          * @param chunkTag the type of the chunk          * @return returns always<code>true</code>          */
+comment|/**          * Not yet implemented.          * @param chunkTag the type of the chunk          * @param chunkProb the probability of the parsed chunk tag          * @return returns always<code>true</code>          */
 annotation|@
 name|Override
 specifier|public
@@ -534,6 +553,9 @@ name|processChunk
 parameter_list|(
 name|String
 name|chunkTag
+parameter_list|,
+name|double
+name|chunkProb
 parameter_list|)
 block|{
 comment|// TODO implement

@@ -306,7 +306,7 @@ argument_list|,
 literal|"U"
 argument_list|)
 block|,
-comment|/**      * POS types for Nouns based on the      *<a href="http://beta.visl.sdu.dk/visl/pt/symbolset-floresta.html">PALAVRAS tag set</a>      * for Portuguese.<p>      * TODO: Someone who speaks this language should check this List<p>      * NOTES: Currently this includes nouns, proper nouns and numbers.      */
+comment|/**      * POS types for Nouns based on the      *<a href="http://beta.visl.sdu.dk/visl/pt/symbolset-floresta.html">PALAVRAS tag set</a>      * for Portuguese.<p>      * TODO: Someone who speaks this language should check this List<p>      * NOTES: Currently this includes nouns, proper nouns and numbers.      * In addition I added "vp". "vp" is not part of the POS tag set       * documentation but in the training set there is a single occurrence       * therefore the POS tagger sometimes do tag words with this tag.      */
 name|PT_NOUN
 argument_list|(
 literal|"pt"
@@ -320,6 +320,8 @@ argument_list|,
 literal|"num"
 argument_list|,
 literal|"prop"
+argument_list|,
+literal|"vp"
 argument_list|)
 block|,
 comment|/**      * POS types for Verbs based on the      *<a href="http://beta.visl.sdu.dk/visl/pt/symbolset-floresta.html">PALAVRAS tag set</a>      * for Portuguese.<p>      * TODO: Someone who speaks this language should check this List<p>      */
@@ -340,7 +342,7 @@ argument_list|,
 literal|"v-ger"
 argument_list|)
 block|,
-comment|/**      * POS types followed to build Chunks based on the      *<a href="http://beta.visl.sdu.dk/visl/pt/symbolset-floresta.html">PALAVRAS tag set</a>      * for Portuguese.<p>      * TODO: Someone who speaks this language should check this List<p>      * NOTES: Currently this pubctations and prepositions.      */
+comment|/**      * POS types followed to build Chunks based on the      *<a href="http://beta.visl.sdu.dk/visl/pt/symbolset-floresta.html">PALAVRAS tag set</a>      * for Portuguese.<p>      * TODO: Someone who speaks this language should check this List<p>      * NOTES: Currently this pubctations and prepositions.       */
 name|PT_FOLLOW
 argument_list|(
 literal|"pt"
