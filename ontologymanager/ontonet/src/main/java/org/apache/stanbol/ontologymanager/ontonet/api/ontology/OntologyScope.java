@@ -70,11 +70,6 @@ name|OntologyScope
 extends|extends
 name|ScopeOntologyListenable
 block|{
-comment|/**      * Returns an ontological form of this scope.      *       * @return an OWL ontology that represents this scope.      */
-name|OWLOntology
-name|asOWLOntology
-parameter_list|()
-function_decl|;
 comment|/**      * Adds a new ontology space to the list of user session spaces for this scope.      *       * @param sessionSpace      *            the ontology space to be added.      * @throws UnmodifiableOntologySpaceException      */
 name|void
 name|addSessionSpace
@@ -88,6 +83,11 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologySpaceException
 function_decl|;
+comment|/**      * Returns an ontological form of this scope.      *       * @return an OWL ontology that represents this scope.      */
+name|OWLOntology
+name|asOWLOntology
+parameter_list|()
+function_decl|;
 comment|/**      * Returns the core ontology space for this ontology scope. The core space should never be null for any      * scope.      *       * @return the core ontology space      */
 name|OntologySpace
 name|getCoreSpace
@@ -99,8 +99,12 @@ name|getCustomSpace
 parameter_list|()
 function_decl|;
 comment|/**      * Returns an object that uniquely identifies this ontology scope.      *       * TODO : check if we'd rather use another class for identifiers.      *       * @return the unique identifier for this ontology scope      */
-name|IRI
+name|String
 name|getID
+parameter_list|()
+function_decl|;
+name|IRI
+name|getNamespace
 parameter_list|()
 function_decl|;
 comment|/**      * Return the ontology space for this scope that is identified by the supplied IRI.      *       * @param sessionID      *            the unique identifier of the KReS session.      * @return the ontology space identified by<code>sessionID</code>, or null if no such space is registered      *         for this scope and session.      */
@@ -128,6 +132,13 @@ name|customSpace
 parameter_list|)
 throws|throws
 name|UnmodifiableOntologySpaceException
+function_decl|;
+name|void
+name|setNamespace
+parameter_list|(
+name|IRI
+name|namespace
+parameter_list|)
 function_decl|;
 comment|/**      * Performs the operations required for activating the ontology scope. It should be possible to perform      * them<i>after</i> the constructor has been invoked.<br>      *<br>      * When the core ontology space is created for this scope, this should be set in the scope constructor. It      * can be changed in the<code>setUp()</code> method though.      */
 name|void

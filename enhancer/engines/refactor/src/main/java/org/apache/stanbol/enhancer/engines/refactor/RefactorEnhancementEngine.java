@@ -1004,7 +1004,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"http://incubator.apache.org/stanbol/enhancer/engines/refactor/scope"
+literal|"enhancer/engines/refactor"
 argument_list|)
 specifier|public
 specifier|static
@@ -2329,13 +2329,10 @@ return|;
 block|}
 block|}
 decl_stmt|;
-name|IRI
-name|dulcifierScopeIRI
+comment|//        IRI dulcifierScopeIRI = IRI.create((String) context.getProperties().get(SCOPE));
+name|String
+name|scopeId
 init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
 operator|(
 name|String
 operator|)
@@ -2348,7 +2345,6 @@ name|get
 argument_list|(
 name|SCOPE
 argument_list|)
-argument_list|)
 decl_stmt|;
 comment|/*          * The scope is created by the ScopeFactory or loaded from the scope registry of KReS          */
 try|try
@@ -2359,7 +2355,8 @@ name|scopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|dulcifierScopeIRI
+name|scopeId
+comment|/*dulcifierScopeIRI*/
 argument_list|,
 name|oisbase
 argument_list|)
@@ -2385,7 +2382,8 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|dulcifierScopeIRI
+name|scopeId
+comment|/*dulcifierScopeIRI*/
 argument_list|)
 expr_stmt|;
 block|}

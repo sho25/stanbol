@@ -239,7 +239,7 @@ name|IRI
 argument_list|,
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 argument_list|>
 name|ontScopeMap
@@ -264,7 +264,7 @@ name|IRI
 argument_list|,
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 argument_list|>
 argument_list|()
@@ -344,7 +344,7 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez
 init|=
@@ -366,7 +366,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -502,7 +502,7 @@ parameter_list|)
 block|{
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez
 init|=
@@ -621,7 +621,7 @@ parameter_list|(
 name|IRI
 name|ontologyIri
 parameter_list|,
-name|IRI
+name|String
 name|scopeId
 parameter_list|)
 block|{
@@ -709,7 +709,7 @@ name|Override
 specifier|public
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|getReferencingScopes
 parameter_list|(
@@ -741,7 +741,7 @@ parameter_list|)
 block|{
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez
 init|=
@@ -770,7 +770,7 @@ specifier|public
 name|void
 name|onOntologyAdded
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|IRI
@@ -792,7 +792,7 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez
 init|=
@@ -814,7 +814,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -836,7 +836,7 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez2
 init|=
@@ -871,7 +871,7 @@ specifier|public
 name|void
 name|onOntologyRemoved
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|IRI
@@ -893,7 +893,7 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez
 init|=
@@ -943,7 +943,7 @@ expr_stmt|;
 block|}
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez2
 init|=
@@ -1014,7 +1014,7 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|scopez
 init|=
@@ -1242,18 +1242,13 @@ control|)
 block|{
 try|try
 block|{
-name|IRI
+name|String
 name|scopeId
 init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
 name|token
 operator|.
 name|trim
 argument_list|()
-argument_list|)
 decl_stmt|;
 name|scopeRegistry
 operator|.

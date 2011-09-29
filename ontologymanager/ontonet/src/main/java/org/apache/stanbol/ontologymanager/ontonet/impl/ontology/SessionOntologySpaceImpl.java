@@ -45,26 +45,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|io
-operator|.
-name|RootOntologySource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|ontology
 operator|.
 name|OntologySpace
@@ -155,26 +135,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|util
-operator|.
-name|StringUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -182,20 +142,6 @@ operator|.
 name|model
 operator|.
 name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
 import|;
 end_import
 
@@ -239,29 +185,25 @@ operator|.
 name|getIRISuffix
 argument_list|()
 decl_stmt|;
-specifier|public
-name|SessionOntologySpaceImpl
+specifier|private
+specifier|static
+name|String
+name|buildId
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
-parameter_list|,
-name|ClerezzaOntologyStorage
-name|store
 parameter_list|)
 block|{
-comment|// FIXME : sync session id with session space ID
-name|super
-argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
+return|return
+operator|(
 name|scopeID
-argument_list|)
+operator|!=
+literal|null
+condition|?
+name|scopeID
+else|:
+literal|""
+operator|)
 operator|+
 literal|"/"
 operator|+
@@ -280,7 +222,31 @@ argument_list|()
 operator|.
 name|nextLong
 argument_list|()
+return|;
+block|}
+specifier|public
+name|SessionOntologySpaceImpl
+parameter_list|(
+name|String
+name|scopeID
+parameter_list|,
+name|IRI
+name|namespace
+parameter_list|,
+name|ClerezzaOntologyStorage
+name|store
+parameter_list|)
+block|{
+comment|// FIXME : sync session id with session space ID
+name|super
+argument_list|(
+name|buildId
+argument_list|(
+name|scopeID
 argument_list|)
+argument_list|,
+name|namespace
+comment|/*          * IRI.create(StringUtils.stripIRITerminator(scopeID) + "/" + SpaceType.SESSION.getIRISuffix() + "-" +          * new Random().nextLong())          */
 argument_list|,
 name|SpaceType
 operator|.
@@ -304,8 +270,11 @@ block|}
 specifier|public
 name|SessionOntologySpaceImpl
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
+parameter_list|,
+name|IRI
+name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|store
@@ -317,35 +286,13 @@ block|{
 comment|// FIXME : sync session id with session space ID
 name|super
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
+name|buildId
 argument_list|(
 name|scopeID
 argument_list|)
-operator|+
-literal|"/"
-operator|+
-name|SpaceType
-operator|.
-name|SESSION
-operator|.
-name|getIRISuffix
-argument_list|()
-operator|+
-literal|"-"
-operator|+
-operator|new
-name|Random
-argument_list|()
-operator|.
-name|nextLong
-argument_list|()
-argument_list|)
+argument_list|,
+name|namespace
+comment|/*          * IRI.create(StringUtils.stripIRITerminator(scopeID) + "/" + SpaceType.SESSION.getIRISuffix() + "-" +          * new Random().nextLong())          */
 argument_list|,
 name|SpaceType
 operator|.
@@ -385,19 +332,19 @@ throws|throws
 name|UnmodifiableOntologySpaceException
 block|{
 comment|// FIXME re-implement!
-comment|//        if (!(space instanceof SessionOntologySpace)) {
-comment|//            OWLOntology o = space.getTopOntology();
-comment|//            // This does the append thingy
-comment|//            log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
-comment|//            try {
-comment|//                // It is in fact the addition of the core space top ontology to the
-comment|//                // custom space, with import statements and all.
-comment|//                addOntology(new RootOntologySource(o, null));
-comment|//                // log.debug("ok");
-comment|//            } catch (Exception ex) {
-comment|//                log.error("FAILED", ex);
-comment|//            }
-comment|//        }
+comment|// if (!(space instanceof SessionOntologySpace)) {
+comment|// OWLOntology o = space.getTopOntology();
+comment|// // This does the append thingy
+comment|// log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
+comment|// try {
+comment|// // It is in fact the addition of the core space top ontology to the
+comment|// // custom space, with import statements and all.
+comment|// addOntology(new RootOntologySource(o, null));
+comment|// // log.debug("ok");
+comment|// } catch (Exception ex) {
+comment|// log.error("FAILED", ex);
+comment|// }
+comment|// }
 block|}
 annotation|@
 name|Override

@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -20,26 +20,6 @@ operator|.
 name|ontology
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|io
-operator|.
-name|RootOntologySource
-import|;
-end_import
 
 begin_import
 import|import
@@ -145,26 +125,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|util
-operator|.
-name|StringUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -172,20 +132,6 @@ operator|.
 name|model
 operator|.
 name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
 import|;
 end_import
 
@@ -232,8 +178,11 @@ decl_stmt|;
 specifier|public
 name|CustomOntologySpaceImpl
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
+parameter_list|,
+name|IRI
+name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
@@ -241,16 +190,16 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
+comment|/* IRI.create( */
+operator|(
 name|scopeID
-argument_list|)
+operator|!=
+literal|null
+condition|?
+name|scopeID
+else|:
+literal|""
+operator|)
 operator|+
 literal|"/"
 operator|+
@@ -260,11 +209,14 @@ name|CUSTOM
 operator|.
 name|getIRISuffix
 argument_list|()
-argument_list|)
+argument_list|,
+name|namespace
+comment|/*                                                                                           * StringUtils.                                                                                           * stripIRITerminator                                                                                           * (namespace) + "/")                                                                                           */
 argument_list|,
 name|SpaceType
 operator|.
 name|CUSTOM
+comment|/* , scopeID */
 argument_list|,
 name|storage
 argument_list|)
@@ -273,8 +225,11 @@ block|}
 specifier|public
 name|CustomOntologySpaceImpl
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
+parameter_list|,
+name|IRI
+name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
@@ -285,16 +240,16 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
+comment|/* IRI.create( */
+operator|(
 name|scopeID
-argument_list|)
+operator|!=
+literal|null
+condition|?
+name|scopeID
+else|:
+literal|""
+operator|)
 operator|+
 literal|"/"
 operator|+
@@ -304,7 +259,9 @@ name|CUSTOM
 operator|.
 name|getIRISuffix
 argument_list|()
-argument_list|)
+argument_list|,
+name|namespace
+comment|/*                                                                                           * StringUtils.                                                                                           * stripIRITerminator                                                                                           * (namespace) + "/")                                                                                           */
 argument_list|,
 name|SpaceType
 operator|.
@@ -332,17 +289,17 @@ throws|throws
 name|UnmodifiableOntologySpaceException
 block|{
 comment|// FIXME re-implement!
-comment|//        OWLOntology o = coreSpace.getTopOntology();
-comment|//        // This does the append thingy
-comment|//        log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
-comment|//        try {
-comment|//            // It is in fact the addition of the core space top ontology to the
-comment|//            // custom space, with import statements and all.
-comment|//            addOntology(new RootOntologySource(o, null));
-comment|//            // log.debug("ok");
-comment|//        } catch (Exception ex) {
-comment|//            log.error("FAILED", ex);
-comment|//        }
+comment|// OWLOntology o = coreSpace.getTopOntology();
+comment|// // This does the append thingy
+comment|// log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
+comment|// try {
+comment|// // It is in fact the addition of the core space top ontology to the
+comment|// // custom space, with import statements and all.
+comment|// addOntology(new RootOntologySource(o, null));
+comment|// // log.debug("ok");
+comment|// } catch (Exception ex) {
+comment|// log.error("FAILED", ex);
+comment|// }
 block|}
 comment|/**      * Once it is set up, a custom space is write-locked.      */
 annotation|@

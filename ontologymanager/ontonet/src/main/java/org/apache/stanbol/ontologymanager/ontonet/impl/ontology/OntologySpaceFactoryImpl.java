@@ -358,6 +358,10 @@ specifier|protected
 name|ScopeRegistry
 name|registry
 decl_stmt|;
+specifier|protected
+name|IRI
+name|namespace
+decl_stmt|;
 comment|/*      * The ClerezzaOntologyStorage (local to OntoNet) has been changed with PersistenceStore (general from      * Stanbol)      */
 specifier|protected
 name|ClerezzaOntologyStorage
@@ -374,6 +378,9 @@ name|storage
 parameter_list|,
 name|OfflineConfiguration
 name|offline
+parameter_list|,
+name|IRI
+name|namespace
 parameter_list|)
 block|{
 name|this
@@ -393,6 +400,12 @@ operator|.
 name|offline
 operator|=
 name|offline
+expr_stmt|;
+name|this
+operator|.
+name|namespace
+operator|=
+name|namespace
 expr_stmt|;
 block|}
 comment|/**      * Utility method for configuring ontology spaces after creating them.      *       * @param s      * @param scopeID      * @param rootSource      */
@@ -403,7 +416,7 @@ parameter_list|(
 name|OntologySpace
 name|s
 parameter_list|,
-name|IRI
+name|String
 name|scopeID
 parameter_list|,
 name|OntologyInputSource
@@ -411,7 +424,7 @@ modifier|...
 name|ontologySources
 parameter_list|)
 block|{
-comment|// FIXME: ensure that this is not null
+comment|// FIXME: ensure that this is not null AND convert to using Strings for scope IDs
 name|OntologyScope
 name|parentScope
 init|=
@@ -491,7 +504,7 @@ specifier|public
 name|CoreOntologySpace
 name|createCoreOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
@@ -506,6 +519,8 @@ operator|new
 name|CoreOntologySpaceImpl
 argument_list|(
 name|scopeId
+argument_list|,
+name|namespace
 argument_list|,
 name|storage
 argument_list|,
@@ -548,7 +563,7 @@ specifier|public
 name|CustomOntologySpace
 name|createCustomOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
@@ -563,6 +578,8 @@ operator|new
 name|CustomOntologySpaceImpl
 argument_list|(
 name|scopeId
+argument_list|,
+name|namespace
 argument_list|,
 name|storage
 argument_list|,
@@ -605,7 +622,7 @@ specifier|public
 name|OntologySpace
 name|createOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|SpaceType
@@ -666,7 +683,7 @@ specifier|public
 name|SessionOntologySpace
 name|createSessionOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
@@ -681,6 +698,8 @@ operator|new
 name|SessionOntologySpaceImpl
 argument_list|(
 name|scopeId
+argument_list|,
+name|namespace
 argument_list|,
 name|storage
 argument_list|,
@@ -734,6 +753,36 @@ comment|// s.setUp();
 return|return
 name|s
 return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|IRI
+name|getNamespace
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|namespace
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setNamespace
+parameter_list|(
+name|IRI
+name|namespace
+parameter_list|)
+block|{
+name|this
+operator|.
+name|namespace
+operator|=
+name|namespace
+expr_stmt|;
 block|}
 block|}
 end_class

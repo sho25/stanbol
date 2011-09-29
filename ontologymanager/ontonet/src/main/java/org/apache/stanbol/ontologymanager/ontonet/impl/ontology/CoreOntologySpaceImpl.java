@@ -85,26 +85,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|util
-operator|.
-name|StringUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -158,8 +138,11 @@ decl_stmt|;
 specifier|public
 name|CoreOntologySpaceImpl
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
+parameter_list|,
+name|IRI
+name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
@@ -167,16 +150,16 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
+comment|/* IRI.create( */
+operator|(
 name|scopeID
-argument_list|)
+operator|!=
+literal|null
+condition|?
+name|scopeID
+else|:
+literal|""
+operator|)
 operator|+
 literal|"/"
 operator|+
@@ -186,7 +169,9 @@ name|CORE
 operator|.
 name|getIRISuffix
 argument_list|()
-argument_list|)
+argument_list|,
+name|namespace
+comment|/*                                                                                         * StringUtils.                                                                                         * stripIRITerminator                                                                                         * (namespace) + "/")                                                                                         */
 argument_list|,
 name|SpaceType
 operator|.
@@ -200,8 +185,11 @@ block|}
 specifier|public
 name|CoreOntologySpaceImpl
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
+parameter_list|,
+name|IRI
+name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
 name|storage
@@ -212,16 +200,16 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|StringUtils
-operator|.
-name|stripIRITerminator
-argument_list|(
+comment|/* IRI.create( */
+operator|(
 name|scopeID
-argument_list|)
+operator|!=
+literal|null
+condition|?
+name|scopeID
+else|:
+literal|""
+operator|)
 operator|+
 literal|"/"
 operator|+
@@ -231,13 +219,15 @@ name|CORE
 operator|.
 name|getIRISuffix
 argument_list|()
-argument_list|)
+argument_list|,
+name|namespace
+comment|/*                                                                                         * StringUtils.                                                                                         * stripIRITerminator                                                                                         * (namespace) + "/")                                                                                         */
 argument_list|,
 name|SpaceType
 operator|.
 name|CORE
 argument_list|,
-comment|/* scopeID, */
+comment|/*                                                                                                              * scopeID                                                                                                              * ,                                                                                                              */
 name|storage
 argument_list|,
 name|ontologyManager

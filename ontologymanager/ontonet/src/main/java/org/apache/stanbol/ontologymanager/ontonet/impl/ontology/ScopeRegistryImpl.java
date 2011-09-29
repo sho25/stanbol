@@ -169,7 +169,7 @@ block|{
 specifier|private
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|activeScopeIRIs
 decl_stmt|;
@@ -183,7 +183,7 @@ decl_stmt|;
 specifier|private
 name|Map
 argument_list|<
-name|IRI
+name|String
 argument_list|,
 name|OntologyScope
 argument_list|>
@@ -198,7 +198,7 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|IRI
+name|String
 argument_list|,
 name|OntologyScope
 argument_list|>
@@ -209,7 +209,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -263,7 +263,7 @@ specifier|public
 name|boolean
 name|containsScope
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 block|{
@@ -291,7 +291,7 @@ name|OntologyScope
 name|scope
 parameter_list|)
 block|{
-name|IRI
+name|String
 name|id
 init|=
 name|scope
@@ -340,7 +340,7 @@ specifier|protected
 name|void
 name|fireScopeActivationChange
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|,
 name|boolean
@@ -465,7 +465,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|IRI
+name|String
 name|id
 range|:
 name|activeScopeIRIs
@@ -519,7 +519,7 @@ specifier|public
 name|OntologyScope
 name|getScope
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 block|{
@@ -554,7 +554,7 @@ specifier|public
 name|boolean
 name|isScopeActive
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 block|{
@@ -671,7 +671,7 @@ specifier|public
 name|void
 name|setScopeActive
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|,
 name|boolean

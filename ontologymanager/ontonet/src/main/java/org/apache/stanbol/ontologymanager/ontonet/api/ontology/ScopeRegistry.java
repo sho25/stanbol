@@ -71,7 +71,7 @@ comment|/** 	 *  	 * @param scopeID 	 * @return true iff an ontology scope with 
 name|boolean
 name|containsScope
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 function_decl|;
@@ -95,14 +95,14 @@ comment|/** 	 * Returns the unique ontology scope identified by the given ID. 	 
 name|OntologyScope
 name|getScope
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 function_decl|;
 name|void
 name|setScopeActive
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|,
 name|boolean
@@ -112,7 +112,7 @@ function_decl|;
 name|boolean
 name|isScopeActive
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 function_decl|;

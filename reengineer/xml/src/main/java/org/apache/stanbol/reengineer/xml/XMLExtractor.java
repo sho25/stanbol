@@ -1004,14 +1004,7 @@ name|_REENGINEERING_SCOPE_DEFAULT
 init|=
 literal|"xml_reengineering"
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_XML_REENGINEERING_SESSION_SPACE_DEFAULT
-init|=
-literal|"/xml-reengineering-session-space"
-decl_stmt|;
+comment|//    public static final String _XML_REENGINEERING_SESSION_SPACE_DEFAULT = "/xml-reengineering-session-space";
 annotation|@
 name|Property
 argument_list|(
@@ -1042,25 +1035,8 @@ name|REENGINEERING_SCOPE
 init|=
 literal|"xml.reengineering.scope"
 decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_XML_REENGINEERING_SESSION_SPACE_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|XML_REENGINEERING_SESSION_SPACE
-init|=
-literal|"http://kres.iks-project.eu/space/reengineering/db"
-decl_stmt|;
-specifier|private
-name|IRI
-name|kReSSessionID
-decl_stmt|;
+comment|//    @Property(value = _XML_REENGINEERING_SESSION_SPACE_DEFAULT)
+comment|//    public static final String XML_REENGINEERING_SESSION_SPACE = "http://kres.iks-project.eu/space/reengineering/db";
 specifier|public
 specifier|final
 name|Logger
@@ -1089,13 +1065,10 @@ name|OntologyScope
 name|scope
 decl_stmt|;
 specifier|private
-name|IRI
-name|scopeIRI
+name|String
+name|scopeID
 decl_stmt|;
-specifier|private
-name|IRI
-name|spaceIRI
-decl_stmt|;
+comment|//    private IRI spaceIRI;
 comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the XMLExtractor instances do need to be configured! YOU NEED      * TO USE {@link #XMLExtractor(ONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|XMLExtractor
@@ -1224,9 +1197,9 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{
-name|String
+comment|/*String*/
 name|scopeID
-init|=
+operator|=
 operator|(
 name|String
 operator|)
@@ -1236,7 +1209,7 @@ name|get
 argument_list|(
 name|REENGINEERING_SCOPE
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 if|if
 condition|(
 name|scopeID
@@ -1271,30 +1244,8 @@ operator|=
 name|_HOST_NAME_AND_PORT_DEFAULT
 expr_stmt|;
 comment|// TODO: Manage the other properties
-name|spaceIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|XML_REENGINEERING_SESSION_SPACE
-argument_list|)
-expr_stmt|;
-name|scopeIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://"
-operator|+
-name|hostPort
-operator|+
-literal|"/kres/ontology/"
-operator|+
-name|scopeID
-argument_list|)
-expr_stmt|;
+comment|//        spaceIRI = IRI.create(XML_REENGINEERING_SESSION_SPACE);
+comment|//        scopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + scopeID);
 name|reengineeringManager
 operator|.
 name|bindReengineer
@@ -1318,13 +1269,7 @@ operator|.
 name|createSession
 argument_list|()
 decl_stmt|;
-name|kReSSessionID
-operator|=
-name|kReSSession
-operator|.
-name|getID
-argument_list|()
-expr_stmt|;
+comment|//        sessionId = kReSSession.getID();
 name|OntologyScopeFactory
 name|ontologyScopeFactory
 init|=
@@ -1409,7 +1354,7 @@ name|ontologyScopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|scopeIRI
+name|scopeID
 argument_list|,
 operator|new
 name|RootOntologyIRISource
@@ -1459,7 +1404,7 @@ argument_list|()
 operator|.
 name|getScope
 argument_list|(
-name|scopeIRI
+name|scopeID
 argument_list|)
 expr_stmt|;
 block|}
@@ -1516,7 +1461,7 @@ name|ontologySpaceFactory
 operator|.
 name|createSessionOntologySpace
 argument_list|(
-name|spaceIRI
+name|scopeID
 argument_list|)
 argument_list|,
 name|kReSSession
@@ -1529,7 +1474,7 @@ name|scopeRegistry
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIRI
+name|scopeID
 argument_list|,
 literal|true
 argument_list|)
@@ -1545,9 +1490,9 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Cannot add session space "
+literal|"Cannot add session space for "
 operator|+
-name|spaceIRI
+name|scopeID
 operator|+
 literal|" to unmodifiable scope "
 operator|+
@@ -3063,7 +3008,7 @@ name|scopeRegistry
 operator|.
 name|isScopeActive
 argument_list|(
-name|scopeIRI
+name|scopeID
 argument_list|)
 condition|)
 block|{
@@ -3073,7 +3018,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|scopeIRI
+name|scopeID
 argument_list|)
 expr_stmt|;
 block|}

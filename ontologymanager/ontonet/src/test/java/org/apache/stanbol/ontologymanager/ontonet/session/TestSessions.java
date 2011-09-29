@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -424,33 +424,21 @@ name|Constants
 operator|.
 name|PEANUTS_MINOR_BASE
 argument_list|)
-decl_stmt|,
-name|scopeIri1
+decl_stmt|;
+specifier|public
+specifier|static
+name|String
+name|scopeId1
 init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://kres.iks-project.eu/scope/Ranma12"
-argument_list|)
+literal|"Ranma12"
 decl_stmt|,
-name|scopeIri2
+name|scopeId2
 init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://kres.iks-project.eu/scope/HokutoNoKen"
-argument_list|)
+literal|"HokutoNoKen"
 decl_stmt|,
-name|scopeIri3
+name|scopeId3
 init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://kres.iks-project.eu/scope/Doraemon"
-argument_list|)
+literal|"Doraemon"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -656,7 +644,7 @@ name|scopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|scopeIri1
+name|scopeId1
 argument_list|,
 name|src1
 argument_list|,
@@ -718,7 +706,7 @@ name|spaceFactory
 operator|.
 name|createSessionOntologySpace
 argument_list|(
-name|scopeIri1
+name|scopeId1
 argument_list|)
 argument_list|,
 name|ses
@@ -767,7 +755,7 @@ name|scopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|scopeIri1
+name|scopeId1
 argument_list|,
 name|src1
 argument_list|,
@@ -787,7 +775,7 @@ name|scopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|scopeIri2
+name|scopeId2
 argument_list|,
 name|src2
 argument_list|,
@@ -807,7 +795,7 @@ name|scopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|scopeIri3
+name|scopeId3
 argument_list|,
 name|src2
 argument_list|,
@@ -827,7 +815,7 @@ name|scopeRegistry
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIri1
+name|scopeId1
 argument_list|,
 literal|true
 argument_list|)
@@ -836,7 +824,7 @@ name|scopeRegistry
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIri2
+name|scopeId2
 argument_list|,
 literal|false
 argument_list|)
@@ -845,7 +833,7 @@ name|scopeRegistry
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIri3
+name|scopeId3
 argument_list|,
 literal|true
 argument_list|)

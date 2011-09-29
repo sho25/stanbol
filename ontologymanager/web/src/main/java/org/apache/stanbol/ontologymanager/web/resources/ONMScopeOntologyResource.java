@@ -33,25 +33,7 @@ name|Response
 operator|.
 name|Status
 operator|.
-name|INTERNAL_SERVER_ERROR
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-operator|.
-name|NOT_FOUND
+name|*
 import|;
 end_import
 
@@ -892,7 +874,7 @@ name|reg
 operator|.
 name|getScope
 argument_list|(
-name|sciri
+name|scopeid
 argument_list|)
 decl_stmt|;
 if|if
@@ -913,9 +895,18 @@ name|build
 argument_list|()
 return|;
 comment|// First of all, it could be a simple request for the space root!
+name|String
+name|temp
+init|=
+name|scopeid
+operator|+
+literal|"/"
+operator|+
+name|ontologyid
+decl_stmt|;
 if|if
 condition|(
-name|ontiri
+name|temp
 operator|.
 name|equals
 argument_list|(
@@ -950,7 +941,7 @@ block|}
 elseif|else
 if|if
 condition|(
-name|ontiri
+name|temp
 operator|.
 name|equals
 argument_list|(
@@ -989,7 +980,12 @@ name|scope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|ontiri
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|temp
+argument_list|)
 argument_list|)
 operator|!=
 literal|null
@@ -1004,7 +1000,12 @@ name|scope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|ontiri
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|temp
+argument_list|)
 argument_list|)
 operator|.
 name|asOWLOntology
@@ -1344,12 +1345,7 @@ name|reg
 operator|.
 name|getScope
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
 name|scopeID
-argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -1981,7 +1977,7 @@ name|reg
 operator|.
 name|getScope
 argument_list|(
-name|scopeIri
+name|scopeId
 argument_list|)
 decl_stmt|;
 name|OntologySpace
@@ -2008,7 +2004,7 @@ name|reg
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIri
+name|scopeId
 argument_list|,
 literal|false
 argument_list|)
@@ -2033,7 +2029,7 @@ name|reg
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIri
+name|scopeId
 argument_list|,
 literal|true
 argument_list|)
@@ -2049,7 +2045,7 @@ name|reg
 operator|.
 name|setScopeActive
 argument_list|(
-name|scopeIri
+name|scopeId
 argument_list|,
 literal|true
 argument_list|)

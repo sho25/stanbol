@@ -94,14 +94,14 @@ parameter_list|(
 name|IRI
 name|ontologyIri
 parameter_list|,
-name|IRI
+name|String
 name|scopeId
 parameter_list|)
 function_decl|;
 comment|/** 	 * Returns the set of ontology scopes where an ontology with the specified 	 * IRI is registered in either their core spaces or their custom spaces. 	 * Optionally, session spaces can be queried as well. 	 *  	 * @param ontologyIri 	 * @param includingSessionSpaces 	 * @return 	 */
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|getReferencingScopes
 parameter_list|(

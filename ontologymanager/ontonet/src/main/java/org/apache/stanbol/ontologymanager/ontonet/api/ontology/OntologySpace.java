@@ -132,8 +132,13 @@ name|ontologyIri
 parameter_list|)
 function_decl|;
 comment|/**      * Returns a Unique Resource Identifier (URI) that identifies this ontology space. For instance, this URI      * could be the parent of (some/most of) the base URIs for the ontologies within this space.<br/>      *<br/>      * A possible way to construct these IDs is by concatenating<code>/{spacetype}</code> (e.g.      *<code>/custom</code>) to the scope IRI. However, this is implementation-dependent.      *       * @return the URI that identifies this ontology space      */
-name|IRI
+name|String
 name|getID
+parameter_list|()
+function_decl|;
+comment|/**      * The namespace can change dynamically (e.g. if the ontology network is relocated), so it is not part of      * the scope identifier (although its concatenation with the identifier will still be unique).      *       * @param namespace      */
+name|IRI
+name|getNamespace
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the ontologies managed by this ontology space.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
@@ -194,6 +199,14 @@ name|removeOntologySpaceListener
 parameter_list|(
 name|OntologySpaceListener
 name|listener
+parameter_list|)
+function_decl|;
+comment|/**      * The namespace can be changed dynamically (e.g. if the ontology network is relocated).      *       * @param namespace      *            Must end with a slash character. If the IRI ends with a has, and      *            {@link IllegalArgumentException} will be thrown. If it ends with neither, a slash will be      *            added.      */
+name|void
+name|setNamespace
+parameter_list|(
+name|IRI
+name|namespace
 parameter_list|)
 function_decl|;
 name|void

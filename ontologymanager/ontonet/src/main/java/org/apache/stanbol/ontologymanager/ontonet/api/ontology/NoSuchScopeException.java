@@ -21,20 +21,6 @@ name|ontology
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
-import|;
-end_import
-
 begin_comment
 comment|/**  * Thrown whenever an operation on a scope that has not been registered is  * thrown.  *   * @author alessandro  *   */
 end_comment
@@ -56,7 +42,7 @@ init|=
 literal|6339531579406287445L
 decl_stmt|;
 specifier|private
-name|IRI
+name|String
 name|scopeID
 init|=
 literal|null
@@ -64,7 +50,7 @@ decl_stmt|;
 specifier|public
 name|NoSuchScopeException
 parameter_list|(
-name|IRI
+name|String
 name|scopeID
 parameter_list|)
 block|{
@@ -76,7 +62,7 @@ name|scopeID
 expr_stmt|;
 block|}
 specifier|public
-name|IRI
+name|String
 name|getScopeId
 parameter_list|()
 block|{

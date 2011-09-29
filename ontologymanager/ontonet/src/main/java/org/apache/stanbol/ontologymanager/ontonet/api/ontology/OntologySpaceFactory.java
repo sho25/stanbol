@@ -68,7 +68,7 @@ comment|/**      * Creates and sets up a default core ontology space. Equivalent
 name|CoreOntologySpace
 name|createCoreOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
@@ -76,11 +76,11 @@ modifier|...
 name|coreSources
 parameter_list|)
 function_decl|;
-comment|/**      * Creates and sets up a default custom ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CUSTOM, OntologyInputSource...)</code>.      *       *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param customSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
+comment|/**      * Creates and sets up a default custom ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CUSTOM, OntologyInputSource...)</code>.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param customSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
 name|CustomOntologySpace
 name|createCustomOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
@@ -92,7 +92,7 @@ comment|/**      * Creates an ontology space of the specified type.      *      
 name|OntologySpace
 name|createOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|SpaceType
@@ -107,12 +107,23 @@ comment|/**      * Creates and sets up a default session ontology space. Equival
 name|SessionOntologySpace
 name|createSessionOntologySpace
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
 modifier|...
 name|sessionSources
+parameter_list|)
+function_decl|;
+name|IRI
+name|getNamespace
+parameter_list|()
+function_decl|;
+name|void
+name|setNamespace
+parameter_list|(
+name|IRI
+name|namespace
 parameter_list|)
 function_decl|;
 block|}

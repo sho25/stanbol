@@ -1154,14 +1154,7 @@ name|_REFACTORING_SESSION_ID_DEFAULT
 init|=
 literal|"http://kres.iksproject.eu/session/refactoring"
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_REFACTORING_SPACE_DEFAULT
-init|=
-literal|"http://kres.iksproject.eu/space/refactoring"
-decl_stmt|;
+comment|//    public static final String _REFACTORING_SPACE_DEFAULT = "http://kres.iksproject.eu/space/refactoring";
 annotation|@
 name|Property
 argument_list|(
@@ -1220,21 +1213,8 @@ name|REFACTORING_SESSION_ID
 init|=
 literal|"org.apache.stanbol.ontlogymanager.session.refactoring"
 decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_REFACTORING_SPACE_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|REFACTORING_SPACE
-init|=
-literal|"org.apache.stanbol.reengineer.space.refactoring"
-decl_stmt|;
+comment|//    @Property(value = _REFACTORING_SPACE_DEFAULT)
+comment|//    public static final String REFACTORING_SPACE = "org.apache.stanbol.reengineer.space.refactoring";
 specifier|private
 name|IRI
 name|defaultRefactoringIRI
@@ -1263,13 +1243,10 @@ name|ONManager
 name|onManager
 decl_stmt|;
 specifier|private
-name|IRI
-name|refactoringScopeIRI
+name|String
+name|refactoringScopeID
 decl_stmt|;
-specifier|private
-name|IRI
-name|refactoringSpaceIRI
-decl_stmt|;
+comment|//    private IRI refactoringSpaceIRI;
 annotation|@
 name|Reference
 specifier|protected
@@ -1501,29 +1478,8 @@ name|refactoringScopeID
 operator|=
 name|_REFACTORING_SCOPE_DEFAULT
 expr_stmt|;
-name|String
-name|refactoringSpaceID
-init|=
-operator|(
-name|String
-operator|)
-name|configuration
-operator|.
-name|get
-argument_list|(
-name|REFACTORING_SPACE
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|refactoringSpaceID
-operator|==
-literal|null
-condition|)
-name|refactoringSpaceID
-operator|=
-name|_REFACTORING_SPACE_DEFAULT
-expr_stmt|;
+comment|//        String refactoringSpaceID = (String) configuration.get(REFACTORING_SPACE);
+comment|//        if (refactoringSpaceID == null) refactoringSpaceID = _REFACTORING_SPACE_DEFAULT;
 name|String
 name|defaultRefactoringID
 init|=
@@ -1579,30 +1535,8 @@ argument_list|(
 name|refactoringSessionID
 argument_list|)
 expr_stmt|;
-name|refactoringScopeIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-literal|"http://"
-operator|+
-name|hostPort
-operator|+
-literal|"/kres/ontology/"
-operator|+
-name|refactoringScopeID
-argument_list|)
-expr_stmt|;
-name|refactoringSpaceIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|refactoringSpaceID
-argument_list|)
-expr_stmt|;
+comment|//        refactoringScopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + refactoringScopeID);
+comment|//        refactoringSpaceIRI = IRI.create(refactoringSpaceID);
 name|defaultRefactoringIRI
 operator|=
 name|IRI
@@ -1718,7 +1652,7 @@ name|ontologyScopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|refactoringScopeIRI
+name|refactoringScopeID
 argument_list|,
 literal|null
 argument_list|)
@@ -1755,7 +1689,7 @@ argument_list|()
 operator|.
 name|getScope
 argument_list|(
-name|refactoringScopeIRI
+name|refactoringScopeID
 argument_list|)
 expr_stmt|;
 block|}
@@ -1769,7 +1703,7 @@ name|ontologySpaceFactory
 operator|.
 name|createSessionOntologySpace
 argument_list|(
-name|refactoringSpaceIRI
+name|refactoringScopeID
 argument_list|)
 argument_list|,
 name|kReSSession
@@ -1799,7 +1733,7 @@ name|scopeRegistry
 operator|.
 name|setScopeActive
 argument_list|(
-name|refactoringScopeIRI
+name|refactoringScopeID
 argument_list|,
 literal|true
 argument_list|)

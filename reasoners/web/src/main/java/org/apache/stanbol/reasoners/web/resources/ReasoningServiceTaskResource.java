@@ -3417,7 +3417,7 @@ argument_list|()
 operator|.
 name|getScope
 argument_list|(
-name|scopeIRI
+name|scopeID
 argument_list|)
 decl_stmt|;
 if|if

@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -19,22 +19,8 @@ name|api
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
-import|;
-end_import
-
 begin_comment
-comment|/**  * Indicates an attempt to illegally create a resource by assigning it an IRI  * that already identifies another known resource. This exception typically  * results in the new resource not being created at all.<br>  *<br>  * This exception can be subclassed for managing specific resource type-based  * behaviour (e.g. scopes, spaces or sessions).  *   * @author alessandro  *   */
+comment|/**  * Indicates an attempt to illegally create a resource by assigning it an IRI that already identifies another  * known resource. This exception typically results in the new resource not being created at all.<br>  *<br>  * This exception can be subclassed for managing specific resource type-based behaviour (e.g. scopes, spaces  * or sessions).  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -54,12 +40,12 @@ init|=
 literal|802959772682427494L
 decl_stmt|;
 specifier|protected
-name|IRI
+name|String
 name|dupe
 decl_stmt|;
-comment|/** 	 * Returns the IRI that identifies the existing resource. This can be use to 	 * obtain the resource itself by passing it onto appropriate managers. 	 *  	 * @return the duplicate identifier 	 */
+comment|/**      * Returns the IRI that identifies the existing resource. This can be use to obtain the resource itself by      * passing it onto appropriate managers.      *       * @return the duplicate identifier      */
 specifier|public
-name|IRI
+name|String
 name|getDulicateID
 parameter_list|()
 block|{
@@ -67,11 +53,11 @@ return|return
 name|dupe
 return|;
 block|}
-comment|/** 	 * Creates a new instance of DuplicateIDException. 	 *  	 * @param dupe 	 *            the duplicate ID. 	 */
+comment|/**      * Creates a new instance of DuplicateIDException.      *       * @param dupe      *            the duplicate ID.      */
 specifier|public
 name|DuplicateIDException
 parameter_list|(
-name|IRI
+name|String
 name|dupe
 parameter_list|)
 block|{
@@ -82,11 +68,11 @@ operator|=
 name|dupe
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new instance of DuplicateIDException. 	 *  	 * @param dupe 	 *            the duplicate ID. 	 * @param message 	 *            the detail message. 	 */
+comment|/**      * Creates a new instance of DuplicateIDException.      *       * @param dupe      *            the duplicate ID.      * @param message      *            the detail message.      */
 specifier|public
 name|DuplicateIDException
 parameter_list|(
-name|IRI
+name|String
 name|dupe
 parameter_list|,
 name|String
@@ -105,11 +91,11 @@ operator|=
 name|dupe
 expr_stmt|;
 block|}
-comment|/** 	 * Creates a new instance of DuplicateIDException. 	 *  	 * @param dupe 	 *            the duplicate ID. 	 * @param cause 	 *            the throwable that caused this exception to be thrown. 	 */
+comment|/**      * Creates a new instance of DuplicateIDException.      *       * @param dupe      *            the duplicate ID.      * @param cause      *            the throwable that caused this exception to be thrown.      */
 specifier|public
 name|DuplicateIDException
 parameter_list|(
-name|IRI
+name|String
 name|dupe
 parameter_list|,
 name|Throwable

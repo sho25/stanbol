@@ -43,7 +43,7 @@ block|{
 name|void
 name|onOntologyAdded
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|IRI
@@ -53,7 +53,7 @@ function_decl|;
 name|void
 name|onOntologyRemoved
 parameter_list|(
-name|IRI
+name|String
 name|scopeId
 parameter_list|,
 name|IRI

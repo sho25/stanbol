@@ -672,6 +672,39 @@ block|{
 comment|// TODO Auto-generated method stub
 block|}
 specifier|public
+name|MGraph
+name|getGraph
+parameter_list|(
+name|UriRef
+name|graphId
+parameter_list|)
+throws|throws
+name|NoSuchStoreException
+block|{
+if|if
+condition|(
+name|tcManager
+operator|!=
+literal|null
+condition|)
+return|return
+name|tcManager
+operator|.
+name|getMGraph
+argument_list|(
+name|graphId
+argument_list|)
+return|;
+else|else
+throw|throw
+operator|new
+name|NoSuchStoreException
+argument_list|(
+literal|"No store registered or activated in the environment."
+argument_list|)
+throw|;
+block|}
+specifier|public
 name|OWLOntology
 name|getGraph
 parameter_list|(
@@ -681,24 +714,10 @@ parameter_list|)
 throws|throws
 name|NoSuchStoreException
 block|{
-name|OWLOntology
-name|ontology
-init|=
-literal|null
-decl_stmt|;
-if|if
-condition|(
-name|tcManager
-operator|!=
-literal|null
-condition|)
-block|{
 name|MGraph
 name|mGraph
 init|=
-name|tcManager
-operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 operator|new
 name|UriRef
@@ -709,6 +728,11 @@ name|toString
 argument_list|()
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|OWLOntology
+name|ontology
+init|=
+literal|null
 decl_stmt|;
 name|JenaToOwlConvert
 name|jowl
@@ -764,17 +788,6 @@ argument_list|)
 expr_stmt|;
 comment|// ontology =
 comment|// OWLAPIToClerezzaConverter.clerezzaMGraphToOWLOntology(mGraph);
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|NoSuchStoreException
-argument_list|(
-literal|"No store registered or activated in the environment."
-argument_list|)
-throw|;
-block|}
 return|return
 name|ontology
 return|;
@@ -829,7 +842,6 @@ name|uriRef
 range|:
 name|uriRefs
 control|)
-block|{
 name|iris
 operator|.
 name|add
@@ -845,7 +857,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 return|return
 name|iris

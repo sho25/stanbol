@@ -598,10 +598,15 @@ name|exclude
 operator|.
 name|add
 argument_list|(
+name|IRI
+operator|.
+name|create
+argument_list|(
 name|e
 operator|.
 name|getDulicateID
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 continue|continue;
@@ -638,6 +643,9 @@ operator|new
 name|DuplicateSessionIDException
 argument_list|(
 name|sessionID
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 throw|;
 name|Session

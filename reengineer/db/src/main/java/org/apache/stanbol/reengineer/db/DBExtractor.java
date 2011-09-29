@@ -668,30 +668,9 @@ name|_DB_DATA_REENGINEERING_SESSION_DEFAULT
 init|=
 literal|"/db-data-reengineering-session"
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT
-init|=
-literal|"/db-data-reengineering-session-space"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_DB_REENGINEERING_SESSION_SPACE_DEFAULT
-init|=
-literal|"/db-schema-reengineering-session-space"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|_DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT
-init|=
-literal|"/db-schema-reengineering-ontology-space"
-decl_stmt|;
+comment|//    public static final String _DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT = "/db-data-reengineering-session-space";
+comment|//    public static final String _DB_REENGINEERING_SESSION_SPACE_DEFAULT = "/db-schema-reengineering-session-space";
+comment|//    public static final String _DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT = "/db-schema-reengineering-ontology-space";
 specifier|public
 specifier|static
 specifier|final
@@ -731,51 +710,13 @@ name|DB_DATA_REENGINEERING_SESSION
 init|=
 literal|"org.apache.stanbol.reengineer.db.data"
 decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|DB_DATA_REENGINEERING_SESSION_SPACE
-init|=
-literal|"org.apache.stanbol.reengineer.space.db.data"
-decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_DB_REENGINEERING_SESSION_SPACE_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|DB_REENGINEERING_SESSION_SPACE
-init|=
-literal|"http://kres.iks-project.eu/space/reengineering/db"
-decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-name|_DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT
-argument_list|)
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE
-init|=
-literal|"org.apache.stanbol.reengineer.ontology.space.db"
-decl_stmt|;
+comment|//    @Property(value = _DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT)
+comment|//    public static final String DB_DATA_REENGINEERING_SESSION_SPACE = "org.apache.stanbol.reengineer.space.db.data";
+comment|//
+comment|//    @Property(value = _DB_REENGINEERING_SESSION_SPACE_DEFAULT)
+comment|//    public static final String DB_REENGINEERING_SESSION_SPACE = "http://kres.iks-project.eu/space/reengineering/db";
+comment|//    @Property(value = _DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT)
+comment|//    public static final String DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE = "org.apache.stanbol.reengineer.ontology.space.db";
 annotation|@
 name|Property
 argument_list|(
@@ -827,10 +768,7 @@ decl_stmt|;
 name|String
 name|databaseURI
 decl_stmt|;
-specifier|private
-name|IRI
-name|kReSSessionID
-decl_stmt|;
+comment|//    private IRI kReSSessionID;
 specifier|private
 specifier|final
 name|Logger
@@ -855,8 +793,8 @@ name|ReengineerManager
 name|reengineeringManager
 decl_stmt|;
 specifier|private
-name|IRI
-name|reengineeringScopeIRI
+name|String
+name|reengineeringScopeID
 decl_stmt|;
 specifier|private
 name|IRI
@@ -1079,9 +1017,9 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{
-name|String
+comment|/*         String */
 name|reengineeringScopeID
-init|=
+operator|=
 operator|(
 name|String
 operator|)
@@ -1091,7 +1029,7 @@ name|get
 argument_list|(
 name|REENGINEERING_SCOPE
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 if|if
 condition|(
 name|reengineeringScopeID
@@ -1132,28 +1070,9 @@ literal|"http://"
 operator|+
 name|hostNameAndPort
 expr_stmt|;
-name|reengineeringScopeIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|hostNameAndPort
-operator|+
-literal|"/kres/ontoman/ontology/ontology/"
-operator|+
-name|reengineeringScopeID
-argument_list|)
-expr_stmt|;
-name|reengineeringSpaceIRI
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|DB_REENGINEERING_SESSION_SPACE
-argument_list|)
-expr_stmt|;
+comment|//        reengineeringScopeID = IRI.create(hostNameAndPort + "/kres/ontoman/ontology/ontology/"
+comment|//                                           + reengineeringScopeID);
+comment|//        reengineeringSpaceIRI = IRI.create(DB_REENGINEERING_SESSION_SPACE);
 name|reengineeringManager
 operator|.
 name|bindReengineer
@@ -1177,13 +1096,7 @@ operator|.
 name|createSession
 argument_list|()
 decl_stmt|;
-name|kReSSessionID
-operator|=
-name|kReSSession
-operator|.
-name|getID
-argument_list|()
-expr_stmt|;
+comment|//        kReSSessionID = kReSSession.getID();
 name|OntologyScopeFactory
 name|ontologyScopeFactory
 init|=
@@ -1268,7 +1181,7 @@ name|ontologyScopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
-name|reengineeringScopeIRI
+name|reengineeringScopeID
 argument_list|,
 operator|new
 name|RootOntologyIRISource
@@ -1314,7 +1227,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|reengineeringScopeIRI
+name|reengineeringScopeID
 argument_list|)
 expr_stmt|;
 block|}
@@ -1369,7 +1282,9 @@ name|ontologySpaceFactory
 operator|.
 name|createSessionOntologySpace
 argument_list|(
-name|reengineeringSpaceIRI
+name|this
+operator|.
+name|reengineeringScopeID
 argument_list|)
 argument_list|,
 name|kReSSession
@@ -1382,7 +1297,7 @@ name|scopeRegistry
 operator|.
 name|setScopeActive
 argument_list|(
-name|reengineeringScopeIRI
+name|reengineeringScopeID
 argument_list|,
 literal|true
 argument_list|)
@@ -1398,9 +1313,9 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Cannot add session space "
+literal|"Cannot add session space for scope "
 operator|+
-name|reengineeringSpaceIRI
+name|reengineeringScopeID
 operator|+
 literal|" to unmodifiable scope "
 operator|+
@@ -1632,7 +1547,7 @@ name|scopeRegistry
 operator|.
 name|isScopeActive
 argument_list|(
-name|reengineeringScopeIRI
+name|reengineeringScopeID
 argument_list|)
 condition|)
 block|{
@@ -1642,7 +1557,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|reengineeringScopeIRI
+name|reengineeringScopeID
 argument_list|)
 expr_stmt|;
 block|}

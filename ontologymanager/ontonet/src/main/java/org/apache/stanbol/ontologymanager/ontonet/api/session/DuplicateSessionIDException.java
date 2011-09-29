@@ -76,7 +76,7 @@ decl_stmt|;
 specifier|public
 name|DuplicateSessionIDException
 parameter_list|(
-name|IRI
+name|String
 name|dupe
 parameter_list|)
 block|{
@@ -89,7 +89,7 @@ block|}
 specifier|public
 name|DuplicateSessionIDException
 parameter_list|(
-name|IRI
+name|String
 name|dupe
 parameter_list|,
 name|String
@@ -107,7 +107,7 @@ block|}
 specifier|public
 name|DuplicateSessionIDException
 parameter_list|(
-name|IRI
+name|String
 name|dupe
 parameter_list|,
 name|Throwable

@@ -765,7 +765,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|scopeIRI
+name|scope
 argument_list|)
 decl_stmt|;
 name|SessionOntologySpace
@@ -982,7 +982,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|scopeIRI
+name|scope
 argument_list|)
 decl_stmt|;
 name|SessionOntologySpace
@@ -1145,7 +1145,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|scopeIRI
+name|scope
 argument_list|)
 decl_stmt|;
 comment|/*          * Finally associate the KReS session to the scope.          */
@@ -1164,7 +1164,7 @@ name|ontologySpaceFactory
 operator|.
 name|createSessionOntologySpace
 argument_list|(
-name|scopeIRI
+name|scope
 argument_list|)
 decl_stmt|;
 try|try
@@ -1307,7 +1307,7 @@ name|scopeRegistry
 operator|.
 name|getScope
 argument_list|(
-name|scopeID
+name|scope
 argument_list|)
 decl_stmt|;
 name|SessionOntologySpace
