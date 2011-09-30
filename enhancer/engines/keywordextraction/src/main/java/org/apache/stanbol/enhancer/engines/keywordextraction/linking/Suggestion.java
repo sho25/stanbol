@@ -158,6 +158,11 @@ specifier|private
 name|double
 name|score
 decl_stmt|;
+comment|/**      * The score of the matches (e.g. when a match is based on stemming or some      * oder kind of fuzziness, than matchers might assign a match score than      * 1.0.      */
+specifier|private
+name|float
+name|matchScore
+decl_stmt|;
 specifier|public
 specifier|static
 enum|enum
@@ -207,7 +212,7 @@ comment|//TODO Do no longer use the resultScore as the score. We need to provide
 comment|//own algorithm to calculate scores!
 comment|//        this.resultScore = result.getFirst(RdfResourceEnum.resultScore.getUri(), Float.class);
 block|}
-comment|/**      * Updates this suggestion       * @param match the math type      * @param span the number of token this suggestion spans      * @param count the number of token that match with the suggestion within the span      * @param label the label that matches the tokens      * @param labelTokenCount the number of tokens of the label      */
+comment|/**      * Updates this suggestion       * @param match the math type      * @param span the number of token this suggestion spans      * @param count the number of token that match with the suggestion within the span      * @param matchScore the score of the match. MUST BE in the range between       *<code>[0..1]</code>. For {@link MATCH#EXACT} and {@link MATCH#NONE} this      * parameter is ignored and the value is set to<code>1</code>,<code>0</code>      * respectively.      * @param label the label that matches the tokens      * @param labelTokenCount the number of tokens of the label      */
 specifier|protected
 name|void
 name|updateMatch
@@ -220,6 +225,9 @@ name|span
 parameter_list|,
 name|int
 name|count
+parameter_list|,
+name|float
+name|matchScore
 parameter_list|,
 name|Text
 name|label
@@ -256,6 +264,12 @@ operator|.
 name|matchCount
 operator|=
 literal|0
+expr_stmt|;
+name|this
+operator|.
+name|matchScore
+operator|=
+literal|0f
 expr_stmt|;
 name|this
 operator|.
@@ -349,22 +363,81 @@ name|span
 expr_stmt|;
 name|this
 operator|.
+name|label
+operator|=
+name|label
+expr_stmt|;
+if|if
+condition|(
+name|match
+operator|==
+name|MATCH
+operator|.
+name|EXACT
+condition|)
+block|{
+comment|//for exact matches the matchScore needs to be
+name|this
+operator|.
+name|matchScore
+operator|=
+literal|1f
+expr_stmt|;
+comment|// ignored and set to 1.0f
+name|this
+operator|.
+name|matchCount
+operator|=
+name|span
+expr_stmt|;
+comment|//and the match count needs to be equals to the span
+name|this
+operator|.
+name|labelTokenCount
+operator|=
+name|span
+expr_stmt|;
+block|}
+else|else
+block|{
+if|if
+condition|(
+name|matchScore
+operator|>
+literal|1f
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The matchScore MUST NOT be greater than one (parsed value = "
+operator|+
+name|matchScore
+operator|+
+literal|")"
+argument_list|)
+throw|;
+block|}
+name|this
+operator|.
+name|matchScore
+operator|=
+name|matchScore
+expr_stmt|;
+name|this
+operator|.
 name|matchCount
 operator|=
 name|count
 expr_stmt|;
 name|this
 operator|.
-name|label
-operator|=
-name|label
-expr_stmt|;
-name|this
-operator|.
 name|labelTokenCount
 operator|=
 name|labelTokenCount
 expr_stmt|;
+block|}
 block|}
 comment|/**      * Getter for the number of Tokens of the label. Usually needed to calculate      * the score (how good the label matches)      * @return the labelTokenCount      */
 specifier|public
@@ -402,6 +475,17 @@ parameter_list|()
 block|{
 return|return
 name|match
+return|;
+block|}
+comment|/**      * Getter for the matching score. This is a modifier in the range      * between [0..1] that tells about the quality of the matches for the      * {@link #getMatchCount() matched} tokens.<p>      * As an example if a match is based on stemming a word a label matcher      * implementation might want to assign a matching score below<code>1</code>.      * Score calculations that use the {@link #getMatchCount()} should use      *<code>{@link #getMatchCount()} * {@link #getMatchScore()}</code> as a      * bases.      * @return the matchScore      */
+specifier|public
+specifier|final
+name|float
+name|getMatchScore
+parameter_list|()
+block|{
+return|return
+name|matchScore
 return|;
 block|}
 comment|/**      * Getter for the number of the token matched by this suggestion      * @return The number of the token matched by this suggestion      */
