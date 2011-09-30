@@ -68,7 +68,7 @@ block|{
 name|String
 name|jsonldInput
 init|=
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 decl_stmt|;
 name|JsonLdProfile
 name|profile
@@ -91,7 +91,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -118,7 +118,7 @@ block|{
 name|String
 name|jsonldInput
 init|=
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":[\"http://iks-project.eu/ont/person\",\"http://www.schema.org/Person\"]}}}"
 decl_stmt|;
 name|JsonLdProfile
 name|profile
@@ -133,7 +133,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":[\"http://iks-project.eu/ont/person\",\"http://www.schema.org/Person\"]}}}"
 decl_stmt|;
 name|String
 name|actual
@@ -143,6 +143,11 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
+name|toConsole
+argument_list|(
+name|actual
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expected

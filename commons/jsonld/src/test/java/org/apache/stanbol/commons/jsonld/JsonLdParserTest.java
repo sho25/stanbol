@@ -86,7 +86,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -113,7 +113,7 @@ block|{
 name|String
 name|jsonldInput
 init|=
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@profile\":\"iks:employeeOf\",\"@\":[{\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"person\":{\"@iri\":\"upb:fchrist\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@profile\":\"iks:employeeOf\",\"@subject\":[{\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"person\":{\"@iri\":\"upb:fchrist\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}}]}"
 decl_stmt|;
 name|JsonLd
 name|jsonLd
@@ -150,7 +150,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":[{\"@\":\"_:bnode1\",\"@profile\":\"http:\\/\\/iks-project.eu\\/ont\\/employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"http:\\/\\/upb.de\\/persons\\/bnagel\"}},{\"@\":\"_:bnode2\",\"@profile\":\"http:\\/\\/iks-project.eu\\/ont\\/employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"http:\\/\\/upb.de\\/persons\\/fchrist\"}}]}"
+literal|"{\"@subject\":[{\"@subject\":\"_:bnode1\",\"@profile\":\"http://iks-project.eu/ont/employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"http://upb.de/persons/bnagel\"}},{\"@subject\":\"_:bnode2\",\"@profile\":\"http://iks-project.eu/ont/employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"http://upb.de/persons/fchrist\"}}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -177,7 +177,7 @@ block|{
 name|String
 name|jsonldInput
 init|=
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@profile\":\"iks:employeeOf\",\"@\":[{\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"person\":{\"@iri\":\"upb:fchrist\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@profile\":\"iks:employeeOf\",\"@subject\":[{\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"person\":{\"@iri\":\"upb:fchrist\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}}]}"
 decl_stmt|;
 name|JsonLd
 name|jsonLd
@@ -214,7 +214,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":[{\"@\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}},{\"@\":\"_:bnode2\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:fchrist\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":[{\"@subject\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}},{\"@subject\":\"_:bnode2\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:fchrist\"}}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -241,7 +241,7 @@ block|{
 name|String
 name|jsonldInput
 init|=
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@profile\":\"iks:employeeOf\",\"@\":[{\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"person\":{\"@iri\":\"upb:fchrist\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@profile\":\"iks:employeeOf\",\"@subject\":[{\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"person\":{\"@iri\":\"upb:fchrist\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}}]}"
 decl_stmt|;
 name|JsonLd
 name|jsonLd
@@ -285,7 +285,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"[{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}},{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":\"_:bnode2\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:fchrist\"}}]"
+literal|"[{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}},{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":\"_:bnode2\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:fchrist\"}}]"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -312,7 +312,7 @@ block|{
 name|String
 name|jsonldInput
 init|=
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@\":[{\"@profile\":\"iks:employeeOf\",\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"@profile\":\"iks:friendOf\",\"person\":{\"@iri\":\"upb:bnagel\"},\"friend\":{\"@iri\":\"upb:fchrist\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":[{\"@profile\":\"iks:employeeOf\",\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"@profile\":\"iks:friendOf\",\"person\":{\"@iri\":\"upb:bnagel\"},\"friend\":{\"@iri\":\"upb:fchrist\"}}]}"
 decl_stmt|;
 name|JsonLd
 name|jsonLd
@@ -356,7 +356,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":[{\"@\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http:\\/\\/uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}},{\"@\":\"_:bnode2\",\"@profile\":\"iks:friendOf\",\"friend\":{\"@iri\":\"upb:fchrist\"},\"person\":{\"@iri\":\"upb:bnagel\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":[{\"@subject\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":{\"@iri\":\"http://uni-paderborn.de\"},\"person\":{\"@iri\":\"upb:bnagel\"}},{\"@subject\":\"_:bnode2\",\"@profile\":\"iks:friendOf\",\"friend\":{\"@iri\":\"upb:fchrist\"},\"person\":{\"@iri\":\"upb:bnagel\"}}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -427,7 +427,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"#\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"upb\":\"http:\\/\\/upb.de\\/persons\\/\"},\"@\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":\"UniPaderborn\",\"person\":\"Benjamin\"}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\"},\"@subject\":\"_:bnode1\",\"@profile\":\"iks:employeeOf\",\"organization\":\"UniPaderborn\",\"person\":\"Benjamin\"}"
 decl_stmt|;
 name|assertEquals
 argument_list|(

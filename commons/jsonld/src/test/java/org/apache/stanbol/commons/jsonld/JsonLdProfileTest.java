@@ -96,7 +96,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -149,7 +149,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":\"http:\\/\\/iks-project.eu\\/ont\\/person\"}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":\"http://iks-project.eu/ont/person\"}}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -213,7 +213,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":[\"http://iks-project.eu/ont/person\",\"http://www.schema.org/Person\"]}}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(

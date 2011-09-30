@@ -300,7 +300,7 @@ name|equals
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|TYPES
+name|COERCE
 argument_list|)
 condition|)
 block|{
@@ -360,7 +360,7 @@ argument_list|)
 decl_stmt|;
 name|subject
 operator|.
-name|putCoercionType
+name|putPropertyType
 argument_list|(
 name|property
 argument_list|,

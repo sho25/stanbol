@@ -298,7 +298,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -351,7 +351,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -409,7 +409,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -467,7 +467,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -541,7 +541,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":\"http:\\/\\/iks-project.eu\\/ont\\/person\"}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":\"http:\\/\\/iks-project.eu\\/ont\\/person\"}}}"
 decl_stmt|;
 name|Assert
 operator|.
@@ -588,7 +588,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"#types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -658,7 +658,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -716,7 +716,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -790,7 +790,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"#types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
 decl_stmt|;
 name|Assert
 operator|.
@@ -837,7 +837,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -938,7 +938,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1039,7 +1039,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1140,7 +1140,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1188,7 +1188,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"friend\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"friend\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1289,7 +1289,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1337,7 +1337,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"friend\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"friend\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1438,7 +1438,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"#types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"person\":\"iks:person\",\"organization\":\"iks:organization\"}}}"
 argument_list|)
 operator|.
 name|withHeader

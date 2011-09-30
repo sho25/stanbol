@@ -98,6 +98,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|// maps properties to types
 specifier|private
 name|Map
 argument_list|<
@@ -105,7 +106,7 @@ name|String
 argument_list|,
 name|String
 argument_list|>
-name|coercionMap
+name|coerceMap
 init|=
 operator|new
 name|HashMap
@@ -116,6 +117,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|// maps properties to values
 specifier|private
 name|Map
 argument_list|<
@@ -221,7 +223,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
-name|putCoercionType
+name|putPropertyType
 parameter_list|(
 name|String
 name|property
@@ -232,7 +234,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|coercionMap
+name|coerceMap
 operator|.
 name|put
 argument_list|(
@@ -244,7 +246,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|String
-name|getCoercionTypeOf
+name|getTypeOfProperty
 parameter_list|(
 name|String
 name|property
@@ -253,7 +255,7 @@ block|{
 return|return
 name|this
 operator|.
-name|coercionMap
+name|coerceMap
 operator|.
 name|get
 argument_list|(
@@ -268,13 +270,13 @@ name|String
 argument_list|,
 name|String
 argument_list|>
-name|getCoercionMap
+name|getCoerceMap
 parameter_list|()
 block|{
 return|return
 name|this
 operator|.
-name|coercionMap
+name|coerceMap
 return|;
 block|}
 specifier|public
