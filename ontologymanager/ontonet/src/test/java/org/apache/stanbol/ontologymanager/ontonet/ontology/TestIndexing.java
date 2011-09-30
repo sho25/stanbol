@@ -139,6 +139,24 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|OfflineConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|io
 operator|.
 name|OntologyInputSource
@@ -258,6 +276,20 @@ operator|.
 name|impl
 operator|.
 name|ONManagerImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|owl
+operator|.
+name|OWLOntologyManagerFactory
 import|;
 end_import
 
@@ -414,7 +446,17 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//        RegistryManager regman = new RegistryManagerImpl(emptyConfig);
+specifier|final
+name|OfflineConfiguration
+name|offline
+init|=
+operator|new
+name|OfflineConfigurationImpl
+argument_list|(
+name|emptyConfig
+argument_list|)
+decl_stmt|;
+comment|// RegistryManager regman = new RegistryManagerImpl(emptyConfig);
 comment|// An ONManagerImpl with no store and default settings
 name|onm
 operator|=
@@ -425,25 +467,30 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-operator|new
-name|OfflineConfigurationImpl
-argument_list|(
-name|emptyConfig
-argument_list|)
+name|offline
 argument_list|,
 name|emptyConfig
 argument_list|)
 expr_stmt|;
 name|mgr
 operator|=
-name|onm
+name|OWLOntologyManagerFactory
 operator|.
-name|getOntologyManagerFactory
+name|createOWLOntologyManager
+argument_list|(
+name|offline
+operator|.
+name|getOntologySourceLocations
 argument_list|()
 operator|.
-name|createOntologyManager
+name|toArray
 argument_list|(
-literal|true
+operator|new
+name|IRI
+index|[
+literal|0
+index|]
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Since it is registered, this scope must be unique, or subsequent
@@ -506,22 +553,22 @@ expr_stmt|;
 block|}
 comment|// The factory call also invokes loadRegistriesEager() and
 comment|// gatherOntologies() so no need to test them individually.
-comment|//        try {
-comment|//            scope = onm.getOntologyScopeFactory().createOntologyScope(
-comment|//                scopeIri,
-comment|//                new RegistryIRISource(testRegistryIri, onm.getOwlCacheManager(), onm
-comment|//                        .getRegistryLoader(), null
-comment|//                // new RootOntologySource(oParent
-comment|//                ));
+comment|// try {
+comment|// scope = onm.getOntologyScopeFactory().createOntologyScope(
+comment|// scopeIri,
+comment|// new RegistryIRISource(testRegistryIri, onm.getOwlCacheManager(), onm
+comment|// .getRegistryLoader(), null
+comment|// // new RootOntologySource(oParent
+comment|// ));
 comment|//
-comment|//            onm.getScopeRegistry().registerScope(scope);
-comment|//        } catch (DuplicateIDException e) {
-comment|//            // Uncomment if annotated with @BeforeClass instead of @Before ,
-comment|//            // comment otherwise.
-comment|//            fail("DuplicateID exception caught when creating test scope.");
-comment|//        }
+comment|// onm.getScopeRegistry().registerScope(scope);
+comment|// } catch (DuplicateIDException e) {
+comment|// // Uncomment if annotated with @BeforeClass instead of @Before ,
+comment|// // comment otherwise.
+comment|// fail("DuplicateID exception caught when creating test scope.");
+comment|// }
 block|}
-comment|//    @Test
+comment|// @Test
 specifier|public
 name|void
 name|testAddOntology
@@ -659,7 +706,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//    @Test
+comment|// @Test
 specifier|public
 name|void
 name|testGetOntology
@@ -690,7 +737,7 @@ comment|// assertNotNull(index.getOntology(objrole));
 comment|// // assertSame() would fail.
 comment|// assertEquals(index.getOntology(objrole), oObjRole);
 block|}
-comment|//    @Test
+comment|// @Test
 specifier|public
 name|void
 name|testIsOntologyLoaded

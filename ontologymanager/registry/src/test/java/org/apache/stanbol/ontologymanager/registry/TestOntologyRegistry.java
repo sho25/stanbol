@@ -25,7 +25,31 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
@@ -132,66 +156,6 @@ operator|.
 name|api
 operator|.
 name|OfflineConfiguration
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|CoreOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|OntologyScope
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|SessionOntologySpace
 import|;
 end_import
 
@@ -331,24 +295,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|registry
-operator|.
-name|io
-operator|.
-name|RegistryIRISource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|Before
@@ -446,12 +392,6 @@ name|scopeIri
 init|=
 literal|"Scope"
 decl_stmt|;
-specifier|private
-specifier|static
-name|RegistryIRISource
-name|ontologySource
-decl_stmt|;
-comment|// Null until the RegistryIRISource stays in place.
 specifier|private
 specifier|static
 name|ONManager
@@ -925,173 +865,46 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Verifies that the addition of a null or valid registry source to a session space works.      */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testAddRegistryToSessionSpace
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|SessionOntologySpace
-name|space
-init|=
-literal|null
-decl_stmt|;
-name|space
-operator|=
-name|onm
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|scopeIri
-argument_list|)
-expr_stmt|;
-name|space
-operator|.
-name|setUp
-argument_list|()
-expr_stmt|;
-comment|// space.addOntology(new
-comment|// OntologyRegistryIRISource(testRegistryIri,onm.getOwlCacheManager(),onm.getRegistryLoader()));
-name|space
-operator|.
-name|addOntology
-argument_list|(
-name|ontologySource
-argument_list|)
-expr_stmt|;
-comment|// FIXME : no longer use the top ontology?
-name|assertTrue
-argument_list|(
-name|space
-operator|.
-name|asOWLOntology
-argument_list|()
-operator|!=
-literal|null
-argument_list|)
-expr_stmt|;
-name|assertTrue
-argument_list|(
-name|space
-operator|.
-name|getOntologies
-argument_list|(
-literal|true
-argument_list|)
-operator|.
-name|contains
-argument_list|(
-name|space
-operator|.
-name|asOWLOntology
-argument_list|()
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**      * Verifies that an ontology scope with a null or valid registry source is created correctly.      */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testScopeCreationWithRegistry
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|OntologyScope
-name|scope
-init|=
-literal|null
-decl_stmt|;
-comment|// The input source instantiation automatically loads the entire content of a registry, no need to
-comment|// test loading methods individually.
-name|scope
-operator|=
-name|onm
-operator|.
-name|getOntologyScopeFactory
-argument_list|()
-operator|.
-name|createOntologyScope
-argument_list|(
-name|scopeIri
-argument_list|,
-name|ontologySource
-argument_list|)
-expr_stmt|;
-name|assertTrue
-argument_list|(
-name|scope
-operator|!=
-literal|null
-operator|&&
-name|scope
-operator|.
-name|getCoreSpace
-argument_list|()
-operator|.
-name|asOWLOntology
-argument_list|()
-operator|!=
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**      * Verifies that an ontology space with a null or valid registry source is created correctly.      */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testSpaceCreationWithRegistry
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-comment|// setupOfflineMapper();
-name|CoreOntologySpace
-name|space
-init|=
-literal|null
-decl_stmt|;
-comment|// The input source instantiation automatically loads the entire content of a registry, no need to
-comment|// test loading methods individually.
-name|space
-operator|=
-name|onm
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-operator|.
-name|createCoreOntologySpace
-argument_list|(
-name|scopeIri
-argument_list|,
-name|ontologySource
-argument_list|)
-expr_stmt|;
-name|assertTrue
-argument_list|(
-name|space
-operator|!=
-literal|null
-operator|&&
-name|space
-operator|.
-name|asOWLOntology
-argument_list|()
-operator|!=
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
+comment|// /**
+comment|// * Verifies that the addition of a null or valid registry source to a session space works.
+comment|// */
+comment|// @Test
+comment|// public void testAddRegistryToSessionSpace() throws Exception {
+comment|// SessionOntologySpace space = null;
+comment|// space = onm.getOntologySpaceFactory().createSessionOntologySpace(scopeIri);
+comment|// space.setUp();
+comment|// // space.addOntology(new
+comment|// // OntologyRegistryIRISource(testRegistryIri,onm.getOwlCacheManager(),onm.getRegistryLoader()));
+comment|// space.addOntology(ontologySource);
+comment|// // FIXME : no longer use the top ontology?
+comment|// assertTrue(space.asOWLOntology() != null);
+comment|// assertTrue(space.getOntologies(true).contains(space.asOWLOntology()));
+comment|// }
+comment|//
+comment|// /**
+comment|// * Verifies that an ontology scope with a null or valid registry source is created correctly.
+comment|// */
+comment|// @Test
+comment|// public void testScopeCreationWithRegistry() throws Exception {
+comment|// OntologyScope scope = null;
+comment|// // The input source instantiation automatically loads the entire content of a registry, no need to
+comment|// // test loading methods individually.
+comment|// scope = onm.getOntologyScopeFactory().createOntologyScope(scopeIri, ontologySource);
+comment|// assertTrue(scope != null&& scope.getCoreSpace().asOWLOntology() != null);
+comment|// }
+comment|//
+comment|// /**
+comment|// * Verifies that an ontology space with a null or valid registry source is created correctly.
+comment|// */
+comment|// @Test
+comment|// public void testSpaceCreationWithRegistry() throws Exception {
+comment|// // setupOfflineMapper();
+comment|// CoreOntologySpace space = null;
+comment|// // The input source instantiation automatically loads the entire content of a registry, no need to
+comment|// // test loading methods individually.
+comment|// space = onm.getOntologySpaceFactory().createCoreOntologySpace(scopeIri, ontologySource);
+comment|// assertTrue(space != null&& space.asOWLOntology() != null);
+comment|// }
 block|}
 end_class
 

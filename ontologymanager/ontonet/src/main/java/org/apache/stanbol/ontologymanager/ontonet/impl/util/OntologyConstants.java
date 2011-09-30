@@ -30,15 +30,15 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|NS__KRES
+name|NS_STANBOL
 init|=
-literal|"http://kres.iks-project.eu/"
+literal|"http://stanbol.apache.org/"
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|String
-name|NS__ODP
+name|NS_ODP
 init|=
 literal|"http://www.ontologydesignpatterns.org/"
 decl_stmt|;
@@ -48,7 +48,7 @@ specifier|final
 name|String
 name|NS_ONM
 init|=
-name|NS__KRES
+name|NS_STANBOL
 operator|+
 literal|"ontology/meta/onm.owl#"
 decl_stmt|;

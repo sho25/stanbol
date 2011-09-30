@@ -153,26 +153,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|ontology
-operator|.
-name|OWLOntologyManagerFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -246,10 +226,6 @@ function_decl|;
 comment|/**      * Returns the default object that automatically indexes ontologies as they are loaded within scopes.      *       * @return the default ontology index.      */
 name|OntologyIndex
 name|getOntologyIndex
-parameter_list|()
-function_decl|;
-name|OWLOntologyManagerFactoryImpl
-name|getOntologyManagerFactory
 parameter_list|()
 function_decl|;
 comment|/**      * Implementations should be able to create a {@link File} object from this path.      *       * @return the local path of the ontology storing the ontology network configuration.      */
