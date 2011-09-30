@@ -961,8 +961,17 @@ literal|"index"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1086,8 +1095,17 @@ literal|"entity"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1183,8 +1201,17 @@ operator|.
 name|ok
 argument_list|(
 name|entity
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1326,8 +1353,17 @@ literal|"lookup"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1451,8 +1487,17 @@ operator|.
 name|ok
 argument_list|(
 name|entity
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1859,8 +1904,17 @@ operator|.
 name|ok
 argument_list|(
 name|entity
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|accepted
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -2354,8 +2408,17 @@ operator|.
 name|ok
 argument_list|(
 name|entity
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|accepted
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -2654,8 +2717,17 @@ literal|"find"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -2872,8 +2944,17 @@ literal|"query"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3002,8 +3083,17 @@ name|find
 argument_list|(
 name|query
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3185,8 +3275,17 @@ literal|"mapping"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3331,8 +3430,17 @@ operator|.
 name|ok
 argument_list|(
 name|mapping
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3345,7 +3453,8 @@ comment|//    @GET
 comment|//    @Path("/entity")
 comment|//    @Produces(MediaType.TEXT_HTML)
 comment|//    public Response getEntityMappingPage() {
-comment|//        return Response.ok(new Viewable("entity", this), TEXT_HTML).build();
+comment|//        return Response.ok(new Viewable("entity", this))
+comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 comment|//    }
 annotation|@
 name|GET
@@ -3482,8 +3591,17 @@ literal|"mapping_entity"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3613,8 +3731,17 @@ operator|.
 name|ok
 argument_list|(
 name|mapping
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3627,7 +3754,8 @@ comment|//    @GET
 comment|//    @Path("mapping/symbol")
 comment|//    @Produces(MediaType.TEXT_HTML)
 comment|//    public Response getSymbolMappingPage() {
-comment|//        return Response.ok(new Viewable("symbol", this), TEXT_HTML).build();
+comment|//        return Response.ok(new Viewable("symbol", this))
+comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 comment|//    }
 annotation|@
 name|GET
@@ -3764,8 +3892,17 @@ literal|"mapping_symbol"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -3926,8 +4063,17 @@ operator|.
 name|ok
 argument_list|(
 name|mappingResultList
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build

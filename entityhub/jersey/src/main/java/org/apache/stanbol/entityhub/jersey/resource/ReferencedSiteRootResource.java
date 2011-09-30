@@ -1151,8 +1151,17 @@ literal|"index"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1227,8 +1236,17 @@ operator|.
 name|toString
 argument_list|()
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1420,8 +1438,17 @@ argument_list|()
 argument_list|,
 name|license
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1632,8 +1659,17 @@ literal|"entity"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1759,8 +1795,17 @@ operator|.
 name|ok
 argument_list|(
 name|entity
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -2081,8 +2126,17 @@ literal|"find"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -2268,8 +2322,17 @@ literal|"query"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -2303,8 +2366,17 @@ name|find
 argument_list|(
 name|query
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|mediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build

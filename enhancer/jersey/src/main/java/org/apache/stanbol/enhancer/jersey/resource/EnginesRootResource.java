@@ -740,6 +740,8 @@ operator|.
 name|build
 argument_list|()
 return|;
+comment|//        return Response.ok(new Viewable("index", this))
+comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 block|}
 specifier|public
 name|List
@@ -1121,16 +1123,15 @@ operator|.
 name|ok
 argument_list|(
 name|ajaxView
-argument_list|)
-operator|.
-name|type
-argument_list|(
+argument_list|,
 name|TEXT_HTML
 argument_list|)
 operator|.
 name|build
 argument_list|()
 return|;
+comment|//            return Response.ok(ajaxView)
+comment|//            .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=UTF-8").build();
 block|}
 if|if
 condition|(
@@ -1153,6 +1154,8 @@ operator|.
 name|build
 argument_list|()
 return|;
+comment|//            return Response.ok(graph)
+comment|//            .header(HttpHeaders.CONTENT_TYPE, format+"; charset=UTF-8").build();
 block|}
 if|if
 condition|(
@@ -1181,6 +1184,8 @@ operator|.
 name|build
 argument_list|()
 return|;
+comment|//            return Response.ok(graph)
+comment|//            .header(HttpHeaders.CONTENT_TYPE, RDF_JSON+"; charset=UTF-8").build();
 block|}
 elseif|else
 if|if
@@ -1209,6 +1214,8 @@ operator|.
 name|build
 argument_list|()
 return|;
+comment|//            return Response.ok(graph)
+comment|//            .header(HttpHeaders.CONTENT_TYPE, RDF_XML+"; charset=UTF-8").build();
 block|}
 comment|// traditional response lookup
 return|return

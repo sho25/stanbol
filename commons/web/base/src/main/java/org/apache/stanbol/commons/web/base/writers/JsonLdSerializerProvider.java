@@ -698,6 +698,8 @@ operator|new
 name|OutputStreamWriter
 argument_list|(
 name|serializedGraph
+argument_list|,
+literal|"utf-8"
 argument_list|)
 argument_list|)
 decl_stmt|;

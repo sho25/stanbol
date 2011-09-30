@@ -707,8 +707,17 @@ literal|"index"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -721,7 +730,8 @@ comment|//    @GET
 comment|//    @Path("/referenced")
 comment|//    @Produces(MediaType.TEXT_HTML)
 comment|//    public Response getReferencedSitesPage() {
-comment|//        return Response.ok(new Viewable("referenced", this), TEXT_HTML).build();
+comment|//        return Response.ok(new Viewable("referenced", this))
+comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 comment|//    }
 comment|/**      * Getter for the id's of all referenced sites      *       * @return the id's of all referenced sites.      */
 annotation|@
@@ -812,8 +822,17 @@ literal|"referenced"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -880,8 +899,17 @@ operator|.
 name|ok
 argument_list|(
 name|referencedSites
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptable
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1018,8 +1046,17 @@ literal|"entity"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1101,8 +1138,17 @@ operator|.
 name|ok
 argument_list|(
 name|sign
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1157,7 +1203,8 @@ comment|//    @GET
 comment|//    @Path("/find")
 comment|//    @Produces(MediaType.TEXT_HTML)
 comment|//    public Response getFindPage() {
-comment|//        return Response.ok(new Viewable("find", this), TEXT_HTML).build();
+comment|//        return Response.ok(new Viewable("find", this))
+comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 comment|//    }
 annotation|@
 name|GET
@@ -1410,8 +1457,17 @@ literal|"find"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1537,8 +1593,17 @@ name|find
 argument_list|(
 name|query
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1569,8 +1634,17 @@ literal|"query"
 argument_list|,
 name|this
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build
@@ -1732,8 +1806,17 @@ name|find
 argument_list|(
 name|query
 argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|acceptedMediaType
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
 operator|.
 name|build

@@ -181,6 +181,16 @@ name|java
 operator|.
 name|io
 operator|.
+name|ByteArrayInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
 name|ByteArrayOutputStream
 import|;
 end_import
@@ -326,6 +336,20 @@ operator|.
 name|rs
 operator|.
 name|Produces
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|HttpHeaders
 import|;
 end_import
 
@@ -742,6 +766,20 @@ operator|.
 name|io
 operator|.
 name|IOUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|lang
+operator|.
+name|StringUtils
 import|;
 end_import
 
@@ -3092,13 +3130,18 @@ operator|.
 name|RDF_JSON
 argument_list|)
 expr_stmt|;
-return|return
+name|String
+name|rdfString
+init|=
 name|out
 operator|.
 name|toString
 argument_list|(
 literal|"utf-8"
 argument_list|)
+decl_stmt|;
+return|return
+name|rdfString
 return|;
 block|}
 annotation|@
@@ -3132,6 +3175,8 @@ operator|.
 name|build
 argument_list|()
 return|;
+comment|//        return Response.ok(new Viewable("index", this))
+comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 block|}
 block|}
 end_class
