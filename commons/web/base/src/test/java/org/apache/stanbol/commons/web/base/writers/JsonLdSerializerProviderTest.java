@@ -573,7 +573,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"dc\":\"http://purl.org/dc/terms/\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"<enhancer:Enhancement>\",\"<enhancer:TextAnnotation>\"],\"dc:created\":{\"@literal\":\""
+literal|"{\"@context\":{\"dc\":\"http://purl.org/dc/terms/\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"enhancer:Enhancement\",\"enhancer:TextAnnotation\"],\"dc:created\":{\"@literal\":\""
 operator|+
 name|this
 operator|.
@@ -669,7 +669,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"dbp-ont\":\"http://dbpedia.org/ontology/\",\"dc\":\"http://purl.org/dc/terms/\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"@iri\":[\"dc:creator\",\"dc:type\"],\"xsd:dateTime\":\"dc:created\",\"xsd:int\":[\"enhancer:end\",\"enhancer:start\"],\"xsd:string\":[\"enhancer:selected-text\",\"enhancer:selection-context\"]}},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"<enhancer:Enhancement>\",\"<enhancer:TextAnnotation>\"],\"dc:created\":\""
+literal|"{\"@context\":{\"dbp-ont\":\"http://dbpedia.org/ontology/\",\"dc\":\"http://purl.org/dc/terms/\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"@iri\":[\"dc:creator\",\"dc:type\"],\"xsd:dateTime\":\"dc:created\",\"xsd:int\":[\"enhancer:end\",\"enhancer:start\"],\"xsd:string\":[\"enhancer:selected-text\",\"enhancer:selection-context\"]}},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"enhancer:Enhancement\",\"enhancer:TextAnnotation\"],\"dc:created\":\""
 operator|+
 name|this
 operator|.
@@ -763,7 +763,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n  \"@context\": {\n    \"dc\": \"http://purl.org/dc/terms/\",\n    \"enhancer\": \"http://fise.iks-project.eu/ontology/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n  \"@type\": [\n    \"<enhancer:Enhancement>\",\n    \"<enhancer:TextAnnotation>\"\n  ],\n  \"dc:created\": {\n    \"@literal\": \""
+literal|"{\n  \"@context\": {\n    \"dc\": \"http://purl.org/dc/terms/\",\n    \"enhancer\": \"http://fise.iks-project.eu/ontology/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n  \"@type\": [\n    \"enhancer:Enhancement\",\n    \"enhancer:TextAnnotation\"\n  ],\n  \"dc:created\": {\n    \"@literal\": \""
 operator|+
 name|this
 operator|.
@@ -924,7 +924,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"dcterms\":\"http://purl.org/dc/terms\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xmlns\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"<enhancer:Enhancement>\",\"<enhancer:TextAnnotation>\"],\"dcterms:/created\":{\"@literal\":\""
+literal|"{\"@context\":{\"dcterms\":\"http://purl.org/dc/terms\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xmlns\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"enhancer:Enhancement\",\"enhancer:TextAnnotation\"],\"dcterms:/created\":{\"@literal\":\""
 operator|+
 name|this
 operator|.
@@ -1085,7 +1085,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"dbpedia\":\"http://dbpedia.org/ontology/\",\"dcterms\":\"http://purl.org/dc/terms/\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xmlns\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"@iri\":[\"dcterms:creator\",\"dcterms:type\"],\"xmlns:dateTime\":\"dcterms:created\",\"xmlns:int\":[\"enhancer:end\",\"enhancer:start\"],\"xmlns:string\":[\"enhancer:selected-text\",\"enhancer:selection-context\"]}},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"<enhancer:Enhancement>\",\"<enhancer:TextAnnotation>\"],\"dcterms:created\":\""
+literal|"{\"@context\":{\"dbpedia\":\"http://dbpedia.org/ontology/\",\"dcterms\":\"http://purl.org/dc/terms/\",\"enhancer\":\"http://fise.iks-project.eu/ontology/\",\"xmlns\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"@iri\":[\"dcterms:creator\",\"dcterms:type\"],\"xmlns:dateTime\":\"dcterms:created\",\"xmlns:int\":[\"enhancer:end\",\"enhancer:start\"],\"xmlns:string\":[\"enhancer:selected-text\",\"enhancer:selection-context\"]}},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"enhancer:Enhancement\",\"enhancer:TextAnnotation\"],\"dcterms:created\":\""
 operator|+
 name|this
 operator|.
@@ -1246,7 +1246,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n    \"@context\": {\n        \"dcterms\": \"http://purl.org/dc/terms/\",\n        \"enhancer\": \"http://fise.iks-project.eu/ontology/\",\n        \"xmlns\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n    \"@type\": [\n        \"<enhancer:Enhancement>\",\n        \"<enhancer:TextAnnotation>\"\n    ],\n    \"dcterms:created\": {\n        \"@literal\": \""
+literal|"{\n    \"@context\": {\n        \"dcterms\": \"http://purl.org/dc/terms/\",\n        \"enhancer\": \"http://fise.iks-project.eu/ontology/\",\n        \"xmlns\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n    \"@type\": [\n        \"enhancer:Enhancement\",\n        \"enhancer:TextAnnotation\"\n    ],\n    \"dcterms:created\": {\n        \"@literal\": \""
 operator|+
 name|this
 operator|.
@@ -1407,7 +1407,7 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n    \"@context\": {\n        \"dbpedia\": \"http://dbpedia.org/ontology/\",\n        \"dcterms\": \"http://purl.org/dc/terms/\",\n        \"enhancer\": \"http://fise.iks-project.eu/ontology/\",\n        \"xmlns\": \"http://www.w3.org/2001/XMLSchema#\",\n        \"@coerce\": {\n            \"@iri\": [\n                \"dcterms:creator\",\n                \"dcterms:type\"\n            ],\n            \"xmlns:dateTime\": \"dcterms:created\",\n            \"xmlns:int\": [\n                \"enhancer:end\",\n                \"enhancer:start\"\n            ],\n            \"xmlns:string\": [\n                \"enhancer:selected-text\",\n                \"enhancer:selection-context\"\n            ]\n        }\n    },\n    \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n    \"@type\": [\n        \"<enhancer:Enhancement>\",\n        \"<enhancer:TextAnnotation>\"\n    ],\n    \"dcterms:created\": \""
+literal|"{\n    \"@context\": {\n        \"dbpedia\": \"http://dbpedia.org/ontology/\",\n        \"dcterms\": \"http://purl.org/dc/terms/\",\n        \"enhancer\": \"http://fise.iks-project.eu/ontology/\",\n        \"xmlns\": \"http://www.w3.org/2001/XMLSchema#\",\n        \"@coerce\": {\n            \"@iri\": [\n                \"dcterms:creator\",\n                \"dcterms:type\"\n            ],\n            \"xmlns:dateTime\": \"dcterms:created\",\n            \"xmlns:int\": [\n                \"enhancer:end\",\n                \"enhancer:start\"\n            ],\n            \"xmlns:string\": [\n                \"enhancer:selected-text\",\n                \"enhancer:selection-context\"\n            ]\n        }\n    },\n    \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n    \"@type\": [\n        \"enhancer:Enhancement\",\n        \"enhancer:TextAnnotation\"\n    ],\n    \"dcterms:created\": \""
 operator|+
 name|this
 operator|.
