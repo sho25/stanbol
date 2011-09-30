@@ -185,7 +185,7 @@ operator|.
 name|getIRISuffix
 argument_list|()
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|static
 name|String
 name|buildId
@@ -246,26 +246,14 @@ name|scopeID
 argument_list|)
 argument_list|,
 name|namespace
-comment|/*          * IRI.create(StringUtils.stripIRITerminator(scopeID) + "/" + SpaceType.SESSION.getIRISuffix() + "-" +          * new Random().nextLong())          */
 argument_list|,
 name|SpaceType
 operator|.
 name|SESSION
 argument_list|,
 name|store
-comment|/* , scopeID */
 argument_list|)
 expr_stmt|;
-comment|// IRI iri = IRI.create(StringUtils.stripIRITerminator(getID()) + "/root.owl");
-comment|// try {
-comment|// setTopOntology(new RootOntologySource(ontologyManager.createOntology(iri), null), false);
-comment|// } catch (OWLOntologyCreationException e) {
-comment|// log.error("Could not create session space root ontology " + iri, e);
-comment|// } catch (UnmodifiableOntologySpaceException e) {
-comment|// // Should not happen...
-comment|// log.error("Session space ontology " + iri
-comment|// + " was denied modification by the space itself. This should not happen.", e);
-comment|// }
 block|}
 specifier|public
 name|SessionOntologySpaceImpl
@@ -292,7 +280,6 @@ name|scopeID
 argument_list|)
 argument_list|,
 name|namespace
-comment|/*          * IRI.create(StringUtils.stripIRITerminator(scopeID) + "/" + SpaceType.SESSION.getIRISuffix() + "-" +          * new Random().nextLong())          */
 argument_list|,
 name|SpaceType
 operator|.
@@ -300,21 +287,9 @@ name|SESSION
 argument_list|,
 name|store
 argument_list|,
-comment|/* scopeID, */
 name|ontologyManager
 argument_list|)
 expr_stmt|;
-comment|// Logger log = LoggerFactory.getLogger(getClass());
-comment|// IRI iri = IRI.create(StringUtils.stripIRITerminator(getID()) + "/root.owl");
-comment|// try {
-comment|// setTopOntology(new RootOntologySource(ontologyManager.createOntology(iri), null), false);
-comment|// } catch (OWLOntologyCreationException e) {
-comment|// log.error("Could not create session space root ontology " + iri, e);
-comment|// } catch (UnmodifiableOntologySpaceException e) {
-comment|// // Should not happen...
-comment|// log.error("Session space ontology " + iri
-comment|// + " was denied modification by the space itself. This should not happen.", e);
-comment|// }
 block|}
 annotation|@
 name|Override
@@ -380,7 +355,11 @@ name|void
 name|tearDown
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
+comment|// TODO Do we really unlock?
+name|locked
+operator|=
+literal|false
+expr_stmt|;
 block|}
 block|}
 end_class

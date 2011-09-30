@@ -774,6 +774,17 @@ name|UriInfo
 name|uriInfo
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Caught request for ontology {} in scope {}"
+argument_list|,
+name|ontologyid
+argument_list|,
+name|scopeid
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
@@ -797,6 +808,24 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Absolute URL Path {}"
+argument_list|,
+name|absur
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Ontology ID {}"
+argument_list|,
+name|ontologyid
+argument_list|)
+expr_stmt|;
 name|URI
 name|uri
 init|=

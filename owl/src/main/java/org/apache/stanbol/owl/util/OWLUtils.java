@@ -19,6 +19,26 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|io
+operator|.
+name|UnsupportedEncodingException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|URLEncoder
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|semanticweb
@@ -64,6 +84,9 @@ name|OWLOntology
 name|o
 parameter_list|)
 block|{
+name|String
+name|originalIri
+decl_stmt|;
 if|if
 condition|(
 name|o
@@ -72,7 +95,8 @@ name|isAnonymous
 argument_list|()
 condition|)
 block|{
-return|return
+name|originalIri
+operator|=
 name|o
 operator|.
 name|getOWLOntologyManager
@@ -82,11 +106,15 @@ name|getOntologyDocumentIRI
 argument_list|(
 name|o
 argument_list|)
-return|;
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
 block|}
 else|else
 block|{
-return|return
+name|originalIri
+operator|=
 name|o
 operator|.
 name|getOntologyID
@@ -94,8 +122,60 @@ argument_list|()
 operator|.
 name|getOntologyIRI
 argument_list|()
-return|;
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
 block|}
+while|while
+condition|(
+name|originalIri
+operator|.
+name|endsWith
+argument_list|(
+literal|"#"
+argument_list|)
+operator|||
+name|originalIri
+operator|.
+name|endsWith
+argument_list|(
+literal|"?"
+argument_list|)
+condition|)
+name|originalIri
+operator|=
+name|originalIri
+operator|.
+name|substring
+argument_list|(
+literal|0
+argument_list|,
+name|originalIri
+operator|.
+name|length
+argument_list|()
+operator|-
+literal|1
+argument_list|)
+expr_stmt|;
+comment|// try {
+comment|// if (originalIri.endsWith("#")) originalIri = originalIri.substring(0,
+comment|// originalIri.length() - 1) + URLEncoder.encode("#", "UTF-8");
+comment|// else if (originalIri.endsWith("?")) originalIri = originalIri.substring(0,
+comment|// originalIri.length() - 1)
+comment|// + URLEncoder.encode("?", "UTF-8");
+comment|// } catch (UnsupportedEncodingException e) {
+comment|// // That cannot be.
+comment|// }
+return|return
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|originalIri
+argument_list|)
+return|;
 block|}
 block|}
 end_class
