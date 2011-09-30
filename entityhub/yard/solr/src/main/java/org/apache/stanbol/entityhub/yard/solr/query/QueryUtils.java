@@ -191,7 +191,7 @@ specifier|private
 name|QueryUtils
 parameter_list|()
 block|{}
-comment|/**      * This method encodes a parsed index value as needed for queries.      *<p>      * In case of TXT it is assumed that a whitespace tokenizer is used by the index. Therefore values with      * multiple words need to be treated and connected with AND to find only values that contain all. In case      * of STR no whitespace is assumed. Therefore spaces need to be replaced with '+' to search for tokens      * with the exact name. In all other cases the string need not to be converted.      *       * Note also that text queries are converted to lower case      *       * @param value      *            the index value      * @return the (possible multiple) values that need to be connected with AND      */
+comment|/**      * This method encodes a parsed index value as needed for queries.      *<p>      * In case of TXT it is assumed that a whitespace tokenizer is used by the index. Therefore values with      * multiple words need to be treated and connected with AND to find only values that contain all. In case      * of STR no whitespace is assumed. Therefore spaces need to be replaced with '+' to search for tokens      * with the exact name. In all other cases the string need not to be converted.      *       * Note also that text queries are converted to lower case      *       * @param value      *            the index value      * @param escape if<code>true</code> all Solr special chars are escaped if      *<code>false</code> than '*' and '?' as used for wildcard searches are      * not escaped.      * @return the (possible multiple) values that need to be connected with AND      */
 specifier|public
 specifier|static
 name|String
@@ -238,6 +238,18 @@ operator|=
 name|SolrUtil
 operator|.
 name|escapeSolrSpecialChars
+argument_list|(
+name|value
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|value
+operator|=
+name|SolrUtil
+operator|.
+name|escapeWildCardString
 argument_list|(
 name|value
 argument_list|)
