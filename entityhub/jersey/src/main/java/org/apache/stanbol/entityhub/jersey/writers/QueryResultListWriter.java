@@ -519,18 +519,6 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|scala
-operator|.
-name|actors
-operator|.
-name|threadpool
-operator|.
-name|Arrays
-import|;
-end_import
-
 begin_comment
 comment|/**  * TODO: Replace with Serializer infrastructure similar to {@link Serializer}  */
 end_comment
