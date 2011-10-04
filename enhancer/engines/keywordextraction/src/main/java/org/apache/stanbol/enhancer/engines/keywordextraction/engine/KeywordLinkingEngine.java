@@ -1386,7 +1386,7 @@ specifier|final
 name|double
 name|DEFAULT_MIN_POS_TAG_PROBABILITY
 init|=
-literal|0.75
+literal|0.8
 decl_stmt|;
 comment|/**      * The languages this engine is configured to enhance. An empty List is      * considered as active for any language      */
 specifier|private
