@@ -169,6 +169,15 @@ name|REQUEST_HEADERS
 init|=
 literal|"Access-Control-Request-Headers"
 decl_stmt|;
+comment|/**      * The "Access-Control-Request-Headers" header      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|ALLOW_HEADERS
+init|=
+literal|"Access-Control-Allow-Headers"
+decl_stmt|;
 comment|/**      * The default methods for the Access-Control-Request-Method header field.      * Set to "GET, POST, OPTIONS"      */
 specifier|public
 specifier|static
@@ -638,7 +647,7 @@ name|responseBuilder
 operator|.
 name|header
 argument_list|(
-name|REQUEST_HEADERS
+name|ALLOW_HEADERS
 argument_list|,
 name|requestHeader
 operator|.
