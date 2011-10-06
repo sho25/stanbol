@@ -32,6 +32,16 @@ argument_list|(
 literal|"http://fise.iks-project.eu/ontology/"
 argument_list|)
 block|,
+name|rickModel
+argument_list|(
+literal|"http://www.iks-project.eu/ontology/rick/model/"
+argument_list|)
+block|,
+name|rickQuery
+argument_list|(
+literal|"http://www.iks-project.eu/ontology/rick/query/"
+argument_list|)
+block|,
 name|atom
 argument_list|(
 literal|"http://www.w3.org/2005/Atom"

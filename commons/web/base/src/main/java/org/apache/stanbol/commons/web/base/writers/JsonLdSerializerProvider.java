@@ -1031,7 +1031,38 @@ name|String
 name|strValue
 parameter_list|)
 block|{
-comment|// check if value can be interpreted as integer
+name|String
+name|trimedValue
+init|=
+name|strValue
+operator|.
+name|replaceAll
+argument_list|(
+literal|"\""
+argument_list|,
+literal|""
+argument_list|)
+decl_stmt|;
+comment|// check if value can be interpreted as Long
+try|try
+block|{
+return|return
+name|Long
+operator|.
+name|valueOf
+argument_list|(
+name|trimedValue
+argument_list|)
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|Throwable
+name|t
+parameter_list|)
+block|{}
+empty_stmt|;
+comment|// check if value can be interpreted as Integer
 try|try
 block|{
 return|return
@@ -1039,7 +1070,45 @@ name|Integer
 operator|.
 name|valueOf
 argument_list|(
-name|strValue
+name|trimedValue
+argument_list|)
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|Throwable
+name|t
+parameter_list|)
+block|{}
+empty_stmt|;
+comment|// check if it is a Float value
+try|try
+block|{
+return|return
+name|Float
+operator|.
+name|valueOf
+argument_list|(
+name|trimedValue
+argument_list|)
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|Throwable
+name|t
+parameter_list|)
+block|{}
+empty_stmt|;
+comment|// check if it is a Double value
+try|try
+block|{
+return|return
+name|Double
+operator|.
+name|valueOf
+argument_list|(
+name|trimedValue
 argument_list|)
 return|;
 block|}
@@ -1053,14 +1122,14 @@ empty_stmt|;
 comment|// check if value can be interpreted as boolean
 if|if
 condition|(
-name|strValue
+name|trimedValue
 operator|.
 name|equalsIgnoreCase
 argument_list|(
 literal|"true"
 argument_list|)
 operator|||
-name|strValue
+name|trimedValue
 operator|.
 name|equalsIgnoreCase
 argument_list|(
@@ -1073,10 +1142,11 @@ name|Boolean
 operator|.
 name|valueOf
 argument_list|(
-name|strValue
+name|trimedValue
 argument_list|)
 return|;
 block|}
+comment|// nothing matched - leave untouched
 return|return
 name|strValue
 return|;

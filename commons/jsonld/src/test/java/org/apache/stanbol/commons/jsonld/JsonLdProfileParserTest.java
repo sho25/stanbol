@@ -80,6 +80,13 @@ argument_list|(
 name|jsonldInput
 argument_list|)
 decl_stmt|;
+name|profile
+operator|.
+name|setUseCuries
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
 name|String
 name|actual
 init|=
