@@ -1230,7 +1230,7 @@ name|types
 operator|.
 name|add
 argument_list|(
-name|shortenURIWithCuries
+name|shortenURI
 argument_list|(
 name|type
 argument_list|)
