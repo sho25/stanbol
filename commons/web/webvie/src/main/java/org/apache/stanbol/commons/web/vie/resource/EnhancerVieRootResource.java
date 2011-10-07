@@ -7,9 +7,11 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|enhancer
+name|commons
 operator|.
-name|webvie
+name|web
+operator|.
+name|vie
 operator|.
 name|resource
 package|;
