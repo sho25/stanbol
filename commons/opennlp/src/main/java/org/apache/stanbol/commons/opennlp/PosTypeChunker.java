@@ -524,7 +524,12 @@ index|[]
 name|tags
 parameter_list|)
 block|{
-comment|//      int consumed = -1;
+name|int
+name|consumed
+init|=
+operator|-
+literal|1
+decl_stmt|;
 name|List
 argument_list|<
 name|Span
@@ -573,10 +578,32 @@ name|start
 init|=
 name|i
 decl_stmt|;
-comment|//do not follow backwards!
-comment|//                while(start-1> consumed&& followPOS(tags[start-1])){
-comment|//                    start--; //follow backwards until consumed
-comment|//                }
+while|while
+condition|(
+name|start
+operator|-
+literal|1
+operator|>
+name|consumed
+operator|&&
+name|followPOS
+argument_list|(
+literal|null
+argument_list|,
+name|tags
+index|[
+name|start
+operator|-
+literal|1
+index|]
+argument_list|)
+condition|)
+block|{
+name|start
+operator|--
+expr_stmt|;
+comment|//follow backwards until consumed
+block|}
 name|int
 name|followEnd
 init|=
@@ -698,7 +725,12 @@ comment|//      need to copy the Stirng[] of the other into a String[][1] as
 comment|//      used by this one :(
 comment|//      If someone has a better Idea feel free to change!
 comment|//      Rupert Westenthaler (28.Sep.2011)
-comment|//        int consumed = -1;
+name|int
+name|consumed
+init|=
+operator|-
+literal|1
+decl_stmt|;
 name|List
 argument_list|<
 name|Span
@@ -751,9 +783,37 @@ init|=
 name|i
 decl_stmt|;
 comment|//do not follow backwards!
-comment|//                while(start-1> consumed&& followPOS(tags[start-1])){
-comment|//                    start--; //follow backwards until consumed
-comment|//                }
+while|while
+condition|(
+name|start
+operator|-
+literal|1
+operator|>
+name|consumed
+operator|&&
+name|followPOS
+argument_list|(
+name|props
+index|[
+name|start
+operator|-
+literal|1
+index|]
+argument_list|,
+name|tags
+index|[
+name|start
+operator|-
+literal|1
+index|]
+argument_list|)
+condition|)
+block|{
+name|start
+operator|--
+expr_stmt|;
+comment|//follow backwards until consumed
+block|}
 name|int
 name|followEnd
 init|=

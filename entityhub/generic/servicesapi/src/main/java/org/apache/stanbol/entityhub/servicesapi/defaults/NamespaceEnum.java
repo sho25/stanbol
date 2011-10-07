@@ -183,6 +183,11 @@ argument_list|(
 literal|"http://www.georss.org/georss/"
 argument_list|)
 block|,
+name|gml
+argument_list|(
+literal|"http://www.opengis.net/gml/"
+argument_list|)
+block|,
 name|dcElements
 argument_list|(
 literal|"dc-elements"

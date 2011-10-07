@@ -121,6 +121,12 @@ name|NONE
 decl_stmt|;
 specifier|private
 name|int
+name|start
+init|=
+literal|0
+decl_stmt|;
+specifier|private
+name|int
 name|span
 init|=
 literal|0
@@ -212,13 +218,16 @@ comment|//TODO Do no longer use the resultScore as the score. We need to provide
 comment|//own algorithm to calculate scores!
 comment|//        this.resultScore = result.getFirst(RdfResourceEnum.resultScore.getUri(), Float.class);
 block|}
-comment|/**      * Updates this suggestion       * @param match the math type      * @param span the number of token this suggestion spans      * @param count the number of token that match with the suggestion within the span      * @param matchScore the score of the match. MUST BE in the range between       *<code>[0..1]</code>. For {@link MATCH#EXACT} and {@link MATCH#NONE} this      * parameter is ignored and the value is set to<code>1</code>,<code>0</code>      * respectively.      * @param label the label that matches the tokens      * @param labelTokenCount the number of tokens of the label      */
+comment|/**      * Updates this suggestion       * @param match the math type      * @param start the start position of this suggestion      * @param span the number of token this suggestion spans      * @param count the number of token that match with the suggestion within the span      * @param matchScore the score of the match. MUST BE in the range between       *<code>[0..1]</code>. For {@link MATCH#EXACT} and {@link MATCH#NONE} this      * parameter is ignored and the value is set to<code>1</code>,<code>0</code>      * respectively.      * @param label the label that matches the tokens      * @param labelTokenCount the number of tokens of the label      */
 specifier|protected
 name|void
 name|updateMatch
 parameter_list|(
 name|MATCH
 name|match
+parameter_list|,
+name|int
+name|start
 parameter_list|,
 name|int
 name|span
@@ -357,6 +366,12 @@ block|}
 block|}
 name|this
 operator|.
+name|start
+operator|=
+name|start
+expr_stmt|;
+name|this
+operator|.
 name|span
 operator|=
 name|span
@@ -486,6 +501,16 @@ parameter_list|()
 block|{
 return|return
 name|matchScore
+return|;
+block|}
+comment|/**      * Getter for the start index of this Suggestion      * @return the start token index for this suggestion      */
+specifier|public
+name|int
+name|getStart
+parameter_list|()
+block|{
+return|return
+name|start
 return|;
 block|}
 comment|/**      * Getter for the number of the token matched by this suggestion      * @return The number of the token matched by this suggestion      */

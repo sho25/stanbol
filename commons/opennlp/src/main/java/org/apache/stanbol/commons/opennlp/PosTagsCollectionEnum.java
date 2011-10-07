@@ -102,7 +102,7 @@ specifier|public
 enum|enum
 name|PosTagsCollectionEnum
 block|{
-comment|/**      * Nouns related POS types for English based on the       *<a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">      * Penn Treebank</a> tag set      */
+comment|/**      * Nouns related POS types for English based on the       *<a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">      * Penn Treebank</a> tag set.      *<p>      * NOTE the "``" tag is also added as noun, because it can not be found in      * the official tag set and is sometimes used to tag nouns.      */
 name|EN_NOUN
 argument_list|(
 literal|"en"
@@ -122,6 +122,8 @@ argument_list|,
 literal|"FW"
 argument_list|,
 literal|"CD"
+argument_list|,
+literal|"``"
 argument_list|)
 block|,
 comment|/**      * Verb related POS types for English based on the       *<a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">      * Penn Treebank</a> tag set      */
@@ -171,11 +173,11 @@ literal|"."
 argument_list|,
 literal|":"
 argument_list|,
-literal|"``"
-argument_list|,
 literal|"POS"
 argument_list|,
 literal|"IN"
+argument_list|,
+literal|"JJ"
 argument_list|)
 block|,
 comment|/**      * Noun related POS types for German based on the       *<a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TagSets/stts-table.html">      * STTS Tag Set</a>       */
@@ -239,11 +241,13 @@ name|PosTypeCollectionType
 operator|.
 name|FOLLOW
 argument_list|,
-literal|"$"
-argument_list|,
 literal|"$."
 argument_list|,
+literal|"$,"
+argument_list|,
 literal|"$("
+argument_list|,
+literal|"APPR"
 argument_list|)
 block|,
 comment|/**      * POS types representing Nouns for Danish based on the PAROLE Tagset as      * described by<a href="http://korpus.dsl.dk/paroledoc_en.pdf">this paper</a>      *<p>      * TODO: Someone who speaks Danish should check this List      * NOTES:<ul>      *<li> included also "XX" and "XR" because the examples in the      * training data for OpenNLP seam to be good candidates for processing      *<li> "AC" is included because it refers to numbers      *</ul>      */

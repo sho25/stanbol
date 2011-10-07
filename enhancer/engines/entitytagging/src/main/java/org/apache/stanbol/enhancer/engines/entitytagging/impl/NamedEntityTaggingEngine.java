@@ -980,7 +980,11 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.referencedSiteId"
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(boolValue = true)
+argument_list|(
+name|boolValue
+operator|=
+literal|false
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -1002,7 +1006,11 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.personType"
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(boolValue = true)
+argument_list|(
+name|boolValue
+operator|=
+literal|false
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -1024,7 +1032,11 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.organisationType"
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(boolValue = true)
+argument_list|(
+name|boolValue
+operator|=
+literal|false
+argument_list|)
 specifier|public
 specifier|static
 specifier|final

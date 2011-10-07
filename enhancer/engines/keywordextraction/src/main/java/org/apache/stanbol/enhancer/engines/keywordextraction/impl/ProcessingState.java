@@ -47,6 +47,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|LinkedHashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -153,29 +163,84 @@ specifier|private
 name|Chunk
 name|chunk
 decl_stmt|;
-comment|/**      * This is a cache over the exact labels over the following 'n' tokens      * relative {@link #tokenIndex}. It is cleared each time {@link #next()}      * is called.       */
+specifier|private
+specifier|static
+specifier|final
+name|int
+name|MAX_TEXT_CACHE_SIZE
+init|=
+literal|32
+decl_stmt|;
+comment|/**      * This is a cache over the last {@link #MAX_TEXT_CACHE_SIZE} token texts      * requested by {@link #getTokenText(int, int)}      */
 specifier|private
 name|Map
 argument_list|<
-name|Integer
+name|String
 argument_list|,
 name|String
 argument_list|>
 name|textCache
 init|=
 operator|new
-name|HashMap
+name|LinkedHashMap
 argument_list|<
-name|Integer
+name|String
 argument_list|,
 name|String
 argument_list|>
+argument_list|(
+name|MAX_TEXT_CACHE_SIZE
+argument_list|,
+literal|0.75f
+argument_list|,
+literal|true
+argument_list|)
+block|{
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+literal|1L
+decl_stmt|;
+specifier|protected
+name|boolean
+name|removeEldestEntry
+parameter_list|(
+name|Map
+operator|.
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|eldest
+parameter_list|)
+block|{
+return|return
+name|size
 argument_list|()
+operator|>
+name|MAX_TEXT_CACHE_SIZE
+return|;
+block|}
+empty_stmt|;
+block|}
 decl_stmt|;
 comment|/**      * The position for the next token      */
 specifier|private
 name|int
 name|nextToken
+init|=
+operator|-
+literal|1
+decl_stmt|;
+comment|/**      * The position of the last consumed position      */
+specifier|private
+name|int
+name|consumedIndex
 init|=
 operator|-
 literal|1
@@ -236,6 +301,17 @@ return|return
 name|tokenIndex
 return|;
 block|}
+comment|/**      * Getter for the last consumed index      * @return the index of the last consumed token      */
+specifier|public
+specifier|final
+name|int
+name|getConsumedIndex
+parameter_list|()
+block|{
+return|return
+name|consumedIndex
+return|;
+block|}
 comment|/**      * The currently active token      * @return the token      */
 specifier|public
 specifier|final
@@ -283,10 +359,27 @@ return|return
 name|nextToken
 return|;
 block|}
-comment|/**      * Allows to manually set to position of the next token to process.      * This can be used to skip some tokens within (e.g. if a Concept      * matching multiple Tokens where found.<p>      * The set token may be greater than the number of tokens in       * {@link #sentence}. This will simple cause the next sentence to be      * activated on the next call to {@link #next()}      * @param pos the position of the next token to process.       */
+comment|//    /**
+comment|//     * Allows to manually set to position of the next token to process.
+comment|//     * This can be used to skip some tokens within (e.g. if a Concept
+comment|//     * matching multiple Tokens where found.<p>
+comment|//     * The set token may be greater than the number of tokens in
+comment|//     * {@link #sentence}. This will simple cause the next sentence to be
+comment|//     * activated on the next call to {@link #next()}
+comment|//     * @param pos the position of the next token to process.
+comment|//     */
+comment|//    public void setNextToken(int pos){
+comment|//        if(pos> tokenIndex){
+comment|//            this.nextToken = pos;
+comment|//        } else {
+comment|//            throw new IllegalArgumentException("The nextTokenPos "+pos+
+comment|//                " MUST BE greater than the current "+tokenIndex);
+comment|//        }
+comment|//    }
+comment|/**      * The index of an consumed Token. The consumed index MUST BE equals or      * greater as {@link #getTokenIndex()}. If the consumed index is set to a      * value greater that {@link #getTokenIndex()} than consumed tokens are      * skipped on the next call to {@link #next()}      * @param pos the position of the last consumed token.      */
 specifier|public
 name|void
-name|setNextToken
+name|setConsumed
 parameter_list|(
 name|int
 name|pos
@@ -295,15 +388,23 @@ block|{
 if|if
 condition|(
 name|pos
-operator|>
+operator|>=
 name|tokenIndex
 condition|)
 block|{
 name|this
 operator|.
+name|consumedIndex
+operator|=
+name|pos
+expr_stmt|;
+name|this
+operator|.
 name|nextToken
 operator|=
 name|pos
+operator|+
+literal|1
 expr_stmt|;
 block|}
 else|else
@@ -312,11 +413,11 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"The nextTokenPos "
+literal|"The lastConsumedPos "
 operator|+
 name|pos
 operator|+
-literal|" MUST BE greater than the current "
+literal|" MUST BE equals or gerater than the current Pos "
 operator|+
 name|tokenIndex
 argument_list|)
@@ -329,12 +430,6 @@ name|boolean
 name|next
 parameter_list|()
 block|{
-comment|//first clear caches for the current element
-name|textCache
-operator|.
-name|clear
-argument_list|()
-expr_stmt|;
 comment|//switch to the next token
 if|if
 condition|(
@@ -423,6 +518,26 @@ name|chunk
 operator|.
 name|getStart
 argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|chunk
+operator|.
+name|getStart
+argument_list|()
+operator|>
+name|consumedIndex
+condition|)
+block|{
+name|consumedIndex
+operator|=
+name|chunk
+operator|.
+name|getStart
+argument_list|()
+operator|-
+literal|1
 expr_stmt|;
 block|}
 name|hasNext
@@ -516,6 +631,11 @@ name|boolean
 name|initNextSentence
 parameter_list|()
 block|{
+name|textCache
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
 name|sentence
 operator|=
 literal|null
@@ -581,6 +701,12 @@ operator|.
 name|getStart
 argument_list|()
 expr_stmt|;
+name|consumedIndex
+operator|=
+name|tokenIndex
+operator|-
+literal|1
+expr_stmt|;
 name|nextToken
 operator|=
 name|tokenIndex
@@ -630,6 +756,11 @@ name|tokenIndex
 operator|=
 literal|0
 expr_stmt|;
+name|consumedIndex
+operator|=
+operator|-
+literal|1
+expr_stmt|;
 name|nextToken
 operator|=
 literal|0
@@ -649,20 +780,20 @@ name|String
 name|getTokenText
 parameter_list|(
 name|int
+name|start
+parameter_list|,
+name|int
 name|tokenCount
 parameter_list|)
 block|{
-name|Integer
+name|String
 name|pos
 init|=
-name|Integer
-operator|.
-name|valueOf
-argument_list|(
+name|start
+operator|+
+literal|","
+operator|+
 name|tokenCount
-operator|-
-literal|1
-argument_list|)
 decl_stmt|;
 name|String
 name|text
@@ -671,14 +802,7 @@ name|textCache
 operator|.
 name|get
 argument_list|(
-name|Integer
-operator|.
-name|valueOf
-argument_list|(
-name|tokenCount
-operator|-
-literal|1
-argument_list|)
+name|pos
 argument_list|)
 decl_stmt|;
 if|if
@@ -697,7 +821,15 @@ argument_list|()
 operator|.
 name|substring
 argument_list|(
-name|token
+name|sentence
+operator|.
+name|getTokens
+argument_list|()
+operator|.
+name|get
+argument_list|(
+name|start
+argument_list|)
 operator|.
 name|getStart
 argument_list|()
@@ -709,12 +841,11 @@ argument_list|()
 operator|.
 name|get
 argument_list|(
-name|tokenIndex
+name|start
 operator|+
-name|pos
-operator|.
-name|intValue
-argument_list|()
+name|tokenCount
+operator|-
+literal|1
 argument_list|)
 operator|.
 name|getEnd
