@@ -37,8 +37,28 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
-comment|/**  *  *  * @author Fabian Christ  *  */
+comment|/**  *   *   * @author Fabian Christ  *   */
 end_comment
 
 begin_class
@@ -47,6 +67,21 @@ specifier|abstract
 class|class
 name|JsonLdCommon
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|logger
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|JsonLdCommon
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -282,7 +317,7 @@ operator|=
 name|useCuries
 expr_stmt|;
 block|}
-comment|/**      * Convert URI to CURIE if namespaces should be applied and CURIEs to URIs if namespaces should not be      * applied.      *       * @param uri      *            That may be in CURIE form.      * @return      * @throws ShorteningException       */
+comment|/**      * Convert URI to CURIE if namespaces should be applied and CURIEs to URIs if namespaces should not be      * applied.      *       * @param uri      *            That may be in CURIE form.      * @return      * @throws ShorteningException      */
 specifier|protected
 name|String
 name|shortenURI
@@ -669,27 +704,34 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+if|if
+condition|(
+name|logger
 operator|.
-name|out
+name|isInfoEnabled
+argument_list|()
+condition|)
+block|{
+name|logger
 operator|.
-name|println
+name|info
 argument_list|(
-literal|"Fallback to CURIEs because of property "
+literal|"Fallback to CURIEs because of duplicate property "
 operator|+
 name|propName
 operator|+
-literal|" with NS "
+literal|" from "
 operator|+
 name|namespaceOfProp
 operator|+
-literal|" and other is "
+literal|" and "
 operator|+
 name|curieNamespace
 operator|+
 name|propName
 argument_list|)
 expr_stmt|;
+block|}
 throw|throw
 operator|new
 name|ShorteningException

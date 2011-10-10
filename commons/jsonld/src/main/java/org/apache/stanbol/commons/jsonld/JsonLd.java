@@ -107,8 +107,28 @@ name|TreeMap
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
-comment|/**  * The JsonLd class provides an API to create a JSON-LD object structure and to serialize this structure.  *   *<p>  * This implementation is based on the JSON-LD specification version 20110201. Available online at<a  * href="http://www.json-ld.org/spec/ED/20110201/">http://www.json-ld.org/spec/ED/20110201/</a>.  *   * @author Fabian Christ  */
+comment|/**  * The JsonLd class provides an API to create a JSON-LD object structure and to serialize this structure.  *   *<p>  * This implementation is based on the JSON-LD 1.0 specification version 20110911. Available online at<a  * href="http://json-ld.org/spec/ED/20110911/">http://json-ld.org/spec/ED/20110911/</a>.  *   * @author Fabian Christ  */
 end_comment
 
 begin_class
@@ -118,7 +138,27 @@ name|JsonLd
 extends|extends
 name|JsonLdCommon
 block|{
-comment|// Map Subject -> Resource
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|logger
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|JsonLd
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+comment|/**      *  Map Subject -> Resource      */
 specifier|private
 name|Map
 argument_list|<
