@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -297,6 +301,26 @@ name|api
 operator|.
 name|io
 operator|.
+name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
 name|RootOntologyIRISource
 import|;
 end_import
@@ -438,6 +462,20 @@ operator|.
 name|session
 operator|.
 name|SessionManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|owl
+operator|.
+name|OWLOntologyManagerFactory
 import|;
 end_import
 
@@ -1004,7 +1042,8 @@ name|_REENGINEERING_SCOPE_DEFAULT
 init|=
 literal|"xml_reengineering"
 decl_stmt|;
-comment|//    public static final String _XML_REENGINEERING_SESSION_SPACE_DEFAULT = "/xml-reengineering-session-space";
+comment|// public static final String _XML_REENGINEERING_SESSION_SPACE_DEFAULT =
+comment|// "/xml-reengineering-session-space";
 annotation|@
 name|Property
 argument_list|(
@@ -1035,8 +1074,9 @@ name|REENGINEERING_SCOPE
 init|=
 literal|"xml.reengineering.scope"
 decl_stmt|;
-comment|//    @Property(value = _XML_REENGINEERING_SESSION_SPACE_DEFAULT)
-comment|//    public static final String XML_REENGINEERING_SESSION_SPACE = "http://kres.iks-project.eu/space/reengineering/db";
+comment|// @Property(value = _XML_REENGINEERING_SESSION_SPACE_DEFAULT)
+comment|// public static final String XML_REENGINEERING_SESSION_SPACE =
+comment|// "http://kres.iks-project.eu/space/reengineering/db";
 specifier|public
 specifier|final
 name|Logger
@@ -1068,7 +1108,7 @@ specifier|private
 name|String
 name|scopeID
 decl_stmt|;
-comment|//    private IRI spaceIRI;
+comment|// private IRI spaceIRI;
 comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the XMLExtractor instances do need to be configured! YOU NEED      * TO USE {@link #XMLExtractor(ONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|XMLExtractor
@@ -1197,7 +1237,7 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{
-comment|/*String*/
+comment|/* String */
 name|scopeID
 operator|=
 operator|(
@@ -1244,8 +1284,8 @@ operator|=
 name|_HOST_NAME_AND_PORT_DEFAULT
 expr_stmt|;
 comment|// TODO: Manage the other properties
-comment|//        spaceIRI = IRI.create(XML_REENGINEERING_SESSION_SPACE);
-comment|//        scopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + scopeID);
+comment|// spaceIRI = IRI.create(XML_REENGINEERING_SESSION_SPACE);
+comment|// scopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + scopeID);
 name|reengineeringManager
 operator|.
 name|bindReengineer
@@ -1269,7 +1309,7 @@ operator|.
 name|createSession
 argument_list|()
 decl_stmt|;
-comment|//        sessionId = kReSSession.getID();
+comment|// sessionId = kReSSession.getID();
 name|OntologyScopeFactory
 name|ontologyScopeFactory
 init|=
@@ -1300,62 +1340,36 @@ literal|null
 expr_stmt|;
 try|try
 block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Semion XMLEtractor : created scope with IRI "
-operator|+
-name|REENGINEERING_SCOPE
-argument_list|)
-expr_stmt|;
+comment|// // A che cacchio serviva 'sta robba?
+comment|// log.info("Semion XMLEtractor : created scope with IRI " + REENGINEERING_SCOPE);
+comment|// IRI iri = IRI.create(XML_OWL.URI);
+comment|// OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
+comment|// OWLOntology owlOntology = ontologyManager.createOntology(iri);
+comment|// log.info("Ontology {} created.", iri);
 name|IRI
-name|iri
+index|[]
+name|locations
 init|=
-name|IRI
+name|onManager
 operator|.
-name|create
-argument_list|(
-name|XML_OWL
-operator|.
-name|URI
-argument_list|)
-decl_stmt|;
-name|OWLOntologyManager
-name|ontologyManager
-init|=
-name|OWLManager
-operator|.
-name|createOWLOntologyManager
+name|getOfflineConfiguration
 argument_list|()
+operator|.
+name|getOntologySourceLocations
+argument_list|()
+operator|.
+name|toArray
+argument_list|(
+operator|new
+name|IRI
+index|[
+literal|0
+index|]
+argument_list|)
 decl_stmt|;
-name|OWLOntology
-name|owlOntology
+name|OntologyInputSource
+name|xmlowlSrc
 init|=
-name|ontologyManager
-operator|.
-name|createOntology
-argument_list|(
-name|iri
-argument_list|)
-decl_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Ontology {} created."
-argument_list|,
-name|iri
-argument_list|)
-expr_stmt|;
-name|scope
-operator|=
-name|ontologyScopeFactory
-operator|.
-name|createOntologyScope
-argument_list|(
-name|scopeID
-argument_list|,
 operator|new
 name|RootOntologyIRISource
 argument_list|(
@@ -1367,7 +1381,24 @@ name|XML_OWL
 operator|.
 name|URI
 argument_list|)
+argument_list|,
+name|OWLOntologyManagerFactory
+operator|.
+name|createOWLOntologyManager
+argument_list|(
+name|locations
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|scope
+operator|=
+name|ontologyScopeFactory
+operator|.
+name|createOntologyScope
+argument_list|(
+name|scopeID
+argument_list|,
+name|xmlowlSrc
 comment|/* new OntologyInputSourceOXML() */
 argument_list|)
 expr_stmt|;
@@ -1390,9 +1421,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Semion DBExtractor : already existing scope for IRI "
-operator|+
-name|REENGINEERING_SCOPE
+literal|"Will perform XML reengineering in already existing scope {}"
+argument_list|,
+name|scopeID
 argument_list|)
 expr_stmt|;
 name|scope
@@ -1414,35 +1445,25 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-name|log
-operator|.
-name|error
+throw|throw
+operator|new
+name|IllegalStateException
 argument_list|(
-literal|"Failed to creare ontology "
+literal|"No valid schema was found in ontology "
 operator|+
 name|XML_OWL
 operator|.
 name|URI
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-name|log
+operator|+
+literal|"for reengineer"
+operator|+
+name|XMLExtractor
 operator|.
-name|error
-argument_list|(
-literal|"Semion XMLExtractor : No OntologyInputSource for ONManager."
+name|class
 argument_list|,
 name|e
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 if|if
 condition|(
@@ -2211,6 +2232,19 @@ parameter_list|)
 throws|throws
 name|ReengineeringException
 block|{
+if|if
+condition|(
+name|schemaOntology
+operator|==
+literal|null
+condition|)
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Cannot reengineer data with a null schema ontology."
+argument_list|)
+throw|;
 name|OWLOntology
 name|ontology
 init|=
@@ -2259,18 +2293,11 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"XML output IRI: "
-operator|+
+literal|"XML output IRI: {}"
+argument_list|,
 name|outputIRI
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|schemaOntology
-operator|!=
-literal|null
-condition|)
-block|{
 if|if
 condition|(
 name|outputIRI
@@ -2296,15 +2323,14 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 throw|throw
 operator|new
 name|ReengineeringException
-argument_list|()
+argument_list|(
+literal|"Failed to create local data ontology "
+operator|+
+name|outputIRI
+argument_list|)
 throw|;
 block|}
 block|}
@@ -2329,7 +2355,9 @@ block|{
 throw|throw
 operator|new
 name|ReengineeringException
-argument_list|()
+argument_list|(
+literal|"Failed to create anonymous local data ontology."
+argument_list|)
 throw|;
 block|}
 block|}
@@ -2529,12 +2557,13 @@ name|ParserConfigurationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|ReengineeringException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|)
+throw|;
 block|}
 catch|catch
 parameter_list|(
@@ -2542,12 +2571,13 @@ name|SAXException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|ReengineeringException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|)
+throw|;
 block|}
 catch|catch
 parameter_list|(
@@ -2555,12 +2585,13 @@ name|IOException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|ReengineeringException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|)
+throw|;
 block|}
 name|OWLOntologyManager
 name|man
@@ -2649,12 +2680,13 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
+throw|throw
+operator|new
+name|ReengineeringException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
+argument_list|)
+throw|;
 block|}
 return|return
 name|ontology
@@ -3821,6 +3853,8 @@ parameter_list|,
 name|DataSource
 name|dataSource
 parameter_list|)
+throws|throws
+name|ReengineeringException
 block|{
 name|XSDExtractor
 name|xsdExtractor

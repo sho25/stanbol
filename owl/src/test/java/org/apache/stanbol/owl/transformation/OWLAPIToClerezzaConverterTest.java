@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -92,6 +92,22 @@ operator|.
 name|core
 operator|.
 name|Triple
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|TripleCollection
 import|;
 end_import
 
@@ -344,7 +360,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * It is a JUnit test class.<br>  * It tests the methods of the class {@link OWLAPIToClerezzaConverter}.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * It is a JUnit test class.<br>  * It tests the methods of the class {@link OWLAPIToClerezzaConverter}.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -398,7 +414,7 @@ name|void
 name|setupClass
 parameter_list|()
 block|{
-comment|/* 		 * Set-up the OWL ontology for the test. 		 * Simply add the axioms: 		 * 	AndreaNuzzolese isA Person -> class assertion axiom 		 * 	EnricoDaga isA Person -> class assertion axiom 		 *  AndreaNuzzolese knows EnricoDaga  -> object property assertion axiom 		 */
+comment|/*          * Set-up the OWL ontology for the test. Simply add the axioms: AndreaNuzzolese isA Person -> class          * assertion axiom EnricoDaga isA Person -> class assertion axiom AndreaNuzzolese knows EnricoDaga ->          * object property assertion axiom          */
 name|OWLOntologyManager
 name|manager
 init|=
@@ -590,7 +606,7 @@ name|axiom
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 		 * Set-up the Clerezza model for the test. 		 * As before simply add the triples: 		 * 	AndreaNuzzolese isA Person 		 * 	EnricoDaga isA Person 		 *  AndreaNuzzolese knows EnricoDaga 		 */
+comment|/*          * Set-up the Clerezza model for the test. As before simply add the triples: AndreaNuzzolese isA          * Person EnricoDaga isA Person AndreaNuzzolese knows EnricoDaga          */
 name|mGraph
 operator|=
 operator|new
@@ -721,18 +737,18 @@ name|void
 name|testMGraphToOWLOntology
 parameter_list|()
 block|{
-comment|/* 		 * Transform the Clerezza MGraph to an OWLOntology. 		 */
+comment|/*          * Transform the Clerezza MGraph to an OWLOntology.          */
 name|OWLOntology
 name|ontology
 init|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|clerezzaMGraphToOWLOntology
+name|clerezzaGraphToOWLOntology
 argument_list|(
 name|mGraph
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Print the number of axioms contained in the OWLOntology. 		 */
+comment|/*          * Print the number of axioms contained in the OWLOntology.          */
 name|int
 name|axiomCount
 init|=
@@ -752,7 +768,7 @@ operator|+
 literal|" axioms: "
 argument_list|)
 expr_stmt|;
-comment|/* 		 * Print the axioms contained in the OWLOntology. 		 */
+comment|/*          * Print the axioms contained in the OWLOntology.          */
 name|Set
 argument_list|<
 name|OWLAxiom
@@ -793,8 +809,8 @@ name|void
 name|testOWLOntologyToMGraph
 parameter_list|()
 block|{
-comment|/* 		 * Transform the OWLOntology into a Clerezza MGraph. 		 */
-name|MGraph
+comment|/*          * Transform the OWLOntology into a Clerezza MGraph.          */
+name|TripleCollection
 name|mGraph
 init|=
 name|OWLAPIToClerezzaConverter
@@ -804,7 +820,7 @@ argument_list|(
 name|ontology
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Print all the triples contained in the Clerezza MGraph. 		 */
+comment|/*          * Print all the triples contained in the Clerezza MGraph.          */
 name|Iterator
 argument_list|<
 name|Triple
@@ -851,7 +867,7 @@ name|void
 name|testOWLOntologyToTriples
 parameter_list|()
 block|{
-comment|/* 		 * Transform the OWLOntology into a collection of Clerezza triples. 		 */
+comment|/*          * Transform the OWLOntology into a collection of Clerezza triples.          */
 name|Collection
 argument_list|<
 name|Triple
@@ -865,7 +881,7 @@ argument_list|(
 name|ontology
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Print the collection of Clerezza triples. 		 */
+comment|/*          * Print the collection of Clerezza triples.          */
 for|for
 control|(
 name|Triple

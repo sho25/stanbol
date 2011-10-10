@@ -41,7 +41,7 @@ specifier|final
 name|String
 name|NS
 init|=
-literal|"http://ontologydesignpatterns.org/ont/iks/oxsd.owl#"
+literal|"http://www.ontologydesignpatterns.org/ont/iks/oxsd.owl#"
 decl_stmt|;
 comment|/**<p>The namespace of the vocabulary as a string</p>      *  @see #NS */
 specifier|public

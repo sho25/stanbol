@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -102,6 +106,24 @@ operator|.
 name|api
 operator|.
 name|DataSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|reengineer
+operator|.
+name|base
+operator|.
+name|api
+operator|.
+name|ReengineeringException
 import|;
 end_import
 
@@ -559,6 +581,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLAxiom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLClassAssertionAxiom
 import|;
 end_import
@@ -768,6 +804,30 @@ operator|.
 name|traversal
 operator|.
 name|TreeWalker
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|xml
+operator|.
+name|sax
+operator|.
+name|EntityResolver
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|xml
+operator|.
+name|sax
+operator|.
+name|InputSource
 import|;
 end_import
 
@@ -2991,10 +3051,15 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|IRI
+name|option
+init|=
+literal|null
+decl_stmt|;
 try|try
 block|{
 comment|// Whitepace
-comment|/*              * This line, sometimes, generates an exception when try to get simple type definition for white              * space. However, even if there is the exception, the line returns the ZERO value, so in the              * catch block is perfomed the option with ZERO value that is WS_PRESERVE.              */
+comment|/*              * This line, sometimes, generates an exception when trying to get simple type definition for              * white space. However, even if there is the exception, the line returns a zero value. In this              * case, the WS_PRESERVE option is set in the catch block.              */
 name|short
 name|whitespace
 init|=
@@ -3011,35 +3076,13 @@ name|XSSimpleTypeDecl
 operator|.
 name|WS_COLLAPSE
 condition|)
-block|{
-comment|// Collapse
-name|manager
-operator|.
-name|applyChange
-argument_list|(
-operator|new
-name|AddAxiom
-argument_list|(
-name|schemaOntology
-argument_list|,
-name|createOWLObjectPropertyAssertionAxiom
-argument_list|(
-name|factory
-argument_list|,
-name|XSD_OWL
-operator|.
-name|hasWhitespace
-argument_list|,
-name|simpleType
-argument_list|,
+name|option
+operator|=
 name|XSD_OWL
 operator|.
 name|COLLAPSE
-argument_list|)
-argument_list|)
-argument_list|)
 expr_stmt|;
-block|}
+comment|// Collapse
 elseif|else
 if|if
 condition|(
@@ -3049,35 +3092,13 @@ name|XSSimpleTypeDecl
 operator|.
 name|WS_PRESERVE
 condition|)
-block|{
-comment|// Preserve
-name|manager
-operator|.
-name|applyChange
-argument_list|(
-operator|new
-name|AddAxiom
-argument_list|(
-name|schemaOntology
-argument_list|,
-name|createOWLObjectPropertyAssertionAxiom
-argument_list|(
-name|factory
-argument_list|,
-name|XSD_OWL
-operator|.
-name|hasWhitespace
-argument_list|,
-name|simpleType
-argument_list|,
+name|option
+operator|=
 name|XSD_OWL
 operator|.
 name|PRESERVE
-argument_list|)
-argument_list|)
-argument_list|)
 expr_stmt|;
-block|}
+comment|// Preserve
 elseif|else
 if|if
 condition|(
@@ -3087,41 +3108,19 @@ name|XSSimpleTypeDecl
 operator|.
 name|WS_REPLACE
 condition|)
-block|{
-comment|// Replace
-name|manager
-operator|.
-name|applyChange
-argument_list|(
-operator|new
-name|AddAxiom
-argument_list|(
-name|schemaOntology
-argument_list|,
-name|createOWLObjectPropertyAssertionAxiom
-argument_list|(
-name|factory
-argument_list|,
-name|XSD_OWL
-operator|.
-name|hasWhitespace
-argument_list|,
-name|simpleType
-argument_list|,
+name|option
+operator|=
 name|XSD_OWL
 operator|.
 name|REPLACE
-argument_list|)
-argument_list|)
-argument_list|)
 expr_stmt|;
-block|}
+comment|// Replace
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"WHITESPACE : "
-operator|+
+literal|"Whitespace facet value for XSD simple type definition is {}."
+argument_list|,
 name|whitespace
 argument_list|)
 expr_stmt|;
@@ -3132,17 +3131,33 @@ name|DatatypeException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
-comment|/* In case of exception is run the option that preserves the simple type. */
-name|manager
+comment|// Exception fallback is to preserve the simple type definition.
+name|log
 operator|.
-name|applyChange
+name|warn
 argument_list|(
-operator|new
-name|AddAxiom
-argument_list|(
-name|schemaOntology
+literal|"Unable to obtain whitespace facet value for simple type definition. Defaulting to WS_PRESERVE."
+operator|+
+literal|"\n\tOriginal message follows :: {}"
 argument_list|,
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|option
+operator|=
+name|XSD_OWL
+operator|.
+name|PRESERVE
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|OWLAxiom
+name|axiom
+init|=
 name|createOWLObjectPropertyAssertionAxiom
 argument_list|(
 name|factory
@@ -3153,20 +3168,26 @@ name|hasWhitespace
 argument_list|,
 name|simpleType
 argument_list|,
-name|XSD_OWL
+name|option
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|option
+operator|!=
+literal|null
+condition|)
+name|manager
 operator|.
-name|PRESERVE
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|warn
+name|applyChange
 argument_list|(
-literal|"PROBLEM TO GET WHITE SPACE FROM SIMPLE TYPE DEFINITION"
+operator|new
+name|AddAxiom
+argument_list|(
+name|schemaOntology
 argument_list|,
-name|e
+name|axiom
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3779,7 +3800,22 @@ parameter_list|,
 name|DataSource
 name|dataSource
 parameter_list|)
+throws|throws
+name|ReengineeringException
 block|{
+if|if
+condition|(
+name|dataSource
+operator|==
+literal|null
+condition|)
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Data source cannot be null."
+argument_list|)
+throw|;
 if|if
 condition|(
 operator|!
@@ -3869,13 +3905,6 @@ decl_stmt|;
 name|XSSimpleTypeDecl
 name|m
 decl_stmt|;
-if|if
-condition|(
-name|dataSource
-operator|!=
-literal|null
-condition|)
-block|{
 name|OWLOntologyManager
 name|ontologyManager
 init|=
@@ -3901,15 +3930,14 @@ operator|+
 name|outputIRI
 argument_list|)
 expr_stmt|;
+try|try
+block|{
 if|if
 condition|(
 name|outputIRI
 operator|!=
 literal|null
 condition|)
-block|{
-try|try
-block|{
 name|dataSourceSchemaOntology
 operator|=
 name|ontologyManager
@@ -3919,25 +3947,7 @@ argument_list|(
 name|outputIRI
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-comment|// TODO Auto-generated catch block
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
-block|}
 else|else
-block|{
-try|try
-block|{
 name|dataSourceSchemaOntology
 operator|=
 name|ontologyManager
@@ -3952,13 +3962,13 @@ name|OWLOntologyCreationException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|ReengineeringException
+argument_list|(
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-block|}
+argument_list|)
+throw|;
 block|}
 if|if
 condition|(
@@ -4059,6 +4069,84 @@ name|dbf
 operator|.
 name|newDocumentBuilder
 argument_list|()
+expr_stmt|;
+comment|// FIXME hack for unit tests, this should have a configurable offline mode!!!
+name|db
+operator|.
+name|setEntityResolver
+argument_list|(
+operator|new
+name|EntityResolver
+argument_list|()
+block|{
+specifier|public
+name|InputSource
+name|resolveEntity
+parameter_list|(
+name|String
+name|publicId
+parameter_list|,
+name|String
+name|systemId
+parameter_list|)
+throws|throws
+name|SAXException
+throws|,
+name|IOException
+block|{
+if|if
+condition|(
+name|systemId
+operator|.
+name|endsWith
+argument_list|(
+literal|"DWML.xsd"
+argument_list|)
+condition|)
+block|{
+name|InputStream
+name|dtdStream
+init|=
+name|XSDExtractor
+operator|.
+name|class
+operator|.
+name|getResourceAsStream
+argument_list|(
+literal|"/xml/DWML.xsd"
+argument_list|)
+decl_stmt|;
+return|return
+operator|new
+name|InputSource
+argument_list|(
+name|dtdStream
+argument_list|)
+return|;
+block|}
+comment|// else
+comment|// if (systemId.endsWith("ndfd_data.xsd"))
+comment|// {
+comment|// InputStream dtdStream = XSDExtractor.class
+comment|// .getResourceAsStream("/xml/ndfd_data.xsd");
+comment|// return new InputSource(dtdStream);
+comment|// }
+comment|// else
+comment|// if (systemId.endsWith("meta_data.xsd"))
+comment|// {
+comment|// InputStream dtdStream = XSDExtractor.class
+comment|// .getResourceAsStream("/xml/meta_data.xsd");
+comment|// return new InputSource(dtdStream);
+comment|// }
+else|else
+block|{
+return|return
+literal|null
+return|;
+block|}
+block|}
+block|}
+argument_list|)
 expr_stmt|;
 name|document
 operator|=
@@ -4823,7 +4911,6 @@ operator|.
 name|printStackTrace
 argument_list|()
 expr_stmt|;
-block|}
 block|}
 block|}
 return|return

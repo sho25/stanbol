@@ -149,6 +149,7 @@ argument_list|(
 name|locations
 argument_list|)
 control|)
+block|{
 name|mgr
 operator|.
 name|addIRIMapper
@@ -156,6 +157,7 @@ argument_list|(
 name|mapper
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|mgr
 return|;
@@ -255,6 +257,7 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// We might want to construct other IRI mappers for regular files in the future...
 block|}
 block|}
 block|}
