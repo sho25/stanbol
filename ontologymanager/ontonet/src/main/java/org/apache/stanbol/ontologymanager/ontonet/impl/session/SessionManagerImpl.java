@@ -604,7 +604,7 @@ name|create
 argument_list|(
 name|e
 operator|.
-name|getDulicateID
+name|getDuplicateID
 argument_list|()
 argument_list|)
 argument_list|)

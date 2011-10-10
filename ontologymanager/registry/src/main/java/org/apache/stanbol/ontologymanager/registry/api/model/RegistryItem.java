@@ -208,16 +208,6 @@ name|boolean
 name|hasParents
 parameter_list|()
 function_decl|;
-comment|/**      * Determines if this registry item is a library.      *       * @return      * @deprecated This method will be removed to make room for possible extensions of the registry metamodel.      *             Use {@link #getType()} or<code>instanceof</code> instead, and check for      *             {@link Type#LIBRARY}.      */
-name|boolean
-name|isLibrary
-parameter_list|()
-function_decl|;
-comment|/**      * Determines if this registry item is an ontology.      *       * @return      * @deprecated This method will be removed to make room for possible extensions of the registry metamodel.      *             Use {@link #getType()} or<code>instanceof</code> instead, and check for      *             {@link Type#ONTOLOGY}.      */
-name|boolean
-name|isOntology
-parameter_list|()
-function_decl|;
 comment|/**      * Releases all the parent and child references of this item. If no objects other than the former parents      * and children are referencing it, this object is left stranded for garbage collection.      */
 name|void
 name|prune
@@ -245,14 +235,6 @@ name|removeRegistryContentListener
 parameter_list|(
 name|RegistryContentListener
 name|listener
-parameter_list|)
-function_decl|;
-comment|/**      * Sets the unique identifier of this registry item.      *       * @param iri      *            the identifier of this registry item.      * @deprecated This method is set for removal, as the unique identifier should not be set after creation.      */
-name|void
-name|setIRI
-parameter_list|(
-name|IRI
-name|iri
 parameter_list|)
 function_decl|;
 comment|/**      * Sets the name of this registry item.      *       * @param name      *            the name of this registry item.      */

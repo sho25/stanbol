@@ -2639,16 +2639,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-else|else
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unable to determine type for registry item {}"
-argument_list|,
-name|iri
-argument_list|)
-expr_stmt|;
+comment|// else log.warn("Unable to determine type for registry item {}", iri);
 block|}
 for|for
 control|(

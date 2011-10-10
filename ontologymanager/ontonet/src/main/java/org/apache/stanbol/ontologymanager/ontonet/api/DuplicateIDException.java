@@ -46,7 +46,7 @@ decl_stmt|;
 comment|/**      * Returns the IRI that identifies the existing resource. This can be use to obtain the resource itself by      * passing it onto appropriate managers.      *       * @return the duplicate identifier      */
 specifier|public
 name|String
-name|getDulicateID
+name|getDuplicateID
 parameter_list|()
 block|{
 return|return

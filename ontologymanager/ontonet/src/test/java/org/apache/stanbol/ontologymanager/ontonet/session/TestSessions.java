@@ -712,7 +712,7 @@ literal|"Unexpected DuplicateIDException was caught while testing scope "
 operator|+
 name|e
 operator|.
-name|getDulicateID
+name|getDuplicateID
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -894,7 +894,7 @@ literal|"Unexpected DuplicateIDException was caught while testing scope "
 operator|+
 name|e
 operator|.
-name|getDulicateID
+name|getDuplicateID
 argument_list|()
 argument_list|)
 expr_stmt|;

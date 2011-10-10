@@ -2748,6 +2748,17 @@ operator|!=
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|OfflineConfiguration
+name|getOfflineConfiguration
+parameter_list|()
+block|{
+return|return
+name|offline
+return|;
+block|}
 block|}
 end_class
 

@@ -1604,7 +1604,7 @@ name|fiseMetadataOntology
 init|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|clerezzaMGraphToOWLOntology
+name|clerezzaGraphToOWLOntology
 argument_list|(
 name|mGraph
 argument_list|)
@@ -3036,7 +3036,7 @@ name|fetchedOntology
 operator|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|clerezzaMGraphToOWLOntology
+name|clerezzaGraphToOWLOntology
 argument_list|(
 name|entityMGraph
 argument_list|)

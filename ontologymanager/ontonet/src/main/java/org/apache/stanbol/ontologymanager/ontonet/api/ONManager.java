@@ -223,6 +223,11 @@ name|String
 name|getID
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the offline configuration set for this ontology network manager, if any.      *       * @return the offline configuration, or null if none was set.      */
+name|OfflineConfiguration
+name|getOfflineConfiguration
+parameter_list|()
+function_decl|;
 comment|/**      * Returns the default object that automatically indexes ontologies as they are loaded within scopes.      *       * @return the default ontology index.      */
 name|OntologyIndex
 name|getOntologyIndex

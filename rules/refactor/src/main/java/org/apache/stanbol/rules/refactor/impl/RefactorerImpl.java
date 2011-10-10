@@ -103,6 +103,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|TripleCollection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|UriRef
 import|;
 end_import
@@ -1154,7 +1170,7 @@ name|_REFACTORING_SESSION_ID_DEFAULT
 init|=
 literal|"http://kres.iksproject.eu/session/refactoring"
 decl_stmt|;
-comment|//    public static final String _REFACTORING_SPACE_DEFAULT = "http://kres.iksproject.eu/space/refactoring";
+comment|// public static final String _REFACTORING_SPACE_DEFAULT = "http://kres.iksproject.eu/space/refactoring";
 annotation|@
 name|Property
 argument_list|(
@@ -1213,8 +1229,8 @@ name|REFACTORING_SESSION_ID
 init|=
 literal|"org.apache.stanbol.ontlogymanager.session.refactoring"
 decl_stmt|;
-comment|//    @Property(value = _REFACTORING_SPACE_DEFAULT)
-comment|//    public static final String REFACTORING_SPACE = "org.apache.stanbol.reengineer.space.refactoring";
+comment|// @Property(value = _REFACTORING_SPACE_DEFAULT)
+comment|// public static final String REFACTORING_SPACE = "org.apache.stanbol.reengineer.space.refactoring";
 specifier|private
 name|IRI
 name|defaultRefactoringIRI
@@ -1246,7 +1262,7 @@ specifier|private
 name|String
 name|refactoringScopeID
 decl_stmt|;
-comment|//    private IRI refactoringSpaceIRI;
+comment|// private IRI refactoringSpaceIRI;
 annotation|@
 name|Reference
 specifier|protected
@@ -1478,8 +1494,8 @@ name|refactoringScopeID
 operator|=
 name|_REFACTORING_SCOPE_DEFAULT
 expr_stmt|;
-comment|//        String refactoringSpaceID = (String) configuration.get(REFACTORING_SPACE);
-comment|//        if (refactoringSpaceID == null) refactoringSpaceID = _REFACTORING_SPACE_DEFAULT;
+comment|// String refactoringSpaceID = (String) configuration.get(REFACTORING_SPACE);
+comment|// if (refactoringSpaceID == null) refactoringSpaceID = _REFACTORING_SPACE_DEFAULT;
 name|String
 name|defaultRefactoringID
 init|=
@@ -1535,8 +1551,8 @@ argument_list|(
 name|refactoringSessionID
 argument_list|)
 expr_stmt|;
-comment|//        refactoringScopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + refactoringScopeID);
-comment|//        refactoringSpaceIRI = IRI.create(refactoringSpaceID);
+comment|// refactoringScopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + refactoringScopeID);
+comment|// refactoringSpaceIRI = IRI.create(refactoringSpaceID);
 name|defaultRefactoringIRI
 operator|=
 name|IRI
@@ -2350,7 +2366,7 @@ operator|new
 name|SimpleMGraph
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|TripleCollection
 name|mGraph
 init|=
 name|OWLAPIToClerezzaConverter
@@ -2401,12 +2417,21 @@ block|{
 case|case
 name|KReSCore
 case|:
+if|if
+condition|(
+name|mGraph
+operator|instanceof
+name|MGraph
+condition|)
 name|constructedGraph
 operator|=
 name|kReSCoreOperation
 argument_list|(
 name|sparql
 argument_list|,
+operator|(
+name|MGraph
+operator|)
 name|mGraph
 argument_list|)
 expr_stmt|;
@@ -2414,6 +2439,13 @@ break|break;
 case|case
 name|ForwardChaining
 case|:
+if|if
+condition|(
+name|mGraph
+operator|instanceof
+name|MGraph
+condition|)
+block|{
 name|ForwardChainingRefactoringGraph
 name|forwardChainingRefactoringGraph
 init|=
@@ -2421,6 +2453,9 @@ name|forwardChainingOperation
 argument_list|(
 name|sparql
 argument_list|,
+operator|(
+name|MGraph
+operator|)
 name|mGraph
 argument_list|)
 decl_stmt|;
@@ -2438,6 +2473,7 @@ operator|.
 name|getInputGraph
 argument_list|()
 expr_stmt|;
+block|}
 break|break;
 case|case
 name|Reflexive
@@ -2455,12 +2491,21 @@ break|break;
 case|case
 name|SPARQLConstruct
 case|:
+if|if
+condition|(
+name|mGraph
+operator|instanceof
+name|MGraph
+condition|)
 name|constructedGraph
 operator|=
 name|kReSCoreOperation
 argument_list|(
 name|sparql
 argument_list|,
+operator|(
+name|MGraph
+operator|)
 name|mGraph
 argument_list|)
 expr_stmt|;
@@ -2514,7 +2559,7 @@ name|refactoredOntology
 operator|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|clerezzaMGraphToOWLOntology
+name|clerezzaGraphToOWLOntology
 argument_list|(
 name|unionMGraph
 argument_list|)
@@ -2617,7 +2662,7 @@ operator|new
 name|SimpleMGraph
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|TripleCollection
 name|mGraph
 init|=
 name|OWLAPIToClerezzaConverter
@@ -2668,12 +2713,21 @@ block|{
 case|case
 name|KReSCore
 case|:
+if|if
+condition|(
+name|mGraph
+operator|instanceof
+name|MGraph
+condition|)
 name|constructedGraph
 operator|=
 name|kReSCoreOperation
 argument_list|(
 name|sparql
 argument_list|,
+operator|(
+name|MGraph
+operator|)
 name|mGraph
 argument_list|)
 expr_stmt|;
@@ -2681,6 +2735,13 @@ break|break;
 case|case
 name|ForwardChaining
 case|:
+if|if
+condition|(
+name|mGraph
+operator|instanceof
+name|MGraph
+condition|)
+block|{
 name|ForwardChainingRefactoringGraph
 name|forwardChainingRefactoringGraph
 init|=
@@ -2688,6 +2749,9 @@ name|forwardChainingOperation
 argument_list|(
 name|sparql
 argument_list|,
+operator|(
+name|MGraph
+operator|)
 name|mGraph
 argument_list|)
 decl_stmt|;
@@ -2705,6 +2769,7 @@ operator|.
 name|getInputGraph
 argument_list|()
 expr_stmt|;
+block|}
 break|break;
 case|case
 name|Reflexive
@@ -2722,12 +2787,21 @@ break|break;
 case|case
 name|SPARQLConstruct
 case|:
+if|if
+condition|(
+name|mGraph
+operator|instanceof
+name|MGraph
+condition|)
 name|constructedGraph
 operator|=
 name|kReSCoreOperation
 argument_list|(
 name|sparql
 argument_list|,
+operator|(
+name|MGraph
+operator|)
 name|mGraph
 argument_list|)
 expr_stmt|;
@@ -2781,7 +2855,7 @@ name|refactoredOntology
 operator|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|clerezzaMGraphToOWLOntology
+name|clerezzaGraphToOWLOntology
 argument_list|(
 name|unionMGraph
 argument_list|)
