@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -96,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An object representing a relational database in Semion.  *    * @author andrea.nuzzolese  *  */
+comment|/**  * An object representing a relational database.  *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -110,7 +114,7 @@ specifier|private
 name|ConnectionSettings
 name|connectionSettings
 decl_stmt|;
-comment|/** 	 * The constructor requires all the parameters in order to establish a connection with the physical DB. 	 * Those information regarding the connection with the DB are passed to the constructor in the {@link ConnectionSettings}. 	 *   	 * @param connectionSettings {@link ConnectionSettings} 	 */
+comment|/**      * The constructor requires all the parameters in order to establish a connection with the physical DB.      * Those information regarding the connection with the DB are passed to the constructor in the      * {@link ConnectionSettings}.      *       * @param connectionSettings      *            {@link ConnectionSettings}      */
 specifier|public
 name|RDB
 parameter_list|(
@@ -166,7 +170,7 @@ operator|=
 name|connectionSettings
 expr_stmt|;
 block|}
-comment|/** 	 * Return the physical data source. In this specific case, as the data source is an RDB, a {@link ConnectionSettings} object containing 	 * the information in order to establish a connection with the DB via JDBC is returned 	 *  	 * @return the information for establishing the connection with the DB 	 */
+comment|/**      * Return the physical data source. In this specific case, as the data source is an RDB, a      * {@link ConnectionSettings} object containing the information in order to establish a connection with      * the DB via JDBC is returned      *       * @return the information for establishing the connection with the DB      */
 annotation|@
 name|Override
 specifier|public
@@ -178,7 +182,7 @@ return|return
 name|connectionSettings
 return|;
 block|}
-comment|/** 	 * Return the {@code int} representing the data source type in Semion. 	 * In the case of relationa databases the value returned is {@link ReengineerType.RDB}, namely 0. 	 *  	 * @return the value assigned to the relational databases by Semion 	 */
+comment|/**      * Return the {@code int} representing the data source type in Semion. In the case of relationa databases      * the value returned is {@link ReengineerType.RDB}, namely 0.      *       * @return the value assigned to the relational databases by Semion      */
 annotation|@
 name|Override
 specifier|public

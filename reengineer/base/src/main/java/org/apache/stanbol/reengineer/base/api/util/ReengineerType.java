@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -18,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The ReenginnerType class allows to declare the type of data source that a concrete SemionReengineer  * is able to manage. The type is represented as an {@code int}  *<br>  *<br>  *   * Valid values are:  *<ul>  *<li> 0 - Relational Databases  *<li> 1 - XML  *<li> 2 - iCalendar  *<li> 3 - RSS  *</ul>  *   *   * @author andrea.nuzzolese  *  */
+comment|/**  * The ReenginnerType class allows to declare the type of data source that a concrete SemionReengineer is able  * to manage. The type is represented as an {@code int}<br>  *<br>  *   * Valid values are:  *<ul>  *<li>0 - Relational Databases  *<li>1 - XML  *<li>2 - iCalendar  *<li>3 - RSS  *</ul>  *   *   * @author andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -26,7 +30,7 @@ specifier|public
 class|class
 name|ReengineerType
 block|{
-comment|/** 	 * 0 - Relational Databases 	 */
+comment|/**      * 0 - Relational Databases      */
 specifier|public
 specifier|static
 name|int
@@ -34,7 +38,7 @@ name|RDB
 init|=
 literal|0
 decl_stmt|;
-comment|/** 	 * 1 - XML 	 */
+comment|/**      * 1 - XML      */
 specifier|public
 specifier|static
 name|int
@@ -42,7 +46,7 @@ name|XML
 init|=
 literal|1
 decl_stmt|;
-comment|/** 	 * 2 - iCalendar 	 */
+comment|/**      * 2 - iCalendar      */
 specifier|public
 specifier|static
 name|int
@@ -50,7 +54,7 @@ name|I_CALENDAR
 init|=
 literal|2
 decl_stmt|;
-comment|/** 	 * 3 - RSS 	 */
+comment|/**      * 3 - RSS      */
 specifier|public
 specifier|static
 name|int
@@ -58,7 +62,7 @@ name|RSS
 init|=
 literal|3
 decl_stmt|;
-comment|/** 	 * Static method that enables to know the the type of a data source supported by the reengineer in a human-readable string 	 * format 	 *  	 * @param type {@code int} 	 * @return the string representing the data source type supported by the reengineer 	 */
+comment|/**      * Static method that enables to know the the type of a data source supported by the reengineer in a      * human-readable string format      *       * @param type      *            {@code int}      * @return the string representing the data source type supported by the reengineer      */
 specifier|public
 specifier|static
 name|String
@@ -115,7 +119,7 @@ return|return
 name|typeString
 return|;
 block|}
-comment|/** 	 * Static method that enables to know the the type of a data source supported by the reengineer in a human-readable string 	 * format 	 *  	 * @param type {@code int} 	 * @return the string representing the data source type supported by the reengineer 	 */
+comment|/**      * Static method that enables to know the the type of a data source supported by the reengineer in a      * human-readable string format      *       * @param type      *            {@code int}      * @return the string representing the data source type supported by the reengineer      */
 specifier|public
 specifier|static
 name|int
