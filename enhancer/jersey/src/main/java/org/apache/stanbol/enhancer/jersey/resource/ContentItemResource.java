@@ -2927,6 +2927,12 @@ operator|.
 name|confidence
 operator|=
 name|confidence
+operator|!=
+literal|null
+condition|?
+name|confidence
+else|:
+literal|0.0
 expr_stmt|;
 name|this
 operator|.
