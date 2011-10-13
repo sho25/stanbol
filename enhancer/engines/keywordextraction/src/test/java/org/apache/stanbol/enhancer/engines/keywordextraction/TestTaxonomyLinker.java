@@ -210,6 +210,8 @@ operator|.
 name|opennlp
 operator|.
 name|TextAnalyzer
+operator|.
+name|TextAnalyzerConfig
 import|;
 end_import
 
@@ -1041,15 +1043,6 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|TextAnalyzer
-name|textAnalyzer
-init|=
-operator|new
-name|TextAnalyzer
-argument_list|(
-name|openNLP
-argument_list|)
-decl_stmt|;
 name|OpenNlpAnalysedContentFactory
 name|acf
 init|=
@@ -1057,7 +1050,11 @@ name|OpenNlpAnalysedContentFactory
 operator|.
 name|getInstance
 argument_list|(
-name|textAnalyzer
+name|openNLP
+argument_list|,
+operator|new
+name|TextAnalyzerConfig
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|EntityLinkerConfig

@@ -309,11 +309,45 @@ name|RdfResourceEnum
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
 name|EntityLinker
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|EntityLinker
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|private
 specifier|final
 name|EntityLinkerConfig
@@ -751,7 +785,10 @@ comment|//how good is the current match in relation to the best one
 name|double
 name|spanScore
 init|=
-name|suggestionMatchScore
+name|suggestion
+operator|.
+name|getMatchCount
+argument_list|()
 operator|/
 name|bestMatchCount
 decl_stmt|;
@@ -833,16 +870,13 @@ name|getMatchCount
 argument_list|()
 condition|)
 block|{
-comment|//TODO: change this to a warning (like to have exceptions during debugging)
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-name|String
+name|log
 operator|.
-name|format
+name|warn
 argument_list|(
-literal|"The match count for the top Ranked Suggestion for %s changed after resorting based on Scores! (original: %s, currnet %s)"
+literal|"The match count for the top Ranked Suggestion for {} "
+operator|+
+literal|"changed after resorting based on Scores!"
 argument_list|,
 name|state
 operator|.
@@ -860,13 +894,33 @@ argument_list|()
 argument_list|,
 name|bestMatchCount
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"  originalbest   : {}"
 argument_list|,
 name|oldBestRanked
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|" currnet ranking : {}"
 argument_list|,
 name|suggestions
 argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"  ... this will result in worng confidence values relative to the best match"
 argument_list|)
-throw|;
+expr_stmt|;
 block|}
 comment|//remove all suggestions> config.maxSuggestions
 if|if
@@ -1027,10 +1081,7 @@ operator|.
 name|getSentence
 argument_list|()
 argument_list|,
-name|state
-operator|.
-name|getTokenIndex
-argument_list|()
+name|start
 argument_list|,
 name|span
 argument_list|)
@@ -2732,12 +2783,18 @@ block|}
 elseif|else
 if|if
 condition|(
+operator|(
 name|foundProcessableTokens
 operator|>=
 name|config
 operator|.
 name|getMinFoundTokens
 argument_list|()
+operator|||
+name|foundTokens
+operator|==
+name|coveredTokens
+operator|)
 operator|&&
 name|labelMatchScore
 operator|>=

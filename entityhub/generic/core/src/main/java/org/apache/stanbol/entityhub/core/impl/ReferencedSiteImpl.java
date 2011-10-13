@@ -1640,8 +1640,8 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"create instance of "
-operator|+
+literal|"create instance of {}"
+argument_list|,
 name|this
 operator|.
 name|getClass
@@ -3289,13 +3289,9 @@ name|TRUE
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"  - cached Representation %s in %d ms"
+literal|"  - cached Representation {} in {} ms"
 argument_list|,
 name|id
 argument_list|,
@@ -3307,7 +3303,6 @@ argument_list|()
 operator|-
 name|start
 operator|)
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3376,13 +3371,9 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"  - loaded Representation %s from Cache in %d ms"
+literal|"  - loaded Representation {} from Cache in {} ms"
 argument_list|,
 name|id
 argument_list|,
@@ -3394,7 +3385,6 @@ argument_list|()
 operator|-
 name|start
 operator|)
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4651,14 +4641,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Process ServceEvent for ComponentFactory %s and State REGISTERED"
+literal|"Process ServiceEvent for ComponentFactory {} and State REGISTERED"
 argument_list|,
 name|eventComponentName
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|ComponentFactory
@@ -4736,11 +4721,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Ignore ServiceEvent for ComponentFactory %s and state %s"
+literal|"Ignore ServiceEvent for ComponentFactory {} and state {}"
 argument_list|,
 name|eventComponentName
 argument_list|,
@@ -4767,7 +4748,6 @@ condition|?
 literal|"UNREGISTERING"
 else|:
 literal|"MODIFIED_ENDMATCH"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

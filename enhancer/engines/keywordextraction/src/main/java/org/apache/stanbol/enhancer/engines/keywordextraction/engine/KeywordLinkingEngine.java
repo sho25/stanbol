@@ -519,6 +519,24 @@ name|stanbol
 operator|.
 name|commons
 operator|.
+name|opennlp
+operator|.
+name|TextAnalyzer
+operator|.
+name|TextAnalyzerConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
 name|stanboltools
 operator|.
 name|offline
@@ -1556,7 +1574,11 @@ name|entitySearcher
 decl_stmt|;
 specifier|private
 name|EntityLinkerConfig
-name|config
+name|linkerConfig
+decl_stmt|;
+specifier|private
+name|TextAnalyzerConfig
+name|nlpConfig
 decl_stmt|;
 comment|/**      * The reference to the OpenNLP component      */
 annotation|@
@@ -1575,11 +1597,9 @@ specifier|private
 name|OpenNLP
 name|openNLP
 decl_stmt|;
-comment|/**      * Used for natural language processing of parsed content      */
-specifier|private
-name|TextAnalyzer
-name|textAnalyser
-decl_stmt|;
+comment|//TextAnalyzer was changed to have a scope of a single request ( call to
+comment|//#computeEnhancement!
+comment|//private TextAnalyzer textAnalyser;
 comment|/**      * Used to create {@link AnalysedContent} instances for parsed content items      */
 specifier|private
 name|OpenNlpAnalysedContentFactory
@@ -1701,8 +1721,11 @@ parameter_list|,
 name|EntitySearcher
 name|entitySearcher
 parameter_list|,
+name|TextAnalyzerConfig
+name|nlpConfig
+parameter_list|,
 name|EntityLinkerConfig
-name|config
+name|linkingConfig
 parameter_list|)
 block|{
 name|this
@@ -1713,13 +1736,31 @@ name|openNLP
 expr_stmt|;
 name|this
 operator|.
-name|textAnalyser
+name|linkerConfig
 operator|=
+name|linkingConfig
+operator|!=
+literal|null
+condition|?
+name|linkingConfig
+else|:
 operator|new
-name|TextAnalyzer
-argument_list|(
-name|openNLP
-argument_list|)
+name|EntityLinkerConfig
+argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|nlpConfig
+operator|=
+name|nlpConfig
+operator|!=
+literal|null
+condition|?
+name|nlpConfig
+else|:
+operator|new
+name|TextAnalyzerConfig
+argument_list|()
 expr_stmt|;
 name|this
 operator|.
@@ -1729,7 +1770,9 @@ name|OpenNlpAnalysedContentFactory
 operator|.
 name|getInstance
 argument_list|(
-name|textAnalyser
+name|openNLP
+argument_list|,
+name|nlpConfig
 argument_list|)
 expr_stmt|;
 name|this
@@ -1737,20 +1780,6 @@ operator|.
 name|entitySearcher
 operator|=
 name|entitySearcher
-expr_stmt|;
-name|this
-operator|.
-name|config
-operator|=
-name|config
-operator|!=
-literal|null
-condition|?
-name|config
-else|:
-operator|new
-name|EntityLinkerConfig
-argument_list|()
 expr_stmt|;
 block|}
 comment|/**      * Allows to create an instance that can be used outside of an OSGI      * environment. This is mainly intended for unit tests.      * @param openNLP The {@link OpenNLP} instance used for natural language processing      * @param entitySearcher the searcher used to lookup terms      * @param config the configuration or<code>null</code> to use the defaults      * @return the created engine instance      */
@@ -1765,8 +1794,11 @@ parameter_list|,
 name|EntitySearcher
 name|entitySearcher
 parameter_list|,
+name|TextAnalyzerConfig
+name|nlpConfig
+parameter_list|,
 name|EntityLinkerConfig
-name|config
+name|linkingConfig
 parameter_list|)
 block|{
 return|return
@@ -1777,7 +1809,9 @@ name|openNLP
 argument_list|,
 name|entitySearcher
 argument_list|,
-name|config
+name|nlpConfig
+argument_list|,
+name|linkingConfig
 argument_list|)
 return|;
 block|}
@@ -2077,7 +2111,7 @@ argument_list|)
 argument_list|,
 name|entitySearcher
 argument_list|,
-name|config
+name|linkerConfig
 argument_list|)
 decl_stmt|;
 comment|//process
@@ -2397,7 +2431,7 @@ name|suggestion
 operator|.
 name|getBestLabel
 argument_list|(
-name|config
+name|linkerConfig
 operator|.
 name|getNameField
 argument_list|()
@@ -2494,7 +2528,7 @@ argument_list|()
 operator|.
 name|getReferences
 argument_list|(
-name|config
+name|linkerConfig
 operator|.
 name|getTypeField
 argument_list|()
@@ -2903,7 +2937,7 @@ name|text
 return|;
 block|}
 comment|/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      * Methods for activate() and deactivate() the properties configureable via      * OSGI.      *       * NOTEs:      * Directly calling super.activate and super.deactivate      * is possible but might not be applicable in all cases.      * The activate**(...) and deactivate**() Methods are intended to be      * called by subclasses that need more control over the initialisation      * process.      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      */
-comment|/**      * Activates this Engine. Subclasses should not call this method but rather      * call<ul>      *<li> {@link #activateEntitySearcher(ComponentContext, Dictionary)}      *<li> {@link #initEntityLinkerConfig(Dictionary, EntityLinkerConfig)} and      *<li> {@link #activateTextAnalyzer(Dictionary)}      *<li> {@link #dereferenceEntitiesState} (needs to be called after       * {@link #initEntityLinkerConfig(Dictionary, EntityLinkerConfig)})      *</ul>      * if applicable.      * @param context the Component context      * @throws ConfigurationException if the required {@link #REFERENCED_SITE_ID}      * configuration is missing or any of the other properties has an illegal value      */
+comment|/**      * Activates this Engine. Subclasses should not call this method but rather      * call<ul>      *<li> {@link #activateEntitySearcher(ComponentContext, Dictionary)}      *<li> {@link #initEntityLinkerConfig(Dictionary, EntityLinkerConfig)} and      *<li> {@link #activateTextAnalyzerConfig(Dictionary)}      *<li> {@link #dereferenceEntitiesState} (needs to be called after       * {@link #initEntityLinkerConfig(Dictionary, EntityLinkerConfig)})      *</ul>      * if applicable.      * @param context the Component context      * @throws ConfigurationException if the required {@link #REFERENCED_SITE_ID}      * configuration is missing or any of the other properties has an illegal value      */
 annotation|@
 name|Activate
 annotation|@
@@ -2934,7 +2968,7 @@ operator|.
 name|getProperties
 argument_list|()
 decl_stmt|;
-name|activateTextAnalyzer
+name|activateTextAnalyzerConfig
 argument_list|(
 name|properties
 argument_list|)
@@ -3044,7 +3078,7 @@ condition|(
 name|dereferenceEntitiesState
 condition|)
 block|{
-name|config
+name|linkerConfig
 operator|.
 name|getSelectedFields
 argument_list|()
@@ -3060,7 +3094,7 @@ comment|/**      * Initialise the {@link TextAnalyzer} component.<p>      * Curr
 specifier|protected
 specifier|final
 name|void
-name|activateTextAnalyzer
+name|activateTextAnalyzerConfig
 parameter_list|(
 name|Dictionary
 argument_list|<
@@ -3073,22 +3107,11 @@ parameter_list|)
 throws|throws
 name|ConfigurationException
 block|{
-name|textAnalyser
+name|nlpConfig
 operator|=
 operator|new
-name|TextAnalyzer
-argument_list|(
-name|openNLP
-argument_list|)
-expr_stmt|;
-name|analysedContentFactory
-operator|=
-name|OpenNlpAnalysedContentFactory
-operator|.
-name|getInstance
-argument_list|(
-name|textAnalyser
-argument_list|)
+name|TextAnalyzerConfig
+argument_list|()
 expr_stmt|;
 name|Object
 name|value
@@ -3323,15 +3346,26 @@ literal|")!"
 argument_list|)
 throw|;
 block|}
-name|textAnalyser
+name|nlpConfig
 operator|.
 name|setMinPosTagProbability
 argument_list|(
 name|minPosTagProb
 argument_list|)
 expr_stmt|;
+name|analysedContentFactory
+operator|=
+name|OpenNlpAnalysedContentFactory
+operator|.
+name|getInstance
+argument_list|(
+name|openNLP
+argument_list|,
+name|nlpConfig
+argument_list|)
+expr_stmt|;
 block|}
-comment|/**      * Configures the parsed {@link EntityLinkerConfig} with the values of the      * following properties:<ul>      *<li>{@link #NAME_FIELD}      *<li>{@link #TYPE_FIELD}      *<li>{@link #REDIRECT_FIELD}      *<li>{@link #REDIRECT_PROCESSING_MODE}      *<li>{@link #MAX_SUGGESTIONS}      *<li>{@link #MIN_SEARCH_TOKEN_LENGTH}      *<li>{@link #MIN_FOUND_TOKENS}      *</ul>      * This Method create an new {@link EntityLinkerConfig} instance only if      *<code>{@link #config} == null</code>. If the instance is already initialised      * that all current values for keys missing in the parsed configuration are      * preserved.      * @param configuration the configuration      * @throws ConfigurationException In case of an illegal value in the parsed configuration.      * Note that all configuration are assumed as optional, therefore missing values will not      * case a ConfigurationException.      */
+comment|/**      * Configures the parsed {@link EntityLinkerConfig} with the values of the      * following properties:<ul>      *<li>{@link #NAME_FIELD}      *<li>{@link #TYPE_FIELD}      *<li>{@link #REDIRECT_FIELD}      *<li>{@link #REDIRECT_PROCESSING_MODE}      *<li>{@link #MAX_SUGGESTIONS}      *<li>{@link #MIN_SEARCH_TOKEN_LENGTH}      *<li>{@link #MIN_FOUND_TOKENS}      *</ul>      * This Method create an new {@link EntityLinkerConfig} instance only if      *<code>{@link #linkerConfig} == null</code>. If the instance is already initialised      * that all current values for keys missing in the parsed configuration are      * preserved.      * @param configuration the configuration      * @throws ConfigurationException In case of an illegal value in the parsed configuration.      * Note that all configuration are assumed as optional, therefore missing values will not      * case a ConfigurationException.      */
 specifier|protected
 name|void
 name|activateEntityLinkerConfig
@@ -3349,14 +3383,14 @@ name|ConfigurationException
 block|{
 if|if
 condition|(
-name|config
+name|linkerConfig
 operator|==
 literal|null
 condition|)
 block|{
 name|this
 operator|.
-name|config
+name|linkerConfig
 operator|=
 operator|new
 name|EntityLinkerConfig
@@ -3403,7 +3437,7 @@ literal|"The configured name field MUST NOT be empty"
 argument_list|)
 throw|;
 block|}
-name|config
+name|linkerConfig
 operator|.
 name|setNameField
 argument_list|(
@@ -3452,7 +3486,7 @@ literal|"The configured name field MUST NOT be empty"
 argument_list|)
 throw|;
 block|}
-name|config
+name|linkerConfig
 operator|.
 name|setTypeField
 argument_list|(
@@ -3501,7 +3535,7 @@ literal|"The configured name field MUST NOT be empty"
 argument_list|)
 throw|;
 block|}
-name|config
+name|linkerConfig
 operator|.
 name|setRedirectField
 argument_list|(
@@ -3613,7 +3647,7 @@ literal|"Values MUST be valid Integer values> 0"
 argument_list|)
 throw|;
 block|}
-name|config
+name|linkerConfig
 operator|.
 name|setMaxSuggestions
 argument_list|(
@@ -3722,7 +3756,7 @@ literal|"Values MUST be valid Integer values> 0"
 argument_list|)
 throw|;
 block|}
-name|config
+name|linkerConfig
 operator|.
 name|setMinFoundTokens
 argument_list|(
@@ -3831,7 +3865,7 @@ literal|"Values MUST be valid Integer values> 0"
 argument_list|)
 throw|;
 block|}
-name|config
+name|linkerConfig
 operator|.
 name|setMaxSuggestions
 argument_list|(
@@ -3858,7 +3892,7 @@ condition|)
 block|{
 try|try
 block|{
-name|config
+name|linkerConfig
 operator|.
 name|setRedirectProcessingMode
 argument_list|(
@@ -3937,7 +3971,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|config
+name|linkerConfig
 operator|.
 name|setDefaultLanguage
 argument_list|(
@@ -3972,7 +4006,7 @@ throw|;
 block|}
 else|else
 block|{
-name|config
+name|linkerConfig
 operator|.
 name|setDefaultLanguage
 argument_list|(
@@ -4113,7 +4147,7 @@ block|{
 name|deactivateEntitySearcher
 argument_list|()
 expr_stmt|;
-name|deactivateTextAnalyzer
+name|deactivateTextAnalyzerConfig
 argument_list|()
 expr_stmt|;
 name|deactivateEntityLinkerConfig
@@ -4138,12 +4172,12 @@ block|}
 comment|/**      * Deactivates the {@link TextAnalyzer} as well as resets the set of languages      * to process to {@link #DEFAULT_LANGUAGES}      */
 specifier|protected
 name|void
-name|deactivateTextAnalyzer
+name|deactivateTextAnalyzerConfig
 parameter_list|()
 block|{
 name|this
 operator|.
-name|textAnalyser
+name|nlpConfig
 operator|=
 literal|null
 expr_stmt|;
@@ -4164,7 +4198,7 @@ name|void
 name|deactivateEntityLinkerConfig
 parameter_list|()
 block|{
-name|config
+name|linkerConfig
 operator|=
 literal|null
 expr_stmt|;

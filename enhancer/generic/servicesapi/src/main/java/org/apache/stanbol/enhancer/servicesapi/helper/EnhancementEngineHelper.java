@@ -874,6 +874,14 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+while|while
+condition|(
+name|results
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
 name|Triple
 name|result
 init|=
@@ -913,35 +921,48 @@ else|else
 block|{
 name|log
 operator|.
-name|warn
+name|debug
 argument_list|(
-literal|"Triple "
-operator|+
+literal|"Triple {} does not have a TypedLiteral as object! -> ignore"
+argument_list|,
 name|result
-operator|+
-literal|" does not have a TypedLiteral as object! -> return null"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"No value for {} and property {} had the requested Type {} -> return null"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|resource
+block|,
+name|property
+block|,
+name|type
+block|}
 argument_list|)
 expr_stmt|;
 return|return
 literal|null
 return|;
 block|}
-block|}
 else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"No Triple found for "
-operator|+
+literal|"No Triple found for {} and property {}! -> return null"
+argument_list|,
 name|resource
-operator|+
-literal|" and property "
-operator|+
+argument_list|,
 name|property
-operator|+
-literal|"! -> return null"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1107,6 +1128,14 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+while|while
+condition|(
+name|results
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
 name|Triple
 name|result
 init|=
@@ -1144,25 +1173,35 @@ else|else
 block|{
 name|log
 operator|.
-name|warn
+name|debug
 argument_list|(
-literal|"Triple "
-operator|+
+literal|"Triple {} does not have a literal as object! -> ignore"
+argument_list|,
 name|result
-operator|+
-literal|" does not have a literal as object! -> return null"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"No Literal value for {} and property {} -> return null"
+argument_list|,
+name|resource
+argument_list|,
+name|property
 argument_list|)
 expr_stmt|;
 return|return
 literal|null
 return|;
 block|}
-block|}
 else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"No Triple found for "
 operator|+
@@ -1322,6 +1361,14 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+while|while
+condition|(
+name|results
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
 name|Triple
 name|result
 init|=
@@ -1354,35 +1401,43 @@ else|else
 block|{
 name|log
 operator|.
-name|warn
+name|debug
 argument_list|(
 literal|"Triple "
 operator|+
 name|result
 operator|+
-literal|" does not have a UriRef as object! -> return null"
+literal|" does not have a UriRef as object! -> ignore"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"No UriRef value for {} and property {} -> return null"
+argument_list|,
+name|resource
+argument_list|,
+name|property
 argument_list|)
 expr_stmt|;
 return|return
 literal|null
 return|;
 block|}
-block|}
 else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"No Triple found for "
-operator|+
+literal|"No Triple found for {} and property {}! -> return null"
+argument_list|,
 name|resource
-operator|+
-literal|" and property "
-operator|+
+argument_list|,
 name|property
-operator|+
-literal|"! -> return null"
 argument_list|)
 expr_stmt|;
 return|return
