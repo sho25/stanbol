@@ -499,6 +499,18 @@ name|ws
 operator|.
 name|rs
 operator|.
+name|DefaultValue
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
 name|FormParam
 import|;
 end_import
@@ -512,6 +524,18 @@ operator|.
 name|rs
 operator|.
 name|GET
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|HttpMethod
 import|;
 end_import
 
@@ -1845,6 +1869,16 @@ argument_list|)
 name|String
 name|id
 parameter_list|,
+annotation|@
+name|QueryParam
+argument_list|(
+name|value
+operator|=
+literal|"update"
+argument_list|)
+name|boolean
+name|allowUpdate
+parameter_list|,
 name|Set
 argument_list|<
 name|Representation
@@ -1896,7 +1930,13 @@ name|id
 argument_list|,
 name|parsed
 argument_list|,
+name|HttpMethod
+operator|.
+name|POST
+argument_list|,
 literal|true
+argument_list|,
+name|allowUpdate
 argument_list|,
 name|headers
 argument_list|)
@@ -1930,6 +1970,21 @@ argument_list|)
 name|String
 name|id
 parameter_list|,
+annotation|@
+name|QueryParam
+argument_list|(
+name|value
+operator|=
+literal|"create"
+argument_list|)
+annotation|@
+name|DefaultValue
+argument_list|(
+literal|"true"
+argument_list|)
+name|boolean
+name|allowCreate
+parameter_list|,
 name|Set
 argument_list|<
 name|Representation
@@ -1981,7 +2036,13 @@ name|id
 argument_list|,
 name|parsed
 argument_list|,
-literal|false
+name|HttpMethod
+operator|.
+name|PUT
+argument_list|,
+name|allowCreate
+argument_list|,
+literal|true
 argument_list|,
 name|headers
 argument_list|)
@@ -2223,7 +2284,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Implements the creation/update of Representations within the Entityhub.      * @param id the id of the resource to create or update. If not       *<code>null</code> all parsed Representations with other      * ids will be ignored.      * @param parsed the parsed representation(s)      * @param createState create or update request      * @param headers the HTTP headers of the request      * @return the created/updated representation as response      */
+comment|/**      * Implements the creation/update of Representations within the Entityhub.      * @param id the id of the resource to create or update. If not       *<code>null</code> all parsed Representations with other      * ids will be ignored.      * @param parsed the parsed representation(s)      * @param method the {@link HttpMethod} used by the reuqest. Needed to create      * the correct response.      * @param create allow to create new Entities      * @param update allow to update existing Entities      * @param headers the HTTP headers of the request      * @return the created/updated representation as response      */
 specifier|private
 name|Response
 name|updateOrCreateEntity
@@ -2237,8 +2298,14 @@ name|Representation
 argument_list|>
 name|parsed
 parameter_list|,
+name|String
+name|method
+parameter_list|,
 name|boolean
-name|createState
+name|create
+parameter_list|,
+name|boolean
+name|update
 parameter_list|,
 name|HttpHeaders
 name|headers
@@ -2390,6 +2457,17 @@ block|}
 block|}
 block|}
 comment|//First check if all parsed Representation can be created/updated
+if|if
+condition|(
+operator|!
+operator|(
+name|create
+operator|&&
+name|update
+operator|)
+condition|)
+block|{
+comment|//if both create and update are enabled skip this
 for|for
 control|(
 name|Representation
@@ -2459,17 +2537,11 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Unable to %s Entity %s because of"
+literal|"Unable to process Entity %s because of"
 operator|+
 literal|"an Error while checking the current version of that"
 operator|+
 literal|"Entity within the Entityhub (Message: %s)"
-argument_list|,
-name|createState
-condition|?
-literal|"create"
-else|:
-literal|"update"
 argument_list|,
 name|representation
 operator|.
@@ -2498,9 +2570,20 @@ return|;
 block|}
 if|if
 condition|(
-name|createState
-operator|==
+operator|(
 name|exists
+operator|&&
+operator|!
+name|update
+operator|)
+operator|||
+operator|(
+operator|!
+name|exists
+operator|&&
+operator|!
+name|create
+operator|)
 condition|)
 block|{
 return|return
@@ -2519,19 +2602,44 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Unable to %s an Entity that %s exist"
+literal|"Unable to %s an Entity %s becuase it %s and %s is deactivated. "
+operator|+
+literal|" You might want to set the '%s' parameter to TRUE in your Request"
 argument_list|,
-name|createState
+name|exists
 condition|?
-literal|"create"
-else|:
 literal|"update"
+else|:
+literal|"create"
+argument_list|,
+name|representation
+operator|.
+name|getId
+argument_list|()
+argument_list|,
+name|exists
+condition|?
+literal|"does already exists "
+else|:
+literal|"does not"
+argument_list|,
+name|exists
+condition|?
+literal|"updateing existing"
+else|:
+literal|"creating new"
 argument_list|,
 name|exists
 condition|?
 literal|"does already"
 else|:
-literal|"does not"
+literal|"does not exists"
+argument_list|,
+name|exists
+condition|?
+literal|"update"
+else|:
+literal|"create"
 argument_list|)
 argument_list|)
 operator|.
@@ -2547,6 +2655,7 @@ operator|.
 name|build
 argument_list|()
 return|;
+block|}
 block|}
 block|}
 comment|//store the Representations
@@ -2621,15 +2730,9 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Exception while %s representation %s"
+literal|"Exception while storing Entity %s"
 operator|+
 literal|"in the Entityhub."
-argument_list|,
-name|createState
-condition|?
-literal|"create"
-else|:
-literal|"update"
 argument_list|,
 name|representation
 argument_list|)
@@ -2698,7 +2801,14 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|createState
+name|method
+operator|.
+name|equals
+argument_list|(
+name|HttpMethod
+operator|.
+name|POST
+argument_list|)
 condition|)
 block|{
 name|ResponseBuilder
