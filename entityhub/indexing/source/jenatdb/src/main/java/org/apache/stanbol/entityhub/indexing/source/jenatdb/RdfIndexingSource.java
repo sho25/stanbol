@@ -869,6 +869,7 @@ argument_list|(
 name|modelLocation
 argument_list|)
 expr_stmt|;
+comment|//use a ResourceLoader that fails on the first invalid RDF file (STANBOL-328)
 name|this
 operator|.
 name|loader
@@ -881,6 +882,8 @@ name|RdfResourceImporter
 argument_list|(
 name|indexingDataset
 argument_list|)
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
