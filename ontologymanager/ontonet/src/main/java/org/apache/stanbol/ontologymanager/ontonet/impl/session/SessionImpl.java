@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -65,9 +65,89 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|session
+name|io
 operator|.
-name|Session
+name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyCollectorListener
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyCollectorModificationException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyScope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -107,7 +187,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|SessionEvent
+name|Session
 import|;
 end_import
 
@@ -127,7 +207,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|SessionListener
+name|SessionEvent
 import|;
 end_import
 
@@ -157,6 +237,26 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|session
+operator|.
+name|SessionListener
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -171,6 +271,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntology
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
@@ -178,7 +292,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Standard implementation of the {@link Session} interface. A  * SessionImpl is initially inactive and creates its own identifier.  *   * @author alessandro  *   */
+comment|/**  * Standard implementation of the {@link Session} interface. A SessionImpl is initially inactive and creates  * its own identifier.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -188,9 +302,9 @@ name|SessionImpl
 implements|implements
 name|Session
 block|{
-comment|/** 	 * A KReS session knows about its own ID. 	 */
+comment|/**      * A KReS session knows about its own ID.      */
 specifier|protected
-name|IRI
+name|String
 name|id
 init|=
 literal|null
@@ -202,7 +316,7 @@ name|SessionListener
 argument_list|>
 name|listeners
 decl_stmt|;
-comment|/** 	 * A KReS session knows about its own state. 	 */
+comment|/**      * A KReS session knows about its own state.      */
 name|State
 name|state
 init|=
@@ -210,11 +324,11 @@ name|State
 operator|.
 name|HALTED
 decl_stmt|;
-comment|/** 	 * Utility constructor for enforcing a given IRI as a session ID. It will 	 * not throw duplication exceptions, since a KReS session does not know 	 * about other sessions. 	 *  	 * @param sessionID 	 *            the IRI to be set as unique identifier for this session 	 */
+comment|/**      * Utility constructor for enforcing a given IRI as a session ID. It will not throw duplication      * exceptions, since a KReS session does not know about other sessions.      *       * @param sessionID      *            the IRI to be set as unique identifier for this session      */
 specifier|public
 name|SessionImpl
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 block|{
@@ -237,7 +351,7 @@ block|}
 specifier|public
 name|SessionImpl
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|,
 name|State
@@ -275,7 +389,7 @@ name|ACTIVE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionListenable#addSessionListener 	 * (eu.iksproject.kres.api.manager.session.SessionListener) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionListenable#addSessionListener      * (eu.iksproject.kres.api.manager.session.SessionListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -294,7 +408,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @seeeu.iksproject.kres.api.manager.session.SessionListenable# 	 * clearSessionListeners() 	 */
+comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.kres.api.manager.session.SessionListenable# clearSessionListeners()      */
 annotation|@
 name|Override
 specifier|public
@@ -308,7 +422,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#close() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#close()      */
 annotation|@
 name|Override
 specifier|public
@@ -329,19 +443,22 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#getID() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#getID()      */
 annotation|@
 name|Override
 specifier|public
-name|IRI
+name|String
 name|getID
 parameter_list|()
 block|{
 return|return
 name|id
+operator|.
+name|toString
+argument_list|()
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.SessionListenable#getSessionListeners 	 * () 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionListenable#getSessionListeners ()      */
 annotation|@
 name|Override
 specifier|public
@@ -356,7 +473,7 @@ return|return
 name|listeners
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#getSessionState() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#getSessionState()      */
 annotation|@
 name|Override
 specifier|public
@@ -368,7 +485,7 @@ return|return
 name|state
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see eu.iksproject.kres.api.manager.session.Session#isActive() 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#isActive()      */
 annotation|@
 name|Override
 specifier|public
@@ -402,7 +519,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see 	 * eu.iksproject.kres.api.manager.session.Session#setActive(boolean) 	 */
+comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#setActive(boolean)      */
 annotation|@
 name|Override
 specifier|public
@@ -447,7 +564,7 @@ name|getSessionState
 argument_list|()
 return|;
 block|}
-comment|/* 	 * (non-Javadoc) 	 *  	 * @see java.lang.Object#toString() 	 */
+comment|/*      * (non-Javadoc)      *       * @see java.lang.Object#toString()      */
 annotation|@
 name|Override
 specifier|public
@@ -543,6 +660,268 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|OWLOntology
+name|asOWLOntology
+parameter_list|(
+name|boolean
+name|merge
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|attachScope
+parameter_list|(
+name|OntologyScope
+name|scope
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|detachScope
+parameter_list|(
+name|String
+name|scopeId
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|clearScopes
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getAttachedScopes
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|addOntology
+parameter_list|(
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
+name|ontologySource
+parameter_list|)
+throws|throws
+name|UnmodifiableOntologyCollectorException
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|getOntologies
+parameter_list|(
+name|boolean
+name|withClosure
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|OWLOntology
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|hasOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isLocked
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|removeOntology
+parameter_list|(
+name|IRI
+name|ontologyId
+parameter_list|)
+throws|throws
+name|OntologyCollectorModificationException
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|addListener
+parameter_list|(
+name|OntologyCollectorListener
+name|listener
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|clearListeners
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Collection
+argument_list|<
+name|OntologyCollectorListener
+argument_list|>
+name|getListeners
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|IRI
+name|getNamespace
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|removeListener
+parameter_list|(
+name|OntologyCollectorListener
+name|listener
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setNamespace
+parameter_list|(
+name|IRI
+name|namespace
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setUp
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|tearDown
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|Class
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|getSupportedTypes
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
 block|}
 block|}
 end_class

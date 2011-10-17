@@ -196,12 +196,12 @@ literal|";qs=2"
 argument_list|)
 specifier|public
 class|class
-name|RootResource
+name|OntoNetRootResource
 extends|extends
 name|BaseStanbolResource
 block|{
 specifier|public
-name|RootResource
+name|OntoNetRootResource
 parameter_list|(
 annotation|@
 name|Context

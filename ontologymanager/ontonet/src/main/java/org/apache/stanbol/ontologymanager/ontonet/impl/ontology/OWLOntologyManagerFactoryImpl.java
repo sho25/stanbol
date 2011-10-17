@@ -158,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author alessandro  * @deprecated use the static methods of {@link org.apache.stanbol.owl.OWLOntologyManagerFactory} instead.  */
+comment|/**  *   * @author alexdma  * @deprecated use the static methods of {@link org.apache.stanbol.owl.OWLOntologyManagerFactory} instead.  */
 end_comment
 
 begin_class

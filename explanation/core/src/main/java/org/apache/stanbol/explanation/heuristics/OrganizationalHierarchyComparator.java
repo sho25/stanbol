@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Transitive comparator for determining if one social person is another person's boss in a hierarchical  * organization.  *   * @author alessandro  *   */
+comment|/**  * Transitive comparator for determining if one social person is another person's boss in a hierarchical  * organization.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

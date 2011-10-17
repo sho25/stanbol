@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An input source that provides the OWL Ontology loaded from the supplied physical IRI, as well as the  * physical IRI itself for consumers that need to load the ontology themselves.<br>  *<br>  * For convenience, an existing OWL ontology manager can be supplied for loading the ontology.  *   * @author alessandro  *   */
+comment|/**  * An input source that provides the OWL Ontology loaded from the supplied physical IRI, as well as the  * physical IRI itself for consumers that need to load the ontology themselves.<br>  *<br>  * For convenience, an existing OWL ontology manager can be supplied for loading the ontology.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -86,7 +86,7 @@ specifier|public
 class|class
 name|RootOntologyIRISource
 extends|extends
-name|AbstractOntologyInputSource
+name|AbstractOWLOntologyInputSource
 block|{
 specifier|public
 name|RootOntologyIRISource

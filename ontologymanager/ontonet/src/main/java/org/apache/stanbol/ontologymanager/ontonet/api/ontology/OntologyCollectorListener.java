@@ -21,42 +21,47 @@ name|ontology
 package|;
 end_package
 
-begin_comment
-comment|/**  * Thrown whenever an attempt to modify the ontology network within a read-only  * ontology space (e.g. a core or custom space in a bootstrapped system) is  * detected and denied.  */
-end_comment
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|IRI
+import|;
+end_import
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|UnmodifiableOntologySpaceException
-extends|extends
-name|OntologySpaceModificationException
+interface|interface
+name|OntologyCollectorListener
 block|{
-comment|/** 	 *  	 */
-specifier|private
-specifier|static
-specifier|final
-name|long
-name|serialVersionUID
-init|=
-literal|6747720213098173405L
-decl_stmt|;
-comment|/** 	 * Creates a new instance of UnmodifiableOntologySpaceException. 	 *  	 * @param space 	 *            the ontology space whose modification was attempted. 	 */
-specifier|public
-name|UnmodifiableOntologySpaceException
+name|void
+name|onOntologyAdded
 parameter_list|(
-name|OntologySpace
-name|space
+name|IRI
+name|spaceId
+parameter_list|,
+name|IRI
+name|addedOntology
 parameter_list|)
-block|{
-name|super
-argument_list|(
-name|space
-argument_list|)
-expr_stmt|;
+function_decl|;
+name|void
+name|onOntologyRemoved
+parameter_list|(
+name|IRI
+name|spaceId
+parameter_list|,
+name|IRI
+name|removedOntology
+parameter_list|)
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 end_unit
 

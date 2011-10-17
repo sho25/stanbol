@@ -1098,7 +1098,7 @@ name|iri
 init|=
 name|OWLUtils
 operator|.
-name|getIdentifyingIRI
+name|guessOntologyIdentifier
 argument_list|(
 name|o
 argument_list|)

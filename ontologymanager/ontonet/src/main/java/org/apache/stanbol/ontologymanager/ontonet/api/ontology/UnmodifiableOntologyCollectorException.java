@@ -21,51 +21,42 @@ name|ontology
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
-import|;
-end_import
-
 begin_comment
-comment|/**  * An ontology space identifies the set of OWL ontologies that should be "active" in a given context, e.g. for  * a certain user session or a specific reasoning service. Each ontology space has an ID and a top ontology  * that can be used as a shared resource for mutual exclusion and locking strategies.  */
+comment|/**  * Thrown whenever an attempt to modify the ontology network within a read-only ontology space (e.g. a core or  * custom space in a bootstrapped system) is detected and denied.  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|OntologySpace
+class|class
+name|UnmodifiableOntologyCollectorException
 extends|extends
-name|LockableOntologyCollector
-extends|,
-name|OWLExportable
+name|OntologyCollectorModificationException
 block|{
-comment|/**      * Returns the ontology that serves as a root module for this ontology space.      *       * @deprecated Please use the inherited method {@link OWLExportable#asOWLOntology(boolean)}. Calls to the      *             current method are equivalent to asOWLOntology(false).      * @return the OWL form of this ontology space.      */
-name|OWLOntology
-name|asOWLOntology
-parameter_list|()
-function_decl|;
-name|boolean
-name|isSilentMissingOntologyHandling
-parameter_list|()
-function_decl|;
-name|void
-name|setSilentMissingOntologyHandling
+comment|/** 	 *  	 */
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+literal|6747720213098173405L
+decl_stmt|;
+comment|/**      * Creates a new instance of UnmodifiableOntologySpaceException.      *       * @param space      *            the ontology space whose modification was attempted.      */
+specifier|public
+name|UnmodifiableOntologyCollectorException
 parameter_list|(
-name|boolean
-name|silent
+name|LockableOntologyCollector
+name|collector
 parameter_list|)
-function_decl|;
+block|{
+name|super
+argument_list|(
+name|collector
+argument_list|)
+expr_stmt|;
 block|}
-end_interface
+block|}
+end_class
 
 end_unit
 

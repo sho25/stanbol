@@ -569,7 +569,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -1069,7 +1069,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|e
 parameter_list|)
 block|{
@@ -2020,7 +2020,11 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"ONManager activated."
+name|ONManager
+operator|.
+name|class
+operator|+
+literal|"activated."
 argument_list|)
 expr_stmt|;
 block|}

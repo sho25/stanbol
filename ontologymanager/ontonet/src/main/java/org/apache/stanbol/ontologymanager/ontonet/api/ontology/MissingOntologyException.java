@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Thrown whenever an attempt to modify an ontology within an ontology space  * that does not contain it is detected.  *   * @author alessandro  *   */
+comment|/**  * Thrown whenever an attempt to modify an ontology within an ontology space  * that does not contain it is detected.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -44,7 +44,7 @@ specifier|public
 class|class
 name|MissingOntologyException
 extends|extends
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 block|{
 specifier|public
 name|MissingOntologyException

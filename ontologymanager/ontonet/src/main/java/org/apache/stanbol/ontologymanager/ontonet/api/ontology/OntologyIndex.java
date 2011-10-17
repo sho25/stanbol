@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides an interface to the ontologies provided by registered scopes in the  * ontology manager.  *   * @author alessandro  *   */
+comment|/**  * Provides an interface to the ontologies provided by registered scopes in the  * ontology manager.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

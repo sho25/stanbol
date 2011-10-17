@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An {@link OntologyInputSource} that recursively tries to hijack all import declarations to the directory  * containing the input ontology (i.e. to the parent directory of the file itself). It can be used for offline  * ontology loading, if one has the entire imports closure available in single directory.<br>  *<br>  * The behaviour of this class is inherited from the {@link AutoIRIMapper} in the OWL API, and so are its  * limitations and fallback policies.  *   * @author alessandro  *   */
+comment|/**  * An {@link OntologyInputSource} that recursively tries to hijack all import declarations to the directory  * containing the input ontology (i.e. to the parent directory of the file itself). It can be used for offline  * ontology loading, if one has the entire imports closure available in single directory.<br>  *<br>  * The behaviour of this class is inherited from the {@link AutoIRIMapper} in the OWL API, and so are its  * limitations and fallback policies.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -124,7 +124,7 @@ specifier|public
 class|class
 name|ParentPathInputSource
 extends|extends
-name|AbstractOntologyInputSource
+name|AbstractOWLOntologyInputSource
 block|{
 comment|/**      * Creates a new parent path ontology input source. When created using this constructor, the only active      * IRI mapper will be the one that maps to any ontology found in the parent directory of the supplied      * file.      *       * @param rootFile      *            the root ontology file. Must not be a directory.      * @throws OWLOntologyCreationException      *             if<code>rootFile</code> does not exist, is not an ontology or one of its imports failed to      *             load.      */
 specifier|public

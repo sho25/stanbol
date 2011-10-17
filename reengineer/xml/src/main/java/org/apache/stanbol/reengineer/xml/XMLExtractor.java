@@ -419,26 +419,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
-operator|.
-name|UnmodifiableOntologySpaceException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|session
 operator|.
 name|Session
@@ -1472,25 +1452,9 @@ operator|!=
 literal|null
 condition|)
 block|{
-try|try
-block|{
-name|scope
-operator|.
-name|addSessionSpace
-argument_list|(
-name|ontologySpaceFactory
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|scopeID
-argument_list|)
-argument_list|,
-name|kReSSession
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|// try {
+comment|// scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(scopeID),
+comment|// kReSSession.getID());
 name|scopeRegistry
 operator|.
 name|setScopeActive
@@ -1500,29 +1464,9 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|ex
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Cannot add session space for "
-operator|+
-name|scopeID
-operator|+
-literal|" to unmodifiable scope "
-operator|+
-name|scope
-argument_list|,
-name|ex
-argument_list|)
-expr_stmt|;
-block|}
+comment|// } catch (UnmodifiableOntologySpaceException ex) {
+comment|// log.error("Cannot add session space for " + scopeID + " to unmodifiable scope " + scope, ex);
+comment|// }
 block|}
 name|log
 operator|.

@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A knowledge object that incorporates a description, or justification, for another knowledge object, be it a  * content item, fact, event or collection thereof.  *   * @author alessandro  *   */
+comment|/**  * A knowledge object that incorporates a description, or justification, for another knowledge object, be it a  * content item, fact, event or collection thereof.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

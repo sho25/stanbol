@@ -344,7 +344,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains hacks to regular ontology renderers with replacements for input statements.  *   * @author alessandro  *  */
+comment|/**  * Contains hacks to regular ontology renderers with replacements for input statements.  *   * @author alexdma  *  */
 end_comment
 
 begin_class

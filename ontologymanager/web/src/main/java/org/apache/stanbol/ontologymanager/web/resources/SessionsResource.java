@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -31,7 +31,39 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|*
+name|APPLICATION_FORM_URLENCODED
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|MULTIPART_FORM_DATA
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|TEXT_HTML
 import|;
 end_import
 
@@ -49,7 +81,25 @@ name|Response
 operator|.
 name|Status
 operator|.
-name|*
+name|INTERNAL_SERVER_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|NOT_FOUND
 import|;
 end_import
 
@@ -71,7 +121,117 @@ name|format
 operator|.
 name|KRFormat
 operator|.
-name|*
+name|FUNCTIONAL_OWL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|format
+operator|.
+name|KRFormat
+operator|.
+name|MANCHESTER_OWL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|format
+operator|.
+name|KRFormat
+operator|.
+name|OWL_XML
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|format
+operator|.
+name|KRFormat
+operator|.
+name|RDF_JSON
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|format
+operator|.
+name|KRFormat
+operator|.
+name|RDF_XML
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|format
+operator|.
+name|KRFormat
+operator|.
+name|TURTLE
 import|;
 end_import
 
@@ -349,9 +509,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|io
+name|ontology
 operator|.
-name|RootOntologySource
+name|OntologyCollectorModificationException
 import|;
 end_import
 
@@ -411,26 +571,6 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologySpaceModificationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
 name|ScopeRegistry
 import|;
 end_import
@@ -471,7 +611,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -615,7 +755,7 @@ literal|"/ontonet/session"
 argument_list|)
 specifier|public
 class|class
-name|SessionResource
+name|SessionsResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -629,7 +769,7 @@ name|ServletContext
 name|servletContext
 decl_stmt|;
 specifier|public
-name|SessionResource
+name|SessionsResource
 parameter_list|(
 annotation|@
 name|Context
@@ -758,39 +898,10 @@ operator|.
 name|getScopeRegistry
 argument_list|()
 decl_stmt|;
-name|OntologyScope
-name|ontologyScope
-init|=
-name|scopeRegistry
-operator|.
-name|getScope
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-name|SessionOntologySpace
-name|sos
-init|=
-name|ontologyScope
-operator|.
-name|getSessionSpace
-argument_list|(
-name|sessionIRI
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|sos
-operator|.
-name|addOntology
-argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|ontology
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|// OntologyScope ontologyScope = scopeRegistry.getScope(scope);
+comment|// SessionOntologySpace sos = ontologyScope.getSessionSpace(sessionIRI);
+comment|// try {
+comment|// sos.addOntology(new RootOntologySource(ontology));
 return|return
 name|Response
 operator|.
@@ -800,25 +911,9 @@ operator|.
 name|build
 argument_list|()
 return|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|INTERNAL_SERVER_ERROR
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
+comment|// } catch (UnmodifiableOntologySpaceException e) {
+comment|// return Response.status(INTERNAL_SERVER_ERROR).build();
+comment|// }
 block|}
 catch|catch
 parameter_list|(
@@ -948,16 +1043,6 @@ name|scope
 argument_list|)
 decl_stmt|;
 name|IRI
-name|sessionIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|session
-argument_list|)
-decl_stmt|;
-name|IRI
 name|ontologyIRI
 init|=
 name|IRI
@@ -992,7 +1077,7 @@ name|ontologyScope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|sessionIRI
+name|session
 argument_list|)
 decl_stmt|;
 try|try
@@ -1020,7 +1105,7 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|e
 parameter_list|)
 block|{
@@ -1184,7 +1269,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|e
 parameter_list|)
 block|{
@@ -1265,16 +1350,6 @@ argument_list|(
 name|scope
 argument_list|)
 decl_stmt|;
-name|IRI
-name|sessionID
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|session
-argument_list|)
-decl_stmt|;
 if|if
 condition|(
 name|deleteOntology
@@ -1317,7 +1392,7 @@ name|ontologyScope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|sessionID
+name|session
 argument_list|)
 decl_stmt|;
 try|try
@@ -1343,11 +1418,7 @@ name|sos
 operator|.
 name|removeOntology
 argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|o
-argument_list|)
+name|ontologyIRI
 argument_list|)
 expr_stmt|;
 return|return
@@ -1362,7 +1433,7 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 name|e
 parameter_list|)
 block|{
@@ -1388,7 +1459,7 @@ argument_list|()
 operator|.
 name|destroySession
 argument_list|(
-name|sessionID
+name|session
 argument_list|)
 expr_stmt|;
 return|return

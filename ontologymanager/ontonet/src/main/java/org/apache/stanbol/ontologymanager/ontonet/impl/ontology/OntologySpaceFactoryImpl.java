@@ -175,7 +175,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologySpaceListener
+name|OntologyCollectorListener
 import|;
 end_import
 
@@ -255,7 +255,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -443,19 +443,25 @@ literal|null
 operator|&&
 name|parentScope
 operator|instanceof
-name|OntologySpaceListener
+name|OntologyCollectorListener
 condition|)
 name|s
 operator|.
-name|addOntologySpaceListener
+name|addListener
 argument_list|(
 operator|(
-name|OntologySpaceListener
+name|OntologyCollectorListener
 operator|)
 name|parentScope
 argument_list|)
 expr_stmt|;
 comment|// Set the supplied ontology's parent as the root for this space.
+if|if
+condition|(
+name|ontologySources
+operator|!=
+literal|null
+condition|)
 try|try
 block|{
 for|for
@@ -475,7 +481,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|e
 parameter_list|)
 block|{
@@ -742,7 +748,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|e
 parameter_list|)
 block|{

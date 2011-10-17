@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Thrown when attempting to create a KReSSession by forcing a session ID that  * is already registered, even if it used to be associated to a session that has  * been destroyed.  *   * @author alessandro  *   */
+comment|/**  * Thrown when attempting to create a KReSSession by forcing a session ID that  * is already registered, even if it used to be associated to a session that has  * been destroyed.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

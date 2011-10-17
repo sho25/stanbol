@@ -1043,20 +1043,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLOntologyManagerProperties
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologySetProvider
 import|;
 end_import
@@ -3460,23 +3446,14 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|IRI
-name|sessionIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|sessionID
-argument_list|)
-decl_stmt|;
+comment|// IRI sessionIRI = IRI.create(sessionID);
 name|sessionSpace
 operator|=
 name|scope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|sessionIRI
+name|sessionID
 argument_list|)
 expr_stmt|;
 block|}
@@ -4557,7 +4534,7 @@ name|output
 operator|=
 name|ready
 expr_stmt|;
-comment|//output = merged;
+comment|// output = merged;
 block|}
 else|else
 throw|throw

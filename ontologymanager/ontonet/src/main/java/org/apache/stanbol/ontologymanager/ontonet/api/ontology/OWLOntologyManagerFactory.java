@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Generates new instances of {@link OWLOntologyManager} with optional offline support already enabled for  * each of them.  *   * @author alessandro  * @deprecated use the static methods of {@link org.apache.stanbol.owl.OWLOntologyManagerFactory} instead.  */
+comment|/**  * Generates new instances of {@link OWLOntologyManager} with optional offline support already enabled for  * each of them.  *   * @author alexdma  * @deprecated use the static methods of {@link org.apache.stanbol.owl.OWLOntologyManagerFactory} instead.  */
 end_comment
 
 begin_interface

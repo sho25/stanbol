@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Placeholder for a wrapper of events that affect ontology spaces.  *   * @author alessandro  *   */
+comment|/**  * Placeholder for a wrapper of events that affect ontology spaces.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

@@ -607,26 +607,6 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologySpaceFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
 name|ScopeRegistry
 import|;
 end_import
@@ -647,7 +627,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -1233,7 +1213,7 @@ argument_list|)
 decl_stmt|;
 comment|/*          * Now we prepare the OntoNet environment. First we create the OntoNet session in which run the whole          */
 specifier|final
-name|IRI
+name|String
 name|sessionIRI
 init|=
 name|createAndAddSessionSpaceToScope
@@ -1479,8 +1459,11 @@ name|Set
 argument_list|<
 name|OWLOntology
 argument_list|>
-name|getClosure
-parameter_list|()
+name|getImports
+parameter_list|(
+name|boolean
+name|direct
+parameter_list|)
 block|{
 comment|// TODO Auto-generated method stub
 return|return
@@ -1521,7 +1504,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|e
 parameter_list|)
 block|{
@@ -1829,6 +1812,9 @@ operator|.
 name|destroySession
 argument_list|(
 name|sessionIRI
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1851,7 +1837,7 @@ block|}
 block|}
 comment|/**      * Setup the KReS session      *       * @return      */
 specifier|private
-name|IRI
+name|String
 name|createAndAddSessionSpaceToScope
 parameter_list|()
 block|{
@@ -1880,60 +1866,13 @@ operator|.
 name|createSession
 argument_list|()
 decl_stmt|;
-name|OntologySpaceFactory
-name|ontologySpaceFactory
-init|=
-name|onManager
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-decl_stmt|;
-name|OntologySpace
-name|sessionSpace
-init|=
-name|ontologySpaceFactory
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|scope
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|scope
-operator|.
-name|addSessionSpace
-argument_list|(
-name|sessionSpace
-argument_list|,
-name|session
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Failed to add session space to unmodifiable scope "
-operator|+
-name|scope
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
+comment|// OntologySpaceFactory ontologySpaceFactory = onManager.getOntologySpaceFactory();
+comment|// OntologySpace sessionSpace = ontologySpaceFactory.createSessionOntologySpace(scope.getID());
+comment|// try {
+comment|// scope.addSessionSpace(sessionSpace, session.getID());
+comment|// } catch (UnmodifiableOntologySpaceException e) {
+comment|// log.error("Failed to add session space to unmodifiable scope " + scope, e);
+comment|// }
 comment|/*          * Finally, we return the session ID to be used by the caller          */
 name|log
 operator|.
@@ -2073,8 +2012,11 @@ name|Set
 argument_list|<
 name|OWLOntology
 argument_list|>
-name|getClosure
-parameter_list|()
+name|getImports
+parameter_list|(
+name|boolean
+name|direct
+parameter_list|)
 block|{
 comment|// TODO Auto-generated method stub
 return|return
@@ -2319,8 +2261,11 @@ name|Set
 argument_list|<
 name|OWLOntology
 argument_list|>
-name|getClosure
-parameter_list|()
+name|getImports
+parameter_list|(
+name|boolean
+name|direct
+parameter_list|)
 block|{
 comment|// TODO Auto-generated method stub
 return|return
@@ -2329,7 +2274,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|//        IRI dulcifierScopeIRI = IRI.create((String) context.getProperties().get(SCOPE));
+comment|// IRI dulcifierScopeIRI = IRI.create((String) context.getProperties().get(SCOPE));
 name|String
 name|scopeId
 init|=
@@ -2356,7 +2301,7 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeId
-comment|/*dulcifierScopeIRI*/
+comment|/* dulcifierScopeIRI */
 argument_list|,
 name|oisbase
 argument_list|)
@@ -2383,7 +2328,7 @@ operator|.
 name|getScope
 argument_list|(
 name|scopeId
-comment|/*dulcifierScopeIRI*/
+comment|/* dulcifierScopeIRI */
 argument_list|)
 expr_stmt|;
 block|}
@@ -2442,7 +2387,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 name|ex
 parameter_list|)
 block|{

@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Additional MIME types for knowledge representation formats.  *   * @author andrea.nuzzolese  * @author alessandro  *   */
+comment|/**  * Additional MIME types for knowledge representation formats.  *   * @author andrea.nuzzolese  * @author alexdma  *   */
 end_comment
 
 begin_class

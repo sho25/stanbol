@@ -107,7 +107,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -304,7 +304,7 @@ name|boolean
 name|skipRoot
 parameter_list|)
 throws|throws
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 block|{
 comment|// FIXME re-implement!
 comment|// if (!(space instanceof SessionOntologySpace)) {

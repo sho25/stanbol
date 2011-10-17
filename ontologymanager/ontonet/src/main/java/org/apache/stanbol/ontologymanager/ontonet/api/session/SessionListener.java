@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Objects that want to listen to events affecting KReS sessions should  * implement this interface and add themselves as listener to a manager.  *   * @author alessandro  *   */
+comment|/**  * Objects that want to listen to events affecting KReS sessions should  * implement this interface and add themselves as listener to a manager.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

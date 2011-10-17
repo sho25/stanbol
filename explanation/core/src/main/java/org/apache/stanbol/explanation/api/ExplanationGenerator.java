@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A factory for explanation information objects.  *   * @author alessandro  *  */
+comment|/**  * A factory for explanation information objects.  *   * @author alexdma  *  */
 end_comment
 
 begin_interface

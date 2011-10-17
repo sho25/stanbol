@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A registry of knowledge schemas to be matched against in order to filter relevant statements for  * explanations.  *   * @author alessandro  *   */
+comment|/**  * A registry of knowledge schemas to be matched against in order to filter relevant statements for  * explanations.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

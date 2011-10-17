@@ -333,7 +333,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -1272,27 +1272,9 @@ operator|!=
 literal|null
 condition|)
 block|{
-try|try
-block|{
-name|scope
-operator|.
-name|addSessionSpace
-argument_list|(
-name|ontologySpaceFactory
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|this
-operator|.
-name|reengineeringScopeID
-argument_list|)
-argument_list|,
-name|kReSSession
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|//            try {
+comment|//                scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(this.reengineeringScopeID),
+comment|//                    kReSSession.getID());
 name|scopeRegistry
 operator|.
 name|setScopeActive
@@ -1302,29 +1284,10 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|ex
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Cannot add session space for scope "
-operator|+
-name|reengineeringScopeID
-operator|+
-literal|" to unmodifiable scope "
-operator|+
-name|scope
-argument_list|,
-name|ex
-argument_list|)
-expr_stmt|;
-block|}
+comment|//            } catch (UnmodifiableOntologySpaceException ex) {
+comment|//                log.error("Cannot add session space for scope " + reengineeringScopeID + " to unmodifiable scope "
+comment|//                          + scope, ex);
+comment|//            }
 block|}
 name|log
 operator|.

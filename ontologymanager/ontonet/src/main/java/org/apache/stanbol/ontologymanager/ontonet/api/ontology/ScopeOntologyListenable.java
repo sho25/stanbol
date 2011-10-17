@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementations of this interface are able to fire events related to the  * modification of ontologies within an ontology scope.  *   * @author alessandro  *   */
+comment|/**  * Implementations of this interface are able to fire events related to the  * modification of ontologies within an ontology scope.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

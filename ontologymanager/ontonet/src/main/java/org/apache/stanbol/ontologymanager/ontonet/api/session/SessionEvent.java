@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An event that encompasses a change in the state of a KReS session.  *   * @author alessandro  *   */
+comment|/**  * An event that encompasses a change in the state of a KReS session.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

@@ -250,7 +250,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Just an attempt. If we like it, make an API out of it.  *   * @author alessandro  *   */
+comment|/**  * Just an attempt. If we like it, make an API out of it.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -289,7 +289,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|GraphsResource
+name|OntoNetRootResource
 import|;
 end_import
 
@@ -307,7 +307,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|ONMOntResource
+name|OntologyIndexResource
 import|;
 end_import
 
@@ -325,7 +325,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|ONMRootResource
+name|OntologyNetworkResource
 import|;
 end_import
 
@@ -343,7 +343,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|ONMScopeOntologyResource
+name|RegistryManagerResource
 import|;
 end_import
 
@@ -361,7 +361,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|ONMScopeResource
+name|ScopeOntologyResource
 import|;
 end_import
 
@@ -379,7 +379,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|RESTfulResource
+name|ScopeResource
 import|;
 end_import
 
@@ -397,7 +397,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|RootResource
+name|SessionByIdResource
 import|;
 end_import
 
@@ -415,7 +415,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|SessionIDResource
+name|SessionsResource
 import|;
 end_import
 
@@ -433,7 +433,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|SessionResource
+name|StoredGraphsResource
 import|;
 end_import
 
@@ -484,7 +484,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of WebFragment for the Stanbol Ontonet end-point.  *   * @author alberto musetti  *  */
+comment|/**  * Implementation of WebFragment for the Stanbol Ontonet end-point.  *   * @author alberto musetti  *   */
 end_comment
 
 begin_class
@@ -603,7 +603,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|RootResource
+name|OntoNetRootResource
 operator|.
 name|class
 argument_list|)
@@ -617,11 +617,12 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+comment|// classes.add(RESTfulResource.class);
 name|classes
 operator|.
 name|add
 argument_list|(
-name|RESTfulResource
+name|StoredGraphsResource
 operator|.
 name|class
 argument_list|)
@@ -630,7 +631,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|GraphsResource
+name|OntologyNetworkResource
 operator|.
 name|class
 argument_list|)
@@ -639,7 +640,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|ONMRootResource
+name|ScopeResource
 operator|.
 name|class
 argument_list|)
@@ -648,7 +649,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|ONMScopeResource
+name|ScopeOntologyResource
 operator|.
 name|class
 argument_list|)
@@ -657,7 +658,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|ONMScopeOntologyResource
+name|OntologyIndexResource
 operator|.
 name|class
 argument_list|)
@@ -666,7 +667,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|ONMOntResource
+name|SessionsResource
 operator|.
 name|class
 argument_list|)
@@ -675,7 +676,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|SessionResource
+name|SessionByIdResource
 operator|.
 name|class
 argument_list|)
@@ -684,7 +685,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|SessionIDResource
+name|RegistryManagerResource
 operator|.
 name|class
 argument_list|)
@@ -795,9 +796,11 @@ argument_list|(
 operator|new
 name|NavigationLink
 argument_list|(
-literal|"ontonet"
+name|NAME
 argument_list|,
-literal|"/ontonet"
+literal|"/"
+operator|+
+name|NAME
 argument_list|,
 literal|"/imports/ontonetDescription.ftl"
 argument_list|,

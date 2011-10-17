@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A registry that keeps track of the active ontology scopes in a running KReS  * instance.  *   * @author alessandro  *   */
+comment|/**  * A registry that keeps track of the active ontology scopes in a running KReS  * instance.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

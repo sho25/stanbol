@@ -33,7 +33,25 @@ name|Response
 operator|.
 name|Status
 operator|.
-name|*
+name|INTERNAL_SERVER_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|Status
+operator|.
+name|NOT_FOUND
 import|;
 end_import
 
@@ -313,26 +331,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|io
-operator|.
-name|RootOntologySource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|ontology
 operator|.
 name|OntologyScope
@@ -375,7 +373,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 import|;
 end_import
 
@@ -626,7 +624,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This resource represents ontologies loaded within a scope.  *   * @author alessandro  *   */
+comment|/**  * This resource represents ontologies loaded within a scope.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -637,7 +635,7 @@ literal|"/ontonet/ontology/{scopeid}/{uri:.+}"
 argument_list|)
 specifier|public
 class|class
-name|ONMScopeOntologyResource
+name|ScopeOntologyResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -663,7 +661,7 @@ name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|public
-name|ONMScopeOntologyResource
+name|ScopeOntologyResource
 parameter_list|(
 annotation|@
 name|Context
@@ -1001,49 +999,8 @@ operator|.
 name|build
 argument_list|()
 return|;
-block|}
-elseif|else
-if|if
-condition|(
-name|scope
-operator|.
-name|getSessionSpace
-argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|temp
-argument_list|)
-argument_list|)
-operator|!=
-literal|null
-condition|)
-block|{
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|(
-name|scope
-operator|.
-name|getSessionSpace
-argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|temp
-argument_list|)
-argument_list|)
-operator|.
-name|asOWLOntology
-argument_list|()
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
+comment|//            } else if (scope.getSessionSpace(IRI.create(temp)) != null) {
+comment|//                return Response.ok(scope.getSessionSpace(IRI.create(temp)).asOWLOntology()).build();
 block|}
 comment|/*              * BEGIN debug code, uncomment only for local testing OWLOntology test = null, top = null; test =              * scope.getCustomSpace().getOntology(ontiri); System.out.println("Ontology " + ontiri); for              * (OWLImportsDeclaration imp : test.getImportsDeclarations()) System.out.println("\timports " +              * imp.getIRI()); top = scope.getCoreSpace().getTopOntology();              * System.out.println("Core root for scope " + scopeid); for (OWLImportsDeclaration imp :              * top.getImportsDeclarations()) System.out.println("\timports " + imp.getIRI()); END debug code              */
 name|OWLOntology
@@ -1181,16 +1138,15 @@ name|ontologies
 init|=
 name|scope
 operator|.
-name|getSessionSpace
-argument_list|(
-name|ontiri
-argument_list|)
+name|getCustomSpace
+argument_list|()
 operator|.
 name|getOntologies
 argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
+comment|//                        scope.getSessionSpace(ontiri).getOntologies(true);
 name|OWLOntologySetProvider
 name|provider
 init|=
@@ -2042,16 +1998,7 @@ name|cs
 operator|.
 name|removeOntology
 argument_list|(
-operator|new
-name|RootOntologySource
-argument_list|(
-name|cs
-operator|.
-name|getOntology
-argument_list|(
 name|ontIri
-argument_list|)
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|reg
@@ -2066,7 +2013,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 name|e
 parameter_list|)
 block|{

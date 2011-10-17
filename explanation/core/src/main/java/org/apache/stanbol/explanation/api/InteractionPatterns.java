@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Interaction patterns known or supported for explanation;  *   * @author alessandro  *  */
+comment|/**  * Interaction patterns known or supported for explanation;  *   * @author alexdma  *  */
 end_comment
 
 begin_enum

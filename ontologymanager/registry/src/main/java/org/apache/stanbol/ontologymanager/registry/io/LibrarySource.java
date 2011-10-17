@@ -73,7 +73,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|AbstractOntologyInputSource
+name|AbstractOWLOntologyInputSource
 import|;
 end_import
 
@@ -94,6 +94,26 @@ operator|.
 name|io
 operator|.
 name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|OntologySetInputSource
 import|;
 end_import
 
@@ -324,8 +344,11 @@ specifier|public
 class|class
 name|LibrarySource
 extends|extends
-name|AbstractOntologyInputSource
+name|AbstractOWLOntologyInputSource
+implements|implements
+name|OntologySetInputSource
 block|{
+comment|/**      * Creates a new ontology manager that shares the same offline configuration as the registry manager.      *       * @param registryManager      * @return      */
 specifier|private
 specifier|static
 name|OWLOntologyManager
@@ -540,6 +563,12 @@ argument_list|(
 literal|"A null registry manager is not allowed"
 argument_list|)
 throw|;
+name|this
+operator|.
+name|libraryID
+operator|=
+name|libraryID
+expr_stmt|;
 comment|// The ontology that imports the whole network is created in-memory, therefore it has no physical IRI
 comment|// unless it is borrowed from the supplied parent.
 name|bindPhysicalIri
@@ -566,6 +595,17 @@ argument_list|(
 name|libraryID
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Got library {}, expected {}"
+argument_list|,
+name|lib
+argument_list|,
+name|libraryID
+argument_list|)
+expr_stmt|;
 comment|// If the manager is set to
 if|if
 condition|(
@@ -585,6 +625,28 @@ operator|.
 name|getOntologies
 argument_list|()
 decl_stmt|;
+name|this
+operator|.
+name|ontologies
+operator|=
+name|subtrees
+expr_stmt|;
+for|for
+control|(
+name|OWLOntology
+name|o
+range|:
+name|subtrees
+control|)
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"\tGot ontology {}"
+argument_list|,
+name|o
+argument_list|)
+expr_stmt|;
 comment|// We always construct a new root now, even if there's just one subtree.
 comment|// if (subtrees.size() == 1)
 comment|// rootOntology = subtrees.iterator().next();
@@ -658,6 +720,27 @@ operator|+
 name|libraryID
 operator|+
 literal|">"
+return|;
+block|}
+specifier|private
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|ontologies
+decl_stmt|;
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntology
+argument_list|>
+name|getOntologies
+parameter_list|()
+block|{
+return|return
+name|ontologies
 return|;
 block|}
 block|}

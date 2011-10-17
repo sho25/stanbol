@@ -23,11 +23,17 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|apache
 operator|.
-name|Assert
+name|stanbol
 operator|.
-name|assertFalse
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|MockOsgiContext
+operator|.
+name|*
 import|;
 end_import
 
@@ -39,31 +45,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertNotNull
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertTrue
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|fail
+name|*
 import|;
 end_import
 
@@ -257,7 +239,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|OfflineConfigurationImpl
+name|ONManagerImpl
 import|;
 end_import
 
@@ -275,7 +257,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ONManagerImpl
+name|OfflineConfigurationImpl
 import|;
 end_import
 
@@ -290,6 +272,16 @@ operator|.
 name|owl
 operator|.
 name|OWLOntologyManagerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|After
 import|;
 end_import
 
@@ -366,16 +358,6 @@ name|TestIndexing
 block|{
 specifier|private
 specifier|static
-name|ONManager
-name|onm
-decl_stmt|;
-specifier|private
-specifier|static
-name|OWLOntologyManager
-name|mgr
-decl_stmt|;
-specifier|private
-specifier|static
 name|IRI
 name|iri_minor
 init|=
@@ -412,6 +394,16 @@ name|create
 argument_list|(
 literal|"http://stanbol.apache.org/ontologies/registries/onmtest.owl"
 argument_list|)
+decl_stmt|;
+specifier|private
+specifier|static
+name|OWLOntologyManager
+name|mgr
+decl_stmt|;
+specifier|private
+specifier|static
+name|ONManager
+name|onm
 decl_stmt|;
 specifier|private
 specifier|static
@@ -568,6 +560,17 @@ comment|// // comment otherwise.
 comment|// fail("DuplicateID exception caught when creating test scope.");
 comment|// }
 block|}
+annotation|@
+name|After
+specifier|public
+name|void
+name|cleanup
+parameter_list|()
+block|{
+name|reset
+argument_list|()
+expr_stmt|;
+block|}
 comment|// @Test
 specifier|public
 name|void
@@ -687,11 +690,7 @@ name|cust
 operator|.
 name|removeOntology
 argument_list|(
-operator|new
-name|ParentPathInputSource
-argument_list|(
-name|f
-argument_list|)
+name|iri_minor
 argument_list|)
 expr_stmt|;
 comment|// cust.removeOntology(commSrc);

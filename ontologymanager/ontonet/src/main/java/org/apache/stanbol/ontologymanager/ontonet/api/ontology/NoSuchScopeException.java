@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown whenever an operation on a scope that has not been registered is  * thrown.  *   * @author alessandro  *   */
+comment|/**  * Thrown whenever an operation on a scope that has not been registered is  * thrown.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

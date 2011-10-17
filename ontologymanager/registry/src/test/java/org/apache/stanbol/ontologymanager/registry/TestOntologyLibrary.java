@@ -868,6 +868,9 @@ argument_list|)
 expr_stmt|;
 comment|// Now use this registry manager to instantiate an input source.
 name|OntologyInputSource
+argument_list|<
+name|OWLOntology
+argument_list|>
 name|src
 init|=
 operator|new

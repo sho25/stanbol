@@ -156,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of an ontology scope registry.  *   * @author alessandro  *   */
+comment|/**  * Default implementation of an ontology scope registry.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

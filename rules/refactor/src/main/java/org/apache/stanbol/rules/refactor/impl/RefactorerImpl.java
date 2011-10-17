@@ -341,6 +341,26 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|io
+operator|.
+name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|ontology
 operator|.
 name|OntologyScope
@@ -404,26 +424,6 @@ operator|.
 name|ontology
 operator|.
 name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|UnmodifiableOntologySpaceException
 import|;
 end_import
 
@@ -1236,8 +1236,8 @@ name|IRI
 name|defaultRefactoringIRI
 decl_stmt|;
 specifier|private
-name|IRI
-name|kReSSessionID
+name|String
+name|sessionId
 decl_stmt|;
 specifier|private
 specifier|final
@@ -1542,14 +1542,9 @@ name|hostPort
 operator|=
 name|_HOST_NAME_AND_PORT_DEFAULT
 expr_stmt|;
-name|kReSSessionID
+name|sessionId
 operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
 name|refactoringSessionID
-argument_list|)
 expr_stmt|;
 comment|// refactoringScopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + refactoringScopeID);
 comment|// refactoringSpaceIRI = IRI.create(refactoringSpaceID);
@@ -1577,7 +1572,7 @@ name|kReSSessionManager
 operator|.
 name|getSession
 argument_list|(
-name|kReSSessionID
+name|sessionId
 argument_list|)
 decl_stmt|;
 if|if
@@ -1595,7 +1590,7 @@ name|kReSSessionManager
 operator|.
 name|createSession
 argument_list|(
-name|kReSSessionID
+name|sessionId
 argument_list|)
 expr_stmt|;
 block|}
@@ -1616,7 +1611,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|kReSSessionID
+name|sessionId
 operator|=
 name|kReSSession
 operator|.
@@ -1653,15 +1648,6 @@ literal|null
 expr_stmt|;
 try|try
 block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Semion DBExtractor : created scope with IRI "
-operator|+
-name|REFACTORING_SCOPE
-argument_list|)
-expr_stmt|;
 name|scope
 operator|=
 name|ontologyScopeFactory
@@ -1670,7 +1656,19 @@ name|createOntologyScope
 argument_list|(
 name|refactoringScopeID
 argument_list|,
+operator|(
+name|OntologyInputSource
+operator|)
 literal|null
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Created scope with IRI "
+operator|+
+name|REFACTORING_SCOPE
 argument_list|)
 expr_stmt|;
 name|scopeRegistry
@@ -1691,7 +1689,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Semion DBExtractor : already existing scope for IRI "
+literal|"Reusing already existing scope for IRI "
 operator|+
 name|REFACTORING_SCOPE
 argument_list|)
@@ -1709,42 +1707,13 @@ name|refactoringScopeID
 argument_list|)
 expr_stmt|;
 block|}
-try|try
-block|{
-name|scope
-operator|.
-name|addSessionSpace
-argument_list|(
-name|ontologySpaceFactory
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|refactoringScopeID
-argument_list|)
-argument_list|,
-name|kReSSession
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologySpaceException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Failed to create session space"
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-block|}
+comment|//
+comment|// try {
+comment|// scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(refactoringScopeID),
+comment|// kReSSession.getID());
+comment|// } catch (UnmodifiableOntologySpaceException e) {
+comment|// log.error("Failed to create session space", e);
+comment|// }
 name|scopeRegistry
 operator|.
 name|setScopeActive
@@ -1799,9 +1768,13 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"Activated KReS Semion Refactorer"
+name|Refactorer
+operator|.
+name|class
+operator|+
+literal|"activated."
 argument_list|)
 expr_stmt|;
 block|}
@@ -1841,7 +1814,7 @@ name|kReSSessionManager
 operator|.
 name|destroySession
 argument_list|(
-name|kReSSessionID
+name|sessionId
 argument_list|)
 expr_stmt|;
 comment|// semionManager.unregisterRefactorer();

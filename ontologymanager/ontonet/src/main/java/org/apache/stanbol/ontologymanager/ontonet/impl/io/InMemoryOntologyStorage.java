@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A hack that stores ontologies in volatile memory (e.g. for unit tests) but prevents the incessant logging  * of related error messages.  *   * @author alessandro  *   */
+comment|/**  * A hack that stores ontologies in volatile memory (e.g. for unit tests) but prevents the incessant logging  * of related error messages.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

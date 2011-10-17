@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A utility input source that contains an unnamed, empty ontology. An example usage of this class is to avoid  * a {@link NullPointerException} to be thrown when an {@link OntologyInputSource} is to be passed to a  * method, but we are not actually interested in the ontology to pass.  *   * @author alessandro  *   */
+comment|/**  * A utility input source that contains an unnamed, empty ontology. An example usage of this class is to avoid  * a {@link NullPointerException} to be thrown when an {@link OntologyInputSource} is to be passed to a  * method, but we are not actually interested in the ontology to pass.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -72,7 +72,7 @@ specifier|public
 class|class
 name|BlankOntologySource
 extends|extends
-name|AbstractOntologyInputSource
+name|AbstractOWLOntologyInputSource
 block|{
 comment|/**      * Creates a new input source with an unnamed, empty ontology.      */
 specifier|public

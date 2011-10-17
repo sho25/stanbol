@@ -360,7 +360,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of a knowledge schema.  *   * @author alessandro  *   */
+comment|/**  * Default implementation of a knowledge schema.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

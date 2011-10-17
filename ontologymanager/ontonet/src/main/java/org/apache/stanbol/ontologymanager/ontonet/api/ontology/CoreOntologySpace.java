@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A core space represents a minimal set of readonly, immutable ontologies for  * modeling a given scope. For example, it may define metamodels or essential  * concepts and rules in a domain.  *   * @author alessandro  *   */
+comment|/**  * A core space represents a minimal set of readonly, immutable ontologies for  * modeling a given scope. For example, it may define metamodels or essential  * concepts and rules in a domain.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

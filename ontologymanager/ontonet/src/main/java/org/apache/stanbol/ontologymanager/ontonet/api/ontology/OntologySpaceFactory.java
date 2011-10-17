@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology space factory is responsible for the creation of new, readily specialized ontology spaces from  * supplied ontology input sources.  *   * Implementations should not call the setup method of the ontology space once it is created, so that it is  * not locked from editing since creation time.  */
+comment|/**  * An ontology space factory is responsible for the creation of new, readily specialized ontology spaces from  * supplied ontology input sources.  *   * Implementations should not call the setup method of the ontology space once it is created, so that it is  * not locked from editing since creation time.  *   * @author alexdma  */
 end_comment
 
 begin_interface
@@ -72,6 +72,9 @@ name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|coreSources
 parameter_list|)
@@ -84,6 +87,9 @@ name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|customSources
 parameter_list|)
@@ -99,11 +105,14 @@ name|SpaceType
 name|type
 parameter_list|,
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|ontologySources
 parameter_list|)
 function_decl|;
-comment|/**      * Creates and sets up a default session ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.SESSION, OntologyInputSource...)</code>.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param sessionSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
+comment|/**      * Creates and sets up a default session ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.SESSION, OntologyInputSource...)</code>.      *       * @deprecated session spaces should no longer exist, as session data shold be loaded in Session objects.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param sessionSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
 name|SessionOntologySpace
 name|createSessionOntologySpace
 parameter_list|(
@@ -111,6 +120,9 @@ name|String
 name|scopeId
 parameter_list|,
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|sessionSources
 parameter_list|)

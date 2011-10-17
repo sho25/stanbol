@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Any entity that can be compared to another one using Description Logic constructs.  *   * @author alessandro  *  */
+comment|/**  * Any entity that can be compared to another one using Description Logic constructs.  *   * @author alexdma  *  */
 end_comment
 
 begin_interface

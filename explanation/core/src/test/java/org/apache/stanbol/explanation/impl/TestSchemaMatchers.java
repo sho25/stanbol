@@ -44,6 +44,22 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|explanation
+operator|.
+name|MockOsgiContext
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
 import|import
 name|org
 operator|.
@@ -124,6 +140,24 @@ operator|.
 name|serializedform
 operator|.
 name|Parser
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|jena
+operator|.
+name|parser
+operator|.
+name|JenaParserProvider
 import|;
 end_import
 
@@ -496,17 +530,10 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|TcManager
-name|tcm
-init|=
-name|MockOsgiContext
-operator|.
-name|tcManager
-decl_stmt|;
 name|MGraph
 name|kb
 init|=
-name|tcm
+name|tcManager
 operator|.
 name|createMGraph
 argument_list|(
@@ -529,14 +556,6 @@ literal|"/ontologies/explanation_testdata.owl"
 argument_list|)
 decl_stmt|;
 comment|// get the singleton instance of Parser
-specifier|final
-name|Parser
-name|parser
-init|=
-name|MockOsgiContext
-operator|.
-name|parser
-decl_stmt|;
 name|Graph
 name|deserializedGraph
 init|=

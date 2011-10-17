@@ -110,7 +110,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of the core ontology space.  */
+comment|/**  * Default implementation of the core ontology space.  *   * @author alexdma  */
 end_comment
 
 begin_class

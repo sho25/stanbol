@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author alessandro  *   * @param<E>  *            the entity to be matched against, or<i><explainable/i>  * @param<KB>  *            knowledge base  * @param<C>  *            schema library, or<i>catalog</i>.  */
+comment|/**  *   * @author alexdma  *   * @param<E>  *            the entity to be matched against, or<i><explainable/i>  * @param<KB>  *            knowledge base  * @param<C>  *            schema library, or<i>catalog</i>.  */
 end_comment
 
 begin_interface

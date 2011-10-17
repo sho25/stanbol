@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Thrown whenever an illegal attempt at removing an ontology from an ontology  * space is detected. This can happen e.g. if the ontology is the space root or  * not a direct child thereof.  *   * @author alessandro  *   */
+comment|/**  * Thrown whenever an illegal attempt at removing an ontology from an ontology  * space is detected. This can happen e.g. if the ontology is the space root or  * not a direct child thereof.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -44,7 +44,7 @@ specifier|public
 class|class
 name|IrremovableOntologyException
 extends|extends
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 block|{
 specifier|protected
 name|IRI

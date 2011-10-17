@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An umbrella and wrapper type for any object that may be backed up by a user-sensitive explanation.  *   * @author alessandro  *   */
+comment|/**  * An umbrella and wrapper type for any object that may be backed up by a user-sensitive explanation.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

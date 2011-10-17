@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A cognitive schema, linguistic frame or knowledge pattern.  *   * @author alessandro  *  */
+comment|/**  * A cognitive schema, linguistic frame or knowledge pattern.  *   * @author alexdma  *  */
 end_comment
 
 begin_interface

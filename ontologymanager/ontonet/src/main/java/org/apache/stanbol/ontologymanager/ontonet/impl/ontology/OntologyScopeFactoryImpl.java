@@ -224,7 +224,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility class that instantiates default implementations of ontology scope.  *   * @author alessandro  *   */
+comment|/**  * Utility class that instantiates default implementations of ontology scope.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -364,6 +364,11 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+comment|// @Override
+comment|// public OntologyScope createOntologyScope(String scopeID, OntologyInputSource coreSource) throws
+comment|// DuplicateIDException {
+comment|// return createOntologyScope(scopeID, coreSource, null);
+comment|// }
 annotation|@
 name|Override
 specifier|public
@@ -374,36 +379,8 @@ name|String
 name|scopeID
 parameter_list|,
 name|OntologyInputSource
-name|coreSource
-parameter_list|)
-throws|throws
-name|DuplicateIDException
-block|{
-return|return
-name|createOntologyScope
-argument_list|(
-name|scopeID
-argument_list|,
-name|coreSource
-argument_list|,
-literal|null
-argument_list|)
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|OntologyScope
-name|createOntologyScope
-parameter_list|(
-name|String
-name|scopeID
-parameter_list|,
-name|OntologyInputSource
-name|coreSource
-parameter_list|,
-name|OntologyInputSource
-name|customSource
+modifier|...
+name|coreSources
 parameter_list|)
 throws|throws
 name|DuplicateIDException
@@ -441,9 +418,7 @@ argument_list|()
 argument_list|,
 name|spaceFactory
 argument_list|,
-name|coreSource
-argument_list|,
-name|customSource
+name|coreSources
 argument_list|)
 decl_stmt|;
 comment|// scope.addOntologyScopeListener(ONManager.get().getOntologyIndex());

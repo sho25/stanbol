@@ -3664,6 +3664,15 @@ parameter_list|)
 throws|throws
 name|RegistryContentException
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Populating registry content from ontology {}"
+argument_list|,
+name|registry
+argument_list|)
+expr_stmt|;
 name|Registry
 name|reg
 init|=
@@ -3757,6 +3766,15 @@ block|{
 case|case
 name|LIBRARY
 case|:
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Found library for individual {}"
+argument_list|,
+name|ind
+argument_list|)
+expr_stmt|;
 comment|// Create the library and attach to parent and children
 name|item
 operator|=
@@ -3788,6 +3806,15 @@ break|break;
 case|case
 name|ONTOLOGY
 case|:
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Found ontology for individual {}"
+argument_list|,
+name|ind
+argument_list|)
+expr_stmt|;
 comment|// Create the ontology and attach to parent
 name|item
 operator|=
@@ -3821,6 +3848,18 @@ operator|.
 name|addRegistryContentListener
 argument_list|(
 name|this
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Registry {} added."
+argument_list|,
+name|reg
+operator|.
+name|getIRI
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|population

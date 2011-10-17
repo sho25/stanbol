@@ -296,6 +296,8 @@ import|;
 end_import
 
 begin_class
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|SessionRenderer
@@ -450,10 +452,15 @@ name|__factory
 operator|.
 name|getOWLNamedIndividual
 argument_list|(
+name|IRI
+operator|.
+name|create
+argument_list|(
 name|session
 operator|.
 name|getID
 argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|additions

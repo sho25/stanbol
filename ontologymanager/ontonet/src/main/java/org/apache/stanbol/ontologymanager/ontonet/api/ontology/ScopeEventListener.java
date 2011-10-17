@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Objects that want to listen to the registration of ontology scopes should  * implement this interface and add themselves as listener to a scope registry.  *   * @author alessandro  *   */
+comment|/**  * Objects that want to listen to the registration of ontology scopes should  * implement this interface and add themselves as listener to a scope registry.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

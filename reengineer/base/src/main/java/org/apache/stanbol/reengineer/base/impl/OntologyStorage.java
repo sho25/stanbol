@@ -418,7 +418,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Copied to avoid cross-dependencies  *   * @author alessandro  *   */
+comment|/**  * Copied to avoid cross-dependencies  *   * @author alexdma  *   */
 end_comment
 
 begin_class

@@ -58,7 +58,7 @@ specifier|public
 class|class
 name|RootOntologySource
 extends|extends
-name|AbstractOntologyInputSource
+name|AbstractOWLOntologyInputSource
 block|{
 specifier|public
 name|RootOntologySource

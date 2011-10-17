@@ -376,7 +376,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The main Web resource of the KReS ontology manager. All the scopes, sessions and ontologies are accessible  * as subresources of ONMRootResource.<br>  *<br>  * This resource allows a GET method for obtaining an RDF representation of the set of registered scopes and a  * DELETE method for clearing the scope set and ontology store accordingly.  *   * @author alessandro  *   */
+comment|/**  * The main Web resource of the KReS ontology manager. All the scopes, sessions and ontologies are accessible  * as subresources of ONMRootResource.<br>  *<br>  * This resource allows a GET method for obtaining an RDF representation of the set of registered scopes and a  * DELETE method for clearing the scope set and ontology store accordingly.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -387,7 +387,7 @@ literal|"/ontonet/ontology"
 argument_list|)
 specifier|public
 class|class
-name|ONMRootResource
+name|OntologyNetworkResource
 extends|extends
 name|BaseStanbolResource
 block|{
@@ -422,7 +422,7 @@ name|ClerezzaOntologyStorage
 name|storage
 decl_stmt|;
 specifier|public
-name|ONMRootResource
+name|OntologyNetworkResource
 parameter_list|(
 annotation|@
 name|Context

@@ -408,7 +408,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * Calls to<code>getSessionListeners()</code> return a {@link Set} of listeners.  *   * TODO: implement storage (using persistence layer).  *   * @author alessandro  *   */
+comment|/**  *   * Calls to<code>getSessionListeners()</code> return a {@link Set} of listeners.  *   * TODO: implement storage (using persistence layer).  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -421,7 +421,7 @@ block|{
 specifier|private
 name|Map
 argument_list|<
-name|IRI
+name|String
 argument_list|,
 name|Session
 argument_list|>
@@ -493,7 +493,7 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|IRI
+name|String
 argument_list|,
 name|Session
 argument_list|>
@@ -555,7 +555,7 @@ parameter_list|()
 block|{
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|exclude
 init|=
@@ -598,15 +598,10 @@ name|exclude
 operator|.
 name|add
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
 name|e
 operator|.
 name|getDuplicateID
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 continue|continue;
@@ -623,7 +618,7 @@ specifier|synchronized
 name|Session
 name|createSession
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 throws|throws
@@ -679,7 +674,7 @@ specifier|synchronized
 name|void
 name|destroySession
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 block|{
@@ -777,7 +772,7 @@ specifier|public
 name|Session
 name|getSession
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 block|{
@@ -795,7 +790,7 @@ name|Override
 specifier|public
 name|Set
 argument_list|<
-name|IRI
+name|String
 argument_list|>
 name|getRegisteredSessionIDs
 parameter_list|()
@@ -976,7 +971,7 @@ name|Session
 name|session
 parameter_list|)
 block|{
-name|IRI
+name|String
 name|id
 init|=
 name|session
@@ -1033,7 +1028,7 @@ name|SessionOntologySpace
 argument_list|>
 name|getSessionSpaces
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 throws|throws
@@ -1118,7 +1113,7 @@ specifier|public
 name|void
 name|storeSession
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|,
 name|OutputStream

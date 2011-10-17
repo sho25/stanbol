@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents an ontology network that is used by KReS for modelling a given knowledge component or domain,  * e.g. workflows, organisations, devices, content or business domain.<br>  *<br>  * Each ontology scope comprises in turn a number of ontology spaces of three kinds.  *<ul>  *<li>Exactly one core space, which defines the immutable components of the scope.  *<li>At most one custom space, which contains user-defined components.  *<li>Zero or more session spaces, which contains (potentially volatile) components specific for user  * sessions.  *</ul>  * An ontology scope can thus be seen as a fa&ccedil;ade for ontology spaces.  *   *   * @author alessandro  *   */
+comment|/**  * Represents an ontology network that is used by KReS for modelling a given knowledge component or domain,  * e.g. workflows, organisations, devices, content or business domain.<br>  *<br>  * Each ontology scope comprises in turn a number of ontology spaces of three kinds.  *<ul>  *<li>Exactly one core space, which defines the immutable components of the scope.  *<li>At most one custom space, which contains user-defined components.  *<li>Zero or more session spaces, which contains (potentially volatile) components specific for user  * sessions.  *</ul>  * An ontology scope can thus be seen as a fa&ccedil;ade for ontology spaces.  *   *   * @author alexdma  *   */
 end_comment
 
 begin_interface
@@ -69,21 +69,23 @@ interface|interface
 name|OntologyScope
 extends|extends
 name|ScopeOntologyListenable
+extends|,
+name|OWLExportable
 block|{
-comment|/**      * Adds a new ontology space to the list of user session spaces for this scope.      *       * @param sessionSpace      *            the ontology space to be added.      * @throws UnmodifiableOntologySpaceException      */
+comment|/**      * Adds a new ontology space to the list of user session spaces for this scope.      *       * @param sessionSpace      *            the ontology space to be added.      * @throws UnmodifiableOntologyCollectorException      */
 name|void
 name|addSessionSpace
 parameter_list|(
 name|OntologySpace
 name|sessionSpace
 parameter_list|,
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 throws|throws
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 function_decl|;
-comment|/**      * Returns an ontological form of this scope.      *       * @return an OWL ontology that represents this scope.      */
+comment|/**      * Returns an ontological form of this scope.      *       * @deprecated Please use the inherited method {@link OWLExportable#asOWLOntology(boolean)}. Calls to the      *             current method are equivalent to asOWLOntology(false).      * @return an OWL ontology that represents this scope.      */
 name|OWLOntology
 name|asOWLOntology
 parameter_list|()
@@ -111,7 +113,7 @@ comment|/**      * Return the ontology space for this scope that is identified b
 name|SessionOntologySpace
 name|getSessionSpace
 parameter_list|(
-name|IRI
+name|String
 name|sessionID
 parameter_list|)
 function_decl|;
@@ -123,7 +125,7 @@ argument_list|>
 name|getSessionSpaces
 parameter_list|()
 function_decl|;
-comment|/**      * Sets an ontology space as the custom space for this scope.      *       * @param customSpace      *            the custom ontology space.      * @throws UnmodifiableOntologySpaceException      *             if either the scope or the supplied space are locked.      */
+comment|/**      * Sets an ontology space as the custom space for this scope.      *       * @param customSpace      *            the custom ontology space.      * @throws UnmodifiableOntologyCollectorException      *             if either the scope or the supplied space are locked.      */
 name|void
 name|setCustomSpace
 parameter_list|(
@@ -131,7 +133,7 @@ name|OntologySpace
 name|customSpace
 parameter_list|)
 throws|throws
-name|UnmodifiableOntologySpaceException
+name|UnmodifiableOntologyCollectorException
 function_decl|;
 name|void
 name|setNamespace

@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This object contains every shared information that other components need to know in order to work. It  * should be the primary object referenced by service components and passed as an argument to non-default  * constructors.  *   * @author alessandro  *   */
+comment|/**  * This object contains every shared information that other components need to know in order to work. It  * should be the primary object referenced by service components and passed as an argument to non-default  * constructors.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

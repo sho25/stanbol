@@ -28,7 +28,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 extends|extends
 name|Exception
 block|{
@@ -43,30 +43,30 @@ operator|-
 literal|5147080356192253724L
 decl_stmt|;
 specifier|protected
-name|OntologySpace
-name|space
+name|OntologyCollector
+name|collector
 decl_stmt|;
 comment|/**      * Creates a new instance of OntologySpaceModificationException.      *       * @param space      *            the ontology space whose modification was attempted.      */
 specifier|public
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 parameter_list|(
-name|OntologySpace
-name|space
+name|OntologyCollector
+name|collector
 parameter_list|)
 block|{
 name|this
 operator|.
-name|space
+name|collector
 operator|=
-name|space
+name|collector
 expr_stmt|;
 block|}
 comment|/**      * Creates a new instance of OntologySpaceModificationException.      *       * @param space      *            the ontology space whose modification was attempted.      */
 specifier|public
-name|OntologySpaceModificationException
+name|OntologyCollectorModificationException
 parameter_list|(
-name|OntologySpace
-name|space
+name|OntologyCollector
+name|collector
 parameter_list|,
 name|Throwable
 name|cause
@@ -74,7 +74,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|space
+name|collector
 argument_list|)
 expr_stmt|;
 name|initCause
@@ -85,12 +85,12 @@ expr_stmt|;
 block|}
 comment|/**      * Returns the ontology space that threw the exception (presumably after a failed modification attempt).      *       * @return the ontology space on which the exception was thrown.      */
 specifier|public
-name|OntologySpace
-name|getSpace
+name|OntologyCollector
+name|getOntologyCollector
 parameter_list|()
 block|{
 return|return
-name|space
+name|collector
 return|;
 block|}
 block|}
