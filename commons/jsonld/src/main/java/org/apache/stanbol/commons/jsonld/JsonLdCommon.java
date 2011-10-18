@@ -118,6 +118,14 @@ specifier|public
 specifier|static
 specifier|final
 name|String
+name|LANGUAGE
+init|=
+literal|"@language"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
 name|IRI
 init|=
 literal|"@iri"
@@ -716,7 +724,7 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Fallback to CURIEs because of duplicate property "
+literal|"Fallback to use CURIEs because of duplicate property "
 operator|+
 name|propName
 operator|+
