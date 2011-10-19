@@ -99,11 +99,6 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-name|toConsole
-argument_list|(
-name|actual
-argument_list|)
-expr_stmt|;
 name|Assert
 operator|.
 name|assertEquals

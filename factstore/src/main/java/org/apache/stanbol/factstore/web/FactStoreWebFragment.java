@@ -343,7 +343,7 @@ name|FactStoreWebFragment
 implements|implements
 name|WebFragment
 block|{
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|String

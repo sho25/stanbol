@@ -101,22 +101,6 @@ name|commons
 operator|.
 name|jsonld
 operator|.
-name|JsonLdIRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|jsonld
-operator|.
 name|JsonLdProperty
 import|;
 end_import
@@ -150,20 +134,6 @@ operator|.
 name|jsonld
 operator|.
 name|JsonLdResource
-import|;
-end_import
-
-begin_import
-import|import
-name|sun
-operator|.
-name|reflect
-operator|.
-name|generics
-operator|.
-name|reflectiveObjects
-operator|.
-name|NotImplementedException
 import|;
 end_import
 
@@ -659,10 +629,13 @@ block|}
 block|}
 else|else
 block|{
+comment|// TODO Implement Me!
 throw|throw
 operator|new
-name|NotImplementedException
-argument_list|()
+name|RuntimeException
+argument_list|(
+literal|"Sorry, this is not implemented yet!"
+argument_list|)
 throw|;
 block|}
 block|}
