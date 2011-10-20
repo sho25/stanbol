@@ -365,26 +365,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|impl
-operator|.
-name|install
-operator|.
-name|IndexInstallerConstants
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|osgi
 operator|.
 name|framework
@@ -779,18 +759,7 @@ literal|"Unsupported compression format "
 operator|+
 name|archiveFormat
 operator|+
-literal|" "
-operator|+
-literal|"(implementation out of sync with Constants defined in "
-operator|+
-name|IndexInstallerConstants
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"). "
+literal|"!. "
 operator|+
 literal|"Please report this to stanbol-dev mailing list!"
 argument_list|)

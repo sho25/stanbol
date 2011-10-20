@@ -14,12 +14,28 @@ operator|.
 name|commons
 operator|.
 name|solr
+package|;
+end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|install
 operator|.
 name|impl
 operator|.
-name|install
-package|;
-end_package
+name|SolrIndexInstaller
+import|;
+end_import
 
 begin_comment
 comment|/**  * Constants and static configuration used by the {@link SolrIndexInstaller}  *   * @author Rupert Westenthaler  *   */

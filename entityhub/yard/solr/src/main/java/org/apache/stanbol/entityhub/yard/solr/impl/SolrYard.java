@@ -1428,6 +1428,11 @@ name|commitWithin
 init|=
 name|DEFAULT_COMMIT_WITHIN_DURATION
 decl_stmt|;
+comment|/**      * Holds the status if this SolrYard runs within or outside an OSGI environment      */
+specifier|private
+name|boolean
+name|withinOSGI
+decl_stmt|;
 comment|/**      * Default constructor as used by the OSGI environment.      *<p>      * DO NOT USE to manually create instances! The SolrYard instances do need to be configured. YOU NEED TO      * USE {@link #SolrYard(SolrYardConfig)} to parse the configuration and the initialise the Yard if running      * outside a OSGI environment.      */
 specifier|public
 name|SolrYard
@@ -1497,6 +1502,13 @@ operator|.
 name|next
 argument_list|()
 expr_stmt|;
+comment|//            if(config.getSolrServerType() == SolrServerTypeEnum.EMBEDDED){
+comment|//                File location = ConfigUtils.toFile(config.getSolrServerLocation());
+comment|//                if(!location.isAbsolute()){
+comment|//                    location = solrDirectoryManager.getSolrIndexDirectory(location.toString());
+comment|//                    config.setSolrServerLocation(location.getAbsolutePath());
+comment|//                }
+comment|//            }
 block|}
 else|else
 block|{
@@ -1613,7 +1625,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|solrDirectoryManager
+name|solrServerProviderManager
 operator|=
 literal|null
 expr_stmt|;
@@ -1710,6 +1722,10 @@ operator|.
 name|getProperties
 argument_list|()
 argument_list|)
+expr_stmt|;
+name|withinOSGI
+operator|=
+literal|true
 expr_stmt|;
 name|activate
 argument_list|(
@@ -1987,9 +2003,6 @@ operator|.
 name|getConfig
 argument_list|()
 decl_stmt|;
-name|String
-name|solrIndexLocation
-decl_stmt|;
 if|if
 condition|(
 name|config
@@ -2025,194 +2038,12 @@ argument_list|()
 condition|)
 block|{
 comment|// relative paths
-name|SolrDirectoryManager
-name|solrDirectoryManager
-init|=
-name|this
-operator|.
-name|solrDirectoryManager
-decl_stmt|;
 if|if
 condition|(
 name|solrDirectoryManager
-operator|!=
-literal|null
-condition|)
-block|{
-comment|// need to be resolved based on the internally managed Solr directory
-name|String
-name|indexName
-init|=
-name|indexDirectory
-operator|.
-name|toString
-argument_list|()
-decl_stmt|;
-name|indexDirectory
-operator|=
-name|solrDirectoryManager
-operator|.
-name|getSolrIndexDirectory
-argument_list|(
-name|indexName
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|indexDirectory
 operator|==
 literal|null
 condition|)
-block|{
-name|String
-name|configName
-decl_stmt|;
-if|if
-condition|(
-name|config
-operator|.
-name|isDefaultInitialisation
-argument_list|()
-condition|)
-block|{
-name|configName
-operator|=
-name|SolrYard
-operator|.
-name|DEFAULT_SOLR_INDEX_CONFIGURATION_NAME
-expr_stmt|;
-block|}
-else|else
-block|{
-name|configName
-operator|=
-name|config
-operator|.
-name|getIndexConfigurationName
-argument_list|()
-expr_stmt|;
-block|}
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... initialise new SolrDirectory Index with name {} by using Index Configuration {}"
-argument_list|,
-name|indexName
-argument_list|,
-name|configName
-argument_list|)
-expr_stmt|;
-try|try
-block|{
-name|indexDirectory
-operator|=
-name|solrDirectoryManager
-operator|.
-name|createSolrDirectory
-argument_list|(
-name|indexName
-argument_list|,
-name|configName
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|YardException
-argument_list|(
-literal|"SolrIndex "
-operator|+
-name|config
-operator|.
-name|getSolrServerLocation
-argument_list|()
-operator|+
-literal|" could not be initialised!"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|indexDirectory
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|YardException
-argument_list|(
-literal|"SolrIndex "
-operator|+
-name|config
-operator|.
-name|getSolrServerLocation
-argument_list|()
-operator|+
-literal|" is not available"
-operator|+
-operator|(
-name|config
-operator|.
-name|isDefaultInitialisation
-argument_list|()
-condition|?
-literal|" and could not be initialised!"
-else|:
-literal|". The necessary Index is not yet installed."
-operator|)
-argument_list|)
-throw|;
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... created IndexDirectory {} for SolrIndex {} by using config {}"
-argument_list|,
-operator|new
-name|Object
-index|[]
-block|{
-name|indexDirectory
-block|,
-name|indexName
-block|,
-name|configName
-block|}
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... use Directory {} for Solr Index with name {} "
-argument_list|,
-name|indexDirectory
-argument_list|,
-name|indexName
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-else|else
 block|{
 throw|throw
 operator|new
@@ -2234,24 +2065,83 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-block|}
+name|File
 name|solrIndexLocation
-operator|=
-name|indexDirectory
+init|=
+literal|null
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|solrDirectoryManager
 operator|.
-name|toString
-argument_list|()
-expr_stmt|;
-block|}
-else|else
-block|{
-name|solrIndexLocation
-operator|=
+name|isManagedIndex
+argument_list|(
 name|config
 operator|.
 name|getSolrServerLocation
 argument_list|()
+argument_list|)
+condition|)
+block|{
+comment|// try to create a new index
+name|solrIndexLocation
+operator|=
+name|createSolrIndex
+argument_list|(
+name|config
+argument_list|,
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+argument_list|)
 expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+operator|!
+name|withinOSGI
+condition|)
+block|{
+comment|//we need only the solrIndexLocation
+comment|//when running outside an OSGI environment
+name|solrIndexLocation
+operator|=
+name|solrDirectoryManager
+operator|.
+name|getSolrIndexDirectory
+argument_list|(
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+operator|!
+name|withinOSGI
+condition|)
+block|{
+comment|//in that case we need to replace the parse SolrServerLocation
+comment|//with the absolute path to the managed Dir
+name|config
+operator|.
+name|setSolrServerLocation
+argument_list|(
+name|solrIndexLocation
+operator|.
+name|getAbsolutePath
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+comment|// else (in OSGI Environment) the index will be found by using it's
+comment|//name (the relative path)
+block|}
 block|}
 if|if
 condition|(
@@ -2293,7 +2183,10 @@ operator|.
 name|getSolrServerType
 argument_list|()
 argument_list|,
-name|solrIndexLocation
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// test the server
@@ -2342,7 +2235,10 @@ name|YardException
 argument_list|(
 literal|"Unable to ping created SolrServer "
 operator|+
-name|solrIndexLocation
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
 argument_list|,
 name|e
 argument_list|)
@@ -2360,7 +2256,10 @@ name|YardException
 argument_list|(
 literal|"Unable to ping created SolrServer "
 operator|+
-name|solrIndexLocation
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
 argument_list|,
 name|e
 argument_list|)
@@ -2378,7 +2277,10 @@ name|YardException
 argument_list|(
 literal|"Unable to init SolrServer "
 operator|+
-name|solrIndexLocation
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
 operator|+
 literal|"because of "
 operator|+
@@ -2392,6 +2294,159 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**      * Creates a new SolrIndex based on this Yards configuration by using the      * {@link SolrDirectoryManager} service      * @param config the configuration of this SolrYard      * @param solrIndexLocation the name of the index to create      * @throws YardException On any Exception while creating the index      */
+specifier|private
+name|File
+name|createSolrIndex
+parameter_list|(
+name|SolrYardConfig
+name|config
+parameter_list|,
+specifier|final
+name|String
+name|solrIndexLocation
+parameter_list|)
+throws|throws
+name|YardException
+block|{
+name|String
+name|configName
+decl_stmt|;
+if|if
+condition|(
+name|config
+operator|.
+name|isDefaultInitialisation
+argument_list|()
+condition|)
+block|{
+name|configName
+operator|=
+name|SolrYard
+operator|.
+name|DEFAULT_SOLR_INDEX_CONFIGURATION_NAME
+expr_stmt|;
+block|}
+else|else
+block|{
+name|configName
+operator|=
+name|config
+operator|.
+name|getIndexConfigurationName
+argument_list|()
+expr_stmt|;
+block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... initialise new SolrDirectory Index with name {} by using Index Configuration {}"
+argument_list|,
+name|solrIndexLocation
+argument_list|,
+name|configName
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|File
+name|createdIndexDir
+init|=
+name|solrDirectoryManager
+operator|.
+name|createSolrDirectory
+argument_list|(
+name|solrIndexLocation
+argument_list|,
+name|configName
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|createdIndexDir
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"SolrIndex "
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|" is not available"
+operator|+
+operator|(
+name|config
+operator|.
+name|isDefaultInitialisation
+argument_list|()
+condition|?
+literal|" and could not be initialised!"
+else|:
+literal|". The necessary Index is not yet installed."
+operator|)
+argument_list|)
+throw|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... created IndexDirectory {} for SolrIndex {} by using config {}"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|createdIndexDir
+block|,
+name|solrIndexLocation
+block|,
+name|configName
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|createdIndexDir
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"SolrIndex "
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|" could not be initialised!"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+specifier|private
 name|FieldMapper
 name|getFieldMapper
 parameter_list|()
@@ -2601,6 +2656,10 @@ name|deactivate
 argument_list|()
 expr_stmt|;
 comment|// deactivate the super implementation
+name|withinOSGI
+operator|=
+literal|false
+expr_stmt|;
 block|}
 comment|/**      * This will case the SolrIndex to be optimised      * @throws YardException on any error while optimising      */
 specifier|public
