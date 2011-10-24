@@ -1849,7 +1849,7 @@ block|{
 return|return
 name|uri
 return|;
-comment|/*          String path = null;          * if (resourceManager != null&& uri != null) { path = resourceManager.getResourceFullPath(uri); } if          * (path == null || path.isEmpty()) { path = uri; }          */
+comment|/*          * String path = null; if (resourceManager != null&& uri != null) { path =          * resourceManager.getResourceFullPath(uri); } if (path == null || path.isEmpty()) { path = uri; }          */
 comment|// TODO : that should return the dereferenceable uri of resource in ontology store
 block|}
 annotation|@

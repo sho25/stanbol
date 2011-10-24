@@ -514,6 +514,8 @@ operator|.
 name|vocabulary
 operator|.
 name|SolrVocabulary
+operator|.
+name|SolrFieldName
 import|;
 end_import
 
@@ -954,31 +956,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-if|if
-condition|(
-name|searchContext
-operator|.
-name|getConstraints
-argument_list|()
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|searchContext
-operator|.
-name|getConstraints
-argument_list|()
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-name|omitNonMatchingResult
-argument_list|(
-name|searchContext
-argument_list|)
-expr_stmt|;
-block|}
+comment|/*              * if (searchContext.getConstraints() != null&& !searchContext.getConstraints().isEmpty()) {              * omitNonMatchingResult(searchContext); }              */
 block|}
 block|}
 comment|/**      * @param kw      *            the keyword to use in query      * @param searchContext      */
@@ -1441,9 +1419,12 @@ name|resultDoc
 operator|.
 name|getFieldValue
 argument_list|(
-name|SolrVocabulary
+name|SolrFieldName
 operator|.
-name|SOLR_FIELD_NAME_ID
+name|ID
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|/*              * String cmsId = (String) resultDoc.getFieldValue(SolrSearchEngineHelper.CMSID_FIELD); cmsId =              * cmsId == null ? "" : cmsId;              */
@@ -1457,9 +1438,12 @@ name|resultDoc
 operator|.
 name|getFieldValue
 argument_list|(
-name|SolrVocabulary
+name|SolrFieldName
 operator|.
-name|SOLR_FIELD_NAME_CONTENT
+name|CONTENT
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// score of the keyword is used as a weight for newly found document
@@ -1486,6 +1470,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|void
 name|omitNonMatchingResult
