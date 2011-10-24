@@ -5216,11 +5216,6 @@ name|expected
 init|=
 literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{\"@literal\":\"31.533567\",\"@datatype\":\"xsd:Float\"},{\"@literal\":\"test\",\"@datatype\":\"xsd:String\"}]}"
 decl_stmt|;
-name|toConsole
-argument_list|(
-name|actual
-argument_list|)
-expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expected
