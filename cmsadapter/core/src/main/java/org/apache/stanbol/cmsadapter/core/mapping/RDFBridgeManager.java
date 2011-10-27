@@ -558,6 +558,13 @@ name|connectionInfo
 argument_list|)
 decl_stmt|;
 comment|// Annotate raw RDF with CMS vocabulary annotations according to bridges
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Graph annotation starting..."
+argument_list|)
+expr_stmt|;
 name|MGraph
 name|annotatedGraph
 init|=
@@ -573,6 +580,14 @@ range|:
 name|rdfBridges
 control|)
 block|{
+name|long
+name|startAnnotation
+init|=
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+decl_stmt|;
 name|annotatedGraph
 operator|.
 name|addAll
@@ -585,8 +600,48 @@ name|rawRDFData
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Graph annotated in: "
+operator|+
+operator|(
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|startAnnotation
+operator|)
+operator|+
+literal|"ms"
+argument_list|)
+expr_stmt|;
 block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Graph annotation finished"
+argument_list|)
+expr_stmt|;
 comment|// Store annotated RDF in repository
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Annotated graph mapping started..."
+argument_list|)
+expr_stmt|;
+name|long
+name|startMap
+init|=
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+decl_stmt|;
 name|mapper
 operator|.
 name|storeRDFinRepository
@@ -594,6 +649,24 @@ argument_list|(
 name|session
 argument_list|,
 name|annotatedGraph
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Annotated graph mapped in: "
+operator|+
+operator|(
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|startMap
+operator|)
+operator|+
+literal|"ms"
 argument_list|)
 expr_stmt|;
 block|}
