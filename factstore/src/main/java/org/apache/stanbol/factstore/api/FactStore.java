@@ -130,7 +130,7 @@ throws|throws
 name|Exception
 function_decl|;
 specifier|public
-name|void
+name|int
 name|addFact
 parameter_list|(
 name|Fact

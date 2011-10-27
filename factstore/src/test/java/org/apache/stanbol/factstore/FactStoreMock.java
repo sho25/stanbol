@@ -198,7 +198,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|void
+name|int
 name|addFact
 parameter_list|(
 name|Fact
@@ -207,7 +207,9 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-comment|// TODO Auto-generated method stub
+return|return
+literal|99
+return|;
 block|}
 annotation|@
 name|Override

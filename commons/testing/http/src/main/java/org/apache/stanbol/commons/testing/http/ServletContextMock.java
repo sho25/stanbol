@@ -525,7 +525,15 @@ name|Object
 name|object
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
+name|this
+operator|.
+name|putAttribute
+argument_list|(
+name|name
+argument_list|,
+name|object
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

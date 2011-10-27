@@ -1880,7 +1880,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|void
+name|int
 name|addFact
 parameter_list|(
 name|Fact
@@ -1889,6 +1889,12 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
+name|int
+name|factId
+init|=
+operator|-
+literal|1
+decl_stmt|;
 name|Connection
 name|con
 init|=
@@ -1905,6 +1911,8 @@ argument_list|(
 name|DB_URL
 argument_list|)
 expr_stmt|;
+name|factId
+operator|=
 name|this
 operator|.
 name|addFact
@@ -1948,7 +1956,9 @@ name|logger
 operator|.
 name|info
 argument_list|(
-literal|"Fact created for {}"
+literal|"Fact {} created for {}"
+argument_list|,
+name|factId
 argument_list|,
 name|fact
 operator|.
@@ -1956,9 +1966,12 @@ name|getFactSchemaURN
 argument_list|()
 argument_list|)
 expr_stmt|;
+return|return
+name|factId
+return|;
 block|}
 specifier|private
-name|void
+name|int
 name|addFact
 parameter_list|(
 name|Fact
@@ -1970,6 +1983,12 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
+name|int
+name|factId
+init|=
+operator|-
+literal|1
+decl_stmt|;
 name|FactSchema
 name|factSchema
 init|=
@@ -2255,12 +2274,6 @@ operator|.
 name|getGeneratedKeys
 argument_list|()
 decl_stmt|;
-name|int
-name|factId
-init|=
-operator|-
-literal|1
-decl_stmt|;
 if|if
 condition|(
 name|rs
@@ -2365,6 +2378,9 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
+return|return
+name|factId
+return|;
 block|}
 annotation|@
 name|Override

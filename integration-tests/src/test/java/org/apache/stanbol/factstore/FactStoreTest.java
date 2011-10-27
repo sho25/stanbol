@@ -298,7 +298,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -351,7 +351,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -409,7 +409,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -467,7 +467,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -541,7 +541,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":\"http:\\/\\/iks-project.eu\\/ont\\/person\"}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":\"http://iks-project.eu/ont/person\"}}}"
 decl_stmt|;
 name|Assert
 operator|.
@@ -588,7 +588,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http:\\/\\/iks-project.eu\\/ont\\/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"@types\":{\"organization\":\"iks:organization\",\"person\":\"iks:person\"}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -658,7 +658,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":[\"http://iks-project.eu/ont/person\",\"http://www.schema.org/Person\"]}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -716,7 +716,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":[\"http://iks-project.eu/ont/person\",\"http://www.schema.org/Person\"]}}}"
 argument_list|)
 operator|.
 name|withHeader
@@ -790,7 +790,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"@types\":{\"organization\":\"http:\\/\\/iks-project.eu\\/ont\\/organization\",\"person\":[\"http:\\/\\/iks-project.eu\\/ont\\/person\",\"http:\\/\\/www.schema.org\\/Person\"]}}}"
+literal|"{\"@context\":{\"@types\":{\"organization\":\"http://iks-project.eu/ont/organization\",\"person\":[\"http://iks-project.eu/ont/person\",\"http://www.schema.org/Person\"]}}}"
 decl_stmt|;
 name|Assert
 operator|.
@@ -900,6 +900,16 @@ operator|.
 name|assertStatus
 argument_list|(
 literal|200
+argument_list|)
+operator|.
+name|assertContentContains
+argument_list|(
+name|builder
+operator|.
+name|buildUrl
+argument_list|(
+literal|"/factstore/facts"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1231,7 +1241,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@\":[{\"@profile\":\"iks:employeeOf2\",\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"@profile\":\"iks:friendOf2\",\"person\":{\"@iri\":\"upb:bnagel\"},\"friend\":{\"@iri\":\"upb:fchrist\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":[{\"@profile\":\"iks:employeeOf2\",\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"@profile\":\"iks:friendOf2\",\"person\":{\"@iri\":\"upb:bnagel\"},\"friend\":{\"@iri\":\"upb:fchrist\"}}]}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1380,7 +1390,7 @@ argument_list|)
 operator|.
 name|withContent
 argument_list|(
-literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@\":[{\"@profile\":\"iks:employeeOf3NegWrong\",\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"@profile\":\"iks:friendOf3Neg\",\"person\":{\"@iri\":\"upb:bnagel\"},\"friend\":{\"@iri\":\"upb:fchrist\"}}]}"
+literal|"{\"@context\":{\"iks\":\"http://iks-project.eu/ont/\",\"upb\":\"http://upb.de/persons/\"},\"@subject\":[{\"@profile\":\"iks:employeeOf3NegWrong\",\"person\":{\"@iri\":\"upb:bnagel\"},\"organization\":{\"@iri\":\"http://uni-paderborn.de\"}},{\"@profile\":\"iks:friendOf3Neg\",\"person\":{\"@iri\":\"upb:bnagel\"},\"friend\":{\"@iri\":\"upb:fchrist\"}}]}"
 argument_list|)
 operator|.
 name|withHeader
@@ -1549,7 +1559,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"resultset\":[{\"PERSON\":\"http:\\/\\/upb.de\\/persons\\/bnagel\"}]}"
+literal|"{\"PERSON\":\"http://upb.de/persons/bnagel\"}"
 decl_stmt|;
 name|String
 name|actual
