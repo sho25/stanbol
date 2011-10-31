@@ -669,7 +669,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Loding RDF {} File{} ..."
+literal|"Loding {} File{} ..."
 argument_list|,
 name|fileToLoad
 operator|.
