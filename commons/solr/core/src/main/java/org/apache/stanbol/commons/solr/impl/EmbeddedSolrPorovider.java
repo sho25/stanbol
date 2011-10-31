@@ -1456,6 +1456,24 @@ name|defaultSolrServerTracker
 operator|=
 literal|null
 expr_stmt|;
+comment|//shutdown externally managed CoreContainers
+for|for
+control|(
+name|CoreContainer
+name|coreContainer
+range|:
+name|coreContainers
+operator|.
+name|values
+argument_list|()
+control|)
+block|{
+name|coreContainer
+operator|.
+name|shutdown
+argument_list|()
+expr_stmt|;
+block|}
 name|this
 operator|.
 name|context
