@@ -2109,6 +2109,9 @@ specifier|public
 name|MGraph
 name|generateRDFFromRepository
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|Object
 name|session
 parameter_list|,
@@ -2244,6 +2247,8 @@ name|addAll
 argument_list|(
 name|getGraphForObject
 argument_list|(
+name|baseURI
+argument_list|,
 name|o
 argument_list|,
 operator|(
@@ -2264,6 +2269,9 @@ specifier|private
 name|MGraph
 name|getGraphForObject
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|CmisObject
 name|o
 parameter_list|,
@@ -2323,6 +2331,8 @@ name|subject
 init|=
 name|getObjectURI
 argument_list|(
+name|baseURI
+argument_list|,
 name|o
 argument_list|,
 name|metadata
@@ -2441,6 +2451,8 @@ name|addAll
 argument_list|(
 name|getGraphForObject
 argument_list|(
+name|baseURI
+argument_list|,
 name|child
 argument_list|,
 name|f
@@ -2786,6 +2798,9 @@ specifier|private
 name|NonLiteral
 name|getObjectURI
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|CmisObject
 name|o
 parameter_list|,
@@ -2828,13 +2843,6 @@ name|getSubject
 argument_list|()
 return|;
 block|}
-name|String
-name|baseURI
-init|=
-name|CMSAdapterVocabulary
-operator|.
-name|CMS_ADAPTER_VOCABULARY_URI
-decl_stmt|;
 name|String
 name|nodeURI
 init|=

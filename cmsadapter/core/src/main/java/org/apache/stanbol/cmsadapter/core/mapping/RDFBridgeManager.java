@@ -670,11 +670,14 @@ literal|"ms"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This method gets the RDF from the content repository based on the path configurations of      * {@link RDFBridge}s and annotate them using {@link RDFBridge#annotateCMSGraph(MGraph)}.      *       * @param connectionInfo      *            is the object that holds all necessary information to connect repository.      * @return {@link MGraph} formed by the aggregation of generated RDF for each RDF bridge      * @throws RepositoryAccessException      * @throws RDFBridgeException      */
+comment|/**      * This method gets the RDF from the content repository based on the path configurations of      * {@link RDFBridge}s and annotate them using {@link RDFBridge#annotateCMSGraph(MGraph)}.      *       * @param baseURI      *            Base URI for the RDF to be generated      * @param connectionInfo      *            is the object that holds all necessary information to connect repository.      * @return {@link MGraph} formed by the aggregation of generated RDF for each RDF bridge      * @throws RepositoryAccessException      * @throws RDFBridgeException      */
 specifier|public
 name|MGraph
 name|generateRDFFromRepository
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|ConnectionInfo
 name|connectionInfo
 parameter_list|)
@@ -726,6 +729,21 @@ argument_list|(
 name|connectionInfo
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|repositoryAccess
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|RepositoryAccessException
+argument_list|(
+literal|"Failed to obtain a RepositoryAccess for the provided connection information"
+argument_list|)
+throw|;
+block|}
 name|Object
 name|session
 init|=
@@ -758,6 +776,8 @@ name|mapper
 operator|.
 name|generateRDFFromRepository
 argument_list|(
+name|baseURI
+argument_list|,
 name|session
 argument_list|,
 name|bridge

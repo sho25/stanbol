@@ -1783,6 +1783,9 @@ specifier|public
 name|MGraph
 name|generateRDFFromRepository
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|Object
 name|session
 parameter_list|,
@@ -1918,6 +1921,8 @@ name|addAll
 argument_list|(
 name|getGraphForNode
 argument_list|(
+name|baseURI
+argument_list|,
 name|n
 argument_list|)
 argument_list|)
@@ -1950,6 +1955,9 @@ comment|/**      * Generates an RDF from the specified {@link Node}. It annotate
 name|MGraph
 name|getGraphForNode
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|Node
 name|n
 parameter_list|)
@@ -1967,6 +1975,8 @@ name|subject
 init|=
 name|getNodeURI
 argument_list|(
+name|baseURI
+argument_list|,
 name|n
 argument_list|)
 decl_stmt|;
@@ -2096,6 +2106,8 @@ name|childURI
 init|=
 name|getNodeURI
 argument_list|(
+name|baseURI
+argument_list|,
 name|child
 argument_list|)
 decl_stmt|;
@@ -2131,6 +2143,8 @@ name|addAll
 argument_list|(
 name|getGraphForNode
 argument_list|(
+name|baseURI
+argument_list|,
 name|child
 argument_list|)
 argument_list|)
@@ -2476,6 +2490,9 @@ specifier|private
 name|UriRef
 name|getNodeURI
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|Node
 name|n
 parameter_list|)
@@ -2567,13 +2584,6 @@ expr_stmt|;
 block|}
 try|try
 block|{
-name|String
-name|baseURI
-init|=
-name|CMSAdapterVocabulary
-operator|.
-name|CMS_ADAPTER_VOCABULARY_URI
-decl_stmt|;
 name|nodeURI
 operator|=
 name|RDFBridgeHelper

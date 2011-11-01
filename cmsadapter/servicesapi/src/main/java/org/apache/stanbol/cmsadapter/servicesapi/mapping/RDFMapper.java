@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -91,10 +91,13 @@ parameter_list|)
 throws|throws
 name|RDFBridgeException
 function_decl|;
-comment|/**      * This method generates an RDF from the part specified with a path of the content repository. It      * transforms CMS objects into resources having {@link CMSAdapterVocabulary#CMS_OBJECT} rdf:type value. It      * also transforms properties and types of the CMS object into the RDF. Furthermore, parent assertions are      * added through the {@link CMSAdapterVocabulary#CMS_OBJECT_PARENT_REF}.      *       * @param session      *            This is a session object which is used to interact with JCR or CMIS repositories      * @param rootPath      *            Content repository path which is the root path indicating the root CMS object that will be      *            transformed into RDF together with its children      * @return annotated {@link MGraph}      * @throws RDFBridgeException      */
+comment|/**      * This method generates an RDF from the part specified with a path of the content repository. It      * transforms CMS objects into resources having {@link CMSAdapterVocabulary#CMS_OBJECT} rdf:type value. It      * also transforms properties and types of the CMS object into the RDF. Furthermore, parent assertions are      * added through the {@link CMSAdapterVocabulary#CMS_OBJECT_PARENT_REF}.      *       * @param baseURI      *            Base URI for the RDF to be generated      * @param session      *            This is a session object which is used to interact with JCR or CMIS repositories      * @param rootPath      *            Content repository path which is the root path indicating the root CMS object that will be      *            transformed into RDF together with its children      * @return annotated {@link MGraph}      * @throws RDFBridgeException      */
 name|MGraph
 name|generateRDFFromRepository
 parameter_list|(
+name|String
+name|baseURI
+parameter_list|,
 name|Object
 name|session
 parameter_list|,

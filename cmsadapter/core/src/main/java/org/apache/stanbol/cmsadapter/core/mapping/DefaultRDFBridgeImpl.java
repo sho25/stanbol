@@ -1520,33 +1520,6 @@ operator|.
 name|getSubject
 argument_list|()
 decl_stmt|;
-comment|/*              * If parent has already a property referencing child, do not add a new subsumption relation.              * Otherwise, if children configurations has a single item use that property, if there are more              * than one children configuration use the default child predicate.              */
-name|Iterator
-argument_list|<
-name|Triple
-argument_list|>
-name|childParentRelations
-init|=
-name|graph
-operator|.
-name|filter
-argument_list|(
-name|parentURI
-argument_list|,
-literal|null
-argument_list|,
-name|childURI
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-operator|!
-name|childParentRelations
-operator|.
-name|hasNext
-argument_list|()
-condition|)
-block|{
 name|UriRef
 name|childPredicate
 decl_stmt|;
@@ -1612,7 +1585,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-block|}
 specifier|private
 name|void
 name|applyReverseBridgeSettings
@@ -1624,6 +1596,7 @@ name|MGraph
 name|graph
 parameter_list|)
 block|{
+comment|// add subsumption assertion
 name|graph
 operator|.
 name|add
@@ -1639,6 +1612,7 @@ name|targetResourceValue
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// add name assertion
 name|revertObjectName
 argument_list|(
 name|subject
@@ -1708,13 +1682,6 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-name|graph
-operator|.
-name|remove
-argument_list|(
-name|nameProp
-argument_list|)
-expr_stmt|;
 name|graph
 operator|.
 name|add
