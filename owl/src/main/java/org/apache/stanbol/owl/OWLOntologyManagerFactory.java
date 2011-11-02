@@ -162,7 +162,7 @@ return|return
 name|mgr
 return|;
 block|}
-specifier|private
+specifier|public
 specifier|static
 name|List
 argument_list|<
