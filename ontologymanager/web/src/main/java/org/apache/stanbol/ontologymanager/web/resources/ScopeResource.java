@@ -1438,24 +1438,6 @@ argument_list|,
 name|regMgr
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"DIOPORCO"
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|coreSrc
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -1602,24 +1584,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"CORRE "
-operator|+
-name|coreSrc
-operator|.
-name|getClass
-argument_list|()
-operator|+
-literal|" "
-operator|+
-name|coreSrc
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|coreSrc
@@ -1627,20 +1591,6 @@ operator|instanceof
 name|OntologySetInputSource
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Root ontology "
-operator|+
-name|coreSrc
-operator|.
-name|getRootOntology
-argument_list|()
-argument_list|)
-expr_stmt|;
 for|for
 control|(
 name|OWLOntology
@@ -1657,17 +1607,6 @@ name|getOntologies
 argument_list|()
 control|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"\t"
-operator|+
-name|o
-argument_list|)
-expr_stmt|;
 name|expanded
 operator|.
 name|add
@@ -1697,20 +1636,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"CUSST "
-operator|+
-name|custSrc
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|custSrc
@@ -1752,24 +1677,6 @@ name|custSrc
 argument_list|)
 expr_stmt|;
 block|}
-for|for
-control|(
-name|OntologyInputSource
-name|s
-range|:
-name|expanded
-control|)
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Expanded Core Source "
-operator|+
-name|s
-argument_list|)
-expr_stmt|;
 comment|// Invoke the appropriate factory method depending on the
 comment|// availability of a custom source.
 comment|// scope = (custSrc != null) ? f.createOntologyScope(scopeid, coreSrc, custSrc) : f

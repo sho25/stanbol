@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A member of an ontology registry, possibly even the registry itself.  */
+comment|/**  * A member of an ontology registry, possibly even the registry itself.  *   * @author alexdma  */
 end_comment
 
 begin_interface

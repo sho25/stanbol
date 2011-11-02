@@ -741,34 +741,8 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|scope
-operator|.
-name|addSessionSpace
-argument_list|(
-name|spaceFactory
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|scopeId1
-argument_list|)
-argument_list|,
-name|ses
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|assertFalse
-argument_list|(
-name|scope
-operator|.
-name|getSessionSpaces
-argument_list|()
-operator|.
-name|isEmpty
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|// scope.addSessionSpace(spaceFactory.createSessionOntologySpace(scopeId1), ses.getID());
+comment|// assertFalse(scope.getSessionSpaces().isEmpty());
 block|}
 annotation|@
 name|Test

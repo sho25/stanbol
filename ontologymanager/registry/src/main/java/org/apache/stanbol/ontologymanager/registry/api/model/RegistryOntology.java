@@ -41,6 +41,26 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|registry
 operator|.
 name|api
@@ -87,12 +107,12 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLOntologyManager
+name|OWLOntologyCreationException
 import|;
 end_import
 
 begin_comment
-comment|/**  * A special registry item that denotes an ontology referenced by a library.<br/>  *<br/>  * Note that this is<b>not equivalent</b> to an {@link OWLOntology}, since a {@link RegistryOntology} can  * exist regardless of the corresponding OWL ontology being loaded. For this reason, a registry ontology  * responds to {@link #getIRI()} with is stated<i>physical location</i>, even if it were found to differ from  * the ontology ID once the corresponding OWL ontology is loaded.<br/>  *<br/>  * Once the corresponding ontology has been loaded (e.g. by a call to  * {@link Library#loadOntologies(OWLOntologyManager)}), the corresponding {@link OWLOntology} object is  * available via calls to {@link #getRawOntology(IRI)}.  */
+comment|/**  * A special registry item that denotes an ontology referenced by a library.<br/>  *<br/>  * Note that this is<b>not equivalent</b> to an {@link OWLOntology}, since a {@link RegistryOntology} can  * exist regardless of the corresponding OWL ontology being loaded. For this reason, a registry ontology  * responds to {@link #getIRI()} with is stated<i>physical location</i>, even if it were found to differ from  * the ontology ID once the corresponding OWL ontology is loaded.<br/>  *<br/>  * Once the corresponding ontology has been loaded (e.g. by a call to {@link Library#loadOntologies(OntologyProvider)}),  * the corresponding {@link OWLOntology} object is available via calls to {@link #getRawOntology(IRI)}.  *   * @author alexdma  */
 end_comment
 
 begin_interface
@@ -115,14 +135,24 @@ name|Map
 argument_list|<
 name|IRI
 argument_list|,
-name|OWLOntology
+name|String
 argument_list|>
-name|getRawOntologies
+name|getReferenceMap
 parameter_list|()
 throws|throws
 name|RegistryOntologyNotLoadedException
 function_decl|;
 comment|/**      * Returns the {@link OWLOntology} object corresponding to this registry ontology. If the ontology was not      * loaded, a {@link RegistryOntologyNotLoadedException} will be thrown.<br/>      *<br/>      * Upon invocation, this method immediately fires a registry content request event on itself. Note,      * however, that this method is in general not synchronized. Therefore, any listeners that react by      * invoking a load method may or may not cause the content to be available to this method before it      * returns.      *       * @param libraryID      *            TODO      *       * @return the OWL ontology corresponding to this registry ontology.      * @throws RegistryOntologyNotLoadedException      *             if the ontology is not loaded.      */
+name|String
+name|getReference
+parameter_list|(
+name|IRI
+name|libraryID
+parameter_list|)
+throws|throws
+name|RegistryOntologyNotLoadedException
+function_decl|;
+comment|/**      * Returns the {@link OWLOntology} object corresponding to this registry ontology. If the ontology was not      * loaded, a {@link RegistryOntologyNotLoadedException} will be thrown.<br/>      *<br/>      * Upon invocation, this method immediately fires a registry content request event on itself. Note,      * however, that this method is in general not synchronized. Therefore, any listeners that react by      * invoking a load method may or may not cause the content to be available to this method before it      * returns.      *       * @deprecated this method will return null if the cache that stores the ontology content is not      *             implemented as an OWLOntologyManager. Applications should either request the reference via      *             a call to {@link #getReference(IRI)} and resolve it, or request the      *             {@link OWLOntologyCreationException} from the library referencing this.      * @param libraryID      *            TODO      *       * @return the OWL ontology corresponding to this registry ontology.      * @throws RegistryOntologyNotLoadedException      *             if the ontology is not loaded.      */
 name|OWLOntology
 name|getRawOntology
 parameter_list|(
@@ -132,7 +162,18 @@ parameter_list|)
 throws|throws
 name|RegistryOntologyNotLoadedException
 function_decl|;
-comment|/**      * Returns the {@link OWLOntology} object corresponding to this registry ontology. Note that the method      * does not check whether the registry item ID matches the ontology ID or its physical location.      * @param libraryID TODO      * @param owl      *            the OWL ontology corresponding to this registry ontology.      */
+comment|/**      * Returns the {@link OWLOntology} object corresponding to this registry ontology. Note that the method      * does not check whether the registry item ID matches the ontology ID or its physical location.      *       * @param libraryID      *            TODO      * @param owl      *            the OWL ontology corresponding to this registry ontology.      */
+name|void
+name|setReference
+parameter_list|(
+name|IRI
+name|libraryID
+parameter_list|,
+name|String
+name|reference
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the {@link OWLOntology} object corresponding to this registry ontology. Note that the method      * does not check whether the registry item ID matches the ontology ID or its physical location.      *       * @deprecated if the cache is not implemented in OWLAPI, this will not be set.      * @param libraryID      *            TODO      * @param owl      *            the OWL ontology corresponding to this registry ontology.      */
 name|void
 name|setRawOntology
 parameter_list|(

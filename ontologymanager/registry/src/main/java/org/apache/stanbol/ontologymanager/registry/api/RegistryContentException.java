@@ -20,7 +20,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown when trying to process an invalid registry item. The reason why it is invalid can be specified by  * the cause, message or subclasses of this exception.  */
+comment|/**  * Thrown when trying to process an invalid registry item. The reason why it is invalid can be specified by  * the cause, message or subclasses of this exception.  *   * @author alexdma  */
 end_comment
 
 begin_class

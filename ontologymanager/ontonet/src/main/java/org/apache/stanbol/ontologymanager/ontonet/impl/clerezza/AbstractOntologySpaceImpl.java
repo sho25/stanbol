@@ -55,7 +55,7 @@ name|core
 operator|.
 name|access
 operator|.
-name|TcManager
+name|TcProvider
 import|;
 end_import
 
@@ -329,8 +329,8 @@ parameter_list|,
 name|SpaceType
 name|type
 parameter_list|,
-name|TcManager
-name|tcManager
+name|TcProvider
+name|tcProvider
 parameter_list|)
 block|{
 name|super
@@ -339,7 +339,7 @@ name|spaceID
 argument_list|,
 name|namespace
 argument_list|,
-name|tcManager
+name|tcProvider
 argument_list|)
 expr_stmt|;
 name|this

@@ -156,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Replacement for {@link RegistryLoader}. Also indexes libraries (and ontologies?).  */
+comment|/**  * An object responsible for the retrieval, loading and unloading of ontology registries and libraries. Also  * works as an indexer for registry items.  *   * @author alexdma  */
 end_comment
 
 begin_interface
@@ -200,7 +200,7 @@ name|void
 name|clearRegistries
 parameter_list|()
 function_decl|;
-comment|/**      * Constructs the models of all the registry items discovered by scanning the supplied ontologies that are      * supposed to denote registries.<br/>      *<br/>      * To denote a registry, an ontology must instantiate the metamodel at<a      * href="http://www.ontologydesignpatterns.org/schemas/meta.owl"      *>http://www.ontologydesignpatterns.org/schemas/meta.owl</a><br/>      *<br/>      * Depending on implementations, this method may or may not be automatically invoked after a call to      * methods that determine changes to the model.      *       * @param registryOntologies      *            the source OWL ontologies that describe the registries. If any of these denotes an invalid      *            registry, a {@link RegistryContentException} will be thrown. If it does not denote a      *            registry at all, it will be skipped.      * @return the ontology registries that are the parent items of the entire model.      */
+comment|/**      * Constructs the models of all the registry items discovered by scanning the supplied ontologies that are      * supposed to denote registries.<br/>      *<br/>      * To denote a registry, an ontology must instantiate the metamodel at<a      * href="http://www.ontologydesignpatterns.org/schemas/meta.owl"      *>http://www.ontologydesignpatterns.org/schemas/meta.owl</a><br/>      *<br/>      * Depending on implementations, this method may or may not be automatically invoked after a call to      * methods that determine changes to the model.      *       * @param registryDescriptors      *            the source OWL ontologies that describe the registries. If any of these denotes an invalid      *            registry, a {@link RegistryContentException} will be thrown. If it does not denote a      *            registry at all, it will be skipped.      * @return the ontology registries that are the parent items of the entire model.      */
 name|Set
 argument_list|<
 name|Registry
@@ -211,7 +211,7 @@ name|Set
 argument_list|<
 name|OWLOntology
 argument_list|>
-name|registryOntologies
+name|registryDescriptors
 parameter_list|)
 function_decl|;
 comment|/**      * Returns the ontology caching policy currently adopted by the registry manager.      *       * @return the caching policy.      */

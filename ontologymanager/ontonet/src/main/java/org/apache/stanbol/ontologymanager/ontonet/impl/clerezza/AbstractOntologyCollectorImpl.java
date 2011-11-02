@@ -157,7 +157,7 @@ name|core
 operator|.
 name|access
 operator|.
-name|TcManager
+name|TcProvider
 import|;
 end_import
 
@@ -460,8 +460,8 @@ argument_list|>
 name|supportedTypes
 decl_stmt|;
 specifier|private
-name|TcManager
-name|tcManager
+name|TcProvider
+name|tcProvider
 decl_stmt|;
 specifier|public
 name|AbstractOntologyCollectorImpl
@@ -472,8 +472,8 @@ parameter_list|,
 name|IRI
 name|namespace
 parameter_list|,
-name|TcManager
-name|tcManager
+name|TcProvider
+name|tcProvider
 parameter_list|)
 block|{
 comment|// Supports OWL API and Clerezza
@@ -519,9 +519,9 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|tcManager
+name|tcProvider
 operator|=
-name|tcManager
+name|tcProvider
 expr_stmt|;
 name|this
 operator|.
@@ -700,7 +700,7 @@ try|try
 block|{
 name|mg
 operator|=
-name|tcManager
+name|tcProvider
 operator|.
 name|createMGraph
 argument_list|(
@@ -716,7 +716,7 @@ parameter_list|)
 block|{
 name|mg
 operator|=
-name|tcManager
+name|tcProvider
 operator|.
 name|getMGraph
 argument_list|(
@@ -1032,7 +1032,7 @@ return|;
 name|TripleCollection
 name|g
 init|=
-name|tcManager
+name|tcProvider
 operator|.
 name|getTriples
 argument_list|(
@@ -1078,12 +1078,12 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|TcManager
-name|getTcManager
+name|TcProvider
+name|getTcProvider
 parameter_list|()
 block|{
 return|return
-name|tcManager
+name|tcProvider
 return|;
 block|}
 annotation|@

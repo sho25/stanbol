@@ -35,7 +35,7 @@ name|core
 operator|.
 name|access
 operator|.
-name|TcManager
+name|TcProvider
 import|;
 end_import
 
@@ -193,8 +193,8 @@ parameter_list|,
 name|IRI
 name|namespace
 parameter_list|,
-name|TcManager
-name|tcManager
+name|TcProvider
+name|tcProvider
 parameter_list|)
 block|{
 name|super
@@ -210,7 +210,7 @@ name|SpaceType
 operator|.
 name|CUSTOM
 argument_list|,
-name|tcManager
+name|tcProvider
 argument_list|)
 expr_stmt|;
 block|}

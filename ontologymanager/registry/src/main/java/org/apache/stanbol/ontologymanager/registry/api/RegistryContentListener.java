@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Object that react to direct content requests to ontology registry items will implement this interface.  */
+comment|/**  * Objects that react to direct content requests to ontology registry items will implement this interface.  *   * @author alexdma  */
 end_comment
 
 begin_interface

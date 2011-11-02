@@ -83,6 +83,10 @@ name|IRI
 import|;
 end_import
 
+begin_comment
+comment|/**  * Objects that keep track of known libraries, registries and ontologies can implement this interface.  *   * @author alexdma  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface

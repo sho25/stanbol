@@ -167,6 +167,10 @@ name|IRI
 import|;
 end_import
 
+begin_comment
+comment|/**  * Abstract default implementation of registry items.  *   * @author alexdma  *   */
+end_comment
+
 begin_class
 specifier|public
 specifier|abstract

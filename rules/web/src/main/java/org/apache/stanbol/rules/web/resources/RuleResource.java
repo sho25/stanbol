@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_comment
@@ -50,16 +50,6 @@ operator|.
 name|util
 operator|.
 name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Hashtable
 import|;
 end_import
 
@@ -307,24 +297,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|stanbol
 operator|.
 name|commons
@@ -392,44 +364,6 @@ operator|.
 name|api
 operator|.
 name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|ONManagerImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -710,7 +644,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  * @author elvio, andrea.nuzzolese  *   */
+comment|/**  *   * @author elvio, andrea.nuzzolese  *   */
 end_comment
 
 begin_class
@@ -728,10 +662,6 @@ block|{
 specifier|protected
 name|ONManager
 name|onm
-decl_stmt|;
-specifier|protected
-name|ClerezzaOntologyStorage
-name|storage
 decl_stmt|;
 specifier|private
 name|Logger
@@ -762,7 +692,7 @@ specifier|private
 name|String
 name|desc
 decl_stmt|;
-comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      * 	 * @param servletContext 	 *            {To get the context where the REST service is running.}      */
+comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
 specifier|public
 name|RuleResource
 parameter_list|(
@@ -808,19 +738,8 @@ argument_list|,
 name|servletContext
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|storage
-operator|=
-name|this
-operator|.
-name|onm
-operator|.
-name|getOntologyStore
-argument_list|()
-expr_stmt|;
 block|}
-comment|/** 	 * Get a rule from the rule base (that is the ontology that contains the 	 * rules and the recipe). curl -v -X GET 	 * http://localhost:8080/kres/rule/http 	 * ://kres.iks-project.eu/ontology/meta/rmi.owl#ProvaParentRule 	 *  	 * @param uri 	 *            {A string contains the IRI full name of the rule.}      * @return Return:<br/> 	 *         200 The rule is retrieved (import declarations point to KReS 	 *         Services)<br/>      *       404 The rule does not exists in the manager<br/>      *       500 Some error occurred      *      */
+comment|/**      * Get a rule from the rule base (that is the ontology that contains the rules and the recipe). curl -v -X      * GET http://localhost:8080/kres/rule/http ://kres.iks-project.eu/ontology/meta/rmi.owl#ProvaParentRule      *       * @param uri      *            {A string contains the IRI full name of the rule.}      * @return Return:<br/>      *         200 The rule is retrieved (import declarations point to KReS Services)<br/>      *         404 The rule does not exists in the manager<br/>      *         500 Some error occurred      *       */
 annotation|@
 name|GET
 annotation|@
@@ -1124,16 +1043,16 @@ name|ax
 argument_list|)
 expr_stmt|;
 block|}
-comment|//            try {
-comment|//						OWLManager.createOWLOntologyManager().saveOntology(
-comment|//								newmodel,
-comment|//								newmodel.getOWLOntologyManager()
-comment|//										.getOntologyFormat(newmodel),
-comment|//								System.out);
-comment|//    		} catch (OWLOntologyStorageException e) {
-comment|//    			// TODO Auto-generated catch block
-comment|//    			e.printStackTrace();
-comment|//    		}
+comment|// try {
+comment|// OWLManager.createOWLOntologyManager().saveOntology(
+comment|// newmodel,
+comment|// newmodel.getOWLOntologyManager()
+comment|// .getOntologyFormat(newmodel),
+comment|// System.out);
+comment|// } catch (OWLOntologyStorageException e) {
+comment|// // TODO Auto-generated catch block
+comment|// e.printStackTrace();
+comment|// }
 return|return
 name|Response
 operator|.
@@ -1366,16 +1285,16 @@ argument_list|,
 name|ax
 argument_list|)
 expr_stmt|;
-comment|//            try {
-comment|//						OWLManager.createOWLOntologyManager().saveOntology(
-comment|//								newmodel,
-comment|//								newmodel.getOWLOntologyManager()
-comment|//										.getOntologyFormat(newmodel),
-comment|//								System.out);
-comment|//    		} catch (OWLOntologyStorageException e) {
-comment|//    			// TODO Auto-generated catch block
-comment|//    			e.printStackTrace();
-comment|//    		}
+comment|// try {
+comment|// OWLManager.createOWLOntologyManager().saveOntology(
+comment|// newmodel,
+comment|// newmodel.getOWLOntologyManager()
+comment|// .getOntologyFormat(newmodel),
+comment|// System.out);
+comment|// } catch (OWLOntologyStorageException e) {
+comment|// // TODO Auto-generated catch block
+comment|// e.printStackTrace();
+comment|// }
 return|return
 name|Response
 operator|.
@@ -1396,7 +1315,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-comment|//Some error occurred
+comment|// Some error occurred
 throw|throw
 operator|new
 name|WebApplicationException
@@ -1550,7 +1469,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** 	 * To add a rule to a recipe at the end of the sequence. curl -v -X POST -F 	 * "recipe=http://kres.iks-project.eu/ontology/meta/rmi.owl%23ProvaParentRecipe" 	 * -F "rule=http://kres.iks-project.eu/ontology/meta/rmi.owl%23ProvaRuleNEW" 	 * -F "kres-syntax=body -> head" -F "description=prova di aggiunta regola" 	 * http://localhost:8080/kres/rule 	 *  	 * @param recipe 	 *            {A string contains the IRI of the recipe where to add the 	 *            rule} 	 * @param rule 	 *            {A string contains the IRI of the rule to be added at the 	 *            recipe} 	 * @param kres_syntax 	 *            {A string contains the body and the head of the kres rule. If 	 *            not specified the rule is search in the Ontology otherwise is 	 *            added as new.} 	 * @param description 	 *            {A string contains a description of the rule}      * @return Return:<br/>      *      200 The rule has been added<br/>      *      204 The rule has not been added<br/>      *      400 The rule and recipe are not specified<br/>      *      404 Recipe or rule not found<br/>      *      409 The rule has not been added<br/>      *      500 Some error occurred      */
+comment|/**      * To add a rule to a recipe at the end of the sequence. curl -v -X POST -F      * "recipe=http://kres.iks-project.eu/ontology/meta/rmi.owl%23ProvaParentRecipe" -F      * "rule=http://kres.iks-project.eu/ontology/meta/rmi.owl%23ProvaRuleNEW" -F "kres-syntax=body -> head" -F      * "description=prova di aggiunta regola" http://localhost:8080/kres/rule      *       * @param recipe      *            {A string contains the IRI of the recipe where to add the rule}      * @param rule      *            {A string contains the IRI of the rule to be added at the recipe}      * @param kres_syntax      *            {A string contains the body and the head of the kres rule. If not specified the rule is      *            search in the Ontology otherwise is added as new.}      * @param description      *            {A string contains a description of the rule}      * @return Return:<br/>      *         200 The rule has been added<br/>      *         204 The rule has not been added<br/>      *         400 The rule and recipe are not specified<br/>      *         404 Recipe or rule not found<br/>      *         409 The rule has not been added<br/>      *         500 Some error occurred      */
 annotation|@
 name|POST
 annotation|@
@@ -1636,12 +1555,12 @@ name|String
 name|description
 parameter_list|)
 block|{
-comment|//        System.err.println("recipe "+recipe);
-comment|//        System.err.println("rule " + rule);
-comment|//        System.err.println("kres-syntax "+kres_syntax);
-comment|//        System.err.println("description "+description);
+comment|// System.err.println("recipe "+recipe);
+comment|// System.err.println("rule " + rule);
+comment|// System.err.println("kres-syntax "+kres_syntax);
+comment|// System.err.println("description "+description);
 comment|//
-comment|//        return Response.ok().build();
+comment|// return Response.ok().build();
 try|try
 block|{
 if|if
@@ -1701,7 +1620,7 @@ operator|.
 name|trim
 argument_list|()
 expr_stmt|;
-comment|//The rule is already inside the rule store
+comment|// The rule is already inside the rule store
 if|if
 condition|(
 operator|(
@@ -1711,7 +1630,7 @@ literal|null
 operator|)
 condition|)
 block|{
-comment|//Get the rule
+comment|// Get the rule
 name|GetRule
 name|inrule
 init|=
@@ -1758,7 +1677,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Get the recipe
+comment|// Get the recipe
 name|GetRecipe
 name|getrecipe
 init|=
@@ -1913,7 +1832,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Add the new rule to the end
+comment|// Add the new rule to the end
 name|ruleseq
 operator|.
 name|add
@@ -1926,7 +1845,7 @@ name|rule
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Remove the old recipe
+comment|// Remove the old recipe
 name|RemoveRecipe
 name|remove
 init|=
@@ -1969,7 +1888,7 @@ operator|.
 name|build
 argument_list|()
 return|;
-comment|//Add the recipe with the new rule
+comment|// Add the recipe with the new rule
 name|AddRecipe
 name|newadd
 init|=
@@ -2034,7 +1953,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|//The rule is added to the store and to the recipe
+comment|// The rule is added to the store and to the recipe
 if|if
 condition|(
 operator|(
@@ -2050,7 +1969,7 @@ literal|null
 operator|)
 condition|)
 block|{
-comment|//Get the rule
+comment|// Get the rule
 name|AddRule
 name|inrule
 init|=
@@ -2119,7 +2038,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Get the recipe
+comment|// Get the recipe
 name|GetRecipe
 name|getrecipe
 init|=
@@ -2275,7 +2194,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Add the new rule to the end
+comment|// Add the new rule to the end
 name|ruleseq
 operator|.
 name|add
@@ -2288,7 +2207,7 @@ name|rule
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Remove the old recipe
+comment|// Remove the old recipe
 name|RemoveRecipe
 name|remove
 init|=
@@ -2343,7 +2262,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Add the recipe with the new rule
+comment|// Add the recipe with the new rule
 name|AddRecipe
 name|newadd
 init|=
@@ -2444,10 +2363,10 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * To delete a rule from a recipe or from the ontology. If the recipe is not 	 * specified the rule is deleted from the ontology. curl -v -X DELETE -G \ 	 * -d recipe= 	 * "http://kres.iks-project.eu/ontology/meta/rmi.owl#ProvaParentRecipe" \ -d 	 * rule 	 * ="http://kres.iks-project.eu/ontology/meta/rmi.owl#ProvaParentNewRule" \      * http://localhost:port/kres/rule     *      * @Param rule {A string contains an IRI of the rule to be removed} 	 * @param recipe 	 *            {A string contains an IRI of the recipe where remove the rule}      * @return Return:<br/>      *      200 The rule has been deleted<br/>      *      204 The rule has not been deleted<br/>      *      404 Recipe or rule not found<br/>      *      409 The recipe has not been deleted<br/>      *      500 Some error occurred      */
+comment|/**      * To delete a rule from a recipe or from the ontology. If the recipe is not specified the rule is deleted      * from the ontology. curl -v -X DELETE -G \ -d recipe=      * "http://kres.iks-project.eu/ontology/meta/rmi.owl#ProvaParentRecipe" \ -d rule      * ="http://kres.iks-project.eu/ontology/meta/rmi.owl#ProvaParentNewRule" \      * http://localhost:port/kres/rule      *       * @Param rule {A string contains an IRI of the rule to be removed}      * @param recipe      *            {A string contains an IRI of the recipe where remove the rule}      * @return Return:<br/>      *         200 The rule has been deleted<br/>      *         204 The rule has not been deleted<br/>      *         404 Recipe or rule not found<br/>      *         409 The recipe has not been deleted<br/>      *         500 Some error occurred      */
 annotation|@
 name|DELETE
-comment|//@Consumes(MediaType.TEXT_PLAIN)
+comment|// @Consumes(MediaType.TEXT_PLAIN)
 annotation|@
 name|Produces
 argument_list|(
@@ -2485,7 +2404,7 @@ name|ok
 decl_stmt|;
 try|try
 block|{
-comment|//Delete from the recipe
+comment|// Delete from the recipe
 if|if
 condition|(
 operator|(
@@ -2529,7 +2448,7 @@ operator|.
 name|trim
 argument_list|()
 expr_stmt|;
-comment|//Get the rule
+comment|// Get the rule
 name|GetRule
 name|getrule
 init|=
@@ -2576,7 +2495,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Get the recipe
+comment|// Get the recipe
 name|GetRecipe
 name|getrecipe
 init|=
@@ -2662,7 +2581,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Remove rule from recipe
+comment|// Remove rule from recipe
 name|RemoveRule
 name|remove
 init|=
@@ -2734,7 +2653,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|//Delete from the ontology
+comment|// Delete from the ontology
 if|if
 condition|(
 operator|(
@@ -2764,7 +2683,7 @@ operator|.
 name|trim
 argument_list|()
 expr_stmt|;
-comment|//Get the rule
+comment|// Get the rule
 name|GetRule
 name|getrule
 init|=
@@ -2811,7 +2730,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//Remove the old rule
+comment|// Remove the old rule
 name|RemoveRule
 name|remove
 init|=

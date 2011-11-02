@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The possible policies a registry manager can adopt for distributed caching.  */
+comment|/**  * The possible policies a registry manager can adopt for distributed caching.  *   * @author alexdma  */
 end_comment
 
 begin_enum

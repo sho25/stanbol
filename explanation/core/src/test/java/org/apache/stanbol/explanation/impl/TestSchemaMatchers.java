@@ -235,6 +235,26 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|clerezza
+operator|.
+name|ClerezzaOntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|registry
 operator|.
 name|api
@@ -466,41 +486,23 @@ name|RegistryManagerImpl
 argument_list|(
 name|offline
 argument_list|,
+operator|new
+name|ClerezzaOntologyProvider
+argument_list|(
+name|tcManager
+argument_list|,
+name|offline
+argument_list|,
+name|parser
+argument_list|)
+argument_list|,
 name|configuration
 argument_list|)
 expr_stmt|;
 comment|// The model should be created by now.
-for|for
-control|(
-name|Library
-name|lib
-range|:
-name|regman
-operator|.
-name|getLibraries
-argument_list|()
-control|)
-block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|lib
-operator|.
-name|getIRI
-argument_list|()
-operator|+
-literal|" : "
-operator|+
-name|lib
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
+comment|//        for (Library lib : regman.getLibraries()) {
+comment|//            System.out.println(lib.getIRI() + " : " + lib.getName());
+comment|//        }
 comment|// IRI id =
 comment|// IRI.create("http://www.ontologydesignpatterns.org/registry/explanation.owl#ExplanationSchemaCatalog");
 comment|// IRI[] locations = new IRI[] {};

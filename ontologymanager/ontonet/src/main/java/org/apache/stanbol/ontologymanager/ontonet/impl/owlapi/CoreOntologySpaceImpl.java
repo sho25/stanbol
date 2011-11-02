@@ -17,7 +17,7 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|owlapi
 package|;
 end_package
 

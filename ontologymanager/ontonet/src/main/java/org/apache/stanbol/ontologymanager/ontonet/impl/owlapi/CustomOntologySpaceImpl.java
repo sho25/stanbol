@@ -17,17 +17,27 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|ontology
+name|owlapi
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|Random
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|CoreOntologySpace
 import|;
 end_import
 
@@ -47,27 +57,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|SessionOntologySpace
+name|CustomOntologySpace
 import|;
 end_import
 
@@ -160,17 +150,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of the session ontology space.  */
+comment|/**  * Default implementation of the custom ontology space.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SessionOntologySpaceImpl
+name|CustomOntologySpaceImpl
 extends|extends
 name|AbstractOntologySpaceImpl
 implements|implements
-name|SessionOntologySpace
+name|CustomOntologySpace
 block|{
 specifier|public
 specifier|static
@@ -180,7 +170,7 @@ name|SUFFIX
 init|=
 name|SpaceType
 operator|.
-name|SESSION
+name|CUSTOM
 operator|.
 name|getIRISuffix
 argument_list|()
@@ -207,25 +197,11 @@ operator|)
 operator|+
 literal|"/"
 operator|+
-name|SpaceType
-operator|.
-name|SESSION
-operator|.
-name|getIRISuffix
-argument_list|()
-operator|+
-literal|"-"
-operator|+
-operator|new
-name|Random
-argument_list|()
-operator|.
-name|nextLong
-argument_list|()
+name|SUFFIX
 return|;
 block|}
 specifier|public
-name|SessionOntologySpaceImpl
+name|CustomOntologySpaceImpl
 parameter_list|(
 name|String
 name|scopeID
@@ -234,10 +210,9 @@ name|IRI
 name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
-name|store
+name|storage
 parameter_list|)
 block|{
-comment|// FIXME : sync session id with session space ID
 name|super
 argument_list|(
 name|buildId
@@ -249,14 +224,14 @@ name|namespace
 argument_list|,
 name|SpaceType
 operator|.
-name|SESSION
+name|CUSTOM
 argument_list|,
-name|store
+name|storage
 argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|SessionOntologySpaceImpl
+name|CustomOntologySpaceImpl
 parameter_list|(
 name|String
 name|scopeID
@@ -265,13 +240,12 @@ name|IRI
 name|namespace
 parameter_list|,
 name|ClerezzaOntologyStorage
-name|store
+name|storage
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
 parameter_list|)
 block|{
-comment|// FIXME : sync session id with session space ID
 name|super
 argument_list|(
 name|buildId
@@ -283,9 +257,9 @@ name|namespace
 argument_list|,
 name|SpaceType
 operator|.
-name|SESSION
+name|CUSTOM
 argument_list|,
-name|store
+name|storage
 argument_list|,
 name|ontologyManager
 argument_list|)
@@ -295,10 +269,10 @@ annotation|@
 name|Override
 specifier|public
 name|void
-name|attachSpace
+name|attachCoreSpace
 parameter_list|(
-name|OntologySpace
-name|space
+name|CoreOntologySpace
+name|coreSpace
 parameter_list|,
 name|boolean
 name|skipRoot
@@ -307,8 +281,7 @@ throws|throws
 name|UnmodifiableOntologyCollectorException
 block|{
 comment|// FIXME re-implement!
-comment|// if (!(space instanceof SessionOntologySpace)) {
-comment|// OWLOntology o = space.getTopOntology();
+comment|// OWLOntology o = coreSpace.getTopOntology();
 comment|// // This does the append thingy
 comment|// log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
 comment|// try {
@@ -319,20 +292,8 @@ comment|// // log.debug("ok");
 comment|// } catch (Exception ex) {
 comment|// log.error("FAILED", ex);
 comment|// }
-comment|// }
 block|}
-annotation|@
-name|Override
-specifier|public
-name|OWLOntologyManager
-name|getOntologyManager
-parameter_list|()
-block|{
-comment|// Session spaces do expose their ontology managers.
-return|return
-name|ontologyManager
-return|;
-block|}
+comment|/**      * Once it is set up, a custom space is write-locked.      */
 annotation|@
 name|Override
 specifier|public
@@ -341,10 +302,9 @@ name|void
 name|setUp
 parameter_list|()
 block|{
-comment|// Once it is set up, a session space is write-enabled.
 name|locked
 operator|=
-literal|false
+literal|true
 expr_stmt|;
 block|}
 annotation|@
@@ -355,7 +315,6 @@ name|void
 name|tearDown
 parameter_list|()
 block|{
-comment|// TODO Do we really unlock?
 name|locked
 operator|=
 literal|false

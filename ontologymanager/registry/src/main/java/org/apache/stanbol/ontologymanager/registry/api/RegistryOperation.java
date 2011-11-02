@@ -20,7 +20,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The possible types of operations that can be performed with registry items.  */
+comment|/**  * The possible types of operations that can be performed with registry items.  *   * @author alexdma  */
 end_comment
 
 begin_enum

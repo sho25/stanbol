@@ -1725,8 +1725,7 @@ argument_list|)
 expr_stmt|;
 comment|// OntologyUtils.printOntology(space.getTopOntology(), System.err);
 block|}
-annotation|@
-name|Test
+comment|//    @Test
 specifier|public
 name|void
 name|testSessionModification

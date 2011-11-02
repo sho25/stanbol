@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An ontology registry can reference zero or more ontology libraries.  */
+comment|/**  * An ontology registry can reference zero or more ontology libraries.  *   * @author alexdma  */
 end_comment
 
 begin_interface

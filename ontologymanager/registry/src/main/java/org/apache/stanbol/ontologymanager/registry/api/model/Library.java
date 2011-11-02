@@ -41,6 +41,26 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|registry
 operator|.
 name|api
@@ -77,22 +97,8 @@ name|OWLOntology
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyManager
-import|;
-end_import
-
 begin_comment
-comment|/**  * An ontology library references one or more ontologies.  */
+comment|/**  * An ontology library references one or more ontologies.  *   * @author alexdma  */
 end_comment
 
 begin_interface
@@ -112,7 +118,10 @@ operator|.
 name|LIBRARY
 decl_stmt|;
 comment|/**      * Returns the OWL ontology manager that this library is using as a cache of its ontologies.      *       * @return the ontology manager that is used as a cache.      */
-name|OWLOntologyManager
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
 name|getCache
 parameter_list|()
 function_decl|;
@@ -126,6 +135,25 @@ parameter_list|()
 throws|throws
 name|RegistryContentException
 function_decl|;
+name|OWLOntology
+name|getOntology
+parameter_list|(
+name|IRI
+name|id
+parameter_list|)
+throws|throws
+name|RegistryContentException
+function_decl|;
+comment|/**      * Returns a string that can be encoded as a IRI/URI/UriRef etc. for retrieving the raw ontology.      *       * @param ontologyId      * @return      */
+name|String
+name|getOntologyReference
+parameter_list|(
+name|IRI
+name|ontologyId
+parameter_list|)
+throws|throws
+name|RegistryContentException
+function_decl|;
 comment|/**      * Determines if the contents of this library have been loaded and are up-to-date.      *       * @return true if the contents are loaded and up-to-date, false otherwise.      */
 name|boolean
 name|isLoaded
@@ -135,15 +163,21 @@ comment|/**      * Causes all the ontologies referenced by this library to be lo
 name|void
 name|loadOntologies
 parameter_list|(
-name|OWLOntologyManager
-name|mgr
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|cache
 parameter_list|)
 function_decl|;
 comment|/**      * Sets the OWL ontology manager that this library will use as a cache of its ontologies. If null, if will      * create its own.      *       * @param cache      *            the ontology manager to be used as a cache.      */
 name|void
 name|setCache
 parameter_list|(
-name|OWLOntologyManager
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
 name|cache
 parameter_list|)
 function_decl|;

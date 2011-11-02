@@ -573,6 +573,26 @@ name|impl
 operator|.
 name|clerezza
 operator|.
+name|ClerezzaOntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|clerezza
+operator|.
 name|ClerezzaUtils
 import|;
 end_import
@@ -1142,7 +1162,15 @@ name|OntologySpaceFactoryImpl
 argument_list|(
 name|reg
 argument_list|,
+operator|new
+name|ClerezzaOntologyProvider
+argument_list|(
 name|tcManager
+argument_list|,
+name|offline
+argument_list|,
+name|parser
+argument_list|)
 argument_list|,
 name|offline
 argument_list|,
@@ -1966,7 +1994,7 @@ argument_list|)
 expr_stmt|;
 comment|// OntologyUtils.printOntology(space.getTopOntology(), System.err);
 block|}
-comment|//    @Test
+comment|// @Test
 specifier|public
 name|void
 name|testSessionModification

@@ -29,6 +29,26 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|registry
 operator|.
 name|api
@@ -186,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of a registry item factory.  */
+comment|/**  * Default implementation of a registry item factory.  *   * @author alexdma  */
 end_comment
 
 begin_class
@@ -196,11 +216,31 @@ name|RegistryItemFactoryImpl
 implements|implements
 name|RegistryItemFactory
 block|{
+specifier|private
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|cache
+decl_stmt|;
 comment|/**      * Creates a new instance of {@link RegistryItemFactoryImpl}.      */
 specifier|public
 name|RegistryItemFactoryImpl
-parameter_list|()
-block|{}
+parameter_list|(
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|provider
+parameter_list|)
+block|{
+name|this
+operator|.
+name|cache
+operator|=
+name|provider
+expr_stmt|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -227,6 +267,8 @@ argument_list|()
 operator|.
 name|getFragment
 argument_list|()
+argument_list|,
+name|cache
 argument_list|)
 return|;
 block|}

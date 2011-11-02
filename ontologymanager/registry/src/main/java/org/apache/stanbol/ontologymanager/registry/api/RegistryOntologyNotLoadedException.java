@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Thrown whenever there is a request for the raw OWL version of a registry ontology which has not been loaded  * yet (e.g. due to lazy loading policies). Developers who catch this exception may, for example, decide to  * load the ontology.<br/>  *<br/>  * Note that this exception is independent from calls to  * {@link RegistryContentListener#registryContentRequested(RegistryItem)}, although it can be expected to be  * thrown thereafter.  */
+comment|/**  * Thrown whenever there is a request for the raw OWL version of a registry ontology which has not been loaded  * yet (e.g. due to lazy loading policies). Developers who catch this exception may, for example, decide to  * load the ontology.<br/>  *<br/>  * Note that this exception is independent from calls to  * {@link RegistryContentListener#registryContentRequested(RegistryItem)}, although it can be expected to be  * thrown thereafter.  *   * @author alexdma  */
 end_comment
 
 begin_class
