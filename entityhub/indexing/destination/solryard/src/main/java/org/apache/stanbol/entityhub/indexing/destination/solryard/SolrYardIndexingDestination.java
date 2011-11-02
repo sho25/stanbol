@@ -171,6 +171,20 @@ name|commons
 operator|.
 name|io
 operator|.
+name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|io
+operator|.
 name|IOUtils
 import|;
 end_import
@@ -2645,10 +2659,15 @@ name|SolrYard
 operator|.
 name|SOLR_SERVER_LOCATION
 argument_list|,
+name|FilenameUtils
+operator|.
+name|getName
+argument_list|(
 name|solrYardConfig
 operator|.
 name|getSolrServerLocation
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//the server type needs not to be set. It is automatically detected by
