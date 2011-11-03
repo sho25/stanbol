@@ -415,32 +415,6 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|// /**
-comment|// * Creates an ontology with the specified IRI and only the import
-comment|// statements
-comment|// * for linking to all the ontologies in the subtrees set. Useful for
-comment|// running
-comment|// * reasoners on an ontology set, as reasoners are instantiated on a single
-comment|// * ontology.
-comment|// *
-comment|// * @param rootIri
-comment|// * @param subtrees
-comment|// * @return
-comment|// */
-comment|// public static OWLOntology buildImportTree(IRI rootIri,
-comment|// Set<OWLOntology> subtrees, OWLOntologyManager mgr) {
-comment|// OWLOntology root = null;
-comment|// try {
-comment|// root = rootIri != null ? mgr.createOntology(rootIri) : mgr
-comment|// .createOntology();
-comment|// } catch (OWLOntologyAlreadyExistsException e) {
-comment|// root = mgr.getOntology(rootIri);
-comment|// } catch (OWLOntologyCreationException e) {
-comment|// e.printStackTrace();
-comment|// return root;
-comment|// }
-comment|// return buildImportTree(root, subtrees, mgr);
-comment|// }
 specifier|public
 specifier|static
 name|OWLOntology

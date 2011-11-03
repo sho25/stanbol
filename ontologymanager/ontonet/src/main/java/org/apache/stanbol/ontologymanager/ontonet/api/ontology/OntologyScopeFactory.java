@@ -53,9 +53,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|io
-operator|.
-name|OntologyInputSource
+name|NamedResource
 import|;
 end_import
 
@@ -63,13 +61,19 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
+name|apache
 operator|.
-name|owlapi
+name|stanbol
 operator|.
-name|model
+name|ontologymanager
 operator|.
-name|IRI
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|OntologyInputSource
 import|;
 end_import
 
@@ -82,6 +86,8 @@ specifier|public
 interface|interface
 name|OntologyScopeFactory
 extends|extends
+name|NamedResource
+extends|,
 name|ScopeEventListenable
 block|{
 comment|/**      * Creates and returns a new ontology scope with the core space ontologies obtained from      *<code>coreSource</code> and the custom space not set.      *       * @param scopeID      *            the desired unique identifier for the ontology scope.      * @param coreSource      *            the input source that provides the top ontology for the core space.      * @return the newly created ontology scope.      * @throws DuplicateIDException      *             if an ontology scope with the given identifier is already<i>registered</i>. The exception      *             is not thrown if another scope with the same ID has been created but not registered.      */
@@ -100,17 +106,6 @@ name|coreSources
 parameter_list|)
 throws|throws
 name|DuplicateIDException
-function_decl|;
-name|IRI
-name|getNamespace
-parameter_list|()
-function_decl|;
-name|void
-name|setNamespace
-parameter_list|(
-name|IRI
-name|namespace
-parameter_list|)
 function_decl|;
 block|}
 end_interface

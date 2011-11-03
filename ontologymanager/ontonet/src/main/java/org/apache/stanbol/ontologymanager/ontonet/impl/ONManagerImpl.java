@@ -425,46 +425,6 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|CoreOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|CustomOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
 name|NoSuchScopeException
 import|;
 end_import
@@ -721,46 +681,6 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|InMemoryOntologyStorage
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
 name|ontology
 operator|.
 name|OntologyIndexImpl
@@ -883,20 +803,6 @@ name|semanticweb
 operator|.
 name|owlapi
 operator|.
-name|apibinding
-operator|.
-name|OWLManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
 name|io
 operator|.
 name|FileDocumentSource
@@ -956,20 +862,6 @@ operator|.
 name|model
 operator|.
 name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLDataFactory
 import|;
 end_import
 
@@ -1399,10 +1291,6 @@ name|OWLOntologyManager
 name|owlCacheManager
 decl_stmt|;
 specifier|private
-name|OWLDataFactory
-name|owlFactory
-decl_stmt|;
-specifier|private
 name|ScopeRegistry
 name|scopeRegistry
 decl_stmt|;
@@ -1410,10 +1298,7 @@ specifier|private
 name|SessionManager
 name|sessionManager
 decl_stmt|;
-specifier|private
-name|ClerezzaOntologyStorage
-name|storage
-decl_stmt|;
+comment|// private ClerezzaOntologyStorage storage;
 annotation|@
 name|Reference
 specifier|private
@@ -1816,13 +1701,6 @@ parameter_list|)
 block|{
 comment|// Ok, go empty
 block|}
-name|owlFactory
-operator|=
-name|OWLManager
-operator|.
-name|getOWLDataFactory
-argument_list|()
-expr_stmt|;
 name|owlCacheManager
 operator|=
 name|OWLOntologyManagerFactory
@@ -1860,15 +1738,7 @@ name|this
 argument_list|)
 expr_stmt|;
 name|bindResources
-argument_list|(
-name|this
-operator|.
-name|tcm
-argument_list|,
-name|this
-operator|.
-name|wtcp
-argument_list|)
+argument_list|()
 expr_stmt|;
 comment|// String tfile = (String) configuration.get(CONFIG_FILE_PATH);
 comment|// if (tfile != null) this.configPath = tfile;
@@ -2153,48 +2023,8 @@ block|}
 specifier|protected
 name|void
 name|bindResources
-parameter_list|(
-name|TcManager
-name|tcm
-parameter_list|,
-name|WeightedTcProvider
-name|wtcp
-parameter_list|)
+parameter_list|()
 block|{
-comment|// At this stage we know if tcm and wtcp have been provided or not.
-comment|/*          * With the current implementation of OntologyStorage, we cannot live with either component being          * null. So create the object only if both are not null.          */
-if|if
-condition|(
-name|tcm
-operator|!=
-literal|null
-operator|&&
-name|wtcp
-operator|!=
-literal|null
-condition|)
-name|storage
-operator|=
-operator|new
-name|ClerezzaOntologyStorage
-argument_list|(
-name|tcm
-argument_list|,
-name|wtcp
-argument_list|)
-expr_stmt|;
-comment|// Manage this in-memory, so it won't have to be null.
-else|else
-block|{
-name|storage
-operator|=
-operator|new
-name|InMemoryOntologyStorage
-argument_list|()
-expr_stmt|;
-block|}
-comment|// Now create everything that depends on the Storage object.
-comment|// These may require the OWL cache manager
 if|if
 condition|(
 name|ontologyProvider
@@ -2252,8 +2082,6 @@ name|OntologySpaceFactoryImpl
 argument_list|(
 name|scopeRegistry
 argument_list|,
-name|storage
-argument_list|,
 name|offline
 argument_list|,
 name|IRI
@@ -2290,11 +2118,6 @@ argument_list|(
 name|oIndex
 argument_list|)
 expr_stmt|;
-comment|// // This requires the OWL cache manager
-comment|// registryLoader = new RegistryLoaderImpl(this);
-comment|// TODO : assign dynamically in case the FISE persistence store is not
-comment|// available.
-comment|// storage = new FISEPersistenceStorage();
 name|sessionManager
 operator|=
 operator|new
@@ -2309,8 +2132,6 @@ argument_list|)
 argument_list|,
 name|getScopeRegistry
 argument_list|()
-argument_list|,
-name|storage
 argument_list|)
 expr_stmt|;
 name|sessionManager
@@ -2527,7 +2348,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: failed to import ontology "
+literal|"Failed to import ontology "
 operator|+
 name|cores
 index|[
@@ -2539,27 +2360,8 @@ argument_list|)
 expr_stmt|;
 continue|continue;
 block|}
-comment|// TODO: this call should be automatic
-operator|(
-operator|(
-name|CustomOntologySpace
-operator|)
-name|sc
-operator|.
-name|getCustomSpace
-argument_list|()
-operator|)
-operator|.
-name|attachCoreSpace
-argument_list|(
-operator|(
-name|CoreOntologySpace
-operator|)
-name|corespc
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
+comment|// ((CustomOntologySpace) sc.getCustomSpace()).attachCoreSpace((CoreOntologySpace)
+comment|// corespc, false);
 block|}
 name|sc
 operator|.
@@ -2767,18 +2569,6 @@ operator|=
 name|mode
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getID
-parameter_list|()
-block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
-block|}
 specifier|public
 name|OntologyIndex
 name|getOntologyIndex
@@ -2830,15 +2620,10 @@ return|return
 name|ontologySpaceFactory
 return|;
 block|}
-specifier|public
-name|ClerezzaOntologyStorage
-name|getOntologyStore
-parameter_list|()
-block|{
-return|return
-name|storage
-return|;
-block|}
+comment|// public ClerezzaOntologyStorage getOntologyStore() {
+comment|// // return storage;
+comment|// return null;
+comment|// }
 specifier|public
 name|OWLOntologyManager
 name|getOwlCacheManager
@@ -2847,16 +2632,6 @@ block|{
 comment|// return OWLManager.createOWLOntologyManager();
 return|return
 name|owlCacheManager
-return|;
-block|}
-comment|/**      * Returns a factory object that can be used for obtaining OWL API objects.      *       * @return the default OWL data factory      */
-specifier|public
-name|OWLDataFactory
-name|getOwlFactory
-parameter_list|()
-block|{
-return|return
-name|owlFactory
 return|;
 block|}
 specifier|public

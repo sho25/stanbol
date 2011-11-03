@@ -115,26 +115,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -160,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of the session ontology space.  */
+comment|/**  * Default implementation of the session ontology space.  *   * @deprecated obsolete, as is its implemented type {@link SessionOntologySpace}.  */
 end_comment
 
 begin_class
@@ -232,9 +212,7 @@ name|scopeID
 parameter_list|,
 name|IRI
 name|namespace
-parameter_list|,
-name|ClerezzaOntologyStorage
-name|store
+comment|// , ClerezzaOntologyStorage store
 parameter_list|)
 block|{
 comment|// FIXME : sync session id with session space ID
@@ -250,8 +228,7 @@ argument_list|,
 name|SpaceType
 operator|.
 name|SESSION
-argument_list|,
-name|store
+comment|/* , store */
 argument_list|)
 expr_stmt|;
 block|}
@@ -264,9 +241,7 @@ parameter_list|,
 name|IRI
 name|namespace
 parameter_list|,
-name|ClerezzaOntologyStorage
-name|store
-parameter_list|,
+comment|// ClerezzaOntologyStorage store,
 name|OWLOntologyManager
 name|ontologyManager
 parameter_list|)
@@ -285,8 +260,7 @@ name|SpaceType
 operator|.
 name|SESSION
 argument_list|,
-name|store
-argument_list|,
+comment|/* store, */
 name|ontologyManager
 argument_list|)
 expr_stmt|;

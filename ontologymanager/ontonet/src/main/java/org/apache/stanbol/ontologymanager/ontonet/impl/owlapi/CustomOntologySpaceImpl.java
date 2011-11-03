@@ -105,26 +105,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -150,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of the custom ontology space.  */
+comment|/**  * Default implementation of the custom ontology space.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -208,9 +188,6 @@ name|scopeID
 parameter_list|,
 name|IRI
 name|namespace
-parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
 parameter_list|)
 block|{
 name|super
@@ -225,8 +202,6 @@ argument_list|,
 name|SpaceType
 operator|.
 name|CUSTOM
-argument_list|,
-name|storage
 argument_list|)
 expr_stmt|;
 block|}
@@ -238,9 +213,6 @@ name|scopeID
 parameter_list|,
 name|IRI
 name|namespace
-parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -258,8 +230,6 @@ argument_list|,
 name|SpaceType
 operator|.
 name|CUSTOM
-argument_list|,
-name|storage
 argument_list|,
 name|ontologyManager
 argument_list|)
@@ -280,7 +250,6 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologyCollectorException
 block|{
-comment|// FIXME re-implement!
 comment|// OWLOntology o = coreSpace.getTopOntology();
 comment|// // This does the append thingy
 comment|// log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
@@ -307,6 +276,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+comment|/**      * Once it is torn down, a custom space is write-unlocked.      */
 annotation|@
 name|Override
 specifier|public

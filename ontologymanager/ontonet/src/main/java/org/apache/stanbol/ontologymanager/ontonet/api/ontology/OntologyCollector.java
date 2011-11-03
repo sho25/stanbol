@@ -55,6 +55,24 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|NamedResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|io
 operator|.
 name|OntologyInputSource
@@ -98,6 +116,8 @@ specifier|public
 interface|interface
 name|OntologyCollector
 extends|extends
+name|NamedResource
+extends|,
 name|OntologyInputSourceHandler
 block|{
 comment|/**      * Registers a new listener for changes in this ontology space. Has no effect if the same listener is      * already registered with this ontology space.      *       * @param listener      *            the ontology space listener to be added.      */
@@ -124,11 +144,6 @@ function_decl|;
 comment|/**      * Removes all ontology space listeners registered with this space.      */
 name|void
 name|clearListeners
-parameter_list|()
-function_decl|;
-comment|/**      * Returns a Unique Resource Identifier (URI) that identifies this ontology space. For instance, this URI      * could be the parent of (some/most of) the base URIs for the ontologies within this space.<br/>      *<br/>      * A possible way to construct these IDs is by concatenating<code>/{spacetype}</code> (e.g.      *<code>/custom</code>) to the scope IRI. However, this is implementation-dependent.      *       * @return the URI that identifies this ontology space      */
-name|String
-name|getID
 parameter_list|()
 function_decl|;
 comment|/**      * Returns all the listeners registered with this ontology space. Whether the collection reflects or not      * the order in which they were registered depends on the implementation.      *       * @return the registered ontology space listeners.      */

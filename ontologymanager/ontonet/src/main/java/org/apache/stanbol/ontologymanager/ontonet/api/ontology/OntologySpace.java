@@ -53,17 +53,6 @@ name|OWLOntology
 name|asOWLOntology
 parameter_list|()
 function_decl|;
-name|boolean
-name|isSilentMissingOntologyHandling
-parameter_list|()
-function_decl|;
-name|void
-name|setSilentMissingOntologyHandling
-parameter_list|(
-name|boolean
-name|silent
-parameter_list|)
-function_decl|;
 block|}
 end_interface
 

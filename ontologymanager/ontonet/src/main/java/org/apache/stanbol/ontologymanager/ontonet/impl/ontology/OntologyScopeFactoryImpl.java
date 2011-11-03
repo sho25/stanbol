@@ -364,11 +364,6 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|// @Override
-comment|// public OntologyScope createOntologyScope(String scopeID, OntologyInputSource coreSource) throws
-comment|// DuplicateIDException {
-comment|// return createOntologyScope(scopeID, coreSource, null);
-comment|// }
 annotation|@
 name|Override
 specifier|public
@@ -379,6 +374,9 @@ name|String
 name|scopeID
 parameter_list|,
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|coreSources
 parameter_list|)
@@ -458,6 +456,33 @@ block|}
 annotation|@
 name|Override
 specifier|public
+name|String
+name|getID
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|IRI
+name|getNamespace
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|namespace
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
 name|Collection
 argument_list|<
 name|ScopeEventListener
@@ -486,19 +511,6 @@ argument_list|(
 name|listener
 argument_list|)
 expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|IRI
-name|getNamespace
-parameter_list|()
-block|{
-return|return
-name|this
-operator|.
-name|namespace
-return|;
 block|}
 annotation|@
 name|Override

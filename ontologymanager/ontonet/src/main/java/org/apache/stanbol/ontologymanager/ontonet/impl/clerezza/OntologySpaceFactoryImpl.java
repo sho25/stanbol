@@ -740,6 +740,20 @@ operator|=
 name|namespace
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getID
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

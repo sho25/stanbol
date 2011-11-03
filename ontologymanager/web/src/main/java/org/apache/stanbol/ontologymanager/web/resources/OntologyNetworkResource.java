@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -175,6 +175,24 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|TcManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|commons
@@ -299,26 +317,6 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
 name|renderers
 operator|.
 name|ScopeSetRenderer
@@ -418,8 +416,8 @@ name|ServletContext
 name|servletContext
 decl_stmt|;
 specifier|protected
-name|ClerezzaOntologyStorage
-name|storage
+name|TcManager
+name|tcManager
 decl_stmt|;
 specifier|public
 name|OntologyNetworkResource
@@ -456,16 +454,16 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|storage
+name|tcManager
 operator|=
 operator|(
-name|ClerezzaOntologyStorage
+name|TcManager
 operator|)
 name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ClerezzaOntologyStorage
+name|TcManager
 operator|.
 name|class
 argument_list|,
@@ -509,14 +507,6 @@ argument_list|)
 expr_stmt|;
 comment|// ...then clear the store.
 comment|// TODO : the other way around?
-name|onm
-operator|.
-name|getOntologyStore
-argument_list|()
-operator|.
-name|clear
-argument_list|()
-expr_stmt|;
 block|}
 comment|/**      * Default GET method for obtaining the set of (both active and, optionally, inactive) ontology scopes      * currently registered with this instance of KReS.      *       * @param inactive      *            if true, both active and inactive scopes will be included. Default is false.      * @param headers      *            the HTTP headers, supplied by the REST call.      * @param servletContext      *            the servlet context, supplied by the REST call.      * @return a string representation of the requested scope set, in a format acceptable by the client.      */
 annotation|@

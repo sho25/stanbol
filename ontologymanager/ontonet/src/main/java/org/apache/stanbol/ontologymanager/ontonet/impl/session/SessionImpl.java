@@ -389,7 +389,6 @@ name|ACTIVE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionListenable#addSessionListener      * (eu.iksproject.kres.api.manager.session.SessionListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -408,7 +407,6 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @seeeu.iksproject.kres.api.manager.session.SessionListenable# clearSessionListeners()      */
 annotation|@
 name|Override
 specifier|public
@@ -422,7 +420,6 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#close()      */
 annotation|@
 name|Override
 specifier|public
@@ -443,7 +440,6 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#getID()      */
 annotation|@
 name|Override
 specifier|public
@@ -458,7 +454,6 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionListenable#getSessionListeners ()      */
 annotation|@
 name|Override
 specifier|public
@@ -473,7 +468,6 @@ return|return
 name|listeners
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#getSessionState()      */
 annotation|@
 name|Override
 specifier|public
@@ -485,7 +479,6 @@ return|return
 name|state
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#isActive()      */
 annotation|@
 name|Override
 specifier|public
@@ -519,7 +512,6 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.Session#setActive(boolean)      */
 annotation|@
 name|Override
 specifier|public
@@ -564,7 +556,6 @@ name|getSessionState
 argument_list|()
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see java.lang.Object#toString()      */
 annotation|@
 name|Override
 specifier|public

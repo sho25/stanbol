@@ -63,6 +63,24 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|access
+operator|.
+name|TcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|serializedform
 operator|.
 name|UnsupportedFormatException
@@ -83,8 +101,22 @@ name|IRI
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyManager
+import|;
+end_import
+
 begin_comment
-comment|/**  * A system responsible for maintaining registry ontologies. Depending on the implementation, it can be  * volatile or persistent, centralised or distributed.  *   * @author alexdma  *   * @param<S>  *            the storage system actually used by this provider.  */
+comment|/**  * A system responsible for maintaining registry ontologies. Depending on the implementation, it can be  * volatile or persistent, centralised or distributed.<br>  *<br>  * TODO see if full CRUD operation support is necessary.  *   * @author alexdma  *   * @param<S>  *            the storage system actually used by this provider.  */
 end_comment
 
 begin_interface
@@ -116,12 +148,12 @@ argument_list|>
 name|getOntologyReferences
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the storage system used by this ontology provider.      *       * @return the ontology store.      */
+comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
 name|S
 name|getStore
 parameter_list|()
 function_decl|;
-comment|/**      *       * @param identifier      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} will be thrown.      * @return      */
+comment|/**      *       * @param identifier      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @return      */
 name|Object
 name|getStoredOntology
 parameter_list|(
@@ -144,6 +176,7 @@ index|[]
 name|getSupportedReturnTypes
 parameter_list|()
 function_decl|;
+comment|/**      * Retrieves an ontology by reading its content from a data stream and stores it using the storage system      * attached to this provider. A key that can be used to identify the ontology in this provider is returned      * if successful.      *       * @param data      *            the ontology content.      * @param formatIdentifier      *            the MIME type of the expected serialization format of this ontology. If null, all supported      *            formats will be tried until all parsers fail or one succeeds.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If some remote import is found, the import policy is aggressive and Stanbol is      *            set on offline mode, this method will fail.      * @return a key that can be used to retrieve the stored ontology afterwards, or null if loading/storage      *         failed.      * @throws IOException      *             if all attempts to load the ontology failed.      * @throws UnsupportedFormatException      *             if no parsers are able to parse the supplied format (or the actual file format).      */
 name|String
 name|loadInStore
 parameter_list|(
@@ -161,6 +194,7 @@ name|IOException
 throws|,
 name|UnsupportedFormatException
 function_decl|;
+comment|/**      * Retrieves an ontology physically located at<code>location</code> (unless mapped otherwise by the      * offline configuration) and stores it using the storage system attached to this provider. A key that can      * be used to identify the ontology in this provider is returned if successful.      *       * @param location      *            the physical IRI where the ontology is located.      * @param formatIdentifier      *            the MIME type of the expected serialization format of this ontology. If null, all supported      *            formats will be tried until all parsers fail or one succeeds.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If the IRI is not local and Stanbol is set on offline mode, this method will      *            fail.      * @return a key that can be used to retrieve the stored ontology afterwards, or null if loading/storage      *         failed.      * @throws IOException      *             if all attempts to load the ontology failed.      * @throws UnsupportedFormatException      *             if no parsers are able to parse the supplied format (or the actual file format).      */
 name|String
 name|loadInStore
 parameter_list|(

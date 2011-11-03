@@ -333,6 +333,26 @@ name|api
 operator|.
 name|ontology
 operator|.
+name|OntologyCollectorModificationException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
 name|OntologyScope
 import|;
 end_import
@@ -373,47 +393,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologyCollectorModificationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
 name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
 import|;
 end_import
 
@@ -656,10 +636,6 @@ specifier|protected
 name|ONManager
 name|onm
 decl_stmt|;
-specifier|protected
-name|ClerezzaOntologyStorage
-name|storage
-decl_stmt|;
 specifier|public
 name|ScopeOntologyResource
 parameter_list|(
@@ -687,24 +663,6 @@ operator|.
 name|getServiceFromContext
 argument_list|(
 name|ONManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|storage
-operator|=
-operator|(
-name|ClerezzaOntologyStorage
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|ClerezzaOntologyStorage
 operator|.
 name|class
 argument_list|,
@@ -999,8 +957,8 @@ operator|.
 name|build
 argument_list|()
 return|;
-comment|//            } else if (scope.getSessionSpace(IRI.create(temp)) != null) {
-comment|//                return Response.ok(scope.getSessionSpace(IRI.create(temp)).asOWLOntology()).build();
+comment|// } else if (scope.getSessionSpace(IRI.create(temp)) != null) {
+comment|// return Response.ok(scope.getSessionSpace(IRI.create(temp)).asOWLOntology()).build();
 block|}
 comment|/*              * BEGIN debug code, uncomment only for local testing OWLOntology test = null, top = null; test =              * scope.getCustomSpace().getOntology(ontiri); System.out.println("Ontology " + ontiri); for              * (OWLImportsDeclaration imp : test.getImportsDeclarations()) System.out.println("\timports " +              * imp.getIRI()); top = scope.getCoreSpace().getTopOntology();              * System.out.println("Core root for scope " + scopeid); for (OWLImportsDeclaration imp :              * top.getImportsDeclarations()) System.out.println("\timports " + imp.getIRI()); END debug code              */
 name|OWLOntology
@@ -1146,7 +1104,7 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
-comment|//                        scope.getSessionSpace(ontiri).getOntologies(true);
+comment|// scope.getSessionSpace(ontiri).getOntologies(true);
 name|OWLOntologySetProvider
 name|provider
 init|=

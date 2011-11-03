@@ -124,7 +124,7 @@ name|String
 name|sessionID
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the ontology space associated with this session.      *       * @return the session space      */
+comment|/**      * Returns the ontology space associated with this session.      *       * @deprecated as session spaces are obsolete, so is this method.      *       * @return the session space      */
 name|Set
 argument_list|<
 name|SessionOntologySpace

@@ -269,26 +269,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|owl
 operator|.
 name|util
@@ -603,16 +583,6 @@ name|OWLOntologyManager
 name|ontologyManager
 decl_stmt|;
 specifier|protected
-name|boolean
-name|silent
-init|=
-literal|false
-decl_stmt|;
-specifier|protected
-name|ClerezzaOntologyStorage
-name|storage
-decl_stmt|;
-specifier|protected
 name|Set
 argument_list|<
 name|Class
@@ -637,9 +607,6 @@ name|namespace
 parameter_list|,
 name|SpaceType
 name|type
-parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
 parameter_list|)
 block|{
 name|this
@@ -649,8 +616,6 @@ argument_list|,
 name|namespace
 argument_list|,
 name|type
-argument_list|,
-name|storage
 argument_list|,
 name|OWLManager
 operator|.
@@ -671,9 +636,6 @@ name|namespace
 parameter_list|,
 name|SpaceType
 name|type
-parameter_list|,
-name|ClerezzaOntologyStorage
-name|storage
 parameter_list|,
 name|OWLOntologyManager
 name|ontologyManager
@@ -716,12 +678,7 @@ name|type
 operator|=
 name|type
 expr_stmt|;
-name|this
-operator|.
-name|storage
-operator|=
-name|storage
-expr_stmt|;
+comment|// this.storage = storage;
 if|if
 condition|(
 name|ontologyManager
@@ -950,6 +907,17 @@ name|boolean
 name|merge
 parameter_list|)
 block|{
+if|if
+condition|(
+name|merge
+condition|)
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Ontology merging not implemented yet. Please set merge parameter to false."
+argument_list|)
+throw|;
 name|OWLOntology
 name|root
 decl_stmt|;
@@ -1266,14 +1234,10 @@ name|listener
 operator|.
 name|onOntologyAdded
 argument_list|(
-name|IRI
+name|this
 operator|.
-name|create
-argument_list|(
-name|namespace
-operator|+
-name|_id
-argument_list|)
+name|getID
+argument_list|()
 argument_list|,
 name|ontologyIri
 argument_list|)
@@ -1299,14 +1263,10 @@ name|listener
 operator|.
 name|onOntologyRemoved
 argument_list|(
-name|IRI
+name|this
 operator|.
-name|create
-argument_list|(
-name|namespace
-operator|+
-name|_id
-argument_list|)
+name|getID
+argument_list|()
 argument_list|,
 name|ontologyIri
 argument_list|)
@@ -1484,17 +1444,6 @@ return|return
 name|locked
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|isSilentMissingOntologyHandling
-parameter_list|()
-block|{
-return|return
-name|silent
-return|;
-block|}
 specifier|private
 name|void
 name|performAdd
@@ -1570,32 +1519,13 @@ name|SessionOntologySpace
 operator|)
 condition|)
 block|{
-if|if
-condition|(
-name|storage
-operator|==
-literal|null
-condition|)
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"No ontology storage found. Ontology {} will be stored in-memory only."
-argument_list|,
-name|ontology
-argument_list|)
-expr_stmt|;
-else|else
-block|{
-comment|// storage = new ClerezzaOntologyStorage(tcManager, wtcProvider)
-name|storage
-operator|.
-name|store
-argument_list|(
-name|ontology
-argument_list|)
-expr_stmt|;
-block|}
+comment|// No longer storing in OWLAPI implementation!
+comment|// if (storage == null) log.warn(
+comment|// "No ontology storage found. Ontology {} will be stored in-memory only.", ontology);
+comment|// else {
+comment|// // storage = new ClerezzaOntologyStorage(tcManager, wtcProvider)
+comment|// storage.store(ontology);
+comment|// }
 block|}
 comment|// ONManager.get().getOntologyStore().load(rootOntology.getOntologyID().getOntologyIRI());
 block|}
@@ -2586,23 +2516,6 @@ operator|.
 name|namespace
 operator|=
 name|namespace
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|setSilentMissingOntologyHandling
-parameter_list|(
-name|boolean
-name|silent
-parameter_list|)
-block|{
-name|this
-operator|.
-name|silent
-operator|=
-name|silent
 expr_stmt|;
 block|}
 block|}

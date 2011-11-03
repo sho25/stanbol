@@ -206,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * OWLAPI-based (in-memory) ontology cache implementation.  *   * @author alexdma  *   */
+comment|/**  * OWLAPI-based (in-memory) ontology cache implementation.  *   * TODO re-introduce SCR annotations, just avoid loading the component  *   * @author alexdma  *   */
 end_comment
 
 begin_comment

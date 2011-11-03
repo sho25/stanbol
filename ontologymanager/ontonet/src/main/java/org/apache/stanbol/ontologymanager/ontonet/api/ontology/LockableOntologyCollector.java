@@ -21,6 +21,10 @@ name|ontology
 package|;
 end_package
 
+begin_comment
+comment|/**  * An ontology collector that supports locking mechanisms, thus allowing/preventing modifications of the  * ontologies contained therein. Lock management is assumed to occur in methods inherited from  * {@link OntologyCollector}.<br>  *   * TODO add public lock handling methods as well?  *   * @author alexdma  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface

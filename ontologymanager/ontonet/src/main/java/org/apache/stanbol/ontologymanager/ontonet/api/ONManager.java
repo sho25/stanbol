@@ -65,6 +65,26 @@ name|api
 operator|.
 name|ontology
 operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
 name|OntologyScopeFactory
 import|;
 end_import
@@ -137,15 +157,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
+name|owl
 operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|io
-operator|.
-name|ClerezzaOntologyStorage
+name|OWLOntologyManagerFactory
 import|;
 end_import
 
@@ -159,7 +173,7 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLDataFactory
+name|IRI
 import|;
 end_import
 
@@ -192,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.  */
+comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.  *   * @author alexdma, anuzzolese  *   */
 end_comment
 
 begin_interface
@@ -218,11 +232,6 @@ name|ONTOLOGY_NETWORK_NS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.ns"
 decl_stmt|;
-comment|/**      * Returns the ID of the ontology network manager.      *       * @return the ID of the ontology network manager.      */
-name|String
-name|getID
-parameter_list|()
-function_decl|;
 comment|/**      * Returns the offline configuration set for this ontology network manager, if any.      *       * @return the offline configuration, or null if none was set.      */
 name|OfflineConfiguration
 name|getOfflineConfiguration
@@ -253,19 +262,9 @@ name|OntologySpaceFactory
 name|getOntologySpaceFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the default ontology storage system for this KReS instance.      *       * @return the default ontology store.      */
-name|ClerezzaOntologyStorage
-name|getOntologyStore
-parameter_list|()
-function_decl|;
-comment|/**      * Returns an OWL Ontology Manager that is never cleared of its ontologies, so it can be used for caching      * ontologies without having to reload them using other managers. It is sufficient to catch      * {@link OWLOntologyAlreadyExistsException}s and obtain the ontology with that same ID from this manager.      *       * @return the OWL Ontology Manager used for caching ontologies.      */
+comment|/**      * Returns an OWL Ontology Manager that is never cleared of its ontologies, so it can be used for caching      * ontologies without having to reload them using other managers. It is sufficient to catch      * {@link OWLOntologyAlreadyExistsException}s and obtain the ontology with that same ID from this manager.      *       * @deprecated the ONManager will soon stop providing a cache manager, as it will gradually be replaced by      *             {@link OntologyProvider}. Implementations that need to use an OWLOntologyManager which      *             avoids reloading stored ontologies can either call {@link OntologyProvider#getStore()} on      *             an {@link OWLOntologyManager}-based implementation, or create a new one by calling      *             {@link OWLOntologyManagerFactory#createOWLOntologyManager(IRI[])} or OWL API methods.      * @return the OWL Ontology Manager used for caching ontologies.      */
 name|OWLOntologyManager
 name|getOwlCacheManager
-parameter_list|()
-function_decl|;
-comment|/**      * Returns a factory object that can be used for obtaining OWL API objects.      *       * @return the default OWL data factory      */
-name|OWLDataFactory
-name|getOwlFactory
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the unique ontology scope registry for this context.      *       * @return the ontology scope registry.      */
@@ -273,7 +272,7 @@ name|ScopeRegistry
 name|getScopeRegistry
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the unique KReS session manager for this context.      *       * @return the KreS session manager.      */
+comment|/**      * Returns the unique session manager for this context.      *       * @return the session manager.      */
 name|SessionManager
 name|getSessionManager
 parameter_list|()

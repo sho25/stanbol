@@ -2613,9 +2613,9 @@ block|{
 name|OWLDataFactory
 name|factory
 init|=
-name|onManager
+name|OWLManager
 operator|.
-name|getOwlFactory
+name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
 name|OWLIndividual
@@ -3014,9 +3014,9 @@ decl_stmt|;
 name|OWLDataFactory
 name|factory
 init|=
-name|onManager
+name|OWLManager
 operator|.
-name|getOwlFactory
+name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
 name|OWLClass

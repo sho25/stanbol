@@ -774,6 +774,17 @@ name|boolean
 name|merge
 parameter_list|)
 block|{
+if|if
+condition|(
+name|merge
+condition|)
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Ontology merging not implemented yet. Please set merge parameter to false."
+argument_list|)
+throw|;
 comment|// Create an ontology manager on the fly. We don't really need a permanent one.
 name|OWLOntologyManager
 name|mgr
@@ -1160,8 +1171,8 @@ specifier|public
 name|void
 name|onOntologyAdded
 parameter_list|(
-name|IRI
-name|spaceId
+name|String
+name|collectorId
 parameter_list|,
 name|IRI
 name|addedOntology
@@ -1180,8 +1191,8 @@ specifier|public
 name|void
 name|onOntologyRemoved
 parameter_list|(
-name|IRI
-name|spaceId
+name|String
+name|collectorId
 parameter_list|,
 name|IRI
 name|removedOntology
@@ -1285,19 +1296,7 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|customSpace
-operator|.
-name|attachCoreSpace
-argument_list|(
-name|this
-operator|.
-name|coreSpace
-argument_list|,
-literal|true
-argument_list|)
-expr_stmt|;
+comment|// this.customSpace.attachCoreSpace(this.coreSpace, true);
 block|}
 block|}
 specifier|protected

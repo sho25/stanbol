@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides the configuration needed for the {@link ONManager}. A configuration should only be handled  * internally by the {@link ONManager} implementation.  */
+comment|/**  * Provides the configuration needed for the {@link ONManager}. A configuration should only be handled  * internally by the {@link ONManager} implementation.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

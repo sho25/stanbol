@@ -35,9 +35,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|io
-operator|.
-name|OntologyInputSource
+name|NamedResource
 import|;
 end_import
 
@@ -45,13 +43,19 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
+name|apache
 operator|.
-name|owlapi
+name|stanbol
 operator|.
-name|model
+name|ontologymanager
 operator|.
-name|IRI
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|OntologyInputSource
 import|;
 end_import
 
@@ -63,6 +67,8 @@ begin_interface
 specifier|public
 interface|interface
 name|OntologySpaceFactory
+extends|extends
+name|NamedResource
 block|{
 comment|/**      * Creates and sets up a default core ontology space. Equivalent to calling      *<code>createOntologySpace(IRI, SpaceTypes.CORE, OntologyInputSource...)</code>.      *       * @param scopeId      *            the unique identifier of the ontology scope that will reference this space. It can be used      *            for generating the identifier for this ontology space.      * @param coreSources      *            the sources of the optional ontologies to be immediately loaded upon space creation.      * @return the generated ontology space.      */
 name|CoreOntologySpace
@@ -125,17 +131,6 @@ name|?
 argument_list|>
 modifier|...
 name|sessionSources
-parameter_list|)
-function_decl|;
-name|IRI
-name|getNamespace
-parameter_list|()
-function_decl|;
-name|void
-name|setNamespace
-parameter_list|(
-name|IRI
-name|namespace
 parameter_list|)
 function_decl|;
 block|}

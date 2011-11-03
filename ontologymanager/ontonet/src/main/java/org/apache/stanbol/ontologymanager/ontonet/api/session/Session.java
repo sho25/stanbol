@@ -127,21 +127,7 @@ name|scope
 parameter_list|)
 function_decl|;
 name|void
-name|detachScope
-parameter_list|(
-name|String
-name|scopeId
-parameter_list|)
-function_decl|;
-name|void
 name|clearScopes
-parameter_list|()
-function_decl|;
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|getAttachedScopes
 parameter_list|()
 function_decl|;
 comment|/**      * Closes this Session irreversibly. Most likely includes setting the state to ZOMBIE.      */
@@ -150,6 +136,20 @@ name|close
 parameter_list|()
 throws|throws
 name|NonReferenceableSessionException
+function_decl|;
+name|void
+name|detachScope
+parameter_list|(
+name|String
+name|scopeId
+parameter_list|)
+function_decl|;
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getAttachedScopes
+parameter_list|()
 function_decl|;
 comment|/**      * Returns the unique Internationalized Resource Identifier (IRI) that identifies this KReS session.<br>      *<br>      * NOTE: There is no set method for the session ID as it is assumed to be set in its constructor once and      * for all.      *       * @return the IRI that identifies this session      */
 name|String

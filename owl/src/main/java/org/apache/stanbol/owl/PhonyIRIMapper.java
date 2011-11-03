@@ -63,6 +63,10 @@ name|OWLOntologyIRIMapper
 import|;
 end_import
 
+begin_comment
+comment|/**  * An ontology IRI mapper that can be used to trick an OWLOntologyManager into believing all imports are  * loaded except for those indicated in the exclusions set. It can be used when imported ontologies have to be  * provided in other ways than by dereferencing URLs, for example when we want to load the same ontology from  * a triple store programmatically.  *   * @author alexdma  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -75,7 +79,7 @@ name|Set
 argument_list|<
 name|IRI
 argument_list|>
-name|notMapped
+name|exclusions
 decl_stmt|;
 specifier|private
 name|IRI
@@ -89,6 +93,7 @@ name|blankResourcePath
 init|=
 literal|"/ontologies/blank.owl"
 decl_stmt|;
+comment|/**      *       * @param notMapped      *            the set of IRIs that will not be mapped by this object, so that the ontology manager will      *            only try to load from these IRIs, unless another attached IRI mapper specifies otherwise.      */
 specifier|public
 name|PhonyIRIMapper
 parameter_list|(
@@ -96,14 +101,14 @@ name|Set
 argument_list|<
 name|IRI
 argument_list|>
-name|notMapped
+name|exclusions
 parameter_list|)
 block|{
 name|this
 operator|.
-name|notMapped
+name|exclusions
 operator|=
-name|notMapped
+name|exclusions
 expr_stmt|;
 try|try
 block|{
@@ -146,7 +151,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|notMapped
+name|exclusions
 operator|.
 name|contains
 argument_list|(

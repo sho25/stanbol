@@ -229,7 +229,7 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologyCollectorException
 block|{
-comment|// TODO Auto-generated method stub
+comment|// TODO deprecated, remove asap.
 block|}
 comment|/**      * Once it is set up, a custom space is write-locked.      */
 annotation|@
