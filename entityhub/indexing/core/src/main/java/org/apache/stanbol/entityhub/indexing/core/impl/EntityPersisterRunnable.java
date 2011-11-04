@@ -688,6 +688,10 @@ name|errorMsg
 operator|=
 literal|"Unable to store Entity %s to Yard %s because of an YardException"
 expr_stmt|;
+name|yardException
+operator|=
+name|e
+expr_stmt|;
 block|}
 comment|//the remaining Items in to store have some errors
 for|for
