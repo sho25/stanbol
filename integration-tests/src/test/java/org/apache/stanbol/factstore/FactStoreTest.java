@@ -1559,7 +1559,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"PERSON\":\"http://upb.de/persons/bnagel\"}"
+literal|"{\"person\":\"http://upb.de/persons/bnagel\"}"
 decl_stmt|;
 name|String
 name|actual

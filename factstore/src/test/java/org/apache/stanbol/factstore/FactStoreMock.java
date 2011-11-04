@@ -243,6 +243,26 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Fact
+name|getFact
+parameter_list|(
+name|int
+name|factId
+parameter_list|,
+name|String
+name|factSchemaURN
+parameter_list|)
+throws|throws
+name|Exception
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
 block|}
 end_class
 
