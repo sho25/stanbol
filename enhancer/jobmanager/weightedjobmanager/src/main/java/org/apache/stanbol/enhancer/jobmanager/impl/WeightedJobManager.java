@@ -176,7 +176,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|InMemoryJobManager
+name|WeightedJobManager
 implements|implements
 name|EnhancementJobManager
 block|{
@@ -190,7 +190,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|InMemoryJobManager
+name|WeightedJobManager
 operator|.
 name|class
 argument_list|)
@@ -393,6 +393,28 @@ argument_list|()
 operator|-
 name|start
 operator|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|enhanceContent
+parameter_list|(
+name|ContentItem
+name|ci
+parameter_list|,
+name|String
+name|chain
+parameter_list|)
+throws|throws
+name|EngineException
+block|{
+comment|//This implementation don't take "chain" in account.
+name|enhanceContent
+argument_list|(
+name|ci
 argument_list|)
 expr_stmt|;
 block|}
