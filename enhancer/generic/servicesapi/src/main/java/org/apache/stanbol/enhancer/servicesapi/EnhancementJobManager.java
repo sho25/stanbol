@@ -46,6 +46,19 @@ parameter_list|)
 throws|throws
 name|EngineException
 function_decl|;
+comment|/**      *       * @param ci : ContentItem to be enhanced      * @param chain : enhancement chain Name      * @throws EngineException : if the enhancement process failed      */
+name|void
+name|enhanceContent
+parameter_list|(
+name|ContentItem
+name|ci
+parameter_list|,
+name|String
+name|chain
+parameter_list|)
+throws|throws
+name|EngineException
+function_decl|;
 comment|/**      * Return the unmodifiable list of active registered engine instance that      * can be used by the manager.      */
 name|List
 argument_list|<
