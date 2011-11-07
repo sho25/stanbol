@@ -359,9 +359,9 @@ specifier|private
 name|Syntax
 name|syntax
 init|=
-name|XsltExtractor
+name|Syntax
 operator|.
-name|N3
+name|RdfXml
 decl_stmt|;
 specifier|public
 name|XsltExtractor
@@ -655,7 +655,6 @@ argument_list|,
 name|output
 argument_list|)
 expr_stmt|;
-comment|// TODO put results into the RDFContainer
 name|String
 name|rdf
 init|=

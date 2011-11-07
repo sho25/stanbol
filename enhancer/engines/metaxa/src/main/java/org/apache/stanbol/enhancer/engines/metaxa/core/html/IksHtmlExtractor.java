@@ -579,10 +579,10 @@ control|)
 block|{
 name|LOG
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"Extractor: "
-operator|+
+literal|"Extractor: {}"
+argument_list|,
 name|s
 argument_list|)
 expr_stmt|;
@@ -641,16 +641,16 @@ condition|)
 block|{
 name|LOG
 operator|.
-name|info
+name|debug
 argument_list|(
+literal|"{} Statements added: {}"
+argument_list|,
 operator|(
 name|tmpSize
 operator|-
 name|modelSize
 operator|)
-operator|+
-literal|" Statements added: "
-operator|+
+argument_list|,
 name|s
 argument_list|)
 expr_stmt|;
