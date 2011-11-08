@@ -984,7 +984,7 @@ name|Property
 argument_list|(
 name|value
 operator|=
-literal|"enhancer/engines/refactor"
+literal|"refactor-engine"
 argument_list|)
 specifier|public
 specifier|static
