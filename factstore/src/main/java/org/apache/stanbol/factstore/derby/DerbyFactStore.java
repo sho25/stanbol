@@ -2787,12 +2787,14 @@ throw|throw
 operator|new
 name|Exception
 argument_list|(
-literal|"Unknown fact schema "
+literal|"Unknown fact schema '"
 operator|+
 name|fact
 operator|.
 name|getFactSchemaURN
 argument_list|()
+operator|+
+literal|"'"
 argument_list|)
 throw|;
 block|}
