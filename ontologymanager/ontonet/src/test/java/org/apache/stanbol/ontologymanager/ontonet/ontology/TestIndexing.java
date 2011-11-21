@@ -33,7 +33,7 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|*
+name|reset
 import|;
 end_import
 
@@ -45,7 +45,43 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -292,6 +328,16 @@ operator|.
 name|junit
 operator|.
 name|BeforeClass
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
 import|;
 end_import
 
@@ -705,7 +751,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// @Test
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGetOntology
@@ -736,7 +783,8 @@ comment|// assertNotNull(index.getOntology(objrole));
 comment|// // assertSame() would fail.
 comment|// assertEquals(index.getOntology(objrole), oObjRole);
 block|}
-comment|// @Test
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsOntologyLoaded

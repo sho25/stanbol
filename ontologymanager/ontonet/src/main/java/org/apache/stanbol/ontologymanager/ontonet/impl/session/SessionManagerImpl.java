@@ -87,6 +87,44 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|TcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|ontologymanager
@@ -391,6 +429,14 @@ begin_comment
 comment|/**  *   * Calls to<code>getSessionListeners()</code> return a {@link Set} of listeners.  *   * TODO: implement storage (using persistence layer).  *   * @author alexdma  *   */
 end_comment
 
+begin_comment
+comment|// @Component(immediate = true, metatype = true)
+end_comment
+
+begin_comment
+comment|// @Service(SessionManager.class)
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -434,7 +480,17 @@ specifier|protected
 name|ScopeRegistry
 name|scopeRegistry
 decl_stmt|;
-comment|// protected ClerezzaOntologyStorage store;
+specifier|private
+name|IRI
+name|namespace
+decl_stmt|;
+specifier|private
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|ontologyProvider
+decl_stmt|;
 specifier|public
 name|SessionManagerImpl
 parameter_list|(
@@ -443,9 +499,26 @@ name|baseIri
 parameter_list|,
 name|ScopeRegistry
 name|scopeRegistry
-comment|/* , ClerezzaOntologyStorage store */
+parameter_list|,
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|ontologyProvider
 parameter_list|)
 block|{
+name|this
+operator|.
+name|namespace
+operator|=
+name|baseIri
+expr_stmt|;
+name|this
+operator|.
+name|ontologyProvider
+operator|=
+name|ontologyProvider
+expr_stmt|;
 name|idgen
 operator|=
 operator|new
@@ -480,9 +553,7 @@ name|scopeRegistry
 operator|=
 name|scopeRegistry
 expr_stmt|;
-comment|// this.store = store;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#addSessionListener      * (eu.iksproject.kres.api.manager.session.SessionListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -501,7 +572,6 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#clearSessionListeners ()      */
 annotation|@
 name|Override
 specifier|public
@@ -515,7 +585,6 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#createSession()      */
 annotation|@
 name|Override
 specifier|public
@@ -580,7 +649,6 @@ return|return
 name|session
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#createSession(org      * .semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -613,6 +681,52 @@ name|toString
 argument_list|()
 argument_list|)
 throw|;
+name|TcProvider
+name|tcp
+init|=
+literal|null
+decl_stmt|;
+if|if
+condition|(
+name|ontologyProvider
+operator|.
+name|getStore
+argument_list|()
+operator|instanceof
+name|TcProvider
+condition|)
+name|tcp
+operator|=
+operator|(
+name|TcProvider
+operator|)
+name|ontologyProvider
+operator|.
+name|getStore
+argument_list|()
+expr_stmt|;
+else|else
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Session manager does not support ontology providers based on "
+operator|+
+name|ontologyProvider
+operator|.
+name|getStore
+argument_list|()
+operator|.
+name|getClass
+argument_list|()
+operator|+
+literal|", only on "
+operator|+
+name|TcProvider
+operator|.
+name|class
+argument_list|)
+throw|;
 name|Session
 name|session
 init|=
@@ -620,6 +734,10 @@ operator|new
 name|SessionImpl
 argument_list|(
 name|sessionID
+argument_list|,
+name|namespace
+argument_list|,
+name|tcp
 argument_list|)
 decl_stmt|;
 name|addSession
@@ -636,7 +754,6 @@ return|return
 name|session
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#destroySession(      * org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -724,7 +841,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"KReS :: tried to kick a dead horse on session "
+literal|"Tried to kick a dead horse on session "
 operator|+
 name|sessionID
 operator|+
@@ -735,7 +852,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#getSession(org.      * semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -973,7 +1089,6 @@ name|id
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#getSessionListeners ()      */
 annotation|@
 name|Override
 specifier|public
@@ -988,7 +1103,6 @@ return|return
 name|listeners
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * TODO : optimize with indexing.      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#getSessionSpaces      * (org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -1057,7 +1171,6 @@ return|return
 name|result
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#removeSessionListener      * (eu.iksproject.kres.api.manager.session.SessionListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -1076,7 +1189,6 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * TODO : storage not implemented yet      *       * @see eu.iksproject.kres.api.manager.session.SessionManager#storeSession(org      * .semanticweb.owlapi.model.IRI, java.io.OutputStream)      */
 annotation|@
 name|Override
 specifier|public
@@ -1122,6 +1234,42 @@ block|{
 comment|// store.store(owlOntology);
 block|}
 block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getSessionNamespace
+parameter_list|()
+block|{
+return|return
+name|namespace
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setSessionNamespace
+parameter_list|(
+name|String
+name|namespace
+parameter_list|)
+block|{
+name|this
+operator|.
+name|namespace
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|namespace
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

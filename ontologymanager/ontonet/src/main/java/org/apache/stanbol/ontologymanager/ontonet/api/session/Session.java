@@ -119,6 +119,7 @@ block|,
 comment|/**          * Inactive and bound for destruction, no longer referenceable          */
 name|ZOMBIE
 block|}
+comment|/**      * Instructs the session to reference the supplied ontology scope. This way, whenever session data are      * processed, scope data will be considered as well.      *       * @param scope      *            the ontology scope to be referenced.      */
 name|void
 name|attachScope
 parameter_list|(
@@ -126,6 +127,7 @@ name|OntologyScope
 name|scope
 parameter_list|)
 function_decl|;
+comment|/**      * Removes all references to ontology scopes, thus leaving the session data as standalone.      */
 name|void
 name|clearScopes
 parameter_list|()
@@ -137,6 +139,7 @@ parameter_list|()
 throws|throws
 name|NonReferenceableSessionException
 function_decl|;
+comment|/**      * Instructs the session to no longer reference the supplied ontology scope. If a scope with the supplied      * identifier was not attached, this method has no effect.      *       * @param scope      *            the identifer of the ontology scope to be detached.      */
 name|void
 name|detachScope
 parameter_list|(
@@ -144,16 +147,12 @@ name|String
 name|scopeId
 parameter_list|)
 function_decl|;
+comment|/**      * Gets the identifiers of the scopes currently attached to this session.      *       * @return the attached scope identifiers      */
 name|Set
 argument_list|<
 name|String
 argument_list|>
 name|getAttachedScopes
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the unique Internationalized Resource Identifier (IRI) that identifies this KReS session.<br>      *<br>      * NOTE: There is no set method for the session ID as it is assumed to be set in its constructor once and      * for all.      *       * @return the IRI that identifies this session      */
-name|String
-name|getID
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the current state of this KReS session.      *       * @return the state of this session      */
@@ -173,7 +172,7 @@ parameter_list|()
 throws|throws
 name|NonReferenceableSessionException
 function_decl|;
-comment|/**      * Sets the KReS session as ACTIVE if<code>active</code> is true, INACTIVE otherwise. The state set is      * returned, which should match the input state unless an error occurs.<br>      *<br>      * Should throw an exception if this session is in a ZOMBIE state.      *       * @param active      *            the desired activity state for this session      * @return the resulting state of this KReS session      */
+comment|/**      * Sets the session as ACTIVE if<code>active</code> is true, INACTIVE otherwise. The state set is      * returned, which should match the input state unless an error occurs.<br>      *<br>      * Should throw an exception if this session is in a ZOMBIE state.      *       * @param active      *            the desired activity state for this session      * @return the resulting state of this KReS session      */
 name|State
 name|setActive
 parameter_list|(

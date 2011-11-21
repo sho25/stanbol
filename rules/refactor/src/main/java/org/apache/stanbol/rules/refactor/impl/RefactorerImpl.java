@@ -1252,7 +1252,8 @@ specifier|final
 name|String
 name|_REFACTORING_SESSION_ID_DEFAULT
 init|=
-literal|"http://kres.iksproject.eu/session/refactoring"
+comment|/* "http://kres.iksproject.eu/session/refactoring" */
+literal|"refactoring"
 decl_stmt|;
 comment|// public static final String _REFACTORING_SPACE_DEFAULT = "http://kres.iksproject.eu/space/refactoring";
 annotation|@

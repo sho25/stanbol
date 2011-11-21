@@ -1086,6 +1086,17 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{
+comment|// Check if the TcManager should be set as the store
+if|if
+condition|(
+name|store
+operator|==
+literal|null
+condition|)
+name|store
+operator|=
+name|tcManager
+expr_stmt|;
 comment|// Parse configuration.
 name|prefix
 operator|=

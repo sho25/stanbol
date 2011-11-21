@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Manages KReS session objects via CRUD-like operations. A<code>SessionManager</code> maintains in-memory  * storage of KReS sessions, creates new ones and either destroys or stores existing ones persistently. All  * KReS sessions are managed via unique identifiers of the<code>org.semanticweb.owlapi.model.IRI</code> type.<br>  *<br>  * NOTE: implementations should be synchronized, or document whenever they are not.  *   * @author alexdma  *   */
+comment|/**  * Manages session objects via CRUD-like operations. A<code>SessionManager</code> maintains in-memory storage  * of sessions, creates new ones and either destroys or stores existing ones persistently. All sessions are  * managed via unique identifiers of the<code>org.semanticweb.owlapi.model.IRI</code> type.<br>  *<br>  * NOTE: implementations should be synchronized, or document whenever they are not.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
@@ -86,19 +86,18 @@ name|SessionManager
 extends|extends
 name|SessionListenable
 block|{
-name|Set
-argument_list|<
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
 name|String
-argument_list|>
-name|getRegisteredSessionIDs
-parameter_list|()
-function_decl|;
-comment|/**      * Generates AND REGISTERS a new KReS session and assigns a unique session ID generated internally.      *       * @return the generated KReS session      */
+name|SESSIONS_NS
+init|=
+literal|"org.apache.stanbol.ontologymanager.session.ns"
+decl_stmt|;
+comment|/**      * Generates AND REGISTERS a new session and assigns a unique session ID generated internally.      *       * @return the generated session      */
 name|Session
 name|createSession
 parameter_list|()
 function_decl|;
-comment|/**      * Generates AND REGISTERS a new KReS session and tries to assign it the supplied session ID. If a session      * with that ID is already registered, the new session is<i>not</i> created and a      *<code>DuplicateSessionIDException</code> is thrown.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @return the generated KReS session      * @throws DuplicateSessionIDException      *             if a KReS session with that sessionID is already registered      */
+comment|/**      * Generates AND REGISTERS a new session and tries to assign it the supplied session ID. If a session with      * that ID is already registered, the new session is<i>not</i> created and a      *<code>DuplicateSessionIDException</code> is thrown.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @return the generated session      * @throws DuplicateSessionIDException      *             if a session with that sessionID is already registered      */
 name|Session
 name|createSession
 parameter_list|(
@@ -108,7 +107,7 @@ parameter_list|)
 throws|throws
 name|DuplicateSessionIDException
 function_decl|;
-comment|/**      * Deletes the KReS session identified by the supplied sessionID and releases its resources.      *       * @param sessionID      *            the IRI that uniquely identifies the session      */
+comment|/**      * Deletes the session identified by the supplied sessionID and releases its resources.      *       * @param sessionID      *            the IRI that uniquely identifies the session      */
 name|void
 name|destroySession
 parameter_list|(
@@ -116,13 +115,25 @@ name|String
 name|sessionID
 parameter_list|)
 function_decl|;
-comment|/**      * Retrieves the unique KReS session identified by<code>sessionID</code>.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @return the unique KReS session identified by<code>sessionID</code>      */
+comment|/**      * Returns the set of strings that identify registered sessions, whatever their state.      *       * @return the IDs of all registered sessions.      */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getRegisteredSessionIDs
+parameter_list|()
+function_decl|;
+comment|/**      * Retrieves the unique session identified by<code>sessionID</code>.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @return the unique session identified by<code>sessionID</code>      */
 name|Session
 name|getSession
 parameter_list|(
 name|String
 name|sessionID
 parameter_list|)
+function_decl|;
+name|String
+name|getSessionNamespace
+parameter_list|()
 function_decl|;
 comment|/**      * Returns the ontology space associated with this session.      *       * @deprecated as session spaces are obsolete, so is this method.      *       * @return the session space      */
 name|Set
@@ -137,7 +148,14 @@ parameter_list|)
 throws|throws
 name|NonReferenceableSessionException
 function_decl|;
-comment|/**      * Stores the KReS session identified by<code>sessionID</code> using the output stream<code>out</code>.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @param out      *            the output stream to store the session      * @throws OWLOntologyStorageException      */
+name|void
+name|setSessionNamespace
+parameter_list|(
+name|String
+name|namespace
+parameter_list|)
+function_decl|;
+comment|/**      * Stores the session identified by<code>sessionID</code> using the output stream<code>out</code>.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @param out      *            the output stream to store the session      * @throws OWLOntologyStorageException      */
 name|void
 name|storeSession
 parameter_list|(
