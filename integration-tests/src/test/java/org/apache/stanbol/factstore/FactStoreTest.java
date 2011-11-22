@@ -902,13 +902,15 @@ argument_list|(
 literal|200
 argument_list|)
 operator|.
-name|assertContentContains
+name|assertHeader
 argument_list|(
+literal|"Location"
+argument_list|,
 name|builder
 operator|.
 name|buildUrl
 argument_list|(
-literal|"/factstore/facts"
+literal|"/factstore/facts/http%3A%2F%2Fiks-project.eu%2Font%2FemployeeOf1/1"
 argument_list|)
 argument_list|)
 expr_stmt|;
