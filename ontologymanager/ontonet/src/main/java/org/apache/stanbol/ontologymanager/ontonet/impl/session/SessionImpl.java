@@ -275,22 +275,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|owl
-operator|.
-name|util
-operator|.
-name|URIUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -483,6 +467,7 @@ argument_list|,
 name|tcProvider
 argument_list|)
 expr_stmt|;
+comment|// setNamespace(namespace);
 name|attachedScopes
 operator|=
 operator|new
@@ -522,7 +507,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * FIXME not merging yet      *       * @see OWLExportable#asOWLOntology(boolean)      */
+comment|/**      * FIXME not merging yet      * FIXME not including imported ontologies      *       * @see OWLExportable#asOWLOntology(boolean)      */
 annotation|@
 name|Override
 specifier|public
@@ -721,10 +706,7 @@ continue|continue;
 name|String
 name|base
 init|=
-name|URIUtils
-operator|.
-name|upOne
-argument_list|(
+comment|/* URIUtils.upOne( */
 name|IRI
 operator|.
 name|create
@@ -734,7 +716,7 @@ operator|+
 name|getID
 argument_list|()
 argument_list|)
-argument_list|)
+comment|/* ) */
 operator|+
 literal|"/"
 decl_stmt|;

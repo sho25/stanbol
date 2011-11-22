@@ -154,11 +154,6 @@ argument_list|>
 name|getListeners
 parameter_list|()
 function_decl|;
-comment|/**      * The namespace can change dynamically (e.g. if the ontology network is relocated), so it is not part of      * the scope identifier (although its concatenation with the identifier will still be unique).      *       * @param namespace      */
-name|IRI
-name|getNamespace
-parameter_list|()
-function_decl|;
 comment|/**      * Returns the ontologies managed by this ontology space.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
 name|Set
 argument_list|<
@@ -203,14 +198,6 @@ name|ontologyId
 parameter_list|)
 throws|throws
 name|OntologyCollectorModificationException
-function_decl|;
-comment|/**      * The namespace can be changed dynamically (e.g. if the ontology network is relocated).      *       * @param namespace      *            Must end with a slash character. If the IRI ends with a has, and      *            {@link IllegalArgumentException} will be thrown. If it ends with neither, a slash will be      *            added.      */
-name|void
-name|setNamespace
-parameter_list|(
-name|IRI
-name|namespace
-parameter_list|)
 function_decl|;
 comment|/**      * Bootstraps the ontology space. In some cases (such as with core and custom spaces) this also implies      * write-locking its ontologies.      */
 name|void
