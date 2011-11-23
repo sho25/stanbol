@@ -681,52 +681,11 @@ name|toString
 argument_list|()
 argument_list|)
 throw|;
-name|TcProvider
-name|tcp
-init|=
-literal|null
-decl_stmt|;
-if|if
-condition|(
-name|ontologyProvider
-operator|.
-name|getStore
-argument_list|()
-operator|instanceof
-name|TcProvider
-condition|)
-name|tcp
-operator|=
-operator|(
-name|TcProvider
-operator|)
-name|ontologyProvider
-operator|.
-name|getStore
-argument_list|()
-expr_stmt|;
-else|else
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Session manager does not support ontology providers based on "
-operator|+
-name|ontologyProvider
-operator|.
-name|getStore
-argument_list|()
-operator|.
-name|getClass
-argument_list|()
-operator|+
-literal|", only on "
-operator|+
-name|TcProvider
-operator|.
-name|class
-argument_list|)
-throw|;
+comment|//        TcProvider tcp = null;
+comment|//        if (ontologyProvider.getStore() instanceof TcProvider) tcp = (TcProvider) ontologyProvider.getStore();
+comment|//        else throw new UnsupportedOperationException(
+comment|//                "Session manager does not support ontology providers based on "
+comment|//                        + ontologyProvider.getStore().getClass() + ", only on " + TcProvider.class);
 name|Session
 name|session
 init|=
@@ -737,7 +696,7 @@ name|sessionID
 argument_list|,
 name|namespace
 argument_list|,
-name|tcp
+name|ontologyProvider
 argument_list|)
 decl_stmt|;
 name|addSession

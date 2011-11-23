@@ -27,15 +27,17 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
+name|stanbol
 operator|.
-name|rdf
+name|ontologymanager
 operator|.
-name|core
+name|ontonet
 operator|.
-name|access
+name|api
 operator|.
-name|TcProvider
+name|ontology
+operator|.
+name|CoreOntologySpace
 import|;
 end_import
 
@@ -55,7 +57,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|CoreOntologySpace
+name|OntologyProvider
 import|;
 end_import
 
@@ -153,8 +155,11 @@ parameter_list|,
 name|IRI
 name|namespace
 parameter_list|,
-name|TcProvider
-name|tcProvider
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|ontologyProvider
 parameter_list|)
 block|{
 name|super
@@ -170,7 +175,7 @@ name|SpaceType
 operator|.
 name|CORE
 argument_list|,
-name|tcProvider
+name|ontologyProvider
 argument_list|)
 expr_stmt|;
 block|}

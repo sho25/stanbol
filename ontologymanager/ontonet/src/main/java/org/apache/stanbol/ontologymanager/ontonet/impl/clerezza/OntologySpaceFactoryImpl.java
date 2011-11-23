@@ -547,9 +547,6 @@ argument_list|,
 name|namespace
 argument_list|,
 name|provider
-operator|.
-name|getStore
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|configureSpace
@@ -593,9 +590,6 @@ argument_list|,
 name|namespace
 argument_list|,
 name|provider
-operator|.
-name|getStore
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|configureSpace

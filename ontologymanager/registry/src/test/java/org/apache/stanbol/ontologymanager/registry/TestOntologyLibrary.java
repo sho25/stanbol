@@ -767,6 +767,8 @@ argument_list|,
 name|offline
 argument_list|,
 name|parser
+argument_list|,
+name|serializer
 argument_list|)
 argument_list|,
 name|regmanConf
@@ -992,6 +994,8 @@ argument_list|,
 name|offline
 argument_list|,
 name|parser
+argument_list|,
+name|serializer
 argument_list|)
 argument_list|,
 name|regmanConf

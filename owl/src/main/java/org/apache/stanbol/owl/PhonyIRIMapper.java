@@ -152,6 +152,15 @@ block|{
 if|if
 condition|(
 name|exclusions
+operator|==
+literal|null
+condition|)
+return|return
+name|blankIri
+return|;
+if|if
+condition|(
+name|exclusions
 operator|.
 name|contains
 argument_list|(

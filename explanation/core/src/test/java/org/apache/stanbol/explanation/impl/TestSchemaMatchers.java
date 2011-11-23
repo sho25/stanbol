@@ -14,6 +14,54 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|explanation
+operator|.
+name|MockOsgiContext
+operator|.
+name|parser
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|explanation
+operator|.
+name|MockOsgiContext
+operator|.
+name|serializer
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|explanation
+operator|.
+name|MockOsgiContext
+operator|.
+name|tcManager
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -40,22 +88,6 @@ operator|.
 name|util
 operator|.
 name|Hashtable
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|explanation
-operator|.
-name|MockOsgiContext
-operator|.
-name|*
 import|;
 end_import
 
@@ -104,60 +136,6 @@ operator|.
 name|core
 operator|.
 name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|Parser
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|jena
-operator|.
-name|parser
-operator|.
-name|JenaParserProvider
 import|;
 end_import
 
@@ -494,15 +472,17 @@ argument_list|,
 name|offline
 argument_list|,
 name|parser
+argument_list|,
+name|serializer
 argument_list|)
 argument_list|,
 name|configuration
 argument_list|)
 expr_stmt|;
 comment|// The model should be created by now.
-comment|//        for (Library lib : regman.getLibraries()) {
-comment|//            System.out.println(lib.getIRI() + " : " + lib.getName());
-comment|//        }
+comment|// for (Library lib : regman.getLibraries()) {
+comment|// System.out.println(lib.getIRI() + " : " + lib.getName());
+comment|// }
 comment|// IRI id =
 comment|// IRI.create("http://www.ontologydesignpatterns.org/registry/explanation.owl#ExplanationSchemaCatalog");
 comment|// IRI[] locations = new IRI[] {};

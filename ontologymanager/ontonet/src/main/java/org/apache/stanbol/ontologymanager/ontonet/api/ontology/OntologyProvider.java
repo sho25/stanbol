@@ -83,6 +83,24 @@ name|core
 operator|.
 name|serializedform
 operator|.
+name|Serializer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
 name|UnsupportedFormatException
 import|;
 end_import
@@ -127,6 +145,10 @@ parameter_list|<
 name|S
 parameter_list|>
 block|{
+name|Serializer
+name|getSerializer
+parameter_list|()
+function_decl|;
 comment|/**      * The key used to configure the prefix to be used for addressing ontologies stored by this provider.      */
 specifier|public
 name|String
@@ -141,11 +163,18 @@ name|RESOLVE_IMPORTS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.resolveImports"
 decl_stmt|;
+name|String
+name|getKey
+parameter_list|(
+name|IRI
+name|ontologyIRI
+parameter_list|)
+function_decl|;
 name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getOntologyReferences
+name|getKeys
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
@@ -153,12 +182,12 @@ name|S
 name|getStore
 parameter_list|()
 function_decl|;
-comment|/**      *       * @param identifier      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @return      */
+comment|/**      * Useful      *       * @param key      *            the key used to identify the ontology in this provider. They can or cannot coincide with the      *            logical and/or physical IRI of the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @return      */
 name|Object
 name|getStoredOntology
 parameter_list|(
 name|String
-name|identifier
+name|key
 parameter_list|,
 name|Class
 argument_list|<

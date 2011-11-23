@@ -468,6 +468,8 @@ argument_list|,
 name|offline
 argument_list|,
 name|parser
+argument_list|,
+name|serializer
 argument_list|)
 expr_stmt|;
 block|}

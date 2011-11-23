@@ -509,6 +509,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLImportsDeclaration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntology
 import|;
 end_import
@@ -1194,6 +1208,8 @@ literal|null
 decl_stmt|;
 try|try
 block|{
+comment|//                for (OWLImportsDeclaration imp : ont.getImportsDeclarations())
+comment|//                    System.out.println("DIOCALE "+imp);
 name|res
 operator|=
 name|OntologyRenderUtils
@@ -1236,7 +1252,6 @@ name|Response
 operator|.
 name|ok
 argument_list|(
-comment|/* ont */
 name|res
 argument_list|)
 operator|.
