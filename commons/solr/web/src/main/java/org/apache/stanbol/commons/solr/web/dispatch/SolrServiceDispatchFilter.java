@@ -93,11 +93,9 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|web
+name|utils
 operator|.
-name|impl
-operator|.
-name|SolrDispatchFilterComponent
+name|ServiceReferenceRankingComparator
 import|;
 end_import
 
@@ -115,9 +113,9 @@ name|solr
 operator|.
 name|web
 operator|.
-name|utils
+name|impl
 operator|.
-name|ServiceReferenceRankingComparator
+name|SolrDispatchFilterComponent
 import|;
 end_import
 

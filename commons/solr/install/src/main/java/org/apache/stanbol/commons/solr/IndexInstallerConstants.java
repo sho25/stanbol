@@ -68,27 +68,7 @@ specifier|final
 name|String
 name|PROPERTY_PREFIX
 init|=
-literal|"org.apache.stanbol.yard.solr.installer."
-decl_stmt|;
-comment|/**      * The key used to configure the name of the Index-Archive The default name is      * \"&lt;indexName&gt;.solrarchive\".      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|PROPERTY_INDEX_ARCHIVE
-init|=
-literal|"Index-Archive"
-decl_stmt|;
-comment|/**      * The key used for the name of the index      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|PROPERTY_INDEX_NAME
-init|=
-name|PROPERTY_PREFIX
-operator|+
-literal|"index.name"
+literal|"org.apache.stanbol.commons.solr.install."
 decl_stmt|;
 comment|/**      * The key used for the type of the archive      */
 specifier|public

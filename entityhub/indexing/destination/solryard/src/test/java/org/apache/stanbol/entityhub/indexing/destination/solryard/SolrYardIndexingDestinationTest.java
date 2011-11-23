@@ -143,6 +143,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ServiceLoader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -182,6 +192,44 @@ operator|.
 name|io
 operator|.
 name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|managed
+operator|.
+name|ManagedSolrServer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|managed
+operator|.
+name|standalone
+operator|.
+name|StandaloneManagedSolrServer
 import|;
 end_import
 
@@ -352,6 +400,16 @@ operator|.
 name|impl
 operator|.
 name|SolrYard
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|After
 import|;
 end_import
 
@@ -577,6 +635,22 @@ literal|"user.dir"
 argument_list|,
 name|userDir
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|After
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+comment|//after each test we need ensure to shutdown the default ManagedSolrServer
+comment|//because different tests use different Directories and therefore a new
+comment|//instance needs to be created
+name|StandaloneManagedSolrServer
+operator|.
+name|shutdownManagedServer
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -994,6 +1068,18 @@ operator|.
 name|nextElement
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Validate Entry : "
+operator|+
+name|entry
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|//the name of the index MUST be the root folder within the Archive!
 name|assertTrue
 argument_list|(

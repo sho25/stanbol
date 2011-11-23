@@ -39,6 +39,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|net
+operator|.
+name|URL
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Map
@@ -155,6 +165,43 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
+name|URL
+name|dataFile
+init|=
+name|getDataFile
+argument_list|(
+name|bundleSymbolicName
+argument_list|,
+name|filename
+argument_list|)
+decl_stmt|;
+comment|// Returning null is fine - if we don't have the data file, another
+comment|// provider might supply it
+return|return
+name|dataFile
+operator|!=
+literal|null
+condition|?
+name|dataFile
+operator|.
+name|openStream
+argument_list|()
+else|:
+literal|null
+return|;
+block|}
+comment|/**      * @param bundleSymbolicName      * @param filename      * @return      */
+specifier|private
+name|URL
+name|getDataFile
+parameter_list|(
+name|String
+name|bundleSymbolicName
+parameter_list|,
+name|String
+name|filename
+parameter_list|)
+block|{
 comment|//If the symbolic name is not null check that is equals to the symbolic
 comment|//name used to create this classpath data file provider
 if|if
@@ -196,9 +243,9 @@ name|RESOURCE_BASE_PATH
 operator|+
 name|filename
 decl_stmt|;
-specifier|final
-name|InputStream
-name|in
+comment|//final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
+name|URL
+name|dataFile
 init|=
 name|getClass
 argument_list|()
@@ -206,34 +253,46 @@ operator|.
 name|getClassLoader
 argument_list|()
 operator|.
-name|getResourceAsStream
+name|getResource
 argument_list|(
 name|resourcePath
 argument_list|)
 decl_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Resource {} found: {}"
-argument_list|,
-operator|(
-name|in
-operator|==
-literal|null
-condition|?
-literal|"NOT"
-else|:
-literal|""
-operator|)
-argument_list|,
-name|resourcePath
-argument_list|)
-expr_stmt|;
-comment|// Returning null is fine - if we don't have the data file, another
-comment|// provider might supply it
+comment|//log.debug("Resource {} found: {}", (dataFile == null ? "NOT" : ""), resourcePath);
 return|return
-name|in
+name|dataFile
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isAvailable
+parameter_list|(
+name|String
+name|bundleSymbolicName
+parameter_list|,
+name|String
+name|filename
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|comments
+parameter_list|)
+block|{
+return|return
+name|getDataFile
+argument_list|(
+name|bundleSymbolicName
+argument_list|,
+name|filename
+argument_list|)
+operator|!=
+literal|null
 return|;
 block|}
 block|}

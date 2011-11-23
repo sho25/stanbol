@@ -79,6 +79,25 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
+comment|/**      * Tests if a given DataFile is available without opening an InputStream      * @param bundleSymbolicName can be used to differentiate      *        between files which have the same name. It is also used by child      *        DataFileProvider to only process requests of there own bundle.       *        If<code>null</code> any file with the requested name is accepted      *        and any DataFileProvider processes the request      * @param filename name of the file to open      * @param comments Optional - how to get a more complete version      *        of the data file, licensing information, etc.      * @return<code>true</code> if the requested Resource is available.      * Otherwise<code>false</code>      */
+name|boolean
+name|isAvailable
+parameter_list|(
+name|String
+name|bundleSymbolicName
+parameter_list|,
+name|String
+name|filename
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|comments
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

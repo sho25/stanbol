@@ -285,11 +285,9 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|web
+name|utils
 operator|.
-name|dispatch
-operator|.
-name|DelegatingSolrDispatchFilter
+name|ServiceReferenceRankingComparator
 import|;
 end_import
 
@@ -307,9 +305,9 @@ name|solr
 operator|.
 name|web
 operator|.
-name|utils
+name|dispatch
 operator|.
-name|ServiceReferenceRankingComparator
+name|DelegatingSolrDispatchFilter
 import|;
 end_import
 
@@ -438,7 +436,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Component that allows to configuer a {@link SolrDispatchFilter} for a   * Solr {@link CoreContainer} running as OSGI service.  * @author Rupert Westenthaler  *  */
+comment|/**  * Component that allows to publishes a Solr {@link CoreContainer} with a given  * name at a given Path by using a {@link SolrDispatchFilter}.<p>  * This allows more customisation for publishing Solr {@link CoreContainer} as  * the {@link SolrServerPublishingComponent}, but also requires a specific  * configuration for earch {@link CoreContainer} to be published.  * @see SolrServerPublishingComponent  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -466,7 +464,7 @@ literal|true
 argument_list|,
 name|immediate
 operator|=
-literal|true
+literal|false
 argument_list|)
 annotation|@
 name|Service

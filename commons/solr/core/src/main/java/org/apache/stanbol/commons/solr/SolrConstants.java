@@ -90,12 +90,7 @@ specifier|final
 name|String
 name|PROPERTY_SOLR_SERVER
 init|=
-name|CoreContainer
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
+literal|"org.apache.solr.core.CoreContainer"
 decl_stmt|;
 comment|/**      * Used as prefix for all {@link SolrCore} related properties      */
 specifier|private
@@ -104,12 +99,7 @@ specifier|final
 name|String
 name|PROPERTY_SOLR_CORE
 init|=
-name|SolrCore
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
+literal|"org.apache.solr.core.SolrCore"
 decl_stmt|;
 comment|/**      * Property used for the human readable name of a SolrServer. This will be used      * as alternative to the absolute file path of the solr.xml file used for the      * initialisation of the solr server      */
 specifier|public
@@ -166,7 +156,27 @@ name|Constants
 operator|.
 name|SERVICE_RANKING
 decl_stmt|;
-comment|/**      * Property used for the name of a solr core. This is typically set by the      * {@link ManagedSolrServer} implementation based on the name of the       * cores registered with a SolrServer.      */
+comment|/**      * Allows to enable/disable the publishing of the RESTful interface of Solr      * on the OSGI HttpService by using the value of the {@link #PROPERTY_SERVER_NAME}      * as path.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PROPERTY_SERVER_PUBLISH_REST
+init|=
+name|PROPERTY_SOLR_SERVER
+operator|+
+literal|".publishREST"
+decl_stmt|;
+comment|/**      * By default the RESTful API of a SolrServer is published      */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|DEFAULT_PUBLISH_REST
+init|=
+literal|true
+decl_stmt|;
+comment|/**      * Property used for the name of a solr core. This is typically set by the      * {@link SolrServerAdapter} implementation based on the name of the       * cores registered with a SolrServer.      */
 specifier|public
 specifier|static
 specifier|final
@@ -188,7 +198,7 @@ name|PROPERTY_SOLR_CORE
 operator|+
 literal|".dir"
 decl_stmt|;
-comment|/**      * The data directory of a core. Set by the {@link ManagedSolrServer} when      * registering a SolrCore based on {@link SolrCore#getDataDir()}      */
+comment|/**      * The data directory of a core. Set by the {@link SolrServerAdapter} when      * registering a SolrCore based on {@link SolrCore#getDataDir()}      */
 specifier|public
 specifier|static
 specifier|final
@@ -199,7 +209,7 @@ name|PROPERTY_SOLR_CORE
 operator|+
 literal|".dadadir"
 decl_stmt|;
-comment|/**      * The index directory of a core. Set by the {@link ManagedSolrServer} when      * registering a SolrCore based on {@link SolrCore#getIndexDir()}      */
+comment|/**      * The index directory of a core. Set by the {@link SolrServerAdapter} when      * registering a SolrCore based on {@link SolrCore#getIndexDir()}      */
 specifier|public
 specifier|static
 specifier|final
@@ -231,6 +241,17 @@ init|=
 name|PROPERTY_SOLR_CORE
 operator|+
 literal|".solrconf"
+decl_stmt|;
+comment|/**      * The {@link Constants#SERVICE_ID} of the {@link CoreContainer} this core      * is registered with      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PROPERTY_CORE_SERVER_ID
+init|=
+name|PROPERTY_SOLR_CORE
+operator|+
+literal|".service.id"
 decl_stmt|;
 comment|/**      * The {@link Constants#SERVICE_RANKING service ranking} of the SolrCore.       * The ranking of the SolrServer is used as default if not defined. If also no       * ServiceRanking is defined for the server than '0' is used.<p>      * Values are expected to be Integers. This Property uses       * {@link Constants#SERVICE_RANKING} as key.      */
 specifier|public

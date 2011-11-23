@@ -4179,7 +4179,7 @@ argument_list|)
 expr_stmt|;
 name|current
 operator|.
-name|add
+name|addNaturalText
 argument_list|(
 name|orgNameMapping
 operator|.

@@ -109,7 +109,7 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|ManagedSolrServer
+name|SolrServerAdapter
 import|;
 end_import
 
@@ -164,7 +164,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Special version of the {@link SolrDispatchFilter} (implemented based on the  * {@link DelegatingSolrDispatchFilter} abstract class) that does NOT create a  * new {@link CoreContainer}, but retrieves it via a OSGI {@link ServiceReference}  * from a {@link BundleContext}. This implementation also ensures that removing  * the FIlter does NOT {@link CoreContainer#shutdown() shutdown} the   * {@link CoreContainer} but instead.  * {@link BundleContext#ungetService(ServiceReference) releases} the reference.<p>  * This does make is save to use this {@link Filter} in combination with a   * {@link CoreContainer} that is managed as a {@link ManagedSolrServer}.<p>  * See<a href="">TODO</a> to see how to use {@link Filter}s in combination with  * the OSGI {@link HttpService}.  * @author Rupert Westenthaler  *  */
+comment|/**  * Special version of the {@link SolrDispatchFilter} (implemented based on the  * {@link DelegatingSolrDispatchFilter} abstract class) that does NOT create a  * new {@link CoreContainer}, but retrieves it via a OSGI {@link ServiceReference}  * from a {@link BundleContext}. This implementation also ensures that removing  * the FIlter does NOT {@link CoreContainer#shutdown() shutdown} the   * {@link CoreContainer} but instead.  * {@link BundleContext#ungetService(ServiceReference) releases} the reference.<p>  * This does make is save to use this {@link Filter} in combination with a   * {@link CoreContainer} that is managed as a {@link SolrServerAdapter}.<p>  * See<a href="">TODO</a> to see how to use {@link Filter}s in combination with  * the OSGI {@link HttpService}.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class

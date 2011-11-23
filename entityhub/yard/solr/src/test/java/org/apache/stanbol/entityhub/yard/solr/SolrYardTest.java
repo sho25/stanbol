@@ -85,7 +85,9 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|SolrDirectoryManager
+name|managed
+operator|.
+name|ManagedSolrServer
 import|;
 end_import
 
@@ -373,7 +375,7 @@ name|File
 operator|.
 name|separatorChar
 operator|+
-name|SolrDirectoryManager
+name|ManagedSolrServer
 operator|.
 name|DEFAULT_SOLR_DATA_DIR
 decl_stmt|;
@@ -441,7 +443,7 @@ name|System
 operator|.
 name|setProperty
 argument_list|(
-name|SolrDirectoryManager
+name|ManagedSolrServer
 operator|.
 name|MANAGED_SOLR_DIR_PROPERTY
 argument_list|,

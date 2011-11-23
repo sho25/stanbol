@@ -25,6 +25,26 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Date
 import|;
 end_import
@@ -58,6 +78,8 @@ specifier|public
 class|class
 name|DataFileProviderEvent
 block|{
+comment|//replaced by Collections#emptyMap() to ensure that a shared instance
+comment|//between events is not changed!
 specifier|private
 specifier|static
 specifier|final
@@ -69,13 +91,9 @@ name|String
 argument_list|>
 name|EMPTY_COMMENTS
 init|=
-operator|new
-name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
+name|Collections
+operator|.
+name|emptyMap
 argument_list|()
 decl_stmt|;
 specifier|private

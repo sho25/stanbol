@@ -921,6 +921,11 @@ condition|(
 name|uri
 operator|==
 literal|null
+operator|||
+name|uri
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 name|config
@@ -1000,6 +1005,11 @@ condition|(
 name|attribution
 operator|==
 literal|null
+operator|||
+name|attribution
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 name|config
@@ -2509,6 +2519,11 @@ condition|(
 name|name
 operator|==
 literal|null
+operator|||
+name|name
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 name|config
@@ -2665,6 +2680,11 @@ condition|(
 name|queryUri
 operator|==
 literal|null
+operator|||
+name|queryUri
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 name|config

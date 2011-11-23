@@ -88,7 +88,7 @@ specifier|final
 name|String
 name|CORE_NAME
 init|=
-literal|"dbpedia_43k"
+literal|"dbpedia"
 decl_stmt|;
 specifier|public
 name|DefaultDataDispatchFilterTest

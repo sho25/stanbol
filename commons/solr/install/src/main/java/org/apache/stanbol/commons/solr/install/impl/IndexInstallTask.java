@@ -51,9 +51,11 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|IndexInstallerConstants
+name|managed
 operator|.
-name|PROPERTY_INDEX_ARCHIVE
+name|ManagedIndexConstants
+operator|.
+name|INDEX_ARCHIVES
 import|;
 end_import
 
@@ -69,19 +71,11 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|IndexInstallerConstants
+name|managed
 operator|.
-name|PROPERTY_INDEX_NAME
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|ManagedIndexConstants
 operator|.
-name|io
-operator|.
-name|File
+name|INDEX_NAME
 import|;
 end_import
 
@@ -239,7 +233,27 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|SolrDirectoryManager
+name|managed
+operator|.
+name|ManagedIndexConstants
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|managed
+operator|.
+name|ManagedSolrServer
 import|;
 end_import
 
@@ -312,10 +326,16 @@ name|CONFIG_INSTALL_ORDER
 init|=
 literal|"19-"
 decl_stmt|;
+comment|/**      * Mapping for the managed servers. The default server uses the<code>null</code>      * key!      */
 specifier|private
 specifier|final
-name|SolrDirectoryManager
-name|solrDirectoryManager
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|ManagedSolrServer
+argument_list|>
+name|managedServers
 decl_stmt|;
 specifier|public
 name|IndexInstallTask
@@ -323,8 +343,13 @@ parameter_list|(
 name|TaskResourceGroup
 name|trg
 parameter_list|,
-name|SolrDirectoryManager
-name|solrDirectoryManager
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|ManagedSolrServer
+argument_list|>
+name|managedServers
 parameter_list|)
 block|{
 name|super
@@ -332,11 +357,26 @@ argument_list|(
 name|trg
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|managedServers
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed map with the ManagedSolrServer MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
-name|solrDirectoryManager
+name|managedServers
 operator|=
-name|solrDirectoryManager
+name|managedServers
 expr_stmt|;
 block|}
 annotation|@
@@ -360,55 +400,25 @@ argument_list|()
 operator|.
 name|getAttribute
 argument_list|(
-name|PROPERTY_INDEX_NAME
+name|INDEX_NAME
 argument_list|)
-decl_stmt|;
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|File
-argument_list|>
-name|existingIndexes
-init|=
-name|solrDirectoryManager
-operator|.
-name|getManagedIndices
-argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|existingIndexes
-operator|.
-name|containsKey
-argument_list|(
 name|indexName
-argument_list|)
+operator|==
+literal|null
 condition|)
 block|{
-comment|// an Index with that name already exists -> ignore
-name|ctx
-operator|.
 name|log
+operator|.
+name|error
 argument_list|(
-literal|"Unable to install the Index with the name \"%s\" becuase an index with that name is already managed by the the SolrYard "
+literal|"Unable to remove Managed Index because the required Property '{}'"
 operator|+
-literal|"(resource %s | location of the existing index %s)!"
+literal|"used to define the name of the Index is missing"
 argument_list|,
-name|indexName
-argument_list|,
-name|getResource
-argument_list|()
-operator|.
-name|getURL
-argument_list|()
-argument_list|,
-name|existingIndexes
-operator|.
-name|get
-argument_list|(
-name|indexName
-argument_list|)
+name|INDEX_NAME
 argument_list|)
 expr_stmt|;
 name|setFinishedState
@@ -421,7 +431,83 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// this index does not exist
+name|String
+name|serverName
+init|=
+operator|(
+name|String
+operator|)
+name|getResource
+argument_list|()
+operator|.
+name|getAttribute
+argument_list|(
+name|ManagedIndexConstants
+operator|.
+name|SERVER_NAME
+argument_list|)
+decl_stmt|;
+name|ManagedSolrServer
+name|server
+init|=
+name|managedServers
+operator|.
+name|get
+argument_list|(
+name|serverName
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|server
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to remove Managed Solr Index {} because the {} "
+operator|+
+literal|"Server {} is currently not active!"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|indexName
+block|,
+name|serverName
+operator|==
+literal|null
+condition|?
+literal|"default"
+else|:
+literal|""
+block|,
+name|serverName
+operator|!=
+literal|null
+condition|?
+name|serverName
+else|:
+literal|""
+block|}
+argument_list|)
+expr_stmt|;
+name|setFinishedState
+argument_list|(
+name|ResourceState
+operator|.
+name|IGNORED
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|//we have an index name and a server to in stall it ...
+comment|//  ... let's do the work
 name|String
 name|archiveFormat
 init|=
@@ -499,6 +585,7 @@ name|reader
 argument_list|)
 expr_stmt|;
 block|}
+comment|//TODO install to the right server!
 name|String
 name|indexPath
 init|=
@@ -506,7 +593,7 @@ name|props
 operator|.
 name|getProperty
 argument_list|(
-name|PROPERTY_INDEX_ARCHIVE
+name|INDEX_ARCHIVES
 argument_list|)
 decl_stmt|;
 if|if
@@ -532,7 +619,7 @@ name|info
 argument_list|(
 literal|"Property \""
 operator|+
-name|PROPERTY_INDEX_ARCHIVE
+name|INDEX_ARCHIVES
 operator|+
 literal|"\" not present within the SolrIndex references file. Will use the default name \""
 operator|+
@@ -542,9 +629,9 @@ literal|"\""
 argument_list|)
 expr_stmt|;
 block|}
-name|solrDirectoryManager
+name|server
 operator|.
-name|createSolrDirectory
+name|updateIndex
 argument_list|(
 name|indexName
 argument_list|,
@@ -581,9 +668,9 @@ argument_list|,
 name|is
 argument_list|)
 expr_stmt|;
-name|solrDirectoryManager
+name|server
 operator|.
-name|createSolrIndex
+name|updateIndex
 argument_list|(
 name|indexName
 argument_list|,
@@ -625,7 +712,9 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Unable to install SolrIndexArchive for index name \"%s\"! (resource=%s, arviceFormat=%s)"
+literal|"Unable to install SolrIndexArchive for index name '%s'!"
+operator|+
+literal|" (resource=%s, arviceFormat=%s)"
 argument_list|,
 name|indexName
 argument_list|,
@@ -678,6 +767,7 @@ argument_list|(
 name|is
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}

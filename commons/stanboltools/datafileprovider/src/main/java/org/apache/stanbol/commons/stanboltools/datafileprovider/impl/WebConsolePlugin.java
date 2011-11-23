@@ -572,9 +572,9 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|String
+name|?
 argument_list|,
-name|String
+name|?
 argument_list|>
 name|comment
 range|:
