@@ -293,6 +293,24 @@ name|jobs
 operator|.
 name|api
 operator|.
+name|JobInfo
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|jobs
+operator|.
+name|api
+operator|.
 name|JobManager
 import|;
 end_import
@@ -327,11 +345,9 @@ name|commons
 operator|.
 name|jobs
 operator|.
-name|web
+name|impl
 operator|.
-name|utils
-operator|.
-name|JobInfo
+name|JobInfoImpl
 import|;
 end_import
 
@@ -499,7 +515,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Job {}"
+literal|"Called get() with id {}"
 argument_list|,
 name|id
 argument_list|)
@@ -579,7 +595,7 @@ operator|.
 name|info
 operator|=
 operator|new
-name|JobInfo
+name|JobInfoImpl
 argument_list|()
 expr_stmt|;
 if|if
@@ -683,6 +699,7 @@ name|isHTML
 argument_list|()
 condition|)
 block|{
+comment|// Result as HTML
 return|return
 name|Response
 operator|.
@@ -703,6 +720,7 @@ return|;
 block|}
 else|else
 block|{
+comment|// Result as application/json, text/plain
 return|return
 name|Response
 operator|.
