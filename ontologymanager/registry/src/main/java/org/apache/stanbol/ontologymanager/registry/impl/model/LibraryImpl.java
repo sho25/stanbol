@@ -239,24 +239,6 @@ name|core
 operator|.
 name|serializedform
 operator|.
-name|Serializer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
 name|SupportedFormat
 import|;
 end_import
@@ -1168,6 +1150,7 @@ condition|)
 block|{
 try|try
 block|{
+comment|// No preferred key, we don't have a prefix here.
 name|String
 name|key
 init|=
@@ -1180,6 +1163,8 @@ argument_list|,
 name|SupportedFormat
 operator|.
 name|RDF_XML
+argument_list|,
+literal|null
 argument_list|,
 literal|false
 argument_list|)
@@ -1647,11 +1632,6 @@ argument_list|,
 literal|null
 argument_list|,
 name|Parser
-operator|.
-name|getInstance
-argument_list|()
-argument_list|,
-name|Serializer
 operator|.
 name|getInstance
 argument_list|()

@@ -83,24 +83,6 @@ name|core
 operator|.
 name|serializedform
 operator|.
-name|Serializer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
 name|UnsupportedFormatException
 import|;
 end_import
@@ -173,10 +155,6 @@ argument_list|>
 name|getKeys
 parameter_list|()
 function_decl|;
-name|Serializer
-name|getSerializer
-parameter_list|()
-function_decl|;
 comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
 name|S
 name|getStore
@@ -215,6 +193,9 @@ parameter_list|,
 name|String
 name|formatIdentifier
 parameter_list|,
+name|String
+name|preferredKey
+parameter_list|,
 name|boolean
 name|force
 parameter_list|)
@@ -233,6 +214,9 @@ parameter_list|,
 name|String
 name|formatIdentifier
 parameter_list|,
+name|String
+name|preferredKey
+parameter_list|,
 name|boolean
 name|force
 parameter_list|)
@@ -246,6 +230,9 @@ name|loadInStore
 parameter_list|(
 name|Object
 name|ontology
+parameter_list|,
+name|String
+name|preferredKey
 parameter_list|,
 name|boolean
 name|force

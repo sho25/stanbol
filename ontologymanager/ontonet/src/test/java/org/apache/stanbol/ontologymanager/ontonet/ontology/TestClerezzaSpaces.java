@@ -69,24 +69,6 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|serializer
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|MockOsgiContext
-operator|.
 name|tcManager
 import|;
 end_import
@@ -1188,8 +1170,6 @@ argument_list|,
 name|offline
 argument_list|,
 name|parser
-argument_list|,
-name|serializer
 argument_list|)
 argument_list|,
 name|offline

@@ -44,9 +44,11 @@ specifier|public
 interface|interface
 name|OntologySpace
 extends|extends
-name|LockableOntologyCollector
+name|OntologyCollector
 extends|,
 name|OWLExportable
+extends|,
+name|Lockable
 block|{
 comment|/**      * Returns the ontology that serves as a root module for this ontology space.      *       * @deprecated Please use the inherited method {@link OWLExportable#asOWLOntology(boolean)}. Calls to the      *             current method are equivalent to asOWLOntology(false).      * @return the OWL form of this ontology space.      */
 name|OWLOntology

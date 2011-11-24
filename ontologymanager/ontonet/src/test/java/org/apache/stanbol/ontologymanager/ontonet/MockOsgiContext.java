@@ -311,6 +311,10 @@ name|ClerezzaOntologyProvider
 import|;
 end_import
 
+begin_comment
+comment|/**  * Utility class that provides some object that would be provided by SCR reference in an OSGi environment. Can  * be used to simulate OSGi in unit tests.  *   * @author alexdma  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -449,8 +453,6 @@ argument_list|,
 name|offline
 argument_list|,
 name|parser
-argument_list|,
-name|serializer
 argument_list|)
 expr_stmt|;
 name|Dictionary

@@ -1194,8 +1194,6 @@ literal|null
 decl_stmt|;
 try|try
 block|{
-comment|// for (OWLImportsDeclaration imp : ont.getImportsDeclarations())
-comment|// System.out.println("DIOCALE "+imp);
 name|res
 operator|=
 name|OntologyRenderUtils

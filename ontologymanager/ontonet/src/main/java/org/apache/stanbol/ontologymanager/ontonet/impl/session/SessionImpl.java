@@ -512,7 +512,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * FIXME not merging yet FIXME not including imported ontologies      *       * @see OWLExportable#asOWLOntology(boolean)      */
+comment|/**      * FIXME not merging yet FIXME not including imported ontologies unless they are merged *before* storage.      *       * @see OWLExportable#asOWLOntology(boolean)      */
 annotation|@
 name|Override
 specifier|public
@@ -534,6 +534,15 @@ argument_list|(
 literal|"Merging not implemented yet. Please call asOWLOntology(false)"
 argument_list|)
 throw|;
+name|long
+name|before
+init|=
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+decl_stmt|;
+comment|// Create a new ontology
 name|OWLOntology
 name|root
 decl_stmt|;
@@ -661,7 +670,6 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|// Add the import declarations for directly managed ontologies.
 if|if
 condition|(
 name|root
@@ -669,6 +677,7 @@ operator|!=
 literal|null
 condition|)
 block|{
+comment|// Add the import declarations for directly managed ontologies.
 name|List
 argument_list|<
 name|OWLOntologyChange
@@ -690,28 +699,9 @@ operator|.
 name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
-for|for
-control|(
-name|OWLOntology
-name|o
-range|:
-name|getOntologies
-argument_list|(
-literal|false
-argument_list|)
-control|)
-block|{
-if|if
-condition|(
-name|o
-operator|==
-literal|null
-condition|)
-continue|continue;
 name|String
 name|base
 init|=
-comment|/* URIUtils.upOne( */
 name|IRI
 operator|.
 name|create
@@ -721,64 +711,18 @@ operator|+
 name|getID
 argument_list|()
 argument_list|)
-comment|/* ) */
 operator|+
 literal|"/"
 decl_stmt|;
+comment|// The key set of managedOntologies contains the ontology IRIs, not their storage keys.
+for|for
+control|(
 name|IRI
 name|ontologyIri
-decl_stmt|;
-if|if
-condition|(
-name|o
-operator|.
-name|isAnonymous
-argument_list|()
-condition|)
-try|try
+range|:
+name|managedOntologies
+control|)
 block|{
-name|ontologyIri
-operator|=
-name|ontologyManager
-operator|.
-name|getOntologyDocumentIRI
-argument_list|(
-name|o
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|ex
-parameter_list|)
-block|{
-name|ontologyIri
-operator|=
-name|o
-operator|.
-name|getOWLOntologyManager
-argument_list|()
-operator|.
-name|getOntologyDocumentIRI
-argument_list|(
-name|o
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-name|ontologyIri
-operator|=
-name|o
-operator|.
-name|getOntologyID
-argument_list|()
-operator|.
-name|getDefaultDocumentIRI
-argument_list|()
-expr_stmt|;
-block|}
 name|IRI
 name|physIRI
 init|=
@@ -810,7 +754,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Add imports for attached scopes
+comment|// Add import declarations for attached scopes.
 for|for
 control|(
 name|String
@@ -851,6 +795,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Commit
 name|ontologyManager
 operator|.
 name|applyChanges
@@ -859,6 +804,23 @@ name|changes
 argument_list|)
 expr_stmt|;
 block|}
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"OWL export of session {} completed in {} ms."
+argument_list|,
+name|getID
+argument_list|()
+argument_list|,
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|before
+argument_list|)
+expr_stmt|;
 return|return
 name|root
 return|;

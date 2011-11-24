@@ -22,17 +22,15 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An ontology collector that supports locking mechanisms, thus allowing/preventing modifications of the  * ontologies contained therein. Lock management is assumed to occur in methods inherited from  * {@link OntologyCollector}.<br>  *   * TODO add public lock handling methods as well?  *   * @author alexdma  *   */
+comment|/**  * An object that supports locking mechanisms, thus allowing/preventing modifications of the resources  * contained therein. Lock management is assumed to occur in methods inherited from implementations.<br>  *   * TODO add public lock handling methods as well?  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|LockableOntologyCollector
-extends|extends
-name|OntologyCollector
+name|Lockable
 block|{
-comment|/**      * Determines if it is no longer possible to modify this space until it is torn down.      *       * @return true if this space is write-locked, false otherwise.      */
+comment|/**      * Determines if it is no longer possible to modify this resource until it is torn down.      *       * @return true if this resource is write-locked, false otherwise.      */
 name|boolean
 name|isLocked
 parameter_list|()

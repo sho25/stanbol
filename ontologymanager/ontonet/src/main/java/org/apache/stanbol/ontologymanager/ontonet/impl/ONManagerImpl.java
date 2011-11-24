@@ -157,24 +157,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|Serializer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|felix
 operator|.
 name|scr
@@ -1489,10 +1471,6 @@ argument_list|,
 operator|new
 name|Parser
 argument_list|()
-argument_list|,
-operator|new
-name|Serializer
-argument_list|()
 argument_list|)
 argument_list|,
 name|offline
@@ -2041,7 +2019,7 @@ name|ONManager
 operator|.
 name|class
 operator|+
-literal|"activated."
+literal|" activated."
 argument_list|)
 expr_stmt|;
 block|}

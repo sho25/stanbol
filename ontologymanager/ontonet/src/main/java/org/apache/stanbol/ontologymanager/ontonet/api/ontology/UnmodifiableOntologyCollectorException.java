@@ -45,7 +45,7 @@ comment|/**      * Creates a new instance of UnmodifiableOntologySpaceException.
 specifier|public
 name|UnmodifiableOntologyCollectorException
 parameter_list|(
-name|LockableOntologyCollector
+name|OntologyCollector
 name|collector
 parameter_list|)
 block|{

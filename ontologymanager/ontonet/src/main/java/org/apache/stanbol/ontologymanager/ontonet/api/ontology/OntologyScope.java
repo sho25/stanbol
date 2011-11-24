@@ -94,6 +94,8 @@ name|OntologyScope
 extends|extends
 name|NamedResource
 extends|,
+name|Lockable
+extends|,
 name|ScopeOntologyListenable
 extends|,
 name|OWLExportable

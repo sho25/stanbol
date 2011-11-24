@@ -25,46 +25,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
-operator|.
-name|ByteArrayInputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|ByteArrayOutputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|IOException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|InputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Collection
@@ -87,27 +47,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|HashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -159,42 +99,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|SupportedFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|UnsupportedFormatException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|stanbol
 operator|.
 name|ontologymanager
@@ -225,7 +129,27 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|LockableOntologyCollector
+name|Lockable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyCollector
 import|;
 end_import
 
@@ -373,34 +297,6 @@ name|semanticweb
 operator|.
 name|owlapi
 operator|.
-name|io
-operator|.
-name|RDFXMLOntologyFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|io
-operator|.
-name|StreamDocumentTarget
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
 name|model
 operator|.
 name|IRI
@@ -418,20 +314,6 @@ operator|.
 name|model
 operator|.
 name|OWLOntology
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyStorageException
 import|;
 end_import
 
@@ -465,7 +347,9 @@ specifier|abstract
 class|class
 name|AbstractOntologyCollectorImpl
 implements|implements
-name|LockableOntologyCollector
+name|OntologyCollector
+implements|,
+name|Lockable
 implements|,
 name|OntologyInputSourceHandler
 block|{
@@ -511,11 +395,9 @@ argument_list|)
 decl_stmt|;
 comment|/**      * The identifier of the ontologies directly managed by this collector (i.e. that were directly added to      * this space, hence not including those just pulled in via import statements).      *       * TODO make it a set again and have the ontology provider manage the mapping?      */
 specifier|protected
-name|Map
+name|Set
 argument_list|<
 name|IRI
-argument_list|,
-name|String
 argument_list|>
 name|managedOntologies
 decl_stmt|;
@@ -526,6 +408,13 @@ init|=
 literal|null
 decl_stmt|;
 specifier|protected
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|ontologyProvider
+decl_stmt|;
+specifier|protected
 name|Set
 argument_list|<
 name|Class
@@ -534,14 +423,6 @@ name|?
 argument_list|>
 argument_list|>
 name|supportedTypes
-decl_stmt|;
-comment|// private TcProvider tcProvider;
-specifier|protected
-name|OntologyProvider
-argument_list|<
-name|?
-argument_list|>
-name|ontologyProvider
 decl_stmt|;
 specifier|public
 name|AbstractOntologyCollectorImpl
@@ -611,11 +492,9 @@ operator|.
 name|managedOntologies
 operator|=
 operator|new
-name|HashMap
+name|HashSet
 argument_list|<
 name|IRI
-argument_list|,
-name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -706,8 +585,14 @@ operator|.
 name|hasRootOntology
 argument_list|()
 condition|)
-return|return;
 comment|// No ontology to add
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Ontology source cannot be null and must provide an ontology object."
+argument_list|)
+throw|;
 name|Object
 name|o
 init|=
@@ -719,6 +604,7 @@ decl_stmt|;
 name|UriRef
 name|uri
 decl_stmt|;
+comment|/*          * Note for the developer: make sure the call to guessOntologyIdentifier() is only performed once          * during all the storage process, otherwise multiple calls could return different results for          * anonymous ontologies.          */
 if|if
 condition|(
 name|o
@@ -782,33 +668,7 @@ operator|+
 literal|" objects."
 argument_list|)
 throw|;
-comment|// // create/get the graph and add the triples.
-comment|// MGraph mg;
-comment|// try {
-comment|// mg = tcProvider.createMGraph(uri);
-comment|// } catch (EntityAlreadyExistsException e) {
-comment|// mg = tcProvider.getMGraph(uri);
-comment|// mg.clear();
-comment|// }
-comment|// if (o instanceof TripleCollection) mg.addAll((TripleCollection) o);
-comment|// else if (o instanceof OWLOntology) {
-comment|// // FIXME there must be a better angle than using converters...
-comment|// mg.addAll(OWLAPIToClerezzaConverter.owlOntologyToClerezzaTriples((OWLOntology) o));
-comment|// }
-comment|//        ByteArrayOutputStream out = new ByteArrayOutputStream();
-comment|//        // serialize it
-comment|//        if (o instanceof TripleCollection) {
-comment|//            ontologyProvider.getSerializer().serialize(out, (TripleCollection) o, SupportedFormat.RDF_XML);
-comment|//            // in = new ByteArrayInputStream(out.toByteArray());
-comment|//        } else if (o instanceof OWLOntology) {
-comment|//            try {
-comment|//                ((OWLOntology) o).getOWLOntologyManager().saveOntology((OWLOntology) o,
-comment|//                    new RDFXMLOntologyFormat(), new StreamDocumentTarget(out));
-comment|//            } catch (OWLOntologyStorageException e) {
-comment|//                log.error("Could not serialize the ontology for storage", e);
-comment|//                return;
-comment|//            }
-comment|//        }
+comment|// Now for the actual storage. We pass the ontology object directly.
 name|String
 name|key
 init|=
@@ -822,20 +682,15 @@ name|loadInStore
 argument_list|(
 name|o
 argument_list|,
+name|uri
+operator|.
+name|getUnicodeString
+argument_list|()
+argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-comment|//        InputStream in = new ByteArrayInputStream(out.toByteArray());
-comment|//        try {
-comment|//            key = ontologyProvider.loadInStore(in, SupportedFormat.RDF_XML, false);
-comment|//        } catch (UnsupportedFormatException e) {
-comment|//            // RDF/XML not supported is next to impossible...
-comment|//            log.error("Format {} not supported for deserialization.", SupportedFormat.RDF_XML);
-comment|//            return;
-comment|//        } catch (IOException e) {
-comment|//            log.error("Deserialization failed.", e);
-comment|//            return;
-comment|//        }
+comment|/*          * Actually we are not interested in knowing the key here (ontology collectors are not concerned with          * them), but knowing it is non-null and non-empty indicates the operation was successful.          */
 if|if
 condition|(
 name|key
@@ -852,7 +707,7 @@ block|{
 comment|// add to index
 name|managedOntologies
 operator|.
-name|put
+name|add
 argument_list|(
 name|IRI
 operator|.
@@ -863,8 +718,6 @@ operator|.
 name|getUnicodeString
 argument_list|()
 argument_list|)
-argument_list|,
-name|key
 argument_list|)
 expr_stmt|;
 name|log
@@ -1057,6 +910,17 @@ name|boolean
 name|withClosure
 parameter_list|)
 block|{
+if|if
+condition|(
+name|withClosure
+condition|)
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Closure support not implemented efficiently yet. Please call getOntologies(false) and compute the closure union for the OWLOntology objects in the set."
+argument_list|)
+throw|;
 name|Set
 argument_list|<
 name|OWLOntology
@@ -1076,9 +940,6 @@ name|IRI
 name|id
 range|:
 name|managedOntologies
-operator|.
-name|keySet
-argument_list|()
 control|)
 name|ontologies
 operator|.
@@ -1144,8 +1005,6 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-comment|// TripleCollection g = tcProvider.getTriples(new UriRef(ontologyIri.toString()));
-comment|// o = OWLAPIToClerezzaConverter.clerezzaGraphToOWLOntology(g);
 return|return
 name|o
 return|;
@@ -1160,7 +1019,7 @@ argument_list|<
 name|?
 argument_list|>
 argument_list|>
-name|getSupportedTypes
+name|getSupportedOntologyTypes
 parameter_list|()
 block|{
 return|return
@@ -1175,6 +1034,34 @@ block|}
 annotation|@
 name|Override
 specifier|public
+name|int
+name|getOntologyCount
+parameter_list|(
+name|boolean
+name|withClosure
+parameter_list|)
+block|{
+if|if
+condition|(
+name|withClosure
+condition|)
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Closure support not implemented efficiently yet. Please call getOntologyCount(false)."
+argument_list|)
+throw|;
+return|return
+name|managedOntologies
+operator|.
+name|size
+argument_list|()
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
 name|boolean
 name|hasOntology
 parameter_list|(
@@ -1184,9 +1071,6 @@ parameter_list|)
 block|{
 return|return
 name|managedOntologies
-operator|.
-name|keySet
-argument_list|()
 operator|.
 name|contains
 argument_list|(

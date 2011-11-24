@@ -68,7 +68,7 @@ argument_list|<
 name|?
 argument_list|>
 argument_list|>
-name|getSupportedTypes
+name|getSupportedOntologyTypes
 parameter_list|()
 function_decl|;
 block|}

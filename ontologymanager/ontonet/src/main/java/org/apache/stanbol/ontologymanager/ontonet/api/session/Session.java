@@ -47,7 +47,7 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|LockableOntologyCollector
+name|Lockable
 import|;
 end_import
 
@@ -68,6 +68,26 @@ operator|.
 name|ontology
 operator|.
 name|OWLExportable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyCollector
 import|;
 end_import
 
@@ -100,11 +120,13 @@ specifier|public
 interface|interface
 name|Session
 extends|extends
-name|LockableOntologyCollector
-extends|,
-name|SessionListenable
+name|OntologyCollector
 extends|,
 name|OWLExportable
+extends|,
+name|Lockable
+extends|,
+name|SessionListenable
 block|{
 comment|/**      * The states a session can be in: ACTIVE (for running sessions), HALTED (for inactive sessions that may      * later be activated, e.g. when a user logs in), ZOMBIE (inactive and bound for destruction, no longer      * referenceable).      *       * @author alexdma      *       */
 enum|enum

@@ -555,10 +555,6 @@ argument_list|,
 operator|new
 name|Parser
 argument_list|()
-argument_list|,
-operator|new
-name|Serializer
-argument_list|()
 argument_list|)
 argument_list|,
 name|config
