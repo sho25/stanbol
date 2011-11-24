@@ -677,6 +677,27 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|loadInStore
+parameter_list|(
+name|Object
+name|ontology
+parameter_list|,
+name|boolean
+name|force
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Not implemented for OWL API version."
+argument_list|)
+throw|;
+block|}
 block|}
 end_class
 

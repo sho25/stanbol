@@ -527,7 +527,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OntologyContentInputSource
+name|GraphContentInputSource
 import|;
 end_import
 
@@ -1174,6 +1174,14 @@ name|InputStream
 name|content
 parameter_list|)
 block|{
+name|long
+name|before
+init|=
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|scope
@@ -1201,10 +1209,11 @@ operator|.
 name|addOntology
 argument_list|(
 operator|new
-name|OntologyContentInputSource
+name|GraphContentInputSource
 argument_list|(
 name|content
 argument_list|)
+comment|// new OntologyContentInputSource(content)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1259,6 +1268,22 @@ name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"POST request for ontology addition completed in {} ms."
+argument_list|,
+operator|(
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|before
+operator|)
+argument_list|)
+expr_stmt|;
 return|return
 name|Response
 operator|.

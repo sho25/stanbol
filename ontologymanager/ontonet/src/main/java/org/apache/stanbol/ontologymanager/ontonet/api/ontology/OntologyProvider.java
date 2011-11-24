@@ -145,10 +145,6 @@ parameter_list|<
 name|S
 parameter_list|>
 block|{
-name|Serializer
-name|getSerializer
-parameter_list|()
-function_decl|;
 comment|/**      * The key used to configure the prefix to be used for addressing ontologies stored by this provider.      */
 specifier|public
 name|String
@@ -175,6 +171,10 @@ argument_list|<
 name|String
 argument_list|>
 name|getKeys
+parameter_list|()
+function_decl|;
+name|Serializer
+name|getSerializer
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
@@ -240,6 +240,16 @@ throws|throws
 name|IOException
 throws|,
 name|UnsupportedFormatException
+function_decl|;
+name|String
+name|loadInStore
+parameter_list|(
+name|Object
+name|ontology
+parameter_list|,
+name|boolean
+name|force
+parameter_list|)
 function_decl|;
 block|}
 end_interface

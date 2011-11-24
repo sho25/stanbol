@@ -654,6 +654,14 @@ parameter_list|)
 throws|throws
 name|UnmodifiableOntologyCollectorException
 block|{
+name|long
+name|before
+init|=
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|locked
@@ -676,9 +684,6 @@ operator|!=
 literal|null
 condition|?
 name|ontologySource
-operator|.
-name|getRootOntology
-argument_list|()
 else|:
 literal|"<NULL>"
 argument_list|,
@@ -790,171 +795,47 @@ comment|// else if (o instanceof OWLOntology) {
 comment|// // FIXME there must be a better angle than using converters...
 comment|// mg.addAll(OWLAPIToClerezzaConverter.owlOntologyToClerezzaTriples((OWLOntology) o));
 comment|// }
-name|ByteArrayOutputStream
-name|out
-init|=
-operator|new
-name|ByteArrayOutputStream
-argument_list|()
-decl_stmt|;
-comment|// serialize it
-if|if
-condition|(
-name|o
-operator|instanceof
-name|TripleCollection
-condition|)
-block|{
-name|ontologyProvider
-operator|.
-name|getSerializer
-argument_list|()
-operator|.
-name|serialize
-argument_list|(
-name|out
-argument_list|,
-operator|(
-name|TripleCollection
-operator|)
-name|o
-argument_list|,
-name|SupportedFormat
-operator|.
-name|RDF_XML
-argument_list|)
-expr_stmt|;
-comment|// in = new ByteArrayInputStream(out.toByteArray());
-block|}
-elseif|else
-if|if
-condition|(
-name|o
-operator|instanceof
-name|OWLOntology
-condition|)
-block|{
-try|try
-block|{
-operator|(
-operator|(
-name|OWLOntology
-operator|)
-name|o
-operator|)
-operator|.
-name|getOWLOntologyManager
-argument_list|()
-operator|.
-name|saveOntology
-argument_list|(
-operator|(
-name|OWLOntology
-operator|)
-name|o
-argument_list|,
-operator|new
-name|RDFXMLOntologyFormat
-argument_list|()
-argument_list|,
-operator|new
-name|StreamDocumentTarget
-argument_list|(
-name|out
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyStorageException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Could not serialize the ontology for storage"
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-return|return;
-block|}
-block|}
+comment|//        ByteArrayOutputStream out = new ByteArrayOutputStream();
+comment|//        // serialize it
+comment|//        if (o instanceof TripleCollection) {
+comment|//            ontologyProvider.getSerializer().serialize(out, (TripleCollection) o, SupportedFormat.RDF_XML);
+comment|//            // in = new ByteArrayInputStream(out.toByteArray());
+comment|//        } else if (o instanceof OWLOntology) {
+comment|//            try {
+comment|//                ((OWLOntology) o).getOWLOntologyManager().saveOntology((OWLOntology) o,
+comment|//                    new RDFXMLOntologyFormat(), new StreamDocumentTarget(out));
+comment|//            } catch (OWLOntologyStorageException e) {
+comment|//                log.error("Could not serialize the ontology for storage", e);
+comment|//                return;
+comment|//            }
+comment|//        }
 name|String
 name|key
 init|=
 literal|null
 decl_stmt|;
-name|InputStream
-name|in
-init|=
-operator|new
-name|ByteArrayInputStream
-argument_list|(
-name|out
-operator|.
-name|toByteArray
-argument_list|()
-argument_list|)
-decl_stmt|;
-try|try
-block|{
 name|key
 operator|=
 name|ontologyProvider
 operator|.
 name|loadInStore
 argument_list|(
-name|in
-argument_list|,
-name|SupportedFormat
-operator|.
-name|RDF_XML
+name|o
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnsupportedFormatException
-name|e
-parameter_list|)
-block|{
-comment|// RDF/XML not supported is next to impossible...
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Format {} not supported for deserialization."
-argument_list|,
-name|SupportedFormat
-operator|.
-name|RDF_XML
-argument_list|)
-expr_stmt|;
-return|return;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Deserialization failed."
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-return|return;
-block|}
+comment|//        InputStream in = new ByteArrayInputStream(out.toByteArray());
+comment|//        try {
+comment|//            key = ontologyProvider.loadInStore(in, SupportedFormat.RDF_XML, false);
+comment|//        } catch (UnsupportedFormatException e) {
+comment|//            // RDF/XML not supported is next to impossible...
+comment|//            log.error("Format {} not supported for deserialization.", SupportedFormat.RDF_XML);
+comment|//            return;
+comment|//        } catch (IOException e) {
+comment|//            log.error("Deserialization failed.", e);
+comment|//            return;
+comment|//        }
 if|if
 condition|(
 name|key
@@ -984,6 +865,22 @@ argument_list|()
 argument_list|)
 argument_list|,
 name|key
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Add ontology completed in {} ms."
+argument_list|,
+operator|(
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|before
+operator|)
 argument_list|)
 expr_stmt|;
 comment|// fire the event

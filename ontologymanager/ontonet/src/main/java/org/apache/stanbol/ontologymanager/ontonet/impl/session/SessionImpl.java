@@ -97,24 +97,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|stanbol
 operator|.
 name|ontologymanager
@@ -530,7 +512,7 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * FIXME not merging yet      * FIXME not including imported ontologies      *       * @see OWLExportable#asOWLOntology(boolean)      */
+comment|/**      * FIXME not merging yet FIXME not including imported ontologies      *       * @see OWLExportable#asOWLOntology(boolean)      */
 annotation|@
 name|Override
 specifier|public

@@ -325,7 +325,8 @@ argument_list|,
 name|uri
 argument_list|)
 expr_stmt|;
-name|assertNull
+comment|//        No longer null!
+name|assertNotNull
 argument_list|(
 name|OWLUtils
 operator|.
