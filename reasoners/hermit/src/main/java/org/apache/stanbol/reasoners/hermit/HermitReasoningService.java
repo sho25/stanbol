@@ -214,7 +214,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is the implementation of {@see OWLApiReasoningService} using the HermiT reasoner  */
+comment|/**  * This class is the implementation of {@see OWLApiReasoningService} using the HermiT reasoner  *   * @author enridaga  */
 end_comment
 
 begin_class
