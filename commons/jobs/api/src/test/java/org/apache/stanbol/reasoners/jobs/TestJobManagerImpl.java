@@ -280,7 +280,7 @@ specifier|final
 name|int
 name|jobsleepTime
 init|=
-literal|100
+literal|10
 decl_stmt|;
 specifier|private
 specifier|static
