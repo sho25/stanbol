@@ -4423,7 +4423,7 @@ argument_list|)
 expr_stmt|;
 name|obj1
 operator|=
-name|iObject
+name|dObject
 argument_list|()
 expr_stmt|;
 name|jj_consume_token
@@ -4490,7 +4490,7 @@ argument_list|)
 expr_stmt|;
 name|obj1
 operator|=
-name|iObject
+name|dObject
 argument_list|()
 expr_stmt|;
 name|jj_consume_token
