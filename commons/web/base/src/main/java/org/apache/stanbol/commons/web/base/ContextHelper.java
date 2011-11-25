@@ -142,6 +142,33 @@ literal|null
 return|;
 block|}
 block|}
+comment|/**      * Fetches the BundleContext      * @param context the {@link ServletContext}      * @return the BundleContext or<code>null</code> if not registered under      *<code>BundleContext.class.getName()</code>.      */
+specifier|public
+specifier|static
+name|BundleContext
+name|getBundleContext
+parameter_list|(
+name|ServletContext
+name|context
+parameter_list|)
+block|{
+return|return
+operator|(
+name|BundleContext
+operator|)
+name|context
+operator|.
+name|getAttribute
+argument_list|(
+name|BundleContext
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

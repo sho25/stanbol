@@ -65,22 +65,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|SolrServerTypeEnum
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|entityhub
 operator|.
 name|core
@@ -191,153 +175,45 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Setter for the type of the SolrServer client to by used by the SolrYard. Setting the type to      *<code>null</code> will activate the default value. The default is determined based on the configured      * {@link #getSolrServerLocation()}      *       * @param type      *            The type to use      */
-specifier|public
-name|void
-name|setSolrServerType
-parameter_list|(
-name|SolrServerTypeEnum
-name|type
-parameter_list|)
-block|{
-if|if
-condition|(
-name|type
-operator|==
-literal|null
-condition|)
-block|{
-name|config
-operator|.
-name|remove
-argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_SERVER_TYPE
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-name|config
-operator|.
-name|put
-argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_SERVER_TYPE
-argument_list|,
-name|type
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-specifier|public
-name|SolrServerTypeEnum
-name|getSolrServerType
-parameter_list|()
-block|{
-name|Object
-name|serverType
-init|=
-name|config
-operator|.
-name|get
-argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_SERVER_TYPE
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|serverType
-operator|!=
-literal|null
-condition|)
-block|{
-if|if
-condition|(
-name|serverType
-operator|instanceof
-name|SolrServerTypeEnum
-condition|)
-block|{
-return|return
-operator|(
-name|SolrServerTypeEnum
-operator|)
-name|serverType
-return|;
-block|}
-else|else
-block|{
-try|try
-block|{
-return|return
-name|SolrServerTypeEnum
-operator|.
-name|valueOf
-argument_list|(
-name|serverType
-operator|.
-name|toString
-argument_list|()
-argument_list|)
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|IllegalArgumentException
-name|e
-parameter_list|)
-block|{
-comment|// invalid value set!
-name|config
-operator|.
-name|remove
-argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_SERVER_TYPE
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-block|}
-comment|// guess type based on Server Location
-name|String
-name|serverLocation
-init|=
-name|getSolrServerLocation
-argument_list|()
-decl_stmt|;
-comment|// TODO: maybe we need to improve this detection code.
-if|if
-condition|(
-name|serverLocation
-operator|.
-name|startsWith
-argument_list|(
-literal|"http"
-argument_list|)
-condition|)
-block|{
-return|return
-name|SolrServerTypeEnum
-operator|.
-name|HTTP
-return|;
-block|}
-else|else
-block|{
-return|return
-name|SolrServerTypeEnum
-operator|.
-name|EMBEDDED
-return|;
-block|}
-block|}
+comment|//    /**
+comment|//     * Setter for the type of the SolrServer client to by used by the SolrYard. Setting the type to
+comment|//     *<code>null</code> will activate the default value. The default is determined based on the configured
+comment|//     * {@link #getSolrServerLocation()}
+comment|//     *
+comment|//     * @param type
+comment|//     *            The type to use
+comment|//     */
+comment|//    public void setSolrServerType(SolrServerTypeEnum type) {
+comment|//        if (type == null) {
+comment|//            config.remove(SolrYard.SOLR_SERVER_TYPE);
+comment|//        } else {
+comment|//            config.put(SolrYard.SOLR_SERVER_TYPE, type);
+comment|//        }
+comment|//    }
+comment|//
+comment|//    public SolrServerTypeEnum getSolrServerType() {
+comment|//        Object serverType = config.get(SolrYard.SOLR_SERVER_TYPE);
+comment|//        if (serverType != null) {
+comment|//            if (serverType instanceof SolrServerTypeEnum) {
+comment|//                return (SolrServerTypeEnum) serverType;
+comment|//            } else {
+comment|//                try {
+comment|//                    return SolrServerTypeEnum.valueOf(serverType.toString());
+comment|//                } catch (IllegalArgumentException e) {
+comment|//                    // invalid value set!
+comment|//                    config.remove(SolrYard.SOLR_SERVER_TYPE);
+comment|//                }
+comment|//            }
+comment|//        }
+comment|//        // guess type based on Server Location
+comment|//        String serverLocation = getSolrServerLocation();
+comment|//        // TODO: maybe we need to improve this detection code.
+comment|//        if (serverLocation.startsWith("http")) {
+comment|//            return SolrServerTypeEnum.HTTP;
+comment|//        } else {
+comment|//            return SolrServerTypeEnum.EMBEDDED;
+comment|//        }
+comment|//    }
 comment|/**      * Setter for the location of the SolrServer. Might be a URL or a file.      *       * @param url      *            the base URL of the SolrServer. Required, NOT NULL.      */
 specifier|public
 name|void

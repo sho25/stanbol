@@ -242,16 +242,16 @@ name|PROPERTY_SOLR_CORE
 operator|+
 literal|".solrconf"
 decl_stmt|;
-comment|/**      * The {@link Constants#SERVICE_ID} of the {@link CoreContainer} this core      * is registered with      */
+comment|/**      * The {@link Constants#SERVICE_ID} of the {@link CoreContainer} this core      * is registered with. Values are of type {@link Long}.      */
 specifier|public
 specifier|static
 specifier|final
 name|String
 name|PROPERTY_CORE_SERVER_ID
 init|=
-name|PROPERTY_SOLR_CORE
+name|PROPERTY_SOLR_SERVER
 operator|+
-literal|".service.id"
+literal|".id"
 decl_stmt|;
 comment|/**      * The {@link Constants#SERVICE_RANKING service ranking} of the SolrCore.       * The ranking of the SolrServer is used as default if not defined. If also no       * ServiceRanking is defined for the server than '0' is used.<p>      * Values are expected to be Integers. This Property uses       * {@link Constants#SERVICE_RANKING} as key.      */
 specifier|public

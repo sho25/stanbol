@@ -27,16 +27,6 @@ name|java
 operator|.
 name|io
 operator|.
-name|File
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 import|;
 end_import
@@ -127,18 +117,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-operator|.
-name|Entry
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|ServiceLoader
 import|;
 end_import
@@ -150,6 +128,18 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+operator|.
+name|Entry
 import|;
 end_import
 
@@ -261,22 +251,6 @@ name|scr
 operator|.
 name|annotations
 operator|.
-name|PropertyOption
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|felix
-operator|.
-name|scr
-operator|.
-name|annotations
-operator|.
 name|Reference
 import|;
 end_import
@@ -373,24 +347,6 @@ name|client
 operator|.
 name|solrj
 operator|.
-name|SolrRequest
-operator|.
-name|METHOD
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|client
-operator|.
-name|solrj
-operator|.
 name|SolrServer
 import|;
 end_import
@@ -423,9 +379,9 @@ name|client
 operator|.
 name|solrj
 operator|.
-name|impl
+name|SolrRequest
 operator|.
-name|CommonsHttpSolrServer
+name|METHOD
 import|;
 end_import
 
@@ -443,7 +399,7 @@ name|solrj
 operator|.
 name|impl
 operator|.
-name|StreamingUpdateSolrServer
+name|CommonsHttpSolrServer
 import|;
 end_import
 
@@ -491,24 +447,6 @@ name|apache
 operator|.
 name|solr
 operator|.
-name|client
-operator|.
-name|solrj
-operator|.
-name|response
-operator|.
-name|SolrPingResponse
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
 name|common
 operator|.
 name|SolrDocument
@@ -526,6 +464,38 @@ operator|.
 name|common
 operator|.
 name|SolrInputDocument
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|IndexReference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|RegisteredSolrServerTracker
 import|;
 end_import
 
@@ -577,57 +547,11 @@ name|commons
 operator|.
 name|solr
 operator|.
-name|IndexReference
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|managed
 operator|.
-name|apache
+name|standalone
 operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|SolrServerProviderManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|SolrServerTypeEnum
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|utils
-operator|.
-name|ConfigUtils
+name|StandaloneEmbeddedSolrServerProvider
 import|;
 end_import
 
@@ -1033,6 +957,18 @@ name|org
 operator|.
 name|osgi
 operator|.
+name|framework
+operator|.
+name|InvalidSyntaxException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
 name|service
 operator|.
 name|cm
@@ -1052,20 +988,6 @@ operator|.
 name|component
 operator|.
 name|ComponentContext
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|util
-operator|.
-name|tracker
-operator|.
-name|ServiceTracker
 import|;
 end_import
 
@@ -1283,15 +1205,13 @@ name|FIELD_BOOST_MAPPINGS
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.fieldBoosts"
 decl_stmt|;
-comment|/**      * Key used to configure the implementation of the {@link SolrServer} to be used by this SolrYard      * implementation. The default value is determined by the type of the value configured by the      * {@link #SOLR_SERVER_LOCATION}. In case a path of a File URI is used, the type is set to      * {@link SolrServerTypeEnum#EMBEDDED} otherwise {@link SolrServerTypeEnum#HTTP} is used as default.      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|SOLR_SERVER_TYPE
-init|=
-literal|"org.apache.stanbol.entityhub.yard.solr.solrServerType"
-decl_stmt|;
+comment|//    /**
+comment|//     * Key used to configure the implementation of the {@link SolrServer} to be used by this SolrYard
+comment|//     * implementation. The default value is determined by the type of the value configured by the
+comment|//     * {@link #SOLR_SERVER_LOCATION}. In case a path of a File URI is used, the type is set to
+comment|//     * {@link SolrServerTypeEnum#EMBEDDED} otherwise {@link SolrServerTypeEnum#HTTP} is used as default.
+comment|//     */
+comment|//    public static final String SOLR_SERVER_TYPE = "org.apache.stanbol.entityhub.yard.solr.solrServerType";
 comment|/**      * Key used to to enable/disable the default configuration. If this is enabled,      * that the index will get initialised with the Default configuration.<p>      * Notes:<ul>      *<li> Configuration is only supported for EmbeddedSolrServers that use a      * relative path      *<li> If this property is enabled the value of the       * {@link #SOLR_INDEX_CONFIGURATION_NAME} will be ignored.      *</ul>      * Only applies in case a EmbeddedSolrServer is used.      * @see SolrYardConfig#isDefaultInitialisation()      * @see SolrYardConfig#setDefaultInitialisation(Boolean)      */
 specifier|public
 specifier|static
@@ -1424,40 +1344,6 @@ name|Float
 argument_list|>
 name|fieldBoostMap
 decl_stmt|;
-comment|/**      * Manager used to create the {@link SolrServer} instance used by this yard. Supports also      * {@link SolrServerTypeEnum#STREAMING} and {@link SolrServerTypeEnum#LOAD_BALANCE} type of servers. TODO: In case a remove SolrServer      * is configured by the {@link SolrYardConfig#getSolrServerLocation()}, than it would be possible to      * create both an {@link StreamingUpdateSolrServer} (by parsing {@link SolrServerTypeEnum#STREAMING}) and an normal      * {@link CommonsHttpSolrServer}. The streaming update one should be used for indexing requests and the      * commons http one for all other requests. This would provide performance advantages when updating      * {@link Representation}s stored in a SolrYard using an remote SolrServer.      */
-annotation|@
-name|Reference
-argument_list|(
-name|cardinality
-operator|=
-name|ReferenceCardinality
-operator|.
-name|MANDATORY_UNARY
-argument_list|,
-name|bind
-operator|=
-literal|"bindSolrServerProviderManager"
-argument_list|,
-name|unbind
-operator|=
-literal|"unbindSolrServerProviderManager"
-argument_list|,
-name|strategy
-operator|=
-name|ReferenceStrategy
-operator|.
-name|EVENT
-argument_list|,
-name|policy
-operator|=
-name|ReferencePolicy
-operator|.
-name|DYNAMIC
-argument_list|)
-specifier|private
-name|SolrServerProviderManager
-name|solrServerProviderManager
-decl_stmt|;
 comment|/**      * Optionally a {@link ManagedSolrServer} that is used to create new       * Solr indexes based on parsed configurations.      */
 annotation|@
 name|Reference
@@ -1506,10 +1392,14 @@ name|commitWithin
 init|=
 name|DEFAULT_COMMIT_WITHIN_DURATION
 decl_stmt|;
-comment|/**      * Holds the status if this SolrYard runs within or outside an OSGI environment      */
+comment|/**      * the {@link ComponentContext}. Will be<code>null</code> if not running      * within OSGI      */
 specifier|private
-name|boolean
-name|withinOSGI
+name|ComponentContext
+name|context
+decl_stmt|;
+specifier|private
+name|RegisteredSolrServerTracker
+name|_registeredServerTracker
 decl_stmt|;
 comment|/**      * Default constructor as used by the OSGI environment.      *<p>      * DO NOT USE to manually create instances! The SolrYard instances do need to be configured. YOU NEED TO      * USE {@link #SolrYard(SolrYardConfig)} to parse the configuration and the initialise the Yard if running      * outside a OSGI environment.      */
 specifier|public
@@ -1532,13 +1422,7 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 block|{
-name|solrServerProviderManager
-operator|=
-name|SolrServerProviderManager
-operator|.
-name|getInstance
-argument_list|()
-expr_stmt|;
+comment|//        solrServerProviderManager = SolrServerProviderManager.getInstance();
 comment|// init via java.util.ServiceLoader
 name|Iterator
 argument_list|<
@@ -1678,36 +1562,12 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-specifier|protected
-name|void
-name|bindSolrServerProviderManager
-parameter_list|(
-name|SolrServerProviderManager
-name|manager
-parameter_list|)
-block|{
-name|this
-operator|.
-name|solrServerProviderManager
-operator|=
-name|manager
-expr_stmt|;
-block|}
-specifier|protected
-name|void
-name|unbindSolrServerProviderManager
-parameter_list|(
-name|SolrServerProviderManager
-name|manager
-parameter_list|)
-block|{
-name|this
-operator|.
-name|solrServerProviderManager
-operator|=
-literal|null
-expr_stmt|;
-block|}
+comment|//    protected void bindSolrServerProviderManager(SolrServerProviderManager manager){
+comment|//        this.solrServerProviderManager = manager;
+comment|//    }
+comment|//    protected void unbindSolrServerProviderManager(SolrServerProviderManager manager){
+comment|//        this.solrServerProviderManager = null;
+comment|//    }
 specifier|protected
 name|void
 name|bindManagedSolrServer
@@ -1869,27 +1729,6 @@ name|IOException
 throws|,
 name|SolrServerException
 block|{
-if|if
-condition|(
-name|context
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"No valid"
-operator|+
-name|ComponentContext
-operator|.
-name|class
-operator|+
-literal|" parsed in activate!"
-argument_list|)
-throw|;
-block|}
 name|log
 operator|.
 name|info
@@ -1909,9 +1748,11 @@ name|getProperties
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|withinOSGI
+name|this
+operator|.
+name|context
 operator|=
-literal|true
+name|context
 expr_stmt|;
 name|activate
 argument_list|(
@@ -2229,17 +2070,49 @@ condition|(
 name|_server
 operator|==
 literal|null
+operator|&&
+name|_registeredServerTracker
+operator|==
+literal|null
 condition|)
 block|{
 name|initSolrServer
 argument_list|()
 expr_stmt|;
 block|}
+comment|//for remove servers and when running outside OSGI
+if|if
+condition|(
+name|_server
+operator|!=
+literal|null
+condition|)
+block|{
 return|return
 name|_server
 return|;
 block|}
-comment|/**      * @throws YardException      */
+comment|//when an internally managed Solr server is used by this SolrYard
+comment|//we dynamically return the tracked version
+if|if
+condition|(
+name|_registeredServerTracker
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+name|_registeredServerTracker
+operator|.
+name|getService
+argument_list|()
+return|;
+block|}
+return|return
+literal|null
+return|;
+block|}
+comment|/**      * Assumes that this method is only called if {@link #_server} and       * {@link #_registeredServerTracker} is<code>null</code>      * @throws YardException      */
 specifier|private
 name|void
 name|initSolrServer
@@ -2258,59 +2131,50 @@ operator|.
 name|getConfig
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|config
-operator|.
-name|getSolrServerType
-argument_list|()
-operator|==
-name|SolrServerTypeEnum
-operator|.
-name|EMBEDDED
-condition|)
-block|{
-comment|//TODO: add support for the creation of indexes on ManagedSolrServers other than the
-comment|//      default server!
-name|checkManagedSolrIndex
-argument_list|(
-name|managedSolrServer
-argument_list|,
-name|config
-argument_list|)
-expr_stmt|;
-block|}
-name|SolrServerProviderManager
-name|provider
+name|String
+name|indexLocation
 init|=
-name|solrServerProviderManager
-decl_stmt|;
-if|if
-condition|(
-name|provider
-operator|!=
-literal|null
-condition|)
-block|{
-try|try
-block|{
-name|_server
-operator|=
-name|provider
-operator|.
-name|getSolrServer
-argument_list|(
-name|config
-operator|.
-name|getSolrServerType
-argument_list|()
-argument_list|,
 name|config
 operator|.
 name|getSolrServerLocation
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|indexLocation
+operator|.
+name|startsWith
+argument_list|(
+literal|"http"
+argument_list|)
+operator|&&
+name|indexLocation
+operator|.
+name|indexOf
+argument_list|(
+literal|"://"
+argument_list|)
+operator|>
+literal|0
+condition|)
+block|{
+comment|//init remote server
+try|try
+block|{
+name|_server
+operator|=
+operator|new
+name|CommonsHttpSolrServer
+argument_list|(
+name|indexLocation
 argument_list|)
 expr_stmt|;
+name|_server
+operator|.
+name|ping
+argument_list|()
+expr_stmt|;
+comment|//test if remove service is available
 block|}
 catch|catch
 parameter_list|(
@@ -2322,14 +2186,70 @@ throw|throw
 operator|new
 name|YardException
 argument_list|(
-literal|"Unable to init SolrServer "
+literal|"Unable to connect to remote SolrServer '"
 operator|+
 name|config
 operator|.
 name|getSolrServerLocation
 argument_list|()
 operator|+
-literal|"because of "
+literal|"' because of "
+operator|+
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|SolrServerException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to initialise to remote SolrServer '"
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|"' because of "
+operator|+
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to connect to remote SolrServer '"
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|"' because of "
 operator|+
 name|e
 operator|.
@@ -2343,27 +2263,151 @@ block|}
 block|}
 else|else
 block|{
+comment|//locally managed Server
+comment|//(1) check if available (also tries to create if not available and
+comment|//    create is allowed based on the configuration)
+name|IndexReference
+name|indexReference
+init|=
+name|checkManagedSolrIndex
+argument_list|(
+name|managedSolrServer
+argument_list|,
+name|config
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|indexReference
+operator|!=
+literal|null
+condition|)
+block|{
+if|if
+condition|(
+name|context
+operator|==
+literal|null
+condition|)
+block|{
+comment|// outside OSGI
+try|try
+block|{
+name|_server
+operator|=
+name|StandaloneEmbeddedSolrServerProvider
+operator|.
+name|getInstance
+argument_list|()
+operator|.
+name|getSolrServer
+argument_list|(
+name|indexReference
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
 throw|throw
 operator|new
 name|YardException
 argument_list|(
-literal|"Unable to init SolrServer because the '"
+literal|"Unable to initialise configured SolrServer'"
 operator|+
-name|SolrServerProviderManager
+name|config
 operator|.
-name|class
-operator|.
-name|getSimpleName
+name|getSolrServerLocation
 argument_list|()
 operator|+
-literal|"' service is currently not active!"
+literal|"'!"
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @param config      * @param indexReference      * @throws YardException      */
+else|else
+block|{
+comment|//within OSGI dynamically track the service
+try|try
+block|{
+name|_registeredServerTracker
+operator|=
+operator|new
+name|RegisteredSolrServerTracker
+argument_list|(
+name|context
+operator|.
+name|getBundleContext
+argument_list|()
+argument_list|,
+name|indexReference
+argument_list|)
+expr_stmt|;
+name|_registeredServerTracker
+operator|.
+name|open
+argument_list|()
+expr_stmt|;
+comment|//start tracking
+block|}
+catch|catch
+parameter_list|(
+name|InvalidSyntaxException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to track configured SolrServer'"
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|"'!"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to initialise configured SolrServer'"
+operator|+
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+operator|+
+literal|"'!"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+block|}
+block|}
+comment|/**      * Checks if the SolrYard      * @param config      * @param indexReference      * @throws YardException      */
 specifier|private
-name|void
+name|IndexReference
 name|checkManagedSolrIndex
 parameter_list|(
 name|ManagedSolrServer
@@ -2375,16 +2419,6 @@ parameter_list|)
 throws|throws
 name|YardException
 block|{
-if|if
-condition|(
-name|managedSolrServer
-operator|==
-literal|null
-condition|)
-block|{
-return|return;
-comment|//no managed server available ... can not check
-block|}
 name|IndexReference
 name|indexReference
 init|=
@@ -2404,12 +2438,35 @@ name|indexReference
 operator|.
 name|isName
 argument_list|()
-operator|&&
+condition|)
+block|{
+if|if
+condition|(
 name|managedSolrServer
-operator|!=
+operator|==
 literal|null
-operator|&&
-operator|(
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to init SolrIndex '{}' because ManagedSolrServer service is not available"
+argument_list|,
+name|config
+operator|.
+name|getSolrServerLocation
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+comment|//indicate that the server is not yet active
+block|}
+elseif|else
+if|if
+condition|(
 name|indexReference
 operator|.
 name|getServer
@@ -2429,11 +2486,9 @@ operator|.
 name|getServerName
 argument_list|()
 argument_list|)
-operator|)
 condition|)
 block|{
-comment|//config is a name and the server is the default server
-comment|// -> look if index is already managed and if not create!
+comment|//check if the referenced Index is Managed
 if|if
 condition|(
 operator|!
@@ -2448,7 +2503,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|// try to create a new index
+comment|// not managed -> try to create
 name|IndexReference
 name|createdIndexRef
 init|=
@@ -2466,8 +2521,9 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|!
-name|withinOSGI
+name|context
+operator|==
+literal|null
 condition|)
 block|{
 comment|//in that case we need to replace the parse SolrServerLocation
@@ -2483,10 +2539,57 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|//return the created IndexReference
+return|return
+name|createdIndexRef
+return|;
 block|}
+else|else
+block|{
 comment|//already managed -> nothing to do
+return|return
+name|indexReference
+return|;
 block|}
-comment|// absolute path or other server than the default server -> can not create!
+block|}
+else|else
+block|{
+comment|//indexReference.getServer() != managedSolrServer.getServerName
+comment|//TODO we would need to track all active ManagedSolrServer and
+comment|//     check/create the core on the requested one!
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Support for multiple ManagedSolrServer"
+operator|+
+literal|"is not yet implemented (defaultServerName: '"
+operator|+
+name|managedSolrServer
+operator|.
+name|getServerName
+argument_list|()
+operator|+
+literal|"' requested: '"
+operator|+
+name|indexReference
+operator|.
+name|getServer
+argument_list|()
+operator|+
+literal|"')!"
+argument_list|)
+throw|;
+block|}
+block|}
+else|else
+block|{
+comment|//a path was parsed
+comment|// -> create not supported. Users are responsible to provide the server
+return|return
+name|indexReference
+return|;
+block|}
 block|}
 comment|/**      * Creates a new SolrIndex based on this Yards configuration by using the      * {@link ManagedSolrServer} service      * @param config the configuration of this SolrYard      * @param solrIndexLocation the name of the index to create      * @throws YardException On any Exception while creating the index      */
 specifier|private
@@ -2720,24 +2823,24 @@ operator|+
 literal|")"
 argument_list|)
 expr_stmt|;
-comment|//Commit in deactivate is not necessary, because either changes are
-comment|//committed within add/update/remove, or the commitWithin parameter takes
-comment|//care of missing commites of the SolrCore shuts down.
-comment|//        try {
-comment|//            SolrServer server;
-comment|//            server = getServer();
-comment|//            server.commit();
-comment|//        } catch (YardException e) {
-comment|//            log.debug("Deactivate SolrYard with SolrServer that was never initialised");
-comment|//        } catch (SolrServerException e) {
-comment|//            log.error(
-comment|//                String.format("Unable to commit unsaved changes to SolrServer %s during deactivate!",
-comment|//                    config.getSolrServerLocation()), e);
-comment|//        } catch (IOException e) {
-comment|//            log.error(
-comment|//                String.format("Unable to commit unsaved changes to SolrServer %s during deactivate!",
-comment|//                    config.getSolrServerLocation()), e);
-comment|//        }
+comment|//close the RegisteredSolrServer tracker if used
+if|if
+condition|(
+name|_registeredServerTracker
+operator|!=
+literal|null
+condition|)
+block|{
+name|_registeredServerTracker
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|_registeredServerTracker
+operator|=
+literal|null
+expr_stmt|;
+block|}
 name|this
 operator|.
 name|_server
@@ -2795,9 +2898,9 @@ name|deactivate
 argument_list|()
 expr_stmt|;
 comment|// deactivate the super implementation
-name|withinOSGI
+name|context
 operator|=
-literal|false
+literal|null
 expr_stmt|;
 block|}
 comment|/**      * This will case the SolrIndex to be optimised      * @throws YardException on any error while optimising      */
