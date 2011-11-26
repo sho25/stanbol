@@ -153,7 +153,7 @@ name|BaseStanbolResource
 block|{
 specifier|private
 name|RuleStoreImpl
-name|kresRuleStore
+name|ruleStore
 decl_stmt|;
 comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *      * @param servletContext {To get the context where the REST service is running.}      */
 specifier|public
@@ -167,7 +167,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|kresRuleStore
+name|ruleStore
 operator|=
 operator|(
 name|RuleStoreImpl
@@ -186,7 +186,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|kresRuleStore
+name|ruleStore
 operator|==
 literal|null
 condition|)
@@ -221,7 +221,7 @@ name|ok
 argument_list|(
 name|this
 operator|.
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 operator|.
 name|build

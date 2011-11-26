@@ -659,10 +659,6 @@ name|RuleResource
 extends|extends
 name|BaseStanbolResource
 block|{
-specifier|protected
-name|ONManager
-name|onm
-decl_stmt|;
 specifier|private
 name|Logger
 name|log
@@ -677,7 +673,7 @@ argument_list|)
 decl_stmt|;
 specifier|private
 name|RuleStore
-name|kresRuleStore
+name|ruleStore
 decl_stmt|;
 specifier|private
 name|HashMap
@@ -704,7 +700,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|kresRuleStore
+name|ruleStore
 operator|=
 operator|(
 name|RuleStoreImpl
@@ -714,24 +710,6 @@ operator|.
 name|getServiceFromContext
 argument_list|(
 name|RuleStore
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|onm
-operator|=
-operator|(
-name|ONManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|ONManager
 operator|.
 name|class
 argument_list|,
@@ -799,7 +777,7 @@ init|=
 operator|new
 name|GetRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 if|if
@@ -865,7 +843,7 @@ block|{
 name|OWLOntology
 name|onto
 init|=
-name|kresRuleStore
+name|ruleStore
 operator|.
 name|getOntology
 argument_list|()
@@ -1114,7 +1092,7 @@ block|{
 name|OWLOntology
 name|onto
 init|=
-name|kresRuleStore
+name|ruleStore
 operator|.
 name|getOntology
 argument_list|()
@@ -1386,7 +1364,7 @@ init|=
 operator|new
 name|GetRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|String
@@ -1637,7 +1615,7 @@ init|=
 operator|new
 name|GetRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|this
@@ -1684,7 +1662,7 @@ init|=
 operator|new
 name|GetRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|this
@@ -1852,7 +1830,7 @@ init|=
 operator|new
 name|RemoveRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|boolean
@@ -1895,7 +1873,7 @@ init|=
 operator|new
 name|AddRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|ok
@@ -1921,7 +1899,7 @@ condition|(
 name|ok
 condition|)
 block|{
-name|kresRuleStore
+name|ruleStore
 operator|.
 name|saveOntology
 argument_list|()
@@ -1976,7 +1954,7 @@ init|=
 operator|new
 name|AddRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|boolean
@@ -2045,7 +2023,7 @@ init|=
 operator|new
 name|GetRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|this
@@ -2214,7 +2192,7 @@ init|=
 operator|new
 name|RemoveRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|ok
@@ -2269,7 +2247,7 @@ init|=
 operator|new
 name|AddRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|ok
@@ -2295,7 +2273,7 @@ condition|(
 name|ok
 condition|)
 block|{
-name|kresRuleStore
+name|ruleStore
 operator|.
 name|saveOntology
 argument_list|()
@@ -2455,7 +2433,7 @@ init|=
 operator|new
 name|GetRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|this
@@ -2502,7 +2480,7 @@ init|=
 operator|new
 name|GetRecipe
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|this
@@ -2588,7 +2566,7 @@ init|=
 operator|new
 name|RemoveRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|ok
@@ -2617,7 +2595,7 @@ condition|(
 name|ok
 condition|)
 block|{
-name|kresRuleStore
+name|ruleStore
 operator|.
 name|saveOntology
 argument_list|()
@@ -2690,7 +2668,7 @@ init|=
 operator|new
 name|GetRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|this
@@ -2737,7 +2715,7 @@ init|=
 operator|new
 name|RemoveRule
 argument_list|(
-name|kresRuleStore
+name|ruleStore
 argument_list|)
 decl_stmt|;
 name|ok
@@ -2759,7 +2737,7 @@ condition|(
 name|ok
 condition|)
 block|{
-name|kresRuleStore
+name|ruleStore
 operator|.
 name|saveOntology
 argument_list|()

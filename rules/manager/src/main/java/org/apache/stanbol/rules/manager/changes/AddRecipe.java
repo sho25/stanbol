@@ -1958,12 +1958,10 @@ expr_stmt|;
 comment|//Add description
 if|if
 condition|(
-operator|(
 name|recipeDescription
 operator|!=
 literal|null
-operator|)
-operator|||
+operator|&&
 operator|!
 name|recipeDescription
 operator|.
@@ -1994,11 +1992,11 @@ argument_list|,
 name|dataPropAssertion
 argument_list|)
 expr_stmt|;
+block|}
 name|ok
 operator|=
 literal|true
 expr_stmt|;
-block|}
 block|}
 else|else
 block|{
