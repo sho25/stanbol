@@ -161,7 +161,10 @@ name|getStore
 parameter_list|()
 function_decl|;
 comment|/**      * Same as {@link OntologyProvider#getStoredOntology(String, Class)}, but instead of the internal key it      * uses an IRI that<i>publicly</i> identifies or references an ontology. This can be, ordered by      * preference most relevant first:      *<ol>      *<li>The version IRI      *<li>The ontology IRI      *<li>The physical IRI, if different from the above      *</ol>      *       * @param reference      * @param returnType      * @return      */
-name|Object
+parameter_list|<
+name|O
+parameter_list|>
+name|O
 name|getStoredOntology
 parameter_list|(
 name|IRI
@@ -169,12 +172,15 @@ name|reference
 parameter_list|,
 name|Class
 argument_list|<
-name|?
+name|O
 argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-name|Object
+parameter_list|<
+name|O
+parameter_list|>
+name|O
 name|getStoredOntology
 parameter_list|(
 name|IRI
@@ -182,7 +188,7 @@ name|reference
 parameter_list|,
 name|Class
 argument_list|<
-name|?
+name|O
 argument_list|>
 name|returnType
 parameter_list|,
@@ -191,7 +197,10 @@ name|merge
 parameter_list|)
 function_decl|;
 comment|/**      *       *       * @param key      *            the key used to identify the ontology in this provider. They can or cannot coincide with the      *            logical and/or physical IRI of the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @return      */
-name|Object
+parameter_list|<
+name|O
+parameter_list|>
+name|O
 name|getStoredOntology
 parameter_list|(
 name|String
@@ -199,12 +208,15 @@ name|key
 parameter_list|,
 name|Class
 argument_list|<
-name|?
+name|O
 argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-name|Object
+parameter_list|<
+name|O
+parameter_list|>
+name|O
 name|getStoredOntology
 parameter_list|(
 name|String
@@ -212,7 +224,7 @@ name|key
 parameter_list|,
 name|Class
 argument_list|<
-name|?
+name|O
 argument_list|>
 name|returnType
 parameter_list|,
@@ -221,9 +233,12 @@ name|merge
 parameter_list|)
 function_decl|;
 comment|/**      * Returns an array containing the most specific types for ontology objects that this provider can manage      * and return on a call to {@link #getStoredOntology(String, Class)}.      *       * @return the supported ontology return types.      */
+parameter_list|<
+name|O
+parameter_list|>
 name|Class
 argument_list|<
-name|?
+name|O
 argument_list|>
 index|[]
 name|getSupportedReturnTypes

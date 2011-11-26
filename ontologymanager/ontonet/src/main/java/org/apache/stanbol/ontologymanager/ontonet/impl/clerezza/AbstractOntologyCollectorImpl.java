@@ -910,17 +910,8 @@ name|boolean
 name|withClosure
 parameter_list|)
 block|{
-if|if
-condition|(
-name|withClosure
-condition|)
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Closure support not implemented efficiently yet. Please call getOntologies(false) and compute the closure union for the OWLOntology objects in the set."
-argument_list|)
-throw|;
+comment|// if (withClosure) throw new UnsupportedOperationException(
+comment|// "Closure support not implemented efficiently yet. Please call getOntologies(false) and compute the closure union for the OWLOntology objects in the set.");
 name|Set
 argument_list|<
 name|OWLOntology
@@ -941,6 +932,8 @@ name|id
 range|:
 name|managedOntologies
 control|)
+block|{
+comment|// FIXME temporary fix is to merge instead of including closure
 name|ontologies
 operator|.
 name|add
@@ -948,9 +941,12 @@ argument_list|(
 name|getOntology
 argument_list|(
 name|id
+argument_list|,
+name|withClosure
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|Collections
 operator|.
