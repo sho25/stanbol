@@ -783,7 +783,9 @@ throw|throw
 operator|new
 name|UnsupportedOperationException
 argument_list|(
-literal|"Ontology merging not implemented yet. Please set merge parameter to false."
+literal|"Ontology merging only implemented for managed ontologies, not for collectors. "
+operator|+
+literal|"Please set merge parameter to false."
 argument_list|)
 throw|;
 comment|// Create an ontology manager on the fly. We don't really need a permanent one.

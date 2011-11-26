@@ -657,6 +657,8 @@ end_import
 
 begin_class
 annotation|@
+name|Deprecated
+annotation|@
 name|Path
 argument_list|(
 literal|"/ontonet/graphs"

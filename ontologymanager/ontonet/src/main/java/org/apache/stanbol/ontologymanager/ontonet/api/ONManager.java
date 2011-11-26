@@ -228,6 +228,18 @@ literal|"org.apache.stanbol.ontologymanager.ontonet.id"
 decl_stmt|;
 comment|/**      * The key used to configure the base namespace of the ontology network.      */
 name|String
+name|ID_SCOPE_REGISTRY
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.scopeRegistry.id"
+decl_stmt|;
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
+name|String
+name|ID_SESSION_MANAGER
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.sessionManager.id"
+decl_stmt|;
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
+name|String
 name|ONTOLOGY_NETWORK_NS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.ns"

@@ -99,24 +99,6 @@ name|core
 operator|.
 name|serializedform
 operator|.
-name|SupportedFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
 name|UnsupportedFormatException
 import|;
 end_import
@@ -401,7 +383,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"What the phukk "
+literal|"Error parsing "
 operator|+
 name|format
 argument_list|,

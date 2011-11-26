@@ -171,6 +171,17 @@ name|getOntology
 parameter_list|(
 name|IRI
 name|ontologyIri
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|)
+function_decl|;
+comment|/**      * Equivalent to calling<code>getOntology(IRI, false)</code>;      *       * @param ontologyIri      * @return      */
+name|OWLOntology
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
 parameter_list|)
 function_decl|;
 comment|/**      * A shortcut method to avoid computing the ontologies themselves before counting them.      *       * @param withClosure      * @return      */

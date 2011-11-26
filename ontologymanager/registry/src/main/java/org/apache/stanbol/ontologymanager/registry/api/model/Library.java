@@ -144,16 +144,6 @@ parameter_list|)
 throws|throws
 name|RegistryContentException
 function_decl|;
-comment|/**      * Returns a string that can be encoded as a IRI/URI/UriRef etc. for retrieving the raw ontology.      *       * @param ontologyId      * @return      */
-name|String
-name|getOntologyReference
-parameter_list|(
-name|IRI
-name|ontologyId
-parameter_list|)
-throws|throws
-name|RegistryContentException
-function_decl|;
 comment|/**      * Determines if the contents of this library have been loaded and are up-to-date.      *       * @return true if the contents are loaded and up-to-date, false otherwise.      */
 name|boolean
 name|isLoaded

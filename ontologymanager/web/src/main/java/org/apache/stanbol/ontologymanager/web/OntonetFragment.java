@@ -267,6 +267,26 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|registry
 operator|.
 name|api
@@ -308,24 +328,6 @@ operator|.
 name|resources
 operator|.
 name|OntoNetRootResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|web
-operator|.
-name|resources
-operator|.
-name|OntologyIndexResource
 import|;
 end_import
 
@@ -451,7 +453,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|StoredGraphsResource
+name|StoredOntologyResource
 import|;
 end_import
 
@@ -570,6 +572,14 @@ name|offline
 decl_stmt|;
 annotation|@
 name|Reference
+name|OntologyProvider
+argument_list|<
+name|?
+argument_list|>
+name|ontologyProvider
+decl_stmt|;
+annotation|@
+name|Reference
 name|RegistryManager
 name|regMgr
 decl_stmt|;
@@ -641,15 +651,7 @@ name|class
 argument_list|)
 expr_stmt|;
 comment|// classes.add(RESTfulResource.class);
-name|classes
-operator|.
-name|add
-argument_list|(
-name|StoredGraphsResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
+comment|// classes.add(StoredGraphsResource.class);
 name|classes
 operator|.
 name|add
@@ -681,7 +683,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|OntologyIndexResource
+name|StoredOntologyResource
 operator|.
 name|class
 argument_list|)
