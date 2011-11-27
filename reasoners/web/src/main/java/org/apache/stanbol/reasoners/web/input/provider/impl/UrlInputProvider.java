@@ -342,6 +342,15 @@ name|String
 name|url
 parameter_list|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Tesm file is {}"
+argument_list|,
+name|url
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|url

@@ -1263,9 +1263,20 @@ argument_list|(
 literal|"The input is not consistent"
 argument_list|)
 expr_stmt|;
-throw|throw
-name|e
-throw|;
+return|return
+operator|new
+name|ReasoningServiceResult
+argument_list|<
+name|OWLOntology
+argument_list|>
+argument_list|(
+name|ReasoningServiceExecutor
+operator|.
+name|TASK_CHECK
+argument_list|,
+literal|false
+argument_list|)
+return|;
 block|}
 catch|catch
 parameter_list|(

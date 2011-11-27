@@ -2635,16 +2635,9 @@ condition|)
 block|{
 comment|// We keep only the first value
 comment|// FIXME We create the file once again...
-name|inmgr
-operator|.
-name|addInputProvider
-argument_list|(
-operator|new
-name|FileInputProvider
-argument_list|(
-operator|new
-name|File
-argument_list|(
+name|String
+name|fv
+init|=
 name|entry
 operator|.
 name|getValue
@@ -2655,6 +2648,32 @@ argument_list|()
 operator|.
 name|next
 argument_list|()
+decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"File value is: {}"
+argument_list|,
+name|fv
+argument_list|)
+expr_stmt|;
+name|inmgr
+operator|.
+name|addInputProvider
+argument_list|(
+operator|new
+name|FileInputProvider
+argument_list|(
+operator|new
+name|File
+argument_list|(
+name|URI
+operator|.
+name|create
+argument_list|(
+name|fv
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

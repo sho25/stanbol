@@ -843,7 +843,7 @@ name|status
 argument_list|(
 name|Status
 operator|.
-name|NO_CONTENT
+name|CONFLICT
 argument_list|)
 operator|.
 name|entity
@@ -917,7 +917,7 @@ name|status
 argument_list|(
 name|Status
 operator|.
-name|NO_CONTENT
+name|CONFLICT
 argument_list|)
 operator|.
 name|build
