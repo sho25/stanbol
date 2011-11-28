@@ -940,9 +940,6 @@ return|return
 literal|null
 return|;
 block|}
-return|return
-literal|null
-return|;
 block|}
 annotation|@
 name|Override
