@@ -145,6 +145,24 @@ name|Resource
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|reasoner
+operator|.
+name|rulesys
+operator|.
+name|ClauseEntry
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
@@ -470,6 +488,18 @@ expr_stmt|;
 block|}
 return|return
 name|owlLiteral
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|ClauseEntry
+name|toJenaClauseEntry
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
 return|;
 block|}
 block|}

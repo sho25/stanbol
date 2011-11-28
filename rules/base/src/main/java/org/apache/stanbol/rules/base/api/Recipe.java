@@ -21,6 +21,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -122,6 +132,26 @@ parameter_list|(
 name|Rule
 name|kReSRule
 parameter_list|)
+function_decl|;
+comment|/** 	 * Convert the recipe in a list of Jena Rules. 	 *  	 * @return The list of Jena Rules which represents the Recipe. 	 */
+name|List
+argument_list|<
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|reasoner
+operator|.
+name|rulesys
+operator|.
+name|Rule
+argument_list|>
+name|toJenaRules
+parameter_list|()
 function_decl|;
 block|}
 end_interface

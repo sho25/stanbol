@@ -199,6 +199,22 @@ name|RuleExpressiveness
 name|getExpressiveness
 parameter_list|()
 function_decl|;
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|reasoner
+operator|.
+name|rulesys
+operator|.
+name|Rule
+name|toJenaRule
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
