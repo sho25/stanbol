@@ -594,123 +594,29 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
+comment|// TODO reinstate this
+comment|// @Override
+comment|// public OWLOntology asOWLOntology(boolean merge) {
+comment|// OWLOntology o = super.asOWLOntology(merge);
+comment|// if (o != null&& !merge) {
+comment|// OWLOntologyManager ontologyManager = o.getOWLOntologyManager();
+comment|// OWLDataFactory df = ontologyManager.getOWLDataFactory();
+comment|// List<OWLOntologyChange> changes = new LinkedList<OWLOntologyChange>();
+comment|// // Add import declarations for attached scopes.
+comment|// for (String scopeID : getAttachedScopes()) {
+comment|// IRI physIRI = IRI.create(namespace + scopeID);
+comment|// changes.add(new AddImport(o, df.getOWLImportsDeclaration(physIRI)));
+comment|// }
+comment|// ontologyManager.applyChanges(changes);
+comment|// }
+comment|// return o;
+comment|// }
+comment|/**      * FIXME not merging yet FIXME not including imported ontologies unless they are merged *before* storage.      *       * @see OWLExportable#asOWLOntology(boolean)      */
 annotation|@
 name|Override
 specifier|public
 name|OWLOntology
 name|asOWLOntology
-parameter_list|(
-name|boolean
-name|merge
-parameter_list|)
-block|{
-name|OWLOntology
-name|o
-init|=
-name|super
-operator|.
-name|asOWLOntology
-argument_list|(
-name|merge
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|o
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|merge
-condition|)
-block|{
-name|OWLOntologyManager
-name|ontologyManager
-init|=
-name|o
-operator|.
-name|getOWLOntologyManager
-argument_list|()
-decl_stmt|;
-name|OWLDataFactory
-name|df
-init|=
-name|ontologyManager
-operator|.
-name|getOWLDataFactory
-argument_list|()
-decl_stmt|;
-name|List
-argument_list|<
-name|OWLOntologyChange
-argument_list|>
-name|changes
-init|=
-operator|new
-name|LinkedList
-argument_list|<
-name|OWLOntologyChange
-argument_list|>
-argument_list|()
-decl_stmt|;
-comment|// Add import declarations for attached scopes.
-for|for
-control|(
-name|String
-name|scopeID
-range|:
-name|getAttachedScopes
-argument_list|()
-control|)
-block|{
-name|IRI
-name|physIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|namespace
-operator|+
-name|scopeID
-argument_list|)
-decl_stmt|;
-name|changes
-operator|.
-name|add
-argument_list|(
-operator|new
-name|AddImport
-argument_list|(
-name|o
-argument_list|,
-name|df
-operator|.
-name|getOWLImportsDeclaration
-argument_list|(
-name|physIRI
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-name|ontologyManager
-operator|.
-name|applyChanges
-argument_list|(
-name|changes
-argument_list|)
-expr_stmt|;
-block|}
-return|return
-name|o
-return|;
-block|}
-comment|/**      * FIXME not merging yet FIXME not including imported ontologies unless they are merged *before* storage.      *       * @see OWLExportable#asOWLOntology(boolean)      */
-comment|// @Override
-specifier|public
-name|OWLOntology
-name|asOWLOntology2
 parameter_list|(
 name|boolean
 name|merge
@@ -1318,6 +1224,25 @@ name|attachedScopes
 operator|.
 name|keySet
 argument_list|()
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|OWLOntology
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|)
+block|{
+return|return
+name|getOntology
+argument_list|(
+name|ontologyIri
+argument_list|,
+literal|false
+argument_list|)
 return|;
 block|}
 annotation|@
