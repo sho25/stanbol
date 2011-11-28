@@ -42,8 +42,8 @@ specifier|public
 specifier|abstract
 class|class
 name|ComparisonAtom
-implements|implements
-name|RuleAtom
+extends|extends
+name|AbstractRuleAtom
 block|{
 annotation|@
 name|Override
