@@ -1017,8 +1017,6 @@ condition|)
 block|{
 name|subject
 operator|=
-literal|"?"
-operator|+
 name|subject
 operator|.
 name|replace
@@ -1049,8 +1047,6 @@ condition|)
 block|{
 name|object
 operator|=
-literal|"?"
-operator|+
 name|subject
 operator|.
 name|replace

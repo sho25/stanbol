@@ -1284,8 +1284,6 @@ condition|)
 block|{
 name|object
 operator|=
-literal|"?"
-operator|+
 name|subject
 operator|.
 name|replace
