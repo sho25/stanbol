@@ -69,20 +69,6 @@ name|Session
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
-import|;
-end_import
-
 begin_comment
 comment|/**  * Represents an ontology network that is used for modelling a given knowledge component or domain, e.g.  * workflows, organisations, devices, content or business domain.<br>  *<br>  * Each ontology scope comprises in turn a number of ontology spaces of three kinds.  *<ul>  *<li>Exactly one core space, which defines the immutable components of the scope.  *<li>At most one custom space, which contains user-defined components.  *<li>Zero or more session spaces, which contains (potentially volatile) components specific for user  * sessions.  *</ul>  * An ontology scope can thus be seen as a fa&ccedil;ade for ontology spaces.  *   *   * @author alexdma  *   */
 end_comment
@@ -100,7 +86,7 @@ name|ScopeOntologyListenable
 extends|,
 name|OWLExportable
 block|{
-comment|/**      * Adds a new ontology space to the list of user session spaces for this scope.      *       * @param sessionSpace      *            the ontology space to be added.      * @throws UnmodifiableOntologyCollectorException      */
+comment|/**      * Adds a new ontology space to the list of user session spaces for this scope.      *       * @deprecated as session ontology spaces are obsolete, so is this method. Please refer directly to the      *             session identified by<code>sessionID</code>.      *       * @param sessionSpace      *            the ontology space to be added.      * @throws UnmodifiableOntologyCollectorException      */
 name|void
 name|addSessionSpace
 parameter_list|(
@@ -112,11 +98,6 @@ name|sessionID
 parameter_list|)
 throws|throws
 name|UnmodifiableOntologyCollectorException
-function_decl|;
-comment|/**      * Returns an ontological form of this scope.      *       * @deprecated Please use the inherited method {@link OWLExportable#asOWLOntology(boolean)}. Calls to the      *             current method are equivalent to asOWLOntology(false).      * @return an OWL ontology that represents this scope.      */
-name|OWLOntology
-name|asOWLOntology
-parameter_list|()
 function_decl|;
 comment|/**      * Returns the core ontology space for this ontology scope. The core space should never be null for any      * scope.      *       * @return the core ontology space      */
 name|OntologySpace

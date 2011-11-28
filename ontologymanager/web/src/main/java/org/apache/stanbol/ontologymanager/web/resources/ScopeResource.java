@@ -1098,7 +1098,9 @@ argument_list|(
 name|scope
 operator|.
 name|asOWLOntology
-argument_list|()
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|build

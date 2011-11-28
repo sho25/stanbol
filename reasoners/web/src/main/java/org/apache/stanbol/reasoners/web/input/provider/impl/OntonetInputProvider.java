@@ -902,60 +902,18 @@ name|scope
 operator|.
 name|asOWLOntology
 argument_list|(
-literal|false
-argument_list|)
-argument_list|)
-expr_stmt|;
-for|for
-control|(
-name|OWLOntology
-name|o
-range|:
-name|scope
-operator|.
-name|getCustomSpace
-argument_list|()
-operator|.
-name|getOntologies
-argument_list|(
 literal|true
 argument_list|)
-control|)
-block|{
-name|set
-operator|.
-name|add
-argument_list|(
-name|o
 argument_list|)
 expr_stmt|;
-comment|// set.addAll(o.getImportsClosure());
-block|}
-for|for
-control|(
-name|OWLOntology
-name|o
-range|:
-name|scope
-operator|.
-name|getCoreSpace
-argument_list|()
-operator|.
-name|getOntologies
-argument_list|(
-literal|true
-argument_list|)
-control|)
-block|{
-name|set
-operator|.
-name|add
-argument_list|(
-name|o
-argument_list|)
-expr_stmt|;
-comment|// set.addAll(o.getImportsClosure());
-block|}
+comment|// for (OWLOntology o : scope.getCustomSpace().getOntologies(true)) {
+comment|// set.add(o);
+comment|// // set.addAll(o.getImportsClosure());
+comment|// }
+comment|// for (OWLOntology o : scope.getCoreSpace().getOntologies(true)) {
+comment|// set.add(o);
+comment|// // set.addAll(o.getImportsClosure());
+comment|// }
 if|if
 condition|(
 name|session
@@ -971,33 +929,33 @@ name|session
 operator|.
 name|asOWLOntology
 argument_list|(
-literal|false
-argument_list|)
-argument_list|)
-expr_stmt|;
-for|for
-control|(
-name|OWLOntology
-name|o
-range|:
-name|session
-operator|.
-name|getOntologies
-argument_list|(
 literal|true
 argument_list|)
-control|)
-block|{
-name|set
-operator|.
-name|add
-argument_list|(
-name|o
 argument_list|)
 expr_stmt|;
-comment|// set.addAll(o.getImportsClosure());
+comment|// for (OWLOntology o : session.getOntologies(true)) {
+comment|// set.add(o);
+comment|// // set.addAll(o.getImportsClosure());
+comment|// }
 block|}
-block|}
+if|if
+condition|(
+name|set
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+condition|)
+return|return
+name|set
+operator|.
+name|iterator
+argument_list|()
+operator|.
+name|next
+argument_list|()
+return|;
 name|OWLOntologyMerger
 name|merger
 init|=

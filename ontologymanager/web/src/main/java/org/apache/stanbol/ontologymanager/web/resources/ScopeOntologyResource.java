@@ -1317,7 +1317,9 @@ name|getCoreSpace
 argument_list|()
 operator|.
 name|asOWLOntology
-argument_list|()
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|build
@@ -1352,7 +1354,9 @@ name|getCustomSpace
 argument_list|()
 operator|.
 name|asOWLOntology
-argument_list|()
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|build

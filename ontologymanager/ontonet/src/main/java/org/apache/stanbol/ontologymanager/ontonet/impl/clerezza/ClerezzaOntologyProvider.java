@@ -3028,6 +3028,7 @@ name|ontologyId
 init|=
 literal|null
 decl_stmt|;
+comment|// Get the id of this ontology.
 name|Iterator
 argument_list|<
 name|Triple
@@ -3219,27 +3220,42 @@ return|;
 block|}
 else|else
 block|{
-comment|// final Set<OWLOntology> mergeUs = new HashSet<OWLOntology>();
-comment|//
-comment|// for (UriRef ref : revImps) {
-comment|// if (!loaded.contains(ref)) {
-comment|// TripleCollection tc = store.getTriples(ref);
-comment|// mergeUs.add(OWLAPIToClerezzaConverter.clerezzaGraphToOWLOntology(tc, mgr));
-comment|// loaded.add(ref);
-comment|// }
-comment|// }
-comment|// mergeUs.add(o);
-comment|// OWLOntologyMerger merger = new OWLOntologyMerger(new OWLOntologySetProvider() {
-comment|//
-comment|// @Override
-comment|// public Set<OWLOntology> getOntologies() {
-comment|// return mergeUs;
-comment|// }
-comment|//
-comment|// }, false);
-comment|// OWLOntology merged = merger.createMergedOntology(OWLManager.createOWLOntologyManager(),
-comment|// OWLUtils.guessOntologyIdentifier(o));
 comment|// More efficient / brutal implementation.
+comment|// If there is just the root ontology, convert it straight away.
+if|if
+condition|(
+name|revImps
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+operator|&&
+name|revImps
+operator|.
+name|contains
+argument_list|(
+name|graphName
+argument_list|)
+condition|)
+block|{
+name|OWLOntology
+name|o
+init|=
+name|OWLAPIToClerezzaConverter
+operator|.
+name|clerezzaGraphToOWLOntology
+argument_list|(
+name|graph
+argument_list|,
+name|mgr
+argument_list|)
+decl_stmt|;
+return|return
+name|o
+return|;
+block|}
+comment|// FIXME when there's more than one ontology, this way of merging them seems inefficient...
 name|TripleCollection
 name|tempGraph
 init|=
