@@ -701,7 +701,6 @@ throw|;
 block|}
 block|}
 return|;
-break|break;
 case|case
 name|Jena
 case|:
@@ -884,7 +883,7 @@ name|hasNext
 parameter_list|()
 block|{
 return|return
-name|iterator
+name|jRiterator
 operator|.
 name|hasNext
 argument_list|()
@@ -906,7 +905,7 @@ return|return
 operator|(
 name|T
 operator|)
-name|iterator
+name|jRiterator
 operator|.
 name|next
 argument_list|()
@@ -936,13 +935,14 @@ throw|;
 block|}
 block|}
 return|;
-break|break;
 default|default:
 return|return
 literal|null
 return|;
-break|break;
 block|}
+return|return
+literal|null
+return|;
 block|}
 annotation|@
 name|Override
