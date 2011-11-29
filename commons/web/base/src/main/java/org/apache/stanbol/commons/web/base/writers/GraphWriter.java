@@ -55,6 +55,22 @@ end_import
 
 begin_import
 import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|APPLICATION_OCTET_STREAM
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|apache
@@ -548,6 +564,13 @@ argument_list|(
 name|APPLICATION_JSON
 argument_list|)
 expr_stmt|;
+name|types
+operator|.
+name|add
+argument_list|(
+name|APPLICATION_OCTET_STREAM
+argument_list|)
+expr_stmt|;
 name|supportedMediaTypes
 operator|=
 name|Collections
@@ -558,6 +581,14 @@ name|types
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|ENCODING
+init|=
+literal|"UTF-8"
+decl_stmt|;
 annotation|@
 name|Context
 specifier|protected
@@ -735,6 +766,13 @@ name|isWildcardType
 argument_list|()
 operator|||
 name|TEXT_PLAIN
+operator|.
+name|equals
+argument_list|(
+name|mediaTypeString
+argument_list|)
+operator|||
+name|APPLICATION_OCTET_STREAM
 operator|.
 name|equals
 argument_list|(

@@ -47,22 +47,6 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|APPLICATION_JSON_TYPE
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MediaType
-operator|.
 name|TEXT_HTML
 import|;
 end_import
@@ -96,26 +80,6 @@ operator|.
 name|MediaType
 operator|.
 name|WILDCARD
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|SupportedFormat
-operator|.
-name|RDF_JSON
 import|;
 end_import
 
@@ -622,7 +586,6 @@ specifier|protected
 name|Serializer
 name|serializer
 decl_stmt|;
-comment|// bind the job manager by looking it up from the servlet request context
 specifier|public
 name|EnginesRootResource
 parameter_list|(
@@ -632,6 +595,7 @@ name|ServletContext
 name|context
 parameter_list|)
 block|{
+comment|// bind the job manager by looking it up from the servlet request context
 name|jobManager
 operator|=
 name|ContextHelper
@@ -758,8 +722,6 @@ operator|.
 name|build
 argument_list|()
 return|;
-comment|//        return Response.ok(new Viewable("index", this))
-comment|//        .header(HttpHeaders.CONTENT_TYPE, TEXT_HTML+"; charset=utf-8").build();
 block|}
 specifier|public
 name|List
@@ -1015,7 +977,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|// let the store build an internal URI basted on the content
+comment|// let the store build an internal URI based on the content
 name|uri
 operator|=
 literal|null
@@ -1083,14 +1045,6 @@ name|ci
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
-name|graph
-init|=
-name|ci
-operator|.
-name|getMetadata
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
 name|buildAjaxview
@@ -1172,6 +1126,14 @@ name|build
 argument_list|()
 return|;
 block|}
+name|MGraph
+name|graph
+init|=
+name|ci
+operator|.
+name|getMetadata
+argument_list|()
+decl_stmt|;
 name|ResponseBuilder
 name|rb
 init|=
@@ -1182,57 +1144,6 @@ argument_list|(
 name|graph
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|format
-operator|!=
-literal|null
-condition|)
-block|{
-comment|// force mimetype from form params
-name|rb
-operator|.
-name|header
-argument_list|(
-name|HttpHeaders
-operator|.
-name|CONTENT_TYPE
-argument_list|,
-name|format
-operator|+
-literal|"; charset=UTF-8"
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|headers
-operator|.
-name|getAcceptableMediaTypes
-argument_list|()
-operator|.
-name|contains
-argument_list|(
-name|APPLICATION_JSON_TYPE
-argument_list|)
-condition|)
-block|{
-comment|// force RDF JSON media type (TODO: move this logic
-name|rb
-operator|.
-name|header
-argument_list|(
-name|HttpHeaders
-operator|.
-name|CONTENT_TYPE
-argument_list|,
-name|RDF_JSON
-operator|+
-literal|"; charset=UTF-8"
-argument_list|)
-expr_stmt|;
-block|}
-elseif|else
 if|if
 condition|(
 name|headers
@@ -1246,6 +1157,15 @@ condition|)
 block|{
 comment|// use RDF/XML as default format to keep compat with OpenCalais
 comment|// clients
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"NO ACCEPTABLE MEDIA TYPE"
+argument_list|)
+expr_stmt|;
 name|rb
 operator|.
 name|header
