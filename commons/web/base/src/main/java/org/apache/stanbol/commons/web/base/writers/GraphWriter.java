@@ -780,6 +780,15 @@ name|mediaTypeString
 argument_list|)
 condition|)
 block|{
+name|httpHeaders
+operator|.
+name|putSingle
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+name|APPLICATION_JSON
+argument_list|)
+expr_stmt|;
 name|getSerializer
 argument_list|()
 operator|.

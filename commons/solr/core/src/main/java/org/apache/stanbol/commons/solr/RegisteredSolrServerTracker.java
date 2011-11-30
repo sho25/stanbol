@@ -280,7 +280,7 @@ name|createFilter
 argument_list|(
 name|reference
 operator|.
-name|getServerFilter
+name|getIndexFilter
 argument_list|()
 argument_list|)
 else|:
@@ -325,7 +325,7 @@ else|else
 block|{
 name|trackingSolrCore
 operator|=
-literal|false
+literal|true
 expr_stmt|;
 name|coreName
 operator|=

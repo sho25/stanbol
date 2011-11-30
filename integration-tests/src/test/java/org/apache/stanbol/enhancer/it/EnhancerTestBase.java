@@ -234,11 +234,7 @@ literal|"org.apache.stanbol.*LangIdEnhancementEngine"
 argument_list|,
 literal|"org.apache.stanbol.*NamedEntityExtractionEnhancementEngine"
 argument_list|,
-comment|//"org.apache.stanbol.*OpenCalaisEngine", not available in offline mode
 literal|"org.apache.stanbol.*NamedEntityTaggingEngine"
-argument_list|,
-literal|"org.apache.stanbol.*CachingDereferencerEngine"
-comment|//removed because not available in offline mode
 argument_list|)
 expr_stmt|;
 comment|/*  List of expected referencedSites could also be made                   *  configurable via system properties, but we don't expect it                   *  to change often.                   */

@@ -418,9 +418,13 @@ block|}
 else|else
 block|{
 comment|//no value found
-return|return
-literal|null
-return|;
+name|headerValues
+operator|=
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 if|if
