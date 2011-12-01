@@ -426,9 +426,7 @@ name|SchemaFactory
 operator|.
 name|newInstance
 argument_list|(
-name|XMLConstants
-operator|.
-name|W3C_XML_SCHEMA_NS_URI
+literal|"http://www.w3.org/2001/XMLSchema"
 argument_list|,
 literal|"com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory"
 argument_list|,
