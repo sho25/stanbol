@@ -489,27 +489,17 @@ name|probeLength
 init|=
 name|PROBE_LENGTH_DEFAULT
 decl_stmt|;
-comment|/**      * The activate method.      *      * @param ce the {@link ComponentContext}      */
+comment|/**      * Initialize the language identifier model and load the prop length bound if      * provided as a property.      *       * @param ce      *            the {@link ComponentContext}      */
 specifier|protected
 name|void
 name|activate
 parameter_list|(
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
 name|ComponentContext
 name|ce
 parameter_list|)
 throws|throws
 name|IOException
 block|{
-name|String
-name|confFile
-init|=
-literal|null
-decl_stmt|;
 if|if
 condition|(
 name|ce
@@ -517,6 +507,11 @@ operator|!=
 literal|null
 condition|)
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 name|Dictionary
 argument_list|<
 name|String
@@ -562,20 +557,6 @@ name|initProfiles
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * The deactivate method.      *      * @param ce the {@link ComponentContext}      */
-specifier|protected
-name|void
-name|deactivate
-parameter_list|(
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
-name|ComponentContext
-name|ce
-parameter_list|)
-block|{            }
 specifier|public
 name|int
 name|canEnhance
