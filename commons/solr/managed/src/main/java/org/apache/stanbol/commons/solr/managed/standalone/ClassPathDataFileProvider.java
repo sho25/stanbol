@@ -17,7 +17,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|standalone
 package|;
 end_package
 
@@ -63,6 +63,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ServiceLoader
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -76,6 +86,24 @@ operator|.
 name|datafileprovider
 operator|.
 name|DataFileProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|stanboltools
+operator|.
+name|datafileprovider
+operator|.
+name|DataFileTracker
 import|;
 end_import
 
@@ -99,10 +127,14 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * Utility that allows to use the {@link DataFileProvider} to lookup   * solrindex archives outside of OSGI.<p>  * Usage:<ul>  *<li> {@link ServiceLoader} is used to search for DataFileProviders outside of  * OSGI. So make sure to have a default constructor and provide the required  * "org.apache.stanbol.commons.stanboltools.datafileprovider.DataFileProvider" files  * within the "META-INF/services" within your jar.  *<li> An instance of this class will load datafiles found within   * {@link #INDEX_BASE_PATH} ("solr/core/"). If you do not want to register an own  * {@link DataFileProvider} implementation with the {@link ServiceLoader} utility  * copy the files to this directory.  *<li> To register server our own datafile you might want to consider to extend  * this implementation by calling the protected constructor with two parameters.  * and parsing the path to your data files as second parameter. Do not forget to  * register your DataFileProvider with the {@link ServiceLoader} utility.  * @author Rupert Westenthaler  *  */
+end_comment
+
 begin_class
 specifier|public
 class|class
-name|ClassPathSolrIndexConfigProvider
+name|ClassPathDataFileProvider
 implements|implements
 name|DataFileProvider
 block|{
@@ -131,19 +163,79 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|String
+name|path
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
 name|symbolicName
 decl_stmt|;
-comment|/**      * Creates a DataFileProvider that loads SolrIndexConfigurations via the      * classpath relative to {@value #INDEX_BASE_PATH}.      * @param bundleSymbolicName the symbolic name of the bundle to accept      * requests from or<code>null</code> to accept any request.      */
+comment|/**      * Loads solr index configurations from "solr/core/" via the java classpath      */
 specifier|public
-name|ClassPathSolrIndexConfigProvider
+name|ClassPathDataFileProvider
+parameter_list|()
+block|{
+name|this
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Creates a DataFileProvider that loads SolrIndexConfigurations via the      * classpath relative to {@value #INDEX_BASE_PATH}.      * @param bundleSymbolicName the symbolic name of the bundle to accept      * requests from or<code>null</code> to accept any request.      */
+specifier|protected
+name|ClassPathDataFileProvider
 parameter_list|(
 name|String
 name|bundleSymbolicName
+parameter_list|,
+name|String
+name|path
 parameter_list|)
 block|{
 name|symbolicName
 operator|=
 name|bundleSymbolicName
+expr_stmt|;
+name|this
+operator|.
+name|path
+operator|=
+name|path
+operator|==
+literal|null
+condition|?
+name|INDEX_BASE_PATH
+else|:
+comment|//use default path
+comment|// else check if we need to add an '/' to the parsed path
+operator|(
+name|path
+operator|.
+name|isEmpty
+argument_list|()
+operator|||
+name|path
+operator|.
+name|charAt
+argument_list|(
+name|path
+operator|.
+name|length
+argument_list|()
+operator|-
+literal|1
+argument_list|)
+operator|!=
+literal|'/'
+operator|)
+condition|?
+name|path
+operator|+
+literal|'/'
+else|:
+name|path
 expr_stmt|;
 block|}
 annotation|@
@@ -276,7 +368,7 @@ specifier|final
 name|String
 name|resourcePath
 init|=
-name|INDEX_BASE_PATH
+name|path
 operator|+
 name|filename
 decl_stmt|;

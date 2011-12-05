@@ -173,6 +173,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -184,6 +194,16 @@ operator|.
 name|util
 operator|.
 name|Properties
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ServiceLoader
 import|;
 end_import
 
@@ -393,26 +413,6 @@ name|managed
 operator|.
 name|impl
 operator|.
-name|ClassPathSolrIndexConfigProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|solr
-operator|.
-name|managed
-operator|.
-name|impl
-operator|.
 name|ManagementUtils
 import|;
 end_import
@@ -486,7 +486,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Basic implementation of the {@link ManagedSolrServer} interface that  * can be used without an OSGI environment.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Basic implementation of the {@link ManagedSolrServer} interface that  * can be used without an OSGI environment.  *<p>  * NOTE: {@link ServiceLoader} is used to search for DataFileProviders outside of  * OSGI. An instance of {@link ClassPathDataFileProvider} is registered by   * default that loads Index-Archives form "solr/core/". if you want to load  * Data-Files form different locations you will need to provide your own   * DataFileProvider. Extending {@link ClassPathDataFileProvider} might be the  * simplest way to do this.  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -521,15 +521,22 @@ decl_stmt|;
 comment|/**      * Outside OSGI we need an instance of a data file provider that can load      * Index Configuration via the classpath      */
 specifier|private
 specifier|static
+name|ServiceLoader
+argument_list|<
 name|DataFileProvider
-name|dataFileProvider
+argument_list|>
+name|dataFileProviders
 init|=
-operator|new
-name|ClassPathSolrIndexConfigProvider
+name|ServiceLoader
+operator|.
+name|load
 argument_list|(
-literal|null
+name|DataFileProvider
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
+comment|//private static DataFileProvider dataFileProvider = new ClassPathSolrIndexConfigProvider(null);
 comment|/**      * Initialising Solr Indexes with a lot of data may take some time. Especially if the data need to be      * copied to the managed directory. Therefore it is important to wait for the initialisation to be      * complete before opening an Solr Index on it.      *<p>      * To this set all cores that are currently initialised are added. As soon as an initialisation completed      * this set is notified.      */
 specifier|private
 name|Set
@@ -1861,7 +1868,45 @@ block|}
 name|InputStream
 name|is
 init|=
-name|dataFileProvider
+literal|null
+decl_stmt|;
+for|for
+control|(
+name|Iterator
+argument_list|<
+name|DataFileProvider
+argument_list|>
+name|it
+init|=
+name|dataFileProviders
+operator|.
+name|iterator
+argument_list|()
+init|;
+name|is
+operator|==
+literal|null
+operator|&&
+name|it
+operator|.
+name|hasNext
+argument_list|()
+condition|;
+control|)
+block|{
+name|DataFileProvider
+name|dfp
+init|=
+name|it
+operator|.
+name|next
+argument_list|()
+decl_stmt|;
+try|try
+block|{
+name|is
+operator|=
+name|dfp
 operator|.
 name|getInputStream
 argument_list|(
@@ -1871,7 +1916,17 @@ name|resourceName
 argument_list|,
 name|comments
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+comment|//not found
+block|}
+block|}
 if|if
 condition|(
 name|is

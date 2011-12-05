@@ -727,6 +727,26 @@ name|commons
 operator|.
 name|solr
 operator|.
+name|managed
+operator|.
+name|standalone
+operator|.
+name|ClassPathDataFileProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
 name|utils
 operator|.
 name|ConfigUtils
@@ -1087,10 +1107,7 @@ specifier|private
 name|IndexUpdateDaemon
 name|updateDaemon
 decl_stmt|;
-specifier|private
-name|ServiceRegistration
-name|dfpServiceRegistration
-decl_stmt|;
+comment|//    private ServiceRegistration dfpServiceRegistration;
 comment|/**      * used to append suffixes to the core directories using the date of its      * creation (patter: yyyy.MM.dd)      */
 specifier|private
 name|DateFormat
@@ -1709,40 +1726,10 @@ name|e
 argument_list|)
 throw|;
 block|}
-name|dfpServiceRegistration
-operator|=
-name|context
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|registerService
-argument_list|(
-name|DataFileProvider
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-operator|new
-name|ClassPathSolrIndexConfigProvider
-argument_list|(
-name|context
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|getBundle
-argument_list|()
-operator|.
-name|getSymbolicName
-argument_list|()
-argument_list|)
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
+comment|//        dfpServiceRegistration = context.getBundleContext().registerService(
+comment|//            DataFileProvider.class.getName(),
+comment|//            new ClassPathSolrIndexConfigProvider(
+comment|//                context.getBundleContext().getBundle().getSymbolicName()), null);
 name|managedCores
 operator|=
 operator|new
@@ -2313,23 +2300,10 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|dfpServiceRegistration
-operator|!=
-literal|null
-condition|)
-block|{
-name|dfpServiceRegistration
-operator|.
-name|unregister
-argument_list|()
-expr_stmt|;
-name|dfpServiceRegistration
-operator|=
-literal|null
-expr_stmt|;
-block|}
+comment|//        if(dfpServiceRegistration != null) {
+comment|//            dfpServiceRegistration.unregister();
+comment|//            dfpServiceRegistration = null;
+comment|//        }
 if|if
 condition|(
 name|indexArchiveTracker

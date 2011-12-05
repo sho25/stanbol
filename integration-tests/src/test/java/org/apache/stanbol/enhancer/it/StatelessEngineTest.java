@@ -85,9 +85,10 @@ index|[]
 block|{
 literal|"application/json"
 block|,
-literal|"application/rdf+json"
+literal|"application/json"
 block|,
-literal|"\\{.*http.*ontology.*confidence.*:"
+comment|//now JSON LD uses application/json
+literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine\","
 block|,
 literal|"application/rdf+xml"
 block|,
