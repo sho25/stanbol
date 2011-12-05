@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -25,7 +25,19 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -112,6 +124,24 @@ operator|.
 name|access
 operator|.
 name|WeightedTcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|Parser
 import|;
 end_import
 
@@ -217,9 +247,87 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
+name|api
+operator|.
+name|session
+operator|.
+name|SessionManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
 name|impl
 operator|.
 name|ONManagerImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|OfflineConfigurationImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|clerezza
+operator|.
+name|ClerezzaOntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|session
+operator|.
+name|SessionManagerImpl
 import|;
 end_import
 
@@ -888,7 +996,7 @@ name|ruleNS
 init|=
 literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
 decl_stmt|;
-comment|/**                              * First get the recipe description in the rule/recipe ontology.                              */
+comment|/**                          * First get the recipe description in the rule/recipe ontology.                          */
 name|OWLDataProperty
 name|hasDescription
 init|=
@@ -942,7 +1050,7 @@ name|getLiteral
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**                              * Then retrieve the rules associated to the recipe in the rule store.                              */
+comment|/**                          * Then retrieve the rules associated to the recipe in the rule store.                          */
 name|OWLObjectProperty
 name|objectProperty
 init|=
@@ -980,7 +1088,7 @@ name|kReSRulesInKReSSyntax
 init|=
 literal|""
 decl_stmt|;
-comment|/**                              * Fetch the rule content expressed as a literal in Rule Syntax.                              */
+comment|/**                          * Fetch the rule content expressed as a literal in Rule Syntax.                          */
 name|OWLDataProperty
 name|hasBodyAndHead
 init|=
@@ -1068,7 +1176,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**                              * Create the Recipe object.                              */
+comment|/**                          * Create the Recipe object.                          */
 name|RuleList
 name|ruleList
 init|=
@@ -1393,6 +1501,31 @@ argument_list|,
 name|emptyConfig
 argument_list|)
 decl_stmt|;
+name|SessionManager
+name|sesMgr
+init|=
+operator|new
+name|SessionManagerImpl
+argument_list|(
+operator|new
+name|ClerezzaOntologyProvider
+argument_list|(
+name|wtcp
+argument_list|,
+operator|new
+name|OfflineConfigurationImpl
+argument_list|(
+name|emptyConfig
+argument_list|)
+argument_list|,
+operator|new
+name|Parser
+argument_list|()
+argument_list|)
+argument_list|,
+name|emptyConfig
+argument_list|)
+decl_stmt|;
 name|Refactorer
 name|refactorer
 init|=
@@ -1408,6 +1541,8 @@ argument_list|,
 name|tcm
 argument_list|,
 name|onm
+argument_list|,
+name|sesMgr
 argument_list|,
 name|ruleStore
 argument_list|,
@@ -1581,6 +1716,31 @@ argument_list|,
 name|emptyConfig
 argument_list|)
 decl_stmt|;
+name|SessionManager
+name|sesMgr
+init|=
+operator|new
+name|SessionManagerImpl
+argument_list|(
+operator|new
+name|ClerezzaOntologyProvider
+argument_list|(
+name|wtcp
+argument_list|,
+operator|new
+name|OfflineConfigurationImpl
+argument_list|(
+name|emptyConfig
+argument_list|)
+argument_list|,
+operator|new
+name|Parser
+argument_list|()
+argument_list|)
+argument_list|,
+name|emptyConfig
+argument_list|)
+decl_stmt|;
 name|Refactorer
 name|refactorer
 init|=
@@ -1596,6 +1756,8 @@ argument_list|,
 name|tcm
 argument_list|,
 name|onm
+argument_list|,
+name|sesMgr
 argument_list|,
 name|ruleStore
 argument_list|,

@@ -31,217 +31,7 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|APPLICATION_FORM_URLENCODED
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MediaType
-operator|.
-name|MULTIPART_FORM_DATA
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MediaType
-operator|.
 name|TEXT_HTML
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-operator|.
-name|INTERNAL_SERVER_ERROR
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-operator|.
-name|NOT_FOUND
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|format
-operator|.
-name|KRFormat
-operator|.
-name|FUNCTIONAL_OWL
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|format
-operator|.
-name|KRFormat
-operator|.
-name|MANCHESTER_OWL
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|format
-operator|.
-name|KRFormat
-operator|.
-name|OWL_XML
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|format
-operator|.
-name|KRFormat
-operator|.
-name|RDF_JSON
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|format
-operator|.
-name|KRFormat
-operator|.
-name|RDF_XML
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|format
-operator|.
-name|KRFormat
-operator|.
-name|TURTLE
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|InputStream
 import|;
 end_import
 
@@ -283,55 +73,7 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|Consumes
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|DELETE
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|FormParam
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
 name|GET
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|POST
 import|;
 end_import
 
@@ -356,18 +98,6 @@ operator|.
 name|rs
 operator|.
 name|Produces
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|QueryParam
 import|;
 end_import
 
@@ -527,207 +257,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|io
-operator|.
-name|RootOntologyIRISource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|OntologyCollectorModificationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|OntologyScope
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|OntologySpaceFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|SessionOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|UnmodifiableOntologyCollectorException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|session
-operator|.
-name|Session
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|session
 operator|.
 name|SessionManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|renderers
-operator|.
-name|SessionRenderer
 import|;
 end_import
 
@@ -887,20 +419,6 @@ name|Viewable
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataParam
-import|;
-end_import
-
 begin_class
 annotation|@
 name|Path
@@ -915,8 +433,8 @@ name|BaseStanbolResource
 block|{
 comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
 specifier|protected
-name|ONManager
-name|onm
+name|SessionManager
+name|sessionManager
 decl_stmt|;
 specifier|protected
 name|ServletContext
@@ -939,16 +457,16 @@ name|servletContext
 expr_stmt|;
 name|this
 operator|.
-name|onm
+name|sessionManager
 operator|=
 operator|(
-name|ONManager
+name|SessionManager
 operator|)
 name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ONManager
+name|SessionManager
 operator|.
 name|class
 argument_list|,
@@ -956,502 +474,122 @@ name|servletContext
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|POST
-annotation|@
-name|Consumes
-argument_list|(
-name|MULTIPART_FORM_DATA
-argument_list|)
-specifier|public
-name|Response
-name|addOntology
-parameter_list|(
-annotation|@
-name|FormDataParam
-argument_list|(
-literal|"scope"
-argument_list|)
-name|String
-name|scope
-parameter_list|,
-annotation|@
-name|FormDataParam
-argument_list|(
-literal|"import"
-argument_list|)
-name|InputStream
-name|importOntology
-parameter_list|,
-annotation|@
-name|FormDataParam
-argument_list|(
-literal|"session"
-argument_list|)
-name|String
-name|session
-parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
-annotation|@
-name|Context
-name|HttpHeaders
-name|headers
-parameter_list|,
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
-block|{
-name|IRI
-name|scopeIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-name|IRI
-name|sessionIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|session
-argument_list|)
-decl_stmt|;
-name|OWLOntology
-name|ontology
-decl_stmt|;
-try|try
-block|{
-name|ontology
-operator|=
-name|onm
-operator|.
-name|getOwlCacheManager
-argument_list|()
-operator|.
-name|loadOntologyFromOntologyDocument
-argument_list|(
-name|importOntology
-argument_list|)
-expr_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onm
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-comment|// OntologyScope ontologyScope = scopeRegistry.getScope(scope);
-comment|// SessionOntologySpace sos = ontologyScope.getSessionSpace(sessionIRI);
+comment|// @POST
+comment|// @Consumes(MULTIPART_FORM_DATA)
+comment|// public Response addOntology(@FormDataParam("scope") String scope,
+comment|// @FormDataParam("import") InputStream importOntology,
+comment|// @FormDataParam("session") String session,
+comment|// @Context UriInfo uriInfo,
+comment|// @Context HttpHeaders headers,
+comment|// @Context ServletContext servletContext) {
+comment|//
+comment|// IRI scopeIRI = IRI.create(scope);
+comment|// IRI sessionIRI = IRI.create(session);
+comment|//
+comment|// OWLOntology ontology;
 comment|// try {
-comment|// sos.addOntology(new RootOntologySource(ontology));
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|()
-operator|.
-name|build
-argument_list|()
-return|;
-comment|// } catch (UnmodifiableOntologySpaceException e) {
+comment|// ontology = onm.getOwlCacheManager().loadOntologyFromOntologyDocument(importOntology);
+comment|//
+comment|// ScopeRegistry scopeRegistry = onm.getScopeRegistry();
+comment|//
+comment|// // OntologyScope ontologyScope = scopeRegistry.getScope(scope);
+comment|// // SessionOntologySpace sos = ontologyScope.getSessionSpace(sessionIRI);
+comment|// // try {
+comment|// // sos.addOntology(new RootOntologySource(ontology));
+comment|// return Response.ok().build();
+comment|// // } catch (UnmodifiableOntologySpaceException e) {
+comment|// // return Response.status(INTERNAL_SERVER_ERROR).build();
+comment|// // }
+comment|// } catch (OWLOntologyCreationException e1) {
+comment|// return Response.status(NOT_FOUND).build();
+comment|// }
+comment|//
+comment|// }
+comment|// /**
+comment|// *
+comment|// * If the session param is missing, this method creates a new session, ignoring other params
+comment|// *
+comment|// * @param scope
+comment|// * @param session
+comment|// * @param location
+comment|// * @param uriInfo
+comment|// * @param headers
+comment|// * @param servletContext
+comment|// * @return
+comment|// */
+comment|// @POST
+comment|// @Consumes(APPLICATION_FORM_URLENCODED)
+comment|// @Produces(value = {RDF_XML, OWL_XML, TURTLE, FUNCTIONAL_OWL, MANCHESTER_OWL, RDF_JSON})
+comment|// public Response addOntology(@FormParam("scope") String scope,
+comment|// @FormParam("session") String session,
+comment|// @FormParam("location") String location,
+comment|// @Context UriInfo uriInfo,
+comment|// @Context HttpHeaders headers,
+comment|// @Context ServletContext servletContext) {
+comment|// if (session == null || session.equals("")) {
+comment|// return createSession(scope, uriInfo, headers);
+comment|// } else {
+comment|// IRI scopeIRI = IRI.create(scope);
+comment|// IRI ontologyIRI = IRI.create(location);
+comment|// ScopeRegistry scopeRegistry = onm.getScopeRegistry();
+comment|//
+comment|// OntologyScope ontologyScope = scopeRegistry.getScope(scope);
+comment|// SessionOntologySpace sos = ontologyScope.getSessionSpace(session);
+comment|// try {
+comment|// sos.addOntology(new RootOntologyIRISource(ontologyIRI));
+comment|// return Response.ok().build();
+comment|// } catch (UnmodifiableOntologyCollectorException e) {
+comment|// return Response.status(INTERNAL_SERVER_ERROR).build();
+comment|// } catch (OWLOntologyCreationException e) {
 comment|// return Response.status(INTERNAL_SERVER_ERROR).build();
 comment|// }
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e1
-parameter_list|)
-block|{
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|NOT_FOUND
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-block|}
-comment|/**      *       * If the session param is missing, this method creates a new session, ignoring other params      *       * @param scope      * @param session      * @param location      * @param uriInfo      * @param headers      * @param servletContext      * @return      */
-annotation|@
-name|POST
-annotation|@
-name|Consumes
-argument_list|(
-name|APPLICATION_FORM_URLENCODED
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|value
-operator|=
-block|{
-name|RDF_XML
-block|,
-name|OWL_XML
-block|,
-name|TURTLE
-block|,
-name|FUNCTIONAL_OWL
-block|,
-name|MANCHESTER_OWL
-block|,
-name|RDF_JSON
-block|}
-argument_list|)
-specifier|public
-name|Response
-name|addOntology
-parameter_list|(
-annotation|@
-name|FormParam
-argument_list|(
-literal|"scope"
-argument_list|)
-name|String
-name|scope
-parameter_list|,
-annotation|@
-name|FormParam
-argument_list|(
-literal|"session"
-argument_list|)
-name|String
-name|session
-parameter_list|,
-annotation|@
-name|FormParam
-argument_list|(
-literal|"location"
-argument_list|)
-name|String
-name|location
-parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
-annotation|@
-name|Context
-name|HttpHeaders
-name|headers
-parameter_list|,
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
-block|{
-if|if
-condition|(
-name|session
-operator|==
-literal|null
-operator|||
-name|session
-operator|.
-name|equals
-argument_list|(
-literal|""
-argument_list|)
-condition|)
-block|{
-return|return
-name|createSession
-argument_list|(
-name|scope
-argument_list|,
-name|uriInfo
-argument_list|,
-name|headers
-argument_list|)
-return|;
-block|}
-else|else
-block|{
-name|IRI
-name|scopeIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-name|IRI
-name|ontologyIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|location
-argument_list|)
-decl_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onm
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-name|OntologyScope
-name|ontologyScope
-init|=
-name|scopeRegistry
-operator|.
-name|getScope
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-name|SessionOntologySpace
-name|sos
-init|=
-name|ontologyScope
-operator|.
-name|getSessionSpace
-argument_list|(
-name|session
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|sos
-operator|.
-name|addOntology
-argument_list|(
-operator|new
-name|RootOntologyIRISource
-argument_list|(
-name|ontologyIRI
-argument_list|)
-argument_list|)
-expr_stmt|;
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|()
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologyCollectorException
-name|e
-parameter_list|)
-block|{
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|INTERNAL_SERVER_ERROR
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|OWLOntologyCreationException
-name|e
-parameter_list|)
-block|{
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|INTERNAL_SERVER_ERROR
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-block|}
-block|}
-comment|/**      * This method creates a session.      *       * @param scope      * @param uriInfo      * @param headers      * @return      */
-specifier|private
-name|Response
-name|createSession
-parameter_list|(
-name|String
-name|scope
-parameter_list|,
-name|UriInfo
-name|uriInfo
-parameter_list|,
-name|HttpHeaders
-name|headers
-parameter_list|)
-block|{
-if|if
-condition|(
-name|scope
-operator|==
-literal|null
-operator|||
-name|scope
-operator|.
-name|equals
-argument_list|(
-literal|""
-argument_list|)
-condition|)
-block|{
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|INTERNAL_SERVER_ERROR
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-name|Session
-name|ses
-init|=
-literal|null
-decl_stmt|;
-name|SessionManager
-name|mgr
-init|=
-name|onm
-operator|.
-name|getSessionManager
-argument_list|()
-decl_stmt|;
-comment|/*          * Create the KReS session to associate to the scope.          */
-name|ses
-operator|=
-name|mgr
-operator|.
-name|createSession
-argument_list|()
-expr_stmt|;
-comment|/*          * First get the scope registry.          */
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onm
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-comment|/*          * Then retrieve the ontology scope.          */
-name|IRI
-name|scopeIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-name|OntologyScope
-name|ontologyScope
-init|=
-name|scopeRegistry
-operator|.
-name|getScope
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-comment|/*          * Finally associate the KReS session to the scope.          */
-name|OntologySpaceFactory
-name|ontologySpaceFactory
-init|=
-name|onm
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-decl_stmt|;
-name|SessionOntologySpace
-name|sessionOntologySpace
-init|=
-name|ontologySpaceFactory
-operator|.
-name|createSessionOntologySpace
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|ontologyScope
-operator|.
-name|addSessionSpace
-argument_list|(
-name|sessionOntologySpace
-argument_list|,
-name|ses
-operator|.
-name|getID
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnmodifiableOntologyCollectorException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|WebApplicationException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|(
-name|SessionRenderer
-operator|.
-name|getSessionMetadataRDFasOntology
-argument_list|(
-name|ses
-argument_list|)
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
+comment|// }
+comment|// }
+comment|// /**
+comment|// * This method creates a session.
+comment|// *
+comment|// * @param scope
+comment|// * @param uriInfo
+comment|// * @param headers
+comment|// * @return
+comment|// */
+comment|// private Response createSession(String scope, UriInfo uriInfo, HttpHeaders headers) {
+comment|// if (scope == null || scope.equals("")) {
+comment|// return Response.status(INTERNAL_SERVER_ERROR).build();
+comment|// }
+comment|// Session ses = null;
+comment|// SessionManager mgr = onm.getSessionManager();
+comment|//
+comment|// /*
+comment|// * Create the KReS session to associate to the scope.
+comment|// */
+comment|// ses = mgr.createSession();
+comment|//
+comment|// /*
+comment|// * First get the scope registry.
+comment|// */
+comment|// ScopeRegistry scopeRegistry = onm.getScopeRegistry();
+comment|//
+comment|// /*
+comment|// * Then retrieve the ontology scope.
+comment|// */
+comment|// IRI scopeIRI = IRI.create(scope);
+comment|// OntologyScope ontologyScope = scopeRegistry.getScope(scope);
+comment|//
+comment|// /*
+comment|// * Finally associate the KReS session to the scope.
+comment|// */
+comment|// OntologySpaceFactory ontologySpaceFactory = onm.getOntologySpaceFactory();
+comment|// SessionOntologySpace sessionOntologySpace = ontologySpaceFactory.createSessionOntologySpace(scope);
+comment|// try {
+comment|// ontologyScope.addSessionSpace(sessionOntologySpace, ses.getID());
+comment|// } catch (UnmodifiableOntologyCollectorException e) {
+comment|// throw new WebApplicationException(e);
+comment|// }
+comment|//
+comment|// return Response.ok(SessionRenderer.getSessionMetadataRDFasOntology(ses)).build();
+comment|//
+comment|// }
 annotation|@
 name|GET
 annotation|@
@@ -1500,14 +638,7 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
-name|SessionManager
-name|sesMgr
-init|=
-name|onm
-operator|.
-name|getSessionManager
-argument_list|()
-decl_stmt|;
+comment|// SessionManager sesMgr = onm.getSessionManager();
 name|OWLOntologyManager
 name|ontMgr
 init|=
@@ -1579,12 +710,34 @@ control|(
 name|String
 name|id
 range|:
-name|sesMgr
+name|sessionManager
 operator|.
 name|getRegisteredSessionIDs
 argument_list|()
 control|)
 block|{
+name|IRI
+name|sessionid
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|sessionManager
+operator|.
+name|getNamespace
+argument_list|()
+operator|+
+name|sessionManager
+operator|.
+name|getID
+argument_list|()
+operator|+
+literal|"/"
+operator|+
+name|id
+argument_list|)
+decl_stmt|;
 name|OWLNamedIndividual
 name|ind
 init|=
@@ -1592,17 +745,7 @@ name|df
 operator|.
 name|getOWLNamedIndividual
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|sesMgr
-operator|.
-name|getSessionNamespace
-argument_list|()
-operator|+
-name|id
-argument_list|)
+name|sessionid
 argument_list|)
 decl_stmt|;
 name|changes
@@ -1664,181 +807,50 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * FIXME what are these path params anyway?      *       * @param scope      * @param session      * @param deleteOntology      * @param uriInfo      * @param headers      * @return      */
-annotation|@
-name|DELETE
-specifier|public
-name|Response
-name|deleteSession
-parameter_list|(
-annotation|@
-name|QueryParam
-argument_list|(
-literal|"scope"
-argument_list|)
-name|String
-name|scope
-parameter_list|,
-annotation|@
-name|QueryParam
-argument_list|(
-literal|"session"
-argument_list|)
-name|String
-name|session
-parameter_list|,
-annotation|@
-name|QueryParam
-argument_list|(
-literal|"delete"
-argument_list|)
-name|String
-name|deleteOntology
-parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
-annotation|@
-name|Context
-name|HttpHeaders
-name|headers
-parameter_list|)
-block|{
-name|IRI
-name|scopeID
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|deleteOntology
-operator|!=
-literal|null
-condition|)
-block|{
-name|IRI
-name|ontologyIRI
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|deleteOntology
-argument_list|)
-decl_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onm
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-name|OntologyScope
-name|ontologyScope
-init|=
-name|scopeRegistry
-operator|.
-name|getScope
-argument_list|(
-name|scope
-argument_list|)
-decl_stmt|;
-name|SessionOntologySpace
-name|sos
-init|=
-name|ontologyScope
-operator|.
-name|getSessionSpace
-argument_list|(
-name|session
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-comment|/*                  * TODO : previous implementation reloaded the whole ontology before deleting it, thus                  * treating this as a physical IRI. See if it still works this way                  */
-name|OWLOntology
-name|o
-init|=
-name|sos
-operator|.
-name|getOntology
-argument_list|(
-name|ontologyIRI
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|o
-operator|!=
-literal|null
-condition|)
-name|sos
-operator|.
-name|removeOntology
-argument_list|(
-name|ontologyIRI
-argument_list|)
-expr_stmt|;
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|()
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|OntologyCollectorModificationException
-name|e
-parameter_list|)
-block|{
-return|return
-name|Response
-operator|.
-name|status
-argument_list|(
-name|INTERNAL_SERVER_ERROR
-argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-block|}
-else|else
-block|{
-name|onm
-operator|.
-name|getSessionManager
-argument_list|()
-operator|.
-name|destroySession
-argument_list|(
-name|session
-argument_list|)
-expr_stmt|;
-return|return
-name|Response
-operator|.
-name|ok
-argument_list|()
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-block|}
+comment|// /**
+comment|// * FIXME what are these path params anyway?
+comment|// *
+comment|// * @param scope
+comment|// * @param session
+comment|// * @param deleteOntology
+comment|// * @param uriInfo
+comment|// * @param headers
+comment|// * @return
+comment|// */
+comment|// @DELETE
+comment|// public Response deleteSession(@QueryParam("scope") String scope,
+comment|// @QueryParam("session") String session,
+comment|// @QueryParam("delete") String deleteOntology,
+comment|// @Context UriInfo uriInfo,
+comment|// @Context HttpHeaders headers) {
+comment|//
+comment|// IRI scopeID = IRI.create(scope);
+comment|//
+comment|// if (deleteOntology != null) {
+comment|// IRI ontologyIRI = IRI.create(deleteOntology);
+comment|//
+comment|// ScopeRegistry scopeRegistry = onm.getScopeRegistry();
+comment|//
+comment|// OntologyScope ontologyScope = scopeRegistry.getScope(scope);
+comment|// SessionOntologySpace sos = ontologyScope.getSessionSpace(session);
+comment|//
+comment|// try {
+comment|// /*
+comment|// * TODO : previous implementation reloaded the whole ontology before deleting it, thus
+comment|// * treating this as a physical IRI. See if it still works this way
+comment|// */
+comment|// OWLOntology o = sos.getOntology(ontologyIRI);
+comment|// if (o != null) sos.removeOntology(ontologyIRI);
+comment|// return Response.ok().build();
+comment|// } catch (OntologyCollectorModificationException e) {
+comment|// return Response.status(INTERNAL_SERVER_ERROR).build();
+comment|// }
+comment|// } else {
+comment|// onm.getSessionManager().destroySession(session);
+comment|// return Response.ok().build();
+comment|// }
+comment|//
+comment|// }
 annotation|@
 name|GET
 annotation|@

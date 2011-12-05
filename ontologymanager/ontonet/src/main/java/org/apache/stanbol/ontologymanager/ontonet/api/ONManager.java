@@ -45,26 +45,6 @@ name|api
 operator|.
 name|ontology
 operator|.
-name|OntologyIndex
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
 name|OntologyProvider
 import|;
 end_import
@@ -157,6 +137,26 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|session
+operator|.
+name|SessionManagerImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|owl
 operator|.
 name|OWLOntologyManagerFactory
@@ -226,17 +226,11 @@ name|ID
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.id"
 decl_stmt|;
-comment|/**      * The key used to configure the base namespace of the ontology network.      */
+comment|/**      * The key used to configure the simple identifier of the scope registry (which should also be      * concatenated with the base namespace to obtain the registry's HTTP endpoint URI).      */
 name|String
 name|ID_SCOPE_REGISTRY
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.scopeRegistry.id"
-decl_stmt|;
-comment|/**      * The key used to configure the base namespace of the ontology network.      */
-name|String
-name|ID_SESSION_MANAGER
-init|=
-literal|"org.apache.stanbol.ontologymanager.ontonet.sessionManager.id"
 decl_stmt|;
 comment|/**      * The key used to configure the base namespace of the ontology network.      */
 name|String
@@ -247,11 +241,6 @@ decl_stmt|;
 comment|/**      * Returns the offline configuration set for this ontology network manager, if any.      *       * @return the offline configuration, or null if none was set.      */
 name|OfflineConfiguration
 name|getOfflineConfiguration
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the default object that automatically indexes ontologies as they are loaded within scopes.      *       * @return the default ontology index.      */
-name|OntologyIndex
-name|getOntologyIndex
 parameter_list|()
 function_decl|;
 comment|/**      * Implementations should be able to create a {@link File} object from this path.      *       * @return the local path of the ontology storing the ontology network configuration.      */
@@ -284,7 +273,7 @@ name|ScopeRegistry
 name|getScopeRegistry
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the unique session manager for this context.      *       * @return the session manager.      */
+comment|/**      * Returns the unique session manager for this context.      *       * @deprecated {@link SessionManager} is now a standalone component and should be accessed independently      *             from the ONManager (e.g. by instantiating a new {@link SessionManagerImpl} or by      *             referencing {@link SessionManager} in OSGi components).      *       * @return the session manager.      */
 name|SessionManager
 name|getSessionManager
 parameter_list|()

@@ -57,20 +57,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|sql
-operator|.
-name|rowset
-operator|.
-name|spi
-operator|.
-name|SyncResolver
-import|;
-end_import
-
 begin_comment
 comment|/**  * Interface to be used by Reasoning services. This interface defines also default task to be implemented by  * all reasoning services: * CLASSIFY : Should return only rdfs:subClassOf and rdf:type statements * ENRICH :  * Should return all inferences  *   * The consistency check task must be managed separately, since it has a different return type (boolean).  *   * TODO In the future we may want to extend the consistency check concept, by supporting tasks which can be of  * this type. For example, we would need a service to provide several validity check as additional tasks.  *   * M => Model type; R => Rule type; S => Statement type  *   */
 end_comment

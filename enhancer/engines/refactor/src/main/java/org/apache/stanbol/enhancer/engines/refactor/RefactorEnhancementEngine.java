@@ -647,7 +647,7 @@ name|api
 operator|.
 name|session
 operator|.
-name|Session
+name|SessionLimitException
 import|;
 end_import
 
@@ -1081,6 +1081,11 @@ name|onManager
 decl_stmt|;
 annotation|@
 name|Reference
+name|SessionManager
+name|sessionManager
+decl_stmt|;
+annotation|@
+name|Reference
 name|ReferencedSiteManager
 name|referencedSiteManager
 decl_stmt|;
@@ -1214,11 +1219,36 @@ decl_stmt|;
 comment|/*          * Now we prepare the OntoNet environment. First we create the OntoNet session in which run the whole          */
 specifier|final
 name|String
-name|sessionIRI
-init|=
-name|createAndAddSessionSpaceToScope
-argument_list|()
+name|sessionID
 decl_stmt|;
+try|try
+block|{
+name|sessionID
+operator|=
+comment|// createAndAddSessionSpaceToScope();
+name|sessionManager
+operator|.
+name|createSession
+argument_list|()
+operator|.
+name|getID
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SessionLimitException
+name|e1
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|EngineException
+argument_list|(
+name|e1
+argument_list|)
+throw|;
+block|}
 comment|/*          * We retrieve the session space          */
 name|OntologySpace
 name|sessionSpace
@@ -1227,7 +1257,7 @@ name|scope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|sessionIRI
+name|sessionID
 argument_list|)
 decl_stmt|;
 while|while
@@ -1566,7 +1596,7 @@ name|scope
 operator|.
 name|getSessionSpace
 argument_list|(
-name|sessionIRI
+name|sessionID
 argument_list|)
 decl_stmt|;
 name|ontologies
@@ -1804,14 +1834,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/*              * The session needs to be destroyed, as it is no more useful.              */
-name|onManager
-operator|.
-name|getSessionManager
-argument_list|()
+name|sessionManager
 operator|.
 name|destroySession
 argument_list|(
-name|sessionIRI
+name|sessionID
 operator|.
 name|toString
 argument_list|()
@@ -1835,68 +1862,37 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Setup the KReS session      *       * @return      */
-specifier|private
-name|String
-name|createAndAddSessionSpaceToScope
-parameter_list|()
-block|{
-comment|/*          * Retrieve the session manager          */
-name|SessionManager
-name|sessionManager
-init|=
-name|onManager
-operator|.
-name|getSessionManager
-argument_list|()
-decl_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Starting create session for the dulcifier"
-argument_list|)
-expr_stmt|;
-comment|/*          * Create and setup the session. TODO FIXME This is an operation that should be made easier for          * developers to do through the API          */
-name|Session
-name|session
-init|=
-name|sessionManager
-operator|.
-name|createSession
-argument_list|()
-decl_stmt|;
-comment|// OntologySpaceFactory ontologySpaceFactory = onManager.getOntologySpaceFactory();
-comment|// OntologySpace sessionSpace = ontologySpaceFactory.createSessionOntologySpace(scope.getID());
-comment|// try {
-comment|// scope.addSessionSpace(sessionSpace, session.getID());
-comment|// } catch (UnmodifiableOntologySpaceException e) {
-comment|// log.error("Failed to add session space to unmodifiable scope " + scope, e);
+comment|// /**
+comment|// * Setup the KReS session
+comment|// *
+comment|// * @return
+comment|// */
+comment|// private String createAndAddSessionSpaceToScope() {
+comment|// /*
+comment|// * Retrieve the session manager
+comment|// */
+comment|// // SessionManager sessionManager = onManager.getSessionManager();
+comment|// log.debug("Starting create session for the dulcifier");
+comment|//
+comment|// /*
+comment|// * Create and setup the session. TODO FIXME This is an operation that should be made easier for
+comment|// * developers to do through the API
+comment|// */
+comment|// Session session = sessionManager.createSession();
+comment|// // OntologySpaceFactory ontologySpaceFactory = onManager.getOntologySpaceFactory();
+comment|// // OntologySpace sessionSpace = ontologySpaceFactory.createSessionOntologySpace(scope.getID());
+comment|// // try {
+comment|// // scope.addSessionSpace(sessionSpace, session.getID());
+comment|// // } catch (UnmodifiableOntologySpaceException e) {
+comment|// // log.error("Failed to add session space to unmodifiable scope " + scope, e);
+comment|// // }
+comment|//
+comment|// /*
+comment|// * Finally, we return the session ID to be used by the caller
+comment|// */
+comment|// log.debug("Session " + session.getID() + " created", this);
+comment|// return session.getID();
 comment|// }
-comment|/*          * Finally, we return the session ID to be used by the caller          */
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Session "
-operator|+
-name|session
-operator|.
-name|getID
-argument_list|()
-operator|+
-literal|" created"
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
-return|return
-name|session
-operator|.
-name|getID
-argument_list|()
-return|;
-block|}
 comment|/**      * To create the input source necesary to load the ontology inside the scope.      *       * @param uri      *            -- A resolvable string uri.      * @return An OntologyInputSource      */
 specifier|private
 name|OntologyInputSource

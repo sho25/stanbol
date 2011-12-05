@@ -143,20 +143,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyCreationException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -172,6 +158,10 @@ operator|.
 name|LoggerFactory
 import|;
 end_import
+
+begin_comment
+comment|/**  * An ontology input source that returns a Clerezza {@link Graph} after parsing its serialized content from an  * input stream.<br>  *<br>  * Note that this implementation does not tamper with the triple store. The resulting graph is created  * in-memory, and its triples will have to be manually added to a stored graph if necessary.  *   * @author alexdma  *   */
+end_comment
 
 begin_class
 specifier|public
@@ -198,8 +188,6 @@ parameter_list|(
 name|InputStream
 name|content
 parameter_list|)
-throws|throws
-name|OWLOntologyCreationException
 block|{
 name|this
 argument_list|(
@@ -218,8 +206,6 @@ parameter_list|,
 name|String
 name|formatIdentifier
 parameter_list|)
-throws|throws
-name|OWLOntologyCreationException
 block|{
 name|this
 argument_list|(
@@ -246,8 +232,6 @@ parameter_list|,
 name|Parser
 name|parser
 parameter_list|)
-throws|throws
-name|OWLOntologyCreationException
 block|{
 name|long
 name|before
@@ -270,6 +254,7 @@ argument_list|(
 literal|"No content supplied"
 argument_list|)
 throw|;
+comment|// No physical IRI
 name|bindPhysicalIri
 argument_list|(
 literal|null

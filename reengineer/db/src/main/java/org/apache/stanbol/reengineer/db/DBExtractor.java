@@ -325,66 +325,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|UnmodifiableOntologyCollectorException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|session
-operator|.
-name|Session
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|session
-operator|.
-name|SessionManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|reengineer
 operator|.
 name|base
@@ -668,9 +608,12 @@ name|_DB_DATA_REENGINEERING_SESSION_DEFAULT
 init|=
 literal|"/db-data-reengineering-session"
 decl_stmt|;
-comment|//    public static final String _DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT = "/db-data-reengineering-session-space";
-comment|//    public static final String _DB_REENGINEERING_SESSION_SPACE_DEFAULT = "/db-schema-reengineering-session-space";
-comment|//    public static final String _DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT = "/db-schema-reengineering-ontology-space";
+comment|// public static final String _DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT =
+comment|// "/db-data-reengineering-session-space";
+comment|// public static final String _DB_REENGINEERING_SESSION_SPACE_DEFAULT =
+comment|// "/db-schema-reengineering-session-space";
+comment|// public static final String _DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT =
+comment|// "/db-schema-reengineering-ontology-space";
 specifier|public
 specifier|static
 specifier|final
@@ -710,13 +653,16 @@ name|DB_DATA_REENGINEERING_SESSION
 init|=
 literal|"org.apache.stanbol.reengineer.db.data"
 decl_stmt|;
-comment|//    @Property(value = _DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT)
-comment|//    public static final String DB_DATA_REENGINEERING_SESSION_SPACE = "org.apache.stanbol.reengineer.space.db.data";
+comment|// @Property(value = _DB_DATA_REENGINEERING_SESSION_SPACE_DEFAULT)
+comment|// public static final String DB_DATA_REENGINEERING_SESSION_SPACE =
+comment|// "org.apache.stanbol.reengineer.space.db.data";
 comment|//
-comment|//    @Property(value = _DB_REENGINEERING_SESSION_SPACE_DEFAULT)
-comment|//    public static final String DB_REENGINEERING_SESSION_SPACE = "http://kres.iks-project.eu/space/reengineering/db";
-comment|//    @Property(value = _DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT)
-comment|//    public static final String DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE = "org.apache.stanbol.reengineer.ontology.space.db";
+comment|// @Property(value = _DB_REENGINEERING_SESSION_SPACE_DEFAULT)
+comment|// public static final String DB_REENGINEERING_SESSION_SPACE =
+comment|// "http://kres.iks-project.eu/space/reengineering/db";
+comment|// @Property(value = _DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE_DEFAULT)
+comment|// public static final String DB_SCHEMA_REENGINEERING_ONTOLOGY_SPACE =
+comment|// "org.apache.stanbol.reengineer.ontology.space.db";
 annotation|@
 name|Property
 argument_list|(
@@ -768,7 +714,7 @@ decl_stmt|;
 name|String
 name|databaseURI
 decl_stmt|;
-comment|//    private IRI kReSSessionID;
+comment|// private IRI kReSSessionID;
 specifier|private
 specifier|final
 name|Logger
@@ -1017,7 +963,7 @@ argument_list|>
 name|configuration
 parameter_list|)
 block|{
-comment|/*         String */
+comment|/*          * String          */
 name|reengineeringScopeID
 operator|=
 operator|(
@@ -1070,9 +1016,9 @@ literal|"http://"
 operator|+
 name|hostNameAndPort
 expr_stmt|;
-comment|//        reengineeringScopeID = IRI.create(hostNameAndPort + "/kres/ontoman/ontology/ontology/"
-comment|//                                           + reengineeringScopeID);
-comment|//        reengineeringSpaceIRI = IRI.create(DB_REENGINEERING_SESSION_SPACE);
+comment|// reengineeringScopeID = IRI.create(hostNameAndPort + "/kres/ontoman/ontology/ontology/"
+comment|// + reengineeringScopeID);
+comment|// reengineeringSpaceIRI = IRI.create(DB_REENGINEERING_SESSION_SPACE);
 name|reengineeringManager
 operator|.
 name|bindReengineer
@@ -1080,23 +1026,9 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-name|SessionManager
-name|kReSSessionManager
-init|=
-name|onManager
-operator|.
-name|getSessionManager
-argument_list|()
-decl_stmt|;
-name|Session
-name|kReSSession
-init|=
-name|kReSSessionManager
-operator|.
-name|createSession
-argument_list|()
-decl_stmt|;
-comment|//        kReSSessionID = kReSSession.getID();
+comment|// SessionManager kReSSessionManager = onManager.getSessionManager();
+comment|// Session kReSSession = kReSSessionManager.createSession();
+comment|// kReSSessionID = kReSSession.getID();
 name|OntologyScopeFactory
 name|ontologyScopeFactory
 init|=
@@ -1272,9 +1204,9 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//            try {
-comment|//                scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(this.reengineeringScopeID),
-comment|//                    kReSSession.getID());
+comment|// try {
+comment|// scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(this.reengineeringScopeID),
+comment|// kReSSession.getID());
 name|scopeRegistry
 operator|.
 name|setScopeActive
@@ -1284,10 +1216,11 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-comment|//            } catch (UnmodifiableOntologySpaceException ex) {
-comment|//                log.error("Cannot add session space for scope " + reengineeringScopeID + " to unmodifiable scope "
-comment|//                          + scope, ex);
-comment|//            }
+comment|// } catch (UnmodifiableOntologySpaceException ex) {
+comment|// log.error("Cannot add session space for scope " + reengineeringScopeID +
+comment|// " to unmodifiable scope "
+comment|// + scope, ex);
+comment|// }
 block|}
 name|log
 operator|.

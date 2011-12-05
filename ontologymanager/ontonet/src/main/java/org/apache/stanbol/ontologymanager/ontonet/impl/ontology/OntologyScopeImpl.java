@@ -1461,7 +1461,6 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-comment|// this.customSpace.attachCoreSpace(this.coreSpace, true);
 block|}
 block|}
 specifier|protected
@@ -1513,7 +1512,7 @@ name|id
 operator|.
 name|matches
 argument_list|(
-literal|"[\\w-]+"
+literal|"[\\w-\\.]+"
 argument_list|)
 condition|)
 throw|throw
@@ -1524,7 +1523,7 @@ literal|"Illegal scope ID "
 operator|+
 name|id
 operator|+
-literal|" - Must be an alphanumeric sequence, with optional underscores or dashes."
+literal|" - Must be an alphanumeric sequence, with optional underscores, dots or dashes."
 argument_list|)
 throw|;
 name|this

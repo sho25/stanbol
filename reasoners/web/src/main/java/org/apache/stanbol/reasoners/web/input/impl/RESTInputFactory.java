@@ -115,6 +115,26 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|session
+operator|.
+name|SessionManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|reasoners
 operator|.
 name|servicesapi
@@ -266,7 +286,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for a {@see ReasoningServiceInputManager}.  * It creates a {@see SimpleInputManager} collecting all known {@see ReasoningServiceInputProvider}s.  *   * TODO  * In the future we may want to move this out of the /web module into a dedicated /input module.  *   * @author enridaga  *  */
+comment|/**  * Factory for a {@see ReasoningServiceInputManager}. It creates a {@see SimpleInputManager} collecting all  * known {@see ReasoningServiceInputProvider}s.  *   * TODO In the future we may want to move this out of the /web module into a dedicated /input module.  *   * @author enridaga  *   */
 end_comment
 
 begin_class
@@ -278,6 +298,9 @@ name|ReasoningServiceInputFactory
 block|{
 name|ONManager
 name|onm
+decl_stmt|;
+name|SessionManager
+name|sessionManager
 decl_stmt|;
 name|RuleStore
 name|rStore
@@ -300,6 +323,9 @@ parameter_list|(
 name|ONManager
 name|onm
 parameter_list|,
+name|SessionManager
+name|sm
+parameter_list|,
 name|RuleStore
 name|rStore
 parameter_list|)
@@ -309,6 +335,12 @@ operator|.
 name|onm
 operator|=
 name|onm
+expr_stmt|;
+name|this
+operator|.
+name|sessionManager
+operator|=
+name|sm
 expr_stmt|;
 name|this
 operator|.
@@ -732,6 +764,8 @@ operator|new
 name|OntonetInputProvider
 argument_list|(
 name|onm
+argument_list|,
+name|sessionManager
 argument_list|,
 name|scope
 argument_list|,

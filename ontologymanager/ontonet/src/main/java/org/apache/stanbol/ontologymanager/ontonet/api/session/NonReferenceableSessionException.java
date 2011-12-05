@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown whenever an attempt to access a KReS session that is bound for removal is detected.  *   * @author alexdma  *   */
+comment|/**  * Thrown whenever an attempt to access a session that is bound for removal is detected.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

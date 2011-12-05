@@ -229,6 +229,26 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|session
+operator|.
+name|SessionManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|reasoners
 operator|.
 name|web
@@ -417,6 +437,11 @@ name|onm
 decl_stmt|;
 annotation|@
 name|Reference
+name|SessionManager
+name|sessionManager
+decl_stmt|;
+annotation|@
+name|Reference
 name|RuleStore
 name|kresRuleStore
 decl_stmt|;
@@ -468,7 +493,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|// Reasoner
-comment|//classes.add(ReasonersResource.class);
+comment|// classes.add(ReasonersResource.class);
 name|classes
 operator|.
 name|add

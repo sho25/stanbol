@@ -589,7 +589,7 @@ name|id
 operator|.
 name|matches
 argument_list|(
-literal|"[\\w-]+"
+literal|"[\\w-\\.]+"
 argument_list|)
 condition|)
 name|log
@@ -613,7 +613,7 @@ name|id
 operator|.
 name|matches
 argument_list|(
-literal|"[\\w-]+/[\\w-]+"
+literal|"[\\w-\\.]+/[\\w-\\.]+"
 argument_list|)
 condition|)
 throw|throw

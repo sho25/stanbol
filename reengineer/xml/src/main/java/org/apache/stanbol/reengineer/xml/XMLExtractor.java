@@ -413,46 +413,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|session
-operator|.
-name|Session
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|session
-operator|.
-name|SessionManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|owl
 operator|.
 name|OWLOntologyManagerFactory
@@ -1075,6 +1035,9 @@ name|Reference
 name|ONManager
 name|onManager
 decl_stmt|;
+comment|//
+comment|// @Reference
+comment|// SessionManager sessionManager;
 annotation|@
 name|Reference
 name|ReengineerManager
@@ -1273,22 +1236,8 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-name|SessionManager
-name|kReSSessionManager
-init|=
-name|onManager
-operator|.
-name|getSessionManager
-argument_list|()
-decl_stmt|;
-name|Session
-name|kReSSession
-init|=
-name|kReSSessionManager
-operator|.
-name|createSession
-argument_list|()
-decl_stmt|;
+comment|// SessionManager kReSSessionManager = onManager.getSessionManager();
+comment|// Session kReSSession = sessionManager.createSession();
 comment|// sessionId = kReSSession.getID();
 name|OntologyScopeFactory
 name|ontologyScopeFactory

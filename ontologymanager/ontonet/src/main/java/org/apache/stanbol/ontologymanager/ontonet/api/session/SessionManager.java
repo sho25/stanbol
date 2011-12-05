@@ -55,6 +55,24 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|NamedResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|ontology
 operator|.
 name|SessionOntologySpace
@@ -84,20 +102,36 @@ specifier|public
 interface|interface
 name|SessionManager
 extends|extends
+name|NamedResource
+extends|,
 name|SessionListenable
 block|{
 comment|/**      * The key used to configure the base namespace of the ontology network.      */
 name|String
+name|ID
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.session_mgr_id"
+decl_stmt|;
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
+name|String
+name|MAX_ACTIVE_SESSIONS
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.session_limit"
+decl_stmt|;
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
+name|String
 name|SESSIONS_NS
 init|=
-literal|"org.apache.stanbol.ontologymanager.session.ns"
+literal|"org.apache.stanbol.ontologymanager.ontonet.session_ns"
 decl_stmt|;
-comment|/**      * Generates AND REGISTERS a new session and assigns a unique session ID generated internally.      *       * @return the generated session      */
+comment|/**      * Generates<b>and registers</b> a new session and assigns a unique session ID generated internally. This      * will not cause {@link DuplicateSessionIDException}s to be thrown.      *       * @return the generated session      */
 name|Session
 name|createSession
 parameter_list|()
+throws|throws
+name|SessionLimitException
 function_decl|;
-comment|/**      * Generates AND REGISTERS a new session and tries to assign it the supplied session ID. If a session with      * that ID is already registered, the new session is<i>not</i> created and a      *<code>DuplicateSessionIDException</code> is thrown.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @return the generated session      * @throws DuplicateSessionIDException      *             if a session with that sessionID is already registered      */
+comment|/**      * Generates<b>and registers</b> a new session and tries to assign it the supplied session ID. If a      * session with that ID is already registered, the new session is<i>not</i> created and a      *<code>DuplicateSessionIDException</code> is thrown.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @return the generated session      * @throws DuplicateSessionIDException      *             if a session with that sessionID is already registered      */
 name|Session
 name|createSession
 parameter_list|(
@@ -106,6 +140,8 @@ name|sessionID
 parameter_list|)
 throws|throws
 name|DuplicateSessionIDException
+throws|,
+name|SessionLimitException
 function_decl|;
 comment|/**      * Deletes the session identified by the supplied sessionID and releases its resources.      *       * @param sessionID      *            the IRI that uniquely identifies the session      */
 name|void
@@ -114,6 +150,11 @@ parameter_list|(
 name|String
 name|sessionID
 parameter_list|)
+function_decl|;
+comment|/**      * Gets the number of sessions that can be simultaneously active and managed by this session manager.      *       * @return the session limit.      */
+name|int
+name|getActiveSessionLimit
+parameter_list|()
 function_decl|;
 comment|/**      * Returns the set of strings that identify registered sessions, whatever their state.      *       * @return the IDs of all registered sessions.      */
 name|Set
@@ -131,11 +172,7 @@ name|String
 name|sessionID
 parameter_list|)
 function_decl|;
-name|String
-name|getSessionNamespace
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the ontology space associated with this session.      *       * @deprecated as session spaces are obsolete, so is this method.      *       * @return the session space      */
+comment|/**      * Returns the ontology spaces associated with this session.      *       * @deprecated as session spaces are obsolete, so is this method. Do no use session spaces.      *       * @return the session spaces      */
 name|Set
 argument_list|<
 name|SessionOntologySpace
@@ -148,11 +185,12 @@ parameter_list|)
 throws|throws
 name|NonReferenceableSessionException
 function_decl|;
+comment|/**      * Sets the maximum allowed number of active sessions managed by this manager simultaneously. A negative      * value denotes no limit.      *       * Note that it is possible to set this value to zero, thus preventing Stanbol from creating session at      * all.      *       * @param limit      */
 name|void
-name|setSessionNamespace
+name|setActiveSessionLimit
 parameter_list|(
-name|String
-name|namespace
+name|int
+name|limit
 parameter_list|)
 function_decl|;
 comment|/**      * Stores the session identified by<code>sessionID</code> using the output stream<code>out</code>.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @param out      *            the output stream to store the session      * @throws OWLOntologyStorageException      */

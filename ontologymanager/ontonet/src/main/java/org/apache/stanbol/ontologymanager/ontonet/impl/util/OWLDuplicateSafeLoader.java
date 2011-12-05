@@ -15,7 +15,9 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
-name|api
+name|impl
+operator|.
+name|util
 package|;
 end_package
 

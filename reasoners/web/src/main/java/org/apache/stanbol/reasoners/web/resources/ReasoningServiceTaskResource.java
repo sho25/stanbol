@@ -359,6 +359,24 @@ name|stanbol
 operator|.
 name|commons
 operator|.
+name|jobs
+operator|.
+name|api
+operator|.
+name|JobManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
 name|web
 operator|.
 name|base
@@ -433,11 +451,15 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|reasoners
+name|ontologymanager
 operator|.
-name|jena
+name|ontonet
 operator|.
-name|JenaReasoningService
+name|api
+operator|.
+name|session
+operator|.
+name|SessionManager
 import|;
 end_import
 
@@ -449,13 +471,11 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|commons
+name|reasoners
 operator|.
-name|jobs
+name|jena
 operator|.
-name|api
-operator|.
-name|JobManager
+name|JenaReasoningService
 import|;
 end_import
 
@@ -536,22 +556,6 @@ operator|.
 name|servicesapi
 operator|.
 name|ReasoningServiceInputManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|reasoners
-operator|.
-name|servicesapi
-operator|.
-name|ReasoningServiceInputProvider
 import|;
 end_import
 
@@ -969,6 +973,10 @@ name|ONManager
 name|onm
 decl_stmt|;
 specifier|private
+name|SessionManager
+name|sessionManager
+decl_stmt|;
+specifier|private
 name|RuleStore
 name|ruleStore
 decl_stmt|;
@@ -1109,6 +1117,25 @@ operator|.
 name|getServiceFromContext
 argument_list|(
 name|ONManager
+operator|.
+name|class
+argument_list|,
+name|servletContext
+argument_list|)
+expr_stmt|;
+comment|// Retrieve the ontology network manager
+name|this
+operator|.
+name|sessionManager
+operator|=
+operator|(
+name|SessionManager
+operator|)
+name|ContextHelper
+operator|.
+name|getServiceFromContext
+argument_list|(
+name|SessionManager
 operator|.
 name|class
 argument_list|,
@@ -1852,7 +1879,7 @@ operator|.
 name|toString
 argument_list|()
 expr_stmt|;
-comment|/**          * If everything went well, we return 201 Created          * We include the header Location: with the Job URL          */
+comment|/**          * If everything went well, we return 201 Created We include the header Location: with the Job URL          */
 name|Viewable
 name|view
 init|=
@@ -1881,7 +1908,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * Process a real-time operation.      * Returns 200 when the process is ready, 500 if some error occurs      *       * @return      */
+comment|/**      * Process a real-time operation. Returns 200 when the process is ready, 500 if some error occurs      *       * @return      */
 specifier|private
 name|Response
 name|processRealTimeRequest
@@ -2052,7 +2079,7 @@ name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
-comment|/**      * Get the target graph, or null if no target graph have been given      * @return      */
+comment|/**      * Get the target graph, or null if no target graph have been given      *       * @return      */
 specifier|private
 name|String
 name|getTarget
@@ -2482,7 +2509,7 @@ name|processRequest
 argument_list|()
 return|;
 block|}
-comment|/**      * Binds the request parameters to a list of {@see ReasoningServiceInputProvider}s, and fed a {@see SimpleInputManager}.      * TODO In the future we may want to decouple this process from this resource/submodule.      *       * @return      */
+comment|/**      * Binds the request parameters to a list of {@see ReasoningServiceInputProvider}s, and fed a {@see      * SimpleInputManager}. TODO In the future we may want to decouple this process from this      * resource/submodule.      *       * @return      */
 specifier|private
 name|ReasoningServiceInputManager
 name|prepareInput
@@ -2936,6 +2963,8 @@ operator|new
 name|OntonetInputProvider
 argument_list|(
 name|onm
+argument_list|,
+name|sessionManager
 argument_list|,
 name|scope
 argument_list|,
