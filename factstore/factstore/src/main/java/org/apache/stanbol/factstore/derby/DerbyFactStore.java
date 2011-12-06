@@ -2123,6 +2123,7 @@ operator|+
 literal|" WHERE id=?"
 argument_list|)
 expr_stmt|;
+comment|// TODO Load the context, too
 name|ps
 operator|=
 name|con
@@ -3548,6 +3549,7 @@ argument_list|(
 literal|')'
 argument_list|)
 expr_stmt|;
+comment|// TODO load context, too
 name|logger
 operator|.
 name|info
