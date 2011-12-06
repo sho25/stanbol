@@ -131,16 +131,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|ServiceLoader
 import|;
 end_import
@@ -152,18 +142,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-operator|.
-name|Entry
 import|;
 end_import
 
@@ -183,15 +161,11 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
-operator|.
 name|commons
 operator|.
-name|solr
+name|io
 operator|.
-name|managed
-operator|.
-name|ManagedSolrServer
+name|FileUtils
 import|;
 end_import
 
@@ -378,8 +352,98 @@ argument_list|(
 literal|"basedir"
 argument_list|)
 decl_stmt|;
+name|File
+name|serverDir
+init|=
+operator|new
+name|File
+argument_list|(
+name|resolvedPrefix
+operator|+
+name|TEST_INDEX_REL_PATH
+argument_list|)
+decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"check ServerDir: {}"
+argument_list|,
+name|serverDir
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|serverDir
+operator|.
+name|exists
+argument_list|()
+condition|)
+block|{
+if|if
+condition|(
+name|serverDir
+operator|.
+name|isDirectory
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Data of a previouse Test are still present ... deleting"
+argument_list|)
+expr_stmt|;
+name|FileUtils
+operator|.
+name|deleteDirectory
+argument_list|(
+name|serverDir
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|serverDir
+operator|.
+name|exists
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to delete Artifacts of a previouse "
+operator|+
+literal|"Test execution (directory: "
+operator|+
+name|serverDir
+operator|+
+literal|")!"
+argument_list|)
+throw|;
+block|}
+block|}
+else|else
+block|{
+comment|//.oO(The File exists and is not a directory ... something strange is going on!)
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"The ManagedSolrServer directory '"
+operator|+
+name|serverDir
+operator|+
+literal|"' as used by this test exists, but is NOT an directory!"
+argument_list|)
+throw|;
+block|}
+block|}
+comment|//else the dir does not exist ... nothing to do
 name|String
-name|solrServerDir
+name|solrServerLocation
 init|=
 name|prefix
 operator|+
@@ -389,9 +453,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"configured directory: "
-operator|+
-name|solrServerDir
+literal|"configured SolrServer Location: {}"
+argument_list|,
+name|solrServerLocation
 argument_list|)
 expr_stmt|;
 name|System
@@ -402,7 +466,7 @@ name|ManagedSolrServer
 operator|.
 name|MANAGED_SOLR_DIR_PROPERTY
 argument_list|,
-name|solrServerDir
+name|solrServerLocation
 argument_list|)
 expr_stmt|;
 comment|// create the SolrDirectoryManager used for the tests
