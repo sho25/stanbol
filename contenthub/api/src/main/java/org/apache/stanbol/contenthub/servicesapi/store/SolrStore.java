@@ -98,12 +98,15 @@ name|SolrStore
 extends|extends
 name|Store
 block|{
-comment|/**      * Creates a {@link SolrContentItem} with the given parameters. Created {@link SolrContentItem} is not      * persisted, this function just creates the object.      *       * @param id      *            The unique ID for the item. If it is null, {@link SolrStore} should assign a unique ID for      *            this item.      * @param content      *            The content itself.      * @param contentType      *            The mimeType of the content.      * @param constraints      *            The facets in<code>key:[value1,value2]</code> pairs.      * @return Created {@link SolrContentItem}.      */
+comment|/**      * Creates a {@link SolrContentItem} with the given parameters. Created {@link SolrContentItem} is not      * persisted, this function just creates the object.      *       * @param id      *            The unique ID for the item. If it is null, {@link SolrStore} should assign a unique ID for      *            this item.      * @param title      *            The title for the content item.      * @param content      *            The content itself.      * @param contentType      *            The mimeType of the content.      * @param constraints      *            The facets in<code>key:[value1,value2]</code> pairs.      * @return Created {@link SolrContentItem}.      */
 name|SolrContentItem
 name|create
 parameter_list|(
 name|String
 name|id
+parameter_list|,
+name|String
+name|title
 parameter_list|,
 name|byte
 index|[]

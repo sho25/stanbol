@@ -21,6 +21,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|net
+operator|.
+name|URLDecoder
+import|;
+end_import
+
+begin_import
+import|import
 name|javax
 operator|.
 name|ws
@@ -787,6 +797,7 @@ name|response
 argument_list|)
 return|;
 block|}
+comment|/**      * Queries the entity hub and tries to find an entity form referenced sites by<br>      * by text search over the entities' labels. When a matching label found, then gets the whole<br>      * dbpedia ontolgoy of the result entity      *       * @param name      *            name of the entity that we will look for in entity labels      * @param language      *            is the language of the name      * @param selects      *            are the properties that we want in our results      * @return ontology of dbpedia of desired entity, if no entity found then return null      */
 specifier|public
 name|OntModel
 name|referencedSiteFind
@@ -1103,6 +1114,20 @@ block|{
 name|model
 operator|=
 literal|null
+expr_stmt|;
+block|}
+else|else
+block|{
+name|dbpediaId
+operator|=
+name|URLDecoder
+operator|.
+name|decode
+argument_list|(
+name|dbpediaId
+argument_list|,
+literal|"UTF-8"
+argument_list|)
 expr_stmt|;
 block|}
 name|model

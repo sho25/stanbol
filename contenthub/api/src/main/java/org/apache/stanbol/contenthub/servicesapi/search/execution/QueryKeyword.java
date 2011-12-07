@@ -33,6 +33,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -63,9 +73,14 @@ extends|extends
 name|Keyword
 block|{
 comment|/**      * If any {@link SearchEngine} attaches a {@link Keyword} to this {@link QueryKeyword}, this function      * returns a list of them.      *       * @return A list of {@link Keyword}.      */
+name|Map
+argument_list|<
+name|String
+argument_list|,
 name|List
 argument_list|<
 name|Keyword
+argument_list|>
 argument_list|>
 name|getRelatedKeywords
 parameter_list|()

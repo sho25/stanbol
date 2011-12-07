@@ -548,6 +548,18 @@ argument_list|(
 literal|"selectionText"
 argument_list|)
 decl_stmt|;
+comment|/**      * Represents the title of a {@link DocumentResource}.      */
+specifier|public
+specifier|static
+specifier|final
+name|Property
+name|DOCUMENT_TITLE
+init|=
+name|property
+argument_list|(
+literal|"documentTitle"
+argument_list|)
+decl_stmt|;
 comment|/**      * Represents relationship between an {@link ExternalResource} and the entity which is externally      * referenced.      */
 specifier|public
 specifier|static

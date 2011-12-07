@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -19,18 +19,8 @@ name|utils
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
 begin_comment
-comment|/**  * Includes static methods that returns SPARQL query strings Queries are  * executed on graph of entities to find their types and extract semantic  * information according to entity type's  *   * @author srdc  *   */
+comment|/**  * Includes static methods that returns SPARQL query strings Queries are executed on graph of entities to find  * their types and extract semantic information according to entity type's  *   * @author srdc  *   */
 end_comment
 
 begin_class
@@ -38,6 +28,7 @@ specifier|public
 class|class
 name|ExploreQueryHelper
 block|{
+comment|/**      * dbpedia-owl:place ranged properties for related places      */
 specifier|public
 specifier|final
 specifier|static
@@ -67,6 +58,7 @@ block|,
 literal|"location"
 block|}
 decl_stmt|;
+comment|/**      * dbpedia-owl:person ranged properties for related persons      */
 specifier|public
 specifier|final
 specifier|static
@@ -88,6 +80,7 @@ block|,
 literal|"president"
 block|}
 decl_stmt|;
+comment|/**      * dbpedia-owl:organization ranged properties for related organizations      */
 specifier|public
 specifier|final
 specifier|static
@@ -109,7 +102,7 @@ block|,
 literal|"associatedBand"
 block|}
 decl_stmt|;
-comment|/** 	 * Used to find all rdf:type's of the entity 	 *  	 * @return is SPARQL query finds rdf:type's of an entity 	 */
+comment|/**      * Used to find all rdf:type's of the entity      *       * @return is SPARQL query finds rdf:type's of an entity      */
 specifier|public
 specifier|final
 specifier|static
@@ -138,7 +131,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/** 	 * Creates a query which finds place type entities;<br> country<br> capital<br> 	 * largestCity<br> isPartOf<br> part<br> birthPlace<br> deathPlace<br> location<br> ... 	 * optionally 	 *  	 * @return resulted query 	 */
+comment|/**      * Creates a query which finds place type entities;<br>      * country<br>      * capital<br>      * largestCity<br>      * isPartOf<br>      * part<br>      * birthPlace<br>      * deathPlace<br>      * location<br>      * ... optionally      *       * @return resulted query      */
 specifier|public
 specifier|final
 specifier|static
@@ -270,7 +263,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 	 * creates a query that finds the person typed entities; 	 *<br> president 	 *<br> spouse 	 *<br> leader 	 *<br> ... optionally 	 * @return resulted query string 	 */
+comment|/**      * creates a query that finds the person typed entities;<br>      * president<br>      * spouse<br>      * leader<br>      * ... optionally      *       * @return resulted query string      */
 specifier|public
 specifier|final
 specifier|static
@@ -402,7 +395,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** 	 * creates a query that finds organization typed related entities; 	 *<br> associatedBand 	 *<br> team 	 *<br> party 	 *<br> ... optionally 	 * @return resulted query String 	 */
+comment|/**      * creates a query that finds organization typed related entities;<br>      * associatedBand<br>      * team<br>      * party<br>      * ... optionally      *       * @return resulted query String      */
 specifier|public
 specifier|final
 specifier|static
@@ -449,7 +442,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|personTypedProperties
+name|organizationTypedProperties
 operator|.
 name|length
 condition|;
@@ -463,7 +456,7 @@ name|append
 argument_list|(
 literal|" ?"
 operator|+
-name|personTypedProperties
+name|organizationTypedProperties
 index|[
 name|i
 index|]
@@ -488,7 +481,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|personTypedProperties
+name|organizationTypedProperties
 operator|.
 name|length
 condition|;
@@ -499,7 +492,7 @@ block|{
 name|String
 name|var
 init|=
-name|personTypedProperties
+name|organizationTypedProperties
 index|[
 name|i
 index|]
@@ -532,6 +525,96 @@ name|query
 operator|.
 name|toString
 argument_list|()
+return|;
+block|}
+comment|/**      * finds and returns the index of the location of<br>      * - last occurence of # , if fails<br>      * - last occurence of / , if fails<br>      * - last occurence of : , if fails length of the string, if string is null, then returns -1;      *       * @param URI      *            is the URI that whose namespace will be splitted      * @return is the index of valid splitter      */
+specifier|public
+specifier|static
+name|int
+name|splitNameSpaceFromURI
+parameter_list|(
+name|String
+name|URI
+parameter_list|)
+block|{
+name|int
+name|index
+init|=
+operator|-
+literal|1
+decl_stmt|;
+name|index
+operator|=
+name|URI
+operator|.
+name|lastIndexOf
+argument_list|(
+literal|"#"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|index
+operator|!=
+operator|-
+literal|1
+condition|)
+return|return
+name|index
+operator|+
+literal|1
+return|;
+name|index
+operator|=
+name|URI
+operator|.
+name|lastIndexOf
+argument_list|(
+literal|"/"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|index
+operator|!=
+operator|-
+literal|1
+condition|)
+return|return
+name|index
+operator|+
+literal|1
+return|;
+name|index
+operator|=
+name|URI
+operator|.
+name|lastIndexOf
+argument_list|(
+literal|":"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|index
+operator|!=
+operator|-
+literal|1
+condition|)
+return|return
+name|index
+operator|+
+literal|1
+return|;
+name|index
+operator|=
+name|URI
+operator|.
+name|length
+argument_list|()
+expr_stmt|;
+return|return
+name|index
 return|;
 block|}
 block|}

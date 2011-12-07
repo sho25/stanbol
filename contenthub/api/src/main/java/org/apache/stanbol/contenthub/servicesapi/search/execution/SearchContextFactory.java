@@ -58,6 +58,9 @@ name|score
 parameter_list|,
 name|QueryKeyword
 name|queryKeyword
+parameter_list|,
+name|String
+name|keywordSource
 parameter_list|)
 function_decl|;
 comment|/**      * Creates a {@link ClassResource} inside the {@link SearchContext} with the given classURI, weight, score      * and {@link Keyword}. The created {@link ClassResource} is put into the {@link SearchContext} and      * returned.      *       * @param classURI      *            The URI of the {@link ClassResource}      * @param weight      *            The weight.      * @param score      *            The score.      * @param relatedKeyword      *            The {@link Keyword} which will be added to this {@link ClassResource} as related.      * @return The created {@link ClassResource}.      */
@@ -112,6 +115,9 @@ name|relatedKeyword
 parameter_list|,
 name|String
 name|selectionText
+parameter_list|,
+name|String
+name|documentTitle
 parameter_list|)
 function_decl|;
 comment|/**      * Creates an {@link ExternalResource} with the given parameters. The created {@link ExternalResource} is      * put into the {@link SearchContext} and returned.      *       * @param reference      *            Dereferenceable URI of the external entity.      * @param weight      *            The weight.      * @param score      *            The score.      * @param relatedKeyword      * @return The {@link Keyword} which will be added to this {@link ExternalResource} as related.      */

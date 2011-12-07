@@ -1485,6 +1485,11 @@ operator|.
 name|getId
 argument_list|()
 argument_list|,
+name|d
+operator|.
+name|getName
+argument_list|()
+argument_list|,
 name|content
 argument_list|,
 name|mimeType

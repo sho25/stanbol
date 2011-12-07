@@ -35,7 +35,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Map
 import|;
 end_import
 
@@ -48,9 +48,11 @@ specifier|public
 interface|interface
 name|CNNImporter
 block|{
-name|List
+name|Map
 argument_list|<
 name|URI
+argument_list|,
+name|String
 argument_list|>
 name|importCNNNews
 parameter_list|(

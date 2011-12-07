@@ -1004,6 +1004,11 @@ name|keyword
 operator|.
 name|getRelatedQueryKeyword
 argument_list|()
+argument_list|,
+name|keyword
+operator|.
+name|getSource
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1272,6 +1277,9 @@ name|score
 parameter_list|,
 name|QueryKeyword
 name|queryKeyword
+parameter_list|,
+name|String
+name|keywordSource
 parameter_list|)
 block|{
 name|Node
@@ -1309,6 +1317,13 @@ argument_list|,
 name|this
 argument_list|)
 decl_stmt|;
+name|k
+operator|.
+name|setSource
+argument_list|(
+name|keywordSource
+argument_list|)
+expr_stmt|;
 name|keywords
 operator|.
 name|put
@@ -1617,7 +1632,10 @@ name|relatedKeyword
 parameter_list|,
 name|String
 name|relatedText
-comment|/*                                                                       * , String contentRepositoryItem                                                                       */
+parameter_list|,
+name|String
+name|documentTitle
+comment|/*                                                                         * , String contentRepositoryItem                                                                         */
 parameter_list|)
 block|{
 name|String
@@ -1704,6 +1722,13 @@ operator|.
 name|setRelatedText
 argument_list|(
 name|relatedText
+argument_list|)
+expr_stmt|;
+name|dri
+operator|.
+name|setDocumentTitle
+argument_list|(
+name|documentTitle
 argument_list|)
 expr_stmt|;
 comment|/* dri.setRelatedContentRepositoryItem(contentRepositoryItem); */

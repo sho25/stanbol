@@ -57,6 +57,11 @@ name|String
 name|getDocumentURI
 parameter_list|()
 function_decl|;
+comment|/**      * Retrieves the title of this document.      *       * @return The title of the document.      */
+name|String
+name|getDocumentTitle
+parameter_list|()
+function_decl|;
 comment|/**      * Retrieves the text of this document, if it has a text based content.      *       * @return The text of the document.      */
 name|String
 name|getRelatedText
@@ -68,6 +73,14 @@ name|setRelatedText
 parameter_list|(
 name|String
 name|selectionText
+parameter_list|)
+function_decl|;
+comment|/**      * Sets the title of this document.      *       * @param documentTitle      *            The title of this document.      */
+name|void
+name|setDocumentTitle
+parameter_list|(
+name|String
+name|documentTitle
 parameter_list|)
 function_decl|;
 block|}

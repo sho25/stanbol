@@ -773,7 +773,7 @@ name|NavigationLink
 argument_list|(
 literal|"contenthub"
 argument_list|,
-literal|"contenthub"
+literal|"/contenthub"
 argument_list|,
 literal|"/imports/contenthubDescription.ftl"
 argument_list|,
@@ -781,23 +781,7 @@ literal|20
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|links
-operator|.
-name|add
-argument_list|(
-operator|new
-name|NavigationLink
-argument_list|(
-literal|"contenthub/search"
-argument_list|,
-literal|"search"
-argument_list|,
-literal|"/imports/searchDescription.ftl"
-argument_list|,
-literal|70
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|//links.add(new NavigationLink("contenthub/search", "search", "/imports/searchDescription.ftl", 70));
 return|return
 name|links
 return|;

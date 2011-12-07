@@ -79,6 +79,11 @@ argument_list|>
 name|getConstraints
 parameter_list|()
 function_decl|;
+comment|/**      * Retrieves the title of this content item      *       * @return title {@link String}      */
+name|String
+name|getTitle
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
