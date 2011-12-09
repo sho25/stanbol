@@ -2135,6 +2135,22 @@ operator|==
 literal|null
 condition|)
 block|{
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+literal|5
+condition|;
+name|i
+operator|++
+control|)
+block|{
+comment|//waiting for a maximum of 5sec
 try|try
 block|{
 name|log
@@ -2163,6 +2179,7 @@ name|InterruptedException
 name|e
 parameter_list|)
 block|{}
+block|}
 block|}
 block|}
 comment|//the server is not available -> throw an exception!

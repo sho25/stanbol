@@ -596,6 +596,7 @@ block|}
 comment|/*--------------------------------------------------------------------------      *    Implementation of the ValueConverters for the dataTypes defined by      *    DataTypeEnum      * -------------------------------------------------------------------------      */
 comment|/**      * This Interface defines an simple converter interface that allows a      * registry to get metadata about the type the converter can create and      * second the {@link #convert(Object)} method that is called to convert      * to the target type.      * @author Rupert Westenthaler      *      * @param<T> the type of created objects      */
 specifier|public
+specifier|static
 interface|interface
 name|ValueConverter
 parameter_list|<
@@ -620,6 +621,7 @@ parameter_list|)
 function_decl|;
 block|}
 specifier|public
+specifier|static
 class|class
 name|BooleanConverter
 implements|implements
@@ -723,6 +725,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|ByteConverter
 implements|implements
@@ -930,6 +933,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|ShortConverter
 implements|implements
@@ -1133,6 +1137,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|IntConverter
 implements|implements
@@ -1332,6 +1337,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|LongConverter
 implements|implements
@@ -1501,6 +1507,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|FloatConverter
 implements|implements
@@ -1593,6 +1600,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|DoubleConverter
 implements|implements
@@ -1685,6 +1693,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|IntegerConverter
 implements|implements
@@ -1790,6 +1799,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|DecimalConverter
 implements|implements
@@ -1881,6 +1891,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|AnyUriConverter
 implements|implements
@@ -2001,6 +2012,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|ReferenceConverter
 extends|extends
@@ -2025,6 +2037,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|DateTimeConverter
 implements|implements
@@ -2204,6 +2217,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|DateConverter
 extends|extends
@@ -2223,6 +2237,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|TimeConverter
 extends|extends
@@ -2242,6 +2257,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|TextConverter
 implements|implements
@@ -2318,6 +2334,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|StringConverter
 implements|implements
@@ -2364,6 +2381,7 @@ return|;
 block|}
 block|}
 specifier|public
+specifier|static
 class|class
 name|DurationConverter
 implements|implements
