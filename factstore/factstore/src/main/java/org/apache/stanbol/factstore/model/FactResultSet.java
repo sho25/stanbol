@@ -251,12 +251,9 @@ name|subject
 operator|.
 name|setSubject
 argument_list|(
-name|String
-operator|.
-name|valueOf
-argument_list|(
+literal|"R"
+operator|+
 name|rowCount
-argument_list|)
 argument_list|)
 expr_stmt|;
 for|for
