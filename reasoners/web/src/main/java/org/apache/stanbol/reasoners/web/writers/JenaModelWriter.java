@@ -340,7 +340,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|error
+name|debug
 argument_list|(
 literal|"Returning {} bytes"
 argument_list|,
