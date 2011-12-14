@@ -886,7 +886,7 @@ specifier|final
 name|boolean
 name|_LAZY_LOADING_DEFAULT
 init|=
-literal|false
+literal|true
 decl_stmt|;
 specifier|private
 specifier|static
@@ -1141,7 +1141,7 @@ argument_list|,
 name|value
 operator|=
 block|{
-literal|"http://www.ontologydesignpatterns.org/registry/iksnetwork.owl"
+literal|"http://www.ontologydesignpatterns.org/registry/iksnetwork-standalone.owl"
 block|}
 argument_list|)
 specifier|private
@@ -1443,7 +1443,7 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"http://www.ontologydesignpatterns.org/registry/iksnetwork.owl"
+literal|"http://www.ontologydesignpatterns.org/registry/iksnetwork-standalone.owl"
 block|}
 expr_stmt|;
 name|Object
