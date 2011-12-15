@@ -779,6 +779,568 @@ literal|"\"@literal\": \"Paris\","
 argument_list|)
 expr_stmt|;
 block|}
+comment|/*      * "/find" tests      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFindInvalidLDPath
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//parse some illegal LDPath
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildPostRequest
+argument_list|(
+literal|"/entityhub/site/dbpedia/ldpath"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|withFormContent
+argument_list|(
+literal|"name"
+argument_list|,
+literal|"Vienna"
+argument_list|,
+literal|"lang"
+argument_list|,
+literal|"en"
+argument_list|,
+comment|//NOTE the missing semicolon
+literal|"ldpath"
+argument_list|,
+literal|"label_de = rdfs:label[@de] :: xsd:string"
+argument_list|,
+literal|"limit"
+argument_list|,
+literal|"1"
+argument_list|)
+argument_list|)
+operator|.
+name|assertStatus
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+operator|.
+name|getStatusCode
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFindLDPathSelectLabel
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//select the German label on a query for the english one
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildPostRequest
+argument_list|(
+literal|"/entityhub/site/dbpedia/find"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|withFormContent
+argument_list|(
+literal|"name"
+argument_list|,
+literal|"Vienna"
+argument_list|,
+literal|"lang"
+argument_list|,
+literal|"en"
+argument_list|,
+literal|"ldpath"
+argument_list|,
+literal|"name_de = rdfs:label[@de] :: xsd:string;"
+argument_list|,
+literal|"limit"
+argument_list|,
+literal|"1"
+argument_list|)
+argument_list|)
+operator|.
+name|assertStatus
+argument_list|(
+literal|200
+argument_list|)
+operator|.
+name|assertContentType
+argument_list|(
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|assertContentContains
+argument_list|(
+literal|"<http://www.iks-project.eu/ontology/rick/query/score>"
+argument_list|,
+literal|"<http://dbpedia.org/resource/Vienna>"
+argument_list|,
+literal|"<name_de> \"Wien\"@de ."
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFindLDPathOnMultipleResults
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//select multiple end check that LD-Path is executed on all results
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildPostRequest
+argument_list|(
+literal|"/entityhub/site/dbpedia/find"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|withFormContent
+argument_list|(
+literal|"name"
+argument_list|,
+literal|"York"
+argument_list|,
+literal|"lang"
+argument_list|,
+literal|"en"
+argument_list|,
+literal|"ldpath"
+argument_list|,
+literal|"@prefix geo :<http://www.w3.org/2003/01/geo/wgs84_pos#> ;"
+operator|+
+literal|"lat = geo:lat :: xsd:double;"
+argument_list|,
+literal|"limit"
+argument_list|,
+literal|"3"
+argument_list|)
+argument_list|)
+operator|.
+name|assertStatus
+argument_list|(
+literal|200
+argument_list|)
+operator|.
+name|assertContentType
+argument_list|(
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|assertContentContains
+argument_list|(
+literal|"<http://www.iks-project.eu/ontology/rick/query/score>"
+argument_list|,
+literal|"<http://dbpedia.org/resource/York>"
+argument_list|,
+literal|"<lat>   \"53.958332\"^^<http://www.w3.org/2001/XMLSchema#double> ."
+argument_list|,
+literal|"<http://dbpedia.org/resource/New_York_City>"
+argument_list|,
+literal|"<lat>   \"40.716667\"^^<http://www.w3.org/2001/XMLSchema#double> ."
+argument_list|,
+literal|"<http://dbpedia.org/resource/New_York>"
+argument_list|,
+literal|"<lat>   \"43.0\"^^<http://www.w3.org/2001/XMLSchema#double> ."
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFindLDPathSelectPaths
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//select the German name and the categories ond other members of the
+comment|//same category
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildPostRequest
+argument_list|(
+literal|"/entityhub/site/dbpedia/find"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|withFormContent
+argument_list|(
+literal|"name"
+argument_list|,
+literal|"Spinne"
+argument_list|,
+literal|"lang"
+argument_list|,
+literal|"de"
+argument_list|,
+literal|"ldpath"
+argument_list|,
+literal|"@prefix dct :<http://purl.org/dc/terms/> ;"
+operator|+
+literal|"name = rdfs:label[@en] :: xsd:string;"
+operator|+
+literal|"category = dct:subject :: xsd:anyURI;"
+operator|+
+literal|"others = dct:subject/^dct:subject :: xsd:anyURI;"
+argument_list|,
+literal|"limit"
+argument_list|,
+literal|"1"
+argument_list|)
+argument_list|)
+operator|.
+name|assertStatus
+argument_list|(
+literal|200
+argument_list|)
+operator|.
+name|assertContentType
+argument_list|(
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|assertContentContains
+argument_list|(
+literal|"<http://www.iks-project.eu/ontology/rick/query/score>"
+argument_list|,
+literal|"<name>  \"Spider\"@en ;"
+argument_list|,
+literal|"<category><http://dbpedia.org/resource/Category:Arachnids> , "
+operator|+
+literal|"<http://dbpedia.org/resource/Category:Spiders> ;"
+argument_list|,
+literal|"<others><http://dbpedia.org/resource/Acari> , "
+operator|+
+literal|"<http://dbpedia.org/resource/Spider> , "
+operator|+
+literal|"<http://dbpedia.org/resource/Scorpion> , "
+operator|+
+literal|"<http://dbpedia.org/resource/Arachnid> ."
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQueryIllegalLDPath
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//The field query as java string
+name|String
+name|query
+init|=
+literal|"{"
+operator|+
+literal|"\"ldpath\": \"@prefix dct :<http:\\/\\/purl.org\\/dc\\/terms\\/subject\\/> ; "
+operator|+
+literal|"@prefix geo :<http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#> ; "
+operator|+
+literal|"@prefix dbp-ont :<http:\\/\\/dbpedia.org\\/ontology\\/> ; "
+operator|+
+comment|//note the missing semicolon
+literal|"lat = geo:lat :: xsd:decimal ; long = geo:long :: xsd:decimal "
+operator|+
+literal|"type = rdf:type :: xsd:anyURI;\","
+operator|+
+literal|"\"constraints\": [{ "
+operator|+
+literal|"\"type\": \"reference\","
+operator|+
+literal|"\"field\": \"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#type\","
+operator|+
+literal|"\"value\": \"http:\\/\\/dbpedia.org\\/ontology\\/Place\","
+operator|+
+literal|"},"
+operator|+
+literal|"{"
+operator|+
+literal|"\"type\": \"range\","
+operator|+
+literal|"\"field\": \"http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#lat\","
+operator|+
+literal|"\"lowerBound\": 50,"
+operator|+
+literal|"\"upperBound\": 51,"
+operator|+
+literal|"\"inclusive\": true,"
+operator|+
+literal|"\"datatype\": \"xsd:double\""
+operator|+
+literal|"},"
+operator|+
+literal|"{"
+operator|+
+literal|"\"type\": \"range\","
+operator|+
+literal|"\"field\": \"http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#long\","
+operator|+
+literal|"\"lowerBound\": 6,"
+operator|+
+literal|"\"upperBound\": 8,"
+operator|+
+literal|"\"inclusive\": true,"
+operator|+
+literal|"\"datatype\": \"xsd:double\""
+operator|+
+literal|"}"
+operator|+
+literal|"],"
+operator|+
+literal|"\"offset\": 0,"
+operator|+
+literal|"\"limit\": 10,"
+operator|+
+literal|"}"
+decl_stmt|;
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildPostRequest
+argument_list|(
+literal|"/entityhub/site/dbpedia/query"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/json"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|withContent
+argument_list|(
+name|query
+argument_list|)
+argument_list|)
+operator|.
+name|assertStatus
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+operator|.
+name|getStatusCode
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQueryLDPathSelection
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//The field query as java string
+name|String
+name|query
+init|=
+literal|"{"
+operator|+
+literal|"\"ldpath\": \"@prefix dct :<http:\\/\\/purl.org\\/dc\\/terms\\/subject\\/> ; "
+operator|+
+literal|"@prefix geo :<http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#> ; "
+operator|+
+literal|"@prefix dbp-ont :<http:\\/\\/dbpedia.org\\/ontology\\/> ; "
+operator|+
+literal|"lat = geo:lat :: xsd:decimal ; long = geo:long :: xsd:decimal ; "
+operator|+
+literal|"population = dbp-ont:populationTotal :: xsd:integer ; "
+operator|+
+literal|"elevation = dbp-ont:elevation :: xsd:integer ; "
+operator|+
+literal|"name = rdfs:label[@en] :: xsd:string; "
+operator|+
+literal|"categories = dct:subject :: xsd:anyURI; "
+operator|+
+literal|"type = rdf:type :: xsd:anyURI;\","
+operator|+
+literal|"\"constraints\": [{ "
+operator|+
+literal|"\"type\": \"reference\","
+operator|+
+literal|"\"field\": \"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#type\","
+operator|+
+literal|"\"value\": \"http:\\/\\/dbpedia.org\\/ontology\\/Place\","
+operator|+
+literal|"},"
+operator|+
+literal|"{"
+operator|+
+literal|"\"type\": \"range\","
+operator|+
+literal|"\"field\": \"http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#lat\","
+operator|+
+literal|"\"lowerBound\": 50,"
+operator|+
+literal|"\"upperBound\": 51,"
+operator|+
+literal|"\"inclusive\": true,"
+operator|+
+literal|"\"datatype\": \"xsd:double\""
+operator|+
+literal|"},"
+operator|+
+literal|"{"
+operator|+
+literal|"\"type\": \"range\","
+operator|+
+literal|"\"field\": \"http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#long\","
+operator|+
+literal|"\"lowerBound\": 6,"
+operator|+
+literal|"\"upperBound\": 8,"
+operator|+
+literal|"\"inclusive\": true,"
+operator|+
+literal|"\"datatype\": \"xsd:double\""
+operator|+
+literal|"}"
+operator|+
+literal|"],"
+operator|+
+literal|"\"offset\": 0,"
+operator|+
+literal|"\"limit\": 10,"
+operator|+
+literal|"}"
+decl_stmt|;
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildPostRequest
+argument_list|(
+literal|"/entityhub/site/dbpedia/query"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/json"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|withContent
+argument_list|(
+name|query
+argument_list|)
+argument_list|)
+operator|.
+name|assertStatus
+argument_list|(
+literal|200
+argument_list|)
+operator|.
+name|assertContentType
+argument_list|(
+literal|"text/turtle"
+argument_list|)
+operator|.
+name|assertContentContains
+argument_list|(
+comment|//first expected entities
+literal|"<http://dbpedia.org/resource/Bonn>"
+argument_list|,
+literal|"<http://dbpedia.org/resource/Aachen>"
+argument_list|,
+literal|"<http://dbpedia.org/resource/Koblenz>"
+argument_list|,
+literal|"<http://dbpedia.org/resource/Cologne>"
+argument_list|,
+comment|//now some values based on the LDPath
+literal|"<name>  \"Koblenz\"@en"
+argument_list|,
+literal|"<lat>   \"50.359722\""
+argument_list|,
+literal|"<long>  \"7.597778\""
+argument_list|,
+literal|"<type><http://www.w3.org/2002/07/owl#Thing> , "
+operator|+
+literal|"<http://www.opengis.net/gml/_Feature> , "
+operator|+
+literal|"<http://dbpedia.org/ontology/Town>"
+argument_list|,
+literal|"<population> 314926"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

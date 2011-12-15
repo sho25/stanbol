@@ -421,6 +421,13 @@ argument_list|(
 literal|"@prefix dct :<http://purl.org/dc/terms/>;"
 argument_list|)
 expr_stmt|;
+name|builder
+operator|.
+name|append
+argument_list|(
+literal|"@prefix geo :<http://www.w3.org/2003/01/geo/wgs84_pos#> ;"
+argument_list|)
+expr_stmt|;
 comment|//this test that even when selecting strings the language is preserved
 name|builder
 operator|.
@@ -451,6 +458,13 @@ operator|.
 name|append
 argument_list|(
 literal|"type = rdf:type :: eh:ref;"
+argument_list|)
+expr_stmt|;
+name|builder
+operator|.
+name|append
+argument_list|(
+literal|"lat = geo:lat :: xsd:double;"
 argument_list|)
 expr_stmt|;
 name|DATA_TYPE_TEST_PROGRAM
@@ -749,6 +763,18 @@ literal|"http://dbpedia.org/ontology/Place"
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|expected
+operator|.
+name|put
+argument_list|(
+literal|"lat"
+argument_list|,
+name|Collections
+operator|.
+name|emptySet
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|EXPECTED_RESULTS_LONDON
