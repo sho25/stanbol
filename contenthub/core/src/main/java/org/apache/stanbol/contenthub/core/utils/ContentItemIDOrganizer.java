@@ -52,7 +52,7 @@ name|id
 operator|.
 name|startsWith
 argument_list|(
-name|CONTENT_ITEM_URI_PREFIX
+literal|"urn:"
 argument_list|)
 condition|)
 block|{

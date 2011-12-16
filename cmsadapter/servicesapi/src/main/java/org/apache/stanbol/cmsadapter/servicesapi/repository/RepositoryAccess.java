@@ -462,6 +462,14 @@ parameter_list|)
 throws|throws
 name|RepositoryAccessException
 function_decl|;
+comment|/**      * Checks the specified session object still can be used to connect content repository      *       * @param session      *            Session object to be validated      * @return<code>true</code> if the specified<code>session</code> is still valid, otherwise      *<code>false</code>.      */
+name|boolean
+name|isSessionValid
+parameter_list|(
+name|Object
+name|session
+parameter_list|)
+function_decl|;
 comment|/**      *       * @param connectionInfo      * @return true if the {@link RepositoryAccess} instance can connect to repository with the given      *<b>connectionInfo</b>      */
 name|boolean
 name|canRetrieve

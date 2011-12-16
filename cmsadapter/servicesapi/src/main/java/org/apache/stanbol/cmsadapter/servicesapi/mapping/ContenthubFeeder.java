@@ -19,6 +19,16 @@ name|mapping
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Dictionary
+import|;
+end_import
+
 begin_comment
 comment|/**  * This interface provides methods to submit and delete content items to/from Contenthub.  *   * Stanbol provides default implementations of this interface for JCR and CMIS content repositories. However,  * it is also possible to provide custom implementations based on the needs of content repository. It is still  * possible to provide new implementations for JCR or CMIS repositories.<code>ContenthubFeederManager</code>  * gives higher priority to custom implementations when selecting the appropriate {@link ContenthubFeeder}  * instance.  *   * While submitting content items to Contenthub properties of content repository objects are provided as  * metadata of the content items. Supplied metadata is used to provide faceted search feature in the  * Contenthub.  *   * @author suat  *   */
 end_comment
@@ -28,24 +38,6 @@ specifier|public
 interface|interface
 name|ContenthubFeeder
 block|{
-comment|/**      * Name of the factory for JCR Contenthub Feeder      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|JCR_CONTENTHUB_FEEDER_FACTORY
-init|=
-literal|"org.apache.stanbol.cmsadapter.jcr.mapping.JCRContenthubFeederFactory"
-decl_stmt|;
-comment|/**      * Name of the factory for CMIS Contenthub Feeder      */
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|CMIS_CONTENTUB_FEEDER_FACTORY
-init|=
-literal|"org.apache.stanbol.cmsadapter.cmis.mapping.CMISContenthubFeederFactory"
-decl_stmt|;
 comment|/**      * Session property for default JCR and CMIS Contenthub Feeder implementations      */
 specifier|public
 specifier|static
@@ -62,8 +54,19 @@ specifier|final
 name|String
 name|PROP_CONTENT_PROPERTIES
 init|=
-literal|"org.apache.stanbol.cmsadapter.servicesapi.mappingçContenthubFeeder.contentFields"
+literal|"org.apache.stanbol.cmsadapter.servicesapi.mapping.ContenthubFeeder.contentFields"
 decl_stmt|;
+comment|/**      * Creates a content item in Contenthub by leveraging the content repository object itself e.g<b>Node</b>      * in JCR,<b>Document</b> in CMIS. If there is an already existing content item in the Contenthub with      * the same id, the existing content item should be deleted first.      *       * @param o      *            Content repository object to be transformed into a content item in Contenthub      * @param id      *            Optional ID for the content item in Contenthub. If this parameter is specified, it will be      *            used as the ID of the content item in Contenthub. Otherwise, the object's own ID in the      *            content repository will be used.      */
+name|void
+name|submitContentItemByCMSObject
+parameter_list|(
+name|Object
+name|o
+parameter_list|,
+name|String
+name|id
+parameter_list|)
+function_decl|;
 comment|/**      * Submits content item by its ID to the Contenthub. If there is an already existing content item in the      * Contenthub with the same id, the existing content item should be deleted first.      *       * @param contentItemID      *            ID of the content item in the repository      */
 name|void
 name|submitContentItemByID
@@ -96,7 +99,7 @@ name|ContentItemFilter
 name|customContentItemFilter
 parameter_list|)
 function_decl|;
-comment|/**      * Deletes content item by its ID from the Contenthub      *       * @param contentItemID      *            ID of the content item in the repository      */
+comment|/**      * Deletes content item by its ID from the Contenthub. Please note that specified identifier should be the      * one that identifying the content item in Contenthub.      *       * @param contentItemID      *            ID of the content item in the<b>Contenthub</b>      */
 name|void
 name|deleteContentItemByID
 parameter_list|(
@@ -128,13 +131,28 @@ name|ContentItemFilter
 name|customContentItemFilter
 parameter_list|)
 function_decl|;
-comment|/**      * Determines the specific implementation of {@link ContenthubFeeder} supports for the specified      *<connectionType>.      *       * @param connectionType      *            connection type for which an {@link RDFMapper} is requested      * @return whether certain implementation can handle specified connection type      */
+comment|/**      * This method is used for identification of {@link ContenthubFeeder}s based on the specified      *<code>session</code> object. If the specified instance can be used in certain implementation, it      * returns<code>true</code>, otherwise<code>false</code>.      *       * @param session      *            Session object to be checked      * @return whether certain implementation can handle specified connection type      */
 name|boolean
-name|canFeed
+name|canFeedWith
 parameter_list|(
-name|String
-name|connectionType
+name|Object
+name|session
 parameter_list|)
+function_decl|;
+comment|/**      * Provides injecting of implementation dependent configurations at runtime for different      * {@link ContenthubFeeder}s.      *       * @param configs      *            Configurations passed in a {@link Dictionary} instance      * @throws ContenthubFeederException      */
+name|void
+name|setConfigs
+parameter_list|(
+name|Dictionary
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|configs
+parameter_list|)
+throws|throws
+name|ContenthubFeederException
 function_decl|;
 block|}
 end_interface

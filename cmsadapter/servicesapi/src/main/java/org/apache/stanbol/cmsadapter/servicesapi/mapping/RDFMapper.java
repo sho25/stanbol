@@ -107,12 +107,12 @@ parameter_list|)
 throws|throws
 name|RDFBridgeException
 function_decl|;
-comment|/**      * This method determines certain implementation of this interface is able to generate RDF from repository      * or update the repository based on the given RDF.      *       * @param connectionType      *            connection type for which an {@link RDFMapper} is requested      * @return whether this implementation can handle specified connection type      */
+comment|/**      * This method is used for identification of RDFMappers based on the specified<code>session</code>      * object. If the specified instance can be used in certain implementation it returns<code>true</code>,      * otherwise<code>false</code>.      *       * @param session      *            Session object to be checked      * @return whether this implementation can handle specified session object      */
 name|boolean
-name|canMap
+name|canMapWith
 parameter_list|(
-name|String
-name|connectionType
+name|Object
+name|session
 parameter_list|)
 function_decl|;
 block|}

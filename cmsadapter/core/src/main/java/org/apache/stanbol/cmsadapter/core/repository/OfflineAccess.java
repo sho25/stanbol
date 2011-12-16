@@ -1768,6 +1768,24 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isSessionValid
+parameter_list|(
+name|Object
+name|session
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Offline Repository Access does not handle connections"
+argument_list|)
+throw|;
+block|}
 block|}
 end_class
 

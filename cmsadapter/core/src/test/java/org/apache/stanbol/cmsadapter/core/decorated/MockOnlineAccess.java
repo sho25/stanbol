@@ -918,6 +918,21 @@ name|parent
 return|;
 block|}
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isSessionValid
+parameter_list|(
+name|Object
+name|session
+parameter_list|)
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_class
 

@@ -799,6 +799,20 @@ literal|null
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isSessionValid
+parameter_list|(
+name|Object
+name|session
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_class
 
