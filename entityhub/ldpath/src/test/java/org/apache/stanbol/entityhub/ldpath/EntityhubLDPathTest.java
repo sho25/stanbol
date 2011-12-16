@@ -407,27 +407,11 @@ operator|new
 name|StringBuilder
 argument_list|()
 decl_stmt|;
-name|builder
-operator|.
-name|append
-argument_list|(
-literal|"@prefix eh :<http://www.iks-project.eu/ontology/rick/model/>;"
-argument_list|)
-expr_stmt|;
-name|builder
-operator|.
-name|append
-argument_list|(
-literal|"@prefix dct :<http://purl.org/dc/terms/>;"
-argument_list|)
-expr_stmt|;
-name|builder
-operator|.
-name|append
-argument_list|(
-literal|"@prefix geo :<http://www.w3.org/2003/01/geo/wgs84_pos#> ;"
-argument_list|)
-expr_stmt|;
+comment|//NOTE: prefixes removed to test registration of the default namespaces
+comment|//      as registered in the NamespaceEnum
+comment|//builder.append("@prefix eh :<http://www.iks-project.eu/ontology/rick/model/>;");
+comment|//builder.append("@prefix dct :<http://purl.org/dc/terms/>;");
+comment|//builder.append("@prefix geo :<http://www.w3.org/2003/01/geo/wgs84_pos#> ;");
 comment|//this test that even when selecting strings the language is preserved
 name|builder
 operator|.
@@ -441,7 +425,7 @@ name|builder
 operator|.
 name|append
 argument_list|(
-literal|"comment = rdfs:comment :: eh:text;"
+literal|"comment = rdfs:comment :: entityhub:text;"
 argument_list|)
 expr_stmt|;
 comment|//this tests that Reference is used for URIs
@@ -449,7 +433,7 @@ name|builder
 operator|.
 name|append
 argument_list|(
-literal|"categories = dct:subject :: xsd:anyURI;"
+literal|"categories = dc:subject :: xsd:anyURI;"
 argument_list|)
 expr_stmt|;
 comment|//this tests support for Reference as used by the entityhub
@@ -457,7 +441,7 @@ name|builder
 operator|.
 name|append
 argument_list|(
-literal|"type = rdf:type :: eh:ref;"
+literal|"type = rdf:type :: entityhub:ref;"
 argument_list|)
 expr_stmt|;
 name|builder

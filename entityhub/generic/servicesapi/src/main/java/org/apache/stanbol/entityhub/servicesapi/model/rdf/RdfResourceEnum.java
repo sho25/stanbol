@@ -193,6 +193,14 @@ comment|/**      * The property used to link from the {@link #QueryResultSet} to
 constructor|queryResult(NamespaceEnum.entityhubQuery
 block|)
 enum|,
+comment|/**      * Property used to link the Literal with the executed Query to the      * {@link #QueryResultSet}      */
+name|query
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|entityhubQuery
+argument_list|)
+operator|,
 comment|/**      * The score of the result in respect to the parsed query.      */
 name|resultScore
 argument_list|(

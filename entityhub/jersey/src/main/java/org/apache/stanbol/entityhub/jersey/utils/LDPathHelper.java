@@ -27,7 +27,7 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|TEXT_HTML
+name|*
 import|;
 end_import
 
@@ -1219,6 +1219,50 @@ argument_list|)
 expr_stmt|;
 return|return
 name|rb
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+elseif|else
+if|if
+condition|(
+name|acceptedMediaType
+operator|.
+name|equals
+argument_list|(
+name|TEXT_HTML_TYPE
+argument_list|)
+condition|)
+block|{
+comment|//HTML is only supported for documentation
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|NOT_ACCEPTABLE
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"The requested content type "
+operator|+
+name|TEXT_HTML
+operator|+
+literal|" is not supported.\n"
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|ACCEPT
+argument_list|,
+name|acceptedMediaType
+argument_list|)
 operator|.
 name|build
 argument_list|()

@@ -277,7 +277,7 @@ name|UriRef
 argument_list|(
 name|RdfResourceEnum
 operator|.
-name|queryResult
+name|query
 operator|.
 name|getUri
 argument_list|()
@@ -356,7 +356,7 @@ name|TripleImpl
 argument_list|(
 name|QUERY_RESULT_LIST
 argument_list|,
-name|FIELD_QUERY
+name|QUERY_RESULT
 argument_list|,
 operator|new
 name|UriRef
@@ -467,7 +467,7 @@ name|filter
 argument_list|(
 name|QUERY_RESULT_LIST
 argument_list|,
-name|FIELD_QUERY
+name|QUERY_RESULT
 argument_list|,
 literal|null
 argument_list|)
@@ -539,7 +539,7 @@ name|TripleImpl
 argument_list|(
 name|QUERY_RESULT_LIST
 argument_list|,
-name|FIELD_QUERY
+name|QUERY_RESULT
 argument_list|,
 name|signId
 argument_list|)
@@ -659,7 +659,7 @@ name|TripleImpl
 argument_list|(
 name|QUERY_RESULT_LIST
 argument_list|,
-name|FIELD_QUERY
+name|QUERY_RESULT
 argument_list|,
 name|resultId
 argument_list|)
