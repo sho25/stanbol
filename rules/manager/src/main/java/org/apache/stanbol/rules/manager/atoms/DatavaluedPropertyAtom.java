@@ -714,37 +714,9 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"TYPED LITERAL : "
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"        value : "
-operator|+
-name|value
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"        xsd type : "
-operator|+
-name|xsdType
-argument_list|)
-expr_stmt|;
+comment|//				System.out.println("TYPED LITERAL : ");
+comment|//				System.out.println("        value : "+value);
+comment|//				System.out.println("        xsd type : "+xsdType);
 if|if
 condition|(
 name|value
@@ -786,17 +758,7 @@ operator|+
 name|xsdType
 expr_stmt|;
 block|}
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"ARG 2 : "
-operator|+
-name|arg2
-argument_list|)
-expr_stmt|;
+comment|//				System.out.println("ARG 2 : "+arg2);
 block|}
 elseif|else
 if|if

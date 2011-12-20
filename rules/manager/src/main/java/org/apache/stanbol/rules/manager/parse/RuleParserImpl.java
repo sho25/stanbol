@@ -982,7 +982,7 @@ block|{
 name|parser
 operator|.
 name|start
-argument_list|( )
+argument_list|()
 expr_stmt|;
 block|}
 catch|catch
@@ -1055,7 +1055,7 @@ block|{
 name|parser
 operator|.
 name|start
-argument_list|( )
+argument_list|()
 expr_stmt|;
 block|}
 catch|catch
@@ -6230,7 +6230,7 @@ block|,
 literal|0x8000000
 block|,
 literal|0x40607800
-block|,}
+block|, }
 expr_stmt|;
 block|}
 specifier|private
@@ -6282,7 +6282,7 @@ block|,
 literal|0x440000
 block|,
 literal|0x200
-block|,}
+block|, }
 expr_stmt|;
 block|}
 comment|/** Constructor with InputStream. */
@@ -7271,14 +7271,14 @@ specifier|public
 name|void
 name|enable_tracing
 parameter_list|()
-block|{   }
+block|{ 	}
 comment|/** Disable tracing. */
 specifier|final
 specifier|public
 name|void
 name|disable_tracing
 parameter_list|()
-block|{   }
+block|{ 	}
 block|}
 end_class
 
