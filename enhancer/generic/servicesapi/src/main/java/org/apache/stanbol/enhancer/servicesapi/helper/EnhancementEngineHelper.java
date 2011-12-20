@@ -367,7 +367,10 @@ name|UriRef
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 argument_list|)
@@ -453,7 +456,10 @@ name|UriRef
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 argument_list|)
@@ -731,7 +737,10 @@ name|UriRef
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 argument_list|)

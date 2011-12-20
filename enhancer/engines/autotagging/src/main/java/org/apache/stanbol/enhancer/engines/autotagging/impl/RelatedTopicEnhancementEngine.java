@@ -471,7 +471,10 @@ literal|" is deactivated: cannot process content item: "
 operator|+
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -566,7 +569,10 @@ name|UriRef
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 argument_list|,
@@ -644,7 +650,10 @@ name|UriRef
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -771,7 +780,10 @@ name|UriRef
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 decl_stmt|;

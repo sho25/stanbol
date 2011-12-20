@@ -587,7 +587,10 @@ name|write
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -748,7 +751,10 @@ name|println
 argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 expr_stmt|;

@@ -1089,14 +1089,10 @@ comment|// check for existence of textual content in metadata
 name|UriRef
 name|subj
 init|=
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 decl_stmt|;
 name|Iterator
 argument_list|<
@@ -1279,14 +1275,10 @@ argument_list|()
 operator|.
 name|filter
 argument_list|(
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 argument_list|,
 name|NIE_PLAINTEXTCONTENT
 argument_list|,
@@ -1356,14 +1348,10 @@ decl_stmt|;
 name|UriRef
 name|ciId
 init|=
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 decl_stmt|;
 comment|//we need to store the results of Zemanta in an temp graph
 name|MGraph

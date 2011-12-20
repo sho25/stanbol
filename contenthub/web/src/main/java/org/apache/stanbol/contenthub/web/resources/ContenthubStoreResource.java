@@ -1349,7 +1349,10 @@ name|detachBaseURI
 argument_list|(
 name|contentItem
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -3766,7 +3769,10 @@ name|makeRedirectionURI
 argument_list|(
 name|sci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 argument_list|)
@@ -3788,7 +3794,10 @@ name|makeRedirectionURI
 argument_list|(
 name|sci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 argument_list|)

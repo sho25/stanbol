@@ -329,7 +329,10 @@ literal|"[{}] cannot be enhanced by engine [{}], skipping"
 argument_list|,
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|,
 name|engine
@@ -358,7 +361,10 @@ index|[]
 block|{
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 block|,
 name|engine
@@ -382,7 +388,10 @@ literal|"ContentItem [{}] enhanced in {}ms"
 argument_list|,
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|,
 operator|(

@@ -940,14 +940,10 @@ argument_list|()
 operator|.
 name|filter
 argument_list|(
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 argument_list|,
 name|NIE_PLAINTEXTCONTENT
 argument_list|,
@@ -1019,7 +1015,10 @@ literal|"computeEnhancements {} text={}"
 argument_list|,
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|,
 name|StringUtils
@@ -1169,7 +1168,10 @@ literal|"NULL was parsed as text for content item "
 operator|+
 name|ci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 operator|+
 literal|"! -> call ignored"
@@ -2536,14 +2538,10 @@ comment|// check for existence of textual content in metadata
 name|UriRef
 name|subj
 init|=
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 decl_stmt|;
 name|Iterator
 argument_list|<

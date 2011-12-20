@@ -1344,14 +1344,10 @@ argument_list|()
 operator|.
 name|filter
 argument_list|(
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 argument_list|,
 name|NIE_PLAINTEXTCONTENT
 argument_list|,

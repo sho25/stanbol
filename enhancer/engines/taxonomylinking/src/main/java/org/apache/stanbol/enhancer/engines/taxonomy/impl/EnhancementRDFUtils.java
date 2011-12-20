@@ -488,14 +488,10 @@ decl_stmt|;
 name|UriRef
 name|contentItemId
 init|=
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
-name|getId
+name|getUri
 argument_list|()
-argument_list|)
 decl_stmt|;
 comment|// 1. check if the returned Entity does has a label -> if not return null
 comment|// add labels (set only a single label. Use "en" if available!

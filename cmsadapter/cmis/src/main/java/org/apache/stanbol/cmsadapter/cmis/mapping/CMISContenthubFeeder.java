@@ -1693,7 +1693,10 @@ literal|"Id: {}"
 argument_list|,
 name|sci
 operator|.
-name|getId
+name|getUri
+argument_list|()
+operator|.
+name|getUnicodeString
 argument_list|()
 argument_list|)
 expr_stmt|;
