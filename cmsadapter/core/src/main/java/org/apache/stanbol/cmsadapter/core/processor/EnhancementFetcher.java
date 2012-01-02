@@ -467,9 +467,11 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|enhancer
+name|contenthub
 operator|.
 name|servicesapi
+operator|.
+name|store
 operator|.
 name|Store
 import|;

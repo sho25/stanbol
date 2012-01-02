@@ -605,6 +605,8 @@ name|servicesapi
 operator|.
 name|store
 operator|.
+name|solr
+operator|.
 name|SolrContentItem
 import|;
 end_import
@@ -622,6 +624,8 @@ operator|.
 name|servicesapi
 operator|.
 name|store
+operator|.
+name|solr
 operator|.
 name|SolrStore
 import|;

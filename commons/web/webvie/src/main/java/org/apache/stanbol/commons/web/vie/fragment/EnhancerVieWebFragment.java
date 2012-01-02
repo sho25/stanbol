@@ -267,11 +267,13 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|enhancer
+name|contenthub
 operator|.
 name|servicesapi
 operator|.
-name|EnhancementJobManager
+name|store
+operator|.
+name|Store
 import|;
 end_import
 
@@ -287,7 +289,7 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|Store
+name|EnhancementJobManager
 import|;
 end_import
 
