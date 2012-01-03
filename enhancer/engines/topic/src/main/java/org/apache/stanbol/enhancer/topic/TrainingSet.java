@@ -134,10 +134,12 @@ throws|throws
 name|TrainingSetException
 function_decl|;
 comment|/**      * Number of examples to fetch at once.      */
-specifier|public
 name|void
 name|setBatchSize
-parameter_list|()
+parameter_list|(
+name|int
+name|batchSize
+parameter_list|)
 function_decl|;
 block|}
 end_interface

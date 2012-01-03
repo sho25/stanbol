@@ -970,7 +970,8 @@ name|assertEquals
 argument_list|(
 name|engine
 operator|.
-name|solrServer
+name|getActiveSolrServer
+argument_list|()
 argument_list|,
 name|solrServer
 argument_list|)
