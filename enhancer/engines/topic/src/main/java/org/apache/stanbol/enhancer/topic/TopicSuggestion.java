@@ -13,8 +13,6 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
-name|engine
-operator|.
 name|topic
 package|;
 end_package

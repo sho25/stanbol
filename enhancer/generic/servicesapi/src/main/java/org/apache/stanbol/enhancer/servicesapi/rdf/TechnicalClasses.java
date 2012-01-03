@@ -95,6 +95,23 @@ operator|+
 literal|"EntityAnnotation"
 argument_list|)
 decl_stmt|;
+comment|/**      * Type used for annotations documents. This type is intended      * to be used in combination with ENHANCER_ENHANCEMENT and      * ENHANCER_ENTITYANNOTATION as a complimentary marker to suggest      * that the referenced is the one of the primary topic of the      * whole document or of a specific section specified by a linked      * TextAnnotation.       *       * The entity or concept is not necessarily explicitly mentioned      * in the document (like a traditional entity occurrence would).      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|ENHANCER_TOPICANNOTATION
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|enhancer
+operator|+
+literal|"TopicAnnotation"
+argument_list|)
+decl_stmt|;
 comment|/**      * To be used as a type pour any semantic knowledge extraction      */
 annotation|@
 name|Deprecated
