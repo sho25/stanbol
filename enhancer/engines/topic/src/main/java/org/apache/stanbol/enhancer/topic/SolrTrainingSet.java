@@ -374,7 +374,7 @@ specifier|final
 name|String
 name|TOPICS_URI_FIELD
 init|=
-literal|"org.apache.stanbol.enhancer.engine.topic.topicUriField"
+literal|"org.apache.stanbol.enhancer.engine.topic.topicsUriField"
 decl_stmt|;
 specifier|public
 specifier|static

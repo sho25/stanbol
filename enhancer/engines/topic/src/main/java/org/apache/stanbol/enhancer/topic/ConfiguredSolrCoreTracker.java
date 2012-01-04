@@ -163,7 +163,7 @@ specifier|protected
 name|RegisteredSolrServerTracker
 name|indexTracker
 decl_stmt|;
-comment|// instance of solrServer to use if not using the OSGi service tracker (e.g. for tests)
+comment|// instance of classifierSolrServer to use if not using the OSGi service tracker (e.g. for tests)
 specifier|protected
 name|SolrServer
 name|solrServer
@@ -427,7 +427,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return the manually bound solrServer instance or the one tracked by the OSGi service tracker.      */
+comment|/**      * @return the manually bound classifierSolrServer instance or the one tracked by the OSGi service tracker.      */
 specifier|public
 name|SolrServer
 name|getActiveSolrServer
