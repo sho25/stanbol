@@ -115,7 +115,6 @@ name|URI
 name|getAbsolutePath
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -127,7 +126,6 @@ name|UriBuilder
 name|getAbsolutePathBuilder
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -167,7 +165,6 @@ name|UriBuilder
 name|getBaseUriBuilder
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -182,7 +179,6 @@ argument_list|>
 name|getMatchedResources
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -197,7 +193,6 @@ argument_list|>
 name|getMatchedURIs
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -215,7 +210,6 @@ name|boolean
 name|arg0
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -227,7 +221,6 @@ name|String
 name|getPath
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -242,7 +235,6 @@ name|boolean
 name|arg0
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -259,7 +251,6 @@ argument_list|>
 name|getPathParameters
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -279,7 +270,6 @@ name|boolean
 name|arg0
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -294,7 +284,6 @@ argument_list|>
 name|getPathSegments
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -312,7 +301,6 @@ name|boolean
 name|arg0
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -329,7 +317,6 @@ argument_list|>
 name|getQueryParameters
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -349,7 +336,6 @@ name|boolean
 name|arg0
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -361,7 +347,6 @@ name|URI
 name|getRequestUri
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -373,7 +358,6 @@ name|UriBuilder
 name|getRequestUriBuilder
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;

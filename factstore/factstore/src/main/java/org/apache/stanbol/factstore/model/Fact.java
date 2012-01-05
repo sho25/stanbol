@@ -602,7 +602,7 @@ block|}
 block|}
 else|else
 block|{
-comment|// TODO Implement Me!
+comment|// TODO Implement multi-valued properties when converting JSON-LD to fact
 throw|throw
 operator|new
 name|RuntimeException

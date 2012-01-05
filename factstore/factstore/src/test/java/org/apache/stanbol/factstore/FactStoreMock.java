@@ -177,9 +177,7 @@ name|factSchema
 parameter_list|)
 throws|throws
 name|Exception
-block|{
-comment|// TODO Auto-generated method stub
-block|}
+block|{               }
 annotation|@
 name|Override
 specifier|public
@@ -190,7 +188,6 @@ name|String
 name|factSchemaURN
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -225,9 +222,7 @@ name|factSet
 parameter_list|)
 throws|throws
 name|Exception
-block|{
-comment|// TODO Auto-generated method stub
-block|}
+block|{               }
 annotation|@
 name|Override
 specifier|public
@@ -238,7 +233,6 @@ name|Query
 name|query
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
@@ -258,7 +252,6 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-comment|// TODO Auto-generated method stub
 return|return
 literal|null
 return|;
