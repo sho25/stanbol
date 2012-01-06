@@ -323,7 +323,9 @@ comment|//set Accept to turtle (overridden)
 operator|.
 name|withContent
 argument_list|(
-literal|"John Smith was born in London."
+literal|"John Smith was born in London. But since ten years he "
+operator|+
+literal|"lives now in Paris."
 argument_list|)
 argument_list|)
 operator|.
