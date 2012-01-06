@@ -175,10 +175,13 @@ name|TrainingSet
 name|trainingSet
 parameter_list|)
 function_decl|;
-comment|/**      * Incrementally update the statistical model of the classifier. Note: depending on the size of the      * dataset and the number of topics to update, this process can take a long time and should probably be      * wrapped in a dedicated thread if called by a the user interface layer.      */
-name|void
+comment|/**      * Update (incrementally or from scratch) the statistical model of the classifier. Note: depending on the      * size of the dataset and the number of topics to update, this process can take a long time and should      * probably be wrapped in a dedicated thread if called by a the user interface layer.      *       * @return the number of updated topics      */
+name|int
 name|updateModel
-parameter_list|()
+parameter_list|(
+name|boolean
+name|incremental
+parameter_list|)
 throws|throws
 name|TrainingSetException
 function_decl|;

@@ -2600,9 +2600,12 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|void
+name|int
 name|updateModel
-parameter_list|()
+parameter_list|(
+name|boolean
+name|incremental
+parameter_list|)
 throws|throws
 name|TrainingSetException
 block|{
@@ -2612,6 +2615,9 @@ expr_stmt|;
 comment|// TODO:
 comment|// perform a first query to iterate over all the registered topics sorted by id (to allow for paging)
 comment|// for each topic find the last update date of the union of the topic and it's narrower topic
+return|return
+literal|0
+return|;
 block|}
 specifier|protected
 name|void
