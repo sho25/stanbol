@@ -1833,6 +1833,17 @@ argument_list|,
 literal|"broader"
 argument_list|)
 expr_stmt|;
+name|config
+operator|.
+name|put
+argument_list|(
+name|TopicClassificationEngine
+operator|.
+name|MODEL_UPDATE_DATE_FIELD
+argument_list|,
+literal|"last_update_dt"
+argument_list|)
+expr_stmt|;
 return|return
 name|config
 return|;
