@@ -184,6 +184,8 @@ name|incremental
 parameter_list|)
 throws|throws
 name|TrainingSetException
+throws|,
+name|ClassifierException
 function_decl|;
 block|}
 end_interface
