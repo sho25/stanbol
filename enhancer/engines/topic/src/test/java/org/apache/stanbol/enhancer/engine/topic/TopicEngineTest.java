@@ -1614,7 +1614,7 @@ name|registerExample
 argument_list|(
 literal|null
 argument_list|,
-literal|"Apple sold many iPads at a very high price"
+literal|"Apple sold the iPad at a very high price"
 operator|+
 literal|" and made record profits."
 argument_list|,
@@ -1866,12 +1866,12 @@ operator|.
 name|size
 argument_list|()
 operator|>=
-literal|3
+literal|4
 argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-name|worldcup
+name|apple
 argument_list|,
 name|suggestions
 operator|.
@@ -1885,7 +1885,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-name|football
+name|worldcup
 argument_list|,
 name|suggestions
 operator|.
@@ -1899,13 +1899,27 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-name|sport
+name|technology
 argument_list|,
 name|suggestions
 operator|.
 name|get
 argument_list|(
 literal|2
+argument_list|)
+operator|.
+name|uri
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+name|football
+argument_list|,
+name|suggestions
+operator|.
+name|get
+argument_list|(
+literal|3
 argument_list|)
 operator|.
 name|uri
