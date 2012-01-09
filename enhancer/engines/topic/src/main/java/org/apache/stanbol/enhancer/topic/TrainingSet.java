@@ -23,7 +23,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Calendar
+name|Date
 import|;
 end_import
 
@@ -34,16 +34,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Set
 import|;
 end_import
 
@@ -78,19 +68,6 @@ argument_list|<
 name|String
 argument_list|>
 name|topics
-parameter_list|)
-throws|throws
-name|TrainingSetException
-function_decl|;
-comment|/**      * @param lastModificationDate      *            typically the date of the last classifier model update or null to find the list of all      *            topics registered in the dataset.      * @return the set of topic ids that received some modifications (e.g. new or updated examples) since      *         {@code lastModificationDate}.      */
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|getUpdatedTopics
-parameter_list|(
-name|Calendar
-name|lastModificationDate
 parameter_list|)
 throws|throws
 name|TrainingSetException
@@ -139,6 +116,20 @@ name|setBatchSize
 parameter_list|(
 name|int
 name|batchSize
+parameter_list|)
+function_decl|;
+comment|/**      * Method to tell the classifier if topic model should be updated if there exists examples classified in      * one of those topics that has changed.      *       * @param topics      *            topics to check      * @param referenceDate      *            look for changes after that date      * @return true if one of the passed topics has changed since the last date      */
+name|boolean
+name|hasChangedSince
+parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|topics
+parameter_list|,
+name|Date
+name|referenceDate
 parameter_list|)
 function_decl|;
 block|}

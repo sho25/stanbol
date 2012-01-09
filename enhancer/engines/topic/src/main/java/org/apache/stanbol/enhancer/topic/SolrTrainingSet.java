@@ -1143,6 +1143,27 @@ block|}
 annotation|@
 name|Override
 specifier|public
+name|boolean
+name|hasChangedSince
+parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|topics
+parameter_list|,
+name|Date
+name|referenceDate
+parameter_list|)
+block|{
+comment|// TODO
+return|return
+literal|true
+return|;
+block|}
+annotation|@
+name|Deprecated
+specifier|public
 name|Set
 argument_list|<
 name|String
