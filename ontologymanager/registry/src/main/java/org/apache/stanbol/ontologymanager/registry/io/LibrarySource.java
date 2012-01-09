@@ -433,6 +433,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|OWLOntologyManager
 argument_list|>
 name|parentSrc
 parameter_list|)
@@ -498,6 +500,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|OWLOntologyManager
 argument_list|>
 name|parentSrc
 parameter_list|)

@@ -1006,6 +1006,8 @@ comment|// Now use this registry manager to instantiate an input source.
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|?
 argument_list|>
 name|src
 init|=

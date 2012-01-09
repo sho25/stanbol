@@ -431,6 +431,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 modifier|...
 name|ontologySources
@@ -480,6 +482,8 @@ for|for
 control|(
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 name|src
@@ -531,6 +535,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 modifier|...
 name|coreSources
@@ -573,6 +579,8 @@ name|scopeId
 parameter_list|,
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 modifier|...
@@ -619,6 +627,8 @@ name|type
 parameter_list|,
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 modifier|...
@@ -685,6 +695,8 @@ name|scopeId
 parameter_list|,
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 modifier|...

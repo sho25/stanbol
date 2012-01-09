@@ -55,6 +55,8 @@ interface|interface
 name|OntologyInputSource
 parameter_list|<
 name|O
+parameter_list|,
+name|P
 parameter_list|>
 block|{
 comment|/**      * Gets the ontology network resulting from the transitive closure of import statements on the root      * ontology. Useful for implementations with a custom management of ontology loading.      *       * @return the import closure of the root ontology.      */
@@ -76,6 +78,14 @@ function_decl|;
 comment|/**      * Returns the OWL Ontology that imports the whole ontology network addressed by this input source.      *       * @return the ontology network root.      */
 name|O
 name|getRootOntology
+parameter_list|()
+function_decl|;
+name|String
+name|getStorageKey
+parameter_list|()
+function_decl|;
+name|P
+name|getTriplesProvider
 parameter_list|()
 function_decl|;
 comment|/**      * Determines if a physical IRI is known for this ontology source. Note that an anonymous ontology may      * have been fetched from a physical location, just as a named ontology may have been stored in memory and      * have no physical location.      *       * @return true if a physical location is known for this ontology source.      */

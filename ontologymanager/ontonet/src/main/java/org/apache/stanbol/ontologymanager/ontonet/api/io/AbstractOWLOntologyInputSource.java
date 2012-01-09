@@ -86,6 +86,8 @@ extends|extends
 name|AbstractGenericInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|OWLOntologyManager
 argument_list|>
 block|{
 annotation|@

@@ -33,7 +33,25 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|*
+name|onManager
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|MockOsgiContext
+operator|.
+name|reset
 import|;
 end_import
 
@@ -45,7 +63,67 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertSame
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -525,6 +603,8 @@ specifier|static
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|?
 argument_list|>
 name|inMemorySrc
 decl_stmt|,
@@ -557,6 +637,8 @@ specifier|static
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|?
 argument_list|>
 name|getLocalSource
 parameter_list|(

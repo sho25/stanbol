@@ -128,12 +128,14 @@ name|OntologyCollectorListener
 name|listener
 parameter_list|)
 function_decl|;
-comment|/**      * Adds the given ontology to the ontology space.      *       * @param ontology      *            the ontology to be added      * @throws UnmodifiableOntologyCollectorException      *             if the ontology space is read-only      */
-name|void
+comment|/**      * Adds the given ontology to the ontology space.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      * @throws UnmodifiableOntologyCollectorException      *             if the ontology space is read-only      */
+name|String
 name|addOntology
 parameter_list|(
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 name|ontologySource

@@ -388,6 +388,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 modifier|...
 name|ontologySources
@@ -438,6 +440,8 @@ control|(
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 name|src
 range|:
@@ -487,6 +491,8 @@ name|scopeId
 parameter_list|,
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 modifier|...
@@ -548,6 +554,8 @@ name|scopeId
 parameter_list|,
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 modifier|...
@@ -613,6 +621,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 modifier|...
 name|ontologySources
@@ -674,6 +684,8 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 modifier|...
 name|sessionSources
@@ -714,6 +726,8 @@ for|for
 control|(
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 name|src

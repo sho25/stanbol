@@ -1112,6 +1112,10 @@ name|OWL_XML
 block|,
 name|KRFormat
 operator|.
+name|N_TRIPLE
+block|,
+name|KRFormat
+operator|.
 name|TURTLE
 block|,
 name|KRFormat
@@ -1140,6 +1144,11 @@ name|manageOntology
 parameter_list|(
 name|InputStream
 name|content
+parameter_list|,
+annotation|@
+name|Context
+name|HttpHeaders
+name|headers
 parameter_list|)
 block|{
 name|long
@@ -1180,6 +1189,14 @@ operator|new
 name|GraphContentInputSource
 argument_list|(
 name|content
+argument_list|,
+name|headers
+operator|.
+name|getMediaType
+argument_list|()
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 comment|// new OntologyContentInputSource(content)
 argument_list|)
@@ -1468,6 +1485,8 @@ block|{
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 name|src
 init|=
@@ -1692,6 +1711,8 @@ decl_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 name|coreSrc
 init|=
@@ -1912,6 +1933,8 @@ argument_list|<
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 argument_list|>
 name|expanded
@@ -1921,6 +1944,8 @@ name|ArrayList
 argument_list|<
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 argument_list|>

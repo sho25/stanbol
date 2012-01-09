@@ -381,7 +381,7 @@ operator|.
 name|getOWLDataFactory
 argument_list|()
 decl_stmt|;
-comment|/*          * TODO manage import rewrites better once the container ID is fully configurable (i.e. instead of          * going upOne() add "session" or "ontology" if needed).          */
+comment|/*          * TODO manage import rewrites better once the container ID is fully configurable (i.e. instead of          * going upOne() add "session" or "ontology" if needed).          * But only do this if we keep considering imported ontologies as *not* managed.          */
 if|if
 condition|(
 operator|!

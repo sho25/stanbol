@@ -152,6 +152,11 @@ parameter_list|,
 name|Set
 argument_list|<
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|,
+name|?
+argument_list|>
 argument_list|>
 name|subtrees
 parameter_list|)
@@ -173,6 +178,11 @@ block|{
 for|for
 control|(
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|,
+name|?
+argument_list|>
 name|st
 range|:
 name|subtrees
@@ -218,6 +228,11 @@ name|void
 name|appendSubtree
 parameter_list|(
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|,
+name|?
+argument_list|>
 name|subtree
 parameter_list|)
 throws|throws

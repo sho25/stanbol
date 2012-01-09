@@ -87,6 +87,11 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
+name|bindTriplesProvider
+argument_list|(
+name|manager
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 name|bindRootOntology

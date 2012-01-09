@@ -857,6 +857,8 @@ expr_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|?
 argument_list|>
 name|coreSource
 init|=
@@ -1047,6 +1049,8 @@ expr_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|?
 argument_list|>
 name|coreSource
 init|=

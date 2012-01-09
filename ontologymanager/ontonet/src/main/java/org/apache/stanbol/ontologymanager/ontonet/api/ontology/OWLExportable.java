@@ -44,10 +44,27 @@ specifier|public
 interface|interface
 name|OWLExportable
 block|{
-comment|/**      * Returns the OWL ontology form of this object.      *       * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the OWL ontology that represents this object.      *       */
+comment|/**      * Returns the OWL ontology form of this object.      *       * @deprecated use the method {@link #export(Class, boolean)} instead, with the first argument set as      *             {@link OWLOntology.class}.      *       * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the OWL ontology that represents this object.      *       */
 name|OWLOntology
 name|asOWLOntology
 parameter_list|(
+name|boolean
+name|merge
+parameter_list|)
+function_decl|;
+comment|/**      * Returns an ontological form of this object of the specified return type, if supported. If the supplied      * class is not a supported return type, an {@link UnsupportedOperationException} is thrown.      *       * @param returnType      *            the desired class of the returned object.      * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the ontology that represents this object.      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|export
+parameter_list|(
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
 name|boolean
 name|merge
 parameter_list|)

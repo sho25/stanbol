@@ -207,7 +207,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Graph
+name|MGraph
 import|;
 end_import
 
@@ -223,7 +223,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|MGraph
+name|TripleCollection
 import|;
 end_import
 
@@ -872,6 +872,8 @@ specifier|static
 name|OntologyInputSource
 argument_list|<
 name|?
+argument_list|,
+name|?
 argument_list|>
 name|inMemorySrc
 decl_stmt|,
@@ -890,7 +892,9 @@ specifier|private
 specifier|static
 name|OntologyInputSource
 argument_list|<
-name|Graph
+name|TripleCollection
+argument_list|,
+name|?
 argument_list|>
 name|getLocalSource
 parameter_list|(
@@ -931,6 +935,8 @@ specifier|private
 specifier|static
 name|OntologyInputSource
 argument_list|<
+name|?
+argument_list|,
 name|?
 argument_list|>
 name|getLocalSource

@@ -33,7 +33,43 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|*
+name|parser
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|MockOsgiContext
+operator|.
+name|reset
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|MockOsgiContext
+operator|.
+name|tcManager
 import|;
 end_import
 
@@ -45,7 +81,19 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
 import|;
 end_import
 
@@ -81,7 +129,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Graph
+name|TripleCollection
 import|;
 end_import
 
@@ -347,7 +395,9 @@ block|}
 specifier|private
 name|OntologyInputSource
 argument_list|<
-name|Graph
+name|TripleCollection
+argument_list|,
+name|?
 argument_list|>
 name|gis
 decl_stmt|;
@@ -412,7 +462,7 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|Graph
+name|TripleCollection
 argument_list|>
 name|imported
 init|=
@@ -444,7 +494,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|Graph
+name|TripleCollection
 name|g
 range|:
 name|imported

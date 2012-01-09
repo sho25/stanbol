@@ -21,53 +21,25 @@ name|ontology
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
-import|;
-end_import
-
 begin_comment
-comment|/**  * Implementations of this interface are able to react to modifications on the ontology network  * infrastructure.  *   * @author alexdma  *   */
+comment|/**  * The policies that determine how OntoNet should handle OWL import statements and/or the imported ontologies  * (i.e. import targets) when performing operations such as load/export of ontologies, and rewriting of import  * statements.  *   * @author alexdma  *   */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|ScopeOntologyListener
+enum|enum
+name|ImportManagementPolicy
 block|{
-comment|/**      * Called whenever an ontology is set to be managed by a scope, space or session.      *       * @param scopeId      * @param addedOntology      */
-name|void
-name|onOntologyAdded
-parameter_list|(
-name|String
-name|scopeId
-parameter_list|,
-name|IRI
-name|addedOntology
-parameter_list|)
-function_decl|;
-comment|/**      * Called whenever an ontology is set to no longer be managed by a scope, space or session. This method is      * not called if that ontology was not being managed earlier.      *       * @param scopeId      * @param addedOntology      */
-name|void
-name|onOntologyRemoved
-parameter_list|(
-name|String
-name|scopeId
-parameter_list|,
-name|IRI
-name|removedOntology
-parameter_list|)
-function_decl|;
-block|}
-end_interface
+comment|/**      * The root ontology contains all the import statements that point to (recursively) imported ontologies,      * which instead are cleared of all import statements. Can be used to minimize the number of statements      * and remove cycles.      */
+name|FLATTEN
+block|,
+comment|/**      * Remove all import statements from the root ontology's import closure, and recursively copy all the      * axioms from imported ontologies into the root one.      */
+name|MERGE
+block|,
+comment|/**      * Keep the import structure as it is. Note that the import targets can still be rewritten even by      * following this policy.      */
+name|PRESERVE
+block|;  }
+end_enum
 
 end_unit
 

@@ -35,7 +35,25 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|*
+name|ontologyProvider
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|MockOsgiContext
+operator|.
+name|reset
 import|;
 end_import
 
@@ -200,20 +218,6 @@ operator|.
 name|model
 operator|.
 name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLImportsDeclaration
 import|;
 end_import
 
@@ -490,6 +494,8 @@ decl_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
+argument_list|,
+name|?
 argument_list|>
 name|src
 init|=

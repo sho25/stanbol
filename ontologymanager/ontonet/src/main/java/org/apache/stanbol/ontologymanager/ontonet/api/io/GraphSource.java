@@ -228,6 +228,11 @@ name|graphId
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|bindTriplesProvider
+argument_list|(
+name|tcManager
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Override

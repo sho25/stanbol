@@ -85,6 +85,14 @@ name|getDefaultDocumentIRI
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|bindTriplesProvider
+argument_list|(
+name|rootOntology
+operator|.
+name|getOWLOntologyManager
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
