@@ -1957,9 +1957,9 @@ name|registerExample
 argument_list|(
 literal|null
 argument_list|,
-literal|"Dubstep is broken beat as are Hip-Hop, Dancehall"
+literal|"Dubstep is a broken beat musical style as are Hip-Hop,"
 operator|+
-literal|" or Drum& Bass"
+literal|" Dancehall or Drum& Bass"
 argument_list|,
 name|Arrays
 operator|.
