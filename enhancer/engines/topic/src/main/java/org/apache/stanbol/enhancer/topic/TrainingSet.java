@@ -131,6 +131,8 @@ parameter_list|,
 name|Date
 name|referenceDate
 parameter_list|)
+throws|throws
+name|TrainingSetException
 function_decl|;
 block|}
 end_interface
