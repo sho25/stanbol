@@ -187,9 +187,9 @@ name|TrainingSetException
 throws|,
 name|ClassifierException
 function_decl|;
-comment|/**      * Perform k-fold cross validation of the model to compute estimates of the precision, recall and f1      * score.      */
+comment|/**      * Perform k-fold cross validation of the model to compute estimates of the precision, recall and f1      * score.      *       * @return number of updated topics      */
 specifier|public
-name|void
+name|int
 name|updatePerformanceEstimates
 parameter_list|(
 name|boolean
