@@ -713,7 +713,7 @@ name|enhancer
 operator|.
 name|topic
 operator|.
-name|ClassificationPerformance
+name|ClassificationReport
 import|;
 end_import
 
@@ -4305,7 +4305,7 @@ block|{              }
 annotation|@
 name|Override
 specifier|public
-name|ClassificationPerformance
+name|ClassificationReport
 name|getPerformanceEstimates
 parameter_list|(
 name|String

@@ -225,7 +225,7 @@ parameter_list|()
 throws|throws
 name|ClassifierException
 function_decl|;
-name|ClassificationPerformance
+name|ClassificationReport
 name|getPerformanceEstimates
 parameter_list|(
 name|String

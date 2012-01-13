@@ -17,33 +17,85 @@ name|topic
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Data transfer object to report estimated classification performance of a classifier.  *   * TODO: explain the metrics and give links to wikipedia  */
+comment|/**  * Data transfer object to report estimated classification performance of a classifier.  *  * Report scores to evaluate the quality of a model on a labeled evaluation dataset (that should not have been  * used when training the model). See:  *  * http://en.wikipedia.org/wiki/Precision_and_recall  *  * Precision, Recall are F1-score and preferred over a simple rate of good classification so as to account for  * potentially imbalanced evaluation set (e.g. when the number of negative examples is much larger than the  * number of positive examples).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ClassificationPerformance
+name|ClassificationReport
 block|{
+comment|/**      * Number of true positives divided by the sum of true positives and false positives.      */
 specifier|public
 specifier|final
 name|float
 name|precision
 decl_stmt|;
+comment|/**      * Number of true positives divided by the sum of true positives and false negatives.      */
 specifier|public
 specifier|final
 name|float
 name|recall
 decl_stmt|;
+comment|/**      * Harmonic mean of the precision and recall that balance the importance of false positive and false      * negatives equally.      */
 specifier|public
 specifier|final
 name|float
 name|f1
 decl_stmt|;
-comment|// TODO: include ids of badly classified positive and negative examples?
 specifier|public
-name|ClassificationPerformance
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|falsePositiveExampleIds
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|falseNegativeExampleIds
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
+specifier|public
+name|ClassificationReport
 parameter_list|(
 name|float
 name|precision
