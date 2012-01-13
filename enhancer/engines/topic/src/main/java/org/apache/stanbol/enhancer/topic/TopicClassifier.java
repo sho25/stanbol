@@ -225,6 +225,7 @@ parameter_list|()
 throws|throws
 name|ClassifierException
 function_decl|;
+comment|/**      * Get a classification report with various accuracy metrics (precision, recall and f1-score) along with      * the example ids of some mistakes (false positives or false negatives).      */
 name|ClassificationReport
 name|getPerformanceEstimates
 parameter_list|(

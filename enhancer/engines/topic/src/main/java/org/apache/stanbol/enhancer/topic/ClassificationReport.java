@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Data transfer object to report estimated classification performance of a classifier.  *  * Report scores to evaluate the quality of a model on a labeled evaluation dataset (that should not have been  * used when training the model). See:  *  * http://en.wikipedia.org/wiki/Precision_and_recall  *  * Precision, Recall are F1-score and preferred over a simple rate of good classification so as to account for  * potentially imbalanced evaluation set (e.g. when the number of negative examples is much larger than the  * number of positive examples).  */
+comment|/**  * Data transfer object to report estimated classification performance of a classifier.  *   *<p>  * Report scores to evaluate the quality of a model on a labeled evaluation dataset (that should not have been  * used when training the model).  *</p>  *   *<p>  * See: http://en.wikipedia.org/wiki/Precision_and_recall  *</p>  *   *<p>  * Precision, Recall are F1-score and preferred over a simple rate of good classification so as to account for  * potentially imbalanced evaluation set (e.g. when the number of negative examples is much larger than the  * number of positive examples).  *</p>  */
 end_comment
 
 begin_class
@@ -63,6 +63,18 @@ specifier|public
 specifier|final
 name|float
 name|f1
+decl_stmt|;
+comment|/**      * Total number of positive examples used by the evaluation procedure.      */
+specifier|public
+specifier|final
+name|int
+name|positiveSupport
+decl_stmt|;
+comment|/**      * Total number of negative examples used by the evaluation procedure.      */
+specifier|public
+specifier|final
+name|int
+name|negativeSupport
 decl_stmt|;
 specifier|public
 specifier|final
@@ -105,6 +117,12 @@ name|recall
 parameter_list|,
 name|float
 name|f1
+parameter_list|,
+name|int
+name|positiveSupport
+parameter_list|,
+name|int
+name|negativeSupport
 parameter_list|)
 block|{
 name|this
@@ -124,6 +142,18 @@ operator|.
 name|f1
 operator|=
 name|f1
+expr_stmt|;
+name|this
+operator|.
+name|positiveSupport
+operator|=
+name|positiveSupport
+expr_stmt|;
+name|this
+operator|.
+name|negativeSupport
+operator|=
+name|negativeSupport
 expr_stmt|;
 block|}
 block|}
