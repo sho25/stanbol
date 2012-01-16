@@ -211,20 +211,6 @@ name|int
 name|foldCount
 parameter_list|)
 function_decl|;
-comment|/**      * Clone the classifier to get a new independent instance with an empty embedded model to be trained on a      * subsample of the dataset in a cross validation setting for model evaluation.      */
-name|TopicClassifier
-name|cloneWithEmdeddedModel
-parameter_list|()
-throws|throws
-name|ClassifierException
-function_decl|;
-comment|/**      * Free the backing resources of the model (e.g. indices persisted on the harddrive or a DB) once the      * cross validation process is completed.      */
-name|void
-name|destroyModel
-parameter_list|()
-throws|throws
-name|ClassifierException
-function_decl|;
 comment|/**      * Get a classification report with various accuracy metrics (precision, recall and f1-score) along with      * the example ids of some mistakes (false positives or false negatives).      */
 name|ClassificationReport
 name|getPerformanceEstimates
