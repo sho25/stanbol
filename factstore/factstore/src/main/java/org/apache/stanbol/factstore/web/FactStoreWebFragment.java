@@ -551,7 +551,7 @@ literal|"factstore"
 argument_list|,
 literal|"/factstore"
 argument_list|,
-literal|null
+literal|"/imports/abstract.ftl"
 argument_list|,
 literal|30
 argument_list|)
