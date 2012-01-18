@@ -37,6 +37,20 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|lang
+operator|.
+name|StringUtils
+import|;
+end_import
+
 begin_comment
 comment|/**  * Data transfer object for the individual topic classification results.  */
 end_comment
@@ -136,6 +150,35 @@ argument_list|,
 name|score
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"TopicSuggestion(\"%s\", [%s], %f)"
+argument_list|,
+name|uri
+argument_list|,
+name|StringUtils
+operator|.
+name|join
+argument_list|(
+name|paths
+argument_list|,
+literal|"\", \""
+argument_list|)
+argument_list|,
+name|score
+argument_list|)
+return|;
 block|}
 block|}
 end_class

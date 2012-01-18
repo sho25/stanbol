@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -12,8 +12,6 @@ operator|.
 name|stanbol
 operator|.
 name|enhancer
-operator|.
-name|engine
 operator|.
 name|topic
 package|;
@@ -68,16 +66,6 @@ operator|.
 name|parsers
 operator|.
 name|ParserConfigurationException
-import|;
-end_import
-
-begin_import
-import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|TestCase
 import|;
 end_import
 
@@ -153,23 +141,20 @@ name|SAXException
 import|;
 end_import
 
+begin_comment
+comment|/**  * Helper class to build an embedded Solr server with a configuration files looked-up from the classpath. This  * helper is both useful in real service usage (for Cross Validation) and in tests.  */
+end_comment
+
 begin_class
 specifier|public
 class|class
-name|BaseTestWithSolrCore
+name|EmbeddedSolrHelper
 block|{
+comment|/**      * Create a single core Solr server with it's own folder hierarchy.      */
 specifier|public
 specifier|static
-specifier|final
-name|String
-name|TEST_CORE_ID
-init|=
-literal|"test"
-decl_stmt|;
-comment|/**      * Create single core test solr server with it's own folder hierarchy.      */
-specifier|public
 name|EmbeddedSolrServer
-name|makeEmptyEmbeddedSolrServer
+name|makeEmbeddedSolrServer
 parameter_list|(
 name|File
 name|rootFolder
@@ -178,7 +163,10 @@ name|String
 name|solrServerId
 parameter_list|,
 name|String
-name|testCoreConfig
+name|coreId
+parameter_list|,
+name|String
+name|configName
 parameter_list|)
 throws|throws
 name|IOException
@@ -225,27 +213,34 @@ decl_stmt|;
 name|InputStream
 name|is
 init|=
-name|getClass
-argument_list|()
+name|EmbeddedSolrHelper
+operator|.
+name|class
 operator|.
 name|getResourceAsStream
 argument_list|(
 literal|"/"
 operator|+
-name|testCoreConfig
+name|configName
 operator|+
 literal|"/solr.xml"
 argument_list|)
 decl_stmt|;
-name|TestCase
-operator|.
-name|assertNotNull
+if|if
+condition|(
+name|is
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
 argument_list|(
 literal|"missing test solr.xml file"
-argument_list|,
-name|is
 argument_list|)
-expr_stmt|;
+throw|;
+block|}
 name|IOUtils
 operator|.
 name|copy
@@ -268,7 +263,7 @@ name|File
 argument_list|(
 name|solrFolder
 argument_list|,
-name|TEST_CORE_ID
+name|coreId
 argument_list|)
 decl_stmt|;
 name|solrCoreFolder
@@ -305,27 +300,34 @@ argument_list|)
 decl_stmt|;
 name|is
 operator|=
-name|getClass
-argument_list|()
+name|EmbeddedSolrHelper
+operator|.
+name|class
 operator|.
 name|getResourceAsStream
 argument_list|(
 literal|"/"
 operator|+
-name|testCoreConfig
+name|configName
 operator|+
 literal|"/schema.xml"
 argument_list|)
 expr_stmt|;
-name|TestCase
-operator|.
-name|assertNotNull
-argument_list|(
-literal|"missing test solr schema.xml file"
-argument_list|,
+if|if
+condition|(
 name|is
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"missing test schema.xml file"
 argument_list|)
-expr_stmt|;
+throw|;
+block|}
 name|IOUtils
 operator|.
 name|copy
@@ -352,27 +354,34 @@ argument_list|)
 decl_stmt|;
 name|is
 operator|=
-name|getClass
-argument_list|()
+name|EmbeddedSolrHelper
+operator|.
+name|class
 operator|.
 name|getResourceAsStream
 argument_list|(
 literal|"/"
 operator|+
-name|testCoreConfig
+name|configName
 operator|+
 literal|"/solrconfig.xml"
 argument_list|)
 expr_stmt|;
-name|TestCase
-operator|.
-name|assertNotNull
+if|if
+condition|(
+name|is
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
 argument_list|(
 literal|"missing test solrconfig.xml file"
-argument_list|,
-name|is
 argument_list|)
-expr_stmt|;
+throw|;
+block|}
 name|IOUtils
 operator|.
 name|copy
@@ -407,7 +416,7 @@ name|EmbeddedSolrServer
 argument_list|(
 name|coreContainer
 argument_list|,
-name|TEST_CORE_ID
+name|coreId
 argument_list|)
 return|;
 block|}
