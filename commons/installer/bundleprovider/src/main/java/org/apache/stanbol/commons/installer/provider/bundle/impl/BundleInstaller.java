@@ -273,6 +273,18 @@ begin_import
 import|import
 name|org
 operator|.
+name|osgi
+operator|.
+name|framework
+operator|.
+name|FrameworkEvent
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -498,11 +510,14 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 break|break;
+comment|//use uninstalled instead of stopped so that unregister is not called
+comment|//when the OSGI environment closes
 case|case
 name|BundleEvent
 operator|.
-name|STOPPED
+name|UNINSTALLED
 case|:
+comment|//STOPPED:
 name|unregister
 argument_list|(
 name|event
