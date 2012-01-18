@@ -1946,16 +1946,8 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-block|}
-finally|finally
-block|{
-name|managedCores
-operator|.
-name|store
-argument_list|(
-name|metadata
-argument_list|)
-expr_stmt|;
+comment|//} finally { The metadata are not modified anyway!
+comment|//    managedCores.store(metadata);
 block|}
 block|}
 block|}
@@ -4709,10 +4701,17 @@ comment|//may be removed in the meantime
 if|if
 condition|(
 operator|!
+operator|(
 name|metadata
 operator|.
 name|isActive
 argument_list|()
+operator|||
+name|metadata
+operator|.
+name|isInactive
+argument_list|()
+operator|)
 operator|||
 name|metadata
 operator|.
@@ -4786,7 +4785,7 @@ block|}
 comment|// else higher priority archive present -> no tracking
 block|}
 block|}
-comment|//else active and not syncronized -> no tracking
+comment|//else (active || inactive) and not syncronized -> no tracking
 block|}
 block|}
 empty_stmt|;
