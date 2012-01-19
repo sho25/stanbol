@@ -82,7 +82,7 @@ argument_list|()
 decl_stmt|;
 specifier|public
 specifier|final
-name|double
+name|float
 name|score
 decl_stmt|;
 specifier|public
@@ -97,7 +97,7 @@ name|String
 argument_list|>
 name|paths
 parameter_list|,
-name|double
+name|float
 name|score
 parameter_list|)
 block|{
@@ -137,7 +137,7 @@ parameter_list|(
 name|String
 name|uri
 parameter_list|,
-name|double
+name|float
 name|score
 parameter_list|)
 block|{
