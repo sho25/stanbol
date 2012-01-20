@@ -37,6 +37,24 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|training
+operator|.
+name|Example
+import|;
+end_import
+
 begin_comment
 comment|/**  * Source of categorized text documents that can be used to build a the statistical model of a  * TopicClassifier.  */
 end_comment
@@ -75,7 +93,7 @@ function_decl|;
 comment|/**      * Fetch examples representative of the set of topics passed as argument so as to be able to build a      * statistical model.      *       * @param topics      *            list of admissible topics to search examples for: each example in the batch will be      *            classified in at list one of the requested topics. This list would typically comprise a      *            topic along with it's direct narrower descendants (and maybe level 2 descendants too).      * @param offset      *            marker value to fetch the next batch. Pass null to fetch the first batch.      * @return a batch of example suitable for training a classifier model for the requested topics.      */
 name|Batch
 argument_list|<
-name|String
+name|Example
 argument_list|>
 name|getPositiveExamples
 parameter_list|(
@@ -94,7 +112,7 @@ function_decl|;
 comment|/**      * Fetch examples representative of any document not specifically classified in one of the passed topics.      * This can be useful to train a statistical model for a classifier of those topics to negatively weight      * generic features (term occurrences) and limit the number of false positives in the classification. It      * is up to the classifier model to decide to use such negative examples or not at training time.      *       * @param topics      *            list of non-admissible topics to search example for: each example in the batch must no be      *            classified in any of the passed topics.      * @param offset      *            marker value to fetch the next batch. Pass null to fetch the first batch.      * @return a batch of examples suitable for training (negative-refinement) a classifier model for the      *         requested topics.      */
 name|Batch
 argument_list|<
-name|String
+name|Example
 argument_list|>
 name|getNegativeExamples
 parameter_list|(
