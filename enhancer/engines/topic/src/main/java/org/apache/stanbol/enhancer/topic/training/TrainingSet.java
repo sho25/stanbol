@@ -14,6 +14,8 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|training
 package|;
 end_package
 
@@ -49,9 +51,7 @@ name|enhancer
 operator|.
 name|topic
 operator|.
-name|training
-operator|.
-name|Example
+name|Batch
 import|;
 end_import
 

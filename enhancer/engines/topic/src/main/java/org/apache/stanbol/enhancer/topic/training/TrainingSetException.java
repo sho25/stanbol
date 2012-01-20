@@ -14,6 +14,8 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|training
 package|;
 end_package
 
