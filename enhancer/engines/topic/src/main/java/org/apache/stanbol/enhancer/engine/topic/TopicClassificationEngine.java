@@ -1436,6 +1436,12 @@ init|=
 literal|"[\"\" TO *]"
 decl_stmt|;
 comment|// TODO: make the following fields configurable
+specifier|private
+name|int
+name|MAX_COLLECTED_EXAMPLES
+init|=
+literal|100
+decl_stmt|;
 specifier|public
 name|int
 name|MAX_EVALUATION_SAMPLES
@@ -5691,6 +5697,18 @@ block|{
 name|falseNegatives
 operator|++
 expr_stmt|;
+if|if
+condition|(
+name|falseNegativeExamples
+operator|.
+name|size
+argument_list|()
+operator|<
+name|MAX_COLLECTED_EXAMPLES
+operator|/
+name|foldCount
+condition|)
+block|{
 name|falseNegativeExamples
 operator|.
 name|add
@@ -5700,6 +5718,7 @@ operator|.
 name|id
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
@@ -5839,6 +5858,18 @@ block|{
 name|falsePositives
 operator|++
 expr_stmt|;
+if|if
+condition|(
+name|falsePositiveExamples
+operator|.
+name|size
+argument_list|()
+operator|<
+name|MAX_COLLECTED_EXAMPLES
+operator|/
+name|foldCount
+condition|)
+block|{
 name|falsePositiveExamples
 operator|.
 name|add
@@ -5848,6 +5879,7 @@ operator|.
 name|id
 argument_list|)
 expr_stmt|;
+block|}
 break|break;
 block|}
 block|}
