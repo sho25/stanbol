@@ -1435,7 +1435,13 @@ name|SOLR_NON_EMPTY_FIELD
 init|=
 literal|"[\"\" TO *]"
 decl_stmt|;
-comment|// TODO: make the following bounds configurable
+comment|// TODO: make the following fields configurable
+specifier|public
+name|int
+name|MAX_EVALUATION_SAMPLES
+init|=
+literal|1000
+decl_stmt|;
 specifier|public
 name|int
 name|MAX_CHARS_PER_TOPIC
@@ -5702,9 +5708,12 @@ condition|(
 name|examples
 operator|.
 name|hasMore
+operator|&&
+name|offset
+operator|<
+name|MAX_EVALUATION_SAMPLES
 condition|)
 do|;
-comment|// TODO: put a bound on the number of examples
 name|List
 argument_list|<
 name|String
@@ -5780,7 +5789,6 @@ name|foldIndex
 operator|)
 condition|)
 block|{
-comment|// TODO: change the dataset API to include exampleId
 comment|// this example is not part of the test fold, skip it
 name|offset
 operator|++
@@ -5851,9 +5859,12 @@ condition|(
 name|examples
 operator|.
 name|hasMore
+operator|&&
+name|offset
+operator|<
+name|MAX_EVALUATION_SAMPLES
 condition|)
 do|;
-comment|// TODO: put a bound on the number of examples
 comment|// compute precision, recall and f1 score for the current test fold and topic
 name|float
 name|precision
@@ -6185,9 +6196,24 @@ argument_list|,
 name|negativeSupport
 argument_list|)
 expr_stmt|;
-comment|// TODO: handle supports too...
-comment|// addToList(fieldValues, falsePositivesField, falsePositiveExamples);
-comment|// addToList(fieldValues, falseNegativesField, falseNegativeExamples);
+name|addToList
+argument_list|(
+name|fieldValues
+argument_list|,
+name|falsePositivesField
+argument_list|,
+name|falsePositiveExamples
+argument_list|)
+expr_stmt|;
+name|addToList
+argument_list|(
+name|fieldValues
+argument_list|,
+name|falseNegativesField
+argument_list|,
+name|falseNegativeExamples
+argument_list|)
+expr_stmt|;
 name|SolrInputDocument
 name|newEntry
 init|=
