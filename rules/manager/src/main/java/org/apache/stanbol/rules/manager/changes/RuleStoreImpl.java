@@ -732,7 +732,7 @@ specifier|final
 name|String
 name|_RULE_NAMESPACE_DEFAULT
 init|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+literal|"http://incubator.apache.org/stanbol/ontology/rmi.owl#"
 decl_stmt|;
 specifier|public
 specifier|static
@@ -740,7 +740,7 @@ specifier|final
 name|String
 name|_RULE_ONTOLOGY_DEFAULT
 init|=
-literal|"http://ontologydesignpatterns.org/ont/iks/kres/rmi_config.owl"
+literal|""
 decl_stmt|;
 comment|/**      * Rewrites the rule ontology location and overwrites the given configuration.      *       * @param configuration      * @param filepath      * @return      */
 specifier|private
@@ -798,7 +798,7 @@ decl_stmt|;
 name|String
 name|respath
 init|=
-literal|"KReSConf"
+literal|"RuleConf"
 operator|+
 name|System
 operator|.
@@ -1403,13 +1403,13 @@ argument_list|)
 operator|+
 name|sep
 operator|+
-literal|"KReSConf"
+literal|"RuleConf"
 operator|+
 name|sep
 operator|+
 literal|"rmi_config.owl"
 decl_stmt|;
-comment|// default KReSConf dir exists
+comment|// default RuleConf dir exists
 if|if
 condition|(
 operator|(
@@ -1485,7 +1485,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// default KReSConf dir does not exist
+comment|// default RuleConf dir does not exist
 else|else
 block|{
 name|IRI
@@ -1568,7 +1568,7 @@ literal|"."
 operator|+
 name|sep
 operator|+
-literal|"KReSConf"
+literal|"RuleConf"
 argument_list|)
 decl_stmt|;
 if|if
@@ -1590,7 +1590,7 @@ literal|"."
 operator|+
 name|sep
 operator|+
-literal|"KReSConf"
+literal|"RuleConf"
 operator|+
 name|sep
 operator|+
@@ -1745,6 +1745,17 @@ expr_stmt|;
 block|}
 block|}
 block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Rule Ontology Location set to be "
+operator|+
+name|ruleOntologyLocation
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
 block|}
 comment|/*      * Moved form AddRecipe class. The AddRecipe should not be used anymore.      */
 annotation|@
@@ -1801,7 +1812,7 @@ decl_stmt|;
 name|String
 name|owlIDrmi
 init|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+literal|"http://incubator.apache.org/stanbol/ontology/rmi.owl#"
 decl_stmt|;
 name|OWLClass
 name|ontocls
@@ -1985,7 +1996,7 @@ return|return
 name|ok
 return|;
 block|}
-comment|/**      *       * @param recipe      *            the recipe      * @param kReSRule      *            the rule in Rule syntax      *       * @return the recipe we the new rule.      */
+comment|/**      *       * @param recipe      *            the recipe      * @param RuleRule      *            the rule in Rule syntax      *       * @return the recipe we the new rule.      */
 annotation|@
 name|Override
 specifier|public
@@ -1996,7 +2007,7 @@ name|Recipe
 name|recipe
 parameter_list|,
 name|String
-name|kReSRuleInKReSSyntax
+name|stanbolSyntaxRule
 parameter_list|)
 block|{
 name|log
@@ -2021,7 +2032,7 @@ comment|/**          * Add the rule to the recipe in the rule ontology managed b
 name|String
 name|ruleNS
 init|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+literal|"http://incubator.apache.org/stanbol/ontology/rmi.owl#"
 decl_stmt|;
 name|OWLObjectProperty
 name|hasRule
@@ -2086,19 +2097,19 @@ argument_list|()
 decl_stmt|;
 comment|/**          * Finally also the in-memory representation of the Recipe passed as input is modified.          */
 name|KB
-name|kReSKB
+name|kb
 init|=
 name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
-name|kReSRuleInKReSSyntax
+name|stanbolSyntaxRule
 argument_list|)
 decl_stmt|;
 name|RuleList
 name|ruleList
 init|=
-name|kReSKB
+name|kb
 operator|.
 name|getkReSRuleList
 argument_list|()
@@ -2111,7 +2122,7 @@ range|:
 name|ruleList
 control|)
 block|{
-comment|/**              * The rule must be added to the ontology, so 1. an IRI is created from its name 2. the KReS              * syntax is added to the rule as a literal through the hasBobyAndHe data property. 3. the rule is              * associated to the recipe by means of the hasRule object property, so that the triple<a_recipe              * hasRule a_rule> is added to the rule ontology.              *               */
+comment|/**              * The rule must be added to the ontology, so 1. an IRI is created from its name 2. the rule              * in Stanbol syntax is added to the rule as a literal through the hasBobyAndHe data property. 3. the rule is              * associated to the recipe by means of the hasRule object property, so that the triple<a_recipe              * hasRule a_rule> is added to the rule ontology.              *               */
 name|IRI
 name|ruleIRI
 init|=
@@ -2235,7 +2246,7 @@ comment|/**          * Add the rule to the recipe in the rule ontology managed b
 name|String
 name|ruleNS
 init|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+literal|"http://incubator.apache.org/stanbol/ontology/rmi.owl#"
 decl_stmt|;
 name|OWLObjectProperty
 name|hasRule
@@ -2300,7 +2311,7 @@ argument_list|()
 decl_stmt|;
 comment|/**          * Finally also the in-memory representation of the Recipe passed as input is modified.          */
 name|KB
-name|kReSKB
+name|kb
 init|=
 name|RuleParserImpl
 operator|.
@@ -2312,7 +2323,7 @@ decl_stmt|;
 name|RuleList
 name|ruleList
 init|=
-name|kReSKB
+name|kb
 operator|.
 name|getkReSRuleList
 argument_list|()
@@ -2325,7 +2336,7 @@ range|:
 name|ruleList
 control|)
 block|{
-comment|/**              * The rule must be added to the ontology, so 1. an IRI is created from its name 2. the KReS              * syntax is added to the rule as a literal through the hasBobyAndHe data property. 3. the rule is              * associated to the recipe by means of the hasRule object property, so that the triple<a_recipe              * hasRule a_rule> is added to the rule ontology.              *               */
+comment|/**              * The rule must be added to the ontology, so 1. an IRI is created from its name 2. the rule              * in Stanbol syntax is added to the rule as a literal through the hasBobyAndHe data property. 3. the rule is              * associated to the recipe by means of the hasRule object property, so that the triple<a_recipe              * hasRule a_rule> is added to the rule ontology.              *               */
 name|IRI
 name|ruleIRI
 init|=
@@ -2413,7 +2424,7 @@ return|return
 name|recipe
 return|;
 block|}
-comment|/**      *       * @param recipeIRI      *            the IRI of the recipe      * @param kReSRule      *            the rule in Rule syntax      */
+comment|/**      *       * @param recipeIRI      *            the IRI of the recipe      * @param stanbolRule      *            the rule in Rule syntax      */
 annotation|@
 name|Override
 specifier|public
@@ -2424,7 +2435,7 @@ name|String
 name|recipeID
 parameter_list|,
 name|String
-name|kReSRuleInKReSSyntax
+name|stanbolRule
 parameter_list|)
 throws|throws
 name|NoSuchRecipeException
@@ -2447,7 +2458,7 @@ name|addRuleToRecipe
 argument_list|(
 name|recipe
 argument_list|,
-name|kReSRuleInKReSSyntax
+name|stanbolRule
 argument_list|)
 return|;
 block|}
@@ -2499,7 +2510,7 @@ name|String
 name|recipeID
 parameter_list|,
 name|String
-name|rulesInKReSSyntax
+name|stanbolRule
 parameter_list|)
 block|{
 name|log
@@ -2510,9 +2521,9 @@ literal|"Create recipe "
 operator|+
 name|recipeID
 operator|+
-literal|" with rules in kres sytnax "
+literal|" with rules in Stanbol sytnax "
 operator|+
-name|rulesInKReSSyntax
+name|stanbolRule
 argument_list|,
 name|this
 argument_list|)
@@ -2524,7 +2535,7 @@ name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
-name|rulesInKReSSyntax
+name|stanbolRule
 argument_list|)
 decl_stmt|;
 name|RuleList
@@ -2590,7 +2601,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 name|String
-name|kReSSyntax
+name|stanbolSyntax
 init|=
 name|rule
 operator|.
@@ -2601,9 +2612,9 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Rule in KReS Syntax : "
+literal|"Rule in Stanbol Syntax : "
 operator|+
-name|kReSSyntax
+name|stanbolSyntax
 argument_list|)
 expr_stmt|;
 name|addRule
@@ -2620,7 +2631,7 @@ name|getRuleName
 argument_list|()
 argument_list|)
 argument_list|,
-name|kReSSyntax
+name|stanbolSyntax
 argument_list|,
 literal|null
 argument_list|)
@@ -2721,7 +2732,7 @@ name|RuleList
 name|generateKnowledgeBase
 parameter_list|(
 name|String
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 parameter_list|)
 block|{
 name|KB
@@ -2731,7 +2742,7 @@ name|RuleParserImpl
 operator|.
 name|parse
 argument_list|(
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 argument_list|)
 decl_stmt|;
 return|return
@@ -2837,7 +2848,7 @@ comment|// factory.getOWLObjectProperty(IRI.create(ruleNS + "hasRule"));
 name|String
 name|ruleNS
 init|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+literal|"http://incubator.apache.org/stanbol/ontology/rmi.owl#"
 decl_stmt|;
 comment|/**                  * First get the recipe description in the rule/recipe ontology.                  */
 name|OWLDataProperty
@@ -2927,7 +2938,7 @@ name|owlmodel
 argument_list|)
 decl_stmt|;
 name|String
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 init|=
 literal|""
 decl_stmt|;
@@ -3001,7 +3012,7 @@ name|Set
 argument_list|<
 name|OWLLiteral
 argument_list|>
-name|kReSRuleLiterals
+name|stanbolRuleLiterals
 init|=
 name|rule
 operator|.
@@ -3018,7 +3029,7 @@ operator|!
 name|firstLoop
 condition|)
 block|{
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 operator|+=
 literal|" . "
 expr_stmt|;
@@ -3033,15 +3044,15 @@ block|}
 for|for
 control|(
 name|OWLLiteral
-name|kReSRuleLiteral
+name|stanbolRuleLiteral
 range|:
-name|kReSRuleLiterals
+name|stanbolRuleLiterals
 control|)
 block|{
 name|String
 name|ruleTmp
 init|=
-name|kReSRuleLiteral
+name|stanbolRuleLiteral
 operator|.
 name|getLiteral
 argument_list|()
@@ -3073,7 +3084,7 @@ operator|+
 name|ruleTmp
 argument_list|)
 expr_stmt|;
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 operator|+=
 name|ruleTmp
 expr_stmt|;
@@ -3084,9 +3095,9 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Recipe in KReS Syntax : "
+literal|"Recipe in Stanbol Syntax : "
 operator|+
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 argument_list|)
 expr_stmt|;
 name|RuleList
@@ -3097,7 +3108,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 operator|.
 name|isEmpty
 argument_list|()
@@ -3107,7 +3118,7 @@ name|ruleList
 operator|=
 name|generateKnowledgeBase
 argument_list|(
-name|kReSRulesInKReSSyntax
+name|stanbolRule
 argument_list|)
 expr_stmt|;
 block|}
@@ -3572,7 +3583,7 @@ decl_stmt|;
 name|String
 name|ruleNS
 init|=
-literal|"http://kres.iks-project.eu/ontology/meta/rmi.owl#"
+literal|"http://incubator.apache.org/stanbol/ontology/rmi.owl#"
 decl_stmt|;
 comment|// Create the remover to be used to delete the rule from the ontology.
 name|OWLEntityRemover
@@ -3667,7 +3678,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * To save some change to the ontology loaded in the store.      *       * FIXME: save using the Clerezza TcManager, or the KReS wrapper for it      */
+comment|/**      * To save some change to the ontology loaded in the store.      *       * FIXME: save using the Clerezza TcManager, or the Stanbol wrapper for it      */
 annotation|@
 name|Override
 specifier|public
@@ -3713,7 +3724,7 @@ argument_list|)
 operator|+
 name|sep
 operator|+
-literal|"KReSConf"
+literal|"RuleConf"
 operator|+
 name|sep
 operator|+
@@ -3787,6 +3798,19 @@ block|}
 block|}
 else|else
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Rule Ontology Location: "
+operator|+
+name|this
+operator|.
+name|ruleOntologyLocation
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
 name|fos
 operator|=
 operator|new
