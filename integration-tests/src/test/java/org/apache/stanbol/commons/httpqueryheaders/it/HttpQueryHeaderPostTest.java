@@ -31,7 +31,7 @@ name|enhancer
 operator|.
 name|it
 operator|.
-name|StatelessEngineTest
+name|DefaultChainTest
 operator|.
 name|ACCEPT_FORMAT_TEST_DATA
 import|;
@@ -128,7 +128,8 @@ name|builder
 operator|.
 name|buildUrl
 argument_list|(
-literal|"/engines"
+name|getEndpoint
+argument_list|()
 argument_list|,
 literal|"header_Accept"
 argument_list|,
@@ -215,7 +216,8 @@ name|builder
 operator|.
 name|buildUrl
 argument_list|(
-literal|"/engines"
+name|getEndpoint
+argument_list|()
 argument_list|,
 literal|"header_Accept"
 argument_list|,
@@ -303,7 +305,8 @@ name|builder
 operator|.
 name|buildUrl
 argument_list|(
-literal|"/engines"
+name|getEndpoint
+argument_list|()
 argument_list|,
 literal|"header_Accept"
 argument_list|,

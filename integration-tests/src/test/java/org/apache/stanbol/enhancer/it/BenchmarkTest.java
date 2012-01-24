@@ -50,13 +50,33 @@ name|BENCHMARK
 init|=
 literal|"= INPUT = \n"
 operator|+
-literal|"Bob Marley was born in Kingston, Jamaica. \n"
+literal|"Bob Marley was born in Kingston, Jamaica. Marley's music was heavily "
+operator|+
+literal|"influenced by the social issues of his homeland.\n"
 operator|+
 literal|"= EXPECT = \n"
 operator|+
 literal|"Description: Jamaica must be found \n"
 operator|+
-literal|"http://fise.iks-project.eu/ontology/entity-reference URI http://dbpedia.org/resource/Jamaica"
+literal|"http://fise.iks-project.eu/ontology/entity-reference URI http://dbpedia.org/resource/Jamaica\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"Description: Bob Marley must be found as a musical artist\n"
+operator|+
+literal|"http://fise.iks-project.eu/ontology/entity-type URI http://dbpedia.org/ontology/MusicalArtist\n"
+operator|+
+literal|"http://fise.iks-project.eu/ontology/entity-reference URI http://dbpedia.org/resource/Bob_Marley\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"= COMPLAIN =\n"
+operator|+
+literal|"Description: Miles Davis must not be found\n"
+operator|+
+literal|"http://fise.iks-project.eu/ontology/entity-type URI http://dbpedia.org/ontology/MusicalArtist\n"
+operator|+
+literal|"http://fise.iks-project.eu/ontology/entity-reference URI http://dbpedia.org/resource/Miles_Davis\n"
 decl_stmt|;
 annotation|@
 name|Test

@@ -910,6 +910,21 @@ comment|//        // register the name finder instances for matching owl class
 comment|////        entityTypes.put(name, new Object[] {typeUri, model});
 comment|//        return model;
 comment|//    }
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getName
+parameter_list|()
+block|{
+return|return
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+return|;
+block|}
 specifier|public
 name|void
 name|computeEnhancements

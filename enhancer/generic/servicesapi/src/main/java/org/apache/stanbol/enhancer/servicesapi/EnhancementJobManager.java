@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Accept requests for enhancing ContentItems, and processes them either  * synchronously or asynchronously (as decided by the enhancement engines or by  * configuration).  *<p>  * The progress of the enhancement process should be made accessible in the  * ContentItem's metadata.  */
+comment|/**  * Accept requests for enhancing ContentItems, and processes them either  * synchronously or asynchronously (as decided by the enhancement engines,  * the job manager implementation, the execution plan provided by the   * {@link Chain} or by some additional configurations).  *<p>  * The progress of the enhancement process should be made accessible in the  * ContentItem's metadata.  */
 end_comment
 
 begin_interface
@@ -36,7 +36,7 @@ specifier|public
 interface|interface
 name|EnhancementJobManager
 block|{
-comment|/**      * Create relevant asynchronous requests or enhance content immediately. The      * result is not persisted right now. The caller is responsible for calling the      * {@link Store#put(ContentItem)} afterwards in case persistence is      * required.      *<p>      * TODO: define the expected semantics if asynchronous enhancements were to      * get implemented.      *      * @throws EngineException if the enhancement process failed      */
+comment|/**      * Enhances the parsed contentItem by using the default enhancement      * Chain.      * Create relevant asynchronous requests or enhance content immediately. The      * result is not persisted right now. The caller is responsible for calling the      * {@link Store#put(ContentItem)} afterwards in case persistence is      * required.      *<p>      * TODO: define the expected semantics if asynchronous enhancements were to      * get implemented.      * @throws EnhancementException if the enhancement process failed      */
 name|void
 name|enhanceContent
 parameter_list|(
@@ -44,22 +44,24 @@ name|ContentItem
 name|ci
 parameter_list|)
 throws|throws
-name|EngineException
+name|EnhancementException
 function_decl|;
-comment|/**      *       * @param ci : ContentItem to be enhanced      * @param chain : enhancement chain Name      * @throws EngineException : if the enhancement process failed      */
+comment|/**      * Processes the parsed {@link ContentItem} by using the       * {@link Chain#getExecutionPlan() execution plan} provided by the      * {@link Chain}.      * @param ci : ContentItem to be enhanced      * @param chain : The enhancement Chain used to process the content item      * @throws EnhancementException : if an Engine required by the Chain fails to      * process the ContentItem      * @throws ChainException : if the enhancement process failed      */
 name|void
 name|enhanceContent
 parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|String
+name|Chain
 name|chain
 parameter_list|)
 throws|throws
-name|EngineException
+name|EnhancementException
 function_decl|;
-comment|/**      * Return the unmodifiable list of active registered engine instance that      * can be used by the manager.      */
+comment|/**      * Return the unmodifiable list of active registered engine instance that      * can be used by the manager.      * @deprecated use the {@link EnhancementEngineManager} to get information      * about currently active Engines and the {@link ChainManager} to get active      * chains. This method will now return active engines of the default chain.      */
+annotation|@
+name|Deprecated
 name|List
 argument_list|<
 name|EnhancementEngine

@@ -11,11 +11,27 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|enhancer
-operator|.
 name|it
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|testing
+operator|.
+name|stanbol
+operator|.
+name|StanbolTestBase
+import|;
+end_import
 
 begin_import
 import|import
@@ -28,34 +44,25 @@ import|;
 end_import
 
 begin_comment
-comment|/** Verify that the example config of STANBOL-110 is present */
+comment|/** Test the stanbol homepage and demonstrate the test classes.  *  Does not inherit from EnhancerTestBase as we don't care  *  at this stage if engines are ready or not.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|DefaultConfigTest
+name|HomepageTest
 extends|extends
-name|EnhancerTestBase
+name|StanbolTestBase
 block|{
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testDefaultConfig
+name|testHomepageExamples
 parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|// AFAIK there's no way to get the config in machine
-comment|// format from the webconsole, so we just grep the
-comment|// text config output
-specifier|final
-name|String
-name|path
-init|=
-literal|"/system/console/config/configuration-status-20110304-1743+0100.txt"
-decl_stmt|;
 name|executor
 operator|.
 name|execute
@@ -64,14 +71,14 @@ name|builder
 operator|.
 name|buildGetRequest
 argument_list|(
-name|path
+literal|"/"
 argument_list|)
 operator|.
-name|withCredentials
+name|withHeader
 argument_list|(
-literal|"admin"
+literal|"Accept"
 argument_list|,
-literal|"admin"
+literal|"text/html"
 argument_list|)
 argument_list|)
 operator|.
@@ -80,15 +87,23 @@ argument_list|(
 literal|200
 argument_list|)
 operator|.
+name|assertContentType
+argument_list|(
+literal|"text/html"
+argument_list|)
+operator|.
+name|assertContentContains
+argument_list|(
+literal|"/static/home/style/stanbol.css"
+argument_list|,
+literal|"The RESTful Semantic Engine"
+argument_list|)
+operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"PID.*org.apache.stanbol.examples.ExampleBootstrapConfig"
+literal|"stylesheet.*stanbol.css"
 argument_list|,
-literal|"anotherValue.*This is AnotherValue."
-argument_list|,
-literal|"message.*This test config should be loaded at startup"
-argument_list|,
-literal|"org.apache.stanbol.examples.ExampleBootstrapConfig.*launchpad:resources/config/org.apache.stanbol.examples.ExampleBootstrapConfig.cfg"
+literal|"<title.*[Ss]tanbol"
 argument_list|)
 expr_stmt|;
 block|}

@@ -26,7 +26,7 @@ specifier|public
 class|class
 name|EngineException
 extends|extends
-name|Exception
+name|EnhancementException
 block|{
 specifier|private
 specifier|static

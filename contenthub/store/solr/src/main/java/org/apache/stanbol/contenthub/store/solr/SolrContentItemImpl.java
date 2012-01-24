@@ -296,6 +296,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|/**      * TODO: sync access to {@link #constraints} using}      */
 specifier|private
 specifier|final
 name|Map
@@ -563,6 +564,7 @@ argument_list|>
 name|getConstraints
 parameter_list|()
 block|{
+comment|// TODO: sync access to constraints via #readLock and #writeLocck
 return|return
 name|constraints
 return|;

@@ -81,6 +81,12 @@ name|nie
 argument_list|(
 literal|"http://www.semanticdesktop.org/ontologies/2007/01/19/nie#"
 argument_list|)
+block|,
+comment|/**      * Namespace for the Stanbol Enhancer Execution Plan ontology      */
+name|ep
+argument_list|(
+literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#"
+argument_list|)
 block|;
 name|String
 name|ns

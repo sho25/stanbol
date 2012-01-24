@@ -29,6 +29,20 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|locks
+operator|.
+name|ReadWriteLock
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -59,6 +73,24 @@ name|UriRef
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|LockableMGraph
+import|;
+end_import
+
 begin_comment
 comment|/**  * A unit of content that Stanbol Enhancer can enhance.  *<p>  * Gives access to the binary content that  * was registered, and the Graph that represents its metadata  * (provided by client and/or generated).  */
 end_comment
@@ -83,8 +115,13 @@ name|String
 name|getMimeType
 parameter_list|()
 function_decl|;
+comment|/**      * Read/write lock used to synchronise access to the {@link #getMetadata()      * metadata} and the content parts of this content item.<p>      * The lock used by the {@link LockableMGraph#getLock()} MUST BE the same      * as the lock returned by this Instance. This is to avoid deadlocks when      * using a lock while iterating over the {@link #getMetadata() metadata} and      * simultaneously accessing the content parts. In other words      * calling<code> contentItem.getLock() == contentItem.getMetadata().getLock()</code>      * MUST BE<code>true</code>      *        * @return the lock used for the content parts and the {@link LockableMGraph}      * containing the metadata of this content item.      */
+name|ReadWriteLock
+name|getLock
+parameter_list|()
+function_decl|;
 comment|/** Optional metadata */
-name|MGraph
+name|LockableMGraph
 name|getMetadata
 parameter_list|()
 function_decl|;

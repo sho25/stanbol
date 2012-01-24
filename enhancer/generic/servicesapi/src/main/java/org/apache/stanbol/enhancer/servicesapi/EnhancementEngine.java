@@ -26,6 +26,12 @@ specifier|public
 interface|interface
 name|EnhancementEngine
 block|{
+comment|/**      * The property used to provide the name of an enhancement engine.      */
+name|String
+name|PROPERTY_NAME
+init|=
+literal|"stanbol.enhancer.engine.name"
+decl_stmt|;
 comment|/**      * Return value for {@link #canEnhance}, meaning this engine cannot enhance      * supplied {@link ContentItem}      */
 name|int
 name|CANNOT_ENHANCE
@@ -42,7 +48,7 @@ comment|/**      * Return value for {@link #canEnhance}, meaning this engine can
 name|int
 name|ENHANCE_ASYNC
 init|=
-literal|1
+literal|2
 decl_stmt|;
 comment|/**      * Indicate if this engine can enhance supplied ContentItem, and if it      * suggests enhancing it synchronously or asynchronously. The      * {@link EnhancementJobManager} can force sync/async mode if desired, it is      * just a suggestion from the engine.      *      * @throws EngineException if the introspecting process of the content item      *             fails      */
 name|int
@@ -63,6 +69,11 @@ name|ci
 parameter_list|)
 throws|throws
 name|EngineException
+function_decl|;
+comment|/**      * Getter for the name of this EnhancementEngine instance as configured      * by {@link #PROPERTY_NAME}      * @return the name      */
+name|String
+name|getName
+parameter_list|()
 function_decl|;
 block|}
 end_interface

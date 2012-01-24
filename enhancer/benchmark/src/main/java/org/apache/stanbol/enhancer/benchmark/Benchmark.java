@@ -55,7 +55,7 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|EngineException
+name|EnhancementException
 import|;
 end_import
 
@@ -110,7 +110,7 @@ name|EnhancementJobManager
 name|jobManager
 parameter_list|)
 throws|throws
-name|EngineException
+name|EnhancementException
 function_decl|;
 comment|/** Return the enhanced Graph of our input text */
 name|Graph
@@ -120,7 +120,7 @@ name|EnhancementJobManager
 name|jobManager
 parameter_list|)
 throws|throws
-name|EngineException
+name|EnhancementException
 function_decl|;
 block|}
 end_interface

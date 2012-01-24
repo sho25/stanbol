@@ -375,6 +375,28 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|utils
+operator|.
+name|MediaTypeUtil
+operator|.
+name|getAcceptableMediaType
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|jersey
@@ -834,6 +856,26 @@ operator|.
 name|resource
 operator|.
 name|BaseStanbolResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|utils
+operator|.
+name|MediaTypeUtil
 import|;
 end_import
 
@@ -1485,8 +1527,6 @@ expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -1775,8 +1815,6 @@ expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -2287,8 +2325,6 @@ block|{
 name|MediaType
 name|accepted
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -2537,8 +2573,6 @@ decl_stmt|;
 name|MediaType
 name|accepted
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -3414,8 +3448,6 @@ specifier|final
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -3815,8 +3847,6 @@ specifier|final
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -4590,8 +4620,6 @@ expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -4969,8 +4997,6 @@ expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
@@ -5333,8 +5359,6 @@ expr_stmt|;
 name|MediaType
 name|acceptedMediaType
 init|=
-name|JerseyUtils
-operator|.
 name|getAcceptableMediaType
 argument_list|(
 name|headers
