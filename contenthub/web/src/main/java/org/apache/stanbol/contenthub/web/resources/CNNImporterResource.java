@@ -211,7 +211,7 @@ name|stanbol
 operator|.
 name|contenthub
 operator|.
-name|helper
+name|crawler
 operator|.
 name|cnn
 operator|.
@@ -230,8 +230,6 @@ operator|.
 name|contenthub
 operator|.
 name|web
-operator|.
-name|search
 operator|.
 name|model
 operator|.
