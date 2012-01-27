@@ -153,6 +153,26 @@ name|helper
 operator|.
 name|ExecutionPlanHelper
 operator|.
+name|createExecutionPlan
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ExecutionPlanHelper
+operator|.
 name|validateExecutionPlan
 import|;
 end_import
@@ -2052,6 +2072,17 @@ operator|new
 name|SimpleMGraph
 argument_list|()
 decl_stmt|;
+name|NonLiteral
+name|epNode
+init|=
+name|createExecutionPlan
+argument_list|(
+name|graph
+argument_list|,
+name|getName
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|//caches the String name -> {NonLiteral node, List<Stirng> dependsOn} mappings
 name|Map
 argument_list|<
@@ -2113,6 +2144,8 @@ block|{
 name|writeExecutionNode
 argument_list|(
 name|graph
+argument_list|,
+name|epNode
 argument_list|,
 name|node
 operator|.

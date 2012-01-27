@@ -63,6 +63,57 @@ parameter_list|()
 block|{
 comment|/* No instances of Utility classes*/
 block|}
+comment|/**      * The Class ep:ExecutionPlan      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|EXECUTION_PLAN
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|ep
+operator|+
+literal|"ExecutionPlan"
+argument_list|)
+decl_stmt|;
+comment|/**      * The property ep:chain linking an {@link #EXECUTION_PLAN} to the name      * of the chain this plan is defined for      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|CHAIN
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|ep
+operator|+
+literal|"chain"
+argument_list|)
+decl_stmt|;
+comment|/**      * the property ep:hasExecutionNode linking an {@link #EXECUTION_PLAN} with      * all its {@link #EXECUTION_NODE}s      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|HAS_EXECUTION_NODE
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|ep
+operator|+
+literal|"hasExecutionNode"
+argument_list|)
+decl_stmt|;
 comment|/**      * The Class ep:ExecutionMode      */
 specifier|public
 specifier|static

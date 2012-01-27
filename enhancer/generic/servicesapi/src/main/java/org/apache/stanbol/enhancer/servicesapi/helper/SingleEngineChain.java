@@ -35,6 +35,26 @@ name|helper
 operator|.
 name|ExecutionPlanHelper
 operator|.
+name|createExecutionPlan
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ExecutionPlanHelper
+operator|.
 name|writeExecutionNode
 import|;
 end_import
@@ -174,7 +194,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Intended to be used if one needs to wrap a single {@link EnhancementEngine}  * with a {@link Chain} to execute it by using the  * {@link EnhancementJobManager#enhanceContent(org.apache.stanbol.enhancer.servicesapi.ContentItem, String)}  * method.<p>  * This Chain implementation is NOT intended to be registered as OSGI service.  * The intension is that it is instantiated by the component (e.g. the implementation  * of a RESTful service) for an {@link EnhancementEngine} and directly parsed  * to the {@link EnhancementJobManager}.  * S  * @author Rupert Westenthaler   *  */
+comment|/**  * Intended to be used if one needs to wrap a single {@link EnhancementEngine}  * with a {@link Chain} to execute it by using the  * {@link EnhancementJobManager#enhanceContent(org.apache.stanbol.enhancer.servicesapi.ContentItem, String)}  * method.<p>  * This Chain implementation is NOT intended to be registered as OSGI service.  * The intension is that it is instantiated by the component (e.g. the implementation  * of a RESTful service) for an {@link EnhancementEngine} and directly parsed  * to the {@link EnhancementJobManager}.  *   * @author Rupert Westenthaler   *  */
 end_comment
 
 begin_class
@@ -227,6 +247,17 @@ name|engine
 operator|=
 name|engine
 expr_stmt|;
+name|this
+operator|.
+name|name
+operator|=
+name|engine
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"Chain"
+expr_stmt|;
 name|MGraph
 name|graph
 init|=
@@ -237,6 +268,13 @@ decl_stmt|;
 name|writeExecutionNode
 argument_list|(
 name|graph
+argument_list|,
+name|createExecutionPlan
+argument_list|(
+name|graph
+argument_list|,
+name|name
+argument_list|)
 argument_list|,
 name|engine
 operator|.
@@ -254,15 +292,6 @@ name|graph
 operator|.
 name|getGraph
 argument_list|()
-expr_stmt|;
-name|name
-operator|=
-name|engine
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"Chain"
 expr_stmt|;
 block|}
 annotation|@

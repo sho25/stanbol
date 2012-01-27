@@ -1065,6 +1065,9 @@ comment|//        }
 return|return
 name|calculateExecutionPlan
 argument_list|(
+name|getName
+argument_list|()
+argument_list|,
 name|availableEngines
 argument_list|,
 name|optionalEngines
