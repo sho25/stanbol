@@ -2845,18 +2845,20 @@ operator|+
 name|METADATA_ENTRY
 argument_list|)
 decl_stmt|;
-comment|// use a filter query to avoid string escaping issues with special solr chars
 name|query
 operator|.
 name|addFilterQuery
 argument_list|(
-literal|"{!field f="
-operator|+
 name|broaderField
 operator|+
-literal|"}"
+literal|":"
 operator|+
+name|ClientUtils
+operator|.
+name|escapeQueryChars
+argument_list|(
 name|broadTopicId
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|query
