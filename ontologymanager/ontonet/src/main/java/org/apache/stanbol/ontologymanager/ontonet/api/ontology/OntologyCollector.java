@@ -156,7 +156,7 @@ argument_list|>
 name|getListeners
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the ontologies managed by this ontology space.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
+comment|/**      * Returns the ontologies managed by this ontology space.      *       * @deprecated to obtain the set as {@link OWLOntology} objects, please use      *<code>#getManagedOntologies(OWLOntology.class, boolean)</code>.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
 name|Set
 argument_list|<
 name|OWLOntology
@@ -167,7 +167,27 @@ name|boolean
 name|withClosure
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the ontology identified by the supplied<i>logical</i> IRI, if such an ontology has been loaded      * in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return the requested ontology, or null if no ontology with this ID has been loaded.      */
+comment|/**      * Returns the ontologies managed by this ontology space.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
+parameter_list|<
+name|O
+parameter_list|>
+name|Set
+argument_list|<
+name|O
+argument_list|>
+name|getManagedOntologies
+parameter_list|(
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|withClosure
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the ontology identified by the supplied<i>logical</i> IRI, if such an ontology has been loaded      * in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @deprecated to obtain the {@link OWLOntology} object, please use<code>#getOntology(IRI,      *             OWLOntology.class, boolean)</code>.      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return the requested ontology, or null if no ontology with this ID has been loaded.      */
 name|OWLOntology
 name|getOntology
 parameter_list|(
@@ -178,12 +198,47 @@ name|boolean
 name|merge
 parameter_list|)
 function_decl|;
-comment|/**      * Equivalent to calling<code>getOntology(IRI, false)</code>;      *       * @param ontologyIri      * @return      */
+comment|/**      * Equivalent to calling<code>getOntology(IRI, false)</code>;      *       * @deprecated to obtain the {@link OWLOntology} object, cast the result of<code>#getOntology(IRI,      *             OWLOntology.class)</code> to OWLOntology.      *       * @param ontologyIri      * @return      */
 name|OWLOntology
 name|getOntology
 parameter_list|(
 name|IRI
 name|ontologyIri
+parameter_list|)
+function_decl|;
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|)
+function_decl|;
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
 parameter_list|)
 function_decl|;
 comment|/**      * A shortcut method to avoid computing the ontologies themselves before counting them.      *       * @param withClosure      * @return      */
