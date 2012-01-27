@@ -3023,7 +3023,9 @@ name|managedSolrServer
 argument_list|)
 operator|.
 name|getServer
-argument_list|()
+argument_list|(
+name|ldProgramName
+argument_list|)
 decl_stmt|;
 name|String
 name|content
