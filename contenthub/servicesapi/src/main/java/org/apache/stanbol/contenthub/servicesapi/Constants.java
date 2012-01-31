@@ -17,28 +17,8 @@ name|servicesapi
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|contenthub
-operator|.
-name|servicesapi
-operator|.
-name|enhancements
-operator|.
-name|vocabulary
-operator|.
-name|EnhancementGraphVocabulary
-import|;
-end_import
-
 begin_comment
-comment|/**  * @author anil.sinaci  *  */
+comment|/**  * Class keeping the constants that are used in various places of Contenthub.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class
@@ -46,6 +26,7 @@ specifier|public
 class|class
 name|Constants
 block|{
+comment|/**      * Default encoding      */
 specifier|public
 specifier|static
 specifier|final
@@ -54,6 +35,16 @@ name|DEFAULT_ENCODING
 init|=
 literal|"UTF-8"
 decl_stmt|;
+comment|/**      * The URI of the global enhancement graph. All enhancements are stored in this graph.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|ENHANCEMENTS_GRAPH_URI
+init|=
+literal|"org.apache.stanbol.enhancer.standalone.store.enhancements"
+decl_stmt|;
+comment|/**      * The URI of ???      */
 specifier|public
 specifier|static
 specifier|final
@@ -72,8 +63,6 @@ init|=
 block|{
 name|ENHANCER_ENTITIY_CACHE_GRAPH_URI
 block|,
-name|EnhancementGraphVocabulary
-operator|.
 name|ENHANCEMENTS_GRAPH_URI
 block|}
 decl_stmt|;
@@ -111,6 +100,14 @@ return|return
 literal|false
 return|;
 block|}
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SEARCH_URI
+init|=
+literal|"http://stanbol.apache.org/contenthub/search/"
+decl_stmt|;
 block|}
 end_class
 

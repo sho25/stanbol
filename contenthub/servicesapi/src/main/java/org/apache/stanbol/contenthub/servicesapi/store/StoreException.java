@@ -31,6 +31,8 @@ name|contenthub
 operator|.
 name|servicesapi
 operator|.
+name|exception
+operator|.
 name|AbstractContenthubException
 import|;
 end_import

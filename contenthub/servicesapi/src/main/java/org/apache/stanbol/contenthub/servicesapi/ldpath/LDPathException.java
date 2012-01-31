@@ -31,12 +31,14 @@ name|contenthub
 operator|.
 name|servicesapi
 operator|.
+name|exception
+operator|.
 name|AbstractContenthubException
 import|;
 end_import
 
 begin_comment
-comment|/**  * @author anil.sinaci  *  */
+comment|/**  * Exception to be thrown in LDPath related operations of Contenthub.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class

@@ -759,7 +759,7 @@ annotation|@
 name|Override
 specifier|public
 name|SearchResult
-name|getRelatedKeywordsFromReferencedCites
+name|getRelatedKeywordsFromReferencedSites
 parameter_list|(
 name|String
 name|keyword

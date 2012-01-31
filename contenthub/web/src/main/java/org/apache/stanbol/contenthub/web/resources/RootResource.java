@@ -97,6 +97,10 @@ name|BaseStanbolResource
 import|;
 end_import
 
+begin_comment
+comment|/**  * Base resource which automatically redirects to "contenthub/store"  *   * @author anil.sinaci  *  */
+end_comment
+
 begin_class
 annotation|@
 name|Path

@@ -33,11 +33,7 @@ name|contenthub
 operator|.
 name|servicesapi
 operator|.
-name|search
-operator|.
-name|vocabulary
-operator|.
-name|SearchVocabulary
+name|Constants
 import|;
 end_import
 
@@ -99,10 +95,9 @@ name|SEARCH
 init|=
 literal|"PREFIX ss:<"
 operator|+
-name|SearchVocabulary
+name|Constants
 operator|.
-name|getUri
-argument_list|()
+name|SEARCH_URI
 operator|+
 literal|">"
 decl_stmt|;

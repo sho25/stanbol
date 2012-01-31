@@ -501,6 +501,26 @@ name|stanbol
 operator|.
 name|contenthub
 operator|.
+name|servicesapi
+operator|.
+name|search
+operator|.
+name|related
+operator|.
+name|RelatedKeywordSearchManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|contenthub
+operator|.
 name|web
 operator|.
 name|util
@@ -576,7 +596,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author anil.sinaci  * @author suat  *   */
+comment|/**  * This class is the web resource which provides RESTful and HTTP interfaces for {@link FeaturedSearch}  * services.  *   * @author anil.sinaci  * @author suat  *   */
 end_comment
 
 begin_class
@@ -654,6 +674,7 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * HTTP POST method to make a featured search over Contenthub. This method directly calls the      * corresponding {{@link #get(String, String, String, String, String, int, int, String, HttpHeaders)}      * method of this class.      *       * @param queryTerm      *            A keyword a statement or a set of keywords which can be regarded as the query term.      * @param solrQuery      *            Solr query string. This is the string format which is accepted by a Solr server. For      *            example, {@code q="john doe"&fl=score} is a valid value for this parameter. If this      *            parameter exists, search is performed based on this solrQuery and any queryTerms are      *            neglected.      * @param ldProgram      *            The name of the LDPath program (actually name of the Solr core/index) to be searched over.      * @param jsonCons      *            Constrainst in JSON format. These constraints are tranformed to corresponding Solr queries      *            to enable faceted search. Each constraint is a facet field and values of the constraints      *            maps to the values of the facet fields in Solr queries.      * @param graphURI      *            URI of the ontology in which related keywords will be searched by      *            {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)}      * @param offset      *            The offset of the document from which the resultant documents will start as the search      *            result. {@link offset} and {@link limit} parameters can be used to make a pagination      *            mechanism for search results.      * @param limit      *            Maximum number of resultant documents to be returned as the search result. {@link offset}      *            and {@link limit} parameters can be used to make a pagination mechanism for search results.      * @param headers      *            HTTP headers      * @return      * @throws IllegalArgumentException      * @throws InstantiationException      * @throws IllegalAccessException      * @throws SolrServerException      * @throws SearchException      * @throws IOException      */
 annotation|@
 name|POST
 annotation|@
@@ -788,6 +809,7 @@ name|headers
 argument_list|)
 return|;
 block|}
+comment|/**      * HTTP GET method to make a featured search over Contenthub.      *       * @param queryTerm      *            A keyword a statement or a set of keywords which can be regarded as the query term.      * @param solrQuery      *            Solr query string. This is the string format which is accepted by a Solr server. For      *            example, {@code q="john doe"&fl=score} is a valid value for this parameter. If this      *            parameter exists, search is performed based on this solrQuery and any queryTerms are      *            neglected.      * @param ldProgram      *            The name of the LDPath program (actually name of the Solr core/index) to be searched over.      * @param jsonCons      *            Constrainst in JSON format. These constraints are tranformed to corresponding Solr queries      *            to enable faceted search. Each constraint is a facet field and values of the constraints      *            maps to the values of the facet fields in Solr queries.      * @param graphURI      *            URI of the ontology in which related keywords will be searched by      *            {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)}      * @param offset      *            The offset of the document from which the resultant documents will start as the search      *            result. {@link offset} and {@link limit} parameters can be used to make a pagination      *            mechanism for search results.      * @param limit      *            Maximum number of resultant documents to be returned as the search result. {@link offset}      *            and {@link limit} parameters can be used to make a pagination mechanism for search results.      * @param fromStore      *            Special parameter for HTML view only.      * @param headers      *            HTTP headers      * @return HTML view or JSON representation of the search results or HTTP BAD REQUEST(400)      * @throws IllegalArgumentException      * @throws SearchException      * @throws InstantiationException      * @throws IllegalAccessException      * @throws SolrServerException      * @throws IOException      */
 annotation|@
 name|GET
 annotation|@
@@ -1340,7 +1362,7 @@ name|allAvailableFacetNames
 init|=
 name|featuredSearch
 operator|.
-name|getFacetNames
+name|getFieldNames
 argument_list|(
 name|ldProgramName
 argument_list|)
@@ -1557,9 +1579,9 @@ name|queryTerm
 init|=
 literal|null
 decl_stmt|;
-comment|//    private String solrQuery = null;
-comment|//    private String ldProgram = null;
-comment|//    private String graphURI = null;
+comment|// private String solrQuery = null;
+comment|// private String ldProgram = null;
+comment|// private String graphURI = null;
 specifier|private
 name|SearchResult
 name|searchResults

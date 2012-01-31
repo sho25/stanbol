@@ -254,7 +254,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author cihan  *   */
+comment|/**  * This is the web resource for CNN Crawler.  *   * @author cihan  *   */
 end_comment
 
 begin_class
@@ -427,6 +427,7 @@ return|return
 name|tn
 return|;
 block|}
+comment|/**      * For HTML view only.      *       * @return Returns the HTML view for CNN News Crawler.      */
 annotation|@
 name|GET
 annotation|@
@@ -459,6 +460,7 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      *       * @param topic      *            The topic which will be crawled.      * @param max      *            Maximum number of news to be retrieved from CNN about the {@link topic}      * @param full      *            If {@code yes}, the topic will be crawled in detail to retrieve all information from CNN      *            about the {@link topic}. If {@code no}, only summary of the news will be crawled and      *            imported.      * @return Returns the HTML view as the result of importing news from CNN.      */
 annotation|@
 name|POST
 annotation|@

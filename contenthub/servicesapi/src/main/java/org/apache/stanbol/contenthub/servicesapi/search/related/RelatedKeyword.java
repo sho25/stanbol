@@ -21,24 +21,31 @@ name|related
 package|;
 end_package
 
+begin_comment
+comment|/**  * This interface defines the structure of a keyword which is related to the query term of a search operation.  *   * @author suat  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
 name|RelatedKeyword
 block|{
+comment|/**      * @return Lexical value of the related keyword.      */
 name|String
 name|getKeyword
 parameter_list|()
 function_decl|;
+comment|/**      * @return Score of the related keyword      */
 name|double
 name|getScore
 parameter_list|()
 function_decl|;
+comment|/**      * @return Source of the related keyword      */
 name|String
 name|getSource
 parameter_list|()
 function_decl|;
-comment|/*      * To enumerate the source for a related keyword       */
+comment|/**      * To enumerate the source for a related keyword      */
 specifier|public
 enum|enum
 name|Source

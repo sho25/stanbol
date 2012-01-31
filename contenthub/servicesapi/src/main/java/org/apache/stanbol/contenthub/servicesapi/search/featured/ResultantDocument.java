@@ -21,27 +21,36 @@ name|featured
 package|;
 end_package
 
+begin_comment
+comment|/**  * This interface contains "getter" methods for a search result that can be passed in a {@link SearchResult}  * object. A resultant document corresponds to a content item stored in Contenthub.  *   * @author suat  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
 name|ResultantDocument
 block|{
+comment|/**      * Returns the URI of the content item corresponding to this search result.      *       * @return URI of the search result      */
 name|String
 name|getLocalId
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the dereferencable URI of the content item corresponding to this search result. This URI of the      * HTML interface of the content item.      *       * @return Dereferencable URI of the search result      */
 name|String
 name|getDereferencableURI
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the mime type of the content item corresponding to this search result      *       * @return Mime type of the search result      */
 name|String
 name|getMimetype
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the count of the enhancements of the content item corresponding to this search result      *       * @return Enhancement count of the search result      */
 name|long
 name|getEnhancementCount
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the title of the content item corresponding to the this search result      *       * @return Title of the search result      */
 name|String
 name|getTitle
 parameter_list|()

@@ -361,11 +361,31 @@ name|newmedialab
 operator|.
 name|ldpath
 operator|.
+name|api
+operator|.
+name|backend
+operator|.
+name|RDFBackend
+import|;
+end_import
+
+begin_import
+import|import
+name|at
+operator|.
+name|newmedialab
+operator|.
+name|ldpath
+operator|.
 name|exception
 operator|.
 name|LDPathParseException
 import|;
 end_import
+
+begin_comment
+comment|/**  * This class provides a main function for executing an LDProgram on {@link ClerezzaBackend} ,which is  * Clerezza based implementation of {@link RDFBackend}, populated with RDF data.  *   * @author suat  *   */
+end_comment
 
 begin_class
 specifier|public
@@ -392,6 +412,7 @@ specifier|static
 name|Parser
 name|clerezzaRDFParser
 decl_stmt|;
+comment|/**      * This executable method provides execution of an LDPath program over an RDF data and prints out the      * obtained results. Passed RDF data should be in<b>RDF/XML</b> format.<br>      *       * Usage of this main method is as follows:<br>      * ClerezzaQuery -context<pre>&lt;uri></pre> -filePath<pre>&lt;filePath></pre> -path<pre>&lt;path></pre> | -program<pre>&lt;file></pre></br></br>       *       *<b><code>context</code>:</b> URI of the context node to start from<br>      *<b><code>rdfData</code>:</b> File system path of the file holding RDF data<br>      *<b><code>path</code>:</b> LD Path to evaluate on the file starting from the<code>context</code><br>      *<b><code>program</code>:</b> LD Path program to evaluate on the file starting from the      *<code>context</code><br>      *       * @param args      *            Collection of<code>context</code>,<code>rdfData</code>,<code>path</code> and<code>program</code> parameters      *       */
 specifier|public
 specifier|static
 name|void
@@ -440,7 +461,7 @@ name|cmd
 operator|.
 name|hasOption
 argument_list|(
-literal|"filePath"
+literal|"rdfData"
 argument_list|)
 condition|)
 block|{
@@ -476,7 +497,7 @@ name|cmd
 operator|.
 name|getOptionValue
 argument_list|(
-literal|"filePath"
+literal|"rdfData"
 argument_list|)
 argument_list|)
 argument_list|,
@@ -789,7 +810,7 @@ name|formatter
 operator|.
 name|printHelp
 argument_list|(
-literal|"LDQuery"
+literal|"ClerezzaQuery"
 argument_list|,
 name|options
 argument_list|,
@@ -840,7 +861,7 @@ name|formatter
 operator|.
 name|printHelp
 argument_list|(
-literal|"LDQuery"
+literal|"ClerezzaQuery"
 argument_list|,
 name|options
 argument_list|,
@@ -959,7 +980,7 @@ name|OptionBuilder
 operator|.
 name|withArgName
 argument_list|(
-literal|"filePath"
+literal|"rdfData"
 argument_list|)
 expr_stmt|;
 name|OptionBuilder
@@ -981,7 +1002,7 @@ name|OptionBuilder
 operator|.
 name|create
 argument_list|(
-literal|"filePath"
+literal|"rdfData"
 argument_list|)
 decl_stmt|;
 name|filePath

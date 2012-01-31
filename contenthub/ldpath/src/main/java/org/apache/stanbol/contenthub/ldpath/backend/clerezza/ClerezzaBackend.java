@@ -392,7 +392,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author anil.sinaci  *   */
+comment|/**  * Clerezza based implementation of {@link RDFBackend} interface. This implementation uses the  * {@link Resource} objects of Clerezza as processing unit RDFBackend.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class

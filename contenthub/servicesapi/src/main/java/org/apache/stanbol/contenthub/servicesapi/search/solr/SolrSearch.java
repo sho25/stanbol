@@ -67,17 +67,40 @@ name|contenthub
 operator|.
 name|servicesapi
 operator|.
+name|ldpath
+operator|.
+name|LDProgramManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|contenthub
+operator|.
+name|servicesapi
+operator|.
 name|search
 operator|.
 name|SearchException
 import|;
 end_import
 
+begin_comment
+comment|/**  * Apache Solr based search interface of Stanbol Contenthub. It makes use of SolrJ API in the provided  * services such that it is possible to provide queries passed in {@link SolrParams} and response are returned  * in the form of {@link QueryResponse}s. This interface also allows querying different Solr cores which are  * created based on the LDPath programs submitted through the {@link LDProgramManager}.  *   * @author anil.sinaci  *   */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
 name|SolrSearch
 block|{
+comment|/**      * Queries the default Solr core of Contenthub with the given<code>queryTerm</code>.      *       * @param queryTerm      *            Query term to be searched      * @return the {@link QueryResponse} as is obtained from Solr.      * @throws SearchException      */
 name|QueryResponse
 name|search
 parameter_list|(
@@ -87,6 +110,7 @@ parameter_list|)
 throws|throws
 name|SearchException
 function_decl|;
+comment|/**      * Queries the Solr core corresponding to the given<code>ldProgramName</code> of Contenthub with the      * given<code>queryTerm</code>.      *       * @param queryTerm      *            Query term to be searched      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core to be searched      * @return the {@link QueryResponse} as is obtained from Solr.      * @throws SearchException      */
 name|QueryResponse
 name|search
 parameter_list|(
@@ -99,6 +123,7 @@ parameter_list|)
 throws|throws
 name|SearchException
 function_decl|;
+comment|/**      * Executes the given<code>solrQuery</code> on the default Solr core of Contenthub.      *       * @param solrQuery      *            {@link SolrParams} to be executed      * @return the {@link QueryResponse} as is obtained from Solr.      * @throws SearchException      */
 name|QueryResponse
 name|search
 parameter_list|(
@@ -108,6 +133,7 @@ parameter_list|)
 throws|throws
 name|SearchException
 function_decl|;
+comment|/**      * Executes the given<code>solrQuery</code> on the Solr core corresponding to the given      *<code>ldProgramName</code> of Contenthub.      *       * @param solrQuery      *            {@link SolrParams} to be executed      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core to be searched      * @return the {@link QueryResponse} as is obtained from Solr.      * @throws SearchException      */
 name|QueryResponse
 name|search
 parameter_list|(

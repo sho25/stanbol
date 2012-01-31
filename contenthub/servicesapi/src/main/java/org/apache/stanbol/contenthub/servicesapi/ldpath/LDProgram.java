@@ -20,7 +20,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * @author anil.sinaci  *  */
+comment|/**  * Simple bean class representing the LDPath programs. Contains the program itself together with its name.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class

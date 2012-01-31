@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author anil.sinaci  *   */
+comment|/**  * A collection class for the managed LDPath programs in the Contenthub. Operates on a {@link Map} keeping the  *&lt;name,program> pairs.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class
@@ -67,6 +67,7 @@ name|String
 argument_list|>
 name|nameProgramMap
 decl_stmt|;
+comment|/**      * Creates an {@link LDProgramCollection} based on a provide {@link Map} keeping&lt;name,program> pairs.      *       * @param nameProgramMap      *            On which the {@link LDProgramCollection} will be initialized.      */
 specifier|public
 name|LDProgramCollection
 parameter_list|(
@@ -86,6 +87,7 @@ operator|=
 name|nameProgramMap
 expr_stmt|;
 block|}
+comment|/**      * This method returns the list of LDPath programs stored in the scope of Contenthub.      *       * @return {@link List} of {@link LDProgram}s.      */
 specifier|public
 name|List
 argument_list|<
@@ -149,6 +151,7 @@ return|return
 name|list
 return|;
 block|}
+comment|/**      * This method returns the programs stored in the scope of Contenthub as a {@link Map}.      *       * @return {@link Map} keeping the&lt;name,program> pairs.      */
 specifier|public
 name|Map
 argument_list|<
@@ -165,6 +168,7 @@ operator|.
 name|nameProgramMap
 return|;
 block|}
+comment|/**      * This method returns the names of LDPath programs stored in the scope of Contenthub.      *       * @return {@link List} of program names.      */
 specifier|public
 name|List
 argument_list|<
@@ -187,6 +191,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**      * This method returns the LDPath programs themselves that are stored in the scope of Contenthub.      *       * @return {@link List} of programs.      */
 specifier|public
 name|List
 argument_list|<

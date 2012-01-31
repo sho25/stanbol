@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author cihan  *   */
+comment|/**  * Bean class to keep information about news that are obtained from news sources.  *   * @author cihan  *   */
 end_comment
 
 begin_class
@@ -124,7 +124,6 @@ operator|=
 name|title
 expr_stmt|;
 block|}
-comment|/*public Map<String, List<Object>> getTitleConstraint() {         if(title == null || title.isEmpty()) return null;         Map<String, List<Object>> titleConstraint = new HashMap<String,List<Object>>();         List<Object> titleList = new ArrayList<Object>(1);         titleList.add(title);         titleConstraint.put(SolrVocabulary.SolrFieldName.TITLE.toString(), titleList);         return titleConstraint;     }*/
 block|}
 end_class
 

@@ -365,6 +365,24 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|contenthub
+operator|.
+name|web
+operator|.
+name|writers
+operator|.
+name|SearchResultWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|core
@@ -537,6 +555,10 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * This is the web resourceclass which implements the search functionality of Contenthub to look for related  * keywords, given a keyword.  *   * @author anil.sinaci  *   */
+end_comment
+
 begin_class
 annotation|@
 name|Path
@@ -626,6 +648,7 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * HTTP GET method to retrieve related keywords from all resources defined within Contenthub.      *       * @param keyword      *            The keyword whose related keywords will be retrieved.      * @param ontologyURI      *            URI of the ontology to be used during the step in which related keywords are searched in      *            ontology resources. If this parameter is {@code null}, then no related keywords are returned      *            from ontology resources.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromAllSources(String, String)} only contains related keywords (no resultant documents      *         or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
 annotation|@
 name|GET
 annotation|@
@@ -755,6 +778,7 @@ name|headers
 argument_list|)
 return|;
 block|}
+comment|/**      * HTTP GET method to retrieve related keywords from Wordnet. If a Wordnet database is not installed into      * Contenthub, this method cannot find any related keywords.      *       * @param keyword      *            The keyword whose related keywords will be retrieved from Wordnet.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromWordnet(String)} contains only related keywords from Wordnet. (No      *         resultant documents or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
 annotation|@
 name|GET
 annotation|@
@@ -870,6 +894,7 @@ name|headers
 argument_list|)
 return|;
 block|}
+comment|/**      * HTTP GET method to retrieve related keywords from ontology resources. Given the ontology URI, this      * method looks for subsumption/hierarchy relations among the concepts to come up with related keywords.      *       * @param keyword      *            The keyword whose related keywords will be retrieved from ontology resources.      * @param ontologyURI      *            URI of the ontology in which related keywords will be searched. The ontology should be      *            available in the Contenthub system.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)} contains only related keywords from ontology resources.      *         (No resultant documents or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
 annotation|@
 name|GET
 annotation|@
@@ -1031,6 +1056,7 @@ name|headers
 argument_list|)
 return|;
 block|}
+comment|/**      *       * HTTP GET method to retrieve related keywords from the referenced sites.      *       * @param keyword      *            The keyword whose related keywords will be retrieved from referenced sites.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromReferencedSites(String)} contains      *         only related keywords from referenced sites. (No resultant documents or facet fields are      *         returned within the {@link SearchResult}).      * @throws SearchException      */
 annotation|@
 name|GET
 annotation|@
@@ -1132,7 +1158,7 @@ name|searchResult
 init|=
 name|relatedKeywordSearchManager
 operator|.
-name|getRelatedKeywordsFromReferencedCites
+name|getRelatedKeywordsFromReferencedSites
 argument_list|(
 name|keyword
 argument_list|)
@@ -1198,7 +1224,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * This method is used to provide data to autocomplete component. It queries entityhub with the provided      * query term.      */
+comment|/**      * TODO: Not completed yet.      * This method is used to provide data to autocomplete component. It queries entityhub with the provided      * query term.      */
 annotation|@
 name|GET
 annotation|@

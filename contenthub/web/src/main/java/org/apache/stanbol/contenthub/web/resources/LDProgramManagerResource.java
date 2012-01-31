@@ -408,7 +408,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author anil.pacaci  * @author anil.sinaci  *   */
+comment|/**  * This class the the web resource to handle the RESTful requests and HTML view of the LDProgram management  * facilities within Contenthub.  *   * @author anil.pacaci  * @author anil.sinaci  *   */
 end_comment
 
 begin_class
@@ -608,6 +608,7 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      * HTTP GET method which returns all LDPath programs residing in Contenthub. LDPath programs are uniquely      * identified by their names. Returning JSON string presents each LDPath program in string format aligned      * with its name.      *       * @param headers      *            HTTP headers      * @return JSON string of {@code name:program} pairs.      */
 annotation|@
 name|GET
 annotation|@
@@ -659,6 +660,7 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      * HTTP POST method which saves an LDPath program into the persistent store of Contenthub.      *       * @param programName      *            Unique name to identify the LDPath program      * @param program      *            The LDPath program.      * @param headers      *            HTTP Headers      * @return HTTP OK(200) or BAD REQUEST(400)      * @throws LDPathException      */
 annotation|@
 name|POST
 annotation|@
@@ -771,6 +773,7 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      * HTTP GET method to retrieve an LDPath program, given its name.      *       * @param programName      *            The name of the LDPath program to be retrieved.      * @param headers      *            HTTP headers      * @return LDPath program in {@link String} format or HTTP NOT FOUND(404)      */
 annotation|@
 name|GET
 annotation|@
@@ -856,6 +859,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/**      * HTTP DELETE method to delete an LDPath program.      *       * @param programName      *            The name of the LDPath program.      * @param headers      *            HTTP headers      * @return HTTP OK(200)      */
 annotation|@
 name|DELETE
 annotation|@
@@ -917,6 +921,7 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      * HTTP GET method to check whether an LDPath program exists in Contenthub or not.      *       * @param programName      *            The name of the LDPath program.      * @param headers      *            HTTP headers      * @return HTTP OK(200) or HTTP NOT FOUND(404)      */
 annotation|@
 name|GET
 annotation|@

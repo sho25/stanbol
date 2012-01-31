@@ -20,13 +20,14 @@ package|;
 end_package
 
 begin_comment
-comment|/**  *   * @author anil.sinaci  *  */
+comment|/**  * Abstract exception class to be used as a parent in various types of other Contenthub exceptions.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
-name|ContenthubException
+name|AbstractContenthubException
 extends|extends
 name|Exception
 block|{
@@ -39,8 +40,8 @@ init|=
 operator|-
 literal|2303415622874917355L
 decl_stmt|;
-specifier|public
-name|ContenthubException
+specifier|protected
+name|AbstractContenthubException
 parameter_list|(
 name|String
 name|msg
@@ -49,6 +50,37 @@ block|{
 name|super
 argument_list|(
 name|msg
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+name|AbstractContenthubException
+parameter_list|(
+name|Throwable
+name|cause
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|cause
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+name|AbstractContenthubException
+parameter_list|(
+name|String
+name|msg
+parameter_list|,
+name|Throwable
+name|cause
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|msg
+argument_list|,
+name|cause
 argument_list|)
 expr_stmt|;
 block|}

@@ -891,6 +891,24 @@ name|contenthub
 operator|.
 name|servicesapi
 operator|.
+name|ldpath
+operator|.
+name|LDProgramManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|contenthub
+operator|.
+name|servicesapi
+operator|.
 name|search
 operator|.
 name|SearchException
@@ -1474,13 +1492,13 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/*      * Methods for retrieving various parts e.g raw content, metadata of content items      */
-comment|/**      * Cool URI handler for the uploaded resource.      *       * @param localId      *            the local id of the resource in the Stanbol Enhancer store      * @param headers      * @return a redirection to either a browser view, the RDF metadata or the raw binary content      */
+comment|/**      * Cool URI handler for the uploaded resource.      *       * @param contentURI      *            The URI of the resource in the Stanbol Contenthub store      * @param headers      *            HTTP headers      * @return a redirection to either a browser view, the RDF metadata or the raw binary content      */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"/content/{localId:.+}"
+literal|"/content/{uri:.+}"
 argument_list|)
 specifier|public
 name|Response
@@ -1491,10 +1509,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localId"
+literal|"uri"
 argument_list|)
 name|String
-name|localId
+name|contentURI
 parameter_list|,
 annotation|@
 name|Context
@@ -1511,7 +1529,7 @@ name|solrStore
 operator|.
 name|get
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 decl_stmt|;
 if|if
@@ -1569,7 +1587,7 @@ argument_list|)
 operator|.
 name|path
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 operator|.
 name|build
@@ -1628,7 +1646,7 @@ argument_list|)
 operator|.
 name|path
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 operator|.
 name|build
@@ -1662,7 +1680,7 @@ argument_list|)
 operator|.
 name|path
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 operator|.
 name|build
@@ -1680,12 +1698,13 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      * HTTP GET method specific for download operations. Raw data (content item) or only metadata of the      * content item can be downloaded.      *       * @param type      *            Type can be {@code "metadata"} or {@code "raw"}. Based on the type, related parts of the      *            content item will be prepared for download.      * @param contentURI      *            URI of the resource in the Stanbol Contenthub store      * @return Raw content item or metadata of the content item.      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"/download/{type}/{localId:.+}"
+literal|"/download/{type}/{uri:.+}"
 argument_list|)
 specifier|public
 name|Response
@@ -1706,10 +1725,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localId"
+literal|"uri"
 argument_list|)
 name|String
-name|localId
+name|contentURI
 parameter_list|)
 throws|throws
 name|IOException
@@ -1723,7 +1742,7 @@ name|solrStore
 operator|.
 name|get
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 decl_stmt|;
 if|if
@@ -1777,7 +1796,7 @@ expr_stmt|;
 name|String
 name|fileName
 init|=
-name|localId
+name|contentURI
 operator|+
 literal|"-metadata"
 decl_stmt|;
@@ -1897,7 +1916,7 @@ comment|// TODO: It is only for text content
 name|String
 name|fileName
 init|=
-name|localId
+name|contentURI
 operator|+
 literal|"-raw"
 decl_stmt|;
@@ -2023,12 +2042,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**      * HTTP GET method to retrieve the metadata of the content item. Generally, metadata contains the      * enhancements of the content item.      *       * @param contentURI      *            URI id of the resource in the Stanbol Contenthub store      * @return RDF representation of the metadata of the content item.      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"/metadata/{localId:.+}"
+literal|"/metadata/{uri:.+}"
 argument_list|)
 specifier|public
 name|Response
@@ -2039,10 +2059,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localId"
+literal|"uri"
 argument_list|)
 name|String
-name|localId
+name|contentURI
 parameter_list|)
 throws|throws
 name|IOException
@@ -2056,7 +2076,7 @@ name|solrStore
 operator|.
 name|get
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 decl_stmt|;
 if|if
@@ -2114,12 +2134,13 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/**      * HTTP GET method to retrieve the raw content item.      *       * @param contentURI      *            URI of the resource in the Stanbol Contenthub store      * @return Raw data of the content item.      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"/raw/{localId:.+}"
+literal|"/raw/{uri:.+}"
 argument_list|)
 specifier|public
 name|Response
@@ -2130,10 +2151,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localId"
+literal|"uri"
 argument_list|)
 name|String
-name|localId
+name|contentURI
 parameter_list|)
 throws|throws
 name|IOException
@@ -2147,7 +2168,7 @@ name|solrStore
 operator|.
 name|get
 argument_list|(
-name|localId
+name|contentURI
 argument_list|)
 decl_stmt|;
 if|if
@@ -2185,13 +2206,13 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * This method creates the Json string of an edited content item to display it in the HTML view.      *       * @param localid      * @return      * @throws StoreException      */
+comment|/**      * This method creates the JSON string of a content item (to be edited) to display it in the HTML view.      *       * @param contentURI      *            URI id of the resource in the Stanbol Contenthub store      * @return JSON representation of the {@link SolrContentItem}      * @throws StoreException      */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"/edit/{localid:.+}"
+literal|"/edit/{uri:.+}"
 argument_list|)
 specifier|public
 name|String
@@ -2202,10 +2223,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localid"
+literal|"uri"
 argument_list|)
 name|String
-name|localid
+name|contentURI
 parameter_list|)
 throws|throws
 name|StoreException
@@ -2220,7 +2241,7 @@ name|solrStore
 operator|.
 name|get
 argument_list|(
-name|localid
+name|contentURI
 argument_list|)
 decl_stmt|;
 if|if
@@ -2278,6 +2299,7 @@ return|;
 block|}
 comment|/*      * Services for content item creation      */
 comment|// TODO other parameters like title, ldprogram should be considered for this service
+comment|/**      * HTTP POST method to create a content item in Contenthub. This is the very basic method to create the      * content item. The payload of the POST method should include the raw data of the content item to be      * created. This method stores the content in the default Solr index ("contenthub").      *       * @param data      *            Raw data of the content item      * @param headers      *            HTTP Headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws StoreException      */
 annotation|@
 name|POST
 annotation|@
@@ -2336,6 +2358,7 @@ literal|null
 argument_list|)
 return|;
 block|}
+comment|/**      * HTTP POST method to create a content item in Contenthub. This method requires the content to be      * text-based.      *       * @param content      *            Actual content in text format. If this parameter is supplied, {@link url} is ommitted.      * @param url      *            URL where the actual content resides. If this parameter is supplied (and {@link content} is      *            {@code null}, then the content is retrieved from this url.      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param contentURI      *            URI for the content item. If not supplied, Contenthub automatically assigns a URI to the      *            content item.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param ldprogram      *            Name of the LDPath program to be used while storing this content item. LDPath programs can      *            be managed through {@link LDProgramManagerResource} or {@link LDProgramManager}      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|POST
 annotation|@
@@ -2374,10 +2397,10 @@ parameter_list|,
 annotation|@
 name|FormParam
 argument_list|(
-literal|"contentId"
+literal|"uri"
 argument_list|)
 name|String
-name|contentId
+name|contentURI
 parameter_list|,
 annotation|@
 name|FormParam
@@ -2456,7 +2479,7 @@ name|createContentItemFromForm
 argument_list|(
 name|content
 argument_list|,
-name|contentId
+name|contentURI
 argument_list|,
 name|url
 argument_list|,
@@ -2474,6 +2497,7 @@ name|ldprogram
 argument_list|)
 return|;
 block|}
+comment|/**      * HTTP POST method to create a content item from file. File is read and loaded as the actual content.      *       * @param file      *            {@link File} which contains the content for the content item.      * @param disposition      *            Additional information about the {@link file} parameter      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param contentId      *            The unique ID for the content item. If not supplied, Contenthub automatically assigns an ID      *            to the content item.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param ldprogram      *            Name of the LDPath program to be used while storing this content item. LDPath programs can      *            be managed through {@link LDProgramManagerResource} or {@link LDProgramManager}      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|POST
 annotation|@
@@ -2613,12 +2637,13 @@ argument_list|)
 return|;
 block|}
 comment|// TODO other parameters like title, ldprogram should be considered for this service
+comment|/**      * HTTP PUT method to create a content item in Contenthub.      *       * @param contentURI      *            URI for the content item. If not supplied, Contenthub automatically assigns an ID      *            to the content item.      * @param data      * @param headers      * @return      * @throws URISyntaxException      * @throws EngineException      * @throws StoreException      */
 annotation|@
 name|PUT
 annotation|@
 name|Path
 argument_list|(
-literal|"/content/{localId:.+}"
+literal|"/content/{uri:.+}"
 argument_list|)
 annotation|@
 name|Consumes
@@ -2634,10 +2659,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localId"
+literal|"uri"
 argument_list|)
 name|String
-name|localId
+name|contentURI
 parameter_list|,
 name|byte
 index|[]
@@ -2665,7 +2690,7 @@ operator|.
 name|getMediaType
 argument_list|()
 argument_list|,
-name|localId
+name|contentURI
 argument_list|,
 literal|null
 argument_list|)
@@ -2679,7 +2704,7 @@ name|String
 name|content
 parameter_list|,
 name|String
-name|contentId
+name|contentURI
 parameter_list|,
 name|String
 name|url
@@ -2905,12 +2930,12 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|contentId
+name|contentURI
 operator|!=
 literal|null
 operator|&&
 operator|!
-name|contentId
+name|contentURI
 operator|.
 name|isEmpty
 argument_list|()
@@ -2920,13 +2945,13 @@ name|uri
 operator|.
 name|equals
 argument_list|(
-name|contentId
+name|contentURI
 argument_list|)
 condition|)
 block|{
 name|deleteContentItem
 argument_list|(
-name|contentId
+name|contentURI
 argument_list|)
 expr_stmt|;
 block|}
@@ -3119,13 +3144,13 @@ name|localId
 argument_list|)
 return|;
 block|}
-comment|/*      * Content item deletion service      */
+comment|/**      * HTTP DELETE method to delete a content item from Contenhub.      * @param contentURI URI of the content item to be deleted.      * @return HTTP OK      * @throws StoreException      */
 annotation|@
 name|DELETE
 annotation|@
 name|Path
 argument_list|(
-literal|"/content/{localid:.+}"
+literal|"/content/{uri:.+}"
 argument_list|)
 specifier|public
 name|Response
@@ -3136,10 +3161,10 @@ name|PathParam
 argument_list|(
 name|value
 operator|=
-literal|"localid"
+literal|"uri"
 argument_list|)
 name|String
-name|localid
+name|contentURI
 parameter_list|)
 throws|throws
 name|StoreException
@@ -3148,7 +3173,7 @@ name|solrStore
 operator|.
 name|deleteById
 argument_list|(
-name|localid
+name|contentURI
 argument_list|)
 expr_stmt|;
 return|return

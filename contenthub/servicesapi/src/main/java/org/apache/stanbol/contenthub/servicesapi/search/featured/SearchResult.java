@@ -79,8 +79,28 @@ name|RelatedKeyword
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|contenthub
+operator|.
+name|servicesapi
+operator|.
+name|search
+operator|.
+name|related
+operator|.
+name|RelatedKeywordSearchManager
+import|;
+end_import
+
 begin_comment
-comment|/**  * This interface defines the structure of a search result returned by  * {@link Search#search(String[], String, List, Map)}. All results of a search operation are encapsulated.  *   * @author anil.sinaci  *   */
+comment|/**  * This interface defines the structure of a unified search result returned by {@link FeaturedSearch} and  * {@link RelatedKeywordSearchManager} interfaces. The results contain {@link ResultantDocument}s which are  * retrieved from underlying Solr cores, {@link RelatedKeyword}s about the search query and {@link FacetField}  * s for the obtained resultant documents. {@link FacetField}s keep information of possible facet values and  * corresponding documents counts matching with the facet value. All search results of a search operation are  * encapsulated within this interface.  *<p>  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_interface
@@ -88,6 +108,7 @@ specifier|public
 interface|interface
 name|SearchResult
 block|{
+comment|/**      * Returns the resultant documents for the query term that is specified for the search operation. These      * resultant documents correspond to content items stored in the underlying Solr cores which are managed      * by the Contenthub.      *       * @return {@link List} of {@link ResultantDocument} encapsulated in this search result      */
 name|List
 argument_list|<
 name|ResultantDocument
@@ -103,6 +124,7 @@ argument_list|>
 name|getFacets
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the {@link RelatedKeyword}s for the query term that is specified for the search operation.      *       * @return A {@link Map} containing the {@link RelatedKeyword}s. Keys of the map represents different      *         tokens that are produced from the original query term. Value of a key is another {@link Map}.      *         Keys of this inner map represents sources/categories of the related keywords. Values of the      *         inner map keeps {@link List} of {@link RelatedKeyword}s.      */
 name|Map
 argument_list|<
 name|String
@@ -120,6 +142,7 @@ argument_list|>
 name|getRelatedKeywords
 parameter_list|()
 function_decl|;
+comment|/**      * Setter for the resultant documents list      *       * @param resultantDocuments      */
 name|void
 name|setDocuments
 parameter_list|(
@@ -130,6 +153,7 @@ argument_list|>
 name|resultantDocuments
 parameter_list|)
 function_decl|;
+comment|/**      * Setter for the facets list      *       * @param facets      */
 name|void
 name|setFacets
 parameter_list|(
@@ -140,6 +164,7 @@ argument_list|>
 name|facets
 parameter_list|)
 function_decl|;
+comment|/**      * Setter for the related keywords      *       * @param relatedKeywords      */
 name|void
 name|setRelatedKeywords
 parameter_list|(
