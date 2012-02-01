@@ -611,7 +611,9 @@ name|rs
 operator|.
 name|core
 operator|.
-name|UriInfo
+name|Response
+operator|.
+name|ResponseBuilder
 import|;
 end_import
 
@@ -625,9 +627,7 @@ name|rs
 operator|.
 name|core
 operator|.
-name|Response
-operator|.
-name|ResponseBuilder
+name|UriInfo
 import|;
 end_import
 
@@ -1044,11 +1044,6 @@ name|ContentItemResource
 extends|extends
 name|BaseStanbolResource
 block|{
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
 specifier|private
 specifier|final
 name|Logger
@@ -1267,7 +1262,7 @@ argument_list|()
 operator|.
 name|path
 argument_list|(
-literal|"/store/raw"
+literal|"/contenthub/store/raw"
 argument_list|)
 operator|.
 name|path
@@ -1401,7 +1396,7 @@ argument_list|()
 operator|.
 name|path
 argument_list|(
-literal|"/store/metadata"
+literal|"/contenthub/store/metadata"
 argument_list|)
 operator|.
 name|path
