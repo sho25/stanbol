@@ -906,6 +906,19 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
+name|boolean
+name|isDefaultChain
+init|=
+name|chain
+operator|.
+name|equals
+argument_list|(
+name|chainManager
+operator|.
+name|getDefault
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|EnhancementJob
 name|job
 init|=
@@ -923,6 +936,8 @@ name|chain
 operator|.
 name|getExecutionPlan
 argument_list|()
+argument_list|,
+name|isDefaultChain
 argument_list|)
 decl_stmt|;
 comment|//start the execution
@@ -1023,6 +1038,11 @@ name|start
 block|}
 argument_list|)
 expr_stmt|;
+comment|//NOTE: ExecutionMetadata are not added to the metadata of the ContentItem
+comment|//      by the EnhancementJobManager.
+comment|//      However one could add this as an optional feature to the
+comment|//      RESTful interface of the Enhancer!
+comment|//ci.getMetadata().addAll(job.getExecutionMetadata());
 if|if
 condition|(
 name|job

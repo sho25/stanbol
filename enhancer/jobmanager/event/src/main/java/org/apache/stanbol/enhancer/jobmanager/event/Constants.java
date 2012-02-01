@@ -55,6 +55,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|ExecutionMetadata
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|service
@@ -100,11 +118,11 @@ name|PROPERTY_JOB_MANAGER
 init|=
 literal|"stanbol.enhancer.jobmanager.event.job"
 decl_stmt|;
-comment|/**      * Property used to provide the {@link NonLiteral} node to execute      */
+comment|/**      * Property used to provide the {@link NonLiteral} describing the      * {@link ExecutionMetadata#EXECUTION} instance      */
 name|String
-name|PROPERTY_NODE
+name|PROPERTY_EXECUTION
 init|=
-literal|"stanbol.enhancer.jobmanager.event.node"
+literal|"stanbol.enhancer.jobmanager.event.execution"
 decl_stmt|;
 block|}
 end_interface

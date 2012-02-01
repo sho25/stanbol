@@ -87,6 +87,12 @@ name|ep
 argument_list|(
 literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#"
 argument_list|)
+block|,
+comment|/**      * Namespace for the Stanbol Enhancer Execution Metadata ontology      */
+name|em
+argument_list|(
+literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#"
+argument_list|)
 block|;
 name|String
 name|ns
