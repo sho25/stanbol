@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -80,26 +80,6 @@ operator|.
 name|MediaType
 operator|.
 name|WILDCARD
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|SupportedFormat
-operator|.
-name|RDF_XML
 import|;
 end_import
 
@@ -353,37 +333,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Iterator
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|LinkedHashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -635,22 +585,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Triple
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|TripleCollection
 import|;
 end_import
@@ -686,24 +620,6 @@ operator|.
 name|access
 operator|.
 name|TcManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|PlainLiteralImpl
 import|;
 end_import
 
@@ -780,26 +696,6 @@ operator|.
 name|utils
 operator|.
 name|MediaTypeUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|jersey
-operator|.
-name|resource
-operator|.
-name|EnhancerRootResource
-operator|.
-name|ExecutionNode
 import|;
 end_import
 
@@ -1392,7 +1288,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Getter for the executionNodes       * @return      */
+comment|/**      * Getter for the executionNodes      *       * @return      */
 specifier|public
 name|Set
 argument_list|<
@@ -1596,27 +1492,27 @@ return|return
 name|_activeNodes
 return|;
 block|}
-comment|//    public EnhancementEngine getEngine(String name){
-comment|//        return engineManager.getEngine(name);
-comment|//    }
-comment|//    public Map<String,EnhancementEngine> getActiveEngines() {
-comment|//        Graph ep;
-comment|//        try {
-comment|//            ep = chain.getExecutionPlan();
-comment|//        } catch (ChainException e) {
-comment|//            return null;
-comment|//        }
-comment|//        Map<String,EnhancementEngine> active;
-comment|//        if(ep != null){
-comment|//            active = new HashMap<String,EnhancementEngine>();
-comment|//            for(EnhancementEngine engine :  ExecutionPlanHelper.getActiveEngines(engineManager, ep)){
-comment|//                active.put(engine.getName(), engine);
-comment|//            }
-comment|//        } else {
-comment|//            active = null;
-comment|//        }
-comment|//        return active;
-comment|//    }
+comment|// public EnhancementEngine getEngine(String name){
+comment|// return engineManager.getEngine(name);
+comment|// }
+comment|// public Map<String,EnhancementEngine> getActiveEngines() {
+comment|// Graph ep;
+comment|// try {
+comment|// ep = chain.getExecutionPlan();
+comment|// } catch (ChainException e) {
+comment|// return null;
+comment|// }
+comment|// Map<String,EnhancementEngine> active;
+comment|// if(ep != null){
+comment|// active = new HashMap<String,EnhancementEngine>();
+comment|// for(EnhancementEngine engine : ExecutionPlanHelper.getActiveEngines(engineManager, ep)){
+comment|// active.put(engine.getName(), engine);
+comment|// }
+comment|// } else {
+comment|// active = null;
+comment|// }
+comment|// return active;
+comment|// }
 specifier|public
 name|Chain
 name|getChain
@@ -2010,6 +1906,11 @@ name|ci
 argument_list|,
 name|uriInfo
 argument_list|,
+name|uriInfo
+operator|.
+name|getBaseUriBuilder
+argument_list|()
+argument_list|,
 name|tcManager
 argument_list|,
 name|serializer
@@ -2127,21 +2028,7 @@ argument_list|(
 name|graph
 argument_list|)
 decl_stmt|;
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|accepted
-init|=
-name|headers
-operator|.
-name|getRequestHeader
-argument_list|(
-name|HttpHeaders
-operator|.
-name|ACCEPT
-argument_list|)
-decl_stmt|;
+comment|// List<String> accepted = headers.getRequestHeader(HttpHeaders.ACCEPT);
 name|MediaType
 name|mediaType
 init|=
@@ -2154,11 +2041,11 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//This can be used to create a customised WebExection. Jersey will sent
-comment|//a 500er response code in any case
-comment|//        if(isAcceptableMediaType(mediaType, SUPPORTED_RDF_TYPES)){
-comment|//           //USE THIS for special error response
-comment|//        }
+comment|// This can be used to create a customised WebExection. Jersey will sent
+comment|// a 500er response code in any case
+comment|// if(isAcceptableMediaType(mediaType, SUPPORTED_RDF_TYPES)){
+comment|// //USE THIS for special error response
+comment|// }
 if|if
 condition|(
 name|mediaType

@@ -2358,7 +2358,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * HTTP POST method to create a content item in Contenthub. This method requires the content to be      * text-based.      *       * @param content      *            Actual content in text format. If this parameter is supplied, {@link url} is ommitted.      * @param url      *            URL where the actual content resides. If this parameter is supplied (and {@link content} is      *            {@code null}, then the content is retrieved from this url.      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param contentURI      *            URI for the content item. If not supplied, Contenthub automatically assigns a URI to the      *            content item.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param ldprogram      *            Name of the LDPath program to be used while storing this content item. LDPath programs can      *            be managed through {@link LDProgramManagerResource} or {@link LDProgramManager}      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
+comment|/**      * HTTP POST method to create a content item in Contenthub. This method requires the content to be      * text-based.      *       * @param content      *            Actual content in text format. If this parameter is supplied, {@link url} is ommitted.      * @param url      *            URL where the actual content resides. If this parameter is supplied (and {@link content} is      *            {@code null}, then the content is retrieved from this url.      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param contentURI      *            URI for the content item if this post is an update action on an existing Content item.      *            Existing content item will first removed and a new URI will be assigned for the new content.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param ldprogram      *            Name of the LDPath program to be used while storing this content item. LDPath programs can      *            be managed through {@link LDProgramManagerResource} or {@link LDProgramManager}      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|POST
 annotation|@
@@ -2497,7 +2497,7 @@ name|ldprogram
 argument_list|)
 return|;
 block|}
-comment|/**      * HTTP POST method to create a content item from file. File is read and loaded as the actual content.      *       * @param file      *            {@link File} which contains the content for the content item.      * @param disposition      *            Additional information about the {@link file} parameter      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param contentId      *            The unique ID for the content item. If not supplied, Contenthub automatically assigns an ID      *            to the content item.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param ldprogram      *            Name of the LDPath program to be used while storing this content item. LDPath programs can      *            be managed through {@link LDProgramManagerResource} or {@link LDProgramManager}      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
+comment|/**      * HTTP POST method to create a content item from file. File is read and loaded as the actual content.      *       * @param file      *            {@link File} which contains the content for the content item.      * @param disposition      *            Additional information about the {@link file} parameter      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param contentURI      *            URI for the content item if this post is an update action on an existing Content item.      *            Existing content item will first removed and a new URI will be assigned for the new content.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param ldprogram      *            Name of the LDPath program to be used while storing this content item. LDPath programs can      *            be managed through {@link LDProgramManagerResource} or {@link LDProgramManager}      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/store/content/localId" which shows the content item in the HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|POST
 annotation|@
@@ -2536,10 +2536,10 @@ parameter_list|,
 annotation|@
 name|FormDataParam
 argument_list|(
-literal|"contentId"
+literal|"uri"
 argument_list|)
 name|String
-name|contentId
+name|contentURI
 parameter_list|,
 annotation|@
 name|FormDataParam
@@ -2618,7 +2618,7 @@ name|createContentItemFromForm
 argument_list|(
 literal|null
 argument_list|,
-name|contentId
+name|contentURI
 argument_list|,
 literal|null
 argument_list|,
@@ -2637,7 +2637,7 @@ argument_list|)
 return|;
 block|}
 comment|// TODO other parameters like title, ldprogram should be considered for this service
-comment|/**      * HTTP PUT method to create a content item in Contenthub.      *       * @param contentURI      *            URI for the content item. If not supplied, Contenthub automatically assigns an ID      *            to the content item.      * @param data      * @param headers      * @return      * @throws URISyntaxException      * @throws EngineException      * @throws StoreException      */
+comment|/**      * HTTP PUT method to create a content item in Contenthub.      *       * @param contentURI      *            URI for the content item. If not supplied, Contenthub automatically assigns an ID to the      *            content item.      * @param data      * @param headers      * @return      * @throws URISyntaxException      * @throws EngineException      * @throws StoreException      */
 annotation|@
 name|PUT
 annotation|@
@@ -3144,7 +3144,7 @@ name|localId
 argument_list|)
 return|;
 block|}
-comment|/**      * HTTP DELETE method to delete a content item from Contenhub.      * @param contentURI URI of the content item to be deleted.      * @return HTTP OK      * @throws StoreException      */
+comment|/**      * HTTP DELETE method to delete a content item from Contenhub.      *       * @param contentURI      *            URI of the content item to be deleted.      * @return HTTP OK      * @throws StoreException      */
 annotation|@
 name|DELETE
 annotation|@
@@ -3534,6 +3534,16 @@ argument_list|,
 name|ci
 argument_list|,
 name|uriInfo
+argument_list|,
+name|uriInfo
+operator|.
+name|getBaseUriBuilder
+argument_list|()
+operator|.
+name|path
+argument_list|(
+literal|"/contenthub/store"
+argument_list|)
 argument_list|,
 name|tcManager
 argument_list|,
