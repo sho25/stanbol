@@ -1930,15 +1930,14 @@ name|String
 name|getName
 parameter_list|()
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Not expected to be called"
-operator|+
-literal|"on this internally used Chain implementation"
-argument_list|)
-throw|;
+return|return
+name|GraphChain
+operator|.
+name|this
+operator|.
+name|getName
+argument_list|()
+return|;
 block|}
 block|}
 end_class
@@ -2366,15 +2365,14 @@ name|String
 name|getName
 parameter_list|()
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Not expected to be called"
-operator|+
-literal|"on this internally used Chain implementation"
-argument_list|)
-throw|;
+return|return
+name|GraphChain
+operator|.
+name|this
+operator|.
+name|getName
+argument_list|()
+return|;
 block|}
 block|}
 end_class
