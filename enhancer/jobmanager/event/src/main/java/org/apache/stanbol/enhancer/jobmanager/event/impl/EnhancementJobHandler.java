@@ -739,6 +739,30 @@ name|Throwable
 name|t
 parameter_list|)
 block|{
+name|String
+name|message
+init|=
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Unexpected Exception while processing "
+operator|+
+literal|"ContentItem %s with EnhancementJobManager: %s"
+argument_list|,
+name|job
+operator|.
+name|getContentItem
+argument_list|()
+operator|.
+name|getUri
+argument_list|()
+argument_list|,
+name|EventJobManagerImpl
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|//this ensures that an runtime exception does not
 name|job
 operator|.
@@ -751,24 +775,19 @@ argument_list|,
 operator|new
 name|IllegalStateException
 argument_list|(
-literal|"Unexpected Exception while processing ContentItem '"
-operator|+
-name|job
-operator|.
-name|getContentItem
-argument_list|()
-operator|.
-name|getUri
-argument_list|()
-operator|+
-literal|"' with EnhancementJobManager: "
-operator|+
-name|EventJobManagerImpl
-operator|.
-name|class
+name|message
 argument_list|,
 name|t
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|error
+argument_list|(
+name|message
+argument_list|,
+name|t
 argument_list|)
 expr_stmt|;
 block|}
@@ -1245,7 +1264,14 @@ block|}
 block|}
 else|else
 block|{
-comment|//required engine is unable to enhance the content
+comment|//CANNOT_ENHANCE
+if|if
+condition|(
+name|exception
+operator|!=
+literal|null
+condition|)
+block|{
 name|job
 operator|.
 name|setFailed
@@ -1257,6 +1283,19 @@ argument_list|,
 name|exception
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+comment|//can not enhance is not an error
+comment|//it just says this engine can not enhance this content item
+name|job
+operator|.
+name|setCompleted
+argument_list|(
+name|execution
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 else|else

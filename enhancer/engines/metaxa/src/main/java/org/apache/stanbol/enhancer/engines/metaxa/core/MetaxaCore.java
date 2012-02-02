@@ -394,7 +394,7 @@ parameter_list|(
 name|InputStream
 name|in
 parameter_list|,
-name|String
+name|URIImpl
 name|docId
 parameter_list|,
 name|String
@@ -477,11 +477,7 @@ name|containerFactory
 operator|.
 name|getRDFContainer
 argument_list|(
-operator|new
-name|URIImpl
-argument_list|(
 name|docId
-argument_list|)
 argument_list|)
 decl_stmt|;
 name|extractor

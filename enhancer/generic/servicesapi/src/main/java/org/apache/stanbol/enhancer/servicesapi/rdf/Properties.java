@@ -418,23 +418,6 @@ operator|+
 literal|"language"
 argument_list|)
 decl_stmt|;
-comment|/**      * Plain text content of a content item.       */
-specifier|public
-specifier|static
-specifier|final
-name|UriRef
-name|NIE_PLAINTEXTCONTENT
-init|=
-operator|new
-name|UriRef
-argument_list|(
-name|NamespaceEnum
-operator|.
-name|nie
-operator|+
-literal|"plainTextContent"
-argument_list|)
-decl_stmt|;
 comment|/**      * The topic of the resource. Used to relate a content item to a      * skos:Concept modelling one of the overall topic of the content.      *      * @deprecated rwesten: To my knowledge no longer used by Stanbol Enhancer enhancement      *             specification      */
 annotation|@
 name|Deprecated

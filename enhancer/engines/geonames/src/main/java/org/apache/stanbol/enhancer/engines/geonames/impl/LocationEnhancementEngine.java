@@ -921,7 +921,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|EnhancementEngineHelper
+name|LocationEnhancementEngine
 operator|.
 name|class
 argument_list|)
@@ -2724,17 +2724,15 @@ control|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"process result "
-operator|+
+literal|"process result {} {}"
+argument_list|,
 name|result
 operator|.
 name|getGeoNameId
 argument_list|()
-operator|+
-literal|" "
-operator|+
+argument_list|,
 name|result
 operator|.
 name|getName
@@ -2751,10 +2749,10 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"> score "
-operator|+
+literal|"> score {}"
+argument_list|,
 name|score
 argument_list|)
 expr_stmt|;
@@ -2825,14 +2823,12 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"> "
-operator|+
+literal|"> {}>= {}"
+argument_list|,
 name|score
-operator|+
-literal|">= "
-operator|+
+argument_list|,
 name|minHierarchyScore
 argument_list|)
 expr_stmt|;
@@ -2849,17 +2845,15 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"> getHierarchy for "
-operator|+
+literal|"> getHierarchy for {} {}"
+argument_list|,
 name|result
 operator|.
 name|getGeoNameId
 argument_list|()
-operator|+
-literal|" "
-operator|+
+argument_list|,
 name|result
 operator|.
 name|getName
@@ -2937,17 +2931,15 @@ comment|//TODO: add additional checks based on possible
 comment|//      configuration here!
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"    - write hierarchy "
-operator|+
+literal|"    - write hierarchy {} {}"
+argument_list|,
 name|hierarchyEntry
 operator|.
 name|getGeoNameId
 argument_list|()
-operator|+
-literal|" "
-operator|+
+argument_list|,
 name|hierarchyEntry
 operator|.
 name|getName
