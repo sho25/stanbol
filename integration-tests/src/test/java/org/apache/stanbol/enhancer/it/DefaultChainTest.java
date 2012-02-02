@@ -174,6 +174,8 @@ name|buildPostRequest
 argument_list|(
 name|getEndpoint
 argument_list|()
+operator|+
+literal|"?executionmetadata=true"
 argument_list|)
 operator|.
 name|withHeader
@@ -196,7 +198,11 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"http://purl.org/dc/terms/creator.*MetaxaEngine"
+comment|//check execution metadata
+literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#executionPart"
+argument_list|,
+comment|//check execution of metaxa& if executionPlan is incuded
+literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#engine.*metaxa"
 argument_list|,
 literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
 argument_list|,
