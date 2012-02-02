@@ -3535,15 +3535,7 @@ name|ci
 argument_list|,
 name|uriInfo
 argument_list|,
-name|uriInfo
-operator|.
-name|getBaseUriBuilder
-argument_list|()
-operator|.
-name|path
-argument_list|(
-literal|"/contenthub/store"
-argument_list|)
+literal|"/contenthub/store/download"
 argument_list|,
 name|tcManager
 argument_list|,
