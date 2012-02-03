@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Service interface for suggesting hierarchical concepts from a specific scheme (a.k.a. taxonomy, thesaurus or  * concepts hierarchy) from the text content of a document or part of a document.  */
+comment|/**  * Service interface for suggesting hierarchical concepts from a specific scheme (a.k.a. taxonomy, thesaurus  * or concepts hierarchy) from the text content of a document or part of a document.  */
 end_comment
 
 begin_interface
@@ -172,17 +172,20 @@ parameter_list|()
 throws|throws
 name|ClassifierException
 function_decl|;
-comment|/**      * @return true if the classifier model can be updated with the {@code addConcept} / {@code removeConcept} /      *         {@code updateModel} / methods.      */
+comment|/**      * @return true if the classifier model can be updated with the {@code addConcept} / {@code removeConcept}      *         / {@code updateModel} / methods.      */
 name|boolean
 name|isUpdatable
 parameter_list|()
 function_decl|;
-comment|/**      * Register a topic and set it's ancestors in the taxonomy. Warning: re-adding an already existing topic      * can delete the underlying statistical model. Calling {@code updateModel} is necessary to rebuild the      * statistical model based on the hierarchical structure of the concepts and the registered training set.      *       * @param id      *            the new topic id      * @param broaderConcepts      *            list of directly broader concepts in the thesaurus      */
+comment|/**      * Register a topic and set it's ancestors in the taxonomy. Warning: re-adding an already existing topic      * can delete the underlying statistical model. Calling {@code updateModel} is necessary to rebuild the      * statistical model based on the hierarchical structure of the concepts and the registered training set.      *       * @param conceptUri      *            the new concept identifier      * @param primaryTopicUri      *            optional identifier of a resource best describing that concept.      * @param broaderConcepts      *            list of directly broader concepts in the thesaurus      */
 name|void
 name|addConcept
 parameter_list|(
 name|String
-name|id
+name|conceptUri
+parameter_list|,
+name|String
+name|primaryTopicUri
 parameter_list|,
 name|Collection
 argument_list|<
@@ -193,12 +196,28 @@ parameter_list|)
 throws|throws
 name|ClassifierException
 function_decl|;
-comment|/**      * Remove a topic from the thesaurus. WARNING: it is the caller responsibility to recursively remove or      * update any narrower topic that might hold a reference on this topic. Once the tree is updated,      * {@code updateModel} should be called to re-align the statistical model to match the new hierarchy by      * drawing examples from the dataset.      *       * @param id      *            if of the topic to remove from the model      */
+comment|/**      * Register a topic and set it's ancestors in the taxonomy. Warning: re-adding an already existing topic      * can delete the underlying statistical model. Calling {@code updateModel} is necessary to rebuild the      * statistical model based on the hierarchical structure of the concepts and the registered training set.      *       * @param conceptUri      *            the new concept identifier      * @param broaderConcepts      *            list of directly broader concepts in the thesaurus      */
+name|void
+name|addConcept
+parameter_list|(
+name|String
+name|conceptUri
+parameter_list|,
+name|Collection
+argument_list|<
+name|String
+argument_list|>
+name|broaderConcepts
+parameter_list|)
+throws|throws
+name|ClassifierException
+function_decl|;
+comment|/**      * Remove a topic from the thesaurus. WARNING: it is the caller responsibility to recursively remove or      * update any narrower topic that might hold a reference on this topic. Once the tree is updated,      * {@code updateModel} should be called to re-align the statistical model to match the new hierarchy by      * drawing examples from the dataset.      *       * @param conceptUri      *            if of the topic to remove from the model      */
 name|void
 name|removeConcept
 parameter_list|(
 name|String
-name|id
+name|conceptUri
 parameter_list|)
 throws|throws
 name|ClassifierException
