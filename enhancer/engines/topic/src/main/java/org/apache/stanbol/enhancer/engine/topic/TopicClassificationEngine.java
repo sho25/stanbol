@@ -125,16 +125,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Iterator
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|LinkedHashSet
 import|;
 end_import
@@ -219,22 +209,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Triple
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|UriRef
 import|;
 end_import
@@ -268,20 +242,6 @@ operator|.
 name|io
 operator|.
 name|FileUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|io
-operator|.
-name|IOUtils
 import|;
 end_import
 
@@ -1044,7 +1004,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enhancement Engine that provides the ability to assign a text document to a set of topics indexed in a  * dedicated Solr core. The assignment logic comes from terms frequencies match of the text of the document to  * categorize with the text indexed for each topic.  *   * The solr server is expected to be configured with the MoreLikeThisHandler and the matching fields from the  * engine configuration.  */
+comment|/**  * Enhancement Engine that provides the ability to assign a text document to a set of concepts indexed in a  * dedicated Solr core. The assignment logic comes from terms frequencies match of the text of the document to  * categorize with the text indexed for each concept.  *   * The data model of the concept tree follows the SKOS model: concepts are organized in a hierarchical  * "scheme" with a "broader" relation (and the inferred "narrower" inverse relation). Concepts can also  * optionally be grounded in the real world by the mean of a foaf:primaryTopic link to an external resource  * such as a DBpedia entry.  *   * A document is typically classified with the concept by using the dct:subject property to link the document  * (subject) to the concept (object).  *   * The Solr server is expected to be configured with the MoreLikeThisHandler and the matching fields from the  * engine configuration.  */
 end_comment
 
 begin_class
@@ -1138,7 +1098,7 @@ name|name
 operator|=
 name|TopicClassificationEngine
 operator|.
-name|TOPIC_URI_FIELD
+name|CONCEPT_URI_FIELD
 argument_list|)
 block|,
 annotation|@
@@ -1382,7 +1342,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|TOPIC_URI_FIELD
+name|CONCEPT_URI_FIELD
 init|=
 literal|"org.apache.stanbol.enhancer.engine.topic.uriField"
 decl_stmt|;
@@ -1393,6 +1353,14 @@ name|String
 name|BROADER_FIELD
 init|=
 literal|"org.apache.stanbol.enhancer.engine.topic.broaderField"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PRIMARY_TOPIC_FIELD
+init|=
+literal|"org.apache.stanbol.enhancer.engine.topic.primaryTopicField"
 decl_stmt|;
 specifier|public
 specifier|static
@@ -1571,7 +1539,7 @@ name|similarityField
 decl_stmt|;
 specifier|protected
 name|String
-name|topicUriField
+name|conceptUriField
 decl_stmt|;
 specifier|protected
 name|String
@@ -1757,13 +1725,13 @@ argument_list|,
 name|MODEL_ENTRY_ID_FIELD
 argument_list|)
 expr_stmt|;
-name|topicUriField
+name|conceptUriField
 operator|=
 name|getRequiredStringParam
 argument_list|(
 name|config
 argument_list|,
-name|TOPIC_URI_FIELD
+name|CONCEPT_URI_FIELD
 argument_list|)
 expr_stmt|;
 name|entryTypeField
@@ -1952,11 +1920,11 @@ return|return
 name|CANNOT_ENHANCE
 return|;
 block|}
-comment|//TODO ogrisel: validate that it is no problem that this does no longer
-comment|//check that the text is not empty
-comment|//        if (text.trim().length() == 0) {
-comment|//            return CANNOT_ENHANCE;
-comment|//        }
+comment|// TODO ogrisel: validate that it is no problem that this does no longer
+comment|// check that the text is not empty
+comment|// if (text.trim().length() == 0) {
+comment|// return CANNOT_ENHANCE;
+comment|// }
 block|}
 annotation|@
 name|Override
@@ -2233,7 +2201,7 @@ name|UriRef
 argument_list|(
 name|topic
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 argument_list|)
 argument_list|)
@@ -2549,7 +2517,7 @@ name|query
 operator|.
 name|setFields
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 expr_stmt|;
 name|query
@@ -2615,7 +2583,7 @@ name|result
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 decl_stmt|;
 if|if
@@ -2637,7 +2605,7 @@ literal|"Solr Core '%s' is missing required field '%s'."
 argument_list|,
 name|solrCoreId
 argument_list|,
-name|topicUriField
+name|conceptUriField
 argument_list|)
 argument_list|)
 throw|;
@@ -2861,7 +2829,7 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getNarrowerTopics
+name|getNarrowerConcepts
 parameter_list|(
 name|String
 name|broadTopicId
@@ -2873,7 +2841,7 @@ name|LinkedHashSet
 argument_list|<
 name|String
 argument_list|>
-name|narrowerTopics
+name|narrowerConcepts
 init|=
 operator|new
 name|LinkedHashSet
@@ -2890,7 +2858,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|narrowerTopics
+name|narrowerConcepts
 return|;
 block|}
 name|SolrServer
@@ -2932,14 +2900,14 @@ name|query
 operator|.
 name|addField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 expr_stmt|;
 name|query
 operator|.
 name|addSortField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
 name|SolrQuery
 operator|.
@@ -2966,7 +2934,7 @@ name|getResults
 argument_list|()
 control|)
 block|{
-name|narrowerTopics
+name|narrowerConcepts
 operator|.
 name|add
 argument_list|(
@@ -2974,7 +2942,7 @@ name|result
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 operator|.
 name|toString
@@ -3014,7 +2982,7 @@ argument_list|)
 throw|;
 block|}
 return|return
-name|narrowerTopics
+name|narrowerConcepts
 return|;
 block|}
 annotation|@
@@ -3024,7 +2992,7 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getBroaderTopics
+name|getBroaderConcepts
 parameter_list|(
 name|String
 name|id
@@ -3036,7 +3004,7 @@ name|LinkedHashSet
 argument_list|<
 name|String
 argument_list|>
-name|broaderTopics
+name|broaderConcepts
 init|=
 operator|new
 name|LinkedHashSet
@@ -3053,7 +3021,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|broaderTopics
+name|broaderConcepts
 return|;
 block|}
 name|SolrServer
@@ -3068,7 +3036,7 @@ init|=
 operator|new
 name|SolrQuery
 argument_list|(
-name|topicUriField
+name|conceptUriField
 operator|+
 literal|":"
 operator|+
@@ -3136,7 +3104,7 @@ range|:
 name|broaderFieldValues
 control|)
 block|{
-name|broaderTopics
+name|broaderConcepts
 operator|.
 name|add
 argument_list|(
@@ -3180,7 +3148,7 @@ argument_list|)
 throw|;
 block|}
 return|return
-name|broaderTopics
+name|broaderConcepts
 return|;
 block|}
 annotation|@
@@ -3190,7 +3158,7 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getTopicRoots
+name|getRootConcepts
 parameter_list|()
 throws|throws
 name|ClassifierException
@@ -3199,7 +3167,7 @@ name|LinkedHashSet
 argument_list|<
 name|String
 argument_list|>
-name|rootTopics
+name|rootConcepts
 init|=
 operator|new
 name|LinkedHashSet
@@ -3233,14 +3201,14 @@ name|query
 operator|.
 name|setFields
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 expr_stmt|;
 name|query
 operator|.
 name|setSortField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
 name|SolrQuery
 operator|.
@@ -3349,7 +3317,7 @@ name|getResults
 argument_list|()
 control|)
 block|{
-name|rootTopics
+name|rootConcepts
 operator|.
 name|add
 argument_list|(
@@ -3357,7 +3325,7 @@ name|result
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 operator|.
 name|toString
@@ -3395,31 +3363,31 @@ argument_list|)
 throw|;
 block|}
 return|return
-name|rootTopics
+name|rootConcepts
 return|;
 block|}
 annotation|@
 name|Override
 specifier|public
 name|void
-name|addTopic
+name|addConcept
 parameter_list|(
 name|String
-name|topicId
+name|conceptId
 parameter_list|,
 name|Collection
 argument_list|<
 name|String
 argument_list|>
-name|broaderTopics
+name|broaderConcepts
 parameter_list|)
 throws|throws
 name|ClassifierException
 block|{
 comment|// ensure that there is no previous topic registered with the same id
-name|removeTopic
+name|removeConcept
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 expr_stmt|;
 name|SolrInputDocument
@@ -3455,9 +3423,9 @@ name|metadataEntry
 operator|.
 name|addField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|)
 expr_stmt|;
 name|metadataEntry
@@ -3489,7 +3457,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|broaderTopics
+name|broaderConcepts
 operator|!=
 literal|null
 operator|&&
@@ -3504,7 +3472,7 @@ name|addField
 argument_list|(
 name|broaderField
 argument_list|,
-name|broaderTopics
+name|broaderConcepts
 argument_list|)
 expr_stmt|;
 block|}
@@ -3528,9 +3496,9 @@ name|modelEntry
 operator|.
 name|addField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|)
 expr_stmt|;
 name|modelEntry
@@ -3544,14 +3512,14 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|broaderTopics
+name|broaderConcepts
 operator|!=
 literal|null
 condition|)
 block|{
 name|invalidateModelFields
 argument_list|(
-name|broaderTopics
+name|broaderConcepts
 argument_list|,
 name|modelUpdateDateField
 argument_list|,
@@ -3616,7 +3584,7 @@ name|format
 argument_list|(
 literal|"Error adding topic with id '%s' on Solr Core '%s'"
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|,
 name|solrCoreId
 argument_list|)
@@ -3641,7 +3609,7 @@ name|Collection
 argument_list|<
 name|String
 argument_list|>
-name|topicIds
+name|conceptIds
 parameter_list|,
 name|String
 modifier|...
@@ -3652,7 +3620,7 @@ name|ClassifierException
 block|{
 if|if
 condition|(
-name|topicIds
+name|conceptIds
 operator|.
 name|isEmpty
 argument_list|()
@@ -3697,9 +3665,9 @@ decl_stmt|;
 for|for
 control|(
 name|String
-name|topicId
+name|conceptId
 range|:
-name|topicIds
+name|conceptIds
 control|)
 block|{
 name|SolrQuery
@@ -3716,7 +3684,7 @@ name|METADATA_ENTRY
 operator|+
 literal|" AND "
 operator|+
-name|topicUriField
+name|conceptUriField
 operator|+
 literal|":"
 operator|+
@@ -3724,7 +3692,7 @@ name|ClientUtils
 operator|.
 name|escapeQueryChars
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -3826,7 +3794,7 @@ name|StringUtils
 operator|.
 name|join
 argument_list|(
-name|topicIds
+name|conceptIds
 argument_list|,
 literal|", "
 argument_list|)
@@ -3849,10 +3817,10 @@ annotation|@
 name|Override
 specifier|public
 name|void
-name|removeTopic
+name|removeConcept
 parameter_list|(
 name|String
-name|topicId
+name|conceptId
 parameter_list|)
 throws|throws
 name|ClassifierException
@@ -3869,7 +3837,7 @@ name|solrServer
 operator|.
 name|deleteByQuery
 argument_list|(
-name|topicUriField
+name|conceptUriField
 operator|+
 literal|":"
 operator|+
@@ -3877,7 +3845,7 @@ name|ClientUtils
 operator|.
 name|escapeQueryChars
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3902,7 +3870,7 @@ name|format
 argument_list|(
 literal|"Error removing topic with id '%s' on Solr Core '%s'"
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|,
 name|solrCoreId
 argument_list|)
@@ -4008,7 +3976,7 @@ name|query
 operator|.
 name|addSortField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
 name|SolrQuery
 operator|.
@@ -4046,7 +4014,7 @@ name|q
 operator|+=
 literal|" AND "
 operator|+
-name|topicUriField
+name|conceptUriField
 operator|+
 literal|":["
 operator|+
@@ -4110,13 +4078,13 @@ argument_list|()
 control|)
 block|{
 name|String
-name|topicId
+name|conceptId
 init|=
 name|result
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 operator|.
 name|toString
@@ -4131,7 +4099,7 @@ condition|)
 block|{
 name|offset
 operator|=
-name|topicId
+name|conceptId
 expr_stmt|;
 block|}
 else|else
@@ -4310,13 +4278,13 @@ name|batch
 control|)
 block|{
 name|String
-name|topicId
+name|conceptId
 init|=
 name|result
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 operator|.
 name|toString
@@ -4339,16 +4307,16 @@ name|impactedTopics
 operator|.
 name|add
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 expr_stmt|;
 name|impactedTopics
 operator|.
 name|addAll
 argument_list|(
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4418,7 +4386,7 @@ argument_list|()
 decl_stmt|;
 name|updateTopic
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|,
 name|metadataEntryId
 argument_list|,
@@ -4477,13 +4445,13 @@ return|return
 name|updatedTopics
 return|;
 block|}
-comment|/**      * @param topicId      *            the topic model to update      * @param metadataEntryId      *            of the metadata entry id of the topic      * @param modelEntryId      *            of the model entry id of the topic      * @param impactedTopics      *            the list of impacted topics (e.g. the topic node and direct children)      * @param broaderTopics      *            the collection of broader to re-add in the broader field      */
+comment|/**      * @param conceptId      *            the topic model to update      * @param metadataEntryId      *            of the metadata entry id of the topic      * @param modelEntryId      *            of the model entry id of the topic      * @param impactedTopics      *            the list of impacted topics (e.g. the topic node and direct children)      * @param broaderConcepts      *            the collection of broader to re-add in the broader field      */
 specifier|protected
 name|void
 name|updateTopic
 parameter_list|(
 name|String
-name|topicId
+name|conceptId
 parameter_list|,
 name|String
 name|metadataId
@@ -4501,7 +4469,7 @@ name|Collection
 argument_list|<
 name|Object
 argument_list|>
-name|broaderTopics
+name|broaderConcepts
 parameter_list|)
 throws|throws
 name|TrainingSetException
@@ -4655,9 +4623,9 @@ name|modelEntry
 operator|.
 name|addField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|)
 expr_stmt|;
 name|modelEntry
@@ -4728,14 +4696,14 @@ name|metadataEntry
 operator|.
 name|addField
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|broaderTopics
+name|broaderConcepts
 operator|!=
 literal|null
 operator|&&
@@ -4750,7 +4718,7 @@ name|addField
 argument_list|(
 name|broaderField
 argument_list|,
-name|broaderTopics
+name|broaderConcepts
 argument_list|)
 expr_stmt|;
 block|}
@@ -4827,7 +4795,7 @@ name|format
 argument_list|(
 literal|"Error updating topic with id '%s' on Solr Core '%s'"
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|,
 name|solrCoreId
 argument_list|)
@@ -4856,7 +4824,7 @@ name|debug
 argument_list|(
 literal|"Sucessfully updated topic {} in {}s"
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|,
 call|(
 name|double
@@ -5044,7 +5012,7 @@ name|put
 argument_list|(
 name|TopicClassificationEngine
 operator|.
-name|TOPIC_URI_FIELD
+name|CONCEPT_URI_FIELD
 argument_list|,
 literal|"topic"
 argument_list|)
@@ -5457,13 +5425,13 @@ name|batch
 control|)
 block|{
 name|String
-name|topicId
+name|conceptId
 init|=
 name|topicEntry
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 operator|.
 name|toString
@@ -5491,9 +5459,9 @@ condition|)
 block|{
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|,
 literal|null
 argument_list|)
@@ -5505,7 +5473,7 @@ name|List
 argument_list|<
 name|String
 argument_list|>
-name|broaderTopics
+name|broaderConcepts
 init|=
 operator|new
 name|ArrayList
@@ -5517,16 +5485,16 @@ decl_stmt|;
 for|for
 control|(
 name|Object
-name|broaderTopic
+name|broaderConcept
 range|:
 name|broader
 control|)
 block|{
-name|broaderTopics
+name|broaderConcepts
 operator|.
 name|add
 argument_list|(
-name|broaderTopic
+name|broaderConcept
 operator|.
 name|toString
 argument_list|()
@@ -5535,11 +5503,11 @@ expr_stmt|;
 block|}
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|,
-name|broaderTopics
+name|broaderConcepts
 argument_list|)
 expr_stmt|;
 block|}
@@ -5631,7 +5599,7 @@ name|topicMetadata
 operator|.
 name|getFirstValue
 argument_list|(
-name|topicUriField
+name|conceptUriField
 argument_list|)
 operator|.
 name|toString
@@ -5782,7 +5750,7 @@ name|equals
 argument_list|(
 name|suggestedTopic
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 condition|)
 block|{
@@ -5959,7 +5927,7 @@ name|equals
 argument_list|(
 name|suggestedTopic
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 condition|)
 block|{
@@ -6170,7 +6138,7 @@ name|void
 name|updatePerformanceMetadata
 parameter_list|(
 name|String
-name|topicId
+name|conceptId
 parameter_list|,
 name|float
 name|precision
@@ -6221,7 +6189,7 @@ name|METADATA_ENTRY
 operator|+
 literal|" AND "
 operator|+
-name|topicUriField
+name|conceptUriField
 operator|+
 literal|":"
 operator|+
@@ -6229,7 +6197,7 @@ name|ClientUtils
 operator|.
 name|escapeQueryChars
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -6434,7 +6402,7 @@ name|format
 argument_list|(
 literal|"Error updating performance metadata for topic '%s' on Solr Core '%s'"
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|,
 name|solrCoreId
 argument_list|)
@@ -6656,7 +6624,7 @@ name|ClassificationReport
 name|getPerformanceEstimates
 parameter_list|(
 name|String
-name|topicId
+name|conceptId
 parameter_list|)
 throws|throws
 name|ClassifierException
@@ -6681,7 +6649,7 @@ name|METADATA_ENTRY
 operator|+
 literal|" AND "
 operator|+
-name|topicUriField
+name|conceptUriField
 operator|+
 literal|":"
 operator|+
@@ -6689,7 +6657,7 @@ name|ClientUtils
 operator|.
 name|escapeQueryChars
 argument_list|(
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -6726,7 +6694,7 @@ name|format
 argument_list|(
 literal|"'%s' is not a registered topic"
 argument_list|,
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 throw|;
@@ -6946,7 +6914,7 @@ name|format
 argument_list|(
 literal|"Error fetching the performance report for topic "
 operator|+
-name|topicId
+name|conceptId
 argument_list|)
 argument_list|)
 throw|;

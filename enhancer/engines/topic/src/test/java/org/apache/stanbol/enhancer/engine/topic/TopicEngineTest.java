@@ -723,7 +723,7 @@ name|set
 argument_list|(
 literal|"fieldnames"
 argument_list|,
-literal|"topic,popularity,paths,text"
+literal|"topic,popularity,broader,text"
 argument_list|)
 expr_stmt|;
 name|query
@@ -851,7 +851,7 @@ name|assertEquals
 argument_list|(
 name|classifier
 operator|.
-name|topicUriField
+name|conceptUriField
 argument_list|,
 literal|"topic"
 argument_list|)
@@ -910,7 +910,7 @@ name|remove
 argument_list|(
 name|TopicClassificationEngine
 operator|.
-name|TOPIC_URI_FIELD
+name|CONCEPT_URI_FIELD
 argument_list|)
 expr_stmt|;
 try|try
@@ -1067,7 +1067,7 @@ block|{
 comment|// Register the roots of the taxonomy
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"http://example.com/topics/root1"
 argument_list|,
@@ -1076,7 +1076,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"http://example.com/topics/root2"
 argument_list|,
@@ -1085,7 +1085,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"http://example.com/topics/root3"
 argument_list|,
@@ -1103,7 +1103,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/root1"
 argument_list|)
@@ -1118,7 +1118,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/root2"
 argument_list|)
@@ -1133,7 +1133,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/root3"
 argument_list|)
@@ -1148,7 +1148,7 @@ literal|3
 argument_list|,
 name|classifier
 operator|.
-name|getTopicRoots
+name|getRootConcepts
 argument_list|()
 operator|.
 name|size
@@ -1158,7 +1158,7 @@ expr_stmt|;
 comment|// Register some non root nodes
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"http://example.com/topics/node1"
 argument_list|,
@@ -1174,7 +1174,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"http://example.com/topics/node2"
 argument_list|,
@@ -1188,7 +1188,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"http://example.com/topics/node3"
 argument_list|,
@@ -1209,7 +1209,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/root1"
 argument_list|)
@@ -1224,7 +1224,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/root2"
 argument_list|)
@@ -1239,7 +1239,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/root3"
 argument_list|)
@@ -1254,7 +1254,7 @@ literal|3
 argument_list|,
 name|classifier
 operator|.
-name|getTopicRoots
+name|getRootConcepts
 argument_list|()
 operator|.
 name|size
@@ -1268,7 +1268,7 @@ literal|2
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/node1"
 argument_list|)
@@ -1283,7 +1283,7 @@ literal|1
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/node2"
 argument_list|)
@@ -1298,7 +1298,7 @@ literal|2
 argument_list|,
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"http://example.com/topics/node3"
 argument_list|)
@@ -1314,7 +1314,7 @@ literal|1
 argument_list|,
 name|classifier
 operator|.
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
 literal|"http://example.com/topics/root1"
 argument_list|)
@@ -1329,7 +1329,7 @@ literal|1
 argument_list|,
 name|classifier
 operator|.
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
 literal|"http://example.com/topics/root2"
 argument_list|)
@@ -1344,7 +1344,7 @@ literal|1
 argument_list|,
 name|classifier
 operator|.
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
 literal|"http://example.com/topics/root3"
 argument_list|)
@@ -1359,7 +1359,7 @@ literal|1
 argument_list|,
 name|classifier
 operator|.
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
 literal|"http://example.com/topics/node1"
 argument_list|)
@@ -1374,7 +1374,7 @@ literal|1
 argument_list|,
 name|classifier
 operator|.
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
 literal|"http://example.com/topics/node2"
 argument_list|)
@@ -1389,7 +1389,7 @@ literal|0
 argument_list|,
 name|classifier
 operator|.
-name|getNarrowerTopics
+name|getNarrowerConcepts
 argument_list|(
 literal|"http://example.com/topics/node3"
 argument_list|)
@@ -1509,7 +1509,7 @@ name|assertEquals
 argument_list|(
 name|bestSuggestion
 operator|.
-name|uri
+name|conceptUri
 argument_list|,
 literal|"Category:American_films"
 argument_list|)
@@ -1567,7 +1567,7 @@ literal|"urn:topics/law"
 decl_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|business
 argument_list|,
@@ -1576,7 +1576,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|technology
 argument_list|,
@@ -1585,7 +1585,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|sport
 argument_list|,
@@ -1594,7 +1594,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|music
 argument_list|,
@@ -1603,7 +1603,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|apple
 argument_list|,
@@ -1619,7 +1619,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|football
 argument_list|,
@@ -1633,7 +1633,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|worldcup
 argument_list|,
@@ -1913,7 +1913,7 @@ argument_list|(
 literal|0
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -1927,7 +1927,7 @@ argument_list|(
 literal|1
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -1941,7 +1941,7 @@ argument_list|(
 literal|2
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -1955,7 +1955,7 @@ argument_list|(
 literal|3
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 comment|// check that the scores are decreasing:
@@ -2052,7 +2052,7 @@ argument_list|(
 literal|0
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -2066,7 +2066,7 @@ argument_list|(
 literal|1
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -2080,7 +2080,7 @@ argument_list|(
 literal|2
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|suggestions
@@ -2113,7 +2113,7 @@ argument_list|(
 literal|0
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -2127,7 +2127,7 @@ argument_list|(
 literal|1
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 comment|// test incremental update of a single root node
@@ -2210,7 +2210,7 @@ argument_list|(
 literal|0
 argument_list|)
 operator|.
-name|uri
+name|conceptUri
 argument_list|)
 expr_stmt|;
 comment|// test incremental update of a leaf node (the parent topic needs re-indexing too)
@@ -2338,7 +2338,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|law
 argument_list|,
@@ -2372,7 +2372,7 @@ expr_stmt|;
 comment|// registering new subtopics invalidate the models of the parent as well
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"urn:topics/sportsmafia"
 argument_list|,
@@ -2450,7 +2450,7 @@ block|}
 comment|// register some topics
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"urn:t/001"
 argument_list|,
@@ -2459,7 +2459,7 @@ argument_list|)
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 literal|"urn:t/002"
 argument_list|,
@@ -2602,7 +2602,7 @@ name|assertTrue
 argument_list|(
 name|classifier
 operator|.
-name|getBroaderTopics
+name|getBroaderConcepts
 argument_list|(
 literal|"urn:t/002"
 argument_list|)
@@ -3161,7 +3161,7 @@ name|topic
 expr_stmt|;
 name|classifier
 operator|.
-name|addTopic
+name|addConcept
 argument_list|(
 name|topic
 argument_list|,
@@ -3685,7 +3685,7 @@ name|put
 argument_list|(
 name|TopicClassificationEngine
 operator|.
-name|TOPIC_URI_FIELD
+name|CONCEPT_URI_FIELD
 argument_list|,
 literal|"topic"
 argument_list|)

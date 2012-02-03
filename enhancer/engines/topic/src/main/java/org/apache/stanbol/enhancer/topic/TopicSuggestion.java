@@ -60,18 +60,20 @@ specifier|public
 class|class
 name|TopicSuggestion
 block|{
+comment|/**      * The URI of the concept in the hierarchical conceptual scheme (that holds the broader relationship)      */
 specifier|public
 specifier|final
 name|String
-name|uri
+name|conceptUri
 decl_stmt|;
+comment|/**      * Reference to the broader concepts of this suggestion.      */
 specifier|public
 specifier|final
 name|List
 argument_list|<
 name|String
 argument_list|>
-name|paths
+name|broader
 init|=
 operator|new
 name|ArrayList
@@ -80,6 +82,13 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/**      * The (optional) URI of a resource that grounds this concepts in the real world. Can be null.      */
+specifier|public
+specifier|final
+name|String
+name|primaryTopicUri
+decl_stmt|;
+comment|/**      * The (positive) score of the suggestion: higher is better. Zero would mean unrelated. The absolute value      * is meaningless: suggestions scores cannot be compared across different input text documents nor      * distinct concept schemes.      */
 specifier|public
 specifier|final
 name|float
@@ -89,13 +98,16 @@ specifier|public
 name|TopicSuggestion
 parameter_list|(
 name|String
-name|uri
+name|conceptUri
+parameter_list|,
+name|String
+name|primaryTopicUri
 parameter_list|,
 name|List
 argument_list|<
 name|String
 argument_list|>
-name|paths
+name|broader
 parameter_list|,
 name|float
 name|score
@@ -103,24 +115,30 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|uri
+name|conceptUri
 operator|=
-name|uri
+name|conceptUri
+expr_stmt|;
+name|this
+operator|.
+name|primaryTopicUri
+operator|=
+name|primaryTopicUri
 expr_stmt|;
 if|if
 condition|(
-name|paths
+name|broader
 operator|!=
 literal|null
 condition|)
 block|{
 name|this
 operator|.
-name|paths
+name|broader
 operator|.
 name|addAll
 argument_list|(
-name|paths
+name|broader
 argument_list|)
 expr_stmt|;
 block|}
@@ -135,7 +153,7 @@ specifier|public
 name|TopicSuggestion
 parameter_list|(
 name|String
-name|uri
+name|conceptUri
 parameter_list|,
 name|float
 name|score
@@ -143,7 +161,9 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|uri
+name|conceptUri
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,
@@ -165,13 +185,13 @@ name|format
 argument_list|(
 literal|"TopicSuggestion(\"%s\", [%s], %f)"
 argument_list|,
-name|uri
+name|conceptUri
 argument_list|,
 name|StringUtils
 operator|.
 name|join
 argument_list|(
-name|paths
+name|broader
 argument_list|,
 literal|"\", \""
 argument_list|)
