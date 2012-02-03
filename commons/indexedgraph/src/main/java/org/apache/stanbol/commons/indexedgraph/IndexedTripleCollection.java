@@ -391,8 +391,15 @@ condition|)
 block|{
 comment|//[n,n,n]
 return|return
+name|createIterator
+argument_list|(
+name|spo
+argument_list|,
+name|spo
+operator|.
 name|iterator
 argument_list|()
+argument_list|)
 return|;
 block|}
 specifier|final
@@ -676,28 +683,10 @@ name|size
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|Iterator
-argument_list|<
-name|Triple
-argument_list|>
-name|iterator
-parameter_list|()
-block|{
-return|return
-name|createIterator
-argument_list|(
-name|spo
-argument_list|,
-name|spo
-operator|.
-name|iterator
-argument_list|()
-argument_list|)
-return|;
-block|}
+comment|//    @Override
+comment|//    public Iterator<Triple> iterator() {
+comment|//        return createIterator(spo, spo.iterator());
+comment|//    }
 comment|/**      * Returns an Iterator that ensures that calls to {@link Iterator#remove()}      * remove items from all three indexes      * @param index      * @param base      * @return      */
 specifier|private
 name|Iterator
@@ -839,21 +828,6 @@ name|current
 argument_list|)
 expr_stmt|;
 block|}
-comment|//this bye-passes the parent remove methods
-comment|//because of that we need to manually dispatch remove events
-name|dispatchEvent
-argument_list|(
-operator|new
-name|RemoveEvent
-argument_list|(
-name|IndexedTripleCollection
-operator|.
-name|this
-argument_list|,
-name|current
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 block|}
 block|}
