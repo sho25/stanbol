@@ -431,11 +431,9 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|contenthub
+name|commons
 operator|.
 name|ldpath
-operator|.
-name|backend
 operator|.
 name|clerezza
 operator|.

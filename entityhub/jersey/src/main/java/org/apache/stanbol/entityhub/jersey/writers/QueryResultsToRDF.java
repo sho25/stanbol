@@ -137,6 +137,22 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|indexedgraph
+operator|.
+name|IndexedMGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|query
@@ -334,7 +350,7 @@ block|{
 name|resultGraph
 operator|=
 operator|new
-name|SimpleMGraph
+name|IndexedMGraph
 argument_list|()
 expr_stmt|;
 comment|//create a new Graph
@@ -554,7 +570,7 @@ comment|//any other implementation of the QueryResultList interface
 name|resultGraph
 operator|=
 operator|new
-name|SimpleMGraph
+name|IndexedMGraph
 argument_list|()
 expr_stmt|;
 comment|//create a new graph

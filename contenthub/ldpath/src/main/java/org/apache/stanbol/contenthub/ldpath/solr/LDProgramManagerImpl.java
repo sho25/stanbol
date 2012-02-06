@@ -261,11 +261,11 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|solr
+name|ldpath
 operator|.
-name|managed
+name|clerezza
 operator|.
-name|ManagedSolrServer
+name|ClerezzaBackend
 import|;
 end_import
 
@@ -277,15 +277,13 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|contenthub
+name|commons
 operator|.
-name|ldpath
+name|solr
 operator|.
-name|backend
+name|managed
 operator|.
-name|clerezza
-operator|.
-name|ClerezzaBackend
+name|ManagedSolrServer
 import|;
 end_import
 

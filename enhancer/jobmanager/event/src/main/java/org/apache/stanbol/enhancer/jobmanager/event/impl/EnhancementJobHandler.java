@@ -33,7 +33,7 @@ name|event
 operator|.
 name|Constants
 operator|.
-name|PROPERTY_JOB_MANAGER
+name|PROPERTY_EXECUTION
 import|;
 end_import
 
@@ -53,7 +53,7 @@ name|event
 operator|.
 name|Constants
 operator|.
-name|PROPERTY_EXECUTION
+name|PROPERTY_JOB_MANAGER
 import|;
 end_import
 
@@ -154,20 +154,6 @@ operator|.
 name|util
 operator|.
 name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|concurrent
-operator|.
-name|locks
-operator|.
-name|Lock
 import|;
 end_import
 

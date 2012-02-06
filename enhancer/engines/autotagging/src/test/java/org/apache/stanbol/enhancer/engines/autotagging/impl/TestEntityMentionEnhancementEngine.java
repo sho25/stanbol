@@ -728,7 +728,16 @@ argument_list|(
 operator|new
 name|UriRef
 argument_list|(
-literal|"urn:org.apache:stanbol.ehnacer:test:text-annotation:person"
+literal|"urn:org.apache:stanbol.ehnacer:test:text-annotation:"
+operator|+
+name|name
+operator|.
+name|replace
+argument_list|(
+literal|' '
+argument_list|,
+literal|'_'
+argument_list|)
 argument_list|)
 argument_list|,
 name|TextAnnotation
