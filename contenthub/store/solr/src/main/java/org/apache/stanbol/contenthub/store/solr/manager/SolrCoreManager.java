@@ -236,7 +236,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 init|=
 literal|"contenthub"
 decl_stmt|;
@@ -400,7 +400,7 @@ name|cache
 operator|.
 name|containsKey
 argument_list|(
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 condition|)
 block|{
@@ -411,7 +411,7 @@ name|managedSolrServer
 operator|.
 name|isManagedIndex
 argument_list|(
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 condition|)
 block|{
@@ -421,9 +421,9 @@ name|managedSolrServer
 operator|.
 name|createSolrIndex
 argument_list|(
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|,
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|,
 literal|null
 argument_list|)
@@ -799,7 +799,7 @@ block|{
 return|return
 name|getServer
 argument_list|(
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 return|;
 block|}
@@ -835,7 +835,7 @@ condition|)
 block|{
 name|coreName
 operator|=
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 expr_stmt|;
 block|}
 if|if

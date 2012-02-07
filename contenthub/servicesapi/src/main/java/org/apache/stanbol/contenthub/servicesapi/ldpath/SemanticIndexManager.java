@@ -72,7 +72,7 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|LDProgramManager
+name|SemanticIndexManager
 block|{
 comment|/**      * Saves LDPath program to persistent storage with given name and initializes a new Solr core with the      * same name      *       * @param programName      *            name of the submitted program, also will be name of corresponding Solr Core      * @param ldPathProgram      *            LDPath Program in the form of {@link String}      * @throws LDPathException      *             is thrown while parsing program and creating Solr Core      */
 specifier|public

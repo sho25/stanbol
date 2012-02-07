@@ -648,7 +648,7 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * HTTP GET method to retrieve related keywords from all resources defined within Contenthub.      *       * @param keyword      *            The keyword whose related keywords will be retrieved.      * @param ontologyURI      *            URI of the ontology to be used during the step in which related keywords are searched in      *            ontology resources. If this parameter is {@code null}, then no related keywords are returned      *            from ontology resources.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromAllSources(String, String)} only contains related keywords (no resultant documents      *         or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
+comment|/**      * HTTP GET method to retrieve related keywords from all resources defined within Contenthub.      *       * @param keyword      *            The keyword whose related keywords will be retrieved.      * @param graphURI      *            URI of the ontology to be used during the step in which related keywords are searched in      *            ontology resources. If this parameter is {@code null}, then no related keywords are returned      *            from ontology resources.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromAllSources(String, String)} only contains related keywords (no resultant documents      *         or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
 annotation|@
 name|GET
 annotation|@
@@ -674,10 +674,10 @@ parameter_list|,
 annotation|@
 name|QueryParam
 argument_list|(
-literal|"ontologyURI"
+literal|"graphURI"
 argument_list|)
 name|String
-name|ontologyURI
+name|graphURI
 parameter_list|,
 annotation|@
 name|Context
@@ -731,7 +731,7 @@ block|{
 name|String
 name|msg
 init|=
-literal|"RelatedKeywordResource.findAllRelatedKeywords requires \"keyword\" parameter. \"ontologyURI\" is optional"
+literal|"RelatedKeywordResource.findAllRelatedKeywords requires \"keyword\" parameter. \"graphURI\" is optional"
 decl_stmt|;
 name|log
 operator|.
@@ -748,13 +748,13 @@ name|msg
 argument_list|)
 throw|;
 block|}
-name|ontologyURI
+name|graphURI
 operator|=
 name|RestUtil
 operator|.
 name|nullify
 argument_list|(
-name|ontologyURI
+name|graphURI
 argument_list|)
 expr_stmt|;
 name|SearchResult
@@ -766,7 +766,7 @@ name|getRelatedKeywordsFromAllSources
 argument_list|(
 name|keyword
 argument_list|,
-name|ontologyURI
+name|graphURI
 argument_list|)
 decl_stmt|;
 return|return
@@ -894,7 +894,7 @@ name|headers
 argument_list|)
 return|;
 block|}
-comment|/**      * HTTP GET method to retrieve related keywords from ontology resources. Given the ontology URI, this      * method looks for subsumption/hierarchy relations among the concepts to come up with related keywords.      *       * @param keyword      *            The keyword whose related keywords will be retrieved from ontology resources.      * @param ontologyURI      *            URI of the ontology in which related keywords will be searched. The ontology should be      *            available in the Contenthub system.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)} contains only related keywords from ontology resources.      *         (No resultant documents or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
+comment|/**      * HTTP GET method to retrieve related keywords from ontology resources. Given the ontology URI, this      * method looks for subsumption/hierarchy relations among the concepts to come up with related keywords.      *       * @param keyword      *            The keyword whose related keywords will be retrieved from ontology resources.      * @param graphURI      *            URI of the ontology in which related keywords will be searched. The ontology should be      *            available in the Contenthub system.      * @param headers      *            HTTP headers      * @return JSON string which is constructed by {@link SearchResultWriter}. {@link SearchResult} returned      *         by {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)} contains only related keywords from ontology resources.      *         (No resultant documents or facet fields are returned within the {@link SearchResult}).      * @throws SearchException      */
 annotation|@
 name|GET
 annotation|@
@@ -925,10 +925,10 @@ parameter_list|,
 annotation|@
 name|QueryParam
 argument_list|(
-literal|"ontologyURI"
+literal|"graphURI"
 argument_list|)
 name|String
-name|ontologyURI
+name|graphURI
 parameter_list|,
 annotation|@
 name|Context
@@ -982,7 +982,7 @@ block|{
 name|String
 name|msg
 init|=
-literal|"RelatedKeywordResource.findOntologyRelatedKeywords requires \"keyword\" and \"ontologyURI\" parameters."
+literal|"RelatedKeywordResource.findOntologyRelatedKeywords requires \"keyword\" and \"graphURI\" parameters."
 decl_stmt|;
 name|log
 operator|.
@@ -999,18 +999,18 @@ name|msg
 argument_list|)
 throw|;
 block|}
-name|ontologyURI
+name|graphURI
 operator|=
 name|RestUtil
 operator|.
 name|nullify
 argument_list|(
-name|ontologyURI
+name|graphURI
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|ontologyURI
+name|graphURI
 operator|==
 literal|null
 condition|)
@@ -1018,7 +1018,7 @@ block|{
 name|String
 name|msg
 init|=
-literal|"RelatedKeywordResource.findOntologyRelatedKeywords requires \"keyword\" and \"ontologyURI\" parameters."
+literal|"RelatedKeywordResource.findOntologyRelatedKeywords requires \"keyword\" and \"graphURI\" parameters."
 decl_stmt|;
 name|log
 operator|.
@@ -1044,7 +1044,7 @@ name|getRelatedKeywordsFromOntology
 argument_list|(
 name|keyword
 argument_list|,
-name|ontologyURI
+name|graphURI
 argument_list|)
 decl_stmt|;
 return|return
@@ -1136,7 +1136,7 @@ block|{
 name|String
 name|msg
 init|=
-literal|"RelatedKeywordResource.findOntologyRelatedKeywords requires \"keyword\" and \"ontologyURI\" parameters."
+literal|"RelatedKeywordResource.findOntologyRelatedKeywords requires a \"keyword\" parameter."
 decl_stmt|;
 name|log
 operator|.

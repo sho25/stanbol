@@ -159,7 +159,7 @@ parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Sends the {@link SolrContentItem} to the {@link EnhancementJobManager} to enhance the content.      * Afterwards saves the item in the Solr core corresponding to the given<code>ldProgramName</code>.      *       * @param sci      *            The {@link SolrContentItem} to be enhanced and saved      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core to store the content item      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
+comment|/**      * Sends the {@link SolrContentItem} to the {@link EnhancementJobManager} to enhance the content.      * Afterwards saves the item in the Solr core corresponding to the given<code>indexName</code>.      *       * @param sci      *            The {@link SolrContentItem} to be enhanced and saved      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core to      *            store the content item      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
 name|String
 name|enhanceAndPut
 parameter_list|(
@@ -167,12 +167,12 @@ name|SolrContentItem
 name|sci
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Stores the passed {@link SolrContentItem} in the Solr core corresponding to the specified      *<code>ldProgramName</code>. If<code>null</code> is passed as the LDPath program name, the default Solr      * core of Contenthub is used.      *       * @param ci      *            {@link SolrContentItem} to be stored      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core to store the content item      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
+comment|/**      * Stores the passed {@link SolrContentItem} in the Solr core corresponding to the specified      *<code>indexName</code>. If<code>null</code> is passed as the LDPath program name (index name), the      * default Solr core of Contenthub is used.      *       * @param ci      *            {@link SolrContentItem} to be stored      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core to      *            store the content item      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
 name|String
 name|put
 parameter_list|(
@@ -180,12 +180,12 @@ name|SolrContentItem
 name|ci
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Retrieves the {@link SolrContentItem} from the Solr core corresponding to the specified      *<code>ldProgramName</code>. If<code>null</code> is passed as the LDPath program name, the default Solr      * core of Contenthub is used.      *       * @param id      *            The ID of {@link SolrContentItem} to be retrieved.      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core from which the content item will      *            be retrieved      * @return {@link SolrContentItem} having the specified id      * @throws StoreException      */
+comment|/**      * Retrieves the {@link SolrContentItem} from the Solr core corresponding to the specified      *<code>indexName</code>. If<code>null</code> is passed as the LDPath program name (index name), the      * default Solr core of Contenthub is used.      *       * @param id      *            The ID of {@link SolrContentItem} to be retrieved.      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core from      *            which the content item will be retrieved      * @return {@link SolrContentItem} having the specified id      * @throws StoreException      */
 name|SolrContentItem
 name|get
 parameter_list|(
@@ -193,12 +193,12 @@ name|String
 name|id
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Deletes the {@link ContentItem} from the default Solr core of Contenthub.      *       * @param id      *            The ID of the item to be deleted.      */
+comment|/**      * Deletes the {@link ContentItem} from the default Solr core/index of Contenthub.      *       * @param id      *            The ID of the item to be deleted.      */
 name|void
 name|deleteById
 parameter_list|(
@@ -208,7 +208,7 @@ parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Deletes the {@link ContentItem} from the default Solr core corresponding to the given      *<code>ldProgramName</code> of the Contenthub.      *       * @param id      *            The ID of the item to be deleted.      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core from which the content item will      *            be deleted      * @throws StoreException      */
+comment|/**      * Deletes the {@link ContentItem} from the default Solr core corresponding to the given      *<code>indexName</code> of the Contenthub.      *       * @param id      *            The ID of the item to be deleted.      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core from      *            which the content item will be deleted      * @throws StoreException      */
 name|void
 name|deleteById
 parameter_list|(
@@ -216,7 +216,7 @@ name|String
 name|id
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|StoreException
@@ -234,7 +234,7 @@ parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Deletes the {@link ContentItem}s from the Solr core corresponding to the given      *<code>ldProgramName</code>.      *       * @param idList      *            The list of IDs of the items to be deleted.      * @param ldProgramName      *            LDPath program name to obtain the corresponding Solr core from which the content items will      *            be deleted      */
+comment|/**      * Deletes the {@link ContentItem}s from the Solr core corresponding to the given<code>indexName</code>.      *       * @param idList      *            The list of IDs of the items to be deleted.      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core from      *            which the content items will be deleted      */
 name|void
 name|deleteById
 parameter_list|(
@@ -245,7 +245,7 @@ argument_list|>
 name|idList
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|StoreException

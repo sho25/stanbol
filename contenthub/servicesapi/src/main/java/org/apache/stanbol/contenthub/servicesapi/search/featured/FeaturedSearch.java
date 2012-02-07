@@ -124,7 +124,7 @@ parameter_list|)
 throws|throws
 name|SearchException
 function_decl|;
-comment|/**      * This method returns a {@link SearchResult} as a unified search response. The response contains content      * items retrieved from the index, which is accessed using the given<code>ldProgramName</code>, of      * Contenthub for the given<code>queryTerm</code>. This name corresponds to a Solr Core name within      * Contenthub. It also consists of related keywords that are obtained from the available      * {@link RelatedKeywordSearch} instances. This method also takes an ontology URI. Using the URI, actual      * ontology is retrieved and it is used as related keyword source. To obtain related keywords, the given      * query term is tokenized with {@link #tokenizeEntities(String)}. And then, related keyword searchers are      * queried for all the query tokens. Furthermore, the {@link SearchResult} includes Solr facets that are      * obtained for the obtained content items.      *       * @param queryTerm      *            Query term for which the unified response will be obtained      * @param ontologyURI      *            URI of an ontology in which related keywords will be searched      * @param ldProgramName      *            LDPath program name which is used to obtained the corresponding Solr core which will be      *            searched for the given query term      * @return {@link SearchResult} for the given query term. For details of the response see      *         {@link SearchResult}.      * @throws SearchException      */
+comment|/**      * This method returns a {@link SearchResult} as a unified search response. The response contains content      * items retrieved from the index, which is accessed using the given<code>indexName</code>, of Contenthub      * for the given<code>queryTerm</code>. This name corresponds to a Solr Core name within Contenthub. It      * also consists of related keywords that are obtained from the available {@link RelatedKeywordSearch}      * instances. This method also takes an ontology URI. Using the URI, actual ontology is retrieved and it      * is used as related keyword source. To obtain related keywords, the given query term is tokenized with      * {@link #tokenizeEntities(String)}. And then, related keyword searchers are queried for all the query      * tokens. Furthermore, the {@link SearchResult} includes Solr facets that are obtained for the obtained      * content items.      *       * @param queryTerm      *            Query term for which the unified response will be obtained      * @param ontologyURI      *            URI of an ontology in which related keywords will be searched      * @param indexName      *            LDPath program name (name of the Solr core/index) which is used to obtained the      *            corresponding Solr core which will be searched for the given query term      * @return {@link SearchResult} for the given query term. For details of the response see      *         {@link SearchResult}.      * @throws SearchException      */
 name|SearchResult
 name|search
 parameter_list|(
@@ -135,7 +135,7 @@ name|String
 name|ontologyURI
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|SearchException
@@ -150,7 +150,7 @@ parameter_list|)
 throws|throws
 name|SearchException
 function_decl|;
-comment|/**      * This methods returns a {@link SearchResult} as a unified search response. The response contains content      * items retrieved from the index, which is accessed using the given<code>ldProgramName</code>, of      * Contenthub for the given<code>queryTerm</code>. This name corresponds to a Solr Core name within      * Contenthub. It also consists of related keywords that are obtained from the available      * {@link RelatedKeywordSearch} instances. This method also takes an ontology URI. Using the URI, actual      * ontology is obtained and it is used as related keyword source. To obtain related keywords, first the      * meaningful query terms are extracted from the Solr query and then they are tokenized with      * {@link #tokenizeEntities(String)}. And then, related keyword searchers are queried for all the query      * tokens. Furthermore, the {@link SearchResult} includes Solr facets that are obtained for the obtained      * content items.      *       * @param solrQuery      *            for which the search results will be obtained      * @return a unified response in a {@link SearchResult} containing actual content items, related keywords      *         and facets for the obtained content items.      * @throws SearchException      */
+comment|/**      * This methods returns a {@link SearchResult} as a unified search response. The response contains content      * items retrieved from the index, which is accessed using the given<code>indexName</code>, of      * Contenthub for the given<code>queryTerm</code>. This name corresponds to a Solr Core name within      * Contenthub. It also consists of related keywords that are obtained from the available      * {@link RelatedKeywordSearch} instances. This method also takes an ontology URI. Using the URI, actual      * ontology is obtained and it is used as related keyword source. To obtain related keywords, first the      * meaningful query terms are extracted from the Solr query and then they are tokenized with      * {@link #tokenizeEntities(String)}. And then, related keyword searchers are queried for all the query      * tokens. Furthermore, the {@link SearchResult} includes Solr facets that are obtained for the obtained      * content items.      *       * @param solrQuery      *            for which the search results will be obtained      * @return a unified response in a {@link SearchResult} containing actual content items, related keywords      *         and facets for the obtained content items.      * @throws SearchException      */
 name|SearchResult
 name|search
 parameter_list|(
@@ -161,7 +161,7 @@ name|String
 name|ontologyURI
 parameter_list|,
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|SearchException
@@ -176,7 +176,7 @@ parameter_list|()
 throws|throws
 name|SearchException
 function_decl|;
-comment|/**      * This method obtains the available field names of the index, corresponding to the given      *<code>ldProgramName</code> of Contenthub. This name corresponds to a Solr Core name within Contenthub.      *       * @param ldProgramName      *            Name of the index for which the field names will be obtained.      * @return {@link List} of field names related index      * @throws SearchException      */
+comment|/**      * This method obtains the available field names of the index, corresponding to the given      *<code>indexName</code> of Contenthub. This name corresponds to a Solr Core name within Contenthub.      *       * @param indexName      *            Name of the index for which the field names will be obtained.      * @return {@link List} of field names related index      * @throws SearchException      */
 name|List
 argument_list|<
 name|String
@@ -184,7 +184,7 @@ argument_list|>
 name|getFieldNames
 parameter_list|(
 name|String
-name|ldProgramName
+name|indexName
 parameter_list|)
 throws|throws
 name|SearchException

@@ -845,6 +845,17 @@ name|put
 argument_list|(
 name|NS_XSD
 operator|+
+literal|"int"
+argument_list|,
+literal|"int"
+argument_list|)
+expr_stmt|;
+name|typeMap
+operator|.
+name|put
+argument_list|(
+name|NS_XSD
+operator|+
 literal|"long"
 argument_list|,
 literal|"long"

@@ -337,7 +337,7 @@ name|servicesapi
 operator|.
 name|ldpath
 operator|.
-name|LDProgramManager
+name|SemanticIndexManager
 import|;
 end_import
 
@@ -485,9 +485,9 @@ annotation|@
 name|Service
 specifier|public
 class|class
-name|LDProgramManagerImpl
+name|SemanticIndexManagerImpl
 implements|implements
-name|LDProgramManager
+name|SemanticIndexManager
 block|{
 specifier|private
 specifier|final
@@ -498,7 +498,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|LDProgramManagerImpl
+name|SemanticIndexManagerImpl
 operator|.
 name|class
 argument_list|)

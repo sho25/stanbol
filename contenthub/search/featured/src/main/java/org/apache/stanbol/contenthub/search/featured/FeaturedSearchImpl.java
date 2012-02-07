@@ -1495,6 +1495,8 @@ operator|.
 name|solrDocument2solrContentItem
 argument_list|(
 name|solrDocument
+argument_list|,
+name|ldProgramName
 argument_list|)
 argument_list|)
 expr_stmt|;

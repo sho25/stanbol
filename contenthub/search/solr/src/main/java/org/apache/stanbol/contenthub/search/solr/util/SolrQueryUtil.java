@@ -462,6 +462,33 @@ name|getValue
 argument_list|()
 control|)
 block|{
+if|if
+condition|(
+name|SolrVocabulary
+operator|.
+name|isNameRangeField
+argument_list|(
+name|fieldName
+argument_list|)
+condition|)
+block|{
+name|query
+operator|.
+name|addFilterQuery
+argument_list|(
+name|fieldName
+operator|+
+name|facetDelimiter
+operator|+
+operator|(
+name|String
+operator|)
+name|value
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|query
 operator|.
 name|addFilterQuery
@@ -480,6 +507,7 @@ operator|+
 name|quotation
 argument_list|)
 expr_stmt|;
+block|}
 comment|/*query.addFacetQuery(fieldName + facetDelimiter + (SolrVocabulary.isNameRangeField(fieldName) ? (String) value                                     : ClientUtils.escapeQueryChars(quotation + (String) value                                                                    + quotation)));*/
 comment|/*queryString = queryString                                       + " "                                       + and                                       + " "                                       + fieldName                                       + facetDelimiter                                       + (SolrVocabulary.isNameRangeField(fieldName) ? (String) value                                               : ClientUtils.escapeQueryChars(quotation + (String) value                                                                              + quotation));*/
 block|}

@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base resource which automatically redirects to "contenthub/store"  *   * @author anil.sinaci  *  */
+comment|/**  * Base resource which automatically redirects to "contenthub/contenthub/store"  *   * @author anil.sinaci  *  */
 end_comment
 
 begin_class
@@ -135,7 +135,7 @@ operator|.
 name|getBaseUri
 argument_list|()
 operator|+
-literal|"contenthub/store/"
+literal|"contenthub/contenthub/store/"
 argument_list|)
 argument_list|)
 operator|.

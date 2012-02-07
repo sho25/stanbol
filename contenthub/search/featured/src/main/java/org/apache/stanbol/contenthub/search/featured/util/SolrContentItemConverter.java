@@ -108,6 +108,9 @@ name|solrDocument2solrContentItem
 parameter_list|(
 name|SolrDocument
 name|solrDocument
+parameter_list|,
+name|String
+name|indexName
 parameter_list|)
 block|{
 return|return
@@ -116,6 +119,8 @@ argument_list|(
 name|solrDocument
 argument_list|,
 literal|null
+argument_list|,
+name|indexName
 argument_list|)
 return|;
 block|}
@@ -129,6 +134,9 @@ name|solrDocument
 parameter_list|,
 name|String
 name|baseURI
+parameter_list|,
+name|String
+name|indexName
 parameter_list|)
 block|{
 name|String
@@ -204,7 +212,11 @@ condition|?
 operator|(
 name|baseURI
 operator|+
-literal|"contenthub/store/content/"
+literal|"contenthub/"
+operator|+
+name|indexName
+operator|+
+literal|"/store/content/"
 operator|+
 name|id
 operator|)

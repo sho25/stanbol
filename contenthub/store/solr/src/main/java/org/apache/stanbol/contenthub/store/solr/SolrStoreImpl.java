@@ -635,7 +635,7 @@ name|servicesapi
 operator|.
 name|ldpath
 operator|.
-name|LDProgramManager
+name|SemanticIndexManager
 import|;
 end_import
 
@@ -997,7 +997,7 @@ decl_stmt|;
 annotation|@
 name|Reference
 specifier|private
-name|LDProgramManager
+name|SemanticIndexManager
 name|ldProgramManager
 decl_stmt|;
 specifier|private
@@ -1970,7 +1970,7 @@ name|equals
 argument_list|(
 name|SolrCoreManager
 operator|.
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 condition|)
 block|{
@@ -2927,7 +2927,7 @@ condition|)
 block|{
 name|doc
 operator|.
-name|setField
+name|addField
 argument_list|(
 name|fieldName
 operator|.
@@ -2961,7 +2961,7 @@ name|id
 argument_list|,
 name|SolrCoreManager
 operator|.
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 return|;
 block|}
@@ -3676,7 +3676,7 @@ name|id
 argument_list|,
 name|SolrCoreManager
 operator|.
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 expr_stmt|;
 block|}
@@ -3858,7 +3858,7 @@ name|idList
 argument_list|,
 name|SolrCoreManager
 operator|.
-name|CONTENTHUB_SOLR_SERVER_NAME
+name|CONTENTHUB_DEFAULT_INDEX_NAME
 argument_list|)
 expr_stmt|;
 block|}

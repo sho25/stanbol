@@ -1506,7 +1506,7 @@ name|jObj
 operator|.
 name|put
 argument_list|(
-literal|"id"
+literal|"uri"
 argument_list|,
 name|ContentItemIDOrganizer
 operator|.
