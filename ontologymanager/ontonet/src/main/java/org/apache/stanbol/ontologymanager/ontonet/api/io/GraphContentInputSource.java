@@ -177,15 +177,13 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
+name|commons
 operator|.
-name|ontonet
-operator|.
-name|impl
+name|owl
 operator|.
 name|util
 operator|.
-name|OntologyUtils
+name|OWLUtils
 import|;
 end_import
 
@@ -197,11 +195,15 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|owl
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
 operator|.
 name|util
 operator|.
-name|OWLUtils
+name|OntologyUtils
 import|;
 end_import
 

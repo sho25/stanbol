@@ -11,6 +11,8 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
 name|owl
 operator|.
 name|util
@@ -140,6 +142,24 @@ operator|.
 name|storage
 operator|.
 name|SimpleTcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|owl
+operator|.
+name|util
+operator|.
+name|OWLUtils
 import|;
 end_import
 

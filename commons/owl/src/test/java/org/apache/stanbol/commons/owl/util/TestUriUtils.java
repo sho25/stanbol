@@ -11,6 +11,8 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
 name|owl
 operator|.
 name|util
@@ -26,6 +28,24 @@ operator|.
 name|Assert
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|owl
+operator|.
+name|util
+operator|.
+name|URIUtils
 import|;
 end_import
 

@@ -15,6 +15,8 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
 name|owl
 package|;
 end_package
@@ -48,6 +50,22 @@ operator|.
 name|util
 operator|.
 name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|owl
+operator|.
+name|RunSingleSPARQL
 import|;
 end_import
 

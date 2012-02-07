@@ -44,6 +44,12 @@ specifier|public
 interface|interface
 name|RefactorEnhancementEngineConf
 block|{
+comment|/**      * The component name used for the Configuration Service      */
+name|String
+name|NAME
+init|=
+literal|"org.apache.stanbol.enhancer.engines.refactor.RefactorEnhancementEngine"
+decl_stmt|;
 comment|/**      * The OntoNet scope that the engine should use.      */
 annotation|@
 name|Property

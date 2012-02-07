@@ -199,6 +199,26 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|jobs
+operator|.
+name|api
+operator|.
+name|Job
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
 name|owl
 operator|.
 name|transformation
@@ -214,6 +234,8 @@ operator|.
 name|apache
 operator|.
 name|stanbol
+operator|.
+name|commons
 operator|.
 name|owl
 operator|.
@@ -236,24 +258,6 @@ operator|.
 name|jena
 operator|.
 name|JenaReasoningService
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|jobs
-operator|.
-name|api
-operator|.
-name|Job
 import|;
 end_import
 
@@ -546,7 +550,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class executes the reasoning process, by delegating the actual work on the given {@see ReasoningService}.  * It can be used on real-time operations and as background {@see Job}  *   * Actually this class supports OWLApi and Jena based services.   * TODO In the future we may want to remove specific dependencies on service implementation from the executor.  *   * @author enridaga  */
+comment|/**  * This class executes the reasoning process, by delegating the actual work on the given {@see  * ReasoningService}. It can be used on real-time operations and as background {@see Job}  *   * Actually this class supports OWLApi and Jena based services. TODO In the future we may want to remove  * specific dependencies on service implementation from the executor.  *   * @author enridaga  */
 end_comment
 
 begin_class
@@ -691,7 +695,7 @@ operator|=
 name|parameters
 expr_stmt|;
 block|}
-comment|/** 	 * Execute a JenaReasoningService 	 *  	 * TODO: Add parameter to decide if the output graph must be deleted if 	 * exists 	 *  	 * @param s 	 * @param input 	 * @param rules 	 * @return 	 * @throws ReasoningServiceException  	 * @throws UnsupportedTaskException  	 */
+comment|/**      * Execute a JenaReasoningService      *       * TODO: Add parameter to decide if the output graph must be deleted if exists      *       * @param s      * @param input      * @param rules      * @return      * @throws ReasoningServiceException      * @throws UnsupportedTaskException      */
 specifier|private
 name|ReasoningServiceResult
 argument_list|<
@@ -1026,7 +1030,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * Executes the OWLApiReasoingService 	 *  	 * @param task 	 * @param s 	 * @param input 	 * @param rules 	 * @param targetGraphID 	 * @param parameters 	 * @return 	 * @throws InconsistentInputException  	 * @throws ReasoningServiceException  	 * @throws UnsupportedTaskException  	 */
+comment|/**      * Executes the OWLApiReasoingService      *       * @param task      * @param s      * @param input      * @param rules      * @param targetGraphID      * @param parameters      * @return      * @throws InconsistentInputException      * @throws ReasoningServiceException      * @throws UnsupportedTaskException      */
 specifier|private
 name|ReasoningServiceResult
 argument_list|<
@@ -1358,7 +1362,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** 	 * To save data in the triple store. 	 *  	 * @param data 	 * @param targetGraphID 	 * @throws IOException  	 */
+comment|/**      * To save data in the triple store.      *       * @param data      * @param targetGraphID      * @throws IOException      */
 specifier|protected
 name|void
 name|save
@@ -1574,7 +1578,7 @@ operator|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** 	 * General method for execution, delegates to specific implementations. 	 *  	 * @param task 	 * @param service 	 * @param targetGraphID 	 * @param parameters 	 * @return 	 * @throws ReasoningServiceException 	 * @throws UnsupportedTaskException 	 * @throws InconsistentInputException 	 */
+comment|/**      * General method for execution, delegates to specific implementations.      *       * @param task      * @param service      * @param targetGraphID      * @param parameters      * @return      * @throws ReasoningServiceException      * @throws UnsupportedTaskException      * @throws InconsistentInputException      */
 specifier|private
 name|ReasoningServiceResult
 argument_list|<

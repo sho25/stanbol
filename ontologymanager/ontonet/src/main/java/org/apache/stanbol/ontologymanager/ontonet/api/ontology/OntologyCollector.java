@@ -206,6 +206,7 @@ name|IRI
 name|ontologyIri
 parameter_list|)
 function_decl|;
+comment|/**      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param ontologyIri      * @param returnType      * @param merge      * @return      */
 parameter_list|<
 name|O
 parameter_list|>

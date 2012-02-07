@@ -39,6 +39,8 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
 name|owl
 operator|.
 name|util
