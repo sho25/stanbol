@@ -259,6 +259,22 @@ name|scr
 operator|.
 name|annotations
 operator|.
+name|Activate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
 name|Component
 import|;
 end_import
@@ -340,24 +356,6 @@ operator|.
 name|annotations
 operator|.
 name|Service
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|owl
-operator|.
-name|transformation
-operator|.
-name|OWLAPIToClerezzaConverter
 import|;
 end_import
 
@@ -462,6 +460,24 @@ operator|.
 name|servicesapi
 operator|.
 name|ServiceProperties
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|AbstractEnhancementEngine
 import|;
 end_import
 
@@ -797,6 +813,22 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|owl
+operator|.
+name|transformation
+operator|.
+name|OWLAPIToClerezzaConverter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|rules
 operator|.
 name|base
@@ -914,6 +946,20 @@ operator|.
 name|api
 operator|.
 name|RefactoringException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
+name|service
+operator|.
+name|cm
+operator|.
+name|ConfigurationException
 import|;
 end_import
 
@@ -1085,10 +1131,6 @@ begin_class
 annotation|@
 name|Component
 argument_list|(
-name|name
-operator|=
-literal|"org.apache.stanbol.enhancer.engines.refactor.RefactorEnhancementEngine.description"
-argument_list|,
 name|configurationFactory
 operator|=
 literal|true
@@ -1110,14 +1152,13 @@ argument_list|,
 name|immediate
 operator|=
 literal|true
+argument_list|,
+name|inherit
+operator|=
+literal|true
 argument_list|)
 annotation|@
 name|Service
-argument_list|(
-name|EnhancementEngine
-operator|.
-name|class
-argument_list|)
 annotation|@
 name|Properties
 argument_list|(
@@ -1129,71 +1170,83 @@ name|Property
 argument_list|(
 name|name
 operator|=
-name|RefactorEnhancementEngineConf
+name|EnhancementEngine
 operator|.
-name|SCOPE
+name|PROPERTY_NAME
 argument_list|,
+name|value
+operator|=
+literal|"seo_refactoring"
+argument_list|)
+block|}
+argument_list|)
+specifier|public
+class|class
+name|RefactorEnhancementEngine
+extends|extends
+name|AbstractEnhancementEngine
+argument_list|<
+name|RuntimeException
+argument_list|,
+name|RuntimeException
+argument_list|>
+implements|implements
+name|EnhancementEngine
+implements|,
+name|ServiceProperties
+block|{
+comment|/*      * TODO This are the scope and recipe IDs to be used by this implementation In future implementation this      * will be configurable      */
+annotation|@
+name|Property
+argument_list|(
 name|value
 operator|=
 literal|"seo"
-argument_list|,
-name|description
-operator|=
-literal|"engine.refactor.scope.description"
 argument_list|)
-block|,
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SCOPE
+init|=
+literal|"engine.refactor.scope"
+decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
-name|name
-operator|=
-name|RefactorEnhancementEngineConf
-operator|.
-name|RECIPE_LOCATION
-argument_list|,
 name|value
 operator|=
 literal|""
-argument_list|,
-name|description
-operator|=
-literal|"engine.refactor.recipe.description"
 argument_list|)
-block|,
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|RECIPE_LOCATION
+init|=
+literal|"engine.refactor.recipe.location"
+decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
-name|name
-operator|=
-name|RefactorEnhancementEngineConf
-operator|.
-name|RECIPE_ID
-argument_list|,
 name|value
 operator|=
 literal|"google_rich_snippet_rules"
-argument_list|,
-name|description
-operator|=
-literal|"engine.refactor.recipe.description"
 argument_list|)
-block|,
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|RECIPE_ID
+init|=
+literal|"engine.refactor.recipe.id"
+decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
-name|name
-operator|=
-name|RefactorEnhancementEngineConf
-operator|.
-name|SCOPE_CORE_ONTOLOGY
-argument_list|,
 name|cardinality
 operator|=
 literal|1000
-argument_list|,
-name|description
-operator|=
-literal|"engine.refactor.scope.core.ontology.description"
 argument_list|,
 name|value
 operator|=
@@ -1203,53 +1256,44 @@ block|,
 literal|""
 block|}
 argument_list|)
-block|,
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SCOPE_CORE_ONTOLOGY
+init|=
+literal|"engine.refactor.scope.core.ontology"
+decl_stmt|;
 annotation|@
 name|Property
 argument_list|(
-name|name
-operator|=
-name|RefactorEnhancementEngineConf
-operator|.
-name|APPEND_OTHER_ENHANCEMENT_GRAPHS
-argument_list|,
 name|boolValue
 operator|=
 literal|true
-argument_list|,
-name|description
-operator|=
-literal|"engine.refactor.append.graphs.description"
-argument_list|)
-block|,
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|RefactorEnhancementEngineConf
-operator|.
-name|USE_ENTITY_HUB
-argument_list|,
-name|boolValue
-operator|=
-literal|true
-argument_list|,
-name|description
-operator|=
-literal|"engine.refactor.entityhub.description"
-argument_list|)
-block|}
 argument_list|)
 specifier|public
-class|class
-name|RefactorEnhancementEngine
-implements|implements
-name|EnhancementEngine
-implements|,
-name|ServiceProperties
-block|{
-comment|/*      * TODO This are the scope and recipe IDs to be used by this implementation In future implementation this      * will be configurable      */
+specifier|static
+specifier|final
+name|String
+name|APPEND_OTHER_ENHANCEMENT_GRAPHS
+init|=
+literal|"engine.refactor.append.graphs"
+decl_stmt|;
+annotation|@
+name|Property
+argument_list|(
+name|boolValue
+operator|=
+literal|true
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|USE_ENTITY_HUB
+init|=
+literal|"engine.refactor.entityhub"
+decl_stmt|;
 annotation|@
 name|Reference
 name|ONManager
@@ -1325,7 +1369,7 @@ parameter_list|)
 throws|throws
 name|EngineException
 block|{
-comment|/*          * Dulcifier can enhance only content items that are previously enhanced by other enhancement engines,          * as it must be the last engine in the chain.          *           * Works only if some enhancement has been produced.          */
+comment|/*          * The Refactor can enhance only content items that are previously enhanced by other enhancement engines,          * as it must be the last engine in the chain.          *           * Works only if some enhancement has been produced.          */
 name|MGraph
 name|mGraph
 init|=
@@ -1402,7 +1446,7 @@ literal|null
 argument_list|)
 decl_stmt|;
 comment|/*          * Now we prepare the OntoNet environment. First we create the OntoNet session in which run the whole          */
-comment|// String sessionID = null;
+comment|//String sessionID = null;
 name|Session
 name|tmpSession
 init|=
@@ -1444,9 +1488,9 @@ name|session
 init|=
 name|tmpSession
 decl_stmt|;
-comment|// final String sessionIdentifier = sessionID;
+comment|//final String sessionIdentifier = sessionID;
 comment|/*              * We retrieve the session space              */
-comment|// OntologySpace sessionSpace = scope.getSessionSpace(sessionIdentifier);
+comment|//OntologySpace sessionSpace = scope.getSessionSpace(sessionIdentifier);
 name|log
 operator|.
 name|debug
@@ -1527,7 +1571,7 @@ argument_list|(
 name|entityReferenceString
 argument_list|)
 decl_stmt|;
-comment|/*                      * The RDF graph of an entity is fetched via the EntityHub. The getEntityOntology is a                      * method the do the job of asking the entity to the EntityHub and wrap the RDF graph into                      * an OWLOntology.                      */
+comment|/*                      * The RDF graph of an entity is fetched via the EntityHub. The getEntityOntology is a method                      * the do the job of asking the entity to the EntityHub and wrap the RDF graph into an                      * OWLOntology.                      */
 name|OWLOntology
 name|fetched
 init|=
@@ -1821,7 +1865,7 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|/*                      * We add to the set the graph containing the metadata generated by previous enhancement                      * engines. It is important becaus we want to menage during the refactoring also some                      * information fron that graph. As the graph is provided as a Clerezza MGraph, we first                      * need to convert it to an OWLAPI OWLOntology. There is no chance that the mGraph could                      * be null as it was previously controlled by the JobManager through the canEnhance method                      * and the computeEnhancement is always called iff the former returns true.                      */
+comment|/*                      * We add to the set the graph containing the metadata generated by previous enhancement                      * engines. It is important becaus we want to menage during the refactoring also some                      * information fron that graph. As the graph is provided as a Clerezza MGraph, we first need                      * to convert it to an OWLAPI OWLOntology. There is no chance that the mGraph could be null as                      * it was previously controlled by the JobManager through the canEnhance method and the                      * computeEnhancement is always called iff the former returns true.                      */
 name|OWLOntology
 name|fiseMetadataOntology
 init|=
@@ -1845,7 +1889,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/*              * We merge all the ontologies from the session space of the scope into a single ontology that              * will be used for the refactoring.              */
+comment|/*              * We merge all the ontologies from the session space of the scope into a single ontology that will be              * used for the refactoring.              */
 name|OWLOntologyMerger
 name|merger
 init|=
@@ -1876,7 +1920,7 @@ literal|"http://fise.iks-project.eu/dulcifier/integrity-check"
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|/*                  * To perform the refactoring of the ontology to a given vocabulary we use the Stanbol                  * Refactor.                  */
+comment|/*                  * To perform the refactoring of the ontology to a given vocabulary we use the Stanbol Refactor.                  */
 name|log
 operator|.
 name|debug
@@ -2006,7 +2050,7 @@ operator|+
 name|ontology
 argument_list|)
 expr_stmt|;
-comment|/*                  * The new generated ontology is converted to Clarezza format and than added os substitued to                  * the old mGraph.                  */
+comment|/*                  * The new generated ontology is converted to Clarezza format and than added os substitued to the                  * old mGraph.                  */
 if|if
 condition|(
 name|engineConfiguration
@@ -2286,6 +2330,13 @@ name|ois
 return|;
 block|}
 comment|/**      * Activating the component      *       * @param context      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
+annotation|@
+name|Activate
 specifier|protected
 name|void
 name|activate
@@ -2294,7 +2345,16 @@ specifier|final
 name|ComponentContext
 name|context
 parameter_list|)
+throws|throws
+name|ConfigurationException
 block|{
+name|super
+operator|.
+name|activate
+argument_list|(
+name|context
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|context
@@ -2339,7 +2399,7 @@ operator|.
 name|getProperties
 argument_list|()
 decl_stmt|;
-comment|// copy the properties to a map
+comment|//copy the properties to a map
 for|for
 control|(
 name|Enumeration
@@ -2382,13 +2442,31 @@ name|key
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Configuration property: "
+operator|+
+name|key
+operator|+
+literal|" :- "
+operator|+
+name|properties
+operator|.
+name|get
+argument_list|(
+name|key
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 name|engineConfiguration
 operator|=
 operator|new
 name|DefaultRefactorEnhancementEngineConf
 argument_list|(
-name|config
+name|properties
 argument_list|)
 expr_stmt|;
 name|initEngine
@@ -2432,7 +2510,7 @@ operator|.
 name|getScopeCoreOntology
 argument_list|()
 decl_stmt|;
-comment|/*          * String[] coreScopeOntologySet; if (obj instanceof String[]) { coreScopeOntologySet = (String[])          * obj; } else { String[] aux = new String[1]; aux[0] = (String) obj; coreScopeOntologySet = aux; }          */
+comment|/*         String[] coreScopeOntologySet;         if (obj instanceof String[]) {             coreScopeOntologySet = (String[]) obj;         } else {             String[] aux = new String[1];             aux[0] = (String) obj;             coreScopeOntologySet = aux;         }         */
 comment|// Step 2
 name|OntologyInputSource
 name|oisbase
@@ -2992,8 +3070,8 @@ name|ComponentFactory
 name|factory
 parameter_list|)
 block|{
-comment|// both create*** methods sync on the searcherAndDereferencerLock to avoid
-comment|// multiple component instances because of concurrent calls
+comment|//both create*** methods sync on the searcherAndDereferencerLock to avoid
+comment|//multiple component instances because of concurrent calls
 synchronized|synchronized
 init|(
 name|this
@@ -3373,18 +3451,6 @@ expr_stmt|;
 block|}
 return|return
 name|fetchedOntology
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getName
-parameter_list|()
-block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
 return|;
 block|}
 block|}

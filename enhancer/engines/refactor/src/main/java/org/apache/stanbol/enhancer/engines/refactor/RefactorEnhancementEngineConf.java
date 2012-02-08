@@ -51,90 +51,36 @@ init|=
 literal|"org.apache.stanbol.enhancer.engines.refactor.RefactorEnhancementEngine"
 decl_stmt|;
 comment|/**      * The OntoNet scope that the engine should use.      */
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-literal|"schema.org"
-argument_list|)
 name|String
 name|SCOPE
 init|=
 literal|"engine.refactor.scope"
 decl_stmt|;
 comment|/**      * The location from which the recipe is loaded.      */
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-literal|""
-argument_list|)
 name|String
 name|RECIPE_LOCATION
 init|=
-literal|"engine.refactor.recipe"
+literal|"engine.refactor.recipe.location"
 decl_stmt|;
 comment|/**      * The ID used for identifying the recipe in the RuleStore.      */
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-literal|""
-argument_list|)
 name|String
 name|RECIPE_ID
 init|=
 literal|"engine.refactor.recipe.id"
 decl_stmt|;
 comment|/**      * The set of ontology URIs that should be loaded in the core space of the scope.      */
-annotation|@
-name|Property
-argument_list|(
-name|value
-operator|=
-block|{
-literal|"http://ontologydesignpatterns.org/ont/iks/kres/dbpedia_demo.owl"
-block|,
-literal|""
-block|}
-argument_list|)
 name|String
 name|SCOPE_CORE_ONTOLOGY
 init|=
 literal|"engine.refactor.scope.core.ontology"
 decl_stmt|;
 comment|/**      * If true: the previously generated RDF is deleted and substituted with the new one.       * If false: the new one is appended to the old RDF.       * Possible value in the configuration: true or false.      */
-annotation|@
-name|Property
-argument_list|(
-name|boolValue
-operator|=
-literal|true
-argument_list|,
-name|description
-operator|=
-literal|"If true: the previously generated RDF is deleted and substituted with the new one. If false: the new one is appended to the old RDF. Possible value: true or false."
-argument_list|)
 name|String
 name|APPEND_OTHER_ENHANCEMENT_GRAPHS
 init|=
 literal|"engine.refactor.append.graphs"
 decl_stmt|;
 comment|/**      * If true: entities are fetched via the EntityHub.       * If false: entities are fetched on-line.       * Possible value in the configuration: true or false.      */
-annotation|@
-name|Property
-argument_list|(
-name|boolValue
-operator|=
-literal|true
-argument_list|,
-name|description
-operator|=
-literal|"If true: entities are fetched via the EntityHub. If false: entities are fetched on-line. Possible value: true or false."
-argument_list|)
 name|String
 name|USE_ENTITY_HUB
 init|=
