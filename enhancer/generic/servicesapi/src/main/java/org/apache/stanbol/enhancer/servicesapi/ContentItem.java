@@ -130,7 +130,7 @@ name|Blob
 name|getBlob
 parameter_list|()
 function_decl|;
-comment|/**      * A content item may consists of multiple parts, while the part with index 0 should always be a blob,      * higher position may be used by Enhancer to story arbitrary objects, such objects can be used for       * accessing the precomputations of EnhancementEngines previous in the chain.      *       */
+comment|/**      * A content item may consists of multiple parts, while the part with index 0 should always be a blob,      * higher position may be used by Enhancer to story arbitrary objects, such objects can be used for       * accessing the precomputations of EnhancementEngines previous in the chain.      * @throws NoSuchPartException if no part with the parsed index exists      * @throws ClassCastException if the class of the part is not compatiple with      * the requested class      * @throws IllegalArgumentException if<code>null</code> is parsed as      * clazz.      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -149,7 +149,7 @@ parameter_list|)
 throws|throws
 name|NoSuchPartException
 function_decl|;
-comment|/**      * Each part of the content item has a URI. EnhancementEngines typically access parts by their Uri as the      * position may vary depending on the chain.      */
+comment|/**      * Each part of the content item has a URI. EnhancementEngines typically access parts by their Uri as the      * position may vary depending on the chain.      * @throws NoSuchPartException if no part with the parsed uri exists      * @throws ClassCastException if the class of the part is not compatiple with      * the requested class      * @throws IllegalArgumentException if<code>null</code> is parsed as      * uri or clazz.      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -168,7 +168,7 @@ parameter_list|)
 throws|throws
 name|NoSuchPartException
 function_decl|;
-comment|/**      * Get the uri of the part at the specified index      */
+comment|/**      * Get the uri of the part at the specified index      * @throws NoSuchPartException if no part with the parsed index exists      */
 name|UriRef
 name|getPartUri
 parameter_list|(
@@ -178,7 +178,7 @@ parameter_list|)
 throws|throws
 name|NoSuchPartException
 function_decl|;
-comment|/**      * Add a new part to this ContentItem      *       * @param uriRef the URI of the part      * @param object the part      * @return the part replaced by the parsed object or<code>null</code> if      * no part with the parsed URI was present      */
+comment|/**      * Add a new part to this ContentItem      *       * @param uriRef the URI of the part      * @param object the part      * @return the part replaced by the parsed object or<code>null</code> if      * no part with the parsed URI was present      * @throws IllegalArgumentException if<code>null</code> is parsed as      * uriRef or object.      */
 name|Object
 name|addPart
 parameter_list|(
