@@ -1746,12 +1746,12 @@ name|content
 argument_list|,
 name|d
 operator|.
-name|getName
+name|getId
 argument_list|()
 argument_list|,
 name|d
 operator|.
-name|getId
+name|getName
 argument_list|()
 argument_list|,
 name|mimeType
