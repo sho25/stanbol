@@ -298,12 +298,12 @@ name|YardException
 throws|,
 name|IllegalArgumentException
 function_decl|;
-comment|/**      * Updates the store with the new state of the parsed representation      *      * @param represnetation the representation      * @return the representation as stored      * @throws NullPointerException If<code>null</code> is parsed as representation      * @throws IllegalArgumentException if the parsed representation is not present       * in the Yard (and can not be updated therefore). TODO: evaluate if this should      * really throw only a {@link RuntimeException}.      * @throws YardException On any error related to the Yard      */
+comment|/**      * Updates the store with the new state of the parsed representation      *      * @param representation the representation      * @return the representation as stored      * @throws NullPointerException If<code>null</code> is parsed as representation      * @throws IllegalArgumentException if the parsed representation is not present       * in the Yard (and can not be updated therefore). TODO: evaluate if this should      * really throw only a {@link RuntimeException}.      * @throws YardException On any error related to the Yard      */
 name|Representation
 name|update
 parameter_list|(
 name|Representation
-name|represnetation
+name|representation
 parameter_list|)
 throws|throws
 name|YardException
