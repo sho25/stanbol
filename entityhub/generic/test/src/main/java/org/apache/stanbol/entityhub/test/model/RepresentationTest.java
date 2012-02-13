@@ -3104,16 +3104,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|// test conversion
-name|rep
-operator|.
-name|add
-argument_list|(
-name|field
-argument_list|,
-name|url
-argument_list|)
-expr_stmt|;
+comment|// test empty reference
 name|Iterator
 argument_list|<
 name|Reference
@@ -3127,6 +3118,33 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
+name|assertFalse
+argument_list|(
+name|refs
+operator|.
+name|hasNext
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|// test conversion
+name|rep
+operator|.
+name|add
+argument_list|(
+name|field
+argument_list|,
+name|url
+argument_list|)
+expr_stmt|;
+name|refs
+operator|=
+name|rep
+operator|.
+name|getReferences
+argument_list|(
+name|field
+argument_list|)
+expr_stmt|;
 name|assertTrue
 argument_list|(
 name|refs

@@ -125,7 +125,9 @@ name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|Map
+operator|.
+name|Entry
 import|;
 end_import
 
@@ -135,9 +137,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-operator|.
-name|Entry
+name|Set
 import|;
 end_import
 
@@ -173,7 +173,7 @@ name|core
 operator|.
 name|utils
 operator|.
-name|TypeSaveIterator
+name|TypeSafeIterator
 import|;
 end_import
 
@@ -925,7 +925,7 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|TypeSaveIterator
+name|TypeSafeIterator
 argument_list|<
 name|T
 argument_list|>
@@ -2492,7 +2492,7 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|TypeSaveIterator
+name|TypeSafeIterator
 argument_list|<
 name|Reference
 argument_list|>

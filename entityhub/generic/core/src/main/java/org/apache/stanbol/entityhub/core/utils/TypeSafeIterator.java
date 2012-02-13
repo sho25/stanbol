@@ -36,7 +36,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|TypeSaveIterator
+name|TypeSafeIterator
 parameter_list|<
 name|T
 parameter_list|>
@@ -60,7 +60,7 @@ argument_list|(
 literal|"unchecked"
 argument_list|)
 specifier|public
-name|TypeSaveIterator
+name|TypeSafeIterator
 parameter_list|(
 name|Iterator
 argument_list|<

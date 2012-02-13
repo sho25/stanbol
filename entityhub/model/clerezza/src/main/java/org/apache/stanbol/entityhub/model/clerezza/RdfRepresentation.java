@@ -215,7 +215,7 @@ name|core
 operator|.
 name|utils
 operator|.
-name|TypeSaveIterator
+name|TypeSafeIterator
 import|;
 end_import
 
@@ -428,26 +428,6 @@ operator|.
 name|model
 operator|.
 name|UnsupportedTypeException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|rdf
-operator|.
-name|RdfResourceEnum
 import|;
 end_import
 
@@ -1232,7 +1212,7 @@ block|{
 comment|//native support for Clerezza types
 return|return
 operator|new
-name|TypeSaveIterator
+name|TypeSafeIterator
 argument_list|<
 name|T
 argument_list|>
