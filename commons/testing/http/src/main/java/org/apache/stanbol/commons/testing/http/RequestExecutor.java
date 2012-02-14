@@ -855,16 +855,9 @@ argument_list|,
 name|response
 argument_list|)
 expr_stmt|;
-name|assertEquals
-argument_list|(
-name|this
-operator|+
-literal|": expecting status "
-operator|+
-name|expected
-argument_list|,
-name|expected
-argument_list|,
+name|int
+name|status
+init|=
 name|response
 operator|.
 name|getStatusLine
@@ -872,6 +865,24 @@ argument_list|()
 operator|.
 name|getStatusCode
 argument_list|()
+decl_stmt|;
+name|assertEquals
+argument_list|(
+name|this
+operator|+
+literal|": expecting status "
+operator|+
+name|expected
+operator|+
+literal|" (content: "
+operator|+
+name|content
+operator|+
+literal|")"
+argument_list|,
+name|expected
+argument_list|,
+name|status
 argument_list|)
 expr_stmt|;
 return|return
