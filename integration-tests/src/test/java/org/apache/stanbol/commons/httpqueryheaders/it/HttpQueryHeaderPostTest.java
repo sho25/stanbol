@@ -328,7 +328,7 @@ name|withContent
 argument_list|(
 literal|"John Smith was born in London. But since ten years he "
 operator|+
-literal|"lives now in Paris."
+literal|"works for the Smith Coorperation and lives in Paris."
 argument_list|)
 argument_list|)
 operator|.

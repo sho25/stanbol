@@ -1137,6 +1137,9 @@ argument_list|)
 operator|.
 name|toLowerCase
 argument_list|()
+operator|.
+name|trim
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -1164,6 +1167,9 @@ name|nameValueSeparator
 operator|+
 literal|1
 argument_list|)
+operator|.
+name|trim
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
