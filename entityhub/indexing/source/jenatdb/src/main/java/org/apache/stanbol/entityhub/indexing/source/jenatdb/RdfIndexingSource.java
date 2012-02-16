@@ -2643,6 +2643,16 @@ name|entityNode
 operator|.
 name|isURI
 argument_list|()
+operator|&&
+comment|// it's unbelievable, but Jena URIs might be empty!
+operator|!
+name|entityNode
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 if|if
@@ -2696,7 +2706,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Current Entity %s is not a URI Node -> ignored"
+literal|"Current Entity '%s' is not a valid URI Node -> skiped"
 argument_list|,
 name|entityNode
 argument_list|)
