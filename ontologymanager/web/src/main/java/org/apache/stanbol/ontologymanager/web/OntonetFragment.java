@@ -793,7 +793,7 @@ name|LinkResource
 argument_list|(
 literal|"stylesheet"
 argument_list|,
-literal|"css/ontonet.css"
+literal|"style/ontonet.css"
 argument_list|,
 name|this
 argument_list|,
@@ -894,7 +894,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"actions/actions.js"
+literal|"scripts/actions.js"
 argument_list|,
 name|this
 argument_list|,

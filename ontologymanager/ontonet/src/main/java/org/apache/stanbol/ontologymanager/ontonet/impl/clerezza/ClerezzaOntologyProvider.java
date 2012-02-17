@@ -1980,12 +1980,11 @@ block|{
 return|return
 name|getStoredOntology
 argument_list|(
-name|getKey
-argument_list|(
 name|reference
-argument_list|)
 argument_list|,
 name|returnType
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
@@ -2011,13 +2010,44 @@ name|boolean
 name|forceMerge
 parameter_list|)
 block|{
-return|return
-name|getStoredOntology
-argument_list|(
+name|String
+name|key
+init|=
 name|getKey
 argument_list|(
 name|reference
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|key
+operator|==
+literal|null
+operator|||
+name|key
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"No key found for IRI {}"
+argument_list|,
+name|reference
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+else|else
+return|return
+name|getStoredOntology
+argument_list|(
+name|key
 argument_list|,
 name|returnType
 argument_list|,
@@ -2088,12 +2118,17 @@ condition|(
 name|identifier
 operator|==
 literal|null
+operator|||
+name|identifier
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Identifier cannot be null"
+literal|"Identifier cannot be null or empty."
 argument_list|)
 throw|;
 if|if
@@ -2120,9 +2155,12 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"No return type given for ontologies. Will return a {}"
+literal|"No return type given for the ontology. Will return a {}"
 argument_list|,
 name|returnType
+operator|.
+name|getCanonicalName
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -2170,6 +2208,9 @@ argument_list|(
 literal|"Return type "
 operator|+
 name|returnType
+operator|.
+name|getCanonicalName
+argument_list|()
 operator|+
 literal|" is not allowed in this implementation. Only allowed return types are "
 operator|+
@@ -2190,6 +2231,15 @@ name|identifier
 argument_list|)
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|tc
+operator|==
+literal|null
+condition|)
+return|return
+literal|null
+return|;
 if|if
 condition|(
 name|MGraph
@@ -2259,6 +2309,9 @@ operator|+
 literal|" as type "
 operator|+
 name|returnType
+operator|.
+name|getCanonicalName
+argument_list|()
 argument_list|,
 name|e
 argument_list|)

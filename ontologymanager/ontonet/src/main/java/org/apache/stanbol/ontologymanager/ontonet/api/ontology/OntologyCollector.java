@@ -250,6 +250,10 @@ name|boolean
 name|withClosure
 parameter_list|)
 function_decl|;
+name|int
+name|getOntologyCount
+parameter_list|()
+function_decl|;
 comment|/**      * Determines if the ontology identified by the supplied<i>logical</i> IRI has been loaded in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return true if an ontology with this ID has been loaded in this space.      */
 name|boolean
 name|hasOntology

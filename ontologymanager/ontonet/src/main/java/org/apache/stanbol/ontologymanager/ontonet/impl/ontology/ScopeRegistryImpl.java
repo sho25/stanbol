@@ -425,7 +425,6 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.ScopeRegistry#getActiveScopes()      */
 annotation|@
 name|Override
 specifier|public
@@ -472,7 +471,6 @@ return|return
 name|scopes
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.ScopeRegistry#getRegisteredScopes()      */
 annotation|@
 name|Override
 specifier|public
@@ -498,7 +496,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.ScopeRegistry#getScope(org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -518,7 +515,6 @@ name|scopeID
 argument_list|)
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.ScopeRegistry#getScopeRegistrationListeners()      */
 annotation|@
 name|Override
 specifier|public
@@ -533,7 +529,6 @@ return|return
 name|scopeListeners
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#isScopeActive(org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -568,7 +563,6 @@ name|scopeID
 argument_list|)
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#registerScope(eu.iksproject.kres.api.manager.      * ontology.OntologyScope)      */
 annotation|@
 name|Override
 specifier|public
@@ -588,7 +582,6 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#registerScope(eu.iksproject.kres.api.manager.      * ontology.OntologyScope, boolean)      */
 annotation|@
 name|Override
 specifier|public
@@ -631,7 +624,6 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#removeScopeRegistrationListener(eu.iksproject      * .kres.api.manager.ontology.ScopeEventListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -650,7 +642,6 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#setScopeActive(org.semanticweb.owlapi.model.IRI,      * boolean)      */
 annotation|@
 name|Override
 specifier|public
