@@ -86,6 +86,22 @@ operator|+
 literal|"registries/onmtest_additions.owl"
 argument_list|)
 decl_stmt|;
+comment|/**      * Default physical location of the ontology registry for testing.      */
+specifier|public
+specifier|static
+specifier|final
+name|IRI
+name|_REGISTRY_TEST_LOOP
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|__STANBOL_ONT_NAMESPACE
+operator|+
+literal|"registries/onmtest_inversepair.owl"
+argument_list|)
+decl_stmt|;
 comment|/**      * An ontology in test library 1 but not in test library 2.      */
 specifier|public
 specifier|static

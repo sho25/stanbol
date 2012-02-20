@@ -79,6 +79,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collections
 import|;
 end_import
@@ -151,24 +161,6 @@ name|clerezza
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|serializedform
-operator|.
-name|Serializer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
 name|simple
 operator|.
 name|storage
@@ -191,43 +183,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|OfflineConfiguration
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|ONManagerImpl
 import|;
 end_import
 
@@ -284,6 +240,26 @@ operator|.
 name|api
 operator|.
 name|RegistryManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|registry
+operator|.
+name|api
+operator|.
+name|model
+operator|.
+name|Library
 import|;
 end_import
 
@@ -461,21 +437,11 @@ class|class
 name|TestOntologyRegistry
 block|{
 specifier|private
-name|String
-name|scopeIri
-init|=
-literal|"Scope"
-decl_stmt|;
-specifier|private
-specifier|static
-name|ONManager
-name|onm
-decl_stmt|;
-specifier|private
 specifier|static
 name|RegistryManager
 name|regman
 decl_stmt|;
+comment|/*      * This ontology manager will be empty on every test, except that it will have mappings to test resources.      */
 specifier|private
 name|OWLOntologyManager
 name|virginOntologyManager
@@ -560,21 +526,6 @@ argument_list|,
 name|config
 argument_list|)
 expr_stmt|;
-comment|// An ONManager with no storage support and same offline settings as the registry manager.
-name|onm
-operator|=
-operator|new
-name|ONManagerImpl
-argument_list|(
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-name|offline
-argument_list|,
-name|config
-argument_list|)
-expr_stmt|;
 block|}
 comment|/**      * Resets the virgin ontology manager for each test.      *       * @throws Exception      */
 annotation|@
@@ -593,6 +544,7 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 expr_stmt|;
+comment|// Add mappings for any ontologies found in ontologies/registry
 name|URL
 name|url
 init|=
@@ -721,7 +673,7 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
-comment|// There are no libreries without ontologies in the test registry.
+comment|// There are no libraries without ontologies in the test registry.
 for|for
 control|(
 name|RegistryItem
@@ -740,6 +692,168 @@ name|hasChildren
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLoopInLibrary
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// Create the model from the looping registry.
+name|OWLOntology
+name|oReg
+init|=
+name|virginOntologyManager
+operator|.
+name|loadOntology
+argument_list|(
+name|Locations
+operator|.
+name|_REGISTRY_TEST_LOOP
+argument_list|)
+decl_stmt|;
+name|Set
+argument_list|<
+name|Registry
+argument_list|>
+name|rs
+init|=
+name|regman
+operator|.
+name|createModel
+argument_list|(
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+name|oReg
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// There has to be a single registry, with the expected number of children (one).
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|rs
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|Registry
+name|r
+init|=
+name|rs
+operator|.
+name|iterator
+argument_list|()
+operator|.
+name|next
+argument_list|()
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|r
+operator|.
+name|hasChildren
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|int
+name|count
+init|=
+literal|1
+decl_stmt|;
+name|assertEquals
+argument_list|(
+name|count
+argument_list|,
+name|r
+operator|.
+name|getChildren
+argument_list|()
+operator|.
+name|length
+argument_list|)
+expr_stmt|;
+comment|// There are no libreries without ontologies in the test registry.
+for|for
+control|(
+name|RegistryItem
+name|child
+range|:
+name|r
+operator|.
+name|getChildren
+argument_list|()
+control|)
+block|{
+name|assertTrue
+argument_list|(
+name|child
+operator|instanceof
+name|Library
+argument_list|)
+expr_stmt|;
+comment|// Check both parent-child relations.
+name|assertTrue
+argument_list|(
+name|child
+operator|.
+name|hasChildren
+argument_list|()
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|RegistryItem
+name|grandchild
+range|:
+name|child
+operator|.
+name|getChildren
+argument_list|()
+control|)
+block|{
+name|assertTrue
+argument_list|(
+name|grandchild
+operator|instanceof
+name|RegistryOntology
+argument_list|)
+expr_stmt|;
+name|assertTrue
+argument_list|(
+name|grandchild
+operator|.
+name|hasParents
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertTrue
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|grandchild
+operator|.
+name|getParents
+argument_list|()
+argument_list|)
+operator|.
+name|contains
+argument_list|(
+name|child
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 block|}
 comment|/**      * Verifies that, when loading multiple registries that add library information to each other, the overall      * model reflects the union of these registries.      *       * @throws Exception      */
 annotation|@
@@ -953,46 +1067,6 @@ block|}
 block|}
 block|}
 block|}
-comment|// /**
-comment|// * Verifies that the addition of a null or valid registry source to a session space works.
-comment|// */
-comment|// @Test
-comment|// public void testAddRegistryToSessionSpace() throws Exception {
-comment|// SessionOntologySpace space = null;
-comment|// space = onm.getOntologySpaceFactory().createSessionOntologySpace(scopeIri);
-comment|// space.setUp();
-comment|// // space.addOntology(new
-comment|// // OntologyRegistryIRISource(testRegistryIri,onm.getOwlCacheManager(),onm.getRegistryLoader()));
-comment|// space.addOntology(ontologySource);
-comment|// // FIXME : no longer use the top ontology?
-comment|// assertTrue(space.asOWLOntology() != null);
-comment|// assertTrue(space.getOntologies(true).contains(space.asOWLOntology()));
-comment|// }
-comment|//
-comment|// /**
-comment|// * Verifies that an ontology scope with a null or valid registry source is created correctly.
-comment|// */
-comment|// @Test
-comment|// public void testScopeCreationWithRegistry() throws Exception {
-comment|// OntologyScope scope = null;
-comment|// // The input source instantiation automatically loads the entire content of a registry, no need to
-comment|// // test loading methods individually.
-comment|// scope = onm.getOntologyScopeFactory().createOntologyScope(scopeIri, ontologySource);
-comment|// assertTrue(scope != null&& scope.getCoreSpace().asOWLOntology() != null);
-comment|// }
-comment|//
-comment|// /**
-comment|// * Verifies that an ontology space with a null or valid registry source is created correctly.
-comment|// */
-comment|// @Test
-comment|// public void testSpaceCreationWithRegistry() throws Exception {
-comment|// // setupOfflineMapper();
-comment|// CoreOntologySpace space = null;
-comment|// // The input source instantiation automatically loads the entire content of a registry, no need to
-comment|// // test loading methods individually.
-comment|// space = onm.getOntologySpaceFactory().createCoreOntologySpace(scopeIri, ontologySource);
-comment|// assertTrue(space != null&& space.asOWLOntology() != null);
-comment|// }
 block|}
 end_class
 
