@@ -160,6 +160,13 @@ name|LAZY_LOADING
 init|=
 literal|"org.apache.stanbol.ontologymanager.registry.laziness"
 decl_stmt|;
+comment|/**      * The key used to configure the retention policy for incomplete registries.      */
+specifier|public
+name|String
+name|RETAIN_INCOMPLETE
+init|=
+literal|"org.apache.stanbol.ontologymanager.registry.retainIncomplete"
+decl_stmt|;
 comment|/**      * The key used to configure the locations of the registries to be scanned by the registry manager.      */
 specifier|public
 name|String

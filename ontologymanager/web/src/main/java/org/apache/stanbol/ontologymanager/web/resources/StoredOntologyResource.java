@@ -810,6 +810,13 @@ name|size
 expr_stmt|;
 block|}
 block|}
+if|if
+condition|(
+name|smallest
+operator|!=
+literal|null
+condition|)
+block|{
 name|log
 operator|.
 name|debug
@@ -857,6 +864,7 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 name|log

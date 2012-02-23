@@ -187,7 +187,7 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLNamedIndividual
+name|OWLNamedObject
 import|;
 end_import
 
@@ -247,7 +247,7 @@ specifier|public
 name|Library
 name|createLibrary
 parameter_list|(
-name|OWLNamedIndividual
+name|OWLNamedObject
 name|ind
 parameter_list|)
 block|{
@@ -317,7 +317,7 @@ specifier|public
 name|RegistryOntology
 name|createRegistryOntology
 parameter_list|(
-name|OWLNamedIndividual
+name|OWLNamedObject
 name|ind
 parameter_list|)
 block|{

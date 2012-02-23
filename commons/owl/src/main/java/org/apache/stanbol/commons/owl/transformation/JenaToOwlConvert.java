@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_comment
@@ -22,194 +22,6 @@ operator|.
 name|transformation
 package|;
 end_package
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|ontology
-operator|.
-name|AnnotationProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|ontology
-operator|.
-name|DatatypeProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|ontology
-operator|.
-name|ObjectProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|ontology
-operator|.
-name|OntClass
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|ontology
-operator|.
-name|OntModel
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|ModelFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|Model
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|RDFNode
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|Statement
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|StmtIterator
-import|;
-end_import
 
 begin_import
 import|import
@@ -643,8 +455,196 @@ name|OWLOntologyMerger
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|ontology
+operator|.
+name|AnnotationProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|ontology
+operator|.
+name|DatatypeProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|ontology
+operator|.
+name|ObjectProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|ontology
+operator|.
+name|OntClass
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|ontology
+operator|.
+name|OntModel
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|Model
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|ModelFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|RDFNode
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|Resource
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|Statement
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|StmtIterator
+import|;
+end_import
+
 begin_comment
-comment|/**  *  * @author elvio  * @author andrea.nuzzolese  */
+comment|/**  *   * @author elvio  * @author andrea.nuzzolese  */
 end_comment
 
 begin_class
@@ -668,10 +668,10 @@ specifier|public
 name|JenaToOwlConvert
 parameter_list|()
 block|{}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|//////////////////////////////FUNCTIONS/////////////////////////////////////////
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts an ontology object from Jena to OWLapi  *  * @param jenamodel {An OntModel object}  * @param format {only in "RDF/XML"}  * @return {An OWLOntology  that is an owl object}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|// ////////////////////////////FUNCTIONS/////////////////////////////////////////
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts an ontology object from Jena to OWLapi      *       * @param jenamodel      *            {An OntModel object}      * @param format      *            {only in "RDF/XML"}      * @return {An OWLOntology that is an owl object}      */
 specifier|public
 specifier|synchronized
 name|OWLOntology
@@ -833,7 +833,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**  * This function converts an ontology object from Jena to OWLapi  *  * @param jenamodel {An OntModel object}  * @param format {only in "RDF/XML"}  * @return {An OWLOntology  that is an owl object}  */
+comment|/**      * This function converts an ontology object from Jena to OWLapi      *       * @param jenamodel      *            {An OntModel object}      * @param format      *            {only in "RDF/XML"}      * @return {An OWLOntology that is an owl object}      */
 specifier|public
 specifier|synchronized
 name|OWLOntology
@@ -1016,8 +1016,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts an ontology object from OWLapi to Jena  *  * @param owlmodel {An OWLOntology object}  * @param format {RDF/XML or TURTLE}  * @return {An OntModel that is a Jena object}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts an ontology object from OWLapi to Jena      *       * @param owlmodel      *            {An OWLOntology object}      * @param format      *            {RDF/XML or TURTLE}      * @return {An OntModel that is a Jena object}      */
 specifier|public
 specifier|synchronized
 name|OntModel
@@ -1280,8 +1280,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts every statments relative to a resource in an a set of OWLAxiom objects  *  * @param jenadata {A resource in the form (S,P,O), it could be any kind of resource (a class, a data property, an object property and an instance) except a litteral}  * @param format {The format of the ontology, i.e. "RDF/XML"}  * @return {A set of axiom in the form of Set<OWLAxiom>}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts every statments relative to a resource in an a set of OWLAxiom objects      *       * @param jenadata      *            {A resource in the form (S,P,O), it could be any kind of resource (a class, a data property,      *            an object property and an instance) except a litteral}      * @param format      *            {The format of the ontology, i.e. "RDF/XML"}      * @return {A set of axiom in the form of Set<OWLAxiom>}      */
 specifier|public
 specifier|synchronized
 name|Set
@@ -1488,8 +1488,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a set of OWLAxiom in an iterator over jena statements  *  * @param axioms  {A set of aximos}  * @param format {RDF/XML or TURTLE}  * @return {An iterator over statments}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a set of OWLAxiom in an iterator over jena statements      *       * @param axioms      *            {A set of aximos}      * @param format      *            {RDF/XML or TURTLE}      * @return {An iterator over statments}      */
 specifier|public
 specifier|synchronized
 name|StmtIterator
@@ -1645,8 +1645,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts any thingths relatives to an OWL entity in an iterator over Jena statement  *  * @param entity {It could be a class, an object property or a data property}  * @param owlmodel {OWLOntology model where to retrieve information about the entity}  * @param format {RDF/XML or TURTLE}  * @return {An iterator over jena statement}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts any thingths relatives to an OWL entity in an iterator over Jena statement      *       * @param entity      *            {It could be a class, an object property or a data property}      * @param owlmodel      *            {OWLOntology model where to retrieve information about the entity}      * @param format      *            {RDF/XML or TURTLE}      * @return {An iterator over jena statement}      */
 specifier|public
 specifier|synchronized
 name|StmtIterator
@@ -1723,7 +1723,7 @@ literal|"http://www.semanticweb.org/owlapi/ontologies/ontology"
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//If the entity is a class
+comment|// If the entity is a class
 if|if
 condition|(
 name|entity
@@ -1811,7 +1811,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//If the entity is a data property
+comment|// If the entity is a data property
 if|if
 condition|(
 name|entity
@@ -1899,7 +1899,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//If the entity is an object property
+comment|// If the entity is an object property
 if|if
 condition|(
 name|entity
@@ -1987,7 +1987,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//If the entity is a data type
+comment|// If the entity is a data type
 if|if
 condition|(
 name|entity
@@ -2075,7 +2075,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//If the entity is an individual
+comment|// If the entity is an individual
 if|if
 condition|(
 name|entity
@@ -2163,7 +2163,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//If the entity is an annotations property
+comment|// If the entity is an annotations property
 if|if
 condition|(
 name|entity
@@ -2305,8 +2305,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single OntClass of Jena to an OWLClass of OWLAPI  *  * @param jenadata {Jena class object}  * @param format {RDF/XML}  * @return {An OWLclass}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single OntClass of Jena to an OWLClass of OWLAPI      *       * @param jenadata      *            {Jena class object}      * @param format      *            {RDF/XML}      * @return {An OWLclass}      */
 specifier|public
 specifier|synchronized
 name|OWLClass
@@ -2430,8 +2430,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single OWLClass of OWLAPI to an OntClass of Jena  *  * @param data {An OWLClass}  * @param format {RDF/XML or TURTLE}  * @return {An OntClass}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single OWLClass of OWLAPI to an OntClass of Jena      *       * @param data      *            {An OWLClass}      * @param format      *            {RDF/XML or TURTLE}      * @return {An OntClass}      */
 specifier|public
 specifier|synchronized
 name|OntClass
@@ -2589,8 +2589,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single ObjectProperty of Jena to an OWLObjectProperty of OWLAPI  *  * @param jenadata {Jena ObjectProperty object}  * @param format {RDF/XML}  * @return {An OWLObjectProperty}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single ObjectProperty of Jena to an OWLObjectProperty of OWLAPI      *       * @param jenadata      *            {Jena ObjectProperty object}      * @param format      *            {RDF/XML}      * @return {An OWLObjectProperty}      */
 specifier|public
 specifier|synchronized
 name|OWLObjectProperty
@@ -2714,8 +2714,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single OWLObjectProperty of owl to an ObjectProperty of Jena  *  * @param data {An OWLObjectProperty object}  * @param format {RDF/XML or TURTLE}  * @return {An ObjectProperty}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single OWLObjectProperty of owl to an ObjectProperty of Jena      *       * @param data      *            {An OWLObjectProperty object}      * @param format      *            {RDF/XML or TURTLE}      * @return {An ObjectProperty}      */
 specifier|public
 specifier|synchronized
 name|ObjectProperty
@@ -2873,8 +2873,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a DatatypeProperty of Jena to and OWLDataProperty of owl  *  * @param jenadata {Jena DatatypeProperty object}  * @param format {RDF/XML}  * @return {An OWLDataProperty}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a DatatypeProperty of Jena to and OWLDataProperty of owl      *       * @param jenadata      *            {Jena DatatypeProperty object}      * @param format      *            {RDF/XML}      * @return {An OWLDataProperty}      */
 specifier|public
 specifier|synchronized
 name|OWLDataProperty
@@ -2998,8 +2998,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single OWLDataProperty of OWL to DatatypeProperty of Jena  *  * @param data {An OWLDataProperty object}  * @param format {RDF/XML or TURTLE}  * @return {A DatatypeProperty object}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single OWLDataProperty of OWL to DatatypeProperty of Jena      *       * @param data      *            {An OWLDataProperty object}      * @param format      *            {RDF/XML or TURTLE}      * @return {A DatatypeProperty object}      */
 specifier|public
 specifier|synchronized
 name|DatatypeProperty
@@ -3157,8 +3157,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single AnnotationProperty of Jena to an OWLAnnotationProperty of OWL  *  * @param jenadata {Jena DatatypeProperty object}  * @param format {RDF/XML}  * @return {An OWLAnnotationProperty object}  */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single AnnotationProperty of Jena to an OWLAnnotationProperty of OWL      *       * @param jenadata      *            {Jena DatatypeProperty object}      * @param format      *            {RDF/XML}      * @return {An OWLAnnotationProperty object}      */
 specifier|public
 specifier|synchronized
 name|OWLAnnotationProperty
@@ -3282,8 +3282,8 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
-comment|/**  * This function converts a single OWLAnnotationProperty of OWL to an AnnotationProperty of Jena  *  * @param data {An OWLAnnotationProperty object}  * @param format {RDF/XML or TURTLE}  * @return {An AnnotationProperty object}   */
+comment|// //////////////////////////////////////////////////////////////////////////////
+comment|/**      * This function converts a single OWLAnnotationProperty of OWL to an AnnotationProperty of Jena      *       * @param data      *            {An OWLAnnotationProperty object}      * @param format      *            {RDF/XML or TURTLE}      * @return {An AnnotationProperty object}      */
 specifier|public
 specifier|synchronized
 name|AnnotationProperty
@@ -3441,7 +3441,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|////////////////////////////////////////////////////////////////////////////////
+comment|// //////////////////////////////////////////////////////////////////////////////
 block|}
 end_class
 

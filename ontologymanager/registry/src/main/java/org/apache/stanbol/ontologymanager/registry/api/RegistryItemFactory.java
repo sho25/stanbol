@@ -99,7 +99,7 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|OWLNamedIndividual
+name|OWLNamedObject
 import|;
 end_import
 
@@ -130,7 +130,7 @@ comment|/**      * Creates a new {@link Library} object named after the ID of th
 name|Library
 name|createLibrary
 parameter_list|(
-name|OWLNamedIndividual
+name|OWLNamedObject
 name|ind
 parameter_list|)
 function_decl|;
@@ -146,7 +146,7 @@ comment|/**      * Creates a new {@link RegistryOntology} object named after the
 name|RegistryOntology
 name|createRegistryOntology
 parameter_list|(
-name|OWLNamedIndividual
+name|OWLNamedObject
 name|ind
 parameter_list|)
 function_decl|;
