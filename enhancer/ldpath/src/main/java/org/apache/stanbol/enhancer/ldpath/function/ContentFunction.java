@@ -27,7 +27,7 @@ name|util
 operator|.
 name|Collections
 operator|.
-name|iterator
+name|concat
 import|;
 end_import
 
@@ -419,10 +419,13 @@ name|Resource
 argument_list|>
 name|params
 init|=
-name|iterator
+name|concat
 argument_list|(
 name|args
 argument_list|)
+operator|.
+name|iterator
+argument_list|()
 init|;
 name|params
 operator|.
