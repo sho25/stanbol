@@ -1223,8 +1223,9 @@ decl_stmt|;
 name|int
 name|iterations
 init|=
-literal|1000
+literal|100
 decl_stmt|;
+comment|//reduced from 1000
 name|int
 name|graphsize
 init|=
@@ -1258,13 +1259,14 @@ name|TestCase
 argument_list|(
 name|sg
 argument_list|,
-literal|100
+literal|20
 argument_list|,
 literal|5
 argument_list|,
-literal|100
+literal|20
 argument_list|)
 decl_stmt|;
+comment|//reduced form 100,5,100
 name|log
 operator|.
 name|info

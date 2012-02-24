@@ -85,24 +85,6 @@ name|Triple
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|SimpleGraph
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
