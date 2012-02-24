@@ -401,6 +401,24 @@ name|core
 operator|.
 name|impl
 operator|.
+name|SimpleLiteralFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|impl
+operator|.
 name|TypedLiteralImpl
 import|;
 end_import
@@ -491,14 +509,35 @@ name|RDFBackend
 import|;
 end_import
 
+begin_import
+import|import
+name|at
+operator|.
+name|newmedialab
+operator|.
+name|ldpath
+operator|.
+name|model
+operator|.
+name|backend
+operator|.
+name|AbstractBackend
+import|;
+end_import
+
 begin_comment
-comment|/**  * Clerezza based implementation of {@link RDFBackend} interface. This implementation uses the  * {@link Resource} objects of Clerezza as processing unit RDFBackend.  *   * @author anil.sinaci  *   */
+comment|/**  * Clerezza based implementation of {@link RDFBackend} interface. This implementation uses the  * {@link Resource} objects of Clerezza as processing unit RDFBackend.<p>  *   * For type conversions of {@link TypedLiteral}s the {@link LiteralFactory}  * of Clerezza is used. In case parsed nodes are not {@link TypedLiteral} the  * super implementations of {@link AbstractBackend} are called as such also  * support converting values based on the string representation.  *   * @author anil.sinaci  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|ClerezzaBackend
+extends|extends
+name|AbstractBackend
+argument_list|<
+name|Resource
+argument_list|>
 implements|implements
 name|RDFBackend
 argument_list|<
@@ -968,20 +1007,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|doubleValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1391,20 +1424,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|longValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1502,20 +1529,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|booleanValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1553,20 +1574,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|dateTimeValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1604,20 +1619,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|dateValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1655,20 +1664,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|timeValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1706,20 +1709,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|floatValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1757,20 +1754,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|intValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1808,20 +1799,14 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
+return|return
+name|super
 operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
+name|integerValue
+argument_list|(
+name|resource
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 annotation|@
@@ -1834,73 +1819,17 @@ name|Resource
 name|resource
 parameter_list|)
 block|{
-if|if
-condition|(
-name|resource
-operator|instanceof
-name|TypedLiteral
-condition|)
-block|{
-try|try
-block|{
-return|return
-name|lf
-operator|.
-name|createObject
-argument_list|(
-name|BigDecimal
-operator|.
-name|class
-argument_list|,
-operator|(
-name|TypedLiteral
-operator|)
-name|resource
-argument_list|)
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|NoConvertorException
-name|e
-parameter_list|)
-block|{
 comment|//currently there is no converter for BigDecimal in clerezza
-comment|//so as a workaround use the lexical form
+comment|//so as a workaround use the lexical form (as provided by the super
+comment|//implementation
 return|return
-operator|new
-name|BigDecimal
-argument_list|(
-operator|(
-operator|(
-name|TypedLiteral
-operator|)
-name|resource
-operator|)
+name|super
 operator|.
-name|getLexicalForm
-argument_list|()
+name|decimalValue
+argument_list|(
+name|resource
 argument_list|)
 return|;
-block|}
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Resource "
-operator|+
-name|resource
-operator|.
-name|toString
-argument_list|()
-operator|+
-literal|" is not a TypedLiteral"
-argument_list|)
-throw|;
-block|}
 block|}
 annotation|@
 name|Override
