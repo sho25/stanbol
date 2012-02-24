@@ -93,6 +93,12 @@ name|em
 argument_list|(
 literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#"
 argument_list|)
+block|,
+comment|/**      * The FISE namespace (1st version of the Enhancement Structure).      * Currently the same as {@link NamespaceEnum#enhancer}      */
+name|fise
+argument_list|(
+literal|"http://fise.iks-project.eu/ontology/"
+argument_list|)
 block|;
 name|String
 name|ns
