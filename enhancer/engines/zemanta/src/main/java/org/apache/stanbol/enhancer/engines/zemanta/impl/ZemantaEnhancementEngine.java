@@ -33,6 +33,26 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
+name|helper
+operator|.
+name|EnhancementEngineHelper
+operator|.
+name|getReferences
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
 name|rdf
 operator|.
 name|Properties
@@ -482,6 +502,24 @@ operator|.
 name|core
 operator|.
 name|UriRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|impl
+operator|.
+name|PlainLiteralImpl
 import|;
 end_import
 
@@ -1938,7 +1976,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"process recognition "
 operator|+
@@ -1958,7 +1996,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> confidence :"
 operator|+
@@ -1986,7 +2024,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> anchor :"
 operator|+
@@ -2014,7 +2052,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> number of textAnnotations :"
 operator|+
@@ -2047,7 +2085,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> object :"
 operator|+
@@ -2079,8 +2117,6 @@ name|UriRef
 argument_list|>
 name|sameAs
 init|=
-name|EnhancementEngineHelper
-operator|.
 name|getReferences
 argument_list|(
 name|results
@@ -2113,7 +2149,7 @@ control|)
 empty_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> sameAs :"
 operator|+
@@ -2168,7 +2204,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"    -  target :"
 operator|+
@@ -2196,7 +2232,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"       o type :"
 operator|+
@@ -2239,7 +2275,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"       o title :"
 operator|+
@@ -2436,9 +2472,8 @@ name|entityEnhancement
 argument_list|,
 name|ENHANCER_ENTITY_LABEL
 argument_list|,
-name|literalFactory
-operator|.
-name|createTypedLiteral
+operator|new
+name|PlainLiteralImpl
 argument_list|(
 name|title
 argument_list|)
@@ -2583,9 +2618,8 @@ decl_stmt|;
 name|Literal
 name|anchorLiteral
 init|=
-name|literalFactory
-operator|.
-name|createTypedLiteral
+operator|new
+name|PlainLiteralImpl
 argument_list|(
 name|anchor
 argument_list|)

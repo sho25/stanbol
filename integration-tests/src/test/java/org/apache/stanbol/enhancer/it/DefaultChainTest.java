@@ -201,7 +201,7 @@ argument_list|(
 comment|//check execution metadata
 literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#executionPart"
 argument_list|,
-comment|//check execution of metaxa& if executionPlan is incuded
+comment|//check execution of metaxa& if executionPlan is included
 literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#engine.*metaxa"
 argument_list|,
 literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
@@ -213,6 +213,11 @@ argument_list|,
 literal|"http://purl.org/dc/terms/creator.*org.apache.stanbol.enhancer.engines.opennlp.*EngineCore"
 argument_list|,
 literal|"http://fise.iks-project.eu/ontology/entity-label.*Bob Marley"
+argument_list|,
+comment|//the following two lines test the use of plain literals (see STANBOL-509)
+literal|"http://fise.iks-project.eu/ontology/selected-text.*\"Bob Marley\"@en"
+argument_list|,
+literal|"http://fise.iks-project.eu/ontology/selection-context>.*people such as Bob Marley.\"@en"
 argument_list|)
 operator|.
 name|generateDocumentation
