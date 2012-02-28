@@ -642,11 +642,66 @@ operator|.
 name|startProcessing
 argument_list|()
 expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"++ w: {}"
+argument_list|,
+literal|"init execution"
+argument_list|)
+expr_stmt|;
+name|enhancementJob
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+try|try
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|">> w: {}"
+argument_list|,
+literal|"init execution"
+argument_list|)
+expr_stmt|;
 name|executeNextNodes
 argument_list|(
 name|enhancementJob
 argument_list|)
 expr_stmt|;
+block|}
+finally|finally
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"<< w: {}"
+argument_list|,
+literal|"init execution"
+argument_list|)
+expr_stmt|;
+name|enhancementJob
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 return|return
 name|o
@@ -1434,6 +1489,37 @@ name|getExecutable
 argument_list|()
 control|)
 block|{
+if|if
+condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"PREPARE execution of Engine {}"
+argument_list|,
+name|getEngine
+argument_list|(
+name|job
+operator|.
+name|getExecutionPlan
+argument_list|()
+argument_list|,
+name|job
+operator|.
+name|getExecutionNode
+argument_list|(
+name|executable
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 name|Dictionary
 argument_list|<
 name|String
@@ -1490,8 +1576,6 @@ name|debug
 argument_list|(
 literal|"SHEDULE execution of Engine {}"
 argument_list|,
-name|ExecutionPlanHelper
-operator|.
 name|getEngine
 argument_list|(
 name|job
@@ -1499,7 +1583,12 @@ operator|.
 name|getExecutionPlan
 argument_list|()
 argument_list|,
+name|job
+operator|.
+name|getExecutionNode
+argument_list|(
 name|executable
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

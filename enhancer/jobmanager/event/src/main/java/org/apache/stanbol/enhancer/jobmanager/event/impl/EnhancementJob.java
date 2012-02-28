@@ -1670,6 +1670,14 @@ operator|.
 name|lock
 argument_list|()
 expr_stmt|;
+name|NonLiteral
+name|executionNode
+init|=
+name|getExecutionNode
+argument_list|(
+name|execution
+argument_list|)
+decl_stmt|;
 name|log
 operator|.
 name|debug
@@ -1682,7 +1690,7 @@ name|getEngine
 argument_list|(
 name|executionPlan
 argument_list|,
-name|execution
+name|executionNode
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1700,16 +1708,13 @@ name|getEngine
 argument_list|(
 name|executionPlan
 argument_list|,
-name|execution
+name|executionNode
 argument_list|)
 argument_list|)
 expr_stmt|;
 name|setNodeCompleted
 argument_list|(
-name|getExecutionNode
-argument_list|(
-name|execution
-argument_list|)
+name|executionNode
 argument_list|)
 expr_stmt|;
 name|setExecutionCompleted
@@ -1736,7 +1741,7 @@ name|getEngine
 argument_list|(
 name|executionPlan
 argument_list|,
-name|execution
+name|executionNode
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2064,10 +2069,9 @@ name|executionNode
 argument_list|)
 condition|)
 block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
+name|String
+name|message
+init|=
 literal|"Unable to set state of ExectionNode '"
 operator|+
 name|executionNode
@@ -2100,6 +2104,19 @@ operator|+
 name|running
 operator|+
 literal|")!"
+decl_stmt|;
+name|log
+operator|.
+name|error
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+name|message
 argument_list|)
 throw|;
 block|}
@@ -2115,10 +2132,9 @@ argument_list|)
 condition|)
 block|{
 comment|// TODO maybe define an own Exception for such cases
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
+name|String
+name|message
+init|=
 literal|"Unable to set state of ExectionNode '"
 operator|+
 name|executionNode
@@ -2155,6 +2171,19 @@ operator|+
 name|running
 operator|+
 literal|")!"
+decl_stmt|;
+name|log
+operator|.
+name|error
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+name|message
 argument_list|)
 throw|;
 block|}
@@ -2681,9 +2710,11 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"<< r: {}"
+literal|"<< r: {}:{}"
 argument_list|,
 literal|"getExecutable"
+argument_list|,
+name|executable
 argument_list|)
 expr_stmt|;
 name|readLock
