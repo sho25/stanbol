@@ -543,7 +543,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"lib/jquery-1.5.1.js"
+literal|"lib/jquery-1.7.1.js"
 argument_list|,
 name|this
 argument_list|,
