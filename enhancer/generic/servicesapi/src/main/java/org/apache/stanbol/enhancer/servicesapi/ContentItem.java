@@ -189,6 +189,22 @@ name|Object
 name|object
 parameter_list|)
 function_decl|;
+comment|/**      * Removes a part - other than the main content part - from this ContentItem      * @param index the index of the part to remove. NOTE that index '0'       * - the main content part - can NOT be removed!      * @throws NoSuchPartException if no ContentPart with the parsed id exists      * @throws IllegalArgumentException it the parsed index&lt; 0      * @throws IllegalStateException if '0' is parsed as index. The index '0'       * - the main content part - can NOT be removed!      */
+name|void
+name|removePart
+parameter_list|(
+name|int
+name|index
+parameter_list|)
+function_decl|;
+comment|/**      * Removes a part - other than the main content part - from this ContentItem      * @param uriRef the uri of the part to remove. NOTE that the part with the      * uri<code>{@link #getPartUri(int) getPartUri(0)}</code> - the main       * content part - can NOT be removed!      * @throws NoSuchPartException if no ContentPart with the parsed uri exists      * @throws IllegalArgumentException it the parsed uri is<code>null</code>      * @throws IllegalStateException if the parsed uri is equals to      *<code>{@link #getPartUri(int) getPartUri(0)}</code>. This uri refers to      * the main content part. This part can NOT be removed by this method      */
+name|void
+name|removePart
+parameter_list|(
+name|UriRef
+name|uriRef
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
