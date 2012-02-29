@@ -1176,7 +1176,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/*      * public static final String getExternalPlacesQuery() {      *       * String query = "PREFIX fise:<http://fise.iks-project.eu/ontology/>\n" +      * "PREFIX pf:<http://jena.hpl.hp.com/ARQ/property#>\n" + "PREFIX dc:<http://purl.org/dc/terms/>\n" +      * "SELECT distinct ?ref \n" + "WHERE {\n" + "  ?enhancement a fise:EntityAnnotation .\n" +      * "  ?enhancement dc:relation ?textEnh.\n" + "  ?enhancement fise:entity-label ?label.\n" +      * "  ?textEnh a fise:TextAnnotation .\n" + "  ?enhancement fise:entity-type ?type.\n" +      * "  ?enhancement fise:entity-reference ?ref.\n" +      * "FILTER sameTerm(?type,<http://dbpedia.org/ontology/Place>) }\n" + "ORDER BY DESC(?extraction_time)";      *       * return query; }      */
+comment|/* 	 * public static final String getExternalPlacesQuery() { 	 *  	 * String query = "PREFIX fise:<http://fise.iks-project.eu/ontology/>\n" + 	 * "PREFIX pf:<http://jena.hpl.hp.com/ARQ/property#>\n" + 	 * "PREFIX dc:<http://purl.org/dc/terms/>\n" + "SELECT distinct ?ref \n" 	 * + "WHERE {\n" + "  ?enhancement a fise:EntityAnnotation .\n" + 	 * "  ?enhancement dc:relation ?textEnh.\n" + 	 * "  ?enhancement fise:entity-label ?label.\n" + 	 * "  ?textEnh a fise:TextAnnotation .\n" + 	 * "  ?enhancement fise:entity-type ?type.\n" + 	 * "  ?enhancement fise:entity-reference ?ref.\n" + 	 * "FILTER sameTerm(?type,<http://dbpedia.org/ontology/Place>) }\n" + 	 * "ORDER BY DESC(?extraction_time)"; 	 *  	 * return query; } 	 */
 specifier|public
 specifier|static
 specifier|final
@@ -1190,23 +1190,31 @@ block|{
 name|String
 name|enhancementQuery
 init|=
-literal|"PREFIX enhancer:<http://fise.iks-project.eu/ontology/> "
+literal|"PREFIX fise:<http://fise.iks-project.eu/ontology/> "
 operator|+
-literal|"SELECT DISTINCT ?enhancement WHERE { "
+literal|"SELECT DISTINCT ?enhID WHERE { "
 operator|+
-literal|"  ?enhancement enhancer:extracted-from ?enhID . "
+literal|"  { ?enhID fise:extracted-from ?contentID . } UNION "
 operator|+
-literal|"  FILTER sameTerm(?enhID,<"
+literal|"  { ?enhancement fise:extracted-from ?contentID . "
+operator|+
+literal|"		 ?enhancement a fise:EntityAnnotation . "
+operator|+
+literal|"		 ?enhancement fise:entity-reference ?enhID . } "
+operator|+
+literal|"    FILTER sameTerm(?contentID,<"
 operator|+
 name|contentID
 operator|+
-literal|">) } "
+literal|">) "
+operator|+
+literal|"}"
 decl_stmt|;
 return|return
 name|enhancementQuery
 return|;
 block|}
-comment|/*      * public static final String getRecentlyEnhancedDocuments(int pageSize, int offset) { String query =      * "PREFIX enhancer:<http://fise.iks-project.eu/ontology/> " +      * "PREFIX dc:<http://purl.org/dc/terms/> " + "SELECT DISTINCT ?content WHERE { " +      * "  ?enhancement enhancer:extracted-from ?content ." + "  ?enhancement dc:created ?extraction_time . } "      * + "ORDER BY DESC(?extraction_time) LIMIT %d OFFSET %d"; return String.format(query, pageSize, offset);      * }      */
+comment|/* 	 * public static final String getRecentlyEnhancedDocuments(int pageSize, int 	 * offset) { String query = 	 * "PREFIX enhancer:<http://fise.iks-project.eu/ontology/> " + 	 * "PREFIX dc:<http://purl.org/dc/terms/> " + 	 * "SELECT DISTINCT ?content WHERE { " + 	 * "  ?enhancement enhancer:extracted-from ?content ." + 	 * "  ?enhancement dc:created ?extraction_time . } " + 	 * "ORDER BY DESC(?extraction_time) LIMIT %d OFFSET %d"; return 	 * String.format(query, pageSize, offset); } 	 */
 block|}
 end_class
 

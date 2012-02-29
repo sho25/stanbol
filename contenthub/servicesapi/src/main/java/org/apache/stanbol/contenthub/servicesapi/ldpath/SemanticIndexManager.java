@@ -61,6 +61,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -81,13 +91,15 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
+name|stanbol
 operator|.
-name|rdf
+name|entityhub
 operator|.
-name|core
+name|servicesapi
 operator|.
-name|UriRef
+name|model
+operator|.
+name|Representation
 import|;
 end_import
 
@@ -161,7 +173,7 @@ name|LDProgramCollection
 name|retrieveAllPrograms
 parameter_list|()
 function_decl|;
-comment|/**      * This method first tries to obtain the program itself through the given<code>programName</code> and if      * the program is obtained it is executed on the given<code>graph</code>.      *       * @param programName      *            name of the program to be executed      * @param concexts      *            a {@link List} of {@link UriRef} that are used as starting nodes to execute LDPath program      *            specified by {@code programName} on the given {@code program}      * @param graph      *            a Clerezza graph on which the specified program will be executed      * @return the {@link Map} containing the results obtained by executing the given program on the given      *         graph. Keys of the map corresponds to fields in the program and values of the map corresponds      *         to results obtained for the field specified in the key.      * @throws LDPathException      */
+comment|/**      * This method first tries to obtain the program itself through the given<code>programName</code> and if      * the program is obtained it is executed on the given<code>graph</code>.      *       * @param programName      *            name of the program to be executed      * @param contexts      *            a {@link List} of URIs that are used as starting nodes to execute LDPath program specified      *            by {@code programName} on the given {@code program}      * @param graph      *            a Clerezza graph on which the specified program will be executed      * @return the {@link Map} containing the results obtained by executing the given program on the given      *         graph. Keys of the map corresponds to fields in the program and values of the map corresponds      *         to results obtained for the field specified in the key.      * @throws LDPathException      */
 specifier|public
 name|Map
 argument_list|<
@@ -177,9 +189,9 @@ parameter_list|(
 name|String
 name|programName
 parameter_list|,
-name|List
+name|Set
 argument_list|<
-name|UriRef
+name|String
 argument_list|>
 name|contexts
 parameter_list|,
