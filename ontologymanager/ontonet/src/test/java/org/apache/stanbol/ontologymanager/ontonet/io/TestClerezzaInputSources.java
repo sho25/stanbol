@@ -533,7 +533,7 @@ block|{
 comment|// Make sure the tc manager has been reset
 name|assertEquals
 argument_list|(
-literal|0
+literal|1
 argument_list|,
 name|tcManager
 operator|.
@@ -656,7 +656,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|0
+literal|1
 argument_list|,
 name|tcManager
 operator|.
@@ -746,7 +746,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|1
+literal|2
 argument_list|,
 name|tcManager
 operator|.
@@ -944,7 +944,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|// Number of stored graphs minus the importing one = imported graphs
+comment|// Number of stored graphs minus the importing one minus the reserved graph = imported graphs
 name|assertEquals
 argument_list|(
 name|tcManager
@@ -955,7 +955,7 @@ operator|.
 name|size
 argument_list|()
 operator|-
-literal|1
+literal|2
 argument_list|,
 name|imported
 operator|.

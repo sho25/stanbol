@@ -341,8 +341,10 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|assertTrue
+name|assertEquals
 argument_list|(
+literal|1
+argument_list|,
 name|ontologyProvider
 operator|.
 name|getStore
@@ -351,7 +353,7 @@ operator|.
 name|listTripleCollections
 argument_list|()
 operator|.
-name|isEmpty
+name|size
 argument_list|()
 argument_list|)
 expr_stmt|;

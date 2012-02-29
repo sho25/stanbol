@@ -97,16 +97,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|HashSet
 import|;
 end_import
@@ -138,16 +128,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -1110,14 +1090,12 @@ name|offlineMode
 decl_stmt|;
 comment|/**      * Maps ontology IRIs (logical or physical if the ontology is anonymous) to Clerezza storage keys i.e.      * graph names.      */
 specifier|private
-name|Map
-argument_list|<
-name|IRI
-argument_list|,
-name|String
-argument_list|>
-name|ontologyIdsToKeys
+name|OntologyToTcMapper
+name|keymap
+init|=
+literal|null
 decl_stmt|;
+comment|// private Map<IRI,String> ontologyIdsToKeys;
 annotation|@
 name|Reference
 specifier|private
@@ -1208,17 +1186,7 @@ operator|.
 name|class
 block|}
 empty_stmt|;
-name|ontologyIdsToKeys
-operator|=
-operator|new
-name|HashMap
-argument_list|<
-name|IRI
-argument_list|,
-name|String
-argument_list|>
-argument_list|()
-expr_stmt|;
+comment|// ontologyIdsToKeys = new HashMap<IRI,String>();
 block|}
 specifier|public
 name|ClerezzaOntologyProvider
@@ -1403,6 +1371,14 @@ condition|)
 name|store
 operator|=
 name|tcManager
+expr_stmt|;
+name|keymap
+operator|=
+operator|new
+name|OntologyToTcMapper
+argument_list|(
+name|store
+argument_list|)
 expr_stmt|;
 comment|// Parse configuration.
 name|prefix
@@ -1898,6 +1874,16 @@ argument_list|(
 name|ontologyIri
 argument_list|)
 expr_stmt|;
+name|UriRef
+name|ur
+init|=
+name|keymap
+operator|.
+name|getMapping
+argument_list|(
+name|ontologyIri
+argument_list|)
+decl_stmt|;
 name|log
 operator|.
 name|debug
@@ -1906,21 +1892,22 @@ literal|"key for {} is {}"
 argument_list|,
 name|ontologyIri
 argument_list|,
-name|ontologyIdsToKeys
-operator|.
-name|get
-argument_list|(
-name|ontologyIri
-argument_list|)
+name|ur
 argument_list|)
 expr_stmt|;
 return|return
-name|ontologyIdsToKeys
+operator|(
+name|ur
+operator|==
+literal|null
+operator|)
+condition|?
+literal|null
+else|:
+name|ur
 operator|.
-name|get
-argument_list|(
-name|ontologyIri
-argument_list|)
+name|getUnicodeString
+argument_list|()
 return|;
 block|}
 annotation|@
@@ -1933,18 +1920,12 @@ argument_list|>
 name|getKeys
 parameter_list|()
 block|{
+comment|// return new HashSet<String>(ontologyIdsToKeys.values());
 return|return
-operator|new
-name|HashSet
-argument_list|<
-name|String
-argument_list|>
-argument_list|(
-name|ontologyIdsToKeys
+name|keymap
 operator|.
-name|values
+name|stringValues
 argument_list|()
-argument_list|)
 return|;
 block|}
 annotation|@
@@ -3019,8 +3000,17 @@ argument_list|(
 name|s
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Storing ontology with graph ID {}"
+argument_list|,
+name|uriref
+argument_list|)
+expr_stmt|;
 comment|// The policy here is to avoid copying the triples from a graph already in the store.
-comment|// TODO not a good policy for graphs that change
+comment|// FIXME not a good policy for graphs that change
 if|if
 condition|(
 operator|!
@@ -3268,13 +3258,23 @@ name|loaded
 condition|)
 block|{
 comment|// All is already sanitized by the time we get here.
-name|ontologyIdsToKeys
+name|UriRef
+name|urs
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|s
+argument_list|)
+decl_stmt|;
+comment|// ontologyIdsToKeys.put(ontologyIri, s);
+name|keymap
 operator|.
-name|put
+name|setMapping
 argument_list|(
 name|ontologyIri
 argument_list|,
-name|s
+name|urs
 argument_list|)
 expr_stmt|;
 if|if
@@ -3291,9 +3291,10 @@ argument_list|(
 name|iri
 argument_list|)
 condition|)
-name|ontologyIdsToKeys
+comment|// ontologyIdsToKeys.put(
+name|keymap
 operator|.
-name|put
+name|setMapping
 argument_list|(
 name|IRI
 operator|.
@@ -3302,7 +3303,7 @@ argument_list|(
 name|alternateId
 argument_list|)
 argument_list|,
-name|s
+name|urs
 argument_list|)
 expr_stmt|;
 name|log
