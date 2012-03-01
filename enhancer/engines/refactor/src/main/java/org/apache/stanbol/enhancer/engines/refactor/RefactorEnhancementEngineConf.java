@@ -54,37 +54,37 @@ comment|/**      * The OntoNet scope that the engine should use.      */
 name|String
 name|SCOPE
 init|=
-literal|"engine.refactor.scope"
+literal|"org.apache.stanbol.enhancer.engines.refactor.scope"
 decl_stmt|;
 comment|/**      * The location from which the recipe is loaded.      */
 name|String
 name|RECIPE_LOCATION
 init|=
-literal|"engine.refactor.recipe.location"
+literal|"org.apache.stanbol.enhancer.engines.refactor.recipe.location"
 decl_stmt|;
 comment|/**      * The ID used for identifying the recipe in the RuleStore.      */
 name|String
 name|RECIPE_ID
 init|=
-literal|"engine.refactor.recipe.id"
+literal|"org.apache.stanbol.enhancer.engines.refactor.recipe.id"
 decl_stmt|;
 comment|/**      * The set of ontology URIs that should be loaded in the core space of the scope.      */
 name|String
 name|SCOPE_CORE_ONTOLOGY
 init|=
-literal|"engine.refactor.scope.core.ontology"
+literal|"org.apache.stanbol.enhancer.engines.refactor.scope.core.ontology"
 decl_stmt|;
 comment|/**      * If true: the previously generated RDF is deleted and substituted with the new one.       * If false: the new one is appended to the old RDF.       * Possible value in the configuration: true or false.      */
 name|String
 name|APPEND_OTHER_ENHANCEMENT_GRAPHS
 init|=
-literal|"engine.refactor.append.graphs"
+literal|"org.apache.stanbol.enhancer.engines.refactor.append.graphs"
 decl_stmt|;
 comment|/**      * If true: entities are fetched via the EntityHub.       * If false: entities are fetched on-line.       * Possible value in the configuration: true or false.      */
 name|String
 name|USE_ENTITY_HUB
 init|=
-literal|"engine.refactor.entityhub"
+literal|"org.apache.stanbol.enhancer.engines.refactor.entityhub"
 decl_stmt|;
 specifier|public
 name|String
