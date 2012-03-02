@@ -65,7 +65,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologyScope
 import|;

@@ -17,57 +17,61 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
-import|;
-end_import
-
 begin_comment
-comment|/**  * Implementations of this interface are able to react to modifications on the ontology network  * infrastructure.  *   * @author alexdma  *   */
+comment|/**  * Thrown whenever an operation on a scope that has not been registered is thrown.  *   * @author alexdma  *   */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|ScopeOntologyListener
+class|class
+name|NoSuchScopeException
+extends|extends
+name|RuntimeException
 block|{
-comment|/**      * Called whenever an ontology is set to be managed by a scope, space or session.      *       * @param scopeId      * @param addedOntology      */
-name|void
-name|onOntologyAdded
+comment|/** 	 *  	 */
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+literal|6339531579406287445L
+decl_stmt|;
+specifier|private
+name|String
+name|scopeID
+init|=
+literal|null
+decl_stmt|;
+specifier|public
+name|NoSuchScopeException
 parameter_list|(
 name|String
-name|scopeId
-parameter_list|,
-name|IRI
-name|addedOntology
+name|scopeID
 parameter_list|)
-function_decl|;
-comment|/**      * Called whenever an ontology is set to no longer be managed by a scope, space or session. This method is      * not called if that ontology was not being managed earlier.      *       * @param scopeId      * @param addedOntology      */
-name|void
-name|onOntologyRemoved
-parameter_list|(
-name|String
-name|scopeId
-parameter_list|,
-name|IRI
-name|removedOntology
-parameter_list|)
-function_decl|;
+block|{
+name|this
+operator|.
+name|scopeID
+operator|=
+name|scopeID
+expr_stmt|;
 block|}
-end_interface
+specifier|public
+name|String
+name|getScopeId
+parameter_list|()
+block|{
+return|return
+name|scopeID
+return|;
+block|}
+block|}
+end_class
 
 end_unit
 

@@ -17,25 +17,56 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|IRI
+import|;
+end_import
+
 begin_comment
-comment|/**  * An ontology space identifies the set of OWL ontologies that should be "active" in a given context, e.g. for  * a certain user session or a specific reasoning service. Each ontology space has an ID and a top ontology  * that can be used as a shared resource for mutual exclusion and locking strategies.  *   * @author alexdma  */
+comment|/**  * Implementations of this interface are able to react to modifications on the ontology network  * infrastructure.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OntologySpace
-extends|extends
-name|OntologyCollector
-extends|,
-name|OWLExportable
-extends|,
-name|Lockable
-block|{  }
+name|ScopeOntologyListener
+block|{
+comment|/**      * Called whenever an ontology is set to be managed by a scope, space or session.      *       * @param scopeId      * @param addedOntology      */
+name|void
+name|onOntologyAdded
+parameter_list|(
+name|String
+name|scopeId
+parameter_list|,
+name|IRI
+name|addedOntology
+parameter_list|)
+function_decl|;
+comment|/**      * Called whenever an ontology is set to no longer be managed by a scope, space or session. This method is      * not called if that ontology was not being managed earlier.      *       * @param scopeId      * @param addedOntology      */
+name|void
+name|onOntologyRemoved
+parameter_list|(
+name|String
+name|scopeId
+parameter_list|,
+name|IRI
+name|removedOntology
+parameter_list|)
+function_decl|;
+block|}
 end_interface
 
 end_unit

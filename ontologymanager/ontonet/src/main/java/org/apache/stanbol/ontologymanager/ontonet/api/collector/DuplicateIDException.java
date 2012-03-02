@@ -16,6 +16,8 @@ operator|.
 name|ontonet
 operator|.
 name|api
+operator|.
+name|collector
 package|;
 end_package
 

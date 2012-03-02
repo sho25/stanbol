@@ -17,46 +17,42 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|io
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
-comment|/**  * Thrown whenever an attempt to modify the ontology network within a read-only ontology space (e.g. a core or  * custom space in a bootstrapped system) is detected and denied.  */
+comment|/**  *   * An object that can manipulate {@link OntologyInputSource} objects;  *   * @author alexdma  *   */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|UnmodifiableOntologyCollectorException
-extends|extends
-name|OntologyCollectorModificationException
+interface|interface
+name|OntologyInputSourceHandler
 block|{
-comment|/** 	 *  	 */
-specifier|private
-specifier|static
-specifier|final
-name|long
-name|serialVersionUID
-init|=
-literal|6747720213098173405L
-decl_stmt|;
-comment|/**      * Creates a new instance of UnmodifiableOntologySpaceException.      *       * @param space      *            the ontology space whose modification was attempted.      */
-specifier|public
-name|UnmodifiableOntologyCollectorException
-parameter_list|(
-name|OntologyCollector
-name|collector
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|collector
-argument_list|)
-expr_stmt|;
+comment|/**      * Gets the the types representing ontologies and RDF graphs that this object is able to manage.      *       * @return the ontology types that can be handled by this object.      */
+name|Set
+argument_list|<
+name|Class
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|getSupportedOntologyTypes
+parameter_list|()
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 end_unit
 

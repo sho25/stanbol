@@ -17,59 +17,54 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Set
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|apache
+name|semanticweb
 operator|.
-name|stanbol
+name|owlapi
 operator|.
-name|ontologymanager
+name|model
 operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|io
-operator|.
-name|OntologyInputSource
+name|IRI
 import|;
 end_import
 
 begin_comment
-comment|/**  *   * An object that can manipulate {@link OntologyInputSource} objects;  *   * @author alexdma  *   */
+comment|/**  * Objects that react to the addition or removal of ontologies to an ontology collector will implement this  * interface.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OntologyInputSourceHandler
+name|OntologyCollectorListener
 block|{
-comment|/**      * Gets the the types representing ontologies and RDF graphs that this object is able to manage.      *       * @return the ontology types that can be handled by this object.      */
-name|Set
-argument_list|<
-name|Class
-argument_list|<
-name|?
-argument_list|>
-argument_list|>
-name|getSupportedOntologyTypes
-parameter_list|()
+comment|/**      * Fired after an ontology was successfully added to an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param addedOntology      *            the added ontology identifier.      */
+name|void
+name|onOntologyAdded
+parameter_list|(
+name|String
+name|collectorId
+parameter_list|,
+name|IRI
+name|addedOntology
+parameter_list|)
+function_decl|;
+comment|/**      * Fired after an ontology was successfully removed from an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param removedOntology      *            the removed ontology identifier.      */
+name|void
+name|onOntologyRemoved
+parameter_list|(
+name|String
+name|collectorId
+parameter_list|,
+name|IRI
+name|removedOntology
+parameter_list|)
 function_decl|;
 block|}
 end_interface

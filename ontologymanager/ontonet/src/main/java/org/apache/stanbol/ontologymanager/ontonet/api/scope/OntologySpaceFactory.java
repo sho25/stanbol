@@ -17,7 +17,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
 
@@ -56,6 +56,28 @@ operator|.
 name|io
 operator|.
 name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|scope
+operator|.
+name|OntologySpace
+operator|.
+name|SpaceType
 import|;
 end_import
 

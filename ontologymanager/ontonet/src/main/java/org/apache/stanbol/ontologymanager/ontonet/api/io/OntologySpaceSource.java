@@ -45,9 +45,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 operator|.
-name|OntologySpace
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -65,9 +65,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
-name|UnmodifiableOntologyCollectorException
+name|OntologySpace
 import|;
 end_import
 

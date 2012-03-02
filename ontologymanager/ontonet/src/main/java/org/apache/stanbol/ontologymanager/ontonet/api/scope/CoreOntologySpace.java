@@ -17,7 +17,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
 

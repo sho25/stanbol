@@ -17,61 +17,29 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown whenever an operation on a scope that has not been registered is thrown.  *   * @author alexdma  *   */
+comment|/**  * The policies that determine how OntoNet should handle OWL import statements and/or the imported ontologies  * (i.e. import targets) when performing operations such as load/export of ontologies, and rewriting of import  * statements.  *   * @author alexdma  *   */
 end_comment
 
-begin_class
+begin_enum
 specifier|public
-class|class
-name|NoSuchScopeException
-extends|extends
-name|RuntimeException
+enum|enum
+name|ImportManagementPolicy
 block|{
-comment|/** 	 *  	 */
-specifier|private
-specifier|static
-specifier|final
-name|long
-name|serialVersionUID
-init|=
-literal|6339531579406287445L
-decl_stmt|;
-specifier|private
-name|String
-name|scopeID
-init|=
-literal|null
-decl_stmt|;
-specifier|public
-name|NoSuchScopeException
-parameter_list|(
-name|String
-name|scopeID
-parameter_list|)
-block|{
-name|this
-operator|.
-name|scopeID
-operator|=
-name|scopeID
-expr_stmt|;
-block|}
-specifier|public
-name|String
-name|getScopeId
-parameter_list|()
-block|{
-return|return
-name|scopeID
-return|;
-block|}
-block|}
-end_class
+comment|/**      * The root ontology contains all the import statements that point to (recursively) imported ontologies,      * which instead are cleared of all import statements. Can be used to minimize the number of statements      * and remove cycles.      */
+name|FLATTEN
+block|,
+comment|/**      * Remove all import statements from the root ontology's import closure, and recursively copy all the      * axioms from imported ontologies into the root one.      */
+name|MERGE
+block|,
+comment|/**      * Keep the import structure as it is. Note that the import targets can still be rewritten even by      * following this policy.      */
+name|PRESERVE
+block|;  }
+end_enum
 
 end_unit
 

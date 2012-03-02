@@ -73,6 +73,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLOntology
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyCreationException
 import|;
 end_import
@@ -110,6 +124,10 @@ operator|.
 name|LoggerFactory
 import|;
 end_import
+
+begin_comment
+comment|/**  * An input source that parses an in-memory {@link OWLOntology} object from an input stream.  *   * @author alexdma  *   */
+end_comment
 
 begin_class
 specifier|public

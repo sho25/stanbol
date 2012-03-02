@@ -17,7 +17,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
@@ -76,6 +76,26 @@ operator|.
 name|io
 operator|.
 name|OntologyInputSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|OntologyInputSourceHandler
 import|;
 end_import
 

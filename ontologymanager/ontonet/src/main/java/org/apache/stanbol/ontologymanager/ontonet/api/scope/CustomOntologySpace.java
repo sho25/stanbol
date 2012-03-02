@@ -17,9 +17,29 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|collector
+operator|.
+name|UnmodifiableOntologyCollectorException
+import|;
+end_import
 
 begin_comment
 comment|/**  * An ontology space that wraps the components that can be customized by CMS developers, IKS customizers and  * the like. The custom ontology space becomes read-only after bootstrapping (i.e. after a call to  *<code>setUp()</code>).  *   * The ontologies in a custom space typically depend on those in the core space. However, a custom space does  *<i>not</i> know which is the core space, it only imports its ontologies. The core-custom-session  * relationship between spaces is a scope is handled by external objects.  *   * @author alexdma  *   */

@@ -17,52 +17,45 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|semanticweb
+name|util
 operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyManager
+name|Set
 import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology scope for application use. There exists exactly one scope for each live (active or halted) KReS  * session.<br>  *<br>  * This is the only type of ontology scope that allows public access to its OWL ontology manager.  *   * @deprecated Session ontology spaces should no longer be created. Session data should be loaded in session  *             objects instead.  *   * @author alexdma  *   */
+comment|/**  * The object that "knows" the relationships between stored graphs and their usage in ontology spaces or  * sessions.  *   * @author alessandro  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SessionOntologySpace
-extends|extends
-name|OntologySpace
+name|OntologyNetworkMultiplexer
 block|{
-comment|/**      * Returns the OWL ontology manager associated to this scope.      *       * @return the associated ontology manager      */
-name|OWLOntologyManager
-name|getOntologyManager
-parameter_list|()
-function_decl|;
-comment|/**      * @deprecated space linking is performed by the parent scope at OWL export time. Implementations do      *             nothing.      * @param space      * @param skipRoot      * @throws UnmodifiableOntologyCollectorException      */
-name|void
-name|attachSpace
+name|String
+name|getOriginator
 parameter_list|(
-name|OntologySpace
-name|space
-parameter_list|,
-name|boolean
-name|skipRoot
+name|String
+name|ontologyKey
 parameter_list|)
-throws|throws
-name|UnmodifiableOntologyCollectorException
+function_decl|;
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getHandles
+parameter_list|(
+name|String
+name|ontologyKey
+parameter_list|)
 function_decl|;
 block|}
 end_interface

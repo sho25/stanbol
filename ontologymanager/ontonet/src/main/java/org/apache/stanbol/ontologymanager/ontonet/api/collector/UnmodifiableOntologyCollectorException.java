@@ -17,26 +17,46 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
 begin_comment
-comment|/**  * An object that supports locking mechanisms, thus allowing/preventing modifications of the resources  * contained therein. Lock management is assumed to occur in methods inherited from implementations.<br>  *   * TODO add public lock handling methods as well?  *   * @author alexdma  *   */
+comment|/**  * Thrown whenever an attempt to modify the ontology network within a read-only ontology space (e.g. a core or  * custom space in a bootstrapped system) is detected and denied.  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|Lockable
+class|class
+name|UnmodifiableOntologyCollectorException
+extends|extends
+name|OntologyCollectorModificationException
 block|{
-comment|/**      * Determines if it is no longer possible to modify this resource until it is torn down.      *       * @return true if this resource is write-locked, false otherwise.      */
-name|boolean
-name|isLocked
-parameter_list|()
-function_decl|;
+comment|/** 	 *  	 */
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+literal|6747720213098173405L
+decl_stmt|;
+comment|/**      * Creates a new instance of UnmodifiableOntologySpaceException.      *       * @param space      *            the ontology space whose modification was attempted.      */
+specifier|public
+name|UnmodifiableOntologyCollectorException
+parameter_list|(
+name|OntologyCollector
+name|collector
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|collector
+argument_list|)
+expr_stmt|;
 block|}
-end_interface
+block|}
+end_class
 
 end_unit
 

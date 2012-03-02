@@ -79,7 +79,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologyScopeFactory
 import|;
@@ -99,7 +99,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologySpaceFactory
 import|;
@@ -119,7 +119,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|ScopeRegistry
 import|;

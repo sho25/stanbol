@@ -35,29 +35,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 operator|.
-name|CoreOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ontology
-operator|.
-name|CustomOntologySpace
+name|UnmodifiableOntologyCollectorException
 import|;
 end_import
 
@@ -95,9 +75,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
-name|SpaceType
+name|CoreOntologySpace
 import|;
 end_import
 
@@ -115,9 +95,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
-name|UnmodifiableOntologyCollectorException
+name|CustomOntologySpace
 import|;
 end_import
 

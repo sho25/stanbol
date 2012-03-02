@@ -37,7 +37,7 @@ name|util
 operator|.
 name|OntologyConstants
 operator|.
-name|*
+name|NS_ONM
 import|;
 end_import
 

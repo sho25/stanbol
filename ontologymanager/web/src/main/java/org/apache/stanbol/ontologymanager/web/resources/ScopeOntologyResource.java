@@ -407,7 +407,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 operator|.
 name|OntologyCollectorModificationException
 import|;
@@ -427,7 +427,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologyScope
 import|;
@@ -447,7 +447,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologySpace
 import|;
@@ -467,7 +467,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|ScopeRegistry
 import|;

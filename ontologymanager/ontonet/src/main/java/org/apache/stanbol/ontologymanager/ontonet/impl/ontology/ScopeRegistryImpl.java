@@ -75,7 +75,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|NoSuchScopeException
 import|;
@@ -95,7 +95,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologyScope
 import|;
@@ -115,7 +115,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|ScopeEventListener
 import|;
@@ -135,7 +135,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|ScopeRegistry
 import|;

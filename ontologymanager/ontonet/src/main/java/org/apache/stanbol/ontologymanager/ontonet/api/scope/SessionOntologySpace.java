@@ -17,9 +17,29 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|collector
+operator|.
+name|UnmodifiableOntologyCollectorException
+import|;
+end_import
 
 begin_import
 import|import
@@ -31,40 +51,38 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
+name|OWLOntologyManager
 import|;
 end_import
 
 begin_comment
-comment|/**  * Objects that react to the addition or removal of ontologies to an ontology collector will implement this  * interface.  *   * @author alexdma  *   */
+comment|/**  * An ontology scope for application use. There exists exactly one scope for each live (active or halted) KReS  * session.<br>  *<br>  * This is the only type of ontology scope that allows public access to its OWL ontology manager.  *   * @deprecated Session ontology spaces should no longer be created. Session data should be loaded in session  *             objects instead.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OntologyCollectorListener
+name|SessionOntologySpace
+extends|extends
+name|OntologySpace
 block|{
-comment|/**      * Fired after an ontology was successfully added to an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param addedOntology      *            the added ontology identifier.      */
-name|void
-name|onOntologyAdded
-parameter_list|(
-name|String
-name|collectorId
-parameter_list|,
-name|IRI
-name|addedOntology
-parameter_list|)
+comment|/**      * Returns the OWL ontology manager associated to this scope.      *       * @return the associated ontology manager      */
+name|OWLOntologyManager
+name|getOntologyManager
+parameter_list|()
 function_decl|;
-comment|/**      * Fired after an ontology was successfully removed from an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param removedOntology      *            the removed ontology identifier.      */
+comment|/**      * @deprecated space linking is performed by the parent scope at OWL export time. Implementations do      *             nothing.      * @param space      * @param skipRoot      * @throws UnmodifiableOntologyCollectorException      */
 name|void
-name|onOntologyRemoved
+name|attachSpace
 parameter_list|(
-name|String
-name|collectorId
+name|OntologySpace
+name|space
 parameter_list|,
-name|IRI
-name|removedOntology
+name|boolean
+name|skipRoot
 parameter_list|)
+throws|throws
+name|UnmodifiableOntologyCollectorException
 function_decl|;
 block|}
 end_interface

@@ -95,6 +95,8 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|collector
+operator|.
 name|DuplicateIDException
 import|;
 end_import
@@ -173,7 +175,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologyScope
 import|;
@@ -193,7 +195,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|OntologyScopeFactory
 import|;
@@ -213,7 +215,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
 name|ScopeRegistry
 import|;

@@ -17,7 +17,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 package|;
 end_package
 
@@ -35,7 +35,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|DuplicateIDException
+name|collector
+operator|.
+name|Lockable
 import|;
 end_import
 
@@ -53,7 +55,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|NamedResource
+name|collector
+operator|.
+name|OntologyCollector
 import|;
 end_import
 
@@ -71,44 +75,78 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|io
+name|ontology
 operator|.
-name|OntologyInputSource
+name|OWLExportable
 import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology scope factory is responsible for the creation of new ontology scopes from supplied ontology  * input sources for their core and custom spaces.<br>  *<br>  * Factory implementations should not call the setup method of the ontology scope once it is created, so that  * its spaces are not locked from editing since creation time.  *   * @author alexdma  *   */
+comment|/**  * An ontology space identifies the set of OWL ontologies that should be "active" in a given context, e.g. for  * a certain user session or a specific reasoning service. Each ontology space has an ID and a top ontology  * that can be used as a shared resource for mutual exclusion and locking strategies.  *   * @author alexdma  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OntologyScopeFactory
+name|OntologySpace
 extends|extends
-name|NamedResource
+name|OntologyCollector
 extends|,
-name|ScopeEventListenable
+name|OWLExportable
+extends|,
+name|Lockable
 block|{
-comment|/**      * Creates and returns a new ontology scope with the core space ontologies obtained from      *<code>coreSource</code> and the custom space not set.      *       * @param scopeID      *            the desired unique identifier for the ontology scope.      * @param coreSource      *            the input source that provides the top ontology for the core space.      * @return the newly created ontology scope.      * @throws DuplicateIDException      *             if an ontology scope with the given identifier is already<i>registered</i>. The exception      *             is not thrown if another scope with the same ID has been created but not registered.      */
-name|OntologyScope
-name|createOntologyScope
+comment|/**      * The possible types of ontology spaces managed by OntoNet.      */
+specifier|public
+enum|enum
+name|SpaceType
+block|{
+comment|/**          * Denotes a core space (1..1). It is instantiated upon creation of the scope.          */
+name|CORE
+argument_list|(
+literal|"core"
+argument_list|)
+block|,
+comment|/**          * Denotes a custom space (0..1).          */
+name|CUSTOM
+argument_list|(
+literal|"custom"
+argument_list|)
+block|,
+comment|/**          * Denotes a session space (0..n).          *           * @deprecated no session spaces should created anymore.          */
+name|SESSION
+argument_list|(
+literal|"session"
+argument_list|)
+block|;
+specifier|private
+name|String
+name|suffix
+decl_stmt|;
+name|SpaceType
 parameter_list|(
 name|String
-name|scopeID
-parameter_list|,
-name|OntologyInputSource
-argument_list|<
-name|?
-argument_list|,
-name|?
-argument_list|>
-modifier|...
-name|coreSources
+name|suffix
 parameter_list|)
-throws|throws
-name|DuplicateIDException
-function_decl|;
+block|{
+name|this
+operator|.
+name|suffix
+operator|=
+name|suffix
+expr_stmt|;
+block|}
+comment|/**          * Returns the preferred string to be attached to an ontology scope IRI (assuming it ends with a hash          * or slash character) in order to reference the included ontology space.          *           * @return the preferred suffix for this space type.          */
+specifier|public
+name|String
+name|getIRISuffix
+parameter_list|()
+block|{
+return|return
+name|suffix
+return|;
+block|}
+block|}
 block|}
 end_interface
 

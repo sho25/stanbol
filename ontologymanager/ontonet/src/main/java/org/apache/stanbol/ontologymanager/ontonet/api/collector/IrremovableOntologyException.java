@@ -17,7 +17,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
@@ -64,8 +64,8 @@ comment|/**      * Constructs a new instance of<code>IrremovableOntologyExceptio
 specifier|public
 name|IrremovableOntologyException
 parameter_list|(
-name|OntologySpace
-name|space
+name|OntologyCollector
+name|collector
 parameter_list|,
 name|IRI
 name|ontologyId
@@ -73,7 +73,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|space
+name|collector
 argument_list|)
 expr_stmt|;
 name|this

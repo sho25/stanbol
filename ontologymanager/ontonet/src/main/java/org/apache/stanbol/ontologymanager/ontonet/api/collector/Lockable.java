@@ -17,29 +17,26 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|collector
 package|;
 end_package
 
 begin_comment
-comment|/**  * The policies that determine how OntoNet should handle OWL import statements and/or the imported ontologies  * (i.e. import targets) when performing operations such as load/export of ontologies, and rewriting of import  * statements.  *   * @author alexdma  *   */
+comment|/**  * An object that supports locking mechanisms, thus allowing/preventing modifications of the resources  * contained therein. Lock management is assumed to occur in methods inherited from implementations.<br>  *   * TODO add public lock handling methods as well?  *   * @author alexdma  *   */
 end_comment
 
-begin_enum
+begin_interface
 specifier|public
-enum|enum
-name|ImportManagementPolicy
+interface|interface
+name|Lockable
 block|{
-comment|/**      * The root ontology contains all the import statements that point to (recursively) imported ontologies,      * which instead are cleared of all import statements. Can be used to minimize the number of statements      * and remove cycles.      */
-name|FLATTEN
-block|,
-comment|/**      * Remove all import statements from the root ontology's import closure, and recursively copy all the      * axioms from imported ontologies into the root one.      */
-name|MERGE
-block|,
-comment|/**      * Keep the import structure as it is. Note that the import targets can still be rewritten even by      * following this policy.      */
-name|PRESERVE
-block|;  }
-end_enum
+comment|/**      * Determines if it is no longer possible to modify this resource until it is torn down.      *       * @return true if this resource is write-locked, false otherwise.      */
+name|boolean
+name|isLocked
+parameter_list|()
+function_decl|;
+block|}
+end_interface
 
 end_unit
 
