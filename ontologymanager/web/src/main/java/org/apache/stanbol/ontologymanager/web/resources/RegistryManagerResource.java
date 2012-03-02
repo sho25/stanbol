@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -56,26 +56,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -124,18 +104,6 @@ operator|.
 name|rs
 operator|.
 name|GET
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|OPTIONS
 import|;
 end_import
 
@@ -229,7 +197,9 @@ name|rs
 operator|.
 name|core
 operator|.
-name|UriInfo
+name|Response
+operator|.
+name|ResponseBuilder
 import|;
 end_import
 
@@ -243,9 +213,7 @@ name|rs
 operator|.
 name|core
 operator|.
-name|Response
-operator|.
-name|ResponseBuilder
+name|UriInfo
 import|;
 end_import
 
@@ -373,10 +341,6 @@ name|RegistryManagerResource
 extends|extends
 name|BaseStanbolResource
 block|{
-specifier|protected
-name|RegistryManager
-name|regMgr
-decl_stmt|;
 specifier|private
 specifier|final
 name|Logger
@@ -389,6 +353,10 @@ argument_list|(
 name|getClass
 argument_list|()
 argument_list|)
+decl_stmt|;
+specifier|protected
+name|RegistryManager
+name|regMgr
 decl_stmt|;
 comment|// bind the registry manager by looking it up from the servlet request context
 specifier|public
@@ -427,25 +395,6 @@ name|uriInfo
 operator|=
 name|uriInfo
 expr_stmt|;
-block|}
-specifier|public
-name|String
-name|getPath
-parameter_list|()
-block|{
-return|return
-name|uriInfo
-operator|.
-name|getPath
-argument_list|()
-operator|.
-name|replaceAll
-argument_list|(
-literal|"[\\/]*$"
-argument_list|,
-literal|""
-argument_list|)
-return|;
 block|}
 annotation|@
 name|GET
@@ -498,42 +447,6 @@ literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
 name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
-return|return
-name|rb
-operator|.
-name|build
-argument_list|()
-return|;
-block|}
-annotation|@
-name|OPTIONS
-specifier|public
-name|Response
-name|handleCorsPreflight
-parameter_list|(
-annotation|@
-name|Context
-name|HttpHeaders
-name|headers
-parameter_list|)
-block|{
-name|ResponseBuilder
-name|rb
-init|=
-name|Response
-operator|.
-name|ok
-argument_list|()
-decl_stmt|;
-name|enableCORS
 argument_list|(
 name|servletContext
 argument_list|,
@@ -609,6 +522,25 @@ name|emptyList
 argument_list|()
 return|;
 block|}
+block|}
+specifier|public
+name|String
+name|getPath
+parameter_list|()
+block|{
+return|return
+name|uriInfo
+operator|.
+name|getPath
+argument_list|()
+operator|.
+name|replaceAll
+argument_list|(
+literal|"[\\/]*$"
+argument_list|,
+literal|""
+argument_list|)
+return|;
 block|}
 block|}
 end_class

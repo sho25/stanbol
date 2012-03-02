@@ -329,24 +329,6 @@ name|web
 operator|.
 name|resources
 operator|.
-name|DocumentationResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|web
-operator|.
-name|resources
-operator|.
 name|OntoNetRootResource
 import|;
 end_import
@@ -437,7 +419,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|SessionByIdResource
+name|SessionResource
 import|;
 end_import
 
@@ -455,7 +437,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|SessionsResource
+name|SessionManagerResource
 import|;
 end_import
 
@@ -666,15 +648,6 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|DocumentationResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
 comment|// classes.add(RESTfulResource.class);
 comment|// classes.add(StoredGraphsResource.class);
 name|classes
@@ -717,7 +690,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|SessionsResource
+name|SessionManagerResource
 operator|.
 name|class
 argument_list|)
@@ -726,7 +699,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|SessionByIdResource
+name|SessionResource
 operator|.
 name|class
 argument_list|)
