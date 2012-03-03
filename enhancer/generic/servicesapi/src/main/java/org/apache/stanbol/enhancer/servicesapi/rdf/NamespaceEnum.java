@@ -99,6 +99,12 @@ name|fise
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/"
 argument_list|)
+block|,
+comment|/**      * The W3C Ontology for Media Resources http://www.w3.org/TR/mediaont-10/      */
+name|media
+argument_list|(
+literal|"http://www.w3.org/ns/ma-ont#"
+argument_list|)
 block|;
 name|String
 name|ns

@@ -293,7 +293,13 @@ literal|"http://schema.org/"
 argument_list|,
 literal|true
 argument_list|)
-block|,     ;
+block|,
+comment|/**      * The W3C Ontology for Media Resources http://www.w3.org/TR/mediaont-10/      */
+name|media
+argument_list|(
+literal|"http://www.w3.org/ns/ma-ont#"
+argument_list|)
+block|;
 comment|/**      * The logger      */
 specifier|private
 specifier|static
