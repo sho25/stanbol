@@ -203,24 +203,6 @@ name|web
 operator|.
 name|resources
 operator|.
-name|CNNImporterResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|contenthub
-operator|.
-name|web
-operator|.
-name|resources
-operator|.
 name|FeaturedSearchResource
 import|;
 end_import
@@ -239,7 +221,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|SemanticIndexManagerResource
+name|RootResource
 import|;
 end_import
 
@@ -257,7 +239,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|RootResource
+name|SemanticIndexManagerResource
 import|;
 end_import
 
@@ -362,7 +344,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Statically define the list of available resources and providers to be contributed to the the Stanbol JAX-RS  * Endpoint.  */
+comment|/**  * Statically define the list of available resources and providers to be  * contributed to the the Stanbol JAX-RS Endpoint.  */
 end_comment
 
 begin_class
@@ -490,15 +472,6 @@ operator|.
 name|add
 argument_list|(
 name|StoreResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|CNNImporterResource
 operator|.
 name|class
 argument_list|)

@@ -85,24 +85,6 @@ name|MGraph
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Representation
-import|;
-end_import
-
 begin_comment
 comment|/**  * This interface provides create, retrieve, delete operations for LDPath programs to be managed in the scope  * of Contenthub.  *   * @author anil.sinaci  *   */
 end_comment
