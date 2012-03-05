@@ -24,10 +24,10 @@ specifier|public
 enum|enum
 name|NamespaceEnum
 block|{
-comment|// TODO: change the namespace as soon as STANBOL-3 defines a namespace to be used for stanbol
+comment|/**      * The Stanbol Enhancer namespace defining Enhancer, EnhancementEngine and      * EnhancementChain. This is NOT the namespace of the enhancement structure.      * As EnhancementStrucutre up to now still the old FISE namespace is used.      */
 name|enhancer
 argument_list|(
-literal|"http://fise.iks-project.eu/ontology/"
+literal|"http://stanbol.apache.org/ontology/enhancer/enhancer#"
 argument_list|)
 block|,
 name|dbpedia_ont
@@ -91,10 +91,10 @@ block|,
 comment|/**      * Namespace for the Stanbol Enhancer Execution Metadata ontology      */
 name|em
 argument_list|(
-literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#"
+literal|"http://stanbol.apache.org/ontology/enhancer/executionmetadata#"
 argument_list|)
 block|,
-comment|/**      * The FISE namespace (1st version of the Enhancement Structure).      * Currently the same as {@link NamespaceEnum#enhancer}      */
+comment|/**      * The FISE namespace (1st version of the Enhancement Structure).      * Will be replaced by the Stanbol Enhancement Structure by a future      * release (see STANBOL-3).      */
 name|fise
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/"

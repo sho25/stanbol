@@ -199,7 +199,7 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 comment|//check execution metadata
-literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#executionPart"
+literal|"http://stanbol.apache.org/ontology/enhancer/executionmetadata#executionPart"
 argument_list|,
 comment|//check execution of metaxa& if executionPlan is included
 literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#engine.*metaxa"

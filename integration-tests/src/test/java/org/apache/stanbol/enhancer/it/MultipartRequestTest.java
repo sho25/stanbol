@@ -1639,7 +1639,7 @@ index|[]
 block|{
 literal|"outputContentPart"
 block|,
-literal|"http://stanbol.apache.org/ontology/enhancer/executionMetadata#ChainExecution"
+literal|"http://stanbol.apache.org/ontology/enhancer/executionmetadata#ChainExecution"
 block|,
 literal|"omitMetadata"
 block|,
@@ -1701,7 +1701,7 @@ literal|"--contentItem"
 argument_list|,
 literal|"--contentItem--"
 argument_list|,
-literal|"Content-Disposition: form-data; name=\"http://stanbol.apache.org/ontology/enhancer/executionMetadata#ChainExecution\""
+literal|"Content-Disposition: form-data; name=\"http://stanbol.apache.org/ontology/enhancer/executionmetadata#ChainExecution\""
 argument_list|,
 literal|"Content-Type: application/rdf+xml; charset=UTF-8"
 argument_list|,
@@ -1709,9 +1709,9 @@ literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/ex
 argument_list|,
 literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionplan#ExecutionNode\"/>"
 argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionMetadata#EngineExecution\"/>"
+literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionmetadata#EngineExecution\"/>"
 argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionMetadata#ChainExecution\"/>"
+literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionmetadata#ChainExecution\"/>"
 argument_list|)
 operator|.
 name|getContent

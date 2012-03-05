@@ -243,7 +243,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"extracted-from"
 argument_list|)
@@ -260,7 +260,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"start"
 argument_list|)
@@ -277,7 +277,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"end"
 argument_list|)
@@ -294,7 +294,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"selected-text"
 argument_list|)
@@ -311,7 +311,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"selection-context"
 argument_list|)
@@ -328,7 +328,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"confidence"
 argument_list|)
@@ -345,7 +345,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"entity-reference"
 argument_list|)
@@ -362,7 +362,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"entity-type"
 argument_list|)
@@ -379,12 +379,14 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"entity-label"
 argument_list|)
 decl_stmt|;
-comment|/**      * Internet Media Type of a content item.      */
+comment|/**      * Internet Media Type of a content item.      *       * @deprecated dc:FileFormat does not exist      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final

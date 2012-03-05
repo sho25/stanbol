@@ -66,10 +66,11 @@ argument_list|(
 literal|"/engines"
 argument_list|)
 specifier|public
+specifier|final
 class|class
 name|EnginesRootResource
 extends|extends
-name|EnhancerRootResource
+name|AbstractEnhancerUiResource
 block|{
 specifier|public
 name|EnginesRootResource
@@ -82,6 +83,8 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
+literal|null
+argument_list|,
 name|context
 argument_list|)
 expr_stmt|;

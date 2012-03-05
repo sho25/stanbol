@@ -220,6 +220,10 @@ block|,
 literal|"dbpediaLinking"
 block|,
 literal|"NamedEntityTaggingEngine"
+block|,
+literal|"tika"
+block|,
+literal|"TikaEngine"
 block|}
 decl_stmt|;
 comment|/**      * Getter for the Endpoint for a specific enhancement chain      * @param chainName the name of the chain      * @return the endpoint      * @throws IllegalArgumentException if the parsed chain is<code>null</code>      * or invalid      */

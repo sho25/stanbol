@@ -56,7 +56,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"Enhancement"
 argument_list|)
@@ -73,7 +73,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"TextAnnotation"
 argument_list|)
@@ -90,7 +90,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"EntityAnnotation"
 argument_list|)
@@ -107,7 +107,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"TopicAnnotation"
 argument_list|)
@@ -171,7 +171,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|enhancer
+name|fise
 operator|+
 literal|"Category"
 argument_list|)
