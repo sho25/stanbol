@@ -5399,6 +5399,12 @@ init|=
 literal|3
 decl_stmt|;
 comment|// 3-folds CV is hardcoded for now
+name|int
+name|cvIterationCount
+init|=
+literal|1
+decl_stmt|;
+comment|// only one 3-folds CV iteration
 name|TopicClassificationEngine
 name|classifier
 init|=
@@ -5436,7 +5442,7 @@ literal|0
 init|;
 name|cvFoldIndex
 operator|<
-name|cvFoldCount
+name|cvIterationCount
 condition|;
 name|cvFoldIndex
 operator|++
@@ -5451,6 +5457,8 @@ argument_list|,
 name|cvFoldIndex
 argument_list|,
 name|cvFoldCount
+argument_list|,
+name|cvIterationCount
 argument_list|,
 name|incremental
 argument_list|)
@@ -5517,6 +5525,9 @@ parameter_list|,
 name|int
 name|cvFoldCount
 parameter_list|,
+name|int
+name|cvIterations
+parameter_list|,
 name|boolean
 name|incremental
 parameter_list|)
@@ -5527,6 +5538,16 @@ name|TrainingSetException
 throws|,
 name|ClassifierException
 block|{
+name|cvIterations
+operator|=
+name|cvIterations
+operator|<=
+literal|0
+condition|?
+name|cvFoldCount
+else|:
+name|cvFoldCount
+expr_stmt|;
 name|log
 operator|.
 name|info
@@ -5535,13 +5556,15 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Performing evaluation CV iteration %d/%d on classifier %s"
+literal|"Performing evaluation %d-fold CV iteration %d/%d on classifier %s"
+argument_list|,
+name|cvFoldCount
 argument_list|,
 name|cvFoldIndex
 operator|+
 literal|1
 argument_list|,
-name|cvFoldCount
+name|cvIterations
 argument_list|,
 name|engineId
 argument_list|)

@@ -3053,7 +3053,7 @@ name|performanceEstimates
 operator|.
 name|precision
 argument_list|,
-literal|0.5f
+literal|0.45f
 argument_list|)
 expr_stmt|;
 name|assertNotNull
@@ -3116,7 +3116,7 @@ name|performanceEstimates
 operator|.
 name|recall
 argument_list|,
-literal|0.5f
+literal|0.45f
 argument_list|)
 expr_stmt|;
 name|assertGreater
@@ -3125,16 +3125,18 @@ name|performanceEstimates
 operator|.
 name|f1
 argument_list|,
-literal|0.65f
+literal|0.55f
 argument_list|)
 expr_stmt|;
+comment|// very small support, hence the estimates are unstable, hence we set low min expectations, but we
+comment|// need this test to run reasonably fast...
 name|assertGreater
 argument_list|(
 name|performanceEstimates
 operator|.
 name|positiveSupport
 argument_list|,
-literal|10
+literal|4
 argument_list|)
 expr_stmt|;
 name|assertGreater
@@ -3143,7 +3145,7 @@ name|performanceEstimates
 operator|.
 name|negativeSupport
 argument_list|,
-literal|10
+literal|4
 argument_list|)
 expr_stmt|;
 name|assertNotNull
