@@ -201,8 +201,8 @@ argument_list|(
 comment|//check execution metadata
 literal|"http://stanbol.apache.org/ontology/enhancer/executionmetadata#executionPart"
 argument_list|,
-comment|//check execution of metaxa& if executionPlan is included
-literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#engine.*metaxa"
+comment|//check execution of tika& if executionPlan is included
+literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#engine.*tika"
 argument_list|,
 literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
 argument_list|,

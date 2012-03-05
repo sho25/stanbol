@@ -201,10 +201,7 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"metaxa"
-block|,
-literal|"MetaxaEngine"
-block|,
+comment|//"metaxa","MetaxaEngine", deactivated see STANBOL-510
 literal|"langid"
 block|,
 literal|"LangIdEnhancementEngine"

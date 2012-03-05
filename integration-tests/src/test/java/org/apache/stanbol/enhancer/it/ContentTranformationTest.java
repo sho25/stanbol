@@ -110,7 +110,7 @@ argument_list|(
 literal|"language"
 argument_list|)
 argument_list|,
-literal|"metaxa"
+literal|"tika"
 argument_list|,
 literal|"langid"
 argument_list|)

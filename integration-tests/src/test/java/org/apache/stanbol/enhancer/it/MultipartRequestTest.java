@@ -1193,7 +1193,7 @@ name|assertContentRegexp
 argument_list|(
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=.*"
 argument_list|,
-literal|"Content-Disposition: form-data; name=\"urn:metaxa:plain-text:.*"
+literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:content-item-sha1-.*"
 argument_list|,
@@ -1330,7 +1330,7 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 comment|//MUST contain
-literal|"Content-Disposition: form-data; name=\"urn:metaxa:plain-text:.*"
+literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:content-item-sha1-.*"
 argument_list|)
@@ -1464,7 +1464,7 @@ name|assertContentRegexp
 argument_list|(
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=.*"
 argument_list|,
-literal|"Content-Disposition: form-data; name=\"urn:metaxa:plain-text:.*"
+literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 comment|//and the expected enhancements in the metadata
 literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
@@ -1593,7 +1593,7 @@ name|assertContentRegexp
 argument_list|(
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=.*"
 argument_list|,
-literal|"Content-Disposition: form-data; name=\"urn:metaxa:plain-text:.*"
+literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 comment|//and the expected enhancements in the metadata
 literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
