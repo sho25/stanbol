@@ -17,6 +17,22 @@ name|servicesapi
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
+import|;
+end_import
+
 begin_comment
 comment|/**  * Class keeping the constants that are used in various places of Contenthub.  *   * @author anil.sinaci  *   */
 end_comment
@@ -107,6 +123,32 @@ name|String
 name|SEARCH_URI
 init|=
 literal|"http://stanbol.apache.org/contenthub/search/"
+decl_stmt|;
+comment|/**      * Represent the RDF type of CMS Object in the content management system      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|CMS_OBJECT
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"http://www.apache.org/stanbol/cms#CMSObject"
+argument_list|)
+decl_stmt|;
+comment|/**      * Represents a reference to name of a CMS Object      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|CMS_OBJECT_NAME
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"http://www.apache.org/stanbol/cms#name"
+argument_list|)
 decl_stmt|;
 block|}
 end_class
