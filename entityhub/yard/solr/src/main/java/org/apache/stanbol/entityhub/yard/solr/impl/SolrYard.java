@@ -969,6 +969,18 @@ name|org
 operator|.
 name|osgi
 operator|.
+name|framework
+operator|.
+name|ServiceReference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
 name|service
 operator|.
 name|cm
@@ -988,6 +1000,20 @@ operator|.
 name|component
 operator|.
 name|ComponentContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
+name|util
+operator|.
+name|tracker
+operator|.
+name|ServiceTrackerCustomizer
 import|;
 end_import
 
@@ -2097,19 +2123,6 @@ name|initSolrServer
 argument_list|()
 expr_stmt|;
 block|}
-comment|//for remove servers and when running outside OSGI
-if|if
-condition|(
-name|_server
-operator|!=
-literal|null
-condition|)
-block|{
-name|server
-operator|=
-name|_server
-expr_stmt|;
-block|}
 comment|//when an internally managed Solr server is used by this SolrYard
 comment|//we dynamically return the tracked version
 if|if
@@ -2181,6 +2194,38 @@ parameter_list|)
 block|{}
 block|}
 block|}
+if|if
+condition|(
+name|server
+operator|==
+literal|null
+operator|||
+operator|!
+name|server
+operator|.
+name|equals
+argument_list|(
+name|this
+operator|.
+name|_server
+argument_list|)
+condition|)
+block|{
+comment|//reset the fieldMapper so that it is reinitialised for the new one
+comment|//STANBOL-519
+name|_fieldMapper
+operator|=
+literal|null
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+comment|//for remove servers and when running outside OSGI
+name|server
+operator|=
+name|_server
+expr_stmt|;
 block|}
 comment|//the server is not available -> throw an exception!
 if|if
@@ -2571,6 +2616,8 @@ name|getBundleContext
 argument_list|()
 argument_list|,
 name|indexReference
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|_registeredServerTracker
