@@ -311,6 +311,18 @@ name|osgi
 operator|.
 name|framework
 operator|.
+name|BundleContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
+name|framework
+operator|.
 name|Constants
 import|;
 end_import
@@ -388,15 +400,16 @@ specifier|final
 name|String
 name|serverName
 decl_stmt|;
-specifier|private
-specifier|final
-name|ComponentContext
-name|context
-decl_stmt|;
+comment|//private final ComponentContext context;
 specifier|private
 specifier|final
 name|String
 name|pid
+decl_stmt|;
+specifier|private
+specifier|final
+name|File
+name|configDir
 decl_stmt|;
 specifier|private
 name|Map
@@ -489,12 +502,7 @@ name|pid
 operator|=
 name|pid
 expr_stmt|;
-name|this
-operator|.
-name|context
-operator|=
-name|context
-expr_stmt|;
+comment|//this.context = context;
 comment|//init the Maps for manageing Indexes with the different states
 for|for
 control|(
@@ -524,6 +532,74 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+name|File
+name|dir
+init|=
+literal|null
+decl_stmt|;
+if|if
+condition|(
+name|context
+operator|!=
+literal|null
+condition|)
+block|{
+name|dir
+operator|=
+name|context
+operator|.
+name|getBundleContext
+argument_list|()
+operator|.
+name|getDataFile
+argument_list|(
+name|DEFAULT_INDEX_CONFIG_DIR
+operator|+
+literal|'/'
+operator|+
+name|pid
+argument_list|)
+expr_stmt|;
+comment|//dir might be null if the OSGI environment is missing file system support
+block|}
+if|if
+condition|(
+name|dir
+operator|==
+literal|null
+condition|)
+block|{
+comment|//outside OSGI or OSGI has no file system support
+comment|// use config directory relative to the the Managed Solr Directory
+name|dir
+operator|=
+operator|new
+name|File
+argument_list|(
+name|DEFAULT_INDEX_CONFIG_DIR
+argument_list|,
+name|pid
+argument_list|)
+operator|.
+name|getAbsoluteFile
+argument_list|()
+expr_stmt|;
+block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"SolrYard Config Directory: "
+operator|+
+name|dir
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|configDir
+operator|=
+name|dir
+expr_stmt|;
 block|}
 comment|/**      * Constructor to be used outside of an OSGI context      * @param serverName the name of the Server      */
 specifier|public
@@ -563,7 +639,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * The constructor to be used inside an OSGI environment.       * The {@link #serverName} is parsed form the {@link SolrConstants#PROPERTY_SERVER_NAME}.      * @param context the context of the {@link ManagedSolrServer} implementation      */
+comment|/**      * The constructor to be used inside an OSGI environment.       * The {@link #serverName} is parsed form the {@link SolrConstants#PROPERTY_SERVER_NAME}.      * @param context the context of the {@link ManagedSolrServer} implementation      * @throws IllegalStateException if the OSGI environment does not have      * FileSystem support      */
 specifier|public
 name|ManagedIndexMetadata
 parameter_list|(
@@ -1917,66 +1993,10 @@ name|boolean
 name|init
 parameter_list|)
 block|{
-name|File
-name|uninstalledConfigDir
-decl_stmt|;
-if|if
-condition|(
-name|context
-operator|==
-literal|null
-condition|)
-block|{
-comment|//outside OSGI
-comment|// use config directory relative to the the Managed Solr Directory
-name|uninstalledConfigDir
-operator|=
-operator|new
-name|File
-argument_list|(
-name|DEFAULT_INDEX_CONFIG_DIR
-argument_list|,
-name|pid
-argument_list|)
-operator|.
-name|getAbsoluteFile
-argument_list|()
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|//whithin an OSGI environment
-comment|//use the DataFile directory of the bundle
-name|uninstalledConfigDir
-operator|=
-name|context
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|getDataFile
-argument_list|(
-name|DEFAULT_INDEX_CONFIG_DIR
-operator|+
-literal|'/'
-operator|+
-name|pid
-argument_list|)
-expr_stmt|;
-block|}
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"SolrYard Config Directory: "
-operator|+
-name|uninstalledConfigDir
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 operator|!
-name|uninstalledConfigDir
+name|configDir
 operator|.
 name|exists
 argument_list|()
@@ -1990,7 +2010,7 @@ block|{
 if|if
 condition|(
 operator|!
-name|uninstalledConfigDir
+name|configDir
 operator|.
 name|mkdirs
 argument_list|()
@@ -2014,7 +2034,7 @@ elseif|else
 if|if
 condition|(
 operator|!
-name|uninstalledConfigDir
+name|configDir
 operator|.
 name|isDirectory
 argument_list|()
@@ -2036,7 +2056,7 @@ throw|;
 block|}
 comment|// else -> it exists and is a dir -> nothing todo
 return|return
-name|uninstalledConfigDir
+name|configDir
 return|;
 block|}
 comment|/**      * Loads the configurations of uninitialised Solr Indexes      *       * @return the map with the index name as key and the properties as values      * @throws IOException      *             on any error while loading the configurations      */
