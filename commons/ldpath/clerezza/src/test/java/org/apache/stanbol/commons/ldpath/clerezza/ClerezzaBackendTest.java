@@ -924,6 +924,10 @@ expr_stmt|;
 block|}
 name|assertTrue
 argument_list|(
+literal|"missing: "
+operator|+
+name|expected
+argument_list|,
 name|expected
 operator|.
 name|isEmpty
