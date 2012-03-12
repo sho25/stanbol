@@ -210,9 +210,9 @@ literal|"ner"
 block|,
 literal|"NamedEntityExtractionEnhancementEngine"
 block|,
-literal|"entityhubLinking"
+literal|"entityhubExtraction"
 block|,
-literal|"NamedEntityTaggingEngine"
+literal|"NamedEntityExtractionEnhancementEngine"
 block|,
 literal|"dbpediaLinking"
 block|,
