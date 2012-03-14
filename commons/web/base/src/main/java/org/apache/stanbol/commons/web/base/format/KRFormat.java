@@ -214,16 +214,16 @@ argument_list|,
 literal|"rdf+xml"
 argument_list|)
 decl_stmt|;
-comment|/**      * "application/turtle"      */
+comment|/**      * "text/turtle"      */
 specifier|public
 specifier|static
 specifier|final
 name|String
 name|TURTLE
 init|=
-literal|"application/turtle"
+literal|"text/turtle"
 decl_stmt|;
-comment|/**      * "application/turtle"      */
+comment|/**      * "text/turtle"      */
 specifier|public
 specifier|static
 specifier|final
@@ -233,9 +233,33 @@ init|=
 operator|new
 name|MediaType
 argument_list|(
-literal|"application"
+literal|"text"
 argument_list|,
 literal|"turtle"
+argument_list|)
+decl_stmt|;
+comment|/**      * "application/x-turtle" (pre-registration MIME type for text/turtle)      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|X_TURTLE
+init|=
+literal|"application/x-turtle"
+decl_stmt|;
+comment|/**      * "application/x-turtle" (pre-registration MIME type for text/turtle)      */
+specifier|public
+specifier|static
+specifier|final
+name|MediaType
+name|X_TURTLE_TYPE
+init|=
+operator|new
+name|MediaType
+argument_list|(
+literal|"application"
+argument_list|,
+literal|"x-turtle"
 argument_list|)
 decl_stmt|;
 block|}
