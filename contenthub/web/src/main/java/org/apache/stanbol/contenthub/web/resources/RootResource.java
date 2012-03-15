@@ -35,6 +35,26 @@ name|base
 operator|.
 name|CorsHelper
 operator|.
+name|addCORSOrigin
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|CorsHelper
+operator|.
 name|enableCORS
 import|;
 end_import
@@ -174,7 +194,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base resource which automatically redirects to "contenthub/contenthub/store"  *   * @author anil.sinaci  *  */
+comment|/**  * Base resource which automatically redirects to "contenthub/contenthub/store"  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_class
@@ -230,11 +250,18 @@ name|GET
 specifier|public
 name|Response
 name|getView
-parameter_list|()
+parameter_list|(
+annotation|@
+name|Context
+name|HttpHeaders
+name|headers
+parameter_list|)
 throws|throws
 name|URISyntaxException
 block|{
-return|return
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|seeOther
@@ -250,6 +277,18 @@ operator|+
 literal|"contenthub/contenthub/store/"
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|servletContext
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
