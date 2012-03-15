@@ -630,6 +630,14 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
+name|String
+name|SOLR_ALLTEXT_FIELD
+init|=
+literal|"stanbolreserved_text_all"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
 name|int
 name|BUFFER_SIZE
 init|=
@@ -1711,7 +1719,7 @@ return|return
 name|is
 return|;
 block|}
-comment|/**      * Creates<b>"schema.xml"</b> file for the Solr configurations to be created for the provided LDPath      * program. Creates<b>Solr fields</b> for each field obtained by calling {@link Program#getFields()} of      * provided<code>program</code>. By default,<i>name</i>,<i>type</i>,<i>stored</i>,<i>indexed</i> and      *<i>multiValued</i> attributes of fields are set. Furthermore, any attribute obtained from the fields of      * the program is also set if it is included in {@link LDPathUtils#SOLR_FIELD_OPTIONS}. Another      * configuration about the fields obtained from the program is {@link LDPathUtils#SOLR_COPY_FIELD_OPTION}.      * If there is a specified configuration about this field,<b>destination</b> of<b>copyField</b> element      * is set accordingly. Otherwise, the destination is set as<b>text_all</b>      *       * @param program      *            LDPath program of which fields will be obtained      * @param template      *            Solr schema template to be populated with the fields based on the provided      *<code>program</code>      * @return created template in an array of bytes.      * @throws LDPathException      */
+comment|/**      * Creates<b>"schema.xml"</b> file for the Solr configurations to be created for the provided LDPath      * program. Creates<b>Solr fields</b> for each field obtained by calling {@link Program#getFields()} of      * provided<code>program</code>. By default,<i>name</i>,<i>type</i>,<i>stored</i>,<i>indexed</i> and      *<i>multiValued</i> attributes of fields are set. Furthermore, any attribute obtained from the fields of      * the program is also set if it is included in {@link LDPathUtils#SOLR_FIELD_OPTIONS}. Another      * configuration about the fields obtained from the program is {@link LDPathUtils#SOLR_COPY_FIELD_OPTION}.      * If there is a specified configuration about this field,<b>destination</b> of<b>copyField</b> element      * is set accordingly. Otherwise, the destination is set as<b>stanbolreserved_text_all</b>      *       * @param program      *            LDPath program of which fields will be obtained      * @param template      *            Solr schema template to be populated with the fields based on the provided      *<code>program</code>      * @return created template in an array of bytes.      * @throws LDPathException      */
 specifier|private
 name|byte
 index|[]
@@ -2216,7 +2224,7 @@ name|Attribute
 argument_list|(
 literal|"dest"
 argument_list|,
-literal|"text_all"
+name|SOLR_ALLTEXT_FIELD
 argument_list|)
 argument_list|)
 expr_stmt|;
