@@ -49,7 +49,7 @@ name|search
 operator|.
 name|featured
 operator|.
-name|ResultantDocumentImpl
+name|DocumentResultImpl
 import|;
 end_import
 
@@ -69,7 +69,7 @@ name|search
 operator|.
 name|featured
 operator|.
-name|ResultantDocument
+name|DocumentResult
 import|;
 end_import
 
@@ -103,7 +103,7 @@ block|{
 comment|/**      * This method converts a {@link SolrDocument} into a {@link HTMLContentItem}. Note currently, it ignores      * its metadata produced after enhancement process and stored. Its constraints indexed in Solr are also      * ignored as these items are only shown as a list in HTML interface.      */
 specifier|public
 specifier|static
-name|ResultantDocument
+name|DocumentResult
 name|solrDocument2solrContentItem
 parameter_list|(
 name|SolrDocument
@@ -126,7 +126,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|ResultantDocument
+name|DocumentResult
 name|solrDocument2solrContentItem
 parameter_list|(
 name|SolrDocument
@@ -245,11 +245,11 @@ else|:
 name|title
 operator|)
 expr_stmt|;
-name|ResultantDocumentImpl
+name|DocumentResultImpl
 name|resultantDocument
 init|=
 operator|new
-name|ResultantDocumentImpl
+name|DocumentResultImpl
 argument_list|(
 name|id
 argument_list|,

@@ -561,7 +561,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|// copied from SiteManagerRootResource
 annotation|@
 name|OPTIONS
 specifier|public

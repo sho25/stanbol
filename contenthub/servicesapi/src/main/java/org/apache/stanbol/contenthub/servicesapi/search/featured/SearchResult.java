@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This interface defines the structure of a unified search result returned by {@link FeaturedSearch} and  * {@link RelatedKeywordSearchManager} interfaces. The results contain {@link ResultantDocument}s which are  * retrieved from underlying Solr cores, {@link RelatedKeyword}s about the search query and {@link FacetField}  * s for the obtained resultant documents. {@link FacetField}s keep information of possible facet values and  * corresponding documents counts matching with the facet value. All search results of a search operation are  * encapsulated within this interface.  *<p>  *   * @author anil.sinaci  *   */
+comment|/**  * This interface defines the structure of a unified search result returned by {@link FeaturedSearch} and  * {@link RelatedKeywordSearchManager} interfaces. The results contain {@link DocumentResult}s which are  * retrieved from underlying Solr cores, {@link RelatedKeyword}s about the search query and {@link FacetField}  * s for the obtained resultant documents. {@link FacetField}s keep information of possible facet values and  * corresponding documents counts matching with the facet value. All search results of a search operation are  * encapsulated within this interface.  *<p>  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_interface
@@ -108,18 +108,18 @@ specifier|public
 interface|interface
 name|SearchResult
 block|{
-comment|/**      * Returns the resultant documents for the query term that is specified for the search operation. These      * resultant documents correspond to content items stored in the underlying Solr cores which are managed      * by the Contenthub.      *       * @return {@link List} of {@link ResultantDocument} encapsulated in this search result      */
+comment|/**      * Returns the resultant documents for the query term that is specified for the search operation. These      * resultant documents correspond to content items stored in the underlying Solr cores which are managed      * by the Contenthub.      *       * @return {@link List} of {@link DocumentResult} encapsulated in this search result      */
 name|List
 argument_list|<
-name|ResultantDocument
+name|DocumentResult
 argument_list|>
 name|getResultantDocuments
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the facets generated as a result of the search operations. Each search result has its own      * facets.      *       * @return A map of<code>property:[value1,value2]</code> pairs.      */
+comment|/**      * Returns the facets generated as a result of the search operations. Each search result has its own      * facets.      *       * @return A {@link List} of {@link FacetResult}s.      */
 name|List
 argument_list|<
-name|FacetField
+name|FacetResult
 argument_list|>
 name|getFacets
 parameter_list|()
@@ -148,7 +148,7 @@ name|setDocuments
 parameter_list|(
 name|List
 argument_list|<
-name|ResultantDocument
+name|DocumentResult
 argument_list|>
 name|resultantDocuments
 parameter_list|)
@@ -159,7 +159,7 @@ name|setFacets
 parameter_list|(
 name|List
 argument_list|<
-name|FacetField
+name|FacetResult
 argument_list|>
 name|facets
 parameter_list|)

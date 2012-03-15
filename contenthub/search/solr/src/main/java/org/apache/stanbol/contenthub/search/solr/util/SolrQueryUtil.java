@@ -402,7 +402,6 @@ operator|new
 name|SolrQuery
 argument_list|()
 decl_stmt|;
-comment|//String queryString = keyword;
 name|query
 operator|.
 name|setQuery
@@ -499,17 +498,20 @@ name|facetDelimiter
 operator|+
 name|quotation
 operator|+
+name|ClientUtils
+operator|.
+name|escapeQueryChars
+argument_list|(
 operator|(
 name|String
 operator|)
 name|value
+argument_list|)
 operator|+
 name|quotation
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*query.addFacetQuery(fieldName + facetDelimiter + (SolrVocabulary.isNameRangeField(fieldName) ? (String) value                                     : ClientUtils.escapeQueryChars(quotation + (String) value                                                                    + quotation)));*/
-comment|/*queryString = queryString                                       + " "                                       + and                                       + " "                                       + fieldName                                       + facetDelimiter                                       + (SolrVocabulary.isNameRangeField(fieldName) ? (String) value                                               : ClientUtils.escapeQueryChars(quotation + (String) value                                                                              + quotation));*/
 block|}
 block|}
 block|}
@@ -530,7 +532,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//query.setQuery(queryString);
 return|return
 name|query
 return|;
@@ -1035,24 +1036,6 @@ argument_list|(
 literal|"*"
 argument_list|,
 name|SCORE_FIELD
-argument_list|)
-expr_stmt|;
-name|solrQuery
-operator|.
-name|setSortField
-argument_list|(
-name|SolrFieldName
-operator|.
-name|CREATIONDATE
-operator|.
-name|toString
-argument_list|()
-argument_list|,
-name|SolrQuery
-operator|.
-name|ORDER
-operator|.
-name|desc
 argument_list|)
 expr_stmt|;
 name|solrQuery

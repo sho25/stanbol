@@ -59,15 +59,17 @@ name|org
 operator|.
 name|apache
 operator|.
-name|solr
+name|stanbol
 operator|.
-name|client
+name|contenthub
 operator|.
-name|solrj
+name|servicesapi
 operator|.
-name|response
+name|search
 operator|.
-name|FacetField
+name|featured
+operator|.
+name|DocumentResult
 import|;
 end_import
 
@@ -87,7 +89,7 @@ name|search
 operator|.
 name|featured
 operator|.
-name|ResultantDocument
+name|FacetResult
 import|;
 end_import
 
@@ -152,7 +154,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author anil.sinaci  *  */
+comment|/**  * @author anil.sinaci  *   */
 end_comment
 
 begin_class
@@ -226,7 +228,7 @@ name|Override
 specifier|public
 name|List
 argument_list|<
-name|ResultantDocument
+name|DocumentResult
 argument_list|>
 name|getResultantDocuments
 parameter_list|()
@@ -247,7 +249,7 @@ name|Override
 specifier|public
 name|List
 argument_list|<
-name|FacetField
+name|FacetResult
 argument_list|>
 name|getFacets
 parameter_list|()
@@ -297,7 +299,7 @@ name|setDocuments
 parameter_list|(
 name|List
 argument_list|<
-name|ResultantDocument
+name|DocumentResult
 argument_list|>
 name|resultantDocuments
 parameter_list|)
@@ -330,7 +332,7 @@ name|setFacets
 parameter_list|(
 name|List
 argument_list|<
-name|FacetField
+name|FacetResult
 argument_list|>
 name|facets
 parameter_list|)

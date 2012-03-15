@@ -203,7 +203,7 @@ name|search
 operator|.
 name|featured
 operator|.
-name|ResultantDocument
+name|DocumentResult
 import|;
 end_import
 
@@ -750,7 +750,7 @@ specifier|static
 name|JSONObject
 name|toJSON
 parameter_list|(
-name|ResultantDocument
+name|DocumentResult
 name|resultantDocument
 parameter_list|)
 throws|throws
@@ -876,7 +876,7 @@ control|)
 block|{
 if|if
 condition|(
-name|ResultantDocument
+name|DocumentResult
 operator|.
 name|class
 operator|.
@@ -896,7 +896,7 @@ argument_list|(
 name|toJSON
 argument_list|(
 operator|(
-name|ResultantDocument
+name|DocumentResult
 operator|)
 name|element
 argument_list|)
