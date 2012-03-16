@@ -584,13 +584,17 @@ init|=
 name|getRepresentation
 argument_list|()
 decl_stmt|;
-comment|// 1. check if the returned Entity does has a label -> if not return null
-comment|// add labels (set only a single label. Use "en" if available!
+comment|//start with the matched label -> so if we do not find a better one
+comment|//we will use the matched!
 name|Text
 name|label
 init|=
-literal|null
+name|this
+operator|.
+name|label
 decl_stmt|;
+comment|// 1. check if the returned Entity does has a label -> if not return null
+comment|// add labels (set only a single label. Use "en" if available!
 name|Iterator
 argument_list|<
 name|Text

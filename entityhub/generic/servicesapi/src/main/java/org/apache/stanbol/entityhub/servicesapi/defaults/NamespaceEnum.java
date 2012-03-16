@@ -299,6 +299,54 @@ name|media
 argument_list|(
 literal|"http://www.w3.org/ns/ma-ont#"
 argument_list|)
+block|,
+comment|/*      * eHealth domain       */
+comment|/**      * DrugBank is a repository of almost 5000 FDA-approved small molecule and       * biotech drugs.       */
+name|drugbank
+argument_list|(
+literal|"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/"
+argument_list|)
+block|,
+comment|/**      * Dailymed is published by the National Library of Medicine,       * and provides high quality information about marketed drugs.      */
+name|dailymed
+argument_list|(
+literal|"http://www4.wiwiss.fu-berlin.de/dailymed/resource/dailymed/"
+argument_list|)
+block|,
+comment|/**      * SIDER contains information on marketed drugs and their adverse effects.       * The information is extracted from public documents and package inserts.      */
+name|sider
+argument_list|(
+literal|"http://www4.wiwiss.fu-berlin.de/sider/resource/sider/"
+argument_list|)
+block|,
+comment|/**      * The Linked Clinical Trials (LinkedCT) project aims at publishing the       * first open Semantic Web data source for clinical trials data.      */
+name|linkedct
+argument_list|(
+literal|"http://data.linkedct.org/resource/linkedct/"
+argument_list|)
+block|,
+comment|/**      * STITCH contains information on chemicals and proteins as well as their       * interactions and links.      */
+name|stitch
+argument_list|(
+literal|"http://www4.wiwiss.fu-berlin.de/stitch/resource/stitch/"
+argument_list|)
+block|,
+comment|/**      * Diseasome publishes a network of 4,300 disorders and disease genes linked       * by known disorder-gene associations for exploring all known phenotype and       * disease gene associations, indicating the common genetic origin of many       * diseases.      */
+name|diseasome
+argument_list|(
+literal|"http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/"
+argument_list|)
+block|,
+comment|/**      * National Cancer Institute Thesaurus (http://www.mindswap.org/2003/CancerOntology/)      */
+name|nci
+argument_list|(
+literal|"http://www.mindswap.org/2003/nciOncology.owl#"
+argument_list|)
+block|,
+name|tcm
+argument_list|(
+literal|"http://purl.org/net/tcm/tcm.lifescience.ntu.edu.tw/"
+argument_list|)
 block|;
 comment|/**      * The logger      */
 specifier|private

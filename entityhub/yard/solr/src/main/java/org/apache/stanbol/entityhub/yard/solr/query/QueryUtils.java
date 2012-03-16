@@ -191,7 +191,7 @@ specifier|private
 name|QueryUtils
 parameter_list|()
 block|{}
-comment|/**      * This method encodes a parsed index value as needed for queries.      *<p>      * In case of TXT it is assumed that a whitespace tokenizer is used by the index. Therefore values with      * multiple words need to be treated and connected with AND to find only values that contain all. In case      * of STR no whitespace is assumed. Therefore spaces need to be replaced with '+' to search for tokens      * with the exact name. In all other cases the string need not to be converted.      *       * Note also that text queries are converted to lower case      *       * @param value      *            the index value      * @param escape if<code>true</code> all Solr special chars are escaped if      *<code>false</code> than '*' and '?' as used for wildcard searches are      * not escaped.      * @return the (possible multiple) values that need to be connected with AND      */
+comment|/**      * This method encodes a parsed index value as needed for queries.      *<p>      * In case of TXT it is assumed that a whitespace tokenizer is used by the index. Therefore values with      * multiple words need to be treated and connected with AND to find only values that contain all. In case      * of STR no whitespace is assumed. Therefore spaces need to be replaced with '+' to search for tokens      * with the exact name. In all other cases the string need not to be converted.      *       *<del>Note also that text queries are converted to lower case</del>      * Note: since 2012-03-14 parsed values are only converted to lower case.      *<p>      *<b>TODO:</b> Until Solr 3.6 is released and the implementation of      *<a href="https://issues.apache.org/jira/browse/">SOLR-2438</a> is      * released this needs to still convert wildcard queries to lower case.<br>      * Because of that:<ul>      *<li> in case<code>escape=true</code>. Non-wildcard queries should support      * case sensitive searches. If the searched solr field uses a lowerCase      * filter than this will be done by Solr anyway and if not that case      * sensitivity might be important!      *<li> for<code>escape=false</code> - wild card searches the values are      * still converted to lower case to keep compatible with previous versions.      * TODO: the caseSensitive parameter of TextConstraints should be used      * instead      *</ul>      *       * @param value      *            the index value      * @param escape if<code>true</code> all Solr special chars are escaped if      *<code>false</code> than '*' and '?' as used for wildcard searches are      * not escaped.      * @return the (possible multiple) values that need to be connected with AND      */
 specifier|public
 specifier|static
 name|String
@@ -273,6 +273,12 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
+if|if
+condition|(
+operator|!
+name|escape
+condition|)
+block|{
 name|value
 operator|=
 name|value
@@ -280,6 +286,8 @@ operator|.
 name|toLowerCase
 argument_list|()
 expr_stmt|;
+block|}
+comment|//rw: 20120314: respect case sensitivity for escaped (non wildcard)
 name|Collection
 argument_list|<
 name|String
@@ -348,6 +356,12 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
+if|if
+condition|(
+operator|!
+name|escape
+condition|)
+block|{
 name|value
 operator|=
 name|value
@@ -355,6 +369,8 @@ operator|.
 name|toLowerCase
 argument_list|()
 expr_stmt|;
+block|}
+comment|//rw: 20120314: respect case sensitivity for escaped (non wildcard)
 name|queryConstraints
 operator|=
 operator|new

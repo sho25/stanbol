@@ -308,6 +308,15 @@ name|DEFAULT_LANGUAGE
 init|=
 literal|null
 decl_stmt|;
+comment|/**      * The default for case sensitive matching is set to<code>false</code>      */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|DEFAULT_CASE_SENSITIVE_MATCHING_STATE
+init|=
+literal|false
+decl_stmt|;
 comment|/**      * Default mapping for Concept types to dc:type values added for      * TextAnnotations.      */
 specifier|public
 specifier|static
@@ -386,6 +395,7 @@ operator|.
 name|DBPEDIA_ORGANISATION
 argument_list|)
 expr_stmt|;
+comment|//        mappings.put(NamespaceEnum.dailymed+"organization",OntologicalClasses.DBPEDIA_ORGANISATION);
 name|mappings
 operator|.
 name|put
@@ -494,6 +504,23 @@ operator|.
 name|SKOS_CONCEPT
 argument_list|)
 expr_stmt|;
+comment|//        UriRef DRUG = new UriRef(NamespaceEnum.drugbank+"drugs");
+comment|//        mappings.put(DRUG.getUnicodeString(), DRUG);
+comment|//        mappings.put(NamespaceEnum.dbpediaOnt+"Drug", DRUG);
+comment|//        mappings.put(NamespaceEnum.dailymed+"drugs", DRUG);
+comment|//        mappings.put(NamespaceEnum.sider+"drugs", DRUG);
+comment|//        mappings.put(NamespaceEnum.tcm+"Medicine", DRUG);
+comment|//
+comment|//        UriRef DISEASE = new UriRef(NamespaceEnum.diseasome+"diseases");
+comment|//        mappings.put(DISEASE.getUnicodeString(), DISEASE);
+comment|//        mappings.put(NamespaceEnum.linkedct+"condition", DISEASE);
+comment|//        mappings.put(NamespaceEnum.tcm+"Disease", DISEASE);
+comment|//
+comment|//        UriRef SIDE_EFFECT = new UriRef(NamespaceEnum.sider+"side_effects");
+comment|//        mappings.put(SIDE_EFFECT.getUnicodeString(), SIDE_EFFECT);
+comment|//
+comment|//        UriRef INGREDIENT = new UriRef(NamespaceEnum.dailymed+"ingredients");
+comment|//        mappings.put(INGREDIENT.getUnicodeString(), INGREDIENT);
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
 operator|=
 name|Collections
@@ -556,6 +583,12 @@ name|int
 name|maxSearchTokens
 init|=
 name|DEFAULT_MAX_SEARCH_TOKENS
+decl_stmt|;
+specifier|private
+name|boolean
+name|caseSensitiveMatchingState
+init|=
+name|DEFAULT_CASE_SENSITIVE_MATCHING_STATE
 decl_stmt|;
 comment|/**      * Holds the mappings of rdf:type used by concepts to dc:type values used      * by TextAnnotations.       */
 specifier|private
@@ -951,6 +984,32 @@ operator|.
 name|maxSearchTokens
 operator|=
 name|maxSearchTokens
+expr_stmt|;
+block|}
+comment|/**      * Getter for the case sensitive matching state      * @return the state      */
+specifier|public
+name|boolean
+name|isCaseSensitiveMatching
+parameter_list|()
+block|{
+return|return
+name|caseSensitiveMatchingState
+return|;
+block|}
+comment|/**      * Setter for the case sensitive matching state      * @param caseSensitiveMatchingState the state      */
+specifier|public
+name|void
+name|setCaseSensitiveMatchingState
+parameter_list|(
+name|boolean
+name|state
+parameter_list|)
+block|{
+name|this
+operator|.
+name|caseSensitiveMatchingState
+operator|=
+name|state
 expr_stmt|;
 block|}
 comment|/**      * Removes the mapping for the parsed concept type      * @param conceptType the concept type to remove the mapping      * @return the previously mapped dc:type value or<code>null</code> if      * no mapping for the parsed concept type was present      */
