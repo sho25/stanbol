@@ -310,6 +310,14 @@ name|void
 name|tearDown
 parameter_list|()
 function_decl|;
+comment|/**      * TODO replace with Ontology IDs      *       * @return      */
+name|Set
+argument_list|<
+name|IRI
+argument_list|>
+name|listManagedOntologies
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

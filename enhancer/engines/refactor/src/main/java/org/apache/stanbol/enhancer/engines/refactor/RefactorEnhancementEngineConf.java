@@ -112,12 +112,12 @@ function_decl|;
 specifier|public
 name|String
 index|[]
-name|getScopeCoreOntology
+name|getScopeCoreOntologies
 parameter_list|()
 function_decl|;
 specifier|public
 name|void
-name|setScopeCoreOntology
+name|setScopeCoreOntologies
 parameter_list|(
 name|String
 index|[]

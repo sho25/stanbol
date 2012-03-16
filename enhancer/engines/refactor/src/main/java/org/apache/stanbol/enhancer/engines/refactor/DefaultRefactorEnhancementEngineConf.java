@@ -191,7 +191,7 @@ name|Override
 specifier|public
 name|String
 index|[]
-name|getScopeCoreOntology
+name|getScopeCoreOntologies
 parameter_list|()
 block|{
 return|return
@@ -211,7 +211,7 @@ annotation|@
 name|Override
 specifier|public
 name|void
-name|setScopeCoreOntology
+name|setScopeCoreOntologies
 parameter_list|(
 name|String
 index|[]
