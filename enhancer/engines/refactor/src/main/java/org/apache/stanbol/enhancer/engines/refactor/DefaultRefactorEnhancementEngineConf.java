@@ -29,28 +29,8 @@ name|Dictionary
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
 begin_comment
-comment|/**  * Default configuration of the Refactor Enhancement Engine.<br/>  * The default configuration load an instance of Refactor Engine which maps named-entities recognized by  * other Enhancement Engines to Schema.org.  *    * @author anuzzolese  * @author alberto.musetti  *  */
+comment|/**  * Default configuration of the Refactor Enhancement Engine.<br/>  * The default configuration load an instance of Refactor Engine which maps named-entities recognized by other  * Enhancement Engines to Schema.org.  *   * @author anuzzolese  * @author alberto.musetti  *   */
 end_comment
 
 begin_class
@@ -69,7 +49,7 @@ name|Object
 argument_list|>
 name|conf
 decl_stmt|;
-comment|/* 	public DefaultRefactorEnhancementEngineConf() { 		 	} 	*/
+comment|/*      * public DefaultRefactorEnhancementEngineConf() {      *       * }      */
 specifier|public
 name|DefaultRefactorEnhancementEngineConf
 parameter_list|(
@@ -256,17 +236,20 @@ name|isInGraphAppendMode
 parameter_list|()
 block|{
 return|return
-operator|(
-operator|(
 name|Boolean
-operator|)
+operator|.
+name|valueOf
+argument_list|(
 name|conf
 operator|.
 name|get
 argument_list|(
 name|APPEND_OTHER_ENHANCEMENT_GRAPHS
 argument_list|)
-operator|)
+operator|.
+name|toString
+argument_list|()
+argument_list|)
 operator|.
 name|booleanValue
 argument_list|()
@@ -300,17 +283,20 @@ name|isEntityHubUsed
 parameter_list|()
 block|{
 return|return
-operator|(
-operator|(
 name|Boolean
-operator|)
+operator|.
+name|valueOf
+argument_list|(
 name|conf
 operator|.
 name|get
 argument_list|(
 name|USE_ENTITY_HUB
 argument_list|)
-operator|)
+operator|.
+name|toString
+argument_list|()
+argument_list|)
 operator|.
 name|booleanValue
 argument_list|()

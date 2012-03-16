@@ -331,6 +331,26 @@ name|OWLEntityRemover
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  *  * @author elvio  */
 end_comment
@@ -340,6 +360,18 @@ specifier|public
 class|class
 name|GetRule
 block|{
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 specifier|private
 name|OWLOntology
 name|owlmodel
@@ -563,11 +595,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with name "
 operator|+
@@ -712,11 +742,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with name "
 operator|+
@@ -940,11 +968,9 @@ name|printStackTrace
 argument_list|()
 expr_stmt|;
 block|}
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"RECIPE IRI : "
 operator|+
@@ -986,11 +1012,9 @@ argument_list|,
 name|owlmodel
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"Rules length : "
 operator|+
@@ -1339,11 +1363,9 @@ return|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with name "
 operator|+

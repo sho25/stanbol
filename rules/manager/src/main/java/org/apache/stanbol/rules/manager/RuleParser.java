@@ -65,6 +65,26 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|hp
@@ -258,6 +278,18 @@ specifier|public
 class|class
 name|RuleParser
 block|{
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 name|String
@@ -572,15 +604,6 @@ name|imp
 init|=
 literal|null
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"INPUT"
-argument_list|)
-expr_stmt|;
 comment|//inputOntology.write(System.out);
 name|String
 index|[]
@@ -634,22 +657,18 @@ index|[
 literal|1
 index|]
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"BODY : "
 operator|+
 name|bodyString
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"HEAD : "
 operator|+
@@ -1056,15 +1075,6 @@ operator|.
 name|Variable
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"LA CREO"
-argument_list|)
-expr_stmt|;
 block|}
 return|return
 name|variableResource
@@ -1110,11 +1120,9 @@ argument_list|,
 name|closePar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT STRING : "
 operator|+
@@ -1177,11 +1185,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT : "
 operator|+
@@ -1301,11 +1307,9 @@ argument_list|,
 name|closePar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT STRING : "
 operator|+
@@ -1368,11 +1372,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT : "
 operator|+
@@ -1495,11 +1497,9 @@ argument_list|,
 name|closePar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT STRING : "
 operator|+
@@ -1556,11 +1556,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT : "
 operator|+
@@ -1657,11 +1655,9 @@ argument_list|,
 name|closePar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT STRING INDIVIDUAL PROPERTY ATOM: "
 operator|+
@@ -1735,11 +1731,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT : "
 operator|+
@@ -1862,11 +1856,9 @@ argument_list|,
 name|closePar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT STRING : "
 operator|+
@@ -1940,11 +1932,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT : "
 operator|+
@@ -2067,11 +2057,9 @@ argument_list|,
 name|closePar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT STRING : "
 operator|+
@@ -2128,11 +2116,9 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ARGUMENT : "
 operator|+
@@ -2301,11 +2287,9 @@ argument_list|,
 name|openPar
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ATOM : "
 operator|+
@@ -2405,11 +2389,9 @@ name|ontResource
 init|=
 literal|null
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"atomNSPrefix : "
 operator|+
@@ -2427,11 +2409,9 @@ argument_list|(
 name|atomNSPrefix
 argument_list|)
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"SEMION RULE PARSER : ontology "
 operator|+
@@ -2484,11 +2464,9 @@ operator|+
 name|atomName
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"NAME ATOOOOM: "
 operator|+
@@ -2504,15 +2482,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"QUIIIIIIIIIIIIIIII"
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|ontResource
@@ -2534,11 +2503,9 @@ argument_list|,
 name|closePar
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 name|ontResource
 operator|.
@@ -2571,11 +2538,9 @@ argument_list|,
 name|closePar
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 name|ontResource
 operator|.
@@ -2608,11 +2573,9 @@ argument_list|,
 name|closePar
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 name|ontResource
 operator|.
@@ -2645,11 +2608,9 @@ argument_list|,
 name|closePar
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 name|ontResource
 operator|.
@@ -2683,11 +2644,9 @@ argument_list|,
 name|closePar
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 name|ontResource
 operator|.
@@ -2700,11 +2659,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 name|ontResource
 operator|.
@@ -2719,15 +2676,7 @@ block|}
 block|}
 else|else
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"SONO UNA MINCHIA"
-argument_list|)
-expr_stmt|;
+comment|//log.debug("SONO UNA MINCHIA");
 block|}
 block|}
 block|}
@@ -2747,11 +2696,9 @@ argument_list|(
 name|atomResource
 argument_list|)
 expr_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"ENTRO QUI "
 operator|+

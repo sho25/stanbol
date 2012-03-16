@@ -68,6 +68,26 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|CorsHelper
+operator|.
+name|addCORSOrigin
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -328,6 +348,22 @@ operator|.
 name|core
 operator|.
 name|Response
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|ResponseBuilder
 import|;
 end_import
 
@@ -1944,7 +1980,10 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-return|return
+comment|//return Response.ok(new Viewable("index", this)).build();
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|ok
@@ -1957,6 +1996,31 @@ argument_list|,
 name|this
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|rb
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
+argument_list|,
+name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
+argument_list|)
+expr_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|servletContext
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()

@@ -36,6 +36,26 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|CorsHelper
+operator|.
+name|addCORSOrigin
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -158,6 +178,22 @@ operator|.
 name|core
 operator|.
 name|UriInfo
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Response
+operator|.
+name|ResponseBuilder
 import|;
 end_import
 
@@ -414,11 +450,26 @@ name|Response
 name|build
 parameter_list|()
 block|{
-return|return
+comment|//return Response.ok().build();
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|ok
 argument_list|()
+decl_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
@@ -447,7 +498,9 @@ argument_list|(
 name|object
 argument_list|)
 decl_stmt|;
-return|return
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|ok
@@ -467,23 +520,62 @@ argument_list|,
 name|out
 argument_list|)
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|rb
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
+expr_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
 return|;
+comment|/*    return Response.ok(                     new Viewable("result",                             new ReasoningPrettyResultResource(                                     context, info, out)),                     TEXT_HTML).build();*/
 block|}
 else|else
 block|{
-return|return
+comment|//return Response.ok(object).build();
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|ok
 argument_list|(
 name|object
 argument_list|)
+decl_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
@@ -799,7 +891,9 @@ argument_list|(
 literal|"The input is consistent"
 argument_list|)
 expr_stmt|;
-return|return
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|ok
@@ -819,13 +913,37 @@ argument_list|,
 literal|"The input is consistent :)"
 argument_list|)
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|rb
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
 argument_list|,
 name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
 argument_list|)
+expr_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
 return|;
+comment|/*return Response.ok(                         new Viewable("result",                                 new ReasoningPrettyResultResource(                                         context, info,                                         "The input is consistent :)")),                         TEXT_HTML).build();*/
 block|}
 else|else
 block|{
@@ -836,7 +954,9 @@ argument_list|(
 literal|"The input is not consistent"
 argument_list|)
 expr_stmt|;
-return|return
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|status
@@ -845,6 +965,30 @@ name|Status
 operator|.
 name|CONFLICT
 argument_list|)
+decl_stmt|;
+name|rb
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_TYPE
+argument_list|,
+name|TEXT_HTML
+operator|+
+literal|"; charset=utf-8"
+argument_list|)
+expr_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+name|rb
 operator|.
 name|entity
 argument_list|(
@@ -864,15 +1008,14 @@ literal|"The input is NOT consistent :("
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|type
-argument_list|(
-name|TEXT_HTML
-argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
 return|;
+comment|/*return Response                         .status(Status.CONFLICT)                         .entity(new Viewable("result",                                 new ReasoningPrettyResultResource(                                         context, info,                                         "The input is NOT consistent :(")))                         .type(TEXT_HTML).build();*/
 block|}
 block|}
 else|else
@@ -889,13 +1032,28 @@ argument_list|(
 literal|"The input is consistent"
 argument_list|)
 expr_stmt|;
-return|return
+comment|//return Response.ok("The input is consistent :)").build();
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|ok
 argument_list|(
 literal|"The input is consistent :)"
 argument_list|)
+decl_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()
@@ -910,7 +1068,10 @@ argument_list|(
 literal|"The input is not consistent"
 argument_list|)
 expr_stmt|;
-return|return
+comment|//return Response.status(Status.CONFLICT).build();
+name|ResponseBuilder
+name|rb
+init|=
 name|Response
 operator|.
 name|status
@@ -919,6 +1080,18 @@ name|Status
 operator|.
 name|CONFLICT
 argument_list|)
+decl_stmt|;
+name|addCORSOrigin
+argument_list|(
+name|context
+argument_list|,
+name|rb
+argument_list|,
+name|headers
+argument_list|)
+expr_stmt|;
+return|return
+name|rb
 operator|.
 name|build
 argument_list|()

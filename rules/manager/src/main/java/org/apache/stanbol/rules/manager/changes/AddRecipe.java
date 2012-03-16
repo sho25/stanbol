@@ -315,6 +315,26 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * This class will add new recipe to the KReSRuleStore used as input.<br/>  * The KReSRuleStore object used as input is not changed and to get the new modified KReSRuleStore there is the method getStore().<br/>  * If a recipe with a same name or IRI is already inside the KReSRuleStore an error is lunched and the process stopped.<br/>  *   */
 end_comment
@@ -347,6 +367,18 @@ decl_stmt|;
 specifier|private
 name|RuleStore
 name|storeaux
+decl_stmt|;
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
 decl_stmt|;
 comment|/**      * To create a list of imported ontlogy to be added as import declarations      *      * @param inowl {Input ontology where to get the import declarations}      * @return {A list of declarations}      */
 specifier|private
@@ -1044,11 +1076,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -1128,11 +1158,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -1382,11 +1410,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -1411,11 +1437,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -1498,11 +1522,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -1527,11 +1549,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name "
 operator|+
@@ -1553,11 +1573,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name and the set of rules cannot be empity or null."
 argument_list|)
@@ -1780,11 +1798,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name "
 operator|+
@@ -1806,11 +1822,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name and the set of rules cannot be empity or null."
 argument_list|)
@@ -2000,11 +2014,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name "
 operator|+
@@ -2026,11 +2038,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name and the set of rules cannot be empity or null."
 argument_list|)
@@ -2368,11 +2378,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -2452,11 +2460,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -2723,11 +2729,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -2752,11 +2756,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -2839,11 +2841,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -2868,11 +2868,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name "
 operator|+
@@ -2894,11 +2892,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name and the set of rules cannot be empity or null."
 argument_list|)
@@ -3342,11 +3338,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -3426,11 +3420,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -3678,11 +3670,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -3707,11 +3697,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -3794,11 +3782,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -3823,11 +3809,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name "
 operator|+
@@ -3849,11 +3833,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name and the set of rules cannot be empity or null."
 argument_list|)
@@ -4291,11 +4273,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -4375,11 +4355,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -4623,11 +4601,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -4652,11 +4628,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -4739,11 +4713,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with IRI "
 operator|+
@@ -4768,11 +4740,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name "
 operator|+
@@ -4794,11 +4764,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The recipe with name and the set of rules cannot be empity or null."
 argument_list|)

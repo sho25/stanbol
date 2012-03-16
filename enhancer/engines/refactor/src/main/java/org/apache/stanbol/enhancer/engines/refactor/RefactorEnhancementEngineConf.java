@@ -19,24 +19,8 @@ name|refactor
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|felix
-operator|.
-name|scr
-operator|.
-name|annotations
-operator|.
-name|Property
-import|;
-end_import
-
 begin_comment
-comment|/**  *  * @author anuzzolese  * @author alberto.musetti  *   */
+comment|/**  *   * @author anuzzolese  * @author alberto.musetti  *   */
 end_comment
 
 begin_interface
@@ -74,13 +58,13 @@ name|SCOPE_CORE_ONTOLOGY
 init|=
 literal|"org.apache.stanbol.enhancer.engines.refactor.scope.core.ontology"
 decl_stmt|;
-comment|/**      * If true: the previously generated RDF is deleted and substituted with the new one.       * If false: the new one is appended to the old RDF.       * Possible value in the configuration: true or false.      */
+comment|/**      * If true: the previously generated RDF is deleted and substituted with the new one. If false: the new      * one is appended to the old RDF. Possible value in the configuration: true or false.      */
 name|String
 name|APPEND_OTHER_ENHANCEMENT_GRAPHS
 init|=
 literal|"org.apache.stanbol.enhancer.engines.refactor.append.graphs"
 decl_stmt|;
-comment|/**      * If true: entities are fetched via the EntityHub.       * If false: entities are fetched on-line.       * Possible value in the configuration: true or false.      */
+comment|/**      * If true: entities are fetched via the EntityHub. If false: entities are fetched on-line. Possible value      * in the configuration: true or false.      */
 name|String
 name|USE_ENTITY_HUB
 init|=

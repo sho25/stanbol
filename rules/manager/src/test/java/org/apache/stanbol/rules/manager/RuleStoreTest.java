@@ -576,11 +576,9 @@ operator|.
 name|getOntology
 argument_list|()
 decl_stmt|;
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"Path for default store config is "
 operator|+

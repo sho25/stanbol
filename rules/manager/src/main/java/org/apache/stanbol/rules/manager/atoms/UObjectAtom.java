@@ -261,17 +261,6 @@ operator|=
 literal|1
 expr_stmt|;
 block|}
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"UObject : "
-operator|+
-name|argument
-argument_list|)
-expr_stmt|;
 block|}
 annotation|@
 name|Override

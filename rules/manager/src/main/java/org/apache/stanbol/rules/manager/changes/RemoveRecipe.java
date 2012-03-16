@@ -297,6 +297,26 @@ name|OWLEntityRemover
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * This class will remove a recipe from the KReSRuleStore used as input.<br/>  * The KReSRuleStore object used as input is not changed and to get the new modified KReSRuleStore there is the method getStore().<br/>  * If the recipe name or IRI is not already inside the KReSRuleStore an error is lunched and the process stopped.  *  */
 end_comment
@@ -306,6 +326,18 @@ specifier|public
 class|class
 name|RemoveRecipe
 block|{
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 specifier|private
 name|OWLOntology
 name|owlmodel
@@ -1054,11 +1086,9 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"Some error occurs during deletion."
 argument_list|)
@@ -1215,11 +1245,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"Some error occurs during deletion."
 argument_list|)
@@ -1240,11 +1268,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with name "
 operator|+
@@ -1616,11 +1642,9 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"Some error occurs during deletion."
 argument_list|)
@@ -1787,11 +1811,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"Some error occurs during deletion."
 argument_list|)
@@ -1820,11 +1842,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The rule with name "
 operator|+

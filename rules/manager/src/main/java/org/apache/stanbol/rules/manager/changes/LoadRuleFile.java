@@ -303,6 +303,26 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * This class will store a set of rules and recipes, describe in a file, to the KReSRuleStore used as input.<br/>  * The file contains all the rules and recipes to be added to the KReSRuleStore. The rows are the following format:<br/>  *  - All the rows that start with # will be ignored<br/>  *  - All the rows that start with $ identify a class either a Recipe or a KReSRule<br/>  *  - All the rows that start with @ identify a name<br/>  *  - All the rows that start with * identify a comment<br/>  *<br/>  * An example of file is:<br/>  * #This is a comment to the file<br/>  * #These are the rules that I want to insert in the system.<br/>  * $KReSRule<br/>  *&#64;MyRuleA<br/>  * *My comment to the rule A<br/>  * MyRuleABody -> MyRuleAHead<br/>  *&#64;MyRuleB<br/>  * *My comment to the rule B<br/>  * MyRuleBBody -> MyRuleBHead<br/>  *&#64;MyRuleC<br/>  * *My comment to the rule C<br/>  * MyRuleCBody -> MyRuleCHead<br/>  *<br/>  * #This is a recipe<br/>  * $Recipe<br/>  *&#64;MyRecipe<br/>  * *My comment to the recipe<br/>  * MyRuleC<br/>  * MyRuleB<br/>  * MyRuleA<br/>  *<br/>  * N.B. The KReSRuleStore object used as input is not changed and to get the new modified KReSRuleStore there is the method getStore().  *  */
 end_comment
@@ -312,6 +332,18 @@ specifier|public
 class|class
 name|LoadRuleFile
 block|{
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
+decl_stmt|;
 specifier|private
 name|OWLOntology
 name|owlmodel
@@ -674,11 +706,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"There isn't the istance to which you are trying to add the property. Pleas check that "
 operator|+
@@ -762,11 +792,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The file contains a wrong class name. Pleas check the name: "
 operator|+
@@ -875,11 +903,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"The file contains a repeated istance name. The istance is already inside the ontology. Pleas check the name: "
 operator|+
@@ -983,11 +1009,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"There isn't the istance to which you are trying to add the property. Pleas check that "
 operator|+
@@ -1125,11 +1149,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"There isn't the istance to which you are trying to add the property. Pleas check that "
 operator|+
@@ -1562,11 +1584,9 @@ block|}
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"There isn't the istance to which you are trying to add the property. Pleas check that "
 operator|+
@@ -1699,11 +1719,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|err
-operator|.
-name|println
+name|error
 argument_list|(
 literal|"There isn't the istance to which you are trying to add the property. Pleas check that "
 operator|+

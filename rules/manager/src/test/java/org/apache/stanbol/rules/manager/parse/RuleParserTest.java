@@ -93,6 +93,26 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  *   * @author andrea.nuzzolese  *  */
 end_comment
@@ -106,6 +126,18 @@ specifier|private
 specifier|static
 name|String
 name|kReSRule
+decl_stmt|;
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
 decl_stmt|;
 annotation|@
 name|BeforeClass
@@ -173,11 +205,9 @@ range|:
 name|kReSRuleList
 control|)
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"RULE : "
 operator|+
@@ -189,11 +219,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"RULE LIST IS NULL"
 argument_list|)
@@ -201,11 +229,9 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|System
+name|log
 operator|.
-name|out
-operator|.
-name|println
+name|debug
 argument_list|(
 literal|"KB IS NULL"
 argument_list|)

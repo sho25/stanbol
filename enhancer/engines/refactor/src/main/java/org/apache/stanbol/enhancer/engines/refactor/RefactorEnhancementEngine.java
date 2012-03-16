@@ -1177,6 +1177,10 @@ operator|=
 name|EnhancementEngine
 operator|.
 name|PROPERTY_NAME
+argument_list|,
+name|value
+operator|=
+literal|"seo_refactoring"
 argument_list|)
 block|}
 argument_list|)
@@ -1198,7 +1202,11 @@ block|{
 comment|/*      * TODO This are the scope and recipe IDs to be used by this implementation In future implementation this      * will be configurable      */
 annotation|@
 name|Property
-argument_list|()
+argument_list|(
+name|value
+operator|=
+literal|"seo"
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -1211,7 +1219,11 @@ name|SCOPE
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|()
+argument_list|(
+name|value
+operator|=
+literal|""
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -1224,7 +1236,11 @@ name|RECIPE_LOCATION
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|()
+argument_list|(
+name|value
+operator|=
+literal|"google_rich_snippet_rules"
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -1241,6 +1257,12 @@ argument_list|(
 name|cardinality
 operator|=
 literal|1000
+argument_list|,
+name|value
+operator|=
+block|{
+literal|"http://ontologydesignpatterns.org/ont/iks/kres/dbpedia_demo.owl"
+block|}
 argument_list|)
 specifier|public
 specifier|static
@@ -1254,7 +1276,11 @@ name|SCOPE_CORE_ONTOLOGY
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|()
+argument_list|(
+name|boolValue
+operator|=
+literal|true
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -1267,7 +1293,11 @@ name|APPEND_OTHER_ENHANCEMENT_GRAPHS
 decl_stmt|;
 annotation|@
 name|Property
-argument_list|()
+argument_list|(
+name|boolValue
+operator|=
+literal|true
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
@@ -2067,12 +2097,11 @@ expr_stmt|;
 block|}
 else|else
 block|{
+comment|// mGraph.removeAll(mGraph);
 name|mGraph
 operator|.
-name|removeAll
-argument_list|(
-name|mGraph
-argument_list|)
+name|clear
+argument_list|()
 expr_stmt|;
 name|mGraph
 operator|.
