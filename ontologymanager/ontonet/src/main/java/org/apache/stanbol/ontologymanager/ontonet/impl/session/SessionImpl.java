@@ -713,6 +713,15 @@ argument_list|(
 name|merge
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+operator|!
+name|attachedScopes
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 name|List
 argument_list|<
 name|OWLOntologyChange
@@ -794,6 +803,7 @@ argument_list|(
 name|changes
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|o
 return|;
