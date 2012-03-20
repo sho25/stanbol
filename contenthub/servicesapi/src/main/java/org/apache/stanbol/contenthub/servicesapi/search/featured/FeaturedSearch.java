@@ -169,9 +169,9 @@ function_decl|;
 comment|/**      * This method obtains the available field names of the default index of Contenthub.      *       * @return {@link List} of field names related index      * @throws SearchException      */
 name|List
 argument_list|<
-name|String
+name|FacetResult
 argument_list|>
-name|getFieldNames
+name|getAllFacets
 parameter_list|()
 throws|throws
 name|SearchException
@@ -179,9 +179,9 @@ function_decl|;
 comment|/**      * This method obtains the available field names of the index, corresponding to the given      *<code>indexName</code> of Contenthub. This name corresponds to a Solr Core name within Contenthub.      *       * @param indexName      *            Name of the index for which the field names will be obtained.      * @return {@link List} of field names related index      * @throws SearchException      */
 name|List
 argument_list|<
-name|String
+name|FacetResult
 argument_list|>
-name|getFieldNames
+name|getAllFacets
 parameter_list|(
 name|String
 name|indexName

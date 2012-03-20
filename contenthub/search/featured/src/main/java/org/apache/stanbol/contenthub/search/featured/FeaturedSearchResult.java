@@ -138,7 +138,7 @@ name|List
 argument_list|<
 name|FacetResult
 argument_list|>
-name|facets
+name|facetResults
 decl_stmt|;
 specifier|private
 name|Map
@@ -170,7 +170,7 @@ name|List
 argument_list|<
 name|FacetResult
 argument_list|>
-name|facets
+name|facetResults
 parameter_list|,
 name|Map
 argument_list|<
@@ -197,9 +197,9 @@ name|resultantDocuments
 expr_stmt|;
 name|this
 operator|.
-name|facets
+name|facetResults
 operator|=
-name|facets
+name|facetResults
 expr_stmt|;
 name|this
 operator|.
@@ -237,7 +237,7 @@ block|{
 return|return
 name|this
 operator|.
-name|facets
+name|facetResults
 return|;
 block|}
 annotation|@
@@ -301,7 +301,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|facets
+name|facetResults
 operator|=
 name|facets
 expr_stmt|;

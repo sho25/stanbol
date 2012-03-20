@@ -23,16 +23,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -46,13 +36,11 @@ operator|.
 name|response
 operator|.
 name|FacetField
-operator|.
-name|Count
 import|;
 end_import
 
 begin_comment
-comment|/**  * This interface defines the structure of facets that are obtained from underlying Solr index for the search  * operation  *   * @author suat  *   */
+comment|/**  * This interface defines the structure of facets that are obtained from underlying Solr index for the search  * operation  *   * @author suat  * @author sinaci  *   */
 end_comment
 
 begin_interface
@@ -60,22 +48,12 @@ specifier|public
 interface|interface
 name|FacetResult
 block|{
-comment|/**      * Returns the full name of the facet.      *       * @return      */
-name|String
-name|getName
+name|FacetField
+name|getFacetField
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the name of the facet to be used in the HTML interface.      *       * @return      */
 name|String
-name|getHtmlName
-parameter_list|()
-function_decl|;
-comment|/**      * Returns values regarding this facet in a {@link List} of {@link Count}s.      *       * @return      */
-name|List
-argument_list|<
-name|Count
-argument_list|>
-name|getValues
+name|getType
 parameter_list|()
 function_decl|;
 block|}
