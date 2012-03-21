@@ -20,6 +20,26 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|core
+operator|.
+name|site
+operator|.
+name|AbstractEntitySearcher
+operator|.
+name|extractBaseUri
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -258,6 +278,10 @@ expr_stmt|;
 block|}
 specifier|private
 name|String
+name|accessUri
+decl_stmt|;
+specifier|private
+name|String
 name|baseUri
 decl_stmt|;
 specifier|private
@@ -286,6 +310,16 @@ specifier|public
 specifier|final
 name|String
 name|getAccessUri
+parameter_list|()
+block|{
+return|return
+name|accessUri
+return|;
+block|}
+comment|/**      * Getter for the base URI to be used for parsing relative URIs in responses      * @return      */
+specifier|protected
+name|String
+name|getBaseUri
 parameter_list|()
 block|{
 return|return
@@ -380,7 +414,7 @@ condition|)
 block|{
 name|this
 operator|.
-name|baseUri
+name|accessUri
 operator|=
 name|baseUriObject
 operator|.
@@ -411,6 +445,13 @@ literal|" must be defined"
 argument_list|)
 throw|;
 block|}
+name|baseUri
+operator|=
+name|extractBaseUri
+argument_list|(
+name|accessUri
+argument_list|)
+expr_stmt|;
 comment|//TODO: I am sure, there is some Utility, that supports getting multiple
 comment|//      values from a OSGI Dictionary
 name|Object
@@ -593,6 +634,12 @@ expr_stmt|;
 name|this
 operator|.
 name|prefixes
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|accessUri
 operator|=
 literal|null
 expr_stmt|;

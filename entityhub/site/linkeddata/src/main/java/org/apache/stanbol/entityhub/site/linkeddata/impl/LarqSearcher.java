@@ -22,6 +22,50 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|site
+operator|.
+name|linkeddata
+operator|.
+name|impl
+operator|.
+name|SparqlEndpointUtils
+operator|.
+name|sendSparqlRequest
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|site
+operator|.
+name|linkeddata
+operator|.
+name|impl
+operator|.
+name|SparqlSearcher
+operator|.
+name|extractEntitiesFromJsonResult
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -95,9 +139,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|impl
-operator|.
-name|SimpleMGraph
+name|UriRef
 import|;
 end_import
 
@@ -571,6 +613,13 @@ argument_list|,
 name|SparqlSearcher
 operator|.
 name|DEFAULT_RDF_CONTENT_TYPE
+argument_list|,
+operator|new
+name|UriRef
+argument_list|(
+name|getBaseUri
+argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -686,8 +735,6 @@ decl_stmt|;
 name|InputStream
 name|in
 init|=
-name|SparqlEndpointUtils
-operator|.
 name|sendSparqlRequest
 argument_list|(
 name|getQueryUri
@@ -708,8 +755,6 @@ name|String
 argument_list|>
 name|entities
 init|=
-name|SparqlSearcher
-operator|.
 name|extractEntitiesFromJsonResult
 argument_list|(
 name|in

@@ -501,6 +501,13 @@ argument_list|(
 name|in
 argument_list|,
 name|format
+argument_list|,
+operator|new
+name|UriRef
+argument_list|(
+name|getBaseUri
+argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
