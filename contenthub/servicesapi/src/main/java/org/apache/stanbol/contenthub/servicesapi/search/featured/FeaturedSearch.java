@@ -171,7 +171,7 @@ name|List
 argument_list|<
 name|FacetResult
 argument_list|>
-name|getAllFacets
+name|getAllFacetResults
 parameter_list|()
 throws|throws
 name|SearchException
@@ -181,7 +181,7 @@ name|List
 argument_list|<
 name|FacetResult
 argument_list|>
-name|getAllFacets
+name|getAllFacetResults
 parameter_list|(
 name|String
 name|indexName

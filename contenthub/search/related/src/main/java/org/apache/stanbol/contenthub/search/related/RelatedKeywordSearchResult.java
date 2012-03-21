@@ -230,7 +230,7 @@ name|List
 argument_list|<
 name|DocumentResult
 argument_list|>
-name|getResultantDocuments
+name|getDocuments
 parameter_list|()
 block|{
 name|log

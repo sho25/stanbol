@@ -1373,7 +1373,7 @@ name|toJSON
 argument_list|(
 name|searchResult
 operator|.
-name|getResultantDocuments
+name|getDocuments
 argument_list|()
 argument_list|)
 argument_list|)

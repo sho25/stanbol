@@ -1687,7 +1687,7 @@ name|FacetResult
 argument_list|>
 name|allFacets
 init|=
-name|getAllFacets
+name|getAllFacetResults
 argument_list|(
 name|ldProgramName
 argument_list|)
@@ -1745,13 +1745,13 @@ name|List
 argument_list|<
 name|FacetResult
 argument_list|>
-name|getAllFacets
+name|getAllFacetResults
 parameter_list|()
 throws|throws
 name|SearchException
 block|{
 return|return
-name|getAllFacets
+name|getAllFacetResults
 argument_list|(
 literal|null
 argument_list|)
@@ -1764,7 +1764,7 @@ name|List
 argument_list|<
 name|FacetResult
 argument_list|>
-name|getAllFacets
+name|getAllFacetResults
 parameter_list|(
 name|String
 name|ldProgramName

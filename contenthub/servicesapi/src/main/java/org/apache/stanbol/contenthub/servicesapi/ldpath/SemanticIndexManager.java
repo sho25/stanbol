@@ -61,17 +61,17 @@ end_import
 
 begin_import
 import|import
-name|org
+name|at
 operator|.
-name|apache
+name|newmedialab
 operator|.
-name|clerezza
+name|ldpath
 operator|.
-name|rdf
+name|model
 operator|.
-name|core
+name|programs
 operator|.
-name|MGraph
+name|Program
 import|;
 end_import
 
@@ -130,6 +130,18 @@ name|String
 name|programName
 parameter_list|)
 function_decl|;
+comment|/** 	 * Retrieves the program managed by {@link ProgramManager} with given 	 name, 	 * parses it, and returns the {@link Progra} 	 * 	 * @param programName 	 * @return 	 * @throws LDPathException 	 */
+specifier|public
+name|Program
+argument_list|<
+name|Object
+argument_list|>
+name|getParsedProgramByName
+parameter_list|(
+name|String
+name|programName
+parameter_list|)
+function_decl|;
 comment|/** 	 * Deletes both the program and the corresponding Solr Core 	 *  	 * @param programName 	 *            name of the program-core pair to be deleted 	 */
 specifier|public
 name|void
@@ -166,9 +178,6 @@ argument_list|<
 name|String
 argument_list|>
 name|contexts
-parameter_list|,
-name|MGraph
-name|graph
 parameter_list|)
 throws|throws
 name|LDPathException

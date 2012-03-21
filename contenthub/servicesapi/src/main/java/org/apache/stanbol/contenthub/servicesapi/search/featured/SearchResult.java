@@ -113,7 +113,7 @@ name|List
 argument_list|<
 name|DocumentResult
 argument_list|>
-name|getResultantDocuments
+name|getDocuments
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the facets generated as a result of the search operations. Each search result has its own      * facets.      *       * @return A {@link List} of {@link FacetResult}s.      */
@@ -142,7 +142,7 @@ argument_list|>
 name|getRelatedKeywords
 parameter_list|()
 function_decl|;
-comment|/**      * Setter for the resultant documents list      *       * @param resultantDocuments      */
+comment|/**      * Setter for the resultant documents list      *       * @param documentResults      */
 name|void
 name|setDocuments
 parameter_list|(
@@ -150,7 +150,7 @@ name|List
 argument_list|<
 name|DocumentResult
 argument_list|>
-name|resultantDocuments
+name|documentResults
 parameter_list|)
 function_decl|;
 comment|/**      * Setter for the facets list      *       * @param facets      */

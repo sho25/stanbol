@@ -662,7 +662,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is the web resource which provides RESTful and HTTP interfaces for {@link FeaturedSearch}  * services.  *   * @author anil.sinaci  * @author suat  *   */
+comment|/**  * This class is the web resource which provides RESTful and HTTP interfaces for  * {@link FeaturedSearch} services.  *   * @author anil.sinaci  * @author suat  *   */
 end_comment
 
 begin_class
@@ -704,7 +704,7 @@ specifier|private
 name|String
 name|indexName
 decl_stmt|;
-comment|/**      *       * @param context      * @param indexName      *            Name of the LDPath program (name of the Solr core/index) to be used while storing this      *            content item. LDPath programs can be managed through {@link SemanticIndexManagerResource} or      *            {@link SemanticIndexManager}      * @throws IOException      * @throws InvalidSyntaxException      */
+comment|/** 	 *  	 * @param context 	 * @param indexName 	 *            Name of the LDPath program (name of the Solr core/index) to be 	 *            used while storing this content item. LDPath programs can be 	 *            managed through {@link SemanticIndexManagerResource} or 	 *            {@link SemanticIndexManager} 	 * @throws IOException 	 * @throws InvalidSyntaxException 	 */
 specifier|public
 name|FeaturedSearchResource
 parameter_list|(
@@ -801,7 +801,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * HTTP GET method to make a featured search over Contenthub.      *       * @param queryTerm      *            A keyword a statement or a set of keywords which can be regarded as the query term.      * @param solrQuery      *            Solr query string. This is the string format which is accepted by a Solr server. For      *            example, {@code q="john doe"&fl=score} is a valid value for this parameter. If this      *            parameter exists, search is performed based on this solrQuery and any queryTerms are      *            neglected.      * @param jsonCons      *            Constrainst in JSON format. These constraints are tranformed to corresponding Solr queries      *            to enable faceted search. Each constraint is a facet field and values of the constraints      *            maps to the values of the facet fields in Solr queries.      * @param graphURI      *            URI of the ontology in which related keywords will be searched by      *            {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)}      * @param offset      *            The offset of the document from which the resultant documents will start as the search      *            result. {@link offset} and {@link limit} parameters can be used to make a pagination      *            mechanism for search results.      * @param limit      *            Maximum number of resultant documents to be returned as the search result. {@link offset}      *            and {@link limit} parameters can be used to make a pagination mechanism for search results.      * @param fromStore      *            Special parameter for HTML view only.      * @param headers      *            HTTP headers      * @return HTML view or JSON representation of the search results or HTTP BAD REQUEST(400)      * @throws IllegalArgumentException      * @throws SearchException      * @throws InstantiationException      * @throws IllegalAccessException      * @throws SolrServerException      * @throws IOException      */
+comment|/** 	 * HTTP GET method to make a featured search over Contenthub. 	 *  	 * @param queryTerm 	 *            A keyword a statement or a set of keywords which can be 	 *            regarded as the query term. 	 * @param solrQuery 	 *            Solr query string. This is the string format which is accepted 	 *            by a Solr server. For example, {@code q="john doe"&fl=score} 	 *            is a valid value for this parameter. If this parameter exists, 	 *            search is performed based on this solrQuery and any queryTerms 	 *            are neglected. 	 * @param jsonCons 	 *            Constrainst in JSON format. These constraints are tranformed 	 *            to corresponding Solr queries to enable faceted search. Each 	 *            constraint is a facet field and values of the constraints maps 	 *            to the values of the facet fields in Solr queries. 	 * @param graphURI 	 *            URI of the ontology in which related keywords will be searched 	 *            by 	 *            {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)} 	 * @param offset 	 *            The offset of the document from which the resultant documents 	 *            will start as the search result. {@link offset} and 	 *            {@link limit} parameters can be used to make a pagination 	 *            mechanism for search results. 	 * @param limit 	 *            Maximum number of resultant documents to be returned as the 	 *            search result. {@link offset} and {@link limit} parameters can 	 *            be used to make a pagination mechanism for search results. 	 * @param fromStore 	 *            Special parameter for HTML view only. 	 * @param headers 	 *            HTTP headers 	 * @return HTML view or JSON representation of the search results or HTTP 	 *         BAD REQUEST(400) 	 * @throws IllegalArgumentException 	 * @throws SearchException 	 * @throws InstantiationException 	 * @throws IllegalAccessException 	 * @throws SolrServerException 	 * @throws IOException 	 */
 annotation|@
 name|GET
 annotation|@
@@ -1334,6 +1334,19 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|List
+argument_list|<
+name|FacetResult
+argument_list|>
+name|allAvailableFacets
+init|=
+name|featuredSearch
+operator|.
+name|getAllFacetResults
+argument_list|(
+name|indexName
+argument_list|)
+decl_stmt|;
 name|sq
 operator|=
 name|SolrQueryUtil
@@ -1342,7 +1355,8 @@ name|prepareFacetedSolrQuery
 argument_list|(
 name|queryTerm
 argument_list|,
-comment|/* allAvailableFacetNames, */
+name|allAvailableFacets
+argument_list|,
 name|constraintsMap
 argument_list|)
 expr_stmt|;
@@ -1356,7 +1370,6 @@ operator|.
 name|prepareDefaultSolrQuery
 argument_list|(
 name|queryTerm
-comment|/* , allAvailableFacetNames */
 argument_list|)
 expr_stmt|;
 block|}
@@ -1427,7 +1440,7 @@ argument_list|)
 condition|)
 block|{
 comment|// return HTML document
-comment|/*              * For HTML view, sort facets according to their names               */
+comment|/* 			 * For HTML view, sort facets according to their names 			 */
 name|this
 operator|.
 name|searchResults
@@ -1687,7 +1700,7 @@ return|return
 name|orderedFacets
 return|;
 block|}
-comment|/*      * Services to draw HTML view      */
+comment|/* 	 * Services to draw HTML view 	 */
 comment|// Data holders for HTML view
 specifier|private
 name|List
@@ -1732,7 +1745,7 @@ init|=
 literal|10
 decl_stmt|;
 comment|// ///////////////////////////
-comment|/*      * Helper methods for HTML view      */
+comment|/* 	 * Helper methods for HTML view 	 */
 specifier|public
 name|Object
 name|getMoreRecentItems
@@ -1767,7 +1780,7 @@ if|if
 condition|(
 name|searchResults
 operator|.
-name|getResultantDocuments
+name|getDocuments
 argument_list|()
 operator|.
 name|size
@@ -1824,14 +1837,14 @@ return|;
 block|}
 specifier|public
 name|Object
-name|getResultantDocuments
+name|getDocuments
 parameter_list|()
 block|{
 if|if
 condition|(
 name|searchResults
 operator|.
-name|getResultantDocuments
+name|getDocuments
 argument_list|()
 operator|.
 name|size
@@ -1843,7 +1856,7 @@ block|{
 return|return
 name|searchResults
 operator|.
-name|getResultantDocuments
+name|getDocuments
 argument_list|()
 operator|.
 name|subList
@@ -1859,7 +1872,7 @@ block|{
 return|return
 name|searchResults
 operator|.
-name|getResultantDocuments
+name|getDocuments
 argument_list|()
 return|;
 block|}
