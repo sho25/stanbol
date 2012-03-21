@@ -363,6 +363,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|net
+operator|.
+name|URLEncoder
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|ArrayList
@@ -2367,10 +2377,18 @@ literal|"raw"
 argument_list|)
 condition|)
 block|{
+comment|//TODO we should return the content directly without the file indirection
 name|String
 name|fileName
 init|=
+name|URLEncoder
+operator|.
+name|encode
+argument_list|(
 name|contentURI
+argument_list|,
+literal|"utf-8"
+argument_list|)
 operator|+
 literal|"-raw"
 decl_stmt|;
