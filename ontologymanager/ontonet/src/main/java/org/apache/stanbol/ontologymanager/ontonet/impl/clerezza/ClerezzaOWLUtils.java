@@ -128,7 +128,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|ClerezzaUtils
+name|ClerezzaOWLUtils
 block|{
 specifier|public
 specifier|static

@@ -647,7 +647,7 @@ name|impl
 operator|.
 name|clerezza
 operator|.
-name|ClerezzaUtils
+name|ClerezzaOWLUtils
 import|;
 end_import
 
@@ -1053,7 +1053,7 @@ comment|// This one is created from scratch
 name|MGraph
 name|ont2
 init|=
-name|ClerezzaUtils
+name|ClerezzaOWLUtils
 operator|.
 name|createOntology
 argument_list|(

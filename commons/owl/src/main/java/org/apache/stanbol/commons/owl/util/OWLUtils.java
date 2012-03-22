@@ -405,6 +405,7 @@ name|iri
 argument_list|)
 return|;
 block|}
+comment|/**      * Returns an UriRef wrapper for the first instance of owl:Ontology it detects, and ignores further      * instances (which is nonstandard in OWL).      *       * If the ontology is anonymous, a timestamped UriRef is created      *       * @param g      * @return      */
 specifier|public
 specifier|static
 name|UriRef
@@ -485,16 +486,30 @@ operator|)
 name|subj
 return|;
 block|}
-return|return
-operator|new
-name|UriRef
-argument_list|(
+name|String
+name|s
+init|=
 name|NS_STANBOL
 operator|+
 name|System
 operator|.
 name|currentTimeMillis
 argument_list|()
+decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Ontology is anonymous. Returning generated ID<{}> ."
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+return|return
+operator|new
+name|UriRef
+argument_list|(
+name|s
 argument_list|)
 return|;
 block|}

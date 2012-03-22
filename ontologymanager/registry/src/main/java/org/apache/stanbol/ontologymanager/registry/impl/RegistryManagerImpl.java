@@ -1868,6 +1868,10 @@ decl_stmt|;
 if|if
 condition|(
 name|dataFileProvider
+operator|!=
+literal|null
+operator|&&
+name|dataFileProvider
 operator|.
 name|isAvailable
 argument_list|(
@@ -1896,6 +1900,12 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|src
+operator|!=
+literal|null
+condition|)
 name|o
 operator|=
 name|mgr

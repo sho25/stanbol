@@ -131,6 +131,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLOntologyID
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -269,16 +283,36 @@ name|forceMerge
 parameter_list|)
 function_decl|;
 comment|/**      * Returns an array containing the most specific types for ontology objects that this provider can manage      * and return on a call to {@link #getStoredOntology(String, Class)}.      *       * @return the supported ontology return types.      */
-parameter_list|<
-name|O
-parameter_list|>
 name|Class
 argument_list|<
-name|O
+name|?
 argument_list|>
 index|[]
 name|getSupportedReturnTypes
 parameter_list|()
+function_decl|;
+name|boolean
+name|hasOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|)
+function_decl|;
+comment|/**      * Checks if an ontology with the specified OWL ontology ID is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(IRI, Class)} and checking      * if the returned value is not null.      *       * @param id      *            the ontology id. If there is both an ontology IRI and a version IRI, both must match the      *            ontology provider's records in order to return true. Otherwise, it will return true iff      *<i>any</i> match with the ontology IIR is found, no matter its version IRI.      * @return true iff an ontology with the supplied id is in the provider's store.      */
+name|boolean
+name|hasOntology
+parameter_list|(
+name|OWLOntologyID
+name|id
+parameter_list|)
+function_decl|;
+comment|/**      * Checks if an ontology with the specified storage reference is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(String, Class)} and      * checking if the returned value is not null.      *       * @param key      *            the ontology storage key.      * @return true iff an ontology with the supplied key is in the provider's store.      */
+name|boolean
+name|hasOntology
+parameter_list|(
+name|String
+name|key
+parameter_list|)
 function_decl|;
 comment|/**      * Retrieves an ontology by reading its content from a data stream and stores it using the storage system      * attached to this provider. A key that can be used to identify the ontology in this provider is returned      * if successful.      *       * @param data      *            the ontology content.      * @param formatIdentifier      *            the MIME type of the expected serialization format of this ontology. If null, all supported      *            formats will be tried until all parsers fail or one succeeds.      * @param preferredKey      *            a string that should preferrably identify the ontology internally within the provider. It      *            will be ignored if null or empty. It is not guaranteed that the supplied key can be used,      *            e.g. if there is already a duplicate of the key and the policy does not allow duplicates. In      *            this case, a different key will be set and returned by this method.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If some remote import is found, the import policy is aggressive and Stanbol is      *            set on offline mode, this method will fail.      * @return a key that can be used to retrieve the stored ontology afterwards, or null if loading/storage      *         failed. If it was possible to set it as such, it will be the same as<tt>preferredKey</tt>.      * @throws IOException      *             if all attempts to load the ontology failed.      * @throws UnsupportedFormatException      *             if no parsers are able to parse the supplied format (or the actual file format).      */
 name|String

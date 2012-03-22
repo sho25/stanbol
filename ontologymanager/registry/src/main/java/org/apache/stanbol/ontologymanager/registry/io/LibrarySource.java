@@ -583,7 +583,11 @@ init|=
 name|lib
 operator|.
 name|getOntologies
-argument_list|()
+argument_list|(
+name|OWLOntology
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 name|this
 operator|.
