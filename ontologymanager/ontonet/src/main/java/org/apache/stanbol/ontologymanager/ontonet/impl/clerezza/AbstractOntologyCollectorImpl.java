@@ -3186,6 +3186,8 @@ operator|.
 name|getUnicodeString
 argument_list|()
 decl_stmt|;
+comment|// FIXME note the different import targets in the OWLOntology and TripleColllection objects!
+comment|// s = s.substring(s.indexOf("::") + 2, s.length());
 name|boolean
 name|managed
 init|=
@@ -3514,7 +3516,27 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-comment|// s = s.substring(s.indexOf("::") + 2, s.length());
+name|s
+operator|=
+name|s
+operator|.
+name|substring
+argument_list|(
+name|s
+operator|.
+name|indexOf
+argument_list|(
+literal|"::"
+argument_list|)
+operator|+
+literal|2
+argument_list|,
+name|s
+operator|.
+name|length
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|boolean
 name|managed
 init|=
