@@ -574,7 +574,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * This service enables submission of content repository objects to Contenthub. Connection to the content      * repository is established by the previously created session object. This object is specified by the      *<code>sessionKey</code>. This service makes possible to submit content items through either their IDs      * or paths in the content repository. Enhancements of content items are obtained through<b>Stanbol      * Enhancer</b> before submitting them to Contenthub.      *       *<p>      * If<code>id</code> parameter is set, the target object is obtained from the content repository      * according to its ID. If<code>path</code> parameter is set, first the ID of target object is obtained      * from the content repository and then the retrieved ID is used in submission of content item. When      *<code>path</code> parameter is set, it is also possible to process all content repository objects under      * the specified path by setting<code>recursive</code> parameter as<code>true</code>.      *       *<p>      * For some cases, it is necessary to know the property of the content repository object that keeps the      * actual content e.g while processing a nt:unstructured typed JCR content repository object. Such custom      * properties are specified within the<code>contentProperties</code> parameter.      *       *       * @param sessionKey      *            session key to obtain a previously created session to be used to connect a content      *            repository      * @param id      *            content repository ID of the content item to be submitted      * @param path      *            content repository path of the content item to be submitted      * @param recursive      *            this parameter is used together with<code>path</code> parameter. Its default value is      *<code>false</code>. If it is set as<code>true</code>. All content repository objects under      *            the specified path are processed.      * @param contentProperties      *            this parameter indicates the list of properties that are possibly holding the actual      *            content. Possible values are passed as comma separated. Its default value is<b>content,      *            skos:definition</b>.      *       * @return      * @throws RepositoryAccessException      * @throws ContenthubFeederException      */
+comment|/**      * This service enables submission of content repository objects to Contenthub. Connection to the content      * repository is established by the previously created session object. This object is specified by the      *<code>sessionKey</code>. This service makes possible to submit content items through either their IDs      * or paths in the content repository. Enhancements of content items are obtained through<b>Stanbol      * Enhancer</b> before submitting them to Contenthub.      *       *<p>      * If<code>id</code> parameter is set, the target object is obtained from the content repository      * according to its ID. If<code>path</code> parameter is set, first the ID of target object is obtained      * from the content repository and then the retrieved ID is used in submission of content item. When      *<code>path</code> parameter is set, it is also possible to process all content repository objects under      * the specified path by setting<code>recursive</code> parameter as<code>true</code>.      *       *<p>      * For some cases, it is necessary to know the property of the content repository object that keeps the      * actual content e.g while processing a nt:unstructured typed JCR content repository object. Such custom      * properties are specified within the<code>contentProperties</code> parameter.      *       *       * @param sessionKey      *            session key to obtain a previously created session to be used to connect a content      *            repository      * @param id      *            content repository ID of the content item to be submitted      * @param path      *            content repository path of the content item to be submitted      * @param recursive      *            this parameter is used together with<code>path</code> parameter. Its default value is      *<code>false</code>. If it is set as<code>true</code>. All content repository objects under      *            the specified path are processed.      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitte content items      * @param contentProperties      *            this parameter indicates the list of properties that are possibly holding the actual      *            content. Possible values are passed as comma separated. Its default value is<b>content,      *            skos:definition</b>.      *       * @return      * @throws RepositoryAccessException      * @throws ContenthubFeederException      */
 annotation|@
 name|POST
 annotation|@
@@ -624,6 +624,14 @@ literal|"false"
 argument_list|)
 name|boolean
 name|recursive
+parameter_list|,
+annotation|@
+name|FormParam
+argument_list|(
+literal|"indexName"
+argument_list|)
+name|String
+name|indexName
 parameter_list|,
 annotation|@
 name|FormParam
@@ -745,6 +753,8 @@ operator|.
 name|submitContentItemByID
 argument_list|(
 name|id
+argument_list|,
+name|indexName
 argument_list|)
 expr_stmt|;
 block|}
@@ -767,6 +777,8 @@ operator|.
 name|submitContentItemByPath
 argument_list|(
 name|path
+argument_list|,
+name|indexName
 argument_list|)
 expr_stmt|;
 block|}
@@ -777,6 +789,8 @@ operator|.
 name|submitContentItemsUnderPath
 argument_list|(
 name|path
+argument_list|,
+name|indexName
 argument_list|)
 expr_stmt|;
 block|}
@@ -826,7 +840,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * This service enables deletion of content items from Contenthub. Connection to the content repository is      * established by the previously created session object. This object is specified by the      *<code>sessionKey</code>. This service makes possible to delete content items through either their IDs      * or paths in the content repository.      *       *<p>      * If<code>id</code> parameter is set, the content item is directly tried to be deleted from Contenthub.      * If<code>path</code> parameter is set, the ID of the target object is first obtained from the content      * repository according to its path. Then retrieved ID is used to delete related content item from      * Contenthub.      *       * @param sessionKey      *            session key to obtain a previously created session to be used to connect a content      *            repository      * @param id      *            content repository ID of the content item to be submitted      * @param path      *            content repository path of the content item to be submitted      * @param recursive      *            this parameter is used together with<code>path</code> parameter. Its default value is      *<code>false</code>. If it is set as<code>true</code>. All content repository objects under      *            the specified path are processed.      * @return      * @throws RepositoryAccessException      * @throws ContenthubFeederException      */
+comment|/**      * This service enables deletion of content items from Contenthub. Connection to the content repository is      * established by the previously created session object. This object is specified by the      *<code>sessionKey</code>. This service makes possible to delete content items through either their IDs      * or paths in the content repository.      *       *<p>      * If<code>id</code> parameter is set, the content item is directly tried to be deleted from Contenthub.      * If<code>path</code> parameter is set, the ID of the target object is first obtained from the content      * repository according to its path. Then retrieved ID is used to delete related content item from      * Contenthub.      *       * @param sessionKey      *            session key to obtain a previously created session to be used to connect a content      *            repository      * @param id      *            content repository ID of the content item to be submitted      * @param path      *            content repository path of the content item to be submitted      * @param recursive      *            this parameter is used together with<code>path</code> parameter. Its default value is      *<code>false</code>. If it is set as<code>true</code>. All content repository objects under      *            the specified path are processed.      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to delete the      *            content items from      * @return      * @throws RepositoryAccessException      * @throws ContenthubFeederException      */
 annotation|@
 name|DELETE
 annotation|@
@@ -876,6 +890,14 @@ literal|"false"
 argument_list|)
 name|boolean
 name|recursive
+parameter_list|,
+annotation|@
+name|FormParam
+argument_list|(
+literal|"indexName"
+argument_list|)
+name|String
+name|indexName
 parameter_list|,
 annotation|@
 name|Context
@@ -964,6 +986,8 @@ operator|.
 name|deleteContentItemByID
 argument_list|(
 name|id
+argument_list|,
+name|indexName
 argument_list|)
 expr_stmt|;
 block|}
@@ -986,6 +1010,8 @@ operator|.
 name|deleteContentItemByPath
 argument_list|(
 name|path
+argument_list|,
+name|indexName
 argument_list|)
 expr_stmt|;
 block|}
@@ -996,6 +1022,8 @@ operator|.
 name|deleteContentItemsUnderPath
 argument_list|(
 name|path
+argument_list|,
+name|indexName
 argument_list|)
 expr_stmt|;
 block|}

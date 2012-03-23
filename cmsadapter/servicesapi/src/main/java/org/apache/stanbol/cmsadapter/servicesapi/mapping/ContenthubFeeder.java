@@ -67,12 +67,37 @@ name|String
 name|id
 parameter_list|)
 function_decl|;
+comment|/**      * Creates a content item in Contenthub by leveraging the content repository object itself e.g<b>Node</b>      * in JCR,<b>Document</b> in CMIS. If there is an already existing content item in the Contenthub with      * the same id, the existing content item should be deleted first.      *       * @param o      *            Content repository object to be transformed into a content item in Contenthub      * @param id      *            Optional ID for the content item in Contenthub. If this parameter is specified, it will be      *            used as the ID of the content item in Contenthub. Otherwise, the object's own ID in the      *            content repository will be used.      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content item      */
+name|void
+name|submitContentItemByCMSObject
+parameter_list|(
+name|Object
+name|o
+parameter_list|,
+name|String
+name|id
+parameter_list|,
+name|String
+name|indexName
+parameter_list|)
+function_decl|;
 comment|/**      * Submits content item by its ID to the Contenthub. If there is an already existing content item in the      * Contenthub with the same id, the existing content item should be deleted first.      *       * @param contentItemID      *            ID of the content item in the repository      */
 name|void
 name|submitContentItemByID
 parameter_list|(
 name|String
 name|contentItemID
+parameter_list|)
+function_decl|;
+comment|/**      * Submits content item by its ID to the Contenthub. If there is an already existing content item in the      * Contenthub with the same id, the existing content item should be deleted first.      *       * @param contentItemID      *            ID of the content item in the repository      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content item      */
+name|void
+name|submitContentItemByID
+parameter_list|(
+name|String
+name|contentItemID
+parameter_list|,
+name|String
+name|indexName
 parameter_list|)
 function_decl|;
 comment|/**      * Submits content item by its path to the Contenthub. If there is an already existing content item in the      * Contenthub with the same id, the existing content item should be deleted first.      *       * @param contentItemPath      *            path of the content item in the repository      */
@@ -83,12 +108,34 @@ name|String
 name|contentItemPath
 parameter_list|)
 function_decl|;
+comment|/**      * Submits content item by its path to the Contenthub. If there is an already existing content item in the      * Contenthub with the same id, the existing content item should be deleted first.      *       * @param contentItemPath      *            path of the content item in the repository      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content item      */
+name|void
+name|submitContentItemByPath
+parameter_list|(
+name|String
+name|contentItemPath
+parameter_list|,
+name|String
+name|indexName
+parameter_list|)
+function_decl|;
 comment|/**      * Submits all of the content items under the specified path to the Contenthub. If there are already      * existing content items in the Contenthub with same ids of submitted content items, the existing content      * items should be deleted first.      *       * @param rootPath      *            root path in the content repository      */
 name|void
 name|submitContentItemsUnderPath
 parameter_list|(
 name|String
 name|rootPath
+parameter_list|)
+function_decl|;
+comment|/**      * Submits all of the content items under the specified path to the Contenthub. If there are already      * existing content items in the Contenthub with same ids of submitted content items, the existing content      * items should be deleted first.      *       * @param rootPath      *            root path in the content repository      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content items      */
+name|void
+name|submitContentItemsUnderPath
+parameter_list|(
+name|String
+name|rootPath
+parameter_list|,
+name|String
+name|indexName
 parameter_list|)
 function_decl|;
 comment|/**      * Filters content items from content repository via the specific {@link ContentItemFilter} implementation      * passed as a parameter and submits the filtered content items to the Contenthub. If there are already      * existing content items in the Contenthub with same ids of submitted content items, the existing content      * items should be deleted first.      *       * @param customContentItemFilter      *            custom {@link ContentItemFilter} implementation      */
@@ -99,12 +146,34 @@ name|ContentItemFilter
 name|customContentItemFilter
 parameter_list|)
 function_decl|;
+comment|/**      * Filters content items from content repository via the specific {@link ContentItemFilter} implementation      * passed as a parameter and submits the filtered content items to the Contenthub. If there are already      * existing content items in the Contenthub with same ids of submitted content items, the existing content      * items should be deleted first.      *       * @param customContentItemFilter      *            custom {@link ContentItemFilter} implementation      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content items      */
+name|void
+name|submitContentItemsByCustomFilter
+parameter_list|(
+name|ContentItemFilter
+name|customContentItemFilter
+parameter_list|,
+name|String
+name|indexName
+parameter_list|)
+function_decl|;
 comment|/**      * Deletes content item by its ID from the Contenthub. Please note that specified identifier should be the      * one that identifying the content item in Contenthub.      *       * @param contentItemID      *            ID of the content item in the<b>Contenthub</b>      */
 name|void
 name|deleteContentItemByID
 parameter_list|(
 name|String
 name|contentItemID
+parameter_list|)
+function_decl|;
+comment|/**      * Deletes content item by its ID from the Contenthub. Please note that specified identifier should be the      * one that identifying the content item in Contenthub.      *       * @param contentItemID      *            ID of the content item in the<b>Contenthub</b>      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to delete the      *            submitted content item from.      */
+name|void
+name|deleteContentItemByID
+parameter_list|(
+name|String
+name|contentItemID
+parameter_list|,
+name|String
+name|indexName
 parameter_list|)
 function_decl|;
 comment|/**      * Deletes content item by its path from the Contenthub      *       * @param contentItemPath      *            path of the content item in the repository      */
@@ -115,6 +184,17 @@ name|String
 name|contentItemPath
 parameter_list|)
 function_decl|;
+comment|/**      * Deletes content item by its path from the Contenthub      *       * @param contentItemPath      *            path of the content item in the repository      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to delete the      *            submitted content item from.      */
+name|void
+name|deleteContentItemByPath
+parameter_list|(
+name|String
+name|contentItemPath
+parameter_list|,
+name|String
+name|indexName
+parameter_list|)
+function_decl|;
 comment|/**      * Deletes all of the content items under the specified path to Contenthub      *       * @param rootPath      *            root path in the content repository      */
 name|void
 name|deleteContentItemsUnderPath
@@ -123,12 +203,34 @@ name|String
 name|rootPath
 parameter_list|)
 function_decl|;
+comment|/**      * Deletes all of the content items under the specified path to Contenthub      *       * @param rootPath      *            root path in the content repository      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to delete the      *            submitted content items from.      */
+name|void
+name|deleteContentItemsUnderPath
+parameter_list|(
+name|String
+name|rootPath
+parameter_list|,
+name|String
+name|indexName
+parameter_list|)
+function_decl|;
 comment|/**      * Filters content items from content repository via the specific {@link ContentItemFilter} implementation      * passed as a parameter and deletes the filtered content items from the Contenthub      *       * @param customContentItemFilter      *            custom {@link ContentItemFilter} implementation      */
 name|void
 name|deleteContentItemsByCustomFilter
 parameter_list|(
 name|ContentItemFilter
 name|customContentItemFilter
+parameter_list|)
+function_decl|;
+comment|/**      * Filters content items from content repository via the specific {@link ContentItemFilter} implementation      * passed as a parameter and deletes the filtered content items from the Contenthub      *       * @param customContentItemFilter      *            custom {@link ContentItemFilter} implementation      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to delete the      *            submitted content items from.      */
+name|void
+name|deleteContentItemsByCustomFilter
+parameter_list|(
+name|ContentItemFilter
+name|customContentItemFilter
+parameter_list|,
+name|String
+name|indexName
 parameter_list|)
 function_decl|;
 comment|/**      * This method is used for identification of {@link ContenthubFeeder}s based on the specified      *<code>session</code> object. If the specified instance can be used in certain implementation, it      * returns<code>true</code>, otherwise<code>false</code>.      *       * @param session      *            Session object to be checked      * @return whether certain implementation can handle specified connection type      */
