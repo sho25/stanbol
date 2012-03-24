@@ -574,9 +574,9 @@ name|solrHome
 argument_list|,
 literal|"classifierserver"
 argument_list|,
-literal|"classifier"
+literal|"default-topic-model"
 argument_list|,
-literal|"classifier"
+literal|"default-topic-model"
 argument_list|)
 expr_stmt|;
 name|classifier
@@ -597,9 +597,9 @@ name|solrHome
 argument_list|,
 literal|"trainingsetserver"
 argument_list|,
-literal|"trainingset"
+literal|"default-topic-trainingset"
 argument_list|,
-literal|"trainingset"
+literal|"default-topic-trainingset"
 argument_list|)
 expr_stmt|;
 name|trainingSet

@@ -454,9 +454,9 @@ name|solrHome
 argument_list|,
 literal|"trainingsetserver"
 argument_list|,
-literal|"trainingset"
+literal|"default-topic-trainingset"
 argument_list|,
-literal|"trainingset"
+literal|"default-topic-trainingset"
 argument_list|)
 expr_stmt|;
 name|trainingSet
