@@ -325,6 +325,23 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
+name|IndexMetadata
+name|updateIndex
+parameter_list|(
+name|String
+name|indexName
+parameter_list|,
+name|ArchiveInputStream
+name|ais
+parameter_list|,
+name|String
+name|archiveCoreName
+parameter_list|)
+throws|throws
+name|IOException
+throws|,
+name|SAXException
+function_decl|;
 comment|/**      * Removes the index with the parsed name and optionally also deletes the      * data on the file system.      * @param name      */
 name|void
 name|removeIndex
