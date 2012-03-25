@@ -1830,7 +1830,7 @@ name|this
 operator|.
 name|indexArchiveName
 operator|=
-literal|"default-topic-classifier-model"
+literal|"default-topic-model"
 expr_stmt|;
 name|configure
 argument_list|(
@@ -1861,6 +1861,10 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+name|context
+operator|=
+literal|null
+expr_stmt|;
 block|}
 specifier|public
 name|void
