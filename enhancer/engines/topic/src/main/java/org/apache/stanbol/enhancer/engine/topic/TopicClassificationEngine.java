@@ -2021,6 +2021,10 @@ argument_list|(
 name|config
 argument_list|,
 name|SOLR_CORE
+argument_list|,
+name|engineId
+operator|+
+literal|"-model"
 argument_list|)
 expr_stmt|;
 comment|// optional fields, can be null

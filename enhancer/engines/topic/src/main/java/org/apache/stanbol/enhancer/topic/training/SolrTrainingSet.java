@@ -709,7 +709,7 @@ specifier|protected
 name|String
 name|indexName
 init|=
-literal|"default-topic-classifier-trainingset"
+literal|"default-topic-trainingset"
 decl_stmt|;
 annotation|@
 name|Reference
@@ -879,6 +879,8 @@ argument_list|(
 name|config
 argument_list|,
 name|SOLR_CORE
+argument_list|,
+name|trainingSetId
 argument_list|)
 expr_stmt|;
 block|}
