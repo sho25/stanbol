@@ -135,6 +135,26 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|RootOntologySource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
 name|impl
 operator|.
 name|util
@@ -396,7 +416,7 @@ name|OWLOntology
 argument_list|>
 name|ontologies
 decl_stmt|;
-comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryManager      *            the registry manager that should contain the library data. Must not be null.      */
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryManager      *            the registry manager that should contain the library data. Must not be null.      * @throws OWLOntologyCreationException      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -408,6 +428,8 @@ name|registryManager
 parameter_list|)
 throws|throws
 name|RegistryContentException
+throws|,
+name|OWLOntologyCreationException
 block|{
 name|this
 argument_list|(
@@ -458,7 +480,7 @@ name|parentSrc
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryManager      *            the registry manager that should contain the library data. Must not be null.      * @param ontologyManager      *            the ontology manager to be used for constructing the import tree. if null, a new one will be      *            used.      */
+comment|/**      * Creates a new ontology source from a library. The physical registry location is assumed to be the      * parent URL of<code>libraryID</code>.<br/>      *<br/>      * Example : if<code>libraryID</code> is<tt>http://foo.bar.baz/registry#library</tt>, the registry      * location will be<tt>http://foo.bar.baz/registry</tt>. Same goes for slash-URIs.      *       * @param libraryID      *            the identifier of the ontology library.      * @param registryManager      *            the registry manager that should contain the library data. Must not be null.      * @param ontologyManager      *            the ontology manager to be used for constructing the import tree. if null, a new one will be      *            used.      * @throws OWLOntologyCreationException      */
 specifier|public
 name|LibrarySource
 parameter_list|(
@@ -473,6 +495,8 @@ name|ontologyManager
 parameter_list|)
 throws|throws
 name|RegistryContentException
+throws|,
+name|OWLOntologyCreationException
 block|{
 name|this
 argument_list|(
@@ -482,7 +506,20 @@ name|registryManager
 argument_list|,
 name|ontologyManager
 argument_list|,
-literal|null
+operator|new
+name|RootOntologySource
+argument_list|(
+name|OWLManager
+operator|.
+name|createOWLOntologyManager
+argument_list|()
+operator|.
+name|createOntology
+argument_list|(
+name|libraryID
+comment|/* IRI.create(libraryID.toString().replace("#", "%23")) */
+argument_list|)
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

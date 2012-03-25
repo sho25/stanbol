@@ -158,8 +158,6 @@ comment|/**      * Closes this Session irreversibly. Most likely includes settin
 name|void
 name|close
 parameter_list|()
-throws|throws
-name|NonReferenceableSessionException
 function_decl|;
 comment|/**      * Instructs the session to no longer reference the supplied ontology scope. If a scope with the supplied      * identifier was not attached, this method has no effect.      *       * @param scope      *            the identifer of the ontology scope to be detached.      */
 name|void
@@ -191,8 +189,6 @@ comment|/**      * Sets this session as active      *       * @throws NonReferen
 name|void
 name|open
 parameter_list|()
-throws|throws
-name|NonReferenceableSessionException
 function_decl|;
 comment|/**      * Sets the session as ACTIVE if<code>active</code> is true, INACTIVE otherwise. The state set is      * returned, which should match the input state unless an error occurs.<br>      *<br>      * Should throw an exception if this session is in a ZOMBIE state.      *       * @param active      *            the desired activity state for this session      * @return the resulting state of this KReS session      */
 name|State
@@ -201,8 +197,6 @@ parameter_list|(
 name|boolean
 name|active
 parameter_list|)
-throws|throws
-name|NonReferenceableSessionException
 function_decl|;
 block|}
 end_interface

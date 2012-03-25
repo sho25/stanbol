@@ -30,7 +30,7 @@ specifier|public
 class|class
 name|NonReferenceableSessionException
 extends|extends
-name|Exception
+name|RuntimeException
 block|{
 comment|/** 	 *  	 */
 specifier|private

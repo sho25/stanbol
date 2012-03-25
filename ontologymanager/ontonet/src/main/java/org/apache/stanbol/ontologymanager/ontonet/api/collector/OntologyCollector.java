@@ -148,7 +148,7 @@ name|OntologyCollectorListener
 name|listener
 parameter_list|)
 function_decl|;
-comment|/**      * Adds the given ontology to the ontology space. If the supplied ontology is not already present in      * storage and does not have an OWL version IRI of its own, this ontology collector will 'claim ownership'      * of the ontology by setting its own logical ID as the version IRI of the new ontology.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      * @throws UnmodifiableOntologyCollectorException      *             if the ontology space is read-only      */
+comment|/**      * Adds the given ontology to the ontology space. If the supplied ontology is not already present in      * storage and does not have an OWL version IRI of its own, this ontology collector will 'claim ownership'      * of the ontology by setting its own logical ID as the version IRI of the new ontology.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      */
 name|String
 name|addOntology
 parameter_list|(
@@ -160,8 +160,6 @@ name|?
 argument_list|>
 name|ontologySource
 parameter_list|)
-throws|throws
-name|UnmodifiableOntologyCollectorException
 function_decl|;
 comment|/**      * Removes all ontology space listeners registered with this space.      */
 name|void
@@ -305,8 +303,6 @@ parameter_list|(
 name|IRI
 name|ontologyId
 parameter_list|)
-throws|throws
-name|OntologyCollectorModificationException
 function_decl|;
 comment|/**      * Bootstraps the ontology space. In some cases (such as with core and custom spaces) this also implies      * write-locking its ontologies.      */
 name|void
