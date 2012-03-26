@@ -64,6 +64,11 @@ specifier|public
 interface|interface
 name|TrainingSet
 block|{
+comment|/**      * The short name of the training set. Can be used as the URI component to identify the training set in      * the Web management interface or in RDF descriptions of the service.      */
+name|String
+name|getName
+parameter_list|()
+function_decl|;
 comment|/**      * @return true if the training set can be updated using the {@code registerExample} API. If false that      *         means that the component is a view on a remote datasource that has its own API for updates      *         (e.g. the document repository of a CMS).      */
 name|boolean
 name|isUpdatable

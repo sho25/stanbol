@@ -179,6 +179,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|EnhancementEngine
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Before
@@ -526,7 +542,7 @@ comment|// Note: the equinox tests can only be run if the test container is swit
 comment|// implementation
 block|}
 comment|// Disabled integration test because SCR configuration factory init is crashing
-comment|//@Test
+comment|// @Test
 specifier|public
 name|void
 name|testTopicClassification
@@ -612,9 +628,9 @@ name|parameters
 operator|.
 name|put
 argument_list|(
-name|TopicClassificationEngine
+name|EnhancementEngine
 operator|.
-name|ENGINE_ID
+name|PROPERTY_NAME
 argument_list|,
 literal|"testclassifier"
 argument_list|)

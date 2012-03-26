@@ -2287,7 +2287,7 @@ name|put
 argument_list|(
 name|SolrTrainingSet
 operator|.
-name|TRAINING_SET_ID
+name|TRAINING_SET_NAME
 argument_list|,
 literal|"test-training-set"
 argument_list|)

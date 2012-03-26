@@ -59,6 +59,22 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
+name|ChainException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
 name|EngineException
 import|;
 end_import
@@ -99,6 +115,18 @@ name|TrainingSetException
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|osgi
+operator|.
+name|framework
+operator|.
+name|InvalidSyntaxException
+import|;
+end_import
+
 begin_comment
 comment|/**  * Service interface for suggesting hierarchical concepts from a specific scheme (a.k.a. taxonomy, thesaurus  * or concepts hierarchy) from the text content of a document or part of a document.  */
 end_comment
@@ -108,10 +136,9 @@ specifier|public
 interface|interface
 name|TopicClassifier
 block|{
-comment|/**      * @return the short id identifying this classifier / scheme: can be used as URL path component to publish      *         the service.      */
-specifier|public
+comment|/**      * The short name of the training set. Can be used as the URI component to identify the training set in      * the Web management interface or in RDF descriptions of the service.      */
 name|String
-name|getSchemeId
+name|getName
 parameter_list|()
 function_decl|;
 comment|/**      * @return list of language codes for text that can be automatically classified by the service.      */
@@ -222,6 +249,12 @@ parameter_list|)
 throws|throws
 name|ClassifierException
 function_decl|;
+comment|/**      * @return the training set registered for this classifier (either set explicitly using setTrainingSet or      *         configured through OSGi properties).      */
+specifier|public
+name|TrainingSet
+name|getTrainingSet
+parameter_list|()
+function_decl|;
 comment|/**      * Register a training set to use to build the statistical model of the classifier.      */
 name|void
 name|setTrainingSet
@@ -271,10 +304,22 @@ name|ClassificationReport
 name|getPerformanceEstimates
 parameter_list|(
 name|String
-name|topic
+name|concept
 parameter_list|)
 throws|throws
 name|ClassifierException
+function_decl|;
+comment|/**      * Return the list of names of chains where the classifier is currently registered as an enhancement      * engine.      */
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getChainNames
+parameter_list|()
+throws|throws
+name|InvalidSyntaxException
+throws|,
+name|ChainException
 function_decl|;
 block|}
 end_interface
