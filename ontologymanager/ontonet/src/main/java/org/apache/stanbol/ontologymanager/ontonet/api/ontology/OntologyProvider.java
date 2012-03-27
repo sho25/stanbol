@@ -353,8 +353,6 @@ name|force
 parameter_list|)
 throws|throws
 name|IOException
-throws|,
-name|UnsupportedFormatException
 function_decl|;
 comment|/**      * Stores an ontology that has already been loaded into an object. If the object is of a non-native yet      * supported type, the ontology provider will try to perform a conversion prior to storing it.      *       * @param ontology      *            the ontology to be stored.      * @param preferredKey      *            a string that should preferrably identify the ontology internally within the provider. It      *            will be ignored if null or empty. It is not guaranteed that the supplied key can be used,      *            e.g. if there is already a duplicate of the key and the policy does not allow duplicates. In      *            this case, a different key will be set and returned by this method.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If some remote import is found, the import policy is aggressive and Stanbol is      *            set on offline mode, this method will fail.      * @return      */
 name|String

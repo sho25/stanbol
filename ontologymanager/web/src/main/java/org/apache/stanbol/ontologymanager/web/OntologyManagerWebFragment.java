@@ -419,24 +419,6 @@ name|web
 operator|.
 name|resources
 operator|.
-name|SessionResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|web
-operator|.
-name|resources
-operator|.
 name|SessionManagerResource
 import|;
 end_import
@@ -455,7 +437,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|StoredOntologyResource
+name|SessionResource
 import|;
 end_import
 
@@ -506,7 +488,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of WebFragment for the Stanbol Ontonet end-point.  *   * @author alberto musetti  *   */
+comment|/**  * Implementation of WebFragment for the Stanbol Ontology Manager endpoint.  *   * @author alberto musetti  *   */
 end_comment
 
 begin_class
@@ -638,7 +620,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|// Temporary resources
+comment|// Core resources
 name|classes
 operator|.
 name|add
@@ -648,8 +630,17 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-comment|// classes.add(RESTfulResource.class);
-comment|// classes.add(StoredGraphsResource.class);
+comment|// Registry resources
+name|classes
+operator|.
+name|add
+argument_list|(
+name|RegistryManagerResource
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+comment|// Scope resources
 name|classes
 operator|.
 name|add
@@ -677,15 +668,7 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|StoredOntologyResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
+comment|// Session resources
 name|classes
 operator|.
 name|add
@@ -700,15 +683,6 @@ operator|.
 name|add
 argument_list|(
 name|SessionResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|RegistryManagerResource
 operator|.
 name|class
 argument_list|)

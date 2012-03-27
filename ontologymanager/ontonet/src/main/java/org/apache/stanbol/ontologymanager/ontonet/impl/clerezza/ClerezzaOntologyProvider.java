@@ -951,7 +951,7 @@ argument_list|<
 name|TcProvider
 argument_list|>
 block|{
-comment|/**      * Internally, the Clerezza ontology provider uses a reserved graph to store the associations between      * ontology IDs/physical IRIs and graph names.      *       * @author alessandro      *       */
+comment|/**      * Internally, the Clerezza ontology provider uses a reserved graph to store the associations between      * ontology IDs/physical IRIs and graph names. This graph is wrapped into an {@link OntologyToTcMapper}      * object.      *       * @author alexdma      *       */
 specifier|private
 class|class
 name|OntologyToTcMapper
@@ -1262,6 +1262,7 @@ name|tHasOiri
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**          * Creates an {@link UriRef} out of an {@link OWLOntologyID}, so it can be used as a storage key for          * the graph.          *           * @param ontologyReference          * @return          */
 specifier|private
 name|UriRef
 name|buildResource
@@ -1270,6 +1271,7 @@ name|OWLOntologyID
 name|ontologyReference
 parameter_list|)
 block|{
+comment|// The UriRef is of the form ontologyIRI[/versionIRI] (TODO use something less conventional?)
 name|IRI
 name|ontologyIRI
 init|=
@@ -1320,6 +1322,7 @@ return|return
 name|entry
 return|;
 block|}
+comment|/**          * Creates an {@link OWLOntologyID} object by combining the ontologyIRI and the versionIRI, where          * applicable, of the stored graph.          *           * @param resource          *            the ontology          * @return          */
 specifier|private
 name|OWLOntologyID
 name|buildOntologyId
@@ -1403,6 +1406,11 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+else|else
+return|return
+literal|null
+return|;
+comment|// Anonymous but versioned ontologies are not acceptable.
 name|it
 operator|=
 name|graph
@@ -3476,8 +3484,6 @@ name|force
 parameter_list|)
 throws|throws
 name|IOException
-throws|,
-name|UnsupportedFormatException
 block|{
 name|log
 operator|.
