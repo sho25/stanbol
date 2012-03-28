@@ -801,7 +801,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** 	 * HTTP GET method to make a featured search over Contenthub. 	 *  	 * @param queryTerm 	 *            A keyword a statement or a set of keywords which can be 	 *            regarded as the query term. 	 * @param solrQuery 	 *            Solr query string. This is the string format which is accepted 	 *            by a Solr server. For example, {@code q="john doe"&fl=score} 	 *            is a valid value for this parameter. If this parameter exists, 	 *            search is performed based on this solrQuery and any queryTerms 	 *            are neglected. 	 * @param jsonCons 	 *            Constrainst in JSON format. These constraints are tranformed 	 *            to corresponding Solr queries to enable faceted search. Each 	 *            constraint is a facet field and values of the constraints maps 	 *            to the values of the facet fields in Solr queries. 	 * @param graphURI 	 *            URI of the ontology in which related keywords will be searched 	 *            by 	 *            {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)} 	 * @param offset 	 *            The offset of the document from which the resultant documents 	 *            will start as the search result. {@link offset} and 	 *            {@link limit} parameters can be used to make a pagination 	 *            mechanism for search results. 	 * @param limit 	 *            Maximum number of resultant documents to be returned as the 	 *            search result. {@link offset} and {@link limit} parameters can 	 *            be used to make a pagination mechanism for search results. 	 * @param fromStore 	 *            Special parameter for HTML view only. 	 * @param headers 	 *            HTTP headers 	 * @return HTML view or JSON representation of the search results or HTTP 	 *         BAD REQUEST(400) 	 * @throws IllegalArgumentException 	 * @throws SearchException 	 * @throws InstantiationException 	 * @throws IllegalAccessException 	 * @throws SolrServerException 	 * @throws IOException 	 */
+comment|/** 	 * HTTP GET method to make a featured search over Contenthub. 	 *  	 * @param queryTerm 	 *            A keyword a statement or a set of keywords which can be 	 *            regarded as the query term. 	 * @param solrQuery 	 *            Solr query string. This is the string format which is accepted 	 *            by a Solr server. For example, {@code q="john doe"&fl=score} 	 *            is a valid value for this parameter. If this parameter exists, 	 *            search is performed based on this solrQuery and any queryTerms 	 *            are neglected. 	 * @param jsonCons 	 *            Constrainst in JSON format. These constraints are tranformed 	 *            to corresponding Solr queries to enable faceted search. Each 	 *            constraint is a facet field and values of the constraints maps 	 *            to the values of the facet fields in Solr queries. 	 * @param ontologyURI 	 *            URI of the ontology in which related keywords will be searched 	 *            by 	 *            {@link RelatedKeywordSearchManager#getRelatedKeywordsFromOntology(String, String)} 	 * @param offset 	 *            The offset of the document from which the resultant documents 	 *            will start as the search result. {@link offset} and 	 *            {@link limit} parameters can be used to make a pagination 	 *            mechanism for search results. 	 * @param limit 	 *            Maximum number of resultant documents to be returned as the 	 *            search result. {@link offset} and {@link limit} parameters can 	 *            be used to make a pagination mechanism for search results. 	 * @param fromStore 	 *            Special parameter for HTML view only. 	 * @param headers 	 *            HTTP headers 	 * @return HTML view or JSON representation of the search results or HTTP 	 *         BAD REQUEST(400) 	 * @throws IllegalArgumentException 	 * @throws SearchException 	 * @throws InstantiationException 	 * @throws IllegalAccessException 	 * @throws SolrServerException 	 * @throws IOException 	 */
 annotation|@
 name|GET
 annotation|@
@@ -849,10 +849,10 @@ parameter_list|,
 annotation|@
 name|QueryParam
 argument_list|(
-literal|"graphURI"
+literal|"ontologyURI"
 argument_list|)
 name|String
-name|graphURI
+name|ontologyURI
 parameter_list|,
 annotation|@
 name|QueryParam
@@ -938,13 +938,13 @@ argument_list|(
 name|solrQuery
 argument_list|)
 expr_stmt|;
-name|graphURI
+name|ontologyURI
 operator|=
 name|RestUtil
 operator|.
 name|nullify
 argument_list|(
-name|graphURI
+name|ontologyURI
 argument_list|)
 expr_stmt|;
 name|jsonCons
@@ -1061,7 +1061,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|graphURI
+name|ontologyURI
 operator|=
 name|it
 operator|.
@@ -1077,7 +1077,7 @@ name|Constants
 operator|.
 name|isGraphReserved
 argument_list|(
-name|graphURI
+name|ontologyURI
 argument_list|)
 condition|)
 block|{
@@ -1089,7 +1089,7 @@ name|ontologies
 operator|.
 name|add
 argument_list|(
-name|graphURI
+name|ontologyURI
 argument_list|)
 expr_stmt|;
 block|}
@@ -1128,7 +1128,7 @@ name|solrQuery
 argument_list|,
 name|jsonCons
 argument_list|,
-name|graphURI
+name|ontologyURI
 argument_list|,
 name|offset
 argument_list|,
@@ -1201,7 +1201,7 @@ name|solrQuery
 argument_list|,
 name|jsonCons
 argument_list|,
-name|graphURI
+name|ontologyURI
 argument_list|,
 name|offset
 argument_list|,

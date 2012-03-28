@@ -2377,7 +2377,7 @@ literal|"raw"
 argument_list|)
 condition|)
 block|{
-comment|//TODO we should return the content directly without the file indirection
+comment|// TODO we should return the content directly without the file indirection
 name|String
 name|fileName
 init|=
@@ -2984,7 +2984,7 @@ name|headers
 argument_list|)
 return|;
 block|}
-comment|/**      * HTTP POST method to create a content item in Contenthub. This method requires the content to be      * text-based.      *       * @param content      *            Actual content in text format. If this parameter is supplied, {@link url} is ommitted.      * @param url      *            URL where the actual content resides. If this parameter is supplied (and {@link content} is      *            {@code null}, then the content is retrieved from this url.      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/{indexName}/store/content/uri" which shows the content item in the      *         HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
+comment|/**      * HTTP POST method to create a content item in Contenthub. This method requires the content to be      * text-based.      *       * @param id      *            Optinal id for the content item to be created.      * @param content      *            Actual content in text format. If this parameter is supplied, {@link url} is ommitted.      * @param url      *            URL where the actual content resides. If this parameter is supplied (and {@link content} is      *            {@code null}, then the content is retrieved from this url.      * @param jsonCons      *            Constraints in JSON format. Constraints are used to add supplementary metadata to the      *            content item. For example, author of the content item may be supplied as {author:      *            "John Doe"}. Then, this constraint is added to the Solr and will be indexed if the      *            corresponding Solr schema includes the author field. Solr indexed can be created/adjusted      *            through LDPath programs.      * @param title      *            The title for the content item. Titles can be used to present summary of the actual content.      *            For example, search results are presented by showing the titles of resultant content items.      * @param headers      *            HTTP headers (optional)      * @return Redirects to "contenthub/{indexName}/store/content/uri" which shows the content item in the      *         HTML view.      * @throws URISyntaxException      * @throws EngineException      * @throws MalformedURLException      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|POST
 annotation|@
@@ -2996,6 +2996,14 @@ specifier|public
 name|Response
 name|createContentItemFromForm
 parameter_list|(
+annotation|@
+name|FormParam
+argument_list|(
+literal|"id"
+argument_list|)
+name|String
+name|id
+parameter_list|,
 annotation|@
 name|FormParam
 argument_list|(
@@ -3087,6 +3095,8 @@ block|}
 return|return
 name|createContentItemFromForm
 argument_list|(
+name|id
+argument_list|,
 name|content
 argument_list|,
 name|url
@@ -3216,6 +3226,11 @@ block|}
 return|return
 name|createContentItemFromForm
 argument_list|(
+name|file
+operator|.
+name|getName
+argument_list|()
+argument_list|,
 literal|null
 argument_list|,
 literal|null
@@ -3238,6 +3253,9 @@ specifier|private
 name|Response
 name|createContentItemFromForm
 parameter_list|(
+name|String
+name|id
+parameter_list|,
 name|String
 name|content
 parameter_list|,
@@ -3446,9 +3464,25 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|String
-name|uri
-init|=
+if|if
+condition|(
+name|id
+operator|==
+literal|null
+operator|||
+name|id
+operator|.
+name|trim
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+literal|""
+argument_list|)
+condition|)
+block|{
+name|id
+operator|=
 name|ContentItemHelper
 operator|.
 name|makeDefaultUrn
@@ -3458,7 +3492,8 @@ argument_list|)
 operator|.
 name|getUnicodeString
 argument_list|()
-decl_stmt|;
+expr_stmt|;
+block|}
 return|return
 name|createEnhanceAndRedirect
 argument_list|(
@@ -3466,7 +3501,7 @@ name|data
 argument_list|,
 name|mt
 argument_list|,
-name|uri
+name|id
 argument_list|,
 literal|true
 argument_list|,
@@ -3795,6 +3830,8 @@ block|}
 return|return
 name|createContentItemFromForm
 argument_list|(
+literal|null
+argument_list|,
 name|content
 argument_list|,
 name|url
