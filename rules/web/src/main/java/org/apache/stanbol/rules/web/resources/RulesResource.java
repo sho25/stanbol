@@ -1302,6 +1302,7 @@ name|ruleID
 operator|!=
 literal|null
 operator|&&
+operator|!
 name|ruleID
 operator|.
 name|isEmpty
