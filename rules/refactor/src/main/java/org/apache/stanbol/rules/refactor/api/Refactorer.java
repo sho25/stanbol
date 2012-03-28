@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -32,6 +32,22 @@ operator|.
 name|core
 operator|.
 name|MGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|TripleCollection
 import|;
 end_import
 
@@ -91,32 +107,22 @@ begin_import
 import|import
 name|org
 operator|.
-name|semanticweb
+name|apache
 operator|.
-name|owlapi
+name|stanbol
 operator|.
-name|model
+name|rules
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|base
 operator|.
-name|semanticweb
+name|api
 operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
+name|RuleStore
 import|;
 end_import
 
 begin_comment
-comment|/**  * A SemionReengineer provides methods for performing ontology refactorings. Refactoring are performed using  * recipes that contain sets of rules that describe the refactoring to do. Rules are expressed using the both  * the SWRL model and the KReS rules language.  *   * @author andrea.nuzzolese  *   */
+comment|/**  * The refactorer provides methods for performing ontology refactorings. Refactoring are performed using  * recipes that contain sets of rules that describe the refactoring to do.  *   * @author anuzzolese  *   */
 end_comment
 
 begin_interface
@@ -132,18 +138,18 @@ name|UriRef
 name|uriRef
 parameter_list|)
 function_decl|;
-comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the {@link IRI} of an IKS ontology and the {@code recipe} is the recipe that needs to be applied to      * ontology in order to perform the refactoring.      *       * @param refactoredDataSetURI      *            {@link IRI}      * @param datasetURI      *            {@link IRI}      * @param recipeIRI      *            {@link IRI}      */
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetID}      * identifies dataset to which apply the refactoring. {@code refactoredDataSetID} identifies the new      * refactored dataset in the store. {@code recipeID} identifies the ID of the recipe in the      * {@link RuleStore},      *       * @param refactoredDataSetID      *            {@link UriRef}      * @param datasetID      *            {@link UriRef}      * @param recipeIRI      *            {@link UriRef}      */
 name|void
-name|ontologyRefactoring
+name|graphRefactoring
 parameter_list|(
-name|IRI
-name|refactoredDataSetURI
+name|UriRef
+name|refactoredOntologyID
 parameter_list|,
-name|IRI
-name|datasetURI
+name|UriRef
+name|datasetID
 parameter_list|,
-name|IRI
-name|recipeIRI
+name|UriRef
+name|recipeID
 parameter_list|)
 throws|throws
 name|RefactoringException
@@ -151,27 +157,26 @@ throws|,
 name|NoSuchRecipeException
 function_decl|;
 comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetURI      *            {@link UriRef}      * @param recipe      *            {@link UriRef}      * @return the refactored {@link MGraph}      * @throws RefactoringException      * @throws NoSuchRecipeException      */
-name|OWLOntology
-name|ontologyRefactoring
+name|TripleCollection
+name|graphRefactoring
 parameter_list|(
-name|OWLOntology
-name|datasetURI
+name|UriRef
+name|datasetID
 parameter_list|,
-name|IRI
-name|recipeIRI
+name|UriRef
+name|recipeID
 parameter_list|)
 throws|throws
 name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 function_decl|;
-comment|/** 	 * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI} is the URI 	 * of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF graph in order to obtain the refactoring.  	 *  	 * @param datasetURI {@link UriRef}  	 * @param recipe {@link Recipe} 	 * @return the refactored {@link MGraph} 	 * @throws SemionRefactoringException 	 * @throws NoSuchRecipeException 	 */
-specifier|public
-name|OWLOntology
-name|ontologyRefactoring
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetID      *            {@link TripleCollection}      * @param recipe      *            {@link Recipe}      * @return the refactored {@link TripleCollection}      * @throws SemionRefactoringException      * @throws NoSuchRecipeException      */
+name|TripleCollection
+name|graphRefactoring
 parameter_list|(
-name|OWLOntology
-name|datasetURI
+name|TripleCollection
+name|dataset
 parameter_list|,
 name|Recipe
 name|recipe
