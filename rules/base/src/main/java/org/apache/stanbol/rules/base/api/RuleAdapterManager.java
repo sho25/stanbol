@@ -23,24 +23,46 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
+name|util
 operator|.
-name|URI
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  * This interface represent RDF objects, i.e., non-literal objects identified by an IRI.  *   * @author anuzzolese  *   */
+comment|/**  * The {@link RuleAdapterManager} allows to manage rule adapters.<br/>  * A rule adapter is able to adapt a {@link Recipe} to an external representation, e.g., Jena rules, SPARQL,  * Clerezza, etc...  *   * @author anuzzolese  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|URIResource
+name|RuleAdapterManager
 block|{
-comment|/**      * It gets the uri of the resource.      *       * @return the uri of the resource as a {@link URI} instance.      */
-name|URI
-name|getURI
+comment|/**      * It adapts the {@link Adaptable} object to the class provided as second parameter.      *       * @param<AdaptedTo>      * @param adaptable      *            {The object that we want to adapt, e.g., a Recipe}      * @param adaptedToType      *            {The object that we want in output}      * @return      * @throws UnavailableRuleObjectException      */
+parameter_list|<
+name|AdaptedTo
+parameter_list|>
+name|RuleAdapter
+name|getAdapter
+parameter_list|(
+name|Adaptable
+name|adaptable
+parameter_list|,
+name|Class
+argument_list|<
+name|AdaptedTo
+argument_list|>
+name|adaptedToType
+parameter_list|)
+throws|throws
+name|UnavailableRuleObjectException
+function_decl|;
+comment|/**      * It returns the list of available rule adapters.      *       * @return the list of available adapters      */
+name|List
+argument_list|<
+name|RuleAdapter
+argument_list|>
+name|listRuleAdapters
 parameter_list|()
 function_decl|;
 block|}

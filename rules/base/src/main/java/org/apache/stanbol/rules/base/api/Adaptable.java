@@ -19,17 +19,17 @@ name|api
 package|;
 end_package
 
-begin_comment
-comment|/**  * A rule atom. Instances of the classes that implement this interface are the basic elements of rules.  *   * @author anuzzolese  *   */
-end_comment
-
 begin_interface
 specifier|public
 interface|interface
-name|RuleAtom
-extends|extends
 name|Adaptable
-block|{  }
+block|{
+comment|/**      * Returns a human-readable description of the adaptable object.      *       * @return the {@link String} containing the human-readable description of the adaptable object.      */
+name|String
+name|prettyPrint
+parameter_list|()
+function_decl|;
+block|}
 end_interface
 
 end_unit

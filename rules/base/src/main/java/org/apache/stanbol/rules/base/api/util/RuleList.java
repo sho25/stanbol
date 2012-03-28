@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -59,26 +59,6 @@ name|Rule
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|Logger
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|LoggerFactory
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
@@ -90,27 +70,14 @@ name|Rule
 argument_list|>
 block|{
 specifier|private
-specifier|final
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
-decl_stmt|;
-specifier|private
 name|Rule
 index|[]
-name|kReSRules
+name|rules
 decl_stmt|;
 specifier|public
 name|RuleList
 parameter_list|()
-block|{  	}
+block|{      }
 specifier|public
 name|boolean
 name|add
@@ -121,12 +88,12 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|kReSRules
+name|rules
 operator|==
 literal|null
 condition|)
 block|{
-name|kReSRules
+name|rules
 operator|=
 operator|new
 name|Rule
@@ -134,7 +101,7 @@ index|[
 literal|1
 index|]
 expr_stmt|;
-name|kReSRules
+name|rules
 index|[
 literal|0
 index|]
@@ -151,7 +118,7 @@ init|=
 operator|new
 name|Rule
 index|[
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|+
@@ -162,7 +129,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 literal|0
 argument_list|,
@@ -170,7 +137,7 @@ name|semionRulesCopy
 argument_list|,
 literal|0
 argument_list|,
-name|kReSRules
+name|rules
 operator|.
 name|length
 argument_list|)
@@ -186,7 +153,7 @@ index|]
 operator|=
 name|semionRule
 expr_stmt|;
-name|kReSRules
+name|rules
 operator|=
 name|semionRulesCopy
 expr_stmt|;
@@ -205,12 +172,12 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|kReSRules
+name|rules
 operator|==
 literal|null
 condition|)
 block|{
-name|kReSRules
+name|rules
 operator|=
 operator|new
 name|Rule
@@ -218,7 +185,7 @@ index|[
 literal|1
 index|]
 expr_stmt|;
-name|kReSRules
+name|rules
 index|[
 literal|0
 index|]
@@ -235,7 +202,7 @@ init|=
 operator|new
 name|Rule
 index|[
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|+
@@ -246,7 +213,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 literal|0
 argument_list|,
@@ -254,7 +221,7 @@ name|semionRulesCopy
 argument_list|,
 literal|1
 argument_list|,
-name|kReSRules
+name|rules
 operator|.
 name|length
 argument_list|)
@@ -266,7 +233,7 @@ index|]
 operator|=
 name|semionRule
 expr_stmt|;
-name|kReSRules
+name|rules
 operator|=
 name|semionRulesCopy
 expr_stmt|;
@@ -312,12 +279,12 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|kReSRules
+name|rules
 operator|==
 literal|null
 condition|)
 block|{
-name|kReSRules
+name|rules
 operator|=
 name|collectionOfSemionRules
 expr_stmt|;
@@ -331,7 +298,7 @@ init|=
 operator|new
 name|Rule
 index|[
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|+
@@ -344,7 +311,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 literal|0
 argument_list|,
@@ -352,7 +319,7 @@ name|semionRulesCopy
 argument_list|,
 literal|0
 argument_list|,
-name|kReSRules
+name|rules
 operator|.
 name|length
 argument_list|)
@@ -367,7 +334,7 @@ literal|0
 argument_list|,
 name|semionRulesCopy
 argument_list|,
-name|kReSRules
+name|rules
 operator|.
 name|length
 argument_list|,
@@ -376,7 +343,7 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
-name|kReSRules
+name|rules
 operator|=
 name|semionRulesCopy
 expr_stmt|;
@@ -385,7 +352,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** 	 * To clear the collection 	 */
+comment|/**      * To clear the collection      */
 specifier|public
 name|void
 name|clear
@@ -393,7 +360,7 @@ parameter_list|()
 block|{
 name|this
 operator|.
-name|kReSRules
+name|rules
 operator|=
 literal|null
 expr_stmt|;
@@ -411,7 +378,7 @@ control|(
 name|Rule
 name|semionRule
 range|:
-name|kReSRules
+name|rules
 control|)
 block|{
 if|if
@@ -457,7 +424,7 @@ control|(
 name|Rule
 name|semionRule
 range|:
-name|kReSRules
+name|rules
 control|)
 block|{
 if|if
@@ -492,18 +459,18 @@ parameter_list|()
 block|{
 if|if
 condition|(
-name|kReSRules
+name|rules
 operator|==
 literal|null
 operator|||
 operator|(
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|==
 literal|1
 operator|&&
-name|kReSRules
+name|rules
 index|[
 literal|0
 index|]
@@ -561,7 +528,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|&&
@@ -575,7 +542,7 @@ block|{
 name|Rule
 name|semionRule
 init|=
-name|kReSRules
+name|rules
 index|[
 name|i
 index|]
@@ -597,7 +564,7 @@ init|=
 operator|new
 name|Rule
 index|[
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|-
@@ -608,7 +575,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 literal|0
 argument_list|,
@@ -623,7 +590,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 name|i
 operator|+
@@ -640,7 +607,7 @@ operator|-
 name|i
 argument_list|)
 expr_stmt|;
-name|kReSRules
+name|rules
 operator|=
 name|semionRulesCopy
 expr_stmt|;
@@ -695,7 +662,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|&&
@@ -709,7 +676,7 @@ block|{
 name|Rule
 name|semionRule
 init|=
-name|kReSRules
+name|rules
 index|[
 name|i
 index|]
@@ -731,7 +698,7 @@ init|=
 operator|new
 name|Rule
 index|[
-name|kReSRules
+name|rules
 operator|.
 name|length
 operator|-
@@ -742,7 +709,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 literal|0
 argument_list|,
@@ -757,7 +724,7 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|kReSRules
+name|rules
 argument_list|,
 name|i
 operator|+
@@ -774,7 +741,7 @@ operator|-
 name|i
 argument_list|)
 expr_stmt|;
-name|kReSRules
+name|rules
 operator|=
 name|semionRulesCopy
 expr_stmt|;
@@ -921,7 +888,7 @@ block|}
 block|}
 block|}
 block|}
-name|kReSRules
+name|rules
 operator|=
 name|semionRulesCopy
 expr_stmt|;
@@ -934,11 +901,25 @@ name|int
 name|size
 parameter_list|()
 block|{
+if|if
+condition|(
+name|rules
+operator|==
+literal|null
+condition|)
+block|{
 return|return
-name|kReSRules
+literal|0
+return|;
+block|}
+else|else
+block|{
+return|return
+name|rules
 operator|.
 name|length
 return|;
+block|}
 block|}
 specifier|public
 name|Object
@@ -947,9 +928,14 @@ name|toArray
 parameter_list|()
 block|{
 return|return
-name|kReSRules
+name|rules
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|public
 parameter_list|<
 name|T
@@ -968,7 +954,7 @@ operator|(
 name|T
 index|[]
 operator|)
-name|kReSRules
+name|rules
 return|;
 block|}
 block|}

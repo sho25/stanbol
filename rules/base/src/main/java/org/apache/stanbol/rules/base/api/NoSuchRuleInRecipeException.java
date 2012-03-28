@@ -20,17 +20,56 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A rule atom. Instances of the classes that implement this interface are the basic elements of rules.  *   * @author anuzzolese  *   */
+comment|/**  * A {@link NoSuchRuleInRecipeException} is thrown when the rule requested does not exist in the store.  *   * @author anuzzolese  *   */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|RuleAtom
+class|class
+name|NoSuchRuleInRecipeException
 extends|extends
-name|Adaptable
-block|{  }
-end_interface
+name|Exception
+block|{
+comment|/** 	 *  	 */
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+literal|1L
+decl_stmt|;
+specifier|private
+name|String
+name|message
+decl_stmt|;
+specifier|public
+name|NoSuchRuleInRecipeException
+parameter_list|(
+name|String
+name|message
+parameter_list|)
+block|{
+name|this
+operator|.
+name|message
+operator|=
+name|message
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getMessage
+parameter_list|()
+block|{
+return|return
+name|message
+return|;
+block|}
+block|}
+end_class
 
 end_unit
 
