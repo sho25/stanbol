@@ -3015,6 +3015,37 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|metadata
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|enhancement
+argument_list|,
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|ENHANCER_ENTITY_TYPE
+argument_list|,
+name|OntologicalClasses
+operator|.
+name|SKOS_CONCEPT
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// add confidence information
 name|metadata
 operator|.
@@ -3057,6 +3088,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// add performance estimates of the classifier if available
 name|ClassificationReport
 name|perf
 init|=
@@ -3156,6 +3188,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|// fetch concept label from the entityhub or a referenced site if available
 name|Entity
 name|entity
 init|=
