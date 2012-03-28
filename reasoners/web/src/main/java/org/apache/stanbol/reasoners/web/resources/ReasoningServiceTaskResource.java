@@ -837,6 +837,24 @@ name|base
 operator|.
 name|api
 operator|.
+name|RuleAdapterManager
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|base
+operator|.
+name|api
+operator|.
 name|RuleStore
 import|;
 end_import
@@ -1035,6 +1053,10 @@ name|RuleStore
 name|ruleStore
 decl_stmt|;
 specifier|private
+name|RuleAdapterManager
+name|adapterManager
+decl_stmt|;
+specifier|private
 name|boolean
 name|job
 init|=
@@ -1196,7 +1218,7 @@ argument_list|,
 name|servletContext
 argument_list|)
 expr_stmt|;
-comment|// Retrieve the ontology network manager
+comment|// Retrieve the rule store
 name|this
 operator|.
 name|ruleStore
@@ -1209,6 +1231,25 @@ operator|.
 name|getServiceFromContext
 argument_list|(
 name|RuleStore
+operator|.
+name|class
+argument_list|,
+name|servletContext
+argument_list|)
+expr_stmt|;
+comment|// Retrieve the rule adapter manager
+name|this
+operator|.
+name|adapterManager
+operator|=
+operator|(
+name|RuleAdapterManager
+operator|)
+name|ContextHelper
+operator|.
+name|getServiceFromContext
+argument_list|(
+name|RuleAdapterManager
 operator|.
 name|class
 argument_list|,
@@ -2981,6 +3022,8 @@ operator|new
 name|RecipeInputProvider
 argument_list|(
 name|ruleStore
+argument_list|,
+name|adapterManager
 argument_list|,
 name|entry
 operator|.
