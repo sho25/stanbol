@@ -3116,17 +3116,28 @@ literal|"score"
 argument_list|)
 decl_stmt|;
 comment|// fetch metadata
+name|SolrQuery
+name|metadataQuery
+init|=
+operator|new
+name|SolrQuery
+argument_list|(
+literal|"*:*"
+argument_list|)
+decl_stmt|;
+comment|// use filter queries to leverage the Solr cache explicitly
 name|String
-name|q
+name|typeFq
 init|=
 name|entryTypeField
 operator|+
 literal|":"
 operator|+
 name|METADATA_ENTRY
-operator|+
-literal|" AND "
-operator|+
+decl_stmt|;
+name|String
+name|conceptFq
+init|=
 name|conceptUriField
 operator|+
 literal|":"
@@ -3138,15 +3149,15 @@ argument_list|(
 name|conceptUri
 argument_list|)
 decl_stmt|;
-name|SolrQuery
 name|metadataQuery
-init|=
-operator|new
-name|SolrQuery
+operator|.
+name|setFilterQueries
 argument_list|(
-name|q
+name|typeFq
+argument_list|,
+name|conceptFq
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|metadataQuery
 operator|.
 name|setFields
