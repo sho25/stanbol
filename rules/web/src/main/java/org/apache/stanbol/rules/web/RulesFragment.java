@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -231,6 +231,26 @@ name|stanbol
 operator|.
 name|rules
 operator|.
+name|base
+operator|.
+name|api
+operator|.
+name|util
+operator|.
+name|RuleList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
 name|refactor
 operator|.
 name|api
@@ -271,7 +291,7 @@ name|web
 operator|.
 name|resources
 operator|.
-name|RecipeResource
+name|RulesResource
 import|;
 end_import
 
@@ -287,9 +307,9 @@ name|rules
 operator|.
 name|web
 operator|.
-name|resources
+name|writers
 operator|.
-name|RuleResource
+name|ListRecipeWriter
 import|;
 end_import
 
@@ -305,9 +325,9 @@ name|rules
 operator|.
 name|web
 operator|.
-name|resources
+name|writers
 operator|.
-name|RuleStoreResource
+name|ListRuleWriter
 import|;
 end_import
 
@@ -323,9 +343,45 @@ name|rules
 operator|.
 name|web
 operator|.
-name|resources
+name|writers
 operator|.
-name|RulesRootResource
+name|RecipeListWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|web
+operator|.
+name|writers
+operator|.
+name|RecipeWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|rules
+operator|.
+name|web
+operator|.
+name|writers
+operator|.
+name|RuleListWriter
 import|;
 end_import
 
@@ -376,7 +432,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of WebFragment for the Stanbol Rules end-point.  *   * @author andrea.nuzzolese  *  */
+comment|/**  * Implementation of WebFragment for the Stanbol Rules end-point.  *   * @author anuzzolese  *   */
 end_comment
 
 begin_class
@@ -519,7 +575,17 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|RecipeResource
+name|RulesResource
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+comment|// writers
+name|classes
+operator|.
+name|add
+argument_list|(
+name|RecipeWriter
 operator|.
 name|class
 argument_list|)
@@ -528,7 +594,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|RuleResource
+name|RecipeListWriter
 operator|.
 name|class
 argument_list|)
@@ -537,16 +603,7 @@ name|classes
 operator|.
 name|add
 argument_list|(
-name|RuleStoreResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|RulesRootResource
+name|RuleListWriter
 operator|.
 name|class
 argument_list|)
