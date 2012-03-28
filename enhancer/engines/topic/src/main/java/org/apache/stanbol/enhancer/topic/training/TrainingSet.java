@@ -157,6 +157,13 @@ parameter_list|)
 throws|throws
 name|TrainingSetException
 function_decl|;
+comment|/**      * Trigger optimization of the underlying index.       */
+name|void
+name|optimize
+parameter_list|()
+throws|throws
+name|TrainingSetException
+function_decl|;
 block|}
 end_interface
 

@@ -271,13 +271,20 @@ parameter_list|)
 throws|throws
 name|ClassifierException
 function_decl|;
-comment|/**      * Remove a topic from the thesaurus. WARNING: it is the caller responsibility to recursively remove or      * update any narrower topic that might hold a reference on this topic. Once the tree is updated,      * {@code updateModel} should be called to re-align the statistical model to match the new hierarchy by      * drawing examples from the dataset.      *       * @param conceptUri      *            if of the topic to remove from the model      */
+comment|/**      * Remove a topic from the thesaurus. WARNING: it is the caller responsibility to recursively remove or      * update any narrower topic that might hold a reference on this topic. Once the tree is updated,      * {@code updateModel} should be called to re-align the statistical model to match the new hierarchy by      * drawing examples from the dataset.      *       * @param conceptUri      *            if of the topic to remove from the model, must not be null      */
 name|void
 name|removeConcept
 parameter_list|(
 name|String
 name|conceptUri
 parameter_list|)
+throws|throws
+name|ClassifierException
+function_decl|;
+comment|/**      * Remove all the concepts from the current model leaving with an empty model.      *       * @throws ClassifierException      */
+name|void
+name|removeAllConcepts
+parameter_list|()
 throws|throws
 name|ClassifierException
 function_decl|;
@@ -353,7 +360,7 @@ name|InvalidSyntaxException
 throws|,
 name|ChainException
 function_decl|;
-comment|/**      * Initialize the concept hierarch of the model using the provided RDF model (e.g. a SKOS taxonomy).      *       * @return the number of concepts successfully imported (including roots).      */
+comment|/**      * Initialize the concept hierarchy of the model using the provided RDF model (e.g. a SKOS taxonomy).      *       * @return the number of concepts successfully imported (including roots).      */
 name|int
 name|importConceptsFromGraph
 parameter_list|(
