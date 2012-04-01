@@ -121,7 +121,7 @@ name|toString
 argument_list|()
 expr_stmt|;
 return|return
-literal|"newNode("
+literal|"newIRI("
 operator|+
 name|variable
 operator|+
