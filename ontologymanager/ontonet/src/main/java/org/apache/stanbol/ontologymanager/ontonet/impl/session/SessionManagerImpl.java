@@ -87,16 +87,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Hashtable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Map
 import|;
 end_import
@@ -224,46 +214,6 @@ operator|.
 name|ontology
 operator|.
 name|OntologyProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|SessionOntologySpace
 import|;
 end_import
 
@@ -707,38 +657,6 @@ argument_list|,
 name|Session
 argument_list|>
 argument_list|()
-expr_stmt|;
-block|}
-comment|/**      * @deprecated In non-OSGi+DS environments, please invoke      *             {@link #SessionManagerImpl(IRI, OntologyProvider, Dictionary)}. With this constructor,      *             baseIri and scopeRegistry are ignored.      *       * @param baseIri      * @param scopeRegistry      * @param ontologyProvider      */
-specifier|public
-name|SessionManagerImpl
-parameter_list|(
-name|IRI
-name|baseIri
-parameter_list|,
-name|ScopeRegistry
-name|scopeRegistry
-parameter_list|,
-name|OntologyProvider
-argument_list|<
-name|?
-argument_list|>
-name|ontologyProvider
-parameter_list|)
-block|{
-name|this
-argument_list|(
-name|ontologyProvider
-argument_list|,
-operator|new
-name|Hashtable
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * To be invoked by non-OSGi environments.      *       * @param the      *            ontology provider that will store and provide ontologies for this session manager.      * @param configuration      */
@@ -1643,36 +1561,6 @@ return|return
 name|listeners
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|Set
-argument_list|<
-name|SessionOntologySpace
-argument_list|>
-name|getSessionSpaces
-parameter_list|(
-name|String
-name|sessionID
-parameter_list|)
-throws|throws
-name|NonReferenceableSessionException
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Session Manager is now agnostic to scopes, and session spaces are deprecated. Please perform CRUD operations on Session objects directly."
-argument_list|)
-throw|;
-comment|// Set<SessionOntologySpace> result = new HashSet<SessionOntologySpace>();
-comment|// // Brute force search
-comment|// for (OntologyScope scope : scopeRegistry.getRegisteredScopes()) {
-comment|// SessionOntologySpace space = scope.getSessionSpace(sessionID);
-comment|// if (space != null) result.add(space);
-comment|// }
-comment|// return result;
-block|}
 specifier|protected
 specifier|synchronized
 name|void
@@ -1893,17 +1781,9 @@ throw|throw
 operator|new
 name|UnsupportedOperationException
 argument_list|(
-literal|"Session content is always stored by default in the current implementation."
+literal|"Not necessary. Session content is always stored by default in the current implementation."
 argument_list|)
 throw|;
-comment|/*          * For each gession space in the session save all the ontologies contained in the space.          */
-comment|// for (SessionOntologySpace so : getSessionSpaces(sessionID)) {
-comment|// for (OWLOntology owlOntology : so.getOntologies(true)) {
-comment|//
-comment|// // store.store(owlOntology);
-comment|//
-comment|// }
-comment|// }
 block|}
 block|}
 end_class

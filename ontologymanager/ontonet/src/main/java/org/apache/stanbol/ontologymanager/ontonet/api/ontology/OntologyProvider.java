@@ -63,6 +63,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|TripleCollection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|access
 operator|.
 name|TcProvider
@@ -175,6 +191,13 @@ name|IMPORT_POLICY
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.importPolicy"
 decl_stmt|;
+comment|/**      * The key used to configure the identifier of the meta-level graph      */
+specifier|public
+name|String
+name|META_GRAPH_ID
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.metaGraphId"
+decl_stmt|;
 comment|/**      * The key used to configure the default import resolution policy for this provider.      */
 specifier|public
 name|String
@@ -193,6 +216,22 @@ name|getKey
 parameter_list|(
 name|IRI
 name|ontologyIRI
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the graph that stores all the information on stored ontologies      *       * @param returnType      * @return      */
+parameter_list|<
+name|O
+extends|extends
+name|TripleCollection
+parameter_list|>
+name|O
+name|getMetaGraph
+parameter_list|(
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
 parameter_list|)
 function_decl|;
 comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
@@ -291,6 +330,7 @@ index|[]
 name|getSupportedReturnTypes
 parameter_list|()
 function_decl|;
+comment|/**      * A convenience method for checking the availability of an ontology given its (physical or logical) IRI.      * It is typically more efficient than calling {@link #getStoredOntology(IRI, Class)} and null-checking      * the result.      *       * @param ontologyIri      * @return      */
 name|boolean
 name|hasOntology
 parameter_list|(

@@ -833,26 +833,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|scope
-operator|.
-name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|session
 operator|.
 name|Session
@@ -2103,7 +2083,7 @@ argument_list|,
 name|recipe
 argument_list|)
 decl_stmt|;
-comment|/*             ontology = refactorer                     .ontologyRefactoring(ontology, IRI.create(engineConfiguration.getRecipeId()));  			*/
+comment|/*              * ontology = refactorer .ontologyRefactoring(ontology,              * IRI.create(engineConfiguration.getRecipeId()));              */
 comment|/*              * The newly generated ontology is converted to Clarezza format and then added os substitued to              * the old mGraph.              */
 if|if
 condition|(
@@ -2531,9 +2511,6 @@ argument_list|()
 expr_stmt|;
 name|onManager
 operator|.
-name|getScopeRegistry
-argument_list|()
-operator|.
 name|deregisterScope
 argument_list|(
 name|scope
@@ -2701,22 +2678,11 @@ name|getScope
 argument_list|()
 decl_stmt|;
 comment|// Create or get the scope with the configured ID
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onManager
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
 try|try
 block|{
 name|scope
 operator|=
 name|onManager
-operator|.
-name|getOntologyScopeFactory
-argument_list|()
 operator|.
 name|createOntologyScope
 argument_list|(
@@ -2733,14 +2699,14 @@ parameter_list|)
 block|{
 name|scope
 operator|=
-name|scopeRegistry
+name|onManager
 operator|.
 name|getScope
 argument_list|(
 name|scopeId
 argument_list|)
 expr_stmt|;
-name|scopeRegistry
+name|onManager
 operator|.
 name|setScopeActive
 argument_list|(
@@ -2979,21 +2945,21 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|scopeRegistry
+name|onManager
 operator|.
 name|containsScope
 argument_list|(
 name|scopeId
 argument_list|)
 condition|)
-name|scopeRegistry
+name|onManager
 operator|.
 name|registerScope
 argument_list|(
 name|scope
 argument_list|)
 expr_stmt|;
-name|scopeRegistry
+name|onManager
 operator|.
 name|setScopeActive
 argument_list|(
@@ -3066,7 +3032,7 @@ argument_list|,
 name|recipeId
 argument_list|)
 expr_stmt|;
-comment|/* 		     * The set of rule to put in the recipe can be provided by the user. A default set of rules is 		     * provided in /META-INF/default/seo_rules.sem. Use the property engine.refactor in the felix console 		     * to pass to the engine your set of rules. 		     */
+comment|/*              * The set of rule to put in the recipe can be provided by the user. A default set of rules is              * provided in /META-INF/default/seo_rules.sem. Use the property engine.refactor in the felix              * console to pass to the engine your set of rules.              */
 name|String
 name|recipeLocation
 init|=

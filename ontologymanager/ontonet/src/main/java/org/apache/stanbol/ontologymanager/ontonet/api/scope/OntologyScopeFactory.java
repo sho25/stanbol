@@ -35,24 +35,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|NamedResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|collector
 operator|.
 name|DuplicateIDException
@@ -88,8 +70,6 @@ specifier|public
 interface|interface
 name|OntologyScopeFactory
 extends|extends
-name|NamedResource
-extends|,
 name|ScopeEventListenable
 block|{
 comment|/**      * Creates and returns a new ontology scope with the core space ontologies obtained from      *<code>coreSource</code> and the custom space not set.      *       * @param scopeID      *            the desired unique identifier for the ontology scope.      * @param coreSource      *            the input source that provides the top ontology for the core space.      * @return the newly created ontology scope.      * @throws DuplicateIDException      *             if an ontology scope with the given identifier is already<i>registered</i>. The exception      *             is not thrown if another scope with the same ID has been created but not registered.      */

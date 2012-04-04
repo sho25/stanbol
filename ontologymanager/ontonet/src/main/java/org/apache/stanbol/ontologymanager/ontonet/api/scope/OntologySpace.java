@@ -112,12 +112,6 @@ name|CUSTOM
 argument_list|(
 literal|"custom"
 argument_list|)
-block|,
-comment|/**          * Denotes a session space (0..n).          *           * @deprecated no session spaces should created anymore.          */
-name|SESSION
-argument_list|(
-literal|"session"
-argument_list|)
 block|;
 specifier|private
 name|String

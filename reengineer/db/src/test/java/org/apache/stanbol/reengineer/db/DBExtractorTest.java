@@ -65,7 +65,43 @@ name|core
 operator|.
 name|access
 operator|.
+name|TcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
 name|WeightedTcProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|Parser
 import|;
 end_import
 
@@ -153,9 +189,125 @@ name|ontologymanager
 operator|.
 name|ontonet
 operator|.
+name|api
+operator|.
+name|OfflineConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|ontology
+operator|.
+name|OntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|scope
+operator|.
+name|OntologySpaceFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
 name|impl
 operator|.
 name|ONManagerImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|OfflineConfigurationImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|clerezza
+operator|.
+name|ClerezzaOntologyProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|impl
+operator|.
+name|clerezza
+operator|.
+name|OntologySpaceFactoryImpl
 import|;
 end_import
 
@@ -322,15 +474,56 @@ argument_list|,
 name|wtcp
 argument_list|)
 decl_stmt|;
-comment|// Two different ontology storagez, the same sparql engine and tcprovider
+name|OfflineConfiguration
+name|offline
+init|=
+operator|new
+name|OfflineConfigurationImpl
+argument_list|(
+name|emptyConf
+argument_list|)
+decl_stmt|;
+name|OntologyProvider
+argument_list|<
+name|TcProvider
+argument_list|>
+name|ontologyProvider
+init|=
+operator|new
+name|ClerezzaOntologyProvider
+argument_list|(
+name|tcm
+argument_list|,
+name|offline
+argument_list|,
+name|Parser
+operator|.
+name|getInstance
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|// Two different ontology storages, the same sparql engine and tcprovider
+name|OntologySpaceFactory
+name|sf
+init|=
+operator|new
+name|OntologySpaceFactoryImpl
+argument_list|(
+name|ontologyProvider
+argument_list|,
+name|emptyConf
+argument_list|)
+decl_stmt|;
 name|onManager
 operator|=
 operator|new
 name|ONManagerImpl
 argument_list|(
-name|tcm
+name|ontologyProvider
 argument_list|,
-name|wtcp
+name|offline
+argument_list|,
+name|sf
 argument_list|,
 name|emptyConf
 argument_list|)
@@ -343,14 +536,7 @@ argument_list|(
 operator|new
 name|ReengineerManagerImpl
 argument_list|(
-operator|new
-name|Hashtable
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
+name|emptyConf
 argument_list|)
 argument_list|,
 name|onManager
@@ -382,14 +568,14 @@ specifier|public
 name|void
 name|setup
 parameter_list|()
-block|{ 		 	}
+block|{      }
 annotation|@
 name|Before
 specifier|public
 name|void
 name|tearDown
 parameter_list|()
-block|{ 		 	}
+block|{      }
 annotation|@
 name|Test
 specifier|public
@@ -397,15 +583,15 @@ name|void
 name|testDataReengineering
 parameter_list|()
 block|{
-comment|//		graphNS = "http://kres.iks-project.eu/reengineering/test";
-comment|//		outputIRI = IRI.create(graphNS);
-comment|//		try {
-comment|//			OWLOntology ontology = dbExtractor.dataReengineering(graphNS,
-comment|//					outputIRI, null, dbExtractor.schemaReengineering(graphNS,
-comment|//							outputIRI, null));
-comment|//		} catch (ReengineeringException e) {
-comment|//			fail("Some errors occur with dataReengineering of DBExtractor.");
-comment|//		}
+comment|// graphNS = "http://kres.iks-project.eu/reengineering/test";
+comment|// outputIRI = IRI.create(graphNS);
+comment|// try {
+comment|// OWLOntology ontology = dbExtractor.dataReengineering(graphNS,
+comment|// outputIRI, null, dbExtractor.schemaReengineering(graphNS,
+comment|// outputIRI, null));
+comment|// } catch (ReengineeringException e) {
+comment|// fail("Some errors occur with dataReengineering of DBExtractor.");
+comment|// }
 block|}
 annotation|@
 name|Test
@@ -414,14 +600,14 @@ name|void
 name|testReengineering
 parameter_list|()
 block|{
-comment|//		graphNS = "http://kres.iks-project.eu/reengineering/test";
-comment|//		outputIRI = IRI.create(graphNS);
-comment|//		try {
-comment|//			OWLOntology ontology = dbExtractor.reengineering(graphNS,
-comment|//					outputIRI, null);
-comment|//		} catch (ReengineeringException e) {
-comment|//			fail("Some errors occur with reengineering of DBExtractor.");
-comment|//		}
+comment|// graphNS = "http://kres.iks-project.eu/reengineering/test";
+comment|// outputIRI = IRI.create(graphNS);
+comment|// try {
+comment|// OWLOntology ontology = dbExtractor.reengineering(graphNS,
+comment|// outputIRI, null);
+comment|// } catch (ReengineeringException e) {
+comment|// fail("Some errors occur with reengineering of DBExtractor.");
+comment|// }
 block|}
 annotation|@
 name|Test
@@ -430,8 +616,8 @@ name|void
 name|testSchemaReengineering
 parameter_list|()
 block|{
-comment|//		OWLOntology ontology = dbExtractor.schemaReengineering(graphNS,
-comment|//				outputIRI, null);
+comment|// OWLOntology ontology = dbExtractor.schemaReengineering(graphNS,
+comment|// outputIRI, null);
 block|}
 block|}
 end_class

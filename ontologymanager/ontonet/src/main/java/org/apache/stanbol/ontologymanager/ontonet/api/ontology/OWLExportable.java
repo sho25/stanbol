@@ -35,22 +35,8 @@ name|IRI
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
-import|;
-end_import
-
 begin_comment
-comment|/**  * An object that can be represented as an {@link OWLOntology} instance.  *   * @author alexdma  *   */
+comment|/**  * An object that can be represented as an ontology instance.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
@@ -58,14 +44,6 @@ specifier|public
 interface|interface
 name|OWLExportable
 block|{
-comment|/**      * Returns the OWL ontology form of this object.      *       * @deprecated use the method {@link #export(Class, boolean)} instead, with the first argument set as      *             {@link OWLOntology.class}.      *       * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the OWL ontology that represents this object.      *       */
-name|OWLOntology
-name|asOWLOntology
-parameter_list|(
-name|boolean
-name|merge
-parameter_list|)
-function_decl|;
 comment|/**      * Returns an ontological form of this object of the specified return type, if supported. If the supplied      * class is not a supported return type, an {@link UnsupportedOperationException} is thrown.<br>      *<br>      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param returnType      *            the desired class of the returned object.      * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the ontology that represents this object.      */
 parameter_list|<
 name|O

@@ -803,9 +803,6 @@ name|scope
 operator|=
 name|onManager
 operator|.
-name|getScopeRegistry
-argument_list|()
-operator|.
 name|getScope
 argument_list|(
 name|this
@@ -878,7 +875,6 @@ name|session
 operator|==
 literal|null
 condition|)
-block|{
 name|log
 operator|.
 name|warn
@@ -890,7 +886,6 @@ operator|.
 name|sessionId
 argument_list|)
 expr_stmt|;
-block|}
 specifier|final
 name|Set
 argument_list|<
@@ -927,7 +922,6 @@ name|session
 operator|!=
 literal|null
 condition|)
-block|{
 name|set
 operator|.
 name|add
@@ -944,7 +938,6 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 name|set
@@ -1056,8 +1049,7 @@ block|{
 comment|// We isolate here the creation of the temporary manager
 comment|// TODO How to behave when resolving owl:imports?
 comment|// We should set the manager to use a service to lookup for ontologies,
-comment|// instead of trying on the web
-comment|// directly
+comment|// instead of trying on the web directly
 name|OWLOntologyManager
 name|manager
 init|=

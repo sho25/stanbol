@@ -209,7 +209,6 @@ argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#addScopeRegistrationListener(eu.iksproject.kres      * .api.manager.ontology.ScopeEventListener)      */
 annotation|@
 name|Override
 specifier|public
@@ -228,7 +227,6 @@ name|listener
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.api.manager.ontology.ScopeRegistry#clearScopeRegistrationListeners()      */
 annotation|@
 name|Override
 specifier|public
@@ -242,7 +240,6 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#containsScope(org.semanticweb.owlapi.model.IRI)      */
 annotation|@
 name|Override
 specifier|public
@@ -265,7 +262,6 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see      * eu.iksproject.kres.api.manager.ontology.ScopeRegistry#deregisterScope(eu.iksproject.kres.api.manager      * .ontology.OntologyScope)      */
 annotation|@
 name|Override
 specifier|public

@@ -371,66 +371,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|OntologyScopeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|OntologySpaceFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|reengineer
 operator|.
 name|base
@@ -1039,9 +979,6 @@ name|Reference
 name|ONManager
 name|onManager
 decl_stmt|;
-comment|//
-comment|// @Reference
-comment|// SessionManager sessionManager;
 annotation|@
 name|Reference
 name|ReengineerManager
@@ -1055,12 +992,11 @@ specifier|private
 name|String
 name|scopeID
 decl_stmt|;
-comment|// private IRI spaceIRI;
 comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the XMLExtractor instances do need to be configured! YOU NEED      * TO USE {@link #XMLExtractor(ONManager)} or its overloads, to parse the configuration and then      * initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|XMLExtractor
 parameter_list|()
-block|{      }
+block|{}
 specifier|public
 name|XMLExtractor
 parameter_list|(
@@ -1231,8 +1167,6 @@ operator|=
 name|_HOST_NAME_AND_PORT_DEFAULT
 expr_stmt|;
 comment|// TODO: Manage the other properties
-comment|// spaceIRI = IRI.create(XML_REENGINEERING_SESSION_SPACE);
-comment|// scopeID = IRI.create("http://" + hostPort + "/kres/ontology/" + scopeID);
 name|reengineeringManager
 operator|.
 name|bindReengineer
@@ -1240,33 +1174,6 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-comment|// SessionManager kReSSessionManager = onManager.getSessionManager();
-comment|// Session kReSSession = sessionManager.createSession();
-comment|// sessionId = kReSSession.getID();
-name|OntologyScopeFactory
-name|ontologyScopeFactory
-init|=
-name|onManager
-operator|.
-name|getOntologyScopeFactory
-argument_list|()
-decl_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onManager
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-name|OntologySpaceFactory
-name|ontologySpaceFactory
-init|=
-name|onManager
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-decl_stmt|;
 name|scope
 operator|=
 literal|null
@@ -1325,7 +1232,7 @@ argument_list|)
 decl_stmt|;
 name|scope
 operator|=
-name|ontologyScopeFactory
+name|onManager
 operator|.
 name|createOntologyScope
 argument_list|(
@@ -1336,7 +1243,7 @@ comment|/* new OntologyInputSourceOXML() */
 argument_list|)
 expr_stmt|;
 comment|// scope.setUp();
-name|scopeRegistry
+name|onManager
 operator|.
 name|registerScope
 argument_list|(
@@ -1362,9 +1269,6 @@ expr_stmt|;
 name|scope
 operator|=
 name|onManager
-operator|.
-name|getScopeRegistry
-argument_list|()
 operator|.
 name|getScope
 argument_list|(
@@ -1404,11 +1308,7 @@ name|scope
 operator|!=
 literal|null
 condition|)
-block|{
-comment|// try {
-comment|// scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(scopeID),
-comment|// kReSSession.getID());
-name|scopeRegistry
+name|onManager
 operator|.
 name|setScopeActive
 argument_list|(
@@ -1417,10 +1317,6 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-comment|// } catch (UnmodifiableOntologySpaceException ex) {
-comment|// log.error("Cannot add session space for " + scopeID + " to unmodifiable scope " + scope, ex);
-comment|// }
-block|}
 name|log
 operator|.
 name|info
@@ -2157,9 +2053,9 @@ expr_stmt|;
 name|OWLOntologyManager
 name|ontologyManager
 init|=
-name|onManager
+name|OWLManager
 operator|.
-name|getOwlCacheManager
+name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
 name|OWLDataFactory
@@ -2168,17 +2064,6 @@ init|=
 name|OWLManager
 operator|.
 name|getOWLDataFactory
-argument_list|()
-decl_stmt|;
-name|IRI
-name|schemaOntologyIRI
-init|=
-name|schemaOntology
-operator|.
-name|getOntologyID
-argument_list|()
-operator|.
-name|getOntologyIRI
 argument_list|()
 decl_stmt|;
 name|OWLOntology
@@ -2611,9 +2496,9 @@ block|{
 name|OWLOntologyManager
 name|ontologyManager
 init|=
-name|onManager
+name|OWLManager
 operator|.
-name|getOwlCacheManager
+name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
 name|OWLDataFactory
@@ -2911,48 +2796,6 @@ return|return
 name|ReengineerType
 operator|.
 name|XML
-return|;
-block|}
-specifier|private
-name|OntologyScope
-name|getScope
-parameter_list|()
-block|{
-name|OntologyScope
-name|ontologyScope
-init|=
-literal|null
-decl_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onManager
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|scopeRegistry
-operator|.
-name|isScopeActive
-argument_list|(
-name|scopeID
-argument_list|)
-condition|)
-block|{
-name|ontologyScope
-operator|=
-name|scopeRegistry
-operator|.
-name|getScope
-argument_list|(
-name|scopeID
-argument_list|)
-expr_stmt|;
-block|}
-return|return
-name|ontologyScope
 return|;
 block|}
 specifier|private
@@ -3758,9 +3601,7 @@ name|xsdExtractor
 init|=
 operator|new
 name|XSDExtractor
-argument_list|(
-name|onManager
-argument_list|)
+argument_list|()
 decl_stmt|;
 return|return
 name|xsdExtractor

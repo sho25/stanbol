@@ -63,26 +63,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|SessionOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -171,19 +151,6 @@ parameter_list|(
 name|String
 name|sessionID
 parameter_list|)
-function_decl|;
-comment|/**      * Returns the ontology spaces associated with this session.      *       * @deprecated as session spaces are obsolete, so is this method. Do no use session spaces.      *       * @return the session spaces      */
-name|Set
-argument_list|<
-name|SessionOntologySpace
-argument_list|>
-name|getSessionSpaces
-parameter_list|(
-name|String
-name|sessionID
-parameter_list|)
-throws|throws
-name|NonReferenceableSessionException
 function_decl|;
 comment|/**      * Sets the maximum allowed number of active sessions managed by this manager simultaneously. A negative      * value denotes no limit.      *       * Note that it is possible to set this value to zero, thus preventing Stanbol from creating session at      * all.      *       * @param limit      */
 name|void

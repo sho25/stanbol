@@ -216,8 +216,12 @@ name|bindRootOntology
 argument_list|(
 name|space
 operator|.
-name|asOWLOntology
+name|export
 argument_list|(
+name|OWLOntology
+operator|.
+name|class
+argument_list|,
 literal|false
 argument_list|)
 argument_list|)
@@ -271,8 +275,12 @@ block|{
 return|return
 name|space
 operator|.
-name|getOntologies
+name|getManagedOntologies
 argument_list|(
+name|OWLOntology
+operator|.
+name|class
+argument_list|,
 name|recursive
 argument_list|)
 return|;

@@ -267,66 +267,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|OntologyScopeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|OntologySpaceFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|ScopeRegistry
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|reengineer
 operator|.
 name|base
@@ -1028,33 +968,6 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-comment|// SessionManager kReSSessionManager = onManager.getSessionManager();
-comment|// Session kReSSession = kReSSessionManager.createSession();
-comment|// kReSSessionID = kReSSession.getID();
-name|OntologyScopeFactory
-name|ontologyScopeFactory
-init|=
-name|onManager
-operator|.
-name|getOntologyScopeFactory
-argument_list|()
-decl_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onManager
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
-name|OntologySpaceFactory
-name|ontologySpaceFactory
-init|=
-name|onManager
-operator|.
-name|getOntologySpaceFactory
-argument_list|()
-decl_stmt|;
 name|scope
 operator|=
 literal|null
@@ -1111,7 +1024,7 @@ argument_list|)
 expr_stmt|;
 name|scope
 operator|=
-name|ontologyScopeFactory
+name|onManager
 operator|.
 name|createOntologyScope
 argument_list|(
@@ -1132,13 +1045,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// scope.setUp();
-name|scopeRegistry
-operator|.
-name|registerScope
-argument_list|(
-name|scope
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -1157,7 +1063,7 @@ argument_list|)
 expr_stmt|;
 name|scope
 operator|=
-name|scopeRegistry
+name|onManager
 operator|.
 name|getScope
 argument_list|(
@@ -1205,11 +1111,7 @@ name|scope
 operator|!=
 literal|null
 condition|)
-block|{
-comment|// try {
-comment|// scope.addSessionSpace(ontologySpaceFactory.createSessionOntologySpace(this.reengineeringScopeID),
-comment|// kReSSession.getID());
-name|scopeRegistry
+name|onManager
 operator|.
 name|setScopeActive
 argument_list|(
@@ -1218,12 +1120,6 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-comment|// } catch (UnmodifiableOntologySpaceException ex) {
-comment|// log.error("Cannot add session space for scope " + reengineeringScopeID +
-comment|// " to unmodifiable scope "
-comment|// + scope, ex);
-comment|// }
-block|}
 name|log
 operator|.
 name|info
@@ -1359,8 +1255,6 @@ init|=
 operator|new
 name|DBDataTransformer
 argument_list|(
-name|onManager
-argument_list|,
 name|schemaOntology
 argument_list|)
 decl_stmt|;
@@ -1426,41 +1320,25 @@ name|OntologyScope
 name|getScope
 parameter_list|()
 block|{
-name|OntologyScope
-name|ontologyScope
-init|=
-literal|null
-decl_stmt|;
-name|ScopeRegistry
-name|scopeRegistry
-init|=
-name|onManager
-operator|.
-name|getScopeRegistry
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
-name|scopeRegistry
+name|onManager
 operator|.
 name|isScopeActive
 argument_list|(
 name|reengineeringScopeID
 argument_list|)
 condition|)
-block|{
-name|ontologyScope
-operator|=
-name|scopeRegistry
+return|return
+name|onManager
 operator|.
 name|getScope
 argument_list|(
 name|reengineeringScopeID
 argument_list|)
-expr_stmt|;
-block|}
+return|;
 return|return
-name|ontologyScope
+literal|null
 return|;
 block|}
 annotation|@

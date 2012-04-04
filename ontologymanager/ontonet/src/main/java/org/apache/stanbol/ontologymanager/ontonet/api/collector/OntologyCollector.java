@@ -113,20 +113,6 @@ name|IRI
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntology
-import|;
-end_import
-
 begin_comment
 comment|/**  * It is not literally an ontology<i>collection</i>, in that it only collects references to ontologies, not  * the ontologies themselves. Unless implementations specify a different behaviour, removing ontologies from  * the collector does not delete them from their persistence system.  *   * @author alexdma  *   */
 end_comment
@@ -174,7 +160,7 @@ argument_list|>
 name|getListeners
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the ontologies managed by this ontology space.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
+comment|/**      * Returns the ontologies managed by this ontology space. This is a shortcut method for iterating      * {@link #getOntology(IRI, Class)} calls over {@link #listManagedOntologies()}.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -194,35 +180,13 @@ name|boolean
 name|withClosure
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the ontologies managed by this ontology space.      *       * @deprecated to obtain the set as {@link OWLOntology} objects, please use      *<code>#getManagedOntologies(OWLOntology.class, boolean)</code>.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
+comment|/**      * TODO replace with Ontology IDs      *       * @return      */
 name|Set
 argument_list|<
-name|OWLOntology
+name|IRI
 argument_list|>
-name|getOntologies
-parameter_list|(
-name|boolean
-name|withClosure
-parameter_list|)
-function_decl|;
-comment|/**      * Equivalent to calling<code>getOntology(IRI, false)</code>;      *       * @deprecated to obtain the {@link OWLOntology} object, cast the result of<code>#getOntology(IRI,      *             OWLOntology.class)</code> to OWLOntology.      *       * @param ontologyIri      * @return      */
-name|OWLOntology
-name|getOntology
-parameter_list|(
-name|IRI
-name|ontologyIri
-parameter_list|)
-function_decl|;
-comment|/**      * Returns the ontology identified by the supplied<i>logical</i> IRI, if such an ontology has been loaded      * in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @deprecated to obtain the {@link OWLOntology} object, please use<code>#getOntology(IRI,      *             OWLOntology.class, boolean)</code>.      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return the requested ontology, or null if no ontology with this ID has been loaded.      */
-name|OWLOntology
-name|getOntology
-parameter_list|(
-name|IRI
-name|ontologyIri
-parameter_list|,
-name|boolean
-name|merge
-parameter_list|)
+name|listManagedOntologies
+parameter_list|()
 function_decl|;
 parameter_list|<
 name|O
@@ -260,18 +224,6 @@ name|boolean
 name|merge
 parameter_list|)
 function_decl|;
-name|int
-name|getOntologyCount
-parameter_list|()
-function_decl|;
-comment|/**      * A shortcut method to avoid computing the ontologies themselves before counting them.      *       * TODO deprecate once support for closure is added to {@link #listManagedOntologies()}.      *       * @param withClosure      * @return      */
-name|int
-name|getOntologyCount
-parameter_list|(
-name|boolean
-name|withClosure
-parameter_list|)
-function_decl|;
 comment|/**      * Determines if the ontology identified by the supplied<i>logical</i> IRI has been loaded in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return true if an ontology with this ID has been loaded in this space.      */
 name|boolean
 name|hasOntology
@@ -279,14 +231,6 @@ parameter_list|(
 name|IRI
 name|ontologyIri
 parameter_list|)
-function_decl|;
-comment|/**      * TODO replace with Ontology IDs      *       * @return      */
-name|Set
-argument_list|<
-name|IRI
-argument_list|>
-name|listManagedOntologies
-parameter_list|()
 function_decl|;
 comment|/**      * Unregisters the supplied for changes in this ontology space. Has no effect if the same listener was not      * registered with this ontology space.      *       * @param listener      *            the ontology space listener to be removed.      */
 name|void
@@ -304,12 +248,12 @@ name|IRI
 name|ontologyId
 parameter_list|)
 function_decl|;
-comment|/**      * Bootstraps the ontology space. In some cases (such as with core and custom spaces) this also implies      * write-locking its ontologies.      */
+comment|/**      * Bootstraps the ontology space. In some cases (such as with core and custom spaces) this also implies      * write-locking its ontologies.      *       * XXX make it a protected, non-interface method ?      */
 name|void
 name|setUp
 parameter_list|()
 function_decl|;
-comment|/**      * Performs all required operations for disposing of an ontology space and releasing its resources (e.g.      * removing the writelock).      */
+comment|/**      * Performs all required operations for disposing of an ontology space and releasing its resources (e.g.      * removing the writelock).      *       * XXX make it a protected, non-interface method ?      */
 name|void
 name|tearDown
 parameter_list|()

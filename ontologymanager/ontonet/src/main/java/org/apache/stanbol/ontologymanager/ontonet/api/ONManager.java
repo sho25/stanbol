@@ -37,11 +37,15 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|commons
+name|ontologymanager
 operator|.
-name|owl
+name|ontonet
 operator|.
-name|OWLOntologyManagerFactory
+name|api
+operator|.
+name|io
+operator|.
+name|OntologyInputSource
 import|;
 end_import
 
@@ -59,9 +63,9 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|ontology
+name|scope
 operator|.
-name|OntologyProvider
+name|OntologyScope
 import|;
 end_import
 
@@ -125,96 +129,18 @@ name|ScopeRegistry
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|session
-operator|.
-name|SessionManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
-name|session
-operator|.
-name|SessionManagerImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyAlreadyExistsException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLOntologyManager
-import|;
-end_import
-
 begin_comment
-comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.  *   * @author alexdma, anuzzolese  *   */
+comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.<br>  *<br>  * Note that since this object is both a {@link ScopeRegistry} and an {@link OntologyScopeFactory}, the call  * to {@link ScopeRegistry#registerScope(OntologyScope)} or its overloads after  * {@link OntologyScopeFactory#createOntologyScope(String, OntologyInputSource...)} is unnecessary, as the  * ONManager automatically registers newly created scopes.  *   * @author alexdma, anuzzolese  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
 name|ONManager
+extends|extends
+name|ScopeRegistry
+extends|,
+name|OntologyScopeFactory
 block|{
 comment|/**      * The key used to configure the path of the ontology network configuration.      */
 name|String
@@ -255,36 +181,28 @@ name|String
 name|getOntologyNetworkNamespace
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @return the default ontology scope factory      */
+comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @deprecated returns this object, which is also an {@link OntologyScopeFactory}.      * @return the default ontology scope factory      */
 name|OntologyScopeFactory
 name|getOntologyScopeFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the ontology space factory that was created along with the manager context.      *       * @return the default ontology space factory.      */
+comment|/**      * Returns the ontology space factory that was created along with the manager context.<br>      *<br>      * Note: Because this can be backend-dependent, this method is not deprecated yet.      *       * @return the default ontology space factory.      */
 name|OntologySpaceFactory
 name|getOntologySpaceFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns an OWL Ontology Manager that is never cleared of its ontologies, so it can be used for caching      * ontologies without having to reload them using other managers. It is sufficient to catch      * {@link OWLOntologyAlreadyExistsException}s and obtain the ontology with that same ID from this manager.      *       * @deprecated the ONManager will soon stop providing a cache manager, as it will gradually be replaced by      *             {@link OntologyProvider}. Implementations that need to use an OWLOntologyManager which      *             avoids reloading stored ontologies can either call {@link OntologyProvider#getStore()} on      *             an {@link OWLOntologyManager}-based implementation, or create a new one by calling      *             {@link OWLOntologyManagerFactory#createOWLOntologyManager(IRI[])} or OWL API methods.      * @return the OWL Ontology Manager used for caching ontologies.      */
-name|OWLOntologyManager
-name|getOwlCacheManager
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the unique ontology scope registry for this context.      *       * @return the ontology scope registry.      */
+comment|/**      * Returns the unique ontology scope registry for this context.      *       * @deprecated returns this object, which is also a {@link ScopeRegistry}.      * @return the ontology scope registry.      */
 name|ScopeRegistry
 name|getScopeRegistry
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the unique session manager for this context.      *       * @deprecated {@link SessionManager} is now a standalone component and should be accessed independently      *             from the ONManager (e.g. by instantiating a new {@link SessionManagerImpl} or by      *             referencing {@link SessionManager} in OSGi components).      *       * @return the session manager.      */
-name|SessionManager
-name|getSessionManager
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the list of IRIs that identify scopes that should be activated on startup,<i>if they      * exist</i>.      *       * @return the list of scope IDs to activate.      */
+comment|/**      * Sets the IRI that will be the base namespace for all ontology scopes and collectors created by this      * object.      *       * @param namespace      *            the base namespace.      */
+name|void
+name|setOntologyNetworkNamespace
+parameter_list|(
 name|String
-index|[]
-name|getUrisToActivate
-parameter_list|()
+name|namespace
+parameter_list|)
 function_decl|;
 block|}
 end_interface
