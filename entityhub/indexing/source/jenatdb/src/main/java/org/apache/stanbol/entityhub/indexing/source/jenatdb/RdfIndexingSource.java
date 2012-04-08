@@ -2389,9 +2389,19 @@ name|entityNode
 operator|.
 name|isURI
 argument_list|()
+operator|&&
+comment|//only uri nodes are valid
+comment|// it's unbelievable, but Jena URIs might be empty!
+operator|!
+name|entityNode
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
-comment|//only uri nodes are valid
 comment|//store it temporarily in nextBinding
 name|nextBinding
 operator|=
