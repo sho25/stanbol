@@ -1282,7 +1282,7 @@ block|{
 name|String
 name|path
 init|=
-literal|"fn:textAnnotation()/fise:selected-text"
+literal|"fn:textAnnotation(.)/fise:selected-text"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -1396,7 +1396,7 @@ comment|//same as the 1st example bat rather using an ld-path construct for
 comment|//filtering for TextAnnotations representing persons
 name|path
 operator|=
-literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Person]/fise:selected-text"
+literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Person]/fise:selected-text"
 expr_stmt|;
 name|result
 operator|=
@@ -1483,7 +1483,7 @@ block|{
 name|String
 name|path
 init|=
-literal|"fn:entityAnnotation()/fise:entity-reference"
+literal|"fn:entityAnnotation(.)/fise:entity-reference"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -1616,7 +1616,7 @@ expr_stmt|;
 comment|//and with a filter
 name|path
 operator|=
-literal|"fn:entityAnnotation()[fise:entity-type is dbpedia-ont:Person]/fise:entity-reference"
+literal|"fn:entityAnnotation(.)[fise:entity-type is dbpedia-ont:Person]/fise:entity-reference"
 expr_stmt|;
 name|result
 operator|=
@@ -1684,7 +1684,7 @@ block|{
 name|String
 name|path
 init|=
-literal|"fn:enhancement()"
+literal|"fn:enhancement(.)"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -1757,7 +1757,7 @@ block|}
 comment|//and with a filter
 name|path
 operator|=
-literal|"fn:enhancement()[rdf:type is fise:TextAnnotation]"
+literal|"fn:enhancement(.)[rdf:type is fise:TextAnnotation]"
 expr_stmt|;
 name|result
 operator|=
@@ -1801,7 +1801,7 @@ expr_stmt|;
 comment|//        assertTrue(result.contains(new UriRef("http://dbpedia.org/resource/Bob_Marley")));
 name|path
 operator|=
-literal|"fn:enhancement()/dc:language"
+literal|"fn:enhancement(.)/dc:language"
 expr_stmt|;
 name|result
 operator|=
@@ -1895,7 +1895,7 @@ comment|// most.
 name|String
 name|path
 init|=
-literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Place]/fn:suggestion()"
+literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Place]/fn:suggestion(.)"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -2038,7 +2038,7 @@ argument_list|)
 expr_stmt|;
 name|path
 operator|=
-literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Place]/fn:suggestion(\"2\")"
+literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Place]/fn:suggestion(.,\"2\")"
 expr_stmt|;
 name|Collection
 argument_list|<
@@ -2122,7 +2122,7 @@ comment|//NOTE: '.' MUST BE used as first argument in this case
 name|String
 name|path
 init|=
-literal|"fn:textAnnotation()/fn:suggestedEntity(\"1\")"
+literal|"fn:textAnnotation(.)/fn:suggestedEntity(.,\"1\")"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -2246,7 +2246,7 @@ comment|//NOTE: the selector parsing all Annotations MUST BE used as first
 comment|//      argument
 name|path
 operator|=
-literal|"fn:suggestedEntity(fn:textAnnotation(),\"1\")"
+literal|"fn:suggestedEntity(fn:textAnnotation(.),\"1\")"
 expr_stmt|;
 name|result
 operator|=

@@ -149,8 +149,6 @@ operator|=
 name|name
 expr_stmt|;
 block|}
-annotation|@
-name|Override
 specifier|public
 specifier|final
 name|Collection
@@ -164,9 +162,6 @@ argument_list|<
 name|Resource
 argument_list|>
 name|backend
-parameter_list|,
-name|Resource
-name|context
 parameter_list|,
 name|Collection
 argument_list|<
@@ -192,8 +187,6 @@ operator|(
 name|ContentItemBackend
 operator|)
 name|backend
-argument_list|,
-name|context
 argument_list|,
 name|args
 argument_list|)
@@ -239,9 +232,6 @@ name|apply
 parameter_list|(
 name|ContentItemBackend
 name|backend
-parameter_list|,
-name|Resource
-name|context
 parameter_list|,
 name|Collection
 argument_list|<

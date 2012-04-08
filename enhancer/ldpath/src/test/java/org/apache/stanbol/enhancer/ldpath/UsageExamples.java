@@ -790,7 +790,7 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"personMentions = fn:textAnnotation()"
+literal|"personMentions = fn:textAnnotation(.)"
 operator|+
 literal|"[dc:type is dbpedia-ont:Person]/fise:selected-text :: xsd:string;"
 argument_list|)
@@ -801,18 +801,18 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"personNames = fn:textAnnotation()"
+literal|"personNames = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Person]/fn:first(fn:suggestion(\"1\")/fise:entity-label,fise:selected-text) :: xsd:string;"
+literal|"[dc:type is dbpedia-ont:Person]/fn:first(fn:suggestion(.,\"1\")/fise:entity-label,fise:selected-text) :: xsd:string;"
 argument_list|)
 expr_stmt|;
 name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedPersons = fn:textAnnotation()"
+literal|"linkedPersons = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Person]/fn:suggestedEntity(\"1\") :: xsd:anyURI;"
+literal|"[dc:type is dbpedia-ont:Person]/fn:suggestedEntity(.,\"1\") :: xsd:anyURI;"
 argument_list|)
 expr_stmt|;
 comment|//this selects only linked Artists
@@ -820,9 +820,9 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedArtists = fn:textAnnotation()"
+literal|"linkedArtists = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Person]/fn:suggestion()"
+literal|"[dc:type is dbpedia-ont:Person]/fn:suggestion(.)"
 operator|+
 literal|"[fise:entity-type is dbpedia-ont:Artist]/fise:entity-reference :: xsd:anyURI;"
 argument_list|)
@@ -1057,7 +1057,7 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"locationMentions = fn:textAnnotation()"
+literal|"locationMentions = fn:textAnnotation(.)"
 operator|+
 literal|"[dc:type is dbpedia-ont:Place]/fise:selected-text :: xsd:string;"
 argument_list|)
@@ -1068,18 +1068,18 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"locationNames = fn:textAnnotation()"
+literal|"locationNames = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Place]/fn:first(fn:suggestion(\"1\")/fise:entity-label,fise:selected-text) :: xsd:string;"
+literal|"[dc:type is dbpedia-ont:Place]/fn:first(fn:suggestion(.,\"1\")/fise:entity-label,fise:selected-text) :: xsd:string;"
 argument_list|)
 expr_stmt|;
 name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedPlaces = fn:textAnnotation()"
+literal|"linkedPlaces = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Place]/fn:suggestedEntity(\"1\") :: xsd:anyURI;"
+literal|"[dc:type is dbpedia-ont:Place]/fn:suggestedEntity(.,\"1\") :: xsd:anyURI;"
 argument_list|)
 expr_stmt|;
 comment|//this selects only linked Artists
@@ -1087,9 +1087,9 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedCountries = fn:textAnnotation()"
+literal|"linkedCountries = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Place]/fn:suggestion()"
+literal|"[dc:type is dbpedia-ont:Place]/fn:suggestion(.)"
 operator|+
 literal|"[fise:entity-type is dbpedia-ont:Country]/fise:entity-reference :: xsd:anyURI;"
 argument_list|)
@@ -1184,7 +1184,7 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"orgMentions = fn:textAnnotation()"
+literal|"orgMentions = fn:textAnnotation(.)"
 operator|+
 literal|"[dc:type is dbpedia-ont:Organisation]/fise:selected-text :: xsd:string;"
 argument_list|)
@@ -1195,29 +1195,29 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"orgNames = fn:textAnnotation()"
+literal|"orgNames = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Organisation]/fn:first(fn:suggestion(\"1\")/fise:entity-label,fise:selected-text) :: xsd:string;"
+literal|"[dc:type is dbpedia-ont:Organisation]/fn:first(fn:suggestion(.,\"1\")/fise:entity-label,fise:selected-text) :: xsd:string;"
 argument_list|)
 expr_stmt|;
 name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedOrgs = fn:textAnnotation()"
+literal|"linkedOrgs = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Organisation]/fn:suggestedEntity(\"1\") :: xsd:anyURI;"
+literal|"[dc:type is dbpedia-ont:Organisation]/fn:suggestedEntity(.,\"1\") :: xsd:anyURI;"
 argument_list|)
 expr_stmt|;
 comment|//this selects only linked education organisations
-comment|//NOTE: this does not use a limit on suggestion()!
+comment|//NOTE: this does not use a limit on suggestion(.)!
 name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedEducationOrg = fn:textAnnotation()"
+literal|"linkedEducationOrg = fn:textAnnotation(.)"
 operator|+
-literal|"[dc:type is dbpedia-ont:Organisation]/fn:suggestion()"
+literal|"[dc:type is dbpedia-ont:Organisation]/fn:suggestion(.)"
 operator|+
 literal|"[fise:entity-type is dbpedia-ont:EducationalInstitution]/fise:entity-reference :: xsd:anyURI;"
 argument_list|)
@@ -1312,7 +1312,7 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"conceptNames = fn:entityAnnotation()"
+literal|"conceptNames = fn:entityAnnotation(.)"
 operator|+
 literal|"[fise:entity-type is skos:Concept]/fise:entity-label :: xsd:anyURI;"
 argument_list|)
@@ -1323,7 +1323,7 @@ name|program
 operator|.
 name|append
 argument_list|(
-literal|"linkedConcepts = fn:entityAnnotation()"
+literal|"linkedConcepts = fn:entityAnnotation(.)"
 operator|+
 literal|"[fise:entity-type is skos:Concept]/fise:entity-reference :: xsd:anyURI;"
 argument_list|)
