@@ -357,24 +357,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|SparqlQueryEngine
-operator|.
-name|SparqlQueryEngineException
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|sun
@@ -615,8 +597,6 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 throws|throws
-name|SparqlQueryEngineException
-throws|,
 name|ParseException
 block|{
 if|if
@@ -761,8 +741,6 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 throws|throws
-name|SparqlQueryEngineException
-throws|,
 name|ParseException
 block|{
 return|return
