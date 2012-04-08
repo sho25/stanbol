@@ -1390,7 +1390,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"manually parsed plassPath: {} from {}"
+literal|"manually parsed classPath: {} from {}"
 argument_list|,
 name|classPath
 argument_list|,
