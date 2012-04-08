@@ -321,7 +321,7 @@ decl_stmt|;
 comment|/**      * The SolrYard used for the tests      */
 specifier|protected
 specifier|static
-name|Yard
+name|SolrYard
 name|yard
 decl_stmt|;
 specifier|protected
@@ -490,6 +490,11 @@ throws|throws
 name|Exception
 block|{
 name|yard
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|yard
 operator|=
 literal|null
 expr_stmt|;
@@ -513,6 +518,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"check Setup"
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|String
@@ -532,6 +544,18 @@ argument_list|(
 name|context
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"> check Entity {}"
+argument_list|,
+name|rep
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|assertNotNull
 argument_list|(
 name|rep
@@ -551,14 +575,21 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isInfoEnabled
 argument_list|()
 condition|)
 block|{
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
+literal|"Data for Entity {}: \n {}"
+argument_list|,
+name|rep
+operator|.
+name|getId
+argument_list|()
+argument_list|,
 name|ModelUtils
 operator|.
 name|getRepresentationInfo
@@ -569,6 +600,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"   ... check completed"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**      * Utility method that checks the results of an LDPath execution against       * a map whit expected results       * @param result the results of the execution      * @param expected the expected results      * @throws IllegalStateException if the parsed expected results are<code>null</code>      */
 specifier|protected
