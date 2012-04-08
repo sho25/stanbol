@@ -64,6 +64,11 @@ init|=
 literal|":"
 decl_stmt|;
 name|String
+name|ENHANCEMENT_CHAIN
+init|=
+literal|"= CHAIN ="
+decl_stmt|;
+name|String
 name|INPUT_SECTION_MARKER
 init|=
 literal|"= INPUT ="

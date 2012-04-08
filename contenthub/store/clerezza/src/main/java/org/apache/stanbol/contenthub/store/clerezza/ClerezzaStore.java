@@ -422,17 +422,10 @@ name|tcManager
 operator|.
 name|getMGraph
 argument_list|(
-operator|new
-name|UriRef
-argument_list|(
 name|ci
 operator|.
 name|getUri
 argument_list|()
-operator|.
-name|getUnicodeString
-argument_list|()
-argument_list|)
 argument_list|)
 decl_stmt|;
 name|metadataGraph
@@ -450,6 +443,7 @@ name|getMetadata
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|//TODO: handle ContentParts
 return|return
 name|ci
 operator|.
@@ -528,6 +522,7 @@ argument_list|,
 name|handler
 argument_list|)
 decl_stmt|;
+comment|//TODO add other contentParts
 return|return
 name|contentItem
 return|;

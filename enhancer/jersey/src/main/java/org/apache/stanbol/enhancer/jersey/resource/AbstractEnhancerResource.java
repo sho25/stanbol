@@ -781,6 +781,22 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
+name|ContentItemFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
 name|EngineException
 import|;
 end_import
@@ -894,6 +910,11 @@ specifier|final
 name|ChainManager
 name|chainManager
 decl_stmt|;
+specifier|protected
+specifier|final
+name|ContentItemFactory
+name|ciFactory
+decl_stmt|;
 specifier|public
 name|AbstractEnhancerResource
 parameter_list|(
@@ -907,6 +928,7 @@ name|super
 argument_list|()
 expr_stmt|;
 comment|// bind the job manager by looking it up from the servlet request context
+comment|// also throw exception if not available to make debugging easier!
 name|jobManager
 operator|=
 name|ContextHelper
@@ -920,6 +942,30 @@ argument_list|,
 name|context
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|jobManager
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to get "
+operator|+
+name|EnhancementJobManager
+operator|.
+name|class
+operator|.
+name|getSimpleName
+argument_list|()
+operator|+
+literal|"service via ServletContext!"
+argument_list|)
+throw|;
+block|}
 name|chainManager
 operator|=
 name|ContextHelper
@@ -933,6 +979,30 @@ argument_list|,
 name|context
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|jobManager
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to get "
+operator|+
+name|ChainManager
+operator|.
+name|class
+operator|.
+name|getSimpleName
+argument_list|()
+operator|+
+literal|"service via ServletContext!"
+argument_list|)
+throw|;
+block|}
 name|engineManager
 operator|=
 name|ContextHelper
@@ -946,6 +1016,67 @@ argument_list|,
 name|context
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|jobManager
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to get "
+operator|+
+name|EnhancementEngineManager
+operator|.
+name|class
+operator|.
+name|getSimpleName
+argument_list|()
+operator|+
+literal|"service via ServletContext!"
+argument_list|)
+throw|;
+block|}
+name|ciFactory
+operator|=
+name|ContextHelper
+operator|.
+name|getServiceFromContext
+argument_list|(
+name|ContentItemFactory
+operator|.
+name|class
+argument_list|,
+name|context
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|jobManager
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to get "
+operator|+
+name|ContentItemFactory
+operator|.
+name|class
+operator|.
+name|getSimpleName
+argument_list|()
+operator|+
+literal|"service via ServletContext!"
+argument_list|)
+throw|;
+block|}
 block|}
 comment|/**      * Getter for the Enhancement {@link Chain}      * @return the enhancement chain. MUST NOT return<code>null</code>      * @throws ChainException if the Chain is currently not available      */
 specifier|protected

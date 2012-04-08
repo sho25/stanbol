@@ -355,7 +355,7 @@ name|servicesapi
 operator|.
 name|helper
 operator|.
-name|AbstractChain
+name|ConfigUtils
 import|;
 end_import
 
@@ -371,9 +371,9 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|helper
+name|impl
 operator|.
-name|ConfigUtils
+name|AbstractChain
 import|;
 end_import
 

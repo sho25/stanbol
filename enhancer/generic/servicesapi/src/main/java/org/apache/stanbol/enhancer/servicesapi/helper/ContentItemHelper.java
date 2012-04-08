@@ -294,6 +294,14 @@ specifier|public
 specifier|static
 specifier|final
 name|String
+name|DEFAULT_CONTENT_ITEM_PREFIX
+init|=
+literal|"urn:content-item-"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
 name|SHA1
 init|=
 literal|"SHA1"
@@ -699,7 +707,7 @@ block|{
 return|return
 name|makeDefaultUri
 argument_list|(
-literal|"urn:content-item-"
+name|DEFAULT_CONTENT_ITEM_PREFIX
 argument_list|,
 name|blob
 operator|.
@@ -720,7 +728,7 @@ block|{
 return|return
 name|makeDefaultUri
 argument_list|(
-literal|"urn:content-item-"
+name|DEFAULT_CONTENT_ITEM_PREFIX
 argument_list|,
 name|in
 argument_list|)
@@ -739,7 +747,7 @@ block|{
 return|return
 name|makeDefaultUri
 argument_list|(
-literal|"urn:content-item-"
+name|DEFAULT_CONTENT_ITEM_PREFIX
 argument_list|,
 operator|new
 name|ByteArrayInputStream

@@ -669,7 +669,7 @@ name|servicesapi
 operator|.
 name|helper
 operator|.
-name|AbstractEnhancementEngine
+name|EnhancementEngineHelper
 import|;
 end_import
 
@@ -685,9 +685,9 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|helper
+name|impl
 operator|.
-name|EnhancementEngineHelper
+name|AbstractEnhancementEngine
 import|;
 end_import
 

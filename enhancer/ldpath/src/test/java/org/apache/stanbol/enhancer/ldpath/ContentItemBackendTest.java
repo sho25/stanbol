@@ -219,22 +219,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|LiteralFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|MGraph
 import|;
 end_import
@@ -381,6 +365,24 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
+name|contentitem
+operator|.
+name|inmemory
+operator|.
+name|InMemoryContentItemFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
 name|ldpath
 operator|.
 name|backend
@@ -417,9 +419,7 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|helper
-operator|.
-name|InMemoryBlob
+name|ContentItemFactory
 import|;
 end_import
 
@@ -435,9 +435,9 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|helper
+name|impl
 operator|.
-name|InMemoryContentItem
+name|ByteArraySource
 import|;
 end_import
 
@@ -597,12 +597,13 @@ argument_list|(
 literal|"UTF-8"
 argument_list|)
 decl_stmt|;
+comment|//private static LiteralFactory lf = LiteralFactory.getInstance();
 specifier|private
 specifier|static
-name|LiteralFactory
-name|lf
+name|ContentItemFactory
+name|ciFactory
 init|=
-name|LiteralFactory
+name|InMemoryContentItemFactory
 operator|.
 name|getInstance
 argument_list|()
@@ -785,17 +786,19 @@ argument_list|)
 expr_stmt|;
 name|ci
 operator|=
-operator|new
-name|InMemoryContentItem
+name|ciFactory
+operator|.
+name|createContentItem
 argument_list|(
 name|contentItemId
-operator|.
-name|getUnicodeString
-argument_list|()
 argument_list|,
+operator|new
+name|ByteArraySource
+argument_list|(
 name|htmlData
 argument_list|,
 literal|"text/html; charset=UTF-8"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|htmlContent
@@ -859,12 +862,17 @@ operator|+
 literal|"_text"
 argument_list|)
 argument_list|,
+name|ciFactory
+operator|.
+name|createBlob
+argument_list|(
 operator|new
-name|InMemoryBlob
+name|ByteArraySource
 argument_list|(
 name|textData
 argument_list|,
 literal|"text/plain; charset=UTF-8"
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1274,7 +1282,7 @@ block|{
 name|String
 name|path
 init|=
-literal|"fn:textAnnotation(.)/fise:selected-text"
+literal|"fn:textAnnotation()/fise:selected-text"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -1388,7 +1396,7 @@ comment|//same as the 1st example bat rather using an ld-path construct for
 comment|//filtering for TextAnnotations representing persons
 name|path
 operator|=
-literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Person]/fise:selected-text"
+literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Person]/fise:selected-text"
 expr_stmt|;
 name|result
 operator|=
@@ -1475,7 +1483,7 @@ block|{
 name|String
 name|path
 init|=
-literal|"fn:entityAnnotation(.)/fise:entity-reference"
+literal|"fn:entityAnnotation()/fise:entity-reference"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -1608,7 +1616,7 @@ expr_stmt|;
 comment|//and with a filter
 name|path
 operator|=
-literal|"fn:entityAnnotation(.)[fise:entity-type is dbpedia-ont:Person]/fise:entity-reference"
+literal|"fn:entityAnnotation()[fise:entity-type is dbpedia-ont:Person]/fise:entity-reference"
 expr_stmt|;
 name|result
 operator|=
@@ -1676,7 +1684,7 @@ block|{
 name|String
 name|path
 init|=
-literal|"fn:enhancement(.)"
+literal|"fn:enhancement()"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -1749,7 +1757,7 @@ block|}
 comment|//and with a filter
 name|path
 operator|=
-literal|"fn:enhancement(.)[rdf:type is fise:TextAnnotation]"
+literal|"fn:enhancement()[rdf:type is fise:TextAnnotation]"
 expr_stmt|;
 name|result
 operator|=
@@ -1793,7 +1801,7 @@ expr_stmt|;
 comment|//        assertTrue(result.contains(new UriRef("http://dbpedia.org/resource/Bob_Marley")));
 name|path
 operator|=
-literal|"fn:enhancement(.)/dc:language"
+literal|"fn:enhancement()/dc:language"
 expr_stmt|;
 name|result
 operator|=
@@ -1887,7 +1895,7 @@ comment|// most.
 name|String
 name|path
 init|=
-literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Place]/fn:suggestion(.)"
+literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Place]/fn:suggestion()"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -2030,7 +2038,7 @@ argument_list|)
 expr_stmt|;
 name|path
 operator|=
-literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Place]/fn:suggestion(.,\"2\")"
+literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Place]/fn:suggestion(\"2\")"
 expr_stmt|;
 name|Collection
 argument_list|<
@@ -2114,7 +2122,7 @@ comment|//NOTE: '.' MUST BE used as first argument in this case
 name|String
 name|path
 init|=
-literal|"fn:textAnnotation(.)/fn:suggestedEntity(.,\"1\")"
+literal|"fn:textAnnotation()/fn:suggestedEntity(\"1\")"
 decl_stmt|;
 name|Collection
 argument_list|<
@@ -2238,7 +2246,7 @@ comment|//NOTE: the selector parsing all Annotations MUST BE used as first
 comment|//      argument
 name|path
 operator|=
-literal|"fn:suggestedEntity(fn:textAnnotation(.),\"1\")"
+literal|"fn:suggestedEntity(fn:textAnnotation(),\"1\")"
 expr_stmt|;
 name|result
 operator|=

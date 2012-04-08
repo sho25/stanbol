@@ -171,6 +171,24 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
+name|contentitem
+operator|.
+name|inmemory
+operator|.
+name|InMemoryBlob
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
 name|servicesapi
 operator|.
 name|helper
@@ -191,27 +209,9 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|helper
+name|impl
 operator|.
 name|ContentItemImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|helper
-operator|.
-name|InMemoryBlob
 import|;
 end_import
 
@@ -440,6 +440,8 @@ name|id
 argument_list|)
 argument_list|)
 argument_list|,
+comment|//using this deprecated constructor is OK as a major change to
+comment|//this component is done in an other branch (STANBOL-471)
 operator|new
 name|InMemoryBlob
 argument_list|(

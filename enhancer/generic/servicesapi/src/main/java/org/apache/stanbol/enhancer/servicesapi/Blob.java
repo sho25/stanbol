@@ -51,7 +51,7 @@ name|String
 name|getMimeType
 parameter_list|()
 function_decl|;
-comment|/** 	 * @return a stream of the data of this blog 	 */
+comment|/** 	 * Getter for the data of this blob in form of an {@link InputStream}. 	 * Multiple calls need to return multiple instances of InputStreams 	 * @return a stream of the data of this blog 	 */
 name|InputStream
 name|getStream
 parameter_list|()

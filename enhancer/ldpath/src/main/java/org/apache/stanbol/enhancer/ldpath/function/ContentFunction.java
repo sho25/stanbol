@@ -341,6 +341,9 @@ parameter_list|(
 name|ContentItemBackend
 name|backend
 parameter_list|,
+name|Resource
+name|context
+parameter_list|,
 name|Collection
 argument_list|<
 name|Resource
