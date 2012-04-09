@@ -1213,11 +1213,13 @@ decl_stmt|;
 name|Long
 name|seed
 init|=
-name|System
-operator|.
-name|currentTimeMillis
-argument_list|()
+operator|new
+name|Long
+argument_list|(
+literal|"1332943407752"
+argument_list|)
 decl_stmt|;
+comment|//System.currentTimeMillis();
 name|log
 operator|.
 name|info
@@ -3011,6 +3013,8 @@ operator|.
 name|shuffle
 argument_list|(
 name|predicateList
+argument_list|,
+name|rnd
 argument_list|)
 expr_stmt|;
 name|predicates
