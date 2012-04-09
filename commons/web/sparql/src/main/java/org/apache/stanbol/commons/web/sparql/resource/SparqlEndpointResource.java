@@ -49,22 +49,6 @@ name|core
 operator|.
 name|MediaType
 operator|.
-name|APPLICATION_XML
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MediaType
-operator|.
 name|TEXT_HTML
 import|;
 end_import
