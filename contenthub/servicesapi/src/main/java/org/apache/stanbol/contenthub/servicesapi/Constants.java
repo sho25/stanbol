@@ -58,7 +58,7 @@ specifier|final
 name|String
 name|ENHANCEMENTS_GRAPH_URI
 init|=
-literal|"org.apache.stanbol.enhancer.standalone.store.enhancements"
+literal|"org.apache.stanbol.contenthub.enhancements"
 decl_stmt|;
 comment|/**      * The URI of ???      */
 specifier|public
