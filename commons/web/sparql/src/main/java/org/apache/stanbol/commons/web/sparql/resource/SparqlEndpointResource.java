@@ -565,20 +565,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|util
-operator|.
-name|tracker
-operator|.
-name|ServiceTracker
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|sun
@@ -594,7 +580,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This is the SPARQL endpoint which is used throughout the Stanbol. It tracks the {@link TripleCollection}s,  * using a {@link ServiceTracker}, registered to OSGi environment. To be able to execute SPARQL queries on  * triple collections, they should be registered to the OSGi environment with the following parameters:  *   *<p>  *<ul>  *<li>graph.uri<b>(required)</b> : The URI of the graph. This is the same as used with the TcManager</li>  *<li>service.ranking: If this parameter is not specified, "0" will be used as default value.</li>  *<li>graph.name: The name of the graph. Human readable name intended to be used in the UI</li>  *<li>graph.description: human readable description providing additional information about the RDF graph</li>  *</ul>  *</p>  *   *<p>  * If a uri is not specified, the graph having highest service.ranking value will be chosen.  *</p>  *   */
+comment|/**  * This is the SPARQL endpoint which is used throughout the Stanbol. It uses {@link BundleContext} to retrive  * {@link TripleCollection} s registered to OSGi environment. To be able to execute SPARQL queries on triple  * collections, they should be registered to the OSGi environment with the following parameters:  *   *<p>  *<ul>  *<li>graph.uri<b>(required)</b> : The URI of the graph. This is the same as used with the TcManager</li>  *<li>service.ranking: If this parameter is not specified, "0" will be used as default value.</li>  *<li>graph.name: The name of the graph. Human readable name intended to be used in the UI</li>  *<li>graph.description: human readable description providing additional information about the RDF graph</li>  *</ul>  *</p>  *   *<p>  * If a uri is not specified, the graph having highest service.ranking value will be chosen.  *</p>  *   */
 end_comment
 
 begin_class
@@ -1191,40 +1177,26 @@ argument_list|(
 name|servletContext
 argument_list|)
 decl_stmt|;
-name|ServiceTracker
-name|graphTracker
+name|ServiceReference
+index|[]
+name|refs
 init|=
-operator|new
-name|ServiceTracker
-argument_list|(
-name|bundleContext
-argument_list|,
 name|bundleContext
 operator|.
-name|createFilter
+name|getServiceReferences
 argument_list|(
+name|TripleCollection
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|,
 name|getFilter
 argument_list|(
 name|graphUri
 argument_list|)
 argument_list|)
-argument_list|,
-literal|null
-argument_list|)
-decl_stmt|;
-name|graphTracker
-operator|.
-name|open
-argument_list|()
-expr_stmt|;
-name|ServiceReference
-index|[]
-name|refs
-init|=
-name|graphTracker
-operator|.
-name|getServiceReferences
-argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -1271,7 +1243,7 @@ argument_list|,
 operator|(
 name|TripleCollection
 operator|)
-name|graphTracker
+name|bundleContext
 operator|.
 name|getService
 argument_list|(
@@ -1281,11 +1253,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|graphTracker
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 return|return
 name|registeredGraphs
 return|;
