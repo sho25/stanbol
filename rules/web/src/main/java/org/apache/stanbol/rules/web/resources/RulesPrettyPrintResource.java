@@ -15,7 +15,7 @@ name|rules
 operator|.
 name|web
 operator|.
-name|writers
+name|resources
 package|;
 end_package
 
