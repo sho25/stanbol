@@ -347,6 +347,12 @@ name|tcm
 argument_list|(
 literal|"http://purl.org/net/tcm/tcm.lifescience.ntu.edu.tw/"
 argument_list|)
+block|,
+comment|/**      * The Music Ontology (http://musicontology.com/)      */
+name|mo
+argument_list|(
+literal|"http://purl.org/ontology/mo/"
+argument_list|)
 block|;
 comment|/**      * The logger      */
 specifier|private
