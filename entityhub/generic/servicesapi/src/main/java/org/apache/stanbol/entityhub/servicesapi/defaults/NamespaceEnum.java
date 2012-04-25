@@ -991,7 +991,7 @@ name|prefix
 argument_list|)
 return|;
 block|}
-comment|/**      * Lookup if the parsed short URI (e.g "rdfs:label") uses one of the       * registered prefixes of this Enumeration of if the parsed short URI uses      * the default namespace (e.g. "name"). In case the prefix could not be found      * the parsed URI is returned unchanged      * @param shortUri the short URI      * @return the full URI if the parsed shortUri uses a prefix defined by this      * Enumeration. Otherwise the parsed value.      */
+comment|/**      * Lookup if the parsed short URI (e.g "rdfs:label") uses one of the       * registered prefixes of this Enumeration of if the parsed short URI uses      * the default namespace (e.g. "name"). In case the prefix could not be found      * the parsed URI is returned unchanged      * @param shortUri the short URI      * @return the full URI if the parsed shortUri uses a prefix defined by this      * Enumeration. Otherwise (including<code>null</code>) the parsed value.      */
 specifier|public
 specifier|static
 name|String
@@ -1001,15 +1001,21 @@ name|String
 name|shortUri
 parameter_list|)
 block|{
+comment|//ignore null and empty strings
 if|if
 condition|(
 name|shortUri
 operator|==
 literal|null
+operator|||
+name|shortUri
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 return|return
-literal|null
+name|shortUri
 return|;
 block|}
 name|int
