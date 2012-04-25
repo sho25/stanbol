@@ -555,7 +555,7 @@ name|result
 return|;
 block|}
 comment|/**      * The default configuration for the Entityhub      * @author Rupert Westenthaler      *      */
-specifier|private
+specifier|public
 specifier|static
 class|class
 name|EntityhubConfiguration

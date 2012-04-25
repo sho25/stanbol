@@ -80,6 +80,12 @@ name|KEY_INDEX_FIELD_CONFIG
 init|=
 literal|"fieldConfiguration"
 decl_stmt|;
+comment|/**      * Name of the file relative to the destination folder used to store      * the IDs of indexed Entities.      */
+name|String
+name|KEX_INDEXED_ENTITIES_FILE
+init|=
+literal|"indexedEntitiesFile"
+decl_stmt|;
 comment|/**      * usage:<br>      *<pre>      * {class1},name:{name1};{class2},name:{name2};...      *</pre>      * The class implementing the normaliser and the name of the configuration      * file stored within /config/normaliser/{name}.properties      */
 name|String
 name|KEY_SCORE_NORMALIZER
@@ -90,6 +96,11 @@ name|String
 name|KEY_ENTITY_PROCESSOR
 init|=
 literal|"entityProcessor"
+decl_stmt|;
+name|String
+name|KEY_ENTITY_POST_PROCESSOR
+init|=
+literal|"entityPostProcessor"
 decl_stmt|;
 block|}
 end_interface

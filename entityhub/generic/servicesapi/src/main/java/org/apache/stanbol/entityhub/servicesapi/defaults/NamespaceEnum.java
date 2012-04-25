@@ -353,6 +353,38 @@ name|mo
 argument_list|(
 literal|"http://purl.org/ontology/mo/"
 argument_list|)
+block|,
+comment|/**      *  The Time ontology (http://www.w3.org/TR/owl-time/)      */
+name|owlTime
+argument_list|(
+literal|"owl-time"
+argument_list|,
+literal|"http://www.w3.org/2006/time#"
+argument_list|)
+block|,
+comment|/**      *  The Event ontology (http://purl.org/NET/c4dm/event.owl#)      */
+name|event
+argument_list|(
+literal|"http://purl.org/NET/c4dm/event.owl#"
+argument_list|)
+block|,
+comment|/**      *  The Timeline ontology (http://purl.org/NET/c4dm/timeline.owl#)      */
+name|timeline
+argument_list|(
+literal|"http://purl.org/NET/c4dm/timeline.owl#"
+argument_list|)
+block|,
+comment|/**      *  Relationship: A vocabulary for describing relationships between people      *  (http://purl.org/vocab/relationship/)      */
+name|rel
+argument_list|(
+literal|"http://purl.org/vocab/relationship/"
+argument_list|)
+block|,
+comment|/**      *  Expression of Core FRBR Concepts in RDF (http://vocab.org/frbr/core)      */
+name|frbr
+argument_list|(
+literal|"http://purl.org/vocab/frbr/core#"
+argument_list|)
 block|;
 comment|/**      * The logger      */
 specifier|private

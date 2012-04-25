@@ -333,7 +333,7 @@ init|=
 literal|"append"
 decl_stmt|;
 comment|/**      * By default appending of LDPath results to the parsed Representation is      * activeted      */
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|boolean
@@ -346,8 +346,7 @@ specifier|final
 name|ValueFactory
 name|vf
 decl_stmt|;
-specifier|private
-specifier|final
+specifier|protected
 name|EntityhubLDPath
 name|ldPath
 decl_stmt|;
@@ -366,6 +365,10 @@ decl_stmt|;
 specifier|private
 name|boolean
 name|appendMode
+decl_stmt|;
+specifier|protected
+name|IndexingConfig
+name|indexingConfig
 decl_stmt|;
 specifier|public
 name|LdpathProcessor
@@ -545,9 +548,8 @@ argument_list|>
 name|config
 parameter_list|)
 block|{
-name|IndexingConfig
 name|indexingConfig
-init|=
+operator|=
 operator|(
 name|IndexingConfig
 operator|)
@@ -559,7 +561,7 @@ name|IndexingConfig
 operator|.
 name|KEY_INDEXING_CONFIG
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 comment|//parse the ldpath
 specifier|final
 name|File

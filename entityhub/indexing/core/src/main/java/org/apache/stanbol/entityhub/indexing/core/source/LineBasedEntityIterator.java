@@ -840,6 +840,13 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
+name|reader
+operator|==
+literal|null
+condition|)
+block|{
+if|if
+condition|(
 name|value
 operator|==
 literal|null
@@ -891,6 +898,8 @@ operator|+
 literal|"'"
 argument_list|)
 expr_stmt|;
+block|}
+comment|//else reader parsed in the constructor ... nothing todo
 comment|//now done in the initialise() method
 comment|//        try {
 comment|//            initReader(new FileInputStream(scoreFile));
@@ -1484,6 +1493,8 @@ operator|.
 name|debug
 argument_list|(
 literal|"> line = {}"
+argument_list|,
+name|line
 argument_list|)
 expr_stmt|;
 name|EntityScore

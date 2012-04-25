@@ -436,7 +436,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Using default Field %s"
+literal|"Using default Field {}"
 argument_list|,
 name|field
 argument_list|)
@@ -459,7 +459,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"configured Field: %s"
+literal|"configured Field: {}"
 argument_list|,
 name|field
 argument_list|)

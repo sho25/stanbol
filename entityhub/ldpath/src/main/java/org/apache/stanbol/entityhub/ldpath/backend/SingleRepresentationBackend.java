@@ -308,6 +308,15 @@ argument_list|)
 throw|;
 block|}
 block|}
+specifier|public
+name|Representation
+name|getRepresentation
+parameter_list|()
+block|{
+return|return
+name|representation
+return|;
+block|}
 annotation|@
 name|Override
 specifier|protected

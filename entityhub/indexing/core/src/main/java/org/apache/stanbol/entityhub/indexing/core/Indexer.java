@@ -31,6 +31,24 @@ name|entityhub
 operator|.
 name|servicesapi
 operator|.
+name|model
+operator|.
+name|Representation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
 name|yard
 operator|.
 name|Yard
@@ -64,6 +82,12 @@ name|INDEXING
 block|,
 comment|/**          * All Entities provided by the {@link IndexingSource}s are processed          * and stored to the {@link IndexingTarget}.          */
 name|INDEXED
+block|,
+comment|/**          * while post-processing of the indexed entities is performed          */
+name|POSTPROCESSING
+block|,
+comment|/**          * after the post-processing of the entities has finished          */
+name|POSTPROCESSED
 block|,
 comment|/**          * While the {@link IndexingTarget} is finalising the indexing process.          */
 name|FINALISING
@@ -103,24 +127,31 @@ parameter_list|()
 function_decl|;
 comment|/**      * Brings this indexer in the {@link State#INITIALISED} by initialising all       * {@link IndexingComponent}s.This method blocks until the  whole process is       * completed.Calls to this method are ignored if the indexer is not in the       * {@link State#UNINITIALISED} state.      *<p>      * This Method is intended to be used by caller that need more control over       * the indexing process as simple to call {@link #index()}.      */
 name|void
-name|initialiseIndexingSources
+name|initialiseIndexing
 parameter_list|()
 function_decl|;
 comment|/**      * Brings this indexer in the {@link State#INDEXED} by indexing all Entities      * provided by the {@link IndexingComponent}s. This method blocks until the        * whole process is completed. Calls to this method are ignored if the       * indexer is in a state greater than {@link State#INITIALISED}.      *<p>      * This Method is intended to be used by caller that need more control over       * the indexing process as simple to call {@link #index()}.      * @throws IllegalStateException if {@link #getState()}&lt;       * {@link State#INITIALISED}      */
 name|void
-name|indexAllEntities
+name|indexEntities
+parameter_list|()
+throws|throws
+name|IllegalStateException
+function_decl|;
+comment|/**      * Performs {@link State#POSTPROCESSING} after all entities are       * {@link State#INDEXED} ({@link #indexEntities()} completed).<p>      * Post-processing will use the {@link IndexingDestination} as source and      * target. It will retrieve the {@link Representation} of each indexed      * entity and sent it to the configured post-processing       * {@link EntityProcessor}s<p>      * The resulting {@link Representation} will be stored to the       * {@link IndexingDestination}      * @throws IllegalStateException if the state is&lt {@link State#INDEXED}      */
+name|void
+name|postProcessEntities
 parameter_list|()
 throws|throws
 name|IllegalStateException
 function_decl|;
 comment|/**      * {@link State#FINISHED Finalises} the indexing process by calling finalise      * on the {@link IndexingDestination}. This method blocks until the        * whole process is completed. Calls to this method are ignored if the       * indexer is in a state greater than {@link State#INDEXED}.      *<p>      * This Method is intended to be used by caller that need more control over       * the indexing process as simple to call {@link #index()}.      * @throws IllegalStateException if {@link #getState()}&lt;       * {@link State#INDEXED}      */
 name|void
-name|finaliseIndexingTarget
+name|finaliseIndexing
 parameter_list|()
 throws|throws
 name|IllegalStateException
 function_decl|;
-comment|/**      * Initialise the {@link IndexingComponent}s, indexes all entities and       * finalises the {@link IndexingDestination}.<p>      * Calls to this method do have the same result as subsequent calls to       * {@link #initialiseIndexingSources()}, {@link #indexAllEntities()},      * {@link #finaliseIndexingTarget()}. This method can also be used if any of      * the mentioned three methods was already called to this indexer instance.      *<p>      * This method blocks until the whole process is completed. Ideal if the       * called does not need/want any further control over the indexing process.      *<p>      * To perform the indexing in the background one need to execute this      * Method in an own {@link Thread}.      */
+comment|/**      * Initialise the {@link IndexingComponent}s, indexes all entities and       * finalises the {@link IndexingDestination}.<p>      * Calls to this method do have the same result as subsequent calls to       * {@link #initialiseIndexing()}, {@link #indexEntities()},      * {@link #finaliseIndexing()}. This method can also be used if any of      * the mentioned three methods was already called to this indexer instance.      *<p>      * This method blocks until the whole process is completed. Ideal if the       * called does not need/want any further control over the indexing process.      *<p>      * To perform the indexing in the background one need to execute this      * Method in an own {@link Thread}.      */
 name|void
 name|index
 parameter_list|()
