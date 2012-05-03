@@ -1351,7 +1351,7 @@ name|sq
 operator|=
 name|SolrQueryUtil
 operator|.
-name|prepareFacetedSolrQuery
+name|prepareSolrQuery
 argument_list|(
 name|queryTerm
 argument_list|,
@@ -1367,7 +1367,7 @@ name|sq
 operator|=
 name|SolrQueryUtil
 operator|.
-name|prepareDefaultSolrQuery
+name|prepareSolrQuery
 argument_list|(
 name|queryTerm
 argument_list|)

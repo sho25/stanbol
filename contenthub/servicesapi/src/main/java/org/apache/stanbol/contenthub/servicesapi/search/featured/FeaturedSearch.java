@@ -33,6 +33,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -150,7 +160,7 @@ parameter_list|)
 throws|throws
 name|SearchException
 function_decl|;
-comment|/**      * This methods returns a {@link SearchResult} as a unified search response. The response contains content      * items retrieved from the index, which is accessed using the given<code>indexName</code>, of      * Contenthub for the given<code>queryTerm</code>. This name corresponds to a Solr Core name within      * Contenthub. It also consists of related keywords that are obtained from the available      * {@link RelatedKeywordSearch} instances. This method also takes an ontology URI. Using the URI, actual      * ontology is obtained and it is used as related keyword source. To obtain related keywords, first the      * meaningful query terms are extracted from the Solr query and then they are tokenized with      * {@link #tokenizeEntities(String)}. And then, related keyword searchers are queried for all the query      * tokens. Furthermore, the {@link SearchResult} includes Solr facets that are obtained for the obtained      * content items.      *       * @param solrQuery      *            for which the search results will be obtained      * @return a unified response in a {@link SearchResult} containing actual content items, related keywords      *         and facets for the obtained content items.      * @throws SearchException      */
+comment|/**      * This methods returns a {@link SearchResult} as a unified search response. The response contains content      * items retrieved from the index, which is accessed using the given<code>indexName</code>, of Contenthub      * for the given<code>queryTerm</code>. This name corresponds to a Solr Core name within Contenthub. It      * also consists of related keywords that are obtained from the available {@link RelatedKeywordSearch}      * instances. This method also takes an ontology URI. Using the URI, actual ontology is obtained and it is      * used as related keyword source. To obtain related keywords, first the meaningful query terms are      * extracted from the Solr query and then they are tokenized with {@link #tokenizeEntities(String)}. And      * then, related keyword searchers are queried for all the query tokens. Furthermore, the      * {@link SearchResult} includes Solr facets that are obtained for the obtained content items.      *       * @param solrQuery      *            for which the search results will be obtained      * @return a unified response in a {@link SearchResult} containing actual content items, related keywords      *         and facets for the obtained content items.      * @throws SearchException      */
 name|SearchResult
 name|search
 parameter_list|(
@@ -159,6 +169,41 @@ name|solrQuery
 parameter_list|,
 name|String
 name|ontologyURI
+parameter_list|,
+name|String
+name|indexName
+parameter_list|)
+throws|throws
+name|SearchException
+function_decl|;
+comment|/**      * This method searches the given<code>keyword</code> in the default index of Contenthub considering the      * given<code>constraints</code>. Results are returned in a {@link ConstrainedDocumentSet} instance and      * all search results are returned without considering any<i>offset</i> or<i>limit</i> value.      * Furthermore, returned {@link ConstrainedDocumentSet} contains {@link Constraint}s that were used to      * filter the results and all possible {@link Facet}s that can be used to filter results even more.      *       * @param keyword      *            keyword to be searched      * @param constraints      *            a {@link Set} of {@link Constraint}s to be provided in addition to initial query      *<code>keyword</code>      * @return an instance of {@link ConstrainedDocumentSet} including the search results and additional      *         {@link Constraint} and {@link Facet} information.      * @throws SearchException      */
+name|ConstrainedDocumentSet
+name|search
+parameter_list|(
+name|String
+name|keyword
+parameter_list|,
+name|Set
+argument_list|<
+name|Constraint
+argument_list|>
+name|constraints
+parameter_list|)
+throws|throws
+name|SearchException
+function_decl|;
+comment|/**      * This method searches the given<code>keyword</code> in the Solr index identified by the given      *<code>indexName</code> considering the given<code>constraints</code>. Results are returned in a      * {@link ConstrainedDocumentSet} instance and all search results are returned without considering any      *<i>offset</i> or<i>limit</i> value. Furthermore, returned {@link ConstrainedDocumentSet} contains      * {@link Constraint}s that were used to filter the results and all possible {@link Facet}s that can be      * used to filter results even more.      *       * @param keyword      *            keyword to be searched      * @param constraints      *            a {@link Set} of {@link Constraint}s to be provided in addition to initial query      *<code>keyword</code>      * @param indexName      *            name of the index (Solr core) on which search will be done      * @return an instance of {@link ConstrainedDocumentSet} including the search results and additional      *         {@link Constraint} and {@link Facet} information.      * @throws SearchException      */
+name|ConstrainedDocumentSet
+name|search
+parameter_list|(
+name|String
+name|keyword
+parameter_list|,
+name|Set
+argument_list|<
+name|Constraint
+argument_list|>
+name|constraints
 parameter_list|,
 name|String
 name|indexName

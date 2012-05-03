@@ -433,7 +433,7 @@ name|solrQuery
 operator|=
 name|SolrQueryUtil
 operator|.
-name|prepareDefaultSolrQuery
+name|prepareSolrQuery
 argument_list|(
 name|solrServer
 argument_list|,
@@ -556,7 +556,7 @@ name|solrQuery
 operator|=
 name|SolrQueryUtil
 operator|.
-name|prepareDefaultSolrQuery
+name|prepareSolrQuery
 argument_list|(
 name|solrServer
 argument_list|,
