@@ -1957,7 +1957,7 @@ if|if
 condition|(
 name|valueConstraint
 operator|.
-name|getValue
+name|getValues
 argument_list|()
 operator|!=
 literal|null

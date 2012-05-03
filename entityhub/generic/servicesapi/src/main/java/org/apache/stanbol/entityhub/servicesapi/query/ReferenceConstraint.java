@@ -31,6 +31,46 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedHashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -54,6 +94,14 @@ name|ReferenceConstraint
 extends|extends
 name|ValueConstraint
 block|{
+comment|/**      * The references. Same as returned by {@link ValueConstraint#getValues()}      * but in a Set of generic type string      */
+specifier|private
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|references
+decl_stmt|;
 specifier|public
 name|ReferenceConstraint
 parameter_list|(
@@ -61,9 +109,36 @@ name|String
 name|reference
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
 name|reference
+operator|!=
+literal|null
+condition|?
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+name|reference
+argument_list|)
+else|:
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|ReferenceConstraint
+parameter_list|(
+name|Collection
+argument_list|<
+name|String
+argument_list|>
+name|references
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|references
 argument_list|,
 name|Arrays
 operator|.
@@ -80,7 +155,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|reference
+name|references
 operator|==
 literal|null
 condition|)
@@ -89,23 +164,81 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Parsed Reference MUST NOT be NULL"
+literal|"Parsed Reference(s) MUST NOT be NULL"
 argument_list|)
 throw|;
 block|}
-block|}
-comment|/**      * Getter for the Reference      * @return the reference      */
-specifier|public
+comment|//we need to copy the values over, because in Java one can not cast
+comment|//Set<Object> to Set<String>
+name|Set
+argument_list|<
 name|String
-name|getReference
-parameter_list|()
+argument_list|>
+name|r
+init|=
+operator|new
+name|LinkedHashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
+name|getValues
+argument_list|()
+operator|.
+name|size
+argument_list|()
+argument_list|)
+decl_stmt|;
+for|for
+control|(
+name|Object
+name|value
+range|:
+name|getValues
+argument_list|()
+control|)
 block|{
-return|return
+name|r
+operator|.
+name|add
+argument_list|(
 operator|(
 name|String
 operator|)
-name|getValue
-argument_list|()
+name|value
+argument_list|)
+expr_stmt|;
+block|}
+name|this
+operator|.
+name|references
+operator|=
+name|Collections
+operator|.
+name|unmodifiableSet
+argument_list|(
+name|r
+argument_list|)
+expr_stmt|;
+block|}
+comment|//    /**
+comment|//     * Getter for the first parsed Reference
+comment|//     * @return the reference
+comment|//     */
+comment|//    public String getReference() {
+comment|//        return (String)getValue();
+comment|//    }
+comment|/**      * Getter for the Reference      * @return the reference      */
+specifier|public
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getReferences
+parameter_list|()
+block|{
+return|return
+name|references
 return|;
 block|}
 block|}

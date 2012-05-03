@@ -1119,6 +1119,211 @@ name|test
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFieldQueryMultiReferenceConstraints
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'rdfs:label',"
+operator|+
+literal|"'rdf:type'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '5',"
+operator|+
+literal|"'constraints': ["
+operator|+
+literal|"{"
+operator|+
+literal|"'type': 'text',"
+operator|+
+literal|"'patternType': 'wildcard',"
+operator|+
+literal|"'text': ['ford'],"
+operator|+
+literal|"'field': 'rdfs:label',"
+operator|+
+literal|"},{"
+operator|+
+literal|"'type': 'reference',"
+operator|+
+literal|"'value': ['dbp-ont:Organisation','dbp-ont:OfficeHolder'],"
+operator|+
+literal|"'field': 'rdf:type',"
+operator|+
+literal|"}"
+operator|+
+literal|"]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Ford_Motor_Company"
+argument_list|,
+literal|"http://dbpedia.org/resource/Gerald_Ford"
+argument_list|,
+comment|//this third result is important, as we would get different
+comment|//without the reference constraint
+literal|"http://dbpedia.org/resource/Ford_Foundation"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|,
+literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFieldQueryMultipleValueConstraints
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+comment|//munich is on geo:alt 519 (will change to 518 on dbpedia 3.7)
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '3',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'value',"
+operator|+
+literal|"'value': ['34','519'],"
+operator|+
+literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
+operator|+
+literal|"'datatype': 'xsd:int'"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Munich"
+argument_list|,
+literal|"http://dbpedia.org/resource/Berlin"
+argument_list|,
+literal|"http://dbpedia.org/resource/Baghdad"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+comment|//a 2nd time the same query (without a datatype), but now we parse a
+comment|//JSON number as value
+name|test
+operator|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '3',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'value',"
+operator|+
+literal|"'value': [34,519],"
+operator|+
+literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Munich"
+argument_list|,
+literal|"http://dbpedia.org/resource/Berlin"
+argument_list|,
+literal|"http://dbpedia.org/resource/Baghdad"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

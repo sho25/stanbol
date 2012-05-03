@@ -365,6 +365,24 @@ name|servicesapi
 operator|.
 name|query
 operator|.
+name|ReferenceConstraint
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
 name|TextConstraint
 import|;
 end_import
@@ -2293,7 +2311,7 @@ if|if
 condition|(
 name|constraint
 operator|.
-name|getValue
+name|getValues
 argument_list|()
 operator|!=
 literal|null
@@ -2334,7 +2352,7 @@ argument_list|()
 argument_list|,
 name|constraint
 operator|.
-name|getValue
+name|getValues
 argument_list|()
 argument_list|,
 name|intend
@@ -2382,13 +2400,7 @@ condition|(
 name|first
 condition|)
 block|{
-name|queryString
-operator|.
-name|append
-argument_list|(
-name|intend
-argument_list|)
-expr_stmt|;
+comment|//queryString.append(intend);
 name|first
 operator|=
 literal|false
@@ -2400,12 +2412,7 @@ name|queryString
 operator|.
 name|append
 argument_list|(
-literal|" UNION \n  "
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|intend
+literal|" UNION \n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2421,10 +2428,10 @@ name|dataType
 argument_list|,
 name|constraint
 operator|.
-name|getValue
+name|getValues
 argument_list|()
 argument_list|,
-literal|""
+name|intend
 argument_list|)
 expr_stmt|;
 block|}
@@ -2647,13 +2654,91 @@ parameter_list|,
 name|String
 name|dataType
 parameter_list|,
+name|Collection
+argument_list|<
 name|Object
-name|value
+argument_list|>
+name|values
 parameter_list|,
 name|String
 name|intend
 parameter_list|)
 block|{
+name|String
+name|addIntend
+init|=
+name|intend
+decl_stmt|;
+name|queryString
+operator|.
+name|append
+argument_list|(
+name|intend
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|values
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
+condition|)
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|"{ "
+argument_list|)
+expr_stmt|;
+name|addIntend
+operator|=
+name|intend
+operator|+
+literal|"  "
+expr_stmt|;
+block|}
+name|boolean
+name|first
+init|=
+literal|true
+decl_stmt|;
+for|for
+control|(
+name|Object
+name|value
+range|:
+name|values
+control|)
+block|{
+if|if
+condition|(
+name|first
+condition|)
+block|{
+comment|//queryString.append(intend);
+name|first
+operator|=
+literal|false
+expr_stmt|;
+block|}
+else|else
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|" UNION\n"
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|addIntend
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|DataTypeEnum
@@ -2681,9 +2766,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%s?%s<%s><%s>"
-argument_list|,
-name|intend
+literal|"?%s<%s><%s>"
 argument_list|,
 name|rootVarName
 argument_list|,
@@ -2704,9 +2787,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%s?%s<%s> \"%s\"%s"
-argument_list|,
-name|intend
+literal|"?%s<%s> \"%s\"%s"
 argument_list|,
 name|rootVarName
 argument_list|,
@@ -2729,6 +2810,25 @@ argument_list|)
 else|:
 literal|""
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+if|if
+condition|(
+name|values
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
+condition|)
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|" }"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4215,41 +4315,45 @@ name|createFieldQuery
 argument_list|()
 decl_stmt|;
 comment|//        query.setConstraint("urn:field1", new ReferenceConstraint("urn:testReference"));
+name|query
+operator|.
+name|setConstraint
+argument_list|(
+literal|"urn:field1"
+argument_list|,
+operator|new
+name|ReferenceConstraint
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"urn:testReference"
+argument_list|,
+literal|"urn:testReference1"
+argument_list|,
+literal|"urn:testReference3"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|//        query.setConstraint("urn:field1a", new ValueConstraint(null, Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri())));
 comment|//        query.addSelectedField("urn:field1a");
 comment|//        query.setConstraint("urn:field1b", new ValueConstraint(9, Arrays.asList(
+comment|//                DataTypeEnum.Float.getUri())));
+comment|//        query.setConstraint("urn:field1b", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri())));
 comment|//        query.setConstraint("urn:field1c", new ValueConstraint(null, Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
 comment|//        query.addSelectedField("urn:field1c");
 comment|//        query.setConstraint("urn:field1d", new ValueConstraint(9, Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
+comment|//        query.setConstraint("urn:field1d", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
+comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
 comment|//        query.setConstraint("urn:field2", new TextConstraint("test value"));
-name|query
-operator|.
-name|setConstraint
-argument_list|(
-literal|"urn:field3"
-argument_list|,
-operator|new
-name|TextConstraint
-argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-literal|"text value"
-argument_list|,
-literal|"anothertest"
-argument_list|,
-literal|"some more values"
-argument_list|)
-argument_list|,
-literal|true
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|//        query.setConstraint("urn:field3", new TextConstraint(Arrays.asList(
+comment|//            "text value","anothertest","some more values"),true));
 comment|//        query.setConstraint("urn:field2a", new TextConstraint(":-]")); //tests escaping of REGEX
 comment|//        query.setConstraint("urn:field3", new TextConstraint("language text","en"));
 comment|//        query.setConstraint("urn:field4", new TextConstraint("multi language text","en","de",null));
