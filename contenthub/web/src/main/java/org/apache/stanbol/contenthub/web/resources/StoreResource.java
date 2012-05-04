@@ -1103,24 +1103,6 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
-name|jersey
-operator|.
-name|resource
-operator|.
-name|ContentItemResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
 name|servicesapi
 operator|.
 name|ContentItem
@@ -2148,7 +2130,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * HTTP GET method specific for download operations. Raw data (content item) or only metadata of the      * content item can be downloaded.      *       * @param type      *            Type can be {@code "metadata"} or {@code "raw"}. Based on the type, related parts of the      *            content item will be prepared for download.      * @param contentURI      *            URI of the resource in the Stanbol Contenthub store      * @return Raw content item or metadata of the content item.      * @throws IOException      * @throws StoreException      */
+comment|/**      * HTTP GET method specific for download operations. Raw data (content item) or only metadata of the      * content item can be downloaded.      *       * @param type      *            Type can be {@code "metadata"} or {@code "raw"}. Based on the type, related parts of the      *            content item will be prepared for download.      * @param contentURI      *            URI of the resource in the Stanbol Contenthub store      * @param format      *            Rdf serialization format of metadata      * @return Raw content item or metadata of the content item.      * @throws IOException      * @throws StoreException      */
 annotation|@
 name|GET
 annotation|@
@@ -2179,6 +2161,16 @@ literal|"uri"
 argument_list|)
 name|String
 name|contentURI
+parameter_list|,
+annotation|@
+name|QueryParam
+argument_list|(
+name|value
+operator|=
+literal|"format"
+argument_list|)
+name|String
+name|format
 parameter_list|,
 annotation|@
 name|Context
@@ -2230,7 +2222,14 @@ block|{
 name|String
 name|fileName
 init|=
+name|URLEncoder
+operator|.
+name|encode
+argument_list|(
 name|contentURI
+argument_list|,
+literal|"utf-8"
+argument_list|)
 operator|+
 literal|"-metadata"
 decl_stmt|;
@@ -2294,9 +2293,7 @@ operator|.
 name|getMetadata
 argument_list|()
 argument_list|,
-name|SupportedFormat
-operator|.
-name|RDF_XML
+name|format
 argument_list|)
 expr_stmt|;
 name|bos
