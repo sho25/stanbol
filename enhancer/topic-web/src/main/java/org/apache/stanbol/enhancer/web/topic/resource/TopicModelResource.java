@@ -831,7 +831,7 @@ name|QueryParam
 argument_list|(
 name|value
 operator|=
-literal|"primaryTopic"
+literal|"primary_topic"
 argument_list|)
 name|String
 name|primaryTopicUri
