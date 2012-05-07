@@ -225,7 +225,7 @@ name|Reference
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|entityhubModel
+name|entityhub
 argument_list|,
 literal|"ref"
 argument_list|,
@@ -238,7 +238,7 @@ name|Text
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|entityhubModel
+name|entityhub
 argument_list|,
 literal|"text"
 argument_list|,

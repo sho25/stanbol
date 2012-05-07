@@ -20,6 +20,26 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|SpecialFieldEnum
+operator|.
+name|isSpecialField
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -289,6 +309,42 @@ name|entityhub
 operator|.
 name|servicesapi
 operator|.
+name|defaults
+operator|.
+name|NamespaceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|SpecialFieldEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
 name|model
 operator|.
 name|Reference
@@ -422,6 +478,26 @@ operator|.
 name|TextConstraint
 operator|.
 name|PatternType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
+name|ValueConstraint
+operator|.
+name|MODE
 import|;
 end_import
 
@@ -2355,13 +2431,22 @@ operator|.
 name|getValues
 argument_list|()
 argument_list|,
+name|constraint
+operator|.
+name|getMode
+argument_list|()
+argument_list|,
+name|varPrefix
+argument_list|,
+name|varNum
+argument_list|,
 name|intend
 argument_list|)
 expr_stmt|;
 block|}
 else|else
 block|{
-comment|//we have multiple dataTypes -> ned to use union!
+comment|//we have multiple dataTypes -> need to use union!
 name|boolean
 name|first
 init|=
@@ -2400,7 +2485,13 @@ condition|(
 name|first
 condition|)
 block|{
-comment|//queryString.append(intend);
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|'{'
+argument_list|)
+expr_stmt|;
 name|first
 operator|=
 literal|false
@@ -2412,7 +2503,7 @@ name|queryString
 operator|.
 name|append
 argument_list|(
-literal|" UNION \n"
+literal|"} UNION {\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2431,11 +2522,26 @@ operator|.
 name|getValues
 argument_list|()
 argument_list|,
+name|constraint
+operator|.
+name|getMode
+argument_list|()
+argument_list|,
+name|varPrefix
+argument_list|,
+name|varNum
+argument_list|,
 name|intend
 argument_list|)
 expr_stmt|;
 block|}
-comment|//queryString.append('}');
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|'}'
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 else|else
@@ -2660,6 +2766,16 @@ name|Object
 argument_list|>
 name|values
 parameter_list|,
+name|MODE
+name|mode
+parameter_list|,
+name|String
+name|varPrefix
+parameter_list|,
+name|int
+index|[]
+name|varNum
+parameter_list|,
 name|String
 name|intend
 parameter_list|)
@@ -2718,10 +2834,45 @@ condition|(
 name|first
 condition|)
 block|{
-comment|//queryString.append(intend);
+if|if
+condition|(
+name|mode
+operator|==
+name|MODE
+operator|.
+name|any
+condition|)
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|'{'
+argument_list|)
+expr_stmt|;
+block|}
 name|first
 operator|=
 literal|false
+expr_stmt|;
+block|}
+else|else
+block|{
+if|if
+condition|(
+name|mode
+operator|==
+name|MODE
+operator|.
+name|any
+condition|)
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|"} UNION {\n"
+argument_list|)
 expr_stmt|;
 block|}
 else|else
@@ -2730,13 +2881,52 @@ name|queryString
 operator|.
 name|append
 argument_list|(
-literal|" UNION\n"
+literal|" .\n"
 argument_list|)
+expr_stmt|;
+block|}
+name|queryString
 operator|.
 name|append
 argument_list|(
 name|addIntend
 argument_list|)
+expr_stmt|;
+block|}
+name|String
+name|fieldVar
+decl_stmt|;
+if|if
+condition|(
+name|isSpecialField
+argument_list|(
+name|field
+argument_list|)
+condition|)
+block|{
+comment|//in case of a special field replace the field URI with an
+comment|//variable to allow searching all outgoing properties
+name|fieldVar
+operator|=
+name|varPrefix
+operator|+
+name|varNum
+index|[
+literal|0
+index|]
+expr_stmt|;
+name|varNum
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+block|}
+else|else
+block|{
+name|fieldVar
+operator|=
+literal|null
 expr_stmt|;
 block|}
 if|if
@@ -2758,6 +2948,34 @@ operator|instanceof
 name|Reference
 condition|)
 block|{
+if|if
+condition|(
+name|fieldVar
+operator|!=
+literal|null
+condition|)
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"?%s ?%s<%s>"
+argument_list|,
+name|rootVarName
+argument_list|,
+name|fieldVar
+argument_list|,
+name|value
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|queryString
 operator|.
 name|append
@@ -2773,6 +2991,50 @@ argument_list|,
 name|field
 argument_list|,
 name|value
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+if|if
+condition|(
+name|fieldVar
+operator|!=
+literal|null
+condition|)
+block|{
+name|queryString
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"?%s ?%s \"%s\"%s"
+argument_list|,
+name|rootVarName
+argument_list|,
+name|fieldVar
+argument_list|,
+name|value
+argument_list|,
+name|dataType
+operator|!=
+literal|null
+condition|?
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"^^<%s>"
+argument_list|,
+name|dataType
+argument_list|)
+else|:
+literal|""
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2814,6 +3076,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 if|if
 condition|(
 name|values
@@ -2824,6 +3087,24 @@ operator|>
 literal|1
 condition|)
 block|{
+if|if
+condition|(
+name|mode
+operator|==
+name|MODE
+operator|.
+name|any
+condition|)
+block|{
+comment|//close the union
+name|queryString
+operator|.
+name|append
+argument_list|(
+literal|'}'
+argument_list|)
+expr_stmt|;
+block|}
 name|queryString
 operator|.
 name|append
@@ -2833,7 +3114,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Adds an text constraint to the SPARQL query string      * @param queryString the query string to add the constraint      * @param var the variable name to constrain      * @param constraint the constraint      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      */
+comment|/**      * Adds an text constraint to the SPARQL query string      * @param queryString the query string to add the constraint      * @param var the variable name to constraint      * @param constraint the constraint      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      */
 specifier|private
 specifier|static
 name|void
@@ -4119,6 +4400,60 @@ index|]
 operator|++
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|isSpecialField
+argument_list|(
+name|field
+argument_list|)
+condition|)
+block|{
+comment|//in case of a special field replace the field URI with an
+comment|//variable to allow searching all outgoing properties
+name|String
+name|fieldVar
+init|=
+name|varPrefix
+operator|+
+name|varNum
+index|[
+literal|0
+index|]
+decl_stmt|;
+name|varNum
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+name|queryString
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"%s?%s ?%s ?%s "
+argument_list|,
+name|intend
+argument_list|,
+name|selectedFields
+operator|.
+name|get
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+name|fieldVar
+argument_list|,
+name|var
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|queryString
 operator|.
 name|append
@@ -4144,6 +4479,7 @@ name|var
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|var
 return|;
@@ -4315,35 +4651,17 @@ name|createFieldQuery
 argument_list|()
 decl_stmt|;
 comment|//        query.setConstraint("urn:field1", new ReferenceConstraint("urn:testReference"));
-name|query
-operator|.
-name|setConstraint
-argument_list|(
-literal|"urn:field1"
-argument_list|,
-operator|new
-name|ReferenceConstraint
-argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-literal|"urn:testReference"
-argument_list|,
-literal|"urn:testReference1"
-argument_list|,
-literal|"urn:testReference3"
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|//        query.setConstraint("urn:field1", new ReferenceConstraint(
+comment|//            Arrays.asList("urn:testReference","urn:testReference1","urn:testReference3"),MODE.any));
+comment|//        query.setConstraint(SpecialFieldEnum.references.getUri(), new ReferenceConstraint(
+comment|//            Arrays.asList("urn:testReference","urn:testReference1","urn:testReference3")));
 comment|//        query.setConstraint("urn:field1a", new ValueConstraint(null, Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri())));
 comment|//        query.addSelectedField("urn:field1a");
 comment|//        query.setConstraint("urn:field1b", new ValueConstraint(9, Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri())));
 comment|//        query.setConstraint("urn:field1b", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri())));
+comment|//                DataTypeEnum.Float.getUri()),MODE.any));
 comment|//        query.setConstraint("urn:field1c", new ValueConstraint(null, Arrays.asList(
 comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
 comment|//        query.addSelectedField("urn:field1c");
@@ -4353,6 +4671,8 @@ comment|//        query.setConstraint("urn:field1d", new ValueConstraint(Arrays.
 comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
 comment|//        query.setConstraint("urn:field2", new TextConstraint("test value"));
 comment|//        query.setConstraint("urn:field3", new TextConstraint(Arrays.asList(
+comment|//            "text value","anothertest","some more values"),true));
+comment|//        query.setConstraint(SpecialFieldEnum.fullText.getUri(), new TextConstraint(Arrays.asList(
 comment|//            "text value","anothertest","some more values"),true));
 comment|//        query.setConstraint("urn:field2a", new TextConstraint(":-]")); //tests escaping of REGEX
 comment|//        query.setConstraint("urn:field3", new TextConstraint("language text","en"));

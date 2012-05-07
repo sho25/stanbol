@@ -117,6 +117,18 @@ name|SPECIAL_FIELD_PREFIX
 operator|+
 literal|"dep"
 decl_stmt|;
+comment|/**      * The field indexing all textual values of an Entity.<p>      * This field is created by copyfield configurations in the Solr schema.xml      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|FULL_TEXT_FIELD
+init|=
+name|SPECIAL_FIELD_PREFIX
+operator|+
+literal|"text"
+decl_stmt|;
+comment|/**      * Prefix used for fields that store meta information about the index.      */
 specifier|public
 specifier|static
 specifier|final

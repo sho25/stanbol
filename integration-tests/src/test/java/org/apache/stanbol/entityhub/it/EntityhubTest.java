@@ -179,6 +179,24 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|NamespaceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
 name|test
 operator|.
 name|it
@@ -367,7 +385,11 @@ name|getDefaultFindQueryField
 parameter_list|()
 block|{
 return|return
-literal|"http://www.iks-project.eu/ontology/rick/model/label"
+name|NamespaceEnum
+operator|.
+name|entityhub
+operator|+
+literal|"label"
 return|;
 block|}
 comment|/*      * First the CRUD interface      */

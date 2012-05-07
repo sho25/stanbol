@@ -69,6 +69,26 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
+name|ValueConstraint
+operator|.
+name|MODE
+import|;
+end_import
+
 begin_comment
 comment|/**  * A constraint the filters/selects based on the value and/or the parsed  * dataTypes. A valid constraint MUST define a value OR valid data type. A  * valid data type is defined as a String that is NOT NULL and NOT empty.<p>  * If the collection of data types is<code>null</code> components processing  * this constraint are encouraged to deduct the data types based on the type  * of the value.  * @author Rupert Westenthaler  *  */
 end_comment
@@ -80,6 +100,30 @@ name|ValueConstraint
 extends|extends
 name|Constraint
 block|{
+comment|/**      * The mode how multiple values are treated      */
+specifier|public
+specifier|static
+enum|enum
+name|MODE
+block|{
+comment|/**          * Any of the parsed values is sufficient to select an entity. Similar          * to UNION in SPARQL          */
+name|any
+block|,
+comment|/**          * All parsed values must be present.          */
+name|all
+block|}
+empty_stmt|;
+comment|/**      * The default {@link MODE} is {@link MODE#any}      */
+specifier|public
+specifier|static
+specifier|final
+name|MODE
+name|DEFAULT_MODE
+init|=
+name|MODE
+operator|.
+name|any
+decl_stmt|;
 specifier|private
 specifier|final
 name|Set
@@ -95,6 +139,11 @@ argument_list|<
 name|String
 argument_list|>
 name|dataTypeUris
+decl_stmt|;
+specifier|private
+specifier|final
+name|MODE
+name|mode
 decl_stmt|;
 specifier|public
 name|ValueConstraint
@@ -122,6 +171,32 @@ argument_list|<
 name|String
 argument_list|>
 name|dataTypes
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|value
+argument_list|,
+name|dataTypes
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|ValueConstraint
+parameter_list|(
+name|Object
+name|value
+parameter_list|,
+name|Iterable
+argument_list|<
+name|String
+argument_list|>
+name|dataTypes
+parameter_list|,
+name|MODE
+name|mode
 parameter_list|)
 block|{
 name|super
@@ -349,15 +424,18 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|//it's questionable if we should do that at this position, because
-comment|//components that process that constraint might have better ways to
-comment|//do that and than they can not know if the user parsed a data type or
-comment|//this code has calculated it based on the java type of the value!
-comment|//        if(dataTypeUris.isEmpty()){ //meaning value != null
-comment|//            for(DataTypeEnum dataType : DataTypeEnum.getAllDataTypes(value.getClass())){
-comment|//                dataTypeUris.add(dataType.getUri());
-comment|//            }
-comment|//        }
+name|this
+operator|.
+name|mode
+operator|=
+name|mode
+operator|==
+literal|null
+condition|?
+name|DEFAULT_MODE
+else|:
+name|mode
+expr_stmt|;
 block|}
 end_class
 
@@ -393,6 +471,22 @@ parameter_list|()
 block|{
 return|return
 name|values
+return|;
+block|}
+end_function
+
+begin_comment
+comment|/**      * Getter for the {@link MODE} of this ValueConstraint      * @return the mode      */
+end_comment
+
+begin_function
+specifier|public
+name|MODE
+name|getMode
+parameter_list|()
+block|{
+return|return
+name|mode
 return|;
 block|}
 end_function

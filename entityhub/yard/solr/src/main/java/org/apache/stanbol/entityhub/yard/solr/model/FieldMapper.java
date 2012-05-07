@@ -128,6 +128,11 @@ name|String
 name|getReferredDocumentField
 parameter_list|()
 function_decl|;
+comment|/**      * Getter for the field name used to index all textual values of an Entity.      * @return the field name that indexes all textual values of an Entity.      */
+name|String
+name|getFullTextSearchField
+parameter_list|()
+function_decl|;
 comment|/**      * Getter for the Merger Field for the parse language      *       * @param lang      *            the language or<code>null</code> for the merger field for all languages      * @return the merger field for the parsed language      */
 name|String
 name|getLanguageMergerField
@@ -143,11 +148,8 @@ name|String
 argument_list|>
 name|encodeLanguages
 parameter_list|(
-name|Collection
-argument_list|<
-name|String
-argument_list|>
-name|languages
+name|IndexField
+name|indexField
 parameter_list|)
 function_decl|;
 comment|/**      * Getter for the prefix/suffix used to encode the parsed index data type.      *       * @param dataType      *            the data type      * @return An array with two entries, where the first represents the prefix and the second the suffix used      *         to encode the index data type. In case no prefix/suffix is used to represent the parsed index      *         data type, the according entry in the array is<code>null</code>      * @throws IllegalArgumentException      *             if no prefix/suffix mapping is defined for the parsed index data type      */
@@ -155,8 +157,8 @@ name|String
 index|[]
 name|encodeDataType
 parameter_list|(
-name|IndexDataType
-name|dataType
+name|IndexField
+name|indexField
 parameter_list|)
 throws|throws
 name|IllegalArgumentException
@@ -165,11 +167,8 @@ comment|/**      * Getter for the encoded path      *       * @param path      *
 name|String
 name|encodePath
 parameter_list|(
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|path
+name|IndexField
+name|indexField
 parameter_list|)
 throws|throws
 name|IllegalArgumentException

@@ -81,6 +81,24 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|SpecialFieldEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
 name|test
 operator|.
 name|query
@@ -1317,6 +1335,380 @@ literal|"http://dbpedia.org/resource/Baghdad"
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Tests that full text queries are possible by using the       * {@link SpecialFieldEnum#fullText} field (STANBOL-596)       */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFullTextQuery
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '3',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'text',"
+operator|+
+literal|"'patternType': 'wildcard',"
+operator|+
+literal|"'text': ['microbiologist'],"
+operator|+
+literal|"'field': 'entityhub-query:fullText'"
+operator|+
+literal|"},{"
+operator|+
+literal|"'type': 'reference',"
+operator|+
+literal|"'value': ['dbp-ont:Person'],"
+operator|+
+literal|"'field': 'rdf:type',"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Louis_Pasteur"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Tests searches for references in the semantic context field (the      * field containing all references to other entities (STANBOL-597)       * @throws IOException      * @throws JSONException      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSemanticContextQuery
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '5',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'reference',"
+operator|+
+literal|"'value': ["
+operator|+
+literal|"'http://dbpedia.org/resource/Category:Capitals_in_Europe',"
+operator|+
+literal|"'http://dbpedia.org/resource/Category:Host_cities_of_the_Summer_Olympic_Games'"
+operator|+
+literal|"],"
+operator|+
+literal|"'field': 'entityhub-query:references',"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/London"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris"
+argument_list|,
+literal|"http://dbpedia.org/resource/Moscow"
+argument_list|,
+literal|"http://dbpedia.org/resource/Rome"
+argument_list|,
+literal|"http://dbpedia.org/resource/Berlin"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Tests ValueConstraint MODE "any" and "all" queries (STANBOL-595)       * @throws IOException      * @throws JSONException      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConstraintValueModeQuery
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+comment|//First with mode = 'any' -> combine Entity Ranking with types
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '5',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'reference',"
+operator|+
+literal|"'value': ["
+operator|+
+literal|"'http:\\/\\/dbpedia.org\\/resource\\/Category:Capitals_in_Europe',"
+operator|+
+literal|"'http:\\/\\/dbpedia.org\\/resource\\/Category:Host_cities_of_the_Summer_Olympic_Games',"
+operator|+
+literal|"'http:\\/\\/dbpedia.org\\/ontology\\/City'"
+operator|+
+literal|"],"
+operator|+
+literal|"'field': 'entityhub-query:references',"
+operator|+
+literal|"'mode': 'any'"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/London"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris"
+argument_list|,
+literal|"http://dbpedia.org/resource/Moscow"
+argument_list|,
+literal|"http://dbpedia.org/resource/Rome"
+argument_list|,
+comment|//now we get Los_Angeles because it has the dbp-ont:City type
+literal|"http://dbpedia.org/resource/Los_Angeles"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+comment|//Second query for Entities that do have relations to all three
+comment|//Entities (NOTE: the dbp-ont:City type is missing for most of the
+comment|//members of the two categories used in this example!)
+name|test
+operator|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '5',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'reference',"
+operator|+
+literal|"'value': ["
+operator|+
+literal|"'http:\\/\\/dbpedia.org\\/resource\\/Category:Capitals_in_Europe',"
+operator|+
+literal|"'http:\\/\\/dbpedia.org\\/resource\\/Category:Host_cities_of_the_Summer_Olympic_Games',"
+operator|+
+literal|"'http:\\/\\/dbpedia.org\\/ontology\\/City'"
+operator|+
+literal|"],"
+operator|+
+literal|"'field': 'entityhub-query:references',"
+operator|+
+literal|"'mode': 'all'"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Berlin"
+argument_list|,
+literal|"http://dbpedia.org/resource/Amsterdam"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Tests (1) similarity searches and (2) that the full text field is supported      * for those (STANBOL-589 and STANBOL-596)      * @throws IOException      * @throws JSONException      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimilaritySearch
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+comment|//searches Places with "Wolfgang Amadeus Mozart" as context
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '5',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'reference',"
+operator|+
+literal|"'value': 'http:\\/\\/dbpedia.org\\/ontology\\/Place',"
+operator|+
+literal|"'field': 'http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#type',"
+operator|+
+literal|"},{"
+operator|+
+literal|"'type': 'similarity',"
+operator|+
+literal|"'context': 'Wolfgang Amadeus Mozart',"
+operator|+
+literal|"'field': 'http:\\/\\/stanbol.apache.org\\/ontology\\/entityhub\\/query#fullText',"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Salzburg"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
 comment|//now execute the test
 name|executeQuery
 argument_list|(

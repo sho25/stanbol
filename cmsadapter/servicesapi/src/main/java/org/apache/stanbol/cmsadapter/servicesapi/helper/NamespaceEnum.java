@@ -83,14 +83,14 @@ name|entityhubModel
 argument_list|(
 literal|"entityhub"
 argument_list|,
-literal|"http://www.iks-project.eu/ontology/rick/model/"
+literal|"http://stanbol.apache.org/ontology/entityhub/entityhub#"
 argument_list|)
 block|,
 name|entityhubQuery
 argument_list|(
 literal|"entityhub-query"
 argument_list|,
-literal|"http://www.iks-project.eu/ontology/rick/query/"
+literal|"http://stanbol.apache.org/ontology/entityhub/query#"
 argument_list|)
 block|,
 comment|// Namespaces defined by the CMS Adapter

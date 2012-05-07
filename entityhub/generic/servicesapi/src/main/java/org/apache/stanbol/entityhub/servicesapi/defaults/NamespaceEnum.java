@@ -78,19 +78,32 @@ specifier|public
 enum|enum
 name|NamespaceEnum
 block|{
-comment|//Namespaces defined by the entityhub
-name|entityhubModel
+comment|/*      * STANBOL internally used Namespaces      */
+comment|/**      * The Stanbol Enhancer namespace defining Enhancer, EnhancementEngine and      * EnhancementChain. This is NOT the namespace of the enhancement structure.      * As EnhancementStrucutre up to now still the old FISE namespace is used.      */
+name|enhancer
 argument_list|(
-literal|"entityhub"
-argument_list|,
-literal|"http://www.iks-project.eu/ontology/rick/model/"
+literal|"http://stanbol.apache.org/ontology/enhancer/enhancer#"
 argument_list|)
 block|,
+comment|//Namespaces defined by the entityhub
+comment|/**      * The Namespace used by the Entityhub to define its concepts such as      * Entity, Representation ...      */
+name|entityhub
+argument_list|(
+literal|"http://stanbol.apache.org/ontology/entityhub/entityhub#"
+argument_list|)
+block|,
+comment|/**      * The namespace used by the Entityhub to define query related concepts      * e.g. the full text search field, semantic context field, result score ...      */
 name|entityhubQuery
 argument_list|(
 literal|"entityhub-query"
 argument_list|,
-literal|"http://www.iks-project.eu/ontology/rick/query/"
+literal|"http://stanbol.apache.org/ontology/entityhub/query#"
+argument_list|)
+block|,
+comment|/**      * The FISE namespace (1st version of the Enhancement Structure).      * Will be replaced by the Stanbol Enhancement Structure by a future      * release (see STANBOL-3).      */
+name|fise
+argument_list|(
+literal|"http://fise.iks-project.eu/ontology/"
 argument_list|)
 block|,
 comment|//First the XML Namespaces
@@ -385,7 +398,28 @@ name|frbr
 argument_list|(
 literal|"http://purl.org/vocab/frbr/core#"
 argument_list|)
-block|;
+block|,
+comment|/*      * Old namespaces still kept for historical reasons      */
+comment|/**      * The old URI for the 'entityhub' namespace prefix as used by STANBOL      * 0.9.0-incubating.      * @see NamespaceEnum#entityhubModel      */
+annotation|@
+name|Deprecated
+name|rickModel
+argument_list|(
+literal|"rick"
+argument_list|,
+literal|"http://www.iks-project.eu/ontology/rick/model/"
+argument_list|)
+block|,
+comment|/**      * The old URI for the 'entityhub-query' namespace prefix as used by STANBOL      * 0.9.0-incubating.      * @see NamespaceEnum#entityhubQuery      */
+annotation|@
+name|Deprecated
+name|rickQuery
+argument_list|(
+literal|"rick-query"
+argument_list|,
+literal|"http://www.iks-project.eu/ontology/rick/query/"
+argument_list|)
+block|,      ;
 comment|/**      * The logger      */
 specifier|private
 specifier|static

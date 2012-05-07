@@ -904,7 +904,7 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"<http://www.iks-project.eu/ontology/rick/query/score>"
+literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
 literal|"<http://dbpedia.org/resource/Vienna>"
 argument_list|,
@@ -974,7 +974,7 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"<http://www.iks-project.eu/ontology/rick/query/score>"
+literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
 literal|"<http://dbpedia.org/resource/York>"
 argument_list|,
@@ -1057,7 +1057,7 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"<http://www.iks-project.eu/ontology/rick/query/score>"
+literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
 literal|"<name>  \"Spider\"@en ;"
 argument_list|,

@@ -3861,7 +3861,7 @@ name|namespace
 init|=
 name|NamespaceEnum
 operator|.
-name|entityhubModel
+name|entityhub
 operator|.
 name|getNamespace
 argument_list|()

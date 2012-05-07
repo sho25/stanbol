@@ -89,6 +89,24 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|NamespaceEnum
+import|;
+end_import
+
 begin_class
 specifier|public
 specifier|abstract
@@ -119,7 +137,11 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://www.iks-project.eu/ontology/rick/query/score"
+name|NamespaceEnum
+operator|.
+name|entityhubQuery
+operator|+
+literal|"score"
 argument_list|)
 argument_list|)
 argument_list|)

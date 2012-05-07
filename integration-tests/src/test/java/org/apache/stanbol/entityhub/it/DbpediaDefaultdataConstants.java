@@ -47,6 +47,24 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|NamespaceEnum
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
@@ -113,21 +131,36 @@ name|required
 operator|.
 name|add
 argument_list|(
-literal|"http://www.w3.org/2000/01/rdf-schema#label"
+name|NamespaceEnum
+operator|.
+name|rdfs
+operator|+
+literal|"label"
 argument_list|)
 expr_stmt|;
 name|required
 operator|.
 name|add
 argument_list|(
-literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+name|NamespaceEnum
+operator|.
+name|rdf
+operator|+
+literal|"type"
 argument_list|)
 expr_stmt|;
+comment|//TODO: STANBOL-600 change to NamespaceEnum.entityhub as soon as a
+comment|//      new dbpedia default data index is available
+comment|//      This will be done as soon as the next DBpedia release is available
 name|required
 operator|.
 name|add
 argument_list|(
-literal|"http://www.iks-project.eu/ontology/rick/model/entityRank"
+name|NamespaceEnum
+operator|.
+name|rickModel
+operator|+
+literal|"entityRank"
 argument_list|)
 expr_stmt|;
 name|DBPEDIA_DEFAULTDATA_REQUIRED_FIELDS

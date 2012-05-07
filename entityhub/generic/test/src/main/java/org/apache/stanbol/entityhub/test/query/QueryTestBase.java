@@ -203,6 +203,24 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
+name|NamespaceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
 name|test
 operator|.
 name|it
@@ -314,7 +332,11 @@ specifier|final
 name|String
 name|RDFS_LABEL
 init|=
-literal|"http://www.w3.org/2000/01/rdf-schema#label"
+name|NamespaceEnum
+operator|.
+name|rdfs
+operator|+
+literal|"label"
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -969,7 +991,7 @@ literal|"'patternType' : 'none', "
 operator|+
 literal|"'field': 'http:\\/\\/www.test.org\\/test#field', "
 operator|+
-literal|"'dataTypes': ['http:\\/\\/www.iks-project.eu\\/ontology\\/rick\\/model\\/text'] "
+literal|"'dataTypes': ['http:\\/\\/stanbol.apache.org\\/ontology\\/entityhub\\/entityhub#text'] "
 operator|+
 literal|"}]"
 operator|+
@@ -1055,7 +1077,7 @@ literal|"'patternType' : 'none', "
 operator|+
 literal|"'field': '', "
 operator|+
-literal|"'dataTypes': ['http:\\/\\/www.iks-project.eu\\/ontology\\/rick\\/model\\/text'] "
+literal|"'dataTypes': ['http:\\/\\/stanbol.apache.org\\/ontology\\/entityhub\\/entityhub#text'] "
 operator|+
 literal|"}]"
 operator|+
@@ -1145,7 +1167,7 @@ literal|"'patternType' : 'none', "
 operator|+
 literal|"'field': 'http:\\/\\/www.test.org\\/test#field', "
 operator|+
-literal|"'dataTypes': ['http:\\/\\/www.iks-project.eu\\/ontology\\/rick\\/model\\/text'] "
+literal|"'dataTypes': ['http:\\/\\/stanbol.apache.org\\/ontology\\/entityhub\\/entityhub#text'] "
 operator|+
 literal|"},{ "
 operator|+
@@ -1473,7 +1495,7 @@ operator|+
 literal|"'patternType' : 'none', "
 operator|+
 comment|//"'field': 'http:\\/\\/www.test.org\\/test#field', " +
-literal|"'dataTypes': ['http:\\/\\/www.iks-project.eu\\/ontology\\/rick\\/model\\/text'] "
+literal|"'dataTypes': ['http:\\/\\/stanbol.apache.org\\/ontology\\/entityhub\\/entityhub#text'] "
 operator|+
 literal|"}]"
 operator|+
