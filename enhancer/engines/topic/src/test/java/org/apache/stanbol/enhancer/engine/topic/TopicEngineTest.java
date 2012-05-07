@@ -696,7 +696,7 @@ name|solrHome
 argument_list|,
 literal|"classifierserver"
 argument_list|,
-literal|"default-topic-model"
+literal|"test-topic-model"
 argument_list|,
 literal|"default-topic-model"
 argument_list|)
@@ -719,7 +719,7 @@ name|solrHome
 argument_list|,
 literal|"trainingsetserver"
 argument_list|,
-literal|"default-topic-trainingset"
+literal|"test-topic-trainingset"
 argument_list|,
 literal|"default-topic-trainingset"
 argument_list|)
@@ -931,7 +931,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testEngineConfiguation
+name|testEngineConfiguration
 parameter_list|()
 throws|throws
 name|ConfigurationException
