@@ -1982,12 +1982,16 @@ name|MAX_COLLECTED_EXAMPLES
 init|=
 literal|1000
 decl_stmt|;
+comment|// Limit the evaluation time by computing the performance estimates on a bounded random selection of
+comment|// labeled examples in the training set.
 specifier|public
 name|int
 name|MAX_EVALUATION_SAMPLES
 init|=
-literal|200
+literal|500
 decl_stmt|;
+comment|// Do not try to compute performance estimates if there is not at least a minimum number of example
+comment|// documents for this concept.
 specifier|public
 name|int
 name|MIN_EVALUATION_SAMPLES
@@ -2780,6 +2784,16 @@ argument_list|(
 name|text
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|topics
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+return|return;
+block|}
 block|}
 catch|catch
 parameter_list|(
@@ -3952,7 +3966,7 @@ return|return
 name|suggestedTopics
 return|;
 block|}
-comment|// filter out suggestion that are less than some threshold based on the mean of the top scores
+comment|// filter out suggestions that are less than some threshold based on the mean of the top scores
 name|float
 name|mean
 init|=
@@ -6720,9 +6734,9 @@ comment|// 3-folds CV is hardcoded for now
 name|int
 name|cvIterationCount
 init|=
-literal|1
+literal|3
 decl_stmt|;
-comment|// only one 3-folds CV iteration
+comment|// make it possible to limit the number of folds to use
 comment|// We will use the training set quite intensively, ensure that the index is packed and its
 comment|// statistics are up to date
 name|getTrainingSet
