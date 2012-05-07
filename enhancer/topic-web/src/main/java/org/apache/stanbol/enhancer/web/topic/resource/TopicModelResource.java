@@ -831,6 +831,16 @@ name|QueryParam
 argument_list|(
 name|value
 operator|=
+literal|"primaryTopic"
+argument_list|)
+name|String
+name|primaryTopicUri
+parameter_list|,
+annotation|@
+name|QueryParam
+argument_list|(
+name|value
+operator|=
 literal|"broader"
 argument_list|)
 name|List
@@ -852,6 +862,8 @@ operator|.
 name|addConcept
 argument_list|(
 name|concept
+argument_list|,
+name|primaryTopicUri
 argument_list|,
 name|broaderConcepts
 argument_list|)
