@@ -711,6 +711,10 @@ argument_list|(
 name|CONFIG_ROOT
 operator|+
 literal|"dataIterating"
+argument_list|,
+name|CONFIG_ROOT
+operator|+
+literal|"idIterating"
 argument_list|)
 decl_stmt|;
 name|indexer
@@ -737,6 +741,10 @@ name|factory
 operator|.
 name|create
 argument_list|(
+name|CONFIG_ROOT
+operator|+
+literal|"idIterating"
+argument_list|,
 name|CONFIG_ROOT
 operator|+
 literal|"idIterating"

@@ -460,7 +460,12 @@ argument_list|(
 name|CONFIG_ROOT
 operator|+
 literal|"noConfig"
+argument_list|,
+name|CONFIG_ROOT
+operator|+
+literal|"noConfig"
 argument_list|)
+block|{}
 expr_stmt|;
 block|}
 comment|/**      * In this case the config exists in the classpath, but is not valid because      * the required indexing.properties is missing      */
@@ -484,7 +489,12 @@ argument_list|(
 name|CONFIG_ROOT
 operator|+
 literal|"missingconfig"
+argument_list|,
+name|CONFIG_ROOT
+operator|+
+literal|"missingconfig"
 argument_list|)
+block|{}
 expr_stmt|;
 block|}
 comment|/**      * Loads a simple but not functional configuration to test the loading and      * parsing of configuration files      */
@@ -511,7 +521,10 @@ operator|new
 name|IndexingConfig
 argument_list|(
 name|name
+argument_list|,
+name|name
 argument_list|)
+block|{}
 decl_stmt|;
 comment|//assert that this directory exists (is created)
 name|File
@@ -556,7 +569,7 @@ argument_list|()
 argument_list|,
 name|config
 operator|.
-name|getRootFolder
+name|getIndexingFolder
 argument_list|()
 operator|.
 name|getCanonicalPath

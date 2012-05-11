@@ -447,7 +447,12 @@ argument_list|(
 name|CONFIG_ROOT
 operator|+
 literal|"iterable"
+argument_list|,
+name|CONFIG_ROOT
+operator|+
+literal|"iterable"
 argument_list|)
+block|{}
 decl_stmt|;
 name|EntityDataIterable
 name|iterable
@@ -582,7 +587,12 @@ argument_list|(
 name|CONFIG_ROOT
 operator|+
 literal|"provider"
+argument_list|,
+name|CONFIG_ROOT
+operator|+
+literal|"provider"
 argument_list|)
+block|{}
 decl_stmt|;
 name|EntityIterator
 name|entityIdIterator
