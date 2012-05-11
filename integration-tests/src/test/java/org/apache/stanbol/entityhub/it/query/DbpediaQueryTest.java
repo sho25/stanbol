@@ -991,6 +991,75 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMultiWordWildcardTextConstraints
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+comment|//this is specially for issue described in the first comment of
+comment|//STANBOL-607
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '3',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'text', "
+operator|+
+literal|"'language': 'de', "
+operator|+
+literal|"'patternType': 'wildcard', "
+operator|+
+literal|"'text': 'Frankf* am Main', "
+operator|+
+literal|"'field': 'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label' "
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Frankfurt"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFieldQueryValueConstraints
 parameter_list|()
 throws|throws
