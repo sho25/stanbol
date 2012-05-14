@@ -22,6 +22,46 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|test
+operator|.
+name|helper
+operator|.
+name|EnhancementStructureHelper
+operator|.
+name|validateAllEntityAnnotations
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|test
+operator|.
+name|helper
+operator|.
+name|EnhancementStructureHelper
+operator|.
+name|validateAllTextAnnotations
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -63,6 +103,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -90,6 +140,22 @@ operator|.
 name|core
 operator|.
 name|MGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|Resource
 import|;
 end_import
 
@@ -251,6 +317,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|test
+operator|.
+name|helper
+operator|.
+name|EnhancementStructureHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -322,7 +406,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** This class provides JUnit tests for OpenCalaisEngine.  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
+comment|/**  * This class provides JUnit tests for OpenCalaisEngine.  *   * @author<a href="mailto:kasper@dfki.de">Walter Kasper</a>  */
 end_comment
 
 begin_class
@@ -330,7 +414,7 @@ specifier|public
 class|class
 name|TestOpenCalaisEngine
 block|{
-comment|/**    * This contains the logger.    */
+comment|/**      * This contains the logger.      */
 specifier|private
 specifier|static
 specifier|final
@@ -381,7 +465,27 @@ specifier|static
 name|String
 name|TEST_TEXT
 init|=
-literal|"Israeli PM Netanyahu pulls out of US nuclear summit\nIsraeli PM Benjamin Netanyahu has cancelled a visit to the US where he was to attend a summit on nuclear security, Israeli officials say. Mr Netanyahu made the decision after learning that Egypt and Turkey intended to raise the issue of Israel's presumed nuclear arsenal, the officials said. Mr Obama is due to host dozens of world leaders at the two-day conference, which begins in Washington on Monday. Israel has never confirmed or denied that it possesses atomic weapons. Israel's Intelligence and Atomic Energy Minister Dan Meridor will take Netanyahu's place in the nuclear summit, Israeli radio said. More than 40 countries are expected at the meeting, which will focus on preventing the spread of nuclear weapons to militant groups."
+literal|"Israeli PM Netanyahu pulls out of US nuclear summit\n"
+operator|+
+literal|"Israeli PM Benjamin Netanyahu has cancelled a visit to the US where he was to "
+operator|+
+literal|"attend a summit on nuclear security, Israeli officials say. Mr Netanyahu made "
+operator|+
+literal|"the decision after learning that Egypt and Turkey intended to raise the issue "
+operator|+
+literal|"of Israel's presumed nuclear arsenal, the officials said. Mr Obama is due to "
+operator|+
+literal|"host dozens of world leaders at the two-day conference, which begins in "
+operator|+
+literal|"Washington on Monday. Israel has never confirmed or denied that it possesses "
+operator|+
+literal|"atomic weapons. Israel's Intelligence and Atomic Energy Minister Dan Meridor "
+operator|+
+literal|"will take Netanyahu's place in the nuclear summit, Israeli radio said. More "
+operator|+
+literal|"than 40 countries are expected at the meeting, which will focus on preventing "
+operator|+
+literal|"the spread of nuclear weapons to militant groups."
 decl_stmt|;
 annotation|@
 name|BeforeClass
@@ -476,6 +580,8 @@ specifier|public
 name|void
 name|testEntityExtraction
 parameter_list|()
+throws|throws
+name|IOException
 block|{
 name|String
 name|testFile
@@ -581,6 +687,102 @@ name|entities
 operator|.
 name|isEmpty
 argument_list|()
+argument_list|)
+expr_stmt|;
+comment|//test the generation of the Enhancements
+name|ContentItem
+name|ci
+init|=
+name|wrapAsContentItem
+argument_list|(
+name|TEST_TEXT
+argument_list|)
+decl_stmt|;
+name|calaisExtractor
+operator|.
+name|createEnhancements
+argument_list|(
+name|entities
+argument_list|,
+name|ci
+argument_list|)
+expr_stmt|;
+name|Map
+argument_list|<
+name|UriRef
+argument_list|,
+name|Resource
+argument_list|>
+name|expectedValues
+init|=
+operator|new
+name|HashMap
+argument_list|<
+name|UriRef
+argument_list|,
+name|Resource
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|expectedValues
+operator|.
+name|put
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_EXTRACTED_FROM
+argument_list|,
+name|ci
+operator|.
+name|getUri
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|expectedValues
+operator|.
+name|put
+argument_list|(
+name|Properties
+operator|.
+name|DC_CREATOR
+argument_list|,
+name|LiteralFactory
+operator|.
+name|getInstance
+argument_list|()
+operator|.
+name|createTypedLiteral
+argument_list|(
+name|calaisExtractor
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|validateAllTextAnnotations
+argument_list|(
+name|ci
+operator|.
+name|getMetadata
+argument_list|()
+argument_list|,
+name|TEST_TEXT
+argument_list|,
+name|expectedValues
+argument_list|)
+expr_stmt|;
+name|validateAllEntityAnnotations
+argument_list|(
+name|ci
+operator|.
+name|getMetadata
+argument_list|()
+argument_list|,
+name|expectedValues
 argument_list|)
 expr_stmt|;
 block|}

@@ -3120,9 +3120,9 @@ else|else
 block|{
 name|log
 operator|.
-name|warn
+name|info
 argument_list|(
-literal|"Unable to extract language for ContentItem %s! Is the %s active?"
+literal|"Unable to extract language for ContentItem {}! Is the {} active?"
 argument_list|,
 name|ci
 operator|.
@@ -3140,7 +3140,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|warn
+name|info
 argument_list|(
 literal|" ... return '{}' as default"
 argument_list|,

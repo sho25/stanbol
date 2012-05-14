@@ -286,7 +286,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Internally used for unit testing      * @param dir      * @param classpathOffset      * @return      */
+comment|/**      * Internally used for unit testing. Allows to parse an offset for loading      * the indexer configuration from the classpath. Currently a protected      * feature, but might be moved to the public API at a later point of time.      * (would allow to include multiple default configurations via the      * classpath).      * @param dir      * @param classpathOffset      * @return      */
 specifier|protected
 name|Indexer
 name|create

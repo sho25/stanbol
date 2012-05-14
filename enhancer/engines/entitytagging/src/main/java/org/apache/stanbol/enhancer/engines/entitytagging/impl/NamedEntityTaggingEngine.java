@@ -1170,18 +1170,18 @@ name|String
 name|placeType
 decl_stmt|;
 comment|/**      * The field used to search for the selected text of the TextAnnotation.      */
-specifier|private
+specifier|protected
 name|String
 name|nameField
 decl_stmt|;
 comment|/**      * The number of Suggestions to be added      */
-specifier|public
+specifier|protected
 name|Integer
 name|numSuggestions
 init|=
 literal|3
 decl_stmt|;
-specifier|public
+specifier|protected
 name|boolean
 name|dereferenceEntities
 init|=
