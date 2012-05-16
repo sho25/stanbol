@@ -182,6 +182,15 @@ name|ALLOW_HEADERS
 init|=
 literal|"Access-Control-Allow-Headers"
 decl_stmt|;
+comment|/**      * The "Access-Control-Allow-Method" header      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|ALLOW_METHOD
+init|=
+literal|"Access-Control-Allow-Method"
+decl_stmt|;
 comment|/**      * The default methods for the Access-Control-Request-Method header field.      * Set to "GET, POST, OPTIONS"      */
 specifier|public
 specifier|static
@@ -547,7 +556,7 @@ name|header
 argument_list|(
 name|CorsHelper
 operator|.
-name|REQUEST_METHOD
+name|ALLOW_METHOD
 argument_list|,
 name|methods
 operator|.
