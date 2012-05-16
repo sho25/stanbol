@@ -160,9 +160,9 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|REQUEST_METHOD
+name|REQUEST_METHODS
 init|=
-literal|"Access-Control-Request-Method"
+literal|"Access-Control-Request-Methods"
 decl_stmt|;
 comment|/**      * The "Access-Control-Request-Headers" header      */
 specifier|public
@@ -187,9 +187,9 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|ALLOW_METHOD
+name|ALLOW_METHODS
 init|=
-literal|"Access-Control-Allow-Method"
+literal|"Access-Control-Allow-Methods"
 decl_stmt|;
 comment|/**      * The default methods for the Access-Control-Request-Method header field.      * Set to "GET, POST, OPTIONS"      */
 specifier|public
@@ -556,7 +556,7 @@ name|header
 argument_list|(
 name|CorsHelper
 operator|.
-name|ALLOW_METHOD
+name|ALLOW_METHODS
 argument_list|,
 name|methods
 operator|.

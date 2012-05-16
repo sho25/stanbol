@@ -369,7 +369,7 @@ name|header
 operator|.
 name|add
 argument_list|(
-literal|"Access-Control-Request-Method"
+literal|"Access-Control-Request-Methods"
 argument_list|,
 literal|"PUT"
 argument_list|)
@@ -522,13 +522,13 @@ name|Assert
 operator|.
 name|assertTrue
 argument_list|(
-literal|"'Access-Control-Allow-Method' expected"
+literal|"'Access-Control-Allow-Methods' expected"
 argument_list|,
 name|metadata
 operator|.
 name|containsKey
 argument_list|(
-literal|"Access-Control-Allow-Method"
+literal|"Access-Control-Allow-Methods"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -541,14 +541,14 @@ name|metadata
 operator|.
 name|getFirst
 argument_list|(
-literal|"Access-Control-Allow-Method"
+literal|"Access-Control-Allow-Methods"
 argument_list|)
 expr_stmt|;
 name|Assert
 operator|.
 name|assertTrue
 argument_list|(
-literal|"'Access-Control-Allow-Method' does not contain the expected values"
+literal|"'Access-Control-Allow-Methods' does not contain the expected values"
 argument_list|,
 name|value
 operator|.
