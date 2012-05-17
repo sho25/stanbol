@@ -41,9 +41,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|TechnicalClasses
 block|{
+specifier|private
+name|TechnicalClasses
+parameter_list|()
+block|{}
 comment|/**      * Type used for all enhancement created by Stanbol Enhancer      */
 specifier|public
 specifier|static
@@ -159,7 +164,7 @@ operator|+
 literal|"Document"
 argument_list|)
 decl_stmt|;
-comment|/**      * Used to indicate, that an EntityAnnotation describes an Categorisation.      * see<a href="http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine#Mapping_of_Categories">      * Mapping of Categories</a> for more Information)      */
+comment|/**      * Used to indicate, that an EntityAnnotation describes an Categorisation.      * see<a href="http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine#Mapping_of_Categories">      * Mapping of Categories</a> for more Information)      * @deprecated the preferred rdf:type for categories and topics is      * {@link OntologicalClasses#SKOS_CONCEPT} (see       *<a href="https://issues.apache.org/jira/browse/STANBOL-617">STANBOL-617</a>)      */
 specifier|public
 specifier|static
 specifier|final
@@ -176,10 +181,23 @@ operator|+
 literal|"Category"
 argument_list|)
 decl_stmt|;
-specifier|private
-name|TechnicalClasses
-parameter_list|()
-block|{     }
+comment|/**      * DC terms Linguistic System is the type used as Range for the dc:language      * property. As this property is also used for describing the language      * as identified for analysed content this type is used as dc:type for      * {@value #ENHANCER_TEXTANNOTATION} describing the language of the text      * (see       *<a href="https://issues.apache.org/jira/browse/STANBOL-613">STANBOL-613</a>)      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|DCTERMS_LINGUISTIC_SYSTEM
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|dc
+operator|+
+literal|"LinguisticSystem"
+argument_list|)
+decl_stmt|;
 block|}
 end_class
 
