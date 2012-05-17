@@ -2949,7 +2949,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Extracts the language of the parsed ContentItem from the metadata      * @param ci the content item      * @return the language      */
+comment|/**      * Extracts the language of the parsed ContentItem by using      * {@link EnhancementEngineHelper#getLanguage(ContentItem)} and "en" as      * default.      * @param ci the content item      * @return the language      */
 specifier|private
 name|String
 name|extractLanguage
@@ -2958,63 +2958,24 @@ name|ContentItem
 name|ci
 parameter_list|)
 block|{
-name|MGraph
-name|metadata
-init|=
-name|ci
-operator|.
-name|getMetadata
-argument_list|()
-decl_stmt|;
-name|Iterator
-argument_list|<
-name|Triple
-argument_list|>
-name|langaugeEnhancementCreatorTriples
-init|=
-name|metadata
-operator|.
-name|filter
-argument_list|(
-literal|null
-argument_list|,
-name|Properties
-operator|.
-name|DC_CREATOR
-argument_list|,
-name|LANG_ID_ENGINE_NAME
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|langaugeEnhancementCreatorTriples
-operator|.
-name|hasNext
-argument_list|()
-condition|)
-block|{
 name|String
 name|lang
 init|=
 name|EnhancementEngineHelper
 operator|.
-name|getString
+name|getLanguage
 argument_list|(
-name|metadata
-argument_list|,
-name|langaugeEnhancementCreatorTriples
-operator|.
-name|next
-argument_list|()
-operator|.
-name|getSubject
-argument_list|()
-argument_list|,
-name|Properties
-operator|.
-name|DC_LANGUAGE
+name|ci
 argument_list|)
 decl_stmt|;
+comment|//        if(lang != null){
+comment|//        MGraph metadata = ci.getMetadata();
+comment|//        Iterator<Triple> langaugeEnhancementCreatorTriples =
+comment|//            metadata.filter(null, Properties.DC_CREATOR, LANG_ID_ENGINE_NAME);
+comment|//        if(langaugeEnhancementCreatorTriples.hasNext()){
+comment|//            String lang = EnhancementEngineHelper.getString(metadata,
+comment|//                langaugeEnhancementCreatorTriples.next().getSubject(),
+comment|//                Properties.DC_LANGUAGE);
 if|if
 condition|(
 name|lang
@@ -3068,40 +3029,12 @@ return|return
 literal|"en"
 return|;
 block|}
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unable to extract language for ContentItem %s! Is the %s active?"
-argument_list|,
-name|ci
-operator|.
-name|getUri
-argument_list|()
-operator|.
-name|getUnicodeString
-argument_list|()
-argument_list|,
-name|LANG_ID_ENGINE_NAME
-operator|.
-name|getLexicalForm
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|" ... return 'en' as default"
-argument_list|)
-expr_stmt|;
-return|return
-literal|"en"
-return|;
-block|}
+comment|//        } else {
+comment|//            log.warn("Unable to extract language for ContentItem %s! Is the %s active?",
+comment|//                ci.getUri().getUnicodeString(),LANG_ID_ENGINE_NAME.getLexicalForm());
+comment|//            log.warn(" ... return 'en' as default");
+comment|//            return "en";
+comment|//        }
 block|}
 comment|/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      * Methods for activate() and deactivate() the properties configureable via      * OSGI.      *       * NOTEs:      * Directly calling super.activate and super.deactivate      * is possible but might not be applicable in all cases.      * The activate**(...) and deactivate**() Methods are intended to be      * called by subclasses that need more control over the initialisation      * process.      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      */
 comment|/**      * Activates this Engine. Subclasses should not call this method but rather      * call<ul>      *<li> {@link #activateEntitySearcher(ComponentContext, Dictionary)}      *<li> {@link #initEntityLinkerConfig(Dictionary, EntityLinkerConfig)} and      *<li> {@link #activateTextAnalyzerConfig(Dictionary)}      *<li> {@link #dereferenceEntitiesState} (needs to be called after       * {@link #initEntityLinkerConfig(Dictionary, EntityLinkerConfig)})      *</ul>      * if applicable.      * @param context the Component context      * @throws ConfigurationException if the required {@link #REFERENCED_SITE_ID}      * configuration is missing or any of the other properties has an illegal value      */

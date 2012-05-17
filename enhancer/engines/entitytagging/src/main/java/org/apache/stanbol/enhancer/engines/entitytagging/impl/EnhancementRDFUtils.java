@@ -448,7 +448,7 @@ specifier|public
 class|class
 name|EnhancementRDFUtils
 block|{
-comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param entity      *            the related entity      * @param nameField the field used to extract the name      */
+comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param entity      *            the related entity      * @param nameField the field used to extract the name      * @param lang the preferred language to include      */
 specifier|public
 specifier|static
 name|UriRef
@@ -477,6 +477,9 @@ name|rep
 parameter_list|,
 name|String
 name|nameField
+parameter_list|,
+name|String
+name|lang
 parameter_list|)
 block|{
 comment|// 1. check if the returned Entity does has a label -> if not return null
@@ -546,7 +549,7 @@ argument_list|()
 operator|.
 name|startsWith
 argument_list|(
-literal|"en"
+name|lang
 argument_list|)
 condition|)
 block|{

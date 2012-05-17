@@ -820,6 +820,30 @@ operator|+
 literal|" EntityAnnotations found ..."
 argument_list|)
 expr_stmt|;
+name|int
+name|topicAnnoNum
+init|=
+name|EnhancementStructureHelper
+operator|.
+name|validateAllTopicAnnotations
+argument_list|(
+name|ci
+operator|.
+name|getMetadata
+argument_list|()
+argument_list|,
+name|expectedValues
+argument_list|)
+decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+name|entityAnnoNum
+operator|+
+literal|" TopicAnnotations found ..."
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 specifier|static

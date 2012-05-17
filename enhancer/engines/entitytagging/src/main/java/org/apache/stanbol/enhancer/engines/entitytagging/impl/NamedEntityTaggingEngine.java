@@ -493,6 +493,24 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
+name|helper
+operator|.
+name|EnhancementEngineHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
 name|impl
 operator|.
 name|AbstractEnhancementEngine
@@ -692,6 +710,24 @@ operator|.
 name|rdf
 operator|.
 name|RdfResourceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
+name|Constraint
 import|;
 end_import
 
@@ -1110,6 +1146,15 @@ init|=
 name|Constants
 operator|.
 name|SERVICE_RANKING
+decl_stmt|;
+comment|/**      * The default language for labels included in the enhancement metadata      * (if not available for the parsed content).      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|DEFAULT_LANGUAGE
+init|=
+literal|"en"
 decl_stmt|;
 comment|/**      * Service of the Entityhub that manages all the active referenced Site. This Service is used to lookup the      * configured Referenced Site when we need to enhance a content item.      */
 annotation|@
@@ -1846,6 +1891,10 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|//the language extracted for the parsed content or NULL if not available
+name|String
+name|contentLangauge
+decl_stmt|;
 name|ci
 operator|.
 name|getLock
@@ -1859,6 +1908,15 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
+name|contentLangauge
+operator|=
+name|EnhancementEngineHelper
+operator|.
+name|getLanguage
+argument_list|(
+name|ci
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|Iterator
@@ -2096,6 +2154,8 @@ name|entry
 operator|.
 name|getValue
 argument_list|()
+argument_list|,
+name|contentLangauge
 argument_list|)
 decl_stmt|;
 if|if
@@ -2297,6 +2357,16 @@ name|getRepresentation
 argument_list|()
 argument_list|,
 name|nameField
+argument_list|,
+comment|//TODO: maybe we want labels in a different language than the
+comment|//      language of the content (e.g. Accept-Language header)?!
+name|contentLangauge
+operator|==
+literal|null
+condition|?
+name|DEFAULT_LANGUAGE
+else|:
+name|contentLangauge
 argument_list|)
 expr_stmt|;
 if|if
@@ -2367,7 +2437,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Computes the Enhancements      * @param site The {@link ReferencedSiteException} id or<code>null</code> to      * use the {@link Entityhub}      * @param literalFactory the {@link LiteralFactory} used to create RDF Literals      * @param contentItemId the id of the contentItem      * @param textAnnotation the text annotation to enhance      * @param subsumedAnnotations other text annotations for the same entity       * @return the suggested {@link Entity entities}      * @throws EntityhubException On any Error while looking up Entities via      * the Entityhub      */
+comment|/**      * Computes the Enhancements      * @param site The {@link ReferencedSiteException} id or<code>null</code> to      * use the {@link Entityhub}      * @param literalFactory the {@link LiteralFactory} used to create RDF Literals      * @param contentItemId the id of the contentItem      * @param textAnnotation the text annotation to enhance      * @param subsumedAnnotations other text annotations for the same entity       * @param language the language of the analyzed text or<code>null</code>      * if not available.      * @return the suggested {@link Entity entities}      * @throws EntityhubException On any Error while looking up Entities via      * the Entityhub      */
 specifier|protected
 specifier|final
 name|List
@@ -2387,6 +2457,9 @@ argument_list|<
 name|UriRef
 argument_list|>
 name|subsumedAnnotations
+parameter_list|,
+name|String
+name|language
 parameter_list|)
 throws|throws
 name|EntityhubException
@@ -2427,12 +2500,25 @@ name|createFieldQuery
 argument_list|()
 decl_stmt|;
 comment|// replace spaces with plus to create an AND search for all words in the name!
-name|query
-operator|.
-name|setConstraint
-argument_list|(
-name|nameField
-argument_list|,
+name|Constraint
+name|labelConstraint
+decl_stmt|;
+comment|//TODO: make case sensitivity configurable
+name|boolean
+name|casesensitive
+init|=
+literal|false
+decl_stmt|;
+if|if
+condition|(
+name|language
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//search labels in the language and without language
+name|labelConstraint
+operator|=
 operator|new
 name|TextConstraint
 argument_list|(
@@ -2440,10 +2526,40 @@ name|namedEntity
 operator|.
 name|getName
 argument_list|()
-argument_list|)
+argument_list|,
+name|casesensitive
+argument_list|,
+name|language
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
-comment|// name.replace(' ', '+')));
+block|}
+else|else
+block|{
+name|labelConstraint
+operator|=
+operator|new
+name|TextConstraint
+argument_list|(
+name|namedEntity
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|casesensitive
+argument_list|)
+expr_stmt|;
+block|}
+name|query
+operator|.
+name|setConstraint
+argument_list|(
+name|nameField
+argument_list|,
+name|labelConstraint
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|OntologicalClasses
@@ -2815,6 +2931,11 @@ argument_list|()
 operator|==
 literal|null
 operator|||
+operator|(
+name|language
+operator|!=
+literal|null
+operator|&&
 name|label
 operator|.
 name|getLanguage
@@ -2822,8 +2943,9 @@ argument_list|()
 operator|.
 name|startsWith
 argument_list|(
-literal|"en"
+name|language
 argument_list|)
+operator|)
 condition|)
 block|{
 if|if

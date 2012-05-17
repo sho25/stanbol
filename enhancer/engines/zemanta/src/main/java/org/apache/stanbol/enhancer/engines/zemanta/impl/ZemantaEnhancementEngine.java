@@ -37,7 +37,67 @@ name|helper
 operator|.
 name|EnhancementEngineHelper
 operator|.
+name|createTextEnhancement
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|EnhancementEngineHelper
+operator|.
+name|createTopicEnhancement
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|EnhancementEngineHelper
+operator|.
 name|getReferences
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+operator|.
+name|SKOS_CONCEPT
 import|;
 end_import
 
@@ -911,6 +971,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|OntologicalClasses
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|framework
@@ -1616,6 +1694,12 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|//add the root Text annotation as soon as the first TopicAnnotation is added.
+name|UriRef
+name|textAnnotation
+init|=
+literal|null
+decl_stmt|;
 while|while
 condition|(
 name|categories
@@ -1755,13 +1839,47 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//now write the Stanbol Enhancer entity enhancement
+if|if
+condition|(
+name|textAnnotation
+operator|==
+literal|null
+condition|)
+block|{
+comment|//this is the first category ... create the TextAnnotation used
+comment|//to link all fise:TopicAnnotations
+name|textAnnotation
+operator|=
+name|createTextEnhancement
+argument_list|(
+name|enhancements
+argument_list|,
+name|this
+argument_list|,
+name|ciId
+argument_list|)
+expr_stmt|;
+name|enhancements
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|textAnnotation
+argument_list|,
+name|DC_TYPE
+argument_list|,
+name|SKOS_CONCEPT
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|//now write the TopicAnnotation
 name|UriRef
 name|categoryEnhancement
 init|=
-name|EnhancementEngineHelper
-operator|.
-name|createEntityEnhancement
+name|createTopicEnhancement
 argument_list|(
 name|enhancements
 argument_list|,
@@ -1770,6 +1888,22 @@ argument_list|,
 name|ciId
 argument_list|)
 decl_stmt|;
+comment|//make related to the EntityAnnotation
+name|enhancements
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|categoryEnhancement
+argument_list|,
+name|DC_RELATION
+argument_list|,
+name|textAnnotation
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|//write the title
 name|enhancements
 operator|.
@@ -1860,7 +1994,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//we need to write the entity type and the dc:type
+comment|//we need to write the fise:entity-type
+comment|//as of STANBOL-617 we use now both the zemanta:Category AND the skos:Concept
+comment|//type. dc:type is no longer used as this is only used by fise:TextAnnotations
 comment|// see http://wiki.iks-project.eu/index.php/ZemantaEnhancementEngine#Mapping_of_Categories
 comment|// for more Information
 name|enhancements
@@ -1872,13 +2008,13 @@ name|TripleImpl
 argument_list|(
 name|categoryEnhancement
 argument_list|,
-name|DC_TYPE
+name|ENHANCER_ENTITY_TYPE
 argument_list|,
-name|ENHANCER_CATEGORY
+name|SKOS_CONCEPT
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Use the Zemanta Category as type for the referred Entity
+comment|//Use also Zemanta Category as type for the referred Entity
 name|enhancements
 operator|.
 name|add

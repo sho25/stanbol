@@ -2994,7 +2994,7 @@ argument_list|(
 literal|"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine"
 argument_list|)
 decl_stmt|;
-comment|/**      * Extracts the language of the parsed ContentItem from the metadata      * @param ci the content item      * @return the language      */
+comment|/**      * Extracts the language of the parsed ContentItem by using      * {@link EnhancementEngineHelper#getLanguage(ContentItem)} and       * {@link #defaultLang} as default      * @param ci the content item      * @return the language      */
 specifier|private
 name|String
 name|extractLanguage
@@ -3003,63 +3003,23 @@ name|ContentItem
 name|ci
 parameter_list|)
 block|{
-name|MGraph
-name|metadata
-init|=
-name|ci
-operator|.
-name|getMetadata
-argument_list|()
-decl_stmt|;
-name|Iterator
-argument_list|<
-name|Triple
-argument_list|>
-name|langaugeEnhancementCreatorTriples
-init|=
-name|metadata
-operator|.
-name|filter
-argument_list|(
-literal|null
-argument_list|,
-name|Properties
-operator|.
-name|DC_CREATOR
-argument_list|,
-name|LANG_ID_ENGINE_NAME
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|langaugeEnhancementCreatorTriples
-operator|.
-name|hasNext
-argument_list|()
-condition|)
-block|{
 name|String
 name|lang
 init|=
 name|EnhancementEngineHelper
 operator|.
-name|getString
+name|getLanguage
 argument_list|(
-name|metadata
-argument_list|,
-name|langaugeEnhancementCreatorTriples
-operator|.
-name|next
-argument_list|()
-operator|.
-name|getSubject
-argument_list|()
-argument_list|,
-name|Properties
-operator|.
-name|DC_LANGUAGE
+name|ci
 argument_list|)
 decl_stmt|;
+comment|//        MGraph metadata = ci.getMetadata();
+comment|//        Iterator<Triple> langaugeEnhancementCreatorTriples =
+comment|//            metadata.filter(null, Properties.DC_CREATOR, LANG_ID_ENGINE_NAME);
+comment|//        if(langaugeEnhancementCreatorTriples.hasNext()){
+comment|//            String lang = EnhancementEngineHelper.getString(metadata,
+comment|//                langaugeEnhancementCreatorTriples.next().getSubject(),
+comment|//                Properties.DC_LANGUAGE);
 if|if
 condition|(
 name|lang
@@ -3115,42 +3075,12 @@ return|return
 name|defaultLang
 return|;
 block|}
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Unable to extract language for ContentItem {}! Is the {} active?"
-argument_list|,
-name|ci
-operator|.
-name|getUri
-argument_list|()
-operator|.
-name|getUnicodeString
-argument_list|()
-argument_list|,
-name|LANG_ID_ENGINE_NAME
-operator|.
-name|getLexicalForm
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... return '{}' as default"
-argument_list|,
-name|defaultLang
-argument_list|)
-expr_stmt|;
-return|return
-name|defaultLang
-return|;
-block|}
+comment|//        } else {
+comment|//            log.info("Unable to extract language for ContentItem {}! Is the {} active?",
+comment|//                ci.getUri().getUnicodeString(),LANG_ID_ENGINE_NAME.getLexicalForm());
+comment|//            log.info(" ... return '{}' as default",defaultLang);
+comment|//            return defaultLang;
+comment|//        }
 block|}
 block|}
 end_class

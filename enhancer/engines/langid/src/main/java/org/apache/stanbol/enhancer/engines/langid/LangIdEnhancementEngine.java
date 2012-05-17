@@ -40,6 +40,46 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
+name|DC_TYPE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|TechnicalClasses
+operator|.
+name|DCTERMS_LINGUISTIC_SYSTEM
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -246,6 +286,22 @@ operator|.
 name|servicesapi
 operator|.
 name|Blob
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|Chain
 import|;
 end_import
 
@@ -514,7 +570,7 @@ name|PROBE_LENGTH_PROP
 init|=
 literal|"org.apache.stanbol.enhancer.engines.langid.probe-length"
 decl_stmt|;
-comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_PRE_PROCESSING}      */
+comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_PRE_PROCESSING} - 2<p>      * NOTE: this information is used by the default and weighed {@link Chain}      * implementation to determine the processing order of       * {@link EnhancementEngine}s. Other {@link Chain} implementation do not      * use this information.      */
 specifier|public
 specifier|static
 specifier|final
@@ -948,6 +1004,21 @@ name|PlainLiteralImpl
 argument_list|(
 name|language
 argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|g
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|textEnhancement
+argument_list|,
+name|DC_TYPE
+argument_list|,
+name|DCTERMS_LINGUISTIC_SYSTEM
 argument_list|)
 argument_list|)
 expr_stmt|;

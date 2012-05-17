@@ -23,6 +23,18 @@ end_package
 
 begin_import
 import|import static
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -122,7 +134,20 @@ specifier|public
 class|class
 name|LangIdTest
 block|{
-comment|/**      * This contains the text categorizer to test.      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|TEST_FILE_NAME
+init|=
+literal|"en.txt"
+decl_stmt|;
+comment|/**      * This contains the text used for testing      */
+specifier|private
+specifier|static
+name|String
+name|text
+decl_stmt|;
 comment|/**      * This initializes the text categorizer.      */
 annotation|@
 name|BeforeClass
@@ -139,6 +164,39 @@ operator|.
 name|initProfiles
 argument_list|()
 expr_stmt|;
+name|InputStream
+name|in
+init|=
+name|LangIdTest
+operator|.
+name|class
+operator|.
+name|getClassLoader
+argument_list|()
+operator|.
+name|getResourceAsStream
+argument_list|(
+name|TEST_FILE_NAME
+argument_list|)
+decl_stmt|;
+name|assertNotNull
+argument_list|(
+literal|"failed to load resource "
+operator|+
+name|TEST_FILE_NAME
+argument_list|,
+name|in
+argument_list|)
+expr_stmt|;
+name|text
+operator|=
+name|IOUtils
+operator|.
+name|toString
+argument_list|(
+name|in
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**      * Tests the language identification.      *      * @throws IOException if there is an error when reading the text      */
 annotation|@
@@ -150,46 +208,6 @@ parameter_list|()
 throws|throws
 name|IOException
 block|{
-name|String
-name|testFileName
-init|=
-literal|"en.txt"
-decl_stmt|;
-name|InputStream
-name|in
-init|=
-name|this
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getClassLoader
-argument_list|()
-operator|.
-name|getResourceAsStream
-argument_list|(
-name|testFileName
-argument_list|)
-decl_stmt|;
-name|assertNotNull
-argument_list|(
-literal|"failed to load resource "
-operator|+
-name|testFileName
-argument_list|,
-name|in
-argument_list|)
-expr_stmt|;
-name|String
-name|text
-init|=
-name|IOUtils
-operator|.
-name|toString
-argument_list|(
-name|in
-argument_list|)
-decl_stmt|;
 name|LanguageIdentifier
 name|tc
 init|=
