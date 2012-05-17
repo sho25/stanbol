@@ -369,7 +369,7 @@ name|header
 operator|.
 name|add
 argument_list|(
-literal|"Access-Control-Request-Methods"
+literal|"Access-Control-Request-Method"
 argument_list|,
 literal|"PUT"
 argument_list|)

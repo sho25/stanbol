@@ -160,9 +160,9 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|REQUEST_METHODS
+name|REQUEST_METHOD
 init|=
-literal|"Access-Control-Request-Methods"
+literal|"Access-Control-Request-Method"
 decl_stmt|;
 comment|/**      * The "Access-Control-Request-Headers" header      */
 specifier|public
@@ -182,7 +182,7 @@ name|ALLOW_HEADERS
 init|=
 literal|"Access-Control-Allow-Headers"
 decl_stmt|;
-comment|/**      * The "Access-Control-Allow-Method" header      */
+comment|/**      * The "Access-Control-Allow-Methods" header      */
 specifier|public
 specifier|static
 specifier|final
