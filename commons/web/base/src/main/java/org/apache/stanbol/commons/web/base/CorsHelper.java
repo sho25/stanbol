@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -36,6 +36,36 @@ operator|.
 name|JerseyEndpoint
 operator|.
 name|CORS_ORIGIN
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|JerseyEndpoint
+operator|.
+name|CORS_ACCESS_CONTROL_EXPOSE_HEADERS
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
 import|;
 end_import
 
@@ -128,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utilities for adding<a href="http://dev.w3.org/2006/waf/access-control/">  * CORS</a> support to the Stanbol RESTful API<p>  *<p> Note that this utility depends on the   * {@link JerseyEndpoint#CORS_ORIGIN} property read from the Servlet Context.<p>  * Currently this support for<ul>  *<li> Origin header  *<li> Preflight Requests.  *</ul>  * @author Rupert Westenthaler  *  */
+comment|/**  * Utilities for adding<a href="http://dev.w3.org/2006/waf/access-control/"> CORS</a> support to the Stanbol  * RESTful API  *<p>  *<p>  * Note that this utility depends on the {@link JerseyEndpoint#CORS_ORIGIN} property read from the Servlet  * Context.  *<p>  * Currently this support for  *<ul>  *<li>Origin header  *<li>Preflight Requests.  *</ul>  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -191,7 +221,16 @@ name|ALLOW_METHODS
 init|=
 literal|"Access-Control-Allow-Methods"
 decl_stmt|;
-comment|/**      * The default methods for the Access-Control-Request-Method header field.      * Set to "GET, POST, OPTIONS"      */
+comment|/**      * The "Access-Control-Expose-Headers" header      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|EXPOSE_HEADERS
+init|=
+literal|"Access-Control-Expose-Headers"
+decl_stmt|;
+comment|/**      * The default methods for the Access-Control-Request-Method header field. Set to "GET, POST, OPTIONS"      */
 specifier|public
 specifier|static
 specifier|final
@@ -200,7 +239,7 @@ name|DEFAULT_REQUEST_METHODS
 init|=
 literal|"GET, POST, OPTIONS"
 decl_stmt|;
-comment|/**      * This methods checks the parsed origin against the present configuration      * and returns if the data returned by this Stanbol instance can be shared      * with the parsed origin.<p>      * The allowed<a href="http://enable-cors.org/">CORS</a> origins for this      * Stanbol instance are configured for the {@link JerseyEndpoint} component      * and added to the {@link ServletContext} under the       * {@link JerseyEndpoint#CORS_ORIGIN} key.      * @param origin the origin host      * @param context the servlet context      * @return<code>true</code> if the configuration includes the pased origin      * and the data can be shared with this host. Otherwise<code>false</code>.      */
+comment|/**      * This methods checks the parsed origin against the present configuration and returns if the data      * returned by this Stanbol instance can be shared with the parsed origin.      *<p>      * The allowed<a href="http://enable-cors.org/">CORS</a> origins for this Stanbol instance are configured      * for the {@link JerseyEndpoint} component and added to the {@link ServletContext} under the      * {@link JerseyEndpoint#CORS_ORIGIN} key.      *       * @param origin      *            the origin host      * @param context      *            the servlet context      * @return<code>true</code> if the configuration includes the pased origin and the data can be shared      *         with this host. Otherwise<code>false</code>.      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -253,7 +292,7 @@ name|origin
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds the Origin response header to the parsed response builder       * based on the headers of an request.      * @param context the ServletContext holding the      * {@link JerseyEndpoint#CORS_ORIGIN} configuration.      * @param responseBuilder The {@link ResponseBuilder} the origin header is added to      * if (1) a origin header is present in the request headers and (1) the parsed      * origin is compatible with the configuration set for the {@link JerseyEndpoint}.      * @param requestHeaders the request headers      * @return<code>true</code> if the origin header was added. Otherwise      *<code>false</code>      * @throws WebApplicationException it the request headers define multiple      * values for the "Origin" header an WebApplicationException with the Status      * "BAD_REQUEST" is thrown.      */
+comment|/**      * Adds the Origin response header to the parsed response builder based on the headers of an request.      *       * @param context      *            the ServletContext holding the {@link JerseyEndpoint#CORS_ORIGIN} configuration.      * @param responseBuilder      *            The {@link ResponseBuilder} the origin header is added to if (1) a origin header is present      *            in the request headers and (1) the parsed origin is compatible with the configuration set      *            for the {@link JerseyEndpoint}.      * @param requestHeaders      *            the request headers      * @return<code>true</code> if the origin header was added. Otherwise<code>false</code>      * @throws WebApplicationException      *             it the request headers define multiple values for the "Origin" header an      *             WebApplicationException with the Status "BAD_REQUEST" is thrown.      */
 specifier|public
 specifier|static
 name|boolean
@@ -360,7 +399,7 @@ literal|"*"
 argument_list|)
 condition|)
 block|{
-comment|//if config includes *
+comment|// if config includes *
 name|responseBuilder
 operator|.
 name|header
@@ -372,7 +411,16 @@ argument_list|,
 literal|"*"
 argument_list|)
 expr_stmt|;
-comment|//add also * to the header
+comment|// add also * to the header
+name|addExposedHeaders
+argument_list|(
+name|servletContext
+argument_list|,
+name|responseBuilder
+argument_list|,
+name|requestHeaders
+argument_list|)
+expr_stmt|;
 return|return
 literal|true
 return|;
@@ -393,7 +441,16 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-comment|//otherwise add the specific Origin host
+comment|// otherwise add the specific Origin host
+name|addExposedHeaders
+argument_list|(
+name|servletContext
+argument_list|,
+name|responseBuilder
+argument_list|,
+name|requestHeaders
+argument_list|)
+expr_stmt|;
 name|responseBuilder
 operator|.
 name|header
@@ -420,7 +477,134 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Enable CORS for OPTION requests based on the provided request headers and      * the allowMethods.<p>      * The {@link #addCORSOrigin(ResponseBuilder, HttpHeaders)} method is used       * deal with the origin. The allowMethods are set to the parsed values or to      * {@link CorsHelper#DEFAULT_REQUEST_METHODS} if non is parsed of the      * parsed values do not contain a single value that is not<code>null</code>      * nor empty.      * @param context the ServletContext holding the      * {@link JerseyEndpoint#CORS_ORIGIN} configuration.      * @param responseBuilder The {@link ResponseBuilder} to add the CORS headers      * @param requestHeaders the headers of the request      * @param allowMethods the allowMethods to if<code>null</code> or empty, the      * {@link CorsHelper#DEFAULT_REQUEST_METHODS} are added      * @return<code>true</code> if the CORS header where added or       * @throws WebApplicationException it the request headers define multiple      * values for the "Origin" header an WebApplicationException with the Status      * "BAD_REQUEST" is thrown.      * @throws IllegalArgumentException if a parsed allowMethods is<code>null</code>      * or empty. NOT if the String array is<code>null</code> or empty, but if      * any of the items within the array is<code>null</code> or empty!      */
+comment|/**      * Adds the      *       * @param servletContext      * @param responseBuilder      * @param httpHeaders      */
+specifier|private
+specifier|static
+name|void
+name|addExposedHeaders
+parameter_list|(
+name|ServletContext
+name|servletContext
+parameter_list|,
+name|ResponseBuilder
+name|responseBuilder
+parameter_list|,
+name|HttpHeaders
+name|httpHeaders
+parameter_list|)
+block|{
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|exposedHeadersConfig
+init|=
+operator|(
+name|Set
+argument_list|<
+name|String
+argument_list|>
+operator|)
+name|servletContext
+operator|.
+name|getAttribute
+argument_list|(
+name|CORS_ACCESS_CONTROL_EXPOSE_HEADERS
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|exposedHeadersConfig
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|exposedHeadersConfig
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|StringBuilder
+name|requestHeader
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+name|boolean
+name|added
+init|=
+literal|false
+decl_stmt|;
+for|for
+control|(
+name|String
+name|header
+range|:
+name|exposedHeadersConfig
+control|)
+block|{
+if|if
+condition|(
+name|header
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|header
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+if|if
+condition|(
+name|added
+condition|)
+block|{
+name|requestHeader
+operator|.
+name|append
+argument_list|(
+literal|", "
+argument_list|)
+expr_stmt|;
+block|}
+name|requestHeader
+operator|.
+name|append
+argument_list|(
+name|header
+argument_list|)
+expr_stmt|;
+name|added
+operator|=
+literal|true
+expr_stmt|;
+block|}
+block|}
+if|if
+condition|(
+name|added
+condition|)
+block|{
+name|responseBuilder
+operator|.
+name|header
+argument_list|(
+name|EXPOSE_HEADERS
+argument_list|,
+name|requestHeader
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+comment|/**      * Enable CORS for OPTION requests based on the provided request headers and the allowMethods.      *<p>      * The {@link #addCORSOrigin(ResponseBuilder, HttpHeaders)} method is used deal with the origin. The      * allowMethods are set to the parsed values or to {@link CorsHelper#DEFAULT_REQUEST_METHODS} if non is      * parsed of the parsed values do not contain a single value that is not<code>null</code> nor empty.      *       * @param context      *            the ServletContext holding the {@link JerseyEndpoint#CORS_ORIGIN} configuration.      * @param responseBuilder      *            The {@link ResponseBuilder} to add the CORS headers      * @param requestHeaders      *            the headers of the request      * @param allowMethods      *            the allowMethods to if<code>null</code> or empty, the      *            {@link CorsHelper#DEFAULT_REQUEST_METHODS} are added      * @return<code>true</code> if the CORS header where added or      * @throws WebApplicationException      *             it the request headers define multiple values for the "Origin" header an      *             WebApplicationException with the Status "BAD_REQUEST" is thrown.      * @throws IllegalArgumentException      *             if a parsed allowMethods is<code>null</code> or empty. NOT if the String array is      *<code>null</code> or empty, but if any of the items within the array is<code>null</code>      *             or empty!      */
 specifier|public
 specifier|static
 name|boolean
@@ -442,7 +626,7 @@ parameter_list|)
 throws|throws
 name|WebApplicationException
 block|{
-comment|//first check if the Origin is present
+comment|// first check if the Origin is present
 if|if
 condition|(
 name|addCORSOrigin
@@ -455,7 +639,7 @@ name|requestHeaders
 argument_list|)
 condition|)
 block|{
-comment|//now add the allowedMethods
+comment|// now add the allowedMethods
 name|boolean
 name|added
 init|=
@@ -523,7 +707,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//throw an exception to make it easier to debug errors
+comment|// throw an exception to make it easier to debug errors
 throw|throw
 operator|new
 name|IllegalArgumentException
@@ -564,9 +748,9 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//third replay parsed "Access-Control-Request-Headers" values
-comment|//currently there is no need to restrict such headers so the simplest
-comment|//way is to return them as they are parsed
+comment|// third replay parsed "Access-Control-Request-Headers" values
+comment|// currently there is no need to restrict such headers so the simplest
+comment|// way is to return them as they are parsed
 name|List
 argument_list|<
 name|String
