@@ -2912,7 +2912,7 @@ name|labelTokens
 operator|.
 name|length
 operator|&&
-name|foundTokenMatch
+name|foundTokens
 operator|==
 name|coveredTokens
 condition|)
