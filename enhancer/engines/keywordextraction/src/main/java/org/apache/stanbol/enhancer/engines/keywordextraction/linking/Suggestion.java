@@ -330,6 +330,10 @@ condition|(
 name|span
 operator|<=
 name|count
+operator|&&
+name|labelTokenCount
+operator|<=
+name|count
 condition|)
 block|{
 throw|throw
@@ -340,7 +344,7 @@ literal|"For "
 operator|+
 name|match
 operator|+
-literal|" matches the token span MUST BE> than the token count!"
+literal|" matches the (token span OR label token count) MUST BE> than the token count!"
 argument_list|)
 throw|;
 block|}
@@ -362,7 +366,22 @@ literal|"For "
 operator|+
 name|match
 operator|+
-literal|" matches the token span MUST BE equals to the token count!"
+literal|" matches the token span '"
+operator|+
+name|span
+operator|+
+literal|"' MUST BE equals to the token count '"
+operator|+
+name|count
+operator|+
+literal|"' (label: '"
+operator|+
+name|label
+operator|.
+name|getText
+argument_list|()
+operator|+
+literal|"')!"
 argument_list|)
 throw|;
 block|}

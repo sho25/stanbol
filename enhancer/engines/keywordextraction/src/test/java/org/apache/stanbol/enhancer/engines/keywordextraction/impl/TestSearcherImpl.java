@@ -549,6 +549,17 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Integer
+name|getLimit
+parameter_list|()
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 end_class
 

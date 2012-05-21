@@ -1667,6 +1667,22 @@ name|DEFAULT_SUGGESTION_COMPARATOR
 argument_list|)
 expr_stmt|;
 block|}
+comment|//TODO: Work in Progress feature ... allowing to refine search if no
+comment|//      suggestion is found but results where present
+comment|//      However this would need full limit/offset support for the
+comment|//      EntitySearcher. (rwesten 2012-05-21)
+comment|//        Integer maxResults = entitySearcher.getLimit();
+comment|//        if(maxResults == null){
+comment|//            maxResults = 1; //fall back to 1 if limit is not known
+comment|//        }
+comment|//        if(suggestions.isEmpty()&& //if no suggestions where found
+comment|//                results.size()>= maxResults&& //but the query had max results
+comment|//                //than the actual entity might not be within the first LIMIT results
+comment|//                searchStrings.size()> 1){ //if multiple words where used for the search
+comment|//            //try again with only a single word
+comment|//            suggestions = lookupEntities(Collections.singletonList(searchStrings.get(0)));
+comment|//
+comment|//        }
 comment|//remove all elements> config.getMaxSuggestions()
 return|return
 name|suggestions
@@ -2577,6 +2593,14 @@ argument_list|(
 name|currentIndex
 argument_list|)
 expr_stmt|;
+name|boolean
+name|isProcessable
+init|=
+name|isProcessableToken
+argument_list|(
+name|currentToken
+argument_list|)
+decl_stmt|;
 name|currentTokenText
 operator|=
 name|currentToken
@@ -2700,6 +2724,16 @@ name|found
 condition|)
 block|{
 comment|//found
+if|if
+condition|(
+name|isProcessable
+condition|)
+block|{
+name|foundProcessableTokens
+operator|++
+expr_stmt|;
+comment|//only count processable Tokens
+block|}
 name|foundTokens
 operator|++
 expr_stmt|;
@@ -2725,6 +2759,8 @@ operator|++
 expr_stmt|;
 if|if
 condition|(
+name|isProcessable
+operator|||
 name|notFound
 operator|>
 name|maxNotFound
@@ -2850,9 +2886,15 @@ operator|.
 name|getMinFoundTokens
 argument_list|()
 operator|||
+comment|//NOTE (rwesten, 2012-05-21): Do not check if all covered
+comment|//  Tokens are found, but if all Tokens of the Label are
+comment|//  matched! (STANBOL-622)
+comment|//foundTokens == coveredTokens)&&
 name|foundTokens
-operator|==
-name|coveredTokens
+operator|>=
+name|labelTokens
+operator|.
+name|length
 operator|)
 operator|&&
 name|labelMatchScore
@@ -2860,9 +2902,17 @@ operator|>=
 literal|0.6f
 condition|)
 block|{
+comment|//same as above
+comment|//if(foundTokens == coveredTokens){
 if|if
 condition|(
 name|foundTokens
+operator|==
+name|labelTokens
+operator|.
+name|length
+operator|&&
+name|foundTokenMatch
 operator|==
 name|coveredTokens
 condition|)

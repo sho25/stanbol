@@ -4737,6 +4737,7 @@ literal|"The ID of the Referenced Site is a required Parameter and MUST NOT be a
 argument_list|)
 throw|;
 block|}
+comment|//TODO: make limit configurable!
 if|if
 condition|(
 name|Entityhub
@@ -4761,6 +4762,8 @@ name|context
 operator|.
 name|getBundleContext
 argument_list|()
+argument_list|,
+literal|10
 argument_list|)
 expr_stmt|;
 block|}
@@ -4777,6 +4780,8 @@ name|getBundleContext
 argument_list|()
 argument_list|,
 name|refSiteId
+argument_list|,
+literal|10
 argument_list|)
 expr_stmt|;
 block|}

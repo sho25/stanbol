@@ -192,6 +192,11 @@ name|boolean
 name|supportsOfflineMode
 parameter_list|()
 function_decl|;
+comment|/**      * The maximum number of {@link Representation}s returned for {@link #lookup(String, Set, List, String...)}      * queries      * @return the Number or<code>null</code> if not known      */
+name|Integer
+name|getLimit
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
