@@ -96,7 +96,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|TestDataFileProvider
+name|DbPediaDataFileProvider
 implements|implements
 name|DataFileProvider
 block|{
@@ -218,7 +218,7 @@ block|{
 name|ClassLoader
 name|cl
 init|=
-name|TestDataFileProvider
+name|DbPediaDataFileProvider
 operator|.
 name|class
 operator|.

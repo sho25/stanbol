@@ -137,26 +137,6 @@ name|rdf
 operator|.
 name|Properties
 operator|.
-name|RDFS_LABEL
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|rdf
-operator|.
-name|Properties
-operator|.
 name|RDF_TYPE
 import|;
 end_import
@@ -448,7 +428,7 @@ specifier|public
 class|class
 name|EnhancementRDFUtils
 block|{
-comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param entity      *            the related entity      * @param nameField the field used to extract the name      * @param lang the preferred language to include      */
+comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param suggestion      *            the entity suggestion      * @param nameField the field used to extract the name      * @param lang the preferred language to include or<code>null</code> if none      */
 specifier|public
 specifier|static
 name|UriRef
@@ -472,8 +452,8 @@ name|NonLiteral
 argument_list|>
 name|relatedEnhancements
 parameter_list|,
-name|Representation
-name|rep
+name|Suggestion
+name|suggestion
 parameter_list|,
 name|String
 name|nameField
@@ -482,13 +462,70 @@ name|String
 name|lang
 parameter_list|)
 block|{
-comment|// 1. check if the returned Entity does has a label -> if not return null
-comment|// add labels (set only a single label. Use "en" if available!
+name|Representation
+name|rep
+init|=
+name|suggestion
+operator|.
+name|getEntity
+argument_list|()
+operator|.
+name|getRepresentation
+argument_list|()
+decl_stmt|;
+comment|// 1. extract the "best label"
+comment|//Start with the matched one
 name|Text
 name|label
 init|=
-literal|null
+name|suggestion
+operator|.
+name|getMatchedLabel
+argument_list|()
 decl_stmt|;
+comment|//if the matched label is not in the requested language
+name|boolean
+name|langMatch
+init|=
+operator|(
+name|lang
+operator|==
+literal|null
+operator|&&
+name|label
+operator|.
+name|getLanguage
+argument_list|()
+operator|==
+literal|null
+operator|)
+operator|||
+operator|(
+name|label
+operator|.
+name|getLanguage
+argument_list|()
+operator|!=
+literal|null
+operator|&&
+name|label
+operator|.
+name|getLanguage
+argument_list|()
+operator|.
+name|startsWith
+argument_list|(
+name|lang
+argument_list|)
+operator|)
+decl_stmt|;
+comment|//search if a better label is available for this Entity
+if|if
+condition|(
+operator|!
+name|langMatch
+condition|)
+block|{
 name|Iterator
 argument_list|<
 name|Text
@@ -508,6 +545,9 @@ name|labels
 operator|.
 name|hasNext
 argument_list|()
+operator|&&
+operator|!
+name|langMatch
 condition|)
 block|{
 name|Text
@@ -518,23 +558,22 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|label
+name|langMatch
+operator|=
+operator|(
+name|lang
 operator|==
 literal|null
-condition|)
-block|{
-name|label
-operator|=
+operator|&&
 name|actLabel
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|//use startWith to match also en-GB and en-US ...
-if|if
-condition|(
+operator|.
+name|getLanguage
+argument_list|()
+operator|==
+literal|null
+operator|)
+operator|||
+operator|(
 name|actLabel
 operator|.
 name|getLanguage
@@ -551,8 +590,15 @@ name|startsWith
 argument_list|(
 name|lang
 argument_list|)
+operator|)
+expr_stmt|;
+if|if
+condition|(
+name|langMatch
 condition|)
 block|{
+comment|//if the language matches ->
+comment|//override the matched label
 name|label
 operator|=
 name|actLabel
@@ -560,17 +606,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-if|if
-condition|(
-name|label
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
+comment|//else the matched label will be the best to use
 name|Literal
 name|literal
 decl_stmt|;
@@ -703,66 +739,16 @@ name|literal
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// TODO: add real confidence values!
-comment|// -> in case of SolrYards this will be a Lucene score and not within the range [0..1]
-comment|// -> in case of SPARQL there will be no score information at all.
-name|Object
-name|score
-init|=
-name|rep
-operator|.
-name|getFirst
-argument_list|(
-name|RdfResourceEnum
-operator|.
-name|resultScore
-operator|.
-name|getUri
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|Double
-name|scoreValue
-init|=
-operator|new
-name|Double
-argument_list|(
-operator|-
-literal|1
-argument_list|)
-decl_stmt|;
-comment|// use -1 if no score is available!
 if|if
 condition|(
-name|score
+name|suggestion
+operator|.
+name|getScore
+argument_list|()
 operator|!=
 literal|null
 condition|)
 block|{
-try|try
-block|{
-name|scoreValue
-operator|=
-name|Double
-operator|.
-name|valueOf
-argument_list|(
-name|score
-operator|.
-name|toString
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|NumberFormatException
-name|e
-parameter_list|)
-block|{
-comment|// ignore
-block|}
-block|}
 name|graph
 operator|.
 name|add
@@ -778,11 +764,15 @@ name|literalFactory
 operator|.
 name|createTypedLiteral
 argument_list|(
-name|scoreValue
+name|suggestion
+operator|.
+name|getScore
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 name|Iterator
 argument_list|<
 name|Reference
@@ -833,11 +823,55 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// TODO: for now add the information about this entity to the graph
-comment|// -> this might be replaced by some additional engine at the end
-comment|// RdfValueFactory rdfValueFactory = RdfValueFactory.getInstance();
-comment|// RdfRepresentation representation = rdfValueFactory.toRdfRepresentation(entity.getRepresentation());
-comment|// graph.addAll(representation.getRdfGraph());
+comment|//add the name of the ReferencedSite that manages the Entity
+if|if
+condition|(
+name|suggestion
+operator|.
+name|getEntity
+argument_list|()
+operator|.
+name|getSite
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+name|graph
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|entityAnnotation
+argument_list|,
+operator|new
+name|UriRef
+argument_list|(
+name|RdfResourceEnum
+operator|.
+name|site
+operator|.
+name|getUri
+argument_list|()
+argument_list|)
+argument_list|,
+operator|new
+name|PlainLiteralImpl
+argument_list|(
+name|suggestion
+operator|.
+name|getEntity
+argument_list|()
+operator|.
+name|getSite
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 return|return
 name|entityAnnotation
 return|;
