@@ -695,6 +695,8 @@ name|actLabel
 expr_stmt|;
 if|if
 condition|(
+name|this
+operator|.
 name|label
 operator|.
 name|getText
