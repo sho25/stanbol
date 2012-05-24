@@ -323,6 +323,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -1323,14 +1333,22 @@ argument_list|,
 name|parser
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
+name|Set
+argument_list|<
+name|MediaType
+argument_list|>
+name|supproted
+init|=
 name|parser
 operator|.
 name|getSupportedTypes
 argument_list|(
 name|context
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|supproted
 operator|.
 name|contains
 argument_list|(
@@ -1772,7 +1790,7 @@ control|)
 block|{
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
 literal|"{}: {}"
 argument_list|,
