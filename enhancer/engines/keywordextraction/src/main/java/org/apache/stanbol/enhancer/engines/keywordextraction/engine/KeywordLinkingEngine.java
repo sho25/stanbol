@@ -1862,7 +1862,8 @@ specifier|private
 name|OfflineMode
 name|offlineMode
 decl_stmt|;
-specifier|private
+comment|/**      * The name of the reference site ('local' or 'entityhub') if the      * Entityhub is used for enhancing      */
+specifier|protected
 name|String
 name|referencedSiteName
 decl_stmt|;
