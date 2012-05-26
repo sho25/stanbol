@@ -2904,7 +2904,7 @@ name|format
 argument_list|(
 literal|"Unable to process ContentItem '%s' with "
 operator|+
-literal|"Enhancement Engine %s because the engine "
+literal|"Enhancement Engine '%s' because the engine "
 argument_list|,
 name|contentItem
 operator|.
@@ -3032,7 +3032,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Enhancement Chain failed because of required Engine '%s' failed"
+literal|"Enhancement Chain failed because of required Engine '%s' failed "
 operator|+
 literal|"with Message: %s"
 argument_list|,
@@ -3045,7 +3045,7 @@ name|setExecutionFaild
 argument_list|(
 name|executionMetadata
 argument_list|,
-name|execution
+name|chainExecutionNode
 argument_list|,
 name|chainMessage
 argument_list|)
@@ -3239,7 +3239,7 @@ name|getString
 argument_list|(
 name|executionMetadata
 argument_list|,
-name|executionPlanNode
+name|chainExecutionNode
 argument_list|,
 name|ExecutionMetadata
 operator|.
