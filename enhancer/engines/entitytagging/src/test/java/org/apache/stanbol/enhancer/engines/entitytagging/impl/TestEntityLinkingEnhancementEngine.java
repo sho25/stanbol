@@ -1551,6 +1551,18 @@ argument_list|,
 name|ENHANCER_ENTITYANNOTATION
 argument_list|)
 decl_stmt|;
+comment|//adding null as expected for confidence makes it a required property
+name|expectedValues
+operator|.
+name|put
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 name|int
 name|entityAnnotationCount
 init|=
@@ -1591,110 +1603,18 @@ argument_list|,
 name|expectedValues
 argument_list|)
 expr_stmt|;
-comment|//validate also that the confidence is between [0..1]
-name|Iterator
-argument_list|<
-name|Triple
-argument_list|>
-name|confidenceIterator
-init|=
-name|ci
-operator|.
-name|getMetadata
-argument_list|()
-operator|.
-name|filter
-argument_list|(
-name|entityAnnotation
-argument_list|,
-name|ENHANCER_CONFIDENCE
-argument_list|,
-literal|null
-argument_list|)
-decl_stmt|;
-comment|//NOTE: the fact that fise:confidence values are TypedLiterals of type xsd:double
-comment|//      is already validated at this point
-comment|//      Also that there are only [0..1] confidence values
-name|assertTrue
-argument_list|(
-literal|"Expected fise:confidence value is missing (entityAnnotation "
-operator|+
-name|entityAnnotation
-operator|+
-literal|")"
-argument_list|,
-name|confidenceIterator
-operator|.
-name|hasNext
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|Double
-name|confidence
-init|=
-name|LiteralFactory
-operator|.
-name|getInstance
-argument_list|()
-operator|.
-name|createObject
-argument_list|(
-name|Double
-operator|.
-name|class
-argument_list|,
-operator|(
-name|TypedLiteral
-operator|)
-name|confidenceIterator
-operator|.
-name|next
-argument_list|()
-operator|.
-name|getObject
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|assertTrue
-argument_list|(
-literal|"fise:confidence MUST BE<= 1 (value= '"
-operator|+
-name|confidence
-operator|+
-literal|"',entityAnnotation "
-operator|+
-name|entityAnnotation
-operator|+
-literal|")"
-argument_list|,
-literal|1.0
-operator|>=
-name|confidence
-operator|.
-name|doubleValue
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|assertTrue
-argument_list|(
-literal|"fise:confidence MUST BE>= 0 (value= '"
-operator|+
-name|confidence
-operator|+
-literal|"',entityAnnotation "
-operator|+
-name|entityAnnotation
-operator|+
-literal|")"
-argument_list|,
-literal|0.0
-operator|<=
-name|confidence
-operator|.
-name|doubleValue
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|//fise:confidence now checked by EnhancementStructureHelper (STANBOL-630)
+comment|//            Iterator<Triple> confidenceIterator = ci.getMetadata().filter(entityAnnotation, ENHANCER_CONFIDENCE, null);
+comment|//            assertTrue("Expected fise:confidence value is missing (entityAnnotation "
+comment|//                    +entityAnnotation+")",confidenceIterator.hasNext());
+comment|//            Double confidence = LiteralFactory.getInstance().createObject(Double.class,
+comment|//                (TypedLiteral)confidenceIterator.next().getObject());
+comment|//            assertTrue("fise:confidence MUST BE<= 1 (value= '"+confidence
+comment|//                    + "',entityAnnotation " +entityAnnotation+")",
+comment|//                    1.0>= confidence.doubleValue());
+comment|//            assertTrue("fise:confidence MUST BE>= 0 (value= '"+confidence
+comment|//                    +"',entityAnnotation "+entityAnnotation+")",
+comment|//                    0.0<= confidence.doubleValue());
 comment|//Test the entityhub:site property (STANBOL-625)
 name|UriRef
 name|ENTITYHUB_SITE

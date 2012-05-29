@@ -3313,6 +3313,18 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
+name|boolean
+name|confidenceRequired
+init|=
+name|expectedValues
+operator|.
+name|containsKey
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|confidenceIterator
@@ -3365,7 +3377,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 name|Double
-name|value
+name|confidence
 init|=
 name|LiteralFactory
 operator|.
@@ -3390,22 +3402,9 @@ literal|"Unable to convert TypedLiteral '"
 operator|+
 name|confidenceResource
 operator|+
-literal|"' to a Java Float value"
+literal|"' to a Java Double value"
 argument_list|,
-name|value
-argument_list|)
-expr_stmt|;
-name|assertTrue
-argument_list|(
-literal|"fise:confidence value "
-operator|+
-name|value
-operator|+
-literal|" MUST BE> 0"
-argument_list|,
-literal|0f
-operator|<
-name|value
+name|confidence
 argument_list|)
 expr_stmt|;
 name|assertFalse
@@ -3416,6 +3415,92 @@ name|confidenceIterator
 operator|.
 name|hasNext
 argument_list|()
+argument_list|)
+expr_stmt|;
+comment|//STANBOL-630: confidence [0..1]
+name|assertTrue
+argument_list|(
+literal|"fise:confidence MUST BE<= 1 (value= '"
+operator|+
+name|confidence
+operator|+
+literal|"',enhancement "
+operator|+
+name|enhancement
+operator|+
+literal|")"
+argument_list|,
+literal|1.0
+operator|>=
+name|confidence
+operator|.
+name|doubleValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertTrue
+argument_list|(
+literal|"fise:confidence MUST BE>= 0 (value= '"
+operator|+
+name|confidence
+operator|+
+literal|"',enhancement "
+operator|+
+name|enhancement
+operator|+
+literal|")"
+argument_list|,
+literal|0.0
+operator|<=
+name|confidence
+operator|.
+name|doubleValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|Resource
+name|expectedConfidence
+init|=
+name|expectedValues
+operator|.
+name|get
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|expectedConfidence
+operator|!=
+literal|null
+condition|)
+block|{
+name|assertEquals
+argument_list|(
+literal|"The fise:confidence for enhancement "
+operator|+
+name|enhancement
+operator|+
+literal|" does not have the expected value"
+argument_list|,
+name|expectedConfidence
+argument_list|,
+name|confidenceResource
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+name|assertFalse
+argument_list|(
+literal|"The required fise:confidence value is missing for enhancement "
+operator|+
+name|enhancement
+argument_list|,
+name|confidenceRequired
 argument_list|)
 expr_stmt|;
 block|}

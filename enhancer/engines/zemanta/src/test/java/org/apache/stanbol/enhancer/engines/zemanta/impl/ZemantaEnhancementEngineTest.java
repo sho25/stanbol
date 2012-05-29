@@ -772,6 +772,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//deactivate require fise:confidence values for fise:TextAnnotations, because
+comment|//the one used to group the TopicAnnotations does not have a confidence value
 name|int
 name|textAnnoNum
 init|=
@@ -794,6 +796,18 @@ argument_list|(
 name|textAnnoNum
 operator|+
 literal|" TextAnnotations found ..."
+argument_list|)
+expr_stmt|;
+comment|//adding null as expected for confidence makes it a required property
+name|expectedValues
+operator|.
+name|put
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|int
@@ -839,7 +853,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-name|entityAnnoNum
+name|topicAnnoNum
 operator|+
 literal|" TopicAnnotations found ..."
 argument_list|)

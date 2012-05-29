@@ -97,6 +97,26 @@ name|rdf
 operator|.
 name|Properties
 operator|.
+name|ENHANCER_CONFIDENCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|rdf
+operator|.
+name|Properties
+operator|.
 name|ENHANCER_END
 import|;
 end_import
@@ -2261,6 +2281,57 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//use the relevance as confidence
+if|if
+condition|(
+name|occ
+operator|.
+name|relevance
+operator|!=
+literal|null
+operator|&&
+name|Double
+operator|.
+name|valueOf
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|compareTo
+argument_list|(
+name|occ
+operator|.
+name|relevance
+argument_list|)
+operator|<=
+literal|0
+condition|)
+block|{
+comment|//we do not know if the relevance is available (may be NULL)
+comment|//or the relevance feature is activated (may be -1)
+name|model
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|textAnnotation
+argument_list|,
+name|ENHANCER_CONFIDENCE
+argument_list|,
+name|literalFactory
+operator|.
+name|createTypedLiteral
+argument_list|(
+name|occ
+operator|.
+name|relevance
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|//create EntityAnnotation only once but add a reference to the textAnnotation
 if|if
 condition|(
@@ -2374,7 +2445,8 @@ comment|//    "c:enableMetadataType=\"GenericRelations,SocialTags\" "+
 comment|//    "c:enableMetadataType=\"GenericRelations\" "+
 literal|"c:outputFormat=\"rdf/xml\" "
 operator|+
-literal|"c:calculateRelevanceScore=\"false\" "
+comment|//NOTE (rw, 2012-05-29) changed to true while working on STANBOL-630
+literal|"c:calculateRelevanceScore=\"true\" "
 operator|+
 literal|"c:omitOutputtingOriginalText=\"true\""
 operator|+
@@ -2658,7 +2730,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the MGraph representing the Calais data      *      * @return a Collection of entity information      */
+comment|/**      * Extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the MGraph representing the Calais data      *      * @return a Collection of entity information      * @throws EngineException on a {@link ParseException} while processing the      * Sparql query.      */
 specifier|public
 name|Collection
 argument_list|<
@@ -2669,6 +2741,8 @@ parameter_list|(
 name|MGraph
 name|model
 parameter_list|)
+throws|throws
+name|EngineException
 block|{
 comment|//TODO extract also Geo info (latitude/longitude)?
 name|String
@@ -3066,12 +3140,15 @@ name|ParseException
 name|e
 parameter_list|)
 block|{
-comment|// TODO Auto-generated catch block
+throw|throw
+operator|new
+name|EngineException
+argument_list|(
+literal|"Unable to parse SPARQL query for processing OpenCalais results"
+argument_list|,
 name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
+argument_list|)
+throw|;
 block|}
 name|log
 operator|.

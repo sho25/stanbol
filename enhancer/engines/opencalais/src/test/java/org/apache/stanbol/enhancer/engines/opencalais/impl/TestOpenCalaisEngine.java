@@ -582,6 +582,8 @@ name|testEntityExtraction
 parameter_list|()
 throws|throws
 name|IOException
+throws|,
+name|EngineException
 block|{
 name|String
 name|testFile
@@ -761,6 +763,18 @@ operator|.
 name|getName
 argument_list|()
 argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//adding null as expected for confidence makes it a required property
+name|expectedValues
+operator|.
+name|put
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|validateAllTextAnnotations

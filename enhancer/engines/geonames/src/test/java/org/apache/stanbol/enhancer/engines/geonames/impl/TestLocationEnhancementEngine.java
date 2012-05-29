@@ -1061,6 +1061,18 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//adding null as expected for confidence makes it a required property
+name|expectedValues
+operator|.
+name|put
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_CONFIDENCE
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 comment|/*          * Note:          *  - Expected results depend on the geonames.org data. So if the test          *    fails it may also mean that the data provided by geonames.org have          *    changed          */
 name|int
 name|entityAnnotationCount
