@@ -2756,16 +2756,23 @@ literal|"isFinished"
 argument_list|)
 expr_stmt|;
 return|return
-name|executable
-operator|.
-name|isEmpty
-argument_list|()
-operator|&&
 name|running
 operator|.
 name|isEmpty
 argument_list|()
+operator|&&
+comment|// wait for running engine (regard if failed or not)
+operator|(
+name|executable
+operator|.
+name|isEmpty
+argument_list|()
+operator|||
+name|isFailed
+argument_list|()
+operator|)
 return|;
+comment|//no more engines or already failed
 block|}
 finally|finally
 block|{

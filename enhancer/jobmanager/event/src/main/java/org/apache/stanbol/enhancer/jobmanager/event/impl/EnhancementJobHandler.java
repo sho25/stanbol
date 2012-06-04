@@ -952,7 +952,7 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
 literal|"Job {} failed, but {} still running!"
 argument_list|,
