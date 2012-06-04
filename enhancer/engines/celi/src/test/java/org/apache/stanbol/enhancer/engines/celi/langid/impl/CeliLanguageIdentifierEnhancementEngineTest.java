@@ -414,6 +414,14 @@ specifier|public
 class|class
 name|CeliLanguageIdentifierEnhancementEngineTest
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|CELI_LANGID_SERVICE_URL
+init|=
+literal|"http://linguagrid.org/LSGrid/ws/language-identifier"
+decl_stmt|;
 specifier|static
 name|CeliLanguageIdentifierEnhancementEngine
 name|langIdentifier
@@ -504,7 +512,7 @@ name|CeliLanguageIdentifierEnhancementEngine
 operator|.
 name|SERVICE_URL
 argument_list|,
-literal|"http://linguagrid.org/LSGrid/ws/language-identifier"
+name|CELI_LANGID_SERVICE_URL
 argument_list|)
 expr_stmt|;
 name|MockComponentContext
