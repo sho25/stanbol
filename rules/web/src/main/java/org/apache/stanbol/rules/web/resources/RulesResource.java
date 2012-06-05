@@ -2503,17 +2503,6 @@ name|responseBuilder
 init|=
 literal|null
 decl_stmt|;
-name|ClassLoader
-name|loader
-init|=
-name|Thread
-operator|.
-name|currentThread
-argument_list|()
-operator|.
-name|getContextClassLoader
-argument_list|()
-decl_stmt|;
 name|Class
 argument_list|<
 name|?
@@ -2522,11 +2511,13 @@ name|classToLoad
 decl_stmt|;
 try|try
 block|{
+comment|// ClassLoader loader = Thread.currentThread().getContextClassLoader();
+comment|// classToLoad = loader.loadClass(format);
 name|classToLoad
 operator|=
-name|loader
+name|Class
 operator|.
-name|loadClass
+name|forName
 argument_list|(
 name|format
 argument_list|)

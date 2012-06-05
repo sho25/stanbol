@@ -57,16 +57,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Dictionary
 import|;
 end_import
@@ -509,24 +499,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|rules
 operator|.
 name|base
@@ -852,7 +824,7 @@ name|UriRef
 argument_list|>
 name|recipes
 decl_stmt|;
-comment|/**      * This construct returns RuleStoreImpl object with inside an ontology where to store the rules.      *       * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RuleStoreImpl instances do need to be configured! YOU      * NEED TO USE {@link #RuleStoreImpl(ONManager, Dictionary)} or its overloads, to parse the configuration      * and then initialise the rule store if running outside a OSGI environment.      */
+comment|/**      * This construct returns RuleStoreImpl object with inside an ontology where to store the rules.      *       * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RuleStoreImpl instances do need to be configured! YOU      * NEED TO USE {@link #ClerezzaRuleStore(Dictionary, TcManager)} or its overloads, to parse the      * configuration and then initialise the rule store if running outside a OSGI environment.      */
 specifier|public
 name|ClerezzaRuleStore
 parameter_list|()

@@ -1122,17 +1122,6 @@ operator|.
 name|class
 condition|)
 block|{
-name|ClassLoader
-name|loader
-init|=
-name|Thread
-operator|.
-name|currentThread
-argument_list|()
-operator|.
-name|getContextClassLoader
-argument_list|()
-decl_stmt|;
 name|String
 name|className
 init|=
@@ -1155,6 +1144,9 @@ name|className
 decl_stmt|;
 try|try
 block|{
+comment|// ClassLoader loader = Thread.currentThread().getContextClassLoader();
+comment|// Class<AdaptableAtom> clerezzaAtomClass = (Class<AdaptableAtom>)
+comment|// loader.loadClass(canonicalName);
 name|Class
 argument_list|<
 name|AdaptableAtom
@@ -1167,9 +1159,9 @@ argument_list|<
 name|AdaptableAtom
 argument_list|>
 operator|)
-name|loader
+name|Class
 operator|.
-name|loadClass
+name|forName
 argument_list|(
 name|canonicalName
 argument_list|)
