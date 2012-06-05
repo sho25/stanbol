@@ -787,7 +787,11 @@ operator|new
 name|String
 index|[]
 block|{
+literal|'"'
+operator|+
 name|value
+operator|+
+literal|'"'
 block|}
 return|;
 block|}
@@ -873,7 +877,7 @@ comment|// (1) [wildcar,at,the,end] : In this case this is called with
 comment|//      'at' as active Token and we need write "wildcar?" as
 comment|//      query term
 comment|// (2) [wild,ard,within,the,word]: In this case this is called with
-comment|//      'ard' as active Tiken and we need write "wild?ard" as
+comment|//      'ard' as active Token and we need write "wild?ard" as
 comment|//      query term.
 if|if
 condition|(
@@ -919,7 +923,11 @@ name|queryElements
 operator|.
 name|add
 argument_list|(
+literal|'"'
+operator|+
 name|queryElement
+operator|+
+literal|'"'
 argument_list|)
 expr_stmt|;
 name|lastAdded
@@ -980,7 +988,11 @@ name|queryElements
 operator|.
 name|add
 argument_list|(
+literal|'"'
+operator|+
 name|queryElement
+operator|+
+literal|'"'
 argument_list|)
 expr_stmt|;
 name|lastAdded
@@ -1037,10 +1049,9 @@ operator|<
 name|lastOffset
 condition|)
 block|{
-name|queryElements
-operator|.
-name|add
-argument_list|(
+name|String
+name|queryElement
+init|=
 name|value
 operator|.
 name|substring
@@ -1049,6 +1060,16 @@ name|lastAdded
 argument_list|,
 name|lastOffset
 argument_list|)
+decl_stmt|;
+name|queryElements
+operator|.
+name|add
+argument_list|(
+literal|'"'
+operator|+
+name|queryElement
+operator|+
+literal|'"'
 argument_list|)
 expr_stmt|;
 name|lastAdded
@@ -1137,7 +1158,11 @@ name|queryElements
 operator|.
 name|add
 argument_list|(
+literal|'"'
+operator|+
 name|queryElement
+operator|+
+literal|'"'
 argument_list|)
 expr_stmt|;
 block|}
