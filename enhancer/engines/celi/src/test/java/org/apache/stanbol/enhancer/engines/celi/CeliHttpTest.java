@@ -77,6 +77,16 @@ end_import
 
 begin_import
 import|import
+name|junit
+operator|.
+name|framework
+operator|.
+name|Assert
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -155,7 +165,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Also illegal formatted user account are expected to throw a IOException      * with a HTTP status code 4** (Bad Request)      *       * @throws IOException      * @throws SOAPException      */
-comment|//@Test(expected=IOException.class) Currently fails
+annotation|@
+name|Test
+argument_list|(
+name|expected
+operator|=
+name|IOException
+operator|.
+name|class
+argument_list|)
 specifier|public
 name|void
 name|testIllegalFormattedAuthentification
@@ -185,6 +203,46 @@ operator|.
 name|guessQueryLanguage
 argument_list|(
 literal|"This is a dummy request"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Also illegal formatted user account are expected to throw a IOException      * with a HTTP status code 4** (Bad Request)      *       * @throws IOException      * @throws SOAPException      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTestAccount
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|SOAPException
+block|{
+name|LanguageIdentifierClientHTTP
+name|testClient
+init|=
+operator|new
+name|LanguageIdentifierClientHTTP
+argument_list|(
+operator|new
+name|URL
+argument_list|(
+name|CELI_LANGID_SERVICE_URL
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|Assert
+operator|.
+name|assertNotNull
+argument_list|(
+name|testClient
+operator|.
+name|guessQueryLanguage
+argument_list|(
+literal|"This is a dummy request"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
