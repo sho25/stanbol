@@ -85,13 +85,16 @@ literal|"memoryusage"
 block|,
 literal|"services"
 block|,
-literal|"shell"
-block|,
+comment|//"shell", No longer available with Felix Webconsole 4.0.0
 literal|"stanbol_datafileprovider"
 block|,
 literal|"osgi-installer"
 block|,
 literal|"slinglog"
+block|,
+literal|"depfinder"
+block|,
+literal|"vmstat"
 block|}
 decl_stmt|;
 for|for

@@ -601,6 +601,17 @@ return|return
 literal|"Mock"
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getContextPath
+parameter_list|()
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 end_class
 
