@@ -171,7 +171,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"CREATE TABLE aHR0cDovL2lrcy1wcm9qZWN0LmV1L29udC9lbXBsb3llZU9m (id INT GENERATED ALWAYS AS IDENTITY, context_id INT NOT NULL CONSTRAINT aHR0cDovL2lrcy1wcm9qZWN0LmV1L29udC9lbXBsb3llZU9m_foreign_key REFERENCES factcontexts ON DELETE CASCADE ON UPDATE RESTRICT, person VARCHAR(1024), organization VARCHAR(1024))"
+literal|"CREATE TABLE aHR0cDovL2lrcy1wcm9qZWN0LmV1L29udC9lbXBsb3llZU9m (id INT GENERATED ALWAYS AS IDENTITY, context_id INT NOT NULL CONSTRAINT aHR0cDovL2lrcy1wcm9qZWN0LmV1L29udC9lbXBsb3llZU9m_foreign_key REFERENCES factcontexts ON DELETE CASCADE ON UPDATE RESTRICT, organization VARCHAR(1024), person VARCHAR(1024))"
 decl_stmt|;
 name|List
 argument_list|<

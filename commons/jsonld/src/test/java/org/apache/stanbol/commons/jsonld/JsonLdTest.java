@@ -2357,7 +2357,15 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@subject\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":{\"@literal\":\"stu\",\"@datatype\":\"http://www.w3.org/2001/XMLSchema#string\"}}"
+literal|"{\"@subject\":\"<http://example.org/people#joebob>\","
+operator|+
+literal|"\"http://xmlns.com/foaf/0.1/nick\":{"
+operator|+
+literal|"\"@datatype\":\"http://www.w3.org/2001/XMLSchema#string\","
+operator|+
+literal|"\"@literal\":\"stu\""
+operator|+
+literal|"}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2470,7 +2478,15 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":{\"@literal\":\"stu\",\"@datatype\":\"xsd:string\"}}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:string\","
+operator|+
+literal|"\"@literal\":\"stu\""
+operator|+
+literal|"}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2709,7 +2725,29 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[{\"@literal\":\"stu\",\"@datatype\":\"xsd:string\"},{\"@literal\":\"groknar\",\"@datatype\":\"xsd:string\"},{\"@literal\":\"radface\",\"@datatype\":\"xsd:string\"}]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"<http://example.org/people#joebob>\","
+operator|+
+literal|"\"foaf:nick\":[{"
+operator|+
+literal|"\"@datatype\":\"xsd:string\","
+operator|+
+literal|"\"@literal\":\"stu\""
+operator|+
+literal|"},{"
+operator|+
+literal|"\"@datatype\":\"xsd:string\","
+operator|+
+literal|"\"@literal\":\"groknar\""
+operator|+
+literal|"},{"
+operator|+
+literal|"\"@datatype\":\"xsd:string\","
+operator|+
+literal|"\"@literal\":\"radface\""
+operator|+
+literal|"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2731,7 +2769,45 @@ decl_stmt|;
 name|String
 name|expectedIndent
 init|=
-literal|"{\n    \"@context\": {\n        \"foaf\": \"http://xmlns.com/foaf/0.1/\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@subject\": \"<http://example.org/people#joebob>\",\n    \"foaf:nick\": [\n        {\n            \"@literal\": \"stu\",\n            \"@datatype\": \"xsd:string\"\n        },\n        {\n            \"@literal\": \"groknar\",\n            \"@datatype\": \"xsd:string\"\n        },\n        {\n            \"@literal\": \"radface\",\n            \"@datatype\": \"xsd:string\"\n        }\n    ]\n}"
+literal|"{\n"
+operator|+
+literal|"    \"@context\": {\n"
+operator|+
+literal|"        \"foaf\": \"http://xmlns.com/foaf/0.1/\",\n"
+operator|+
+literal|"        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"@subject\": \"<http://example.org/people#joebob>\",\n"
+operator|+
+literal|"    \"foaf:nick\": [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"            \"@datatype\": \"xsd:string\",\n"
+operator|+
+literal|"            \"@literal\": \"stu\"\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"            \"@datatype\": \"xsd:string\",\n"
+operator|+
+literal|"            \"@literal\": \"groknar\"\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"            \"@datatype\": \"xsd:string\",\n"
+operator|+
+literal|"            \"@literal\": \"radface\"\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"    ]\n}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4084,7 +4160,15 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"_:bnode1\",\"foaf:age\":{\"@literal\":\"31\",\"@datatype\":\"xsd:int\"}}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"_:bnode1\",\"foaf:age\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:int\","
+operator|+
+literal|"\"@literal\":\"31\""
+operator|+
+literal|"}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4423,7 +4507,15 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"_:bnode1\",\"foaf:age\":{\"@literal\":\"31.533567\",\"@datatype\":\"xsd:int\"}}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"_:bnode1\",\"foaf:age\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:int\","
+operator|+
+literal|"\"@literal\":\"31.533567\""
+operator|+
+literal|"}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5214,7 +5306,21 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{\"@literal\":\"31.533567\",\"@datatype\":\"xsd:Float\"},{\"@literal\":\"test\",\"@datatype\":\"xsd:String\"}]}"
+literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
+operator|+
+literal|"\"@datatype\":\"xsd:Float\","
+operator|+
+literal|"\"@literal\":\"31.533567\""
+operator|+
+literal|"},{"
+operator|+
+literal|"\"@datatype\":\"xsd:String\","
+operator|+
+literal|"\"@literal\":\"test\""
+operator|+
+literal|"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5380,7 +5486,23 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{\"@literal\":\"31.533567\",\"@datatype\":\"xsd:Float\"},{\"@literal\":\"test\",\"@language\":\"en\",\"@datatype\":\"xsd:String\"}]}"
+literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
+operator|+
+literal|"\"@datatype\":\"xsd:Float\","
+operator|+
+literal|"\"@literal\":\"31.533567\""
+operator|+
+literal|"},{"
+operator|+
+literal|"\"@datatype\":\"xsd:String\","
+operator|+
+literal|"\"@language\":\"en\","
+operator|+
+literal|"\"@literal\":\"test\""
+operator|+
+literal|"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5555,7 +5677,23 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{\"@literal\":\"31.533567\",\"@datatype\":\"xsd:Float\"},{\"@literal\":\"test\",\"@language\":\"en\",\"@datatype\":\"xsd:String\"},\"On more untyped value\"]}"
+literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
+operator|+
+literal|"\"@datatype\":\"xsd:Float\","
+operator|+
+literal|"\"@literal\":\"31.533567\""
+operator|+
+literal|"},{"
+operator|+
+literal|"\"@datatype\":\"xsd:String\","
+operator|+
+literal|"\"@language\":\"en\","
+operator|+
+literal|"\"@literal\":\"test\""
+operator|+
+literal|"},\"On more untyped value\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(

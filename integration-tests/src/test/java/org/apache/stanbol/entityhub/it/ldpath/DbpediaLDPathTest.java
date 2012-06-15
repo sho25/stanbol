@@ -771,15 +771,15 @@ literal|"http://www.paris.fr"
 argument_list|,
 literal|"\"labels\": ["
 argument_list|,
-literal|"\"@literal\": \"Pariisi\","
+literal|"\"@literal\": \"Pariisi\""
 argument_list|,
-literal|"\"@literal\": \"巴黎\","
+literal|"\"@literal\": \"巴黎\""
 argument_list|,
-literal|"\"location\": \"[48.856667,2.350833]\","
+literal|"\"location\": \"[48.856667,2.350833]\""
 argument_list|,
 literal|"\"name\": {"
 argument_list|,
-literal|"\"@literal\": \"Paris\","
+literal|"\"@literal\": \"Paris\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -1055,23 +1055,23 @@ argument_list|(
 literal|"text/turtle"
 argument_list|)
 operator|.
-name|assertContentContains
+name|assertContentRegexp
 argument_list|(
 literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
 literal|"<name>  \"Spider\"@en ;"
 argument_list|,
-literal|"<category><http://dbpedia.org/resource/Category:Arachnids> , "
-operator|+
-literal|"<http://dbpedia.org/resource/Category:Spiders> ;"
+literal|"<category>.*<http://dbpedia.org/resource/Category:Arachnids>"
 argument_list|,
-literal|"<others><http://dbpedia.org/resource/Acari> , "
-operator|+
-literal|"<http://dbpedia.org/resource/Spider> , "
-operator|+
-literal|"<http://dbpedia.org/resource/Scorpion> , "
-operator|+
-literal|"<http://dbpedia.org/resource/Arachnid> ."
+literal|"<category>.*<http://dbpedia.org/resource/Category:Spiders>"
+argument_list|,
+literal|"<others>.*<http://dbpedia.org/resource/Acari>"
+argument_list|,
+literal|"<others>.*<http://dbpedia.org/resource/Spider>"
+argument_list|,
+literal|"<others>.*<http://dbpedia.org/resource/Scorpion>"
+argument_list|,
+literal|"<others>.*<http://dbpedia.org/resource/Arachnid>"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1317,7 +1317,7 @@ argument_list|(
 literal|"text/turtle"
 argument_list|)
 operator|.
-name|assertContentContains
+name|assertContentRegexp
 argument_list|(
 comment|//first expected entities
 literal|"<http://dbpedia.org/resource/Bonn>"
@@ -1335,11 +1335,11 @@ literal|"<lat>   \"50.359722\""
 argument_list|,
 literal|"<long>  \"7.597778\""
 argument_list|,
-literal|"<type><http://www.w3.org/2002/07/owl#Thing> , "
-operator|+
-literal|"<http://www.opengis.net/gml/_Feature> , "
-operator|+
-literal|"<http://dbpedia.org/ontology/Town>"
+literal|"<type>.*<http://www.w3.org/2002/07/owl#Thing>"
+argument_list|,
+literal|"<type>.*<http://www.opengis.net/gml/_Feature>"
+argument_list|,
+literal|"<type>.*<http://dbpedia.org/ontology/Town>"
 argument_list|,
 literal|"<population> 314926"
 argument_list|)

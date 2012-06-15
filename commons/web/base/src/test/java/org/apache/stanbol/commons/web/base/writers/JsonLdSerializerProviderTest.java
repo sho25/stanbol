@@ -506,13 +506,71 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"created\":\"http://purl.org/dc/terms/created\",\"creator\":\"http://purl.org/dc/terms/creator\",\"end\":\"http://fise.iks-project.eu/ontology/end\",\"Enhancement\":\"http://fise.iks-project.eu/ontology/Enhancement\",\"Person\":\"http://dbpedia.org/ontology/Person\",\"selected-text\":\"http://fise.iks-project.eu/ontology/selected-text\",\"selection-context\":\"http://fise.iks-project.eu/ontology/selection-context\",\"start\":\"http://fise.iks-project.eu/ontology/start\",\"TextAnnotation\":\"http://fise.iks-project.eu/ontology/TextAnnotation\",\"type\":\"http://purl.org/dc/terms/type\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"Enhancement\",\"TextAnnotation\"],\"created\":{\"@literal\":\""
+literal|"{\"@context\":{\"created\":\"http://purl.org/dc/terms/created\","
+operator|+
+literal|"\"creator\":\"http://purl.org/dc/terms/creator\","
+operator|+
+literal|"\"end\":\"http://fise.iks-project.eu/ontology/end\","
+operator|+
+literal|"\"Enhancement\":\"http://fise.iks-project.eu/ontology/Enhancement\","
+operator|+
+literal|"\"Person\":\"http://dbpedia.org/ontology/Person\","
+operator|+
+literal|"\"selected-text\":\"http://fise.iks-project.eu/ontology/selected-text\","
+operator|+
+literal|"\"selection-context\":\"http://fise.iks-project.eu/ontology/selection-context\","
+operator|+
+literal|"\"start\":\"http://fise.iks-project.eu/ontology/start\","
+operator|+
+literal|"\"TextAnnotation\":\"http://fise.iks-project.eu/ontology/TextAnnotation\","
+operator|+
+literal|"\"type\":\"http://purl.org/dc/terms/type\","
+operator|+
+literal|"\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\","
+operator|+
+literal|"\"@type\":[\"Enhancement\",\"TextAnnotation\"],"
+operator|+
+literal|"\"created\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:dateTime\","
+operator|+
+literal|"\"@literal\":\""
 operator|+
 name|this
 operator|.
 name|expectedW3CFormattedDate
 operator|+
-literal|"\",\"@datatype\":\"xsd:dateTime\"},\"creator\":{\"@iri\":\"urn:iks-project:enhancer:test:dummyEngine\"},\"end\":{\"@literal\":\"20\",\"@datatype\":\"xsd:int\"},\"selected-text\":{\"@literal\":\"Patrick Marshall\",\"@datatype\":\"xsd:string\"},\"selection-context\":{\"@literal\":\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\",\"@datatype\":\"xsd:string\"},\"start\":{\"@literal\":\"4\",\"@datatype\":\"xsd:int\"},\"type\":{\"@iri\":\"Person\"}}"
+literal|"\""
+operator|+
+literal|"},\"creator\":{\"@iri\":\"urn:iks-project:enhancer:test:dummyEngine\"},"
+operator|+
+literal|"\"end\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:int\","
+operator|+
+literal|"\"@literal\":\"20\""
+operator|+
+literal|"},\"selected-text\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:string\","
+operator|+
+literal|"\"@literal\":\"Patrick Marshall\""
+operator|+
+literal|"},\"selection-context\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:string\","
+operator|+
+literal|"\"@literal\":\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\""
+operator|+
+literal|"},\"start\":{"
+operator|+
+literal|"\"@datatype\":\"xsd:int\","
+operator|+
+literal|"\"@literal\":\"4\""
+operator|+
+literal|"},\"type\":{\"@iri\":\"Person\"}}"
 decl_stmt|;
 name|String
 name|result
@@ -699,13 +757,103 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n  \"@context\": {\n    \"created\": \"http://purl.org/dc/terms/created\",\n    \"creator\": \"http://purl.org/dc/terms/creator\",\n    \"end\": \"http://fise.iks-project.eu/ontology/end\",\n    \"Enhancement\": \"http://fise.iks-project.eu/ontology/Enhancement\",\n    \"Person\": \"http://dbpedia.org/ontology/Person\",\n    \"selected-text\": \"http://fise.iks-project.eu/ontology/selected-text\",\n    \"selection-context\": \"http://fise.iks-project.eu/ontology/selection-context\",\n    \"start\": \"http://fise.iks-project.eu/ontology/start\",\n    \"TextAnnotation\": \"http://fise.iks-project.eu/ontology/TextAnnotation\",\n    \"type\": \"http://purl.org/dc/terms/type\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n  \"@type\": [\n    \"Enhancement\",\n    \"TextAnnotation\"\n  ],\n  \"created\": {\n    \"@literal\": \""
+literal|"{\n"
+operator|+
+literal|"  \"@context\": {\n"
+operator|+
+literal|"    \"created\": \"http://purl.org/dc/terms/created\",\n"
+operator|+
+literal|"    \"creator\": \"http://purl.org/dc/terms/creator\",\n"
+operator|+
+literal|"    \"end\": \"http://fise.iks-project.eu/ontology/end\",\n"
+operator|+
+literal|"    \"Enhancement\": \"http://fise.iks-project.eu/ontology/Enhancement\",\n"
+operator|+
+literal|"    \"Person\": \"http://dbpedia.org/ontology/Person\",\n"
+operator|+
+literal|"    \"selected-text\": \"http://fise.iks-project.eu/ontology/selected-text\",\n"
+operator|+
+literal|"    \"selection-context\": \"http://fise.iks-project.eu/ontology/selection-context\",\n"
+operator|+
+literal|"    \"start\": \"http://fise.iks-project.eu/ontology/start\",\n"
+operator|+
+literal|"    \"TextAnnotation\": \"http://fise.iks-project.eu/ontology/TextAnnotation\",\n"
+operator|+
+literal|"    \"type\": \"http://purl.org/dc/terms/type\",\n"
+operator|+
+literal|"    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n"
+operator|+
+literal|"  \"@type\": [\n"
+operator|+
+literal|"    \"Enhancement\",\n"
+operator|+
+literal|"    \"TextAnnotation\"\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  \"created\": {\n"
+operator|+
+literal|"    \"@datatype\": \"xsd:dateTime\",\n"
+operator|+
+literal|"    \"@literal\": \""
 operator|+
 name|this
 operator|.
 name|expectedW3CFormattedDate
 operator|+
-literal|"\",\n    \"@datatype\": \"xsd:dateTime\"\n  },\n  \"creator\": {\n    \"@iri\": \"urn:iks-project:enhancer:test:dummyEngine\"\n  },\n  \"end\": {\n    \"@literal\": \"20\",\n    \"@datatype\": \"xsd:int\"\n  },\n  \"selected-text\": {\n    \"@literal\": \"Patrick Marshall\",\n    \"@datatype\": \"xsd:string\"\n  },\n  \"selection-context\": {\n    \"@literal\": \"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\",\n    \"@datatype\": \"xsd:string\"\n  },\n  \"start\": {\n    \"@literal\": \"4\",\n    \"@datatype\": \"xsd:int\"\n  },\n  \"type\": {\n    \"@iri\": \"Person\"\n  }\n}"
+literal|"\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"creator\": {\n"
+operator|+
+literal|"    \"@iri\": \"urn:iks-project:enhancer:test:dummyEngine\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"end\": {\n"
+operator|+
+literal|"    \"@datatype\": \"xsd:int\",\n"
+operator|+
+literal|"    \"@literal\": \"20\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"selected-text\": {\n"
+operator|+
+literal|"    \"@datatype\": \"xsd:string\",\n"
+operator|+
+literal|"    \"@literal\": \"Patrick Marshall\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"selection-context\": {\n"
+operator|+
+literal|"    \"@datatype\": \"xsd:string\",\n"
+operator|+
+literal|"    \"@literal\": \"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"start\": {\n"
+operator|+
+literal|"    \"@datatype\": \"xsd:int\",\n"
+operator|+
+literal|"    \"@literal\": \"4\"\n"
+operator|+
+literal|"  },\n"
+operator|+
+literal|"  \"type\": {\n"
+operator|+
+literal|"    \"@iri\": \"Person\"\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}"
 decl_stmt|;
 name|String
 name|result
@@ -858,13 +1006,69 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"/created\":\"http://purl.org/dc/terms/created\",\"/creator\":\"http://purl.org/dc/terms/creator\",\"/type\":\"http://purl.org/dc/terms/type\",\"end\":\"http://fise.iks-project.eu/ontology/end\",\"Enhancement\":\"http://fise.iks-project.eu/ontology/Enhancement\",\"Person\":\"http://dbpedia.org/ontology/Person\",\"selected-text\":\"http://fise.iks-project.eu/ontology/selected-text\",\"selection-context\":\"http://fise.iks-project.eu/ontology/selection-context\",\"start\":\"http://fise.iks-project.eu/ontology/start\",\"TextAnnotation\":\"http://fise.iks-project.eu/ontology/TextAnnotation\",\"xmlns\":\"http://www.w3.org/2001/XMLSchema#\"},\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"Enhancement\",\"TextAnnotation\"],\"/created\":{\"@literal\":\""
+literal|"{\"@context\":{\"/created\":\"http://purl.org/dc/terms/created\","
+operator|+
+literal|"\"/creator\":\"http://purl.org/dc/terms/creator\","
+operator|+
+literal|"\"/type\":\"http://purl.org/dc/terms/type\","
+operator|+
+literal|"\"end\":\"http://fise.iks-project.eu/ontology/end\","
+operator|+
+literal|"\"Enhancement\":\"http://fise.iks-project.eu/ontology/Enhancement\","
+operator|+
+literal|"\"Person\":\"http://dbpedia.org/ontology/Person\","
+operator|+
+literal|"\"selected-text\":\"http://fise.iks-project.eu/ontology/selected-text\","
+operator|+
+literal|"\"selection-context\":\"http://fise.iks-project.eu/ontology/selection-context\","
+operator|+
+literal|"\"start\":\"http://fise.iks-project.eu/ontology/start\","
+operator|+
+literal|"\"TextAnnotation\":\"http://fise.iks-project.eu/ontology/TextAnnotation\","
+operator|+
+literal|"\"xmlns\":\"http://www.w3.org/2001/XMLSchema#\"},"
+operator|+
+literal|"\"@subject\":\"urn:iks-project:enhancer:test:text-annotation:Person\",\"@type\":[\"Enhancement\",\"TextAnnotation\"],"
+operator|+
+literal|"\"/created\":{"
+operator|+
+literal|"\"@datatype\":\"xmlns:dateTime\","
+operator|+
+literal|"\"@literal\":\""
 operator|+
 name|this
 operator|.
 name|expectedW3CFormattedDate
 operator|+
-literal|"\",\"@datatype\":\"xmlns:dateTime\"},\"/creator\":{\"@iri\":\"urn:iks-project:enhancer:test:dummyEngine\"},\"/type\":{\"@iri\":\"Person\"},\"end\":{\"@literal\":\"20\",\"@datatype\":\"xmlns:int\"},\"selected-text\":{\"@literal\":\"Patrick Marshall\",\"@datatype\":\"xmlns:string\"},\"selection-context\":{\"@literal\":\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\",\"@datatype\":\"xmlns:string\"},\"start\":{\"@literal\":\"4\",\"@datatype\":\"xmlns:int\"}}"
+literal|"\""
+operator|+
+literal|"},\"/creator\":{\"@iri\":\"urn:iks-project:enhancer:test:dummyEngine\"},"
+operator|+
+literal|"\"/type\":{\"@iri\":\"Person\"},\"end\":{"
+operator|+
+literal|"\"@datatype\":\"xmlns:int\","
+operator|+
+literal|"\"@literal\":\"20\""
+operator|+
+literal|"},\"selected-text\":{"
+operator|+
+literal|"\"@datatype\":\"xmlns:string\","
+operator|+
+literal|"\"@literal\":\"Patrick Marshall\""
+operator|+
+literal|"},\"selection-context\":{"
+operator|+
+literal|"\"@datatype\":\"xmlns:string\","
+operator|+
+literal|"\"@literal\":\"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\""
+operator|+
+literal|"},\"start\":{"
+operator|+
+literal|"\"@datatype\":\"xmlns:int\","
+operator|+
+literal|"\"@literal\":\"4\""
+operator|+
+literal|"}}"
 decl_stmt|;
 name|String
 name|result
@@ -1176,13 +1380,103 @@ expr_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\n    \"@context\": {\n        \"created\": \"http://purl.org/dc/terms/created\",\n        \"creator\": \"http://purl.org/dc/terms/creator\",\n        \"end\": \"http://fise.iks-project.eu/ontology/end\",\n        \"Enhancement\": \"http://fise.iks-project.eu/ontology/Enhancement\",\n        \"Person\": \"http://dbpedia.org/ontology/Person\",\n        \"selected-text\": \"http://fise.iks-project.eu/ontology/selected-text\",\n        \"selection-context\": \"http://fise.iks-project.eu/ontology/selection-context\",\n        \"start\": \"http://fise.iks-project.eu/ontology/start\",\n        \"TextAnnotation\": \"http://fise.iks-project.eu/ontology/TextAnnotation\",\n        \"type\": \"http://purl.org/dc/terms/type\",\n        \"xmlns\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n    \"@type\": [\n        \"Enhancement\",\n        \"TextAnnotation\"\n    ],\n    \"created\": {\n        \"@literal\": \""
+literal|"{\n"
+operator|+
+literal|"    \"@context\": {\n"
+operator|+
+literal|"        \"created\": \"http://purl.org/dc/terms/created\",\n"
+operator|+
+literal|"        \"creator\": \"http://purl.org/dc/terms/creator\",\n"
+operator|+
+literal|"        \"end\": \"http://fise.iks-project.eu/ontology/end\",\n"
+operator|+
+literal|"        \"Enhancement\": \"http://fise.iks-project.eu/ontology/Enhancement\",\n"
+operator|+
+literal|"        \"Person\": \"http://dbpedia.org/ontology/Person\",\n"
+operator|+
+literal|"        \"selected-text\": \"http://fise.iks-project.eu/ontology/selected-text\",\n"
+operator|+
+literal|"        \"selection-context\": \"http://fise.iks-project.eu/ontology/selection-context\",\n"
+operator|+
+literal|"        \"start\": \"http://fise.iks-project.eu/ontology/start\",\n"
+operator|+
+literal|"        \"TextAnnotation\": \"http://fise.iks-project.eu/ontology/TextAnnotation\",\n"
+operator|+
+literal|"        \"type\": \"http://purl.org/dc/terms/type\",\n"
+operator|+
+literal|"        \"xmlns\": \"http://www.w3.org/2001/XMLSchema#\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"@subject\": \"urn:iks-project:enhancer:test:text-annotation:Person\",\n"
+operator|+
+literal|"    \"@type\": [\n"
+operator|+
+literal|"        \"Enhancement\",\n"
+operator|+
+literal|"        \"TextAnnotation\"\n"
+operator|+
+literal|"    ],\n"
+operator|+
+literal|"    \"created\": {\n"
+operator|+
+literal|"        \"@datatype\": \"xmlns:dateTime\",\n"
+operator|+
+literal|"        \"@literal\": \""
 operator|+
 name|this
 operator|.
 name|expectedW3CFormattedDate
 operator|+
-literal|"\",\n        \"@datatype\": \"xmlns:dateTime\"\n    },\n    \"creator\": {\n        \"@iri\": \"urn:iks-project:enhancer:test:dummyEngine\"\n    },\n    \"end\": {\n        \"@literal\": \"20\",\n        \"@datatype\": \"xmlns:int\"\n    },\n    \"selected-text\": {\n        \"@literal\": \"Patrick Marshall\",\n        \"@datatype\": \"xmlns:string\"\n    },\n    \"selection-context\": {\n        \"@literal\": \"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\",\n        \"@datatype\": \"xmlns:string\"\n    },\n    \"start\": {\n        \"@literal\": \"4\",\n        \"@datatype\": \"xmlns:int\"\n    },\n    \"type\": {\n        \"@iri\": \"Person\"\n    }\n}"
+literal|"\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"creator\": {\n"
+operator|+
+literal|"        \"@iri\": \"urn:iks-project:enhancer:test:dummyEngine\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"end\": {\n"
+operator|+
+literal|"        \"@datatype\": \"xmlns:int\",\n"
+operator|+
+literal|"        \"@literal\": \"20\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"selected-text\": {\n"
+operator|+
+literal|"        \"@datatype\": \"xmlns:string\",\n"
+operator|+
+literal|"        \"@literal\": \"Patrick Marshall\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"selection-context\": {\n"
+operator|+
+literal|"        \"@datatype\": \"xmlns:string\",\n"
+operator|+
+literal|"        \"@literal\": \"Dr. Patrick Marshall (1869 - November 1950) was a geologist who lived in New Zealand and worked at the University of Otago.\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"start\": {\n"
+operator|+
+literal|"        \"@datatype\": \"xmlns:int\",\n"
+operator|+
+literal|"        \"@literal\": \"4\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    \"type\": {\n"
+operator|+
+literal|"        \"@iri\": \"Person\"\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"}"
 decl_stmt|;
 name|String
 name|result

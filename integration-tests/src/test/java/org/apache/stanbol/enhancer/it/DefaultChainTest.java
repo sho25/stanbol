@@ -100,13 +100,13 @@ literal|"application/rdf+json"
 block|,
 literal|"application/rdf+json"
 block|,
-literal|"\\{.*value.*ontology.*TextAnnotation.*type.*uri.*}"
+literal|"\"value\":\"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine\""
 block|,
 literal|"text/turtle"
 block|,
 literal|"text/turtle"
 block|,
-literal|"a.*ontology/TextAnnotation.*ontology/Enhancement.*;"
+literal|"a.*ontology/TextAnnotation.*;"
 block|,
 literal|"text/rdf+nt"
 block|,
