@@ -3516,7 +3516,7 @@ name|configName
 return|;
 block|}
 comment|/**      * Saves the current configuration to the index!      */
-specifier|private
+specifier|public
 name|void
 name|saveNamespaceConfig
 parameter_list|()

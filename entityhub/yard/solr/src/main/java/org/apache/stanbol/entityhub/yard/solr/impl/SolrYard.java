@@ -1354,7 +1354,7 @@ name|_server
 decl_stmt|;
 comment|/**      * The {@link FieldMapper} is responsible for converting fields of {@link Representation} to fields in the      * {@link SolrInputDocument} and vice versa      */
 specifier|private
-name|FieldMapper
+name|SolrFieldMapper
 name|_fieldMapper
 decl_stmt|;
 comment|/**      * The {@link IndexValueFactory} is responsible for converting values of fields in the      * {@link Representation} to the according {@link IndexValue}. One should note, that some properties of      * the {@link IndexValue} such as the language ({@link IndexValue#getLanguage()}) and the dataType (      * {@link IndexValue#getType()}) are encoded within the field name inside the {@link SolrInputDocument}      * and {@link SolrDocument}. This is done by the configured {@link FieldMapper}.      */
@@ -3170,7 +3170,7 @@ throw|;
 block|}
 block|}
 specifier|private
-name|FieldMapper
+name|SolrFieldMapper
 name|getFieldMapper
 parameter_list|()
 throws|throws
@@ -4988,6 +4988,83 @@ comment|// NOTE: We do not need to update all Documents that refer this ID, beca
 comment|// only the representation of the Entity is deleted and not the
 comment|// Entity itself. So even that we do no longer have an representation
 comment|// the entity still exists and might be referenced by others!
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|removeAll
+parameter_list|()
+throws|throws
+name|YardException
+block|{
+name|SolrServer
+name|server
+init|=
+name|getServer
+argument_list|()
+decl_stmt|;
+try|try
+block|{
+comment|//ensures that the fildMapper is initialised and reads the
+comment|//namespace config before deleting all documents
+name|getFieldMapper
+argument_list|()
+expr_stmt|;
+comment|//delete all documents
+name|server
+operator|.
+name|deleteByQuery
+argument_list|(
+literal|"*:*"
+argument_list|)
+expr_stmt|;
+comment|//ensure that the namespace config is stored again after deleting
+comment|//all documents
+name|getFieldMapper
+argument_list|()
+operator|.
+name|saveNamespaceConfig
+argument_list|()
+expr_stmt|;
+name|server
+operator|.
+name|commit
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SolrServerException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Error while deleting documents from the Solr server"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to access SolrServer"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
 block|}
 annotation|@
 name|Override

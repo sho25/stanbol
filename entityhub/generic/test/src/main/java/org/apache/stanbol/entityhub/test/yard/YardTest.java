@@ -2368,6 +2368,211 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Tests that multiple Representations are removed.      *       * @throws YardException      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRemoveAll
+parameter_list|()
+throws|throws
+name|YardException
+block|{
+comment|// NOTE: This test needs not to use the create(..) method, because we
+comment|// remove the created representation form the store anyway as part of the
+comment|// test
+name|String
+name|id
+init|=
+literal|"urn:yard.test.testRemoveAll:representation.id1"
+decl_stmt|;
+name|String
+name|id2
+init|=
+literal|"urn:yard.test.testRemoveAll:representation.id2"
+decl_stmt|;
+name|String
+name|field
+init|=
+literal|"urn:the.field:used.for.this.Test"
+decl_stmt|;
+name|String
+name|testValue
+init|=
+literal|"This is a test"
+decl_stmt|;
+name|Yard
+name|yard
+init|=
+name|getYard
+argument_list|()
+decl_stmt|;
+comment|// use both ways to add the two Representations (should make no differences,
+comment|// but one never can know ...
+name|Representation
+name|test1
+init|=
+name|yard
+operator|.
+name|create
+argument_list|(
+name|id
+argument_list|)
+decl_stmt|;
+comment|// create and add
+name|test1
+operator|.
+name|add
+argument_list|(
+name|field
+argument_list|,
+name|testValue
+argument_list|)
+expr_stmt|;
+comment|// add value
+name|yard
+operator|.
+name|store
+argument_list|(
+name|test1
+argument_list|)
+expr_stmt|;
+comment|// store
+name|Representation
+name|test2
+init|=
+name|yard
+operator|.
+name|getValueFactory
+argument_list|()
+operator|.
+name|createRepresentation
+argument_list|(
+name|id2
+argument_list|)
+decl_stmt|;
+comment|// create
+name|test2
+operator|.
+name|add
+argument_list|(
+name|field
+argument_list|,
+name|testValue
+argument_list|)
+expr_stmt|;
+comment|// add value
+name|yard
+operator|.
+name|store
+argument_list|(
+name|test2
+argument_list|)
+expr_stmt|;
+comment|// store
+name|assertTrue
+argument_list|(
+name|yard
+operator|.
+name|isRepresentation
+argument_list|(
+name|test1
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// test if stored
+name|assertTrue
+argument_list|(
+name|yard
+operator|.
+name|isRepresentation
+argument_list|(
+name|test2
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|yard
+operator|.
+name|removeAll
+argument_list|()
+expr_stmt|;
+comment|// remove
+name|assertFalse
+argument_list|(
+name|yard
+operator|.
+name|isRepresentation
+argument_list|(
+name|test1
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// test if removed
+name|assertFalse
+argument_list|(
+name|yard
+operator|.
+name|isRepresentation
+argument_list|(
+name|test2
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//test that Yard is still useable after removeAll
+name|yard
+operator|.
+name|store
+argument_list|(
+name|test1
+argument_list|)
+expr_stmt|;
+comment|// store
+name|assertTrue
+argument_list|(
+name|yard
+operator|.
+name|isRepresentation
+argument_list|(
+name|test1
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// test if stored
+name|yard
+operator|.
+name|removeAll
+argument_list|()
+expr_stmt|;
+comment|// remove
+name|assertFalse
+argument_list|(
+name|yard
+operator|.
+name|isRepresentation
+argument_list|(
+name|test1
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**      * Tests if<code>null</code> values within the Iterable are ignored and do not cause an Exception      *       * @throws YardException      */
 annotation|@
 name|Test

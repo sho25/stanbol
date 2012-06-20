@@ -274,6 +274,13 @@ name|IllegalArgumentException
 throws|,
 name|YardException
 function_decl|;
+comment|/**      * Removes all the {@link Representation} managed by this Yard      * @throws YardException On any error related to the Yard      */
+name|void
+name|removeAll
+parameter_list|()
+throws|throws
+name|YardException
+function_decl|;
 comment|/**      * checks if a representation with the given id is present in the Yard      *      * @param id the id. Calls with<code>null</code> are ignored      * @return<code>true</code> if a representation with the id is present in      *         the Yard. Otherwise<code>false</code>.      * @throws NullPointerException if<code>null</code> is parsed as ID      * @throws IllegalArgumentException if the parsed ID is not valid      * formatted (especially if an empty String is parsed as ID      * @throws YardException On any error related to the Yard      */
 name|boolean
 name|isRepresentation
