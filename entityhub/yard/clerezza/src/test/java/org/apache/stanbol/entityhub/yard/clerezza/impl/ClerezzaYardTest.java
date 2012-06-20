@@ -264,13 +264,13 @@ name|void
 name|initYard
 parameter_list|()
 block|{
-name|YardConfig
+name|ClerezzaYardConfig
 name|config
 init|=
 operator|new
-name|SimpleYardConfig
+name|ClerezzaYardConfig
 argument_list|(
-literal|"urn:yard.clerezza:testYardId"
+literal|"testYardId"
 argument_list|)
 decl_stmt|;
 name|config
