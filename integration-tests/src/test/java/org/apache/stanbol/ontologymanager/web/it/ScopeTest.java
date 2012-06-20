@@ -158,9 +158,8 @@ specifier|final
 name|String
 name|URI_SCOPE_CLASS
 init|=
-literal|"http://kres.iks-project.eu/ontology/onm/meta.owl#Scope"
+literal|"http://stanbol.apache.org/ontology/meta/ontonet#Scope"
 decl_stmt|;
-empty_stmt|;
 specifier|private
 specifier|static
 specifier|final
