@@ -496,9 +496,8 @@ name|tcm
 argument_list|,
 name|offline
 argument_list|,
+operator|new
 name|Parser
-operator|.
-name|getInstance
 argument_list|()
 argument_list|)
 decl_stmt|;

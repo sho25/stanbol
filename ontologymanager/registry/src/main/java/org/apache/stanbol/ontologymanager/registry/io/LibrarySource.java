@@ -119,7 +119,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OntologySetInputSource
+name|RootOntologySource
 import|;
 end_import
 
@@ -139,7 +139,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|RootOntologySource
+name|SetInputSource
 import|;
 end_import
 
@@ -340,7 +340,7 @@ name|LibrarySource
 extends|extends
 name|AbstractOWLOntologyInputSource
 implements|implements
-name|OntologySetInputSource
+name|SetInputSource
 block|{
 comment|/**      * Creates a new ontology manager that shares the same offline configuration as the registry manager.      *       * @param registryManager      * @return      */
 specifier|private

@@ -21,26 +21,6 @@ name|scope
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|collector
-operator|.
-name|UnmodifiableOntologyCollectorException
-import|;
-end_import
-
 begin_comment
 comment|/**  * An ontology space that wraps the components that can be customized by CMS developers, IKS customizers and  * the like. The custom ontology space becomes read-only after bootstrapping (i.e. after a call to  *<code>setUp()</code>).  *   * The ontologies in a custom space typically depend on those in the core space. However, a custom space does  *<i>not</i> know which is the core space, it only imports its ontologies. The core-custom-session  * relationship between spaces is a scope is handled by external objects.  *   * @author alexdma  *   */
 end_comment
@@ -51,21 +31,7 @@ interface|interface
 name|CustomOntologySpace
 extends|extends
 name|OntologySpace
-block|{
-comment|/**      * Logically links this custom space with the supplied core ontology space, so that the top ontology in      * the former will import those in the latter.<br>      *<br>      * This relationship is expected to hold at all times once the space is active, however the method to set      * it is available in case implementations require to perform other operations between the creation of      * ontology spaces and their linking.      *       * @deprecated space linking is performed by the parent scope at OWL export time. Implementations do      *             nothing.      * @param coreSpace      *            the core ontology space to be linked      * @param skipRoot      *            if true, the custom root ontology will not import the core root ontology straight away, but      *            instead all of its axioms and import statements will be copied. Useful for implementations      *            that construct root ontologies in memory but do not store them.      */
-name|void
-name|attachCoreSpace
-parameter_list|(
-name|CoreOntologySpace
-name|coreSpace
-parameter_list|,
-name|boolean
-name|skipRoot
-parameter_list|)
-throws|throws
-name|UnmodifiableOntologyCollectorException
-function_decl|;
-block|}
+block|{  }
 end_interface
 
 end_unit

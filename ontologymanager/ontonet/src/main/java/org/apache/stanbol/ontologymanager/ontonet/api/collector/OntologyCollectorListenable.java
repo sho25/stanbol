@@ -17,53 +17,52 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|scope
+name|collector
 package|;
 end_package
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|semanticweb
+name|util
 operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
+name|Collection
 import|;
 end_import
 
 begin_comment
-comment|/**  * Implementations of this interface are able to react to modifications on the ontology network  * infrastructure.  *   * @author alexdma  *   */
+comment|/**  * Informs listeners about changes in an ontology collector. Implementations of this interface should be able  * to fire events related to the modification of ontologies within an ontology collector.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|ScopeOntologyListener
+name|OntologyCollectorListenable
 block|{
-comment|/**      * Called whenever an ontology is set to be managed by a scope, space or session.      *       * @param scopeId      * @param addedOntology      */
 name|void
-name|onOntologyAdded
+name|addOntologyCollectorListener
 parameter_list|(
-name|String
-name|scopeId
-parameter_list|,
-name|IRI
-name|addedOntology
+name|OntologyCollectorListener
+name|listener
 parameter_list|)
 function_decl|;
-comment|/**      * Called whenever an ontology is set to no longer be managed by a scope, space or session. This method is      * not called if that ontology was not being managed earlier.      *       * @param scopeId      * @param addedOntology      */
 name|void
-name|onOntologyRemoved
+name|clearOntologyCollectorListeners
+parameter_list|()
+function_decl|;
+name|Collection
+argument_list|<
+name|OntologyCollectorListener
+argument_list|>
+name|getOntologyCollectorListeners
+parameter_list|()
+function_decl|;
+name|void
+name|removeOntologyCollectorListener
 parameter_list|(
-name|String
-name|scopeId
-parameter_list|,
-name|IRI
-name|removedOntology
+name|OntologyCollectorListener
+name|listener
 parameter_list|)
 function_decl|;
 block|}

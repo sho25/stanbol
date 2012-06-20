@@ -402,7 +402,7 @@ name|OntologyCollectorListener
 condition|)
 name|s
 operator|.
-name|addListener
+name|addOntologyCollectorListener
 argument_list|(
 operator|(
 name|OntologyCollectorListener

@@ -155,6 +155,26 @@ name|api
 operator|.
 name|collector
 operator|.
+name|OntologyCollectorListener
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|collector
+operator|.
 name|UnmodifiableOntologyCollectorException
 import|;
 end_import
@@ -586,6 +606,23 @@ comment|// OntologyScope parentScope = registry.getScope(scopeID);
 comment|//
 comment|// if (parentScope != null&& parentScope instanceof OntologyCollectorListener) s
 comment|// .addListener((OntologyCollectorListener) parentScope);
+comment|// Make sure the ontology provider listens to ontology additions before core ontologies are added.
+if|if
+condition|(
+name|ontologyProvider
+operator|instanceof
+name|OntologyCollectorListener
+condition|)
+name|s
+operator|.
+name|addOntologyCollectorListener
+argument_list|(
+operator|(
+name|OntologyCollectorListener
+operator|)
+name|ontologyProvider
+argument_list|)
+expr_stmt|;
 comment|// Set the supplied ontology's parent as the root for this space.
 if|if
 condition|(

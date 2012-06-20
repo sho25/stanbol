@@ -254,7 +254,7 @@ name|GraphContentInputSource
 extends|extends
 name|AbstractClerezzaGraphInputSource
 block|{
-specifier|private
+specifier|protected
 name|Logger
 name|log
 init|=

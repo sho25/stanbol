@@ -27,16 +27,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collection
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -122,18 +112,12 @@ specifier|public
 interface|interface
 name|OntologyCollector
 extends|extends
+name|OntologyCollectorListenable
+extends|,
 name|NamedResource
 extends|,
 name|OntologyInputSourceHandler
 block|{
-comment|/**      * Registers a new listener for changes in this ontology space. Has no effect if the same listener is      * already registered with this ontology space.      *       * @param listener      *            the ontology space listener to be added.      */
-name|void
-name|addListener
-parameter_list|(
-name|OntologyCollectorListener
-name|listener
-parameter_list|)
-function_decl|;
 comment|/**      * Adds the given ontology to the ontology space. If the supplied ontology is not already present in      * storage and does not have an OWL version IRI of its own, this ontology collector will 'claim ownership'      * of the ontology by setting its own logical ID as the version IRI of the new ontology.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      */
 name|String
 name|addOntology
@@ -146,19 +130,6 @@ name|?
 argument_list|>
 name|ontologySource
 parameter_list|)
-function_decl|;
-comment|/**      * Removes all ontology space listeners registered with this space.      */
-name|void
-name|clearListeners
-parameter_list|()
-function_decl|;
-comment|/**      * Returns all the listeners registered with this ontology space. Whether the collection reflects or not      * the order in which they were registered depends on the implementation.      *       * @return the registered ontology space listeners.      */
-name|Collection
-argument_list|<
-name|OntologyCollectorListener
-argument_list|>
-name|getListeners
-parameter_list|()
 function_decl|;
 comment|/**      * Returns the ontologies managed by this ontology space. This is a shortcut method for iterating      * {@link #getOntology(IRI, Class)} calls over {@link #listManagedOntologies()}.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
 parameter_list|<
@@ -230,14 +201,6 @@ name|hasOntology
 parameter_list|(
 name|IRI
 name|ontologyIri
-parameter_list|)
-function_decl|;
-comment|/**      * Unregisters the supplied for changes in this ontology space. Has no effect if the same listener was not      * registered with this ontology space.      *       * @param listener      *            the ontology space listener to be removed.      */
-name|void
-name|removeListener
-parameter_list|(
-name|OntologyCollectorListener
-name|listener
 parameter_list|)
 function_decl|;
 comment|/**      * Removes the given ontology from the ontology space, if the ontology is a direct child of the top      * ontology.<br/>      *<u>Note</u> that this will NOT delete the ontology from the store! This method simply states that the      * ontology is no longer managed by this space and its axioms will no longer appear when the space is      * serialized as an ontology. To delete the ontology itself, please use the Ontology Manager Store.      *       * @param ontologyIri      *            the identifier of this ontology.      */

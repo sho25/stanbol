@@ -63,6 +63,38 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|Graph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|MGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|TripleCollection
 import|;
 end_import
@@ -210,15 +242,31 @@ name|ImportManagementPolicy
 name|getImportManagementPolicy
 parameter_list|()
 function_decl|;
-comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @param ontologyIRI      *            the logical identifier of the ontology.      * @return the key to access the ontology from the store.      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @param locator      *            the logical identifier of the ontology.      * @return the key to access the ontology from the store.      */
 name|String
 name|getKey
 parameter_list|(
 name|IRI
-name|ontologyIRI
+name|locator
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the graph that stores all the information on stored ontologies      *       * @param returnType      * @return      */
+comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null. To get the keys for a givemn ontologyIRI, no      * matte what its version is, use {@link #getOntologyVersionKeys(IRI)}.      *       * @param ontologyId      * @return      */
+name|String
+name|getKey
+parameter_list|(
+name|OWLOntologyID
+name|ontologyId
+parameter_list|)
+function_decl|;
+comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getKeys
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the graph that stores all the information on stored ontologies. Whether the returned triple      * collection is a {@link Graph} or a {@link MGraph} depends on the provider's policy on allowing external      * modifications to the meta-level graph or not.      *       * @param returnType      * @return      */
 parameter_list|<
 name|O
 extends|extends
@@ -234,13 +282,16 @@ argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
+comment|/**      * Will return the keys of all the ontologies whose ontologyIRI is the one provided. These include any      * ontologies with that ontologyIRI and a versionIRI, and one ontology with no version IRI (if it exists,      * it must be unique).      *       * @param ontologyIRI      * @return      */
 name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getKeys
-parameter_list|()
+name|getOntologyVersionKeys
+parameter_list|(
+name|IRI
+name|ontologyIRI
+parameter_list|)
 function_decl|;
 comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
 name|S
@@ -364,9 +415,6 @@ parameter_list|,
 name|String
 name|formatIdentifier
 parameter_list|,
-name|String
-name|preferredKey
-parameter_list|,
 name|boolean
 name|force
 parameter_list|)
@@ -385,9 +433,6 @@ parameter_list|,
 name|String
 name|formatIdentifier
 parameter_list|,
-name|String
-name|preferredKey
-parameter_list|,
 name|boolean
 name|force
 parameter_list|)
@@ -401,9 +446,6 @@ parameter_list|(
 name|Object
 name|ontology
 parameter_list|,
-name|String
-name|preferredKey
-parameter_list|,
 name|boolean
 name|force
 parameter_list|)
@@ -414,6 +456,17 @@ name|setImportManagementPolicy
 parameter_list|(
 name|ImportManagementPolicy
 name|policy
+parameter_list|)
+function_decl|;
+comment|/**      * Will not be checked by dereferencing      *       * If the key does not exist in the provider, or if locator is already bound to a different key, an      * {@link IllegalArgumentException} will be thrown.      *       *       * @param locator      * @param key      */
+name|void
+name|setLocatorMapping
+parameter_list|(
+name|IRI
+name|locator
+parameter_list|,
+name|String
+name|key
 parameter_list|)
 function_decl|;
 block|}

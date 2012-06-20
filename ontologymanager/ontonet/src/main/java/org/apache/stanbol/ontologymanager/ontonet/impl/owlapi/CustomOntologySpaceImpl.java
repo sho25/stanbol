@@ -35,46 +35,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|collector
-operator|.
-name|UnmodifiableOntologyCollectorException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|CoreOntologySpace
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|scope
 operator|.
 name|CustomOntologySpace
@@ -214,33 +174,6 @@ argument_list|,
 name|ontologyManager
 argument_list|)
 expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|attachCoreSpace
-parameter_list|(
-name|CoreOntologySpace
-name|coreSpace
-parameter_list|,
-name|boolean
-name|skipRoot
-parameter_list|)
-throws|throws
-name|UnmodifiableOntologyCollectorException
-block|{
-comment|// OWLOntology o = coreSpace.getTopOntology();
-comment|// // This does the append thingy
-comment|// log.debug("Attaching " + o + " TO " + getTopOntology() + " ...");
-comment|// try {
-comment|// // It is in fact the addition of the core space top ontology to the
-comment|// // custom space, with import statements and all.
-comment|// addOntology(new RootOntologySource(o, null));
-comment|// // log.debug("ok");
-comment|// } catch (Exception ex) {
-comment|// log.error("FAILED", ex);
-comment|// }
 block|}
 comment|/**      * Once it is set up, a custom space is write-locked.      */
 annotation|@

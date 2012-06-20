@@ -152,21 +152,21 @@ name|ScopeRegistryImpl
 implements|implements
 name|ScopeRegistry
 block|{
-specifier|private
+specifier|protected
 name|Set
 argument_list|<
 name|String
 argument_list|>
 name|activeScopeIRIs
 decl_stmt|;
-specifier|private
+specifier|protected
 name|Set
 argument_list|<
 name|ScopeEventListener
 argument_list|>
-name|scopeListeners
+name|listeners
 decl_stmt|;
-specifier|private
+specifier|protected
 name|Map
 argument_list|<
 name|String
@@ -199,7 +199,7 @@ name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
-name|scopeListeners
+name|listeners
 operator|=
 operator|new
 name|HashSet
@@ -219,7 +219,7 @@ name|ScopeEventListener
 name|listener
 parameter_list|)
 block|{
-name|scopeListeners
+name|listeners
 operator|.
 name|add
 argument_list|(
@@ -234,7 +234,7 @@ name|void
 name|clearScopeRegistrationListeners
 parameter_list|()
 block|{
-name|scopeListeners
+name|listeners
 operator|.
 name|clear
 argument_list|()
@@ -348,7 +348,7 @@ control|(
 name|ScopeEventListener
 name|l
 range|:
-name|scopeListeners
+name|listeners
 control|)
 name|l
 operator|.
@@ -363,7 +363,7 @@ control|(
 name|ScopeEventListener
 name|l
 range|:
-name|scopeListeners
+name|listeners
 control|)
 name|l
 operator|.
@@ -387,7 +387,7 @@ control|(
 name|ScopeEventListener
 name|l
 range|:
-name|scopeListeners
+name|listeners
 control|)
 name|l
 operator|.
@@ -411,7 +411,7 @@ control|(
 name|ScopeEventListener
 name|l
 range|:
-name|scopeListeners
+name|listeners
 control|)
 name|l
 operator|.
@@ -522,7 +522,7 @@ name|getScopeRegistrationListeners
 parameter_list|()
 block|{
 return|return
-name|scopeListeners
+name|listeners
 return|;
 block|}
 annotation|@
@@ -630,7 +630,7 @@ name|ScopeEventListener
 name|listener
 parameter_list|)
 block|{
-name|scopeListeners
+name|listeners
 operator|.
 name|remove
 argument_list|(

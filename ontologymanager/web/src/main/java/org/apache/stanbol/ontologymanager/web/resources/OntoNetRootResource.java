@@ -3172,8 +3172,6 @@ name|content
 argument_list|,
 name|format
 argument_list|,
-literal|null
-argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
@@ -3240,8 +3238,6 @@ operator|.
 name|loadInStore
 argument_list|(
 name|location
-argument_list|,
-literal|null
 argument_list|,
 literal|null
 argument_list|,
@@ -3701,8 +3697,6 @@ operator|.
 name|toString
 argument_list|()
 argument_list|,
-literal|null
-argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
@@ -3831,8 +3825,6 @@ name|src
 operator|.
 name|getRootOntology
 argument_list|()
-argument_list|,
-literal|null
 argument_list|,
 literal|true
 argument_list|)

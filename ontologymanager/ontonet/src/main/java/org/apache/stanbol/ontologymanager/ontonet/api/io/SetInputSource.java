@@ -48,11 +48,14 @@ end_import
 begin_interface
 specifier|public
 interface|interface
-name|OntologySetInputSource
+name|SetInputSource
+parameter_list|<
+name|O
+parameter_list|>
 block|{
 name|Set
 argument_list|<
-name|OWLOntology
+name|O
 argument_list|>
 name|getOntologies
 parameter_list|()

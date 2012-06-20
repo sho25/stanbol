@@ -31,12 +31,12 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
+name|OWLOntologyID
 import|;
 end_import
 
 begin_comment
-comment|/**  * Objects that react to the addition or removal of ontologies to an ontology collector will implement this  * interface.  *   * @author alexdma  *   */
+comment|/**  * Objects that react to the addition or removal of ontologies to or from an ontology collector will implement  * this interface.<br>  *<br>  * XXX add "before" methods.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
@@ -44,25 +44,25 @@ specifier|public
 interface|interface
 name|OntologyCollectorListener
 block|{
-comment|/**      * Fired after an ontology was successfully added to an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param addedOntology      *            the added ontology identifier.      */
+comment|/**      * Fired<i>after</i> an ontology was successfully added to an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param addedOntology      *            the added ontology identifier.      */
 name|void
 name|onOntologyAdded
 parameter_list|(
-name|String
-name|collectorId
+name|OntologyCollector
+name|collector
 parameter_list|,
-name|IRI
+name|OWLOntologyID
 name|addedOntology
 parameter_list|)
 function_decl|;
-comment|/**      * Fired after an ontology was successfully removed from an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param removedOntology      *            the removed ontology identifier.      */
+comment|/**      * Fired<i>after</i> an ontology was successfully removed from an ontology collector.      *       * @param collectorId      *            the ontology collector identifier.      * @param removedOntology      *            the removed ontology identifier.      */
 name|void
 name|onOntologyRemoved
 parameter_list|(
-name|String
-name|collectorId
+name|OntologyCollector
+name|collector
 parameter_list|,
-name|IRI
+name|OWLOntologyID
 name|removedOntology
 parameter_list|)
 function_decl|;

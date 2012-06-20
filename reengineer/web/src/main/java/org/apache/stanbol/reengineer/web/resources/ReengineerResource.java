@@ -1142,7 +1142,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//return Response.ok(mGraph).build();
+comment|// return Response.ok(mGraph).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1263,7 +1263,7 @@ name|UnsupportedReengineerException
 name|e
 parameter_list|)
 block|{
-comment|//Response.status(404).build();
+comment|// Response.status(404).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1366,7 +1366,7 @@ argument_list|,
 name|dataSource
 argument_list|)
 expr_stmt|;
-comment|//return Response.ok().build();
+comment|// return Response.ok().build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1416,7 +1416,7 @@ argument_list|(
 name|ontology
 argument_list|)
 expr_stmt|;
-comment|//return Response.ok(ontology).build();
+comment|// return Response.ok(ontology).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1455,7 +1455,7 @@ operator|.
 name|printStackTrace
 argument_list|()
 expr_stmt|;
-comment|//return Response.status(500).build();
+comment|// return Response.status(500).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1491,7 +1491,7 @@ name|NoSuchDataSourceExpection
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(415).build();
+comment|// return Response.status(415).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1524,7 +1524,7 @@ name|InvalidDataSourceForTypeSelectedException
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(204).build();
+comment|// return Response.status(204).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1758,7 +1758,7 @@ argument_list|,
 name|dataSource
 argument_list|)
 expr_stmt|;
-comment|//return Response.ok(ontology).build();
+comment|// return Response.ok(ontology).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1791,7 +1791,7 @@ name|ReengineeringException
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(500).build();
+comment|// return Response.status(500).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1836,7 +1836,7 @@ argument_list|,
 name|dataSource
 argument_list|)
 expr_stmt|;
-comment|//return Response.ok().build();
+comment|// return Response.ok().build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -1867,7 +1867,7 @@ name|ReengineeringException
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(500).build();
+comment|// return Response.status(500).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -2105,7 +2105,7 @@ name|dataSource
 argument_list|)
 expr_stmt|;
 comment|/*                  * MediaType mediaType = headers.getMediaType(); String res =                  * OntologyRenderUtils.renderOntology(ontology, mediaType.getType());                  */
-comment|//return Response.ok(ontology).build();
+comment|// return Response.ok(ontology).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -2138,7 +2138,7 @@ name|ReengineeringException
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(500).build();
+comment|// return Response.status(500).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -2183,7 +2183,7 @@ argument_list|,
 name|dataSource
 argument_list|)
 expr_stmt|;
-comment|//return Response.ok().build();
+comment|// return Response.ok().build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -2214,7 +2214,7 @@ name|ReengineeringException
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(500).build();
+comment|// return Response.status(500).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -2491,7 +2491,7 @@ name|ReengineeringException
 name|e
 parameter_list|)
 block|{
-comment|//return Response.status(500).build();
+comment|// return Response.status(500).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -2623,6 +2623,9 @@ name|guessOntologyIdentifier
 argument_list|(
 name|o
 argument_list|)
+operator|.
+name|getOntologyIRI
+argument_list|()
 decl_stmt|;
 name|UriRef
 name|ref
