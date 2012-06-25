@@ -488,6 +488,13 @@ name|EntityhubException
 throws|,
 name|IllegalArgumentException
 function_decl|;
+comment|/**      * Deletes all Entities and their Mappings from the Entityhub.      * @throws EntityhubException On any error while performing the operation      */
+name|void
+name|deleteAll
+parameter_list|()
+throws|throws
+name|EntityhubException
+function_decl|;
 comment|/**      * Setter for the state of an Entity. This can be used to directly set the      * {@link ManagedEntityState} as stored with the       * {@link Entity#getMetadata() metadata} of an entity.      * @param id The id of the Entity (or the metadata of the entity)      * @param state the new state      * @return the entity with the new state or<code>null</code> if no entity      * for the parsed id was found.      * @throws EntityhubException On any error while performing the operation      * @throws IllegalArgumentException if<code>null</code> is parsed as any of      * the two parameter or if the parsed id is an empty string      */
 name|Entity
 name|setState

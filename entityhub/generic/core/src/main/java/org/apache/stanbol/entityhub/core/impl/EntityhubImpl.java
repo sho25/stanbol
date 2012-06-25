@@ -1422,6 +1422,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|EntityhubConfiguration
 name|getConfig
 parameter_list|()
@@ -1604,6 +1605,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Entity
 name|importEntity
 parameter_list|(
@@ -1744,6 +1746,7 @@ comment|/*      * @throws IllegalArgumentException if a {@link Representation} f
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Entity
 name|getEntity
 parameter_list|(
@@ -1838,6 +1841,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|boolean
 name|isRepresentation
 parameter_list|(
@@ -1882,6 +1886,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Entity
 name|store
 parameter_list|(
@@ -2068,6 +2073,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Entity
 name|delete
 parameter_list|(
@@ -2176,6 +2182,29 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
+name|void
+name|deleteAll
+parameter_list|()
+throws|throws
+name|EntityhubException
+block|{
+name|Yard
+name|yard
+init|=
+name|lookupYard
+argument_list|()
+decl_stmt|;
+name|yard
+operator|.
+name|removeAll
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+specifier|final
 name|Entity
 name|setState
 parameter_list|(
@@ -3787,6 +3816,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|Entity
 name|getMappingById
 parameter_list|(
@@ -3883,6 +3913,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|FieldQueryFactory
 name|getQueryFactory
 parameter_list|()
@@ -3915,6 +3946,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|FieldMapper
 name|getFieldMappings
 parameter_list|()
@@ -3926,6 +3958,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -3951,6 +3984,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|String
@@ -3976,6 +4010,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|QueryResultList
 argument_list|<
 name|Entity

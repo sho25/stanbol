@@ -3047,8 +3047,47 @@ name|saveNamespaceConfig
 argument_list|()
 expr_stmt|;
 comment|// save the configuration
-comment|// (TODO: we do not make a flush here ... so maybe we need to ensure that a flush is called
-comment|// sometimes)
+comment|//make sure the namespaces are committed to the Solr Server
+try|try
+block|{
+name|server
+operator|.
+name|commit
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SolrServerException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unable to commit NamespaceConfig to SolrServer"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Unable to commit NamespaceConfig to SolrServer"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 return|return
 name|prefix
@@ -3515,7 +3554,7 @@ operator|+
 name|configName
 return|;
 block|}
-comment|/**      * Saves the current configuration to the index!      */
+comment|/**      * Saves the current configuration to the index! This does NOT commit the      * changes!      */
 specifier|public
 name|void
 name|saveNamespaceConfig
