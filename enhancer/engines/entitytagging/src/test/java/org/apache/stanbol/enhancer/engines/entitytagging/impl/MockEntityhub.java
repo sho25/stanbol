@@ -885,6 +885,15 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|deleteAll
+parameter_list|()
+throws|throws
+name|EntityhubException
+block|{     }
 block|}
 end_class
 
