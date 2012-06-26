@@ -2727,7 +2727,7 @@ argument_list|,
 name|iri
 argument_list|)
 expr_stmt|;
-comment|// Rewrite imports
+comment|// Rewrite import statements
 name|String
 name|uri
 init|=
@@ -2763,7 +2763,6 @@ literal|1
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Rewrite import statements
 name|List
 argument_list|<
 name|OWLOntologyChange

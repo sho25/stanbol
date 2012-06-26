@@ -133,6 +133,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|reasoners
+operator|.
+name|servicesapi
+operator|.
+name|annotations
+operator|.
+name|Documentation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|service
@@ -235,6 +253,17 @@ literal|true
 argument_list|)
 annotation|@
 name|Service
+annotation|@
+name|Documentation
+argument_list|(
+name|name
+operator|=
+literal|"HermiT OWL 2"
+argument_list|,
+name|description
+operator|=
+literal|"This service supports OWL 2 profiles as implemented by the HermiT reasoner."
+argument_list|)
 specifier|public
 class|class
 name|HermitReasoningService
