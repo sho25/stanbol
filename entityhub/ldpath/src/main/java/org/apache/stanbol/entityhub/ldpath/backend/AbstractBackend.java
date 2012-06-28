@@ -2195,9 +2195,7 @@ name|Object
 name|value
 parameter_list|)
 block|{
-name|T
-name|converted
-decl_stmt|;
+comment|//        T converted;
 name|Object
 name|convertedObject
 init|=
@@ -2218,13 +2216,12 @@ argument_list|)
 decl_stmt|;
 try|try
 block|{
-name|converted
-operator|=
+return|return
 operator|(
 name|T
 operator|)
 name|convertedObject
-expr_stmt|;
+return|;
 block|}
 catch|catch
 parameter_list|(
@@ -2266,42 +2263,14 @@ literal|"'!"
 argument_list|)
 throw|;
 block|}
-if|if
-condition|(
-name|converted
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Unable to convert value '"
-operator|+
-name|value
-operator|+
-literal|"' to dataType '"
-operator|+
-name|type
-operator|.
-name|getShortName
-argument_list|()
-operator|+
-literal|"' (java: "
-operator|+
-name|type
-operator|.
-name|getJavaType
-argument_list|()
-operator|+
-literal|")!"
-argument_list|)
-throw|;
-block|}
-return|return
-name|converted
-return|;
+comment|//STANBOL-661: silently ignore values that can not be transformed to the
+comment|//  requested xsd data type
+comment|//        if(converted == null){
+comment|//            throw new IllegalArgumentException("Unable to convert value '"+
+comment|//                value+"' to dataType '"+type.getShortName()+"' (java: "+
+comment|//                type.getJavaType()+")!");
+comment|//        }
+comment|//        return converted;
 block|}
 comment|/*      * Utility methods for managing the local cache      */
 comment|/**      * Adds an retrieved Representation to the LRU cache      * @param r      */
