@@ -416,6 +416,23 @@ operator|+
 literal|"entity-label"
 argument_list|)
 decl_stmt|;
+comment|/**      * The confidence level (introducdes by      *<a herf="https://issues.apache.org/jira/browse/STANBOL-631">STANBOL-631</a>)      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|ENHANCER_CONFIDENCE_LEVEL
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"confidence-level"
+argument_list|)
+decl_stmt|;
 comment|/**      * Internet Media Type of a content item.      *       * @deprecated dc:FileFormat does not exist      */
 annotation|@
 name|Deprecated
