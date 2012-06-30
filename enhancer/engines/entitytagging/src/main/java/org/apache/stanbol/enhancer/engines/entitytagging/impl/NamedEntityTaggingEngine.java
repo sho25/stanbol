@@ -1455,7 +1455,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Init NamedEntityTaggingEngine instance for the Entityhub"
 argument_list|)
@@ -2504,7 +2504,7 @@ comment|// First get the required properties for the parsed textAnnotation
 comment|// ... and check the values
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Process {}"
 argument_list|,
@@ -2830,7 +2830,7 @@ decl_stmt|;
 comment|//else the referenced site
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|" - {} results returned by query {}"
 argument_list|,
@@ -3169,7 +3169,7 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"No value of {} for Entity {}!"
 argument_list|,
