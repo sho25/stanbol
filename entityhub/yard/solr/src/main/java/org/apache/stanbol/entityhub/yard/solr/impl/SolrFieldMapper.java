@@ -796,7 +796,7 @@ block|}
 comment|/**      * The assumption is, that only a handful of {@link IndexField}s are used very often.      *<p>      * So it makes sense to keep some mappings within a cache rather than calculating them again and again.      *       * @see LinkedHashMap#      */
 specifier|private
 specifier|final
-name|LRU
+name|Map
 argument_list|<
 name|IndexField
 argument_list|,
@@ -807,6 +807,11 @@ argument_list|>
 argument_list|>
 name|indexFieldMappings
 init|=
+comment|//STANBOL-669: LRU chaches MUST BE synchronized!
+name|Collections
+operator|.
+name|synchronizedMap
+argument_list|(
 operator|new
 name|LRU
 argument_list|<
@@ -818,11 +823,12 @@ name|String
 argument_list|>
 argument_list|>
 argument_list|()
+argument_list|)
 decl_stmt|;
 comment|/**      * The assumption is, that only a handful of fields appear in index documents. So it makes sense to keep      * some mappings within a cache rather than calculating them again and again.      */
 specifier|private
 specifier|final
-name|LRU
+name|Map
 argument_list|<
 name|String
 argument_list|,
@@ -830,6 +836,11 @@ name|IndexField
 argument_list|>
 name|fieldMappings
 init|=
+comment|//STANBOL-669: LRU chaches MUST BE synchronized!
+name|Collections
+operator|.
+name|synchronizedMap
+argument_list|(
 operator|new
 name|LRU
 argument_list|<
@@ -838,6 +849,7 @@ argument_list|,
 name|IndexField
 argument_list|>
 argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|public
 name|SolrFieldMapper
@@ -2688,9 +2700,15 @@ operator|==
 literal|null
 condition|)
 block|{
+synchronized|synchronized
+init|(
+name|prefixNamespaceMappingsLock
+init|)
+block|{
 name|loadNamespaceConfig
 argument_list|()
 expr_stmt|;
+block|}
 block|}
 return|return
 name|__namespaceMap
@@ -2707,6 +2725,15 @@ argument_list|>
 name|__prefixMap
 init|=
 literal|null
+decl_stmt|;
+comment|/**      * used as lock during loading of the namespace<-> prefix mappings      * (fixes STANBOL-668)      */
+specifier|private
+name|Object
+name|prefixNamespaceMappingsLock
+init|=
+operator|new
+name|Object
+argument_list|()
 decl_stmt|;
 comment|/**      * Getter for the prefix to namespace mappings      *       * @return the map holding the prefix to namespace mappings      */
 specifier|private
@@ -2726,9 +2753,15 @@ operator|==
 literal|null
 condition|)
 block|{
+synchronized|synchronized
+init|(
+name|prefixNamespaceMappingsLock
+init|)
+block|{
 name|loadNamespaceConfig
 argument_list|()
 expr_stmt|;
+block|}
 block|}
 return|return
 name|__prefixMap
@@ -3158,6 +3191,11 @@ name|String
 name|namespace
 parameter_list|)
 block|{
+synchronized|synchronized
+init|(
+name|prefixNamespaceMappingsLock
+init|)
+block|{
 name|getPrefixMap
 argument_list|()
 operator|.
@@ -3179,14 +3217,21 @@ name|prefix
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 comment|/**      * Leads the prefix to namespace mappings from the configured Solr server and inits the two mapps holding      * the prefix&lt;-&gt; namespace mappings      */
 specifier|private
 name|void
 name|loadNamespaceConfig
 parameter_list|()
 block|{
-name|__prefixMap
-operator|=
+name|HashMap
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|prefixMap
+init|=
 operator|new
 name|HashMap
 argument_list|<
@@ -3195,9 +3240,15 @@ argument_list|,
 name|String
 argument_list|>
 argument_list|()
-expr_stmt|;
-name|__namespaceMap
-operator|=
+decl_stmt|;
+name|HashMap
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|namespaceMap
+init|=
 operator|new
 name|HashMap
 argument_list|<
@@ -3206,7 +3257,7 @@ argument_list|,
 name|String
 argument_list|>
 argument_list|()
-expr_stmt|;
+decl_stmt|;
 name|SolrDocument
 name|config
 init|=
@@ -3348,7 +3399,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|__namespaceMap
+name|namespaceMap
 operator|.
 name|containsKey
 argument_list|(
@@ -3365,7 +3416,7 @@ name|error
 argument_list|(
 literal|"found two prefixes ("
 operator|+
-name|__namespaceMap
+name|namespaceMap
 operator|.
 name|get
 argument_list|(
@@ -3405,7 +3456,7 @@ operator|+
 name|value
 argument_list|)
 expr_stmt|;
-name|__prefixMap
+name|prefixMap
 operator|.
 name|put
 argument_list|(
@@ -3417,7 +3468,7 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|__namespaceMap
+name|namespaceMap
 operator|.
 name|put
 argument_list|(
@@ -3536,6 +3587,21 @@ expr_stmt|;
 block|}
 block|}
 block|}
+block|}
+comment|//only store complete mappings to the member variables (STANBOL-668)
+synchronized|synchronized
+init|(
+name|prefixNamespaceMappingsLock
+init|)
+block|{
+name|__prefixMap
+operator|=
+name|prefixMap
+expr_stmt|;
+name|__namespaceMap
+operator|=
+name|namespaceMap
+expr_stmt|;
 block|}
 block|}
 specifier|private
