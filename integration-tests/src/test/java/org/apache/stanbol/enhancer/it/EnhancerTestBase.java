@@ -612,7 +612,7 @@ name|getRemainingTimeSeconds
 argument_list|()
 operator|+
 literal|" seconds: "
-operator|+
+argument_list|,
 name|t
 argument_list|)
 expr_stmt|;
