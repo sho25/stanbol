@@ -679,7 +679,7 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"isReadable type {}, mediaType {}"
 argument_list|,
@@ -2254,7 +2254,7 @@ else|else
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"RangeConstraint does not define the field 'inclusive'. Use false as default!"
 argument_list|)

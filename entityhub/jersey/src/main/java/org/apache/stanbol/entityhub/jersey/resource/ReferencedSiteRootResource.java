@@ -1441,7 +1441,7 @@ argument_list|()
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"<init> with site {}"
 argument_list|,
@@ -2079,7 +2079,7 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"site/{}/entity Request"
 argument_list|,
@@ -2091,7 +2091,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> id       : "
 operator|+
@@ -2100,7 +2100,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> accept   : "
 operator|+
@@ -2112,7 +2112,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> mediaType: "
 operator|+
@@ -2263,7 +2263,7 @@ block|}
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"handle Request for Entity {} of Site {}"
 argument_list|,
@@ -2388,7 +2388,7 @@ comment|// TODO: How to parse an ErrorMessage?
 comment|// create an Response with the the Error?
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|" ... Entity {} not found on referenced site {}"
 argument_list|,

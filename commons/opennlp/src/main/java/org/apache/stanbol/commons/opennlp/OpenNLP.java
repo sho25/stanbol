@@ -713,7 +713,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"No perceptron based POS model for language "
 operator|+
@@ -880,7 +880,7 @@ comment|//                if(Arrays.equals(searchPaths, current.paths)) {
 comment|//                    log.debug("ModelLocations for Bundle {} and Paths {} already registered");
 comment|//                    return;
 comment|//                } else { //remove current registration
-comment|//                    log.info("remove existing ModelLocations for Bundle {} and Paths {}",
+comment|//                    log.debug("remove existing ModelLocations for Bundle {} and Paths {}",
 comment|//                        bundleSymbolicName,current.paths);
 comment|//                    if(current.provider != null){
 comment|//                        current.provider.close();
@@ -910,7 +910,7 @@ comment|//        String bundleSymbolicName = bundleContext.getBundle().getSymbo
 comment|//        synchronized (modelLocations) {
 comment|//            ModelLocation current = modelLocations.remove(bundleSymbolicName);
 comment|//            if(current != null){
-comment|//                log.info("remove modelLocation for Bundle {} and paths {}",
+comment|//                log.debug("remove modelLocation for Bundle {} and paths {}",
 comment|//                    bundleSymbolicName,current.paths);
 comment|//                if(current.provider != null){
 comment|//                    current.provider.close();
@@ -1082,7 +1082,7 @@ parameter_list|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Unable to load Resource {} via the DataFileProvider"
 argument_list|,
@@ -1102,7 +1102,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Unable to load Resource {} via the DataFileProvider"
 argument_list|,
