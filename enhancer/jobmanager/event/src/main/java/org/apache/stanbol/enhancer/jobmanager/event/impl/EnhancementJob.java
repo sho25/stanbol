@@ -1903,7 +1903,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Execution of '{}' for ContentItem {} completed "
 operator|+
@@ -2237,7 +2237,7 @@ block|{
 comment|//added an engine to running
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Started Execution of '{}' for ContentItem {} "
 operator|+
