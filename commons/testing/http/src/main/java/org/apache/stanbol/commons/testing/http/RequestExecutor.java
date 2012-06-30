@@ -726,20 +726,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|httpClient
-operator|.
-name|getCredentialsProvider
-argument_list|()
-operator|.
-name|setCredentials
-argument_list|(
-name|AuthScope
-operator|.
-name|ANY
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
+comment|//httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY, null);
 name|httpClient
 operator|.
 name|removeRequestInterceptorByClass

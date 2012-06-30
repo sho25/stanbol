@@ -978,13 +978,15 @@ operator|==
 literal|null
 condition|)
 block|{
-throw|throw
-operator|new
-name|IllegalStateException
+name|log
+operator|.
+name|debug
 argument_list|(
-literal|"Null ComponentContext, not activated?"
+literal|" ... can not init Jersey Endpoint - Component not yet activated!"
 argument_list|)
-throw|;
+expr_stmt|;
+comment|//throw new IllegalStateException("Null ComponentContext, not activated?");
+return|return;
 block|}
 name|shutdownJersey
 argument_list|()
@@ -993,7 +995,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Initializing the Jersey subsystem"
+literal|"(Re)initializing the Stanbol Jersey subsystem"
 argument_list|)
 expr_stmt|;
 comment|// register all the JAX-RS resources into a a JAX-RS application and bind it to a configurable URL
@@ -1087,7 +1089,7 @@ control|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Registering web fragment '{}' into jaxrs application"
 argument_list|,
@@ -1424,7 +1426,7 @@ parameter_list|()
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Unregistering aliases {}"
 argument_list|,

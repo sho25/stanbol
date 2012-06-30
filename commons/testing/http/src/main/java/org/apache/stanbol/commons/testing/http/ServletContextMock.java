@@ -272,10 +272,13 @@ name|String
 name|uripath
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|String
@@ -285,30 +288,39 @@ name|String
 name|name
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|Enumeration
 name|getInitParameterNames
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|int
 name|getMajorVersion
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|0
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|String
@@ -318,20 +330,26 @@ name|String
 name|file
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|int
 name|getMinorVersion
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|0
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|RequestDispatcher
@@ -341,10 +359,13 @@ name|String
 name|name
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|String
@@ -354,10 +375,13 @@ name|String
 name|path
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|RequestDispatcher
@@ -367,10 +391,13 @@ name|String
 name|path
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|URL
@@ -382,10 +409,13 @@ parameter_list|)
 throws|throws
 name|MalformedURLException
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|InputStream
@@ -395,10 +425,13 @@ name|String
 name|path
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|Set
@@ -408,20 +441,26 @@ name|String
 name|path
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|String
 name|getServerInfo
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|Servlet
@@ -433,40 +472,52 @@ parameter_list|)
 throws|throws
 name|ServletException
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|String
 name|getServletContextName
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|Enumeration
 name|getServletNames
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|Enumeration
 name|getServlets
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|void
@@ -476,7 +527,13 @@ name|String
 name|msg
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|void
@@ -489,7 +546,13 @@ name|String
 name|msg
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|void
@@ -502,7 +565,13 @@ name|Throwable
 name|throwable
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|void
@@ -512,7 +581,13 @@ name|String
 name|name
 parameter_list|)
 block|{
-comment|// TODO Auto-generated method stub
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 specifier|public
 name|void
@@ -534,6 +609,21 @@ argument_list|,
 name|object
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getContextPath
+parameter_list|()
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not included in the mock implementation"
+argument_list|)
+throw|;
 block|}
 block|}
 end_class
