@@ -136,6 +136,13 @@ name|OntologyCollectorListenable
 extends|,
 name|OWLExportable
 block|{
+specifier|static
+specifier|final
+name|String
+name|shortName
+init|=
+literal|"scope"
+decl_stmt|;
 comment|/**      * Returns the core ontology space for this ontology scope. The core space should never be null for any      * scope.      *       * @return the core ontology space      */
 name|OntologySpace
 name|getCoreSpace

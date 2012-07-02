@@ -56,7 +56,7 @@ parameter_list|)
 function_decl|;
 comment|/** 	 * Called<i>after</i> an ontology scope is removed from the scope registry. 	 *  	 * @param scope 	 *            the deregistered ontology scope 	 */
 name|void
-name|scopeDeregistered
+name|scopeUnregistered
 parameter_list|(
 name|OntologyScope
 name|scope

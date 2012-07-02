@@ -128,6 +128,13 @@ name|Lockable
 extends|,
 name|SessionListenable
 block|{
+specifier|static
+specifier|final
+name|String
+name|shortName
+init|=
+literal|"session"
+decl_stmt|;
 comment|/**      * The states a session can be in: ACTIVE (for running sessions), HALTED (for inactive sessions that may      * later be activated, e.g. when a user logs in), ZOMBIE (inactive and bound for destruction, no longer      * referenceable).      *       * @author alexdma      *       */
 enum|enum
 name|State

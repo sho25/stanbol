@@ -149,6 +149,24 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|OntologyNetworkConfiguration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
 name|collector
 operator|.
 name|ImportManagementPolicy
@@ -281,6 +299,11 @@ name|O
 argument_list|>
 name|returnType
 parameter_list|)
+function_decl|;
+specifier|public
+name|OntologyNetworkConfiguration
+name|getOntologyNetworkConfiguration
+parameter_list|()
 function_decl|;
 comment|/**      * Will return the keys of all the ontologies whose ontologyIRI is the one provided. These include any      * ontologies with that ontologyIRI and a versionIRI, and one ontology with no version IRI (if it exists,      * it must be unique).      *       * @param ontologyIRI      * @return      */
 name|Set

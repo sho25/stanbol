@@ -96,6 +96,13 @@ name|OWLExportable
 extends|,
 name|Lockable
 block|{
+specifier|static
+specifier|final
+name|String
+name|shortName
+init|=
+literal|"space"
+decl_stmt|;
 comment|/**      * The possible types of ontology spaces managed by OntoNet.      */
 specifier|public
 enum|enum

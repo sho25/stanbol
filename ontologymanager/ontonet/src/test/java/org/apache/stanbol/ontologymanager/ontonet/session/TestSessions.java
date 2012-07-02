@@ -33,7 +33,7 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|*
+name|ontologyProvider
 import|;
 end_import
 
@@ -134,24 +134,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|simple
-operator|.
-name|storage
-operator|.
-name|SimpleTcProvider
 import|;
 end_import
 
@@ -679,7 +661,7 @@ operator|=
 operator|new
 name|SessionManagerImpl
 argument_list|(
-literal|null
+name|ontologyProvider
 argument_list|,
 name|onmconf
 argument_list|)
@@ -916,7 +898,7 @@ operator|.
 name|getID
 argument_list|()
 decl_stmt|;
-comment|// FIXME replace with proper tests
+comment|// TODO replace with proper tests
 comment|// assertFalse(scope1.getSessionSpaces().isEmpty());
 comment|// assertNotNull(scope1.getSessionSpace(sesid));
 comment|// assertFalse(scope3.getSessionSpaces().isEmpty());

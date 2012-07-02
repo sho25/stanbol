@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An {@link OntologyInputSource} that gets ontologies from either a Clerezza {@link Graph} (or {@link MGraph}  * ), or its identifier and an optionally supplied triple collection manager.  *   * @author alexdma  *   */
+comment|/**  * An {@link OntologyInputSource} that gets ontologies from either a stored Clerezza {@link Graph} (or  * {@link MGraph} ), or its identifier and an optionally supplied triple collection manager.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -173,6 +173,23 @@ throw|;
 name|bindPhysicalIri
 argument_list|(
 literal|null
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|GraphSource
+parameter_list|(
+name|String
+name|graphId
+parameter_list|)
+block|{
+name|this
+argument_list|(
+operator|new
+name|UriRef
+argument_list|(
+name|graphId
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

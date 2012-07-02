@@ -97,6 +97,66 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|Vocabulary
+operator|.
+name|IS_MANAGED_BY
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|Vocabulary
+operator|.
+name|MANAGES
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|Vocabulary
+operator|.
+name|_NS_STANBOL_INTERNAL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -126,6 +186,18 @@ operator|.
 name|Assert
 operator|.
 name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNull
 import|;
 end_import
 
@@ -307,24 +379,6 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|Vocabulary
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
 name|io
 operator|.
 name|GraphContentInputSource
@@ -368,6 +422,26 @@ operator|.
 name|scope
 operator|.
 name|OntologyScope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|scope
+operator|.
+name|OntologySpace
 import|;
 end_import
 
@@ -510,7 +584,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This suite is for testing that all the meta-level information stored by OntoNet can be retrieved and  * rebuilt if OntoNet or Stanbol goes down but the Clerezza store is not cleared.  *   * @author alexdma  *   */
+comment|/**  * This suite is for testing that all the meta-level information stored by OntoNet can be retrieved and  * rebuilt if OntoNet or Stanbol goes down but the Clerezza store is not cleared.  *   * TODO add tests for preserving added ontologies  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -601,10 +675,13 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-name|scope
+name|_NS_STANBOL_INTERNAL
+operator|+
+name|OntologySpace
 operator|.
-name|getNamespace
-argument_list|()
+name|shortName
+operator|+
+literal|"/"
 operator|+
 name|scope
 operator|.
@@ -621,7 +698,17 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
+name|ontologyProvider
+operator|.
+name|getKey
+argument_list|(
+name|IRI
+operator|.
+name|create
+argument_list|(
 literal|"http://stanbol.apache.org/ontologies/test1.owl"
+argument_list|)
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Has no versionIRI
@@ -629,13 +716,7 @@ comment|// Be strict: the whole property pair must be there.
 name|UriRef
 name|predicate
 init|=
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|MANAGES_IN_CORE
-argument_list|)
+name|MANAGES
 decl_stmt|;
 name|assertTrue
 argument_list|(
@@ -657,13 +738,7 @@ argument_list|)
 expr_stmt|;
 name|predicate
 operator|=
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|IS_MANAGED_BY_CORE
-argument_list|)
+name|IS_MANAGED_BY
 expr_stmt|;
 name|assertTrue
 argument_list|(
@@ -715,19 +790,22 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
+name|ontologyProvider
+operator|.
+name|getKey
+argument_list|(
+name|IRI
+operator|.
+name|create
+argument_list|(
 literal|"http://stanbol.apache.org/ontologies/pcomics/minorcharacters.owl"
 argument_list|)
+argument_list|)
+argument_list|)
 decl_stmt|;
-comment|// Has no versionIRI
 name|predicate
 operator|=
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|MANAGES_IN_CORE
-argument_list|)
+name|MANAGES
 expr_stmt|;
 name|assertTrue
 argument_list|(
@@ -749,13 +827,7 @@ argument_list|)
 expr_stmt|;
 name|predicate
 operator|=
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|IS_MANAGED_BY_CORE
-argument_list|)
+name|IS_MANAGED_BY
 expr_stmt|;
 name|assertTrue
 argument_list|(
@@ -816,7 +888,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// @Test
+annotation|@
+name|Test
 specifier|public
 name|void
 name|preservesManagedOntologies
@@ -872,6 +945,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Simulate Stanbol going down.
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Stanbol going down..."
+argument_list|)
+expr_stmt|;
 name|resetOntologyProvider
 argument_list|()
 expr_stmt|;
@@ -895,8 +975,6 @@ name|sc
 argument_list|)
 expr_stmt|;
 comment|// assertEquals(scope, sc); XXX should scopes be equal on ID + content?
-comment|// for (IRI iri : sc.getCustomSpace().listManagedOntologies())
-comment|// System.out.println(iri);
 block|}
 annotation|@
 name|Test
@@ -907,6 +985,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+comment|/*          * Both scopes will be created, but scope1 will be unregistered and we expect not to be able to          * rebuild it.          */
 name|String
 name|id1
 init|=
@@ -915,6 +994,15 @@ decl_stmt|,
 name|id2
 init|=
 literal|"scope2"
+decl_stmt|,
+name|sid2
+init|=
+literal|"auto-"
+operator|+
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
 decl_stmt|;
 comment|// Setup a network
 name|OntologyScope
@@ -932,15 +1020,43 @@ argument_list|(
 name|scope1
 argument_list|)
 expr_stmt|;
-comment|// OntologyScope scope2 = onManager.createOntologyScope(id2);
-comment|// assertNotNull(scope2);
-comment|// onManager.deregisterScope(scope1);
+name|OntologyScope
+name|scope2
+init|=
+name|onManager
+operator|.
+name|createOntologyScope
+argument_list|(
+name|id2
+argument_list|)
+decl_stmt|;
+name|assertNotNull
+argument_list|(
+name|scope2
+argument_list|)
+expr_stmt|;
+name|onManager
+operator|.
+name|deregisterScope
+argument_list|(
+name|scope1
+argument_list|)
+expr_stmt|;
+comment|// A session with a system ID
 name|Session
 name|ses1
 init|=
 name|sessionManager
 operator|.
 name|createSession
+argument_list|()
+decl_stmt|;
+name|String
+name|sid1
+init|=
+name|ses1
+operator|.
+name|getID
 argument_list|()
 decl_stmt|;
 name|assertNotNull
@@ -950,30 +1066,27 @@ argument_list|)
 expr_stmt|;
 name|assertNotNull
 argument_list|(
-name|ses1
-operator|.
-name|getID
-argument_list|()
+name|sid1
 argument_list|)
 expr_stmt|;
 name|assertFalse
 argument_list|(
-name|ses1
-operator|.
-name|getID
-argument_list|()
+name|sid1
 operator|.
 name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// A session with an ID chosen manually
 name|Session
 name|ses2
 init|=
 name|sessionManager
 operator|.
 name|createSession
-argument_list|()
+argument_list|(
+name|sid2
+argument_list|)
 decl_stmt|;
 name|assertNotNull
 argument_list|(
@@ -988,15 +1101,21 @@ name|getID
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertEquals
 argument_list|(
+name|sid2
+argument_list|,
 name|ses2
 operator|.
 name|getID
 argument_list|()
+argument_list|)
+expr_stmt|;
+name|log
 operator|.
-name|isEmpty
-argument_list|()
+name|info
+argument_list|(
+literal|"Stanbol going down..."
 argument_list|)
 expr_stmt|;
 name|resetOntologyProvider
@@ -1006,7 +1125,8 @@ comment|// but keep the TcProvider
 name|resetManagers
 argument_list|()
 expr_stmt|;
-name|assertNotNull
+comment|// The unregistered scope should be missing.
+name|assertNull
 argument_list|(
 name|onManager
 operator|.
@@ -1016,7 +1136,37 @@ name|id1
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// assertNotNull(onManager.getScope(id2));
+comment|// The other collectors should have been rebuilt.
+name|assertNotNull
+argument_list|(
+name|onManager
+operator|.
+name|getScope
+argument_list|(
+name|id2
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertNotNull
+argument_list|(
+name|sessionManager
+operator|.
+name|getSession
+argument_list|(
+name|sid1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertNotNull
+argument_list|(
+name|sessionManager
+operator|.
+name|getSession
+argument_list|(
+name|sid2
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 comment|/*      * Use a dedicated TC Provider that is setup once before the tests begin and never cleared.      */
 specifier|private
@@ -1324,6 +1474,13 @@ argument_list|,
 name|id
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Stanbol going down..."
+argument_list|)
+expr_stmt|;
 name|resetOntologyProvider
 argument_list|()
 expr_stmt|;
@@ -1461,7 +1618,7 @@ decl_stmt|;
 name|OWLOntology
 name|o1
 decl_stmt|;
-comment|// Get the fake FOAF
+comment|// Get the fake FOAF and load it into the ontology provider
 name|InputStream
 name|data
 init|=
@@ -1473,6 +1630,7 @@ argument_list|(
 literal|"/ontologies/mockfoaf.rdf"
 argument_list|)
 decl_stmt|;
+comment|// Keep track of its storage key
 name|String
 name|key
 init|=
@@ -1502,7 +1660,7 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// Retrieve the stored ontology
+comment|// Retrieve the stored fake FOAF
 name|assertEquals
 argument_list|(
 literal|1
@@ -1551,7 +1709,7 @@ argument_list|,
 name|id
 argument_list|)
 expr_stmt|;
-comment|// Check there is a storage key for the FOAF ID
+comment|// Check there is a storage key for the (real) ID of the FOAF ontology
 name|key
 operator|=
 name|ontologyProvider
@@ -1574,6 +1732,13 @@ name|isEmpty
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Stanbol going down..."
+argument_list|)
+expr_stmt|;
 name|resetOntologyProvider
 argument_list|()
 expr_stmt|;
@@ -1591,7 +1756,7 @@ name|size
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// Check again
+comment|// Check again for the FOAF key
 name|key
 operator|=
 name|ontologyProvider
@@ -1634,6 +1799,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/*      * Before each test, everything is cleaned up, including the TcProvider.      */
 annotation|@
 name|Before
 specifier|public
@@ -1694,6 +1860,7 @@ name|empty
 argument_list|)
 expr_stmt|;
 block|}
+comment|/*      * With this method, the ontology provider and all its internal indices are cleared. However, the Clerezza      * persistence objects are not cleared, so we can check if we can still retrieve metadata from them.      */
 specifier|private
 name|void
 name|resetOntologyProvider

@@ -391,7 +391,7 @@ name|listeners
 control|)
 name|l
 operator|.
-name|scopeDeregistered
+name|scopeUnregistered
 argument_list|(
 name|scope
 argument_list|)

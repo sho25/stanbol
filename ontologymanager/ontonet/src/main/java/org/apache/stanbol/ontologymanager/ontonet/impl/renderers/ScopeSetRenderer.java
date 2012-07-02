@@ -298,6 +298,9 @@ argument_list|(
 name|Vocabulary
 operator|.
 name|SCOPE
+operator|.
+name|getUnicodeString
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
