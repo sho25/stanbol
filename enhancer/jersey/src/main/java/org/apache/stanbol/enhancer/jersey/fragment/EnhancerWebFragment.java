@@ -81,9 +81,9 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|access
+name|serializedform
 operator|.
-name|TcManager
+name|Serializer
 import|;
 end_import
 
@@ -99,9 +99,9 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|serializedform
+name|sparql
 operator|.
-name|Serializer
+name|QueryEngine
 import|;
 end_import
 
@@ -150,6 +150,22 @@ operator|.
 name|annotations
 operator|.
 name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|ReferenceCardinality
 import|;
 end_import
 
@@ -309,6 +325,24 @@ name|jersey
 operator|.
 name|resource
 operator|.
+name|EnhancementChainResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|jersey
+operator|.
+name|resource
+operator|.
 name|EnhancementEngineResource
 import|;
 end_import
@@ -346,24 +380,6 @@ operator|.
 name|resource
 operator|.
 name|EnhancerRootResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|jersey
-operator|.
-name|resource
-operator|.
-name|EnhancementChainResource
 import|;
 end_import
 
@@ -504,10 +520,18 @@ name|Reference
 name|EnhancementJobManager
 name|jobManager
 decl_stmt|;
+comment|/**      * Optional to have SPARQL support for the Stanbol Enhancer Config      */
 annotation|@
 name|Reference
-name|TcManager
-name|tcManager
+argument_list|(
+name|cardinality
+operator|=
+name|ReferenceCardinality
+operator|.
+name|OPTIONAL_UNARY
+argument_list|)
+name|QueryEngine
+name|queryEngine
 decl_stmt|;
 annotation|@
 name|Reference

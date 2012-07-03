@@ -53,22 +53,6 @@ end_import
 
 begin_import
 import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MediaType
-operator|.
-name|TEXT_PLAIN
-import|;
-end_import
-
-begin_import
-import|import static
 name|org
 operator|.
 name|apache
@@ -94,16 +78,6 @@ operator|.
 name|io
 operator|.
 name|IOException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|net
-operator|.
-name|URI
 import|;
 end_import
 
@@ -337,9 +311,9 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|access
+name|serializedform
 operator|.
-name|TcManager
+name|Serializer
 import|;
 end_import
 
@@ -355,9 +329,9 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|serializedform
+name|sparql
 operator|.
-name|Serializer
+name|QueryEngine
 import|;
 end_import
 
@@ -424,22 +398,6 @@ operator|.
 name|servicesapi
 operator|.
 name|ContentItem
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|ContentItemFactory
 import|;
 end_import
 
@@ -588,10 +546,10 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * Optional dependency - might be<code>null</code>      */
 specifier|protected
-specifier|final
-name|TcManager
-name|tcManager
+name|QueryEngine
+name|queryEngine
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -645,13 +603,13 @@ argument_list|,
 name|context
 argument_list|)
 expr_stmt|;
-name|tcManager
+name|queryEngine
 operator|=
 name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|TcManager
+name|QueryEngine
 operator|.
 name|class
 argument_list|,
@@ -901,8 +859,6 @@ argument_list|,
 name|uriInfo
 argument_list|,
 literal|""
-argument_list|,
-name|tcManager
 argument_list|,
 name|serializer
 argument_list|,

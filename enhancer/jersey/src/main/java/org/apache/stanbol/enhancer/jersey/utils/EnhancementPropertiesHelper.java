@@ -71,6 +71,18 @@ end_import
 
 begin_import
 import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|QueryParam
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
