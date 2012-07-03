@@ -2776,6 +2776,51 @@ expr_stmt|;
 comment|//not the Entity nor the metadata of the parsed ID
 block|}
 block|}
+if|if
+condition|(
+name|parsed
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Parsed RDF data do not contain any "
+operator|+
+literal|"Information about the parsed id '%s'"
+argument_list|,
+name|id
+argument_list|)
+argument_list|)
+operator|.
+name|header
+argument_list|(
+name|HttpHeaders
+operator|.
+name|ACCEPT
+argument_list|,
+name|accepted
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
 block|}
 comment|//First check if all parsed Representation can be created/updated
 if|if
