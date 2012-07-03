@@ -143,7 +143,6 @@ name|boolean
 name|timedOut
 decl_stmt|;
 specifier|protected
-specifier|final
 name|String
 name|endpoint
 decl_stmt|;
