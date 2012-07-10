@@ -431,7 +431,6 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-empty_stmt|;
 specifier|public
 name|OntologySpaceFactoryImpl
 parameter_list|(
@@ -700,7 +699,7 @@ name|CoreOntologySpace
 name|s
 init|=
 operator|new
-name|CoreOntologySpaceImpl
+name|CoreSpaceImpl
 argument_list|(
 name|scopeId
 argument_list|,
@@ -745,7 +744,7 @@ name|CustomOntologySpace
 name|s
 init|=
 operator|new
-name|CustomOntologySpaceImpl
+name|CustomSpaceImpl
 argument_list|(
 name|scopeId
 argument_list|,

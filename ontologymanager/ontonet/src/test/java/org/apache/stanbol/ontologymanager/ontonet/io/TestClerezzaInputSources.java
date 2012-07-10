@@ -383,7 +383,7 @@ name|impl
 operator|.
 name|clerezza
 operator|.
-name|CoreOntologySpaceImpl
+name|CoreSpaceImpl
 import|;
 end_import
 
@@ -671,7 +671,7 @@ name|OntologySpace
 name|spc
 init|=
 operator|new
-name|CoreOntologySpaceImpl
+name|CoreSpaceImpl
 argument_list|(
 name|TestClerezzaInputSources
 operator|.

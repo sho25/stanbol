@@ -1882,7 +1882,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|OntologySpace
+name|CoreOntologySpace
 name|getCoreSpace
 parameter_list|()
 block|{
@@ -1893,7 +1893,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|OntologySpace
+name|CustomOntologySpace
 name|getCustomSpace
 parameter_list|()
 block|{
@@ -2057,7 +2057,7 @@ specifier|synchronized
 name|void
 name|setCustomSpace
 parameter_list|(
-name|OntologySpace
+name|CustomOntologySpace
 name|customSpace
 parameter_list|)
 throws|throws

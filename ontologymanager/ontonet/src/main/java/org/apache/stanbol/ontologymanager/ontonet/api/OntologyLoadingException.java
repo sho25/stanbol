@@ -16,43 +16,60 @@ operator|.
 name|ontonet
 operator|.
 name|api
-operator|.
-name|scope
 package|;
 end_package
 
 begin_comment
-comment|/**  * An ontology space that wraps the components that can be customized by CMS developers, IKS customizers and  * the like. The custom ontology space becomes read-only after bootstrapping (i.e. after a call to  *<code>setUp()</code>).  *   * The ontologies in a custom space typically depend on those in the core space. However, a custom space does  *<i>not</i> know which is the core space, it only imports its ontologies. The core-custom-session  * relationship between spaces is a scope is handled by external objects.  *   * @author alexdma  *   */
+comment|/**  * A runtime exception denoting that trying to load an ontology into the Ontology Manager has caused an  * undesired status. Most of the time the reason is to be found in the cause registered with this exception.  *   * @author alexdma  *   */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|CustomOntologySpace
+class|class
+name|OntologyLoadingException
 extends|extends
-name|OntologySpace
+name|RuntimeException
 block|{
-enum|enum
-name|ConnectivityPolicy
-block|{
-name|LOOSE
-block|,
-name|TIGHT
-block|}
-empty_stmt|;
-name|ConnectivityPolicy
-name|getConnectivityPolicy
-parameter_list|()
-function_decl|;
-name|void
-name|setConnectivityPolicy
+comment|/**      *       */
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+operator|-
+literal|8496827319814210715L
+decl_stmt|;
+comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param cause      *            the throwable that caused this exception to be thrown.      */
+specifier|public
+name|OntologyLoadingException
 parameter_list|(
-name|ConnectivityPolicy
-name|policy
+name|Throwable
+name|cause
 parameter_list|)
-function_decl|;
+block|{
+name|initCause
+argument_list|(
+name|cause
+argument_list|)
+expr_stmt|;
 block|}
-end_interface
+comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param message      *            the exception message.      */
+specifier|public
+name|OntologyLoadingException
+parameter_list|(
+name|String
+name|message
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+end_class
 
 end_unit
 

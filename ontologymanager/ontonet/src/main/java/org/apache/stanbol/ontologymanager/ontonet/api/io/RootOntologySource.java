@@ -72,17 +72,10 @@ argument_list|(
 name|rootOntology
 argument_list|)
 expr_stmt|;
-try|try
-block|{
+comment|// Never bind logical IDs as physical IRIs, as they risk overwriting previous bindings.
 name|bindPhysicalIri
 argument_list|(
-name|rootOntology
-operator|.
-name|getOntologyID
-argument_list|()
-operator|.
-name|getDefaultDocumentIRI
-argument_list|()
+literal|null
 argument_list|)
 expr_stmt|;
 name|bindTriplesProvider
@@ -93,20 +86,6 @@ name|getOWLOntologyManager
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-comment|// Ontology might be anonymous, no physical IRI then...
-name|bindPhysicalIri
-argument_list|(
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 comment|/**      * This constructor can be used to hijack ontologies using a physical IRI other than their default one.      *       * @param rootOntology      * @param phyicalIRI      */
 specifier|public

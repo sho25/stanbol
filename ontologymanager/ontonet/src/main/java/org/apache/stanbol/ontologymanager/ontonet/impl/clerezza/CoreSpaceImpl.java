@@ -57,7 +57,7 @@ name|api
 operator|.
 name|scope
 operator|.
-name|CustomOntologySpace
+name|CoreOntologySpace
 import|;
 end_import
 
@@ -76,17 +76,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of custom ontology space.  *   * @author alexdma  *   */
+comment|/**  * Default implementation of core ontology space.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|CustomOntologySpaceImpl
+name|CoreSpaceImpl
 extends|extends
 name|AbstractOntologySpaceImpl
 implements|implements
-name|CustomOntologySpace
+name|CoreOntologySpace
 block|{
 specifier|public
 specifier|static
@@ -96,7 +96,7 @@ name|SUFFIX
 init|=
 name|SpaceType
 operator|.
-name|CUSTOM
+name|CORE
 operator|.
 name|getIRISuffix
 argument_list|()
@@ -127,7 +127,7 @@ name|SUFFIX
 return|;
 block|}
 specifier|public
-name|CustomOntologySpaceImpl
+name|CoreSpaceImpl
 parameter_list|(
 name|String
 name|scopeID
@@ -153,13 +153,13 @@ name|namespace
 argument_list|,
 name|SpaceType
 operator|.
-name|CUSTOM
+name|CORE
 argument_list|,
 name|ontologyProvider
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Once it is set up, a custom space is write-locked.      */
+comment|/**      * When set up, a core space is write-locked.      */
 annotation|@
 name|Override
 specifier|public
@@ -173,6 +173,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+comment|/**      * When torn down, a core space releases its write-lock.      */
 annotation|@
 name|Override
 specifier|public

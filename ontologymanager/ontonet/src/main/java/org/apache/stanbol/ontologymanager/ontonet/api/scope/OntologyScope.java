@@ -144,12 +144,12 @@ init|=
 literal|"scope"
 decl_stmt|;
 comment|/**      * Returns the core ontology space for this ontology scope. The core space should never be null for any      * scope.      *       * @return the core ontology space      */
-name|OntologySpace
+name|CoreOntologySpace
 name|getCoreSpace
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the custom ontology space for this ontology scope.      *       * @return the custom ontology space, or null if no custom space is registered for this scope.      */
-name|OntologySpace
+name|CustomOntologySpace
 name|getCustomSpace
 parameter_list|()
 function_decl|;
@@ -157,7 +157,7 @@ comment|/**      * Sets an ontology space as the custom space for this scope.   
 name|void
 name|setCustomSpace
 parameter_list|(
-name|OntologySpace
+name|CustomOntologySpace
 name|customSpace
 parameter_list|)
 throws|throws

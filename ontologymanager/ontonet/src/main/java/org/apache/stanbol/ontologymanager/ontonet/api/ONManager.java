@@ -148,6 +148,12 @@ name|CONFIG_ONTOLOGY_PATH
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.onconfig"
 decl_stmt|;
+comment|/**      * The key used to configure the connectivity policy.      */
+name|String
+name|CONNECTIVITY_POLICY
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.connectivity"
+decl_stmt|;
 comment|/**      * The key used to configure the ID of the ontology network manager.      */
 name|String
 name|ID

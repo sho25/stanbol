@@ -540,7 +540,7 @@ name|OntologySpace
 name|spc
 init|=
 operator|new
-name|CustomOntologySpaceImpl
+name|CustomSpaceImpl
 argument_list|(
 literal|"Test"
 argument_list|,
