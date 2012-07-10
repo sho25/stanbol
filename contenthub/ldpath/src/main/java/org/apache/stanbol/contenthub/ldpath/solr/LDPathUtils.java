@@ -383,7 +383,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -1011,7 +1011,7 @@ name|Bundle
 name|bundle
 decl_stmt|;
 specifier|private
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 decl_stmt|;
 comment|/**      * Constructor taking a {@link Bundle} parameter. This bundle is used when obtaining Solr schema template.      *       * @param bundle      *            From which the template Solr schema is obtained.      */
@@ -1021,7 +1021,7 @@ parameter_list|(
 name|Bundle
 name|bundle
 parameter_list|,
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 parameter_list|)
 block|{

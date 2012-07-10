@@ -83,12 +83,12 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
 begin_comment
-comment|/**  * Intended to define the configuration of the fieldMapper.  *  * @author Rupert Westenthaler  * @deprecated unsure - Currently the functionality of this service is part of  * the {@link EntityhubConfiguration} and the {@link SiteConfiguration} interfaces.   * Access Methods for the {@link FieldMapper} are defined by the   * {@link Entityhub} and the {@link ReferencedSite} interfaces  */
+comment|/**  * Intended to define the configuration of the fieldMapper.  *  * @author Rupert Westenthaler  * @deprecated unsure - Currently the functionality of this service is part of  * the {@link EntityhubConfiguration} and the {@link SiteConfiguration} interfaces.   * Access Methods for the {@link FieldMapper} are defined by the   * {@link Entityhub} and the {@link Site} interfaces  */
 end_comment
 
 begin_interface
@@ -98,7 +98,7 @@ specifier|public
 interface|interface
 name|FieldMapperConfig
 block|{
-comment|/**      * The property used to configure the default mappings used by all      * {@link ReferencedSite} instances active within the Entityhub      */
+comment|/**      * The property used to configure the default mappings used by all      * {@link Site} instances active within the Entityhub      */
 name|String
 name|DEFAULT_MAPPINGS
 init|=

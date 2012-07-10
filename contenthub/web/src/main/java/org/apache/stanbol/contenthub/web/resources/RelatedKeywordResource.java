@@ -549,7 +549,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -637,7 +637,7 @@ name|getUnicodeString
 argument_list|()
 decl_stmt|;
 specifier|private
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 decl_stmt|;
 specifier|private
@@ -659,7 +659,7 @@ name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,

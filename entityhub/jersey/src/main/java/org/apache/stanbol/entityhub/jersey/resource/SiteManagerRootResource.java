@@ -967,7 +967,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -1052,7 +1052,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Resource to provide a REST API for the {@link ReferencedSiteManager}.  *   * TODO: add description  */
+comment|/**  * Resource to provide a REST API for the {@link SiteManager}.  *   * TODO: add description  */
 end_comment
 
 begin_class
@@ -1457,14 +1457,14 @@ return|;
 block|}
 else|else
 block|{
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 init|=
 name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -1485,7 +1485,7 @@ name|site
 range|:
 name|referencedSiteManager
 operator|.
-name|getReferencedSiteIds
+name|getSiteIds
 argument_list|()
 control|)
 block|{
@@ -1785,14 +1785,14 @@ argument_list|()
 return|;
 block|}
 block|}
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 init|=
 name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -2313,7 +2313,7 @@ name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -2527,7 +2527,7 @@ name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -2682,14 +2682,14 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 init|=
 name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -2717,12 +2717,12 @@ name|servletContext
 argument_list|)
 return|;
 block|}
-comment|/**      * Executes the query parsed by {@link #queryEntities(String, File, HttpHeaders)} or created based      * {@link #findEntity(String, String, String, int, int, HttpHeaders)}      *       * @param manager The {@link ReferencedSiteManager}      * @param query      *            The query to execute      * @param headers the request headers      * @return the response (results of error)      */
+comment|/**      * Executes the query parsed by {@link #queryEntities(String, File, HttpHeaders)} or created based      * {@link #findEntity(String, String, String, int, int, HttpHeaders)}      *       * @param manager The {@link SiteManager}      * @param query      *            The query to execute      * @param headers the request headers      * @return the response (results of error)      */
 specifier|private
 name|Response
 name|executeQuery
 parameter_list|(
-name|ReferencedSiteManager
+name|SiteManager
 name|manager
 parameter_list|,
 name|FieldQuery
@@ -2841,7 +2841,7 @@ specifier|private
 name|Response
 name|executeLDPathQuery
 parameter_list|(
-name|ReferencedSiteManager
+name|SiteManager
 name|manager
 parameter_list|,
 name|FieldQuery

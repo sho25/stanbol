@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interface used to provide service/technology specific implementation of the  * search interface provided by {@link ReferencedSite}.  * @author Rupert Westenthaler  *  */
+comment|/**  * Interface used to provide service/technology specific implementation of the  * search interface provided by {@link Site}.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface
@@ -96,7 +96,7 @@ comment|/**      * The key used to define the baseUri of the query service used 
 name|String
 name|QUERY_URI
 init|=
-name|SiteConfiguration
+name|ReferencedSiteConfiguration
 operator|.
 name|QUERY_URI
 decl_stmt|;

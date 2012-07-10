@@ -173,7 +173,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -191,7 +191,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteException
+name|SiteException
 import|;
 end_import
 
@@ -209,7 +209,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -260,7 +260,7 @@ name|class
 argument_list|)
 decl_stmt|;
 specifier|private
-name|ReferencedSiteManager
+name|SiteManager
 name|_siteManager
 decl_stmt|;
 specifier|private
@@ -326,7 +326,7 @@ name|siteId
 expr_stmt|;
 block|}
 specifier|private
-name|ReferencedSite
+name|Site
 name|getSite
 parameter_list|()
 throws|throws
@@ -345,7 +345,7 @@ name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -372,12 +372,12 @@ argument_list|)
 throw|;
 block|}
 block|}
-name|ReferencedSite
+name|Site
 name|site
 init|=
 name|_siteManager
 operator|.
-name|getReferencedSite
+name|getSite
 argument_list|(
 name|siteId
 argument_list|)
@@ -435,7 +435,7 @@ return|return
 name|site
 return|;
 block|}
-comment|/**      * @param query      * @return      * @throws ReferencedSiteException      */
+comment|/**      * @param query      * @return      * @throws SiteException      */
 specifier|protected
 name|QueryResultList
 argument_list|<
@@ -447,7 +447,7 @@ name|FieldQuery
 name|query
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 block|{
 return|return
 name|getSite

@@ -847,7 +847,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -865,7 +865,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteException
+name|SiteException
 import|;
 end_import
 
@@ -883,7 +883,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -948,7 +948,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Engine that uses a {@link ReferencedSite} to search for entities for existing TextAnnotations of an Content  * Item.  *   * @author ogrisel, rwesten  */
+comment|/**  * Engine that uses a {@link Site} to search for entities for existing TextAnnotations of an Content  * Item.  *   * @author ogrisel, rwesten  */
 end_comment
 
 begin_class
@@ -1190,7 +1190,7 @@ comment|/**      * Service of the Entityhub that manages all the active referenc
 annotation|@
 name|Reference
 specifier|protected
-name|ReferencedSiteManager
+name|SiteManager
 name|siteManager
 decl_stmt|;
 comment|/**      * Used to lookup Entities if the {@link #REFERENCED_SITE_ID} property is      * set to "entityhub" or "local"      */
@@ -1200,7 +1200,7 @@ specifier|protected
 name|Entityhub
 name|entityhub
 decl_stmt|;
-comment|/**      * This holds the id of the {@link ReferencedSite} used to lookup Entities      * or<code>null</code> if the {@link Entityhub} is used.       */
+comment|/**      * This holds the id of the {@link Site} used to lookup Entities      * or<code>null</code> if the {@link Entityhub} is used.       */
 specifier|protected
 name|String
 name|referencedSiteID
@@ -1262,7 +1262,7 @@ name|dereferenceEntities
 init|=
 literal|true
 decl_stmt|;
-comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link ReferencedSite} can operate      * offline or not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
+comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link Site} can operate      * offline or not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
 annotation|@
 name|Reference
 argument_list|(
@@ -1777,7 +1777,7 @@ throws|throws
 name|EngineException
 block|{
 specifier|final
-name|ReferencedSite
+name|Site
 name|site
 decl_stmt|;
 if|if
@@ -1792,7 +1792,7 @@ name|site
 operator|=
 name|siteManager
 operator|.
-name|getReferencedSite
+name|getSite
 argument_list|(
 name|referencedSiteID
 argument_list|)
@@ -2473,7 +2473,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Computes the Enhancements      * @param site The {@link ReferencedSiteException} id or<code>null</code> to      * use the {@link Entityhub}      * @param literalFactory the {@link LiteralFactory} used to create RDF Literals      * @param contentItemId the id of the contentItem      * @param textAnnotation the text annotation to enhance      * @param subsumedAnnotations other text annotations for the same entity       * @param language the language of the analysed text or<code>null</code>      * if not available.      * @return the suggestions for the parsed {@link NamedEntity}      * @throws EntityhubException On any Error while looking up Entities via      * the Entityhub      */
+comment|/**      * Computes the Enhancements      * @param site The {@link SiteException} id or<code>null</code> to      * use the {@link Entityhub}      * @param literalFactory the {@link LiteralFactory} used to create RDF Literals      * @param contentItemId the id of the contentItem      * @param textAnnotation the text annotation to enhance      * @param subsumedAnnotations other text annotations for the same entity       * @param language the language of the analysed text or<code>null</code>      * if not available.      * @return the suggestions for the parsed {@link NamedEntity}      * @throws EntityhubException On any Error while looking up Entities via      * the Entityhub      */
 specifier|protected
 specifier|final
 name|List
@@ -2482,7 +2482,7 @@ name|Suggestion
 argument_list|>
 name|computeEntityRecommentations
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|site
 parameter_list|,
 name|NamedEntity

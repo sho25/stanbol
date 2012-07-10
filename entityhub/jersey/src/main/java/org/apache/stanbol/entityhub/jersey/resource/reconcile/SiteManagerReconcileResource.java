@@ -137,7 +137,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteException
+name|SiteException
 import|;
 end_import
 
@@ -155,7 +155,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -171,7 +171,7 @@ name|SiteManagerReconcileResource
 extends|extends
 name|BaseGoogleRefineReconcileResource
 block|{
-name|ReferencedSiteManager
+name|SiteManager
 name|_siteManager
 decl_stmt|;
 specifier|public
@@ -183,7 +183,7 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|private
-name|ReferencedSiteManager
+name|SiteManager
 name|getSiteManager
 parameter_list|()
 block|{
@@ -200,7 +200,7 @@ name|ContextHelper
 operator|.
 name|getServiceFromContext
 argument_list|(
-name|ReferencedSiteManager
+name|SiteManager
 operator|.
 name|class
 argument_list|,
@@ -240,7 +240,7 @@ name|FieldQuery
 name|query
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 block|{
 return|return
 name|getSiteManager

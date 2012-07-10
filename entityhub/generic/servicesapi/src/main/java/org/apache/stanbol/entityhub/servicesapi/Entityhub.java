@@ -225,7 +225,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -243,7 +243,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -266,7 +266,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<p>The Entityhub defines an interface that allows to manage Entities.   * Entities managed by the Entityhub are often referred by "locally managed  * Entities" to differentiate them form entities managed by   * {@link ReferencedSite}s.<p>  * The Entityhub supports full CRUD support for Entities and also allows to   * import Entities from Referenced sites.<p>  * In addition to Entities the Entityhub also allows to work with mappings  * between Entities of {@link ReferencedSite}s with locally managed Entities.  *   * @author Rupert Westenthaler  *  */
+comment|/**  *<p>The Entityhub defines an interface that allows to manage Entities.   * Entities managed by the Entityhub are often referred by "locally managed  * Entities" to differentiate them form entities managed by   * {@link Site}s.<p>  * The Entityhub supports full CRUD support for Entities and also allows to   * import Entities from Referenced sites.<p>  * In addition to Entities the Entityhub also allows to work with mappings  * between Entities of {@link Site}s with locally managed Entities.  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface
@@ -279,7 +279,7 @@ name|DEFAUTL_ENTITYHUB_PREFIX
 init|=
 literal|"urn:org.apache.stanbol:entityhub"
 decl_stmt|;
-comment|/**      * Protected keys to be used as name for the Entityhub. Such keys MUST NOT      * be used as {@link ReferencedSite#getId() id}s for       * {@link ReferencedSite}s. (case insensitive)<p>      * The protected values are<ul>      *<li><code>"local"</code>      *<li><code>"entityhub"</code>      *</ul>      */
+comment|/**      * Protected keys to be used as name for the Entityhub. Such keys MUST NOT      * be used as {@link Site#getId() id}s for       * {@link Site}s. (case insensitive)<p>      * The protected values are<ul>      *<li><code>"local"</code>      *<li><code>"entityhub"</code>      *</ul>      */
 name|Set
 argument_list|<
 name|String

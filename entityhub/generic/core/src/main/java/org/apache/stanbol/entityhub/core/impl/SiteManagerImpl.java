@@ -399,7 +399,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -417,7 +417,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteException
+name|SiteException
 import|;
 end_import
 
@@ -435,7 +435,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -492,9 +492,9 @@ block|{ }
 argument_list|)
 specifier|public
 class|class
-name|ReferenceManagerImpl
+name|SiteManagerImpl
 implements|implements
-name|ReferencedSiteManager
+name|SiteManager
 block|{
 specifier|private
 specifier|final
@@ -503,7 +503,7 @@ name|log
 decl_stmt|;
 comment|//    private ComponentContext context;
 specifier|public
-name|ReferenceManagerImpl
+name|SiteManagerImpl
 parameter_list|()
 block|{
 name|super
@@ -515,7 +515,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|ReferenceManagerImpl
+name|SiteManagerImpl
 operator|.
 name|class
 argument_list|)
@@ -526,7 +526,7 @@ name|info
 argument_list|(
 literal|" create instance of "
 operator|+
-name|ReferenceManagerImpl
+name|SiteManagerImpl
 operator|.
 name|class
 argument_list|)
@@ -543,7 +543,7 @@ name|OPTIONAL_MULTIPLE
 argument_list|,
 name|referenceInterface
 operator|=
-name|ReferencedSite
+name|Site
 operator|.
 name|class
 argument_list|,
@@ -569,25 +569,25 @@ literal|"unbindReferencedSites"
 argument_list|)
 name|List
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|referencedSites
 init|=
 operator|new
 name|CopyOnWriteArrayList
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Map holding the mapping of the site ID to the referencedSite Object      * TODO: in principle it could be possible that two instances of      * {@link ReferencedSite} could be configured to use the same ID      */
+comment|/**      * Map holding the mapping of the site ID to the referencedSite Object      * TODO: in principle it could be possible that two instances of      * {@link Site} could be configured to use the same ID      */
 specifier|private
 specifier|final
 name|Map
 argument_list|<
 name|String
 argument_list|,
-name|ReferencedSite
+name|Site
 argument_list|>
 name|idMap
 init|=
@@ -600,7 +600,7 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|()
 argument_list|)
@@ -614,7 +614,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|>
 name|prefixMap
@@ -630,13 +630,13 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|>
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * This List is used for binary searches within the prefixes to find the      * {@link ReferencedSite} to search for a {@link #getEntity(String)}      * request.<b>      * NOTE: Every access to this list MUST BE synchronised to {@link #prefixMap}      * TODO: I am quite sure, that there is some ioUtils class that provides      * both a Map and an sorted List over the keys!      */
+comment|/**      * This List is used for binary searches within the prefixes to find the      * {@link Site} to search for a {@link #getEntity(String)}      * request.<b>      * NOTE: Every access to this list MUST BE synchronised to {@link #prefixMap}      * TODO: I am quite sure, that there is some ioUtils class that provides      * both a Map and an sorted List over the keys!      */
 specifier|private
 specifier|final
 name|List
@@ -656,7 +656,7 @@ specifier|private
 specifier|final
 name|Set
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|noPrefixSites
 init|=
@@ -667,7 +667,7 @@ argument_list|(
 operator|new
 name|HashSet
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|()
 argument_list|)
@@ -742,36 +742,11 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|addReferredSite
-parameter_list|(
-name|String
-name|baseUri
-parameter_list|,
-name|Dictionary
-argument_list|<
-name|String
-argument_list|,
-name|?
-argument_list|>
-name|properties
-parameter_list|)
-block|{
-comment|//TODO: implement
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
-block|}
 specifier|protected
 name|void
 name|bindReferencedSites
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|referencedSite
 parameter_list|)
 block|{
@@ -816,7 +791,7 @@ specifier|protected
 name|void
 name|unbindReferencedSites
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|referencedSite
 parameter_list|)
 block|{
@@ -860,7 +835,7 @@ specifier|private
 name|void
 name|addEntityPrefixes
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|referencedSite
 parameter_list|)
 block|{
@@ -933,7 +908,7 @@ init|)
 block|{
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|sites
 init|=
@@ -956,7 +931,7 @@ operator|=
 operator|new
 name|CopyOnWriteArrayList
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -1025,7 +1000,7 @@ specifier|private
 name|void
 name|removeEntityPrefixes
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|referencedSite
 parameter_list|)
 block|{
@@ -1085,7 +1060,7 @@ init|)
 block|{
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|sites
 init|=
@@ -1143,8 +1118,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|ReferencedSite
-name|getReferencedSite
+name|Site
+name|getSite
 parameter_list|(
 name|String
 name|id
@@ -1166,7 +1141,7 @@ name|Collection
 argument_list|<
 name|String
 argument_list|>
-name|getReferencedSiteIds
+name|getSiteIds
 parameter_list|()
 block|{
 return|return
@@ -1205,9 +1180,9 @@ name|Override
 specifier|public
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
-name|getReferencedSitesByEntityPrefix
+name|getSitesByEntityPrefix
 parameter_list|(
 name|String
 name|entityUri
@@ -1335,7 +1310,7 @@ argument_list|)
 expr_stmt|;
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|prefixSites
 init|=
@@ -1348,14 +1323,14 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|sites
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 argument_list|(
 name|noPrefixSites
@@ -1469,7 +1444,7 @@ literal|null
 decl_stmt|;
 for|for
 control|(
-name|ReferencedSite
+name|Site
 name|site
 range|:
 name|referencedSites
@@ -1565,7 +1540,7 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{
@@ -1700,7 +1675,7 @@ literal|null
 decl_stmt|;
 for|for
 control|(
-name|ReferencedSite
+name|Site
 name|site
 range|:
 name|referencedSites
@@ -1834,7 +1809,7 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{
@@ -1966,7 +1941,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|ReferencedSite
+name|Site
 name|site
 range|:
 name|referencedSites
@@ -2103,7 +2078,7 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{
@@ -2198,11 +2173,11 @@ parameter_list|)
 block|{
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|sites
 init|=
-name|getReferencedSitesByEntityPrefix
+name|getSitesByEntityPrefix
 argument_list|(
 name|entityId
 argument_list|)
@@ -2239,7 +2214,7 @@ return|;
 block|}
 for|for
 control|(
-name|ReferencedSite
+name|Site
 name|site
 range|:
 name|sites
@@ -2299,7 +2274,7 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{
@@ -2358,11 +2333,11 @@ parameter_list|)
 block|{
 name|Collection
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 name|sites
 init|=
-name|getReferencedSitesByEntityPrefix
+name|getSitesByEntityPrefix
 argument_list|(
 name|entityId
 argument_list|)
@@ -2399,7 +2374,7 @@ return|;
 block|}
 for|for
 control|(
-name|ReferencedSite
+name|Site
 name|site
 range|:
 name|sites
@@ -2450,7 +2425,7 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{

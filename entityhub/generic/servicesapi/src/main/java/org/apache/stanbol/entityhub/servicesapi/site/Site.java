@@ -217,10 +217,14 @@ name|Cache
 import|;
 end_import
 
+begin_comment
+comment|/**  * A site that provides Entities for the Entityhub. Sites are read-only and  * do support {@link #getEntity(String) dereferencing} of {@link Entity entities}.   * They optionally can {@link #supportsSearch() support search}.<p>  * {@link ManagedSite}s do also support create/update/delete on  * managed entities. They are also required to support the query.  *   *<i>NOTE:</i> this interface replaces ReferencedSite in versions  * later than 0.10.0-incubating.  *   * @author Rupert Westenthaler  */
+end_comment
+
 begin_interface
 specifier|public
 interface|interface
-name|ReferencedSite
+name|Site
 block|{
 comment|/**      * List of {@link #getId() ids} that are not allowed to be used (case      * insensitive) for referenced sites.      */
 name|Set
@@ -238,7 +242,7 @@ name|String
 name|getId
 parameter_list|()
 function_decl|;
-comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * the references (ids). Note that selected fields of the query are ignored.      * @param query the query      * @return the references of the found entities      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * the references (ids). Note that selected fields of the query are ignored.      * @param query the query      * @return the references of the found entities      * @throws SiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
 name|String
@@ -249,9 +253,9 @@ name|FieldQuery
 name|query
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 function_decl|;
-comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * representations as defined by the selected fields of the query. Note that      * if the query defines also {@link Constraint}s for selected fields, that      * the returned representation will only contain values selected by such      * constraints.      * @param query the query      * @return the found entities as representation containing only the selected      * fields and there values.      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+comment|/**      * Searches for entities based on the parsed {@link FieldQuery} and returns      * representations as defined by the selected fields of the query. Note that      * if the query defines also {@link Constraint}s for selected fields, that      * the returned representation will only contain values selected by such      * constraints.      * @param query the query      * @return the found entities as representation containing only the selected      * fields and there values.      * @throws SiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -262,9 +266,9 @@ name|FieldQuery
 name|query
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 function_decl|;
-comment|/**      * Searches for Entities based on the parsed {@link FieldQuery} and returns      * the selected Entities including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+comment|/**      * Searches for Entities based on the parsed {@link FieldQuery} and returns      * the selected Entities including the whole representation. Note that selected      * fields of the query are ignored.      * @param query the query      * @return All Entities selected by the Query.      * @throws SiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|QueryResultList
 argument_list|<
 name|Entity
@@ -275,9 +279,9 @@ name|FieldQuery
 name|query
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 function_decl|;
-comment|/**      * Getter for the Entity by the id      * @param id the id of the entity      * @return the entity or<code>null</code> if not found      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+comment|/**      * Getter for the Entity by the id      * @param id the id of the entity      * @return the entity or<code>null</code> if not found      * @throws SiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|Entity
 name|getEntity
 parameter_list|(
@@ -285,9 +289,9 @@ name|String
 name|id
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 function_decl|;
-comment|/**      * Getter for the Content of the Entity      * @param id the id of the Entity      * @param contentType the requested contentType      * @return the content or<code>null</code> if no entity with the parsed id      * was found or the parsed ContentType is not supported for this Entity      * @throws ReferencedSiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
+comment|/**      * Getter for the Content of the Entity      * @param id the id of the Entity      * @param contentType the requested contentType      * @return the content or<code>null</code> if no entity with the parsed id      * was found or the parsed ContentType is not supported for this Entity      * @throws SiteException If the request can not be executed both on      * the {@link Cache} and by using the {@link EntityDereferencer}/      * {@link EntitySearcher} accessing the remote site. For errors with the      * remote site the cause will always be a Yard Exceptions. Errors for remote      * Sites are usually IOExceptions.      */
 name|InputStream
 name|getContent
 parameter_list|(
@@ -298,7 +302,7 @@ name|String
 name|contentType
 parameter_list|)
 throws|throws
-name|ReferencedSiteException
+name|SiteException
 function_decl|;
 comment|/**      * Getter for the FieldMappings configured for this Site      * @return The {@link FieldMapping} present for this Site.      */
 name|FieldMapper

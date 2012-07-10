@@ -211,7 +211,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -224,7 +224,7 @@ name|AbstractBackend
 block|{
 specifier|protected
 specifier|final
-name|ReferencedSiteManager
+name|SiteManager
 name|siteManager
 decl_stmt|;
 specifier|private
@@ -248,7 +248,7 @@ decl_stmt|;
 specifier|public
 name|SiteManagerBackend
 parameter_list|(
-name|ReferencedSiteManager
+name|SiteManager
 name|siteManager
 parameter_list|)
 block|{
@@ -263,7 +263,7 @@ block|}
 specifier|public
 name|SiteManagerBackend
 parameter_list|(
-name|ReferencedSiteManager
+name|SiteManager
 name|siteManager
 parameter_list|,
 name|ValueConverterFactory

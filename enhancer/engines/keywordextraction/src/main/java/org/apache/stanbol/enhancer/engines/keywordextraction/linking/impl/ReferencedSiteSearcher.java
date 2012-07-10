@@ -189,25 +189,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
-name|ReferencedSiteException
+name|Site
 import|;
 end_import
 
@@ -233,6 +215,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|site
+operator|.
+name|SiteException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|framework
@@ -249,7 +249,7 @@ name|ReferencedSiteSearcher
 extends|extends
 name|TrackingEntitySearcher
 argument_list|<
-name|ReferencedSite
+name|Site
 argument_list|>
 implements|implements
 name|EntitySearcher
@@ -281,7 +281,7 @@ name|super
 argument_list|(
 name|context
 argument_list|,
-name|ReferencedSite
+name|Site
 operator|.
 name|class
 argument_list|,
@@ -355,7 +355,7 @@ block|}
 name|Entity
 name|entity
 decl_stmt|;
-name|ReferencedSite
+name|Site
 name|site
 init|=
 name|getSearchService
@@ -394,7 +394,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{
@@ -464,7 +464,7 @@ throws|throws
 name|IllegalStateException
 block|{
 comment|//build the query and than return the result
-name|ReferencedSite
+name|Site
 name|site
 init|=
 name|getSearchService
@@ -545,7 +545,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ReferencedSiteException
+name|SiteException
 name|e
 parameter_list|)
 block|{
@@ -591,7 +591,7 @@ name|boolean
 name|supportsOfflineMode
 parameter_list|()
 block|{
-name|ReferencedSite
+name|Site
 name|site
 init|=
 name|getSearchService

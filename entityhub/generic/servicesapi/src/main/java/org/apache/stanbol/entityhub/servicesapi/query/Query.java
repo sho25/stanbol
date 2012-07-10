@@ -33,7 +33,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Common interfaces for all supported queries. The idea is that some query  * types MUST BE supported by the Entityhub. However some {@link ReferencedSite} and  * {@link Yard} implementations may support additional query types.<p>  *  * @author Rupert Westenthaler  *  */
+comment|/**  * Common interfaces for all supported queries. The idea is that some query  * types MUST BE supported by the Entityhub. However some {@link Site} and  * {@link Yard} implementations may support additional query types.<p>  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface

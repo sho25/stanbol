@@ -58,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Service used by {@link ReferencedSite} to dereference {@link Representation}  * for entity ids. Implementations of this interface are dependent on the  * service provided by the referenced site.  * @author Rupert Westenthaler  *  */
+comment|/**  * Service used by {@link Site} to dereference {@link Representation}  * for entity ids. Implementations of this interface are dependent on the  * service provided by the referenced site.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_interface
@@ -70,7 +70,7 @@ comment|/**      * The key used to define the baseUri of the service used for th
 name|String
 name|ACCESS_URI
 init|=
-name|SiteConfiguration
+name|ReferencedSiteConfiguration
 operator|.
 name|ACCESS_URI
 decl_stmt|;

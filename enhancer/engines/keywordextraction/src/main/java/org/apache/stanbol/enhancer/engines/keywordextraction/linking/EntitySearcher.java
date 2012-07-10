@@ -113,24 +113,6 @@ name|TextConstraint
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|site
-operator|.
-name|ReferencedSite
-import|;
-end_import
-
 begin_comment
 comment|/**  * Interface used to search for Entities (e.g. as defined by a Controlled  * Vocabulary) Different implementations of this interface allow to use   * different sources. Typically the {@link Entityhub} or a {@link ReferencedSite}  * will be used as source, but in some cases one might also use in-memory  * implementation.  * @author Rupert Westenthaler  */
 end_comment

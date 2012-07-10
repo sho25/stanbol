@@ -423,7 +423,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -592,7 +592,7 @@ decl_stmt|;
 annotation|@
 name|Reference
 specifier|private
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 decl_stmt|;
 annotation|@

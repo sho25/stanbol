@@ -743,7 +743,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteException
+name|SiteException
 import|;
 end_import
 
@@ -1289,7 +1289,7 @@ argument_list|,
 name|getSiteName
 argument_list|()
 argument_list|,
-name|ReferencedSiteException
+name|SiteException
 operator|.
 name|class
 operator|.
@@ -1421,7 +1421,7 @@ argument_list|,
 name|getSiteName
 argument_list|()
 argument_list|,
-name|ReferencedSiteException
+name|SiteException
 operator|.
 name|class
 operator|.
@@ -2038,7 +2038,7 @@ return|return
 name|jResultContainer
 return|;
 block|}
-comment|/**      * @param query      * @return      * @throws ReferencedSiteException      */
+comment|/**      * @param query      * @return      * @throws SiteException      */
 specifier|protected
 specifier|abstract
 name|QueryResultList

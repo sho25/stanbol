@@ -175,7 +175,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -188,7 +188,7 @@ name|AbstractBackend
 block|{
 specifier|protected
 specifier|final
-name|ReferencedSite
+name|Site
 name|site
 decl_stmt|;
 specifier|private
@@ -199,7 +199,7 @@ decl_stmt|;
 specifier|public
 name|SiteBackend
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|site
 parameter_list|)
 block|{
@@ -216,7 +216,7 @@ block|}
 specifier|public
 name|SiteBackend
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|site
 parameter_list|,
 name|ValueFactory
@@ -236,7 +236,7 @@ block|}
 specifier|public
 name|SiteBackend
 parameter_list|(
-name|ReferencedSite
+name|Site
 name|site
 parameter_list|,
 name|ValueFactory

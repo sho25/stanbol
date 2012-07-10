@@ -95,7 +95,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSite
+name|Site
 import|;
 end_import
 
@@ -193,7 +193,7 @@ name|FIELD_MAPPINGS
 init|=
 literal|"org.apache.stanbol.entityhub.mapping.entityhub"
 decl_stmt|;
-comment|/**      * Getter for the FieldMapping configuration of the {@link Entityhub}.       * These Mappings are used for every {@link ReferencedSite} of the       * {@link Entityhub}.<br>      * Note that {@link FieldMapping#parseFieldMapping(String)} is used to      * parsed the values returned by this Method      * @return the configured mappings for the {@link Entityhub}      */
+comment|/**      * Getter for the FieldMapping configuration of the {@link Entityhub}.       * These Mappings are used for every {@link Site} of the       * {@link Entityhub}.<br>      * Note that {@link FieldMapping#parseFieldMapping(String)} is used to      * parsed the values returned by this Method      * @return the configured mappings for the {@link Entityhub}      */
 name|Collection
 argument_list|<
 name|String

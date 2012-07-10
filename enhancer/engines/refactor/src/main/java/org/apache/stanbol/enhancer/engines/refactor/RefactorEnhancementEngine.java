@@ -617,7 +617,7 @@ name|servicesapi
 operator|.
 name|site
 operator|.
-name|ReferencedSiteManager
+name|SiteManager
 import|;
 end_import
 
@@ -1437,7 +1437,7 @@ name|refactorer
 decl_stmt|;
 annotation|@
 name|Reference
-name|ReferencedSiteManager
+name|SiteManager
 name|referencedSiteManager
 decl_stmt|;
 annotation|@
