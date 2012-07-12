@@ -378,6 +378,17 @@ name|File
 name|getManagedDirectory
 parameter_list|()
 function_decl|;
+comment|/**      * Swaps the indexes through using the swap method of the underlying CoreContainer       * ({@link CoreContainer#swap(String, String)}).        * @param indexName1 the name of the first index      * @param indexName2 the name of the second index      * @throws IllegalArgumentException if one or both of the indexes is not managed i.e {@link #isManagedIndex(String)}      * returns {@code false}.      * @throws IllegalStateException if one or both of the index is not in {@link ManagedIndexState#ACTIVE}      * state.      */
+name|void
+name|swapIndexes
+parameter_list|(
+name|String
+name|indexName1
+parameter_list|,
+name|String
+name|indexName2
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

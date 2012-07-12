@@ -6154,16 +6154,17 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Swaps Solr cores identified by the given names. The swap operation is realized by       * the underlying {@link SolrServerAdapter#swap(String, String)}.      *       * @param core1      *            name of the first core      * @param core2      *            name of the second core      */
+annotation|@
+name|Override
 specifier|public
 name|void
-name|swapCores
+name|swapIndexes
 parameter_list|(
 name|String
-name|core1
+name|indexName1
 parameter_list|,
 name|String
-name|core2
+name|indexName2
 parameter_list|)
 block|{
 if|if
@@ -6172,12 +6173,12 @@ operator|!
 operator|(
 name|isManagedIndex
 argument_list|(
-name|core1
+name|indexName1
 argument_list|)
 operator|&&
 name|isManagedIndex
 argument_list|(
-name|core2
+name|indexName2
 argument_list|)
 operator|)
 condition|)
@@ -6192,9 +6193,9 @@ name|format
 argument_list|(
 literal|"Both core names (%s,%s) must correspond to a managed index"
 argument_list|,
-name|core1
+name|indexName1
 argument_list|,
-name|core2
+name|indexName2
 argument_list|)
 argument_list|)
 throw|;
@@ -6211,7 +6212,7 @@ name|ManagedIndexState
 operator|.
 name|ACTIVE
 argument_list|,
-name|core1
+name|indexName1
 argument_list|)
 operator|&&
 name|managedCores
@@ -6222,7 +6223,7 @@ name|ManagedIndexState
 operator|.
 name|ACTIVE
 argument_list|,
-name|core2
+name|indexName2
 argument_list|)
 operator|)
 condition|)
@@ -6237,9 +6238,9 @@ name|format
 argument_list|(
 literal|"Both cores (%s,%s) should be in ManagedIndexState.ACTIVE state"
 argument_list|,
-name|core1
+name|indexName1
 argument_list|,
-name|core2
+name|indexName2
 argument_list|)
 argument_list|)
 throw|;
@@ -6270,9 +6271,9 @@ name|server
 operator|.
 name|swap
 argument_list|(
-name|core1
+name|indexName1
 argument_list|,
-name|core2
+name|indexName2
 argument_list|)
 expr_stmt|;
 name|IndexMetadata
@@ -6280,7 +6281,7 @@ name|core1Metadata
 init|=
 name|getIndexMetadata
 argument_list|(
-name|core1
+name|indexName1
 argument_list|)
 decl_stmt|;
 name|IndexMetadata
@@ -6288,7 +6289,7 @@ name|core2Metadata
 init|=
 name|getIndexMetadata
 argument_list|(
-name|core2
+name|indexName2
 argument_list|)
 decl_stmt|;
 name|String
