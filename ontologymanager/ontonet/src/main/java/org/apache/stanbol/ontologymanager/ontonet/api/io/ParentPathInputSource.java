@@ -211,7 +211,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// TODO : do we really want this to happen?
-name|bindPhysicalIri
+name|bindPhysicalOrigin
+argument_list|(
+name|Origin
+operator|.
+name|create
 argument_list|(
 name|IRI
 operator|.
@@ -220,10 +224,6 @@ argument_list|(
 name|rootFile
 argument_list|)
 argument_list|)
-expr_stmt|;
-name|bindTriplesProvider
-argument_list|(
-name|mgr
 argument_list|)
 expr_stmt|;
 block|}
@@ -237,7 +237,7 @@ block|{
 return|return
 literal|"ROOT_ONT_IRI<"
 operator|+
-name|getPhysicalIRI
+name|getOrigin
 argument_list|()
 operator|+
 literal|">"

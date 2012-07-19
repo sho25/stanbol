@@ -42,17 +42,30 @@ specifier|public
 interface|interface
 name|NamedResource
 block|{
+comment|/**      * Returns the namespace that should prefix the ID of this resource and all the resources managed thereby.      * This is also used by ontology collectors to dynamically generate import statements.      *       * @return the default namespace for this resources.      */
+name|IRI
+name|getDefaultNamespace
+parameter_list|()
+function_decl|;
 comment|/**      * Returns a string (assumed to be unique in the system) that identifies this resource. For instance, a      * parent IRI of the base IRIs for the ontologies within an ontology space. Naming schemes are      * implementation-dependent.<br>      *<br>      * Note that in general a named resource is not aware of its uniqueness. It is not even implied that      * objects of different types cannot have the same ID. These aspects should be ensured by registries,      * indexers etc.<br>      *<br>      * TODO check if a type other than String (e.g. URI, IRI, UriRef) should be used.      *       * @return an identifier for this resource.      */
 name|String
 name|getID
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the namespace that should prefix the ID of this resource and all the resources managed thereby.      * This is also used by ontology collectors to dynamically generate import statements.      *       * @return the default namespace for this resources.      */
+comment|/**      * @deprecated use {@link #getDefaultNamespace()} instead.      * @return      */
 name|IRI
 name|getNamespace
 parameter_list|()
 function_decl|;
 comment|/**      * Sets the namespace that should prefix the ID of this resource and all the resources managed thereby.      * This is also used by ontology collectors to dynamically generate import statements.      *       * @param namespace      *            the new default namespace for this resources.      */
+name|void
+name|setDefaultNamespace
+parameter_list|(
+name|IRI
+name|namespace
+parameter_list|)
+function_decl|;
+comment|/**      * @deprecated use {@link #setDefaultNamespace(IRI)} instead.      * @param namespace      */
 name|void
 name|setNamespace
 parameter_list|(

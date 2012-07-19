@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract OWL API implementation of {@link OntologyInputSource} with the basic methods for obtaining root  * ontologies and their physical IRIs where applicable.<br/>  *</br> Implementations should either invoke abstract methods {@link #bindPhysicalIri(IRI)} and  * {@link #bindRootOntology(OWLOntology)} in their constructors, or override them.  *   */
+comment|/**  * Abstract OWL API implementation of {@link OntologyInputSource} with the basic methods for obtaining root  * ontologies and their physical IRIs where applicable.<br/>  *</br> Implementations should either invoke abstract methods {@link #bindPhysicalOrigin(IRI)} and  * {@link #bindRootOntology(OWLOntology)} in their constructors, or override them.  *   */
 end_comment
 
 begin_class
@@ -86,8 +86,6 @@ extends|extends
 name|AbstractGenericInputSource
 argument_list|<
 name|OWLOntology
-argument_list|,
-name|OWLOntologyManager
 argument_list|>
 block|{
 annotation|@
@@ -130,7 +128,6 @@ name|rootOntology
 argument_list|)
 operator|)
 return|;
-comment|// return rootOntology.getOWLOntologyManager().getImportsClosure(rootOntology);
 block|}
 block|}
 end_class

@@ -19,11 +19,16 @@ name|util
 package|;
 end_package
 
+begin_comment
+comment|/**  * A collection of OWL 2 vocabulary terms that integrates those provided by Clerezza.  *   * @author alexdma  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
 name|OWL2Constants
 block|{
+comment|/**      * The namespace for the OWL language vocabulary.      */
 specifier|public
 specifier|static
 specifier|final
@@ -32,6 +37,7 @@ name|_OWL_NS
 init|=
 literal|"http://www.w3.org/2002/07/owl#"
 decl_stmt|;
+comment|/**      * The owl:versionIRI annotation property that applies to resources of type owl:Ontology in OWL 2.      */
 specifier|public
 specifier|static
 specifier|final

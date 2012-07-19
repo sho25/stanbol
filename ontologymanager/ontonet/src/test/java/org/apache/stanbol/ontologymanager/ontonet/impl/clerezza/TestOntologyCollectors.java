@@ -506,8 +506,6 @@ decl_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
-argument_list|,
-name|?
 argument_list|>
 name|src
 init|=

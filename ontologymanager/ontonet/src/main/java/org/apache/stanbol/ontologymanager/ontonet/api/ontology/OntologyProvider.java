@@ -177,6 +177,26 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|io
+operator|.
+name|Origin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -260,29 +280,21 @@ name|ImportManagementPolicy
 name|getImportManagementPolicy
 parameter_list|()
 function_decl|;
-comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @param locator      *            the logical identifier of the ontology.      * @return the key to access the ontology from the store.      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @deprecated Please use {@link #getPublicKey(OWLOntologyID)} instead. To obtain the public keys for all      *             the versions of ontologies with this ontology IRI, use {@link #getVersionKeys(IRI)}.      *       * @param ontologyIri      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
 name|String
 name|getKey
 parameter_list|(
 name|IRI
-name|locator
+name|ontologyIri
 parameter_list|)
 function_decl|;
-comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null. To get the keys for a givemn ontologyIRI, no      * matte what its version is, use {@link #getOntologyVersionKeys(IRI)}.      *       * @param ontologyId      * @return      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyId</tt>.      *       * @deprecated Please use {@link #getPublicKey(OWLOntologyID)} instead.      *       * @param ontologyId      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
 name|String
 name|getKey
 parameter_list|(
 name|OWLOntologyID
 name|ontologyId
 parameter_list|)
-function_decl|;
-comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|getKeys
-parameter_list|()
 function_decl|;
 comment|/**      * Returns the graph that stores all the information on stored ontologies. Whether the returned triple      * collection is a {@link Graph} or a {@link MGraph} depends on the provider's policy on allowing external      * modifications to the meta-level graph or not.      *       * @param returnType      * @return      */
 parameter_list|<
@@ -300,21 +312,32 @@ argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-specifier|public
+name|OWLOntologyID
+name|getOntologyId
+parameter_list|(
+name|String
+name|storageKey
+parameter_list|)
+function_decl|;
 name|OntologyNetworkConfiguration
 name|getOntologyNetworkConfiguration
 parameter_list|()
 function_decl|;
-comment|/**      * Will return the keys of all the ontologies whose ontologyIRI is the one provided. These include any      * ontologies with that ontologyIRI and a versionIRI, and one ontology with no version IRI (if it exists,      * it must be unique).      *       * @param ontologyIRI      * @return      */
+comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null. To get the keys for a given ontologyIRI, no      * matte what its version is, use {@link #getVersionKeys(IRI)}.      *       * @param ontologyId      * @return      */
+name|String
+name|getPublicKey
+parameter_list|(
+name|OWLOntologyID
+name|ontologyId
+parameter_list|)
+function_decl|;
+comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
 name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getOntologyVersionKeys
-parameter_list|(
-name|IRI
-name|ontologyIRI
-parameter_list|)
+name|getPublicKeys
+parameter_list|()
 function_decl|;
 comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
 name|S
@@ -404,6 +427,17 @@ index|[]
 name|getSupportedReturnTypes
 parameter_list|()
 function_decl|;
+comment|/**      * Will return the keys of all the ontologies whose ontologyIRI is the one provided. These include any      * ontologies with that ontologyIRI and a versionIRI, and one ontology with no version IRI (if it exists,      * it must be unique).      *       * @param ontologyIRI      * @return      */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getVersionKeys
+parameter_list|(
+name|IRI
+name|ontologyIRI
+parameter_list|)
+function_decl|;
 comment|/**      * A convenience method for checking the availability of an ontology given its (physical or logical) IRI.      * It is typically more efficient than calling {@link #getStoredOntology(IRI, Class)} and null-checking      * the result.      *       * @param ontologyIri      * @return      */
 name|boolean
 name|hasOntology
@@ -471,6 +505,21 @@ name|ontology
 parameter_list|,
 name|boolean
 name|force
+parameter_list|,
+name|Origin
+argument_list|<
+name|?
+argument_list|>
+modifier|...
+name|references
+parameter_list|)
+function_decl|;
+comment|/**      * Removes the ontology identified by the supplied public key.      *       * @param publicKey      *            the public key for accessing the ontology.      * @return true iff an ontology with that public key existed and was removed.      */
+name|boolean
+name|removeOntology
+parameter_list|(
+name|String
+name|publicKey
 parameter_list|)
 function_decl|;
 comment|/**      * Sets the policy adopted by this provider whenever an import statement is found in an ontology<i>that      * has already been loaded</i> (e.g. when exporting it). It does<b>not</b> influence how the system      * should<i>resolve</i> imports of newly found ontologies.      *       * @param policy      *            the import management policy.      */

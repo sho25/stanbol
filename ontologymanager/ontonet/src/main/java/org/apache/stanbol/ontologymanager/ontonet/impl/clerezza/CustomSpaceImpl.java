@@ -371,6 +371,9 @@ name|ontologyIri
 parameter_list|,
 name|boolean
 name|merge
+parameter_list|,
+name|IRI
+name|universalPrefix
 parameter_list|)
 block|{
 name|MGraph
@@ -383,6 +386,8 @@ argument_list|(
 name|ontologyIri
 argument_list|,
 name|merge
+argument_list|,
+name|universalPrefix
 argument_list|)
 decl_stmt|;
 switch|switch
@@ -498,8 +503,7 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-name|getNamespace
-argument_list|()
+name|universalPrefix
 operator|+
 name|s
 argument_list|)
@@ -547,6 +551,9 @@ name|ontologyIri
 parameter_list|,
 name|boolean
 name|merge
+parameter_list|,
+name|IRI
+name|universalPrefix
 parameter_list|)
 block|{
 name|OWLOntology
@@ -559,6 +566,8 @@ argument_list|(
 name|ontologyIri
 argument_list|,
 name|merge
+argument_list|,
+name|universalPrefix
 argument_list|)
 decl_stmt|;
 switch|switch
@@ -614,8 +623,7 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-name|getNamespace
-argument_list|()
+name|universalPrefix
 operator|+
 name|s
 argument_list|)

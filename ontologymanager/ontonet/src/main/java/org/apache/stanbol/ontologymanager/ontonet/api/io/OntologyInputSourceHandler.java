@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * An object that can manipulate {@link OntologyInputSource} objects;  *   * @author alexdma  *   */
+comment|/**  * An object that can manipulate {@link OntologyInputSource} objects;  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

@@ -145,9 +145,14 @@ parameter_list|)
 throws|throws
 name|OWLOntologyCreationException
 block|{
-name|bindPhysicalIri
+name|bindPhysicalOrigin
+argument_list|(
+name|Origin
+operator|.
+name|create
 argument_list|(
 name|rootPhysicalIri
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|bindRootOntology
@@ -169,11 +174,6 @@ name|rootPhysicalIri
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|bindTriplesProvider
-argument_list|(
-name|manager
-argument_list|)
-expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -185,7 +185,7 @@ block|{
 return|return
 literal|"ROOT_ONT_IRI<"
 operator|+
-name|getPhysicalIRI
+name|getOrigin
 argument_list|()
 operator|+
 literal|">"

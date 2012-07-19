@@ -103,8 +103,26 @@ name|TcManager
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|TcProvider
+import|;
+end_import
+
 begin_comment
-comment|/**  * An {@link OntologyInputSource} that gets ontologies from either a stored Clerezza {@link Graph} (or  * {@link MGraph} ), or its identifier and an optionally supplied triple collection manager.  *   * @author alexdma  *   */
+comment|/**  * An {@link OntologyInputSource} that gets ontologies from either a stored {@link TripleCollection}, or its  * identifier and an optionally supplied triple collection manager.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -114,6 +132,25 @@ name|GraphSource
 extends|extends
 name|AbstractClerezzaGraphInputSource
 block|{
+comment|/**      * Creates a new input source by querying the default triple collection manager for a graph named with the      * supplied<code>graphId</code>. A {@link UriRef} that represents the graph name will also be set as the      * graph origin.      *       * @param graphId      *            the graph ID.      * @throws NullPointerException      *             if there is no default triple collection manager available.      * @throws org.apache.clerezza.rdf.core.access.NoSuchEntityException      *             if no such graph can be found.      */
+specifier|public
+name|GraphSource
+parameter_list|(
+name|String
+name|graphId
+parameter_list|)
+block|{
+name|this
+argument_list|(
+operator|new
+name|UriRef
+argument_list|(
+name|graphId
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Wraps the supplied<code>graph</code> into a new input source. No origin will be set.      *       * @param graph      *            the RDF graph      * @throws IllegalArgumentException      *             if<code>graph</code> is neither a {@link Graph} nor a {@link MGraph}.      */
 specifier|public
 name|GraphSource
 parameter_list|(
@@ -170,29 +207,13 @@ operator|+
 literal|" is not supported."
 argument_list|)
 throw|;
-name|bindPhysicalIri
+name|bindPhysicalOrigin
 argument_list|(
 literal|null
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
-name|GraphSource
-parameter_list|(
-name|String
-name|graphId
-parameter_list|)
-block|{
-name|this
-argument_list|(
-operator|new
-name|UriRef
-argument_list|(
-name|graphId
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
+comment|/**      * Creates a new input source by querying the default triple collection manager for a graph named with the      * supplied<code>graphId</code>. The supplied ID will also be set as the graph origin.      *       * @param graphId      *            the graph ID.      * @throws NullPointerException      *             if there is no default triple collection manager available.      * @throws org.apache.clerezza.rdf.core.access.NoSuchEntityException      *             if no such graph can be found.      */
 specifier|public
 name|GraphSource
 parameter_list|(
@@ -211,20 +232,20 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This constructor can be used to hijack ontologies using a physical IRI other than their default one.      *       * @param rootOntology      * @param phyicalIRI      */
+comment|/**      * Creates a new input source by querying the supplied triple collection provider for a graph named with      * the supplied<code>graphId</code>. The supplied ID will also be set as the graph origin.      *       * @param graphId      *            the graph ID.      * @throws NullPointerException      *             if<code>tcProvider</code> is null.      * @throws org.apache.clerezza.rdf.core.access.NoSuchEntityException      *             if no such graph can be found in<code>tcProvider</code>.      */
 specifier|public
 name|GraphSource
 parameter_list|(
 name|UriRef
 name|graphId
 parameter_list|,
-name|TcManager
-name|tcManager
+name|TcProvider
+name|tcProvider
 parameter_list|)
 block|{
 name|this
 argument_list|(
-name|tcManager
+name|tcProvider
 operator|.
 name|getTriples
 argument_list|(
@@ -232,9 +253,14 @@ name|graphId
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|bindTriplesProvider
+name|bindPhysicalOrigin
 argument_list|(
-name|tcManager
+name|Origin
+operator|.
+name|create
+argument_list|(
+name|graphId
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -249,6 +275,14 @@ return|return
 literal|"GRAPH<"
 operator|+
 name|rootOntology
+operator|.
+name|getClass
+argument_list|()
+operator|+
+literal|","
+operator|+
+name|getOrigin
+argument_list|()
 operator|+
 literal|">"
 return|;

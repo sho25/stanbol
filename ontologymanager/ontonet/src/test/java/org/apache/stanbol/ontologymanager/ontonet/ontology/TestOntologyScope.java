@@ -171,26 +171,6 @@ name|api
 operator|.
 name|io
 operator|.
-name|BlankOntologySource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|io
-operator|.
 name|OntologyInputSource
 import|;
 end_import
@@ -249,9 +229,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|owlapi
+name|clerezza
 operator|.
-name|CoreOntologySpaceImpl
+name|CoreSpaceImpl
 import|;
 end_import
 
@@ -269,9 +249,9 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|owlapi
+name|clerezza
 operator|.
-name|CustomOntologySpaceImpl
+name|CustomSpaceImpl
 import|;
 end_import
 
@@ -531,10 +511,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 literal|null
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|fail
@@ -564,10 +540,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 literal|"a0/b1"
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|fail
@@ -605,10 +577,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeIdBlank
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|fail
@@ -645,10 +613,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeIdBlank
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|fail
@@ -685,10 +649,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeIdBlank
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|fail
@@ -725,10 +685,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeIdBlank
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|fail
@@ -763,10 +719,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeIdBlank
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertNotNull
@@ -800,10 +752,6 @@ operator|.
 name|createOntologyScope
 argument_list|(
 name|scopeIdBlank
-argument_list|,
-operator|new
-name|BlankOntologySource
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertNotNull
@@ -906,7 +854,7 @@ name|scopeId1
 operator|+
 literal|"/"
 operator|+
-name|CoreOntologySpaceImpl
+name|CoreSpaceImpl
 operator|.
 name|SUFFIX
 argument_list|)
@@ -927,7 +875,7 @@ name|scopeId1
 operator|+
 literal|"/"
 operator|+
-name|CustomOntologySpaceImpl
+name|CustomSpaceImpl
 operator|.
 name|SUFFIX
 argument_list|)

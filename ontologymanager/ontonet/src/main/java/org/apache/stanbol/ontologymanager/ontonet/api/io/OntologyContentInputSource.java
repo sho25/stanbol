@@ -188,7 +188,7 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
-name|bindPhysicalIri
+name|bindPhysicalOrigin
 argument_list|(
 literal|null
 argument_list|)
@@ -201,11 +201,6 @@ name|loadOntologyFromOntologyDocument
 argument_list|(
 name|content
 argument_list|)
-argument_list|)
-expr_stmt|;
-name|bindTriplesProvider
-argument_list|(
-name|manager
 argument_list|)
 expr_stmt|;
 name|log

@@ -1309,7 +1309,7 @@ name|total
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getKeys
+name|getPublicKeys
 argument_list|()
 operator|.
 name|size
@@ -1491,7 +1491,7 @@ name|total
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getKeys
+name|getPublicKeys
 argument_list|()
 operator|.
 name|size
@@ -1667,7 +1667,7 @@ literal|1
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getKeys
+name|getPublicKeys
 argument_list|()
 operator|.
 name|size
@@ -1749,7 +1749,7 @@ literal|1
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getKeys
+name|getPublicKeys
 argument_list|()
 operator|.
 name|size

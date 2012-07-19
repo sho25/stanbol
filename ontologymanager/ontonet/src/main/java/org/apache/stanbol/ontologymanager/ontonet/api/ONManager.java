@@ -154,23 +154,11 @@ name|CONNECTIVITY_POLICY
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.connectivity"
 decl_stmt|;
-comment|/**      * The key used to configure the ID of the ontology network manager.      */
-name|String
-name|ID
-init|=
-literal|"org.apache.stanbol.ontologymanager.ontonet.id"
-decl_stmt|;
 comment|/**      * The key used to configure the simple identifier of the scope registry (which should also be      * concatenated with the base namespace to obtain the registry's HTTP endpoint URI).      */
 name|String
 name|ID_SCOPE_REGISTRY
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.scopeRegistry.id"
-decl_stmt|;
-comment|/**      * The key used to configure the base namespace of the ontology network.      */
-name|String
-name|ONTOLOGY_NETWORK_NS
-init|=
-literal|"org.apache.stanbol.ontologymanager.ontonet.ns"
 decl_stmt|;
 comment|/**      * Returns the offline configuration set for this ontology network manager, if any.      *       * @return the offline configuration, or null if none was set.      */
 name|OfflineConfiguration
@@ -187,7 +175,7 @@ name|String
 name|getOntologyNetworkNamespace
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @deprecated returns this object, which is also an {@link OntologyScopeFactory}.      * @return the default ontology scope factory      */
+comment|/**      * Returns the ontology scope factory that was created along with the manager context.      *       * @deprecated This methods now returns the current object, which is also an {@link OntologyScopeFactory}.      * @return the default ontology scope factory      */
 name|OntologyScopeFactory
 name|getOntologyScopeFactory
 parameter_list|()
@@ -197,7 +185,7 @@ name|OntologySpaceFactory
 name|getOntologySpaceFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the unique ontology scope registry for this context.      *       * @deprecated returns this object, which is also a {@link ScopeRegistry}.      * @return the ontology scope registry.      */
+comment|/**      * Returns the unique ontology scope registry for this context.      *       * @deprecated This methods now returns the current object, which is also a {@link ScopeRegistry}.      * @return the ontology scope registry.      */
 name|ScopeRegistry
 name|getScopeRegistry
 parameter_list|()

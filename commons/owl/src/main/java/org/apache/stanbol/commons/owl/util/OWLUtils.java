@@ -103,24 +103,6 @@ name|clerezza
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|TcProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
 name|ontologies
 operator|.
 name|OWL
@@ -254,8 +236,8 @@ name|viri
 init|=
 literal|null
 decl_stmt|;
-comment|// For named OWL ontologies it is their ontology ID. For anonymous ontologies, it is the URI they were
-comment|// fetched from, if any.
+comment|// For named OWL ontologies it is their ontology ID.
+comment|// For anonymous ontologies, it is the URI they were fetched from, if any.
 if|if
 condition|(
 name|o
@@ -339,15 +321,6 @@ operator|-
 literal|1
 argument_list|)
 expr_stmt|;
-comment|// try {
-comment|// if (originalIri.endsWith("#")) originalIri = originalIri.substring(0,
-comment|// originalIri.length() - 1) + URLEncoder.encode("#", "UTF-8");
-comment|// else if (originalIri.endsWith("?")) originalIri = originalIri.substring(0,
-comment|// originalIri.length() - 1)
-comment|// + URLEncoder.encode("?", "UTF-8");
-comment|// } catch (UnsupportedEncodingException e) {
-comment|// // That cannot be.
-comment|// }
 if|if
 condition|(
 name|viri
@@ -382,13 +355,14 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/**      * Returns the logical identifier of the supplied RDF graph, which is interpreted as an OWL ontology.      *       * @param graph      *            the RDF graph      * @return the OWL ontology ID of the supplied graph, or null if it denotes an anonymous ontology.      */
 specifier|public
 specifier|static
 name|OWLOntologyID
 name|guessOntologyIdentifier
 parameter_list|(
 name|TripleCollection
-name|g
+name|graph
 parameter_list|)
 block|{
 name|IRI
@@ -406,7 +380,7 @@ name|Triple
 argument_list|>
 name|it
 init|=
-name|g
+name|graph
 operator|.
 name|filter
 argument_list|(
@@ -447,17 +421,24 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
+block|{
 name|log
 operator|.
 name|warn
 argument_list|(
-literal|"RDF Graph {} has multiple OWL ontology definitions! Ignoring all but {}"
-argument_list|,
-name|g
+literal|"Multiple OWL ontology definitions found."
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Ignoring all but {}"
 argument_list|,
 name|subj
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|subj
@@ -488,7 +469,7 @@ name|Triple
 argument_list|>
 name|it2
 init|=
-name|g
+name|graph
 operator|.
 name|filter
 argument_list|(
@@ -547,29 +528,17 @@ operator|==
 literal|null
 condition|)
 block|{
-name|ontologyIri
-operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|NS_STANBOL
-operator|+
-name|System
-operator|.
-name|currentTimeMillis
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|// Note that OWL 2 does not allow ontologies with a version IRI and no ontology IRI.
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Ontology is anonymous. Returning generated ID<{}> ."
-argument_list|,
-name|ontologyIri
+literal|"Ontology is anonymous. Returning null ID."
 argument_list|)
 expr_stmt|;
+return|return
+literal|null
+return|;
 block|}
 if|if
 condition|(
@@ -592,30 +561,6 @@ argument_list|(
 name|ontologyIri
 argument_list|,
 name|versionIri
-argument_list|)
-return|;
-block|}
-specifier|public
-specifier|static
-name|OWLOntologyID
-name|guessOntologyIdentifier
-parameter_list|(
-name|UriRef
-name|key
-parameter_list|,
-name|TcProvider
-name|store
-parameter_list|)
-block|{
-return|return
-name|guessOntologyIdentifier
-argument_list|(
-name|store
-operator|.
-name|getTriples
-argument_list|(
-name|key
-argument_list|)
 argument_list|)
 return|;
 block|}

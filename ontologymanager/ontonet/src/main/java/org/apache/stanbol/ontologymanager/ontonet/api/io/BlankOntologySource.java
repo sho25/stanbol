@@ -87,11 +87,6 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
-name|bindTriplesProvider
-argument_list|(
-name|manager
-argument_list|)
-expr_stmt|;
 try|try
 block|{
 name|bindRootOntology
@@ -115,7 +110,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-name|bindPhysicalIri
+name|bindPhysicalOrigin
 argument_list|(
 literal|null
 argument_list|)

@@ -52,12 +52,22 @@ specifier|public
 interface|interface
 name|OfflineConfiguration
 block|{
+comment|/**      * The key used to configure the base namespace of the ontology network.      */
+name|String
+name|DEFAULT_NS
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.ns"
+decl_stmt|;
 comment|/**      * The key used to configure the paths of local ontologies.      */
 name|String
 name|ONTOLOGY_PATHS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.ontologypaths"
 decl_stmt|;
+name|IRI
+name|getDefaultOntologyNetworkNamespace
+parameter_list|()
+function_decl|;
 comment|/**      * Returns the paths of all the directories where the ontology network manager will try to locate      * ontologies. These directories will be prioritaire if the engine is set to run in offline mode. This      * list is ordered in that the higher-ordered directories generally override lower-ordered ones, that is,      * any ontologies found in the directories belonging to the tail of this list will supersede any      * ontologies with the same ID found in the directories belonging to its head.      *       * @return an ordered list of directory paths for offline ontologies.      */
 name|List
 argument_list|<

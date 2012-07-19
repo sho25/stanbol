@@ -457,8 +457,6 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
-argument_list|,
-name|OWLOntologyManager
 argument_list|>
 name|parentSrc
 parameter_list|)
@@ -539,8 +537,6 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
-argument_list|,
-name|OWLOntologyManager
 argument_list|>
 name|parentSrc
 parameter_list|)
@@ -568,7 +564,7 @@ name|libraryID
 expr_stmt|;
 comment|// The ontology that imports the whole network is created in-memory, therefore it has no physical IRI
 comment|// unless it is borrowed from the supplied parent.
-name|bindPhysicalIri
+name|bindPhysicalOrigin
 argument_list|(
 name|parentSrc
 operator|!=
@@ -576,7 +572,7 @@ literal|null
 condition|?
 name|parentSrc
 operator|.
-name|getPhysicalIRI
+name|getOrigin
 argument_list|()
 else|:
 literal|null

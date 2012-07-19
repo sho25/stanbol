@@ -154,8 +154,6 @@ argument_list|<
 name|OntologyInputSource
 argument_list|<
 name|?
-argument_list|,
-name|?
 argument_list|>
 argument_list|>
 name|subtrees
@@ -179,8 +177,6 @@ for|for
 control|(
 name|OntologyInputSource
 argument_list|<
-name|?
-argument_list|,
 name|?
 argument_list|>
 name|st
@@ -233,8 +229,6 @@ name|appendSubtree
 parameter_list|(
 name|OntologyInputSource
 argument_list|<
-name|?
-argument_list|,
 name|?
 argument_list|>
 name|subtree
@@ -295,7 +289,7 @@ block|{
 return|return
 literal|"SCOPE_ONT_IRI<"
 operator|+
-name|getPhysicalIRI
+name|getOrigin
 argument_list|()
 operator|+
 literal|">"

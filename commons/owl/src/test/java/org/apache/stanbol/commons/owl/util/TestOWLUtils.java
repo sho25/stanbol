@@ -32,6 +32,18 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNull
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -327,8 +339,7 @@ argument_list|,
 name|uri
 argument_list|)
 expr_stmt|;
-comment|// No longer null!
-name|assertNotNull
+name|assertNull
 argument_list|(
 name|OWLUtils
 operator|.

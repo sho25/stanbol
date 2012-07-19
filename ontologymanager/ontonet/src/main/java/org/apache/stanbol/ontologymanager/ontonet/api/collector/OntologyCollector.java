@@ -125,8 +125,6 @@ parameter_list|(
 name|OntologyInputSource
 argument_list|<
 name|?
-argument_list|,
-name|?
 argument_list|>
 name|ontologySource
 parameter_list|)
@@ -150,14 +148,6 @@ parameter_list|,
 name|boolean
 name|withClosure
 parameter_list|)
-function_decl|;
-comment|/**      * TODO replace with Ontology IDs      *       * @return      */
-name|Set
-argument_list|<
-name|IRI
-argument_list|>
-name|listManagedOntologies
-parameter_list|()
 function_decl|;
 parameter_list|<
 name|O
@@ -195,6 +185,47 @@ name|boolean
 name|merge
 parameter_list|)
 function_decl|;
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|,
+name|IRI
+name|universalPrefix
+parameter_list|)
+function_decl|;
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|IRI
+name|universalPrefix
+parameter_list|)
+function_decl|;
 comment|/**      * Determines if the ontology identified by the supplied<i>logical</i> IRI has been loaded in this space.<br>      *<br>      * Note that ontologies are not identified by physical IRI here. There's no need to ask KReS for      * ontologies by physical IRI, use a browser or some other program instead!      *       * @param ontologyIri      *            the<i>logical</i> identifier of the ontology to query for.      *       * @return true if an ontology with this ID has been loaded in this space.      */
 name|boolean
 name|hasOntology
@@ -202,6 +233,14 @@ parameter_list|(
 name|IRI
 name|ontologyIri
 parameter_list|)
+function_decl|;
+comment|/**      * TODO replace with Ontology IDs      *       * @return      */
+name|Set
+argument_list|<
+name|IRI
+argument_list|>
+name|listManagedOntologies
+parameter_list|()
 function_decl|;
 comment|/**      * Removes the given ontology from the ontology space, if the ontology is a direct child of the top      * ontology.<br/>      *<u>Note</u> that this will NOT delete the ontology from the store! This method simply states that the      * ontology is no longer managed by this space and its axioms will no longer appear when the space is      * serialized as an ontology. To delete the ontology itself, please use the Ontology Manager Store.      *       * @param ontologyIri      *            the identifier of this ontology.      */
 name|void

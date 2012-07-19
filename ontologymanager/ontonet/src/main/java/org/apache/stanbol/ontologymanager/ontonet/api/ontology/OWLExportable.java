@@ -61,9 +61,25 @@ name|boolean
 name|merge
 parameter_list|)
 function_decl|;
+comment|/**      * Returns an ontological form of this object of the specified return type, if supported. If the supplied      * class is not a supported return type, an {@link UnsupportedOperationException} is thrown.<br>      *<br>      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param returnType      *            the desired class of the returned object.      * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the ontology that represents this object.      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|export
+parameter_list|(
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|,
 name|IRI
-name|getDocumentIRI
-parameter_list|()
+name|universalPrefix
+parameter_list|)
 function_decl|;
 block|}
 end_interface

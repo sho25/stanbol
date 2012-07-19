@@ -33,6 +33,24 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
+name|offline
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|MockOsgiContext
+operator|.
 name|ontologyProvider
 import|;
 end_import
@@ -441,24 +459,6 @@ name|ontonet
 operator|.
 name|impl
 operator|.
-name|OfflineConfigurationImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|impl
-operator|.
 name|session
 operator|.
 name|SessionManagerImpl
@@ -557,6 +557,13 @@ operator|.
 name|PEANUTS_MINOR_BASE
 argument_list|)
 decl_stmt|;
+specifier|private
+specifier|static
+name|OntologyScopeFactory
+name|scopeFactory
+init|=
+literal|null
+decl_stmt|;
 specifier|public
 specifier|static
 name|String
@@ -571,13 +578,6 @@ decl_stmt|,
 name|scopeId3
 init|=
 literal|"Doraemon"
-decl_stmt|;
-specifier|private
-specifier|static
-name|OntologyScopeFactory
-name|scopeFactory
-init|=
-literal|null
 decl_stmt|;
 specifier|private
 specifier|static
@@ -603,6 +603,9 @@ decl_stmt|;
 specifier|private
 specifier|static
 name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 name|src1
 init|=
 literal|null
@@ -645,11 +648,7 @@ name|ONManagerImpl
 argument_list|(
 name|ontologyProvider
 argument_list|,
-operator|new
-name|OfflineConfigurationImpl
-argument_list|(
-name|onmconf
-argument_list|)
+name|offline
 argument_list|,
 name|spaceFactory
 argument_list|,
@@ -662,6 +661,8 @@ operator|new
 name|SessionManagerImpl
 argument_list|(
 name|ontologyProvider
+argument_list|,
+name|offline
 argument_list|,
 name|onmconf
 argument_list|)
@@ -882,22 +883,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|Session
-name|ses
-init|=
-name|sesmgr
-operator|.
-name|createSession
-argument_list|()
-decl_stmt|;
-name|String
-name|sesid
-init|=
-name|ses
-operator|.
-name|getID
-argument_list|()
-decl_stmt|;
+comment|// Session ses = sesmgr.createSession();
+comment|// String sesid = ses.getID();
 comment|// TODO replace with proper tests
 comment|// assertFalse(scope1.getSessionSpaces().isEmpty());
 comment|// assertNotNull(scope1.getSessionSpace(sesid));

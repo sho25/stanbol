@@ -105,19 +105,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertNotNull
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertNull
+name|assertTrue
 import|;
 end_import
 
@@ -474,8 +462,6 @@ comment|// This one has an import that we want to hijack locally, so we use the 
 name|OntologyInputSource
 argument_list|<
 name|?
-argument_list|,
-name|?
 argument_list|>
 name|ois
 init|=
@@ -660,8 +646,6 @@ decl_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|OWLOntology
-argument_list|,
-name|?
 argument_list|>
 name|ois
 init|=
@@ -707,11 +691,11 @@ name|ephemeralScopeId
 argument_list|)
 decl_stmt|;
 comment|// Initially, the ontology is not there
-name|assertNull
+name|assertFalse
 argument_list|(
 name|ontologyProvider
 operator|.
-name|getKey
+name|hasOntology
 argument_list|(
 name|ontologyId
 argument_list|)
@@ -728,11 +712,11 @@ argument_list|(
 name|ois
 argument_list|)
 expr_stmt|;
-name|assertNotNull
+name|assertTrue
 argument_list|(
 name|ontologyProvider
 operator|.
-name|getKey
+name|hasOntology
 argument_list|(
 name|ontologyId
 argument_list|)
@@ -749,11 +733,11 @@ argument_list|(
 name|ontologyId
 argument_list|)
 expr_stmt|;
-name|assertNotNull
+name|assertTrue
 argument_list|(
 name|ontologyProvider
 operator|.
-name|getKey
+name|hasOntology
 argument_list|(
 name|ontologyId
 argument_list|)
@@ -766,11 +750,11 @@ operator|.
 name|tearDown
 argument_list|()
 expr_stmt|;
-name|assertNotNull
+name|assertTrue
 argument_list|(
 name|ontologyProvider
 operator|.
-name|getKey
+name|hasOntology
 argument_list|(
 name|ontologyId
 argument_list|)

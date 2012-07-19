@@ -91,26 +91,6 @@ name|OWLExportable
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|OntologyScope
-import|;
-end_import
-
 begin_comment
 comment|/**  * Note that sessions are possibly disjoint with HTTP sessions or the like.  *   * @author alexdma  *   */
 end_comment
@@ -152,8 +132,8 @@ comment|/**      * Instructs the session to reference the supplied ontology scop
 name|void
 name|attachScope
 parameter_list|(
-name|OntologyScope
-name|scope
+name|String
+name|scopeId
 parameter_list|)
 function_decl|;
 comment|/**      * Removes all references to ontology scopes, thus leaving the session data as standalone.      */

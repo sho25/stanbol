@@ -82,8 +82,6 @@ parameter_list|,
 name|OntologyInputSource
 argument_list|<
 name|?
-argument_list|,
-name|?
 argument_list|>
 modifier|...
 name|coreSources

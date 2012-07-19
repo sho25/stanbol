@@ -250,8 +250,6 @@ decl_stmt|;
 name|OntologyInputSource
 argument_list|<
 name|?
-argument_list|,
-name|?
 argument_list|>
 name|coreSrc
 init|=
@@ -296,8 +294,6 @@ argument_list|)
 expr_stmt|;
 name|OntologyInputSource
 argument_list|<
-name|?
-argument_list|,
 name|?
 argument_list|>
 name|custSrc

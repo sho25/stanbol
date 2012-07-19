@@ -98,12 +98,6 @@ name|MAX_ACTIVE_SESSIONS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.session_limit"
 decl_stmt|;
-comment|/**      * The key used to configure the base namespace of the ontology network.      */
-name|String
-name|SESSIONS_NS
-init|=
-literal|"org.apache.stanbol.ontologymanager.ontonet.session_ns"
-decl_stmt|;
 comment|/**      * Generates<b>and registers</b> a new session and assigns a unique session ID generated internally. This      * will not cause {@link DuplicateSessionIDException}s to be thrown.      *       * @return the generated session      */
 name|Session
 name|createSession
@@ -160,7 +154,7 @@ name|int
 name|limit
 parameter_list|)
 function_decl|;
-comment|/**      * Stores the session identified by<code>sessionID</code> using the output stream<code>out</code>.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @param out      *            the output stream to store the session      * @throws OWLOntologyStorageException      */
+comment|/**      * Stores the session identified by<code>sessionID</code> using the output stream<code>out</code>.      *       * @deprecated As of now, session contents are always stored. Deprecation will be removed if a new policy      *             is implemented.      *       * @param sessionID      *            the IRI that uniquely identifies the session      * @param out      *            the output stream to store the session      * @throws OWLOntologyStorageException      */
 name|void
 name|storeSession
 parameter_list|(
