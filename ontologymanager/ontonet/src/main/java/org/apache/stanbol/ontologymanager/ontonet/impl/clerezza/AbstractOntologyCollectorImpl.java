@@ -3718,6 +3718,16 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
+comment|// FIXME Ugly way to check, but we'll get through with it
+if|if
+condition|(
+name|s
+operator|.
+name|contains
+argument_list|(
+literal|"::"
+argument_list|)
+condition|)
 name|s
 operator|=
 name|s

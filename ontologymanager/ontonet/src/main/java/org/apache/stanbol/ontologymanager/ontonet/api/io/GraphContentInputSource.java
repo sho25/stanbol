@@ -489,10 +489,7 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-literal|"ontonet"
-operator|+
-literal|"::"
-operator|+
+comment|//   "ontonet" + "::" +
 name|getClass
 argument_list|()
 operator|.
