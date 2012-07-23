@@ -109,6 +109,26 @@ name|IOUtils
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_class
 specifier|public
 specifier|final
@@ -119,8 +139,23 @@ specifier|private
 name|SparqlEndpointUtils
 parameter_list|()
 block|{
-comment|/* Do not create instances of utility classes*/
+comment|/*                                     * Do not create instances of utility classes                                     */
 block|}
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|SparqlEndpointUtils
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -129,7 +164,7 @@ name|SPARQL_RESULT_JSON
 init|=
 literal|"application/sparql-results+json"
 decl_stmt|;
-comment|/**      * Sends an SPARQL Request to the accessUri. Please note that based on the      * type of the SPARQL query different content are supported by the Site      * @param accessUri the uri of the SPARQL endpoint      * @param contentType the contentType of the returned RDF graph      * @param query the SPARQL Construct query      * @return the results as input stream      * @throws IOException      * @throws MalformedURLException      */
+comment|/**      * Sends an SPARQL Request to the accessUri. Please note that based on the type of the SPARQL query      * different content are supported by the Site      *       * @param accessUri      *            the uri of the SPARQL endpoint      * @param contentType      *            the contentType of the returned RDF graph      * @param query      *            the SPARQL Construct query      * @return the results as input stream      * @throws IOException      * @throws MalformedURLException      */
 specifier|public
 specifier|static
 name|InputStream
@@ -149,6 +184,24 @@ name|IOException
 throws|,
 name|MalformedURLException
 block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Sending SPARQL request [accessUri :: {}][query :: {}][contentType :: {}]."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|accessUri
+block|,
+name|query
+block|,
+name|contentType
+block|}
+argument_list|)
+expr_stmt|;
 specifier|final
 name|URI
 name|dereferenceUri
@@ -224,7 +277,7 @@ operator|instanceof
 name|HttpURLConnection
 condition|)
 block|{
-comment|//try to create a better Error Message
+comment|// try to create a better Error Message
 name|InputStream
 name|reason
 init|=
@@ -268,7 +321,7 @@ name|IOException
 name|e1
 parameter_list|)
 block|{
-comment|//ignore ...
+comment|// ignore ...
 block|}
 name|IOUtils
 operator|.
@@ -314,7 +367,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|//if still here re-throw the original exception
+comment|// if still here re-throw the original exception
 throw|throw
 name|e
 throw|;

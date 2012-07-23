@@ -507,10 +507,10 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"> DereferenceTime: "
-operator|+
+literal|"> DereferenceTime: {}"
+argument_list|,
 operator|(
 name|queryEnd
 operator|-
@@ -558,10 +558,10 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
-literal|"> ParseTime: "
-operator|+
+literal|"> ParseTime: {}"
+argument_list|,
 operator|(
 name|parseEnd
 operator|-

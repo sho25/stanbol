@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Adds the "selected field" to "SPARQL variable name" mapping  * @author Rupert Westenthaler  *  */
+comment|/**  * Adds the "selected field" to "SPARQL variable name" mapping  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -260,7 +260,7 @@ operator|=
 name|endpointType
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#addSelectedField(java.lang.String)      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#addSelectedField (java.lang.String)      */
 annotation|@
 name|Override
 specifier|public
@@ -289,7 +289,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#addSelectedFields(java.util.Collection)      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#addSelectedFields (java.util.Collection)      */
 annotation|@
 name|Override
 specifier|public
@@ -330,7 +330,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/*      * (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeSelectedField(java.lang.String)      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeSelectedField (java.lang.String)      */
 annotation|@
 name|Override
 specifier|public
@@ -356,7 +356,7 @@ name|field
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeSelectedFields(java.util.Collection)      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeSelectedFields (java.util.Collection)      */
 annotation|@
 name|Override
 specifier|public
@@ -394,7 +394,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for the variable name for a selected field      * @param field the selected field      * @return the variable name or<code>null</code> if the parsed field is not selected.      */
+comment|/**      * Getter for the variable name for a selected field      *       * @param field      *            the selected field      * @return the variable name or<code>null</code> if the parsed field is not selected.      */
 specifier|public
 name|String
 name|getVariableName
@@ -412,7 +412,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/**      * Getter for the unmodifiable field name to variable name mapping.      * @return      */
+comment|/**      * Getter for the unmodifiable field name to variable name mapping.      *       * @return      */
 specifier|public
 name|Map
 argument_list|<
@@ -470,10 +470,13 @@ name|SparqlFieldQuery
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//Note: this uses the public API. However the field->ar mapping might still
-comment|//be different if any removeSelectedField(..) method was used on this
-comment|//instance. Because of that manually set the map and the value of the int.
-comment|//clone.field2VarMappings.clear(); //clear is not necessary, because the keys are equals!
+comment|// Note: this uses the public API. However the field->ar mapping might
+comment|// still
+comment|// be different if any removeSelectedField(..) method was used on this
+comment|// instance. Because of that manually set the map and the value of the
+comment|// int.
+comment|// clone.field2VarMappings.clear(); //clear is not necessary, because
+comment|// the keys are equals!
 name|clone
 operator|.
 name|field2VarMappings
@@ -519,7 +522,7 @@ name|ordinal
 argument_list|()
 return|;
 block|}
-comment|/**      * Removes also the field to var name mappings      * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeAllSelectedFields()      */
+comment|/**      * Removes also the field to var name mappings      *       * @see org.apache.stanbol.entityhub.core.query.FieldQueryImpl#removeAllSelectedFields()      */
 annotation|@
 name|Override
 specifier|public
@@ -601,7 +604,7 @@ operator|==
 name|endpointType
 return|;
 block|}
-comment|/**      * Getter for the SPARQL SELECT representation of this FieldQuery      * @return the SPARQL SELECT query      */
+comment|/**      * Getter for the SPARQL SELECT representation of this FieldQuery      *       * @return the SPARQL SELECT query      */
 specifier|public
 name|String
 name|toSparqlSelect
@@ -623,7 +626,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/**      * Getter for the SPARQL CONSTRUCT representation of this FieldQuery      * @return the SPARQL CONSTRUCT query      */
+comment|/**      * Getter for the SPARQL CONSTRUCT representation of this FieldQuery      *       * @return the SPARQL CONSTRUCT query      */
 specifier|public
 name|String
 name|toSparqlConstruct

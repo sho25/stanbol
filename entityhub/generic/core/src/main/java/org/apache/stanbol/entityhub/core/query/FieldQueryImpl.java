@@ -158,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of the FieldQuery interface.  * Note that the getter methods are defined as final. So implementations that  * need to overwrite some functionality need to use the sets provided by this  * implementation to store selected fields and field constraints.  * @author Rupert Westenthaler  *  */
+comment|/**  * Default implementation of the FieldQuery interface. Note that the getter methods are defined as final. So  * implementations that need to overwrite some functionality need to use the sets provided by this  * implementation to store selected fields and field constraints.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -400,17 +400,22 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|field
-operator|!=
 literal|null
-operator|&&
-operator|!
+operator|==
+name|field
+operator|||
 name|field
 operator|.
 name|isEmpty
 argument_list|()
 condition|)
-block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Parameter Field MUST NOT be NULL nor empty!"
+argument_list|)
+throw|;
 if|if
 condition|(
 name|constraint
@@ -439,18 +444,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Parameter Field MUST NOT be NULL nor empty!"
-argument_list|)
-throw|;
-block|}
-block|}
-comment|/**      * Calls {@link #setConstraint(String, Constraint)} with<code>null</code>      * as {@link Constraint}. So overwrite the setConstraint Method if needed.      * @see org.apache.stanbol.entityhub.core.query.FieldConstraint#removeConstraint(java.lang.String)      */
+comment|/**      * Calls {@link #setConstraint(String, Constraint)} with<code>null</code> as {@link Constraint}. So      * overwrite the setConstraint Method if needed.      *       * @see org.apache.stanbol.entityhub.core.query.FieldConstraint#removeConstraint(java.lang.String)      */
 specifier|public
 specifier|final
 name|void
@@ -468,7 +462,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQuery#isConstraint(java.lang.String)      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQuery#isConstraint(java. lang.String)      */
 specifier|public
 specifier|final
 name|boolean
@@ -487,7 +481,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQuery#getConstraint(java.lang.String)      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQuery#getConstraint(java .lang.String)      */
 specifier|public
 specifier|final
 name|Constraint
@@ -506,7 +500,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/* (non-Javadoc)      * @see org.apache.stanbol.entityhub.core.query.FieldQuery#getConstraints()      */
+comment|/*      * (non-Javadoc)      *       * @see org.apache.stanbol.entityhub.core.query.FieldQuery#getConstraints()      */
 annotation|@
 name|Override
 specifier|public
@@ -562,14 +556,264 @@ name|String
 name|toString
 parameter_list|()
 block|{
-return|return
-literal|"Query constraints:"
-operator|+
+name|StringBuilder
+name|query
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Query Constraints (%d)\n"
+argument_list|,
+name|this
+operator|.
 name|queryConstraint
-operator|+
-literal|" selectedFields:"
-operator|+
+operator|.
+name|size
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|Constraint
+argument_list|>
+name|entry
+range|:
+name|this
+operator|.
+name|queryConstraint
+operator|.
+name|entrySet
+argument_list|()
+control|)
+block|{
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"[key:: %s][%s]\n"
+argument_list|,
+name|entry
+operator|.
+name|getKey
+argument_list|()
+argument_list|,
+name|entry
+operator|.
+name|getValue
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"unmod Query Elements (%d)\n"
+argument_list|,
+name|this
+operator|.
+name|unmodQueryElements
+operator|.
+name|size
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|Constraint
+argument_list|>
+name|entry
+range|:
+name|this
+operator|.
+name|unmodQueryElements
+operator|.
+name|entrySet
+argument_list|()
+control|)
+block|{
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"[key:: %s][%s]\n"
+argument_list|,
+name|entry
+operator|.
+name|getKey
+argument_list|()
+argument_list|,
+name|entry
+operator|.
+name|getValue
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Selected (%d)\n"
+argument_list|,
+name|this
+operator|.
 name|selected
+operator|.
+name|size
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|String
+name|entry
+range|:
+name|this
+operator|.
+name|selected
+control|)
+block|{
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"[%s]"
+argument_list|,
+name|entry
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"unmod Selected (%d)\n"
+argument_list|,
+name|this
+operator|.
+name|unmodSelected
+operator|.
+name|size
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|String
+name|entry
+range|:
+name|this
+operator|.
+name|unmodSelected
+control|)
+block|{
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"[%s]"
+argument_list|,
+name|entry
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"[limit :: %d]\n"
+argument_list|,
+name|this
+operator|.
+name|limit
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|query
+operator|.
+name|append
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"[offset :: %d]\n"
+argument_list|,
+name|this
+operator|.
+name|offset
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|query
+operator|.
+name|toString
+argument_list|()
 return|;
 block|}
 annotation|@
@@ -588,7 +832,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Uses the public API to clone the state of this instance to the instance      * provided as parameter.      * @param<C> An implementation of the FieldQuery interface      * @param copyTo An instance to copy the state of this on.      * @return The parsed instance      */
+comment|/**      * Uses the public API to clone the state of this instance to the instance provided as parameter.      *       * @param<C>      *            An implementation of the FieldQuery interface      * @param copyTo      *            An instance to copy the state of this on.      * @return The parsed instance      */
 specifier|public
 parameter_list|<
 name|C
@@ -628,7 +872,8 @@ name|entrySet
 argument_list|()
 control|)
 block|{
-comment|//we need not to copy keys or values, because everything is immutable
+comment|// we need not to copy keys or values, because everything is
+comment|// immutable
 name|copyTo
 operator|.
 name|setConstraint

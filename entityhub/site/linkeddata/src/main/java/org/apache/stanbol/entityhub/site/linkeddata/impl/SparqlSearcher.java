@@ -925,7 +925,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> InitTime: "
 operator|+
@@ -938,7 +938,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> SPARQL query:\n"
 operator|+
@@ -970,7 +970,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> QueryTime: "
 operator|+
@@ -1046,7 +1046,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> ParseTime: "
 operator|+

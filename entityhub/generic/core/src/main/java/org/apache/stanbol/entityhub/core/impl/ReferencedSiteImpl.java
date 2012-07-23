@@ -1338,7 +1338,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This in the Default implementation of the {@link Site} interface.  * However this implementation forwards calls to methods defined within the  * {@link EntityDereferencer} and {@link EntitySearcher} to sub components  * (See the detailed description below).<p>  * Each {@link Site} with an {@link CacheStrategy} other than  * {@link CacheStrategy#none} needs an associated {@link Cache}.  *<p>  * The Initialisation of the sub-components:  *<ul>  *<li><b>{@link EntityDereferencer}:</b> Implementations of this interface are  *      specific to the used protocol/technology of the referenced site.  *      Because of that calls to methods defined in this interface are forwarded  *      to an site specific instance of the {@link EntityDereferencer} interface  *      as configured by the {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} property.<br>  *      During activation the the {@link BundleContext} is used to  *      search for {@link ComponentFactory} with the configuration<code>  *      "component.name= {@link ComponentContext#getProperties()}.get(  *      {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE})</code>. This factory is used  *      to create an instance of {@link EntityDereferencer}.<br>  *      Note also, that the configuration of this instance that is covered  *      by the {@link SiteConfiguration} interface are parsed to the  *      {@link EntityDereferencer} instance.  *<li><b> {@link EntitySearcher}:</b> Implementations of this interface are  *      also specific to the used protocol/technology of the referenced site.  *      Because of that calls to methods defined in this interface are forwarded  *      to an site specific instance of the {@link EntitySearcher} interface  *      as configured by the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property.<br>  *      The initialisation of this instance works similar as described for the  *      {@link EntityDereferencer}. However if the value of the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE}  *      is equals to {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} or the  *      {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} is not defined at all, than the  *      Dereferencer Instance is also used as {@link EntitySearcher}. If the  *      according cast does not succeed, an {@link ConfigurationException} for the  *      {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property is thrown.  *<li><b>{@link Cache}:</b> An instance of a {@link Cache} is used to  *      cache {@link Representation}s loaded form the Site. A cache is a wrapper  *      over a {@link Yard} instance that allows to configure what data are  *      stored for each representation cached form this referenced site. A  *      {@link ServiceTracker} is used for managing the dependency with the cache.  *      So if a cache is no longer available a referenced site can still be used -  *      only the local cache can not be used to retrieve entity representations.  *</ul>  *  * @author Rupert Westenthaler  *  */
+comment|/**  * This in the Default implementation of the {@link Site} interface. However this implementation forwards  * calls to methods defined within the {@link EntityDereferencer} and {@link EntitySearcher} to sub components  * (See the detailed description below).  *<p>  * Each {@link Site} with an {@link CacheStrategy} other than {@link CacheStrategy#none} needs an associated  * {@link Cache}.  *<p>  * The Initialisation of the sub-components:  *<ul>  *<li><b>{@link EntityDereferencer}:</b> Implementations of this interface are specific to the used  * protocol/technology of the referenced site. Because of that calls to methods defined in this interface are  * forwarded to an site specific instance of the {@link EntityDereferencer} interface as configured by the  * {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} property.<br>  * During activation the the {@link BundleContext} is used to search for {@link ComponentFactory} with the  * configuration<code>  *      "component.name= {@link ComponentContext#getProperties()}.get(  *      {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE})</code>. This factory is used to create an instance  * of {@link EntityDereferencer}.<br>  * Note also, that the configuration of this instance that is covered by the {@link SiteConfiguration}  * interface are parsed to the {@link EntityDereferencer} instance.  *<li><b> {@link EntitySearcher}:</b> Implementations of this interface are also specific to the used  * protocol/technology of the referenced site. Because of that calls to methods defined in this interface are  * forwarded to an site specific instance of the {@link EntitySearcher} interface as configured by the  * {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property.<br>  * The initialisation of this instance works similar as described for the {@link EntityDereferencer}. However  * if the value of the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} is equals to  * {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} or the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} is  * not defined at all, than the Dereferencer Instance is also used as {@link EntitySearcher}. If the according  * cast does not succeed, an {@link ConfigurationException} for the  * {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property is thrown.  *<li><b>{@link Cache}:</b> An instance of a {@link Cache} is used to cache {@link Representation}s loaded  * form the Site. A cache is a wrapper over a {@link Yard} instance that allows to configure what data are  * stored for each representation cached form this referenced site. A {@link ServiceTracker} is used for  * managing the dependency with the cache. So if a cache is no longer available a referenced site can still be  * used - only the local cache can not be used to retrieve entity representations.  *</ul>  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_decl_stmt
@@ -1359,7 +1359,10 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|//the baseUri is required!
+comment|// the
+comment|// baseUri
+comment|// is
+comment|// required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -1386,7 +1389,7 @@ name|Properties
 argument_list|(
 name|value
 operator|=
-block|{         @
+block|{                      @
 name|Property
 argument_list|(
 name|name
@@ -1395,7 +1398,7 @@ name|SiteConfiguration
 operator|.
 name|ID
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1404,7 +1407,7 @@ name|SiteConfiguration
 operator|.
 name|NAME
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1413,7 +1416,7 @@ name|SiteConfiguration
 operator|.
 name|DESCRIPTION
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1426,14 +1429,14 @@ name|cardinality
 operator|=
 literal|1000
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
 operator|=
 name|ACCESS_URI
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1442,7 +1445,7 @@ name|ENTITY_DEREFERENCER_TYPE
 argument_list|,
 name|options
 operator|=
-block|{                 @
+block|{                                                                            @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1457,7 +1460,7 @@ name|name
 operator|=
 literal|""
 argument_list|)
-block|,                 @
+block|,                                                                            @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1472,7 +1475,7 @@ name|name
 operator|=
 literal|"org.apache.stanbol.entityhub.dereferencer.SparqlDereferencer"
 argument_list|)
-block|,                 @
+block|,                                                                            @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1495,7 +1498,7 @@ name|value
 operator|=
 literal|"org.apache.stanbol.entityhub.dereferencer.SparqlDereferencer"
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1503,7 +1506,7 @@ operator|=
 name|QUERY_URI
 argument_list|)
 block|,
-comment|//the deri server has better performance
+comment|// the deri server has better performance
 block|@
 name|Property
 argument_list|(
@@ -1513,7 +1516,7 @@ name|ENTITY_SEARCHER_TYPE
 argument_list|,
 name|options
 operator|=
-block|{                 @
+block|{                                                                        @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1528,7 +1531,7 @@ name|name
 operator|=
 literal|""
 argument_list|)
-block|,                 @
+block|,                                                                        @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1543,7 +1546,7 @@ name|name
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|)
-block|,                 @
+block|,                                                                        @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1558,7 +1561,7 @@ name|name
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcher"
 argument_list|)
-block|,                 @
+block|,                                                                        @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1579,7 +1582,7 @@ name|value
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1588,10 +1591,12 @@ name|DEFAULT_SYMBOL_STATE
 argument_list|,
 name|options
 operator|=
-block|{                 @
+block|{                                                                        @
 name|PropertyOption
 argument_list|(
-comment|//seems, that name and value are exchanged ...
+comment|// seems, that name
+comment|// and value are
+comment|// exchanged ...
 name|value
 operator|=
 literal|'%'
@@ -1604,7 +1609,7 @@ name|name
 operator|=
 literal|"proposed"
 argument_list|)
-block|,                 @
+block|,                                                                        @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1619,14 +1624,14 @@ name|name
 operator|=
 literal|"active"
 argument_list|)
-comment|//the other states make no sense for new symbols
+comment|// the other states make no sense for new symbols
 block|}
 argument_list|,
 name|value
 operator|=
 literal|"proposed"
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1635,7 +1640,7 @@ name|DEFAULT_MAPPING_STATE
 argument_list|,
 name|options
 operator|=
-block|{                 @
+block|{                                                                         @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1650,7 +1655,7 @@ name|name
 operator|=
 literal|"proposed"
 argument_list|)
-block|,                 @
+block|,                                                                         @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1665,14 +1670,14 @@ name|name
 operator|=
 literal|"confirmed"
 argument_list|)
-comment|//the other states make no sense for new symbols
+comment|// the other states make no sense for new symbols
 block|}
 argument_list|,
 name|value
 operator|=
 literal|"proposed"
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1681,7 +1686,7 @@ name|DEFAULT_EXPIRE_DURATION
 argument_list|,
 name|options
 operator|=
-block|{                 @
+block|{                                                                           @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1708,7 +1713,7 @@ operator|*
 literal|30
 operator|)
 argument_list|)
-block|,                 @
+block|,                                                                           @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1735,7 +1740,7 @@ operator|*
 literal|183
 operator|)
 argument_list|)
-block|,                 @
+block|,                                                                           @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1762,7 +1767,7 @@ operator|*
 literal|365
 operator|)
 argument_list|)
-block|,                 @
+block|,                                                                           @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1783,7 +1788,7 @@ name|value
 operator|=
 literal|"0"
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
@@ -1792,7 +1797,7 @@ name|CACHE_STRATEGY
 argument_list|,
 name|options
 operator|=
-block|{                 @
+block|{                                                                  @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1807,7 +1812,7 @@ name|name
 operator|=
 literal|"none"
 argument_list|)
-block|,                 @
+block|,                                                                  @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1822,7 +1827,7 @@ name|name
 operator|=
 literal|"used"
 argument_list|)
-block|,                 @
+block|,                                                                  @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1843,14 +1848,14 @@ name|value
 operator|=
 literal|"none"
 argument_list|)
-block|,         @
+block|,                      @
 name|Property
 argument_list|(
 name|name
 operator|=
 name|CACHE_ID
 argument_list|)
-block|,         @
+block|, @
 name|Property
 argument_list|(
 name|name
@@ -1912,7 +1917,7 @@ specifier|private
 name|ComponentFactoryListener
 name|searcherComponentFactoryListener
 decl_stmt|;
-comment|//    private String dereferencerComponentName;
+comment|// private String dereferencerComponentName;
 specifier|private
 name|ComponentInstance
 name|dereferencerComponentInstance
@@ -1921,7 +1926,7 @@ specifier|private
 name|EntityDereferencer
 name|dereferencer
 decl_stmt|;
-comment|//    private String entitySearcherComponentName;
+comment|// private String entitySearcherComponentName;
 specifier|private
 name|EntitySearcher
 name|entitySearcher
@@ -1938,7 +1943,7 @@ specifier|private
 name|ReferencedSiteConfiguration
 name|siteConfiguration
 decl_stmt|;
-comment|/**      * Stores keys -> values to be added to the metadata of {@link Entity Entities}      * created by this site.      */
+comment|/**      * Stores keys -> values to be added to the metadata of {@link Entity Entities} created by this site.      */
 specifier|private
 name|Map
 argument_list|<
@@ -1948,7 +1953,7 @@ name|Object
 argument_list|>
 name|siteMetadata
 decl_stmt|;
-comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external      * service should be referenced. For the ReferencedSiteImpl this means that      * the {@link EntityDereferencer} and {@link EntitySearcher} interfaces      * are no longer used.<p>      * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      * @see #isOfflineMode()      * @see #ensureOnline(String, Class)      */
+comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For the ReferencedSiteImpl this means that the {@link EntityDereferencer} and {@link EntitySearcher}      * interfaces are no longer used.      *<p>      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      * @see #isOfflineMode()      * @see #ensureOnline(String, Class)      */
 annotation|@
 name|Reference
 argument_list|(
@@ -2073,7 +2078,8 @@ operator|.
 name|all
 condition|)
 block|{
-comment|//TODO: check if query can be executed based on the base configuration of the Cache
+comment|// TODO: check if query can be executed based on the base
+comment|// configuration of the Cache
 name|Cache
 name|cache
 init|=
@@ -2089,7 +2095,7 @@ condition|)
 block|{
 try|try
 block|{
-comment|//When using the Cache, directly get the representations!
+comment|// When using the Cache, directly get the representations!
 name|QueryResultList
 argument_list|<
 name|Representation
@@ -2364,6 +2370,25 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Will use an entity-searcher [type :: {}][query-uri :: {}]."
+argument_list|,
+name|entitySearcher
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|EntitySearcher
+operator|.
+name|QUERY_URI
+argument_list|)
+expr_stmt|;
 name|entityIds
 operator|=
 name|entitySearcher
@@ -2484,7 +2509,7 @@ argument_list|(
 name|entity
 argument_list|)
 expr_stmt|;
-comment|//use the position in the list as resultSocre
+comment|// use the position in the list as resultSocre
 name|entity
 operator|.
 name|getRepresentation
@@ -2559,7 +2584,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//decrease numResults because it is used as resultScore for entities
+comment|// decrease numResults because it is used as resultScore for
+comment|// entities
 name|numResults
 operator|--
 expr_stmt|;
@@ -2665,7 +2691,8 @@ operator|.
 name|all
 condition|)
 block|{
-comment|//TODO: check if query can be executed based on the base configuration of the Cache
+comment|// TODO: check if query can be executed based on the base
+comment|// configuration of the Cache
 name|Cache
 name|cache
 init|=
@@ -2916,7 +2943,8 @@ operator|.
 name|all
 condition|)
 block|{
-comment|//TODO: check if query can be executed based on the base configuration of the Cache
+comment|// TODO: check if query can be executed based on the base
+comment|// configuration of the Cache
 name|Cache
 name|cache
 init|=
@@ -3386,7 +3414,7 @@ block|{
 return|return
 literal|null
 return|;
-comment|//do no remote lokkups on CacheStrategy.all!!
+comment|// do no remote lokkups on CacheStrategy.all!!
 block|}
 block|}
 catch|catch
@@ -3625,7 +3653,7 @@ name|e
 argument_list|)
 throw|;
 block|}
-comment|//representation loaded from remote site and cache is available
+comment|// representation loaded from remote site and cache is available
 if|if
 condition|(
 name|rep
@@ -3657,7 +3685,7 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 expr_stmt|;
-comment|//return the the cached version
+comment|// return the the cached version
 name|rep
 operator|=
 name|cache
@@ -3866,7 +3894,7 @@ operator|.
 name|getConfiguration
 argument_list|()
 decl_stmt|;
-comment|//this will return false if one of the two sites is not activated
+comment|// this will return false if one of the two sites is not activated
 comment|// -> this should be OK
 return|return
 name|siteConfiguration
@@ -3907,7 +3935,7 @@ return|return
 name|fieldMappings
 return|;
 block|}
-comment|/**      * In case {@link CacheStrategy#all} this Method returns the      * query factory of the Cache.      * Otherwise it returns {@link DefaultQueryFactory#getInstance()}.      */
+comment|/**      * In case {@link CacheStrategy#all} this Method returns the query factory of the Cache. Otherwise it      * returns {@link DefaultQueryFactory#getInstance()}.      */
 annotation|@
 name|Override
 specifier|public
@@ -4008,7 +4036,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/**      * Internally used to get the Cache for this site. If      * {@link CacheStrategy#none}, this methods always returns<code>null</code>,      * otherwise it returns the Cache for the configured Yard or<code>null</code>      * if no such Cache is available.      * @return the cache or<code>null</code> if {@link CacheStrategy#none} or      * the configured cache instance is not available.      */
+comment|/**      * Internally used to get the Cache for this site. If {@link CacheStrategy#none}, this methods always      * returns<code>null</code> , otherwise it returns the Cache for the configured Yard or<code>null</code>      * if no such Cache is available.      *       * @return the cache or<code>null</code> if {@link CacheStrategy#none} or the configured cache instance      *         is not available.      */
 specifier|protected
 name|Cache
 name|getCache
@@ -4137,8 +4165,8 @@ name|context
 operator|=
 name|context
 expr_stmt|;
-comment|//create the SiteConfiguration based on the parsed properties
-comment|//NOTE that the constructor also validation of the parsed configuration
+comment|// create the SiteConfiguration based on the parsed properties
+comment|// NOTE that the constructor also validation of the parsed configuration
 name|siteConfiguration
 operator|=
 operator|new
@@ -4213,14 +4241,16 @@ argument_list|(
 name|siteConfiguration
 argument_list|)
 expr_stmt|;
-comment|//if the accessUri is the same as the queryUri and both the dereferencer and
-comment|//the entitySearcher uses the same component, than we need only one component
-comment|//for both dependencies.
+comment|// if the accessUri is the same as the queryUri and both the
+comment|// dereferencer and
+comment|// the entitySearcher uses the same component, than we need only one
+comment|// component
+comment|// for both dependencies.
 name|this
 operator|.
 name|dereferencerEqualsEntitySearcherComponent
 operator|=
-comment|//(1) accessURI == queryURI
+comment|// (1) accessURI == queryURI
 name|siteConfiguration
 operator|.
 name|getAccessUri
@@ -4241,7 +4271,7 @@ name|getQueryUri
 argument_list|()
 argument_list|)
 operator|&&
-comment|//(2) entity dereferencer == entity searcher
+comment|// (2) entity dereferencer == entity searcher
 name|siteConfiguration
 operator|.
 name|getEntityDereferencerType
@@ -4262,7 +4292,7 @@ name|getEntitySearcherType
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//init the fieldMapper based on the configuration
+comment|// init the fieldMapper based on the configuration
 name|fieldMappings
 operator|=
 operator|new
@@ -4338,7 +4368,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//now init the referenced Services
+comment|// now init the referenced Services
 name|initDereferencerAndEntitySearcher
 argument_list|()
 expr_stmt|;
@@ -4414,7 +4444,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Initialise the dereferencer and searcher component as soon as the according      * {@link ComponentFactory} gets registered.<p>      * First this Methods tries to find the according {@link ServiceReference}s      * directly. If they are not available (e.g. because the component factories      * are not yet started) than it adds a {@link ServiceListener} for the missing      * {@link ComponentFactory} that calls the {@link #createDereferencerComponent(ComponentFactory)}      * and {@link #createEntitySearcherComponent(ComponentFactory)} as soon as      * the factory gets registered.      * @throws InvalidSyntaxException if the #entitySearcherComponentName or the      * {@link #dereferencerComponentName} somehow cause an invalid formated string      * that can not be used to parse a {@link Filter}.      */
+comment|/**      * Initialise the dereferencer and searcher component as soon as the according {@link ComponentFactory}      * gets registered.      *<p>      * First this Methods tries to find the according {@link ServiceReference}s directly. If they are not      * available (e.g. because the component factories are not yet started) than it adds a      * {@link ServiceListener} for the missing {@link ComponentFactory} that calls the      * {@link #createDereferencerComponent(ComponentFactory)} and      * {@link #createEntitySearcherComponent(ComponentFactory)} as soon as the factory gets registered.      *       * @throws InvalidSyntaxException      *             if the #entitySearcherComponentName or the {@link #dereferencerComponentName} somehow cause      *             an invalid formated string that can not be used to parse a {@link Filter}.      */
 specifier|private
 name|void
 name|initDereferencerAndEntitySearcher
@@ -4431,7 +4461,8 @@ argument_list|()
 operator|!=
 literal|null
 operator|&&
-comment|//initialise only if a accessUri
+comment|// initialise only if a
+comment|// accessUri
 operator|!
 name|siteConfiguration
 operator|.
@@ -4546,7 +4577,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//service factory not yet available -> add servicelistener
+comment|// service factory not yet available -> add servicelistener
 name|this
 operator|.
 name|searcherComponentFactoryListener
@@ -4574,10 +4605,18 @@ argument_list|,
 name|filterString
 argument_list|)
 expr_stmt|;
-comment|//NOTE: here the filter MUST include also the objectClass!
+comment|// NOTE:
+comment|// here
+comment|// the
+comment|// filter
+comment|// MUST
+comment|// include
+comment|// also
+comment|// the
+comment|// objectClass!
 block|}
-comment|//context.getComponentInstance().dispose();
-comment|//throw an exception to avoid an successful activation
+comment|// context.getComponentInstance().dispose();
+comment|// throw an exception to avoid an successful activation
 block|}
 if|if
 condition|(
@@ -4588,7 +4627,7 @@ argument_list|()
 operator|!=
 literal|null
 operator|&&
-comment|//initialise only if a query URI
+comment|// initialise only if a query URI
 operator|!
 name|siteConfiguration
 operator|.
@@ -4708,7 +4747,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//service factory not yet available -> add servicelistener
+comment|// service factory not yet available -> add servicelistener
 name|this
 operator|.
 name|dereferencerComponentFactoryListener
@@ -4738,11 +4777,12 @@ argument_list|,
 name|filterString
 argument_list|)
 expr_stmt|;
-comment|//NOTE: here the filter MUST include also the objectClass!
+comment|// NOTE: here the filter MUST
+comment|// include also the objectClass!
 block|}
 block|}
 block|}
-comment|/**      * Creates the entity searcher component used by this {@link Site}      * (and configured via the {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property).<p>      * If the {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} is set to the same vale      * and the {@link #accessUri} also equals the {@link #queryUri}, than the      * component created for the entity searcher is also used as dereferencer.      * @param factory The component factory used to create the      * {@link #entitySearcherComponentInstance}      */
+comment|/**      * Creates the entity searcher component used by this {@link Site} (and configured via the      * {@link SiteConfiguration#ENTITY_SEARCHER_TYPE} property).      *<p>      * If the {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} is set to the same vale and the      * {@link #accessUri} also equals the {@link #queryUri}, than the component created for the entity      * searcher is also used as dereferencer.      *       * @param factory      *            The component factory used to create the {@link #entitySearcherComponentInstance}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -4756,8 +4796,9 @@ name|ComponentFactory
 name|factory
 parameter_list|)
 block|{
-comment|//both create*** methods sync on the searcherAndDereferencerLock to avoid
-comment|//multiple component instances because of concurrent calls
+comment|// both create*** methods sync on the searcherAndDereferencerLock to
+comment|// avoid
+comment|// multiple component instances because of concurrent calls
 synchronized|synchronized
 init|(
 name|this
@@ -4821,7 +4862,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Creates the entity dereferencer component used by this {@link Site}.      * The implementation used as the dereferencer is configured by the      * {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} property.      * @param factory the component factory used to create the {@link #dereferencer}      */
+comment|/**      * Creates the entity dereferencer component used by this {@link Site}. The implementation used as the      * dereferencer is configured by the {@link SiteConfiguration#ENTITY_DEREFERENCER_TYPE} property.      *       * @param factory      *            the component factory used to create the {@link #dereferencer}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -4835,8 +4876,8 @@ name|ComponentFactory
 name|factory
 parameter_list|)
 block|{
-comment|//both create*** methods sync on searcherAndDereferencerLock to avoid
-comment|//multiple component instances because of concurrent calls
+comment|// both create*** methods sync on searcherAndDereferencerLock to avoid
+comment|// multiple component instances because of concurrent calls
 synchronized|synchronized
 init|(
 name|this
@@ -4883,7 +4924,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Simple {@link ServiceListener} implementation that is used to get notified      * if one of the {@link ComponentFactory component factories} for the      * configured implementation of the {@link EntityDereferencer} or      * {@link EntitySearcher} interfaces get registered.      * @author Rupert Westenthaler      *      */
+comment|/**      * Simple {@link ServiceListener} implementation that is used to get notified if one of the      * {@link ComponentFactory component factories} for the configured implementation of the      * {@link EntityDereferencer} or {@link EntitySearcher} interfaces get registered.      *       * @author Rupert Westenthaler      *       */
 specifier|private
 class|class
 name|ComponentFactoryListener
@@ -5234,8 +5275,8 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      * Method for handling the OfflineMode      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      */
-comment|/**      * Called by the ConfigurationAdmin to bind the {@link #offlineMode} if the      * service becomes available      * @param mode       */
+comment|/*      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Method for handling the      * OfflineMode - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -      */
+comment|/**      * Called by the ConfigurationAdmin to bind the {@link #offlineMode} if the service becomes available      *       * @param mode      */
 specifier|protected
 specifier|final
 name|void
@@ -5252,7 +5293,7 @@ operator|=
 name|mode
 expr_stmt|;
 block|}
-comment|/**      * Called by the ConfigurationAdmin to unbind the {@link #offlineMode} if the      * service becomes unavailable      * @param mode      */
+comment|/**      * Called by the ConfigurationAdmin to unbind the {@link #offlineMode} if the service becomes unavailable      *       * @param mode      */
 specifier|protected
 specifier|final
 name|void
@@ -5269,7 +5310,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode}.      * @return the offline state      */
+comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode} .      *       * @return the offline state      */
 specifier|protected
 specifier|final
 name|boolean
@@ -5282,7 +5323,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/**      * Basically this Method throws an {@link SiteException} in case      * Stanbol operates in offline mode      * @param uri the URI of the remote service      * @param clazz the clazz of the service that would like to refer the remote      * service      * @throws SiteException in case {@link #isOfflineMode()} returns      *<code>true</code>      */
+comment|/**      * Basically this Method throws an {@link SiteException} in case Stanbol operates in offline mode      *       * @param uri      *            the URI of the remote service      * @param clazz      *            the clazz of the service that would like to refer the remote service      * @throws SiteException      *             in case {@link #isOfflineMode()} returns<code>true</code>      */
 specifier|private
 name|void
 name|ensureOnline

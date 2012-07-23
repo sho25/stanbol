@@ -20,7 +20,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Abstract base class for all types of Constraints.  * @author Rupert Westenthaler  *  */
+comment|/**  * Abstract base class for all types of Constraints.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -29,17 +29,18 @@ specifier|abstract
 class|class
 name|Constraint
 block|{
-comment|/**      * Defines the enumeration of available Constraints.      * TODO Maybe we need a more "extensible" way to define different constraints      * in future      * @author Rupert Westenthaler      *      */
+comment|/**      * Defines the enumeration of available Constraints. TODO Maybe we need a more "extensible" way to define      * different constraints in future      *       * @author Rupert Westenthaler      *       */
 specifier|public
 enum|enum
 name|ConstraintType
 block|{
-comment|// NOTE (2010-Nov-09,rw) Because a reference constraint is now a special kind of
-comment|//                       a value constraint.
-comment|//        /**
-comment|//         * Constraints a field to have a specific reference
-comment|//         */
-comment|//        reference,
+comment|// NOTE (2010-Nov-09,rw) Because a reference constraint is now a special
+comment|// kind of
+comment|// a value constraint.
+comment|// /**
+comment|// * Constraints a field to have a specific reference
+comment|// */
+comment|// reference,
 comment|/**          * Constraints the value and possible the dataType          */
 name|value
 block|,
@@ -86,7 +87,7 @@ operator|=
 name|type
 expr_stmt|;
 block|}
-comment|/**      * Getter for the type of the constraint.      * @return The type of the constraint      */
+comment|/**      * Getter for the type of the constraint.      *       * @return The type of the constraint      */
 specifier|public
 specifier|final
 name|ConstraintType
@@ -95,6 +96,30 @@ parameter_list|()
 block|{
 return|return
 name|type
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"Constraint [type :: %s][class :: %s]"
+argument_list|,
+name|type
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
 return|;
 block|}
 block|}

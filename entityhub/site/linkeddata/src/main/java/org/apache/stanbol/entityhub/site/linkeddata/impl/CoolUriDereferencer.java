@@ -470,7 +470,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> DereferenceTime: "
 operator|+
@@ -521,7 +521,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> ParseTime: "
 operator|+

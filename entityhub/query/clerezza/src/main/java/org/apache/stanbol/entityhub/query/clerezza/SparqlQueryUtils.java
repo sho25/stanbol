@@ -540,7 +540,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility Class to create SPARQL Queries for {@link SparqlFieldQuery} instances.<p>  * Thanks to ogrisel for pointing me to his<a href="http://hg.nuxeo.org/sandbox/scribo/raw-file/b57ada956947/scribo-annotator-recognizer-sparql-ep/src/main/java/ws/scribo/annotators/recognizer/SparqlEndpointInstanceRecognizer.java">  * SparqlEndpointInstanceRecognizer</a> implementation for the query optimisations  * for Virtuoso and LARQ!  * @author Rupert Westenthaler  *  */
+comment|/**  * Utility Class to create SPARQL Queries for {@link SparqlFieldQuery} instances.  *<p>  * Thanks to ogrisel for pointing me to his<a href=  * "http://hg.nuxeo.org/sandbox/scribo/raw-file/b57ada956947/scribo-annotator-recognizer-sparql-ep/src/main/java/ws/scribo/annotators/recognizer/SparqlEndpointInstanceRecognizer.java"  *> SparqlEndpointInstanceRecognizer</a> implementation for the query optimisations for Virtuoso and LARQ!  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
@@ -593,7 +593,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Allows to enable SPARQL 1.1 features          * @param supportsSparql11SubSelect          */
+comment|/**          * Allows to enable SPARQL 1.1 features          *           * @param supportsSparql11SubSelect          */
 name|EndpointTypeEnum
 parameter_list|(
 name|boolean
@@ -647,7 +647,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#queryResult}      * @see RdfResourceEnum.fieldQueryResult      */
+comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#queryResult}      *       * @see RdfResourceEnum.fieldQueryResult      */
 specifier|public
 specifier|static
 specifier|final
@@ -665,7 +665,7 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#QueryResultSet}      * @see RdfResourceEnum.FieldQueryResultSet      */
+comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#QueryResultSet}      *       * @see RdfResourceEnum.FieldQueryResultSet      */
 specifier|public
 specifier|static
 specifier|final
@@ -687,7 +687,7 @@ specifier|private
 name|SparqlQueryUtils
 parameter_list|()
 block|{}
-comment|/**      * Creates a SPARWL CONSTRUCT query that creates triples for all the selected      * fields of representations in the result set.<p>      * In addition the query also constructs<code>entityhub-query:ieldQueryResultSet      * entityhub-query:fieldQueryResult ?representation</code> triples that can be      * used to create an iterator over the results of the query      * @param query the field query      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @param additionalFields This allows to parse additional fields that are      *    optionally selected in the data set and added to the CONSTRUCT part      *    of the query      * @return the SPARQL CONSTRUCT Query      */
+comment|/**      * Creates a SPARWL CONSTRUCT query that creates triples for all the selected fields of representations in      * the result set.      *<p>      * In addition the query also constructs<code>entityhub-query:ieldQueryResultSet      * entityhub-query:fieldQueryResult ?representation</code> triples that can be used to create an iterator      * over the results of the query      *       * @param query      *            the field query      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      * @param additionalFields      *            This allows to parse additional fields that are optionally selected in the data set and      *            added to the CONSTRUCT part of the query      * @return the SPARQL CONSTRUCT Query      */
 specifier|public
 specifier|static
 name|String
@@ -718,7 +718,7 @@ name|additionalFields
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a SPARWL CONSTRUCT query that creates triples for all the selected      * fields of representations in the result set.<p>      * In addition the query also constructs<code>entityhub-query:ieldQueryResultSet      * entityhub-query:fieldQueryResult ?representation</code> triples that can be      * used to create an iterator over the results of the query      * @param query the field query      * @param limit if a value> 0 is parsed, than this value overwrites the limit      *    defined by the query.      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @param additionalFields This allows to parse additional fields that are      *    optionally selected in the data set and added to the CONSTRUCT part      *    of the query      * @return the SPARQL CONSTRUCT Query      */
+comment|/**      * Creates a SPARWL CONSTRUCT query that creates triples for all the selected fields of representations in      * the result set.      *<p>      * In addition the query also constructs<code>entityhub-query:ieldQueryResultSet      * entityhub-query:fieldQueryResult ?representation</code> triples that can be used to create an iterator      * over the results of the query      *       * @param query      *            the field query      * @param limit      *            if a value> 0 is parsed, than this value overwrites the limit defined by the query.      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      * @param additionalFields      *            This allows to parse additional fields that are optionally selected in the data set and      *            added to the CONSTRUCT part of the query      * @return the SPARQL CONSTRUCT Query      */
 specifier|public
 specifier|static
 name|String
@@ -738,7 +738,7 @@ modifier|...
 name|additionalFields
 parameter_list|)
 block|{
-comment|//1)INIT
+comment|// 1)INIT
 specifier|final
 name|StringBuilder
 name|queryString
@@ -747,7 +747,7 @@ operator|new
 name|StringBuilder
 argument_list|()
 decl_stmt|;
-comment|//clone the query and reconfigure the clone
+comment|// clone the query and reconfigure the clone
 name|query
 operator|=
 name|initLocalQuery
@@ -773,7 +773,7 @@ argument_list|(
 name|query
 argument_list|)
 decl_stmt|;
-comment|//2)CONSTRUCT
+comment|// 2)CONSTRUCT
 name|createConstruct
 argument_list|(
 name|queryString
@@ -781,7 +781,7 @@ argument_list|,
 name|selectedFields
 argument_list|)
 expr_stmt|;
-comment|//3)WHERE
+comment|// 3)WHERE
 name|queryString
 operator|.
 name|append
@@ -807,7 +807,7 @@ argument_list|(
 literal|"} \n"
 argument_list|)
 expr_stmt|;
-comment|//5) Limit and Offset
+comment|// 5) Limit and Offset
 if|if
 condition|(
 operator|!
@@ -819,7 +819,7 @@ name|selectedFields
 argument_list|)
 condition|)
 block|{
-comment|//4)add Entity Ranking (if needed)
+comment|// 4)add Entity Ranking (if needed)
 name|addRankingOrder
 argument_list|(
 name|endpointType
@@ -870,7 +870,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Determines if the current query uses sub selects. Activated if the      * SPARQL endpoint supports the SPARQL 1.1 sub select feature and the query      * selects more than the enttiy id.      * @param endpoint the used endpoint type      * @param selectedFields the map with the selected fields      * @return the state      */
+comment|/**      * Determines if the current query uses sub selects. Activated if the SPARQL endpoint supports the SPARQL      * 1.1 sub select feature and the query selects more than the enttiy id.      *       * @param endpoint      *            the used endpoint type      * @param selectedFields      *            the map with the selected fields      * @return the state      */
 specifier|private
 specifier|static
 name|boolean
@@ -902,7 +902,7 @@ operator|>
 literal|1
 return|;
 block|}
-comment|/**      * Creates a clone of the parsed query and applies the parsed limit and      * additional fields      * @param query the query      * @param limit the limit (if&gt; 0)      * @param additionalFields additional fields to select      * @return a clone of the parsed query with the set limit and added fields      */
+comment|/**      * Creates a clone of the parsed query and applies the parsed limit and additional fields      *       * @param query      *            the query      * @param limit      *            the limit (if&gt; 0)      * @param additionalFields      *            additional fields to select      * @return a clone of the parsed query with the set limit and added fields      */
 specifier|private
 specifier|static
 name|SparqlFieldQuery
@@ -941,8 +941,9 @@ name|limit
 argument_list|)
 expr_stmt|;
 block|}
-comment|//We need a copy to delete all fields that are already covered by some added
-comment|//graph pattern.
+comment|// We need a copy to delete all fields that are already covered by some
+comment|// added
+comment|// graph pattern.
 if|if
 condition|(
 name|additionalFields
@@ -973,7 +974,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/**      * Creates the CONSTRUCT part of the query including the      *<code>entityhub-query:ieldQueryResultSet entityhub-query:fieldQueryResult ?representation</code>      * triples that are used to build the iterator over the results      * @param queryString The query to add the construct fields      * @param selectedFields the field name 2 variable name mapping used by the      *    query. This mapping MUST also contain the<code>null</code> key that      *    is mapped to the variable name used for the representations to be selected      */
+comment|/**      * Creates the CONSTRUCT part of the query including the      *<code>entityhub-query:ieldQueryResultSet entityhub-query:fieldQueryResult ?representation</code>      * triples that are used to build the iterator over the results      *       * @param queryString      *            The query to add the construct fields      * @param selectedFields      *            the field name 2 variable name mapping used by the query. This mapping MUST also contain the      *<code>null</code> key that is mapped to the variable name used for the representations to be      *            selected      */
 specifier|private
 specifier|static
 name|void
@@ -1010,7 +1011,8 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|//the null element has the root variable mapping
+comment|// the null element has the
+comment|// root variable mapping
 for|for
 control|(
 name|Entry
@@ -1086,8 +1088,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//add the triples for the Representation type
-comment|//add the triples that form the result set
+comment|// add the triples for the Representation type
+comment|// add the triples that form the result set
 name|queryString
 operator|.
 name|append
@@ -1141,7 +1143,7 @@ literal|"} "
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
+comment|/**      * Creates the SPARQL representation of the parse field query.      *       * @param query      *            A field query implementation that additionally supports a field to variable mapping      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1168,7 +1170,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param limit If> 0, than the limit parsed by the query is overriden by this      *    value      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
+comment|/**      * Creates the SPARQL representation of the parse field query.      *       * @param query      *            A field query implementation that additionally supports a field to variable mapping      * @param limit      *            If> 0, than the limit parsed by the query is overriden by this value      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1197,7 +1199,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param includeFields if<code>false</code> only the root is selected (selected fields are ignored)      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
+comment|/**      * Creates the SPARQL representation of the parse field query.      *       * @param query      *            A field query implementation that additionally supports a field to variable mapping      * @param includeFields      *            if<code>false</code> only the root is selected (selected fields are ignored)      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1227,7 +1229,7 @@ name|endpointType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates the SPARQL representation of the parse field query.      * @param query A field query implementation that additionally supports a field      *    to variable mapping      * @param includeFields if<code>false</code> only the root is selected (selected fields are ignored)      * @param limit if> 0 than the limit defined by the query is overridden by      *    the parsed value      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      * @return the SPARQL query as String      */
+comment|/**      * Creates the SPARQL representation of the parse field query.      *       * @param query      *            A field query implementation that additionally supports a field to variable mapping      * @param includeFields      *            if<code>false</code> only the root is selected (selected fields are ignored)      * @param limit      *            if> 0 than the limit defined by the query is overridden by the parsed value      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      * @return the SPARQL query as String      */
 specifier|public
 specifier|static
 name|String
@@ -1246,7 +1248,7 @@ name|EndpointTypeEnum
 name|endpointType
 parameter_list|)
 block|{
-comment|//1) INIT
+comment|// 1) INIT
 specifier|final
 name|StringBuilder
 name|queryString
@@ -1278,7 +1280,7 @@ argument_list|(
 name|query
 argument_list|)
 decl_stmt|;
-comment|//2) SELECT
+comment|// 2) SELECT
 name|createSelect
 argument_list|(
 name|queryString
@@ -1288,7 +1290,7 @@ argument_list|,
 name|selectedFields
 argument_list|)
 expr_stmt|;
-comment|//3) WHERE
+comment|// 3) WHERE
 name|queryString
 operator|.
 name|append
@@ -1305,6 +1307,15 @@ argument_list|,
 name|selectedFields
 argument_list|,
 name|endpointType
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"After adding field constrains the query string is [{}]."
+argument_list|,
+name|queryString
 argument_list|)
 expr_stmt|;
 name|queryString
@@ -1325,7 +1336,7 @@ name|selectedFields
 argument_list|)
 condition|)
 block|{
-comment|//4) Add Stuff to rank results based on the "page rank" of entities
+comment|// 4) Add Stuff to rank results based on the "page rank" of entities
 name|addRankingOrder
 argument_list|(
 name|endpointType
@@ -1342,7 +1353,7 @@ argument_list|,
 literal|""
 argument_list|)
 expr_stmt|;
-comment|//5) Limit and Offset
+comment|// 5) Limit and Offset
 name|addLimit
 argument_list|(
 name|query
@@ -1377,7 +1388,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Initialise the field -&gt; variable name mappings including the root      * variable name by adding<code>null</code> as key      * @param query the query      * @return the mappings      */
+comment|/**      * Initialise the field -&gt; variable name mappings including the root variable name by adding      *<code>null</code> as key      *       * @param query      *            the query      * @return the mappings      */
 specifier|private
 specifier|static
 name|Map
@@ -1392,8 +1403,9 @@ name|SparqlFieldQuery
 name|query
 parameter_list|)
 block|{
-comment|//We need a copy to delete all fields that are already covered by some added
-comment|//graph pattern.
+comment|// We need a copy to delete all fields that are already covered by some
+comment|// added
+comment|// graph pattern.
 specifier|final
 name|Map
 argument_list|<
@@ -1422,7 +1434,7 @@ name|getFieldVariableMappings
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//also add the root variable
+comment|// also add the root variable
 name|selectedFields
 operator|.
 name|put
@@ -1439,7 +1451,7 @@ return|return
 name|selectedFields
 return|;
 block|}
-comment|/**      * For some {@link EndpointTypeEnum SPARQL endpoint types} we need to add      * an additional constraint to determine the ranking information based on      * incomming relations to the Entities.<p>      * Currently this done for {@link EndpointTypeEnum#ARQ ARQ} and      * {@link EndpointTypeEnum#LARQ LARQ}.       * @param endpointType the endpoint type      * @param queryString the SPARQL query string to add the ranking constraint      * @param rootFieldName the variable name used to select entities      */
+comment|/**      * For some {@link EndpointTypeEnum SPARQL endpoint types} we need to add an additional constraint to      * determine the ranking information based on incoming relations to the Entities.      *<p>      * Currently this done for {@link EndpointTypeEnum#ARQ ARQ} and {@link EndpointTypeEnum#LARQ LARQ}.      *       * @param endpointType      *            the endpoint type      * @param queryString      *            the SPARQL query string to add the ranking constraint      * @param rootFieldName      *            the variable name used to select entities      */
 specifier|private
 specifier|static
 name|void
@@ -1480,16 +1492,17 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"   { ?incoming ?p ?%s . } \n"
+literal|"  { \n    ?incoming ?p ?%s . \n  } \n"
 argument_list|,
 name|rootFieldName
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//else ... for Virtuoso we need not count incoming links, because it has a
-comment|//page rank like feature we can use to rank entities!
-comment|//all others do not support sorting
+comment|// else ... for Virtuoso we need not count incoming links, because it
+comment|// has a
+comment|// page rank like feature we can use to rank entities!
+comment|// all others do not support sorting
 block|}
 comment|/**      * @param endpointType      * @param queryString      */
 specifier|private
@@ -1520,7 +1533,7 @@ operator|.
 name|Virtuoso
 condition|)
 block|{
-comment|//is that still SPARQL ... wondering about the syntax ^
+comment|// is that still SPARQL ... wondering about the syntax ^
 name|queryString
 operator|.
 name|append
@@ -1560,7 +1573,7 @@ operator|.
 name|LARQ
 condition|)
 block|{
-comment|//TODO: COUNT is not part of the SPARQL 1.0 specification!
+comment|// TODO: COUNT is not part of the SPARQL 1.0 specification!
 comment|// see http://www.w3.org/2009/sparql/wiki/Feature:AggregateFunctions
 name|queryString
 operator|.
@@ -1583,7 +1596,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//else not supported ... add nothing
+comment|// else not supported ... add nothing
 block|}
 comment|/**      * @param query      * @param queryString      */
 specifier|private
@@ -1669,7 +1682,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Adds the SELECT part to the SPARQL query      * @param queryString      * @param query      * @param includeFields      * @param selectedFields      */
+comment|/**      * Adds the SELECT part to the SPARQL query      *       * @param queryString      * @param query      * @param includeFields      * @param selectedFields      */
 specifier|private
 specifier|static
 name|void
@@ -1700,8 +1713,9 @@ literal|"SELECT DISTINCT"
 argument_list|)
 expr_stmt|;
 comment|// REMOVED: The root variable is already in the selected fields map!
-comment|// queryString.append(" ?"+query.getRootVariableName()); //select the representation ID
-comment|//now the variables for the selected fields!
+comment|// queryString.append(" ?"+query.getRootVariableName()); //select the
+comment|// representation ID
+comment|// now the variables for the selected fields!
 if|if
 condition|(
 name|includeFields
@@ -1736,7 +1750,7 @@ block|}
 block|}
 else|else
 block|{
-comment|//else add only the root variable (stored under key null)
+comment|// else add only the root variable (stored under key null)
 name|queryString
 operator|.
 name|append
@@ -1765,7 +1779,7 @@ literal|" \n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds the WHERE clause of the SPARQL query.<p>      * If the {@link EndpointTypeEnum SPARQL endpoint} supports SPARQL 1.1       * subqueries, than this adds also the LIMIT and OFFSET to in inner SELECT       * that only selects the id.       * @param queryString the SPARQL query string to add the WHERE      * @param query the query      * @param selectedFields the selected fields      * @param endpointType The type of the endpoint (used to write optimised      *    queries for endpoint type specific extensions      */
+comment|/**      * Adds the WHERE clause of the SPARQL query.      *<p>      * If the {@link EndpointTypeEnum SPARQL endpoint} supports SPARQL 1.1 subqueries, than this adds also the      * LIMIT and OFFSET to in inner SELECT that only selects the id.      *       * @param queryString      *            the SPARQL query string to add the WHERE      * @param query      *            the query      * @param selectedFields      *            the selected fields      * @param endpointType      *            The type of the endpoint (used to write optimised queries for endpoint type specific      *            extensions      */
 specifier|private
 specifier|static
 name|void
@@ -1790,7 +1804,7 @@ name|EndpointTypeEnum
 name|endpointType
 parameter_list|)
 block|{
-comment|//we need temporary variables with unique names
+comment|// we need temporary variables with unique names
 name|String
 name|varPrefix
 init|=
@@ -1807,14 +1821,14 @@ block|{
 literal|1
 block|}
 decl_stmt|;
-comment|//used to open brackets for the select part of the constraints
+comment|// used to open brackets for the select part of the constraints
 name|boolean
 name|first
 init|=
 literal|true
 decl_stmt|;
-comment|//determine if sub-selects are supported and if we need a sub-select
-comment|//(more than the id is selected)
+comment|// determine if sub-selects are supported and if we need a sub-select
+comment|// (more than the id is selected)
 name|boolean
 name|subSelectState
 init|=
@@ -1825,8 +1839,24 @@ argument_list|,
 name|selectedFields
 argument_list|)
 decl_stmt|;
-comment|//if we uses a sub query to select the ids, we need to add the graph pattern
-comment|//of all selected fields outside of the sub query
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"add field constraints is in a sub-select-state [{}]."
+argument_list|,
+operator|(
+name|subSelectState
+condition|?
+literal|"yes"
+else|:
+literal|"no"
+operator|)
+argument_list|)
+expr_stmt|;
+comment|// if we uses a sub query to select the ids, we need to add the graph
+comment|// pattern
+comment|// of all selected fields outside of the sub query
 name|Map
 argument_list|<
 name|String
@@ -1862,7 +1892,7 @@ name|intend
 operator|=
 literal|"      "
 expr_stmt|;
-comment|//additional intend because of sub query (3*2)
+comment|// additional intend because of sub query (3*2)
 block|}
 else|else
 block|{
@@ -1870,10 +1900,32 @@ name|intend
 operator|=
 literal|"    "
 expr_stmt|;
-comment|//normal intend (2*2)
+comment|// normal intend (2*2)
 block|}
-for|for
-control|(
+name|Iterator
+argument_list|<
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|Constraint
+argument_list|>
+argument_list|>
+name|constraintIterator
+init|=
+name|query
+operator|.
+name|iterator
+argument_list|()
+decl_stmt|;
+while|while
+condition|(
+name|constraintIterator
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
 name|Entry
 argument_list|<
 name|String
@@ -1881,10 +1933,13 @@ argument_list|,
 name|Constraint
 argument_list|>
 name|fieldConstraint
-range|:
-name|query
-control|)
-block|{
+init|=
+name|constraintIterator
+operator|.
+name|next
+argument_list|()
+decl_stmt|;
+comment|// for (Entry<String, Constraint> fieldConstraint : query) {
 if|if
 condition|(
 name|first
@@ -1958,6 +2013,29 @@ operator|.
 name|getValue
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"adding a constraint [type :: {}][field :: {}][prefix :: {}][intent :: {}]."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|constraint
+operator|.
+name|getType
+argument_list|()
+block|,
+name|field
+block|,
+name|varPrefix
+block|,
+name|intend
+block|}
+argument_list|)
+expr_stmt|;
 switch|switch
 condition|(
 name|constraint
@@ -2089,11 +2167,12 @@ literal|" . \n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|//for some endpoints we need to add an additional constraints used for
-comment|//ranking. If sub-queries are used this need to be in the select part
-comment|//of the query (to rank results of the inner query)
-comment|//otherwise it is better to have it in outside if the select part to only
-comment|//rank the graph selected by the query
+comment|// for some endpoints we need to add an additional constraints used for
+comment|// ranking. If sub-queries are used this need to be in the select part
+comment|// of the query (to rank results of the inner query)
+comment|// otherwise it is better to have it in outside if the select part to
+comment|// only
+comment|// rank the graph selected by the query
 if|if
 condition|(
 name|subSelectState
@@ -2132,14 +2211,14 @@ argument_list|(
 literal|"    } \n"
 argument_list|)
 expr_stmt|;
-comment|//re-add all selected fields to be added as selects because in
-comment|//the sub-query we only select the ID!
+comment|// re-add all selected fields to be added as selects because in
+comment|// the sub-query we only select the ID!
 name|selectedFields
 operator|=
 name|tmpSelectedFields
 expr_stmt|;
-comment|//ranking needs also to be added to the sub-query (to correctly
-comment|//process LIMIT and OFFSET
+comment|// ranking needs also to be added to the sub-query (to correctly
+comment|// process LIMIT and OFFSET
 name|addRankingOrder
 argument_list|(
 name|endpointType
@@ -2156,8 +2235,8 @@ argument_list|,
 literal|"    "
 argument_list|)
 expr_stmt|;
-comment|//add LIMIT and OFFSET to the sub-query!
-comment|//TODO: add link to the email
+comment|// add LIMIT and OFFSET to the sub-query!
+comment|// TODO: add link to the email
 name|queryString
 operator|.
 name|append
@@ -2201,13 +2280,14 @@ name|queryString
 operator|.
 name|append
 argument_list|(
-literal|"} \n"
+literal|"  } \n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|//All the followig Graphpattern are only processed for the parts selected
-comment|//by the above constraints
-comment|//if no subqueries are used we need now to add the ranking constraints
+comment|// All the followig Graphpattern are only processed for the parts
+comment|// selected
+comment|// by the above constraints
+comment|// if no subqueries are used we need now to add the ranking constraints
 if|if
 condition|(
 operator|!
@@ -2229,9 +2309,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//we need to add graph pattern for selected field that are not covered by
-comment|//graph pattern written for the constraint.
-comment|//Implementation Note: selectedFields contains the null key for the root variable
+comment|// we need to add graph pattern for selected field that are not covered
+comment|// by
+comment|// graph pattern written for the constraint.
+comment|// Implementation Note: selectedFields contains the null key for the
+comment|// root variable
 while|while
 condition|(
 name|selectedFields
@@ -2242,7 +2324,8 @@ operator|>
 literal|1
 condition|)
 block|{
-comment|//if this is the only left element we are done
+comment|// if this is the only left element
+comment|// we are done
 name|Iterator
 argument_list|<
 name|String
@@ -2260,10 +2343,11 @@ decl_stmt|;
 name|String
 name|actField
 decl_stmt|;
-comment|//we need to get a non null value from the map
+comment|// we need to get a non null value from the map
 do|do
 block|{
-comment|//the outer while ensures an non null value so we need not to use hasNext
+comment|// the outer while ensures an non null value so we need not to
+comment|// use hasNext
 name|actField
 operator|=
 name|it
@@ -2286,7 +2370,8 @@ argument_list|(
 literal|"  OPTIONAL { "
 argument_list|)
 expr_stmt|;
-comment|// NOTE the following Method removes the written mapping from the Map
+comment|// NOTE the following Method removes the written mapping from the
+comment|// Map
 name|addFieldGraphPattern
 argument_list|(
 name|queryString
@@ -2372,9 +2457,10 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//we need not to distinguish between empty and null
-comment|//because SPARQL includes support for automatic detection of dataTypes
-comment|//see http://www.w3.org/TR/rdf-sparql-query/#QSynLiterals
+comment|// we need not to distinguish between empty and null
+comment|// because SPARQL includes support for automatic detection of
+comment|// dataTypes
+comment|// see http://www.w3.org/TR/rdf-sparql-query/#QSynLiterals
 name|dataTypes
 operator|=
 name|Collections
@@ -2446,7 +2532,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//we have multiple dataTypes -> need to use union!
+comment|// we have multiple dataTypes -> need to use union!
 name|boolean
 name|first
 init|=
@@ -2547,9 +2633,10 @@ block|}
 else|else
 block|{
 comment|// no constraint for the value
-comment|// filter all instances that define any value for the given dataTypes
+comment|// filter all instances that define any value for the given
+comment|// dataTypes
 comment|// see http://www.w3.org/TR/rdf-sparql-query/#func-datatype
-comment|//first we need to select the Variable to filter
+comment|// first we need to select the Variable to filter
 name|String
 name|var
 init|=
@@ -2580,7 +2667,7 @@ argument_list|(
 name|intend
 argument_list|)
 expr_stmt|;
-comment|//now we need to write the filter
+comment|// now we need to write the filter
 if|if
 condition|(
 name|dataTypes
@@ -2709,7 +2796,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Adds a filter that restricts the data type to an variable      * @param queryString the query String to add the filter. MUST NOT be<code>null</code>      * @param var the variable to add the filter. MUST NOT be<code>null</code>      * @param dataTypes the data type uri for the filter. MUST NOT be<code>null</code>      */
+comment|/**      * Adds a filter that restricts the data type to an variable      *       * @param queryString      *            the query String to add the filter. MUST NOT be<code>null</code>      * @param var      *            the variable to add the filter. MUST NOT be<code>null</code>      * @param dataTypes      *            the data type uri for the filter. MUST NOT be<code>null</code>      */
 specifier|private
 specifier|static
 name|void
@@ -2742,7 +2829,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds a value constraint for a field including the dataType      * @param queryString the query string to add the constraint.  MUST NOT be<code>null</code>      * @param rootVarName the variable name of the subject.  MUST NOT be<code>null</code>      * @param field the property name of the field. MUST NOT be<code>null</code>      * @param dataType the dataType constraint or<code>null</code> if none      * @param value the value. MUST NOT be<code>null</code>.      */
+comment|/**      * Adds a value constraint for a field including the dataType      *       * @param queryString      *            the query string to add the constraint. MUST NOT be<code>null</code>      * @param rootVarName      *            the variable name of the subject. MUST NOT be<code>null</code>      * @param field      *            the property name of the field. MUST NOT be<code>null</code>      * @param dataType      *            the dataType constraint or<code>null</code> if none      * @param value      *            the value. MUST NOT be<code>null</code>.      */
 specifier|private
 specifier|static
 name|void
@@ -2834,6 +2921,7 @@ condition|(
 name|first
 condition|)
 block|{
+comment|// only add bracket if multiple values are parsed (STANBOL-697)
 if|if
 condition|(
 name|mode
@@ -2841,6 +2929,13 @@ operator|==
 name|MODE
 operator|.
 name|any
+operator|&&
+name|values
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
 condition|)
 block|{
 name|queryString
@@ -2904,8 +2999,8 @@ name|field
 argument_list|)
 condition|)
 block|{
-comment|//in case of a special field replace the field URI with an
-comment|//variable to allow searching all outgoing properties
+comment|// in case of a special field replace the field URI with an
+comment|// variable to allow searching all outgoing properties
 name|fieldVar
 operator|=
 name|varPrefix
@@ -3096,7 +3191,7 @@ operator|.
 name|any
 condition|)
 block|{
-comment|//close the union
+comment|// close the union
 name|queryString
 operator|.
 name|append
@@ -3114,7 +3209,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Adds an text constraint to the SPARQL query string      * @param queryString the query string to add the constraint      * @param var the variable name to constraint      * @param constraint the constraint      * @param endpointType The type of the Endpoint (used to write optimized      *    queries for endpoint type specific extensions      */
+comment|/**      * Adds an text constraint to the SPARQL query string      *       * @param queryString      *            the query string to add the constraint      * @param var      *            the variable name to constraint      * @param constraint      *            the constraint      * @param endpointType      *            The type of the Endpoint (used to write optimized queries for endpoint type specific      *            extensions      */
 specifier|private
 specifier|static
 name|void
@@ -3160,6 +3255,30 @@ operator|.
 name|isEmpty
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Constraint is text-value constrain [{}][var :: {}][intent :: {}]."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+operator|(
+name|isTextValueConstraint
+condition|?
+literal|"yes"
+else|:
+literal|"no"
+operator|)
+block|,
+name|var
+block|,
+name|intend
+block|}
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|isTextValueConstraint
@@ -3218,8 +3337,8 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//TODO: This optimised versions for Virtuoso and LARQ might not
-comment|//      respect case sensitive queries. Need more testing!
+comment|// TODO: This optimised versions for Virtuoso and LARQ might not
+comment|// respect case sensitive queries. Need more testing!
 if|if
 condition|(
 name|EndpointTypeEnum
@@ -3510,7 +3629,8 @@ operator|.
 name|wildcard
 condition|)
 block|{
-comment|//parse false, because that is more in line with the expectations of users!
+comment|// parse false, because that is more in line with the
+comment|// expectations of users!
 name|Collection
 argument_list|<
 name|String
@@ -3631,9 +3751,9 @@ block|}
 block|}
 block|}
 block|}
-comment|//else nothing to do
-comment|//add language Filters
-comment|//TODO check if FILTER ( is already written!
+comment|// else nothing to do
+comment|// add language Filters
+comment|// TODO check if FILTER ( is already written!
 if|if
 condition|(
 name|constraint
@@ -3653,6 +3773,21 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Constraint has languages [filter-added :: {}]."
+argument_list|,
+operator|(
+name|filterAdded
+condition|?
+literal|"yes"
+else|:
+literal|"no"
+operator|)
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
@@ -3725,10 +3860,10 @@ argument_list|(
 literal|")"
 argument_list|)
 expr_stmt|;
-comment|//close the FILTER and the graph pattern
+comment|// close the FILTER and the graph pattern
 block|}
 block|}
-comment|/**      * (Creates AND Text) OR (Query AND String) like queries based on the      * parsed TextConstraint as used by {@link EndpointTypeEnum#LARQ LARQ} and      * {@link EndpointTypeEnum#Virtuoso VIRTUOSO} SPARQL endpoints to speed up      * full text queries.      * @param constraints the as returned by {@link TextConstraint#getTexts()}      * @return the full text query string       */
+comment|/**      * (Creates AND Text) OR (Query AND String) like queries based on the parsed TextConstraint as used by      * {@link EndpointTypeEnum#LARQ LARQ} and {@link EndpointTypeEnum#Virtuoso VIRTUOSO} SPARQL endpoints to      * speed up full text queries.      *       * @param constraints      *            the as returned by {@link TextConstraint#getTexts()}      * @return the full text query string      */
 specifier|protected
 specifier|static
 name|String
@@ -3794,7 +3929,7 @@ literal|" OR "
 argument_list|)
 expr_stmt|;
 block|}
-comment|//TODO: maybe we should use a word tokenizer here
+comment|// TODO: maybe we should use a word tokenizer here
 name|String
 index|[]
 name|words
@@ -3815,8 +3950,8 @@ operator|>
 literal|1
 condition|)
 block|{
-comment|//not perfect because words might contain empty string, but
-comment|//it will eliminate most unnecessary brackets .
+comment|// not perfect because words might contain empty string, but
+comment|// it will eliminate most unnecessary brackets .
 name|textQuery
 operator|.
 name|append
@@ -3929,7 +4064,8 @@ literal|" AND "
 argument_list|)
 expr_stmt|;
 block|}
-comment|// we need to double the backslashes because of replaceAll takes a regular expression
+comment|// we need to double the backslashes because of
+comment|// replaceAll takes a regular expression
 comment|// as input.
 name|String
 name|escapedWord
@@ -3980,7 +4116,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//end if not null and not empty
+comment|// end if not null and not empty
 block|}
 return|return
 name|textQuery
@@ -3989,7 +4125,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Adds a SPARQL regex filter to the parsed query string      * @param queryString the string builder to add the constraint      * @param var the variable to constrain      * @param regexContraints the regex encoded search strings (connected with '||' (OR))      * @param isCasesensitive if the constraint is case sensitive or not      */
+comment|/**      * Adds a SPARQL regex filter to the parsed query string      *       * @param queryString      *            the string builder to add the constraint      * @param var      *            the variable to constrain      * @param regexContraints      *            the regex encoded search strings (connected with '||' (OR))      * @param isCasesensitive      *            if the constraint is case sensitive or not      */
 specifier|private
 specifier|static
 name|void
@@ -4082,7 +4218,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Adds an RangeConstraint to the parsed query String      * @param queryString the query to add the constraint      * @param var the variable to constrain      * @param constraint the constraint      */
+comment|/**      * Adds an RangeConstraint to the parsed query String      *       * @param queryString      *            the query to add the constraint      * @param var      *            the variable to constrain      * @param constraint      *            the constraint      */
 specifier|private
 specifier|static
 name|void
@@ -4118,7 +4254,8 @@ argument_list|(
 literal|"FILTER "
 argument_list|)
 expr_stmt|;
-comment|//start the FILTER
+comment|// start the
+comment|// FILTER
 name|boolean
 name|closedRange
 init|=
@@ -4149,7 +4286,7 @@ literal|"("
 argument_list|)
 expr_stmt|;
 block|}
-comment|//write lower and upper bounds
+comment|// write lower and upper bounds
 if|if
 condition|(
 name|constraint
@@ -4237,7 +4374,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Adds a lower/upper bound constraint to the query String      * @param queryString the query string      * @param var the variable      * @param lowerBound<code>true</code> to add the lower bound and      *<code>false</code> to add the upper bound      * @param inclusive if the bound is inclusive (>= or<=)      * @param value the value representing the bound.      */
+comment|/**      * Adds a lower/upper bound constraint to the query String      *       * @param queryString      *            the query string      * @param var      *            the variable      * @param lowerBound      *<code>true</code> to add the lower bound and<code>false</code> to add the upper bound      * @param inclusive      *            if the bound is inclusive (>= or<=)      * @param value      *            the value representing the bound.      */
 specifier|private
 specifier|static
 name|void
@@ -4269,7 +4406,7 @@ operator|instanceof
 name|Date
 condition|)
 block|{
-comment|//for dates add the data type!
+comment|// for dates add the data type!
 name|stringValue
 operator|=
 name|String
@@ -4294,7 +4431,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//add additional  "if" for special types if necessary
+comment|// add additional "if" for special types if necessary
 name|stringValue
 operator|=
 name|value
@@ -4303,7 +4440,7 @@ name|toString
 argument_list|()
 expr_stmt|;
 block|}
-comment|//adds (?var>/<[=] valueString)
+comment|// adds (?var>/<[=] valueString)
 name|queryString
 operator|.
 name|append
@@ -4333,7 +4470,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds a S P O pattern to the query by using the root as subject, the parsed      * field as predicate and the returned variable as object. This method doese      * not open a '{' nor close the pattern with any of '.', ',' or ';'      * @param queryString the {@link StringBuilder} to add the pattern      * @param field the field      * @param selectedFields the map field -> var of the selected variables. If      *    the parsed field is selected, the field is removed from the list and      *    the mapped variable name is returned      * @param varPrefix the default prefix for newly created variable names      * @param varNum The first element of the array is used to get the number of      *    the created variable. If one is created the value of the first element is      *    increased by one      * @return The variable name used for the object of the pattern      */
+comment|/**      * Adds a S P O pattern to the query by using the root as subject, the parsed field as predicate and the      * returned variable as object. This method doese not open a '{' nor close the pattern with any of '.',      * ',' or ';'      *       * @param queryString      *            the {@link StringBuilder} to add the pattern      * @param field      *            the field      * @param selectedFields      *            the map field -> var of the selected variables. If the parsed field is selected, the field      *            is removed from the list and the mapped variable name is returned      * @param varPrefix      *            the default prefix for newly created variable names      * @param varNum      *            The first element of the array is used to get the number of the created variable. If one is      *            created the value of the first element is increased by one      * @return The variable name used for the object of the pattern      */
 specifier|private
 specifier|static
 name|String
@@ -4374,7 +4511,8 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//check if the field is selected
+comment|// check if the field is
+comment|// selected
 if|if
 condition|(
 name|var
@@ -4382,8 +4520,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//this field is not selected
-comment|//we need to generate a temp var
+comment|// this field is not selected
+comment|// we need to generate a temp var
 name|var
 operator|=
 name|varPrefix
@@ -4408,8 +4546,8 @@ name|field
 argument_list|)
 condition|)
 block|{
-comment|//in case of a special field replace the field URI with an
-comment|//variable to allow searching all outgoing properties
+comment|// in case of a special field replace the field URI with an
+comment|// variable to allow searching all outgoing properties
 name|String
 name|fieldVar
 init|=
@@ -4484,7 +4622,7 @@ return|return
 name|var
 return|;
 block|}
-comment|/**      * Writes the SPARQL FILTER for the parsed languages.      * This Method writes      *<code><pre>      *      prefix ((lang(?var) = "lang1") [|| (lang(?var) = "lang2..n")])      *</pre></code>      * @param queryString the query string to add the FILTER      * @param languages the languages to filter for (may contain<code>null</code> as element)      * @param var the name of the variable to filter.      * @param prefix The prefix is written in front of the filter expression (if any is created).      *        Typically this will be<ul>      *<li> FILTER if this is the only filter for an variable      *<li>&& if this filter is combined with AND to an other filter or      *<li> || if this filter is combined wit OR to an other filter      *</ul>      */
+comment|/**      * Writes the SPARQL FILTER for the parsed languages. This Method writes<code><pre>      *      prefix ((lang(?var) = "lang1") [|| (lang(?var) = "lang2..n")])      *</pre></code>      *       * @param queryString      *            the query string to add the FILTER      * @param languages      *            the languages to filter for (may contain<code>null</code> as element)      * @param var      *            the name of the variable to filter.      * @param prefix      *            The prefix is written in front of the filter expression (if any is created). Typically this      *            will be      *<ul>      *<li>FILTER if this is the only filter for an variable      *<li>&& if this filter is combined with AND to an other filter or      *<li>|| if this filter is combined wit OR to an other filter      *</ul>      */
 specifier|private
 specifier|static
 name|void
@@ -4508,17 +4646,37 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|languages
-operator|!=
 literal|null
-operator|&&
-operator|!
+operator|==
+name|languages
+operator|||
 name|languages
 operator|.
 name|isEmpty
 argument_list|()
 condition|)
+return|return;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Writing languages filter [var :: {}][prefix :: {}][languages :: {}]."
+argument_list|,
+operator|new
+name|Object
+index|[]
 block|{
+name|var
+block|,
+name|prefix
+block|,
+name|languages
+operator|.
+name|size
+argument_list|()
+block|}
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|prefix
@@ -4607,7 +4765,7 @@ literal|""
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|/*                  * NOTE: the lang() returns "" for literals without an language                  *       tag. Because of that if the language == null we need                  *       to parse "" as an argument                  */
+comment|/*              * NOTE: the lang() returns "" for literals without an language tag. Because of that if the              * language == null we need to parse "" as an argument              */
 block|}
 if|if
 condition|(
@@ -4626,7 +4784,6 @@ argument_list|(
 literal|")"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 block|}
 specifier|public
@@ -4650,57 +4807,69 @@ operator|.
 name|createFieldQuery
 argument_list|()
 decl_stmt|;
-comment|//        query.setConstraint("urn:field1", new ReferenceConstraint("urn:testReference"));
-comment|//        query.setConstraint("urn:field1", new ReferenceConstraint(
-comment|//            Arrays.asList("urn:testReference","urn:testReference1","urn:testReference3"),MODE.any));
-comment|//        query.setConstraint(SpecialFieldEnum.references.getUri(), new ReferenceConstraint(
-comment|//            Arrays.asList("urn:testReference","urn:testReference1","urn:testReference3")));
-comment|//        query.setConstraint("urn:field1a", new ValueConstraint(null, Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri())));
-comment|//        query.addSelectedField("urn:field1a");
-comment|//        query.setConstraint("urn:field1b", new ValueConstraint(9, Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri())));
-comment|//        query.setConstraint("urn:field1b", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri()),MODE.any));
-comment|//        query.setConstraint("urn:field1c", new ValueConstraint(null, Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
-comment|//        query.addSelectedField("urn:field1c");
-comment|//        query.setConstraint("urn:field1d", new ValueConstraint(9, Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
-comment|//        query.setConstraint("urn:field1d", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
-comment|//                DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
-comment|//        query.setConstraint("urn:field2", new TextConstraint("test value"));
-comment|//        query.setConstraint("urn:field3", new TextConstraint(Arrays.asList(
-comment|//            "text value","anothertest","some more values"),true));
-comment|//        query.setConstraint(SpecialFieldEnum.fullText.getUri(), new TextConstraint(Arrays.asList(
-comment|//            "text value","anothertest","some more values"),true));
-comment|//        query.setConstraint("urn:field2a", new TextConstraint(":-]")); //tests escaping of REGEX
-comment|//        query.setConstraint("urn:field3", new TextConstraint("language text","en"));
-comment|//        query.setConstraint("urn:field4", new TextConstraint("multi language text","en","de",null));
-comment|//        query.setConstraint("urn:field5", new TextConstraint("wildcar*",PatternType.wildcard,false,"en","de"));
-comment|//        query.addSelectedField("urn:field5");
-comment|//        query.setConstraint("urn:field6", new TextConstraint("^regex",PatternType.REGEX,true));
-comment|//        query.setConstraint("urn:field7", new TextConstraint("par*",PatternType.WildCard,false,"en","de",null));
-comment|//        query.setConstraint("urn:field8", new TextConstraint(null,"en","de",null));
-comment|//        query.setConstraint("urn:field9", new RangeConstraint((int)5, (int)10, true));
-comment|//        query.setConstraint("urn:field10", new RangeConstraint((int)5, (int)10, false));
-comment|//        query.setConstraint("urn:field11", new RangeConstraint(null, (int)10, true));
-comment|//        query.setConstraint("urn:field12", new RangeConstraint((int)5, null, true));
-comment|//        query.setConstraint("urn:field12", new RangeConstraint(new Date(), null, true));
+comment|// query.setConstraint("urn:field1", new
+comment|// ReferenceConstraint("urn:testReference"));
+comment|// query.setConstraint("urn:field1", new ReferenceConstraint(
+comment|// Arrays.asList("urn:testReference","urn:testReference1","urn:testReference3"),MODE.any));
+comment|// query.setConstraint(SpecialFieldEnum.references.getUri(), new
+comment|// ReferenceConstraint(
+comment|// Arrays.asList("urn:testReference","urn:testReference1","urn:testReference3")));
+comment|// query.setConstraint("urn:field1a", new ValueConstraint(null,
+comment|// Arrays.asList(
+comment|// DataTypeEnum.Float.getUri())));
+comment|// query.addSelectedField("urn:field1a");
+comment|// query.setConstraint("urn:field1b", new ValueConstraint(9, Arrays.asList(
+comment|// DataTypeEnum.Float.getUri())));
+comment|// query.setConstraint("urn:field1b", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
+comment|// DataTypeEnum.Float.getUri()),MODE.any));
+comment|// query.setConstraint("urn:field1c", new ValueConstraint(null, Arrays.asList(
+comment|// DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
+comment|// query.addSelectedField("urn:field1c");
+comment|// query.setConstraint("urn:field1d", new ValueConstraint(9, Arrays.asList(
+comment|// DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
+comment|// query.setConstraint("urn:field1d", new ValueConstraint(Arrays.asList(9,10,11), Arrays.asList(
+comment|// DataTypeEnum.Float.getUri(),DataTypeEnum.Double.getUri(),DataTypeEnum.Decimal.getUri())));
+comment|// query.setConstraint("urn:field2", new TextConstraint("test value"));
+comment|// query.setConstraint("urn:field3", new TextConstraint(Arrays.asList(
+comment|// "text value","anothertest","some more values"),true));
+comment|// query.setConstraint(SpecialFieldEnum.fullText.getUri(), new TextConstraint(Arrays.asList(
+comment|// "text value","anothertest","some more values"),true));
+comment|// query.setConstraint("urn:field2a", new TextConstraint(":-]"));
+comment|// //tests escaping of REGEX
+comment|// query.setConstraint("urn:field3", new TextConstraint("language text","en"));
 name|query
 operator|.
-name|addSelectedField
+name|setConstraint
 argument_list|(
-literal|"urn:field2a"
+literal|"urn:field4"
+argument_list|,
+operator|new
+name|TextConstraint
+argument_list|(
+literal|"multi language text"
+argument_list|,
+literal|"en"
+argument_list|,
+literal|"de"
+argument_list|,
+literal|null
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|query
-operator|.
-name|addSelectedField
-argument_list|(
-literal|"urn:field3"
-argument_list|)
-expr_stmt|;
+comment|// query.setConstraint("urn:field5", new
+comment|// TextConstraint("wildcar*",PatternType.wildcard,false,"en","de"));
+comment|// query.addSelectedField("urn:field5");
+comment|// query.setConstraint("urn:field6", new TextConstraint("^regex",PatternType.REGEX,true));
+comment|// query.setConstraint("urn:field7", new
+comment|// TextConstraint("par*",PatternType.WildCard,false,"en","de",null));
+comment|// query.setConstraint("urn:field8", new TextConstraint(null,"en","de",null));
+comment|// query.setConstraint("urn:field9", new RangeConstraint((int)5, (int)10, true));
+comment|// query.setConstraint("urn:field10", new RangeConstraint((int)5, (int)10, false));
+comment|// query.setConstraint("urn:field11", new RangeConstraint(null, (int)10, true));
+comment|// query.setConstraint("urn:field12", new RangeConstraint((int)5, null, true));
+comment|// query.setConstraint("urn:field12", new RangeConstraint(new Date(), null, true));
+comment|// query.addSelectedField("urn:field2a");
+comment|// query.addSelectedField("urn:field3");
 name|query
 operator|.
 name|setLimit
@@ -4873,7 +5042,7 @@ name|RdfRepresentation
 argument_list|>
 argument_list|()
 block|{
-comment|/*                      * Anonymous implementation of an Adapter that converts the filtered                      * Triples of the resulting graph to RdfRepresentations                      */
+comment|/*                      * Anonymous implementation of an Adapter that converts the filtered Triples of the                      * resulting graph to RdfRepresentations                      */
 annotation|@
 name|Override
 specifier|public

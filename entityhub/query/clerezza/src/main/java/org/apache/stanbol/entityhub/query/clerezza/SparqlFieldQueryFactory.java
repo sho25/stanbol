@@ -55,6 +55,26 @@ name|FieldQueryFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_class
 specifier|public
 specifier|final
@@ -113,7 +133,7 @@ name|SparqlFieldQuery
 argument_list|()
 return|;
 block|}
-comment|/**      * Utility Method to create an {@link SparqlFieldQuery} based on the parse {@link FieldQuery}      * @param parsedQuery the parsed Query      */
+comment|/**      * Utility Method to create an {@link SparqlFieldQuery} based on the parse {@link FieldQuery}      *       * @param parsedQuery      *            the parsed Query      */
 specifier|public
 specifier|static
 name|SparqlFieldQuery
@@ -123,6 +143,18 @@ name|FieldQuery
 name|parsedQuery
 parameter_list|)
 block|{
+name|Logger
+name|logger
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|SparqlFieldQueryFactory
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|parsedQuery
@@ -130,6 +162,13 @@ operator|==
 literal|null
 condition|)
 block|{
+name|logger
+operator|.
+name|trace
+argument_list|(
+literal|"Parsed query is null."
+argument_list|)
+expr_stmt|;
 return|return
 literal|null
 return|;
@@ -142,6 +181,13 @@ operator|instanceof
 name|SparqlFieldQuery
 condition|)
 block|{
+name|logger
+operator|.
+name|trace
+argument_list|(
+literal|"Parsed query is a [SparqlFieldQuery]."
+argument_list|)
+expr_stmt|;
 return|return
 operator|(
 name|SparqlFieldQuery
@@ -151,6 +197,21 @@ return|;
 block|}
 else|else
 block|{
+name|logger
+operator|.
+name|trace
+argument_list|(
+literal|"Parsed query is a [{}]."
+argument_list|,
+name|parsedQuery
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
 return|return
 name|parsedQuery
 operator|.

@@ -793,6 +793,24 @@ name|servicesapi
 operator|.
 name|query
 operator|.
+name|FieldQueryFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
 name|QueryResultList
 import|;
 end_import
@@ -948,7 +966,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Engine that uses a {@link Site} to search for entities for existing TextAnnotations of an Content  * Item.  *   * @author ogrisel, rwesten  */
+comment|/**  * Engine that uses a {@link Site} to search for entities for existing TextAnnotations of an Content Item.  *   * @author ogrisel, rwesten  */
 end_comment
 
 begin_class
@@ -965,7 +983,10 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|// the baseUri is required!
+comment|// the
+comment|// baseUri
+comment|// is
+comment|// required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -1041,7 +1062,7 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(value = "dbpedia")
+comment|// (value = "dbpedia")
 specifier|public
 specifier|static
 specifier|final
@@ -1067,7 +1088,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.personState"
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(value = "dbp-ont:Person")
+comment|// (value = "dbp-ont:Person")
 specifier|public
 specifier|static
 specifier|final
@@ -1093,7 +1114,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.organisationState"
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(value = "dbp-ont:Organisation")
+comment|// (value = "dbp-ont:Organisation")
 specifier|public
 specifier|static
 specifier|final
@@ -1119,7 +1140,7 @@ literal|"org.apache.stanbol.enhancer.engines.entitytagging.placeState"
 decl_stmt|;
 annotation|@
 name|Property
-comment|//(value = "dbp-ont:Place")
+comment|// (value = "dbp-ont:Place")
 specifier|public
 specifier|static
 specifier|final
@@ -1177,7 +1198,7 @@ name|Constants
 operator|.
 name|SERVICE_RANKING
 decl_stmt|;
-comment|/**      * The default language for labels included in the enhancement metadata      * (if not available for the parsed content).      */
+comment|/**      * The default language for labels included in the enhancement metadata (if not available for the parsed      * content).      */
 specifier|private
 specifier|static
 specifier|final
@@ -1186,21 +1207,21 @@ name|DEFAULT_LANGUAGE
 init|=
 literal|"en"
 decl_stmt|;
-comment|/**      * Service of the Entityhub that manages all the active referenced Site. This Service is used to lookup the      * configured Referenced Site when we need to enhance a content item.      */
+comment|/**      * Service of the Entityhub that manages all the active referenced Site. This Service is used to lookup      * the configured Referenced Site when we need to enhance a content item.      */
 annotation|@
 name|Reference
 specifier|protected
 name|SiteManager
 name|siteManager
 decl_stmt|;
-comment|/**      * Used to lookup Entities if the {@link #REFERENCED_SITE_ID} property is      * set to "entityhub" or "local"      */
+comment|/**      * Used to lookup Entities if the {@link #REFERENCED_SITE_ID} property is set to "entityhub" or "local"      */
 annotation|@
 name|Reference
 specifier|protected
 name|Entityhub
 name|entityhub
 decl_stmt|;
-comment|/**      * This holds the id of the {@link Site} used to lookup Entities      * or<code>null</code> if the {@link Entityhub} is used.       */
+comment|/**      * This holds the id of the {@link Site} used to lookup Entities or<code>null</code> if the      * {@link Entityhub} is used.      */
 specifier|protected
 name|String
 name|referencedSiteID
@@ -1262,7 +1283,7 @@ name|dereferenceEntities
 init|=
 literal|true
 decl_stmt|;
-comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link Site} can operate      * offline or not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
+comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link Site} can operate offline or      * not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
 annotation|@
 name|Reference
 argument_list|(
@@ -1330,7 +1351,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode}.      *       * @return the offline state      */
+comment|/**      * Returns<code>true</code> only if Stanbol operates in {@link OfflineMode} .      *       * @return the offline state      */
 specifier|protected
 specifier|final
 name|boolean
@@ -1787,7 +1808,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//lookup the referenced site
+comment|// lookup the referenced site
 name|site
 operator|=
 name|siteManager
@@ -1797,7 +1818,7 @@ argument_list|(
 name|referencedSiteID
 argument_list|)
 expr_stmt|;
-comment|//ensure that it is present
+comment|// ensure that it is present
 if|if
 condition|(
 name|site
@@ -1832,12 +1853,13 @@ argument_list|(
 name|msg
 argument_list|)
 expr_stmt|;
-comment|// TODO: throwing Exceptions is currently deactivated. We need a more clear
+comment|// TODO: throwing Exceptions is currently deactivated. We need a
+comment|// more clear
 comment|// policy what do to in such situations
 comment|// throw new EngineException(msg);
 return|return;
 block|}
-comment|//and that it supports offline mode if required
+comment|// and that it supports offline mode if required
 if|if
 condition|(
 name|isOfflineMode
@@ -1921,7 +1943,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//the language extracted for the parsed content or NULL if not available
+comment|// the language extracted for the parsed content or NULL if not
+comment|// available
 name|String
 name|contentLangauge
 decl_stmt|;
@@ -2008,7 +2031,8 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-comment|// this is not the most specific occurrence of this name: skip
+comment|// this is not the most specific occurrence of this name:
+comment|// skip
 continue|continue;
 block|}
 name|NamedEntity
@@ -2030,7 +2054,8 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// This is a first occurrence, collect any subsumed annotations
+comment|// This is a first occurrence, collect any subsumed
+comment|// annotations
 name|List
 argument_list|<
 name|UriRef
@@ -2115,7 +2140,7 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
-comment|//search the suggestions
+comment|// search the suggestions
 name|Map
 argument_list|<
 name|NamedEntity
@@ -2234,7 +2259,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|//now write the results (requires write lock)
+comment|// now write the results (requires write lock)
 name|ci
 operator|.
 name|getLock
@@ -2388,8 +2413,10 @@ name|suggestion
 argument_list|,
 name|nameField
 argument_list|,
-comment|//TODO: maybe we want labels in a different language than the
-comment|//      language of the content (e.g. Accept-Language header)?!
+comment|// TODO: maybe we want labels in a different
+comment|// language than the
+comment|// language of the content (e.g. Accept-Language
+comment|// header)?!
 name|contentLangauge
 operator|==
 literal|null
@@ -2428,8 +2455,9 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|//if dereferneceEntities is true the entityData will also contain all
-comment|//Representations to add! If false entityData will be empty
+comment|// if dereferneceEntities is true the entityData will also contain
+comment|// all
+comment|// Representations to add! If false entityData will be empty
 for|for
 control|(
 name|Representation
@@ -2473,7 +2501,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Computes the Enhancements      * @param site The {@link SiteException} id or<code>null</code> to      * use the {@link Entityhub}      * @param literalFactory the {@link LiteralFactory} used to create RDF Literals      * @param contentItemId the id of the contentItem      * @param textAnnotation the text annotation to enhance      * @param subsumedAnnotations other text annotations for the same entity       * @param language the language of the analysed text or<code>null</code>      * if not available.      * @return the suggestions for the parsed {@link NamedEntity}      * @throws EntityhubException On any Error while looking up Entities via      * the Entityhub      */
+comment|/**      * Computes the Enhancements      *       * @param site      *            The {@link SiteException} id or<code>null</code> to use the {@link Entityhub}      * @param literalFactory      *            the {@link LiteralFactory} used to create RDF Literals      * @param contentItemId      *            the id of the contentItem      * @param textAnnotation      *            the text annotation to enhance      * @param subsumedAnnotations      *            other text annotations for the same entity      * @param language      *            the language of the analysed text or<code>null</code> if not available.      * @return the suggestions for the parsed {@link NamedEntity}      * @throws EntityhubException      *             On any Error while looking up Entities via the Entityhub      */
 specifier|protected
 specifier|final
 name|List
@@ -2511,35 +2539,54 @@ argument_list|,
 name|namedEntity
 argument_list|)
 expr_stmt|;
-name|FieldQuery
-name|query
+comment|// if site is NULL use
+comment|// the Entityhub
+name|FieldQueryFactory
+name|queryFactory
 init|=
 name|site
 operator|==
 literal|null
 condition|?
-comment|//if site is NULL use the Entityhub
 name|entityhub
 operator|.
 name|getQueryFactory
-argument_list|()
-operator|.
-name|createFieldQuery
 argument_list|()
 else|:
 name|site
 operator|.
 name|getQueryFactory
 argument_list|()
+decl_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Will use a query-factory of type [{}]."
+argument_list|,
+name|queryFactory
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|FieldQuery
+name|query
+init|=
+name|queryFactory
 operator|.
 name|createFieldQuery
 argument_list|()
 decl_stmt|;
-comment|// replace spaces with plus to create an AND search for all words in the name!
+comment|// replace spaces with plus to create an AND search for all words in the
+comment|// name!
 name|Constraint
 name|labelConstraint
 decl_stmt|;
-comment|//TODO: make case sensitivity configurable
+comment|// TODO: make case sensitivity configurable
 name|boolean
 name|casesensitive
 init|=
@@ -2570,7 +2617,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//search labels in the language and without language
+comment|// search labels in the language and without language
 name|labelConstraint
 operator|=
 operator|new
@@ -2801,6 +2848,62 @@ literal|3
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"A query has been created of type [{}] and the following settings:\n{}"
+argument_list|,
+name|query
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|query
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+literal|null
+operator|==
+name|site
+condition|)
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"A query will be sent to the entity-hub of type [{}]."
+argument_list|,
+name|entityhub
+operator|.
+name|getClass
+argument_list|()
+argument_list|)
+expr_stmt|;
+else|else
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"A query will be sent to a site [id :: {}][type :: {}]."
+argument_list|,
+name|site
+operator|.
+name|getId
+argument_list|()
+argument_list|,
+name|site
+operator|.
+name|getClass
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|QueryResultList
 argument_list|<
 name|Entity
@@ -2811,7 +2914,7 @@ name|site
 operator|==
 literal|null
 condition|?
-comment|//if site is NULL
+comment|// if site is NULL
 name|entityhub
 operator|.
 name|findEntities
@@ -2819,7 +2922,7 @@ argument_list|(
 name|query
 argument_list|)
 else|:
-comment|//use the Entityhub
+comment|// use the Entityhub
 name|site
 operator|.
 name|findEntities
@@ -2827,7 +2930,7 @@ argument_list|(
 name|query
 argument_list|)
 decl_stmt|;
-comment|//else the referenced site
+comment|// else the referenced site
 name|log
 operator|.
 name|debug
@@ -2853,7 +2956,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//no results nothing to do
+comment|// no results nothing to do
 return|return
 name|Collections
 operator|.
@@ -2861,7 +2964,7 @@ name|emptyList
 argument_list|()
 return|;
 block|}
-comment|//we need to normalise the confidence values from [0..1]
+comment|// we need to normalise the confidence values from [0..1]
 comment|// * levenshtein distance as absolute (1.0 for exact match)
 comment|// * Solr scores * levenshtein to rank entities relative to each other
 name|Float
@@ -2889,7 +2992,7 @@ argument_list|(
 name|numSuggestions
 argument_list|)
 decl_stmt|;
-comment|//assumes entities are sorted by score
+comment|// assumes entities are sorted by score
 for|for
 control|(
 name|Iterator
@@ -3006,7 +3109,8 @@ name|language
 operator|==
 literal|null
 operator|||
-comment|//if the content language is unknown -> accept all labels
+comment|// if the content language is unknown ->
+comment|// accept all labels
 name|label
 operator|.
 name|getLanguage
@@ -3014,8 +3118,9 @@ argument_list|()
 operator|==
 literal|null
 operator|||
-comment|//accept labels with no language
-comment|//and labels in the same language as the content
+comment|// accept labels with no
+comment|// language
+comment|// and labels in the same language as the content
 operator|(
 name|language
 operator|!=
@@ -3115,7 +3220,7 @@ operator|=
 name|score
 expr_stmt|;
 block|}
-comment|//normalise exact matches against the best exact score
+comment|// normalise exact matches against the best exact score
 name|match
 operator|.
 name|setScore
@@ -3134,8 +3239,8 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//normalise partial matches against the best match and the
-comment|//Levenshtein similarity with the label
+comment|// normalise partial matches against the best match and the
+comment|// Levenshtein similarity with the label
 name|match
 operator|.
 name|setScore
@@ -3186,7 +3291,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//now sort the results
+comment|// now sort the results
 name|Collections
 operator|.
 name|sort
@@ -3215,7 +3320,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * This EnhancementEngine can enhance any ContentItem as it does consume      * existing TextAnnotations with the configured dc:type's      * @see org.apache.stanbol.enhancer.servicesapi.EnhancementEngine#canEnhance(org.apache.stanbol.enhancer.servicesapi.ContentItem)      */
+comment|/**      * This EnhancementEngine can enhance any ContentItem as it does consume existing TextAnnotations with the      * configured dc:type's      *       * @see org.apache.stanbol.enhancer.servicesapi.EnhancementEngine#canEnhance(org.apache.stanbol.enhancer.servicesapi.ContentItem)      */
 specifier|public
 name|int
 name|canEnhance
@@ -3227,7 +3332,7 @@ block|{
 return|return
 name|ENHANCE_ASYNC
 return|;
-comment|//Entity tagging now supports asyc processing
+comment|// Entity tagging now supports asyc processing
 block|}
 annotation|@
 name|Override
@@ -3260,7 +3365,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Compares two strings (after {@link StringUtils#trim(String) trimming})      * by using the Levenshtein's Edit Distance of the two      * strings. Does not return the {@link Integer} number of changes but      *<code>1-(changes/maxStringSizeAfterTrim)</code><p>      * @param s1 the first string      * @param s2 the second string      * @return the distance      * @throws IllegalArgumentException if any of the two parsed strings is NULL      */
+comment|/**      * Compares two strings (after {@link StringUtils#trim(String) trimming}) by using the Levenshtein's Edit      * Distance of the two strings. Does not return the {@link Integer} number of changes but      *<code>1-(changes/maxStringSizeAfterTrim)</code>      *<p>      *       * @param s1      *            the first string      * @param s2      *            the second string      * @return the distance      * @throws IllegalArgumentException      *             if any of the two parsed strings is NULL      */
 specifier|private
 specifier|static
 name|double

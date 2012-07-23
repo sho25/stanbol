@@ -453,7 +453,14 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|//the queryUri and the SPARQL Endpoint are required
+comment|// the
+comment|// queryUri
+comment|// and
+comment|// the
+comment|// SPARQL
+comment|// Endpoint
+comment|// are
+comment|// required
 name|specVersion
 operator|=
 literal|"1.1"
@@ -750,6 +757,15 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Sending Sparql request [{}]."
+argument_list|,
+name|sparqlQuery
+argument_list|)
+expr_stmt|;
 name|InputStream
 name|in
 init|=
@@ -765,7 +781,7 @@ operator|.
 name|DEFAULT_SPARQL_RESULT_CONTENT_TYPE
 argument_list|)
 decl_stmt|;
-comment|//Move to util class!
+comment|// Move to util class!
 specifier|final
 name|List
 argument_list|<
