@@ -555,6 +555,17 @@ name|String
 name|scopeId
 parameter_list|)
 block|{
+if|if
+condition|(
+operator|!
+name|attachedScopes
+operator|.
+name|contains
+argument_list|(
+name|scopeId
+argument_list|)
+condition|)
+return|return;
 name|attachedScopes
 operator|.
 name|remove
