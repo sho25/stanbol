@@ -1327,16 +1327,8 @@ parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-annotation|@
-name|QueryParam
-argument_list|(
-name|value
-operator|=
-literal|"uri"
-argument_list|)
-name|String
-name|uri
-parameter_list|,
+comment|//NOTE: The 'uri' parameter is already consumed by the ContentItemReader
+comment|//@QueryParam(value = "uri") String uri,
 annotation|@
 name|QueryParam
 argument_list|(
