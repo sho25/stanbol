@@ -822,8 +822,57 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
+comment|/**      * Allows sub-classes to create a instance and setting the {@link #graph}      * later on by using {@link #setGraph(TripleCollection)}.      */
+specifier|protected
+name|ClerezzaBackend
+parameter_list|()
+block|{     }
+comment|/**      * Constructs a Clerezza {@link RDFBackend} by using the parsed {@link TripleCollection}      * @param graph the {@link TripleCollection}      * @throws IllegalArgumentException if<code>null</code> is parsed as graph.      */
 specifier|public
 name|ClerezzaBackend
+parameter_list|(
+name|TripleCollection
+name|graph
+parameter_list|)
+block|{
+if|if
+condition|(
+name|graph
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed Graph MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+name|this
+operator|.
+name|graph
+operator|=
+name|graph
+expr_stmt|;
+block|}
+specifier|protected
+specifier|final
+name|TripleCollection
+name|getGraph
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|graph
+return|;
+block|}
+specifier|protected
+specifier|final
+name|void
+name|setGraph
 parameter_list|(
 name|TripleCollection
 name|graph
