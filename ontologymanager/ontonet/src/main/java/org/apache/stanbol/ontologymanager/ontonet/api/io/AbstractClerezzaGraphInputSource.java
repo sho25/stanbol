@@ -63,22 +63,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Graph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|NonLiteral
 import|;
 end_import
@@ -218,7 +202,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of an {@link OntologyInputSource} that returns {@link Graph} objects as ontologies.  *   * Subclasses must implement the {@link #getImports(boolean)} method, as the availability of imported  * ontologies might depend on the input source being able to access the {@link TcManager} where they are  * stored.  *   * @author alexdma  *   */
+comment|/**  * Default implementation of an {@link OntologyInputSource} that returns {@link TripleCollection} objects as  * ontologies.  *   * Subclasses must implement the {@link #getImports(boolean)} method, as the availability of imported  * ontologies might depend on the input source being able to access the {@link TcManager} where they are  * stored.  *   * @author alexdma  *   */
 end_comment
 
 begin_class

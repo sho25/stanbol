@@ -170,7 +170,7 @@ name|String
 name|getOntologyNetworkConfigurationPath
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the base namespace to be used for the Stanbol ontology network (e.g. for the creation of new      * scopes). For convenience, it is returned as a string so that it can be concatenated to form IRIs.      *       * @return the base namespace of the Stanbol ontology network.      */
+comment|/**      * Returns the base namespace to be used for the Stanbol ontology network (e.g. for the creation of new      * scopes). For convenience, it is returned as a string so that it can be concatenated to form IRIs.      *       * @deprecated please use {@link OfflineConfiguration#getDefaultOntologyNetworkNamespace()} to obtain the      *             namespace      *       * @return the base namespace of the Stanbol ontology network.      */
 name|String
 name|getOntologyNetworkNamespace
 parameter_list|()
@@ -190,7 +190,7 @@ name|ScopeRegistry
 name|getScopeRegistry
 parameter_list|()
 function_decl|;
-comment|/**      * Sets the IRI that will be the base namespace for all ontology scopes and collectors created by this      * object.      *       * @param namespace      *            the base namespace.      */
+comment|/**      * Sets the IRI that will be the base namespace for all ontology scopes and collectors created by this      * object.      *       * @deprecated {@link ONManager} should set its namespace to be the same as      *             {@link OfflineConfiguration#getDefaultOntologyNetworkNamespace()} whenever it changes on      *             the object obtained by calling {@link #getOfflineConfiguration()}.      *       * @param namespace      *            the base namespace.      */
 name|void
 name|setOntologyNetworkNamespace
 parameter_list|(

@@ -287,7 +287,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|GraphSource
+name|Origin
 import|;
 end_import
 
@@ -580,6 +580,20 @@ operator|.
 name|model
 operator|.
 name|IRI
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyID
 import|;
 end_import
 
@@ -1401,7 +1415,7 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-name|getNamespace
+name|getDefaultNamespace
 argument_list|()
 operator|+
 name|getID
@@ -1438,6 +1452,17 @@ operator|(
 name|OntologyCollectorListener
 operator|)
 name|ontologyProvider
+argument_list|)
+expr_stmt|;
+else|else
+name|session
+operator|.
+name|addOntologyCollectorListener
+argument_list|(
+name|ontologyProvider
+operator|.
+name|getOntologyNetworkDescriptor
+argument_list|()
 argument_list|)
 expr_stmt|;
 if|if
@@ -1901,7 +1926,7 @@ expr_stmt|;
 comment|// Restored sessions are inactive at first.
 for|for
 control|(
-name|String
+name|OWLOntologyID
 name|key
 range|:
 name|struct
@@ -1911,18 +1936,22 @@ argument_list|(
 name|sessionId
 argument_list|)
 control|)
+block|{
 name|session
 operator|.
 name|addOntology
 argument_list|(
-operator|new
-name|GraphSource
+comment|// new GraphSource(key)
+name|Origin
+operator|.
+name|create
 argument_list|(
 name|key
 argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// TODO use the public key instead!
+block|}
 for|for
 control|(
 name|String

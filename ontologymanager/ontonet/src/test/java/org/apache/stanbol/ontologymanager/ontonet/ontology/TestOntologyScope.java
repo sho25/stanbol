@@ -33,7 +33,7 @@ name|ontonet
 operator|.
 name|MockOsgiContext
 operator|.
-name|onManager
+name|*
 import|;
 end_import
 
@@ -763,7 +763,7 @@ name|assertTrue
 argument_list|(
 name|shouldBeNotNull
 operator|.
-name|getNamespace
+name|getDefaultNamespace
 argument_list|()
 operator|.
 name|toString
@@ -780,9 +780,12 @@ name|onManager
 operator|.
 name|setOntologyNetworkNamespace
 argument_list|(
-name|onManager
+name|offline
 operator|.
-name|getOntologyNetworkNamespace
+name|getDefaultOntologyNetworkNamespace
+argument_list|()
+operator|.
+name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;

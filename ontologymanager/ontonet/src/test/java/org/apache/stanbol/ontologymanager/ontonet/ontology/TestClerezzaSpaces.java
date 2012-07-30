@@ -1134,7 +1134,7 @@ argument_list|)
 expr_stmt|;
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1566,7 +1566,7 @@ comment|/* Now test namespaces. */
 comment|// Null namespace (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 literal|null
 argument_list|)
@@ -1606,7 +1606,7 @@ expr_stmt|;
 comment|// Namespace with query (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1651,7 +1651,7 @@ expr_stmt|;
 comment|// Namespace with fragment (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1696,7 +1696,7 @@ expr_stmt|;
 comment|// Namespace ending with hash (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1741,7 +1741,7 @@ expr_stmt|;
 comment|// Namespace ending with neither (valid, should automatically add slash).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1773,7 +1773,7 @@ name|assertTrue
 argument_list|(
 name|shouldBeNotNull
 operator|.
-name|getNamespace
+name|getDefaultNamespace
 argument_list|()
 operator|.
 name|toString
@@ -1792,7 +1792,7 @@ expr_stmt|;
 comment|// Namespace ending with slash (valid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.

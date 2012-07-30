@@ -261,6 +261,20 @@ name|OWLOntology
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyID
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementation of custom ontology space.  *   * @author alexdma  *   */
 end_comment
@@ -366,8 +380,8 @@ specifier|protected
 name|MGraph
 name|getOntologyAsMGraph
 parameter_list|(
-name|IRI
-name|ontologyIri
+name|OWLOntologyID
+name|ontologyId
 parameter_list|,
 name|boolean
 name|merge
@@ -383,7 +397,7 @@ name|super
 operator|.
 name|getOntologyAsMGraph
 argument_list|(
-name|ontologyIri
+name|ontologyId
 argument_list|,
 name|merge
 argument_list|,
@@ -546,8 +560,8 @@ specifier|protected
 name|OWLOntology
 name|getOntologyAsOWLOntology
 parameter_list|(
-name|IRI
-name|ontologyIri
+name|OWLOntologyID
+name|ontologyId
 parameter_list|,
 name|boolean
 name|merge
@@ -563,7 +577,7 @@ name|super
 operator|.
 name|getOntologyAsOWLOntology
 argument_list|(
-name|ontologyIri
+name|ontologyId
 argument_list|,
 name|merge
 argument_list|,

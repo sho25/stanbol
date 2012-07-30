@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Objects that react to the addition or removal of ontologies to or from an ontology collector will implement  * this interface.<br>  *<br>  * XXX add "before" methods.  *   * @author alexdma  *   */
+comment|/**  * Objects that react to the addition or removal of ontologies to or from an ontology collector will implement  * this interface.<br>  *<br>  * XXX add "before" methods and provide a way to abort the corresponding operation.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

@@ -34,13 +34,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Denotes any OntoNet object that has an identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @author alexdma  *   */
+comment|/**  * Denotes any API artifact that has an identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|NamedResource
+name|NamedArtifact
 block|{
 comment|/**      * Returns the namespace that should prefix the ID of this resource and all the resources managed thereby.      * This is also used by ontology collectors to dynamically generate import statements.      *       * @return the default namespace for this resources.      */
 name|IRI

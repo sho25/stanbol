@@ -205,6 +205,26 @@ name|api
 operator|.
 name|collector
 operator|.
+name|MissingOntologyException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|collector
+operator|.
 name|UnmodifiableOntologyCollectorException
 import|;
 end_import
@@ -547,6 +567,26 @@ name|OWLOntologyManager
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
@@ -602,6 +642,18 @@ name|OWLAxiom
 name|linusIsHuman
 init|=
 literal|null
+decl_stmt|;
+specifier|private
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|getClass
+argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|private
 specifier|static
@@ -1246,7 +1298,7 @@ comment|/* Now test namespaces. */
 comment|// Null namespace (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 literal|null
 argument_list|)
@@ -1290,7 +1342,7 @@ expr_stmt|;
 comment|// Namespace with query (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1339,7 +1391,7 @@ expr_stmt|;
 comment|// Namespace with fragment (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1388,7 +1440,7 @@ expr_stmt|;
 comment|// Namespace ending with hash (invalid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1433,7 +1485,7 @@ expr_stmt|;
 comment|// Namespace ending with neither (valid, should automatically add slash).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1465,7 +1517,7 @@ name|assertTrue
 argument_list|(
 name|shouldBeNotNull
 operator|.
-name|getNamespace
+name|getDefaultNamespace
 argument_list|()
 operator|.
 name|toString
@@ -1484,7 +1536,7 @@ expr_stmt|;
 comment|// Namespace ending with slash (valid).
 name|factory
 operator|.
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -1627,6 +1679,8 @@ argument_list|(
 literal|"http://www.example.org/ontology/bogus"
 argument_list|)
 decl_stmt|;
+try|try
+block|{
 name|space
 operator|.
 name|removeOntology
@@ -1634,6 +1688,28 @@ argument_list|(
 name|bogus
 argument_list|)
 expr_stmt|;
+name|fail
+argument_list|(
+literal|"Removing nonexisting ontology succeeded without an exception. This should not happen."
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|MissingOntologyException
+name|mex
+parameter_list|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Expected exception caught when removing missing ontology {}"
+argument_list|,
+name|bogus
+argument_list|)
+expr_stmt|;
+block|}
 name|space
 operator|.
 name|removeOntology

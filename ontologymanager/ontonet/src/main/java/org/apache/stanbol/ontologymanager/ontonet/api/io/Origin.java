@@ -69,6 +69,20 @@ name|IRI
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyID
+import|;
+end_import
+
 begin_comment
 comment|/**  * A wrapper class for whatever can be used for physically referencing a resource (typically an ontology).  * Currently the supported types are:  *<ul>  *<li> {@link IRI}, which is interpreted as the physical location of the resource.  *<li> {@link UriRef}, which is interpreted as the name of a graph to be retrieved from an underlying Clerezza  * store (typically a {@link TcProvider}).  *</ul>  *   * @author alexdma  *   * @param<R>  *            the resource reference.  */
 end_comment
@@ -102,6 +116,30 @@ name|IRI
 argument_list|>
 argument_list|(
 name|physicalURL
+argument_list|)
+return|;
+block|}
+comment|/**      * Creates a new Origin for a resource whose public key is known. What a "public key" is interpreted to be      * is implementation-dependent.      *       * @param publicKey      *            the public key      * @return the origin that wraps this IRI.      */
+specifier|public
+specifier|static
+name|Origin
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|create
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Origin
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+argument_list|(
+name|publicKey
 argument_list|)
 return|;
 block|}

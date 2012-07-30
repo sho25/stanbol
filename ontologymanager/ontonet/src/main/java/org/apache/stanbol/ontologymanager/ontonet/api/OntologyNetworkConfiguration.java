@@ -39,6 +39,20 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyID
+import|;
+end_import
+
 begin_comment
 comment|/**  * Contains ownership and collector information on all ontology networks currently configured.  *   * @author alexdma  *   */
 end_comment
@@ -58,13 +72,23 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|>
+name|scopesForSessions
+decl_stmt|;
+specifier|private
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Collection
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+argument_list|>
 name|coreOntologiesForScopes
 decl_stmt|,
 name|customOntologiesForScopes
 decl_stmt|,
 name|ontologiesForSessions
-decl_stmt|,
-name|scopesForSessions
 decl_stmt|;
 specifier|public
 name|OntologyNetworkConfiguration
@@ -75,7 +99,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 argument_list|>
 name|coreOntologiesForScopes
@@ -86,7 +110,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 argument_list|>
 name|customOntologiesForScopes
@@ -97,7 +121,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 argument_list|>
 name|ontologiesForSessions
@@ -162,7 +186,7 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 name|getCoreOntologyKeysForScope
 parameter_list|(
@@ -182,7 +206,7 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 name|getCustomOntologyKeysForScope
 parameter_list|(
@@ -202,7 +226,7 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 name|getOntologyKeysForSession
 parameter_list|(

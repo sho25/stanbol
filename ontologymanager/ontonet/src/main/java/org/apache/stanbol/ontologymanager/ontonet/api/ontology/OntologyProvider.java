@@ -275,12 +275,16 @@ name|RESOLVE_IMPORTS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.resolveImports"
 decl_stmt|;
+name|String
+name|getGraphPrefix
+parameter_list|()
+function_decl|;
 comment|/**      * Gets the policy adopted by this provider whenever an import statement is found in an ontology<i>that      * has already been loaded</i> (e.g. when exporting it). It does<b>not</b> influence how the system      * should<i>resolve</i> imports of newly found ontologies.      *       * @return the import management policy.      */
 name|ImportManagementPolicy
 name|getImportManagementPolicy
 parameter_list|()
 function_decl|;
-comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @deprecated Please use {@link #getPublicKey(OWLOntologyID)} instead. To obtain the public keys for all      *             the versions of ontologies with this ontology IRI, use {@link #getVersionKeys(IRI)}.      *       * @param ontologyIri      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @deprecated      *       * @param ontologyIri      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
 name|String
 name|getKey
 parameter_list|(
@@ -288,7 +292,7 @@ name|IRI
 name|ontologyIri
 parameter_list|)
 function_decl|;
-comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyId</tt>.      *       * @deprecated Please use {@link #getPublicKey(OWLOntologyID)} instead.      *       * @param ontologyId      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyId</tt>.      *       * @deprecated      *       * @param ontologyId      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
 name|String
 name|getKey
 parameter_list|(
@@ -312,6 +316,8 @@ argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
+annotation|@
+name|Deprecated
 name|OWLOntologyID
 name|getOntologyId
 parameter_list|(
@@ -319,11 +325,17 @@ name|String
 name|storageKey
 parameter_list|)
 function_decl|;
+annotation|@
+name|Deprecated
 name|OntologyNetworkConfiguration
 name|getOntologyNetworkConfiguration
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null. To get the keys for a given ontologyIRI, no      * matte what its version is, use {@link #getVersionKeys(IRI)}.      *       * @param ontologyId      * @return      */
+name|OntologyNetworkMultiplexer
+name|getOntologyNetworkDescriptor
+parameter_list|()
+function_decl|;
+comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null.      *       * @deprecated      * @param ontologyId      * @return      */
 name|String
 name|getPublicKey
 parameter_list|(
@@ -334,7 +346,7 @@ function_decl|;
 comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
 name|Set
 argument_list|<
-name|String
+name|OWLOntologyID
 argument_list|>
 name|getPublicKeys
 parameter_list|()
@@ -344,7 +356,7 @@ name|S
 name|getStore
 parameter_list|()
 function_decl|;
-comment|/**      * Same as {@link OntologyProvider#getStoredOntology(String, Class)}, but instead of the internal key it      * uses an IRI that<i>publicly</i> identifies or references an ontology. This can be, ordered by      * preference most relevant first:      *<ol>      *<li>The version IRI      *<li>The ontology IRI      *<li>The physical IRI, if different from the above      *</ol>      *       * @param reference      *            the IRI that references the ontology.      * @param returnType      *            the desired type that the method should return, if supported, otherwise an      *            {@link UnsupportedOperationException} is thrown. Can be null, in which case a default return      *            type is chosen.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
+comment|/**      * Same as {@link OntologyProvider#getStoredOntology(String, Class)}, but instead of the internal key it      * uses an IRI that<i>publicly</i> identifies or references an ontology. This can be, ordered by      * preference most relevant first:      *<ol>      *<li>The version IRI      *<li>The ontology IRI      *<li>The physical IRI, if different from the above      *</ol>      *       * @deprecated      * @param reference      *            the IRI that references the ontology.      * @param returnType      *            the desired type that the method should return, if supported, otherwise an      *            {@link UnsupportedOperationException} is thrown. Can be null, in which case a default return      *            type is chosen.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -361,7 +373,7 @@ argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-comment|/**      * Same as {@link OntologyProvider#getStoredOntology(String, Class, boolean)}, but instead of the internal      * key it uses an IRI that<i>publicly</i> identifies or references an ontology. This can be, ordered by      * preference most relevant first:      *       * @param reference      *            the IRI that references the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @param forceMerge      *            if true, the ontology will be merged with all its imports, thus overriding the import      *            management policy set for this provider.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
+comment|/**      * Same as {@link OntologyProvider#getStoredOntology(String, Class, boolean)}, but instead of the internal      * key it uses an IRI that<i>publicly</i> identifies or references an ontology. This can be, ordered by      * preference most relevant first:      *       * @deprecated      * @param reference      *            the IRI that references the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @param forceMerge      *            if true, the ontology will be merged with all its imports, thus overriding the import      *            management policy set for this provider.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -381,7 +393,42 @@ name|boolean
 name|merge
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a stored ontology that is internally identified by the provided key.      *       * @param key      *            the key used to identify the ontology in this provider. They can or cannot coincide with the      *            logical and/or physical IRI of the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getStoredOntology
+parameter_list|(
+name|OWLOntologyID
+name|reference
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|)
+function_decl|;
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getStoredOntology
+parameter_list|(
+name|OWLOntologyID
+name|reference
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|)
+function_decl|;
+comment|/**      * Returns a stored ontology that is internally identified by the provided key.      *       * @deprecated      * @param key      *            the key used to identify the ontology in this provider. They can or cannot coincide with the      *            logical and/or physical IRI of the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -398,7 +445,7 @@ argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a stored ontology that is internally identified by the provided key.      *       * @param key      *            the key used to identify the ontology in this provider. They can or cannot coincide with the      *            logical and/or physical IRI of the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @param forceMerge      *            if true, the ontology will be merged with all its imports, thus overriding the import      *            management policy set for this provider.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
+comment|/**      * Returns a stored ontology that is internally identified by the provided key.      *       * @deprecated      * @param key      *            the key used to identify the ontology in this provider. They can or cannot coincide with the      *            logical and/or physical IRI of the ontology.      * @param returnType      *            The expected type for the returned ontology object. If null, the provider will arbitrarily      *            select a supported return type. If the supplied type is not supported (i.e. not assignable      *            to any type contained in the result of {@link #getSupportedReturnTypes()}) an      *            {@link UnsupportedOperationException} should be thrown.      * @param forceMerge      *            if true, the ontology will be merged with all its imports, thus overriding the import      *            management policy set for this provider.      * @return the stored ontology in the desired format, or null if no such ontology is managed by the      *         provider.      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -427,18 +474,7 @@ index|[]
 name|getSupportedReturnTypes
 parameter_list|()
 function_decl|;
-comment|/**      * Will return the keys of all the ontologies whose ontologyIRI is the one provided. These include any      * ontologies with that ontologyIRI and a versionIRI, and one ontology with no version IRI (if it exists,      * it must be unique).      *       * @param ontologyIRI      * @return      */
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|getVersionKeys
-parameter_list|(
-name|IRI
-name|ontologyIRI
-parameter_list|)
-function_decl|;
-comment|/**      * A convenience method for checking the availability of an ontology given its (physical or logical) IRI.      * It is typically more efficient than calling {@link #getStoredOntology(IRI, Class)} and null-checking      * the result.      *       * @param ontologyIri      * @return      */
+comment|/**      * A convenience method for checking the availability of an ontology given its (physical or logical) IRI.      * It is typically more efficient than calling {@link #getStoredOntology(IRI, Class)} and null-checking      * the result.      *       * @deprecated      * @param ontologyIri      * @return      */
 name|boolean
 name|hasOntology
 parameter_list|(
@@ -454,13 +490,13 @@ name|OWLOntologyID
 name|id
 parameter_list|)
 function_decl|;
-comment|/**      * Checks if an ontology with the specified storage reference is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(String, Class)} and      * checking if the returned value is not null.      *       * @param key      *            the ontology storage key.      * @return true iff an ontology with the supplied key is in the provider's store.      */
-name|boolean
-name|hasOntology
-parameter_list|(
-name|String
-name|key
-parameter_list|)
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|listOntologies
+parameter_list|()
 function_decl|;
 comment|/**      * Retrieves an ontology by reading its content from a data stream and stores it using the storage system      * attached to this provider. A key that can be used to identify the ontology in this provider is returned      * if successful.      *       * @param data      *            the ontology content.      * @param formatIdentifier      *            the MIME type of the expected serialization format of this ontology. If null, all supported      *            formats will be tried until all parsers fail or one succeeds. Whether the supplied format      *            will be the only one to be attempted, or simply the preferred one, is left to arbitration      *            and is implementation-dependent.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If some remote import is found, the import policy is aggressive and Stanbol is      *            set on offline mode, this method will fail.      * @return a key that can be used to retrieve the stored ontology afterwards, or null if loading/storage      *         failed. If it was possible to set it as such, it will be the same as<tt>preferredKey</tt>.      * @throws IOException      *             if all attempts to load the ontology failed.      * @throws UnsupportedFormatException      *             if no parsers are able to parse the supplied format (or the actual file format).      */
 name|String
@@ -474,6 +510,13 @@ name|formatIdentifier
 parameter_list|,
 name|boolean
 name|force
+parameter_list|,
+name|Origin
+argument_list|<
+name|?
+argument_list|>
+modifier|...
+name|references
 parameter_list|)
 throws|throws
 name|IOException
@@ -492,6 +535,13 @@ name|formatIdentifier
 parameter_list|,
 name|boolean
 name|force
+parameter_list|,
+name|Origin
+argument_list|<
+name|?
+argument_list|>
+modifier|...
+name|references
 parameter_list|)
 throws|throws
 name|IOException
@@ -518,8 +568,15 @@ comment|/**      * Removes the ontology identified by the supplied public key.  
 name|boolean
 name|removeOntology
 parameter_list|(
-name|String
+name|OWLOntologyID
 name|publicKey
+parameter_list|)
+function_decl|;
+name|void
+name|setGraphPrefix
+parameter_list|(
+name|String
+name|prefix
 parameter_list|)
 function_decl|;
 comment|/**      * Sets the policy adopted by this provider whenever an import statement is found in an ontology<i>that      * has already been loaded</i> (e.g. when exporting it). It does<b>not</b> influence how the system      * should<i>resolve</i> imports of newly found ontologies.      *       * @param policy      *            the import management policy.      */

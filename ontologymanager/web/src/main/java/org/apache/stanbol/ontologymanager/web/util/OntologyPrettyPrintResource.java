@@ -77,7 +77,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|NamedResource
+name|NamedArtifact
 import|;
 end_import
 
@@ -93,7 +93,7 @@ extends|extends
 name|BaseStanbolResource
 block|{
 specifier|private
-name|NamedResource
+name|NamedArtifact
 name|owner
 init|=
 literal|null
@@ -146,7 +146,7 @@ parameter_list|,
 name|Object
 name|result
 parameter_list|,
-name|NamedResource
+name|NamedArtifact
 name|owner
 parameter_list|)
 block|{
@@ -167,7 +167,7 @@ name|owner
 expr_stmt|;
 block|}
 specifier|public
-name|NamedResource
+name|NamedArtifact
 name|getOwner
 parameter_list|()
 block|{

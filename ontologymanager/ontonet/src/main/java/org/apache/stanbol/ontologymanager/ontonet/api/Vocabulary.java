@@ -58,6 +58,7 @@ name|_NS_STANBOL_INTERNAL
 init|=
 literal|"http://stanbol.apache.org/ontology/.internal/"
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>isAppendedTo</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -72,6 +73,22 @@ operator|+
 literal|"isAppendedTo"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>class</b><tt>Scope</tt>.      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|ENTRY
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|_NS_ONTONET
+operator|+
+literal|"Entry"
+argument_list|)
+decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>hasAppended</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -86,6 +103,22 @@ operator|+
 literal|"hasAppended"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>datatype property</b><tt>hasOntologyIRI</tt>.      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|HAS_ONTOLOGY_IRI
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|_NS_ONTONET
+operator|+
+literal|"hasOntologyIRI"
+argument_list|)
+decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>hasCoreSpace</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -100,6 +133,7 @@ operator|+
 literal|"hasCoreSpace"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>hasCustomSpace</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -114,6 +148,7 @@ operator|+
 literal|"hasCustomSpace"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>hasStatus</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -128,6 +163,22 @@ operator|+
 literal|"hasStatus"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>datatype property</b><tt>hasVersionIRI</tt>.      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|HAS_VERSION_IRI
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|_NS_ONTONET
+operator|+
+literal|"hasVersionIRI"
+argument_list|)
+decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>isManagedBy</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -142,6 +193,7 @@ operator|+
 literal|"isManagedBy"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>isManagedByCore</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -156,6 +208,7 @@ operator|+
 literal|"isManagedByCore"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>isManagedByCustom</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -170,6 +223,7 @@ operator|+
 literal|"isManagedByCustom"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>isCoreSpaceOf</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -184,6 +238,7 @@ operator|+
 literal|"isCoreSpaceOf"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>isCustomSpaceOf</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -198,6 +253,7 @@ operator|+
 literal|"isCustomSpaceOf"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>manages</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -212,6 +268,7 @@ operator|+
 literal|"manages"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>managesInCore</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -226,6 +283,7 @@ operator|+
 literal|"managesInCore"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>object property</b><tt>managesInCustom</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -240,6 +298,7 @@ operator|+
 literal|"managesInCustom"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>class</b><tt>Scope</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -254,6 +313,7 @@ operator|+
 literal|"Scope"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>class</b><tt>Session</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -268,6 +328,37 @@ operator|+
 literal|"Session"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>datatype property</b><tt>hasSizeInAxioms</tt>.      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|SIZE_IN_AXIOMS
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|_NS_ONTONET
+operator|+
+literal|"hasSizeInAxioms"
+argument_list|)
+decl_stmt|;
+comment|/**      * The OWL<b>datatype property</b><tt>hasSizeInTriples</tt>.      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|SIZE_IN_TRIPLES
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|_NS_ONTONET
+operator|+
+literal|"hasSizeInTriples"
+argument_list|)
+decl_stmt|;
+comment|/**      * The OWL<b>class</b><tt>Space</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -282,6 +373,7 @@ operator|+
 literal|"Space"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>class</b><tt>Status</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -296,6 +388,7 @@ operator|+
 literal|"Status"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>individual</b><tt>Status.ACTIVE</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -310,6 +403,7 @@ operator|+
 literal|"Status.ACTIVE"
 argument_list|)
 decl_stmt|;
+comment|/**      * The OWL<b>individual</b><tt>Status.INACTIVE</tt>.      */
 specifier|public
 specifier|static
 specifier|final

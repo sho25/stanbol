@@ -31,12 +31,12 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
+name|OWLOntologyID
 import|;
 end_import
 
 begin_comment
-comment|/**  * Thrown whenever an attempt to modify an ontology within an ontology space that does not contain it is  * detected.  *   * @author alexdma  *   */
+comment|/**  * Thrown whenever an attempt to modify an ontology within an ontology collector that does not contain it is  * detected.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -46,42 +46,6 @@ name|MissingOntologyException
 extends|extends
 name|OntologyCollectorModificationException
 block|{
-specifier|public
-name|MissingOntologyException
-parameter_list|(
-name|OntologyCollector
-name|collector
-parameter_list|,
-name|IRI
-name|ontologyId
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|collector
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|ontologyId
-operator|=
-name|ontologyId
-expr_stmt|;
-block|}
-comment|/**      * Returns the unique identifier of the ontology whose removal was denied.      *       * @return the ID of the ontology that was not removed.      */
-specifier|public
-name|IRI
-name|getOntologyId
-parameter_list|()
-block|{
-return|return
-name|ontologyId
-return|;
-block|}
-specifier|protected
-name|IRI
-name|ontologyId
-decl_stmt|;
 comment|/** 	 *  	 */
 specifier|private
 specifier|static
@@ -92,6 +56,43 @@ init|=
 operator|-
 literal|3449667155191079302L
 decl_stmt|;
+specifier|protected
+name|OWLOntologyID
+name|publicKey
+decl_stmt|;
+comment|/**      *       * @param collector      * @param ontologyId      */
+specifier|public
+name|MissingOntologyException
+parameter_list|(
+name|OntologyCollector
+name|collector
+parameter_list|,
+name|OWLOntologyID
+name|publicKey
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|collector
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|publicKey
+operator|=
+name|publicKey
+expr_stmt|;
+block|}
+comment|/**      * Returns the unique identifier of the ontology whose removal was denied.      *       * @return the ID of the ontology that was not removed.      */
+specifier|public
+name|OWLOntologyID
+name|getOntologyKey
+parameter_list|()
+block|{
+return|return
+name|publicKey
+return|;
+block|}
 block|}
 end_class
 

@@ -40,6 +40,7 @@ specifier|public
 interface|interface
 name|OntologyCollectorListenable
 block|{
+comment|/**      * Registers a new {@link OntologyCollectorListener} with this object.      *       * @param listener      *            the listener to be registered.      */
 name|void
 name|addOntologyCollectorListener
 parameter_list|(
@@ -47,10 +48,12 @@ name|OntologyCollectorListener
 name|listener
 parameter_list|)
 function_decl|;
+comment|/**      * Unregisters every {@link OntologyCollectorListener} from this object.      */
 name|void
 name|clearOntologyCollectorListeners
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the list of {@link OntologyCollectorListener}s registered with this object.      *       * @return the registered listeners.      */
 name|Collection
 argument_list|<
 name|OntologyCollectorListener
@@ -58,6 +61,7 @@ argument_list|>
 name|getOntologyCollectorListeners
 parameter_list|()
 function_decl|;
+comment|/**      * Unregisters {@link OntologyCollectorListener} from this object.      *       * @param listener      *            the listener to be unregistered.      */
 name|void
 name|removeOntologyCollectorListener
 parameter_list|(

@@ -435,7 +435,7 @@ name|create
 argument_list|(
 name|scope
 operator|.
-name|getNamespace
+name|getDefaultNamespace
 argument_list|()
 operator|+
 name|scope

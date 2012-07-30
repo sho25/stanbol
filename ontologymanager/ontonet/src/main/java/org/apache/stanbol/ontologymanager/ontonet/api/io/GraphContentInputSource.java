@@ -489,14 +489,14 @@ init|=
 operator|new
 name|UriRef
 argument_list|(
-comment|//   "ontonet" + "::" +
+comment|/* "ontonet" + "::" + */
 name|getClass
 argument_list|()
 operator|.
 name|getCanonicalName
 argument_list|()
 operator|+
-literal|"-"
+literal|"-time:"
 operator|+
 name|System
 operator|.

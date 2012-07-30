@@ -1197,7 +1197,7 @@ name|create
 argument_list|(
 name|sessionManager
 operator|.
-name|getNamespace
+name|getDefaultNamespace
 argument_list|()
 operator|+
 name|sessionManager

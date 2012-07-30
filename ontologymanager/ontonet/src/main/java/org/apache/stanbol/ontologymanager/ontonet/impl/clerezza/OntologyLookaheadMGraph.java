@@ -129,6 +129,28 @@ name|RDF
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|owl
+operator|.
+name|util
+operator|.
+name|OWL2Constants
+import|;
+end_import
+
+begin_comment
+comment|/**  * An utility modifiable graph that only  *   * @author alexdma  *   */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -139,6 +161,10 @@ block|{
 specifier|private
 name|UriRef
 name|ontologyIRI
+init|=
+literal|null
+decl_stmt|,
+name|versionIRI
 init|=
 literal|null
 decl_stmt|;
@@ -157,7 +183,7 @@ name|b
 init|=
 literal|false
 decl_stmt|;
-comment|// filter the interesting Triple
+comment|// filter the interesting Triples
 if|if
 condition|(
 name|RDF
@@ -193,6 +219,34 @@ argument_list|(
 name|t
 argument_list|)
 expr_stmt|;
+elseif|else
+if|if
+condition|(
+operator|new
+name|UriRef
+argument_list|(
+name|OWL2Constants
+operator|.
+name|OWL_VERSION_IRI
+argument_list|)
+operator|.
+name|equals
+argument_list|(
+name|t
+operator|.
+name|getPredicate
+argument_list|()
+argument_list|)
+condition|)
+name|b
+operator|=
+name|super
+operator|.
+name|performAdd
+argument_list|(
+name|t
+argument_list|)
+expr_stmt|;
 comment|// check the currently available triples for the Ontology ID
 name|checkOntologyId
 argument_list|()
@@ -209,7 +263,7 @@ name|RuntimeException
 argument_list|()
 throw|;
 comment|// stop importing
-comment|// TODO: add an limit to the triples you read
+comment|// TODO: add a limit to the triples you read
 return|return
 name|b
 return|;

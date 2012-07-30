@@ -64,6 +64,7 @@ name|ONTOLOGY_PATHS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.ontologypaths"
 decl_stmt|;
+comment|/**      * Returns the namespace that will be used as the prefix for all named artifacts when exported to RDF/OWL,      * unless overridden manually (e.g. by calling the RESTful API on another base IRI).      *       * @return the default ontology network namespace      */
 name|IRI
 name|getDefaultOntologyNetworkNamespace
 parameter_list|()

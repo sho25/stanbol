@@ -22,7 +22,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An object that supports locking mechanisms, thus allowing/preventing modifications of the resources  * contained therein. Lock management is assumed to occur in methods inherited from implementations.<br>  *   * TODO add public lock handling methods as well?  *   * @author alexdma  *   */
+comment|/**  * An object that supports locking mechanisms, thus allowing/preventing modifications of the resources  * contained therein. Lock management is assumed to occur in methods inherited from implementations.<br>  *   * XXX add public lock handling methods as well?  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

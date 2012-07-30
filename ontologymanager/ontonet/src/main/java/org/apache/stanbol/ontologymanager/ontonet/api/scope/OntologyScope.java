@@ -35,7 +35,7 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|NamedResource
+name|NamedArtifact
 import|;
 end_import
 
@@ -128,7 +128,7 @@ specifier|public
 interface|interface
 name|OntologyScope
 extends|extends
-name|NamedResource
+name|NamedArtifact
 extends|,
 name|Lockable
 extends|,
