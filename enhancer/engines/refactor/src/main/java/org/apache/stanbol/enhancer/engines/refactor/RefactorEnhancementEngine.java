@@ -1165,6 +1165,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLOntologyID
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -2247,8 +2261,8 @@ block|{
 comment|/*              * The session needs to be destroyed anyhow.              *               * Clear contents before destroying (FIXME only do this until this is implemented in the              * destroySession() method).              */
 for|for
 control|(
-name|IRI
-name|iri
+name|OWLOntologyID
+name|id
 range|:
 name|session
 operator|.
@@ -2265,7 +2279,10 @@ name|ontologyProvider
 operator|.
 name|getKey
 argument_list|(
-name|iri
+name|id
+operator|.
+name|getOntologyIRI
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|ontologyProvider
@@ -2295,7 +2312,7 @@ name|error
 argument_list|(
 literal|"Failed to delete triple collection "
 operator|+
-name|iri
+name|id
 argument_list|,
 name|ex
 argument_list|)
