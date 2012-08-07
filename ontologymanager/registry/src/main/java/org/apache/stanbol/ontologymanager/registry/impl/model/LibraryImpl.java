@@ -339,6 +339,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLOntologyID
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLOntologyManager
 import|;
 end_import
@@ -847,7 +861,7 @@ decl_stmt|;
 try|try
 block|{
 comment|// No preferred key, we don't have a prefix here.
-name|String
+name|OWLOntologyID
 name|key
 init|=
 name|loader
@@ -869,7 +883,7 @@ literal|null
 operator|||
 name|key
 operator|.
-name|isEmpty
+name|isAnonymous
 argument_list|()
 condition|)
 name|log

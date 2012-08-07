@@ -65,26 +65,6 @@ name|api
 operator|.
 name|io
 operator|.
-name|OntologyInputSource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|io
-operator|.
 name|OntologyInputSourceHandler
 import|;
 end_import
@@ -105,7 +85,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|Origin
+name|OriginOrInputSource
 import|;
 end_import
 
@@ -173,25 +153,11 @@ extends|,
 name|OntologyInputSourceHandler
 block|{
 comment|/**      * Adds the given ontology to the ontology collector. If the supplied ontology is not already present in      * storage and does not have an OWL version IRI of its own, this ontology collector will 'claim ownership'      * of the ontology by setting its own logical ID as the version IRI of the new ontology.      *       * TODO make this method return the public key as an {@link OWLOntologyID}.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      */
-name|String
+name|OWLOntologyID
 name|addOntology
 parameter_list|(
-name|OntologyInputSource
-argument_list|<
-name|?
-argument_list|>
-name|ontologySource
-parameter_list|)
-function_decl|;
-comment|/**      * Tells this ontology collector to manage the ontology referenced by<tt>origin</tt>. This method will      * try to<i>avoid</i> processing the ontology content whenever possible. For the example, if      *<tt>origin</tt> is an {@link Origin} that wraps an {@link OWLOntologyID}, it will assumed the wrapperd      * reference to be a public key for an already stored ontology.      *       * TODO make this method return the public key as an {@link OWLOntologyID}.      *       * @param origin      *            the origin of the ontology to be added.      */
-name|void
-name|addOntology
-parameter_list|(
-name|Origin
-argument_list|<
-name|?
-argument_list|>
-name|origin
+name|OriginOrInputSource
+name|ontology
 parameter_list|)
 function_decl|;
 comment|/**      * Returns the ontologies managed by this ontology space. This is a shortcut method for iterating      * {@link #getOntology(IRI, Class)} calls over {@link #listManagedOntologies()}.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */

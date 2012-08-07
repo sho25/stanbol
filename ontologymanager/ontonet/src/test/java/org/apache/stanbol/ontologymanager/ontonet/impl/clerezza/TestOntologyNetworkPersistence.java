@@ -720,7 +720,7 @@ argument_list|(
 literal|"/ontologies/characters_all.owl"
 argument_list|)
 decl_stmt|;
-name|String
+name|OWLOntologyID
 name|key
 init|=
 name|ontologyProvider
@@ -745,7 +745,7 @@ name|assertFalse
 argument_list|(
 name|key
 operator|.
-name|isEmpty
+name|isAnonymous
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1078,7 +1078,7 @@ literal|"/ontologies/mockfoaf.rdf"
 argument_list|)
 decl_stmt|;
 comment|// Keep track of its storage key
-name|String
+name|OWLOntologyID
 name|key
 init|=
 name|ontologyProvider
@@ -1103,7 +1103,7 @@ name|assertFalse
 argument_list|(
 name|key
 operator|.
-name|isEmpty
+name|isAnonymous
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1157,26 +1157,17 @@ name|id
 argument_list|)
 expr_stmt|;
 comment|// Check there is a storage key for the (real) ID of the FOAF ontology
-name|key
-operator|=
+comment|//        key = ontologyProvider.getKey(foaf);
+comment|//        assertNotNull(key);
+comment|//        assertFalse(key.isAnonymous());
+name|assertTrue
+argument_list|(
 name|ontologyProvider
 operator|.
-name|getKey
+name|hasOntology
 argument_list|(
 name|foaf
 argument_list|)
-expr_stmt|;
-name|assertNotNull
-argument_list|(
-name|key
-argument_list|)
-expr_stmt|;
-name|assertFalse
-argument_list|(
-name|key
-operator|.
-name|isEmpty
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|log
@@ -1204,26 +1195,17 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Check again for the FOAF key
-name|key
-operator|=
+comment|//        key = ontologyProvider.getKey(foaf);
+comment|//        assertNotNull(key);
+comment|//        assertFalse(key.isAnonymous());
+name|assertTrue
+argument_list|(
 name|ontologyProvider
 operator|.
-name|getKey
+name|hasOntology
 argument_list|(
 name|foaf
 argument_list|)
-expr_stmt|;
-name|assertNotNull
-argument_list|(
-name|key
-argument_list|)
-expr_stmt|;
-name|assertFalse
-argument_list|(
-name|key
-operator|.
-name|isEmpty
-argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// The OWL API implements OWLOntology#equals()

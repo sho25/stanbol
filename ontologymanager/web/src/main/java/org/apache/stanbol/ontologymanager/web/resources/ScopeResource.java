@@ -3312,12 +3312,12 @@ name|o
 init|=
 literal|null
 decl_stmt|;
-name|IRI
-name|ontologyIri
+name|OWLOntologyID
+name|id
 init|=
-name|IRI
+name|OntologyUtils
 operator|.
-name|create
+name|decode
 argument_list|(
 name|ontologyId
 argument_list|)
@@ -3340,7 +3340,7 @@ name|spc
 operator|.
 name|hasOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|)
 condition|)
 block|{
@@ -3350,7 +3350,7 @@ name|spc
 operator|.
 name|getOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|,
 name|Graph
 operator|.
@@ -3381,7 +3381,7 @@ name|spc
 operator|.
 name|hasOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|)
 condition|)
 name|o
@@ -3390,7 +3390,7 @@ name|spc
 operator|.
 name|getOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|,
 name|Graph
 operator|.
@@ -3568,12 +3568,12 @@ name|o
 init|=
 literal|null
 decl_stmt|;
-name|IRI
-name|ontologyIri
+name|OWLOntologyID
+name|id
 init|=
-name|IRI
+name|OntologyUtils
 operator|.
-name|create
+name|decode
 argument_list|(
 name|ontologyId
 argument_list|)
@@ -3596,7 +3596,7 @@ name|spc
 operator|.
 name|hasOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|)
 condition|)
 block|{
@@ -3606,7 +3606,7 @@ name|spc
 operator|.
 name|getOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|,
 name|OWLOntology
 operator|.
@@ -3637,7 +3637,7 @@ name|spc
 operator|.
 name|hasOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|)
 condition|)
 name|o
@@ -3646,7 +3646,7 @@ name|spc
 operator|.
 name|getOntology
 argument_list|(
-name|ontologyIri
+name|id
 argument_list|,
 name|OWLOntology
 operator|.
@@ -4251,7 +4251,7 @@ argument_list|,
 name|mt
 argument_list|)
 expr_stmt|;
-name|String
+name|OWLOntologyID
 name|key
 init|=
 name|scope
@@ -4287,7 +4287,7 @@ literal|null
 operator|||
 name|key
 operator|.
-name|isEmpty
+name|isAnonymous
 argument_list|()
 condition|)
 block|{
@@ -4322,23 +4322,14 @@ name|String
 name|uri
 init|=
 comment|// key.split("::")[1];
-name|key
+name|OntologyUtils
 operator|.
-name|substring
+name|encode
 argument_list|(
-operator|(
-name|ontologyProvider
-operator|.
-name|getGraphPrefix
-argument_list|()
-operator|+
-literal|"::"
-operator|)
-operator|.
-name|length
-argument_list|()
+name|key
 argument_list|)
 decl_stmt|;
+comment|//            uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
 name|URI
 name|created
 init|=
@@ -5188,7 +5179,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|String
+name|OWLOntologyID
 name|key
 init|=
 name|scope
@@ -5209,7 +5200,7 @@ literal|null
 operator|||
 name|key
 operator|.
-name|isEmpty
+name|isAnonymous
 argument_list|()
 condition|)
 throw|throw
@@ -5224,23 +5215,14 @@ name|String
 name|uri
 init|=
 comment|// key.split("::")[1];
-name|key
+name|OntologyUtils
 operator|.
-name|substring
+name|encode
 argument_list|(
-operator|(
-name|ontologyProvider
-operator|.
-name|getGraphPrefix
-argument_list|()
-operator|+
-literal|"::"
-operator|)
-operator|.
-name|length
-argument_list|()
+name|key
 argument_list|)
 decl_stmt|;
+comment|//                        uri =  uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
 if|if
 condition|(
 name|uri

@@ -45,7 +45,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OntologyInputSource
+name|OriginOrInputSource
 import|;
 end_import
 
@@ -130,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.<br>  *<br>  * Note that since this object is both a {@link ScopeRegistry} and an {@link OntologyScopeFactory}, the call  * to {@link ScopeRegistry#registerScope(OntologyScope)} or its overloads after  * {@link OntologyScopeFactory#createOntologyScope(String, OntologyInputSource...)} is unnecessary, as the  * ONManager automatically registers newly created scopes.  *   * @author alexdma, anuzzolese  *   */
+comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.<br>  *<br>  * Note that since this object is both a {@link ScopeRegistry} and an {@link OntologyScopeFactory}, the call  * to {@link ScopeRegistry#registerScope(OntologyScope)} or its overloads after  * {@link OntologyScopeFactory#createOntologyScope(String, OriginOrInputSource...)} is unnecessary, as the  * ONManager automatically registers newly created scopes.  *   * @author alexdma, anuzzolese  *   */
 end_comment
 
 begin_interface

@@ -65,8 +65,6 @@ parameter_list|,
 name|OperationType
 name|operationType
 parameter_list|)
-throws|throws
-name|Exception
 block|{
 if|if
 condition|(
@@ -76,7 +74,7 @@ literal|null
 condition|)
 throw|throw
 operator|new
-name|Exception
+name|IllegalArgumentException
 argument_list|(
 literal|"No operation type specified for this session event."
 argument_list|)
@@ -89,9 +87,9 @@ literal|null
 condition|)
 throw|throw
 operator|new
-name|Exception
+name|IllegalArgumentException
 argument_list|(
-literal|"No KReS session specified for this session event."
+literal|"No session specified for this session event."
 argument_list|)
 throw|;
 name|this

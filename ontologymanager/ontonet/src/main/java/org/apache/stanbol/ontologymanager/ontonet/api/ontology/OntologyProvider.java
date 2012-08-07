@@ -275,16 +275,12 @@ name|RESOLVE_IMPORTS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.resolveImports"
 decl_stmt|;
-name|String
-name|getGraphPrefix
-parameter_list|()
-function_decl|;
 comment|/**      * Gets the policy adopted by this provider whenever an import statement is found in an ontology<i>that      * has already been loaded</i> (e.g. when exporting it). It does<b>not</b> influence how the system      * should<i>resolve</i> imports of newly found ontologies.      *       * @return the import management policy.      */
 name|ImportManagementPolicy
 name|getImportManagementPolicy
 parameter_list|()
 function_decl|;
-comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @deprecated      *       * @param ontologyIri      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyIRI</tt>.      *       * @deprecated public keys are now of type {@link OWLOntologyID} and should match ontologyIri, or      *             derivative versioned IDs, whenever possible.      * @see #listVersions(IRI)      * @see #listAliases(OWLOntologyID)      * @param ontologyIri      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
 name|String
 name|getKey
 parameter_list|(
@@ -292,7 +288,7 @@ name|IRI
 name|ontologyIri
 parameter_list|)
 function_decl|;
-comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyId</tt>.      *       * @deprecated      *       * @param ontologyId      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
+comment|/**      * Gets a string that can be used to directly access the ontology whose logical identifier is      *<tt>ontologyId</tt>.      *       * @deprecated public keys are now of type {@link OWLOntologyID} and should match ontologyId. To obtain      *             alternate public keys (aliases) or versioned public keys, see      *             {@link #listAliases(OWLOntologyID)} and {@link #listVersions(IRI)} respectively.      * @see #listVersions(IRI)      * @see #listAliases(OWLOntologyID)      *       * @param ontologyId      *            the logical identifier of the ontology.      * @return the public key (note that it might be different from the graph name).      */
 name|String
 name|getKey
 parameter_list|(
@@ -331,11 +327,12 @@ name|OntologyNetworkConfiguration
 name|getOntologyNetworkConfiguration
 parameter_list|()
 function_decl|;
+comment|/**      * XXX This method is temporary until {@link OntologyNetworkMultiplexer} becomes an OSGi component.      *       * @return      */
 name|OntologyNetworkMultiplexer
 name|getOntologyNetworkDescriptor
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null.      *       * @deprecated      * @param ontologyId      * @return      */
+comment|/**      * Gets the key of the ontology with the supplied ontology ID. Note that both ontoloeyIRI and versionIRI      * (if present) must match, otherwise it will return null.      *       * @deprecated public keys are now of type {@link OWLOntologyID} and should match ontologyId. To obtain      *             alternate public keys (aliases) or versioned public keys, see      *             {@link #listAliases(OWLOntologyID)} and {@link #listVersions(IRI)} respectively.      * @see #listVersions(IRI)      * @see #listAliases(OWLOntologyID)      *       * @param ontologyId      * @return      */
 name|String
 name|getPublicKey
 parameter_list|(
@@ -343,7 +340,7 @@ name|OWLOntologyID
 name|ontologyId
 parameter_list|)
 function_decl|;
-comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @return the ontology key set.      */
+comment|/**      * Gets the set of all the strings that can be used to access the ontologies stored by this provider.      *       * @deprecated Please use {@link #listOntologies()} instead.      *       * @return the ontology key set.      */
 name|Set
 argument_list|<
 name|OWLOntologyID
@@ -482,15 +479,26 @@ name|IRI
 name|ontologyIri
 parameter_list|)
 function_decl|;
-comment|/**      * Checks if an ontology with the specified OWL ontology ID is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(IRI, Class)} and checking      * if the returned value is not null.      *       * @param id      *            the ontology id. If there is both an ontology IRI and a version IRI, both must match the      *            ontology provider's records in order to return true. Otherwise, it will return true iff      *<i>any</i> match with the ontology IIR is found, no matter its version IRI.      * @return true iff an ontology with the supplied id is in the provider's store.      */
+comment|/**      * Checks if an ontology with the specified OWL ontology ID is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(IRI, Class)} and checking      * if the returned value is not null.      *       * @param publicKey      *            the ontology id. If there is both an ontology IRI and a version IRI, both must match the      *            ontology provider's records in order to return true. Otherwise, it will return true iff      *<i>any</i> match with the ontology IIR is found, no matter its version IRI.      * @return true iff an ontology with the supplied id is in the provider's store.      */
 name|boolean
 name|hasOntology
 parameter_list|(
 name|OWLOntologyID
-name|id
+name|publicKey
 parameter_list|)
 function_decl|;
-specifier|public
+comment|/**      * Returns all the alternate public keys of the ontology identified by the supplied public key. These      * could include, for example, the physical URLs they were, or can be, retrieved from. The supplied public      * key is not included in the returned set, and it needs not be the primary key. It can be an alias      * itself, in whih case the primary key will be included in the results.      *       * @param publicKey      *            the public key of the ontology. It could be an alias itself.      * @return the matching versions of stored ontologies.      */
+name|Set
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|listAliases
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the public keys of all the ontologies stored by this provider. Only primary keys are returned:      * aliases are not included.      *       * @return all the ontology public keys.      */
 name|Set
 argument_list|<
 name|OWLOntologyID
@@ -498,8 +506,19 @@ argument_list|>
 name|listOntologies
 parameter_list|()
 function_decl|;
+comment|/**      * Returns all the public keys of the ontologies whose ontology IRI matches the one supplied,a nd which      * differ by version IRI. Only primary keys are returned: aliases are not included.      *       * @param ontologyIri      *            the ontology IRI to match      * @return the matching versions of stored ontologies.      */
+name|Set
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|listVersions
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|)
+function_decl|;
 comment|/**      * Retrieves an ontology by reading its content from a data stream and stores it using the storage system      * attached to this provider. A key that can be used to identify the ontology in this provider is returned      * if successful.      *       * @param data      *            the ontology content.      * @param formatIdentifier      *            the MIME type of the expected serialization format of this ontology. If null, all supported      *            formats will be tried until all parsers fail or one succeeds. Whether the supplied format      *            will be the only one to be attempted, or simply the preferred one, is left to arbitration      *            and is implementation-dependent.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If some remote import is found, the import policy is aggressive and Stanbol is      *            set on offline mode, this method will fail.      * @return a key that can be used to retrieve the stored ontology afterwards, or null if loading/storage      *         failed. If it was possible to set it as such, it will be the same as<tt>preferredKey</tt>.      * @throws IOException      *             if all attempts to load the ontology failed.      * @throws UnsupportedFormatException      *             if no parsers are able to parse the supplied format (or the actual file format).      */
-name|String
+name|OWLOntologyID
 name|loadInStore
 parameter_list|(
 name|InputStream
@@ -524,7 +543,7 @@ throws|,
 name|UnsupportedFormatException
 function_decl|;
 comment|/**      * Retrieves an ontology physically located at<code>location</code> (unless mapped otherwise by the      * offline configuration) and stores it using the storage system attached to this provider. A key that can      * be used to identify the ontology in this provider is returned if successful.      *       * @param location      *            the physical IRI where the ontology is located.      * @param formatIdentifier      *            the MIME type of the expected serialization format of this ontology. If null, all supported      *            formats will be tried until all parsers fail or one succeeds. Whether the supplied format      *            will be the only one to be attempted, or simply the preferred one, is left to arbitration      *            and is implementation-dependent.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If the IRI is not local and Stanbol is set on offline mode, this method will      *            fail.      * @return a key that can be used to retrieve the stored ontology afterwards, or null if loading/storage      *         failed.      * @throws IOException      *             if all attempts to load the ontology failed.      * @throws UnsupportedFormatException      *             if no parsers are able to parse the supplied format (or the actual file format).      */
-name|String
+name|OWLOntologyID
 name|loadInStore
 parameter_list|(
 name|IRI
@@ -547,7 +566,7 @@ throws|throws
 name|IOException
 function_decl|;
 comment|/**      * Stores an ontology that has already been loaded into an object. If the object is of a non-native yet      * supported type, the ontology provider will try to perform a conversion prior to storing it.      *       * @param ontology      *            the ontology to be stored.      * @param force      *            if true, all mappings provided by the offline configuration will be ignored (both for the      *            root ontology and its recursive imports) and the provider will forcibly try to resolve the      *            location IRI. If some remote import is found, the import policy is aggressive and Stanbol is      *            set on offline mode, this method will fail.      * @return      */
-name|String
+name|OWLOntologyID
 name|loadInStore
 parameter_list|(
 name|Object
@@ -572,13 +591,6 @@ name|OWLOntologyID
 name|publicKey
 parameter_list|)
 function_decl|;
-name|void
-name|setGraphPrefix
-parameter_list|(
-name|String
-name|prefix
-parameter_list|)
-function_decl|;
 comment|/**      * Sets the policy adopted by this provider whenever an import statement is found in an ontology<i>that      * has already been loaded</i> (e.g. when exporting it). It does<b>not</b> influence how the system      * should<i>resolve</i> imports of newly found ontologies.      *       * @param policy      *            the import management policy.      */
 name|void
 name|setImportManagementPolicy
@@ -587,7 +599,19 @@ name|ImportManagementPolicy
 name|policy
 parameter_list|)
 function_decl|;
-comment|/**      * Will not be checked by dereferencing      *       * If the key does not exist in the provider, or if locator is already bound to a different key, an      * {@link IllegalArgumentException} will be thrown.      *       *       * @param locator      * @param key      */
+comment|/**      * Tells this ontology provider that a stored ontology whose public key is<tt>publicKey</tt> can be (or      * was) retrieved by dereferencing<tt>locator</tt>. If<tt>publicKey</tt>does not exist in the provider,      * or if<tt>locator</tt> is already bound to an incompatible key, an {@link IllegalArgumentException}      * will be thrown.      *       * @param locator      *            a physical location for this ontology.      * @param publicKey      *            the public key of the stored ontology.      */
+name|void
+name|setLocatorMapping
+parameter_list|(
+name|IRI
+name|locator
+parameter_list|,
+name|OWLOntologyID
+name|publicKey
+parameter_list|)
+function_decl|;
+annotation|@
+name|Deprecated
 name|void
 name|setLocatorMapping
 parameter_list|(

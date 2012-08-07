@@ -42,6 +42,8 @@ name|OntologyInputSource
 parameter_list|<
 name|O
 parameter_list|>
+extends|extends
+name|OriginOrInputSource
 block|{
 comment|/**      * Gets the ontology network resulting from the transitive closure of import statements on the root      * ontology. Useful for implementations with a custom management of ontology loading.      *       * @return the import closure of the root ontology.      */
 name|Set
