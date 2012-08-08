@@ -3926,7 +3926,7 @@ argument_list|(
 name|key
 argument_list|)
 decl_stmt|;
-comment|//            uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
+comment|// uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
 name|URI
 name|created
 init|=
@@ -4314,6 +4314,15 @@ operator|.
 name|getName
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Detected form parameter \"{}\"."
+argument_list|,
+name|name
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|name
@@ -4363,10 +4372,21 @@ argument_list|(
 literal|"auto"
 argument_list|)
 condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" -- Expected format : {}"
+argument_list|,
+name|value
+argument_list|)
+expr_stmt|;
 name|format
 operator|=
 name|value
 expr_stmt|;
+block|}
 elseif|else
 if|if
 condition|(
@@ -4394,6 +4414,15 @@ operator|.
 name|create
 argument_list|(
 name|value
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" -- Will load ontology from URL : {}"
+argument_list|,
+name|location
 argument_list|)
 expr_stmt|;
 block|}
@@ -4444,6 +4473,15 @@ argument_list|)
 condition|)
 try|try
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" -- Library ID : {}"
+argument_list|,
+name|value
+argument_list|)
+expr_stmt|;
 name|URI
 operator|.
 name|create
@@ -4459,6 +4497,13 @@ operator|.
 name|create
 argument_list|(
 name|value
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ---- (is well-formed URI)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4864,6 +4909,23 @@ block|{
 comment|// This comes last, since it will most likely have a value.
 try|try
 block|{
+name|long
+name|beforeLib
+init|=
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Creating library source for {}"
+argument_list|,
+name|library
+argument_list|)
+expr_stmt|;
 name|src
 operator|=
 operator|new
@@ -4872,6 +4934,20 @@ argument_list|(
 name|library
 argument_list|,
 name|regMgr
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Library source created in {} ms."
+argument_list|,
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|beforeLib
 argument_list|)
 expr_stmt|;
 block|}
@@ -5016,7 +5092,7 @@ argument_list|(
 name|key
 argument_list|)
 decl_stmt|;
-comment|//                uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
+comment|// uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
 if|if
 condition|(
 name|uri
