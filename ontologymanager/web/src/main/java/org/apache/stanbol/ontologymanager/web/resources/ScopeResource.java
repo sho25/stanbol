@@ -4329,7 +4329,7 @@ argument_list|(
 name|key
 argument_list|)
 decl_stmt|;
-comment|//            uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
+comment|// uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
 name|URI
 name|created
 init|=
@@ -4456,25 +4456,30 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|ResponseBuilder
+name|rb
+decl_stmt|;
 if|if
 condition|(
 name|scope
 operator|==
 literal|null
 condition|)
-return|return
+name|rb
+operator|=
 name|Response
 operator|.
 name|status
 argument_list|(
 name|NOT_FOUND
 argument_list|)
-operator|.
-name|build
-argument_list|()
-return|;
+expr_stmt|;
+else|else
 try|try
 block|{
+name|OWLOntologyID
+name|key
+init|=
 name|scope
 operator|.
 name|getCustomSpace
@@ -4492,6 +4497,28 @@ argument_list|(
 name|iri
 argument_list|)
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|URI
+name|created
+init|=
+name|getCreatedResource
+argument_list|(
+name|OntologyUtils
+operator|.
+name|encode
+argument_list|(
+name|key
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|rb
+operator|=
+name|Response
+operator|.
+name|created
+argument_list|(
+name|created
 argument_list|)
 expr_stmt|;
 block|}
@@ -4527,14 +4554,6 @@ name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
-name|ResponseBuilder
-name|rb
-init|=
-name|Response
-operator|.
-name|ok
-argument_list|()
-decl_stmt|;
 name|addCORSOrigin
 argument_list|(
 name|servletContext
@@ -5222,7 +5241,7 @@ argument_list|(
 name|key
 argument_list|)
 decl_stmt|;
-comment|//                        uri =  uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
+comment|// uri = uri.substring((ontologyProvider.getGraphPrefix() + "::").length());
 if|if
 condition|(
 name|uri

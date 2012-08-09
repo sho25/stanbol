@@ -401,6 +401,26 @@ name|api
 operator|.
 name|collector
 operator|.
+name|MissingOntologyException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|collector
+operator|.
 name|UnmodifiableOntologyCollectorException
 import|;
 end_import
@@ -2825,7 +2845,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Tried to rebuild existing scope \"{}\". Reusing."
+literal|"Scope \"{}\" already exists and will be reused."
 argument_list|,
 name|dupe
 argument_list|)
@@ -2868,6 +2888,7 @@ argument_list|(
 name|scopeId
 argument_list|)
 control|)
+try|try
 block|{
 name|log
 operator|.
@@ -2891,6 +2912,50 @@ argument_list|)
 comment|// new GraphSource(key)
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|MissingOntologyException
+name|ex
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Could not find an ontology with public key {} to be managed by scope \"{}\". Proceeding to next ontology."
+argument_list|,
+name|key
+argument_list|,
+name|scopeId
+argument_list|)
+expr_stmt|;
+continue|continue;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|ex
+parameter_list|)
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Exception caught while trying to add ontology with public key "
+operator|+
+name|key
+operator|+
+literal|" to rebuilt scope \""
+operator|+
+name|scopeId
+operator|+
+literal|"\". proceeding to next ontology"
+argument_list|,
+name|ex
+argument_list|)
+expr_stmt|;
+continue|continue;
 block|}
 name|log
 operator|.
