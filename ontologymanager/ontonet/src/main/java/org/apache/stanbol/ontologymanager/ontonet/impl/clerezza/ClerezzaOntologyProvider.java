@@ -37,7 +37,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|APPENDED_TO
+name|APPENDED_TO_URIREF
 import|;
 end_import
 
@@ -57,7 +57,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|ENTRY
+name|ENTRY_URIREF
 import|;
 end_import
 
@@ -77,7 +77,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_APPENDED
+name|HAS_APPENDED_URIREF
 import|;
 end_import
 
@@ -97,7 +97,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 import|;
 end_import
 
@@ -117,7 +117,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_SPACE_CORE
+name|HAS_SPACE_CORE_URIREF
 import|;
 end_import
 
@@ -137,7 +137,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_SPACE_CUSTOM
+name|HAS_SPACE_CUSTOM_URIREF
 import|;
 end_import
 
@@ -157,7 +157,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 import|;
 end_import
 
@@ -177,7 +177,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 import|;
 end_import
 
@@ -197,7 +197,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|IS_SPACE_CORE_OF
+name|IS_SPACE_CORE_OF_URIREF
 import|;
 end_import
 
@@ -217,7 +217,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|IS_SPACE_CUSTOM_OF
+name|IS_SPACE_CUSTOM_OF_URIREF
 import|;
 end_import
 
@@ -237,7 +237,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|MANAGES
+name|MANAGES_URIREF
 import|;
 end_import
 
@@ -257,7 +257,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|SCOPE
+name|MAPS_TO_GRAPH_URIREF
 import|;
 end_import
 
@@ -277,7 +277,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|SESSION
+name|RETRIEVED_FROM_URIREF
 import|;
 end_import
 
@@ -297,7 +297,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|SPACE
+name|SCOPE_URIREF
 import|;
 end_import
 
@@ -317,7 +317,47 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|_NS_ONTONET
+name|SESSION_URIREF
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|Vocabulary
+operator|.
+name|SIZE_IN_TRIPLES_URIREF
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|Vocabulary
+operator|.
+name|SPACE_URIREF
 import|;
 end_import
 
@@ -630,6 +670,22 @@ operator|.
 name|core
 operator|.
 name|TripleCollection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|TypedLiteral
 import|;
 end_import
 
@@ -1540,30 +1596,6 @@ specifier|private
 class|class
 name|OntologyToTcMapper
 block|{
-comment|/**          * The basic terms to use for the mapping graph.          *           * @author alexdma          *           */
-specifier|private
-class|class
-name|Vocabulary
-block|{
-specifier|static
-specifier|final
-name|String
-name|MAPS_TO_GRAPH
-init|=
-name|_NS_ONTONET
-operator|+
-literal|"mapsToGraph"
-decl_stmt|;
-specifier|static
-specifier|final
-name|String
-name|RETRIEVED_FROM
-init|=
-name|_NS_ONTONET
-operator|+
-literal|"retrievedFrom"
-decl_stmt|;
-block|}
 specifier|private
 name|MGraph
 name|graph
@@ -1765,7 +1797,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|ENTRY
+name|ENTRY_URIREF
 argument_list|)
 expr_stmt|;
 name|tMaps
@@ -1775,17 +1807,19 @@ name|TripleImpl
 argument_list|(
 name|entry
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|MAPS_TO_GRAPH
-argument_list|)
+name|MAPS_TO_GRAPH_URIREF
 argument_list|,
 name|graphName
 argument_list|)
 expr_stmt|;
+name|LiteralFactory
+name|lf
+init|=
+name|LiteralFactory
+operator|.
+name|getInstance
+argument_list|()
+decl_stmt|;
 name|tHasOiri
 operator|=
 operator|new
@@ -1793,8 +1827,12 @@ name|TripleImpl
 argument_list|(
 name|entry
 argument_list|,
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 argument_list|,
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
 operator|new
 name|UriRef
 argument_list|(
@@ -1802,6 +1840,7 @@ name|ontologyIRI
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1818,8 +1857,12 @@ name|TripleImpl
 argument_list|(
 name|entry
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
 operator|new
 name|UriRef
 argument_list|(
@@ -1827,6 +1870,7 @@ name|versionIri
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1880,6 +1924,14 @@ name|resource
 parameter_list|)
 block|{
 comment|// TODO desanitize?
+name|LiteralFactory
+name|lf
+init|=
+name|LiteralFactory
+operator|.
+name|getInstance
+argument_list|()
+decl_stmt|;
 name|IRI
 name|oiri
 init|=
@@ -1901,7 +1953,7 @@ name|filter
 argument_list|(
 name|resource
 argument_list|,
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -1914,6 +1966,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+name|UriRef
+name|s
+init|=
+literal|null
+decl_stmt|;
 name|Resource
 name|obj
 init|=
@@ -1931,18 +1988,45 @@ name|obj
 operator|instanceof
 name|UriRef
 condition|)
-name|oiri
+name|s
 operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
 operator|(
 operator|(
 name|UriRef
 operator|)
 name|obj
 operator|)
+expr_stmt|;
+elseif|else
+if|if
+condition|(
+name|obj
+operator|instanceof
+name|TypedLiteral
+condition|)
+name|s
+operator|=
+name|lf
+operator|.
+name|createObject
+argument_list|(
+name|UriRef
+operator|.
+name|class
+argument_list|,
+operator|(
+name|TypedLiteral
+operator|)
+name|obj
+argument_list|)
+expr_stmt|;
+name|oiri
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|s
 operator|.
 name|getUnicodeString
 argument_list|()
@@ -1972,7 +2056,7 @@ name|filter
 argument_list|(
 name|resource
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -1985,6 +2069,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+name|UriRef
+name|s
+init|=
+literal|null
+decl_stmt|;
 name|Resource
 name|obj
 init|=
@@ -2002,18 +2091,45 @@ name|obj
 operator|instanceof
 name|UriRef
 condition|)
-name|viri
+name|s
 operator|=
-name|IRI
-operator|.
-name|create
-argument_list|(
 operator|(
 operator|(
 name|UriRef
 operator|)
 name|obj
 operator|)
+expr_stmt|;
+elseif|else
+if|if
+condition|(
+name|obj
+operator|instanceof
+name|TypedLiteral
+condition|)
+name|s
+operator|=
+name|lf
+operator|.
+name|createObject
+argument_list|(
+name|UriRef
+operator|.
+name|class
+argument_list|,
+operator|(
+name|TypedLiteral
+operator|)
+name|obj
+argument_list|)
+expr_stmt|;
+name|viri
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|s
 operator|.
 name|getUnicodeString
 argument_list|()
@@ -2052,14 +2168,7 @@ name|OWLOntologyID
 name|publicKey
 parameter_list|)
 block|{
-comment|// // The UriRef is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional?)
-comment|// IRI ontologyIRI = publicKey.getOntologyIRI(), versionIri = publicKey
-comment|// .getVersionIRI();
-comment|// UriRef entry = new UriRef(URIUtils.sanitize(ontologyIRI).toString()
-comment|// + ((versionIri == null) ? "" : (":::" + URIUtils.sanitize(versionIri)
-comment|// .toString())));
-comment|// System.out.println("Returning "+entry);
-comment|// return entry;
+comment|/*              * The UriRef is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional e.g.              * the string form of OWLOntologyID objects?)              */
 name|TripleCollection
 name|meta
 init|=
@@ -2083,7 +2192,6 @@ argument_list|(
 literal|"Cannot build a UriRef resource on a null public key!"
 argument_list|)
 throw|;
-comment|// The UriRef is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional?)
 comment|// XXX should versionIRI also include the version IRI set by owners? Currently not
 comment|// Remember not to sanitize logical identifiers.
 name|IRI
@@ -2135,6 +2243,54 @@ name|match
 init|=
 literal|null
 decl_stmt|;
+name|LiteralFactory
+name|lf
+init|=
+name|LiteralFactory
+operator|.
+name|getInstance
+argument_list|()
+decl_stmt|;
+name|TypedLiteral
+name|oiri
+init|=
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
+operator|new
+name|UriRef
+argument_list|(
+name|ontologyIri
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|TypedLiteral
+name|viri
+init|=
+name|versionIri
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
+operator|new
+name|UriRef
+argument_list|(
+name|versionIri
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|Iterator
@@ -2149,16 +2305,9 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|ontologyIri
-operator|.
-name|toString
-argument_list|()
-argument_list|)
+name|oiri
 argument_list|)
 init|;
 name|it
@@ -2216,7 +2365,7 @@ continue|continue;
 block|}
 if|if
 condition|(
-name|versionIri
+name|viri
 operator|!=
 literal|null
 condition|)
@@ -2236,16 +2385,9 @@ name|UriRef
 operator|)
 name|subj
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|versionIri
-operator|.
-name|toString
-argument_list|()
-argument_list|)
+name|viri
 argument_list|)
 argument_list|)
 condition|)
@@ -2294,7 +2436,7 @@ name|UriRef
 operator|)
 name|subj
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -2376,7 +2518,6 @@ name|OWLOntologyID
 name|reference
 parameter_list|)
 block|{
-comment|// UriRef res = buildResource(reference);
 name|Set
 argument_list|<
 name|UriRef
@@ -2441,13 +2582,7 @@ name|filter
 argument_list|(
 name|alias
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|MAPS_TO_GRAPH
-argument_list|)
+name|MAPS_TO_GRAPH_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -2513,13 +2648,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|RETRIEVED_FROM
-argument_list|)
+name|RETRIEVED_FROM_URIREF
 argument_list|,
 name|litloc
 argument_list|)
@@ -2581,13 +2710,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|MAPS_TO_GRAPH
-argument_list|)
+name|MAPS_TO_GRAPH_URIREF
 argument_list|,
 name|graphName
 argument_list|)
@@ -2656,13 +2779,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|RETRIEVED_FROM
-argument_list|)
+name|RETRIEVED_FROM_URIREF
 argument_list|,
 name|litloc
 argument_list|)
@@ -2742,9 +2859,21 @@ name|OWLOntologyID
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|LiteralFactory
+name|lf
+init|=
+name|LiteralFactory
+operator|.
+name|getInstance
+argument_list|()
+decl_stmt|;
+name|TypedLiteral
 name|iri
 init|=
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
 operator|new
 name|UriRef
 argument_list|(
@@ -2752,6 +2881,7 @@ name|ontologyIri
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Exclude aliases.
@@ -2769,7 +2899,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 argument_list|,
 name|iri
 argument_list|)
@@ -2813,19 +2943,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Also check for physical locations
-name|Literal
-name|litloc
-init|=
-name|LiteralFactory
-operator|.
-name|getInstance
-argument_list|()
-operator|.
-name|createTypedLiteral
-argument_list|(
-name|iri
-argument_list|)
-decl_stmt|;
 for|for
 control|(
 name|Iterator
@@ -2840,15 +2957,9 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|RETRIEVED_FROM
-argument_list|)
+name|RETRIEVED_FROM_URIREF
 argument_list|,
-name|litloc
+name|iri
 argument_list|)
 init|;
 name|it
@@ -2917,17 +3028,6 @@ literal|"A null graph name is not allowed."
 argument_list|)
 throw|;
 comment|// Null locator is a legal argument, will remove all locator mappings from the supplied graph
-name|UriRef
-name|retrieved_from
-init|=
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|RETRIEVED_FROM
-argument_list|)
-decl_stmt|;
 name|Set
 argument_list|<
 name|Triple
@@ -2978,7 +3078,7 @@ decl_stmt|;
 comment|// isOntology |= RDF.type.equals(t.getPredicate())&& OWL.Ontology.equals(t.getObject());
 if|if
 condition|(
-name|retrieved_from
+name|RETRIEVED_FROM_URIREF
 operator|.
 name|equals
 argument_list|(
@@ -3039,7 +3139,7 @@ name|TripleImpl
 argument_list|(
 name|graphName
 argument_list|,
-name|retrieved_from
+name|RETRIEVED_FROM_URIREF
 argument_list|,
 name|litloc
 argument_list|)
@@ -3069,13 +3169,7 @@ argument_list|(
 name|ontologyReference
 argument_list|)
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|Vocabulary
-operator|.
-name|MAPS_TO_GRAPH
-argument_list|)
+name|MAPS_TO_GRAPH_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -4637,7 +4731,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|SCOPE
+name|SCOPE_URIREF
 argument_list|)
 init|;
 name|it
@@ -4647,7 +4741,8 @@ argument_list|()
 condition|;
 control|)
 block|{
-comment|// for each scope
+comment|// for each
+comment|// scope
 name|Triple
 name|ta
 init|=
@@ -4733,7 +4828,7 @@ argument_list|(
 name|scopeId
 argument_list|,
 operator|new
-name|LinkedList
+name|TreeSet
 argument_list|<
 name|OWLOntologyID
 argument_list|>
@@ -4747,7 +4842,7 @@ argument_list|(
 name|scopeId
 argument_list|,
 operator|new
-name|LinkedList
+name|TreeSet
 argument_list|<
 name|OWLOntologyID
 argument_list|>
@@ -4779,7 +4874,7 @@ name|filter
 argument_list|(
 name|sub
 argument_list|,
-name|HAS_SPACE_CORE
+name|HAS_SPACE_CORE_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -4826,7 +4921,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|IS_SPACE_CORE_OF
+name|IS_SPACE_CORE_OF_URIREF
 argument_list|,
 name|sub
 argument_list|)
@@ -4873,7 +4968,7 @@ name|filter
 argument_list|(
 name|sub
 argument_list|,
-name|HAS_SPACE_CUSTOM
+name|HAS_SPACE_CUSTOM_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -4920,7 +5015,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|IS_SPACE_CUSTOM_OF
+name|IS_SPACE_CUSTOM_OF_URIREF
 argument_list|,
 name|sub
 argument_list|)
@@ -5010,7 +5105,7 @@ name|predicate
 operator|.
 name|equals
 argument_list|(
-name|MANAGES
+name|MANAGES_URIREF
 argument_list|)
 condition|)
 block|{
@@ -5095,7 +5190,7 @@ name|predicate
 operator|.
 name|equals
 argument_list|(
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 argument_list|)
 condition|)
 block|{
@@ -5188,7 +5283,7 @@ name|predicate
 operator|.
 name|equals
 argument_list|(
-name|MANAGES
+name|MANAGES_URIREF
 argument_list|)
 condition|)
 block|{
@@ -5273,7 +5368,7 @@ name|predicate
 operator|.
 name|equals
 argument_list|(
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 argument_list|)
 condition|)
 block|{
@@ -5360,7 +5455,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|SESSION
+name|SESSION_URIREF
 argument_list|)
 init|;
 name|it
@@ -5370,7 +5465,8 @@ argument_list|()
 condition|;
 control|)
 block|{
-comment|// for each scope
+comment|// for each
+comment|// scope
 name|Triple
 name|ta
 init|=
@@ -5465,7 +5561,7 @@ argument_list|(
 name|sessionId
 argument_list|,
 operator|new
-name|HashSet
+name|TreeSet
 argument_list|<
 name|OWLOntologyID
 argument_list|>
@@ -5479,7 +5575,7 @@ argument_list|(
 name|sessionId
 argument_list|,
 operator|new
-name|HashSet
+name|TreeSet
 argument_list|<
 name|String
 argument_list|>
@@ -5508,7 +5604,7 @@ name|filter
 argument_list|(
 name|ses_ur
 argument_list|,
-name|MANAGES
+name|MANAGES_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -5574,7 +5670,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 argument_list|,
 name|ses_ur
 argument_list|)
@@ -5640,7 +5736,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|APPENDED_TO
+name|APPENDED_TO_URIREF
 argument_list|,
 name|ses_ur
 argument_list|)
@@ -5746,7 +5842,7 @@ name|filter
 argument_list|(
 name|ses_ur
 argument_list|,
-name|HAS_APPENDED
+name|HAS_APPENDED_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -7642,21 +7738,7 @@ argument_list|(
 name|publicKey
 argument_list|)
 argument_list|,
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|Vocabulary
-operator|.
-name|SIZE_IN_TRIPLES
+name|SIZE_IN_TRIPLES_URIREF
 argument_list|,
 name|LiteralFactory
 operator|.
@@ -9103,7 +9185,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|SCOPE
+name|SCOPE_URIREF
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9120,7 +9202,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|SPACE
+name|SPACE_URIREF
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9137,7 +9219,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|SPACE
+name|SPACE_URIREF
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9150,7 +9232,7 @@ name|TripleImpl
 argument_list|(
 name|scopeur
 argument_list|,
-name|HAS_SPACE_CORE
+name|HAS_SPACE_CORE_URIREF
 argument_list|,
 name|coreur
 argument_list|)
@@ -9165,7 +9247,7 @@ name|TripleImpl
 argument_list|(
 name|scopeur
 argument_list|,
-name|HAS_SPACE_CUSTOM
+name|HAS_SPACE_CUSTOM_URIREF
 argument_list|,
 name|custur
 argument_list|)
@@ -9181,7 +9263,7 @@ name|TripleImpl
 argument_list|(
 name|coreur
 argument_list|,
-name|IS_SPACE_CORE_OF
+name|IS_SPACE_CORE_OF_URIREF
 argument_list|,
 name|scopeur
 argument_list|)
@@ -9196,7 +9278,7 @@ name|TripleImpl
 argument_list|(
 name|custur
 argument_list|,
-name|IS_SPACE_CUSTOM_OF
+name|IS_SPACE_CUSTOM_OF_URIREF
 argument_list|,
 name|scopeur
 argument_list|)
@@ -9354,7 +9436,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|SCOPE
+name|SCOPE_URIREF
 operator|.
 name|equals
 argument_list|(
@@ -9410,7 +9492,7 @@ name|error
 argument_list|(
 literal|"-- is not typed as a {} in the meta-graph."
 argument_list|,
-name|SCOPE
+name|SCOPE_URIREF
 argument_list|)
 expr_stmt|;
 block|}

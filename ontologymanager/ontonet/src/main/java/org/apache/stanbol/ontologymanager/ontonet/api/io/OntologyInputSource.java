@@ -21,16 +21,6 @@ name|io
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Set
-import|;
-end_import
-
 begin_comment
 comment|/**  * An ontology input source provides a point for loading an ontology. Currently it provides two ways of  * obtaining an ontology document:  *   *<ol>  *<li>From an OWLOntology.  *<li>By dereferencing a physical IRI.  *<li>By querying a triple store.  *</ol>  *   * Consumers that use an ontology input source will attempt to obtain a concrete representation of an ontology  * in the above order. Implementations of this interface may try to dereference the IRI internally and just  * provide the OWLOntology, or directly provide the physical IRI for other classes to dereference.  * Implementations should allow multiple attempts at loading an ontology.  *   * @author alexdma  *   */
 end_comment
@@ -42,20 +32,7 @@ name|OntologyInputSource
 parameter_list|<
 name|O
 parameter_list|>
-extends|extends
-name|OriginOrInputSource
 block|{
-comment|/**      * Gets the ontology network resulting from the transitive closure of import statements on the root      * ontology. Useful for implementations with a custom management of ontology loading.      *       * @return the import closure of the root ontology.      */
-name|Set
-argument_list|<
-name|O
-argument_list|>
-name|getImports
-parameter_list|(
-name|boolean
-name|recursive
-parameter_list|)
-function_decl|;
 comment|/**      * Returns a reference object that can be used for obtaining the supplied ontology. Depending on how the      * ontology was obtained, the origin can be a physical URL, the ID of a database or graph in the local      * storage, or something else.This method is supposed to return null if the ontology lives in-memory and      * was not or is not going to be stored publicly.      *       * @return a physical reference for this ontology source, or null if unknown.      */
 name|Origin
 argument_list|<

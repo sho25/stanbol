@@ -65,7 +65,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OntologyInputSourceHandler
+name|OntologyInputSource
 import|;
 end_import
 
@@ -85,7 +85,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OriginOrInputSource
+name|OntologyInputSourceHandler
 import|;
 end_import
 
@@ -152,11 +152,14 @@ name|NamedArtifact
 extends|,
 name|OntologyInputSourceHandler
 block|{
-comment|/**      * Adds the given ontology to the ontology collector. If the supplied ontology is not already present in      * storage and does not have an OWL version IRI of its own, this ontology collector will 'claim ownership'      * of the ontology by setting its own logical ID as the version IRI of the new ontology.      *       * TODO make this method return the public key as an {@link OWLOntologyID}.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      */
+comment|/**      * Adds the given ontology to the ontology collector. If the supplied ontology is not already present in      * storage and does not have an OWL version IRI of its own, this ontology collector will 'claim ownership'      * of the ontology by setting its own logical ID as the version IRI of the new ontology.      *       * @param ontology      *            the ontology to be added      * @return the key that can be used for accessing the stored ontology directly      */
 name|OWLOntologyID
 name|addOntology
 parameter_list|(
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 name|ontology
 parameter_list|)
 function_decl|;

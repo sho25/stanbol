@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A wrapper class for whatever can be used for physically referencing a resource (typically an ontology).  * Currently the supported types are:  *<ul>  *<li> {@link IRI}, which is interpreted as the physical location of the resource.  *<li> {@link UriRef}, which is interpreted as the name of a graph to be retrieved from an underlying Clerezza  * store (typically a {@link TcProvider}).  *</ul>  *   * @author alexdma  *   * @param<R>  *            the resource reference.  */
+comment|/**  * A wrapper class for whatever can be used for physically referencing a resource (typically an ontology).  * Currently the supported types are:  *<ul>  *<li> {@link IRI}, which is interpreted as the physical location of the resource.  *<li> {@link OWLOntologyID}, which is interpreted as the public key of an ontology already stored by Stanbol.  *<li> {@link UriRef}, which is interpreted as the name of a graph to be retrieved from an underlying Clerezza  * store (typically a {@link TcProvider}).  *</ul>  *   * @author alexdma  *   * @param<R>  *            the resource reference.  */
 end_comment
 
 begin_class
@@ -94,8 +94,6 @@ name|Origin
 parameter_list|<
 name|R
 parameter_list|>
-implements|implements
-name|OriginOrInputSource
 block|{
 comment|/**      * Creates a new Origin for a resource that can be retrieved by dereferencing the given IRI as an URL.      *       * @param physicalURL      *            the physical location of the resource      * @return the origin that wraps this IRI.      */
 specifier|public
@@ -214,47 +212,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|OntologyInputSource
-argument_list|<
-name|?
-argument_list|>
-name|asInputSource
-parameter_list|()
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Unsupported conversion from "
-operator|+
-name|getClass
-argument_list|()
-operator|+
-literal|" to "
-operator|+
-name|OntologyInputSource
-operator|.
-name|class
-argument_list|)
-throw|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|Origin
-argument_list|<
-name|?
-argument_list|>
-name|asOrigin
-parameter_list|()
-block|{
-return|return
-name|this
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
 name|boolean
 name|equals
 parameter_list|(
@@ -317,28 +274,6 @@ parameter_list|()
 block|{
 return|return
 name|ref
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|isInputSource
-parameter_list|()
-block|{
-return|return
-literal|false
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|isOrigin
-parameter_list|()
-block|{
-return|return
-literal|true
 return|;
 block|}
 annotation|@

@@ -297,7 +297,7 @@ name|create
 argument_list|(
 name|Vocabulary
 operator|.
-name|SCOPE
+name|SCOPE_URIREF
 operator|.
 name|getUnicodeString
 argument_list|()

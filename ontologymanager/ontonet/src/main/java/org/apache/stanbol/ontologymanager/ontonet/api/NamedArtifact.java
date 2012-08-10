@@ -34,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Denotes any API artifact that has an identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @author alexdma  *   */
+comment|/**  * Denotes any API artifact that has an identifier. Both the identifier and the concatenation of the namespace  * with the identifier should be unique in the system. Having both a non-null namespace and ID is optional,  * but at least one of them should be non-null.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface
@@ -47,7 +47,7 @@ name|IRI
 name|getDefaultNamespace
 parameter_list|()
 function_decl|;
-comment|/**      * Returns a string (assumed to be unique in the system) that identifies this resource. For instance, a      * parent IRI of the base IRIs for the ontologies within an ontology space. Naming schemes are      * implementation-dependent.<br>      *<br>      * Note that in general a named resource is not aware of its uniqueness. It is not even implied that      * objects of different types cannot have the same ID. These aspects should be ensured by registries,      * indexers etc.<br>      *<br>      * TODO check if a type other than String (e.g. URI, IRI, UriRef) should be used.      *       * @return an identifier for this resource.      */
+comment|/**      * Returns a string (assumed to be unique in the system) that identifies this resource. For instance, a      * parent IRI of the base IRIs for the ontologies within an ontology space. Naming schemes are      * implementation-dependent.<br>      *<br>      * Note that in general a named resource is not aware of its uniqueness. It is not even implied that      * objects of different types cannot have the same ID. These aspects should be ensured by registries,      * indexers etc.<br>      *<br>      * XXX check if a type other than String (e.g. URI, IRI, UriRef) should be used.      *       * @return an identifier for this resource.      */
 name|String
 name|getID
 parameter_list|()

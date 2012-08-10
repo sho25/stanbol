@@ -195,7 +195,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OriginOrInputSource
+name|OntologyInputSource
 import|;
 end_import
 
@@ -631,7 +631,10 @@ parameter_list|,
 name|String
 name|scopeID
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|ontologySources
 parameter_list|)
@@ -653,7 +656,10 @@ try|try
 block|{
 for|for
 control|(
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 name|src
 range|:
 name|ontologySources
@@ -700,7 +706,10 @@ parameter_list|(
 name|String
 name|scopeId
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|coreSources
 parameter_list|)
@@ -740,7 +749,10 @@ parameter_list|(
 name|String
 name|scopeId
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|customSources
 parameter_list|)
@@ -783,7 +795,10 @@ parameter_list|,
 name|SpaceType
 name|type
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|ontologySources
 parameter_list|)

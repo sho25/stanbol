@@ -109,7 +109,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 import|;
 end_import
 
@@ -129,7 +129,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|MANAGES
+name|MANAGES_URIREF
 import|;
 end_import
 
@@ -220,6 +220,16 @@ operator|.
 name|io
 operator|.
 name|InputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
 import|;
 end_import
 
@@ -756,7 +766,7 @@ name|total
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getPublicKeys
+name|listOntologies
 argument_list|()
 operator|.
 name|size
@@ -770,12 +780,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|all
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -810,12 +815,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|main
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -849,12 +849,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|minor
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -888,12 +883,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|foaf
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -938,7 +928,7 @@ name|total
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getPublicKeys
+name|listOntologies
 argument_list|()
 operator|.
 name|size
@@ -954,12 +944,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|all
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -977,12 +962,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|main
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -1000,12 +980,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|minor
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -1023,12 +998,7 @@ name|ontologyProvider
 operator|.
 name|getStoredOntology
 argument_list|(
-name|ontologyProvider
-operator|.
-name|getKey
-argument_list|(
 name|foaf
-argument_list|)
 argument_list|,
 name|OWLOntology
 operator|.
@@ -1114,7 +1084,7 @@ literal|1
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getPublicKeys
+name|listOntologies
 argument_list|()
 operator|.
 name|size
@@ -1157,9 +1127,9 @@ name|id
 argument_list|)
 expr_stmt|;
 comment|// Check there is a storage key for the (real) ID of the FOAF ontology
-comment|//        key = ontologyProvider.getKey(foaf);
-comment|//        assertNotNull(key);
-comment|//        assertFalse(key.isAnonymous());
+comment|// key = ontologyProvider.getKey(foaf);
+comment|// assertNotNull(key);
+comment|// assertFalse(key.isAnonymous());
 name|assertTrue
 argument_list|(
 name|ontologyProvider
@@ -1187,7 +1157,7 @@ literal|1
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getPublicKeys
+name|listOntologies
 argument_list|()
 operator|.
 name|size
@@ -1195,9 +1165,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Check again for the FOAF key
-comment|//        key = ontologyProvider.getKey(foaf);
-comment|//        assertNotNull(key);
-comment|//        assertFalse(key.isAnonymous());
+comment|// key = ontologyProvider.getKey(foaf);
+comment|// assertNotNull(key);
+comment|// assertFalse(key.isAnonymous());
 name|assertTrue
 argument_list|(
 name|ontologyProvider
@@ -1293,7 +1263,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|preservesManagedOntologies
+name|scopePreservesManagedOntologies
 parameter_list|()
 throws|throws
 name|Exception
@@ -1345,6 +1315,34 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|Collection
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|cores
+init|=
+name|scope
+operator|.
+name|getCoreSpace
+argument_list|()
+operator|.
+name|listManagedOntologies
+argument_list|()
+decl_stmt|;
+name|Collection
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|customs
+init|=
+name|scope
+operator|.
+name|getCustomSpace
+argument_list|()
+operator|.
+name|listManagedOntologies
+argument_list|()
+decl_stmt|;
 comment|// Simulate Stanbol going down.
 name|log
 operator|.
@@ -1375,7 +1373,206 @@ argument_list|(
 name|sc
 argument_list|)
 expr_stmt|;
-comment|// assertEquals(scope, sc); XXX should scopes be equal on ID + content?
+name|assertEquals
+argument_list|(
+name|cores
+argument_list|,
+name|sc
+operator|.
+name|getCoreSpace
+argument_list|()
+operator|.
+name|listManagedOntologies
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+name|customs
+argument_list|,
+name|sc
+operator|.
+name|getCustomSpace
+argument_list|()
+operator|.
+name|listManagedOntologies
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+name|scope
+argument_list|,
+name|sc
+argument_list|)
+expr_stmt|;
+comment|// XXX Remember that only weak equality is implemented.
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|sessionPreservesManagedOntologies
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|String
+name|id
+init|=
+literal|"12345"
+decl_stmt|;
+comment|// The kind of thing an idiot would have on his luggage.
+name|Session
+name|session
+init|=
+name|sessionManager
+operator|.
+name|createSession
+argument_list|(
+name|id
+argument_list|)
+decl_stmt|;
+comment|// Anonymous ontologies must preserve their public keys!
+name|session
+operator|.
+name|addOntology
+argument_list|(
+operator|new
+name|GraphContentInputSource
+argument_list|(
+name|getClass
+argument_list|()
+operator|.
+name|getResourceAsStream
+argument_list|(
+literal|"/ontologies/nameless_ontology.owl"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Same for named ontologies...
+name|session
+operator|.
+name|addOntology
+argument_list|(
+operator|new
+name|GraphContentInputSource
+argument_list|(
+name|getClass
+argument_list|()
+operator|.
+name|getResourceAsStream
+argument_list|(
+literal|"/ontologies/nonexistentcharacters.owl"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// ... and versioned ontologies too.
+name|session
+operator|.
+name|addOntology
+argument_list|(
+operator|new
+name|GraphContentInputSource
+argument_list|(
+name|getClass
+argument_list|()
+operator|.
+name|getResourceAsStream
+argument_list|(
+literal|"/ontologies/versiontest_v1.owl"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|session
+operator|.
+name|addOntology
+argument_list|(
+operator|new
+name|GraphContentInputSource
+argument_list|(
+name|getClass
+argument_list|()
+operator|.
+name|getResourceAsStream
+argument_list|(
+literal|"/ontologies/versiontest_v2.owl"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|Collection
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|managed
+init|=
+name|session
+operator|.
+name|listManagedOntologies
+argument_list|()
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|4
+argument_list|,
+name|managed
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|// Simulate Stanbol going down.
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Stanbol going down..."
+argument_list|)
+expr_stmt|;
+name|resetOntologyProvider
+argument_list|()
+expr_stmt|;
+comment|// but keep the TcProvider
+name|resetManagers
+argument_list|()
+expr_stmt|;
+name|Session
+name|ses
+init|=
+name|sessionManager
+operator|.
+name|getSession
+argument_list|(
+name|id
+argument_list|)
+decl_stmt|;
+name|assertNotNull
+argument_list|(
+name|ses
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+name|managed
+argument_list|,
+name|ses
+operator|.
+name|listManagedOntologies
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+name|session
+argument_list|,
+name|ses
+argument_list|)
+expr_stmt|;
+comment|// XXX Remember that only weak equality is implemented.
 block|}
 comment|/*      * With this method, the ontology provider and all its internal indices are cleared. However, the Clerezza      * persistence objects are not cleared, so we can check if we can still retrieve metadata from them.      */
 specifier|private
@@ -1690,7 +1887,7 @@ comment|// Be strict: the whole property pair must be there.
 name|UriRef
 name|predicate
 init|=
-name|MANAGES
+name|MANAGES_URIREF
 decl_stmt|;
 name|assertTrue
 argument_list|(
@@ -1712,7 +1909,7 @@ argument_list|)
 expr_stmt|;
 name|predicate
 operator|=
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 expr_stmt|;
 name|assertTrue
 argument_list|(
@@ -1769,7 +1966,7 @@ argument_list|)
 decl_stmt|;
 name|predicate
 operator|=
-name|MANAGES
+name|MANAGES_URIREF
 expr_stmt|;
 name|assertTrue
 argument_list|(
@@ -1791,7 +1988,7 @@ argument_list|)
 expr_stmt|;
 name|predicate
 operator|=
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 expr_stmt|;
 name|assertTrue
 argument_list|(

@@ -259,7 +259,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|Origin
+name|RootOntologyIRISource
 import|;
 end_import
 
@@ -987,7 +987,7 @@ name|resurrect
 argument_list|)
 expr_stmt|;
 block|}
-comment|//    @Test
+comment|// @Test
 specifier|public
 name|void
 name|zombieSessionClearsContents
@@ -1007,10 +1007,10 @@ name|ses
 operator|.
 name|addOntology
 argument_list|(
-name|Origin
-operator|.
-name|create
+operator|new
+name|RootOntologyIRISource
 argument_list|(
+operator|(
 name|IRI
 operator|.
 name|create
@@ -1023,6 +1023,7 @@ argument_list|(
 literal|"/ontologies/mockfoaf.rdf"
 argument_list|)
 argument_list|)
+operator|)
 argument_list|)
 argument_list|)
 expr_stmt|;

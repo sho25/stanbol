@@ -307,7 +307,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|Origin
+name|StoredOntologySource
 import|;
 end_import
 
@@ -1080,7 +1080,7 @@ literal|null
 decl_stmt|;
 try|try
 block|{
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|offline
 operator|.
@@ -1109,7 +1109,7 @@ argument_list|,
 name|_ONTOLOGY_NETWORK_NS_DEFAULT
 argument_list|)
 expr_stmt|;
-name|setNamespace
+name|setDefaultNamespace
 argument_list|(
 name|IRI
 operator|.
@@ -2006,10 +2006,8 @@ name|session
 operator|.
 name|addOntology
 argument_list|(
-comment|// new GraphSource(key)
-name|Origin
-operator|.
-name|create
+operator|new
+name|StoredOntologySource
 argument_list|(
 name|key
 argument_list|)

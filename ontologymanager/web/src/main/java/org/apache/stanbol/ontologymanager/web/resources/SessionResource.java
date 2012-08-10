@@ -1127,7 +1127,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|Origin
+name|RootOntologyIRISource
 import|;
 end_import
 
@@ -1147,7 +1147,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|RootOntologyIRISource
+name|StoredOntologySource
 import|;
 end_import
 
@@ -5180,9 +5180,8 @@ name|session
 operator|.
 name|addOntology
 argument_list|(
-name|Origin
-operator|.
-name|create
+operator|new
+name|StoredOntologySource
 argument_list|(
 name|OntologyUtils
 operator|.

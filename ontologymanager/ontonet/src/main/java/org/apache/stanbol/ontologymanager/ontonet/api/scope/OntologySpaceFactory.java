@@ -55,7 +55,7 @@ name|api
 operator|.
 name|io
 operator|.
-name|OriginOrInputSource
+name|OntologyInputSource
 import|;
 end_import
 
@@ -99,7 +99,10 @@ parameter_list|(
 name|String
 name|scopeId
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|coreOntologies
 parameter_list|)
@@ -111,7 +114,10 @@ parameter_list|(
 name|String
 name|scopeId
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|customOntologies
 parameter_list|)
@@ -126,7 +132,10 @@ parameter_list|,
 name|SpaceType
 name|type
 parameter_list|,
-name|OriginOrInputSource
+name|OntologyInputSource
+argument_list|<
+name|?
+argument_list|>
 modifier|...
 name|ontologySources
 parameter_list|)

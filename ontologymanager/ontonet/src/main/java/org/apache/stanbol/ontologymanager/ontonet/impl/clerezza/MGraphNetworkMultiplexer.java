@@ -37,7 +37,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|APPENDED_TO
+name|APPENDED_TO_URIREF
 import|;
 end_import
 
@@ -57,7 +57,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|ENTRY
+name|ENTRY_URIREF
 import|;
 end_import
 
@@ -77,7 +77,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_APPENDED
+name|HAS_APPENDED_URIREF
 import|;
 end_import
 
@@ -97,7 +97,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 import|;
 end_import
 
@@ -117,7 +117,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 import|;
 end_import
 
@@ -137,7 +137,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 import|;
 end_import
 
@@ -157,7 +157,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|MANAGES
+name|MANAGES_URIREF
 import|;
 end_import
 
@@ -177,7 +177,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|SESSION
+name|SESSION_URIREF
 import|;
 end_import
 
@@ -197,7 +197,7 @@ name|api
 operator|.
 name|Vocabulary
 operator|.
-name|SIZE_IN_TRIPLES
+name|SIZE_IN_TRIPLES_URIREF
 import|;
 end_import
 
@@ -279,6 +279,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|LiteralFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|MGraph
 import|;
 end_import
@@ -312,6 +328,22 @@ operator|.
 name|core
 operator|.
 name|Triple
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|TypedLiteral
 import|;
 end_import
 
@@ -666,7 +698,7 @@ name|filter
 argument_list|(
 name|resource
 argument_list|,
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -713,6 +745,30 @@ name|getUnicodeString
 argument_list|()
 argument_list|)
 expr_stmt|;
+elseif|else
+if|if
+condition|(
+name|obj
+operator|instanceof
+name|Literal
+condition|)
+name|oiri
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+operator|(
+operator|(
+name|Literal
+operator|)
+name|obj
+operator|)
+operator|.
+name|getLexicalForm
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 else|else
 block|{
@@ -737,7 +793,7 @@ name|filter
 argument_list|(
 name|resource
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -781,6 +837,30 @@ name|obj
 operator|)
 operator|.
 name|getUnicodeString
+argument_list|()
+argument_list|)
+expr_stmt|;
+elseif|else
+if|if
+condition|(
+name|obj
+operator|instanceof
+name|Literal
+condition|)
+name|viri
+operator|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+operator|(
+operator|(
+name|Literal
+operator|)
+name|obj
+operator|)
+operator|.
+name|getLexicalForm
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -884,6 +964,54 @@ name|match
 init|=
 literal|null
 decl_stmt|;
+name|LiteralFactory
+name|lf
+init|=
+name|LiteralFactory
+operator|.
+name|getInstance
+argument_list|()
+decl_stmt|;
+name|TypedLiteral
+name|oiri
+init|=
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
+operator|new
+name|UriRef
+argument_list|(
+name|ontologyIri
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|TypedLiteral
+name|viri
+init|=
+name|versionIri
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|lf
+operator|.
+name|createTypedLiteral
+argument_list|(
+operator|new
+name|UriRef
+argument_list|(
+name|versionIri
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|Iterator
@@ -898,16 +1026,9 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|HAS_ONTOLOGY_IRI
+name|HAS_ONTOLOGY_IRI_URIREF
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|ontologyIri
-operator|.
-name|toString
-argument_list|()
-argument_list|)
+name|oiri
 argument_list|)
 init|;
 name|it
@@ -965,7 +1086,7 @@ continue|continue;
 block|}
 if|if
 condition|(
-name|versionIri
+name|viri
 operator|!=
 literal|null
 condition|)
@@ -985,16 +1106,9 @@ name|UriRef
 operator|)
 name|subj
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|versionIri
-operator|.
-name|toString
-argument_list|()
-argument_list|)
+name|viri
 argument_list|)
 argument_list|)
 condition|)
@@ -1043,7 +1157,7 @@ name|UriRef
 operator|)
 name|subj
 argument_list|,
-name|HAS_VERSION_IRI
+name|HAS_VERSION_IRI_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -1248,7 +1362,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|ENTRY
+name|ENTRY_URIREF
 argument_list|)
 decl_stmt|;
 while|while
@@ -1324,7 +1438,7 @@ name|filter
 argument_list|(
 name|subj
 argument_list|,
-name|SIZE_IN_TRIPLES
+name|SIZE_IN_TRIPLES_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -1536,7 +1650,7 @@ name|filter
 argument_list|(
 name|u
 argument_list|,
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 argument_list|,
 literal|null
 argument_list|)
@@ -1582,7 +1696,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|MANAGES
+name|MANAGES_URIREF
 argument_list|,
 name|u
 argument_list|)
@@ -1645,11 +1759,11 @@ condition|)
 block|{
 name|predicate1
 operator|=
-name|MANAGES
+name|MANAGES_URIREF
 expr_stmt|;
 name|predicate2
 operator|=
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 expr_stmt|;
 block|}
 elseif|else
@@ -1663,11 +1777,11 @@ block|{
 comment|// TODO implement model for sessions.
 name|predicate1
 operator|=
-name|MANAGES
+name|MANAGES_URIREF
 expr_stmt|;
 name|predicate2
 operator|=
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 expr_stmt|;
 block|}
 else|else
@@ -1989,7 +2103,7 @@ name|property
 operator|.
 name|equals
 argument_list|(
-name|MANAGES
+name|MANAGES_URIREF
 argument_list|)
 condition|)
 name|badState
@@ -2063,7 +2177,7 @@ name|property
 operator|.
 name|equals
 argument_list|(
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 argument_list|)
 condition|)
 name|badState
@@ -2112,7 +2226,7 @@ name|TripleImpl
 argument_list|(
 name|c
 argument_list|,
-name|MANAGES
+name|MANAGES_URIREF
 argument_list|,
 name|u
 argument_list|)
@@ -2127,7 +2241,7 @@ name|TripleImpl
 argument_list|(
 name|u
 argument_list|,
-name|IS_MANAGED_BY
+name|IS_MANAGED_BY_URIREF
 argument_list|,
 name|c
 argument_list|)
@@ -2202,7 +2316,7 @@ name|TripleImpl
 argument_list|(
 name|sessionur
 argument_list|,
-name|HAS_APPENDED
+name|HAS_APPENDED_URIREF
 argument_list|,
 name|scopeur
 argument_list|)
@@ -2217,7 +2331,7 @@ name|TripleImpl
 argument_list|(
 name|scopeur
 argument_list|,
-name|APPENDED_TO
+name|APPENDED_TO_URIREF
 argument_list|,
 name|sessionur
 argument_list|)
@@ -2292,7 +2406,7 @@ name|TripleImpl
 argument_list|(
 name|sessionur
 argument_list|,
-name|HAS_APPENDED
+name|HAS_APPENDED_URIREF
 argument_list|,
 name|scopeur
 argument_list|)
@@ -2307,7 +2421,7 @@ name|TripleImpl
 argument_list|(
 name|scopeur
 argument_list|,
-name|APPENDED_TO
+name|APPENDED_TO_URIREF
 argument_list|,
 name|sessionur
 argument_list|)
@@ -2398,7 +2512,7 @@ name|RDF
 operator|.
 name|type
 argument_list|,
-name|SESSION
+name|SESSION_URIREF
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2511,7 +2625,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|SESSION
+name|SESSION_URIREF
 operator|.
 name|equals
 argument_list|(
@@ -2567,7 +2681,7 @@ name|error
 argument_list|(
 literal|"-- is not typed as a {} in the meta-graph."
 argument_list|,
-name|SESSION
+name|SESSION_URIREF
 argument_list|)
 expr_stmt|;
 block|}

@@ -137,16 +137,6 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Set
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -944,50 +934,11 @@ name|getRootOntology
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Set
-argument_list|<
-name|TripleCollection
-argument_list|>
-name|imported
-init|=
-name|gis
-operator|.
-name|getImports
-argument_list|(
-literal|false
-argument_list|)
-decl_stmt|;
-comment|// Number of stored graphs minus the importing one minus the reserved graph = imported graphs
-name|assertEquals
-argument_list|(
-name|tcManager
-operator|.
-name|listTripleCollections
-argument_list|()
-operator|.
-name|size
-argument_list|()
-operator|-
-literal|2
-argument_list|,
-name|imported
-operator|.
-name|size
-argument_list|()
-argument_list|)
-expr_stmt|;
-for|for
-control|(
-name|TripleCollection
-name|g
-range|:
-name|imported
-control|)
-name|assertNotNull
-argument_list|(
-name|g
-argument_list|)
-expr_stmt|;
+comment|// Set<TripleCollection> imported = gis.getImports(false);
+comment|// // Number of stored graphs minus the importing one minus the reserved graph = imported graphs
+comment|// assertEquals(tcManager.listTripleCollections().size() - 2, imported.size());
+comment|// for (TripleCollection g : imported)
+comment|// assertNotNull(g);
 block|}
 block|}
 end_class
