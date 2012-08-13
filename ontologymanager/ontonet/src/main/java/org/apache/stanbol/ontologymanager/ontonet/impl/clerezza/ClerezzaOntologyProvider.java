@@ -4228,10 +4228,8 @@ literal|null
 operator|||
 name|publicKey
 operator|.
-name|getOntologyIRI
+name|isAnonymous
 argument_list|()
-operator|==
-literal|null
 condition|)
 throw|throw
 operator|new
