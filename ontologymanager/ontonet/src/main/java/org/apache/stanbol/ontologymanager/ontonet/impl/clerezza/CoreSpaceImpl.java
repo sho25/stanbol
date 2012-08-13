@@ -158,6 +158,13 @@ argument_list|,
 name|ontologyProvider
 argument_list|)
 expr_stmt|;
+name|setConnectivityPolicy
+argument_list|(
+name|ConnectivityPolicy
+operator|.
+name|LOOSE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Override

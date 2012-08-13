@@ -44,6 +44,18 @@ specifier|public
 interface|interface
 name|OWLExportable
 block|{
+comment|/**      * The policy that determines how an OWL exportable objects should represent other referenced objects.      *       * @author alexdma      *       */
+specifier|public
+enum|enum
+name|ConnectivityPolicy
+block|{
+comment|/**          * A minimum set of import statements will be used to connect this artifact with other referenced          * objects.          */
+name|LOOSE
+block|,
+comment|/**          * This artifact will be connected with other referenced objects using as many import statements as          * can guarantee the greatest expressiveness of the ontologies.          */
+name|TIGHT
+block|}
+empty_stmt|;
 comment|/**      * Returns an ontological form of this object of the specified return type, if supported. If the supplied      * class is not a supported return type, an {@link UnsupportedOperationException} is thrown.<br>      *<br>      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param returnType      *            the desired class of the returned object.      * @param merge      *            if true, all imported ontologies will be merged and no import statements will appear.      * @return the ontology that represents this object.      */
 parameter_list|<
 name|O
@@ -79,6 +91,19 @@ name|merge
 parameter_list|,
 name|IRI
 name|universalPrefix
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the connectivity policy adopted by this object when exported to an OWL artifact.      *       * @return the connectivity policy.      */
+name|ConnectivityPolicy
+name|getConnectivityPolicy
+parameter_list|()
+function_decl|;
+comment|/**      * Sets the connectivity policy that will be adopted by this object when it is exported to an OWL      * artifact.      *       * @param policy      *            the new connectivity policy.      */
+name|void
+name|setConnectivityPolicy
+parameter_list|(
+name|ConnectivityPolicy
+name|policy
 parameter_list|)
 function_decl|;
 block|}

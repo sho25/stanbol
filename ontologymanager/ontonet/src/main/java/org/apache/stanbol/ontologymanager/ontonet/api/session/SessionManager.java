@@ -86,6 +86,12 @@ name|NamedArtifact
 extends|,
 name|SessionListenable
 block|{
+comment|/**      * The key used to configure the connectivity policy.      */
+name|String
+name|CONNECTIVITY_POLICY
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.session_connectivity"
+decl_stmt|;
 comment|/**      * The key used to configure the base namespace of the ontology network.      */
 name|String
 name|ID

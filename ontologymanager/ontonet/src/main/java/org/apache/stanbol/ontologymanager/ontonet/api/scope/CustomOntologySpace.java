@@ -31,27 +31,7 @@ interface|interface
 name|CustomOntologySpace
 extends|extends
 name|OntologySpace
-block|{
-enum|enum
-name|ConnectivityPolicy
-block|{
-name|LOOSE
-block|,
-name|TIGHT
-block|}
-empty_stmt|;
-name|ConnectivityPolicy
-name|getConnectivityPolicy
-parameter_list|()
-function_decl|;
-name|void
-name|setConnectivityPolicy
-parameter_list|(
-name|ConnectivityPolicy
-name|policy
-parameter_list|)
-function_decl|;
-block|}
+block|{  }
 end_interface
 
 end_unit
