@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_comment
@@ -26,40 +26,6 @@ end_package
 begin_comment
 comment|/**  *  * @author elvio  */
 end_comment
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|ontology
-operator|.
-name|AnnotationProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|rdf
-operator|.
-name|model
-operator|.
-name|StmtIterator
-import|;
-end_import
 
 begin_import
 import|import
@@ -95,24 +61,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|owl
-operator|.
-name|transformation
-operator|.
-name|JenaToOwlConvert
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -134,6 +82,20 @@ operator|.
 name|model
 operator|.
 name|IRI
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLAnnotation
 import|;
 end_import
 
@@ -203,6 +165,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLClassAssertionAxiom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLDataFactory
 import|;
 end_import
@@ -246,6 +222,48 @@ operator|.
 name|model
 operator|.
 name|OWLDatatype
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLDeclarationAxiom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLIndividualAxiom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLLiteral
 import|;
 end_import
 
@@ -330,6 +348,22 @@ operator|.
 name|model
 operator|.
 name|OWLOntologyManager
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|ontology
+operator|.
+name|AnnotationProperty
 import|;
 end_import
 
@@ -495,81 +529,29 @@ name|hpl
 operator|.
 name|jena
 operator|.
+name|rdf
+operator|.
+name|model
+operator|.
+name|StmtIterator
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
 name|util
 operator|.
 name|iterator
 operator|.
 name|ExtendedIterator
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLAnnotation
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLClassAssertionAxiom
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLDeclarationAxiom
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLIndividualAxiom
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|OWLLiteral
 import|;
 end_import
 
@@ -934,7 +916,7 @@ argument_list|(
 name|cls
 argument_list|)
 decl_stmt|;
-comment|//Classe
+comment|// Classe
 name|OWLDeclarationAxiom
 name|daxiomop
 init|=
@@ -945,7 +927,7 @@ argument_list|(
 name|op
 argument_list|)
 decl_stmt|;
-comment|//obj prop
+comment|// obj prop
 name|OWLDeclarationAxiom
 name|daxiomdp
 init|=
@@ -956,7 +938,7 @@ argument_list|(
 name|dp
 argument_list|)
 decl_stmt|;
-comment|//data prop
+comment|// data prop
 name|OWLDeclarationAxiom
 name|daxiomsub
 init|=
@@ -967,7 +949,7 @@ argument_list|(
 name|sub
 argument_list|)
 decl_stmt|;
-comment|//subject
+comment|// subject
 name|OWLDeclarationAxiom
 name|daxiomobj
 init|=
@@ -978,7 +960,7 @@ argument_list|(
 name|obj
 argument_list|)
 decl_stmt|;
-comment|//object
+comment|// object
 name|OWLClassAssertionAxiom
 name|axiomsub
 init|=
@@ -991,7 +973,7 @@ argument_list|,
 name|sub
 argument_list|)
 decl_stmt|;
-comment|//Istanza
+comment|// Istanza
 name|OWLClassAssertionAxiom
 name|axiomobj
 init|=
@@ -1004,7 +986,7 @@ argument_list|,
 name|obj
 argument_list|)
 decl_stmt|;
-comment|//Istanza
+comment|// Istanza
 name|OWLObjectPropertyAssertionAxiom
 name|axiomop
 init|=
@@ -1019,7 +1001,10 @@ argument_list|,
 name|obj
 argument_list|)
 decl_stmt|;
-comment|//Obj prop tra individui
+comment|// Obj
+comment|// prop
+comment|// tra
+comment|// individui
 name|OWLDataPropertyAssertionAxiom
 name|axiomvalue
 init|=
@@ -1034,7 +1019,7 @@ argument_list|,
 name|literal1
 argument_list|)
 decl_stmt|;
-comment|//Dataprop all'istanza;
+comment|// Dataprop all'istanza;
 name|OWLAnnotationAssertionAxiom
 name|axioman
 init|=
@@ -1050,7 +1035,7 @@ argument_list|,
 name|oav
 argument_list|)
 decl_stmt|;
-comment|//Annotazione
+comment|// Annotazione
 name|mgr
 operator|.
 name|addAxiom
@@ -3700,7 +3685,7 @@ argument_list|(
 name|cls
 argument_list|)
 decl_stmt|;
-comment|//Classe
+comment|// Classe
 name|OWLDeclarationAxiom
 name|daxiomop
 init|=
@@ -3711,7 +3696,7 @@ argument_list|(
 name|op
 argument_list|)
 decl_stmt|;
-comment|//obj prop
+comment|// obj prop
 name|OWLDeclarationAxiom
 name|daxiomdp
 init|=
@@ -3722,7 +3707,7 @@ argument_list|(
 name|dp
 argument_list|)
 decl_stmt|;
-comment|//data prop
+comment|// data prop
 name|OWLDeclarationAxiom
 name|daxiomsub
 init|=
@@ -3733,7 +3718,7 @@ argument_list|(
 name|sub
 argument_list|)
 decl_stmt|;
-comment|//subject
+comment|// subject
 name|OWLDeclarationAxiom
 name|daxiomobj
 init|=
@@ -3744,7 +3729,7 @@ argument_list|(
 name|obj
 argument_list|)
 decl_stmt|;
-comment|//object
+comment|// object
 name|OWLClassAssertionAxiom
 name|axiomsub
 init|=
@@ -3757,7 +3742,7 @@ argument_list|,
 name|sub
 argument_list|)
 decl_stmt|;
-comment|//Istanza
+comment|// Istanza
 name|OWLClassAssertionAxiom
 name|axiomobj
 init|=
@@ -3770,7 +3755,7 @@ argument_list|,
 name|obj
 argument_list|)
 decl_stmt|;
-comment|//Istanza
+comment|// Istanza
 name|OWLObjectPropertyAssertionAxiom
 name|axiomop
 init|=
@@ -3785,7 +3770,10 @@ argument_list|,
 name|obj
 argument_list|)
 decl_stmt|;
-comment|//Obj prop tra individui
+comment|// Obj
+comment|// prop
+comment|// tra
+comment|// individui
 name|OWLDataPropertyAssertionAxiom
 name|axiomvalue
 init|=
@@ -3800,7 +3788,7 @@ argument_list|,
 name|literal1
 argument_list|)
 decl_stmt|;
-comment|//Dataprop all'istanza;
+comment|// Dataprop all'istanza;
 name|OWLAnnotationAssertionAxiom
 name|axioman
 init|=
@@ -3816,7 +3804,7 @@ argument_list|,
 name|oav
 argument_list|)
 decl_stmt|;
-comment|//Annotazione
+comment|// Annotazione
 name|mgr
 operator|.
 name|addAxiom

@@ -431,12 +431,6 @@ init|=
 literal|"/ontologies/versiontest_v2.owl"
 decl_stmt|;
 specifier|private
-name|String
-name|oiri
-init|=
-literal|"http://stanbol.apache.org/ontologies/versiontest"
-decl_stmt|;
-specifier|private
 name|OntologyProvider
 argument_list|<
 name|TcProvider
@@ -597,7 +591,7 @@ literal|2
 argument_list|,
 name|ontologyProvider
 operator|.
-name|getPublicKeys
+name|listOntologies
 argument_list|()
 operator|.
 name|size

@@ -232,7 +232,7 @@ literal|"<ONTOLOGY_CONTENT>"
 operator|+
 name|OWLUtils
 operator|.
-name|guessOntologyIdentifier
+name|extractOntologyID
 argument_list|(
 name|getRootOntology
 argument_list|()

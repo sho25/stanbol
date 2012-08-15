@@ -2619,7 +2619,7 @@ name|iri
 init|=
 name|OWLUtils
 operator|.
-name|guessOntologyIdentifier
+name|extractOntologyID
 argument_list|(
 name|o
 argument_list|)

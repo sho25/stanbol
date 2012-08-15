@@ -7167,7 +7167,7 @@ name|publicKey
 init|=
 name|OWLUtils
 operator|.
-name|guessOntologyIdentifier
+name|extractOntologyID
 argument_list|(
 name|rdfData
 argument_list|)
@@ -7384,7 +7384,7 @@ name|idFromSrc
 init|=
 name|OWLUtils
 operator|.
-name|guessOntologyIdentifier
+name|extractOntologyID
 argument_list|(
 name|rdfData
 argument_list|)
@@ -7394,7 +7394,7 @@ name|idFromStore
 init|=
 name|OWLUtils
 operator|.
-name|guessOntologyIdentifier
+name|extractOntologyID
 argument_list|(
 name|store
 operator|.
