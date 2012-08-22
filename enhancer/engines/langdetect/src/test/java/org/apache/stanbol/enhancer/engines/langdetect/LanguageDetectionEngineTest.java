@@ -96,6 +96,18 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -330,6 +342,16 @@ operator|.
 name|rdf
 operator|.
 name|Properties
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 import|;
 end_import
 
@@ -865,18 +887,17 @@ argument_list|,
 name|expectedValues
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|assertTrue
 argument_list|(
-literal|"A single TextAnnotation is expected"
-argument_list|,
-literal|1
+literal|"A TextAnnotation is expected"
 argument_list|,
 name|textAnnotationCount
+operator|>
+literal|0
 argument_list|)
 expr_stmt|;
-comment|//even through this tests do not validate service quality but rather
-comment|//the correct integration of the CELI service as EnhancementEngine
-comment|//we expect the "en" is detected for the parsed text
+comment|//even through this tests do not validate detection quality
+comment|//we expect the "en" is detected as best guess for the parsed text
 name|assertEquals
 argument_list|(
 literal|"The detected language for text '"
