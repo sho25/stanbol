@@ -347,7 +347,7 @@ name|assertContentRegexp
 argument_list|(
 literal|"\"entity-reference\": \"http://dbpedia.org/resource/London\","
 argument_list|,
-literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine\""
+literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
 argument_list|,
 literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\""
 argument_list|)

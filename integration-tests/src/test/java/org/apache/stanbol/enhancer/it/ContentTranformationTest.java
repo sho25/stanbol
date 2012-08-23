@@ -112,7 +112,7 @@ argument_list|)
 argument_list|,
 literal|"tika"
 argument_list|,
-literal|"langid"
+literal|"langdetect"
 argument_list|)
 expr_stmt|;
 block|}

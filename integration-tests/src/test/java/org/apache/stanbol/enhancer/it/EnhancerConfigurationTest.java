@@ -88,6 +88,8 @@ literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbped
 argument_list|,
 literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langid\"/>"
 argument_list|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langdetect\"/>"
+argument_list|,
 literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/tika\"/>"
 argument_list|,
 literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/ner\"/>"
@@ -151,6 +153,8 @@ argument_list|,
 literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpediaLinking\"/>"
 argument_list|,
 literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langid\"/>"
+argument_list|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langdetect\"/>"
 argument_list|,
 literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/tika\"/>"
 argument_list|,

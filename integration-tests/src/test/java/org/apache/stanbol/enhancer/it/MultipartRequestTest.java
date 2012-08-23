@@ -1198,7 +1198,7 @@ argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:content-item-sha1-.*"
 argument_list|,
 comment|//and the expected enhancements in the metadata
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
@@ -1343,7 +1343,7 @@ comment|//MUST NOT contain
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=.*"
 argument_list|,
 comment|//and the expected enhancements in the metadata
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
@@ -1467,7 +1467,7 @@ argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 comment|//and the expected enhancements in the metadata
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
@@ -1596,7 +1596,7 @@ argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 comment|//and the expected enhancements in the metadata
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
@@ -1870,7 +1870,7 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 comment|//and the expected enhancements in the metadata
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
@@ -2467,7 +2467,7 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 comment|//and the expected enhancements based on the parsed content
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,

@@ -201,9 +201,9 @@ name|String
 index|[]
 block|{
 comment|//"metaxa","MetaxaEngine", deactivated see STANBOL-510
-literal|"langid"
+literal|"langdetect"
 block|,
-literal|"LangIdEnhancementEngine"
+literal|"LanguageDetectionEnhancementEngine"
 block|,
 literal|"ner"
 block|,

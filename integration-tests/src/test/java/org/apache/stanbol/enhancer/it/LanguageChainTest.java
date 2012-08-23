@@ -45,9 +45,9 @@ argument_list|(
 literal|"language"
 argument_list|)
 argument_list|,
-literal|"langid"
+literal|"langdetect"
 argument_list|,
-literal|"LangIdEnhancementEngine"
+literal|"LanguageDetectionEnhancementEngine"
 argument_list|)
 expr_stmt|;
 block|}
@@ -97,7 +97,7 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 comment|// it MUST detect the language
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|)

@@ -88,7 +88,7 @@ block|,
 literal|"application/json"
 block|,
 comment|//now JSON LD uses application/json
-literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine\","
+literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\","
 block|,
 literal|"application/rdf+xml"
 block|,
@@ -100,7 +100,7 @@ literal|"application/rdf+json"
 block|,
 literal|"application/rdf+json"
 block|,
-literal|"\"value\":\"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine\""
+literal|"\"value\":\"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
 block|,
 literal|"text/turtle"
 block|,
@@ -204,7 +204,7 @@ argument_list|,
 comment|//check execution of tika& if executionPlan is included
 literal|"http://stanbol.apache.org/ontology/enhancer/executionplan#engine.*tika"
 argument_list|,
-literal|"http://purl.org/dc/terms/creator.*LangIdEnhancementEngine"
+literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
 argument_list|,
 literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
