@@ -498,7 +498,7 @@ argument_list|,
 literal|"IU"
 argument_list|)
 block|,
-comment|/**      * Nouns related POS types for Spanish language.      * I was not able to find the list, so POS tag results where used to       * create this configuration.      */
+comment|/**      * Nouns related POS types for Spanish language.      * The description of the Tagset is available at      * http://www.lsi.upc.edu/~nlp/SVMTool/parole.html      */
 name|ES_NOUN
 argument_list|(
 literal|"es"
