@@ -3149,13 +3149,13 @@ name|label
 operator|.
 name|getText
 argument_list|()
-operator|.
-name|toLowerCase
-argument_list|()
 else|:
 name|label
 operator|.
 name|getText
+argument_list|()
+operator|.
+name|toLowerCase
 argument_list|()
 argument_list|,
 name|namedEntityLabel
