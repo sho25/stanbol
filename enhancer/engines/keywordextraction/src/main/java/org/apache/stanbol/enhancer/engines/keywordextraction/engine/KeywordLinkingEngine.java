@@ -4159,7 +4159,7 @@ throw|;
 block|}
 name|linkerConfig
 operator|.
-name|setMaxSuggestions
+name|setMinSearchTokenLength
 argument_list|(
 name|minSearchTokenLength
 argument_list|)
