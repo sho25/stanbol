@@ -1581,7 +1581,7 @@ name|Program
 argument_list|<
 name|Object
 argument_list|>
-name|prepairQueryLDPathProgram
+name|prepareQueryLDPathProgram
 parameter_list|(
 name|String
 name|ldpathProgram

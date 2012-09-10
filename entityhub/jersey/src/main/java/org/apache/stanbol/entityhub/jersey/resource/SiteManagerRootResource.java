@@ -315,7 +315,7 @@ name|utils
 operator|.
 name|LDPathHelper
 operator|.
-name|prepairQueryLDPathProgram
+name|prepareQueryLDPathProgram
 import|;
 end_import
 
@@ -2925,7 +2925,7 @@ try|try
 block|{
 name|program
 operator|=
-name|prepairQueryLDPathProgram
+name|prepareQueryLDPathProgram
 argument_list|(
 name|ldpathProgramString
 argument_list|,
