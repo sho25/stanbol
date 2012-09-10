@@ -1154,12 +1154,6 @@ name|ComponentContext
 name|context
 parameter_list|)
 throws|throws
-name|IllegalArgumentException
-throws|,
-name|IOException
-throws|,
-name|InvalidSyntaxException
-throws|,
 name|StoreException
 block|{
 if|if
@@ -1313,6 +1307,8 @@ specifier|public
 name|void
 name|createEnhancementGraph
 parameter_list|()
+throws|throws
+name|StoreException
 block|{
 specifier|final
 name|UriRef
@@ -1436,6 +1432,15 @@ argument_list|(
 literal|"Failed to get ServiceReference for TripleCollection"
 argument_list|)
 expr_stmt|;
+throw|throw
+operator|new
+name|StoreException
+argument_list|(
+literal|"Failed to get ServiceReference for TripleCollection"
+argument_list|,
+name|e
+argument_list|)
+throw|;
 block|}
 block|}
 specifier|private
