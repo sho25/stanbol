@@ -21,46 +21,6 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|engines
-operator|.
-name|uimalocal
-operator|.
-name|endorsed
-operator|.
-name|AEProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|engines
-operator|.
-name|uimalocal
-operator|.
-name|endorsed
-operator|.
-name|AEProviderFactory
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -273,6 +233,22 @@ name|commons
 operator|.
 name|caslight
 operator|.
+name|Feature
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|caslight
+operator|.
 name|FeatureStructure
 import|;
 end_import
@@ -301,11 +277,35 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|commons
+name|enhancer
 operator|.
-name|caslight
+name|engines
 operator|.
-name|Feature
+name|uimalocal
+operator|.
+name|endorsed
+operator|.
+name|AEProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|engines
+operator|.
+name|uimalocal
+operator|.
+name|endorsed
+operator|.
+name|AEProviderFactory
 import|;
 end_import
 
@@ -622,7 +622,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  * @author Mihaly Heder  */
+comment|/**  * @author Mihaly Heder  */
 end_comment
 
 begin_class
@@ -687,17 +687,7 @@ name|EnhancementEngine
 implements|,
 name|ServiceProperties
 block|{
-name|Imports
-name|imports
-init|=
-operator|new
-name|Imports
-argument_list|()
-decl_stmt|;
 specifier|private
-name|AEProvider
-name|aeProvider
-decl_stmt|;
 specifier|final
 name|Logger
 name|logger
@@ -706,8 +696,6 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|this
-operator|.
 name|getClass
 argument_list|()
 argument_list|)
@@ -725,9 +713,7 @@ literal|"UIMA source name"
 argument_list|,
 name|description
 operator|=
-literal|"The name of this UIMA source"
-operator|+
-literal|"The sourcename will be used for referring internally to the UIMA endpoint"
+literal|"The name of this UIMA source which will be used for referring internally to the UIMA endpoint"
 argument_list|)
 specifier|public
 specifier|static
@@ -802,9 +788,7 @@ literal|"Supported Mime Types"
 argument_list|,
 name|description
 operator|=
-literal|"Mime Types supported by this client. This should be aligned to the capabilities of the "
-operator|+
-literal|"UIMA Endpoints."
+literal|"Mime Types supported by this client. This should be aligned to the capabilities of the UIMA Endpoints."
 argument_list|)
 specifier|public
 specifier|static
@@ -823,6 +807,10 @@ init|=
 name|ServiceProperties
 operator|.
 name|ORDERING_PRE_PROCESSING
+decl_stmt|;
+specifier|private
+name|AEProvider
+name|aeProvider
 decl_stmt|;
 specifier|private
 name|Set
