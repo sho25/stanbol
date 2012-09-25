@@ -895,7 +895,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|" *** Triples scanned : {}, filtered : {}"
+literal|" ... Triples scanned : {}; filtered in : {}"
 argument_list|,
 name|graph
 operator|.
@@ -912,7 +912,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|" *** Time : {} ms"
+literal|" ... Time : {} ms"
 argument_list|,
 name|System
 operator|.

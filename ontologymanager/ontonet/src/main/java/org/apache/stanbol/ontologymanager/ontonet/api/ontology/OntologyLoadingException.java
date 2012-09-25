@@ -17,22 +17,22 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|collector
+name|ontology
 package|;
 end_package
 
 begin_comment
-comment|/**  * Thrown whenever an illegal operation that modifies an ontology collector is detected and denied.  */
+comment|/**  * A runtime exception denoting that trying to load an ontology into the Ontology Manager has caused an  * undesired status. The reason is most likely to be found in the cause registered with this exception.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OntologyCollectorModificationException
+name|OntologyLoadingException
 extends|extends
 name|RuntimeException
 block|{
-comment|/** 	 *  	 */
+comment|/**      *       */
 specifier|private
 specifier|static
 specifier|final
@@ -40,59 +40,35 @@ name|long
 name|serialVersionUID
 init|=
 operator|-
-literal|5147080356192253724L
+literal|8496827319814210715L
 decl_stmt|;
-comment|/**      * The affected ontology collector.      */
-specifier|protected
-name|OntologyCollector
-name|collector
-decl_stmt|;
-comment|/**      * Creates a new instance of OntologySpaceModificationException.      *       * @param space      *            the ontology space whose modification was attempted.      */
+comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param cause      *            the throwable that caused this exception to be thrown.      */
 specifier|public
-name|OntologyCollectorModificationException
+name|OntologyLoadingException
 parameter_list|(
-name|OntologyCollector
-name|collector
-parameter_list|)
-block|{
-name|this
-operator|.
-name|collector
-operator|=
-name|collector
-expr_stmt|;
-block|}
-comment|/**      * Creates a new instance of OntologySpaceModificationException.      *       * @param space      *            the ontology space whose modification was attempted.      */
-specifier|public
-name|OntologyCollectorModificationException
-parameter_list|(
-name|OntologyCollector
-name|collector
-parameter_list|,
 name|Throwable
 name|cause
 parameter_list|)
 block|{
-name|this
-argument_list|(
-name|collector
-argument_list|)
-expr_stmt|;
 name|initCause
 argument_list|(
 name|cause
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the ontology space that threw the exception (presumably after a failed modification attempt).      *       * @return the ontology space on which the exception was thrown.      */
+comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param message      *            the exception message.      */
 specifier|public
-name|OntologyCollector
-name|getOntologyCollector
-parameter_list|()
+name|OntologyLoadingException
+parameter_list|(
+name|String
+name|message
+parameter_list|)
 block|{
-return|return
-name|collector
-return|;
+name|super
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

@@ -560,7 +560,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Triples scanned: {}"
+literal|" ... Triples scanned: {}"
 argument_list|,
 name|tripleCount
 argument_list|)
@@ -569,7 +569,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Found at: {}"
+literal|" ... Found at: {}"
 argument_list|,
 name|foundIndex
 argument_list|)
@@ -578,7 +578,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Offset: {}"
+literal|" ... Offset: {}"
 argument_list|,
 name|offset
 argument_list|)
@@ -664,7 +664,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Fully qualified OWL Ontology ID found. Aborting."
+literal|"Fully qualified OWL Ontology ID found. Exiting."
 argument_list|)
 expr_stmt|;
 throw|throw

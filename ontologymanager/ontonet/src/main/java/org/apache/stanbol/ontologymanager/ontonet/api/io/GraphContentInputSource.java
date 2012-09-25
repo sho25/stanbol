@@ -219,6 +219,8 @@ name|ontonet
 operator|.
 name|api
 operator|.
+name|ontology
+operator|.
 name|OntologyLoadingException
 import|;
 end_import

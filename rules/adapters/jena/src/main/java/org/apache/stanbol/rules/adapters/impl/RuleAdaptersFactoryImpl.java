@@ -35,16 +35,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Dictionary
 import|;
 end_import
@@ -56,6 +46,16 @@ operator|.
 name|util
 operator|.
 name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedList
 import|;
 end_import
 
@@ -751,11 +751,14 @@ name|RuleAdapter
 argument_list|>
 name|ruleAdapters
 init|=
-name|Collections
-operator|.
-name|emptyList
+operator|new
+name|LinkedList
+argument_list|<
+name|RuleAdapter
+argument_list|>
 argument_list|()
 decl_stmt|;
+comment|// Collections.emptyList();
 name|ruleAdapters
 operator|.
 name|addAll

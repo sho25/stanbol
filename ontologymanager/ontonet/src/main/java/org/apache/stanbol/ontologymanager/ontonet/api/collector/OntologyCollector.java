@@ -163,7 +163,7 @@ argument_list|>
 name|ontology
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the ontologies managed by this ontology space. This is a shortcut method for iterating      * {@link #getOntology(IRI, Class)} calls over {@link #listManagedOntologies()}.      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
+comment|/**      * Returns the ontologies managed by this ontology space. This is a shortcut method for iterating      * {@link #getOntology(OWLOntologyID, Class)} calls over {@link #listManagedOntologies()}.      *       * @deprecated Please simulate this method manually by iterating      *             {@link #getOntology(OWLOntologyID, Class)} calls over {@link #listManagedOntologies()}      *       * @param withClosure      *            if true, also the ontologies imported by those directly managed by this space will be      *            included.      * @return the set of ontologies in the ontology space      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -183,7 +183,7 @@ name|boolean
 name|withClosure
 parameter_list|)
 function_decl|;
-comment|/**      * @deprecated      * @param ontologyIri      * @param returnType      * @return      */
+comment|/**      * @deprecated Please use {@link #getOntology(OWLOntologyID, Class)} instead.      * @param ontologyIri      * @param returnType      * @return      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -200,27 +200,7 @@ argument_list|>
 name|returnType
 parameter_list|)
 function_decl|;
-comment|/**      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @deprecated      * @param ontologyIri      * @param returnType      * @param merge      * @return      */
-parameter_list|<
-name|O
-parameter_list|>
-name|O
-name|getOntology
-parameter_list|(
-name|IRI
-name|ontologyIri
-parameter_list|,
-name|Class
-argument_list|<
-name|O
-argument_list|>
-name|returnType
-parameter_list|,
-name|boolean
-name|merge
-parameter_list|)
-function_decl|;
-comment|/**      * @deprecated      * @param ontologyIri      * @param returnType      * @param merge      * @param universalPrefix      * @return      */
+comment|/**      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @deprecated Please use {@link #getOntology(OWLOntologyID, Class, boolean)} instead.      * @param ontologyIri      * @param returnType      * @param merge      * @return      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -238,12 +218,9 @@ name|returnType
 parameter_list|,
 name|boolean
 name|merge
-parameter_list|,
-name|IRI
-name|universalPrefix
 parameter_list|)
 function_decl|;
-comment|/**      * @deprecated      * @param ontologyIri      * @param returnType      * @param universalPrefix      * @return      */
+comment|/**      * @deprecated Please use {@link #getOntology(OWLOntologyID, Class, boolean, IRI)} instead.      * @param ontologyIri      * @param returnType      * @param merge      * @param universalPrefix      * @return      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -252,61 +229,6 @@ name|getOntology
 parameter_list|(
 name|IRI
 name|ontologyIri
-parameter_list|,
-name|Class
-argument_list|<
-name|O
-argument_list|>
-name|returnType
-parameter_list|,
-name|IRI
-name|universalPrefix
-parameter_list|)
-function_decl|;
-parameter_list|<
-name|O
-parameter_list|>
-name|O
-name|getOntology
-parameter_list|(
-name|OWLOntologyID
-name|ontologyId
-parameter_list|,
-name|Class
-argument_list|<
-name|O
-argument_list|>
-name|returnType
-parameter_list|)
-function_decl|;
-comment|/**      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param ontologyIri      * @param returnType      * @param merge      * @return      */
-parameter_list|<
-name|O
-parameter_list|>
-name|O
-name|getOntology
-parameter_list|(
-name|OWLOntologyID
-name|ontologyId
-parameter_list|,
-name|Class
-argument_list|<
-name|O
-argument_list|>
-name|returnType
-parameter_list|,
-name|boolean
-name|merge
-parameter_list|)
-function_decl|;
-parameter_list|<
-name|O
-parameter_list|>
-name|O
-name|getOntology
-parameter_list|(
-name|OWLOntologyID
-name|ontologyId
 parameter_list|,
 name|Class
 argument_list|<
@@ -321,6 +243,27 @@ name|IRI
 name|universalPrefix
 parameter_list|)
 function_decl|;
+comment|/**      * @deprecated Please use {@link #getOntology(OWLOntologyID, Class, IRI)} instead.      * @param ontologyIri      * @param returnType      * @param universalPrefix      * @return      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|IRI
+name|ontologyIri
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|IRI
+name|universalPrefix
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the managed ontology with the specified public key as a Java object of the specified type, if      * supported. If such an ontology exists but is not managed by this collector, it will not be returned.<br>      *<br>      * How the method should react if<code>publicKey</code> is invalid or no such ontology exists, or whether      * the desired return type is not supported, is implementation-dependent. However, developers should at      * least expect that the methods either returns<code>null</code> or throws a      * {@link MissingOntologyException} if no such ontology is managed by this collector. Likewise, if      *<code>returnType</code> is not supported, an {@link UnsupportedOperationException} could be expected to      * be thrown.      *       * @param publicKey      *            the public identifier of the requested ontology.      * @param returnType      *            the desired type of the ontology object.      * @return the ontology object.      */
 parameter_list|<
 name|O
 parameter_list|>
@@ -328,7 +271,67 @@ name|O
 name|getOntology
 parameter_list|(
 name|OWLOntologyID
-name|ontologyId
+name|publicKey
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the managed ontology with the specified public key as a Java object of the specified type, if      * supported. If such an ontology exists but is not managed by this collector, it will not be returned.<br>      *<br>      * How the method should react if<code>publicKey</code> is invalid or no such ontology exists, or whether      * the desired return type is not supported, is implementation-dependent. However, developers should at      * least expect that the methods either returns<code>null</code> or throws a      * {@link MissingOntologyException} if no such ontology is managed by this collector. Likewise, if      *<code>returnType</code> is not supported, an {@link UnsupportedOperationException} could be expected to      * be thrown.<br>      *<br>      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param publicKey      *            the public identifier of the requested ontology.      * @param returnType      *            the desired type of the ontology object.      * @param merge      *            if true, the requested ontology will be merged with its imports up to whatever supported      *            level.      * @return the ontology object.      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the managed ontology with the specified public key as a Java object of the specified type, if      * supported. If such an ontology exists but is not managed by this collector, it will not be returned.<br>      *<br>      * How the method should react if<code>publicKey</code> is invalid or no such ontology exists, or whether      * the desired return type is not supported, is implementation-dependent. However, developers should at      * least expect that the methods either returns<code>null</code> or throws a      * {@link MissingOntologyException} if no such ontology is managed by this collector. Likewise, if      *<code>returnType</code> is not supported, an {@link UnsupportedOperationException} could be expected to      * be thrown.<br>      *<br>      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param publicKey      *            the public identifier of the requested ontology.      * @param returnType      *            the desired type of the ontology object.      * @param merge      *            if true, the requested ontology will be merged with its imports up to whatever supported      *            level.      * @param universalPrefix      *            the IRI to be used as a prefix and/or namespace for all derived IRIs, e.g. OWL import      *            statements and version IRIs.      * @return the ontology object.      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
+parameter_list|,
+name|Class
+argument_list|<
+name|O
+argument_list|>
+name|returnType
+parameter_list|,
+name|boolean
+name|merge
+parameter_list|,
+name|IRI
+name|universalPrefix
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the managed ontology with the specified public key as a Java object of the specified type, if      * supported. If such an ontology exists but is not managed by this collector, it will not be returned.<br>      *<br>      * How the method should react if<code>publicKey</code> is invalid or no such ontology exists, or whether      * the desired return type is not supported, is implementation-dependent. However, developers should at      * least expect that the methods either returns<code>null</code> or throws a      * {@link MissingOntologyException} if no such ontology is managed by this collector. Likewise, if      *<code>returnType</code> is not supported, an {@link UnsupportedOperationException} could be expected to      * be thrown.<br>      *<br>      * TODO replace merge parameter with integer for merge level (-1 for infinite).      *       * @param publicKey      *            the public identifier of the requested ontology.      * @param returnType      *            the desired type of the ontology object.      * @param universalPrefix      *            the IRI to be used as a prefix and/or namespace for all derived IRIs, e.g. OWL import      *            statements and version IRIs.      * @return the ontology object.      */
+parameter_list|<
+name|O
+parameter_list|>
+name|O
+name|getOntology
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
 parameter_list|,
 name|Class
 argument_list|<

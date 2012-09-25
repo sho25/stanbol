@@ -16,17 +16,33 @@ operator|.
 name|ontonet
 operator|.
 name|api
+operator|.
+name|ontology
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyID
+import|;
+end_import
+
 begin_comment
-comment|/**  * A runtime exception denoting that trying to load an ontology into the Ontology Manager has caused an  * undesired status. The reason is most likely to be found in the cause registered with this exception.  *   * @author alexdma  *   */
+comment|/**  * Thrown when no match is found between a public key of an ontology that was supposed to be stored and the  * stored graphs. This public key is then called<i>orphan</i>.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OntologyLoadingException
+name|OrphanOntologyKeyException
 extends|extends
 name|RuntimeException
 block|{
@@ -37,36 +53,36 @@ specifier|final
 name|long
 name|serialVersionUID
 init|=
-operator|-
-literal|8496827319814210715L
+literal|599697367795290663L
 decl_stmt|;
-comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param cause      *            the throwable that caused this exception to be thrown.      */
+specifier|private
+name|OWLOntologyID
+name|orphan
+decl_stmt|;
+comment|/**      * Creates a new instance of {@link OrphanOntologyKeyException} with the supplied orphan key.      *       * @param key      *            the orphan ontology key.      */
 specifier|public
-name|OntologyLoadingException
+name|OrphanOntologyKeyException
 parameter_list|(
-name|Throwable
-name|cause
+name|OWLOntologyID
+name|key
 parameter_list|)
 block|{
-name|initCause
-argument_list|(
-name|cause
-argument_list|)
+name|this
+operator|.
+name|orphan
+operator|=
+name|key
 expr_stmt|;
 block|}
-comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param message      *            the exception message.      */
+comment|/**      * Returns the public key of the ontology which was supposed to exist in the triple store but is not.      *       * @return the orphan ontology key.      */
 specifier|public
-name|OntologyLoadingException
-parameter_list|(
-name|String
-name|message
-parameter_list|)
+name|OWLOntologyID
+name|getOrphanPublicKey
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|message
-argument_list|)
-expr_stmt|;
+return|return
+name|orphan
+return|;
 block|}
 block|}
 end_class

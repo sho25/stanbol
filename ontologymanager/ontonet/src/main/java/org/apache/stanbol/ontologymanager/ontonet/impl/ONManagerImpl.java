@@ -978,6 +978,25 @@ name|_ID_SCOPE_REGISTRY_DEFAULT
 init|=
 literal|"ontology"
 decl_stmt|;
+comment|/**      * The singleton instance of {@link ONManagerImpl}.      */
+specifier|private
+specifier|static
+name|ONManagerImpl
+name|me
+init|=
+literal|null
+decl_stmt|;
+comment|/**      * Returns the instance of {@link ONManagerImpl} that was activated most recently. It can be used for      * referencing this component from an object that is not an OSGi component (for instance, if making it a      * component would introduce an activation cycle).      *       * @return the singleton instance of {@link ONManagerImpl}.      */
+specifier|public
+specifier|static
+name|ONManagerImpl
+name|get
+parameter_list|()
+block|{
+return|return
+name|me
+return|;
+block|}
 annotation|@
 name|Property
 argument_list|(
@@ -1154,7 +1173,7 @@ name|String
 index|[]
 block|{}
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ReengineerManagerImpl instances do need to be configured!      * YOU NEED TO USE      * {@link #ONManagerImpl(OntologyProvider, OfflineConfiguration, OntologySpaceFactory, Dictionary)} or its      * overloads, to parse the configuration and then initialise the rule store if running outside an OSGI      * environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ONManagerImpl instances do need to be configured! YOU      * NEED TO USE      * {@link #ONManagerImpl(OntologyProvider, OfflineConfiguration, OntologySpaceFactory, Dictionary)} or its      * overloads, to parse the configuration and then initialise the rule store if running outside an OSGI      * environment.      */
 specifier|public
 name|ONManagerImpl
 parameter_list|()
@@ -1164,6 +1183,7 @@ argument_list|()
 expr_stmt|;
 comment|// All bindings are deferred to the activator
 block|}
+comment|/**      * Used to instantiate an ONManagerImpl outside of an OSGi environment.      *       * @param ontologyProvider      *            the ontology provider that will be used for storing ontologies.      * @param offline      *            the offline configuration      * @param spaceFactory      *            the factory implementation to be used for creating ontology spaces      * @param configuration      *            the configuration of this ONManagerImpl      */
 specifier|public
 name|ONManagerImpl
 parameter_list|(
@@ -1323,6 +1343,11 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
+name|me
+operator|=
+name|this
+expr_stmt|;
+comment|// Assign singleton instance
 comment|// Parse configuration
 if|if
 condition|(
@@ -1438,7 +1463,7 @@ comment|// if (tfile != null) this.configPath = tfile;
 comment|// String tns = (String) configuration.get(KRES_NAMESPACE);
 comment|// if (tns != null) this.kresNs = tns;
 comment|// configPath = (String) configuration.get(CONFIG_FILE_PATH);
-comment|/*          * If there is no configuration file, just start with an empty scope set          */
+comment|// If there is no configuration file, just start with an empty scope set
 name|Object
 name|connectivityPolicy
 init|=
@@ -1870,6 +1895,16 @@ operator|(
 name|ScopeEventListener
 operator|)
 name|ontologyProvider
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|addScopeEventListener
+argument_list|(
+name|ontologyProvider
+operator|.
+name|getOntologyNetworkDescriptor
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

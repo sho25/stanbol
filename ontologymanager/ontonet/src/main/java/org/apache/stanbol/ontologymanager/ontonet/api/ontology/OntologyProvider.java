@@ -506,6 +506,13 @@ argument_list|>
 name|listOntologies
 parameter_list|()
 function_decl|;
+name|Set
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|listOrphans
+parameter_list|()
+function_decl|;
 comment|/**      * Returns all the public keys of the ontologies whose ontology IRI matches the one supplied,a nd which      * differ by version IRI. Only primary keys are returned: aliases are not included.      *       * @param ontologyIri      *            the ontology IRI to match      * @return the matching versions of stored ontologies.      */
 name|Set
 argument_list|<
@@ -590,6 +597,8 @@ parameter_list|(
 name|OWLOntologyID
 name|publicKey
 parameter_list|)
+throws|throws
+name|OntologyHandleException
 function_decl|;
 comment|/**      * Sets the policy adopted by this provider whenever an import statement is found in an ontology<i>that      * has already been loaded</i> (e.g. when exporting it). It does<b>not</b> influence how the system      * should<i>resolve</i> imports of newly found ontologies.      *       * @param policy      *            the import management policy.      */
 name|void
@@ -599,7 +608,7 @@ name|ImportManagementPolicy
 name|policy
 parameter_list|)
 function_decl|;
-comment|/**      * Tells this ontology provider that a stored ontology whose public key is<tt>publicKey</tt> can be (or      * was) retrieved by dereferencing<tt>locator</tt>. If<tt>publicKey</tt>does not exist in the provider,      * or if<tt>locator</tt> is already bound to an incompatible key, an {@link IllegalArgumentException}      * will be thrown.      *       * @param locator      *            a physical location for this ontology.      * @param publicKey      *            the public key of the stored ontology.      */
+comment|/**      * Tells this ontology provider that a stored ontology whose public key is<tt>publicKey</tt> can be (or      * was) retrieved by dereferencing<tt>locator</tt>. If<tt>publicKey</tt>does not exist in the provider,      * or if<tt>locator</tt> is already bound to an incompatible key, an {@link IllegalArgumentException}      * will be thrown.      *       * @deprecated this is now done by setting aliases.      *       * @param locator      *            a physical location for this ontology.      * @param publicKey      *            the public key of the stored ontology.      */
 name|void
 name|setLocatorMapping
 parameter_list|(

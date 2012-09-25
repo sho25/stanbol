@@ -112,7 +112,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*      * (non-Javadoc)      *       * @see eu.iksproject.kres.manager.io.AbstractOntologyInputSource#toString()      */
 annotation|@
 name|Override
 specifier|public

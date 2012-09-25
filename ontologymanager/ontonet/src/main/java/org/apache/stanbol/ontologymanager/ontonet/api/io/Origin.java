@@ -266,7 +266,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the actual reference object that was wrapped by this Origin.      *       * @return      */
+comment|/**      * Returns the actual reference object that was wrapped by this Origin.      *       * @return the reference object.      */
 specifier|public
 name|R
 name|getReference

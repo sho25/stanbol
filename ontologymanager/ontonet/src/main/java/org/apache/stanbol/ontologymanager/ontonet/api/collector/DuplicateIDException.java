@@ -41,6 +41,7 @@ name|serialVersionUID
 init|=
 literal|802959772682427494L
 decl_stmt|;
+comment|/**      * The duplicate identifier      */
 specifier|protected
 name|String
 name|dupe

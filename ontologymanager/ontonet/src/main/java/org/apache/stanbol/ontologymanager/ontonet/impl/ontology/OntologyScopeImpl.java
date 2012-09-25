@@ -645,6 +645,7 @@ begin_class
 specifier|public
 class|class
 name|OntologyScopeImpl
+comment|/* TODO extends AbstractOntologyCollectorImpl */
 implements|implements
 name|OntologyScope
 implements|,
