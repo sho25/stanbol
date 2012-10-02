@@ -1907,7 +1907,7 @@ name|xhtmlBlob
 argument_list|,
 literal|"<html xmlns=\"http://www.w3.org/1999/xhtml\">"
 argument_list|,
-literal|"<title></title>"
+literal|"<title>\\[jira\\] Commented: \\(TIKA-461\\) RFC822 messages not parsed</title>"
 argument_list|,
 literal|"<body><p>"
 argument_list|,
@@ -1924,27 +1924,8 @@ argument_list|)
 expr_stmt|;
 comment|//no check the extracted metadata!
 comment|//DC
-name|verifyValue
-argument_list|(
-name|ci
-argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|NamespaceEnum
-operator|.
-name|dc
-operator|+
-literal|"date"
-argument_list|)
-argument_list|,
-name|XSD
-operator|.
-name|dateTime
-argument_list|,
-literal|"2010-09-06T09:25:34Z"
-argument_list|)
-expr_stmt|;
+comment|//STANBOL-757: dc:date no longer added by Tika 1.2 (dc:created is still present)
+comment|//verifyValue(ci, new UriRef(NamespaceEnum.dc+"date"), XSD.dateTime,"2010-09-06T09:25:34Z");
 name|verifyValue
 argument_list|(
 name|ci
@@ -1964,6 +1945,8 @@ argument_list|,
 literal|"message/rfc822"
 argument_list|)
 expr_stmt|;
+comment|//STANBOL-757: dc:subject no longer added by Tika1.2 (dc:title is used instead)
+comment|//verifyValue(ci, new UriRef(NamespaceEnum.dc+"subject"), null,"[jira] Commented: (TIKA-461) RFC822 messages not parsed");
 name|verifyValue
 argument_list|(
 name|ci
@@ -1975,7 +1958,7 @@ name|NamespaceEnum
 operator|.
 name|dc
 operator|+
-literal|"subject"
+literal|"title"
 argument_list|)
 argument_list|,
 literal|null
@@ -2102,25 +2085,8 @@ argument_list|,
 literal|"Julien Nioche (JIRA)<jira@apache.org>"
 argument_list|)
 expr_stmt|;
-name|verifyValue
-argument_list|(
-name|ci
-argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-name|NamespaceEnum
-operator|.
-name|media
-operator|+
-literal|"hasKeyword"
-argument_list|)
-argument_list|,
-literal|null
-argument_list|,
-literal|"[jira] Commented: (TIKA-461) RFC822 messages not parsed"
-argument_list|)
-expr_stmt|;
+comment|//STANBOL-757: This was present with Tika 1.1 because its mapping from dc:subject
+comment|//        verifyValue(ci, new UriRef(NamespaceEnum.media+"hasKeyword"),null,"[jira] Commented: (TIKA-461) RFC822 messages not parsed");
 comment|//Nepomuk Message
 name|String
 name|message
@@ -2426,7 +2392,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests mappings for the Mp4 metadata extraction capabilities added to      * Tika 1.1 (STANBOL-627)      * @throws EngineException      * @throws IOException      * @throws ParseException      */
-comment|//@Test deactivated because of TIKA-852
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMp4
@@ -3628,7 +3595,7 @@ name|NamespaceEnum
 operator|.
 name|dc
 operator|+
-literal|"date"
+literal|"created"
 argument_list|)
 argument_list|,
 name|XSD

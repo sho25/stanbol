@@ -1773,7 +1773,7 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isInfoEnabled
 argument_list|()
 condition|)
 block|{

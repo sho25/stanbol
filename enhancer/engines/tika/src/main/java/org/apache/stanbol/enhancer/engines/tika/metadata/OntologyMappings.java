@@ -1129,6 +1129,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|CONTRIBUTOR
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1150,6 +1153,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|COVERAGE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1167,6 +1173,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|CREATOR
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1190,6 +1199,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|DESCRIPTION
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1207,6 +1219,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|FORMAT
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|HttpHeaders
 operator|.
@@ -1228,6 +1243,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|IDENTIFIER
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1245,6 +1263,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|LANGUAGE
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|HttpHeaders
 operator|.
@@ -1270,6 +1291,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|MODIFIED
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 literal|"Last-Modified"
 argument_list|)
@@ -1289,6 +1313,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|PUBLISHER
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1310,6 +1337,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|RELATION
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1327,6 +1357,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|RIGHTS
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1344,6 +1377,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|SOURCE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1361,6 +1397,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|SUBJECT
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1382,6 +1421,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|TITLE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1399,6 +1441,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|TYPE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1479,6 +1524,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|CONTRIBUTOR
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|XMPDM
 operator|.
@@ -1525,6 +1573,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|COVERAGE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1543,6 +1594,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|CREATOR
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1566,6 +1620,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|DESCRIPTION
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1583,6 +1640,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|FORMAT
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|HttpHeaders
 operator|.
@@ -1609,6 +1669,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|IDENTIFIER
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1626,6 +1689,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|LANGUAGE
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|HttpHeaders
 operator|.
@@ -1651,6 +1717,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|MODIFIED
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1675,6 +1744,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|PUBLISHER
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1692,6 +1764,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|RELATION
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1714,6 +1789,9 @@ comment|//DC:rights and cc:license
 name|DublinCore
 operator|.
 name|RIGHTS
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|CreativeCommons
 operator|.
@@ -1746,6 +1824,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|SOURCE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1763,6 +1844,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|SUBJECT
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -1784,6 +1868,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|TITLE
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|XMPDM
 operator|.
@@ -1862,6 +1949,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|TYPE
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|XMPDM
 operator|.
@@ -1919,6 +2009,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|DESCRIPTION
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
@@ -2662,6 +2755,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|TITLE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2679,6 +2775,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|DESCRIPTION
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2696,6 +2795,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|IDENTIFIER
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2766,6 +2868,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|TITLE
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2783,6 +2888,9 @@ argument_list|,
 name|DublinCore
 operator|.
 name|DESCRIPTION
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|MSOffice
 operator|.
