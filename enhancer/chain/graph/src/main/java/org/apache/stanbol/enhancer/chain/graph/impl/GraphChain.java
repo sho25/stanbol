@@ -940,7 +940,7 @@ annotation|@
 name|Activate
 annotation|@
 name|Override
-specifier|public
+specifier|protected
 name|void
 name|activate
 parameter_list|(
@@ -1415,7 +1415,7 @@ unit|}     @
 name|Deactivate
 annotation|@
 name|Override
-specifier|public
+specifier|protected
 name|void
 name|deactivate
 parameter_list|(

@@ -629,6 +629,51 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+elseif|else
+if|if
+condition|(
+name|value
+operator|instanceof
+name|List
+argument_list|<
+name|?
+argument_list|>
+condition|)
+block|{
+for|for
+control|(
+name|Object
+name|o
+operator|:
+operator|(
+name|List
+argument_list|<
+name|?
+argument_list|>
+operator|)
+name|value
+control|)
+block|{
+if|if
+condition|(
+name|o
+operator|!=
+literal|null
+condition|)
+block|{
+name|configuredChain
+operator|.
+name|add
+argument_list|(
+name|o
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
 else|else
 block|{
 throw|throw
@@ -637,7 +682,7 @@ name|ConfigurationException
 argument_list|(
 name|PROPERTY_ENGINE_LIST
 argument_list|,
-literal|"The engines of a List Chain MUST BE configured as Array of "
+literal|"The engines of a List Chain MUST BE configured as Array/List of "
 operator|+
 literal|"Strings (parsed: "
 operator|+
@@ -898,6 +943,9 @@ name|getGraph
 argument_list|()
 expr_stmt|;
 block|}
+end_class
+
+begin_function
 annotation|@
 name|Override
 specifier|protected
@@ -928,6 +976,9 @@ name|ctx
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -941,6 +992,9 @@ return|return
 name|executionPlan
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -955,8 +1009,8 @@ return|return
 name|engineNames
 return|;
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 
