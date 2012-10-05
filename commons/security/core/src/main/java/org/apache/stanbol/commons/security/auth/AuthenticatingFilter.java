@@ -680,6 +680,7 @@ init|=
 name|getSubject
 argument_list|()
 decl_stmt|;
+block|{
 name|AuthenticationMethod
 name|authenticationMethod
 init|=
@@ -762,6 +763,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return;
+block|}
 block|}
 name|Set
 argument_list|<
