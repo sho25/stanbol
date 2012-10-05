@@ -41,13 +41,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
+name|registry
 operator|.
 name|api
 operator|.
-name|ontology
-operator|.
-name|OntologyProvider
+name|RegistryContentException
 import|;
 end_import
 
@@ -61,11 +59,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|registry
+name|servicesapi
 operator|.
-name|api
+name|ontology
 operator|.
-name|RegistryContentException
+name|OntologyProvider
 import|;
 end_import
 

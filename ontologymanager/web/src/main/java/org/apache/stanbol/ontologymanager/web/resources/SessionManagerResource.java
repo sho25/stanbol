@@ -579,9 +579,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
-operator|.
-name|api
+name|servicesapi
 operator|.
 name|session
 operator|.
@@ -599,9 +597,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
-operator|.
-name|api
+name|servicesapi
 operator|.
 name|session
 operator|.
@@ -619,9 +615,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
-operator|.
-name|api
+name|servicesapi
 operator|.
 name|session
 operator|.

@@ -471,7 +471,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
+name|obsolete
 operator|.
 name|api
 operator|.
@@ -489,9 +489,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
-operator|.
-name|api
+name|servicesapi
 operator|.
 name|session
 operator|.
@@ -721,7 +719,7 @@ name|provider
 operator|.
 name|impl
 operator|.
-name|OntonetInputProvider
+name|OntologyManagerInputProvider
 import|;
 end_import
 
@@ -2021,7 +2019,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//return Response.ok(new Viewable("index", this)).build();
+comment|// return Response.ok(new Viewable("index", this)).build();
 name|ResponseBuilder
 name|rb
 init|=
@@ -3085,7 +3083,7 @@ operator|.
 name|addInputProvider
 argument_list|(
 operator|new
-name|OntonetInputProvider
+name|OntologyManagerInputProvider
 argument_list|(
 name|onm
 argument_list|,

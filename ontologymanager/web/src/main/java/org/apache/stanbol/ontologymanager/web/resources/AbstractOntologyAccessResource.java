@@ -49,9 +49,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
-operator|.
-name|impl
+name|servicesapi
 operator|.
 name|util
 operator|.
