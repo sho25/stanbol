@@ -745,7 +745,7 @@ name|addHeader
 argument_list|(
 literal|"WWW-Authenticate"
 argument_list|,
-literal|"Basic realm=\"Clerezza Platform authentication needed\""
+literal|"Basic realm=\"Apache Stanbol authentication needed\""
 argument_list|)
 expr_stmt|;
 specifier|final
