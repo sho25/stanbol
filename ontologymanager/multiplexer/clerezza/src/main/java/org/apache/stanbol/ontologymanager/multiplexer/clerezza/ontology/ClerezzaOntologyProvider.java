@@ -1491,7 +1491,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|obsolete
+name|ontonet
 operator|.
 name|api
 operator|.
@@ -1514,7 +1514,7 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|obsolete
+name|ontonet
 operator|.
 name|api
 operator|.

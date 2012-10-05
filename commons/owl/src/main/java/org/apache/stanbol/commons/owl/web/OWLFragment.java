@@ -249,7 +249,7 @@ literal|true
 argument_list|,
 name|metatype
 operator|=
-literal|true
+literal|false
 argument_list|)
 annotation|@
 name|Service
