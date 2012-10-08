@@ -486,9 +486,15 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
+block|{
 name|OntologySpaceFactory
 operator|.
 name|class
+block|,
+name|ScopeFactory
+operator|.
+name|class
+block|}
 argument_list|)
 specifier|public
 class|class
