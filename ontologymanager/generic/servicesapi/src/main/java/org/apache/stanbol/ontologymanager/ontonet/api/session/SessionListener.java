@@ -21,9 +21,11 @@ name|session
 package|;
 end_package
 
+begin_comment
+comment|/**  * Objects that want to listen to events affecting sessions should implement this interface and add themselves  * as listener to a manager.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.session.SessionListener}  *             as soon as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.session.SessionListener  *   * @author alexdma  *   */
+end_comment
+
 begin_interface
-annotation|@
-name|Deprecated
 specifier|public
 interface|interface
 name|SessionListener

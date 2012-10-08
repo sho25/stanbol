@@ -81,9 +81,11 @@ name|OWLExportable
 import|;
 end_import
 
+begin_comment
+comment|/**  * An ontology collector that can be used by client applications to store volatile data, e.g. for the duration  * of a service call. It has an aggressive severance policy and tries to delete as many managed ontologies as  * possible when it goes down.<br>  *<br>  * Note that sessions are generally disjoint with HTTP sessions or the like, but can be used in conjunction  * with them, or manipulated to mimic their behaviour.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.session.Session} as soon  *             as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.session.Session  *   * @author alexdma  *   */
+end_comment
+
 begin_interface
-annotation|@
-name|Deprecated
 specifier|public
 interface|interface
 name|Session

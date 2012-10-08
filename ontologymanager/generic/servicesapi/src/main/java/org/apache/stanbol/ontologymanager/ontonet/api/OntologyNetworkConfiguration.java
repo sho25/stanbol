@@ -13,7 +13,9 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|servicesapi
+name|ontonet
+operator|.
+name|api
 package|;
 end_package
 
@@ -52,12 +54,10 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains ownership and collector information on all ontology networks currently configured.  *   * @author alexdma  *   */
+comment|/**  * Contains ownership and collector information on all ontology networks currently configured.  *   * @deprecated as it is only for use by component activators, it will probably be confined to a private  *             package.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
-annotation|@
-name|Deprecated
 specifier|public
 class|class
 name|OntologyNetworkConfiguration

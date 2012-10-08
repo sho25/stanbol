@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Note that sessions are possibly disjoint with HTTP sessions or the like.  *   * @author alexdma  *   */
+comment|/**  * An ontology collector that can be used by client applications to store volatile data, e.g. for the duration  * of a service call. It has an aggressive severance policy and tries to delete as many managed ontologies as  * possible when it goes down.<br>  *<br>  * Note that sessions are generally disjoint with HTTP sessions or the like, but can be used in conjunction  * with them, or manipulated to mimic their behaviour.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

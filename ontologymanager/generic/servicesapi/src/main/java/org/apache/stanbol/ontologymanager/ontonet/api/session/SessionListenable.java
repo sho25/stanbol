@@ -21,9 +21,11 @@ name|session
 package|;
 end_package
 
+begin_comment
+comment|/**  * An object that can fire or propagate changes in {@link Session} objects.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to  *             {@link org.apache.stanbol.ontologymanager.servicesapi.session.SessionListenable} as soon as  *             possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.session.SessionListenable  *   * @author alexdma  *   */
+end_comment
+
 begin_interface
-annotation|@
-name|Deprecated
 specifier|public
 interface|interface
 name|SessionListenable

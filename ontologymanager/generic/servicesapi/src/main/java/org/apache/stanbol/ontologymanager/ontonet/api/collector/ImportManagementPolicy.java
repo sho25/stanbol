@@ -16,31 +16,30 @@ operator|.
 name|ontonet
 operator|.
 name|api
+operator|.
+name|collector
 package|;
 end_package
 
 begin_comment
-comment|/**  * Denotes any API artifact that has a qualified identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact} as soon  *             as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact  *   * @author alexdma  *   */
+comment|/**  * The policies that determine how OntoNet should handle OWL import statements and/or the imported ontologies  * (i.e. import targets) when performing operations such as load/export of ontologies, and rewriting of import  * statements.  *   * @author alexdma  *   */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|NamedArtifact
-extends|extends
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|servicesapi
-operator|.
-name|NamedArtifact
-block|{  }
-end_interface
+enum|enum
+name|ImportManagementPolicy
+block|{
+comment|/**      * The root ontology contains all the import statements that point to (recursively) imported ontologies,      * which instead are cleared of all import statements. Can be used to minimize the number of statements      * and remove cycles.      */
+name|FLATTEN
+block|,
+comment|/**      * Remove all import statements from the root ontology's import closure, and recursively copy all the      * axioms from imported ontologies into the root one.      */
+name|MERGE
+block|,
+comment|/**      * Keep the import structure as it is. Note that the import targets can still be rewritten even by      * following this policy.      */
+name|PRESERVE
+block|;  }
+end_enum
 
 end_unit
 

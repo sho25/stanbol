@@ -361,7 +361,7 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 import|;
 end_import
 
@@ -398,6 +398,24 @@ operator|.
 name|scope
 operator|.
 name|ScopeEventListener
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|servicesapi
+operator|.
+name|scope
+operator|.
+name|ScopeFactory
 import|;
 end_import
 
@@ -450,7 +468,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link PersistentCollectorFactory} based on Clerezza.  *   * @author alexdma  *   */
+comment|/**  * Implementation of {@link OntologySpaceFactory} based on Clerezza.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -468,7 +486,7 @@ argument_list|)
 annotation|@
 name|Service
 argument_list|(
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 operator|.
 name|class
 argument_list|)
@@ -476,7 +494,9 @@ specifier|public
 class|class
 name|ClerezzaCollectorFactory
 implements|implements
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
+implements|,
+name|ScopeFactory
 block|{
 specifier|protected
 name|Collection

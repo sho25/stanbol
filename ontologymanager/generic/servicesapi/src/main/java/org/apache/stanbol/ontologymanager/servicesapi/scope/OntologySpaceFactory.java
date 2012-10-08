@@ -80,10 +80,8 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 extends|extends
-name|ScopeFactory
-extends|,
 name|ScopeEventListenable
 extends|,
 name|NamedArtifact

@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Manages session objects via CRUD-like operations. A<code>SessionManager</code> maintains in-memory storage  * of sessions, creates new ones and either destroys or stores existing ones persistently. All sessions are  * managed via unique identifiers of the<code>org.semanticweb.owlapi.model.IRI</code> type.<br>  *<br>  * NOTE: implementations should be synchronized, or document whenever they are not.  *   * @author alexdma  *   */
+comment|/**  * Manages session objects via CRUD-like operations. A<code>SessionManager</code> maintains in-memory storage  * of sessions, creates new ones and either destroys or stores existing ones persistently. All sessions are  * managed via unique identifiers of the<code>org.semanticweb.owlapi.model.IRI</code> type.<br>  *<br>  * NOTE: implementations should either be synchronized, or document whenever they are not.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

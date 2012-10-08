@@ -21,9 +21,11 @@ name|scope
 package|;
 end_package
 
+begin_comment
+comment|/**  * An ontology collector that references modifiable ontologies in a scope.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out. In  *             addition, the distinction between core and custom spaces will disappear at the operational  *             level. Please switch to  *             {@link org.apache.stanbol.ontologymanager.servicesapi.scope.OntologySpace} as soon as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.scope.OntologySpace  *   * @author alexdma  *   */
+end_comment
+
 begin_interface
-annotation|@
-name|Deprecated
 specifier|public
 interface|interface
 name|CustomOntologySpace

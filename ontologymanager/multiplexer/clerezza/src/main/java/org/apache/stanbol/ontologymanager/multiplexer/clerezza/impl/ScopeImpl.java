@@ -385,7 +385,7 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 import|;
 end_import
 
@@ -660,7 +660,7 @@ parameter_list|,
 name|IRI
 name|namespace
 parameter_list|,
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 name|factory
 parameter_list|,
 name|OntologyInputSource
@@ -754,7 +754,7 @@ specifier|private
 name|void
 name|configureCoreSpace
 parameter_list|(
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 name|factory
 parameter_list|)
 block|{
@@ -785,7 +785,7 @@ specifier|private
 name|void
 name|configureCustomSpace
 parameter_list|(
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 name|factory
 parameter_list|)
 block|{

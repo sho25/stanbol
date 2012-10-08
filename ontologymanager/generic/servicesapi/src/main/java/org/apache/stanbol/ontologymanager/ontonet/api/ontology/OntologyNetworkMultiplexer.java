@@ -16,18 +16,13 @@ operator|.
 name|ontonet
 operator|.
 name|api
+operator|.
+name|ontology
 package|;
 end_package
 
-begin_comment
-comment|/**  * Denotes any API artifact that has a qualified identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact} as soon  *             as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact  *   * @author alexdma  *   */
-end_comment
-
-begin_interface
-specifier|public
-interface|interface
-name|NamedArtifact
-extends|extends
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -38,7 +33,22 @@ name|ontologymanager
 operator|.
 name|servicesapi
 operator|.
-name|NamedArtifact
+name|ontology
+operator|.
+name|Multiplexer
+import|;
+end_import
+
+begin_comment
+comment|/**  * The object that "knows" the relationships between stored graphs and their usage in ontology spaces or  * sessions.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link Multiplexer} as soon as possible.  *   * @see Multiplexer  *   * @author alexdma  *   */
+end_comment
+
+begin_interface
+specifier|public
+interface|interface
+name|OntologyNetworkMultiplexer
+extends|extends
+name|Multiplexer
 block|{  }
 end_interface
 

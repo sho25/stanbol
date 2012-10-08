@@ -311,9 +311,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|servicesapi
+name|ontonet
 operator|.
-name|OfflineConfiguration
+name|api
+operator|.
+name|OntologyNetworkConfiguration
 import|;
 end_import
 
@@ -329,7 +331,7 @@ name|ontologymanager
 operator|.
 name|servicesapi
 operator|.
-name|OntologyNetworkConfiguration
+name|OfflineConfiguration
 import|;
 end_import
 
@@ -509,7 +511,7 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 import|;
 end_import
 
@@ -528,6 +530,42 @@ operator|.
 name|scope
 operator|.
 name|Scope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|servicesapi
+operator|.
+name|scope
+operator|.
+name|ScopeEventListener
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|servicesapi
+operator|.
+name|scope
+operator|.
+name|ScopeFactory
 import|;
 end_import
 
@@ -939,11 +977,18 @@ specifier|private
 name|String
 name|connectivityPolicyString
 decl_stmt|;
+comment|/*      * TODO when adapters are implemented for exporting, factory implementations can be Clerezza-independent      * and this object can become a scope factory itself.      */
 annotation|@
 name|Reference
 specifier|private
-name|PersistentCollectorFactory
-name|factory
+name|ScopeFactory
+name|scopeFactory
+decl_stmt|;
+annotation|@
+name|Reference
+specifier|private
+name|OntologySpaceFactory
+name|spaceFactory
 decl_stmt|;
 specifier|private
 specifier|final
@@ -1041,7 +1086,7 @@ name|String
 index|[]
 block|{}
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ONManagerImpl instances do need to be configured! YOU      * NEED TO USE      * {@link #ONManagerImpl(OntologyProvider, OfflineConfiguration, PersistentCollectorFactory, Dictionary)}      * or its overloads, to parse the configuration and then initialise the rule store if running outside an      * OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the ONManagerImpl instances do need to be configured! YOU      * NEED TO USE      * {@link #ONManagerImpl(OntologyProvider, OfflineConfiguration, OntologySpaceFactory, Dictionary)} or its      * overloads, to parse the configuration and then initialise the rule store if running outside an OSGI      * environment.      */
 specifier|public
 name|ScopeManagerImpl
 parameter_list|()
@@ -1064,8 +1109,11 @@ parameter_list|,
 name|OfflineConfiguration
 name|offline
 parameter_list|,
-name|PersistentCollectorFactory
-name|factory
+name|ScopeFactory
+name|scopeFactory
+parameter_list|,
+name|OntologySpaceFactory
+name|spaceFactory
 parameter_list|,
 name|Dictionary
 argument_list|<
@@ -1087,9 +1135,15 @@ name|ontologyProvider
 expr_stmt|;
 name|this
 operator|.
-name|factory
+name|scopeFactory
 operator|=
-name|factory
+name|scopeFactory
+expr_stmt|;
+name|this
+operator|.
+name|spaceFactory
+operator|=
+name|spaceFactory
 expr_stmt|;
 name|this
 operator|.
@@ -1688,7 +1742,7 @@ operator|+
 literal|"/"
 argument_list|)
 decl_stmt|;
-name|factory
+name|spaceFactory
 operator|.
 name|setDefaultNamespace
 argument_list|(
@@ -1713,7 +1767,7 @@ argument_list|(
 name|multiplexer
 argument_list|)
 expr_stmt|;
-name|factory
+name|this
 operator|.
 name|addScopeEventListener
 argument_list|(
@@ -2240,7 +2294,11 @@ block|}
 comment|// Commented out: for the time being we try not to propagate additions to scopes.
 comment|// if (ontologyProvider instanceof OntologyCollectorListener) scope
 comment|// .addOntologyCollectorListener((OntologyCollectorListener) ontologyProvider);
-comment|// fireScopeCreated(scope);
+name|fireScopeCreated
+argument_list|(
+name|scope
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|registerScope
@@ -2271,7 +2329,7 @@ block|{
 name|Scope
 name|sc
 init|=
-name|factory
+name|scopeFactory
 operator|.
 name|createOntologyScope
 argument_list|(
@@ -2392,18 +2450,6 @@ name|ontonetNS
 operator|.
 name|toString
 argument_list|()
-return|;
-block|}
-comment|/**      * Returns the ontology space factory that was created along with the manager context.      *       * @return the ontology space factory      */
-annotation|@
-name|Override
-specifier|public
-name|PersistentCollectorFactory
-name|getPersistentCollectorFactory
-parameter_list|()
-block|{
-return|return
-name|factory
 return|;
 block|}
 annotation|@
@@ -2829,6 +2875,40 @@ argument_list|(
 name|namespace
 argument_list|)
 expr_stmt|;
+block|}
+specifier|protected
+name|void
+name|fireScopeCreated
+parameter_list|(
+name|Scope
+name|scope
+parameter_list|)
+block|{
+for|for
+control|(
+name|ScopeEventListener
+name|l
+range|:
+name|listeners
+control|)
+name|l
+operator|.
+name|scopeCreated
+argument_list|(
+name|scope
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|OntologySpaceFactory
+name|getOntologySpaceFactory
+parameter_list|()
+block|{
+return|return
+name|spaceFactory
+return|;
 block|}
 block|}
 end_class

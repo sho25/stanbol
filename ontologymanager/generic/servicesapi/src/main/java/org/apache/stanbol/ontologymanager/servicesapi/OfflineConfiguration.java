@@ -31,24 +31,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|servicesapi
-operator|.
-name|scope
-operator|.
-name|ScopeManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -60,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides the configuration needed for the {@link ScopeManager}. A configuration should only be handled  * internally by the {@link ScopeManager} implementation.  *   * @author alexdma  *   */
+comment|/**  * Provides the configuration needed by the ontology manager in order to locate offline ontologies and export  * them to the Web.  *   * @author alexdma  *   */
 end_comment
 
 begin_interface

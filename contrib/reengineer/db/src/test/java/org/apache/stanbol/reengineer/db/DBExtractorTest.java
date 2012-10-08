@@ -281,24 +281,6 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|PersistentCollectorFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|servicesapi
-operator|.
-name|scope
-operator|.
 name|ScopeManager
 import|;
 end_import
@@ -494,7 +476,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// Two different ontology storages, the same sparql engine and tcprovider
-name|PersistentCollectorFactory
+name|ClerezzaCollectorFactory
 name|sf
 init|=
 operator|new
@@ -513,6 +495,8 @@ argument_list|(
 name|ontologyProvider
 argument_list|,
 name|offline
+argument_list|,
+name|sf
 argument_list|,
 name|sf
 argument_list|,

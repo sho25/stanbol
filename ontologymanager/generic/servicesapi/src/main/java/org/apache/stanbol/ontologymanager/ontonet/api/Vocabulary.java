@@ -19,9 +19,11 @@ name|api
 package|;
 end_package
 
+begin_comment
+comment|/**  * An internal representation of the vocabulary that Stanbol uses internally for representing stored  * ontologies and virtual ontology networks, and restoring them on startup. This vocabulary is not intended to  * be used for ontologies exposed to the public.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.Vocabulary} as soon as  *             possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.Vocabulary  *   * @author alexdma  *   */
+end_comment
+
 begin_class
-annotation|@
-name|Deprecated
 specifier|public
 class|class
 name|Vocabulary

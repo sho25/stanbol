@@ -16,17 +16,31 @@ operator|.
 name|ontonet
 operator|.
 name|api
+operator|.
+name|io
 package|;
 end_package
 
-begin_comment
-comment|/**  * Denotes any API artifact that has a qualified identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact} as soon  *             as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact  *   * @author alexdma  *   */
-end_comment
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|OWLOntologyID
+import|;
+end_import
 
-begin_interface
+begin_class
+annotation|@
+name|Deprecated
 specifier|public
-interface|interface
-name|NamedArtifact
+class|class
+name|StoredOntologySource
 extends|extends
 name|org
 operator|.
@@ -38,9 +52,25 @@ name|ontologymanager
 operator|.
 name|servicesapi
 operator|.
-name|NamedArtifact
-block|{  }
-end_interface
+name|io
+operator|.
+name|StoredOntologySource
+block|{
+specifier|public
+name|StoredOntologySource
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|publicKey
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+end_class
 
 end_unit
 

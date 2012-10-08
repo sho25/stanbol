@@ -39,6 +39,26 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
+name|ontonet
+operator|.
+name|api
+operator|.
+name|scope
+operator|.
+name|OntologyScope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
 name|servicesapi
 operator|.
 name|OfflineConfiguration
@@ -64,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An Ontology Network Manager holds all references and tools for creating, modifying and deleting the logical  * realms that store Web Ontologies, as well as offer facilities for handling the ontologies contained  * therein.<br>  *<br>  * Note that since this object is both a {@link ScopeRegistry} and an {@link ScopeFactory}, the call to  * {@link ScopeRegistry#registerScope(OntologyScope)} or its overloads after  * {@link ScopeFactory#createOntologyScope(String, OntologyInputSource...)} is unnecessary, as the ONManager  * automatically registers newly created scopes.  *   * @author alexdma, anuzzolese  *   */
+comment|/**  * A Scope Manager holds all references and tools for creating, modifying and deleting the logical realms that  * store Web Ontologies, as well as offer facilities for handling the ontologies contained therein.<br>  *<br>  * Note that since this object is both a {@link ScopeRegistry} and an {@link ScopeFactory}, the call to  * {@link ScopeRegistry#registerScope(OntologyScope)} or its overloads after  * {@link ScopeFactory#createOntologyScope(String, OntologyInputSource...)} is unnecessary, as the ONManager  * automatically registers newly created scopes.  *   * @author alexdma, anuzzolese  *   */
 end_comment
 
 begin_interface
@@ -99,6 +119,10 @@ name|OfflineConfiguration
 name|getOfflineConfiguration
 parameter_list|()
 function_decl|;
+name|OntologySpaceFactory
+name|getOntologySpaceFactory
+parameter_list|()
+function_decl|;
 comment|/**      * Implementations should be able to create a {@link File} object from this path.      *       * @return the local path of the ontology storing the ontology network configuration.      */
 name|String
 name|getOntologyNetworkConfigurationPath
@@ -107,11 +131,6 @@ function_decl|;
 comment|/**      * Returns the base namespace to be used for the Stanbol ontology network (e.g. for the creation of new      * scopes). For convenience, it is returned as a string so that it can be concatenated to form IRIs.      *       * @deprecated please use {@link OfflineConfiguration#getDefaultOntologyNetworkNamespace()} to obtain the      *             namespace      *       * @return the base namespace of the Stanbol ontology network.      */
 name|String
 name|getOntologyNetworkNamespace
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the ontology space factory that was created along with the manager context.<br>      *<br>      * Note: Because this can be backend-dependent, this method is not deprecated yet.      *       * @return the default ontology space factory.      */
-name|PersistentCollectorFactory
-name|getPersistentCollectorFactory
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the unique ontology scope registry for this context.      *       * @deprecated This methods now returns the current object, which is also a {@link ScopeRegistry}.      * @return the ontology scope registry.      */

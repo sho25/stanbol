@@ -303,7 +303,7 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 import|;
 end_import
 
@@ -569,7 +569,7 @@ argument_list|)
 decl_stmt|;
 specifier|private
 specifier|static
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 name|factory
 decl_stmt|;
 specifier|private
@@ -709,7 +709,7 @@ name|factory
 operator|=
 name|onManager
 operator|.
-name|getPersistentCollectorFactory
+name|getOntologySpaceFactory
 argument_list|()
 expr_stmt|;
 if|if

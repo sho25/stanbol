@@ -55,8 +55,10 @@ begin_interface
 specifier|public
 interface|interface
 name|ScopeRegistry
+extends|extends
+name|ScopeEventListenable
 block|{
-comment|/**      * Adds a scope registration listener to this registry. If the listener was already added, this should      * result in no effect.      *       * @param listener      *            the listener to be added      */
+comment|/**      * Adds a scope registration listener to this registry. If the listener was already added, this should      * result in no effect.      *       * @deprecated use {@link ScopeEventListenable#addScopeEventListener(ScopeEventListener)}      *       * @param listener      *            the listener to be added      */
 name|void
 name|addScopeRegistrationListener
 parameter_list|(
@@ -64,7 +66,7 @@ name|ScopeEventListener
 name|listener
 parameter_list|)
 function_decl|;
-comment|/**      * Removes all registered scope registration listeners.      */
+comment|/**      * Removes all registered scope registration listeners.      *       * @deprecated use {@link ScopeEventListenable#clearScopeEventListeners()}      */
 name|void
 name|clearScopeRegistrationListeners
 parameter_list|()
@@ -108,7 +110,7 @@ name|String
 name|scopeID
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the set of registered scope registration listeners, in no particular order.      *       * @return the set of scope registration listeners      */
+comment|/**      * Returns the set of registered scope registration listeners, in no particular order.      *       * @deprecated use {@link ScopeEventListenable#getScopeEventListeners()}      *       * @return the set of scope registration listeners      */
 name|Set
 argument_list|<
 name|ScopeEventListener
@@ -146,7 +148,7 @@ parameter_list|)
 throws|throws
 name|DuplicateIDException
 function_decl|;
-comment|/**      * Removes a scope registration listener from this registry. If the listener was not previously added,      * this should result in no effect.      *       * @param listener      *            the listener to be removed      */
+comment|/**      * Removes a scope registration listener from this registry. If the listener was not previously added,      * this should result in no effect.      *       * @deprecated use {@link ScopeEventListenable#removeScopeEventListener(ScopeEventListener)}      *       * @param listener      *            the listener to be removed      */
 name|void
 name|removeScopeRegistrationListener
 parameter_list|(

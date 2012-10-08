@@ -1101,9 +1101,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|servicesapi
+name|ontonet
 operator|.
-name|OfflineConfiguration
+name|api
+operator|.
+name|OntologyNetworkConfiguration
 import|;
 end_import
 
@@ -1119,7 +1121,7 @@ name|ontologymanager
 operator|.
 name|servicesapi
 operator|.
-name|OntologyNetworkConfiguration
+name|OfflineConfiguration
 import|;
 end_import
 

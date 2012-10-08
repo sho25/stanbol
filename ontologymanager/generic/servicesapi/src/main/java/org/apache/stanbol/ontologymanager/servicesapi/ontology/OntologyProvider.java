@@ -143,7 +143,9 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|servicesapi
+name|ontonet
+operator|.
+name|api
 operator|.
 name|OntologyNetworkConfiguration
 import|;

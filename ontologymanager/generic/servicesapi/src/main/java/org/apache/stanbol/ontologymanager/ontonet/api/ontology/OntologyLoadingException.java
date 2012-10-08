@@ -16,17 +16,17 @@ operator|.
 name|ontonet
 operator|.
 name|api
+operator|.
+name|ontology
 package|;
 end_package
 
-begin_comment
-comment|/**  * Denotes any API artifact that has a qualified identifier. Both the identifier and the concatenation of the  * namespace with the identifier should be unique in the system. Having both a non-null namespace and ID is  * optional, but at least one of them should be non-null.  *   * @deprecated Packages, class names etc. containing "ontonet" in any capitalization are being phased out.  *             Please switch to {@link org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact} as soon  *             as possible.  *   * @see org.apache.stanbol.ontologymanager.servicesapi.NamedArtifact  *   * @author alexdma  *   */
-end_comment
-
-begin_interface
+begin_class
+annotation|@
+name|Deprecated
 specifier|public
-interface|interface
-name|NamedArtifact
+class|class
+name|OntologyLoadingException
 extends|extends
 name|org
 operator|.
@@ -38,9 +38,49 @@ name|ontologymanager
 operator|.
 name|servicesapi
 operator|.
-name|NamedArtifact
-block|{  }
-end_interface
+name|ontology
+operator|.
+name|OntologyLoadingException
+block|{
+comment|/**      *       */
+specifier|private
+specifier|static
+specifier|final
+name|long
+name|serialVersionUID
+init|=
+operator|-
+literal|4406721649095540941L
+decl_stmt|;
+specifier|public
+name|OntologyLoadingException
+parameter_list|(
+name|Throwable
+name|cause
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|cause
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Creates a new instance of {@link OntologyLoadingException}.      *       * @param message      *            the exception message.      */
+specifier|public
+name|OntologyLoadingException
+parameter_list|(
+name|String
+name|message
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+end_class
 
 end_unit
 

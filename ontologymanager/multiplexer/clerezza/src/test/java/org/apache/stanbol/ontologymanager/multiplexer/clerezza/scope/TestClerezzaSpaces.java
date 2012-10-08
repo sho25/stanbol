@@ -467,7 +467,7 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 import|;
 end_import
 
@@ -706,7 +706,7 @@ literal|null
 decl_stmt|;
 specifier|private
 specifier|static
-name|PersistentCollectorFactory
+name|OntologySpaceFactory
 name|factory
 decl_stmt|;
 specifier|private
