@@ -5285,6 +5285,14 @@ argument_list|(
 name|indexName
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|metadata
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//the core might be deleted in the meantime
 name|List
 argument_list|<
 name|String
@@ -5378,6 +5386,8 @@ name|isSynchronized
 argument_list|()
 expr_stmt|;
 block|}
+block|}
+comment|//else managed core was deleted in the meantime ...
 block|}
 return|return
 operator|!
