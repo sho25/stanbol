@@ -1140,11 +1140,6 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-name|yardTracker
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 synchronized|synchronized
 init|(
 name|yardReferenceLock
