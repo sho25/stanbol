@@ -1042,9 +1042,11 @@ argument_list|)
 decl_stmt|;
 comment|//two suggestions for New Zealand and one hierarchy entry for the first
 comment|//suggestion
+comment|//NOTE 2012-10-10: changed expected value back to "3" as geonames.org
+comment|//   again returns "Oceania" as parent for "New Zealand"
 name|assertEquals
 argument_list|(
-literal|2
+literal|3
 argument_list|,
 name|entityAnnotationCount
 argument_list|)

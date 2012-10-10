@@ -2194,7 +2194,9 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-comment|// test if the referred annotations are text annotations
+comment|// test if the referred annotations are text annotations or
+comment|// the referenced annotations is a fise:EntityAnnotation AND also a
+comment|// dc:requires link is defined (STANBOL-766)
 name|UriRef
 name|referredTextAnnotation
 init|=
@@ -2211,6 +2213,8 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
+literal|"fise:EntityAnnotations MUST BE dc:related to a fise:TextAnnotation OR dc:requires and dc:related to the same fise:EntityAnnotation"
+argument_list|,
 name|enhancements
 operator|.
 name|filter
@@ -2224,6 +2228,38 @@ argument_list|)
 operator|.
 name|hasNext
 argument_list|()
+operator|||
+operator|(
+name|enhancements
+operator|.
+name|filter
+argument_list|(
+name|referredTextAnnotation
+argument_list|,
+name|RDF_TYPE
+argument_list|,
+name|ENHANCER_ENTITYANNOTATION
+argument_list|)
+operator|.
+name|hasNext
+argument_list|()
+operator|&&
+name|enhancements
+operator|.
+name|filter
+argument_list|(
+name|entityAnnotation
+argument_list|,
+name|Properties
+operator|.
+name|DC_REQUIRES
+argument_list|,
+name|referredTextAnnotation
+argument_list|)
+operator|.
+name|hasNext
+argument_list|()
+operator|)
 argument_list|)
 expr_stmt|;
 block|}

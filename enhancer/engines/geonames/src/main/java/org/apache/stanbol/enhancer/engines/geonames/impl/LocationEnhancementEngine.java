@@ -3219,6 +3219,22 @@ name|requires
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//STANBOL-767: also add dc:relation link
+name|graph
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|entityAnnotation
+argument_list|,
+name|DC_RELATION
+argument_list|,
+name|requires
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 name|graph
