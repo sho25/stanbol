@@ -85,6 +85,20 @@ name|commons
 operator|.
 name|io
 operator|.
+name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|io
+operator|.
 name|IOUtils
 import|;
 end_import
@@ -1579,7 +1593,13 @@ name|setProperty
 argument_list|(
 literal|"Install-Path"
 argument_list|,
+name|FilenameUtils
+operator|.
+name|separatorsToUnix
+argument_list|(
 name|CONFIG_PATH
+argument_list|)
+comment|//see STANBOL-768
 operator|+
 name|config
 operator|.
