@@ -1190,6 +1190,10 @@ name|UriRef
 argument_list|>
 name|textAnnotationsMap
 decl_stmt|;
+specifier|private
+name|int
+name|connectionTimeout
+decl_stmt|;
 comment|/** 	 * Default constructor used by OSGI. It is expected that 	 * {@link #activate(ComponentContext)} is called before 	 * using the instance. 	 */
 specifier|public
 name|DBPSpotlightDisambiguateEnhancementEngine
@@ -1201,6 +1205,9 @@ name|DBPSpotlightDisambiguateEnhancementEngine
 parameter_list|(
 name|URL
 name|serviceURL
+parameter_list|,
+name|int
+name|connectionTimeout
 parameter_list|)
 block|{
 name|this
@@ -1208,6 +1215,12 @@ operator|.
 name|spotlightUrl
 operator|=
 name|serviceURL
+expr_stmt|;
+name|this
+operator|.
+name|connectionTimeout
+operator|=
+name|connectionTimeout
 expr_stmt|;
 block|}
 comment|/** 	 * Initialize all parameters from the configuration panel, or with their 	 * default values 	 *  	 * @param ce 	 *            the {@link ComponentContext} 	 */
@@ -1253,6 +1266,15 @@ operator|=
 name|SpotlightEngineUtils
 operator|.
 name|parseSpotlightServiceURL
+argument_list|(
+name|properties
+argument_list|)
+expr_stmt|;
+name|connectionTimeout
+operator|=
+name|SpotlightEngineUtils
+operator|.
+name|getConnectionTimeout
 argument_list|(
 name|properties
 argument_list|)
@@ -1873,6 +1895,33 @@ argument_list|,
 literal|"text/xml"
 argument_list|)
 expr_stmt|;
+comment|//set ConnectionTimeout (if configured)
+if|if
+condition|(
+name|connectionTimeout
+operator|>
+literal|0
+condition|)
+block|{
+name|connection
+operator|.
+name|setConnectTimeout
+argument_list|(
+name|connectionTimeout
+operator|*
+literal|1000
+argument_list|)
+expr_stmt|;
+name|connection
+operator|.
+name|setReadTimeout
+argument_list|(
+name|connectionTimeout
+operator|*
+literal|1000
+argument_list|)
+expr_stmt|;
+block|}
 name|connection
 operator|.
 name|setUseCaches

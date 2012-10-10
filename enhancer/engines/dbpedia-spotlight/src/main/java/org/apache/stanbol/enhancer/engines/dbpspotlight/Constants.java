@@ -143,6 +143,12 @@ name|PARAM_CONFIDENCE
 init|=
 literal|"dbpedia.spotlight.confidence"
 decl_stmt|;
+comment|/** 	 * Cab be used to set both connection AND read timeout for Http requests 	 * to the configured DBpedia Spotlight services.<br> 	 * Supported by all DBpedia Spotlight Engines. 	 */
+name|String
+name|PARAM_CONNECTION_TIMEOUT
+init|=
+literal|"dbpedia.spotlight.connection.timeout"
+decl_stmt|;
 comment|/** 	 * The namespace used by DBpedia Spotlight specific properties  	 */
 name|String
 name|SPOTLIGHT_NAME_SPACE
