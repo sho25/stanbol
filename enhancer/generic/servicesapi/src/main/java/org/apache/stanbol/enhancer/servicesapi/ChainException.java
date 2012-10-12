@@ -17,97 +17,29 @@ name|servicesapi
 package|;
 end_package
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|helper
-operator|.
-name|ExecutionPlanHelper
-operator|.
-name|getDependend
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.enhancer.servicesapi.helper.ExecutionPlanHelper.getDependend;
+end_comment
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|helper
-operator|.
-name|ExecutionPlanHelper
-operator|.
-name|getEngine
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.enhancer.servicesapi.helper.ExecutionPlanHelper.getEngine;
+end_comment
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|helper
-operator|.
-name|ExecutionPlanHelper
-operator|.
-name|isOptional
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.enhancer.servicesapi.helper.ExecutionPlanHelper.isOptional;
+end_comment
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Graph
-import|;
-end_import
+begin_comment
+comment|//
+end_comment
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|NonLiteral
-import|;
-end_import
+begin_comment
+comment|//import org.apache.clerezza.rdf.core.Graph;
+end_comment
+
+begin_comment
+comment|//import org.apache.clerezza.rdf.core.NonLiteral;
+end_comment
 
 begin_comment
 comment|/**  * BaseException thrown by {@link Chain} implementations or  * {@link EnhancementJobManager} implementations when encountering problems   * while executing e Chain  * @author Rupert Westenthaler  *  */
@@ -159,74 +91,21 @@ name|cause
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a chain exception for the parsed node within the parsed executionPlan      * @param executionPlan      * @param node      * @param message      * @param cause      */
-specifier|public
-name|ChainException
-parameter_list|(
-name|Graph
-name|executionPlan
-parameter_list|,
-name|NonLiteral
-name|node
-parameter_list|,
-name|String
-name|message
-parameter_list|,
-name|Throwable
-name|cause
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Unable to execute node {} (engine: {} | optional : {}"
-operator|+
-literal|" | dependsOn : {}) because of: {}"
-argument_list|,
-name|node
-argument_list|,
-name|getEngine
-argument_list|(
-name|executionPlan
-argument_list|,
-name|node
-argument_list|)
-argument_list|,
-name|isOptional
-argument_list|(
-name|executionPlan
-argument_list|,
-name|node
-argument_list|)
-argument_list|,
-name|getDependend
-argument_list|(
-name|executionPlan
-argument_list|,
-name|node
-argument_list|)
-argument_list|,
-name|message
-operator|==
-literal|null
-operator|||
-name|message
-operator|.
-name|isEmpty
-argument_list|()
-condition|?
-literal|"<unknown>"
-else|:
-name|message
-argument_list|)
-argument_list|,
-name|cause
-argument_list|)
-expr_stmt|;
-block|}
+comment|//Removed - unused
+comment|//    /**
+comment|//     * Creates a chain exception for the parsed node within the parsed executionPlan
+comment|//     * @param executionPlan
+comment|//     * @param node
+comment|//     * @param message
+comment|//     * @param cause
+comment|//     */
+comment|//    public ChainException(Graph executionPlan, NonLiteral node, String message, Throwable cause){
+comment|//        super(String.format("Unable to execute node {} (engine: {} | optional : {}" +
+comment|//        		" | dependsOn : {}) because of: {}",
+comment|//            node,getEngine(executionPlan, node),
+comment|//            isOptional(executionPlan, node), getDependend(executionPlan, node),
+comment|//            message == null || message.isEmpty() ? "<unknown>": message),cause);
+comment|//    }
 block|}
 end_class
 
