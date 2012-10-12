@@ -95,24 +95,6 @@ name|UriRef
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|servicesapi
-operator|.
-name|helper
-operator|.
-name|ContentItemHelper
-import|;
-end_import
-
 begin_comment
 comment|/**  * OSGI service to be used to create {@link ContentItem}s and Blobs.  *   * @since 0.9.1-incubating  */
 end_comment
@@ -132,7 +114,7 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
-comment|/**      * Creates a new ContentItem for the passed content source and an      * ID relative to the passed prefix.      * @param prefix the URI prefix used generate the URI of the content item.      * Note the only a generated ID will be added to the passed prefix. So passed      * values should typically end with an separator char (e.g. '/', '#', ':').      * Implementors might want to use      * {@link ContentItemHelper#streamDigest(InputStream, java.io.OutputStream, String)      * for generating an ID while reading the data from the ContentSource.      * @param source The content source      * @return the {@link ContentItem} with a generated id and the passed      * content as content-part of type {@link Blob} at index<code>0</code>      * @throws IllegalArgumentException if<code>null</code> is passed as content      * source, the content source is already consumed or the passed prefix is      *<code>null</code>      * @throws IOException on any error while reading the content from the       * content source.      */
+comment|/**      * Creates a new ContentItem for the passed content source and an      * ID relative to the passed prefix.      * @param prefix the URI prefix used generate the URI of the content item.      * Note the only a generated ID will be added to the passed prefix. So passed      * values should typically end with an separator char (e.g. '/', '#', ':').      * Implementors might want to use      * {@link org.apache.stanbol.enhancer.servicesapi.helper.ContentItemHelper#streamDigest(InputStream, java.io.OutputStream, String)      * for generating an ID while reading the data from the ContentSource.      * @param source The content source      * @return the {@link ContentItem} with a generated id and the passed      * content as content-part of type {@link Blob} at index<code>0</code>      * @throws IllegalArgumentException if<code>null</code> is passed as content      * source, the content source is already consumed or the passed prefix is      *<code>null</code>      * @throws IOException on any error while reading the content from the       * content source.      */
 name|ContentItem
 name|createContentItem
 parameter_list|(
