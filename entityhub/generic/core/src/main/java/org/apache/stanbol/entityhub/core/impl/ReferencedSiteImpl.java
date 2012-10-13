@@ -4239,6 +4239,11 @@ operator|=
 name|extractSiteMetadata
 argument_list|(
 name|siteConfiguration
+argument_list|,
+name|InMemoryValueFactory
+operator|.
+name|getInstance
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// if the accessUri is the same as the queryUri and both the

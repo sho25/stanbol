@@ -51,23 +51,9 @@ name|Entry
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|core
-operator|.
-name|model
-operator|.
-name|InMemoryValueFactory
-import|;
-end_import
+begin_comment
+comment|//import org.apache.stanbol.entityhub.core.model.InMemoryValueFactory;
+end_comment
 
 begin_import
 import|import
@@ -306,7 +292,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Sites need to provide Metadata about managed Entities (e.g. license,      * attribution, ...) those information are provided by the configuration      * of the site and need to be included with each requested entity.<p>      * This method implements the extracting of those information from the      * configuration.      * @param siteConfiguration the configuration      * @return the metadata for the parsed configuration      */
+comment|/**      * Sites need to provide Metadata about managed Entities (e.g. license,      * attribution, ...) those information are provided by the configuration      * of the site and need to be included with each requested entity.<p>      * This method implements the extracting of those information from the      * configuration.      * @param siteConfiguration the configuration      * @param vf The {@link ValueFactory} used to create values of the returned      * Map.      * @return the metadata for the parsed configuration      */
 specifier|public
 specifier|static
 name|Map
@@ -319,6 +305,9 @@ name|extractSiteMetadata
 parameter_list|(
 name|SiteConfiguration
 name|siteConfiguration
+parameter_list|,
+name|ValueFactory
+name|vf
 parameter_list|)
 block|{
 name|Map
@@ -336,14 +325,6 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-argument_list|()
-decl_stmt|;
-name|ValueFactory
-name|vf
-init|=
-name|InMemoryValueFactory
-operator|.
-name|getInstance
 argument_list|()
 decl_stmt|;
 if|if

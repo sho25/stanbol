@@ -601,9 +601,8 @@ name|String
 name|getName
 parameter_list|()
 block|{
-comment|// TODO Auto-generated method stub
 return|return
-literal|null
+literal|"dummyYard"
 return|;
 block|}
 annotation|@
@@ -761,6 +760,23 @@ name|random
 argument_list|()
 argument_list|)
 return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|removeAll
+parameter_list|()
+throws|throws
+name|YardException
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"I think this is not needed for testing"
+argument_list|)
+throw|;
 block|}
 block|}
 decl_stmt|;

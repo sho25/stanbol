@@ -257,6 +257,24 @@ name|entityhub
 operator|.
 name|core
 operator|.
+name|model
+operator|.
+name|InMemoryValueFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|core
+operator|.
 name|utils
 operator|.
 name|SiteUtils
@@ -825,6 +843,11 @@ operator|.
 name|extractSiteMetadata
 argument_list|(
 name|siteConfiguration
+argument_list|,
+name|InMemoryValueFactory
+operator|.
+name|getInstance
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//Initialise the Yard

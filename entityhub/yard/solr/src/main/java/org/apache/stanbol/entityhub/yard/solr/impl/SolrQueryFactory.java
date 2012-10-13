@@ -1633,6 +1633,16 @@ argument_list|,
 literal|"details"
 argument_list|)
 expr_stmt|;
+name|query
+operator|.
+name|set
+argument_list|(
+literal|"mlt.boost"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|//testing
 name|List
 argument_list|<
 name|String
@@ -1995,7 +2005,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
 literal|"QueryString: {}"
 argument_list|,
@@ -2038,6 +2048,15 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Solr Query: {}"
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
 return|return
 name|query
 return|;

@@ -145,9 +145,9 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|core
+name|servicesapi
 operator|.
-name|utils
+name|util
 operator|.
 name|AdaptingIterator
 operator|.

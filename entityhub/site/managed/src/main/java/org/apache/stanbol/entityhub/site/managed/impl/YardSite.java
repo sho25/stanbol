@@ -155,9 +155,9 @@ name|entityhub
 operator|.
 name|core
 operator|.
-name|query
+name|model
 operator|.
-name|QueryResultListImpl
+name|InMemoryValueFactory
 import|;
 end_import
 
@@ -173,9 +173,9 @@ name|entityhub
 operator|.
 name|core
 operator|.
-name|utils
+name|query
 operator|.
-name|AdaptingIterator
+name|QueryResultListImpl
 import|;
 end_import
 
@@ -479,6 +479,24 @@ name|entityhub
 operator|.
 name|servicesapi
 operator|.
+name|util
+operator|.
+name|AdaptingIterator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
 name|yard
 operator|.
 name|Yard
@@ -609,6 +627,11 @@ operator|=
 name|extractSiteMetadata
 argument_list|(
 name|config
+argument_list|,
+name|InMemoryValueFactory
+operator|.
+name|getInstance
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//all entities of managed sites are locally cached - so we can add this
