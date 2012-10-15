@@ -50,20 +50,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|osgi
-operator|.
-name|framework
-operator|.
-name|Constants
-operator|.
-name|SERVICE_PID
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -90,16 +76,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Arrays
 import|;
 end_import
 
@@ -195,18 +171,6 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-operator|.
-name|Entry
-import|;
-end_import
-
-begin_import
-import|import
 name|javax
 operator|.
 name|xml
@@ -219,15 +183,13 @@ end_import
 
 begin_import
 import|import
-name|org
+name|javax
 operator|.
-name|apache
+name|xml
 operator|.
-name|commons
+name|xpath
 operator|.
-name|io
-operator|.
-name|FileUtils
+name|XPathFactory
 import|;
 end_import
 
@@ -242,22 +204,6 @@ operator|.
 name|io
 operator|.
 name|FilenameUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|client
-operator|.
-name|solrj
-operator|.
-name|SolrServer
 import|;
 end_import
 
@@ -1062,7 +1008,7 @@ argument_list|()
 operator|.
 name|setContextClassLoader
 argument_list|(
-name|SolrServerAdapter
+name|CoreContainer
 operator|.
 name|class
 operator|.
