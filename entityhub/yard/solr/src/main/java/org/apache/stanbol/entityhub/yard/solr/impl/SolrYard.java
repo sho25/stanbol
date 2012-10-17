@@ -2728,6 +2728,15 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... start tracking for SolrCore based on {}"
+argument_list|,
+name|indexReference
+argument_list|)
+expr_stmt|;
 name|_registeredServerTracker
 operator|.
 name|open
