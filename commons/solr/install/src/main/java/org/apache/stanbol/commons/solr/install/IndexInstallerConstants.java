@@ -14,6 +14,8 @@ operator|.
 name|commons
 operator|.
 name|solr
+operator|.
+name|install
 package|;
 end_package
 

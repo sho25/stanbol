@@ -183,7 +183,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 operator|.
 name|ManagementUtils
 operator|.
@@ -205,7 +205,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 operator|.
 name|ManagementUtils
 operator|.
@@ -732,6 +732,26 @@ operator|.
 name|standalone
 operator|.
 name|ClassPathDataFileProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|managed
+operator|.
+name|util
+operator|.
+name|ManagementUtils
 import|;
 end_import
 

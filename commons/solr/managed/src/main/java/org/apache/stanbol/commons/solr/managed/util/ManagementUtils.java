@@ -17,7 +17,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 package|;
 end_package
 

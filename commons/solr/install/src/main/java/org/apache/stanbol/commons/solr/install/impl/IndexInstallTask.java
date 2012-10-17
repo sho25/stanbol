@@ -33,6 +33,8 @@ name|commons
 operator|.
 name|solr
 operator|.
+name|install
+operator|.
 name|IndexInstallerConstants
 operator|.
 name|PROPERTY_ARCHIVE_FORMAT

@@ -1428,7 +1428,7 @@ argument_list|()
 operator|.
 name|setContextClassLoader
 argument_list|(
-name|SolrServerPublishingComponent
+name|CoreContainer
 operator|.
 name|class
 operator|.

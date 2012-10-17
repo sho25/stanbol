@@ -35,7 +35,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 operator|.
 name|ManagementUtils
 operator|.
@@ -57,7 +57,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 operator|.
 name|ManagementUtils
 operator|.
@@ -79,7 +79,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 operator|.
 name|ManagementUtils
 operator|.
@@ -411,7 +411,7 @@ name|solr
 operator|.
 name|managed
 operator|.
-name|impl
+name|util
 operator|.
 name|ManagementUtils
 import|;
