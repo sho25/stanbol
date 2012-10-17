@@ -203,13 +203,11 @@ name|stanbol
 operator|.
 name|contenthub
 operator|.
+name|servicesapi
+operator|.
 name|search
 operator|.
-name|solr
-operator|.
-name|util
-operator|.
-name|SolrQueryUtil
+name|SearchException
 import|;
 end_import
 
@@ -227,7 +225,9 @@ name|servicesapi
 operator|.
 name|search
 operator|.
-name|SearchException
+name|solr
+operator|.
+name|SolrQueryUtil
 import|;
 end_import
 

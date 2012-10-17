@@ -13,11 +13,11 @@ name|stanbol
 operator|.
 name|contenthub
 operator|.
+name|servicesapi
+operator|.
 name|search
 operator|.
 name|solr
-operator|.
-name|util
 package|;
 end_package
 
@@ -348,12 +348,10 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * @author anil.pacaci  * @deprecated This class was moved to   *   {@link org.apache.stanbol.contenthub.servicesapi.search.solr.SolrQueryUtil}  */
+comment|/**  *   * @author anil.pacaci  *   */
 end_comment
 
 begin_class
-annotation|@
-name|Deprecated
 specifier|public
 class|class
 name|SolrQueryUtil
@@ -447,8 +445,6 @@ argument_list|,
 literal|','
 argument_list|)
 decl_stmt|;
-annotation|@
-name|Deprecated
 specifier|private
 specifier|static
 name|String
@@ -673,8 +669,6 @@ return|return
 name|query
 return|;
 block|}
-annotation|@
-name|Deprecated
 specifier|private
 specifier|static
 name|String
@@ -784,8 +778,6 @@ return|return
 name|query
 return|;
 block|}
-annotation|@
-name|Deprecated
 specifier|private
 specifier|static
 name|String
@@ -828,8 +820,6 @@ return|return
 name|query
 return|;
 block|}
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|String
@@ -887,8 +877,6 @@ argument_list|()
 return|;
 block|}
 comment|/**      * This methods adds a facet field the given<code>solrQuery</code> for each facet passed in      *<code>allAvailableFacetNames</code>. This provides obtaining information about specified facets such as      * possible facet values, number documents of documents matching with certain values of facets, etc in the      * search results.      *       * @param solrQuery      *            {@link SolrQuery} to be extended with facet fields      * @param allAvailableFacetNames      *            list of facets      */
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 parameter_list|<
@@ -1042,8 +1030,6 @@ block|}
 block|}
 block|}
 comment|/**      * This method create a {@link SolrQuery} using the given parameters.<code>queryTerm</code> is the main      * query of the solr query to be created.<code>solrServer</code> is used fetch possible facet fields of      * the underlying Solr schema. Obtained facet names are attached to the query to obtain the corresponding      * facet information such as possible facet values, number documents of documents matching with certain      * values of facets, etc in the search results.      *       * @param solrServer      *            Solr server to obtain corresponding facet names      * @param queryTerm      *            main query term to be used in {@link SolrQuery#setQuery(String)}      * @return {@link SolrQuery} constructed by using the given parameters      * @throws SolrServerException      * @throws IOException      */
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|SolrQuery
@@ -1089,8 +1075,6 @@ name|solrQuery
 return|;
 block|}
 comment|/**      * This method simply wraps the given<code>queryTerm</code> in a {@link SolrQuery} instance.      *       * @param queryTerm      *            {@link String} query term to be represented as a {@link SolrQuery}      * @return {@link SolrQuery} wrapping the given<code>queryTerm</code>      */
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|SolrQuery
@@ -1119,8 +1103,6 @@ name|solrQuery
 return|;
 block|}
 comment|/**      * This method creates a {@link SolrQuery} with the given parameters. It sets the<code>queryTerm</code>      * as the main query and for each constraint passed in the<code>constraints</code> a filter query is      * added to the solr query.      *       * @param queryTerm      *            main query to be used in {@link SolrQuery#setQuery(String)}      * @param allAvailableFacets      *            {@link FacetResult}s passed in this list are used to check types of the facets.      * @param constraints      *            additional constraints to be applied in the {@link SolrQuery}.      * @return {@link SolrQuery} constructed by using the given parameters      */
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|SolrQuery
@@ -1298,8 +1280,6 @@ return|return
 name|query
 return|;
 block|}
-annotation|@
-name|Deprecated
 specifier|private
 specifier|static
 name|String
@@ -1351,8 +1331,6 @@ return|return
 literal|""
 return|;
 block|}
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|List
@@ -1428,8 +1406,6 @@ return|return
 name|facetNames
 return|;
 block|}
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|NamedList
@@ -1521,8 +1497,6 @@ throw|;
 block|}
 block|}
 comment|/**      * This method parses the {@link Set} of {@link Constraint} and update the {@link SolrQuery} with      * corresponding field queries. Name of the field is obtained from associated {@link Facet} of a      * constraint and the value is obtained from the constraint itself.      *       * @param constraints      *            {@link Set} of {@link Constraint}s to be transformed into the given<code>solrQuery</code>      * @param solrQuery      *            {@link SolrQuery} to be updated with the given<code>constraints</code>      */
-annotation|@
-name|Deprecated
 specifier|public
 specifier|static
 name|void
