@@ -983,10 +983,7 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|// the
-comment|// baseUri
-comment|// is
-comment|// required!
+comment|// the baseUri is required!
 name|specVersion
 operator|=
 literal|"1.1"
