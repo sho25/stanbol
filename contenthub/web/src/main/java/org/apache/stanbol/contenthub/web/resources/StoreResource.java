@@ -4221,7 +4221,7 @@ operator|!
 operator|(
 name|solrSearch
 operator|instanceof
-name|SolrSearchImpl
+name|SolrSearch
 operator|)
 condition|)
 block|{
