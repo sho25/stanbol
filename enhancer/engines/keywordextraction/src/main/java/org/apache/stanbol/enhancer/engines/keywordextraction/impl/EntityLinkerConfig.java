@@ -17,7 +17,7 @@ name|engines
 operator|.
 name|keywordextraction
 operator|.
-name|linking
+name|impl
 package|;
 end_package
 
@@ -185,9 +185,7 @@ name|keywordextraction
 operator|.
 name|linking
 operator|.
-name|Suggestion
-operator|.
-name|MATCH
+name|EntitySearcher
 import|;
 end_import
 

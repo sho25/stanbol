@@ -21,7 +21,7 @@ name|engines
 operator|.
 name|keywordextraction
 operator|.
-name|linking
+name|impl
 package|;
 end_package
 
@@ -42,6 +42,26 @@ operator|.
 name|util
 operator|.
 name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|engines
+operator|.
+name|keywordextraction
+operator|.
+name|linking
+operator|.
+name|EntitySearcher
 import|;
 end_import
 

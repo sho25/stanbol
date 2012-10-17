@@ -37,18 +37,6 @@ end_import
 
 begin_import
 import|import
-name|opennlp
-operator|.
-name|tools
-operator|.
-name|util
-operator|.
-name|Span
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
