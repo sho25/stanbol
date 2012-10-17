@@ -1927,32 +1927,13 @@ block|}
 block|}
 comment|//else this listener is already in the notified state ... ignore
 block|}
-if|if
-condition|(
-name|is
-operator|!=
-literal|null
-condition|)
-block|{
-comment|//the created InputStream was not sent to a Listener
-try|try
-block|{
-name|is
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-comment|//clean up
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|e
-parameter_list|)
-block|{
-comment|//ignore
-block|}
-block|}
+comment|//            if(is != null) { //the created InputStream was not sent to a Listener
+comment|//                try {
+comment|//                    is.close(); //clean up
+comment|//                } catch (IOException e) {
+comment|//                    //ignore
+comment|//                }
+comment|//            }
 block|}
 block|}
 block|}
