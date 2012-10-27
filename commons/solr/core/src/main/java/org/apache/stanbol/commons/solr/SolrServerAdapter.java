@@ -410,7 +410,7 @@ annotation|@
 name|Override
 specifier|public
 name|void
-name|close
+name|preClose
 parameter_list|(
 name|SolrCore
 name|core
@@ -519,6 +519,18 @@ comment|//update the OSGI service for the CoreContainer
 name|updateServerRegistration
 argument_list|()
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|postClose
+parameter_list|(
+name|SolrCore
+name|core
+parameter_list|)
+block|{
+comment|//nothing to do
 block|}
 block|}
 decl_stmt|;
@@ -655,6 +667,45 @@ argument_list|()
 decl_stmt|;
 try|try
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|">> +++++++++++++++++++++++"
+argument_list|)
+expr_stmt|;
+name|XPathFactory
+operator|.
+name|newInstance
+argument_list|()
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|">>  {}"
+argument_list|,
+name|org
+operator|.
+name|xml
+operator|.
+name|sax
+operator|.
+name|InputSource
+operator|.
+name|class
+operator|.
+name|getClassLoader
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|">> +++++++++++++++++++++++"
+argument_list|)
+expr_stmt|;
 name|container
 operator|.
 name|load
