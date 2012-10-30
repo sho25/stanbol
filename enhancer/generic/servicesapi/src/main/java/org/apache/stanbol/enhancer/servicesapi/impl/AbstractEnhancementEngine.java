@@ -365,6 +365,31 @@ return|return
 name|name
 return|;
 block|}
+comment|/**      * Prints the simple name of the Class and the configured Name.      */
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"%s(name=%s)"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|,
+name|name
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

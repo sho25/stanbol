@@ -114,6 +114,23 @@ operator|+
 literal|"created"
 argument_list|)
 decl_stmt|;
+comment|/**      * Modification date of a resource. Used by Stanbol Enhancer to annotate the       * modification date of the enhancement if it was changed by an other      * enhancement engine as the one creating it. Multiple changes of the      * creating enhancement engines are not considered as modifications.      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|DC_MODIFIED
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|dc
+operator|+
+literal|"modified"
+argument_list|)
+decl_stmt|;
 comment|/**      * The entity responsible for the creation of a resource. Used by Stanbol Enhancer to      * annotate the enhancement engine that created an enhancement      */
 specifier|public
 specifier|static
@@ -129,6 +146,23 @@ operator|.
 name|dc
 operator|+
 literal|"creator"
+argument_list|)
+decl_stmt|;
+comment|/**      * The entity contributed to a resource. Used by Stanbol Enhancer to      * annotate the enhancement engine that changed an enhancement originally      * created by an other enhancemetn engine      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|DC_CONTRIBUTOR
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|dc
+operator|+
+literal|"contributor"
 argument_list|)
 decl_stmt|;
 comment|/**      * The nature or genre of the resource. Stanbol Enhancer uses this property to refer to      * the type of the enhancement. Values should be URIs defined in some      * controlled vocabulary      */
