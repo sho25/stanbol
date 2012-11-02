@@ -703,6 +703,24 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
+name|impl
+operator|.
+name|AbstractEnhancementEngine
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
 name|rdf
 operator|.
 name|OntologicalClasses
@@ -748,13 +766,21 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Core of our EnhancementEngine, separated from the OSGi service to make it easier to test this.  */
+comment|/**  * Core of the NER EnhancementEngine(s), separated from the OSGi service to make   * it easier to test this.  */
 end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|NEREngineCore
+extends|extends
+name|AbstractEnhancementEngine
+argument_list|<
+name|IOException
+argument_list|,
+name|RuntimeException
+argument_list|>
 implements|implements
 name|EnhancementEngine
 block|{
@@ -796,77 +822,13 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|static
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|UriRef
-argument_list|>
-name|entityTypes
-init|=
-operator|new
-name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|UriRef
-argument_list|>
-argument_list|()
-decl_stmt|;
-static|static
-block|{
-name|entityTypes
-operator|.
-name|put
-argument_list|(
-literal|"person"
-argument_list|,
-name|OntologicalClasses
-operator|.
-name|DBPEDIA_PERSON
-argument_list|)
-expr_stmt|;
-name|entityTypes
-operator|.
-name|put
-argument_list|(
-literal|"location"
-argument_list|,
-name|OntologicalClasses
-operator|.
-name|DBPEDIA_PLACE
-argument_list|)
-expr_stmt|;
-name|entityTypes
-operator|.
-name|put
-argument_list|(
-literal|"organization"
-argument_list|,
-name|OntologicalClasses
-operator|.
-name|DBPEDIA_ORGANISATION
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
+specifier|protected
 name|OpenNLP
 name|openNLP
 decl_stmt|;
-specifier|private
-specifier|final
-name|String
-name|defaultLang
-decl_stmt|;
-specifier|private
-specifier|final
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|processedLangs
+specifier|protected
+name|NEREngineConfig
+name|config
 decl_stmt|;
 comment|/** Comments about our models */
 specifier|public
@@ -903,48 +865,65 @@ literal|"provided by the org.apache.stanbol.defaultdata bundle"
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
+comment|/**      * If used sub classes MUST ensure that {@link #openNLP} and {@link #config}      * are set before calling {@link #canEnhance(ContentItem)} or      * {@link #computeEnhancements(ContentItem)}      */
+specifier|protected
+name|NEREngineCore
+parameter_list|()
+block|{}
 name|NEREngineCore
 parameter_list|(
 name|OpenNLP
 name|openNLP
 parameter_list|,
-name|String
-name|defaultLanguage
-parameter_list|,
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|processedLanguages
+name|NEREngineConfig
+name|config
 parameter_list|)
 throws|throws
 name|InvalidFormatException
 throws|,
 name|IOException
 block|{
-name|this
-operator|.
+if|if
+condition|(
 name|openNLP
-operator|=
-name|openNLP
-expr_stmt|;
-name|this
-operator|.
-name|defaultLang
-operator|=
-name|defaultLanguage
-expr_stmt|;
-name|this
-operator|.
-name|processedLangs
-operator|=
-name|Collections
-operator|.
-name|unmodifiableSet
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
 argument_list|(
-name|processedLanguages
+literal|"The parsed OpenNLP instance MUST NOT be NULL!"
 argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|config
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed NER engine configuration MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+name|this
+operator|.
+name|openNLP
+operator|=
+name|openNLP
+expr_stmt|;
+name|this
+operator|.
+name|config
+operator|=
+name|config
 expr_stmt|;
 block|}
 name|NEREngineCore
@@ -952,14 +931,8 @@ parameter_list|(
 name|DataFileProvider
 name|dfp
 parameter_list|,
-name|String
-name|defaultLanguage
-parameter_list|,
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|processedLanguages
+name|NEREngineConfig
+name|config
 parameter_list|)
 throws|throws
 name|InvalidFormatException
@@ -974,33 +947,9 @@ argument_list|(
 name|dfp
 argument_list|)
 argument_list|,
-name|defaultLanguage
-argument_list|,
-name|processedLanguages
+name|config
 argument_list|)
 expr_stmt|;
-block|}
-comment|//    protected TokenNameFinderModel buildNameModel(String name, UriRef typeUri) throws IOException {
-comment|//        //String modelRelativePath = String.format("en-ner-%s.bin", name);
-comment|//        TokenNameFinderModel model = openNLP.getNameModel(name, "en");
-comment|//        // register the name finder instances for matching owl class
-comment|////        entityTypes.put(name, new Object[] {typeUri, model});
-comment|//        return model;
-comment|//    }
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getName
-parameter_list|()
-block|{
-return|return
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-return|;
 block|}
 specifier|public
 name|void
@@ -1052,7 +1001,7 @@ block|}
 if|if
 condition|(
 operator|!
-name|isProcessedLangage
+name|isNerModel
 argument_list|(
 name|language
 argument_list|)
@@ -1062,7 +1011,7 @@ throw|throw
 operator|new
 name|IllegalStateException
 argument_list|(
-literal|"The language '"
+literal|"For the language '"
 operator|+
 name|language
 operator|+
@@ -1073,13 +1022,7 @@ operator|.
 name|getUri
 argument_list|()
 operator|+
-literal|" is not configured to be processed by this NER engine instance "
-operator|+
-literal|"(processed "
-operator|+
-name|processedLangs
-operator|+
-literal|"): This is also checked in the canEnhance "
+literal|" no NER model is configured: This is also checked in the canEnhance "
 operator|+
 literal|"method! -> This indicated an Bug in the implementation of the "
 operator|+
@@ -1240,40 +1183,27 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
+if|if
+condition|(
+name|config
+operator|.
+name|isProcessedLangage
+argument_list|(
+name|language
+argument_list|)
+condition|)
+block|{
 for|for
 control|(
-name|Map
-operator|.
-name|Entry
-argument_list|<
 name|String
-argument_list|,
-name|UriRef
-argument_list|>
-name|type
+name|defaultModelType
 range|:
-name|entityTypes
+name|config
 operator|.
-name|entrySet
+name|getDefaultModelTypes
 argument_list|()
 control|)
 block|{
-name|String
-name|typeLabel
-init|=
-name|type
-operator|.
-name|getKey
-argument_list|()
-decl_stmt|;
-name|UriRef
-name|typeUri
-init|=
-name|type
-operator|.
-name|getValue
-argument_list|()
-decl_stmt|;
 name|TokenNameFinderModel
 name|nameFinderModel
 init|=
@@ -1281,7 +1211,7 @@ name|openNLP
 operator|.
 name|getNameModel
 argument_list|(
-name|typeLabel
+name|defaultModelType
 argument_list|,
 name|language
 argument_list|)
@@ -1299,7 +1229,7 @@ name|info
 argument_list|(
 literal|"No NER Model for {} and language {} available!"
 argument_list|,
-name|typeLabel
+name|defaultModelType
 argument_list|,
 name|language
 argument_list|)
@@ -1315,11 +1245,104 @@ name|text
 argument_list|,
 name|language
 argument_list|,
-name|typeUri
+name|nameFinderModel
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+comment|//else do not use default models for languages other than the processed one
+comment|//process for additional models
+for|for
+control|(
+name|String
+name|additionalModel
+range|:
+name|config
+operator|.
+name|getSpecificNerModles
+argument_list|(
+name|language
+argument_list|)
+control|)
+block|{
+name|TokenNameFinderModel
+name|nameFinderModel
+decl_stmt|;
+try|try
+block|{
+name|nameFinderModel
+operator|=
+name|openNLP
+operator|.
+name|getModel
+argument_list|(
+name|TokenNameFinderModel
+operator|.
+name|class
 argument_list|,
-name|typeLabel
+name|additionalModel
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|findNamedEntities
+argument_list|(
+name|ci
+argument_list|,
+name|text
+argument_list|,
+name|language
 argument_list|,
 name|nameFinderModel
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to load TokenNameFinderModel model for language '"
+operator|+
+name|language
+operator|+
+literal|"' (model: "
+operator|+
+name|additionalModel
+operator|+
+literal|")"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Error while creating ChunkerModel for language '"
+operator|+
+name|language
+operator|+
+literal|"' (model: "
+operator|+
+name|additionalModel
+operator|+
+literal|")"
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 block|}
@@ -1376,14 +1399,6 @@ parameter_list|,
 specifier|final
 name|String
 name|lang
-parameter_list|,
-specifier|final
-name|UriRef
-name|typeUri
-parameter_list|,
-specifier|final
-name|String
-name|typeLabel
 parameter_list|,
 specifier|final
 name|TokenNameFinderModel
@@ -1464,19 +1479,27 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"findNamedEntities typeUri={}, type={}, text="
+literal|"findNamedEntities model={},  language={}, text="
 argument_list|,
 operator|new
 name|Object
 index|[]
 block|{
-name|typeUri
+name|nameFinderModel
 block|,
-name|typeLabel
+name|language
 block|,
 name|StringUtils
 operator|.
@@ -1489,6 +1512,7 @@ argument_list|)
 block|}
 argument_list|)
 expr_stmt|;
+block|}
 name|LiteralFactory
 name|literalFactory
 init|=
@@ -1663,6 +1687,15 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|occurrence
+operator|.
+name|type
+operator|!=
+literal|null
+condition|)
+block|{
 name|g
 operator|.
 name|add
@@ -1674,10 +1707,13 @@ name|textAnnotation
 argument_list|,
 name|DC_TYPE
 argument_list|,
-name|typeUri
+name|occurrence
+operator|.
+name|type
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 name|g
 operator|.
 name|add
@@ -2710,6 +2746,22 @@ operator|.
 name|length
 argument_list|()
 decl_stmt|;
+name|UriRef
+name|mappedType
+init|=
+name|config
+operator|.
+name|getMappedType
+argument_list|(
+name|nameSpans
+index|[
+name|j
+index|]
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|NameOccurrence
 name|occurrence
 init|=
@@ -2721,6 +2773,8 @@ argument_list|,
 name|absoluteStart
 argument_list|,
 name|absoluteEnd
+argument_list|,
+name|mappedType
 argument_list|,
 name|context
 argument_list|,
@@ -2819,7 +2873,7 @@ argument_list|)
 operator|!=
 literal|null
 operator|&&
-name|isProcessedLangage
+name|isNerModel
 argument_list|(
 name|extractLanguage
 argument_list|(
@@ -2831,11 +2885,13 @@ block|{
 return|return
 name|ENHANCE_ASYNC
 return|;
-comment|//The NER engine now supports Async processing!
 block|}
+else|else
+block|{
 return|return
 name|CANNOT_ENHANCE
 return|;
+block|}
 block|}
 comment|/**      * Remove non UTF-8 compliant characters (typically control characters) so has to avoid polluting the      * annotation graph with snippets that are not serializable as XML.      */
 specifier|protected
@@ -2954,63 +3010,6 @@ name|UTF8
 argument_list|)
 return|;
 block|}
-comment|/**      * The default language      * @return the defaultLang      */
-specifier|public
-name|String
-name|getDefaultLanguage
-parameter_list|()
-block|{
-return|return
-name|defaultLang
-return|;
-block|}
-comment|/**      * Checks if the parsed language is enabled for processing.      * If<code>null</code> is parsed as language this returns<code>false</code>      * even if processing of all languages is enabled.<p>      * NOTE: If this Method returns<code>true</code> this does      * not mean that text with this language can be actually processed because this      * also requires that the NER model for this language are available via the      * parsed {@link OpenNLP} instance.      * @param lang the language      * @return the state      */
-specifier|public
-name|boolean
-name|isProcessedLangage
-parameter_list|(
-name|String
-name|lang
-parameter_list|)
-block|{
-return|return
-name|lang
-operator|!=
-literal|null
-operator|&&
-operator|(
-name|processedLangs
-operator|.
-name|isEmpty
-argument_list|()
-operator|||
-name|processedLangs
-operator|.
-name|contains
-argument_list|(
-name|lang
-argument_list|)
-operator|)
-return|;
-block|}
-comment|/*      * The following Utility extracts the language from the metadata of the      * parsed Content Item.      * This Utility is actually a copy of the same form the KeywordExtractionEngine.      * TODO: change this to a global Utility as soon as STANBOL Enhancement      * Structure is defined      */
-comment|/**      * The literal representing the LangIDEngine as creator.      */
-specifier|public
-specifier|static
-specifier|final
-name|Literal
-name|LANG_ID_ENGINE_NAME
-init|=
-name|LiteralFactory
-operator|.
-name|getInstance
-argument_list|()
-operator|.
-name|createTypedLiteral
-argument_list|(
-literal|"org.apache.stanbol.enhancer.engines.langid.LangIdEnhancementEngine"
-argument_list|)
-decl_stmt|;
 comment|/**      * Extracts the language of the parsed ContentItem by using      * {@link EnhancementEngineHelper#getLanguage(ContentItem)} and       * {@link #defaultLang} as default      * @param ci the content item      * @return the language      */
 specifier|private
 name|String
@@ -3030,13 +3029,6 @@ argument_list|(
 name|ci
 argument_list|)
 decl_stmt|;
-comment|//        MGraph metadata = ci.getMetadata();
-comment|//        Iterator<Triple> langaugeEnhancementCreatorTriples =
-comment|//            metadata.filter(null, Properties.DC_CREATOR, LANG_ID_ENGINE_NAME);
-comment|//        if(langaugeEnhancementCreatorTriples.hasNext()){
-comment|//            String lang = EnhancementEngineHelper.getString(metadata,
-comment|//                langaugeEnhancementCreatorTriples.next().getSubject(),
-comment|//                Properties.DC_LANGUAGE);
 if|if
 condition|(
 name|lang
@@ -3054,12 +3046,8 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Unable to extract language for ContentItem %s! The Enhancement of the %s is missing the %s property"
+literal|"Unable to extract language for ContentItem %s!"
 argument_list|,
-operator|new
-name|Object
-index|[]
-block|{
 name|ci
 operator|.
 name|getUri
@@ -3067,16 +3055,6 @@ argument_list|()
 operator|.
 name|getUnicodeString
 argument_list|()
-block|,
-name|LANG_ID_ENGINE_NAME
-operator|.
-name|getLexicalForm
-argument_list|()
-block|,
-name|Properties
-operator|.
-name|DC_LANGUAGE
-block|}
 argument_list|)
 expr_stmt|;
 name|log
@@ -3085,19 +3063,59 @@ name|info
 argument_list|(
 literal|" ... return '{}' as default"
 argument_list|,
-name|defaultLang
+name|config
+operator|.
+name|getDefaultLanguage
+argument_list|()
 argument_list|)
 expr_stmt|;
 return|return
-name|defaultLang
+name|config
+operator|.
+name|getDefaultLanguage
+argument_list|()
 return|;
 block|}
-comment|//        } else {
-comment|//            log.info("Unable to extract language for ContentItem {}! Is the {} active?",
-comment|//                ci.getUri().getUnicodeString(),LANG_ID_ENGINE_NAME.getLexicalForm());
-comment|//            log.info(" ... return '{}' as default",defaultLang);
-comment|//            return defaultLang;
-comment|//        }
+block|}
+comment|/**      * This Method checks if this configuration does have a NER model for the      * parsed language. This checks if the pased language       * {@link #isProcessedLangage(String)} and any {@link #getDefaultModelTypes()}      * is present OR if any {@link #getSpecificNerModles(String)} is configured for the      * parsed language.      * @param lang The language to check      * @return if there is any NER model configured for the parsed language      */
+specifier|public
+name|boolean
+name|isNerModel
+parameter_list|(
+name|String
+name|lang
+parameter_list|)
+block|{
+return|return
+operator|(
+name|config
+operator|.
+name|isProcessedLangage
+argument_list|(
+name|lang
+argument_list|)
+operator|&&
+operator|!
+name|config
+operator|.
+name|getDefaultModelTypes
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+operator|)
+operator|||
+operator|!
+name|config
+operator|.
+name|getSpecificNerModles
+argument_list|(
+name|lang
+argument_list|)
+operator|.
+name|isEmpty
+argument_list|()
+return|;
 block|}
 block|}
 end_class

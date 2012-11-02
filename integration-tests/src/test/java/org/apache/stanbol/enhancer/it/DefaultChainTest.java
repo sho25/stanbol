@@ -210,7 +210,7 @@ literal|"http://purl.org/dc/terms/language.*en"
 argument_list|,
 literal|"http://fise.iks-project.eu/ontology/entity-label.*Paris"
 argument_list|,
-literal|"http://purl.org/dc/terms/creator.*org.apache.stanbol.enhancer.engines.opennlp.*EngineCore"
+literal|"http://purl.org/dc/terms/creator.*org.apache.stanbol.enhancer.engines.opennlp.*NamedEntityExtractionEnhancementEngine"
 argument_list|,
 literal|"http://fise.iks-project.eu/ontology/entity-label.*Bob Marley"
 argument_list|,

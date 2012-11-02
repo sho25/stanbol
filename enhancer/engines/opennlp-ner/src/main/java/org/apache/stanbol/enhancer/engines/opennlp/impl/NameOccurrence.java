@@ -21,6 +21,22 @@ name|impl
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
@@ -52,6 +68,11 @@ name|Double
 name|confidence
 decl_stmt|;
 specifier|public
+specifier|final
+name|UriRef
+name|type
+decl_stmt|;
+specifier|public
 name|NameOccurrence
 parameter_list|(
 name|String
@@ -62,6 +83,9 @@ name|start
 parameter_list|,
 name|Integer
 name|end
+parameter_list|,
+name|UriRef
+name|type
 parameter_list|,
 name|String
 name|context
@@ -90,6 +114,12 @@ name|name
 expr_stmt|;
 name|this
 operator|.
+name|type
+operator|=
+name|type
+expr_stmt|;
+name|this
+operator|.
 name|context
 operator|=
 name|context
@@ -113,13 +143,15 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"[name='%s', start='%d', end='%d', confidence='%f', context='%s']"
+literal|"[name='%s', start='%d', end='%d', type='%s', confidence='%f', context='%s']"
 argument_list|,
 name|name
 argument_list|,
 name|start
 argument_list|,
 name|end
+argument_list|,
+name|type
 argument_list|,
 name|confidence
 argument_list|,
