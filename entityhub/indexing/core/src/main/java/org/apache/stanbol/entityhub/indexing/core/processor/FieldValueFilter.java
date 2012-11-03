@@ -279,7 +279,6 @@ parameter_list|)
 block|{
 if|if
 condition|(
-operator|!
 name|includeEmpty
 operator|&&
 name|values
@@ -330,8 +329,13 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
+comment|//NOTE: if !includeEmpty values may be NULL (any value accepted)
 if|if
 condition|(
+name|values
+operator|==
+literal|null
+operator|||
 name|values
 operator|.
 name|contains
@@ -477,34 +481,6 @@ expr_stmt|;
 if|if
 condition|(
 name|value
-operator|==
-literal|null
-operator|||
-name|value
-operator|.
-name|toString
-argument_list|()
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Missing required Parameter "
-operator|+
-name|PARAM_VALUES
-operator|+
-literal|". Set to '*' to deactivate Filtering"
-argument_list|)
-throw|;
-block|}
-elseif|else
-if|if
-condition|(
-name|value
 operator|instanceof
 name|String
 condition|)
@@ -539,6 +515,12 @@ name|Collections
 operator|.
 name|emptySet
 argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|includeEmpty
+operator|=
+literal|true
 expr_stmt|;
 block|}
 else|else
@@ -709,6 +691,12 @@ name|emptySet
 argument_list|()
 expr_stmt|;
 comment|// than deactivate filtering
+name|this
+operator|.
+name|includeEmpty
+operator|=
+literal|true
+expr_stmt|;
 block|}
 else|else
 block|{
@@ -821,28 +809,14 @@ block|}
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Type of parameter "
-operator|+
-name|PARAM_VALUES
-operator|+
-literal|'='
-operator|+
-name|value
-operator|+
-literal|"(type:"
-operator|+
-name|value
+comment|// no values (accept all entities with any value)
+name|values
+operator|=
+name|Collections
 operator|.
-name|getClass
+name|emptySet
 argument_list|()
-operator|+
-literal|") is not supported MUST be String or String[]!"
-argument_list|)
-throw|;
+expr_stmt|;
 block|}
 block|}
 block|}
