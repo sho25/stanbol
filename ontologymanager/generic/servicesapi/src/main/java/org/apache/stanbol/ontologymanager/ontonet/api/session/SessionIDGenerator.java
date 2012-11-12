@@ -17,48 +17,32 @@ name|ontonet
 operator|.
 name|api
 operator|.
-name|collector
+name|session
 package|;
 end_package
 
-begin_class
+begin_interface
 annotation|@
 name|Deprecated
 specifier|public
-class|class
-name|IrremovableOntologyException
+interface|interface
+name|SessionIDGenerator
 extends|extends
-name|OntologyCollectorModificationException
-block|{
-comment|/**      *       */
-specifier|private
-specifier|static
-specifier|final
-name|long
-name|serialVersionUID
-init|=
-literal|2804710441701624939L
-decl_stmt|;
-specifier|public
-name|IrremovableOntologyException
-parameter_list|(
-name|OntologyCollector
-name|collector
-parameter_list|,
-name|Throwable
-name|cause
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|collector
-argument_list|,
-name|cause
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-end_class
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|servicesapi
+operator|.
+name|session
+operator|.
+name|SessionIDGenerator
+block|{  }
+end_interface
 
 end_unit
 

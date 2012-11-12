@@ -21,24 +21,6 @@ name|collector
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|servicesapi
-operator|.
-name|collector
-operator|.
-name|OntologyCollector
-import|;
-end_import
-
 begin_class
 annotation|@
 name|Deprecated

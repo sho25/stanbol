@@ -241,6 +241,23 @@ parameter_list|<
 name|S
 parameter_list|>
 block|{
+comment|/**      * The status of a stored ontology entry in the {@link OntologyProvider}.      *       * @author alexdma      *       */
+specifier|public
+enum|enum
+name|Status
+block|{
+comment|/**          * A non-null ontology object can be obtained by querying the ontology provider for this entry.          */
+name|MATCH
+block|,
+comment|/**          * No such entry is registered as either a primary key or an alias in the ontology provider.          */
+name|NO_MATCH
+block|,
+comment|/**          * The entry is registered and assigned a graph name, but the corresponding graph cannot be found.          */
+name|ORPHAN
+block|,
+comment|/**          * The entry is registered but not assigned a graph.          */
+name|UNCHARTED
+block|}
 comment|/**      * The key used to configure the prefix to be used for addressing ontologies stored by this provider.      */
 specifier|public
 name|String
@@ -358,6 +375,13 @@ name|OWLOntologyID
 argument_list|>
 name|getPublicKeys
 parameter_list|()
+function_decl|;
+name|Status
+name|getStatus
+parameter_list|(
+name|OWLOntologyID
+name|publicKey
+parameter_list|)
 function_decl|;
 comment|/**      * Returns the storage system used by this ontology provider (e.g. a {@link TcProvider} or an      * {@link OWLOntologyManager}).      *       * @return the ontology store.      */
 name|S
@@ -490,7 +514,7 @@ name|IRI
 name|ontologyIri
 parameter_list|)
 function_decl|;
-comment|/**      * Checks if an ontology with the specified OWL ontology ID is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(IRI, Class)} and checking      * if the returned value is not null.      *       * @param publicKey      *            the ontology id. If there is both an ontology IRI and a version IRI, both must match the      *            ontology provider's records in order to return true. Otherwise, it will return true iff      *<i>any</i> match with the ontology IIR is found, no matter its version IRI.      * @return true iff an ontology with the supplied id is in the provider's store.      */
+comment|/**      * Checks if an ontology with the specified OWL ontology ID is in the ontology provider's store.<br>      *<br>      * Implementations are typically faster than calling {@link #getStoredOntology(IRI, Class)} and checking      * if the returned value is not null.      *       * @deprecated the notion of "having an ontology" has become ambiguous. Please use      *             {@link #getStatus(OWLOntologyID)} and verify its value.      *       * @param publicKey      *            the ontology id. If there is both an ontology IRI and a version IRI, both must match the      *            ontology provider's records in order to return true. Otherwise, it will return true iff      *<i>any</i> match with the ontology IIR is found, no matter its version IRI.      * @return true iff an ontology with the supplied id is in the provider's store.      */
 name|boolean
 name|hasOntology
 parameter_list|(
