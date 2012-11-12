@@ -1044,13 +1044,10 @@ comment|//two suggestions for New Zealand and one hierarchy entry for the first
 comment|//suggestion
 comment|//NOTE 2012-10-10: changed expected value back to "3" as geonames.org
 comment|//   again returns "Oceania" as parent for "New Zealand"
-name|assertEquals
-argument_list|(
-literal|3
-argument_list|,
-name|entityAnnotationCount
-argument_list|)
-expr_stmt|;
+comment|//NOTE: 2012-11-12: deactivated this check, because this the fact that
+comment|//   "Oceania" is returned as parent for "New Zealand" changes every
+comment|//   every view weeks
+comment|//assertEquals(3, entityAnnotationCount);
 block|}
 block|}
 end_class
