@@ -79,6 +79,18 @@ name|junit
 operator|.
 name|Assert
 operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
 name|assertNotNull
 import|;
 end_import
@@ -92,6 +104,18 @@ operator|.
 name|Assert
 operator|.
 name|assertNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
@@ -423,9 +447,12 @@ argument_list|,
 literal|10
 argument_list|)
 decl_stmt|;
-name|assertNull
+name|assertTrue
 argument_list|(
 name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Try again with no limit
@@ -455,6 +482,14 @@ expr_stmt|;
 name|assertNotNull
 argument_list|(
 name|id
+argument_list|)
+expr_stmt|;
+name|assertFalse
+argument_list|(
+name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -613,9 +648,12 @@ argument_list|,
 literal|10
 argument_list|)
 decl_stmt|;
-name|assertNull
+name|assertTrue
 argument_list|(
 name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Reasonable triple limit with low offset: guessing should return the unversioned ID.
@@ -649,6 +687,14 @@ expr_stmt|;
 name|assertNotNull
 argument_list|(
 name|id
+argument_list|)
+expr_stmt|;
+name|assertFalse
+argument_list|(
+name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -693,6 +739,14 @@ argument_list|(
 name|id
 argument_list|)
 expr_stmt|;
+name|assertFalse
+argument_list|(
+name|id
+operator|.
+name|isAnonymous
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expectedOntId
@@ -727,6 +781,14 @@ expr_stmt|;
 name|assertNotNull
 argument_list|(
 name|id
+argument_list|)
+expr_stmt|;
+name|assertFalse
+argument_list|(
+name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -946,9 +1008,12 @@ argument_list|,
 literal|99
 argument_list|)
 decl_stmt|;
-name|assertNull
+name|assertTrue
 argument_list|(
 name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Try again, setting limit = 1024 (offset = 102) should work.
@@ -980,6 +1045,14 @@ expr_stmt|;
 name|assertNotNull
 argument_list|(
 name|id
+argument_list|)
+expr_stmt|;
+name|assertFalse
+argument_list|(
+name|id
+operator|.
+name|isAnonymous
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertEquals

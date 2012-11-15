@@ -801,7 +801,17 @@ parameter_list|(
 name|RuntimeException
 name|e
 parameter_list|)
-block|{}
+block|{
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Parsing failed for format {}. Returning null."
+argument_list|,
+name|format
+argument_list|)
+expr_stmt|;
+block|}
 name|OWLOntologyID
 name|result
 decl_stmt|;
@@ -825,7 +835,9 @@ argument_list|)
 expr_stmt|;
 name|result
 operator|=
-literal|null
+operator|new
+name|OWLOntologyID
+argument_list|()
 expr_stmt|;
 block|}
 else|else
