@@ -21,9 +21,9 @@ end_package
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -33,9 +33,9 @@ end_import
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -45,9 +45,21 @@ end_import
 
 begin_import
 import|import static
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -147,16 +159,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -166,6 +168,16 @@ operator|.
 name|io
 operator|.
 name|FileUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 import|;
 end_import
 
@@ -679,13 +691,38 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Ensures that the three tests testing the API are called in the right order      */
 annotation|@
 name|Test
 specifier|public
 name|void
+name|testManagedSolrServer
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+name|testGetManagedIndexes
+argument_list|()
+expr_stmt|;
+name|testIsManagedIndex
+argument_list|()
+expr_stmt|;
+name|testDefaultIndexInitialisation
+argument_list|()
+expr_stmt|;
+block|}
+specifier|private
+name|void
 name|testGetManagedIndexes
 parameter_list|()
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"test getManagedIndeces"
+argument_list|)
+expr_stmt|;
 name|Set
 argument_list|<
 name|String
@@ -737,6 +774,15 @@ range|:
 name|present
 control|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... {}"
+argument_list|,
+name|metadata
+argument_list|)
+expr_stmt|;
 name|presentNames
 operator|.
 name|add
@@ -814,9 +860,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
 name|testIsManagedIndex
 parameter_list|()
@@ -856,9 +900,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
 name|testDefaultIndexInitialisation
 parameter_list|()
@@ -891,8 +933,6 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"The metadata returned after creating index "
