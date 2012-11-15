@@ -903,12 +903,15 @@ block|}
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|initOfflineAccess
+argument_list|()
+expr_stmt|;
 block|}
-annotation|@
-name|Test
-specifier|public
+comment|/**      * no longer a test ... as it needs to run before all others      */
+specifier|private
+specifier|static
 name|void
-name|testOfflineAccess
+name|initOfflineAccess
 parameter_list|()
 block|{
 try|try
