@@ -527,9 +527,32 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Ensures that the tests are called in the correct order      * @throws ExecutionException       * @throws InterruptedException       */
 annotation|@
 name|Test
 specifier|public
+name|void
+name|testJobManagerImpl
+parameter_list|()
+throws|throws
+name|InterruptedException
+throws|,
+name|ExecutionException
+block|{
+name|contains
+argument_list|()
+expr_stmt|;
+name|future
+argument_list|()
+expr_stmt|;
+name|interrupt
+argument_list|()
+expr_stmt|;
+name|ping
+argument_list|()
+expr_stmt|;
+block|}
+specifier|private
 name|void
 name|contains
 parameter_list|()
@@ -561,9 +584,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
 name|future
 parameter_list|()
@@ -614,9 +635,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
 name|ping
 parameter_list|()
@@ -682,9 +701,7 @@ block|}
 block|}
 block|}
 comment|/**      * To test the interaction with the Future object, for interrupting jobs. Jobs are canceled, but they      * persist in the manager.      */
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
 name|interrupt
 parameter_list|()
