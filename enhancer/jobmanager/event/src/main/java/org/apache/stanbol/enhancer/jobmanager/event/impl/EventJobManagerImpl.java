@@ -501,6 +501,22 @@ name|EventJobManagerImpl
 operator|.
 name|DEFAULT_SERVICE_RANKING
 argument_list|)
+block|,
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+name|EventJobManagerImpl
+operator|.
+name|MAX_ENHANCEMENT_JOB_WAIT_TIME
+argument_list|,
+name|intValue
+operator|=
+name|EventJobManagerImpl
+operator|.
+name|DEFAULT_MAX_ENHANCEMENT_JOB_WAIT_TIME
+argument_list|)
 block|}
 argument_list|)
 specifier|public
@@ -531,11 +547,19 @@ name|DEFAULT_SERVICE_RANKING
 init|=
 literal|0
 decl_stmt|;
-specifier|private
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|MAX_ENHANCEMENT_JOB_WAIT_TIME
+init|=
+literal|"stanbol.maxEnhancementJobWaitTime"
+decl_stmt|;
+specifier|public
 specifier|static
 specifier|final
 name|int
-name|MAX_ENHANCEMENT_JOB_WAIT_TIME
+name|DEFAULT_MAX_ENHANCEMENT_JOB_WAIT_TIME
 init|=
 literal|10
 operator|*
@@ -566,6 +590,12 @@ decl_stmt|;
 specifier|private
 name|EnhancementJobHandler
 name|jobHandler
+decl_stmt|;
+specifier|private
+name|int
+name|maxEnhancementJobWaitTime
+init|=
+name|DEFAULT_MAX_ENHANCEMENT_JOB_WAIT_TIME
 decl_stmt|;
 comment|/**      * Instantiates and registers the {@link EnhancementJobHandler} as      * {@link EventHandler} for the topic       * {@link org.apache.stanbol.enhancer.jobmanager.event.Constants#TOPIC_JOB_MANAGER}      * @param ctx      */
 annotation|@
@@ -658,6 +688,36 @@ argument_list|,
 name|properties
 argument_list|)
 expr_stmt|;
+name|Object
+name|maxWaitTime
+init|=
+name|ctx
+operator|.
+name|getProperties
+argument_list|()
+operator|.
+name|get
+argument_list|(
+name|MAX_ENHANCEMENT_JOB_WAIT_TIME
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|maxWaitTime
+operator|instanceof
+name|Integer
+condition|)
+block|{
+name|this
+operator|.
+name|maxEnhancementJobWaitTime
+operator|=
+operator|(
+name|Integer
+operator|)
+name|maxWaitTime
+expr_stmt|;
+block|}
 block|}
 comment|/**      * Unregisters the {@link EnhancementJobHandler}      * @param ctx      */
 annotation|@
@@ -818,7 +878,7 @@ operator|.
 name|getUri
 argument_list|()
 operator|+
-literal|"' because NULL was parsed as enhancement chain"
+literal|"' because NULL was passed as enhancement chain"
 argument_list|)
 throw|;
 block|}
@@ -894,7 +954,7 @@ name|observer
 operator|.
 name|waitForCompletion
 argument_list|(
-name|MAX_ENHANCEMENT_JOB_WAIT_TIME
+name|maxEnhancementJobWaitTime
 argument_list|)
 expr_stmt|;
 block|}
@@ -1000,19 +1060,19 @@ name|ChainException
 argument_list|(
 literal|"EnhancementJobManager was deactivated while"
 operator|+
-literal|"enhancing the parsed ContentItem "
+literal|" enhancing the passed ContentItem "
 operator|+
 name|job
 operator|.
 name|getContentItem
 argument_list|()
 operator|+
-literal|"(EnhancementJobManager type: "
+literal|" (EnhancementJobManager type: "
 operator|+
 name|getClass
 argument_list|()
 operator|+
-literal|")!"
+literal|")"
 argument_list|)
 throw|;
 block|}
