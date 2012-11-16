@@ -82,7 +82,7 @@ name|sources
 operator|.
 name|owlapi
 operator|.
-name|RootOntologyIRISource
+name|RootOntologySource
 block|{
 specifier|public
 name|RootOntologyIRISource
@@ -134,13 +134,11 @@ parameter_list|)
 throws|throws
 name|OWLOntologyCreationException
 block|{
-name|super
+name|this
 argument_list|(
 name|rootPhysicalIri
 argument_list|,
 name|manager
-argument_list|,
-name|ignoreIriMappers
 argument_list|)
 expr_stmt|;
 block|}

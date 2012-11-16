@@ -771,8 +771,6 @@ operator|new
 name|RootOntologySource
 argument_list|(
 name|ont
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 comment|// Let's state that Linus is a human being
@@ -883,8 +881,6 @@ operator|new
 name|RootOntologySource
 argument_list|(
 name|ont2
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}

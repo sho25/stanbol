@@ -1309,7 +1309,7 @@ name|sources
 operator|.
 name|owlapi
 operator|.
-name|RootOntologyIRISource
+name|RootOntologySource
 import|;
 end_import
 
@@ -4113,7 +4113,7 @@ operator|.
 name|addOntology
 argument_list|(
 operator|new
-name|RootOntologyIRISource
+name|RootOntologySource
 argument_list|(
 name|IRI
 operator|.
@@ -4799,6 +4799,16 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+name|guessed
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|guessed
+operator|.
+name|isAnonymous
+argument_list|()
+operator|&&
 name|ontologyProvider
 operator|.
 name|hasOntology
@@ -4890,7 +4900,7 @@ name|GraphContentInputSource
 argument_list|(
 name|content
 argument_list|,
-name|format
+name|f
 argument_list|,
 name|ontologyProvider
 operator|.
@@ -4979,7 +4989,7 @@ block|{
 name|src
 operator|=
 operator|new
-name|RootOntologyIRISource
+name|RootOntologySource
 argument_list|(
 name|location
 argument_list|)

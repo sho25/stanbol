@@ -351,7 +351,7 @@ name|sources
 operator|.
 name|owlapi
 operator|.
-name|RootOntologyIRISource
+name|RootOntologySource
 import|;
 end_import
 
@@ -1203,7 +1203,7 @@ name|OntologyInputSource
 name|xmlowlSrc
 init|=
 operator|new
-name|RootOntologyIRISource
+name|RootOntologySource
 argument_list|(
 name|IRI
 operator|.

@@ -4890,6 +4890,7 @@ condition|)
 do|;
 if|if
 condition|(
+operator|(
 name|key
 operator|==
 literal|null
@@ -4898,6 +4899,7 @@ name|key
 operator|.
 name|isAnonymous
 argument_list|()
+operator|)
 operator|&&
 name|rb
 operator|==

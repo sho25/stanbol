@@ -718,6 +718,8 @@ argument_list|,
 name|f
 argument_list|)
 expr_stmt|;
+comment|// No way to retry if the stream cannot be reset. Must recreate it.
+break|break;
 block|}
 block|}
 block|}
@@ -772,6 +774,7 @@ name|tcProvider
 operator|!=
 literal|null
 condition|)
+block|{
 name|tcProvider
 operator|.
 name|deleteTripleCollection
@@ -779,11 +782,21 @@ argument_list|(
 name|name
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Parsing failed. Deleting triple collection {}"
+argument_list|,
+name|name
+argument_list|)
+expr_stmt|;
+block|}
 throw|throw
 operator|new
 name|OntologyLoadingException
 argument_list|(
-literal|"All parsers failed. Giving up."
+literal|"Parsing failed. Giving up."
 argument_list|)
 throw|;
 block|}
