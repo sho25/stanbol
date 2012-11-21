@@ -697,6 +697,10 @@ argument_list|(
 literal|"index"
 argument_list|,
 name|this
+argument_list|,
+name|AbstractEnhancerUiResource
+operator|.
+name|class
 argument_list|)
 argument_list|,
 name|TEXT_HTML
