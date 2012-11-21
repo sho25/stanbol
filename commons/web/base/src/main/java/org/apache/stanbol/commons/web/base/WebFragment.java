@@ -99,11 +99,6 @@ argument_list|>
 name|getJaxrsResourceSingletons
 parameter_list|()
 function_decl|;
-comment|/**      * @return a template load instance that can be used by the FreemarkerViewProcessor for building the HTML      *         UI incrementally. If this is an instance of ClassTemplateLoader, the class path visibility      *         should be exported using the Export-Package bundle declaration.      */
-name|TemplateLoader
-name|getTemplateLoader
-parameter_list|()
-function_decl|;
 comment|/**      * CSS and favicon resources to be linked in the head of all HTML pages controlled by the NavigationMixin      * abstract resource. The resources will be published under:      *       * ${it.staticRootUrl}/${link.fragmentName}/${link.relativePath}      */
 name|List
 argument_list|<

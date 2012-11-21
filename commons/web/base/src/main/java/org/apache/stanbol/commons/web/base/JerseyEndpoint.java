@@ -1149,16 +1149,6 @@ name|getJaxrsResourceSingletons
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|app
-operator|.
-name|contributeTemplateLoader
-argument_list|(
-name|fragment
-operator|.
-name|getTemplateLoader
-argument_list|()
-argument_list|)
-expr_stmt|;
 name|String
 name|staticPath
 init|=

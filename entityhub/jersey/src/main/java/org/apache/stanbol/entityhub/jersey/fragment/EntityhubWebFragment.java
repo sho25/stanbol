@@ -845,24 +845,6 @@ return|return
 name|STATIC_RESOURCE_PATH
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|TemplateLoader
-name|getTemplateLoader
-parameter_list|()
-block|{
-return|return
-operator|new
-name|ClassTemplateLoader
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|,
-name|TEMPLATE_PATH
-argument_list|)
-return|;
-block|}
 block|}
 end_class
 
