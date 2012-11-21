@@ -301,7 +301,7 @@ specifier|final
 name|String
 name|TEMPLATE_PATH
 init|=
-literal|"/org/apache/stanbol/commons/web/home/templates"
+literal|"/templates"
 decl_stmt|;
 specifier|private
 name|BundleContext

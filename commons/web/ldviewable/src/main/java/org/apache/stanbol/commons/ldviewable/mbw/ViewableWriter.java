@@ -35,6 +35,16 @@ name|java
 operator|.
 name|io
 operator|.
+name|InputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
 name|OutputStream
 import|;
 end_import
@@ -46,6 +56,16 @@ operator|.
 name|io
 operator|.
 name|OutputStreamWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|PrintStream
 import|;
 end_import
 
@@ -85,6 +105,46 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|servlet
+operator|.
+name|ServletContext
+import|;
+end_import
+
+begin_import
+import|import
 name|javax
 operator|.
 name|ws
@@ -104,6 +164,20 @@ operator|.
 name|rs
 operator|.
 name|WebApplicationException
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|Context
 import|;
 end_import
 
@@ -226,6 +300,72 @@ operator|.
 name|ldviewable
 operator|.
 name|Viewable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|spi
+operator|.
+name|template
+operator|.
+name|ViewProcessor
+import|;
+end_import
+
+begin_import
+import|import
+name|freemarker
+operator|.
+name|cache
+operator|.
+name|TemplateLoader
+import|;
+end_import
+
+begin_import
+import|import
+name|freemarker
+operator|.
+name|template
+operator|.
+name|Configuration
+import|;
+end_import
+
+begin_import
+import|import
+name|freemarker
+operator|.
+name|template
+operator|.
+name|Template
 import|;
 end_import
 
@@ -441,6 +581,614 @@ block|}
 block|}
 block|}
 end_class
+
+begin_comment
+comment|//TODO check if some frremarker config settings should be taken from there
+end_comment
+
+begin_comment
+comment|//public class FreemarkerViewProcessor implements ViewProcessor<Template> {
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    private final Logger log = LoggerFactory.getLogger(getClass());
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    protected Configuration freemarkerConfig;
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    protected TemplateLoader templateLoader;
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    @Context
+end_comment
+
+begin_comment
+comment|//    protected ServletContext context;
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    public FreemarkerViewProcessor(TemplateLoader templateLoader) {
+end_comment
+
+begin_comment
+comment|//        this.templateLoader = templateLoader;
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    /**
+end_comment
+
+begin_comment
+comment|//     * @return extension for templates, ".ftl" by default; if we don't see this
+end_comment
+
+begin_comment
+comment|//     *         at the end of your view we'll append it so we can find the
+end_comment
+
+begin_comment
+comment|//     *         template resource
+end_comment
+
+begin_comment
+comment|//     */
+end_comment
+
+begin_comment
+comment|//    protected String getDefaultExtension() {
+end_comment
+
+begin_comment
+comment|//        return ".ftl";
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    /**
+end_comment
+
+begin_comment
+comment|//     * Define additional variables to make available to the template.
+end_comment
+
+begin_comment
+comment|//     *
+end_comment
+
+begin_comment
+comment|//     * @param viewableVariables variables provided by whomever generated the
+end_comment
+
+begin_comment
+comment|//     *            viewable object; these are provided for reference only, there
+end_comment
+
+begin_comment
+comment|//     *            will be no effect if you modify this map
+end_comment
+
+begin_comment
+comment|//     * @return new variables for the template context, which will override any
+end_comment
+
+begin_comment
+comment|//     *         defaults provided
+end_comment
+
+begin_comment
+comment|//     */
+end_comment
+
+begin_comment
+comment|//    protected Map<String, Object> getVariablesForTemplate(
+end_comment
+
+begin_comment
+comment|//            final Map<String, Object> viewableVariables) {
+end_comment
+
+begin_comment
+comment|//        return Collections.emptyMap();
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    /**
+end_comment
+
+begin_comment
+comment|//     * Catch any exception generated during template processing.
+end_comment
+
+begin_comment
+comment|//     *
+end_comment
+
+begin_comment
+comment|//     * @param t throwable caught
+end_comment
+
+begin_comment
+comment|//     * @param templatePath path of template we're executing
+end_comment
+
+begin_comment
+comment|//     * @param templateContext context use when evaluating this template
+end_comment
+
+begin_comment
+comment|//     * @param out output stream from servlet container
+end_comment
+
+begin_comment
+comment|//     * @throws IOException on any write errors, or if you want to rethrow
+end_comment
+
+begin_comment
+comment|//     */
+end_comment
+
+begin_comment
+comment|//    protected void onProcessException(final Throwable t,
+end_comment
+
+begin_comment
+comment|//            final Template template, final Map<String, Object> templateContext,
+end_comment
+
+begin_comment
+comment|//            final OutputStream out) throws IOException {
+end_comment
+
+begin_comment
+comment|//        log.error("Error processing freemarker template @ "
+end_comment
+
+begin_comment
+comment|//                + template.getName() + ": " + t.getMessage(), t);
+end_comment
+
+begin_comment
+comment|//        out.write("<pre>".getBytes());
+end_comment
+
+begin_comment
+comment|//        t.printStackTrace(new PrintStream(out));
+end_comment
+
+begin_comment
+comment|//        out.write("</pre>".getBytes());
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    /**
+end_comment
+
+begin_comment
+comment|//     * Modify freemarker configuration after we've created it and applied any
+end_comment
+
+begin_comment
+comment|//     * settings from 'freemarker.properties' on the classpath.
+end_comment
+
+begin_comment
+comment|//     *
+end_comment
+
+begin_comment
+comment|//     * @param config configuration we've created so far
+end_comment
+
+begin_comment
+comment|//     * @param context servlet context used to create the configuration
+end_comment
+
+begin_comment
+comment|//     */
+end_comment
+
+begin_comment
+comment|//    protected void assignFreemarkerConfig(final Configuration config,
+end_comment
+
+begin_comment
+comment|//            final ServletContext context) {
+end_comment
+
+begin_comment
+comment|//        // TODO read those parameters from context instead of hardcoding them
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//        // don't always put a ',' in numbers (e.g., id=2000 vs id=2,000)
+end_comment
+
+begin_comment
+comment|//        config.setNumberFormat("0");
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//        // don't look for list.en.ftl when list.ftl requested
+end_comment
+
+begin_comment
+comment|//        config.setLocalizedLookup(false);
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//        // don't cache for more that 2s
+end_comment
+
+begin_comment
+comment|//        config.setTemplateUpdateDelay(2);
+end_comment
+
+begin_comment
+comment|//        config.setDefaultEncoding("utf-8");
+end_comment
+
+begin_comment
+comment|//        config.setOutputEncoding("utf-8");
+end_comment
+
+begin_comment
+comment|//        log.info("Assigned default freemarker configuration");
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    protected Configuration getConfig() {
+end_comment
+
+begin_comment
+comment|//        if (freemarkerConfig == null) {
+end_comment
+
+begin_comment
+comment|//            // deferred initialization of the freemarker config to ensure that
+end_comment
+
+begin_comment
+comment|//            // the injected ServletContext is fully functional
+end_comment
+
+begin_comment
+comment|//            Configuration config = new Configuration();
+end_comment
+
+begin_comment
+comment|//            config.setTemplateLoader(templateLoader);
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//            // TODO: make the usage of a freemaker properties file an explicit
+end_comment
+
+begin_comment
+comment|//            // parameter declared in the servlet context instead of magic
+end_comment
+
+begin_comment
+comment|//            // classloading auto-detect. That way the application could
+end_comment
+
+begin_comment
+comment|//            // explicitly override the defaults
+end_comment
+
+begin_comment
+comment|//            final InputStream fmProps = context.getResourceAsStream("freemarker.properties");
+end_comment
+
+begin_comment
+comment|//            boolean loadDefaults = true;
+end_comment
+
+begin_comment
+comment|//            if (fmProps != null) {
+end_comment
+
+begin_comment
+comment|//                try {
+end_comment
+
+begin_comment
+comment|//                    config.setSettings(fmProps);
+end_comment
+
+begin_comment
+comment|//                    log.info("Assigned freemarker configuration from 'freemarker.properties'");
+end_comment
+
+begin_comment
+comment|//                    loadDefaults = false;
+end_comment
+
+begin_comment
+comment|//                } catch (Throwable t) {
+end_comment
+
+begin_comment
+comment|//                    log.warn(
+end_comment
+
+begin_comment
+comment|//                            "Failed to load/assign freemarker.properties, will"
+end_comment
+
+begin_comment
+comment|//                                    + " use default settings instead: "
+end_comment
+
+begin_comment
+comment|//                                    + t.getMessage(), t);
+end_comment
+
+begin_comment
+comment|//                }
+end_comment
+
+begin_comment
+comment|//            }
+end_comment
+
+begin_comment
+comment|//            if (loadDefaults) {
+end_comment
+
+begin_comment
+comment|//                assignFreemarkerConfig(config, context);
+end_comment
+
+begin_comment
+comment|//            }
+end_comment
+
+begin_comment
+comment|//            freemarkerConfig = config;
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//        return freemarkerConfig;
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    public Template resolve(final String path) {
+end_comment
+
+begin_comment
+comment|//        // accept both '/path/to/template' and '/path/to/template.ftl'
+end_comment
+
+begin_comment
+comment|//        final String defaultExtension = getDefaultExtension();
+end_comment
+
+begin_comment
+comment|//        final String filePath = path.endsWith(defaultExtension) ? path : path
+end_comment
+
+begin_comment
+comment|//                + defaultExtension;
+end_comment
+
+begin_comment
+comment|//        try {
+end_comment
+
+begin_comment
+comment|//            return getConfig().getTemplate(filePath);
+end_comment
+
+begin_comment
+comment|//        } catch (IOException e) {
+end_comment
+
+begin_comment
+comment|//            log.error("Failed to load freemaker template: " + filePath);
+end_comment
+
+begin_comment
+comment|//            return null;
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//    @SuppressWarnings("unchecked")
+end_comment
+
+begin_comment
+comment|//    public void writeTo(Template template, Viewable viewable, OutputStream out)
+end_comment
+
+begin_comment
+comment|//            throws IOException {
+end_comment
+
+begin_comment
+comment|//        out.flush(); // send status + headers
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//        Object model = viewable.getModel();
+end_comment
+
+begin_comment
+comment|//        final Map<String, Object> vars = new HashMap<String, Object>();
+end_comment
+
+begin_comment
+comment|//        if (model instanceof Map<?, ?>) {
+end_comment
+
+begin_comment
+comment|//            vars.putAll((Map<String, Object>) model);
+end_comment
+
+begin_comment
+comment|//        } else {
+end_comment
+
+begin_comment
+comment|//            vars.put("it", model);
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//        // override custom variables if any
+end_comment
+
+begin_comment
+comment|//        vars.putAll(getVariablesForTemplate(vars));
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//        final OutputStreamWriter writer = new OutputStreamWriter(out,"utf-8");
+end_comment
+
+begin_comment
+comment|//        try {
+end_comment
+
+begin_comment
+comment|//            template.process(vars, writer);
+end_comment
+
+begin_comment
+comment|//        } catch (Throwable t) {
+end_comment
+
+begin_comment
+comment|//            onProcessException(t, template, vars, out);
+end_comment
+
+begin_comment
+comment|//        }
+end_comment
+
+begin_comment
+comment|//    }
+end_comment
+
+begin_comment
+comment|//
+end_comment
+
+begin_comment
+comment|//}
+end_comment
 
 end_unit
 

@@ -349,15 +349,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|sun
+name|apache
 operator|.
-name|jersey
+name|stanbol
 operator|.
-name|api
+name|commons
 operator|.
-name|view
+name|ldviewable
 operator|.
 name|Viewable
 import|;
