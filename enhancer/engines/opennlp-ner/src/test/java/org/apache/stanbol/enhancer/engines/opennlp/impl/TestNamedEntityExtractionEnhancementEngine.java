@@ -422,7 +422,7 @@ name|SINGLE_SENTENCE_WITH_CONTROL_CHARS
 init|=
 literal|"Dr Patrick Marshall (1869 - November 1950) was a"
 operator|+
-literal|" \u0014geologist\u0015 who lived in New Zealand and worked at the University of Otago."
+literal|" \u0014geologist\u0015 who lived in New\tZealand and worked at the University\nof Otago."
 decl_stmt|;
 specifier|public
 specifier|static
@@ -914,6 +914,30 @@ operator|.
 name|contains
 argument_list|(
 literal|"\u0014"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertTrue
+argument_list|(
+name|firstOccurrence
+operator|.
+name|context
+operator|.
+name|contains
+argument_list|(
+literal|"\t"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertTrue
+argument_list|(
+name|firstOccurrence
+operator|.
+name|context
+operator|.
+name|contains
+argument_list|(
+literal|"\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
