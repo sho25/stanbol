@@ -2969,9 +2969,11 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Unable to %s an Entity %s becuase it %s and %s is deactivated. "
+literal|"Unable to %s an Entity '%s' becuase it %s and request parameter '%s' is set. "
 operator|+
-literal|" You might want to set the '%s' parameter to TRUE in your Request"
+literal|" To allow both creating and updating of Entities you need to set "
+operator|+
+literal|"'%s=true' in the request"
 argument_list|,
 name|exists
 condition|?
@@ -2986,21 +2988,15 @@ argument_list|()
 argument_list|,
 name|exists
 condition|?
-literal|"does already exists "
+literal|"exists "
 else|:
-literal|"does not"
+literal|"does not exist"
 argument_list|,
 name|exists
 condition|?
-literal|"updateing existing"
+literal|"update=false"
 else|:
-literal|"creating new"
-argument_list|,
-name|exists
-condition|?
-literal|"does already"
-else|:
-literal|"does not exists"
+literal|"create=false"
 argument_list|,
 name|exists
 condition|?
