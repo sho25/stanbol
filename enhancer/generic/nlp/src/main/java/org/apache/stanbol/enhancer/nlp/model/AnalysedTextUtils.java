@@ -71,7 +71,27 @@ name|java
 operator|.
 name|util
 operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|SortedMap
 import|;
 end_import
 
@@ -125,6 +145,46 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
+name|nlp
+operator|.
+name|model
+operator|.
+name|impl
+operator|.
+name|SectionImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|nlp
+operator|.
+name|model
+operator|.
+name|impl
+operator|.
+name|SpanImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
 name|servicesapi
 operator|.
 name|ContentItem
@@ -147,11 +207,74 @@ name|NoSuchPartException
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|helpers
+operator|.
+name|SubstituteLoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|ibm
+operator|.
+name|icu
+operator|.
+name|lang
+operator|.
+name|UCharacter
+operator|.
+name|SentenceBreak
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
 name|AnalysedTextUtils
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|AnalysedTextUtils
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|/**      * Getter for the {@link AnalysedText} content part of the parsed      * ContentItem.<p>      * This assumes that the AnalysedText is registered by using      * {@link AnalysedText#ANALYSED_TEXT_URI}. Otherwise it will not find it.      * @param ci The {@link ContentItem}      * @return the {@link AnalysedText} or<code>null</code> if not present.      * @throws ClassCastException if a content part is registered with      * {@link AnalysedText#ANALYSED_TEXT_URI} but its type is not compatible      * to {@link AnalysedText}.      */
 specifier|public
 specifier|static
@@ -617,6 +740,49 @@ block|}
 block|}
 return|;
 block|}
+comment|// NOTE: No longer used ... keep for now in case that we need this functionality.
+comment|//    public static Set<Span> getEnclosed(SortedSet<Span> sortedSet, Span span){
+comment|//        if(span.getType() == SpanTypeEnum.Token){
+comment|//            log.warn("Span {} with SpanType {} parsed to getEnclosing(..). Returned Set will "
+comment|//                    + "contain the parsed span!");
+comment|//        }
+comment|//        return sortedSet.subSet(new SubSetHelperSpan(span.getStart(), span.getEnd()),
+comment|//            new SubSetHelperSpan(span.getEnd()));
+comment|//    }
+comment|//    public static<T> Map<Span,T> getEnclosed(SortedMap<Span,T> sortedSet, Span span){
+comment|//        if(span.getType() == SpanTypeEnum.Token){
+comment|//            log.warn("Span {} with SpanType {} parsed to getEnclosing(..). Returned Set will "
+comment|//                    + "contain the parsed span!");
+comment|//        }
+comment|//        return sortedSet.subMap(new SubSetHelperSpan(span.getStart(), span.getEnd()),
+comment|//            new SubSetHelperSpan(span.getEnd()));
+comment|//    }
+comment|//
+comment|//    /**
+comment|//     * Internal helper class used for building {@link SortedSet#subSet(Object, Object)}.
+comment|//     *
+comment|//     * @author Rupert Westenthaler
+comment|//     *
+comment|//     */
+comment|//    private static class SubSetHelperSpan extends SpanImpl implements Span {
+comment|//        /**
+comment|//         * Create the start constraint for {@link SortedSet#subSet(Object, Object)}
+comment|//         * @param start
+comment|//         * @param end
+comment|//         */
+comment|//        protected SubSetHelperSpan(int start,int end){
+comment|//            super(SpanTypeEnum.Text, //lowest pos type
+comment|//                start,end);
+comment|//        }
+comment|//        /**
+comment|//         * Creates the end constraint for {@link SortedSet#subSet(Object, Object)}
+comment|//         * @param pos
+comment|//         */
+comment|//        protected SubSetHelperSpan(int pos){
+comment|//            super(SpanTypeEnum.Token, //highest pos type,
+comment|//                pos,Integer.MAX_VALUE);
+comment|//        }
+comment|//    }
 block|}
 end_class
 

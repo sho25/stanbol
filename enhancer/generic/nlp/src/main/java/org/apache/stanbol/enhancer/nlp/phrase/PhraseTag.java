@@ -27,6 +27,10 @@ name|enhancer
 operator|.
 name|nlp
 operator|.
+name|model
+operator|.
+name|tag
+operator|.
 name|Tag
 import|;
 end_import
@@ -42,6 +46,10 @@ operator|.
 name|enhancer
 operator|.
 name|nlp
+operator|.
+name|model
+operator|.
+name|tag
 operator|.
 name|TagSet
 import|;
