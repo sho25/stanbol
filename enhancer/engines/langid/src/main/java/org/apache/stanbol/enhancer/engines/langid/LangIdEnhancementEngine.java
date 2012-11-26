@@ -570,16 +570,16 @@ name|PROBE_LENGTH_PROP
 init|=
 literal|"org.apache.stanbol.enhancer.engines.langid.probe-length"
 decl_stmt|;
-comment|/**      * The default value for the Execution of this Engine. Currently set to      * {@link ServiceProperties#ORDERING_PRE_PROCESSING} - 2<p>      * NOTE: this information is used by the default and weighed {@link Chain}      * implementation to determine the processing order of       * {@link EnhancementEngine}s. Other {@link Chain} implementation do not      * use this information.      */
+comment|/**      * The default value for the Execution of this Engine (      * {@link ServiceProperties#ORDERING_NLP_LANGAUGE_DETECTION})<p>      * NOTE: this information is used by the default and weighed {@link Chain}      * implementation to determine the processing order of       * {@link EnhancementEngine}s. Other {@link Chain} implementation do not      * use this information.      */
 specifier|public
 specifier|static
 specifier|final
 name|Integer
 name|defaultOrder
 init|=
-name|ORDERING_PRE_PROCESSING
-operator|-
-literal|2
+name|ServiceProperties
+operator|.
+name|ORDERING_NLP_LANGAUGE_DETECTION
 decl_stmt|;
 comment|/**      * This contains the only MIME type directly supported by this enhancement engine.      */
 specifier|private
@@ -1075,10 +1075,6 @@ block|{
 return|return
 name|Collections
 operator|.
-name|unmodifiableMap
-argument_list|(
-name|Collections
-operator|.
 name|singletonMap
 argument_list|(
 name|ENHANCEMENT_ENGINE_ORDERING
@@ -1087,7 +1083,6 @@ operator|(
 name|Object
 operator|)
 name|defaultOrder
-argument_list|)
 argument_list|)
 return|;
 block|}

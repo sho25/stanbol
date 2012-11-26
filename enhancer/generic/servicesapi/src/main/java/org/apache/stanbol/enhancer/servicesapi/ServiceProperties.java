@@ -59,7 +59,7 @@ name|ORDERING_PRE_PROCESSING
 init|=
 literal|200
 decl_stmt|;
-comment|/**      * Ordering values< {@link ServiceProperties#ORDERING_PRE_PROCESSING} and      *>= this value indicate, that an enhancement engine performs operations      * that are only dependent on the parsed content.      */
+comment|/**      * Ordering values< {@link ServiceProperties#ORDERING_PRE_PROCESSING} and      *>= this value indicate, that an enhancement engine performs operations      * that are only dependent on the parsed content.<p>      *<b>NOTE:</b> the NLP processing specific orderings that are defined      * within this span      * @see #ORDERING_NLP_LANGAUGE_DETECTION      * @see #ORDERING_NLP_SENTENCE_DETECTION      * @see #ORDERING_NLP_TOKENIZING      * @see #ORDERING_NLP_POS      * @see #ORDERING_NLP_CHUNK      * @See #ORDERING_NLP_LEMMATIZE      */
 name|Integer
 name|ORDERING_CONTENT_EXTRACTION
 init|=
@@ -83,6 +83,67 @@ name|ORDERING_POST_PROCESSING
 init|=
 operator|-
 literal|100
+decl_stmt|;
+comment|/* -------      * NLP processing orderings (all within the ORDERING_CONTENT_EXTRACTION range      * -------      */
+comment|/**      * Ordering values< {@link #ORDERING_PRE_PROCESSING} and>=      * {@link #ORDERING_NLP_LANGAUGE_DETECTION} are reserved for engines that detect      * the language of an content      */
+name|Integer
+name|ORDERING_NLP_LANGAUGE_DETECTION
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|90
+decl_stmt|;
+comment|/**      * Ordering values< {@link #ORDERING_NLP_LANGAUGE_DETECTION} and>=      * {@link #ORDERING_NLP_SENTENCE_DETECTION} are reserved for engines that extract      * sections within the text content      */
+name|Integer
+name|ORDERING_NLP_SENTENCE_DETECTION
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|80
+decl_stmt|;
+comment|/**      * Ordering values< {@link #ORDERING_NLP_SENTENCE_DETECTION} and>=      * {@link #ORDERING_NLP_TOKENIZING} are reserved for engines that tokenize      * the text      */
+name|Integer
+name|ORDERING_NLP_TOKENIZING
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|70
+decl_stmt|;
+comment|/**      * Ordering values< {@link #ORDERING_NLP_TOKENIZING} and>=      * {@link #ORDERING_NLP_POS} are reserved for engines that perform      * POS (Part of Speech) tagging      */
+name|Integer
+name|ORDERING_NLP_POS
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|60
+decl_stmt|;
+comment|/**      * Ordering values< {@link #ORDERING_NLP_POS} and>=      * {@link #ORDERING_NLP_CHUNK} are reserved for engines that annotate      * Chunks (such as Noun Phrases) in an text.      */
+name|Integer
+name|ORDERING_NLP_CHUNK
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|50
+decl_stmt|;
+comment|/**      * Ordering values< {@link #ORDERING_NLP_CHUNK} and>=      * {@link #ORDERING_NLP_LEMMATIZE} are reserved for engines that lemmatize      * texts.<p>      * TODO: maybe this should be the same as {@link #ORDERING_NLP_TOKENIZING}      */
+name|Integer
+name|ORDERING_NLP_LEMMATIZE
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|40
 decl_stmt|;
 block|}
 end_interface

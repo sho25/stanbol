@@ -44,6 +44,169 @@ name|EnhancerConfigurationTest
 extends|extends
 name|EnhancerTestBase
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|String
+index|[]
+name|EXPECTED_ENGINES
+init|=
+operator|new
+name|String
+index|[]
+block|{
+literal|"<rdf:Description rdf:about=\"http://localhost:.*/enhancer\">"
+block|,
+literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#Enhancer\"/>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpediaLinking\"/>"
+block|,
+literal|"<rdfs:label>dbpediaLinking</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langid\"/>"
+block|,
+literal|"<rdfs:label>langid</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langdetect\"/>"
+block|,
+literal|"<rdfs:label>langdetect</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/tika\"/>"
+block|,
+literal|"<rdfs:label>tika</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/opennlp-sentence\"/>"
+block|,
+literal|"<rdfs:label>opennlp-sentence</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/opennlp-token\"/>"
+block|,
+literal|"<rdfs:label>opennlp-token</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/opennlp-pos\"/>"
+block|,
+literal|"<rdfs:label>opennlp-pos</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/opennlp-ner\"/>"
+block|,
+literal|"<rdfs:label>opennlp-ner</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/opennlp-chunker\"/>"
+block|,
+literal|"<rdfs:label>opennlp-chunker</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/sentiment-wordclassifier\"/>"
+block|,
+literal|"<rdfs:label>sentiment-wordclassifier</rdfs:label>"
+block|,
+literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/xmpextractor\"/>"
+block|,
+literal|"<rdfs:label>xmpextractor</rdfs:label>"
+block|,
+comment|//NOT AVAILABLE DURING TESTS, BECAUSE OF OFFLINE MODE!
+comment|//        "<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpspotlightdisambiguate\"/>",
+comment|//        "<rdfs:label>dbpspotlightdisambiguate</rdfs:label>",
+comment|//        "<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpspotlightannotate\"/>",
+comment|//        "<rdfs:label>dbpspotlightannotate</rdfs:label>",
+comment|//        "<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpspotlightcandidates\"/>",
+comment|//        "<rdfs:label>dbpspotlightcandidates</rdfs:label>",
+comment|//        "<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpspotlightspot\"/>",
+comment|//        "<rdfs:label>dbpspotlightspot</rdfs:label>",
+literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#EnhancementEngine\"/>"
+block|}
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+index|[]
+name|EXPECTED_CHAINS
+init|=
+operator|new
+name|String
+index|[]
+block|{
+literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/default\"/>"
+block|,
+literal|"<rdfs:label>default</rdfs:label>"
+block|,
+literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/language\"/>"
+block|,
+literal|"<rdfs:label>language</rdfs:label>"
+block|,
+literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/dbpedia-proper-noun\"/>"
+block|,
+literal|"<rdfs:label>dbpedia-proper-noun</rdfs:label>"
+block|,
+literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/dbpedia-spotlight\"/>"
+block|,
+literal|"<rdfs:label>dbpedia-spotlight</rdfs:label>"
+block|,
+literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/all-active\"/>"
+block|,
+literal|"<rdfs:label>all-active</rdfs:label>"
+block|,
+literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#EnhancementChain\"/>"
+block|,         }
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+index|[]
+name|EXPECTED_CONFIG
+init|=
+operator|new
+name|String
+index|[
+name|EXPECTED_CHAINS
+operator|.
+name|length
+operator|+
+name|EXPECTED_ENGINES
+operator|.
+name|length
+index|]
+decl_stmt|;
+static|static
+block|{
+name|System
+operator|.
+name|arraycopy
+argument_list|(
+name|EXPECTED_CHAINS
+argument_list|,
+literal|0
+argument_list|,
+name|EXPECTED_CONFIG
+argument_list|,
+literal|0
+argument_list|,
+name|EXPECTED_CHAINS
+operator|.
+name|length
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|arraycopy
+argument_list|(
+name|EXPECTED_ENGINES
+argument_list|,
+literal|0
+argument_list|,
+name|EXPECTED_CONFIG
+argument_list|,
+name|EXPECTED_CHAINS
+operator|.
+name|length
+argument_list|,
+name|EXPECTED_ENGINES
+operator|.
+name|length
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -80,31 +243,7 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"<rdf:Description rdf:about=\"http://localhost:.*/enhancer\">"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#Enhancer\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpediaLinking\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langid\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langdetect\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/tika\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/ner\"/>"
-argument_list|,
-literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/default\"/>"
-argument_list|,
-literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/language\"/>"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#EnhancementChain\"/>"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#EnhancementEngine\"/>"
-argument_list|,
-literal|"<rdfs:label>ner</rdfs:label>"
-argument_list|,
-literal|"<rdfs:label>language</rdfs:label>"
+name|EXPECTED_CONFIG
 argument_list|)
 expr_stmt|;
 block|}
@@ -146,23 +285,7 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"<rdf:Description rdf:about=\"http://localhost:.*/enhancer\">"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#Enhancer\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/dbpediaLinking\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langid\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/langdetect\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/tika\"/>"
-argument_list|,
-literal|"<j.0:hasEngine rdf:resource=\"http://localhost:.*/enhancer/engine/ner\"/>"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#EnhancementEngine\"/>"
-argument_list|,
-literal|"<rdfs:label>ner</rdfs:label>"
+name|EXPECTED_ENGINES
 argument_list|)
 expr_stmt|;
 block|}
@@ -204,17 +327,7 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"<rdf:Description rdf:about=\"http://localhost:.*/enhancer\">"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#Enhancer\"/>"
-argument_list|,
-literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/default\"/>"
-argument_list|,
-literal|"<j.0:hasChain rdf:resource=\"http://localhost:.*/enhancer/chain/language\"/>"
-argument_list|,
-literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/enhancer#EnhancementChain\"/>"
-argument_list|,
-literal|"<rdfs:label>language</rdfs:label>"
+name|EXPECTED_CHAINS
 argument_list|)
 expr_stmt|;
 block|}
@@ -345,6 +458,8 @@ argument_list|,
 literal|"<uri>http://localhost:.*/enhancer/chain/default</uri>"
 argument_list|,
 literal|"<uri>http://localhost:.*/enhancer/chain/language</uri>"
+argument_list|,
+literal|"<uri>http://localhost:.*/enhancer/chain/dbpedia-proper-noun</uri>"
 argument_list|,
 literal|"<binding name=\"name\">"
 argument_list|,

@@ -33,6 +33,16 @@ name|Hashtable
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
@@ -45,7 +55,10 @@ name|Hashtable
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|String
+argument_list|>
 argument_list|>
 name|lexicalFeatures
 decl_stmt|;
@@ -59,7 +72,10 @@ name|Hashtable
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|String
+argument_list|>
 argument_list|>
 name|lexicalFeatures
 parameter_list|)
@@ -109,7 +125,10 @@ name|Hashtable
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|String
+argument_list|>
 argument_list|>
 name|getLexicalFeatures
 parameter_list|()
@@ -126,7 +145,10 @@ name|Hashtable
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|String
+argument_list|>
 argument_list|>
 name|lexicalFeatures
 parameter_list|)

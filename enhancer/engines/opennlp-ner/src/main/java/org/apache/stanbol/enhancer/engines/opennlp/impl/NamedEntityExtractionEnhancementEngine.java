@@ -342,7 +342,7 @@ name|PROPERTY_NAME
 argument_list|,
 name|value
 operator|=
-literal|"ner"
+literal|"opennlp-ner"
 argument_list|)
 block|,
 annotation|@
