@@ -29,6 +29,22 @@ name|Dictionary
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
+import|;
+end_import
+
 begin_comment
 comment|/**  * This interface provides methods to submit and delete content items to/from Contenthub.  *   * Stanbol provides default implementations of this interface for JCR and CMIS content repositories. However,  * it is also possible to provide custom implementations based on the needs of content repository. It is still  * possible to provide new implementations for JCR or CMIS repositories.<code>ContenthubFeederManager</code>  * gives higher priority to custom implementations when selecting the appropriate {@link ContenthubFeeder}  * instance.  *   * While submitting content items to Contenthub properties of content repository objects are provided as  * metadata of the content items. Supplied metadata is used to provide faceted search feature in the  * Contenthub.  *   * @author suat  *   */
 end_comment
@@ -56,26 +72,42 @@ name|PROP_CONTENT_PROPERTIES
 init|=
 literal|"org.apache.stanbol.cmsadapter.servicesapi.mapping.ContenthubFeeder.contentFields"
 decl_stmt|;
-comment|/**      * Creates a content item in Contenthub by leveraging the content repository object itself e.g<b>Node</b>      * in JCR,<b>Document</b> in CMIS. If there is an already existing content item in the Contenthub with      * the same id, the existing content item should be deleted first.      *       * @param o      *            Content repository object to be transformed into a content item in Contenthub      * @param id      *            Optional ID for the content item in Contenthub. If this parameter is specified, it will be      *            used as the ID of the content item in Contenthub. Otherwise, the object's own ID in the      *            content repository will be used.      */
+comment|/**      * When creating a ContentItem from a node, metadata of this node is added as an additional part to      * ContentItem through this URI      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|ADDITIONAL_METADATA_URI
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"org.apache.stanbol.cmsadapter.servicesapi.mapping.ContenthubFeeder.additionalMetadata"
+argument_list|)
+decl_stmt|;
+comment|/*      *       */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|CONTENT_ITEM_URI_PREFIX
+init|=
+literal|"urn:content-item-"
+decl_stmt|;
+comment|/**      * Creates a content item in Contenthub by leveraging the content repository object itself e.g<b>Node</b>      * in JCR,<b>Document</b> in CMIS. If there is an already existing content item in the Contenthub with      * the same id, the existing content item should be deleted first.      *       * @param o      *            Content repository object to be transformed into a content item in Contenthub      */
 name|void
 name|submitContentItemByCMSObject
 parameter_list|(
 name|Object
 name|o
-parameter_list|,
-name|String
-name|id
 parameter_list|)
 function_decl|;
-comment|/**      * Creates a content item in Contenthub by leveraging the content repository object itself e.g<b>Node</b>      * in JCR,<b>Document</b> in CMIS. If there is an already existing content item in the Contenthub with      * the same id, the existing content item should be deleted first.      *       * @param o      *            Content repository object to be transformed into a content item in Contenthub      * @param id      *            Optional ID for the content item in Contenthub. If this parameter is specified, it will be      *            used as the ID of the content item in Contenthub. Otherwise, the object's own ID in the      *            content repository will be used.      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content item      */
+comment|/**      * Creates a content item in Contenthub by leveraging the content repository object itself e.g<b>Node</b>      * in JCR,<b>Document</b> in CMIS. If there is an already existing content item in the Contenthub with      * the same id, the existing content item should be deleted first.      *       * @param o      *            Content repository object to be transformed into a content item in Contenthub      * @param indexName      *            Name of the Solr index managed by Contenthub. Specified index will be used to store the      *            submitted content item      */
 name|void
 name|submitContentItemByCMSObject
 parameter_list|(
 name|Object
 name|o
-parameter_list|,
-name|String
-name|id
 parameter_list|,
 name|String
 name|indexName
