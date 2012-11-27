@@ -753,9 +753,19 @@ specifier|final
 name|int
 name|minIncludeIndex
 decl_stmt|;
+specifier|final
 name|int
 name|maxIndcludeIndex
 decl_stmt|;
+comment|//NOTE: testing has shown that using Chunks to restrict search for
+comment|//      additional matchable tokens does have an negative impact on
+comment|//      recall. Because of that this restriction is for now deactivated
+name|boolean
+name|restrirctContextByChunks
+init|=
+literal|false
+decl_stmt|;
+comment|//TODO: maybe make configurable
 if|if
 condition|(
 name|token
@@ -769,6 +779,8 @@ name|textProcessingConfig
 operator|.
 name|isIgnoreChunks
 argument_list|()
+operator|&&
+name|restrirctContextByChunks
 condition|)
 block|{
 name|minIncludeIndex
