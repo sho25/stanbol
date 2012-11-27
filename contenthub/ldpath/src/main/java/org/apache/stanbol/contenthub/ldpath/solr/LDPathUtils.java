@@ -1134,7 +1134,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Encoding {} should be supported by the system"
+literal|"Encoding %s should be supported by the system"
 argument_list|,
 name|Constants
 operator|.
