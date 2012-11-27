@@ -33,11 +33,17 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|Map
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
 import|;
 end_import
 
@@ -74,6 +80,22 @@ operator|.
 name|store
 operator|.
 name|StoreException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|Chain
 import|;
 end_import
 
@@ -120,8 +142,20 @@ name|SolrStore
 extends|extends
 name|Store
 block|{
-comment|/**      * Creates a {@link SolrContentItem} with the given parameters. Created {@link SolrContentItem} is not      * persisted, this function just creates the object.      *       * @param content      *            The content itself.      * @param id      *            The unique ID for the item. If it is null, {@link SolrStore} should assign a unique ID for      *            this item.      * @param title      *            The title for the content item.      * @param contentType      *            The mimeType of the content.      * @param constraints      *            The facets in<code>key:[value1,value2]</code> pairs.      * @return Created {@link SolrContentItem}.      */
-name|SolrContentItem
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|TITLE_URI
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"org.apache.stanbol.contenthub.store.solr.title"
+argument_list|)
+decl_stmt|;
+comment|/**      * Creates a {@link ContentItem} with the given parameters. Created {@link ContentItem} is not persisted,      * this function just creates the object.      *       * @param content      *            The content itself.      * @param id      *            The unique ID for the item. If it is null, {@link SolrStore} should assign a unique ID for      *            this item.      * @param title      *            The title for the content item.      * @param contentType      *            The mimeType of the content.      * @return Created {@link ContentItem}.      * @throws StoreException      */
+name|ContentItem
 name|create
 parameter_list|(
 name|byte
@@ -136,47 +170,44 @@ name|title
 parameter_list|,
 name|String
 name|contentType
-parameter_list|,
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|List
-argument_list|<
-name|Object
-argument_list|>
-argument_list|>
-name|constraints
-parameter_list|)
-function_decl|;
-comment|/**      * Sends the {@link SolrContentItem} to the {@link EnhancementJobManager} to enhance the content.      * Afterwards saves the item in the default Solr core of the Contenthub.      *       * @param sci      *            The {@link SolrContentItem} to be enhanced and saved.      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
-name|String
-name|enhanceAndPut
-parameter_list|(
-name|SolrContentItem
-name|sci
 parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Sends the {@link SolrContentItem} to the {@link EnhancementJobManager} to enhance the content.      * Afterwards saves the item in the Solr core corresponding to the given<code>indexName</code>.      *       * @param sci      *            The {@link SolrContentItem} to be enhanced and saved      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core to      *            store the content item      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
+comment|/**      * Sends the {@link ContentItem} to the {@link EnhancementJobManager} to enhance the content. Afterwards      * saves the item in the default Solr core of the Contenthub.      *       * @param ci      *            The {@link ContentItem} to be enhanced and saved.      * @param chain      *            name of a particular {@link Chain} in which the enhancement engines are ordered according to      *            a specific use case or need      * @return The unique ID of the {@link ContentItem}.      * @throws StoreException      */
 name|String
 name|enhanceAndPut
 parameter_list|(
-name|SolrContentItem
-name|sci
+name|ContentItem
+name|ci
+parameter_list|,
+name|String
+name|chain
+parameter_list|)
+throws|throws
+name|StoreException
+function_decl|;
+comment|/**      * Sends the {@link ContentItem} to the {@link EnhancementJobManager} to enhance the content. Afterwards      * saves the item in the Solr core corresponding to the given<code>indexName</code>.      *       * @param ci      *            The {@link ContentItem} to be enhanced and saved      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core to      *            store the content item      * @param chain      *            name of a particular {@link Chain} in which the enhancement engines are ordered according to      *            a specific use case or need      * @return The unique ID of the {@link ContentItem}.      * @throws StoreException      */
+name|String
+name|enhanceAndPut
+parameter_list|(
+name|ContentItem
+name|ci
 parameter_list|,
 name|String
 name|indexName
+parameter_list|,
+name|String
+name|chain
 parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Stores the passed {@link SolrContentItem} in the Solr core corresponding to the specified      *<code>indexName</code>. If<code>null</code> is passed as the LDPath program name (index name), the      * default Solr core of Contenthub is used.      *       * @param ci      *            {@link SolrContentItem} to be stored      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core to      *            store the content item      * @return The unique ID of the {@link SolrContentItem}.      * @throws StoreException      */
+comment|/**      * Stores the passed {@link ContentItem} in the Solr core corresponding to the specified      *<code>indexName</code>. If<code>null</code> is passed as the LDPath program name (index name), the      * default Solr core of Contenthub is used.      *       * @param ci      *            {@link ContentItem} to be stored      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core to      *            store the content item      * @return The unique ID of the {@link ContentItem}.      * @throws StoreException      */
 name|String
 name|put
 parameter_list|(
-name|SolrContentItem
+name|ContentItem
 name|ci
 parameter_list|,
 name|String
@@ -185,8 +216,8 @@ parameter_list|)
 throws|throws
 name|StoreException
 function_decl|;
-comment|/**      * Retrieves the {@link SolrContentItem} from the Solr core corresponding to the specified      *<code>indexName</code>. If<code>null</code> is passed as the LDPath program name (index name), the      * default Solr core of Contenthub is used.      *       * @param id      *            The ID of {@link SolrContentItem} to be retrieved.      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core from      *            which the content item will be retrieved      * @return {@link SolrContentItem} having the specified id      * @throws StoreException      */
-name|SolrContentItem
+comment|/**      * Retrieves the {@link ContentItem} from the Solr core corresponding to the specified      *<code>indexName</code>. If<code>null</code> is passed as the LDPath program name (index name), the      * default Solr core of Contenthub is used.      *       * @param id      *            The ID of {@link ContentItem} to be retrieved.      * @param indexName      *            LDPath program name (name of the Solr core/index) to obtain the corresponding Solr core from      *            which the content item will be retrieved      * @return {@link ContentItem} having the specified id      * @throws StoreException      */
+name|ContentItem
 name|get
 parameter_list|(
 name|String
