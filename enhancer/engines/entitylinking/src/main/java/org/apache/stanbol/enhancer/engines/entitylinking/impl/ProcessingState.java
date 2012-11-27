@@ -909,11 +909,6 @@ name|section
 operator|=
 literal|null
 expr_stmt|;
-name|tokens
-operator|.
-name|clear
-argument_list|()
-expr_stmt|;
 name|processableTokensIterator
 operator|=
 literal|null
@@ -946,6 +941,12 @@ operator|.
 name|next
 argument_list|()
 expr_stmt|;
+name|tokens
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+comment|//clear token for each section (STANBOL-818)
 name|Iterator
 argument_list|<
 name|Span
