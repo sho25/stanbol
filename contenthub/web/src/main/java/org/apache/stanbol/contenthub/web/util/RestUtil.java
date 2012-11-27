@@ -313,16 +313,16 @@ name|getAcceptedMediaType
 parameter_list|(
 name|HttpHeaders
 name|headers
+parameter_list|,
+name|MediaType
+name|defaultMediaType
 parameter_list|)
 block|{
 name|MediaType
 name|acceptedMediaType
 init|=
-name|MediaType
-operator|.
-name|APPLICATION_JSON_TYPE
+name|defaultMediaType
 decl_stmt|;
-comment|// default
 if|if
 condition|(
 operator|!
