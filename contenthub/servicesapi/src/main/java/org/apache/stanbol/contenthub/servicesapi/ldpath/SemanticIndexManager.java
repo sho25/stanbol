@@ -61,6 +61,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|ContentItem
+import|;
+end_import
+
+begin_import
+import|import
 name|at
 operator|.
 name|newmedialab
@@ -76,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This interface provides create, retrieve, delete operations for LDPath  * programs to be managed in the scope of Contenthub.  *   * @author anil.sinaci  *   */
+comment|/**  * This interface provides create, retrieve, delete operations for LDPath programs to be managed in the scope  * of Contenthub.  *   * @author anil.sinaci  *   */
 end_comment
 
 begin_interface
@@ -84,7 +100,7 @@ specifier|public
 interface|interface
 name|SemanticIndexManager
 block|{
-comment|/** 	 * Saves LDPath program to persistent storage with given name and 	 * initializes a new Solr core with the same name 	 *  	 * @param programName 	 *            name of the submitted program, also will be name of 	 *            corresponding Solr Core 	 * @param ldPathProgram 	 *            LDPath Program in the form of {@link String} 	 * @throws LDPathException 	 *             is thrown while parsing program and creating Solr Core 	 */
+comment|/**      * Saves LDPath program to persistent storage with given name and initializes a new Solr core with the      * same name      *       * @param programName      *            name of the submitted program, also will be name of corresponding Solr Core      * @param ldPathProgram      *            LDPath Program in the form of {@link String}      * @throws LDPathException      *             is thrown while parsing program and creating Solr Core      */
 specifier|public
 name|void
 name|submitProgram
@@ -98,7 +114,7 @@ parameter_list|)
 throws|throws
 name|LDPathException
 function_decl|;
-comment|/** 	 * Saves LDPath program to persistent storage with given name and 	 * initializes a new Solr core with the same name 	 *  	 * @param programName 	 *            name of the submitted program, also will be name of 	 *            corresponding Solr Core 	 * @param ldPathProgram 	 *            LDPath Program in the form of {@link java.io.Reader} 	 * @throws LDPathException 	 *             is thrown while parsing program and creating Solr Core 	 */
+comment|/**      * Saves LDPath program to persistent storage with given name and initializes a new Solr core with the      * same name      *       * @param programName      *            name of the submitted program, also will be name of corresponding Solr Core      * @param ldPathProgram      *            LDPath Program in the form of {@link java.io.Reader}      * @throws LDPathException      *             is thrown while parsing program and creating Solr Core      */
 specifier|public
 name|void
 name|submitProgram
@@ -112,7 +128,7 @@ parameter_list|)
 throws|throws
 name|LDPathException
 function_decl|;
-comment|/** 	 * Checks whether a program-core pair exists with given name or not 	 *  	 * @param programName 	 *            name of the program/core 	 * @return {@link true} if a program with given name exists; {@link false} 	 *         otherwise 	 */
+comment|/**      * Checks whether a program-core pair exists with given name or not      *       * @param programName      *            name of the program/core      * @return {@link true} if a program with given name exists; {@link false} otherwise      */
 specifier|public
 name|boolean
 name|isManagedProgram
@@ -121,7 +137,7 @@ name|String
 name|programName
 parameter_list|)
 function_decl|;
-comment|/** 	 * Retrieves the program managed by {@link ProgramManager} with given name 	 *  	 * @param programName 	 *            name of the program that will be retrieved 	 * @return requested program as String, if such program does not exist, 	 *         returns {@link false} 	 */
+comment|/**      * Retrieves the program managed by {@link ProgramManager} with given name      *       * @param programName      *            name of the program that will be retrieved      * @return requested program as String, if such program does not exist, returns {@link false}      */
 specifier|public
 name|String
 name|getProgramByName
@@ -130,7 +146,7 @@ name|String
 name|programName
 parameter_list|)
 function_decl|;
-comment|/** 	 * Retrieves the program managed by {@link ProgramManager} with given 	 name, 	 * parses it, and returns the {@link Progra} 	 * 	 * @param programName 	 * @return 	 * @throws LDPathException 	 */
+comment|/**      * Retrieves the program managed by {@link ProgramManager} with given name, parses it, and returns the      * {@link Progra}      *       * @param programName      * @return      * @throws LDPathException      */
 specifier|public
 name|Program
 argument_list|<
@@ -142,7 +158,7 @@ name|String
 name|programName
 parameter_list|)
 function_decl|;
-comment|/** 	 * Deletes both the program and the corresponding Solr Core 	 *  	 * @param programName 	 *            name of the program-core pair to be deleted 	 */
+comment|/**      * Deletes both the program and the corresponding Solr Core      *       * @param programName      *            name of the program-core pair to be deleted      */
 specifier|public
 name|void
 name|deleteProgram
@@ -151,13 +167,13 @@ name|String
 name|programName
 parameter_list|)
 function_decl|;
-comment|/** 	 * Used to retrieve names and programs of all currently managed program-core 	 * pairs 	 *  	 * @return All managed programs as {@link LDProgramCollection} 	 */
+comment|/**      * Used to retrieve names and programs of all currently managed program-core pairs      *       * @return All managed programs as {@link LDProgramCollection}      */
 specifier|public
 name|LDProgramCollection
 name|retrieveAllPrograms
 parameter_list|()
 function_decl|;
-comment|/** 	 * This method first tries to obtain the program itself through the given 	 *<code>programName</code> and if the program is obtained it is executed on 	 * the given<code>graph</code>. 	 *  	 * @param programName 	 *            name of the program to be executed 	 * @param contexts 	 *            a {@link Set} of URIs (string representations) that are used 	 *            as starting nodes to execute LDPath program specified by 	 *            {@code programName} on the given {@code program} 	 * @param graph 	 *            a Clerezza graph on which the specified program will be 	 *            executed 	 * @return the {@link Map} containing the results obtained by executing the 	 *         given program on the given graph. Keys of the map corresponds to 	 *         fields in the program and values of the map corresponds to 	 *         results obtained for the field specified in the key. 	 * @throws LDPathException 	 */
+comment|/**      * This method first tries to obtain the program itself through the given<code>programName</code> and if      * the program is obtained it is executed on the given<code>graph</code>.      *       * @param programName      *            name of the program to be executed      * @param contexts      *            a {@link Set} of URIs (string representations) that are used as starting nodes to execute      *            LDPath program specified by {@code programName} on the given {@code program}      * @param ci      *            a {@link ContentItem} on which the specified program will be executed      * @return the {@link Map} containing the results obtained by executing the given program on the given      *         graph. Keys of the map corresponds to fields in the program and values of the map corresponds      *         to results obtained for the field specified in the key.      * @throws LDPathException      */
 specifier|public
 name|Map
 argument_list|<
@@ -178,6 +194,9 @@ argument_list|<
 name|String
 argument_list|>
 name|contexts
+parameter_list|,
+name|ContentItem
+name|ci
 parameter_list|)
 throws|throws
 name|LDPathException
