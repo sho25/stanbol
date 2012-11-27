@@ -2005,7 +2005,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"QueryString: {}"
 argument_list|,
@@ -2050,7 +2050,7 @@ block|}
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Solr Query: {}"
 argument_list|,
