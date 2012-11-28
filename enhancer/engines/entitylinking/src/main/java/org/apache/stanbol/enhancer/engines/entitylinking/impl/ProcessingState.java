@@ -2097,7 +2097,7 @@ argument_list|()
 operator|.
 name|length
 argument_list|()
-operator|!=
+operator|>=
 name|elc
 operator|.
 name|getMinSearchTokenLength

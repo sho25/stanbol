@@ -1127,11 +1127,20 @@ name|searchStrings
 operator|.
 name|subList
 argument_list|(
-literal|0
-argument_list|,
+comment|//the last part of the list
+name|searchStrings
+operator|.
+name|size
+argument_list|()
+operator|-
 name|linkerConfig
 operator|.
 name|getMaxSearchTokens
+argument_list|()
+argument_list|,
+name|searchStrings
+operator|.
+name|size
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -3421,6 +3430,19 @@ name|foundProcessableTokens
 operator|++
 expr_stmt|;
 comment|//only count processable Tokens
+if|if
+condition|(
+name|lastProcessableFoundIndex
+operator|<
+literal|0
+condition|)
+block|{
+comment|//if last is not yet set
+name|lastProcessableFoundIndex
+operator|=
+name|currentIndex
+expr_stmt|;
+block|}
 name|firstProcessableFoundIndex
 operator|=
 name|currentIndex
