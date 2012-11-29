@@ -1463,22 +1463,6 @@ name|Viewable
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|research
-operator|.
-name|ws
-operator|.
-name|wadl
-operator|.
-name|HTTPMethods
-import|;
-end_import
-
 begin_comment
 comment|/**  * Resource to provide a REST API for the {@link SiteManager}  *<p/>  * TODO: add description  */
 end_comment

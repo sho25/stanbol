@@ -601,22 +601,6 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|api
-operator|.
-name|representation
-operator|.
-name|Form
-import|;
-end_import
-
 begin_comment
 comment|/**  * Utility methods used by several of the RESTful service endpoints of the  * Entityhub.  * @author Rupert Westenthaler  *  */
 end_comment

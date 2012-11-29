@@ -198,7 +198,7 @@ name|attributes
 operator|.
 name|put
 argument_list|(
-name|JerseyEndpoint
+name|CorsConstants
 operator|.
 name|CORS_ACCESS_CONTROL_EXPOSE_HEADERS
 argument_list|,

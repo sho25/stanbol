@@ -33,7 +33,7 @@ name|web
 operator|.
 name|base
 operator|.
-name|JerseyEndpoint
+name|CorsConstants
 operator|.
 name|CORS_ORIGIN
 import|;
@@ -53,7 +53,7 @@ name|web
 operator|.
 name|base
 operator|.
-name|JerseyEndpoint
+name|CorsConstants
 operator|.
 name|CORS_ACCESS_CONTROL_EXPOSE_HEADERS
 import|;

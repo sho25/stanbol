@@ -180,7 +180,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|JerseyEndpointApplication
+name|DefaultApplication
 extends|extends
 name|Application
 block|{
@@ -199,7 +199,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|JerseyEndpointApplication
+name|DefaultApplication
 operator|.
 name|class
 argument_list|)
