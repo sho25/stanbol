@@ -95,7 +95,7 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|viewable
 operator|.
 name|Viewable
 import|;

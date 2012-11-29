@@ -83,13 +83,9 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|web
+name|viewable
 operator|.
-name|base
-operator|.
-name|resource
-operator|.
-name|BaseStanbolResource
+name|Viewable
 import|;
 end_import
 
@@ -103,9 +99,13 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|web
 operator|.
-name|Viewable
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
 import|;
 end_import
 

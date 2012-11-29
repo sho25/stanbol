@@ -13,7 +13,7 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|viewable
 operator|.
 name|webfragment
 package|;
@@ -133,7 +133,7 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|viewable
 operator|.
 name|mbw
 operator|.
@@ -151,7 +151,7 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|viewable
 operator|.
 name|mbw
 operator|.

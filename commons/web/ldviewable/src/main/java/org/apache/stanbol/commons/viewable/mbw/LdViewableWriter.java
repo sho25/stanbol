@@ -13,7 +13,7 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|viewable
 operator|.
 name|mbw
 package|;
@@ -223,9 +223,9 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|ldviewable
+name|viewable
 operator|.
-name|LdViewable
+name|RdfViewable
 import|;
 end_import
 
@@ -250,7 +250,7 @@ name|LdViewableWriter
 implements|implements
 name|MessageBodyWriter
 argument_list|<
-name|LdViewable
+name|RdfViewable
 argument_list|>
 block|{
 annotation|@
@@ -283,7 +283,7 @@ name|mediaType
 parameter_list|)
 block|{
 return|return
-name|LdViewable
+name|RdfViewable
 operator|.
 name|class
 operator|.
@@ -299,7 +299,7 @@ specifier|public
 name|long
 name|getSize
 parameter_list|(
-name|LdViewable
+name|RdfViewable
 name|t
 parameter_list|,
 name|Class
@@ -330,7 +330,7 @@ specifier|public
 name|void
 name|writeTo
 parameter_list|(
-name|LdViewable
+name|RdfViewable
 name|t
 parameter_list|,
 name|Class
