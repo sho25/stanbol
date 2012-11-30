@@ -836,11 +836,6 @@ operator|.
 name|flush
 argument_list|()
 expr_stmt|;
-name|out
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
