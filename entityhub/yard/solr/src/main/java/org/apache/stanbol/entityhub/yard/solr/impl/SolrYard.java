@@ -943,6 +943,26 @@ name|solr
 operator|.
 name|model
 operator|.
+name|IndexDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|yard
+operator|.
+name|solr
+operator|.
+name|model
+operator|.
 name|IndexField
 import|;
 end_import
@@ -6080,17 +6100,10 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|documentBoost
-operator|!=
-literal|null
-condition|)
-block|{
-name|boost
-operator|=
-name|documentBoost
-expr_stmt|;
+comment|//With solr 3.6 one can not set index time boosts on fields that omitNorms
+comment|//because of that we need to restrict the usage of boosts to those manually
+comment|//configured in the fieldBoostMap. Before bosts where dropped for fields that
+comment|//do not support them
 if|if
 condition|(
 name|fieldBoost
@@ -6100,22 +6113,14 @@ condition|)
 block|{
 name|boost
 operator|=
-name|boost
+name|documentBoost
+operator|!=
+literal|null
+condition|?
+name|fieldBoost
 operator|*
-name|fieldBoost
-expr_stmt|;
-block|}
-block|}
-elseif|else
-if|if
-condition|(
-name|fieldBoost
-operator|!=
-literal|null
-condition|)
-block|{
-name|boost
-operator|=
+name|documentBoost
+else|:
 name|fieldBoost
 expr_stmt|;
 block|}
@@ -6127,6 +6132,17 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+comment|//the old code that does no longer work with Solr 3.6 :(
+comment|//            if(documentBoost != null){
+comment|//                boost = documentBoost;
+comment|//                if(fieldBoost != null){
+comment|//                    boost = boost*fieldBoost;
+comment|//                }
+comment|//            } else if(fieldBoost != null){
+comment|//                boost = fieldBoost;
+comment|//            } else {
+comment|//                boost = -1;
+comment|//            }
 for|for
 control|(
 name|Iterator
@@ -6192,6 +6208,7 @@ name|value
 argument_list|)
 control|)
 block|{
+comment|//Set Boosts only for text data types
 if|if
 condition|(
 name|boost

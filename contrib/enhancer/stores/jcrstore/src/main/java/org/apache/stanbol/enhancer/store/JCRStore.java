@@ -313,11 +313,13 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|enhancer
+name|contenthub
 operator|.
 name|servicesapi
 operator|.
-name|ContentItem
+name|store
+operator|.
+name|Store
 import|;
 end_import
 
@@ -333,7 +335,7 @@ name|enhancer
 operator|.
 name|servicesapi
 operator|.
-name|Store
+name|ContentItem
 import|;
 end_import
 
