@@ -33,6 +33,22 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|PlainLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|enhancer
@@ -46,24 +62,6 @@ operator|.
 name|Suggestion
 operator|.
 name|MATCH
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Text
 import|;
 end_import
 
@@ -110,7 +108,7 @@ init|=
 literal|0
 decl_stmt|;
 specifier|private
-name|Text
+name|PlainLiteral
 name|label
 decl_stmt|;
 specifier|private
@@ -152,7 +150,7 @@ parameter_list|,
 name|int
 name|span
 parameter_list|,
-name|Text
+name|PlainLiteral
 name|label
 parameter_list|)
 block|{
@@ -192,7 +190,7 @@ parameter_list|,
 name|float
 name|tokenMatchScore
 parameter_list|,
-name|Text
+name|PlainLiteral
 name|label
 parameter_list|,
 name|int
@@ -476,7 +474,7 @@ return|;
 block|}
 comment|/**      * The actual label of the {@link #getResult() result} that produced the      * based match for the given search tokens.      * @return the label      */
 specifier|public
-name|Text
+name|PlainLiteral
 name|getMatchedLabel
 parameter_list|()
 block|{
@@ -572,7 +570,7 @@ name|StringBuilder
 argument_list|(
 name|label
 operator|.
-name|getText
+name|getLexicalForm
 argument_list|()
 argument_list|)
 decl_stmt|;

@@ -91,26 +91,8 @@ name|UriRef
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|model
-operator|.
-name|Representation
-import|;
-end_import
-
 begin_comment
-comment|/**  * Interface used to search for Entities (e.g. as defined by a Controlled  * Vocabulary) Different implementations of this interface allow to use   * different sources.  * @author Rupert Westenthaler  */
+comment|/**  * Interface used to search for Entities (e.g. as defined by a Controlled  * Vocabulary) Different implementations of this interface allow to use   * different sources.<p>  *<b>NOTE:</b> Implementations that support entity rankings SHOULD provide an  * own {@link Entity} implementation that overrides the default   * {@link Entity#getEntityRanking()} implementation.  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -118,23 +100,23 @@ specifier|public
 interface|interface
 name|EntitySearcher
 block|{
-comment|/**      * Lookup Entities for the parsed parameters.      * @param field the field used to search for values in the parsed languages      * @param includeFields A set of fields that need to be included within the       * returned {@link Representation}. The parsed field needs also to be included      * even if missing in this set. If<code>null</code> only the field needs      * to be included. Other fields MAY also be included.      * @param search the tokens to search for. MUST NOT be<code>null</code>      * @param languages the languages to include in the search       * @param limit The maximum number of resutls of<code>null</code> to use the default      * @return the Representations found for the specified query      * @throws T An exception while searching for concepts      */
+comment|/**      * Lookup Entities for the parsed parameters.      * @param field the field used to search for values in the parsed languages      * @param selectedFields A set of fields that need to be included within the       * returned {@link Representation}. The parsed field needs also to be included      * even if missing in this set. If<code>null</code> only the field needs      * to be included. Other fields MAY also be included.      * @param search the tokens to search for. MUST NOT be<code>null</code>      * @param languages the languages to include in the search       * @param limit The maximum number of resutls of<code>null</code> to use the default      * @return the Entities found for the specified query containing information for      * all selected fields      * @throws EntitySearcherException An exception while searching for concepts      * @throws IllegalArgumentException if the parsed field is<code>null</code>;      * the list with the search terms is<code>null</code> or empty;      */
 name|Collection
 argument_list|<
 name|?
 extends|extends
-name|Representation
+name|Entity
 argument_list|>
 name|lookup
 parameter_list|(
-name|String
+name|UriRef
 name|field
 parameter_list|,
 name|Set
 argument_list|<
-name|String
+name|UriRef
 argument_list|>
-name|includeFields
+name|selectedFields
 parameter_list|,
 name|List
 argument_list|<
@@ -150,23 +132,23 @@ name|Integer
 name|limit
 parameter_list|)
 throws|throws
-name|IllegalStateException
+name|EntitySearcherException
 function_decl|;
-comment|/**      * Lookup a concept of the taxonomy by the id.      * @param id the id      * @param includeFields A set of fields that need to be included within the       * returned {@link Representation}. Other fields MAY be also included.      * @return the concept or<code>null</code> if not found      */
-name|Representation
+comment|/**      * Lookup an Entity of the linked vocabulary by the id.      * @param id the id      * @param selectedFields A set of fields that need to be included within the       * returned {@link Representation}. Other fields MAY be also included.      * @return the concept or<code>null</code> if not found      * @throws EntitySearcherException on any error while dereferencing the      * Entity with the parsed Id      * @throws IllegalArgumentException if the parsed id is<code>null</code>      */
+name|Entity
 name|get
 parameter_list|(
-name|String
+name|UriRef
 name|id
 parameter_list|,
 name|Set
 argument_list|<
-name|String
+name|UriRef
 argument_list|>
-name|includeFields
+name|selectedFields
 parameter_list|)
 throws|throws
-name|IllegalStateException
+name|EntitySearcherException
 function_decl|;
 comment|/**      * Returns<code>true</code> if this EntitySearcher can operate without      * dependencies to remote services. This is important because Stanbol can      * be forced to run in offline-mode.      * @return the state      */
 name|boolean
@@ -178,7 +160,7 @@ name|Integer
 name|getLimit
 parameter_list|()
 function_decl|;
-comment|/**      * Information in this map are added to each      *<code>fise:EntityAnnotation</code> linking to      * an entity returned by this EntitySearcher.         * @return      */
+comment|/**      * Information in this map are added to each      *<code>fise:EntityAnnotation</code> linking to      * an entity returned by this EntitySearcher.         * @return the predicate[1..1] -> predicate[1..*] tuples added to any       * 'fise:EntityAnnotation'.      */
 name|Map
 argument_list|<
 name|UriRef
