@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines commonly used name spaces to prevent multiple definitions in several  * classes  * @author Rupert Westenthaler  *  */
+comment|/**  * Defines commonly used name spaces to prevent multiple definitions in several  * classes  * @author Rupert Westenthaler  */
 end_comment
 
 begin_enum
@@ -107,48 +107,57 @@ literal|"http://fise.iks-project.eu/ontology/"
 argument_list|)
 block|,
 comment|//First the XML Namespaces
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|xsd
 argument_list|(
 literal|"http://www.w3.org/2001/XMLSchema#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|xsi
 argument_list|(
 literal|"http://www.w3.org/2001/XMLSchema-instance#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|xml
 argument_list|(
 literal|"http://www.w3.org/XML/1998/namespace#"
 argument_list|)
 block|,
 comment|//Start with the semantic Web Namespaces
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|rdf
 argument_list|(
 literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|rdfs
 argument_list|(
 literal|"http://www.w3.org/2000/01/rdf-schema#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|owl
 argument_list|(
 literal|"http://www.w3.org/2002/07/owl#"
 argument_list|)
 block|,
 comment|//CMIS related
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|atom
 argument_list|(
 literal|"http://www.w3.org/2005/Atom"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|cmis
 argument_list|(
 literal|"http://docs.oasis-open.org/ns/cmis/core/200908/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|cmisRa
 argument_list|(
 literal|"cmis-ra"
@@ -157,6 +166,7 @@ literal|"http://docs.oasis-open.org/ns/cmis/restatom/200908/"
 argument_list|)
 block|,
 comment|//now the JCR related Namespaces
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|jcr
 argument_list|(
 literal|"jcr"
@@ -164,6 +174,7 @@ argument_list|,
 literal|"http://www.jcp.org/jcr/1.0/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|jcrSv
 argument_list|(
 literal|"jcr-sv"
@@ -171,6 +182,7 @@ argument_list|,
 literal|"http://www.jcp.org/jcr/sv/1.0/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|jcrNt
 argument_list|(
 literal|"jcr-nt"
@@ -178,6 +190,7 @@ argument_list|,
 literal|"http://www.jcp.org/jcr/nt/1.0/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|jcrMix
 argument_list|(
 literal|"jcr-mix"
@@ -186,21 +199,25 @@ literal|"http://www.jcp.org/jcr/mix/1.0/"
 argument_list|)
 block|,
 comment|//Some well known Namespaces of Ontologies
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|geo
 argument_list|(
 literal|"http://www.w3.org/2003/01/geo/wgs84_pos#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|georss
 argument_list|(
 literal|"http://www.georss.org/georss/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|gml
 argument_list|(
 literal|"http://www.opengis.net/gml/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|dcElements
 argument_list|(
 literal|"dc-elements"
@@ -208,6 +225,7 @@ argument_list|,
 literal|"http://purl.org/dc/elements/1.1/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|dcTerms
 argument_list|(
 literal|"dc"
@@ -216,31 +234,37 @@ literal|"http://purl.org/dc/terms/"
 argument_list|)
 block|,
 comment|// Entityhub prefers DC-Terms, therefore use the "dc" prefix for the terms name space
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|foaf
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|vCal
 argument_list|(
 literal|"http://www.w3.org/2002/12/cal#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|vCard
 argument_list|(
 literal|"http://www.w3.org/2001/vcard-rdf/3.0#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|skos
 argument_list|(
 literal|"http://www.w3.org/2004/02/skos/core#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|sioc
 argument_list|(
 literal|"http://rdfs.org/sioc/ns#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|siocTypes
 argument_list|(
 literal|"sioc-types"
@@ -248,6 +272,7 @@ argument_list|,
 literal|"http://rdfs.org/sioc/types#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|bio
 argument_list|(
 literal|"dc-bio"
@@ -255,11 +280,13 @@ argument_list|,
 literal|"http://purl.org/vocab/bio/0.1/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|rss
 argument_list|(
 literal|"http://purl.org/rss/1.0/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|goodRelations
 argument_list|(
 literal|"gr"
@@ -267,6 +294,7 @@ argument_list|,
 literal|"http://purl.org/goodrelations/v1#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|swrc
 argument_list|(
 literal|"http://swrc.ontoware.org/ontology#"
@@ -274,6 +302,7 @@ argument_list|)
 block|,
 comment|//The Semantic Web for Research Communities Ontology
 comment|//Linked Data Ontologies
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|dbpediaOnt
 argument_list|(
 literal|"dbp-ont"
@@ -281,6 +310,7 @@ argument_list|,
 literal|"http://dbpedia.org/ontology/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|dbpediaProp
 argument_list|(
 literal|"dbp-prop"
@@ -288,18 +318,21 @@ argument_list|,
 literal|"http://dbpedia.org/property/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|geonames
 argument_list|(
 literal|"http://www.geonames.org/ontology#"
 argument_list|)
 block|,
 comment|//copyright and license
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|cc
 argument_list|(
 literal|"http://creativecommons.org/ns#"
 argument_list|)
 block|,
 comment|//Schema.org (see http://schema.org/docs/schemaorg.owl for the Ontology)
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|schema
 argument_list|(
 literal|"http://schema.org/"
@@ -307,67 +340,68 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
-comment|/**      * The W3C Ontology for Media Resources http://www.w3.org/TR/mediaont-10/      */
+comment|/**      * The W3C Ontology for Media Resources http://www.w3.org/TR/mediaont-10/     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|media
 argument_list|(
 literal|"http://www.w3.org/ns/ma-ont#"
 argument_list|)
 block|,
 comment|/*      * eHealth domain       */
-comment|/**      * DrugBank is a repository of almost 5000 FDA-approved small molecule and       * biotech drugs.       */
+comment|/**      * DrugBank is a repository of almost 5000 FDA-approved small molecule and       * biotech drugs.      * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|drugbank
 argument_list|(
 literal|"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/"
 argument_list|)
 block|,
-comment|/**      * Dailymed is published by the National Library of Medicine,       * and provides high quality information about marketed drugs.      */
+comment|/**      * Dailymed is published by the National Library of Medicine,       * and provides high quality information about marketed drugs.     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|dailymed
 argument_list|(
 literal|"http://www4.wiwiss.fu-berlin.de/dailymed/resource/dailymed/"
 argument_list|)
 block|,
-comment|/**      * SIDER contains information on marketed drugs and their adverse effects.       * The information is extracted from public documents and package inserts.      */
+comment|/**      * SIDER contains information on marketed drugs and their adverse effects.       * The information is extracted from public documents and package inserts.     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|sider
 argument_list|(
 literal|"http://www4.wiwiss.fu-berlin.de/sider/resource/sider/"
 argument_list|)
 block|,
-comment|/**      * The Linked Clinical Trials (LinkedCT) project aims at publishing the       * first open Semantic Web data source for clinical trials data.      */
+comment|/**      * The Linked Clinical Trials (LinkedCT) project aims at publishing the       * first open Semantic Web data source for clinical trials data.     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|linkedct
 argument_list|(
 literal|"http://data.linkedct.org/resource/linkedct/"
 argument_list|)
 block|,
-comment|/**      * STITCH contains information on chemicals and proteins as well as their       * interactions and links.      */
+comment|/**      * STITCH contains information on chemicals and proteins as well as their       * interactions and links.     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|stitch
 argument_list|(
 literal|"http://www4.wiwiss.fu-berlin.de/stitch/resource/stitch/"
 argument_list|)
 block|,
-comment|/**      * Diseasome publishes a network of 4,300 disorders and disease genes linked       * by known disorder-gene associations for exploring all known phenotype and       * disease gene associations, indicating the common genetic origin of many       * diseases.      */
+comment|/**      * Diseasome publishes a network of 4,300 disorders and disease genes linked       * by known disorder-gene associations for exploring all known phenotype and       * disease gene associations, indicating the common genetic origin of many       * diseases.     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|diseasome
 argument_list|(
 literal|"http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/"
 argument_list|)
 block|,
-comment|/**      * National Cancer Institute Thesaurus (http://www.mindswap.org/2003/CancerOntology/)      */
+comment|/**      * National Cancer Institute Thesaurus (http://www.mindswap.org/2003/CancerOntology/)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|nci
 argument_list|(
 literal|"http://www.mindswap.org/2003/nciOncology.owl#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|tcm
 argument_list|(
 literal|"http://purl.org/net/tcm/tcm.lifescience.ntu.edu.tw/"
 argument_list|)
 block|,
-comment|/**      * The Music Ontology (http://musicontology.com/)      */
+comment|/**      * The Music Ontology (http://musicontology.com/)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|mo
 argument_list|(
 literal|"http://purl.org/ontology/mo/"
 argument_list|)
 block|,
-comment|/**      *  The Time ontology (http://www.w3.org/TR/owl-time/)      */
+comment|/**      *  The Time ontology (http://www.w3.org/TR/owl-time/)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|owlTime
 argument_list|(
 literal|"owl-time"
@@ -375,28 +409,36 @@ argument_list|,
 literal|"http://www.w3.org/2006/time#"
 argument_list|)
 block|,
-comment|/**      *  The Event ontology (http://purl.org/NET/c4dm/event.owl#)      */
+comment|/**      *  The Event ontology (http://purl.org/NET/c4dm/event.owl#)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|event
 argument_list|(
 literal|"http://purl.org/NET/c4dm/event.owl#"
 argument_list|)
 block|,
-comment|/**      *  The Timeline ontology (http://purl.org/NET/c4dm/timeline.owl#)      */
+comment|/**      *  The Timeline ontology (http://purl.org/NET/c4dm/timeline.owl#)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|timeline
 argument_list|(
 literal|"http://purl.org/NET/c4dm/timeline.owl#"
 argument_list|)
 block|,
-comment|/**      *  Relationship: A vocabulary for describing relationships between people      *  (http://purl.org/vocab/relationship/)      */
+comment|/**      *  Relationship: A vocabulary for describing relationships between people      *  (http://purl.org/vocab/relationship/)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|rel
 argument_list|(
 literal|"http://purl.org/vocab/relationship/"
 argument_list|)
 block|,
-comment|/**      *  Expression of Core FRBR Concepts in RDF (http://vocab.org/frbr/core)      */
+comment|/**      *  Expression of Core FRBR Concepts in RDF (http://vocab.org/frbr/core)     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|frbr
 argument_list|(
 literal|"http://purl.org/vocab/frbr/core#"
+argument_list|)
+block|,
+comment|/**      * Special namespace used for disambiguation metadata      * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
+name|disambiguation
+argument_list|(
+literal|"dis"
+argument_list|,
+literal|"urn:stanbol.entityhub:disambiguation:"
 argument_list|)
 block|,
 comment|/*      * Old namespaces still kept for historical reasons      */
@@ -1025,7 +1067,7 @@ name|prefix
 argument_list|)
 return|;
 block|}
-comment|/**      * Lookup if the parsed short URI (e.g "rdfs:label") uses one of the       * registered prefixes of this Enumeration of if the parsed short URI uses      * the default namespace (e.g. "name"). In case the prefix could not be found      * the parsed URI is returned unchanged      * @param shortUri the short URI      * @return the full URI if the parsed shortUri uses a prefix defined by this      * Enumeration. Otherwise (including<code>null</code>) the parsed value.      */
+comment|/**      * Lookup if the parsed short URI (e.g "rdfs:label") uses one of the       * registered prefixes of this Enumeration of if the parsed short URI uses      * the default namespace (e.g. "name"). In case the prefix could not be found      * the parsed URI is returned unchanged      * @param shortUri the short URI      * @return the full URI if the parsed shortUri uses a prefix defined by this      * Enumeration. Otherwise (including<code>null</code>) the parsed value.     * @deprecated To obtain the fullName for an URI users should use       * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     *<b>NOTE</b> that this service will return<code>null</code> if a shortUri     * was parsed AND no mapping for the prefix was defined. This is different to     * this version that would return the parsed string.      */
 specifier|public
 specifier|static
 name|String
@@ -1133,7 +1175,7 @@ return|return
 name|shortUri
 return|;
 block|}
-comment|/**      * Parsed the namespace of the parsed full URI by searching the last occurrence      * of '#' or '/' and than looks if the namespace is part of this enumeration.      * If a namesoace is found it is replaced by the registered prefix. If not      * the parsed URI is resturned      * @param fullUri the full uri to convert      * @return the converted URI or the parsed value of<code>null</code> was      * parsed, no local name was present (e.g. if the namespace itself was parsed)      * or the parsed namespace is not known.      */
+comment|/**      * Parsed the namespace of the parsed full URI by searching the last occurrence      * of '#' or '/' and than looks if the namespace is part of this enumeration.      * If a namesoace is found it is replaced by the registered prefix. If not      * the parsed URI is resturned      * @param fullUri the full uri to convert      * @return the converted URI or the parsed value of<code>null</code> was      * parsed, no local name was present (e.g. if the namespace itself was parsed)      * or the parsed namespace is not known.     * @deprecated To obtain the shortName for an URI users should use       * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 specifier|public
 specifier|static
 name|String
@@ -1247,7 +1289,7 @@ return|return
 name|fullUri
 return|;
 block|}
-comment|/**      * @return the defaultPrefix      */
+comment|/**      * @return the defaultPrefix     * @deprecated To obtain the default namespace please lookup the prefx ''      * on the the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 specifier|public
 name|boolean
 name|isDefault

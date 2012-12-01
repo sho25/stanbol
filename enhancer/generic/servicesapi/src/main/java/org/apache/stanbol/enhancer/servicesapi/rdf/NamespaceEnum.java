@@ -19,6 +19,10 @@ name|rdf
 package|;
 end_package
 
+begin_comment
+comment|/**  *   */
+end_comment
+
 begin_enum
 specifier|public
 enum|enum
@@ -57,26 +61,31 @@ argument_list|(
 literal|"http://www.w3.org/2004/02/skos/core#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|foaf
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|geonames
 argument_list|(
 literal|"http://www.geonames.org/ontology#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|georss
 argument_list|(
 literal|"http://www.georss.org/georss/"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|geo
 argument_list|(
 literal|"http://www.w3.org/2003/01/geo/wgs84_pos#"
 argument_list|)
 block|,
+comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
 name|nie
 argument_list|(
 literal|"http://www.semanticdesktop.org/ontologies/2007/01/19/nie#"
@@ -100,12 +109,18 @@ argument_list|(
 literal|"http://fise.iks-project.eu/ontology/"
 argument_list|)
 block|,
-comment|/**      * The W3C Ontology for Media Resources http://www.w3.org/TR/mediaont-10/      */
+comment|/**      * The W3C Ontology for Media Resources http://www.w3.org/TR/mediaont-10/      * @deprecated All none core namespaces where deprecated. Users should use      * the NamespacePrefixService (module:      * org.apache.stanbol.commons.namespaceprefixservice) instead (see also      *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
 name|media
 argument_list|(
 literal|"http://www.w3.org/ns/ma-ont#"
 argument_list|)
-block|;
+block|,
+comment|/**      * The namespace of the Apache Stanbol Entityhub      */
+name|entityhub
+argument_list|(
+literal|"http://stanbol.apache.org/ontology/entityhub/entityhub#"
+argument_list|)
+block|,     ;
 name|String
 name|ns
 decl_stmt|;
