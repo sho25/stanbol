@@ -674,11 +674,12 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * OSGI constructor      */
+comment|/**      * OSGI constructor<b> DO NOT USE</b> outside of an OSGI environment as this      * will not initialise the {@link NamespacePrefixProvider} using the      * {@link ServiceLoader} utility!      */
 specifier|public
 name|StanbolNamespacePrefixService
 parameter_list|()
 block|{}
+comment|/**      * Constructs an Stanbol NamespacePrefixService and initialises other      * {@link NamespacePrefixProvider} implementations using the      * Java {@link ServiceLoader} utility.      * @param mappingFile the mapping file used to manage local mappings. If      *<code>null</code> no local mappings are supported.      * @throws IOException      */
 specifier|public
 name|StanbolNamespacePrefixService
 parameter_list|(
@@ -696,6 +697,10 @@ name|mappingFile
 expr_stmt|;
 if|if
 condition|(
+name|mappingsFile
+operator|!=
+literal|null
+operator|&&
 name|mappingsFile
 operator|.
 name|isFile
@@ -1344,6 +1349,13 @@ name|createNewFile
 argument_list|()
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|mappingsFile
+operator|!=
+literal|null
+condition|)
+block|{
 name|writePrefixMappings
 argument_list|(
 operator|new
@@ -1355,6 +1367,8 @@ literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+comment|//else do not persist mappings
 block|}
 comment|//(2) update the inverse mappings (ensure read only lists!)
 name|List
