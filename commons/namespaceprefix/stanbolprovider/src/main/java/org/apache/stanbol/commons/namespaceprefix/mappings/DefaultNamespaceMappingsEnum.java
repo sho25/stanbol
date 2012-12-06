@@ -262,6 +262,14 @@ argument_list|,
 literal|"http://dbpedia.org/ontology/"
 argument_list|)
 block|,
+comment|/**      * The "dbpedia-owl" prefix was used by a single mapping of the dbpedia      * indexing tool. This was actually not intended, but as the new service does      * validate prefixes this now causes errors. So this prefix was added to the      * list. However it is not recommended to be used - hence deprecated      * @deprecated      */
+name|dbpediaOnt2
+argument_list|(
+literal|"dbpedia-owl"
+argument_list|,
+literal|"http://dbpedia.org/ontology/"
+argument_list|)
+block|,
 name|dbpediaProp
 argument_list|(
 literal|"dbp-prop"

@@ -919,6 +919,8 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+name|StanbolNamespacePrefixService
+operator|.
 name|this
 operator|.
 name|equals
