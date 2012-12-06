@@ -107,6 +107,38 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|namespaceprefix
+operator|.
+name|NamespaceMappingUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|namespaceprefix
+operator|.
+name|NamespacePrefixService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|servicesapi
@@ -435,7 +467,7 @@ parameter_list|()
 block|{
 comment|/* Do not create Instances of Util Classes*/
 block|}
-comment|/**      * Parses fieldMappings from a String formated like follows      *<code><pre>      *    fieldPattern&gt; mapping_1 mapping_2 ... mapping_n      *</pre></code>      * Parsing is done like follows:      *<ul>      *<li> The elements of the parsed string are split by spaces. Leading and      *      tailing spaces are ignored.      *<li> the<code>fieldPattern</code> supports {@link PatternType#wildcard}.      *      '*' and '?' within this part are interpreted accordingly      *<li> Each mapping can have an optional Filter. The filter section starts with      *<code>" | "</code> and ends with the next space.<br>      *      Currently two types of Filters are supported.<br>      *<b>Language Filter:</b> Syntax:<code>@=&lt;lang-1&gt;,&lt;lang-2&gt;,      *      ... ,&lt;lang-n&gt;</code>.<br>The default language can be activated by      *      using an empty String (e.g.<code> "@=en,,de"</code>) or null      *      (e.g.<code>"@=en,null,de</code>).<br>      *<b>Data Type Filter:</b> Syntax:<code>d=&lt;type-1&gt;,&lt;type-2&gt;,      *      ... ,&lt;type-n&gt;</code>. Types can be specified by the full URI      *      however the preferred way is to use the prefix and the local name      *      (e.g.to allow all kind of floating point values one could use a      *      filter like<code>"d=xsd:decimal,xsd:float,xsd:double"</code>).      *<li> If the field should be mapped to one or more other fields, than the      *      second element of the field MUST BE equals to<code>'&gt'</code>      *<li> If the second element equals to '&gt', than all further Elements are      *      interpreted as mapping target by field names that match the      *      FieldPattern define in the first element.      *</ul>      * Examples:      *<ul>      *<li> To copy all fields define the Mapping<br>      *<code><pre>*</pre></code>      *<li> This pattern copy all fields of the foaf namespace<br>      *<code><pre>http://xmlns.com/foaf/0.1/*</pre></code>      *<li> The following Pattern uses the values of the foaf:name field as      *      entityhub symbol label<br>      *<code><pre>http://xmlns.com/foaf/0.1/name&gt; http://www.iks-project.eu/ontology/entityhub/model/label</pre></code>      *</ul>      * Notes:      *<ul>      *<li> The combination of patterns for the source field and the definition of      *      mappings is possible, but typically results in situations where all      *      field names matched by the defined pattern are copied as values of the      *      mapped field.      *</ul>      * TODO: Add Support for {@link Constraint}s on the field values.      * @param mapping The mapping      * @return the parsed {@link FieldMapping} or<code>null</code> if the parsed      *    String can not be parsed.      */
+comment|/**      * Parses fieldMappings from a String formated like follows      *<code><pre>      *    fieldPattern&gt; mapping_1 mapping_2 ... mapping_n      *</pre></code>      * Parsing is done like follows:      *<ul>      *<li> The elements of the parsed string are split by spaces. Leading and      *      tailing spaces are ignored.      *<li> the<code>fieldPattern</code> supports {@link PatternType#wildcard}.      *      '*' and '?' within this part are interpreted accordingly      *<li> Each mapping can have an optional Filter. The filter section starts with      *<code>" | "</code> and ends with the next space.<br>      *      Currently two types of Filters are supported.<br>      *<b>Language Filter:</b> Syntax:<code>@=&lt;lang-1&gt;,&lt;lang-2&gt;,      *      ... ,&lt;lang-n&gt;</code>.<br>The default language can be activated by      *      using an empty String (e.g.<code> "@=en,,de"</code>) or null      *      (e.g.<code>"@=en,null,de</code>).<br>      *<b>Data Type Filter:</b> Syntax:<code>d=&lt;type-1&gt;,&lt;type-2&gt;,      *      ... ,&lt;type-n&gt;</code>. Types can be specified by the full URI      *      however the preferred way is to use the prefix and the local name      *      (e.g.to allow all kind of floating point values one could use a      *      filter like<code>"d=xsd:decimal,xsd:float,xsd:double"</code>).      *<li> If the field should be mapped to one or more other fields, than the      *      second element of the field MUST BE equals to<code>'&gt'</code>      *<li> If the second element equals to '&gt', than all further Elements are      *      interpreted as mapping target by field names that match the      *      FieldPattern define in the first element.      *</ul>      * Examples:      *<ul>      *<li> To copy all fields define the Mapping<br>      *<code><pre>*</pre></code>      *<li> This pattern copy all fields of the foaf namespace<br>      *<code><pre>http://xmlns.com/foaf/0.1/*</pre></code>      *<li> The following Pattern uses the values of the foaf:name field as      *      entityhub symbol label<br>      *<code><pre>http://xmlns.com/foaf/0.1/name&gt; http://www.iks-project.eu/ontology/entityhub/model/label</pre></code>      *</ul>      * Notes:      *<ul>      *<li> The combination of patterns for the source field and the definition of      *      mappings is possible, but typically results in situations where all      *      field names matched by the defined pattern are copied as values of the      *      mapped field.      *</ul>      * TODO: Add Support for {@link Constraint}s on the field values.      * @param mapping The mapping      * @param nps Optionally a namespace prefix service used to convert       * '{prefix}:{localname}' configurations to full URIs      * @return the parsed {@link FieldMapping} or<code>null</code> if the parsed      *    String can not be parsed.      */
 specifier|public
 specifier|static
 name|FieldMapping
@@ -443,6 +475,9 @@ name|parseFieldMapping
 parameter_list|(
 name|String
 name|mapping
+parameter_list|,
+name|NamespacePrefixService
+name|nps
 parameter_list|)
 block|{
 if|if
@@ -587,10 +622,12 @@ condition|)
 block|{
 name|fieldPattern
 operator|=
-name|NamespaceEnum
+name|NamespaceMappingUtils
 operator|.
-name|getFullName
+name|getConfiguredUri
 argument_list|(
+name|nps
+argument_list|,
 name|parts
 index|[
 literal|0
@@ -694,6 +731,8 @@ argument_list|,
 name|i
 operator|+
 literal|1
+argument_list|,
+name|nps
 argument_list|)
 expr_stmt|;
 block|}
@@ -788,6 +827,9 @@ argument_list|<
 name|String
 argument_list|>
 name|mappings
+parameter_list|,
+name|NamespacePrefixService
+name|nps
 parameter_list|)
 block|{
 name|List
@@ -873,6 +915,8 @@ name|mappingString
 operator|.
 name|toString
 argument_list|()
+argument_list|,
+name|nps
 argument_list|)
 decl_stmt|;
 if|if
@@ -919,6 +963,9 @@ argument_list|<
 name|String
 argument_list|>
 name|mappings
+parameter_list|,
+name|NamespacePrefixService
+name|nps
 parameter_list|)
 block|{
 name|FieldMapper
@@ -948,6 +995,8 @@ range|:
 name|parseFieldMappings
 argument_list|(
 name|mappings
+argument_list|,
+name|nps
 argument_list|)
 control|)
 block|{
@@ -1017,17 +1066,6 @@ return|return
 name|mapper
 return|;
 block|}
-comment|//moved to NamespaceEnum
-comment|//    private static String getFullUri(String value){
-comment|//        int index = value.indexOf(':');
-comment|//        if(index>0){
-comment|//            NamespaceEnum namespace = NamespaceEnum.forPrefix(value.substring(0, index));
-comment|//            if(namespace!= null){
-comment|//                value = namespace.getNamespace()+value.substring(index+1);
-comment|//            }
-comment|//        }
-comment|//        return value;
-comment|//    }
 specifier|private
 specifier|static
 name|List
@@ -1042,6 +1080,9 @@ name|parts
 parameter_list|,
 name|int
 name|start
+parameter_list|,
+name|NamespacePrefixService
+name|nps
 parameter_list|)
 block|{
 name|ArrayList
@@ -1093,28 +1134,23 @@ argument_list|()
 condition|)
 block|{
 comment|//needed to remove two spaces in a row
-name|String
-name|act
-init|=
-name|NamespaceEnum
+name|mappings
 operator|.
-name|getFullName
+name|add
 argument_list|(
+name|NamespaceMappingUtils
+operator|.
+name|getConfiguredUri
+argument_list|(
+name|nps
+argument_list|,
 name|parts
 index|[
 name|i
 index|]
 argument_list|)
-decl_stmt|;
-comment|//                if(!act.isEmpty()){
-name|mappings
-operator|.
-name|add
-argument_list|(
-name|act
 argument_list|)
 expr_stmt|;
-comment|//               }
 block|}
 block|}
 return|return

@@ -595,6 +595,22 @@ name|stanbol
 operator|.
 name|commons
 operator|.
+name|namespaceprefix
+operator|.
+name|NamespacePrefixService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
 name|stanboltools
 operator|.
 name|offline
@@ -1359,10 +1375,7 @@ name|ConfigurationPolicy
 operator|.
 name|REQUIRE
 argument_list|,
-comment|// the
-comment|// baseUri
-comment|// is
-comment|// required!
+comment|// the baseUri is required!
 name|specVersion
 operator|=
 literal|"1.1"
@@ -1389,7 +1402,7 @@ name|Properties
 argument_list|(
 name|value
 operator|=
-block|{                      @
+block|{         @
 name|Property
 argument_list|(
 name|name
@@ -1398,7 +1411,7 @@ name|SiteConfiguration
 operator|.
 name|ID
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1407,7 +1420,7 @@ name|SiteConfiguration
 operator|.
 name|NAME
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1416,7 +1429,7 @@ name|SiteConfiguration
 operator|.
 name|DESCRIPTION
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1429,14 +1442,14 @@ name|cardinality
 operator|=
 literal|1000
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
 operator|=
 name|ACCESS_URI
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1445,7 +1458,7 @@ name|ENTITY_DEREFERENCER_TYPE
 argument_list|,
 name|options
 operator|=
-block|{                                                                            @
+block|{                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1460,7 +1473,7 @@ name|name
 operator|=
 literal|""
 argument_list|)
-block|,                                                                            @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1475,7 +1488,7 @@ name|name
 operator|=
 literal|"org.apache.stanbol.entityhub.dereferencer.SparqlDereferencer"
 argument_list|)
-block|,                                                                            @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1498,7 +1511,7 @@ name|value
 operator|=
 literal|"org.apache.stanbol.entityhub.dereferencer.SparqlDereferencer"
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1516,7 +1529,7 @@ name|ENTITY_SEARCHER_TYPE
 argument_list|,
 name|options
 operator|=
-block|{                                                                        @
+block|{                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1531,7 +1544,7 @@ name|name
 operator|=
 literal|""
 argument_list|)
-block|,                                                                        @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1546,7 +1559,7 @@ name|name
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|)
-block|,                                                                        @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1561,7 +1574,7 @@ name|name
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcher"
 argument_list|)
-block|,                                                                        @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1582,7 +1595,7 @@ name|value
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.SparqlSearcher"
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1591,12 +1604,9 @@ name|DEFAULT_SYMBOL_STATE
 argument_list|,
 name|options
 operator|=
-block|{                                                                        @
+block|{                     @
 name|PropertyOption
 argument_list|(
-comment|// seems, that name
-comment|// and value are
-comment|// exchanged ...
 name|value
 operator|=
 literal|'%'
@@ -1609,7 +1619,7 @@ name|name
 operator|=
 literal|"proposed"
 argument_list|)
-block|,                                                                        @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1624,14 +1634,13 @@ name|name
 operator|=
 literal|"active"
 argument_list|)
-comment|// the other states make no sense for new symbols
 block|}
 argument_list|,
 name|value
 operator|=
 literal|"proposed"
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1640,7 +1649,7 @@ name|DEFAULT_MAPPING_STATE
 argument_list|,
 name|options
 operator|=
-block|{                                                                         @
+block|{                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1655,7 +1664,7 @@ name|name
 operator|=
 literal|"proposed"
 argument_list|)
-block|,                                                                         @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1670,14 +1679,13 @@ name|name
 operator|=
 literal|"confirmed"
 argument_list|)
-comment|// the other states make no sense for new symbols
 block|}
 argument_list|,
 name|value
 operator|=
 literal|"proposed"
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1686,7 +1694,7 @@ name|DEFAULT_EXPIRE_DURATION
 argument_list|,
 name|options
 operator|=
-block|{                                                                           @
+block|{                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1713,7 +1721,7 @@ operator|*
 literal|30
 operator|)
 argument_list|)
-block|,                                                                           @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1740,7 +1748,7 @@ operator|*
 literal|183
 operator|)
 argument_list|)
-block|,                                                                           @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1767,7 +1775,7 @@ operator|*
 literal|365
 operator|)
 argument_list|)
-block|,                                                                           @
+block|,                     @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1788,7 +1796,7 @@ name|value
 operator|=
 literal|"0"
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1797,7 +1805,7 @@ name|CACHE_STRATEGY
 argument_list|,
 name|options
 operator|=
-block|{                                                                  @
+block|{                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1812,7 +1820,7 @@ name|name
 operator|=
 literal|"none"
 argument_list|)
-block|,                                                                  @
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1827,7 +1835,7 @@ name|name
 operator|=
 literal|"used"
 argument_list|)
-block|,                                                                  @
+block|,                 @
 name|PropertyOption
 argument_list|(
 name|value
@@ -1848,7 +1856,7 @@ name|value
 operator|=
 literal|"none"
 argument_list|)
-block|,                      @
+block|,         @
 name|Property
 argument_list|(
 name|name
@@ -1986,6 +1994,19 @@ argument_list|)
 specifier|private
 name|OfflineMode
 name|offlineMode
+decl_stmt|;
+annotation|@
+name|Reference
+argument_list|(
+name|cardinality
+operator|=
+name|ReferenceCardinality
+operator|.
+name|OPTIONAL_UNARY
+argument_list|)
+specifier|private
+name|NamespacePrefixService
+name|nsPrefixService
 decl_stmt|;
 specifier|public
 name|ReferencedSiteImpl
@@ -4345,6 +4366,8 @@ operator|.
 name|parseFieldMapping
 argument_list|(
 name|configuredMapping
+argument_list|,
+name|nsPrefixService
 argument_list|)
 decl_stmt|;
 if|if
@@ -4596,6 +4619,7 @@ name|getBundleContext
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// NOTE: here the filter MUST include also the objectClass!
 name|context
 operator|.
 name|getBundleContext
@@ -4610,15 +4634,6 @@ argument_list|,
 name|filterString
 argument_list|)
 expr_stmt|;
-comment|// NOTE:
-comment|// here
-comment|// the
-comment|// filter
-comment|// MUST
-comment|// include
-comment|// also
-comment|// the
-comment|// objectClass!
 block|}
 comment|// context.getComponentInstance().dispose();
 comment|// throw an exception to avoid an successful activation

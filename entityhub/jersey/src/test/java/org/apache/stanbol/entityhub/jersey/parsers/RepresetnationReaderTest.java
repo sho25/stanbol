@@ -31,6 +31,20 @@ end_import
 
 begin_import
 import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|ext
+operator|.
+name|RuntimeDelegate
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -100,20 +114,6 @@ operator|.
 name|provider
 operator|.
 name|RuntimeDelegateImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|ext
-operator|.
-name|RuntimeDelegate
 import|;
 end_import
 

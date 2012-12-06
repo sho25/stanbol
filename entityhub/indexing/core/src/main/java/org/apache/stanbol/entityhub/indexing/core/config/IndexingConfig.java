@@ -347,6 +347,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collection
 import|;
 end_import
@@ -498,6 +508,40 @@ operator|.
 name|io
 operator|.
 name|LineIterator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|namespaceprefix
+operator|.
+name|NamespacePrefixService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|namespaceprefix
+operator|.
+name|service
+operator|.
+name|StanbolNamespacePrefixService
 import|;
 end_import
 
@@ -1035,6 +1079,10 @@ specifier|private
 name|String
 name|classpathResourceOffset
 decl_stmt|;
+specifier|private
+name|NamespacePrefixService
+name|namespacePrefixService
+decl_stmt|;
 comment|/**      * Creates an instance using {@link #DEFAULT_ROOT_PATH} (relative to the      * working directory) as {@link #getIndexingFolder()} for the indexing      */
 specifier|public
 name|IndexingConfig
@@ -1434,6 +1482,29 @@ argument_list|,
 name|classPathRootDir
 argument_list|)
 expr_stmt|;
+comment|//read the prefixnamespace mappings
+try|try
+block|{
+name|initNamespacePrefixMapper
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to get create NamespacePrefixMapper"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
 comment|//check the main configuration
 name|this
 operator|.
@@ -1636,6 +1707,9 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+argument_list|,
+name|getNamespacePrefixService
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1686,6 +1760,78 @@ literal|"' to configure a different one!"
 argument_list|)
 throw|;
 block|}
+block|}
+specifier|public
+name|NamespacePrefixService
+name|getNamespacePrefixService
+parameter_list|()
+block|{
+return|return
+name|namespacePrefixService
+return|;
+block|}
+comment|/**      * @param configDir      * @throws IOException      */
+specifier|private
+name|void
+name|initNamespacePrefixMapper
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+name|File
+name|nsPrefixMappings
+init|=
+operator|new
+name|File
+argument_list|(
+name|getConfigFolder
+argument_list|()
+argument_list|,
+literal|"namespaceprefix.mappings"
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|nsPrefixMappings
+operator|.
+name|isFile
+argument_list|()
+condition|)
+block|{
+name|FileUtils
+operator|.
+name|writeLines
+argument_list|(
+name|nsPrefixMappings
+argument_list|,
+literal|"UTF-8"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"# Syntax: '{prefix}\\t{namespace}\\n"
+argument_list|,
+literal|"# where:"
+argument_list|,
+literal|"#   {prefix} ... [0..9A..Za..z-_]"
+argument_list|,
+literal|"#   {namespace} ... must end with '#' or '/' for URLs and ':' for URNs"
+argument_list|,
+literal|"# one mapping per line, multiple prefixes for the same namespace allowed"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|namespacePrefixService
+operator|=
+operator|new
+name|StanbolNamespacePrefixService
+argument_list|(
+name|nsPrefixMappings
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**      * Searches for a configuration file. If the configuration is not found      * within the {@link #getConfigFolder()} than it searches the Classpath for      * the configuration. If the configuration is found within the Classpath it      * is copied the the configuration folder and than opened.<p>      * The intension behind that is that the default values are provided within      * the indexer archive but that the user can modify the configuration after      * the first call.      * @param configFile the name of the configuration file      * @return      * @throws IOException      */
 specifier|public

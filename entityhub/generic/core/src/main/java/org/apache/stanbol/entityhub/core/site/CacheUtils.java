@@ -27,6 +27,22 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|namespaceprefix
+operator|.
+name|NamespacePrefixService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|core
@@ -279,7 +295,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Loads the base mappings form the parsed Yard      * @param yard The yard      * @return The baseMappings      * @throws YardException on any Error while getting the Representation holding      * the Configuration from the Yard.      * @throws CacheInitialisationException if the configuration is found but not      * valid.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}      */
+comment|/**      * Loads the base mappings form the parsed Yard      * @param yard The yard      * @param nsPrefixService if present '{prefix}:{localname}' configurations are      * @return The baseMappings      * @throws YardException on any Error while getting the Representation holding      * the Configuration from the Yard.      * @throws CacheInitialisationException if the configuration is found but not      * valid.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}      */
 specifier|public
 specifier|static
 name|FieldMapper
@@ -287,6 +303,9 @@ name|loadBaseMappings
 parameter_list|(
 name|Yard
 name|yard
+parameter_list|,
+name|NamespacePrefixService
+name|nsPrefixService
 parameter_list|)
 throws|throws
 name|YardException
@@ -335,6 +354,8 @@ argument_list|(
 name|yard
 argument_list|,
 name|baseConfig
+argument_list|,
+name|nsPrefixService
 argument_list|)
 decl_stmt|;
 if|if
@@ -404,7 +425,7 @@ return|;
 comment|//throw new CacheInitialisationException("Base Configuration not present");
 block|}
 block|}
-comment|/**      * Loads the additional field mappings used by this cache from the yard.      * This method sets the {@link #baseMapper} field during initialisation.      * @param yard The yard      * @return The parsed mappings or<code>null</code> if no found      * @throws YardException on any Error while reading the {@link Representation}      * holding the configuration from the {@link Yard}.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}.      */
+comment|/**      * Loads the additional field mappings used by this cache from the yard.      * This method sets the {@link #baseMapper} field during initialisation.      * @param yard The yard      * @param nsPrefixService if present '{prefix}:{localname}' configurations are      * @return The parsed mappings or<code>null</code> if no found      * @throws YardException on any Error while reading the {@link Representation}      * holding the configuration from the {@link Yard}.      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link Yard}.      */
 specifier|protected
 specifier|static
 name|FieldMapper
@@ -412,6 +433,9 @@ name|loadAdditionalMappings
 parameter_list|(
 name|Yard
 name|yard
+parameter_list|,
+name|NamespacePrefixService
+name|nsPrefixService
 parameter_list|)
 throws|throws
 name|YardException
@@ -458,6 +482,8 @@ argument_list|(
 name|yard
 argument_list|,
 name|addConfig
+argument_list|,
+name|nsPrefixService
 argument_list|)
 decl_stmt|;
 if|if
@@ -513,7 +539,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Reads the field mapping config from an document      * @param yard the yard of the parsed Representation      * @param config the configuration MUST NOT be<code>null</code>      * @return A field mapper configured based on the configuration in the parsed {@link Representation}      * @throws if the parsed {@link Representation} does not contain a value for {@value CacheConstants.FIELD_MAPPING_CONFIG_FIELD}.      */
+comment|/**      * Reads the field mapping config from an document      * @param yard the yard of the parsed Representation      * @param config the configuration MUST NOT be<code>null</code>      * @param nsPrefixService if present '{prefix}:{localname}' configurations are      * supported for the fieldmappings used by the cache.       * @return A field mapper configured based on the configuration in the parsed {@link Representation}      * @throws if the parsed {@link Representation} does not contain a value for {@value CacheConstants.FIELD_MAPPING_CONFIG_FIELD}.      */
 specifier|private
 specifier|static
 name|FieldMapper
@@ -524,6 +550,9 @@ name|yard
 parameter_list|,
 name|Representation
 name|config
+parameter_list|,
+name|NamespacePrefixService
+name|nsPrefixService
 parameter_list|)
 block|{
 name|Object
@@ -581,6 +610,8 @@ operator|.
 name|parseFieldMapping
 argument_list|(
 name|mappingStirng
+argument_list|,
+name|nsPrefixService
 argument_list|)
 decl_stmt|;
 if|if

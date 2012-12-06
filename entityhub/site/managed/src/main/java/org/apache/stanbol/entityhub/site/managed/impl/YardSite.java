@@ -79,6 +79,22 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|namespaceprefix
+operator|.
+name|NamespacePrefixService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|entityhub
 operator|.
 name|core
@@ -598,6 +614,11 @@ name|getDefaultInstance
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|/**      * used to support '{prefix}:{loacalname}' configurations in the {@link SiteConfiguration}      */
+specifier|private
+name|NamespacePrefixService
+name|nsPrefixService
+decl_stmt|;
 specifier|public
 name|YardSite
 parameter_list|(
@@ -606,6 +627,9 @@ name|yard
 parameter_list|,
 name|SiteConfiguration
 name|config
+parameter_list|,
+name|NamespacePrefixService
+name|nsPrefixService
 parameter_list|)
 block|{
 name|this
@@ -619,6 +643,12 @@ operator|.
 name|config
 operator|=
 name|config
+expr_stmt|;
+name|this
+operator|.
+name|nsPrefixService
+operator|=
+name|nsPrefixService
 expr_stmt|;
 name|this
 operator|.
@@ -704,6 +734,8 @@ operator|.
 name|parseFieldMapping
 argument_list|(
 name|configuredMapping
+argument_list|,
+name|nsPrefixService
 argument_list|)
 decl_stmt|;
 if|if

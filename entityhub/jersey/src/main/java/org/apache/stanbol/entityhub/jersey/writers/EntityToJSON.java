@@ -220,53 +220,13 @@ parameter_list|)
 throws|throws
 name|JSONException
 block|{
-name|JSONObject
-name|jSign
-decl_stmt|;
-comment|//        if (entity instanceof Symbol) {
-comment|//            jSign = writeSymbolAsJSON((Symbol) entity);
-comment|//        } else if (entity instanceof EntityMapping) {
-comment|//            jSign = writeEntityMappingAsJSON((EntityMapping) entity);
-comment|//        } else {
-name|jSign
-operator|=
+return|return
 name|convertEntityToJSON
 argument_list|(
 name|entity
 argument_list|)
-expr_stmt|;
-comment|//        }
-return|return
-name|jSign
 return|;
 block|}
-comment|//    private static JSONObject writeSymbolAsJSON(Symbol symbol) throws JSONException {
-comment|//        JSONObject jSymbol = convertSignToJSON(symbol);
-comment|//        jSymbol.put("label", symbol.getLabel());
-comment|//        Iterator<Text> descriptions = symbol.getDescriptions();
-comment|//        if (descriptions.hasNext()) {
-comment|//            jSymbol.put("description", convertFieldValuesToJSON(descriptions));
-comment|//        }
-comment|//        Collection<String> value = ModelUtils.asCollection(symbol.getPredecessors());
-comment|//        if (!value.isEmpty()) {
-comment|//            jSymbol.put("predecessors", value);
-comment|//        }
-comment|//        value = ModelUtils.asCollection(symbol.getSuccessors());
-comment|//        if (!value.isEmpty()) {
-comment|//            jSymbol.put("successors", new JSONArray());
-comment|//        }
-comment|//        jSymbol.put("stateUri", symbol.getState().getUri());
-comment|//        jSymbol.put("state", symbol.getState().name());
-comment|//        return jSymbol;
-comment|//    }
-comment|//    private static JSONObject writeEntityMappingAsJSON(EntityMapping entityMapping) throws JSONException {
-comment|//        JSONObject jEntityMapping = convertSignToJSON(entityMapping);
-comment|//        jEntityMapping.put("symbol", entityMapping.getTargetId());
-comment|//        jEntityMapping.put("entity", entityMapping.getSourceId());
-comment|//        jEntityMapping.put("stateUri", entityMapping.getState().getUri());
-comment|//        jEntityMapping.put("state", entityMapping.getState().name());
-comment|//        return jEntityMapping;
-comment|//    }
 comment|/**      * @param entity      * @return      * @throws JSONException      */
 specifier|private
 specifier|static

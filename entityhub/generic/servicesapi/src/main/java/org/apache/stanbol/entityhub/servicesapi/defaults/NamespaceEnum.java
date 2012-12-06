@@ -107,38 +107,38 @@ literal|"http://fise.iks-project.eu/ontology/"
 argument_list|)
 block|,
 comment|//First the XML Namespaces
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**      * The XSD namespace as used by the datatypes of XML and RDF literals       */
 name|xsd
 argument_list|(
 literal|"http://www.w3.org/2001/XMLSchema#"
 argument_list|)
 block|,
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**      * The XSI namespace      */
 name|xsi
 argument_list|(
 literal|"http://www.w3.org/2001/XMLSchema-instance#"
 argument_list|)
 block|,
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**      * The XML namespace as used by the language attribute of XML and the language      * for RDF literals      */
 name|xml
 argument_list|(
 literal|"http://www.w3.org/XML/1998/namespace#"
 argument_list|)
 block|,
 comment|//Start with the semantic Web Namespaces
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * The RDF namespace (rdf:type)     */
 name|rdf
 argument_list|(
 literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 argument_list|)
 block|,
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * The RDFS namespace (rdfs:label, rdfs:comment, rdfs:seeAlso)     */
 name|rdfs
 argument_list|(
 literal|"http://www.w3.org/2000/01/rdf-schema#"
 argument_list|)
 block|,
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * The OWL namespace (owl:sameAs)     */
 name|owl
 argument_list|(
 literal|"http://www.w3.org/2002/07/owl#"
@@ -225,7 +225,7 @@ argument_list|,
 literal|"http://purl.org/dc/elements/1.1/"
 argument_list|)
 block|,
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * The DC terms ontology as used by the Entityhub to manage metadata such as     * creator, creation/modification dates as well as linking to the license     */
 name|dcTerms
 argument_list|(
 literal|"dc"
@@ -234,7 +234,7 @@ literal|"http://purl.org/dc/terms/"
 argument_list|)
 block|,
 comment|// Entityhub prefers DC-Terms, therefore use the "dc" prefix for the terms name space
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * FOAF ontology used as type for the resource providing metadata about an     * Entity (foaf:Document)     */
 name|foaf
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/"
@@ -252,7 +252,7 @@ argument_list|(
 literal|"http://www.w3.org/2001/vcard-rdf/3.0#"
 argument_list|)
 block|,
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * The SKOS namespace (skos:Concept)     */
 name|skos
 argument_list|(
 literal|"http://www.w3.org/2004/02/skos/core#"
@@ -302,7 +302,7 @@ argument_list|)
 block|,
 comment|//The Semantic Web for Research Communities Ontology
 comment|//Linked Data Ontologies
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * THe DBpedia.org ontology (dbp-ont:Person, dbp-ont:Organisation, dbp-ont:Place, ...)     */
 name|dbpediaOnt
 argument_list|(
 literal|"dbp-ont"
@@ -325,7 +325,7 @@ literal|"http://www.geonames.org/ontology#"
 argument_list|)
 block|,
 comment|//copyright and license
-comment|/**     * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>     */
+comment|/**     * Creative Commons as used by the Entityhub for license and attribution information     */
 name|cc
 argument_list|(
 literal|"http://creativecommons.org/ns#"

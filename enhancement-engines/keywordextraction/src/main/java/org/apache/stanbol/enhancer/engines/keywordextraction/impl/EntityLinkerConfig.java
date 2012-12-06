@@ -277,7 +277,7 @@ specifier|final
 name|String
 name|DEFAULT_NAME_FIELD
 init|=
-literal|"rdfs:label"
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
 decl_stmt|;
 comment|/**      * Default value for {@link #getTypeField()} (rdf:type)      */
 specifier|public
@@ -286,7 +286,7 @@ specifier|final
 name|String
 name|DEFAULT_TYPE_FIELD
 init|=
-literal|"rdf:type"
+literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 decl_stmt|;
 comment|/**      * Default value for {@link #getRedirectField()} (rdf:seeAlso)      */
 specifier|public
@@ -295,7 +295,7 @@ specifier|final
 name|String
 name|DEFAULT_REDIRECT_FIELD
 init|=
-literal|"rdfs:seeAlso"
+literal|"http://www.w3.org/2000/01/rdf-schema#seeAlso"
 decl_stmt|;
 comment|/**      * The default language used to search for labels regardless of the language      * of the text. The default value is<code>null</code> causing to include      * labels that do not have a language assigned.      */
 specifier|public
@@ -367,11 +367,7 @@ name|mappings
 operator|.
 name|put
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|dbpediaOnt
-operator|+
-literal|"Newspaper"
+literal|"http://dbpedia.org/ontology/Newspaper"
 argument_list|,
 name|OntologicalClasses
 operator|.
@@ -382,11 +378,7 @@ name|mappings
 operator|.
 name|put
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|schema
-operator|+
-literal|"Organization"
+literal|"http://schema.org/Organization"
 argument_list|,
 name|OntologicalClasses
 operator|.
@@ -414,11 +406,7 @@ name|mappings
 operator|.
 name|put
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|foaf
-operator|+
-literal|"Person"
+literal|"http://xmlns.com/foaf/0.1/Person"
 argument_list|,
 name|OntologicalClasses
 operator|.
@@ -429,11 +417,7 @@ name|mappings
 operator|.
 name|put
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|schema
-operator|+
-literal|"Person"
+literal|"http://schema.org/Person"
 argument_list|,
 name|OntologicalClasses
 operator|.
@@ -460,11 +444,7 @@ name|mappings
 operator|.
 name|put
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|schema
-operator|+
-literal|"Place"
+literal|"http://schema.org/Place"
 argument_list|,
 name|OntologicalClasses
 operator|.
@@ -475,11 +455,7 @@ name|mappings
 operator|.
 name|put
 argument_list|(
-name|NamespaceEnum
-operator|.
-name|gml
-operator|+
-literal|"_Feature"
+literal|"http://www.opengis.net/gml/_Feature"
 argument_list|,
 name|OntologicalClasses
 operator|.
@@ -500,6 +476,22 @@ argument_list|,
 name|OntologicalClasses
 operator|.
 name|SKOS_CONCEPT
+argument_list|)
+expr_stmt|;
+name|mappings
+operator|.
+name|put
+argument_list|(
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_ORGANISATION
+operator|.
+name|getUnicodeString
+argument_list|()
+argument_list|,
+name|OntologicalClasses
+operator|.
+name|DBPEDIA_ORGANISATION
 argument_list|)
 expr_stmt|;
 comment|//        UriRef DRUG = new UriRef(NamespaceEnum.drugbank+"drugs");
@@ -772,7 +764,7 @@ return|return
 name|nameField
 return|;
 block|}
-comment|/**      * Setter for the uri of the field used for the names in the taxonomy      * (e.g. rdfs:label, skos:prefLabel).       * Converts short to full URIy by using the prefixes as registered in the      * {@link NamespaceEnum}.      * @param nameField the nameField to set      */
+comment|/**      * Setter for the uri of the field used for the entities in the vocabulary<p>      *<b>NOTE</b>: does NOT support the convertion of short to full URIs      * {@link NamespaceEnum}.      * @param nameField the nameField to set      */
 specifier|public
 specifier|final
 name|void
@@ -786,12 +778,7 @@ name|this
 operator|.
 name|nameField
 operator|=
-name|NamespaceEnum
-operator|.
-name|getFullName
-argument_list|(
 name|nameField
-argument_list|)
 expr_stmt|;
 name|updateSelectedFields
 argument_list|()
@@ -855,7 +842,7 @@ return|return
 name|redirectField
 return|;
 block|}
-comment|/**      * The field used to follow redirects (typically rdf:seeAlso)      * Converts short to full URIy by using the prefixes as registered in the      * {@link NamespaceEnum}.      * @param redirectField the redirectField to set      */
+comment|/**      * The field used to follow redirects (typically rdf:seeAlso)<p>      *<b>NOTE</b>: does NOT support the convertion of short to full URIs      * @param redirectField the redirectField to set      */
 specifier|public
 specifier|final
 name|void
@@ -869,12 +856,7 @@ name|this
 operator|.
 name|redirectField
 operator|=
-name|NamespaceEnum
-operator|.
-name|getFullName
-argument_list|(
 name|redirectField
-argument_list|)
 expr_stmt|;
 name|updateSelectedFields
 argument_list|()
@@ -891,7 +873,7 @@ return|return
 name|typeField
 return|;
 block|}
-comment|/**      * The field used to lookup the types (typically rdf:type)      * Converts short to full URIy by using the prefixes as registered in the      * {@link NamespaceEnum}.      * @param typeField the typeField to set      */
+comment|/**      * The field used to lookup the types (typically rdf:type)<p>      *<b>NOTE</b>: does NOT support the convertion of short to full URIs      * @param typeField the typeField to set      */
 specifier|public
 specifier|final
 name|void
@@ -905,12 +887,7 @@ name|this
 operator|.
 name|typeField
 operator|=
-name|NamespaceEnum
-operator|.
-name|getFullName
-argument_list|(
 name|typeField
-argument_list|)
 expr_stmt|;
 name|updateSelectedFields
 argument_list|()

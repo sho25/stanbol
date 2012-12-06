@@ -84,17 +84,6 @@ operator|.
 name|id
 operator|=
 name|id
-operator|==
-literal|null
-condition|?
-literal|null
-else|:
-name|NamespaceEnum
-operator|.
-name|getFullName
-argument_list|(
-name|id
-argument_list|)
 expr_stmt|;
 if|if
 condition|(
