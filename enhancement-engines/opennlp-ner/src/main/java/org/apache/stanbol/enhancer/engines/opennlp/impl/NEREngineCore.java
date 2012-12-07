@@ -2838,7 +2838,6 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-operator|!
 name|sentences
 operator|.
 name|isEmpty
