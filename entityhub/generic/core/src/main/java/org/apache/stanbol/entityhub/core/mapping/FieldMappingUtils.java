@@ -620,6 +620,8 @@ literal|"*"
 argument_list|)
 condition|)
 block|{
+try|try
+block|{
 name|fieldPattern
 operator|=
 name|NamespaceMappingUtils
@@ -634,6 +636,26 @@ literal|0
 index|]
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IllegalArgumentException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to parse fieldMapping because of unknown namespace prefix"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
 block|}
 else|else
 block|{
@@ -907,8 +929,6 @@ comment|//not an comment
 name|FieldMapping
 name|fieldMapping
 init|=
-name|FieldMappingUtils
-operator|.
 name|parseFieldMapping
 argument_list|(
 name|mappingString
@@ -1134,6 +1154,8 @@ argument_list|()
 condition|)
 block|{
 comment|//needed to remove two spaces in a row
+try|try
+block|{
 name|mappings
 operator|.
 name|add
@@ -1151,6 +1173,28 @@ index|]
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IllegalArgumentException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to parse mapping because of unkown namespace prefix in "
+operator|+
+name|parts
+index|[
+name|i
+index|]
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 return|return
