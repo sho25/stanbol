@@ -809,7 +809,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Use Simple Tolenizer for language {}"
+literal|"Use Simple Tokenizer for language {}"
 argument_list|,
 name|language
 argument_list|)
@@ -827,7 +827,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Use ME Tolenizer for language {}"
+literal|"Use ME Tokenizer for language {}"
 argument_list|,
 name|language
 argument_list|)
