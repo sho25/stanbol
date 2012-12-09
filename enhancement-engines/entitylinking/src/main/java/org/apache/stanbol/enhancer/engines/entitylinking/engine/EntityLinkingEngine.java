@@ -1075,7 +1075,7 @@ name|EngineException
 block|{
 name|log
 operator|.
-name|info
+name|trace
 argument_list|(
 literal|"canEnhancer {}"
 argument_list|,
@@ -1217,7 +1217,7 @@ name|EngineException
 block|{
 name|log
 operator|.
-name|info
+name|trace
 argument_list|(
 literal|" enhance ci {}"
 argument_list|,
@@ -1267,7 +1267,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> AnalysedText {}"
 argument_list|,

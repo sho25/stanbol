@@ -669,6 +669,24 @@ name|enhancer
 operator|.
 name|nlp
 operator|.
+name|phrase
+operator|.
+name|PhraseTag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|nlp
+operator|.
 name|pos
 operator|.
 name|PosTag
@@ -1112,6 +1130,35 @@ specifier|private
 name|AnalysedTextFactory
 name|analysedTextFactory
 decl_stmt|;
+comment|/**      * Holds as key the languages and as values the ad-hoc (unmapped) phrase tags      * for that languages.<p>      * NOTE: Not synchronised as concurrent execution caused multiple adds will      * only create some additional {@link PhraseTag} instances and not actual      * problems.      */
+specifier|private
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|PosTag
+argument_list|>
+argument_list|>
+name|languageAdhocTags
+init|=
+operator|new
+name|HashMap
+argument_list|<
+name|String
+argument_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|PosTag
+argument_list|>
+argument_list|>
+argument_list|()
+decl_stmt|;
 comment|/**      * Indicate if this engine can enhance supplied ContentItem, and if it      * suggests enhancing it synchronously or asynchronously. The      * {@link org.apache.stanbol.enhancer.servicesapi.EnhancementJobManager} can force sync/async mode if desired, it is      * just a suggestion from the engine.      *<p/>      * Returns ENHANCE_ASYNC in case there is a text/plain content part and a tagger for the language identified for      * the content item, CANNOT_ENHANCE otherwise.      *      * @throws org.apache.stanbol.enhancer.servicesapi.EngineException      *          if the introspecting process of the content item      *          fails      */
 annotation|@
 name|Override
@@ -1383,6 +1430,22 @@ name|PosTag
 argument_list|>
 name|adhocTags
 init|=
+name|languageAdhocTags
+operator|.
+name|get
+argument_list|(
+name|language
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|adhocTags
+operator|==
+literal|null
+condition|)
+block|{
+name|adhocTags
+operator|=
 operator|new
 name|HashMap
 argument_list|<
@@ -1391,7 +1454,17 @@ argument_list|,
 name|PosTag
 argument_list|>
 argument_list|()
-decl_stmt|;
+expr_stmt|;
+name|languageAdhocTags
+operator|.
+name|put
+argument_list|(
+name|language
+argument_list|,
+name|adhocTags
+argument_list|)
+expr_stmt|;
+block|}
 comment|//(1) Sentence detection
 comment|//Try to read existing Sentence Annotations
 name|Iterator
@@ -1604,6 +1677,8 @@ argument_list|,
 name|tagSet
 argument_list|,
 name|adhocTags
+argument_list|,
+name|language
 argument_list|)
 expr_stmt|;
 block|}
@@ -1723,7 +1798,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * POS tags the parsed tokens by using the pos tagger. Annotations are      * added based on the posModel and already created adhoc tags.      * @param tokenList      * @param posTagger      * @param posModel      * @param adhocTags      */
+comment|/**      * POS tags the parsed tokens by using the pos tagger. Annotations are      * added based on the posModel and already created adhoc tags.      * @param tokenList      * @param posTagger      * @param posModel      * @param adhocTags      * @param language      */
 specifier|private
 name|void
 name|posTag
@@ -1750,6 +1825,9 @@ argument_list|,
 name|PosTag
 argument_list|>
 name|adhocTags
+parameter_list|,
+name|String
+name|language
 parameter_list|)
 block|{
 name|String
@@ -1943,6 +2021,8 @@ argument_list|,
 name|adhocTags
 argument_list|,
 name|p
+argument_list|,
+name|language
 argument_list|)
 expr_stmt|;
 name|actProp
@@ -2007,6 +2087,9 @@ name|adhocTags
 parameter_list|,
 name|String
 name|tag
+parameter_list|,
+name|String
+name|language
 parameter_list|)
 block|{
 name|PosTag
@@ -2069,16 +2152,13 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|warn
+name|info
 argument_list|(
-literal|"Encountered unknown POS tag '{}' for langauge '{}'"
+literal|"Encountered umapped POS tag '{}' for langauge '{}'"
 argument_list|,
 name|tag
 argument_list|,
-name|model
-operator|.
-name|getLanguages
-argument_list|()
+name|language
 argument_list|)
 expr_stmt|;
 return|return

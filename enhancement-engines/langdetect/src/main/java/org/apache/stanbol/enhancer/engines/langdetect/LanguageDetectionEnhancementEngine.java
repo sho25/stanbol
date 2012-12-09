@@ -1276,7 +1276,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"language identified: {}"
 argument_list|,
@@ -1295,9 +1295,23 @@ operator|.
 name|warn
 argument_list|(
 literal|"Could not identify language"
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
-return|return;
+throw|throw
+operator|new
+name|EngineException
+argument_list|(
+name|this
+argument_list|,
+name|ci
+argument_list|,
+literal|"Could not identify language"
+argument_list|,
+name|e
+argument_list|)
+throw|;
 block|}
 comment|// add language to metadata
 if|if
