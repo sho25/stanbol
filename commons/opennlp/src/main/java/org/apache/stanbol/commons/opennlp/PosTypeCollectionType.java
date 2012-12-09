@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The type of the POS types represented by a {@link PosTagsCollectionEnum#getTags()}  * @author Rupert Westenthaler  *  */
+comment|/**  * The type of the POS types represented by a {@link PosTagsCollectionEnum#getTags()}  * @author Rupert Westenthaler  * @deprecated replaced by STANBOL-733 (stanbol nlp processing module  */
 end_comment
 
 begin_enum

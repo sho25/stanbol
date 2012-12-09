@@ -257,6 +257,10 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * @deprecated replaced by STANBOL-733 (stanbol nlp processing module  */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -289,6 +293,7 @@ specifier|final
 name|TextAnalyzerConfig
 name|config
 decl_stmt|;
+comment|/**      * @deprecated replaced by STANBOL-733 (stanbol nlp processing module      */
 specifier|public
 specifier|static
 specifier|final
@@ -1270,6 +1275,7 @@ name|language
 argument_list|)
 return|;
 block|}
+comment|/**      * @deprecated replaced by STANBOL-733 (stanbol nlp processing module      */
 specifier|private
 specifier|final
 class|class
@@ -1470,6 +1476,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**      * @deprecated replaced by STANBOL-733 (stanbol nlp processing module      */
 specifier|public
 class|class
 name|AnalysedText
@@ -2295,6 +2302,7 @@ return|return
 name|offset
 return|;
 block|}
+comment|/**          * @deprecated replaced by STANBOL-733 (stanbol nlp processing module          */
 specifier|public
 class|class
 name|Token
@@ -2681,6 +2689,7 @@ operator|)
 return|;
 block|}
 block|}
+comment|/**          * @deprecated replaced by STANBOL-733 (stanbol nlp processing module          */
 specifier|public
 class|class
 name|Chunk

@@ -80,7 +80,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simple version of a {@link opennlp.tools.chunker.Chunker} that uses the POS tags to build chunks.  * It does not implement the {@link opennlp.tools.chunker.Chunker} interface because implementing  * methods other than the {@link opennlp.tools.chunker.Chunker#chunkAsSpans(String[], String[])}  * is not feasible.<p>  * Defaults are based on the<a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">  * Penn Treebank</a> tag set   *   * TODO:<ul>  *<li> Test if POS tags are the same for different languages  *<li> Check if it is possible to implement the {@link opennlp.tools.chunker.Chunker} interface  *</ul>  * @author Rupert Westenthaler  *  */
+comment|/**  * Simple version of a {@link opennlp.tools.chunker.Chunker} that uses the POS tags to build chunks.  * It does not implement the {@link opennlp.tools.chunker.Chunker} interface because implementing  * methods other than the {@link opennlp.tools.chunker.Chunker#chunkAsSpans(String[], String[])}  * is not feasible.<p>  * Defaults are based on the<a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">  * Penn Treebank</a> tag set   *   * TODO:<ul>  *<li> Test if POS tags are the same for different languages  *<li> Check if it is possible to implement the {@link opennlp.tools.chunker.Chunker} interface  *</ul>  * @author Rupert Westenthaler  * @deprecated replaced by STANBOL-733 (stanbol nlp processing module  *  */
 end_comment
 
 begin_class

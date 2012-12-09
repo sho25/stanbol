@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration with pre-configured sets of POS tags for finding nouns, verbs ...  * in different languages  * @author Rupert Westenthaler  *  */
+comment|/**  * Enumeration with pre-configured sets of POS tags for finding nouns, verbs ...  * in different languages  * @author Rupert Westenthaler  * @deprecated replaced by STANBOL-733 (stanbol nlp processing module  */
 end_comment
 
 begin_enum
