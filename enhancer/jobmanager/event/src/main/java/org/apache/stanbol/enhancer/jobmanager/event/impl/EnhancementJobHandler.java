@@ -363,22 +363,6 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|ibm
-operator|.
-name|icu
-operator|.
-name|lang
-operator|.
-name|UCharacter
-operator|.
-name|SentenceBreak
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
@@ -684,6 +668,14 @@ argument_list|(
 name|enhancementJob
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
 name|logJobInfo
 argument_list|(
 name|log
@@ -692,9 +684,13 @@ name|enhancementJob
 argument_list|,
 literal|"Add EnhancementJob:"
 argument_list|,
-literal|false
+name|log
+operator|.
+name|isTraceEnabled
+argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 name|processingJobs
 operator|.
 name|put
@@ -711,6 +707,23 @@ expr_stmt|;
 block|}
 else|else
 block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Request to register an EnhancementJob for an ContentItem {} that is"
+operator|+
+literal|"already registered "
+operator|+
+name|enhancementJob
+operator|.
+name|getContentItem
+argument_list|()
+operator|.
+name|getUri
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|init
 operator|=
 literal|false
@@ -745,7 +758,7 @@ argument_list|()
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ w: {}"
 argument_list|,
@@ -767,24 +780,72 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> w: {}"
 argument_list|,
 literal|"init execution"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
 name|executeNextNodes
+argument_list|(
+name|enhancementJob
+argument_list|)
+condition|)
+block|{
+name|String
+name|message
+init|=
+literal|"Unable to start Execution of "
+operator|+
+name|enhancementJob
+operator|.
+name|getContentItem
+argument_list|()
+operator|.
+name|getUri
+argument_list|()
+decl_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+name|logJobInfo
+argument_list|(
+name|log
+argument_list|,
+name|enhancementJob
+argument_list|,
+literal|null
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"finishing job ..."
+argument_list|)
+expr_stmt|;
+name|finish
 argument_list|(
 name|enhancementJob
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< w: {}"
 argument_list|,
@@ -940,7 +1001,7 @@ block|}
 comment|//(2) trigger the next actions
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ w: {}"
 argument_list|,
@@ -960,7 +1021,7 @@ argument_list|()
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> w: {}"
 argument_list|,
@@ -1112,7 +1173,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< w: {}"
 argument_list|,
@@ -1144,16 +1205,6 @@ name|NonLiteral
 name|execution
 parameter_list|)
 block|{
-name|NonLiteral
-name|executionNode
-init|=
-name|job
-operator|.
-name|getExecutionNode
-argument_list|(
-name|execution
-argument_list|)
-decl_stmt|;
 name|String
 name|engineName
 init|=
@@ -1164,7 +1215,12 @@ operator|.
 name|getExecutionPlan
 argument_list|()
 argument_list|,
-name|executionNode
+name|job
+operator|.
+name|getExecutionNode
+argument_list|(
+name|execution
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|//(1) execute the parsed ExecutionNode
@@ -1268,7 +1324,7 @@ block|{
 comment|//ensure that this engine exclusively access the content item
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ w: {}: {}"
 argument_list|,
@@ -1293,7 +1349,7 @@ argument_list|()
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> w: {}: {}"
 argument_list|,
@@ -1331,6 +1387,48 @@ name|EngineException
 name|e
 parameter_list|)
 block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+name|job
+operator|.
+name|setFailed
+argument_list|(
+name|execution
+argument_list|,
+name|engine
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|job
 operator|.
 name|setFailed
@@ -1347,7 +1445,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< w: {}: {}"
 argument_list|,
@@ -1386,7 +1484,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ n: start async execution of Engine {}"
 argument_list|,
@@ -1408,7 +1506,7 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ n: finished async execution of Engine {}"
 argument_list|,
@@ -1432,6 +1530,18 @@ name|EngineException
 name|e
 parameter_list|)
 block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|job
 operator|.
 name|setFailed
@@ -1450,6 +1560,18 @@ name|RuntimeException
 name|e
 parameter_list|)
 block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|job
 operator|.
 name|setFailed
@@ -1567,6 +1689,14 @@ condition|)
 block|{
 try|try
 block|{
+if|if
+condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
 name|logJobInfo
 argument_list|(
 name|log
@@ -1575,12 +1705,16 @@ name|job
 argument_list|,
 literal|"Finished EnhancementJob:"
 argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
 name|log
 operator|.
-name|debug
+name|isTraceEnabled
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+name|log
+operator|.
+name|trace
 argument_list|(
 literal|"++ n: finished processing ContentItem {} with Chain {}"
 argument_list|,
@@ -1667,13 +1801,13 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isTraceEnabled
 argument_list|()
 condition|)
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"PREPARE execution of Engine {}"
 argument_list|,
@@ -1740,13 +1874,13 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isTraceEnabled
 argument_list|()
 condition|)
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"SHEDULE execution of Engine {}"
 argument_list|,
@@ -1958,6 +2092,86 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+for|for
+control|(
+name|NonLiteral
+name|executeable
+range|:
+name|job
+operator|.
+name|getExecutable
+argument_list|()
+control|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"    - {} executeable"
+argument_list|,
+name|getEngine
+argument_list|(
+name|job
+operator|.
+name|getExecutionMetadata
+argument_list|()
+argument_list|,
+name|job
+operator|.
+name|getExecutionNode
+argument_list|(
+name|executeable
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+if|if
+condition|(
+name|job
+operator|.
+name|getErrorMessage
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Error Message: {}"
+argument_list|,
+name|job
+operator|.
+name|getErrorMessage
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|job
+operator|.
+name|getError
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Reported Exception:"
+argument_list|,
+name|job
+operator|.
+name|getError
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 specifier|public
@@ -2107,13 +2321,18 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
-name|void
+name|boolean
 name|waitForCompletion
 parameter_list|(
 name|int
 name|maxEnhancementJobWaitTime
 parameter_list|)
 block|{
+name|boolean
+name|acquire
+init|=
+literal|false
+decl_stmt|;
 if|if
 condition|(
 name|semaphore
@@ -2127,6 +2346,8 @@ block|{
 comment|// The only permit is taken by the EnhancementJobHander
 try|try
 block|{
+name|acquire
+operator|=
 name|semaphore
 operator|.
 name|tryAcquire
@@ -2155,6 +2376,10 @@ name|e
 parameter_list|)
 block|{
 comment|//interupted
+name|acquire
+operator|=
+literal|false
+expr_stmt|;
 block|}
 block|}
 elseif|else
@@ -2229,8 +2454,15 @@ parameter_list|)
 block|{
 comment|//interupted
 block|}
+name|acquire
+operator|=
+literal|true
+expr_stmt|;
 block|}
 comment|// else completed
+return|return
+name|acquire
+return|;
 block|}
 block|}
 comment|/**      * Currently only used to debug the number of currently registered      * Enhancements Jobs (if there are some)      * @author Rupert Westenthaler      */
@@ -2364,7 +2596,7 @@ condition|)
 block|{
 name|observerLog
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|" -- {} active Enhancement Jobs"
 argument_list|,

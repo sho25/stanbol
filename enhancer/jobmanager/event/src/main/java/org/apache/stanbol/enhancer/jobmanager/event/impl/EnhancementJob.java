@@ -1540,7 +1540,7 @@ parameter_list|()
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ r: {}"
 argument_list|,
@@ -1556,7 +1556,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> r: {}"
 argument_list|,
@@ -1571,7 +1571,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< r: {}"
 argument_list|,
@@ -1596,7 +1596,7 @@ parameter_list|()
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ r: {}"
 argument_list|,
@@ -1612,7 +1612,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> r: {}"
 argument_list|,
@@ -1627,7 +1627,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< r: {}"
 argument_list|,
@@ -1680,7 +1680,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ w: {}: {}"
 argument_list|,
@@ -1698,7 +1698,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> w: {}: {}"
 argument_list|,
@@ -1731,7 +1731,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< w: {}: {}"
 argument_list|,
@@ -1903,7 +1903,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"Execution of '{}' for ContentItem {} completed "
 operator|+
@@ -2018,7 +2018,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ w: {}: {}"
 argument_list|,
@@ -2043,7 +2043,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> w: {}: {}"
 argument_list|,
@@ -2237,7 +2237,7 @@ block|{
 comment|//added an engine to running
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"Started Execution of '{}' for ContentItem {} "
 operator|+
@@ -2289,7 +2289,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< w: {}: {}"
 argument_list|,
@@ -2520,7 +2520,7 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"MARK {} as executeable"
 argument_list|,
@@ -2677,7 +2677,7 @@ parameter_list|()
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ r: {}"
 argument_list|,
@@ -2691,7 +2691,7 @@ argument_list|()
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> r: {}"
 argument_list|,
@@ -2708,7 +2708,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< r: {}:{}"
 argument_list|,
@@ -2732,7 +2732,7 @@ parameter_list|()
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ r: {}"
 argument_list|,
@@ -2748,7 +2748,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> r: {}"
 argument_list|,
@@ -2778,7 +2778,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< r: {}"
 argument_list|,
@@ -2853,7 +2853,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ w: {}: {}"
 argument_list|,
@@ -2878,7 +2878,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> w: {}: {}"
 argument_list|,
@@ -3069,7 +3069,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< w: {}: {}"
 argument_list|,
@@ -3100,7 +3100,7 @@ parameter_list|()
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"++ r: {}"
 argument_list|,
@@ -3116,7 +3116,7 @@ try|try
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|">> r: {}"
 argument_list|,
@@ -3136,7 +3136,7 @@ finally|finally
 block|{
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|"<< r: {}"
 argument_list|,
@@ -3150,59 +3150,19 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-annotation|@
-name|Override
-specifier|public
-name|int
-name|hashCode
-parameter_list|()
-block|{
-return|return
-name|contentItem
-operator|.
-name|getUri
-argument_list|()
-operator|.
-name|hashCode
-argument_list|()
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|equals
-parameter_list|(
-name|Object
-name|o
-parameter_list|)
-block|{
-return|return
-name|o
-operator|instanceof
-name|EnhancementJob
-operator|&&
-name|contentItem
-operator|.
-name|getUri
-argument_list|()
-operator|.
-name|equals
-argument_list|(
-operator|(
-operator|(
-name|EnhancementJob
-operator|)
-name|o
-operator|)
-operator|.
-name|contentItem
-operator|.
-name|getUri
-argument_list|()
-argument_list|)
-return|;
-block|}
+comment|// NOTE: use default implementations of hashCode and equals for now as we need
+comment|//       to support the concurrent enhancement of ContentItems with the same
+comment|//       URI. Also two ContentItems with the same URI might still have other
+comment|//       content (as users can manually parse the URI in the request).
+comment|//    @Override
+comment|//    public int hashCode() {
+comment|//        return contentItem.getUri().hashCode();
+comment|//    }
+comment|//    @Override
+comment|//    public boolean equals(Object o) {
+comment|//        return o instanceof EnhancementJob&&
+comment|//                contentItem.getUri().equals(((EnhancementJob)o).contentItem.getUri());
+comment|//    }
 annotation|@
 name|Override
 specifier|public
