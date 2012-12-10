@@ -257,26 +257,6 @@ name|ComponentContext
 import|;
 end_import
 
-begin_import
-import|import
-name|freemarker
-operator|.
-name|cache
-operator|.
-name|ClassTemplateLoader
-import|;
-end_import
-
-begin_import
-import|import
-name|freemarker
-operator|.
-name|cache
-operator|.
-name|TemplateLoader
-import|;
-end_import
-
 begin_comment
 comment|/**  * Statically define the list of available resources and providers to be  * contributed to the the Stanbol JAX-RS Endpoint.  */
 end_comment
@@ -431,17 +411,6 @@ argument_list|)
 expr_stmt|;
 return|return
 name|instances
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getStaticResourceClassPath
-parameter_list|()
-block|{
-return|return
-literal|"foobar"
 return|;
 block|}
 annotation|@

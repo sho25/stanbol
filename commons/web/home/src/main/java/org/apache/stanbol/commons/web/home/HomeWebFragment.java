@@ -395,17 +395,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|String
-name|getStaticResourceClassPath
-parameter_list|()
-block|{
-return|return
-name|STATIC_RESOURCE_PATH
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
 name|List
 argument_list|<
 name|LinkResource

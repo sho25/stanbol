@@ -497,14 +497,6 @@ name|NAME
 init|=
 literal|"entityhub"
 decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|String
-name|STATIC_RESOURCE_PATH
-init|=
-literal|"/org/apache/stanbol/entityhub/jersey/static"
-decl_stmt|;
 comment|//    private static final String TEMPLATE_PATH = "/org/apache/stanbol/entityhub/jersey/templates";
 comment|/**      * This service is used to map '{prefix}:{localname}' values to full URIs and      * vice versa.       */
 annotation|@
@@ -844,17 +836,6 @@ name|Collections
 operator|.
 name|emptyList
 argument_list|()
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getStaticResourceClassPath
-parameter_list|()
-block|{
-return|return
-name|STATIC_RESOURCE_PATH
 return|;
 block|}
 block|}
