@@ -584,51 +584,6 @@ name|DEREFERENCE_ENTITIES_FIELDS
 init|=
 literal|"enhancer.engines.linking.dereferenceFields"
 decl_stmt|;
-comment|/**      * Additional fields added for dereferenced entities      */
-specifier|private
-specifier|static
-specifier|final
-name|Collection
-argument_list|<
-name|UriRef
-argument_list|>
-name|DEFAULT_DEREFERENCED_FIELDS
-init|=
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-operator|new
-name|UriRef
-argument_list|(
-literal|"http://www.w3.org/2000/01/rdf-schema#comment"
-argument_list|)
-argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-literal|"http://www.w3.org/2003/01/geo/wgs84_pos#lat"
-argument_list|)
-argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-literal|"http://www.w3.org/2003/01/geo/wgs84_pos#long"
-argument_list|)
-argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-literal|"http://xmlns.com/foaf/0.1/depiction"
-argument_list|)
-argument_list|,
-operator|new
-name|UriRef
-argument_list|(
-literal|"http://dbpedia.org/ontology/thumbnail"
-argument_list|)
-argument_list|)
-decl_stmt|;
 comment|/**      * The minimum length of Token to be used for searches in case no      * POS (Part of Speech) tags are available.      */
 specifier|public
 specifier|static
@@ -3476,15 +3431,12 @@ throw|;
 block|}
 else|else
 block|{
-comment|//value == null -> add the default fields
-name|linkerConfig
+comment|//value == null
+name|log
 operator|.
-name|getDereferencedFields
-argument_list|()
-operator|.
-name|addAll
+name|debug
 argument_list|(
-name|DEFAULT_DEREFERENCED_FIELDS
+literal|"No deference fields for entity configured"
 argument_list|)
 expr_stmt|;
 block|}
