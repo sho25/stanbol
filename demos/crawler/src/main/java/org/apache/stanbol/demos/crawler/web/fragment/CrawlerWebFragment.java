@@ -559,17 +559,6 @@ name|emptyList
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|BundleContext
-name|getBundleContext
-parameter_list|()
-block|{
-return|return
-name|bundleContext
-return|;
-block|}
 block|}
 end_class
 

@@ -518,19 +518,6 @@ name|getBundleContext
 argument_list|()
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|BundleContext
-name|getBundleContext
-parameter_list|()
-block|{
-return|return
-name|this
-operator|.
-name|bundleContext
-return|;
-block|}
 block|}
 end_class
 

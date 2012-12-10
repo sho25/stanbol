@@ -483,17 +483,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|BundleContext
-name|getBundleContext
-parameter_list|()
-block|{
-return|return
-name|bundleContext
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
 name|List
 argument_list|<
 name|NavigationLink

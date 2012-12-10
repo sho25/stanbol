@@ -118,11 +118,6 @@ argument_list|>
 name|getNavigationLinks
 parameter_list|()
 function_decl|;
-comment|/**      * @return the bundle context who contributed this fragment (useful for loading the resources from the      *         right classloading context)      */
-name|BundleContext
-name|getBundleContext
-parameter_list|()
-function_decl|;
 block|}
 end_interface
 
