@@ -905,6 +905,13 @@ argument_list|)
 expr_stmt|;
 name|freemarker
 operator|.
+name|setLocalizedLookup
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+name|freemarker
+operator|.
 name|setObjectWrapper
 argument_list|(
 operator|new
