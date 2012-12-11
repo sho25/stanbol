@@ -1212,7 +1212,7 @@ specifier|final
 name|String
 name|SITE_ID
 init|=
-literal|"enhancer.engines.entityhublinking.siteId"
+literal|"enhancer.engines.linking.entityhub.siteId"
 decl_stmt|;
 comment|/**      * The engine initialised based on the configuration of this component      */
 specifier|protected
