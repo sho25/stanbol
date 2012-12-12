@@ -107,6 +107,26 @@ begin_import
 import|import
 name|java
 operator|.
+name|net
+operator|.
+name|URI
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|URISyntaxException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -240,18 +260,6 @@ operator|.
 name|rs
 operator|.
 name|QueryParam
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|WebApplicationException
 import|;
 end_import
 
@@ -575,16 +583,14 @@ name|logger
 operator|.
 name|error
 argument_list|(
-literal|"Missing LDProgramManager = {}"
-argument_list|,
-name|programManager
+literal|"Missing SemanticIndexManager service"
 argument_list|)
 expr_stmt|;
 throw|throw
 operator|new
-name|WebApplicationException
+name|IllegalStateException
 argument_list|(
-literal|404
+literal|"Missing SemanticIndexManager service"
 argument_list|)
 throw|;
 block|}
@@ -867,7 +873,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * HTTP POST method which saves an LDPath program into the persistent store of Contenthub.      *       * @param programName      *            Unique name to identify the LDPath program      * @param program      *            The LDPath program.      * @param headers      *            HTTP Headers      * @return HTTP OK(200) or BAD REQUEST(400)      * @throws LDPathException      */
+comment|/**      * HTTP POST method which takes an LDPath program into and creates a Solr index of which configuration is      * adjusted according to the given LDPath program.      *       * @param programName      *            Unique name to identify the LDPath program      * @param program      *            The LDPath program.      * @param headers      *            HTTP Headers      * @return HTTP CREATED(201) or BAD REQUEST(400)      * @throws LDPathException      * @throws URISyntaxException      */
 annotation|@
 name|POST
 annotation|@
@@ -907,6 +913,8 @@ name|headers
 parameter_list|)
 throws|throws
 name|LDPathException
+throws|,
+name|URISyntaxException
 block|{
 name|programName
 operator|=
@@ -931,19 +939,8 @@ condition|(
 name|programName
 operator|==
 literal|null
-operator|||
-name|program
-operator|==
-literal|null
 condition|)
 block|{
-name|logger
-operator|.
-name|error
-argument_list|(
-literal|"LDPath program cannot be submitted"
-argument_list|)
-expr_stmt|;
 return|return
 name|Response
 operator|.
@@ -952,6 +949,37 @@ argument_list|(
 name|Status
 operator|.
 name|BAD_REQUEST
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"Missing 'name' parameter"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+if|if
+condition|(
+name|program
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"Missing 'program' parameter"
 argument_list|)
 operator|.
 name|build
@@ -972,9 +1000,22 @@ name|rb
 init|=
 name|Response
 operator|.
-name|ok
+name|created
 argument_list|(
-literal|"LDPath program has been successfully saved and corresponding Solr Core has been successfully created."
+operator|new
+name|URI
+argument_list|(
+name|uriInfo
+operator|.
+name|getBaseUri
+argument_list|()
+operator|+
+literal|"contenthub/"
+operator|+
+name|programName
+operator|+
+literal|"/store"
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|addCORSOrigin
@@ -993,7 +1034,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * HTTP GET method to retrieve an LDPath program, given its name.      *       * @param programName      *            The name of the LDPath program to be retrieved.      * @param headers      *            HTTP headers      * @return LDPath program in {@link String} format or HTTP NOT FOUND(404)      */
+comment|/**      * HTTP GET method to retrieve an LDPath program, given its name.      *       * @param programName      *            The name of the LDPath program to be retrieved.      * @param headers      *            HTTP headers      * @return LDPath program in {@link String} format or HTTP BAD_REQUEST(400) or HTTP NOT FOUND(404)      */
 annotation|@
 name|GET
 annotation|@
@@ -1028,6 +1069,32 @@ argument_list|(
 name|programName
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|programName
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"Missing 'name' parameter"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
 name|String
 name|ldPathProgram
 init|=
@@ -1088,7 +1155,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * HTTP DELETE method to delete an LDPath program.      *       * @param programName      *            The name of the LDPath program.      * @param headers      *            HTTP headers      * @return HTTP OK(200)      */
+comment|/**      * HTTP DELETE method to delete an LDPath program.      *       * @param programName      *            The name of the LDPath program.      * @param headers      *            HTTP headers      * @return HTTP OK(200), HTTP BAD_REQUEST(400) or HTTP NOT FOUND(403)      */
 annotation|@
 name|DELETE
 annotation|@
@@ -1127,6 +1194,32 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
+name|programName
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"Missing 'name' parameter"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+if|if
+condition|(
 operator|!
 name|programManager
 operator|.
@@ -1136,13 +1229,19 @@ name|programName
 argument_list|)
 condition|)
 block|{
-throw|throw
-operator|new
-name|WebApplicationException
+return|return
+name|Response
+operator|.
+name|status
 argument_list|(
-literal|404
+name|Status
+operator|.
+name|NOT_FOUND
 argument_list|)
-throw|;
+operator|.
+name|build
+argument_list|()
+return|;
 block|}
 name|programManager
 operator|.
@@ -1175,7 +1274,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * HTTP GET method to check whether an LDPath program exists in Contenthub or not.      *       * @param programName      *            The name of the LDPath program.      * @param headers      *            HTTP headers      * @return HTTP OK(200) or HTTP NOT FOUND(404)      */
+comment|/**      * HTTP GET method to check whether an LDPath program exists in Contenthub or not.      *       * @param programName      *            The name of the LDPath program.      * @param headers      *            HTTP headers      * @return HTTP OK(200), HTTP BAD REQUEST(400) or HTTP NOT FOUND(404)      */
 annotation|@
 name|GET
 annotation|@
@@ -1210,6 +1309,32 @@ argument_list|(
 name|programName
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|programName
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Status
+operator|.
+name|BAD_REQUEST
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"Missing 'name' parameter"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
 if|if
 condition|(
 name|programManager
