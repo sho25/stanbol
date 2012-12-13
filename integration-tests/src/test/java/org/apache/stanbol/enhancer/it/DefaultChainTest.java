@@ -45,6 +45,26 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/** Test that the default chain is called by requesting the "/enhancer" endpoint. */
 end_comment
@@ -56,6 +76,20 @@ name|DefaultChainTest
 extends|extends
 name|EnhancerTestBase
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|DefaultChainTest
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|private
 specifier|final
 name|RequestDocumentor
@@ -423,6 +457,20 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"This test validate that requests with invalid formats do fail."
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"The following Exception is expected (see also STANBOL-262)."
+argument_list|)
+expr_stmt|;
 name|executor
 operator|.
 name|execute
