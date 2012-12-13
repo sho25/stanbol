@@ -2250,21 +2250,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//and add geonames.org as the creator!
-name|doc
-operator|.
-name|add
-argument_list|(
-name|GeonamesPropertyEnum
-operator|.
-name|dc_creator
-operator|.
-name|toString
-argument_list|()
-argument_list|,
-literal|"http://www.geonames.org/"
-argument_list|)
-expr_stmt|;
+comment|//no creator as this is anyway provided by attribution
+comment|//doc.add(GeonamesPropertyEnum.dc_creator.toString(),"http://www.geonames.org/");
 return|return
 name|doc
 return|;

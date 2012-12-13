@@ -280,6 +280,11 @@ argument_list|(
 literal|"shortName"
 argument_list|)
 block|,
+name|gn_colloquialName
+argument_list|(
+literal|"colloquialName"
+argument_list|)
+block|,
 name|gn_postalCode
 argument_list|(
 literal|"postalCode"
