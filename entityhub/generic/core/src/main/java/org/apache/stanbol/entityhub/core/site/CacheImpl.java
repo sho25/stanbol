@@ -723,6 +723,7 @@ name|ReferenceCardinality
 operator|.
 name|OPTIONAL_UNARY
 argument_list|)
+specifier|protected
 name|NamespacePrefixService
 name|nsPrefixService
 decl_stmt|;
