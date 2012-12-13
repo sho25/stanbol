@@ -316,6 +316,10 @@ return|return
 name|chain
 return|;
 block|}
+comment|/** @inheritDoc */
+annotation|@
+name|Override
+specifier|public
 name|void
 name|setChain
 parameter_list|(

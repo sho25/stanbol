@@ -165,6 +165,14 @@ parameter_list|)
 throws|throws
 name|EnhancementException
 function_decl|;
+comment|/**      * Setter for the chain      * @param chain the chain      */
+name|void
+name|setChain
+parameter_list|(
+name|Chain
+name|chain
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
