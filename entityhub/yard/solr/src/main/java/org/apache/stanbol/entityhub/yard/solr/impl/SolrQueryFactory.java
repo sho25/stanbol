@@ -4752,134 +4752,22 @@ comment|// }
 comment|// this.fieldConstraints.remove(constraintType);
 comment|// }
 block|}
-specifier|public
-specifier|static
-name|void
-name|main
-parameter_list|(
-name|String
-index|[]
-name|args
-parameter_list|)
-block|{
-name|SolrQueryFactory
-name|factory
-init|=
-operator|new
-name|SolrQueryFactory
-argument_list|(
-name|InMemoryValueFactory
-operator|.
-name|getInstance
-argument_list|()
-argument_list|,
-name|IndexValueFactory
-operator|.
-name|getInstance
-argument_list|()
-argument_list|,
-operator|new
-name|SolrFieldMapper
-argument_list|(
-literal|null
-argument_list|)
-argument_list|)
-decl_stmt|;
-name|FieldQuery
-name|query
-init|=
-name|DefaultQueryFactory
-operator|.
-name|getInstance
-argument_list|()
-operator|.
-name|createFieldQuery
-argument_list|()
-decl_stmt|;
-comment|//        query.setConstraint("urn:field2", new TextConstraint("test","en","de"));
-name|query
-operator|.
-name|setConstraint
-argument_list|(
-literal|"urn:field3"
-argument_list|,
-operator|new
-name|TextConstraint
-argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-literal|"text value"
-argument_list|,
-literal|"anothertest"
-argument_list|,
-literal|"some more values"
-argument_list|)
-argument_list|,
-literal|"en"
-argument_list|,
-literal|"de"
-argument_list|,
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|query
-operator|.
-name|addSelectedField
-argument_list|(
-literal|"urn:field2a"
-argument_list|)
-expr_stmt|;
-name|query
-operator|.
-name|addSelectedField
-argument_list|(
-literal|"urn:field3"
-argument_list|)
-expr_stmt|;
-name|query
-operator|.
-name|setLimit
-argument_list|(
-literal|5
-argument_list|)
-expr_stmt|;
-name|query
-operator|.
-name|setOffset
-argument_list|(
-literal|5
-argument_list|)
-expr_stmt|;
-name|SolrQuery
-name|solrQuery
-init|=
-name|factory
-operator|.
-name|parseFieldQuery
-argument_list|(
-name|query
-argument_list|,
-name|SELECT
-operator|.
-name|QUERY
-argument_list|)
-decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|solrQuery
-operator|.
-name|getQuery
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
+comment|//    public static void main(String[] args) {
+comment|//        SolrQueryFactory factory = new SolrQueryFactory(
+comment|//            InMemoryValueFactory.getInstance(),
+comment|//            IndexValueFactory.getInstance(),
+comment|//            new SolrFieldMapper(null));
+comment|//        FieldQuery query = DefaultQueryFactory.getInstance().createFieldQuery();
+comment|////        query.setConstraint("urn:field2", new TextConstraint("test","en","de"));
+comment|//        query.setConstraint("urn:field3", new TextConstraint(Arrays.asList(
+comment|//            "text value","anothertest","some more values"),"en","de",null));
+comment|//        query.addSelectedField("urn:field2a");
+comment|//        query.addSelectedField("urn:field3");
+comment|//        query.setLimit(5);
+comment|//        query.setOffset(5);
+comment|//        SolrQuery solrQuery = factory.parseFieldQuery(query, SELECT.QUERY);
+comment|//        System.out.println(solrQuery.getQuery());
+comment|//    }
 block|}
 end_class
 

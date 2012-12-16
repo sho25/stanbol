@@ -533,6 +533,22 @@ name|stanbol
 operator|.
 name|commons
 operator|.
+name|namespaceprefix
+operator|.
+name|NamespacePrefixService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
 name|solr
 operator|.
 name|IndexReference
@@ -1492,6 +1508,19 @@ specifier|private
 name|ManagedSolrServer
 name|managedSolrServer
 decl_stmt|;
+annotation|@
+name|Reference
+argument_list|(
+name|cardinality
+operator|=
+name|ReferenceCardinality
+operator|.
+name|OPTIONAL_UNARY
+argument_list|)
+specifier|private
+name|NamespacePrefixService
+name|nsPrefixService
+decl_stmt|;
 comment|/**      * If update(..) and store(..) calls should be immediately committed.      */
 specifier|private
 name|boolean
@@ -2289,6 +2318,10 @@ condition|)
 block|{
 comment|//reset the fieldMapper so that it is reinitialised for the new one
 comment|//STANBOL-519
+name|_server
+operator|=
+name|server
+expr_stmt|;
 name|Lock
 name|writeLock
 init|=
@@ -2341,6 +2374,10 @@ return|;
 block|}
 else|else
 block|{
+name|_server
+operator|=
+literal|null
+expr_stmt|;
 name|Lock
 name|writeLock
 init|=
@@ -3363,7 +3400,14 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
-comment|// the fieldMapper need the Server to store it's namespace prefix configuration
+if|if
+condition|(
+name|_fieldMapper
+operator|==
+literal|null
+condition|)
+block|{
+comment|//might be init by an other thread
 name|_fieldMapper
 operator|=
 operator|new
@@ -3371,8 +3415,11 @@ name|SolrFieldMapper
 argument_list|(
 name|getServer
 argument_list|()
+argument_list|,
+name|nsPrefixService
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|_fieldMapper
 return|;
