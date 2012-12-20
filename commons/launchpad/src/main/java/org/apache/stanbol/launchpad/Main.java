@@ -16,26 +16,6 @@ package|;
 end_package
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|sling
-operator|.
-name|launchpad
-operator|.
-name|base
-operator|.
-name|shared
-operator|.
-name|SharedConstants
-operator|.
-name|SLING_HOME
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -121,27 +101,27 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collection
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|sling
+operator|.
+name|launchpad
+operator|.
+name|base
+operator|.
+name|shared
+operator|.
+name|SharedConstants
+operator|.
+name|SLING_HOME
 import|;
 end_import
 
@@ -157,6 +137,15 @@ name|String
 name|DEFAULT_STANBOL_HOME
 init|=
 literal|"stanbol"
+decl_stmt|;
+comment|/**      * If this argument is set Stanbol is started without a securitymanager      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|NOSECURITYARG
+init|=
+literal|"-no-security"
 decl_stmt|;
 comment|/**      * @param args      */
 specifier|public
@@ -237,7 +226,7 @@ name|argsList
 operator|.
 name|contains
 argument_list|(
-literal|"-s"
+name|NOSECURITYARG
 argument_list|)
 condition|)
 block|{
@@ -245,9 +234,12 @@ name|argsList
 operator|.
 name|remove
 argument_list|(
-literal|"-s"
+name|NOSECURITYARG
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
 name|args
 operator|=
 name|argsList
