@@ -633,6 +633,9 @@ operator|.
 name|clone
 argument_list|()
 expr_stmt|;
+comment|//        SolrResourceLoader loader = new OsgiResourceLoader(solrDir.getAbsolutePath(),
+comment|//            SolrServerAdapter.class.getClassLoader());
+comment|//        CoreContainer container = new CoreContainer(loader);
 name|CoreContainer
 name|container
 init|=
@@ -1230,6 +1233,10 @@ name|core
 decl_stmt|;
 try|try
 block|{
+comment|//            SolrResourceLoader loader = new OsgiResourceLoader(coreDir.getAbsolutePath(),
+comment|//                SolrServerAdapter.class.getClassLoader());
+comment|//            SolrConfig config = new OsgiEnabledSolrConfig(loader, "solrconfig.xml", null);
+comment|//            IndexSchema schema = new IndexSchema(config,"schema.xml",null);
 name|CoreDescriptor
 name|coreDescriptor
 init|=
@@ -1246,6 +1253,8 @@ name|getAbsolutePath
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|//            core = new SolrCore(coreName, coreDir.getAbsolutePath(), config, schema,coreDescriptor);
+comment|//            server.register(coreName, core, false);
 name|core
 operator|=
 name|server
