@@ -743,6 +743,16 @@ argument_list|(
 name|url
 argument_list|)
 decl_stmt|;
+comment|//authenticate as admin with password admin
+name|get
+operator|.
+name|setHeader
+argument_list|(
+literal|"Authorization"
+argument_list|,
+literal|"Basic YWRtaW46YWRtaW4="
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|int
