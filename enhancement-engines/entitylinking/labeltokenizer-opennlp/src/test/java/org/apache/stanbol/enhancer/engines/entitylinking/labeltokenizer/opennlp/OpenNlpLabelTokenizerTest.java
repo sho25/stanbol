@@ -273,7 +273,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNullLanguate
+name|testNullLanguage
 parameter_list|()
 block|{
 name|String

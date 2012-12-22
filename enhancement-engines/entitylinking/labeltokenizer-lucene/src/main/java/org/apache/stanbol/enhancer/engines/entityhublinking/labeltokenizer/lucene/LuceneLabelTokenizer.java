@@ -1364,6 +1364,16 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|tokenizer
+operator|.
+name|end
+argument_list|()
+expr_stmt|;
+name|tokenizer
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
