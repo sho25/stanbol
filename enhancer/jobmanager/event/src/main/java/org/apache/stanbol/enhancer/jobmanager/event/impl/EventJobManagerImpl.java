@@ -1108,7 +1108,37 @@ throw|throw
 operator|new
 name|ChainException
 argument_list|(
-literal|"Execution timeout after {}sec "
+literal|"Execution timeout after "
+operator|+
+operator|(
+operator|(
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+operator|-
+name|start
+operator|)
+operator|/
+literal|1000f
+operator|)
+operator|+
+literal|"sec (timeout:"
+operator|+
+operator|(
+name|maxEnhancementJobWaitTime
+operator|/
+literal|1000
+operator|)
+operator|+
+literal|"sec) for ContentItem "
+operator|+
+name|ci
+operator|.
+name|getUri
+argument_list|()
+operator|+
+literal|"\n"
 operator|+
 name|sb
 operator|.
