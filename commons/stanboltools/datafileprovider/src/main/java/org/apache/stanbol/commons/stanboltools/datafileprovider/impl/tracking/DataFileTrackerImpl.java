@@ -391,7 +391,6 @@ begin_class
 annotation|@
 name|Component
 argument_list|(
-comment|//specVersion="1.1-felix", //to use the update property for @Reference
 name|immediate
 operator|=
 literal|true
@@ -500,8 +499,6 @@ argument_list|,
 name|unbind
 operator|=
 literal|"unbindDataFileProvider"
-comment|//,
-comment|//updated="bindDataFileProvider"
 argument_list|)
 specifier|protected
 name|DataFileProvider
