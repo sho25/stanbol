@@ -731,7 +731,7 @@ name|iterable
 init|=
 name|config
 operator|.
-name|getDataInterable
+name|getDataIterable
 argument_list|()
 decl_stmt|;
 name|assertNotNull
@@ -1201,7 +1201,7 @@ name|iterable
 init|=
 name|config
 operator|.
-name|getDataInterable
+name|getDataIterable
 argument_list|()
 decl_stmt|;
 name|assertNotNull

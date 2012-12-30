@@ -340,7 +340,7 @@ name|dataIterable
 init|=
 name|config
 operator|.
-name|getDataInterable
+name|getDataIterable
 argument_list|()
 decl_stmt|;
 name|EntityIterator

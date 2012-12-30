@@ -1004,7 +1004,7 @@ specifier|private
 name|String
 name|name
 decl_stmt|;
-comment|/**      * The {@link EntityDataIterable} instance initialised based on the value      * of the {@link IndexingConstants#KEY_ENTITY_DATA_ITERABLE} key or      *<code>null</code> if not configured.      * This variable uses lazy initialisation      * @see #getDataInterable()      */
+comment|/**      * The {@link EntityDataIterable} instance initialised based on the value      * of the {@link IndexingConstants#KEY_ENTITY_DATA_ITERABLE} key or      *<code>null</code> if not configured.      * This variable uses lazy initialisation      * @see #getDataIterable()      */
 specifier|private
 name|EntityDataIterable
 name|entityDataIterable
@@ -3424,7 +3424,7 @@ block|}
 comment|/**      * The {@link EntityDataIterable} as configured by the {@link IndexingConstants#KEY_ENTITY_DATA_ITERABLE}      * by the main indexing configuration.      * @return the configured {@link EntityDataIterable} or a<code>null</code> if      * this configuration is not present.      */
 specifier|public
 name|EntityDataIterable
-name|getDataInterable
+name|getDataIterable
 parameter_list|()
 block|{
 if|if

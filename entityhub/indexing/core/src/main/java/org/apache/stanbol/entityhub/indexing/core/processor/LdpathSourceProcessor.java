@@ -634,7 +634,7 @@ name|indexingSource
 operator|=
 name|indexingConfig
 operator|.
-name|getDataInterable
+name|getDataIterable
 argument_list|()
 expr_stmt|;
 block|}

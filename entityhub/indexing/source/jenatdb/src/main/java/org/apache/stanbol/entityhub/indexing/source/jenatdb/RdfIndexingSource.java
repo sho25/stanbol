@@ -872,6 +872,15 @@ name|PARAM_SOURCE_FILE_OR_FOLDER
 init|=
 literal|"source"
 decl_stmt|;
+comment|/**      * The directory where successfully imported files are copied to      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|PARAM_IMPORTED_FOLDER
+init|=
+literal|"imported"
+decl_stmt|;
 comment|/**      * Allows to enable/disable the indexing of Bnodes (see       *<a href="https://issues.apache.org/jira/browse/STANBOL-765">STANBOL-765</a>      * for details).      */
 specifier|private
 specifier|static
@@ -907,6 +916,14 @@ name|String
 name|DEFAULT_SOURCE_FOLDER_NAME
 init|=
 literal|"rdfdata"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DEFAULT_IMPORTED_FOLDER_NAME
+init|=
+literal|"imported"
 decl_stmt|;
 comment|//protected to allow internal classes direct access (without hidden getter/
 comment|//setter added by the compiler that decrease performance)
@@ -1123,13 +1140,6 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-comment|//check if importing is deactivated
-name|boolean
-name|importSource
-init|=
-literal|true
-decl_stmt|;
-comment|//default is true
 name|Object
 name|value
 init|=
@@ -1137,9 +1147,91 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|PARAM_IMPORT_SOURCE
+name|PARAM_IMPORTED_FOLDER
 argument_list|)
 decl_stmt|;
+name|String
+name|importedFolderName
+decl_stmt|;
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|value
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|importedFolderName
+operator|=
+name|value
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
+block|}
+else|else
+block|{
+name|importedFolderName
+operator|=
+name|DEFAULT_IMPORTED_FOLDER_NAME
+expr_stmt|;
+block|}
+name|File
+name|importedFolder
+init|=
+operator|new
+name|File
+argument_list|(
+name|indexingConfig
+operator|.
+name|getSourceFolder
+argument_list|()
+argument_list|,
+name|importedFolderName
+argument_list|)
+decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Imported RDF File Folder: {}"
+argument_list|,
+name|importedFolder
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|loader
+operator|.
+name|setImportedDir
+argument_list|(
+name|importedFolder
+argument_list|)
+expr_stmt|;
+comment|//check if importing is deactivated
+name|boolean
+name|importSource
+init|=
+literal|true
+decl_stmt|;
+comment|//default is true
+name|value
+operator|=
+name|config
+operator|.
+name|get
+argument_list|(
+name|PARAM_IMPORT_SOURCE
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|value
