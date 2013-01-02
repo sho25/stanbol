@@ -829,7 +829,6 @@ name|linkerConfig
 decl_stmt|;
 comment|/**      * The label tokenizer      */
 specifier|protected
-specifier|final
 name|LabelTokenizer
 name|labelTokenizer
 decl_stmt|;
@@ -1012,6 +1011,34 @@ name|entitySearcher
 operator|=
 name|entitySearcher
 expr_stmt|;
+name|this
+operator|.
+name|labelTokenizer
+operator|=
+name|labelTokenizer
+expr_stmt|;
+block|}
+comment|/**      * Getter for the {@link LabelTokenizer} used by this Engine      * @return the labelTokenizer      */
+specifier|public
+specifier|final
+name|LabelTokenizer
+name|getLabelTokenizer
+parameter_list|()
+block|{
+return|return
+name|labelTokenizer
+return|;
+block|}
+comment|/**      * Setter for the {@link LabelTokenizer} used by this Engine      * @param labelTokenizer the labelTokenizer to set      */
+specifier|public
+specifier|final
+name|void
+name|setLabelTokenizer
+parameter_list|(
+name|LabelTokenizer
+name|labelTokenizer
+parameter_list|)
+block|{
 name|this
 operator|.
 name|labelTokenizer

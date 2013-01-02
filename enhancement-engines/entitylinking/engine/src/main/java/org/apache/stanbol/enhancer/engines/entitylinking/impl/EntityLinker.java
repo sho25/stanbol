@@ -2830,6 +2830,10 @@ index|[]
 name|unprocessedLabelTokens
 init|=
 name|labelTokenizer
+operator|!=
+literal|null
+condition|?
+name|labelTokenizer
 operator|.
 name|tokenize
 argument_list|(
@@ -2837,6 +2841,8 @@ name|text
 argument_list|,
 name|lang
 argument_list|)
+else|:
+literal|null
 decl_stmt|;
 if|if
 condition|(

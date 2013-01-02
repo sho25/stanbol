@@ -15,7 +15,7 @@ name|enhancer
 operator|.
 name|engines
 operator|.
-name|entityhublinking
+name|entitylinking
 operator|.
 name|labeltokenizer
 operator|.
