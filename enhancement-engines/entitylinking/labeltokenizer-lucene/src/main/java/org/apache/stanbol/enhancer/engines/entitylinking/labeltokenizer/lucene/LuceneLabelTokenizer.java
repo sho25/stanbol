@@ -828,7 +828,7 @@ argument_list|,
 name|String
 argument_list|>
 argument_list|>
-name|componentConfig
+name|charFilterConfig
 init|=
 name|parseConfigLine
 argument_list|(
@@ -851,7 +851,7 @@ name|resourceLoader
 operator|.
 name|newInstance
 argument_list|(
-name|componentConfig
+name|charFilterConfig
 operator|.
 name|getKey
 argument_list|()
@@ -880,7 +880,7 @@ literal|"Unable to instantiate the "
 operator|+
 literal|"class '"
 operator|+
-name|componentConfig
+name|charFilterConfig
 operator|.
 name|getKey
 argument_list|()
@@ -913,7 +913,7 @@ name|String
 argument_list|>
 name|config
 init|=
-name|componentConfig
+name|charFilterConfig
 operator|.
 name|getValue
 argument_list|()
@@ -982,7 +982,7 @@ name|PROPERTY_CHAR_FILTER_FACTORY
 argument_list|,
 literal|"The parsed class '"
 operator|+
-name|componentConfig
+name|charFilterConfig
 operator|.
 name|getKey
 argument_list|()
@@ -1059,7 +1059,7 @@ argument_list|,
 name|String
 argument_list|>
 argument_list|>
-name|componentConfig
+name|tokenizerConfig
 init|=
 name|parseConfigLine
 argument_list|(
@@ -1082,7 +1082,7 @@ name|resourceLoader
 operator|.
 name|newInstance
 argument_list|(
-name|componentConfig
+name|tokenizerConfig
 operator|.
 name|getKey
 argument_list|()
@@ -1111,7 +1111,7 @@ literal|"Unable to instantiate the "
 operator|+
 literal|"class '"
 operator|+
-name|componentConfig
+name|tokenizerConfig
 operator|.
 name|getKey
 argument_list|()
@@ -1144,7 +1144,7 @@ name|String
 argument_list|>
 name|config
 init|=
-name|componentConfig
+name|tokenizerConfig
 operator|.
 name|getValue
 argument_list|()
@@ -1197,7 +1197,7 @@ name|factoryObject
 operator|+
 literal|"of the parsed parsed class '"
 operator|+
-name|componentConfig
+name|tokenizerConfig
 operator|.
 name|getKey
 argument_list|()
@@ -1449,7 +1449,7 @@ name|resourceLoader
 operator|.
 name|newInstance
 argument_list|(
-name|componentConfig
+name|filterConfig
 operator|.
 name|getKey
 argument_list|()
@@ -1478,7 +1478,7 @@ literal|"Unable to instantiate the "
 operator|+
 literal|"class '"
 operator|+
-name|componentConfig
+name|filterConfig
 operator|.
 name|getKey
 argument_list|()
@@ -1568,7 +1568,7 @@ name|PROPERTY_TOKEN_FILTER_FACTORY
 argument_list|,
 literal|"The parsed class '"
 operator|+
-name|componentConfig
+name|filterConfig
 operator|.
 name|getKey
 argument_list|()
