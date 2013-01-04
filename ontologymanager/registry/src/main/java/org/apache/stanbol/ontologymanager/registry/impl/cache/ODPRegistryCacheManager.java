@@ -997,6 +997,9 @@ name|arg0
 operator|.
 name|getImportedOntologyURI
 argument_list|()
+operator|.
+name|toURI
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1135,6 +1138,9 @@ argument_list|(
 name|arg0
 operator|.
 name|getImportedOntologyURI
+argument_list|()
+operator|.
+name|toURI
 argument_list|()
 argument_list|)
 expr_stmt|;

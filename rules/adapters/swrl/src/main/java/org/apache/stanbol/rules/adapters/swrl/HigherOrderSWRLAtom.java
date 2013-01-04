@@ -59,6 +59,20 @@ name|owlapi
 operator|.
 name|model
 operator|.
+name|OWLAnonymousIndividual
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|OWLClass
 import|;
 end_import
@@ -572,6 +586,21 @@ name|Override
 specifier|public
 name|SWRLPredicate
 name|getPredicate
+parameter_list|()
+block|{
+comment|// TODO Auto-generated method stub
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLAnonymousIndividual
+argument_list|>
+name|getAnonymousIndividuals
 parameter_list|()
 block|{
 comment|// TODO Auto-generated method stub
