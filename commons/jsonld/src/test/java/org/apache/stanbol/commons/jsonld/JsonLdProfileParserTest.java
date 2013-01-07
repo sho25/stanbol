@@ -150,11 +150,6 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-name|toConsole
-argument_list|(
-name|actual
-argument_list|)
-expr_stmt|;
 name|assertEquals
 argument_list|(
 name|expected

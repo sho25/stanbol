@@ -559,7 +559,7 @@ name|equals
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|IRI
+name|ID
 argument_list|)
 condition|)
 block|{

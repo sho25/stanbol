@@ -999,7 +999,7 @@ name|setType
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|IRI
+name|ID
 argument_list|)
 expr_stmt|;
 name|strValue

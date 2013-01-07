@@ -337,6 +337,19 @@ operator|==
 literal|1
 return|;
 block|}
+specifier|public
+name|boolean
+name|isTyped
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|type
+operator|!=
+literal|null
+return|;
+block|}
 block|}
 end_class
 

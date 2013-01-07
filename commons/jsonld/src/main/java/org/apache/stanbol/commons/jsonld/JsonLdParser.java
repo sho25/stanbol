@@ -461,7 +461,7 @@ name|has
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|SUBJECT
+name|ID
 argument_list|)
 condition|)
 block|{
@@ -475,7 +475,7 @@ name|get
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|SUBJECT
+name|ID
 argument_list|)
 decl_stmt|;
 if|if
@@ -545,7 +545,7 @@ name|getString
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|SUBJECT
+name|ID
 argument_list|)
 argument_list|,
 name|jld
@@ -568,7 +568,7 @@ name|remove
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|SUBJECT
+name|ID
 argument_list|)
 expr_stmt|;
 block|}
@@ -875,7 +875,7 @@ name|has
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|IRI
+name|ID
 argument_list|)
 condition|)
 block|{
@@ -893,7 +893,7 @@ name|getString
 argument_list|(
 name|JsonLdCommon
 operator|.
-name|IRI
+name|ID
 argument_list|)
 argument_list|,
 name|namespacePrefixMap

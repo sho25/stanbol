@@ -582,7 +582,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@subject\":[{\"@subject\":\"_:bnode1\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/bob>\",\"foaf:name\":\"Bob\"},{\"@subject\":\"_:bnode2\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/eve>\",\"foaf:name\":\"Eve\"},{\"@subject\":\"_:bnode3\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/bert>\",\"foaf:name\":\"Bert\"}]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@graph\":[{\"@id\":\"_:bnode1\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/bob>\",\"foaf:name\":\"Bob\"},{\"@id\":\"_:bnode2\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/eve>\",\"foaf:name\":\"Eve\"},{\"@id\":\"_:bnode3\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/bert>\",\"foaf:name\":\"Bert\"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -604,7 +604,7 @@ decl_stmt|;
 name|String
 name|expectedIndent
 init|=
-literal|"{\n    \"@context\": {\n        \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n    },\n    \"@subject\": [\n        {\n            \"@subject\": \"_:bnode1\",\n            \"@type\": \"foaf:Person\",\n            \"foaf:homepage\": \"<http://example.com/bob>\",\n            \"foaf:name\": \"Bob\"\n        },\n        {\n            \"@subject\": \"_:bnode2\",\n            \"@type\": \"foaf:Person\",\n            \"foaf:homepage\": \"<http://example.com/eve>\",\n            \"foaf:name\": \"Eve\"\n        },\n        {\n            \"@subject\": \"_:bnode3\",\n            \"@type\": \"foaf:Person\",\n            \"foaf:homepage\": \"<http://example.com/bert>\",\n            \"foaf:name\": \"Bert\"\n        }\n    ]\n}"
+literal|"{\n    \"@context\": {\n        \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n    },\n    \"@graph\": [\n        {\n            \"@id\": \"_:bnode1\",\n            \"@type\": \"foaf:Person\",\n            \"foaf:homepage\": \"<http://example.com/bob>\",\n            \"foaf:name\": \"Bob\"\n        },\n        {\n            \"@id\": \"_:bnode2\",\n            \"@type\": \"foaf:Person\",\n            \"foaf:homepage\": \"<http://example.com/eve>\",\n            \"foaf:name\": \"Eve\"\n        },\n        {\n            \"@id\": \"_:bnode3\",\n            \"@type\": \"foaf:Person\",\n            \"foaf:homepage\": \"<http://example.com/bert>\",\n            \"foaf:name\": \"Bert\"\n        }\n    ]\n}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -822,7 +822,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@subject\":[{\"@subject\":\"_:bnode1\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/bob>\",\"name\":\"Bob\"},{\"@subject\":\"_:bnode2\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/eve>\",\"name\":\"Eve\"},{\"@subject\":\"_:bnode3\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/bert>\",\"name\":\"Bert\"}]}"
+literal|"{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@graph\":[{\"@id\":\"_:bnode1\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/bob>\",\"name\":\"Bob\"},{\"@id\":\"_:bnode2\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/eve>\",\"name\":\"Eve\"},{\"@id\":\"_:bnode3\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/bert>\",\"name\":\"Bert\"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1040,7 +1040,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"[{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@subject\":\"_:bnode1\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/bob>\",\"foaf:name\":\"Bob\"},{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@subject\":\"_:bnode2\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/eve>\",\"foaf:name\":\"Eve\"},{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@subject\":\"_:bnode3\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/eve>\",\"foaf:name\":\"Eve\"}]"
+literal|"[{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@id\":\"_:bnode1\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/bob>\",\"foaf:name\":\"Bob\"},{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@id\":\"_:bnode2\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/eve>\",\"foaf:name\":\"Eve\"},{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@id\":\"_:bnode3\",\"@type\":\"foaf:Person\",\"foaf:homepage\":\"<http://example.com/eve>\",\"foaf:name\":\"Eve\"}]"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1062,7 +1062,7 @@ decl_stmt|;
 name|String
 name|expectedIndent
 init|=
-literal|"[\n    {\n        \"@context\": {\n            \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n        },\n        \"@subject\": \"_:bnode1\",\n        \"@type\": \"foaf:Person\",\n        \"foaf:homepage\": \"<http://example.com/bob>\",\n        \"foaf:name\": \"Bob\"\n    },\n    {\n        \"@context\": {\n            \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n        },\n        \"@subject\": \"_:bnode2\",\n        \"@type\": \"foaf:Person\",\n        \"foaf:homepage\": \"<http://example.com/eve>\",\n        \"foaf:name\": \"Eve\"\n    },\n    {\n        \"@context\": {\n            \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n        },\n        \"@subject\": \"_:bnode3\",\n        \"@type\": \"foaf:Person\",\n        \"foaf:homepage\": \"<http://example.com/eve>\",\n        \"foaf:name\": \"Eve\"\n    }\n]"
+literal|"[\n    {\n        \"@context\": {\n            \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n        },\n        \"@id\": \"_:bnode1\",\n        \"@type\": \"foaf:Person\",\n        \"foaf:homepage\": \"<http://example.com/bob>\",\n        \"foaf:name\": \"Bob\"\n    },\n    {\n        \"@context\": {\n            \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n        },\n        \"@id\": \"_:bnode2\",\n        \"@type\": \"foaf:Person\",\n        \"foaf:homepage\": \"<http://example.com/eve>\",\n        \"foaf:name\": \"Eve\"\n    },\n    {\n        \"@context\": {\n            \"foaf\": \"http://xmlns.com/foaf/0.1/\"\n        },\n        \"@id\": \"_:bnode3\",\n        \"@type\": \"foaf:Person\",\n        \"foaf:homepage\": \"<http://example.com/eve>\",\n        \"foaf:name\": \"Eve\"\n    }\n]"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1280,7 +1280,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"[{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@subject\":\"_:bnode1\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/bob>\",\"name\":\"Bob\"},{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@subject\":\"_:bnode2\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/eve>\",\"name\":\"Eve\"},{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@subject\":\"_:bnode3\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/eve>\",\"name\":\"Eve\"}]"
+literal|"[{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@id\":\"_:bnode1\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/bob>\",\"name\":\"Bob\"},{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@id\":\"_:bnode2\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/eve>\",\"name\":\"Eve\"},{\"@context\":{\"homepage\":\"http://xmlns.com/foaf/0.1/homepage\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"Person\":\"http://xmlns.com/foaf/0.1/Person\"},\"@id\":\"_:bnode3\",\"@type\":\"Person\",\"homepage\":\"<http://example.com/eve>\",\"name\":\"Eve\"}]"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1407,7 +1407,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"fn\":\"http://microformats.org/profile/hcard#fn\",\"url\":\"http://microformats.org/profile/hcard#url\",\"vcard\":\"http://microformats.org/profile/hcard#vcard\"},\"@subject\":\"_:bnode1\",\"@type\":\"vcard\",\"fn\":\"Tantek Celik\",\"url\":\"<http://tantek.com/>\"}"
+literal|"{\"@context\":{\"fn\":\"http://microformats.org/profile/hcard#fn\",\"url\":\"http://microformats.org/profile/hcard#url\",\"vcard\":\"http://microformats.org/profile/hcard#vcard\"},\"@id\":\"_:bnode1\",\"@type\":\"vcard\",\"fn\":\"Tantek Celik\",\"url\":\"<http://tantek.com/>\"}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1429,7 +1429,7 @@ decl_stmt|;
 name|String
 name|expectedIndent
 init|=
-literal|"{\n    \"@context\": {\n        \"fn\": \"http://microformats.org/profile/hcard#fn\",\n        \"url\": \"http://microformats.org/profile/hcard#url\",\n        \"vcard\": \"http://microformats.org/profile/hcard#vcard\"\n    },\n    \"@subject\": \"_:bnode1\",\n    \"@type\": \"vcard\",\n    \"fn\": \"Tantek Celik\",\n    \"url\": \"<http://tantek.com/>\"\n}"
+literal|"{\n    \"@context\": {\n        \"fn\": \"http://microformats.org/profile/hcard#fn\",\n        \"url\": \"http://microformats.org/profile/hcard#url\",\n        \"vcard\": \"http://microformats.org/profile/hcard#vcard\"\n    },\n    \"@id\": \"_:bnode1\",\n    \"@type\": \"vcard\",\n    \"fn\": \"Tantek Celik\",\n    \"url\": \"<http://tantek.com/>\"\n}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1788,7 +1788,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"[{\"@subject\":\"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\"@type\":\"<http://purl.org/vocab/frbr/core#Expression>\",\"http://purl.org/dc/terms/type\":\"<http://purl.oreilly.com/product-types/BOOK>\"},{\"@subject\":\"<http://purl.oreilly.com/products/9780596802189.EBOOK>\",\"@type\":\"http://purl.org/vocab/frbr/core#Expression\",\"http://purl.org/dc/terms/type\":\"<http://purl.oreilly.com/product-types/BOOK>\"},{\"@subject\":\"<http://purl.oreilly.com/works/45U8QJGZSQKDH8N>\",\"@type\":\"http://purl.org/vocab/frbr/core#Work\",\"http://purl.org/dc/terms/creator\":\"Whil Wheaton\",\"http://purl.org/dc/terms/title\":\"Just a Geek\",\"http://purl.org/vocab/frbr/core#realization\":[\"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\"<http://purl.oreilly.com/products/9780596802189.EBOOK>\"]}]"
+literal|"[{\"@id\":\"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\"@type\":\"<http://purl.org/vocab/frbr/core#Expression>\",\"http://purl.org/dc/terms/type\":\"<http://purl.oreilly.com/product-types/BOOK>\"},{\"@id\":\"<http://purl.oreilly.com/products/9780596802189.EBOOK>\",\"@type\":\"http://purl.org/vocab/frbr/core#Expression\",\"http://purl.org/dc/terms/type\":\"<http://purl.oreilly.com/product-types/BOOK>\"},{\"@id\":\"<http://purl.oreilly.com/works/45U8QJGZSQKDH8N>\",\"@type\":\"http://purl.org/vocab/frbr/core#Work\",\"http://purl.org/dc/terms/creator\":\"Whil Wheaton\",\"http://purl.org/dc/terms/title\":\"Just a Geek\",\"http://purl.org/vocab/frbr/core#realization\":[\"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\"<http://purl.oreilly.com/products/9780596802189.EBOOK>\"]}]"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1810,7 +1810,7 @@ decl_stmt|;
 name|String
 name|expectedIndent
 init|=
-literal|"[\n    {\n        \"@subject\": \"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\n        \"@type\": \"<http://purl.org/vocab/frbr/core#Expression>\",\n        \"http://purl.org/dc/terms/type\": \"<http://purl.oreilly.com/product-types/BOOK>\"\n    },\n    {\n        \"@subject\": \"<http://purl.oreilly.com/products/9780596802189.EBOOK>\",\n        \"@type\": \"http://purl.org/vocab/frbr/core#Expression\",\n        \"http://purl.org/dc/terms/type\": \"<http://purl.oreilly.com/product-types/BOOK>\"\n    },\n    {\n        \"@subject\": \"<http://purl.oreilly.com/works/45U8QJGZSQKDH8N>\",\n        \"@type\": \"http://purl.org/vocab/frbr/core#Work\",\n        \"http://purl.org/dc/terms/creator\": \"Whil Wheaton\",\n        \"http://purl.org/dc/terms/title\": \"Just a Geek\",\n        \"http://purl.org/vocab/frbr/core#realization\": [\n            \"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\n            \"<http://purl.oreilly.com/products/9780596802189.EBOOK>\"\n        ]\n    }\n]"
+literal|"[\n    {\n        \"@id\": \"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\n        \"@type\": \"<http://purl.org/vocab/frbr/core#Expression>\",\n        \"http://purl.org/dc/terms/type\": \"<http://purl.oreilly.com/product-types/BOOK>\"\n    },\n    {\n        \"@id\": \"<http://purl.oreilly.com/products/9780596802189.EBOOK>\",\n        \"@type\": \"http://purl.org/vocab/frbr/core#Expression\",\n        \"http://purl.org/dc/terms/type\": \"<http://purl.oreilly.com/product-types/BOOK>\"\n    },\n    {\n        \"@id\": \"<http://purl.oreilly.com/works/45U8QJGZSQKDH8N>\",\n        \"@type\": \"http://purl.org/vocab/frbr/core#Work\",\n        \"http://purl.org/dc/terms/creator\": \"Whil Wheaton\",\n        \"http://purl.org/dc/terms/title\": \"Just a Geek\",\n        \"http://purl.org/vocab/frbr/core#realization\": [\n            \"<http://purl.oreilly.com/products/9780596007683.BOOK>\",\n            \"<http://purl.oreilly.com/products/9780596802189.EBOOK>\"\n        ]\n    }\n]"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1969,7 +1969,7 @@ name|r1
 operator|.
 name|setSubject
 argument_list|(
-literal|"<http://example.org/people#joebob>"
+literal|"http://example.org/people#joebob"
 argument_list|)
 expr_stmt|;
 name|String
@@ -2015,7 +2015,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"@coerce\":{\"http://www.w3.org/2001/XMLSchema#string\":\"http://xmlns.com/foaf/0.1/nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":\"stu\"}"
+literal|"{\"@context\":{\"http://xmlns.com/foaf/0.1/nick\":{\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}},\"@id\":\"http://example.org/people#joebob\",\"http://xmlns.com/foaf/0.1/nick\":\"stu\"}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2133,7 +2133,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:string\":\"foaf:nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":\"stu\"}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:nick\":{\"@type\":\"xsd:string\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":\"stu\"}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2251,7 +2251,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"nick\":\"http://xmlns.com/foaf/0.1/nick\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:string\":\"nick\"}},\"@subject\":\"http://example.org/people#joebob\",\"nick\":\"stu\"}"
+literal|"{\"@context\":{\"nick\":{\"@id\":\"http://xmlns.com/foaf/0.1/nick\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"http://example.org/people#joebob\",\"nick\":\"stu\"}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2357,13 +2357,13 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@subject\":\"<http://example.org/people#joebob>\","
+literal|"{\"@id\":\"<http://example.org/people#joebob>\","
 operator|+
 literal|"\"http://xmlns.com/foaf/0.1/nick\":{"
 operator|+
-literal|"\"@datatype\":\"http://www.w3.org/2001/XMLSchema#string\","
+literal|"\"@type\":\"http://www.w3.org/2001/XMLSchema#string\","
 operator|+
-literal|"\"@literal\":\"stu\""
+literal|"\"@value\":\"stu\""
 operator|+
 literal|"}}"
 decl_stmt|;
@@ -2480,11 +2480,11 @@ name|expected
 init|=
 literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
 operator|+
-literal|"\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":{"
+literal|"\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":{"
 operator|+
-literal|"\"@datatype\":\"xsd:string\","
+literal|"\"@type\":\"xsd:string\","
 operator|+
-literal|"\"@literal\":\"stu\""
+literal|"\"@value\":\"stu\""
 operator|+
 literal|"}}"
 decl_stmt|;
@@ -2601,7 +2601,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[\"stu\",\"groknar\",\"radface\"]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\"},\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[\"stu\",\"groknar\",\"radface\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2725,29 +2725,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
-operator|+
-literal|"\"@subject\":\"<http://example.org/people#joebob>\","
-operator|+
-literal|"\"foaf:nick\":[{"
-operator|+
-literal|"\"@datatype\":\"xsd:string\","
-operator|+
-literal|"\"@literal\":\"stu\""
-operator|+
-literal|"},{"
-operator|+
-literal|"\"@datatype\":\"xsd:string\","
-operator|+
-literal|"\"@literal\":\"groknar\""
-operator|+
-literal|"},{"
-operator|+
-literal|"\"@datatype\":\"xsd:string\","
-operator|+
-literal|"\"@literal\":\"radface\""
-operator|+
-literal|"}]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[{\"@type\":\"xsd:string\",\"@value\":\"stu\"},{\"@type\":\"xsd:string\",\"@value\":\"groknar\"},{\"@type\":\"xsd:string\",\"@value\":\"radface\"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2779,31 +2757,31 @@ literal|"        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n"
 operator|+
 literal|"    },\n"
 operator|+
-literal|"    \"@subject\": \"<http://example.org/people#joebob>\",\n"
+literal|"    \"@id\": \"<http://example.org/people#joebob>\",\n"
 operator|+
 literal|"    \"foaf:nick\": [\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"            \"@datatype\": \"xsd:string\",\n"
+literal|"            \"@type\": \"xsd:string\",\n"
 operator|+
-literal|"            \"@literal\": \"stu\"\n"
-operator|+
-literal|"        },\n"
-operator|+
-literal|"        {\n"
-operator|+
-literal|"            \"@datatype\": \"xsd:string\",\n"
-operator|+
-literal|"            \"@literal\": \"groknar\"\n"
+literal|"            \"@value\": \"stu\"\n"
 operator|+
 literal|"        },\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"            \"@datatype\": \"xsd:string\",\n"
+literal|"            \"@type\": \"xsd:string\",\n"
 operator|+
-literal|"            \"@literal\": \"radface\"\n"
+literal|"            \"@value\": \"groknar\"\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"            \"@type\": \"xsd:string\",\n"
+operator|+
+literal|"            \"@value\": \"radface\"\n"
 operator|+
 literal|"        }\n"
 operator|+
@@ -2938,7 +2916,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"@coerce\":{\"http://www.w3.org/2001/XMLSchema#string\":\"http://xmlns.com/foaf/0.1/nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":[\"stu\",\"groknar\",\"radface\"]}"
+literal|"{\"@context\":{\"http://xmlns.com/foaf/0.1/nick\":{\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}},\"@id\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":[\"stu\",\"groknar\",\"radface\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3069,7 +3047,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"nick\":\"http://xmlns.com/foaf/0.1/nick\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:string\":\"nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"nick\":[\"stu\",\"groknar\",\"radface\"]}"
+literal|"{\"@context\":{\"nick\":{\"@id\":\"http://xmlns.com/foaf/0.1/nick\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"<http://example.org/people#joebob>\",\"nick\":[\"stu\",\"groknar\",\"radface\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3193,7 +3171,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:string\":\"foaf:nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[\"stu\",\"groknar\",\"radface\"]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:nick\":{\"@type\":\"xsd:string\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[\"stu\",\"groknar\",\"radface\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3326,7 +3304,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"@coerce\":{\"@iri\":\"http://xmlns.com/foaf/0.1/nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":[\"http://nickworld.com/nicks/stu\",\"http://nickworld.com/nicks/pet\",\"http://nickworld.com/nicks/flo\"]}"
+literal|"{\"@context\":{\"http://xmlns.com/foaf/0.1/nick\":{\"@type\":\"@iri\"}},\"@id\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":[\"http://nickworld.com/nicks/stu\",\"http://nickworld.com/nicks/pet\",\"http://nickworld.com/nicks/flo\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3348,7 +3326,7 @@ decl_stmt|;
 name|String
 name|expectedIndent
 init|=
-literal|"{\n    \"@context\": {\n        \"@coerce\": {\n            \"@iri\": \"http://xmlns.com/foaf/0.1/nick\"\n        }\n    },\n    \"@subject\": \"<http://example.org/people#joebob>\",\n    \"http://xmlns.com/foaf/0.1/nick\": [\n        \"http://nickworld.com/nicks/stu\",\n        \"http://nickworld.com/nicks/pet\",\n        \"http://nickworld.com/nicks/flo\"\n    ]\n}"
+literal|"{\n    \"@context\": {\n        \"http://xmlns.com/foaf/0.1/nick\": {\n            \"@type\": \"@iri\"\n        }\n    },\n    \"@id\": \"<http://example.org/people#joebob>\",\n    \"http://xmlns.com/foaf/0.1/nick\": [\n        \"http://nickworld.com/nicks/stu\",\n        \"http://nickworld.com/nicks/pet\",\n        \"http://nickworld.com/nicks/flo\"\n    ]\n}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3499,7 +3477,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@subject\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":[{\"@iri\":\"http://nickworld.com/nicks/stu\"},{\"@iri\":\"http://nickworld.com/nicks/pet\"},{\"@iri\":\"http://nickworld.com/nicks/flo\"}]}"
+literal|"{\"@id\":\"<http://example.org/people#joebob>\",\"http://xmlns.com/foaf/0.1/nick\":[{\"@id\":\"http://nickworld.com/nicks/stu\"},{\"@id\":\"http://nickworld.com/nicks/pet\"},{\"@id\":\"http://nickworld.com/nicks/flo\"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3657,7 +3635,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"nick\":\"http://nickworld.com/nicks/\"},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[{\"@iri\":\"nick:stu\"},{\"@iri\":\"nick:pet\"},{\"@iri\":\"nick:flo\"}]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"nick\":\"http://nickworld.com/nicks/\"},\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[{\"@id\":\"nick:stu\"},{\"@id\":\"nick:pet\"},{\"@id\":\"nick:flo\"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3803,7 +3781,7 @@ name|putPropertyType
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/nick"
 argument_list|,
-literal|"@iri"
+literal|"@id"
 argument_list|)
 expr_stmt|;
 name|jsonLd
@@ -3824,7 +3802,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"@coerce\":{\"@iri\":\"foaf:nick\"}},\"@subject\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[\"nick:stu\",\"nick:pet\",\"nick:flo\"]}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:nick\":{\"@type\":\"@id\"}},\"@id\":\"<http://example.org/people#joebob>\",\"foaf:nick\":[\"nick:stu\",\"nick:pet\",\"nick:flo\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3912,7 +3890,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@subject\":\"_:bnode1\",\"@profile\":\"testprofile\"}"
+literal|"{\"@id\":\"_:bnode1\",\"@profile\":\"testprofile\"}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4025,7 +4003,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:int\":\"foaf:age\"}},\"@subject\":\"_:bnode1\",\"foaf:age\":31}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:age\":{\"@type\":\"xsd:int\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"foaf:age\":31}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4047,7 +4025,7 @@ decl_stmt|;
 name|String
 name|expectedIndented
 init|=
-literal|"{\n  \"@context\": {\n    \"foaf\": \"http://xmlns.com/foaf/0.1/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"@coerce\": {\n      \"xsd:int\": \"foaf:age\"\n    }\n  },\n  \"@subject\": \"_:bnode1\",\n  \"foaf:age\": 31\n}"
+literal|"{\n  \"@context\": {\n    \"foaf\": \"http://xmlns.com/foaf/0.1/\",\n    \"foaf:age\": {\n      \"@type\": \"xsd:int\"\n    },\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@id\": \"_:bnode1\",\n  \"foaf:age\": 31\n}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4119,13 +4097,6 @@ argument_list|()
 decl_stmt|;
 name|r1
 operator|.
-name|setSubject
-argument_list|(
-literal|"_:bnode1"
-argument_list|)
-expr_stmt|;
-name|r1
-operator|.
 name|putProperty
 argument_list|(
 literal|"foaf:age"
@@ -4160,15 +4131,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
-operator|+
-literal|"\"@subject\":\"_:bnode1\",\"foaf:age\":{"
-operator|+
-literal|"\"@datatype\":\"xsd:int\","
-operator|+
-literal|"\"@literal\":\"31\""
-operator|+
-literal|"}}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"foaf:age\":{\"@type\":\"xsd:int\",\"@value\":\"31\"}}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4281,7 +4244,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:int\":\"foaf:age\"}},\"@subject\":\"_:bnode1\",\"foaf:age\":31.533567}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:age\":{\"@type\":\"xsd:int\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"foaf:age\":31.533567}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4394,7 +4357,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:int\":\"age\"}},\"@subject\":\"_:bnode1\",\"age\":31.533567}"
+literal|"{\"@context\":{\"age\":{\"@id\":\"http://xmlns.com/foaf/0.1/age\",\"@type\":\"http://www.w3.org/2001/XMLSchema#int\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"age\":31.533567}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4509,11 +4472,11 @@ name|expected
 init|=
 literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
 operator|+
-literal|"\"@subject\":\"_:bnode1\",\"foaf:age\":{"
+literal|"\"@id\":\"_:bnode1\",\"foaf:age\":{"
 operator|+
-literal|"\"@datatype\":\"xsd:int\","
+literal|"\"@type\":\"xsd:int\","
 operator|+
-literal|"\"@literal\":\"31.533567\""
+literal|"\"@value\":\"31.533567\""
 operator|+
 literal|"}}"
 decl_stmt|;
@@ -4634,7 +4597,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"onto\":\"http://onto.test.org/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:float\":\"foaf:age\",\"xsd:int\":\"onto:age\"}},\"@subject\":\"_:bnode1\",\"foaf:age\":31.533567,\"onto:age\":456}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:age\":{\"@type\":\"xsd:float\"},\"onto\":\"http://onto.test.org/\",\"onto:age\":{\"@type\":\"xsd:int\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"foaf:age\":31.533567,\"onto:age\":456}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4749,7 +4712,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:float\":\"age\"}},\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":31.533567}"
+literal|"{\"@context\":{\"age\":{\"@id\":\"http://xmlns.com/foaf/0.1/age\",\"@type\":\"http://www.w3.org/2001/XMLSchema#float\"},\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":31.533567}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4864,7 +4827,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:float\":\"foaf:age\"}},\"@subject\":\"_:bnode1\",\"@type\":[\"foaf:String\",\"xsd:String\"],\"foaf:age\":31.533567}"
+literal|"{\"@context\":{\"foaf\":\"http://xmlns.com/foaf/0.1/\",\"foaf:age\":{\"@type\":\"xsd:float\"},\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"@type\":[\"foaf:String\",\"xsd:String\"],\"foaf:age\":31.533567}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -4878,7 +4841,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubjectsWithSeveralTypes
+name|testGraph
 parameter_list|()
 block|{
 name|JsonLd
@@ -5032,7 +4995,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"@coerce\":{\"xsd:float\":\"age\"}},\"@subject\":[{\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":31.533567},{\"@subject\":\"_:bnode2\",\"@type\":[\"String\",\"name\"],\"age\":31.533567}]}"
+literal|"{\"@context\":{\"age\":{\"@id\":\"http://xmlns.com/foaf/0.1/age\",\"@type\":\"http://www.w3.org/2001/XMLSchema#float\"},\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@graph\":[{\"@id\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":31.533567},{\"@id\":\"_:bnode2\",\"@type\":[\"String\",\"name\"],\"age\":31.533567}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5147,7 +5110,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\"},\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[31.533567,\"de\"]}"
+literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\"},\"@id\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[31.533567,\"de\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5308,17 +5271,17 @@ name|expected
 init|=
 literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
 operator|+
-literal|"\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
+literal|"\"@id\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
 operator|+
-literal|"\"@datatype\":\"xsd:Float\","
+literal|"\"@type\":\"xsd:Float\","
 operator|+
-literal|"\"@literal\":\"31.533567\""
+literal|"\"@value\":\"31.533567\""
 operator|+
 literal|"},{"
 operator|+
-literal|"\"@datatype\":\"xsd:String\","
+literal|"\"@type\":\"xsd:String\","
 operator|+
-literal|"\"@literal\":\"test\""
+literal|"\"@value\":\"test\""
 operator|+
 literal|"}]}"
 decl_stmt|;
@@ -5486,23 +5449,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
-operator|+
-literal|"\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
-operator|+
-literal|"\"@datatype\":\"xsd:Float\","
-operator|+
-literal|"\"@literal\":\"31.533567\""
-operator|+
-literal|"},{"
-operator|+
-literal|"\"@datatype\":\"xsd:String\","
-operator|+
-literal|"\"@language\":\"en\","
-operator|+
-literal|"\"@literal\":\"test\""
-operator|+
-literal|"}]}"
+literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{\"@type\":\"xsd:Float\",\"@value\":\"31.533567\"},{\"@language\":\"en\",\"@type\":\"xsd:String\",\"@value\":\"test\"}]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5656,7 +5603,7 @@ name|putProperty
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/age"
 argument_list|,
-literal|"On more untyped value"
+literal|"One more untyped value"
 argument_list|)
 expr_stmt|;
 name|jsonLd
@@ -5677,23 +5624,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},"
-operator|+
-literal|"\"@subject\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{"
-operator|+
-literal|"\"@datatype\":\"xsd:Float\","
-operator|+
-literal|"\"@literal\":\"31.533567\""
-operator|+
-literal|"},{"
-operator|+
-literal|"\"@datatype\":\"xsd:String\","
-operator|+
-literal|"\"@language\":\"en\","
-operator|+
-literal|"\"@literal\":\"test\""
-operator|+
-literal|"},\"On more untyped value\"]}"
+literal|"{\"@context\":{\"age\":\"http://xmlns.com/foaf/0.1/age\",\"name\":\"http://xmlns.com/foaf/0.1/name\",\"String\":\"http://www.w3.org/2001/XMLSchema#String\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\"},\"@id\":\"_:bnode1\",\"@type\":[\"String\",\"name\"],\"age\":[{\"@type\":\"xsd:Float\",\"@value\":\"31.533567\"},{\"@language\":\"en\",\"@type\":\"xsd:String\",\"@value\":\"test\"},\"One more untyped value\"]}"
 decl_stmt|;
 name|assertEquals
 argument_list|(

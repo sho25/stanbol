@@ -75,7 +75,7 @@ name|type
 operator|=
 name|JsonLdCommon
 operator|.
-name|IRI
+name|ID
 expr_stmt|;
 block|}
 else|else
