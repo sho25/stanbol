@@ -650,9 +650,13 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"\"@literal\": \"Paris\""
+literal|"\"@id\": \"http://dbpedia.org/resource/London\""
 argument_list|,
-literal|"\"@literal\": \"London\""
+literal|"\"@value\": \"London\""
+argument_list|,
+literal|"\"@id\": \"http://dbpedia.org/resource/Paris\""
+argument_list|,
+literal|"\"@value\": \"Paris\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -759,7 +763,7 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"\"@subject\": \"http://dbpedia.org/resource/Paris\""
+literal|"\"@id\": \"http://dbpedia.org/resource/Paris\""
 argument_list|,
 literal|"\"comment\": {"
 argument_list|,
@@ -771,15 +775,15 @@ literal|"http://www.paris.fr"
 argument_list|,
 literal|"\"labels\": ["
 argument_list|,
-literal|"\"@literal\": \"Pariisi\""
+literal|"\"@value\": \"Pariisi\""
 argument_list|,
-literal|"\"@literal\": \"巴黎\""
+literal|"\"@value\": \"巴黎\""
 argument_list|,
 literal|"\"location\": \"[48.856667,2.350833]\""
 argument_list|,
 literal|"\"name\": {"
 argument_list|,
-literal|"\"@literal\": \"Paris\""
+literal|"\"@value\": \"Paris\""
 argument_list|)
 expr_stmt|;
 block|}
