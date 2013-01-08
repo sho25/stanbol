@@ -896,9 +896,9 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"\"@subject\": \"http://dbpedia.org/resource/Paris\","
+literal|"\"@id\": \"http://dbpedia.org/resource/Paris\","
 block|,
-literal|"\"@subject\": \"http://dbpedia.org/resource/Bob_Marley\","
+literal|"\"@id\": \"http://dbpedia.org/resource/Bob_Marley\","
 block|,
 literal|"\"dc:creator\": \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\","
 block|}
