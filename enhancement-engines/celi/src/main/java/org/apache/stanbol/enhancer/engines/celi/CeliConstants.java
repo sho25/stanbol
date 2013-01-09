@@ -23,6 +23,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|framework
@@ -61,6 +77,26 @@ name|String
 name|CELI_TEST_ACCOUNT
 init|=
 literal|"celi.testaccount"
+decl_stmt|;
+comment|/**      * Concept used to annotate sentiment expressions within text      *  TODO: Find standard ontology for reference or check if it is OK to define new properties in the FISE namespace      */
+name|UriRef
+name|SENTIMENT_EXPRESSION
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"http://fise.iks-project.eu/ontology/Sentiment Expression"
+argument_list|)
+decl_stmt|;
+comment|/**      * Datatype property (targets double literals) used to represent the polarity of a sentiment expression      *  TODO: Find standard ontology for reference or check if it is OK to define new properties in the FISE namespace      */
+name|UriRef
+name|HAS_SENTIMENT_EXPRESSION_POLARITY
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"http://fise.iks-project.eu/ontology/hasSentimentPolarityValue"
+argument_list|)
 decl_stmt|;
 block|}
 end_interface
