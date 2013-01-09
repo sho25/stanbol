@@ -27,14 +27,12 @@ specifier|final
 class|class
 name|Annotation
 parameter_list|<
-name|K
-parameter_list|,
 name|V
 parameter_list|>
 block|{
 comment|/**      * The type of the used Key      */
 specifier|final
-name|K
+name|String
 name|key
 decl_stmt|;
 comment|/**      * The type of the used Value      */
@@ -48,7 +46,7 @@ decl_stmt|;
 specifier|public
 name|Annotation
 parameter_list|(
-name|K
+name|String
 name|key
 parameter_list|,
 name|Class
@@ -91,7 +89,7 @@ name|valueType
 expr_stmt|;
 block|}
 specifier|public
-name|K
+name|String
 name|getKey
 parameter_list|()
 block|{

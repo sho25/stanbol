@@ -27,11 +27,29 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_interface
 specifier|public
 interface|interface
 name|Annotated
 block|{
+comment|/**      * Getter for all keys used by Annotations      * @return the Set with all keys. An empty Set if none      */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getKeys
+parameter_list|()
+function_decl|;
 comment|/**      * Method for requesting Values of a given Key. This allows to request      * Values without an {@link Annotation}.      * @param key the Key      * @return the Value with the highest probability      */
 name|Value
 argument_list|<
@@ -39,7 +57,7 @@ name|?
 argument_list|>
 name|getValue
 parameter_list|(
-name|Object
+name|String
 name|key
 parameter_list|)
 function_decl|;
@@ -55,8 +73,6 @@ name|getAnnotation
 parameter_list|(
 name|Annotation
 argument_list|<
-name|?
-argument_list|,
 name|V
 argument_list|>
 name|annotation
@@ -72,7 +88,7 @@ argument_list|>
 argument_list|>
 name|getValues
 parameter_list|(
-name|Object
+name|String
 name|key
 parameter_list|)
 function_decl|;
@@ -91,8 +107,6 @@ name|getAnnotations
 parameter_list|(
 name|Annotation
 argument_list|<
-name|?
-argument_list|,
 name|V
 argument_list|>
 name|annotation
@@ -100,8 +114,6 @@ parameter_list|)
 function_decl|;
 comment|/**      * Appends an Annotation to eventually already existing values       * @param annotation the annotation      * @param value the value to append      */
 parameter_list|<
-name|K
-parameter_list|,
 name|V
 parameter_list|>
 name|void
@@ -109,8 +121,6 @@ name|addAnnotation
 parameter_list|(
 name|Annotation
 argument_list|<
-name|K
-argument_list|,
 name|V
 argument_list|>
 name|annotation
@@ -124,8 +134,6 @@ parameter_list|)
 function_decl|;
 comment|/**      * Replaces existing Annotations with the parsed one      * @param annotation the annotation      * @param value the value for the annotation      */
 parameter_list|<
-name|K
-parameter_list|,
 name|V
 parameter_list|>
 name|void
@@ -133,8 +141,6 @@ name|setAnnotation
 parameter_list|(
 name|Annotation
 argument_list|<
-name|K
-argument_list|,
 name|V
 argument_list|>
 name|annotation
@@ -146,10 +152,36 @@ argument_list|>
 name|value
 parameter_list|)
 function_decl|;
+comment|/**      * Appends an Value to the key. This method is intended for internal use (      * e.g. parsers). Users are encouraged to define type save      * {@link Annotation} objects and use {@link #addAnnotation(Annotation, Value)}      * instead.       * @param key the key      * @param value the value      */
+name|void
+name|addValue
+parameter_list|(
+name|String
+name|key
+parameter_list|,
+name|Value
+argument_list|<
+name|?
+argument_list|>
+name|value
+parameter_list|)
+function_decl|;
+comment|/**      * Replaces existing Values for a key with the parsed one. This method is       * intended for internal use (e.g. parsers). Users are encouraged to define       * type save {@link Annotation} objects and use       * {@link #setAnnotation(Annotation, Value)} instead.       * @param key the key      * @param value the value      */
+name|void
+name|setValue
+parameter_list|(
+name|String
+name|key
+parameter_list|,
+name|Value
+argument_list|<
+name|?
+argument_list|>
+name|value
+parameter_list|)
+function_decl|;
 comment|/**      * Appends an Annotation to eventually already existing values       * @param annotation the annotation      * @param value the value to append      */
 parameter_list|<
-name|K
-parameter_list|,
 name|V
 parameter_list|>
 name|void
@@ -157,8 +189,6 @@ name|addAnnotations
 parameter_list|(
 name|Annotation
 argument_list|<
-name|K
-argument_list|,
 name|V
 argument_list|>
 name|annotation
@@ -175,8 +205,6 @@ parameter_list|)
 function_decl|;
 comment|/**      * Replaces existing Annotations with the parsed one      * @param annotation the annotation      * @param value the value for the annotation      */
 parameter_list|<
-name|K
-parameter_list|,
 name|V
 parameter_list|>
 name|void
@@ -184,8 +212,6 @@ name|setAnnotations
 parameter_list|(
 name|Annotation
 argument_list|<
-name|K
-argument_list|,
 name|V
 argument_list|>
 name|annotation
@@ -195,6 +221,40 @@ argument_list|<
 name|Value
 argument_list|<
 name|V
+argument_list|>
+argument_list|>
+name|values
+parameter_list|)
+function_decl|;
+comment|/**      * Appends the parsed values to the key. This method is intended for internal use (      * e.g. parsers). Users are encouraged to define type save      * {@link Annotation} objects and use {@link #addAnnotations(Annotation, List)      * instead.       * @param key the key      * @param value the value      */
+name|void
+name|addValues
+parameter_list|(
+name|String
+name|key
+parameter_list|,
+name|List
+argument_list|<
+name|Value
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|values
+parameter_list|)
+function_decl|;
+comment|/**      * Replaces existing Values for a key with the parsed one. This method is       * intended for internal use (e.g. parsers). Users are encouraged to define       * type save {@link Annotation} objects and use       * {@link #setAnnotations(Annotation, List) instead.       * @param key the key      * @param value the value      */
+name|void
+name|setValues
+parameter_list|(
+name|String
+name|key
+parameter_list|,
+name|List
+argument_list|<
+name|Value
+argument_list|<
+name|?
 argument_list|>
 argument_list|>
 name|values

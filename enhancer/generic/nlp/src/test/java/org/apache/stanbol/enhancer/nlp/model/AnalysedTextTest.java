@@ -16,42 +16,6 @@ package|;
 end_package
 
 begin_import
-import|import static
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
-operator|.
-name|assertNotNull
-import|;
-end_import
-
-begin_import
-import|import static
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
-operator|.
-name|assertTrue
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -160,16 +124,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
 import|;
 end_import
 
@@ -357,6 +311,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Assert
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Before
 import|;
 end_import
@@ -443,8 +407,6 @@ specifier|static
 specifier|final
 name|Annotation
 argument_list|<
-name|String
-argument_list|,
 name|Number
 argument_list|>
 name|testAnnotation
@@ -452,8 +414,6 @@ init|=
 operator|new
 name|Annotation
 argument_list|<
-name|String
-argument_list|,
 name|Number
 argument_list|>
 argument_list|(
@@ -1937,6 +1897,8 @@ argument_list|,
 name|sent
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|start
@@ -1947,6 +1909,8 @@ name|getStart
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|end
@@ -2069,6 +2033,8 @@ argument_list|()
 operator|+
 name|end
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|start
@@ -2079,6 +2045,8 @@ name|getStart
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|end
@@ -2170,6 +2138,8 @@ argument_list|()
 operator|+
 name|end
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|start
@@ -2180,6 +2150,8 @@ name|getStart
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|end
@@ -2274,6 +2246,8 @@ name|s
 operator|++
 control|)
 block|{
+name|Assert
+operator|.
 name|assertTrue
 argument_list|(
 name|sentences
@@ -2316,6 +2290,8 @@ argument_list|,
 name|sent
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|sentences
@@ -2356,6 +2332,8 @@ name|c
 operator|++
 control|)
 block|{
+name|Assert
+operator|.
 name|assertTrue
 argument_list|(
 name|chunks
@@ -2398,6 +2376,8 @@ argument_list|,
 name|chunk
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|chunks
@@ -2438,6 +2418,8 @@ name|t
 operator|++
 control|)
 block|{
+name|Assert
+operator|.
 name|assertTrue
 argument_list|(
 name|tokens
@@ -2480,6 +2462,8 @@ argument_list|,
 name|token
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokens
@@ -2496,6 +2480,8 @@ name|foundTokens
 operator|++
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokensInChunk
@@ -2511,6 +2497,8 @@ name|foundChunks
 operator|++
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|chunksInSentence
@@ -2577,6 +2565,8 @@ argument_list|,
 name|token
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokens
@@ -2594,6 +2584,8 @@ name|token
 argument_list|)
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokensInSentence
@@ -2606,6 +2598,8 @@ name|foundTokens
 argument_list|)
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|sentences
@@ -2627,6 +2621,8 @@ argument_list|,
 name|s
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|chunks
@@ -2648,6 +2644,8 @@ argument_list|,
 name|c
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokens
@@ -2724,6 +2722,8 @@ argument_list|,
 name|chunk
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|chunks
@@ -2737,6 +2737,8 @@ name|chunk
 argument_list|)
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|chunks
@@ -2809,6 +2811,8 @@ argument_list|,
 name|token
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokens
@@ -2822,6 +2826,8 @@ name|token
 argument_list|)
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|tokens
@@ -2918,6 +2924,8 @@ operator|.
 name|Chunk
 condition|)
 block|{
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|chunks
@@ -2947,6 +2955,8 @@ operator|.
 name|Sentence
 condition|)
 block|{
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|sentences
@@ -2988,6 +2998,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|sentences
@@ -3005,6 +3017,8 @@ argument_list|,
 name|s
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 operator|(
@@ -3139,11 +3153,15 @@ argument_list|(
 name|testAnnotation
 argument_list|)
 decl_stmt|;
+name|Assert
+operator|.
 name|assertNotNull
 argument_list|(
 name|value
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|Double
@@ -3159,6 +3177,8 @@ name|value
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 literal|0.8d
@@ -3167,6 +3187,8 @@ name|value
 operator|.
 name|probability
 argument_list|()
+argument_list|,
+literal|0.0d
 argument_list|)
 expr_stmt|;
 name|Number
@@ -3195,11 +3217,15 @@ name|testAnnotation
 argument_list|)
 control|)
 block|{
+name|Assert
+operator|.
 name|assertNotNull
 argument_list|(
 name|v
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertTrue
 argument_list|(
 name|v
@@ -3266,11 +3292,15 @@ name|testAnnotation
 argument_list|)
 control|)
 block|{
+name|Assert
+operator|.
 name|assertNotNull
 argument_list|(
 name|v
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertTrue
 argument_list|(
 name|v
