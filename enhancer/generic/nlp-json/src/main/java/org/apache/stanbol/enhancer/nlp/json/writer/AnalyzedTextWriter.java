@@ -587,7 +587,8 @@ name|mediaType
 parameter_list|)
 block|{
 return|return
-literal|0
+operator|-
+literal|1
 return|;
 block|}
 annotation|@

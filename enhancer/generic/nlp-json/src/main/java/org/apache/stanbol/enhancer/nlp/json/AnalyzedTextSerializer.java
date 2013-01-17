@@ -343,6 +343,26 @@ name|ObjectNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Serializes an AnalysedText instance as JSON  * @author Rupert Westenthaler  *  */
 end_comment
@@ -374,6 +394,18 @@ specifier|public
 class|class
 name|AnalyzedTextSerializer
 block|{
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|AnalyzedTextSerializer
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|private
 specifier|final
 specifier|static
@@ -651,6 +683,15 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"wirte {}"
+argument_list|,
+name|span
+argument_list|)
+expr_stmt|;
 name|ObjectNode
 name|jSpan
 init|=
@@ -798,6 +839,15 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|" ... {}"
+argument_list|,
+name|jSpan
+argument_list|)
+expr_stmt|;
 return|return
 name|jSpan
 return|;
