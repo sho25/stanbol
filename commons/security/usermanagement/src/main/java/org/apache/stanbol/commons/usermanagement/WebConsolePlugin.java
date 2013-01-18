@@ -389,28 +389,11 @@ name|getWriter
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|serializer
-operator|.
-name|serialize
-argument_list|(
-name|System
-operator|.
-name|out
-argument_list|,
-name|userManager
-operator|.
-name|getUserType
-argument_list|()
-operator|.
-name|getGraph
-argument_list|()
-argument_list|,
-name|SupportedFormat
-operator|.
-name|TURTLE
-argument_list|)
-expr_stmt|;
+comment|// serializer.serialize(System.out, userManager.getUserType().getGraph(), SupportedFormat.TURTLE);
+comment|// log me for debug!
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|String
 index|[]
@@ -427,15 +410,12 @@ index|[
 literal|1
 index|]
 decl_stmt|;
-comment|//this is to use the stanbol way for static resources
-comment|//http://felix.apache.org/site/providing-resources.html describes the webconsole way
-comment|//TODO make sure things work when stanbol is not in root
 name|result
 index|[
 literal|0
 index|]
 operator|=
-literal|"../../static/user-management/styles/webconsole.css"
+literal|"usermanagement/res/static/user-management/styles/webconsole.css"
 expr_stmt|;
 return|return
 name|result
@@ -468,6 +448,7 @@ name|deactivate
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**      * The felix webconsole way for returning static resources      */
 specifier|public
 name|URL
 name|getResource
@@ -486,6 +467,13 @@ name|STATIC_PREFIX
 argument_list|)
 condition|)
 block|{
+comment|//we just get the resources from the same place as stanbol expectes them to be
+comment|//i.e. the resources will be available below
+comment|//http://<host>/<path/to/webconsole>/usermangement/res/
+comment|//by virtuel of this felix webconsole method
+comment|//as well as below
+comment|//http://<host>/<path/to/stanbol>/,
+comment|//e.g. with the default config below http://localhost:8080/
 return|return
 name|this
 operator|.
@@ -494,6 +482,8 @@ argument_list|()
 operator|.
 name|getResource
 argument_list|(
+literal|"/META-INF/resources/"
+operator|+
 name|path
 operator|.
 name|substring
