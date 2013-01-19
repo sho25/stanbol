@@ -598,11 +598,6 @@ name|ValueTypeParserRegistry
 operator|.
 name|getInstance
 argument_list|()
-argument_list|,
-name|AnalysedTextFactory
-operator|.
-name|getDefaultInstance
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -615,15 +610,12 @@ specifier|public
 name|AnalyzedTextParser
 parameter_list|()
 block|{}
-comment|/**      * Constructs a new Parser instance for the parsed {@link ValueTypeParserRegistry}      * instance. Typically this constructor should not be used as usages within      * an OSGI environment MUST lookup the service via the service registry.      * Usages outside an OSGI environment should prefer to use the      * {@link #getDefaultInstance()} instance to obtain the singleton instance.      * @param vtsr      * @param atf      */
+comment|/**      * Constructs a new Parser instance for the parsed {@link ValueTypeParserRegistry}      * instance. Typically this constructor should not be used as usages within      * an OSGI environment MUST lookup the service via the service registry.      * Usages outside an OSGI environment should prefer to use the      * {@link #getDefaultInstance()} instance to obtain the singleton instance.      * @param vtsr      */
 specifier|public
 name|AnalyzedTextParser
 parameter_list|(
 name|ValueTypeParserRegistry
 name|vtpr
-parameter_list|,
-name|AnalysedTextFactory
-name|atf
 parameter_list|)
 block|{
 if|if
@@ -641,32 +633,11 @@ literal|"The parsed ValueTypeParserRegistry MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-if|if
-condition|(
-name|atf
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed AnalyzedTextFactory MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
 name|this
 operator|.
 name|valueTypeParserRegistry
 operator|=
 name|vtpr
-expr_stmt|;
-name|this
-operator|.
-name|analysedTextFactory
-operator|=
-name|atf
 expr_stmt|;
 block|}
 annotation|@
@@ -675,13 +646,7 @@ specifier|protected
 name|ValueTypeParserRegistry
 name|valueTypeParserRegistry
 decl_stmt|;
-annotation|@
-name|Reference
-specifier|protected
-name|AnalysedTextFactory
-name|analysedTextFactory
-decl_stmt|;
-comment|/**      * Parses an {@link AnalysedText} instance from the {@link InputStream}. The      * analyzed text needs also to be parsed as the serialized data to usually      * not include those information      * @param in      * @param charset      * @param blob The blob to create the AnalyzedText for. As the Blob is not      * part of the parsed data it must be provided      * @return      * @throws IOException      */
+comment|/**      * Parses {@link AnalysedText} {@link Span}s including annotations from the       * {@link InputStream}. The {@link AnalysedText} instance that is going to      * be enrichted with the parsed data needs to be parsed. In the simplest case      * the caller can create an empty instance by using a       * {@link AnalysedTextFactory}.      * @param in The stream to read the data from      * @param charset the {@link Charset} used by the stream      * @param at The {@link AnalysedText} instance used to add the data to      * @return the parsed {@link AnalysedText} instance enrichted with the      * information parsed from the Stream      * @throws IOException on any Error while reading or parsing the data      * from the Stream      */
 specifier|public
 name|AnalysedText
 name|parse
@@ -693,8 +658,8 @@ name|Charset
 name|charset
 parameter_list|,
 specifier|final
-name|Blob
-name|blob
+name|AnalysedText
+name|at
 parameter_list|)
 throws|throws
 name|IOException
@@ -816,11 +781,6 @@ name|first
 init|=
 literal|true
 decl_stmt|;
-name|AnalysedText
-name|at
-init|=
-literal|null
-decl_stmt|;
 while|while
 condition|(
 name|parser
@@ -838,8 +798,6 @@ condition|(
 name|first
 condition|)
 block|{
-name|at
-operator|=
 name|parseAnalyzedTextSpan
 argument_list|(
 name|parser
@@ -847,7 +805,7 @@ operator|.
 name|readValueAsTree
 argument_list|()
 argument_list|,
-name|blob
+name|at
 argument_list|)
 expr_stmt|;
 name|first
@@ -874,14 +832,14 @@ name|at
 return|;
 block|}
 specifier|private
-name|AnalysedText
+name|void
 name|parseAnalyzedTextSpan
 parameter_list|(
 name|JsonNode
 name|node
 parameter_list|,
-name|Blob
-name|blob
+name|AnalysedText
+name|at
 parameter_list|)
 throws|throws
 name|IOException
@@ -989,16 +947,6 @@ name|jSpan
 argument_list|)
 throw|;
 block|}
-name|AnalysedText
-name|at
-init|=
-name|analysedTextFactory
-operator|.
-name|createAnalysedText
-argument_list|(
-name|blob
-argument_list|)
-decl_stmt|;
 if|if
 condition|(
 name|at
@@ -1050,9 +998,6 @@ argument_list|,
 name|jAnnotations
 argument_list|)
 expr_stmt|;
-return|return
-name|at
-return|;
 block|}
 else|else
 block|{

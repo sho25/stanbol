@@ -1062,8 +1062,13 @@ name|refs
 operator|.
 name|isEmpty
 argument_list|()
+operator|&&
+name|valueTypeParsers
+operator|!=
+literal|null
 condition|)
 block|{
+comment|//not yet deactivated
 name|valueTypeParsers
 operator|.
 name|remove

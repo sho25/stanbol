@@ -1745,10 +1745,15 @@ argument_list|)
 argument_list|,
 literal|null
 argument_list|,
+name|atFactory
+operator|.
+name|createAnalysedText
+argument_list|(
 name|textBlob
 operator|.
 name|getValue
 argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|Assert

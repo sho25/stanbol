@@ -1072,8 +1072,13 @@ name|refs
 operator|.
 name|isEmpty
 argument_list|()
+operator|&&
+name|valueTypeSerializers
+operator|!=
+literal|null
 condition|)
 block|{
+comment|//not yet deactivated
 name|valueTypeSerializers
 operator|.
 name|remove
