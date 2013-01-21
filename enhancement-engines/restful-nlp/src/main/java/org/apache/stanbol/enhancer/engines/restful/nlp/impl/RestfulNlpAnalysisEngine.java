@@ -1973,6 +1973,9 @@ argument_list|,
 name|supportedLanguages
 argument_list|)
 expr_stmt|;
+return|return
+name|CANNOT_ENHANCE
+return|;
 block|}
 name|log
 operator|.
