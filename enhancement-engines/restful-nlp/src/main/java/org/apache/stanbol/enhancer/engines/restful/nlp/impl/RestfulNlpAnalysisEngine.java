@@ -1,6 +1,6 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/*  * Copyright (c) 2012 Sebastian Schaffert  *  *  Licensed under the Apache License, Version 2.0 (the "License");  *  you may not use this file except in compliance with the License.  *  You may obtain a copy of the License at  *  *      http://www.apache.org/licenses/LICENSE-2.0  *  *  Unless required by applicable law or agreed to in writing, software  *  distributed under the License is distributed on an "AS IS" BASIS,  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  *  See the License for the specific language governing permissions and  *  limitations under the License.  */
+comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more  * contributor license agreements.  See the NOTICE file distributed with  * this work for additional information regarding copyright ownership.  * The ASF licenses this file to You under the Apache License, Version 2.0  * (the "License"); you may not use this file except in compliance with  * the License.  You may obtain a copy of the License at  *  *     http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  */
 end_comment
 
 begin_package
@@ -1488,7 +1488,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An enhancement engine that uses a RESTful service for NLP processing of  * the pain text content part of processed {@link ContentItem}s.<p>  * The RESTful API of the remote service is standardized by STANBOL-TODO<p>  *   * @author Rupert Westenthaler  */
+comment|/**  * An enhancement engine that uses a RESTful service for NLP processing of  * the pain text content part of processed {@link ContentItem}s.<p>  * The RESTful API of the remote service is standardised by    *<a href="https://issues.apache.org/jira/browse/STANBOL-892">STANBOL-892</a><p>  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -1508,6 +1508,10 @@ operator|=
 name|ConfigurationPolicy
 operator|.
 name|REQUIRE
+argument_list|,
+name|configurationFactory
+operator|=
+literal|true
 argument_list|)
 annotation|@
 name|Service
