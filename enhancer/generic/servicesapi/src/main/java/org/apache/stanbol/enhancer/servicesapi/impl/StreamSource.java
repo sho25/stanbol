@@ -35,6 +35,16 @@ name|java
 operator|.
 name|io
 operator|.
+name|FilterInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
 name|IOException
 import|;
 end_import
@@ -415,12 +425,17 @@ operator|=
 literal|true
 expr_stmt|;
 return|return
+operator|new
+name|NonCloseableInputStream
+argument_list|(
 name|in
+argument_list|)
 return|;
 block|}
 annotation|@
 name|Override
 specifier|public
+specifier|synchronized
 name|byte
 index|[]
 name|getData
@@ -435,14 +450,6 @@ operator|==
 literal|null
 condition|)
 block|{
-name|InputStream
-name|in
-init|=
-name|getStream
-argument_list|()
-decl_stmt|;
-try|try
-block|{
 name|data
 operator|=
 name|IOUtils
@@ -452,17 +459,6 @@ argument_list|(
 name|in
 argument_list|)
 expr_stmt|;
-block|}
-finally|finally
-block|{
-name|IOUtils
-operator|.
-name|closeQuietly
-argument_list|(
-name|in
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 return|return
 name|data
@@ -509,22 +505,43 @@ return|return
 name|headers
 return|;
 block|}
-annotation|@
-name|Override
-specifier|protected
-name|void
-name|finalize
-parameter_list|()
-throws|throws
-name|Throwable
+comment|// The parsed Stream MUST NOT be closed (STANBOL-898)
+comment|//    @Override
+comment|//    protected void finalize() throws Throwable {
+comment|//        IOUtils.closeQuietly(in);
+comment|//    }
+comment|/**      * Internally used to ensure that InputStreams returned by      * {@link StreamSource#getStream()} can not be closed by callers (as       * requested by STANBOL-898)      */
+specifier|private
+specifier|static
+class|class
+name|NonCloseableInputStream
+extends|extends
+name|FilterInputStream
 block|{
-name|IOUtils
-operator|.
-name|closeQuietly
+specifier|protected
+name|NonCloseableInputStream
+parameter_list|(
+name|InputStream
+name|in
+parameter_list|)
+block|{
+name|super
 argument_list|(
 name|in
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|close
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//ignore call to close
+block|}
 block|}
 block|}
 end_class
