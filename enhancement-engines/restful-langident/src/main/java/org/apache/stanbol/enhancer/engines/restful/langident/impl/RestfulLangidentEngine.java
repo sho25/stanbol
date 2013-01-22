@@ -1130,6 +1130,10 @@ operator|=
 name|ConfigurationPolicy
 operator|.
 name|REQUIRE
+argument_list|,
+name|configurationFactory
+operator|=
+literal|true
 argument_list|)
 annotation|@
 name|Service
