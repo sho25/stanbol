@@ -712,6 +712,38 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|//we need to create
+name|ci
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+try|try
+block|{
+comment|//try again to retrieve (maybe an concurrent thread has created
+comment|//the content part in the meantime
+name|at
+operator|=
+name|AnalysedTextUtils
+operator|.
+name|getAnalysedText
+argument_list|(
+name|ci
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|at
+operator|==
+literal|null
+condition|)
+block|{
 name|log
 operator|.
 name|debug
@@ -724,8 +756,6 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-try|try
-block|{
 name|at
 operator|=
 name|analysedTextFactory
@@ -740,6 +770,7 @@ name|getValue
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 catch|catch
 parameter_list|(
@@ -770,6 +801,20 @@ argument_list|,
 name|e
 argument_list|)
 throw|;
+block|}
+finally|finally
+block|{
+name|ci
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 else|else
