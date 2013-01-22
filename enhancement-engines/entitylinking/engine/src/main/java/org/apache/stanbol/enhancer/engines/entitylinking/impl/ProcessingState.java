@@ -539,6 +539,10 @@ name|EntityLinkerConfig
 name|elc
 decl_stmt|;
 specifier|private
+name|AnalysedText
+name|at
+decl_stmt|;
+specifier|private
 specifier|static
 specifier|final
 name|Predicate
@@ -694,6 +698,13 @@ name|Chunk
 argument_list|)
 expr_stmt|;
 block|}
+name|this
+operator|.
+name|at
+operator|=
+name|at
+expr_stmt|;
+comment|//store as field (just used for logging)
 name|this
 operator|.
 name|language
@@ -981,6 +992,42 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|span
+operator|.
+name|getStart
+argument_list|()
+operator|>=
+name|span
+operator|.
+name|getEnd
+argument_list|()
+condition|)
+block|{
+comment|//save guard against empty spans
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Detected Empty Span {} in section {} of Blob {}"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|span
+block|,
+name|section
+block|,
+name|at
+operator|.
+name|getBlob
+argument_list|()
+block|}
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|span
@@ -1911,6 +1958,18 @@ name|index
 operator|>
 literal|0
 operator|&&
+comment|//not a sentence start
+name|token
+operator|.
+name|getEnd
+argument_list|()
+operator|>
+name|token
+operator|.
+name|getStart
+argument_list|()
+operator|&&
+comment|//not an empty token
 name|Character
 operator|.
 name|isUpperCase
@@ -1926,6 +1985,7 @@ literal|0
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|//and upper case
 if|if
 condition|(
 name|tpc
