@@ -1785,7 +1785,9 @@ operator|-
 literal|1
 argument_list|)
 operator|==
-literal|'/'
+name|File
+operator|.
+name|separatorChar
 operator|)
 condition|)
 block|{
@@ -1793,9 +1795,20 @@ name|context
 operator|=
 name|context
 operator|+
-literal|'/'
+name|File
+operator|.
+name|separatorChar
 expr_stmt|;
 block|}
+name|resource
+operator|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
+name|resource
+argument_list|)
+expr_stmt|;
 name|int
 name|contextPos
 init|=
@@ -1829,16 +1842,11 @@ name|log
 operator|.
 name|warn
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Context %s not found in resource %s -> ignored!"
+literal|"Context {} not found in resource {} -> ignored!"
 argument_list|,
 name|context
 argument_list|,
 name|resource
-argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
@@ -1863,7 +1871,9 @@ name|relativePath
 operator|.
 name|split
 argument_list|(
-literal|"/"
+name|File
+operator|.
+name|separator
 argument_list|)
 decl_stmt|;
 name|File
