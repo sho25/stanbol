@@ -277,26 +277,6 @@ name|ComponentContext
 import|;
 end_import
 
-begin_import
-import|import
-name|freemarker
-operator|.
-name|cache
-operator|.
-name|ClassTemplateLoader
-import|;
-end_import
-
-begin_import
-import|import
-name|freemarker
-operator|.
-name|cache
-operator|.
-name|TemplateLoader
-import|;
-end_import
-
 begin_class
 annotation|@
 name|Component

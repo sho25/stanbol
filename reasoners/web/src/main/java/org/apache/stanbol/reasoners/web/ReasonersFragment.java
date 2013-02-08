@@ -394,6 +394,18 @@ name|NAME
 init|=
 literal|"reasoners"
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|htmlDescription
+init|=
+literal|"The entry point to multiple<strong>reasoning services</strong> that are used for"
+operator|+
+literal|"obtaining unexpressed additional knowledge from the explicit axioms in an ontology."
+operator|+
+literal|"Multiple reasoning profiles are available, each with its expressive power and computational cost."
+decl_stmt|;
 annotation|@
 name|Reference
 name|ONManager
@@ -594,7 +606,7 @@ literal|"reasoners"
 argument_list|,
 literal|"/reasoners"
 argument_list|,
-literal|"/imports/reasonersDescription.ftl"
+name|htmlDescription
 argument_list|,
 literal|50
 argument_list|)

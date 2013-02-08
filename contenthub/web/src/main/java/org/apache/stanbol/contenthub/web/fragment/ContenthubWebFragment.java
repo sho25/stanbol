@@ -374,8 +374,18 @@ init|=
 literal|"contenthub"
 decl_stmt|;
 specifier|private
-name|BundleContext
-name|bundleContext
+specifier|static
+specifier|final
+name|String
+name|htmlDescription
+init|=
+literal|"This is a<strong>stateful interface</strong> to submit content to<strong>"
+operator|+
+literal|"analyze and store the results</strong> on the server. It is then possible"
+operator|+
+literal|"to browse the resulting enhanced content items. The longer-term goal of this"
+operator|+
+literal|"endpoint is to implement faceted semantic search of the enhanced content items"
 decl_stmt|;
 annotation|@
 name|Override
@@ -387,26 +397,6 @@ block|{
 return|return
 name|NAME
 return|;
-block|}
-annotation|@
-name|Activate
-specifier|protected
-name|void
-name|activate
-parameter_list|(
-name|ComponentContext
-name|ctx
-parameter_list|)
-block|{
-name|this
-operator|.
-name|bundleContext
-operator|=
-name|ctx
-operator|.
-name|getBundleContext
-argument_list|()
-expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -714,7 +704,7 @@ literal|"contenthub/contenthub/store"
 argument_list|,
 literal|"/contenthub"
 argument_list|,
-literal|"/imports/contenthubDescription.ftl"
+name|htmlDescription
 argument_list|,
 literal|20
 argument_list|)

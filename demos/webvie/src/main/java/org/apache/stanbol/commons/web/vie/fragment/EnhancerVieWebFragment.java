@@ -290,8 +290,12 @@ init|=
 literal|"enhancervie"
 decl_stmt|;
 specifier|private
-name|BundleContext
-name|bundleContext
+specifier|static
+specifier|final
+name|String
+name|htmlDescription
+init|=
+literal|"This is a frontend to the enhancer featuring VIE.js"
 decl_stmt|;
 annotation|@
 name|Override
@@ -303,26 +307,6 @@ block|{
 return|return
 name|NAME
 return|;
-block|}
-annotation|@
-name|Activate
-specifier|protected
-name|void
-name|activate
-parameter_list|(
-name|ComponentContext
-name|ctx
-parameter_list|)
-block|{
-name|this
-operator|.
-name|bundleContext
-operator|=
-name|ctx
-operator|.
-name|getBundleContext
-argument_list|()
-expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -680,7 +664,7 @@ literal|"enhancervie"
 argument_list|,
 literal|"/enhancer VIE"
 argument_list|,
-literal|"/imports/enhancervieDescription.ftl"
+name|htmlDescription
 argument_list|,
 literal|20
 argument_list|)

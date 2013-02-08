@@ -481,6 +481,16 @@ init|=
 literal|"ontonet"
 decl_stmt|;
 specifier|private
+specifier|static
+specifier|final
+name|String
+name|htmlDescription
+init|=
+literal|"A<strong>controlled environment</strong> for managing Web ontologies, "
+operator|+
+literal|"<strong>ontology networks</strong> and user sessions that put them to use."
+decl_stmt|;
+specifier|private
 name|BundleContext
 name|bundleContext
 decl_stmt|;
@@ -739,7 +749,7 @@ literal|"/"
 operator|+
 name|NAME
 argument_list|,
-literal|"/imports/ontonetDescription.ftl"
+name|htmlDescription
 argument_list|,
 literal|50
 argument_list|)

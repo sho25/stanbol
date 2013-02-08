@@ -292,6 +292,18 @@ specifier|private
 name|BundleContext
 name|bundleContext
 decl_stmt|;
+specifier|private
+name|String
+name|htmlDescription
+init|=
+literal|"This is the<strong>SPARQL endpoint</strong> for the Stanbol store."
+operator|+
+literal|"<a href=\"http://en.wikipedia.org/wiki/Sparql\">SPARQL</a> is the"
+operator|+
+literal|"standard query language the most commonly used to provide interactive"
+operator|+
+literal|"access to semantic knowledge bases."
+decl_stmt|;
 annotation|@
 name|Override
 specifier|public
@@ -453,7 +465,7 @@ literal|"sparql"
 argument_list|,
 literal|"/sparql"
 argument_list|,
-literal|"/imports/sparqlDescription.ftl"
+name|htmlDescription
 argument_list|,
 literal|50
 argument_list|)
