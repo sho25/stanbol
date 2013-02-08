@@ -1605,6 +1605,13 @@ literal|"UTF-8"
 argument_list|)
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+name|serialized
+argument_list|)
+expr_stmt|;
 name|Assert
 operator|.
 name|assertTrue
