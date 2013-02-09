@@ -2592,6 +2592,16 @@ argument_list|,
 name|i
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|failed
+operator|.
+name|getKey
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
 name|log
 operator|.
 name|warn
@@ -2607,6 +2617,17 @@ name|getStatusLine
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"> HttpResponse is NULL"
+argument_list|)
+expr_stmt|;
+block|}
 name|log
 operator|.
 name|warn
