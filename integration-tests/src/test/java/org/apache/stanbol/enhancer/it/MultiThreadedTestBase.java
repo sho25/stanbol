@@ -2652,12 +2652,15 @@ name|tracker
 operator|.
 name|getFailed
 argument_list|()
+operator|.
+name|size
+argument_list|()
 operator|+
 literal|"/"
 operator|+
 name|settings
 operator|.
-name|getNumThreads
+name|getMaxRequests
 argument_list|()
 operator|+
 literal|" failed"
