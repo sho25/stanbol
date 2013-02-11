@@ -2568,7 +2568,7 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|HttpResponse
+name|RequestExecutor
 argument_list|,
 name|String
 argument_list|>
@@ -2592,11 +2592,44 @@ argument_list|,
 name|i
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"> Request: {}"
+operator|+
+name|failed
+operator|.
+name|getKey
+argument_list|()
+operator|.
+name|getRequest
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"> Response: {}"
+operator|+
+name|failed
+operator|.
+name|getKey
+argument_list|()
+operator|.
+name|getResponse
+argument_list|()
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|failed
 operator|.
 name|getKey
+argument_list|()
+operator|.
+name|getResponse
 argument_list|()
 operator|!=
 literal|null
@@ -2606,25 +2639,18 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"> Status: {}"
+literal|"    - Status: {}"
 argument_list|,
 name|failed
 operator|.
 name|getKey
 argument_list|()
 operator|.
+name|getResponse
+argument_list|()
+operator|.
 name|getStatusLine
 argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"> HttpResponse is NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3435,7 +3461,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|HttpResponse
+name|RequestExecutor
 argument_list|,
 name|String
 argument_list|>
@@ -3448,7 +3474,7 @@ argument_list|(
 operator|new
 name|LinkedHashMap
 argument_list|<
-name|HttpResponse
+name|RequestExecutor
 argument_list|,
 name|String
 argument_list|>
@@ -3695,9 +3721,6 @@ operator|.
 name|put
 argument_list|(
 name|executor
-operator|.
-name|getResponse
-argument_list|()
 argument_list|,
 name|content
 argument_list|)
@@ -3745,7 +3768,7 @@ comment|/**          * Live list of the failed requests. Non basic access MUST B
 specifier|public
 name|Map
 argument_list|<
-name|HttpResponse
+name|RequestExecutor
 argument_list|,
 name|String
 argument_list|>
@@ -4179,6 +4202,7 @@ name|rtt
 operator|=
 literal|null
 expr_stmt|;
+return|return;
 block|}
 name|IndexedMGraph
 name|graph
@@ -4216,47 +4240,28 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|Assert
+name|log
 operator|.
-name|fail
+name|warn
 argument_list|(
-literal|"Unable to parse RDF data from Response with Content-Type "
-operator|+
-name|executor
-operator|.
-name|getContentType
-argument_list|()
-operator|.
-name|getMimeType
-argument_list|()
-operator|+
-literal|" ( "
-operator|+
+literal|"Exception while parsing Enhancement Response"
+argument_list|,
 name|e
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getSimpleName
-argument_list|()
-operator|+
-literal|": "
-operator|+
-name|e
-operator|.
-name|getMessage
-argument_list|()
-operator|+
-literal|")"
 argument_list|)
 expr_stmt|;
+name|tracker
+operator|.
+name|failed
+argument_list|(
+name|request
+argument_list|,
+name|content
+argument_list|,
+name|executor
+argument_list|)
+expr_stmt|;
+return|return;
 block|}
-comment|//            log.info("Content:\n{}",executor.getContent());
-comment|//
-comment|//            log.info("Triples");
-comment|//            for(Triple t : graph){
-comment|//                log.info(t.toString());
-comment|//            }
 name|Iterator
 argument_list|<
 name|Triple
