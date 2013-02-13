@@ -311,7 +311,9 @@ argument_list|)
 annotation|@
 name|Produces
 argument_list|(
-literal|"text/html"
+name|MediaType
+operator|.
+name|TEXT_HTML
 argument_list|)
 annotation|@
 name|Provider
