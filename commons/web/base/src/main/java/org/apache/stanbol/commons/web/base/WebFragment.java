@@ -39,28 +39,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|osgi
-operator|.
-name|framework
-operator|.
-name|BundleContext
-import|;
-end_import
-
-begin_import
-import|import
-name|freemarker
-operator|.
-name|cache
-operator|.
-name|TemplateLoader
-import|;
-end_import
-
 begin_comment
 comment|/**  * Interface to be implemented by bundles that want to customize the stanbol web interface and REST API by  * contributing static resources, JAX-RS resources and Freemarker views.  *   * TODO: add some kind of ordering information  */
 end_comment
