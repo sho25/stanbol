@@ -1387,7 +1387,7 @@ try|try
 block|{
 name|jResult
 operator|=
-name|reoncile
+name|reconcile
 argument_list|(
 name|ReconcileQuery
 operator|.
@@ -1529,6 +1529,10 @@ argument_list|(
 literal|"index"
 argument_list|,
 name|this
+argument_list|,
+name|BaseGoogleRefineReconcileResource
+operator|.
+name|class
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1627,7 +1631,7 @@ return|;
 block|}
 specifier|private
 name|JSONObject
-name|reoncile
+name|reconcile
 parameter_list|(
 name|Map
 argument_list|<
