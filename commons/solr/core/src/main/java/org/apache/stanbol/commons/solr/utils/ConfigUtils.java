@@ -1769,6 +1769,15 @@ name|String
 name|context
 parameter_list|)
 block|{
+name|context
+operator|=
+name|FilenameUtils
+operator|.
+name|separatorsToSystem
+argument_list|(
+name|context
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
