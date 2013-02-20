@@ -27,7 +27,7 @@ specifier|abstract
 class|class
 name|EntityhubException
 extends|extends
-name|Exception
+name|RuntimeException
 block|{
 comment|/**      * default serial version uid.      */
 specifier|private
