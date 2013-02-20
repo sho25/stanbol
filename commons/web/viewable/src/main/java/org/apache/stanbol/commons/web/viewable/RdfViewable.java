@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An RdfViewable is a GraphNode associated with a template path. The template   * path will be attempted to be resolved based on the accepted target formats  * to create a representation of the GraphNode.   *  */
+comment|/**  * An RdfViewable is a GraphNode associated with a rendering specification. The   * rendering specification determines the way the GraphNode is rendered in the   * requested format. The rendering specification is typically a path to a   * template.   *  */
 end_comment
 
 begin_class
@@ -44,13 +44,13 @@ specifier|public
 class|class
 name|RdfViewable
 block|{
-comment|/**      *       * @param templatePath the templatePath      * @param graphNode the graphNode with the actual content      */
+comment|/**      *       * @param renderingSpecification the rendering specification      * @param graphNode the graphNode with the actual content      */
 specifier|public
 name|RdfViewable
 parameter_list|(
 specifier|final
 name|String
-name|templatePath
+name|renderingSpecification
 parameter_list|,
 specifier|final
 name|GraphNode
@@ -59,9 +59,9 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|templatePath
+name|renderingSpecification
 operator|=
-name|templatePath
+name|renderingSpecification
 expr_stmt|;
 name|this
 operator|.
@@ -70,13 +70,13 @@ operator|=
 name|graphNode
 expr_stmt|;
 block|}
-comment|/**      * With this version of the constructor the templatePath is prefixed with      * the slash-separated package name of the given Class.      *       */
+comment|/**      * With this version of the constructor the rendering specification is prefixed with      * the slash-separated package name of the given Class.      *       */
 specifier|public
 name|RdfViewable
 parameter_list|(
 specifier|final
 name|String
-name|templatePath
+name|renderingSpecification
 parameter_list|,
 specifier|final
 name|GraphNode
@@ -111,7 +111,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|templatePath
+name|renderingSpecification
 operator|.
 name|startsWith
 argument_list|(
@@ -121,24 +121,24 @@ condition|)
 block|{
 name|this
 operator|.
-name|templatePath
+name|renderingSpecification
 operator|=
 name|slahSeparatedPacakgeName
 operator|+
-name|templatePath
+name|renderingSpecification
 expr_stmt|;
 block|}
 else|else
 block|{
 name|this
 operator|.
-name|templatePath
+name|renderingSpecification
 operator|=
 name|slahSeparatedPacakgeName
 operator|+
 literal|'/'
 operator|+
-name|templatePath
+name|renderingSpecification
 expr_stmt|;
 block|}
 name|this
@@ -150,7 +150,7 @@ expr_stmt|;
 block|}
 specifier|private
 name|String
-name|templatePath
+name|renderingSpecification
 decl_stmt|;
 specifier|private
 name|GraphNode
@@ -158,11 +158,11 @@ name|graphNode
 decl_stmt|;
 specifier|public
 name|String
-name|getTemplatePath
+name|getRenderingSpecification
 parameter_list|()
 block|{
 return|return
-name|templatePath
+name|renderingSpecification
 return|;
 block|}
 specifier|public

@@ -723,7 +723,7 @@ name|getRecipe
 argument_list|(
 name|v
 operator|.
-name|getTemplatePath
+name|getRenderingSpecification
 argument_list|()
 argument_list|)
 decl_stmt|;

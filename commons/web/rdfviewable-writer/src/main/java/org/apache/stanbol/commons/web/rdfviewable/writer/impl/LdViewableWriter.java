@@ -444,7 +444,7 @@ literal|"html/"
 operator|+
 name|t
 operator|.
-name|getTemplatePath
+name|getRenderingSpecification
 argument_list|()
 argument_list|,
 name|out
