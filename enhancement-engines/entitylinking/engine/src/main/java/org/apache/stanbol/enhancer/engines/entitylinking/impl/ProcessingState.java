@@ -89,6 +89,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collections
 import|;
 end_import
@@ -407,6 +417,24 @@ name|nlp
 operator|.
 name|pos
 operator|.
+name|Pos
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|nlp
+operator|.
+name|pos
+operator|.
 name|PosTag
 import|;
 end_import
@@ -574,6 +602,24 @@ name|isProcessable
 return|;
 block|}
 block|}
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|Collection
+argument_list|<
+name|Pos
+argument_list|>
+name|SUB_SENTENCE_START_POS
+init|=
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|Pos
+operator|.
+name|Quote
+argument_list|)
 decl_stmt|;
 specifier|public
 name|ProcessingState
@@ -1057,6 +1103,7 @@ condition|(
 name|chunkData
 operator|.
 name|isProcessable
+argument_list|()
 condition|)
 block|{
 if|if
@@ -1275,6 +1322,115 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|//determine if the token should be linked/matched
+name|tokenData
+operator|.
+name|isProcessable
+operator|=
+name|tokenData
+operator|.
+name|isLinkablePos
+expr_stmt|;
+name|tokenData
+operator|.
+name|isMatchable
+operator|=
+name|tokenData
+operator|.
+name|isProcessable
+operator|||
+name|tokenData
+operator|.
+name|isMatchablePos
+expr_stmt|;
+comment|//for non processable but upper case tolkens we need to check
+comment|//the uper case token configuration
+if|if
+condition|(
+operator|!
+name|tokenData
+operator|.
+name|isProcessable
+operator|&&
+name|tokenData
+operator|.
+name|upperCase
+condition|)
+block|{
+if|if
+condition|(
+name|tokenData
+operator|.
+name|index
+operator|>
+literal|0
+operator|&&
+comment|//not a sentence or sub-sentence start
+operator|!
+name|tokens
+operator|.
+name|get
+argument_list|(
+name|tokenData
+operator|.
+name|index
+operator|-
+literal|1
+argument_list|)
+operator|.
+name|isSubSentenceStart
+condition|)
+block|{
+if|if
+condition|(
+name|tpc
+operator|.
+name|isLinkUpperCaseTokens
+argument_list|()
+operator|&&
+comment|//if upper case tokens should be linked
+name|tokenData
+operator|.
+name|isMatchable
+condition|)
+block|{
+comment|//convert matchable to
+name|tokenData
+operator|.
+name|isProcessable
+operator|=
+literal|true
+expr_stmt|;
+comment|//linkable
+block|}
+elseif|else
+if|if
+condition|(
+name|tpc
+operator|.
+name|isMatchUpperCaseTokens
+argument_list|()
+operator|||
+name|tpc
+operator|.
+name|isLinkUpperCaseTokens
+argument_list|()
+condition|)
+block|{
+comment|//if matching for upperCase Tokens is activated or
+comment|//linking is activated, but the current Token is not
+comment|//matchable, than mark the Token as matchable
+name|tokenData
+operator|.
+name|isMatchable
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|//else upper case matching and linking is deactivated
+block|}
+block|}
+comment|//add the token to the list
 name|tokens
 operator|.
 name|add
@@ -1893,6 +2049,26 @@ specifier|final
 name|MorphoFeatures
 name|morpho
 decl_stmt|;
+comment|/**          * if this token starts with an upperCase letter          */
+specifier|final
+name|boolean
+name|upperCase
+decl_stmt|;
+comment|/**          * If the POS type of this word matches a linkable category          */
+specifier|final
+name|boolean
+name|isLinkablePos
+decl_stmt|;
+comment|/**          * if the POS type of this word matches a matchable category          */
+specifier|final
+name|boolean
+name|isMatchablePos
+decl_stmt|;
+comment|/**          * if this Token represents the start of an sub-sentence such as an           * starting ending quote           * @see ProcessingState#SUB_SENTENCE_START_POS          */
+specifier|final
+name|boolean
+name|isSubSentenceStart
+decl_stmt|;
 comment|/**          * Constructs and initializes meta data needed for linking based           * on the current tokens (and its NLP annotation)          * @param index the index of the Token within the current section          * @param token the token          * @param chunk the current chunk or<code>null</code> if none          */
 name|TokenData
 parameter_list|(
@@ -1951,14 +2127,8 @@ literal|false
 decl_stmt|;
 comment|//matched any of the POS annotations
 comment|//(1) check if this Token should be linked against the Vocabulary (isProcessable)
-name|boolean
 name|upperCase
-init|=
-name|index
-operator|>
-literal|0
-operator|&&
-comment|//not a sentence start
+operator|=
 name|token
 operator|.
 name|getEnd
@@ -1984,26 +2154,39 @@ argument_list|(
 literal|0
 argument_list|)
 argument_list|)
-decl_stmt|;
-comment|//and upper case
-if|if
-condition|(
-name|tpc
-operator|.
-name|isLinkUpperCaseTokens
-argument_list|()
-operator|&&
-name|upperCase
-condition|)
-block|{
-name|isProcessable
-operator|=
-literal|true
 expr_stmt|;
-block|}
-else|else
-block|{
-comment|//else use POS tag& token length
+comment|//and upper case
+name|boolean
+name|isLinkablePos
+init|=
+literal|false
+decl_stmt|;
+name|boolean
+name|isMatchablePos
+init|=
+literal|false
+decl_stmt|;
+name|boolean
+name|isSubSentenceStart
+init|=
+literal|false
+decl_stmt|;
+name|List
+argument_list|<
+name|Value
+argument_list|<
+name|PosTag
+argument_list|>
+argument_list|>
+name|posAnnotations
+init|=
+name|token
+operator|.
+name|getAnnotations
+argument_list|(
+name|POS_ANNOTATION
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|Value
@@ -2012,12 +2195,7 @@ name|PosTag
 argument_list|>
 name|posAnnotation
 range|:
-name|token
-operator|.
-name|getAnnotations
-argument_list|(
-name|POS_ANNOTATION
-argument_list|)
+name|posAnnotations
 control|)
 block|{
 comment|// check three possible match
@@ -2097,11 +2275,11 @@ name|selectedPosTag
 operator|=
 name|posTag
 expr_stmt|;
-name|isProcessable
+name|isLinkablePos
 operator|=
 literal|true
 expr_stmt|;
-name|matchedPosTag
+name|isMatchablePos
 operator|=
 literal|true
 expr_stmt|;
@@ -2132,7 +2310,7 @@ name|matchedPosTag
 operator|=
 literal|true
 expr_stmt|;
-name|isProcessable
+name|isLinkablePos
 operator|=
 literal|false
 expr_stmt|;
@@ -2148,7 +2326,9 @@ condition|)
 block|{
 comment|//not matched against a POS Tag ...
 comment|// ... fall back to the token length
-name|isProcessable
+name|this
+operator|.
+name|isLinkablePos
 operator|=
 name|token
 operator|.
@@ -2164,32 +2344,27 @@ name|getMinSearchTokenLength
 argument_list|()
 expr_stmt|;
 block|}
+else|else
+block|{
+name|this
+operator|.
+name|isLinkablePos
+operator|=
+name|isLinkablePos
+expr_stmt|;
 block|}
 comment|//(2) check if this token should be considered to match labels of suggestions
 if|if
 condition|(
-name|isProcessable
+name|this
+operator|.
+name|isLinkablePos
 condition|)
 block|{
 comment|//processable tokens are also matchable
-name|isMatchable
-operator|=
-literal|true
-expr_stmt|;
-block|}
-elseif|else
-if|if
-condition|(
-name|tpc
+name|this
 operator|.
-name|isMatchUpperCaseTokens
-argument_list|()
-operator|&&
-name|upperCase
-condition|)
-block|{
-comment|//match upper case tokens regardless of POS and length
-name|isMatchable
+name|isMatchablePos
 operator|=
 literal|true
 expr_stmt|;
@@ -2210,12 +2385,7 @@ name|PosTag
 argument_list|>
 name|posAnnotation
 range|:
-name|token
-operator|.
-name|getAnnotations
-argument_list|(
-name|POS_ANNOTATION
-argument_list|)
+name|posAnnotations
 control|)
 block|{
 name|PosTag
@@ -2272,7 +2442,7 @@ operator|=
 name|posTag
 expr_stmt|;
 comment|//mark the matchable as selected PosTag
-name|isMatchable
+name|isMatchablePos
 operator|=
 literal|true
 expr_stmt|;
@@ -2312,7 +2482,7 @@ name|posTag
 expr_stmt|;
 comment|//also rejected PosTags are selected
 block|}
-name|isMatchable
+name|isMatchablePos
 operator|=
 literal|false
 expr_stmt|;
@@ -2334,7 +2504,9 @@ condition|)
 block|{
 comment|//not matched against POS tag ...
 comment|//fall back to the token length
-name|isMatchable
+name|this
+operator|.
+name|isMatchablePos
 operator|=
 name|token
 operator|.
@@ -2350,8 +2522,99 @@ name|getMinSearchTokenLength
 argument_list|()
 expr_stmt|;
 block|}
+else|else
+block|{
+name|this
+operator|.
+name|isMatchablePos
+operator|=
+name|isMatchablePos
+expr_stmt|;
 block|}
-comment|//(3) check for morpho analyses
+block|}
+comment|//(3) check if the POS tag indicates the start/end of an sub-sentence
+for|for
+control|(
+name|Value
+argument_list|<
+name|PosTag
+argument_list|>
+name|posAnnotation
+range|:
+name|posAnnotations
+control|)
+block|{
+name|PosTag
+name|posTag
+init|=
+name|posAnnotation
+operator|.
+name|value
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+operator|(
+operator|!
+name|disjoint
+argument_list|(
+name|SUB_SENTENCE_START_POS
+argument_list|,
+name|posTag
+operator|.
+name|getPosHierarchy
+argument_list|()
+argument_list|)
+operator|)
+condition|)
+block|{
+if|if
+condition|(
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
+operator|>=
+name|tpc
+operator|.
+name|getMinPosAnnotationProbability
+argument_list|()
+condition|)
+block|{
+name|isSubSentenceStart
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|// else probability to low for inclusion
+block|}
+elseif|else
+if|if
+condition|(
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
+operator|>=
+name|tpc
+operator|.
+name|getMinExcludePosAnnotationProbability
+argument_list|()
+condition|)
+block|{
+name|isSubSentenceStart
+operator|=
+literal|false
+expr_stmt|;
+block|}
+block|}
+name|this
+operator|.
+name|isSubSentenceStart
+operator|=
+name|isSubSentenceStart
+expr_stmt|;
+comment|//(4) check for morpho analyses
 if|if
 condition|(
 name|selectedPosTag
@@ -2742,6 +3005,15 @@ name|merged
 operator|.
 name|getEnd
 argument_list|()
+return|;
+block|}
+specifier|public
+name|boolean
+name|isProcessable
+parameter_list|()
+block|{
+return|return
+name|isProcessable
 return|;
 block|}
 block|}

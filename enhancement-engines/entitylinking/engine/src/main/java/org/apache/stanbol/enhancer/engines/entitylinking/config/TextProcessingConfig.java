@@ -390,11 +390,16 @@ name|LanguageConfiguration
 argument_list|(
 name|PROCESSED_LANGUAGES
 argument_list|,
+comment|// link multiple matchable tokens in chunks; link upper case words
 operator|new
 name|String
 index|[]
 block|{
-literal|"*"
+literal|"*;lmmtip;uc=LINK;prop=0.75;pprob=0.75"
+block|,
+literal|"de;uc=MATCH"
+block|,
+comment|//in German all Nouns are upper case
 block|}
 argument_list|)
 decl_stmt|;
