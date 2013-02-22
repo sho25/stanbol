@@ -446,7 +446,6 @@ name|graph
 decl_stmt|;
 if|if
 condition|(
-operator|!
 name|included
 operator|.
 name|isEmpty
@@ -492,10 +491,6 @@ name|System
 operator|.
 name|arraycopy
 argument_list|(
-name|tcs
-argument_list|,
-literal|1
-argument_list|,
 name|included
 operator|.
 name|values
@@ -505,6 +500,10 @@ name|toArray
 argument_list|()
 argument_list|,
 literal|0
+argument_list|,
+name|tcs
+argument_list|,
+literal|1
 argument_list|,
 name|included
 operator|.
