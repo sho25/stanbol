@@ -1747,6 +1747,7 @@ name|getReferredDocumentField
 argument_list|()
 argument_list|)
 expr_stmt|;
+break|break;
 default|default:
 throw|throw
 operator|new
@@ -1781,7 +1782,7 @@ argument_list|(
 literal|2
 argument_list|)
 expr_stmt|;
-comment|//typically onle 1 or 2 values
+comment|//typically only 1 or 2 values
 name|IndexDataTypeEnum
 name|dataTypeConfig
 init|=
