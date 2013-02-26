@@ -1877,7 +1877,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"{} {} {}"
 argument_list|,
