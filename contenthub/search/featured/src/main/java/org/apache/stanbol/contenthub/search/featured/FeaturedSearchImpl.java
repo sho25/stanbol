@@ -1385,6 +1385,13 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+name|facetFields
+operator|!=
+literal|null
+condition|)
+block|{
+if|if
+condition|(
 name|allFacets
 operator|==
 literal|null
@@ -1485,6 +1492,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
@@ -1759,15 +1767,6 @@ argument_list|(
 name|ldProgramName
 argument_list|)
 decl_stmt|;
-name|SolrQueryUtil
-operator|.
-name|setFacetFields
-argument_list|(
-name|solrQuery
-argument_list|,
-name|allFacets
-argument_list|)
-expr_stmt|;
 name|QueryResponse
 name|queryResponse
 init|=
