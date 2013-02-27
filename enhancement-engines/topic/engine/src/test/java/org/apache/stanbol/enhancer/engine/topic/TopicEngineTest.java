@@ -973,6 +973,13 @@ name|trainingSet
 operator|=
 literal|null
 expr_stmt|;
+name|classifier
+operator|.
+name|deactivate
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
 block|}
 specifier|protected
 name|void
