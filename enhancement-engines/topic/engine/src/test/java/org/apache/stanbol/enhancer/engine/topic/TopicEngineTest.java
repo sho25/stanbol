@@ -913,6 +913,14 @@ name|getDefaultClassifierConfigParams
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|//configure the directory used to create Embedded SolrServers for CVFold
+name|classifier
+operator|.
+name|configureEmbeddedSolrServerDir
+argument_list|(
+name|solrHome
+argument_list|)
+expr_stmt|;
 name|trainingSetSolrServer
 operator|=
 name|makeEmbeddedSolrServer
@@ -1132,6 +1140,13 @@ parameter_list|()
 throws|throws
 name|ConfigurationException
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testEngineConfiguration --- "
+argument_list|)
+expr_stmt|;
 name|Hashtable
 argument_list|<
 name|String
@@ -1394,6 +1409,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testImportModelFromSKOS --- "
+argument_list|)
+expr_stmt|;
 name|Parser
 name|parser
 init|=
@@ -1539,6 +1561,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testProgrammaticThesaurusConstruction --- "
+argument_list|)
+expr_stmt|;
 comment|// Register the roots of the taxonomy
 name|classifier
 operator|.
@@ -1883,6 +1912,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testEmptyIndexTopicClassification --- "
+argument_list|)
+expr_stmt|;
 name|TopicClassificationEngine
 name|engine
 init|=
@@ -1933,6 +1969,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testTopicClassification --- "
+argument_list|)
+expr_stmt|;
 name|loadSampleTopicsFromTSV
 argument_list|()
 expr_stmt|;
@@ -1999,6 +2042,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testTrainClassifierFromExamples --- "
+argument_list|)
+expr_stmt|;
 comment|// mini taxonomy for news articles
 name|String
 index|[]
@@ -3021,6 +3071,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testUpdatePerformanceEstimates --- "
+argument_list|)
+expr_stmt|;
 name|ClassificationReport
 name|performanceEstimates
 decl_stmt|;
@@ -3335,6 +3392,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testCrossValidation --- "
+argument_list|)
+expr_stmt|;
 comment|// seed a pseudo random number generator for reproducible tests
 name|Random
 name|rng

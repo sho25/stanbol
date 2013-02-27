@@ -737,6 +737,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testDateSerialization --- "
+argument_list|)
+expr_stmt|;
 name|GregorianCalendar
 name|timeUtc
 init|=
@@ -861,6 +868,13 @@ parameter_list|()
 throws|throws
 name|TrainingSetException
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testEmptyTrainingSet --- "
+argument_list|)
+expr_stmt|;
 name|Batch
 argument_list|<
 name|Example
@@ -1056,6 +1070,13 @@ name|ConfigurationException
 throws|,
 name|TrainingSetException
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testStoringExamples --- "
+argument_list|)
+expr_stmt|;
 name|trainingSet
 operator|.
 name|registerExample
@@ -1516,6 +1537,13 @@ name|ConfigurationException
 throws|,
 name|TrainingSetException
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testBatchingPositiveExamples --- "
+argument_list|)
+expr_stmt|;
 name|Set
 argument_list|<
 name|String
@@ -1872,6 +1900,13 @@ name|ConfigurationException
 throws|,
 name|TrainingSetException
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testBatchingNegativeExamplesAndAutoId --- "
+argument_list|)
+expr_stmt|;
 name|Set
 argument_list|<
 name|String
@@ -2149,6 +2184,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" --- testHasChangedSince --- "
+argument_list|)
+expr_stmt|;
 name|Date
 name|date0
 init|=
