@@ -430,7 +430,7 @@ argument_list|()
 expr_stmt|;
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
 literal|"Loading FOAF ontology from {}"
 argument_list|,
@@ -440,12 +440,7 @@ name|class
 operator|.
 name|getResource
 argument_list|(
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"file.separator"
-argument_list|)
+literal|"/"
 operator|+
 name|LOCAL_RESOURCE_FOAF
 argument_list|)
@@ -463,12 +458,7 @@ name|class
 operator|.
 name|getResource
 argument_list|(
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"file.separator"
-argument_list|)
+literal|"/"
 operator|+
 name|LOCAL_RESOURCE_FOAF
 argument_list|)
