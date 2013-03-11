@@ -1122,6 +1122,11 @@ literal|0
 decl_stmt|;
 try|try
 block|{
+name|ts
+operator|.
+name|reset
+argument_list|()
+expr_stmt|;
 while|while
 condition|(
 name|ts

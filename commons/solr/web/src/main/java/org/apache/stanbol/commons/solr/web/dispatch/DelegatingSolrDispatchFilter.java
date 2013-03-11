@@ -197,12 +197,6 @@ specifier|public
 name|CoreContainer
 name|initialize
 parameter_list|()
-throws|throws
-name|IOException
-throws|,
-name|ParserConfigurationException
-throws|,
-name|SAXException
 block|{
 comment|//support multiple calls
 if|if

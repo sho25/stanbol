@@ -182,7 +182,7 @@ specifier|final
 name|Object
 name|TOKENIZER_FACTORY_CLASS
 init|=
-literal|"org.apache.solr.analysis.SmartChineseSentenceTokenizerFactory"
+literal|"org.apache.lucene.analysis.cn.smart.SmartChineseSentenceTokenizerFactory"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -195,7 +195,7 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"org.apache.solr.analysis.SmartChineseWordTokenFilterFactory"
+literal|"org.apache.lucene.analysis.cn.smart.SmartChineseWordTokenFilterFactory"
 block|}
 decl_stmt|;
 specifier|private
