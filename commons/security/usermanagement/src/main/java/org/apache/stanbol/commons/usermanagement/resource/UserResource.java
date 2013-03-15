@@ -21,6 +21,20 @@ end_package
 
 begin_import
 import|import
+name|com
+operator|.
+name|sun
+operator|.
+name|jersey
+operator|.
+name|multipart
+operator|.
+name|FormDataParam
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -329,6 +343,20 @@ name|rs
 operator|.
 name|core
 operator|.
+name|UriBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
 name|UriInfo
 import|;
 end_import
@@ -409,6 +437,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|MGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|NonLiteral
 import|;
 end_import
@@ -441,7 +485,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Triple
+name|Resource
 import|;
 end_import
 
@@ -457,7 +501,7 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Resource
+name|Triple
 import|;
 end_import
 
@@ -681,6 +725,22 @@ name|rdf
 operator|.
 name|ontologies
 operator|.
+name|PERMISSION
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|ontologies
+operator|.
 name|PLATFORM
 import|;
 end_import
@@ -821,22 +881,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|ontologies
-operator|.
-name|PERMISSION
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|stanbol
 operator|.
 name|commons
@@ -898,100 +942,6 @@ operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataParam
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|net
-operator|.
-name|URISyntaxException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MultivaluedMap
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Request
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|UriBuilder
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
 import|;
 end_import
 
@@ -1091,7 +1041,7 @@ block|}
 comment|// **********************************
 comment|// ****** SHOW USER DETAILS ******
 comment|// **********************************
-comment|/**      *       * @param userName      * @return       */
+comment|/**      * lookup a user by name.      *      * @param userName      * @return      */
 annotation|@
 name|GET
 annotation|@
@@ -1119,12 +1069,11 @@ name|String
 name|userName
 parameter_list|)
 block|{
-comment|// System.out.println("HEEEEEEEEEEEEEEEEERE");
 return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"edit.ftl"
+literal|"edit"
 argument_list|,
 name|getUser
 argument_list|(
@@ -1138,6 +1087,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**      * lookup a user by name presenting it with "editUser" as rendering      * instruction.      *      * @param userName      * @return      */
 annotation|@
 name|GET
 annotation|@
@@ -1169,7 +1119,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"editUser.ftl"
+literal|"editUser"
 argument_list|,
 name|getUser
 argument_list|(
@@ -1183,6 +1133,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**      * Produces suitable permission-checkboxes      */
 annotation|@
 name|GET
 annotation|@
@@ -1215,7 +1166,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"permissionsCheckboxes.ftl"
+literal|"permissionsCheckboxes"
 argument_list|,
 name|getUser
 argument_list|(
@@ -1398,9 +1349,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|// **********************************
-comment|// ****** UPDATE USER DETAILS *******
-comment|// **********************************
+comment|/**      * Update user details.      *      * @param uriInfo      * @param currentLogin      * @param newLogin      * @param fullName      * @param email      * @param password      * @param roles      * @param permissions      * @return      */
 annotation|@
 name|POST
 annotation|@
@@ -1507,7 +1456,6 @@ name|trim
 argument_list|()
 expr_stmt|;
 block|}
-comment|// System.out.println("CURRENTUSERNAME = ["+currentUserName+"]");
 if|if
 condition|(
 name|currentLogin
@@ -1553,9 +1501,6 @@ name|permissions
 argument_list|)
 return|;
 block|}
-comment|//        try {
-comment|//             userNode = getUser(newLogin);
-comment|//        } catch(Exception e) {
 name|userNode
 operator|=
 name|createUser
@@ -1563,8 +1508,6 @@ argument_list|(
 name|newLogin
 argument_list|)
 expr_stmt|;
-comment|//  }
-comment|// System.out.println("NEWLOGIN = [" + newLogin + "]");
 return|return
 name|store
 argument_list|(
@@ -1588,6 +1531,7 @@ name|permissions
 argument_list|)
 return|;
 block|}
+comment|/**      * produces suitable role checkboxes      *      * @return      */
 annotation|@
 name|GET
 annotation|@
@@ -1611,7 +1555,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"rolesCheckboxes.ftl"
+literal|"rolesCheckboxes"
 argument_list|,
 name|getRoleType
 argument_list|()
@@ -1623,8 +1567,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|// needs refactoring and locks adding?
-comment|/*      * API/Turtle style      */
+comment|/*      * Modify user given give a graph describing the change.      */
 annotation|@
 name|POST
 annotation|@
@@ -1952,7 +1895,7 @@ name|String
 name|userName
 parameter_list|)
 block|{
-comment|// return new RdfViewable("rolesCheckboxes.ftl", getRoleType(), this.getClass());
+comment|// return new RdfViewable("rolesCheckboxes", getRoleType(), this.getClass());
 name|StringBuffer
 name|html
 init|=
@@ -2338,9 +2281,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|// **********************************
-comment|// ****** LIST USERS ******
-comment|// **********************************
+comment|/**      * List the users. I.e. renders the user type with the "listUser" rendering      * specification.      *      * @return      */
 annotation|@
 name|GET
 annotation|@
@@ -2364,7 +2305,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"listUser.ftl"
+literal|"listUser"
 argument_list|,
 name|getUserType
 argument_list|()
@@ -2376,9 +2317,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|// **********************************
-comment|// ****** CREATE USER ******
-comment|// **********************************
+comment|/**      * Create a user. I.e. returns a dummy use with "editUSer" as rendering      * specification.      *      * @param uriInfo      * @return      */
 annotation|@
 name|GET
 annotation|@
@@ -2400,7 +2339,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"editUser.ftl"
+literal|"editUser"
 argument_list|,
 name|dummyNode
 argument_list|,
@@ -2411,7 +2350,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Endpoint-style user creation takes a little bunch of Turtle e.g. [] a      * foaf:Agent ; cz:userName "Hugo Ball" .      *       * [has test]      *      * @param userData      * @return HTTP/1.1 204 No Content      */
+comment|/**      * Endpoint-style user creation takes a little bunch of Turtle e.g. [] a      * foaf:Agent ; cz:userName "Hugo Ball" .      *      * [has test]      *      * @param userData      * @return HTTP/1.1 204 No Content      */
 annotation|@
 name|POST
 comment|// @TODO add RESTful PUT version
@@ -2645,8 +2584,6 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|//  // http://localhost:8080/user-management/add-user/user-management/users/hugob
-comment|// http://localhost:8080/user-management/users/hugob
 comment|// **********************************
 comment|// ****** REMOVE USER ***************
 comment|// **********************************
@@ -3028,7 +2965,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"listRole.ftl"
+literal|"listRole"
 argument_list|,
 name|getRoleType
 argument_list|()
@@ -3081,7 +3018,7 @@ return|return
 operator|new
 name|RdfViewable
 argument_list|(
-literal|"listPermission.ftl"
+literal|"listPermission"
 argument_list|,
 name|getPermissionType
 argument_list|()
@@ -3560,11 +3497,6 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|//  System.out.println("AFTER ========================================================");
-comment|//        serializeTriplesWithSubject(System.out, userNode);
-comment|//        serializer.serialize(System.out, systemGraph, SupportedFormat.TURTLE);
-comment|//        System.out
-comment|//                .println("^^^^ ========================================================");
 name|URI
 name|pageUri
 init|=
@@ -4131,7 +4063,7 @@ return|return
 name|rolesGraph
 return|;
 block|}
-comment|/**      **********************      * helper methods *********************      */
+comment|/**      * Creates a new user withe the specified user name      *      * @param newUserName      * @return      */
 specifier|private
 name|GraphNode
 name|createUser

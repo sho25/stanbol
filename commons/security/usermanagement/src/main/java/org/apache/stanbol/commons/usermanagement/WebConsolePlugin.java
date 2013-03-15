@@ -87,22 +87,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|felix
 operator|.
 name|scr
@@ -342,6 +326,8 @@ return|return
 name|NAME
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|renderContent
@@ -375,8 +361,6 @@ name|getWriter
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// serializer.serialize(System.out, userManager.getUserType().getGraph(), SupportedFormat.TURTLE);
-comment|// log me for debug!
 block|}
 annotation|@
 name|Override
@@ -423,6 +407,8 @@ name|bundleContext
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|deactivate
