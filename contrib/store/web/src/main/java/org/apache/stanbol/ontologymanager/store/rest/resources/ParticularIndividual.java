@@ -355,22 +355,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|api
-operator|.
-name|view
-operator|.
-name|ImplicitProduces
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
