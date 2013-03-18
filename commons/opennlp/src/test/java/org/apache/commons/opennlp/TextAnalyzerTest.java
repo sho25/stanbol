@@ -17,9 +17,9 @@ end_package
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -176,6 +176,12 @@ import|;
 end_import
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+comment|//test for a deprecated component
 specifier|public
 class|class
 name|TextAnalyzerTest
