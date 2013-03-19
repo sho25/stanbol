@@ -31,6 +31,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|PlainLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|UriRef
 import|;
 end_import
@@ -217,6 +233,8 @@ literal|"relation"
 argument_list|)
 decl_stmt|;
 comment|/**      * A point on the surface of the earth given by two signed floats (latitude      * and longitude) concatenated as a string literal using a whitespace as      * separator.      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -233,6 +251,8 @@ operator|+
 literal|"point"
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -249,6 +269,8 @@ operator|+
 literal|"lat"
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -380,6 +402,74 @@ operator|.
 name|fise
 operator|+
 literal|"selection-context"
+argument_list|)
+decl_stmt|;
+comment|/**      * The prefix of the {@link #ENHANCER_SELECTED_TEXT}. Intended to be used      * to find the exact position within the text if char indexes can not be used      * @since 0.11.0      */
+specifier|public
+specifier|final
+specifier|static
+name|UriRef
+name|ENHANCER_SELECTION_PREFIX
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"selection-prefix"
+argument_list|)
+decl_stmt|;
+comment|/**      * The first few chars of the {@link #ENHANCER_SELECTED_TEXT}. To be used if      * the selected text is to long to be included as a {@link PlainLiteral} (      * e.g. when selection sentences or whole sections of the text).      * @since 0.11.0      */
+specifier|public
+specifier|final
+specifier|static
+name|UriRef
+name|ENHANCER_SELECTION_HEAD
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"selection-head"
+argument_list|)
+decl_stmt|;
+comment|/**      * The last few chars of the {@link #ENHANCER_SELECTED_TEXT}. To be used if      * the selected text is to long to be included as a {@link PlainLiteral} (      * e.g. when selection sentences or whole sections of the text).      * @since 0.11.0      */
+specifier|public
+specifier|final
+specifier|static
+name|UriRef
+name|ENHANCER_SELECTION_TAIL
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"selection-tail"
+argument_list|)
+decl_stmt|;
+comment|/**      * The suffix of the {@link #ENHANCER_SELECTED_TEXT}. Intended to be used      * to find the exact position within the text if char indexes can not be used      * @since 0.11.0      */
+specifier|public
+specifier|final
+specifier|static
+name|UriRef
+name|ENHANCER_SELECTION_SUFFIX
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"selection-suffix"
 argument_list|)
 decl_stmt|;
 comment|/**      * A positive double value to rank extractions according to the algorithm      * confidence in the accuracy of the extraction.      */
@@ -523,6 +613,8 @@ literal|"subject"
 argument_list|)
 decl_stmt|;
 comment|/**      * The sha1 hexadecimal digest of a content item.      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
