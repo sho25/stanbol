@@ -2329,7 +2329,7 @@ name|maxEnhancementJobWaitTime
 parameter_list|)
 block|{
 name|boolean
-name|acquire
+name|finished
 init|=
 literal|false
 decl_stmt|;
@@ -2346,7 +2346,7 @@ block|{
 comment|// The only permit is taken by the EnhancementJobHander
 try|try
 block|{
-name|acquire
+name|finished
 operator|=
 name|semaphore
 operator|.
@@ -2376,7 +2376,7 @@ name|e
 parameter_list|)
 block|{
 comment|//interupted
-name|acquire
+name|finished
 operator|=
 literal|false
 expr_stmt|;
@@ -2390,37 +2390,22 @@ name|hasCompleted
 argument_list|()
 condition|)
 block|{
-name|int
-name|wait
-init|=
-name|Math
-operator|.
-name|max
-argument_list|(
-literal|100
-argument_list|,
-name|maxEnhancementJobWaitTime
-operator|/
-literal|10
-argument_list|)
-decl_stmt|;
 name|log
 operator|.
-name|warn
+name|error
 argument_list|(
-literal|"Unexpected permit available for Semaphore of "
+literal|"Unexpected {} permit(s) (expected = 0) available for "
 operator|+
-literal|"EnhancementJob of ContentItem {}. Fallback to wait({})"
+literal|"Semaphore of  EnhancementJob of ContentItem {}. Please "
 operator|+
-literal|"for detecting if Job has finished. While the fallback "
+literal|"report this on dev@stanbol.apache.org and/or the Apache "
 operator|+
-literal|"should ensure correct Enhancement results this indicates a "
-operator|+
-literal|"Bug in the EventHobManager. Please feel free to report "
-operator|+
-literal|"This on dev@stanbol.apache.org or the Apache Stanbol "
-operator|+
-literal|"Issue Tracker."
+literal|"Stanbol Issue Tracker."
+argument_list|,
+name|semaphore
+operator|.
+name|availablePermits
+argument_list|()
 argument_list|,
 name|enhancementJob
 operator|.
@@ -2429,39 +2414,23 @@ argument_list|()
 operator|.
 name|getUri
 argument_list|()
-argument_list|,
-name|wait
 argument_list|)
 expr_stmt|;
-try|try
-block|{
-name|Thread
-operator|.
-name|currentThread
-argument_list|()
-operator|.
-name|wait
-argument_list|(
-name|wait
-argument_list|)
+name|finished
+operator|=
+literal|false
 expr_stmt|;
 block|}
-catch|catch
-parameter_list|(
-name|InterruptedException
-name|e
-parameter_list|)
+else|else
 block|{
-comment|//interupted
-block|}
-name|acquire
+comment|//already completed
+name|finished
 operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|// else completed
 return|return
-name|acquire
+name|finished
 return|;
 block|}
 block|}
