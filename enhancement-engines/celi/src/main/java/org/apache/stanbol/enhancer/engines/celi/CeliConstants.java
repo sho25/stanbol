@@ -78,6 +78,17 @@ name|CELI_TEST_ACCOUNT
 init|=
 literal|"celi.testaccount"
 decl_stmt|;
+name|String
+name|CELI_CONNECTION_TIMEOUT
+init|=
+literal|"celi.connectionTimeout"
+decl_stmt|;
+comment|/**      * The default connection timeout for HTTP connections (30sec)      */
+name|int
+name|DEFAULT_CONECTION_TIMEOUT
+init|=
+literal|30
+decl_stmt|;
 comment|/**      * Concept used to annotate sentiment expressions within text      *  TODO: Find standard ontology for reference or check if it is OK to define new properties in the FISE namespace      */
 name|UriRef
 name|SENTIMENT_EXPRESSION

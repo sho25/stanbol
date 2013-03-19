@@ -915,6 +915,17 @@ name|properties
 operator|.
 name|put
 argument_list|(
+name|CeliConstants
+operator|.
+name|CELI_CONNECTION_TIMEOUT
+argument_list|,
+literal|"5"
+argument_list|)
+expr_stmt|;
+name|properties
+operator|.
+name|put
+argument_list|(
 name|MORPHOLOGICAL_ANALYSIS
 argument_list|,
 name|completeMorphoAnalysis

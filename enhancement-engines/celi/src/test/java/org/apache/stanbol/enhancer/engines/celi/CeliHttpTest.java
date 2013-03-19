@@ -77,16 +77,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -122,6 +112,16 @@ operator|.
 name|helper
 operator|.
 name|RemoteServiceHelper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 import|;
 end_import
 
@@ -207,6 +207,8 @@ name|CELI_LANGID_SERVICE_URL
 argument_list|)
 argument_list|,
 literal|"nonexistent:useraccount"
+argument_list|,
+literal|5
 argument_list|)
 decl_stmt|;
 name|testClient
@@ -249,6 +251,8 @@ name|CELI_LANGID_SERVICE_URL
 argument_list|)
 argument_list|,
 literal|"illeagalFormatted"
+argument_list|,
+literal|5
 argument_list|)
 decl_stmt|;
 name|testClient
@@ -284,6 +288,8 @@ name|CELI_LANGID_SERVICE_URL
 argument_list|)
 argument_list|,
 literal|null
+argument_list|,
+literal|5
 argument_list|)
 decl_stmt|;
 try|try

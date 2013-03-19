@@ -667,6 +667,17 @@ argument_list|,
 name|CELI_SENTIMENT_ANALYSIS_SERVICE_URL
 argument_list|)
 expr_stmt|;
+name|properties
+operator|.
+name|put
+argument_list|(
+name|CeliConstants
+operator|.
+name|CELI_CONNECTION_TIMEOUT
+argument_list|,
+literal|"5"
+argument_list|)
+expr_stmt|;
 name|MockComponentContext
 name|context
 init|=

@@ -67,16 +67,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
-operator|.
-name|Writer
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|net
 operator|.
 name|HttpURLConnection
@@ -122,16 +112,6 @@ operator|.
 name|util
 operator|.
 name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashSet
 import|;
 end_import
 
@@ -272,20 +252,6 @@ operator|.
 name|util
 operator|.
 name|Base64
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|io
-operator|.
-name|IOUtils
 import|;
 end_import
 
@@ -483,8 +449,11 @@ specifier|final
 name|String
 name|licenseKey
 decl_stmt|;
-comment|//NOTE: the request headers are the same for all request - so they can be
-comment|//      initialized in the constructor.
+specifier|private
+specifier|final
+name|int
+name|conTimeout
+decl_stmt|;
 specifier|private
 specifier|final
 name|Map
@@ -503,6 +472,9 @@ name|serviceUrl
 parameter_list|,
 name|String
 name|licenseKey
+parameter_list|,
+name|int
+name|conTimeout
 parameter_list|)
 block|{
 name|this
@@ -516,6 +488,12 @@ operator|.
 name|licenseKey
 operator|=
 name|licenseKey
+expr_stmt|;
+name|this
+operator|.
+name|conTimeout
+operator|=
+name|conTimeout
 expr_stmt|;
 name|Map
 argument_list|<
@@ -591,42 +569,6 @@ name|headers
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* 	 * NOTE: parsing/returning a String requires to create in-memory copies 	 *       of the sent/received data. Imaging users that send the text of 	 *       100 pages PDF files to the Stanbol Enhancer. 	 *       Because of that an implementation that directly streams the 	 *       StringEscapeUtils.escapeXml(..) to the request is preferable  	 *        	 *       This will no longer allow to debug the data of the request and 	 *       response. See the commented main method at the end for alternatives 	 */
-comment|//	public String doPostRequest(URL url, String body) throws IOException {
-comment|//
-comment|//		HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-comment|//		urlConn.setRequestMethod("POST");
-comment|//		urlConn.setDoInput(true);
-comment|//		if (null != body) {
-comment|//			urlConn.setDoOutput(true);
-comment|//		} else {
-comment|//			urlConn.setDoOutput(false);
-comment|//		}
-comment|//		urlConn.setUseCaches(false);
-comment|//		String	contentType = "text/xml; charset=utf-8";
-comment|//		urlConn.setRequestProperty("Content-Type", contentType);
-comment|//		if(this.licenseKey!=null){
-comment|//			String encoded = Base64.encode(this.licenseKey.getBytes("UTF-8"));
-comment|//			urlConn.setRequestProperty("Authorization", "Basic "+encoded);
-comment|//		}
-comment|//
-comment|//		// send POST output
-comment|//		if (null != body) {
-comment|//			OutputStreamWriter printout = new OutputStreamWriter(urlConn.getOutputStream(), "UTF-8");
-comment|//			printout.write(body);
-comment|//			printout.flush();
-comment|//			printout.close();
-comment|//		}
-comment|//
-comment|//		//close connection
-comment|//		urlConn.disconnect();
-comment|//
-comment|//		// get response data
-comment|//		return IOUtils.toString(urlConn.getInputStream(), "UTF-8");
-comment|//	}
-comment|//NOTE: forward IOException and SOAPExceptions to allow correct error handling
-comment|//      by the EnhancementJobManager.
-comment|//      Also RuntimeExceptions MUST NOT be cached out of the same reason!
 specifier|public
 name|List
 argument_list|<
@@ -676,6 +618,8 @@ argument_list|(
 name|serviceEP
 argument_list|,
 name|requestHeaders
+argument_list|,
+name|conTimeout
 argument_list|)
 decl_stmt|;
 comment|//"stream" the request content directly to the buffered writer
@@ -816,11 +760,6 @@ operator|-
 name|start
 argument_list|)
 expr_stmt|;
-comment|//NOTE: forward IOException and SOAPExceptions to allow correct error handling
-comment|//      by the EnhancementJobManager.
-comment|//      Also RuntimeExceptions MUST NOT be cached out of the same reason!
-comment|//		try {
-comment|// Create SoapMessage
 name|MessageFactory
 name|msgFactory
 init|=
@@ -845,8 +784,6 @@ operator|.
 name|getSOAPPart
 argument_list|()
 decl_stmt|;
-comment|// NOTE: directly use the InputStream provided by the URLConnection!
-comment|//			ByteArrayInputStream stream = new ByteArrayInputStream(responseXml.getBytes("UTF-8"));
 name|StreamSource
 name|source
 init|=
@@ -897,19 +834,6 @@ argument_list|,
 literal|"return"
 argument_list|)
 decl_stmt|;
-name|HashSet
-argument_list|<
-name|String
-argument_list|>
-name|inserted
-init|=
-operator|new
-name|HashSet
-argument_list|<
-name|String
-argument_list|>
-argument_list|()
-decl_stmt|;
 for|for
 control|(
 name|int
@@ -932,9 +856,6 @@ name|i
 operator|++
 control|)
 block|{
-comment|//NOTE: do not catch RuntimeExceptions. Error handling is done by
-comment|//      the EnhancementJobManager!
-comment|//			try {
 name|Element
 name|result
 init|=
@@ -1045,13 +966,7 @@ name|confidence
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//			} catch (Exception e) {
-comment|//				e.printStackTrace();
-comment|//			}
 block|}
-comment|//		} catch (Exception e) {
-comment|//			e.printStackTrace();
-comment|//		}
 return|return
 name|extractedConcepts
 return|;
@@ -1171,226 +1086,6 @@ operator|)
 argument_list|)
 return|;
 comment|//the Class for the label
-block|}
-comment|//NOTE: If you stream the contents directly to the stream, you can no longer
-comment|//      debug the request/response. Because of that it is sometimes
-comment|//      helpful to have a main method for those tests
-comment|//      An even better variant would be to write a UnitTest for that!!
-comment|//      This would be recommended of the called service is still in beta
-comment|//      and may change at any time
-specifier|public
-specifier|static
-name|void
-name|main
-parameter_list|(
-name|String
-index|[]
-name|args
-parameter_list|)
-throws|throws
-name|Exception
-block|{
-name|String
-name|lang
-init|=
-literal|"fr"
-decl_stmt|;
-name|String
-name|text
-init|=
-literal|"Brigitte Bardot, née  le 28 septembre "
-operator|+
-literal|"1934 à Paris, est une actrice de cinéma et chanteuse française."
-decl_stmt|;
-comment|//For request testing
-comment|//Writer request = new StringWriter();
-comment|//For response testing
-name|HttpURLConnection
-name|con
-init|=
-name|Utils
-operator|.
-name|createPostRequest
-argument_list|(
-operator|new
-name|URL
-argument_list|(
-literal|"http://linguagrid.org/LSGrid/ws/dbpedia-classification"
-argument_list|)
-argument_list|,
-name|Collections
-operator|.
-name|singletonMap
-argument_list|(
-literal|"Content-Type"
-argument_list|,
-name|CONTENT_TYPE
-argument_list|)
-argument_list|)
-decl_stmt|;
-name|Writer
-name|request
-init|=
-operator|new
-name|OutputStreamWriter
-argument_list|(
-name|con
-operator|.
-name|getOutputStream
-argument_list|()
-argument_list|,
-name|UTF8
-argument_list|)
-decl_stmt|;
-comment|//"stream" the request content directly to the buffered writer
-name|BufferedWriter
-name|writer
-init|=
-operator|new
-name|BufferedWriter
-argument_list|(
-name|request
-argument_list|)
-decl_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-name|SOAP_PREFIX
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"<clas:classify>"
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"<clas:user>wiki</clas:user>"
-argument_list|)
-expr_stmt|;
-comment|//TODO: should the user be configurable?
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"<clas:model>"
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-name|lang
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"</clas:model>"
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"<clas:text>"
-argument_list|)
-expr_stmt|;
-name|StringEscapeUtils
-operator|.
-name|escapeXml
-argument_list|(
-name|writer
-argument_list|,
-name|text
-argument_list|)
-expr_stmt|;
-comment|//write the escaped text directly to the request
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"</clas:text>"
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-literal|"</clas:classify>"
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|write
-argument_list|(
-name|SOAP_SUFFIX
-argument_list|)
-expr_stmt|;
-name|writer
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-comment|//log the Request (if request testing)
-comment|//log.info("Request \n{}",request.toString());
-comment|//for response testing we need to call the service
-comment|//Call the service
-name|long
-name|start
-init|=
-name|System
-operator|.
-name|currentTimeMillis
-argument_list|()
-decl_stmt|;
-name|InputStream
-name|stream
-init|=
-name|con
-operator|.
-name|getInputStream
-argument_list|()
-decl_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Request to took {}ms"
-argument_list|,
-name|System
-operator|.
-name|currentTimeMillis
-argument_list|()
-operator|-
-name|start
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Response:\n{}"
-argument_list|,
-name|IOUtils
-operator|.
-name|toString
-argument_list|(
-name|stream
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|stream
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 end_class

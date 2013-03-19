@@ -404,6 +404,11 @@ name|requestHeaders
 decl_stmt|;
 specifier|private
 specifier|final
+name|int
+name|conTimeout
+decl_stmt|;
+specifier|private
+specifier|final
 name|Logger
 name|log
 init|=
@@ -423,6 +428,9 @@ name|serviceUrl
 parameter_list|,
 name|String
 name|licenseKey
+parameter_list|,
+name|int
+name|conTimeout
 parameter_list|)
 block|{
 name|this
@@ -430,6 +438,12 @@ operator|.
 name|serviceEP
 operator|=
 name|serviceUrl
+expr_stmt|;
+name|this
+operator|.
+name|conTimeout
+operator|=
+name|conTimeout
 expr_stmt|;
 name|Map
 argument_list|<
@@ -551,6 +565,8 @@ argument_list|(
 name|serviceEP
 argument_list|,
 name|requestHeaders
+argument_list|,
+name|conTimeout
 argument_list|)
 decl_stmt|;
 comment|//write content
@@ -859,6 +875,8 @@ argument_list|(
 name|serviceEP
 argument_list|,
 name|requestHeaders
+argument_list|,
+name|conTimeout
 argument_list|)
 decl_stmt|;
 comment|//write content
