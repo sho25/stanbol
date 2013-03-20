@@ -1504,7 +1504,7 @@ operator|.
 name|getSpan
 argument_list|()
 operator|+
-literal|" of ContentItem "
+literal|"' of ContentItem "
 operator|+
 name|ci
 operator|.
