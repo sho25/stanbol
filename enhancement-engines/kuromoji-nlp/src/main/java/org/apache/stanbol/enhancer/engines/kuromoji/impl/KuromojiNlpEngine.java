@@ -1351,7 +1351,7 @@ name|PROPERTY_NAME
 argument_list|,
 name|value
 operator|=
-literal|"kuromoji-token"
+literal|"kuromoji-nlp"
 argument_list|)
 block|,
 annotation|@
@@ -2818,12 +2818,25 @@ name|ce
 argument_list|)
 expr_stmt|;
 comment|//init the Solr ResourceLoader used for initialising the components
+comment|//first a ResourceLoader for this classloader, 2nd one using the commons.solr.core classloader
+comment|//and third the parentResourceLoader (if present).
 name|resourceLoader
 operator|=
 operator|new
 name|StanbolResourceLoader
 argument_list|(
+name|KuromojiNlpEngine
+operator|.
+name|class
+operator|.
+name|getClassLoader
+argument_list|()
+argument_list|,
+operator|new
+name|StanbolResourceLoader
+argument_list|(
 name|parentResourceLoader
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|tokenizerFactory
