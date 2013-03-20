@@ -93,9 +93,11 @@ name|org
 operator|.
 name|apache
 operator|.
-name|solr
+name|lucene
 operator|.
-name|common
+name|analysis
+operator|.
+name|util
 operator|.
 name|ResourceLoader
 import|;
@@ -168,7 +170,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Solr {@link ResourceLoader} implementation that supports adding an parent as  * well as parsing the classloader used for   * {@link #newInstance(String, String...)}.<p>  * This implementation can be used in combination with the   * {@link DataFileResourceLoader} to allow providing resources via the  * Stanbol {@link DataFileProvider} infrastructure.<p>  * The {@link #newInstance(String, String...)} method uses the same algorithm as  * the {@link SolrResourceLoader#newInstance(String, String...)} method to   * build candidate class names. It also supports the default packages if  *<code>null</code> or an empty array is parsed as second parameter.  * @author Rupert Westenthaler  *  */
+comment|/**  * Solr {@link ResourceLoader} implementation that supports adding an parent as  * well as parsing the classloader used for   * {@link #newInstance(String, Class)}.<p>  * This implementation can be used in combination with the   * {@link DataFileResourceLoader} to allow providing resources via the  * Stanbol {@link DataFileProvider} infrastructure.<p>  * The {@link #newInstance(String, Class)} method uses the same algorithm as  * the {@link SolrResourceLoader#newInstance(String, Class)} method to  * build candidate class names. It supports the default packages.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -483,8 +485,6 @@ return|return
 name|in
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|List
 argument_list|<
@@ -580,15 +580,20 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Object
+parameter_list|<
+name|T
+parameter_list|>
+name|T
 name|newInstance
 parameter_list|(
 name|String
 name|cname
 parameter_list|,
-name|String
-modifier|...
-name|subpackages
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|expectedType
 parameter_list|)
 block|{
 name|String
@@ -612,7 +617,7 @@ name|newInstance
 argument_list|(
 name|cname
 argument_list|,
-name|subpackages
+name|expectedType
 argument_list|)
 return|;
 block|}
@@ -642,29 +647,10 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-if|if
-condition|(
-name|subpackages
-operator|==
-literal|null
-operator|||
-name|subpackages
-operator|.
-name|length
-operator|==
-literal|0
-operator|||
-name|subpackages
-operator|==
-name|packages
-condition|)
-block|{
-name|subpackages
-operator|=
-name|packages
-expr_stmt|;
-block|}
 name|Class
+argument_list|<
+name|T
+argument_list|>
 name|clazz
 init|=
 literal|null
@@ -674,6 +660,12 @@ try|try
 block|{
 name|clazz
 operator|=
+operator|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+operator|)
 name|classloader
 operator|.
 name|loadClass
@@ -684,7 +676,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ClassNotFoundException
+name|Exception
 name|e
 parameter_list|)
 block|{
@@ -723,7 +715,7 @@ control|(
 name|String
 name|subpackage
 range|:
-name|subpackages
+name|packages
 control|)
 block|{
 try|try
@@ -750,6 +742,12 @@ argument_list|)
 expr_stmt|;
 name|clazz
 operator|=
+operator|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+operator|)
 name|classloader
 operator|.
 name|loadClass
@@ -761,7 +759,7 @@ break|break;
 block|}
 catch|catch
 parameter_list|(
-name|ClassNotFoundException
+name|Exception
 name|e1
 parameter_list|)
 block|{

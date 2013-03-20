@@ -55,47 +55,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Iterator
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|collections
-operator|.
-name|Predicate
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|collections
-operator|.
-name|iterators
-operator|.
-name|FilterIterator
 import|;
 end_import
 
@@ -197,9 +157,11 @@ name|org
 operator|.
 name|apache
 operator|.
-name|solr
+name|lucene
 operator|.
-name|common
+name|analysis
+operator|.
+name|util
 operator|.
 name|ResourceLoader
 import|;
@@ -224,7 +186,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SolrResourceLoader that supports loading resources via the Apache Stanbol  * {@link DataFileProvider}<p>  * This does NOT implement the {@link #newInstance(String, String...)} method.  * Calls will throw an {@link UnsupportedOperationException}.  * Users that need to also load classes should combine this implementation with  * the {@link StanbolResourceLoader} that supports instantiation of classes via  * the parsed ClassLoader.  * @author Rupert Westenthaler  *  */
+comment|/**  * SolrResourceLoader that supports loading resources via the Apache Stanbol  * {@link DataFileProvider}<p>  * This does NOT implement the {@link #newInstance(String, Class)} method.  * Calls will throw an {@link UnsupportedOperationException}.  * Users that need to also load classes should combine this implementation with  * the {@link StanbolResourceLoader} that supports instantiation of classes via  * the parsed ClassLoader.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -332,8 +294,6 @@ literal|null
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|List
 argument_list|<
@@ -426,19 +386,24 @@ return|return
 name|lines
 return|;
 block|}
-comment|/**      * Not implemented!      * @throws UnsupportedOperationException on every call to this mehtod      * @see StanbolResourceLoader#newInstance(String, String...)      */
+comment|/**      * Not implemented!      * @throws UnsupportedOperationException on every call to this mehtod      * @see StanbolResourceLoader#newInstance(String, Class)      */
 annotation|@
 name|Override
 specifier|public
-name|Object
+parameter_list|<
+name|T
+parameter_list|>
+name|T
 name|newInstance
 parameter_list|(
 name|String
 name|cname
 parameter_list|,
-name|String
-modifier|...
-name|subpackages
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|expectedType
 parameter_list|)
 throws|throws
 name|UnsupportedOperationException

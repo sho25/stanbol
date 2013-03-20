@@ -162,7 +162,7 @@ specifier|final
 name|Object
 name|TOKENIZER_FACTORY_CLASS
 init|=
-literal|"org.apache.solr.analysis.WhitespaceTokenizerFactory"
+literal|"org.apache.lucene.analysis.core.WhitespaceTokenizerFactory"
 decl_stmt|;
 specifier|private
 specifier|static

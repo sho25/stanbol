@@ -858,6 +858,16 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|private
+name|org
+operator|.
+name|apache
+operator|.
+name|lucene
+operator|.
+name|analysis
+operator|.
+name|en
+operator|.
 name|EnglishMinimalStemmer
 name|stemmer
 init|=

@@ -2586,7 +2586,7 @@ expr_stmt|;
 comment|//close the core
 block|}
 block|}
-comment|/**          * The name under witch the {@link #getCore() SolrCore} is registered.          * {@link SolrCore#getName()} MAY NOT be equals to the name returned by          * this Method.          * @return the name under witch the SolrCore is registered. This can be          * also retrieved by using {@link ServiceReference#getProperty(String)          * gerServiceReference().getProperty(String)} with the key          * {@link SolrConstants#NAME}.          */
+comment|/**          * The name under witch the {@link #getCore() SolrCore} is registered.          * {@link SolrCore#getName()} MAY NOT be equals to the name returned by          * this Method.          * @return the name under witch the SolrCore is registered. This can be          * also retrieved by using {@link ServiceReference#getProperty(String)          * gerServiceReference().getProperty(String)} with the key          * {@link SolrConstants#PROPERTY_CORE_NAME}.          */
 specifier|public
 name|String
 name|getName

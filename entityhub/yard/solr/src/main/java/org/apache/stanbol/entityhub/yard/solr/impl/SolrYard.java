@@ -2280,59 +2280,15 @@ argument_list|()
 expr_stmt|;
 comment|//TODO: remove and replace with a setting where the SolrYard does not
 comment|//      not activate until the SolrServer is available.
-if|if
-condition|(
-name|server
-operator|==
-literal|null
-condition|)
-block|{
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-literal|5
-condition|;
-name|i
-operator|++
-control|)
-block|{
-comment|//waiting for a maximum of 5sec
-try|try
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... waiting 1sec for SolrServer"
-argument_list|)
-expr_stmt|;
-name|server
-operator|=
-operator|(
-name|SolrServer
-operator|)
-name|_registeredServerTracker
-operator|.
-name|waitForService
-argument_list|(
-literal|1000
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|InterruptedException
-name|e
-parameter_list|)
-block|{}
-block|}
-block|}
+comment|//            if(server == null){
+comment|//                for(int i = 0;i<5;i++){//waiting for a maximum of 5sec
+comment|//                    try {
+comment|//                        log.info(" ... waiting 1sec for SolrServer");
+comment|//
+comment|//                        server = (SolrServer)_registeredServerTracker.waitForService(1000);
+comment|//                    } catch (InterruptedException e) {}
+comment|//                }
+comment|//            }
 if|if
 condition|(
 name|server

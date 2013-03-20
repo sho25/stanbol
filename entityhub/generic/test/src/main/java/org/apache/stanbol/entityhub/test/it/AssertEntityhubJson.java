@@ -330,6 +330,18 @@ parameter_list|)
 throws|throws
 name|JSONException
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Assert Query Results for test {}"
+argument_list|,
+name|test
+operator|.
+name|getContent
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|re
 operator|.
 name|assertStatus
