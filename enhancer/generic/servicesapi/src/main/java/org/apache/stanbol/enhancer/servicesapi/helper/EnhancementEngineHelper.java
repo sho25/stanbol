@@ -466,6 +466,33 @@ specifier|public
 class|class
 name|EnhancementEngineHelper
 block|{
+comment|/**      * The minimum length of the selected text so that fise:selection-head and      * fise:selection.tail are being used instead of fise:selected-text. The      * actual size is calculated by using<code>prefixSuffixLength*5</code>.      * So if a user does not chage the {@link #DEFAULT_PREFIX_SUFFIX_LENGTH} the      * default value us<code>10 * 5 = 50</code> chars.      */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|MIN_SELECTEN_HEAD_TAIL_USAGE_LENGTH
+init|=
+literal|30
+decl_stmt|;
+comment|/**      * The default length of fise:selection-prefix and fise:selection-suffix      * literals (value = 10).      */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|DEFAULT_PREFIX_SUFFIX_LENGTH
+init|=
+literal|10
+decl_stmt|;
+comment|/**      * The minimum size for fise:selection-prefix and fise:selection-suffix      * literals (value = 3).      */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|MIN_PREFIX_SUFFIX_SIZE
+init|=
+literal|3
+decl_stmt|;
 specifier|protected
 specifier|final
 specifier|static
@@ -681,9 +708,9 @@ name|prefixSuffixSize
 operator|=
 name|prefixSuffixSize
 operator|<
-literal|3
+name|MIN_PREFIX_SUFFIX_SIZE
 condition|?
-literal|10
+name|DEFAULT_PREFIX_SUFFIX_LENGTH
 else|:
 name|prefixSuffixSize
 expr_stmt|;
@@ -772,7 +799,7 @@ name|Math
 operator|.
 name|max
 argument_list|(
-literal|30
+name|MIN_SELECTEN_HEAD_TAIL_USAGE_LENGTH
 argument_list|,
 name|prefixSuffixSize
 operator|*
