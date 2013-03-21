@@ -155,6 +155,24 @@ name|hpl
 operator|.
 name|jena
 operator|.
+name|sparql
+operator|.
+name|core
+operator|.
+name|DatasetGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
 name|tdb
 operator|.
 name|TDBFactory
@@ -196,6 +214,24 @@ operator|.
 name|store
 operator|.
 name|DatasetGraphTDB
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|tdb
+operator|.
+name|sys
+operator|.
+name|TDBMaker
 import|;
 end_import
 
@@ -308,10 +344,13 @@ name|getAbsolutePath
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|//TODO: change this to support transactions
+comment|//    TDBMaker.createDatasetGraphTransaction(location);
+comment|//  if we need transaction support!
 return|return
-name|TDBFactory
+name|TDBMaker
 operator|.
-name|createDatasetGraph
+name|createDatasetGraphTDB
 argument_list|(
 name|location
 argument_list|)

@@ -231,6 +231,24 @@ name|hpl
 operator|.
 name|jena
 operator|.
+name|sparql
+operator|.
+name|core
+operator|.
+name|DatasetGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
 name|tdb
 operator|.
 name|store
@@ -319,7 +337,7 @@ name|values
 decl_stmt|;
 comment|/**      * The RDF data      */
 specifier|private
-name|DatasetGraphTDB
+name|DatasetGraph
 name|indexingDataset
 decl_stmt|;
 comment|/**      * The Iterator over the current EntityFilter (or<code>null</code> if not      * yet initialised)      */
