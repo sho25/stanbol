@@ -1831,13 +1831,6 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/*                   * We need to replace the context Classloader with the Bundle ClassLoader                  * to ensure that Singleton instances of XML frameworks (such as node4j)                   * do not leak into the OSGI environment.                  *                   * Most Java XML libs prefer to load implementations by using the                   * {@link Thread#getContextClassLoader()}. However OSGI has no control over                  * this {@link ClassLoader}. Because of that there can be situations where                  * Interfaces are loaded via the Bundle Classloader and the implementations                  * are taken from the context Classloader. What can cause                   * {@link ClassCastException}, {@link ExceptionInInitializerError}s, ...                  *                   * Setting the context Classloader to the Bundle classloader helps to avoid                  * those situations.                  */
-name|ClassLoader
-name|contextClassLoader
-init|=
-name|updateContextClassLoader
-argument_list|()
-decl_stmt|;
 try|try
 block|{
 name|AccessController
@@ -1862,6 +1855,15 @@ name|SAXException
 throws|,
 name|TikaException
 block|{
+comment|/*                               * We need to replace the context Classloader with the Bundle ClassLoader                              * to ensure that Singleton instances of XML frameworks (such as node4j)                               * do not leak into the OSGI environment.                              *                               * Most Java XML libs prefer to load implementations by using the                               * {@link Thread#getContextClassLoader()}. However OSGI has no control over                              * this {@link ClassLoader}. Because of that there can be situations where                              * Interfaces are loaded via the Bundle Classloader and the implementations                              * are taken from the context Classloader. What can cause                               * {@link ClassCastException}, {@link ExceptionInInitializerError}s, ...                              *                               * Setting the context Classloader to the Bundle classloader helps to avoid                              * those situations.                              */
+name|ClassLoader
+name|contextClassLoader
+init|=
+name|updateContextClassLoader
+argument_list|()
+decl_stmt|;
+try|try
+block|{
 name|parser
 operator|.
 name|parse
@@ -1875,6 +1877,21 @@ argument_list|,
 name|context
 argument_list|)
 expr_stmt|;
+block|}
+finally|finally
+block|{
+comment|//reset the previous context ClassLoader
+name|Thread
+operator|.
+name|currentThread
+argument_list|()
+operator|.
+name|setContextClassLoader
+argument_list|(
+name|contextClassLoader
+argument_list|)
+expr_stmt|;
+block|}
 return|return
 literal|null
 return|;
@@ -1952,20 +1969,6 @@ name|e
 argument_list|)
 throw|;
 block|}
-block|}
-finally|finally
-block|{
-comment|//reset the previous context ClassLoader
-name|Thread
-operator|.
-name|currentThread
-argument_list|()
-operator|.
-name|setContextClassLoader
-argument_list|(
-name|contextClassLoader
-argument_list|)
-expr_stmt|;
 block|}
 block|}
 finally|finally
