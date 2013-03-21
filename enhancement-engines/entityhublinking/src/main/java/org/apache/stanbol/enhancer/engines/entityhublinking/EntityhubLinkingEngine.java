@@ -1667,6 +1667,17 @@ argument_list|(
 name|reference
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|service
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|service
+return|;
+block|}
 synchronized|synchronized
 init|(
 name|labelTokenizersRefs
