@@ -177,6 +177,18 @@ name|ws
 operator|.
 name|rs
 operator|.
+name|DELETE
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
 name|DefaultValue
 import|;
 end_import
@@ -214,6 +226,18 @@ operator|.
 name|rs
 operator|.
 name|POST
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|PUT
 import|;
 end_import
 
@@ -961,6 +985,10 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_comment
+comment|/**  * Handles HTTP requests related to a user  *   */
+end_comment
+
 begin_class
 annotation|@
 name|Component
@@ -1027,6 +1055,12 @@ decl_stmt|;
 annotation|@
 name|Reference
 specifier|private
+name|Serializer
+name|serializer
+decl_stmt|;
+annotation|@
+name|Reference
+specifier|private
 name|Parser
 name|parser
 decl_stmt|;
@@ -1066,8 +1100,66 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// **********************************
-comment|// ****** SHOW USER DETAILS ******
+comment|// ****** SHOW USER DETAILS *********
 comment|// **********************************
+comment|//
+comment|// ****** RESTful/RDF *******************
+comment|//
+comment|/**      * RESTful access to individual user data      *      * [has integration test] currently has a kludge to return an empty graph if      * user not found should return a 404      *      * @param userName      * @return context graph for user      * @throws UnsupportedEncodingException      */
+annotation|@
+name|GET
+annotation|@
+name|Path
+argument_list|(
+literal|"users/{username}"
+argument_list|)
+specifier|public
+name|TripleCollection
+name|getUserContext
+parameter_list|(
+annotation|@
+name|PathParam
+argument_list|(
+literal|"username"
+argument_list|)
+name|String
+name|userName
+parameter_list|)
+throws|throws
+name|UnsupportedEncodingException
+block|{
+name|GraphNode
+name|userNode
+init|=
+name|getUser
+argument_list|(
+name|userName
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|userNode
+operator|==
+literal|null
+condition|)
+block|{
+comment|// a kludge
+return|return
+operator|new
+name|SimpleMGraph
+argument_list|()
+return|;
+block|}
+return|return
+name|userNode
+operator|.
+name|getNodeContext
+argument_list|()
+return|;
+block|}
+comment|//
+comment|// ****** HTML *******************
+comment|//
 comment|/**      * lookup a user by name.      *      * @param userName      * @return      */
 annotation|@
 name|GET
@@ -1120,7 +1212,7 @@ name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"user/{username}"
+literal|"users/edit/{username}"
 argument_list|)
 annotation|@
 name|Produces
@@ -1166,7 +1258,7 @@ name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"user/{username}/permissionsCheckboxes"
+literal|"users/{username}/permissionsCheckboxes"
 argument_list|)
 annotation|@
 name|Produces
@@ -1189,16 +1281,21 @@ name|userName
 parameter_list|)
 block|{
 comment|//getUser(userName)
+name|addClassToPermissions
+argument_list|()
+expr_stmt|;
+comment|// workaround
+name|showSystem
+argument_list|()
+expr_stmt|;
 return|return
 operator|new
 name|RdfViewable
 argument_list|(
 literal|"permissionsCheckboxes"
 argument_list|,
-name|getUser
-argument_list|(
-name|userName
-argument_list|)
+name|getPermissionType
+argument_list|()
 argument_list|,
 name|this
 operator|.
@@ -1207,40 +1304,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * RESTful access to individual user data [has integration test]      *      * @param userName      * @return context graph for user      * @throws UnsupportedEncodingException      */
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"users/{username}"
-argument_list|)
-specifier|public
-name|TripleCollection
-name|getUserContext
-parameter_list|(
-annotation|@
-name|PathParam
-argument_list|(
-literal|"username"
-argument_list|)
-name|String
-name|userName
-parameter_list|)
-throws|throws
-name|UnsupportedEncodingException
-block|{
-return|return
-name|getUser
-argument_list|(
-name|userName
-argument_list|)
-operator|.
-name|getNodeContext
-argument_list|()
-return|;
-block|}
-comment|/**      * RESTful access to user roles (and permissions right now - may change)      * [has integration test]      *      * @param userName      * @return context graph for user      * @throws UnsupportedEncodingException      */
+comment|/**      * RESTful access to user roles (and nested permissions right now - may      * change) [has integration test]      *      * @param userName      * @return role graph for user      * @throws UnsupportedEncodingException      */
 annotation|@
 name|GET
 annotation|@
@@ -1284,7 +1348,7 @@ return|return
 name|rolesGraph
 return|;
 block|}
-comment|/**      * Update user details.      *      * @param uriInfo      * @param currentLogin      * @param newLogin      * @param fullName      * @param email      * @param password      * @param roles      * @param permissions      * @return      */
+comment|/**      * Update user details      * adds triples as appropriate to system graph      *      * @param uriInfo      * @param currentLogin      * @param newLogin      * @param fullName      * @param email      * @param password      * @param roles      * @param permissions      * @return      */
 annotation|@
 name|POST
 annotation|@
@@ -1292,7 +1356,6 @@ name|Path
 argument_list|(
 literal|"store-user"
 argument_list|)
-comment|// @Consumes("multipart/form-data")
 annotation|@
 name|Consumes
 argument_list|(
@@ -1466,43 +1529,7 @@ name|permissions
 argument_list|)
 return|;
 block|}
-comment|/**      * produces suitable role checkboxes      *      * @return      */
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"rolesCheckboxes"
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|SupportedFormat
-operator|.
-name|HTML
-argument_list|)
-specifier|public
-name|RdfViewable
-name|rolesCheckboxes
-parameter_list|()
-block|{
-return|return
-operator|new
-name|RdfViewable
-argument_list|(
-literal|"rolesCheckboxes"
-argument_list|,
-name|getRoleType
-argument_list|()
-argument_list|,
-name|this
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-return|;
-block|}
-comment|/*      * Modify user given give a graph describing the change.      */
+comment|/**  * Modify user given a graph describing the change.  *   * @param inputGraph change graph  * @return HTTP response  */
 annotation|@
 name|POST
 annotation|@
@@ -1560,7 +1587,17 @@ operator|.
 name|Change
 argument_list|)
 decl_stmt|;
-while|while
+name|Triple
+name|oldTriple
+init|=
+literal|null
+decl_stmt|;
+name|Triple
+name|newTriple
+init|=
+literal|null
+decl_stmt|;
+if|if
 condition|(
 name|changes
 operator|.
@@ -1609,12 +1646,12 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-name|NonLiteral
-name|userNode
+name|Iterator
+argument_list|<
+name|Triple
+argument_list|>
+name|userTriples
 init|=
-operator|(
-name|NonLiteral
-operator|)
 name|systemGraph
 operator|.
 name|filter
@@ -1627,6 +1664,15 @@ name|userName
 argument_list|,
 name|userName
 argument_list|)
+decl_stmt|;
+comment|//     if (userTriples.hasNext()) {
+name|NonLiteral
+name|userNode
+init|=
+operator|(
+name|NonLiteral
+operator|)
+name|userTriples
 operator|.
 name|next
 argument_list|()
@@ -1659,7 +1705,6 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-comment|// System.out.println("predicateUriRef = " + predicateUriRef);
 comment|// handle old value (if it exists)
 name|Iterator
 argument_list|<
@@ -1705,8 +1750,11 @@ argument_list|()
 expr_stmt|;
 comment|// Triple oldTriple = systemGraph.filter(null, predicateUriRef,
 comment|// oldValue).next();
+name|Iterator
+argument_list|<
 name|Triple
-name|oldTriple
+argument_list|>
+name|oldTriples
 init|=
 name|systemGraph
 operator|.
@@ -1718,17 +1766,23 @@ name|predicateUriRef
 argument_list|,
 name|oldValue
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|oldTriples
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
+name|oldTriple
+operator|=
+name|oldTriples
 operator|.
 name|next
 argument_list|()
-decl_stmt|;
-name|systemGraph
-operator|.
-name|remove
-argument_list|(
-name|oldTriple
-argument_list|)
 expr_stmt|;
+block|}
 block|}
 name|Resource
 name|newValue
@@ -1752,9 +1806,8 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-name|Triple
 name|newTriple
-init|=
+operator|=
 operator|new
 name|TripleImpl
 argument_list|(
@@ -1764,7 +1817,45 @@ name|predicateUriRef
 argument_list|,
 name|newValue
 argument_list|)
+expr_stmt|;
+comment|// }
+block|}
+name|readLock
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+name|Lock
+name|writeLock
+init|=
+name|systemGraph
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
 decl_stmt|;
+name|writeLock
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+if|if
+condition|(
+name|oldTriple
+operator|!=
+literal|null
+condition|)
+block|{
+name|systemGraph
+operator|.
+name|remove
+argument_list|(
+name|oldTriple
+argument_list|)
+expr_stmt|;
+block|}
 name|systemGraph
 operator|.
 name|add
@@ -1772,8 +1863,12 @@ argument_list|(
 name|newTriple
 argument_list|)
 expr_stmt|;
-block|}
-comment|// it's not actually creating a resource at this URI so this
+name|writeLock
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+comment|// it's not actually creating a resource so this
 comment|// seems the most appropriate response
 return|return
 name|Response
@@ -1785,13 +1880,13 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/*      * Isn't very pretty but is just a one-off      */
+comment|/**  * Provides HTML corresponding to a user's roles  *   * all roles are listed with checkboxes,   * the roles this user has are checked  *   * (isn't very pretty but is just a one-off)  *   * @param userName the user in question  * @return HTML checkboxes as HTTP response  */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
-literal|"user/{username}/rolesCheckboxes"
+literal|"users/{username}/rolesCheckboxes"
 argument_list|)
 annotation|@
 name|Produces
@@ -1890,11 +1985,6 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-comment|//                if (triple.getPredicate().equals(DC.title)) {
-comment|//                    allRoleNames.add(((Literal) triple.getObject()).getLexicalForm());
-comment|//                    System.out.println("system role = "+((Literal) triple.getObject()).getLexicalForm());
-comment|//                }
-comment|//   NonLiteral roleNode = triple.getSubject();
 name|GraphNode
 name|roleNode
 init|=
@@ -1945,7 +2035,6 @@ name|getLexicalForm
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//   System.out.println("system role = " + titlesIterator.next().getLexicalForm());
 block|}
 block|}
 block|}
@@ -2065,7 +2154,6 @@ name|getLexicalForm
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//   System.out.println("user role = " + titlesIterator.next().getLexicalForm());
 block|}
 block|}
 for|for
@@ -2086,7 +2174,6 @@ name|i
 operator|++
 control|)
 block|{
-comment|// BasePermissionsRole
 name|String
 name|role
 init|=
@@ -2107,6 +2194,7 @@ literal|"BasePermissionsRole"
 argument_list|)
 condition|)
 block|{
+comment|// filter out
 continue|continue;
 block|}
 if|if
@@ -2199,7 +2287,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * List the users. I.e. renders the user type with the "listUser" rendering      * specification.      *      * @return      */
+comment|/**  * List the users.   * renders the user type with the "listUser" rendering template  *   * @return rendering specification  */
 annotation|@
 name|GET
 annotation|@
@@ -2235,13 +2323,136 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Create a user. I.e. returns a dummy use with "editUSer" as rendering      * specification.      *      * @param uriInfo      * @return      */
+specifier|public
+name|GraphNode
+name|getUserType
+parameter_list|()
+block|{
+return|return
+operator|new
+name|GraphNode
+argument_list|(
+name|FOAF
+operator|.
+name|Agent
+argument_list|,
+name|systemGraph
+argument_list|)
+return|;
+block|}
+comment|/*      * RESTful creation of user      * @TODO validity check input      */
+annotation|@
+name|PUT
+annotation|@
+name|Path
+argument_list|(
+literal|"users/{username}"
+argument_list|)
+annotation|@
+name|Consumes
+argument_list|(
+name|SupportedFormat
+operator|.
+name|TURTLE
+argument_list|)
+specifier|public
+name|Response
+name|createUser
+parameter_list|(
+annotation|@
+name|Context
+name|UriInfo
+name|uriInfo
+parameter_list|,
+annotation|@
+name|PathParam
+argument_list|(
+literal|"username"
+argument_list|)
+name|String
+name|userName
+parameter_list|,
+name|Graph
+name|inputGraph
+parameter_list|)
+block|{
+name|Lock
+name|writeLock
+init|=
+name|systemGraph
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
+decl_stmt|;
+name|writeLock
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+name|systemGraph
+operator|.
+name|addAll
+argument_list|(
+name|inputGraph
+argument_list|)
+expr_stmt|;
+name|writeLock
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+name|UriBuilder
+name|uriBuilder
+init|=
+name|uriInfo
+operator|.
+name|getBaseUriBuilder
+argument_list|()
+decl_stmt|;
+name|URI
+name|createdResource
+init|=
+name|uriBuilder
+operator|.
+name|replacePath
+argument_list|(
+literal|"/user-management/users/"
+operator|+
+name|userName
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+return|return
+name|Response
+operator|.
+name|created
+argument_list|(
+name|createdResource
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+comment|/**      * Create a user.       * returns a dummy use with "editUser" as rendering      * specification (this will be a HTML form)      *      * @param uriInfo request details      * @return rendering specification      */
 annotation|@
 name|GET
 annotation|@
 name|Path
 argument_list|(
 literal|"create-form"
+argument_list|)
+annotation|@
+name|Produces
+argument_list|(
+name|MediaType
+operator|.
+name|TEXT_HTML
 argument_list|)
 specifier|public
 name|RdfViewable
@@ -2268,10 +2479,9 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Endpoint-style user creation takes a little bunch of Turtle e.g. [] a      * foaf:Agent ; cz:userName "Hugo Ball" .      *      * [has test]      *      * @param userData      * @return HTTP/1.1 204 No Content      */
+comment|/**      * Endpoint-style user creation takes a little bunch of Turtle e.g. [] a      * foaf:Agent ; cz:userName "Hugo Ball" .      *      * [has test]      *      * @TODO check for password      *      * @param userData      * @return HTTP/1.1 204 No Content      */
 annotation|@
 name|POST
-comment|// @TODO add RESTful PUT version
 annotation|@
 name|Consumes
 argument_list|(
@@ -2372,6 +2582,24 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
+name|GraphNode
+name|systemUserNode
+init|=
+operator|new
+name|GraphNode
+argument_list|(
+name|userNode
+argument_list|,
+name|systemGraph
+argument_list|)
+decl_stmt|;
+name|addRole
+argument_list|(
+name|systemUserNode
+argument_list|,
+literal|"BasePermissionsRole"
+argument_list|)
+expr_stmt|;
 while|while
 condition|(
 name|userTriples
@@ -2430,12 +2658,6 @@ decl_stmt|;
 name|URI
 name|createdResource
 init|=
-literal|null
-decl_stmt|;
-comment|//    try {
-comment|//  createdResource = new URI("http://localhost:8080/user-management/users/" + userName);
-name|createdResource
-operator|=
 name|uriBuilder
 operator|.
 name|replacePath
@@ -2447,30 +2669,7 @@ argument_list|)
 operator|.
 name|build
 argument_list|()
-expr_stmt|;
-comment|//        } catch (URISyntaxException ex) {
-comment|//            java.util.logging.Logger.getLogger(UserResource.class.getName()).log(Level.SEVERE, null, ex);
-comment|//        }
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"URI ="
-operator|+
-name|createdResource
-argument_list|)
-expr_stmt|;
-comment|// from HTTPbis
-comment|//The request has been fulfilled and has resulted in one or more new
-comment|//   resources being created.
-comment|//        Response.ResponseBuilder builder = Response.status(Response.Status.CREATED);
-comment|//       // builder.header("Location", createdResource);
-comment|//
-comment|//        Response response = builder.build();
-comment|//         MultivaluedMap<String,Object> meta = response.getMetadata();
-comment|//         meta.putSingle("Location", createdResource);
+decl_stmt|;
 return|return
 name|Response
 operator|.
@@ -2486,6 +2685,7 @@ block|}
 comment|// **********************************
 comment|// ****** REMOVE USER ***************
 comment|// **********************************
+comment|/**      * Deletes a named user      *       * (called from HTML form)      *       * @param userName       */
 annotation|@
 name|POST
 annotation|@
@@ -2506,7 +2706,21 @@ name|String
 name|userName
 parameter_list|)
 block|{
-comment|// System.out.println("DELETE " + userName);
+name|remove
+argument_list|(
+name|userName
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Deletes a named user      *       * @param userName       */
+specifier|private
+name|void
+name|remove
+parameter_list|(
+name|String
+name|userName
+parameter_list|)
+block|{
 name|Resource
 name|userResource
 init|=
@@ -2638,7 +2852,43 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Endpoint-style user deletion takes a little bunch of Turtle e.g. [] a      * foaf:Agent ; cz:userName "Hugo Ball" .      *      * @param userData      * @return HTTP/1.1 204 No Content      */
+comment|/**      * RESTful user deletion      *       * called direct from the URI, e.g.      * http://localhost:8080/user-management/users/fred      *      * @param userName name of the user to delete      * @return HTTP/1.1 204 No Content      */
+annotation|@
+name|DELETE
+annotation|@
+name|Path
+argument_list|(
+literal|"users/{username}"
+argument_list|)
+specifier|public
+name|Response
+name|delete
+parameter_list|(
+annotation|@
+name|PathParam
+argument_list|(
+literal|"username"
+argument_list|)
+name|String
+name|userName
+parameter_list|)
+block|{
+name|remove
+argument_list|(
+name|userName
+argument_list|)
+expr_stmt|;
+return|return
+name|Response
+operator|.
+name|noContent
+argument_list|()
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+comment|/**      * Endpoint-style user deletion takes a little bunch of Turtle describing the user to delete      * e.g. [] a      * foaf:Agent ; cz:userName "Hugo Ball" .      *      * @param userData      * @return HTTP/1.1 204 No Content      */
 annotation|@
 name|POST
 annotation|@
@@ -2743,6 +2993,14 @@ argument_list|,
 name|userNameNode
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|userTriples
+operator|.
+name|hasNext
+argument_list|()
+condition|)
+block|{
 name|Triple
 name|userTriple
 init|=
@@ -2791,6 +3049,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 finally|finally
 block|{
 name|readLock
@@ -2824,6 +3083,7 @@ comment|// **********************************
 comment|// **********************************
 comment|// ****** LIST ROLES ****************
 comment|// **********************************
+comment|/**      * Lists all roles using a rendering as specified in template listRole      * @return       */
 annotation|@
 name|GET
 annotation|@
@@ -2859,6 +3119,24 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**      * Provides the node in the system graph corresponding to rdf:type Role      *       * @return Role class node      */
+specifier|public
+name|GraphNode
+name|getRoleType
+parameter_list|()
+block|{
+return|return
+operator|new
+name|GraphNode
+argument_list|(
+name|PERMISSION
+operator|.
+name|Role
+argument_list|,
+name|systemGraph
+argument_list|)
+return|;
+block|}
 comment|// **********************************
 comment|// ****** ADD ROLE ******************
 comment|// **********************************
@@ -2874,6 +3152,7 @@ comment|// **********************************
 comment|// **********************************
 comment|// ****** LIST PERMISSIONS **********
 comment|// **********************************
+comment|/*      * Provides listing of all permissions present in system graph      * rendered according to specification in listPermission template      */
 annotation|@
 name|GET
 annotation|@
@@ -2896,6 +3175,7 @@ block|{
 name|addClassToPermissions
 argument_list|()
 expr_stmt|;
+comment|// workaround
 return|return
 operator|new
 name|RdfViewable
@@ -2912,6 +3192,24 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**      * Provides the node in the system graph corresponding to rdf:type Permission      *       * @return Permission class node      */
+specifier|public
+name|GraphNode
+name|getPermissionType
+parameter_list|()
+block|{
+return|return
+operator|new
+name|GraphNode
+argument_list|(
+name|PERMISSION
+operator|.
+name|Permission
+argument_list|,
+name|systemGraph
+argument_list|)
+return|;
+block|}
 comment|// **********************************
 comment|// ****** ADD PERMISSION TO USER ****
 comment|// **********************************
@@ -2924,26 +3222,8 @@ comment|// ************************************
 comment|// **************************************
 comment|// ****** REMOVE PERMISSION FROM ROLE ***
 comment|// **************************************
-comment|// misc
-comment|/* @GET     public String index() throws UnsupportedEncodingException {         ByteArrayOutputStream baos = new ByteArrayOutputStream();         serializer.serialize(baos, systemGraph, SupportedFormat.TURTLE);         String serialized = new String(baos.toByteArray(), "utf-8");         return serialized;     }*/
-specifier|public
-name|GraphNode
-name|getUserType
-parameter_list|()
-block|{
-return|return
-operator|new
-name|GraphNode
-argument_list|(
-name|FOAF
-operator|.
-name|Agent
-argument_list|,
-name|systemGraph
-argument_list|)
-return|;
-block|}
-comment|/**      * takes edit form data and pushes into store "" values are ignored      */
+comment|////////////////////////////////////////////////////////////////
+comment|/**  * Pushes user data into system graph  *   * @param userNode  * @param uriInfo  * @param currentUserName  * @param newUserName  * @param fullName  * @param email  * @param password  * @param roles  * @param permissions  * @return   */
 specifier|private
 name|Response
 name|store
@@ -3360,6 +3640,7 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
+comment|//showSystem();
 comment|// see other my not be the best response, but does seem the best given
 comment|// the jax-rs things available
 return|return
@@ -3377,192 +3658,6 @@ argument_list|)
 operator|.
 name|build
 argument_list|()
-return|;
-block|}
-comment|/**      * NOT CURRENTLY IN USE replaces the subgraph      *<code>revokedString      *</code> with the one from      *<code>assertedString</code>.      *      * @param graphUri the graph within which the replacement has to take place      * or null for the content graph      * @param assertedString the asserted Graph      * @param revokedString the revoked Graph      * @param format the media-type of the rdf format in which the asserted and      * revoked graph are serialized, default: text/turtle      */
-annotation|@
-name|POST
-annotation|@
-name|Path
-argument_list|(
-literal|"replace-subgraph"
-argument_list|)
-annotation|@
-name|Consumes
-argument_list|(
-name|MediaType
-operator|.
-name|MULTIPART_FORM_DATA
-argument_list|)
-specifier|public
-name|void
-name|replaceSubGraph
-parameter_list|(
-annotation|@
-name|QueryParam
-argument_list|(
-literal|"graph"
-argument_list|)
-name|UriRef
-name|graphUri
-parameter_list|,
-annotation|@
-name|FormDataParam
-argument_list|(
-literal|"assert"
-argument_list|)
-name|String
-name|assertedString
-parameter_list|,
-annotation|@
-name|FormDataParam
-argument_list|(
-literal|"revoke"
-argument_list|)
-name|String
-name|revokedString
-parameter_list|,
-annotation|@
-name|FormDataParam
-argument_list|(
-literal|"format"
-argument_list|)
-annotation|@
-name|DefaultValue
-argument_list|(
-name|SupportedFormat
-operator|.
-name|TURTLE
-argument_list|)
-name|String
-name|format
-parameter_list|)
-block|{
-specifier|final
-name|Graph
-name|assertedGraph
-decl_stmt|;
-specifier|final
-name|Graph
-name|revokedGraph
-decl_stmt|;
-try|try
-block|{
-name|assertedGraph
-operator|=
-name|parser
-operator|.
-name|parse
-argument_list|(
-operator|new
-name|ByteArrayInputStream
-argument_list|(
-name|assertedString
-operator|.
-name|getBytes
-argument_list|(
-literal|"utf-8"
-argument_list|)
-argument_list|)
-argument_list|,
-name|format
-argument_list|)
-expr_stmt|;
-name|revokedGraph
-operator|=
-name|parser
-operator|.
-name|parse
-argument_list|(
-operator|new
-name|ByteArrayInputStream
-argument_list|(
-name|assertedString
-operator|.
-name|getBytes
-argument_list|(
-literal|"utf-8"
-argument_list|)
-argument_list|)
-argument_list|,
-name|format
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|ex
-parameter_list|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"reading graph {}"
-argument_list|,
-name|ex
-argument_list|)
-expr_stmt|;
-throw|throw
-operator|new
-name|WebApplicationException
-argument_list|(
-name|ex
-argument_list|,
-literal|500
-argument_list|)
-throw|;
-block|}
-try|try
-block|{
-name|MGraphUtils
-operator|.
-name|removeSubGraph
-argument_list|(
-name|systemGraph
-argument_list|,
-name|revokedGraph
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|NoSuchSubGraphException
-name|ex
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|ex
-argument_list|)
-throw|;
-block|}
-name|systemGraph
-operator|.
-name|addAll
-argument_list|(
-name|assertedGraph
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|GraphNode
-name|getPermissionType
-parameter_list|()
-block|{
-return|return
-operator|new
-name|GraphNode
-argument_list|(
-name|PERMISSION
-operator|.
-name|Permission
-argument_list|,
-name|systemGraph
-argument_list|)
 return|;
 block|}
 comment|/**      * a kludge - initially the permissions aren't expressed as instances of      * Permission class, this adds the relevant triples      */
@@ -3733,23 +3828,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-specifier|public
-name|GraphNode
-name|getRoleType
-parameter_list|()
-block|{
-return|return
-operator|new
-name|GraphNode
-argument_list|(
-name|PERMISSION
-operator|.
-name|Role
-argument_list|,
-name|systemGraph
-argument_list|)
-return|;
-block|}
+comment|/**      * Provides a graph containing Role triples associated with a given user      *       * @param userName      * @return roles graph      */
 specifier|private
 name|MGraph
 name|getUserRolesGraph
@@ -3894,7 +3973,7 @@ return|return
 name|rolesGraph
 return|;
 block|}
-comment|/**      * Creates a new user withe the specified user name      *      * @param newUserName      * @return      */
+comment|/**      * Creates a new user withe the specified user name      *      * @param newUserName      * @return user node in system graph      */
 specifier|private
 name|GraphNode
 name|createUser
@@ -3949,6 +4028,13 @@ name|newUserName
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|addRole
+argument_list|(
+name|userNode
+argument_list|,
+literal|"BasePermissionsRole"
+argument_list|)
+expr_stmt|;
 return|return
 name|userNode
 return|;
@@ -3987,6 +4073,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * convenience - used for buffering      *       * @param subject      * @param predicate      * @param object      * @return       */
 specifier|private
 name|ArrayList
 argument_list|<
@@ -4084,6 +4171,7 @@ return|return
 name|buffer
 return|;
 block|}
+comment|/**      * Add a role to a given user in system graph      *       * @param userNode node corresponding to user      * @param roleName name of the role      * @return user node      */
 specifier|private
 name|GraphNode
 name|addRole
@@ -4095,7 +4183,6 @@ name|String
 name|roleName
 parameter_list|)
 block|{
-comment|// System.out.println("ROLENAME = " + roleName);
 comment|// is this thing already around? (will be a bnode)
 name|GraphNode
 name|roleNode
@@ -4211,16 +4298,9 @@ name|GraphNode
 name|userNode
 parameter_list|,
 name|String
-name|permissionName
+name|permissionString
 parameter_list|)
 block|{
-comment|// System.out.println("ROLENAME = " + roleName);
-comment|// is this thing already around? (will be a bnode)
-comment|//   GraphNode permissionNode = getTitleNode(permissionName);
-comment|// otherwise make a new one as a named node
-comment|//  if (permissionNode == null) {
-comment|//            UriRef permissionUriRef = new UriRef(permissionsBase + permissionName);
-comment|// BNode permissionBNode = new BNode();
 name|GraphNode
 name|permissionNode
 init|=
@@ -4273,7 +4353,7 @@ argument_list|,
 operator|new
 name|PlainLiteralImpl
 argument_list|(
-name|permissionName
+name|permissionString
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4873,6 +4953,66 @@ block|{
 name|readLock
 operator|.
 name|unlock
+argument_list|()
+expr_stmt|;
+block|}
+block|}
+comment|/*      * Dumps a Turtle serialization of the system graph to System.out      * handy for debugging      */
+specifier|private
+name|void
+name|showSystem
+parameter_list|()
+block|{
+try|try
+block|{
+name|ByteArrayOutputStream
+name|baos
+init|=
+operator|new
+name|ByteArrayOutputStream
+argument_list|()
+decl_stmt|;
+name|serializer
+operator|.
+name|serialize
+argument_list|(
+name|baos
+argument_list|,
+name|systemGraph
+argument_list|,
+name|SupportedFormat
+operator|.
+name|TURTLE
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+operator|new
+name|String
+argument_list|(
+name|baos
+operator|.
+name|toByteArray
+argument_list|()
+argument_list|,
+literal|"utf-8"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|e
+operator|.
+name|printStackTrace
 argument_list|()
 expr_stmt|;
 block|}
