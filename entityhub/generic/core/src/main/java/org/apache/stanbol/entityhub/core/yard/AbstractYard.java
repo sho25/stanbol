@@ -1448,6 +1448,24 @@ name|number
 return|;
 block|}
 block|}
+comment|/**          * Getter for the {@link Dictionary} used to store the configuration          * wrapped by this API          * @return the configuration          */
+specifier|public
+specifier|final
+name|Dictionary
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|getDictionary
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|config
+return|;
+block|}
 comment|/**          * Checks if the configuration is valid and throws a {@link ConfigurationException}          * if not.<p>          * This method checks the {@link Yard#ID} property and than calls          * {@link #validateConfig()} to check additional constraints of specific          * Yard configurations (subclasses of this class)          * @return returns true if valid          * @throws ConfigurationException          */
 specifier|protected
 specifier|final
