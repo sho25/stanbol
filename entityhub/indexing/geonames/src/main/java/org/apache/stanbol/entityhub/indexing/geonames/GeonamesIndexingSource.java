@@ -864,6 +864,13 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Source File(s): "
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|String
@@ -899,6 +906,18 @@ argument_list|()
 condition|)
 block|{
 comment|//register the configured source with the ResourceLoader
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"> {}"
+argument_list|,
+name|sourceFileOrDirectory
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|loader
