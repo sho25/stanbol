@@ -27,6 +27,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Dictionary
 import|;
 end_import
@@ -38,6 +48,18 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+operator|.
+name|Entry
 import|;
 end_import
 
@@ -91,6 +113,26 @@ name|ConfigurationException
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Used for the configuration of a SolrYard. Especially if the SolrYard is not running within an OSGI context,  * than an instance of this class must be configured and than parsed to the constructor of {@link SolrYard}.  *<p>  * When running within an OSGI context, the configuration is provided by the OSGI environment. I that case  * this class is used as a wrapper for easy access to the configuration.  *   * @author Rupert Westenthaler  *   */
 end_comment
@@ -103,6 +145,148 @@ name|SolrYardConfig
 extends|extends
 name|YardConfig
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|SolrYardConfig
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+comment|/**      * The key used to configure the URL for the SolrServer      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SOLR_SERVER_LOCATION
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.solrUri"
+decl_stmt|;
+comment|/**      * The key used to configure if data of multiple Yards are stored within the same index (      *<code>default=false</code>)      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|MULTI_YARD_INDEX_LAYOUT
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.multiYardIndexLayout"
+decl_stmt|;
+comment|/**      * The maximum boolean clauses as configured in the solrconfig.xml of the SolrServer. The default value      * for this config in Solr 1.4 is 1024.      *<p>      * This value is important for generating queries that search for multiple documents, because it      * determines the maximum number of OR combination for the searched document ids.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|MAX_BOOLEAN_CLAUSES
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.maxBooleanClauses"
+decl_stmt|;
+comment|/**      * This property allows to define a field that is used to parse the boost for the parsed representation.      * Typically this will be the pageRank of that entity within the referenced site (e.g.      * {@link Math#log1p(double)} of the number of incoming links      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DOCUMENT_BOOST_FIELD
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.documentBoost"
+decl_stmt|;
+comment|/**      * Key used to configure {@link Entry Entry&lt;String,Float&gt;} for fields with the boost. If no Map is      * configured or a field is not present in the Map, than 1.0f is used as Boost. If a Document boost is      * present than the boost of a Field is documentBoost*fieldBoost.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|FIELD_BOOST_MAPPINGS
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.fieldBoosts"
+decl_stmt|;
+comment|/**      * Key used to to enable/disable the default configuration. If this is enabled,      * that the index will get initialised with the Default configuration.<p>      * Notes:<ul>      *<li> Configuration is only supported for EmbeddedSolrServers that use a      * relative path      *<li> If this property is enabled the value of the       * {@link #SOLR_INDEX_CONFIGURATION_NAME} will be ignored.      *</ul>      * Only applies in case a EmbeddedSolrServer is used.      * @see SolrYardConfig#isAllowInitialisation()      * @see SolrYardConfig#setAllowInitialisation(Boolean)      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|ALLOW_INITIALISATION_STATE
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.useDefaultConfig"
+decl_stmt|;
+comment|/**      * By default the use of an default configuration is disabled!      */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|DEFAULT_ALLOW_INITIALISATION_STATE
+init|=
+literal|false
+decl_stmt|;
+comment|/**      * The name of the configuration use as default.       */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DEFAULT_SOLR_INDEX_CONFIGURATION_NAME
+init|=
+literal|"default.solrindex.zip"
+decl_stmt|;
+comment|/**      * Allows to configure the name of the index used for the configuration of the Solr Core.      * Only applies in case of using an EmbeddedSolrServer and      * {@link #ALLOW_INITIALISATION_STATE} is disabled.      * As default the value of the {@link #SOLR_SERVER_LOCATION} is used.      * @see SolrYardConfig#getIndexConfigurationName()      * @see SolrYardConfig#setIndexConfigurationName(String)      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SOLR_INDEX_CONFIGURATION_NAME
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.configName"
+decl_stmt|;
+comment|/**      * The default value for the maxBooleanClauses of SolrQueries. Set to {@value #DEFAULT_MAX_BOOLEAN_CLAUSES}      * the default of Slor 1.4      */
+specifier|protected
+specifier|static
+specifier|final
+name|int
+name|DEFAULT_MAX_BOOLEAN_CLAUSES
+init|=
+literal|1024
+decl_stmt|;
+comment|/**      * Key used to enable/disable committing of update(..) and store(..) operations. Enabling this ensures      * that indexed documents are immediately available for searches, but it will also decrease the      * performance for updates.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|IMMEDIATE_COMMIT
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.immediateCommit"
+decl_stmt|;
+comment|/**      * By default {@link #IMMEDIATE_COMMIT} is enabled      */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|DEFAULT_IMMEDIATE_COMMIT_STATE
+init|=
+literal|true
+decl_stmt|;
+comment|/**      * If {@link #IMMEDIATE_COMMIT} is deactivated, than this time is parsed to update(..) and store(..)      * operations as the maximum time (in ms) until a commit.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|COMMIT_WITHIN_DURATION
+init|=
+literal|"org.apache.stanbol.entityhub.yard.solr.commitWithinDuration"
+decl_stmt|;
+comment|/**      * The default value for the {@link #COMMIT_WITHIN_DURATION} parameter is 10 sec.      */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|DEFAULT_COMMIT_WITHIN_DURATION
+init|=
+literal|1000
+operator|*
+literal|10
+decl_stmt|;
 comment|/**      * Creates a new config with the minimal set of required properties      *       * @param id      *            the ID of the Yard      * @param solrServer      *            the base URL of the {@link SolrServer}      * @throws IllegalArgumentException      *             if the parsed valued do not fulfil the requirements.      */
 specifier|public
 name|SolrYardConfig
@@ -175,45 +359,6 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
-comment|//    /**
-comment|//     * Setter for the type of the SolrServer client to by used by the SolrYard. Setting the type to
-comment|//     *<code>null</code> will activate the default value. The default is determined based on the configured
-comment|//     * {@link #getSolrServerLocation()}
-comment|//     *
-comment|//     * @param type
-comment|//     *            The type to use
-comment|//     */
-comment|//    public void setSolrServerType(SolrServerTypeEnum type) {
-comment|//        if (type == null) {
-comment|//            config.remove(SolrYard.SOLR_SERVER_TYPE);
-comment|//        } else {
-comment|//            config.put(SolrYard.SOLR_SERVER_TYPE, type);
-comment|//        }
-comment|//    }
-comment|//
-comment|//    public SolrServerTypeEnum getSolrServerType() {
-comment|//        Object serverType = config.get(SolrYard.SOLR_SERVER_TYPE);
-comment|//        if (serverType != null) {
-comment|//            if (serverType instanceof SolrServerTypeEnum) {
-comment|//                return (SolrServerTypeEnum) serverType;
-comment|//            } else {
-comment|//                try {
-comment|//                    return SolrServerTypeEnum.valueOf(serverType.toString());
-comment|//                } catch (IllegalArgumentException e) {
-comment|//                    // invalid value set!
-comment|//                    config.remove(SolrYard.SOLR_SERVER_TYPE);
-comment|//                }
-comment|//            }
-comment|//        }
-comment|//        // guess type based on Server Location
-comment|//        String serverLocation = getSolrServerLocation();
-comment|//        // TODO: maybe we need to improve this detection code.
-comment|//        if (serverLocation.startsWith("http")) {
-comment|//            return SolrServerTypeEnum.HTTP;
-comment|//        } else {
-comment|//            return SolrServerTypeEnum.EMBEDDED;
-comment|//        }
-comment|//    }
 comment|/**      * Setter for the location of the SolrServer. Might be a URL or a file.      *       * @param url      *            the base URL of the SolrServer. Required, NOT NULL.      */
 specifier|public
 name|void
@@ -234,8 +379,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_SERVER_LOCATION
 argument_list|,
 name|url
@@ -248,8 +391,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_SERVER_LOCATION
 argument_list|)
 expr_stmt|;
@@ -270,8 +411,6 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_SERVER_LOCATION
 argument_list|)
 decl_stmt|;
@@ -316,8 +455,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|MULTI_YARD_INDEX_LAYOUT
 argument_list|,
 name|multiYardIndexLayoutState
@@ -330,8 +467,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|MULTI_YARD_INDEX_LAYOUT
 argument_list|)
 expr_stmt|;
@@ -350,8 +485,6 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|MULTI_YARD_INDEX_LAYOUT
 argument_list|)
 decl_stmt|;
@@ -401,7 +534,7 @@ block|}
 comment|/**      * Getter for the state if this SolrYard can be initialised by using the default configuration or if it is      * required to use a provided configuration. The default is set to<code>true</code>.      *<p>      * If this property is set to<code>false</code> than the SolrYard can only be initialised if the Index is      * already available or the initial configuration is provided to the {@link SolrDirectoryManager}.      *       * @return the state or<code>true</code> as default      */
 specifier|public
 name|boolean
-name|isDefaultInitialisation
+name|isAllowInitialisation
 parameter_list|()
 block|{
 name|Object
@@ -411,9 +544,7 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_INDEX_DEFAULT_CONFIG
+name|ALLOW_INITIALISATION_STATE
 argument_list|)
 decl_stmt|;
 if|if
@@ -455,16 +586,14 @@ block|}
 else|else
 block|{
 return|return
-name|SolrYard
-operator|.
-name|DEFAULT_SOLR_INDEX_DEFAULT_CONFIG_STATE
+name|DEFAULT_ALLOW_INITIALISATION_STATE
 return|;
 block|}
 block|}
 comment|/**      * Setter for the state if this SolrYard can be initialised by using the default configuration or if it is      * required to use a provided configuration. The default is set to<code>true</code>.      *<p>      * If this property is set to<code>false</code> than the SolrYard can only be initialised if the Index is      * already available or the initial configuration is provided to the {@link SolrDirectoryManager}.      *       * @param defaultInitialisationState      *            the state or<code>null</code> to remove the current configuration. The default state is      *<code>true</code>.      */
 specifier|public
 name|void
-name|setDefaultInitialisation
+name|setAllowInitialisation
 parameter_list|(
 name|Boolean
 name|defaultInitialisationState
@@ -481,9 +610,7 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_INDEX_DEFAULT_CONFIG
+name|ALLOW_INITIALISATION_STATE
 argument_list|,
 name|defaultInitialisationState
 argument_list|)
@@ -495,14 +622,12 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
-name|SOLR_INDEX_DEFAULT_CONFIG
+name|ALLOW_INITIALISATION_STATE
 argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Getter for the name of the configuration used to initialise the SolrServer.<p>      * In case this property is not set the value of {@link #getSolrServerLocation()}       * is used as default.<p>      * Please NOTE that in case<code>{@link #isDefaultInitialisation()} == true</code>       * the value of {@link SolrYard#DEFAULT_SOLR_INDEX_CONFIGURATION_NAME} MUST      * BE used to initialise the SolrIndex instead of the value returned by this      * Method!      * @return the name of the configuration of the SolrIndex      * @see SolrYard#SOLR_INDEX_CONFIGURATION_NAME      * @see SolrYard#SOLR_INDEX_DEFAULT_CONFIG      */
+comment|/**      * Getter for the name of the configuration used to initialise the SolrServer.<p>      * In case this property is not set the value of {@link #getSolrServerLocation()}       * is used as default.<p>      * Please NOTE that in case<code>{@link #isAllowInitialisation()} == true</code>       * the value of {@link SolrYard#DEFAULT_SOLR_INDEX_CONFIGURATION_NAME} MUST      * BE used to initialise the SolrIndex instead of the value returned by this      * Method!      * @return the name of the configuration of the SolrIndex      * @see SolrYard#SOLR_INDEX_CONFIGURATION_NAME      * @see SolrYard#ALLOW_INITIALISATION_STATE      */
 specifier|public
 name|String
 name|getIndexConfigurationName
@@ -515,8 +640,6 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_INDEX_CONFIGURATION_NAME
 argument_list|)
 decl_stmt|;
@@ -537,8 +660,7 @@ block|}
 else|else
 block|{
 return|return
-name|getSolrServerLocation
-argument_list|()
+name|DEFAULT_SOLR_INDEX_CONFIGURATION_NAME
 return|;
 block|}
 block|}
@@ -567,8 +689,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_INDEX_CONFIGURATION_NAME
 argument_list|)
 expr_stmt|;
@@ -579,8 +699,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_INDEX_CONFIGURATION_NAME
 argument_list|,
 name|name
@@ -590,7 +708,7 @@ block|}
 block|}
 comment|/**      * Getter for the maximum number of boolean clauses allowed for queries      *       * @return The configured number of<code>null</code> if not configured or the configured value is not an      *         valid Integer.      */
 specifier|public
-name|Integer
+name|int
 name|getMaxBooleanClauses
 parameter_list|()
 block|{
@@ -601,10 +719,11 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|MAX_BOOLEAN_CLAUSES
 argument_list|)
+decl_stmt|;
+name|int
+name|clauses
 decl_stmt|;
 if|if
 condition|(
@@ -620,18 +739,25 @@ operator|instanceof
 name|Integer
 condition|)
 block|{
-return|return
+name|clauses
+operator|=
+operator|(
 operator|(
 name|Integer
 operator|)
 name|value
-return|;
+operator|)
+operator|.
+name|intValue
+argument_list|()
+expr_stmt|;
 block|}
 else|else
 block|{
 try|try
 block|{
-return|return
+name|clauses
+operator|=
 name|Integer
 operator|.
 name|parseInt
@@ -641,7 +767,7 @@ operator|.
 name|toString
 argument_list|()
 argument_list|)
-return|;
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -649,18 +775,76 @@ name|NumberFormatException
 name|e
 parameter_list|)
 block|{
-return|return
-literal|null
-return|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to parse Integer property '"
+operator|+
+name|MAX_BOOLEAN_CLAUSES
+operator|+
+literal|"' from configured value '"
+operator|+
+name|value
+operator|+
+literal|"'! Use default '"
+operator|+
+name|DEFAULT_MAX_BOOLEAN_CLAUSES
+operator|+
+literal|"' instead."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+name|clauses
+operator|=
+name|DEFAULT_MAX_BOOLEAN_CLAUSES
+expr_stmt|;
 block|}
 block|}
 block|}
 else|else
 block|{
-return|return
-literal|null
-return|;
+name|clauses
+operator|=
+name|DEFAULT_MAX_BOOLEAN_CLAUSES
+expr_stmt|;
 block|}
+if|if
+condition|(
+name|clauses
+operator|<
+literal|1
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Configured '{}={} is invalid (value MUST BE> 0). Use "
+operator|+
+literal|"default {} instead."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|MAX_BOOLEAN_CLAUSES
+block|,
+name|clauses
+block|,
+name|DEFAULT_MAX_BOOLEAN_CLAUSES
+block|}
+argument_list|)
+expr_stmt|;
+name|clauses
+operator|=
+name|DEFAULT_MAX_BOOLEAN_CLAUSES
+expr_stmt|;
+block|}
+return|return
+name|clauses
+return|;
 block|}
 specifier|public
 name|void
@@ -688,8 +872,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|MAX_BOOLEAN_CLAUSES
 argument_list|)
 expr_stmt|;
@@ -700,8 +882,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|MAX_BOOLEAN_CLAUSES
 argument_list|,
 name|integer
@@ -733,8 +913,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|DOCUMENT_BOOST_FIELD
 argument_list|)
 expr_stmt|;
@@ -745,8 +923,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|DOCUMENT_BOOST_FIELD
 argument_list|,
 name|fieldName
@@ -766,8 +942,6 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|DOCUMENT_BOOST_FIELD
 argument_list|)
 decl_stmt|;
@@ -808,8 +982,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|FIELD_BOOST_MAPPINGS
 argument_list|,
 name|fieldBoosts
@@ -822,15 +994,13 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|FIELD_BOOST_MAPPINGS
 argument_list|)
 expr_stmt|;
 block|}
 block|}
 specifier|public
-name|Boolean
+name|boolean
 name|isImmediateCommit
 parameter_list|()
 block|{
@@ -841,8 +1011,6 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|IMMEDIATE_COMMIT
 argument_list|)
 decl_stmt|;
@@ -862,9 +1030,14 @@ condition|)
 block|{
 return|return
 operator|(
+operator|(
 name|Boolean
 operator|)
 name|value
+operator|)
+operator|.
+name|booleanValue
+argument_list|()
 return|;
 block|}
 else|else
@@ -885,7 +1058,7 @@ block|}
 else|else
 block|{
 return|return
-literal|null
+name|DEFAULT_IMMEDIATE_COMMIT_STATE
 return|;
 block|}
 block|}
@@ -908,8 +1081,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|IMMEDIATE_COMMIT
 argument_list|,
 name|state
@@ -922,8 +1093,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|IMMEDIATE_COMMIT
 argument_list|)
 expr_stmt|;
@@ -931,7 +1100,7 @@ block|}
 block|}
 specifier|public
 specifier|final
-name|Integer
+name|int
 name|getCommitWithinDuration
 parameter_list|()
 block|{
@@ -942,10 +1111,11 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|COMMIT_WITHIN_DURATION
 argument_list|)
+decl_stmt|;
+name|int
+name|duration
 decl_stmt|;
 if|if
 condition|(
@@ -961,18 +1131,25 @@ operator|instanceof
 name|Integer
 condition|)
 block|{
-return|return
+name|duration
+operator|=
+operator|(
 operator|(
 name|Integer
 operator|)
 name|value
-return|;
+operator|)
+operator|.
+name|intValue
+argument_list|()
+expr_stmt|;
 block|}
 else|else
 block|{
 try|try
 block|{
-return|return
+name|duration
+operator|=
 name|Integer
 operator|.
 name|parseInt
@@ -982,7 +1159,7 @@ operator|.
 name|toString
 argument_list|()
 argument_list|)
-return|;
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -990,18 +1167,76 @@ name|NumberFormatException
 name|e
 parameter_list|)
 block|{
-return|return
-literal|null
-return|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to parse Integer property '"
+operator|+
+name|COMMIT_WITHIN_DURATION
+operator|+
+literal|"' from configured value '"
+operator|+
+name|value
+operator|+
+literal|"'! Use default "
+operator|+
+name|DEFAULT_COMMIT_WITHIN_DURATION
+operator|+
+literal|"ms instead."
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+name|duration
+operator|=
+name|DEFAULT_COMMIT_WITHIN_DURATION
+expr_stmt|;
 block|}
 block|}
 block|}
 else|else
 block|{
-return|return
-literal|null
-return|;
+name|duration
+operator|=
+name|DEFAULT_COMMIT_WITHIN_DURATION
+expr_stmt|;
 block|}
+if|if
+condition|(
+name|duration
+operator|<=
+literal|0
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Configured '{}={}ms is invalid (value MUST BE>= 0). Use "
+operator|+
+literal|"default {}ms instead."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|COMMIT_WITHIN_DURATION
+block|,
+name|duration
+block|,
+name|DEFAULT_COMMIT_WITHIN_DURATION
+block|}
+argument_list|)
+expr_stmt|;
+name|duration
+operator|=
+name|DEFAULT_COMMIT_WITHIN_DURATION
+expr_stmt|;
+block|}
+return|return
+name|duration
+return|;
 block|}
 specifier|public
 specifier|final
@@ -1030,8 +1265,6 @@ name|config
 operator|.
 name|remove
 argument_list|(
-name|SolrYard
-operator|.
 name|COMMIT_WITHIN_DURATION
 argument_list|)
 expr_stmt|;
@@ -1042,8 +1275,6 @@ name|config
 operator|.
 name|put
 argument_list|(
-name|SolrYard
-operator|.
 name|COMMIT_WITHIN_DURATION
 argument_list|,
 name|duration
@@ -1073,8 +1304,6 @@ name|config
 operator|.
 name|get
 argument_list|(
-name|SolrYard
-operator|.
 name|FIELD_BOOST_MAPPINGS
 argument_list|)
 decl_stmt|;
@@ -1118,7 +1347,10 @@ else|else
 block|{
 comment|// TODO: add support for parsing from String[] and Collection<String>
 return|return
-literal|null
+name|Collections
+operator|.
+name|emptyMap
+argument_list|()
 return|;
 block|}
 block|}
@@ -1151,8 +1383,6 @@ throw|throw
 operator|new
 name|ConfigurationException
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_SERVER_LOCATION
 argument_list|,
 literal|"The URL of the Solr server MUST NOT be NULL!"
@@ -1170,8 +1400,6 @@ throw|throw
 operator|new
 name|ConfigurationException
 argument_list|(
-name|SolrYard
-operator|.
 name|SOLR_SERVER_LOCATION
 argument_list|,
 name|e
