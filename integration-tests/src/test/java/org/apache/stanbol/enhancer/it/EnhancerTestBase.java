@@ -717,32 +717,12 @@ argument_list|)
 expr_stmt|;
 comment|//also assert that the SolrYard for the dbpedia site is fully
 comment|//initialized
-name|executor
-operator|.
-name|execute
-argument_list|(
-name|builder
-operator|.
-name|buildGetRequest
-argument_list|(
-literal|"/entityhub/site/dbpedia"
-operator|+
-literal|"/entity?id=urn:does:not:exist:f82js95xsig39s.23987"
-argument_list|)
-operator|.
-name|withHeader
-argument_list|(
-literal|"Accept"
-argument_list|,
-literal|"application/json"
-argument_list|)
-argument_list|)
-operator|.
-name|assertStatus
-argument_list|(
-literal|404
-argument_list|)
-expr_stmt|;
+comment|//No longer needed with STANBOL-996
+comment|//                executor.execute(
+comment|//                        builder.buildGetRequest("/entityhub/site/dbpedia" +
+comment|//                        		"/entity?id=urn:does:not:exist:f82js95xsig39s.23987")
+comment|//                        .withHeader("Accept", "application/json"))
+comment|//                .assertStatus(404);
 name|log
 operator|.
 name|info
