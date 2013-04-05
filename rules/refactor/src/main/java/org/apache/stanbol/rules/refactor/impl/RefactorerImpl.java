@@ -385,24 +385,6 @@ name|apache
 operator|.
 name|stanbol
 operator|.
-name|ontologymanager
-operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|ONManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
 name|rules
 operator|.
 name|adapters
@@ -989,12 +971,12 @@ specifier|protected
 name|RuleAdapterManager
 name|ruleAdapterManager
 decl_stmt|;
-comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RefactorerImpl instances do need to be configured! YOU      * NEED TO USE      * {@link #RefactorerImpl(WeightedTcProvider, Serializer, TcManager, ONManager, SemionManager, RuleStore, Reasoner, Dictionary)}      * or its overloads, to parse the configuration and then initialise the rule store if running outside a      * OSGI environment.      */
+comment|/**      * This default constructor is<b>only</b> intended to be used by the OSGI environment with Service      * Component Runtime support.      *<p>      * DO NOT USE to manually create instances - the RefactorerImpl instances do need to be configured! YOU      * NEED TO USE      * {@link #RefactorerImpl(WeightedTcProvider, TcManager, RuleStore, RuleAdapterManager, Dictionary)}      * or its overloads, to parse the configuration and then initialise the rule store if running outside a      * OSGI environment.      */
 specifier|public
 name|RefactorerImpl
 parameter_list|()
 block|{      }
-comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      *       * @param weightedTcProvider      * @param serializer      * @param tcManager      * @param onManager      * @param semionManager      * @param ruleStore      * @param kReSReasoner      * @param configuration      */
+comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      *       * @param weightedTcProvider      * @param serializer      * @param tcManager      * @param semionManager      * @param ruleStore      * @param kReSReasoner      * @param configuration      */
 specifier|public
 name|RefactorerImpl
 parameter_list|(
