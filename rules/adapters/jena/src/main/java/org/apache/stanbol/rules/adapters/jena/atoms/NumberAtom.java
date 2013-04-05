@@ -219,6 +219,17 @@ name|node
 init|=
 literal|null
 decl_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"Number atom "
+operator|+
+name|number
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|number

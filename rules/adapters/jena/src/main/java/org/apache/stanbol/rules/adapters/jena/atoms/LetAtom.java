@@ -564,9 +564,9 @@ literal|"makeSkolem"
 argument_list|,
 name|nodes
 argument_list|,
-operator|new
 name|BuiltinRegistry
-argument_list|()
+operator|.
+name|theRegistry
 argument_list|)
 decl_stmt|;
 name|clauseEntries
