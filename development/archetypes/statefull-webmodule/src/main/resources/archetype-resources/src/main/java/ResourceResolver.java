@@ -165,6 +165,22 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|jaxrs
+operator|.
+name|utils
+operator|.
+name|TrailingSlash
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
@@ -817,6 +833,15 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
+comment|//this maks sure we are nt invoked with a trailing slash which would affect
+comment|//relative resolution of links (e.g. css)
+name|TrailingSlash
+operator|.
+name|enforcePresent
+argument_list|(
+name|uriInfo
+argument_list|)
+expr_stmt|;
 specifier|final
 name|String
 name|resourcePath
