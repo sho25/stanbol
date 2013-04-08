@@ -103,7 +103,7 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"${artifactId}"
+literal|"${artifactId}/"
 argument_list|,
 literal|"Example:${artifactId}"
 argument_list|,
