@@ -1230,13 +1230,6 @@ name|Path
 argument_list|(
 literal|"users/edit/{username}"
 argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|MediaType
-operator|.
-name|TEXT_HTML
-argument_list|)
 specifier|public
 name|RdfViewable
 name|editUser
@@ -1260,62 +1253,6 @@ name|getUser
 argument_list|(
 name|userName
 argument_list|)
-argument_list|,
-name|this
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-return|;
-block|}
-comment|/**      * Produces suitable permission-checkboxes      */
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"users/{username}/permissionsCheckboxes"
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|MediaType
-operator|.
-name|TEXT_HTML
-argument_list|)
-specifier|public
-name|RdfViewable
-name|permissionsCheckboxes
-parameter_list|(
-annotation|@
-name|PathParam
-argument_list|(
-literal|"username"
-argument_list|)
-name|String
-name|userName
-parameter_list|)
-block|{
-name|addClassToPermissions
-argument_list|()
-expr_stmt|;
-comment|// workaround
-comment|// showSystem();
-name|addClassToPermissions
-argument_list|()
-expr_stmt|;
-comment|// workaround
-name|showSystem
-argument_list|()
-expr_stmt|;
-return|return
-operator|new
-name|RdfViewable
-argument_list|(
-literal|"permissionsCheckboxes"
-argument_list|,
-name|getPermissionType
-argument_list|()
 argument_list|,
 name|this
 operator|.
@@ -3167,55 +3104,6 @@ name|systemGraph
 argument_list|)
 return|;
 block|}
-comment|/**      * Produces suitable permission-checkboxes      */
-annotation|@
-name|GET
-annotation|@
-name|Path
-argument_list|(
-literal|"roles/{rolename}/permissionsCheckboxes"
-argument_list|)
-annotation|@
-name|Produces
-argument_list|(
-name|MediaType
-operator|.
-name|TEXT_HTML
-argument_list|)
-specifier|public
-name|RdfViewable
-name|rolePermissionsCheckboxes
-parameter_list|(
-annotation|@
-name|PathParam
-argument_list|(
-literal|"rolename"
-argument_list|)
-name|String
-name|roleName
-parameter_list|)
-block|{
-comment|// addClassToPermissions(); // workaround
-comment|// showSystem();
-return|return
-operator|new
-name|RdfViewable
-argument_list|(
-literal|"rolePermissionsCheckboxes"
-argument_list|,
-name|getRole
-argument_list|(
-name|roleName
-argument_list|)
-argument_list|,
-name|this
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-return|;
-block|}
-comment|// getPermissionType()
 comment|// **********************************
 comment|// ****** ADD ROLE ******************
 comment|// **********************************
