@@ -135,7 +135,7 @@ name|ORDERING_CONTENT_EXTRACTION
 operator|+
 literal|50
 decl_stmt|;
-comment|/**      * Ordering values< {@link #ORDERING_NLP_CHUNK} and>=      * {@link #ORDERING_NLP_LEMMATIZE} are reserved for engines that lemmatize      * texts.<p>      * TODO: maybe this should be the same as {@link #ORDERING_NLP_TOKENIZING}      */
+comment|/**      * Ordering values< {@link #ORDERING_NLP_CHUNK} and>=      * {@link #ORDERING_NLP_LEMMATIZE} are reserved for engines that lemmatize      * texts.<p>      */
 name|Integer
 name|ORDERING_NLP_LEMMATIZE
 init|=
@@ -144,6 +144,16 @@ operator|.
 name|ORDERING_CONTENT_EXTRACTION
 operator|+
 literal|40
+decl_stmt|;
+comment|/**      * Ordering values< {@link #ORDERING_NLP_LEMMATIZE} and>=      * {@link #ORDERING_NLP_NER} are reserved for engines that do perform       * Named Entity Recognition (NER)<p>      */
+name|Integer
+name|ORDERING_NLP_NER
+init|=
+name|ServiceProperties
+operator|.
+name|ORDERING_CONTENT_EXTRACTION
+operator|+
+literal|30
 decl_stmt|;
 block|}
 end_interface
