@@ -470,7 +470,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Unable to remove Managed Solr Index {} because the {} "
+literal|"Unable to install Managed Solr Index {} because the {} "
 operator|+
 literal|"Server {} is currently not active!"
 argument_list|,
@@ -505,6 +505,7 @@ operator|.
 name|IGNORED
 argument_list|)
 expr_stmt|;
+comment|//needs still to be installed
 block|}
 else|else
 block|{
