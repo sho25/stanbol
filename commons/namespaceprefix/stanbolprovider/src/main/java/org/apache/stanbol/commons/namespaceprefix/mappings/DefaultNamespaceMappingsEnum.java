@@ -389,7 +389,20 @@ name|frbr
 argument_list|(
 literal|"http://purl.org/vocab/frbr/core#"
 argument_list|)
-block|,         ;
+block|,
+comment|/*      * Freebase namesoaces      */
+comment|/**      * The freebase.com namespace      */
+name|fb
+argument_list|(
+literal|"http://rdf.freebase.com/ns/"
+argument_list|)
+block|,
+comment|/**      * The freebase.com key namespace. Keys are used to refer to keys used by      * for freebase topics (entities) on external sites (e.g. musicbrainz,       * wikipedia ...).      */
+name|key
+argument_list|(
+literal|"http://rdf.freebase.com/key/"
+argument_list|)
+block|;
 specifier|private
 name|String
 name|namespace
