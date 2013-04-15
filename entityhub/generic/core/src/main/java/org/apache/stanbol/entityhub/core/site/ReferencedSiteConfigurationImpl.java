@@ -405,6 +405,14 @@ return|return
 name|accessUri
 operator|==
 literal|null
+operator|||
+name|accessUri
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
 condition|?
 literal|null
 else|:
