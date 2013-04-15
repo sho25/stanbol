@@ -271,11 +271,17 @@ name|String
 name|lang
 parameter_list|)
 block|{
+comment|//Jena TDB uses '' for representing Literals without language
 if|if
 condition|(
 name|lang
 operator|==
 literal|null
+operator|||
+name|lang
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 return|return

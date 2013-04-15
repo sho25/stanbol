@@ -238,6 +238,9 @@ name|RdfResourceImporter
 parameter_list|(
 name|DatasetGraphTDB
 name|indexingDataset
+parameter_list|,
+name|RdfImportFilter
+name|importFilter
 parameter_list|)
 block|{
 if|if
@@ -264,6 +267,8 @@ operator|new
 name|DestinationTripleGraph
 argument_list|(
 name|indexingDataset
+argument_list|,
+name|importFilter
 argument_list|,
 name|log
 argument_list|)
