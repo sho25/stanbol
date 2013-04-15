@@ -1251,7 +1251,7 @@ condition|)
 block|{
 comment|//literal
 name|Locale
-name|lang
+name|locale
 init|=
 name|backend
 operator|.
@@ -1262,12 +1262,20 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|lang
+name|locale
 operator|!=
 literal|null
 condition|)
 block|{
 comment|//text with language
+name|String
+name|lang
+init|=
+name|locale
+operator|.
+name|getLanguage
+argument_list|()
+decl_stmt|;
 name|result
 operator|.
 name|addNaturalText
@@ -1286,8 +1294,12 @@ argument_list|)
 argument_list|,
 name|lang
 operator|.
-name|getLanguage
+name|isEmpty
 argument_list|()
+condition|?
+literal|null
+else|:
+name|lang
 argument_list|)
 expr_stmt|;
 block|}
