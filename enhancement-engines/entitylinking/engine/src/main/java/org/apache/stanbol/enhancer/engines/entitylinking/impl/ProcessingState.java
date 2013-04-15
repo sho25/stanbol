@@ -561,11 +561,7 @@ specifier|final
 name|LanguageProcessingConfig
 name|tpc
 decl_stmt|;
-specifier|protected
-specifier|final
-name|EntityLinkerConfig
-name|elc
-decl_stmt|;
+comment|//protected final EntityLinkerConfig elc;
 specifier|private
 name|AnalysedText
 name|at
@@ -598,7 +594,7 @@ operator|)
 name|object
 operator|)
 operator|.
-name|isProcessable
+name|isLinkable
 return|;
 block|}
 block|}
@@ -632,9 +628,6 @@ name|language
 parameter_list|,
 name|LanguageProcessingConfig
 name|tpc
-parameter_list|,
-name|EntityLinkerConfig
-name|elc
 parameter_list|)
 block|{
 if|if
@@ -687,32 +680,11 @@ literal|"The parsed TextProcessingConfig MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-if|if
-condition|(
-name|elc
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed EntityLinkerConfig MUST NOT be NULL!"
-argument_list|)
-throw|;
-block|}
 name|this
 operator|.
 name|tpc
 operator|=
 name|tpc
-expr_stmt|;
-name|this
-operator|.
-name|elc
-operator|=
-name|elc
 expr_stmt|;
 name|enclosedSpanTypes
 operator|=
@@ -1325,7 +1297,7 @@ block|}
 comment|//determine if the token should be linked/matched
 name|tokenData
 operator|.
-name|isProcessable
+name|isLinkable
 operator|=
 name|tokenData
 operator|.
@@ -1337,7 +1309,7 @@ name|isMatchable
 operator|=
 name|tokenData
 operator|.
-name|isProcessable
+name|isLinkable
 operator|||
 name|tokenData
 operator|.
@@ -1350,7 +1322,7 @@ condition|(
 operator|!
 name|tokenData
 operator|.
-name|isProcessable
+name|isLinkable
 operator|&&
 name|tokenData
 operator|.
@@ -1397,7 +1369,7 @@ block|{
 comment|//convert matchable to
 name|tokenData
 operator|.
-name|isProcessable
+name|isLinkable
 operator|=
 literal|true
 expr_stmt|;
@@ -1448,7 +1420,7 @@ name|foundProcessable
 operator|=
 name|tokenData
 operator|.
-name|isProcessable
+name|isLinkable
 expr_stmt|;
 block|}
 if|if
@@ -1516,7 +1488,8 @@ argument_list|()
 operator|&&
 name|activeChunk
 operator|.
-name|matchableCount
+name|getMatchableCount
+argument_list|()
 operator|>
 literal|1
 condition|)
@@ -1591,7 +1564,7 @@ condition|(
 operator|!
 name|ct
 operator|.
-name|isProcessable
+name|isLinkable
 condition|)
 block|{
 comment|//if not already processable
@@ -1627,7 +1600,7 @@ argument_list|)
 expr_stmt|;
 name|ct
 operator|.
-name|isProcessable
+name|isLinkable
 operator|=
 literal|true
 expr_stmt|;
@@ -2013,58 +1986,70 @@ argument_list|()
 return|;
 block|}
 comment|/**      * Internally used to store additional Metadata for Tokens of the current Sentence      *<p>      * Checks if the parsed {@link Token} is processable. This decision is taken first based on the POS      * annotation ( Lexical Category, POS tag) and second on the      * {@link EntityLinkerConfig#getMinSearchTokenLength()} if no POS annotations are available or the      * probability of the POS annotations is to low.      *<p>      * Since STANBOL-685two POS Probabilities are used<ul>      *<li> {@link LanguageProcessingConfig#getMinPosAnnotationProbability()} for accepting POS tags that are      * processed - included in {@link LanguageProcessingConfig#getLinkedLexicalCategories()} or      * {@link LanguageProcessingConfig#getLinkedPosTags()}.      *<li> {@link LanguageProcessingConfig#getMinExcludePosAnnotationProbability()} for those that are not      * processed. By default the exclusion probability is set to half of the inclusion one.      *</ul>      * Assuming that the<code>minPosTypePropb=0.667</code> a      *<ul>      *<li>noun with the prop 0.8 would result in returning<code>true</code>      *<li>noun with prop 0.5 would return<code>null</code>      *<li>verb with prop 0.4 would return<code>false</code>      *<li>verb with prop 0.3 would return<code>null</code>      *</ul>      * This algorithm makes it less likely that the {@link EntityLinkerConfig#getMinSearchTokenLength()} needs      * to be used as fallback for Tokens (what typically still provides better estimations as the token      * length).      *<p>      * (see also STANBOL-685 even that this Issue refers a version of this Engine that has not yet used the      * Stanbol NLP processing chain)      *       * @param token      *            the {@link Token} to check.      * @return<code>true</code> if the parsed token needs to be processed. Otherwise<code>false</code>      */
+specifier|public
 class|class
 name|TokenData
 block|{
 comment|/** The Token */
+specifier|public
 specifier|final
 name|Token
 name|token
 decl_stmt|;
 comment|/** The index of the Token within the current Section (Sentence) */
+specifier|public
 specifier|final
 name|int
 name|index
 decl_stmt|;
 comment|/** If this Token should be linked with the Vocabulary */
+specifier|public
 name|boolean
-name|isProcessable
+name|isLinkable
 decl_stmt|;
 comment|/** If this Token should be used for multi word searches in the Vocabulary */
+specifier|public
 name|boolean
 name|isMatchable
 decl_stmt|;
 comment|/** if this Token has an alpha or numeric char */
+specifier|public
 specifier|final
 name|boolean
 name|hasAlphaNumeric
 decl_stmt|;
 comment|/** the chunk of this Token */
+specifier|public
 specifier|final
 name|ChunkData
 name|inChunk
 decl_stmt|;
 comment|/** the morphological features of the Token (selected based on the POS Tag) */
+specifier|public
 specifier|final
 name|MorphoFeatures
 name|morpho
 decl_stmt|;
 comment|/**          * if this token starts with an upperCase letter          */
+specifier|public
 specifier|final
 name|boolean
 name|upperCase
 decl_stmt|;
 comment|/**          * If the POS type of this word matches a linkable category          */
+specifier|public
 specifier|final
 name|boolean
 name|isLinkablePos
 decl_stmt|;
 comment|/**          * if the POS type of this word matches a matchable category          */
+specifier|public
 specifier|final
 name|boolean
 name|isMatchablePos
 decl_stmt|;
 comment|/**          * if this Token represents the start of an sub-sentence such as an           * starting ending quote           * @see ProcessingState#SUB_SENTENCE_START_POS          */
+specifier|public
 specifier|final
 name|boolean
 name|isSubSentenceStart
@@ -2338,7 +2323,7 @@ operator|.
 name|length
 argument_list|()
 operator|>=
-name|elc
+name|tpc
 operator|.
 name|getMinSearchTokenLength
 argument_list|()
@@ -2516,7 +2501,7 @@ operator|.
 name|length
 argument_list|()
 operator|>=
-name|elc
+name|tpc
 operator|.
 name|getMinSearchTokenLength
 argument_list|()
@@ -2771,32 +2756,11 @@ name|mf
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Getter for the text as used for searching/matching          * Entities in the linked vocabulary. If           * {@link EntityLinkerConfig#isLemmaMatching()} is          * enabled this will return the          * {@link MorphoFeatures#getLemma()} (if available).           * Otherwise the {@link Token#getSpan()} is returned          * @return the text of the token as to be used for          * matching. Guaranteed to be NOT NULL.          */
+comment|/**          * Getter for token text          * @return the text of the token          */
 specifier|public
 name|String
 name|getTokenText
 parameter_list|()
-block|{
-if|if
-condition|(
-name|elc
-operator|.
-name|isLemmaMatching
-argument_list|()
-operator|&&
-name|morpho
-operator|!=
-literal|null
-condition|)
-block|{
-return|return
-name|morpho
-operator|.
-name|getLemma
-argument_list|()
-return|;
-block|}
-else|else
 block|{
 return|return
 name|token
@@ -2805,9 +2769,28 @@ name|getSpan
 argument_list|()
 return|;
 block|}
+comment|/**          * Getter for the Lemma of the token.           * @return the Lemma of the Token or<code>null</code> if not available          */
+specifier|public
+name|String
+name|getTokenLemma
+parameter_list|()
+block|{
+return|return
+name|morpho
+operator|!=
+literal|null
+condition|?
+name|morpho
+operator|.
+name|getLemma
+argument_list|()
+else|:
+literal|null
+return|;
 block|}
 block|}
 comment|/**       * Represents a Chunk (group of tokens) used as context for EntityLinking.      * Typically a single {@link ChunkData#chunk} is used, but in case of      * overlapping and {@link ChunkData#isProcessable processable} chunks      * multiple {@link Chunk}s might be merged to a single {@link ChunkData}      * instance. In such cases {@link ChunkData#chunk} represents the      * first and {@link ChunkData#merged} the last of the merged chunks.<p>      * {@link ChunkData#startToken} and {@link ChunkData#endToken} represent      * the covered [start,end) {@link Token} indices relative to the current      * sections (typically a {@link Sentence}). {@link ChunkData#getStartChar()}      * and {@link ChunkData#getEndChar()} are the absolute [start,end) character      * indices within the {@link AnalysedText#getSpan()}      */
+specifier|public
 class|class
 name|ChunkData
 block|{
@@ -2820,30 +2803,31 @@ init|=
 literal|true
 decl_stmt|;
 comment|/** if the Chunk is processable */
+specifier|public
 specifier|final
 name|boolean
 name|isProcessable
 decl_stmt|;
 comment|/** the Chunk */
+specifier|public
 specifier|final
 name|Chunk
 name|chunk
 decl_stmt|;
 comment|/**           * In case multiple overlapping and processable {@link Chunk}s the          * section selected by the chunks are merged. While {@link #chunk}          * holds the original chunk (the first) this variable holds the          * last merged one. Enclosed chunks (in case more than two are          * merged) are not available via this class, but can be retrieved          * by iterating over the {@link AnalysedText} content part.          */
+specifier|private
 name|Chunk
 name|merged
 decl_stmt|;
 comment|/** the start token index relative to the current section (sentence) */
+specifier|private
 name|int
 name|startToken
 decl_stmt|;
 comment|/** the end token index relative to the current section (sentence) */
+specifier|private
 name|int
 name|endToken
-decl_stmt|;
-comment|/**          * The number of processable Tokens enclosed by this Chunk          */
-name|int
-name|processableCount
 decl_stmt|;
 comment|/**          * The number of matchable Tokens enclosed by this Chunk          */
 name|int
@@ -3007,6 +2991,7 @@ name|getEnd
 argument_list|()
 return|;
 block|}
+comment|/**          * If this chunk is processable          * @return the state          */
 specifier|public
 name|boolean
 name|isProcessable
@@ -3014,6 +2999,34 @@ parameter_list|()
 block|{
 return|return
 name|isProcessable
+return|;
+block|}
+comment|/**          * Getter for the number of matchable tokens contained in this chunk          * @return The number of matchable tokens contained in this chunk          */
+specifier|public
+name|int
+name|getMatchableCount
+parameter_list|()
+block|{
+return|return
+name|matchableCount
+return|;
+block|}
+specifier|public
+name|int
+name|getStartTokenIndex
+parameter_list|()
+block|{
+return|return
+name|startToken
+return|;
+block|}
+specifier|public
+name|int
+name|getEndTokenIndex
+parameter_list|()
+block|{
+return|return
+name|endToken
 return|;
 block|}
 block|}

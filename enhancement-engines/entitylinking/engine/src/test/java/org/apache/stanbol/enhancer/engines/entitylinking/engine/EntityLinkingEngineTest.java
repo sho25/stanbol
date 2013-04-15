@@ -3168,6 +3168,12 @@ name|linkedEntity
 operator|.
 name|getSelectedText
 argument_list|()
+operator|+
+literal|"(Expected: "
+operator|+
+name|expectedSuggestions
+operator|+
+literal|")"
 argument_list|,
 name|linkedEntity
 operator|.

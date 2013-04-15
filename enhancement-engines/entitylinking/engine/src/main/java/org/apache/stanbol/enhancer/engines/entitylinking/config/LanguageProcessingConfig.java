@@ -484,6 +484,10 @@ name|linkMultiMatchableTokensInChunkState
 init|=
 name|DEFAULT_LINK_MULTIPLE_MATCHABLE_TOKENS_IN_CHUNKS_STATE
 decl_stmt|;
+specifier|private
+name|int
+name|minSearchTokenLength
+decl_stmt|;
 comment|/**      * The language or<code>null</code> for the default configuration      * @param language      */
 specifier|public
 name|LanguageProcessingConfig
@@ -1333,6 +1337,32 @@ name|state
 expr_stmt|;
 block|}
 block|}
+comment|/**      * The minimum number of character a {@link Token} (word) must have to be      * used {@link EntitySearcher#lookup(java.util.List, String...) lookup} concepts      * in the taxonomy. Note that this parameter is only used of no POS (Part-      * of-speech) tags are available in the {@link AnalysedText}.      * @param minSearchTokenLength the minSearchTokenLength to set      */
+specifier|public
+name|void
+name|setMinSearchTokenLength
+parameter_list|(
+name|int
+name|minSearchTokenLength
+parameter_list|)
+block|{
+name|this
+operator|.
+name|minSearchTokenLength
+operator|=
+name|minSearchTokenLength
+expr_stmt|;
+block|}
+comment|/**      * The minimum number of character a {@link Token} (word) must have to be      * used {@link EntitySearcher#lookup(java.util.List, String...) lookup} concepts      * in the taxonomy. Note that this parameter is only used of no POS (Part-      * of-speech) tags are available in the {@link AnalysedText}.      * @return the minSearchTokenLength      */
+specifier|public
+name|int
+name|getMinSearchTokenLength
+parameter_list|()
+block|{
+return|return
+name|minSearchTokenLength
+return|;
+block|}
 comment|/**      * Clones the {@link LanguageProcessingConfig}. Intended to be used      * to create language specific configs based on the default one.      */
 annotation|@
 name|Override
@@ -1431,6 +1461,12 @@ operator|.
 name|matchedLexicalCategories
 operator|=
 name|matchedLexicalCategories
+expr_stmt|;
+name|c
+operator|.
+name|minSearchTokenLength
+operator|=
+name|minSearchTokenLength
 expr_stmt|;
 return|return
 name|c

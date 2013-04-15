@@ -123,7 +123,7 @@ name|entitylinking
 operator|.
 name|config
 operator|.
-name|EntityLinkerConfig
+name|TextProcessingConfig
 operator|.
 name|DEFAULT_MIN_SEARCH_TOKEN_LENGTH
 import|;
@@ -233,7 +233,7 @@ name|entitylinking
 operator|.
 name|config
 operator|.
-name|EntityLinkerConfig
+name|TextProcessingConfig
 operator|.
 name|MIN_SEARCH_TOKEN_LENGTH
 import|;
@@ -528,16 +528,6 @@ operator|.
 name|util
 operator|.
 name|NoSuchElementException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|SortedSet
 import|;
 end_import
 
@@ -1212,6 +1202,24 @@ operator|=
 name|Integer
 operator|.
 name|MAX_VALUE
+argument_list|,
+name|value
+operator|=
+block|{
+literal|"dbp-ont:Organisation; dbp-ont:Newspaper; schema:Organization> dbp-ont:Organisation"
+block|,
+literal|"dbp-ont:Person; foaf:Person; schema:Person> dbp-ont:Person"
+block|,
+literal|"dbp-ont:Place; schema:Place> dbp-ont:Place"
+block|,
+literal|"dbp-ont:Work; schema:CreativeWork> dbp-ont:Work"
+block|,
+literal|"dbp-ont:Event; schema:Event> dbp-ont:Event"
+block|,
+literal|"schema:Product> schema:Product"
+block|,
+literal|"skos:Concept> skos:Concept"
+block|}
 argument_list|)
 block|,
 annotation|@
@@ -1242,15 +1250,15 @@ argument_list|,
 name|value
 operator|=
 block|{
-literal|"http://www.w3.org/2000/01/rdf-schema#comment"
+literal|"rdfs:comment"
 block|,
-literal|"http://www.w3.org/2003/01/geo/wgs84_pos#lat"
+literal|"geo:lat"
 block|,
-literal|"http://www.w3.org/2003/01/geo/wgs84_pos#long"
+literal|"geo:long"
 block|,
-literal|"http://xmlns.com/foaf/0.1/depiction"
+literal|"foaf:depiction"
 block|,
-literal|"http://dbpedia.org/ontology/thumbnail"
+literal|"dbp-ont:thumbnail"
 block|}
 argument_list|)
 block|,
