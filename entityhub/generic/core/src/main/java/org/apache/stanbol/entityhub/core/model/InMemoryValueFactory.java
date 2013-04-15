@@ -549,6 +549,12 @@ operator|(
 name|language
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|language
+operator|.
+name|isEmpty
+argument_list|()
 condition|?
 operator|(
 literal|'@'
