@@ -516,7 +516,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"lib/underscore-min.js"
+literal|"lib/underscore/underscore-min.js"
 argument_list|,
 name|this
 argument_list|,
@@ -567,7 +567,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"lib/vie/vie-2.1.0.debug.js"
+literal|"lib/vie/vie-latest.debug.js"
 argument_list|,
 name|this
 argument_list|,
