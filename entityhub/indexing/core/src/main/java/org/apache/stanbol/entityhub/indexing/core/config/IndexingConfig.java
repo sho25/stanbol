@@ -1781,12 +1781,8 @@ block|{
 name|File
 name|nsPrefixMappings
 init|=
-operator|new
-name|File
+name|getConfigFile
 argument_list|(
-name|getConfigFolder
-argument_list|()
-argument_list|,
 literal|"namespaceprefix.mappings"
 argument_list|)
 decl_stmt|;
