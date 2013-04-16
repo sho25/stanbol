@@ -246,7 +246,7 @@ specifier|final
 name|String
 name|PARAM_MAX_THUMBNAIL_SIZE
 init|=
-literal|"icon-max-size"
+literal|"thumbnail-max-size"
 decl_stmt|;
 specifier|public
 specifier|static
@@ -265,7 +265,7 @@ specifier|final
 name|String
 name|PARAM_DEPICTION_PROPERTY
 init|=
-literal|"thumbnail-property"
+literal|"depiction-property"
 decl_stmt|;
 specifier|public
 specifier|static
