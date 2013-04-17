@@ -469,7 +469,7 @@ comment|//we need to reset the context ClassLoader to avoid leaking of Solr
 comment|//versions present in the System (when Stanbol is running in an embedded
 comment|//OSGI environment)
 name|ClassLoader
-name|classLoader
+name|ccl
 init|=
 name|Thread
 operator|.
@@ -488,12 +488,9 @@ argument_list|()
 operator|.
 name|setContextClassLoader
 argument_list|(
-name|CoreContainer
+name|this
 operator|.
-name|class
-operator|.
-name|getClassLoader
-argument_list|()
+name|classLoader
 argument_list|)
 expr_stmt|;
 name|charFilterFactoryRegistrations
@@ -545,7 +542,7 @@ argument_list|()
 operator|.
 name|setContextClassLoader
 argument_list|(
-name|classLoader
+name|ccl
 argument_list|)
 expr_stmt|;
 block|}
