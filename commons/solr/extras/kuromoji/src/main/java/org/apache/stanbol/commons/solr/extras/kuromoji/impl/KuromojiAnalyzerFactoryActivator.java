@@ -13,7 +13,7 @@ name|solr
 operator|.
 name|extras
 operator|.
-name|icu
+name|kuromoji
 operator|.
 name|impl
 package|;
@@ -33,7 +33,7 @@ name|solr
 operator|.
 name|utils
 operator|.
-name|AbstractAnalyzerFoctoryActivator
+name|AbstractAnalyzerFactoryActivator
 import|;
 end_import
 
@@ -41,12 +41,12 @@ begin_class
 specifier|public
 specifier|final
 class|class
-name|IcuAnalyzerFoctoryActivator
+name|KuromojiAnalyzerFactoryActivator
 extends|extends
-name|AbstractAnalyzerFoctoryActivator
+name|AbstractAnalyzerFactoryActivator
 block|{
 specifier|public
-name|IcuAnalyzerFoctoryActivator
+name|KuromojiAnalyzerFactoryActivator
 parameter_list|()
 block|{
 name|super

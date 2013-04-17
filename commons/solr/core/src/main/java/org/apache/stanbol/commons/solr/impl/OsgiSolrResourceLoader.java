@@ -197,7 +197,7 @@ name|solr
 operator|.
 name|utils
 operator|.
-name|AbstractAnalyzerFoctoryActivator
+name|AbstractAnalyzerFactoryActivator
 import|;
 end_import
 
@@ -238,7 +238,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Overrides the {@link SolrResourceLoader#findClass(String, Class, String...)}  * method to look for {@link TokenFilterFactory}, {@link CharFilterFactory} and  * {@link TokenizerFactory} registered as OSGI services.<p>  * This is because Solr 4 uses SPI ("META-INF/services" files) to lookup  * those factories and this does not work across bundles in OSGI.<p>  * This {@link SolrResourceLoader} variant is intended to be used together  * with Bundle-Activators based on the {@link AbstractAnalyzerFoctoryActivator}.  *<p> The {@link SolrServerAdapter} does use this class as {@link SolrResourceLoader}  * when creating {@link SolrCore}s.  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Overrides the {@link SolrResourceLoader#findClass(String, Class, String...)}  * method to look for {@link TokenFilterFactory}, {@link CharFilterFactory} and  * {@link TokenizerFactory} registered as OSGI services.<p>  * This is because Solr 4 uses SPI ("META-INF/services" files) to lookup  * those factories and this does not work across bundles in OSGI.<p>  * This {@link SolrResourceLoader} variant is intended to be used together  * with Bundle-Activators based on the {@link AbstractAnalyzerFactoryActivator}.  *<p> The {@link SolrServerAdapter} does use this class as {@link SolrResourceLoader}  * when creating {@link SolrCore}s.  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class

@@ -33,7 +33,7 @@ name|solr
 operator|.
 name|utils
 operator|.
-name|AbstractAnalyzerFoctoryActivator
+name|AbstractAnalyzerFactoryActivator
 import|;
 end_import
 
@@ -43,7 +43,7 @@ specifier|final
 class|class
 name|StempelAnalyzerFoctoryActivator
 extends|extends
-name|AbstractAnalyzerFoctoryActivator
+name|AbstractAnalyzerFactoryActivator
 block|{
 specifier|public
 name|StempelAnalyzerFoctoryActivator
