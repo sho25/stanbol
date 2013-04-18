@@ -1709,6 +1709,11 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
+literal|'.'
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|t
 operator|.
 name|next
