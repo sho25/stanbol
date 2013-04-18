@@ -97,6 +97,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|HashSet
 import|;
 end_import
@@ -128,6 +138,18 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+operator|.
+name|Entry
 import|;
 end_import
 
@@ -286,6 +308,20 @@ operator|.
 name|common
 operator|.
 name|SolrInputDocument
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|solr
+operator|.
+name|common
+operator|.
+name|SolrInputField
 import|;
 end_import
 
@@ -4009,9 +4045,11 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+comment|/*              * With STANBOL-1027 the calculation of the boost has changed to              * consider multiple values for Representation#get(field).              */
 name|float
-name|boost
+name|baseBoost
 decl_stmt|;
+comment|//the boost without considering the number of values per solr field
 name|Float
 name|fieldBoost
 init|=
@@ -4028,10 +4066,17 @@ argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
-comment|//With solr 3.6 one can not set index time boosts on fields that omitNorms
-comment|//because of that we need to restrict the usage of boosts to those manually
-comment|//configured in the fieldBoostMap. Before bosts where dropped for fields that
-comment|//do not support them
+specifier|final
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|int
+index|[]
+argument_list|>
+name|fieldsToBoost
+decl_stmt|;
+comment|//used to keep track of field we need boost
 if|if
 condition|(
 name|fieldBoost
@@ -4039,7 +4084,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|boost
+name|baseBoost
 operator|=
 name|documentBoost
 operator|!=
@@ -4051,26 +4096,36 @@ name|documentBoost
 else|:
 name|fieldBoost
 expr_stmt|;
+name|fieldsToBoost
+operator|=
+operator|new
+name|HashMap
+argument_list|<
+name|String
+argument_list|,
+name|int
+index|[]
+argument_list|>
+argument_list|()
+expr_stmt|;
 block|}
 else|else
 block|{
-name|boost
+name|baseBoost
 operator|=
 operator|-
 literal|1
 expr_stmt|;
+name|fieldsToBoost
+operator|=
+literal|null
+expr_stmt|;
 block|}
-comment|//the old code that does no longer work with Solr 3.6 :(
-comment|//            if(documentBoost != null){
-comment|//                boost = documentBoost;
-comment|//                if(fieldBoost != null){
-comment|//                    boost = boost*fieldBoost;
-comment|//                }
-comment|//            } else if(fieldBoost != null){
-comment|//                boost = fieldBoost;
-comment|//            } else {
-comment|//                boost = -1;
-comment|//            }
+comment|//NOTE: Setting a boost requires two iteration
+comment|//  (1) we add the values to the SolrInputDocument without an boost
+comment|//  (2) set the boost by using doc.setField(field,doc.getFieldValues(),boost)
+comment|//  Holding field values in an own map does not make sense as the SolrInputDocument
+comment|//  does already exactly that (in an more efficient way)
 for|for
 control|(
 name|Iterator
@@ -4136,14 +4191,53 @@ name|value
 argument_list|)
 control|)
 block|{
-comment|//Set Boosts only for text data types
+comment|//In step (1) of boosting just keep track of the field
 if|if
 condition|(
-name|boost
-operator|>
-literal|0
+name|fieldBoost
+operator|!=
+literal|null
 condition|)
 block|{
+comment|//wee need to boost in (2)
+name|int
+index|[]
+name|numValues
+init|=
+name|fieldsToBoost
+operator|.
+name|get
+argument_list|(
+name|fieldName
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|numValues
+operator|==
+literal|null
+condition|)
+block|{
+name|numValues
+operator|=
+operator|new
+name|int
+index|[]
+block|{
+literal|1
+block|}
+expr_stmt|;
+name|fieldsToBoost
+operator|.
+name|put
+argument_list|(
+name|fieldName
+argument_list|,
+name|numValues
+argument_list|)
+expr_stmt|;
+comment|//the first time add the document with the baseBoost
+comment|//as this will be the correct boost for single value fields
 name|inputDocument
 operator|.
 name|addField
@@ -4155,12 +4249,37 @@ operator|.
 name|getValue
 argument_list|()
 argument_list|,
-name|boost
+name|baseBoost
 argument_list|)
 expr_stmt|;
 block|}
 else|else
 block|{
+name|numValues
+index|[
+literal|0
+index|]
+operator|++
+expr_stmt|;
+comment|//for multi valued fields the correct boost is set in (2)
+comment|//so we can add here without an boost
+name|inputDocument
+operator|.
+name|addField
+argument_list|(
+name|fieldName
+argument_list|,
+name|value
+operator|.
+name|getValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+comment|//add add the values without boost
 name|inputDocument
 operator|.
 name|addField
@@ -4275,6 +4394,88 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+if|if
+condition|(
+name|fieldBoost
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//we need still to do part (2) of setting the correct boost
+for|for
+control|(
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|int
+index|[]
+argument_list|>
+name|entry
+range|:
+name|fieldsToBoost
+operator|.
+name|entrySet
+argument_list|()
+control|)
+block|{
+if|if
+condition|(
+name|entry
+operator|.
+name|getValue
+argument_list|()
+index|[
+literal|0
+index|]
+operator|>
+literal|1
+condition|)
+block|{
+comment|//adapt the boost only for multi valued fields
+name|SolrInputField
+name|solrField
+init|=
+name|inputDocument
+operator|.
+name|getField
+argument_list|(
+name|entry
+operator|.
+name|getKey
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|//the correct bosst is baseBoost (representing entity boost with field
+comment|//boost) multiplied with the sqrt(fieldValues). The 2nd part aims to
+comment|//compensate the Solr lengthNorm (1/sqrt(fieldTokens))
+comment|//see STANBOL-1027 for details
+name|solrField
+operator|.
+name|setBoost
+argument_list|(
+name|baseBoost
+operator|*
+operator|(
+name|float
+operator|)
+name|Math
+operator|.
+name|sqrt
+argument_list|(
+name|entry
+operator|.
+name|getValue
+argument_list|()
+index|[
+literal|0
+index|]
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 block|}
