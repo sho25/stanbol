@@ -316,6 +316,26 @@ index|[
 literal|0
 index|]
 argument_list|)
+operator|||
+literal|"postprocess"
+operator|.
+name|equalsIgnoreCase
+argument_list|(
+name|args
+index|[
+literal|0
+index|]
+argument_list|)
+operator|||
+literal|"finalise"
+operator|.
+name|equalsIgnoreCase
+argument_list|(
+name|args
+index|[
+literal|0
+index|]
+argument_list|)
 condition|)
 block|{
 if|if
@@ -397,6 +417,76 @@ name|index
 argument_list|()
 expr_stmt|;
 block|}
+elseif|else
+if|if
+condition|(
+literal|"postprocess"
+operator|.
+name|equalsIgnoreCase
+argument_list|(
+name|args
+index|[
+literal|0
+index|]
+argument_list|)
+condition|)
+block|{
+name|indexer
+operator|.
+name|initialiseIndexing
+argument_list|()
+expr_stmt|;
+name|indexer
+operator|.
+name|skipIndexEntities
+argument_list|()
+expr_stmt|;
+name|indexer
+operator|.
+name|postProcessEntities
+argument_list|()
+expr_stmt|;
+name|indexer
+operator|.
+name|finaliseIndexing
+argument_list|()
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+literal|"finalise"
+operator|.
+name|equalsIgnoreCase
+argument_list|(
+name|args
+index|[
+literal|0
+index|]
+argument_list|)
+condition|)
+block|{
+name|indexer
+operator|.
+name|initialiseIndexing
+argument_list|()
+expr_stmt|;
+name|indexer
+operator|.
+name|skipIndexEntities
+argument_list|()
+expr_stmt|;
+name|indexer
+operator|.
+name|skipPostProcessEntities
+argument_list|()
+expr_stmt|;
+name|indexer
+operator|.
+name|finaliseIndexing
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -452,13 +542,19 @@ literal|"-jar-with-dependencies.jar [options] init|index [configDir]"
 argument_list|,
 literal|"Indexing Commandline Utility: \n"
 operator|+
-literal|"  size:  Heap requirements depend on the dataset and the configuration.\n"
+literal|"  size:        Heap requirements depend on the dataset and the\n"
 operator|+
-literal|"         1024m should be a reasonable default.\n"
+literal|"               configuration. 1024m should be a reasonable default.\n"
 operator|+
-literal|"  init:  Initialise the configuration with the defaults \n"
+literal|"  init:        Initialise the configuration with the defaults \n"
 operator|+
-literal|"  index: Needed to start the indexing process\n"
+literal|"  index:       Needed to start the indexing process\n"
+operator|+
+literal|"  postprocess: Skip indexing and directly start with post-processing\n"
+operator|+
+literal|"  finalise:    Skip indexing and post-processing; only finalises \n"
+operator|+
+literal|"               the index. \n"
 operator|+
 literal|"  configDir: the path to the configuration directory (default:"
 operator|+

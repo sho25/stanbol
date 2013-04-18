@@ -2043,6 +2043,107 @@ annotation|@
 name|Override
 specifier|public
 name|void
+name|skipPostProcessEntities
+parameter_list|()
+block|{
+synchronized|synchronized
+init|(
+name|stateSync
+init|)
+block|{
+comment|//ensure that two threads do not start the
+comment|//initialisation at the same time ...
+name|State
+name|state
+init|=
+name|getState
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|state
+operator|.
+name|ordinal
+argument_list|()
+operator|<
+name|State
+operator|.
+name|INDEXED
+operator|.
+name|ordinal
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"The Indexer MUST BE already "
+operator|+
+name|State
+operator|.
+name|INDEXED
+operator|+
+literal|" when calling this Method!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|state
+operator|==
+name|State
+operator|.
+name|POSTPROCESSING
+condition|)
+block|{
+comment|//if state> INITIALISED
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to skip post processing if postprocessing is already in progress!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|state
+operator|.
+name|ordinal
+argument_list|()
+operator|>=
+name|state
+operator|.
+name|POSTPROCESSED
+operator|.
+name|ordinal
+argument_list|()
+condition|)
+block|{
+return|return;
+comment|//already post processed
+block|}
+name|setState
+argument_list|(
+name|State
+operator|.
+name|POSTPROCESSED
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Skiped postprocessing ..."
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
 name|postProcessEntities
 parameter_list|()
 block|{
@@ -2112,7 +2213,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Indexing started ..."
+literal|"PostProcessing started ..."
 argument_list|)
 expr_stmt|;
 block|}
@@ -2792,7 +2893,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Indexing started ..."
+literal|"finalisation started ..."
 argument_list|)
 expr_stmt|;
 block|}
@@ -2808,6 +2909,107 @@ operator|.
 name|FINISHED
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|skipIndexEntities
+parameter_list|()
+block|{
+synchronized|synchronized
+init|(
+name|stateSync
+init|)
+block|{
+comment|//ensure that two threads do not start the
+comment|//initialisation at the same time ...
+name|State
+name|state
+init|=
+name|getState
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|state
+operator|.
+name|ordinal
+argument_list|()
+operator|<
+name|State
+operator|.
+name|INITIALISED
+operator|.
+name|ordinal
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"The Indexer MUST BE already "
+operator|+
+name|State
+operator|.
+name|INITIALISED
+operator|+
+literal|" when calling this Method!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|state
+operator|==
+name|State
+operator|.
+name|INDEXING
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to skip indexing if indexing is already in progress!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|state
+operator|.
+name|ordinal
+argument_list|()
+operator|>=
+name|state
+operator|.
+name|INDEXED
+operator|.
+name|ordinal
+argument_list|()
+condition|)
+block|{
+comment|//if state> INDEXING
+return|return;
+comment|//already in INDEXED state
+block|}
+name|setState
+argument_list|(
+name|State
+operator|.
+name|INDEXED
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Indexing of Entities skipped ..."
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override

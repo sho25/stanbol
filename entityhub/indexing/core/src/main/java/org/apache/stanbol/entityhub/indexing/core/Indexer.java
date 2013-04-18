@@ -178,6 +178,17 @@ name|State
 name|getState
 parameter_list|()
 function_decl|;
+comment|/**      * Tells the indexer that the {@link #indexEntities()} step should be skipped.      * Will set the {@link #getState()} to {@link State#INDEXED} without indexing      * any Entities. Otherwise this has the same pre-requirements as calling      * {@link #indexEntities()}      */
+specifier|public
+name|void
+name|skipIndexEntities
+parameter_list|()
+function_decl|;
+comment|/**      * Tells the Indexer to skip the {@link #postProcessEntities()} step. Will set      * the {@link #getState()} to {@link State#POSTPROCESSED} without performing      * any post processing.Otherwise this has the same pre-requirements as calling      * {@link #postProcessEntities()}      */
+name|void
+name|skipPostProcessEntities
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
