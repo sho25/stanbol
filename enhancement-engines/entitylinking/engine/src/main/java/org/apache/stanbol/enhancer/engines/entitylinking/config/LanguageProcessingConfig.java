@@ -488,6 +488,10 @@ specifier|private
 name|int
 name|minSearchTokenLength
 decl_stmt|;
+specifier|private
+name|boolean
+name|linkOnlyUpperCaseTokenWithUnknownPos
+decl_stmt|;
 comment|/**      * The language or<code>null</code> for the default configuration      * @param language      */
 specifier|public
 name|LanguageProcessingConfig
@@ -1363,6 +1367,32 @@ return|return
 name|minSearchTokenLength
 return|;
 block|}
+comment|/**      * This returns the state if only upper case tokens should be marked as       * 'linkable' if they do not have a POS tag      * @return the state      */
+specifier|public
+name|boolean
+name|isLinkOnlyUpperCaseTokensWithUnknownPos
+parameter_list|()
+block|{
+return|return
+name|linkOnlyUpperCaseTokenWithUnknownPos
+return|;
+block|}
+comment|/**      * This returns the state if only upper case tokens should be marked as       * 'linkable' if they do not have a POS tag      * @param linkOnlyUpperCaseTokenWithUnknownPos the state      */
+specifier|public
+name|void
+name|setLinkOnlyUpperCaseTokenWithUnknownPos
+parameter_list|(
+name|boolean
+name|linkOnlyUpperCaseTokenWithUnknownPos
+parameter_list|)
+block|{
+name|this
+operator|.
+name|linkOnlyUpperCaseTokenWithUnknownPos
+operator|=
+name|linkOnlyUpperCaseTokenWithUnknownPos
+expr_stmt|;
+block|}
 comment|/**      * Clones the {@link LanguageProcessingConfig}. Intended to be used      * to create language specific configs based on the default one.      */
 annotation|@
 name|Override
@@ -1467,6 +1497,12 @@ operator|.
 name|minSearchTokenLength
 operator|=
 name|minSearchTokenLength
+expr_stmt|;
+name|c
+operator|.
+name|linkOnlyUpperCaseTokenWithUnknownPos
+operator|=
+name|linkOnlyUpperCaseTokenWithUnknownPos
 expr_stmt|;
 return|return
 name|c

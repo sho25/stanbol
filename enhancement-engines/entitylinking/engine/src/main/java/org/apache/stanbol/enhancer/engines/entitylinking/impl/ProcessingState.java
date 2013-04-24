@@ -47,6 +47,28 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
+name|engines
+operator|.
+name|entitylinking
+operator|.
+name|config
+operator|.
+name|TextProcessingConfig
+operator|.
+name|UNICASE_SCRIPT_LANUAGES
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
 name|nlp
 operator|.
 name|NlpAnnotations
@@ -135,6 +157,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -200,6 +232,26 @@ operator|.
 name|config
 operator|.
 name|LanguageProcessingConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|engines
+operator|.
+name|entitylinking
+operator|.
+name|config
+operator|.
+name|TextProcessingConfig
 import|;
 end_import
 
@@ -566,6 +618,11 @@ specifier|private
 name|AnalysedText
 name|at
 decl_stmt|;
+comment|/**      * If the language uses a unicase script and therefore upper case specific      * processing rules can not be used (see STANBOL-1049)      */
+specifier|private
+name|boolean
+name|isUnicaseLanguage
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -728,6 +785,39 @@ operator|.
 name|language
 operator|=
 name|language
+expr_stmt|;
+comment|//STANBOL-1049: we need now to know if a language uses a unicase script
+comment|//ensure lower case and only use the language part
+name|String
+name|lookupLang
+init|=
+name|language
+operator|.
+name|toLowerCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+operator|.
+name|split
+argument_list|(
+literal|"[_-]"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
+name|this
+operator|.
+name|isUnicaseLanguage
+operator|=
+name|UNICASE_SCRIPT_LANUAGES
+operator|.
+name|contains
+argument_list|(
+name|lookupLang
+argument_list|)
 expr_stmt|;
 comment|//prefer to iterate over sentences
 name|Iterator
@@ -948,14 +1038,14 @@ operator|-
 literal|1
 expr_stmt|;
 name|boolean
-name|foundProcessable
+name|foundLinkableToken
 init|=
 literal|false
 decl_stmt|;
 while|while
 condition|(
 operator|!
-name|foundProcessable
+name|foundLinkableToken
 operator|&&
 name|sections
 operator|.
@@ -1294,6 +1384,30 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+operator|!
+name|tokenData
+operator|.
+name|hasAlphaNumeric
+condition|)
+block|{
+name|tokenData
+operator|.
+name|isLinkable
+operator|=
+literal|false
+expr_stmt|;
+name|tokenData
+operator|.
+name|isMatchable
+operator|=
+literal|false
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// (1) apply basic rules for linkable/processable tokens
 comment|//determine if the token should be linked/matched
 name|tokenData
 operator|.
@@ -1302,7 +1416,16 @@ operator|=
 name|tokenData
 operator|.
 name|isLinkablePos
+operator|!=
+literal|null
+condition|?
+name|tokenData
+operator|.
+name|isLinkablePos
+else|:
+literal|false
 expr_stmt|;
+comment|//matchabel := linkable OR has matchablePos
 name|tokenData
 operator|.
 name|isMatchable
@@ -1311,12 +1434,19 @@ name|tokenData
 operator|.
 name|isLinkable
 operator|||
+operator|(
 name|tokenData
 operator|.
 name|isMatchablePos
+operator|!=
+literal|null
+operator|&&
+name|tokenData
+operator|.
+name|isMatchablePos
+operator|)
 expr_stmt|;
-comment|//for non processable but upper case tolkens we need to check
-comment|//the uper case token configuration
+comment|//(2) for non linkable tokens check for upper case rules
 if|if
 condition|(
 operator|!
@@ -1327,10 +1457,151 @@ operator|&&
 name|tokenData
 operator|.
 name|upperCase
+operator|&&
+name|tokenData
+operator|.
+name|index
+operator|>
+literal|0
+operator|&&
+comment|//not a sentence or sub-sentence start
+operator|!
+name|tokens
+operator|.
+name|get
+argument_list|(
+name|tokenData
+operator|.
+name|index
+operator|-
+literal|1
+argument_list|)
+operator|.
+name|isSubSentenceStart
+condition|)
+block|{
+comment|//We have an upper case token!
+if|if
+condition|(
+name|tpc
+operator|.
+name|isLinkUpperCaseTokens
+argument_list|()
 condition|)
 block|{
 if|if
 condition|(
+name|tokenData
+operator|.
+name|isMatchable
+condition|)
+block|{
+comment|//convert matchable to
+name|tokenData
+operator|.
+name|isLinkable
+operator|=
+literal|true
+expr_stmt|;
+comment|//linkable
+block|}
+else|else
+block|{
+comment|// and other tokens to
+name|tokenData
+operator|.
+name|isMatchable
+operator|=
+literal|true
+expr_stmt|;
+comment|//matchable
+block|}
+block|}
+else|else
+block|{
+comment|//finally we need to convert other Tokens to matchable
+comment|//if MatchUpperCaseTokens is active
+if|if
+condition|(
+operator|!
+name|tokenData
+operator|.
+name|isMatchable
+operator|&&
+name|tpc
+operator|.
+name|isMatchUpperCaseTokens
+argument_list|()
+condition|)
+block|{
+name|tokenData
+operator|.
+name|isMatchable
+operator|=
+literal|true
+expr_stmt|;
+block|}
+block|}
+block|}
+comment|//else not an upper case token
+comment|//(3) Unknown POS tag Rules (see STANBOL-1049)
+if|if
+condition|(
+operator|!
+name|tokenData
+operator|.
+name|isLinkable
+operator|&&
+name|tokenData
+operator|.
+name|isLinkablePos
+operator|==
+literal|null
+operator|&&
+name|tokenData
+operator|.
+name|isLinkablePos
+operator|==
+literal|null
+condition|)
+block|{
+if|if
+condition|(
+name|isUnicaseLanguage
+operator|||
+operator|!
+name|tpc
+operator|.
+name|isLinkOnlyUpperCaseTokensWithUnknownPos
+argument_list|()
+condition|)
+block|{
+if|if
+condition|(
+name|tokenData
+operator|.
+name|hasSearchableLength
+condition|)
+block|{
+name|tokenData
+operator|.
+name|isLinkable
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|//else no need to change the state
+block|}
+else|else
+block|{
+comment|//non unicase language and link only upper case tokens enabled
+if|if
+condition|(
+name|tokenData
+operator|.
+name|upperCase
+operator|&&
+comment|// upper case token
 name|tokenData
 operator|.
 name|index
@@ -1355,43 +1626,20 @@ condition|)
 block|{
 if|if
 condition|(
-name|tpc
-operator|.
-name|isLinkUpperCaseTokens
-argument_list|()
-operator|&&
-comment|//if upper case tokens should be linked
 name|tokenData
 operator|.
-name|isMatchable
+name|hasSearchableLength
 condition|)
 block|{
-comment|//convert matchable to
 name|tokenData
 operator|.
 name|isLinkable
 operator|=
 literal|true
 expr_stmt|;
-comment|//linkable
 block|}
-elseif|else
-if|if
-condition|(
-name|tpc
-operator|.
-name|isMatchUpperCaseTokens
-argument_list|()
-operator|||
-name|tpc
-operator|.
-name|isLinkUpperCaseTokens
-argument_list|()
-condition|)
+else|else
 block|{
-comment|//if matching for upperCase Tokens is activated or
-comment|//linking is activated, but the current Token is not
-comment|//matchable, than mark the Token as matchable
 name|tokenData
 operator|.
 name|isMatchable
@@ -1399,8 +1647,27 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|//else upper case matching and linking is deactivated
 block|}
+elseif|else
+if|if
+condition|(
+name|tokenData
+operator|.
+name|hasSearchableLength
+condition|)
+block|{
+comment|//lower case and long token
+name|tokenData
+operator|.
+name|isMatchable
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|//else lower case and short word
+block|}
+block|}
+comment|//else already linkable or POS tag present
 block|}
 comment|//add the token to the list
 name|tokens
@@ -1413,10 +1680,10 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|foundProcessable
+name|foundLinkableToken
 condition|)
 block|{
-name|foundProcessable
+name|foundLinkableToken
 operator|=
 name|tokenData
 operator|.
@@ -1607,10 +1874,10 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|foundProcessable
+name|foundLinkableToken
 condition|)
 block|{
-name|foundProcessable
+name|foundLinkableToken
 operator|=
 literal|true
 expr_stmt|;
@@ -1666,7 +1933,7 @@ name|PROCESSABLE_TOKEN_OREDICATE
 argument_list|)
 expr_stmt|;
 return|return
-name|foundProcessable
+name|foundLinkableToken
 return|;
 block|}
 comment|/**      * Getter for the text covered by the next tokenCount tokens relative to      * {@link #token}. It uses the {@link #textCache} to lookup/store such texts.      * Given the Tokens      *<pre>      *    [This, is, an, Example]      *</pre>      * and the parameter<code>3</code> this method will return      *<pre>      *     This is an      *</pre>      * @param tokenCount the number of tokens to be included relative to       * {@link #tokenIndex}      * @return the text covered by the span start of {@link #token} to end of      * token at<code>{@link #tokenIndex}+tokenCount</code>.      */
@@ -2036,16 +2303,21 @@ specifier|final
 name|boolean
 name|upperCase
 decl_stmt|;
+comment|/**          * if the length of the token is&gt;= {@link LanguageProcessingConfig#getMinSearchTokenLength()}          */
+specifier|public
+name|boolean
+name|hasSearchableLength
+decl_stmt|;
 comment|/**          * If the POS type of this word matches a linkable category          */
 specifier|public
 specifier|final
-name|boolean
+name|Boolean
 name|isLinkablePos
 decl_stmt|;
 comment|/**          * if the POS type of this word matches a matchable category          */
 specifier|public
 specifier|final
-name|boolean
+name|Boolean
 name|isMatchablePos
 decl_stmt|;
 comment|/**          * if this Token represents the start of an sub-sentence such as an           * starting ending quote           * @see ProcessingState#SUB_SENTENCE_START_POS          */
@@ -2099,6 +2371,23 @@ operator|.
 name|getSpan
 argument_list|()
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|hasSearchableLength
+operator|=
+name|token
+operator|.
+name|getSpan
+argument_list|()
+operator|.
+name|length
+argument_list|()
+operator|>=
+name|tpc
+operator|.
+name|getMinSearchTokenLength
+argument_list|()
 expr_stmt|;
 name|PosTag
 name|selectedPosTag
@@ -2249,6 +2538,15 @@ name|posAnnotation
 operator|.
 name|probability
 argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
 operator|>=
 name|tpc
 operator|.
@@ -2268,6 +2566,10 @@ name|isMatchablePos
 operator|=
 literal|true
 expr_stmt|;
+name|matchedPosTag
+operator|=
+literal|true
+expr_stmt|;
 break|break;
 block|}
 comment|// else probability to low for inclusion
@@ -2275,6 +2577,15 @@ block|}
 elseif|else
 if|if
 condition|(
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
 name|posAnnotation
 operator|.
 name|probability
@@ -2310,23 +2621,11 @@ name|matchedPosTag
 condition|)
 block|{
 comment|//not matched against a POS Tag ...
-comment|// ... fall back to the token length
 name|this
 operator|.
 name|isLinkablePos
 operator|=
-name|token
-operator|.
-name|getSpan
-argument_list|()
-operator|.
-name|length
-argument_list|()
-operator|>=
-name|tpc
-operator|.
-name|getMinSearchTokenLength
-argument_list|()
+literal|null
 expr_stmt|;
 block|}
 else|else
@@ -2341,6 +2640,12 @@ block|}
 comment|//(2) check if this token should be considered to match labels of suggestions
 if|if
 condition|(
+name|this
+operator|.
+name|isLinkablePos
+operator|!=
+literal|null
+operator|&&
 name|this
 operator|.
 name|isLinkablePos
@@ -2414,6 +2719,15 @@ name|posAnnotation
 operator|.
 name|probability
 argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
 operator|>=
 name|tpc
 operator|.
@@ -2442,6 +2756,15 @@ block|}
 elseif|else
 if|if
 condition|(
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
 name|posAnnotation
 operator|.
 name|probability
@@ -2493,19 +2816,9 @@ name|this
 operator|.
 name|isMatchablePos
 operator|=
-name|token
-operator|.
-name|getSpan
-argument_list|()
-operator|.
-name|length
-argument_list|()
-operator|>=
-name|tpc
-operator|.
-name|getMinSearchTokenLength
-argument_list|()
+literal|null
 expr_stmt|;
+comment|//this.isMatchablePos = token.getSpan().length()>= tpc.getMinSearchTokenLength();
 block|}
 else|else
 block|{
@@ -2559,6 +2872,15 @@ name|posAnnotation
 operator|.
 name|probability
 argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
 operator|>=
 name|tpc
 operator|.
@@ -2576,6 +2898,15 @@ block|}
 elseif|else
 if|if
 condition|(
+name|posAnnotation
+operator|.
+name|probability
+argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
 name|posAnnotation
 operator|.
 name|probability
@@ -2908,6 +3239,15 @@ name|phraseAnnotation
 operator|.
 name|probability
 argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
+name|phraseAnnotation
+operator|.
+name|probability
+argument_list|()
 operator|>=
 name|tpc
 operator|.
@@ -2926,6 +3266,15 @@ block|}
 elseif|else
 if|if
 condition|(
+name|phraseAnnotation
+operator|.
+name|probability
+argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
 name|phraseAnnotation
 operator|.
 name|probability
