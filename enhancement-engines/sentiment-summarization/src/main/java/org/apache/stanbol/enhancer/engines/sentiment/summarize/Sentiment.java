@@ -378,6 +378,15 @@ name|tag
 operator|.
 name|probability
 argument_list|()
+operator|==
+name|Value
+operator|.
+name|UNKNOWN_PROBABILITY
+operator|||
+name|tag
+operator|.
+name|probability
+argument_list|()
 operator|>=
 name|MIN_POS_CONF
 operator|||
