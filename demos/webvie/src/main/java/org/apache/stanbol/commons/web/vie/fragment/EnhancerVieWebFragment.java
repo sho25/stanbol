@@ -499,7 +499,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"lib/jqueryui/jquery-ui.1.9.2.js"
+literal|"lib/jqueryui/jquery-ui.1.10.2.min.js"
 argument_list|,
 name|this
 argument_list|,
@@ -533,7 +533,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"lib/backbone.js"
+literal|"lib/backboneJS/backbone.js"
 argument_list|,
 name|this
 argument_list|,
@@ -567,7 +567,7 @@ name|ScriptResource
 argument_list|(
 literal|"text/javascript"
 argument_list|,
-literal|"lib/vie/vie-latest.debug.js"
+literal|"lib/vie/vie.js"
 argument_list|,
 name|this
 argument_list|,
