@@ -421,8 +421,6 @@ name|double
 name|minExcludePosAnnotationProbability
 init|=
 name|DEFAULT_MIN_EXCLUDE_POS_ANNOTATION_PROBABILITY
-operator|/
-literal|2
 decl_stmt|;
 specifier|private
 name|boolean

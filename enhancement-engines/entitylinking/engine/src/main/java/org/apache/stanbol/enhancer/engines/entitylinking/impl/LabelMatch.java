@@ -69,11 +69,45 @@ name|MATCH
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_class
 specifier|public
 class|class
 name|LabelMatch
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|LabelMatch
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|/**      * To be used in case no match is present      */
 specifier|public
 specifier|static
@@ -386,7 +420,7 @@ literal|"The span '"
 operator|+
 name|span
 operator|+
-literal|"' MUST BE>= the number of matched processable tokens'"
+literal|"' MUST BE>= then number of matched processable tokens'"
 operator|+
 name|processableMatchCount
 operator|+
@@ -406,26 +440,33 @@ operator|<
 name|matchCount
 condition|)
 block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
+name|log
+operator|.
+name|warn
 argument_list|(
-literal|"The span '"
+literal|"The span '{}' MUST BE>= then number of matched tokens '{}"
 operator|+
+literal|"': {}! Set span to {}."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
 name|span
-operator|+
-literal|"' MUST BE>= the number of matched tokens '"
-operator|+
+block|,
 name|matchCount
-operator|+
-literal|"': "
-operator|+
+block|,
 name|toString
 argument_list|()
-operator|+
-literal|"!"
+block|,
+name|matchCount
+block|}
 argument_list|)
-throw|;
+expr_stmt|;
+name|span
+operator|=
+name|matchCount
+expr_stmt|;
 block|}
 if|if
 condition|(
