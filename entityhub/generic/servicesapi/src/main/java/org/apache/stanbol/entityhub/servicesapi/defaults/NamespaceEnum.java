@@ -433,12 +433,12 @@ argument_list|(
 literal|"http://purl.org/vocab/frbr/core#"
 argument_list|)
 block|,
-comment|/**      * Special namespace used for disambiguation metadata      * @deprecated All none core namespaces where deprecated. Users should use     * the NamespacePrefixService (module:     * org.apache.stanbol.commons.namespaceprefixservice) instead (see also     *<a href="https://issues.apache.org/jira/browse/STANBOL-824">STANBOL-824)</a>      */
+comment|/**      * Special namespace used for disambiguation metadata. NOTE: that with STANBOL-1053      * the URI used for disambiguation changed.      *       */
 name|disambiguation
 argument_list|(
 literal|"dis"
 argument_list|,
-literal|"urn:stanbol.entityhub:disambiguation:"
+literal|"http://stanbol.apache.org/ontology/disambiguation/disambiguation#"
 argument_list|)
 block|,
 comment|/*      * Old namespaces still kept for historical reasons      */
