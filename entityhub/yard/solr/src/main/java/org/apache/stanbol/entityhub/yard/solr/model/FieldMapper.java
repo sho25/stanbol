@@ -105,6 +105,19 @@ parameter_list|)
 throws|throws
 name|IllegalArgumentException
 function_decl|;
+comment|/**      * Getter for the actual field names representing the parsed logical {@link IndexField}      * in the context of a Query.      * @param indexField the index field      * @return the actual field names in the index that need to be searched for the      * finding values of the parsed {@link IndexField}      * @throws IllegalArgumentException      */
+name|Collection
+argument_list|<
+name|String
+argument_list|>
+name|getQueryFieldNames
+parameter_list|(
+name|IndexField
+name|indexField
+parameter_list|)
+throws|throws
+name|IllegalArgumentException
+function_decl|;
 comment|/**      * Getter for the logical {@link IndexField} of an given fieldName, typically as found in a document      * retrieved from the index.      *       * @param fieldName      *            the name of the field in the index document      * @return the logical index field or<code>null</code> if the parsed field name does not represent a      *         logical field.      *<p>      *         Note that this may only happen, if the index is configured to store values for fields that do      *         not represent logical field. This is typically not the case, but may be activated for debugging      *         reasons.      */
 name|IndexField
 name|getField

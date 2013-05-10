@@ -1523,7 +1523,7 @@ condition|)
 block|{
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"{}"
 argument_list|,
@@ -2814,7 +2814,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%s:%s AND %s:%s"
+literal|"%s:%s AND %s:\"%s\""
 argument_list|,
 name|fieldMapper
 operator|.
@@ -3065,7 +3065,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%s:%s AND %s:%s"
+literal|"%s:%s AND %s:\"%s\""
 argument_list|,
 name|fieldMapper
 operator|.
@@ -5503,7 +5503,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%s:%s"
+literal|"%s:\"%s\""
 argument_list|,
 name|fieldMapper
 operator|.
@@ -5822,7 +5822,7 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"%s:%s"
+literal|"%s:\"%s\""
 argument_list|,
 name|fieldMapper
 operator|.

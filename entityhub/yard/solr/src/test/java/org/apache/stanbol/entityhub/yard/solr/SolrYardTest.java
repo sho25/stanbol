@@ -21,9 +21,9 @@ end_package
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -33,13 +33,25 @@ end_import
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
 name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNull
 import|;
 end_import
 
@@ -292,6 +304,24 @@ operator|.
 name|model
 operator|.
 name|Representation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|model
+operator|.
+name|Text
 import|;
 end_import
 
@@ -873,6 +903,211 @@ argument_list|(
 literal|null
 argument_list|,
 name|TEST_SOLR_CORE_NAME
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Additional test for<a href="https://issues.apache.org/jira/browse/STANBOL-1065">      * STANBOL-1065</a>      * @throws YardException      */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUriWithSpaces
+parameter_list|()
+throws|throws
+name|YardException
+block|{
+name|Yard
+name|yard
+init|=
+name|getYard
+argument_list|()
+decl_stmt|;
+name|String
+name|id1
+init|=
+literal|"http://www.example.com/with space"
+decl_stmt|;
+name|String
+name|id2
+init|=
+literal|"http://www.example.com/other"
+decl_stmt|;
+name|Representation
+name|test1
+init|=
+name|create
+argument_list|(
+name|id1
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
+name|Representation
+name|test2
+init|=
+name|create
+argument_list|(
+name|id2
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
+comment|//now add a label containing space to id2
+name|test1
+operator|.
+name|addNaturalText
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|rdfs
+operator|+
+literal|"label"
+argument_list|,
+literal|"expected result"
+argument_list|,
+literal|"en"
+argument_list|)
+expr_stmt|;
+name|test2
+operator|.
+name|addNaturalText
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|rdfs
+operator|+
+literal|"label"
+argument_list|,
+literal|"space"
+argument_list|,
+literal|"en"
+argument_list|)
+expr_stmt|;
+name|test2
+operator|.
+name|addNaturalText
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|rdfs
+operator|+
+literal|"comment"
+argument_list|,
+literal|"URIs with space got separated "
+operator|+
+literal|"in queries causing parts in URIs after spaces to form full text "
+operator|+
+literal|"queries instead!"
+argument_list|,
+literal|"en"
+argument_list|)
+expr_stmt|;
+name|yard
+operator|.
+name|update
+argument_list|(
+name|test1
+argument_list|)
+expr_stmt|;
+name|yard
+operator|.
+name|update
+argument_list|(
+name|test2
+argument_list|)
+expr_stmt|;
+comment|//now try to query for some combination
+name|assertNull
+argument_list|(
+literal|"No Entity with ID 'http://www.example.com/with URIs' expected"
+argument_list|,
+name|yard
+operator|.
+name|getRepresentation
+argument_list|(
+literal|"http://www.example.com/with URIs"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+literal|"No Entity with ID 'http://www.example.com/with' expected"
+argument_list|,
+name|yard
+operator|.
+name|getRepresentation
+argument_list|(
+literal|"http://www.example.com/with"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//no check that lookups do work withspace uris
+name|Representation
+name|result
+init|=
+name|yard
+operator|.
+name|getRepresentation
+argument_list|(
+name|id1
+argument_list|)
+decl_stmt|;
+name|assertNotNull
+argument_list|(
+literal|"Entity with ID 'http://www.example.com/with space' expected"
+argument_list|,
+name|result
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"Entity with id '"
+operator|+
+name|id1
+operator|+
+literal|"' expected, but got '"
+operator|+
+name|result
+operator|.
+name|getId
+argument_list|()
+operator|+
+literal|"' instead"
+argument_list|,
+name|id1
+argument_list|,
+name|result
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|//finally test removal of Entities with space
+name|yard
+operator|.
+name|remove
+argument_list|(
+name|id1
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+literal|"Entity with ID 'http://www.example.com/with space' got not deleted"
+argument_list|,
+name|yard
+operator|.
+name|getRepresentation
+argument_list|(
+name|id1
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//and also clean up the 2nd entity used for the test
+name|yard
+operator|.
+name|remove
+argument_list|(
+name|id2
 argument_list|)
 expr_stmt|;
 block|}
