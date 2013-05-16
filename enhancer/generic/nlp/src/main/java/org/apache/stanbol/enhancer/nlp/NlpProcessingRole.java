@@ -39,6 +39,8 @@ block|,
 name|SentimentTagging
 block|,
 name|Lemmatize
+block|,
+name|NamedEntityRecognition
 block|}
 end_enum
 
