@@ -1793,8 +1793,28 @@ name|FormDataMultiPart
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|security
+operator|.
+name|AccessController
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|security
+operator|.
+name|PrivilegedAction
+import|;
+end_import
+
 begin_comment
-comment|/**  * Provides the basic HTTP methods for storing and managing ontologies regardless of them belonging to a  * specific network, scope or session.  *   * @author anuzzolese, alexdma  *   */
+comment|/**  * Provides the basic HTTP methods for storing and managing ontologies  * regardless of them belonging to a specific network, scope or session.  *  * @author anuzzolese, alexdma  *  */
 end_comment
 
 begin_class
@@ -2036,6 +2056,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -2045,6 +2066,7 @@ argument_list|(
 name|CONFLICT
 argument_list|)
 expr_stmt|;
+block|}
 else|else
 block|{
 name|ontologyProvider
@@ -2133,6 +2155,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -2142,7 +2165,9 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 expr_stmt|;
+block|}
 else|else
+block|{
 try|try
 block|{
 comment|// TODO check aliases!
@@ -2176,6 +2201,7 @@ argument_list|(
 name|CONFLICT
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 catch|catch
@@ -2229,9 +2255,37 @@ name|String
 argument_list|>
 name|getAliases
 parameter_list|(
+specifier|final
 name|OWLOntologyID
 name|ontologyId
 parameter_list|)
+block|{
+comment|//TODO use rdfViewable instead of Vieable to make separation of
+comment|//presentation and application logic cleaner
+return|return
+name|AccessController
+operator|.
+name|doPrivileged
+argument_list|(
+operator|new
+name|PrivilegedAction
+argument_list|<
+name|Set
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|run
+parameter_list|()
 block|{
 name|Set
 argument_list|<
@@ -2258,6 +2312,7 @@ argument_list|(
 name|ontologyId
 argument_list|)
 control|)
+block|{
 name|aliases
 operator|.
 name|add
@@ -2270,8 +2325,13 @@ name|alias
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|aliases
+return|;
+block|}
+block|}
+argument_list|)
 return|;
 block|}
 specifier|private
@@ -2523,6 +2583,7 @@ name|oTemp
 operator|!=
 literal|null
 condition|)
+block|{
 name|o
 operator|=
 operator|new
@@ -2531,6 +2592,7 @@ argument_list|(
 name|oTemp
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|o
@@ -2637,6 +2699,7 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
+block|{
 name|oldImports
 operator|.
 name|add
@@ -2647,6 +2710,7 @@ name|next
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 for|for
 control|(
 name|Triple
@@ -2681,6 +2745,7 @@ argument_list|(
 literal|"::"
 argument_list|)
 condition|)
+block|{
 name|s
 operator|=
 name|s
@@ -2702,6 +2767,7 @@ name|length
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 name|UriRef
 name|target
 init|=
@@ -2853,9 +2919,37 @@ name|String
 argument_list|>
 name|getHandles
 parameter_list|(
+specifier|final
 name|OWLOntologyID
 name|ontologyId
 parameter_list|)
+block|{
+comment|//TODO use rdfViewable instead of Vieable to make separation of
+comment|//presentation and application logic cleaner
+return|return
+name|AccessController
+operator|.
+name|doPrivileged
+argument_list|(
+operator|new
+name|PrivilegedAction
+argument_list|<
+name|Set
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|run
+parameter_list|()
 block|{
 name|Set
 argument_list|<
@@ -2876,6 +2970,7 @@ name|onManager
 operator|!=
 literal|null
 condition|)
+block|{
 for|for
 control|(
 name|Scope
@@ -2886,6 +2981,7 @@ operator|.
 name|getRegisteredScopes
 argument_list|()
 control|)
+block|{
 if|if
 condition|(
 name|scope
@@ -2908,6 +3004,7 @@ argument_list|(
 name|ontologyId
 argument_list|)
 condition|)
+block|{
 name|handles
 operator|.
 name|add
@@ -2918,12 +3015,16 @@ name|getID
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+block|}
 if|if
 condition|(
 name|sessionManager
 operator|!=
 literal|null
 condition|)
+block|{
 for|for
 control|(
 name|String
@@ -2934,6 +3035,7 @@ operator|.
 name|getRegisteredSessionIDs
 argument_list|()
 control|)
+block|{
 if|if
 condition|(
 name|sessionManager
@@ -2948,6 +3050,7 @@ argument_list|(
 name|ontologyId
 argument_list|)
 condition|)
+block|{
 name|handles
 operator|.
 name|add
@@ -2955,8 +3058,15 @@ argument_list|(
 name|sesId
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+block|}
 return|return
 name|handles
+return|;
+block|}
+block|}
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -3089,6 +3199,35 @@ argument_list|>
 name|getOntologies
 parameter_list|()
 block|{
+comment|//As this method is invoked from the template it would be too late
+comment|//to handle AccessControlExceptionS
+comment|//TODO use rdfViewable instead of Vieable to make separation of
+comment|//presentation and application logic cleaner
+return|return
+name|AccessController
+operator|.
+name|doPrivileged
+argument_list|(
+operator|new
+name|PrivilegedAction
+argument_list|<
+name|SortedSet
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|SortedSet
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|run
+parameter_list|()
+block|{
 comment|// No orphans included.
 name|SortedSet
 argument_list|<
@@ -3124,6 +3263,7 @@ operator|.
 name|getPublicKeys
 argument_list|()
 control|)
+block|{
 if|if
 condition|(
 name|id
@@ -3138,6 +3278,7 @@ argument_list|(
 name|id
 argument_list|)
 condition|)
+block|{
 name|filtered
 operator|.
 name|add
@@ -3145,8 +3286,14 @@ argument_list|(
 name|id
 argument_list|)
 expr_stmt|;
+block|}
+block|}
 return|return
 name|filtered
+return|;
+block|}
+block|}
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -3157,11 +3304,44 @@ argument_list|>
 name|getOrphans
 parameter_list|()
 block|{
+comment|//As this method is invoked from the template it would be too late
+comment|//to handle AccessControlExceptionS
+comment|//TODO use rdfViewable instead of Vieable to make separation of
+comment|//presentation and application logic cleaner
+return|return
+name|AccessController
+operator|.
+name|doPrivileged
+argument_list|(
+operator|new
+name|PrivilegedAction
+argument_list|<
+name|Set
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Set
+argument_list|<
+name|OWLOntologyID
+argument_list|>
+name|run
+parameter_list|()
+block|{
 return|return
 name|ontologyProvider
 operator|.
 name|listOrphans
 argument_list|()
+return|;
+block|}
+block|}
+argument_list|)
 return|;
 block|}
 specifier|private
@@ -3513,6 +3693,7 @@ argument_list|(
 literal|"::"
 argument_list|)
 condition|)
+block|{
 name|s
 operator|=
 name|s
@@ -3534,6 +3715,7 @@ name|length
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 name|IRI
 name|target
 init|=
@@ -3664,9 +3846,31 @@ specifier|public
 name|int
 name|getSize
 parameter_list|(
+specifier|final
 name|OWLOntologyID
 name|ontologyId
 parameter_list|)
+block|{
+comment|//TODO use rdfViewable instead of Vieable to make separation of
+comment|//presentation and application logic cleaner
+return|return
+name|AccessController
+operator|.
+name|doPrivileged
+argument_list|(
+operator|new
+name|PrivilegedAction
+argument_list|<
+name|Integer
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Integer
+name|run
+parameter_list|()
 block|{
 name|Multiplexer
 name|desc
@@ -3690,6 +3894,10 @@ operator|.
 name|getSize
 argument_list|(
 name|ontologyId
+argument_list|)
+return|;
+block|}
+block|}
 argument_list|)
 return|;
 block|}
@@ -3768,6 +3976,7 @@ if|if
 condition|(
 name|meta
 condition|)
+block|{
 return|return
 name|getMetadata
 argument_list|(
@@ -3778,6 +3987,7 @@ argument_list|,
 name|headers
 argument_list|)
 return|;
+block|}
 name|ResponseBuilder
 name|rb
 decl_stmt|;
@@ -3792,6 +4002,7 @@ operator|.
 name|isEmpty
 argument_list|()
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -3801,6 +4012,7 @@ argument_list|(
 name|BAD_REQUEST
 argument_list|)
 expr_stmt|;
+block|}
 name|OWLOntologyID
 name|key
 init|=
@@ -3823,6 +4035,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -3832,6 +4045,7 @@ argument_list|(
 name|NO_CONTENT
 argument_list|)
 expr_stmt|;
+block|}
 else|else
 block|{
 name|TripleCollection
@@ -3886,7 +4100,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * Gets the ontology with the given identifier in its version managed by the session.      *       * @param sessionId      *            the session identifier.      * @param ontologyId      *            the ontology identifier.      * @param uriInfo      * @param headers      * @return the requested managed ontology, or {@link Status#NOT_FOUND} if either the sessionn does not      *         exist, or the if the ontology either does not exist or is not managed.      */
+comment|/**      * Gets the ontology with the given identifier in its version managed by the      * session.      *      * @param sessionId the session identifier.      * @param ontologyId the ontology identifier.      * @param uriInfo      * @param headers      * @return the requested managed ontology, or {@link Status#NOT_FOUND} if      * either the sessionn does not exist, or the if the ontology either does      * not exist or is not managed.      */
 annotation|@
 name|GET
 annotation|@
@@ -3965,6 +4179,7 @@ operator|.
 name|isEmpty
 argument_list|()
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -3974,6 +4189,7 @@ argument_list|(
 name|BAD_REQUEST
 argument_list|)
 expr_stmt|;
+block|}
 name|OWLOntologyID
 name|key
 init|=
@@ -3996,6 +4212,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -4005,6 +4222,7 @@ argument_list|(
 name|NO_CONTENT
 argument_list|)
 expr_stmt|;
+block|}
 else|else
 block|{
 name|OWLOntology
@@ -4121,6 +4339,7 @@ name|ontologyId
 argument_list|)
 argument_list|)
 control|)
+block|{
 name|mGraph
 operator|.
 name|add
@@ -4147,6 +4366,7 @@ name|me
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 name|rb
 operator|=
 name|Response
@@ -4377,6 +4597,7 @@ argument_list|(
 literal|"file"
 argument_list|)
 condition|)
+block|{
 name|file
 operator|=
 name|bpart
@@ -4388,6 +4609,7 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+block|}
 else|else
 block|{
 name|String
@@ -4415,10 +4637,12 @@ argument_list|(
 literal|"auto"
 argument_list|)
 condition|)
+block|{
 name|format
 operator|=
 name|value
 expr_stmt|;
+block|}
 elseif|else
 if|if
 condition|(
@@ -4429,6 +4653,7 @@ argument_list|(
 literal|"url"
 argument_list|)
 condition|)
+block|{
 try|try
 block|{
 name|URI
@@ -4476,6 +4701,7 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
+block|}
 elseif|else
 if|if
 condition|(
@@ -4494,6 +4720,7 @@ argument_list|(
 name|value
 argument_list|)
 condition|)
+block|{
 try|try
 block|{
 name|aliases
@@ -4535,6 +4762,7 @@ argument_list|,
 name|BAD_REQUEST
 argument_list|)
 throw|;
+block|}
 block|}
 block|}
 block|}
@@ -4584,6 +4812,7 @@ operator|.
 name|isEmpty
 argument_list|()
 condition|)
+block|{
 name|formats
 operator|=
 name|Collections
@@ -4593,8 +4822,10 @@ argument_list|(
 name|format
 argument_list|)
 expr_stmt|;
+block|}
 else|else
 comment|// The RESTful API has its own list of preferred formats
+block|{
 name|formats
 operator|=
 name|Arrays
@@ -4625,6 +4856,7 @@ name|RDF_JSON
 block|}
 argument_list|)
 expr_stmt|;
+block|}
 name|int
 name|unsupported
 init|=
@@ -4653,6 +4885,7 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
+block|{
 throw|throw
 operator|new
 name|OntologyLoadingException
@@ -4660,6 +4893,7 @@ argument_list|(
 literal|"No suitable format found or defined."
 argument_list|)
 throw|;
+block|}
 do|do
 block|{
 name|String
@@ -4912,6 +5146,7 @@ name|failed
 operator|>
 literal|0
 condition|)
+block|{
 throw|throw
 operator|new
 name|WebApplicationException
@@ -4919,6 +5154,7 @@ argument_list|(
 name|BAD_REQUEST
 argument_list|)
 throw|;
+block|}
 elseif|else
 if|if
 condition|(
@@ -4926,6 +5162,7 @@ name|unsupported
 operator|>
 literal|0
 condition|)
+block|{
 throw|throw
 operator|new
 name|WebApplicationException
@@ -4933,6 +5170,7 @@ argument_list|(
 name|UNSUPPORTED_MEDIA_TYPE
 argument_list|)
 throw|;
+block|}
 block|}
 block|}
 elseif|else
@@ -5011,6 +5249,7 @@ name|origin
 range|:
 name|keys
 control|)
+block|{
 if|if
 condition|(
 name|origin
@@ -5061,6 +5300,7 @@ name|Status
 operator|.
 name|NO_MATCH
 condition|)
+block|{
 for|for
 control|(
 name|OWLOntologyID
@@ -5068,6 +5308,7 @@ name|alias
 range|:
 name|aliases
 control|)
+block|{
 try|try
 block|{
 if|if
@@ -5085,10 +5326,12 @@ name|key
 operator|==
 literal|null
 condition|)
+block|{
 name|key
 operator|=
 name|alias
 expr_stmt|;
+block|}
 block|}
 catch|catch
 parameter_list|(
@@ -5131,6 +5374,9 @@ name|ex
 argument_list|)
 expr_stmt|;
 continue|continue;
+block|}
+block|}
+block|}
 block|}
 block|}
 block|}
@@ -5249,6 +5495,7 @@ expr_stmt|;
 block|}
 block|}
 else|else
+block|{
 name|rb
 operator|=
 name|Response
@@ -5257,6 +5504,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+block|}
 elseif|else
 if|if
 condition|(
@@ -5264,6 +5512,7 @@ name|rb
 operator|==
 literal|null
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -5275,11 +5524,12 @@ operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|rb
 return|;
 block|}
-comment|/**      * Helper method to make sure a ResponseBuilder is created on every conditions, so that it is then      * possible to enable CORS on it afterwards.      *       * @param ontologyId      * @return      */
+comment|/**      * Helper method to make sure a ResponseBuilder is created on every      * conditions, so that it is then possible to enable CORS on it afterwards.      *      * @param ontologyId      * @return      */
 specifier|protected
 name|ResponseBuilder
 name|performShowOntology
@@ -5299,6 +5549,7 @@ operator|.
 name|isEmpty
 argument_list|()
 condition|)
+block|{
 return|return
 name|Response
 operator|.
@@ -5307,6 +5558,7 @@ argument_list|(
 name|BAD_REQUEST
 argument_list|)
 return|;
+block|}
 name|OWLOntologyID
 name|key
 init|=
@@ -5329,6 +5581,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 return|return
 name|Response
 operator|.
@@ -5337,6 +5590,7 @@ argument_list|(
 name|NO_CONTENT
 argument_list|)
 return|;
+block|}
 name|OWLOntology
 name|o
 init|=
@@ -5358,6 +5612,7 @@ name|o
 operator|==
 literal|null
 condition|)
+block|{
 return|return
 name|Response
 operator|.
@@ -5366,6 +5621,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 return|;
+block|}
 comment|// try {
 name|Set
 argument_list|<
@@ -5386,6 +5642,7 @@ name|onManager
 operator|!=
 literal|null
 condition|)
+block|{
 for|for
 control|(
 name|Scope
@@ -5409,6 +5666,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|handles
 operator|.
 name|add
@@ -5419,6 +5677,7 @@ name|getCoreSpace
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|scope
@@ -5431,6 +5690,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|handles
 operator|.
 name|add
@@ -5442,12 +5702,15 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+block|}
 if|if
 condition|(
 name|sessionManager
 operator|!=
 literal|null
 condition|)
+block|{
 for|for
 control|(
 name|String
@@ -5458,6 +5721,7 @@ operator|.
 name|getRegisteredSessionIDs
 argument_list|()
 control|)
+block|{
 if|if
 condition|(
 name|sessionManager
@@ -5472,6 +5736,7 @@ argument_list|(
 name|key
 argument_list|)
 condition|)
+block|{
 name|handles
 operator|.
 name|add
@@ -5484,6 +5749,9 @@ name|sesId
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+block|}
 comment|// ByteArrayOutputStream out = new ByteArrayOutputStream();
 comment|// o.getOWLOntologyManager().saveOntology(o, new ManchesterOWLSyntaxOntologyFormat(), out);
 return|return
@@ -5663,7 +5931,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * POSTs an ontology content as application/x-www-form-urlencoded      *       * @param content      * @param headers      * @return      */
+comment|/**      * POSTs an ontology content as application/x-www-form-urlencoded      *      * @param content      * @param headers      * @return      */
 annotation|@
 name|POST
 annotation|@
@@ -5858,6 +6126,7 @@ operator|.
 name|isAnonymous
 argument_list|()
 condition|)
+block|{
 name|rb
 operator|=
 name|Response
@@ -5869,6 +6138,7 @@ operator|.
 name|INTERNAL_SERVER_ERROR
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 elseif|else
 if|if
@@ -5947,6 +6217,7 @@ throw|;
 block|}
 block|}
 else|else
+block|{
 name|rb
 operator|=
 name|Response
@@ -5956,6 +6227,7 @@ argument_list|(
 name|UNSUPPORTED_MEDIA_TYPE
 argument_list|)
 expr_stmt|;
+block|}
 name|addCORSOrigin
 argument_list|(
 name|servletContext
