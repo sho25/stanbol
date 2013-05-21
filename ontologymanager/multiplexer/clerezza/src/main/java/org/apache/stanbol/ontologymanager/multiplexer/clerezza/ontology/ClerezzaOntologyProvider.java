@@ -3254,7 +3254,7 @@ specifier|final
 name|String
 name|_META_GRAPH_ID_DEFAULT
 init|=
-literal|"org.apache.stanbol.ontologymanager.ontonet"
+literal|"urn:x-localinstance:/ontologymanager.graph"
 decl_stmt|;
 specifier|private
 specifier|static
