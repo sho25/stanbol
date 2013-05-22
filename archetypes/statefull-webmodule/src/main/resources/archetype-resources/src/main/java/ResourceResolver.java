@@ -796,7 +796,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"The example service is being activated"
+literal|"The example service is being deactivated"
 argument_list|)
 expr_stmt|;
 block|}
