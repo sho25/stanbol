@@ -572,8 +572,6 @@ init|(
 name|url
 init|)
 block|{
-try|try
-block|{
 comment|// FIXME: use instead:
 comment|// FileManager.get().loadModel
 name|input
@@ -583,21 +581,6 @@ argument_list|(
 name|url
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|IOException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
 block|}
 specifier|final
 name|StmtIterator
