@@ -5774,7 +5774,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|Exception
+name|OWLOntologyCreationException
 name|e2
 parameter_list|)
 block|{
