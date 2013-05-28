@@ -31,7 +31,9 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|MGraph
+name|access
+operator|.
+name|LockableMGraph
 import|;
 end_import
 
@@ -116,7 +118,7 @@ throws|throws
 name|StoreException
 function_decl|;
 comment|/**      * Get the graph of triples of enhancements related to the content item from this store      */
-name|MGraph
+name|LockableMGraph
 name|getEnhancementGraph
 parameter_list|()
 function_decl|;
