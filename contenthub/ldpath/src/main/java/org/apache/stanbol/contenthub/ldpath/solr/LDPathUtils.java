@@ -1660,6 +1660,7 @@ name|solrCorePath
 init|=
 name|SOLR_CORE_PATH
 decl_stmt|;
+comment|//The name of a resource is independent of the Java implementation; in particular, the path separator is always a slash (/).
 if|if
 condition|(
 operator|!
@@ -1667,16 +1668,12 @@ name|solrCorePath
 operator|.
 name|endsWith
 argument_list|(
-name|File
-operator|.
-name|separator
+literal|"/"
 argument_list|)
 condition|)
 name|solrCorePath
 operator|+=
-name|File
-operator|.
-name|separator
+literal|'/'
 expr_stmt|;
 name|String
 name|templateZip
