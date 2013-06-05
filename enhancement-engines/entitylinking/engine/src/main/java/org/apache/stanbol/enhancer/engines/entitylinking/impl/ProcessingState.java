@@ -603,6 +603,14 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+comment|/**      * Ensures that Tokens are not processed twice in case of multiple      * overlapping Sentence Annotations (e.g. if two NLP frameworks contributing      * Sentences do not agree with each other).      */
+specifier|private
+name|int
+name|consumedSectionIndex
+init|=
+operator|-
+literal|1
+decl_stmt|;
 comment|/**      * The language of the text      */
 specifier|private
 name|String
@@ -853,9 +861,7 @@ name|iterator
 argument_list|()
 expr_stmt|;
 comment|//init the first sentence
-name|initNextSentence
-argument_list|()
-expr_stmt|;
+comment|//initNextSentence();
 block|}
 comment|/**      * Getter for the current section. This is typically a {@link Sentence}      * but might also be the whole {@link AnalysedText} in case no sentence      * annotations are available      * @return the currently processed {@link Section}      */
 specifier|public
@@ -1058,6 +1064,41 @@ operator|=
 name|sections
 operator|.
 name|next
+argument_list|()
+expr_stmt|;
+if|if
+condition|(
+name|consumedSectionIndex
+operator|>
+name|section
+operator|.
+name|getStart
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> skipping {} because an other section until Index {} "
+operator|+
+literal|"was already processed. This is not an error, but indicates that"
+operator|+
+literal|"multiple NLP framewords do contribute divergating Sentence annotations"
+argument_list|,
+name|section
+argument_list|,
+name|consumedSectionIndex
+argument_list|)
+expr_stmt|;
+continue|continue;
+comment|//ignore this section
+block|}
+name|consumedSectionIndex
+operator|=
+name|section
+operator|.
+name|getEnd
 argument_list|()
 expr_stmt|;
 name|tokens
