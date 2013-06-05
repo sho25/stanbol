@@ -704,6 +704,15 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
+comment|//for unit testing we want immidiate commits (required after STANBOL-1092
+comment|// as the default changed to false)
+name|config
+operator|.
+name|setImmediateCommit
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
 comment|//init the ManagedSolrServer used for the UnitTest
 name|System
 operator|.

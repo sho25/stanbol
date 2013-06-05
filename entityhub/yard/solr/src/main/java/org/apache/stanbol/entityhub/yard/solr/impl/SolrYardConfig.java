@@ -258,14 +258,14 @@ name|IMMEDIATE_COMMIT
 init|=
 literal|"org.apache.stanbol.entityhub.yard.solr.immediateCommit"
 decl_stmt|;
-comment|/**      * By default {@link #IMMEDIATE_COMMIT} is enabled      */
+comment|/**      * By default {@link #IMMEDIATE_COMMIT} is disabled (NOTE: was enabled, but changed with       *<a href="https://issues.apache.org/jira/browse/STANBOL-1092">STANBOL-1092</a>)      */
 specifier|public
 specifier|static
 specifier|final
 name|boolean
 name|DEFAULT_IMMEDIATE_COMMIT_STATE
 init|=
-literal|true
+literal|false
 decl_stmt|;
 comment|/**      * If {@link #IMMEDIATE_COMMIT} is deactivated, than this time is parsed to update(..) and store(..)      * operations as the maximum time (in ms) until a commit.      */
 specifier|public
