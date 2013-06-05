@@ -1232,60 +1232,14 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// check some required attributes
-name|Hashtable
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-name|configWithMissingTopicField
-init|=
-operator|new
-name|Hashtable
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-decl_stmt|;
-name|configWithMissingTopicField
-operator|.
-name|putAll
-argument_list|(
-name|config
-argument_list|)
-expr_stmt|;
-name|configWithMissingTopicField
-operator|.
-name|remove
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|CONCEPT_URI_FIELD
-argument_list|)
-expr_stmt|;
-try|try
-block|{
-name|TopicClassificationEngine
-operator|.
-name|fromParameters
-argument_list|(
-name|configWithMissingTopicField
-argument_list|)
-expr_stmt|;
-name|fail
-argument_list|(
-literal|"Should have raised a ConfigurationException"
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|ConfigurationException
-name|e
-parameter_list|)
-block|{}
+comment|// NOTE: This is no longer an required field, but uses a default values instead
+comment|//        Hashtable<String,Object> configWithMissingTopicField = new Hashtable<String,Object>();
+comment|//        configWithMissingTopicField.putAll(config);
+comment|//        configWithMissingTopicField.remove(TopicClassificationEngine.CONCEPT_URI_FIELD);
+comment|//        try {
+comment|//            TopicClassificationEngine.fromParameters(configWithMissingTopicField);
+comment|//            fail("Should have raised a ConfigurationException");
+comment|//        } catch (ConfigurationException e) {}
 name|Hashtable
 argument_list|<
 name|String
@@ -4315,176 +4269,27 @@ name|put
 argument_list|(
 name|TopicClassificationEngine
 operator|.
-name|ENTRY_ID_FIELD
-argument_list|,
-literal|"entry_id"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|ENTRY_TYPE_FIELD
-argument_list|,
-literal|"entry_type"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|MODEL_ENTRY_ID_FIELD
-argument_list|,
-literal|"model_entry_id"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
 name|SOLR_CORE
 argument_list|,
 name|classifierSolrServer
 argument_list|)
 expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|CONCEPT_URI_FIELD
-argument_list|,
-literal|"concept"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|PRIMARY_TOPIC_URI_FIELD
-argument_list|,
-literal|"primary_topic"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|SIMILARTITY_FIELD
-argument_list|,
-literal|"classifier_features"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|BROADER_FIELD
-argument_list|,
-literal|"broader"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|MODEL_UPDATE_DATE_FIELD
-argument_list|,
-literal|"last_update_dt"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|MODEL_EVALUATION_DATE_FIELD
-argument_list|,
-literal|"last_evaluation_dt"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|PRECISION_FIELD
-argument_list|,
-literal|"precision"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|RECALL_FIELD
-argument_list|,
-literal|"recall"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|POSITIVE_SUPPORT_FIELD
-argument_list|,
-literal|"positive_support"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|NEGATIVE_SUPPORT_FIELD
-argument_list|,
-literal|"negative_support"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|FALSE_POSITIVES_FIELD
-argument_list|,
-literal|"false_positives"
-argument_list|)
-expr_stmt|;
-name|config
-operator|.
-name|put
-argument_list|(
-name|TopicClassificationEngine
-operator|.
-name|FALSE_NEGATIVES_FIELD
-argument_list|,
-literal|"false_negatives"
-argument_list|)
-expr_stmt|;
+comment|//those are now optional properties
+comment|//        config.put(TopicClassificationEngine.ENTRY_ID_FIELD, "entry_id");
+comment|//        config.put(TopicClassificationEngine.ENTRY_TYPE_FIELD, "entry_type");
+comment|//        config.put(TopicClassificationEngine.MODEL_ENTRY_ID_FIELD, "model_entry_id");
+comment|//        config.put(TopicClassificationEngine.CONCEPT_URI_FIELD, "concept");
+comment|//        config.put(TopicClassificationEngine.PRIMARY_TOPIC_URI_FIELD, "primary_topic");
+comment|//        config.put(TopicClassificationEngine.SIMILARTITY_FIELD, "classifier_features");
+comment|//        config.put(TopicClassificationEngine.BROADER_FIELD, "broader");
+comment|//        config.put(TopicClassificationEngine.MODEL_UPDATE_DATE_FIELD, "last_update_dt");
+comment|//        config.put(TopicClassificationEngine.MODEL_EVALUATION_DATE_FIELD, "last_evaluation_dt");
+comment|//        config.put(TopicClassificationEngine.PRECISION_FIELD, "precision");
+comment|//        config.put(TopicClassificationEngine.RECALL_FIELD, "recall");
+comment|//        config.put(TopicClassificationEngine.POSITIVE_SUPPORT_FIELD, "positive_support");
+comment|//        config.put(TopicClassificationEngine.NEGATIVE_SUPPORT_FIELD, "negative_support");
+comment|//        config.put(TopicClassificationEngine.FALSE_POSITIVES_FIELD, "false_positives");
+comment|//        config.put(TopicClassificationEngine.FALSE_NEGATIVES_FIELD, "false_negatives");
 return|return
 name|config
 return|;
