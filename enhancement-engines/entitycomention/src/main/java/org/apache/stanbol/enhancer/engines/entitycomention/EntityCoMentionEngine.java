@@ -1844,7 +1844,7 @@ init|=
 name|ServiceProperties
 operator|.
 name|ORDERING_POST_PROCESSING
-operator|-
+operator|+
 literal|90
 decl_stmt|;
 specifier|private
@@ -1913,10 +1913,7 @@ specifier|protected
 name|LabelTokenizer
 name|labelTokenizer
 decl_stmt|;
-specifier|private
-name|BundleContext
-name|bundleContext
-decl_stmt|;
+comment|//    private BundleContext bundleContext;
 comment|/**      * EntityLinking configuration used for Co-Mention extractions      */
 specifier|private
 name|EntityLinkerConfig
@@ -1985,13 +1982,7 @@ operator|.
 name|getProperties
 argument_list|()
 decl_stmt|;
-name|bundleContext
-operator|=
-name|ctx
-operator|.
-name|getBundleContext
-argument_list|()
-expr_stmt|;
+comment|//        bundleContext = ctx.getBundleContext();
 comment|//extract TextProcessing and EnityLinking config from the provided properties
 name|textProcessingConfig
 operator|=
@@ -3073,22 +3064,6 @@ range|:
 name|initialMentions
 control|)
 block|{
-comment|//link the co-mentation with the initial one
-name|metadata
-operator|.
-name|add
-argument_list|(
-operator|new
-name|TripleImpl
-argument_list|(
-name|textAnnotation
-argument_list|,
-name|DC_RELATION
-argument_list|,
-name|initialMention
-argument_list|)
-argument_list|)
-expr_stmt|;
 comment|//check confidence of the initial one
 name|Double
 name|confidnece
@@ -3299,6 +3274,23 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|//finally link the co-mentation with the initial one
+name|metadata
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|textAnnotation
+argument_list|,
+name|DC_RELATION
+argument_list|,
+name|initialMention
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//metadata.add(new TripleImpl(initialMention, DC_RELATION, textAnnotation));
 block|}
 comment|//TODO: support also Entities
 if|if
