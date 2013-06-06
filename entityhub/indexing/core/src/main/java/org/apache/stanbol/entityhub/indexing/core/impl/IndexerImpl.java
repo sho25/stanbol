@@ -3373,6 +3373,14 @@ argument_list|(
 name|activeIndexingDeamons
 argument_list|)
 expr_stmt|;
+comment|//close the stream with IDs
+name|IOUtils
+operator|.
+name|closeQuietly
+argument_list|(
+name|indexedEntityIdOutputStream
+argument_list|)
+expr_stmt|;
 comment|//set the new state to INDEXED
 name|setState
 argument_list|(
