@@ -120,7 +120,13 @@ name|entityhub
 argument_list|(
 literal|"http://stanbol.apache.org/ontology/entityhub/entityhub#"
 argument_list|)
-block|,     ;
+block|,
+comment|/**      * Namespace for Disambiguation related properties and classes (added with      * STANBOL-1053)      */
+name|dis
+argument_list|(
+literal|"http://stanbol.apache.org/ontology/disambiguation/disambiguation#"
+argument_list|)
+block|;
 name|String
 name|ns
 decl_stmt|;
