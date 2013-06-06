@@ -361,6 +361,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|text
+operator|.
+name|SimpleDateFormat
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|ArrayList
@@ -384,6 +394,16 @@ operator|.
 name|util
 operator|.
 name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Date
 import|;
 end_import
 
@@ -443,6 +463,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -480,6 +510,36 @@ operator|.
 name|io
 operator|.
 name|FilenameUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|solr
+operator|.
+name|common
+operator|.
+name|SolrException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|solr
+operator|.
+name|common
+operator|.
+name|SolrException
+operator|.
+name|ErrorCode
 import|;
 end_import
 
@@ -732,6 +792,13 @@ specifier|final
 name|BundleContext
 name|context
 decl_stmt|;
+comment|/**      * Used to skip registration of OSGI services during the initialisation      * of the {@link CoreContainer}.<p>      * This is necessary to avoid deadlocks with      * OSGI allowing only a single thread to register services and the      * {@link CoreContainer} using a thread pool to initialise SolrCores during      * startup. The combination of this would result in deadlock if the      * {@link SolrServerAdapter} is created within a activate method and the      * CoreContainer does contain more then a single {@link SolrCore} to load.      *<p>      *       */
+specifier|private
+name|boolean
+name|initialised
+init|=
+literal|false
+decl_stmt|;
 comment|/**      * This implements CloseHook as used by {@link SolrCore} to notify about      * the event that a specific SolrCore was finally closed. This is the only      * way to get notified if a SolrCore is removed by other means than using      * this class (e.g. by using the AdminRequestHandler)      */
 specifier|private
 specifier|final
@@ -866,7 +933,7 @@ name|SolrCore
 name|core
 parameter_list|)
 block|{
-comment|//nothing to do
+comment|//If we want to delete SolrCores from Disc, this can be done here!
 block|}
 block|}
 decl_stmt|;
@@ -874,6 +941,7 @@ comment|/**      * Creates and Initialise a Solr {@link CoreContainer} based on 
 specifier|public
 name|SolrServerAdapter
 parameter_list|(
+specifier|final
 name|BundleContext
 name|context
 parameter_list|,
@@ -969,20 +1037,433 @@ operator|.
 name|clone
 argument_list|()
 expr_stmt|;
-comment|//        SolrResourceLoader loader = new OsgiResourceLoader(solrDir.getAbsolutePath(),
-comment|//            SolrServerAdapter.class.getClassLoader());
-comment|//        CoreContainer container = new CoreContainer(loader);
+name|SolrResourceLoader
+name|loader
+init|=
+operator|new
+name|OsgiSolrResourceLoader
+argument_list|(
+name|context
+argument_list|,
+name|solrDir
+operator|.
+name|getAbsolutePath
+argument_list|()
+argument_list|,
+name|SolrServerAdapter
+operator|.
+name|class
+operator|.
+name|getClassLoader
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|//We need to override some methods of the CoreContainer to
+comment|// (1) ensure the OsigSolrResourceLoader is used
+comment|// (2) update the OSGI service registrations
+comment|//Previously this was done in the SolrServerAdapter, but to also support
+comment|//ReferencedSolrServer (STANBOL-1081) we do it now directly for the
+comment|//CoreContainer. This allows also to correctly load and register
+comment|//cores that are created/changed via the Solr RESTful API
 name|CoreContainer
 name|container
 init|=
 operator|new
 name|CoreContainer
 argument_list|(
-name|solrDir
+name|loader
+argument_list|)
+block|{
+comment|//override this to ensure that the OsgiSolrResourceLodaer is used
+comment|//to create SolrCores
+annotation|@
+name|Override
+specifier|public
+name|SolrCore
+name|create
+parameter_list|(
+name|CoreDescriptor
+name|dcore
+parameter_list|)
+block|{
+name|log
 operator|.
-name|getAbsolutePath
+name|info
+argument_list|(
+literal|" .... createCore {}:{}"
+argument_list|,
+name|serverProperties
+operator|.
+name|getServerName
+argument_list|()
+argument_list|,
+name|dcore
+operator|.
+name|getName
 argument_list|()
 argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|getZkController
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//TODO: add support for ZooKeeper managed cores
+return|return
+name|super
+operator|.
+name|create
+argument_list|(
+name|dcore
+argument_list|)
+return|;
+block|}
+else|else
+block|{
+name|File
+name|idir
+init|=
+operator|new
+name|File
+argument_list|(
+name|dcore
+operator|.
+name|getInstanceDir
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|String
+name|instanceDir
+init|=
+name|idir
+operator|.
+name|getPath
+argument_list|()
+decl_stmt|;
+comment|//TODO: we can not use the indexSchemaCache because it is
+comment|//      a private variable
+name|SolrResourceLoader
+name|loader
+init|=
+operator|new
+name|OsgiSolrResourceLoader
+argument_list|(
+name|context
+argument_list|,
+name|instanceDir
+argument_list|,
+name|CoreContainer
+operator|.
+name|class
+operator|.
+name|getClassLoader
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|SolrConfig
+name|config
+decl_stmt|;
+try|try
+block|{
+name|config
+operator|=
+operator|new
+name|SolrConfig
+argument_list|(
+name|loader
+argument_list|,
+name|dcore
+operator|.
+name|getConfigName
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|SolrException
+argument_list|(
+name|ErrorCode
+operator|.
+name|SERVER_ERROR
+argument_list|,
+literal|"Could not load config for "
+operator|+
+name|dcore
+operator|.
+name|getConfigName
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+name|IndexSchema
+name|schema
+init|=
+operator|new
+name|IndexSchema
+argument_list|(
+name|config
+argument_list|,
+name|dcore
+operator|.
+name|getSchemaName
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|SolrCore
+name|core
+init|=
+operator|new
+name|SolrCore
+argument_list|(
+name|dcore
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+literal|null
+argument_list|,
+name|config
+argument_list|,
+name|schema
+argument_list|,
+name|dcore
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|core
+operator|.
+name|getUpdateHandler
+argument_list|()
+operator|.
+name|getUpdateLog
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// always kick off recovery if we are in standalone mode.
+name|core
+operator|.
+name|getUpdateHandler
+argument_list|()
+operator|.
+name|getUpdateLog
+argument_list|()
+operator|.
+name|recoverFromLog
+argument_list|()
+expr_stmt|;
+block|}
+return|return
+name|core
+return|;
+block|}
+block|}
+comment|//this ensures that a closeHook is added to registered cores
+annotation|@
+name|Override
+specifier|protected
+name|SolrCore
+name|registerCore
+parameter_list|(
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|SolrCore
+argument_list|>
+name|whichCores
+parameter_list|,
+name|String
+name|name
+parameter_list|,
+name|SolrCore
+name|core
+parameter_list|,
+name|boolean
+name|returnPrevNotClosed
+parameter_list|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" .... registerCore {}:{}"
+argument_list|,
+name|serverProperties
+operator|.
+name|getServerName
+argument_list|()
+argument_list|,
+name|name
+argument_list|)
+expr_stmt|;
+name|SolrCore
+name|old
+init|=
+name|super
+operator|.
+name|registerCore
+argument_list|(
+name|whichCores
+argument_list|,
+name|name
+argument_list|,
+name|core
+argument_list|,
+name|returnPrevNotClosed
+argument_list|)
+decl_stmt|;
+comment|//NOTE: we can not register the services here, as this can trigger
+comment|//      a deadlock!!
+comment|//Reason: OSGI ensures that activation is done by a single thread.
+comment|//        Solr uses a Threadpool to activate SolrCores. This means
+comment|//        that this method is called in a different thread context
+comment|//        as the OSGI activation thread. However the registration
+comment|//        of the SolrCore would try to re-sync on the OSGI activation
+comment|//        Thread and therefore cause a deadlock as the
+comment|//        constructor of the SolrServerAdapter is typically expected
+comment|//        to be called within an activate method.
+comment|//Solution: the 'initialised' switch is only set to TRUE after the
+comment|//          initialisation of the CoreContainer. During initialisation
+comment|//          the SolrCores ore only registered after the construction
+comment|//          of the CoreContainer. This ensures that the OSGI
+comment|//          activation thread context is used for registration
+comment|//          If SolrCores are registered afterwards (e.g a SolrCore
+comment|//          is added to a ManagedSolrServer) the registration is
+comment|//          done as part of this method (because 'initialised' is
+comment|//          already set to TRUE).
+if|if
+condition|(
+name|initialised
+condition|)
+block|{
+comment|//already initialised ?
+comment|//register the core as OSGI service
+name|registerCoreService
+argument_list|(
+name|name
+argument_list|,
+name|core
+argument_list|)
+expr_stmt|;
+name|updateCoreNamesInServerProperties
+argument_list|()
+expr_stmt|;
+name|updateServerRegistration
+argument_list|()
+expr_stmt|;
+comment|//add a closeHook so that we know when to unregister
+name|core
+operator|.
+name|addCloseHook
+argument_list|(
+name|closeHook
+argument_list|)
+expr_stmt|;
+block|}
+comment|//else ignore registration during startup
+return|return
+name|old
+return|;
+block|}
+comment|//in the case of a swap we need to update the OSGI service registrations
+annotation|@
+name|Override
+specifier|public
+name|void
+name|swap
+parameter_list|(
+name|String
+name|name1
+parameter_list|,
+name|String
+name|name2
+parameter_list|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" .... swap {}:{} with {}:{}"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|serverProperties
+operator|.
+name|getServerName
+argument_list|()
+block|,
+name|name1
+block|,
+name|serverProperties
+operator|.
+name|getServerName
+argument_list|()
+block|,
+name|name2
+block|}
+argument_list|)
+expr_stmt|;
+name|super
+operator|.
+name|swap
+argument_list|(
+name|name1
+argument_list|,
+name|name2
+argument_list|)
+expr_stmt|;
+comment|//also update the OSGI Service registrations
+if|if
+condition|(
+name|initialised
+condition|)
+block|{
+name|registerCoreService
+argument_list|(
+name|name1
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|registerCoreService
+argument_list|(
+name|name2
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+comment|//update the OSGI service for the CoreContainer
+name|updateCoreNamesInServerProperties
+argument_list|()
+expr_stmt|;
+name|updateServerRegistration
+argument_list|()
+expr_stmt|;
+block|}
+comment|//else ignore registration during startup
+block|}
+block|}
 decl_stmt|;
 name|File
 name|solrCof
@@ -998,40 +1479,6 @@ name|getSolrXml
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|ClassLoader
-name|classLoader
-init|=
-name|updateContextClassLoader
-argument_list|()
-decl_stmt|;
-try|try
-block|{
-name|container
-operator|.
-name|load
-argument_list|(
-name|solrDir
-operator|.
-name|getAbsolutePath
-argument_list|()
-argument_list|,
-name|solrCof
-argument_list|)
-expr_stmt|;
-block|}
-finally|finally
-block|{
-name|Thread
-operator|.
-name|currentThread
-argument_list|()
-operator|.
-name|setContextClassLoader
-argument_list|(
-name|classLoader
-argument_list|)
-expr_stmt|;
-block|}
 name|this
 operator|.
 name|server
@@ -1083,16 +1530,63 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//add the currently available cores to the properties
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|coreNames
+comment|//now load the cores
+name|ClassLoader
+name|classLoader
 init|=
-name|updateCoreNamesInServerProperties
+name|updateContextClassLoader
 argument_list|()
 decl_stmt|;
+try|try
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"    ... load SolrConfig {}"
+argument_list|,
+name|solrCof
+argument_list|)
+expr_stmt|;
+name|container
+operator|.
+name|load
+argument_list|(
+name|solrDir
+operator|.
+name|getAbsolutePath
+argument_list|()
+argument_list|,
+name|solrCof
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"      - loaded SolrConfig {}"
+argument_list|,
+name|solrCof
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|Thread
+operator|.
+name|currentThread
+argument_list|()
+operator|.
+name|setContextClassLoader
+argument_list|(
+name|classLoader
+argument_list|)
+expr_stmt|;
+block|}
+comment|//add the currently available cores to the properties
+name|updateCoreNamesInServerProperties
+argument_list|()
+expr_stmt|;
 comment|//register the SolrServer
 name|this
 operator|.
@@ -1114,22 +1608,60 @@ argument_list|,
 name|serverProperties
 argument_list|)
 expr_stmt|;
-comment|//now register the cores
+comment|//activate OSGI service registration on changes of the CoreContainer
+name|initialised
+operator|=
+literal|true
+expr_stmt|;
+comment|//register the cores;
 for|for
 control|(
 name|String
-name|name
+name|coreName
 range|:
-name|coreNames
+name|server
+operator|.
+name|getCoreNames
+argument_list|()
 control|)
+block|{
+name|SolrCore
+name|core
+init|=
+name|server
+operator|.
+name|getCore
+argument_list|(
+name|coreName
+argument_list|)
+decl_stmt|;
+try|try
 block|{
 name|registerCoreService
 argument_list|(
-name|name
+name|coreName
 argument_list|,
-literal|null
+name|core
 argument_list|)
 expr_stmt|;
+name|core
+operator|.
+name|addCloseHook
+argument_list|(
+name|closeHook
+argument_list|)
+expr_stmt|;
+comment|//add a closeHook
+block|}
+finally|finally
+block|{
+comment|//decrease the reference count
+name|core
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 block|}
 comment|/**      * Shutdown the {@link CoreContainer} and all {@link SolrCore}s managed by       * this instance. This will also cause all OSGI services to be unregistered      */
@@ -1433,7 +1965,6 @@ block|}
 argument_list|)
 expr_stmt|;
 comment|//swap the cores
-comment|//TODO: what happens if one/both cores are no longer present?
 name|server
 operator|.
 name|swap
@@ -1442,25 +1973,6 @@ name|core1
 argument_list|,
 name|core2
 argument_list|)
-expr_stmt|;
-comment|//(re-)register the two cores
-name|registerCoreService
-argument_list|(
-name|core1
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-name|registerCoreService
-argument_list|(
-name|core2
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-comment|//update the OSGI service for the CoreContainer
-name|updateServerRegistration
-argument_list|()
 expr_stmt|;
 block|}
 comment|/**      * Registers a SolrCore based on the parsed configuration. If a SolrCore      * with the same name as provided by the configuration is already present      * it will be replace by this one.      * @param parsedCoreConfig The configuration.      * @return The ServiceReference to the SolrCore.      * @throws ParserConfigurationException if the XML parser could not be configured      * @throws IOException indicated an error related to accessing the configured resource      * @throws SAXException indicated an formatting error in the xml configuration files.      */
@@ -1498,7 +2010,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Register Core {} to CoreContainer {}"
+literal|"Register Core {} to SolrServerAdapter (coreContainer: {})"
 argument_list|,
 name|coreName
 argument_list|,
@@ -1593,144 +2105,32 @@ name|core
 decl_stmt|;
 try|try
 block|{
-comment|//This API usage is based on CoreContainer#createFromLocal(..)
-comment|//version 4.1
-comment|//Using this rather low level API is necessary to allow the usage
-comment|//of an own SolrResourceLoader
-name|CoreDescriptor
-name|coreDescriptor
-init|=
-operator|new
-name|CoreDescriptor
-argument_list|(
-name|server
-argument_list|,
-name|coreName
-argument_list|,
-name|coreDir
-operator|.
-name|getAbsolutePath
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|SolrResourceLoader
-name|loader
-init|=
-operator|new
-name|OsgiSolrResourceLoader
-argument_list|(
-name|context
-argument_list|,
-name|coreDir
-operator|.
-name|getAbsolutePath
-argument_list|()
-argument_list|,
-name|SolrServerAdapter
-operator|.
-name|class
-operator|.
-name|getClassLoader
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|SolrConfig
-name|config
-init|=
-operator|new
-name|SolrConfig
-argument_list|(
-name|loader
-argument_list|,
-name|coreDescriptor
-operator|.
-name|getConfigName
-argument_list|()
-argument_list|,
-literal|null
-argument_list|)
-decl_stmt|;
-name|IndexSchema
-name|schema
-init|=
-operator|new
-name|IndexSchema
-argument_list|(
-name|config
-argument_list|,
-name|coreDescriptor
-operator|.
-name|getSchemaName
-argument_list|()
-argument_list|,
-literal|null
-argument_list|)
-decl_stmt|;
+comment|//NOTE: this code depends on the fact that the create method of the
+comment|//      CoreContainer is overridden by the SolrServerAdapter
+comment|//      to use the OSGI specific SolrResourceLoader!
 name|core
 operator|=
-operator|new
-name|SolrCore
-argument_list|(
-name|coreDescriptor
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-literal|null
-argument_list|,
-name|config
-argument_list|,
-name|schema
-argument_list|,
-name|coreDescriptor
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|core
-operator|.
-name|getUpdateHandler
-argument_list|()
-operator|.
-name|getUpdateLog
-argument_list|()
-operator|!=
-literal|null
-condition|)
-block|{
-comment|// always kick off recovery if we are in standalone mode.
-name|core
-operator|.
-name|getUpdateHandler
-argument_list|()
-operator|.
-name|getUpdateLog
-argument_list|()
-operator|.
-name|recoverFromLog
-argument_list|()
-expr_stmt|;
-block|}
 name|server
 operator|.
-name|register
+name|create
 argument_list|(
+operator|new
+name|CoreDescriptor
+argument_list|(
+name|server
+argument_list|,
 name|coreName
 argument_list|,
-name|core
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-comment|//core = server.create(coreDescriptor);
-comment|//add the CloseHook
-name|core
+name|coreDir
 operator|.
-name|addCloseHook
-argument_list|(
-name|closeHook
+name|getAbsolutePath
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//CloseHook is now appied by the overridden registerCore(..) method
+comment|//of the wrapped CoreContainer!
+comment|//core.addCloseHook(closeHook);
 comment|// parse ture as third argument to avoid closing the current core for now
 name|old
 operator|=
@@ -1786,10 +2186,9 @@ expr_stmt|;
 block|}
 comment|// persist the new core to have it available on the next start
 comment|//server.persist();
-comment|//update the OSGI service for the CoreContainer
-name|updateServerRegistration
-argument_list|()
-expr_stmt|;
+comment|//update the OSGI service is now done by the overridden CoreContainer#create(..)
+comment|//method
+comment|//updateServerRegistration();
 return|return
 name|coreRef
 return|;
@@ -1803,7 +2202,6 @@ name|SolrCore
 name|old
 parameter_list|)
 block|{
-comment|/*          * TODO: Validate if it is a good Idea to decrease the reference count          * until the SolrCore is closed.          */
 if|if
 condition|(
 name|old
@@ -1818,70 +2216,28 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|old
-operator|.
-name|isClosed
-argument_list|()
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Old SolrCore was not Closed correctly - this indicates that some other"
-operator|+
-literal|"components calling CoreContainer#getSolrCore() has not colled SolrCore#close()"
-operator|+
-literal|"after using it."
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"To avoid memory leaks this will call SolrCore#close() until closed"
-argument_list|)
-expr_stmt|;
-name|int
-name|i
-init|=
-literal|0
-decl_stmt|;
-for|for
-control|(
-init|;
-operator|!
-name|old
-operator|.
-name|isClosed
-argument_list|()
-condition|;
-name|i
-operator|++
-control|)
-block|{
-name|old
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-block|}
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"   ... called SolrCore#close() {} times before closed"
-argument_list|,
-name|i
-argument_list|)
-expr_stmt|;
-block|}
+comment|//this frees the reference hold by the SolrServerAdapter
+comment|//We do no longer free additional references (that could be hold by other
+comment|//OSGI components that do retrieve a SolrCore from the CoreContainer)
+comment|//Those components will need to close their SolrCores themselves!
+comment|//As it is expected that most components will use EmbeddedSolrServer
+comment|//to use registered CoreContainer and SolrCores and this implementation
+comment|//does correctly call SolrCore#close() on each retrieved SolrCore this
+comment|//assumption will be true in most Situations.
+comment|//        if(!old.isClosed()){
+comment|//            log.warn("Old SolrCore was not Closed correctly - this indicates that some other" +
+comment|//            		"components calling CoreContainer#getSolrCore() has not colled SolrCore#close()" +
+comment|//            		"after using it.");
+comment|//            log.warn("To avoid memory leaks this will call SolrCore#close() until closed");
+comment|//            int i=0;
+comment|//            for(;!old.isClosed();i++){
+comment|//                old.close();
+comment|//            }
+comment|//            log.warn("   ... called SolrCore#close() {} times before closed",i);
+comment|//        }
 block|}
 comment|/**      * Registers a {@link SolrCore} as OSGI service with the some additional      * metadata allowing other components to explicitly register for this      * SolrCore      * @param name the name of the core      * @param core the Core or<code>null</code> if not available. If       *<code>null</code> is parsed the {@link SolrCore} will be looked up by      * using the {@link #server}. This is mainly to do not increase the      * {@link SolrCore#getOpenCount()}.      */
-specifier|private
+specifier|protected
 name|ServiceReference
 name|registerCoreService
 parameter_list|(
@@ -1932,7 +2288,7 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|debug
+name|info
 argument_list|(
 literal|"added Registration for SolrCore {}"
 argument_list|,
@@ -2407,16 +2763,17 @@ name|name
 operator|=
 name|name
 expr_stmt|;
+if|if
+condition|(
+name|parsedCore
+operator|==
+literal|null
+condition|)
+block|{
 name|this
 operator|.
 name|core
 operator|=
-name|parsedCore
-operator|!=
-literal|null
-condition|?
-name|parsedCore
-else|:
 name|server
 operator|.
 name|getCore
@@ -2425,6 +2782,22 @@ name|name
 argument_list|)
 expr_stmt|;
 comment|//increases the reference count
+block|}
+else|else
+block|{
+name|this
+operator|.
+name|core
+operator|=
+name|parsedCore
+expr_stmt|;
+name|parsedCore
+operator|.
+name|open
+argument_list|()
+expr_stmt|;
+comment|//increase the reference count!!
+block|}
 if|if
 condition|(
 name|core
@@ -2655,11 +3028,7 @@ name|registration
 operator|=
 literal|null
 expr_stmt|;
-name|core
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
+comment|//core.close(); ... do not close (this registration need to keep a reference
 throw|throw
 name|e
 throw|;
@@ -2742,7 +3111,7 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|//close the core
+comment|//close the core to decrease the refernece count!!
 block|}
 block|}
 comment|/**          * The name under witch the {@link #getCore() SolrCore} is registered.          * {@link SolrCore#getName()} MAY NOT be equals to the name returned by          * this Method.          * @return the name under witch the SolrCore is registered. This can be          * also retrieved by using {@link ServiceReference#getProperty(String)          * gerServiceReference().getProperty(String)} with the key          * {@link SolrConstants#PROPERTY_CORE_NAME}.          */
