@@ -402,6 +402,10 @@ import|;
 end_import
 
 begin_comment
+comment|//TODO check if clerezza rdf.jaxrs prvoder fits the purpose?
+end_comment
+
+begin_comment
 comment|//TODO make it a service/component
 end_comment
 

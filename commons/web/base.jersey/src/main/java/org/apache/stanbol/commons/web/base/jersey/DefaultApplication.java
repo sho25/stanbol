@@ -16,6 +16,8 @@ operator|.
 name|web
 operator|.
 name|base
+operator|.
+name|jersey
 package|;
 end_package
 
@@ -130,6 +132,20 @@ operator|.
 name|writers
 operator|.
 name|ResultSetWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|glassfish
+operator|.
+name|jersey
+operator|.
+name|server
+operator|.
+name|ResourceConfig
 import|;
 end_import
 
@@ -260,34 +276,11 @@ argument_list|(
 name|contributedClasses
 argument_list|)
 expr_stmt|;
+comment|//TODO check if clerezza rdf.jaxrs prvoder fits the purpose
 comment|// message body writers, hard-coded for now
-name|classes
-operator|.
-name|add
-argument_list|(
-name|GraphWriter
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|JenaModelWriter
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|ResultSetWriter
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
+comment|//classes.add(GraphWriter.class);
+comment|//classes.add(JenaModelWriter.class);
+comment|//classes.add(ResultSetWriter.class);
 return|return
 name|classes
 return|;

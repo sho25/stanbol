@@ -21,20 +21,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataParam
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
