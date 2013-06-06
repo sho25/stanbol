@@ -637,6 +637,19 @@ argument_list|>
 name|config
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Configure {} :"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|IndexingConfig
 name|indexingConfig
 init|=
@@ -652,6 +665,14 @@ operator|.
 name|KEY_INDEXING_CONFIG
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|indexingConfig
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//will be null if used for post processing
 name|nsPrefixService
 operator|=
 name|indexingConfig
@@ -659,19 +680,7 @@ operator|.
 name|getNamespacePrefixService
 argument_list|()
 expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Configure {} :"
-argument_list|,
-name|getClass
-argument_list|()
-operator|.
-name|getSimpleName
-argument_list|()
-argument_list|)
-expr_stmt|;
+block|}
 name|Object
 name|value
 init|=
@@ -1397,6 +1406,25 @@ operator|=
 literal|false
 expr_stmt|;
 comment|//deactivate as default
+block|}
+if|if
+condition|(
+name|nsPrefixState
+operator|&&
+name|nsPrefixService
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to enable Namespace Prefix support, "
+operator|+
+literal|"because no NamespacePrefixService is preset!"
+argument_list|)
+throw|;
 block|}
 name|log
 operator|.
