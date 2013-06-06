@@ -1945,6 +1945,14 @@ index|]
 expr_stmt|;
 block|}
 comment|//now process the admin Codes (including the country at index 0)
+name|StringBuilder
+name|parentCode
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+comment|//iterate over parent codes until the first NULL (or '00' unknown) element
 for|for
 control|(
 name|int
@@ -1957,13 +1965,7 @@ operator|<
 name|adminCodes
 operator|.
 name|length
-condition|;
-name|i
-operator|++
-control|)
-block|{
-if|if
-condition|(
+operator|&&
 name|adminCodes
 index|[
 name|i
@@ -1981,42 +1983,18 @@ name|equals
 argument_list|(
 literal|"00"
 argument_list|)
-condition|)
-block|{
-comment|//00 is used to indicate not known
-name|StringBuilder
-name|parentCode
-init|=
-operator|new
-name|StringBuilder
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|int
-name|j
-init|=
-literal|0
-init|;
-name|j
-operator|<
-name|i
 condition|;
-name|j
+name|i
 operator|++
 control|)
 block|{
-name|parentCode
-operator|.
-name|append
-argument_list|(
-name|adminCodes
-index|[
-name|j
-index|]
-argument_list|)
-expr_stmt|;
-comment|//add all the previous
+if|if
+condition|(
+name|i
+operator|>
+literal|0
+condition|)
+block|{
 name|parentCode
 operator|.
 name|append
@@ -2024,7 +2002,6 @@ argument_list|(
 literal|'.'
 argument_list|)
 expr_stmt|;
-comment|//add the seperator char
 block|}
 name|parentCode
 operator|.
@@ -2082,7 +2059,7 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
+comment|// add each level
 block|}
 comment|//[14] population
 name|String
