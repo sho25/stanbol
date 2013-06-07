@@ -137,6 +137,38 @@ name|org
 operator|.
 name|apache
 operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Component
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Service
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|commons
@@ -168,10 +200,24 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@JobManager} interface.  *   * @author enridaga  *  *  * @scr.component immediate="true"  * @scr.service  *  */
+comment|/**  * Implementation of the {@JobManager} interface.  *   * @author enridaga  *  */
 end_comment
 
 begin_class
+annotation|@
+name|Component
+argument_list|(
+name|immediate
+operator|=
+literal|true
+argument_list|)
+annotation|@
+name|Service
+argument_list|(
+name|JobManager
+operator|.
+name|class
+argument_list|)
 specifier|public
 class|class
 name|JobManagerImpl
