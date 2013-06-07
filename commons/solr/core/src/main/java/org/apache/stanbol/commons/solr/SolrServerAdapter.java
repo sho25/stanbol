@@ -867,6 +867,13 @@ comment|//parsed name is still the same as parsed
 if|if
 condition|(
 name|coreRegistration
+operator|!=
+literal|null
+condition|)
+block|{
+if|if
+condition|(
+name|coreRegistration
 operator|.
 name|getCore
 argument_list|()
@@ -916,12 +923,33 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|//else the core was removed by using the API of the SolrServerAdapter
+block|}
 block|}
 block|}
 comment|//update the OSGI service for the CoreContainer
+try|try
+block|{
 name|updateServerRegistration
 argument_list|()
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IllegalStateException
+name|e
+parameter_list|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Server Registration already unregistered "
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override
