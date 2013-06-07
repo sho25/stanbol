@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  * @author Reto  */
+comment|/**  * That's the data the Web Binding Provider need to provide  */
 end_comment
 
 begin_interface
@@ -115,7 +115,7 @@ name|List
 argument_list|<
 name|LinkResource
 argument_list|>
-name|getLinkResources
+name|getRegisteredLinkResources
 parameter_list|()
 function_decl|;
 specifier|public
@@ -123,7 +123,7 @@ name|List
 argument_list|<
 name|ScriptResource
 argument_list|>
-name|getScriptResources
+name|getRegisteredScriptResources
 parameter_list|()
 function_decl|;
 block|}

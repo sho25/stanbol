@@ -488,7 +488,6 @@ specifier|private
 name|JobManager
 name|jobManager
 decl_stmt|;
-comment|/*public JobInfo getJobInfo(){         return info;     }*/
 annotation|@
 name|GET
 specifier|public
@@ -506,7 +505,10 @@ name|Viewable
 argument_list|(
 literal|"index"
 argument_list|,
-name|this
+operator|new
+name|ResultData
+argument_list|()
+block|{}
 argument_list|)
 argument_list|)
 operator|.
@@ -614,6 +616,7 @@ name|id
 argument_list|)
 decl_stmt|;
 comment|//this.info = new JobInfoImpl();
+specifier|final
 name|JobInfo
 name|info
 init|=
@@ -733,7 +736,20 @@ name|Viewable
 argument_list|(
 literal|"info"
 argument_list|,
+operator|new
+name|ResultData
+argument_list|()
+block|{
+specifier|public
+name|JobInfo
+name|getJobInfo
+parameter_list|()
+block|{
+return|return
 name|info
+return|;
+block|}
+block|}
 argument_list|)
 argument_list|)
 operator|.

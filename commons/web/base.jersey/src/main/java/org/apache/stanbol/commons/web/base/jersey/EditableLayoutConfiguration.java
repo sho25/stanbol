@@ -397,7 +397,7 @@ name|List
 argument_list|<
 name|LinkResource
 argument_list|>
-name|getLinkResources
+name|getRegisteredLinkResources
 parameter_list|()
 block|{
 return|return
@@ -411,7 +411,7 @@ name|List
 argument_list|<
 name|ScriptResource
 argument_list|>
-name|getScriptResources
+name|getRegisteredScriptResources
 parameter_list|()
 block|{
 return|return
