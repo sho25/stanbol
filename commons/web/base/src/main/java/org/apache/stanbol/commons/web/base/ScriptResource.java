@@ -24,6 +24,8 @@ comment|/**  * Simple data transfer object for scripts (typically javascript) to
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|ScriptResource

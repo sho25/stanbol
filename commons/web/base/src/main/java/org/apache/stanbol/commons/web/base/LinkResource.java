@@ -24,6 +24,8 @@ comment|/**  * Simple data transfer object for stylesheet (CSS) and fiveicon lis
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
 specifier|public
 class|class
 name|LinkResource

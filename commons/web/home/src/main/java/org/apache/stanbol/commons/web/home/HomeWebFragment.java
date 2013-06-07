@@ -362,15 +362,6 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|classes
-operator|.
-name|add
-argument_list|(
-name|StanbolRootResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
 return|return
 name|classes
 return|;
