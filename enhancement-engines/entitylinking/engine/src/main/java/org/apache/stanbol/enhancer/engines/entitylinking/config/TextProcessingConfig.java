@@ -539,7 +539,7 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"*;lmmtip;uc=LINK;prop=0.75;pprob=0.75"
+literal|"*;lmmtip;uc=LINK;prob=0.75;pprob=0.75"
 block|,
 literal|"de;uc=MATCH"
 block|,
