@@ -1221,6 +1221,16 @@ name|NamespaceException
 throws|,
 name|ServletException
 block|{
+if|if
+condition|(
+name|componentContext
+operator|==
+literal|null
+condition|)
+block|{
+comment|//we have not yet been activated
+return|return;
+block|}
 comment|//temporary workaround for STANBOL-1073
 name|InputStream
 name|in
