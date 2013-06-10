@@ -1164,7 +1164,7 @@ argument_list|,
 name|value
 operator|=
 block|{
-literal|"*;lmmtip;uc=LINK;prop=0.75;pprob=0.75"
+literal|"*;lmmtip;uc=LINK;prob=0.75;pprob=0.75"
 block|,
 comment|// link multiple matchable tokens in chunks; link upper case words
 literal|"de;uc=MATCH"
