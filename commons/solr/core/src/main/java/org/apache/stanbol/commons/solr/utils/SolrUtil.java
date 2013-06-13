@@ -47,7 +47,7 @@ specifier|final
 name|String
 name|LUCENE_ESCAPE_CHARS
 init|=
-literal|"[\\\\+\\-\\!\\(\\)\\:\\^\\[\\]\\{\\}\\~\\*\\?\\\"]"
+literal|"[\\\\+\\-\\!\\(\\)\\:\\^\\[\\]\\{\\}\\~\\*\\?\\\"\\/]"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -68,7 +68,7 @@ specifier|final
 name|String
 name|WILDCARD_ESCAPE_CHARS
 init|=
-literal|"[\\\\+\\-\\!\\(\\)\\:\\^\\[\\]\\{\\}\\~\\\"]"
+literal|"[\\\\+\\-\\!\\(\\)\\:\\^\\[\\]\\{\\}\\~\\\"\\/]"
 decl_stmt|;
 specifier|private
 specifier|static
