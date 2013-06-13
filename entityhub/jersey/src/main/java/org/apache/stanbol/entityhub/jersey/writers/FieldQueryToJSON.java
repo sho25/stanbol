@@ -428,6 +428,35 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//add the field
+comment|//write the boost if present
+name|Double
+name|boost
+init|=
+name|fieldConstraint
+operator|.
+name|getValue
+argument_list|()
+operator|.
+name|getBoost
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|boost
+operator|!=
+literal|null
+condition|)
+block|{
+name|jFieldConstraint
+operator|.
+name|put
+argument_list|(
+literal|"boost"
+argument_list|,
+name|boost
+argument_list|)
+expr_stmt|;
+block|}
 name|constraints
 operator|.
 name|put
@@ -1020,6 +1049,30 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//else default is false
+comment|//write the proximity ranking state (if defined)
+if|if
+condition|(
+name|textConstraint
+operator|.
+name|isProximityRanking
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+name|jConstraint
+operator|.
+name|put
+argument_list|(
+literal|"proximityRanking"
+argument_list|,
+name|textConstraint
+operator|.
+name|isProximityRanking
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 break|break;
 case|case
 name|range
