@@ -586,7 +586,7 @@ name|getName
 argument_list|()
 expr_stmt|;
 name|CoreDescriptor
-name|descriptior
+name|descriptor
 init|=
 name|core
 operator|.
@@ -595,7 +595,7 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|descriptior
+name|descriptor
 operator|==
 literal|null
 condition|)
@@ -617,7 +617,7 @@ else|else
 block|{
 name|server
 operator|=
-name|descriptior
+name|descriptor
 operator|.
 name|getCoreContainer
 argument_list|()

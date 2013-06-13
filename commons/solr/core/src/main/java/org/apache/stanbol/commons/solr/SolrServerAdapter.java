@@ -819,6 +819,18 @@ name|SolrCore
 name|core
 parameter_list|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"  ... in preClose SolrCore {}"
+argument_list|,
+name|core
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|Collection
 argument_list|<
 name|String
@@ -895,18 +907,30 @@ argument_list|,
 name|name
 argument_list|)
 expr_stmt|;
+name|CoreRegistration
+name|removed
+init|=
 name|registrations
 operator|.
 name|remove
 argument_list|(
 name|name
 argument_list|)
-expr_stmt|;
-name|coreRegistration
+decl_stmt|;
+if|if
+condition|(
+name|removed
+operator|!=
+literal|null
+condition|)
+block|{
+name|removed
 operator|.
 name|unregister
 argument_list|()
 expr_stmt|;
+block|}
+comment|//else removed in the meantime by an other thread ... nothing to do
 block|}
 else|else
 block|{
@@ -1325,6 +1349,18 @@ name|void
 name|shutdown
 parameter_list|()
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... in shutdown for SolrServer {}"
+argument_list|,
+name|serverProperties
+operator|.
+name|getServerName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|Collection
 argument_list|<
 name|CoreRegistration
@@ -1928,19 +1964,6 @@ argument_list|,
 name|current
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|old
-operator|!=
-literal|null
-condition|)
-block|{
-name|old
-operator|.
-name|unregister
-argument_list|()
-expr_stmt|;
-block|}
 name|log
 operator|.
 name|info
@@ -1950,6 +1973,28 @@ argument_list|,
 name|name
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|old
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"  ... unregister old registration {}"
+argument_list|,
+name|old
+argument_list|)
+expr_stmt|;
+name|old
+operator|.
+name|unregister
+argument_list|()
+expr_stmt|;
+block|}
 return|return
 name|current
 operator|.
@@ -2798,7 +2843,6 @@ name|String
 name|name
 decl_stmt|;
 specifier|protected
-specifier|final
 name|SolrCore
 name|core
 decl_stmt|;
@@ -3154,6 +3198,15 @@ block|}
 block|}
 try|try
 block|{
+if|if
+condition|(
+name|tmp
+operator|!=
+literal|null
+condition|)
+block|{
+try|try
+block|{
 name|tmp
 operator|.
 name|unregister
@@ -3184,14 +3237,49 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+block|}
 finally|finally
+block|{
+comment|//ensure that the core is closed to decrease the reference count
+comment|//ensure this is only done once
+name|SolrCore
+name|core
+decl_stmt|;
+synchronized|synchronized
+init|(
+name|this
+init|)
+block|{
+name|core
+operator|=
+name|this
+operator|.
+name|core
+expr_stmt|;
+comment|//copy over to a local variable
+name|this
+operator|.
+name|core
+operator|=
+literal|null
+expr_stmt|;
+comment|//set the field to null
+block|}
+if|if
+condition|(
+name|core
+operator|!=
+literal|null
+condition|)
 block|{
 name|core
 operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|//close the core to decrease the refernece count!!
+comment|//decrease the reference count!!
+block|}
 block|}
 block|}
 comment|/**          * The name under witch the {@link #getCore() SolrCore} is registered.          * {@link SolrCore#getName()} MAY NOT be equals to the name returned by          * this Method.          * @return the name under witch the SolrCore is registered. This can be          * also retrieved by using {@link ServiceReference#getProperty(String)          * gerServiceReference().getProperty(String)} with the key          * {@link SolrConstants#PROPERTY_CORE_NAME}.          */
