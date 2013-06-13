@@ -1785,6 +1785,82 @@ name|test
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBoostAndProximityRanking
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|JSONException
+block|{
+comment|//test features added with STANBOL-1105, STANBOL-1106
+name|FieldQueryTestCase
+name|test
+init|=
+operator|new
+name|FieldQueryTestCase
+argument_list|(
+literal|"{ "
+operator|+
+literal|"'selected': ["
+operator|+
+literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
+operator|+
+literal|"'offset': '0',"
+operator|+
+literal|"'limit': '3',"
+operator|+
+literal|"'constraints': [{ "
+operator|+
+literal|"'type': 'text', "
+operator|+
+literal|"'text': ['Frankfurt','Main','Flughafen'], "
+operator|+
+literal|"'language': ['de', 'en'], "
+operator|+
+literal|"'field': 'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label', "
+operator|+
+literal|"'boost': 12.34,"
+operator|+
+literal|"'proximityRanking': true"
+operator|+
+literal|"}]"
+operator|+
+literal|"}"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of expected results
+literal|"http://dbpedia.org/resource/Frankfurt_Airport"
+argument_list|,
+literal|"http://dbpedia.org/resource/Frankfurt"
+argument_list|,
+comment|// this query selects Main instead of Airport, as Main has the same label in German and English
+comment|//                     "http://dbpedia.org/resource/Airport"),
+literal|"http://dbpedia.org/resource/Main"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+comment|//list of required fields for results
+literal|"http://www.w3.org/2000/01/rdf-schema#label"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|//now execute the test
+name|executeQuery
+argument_list|(
+name|test
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
