@@ -136,6 +136,11 @@ name|String
 argument_list|>
 name|texts
 decl_stmt|;
+comment|/**      * If enabled the proximity of query terms will be used for ranking the       * results.      */
+specifier|private
+name|boolean
+name|proximityRanking
+decl_stmt|;
 comment|/**      * Creates a TextConstraint for multiple texts and languages. Parsed texts      * are connected using OR and may appear in any of the parsed languages.      * @param text the texts or<code>null</code> to search for any text in active languages      * @param languages the set of active languages      */
 specifier|public
 name|TextConstraint
@@ -653,6 +658,32 @@ argument_list|(
 literal|0
 argument_list|)
 return|;
+block|}
+comment|/**      * Getter for the Term Proximity state. If enabled the proximity of the      * parsed terms should be used to rank search results.      * @return the termProximity or<code>null</code> if not specified      */
+specifier|public
+name|Boolean
+name|isProximityRanking
+parameter_list|()
+block|{
+return|return
+name|proximityRanking
+return|;
+block|}
+comment|/**      * Setter for the proximity ranking state. If enabled the proximity of the      * parsed terms should be used to rank search results.      * @param state the proximity ranking state to set      */
+specifier|public
+name|void
+name|setProximityRanking
+parameter_list|(
+name|boolean
+name|state
+parameter_list|)
+block|{
+name|this
+operator|.
+name|proximityRanking
+operator|=
+name|state
+expr_stmt|;
 block|}
 annotation|@
 name|Override
