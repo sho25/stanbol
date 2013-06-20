@@ -133,16 +133,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -402,6 +392,47 @@ parameter_list|()
 throws|throws
 name|IOException
 block|{
+comment|// Check if the service is down
+name|PrefixccProvider
+name|pcp
+init|=
+operator|new
+name|PrefixccProvider
+argument_list|(
+literal|10
+argument_list|,
+name|TimeUnit
+operator|.
+name|SECONDS
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|pcp
+operator|.
+name|isAvailable
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Unable to retrieve prefixes from http://prefix.cc ... deactivating "
+operator|+
+name|PrefixccProvider
+operator|.
+name|class
+operator|.
+name|getSimpleName
+argument_list|()
+operator|+
+literal|"ServiceLoader support test"
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 comment|//this test works only if online
 try|try
 block|{
@@ -409,7 +440,7 @@ name|PrefixccProvider
 operator|.
 name|GET_ALL
 operator|.
-name|openStream
+name|getInputStream
 argument_list|()
 expr_stmt|;
 block|}
