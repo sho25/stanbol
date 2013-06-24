@@ -47,6 +47,16 @@ name|java
 operator|.
 name|net
 operator|.
+name|HttpURLConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
 name|URISyntaxException
 import|;
 end_import
@@ -80,6 +90,20 @@ operator|.
 name|concurrent
 operator|.
 name|TimeUnit
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|io
+operator|.
+name|IOUtils
 import|;
 end_import
 
@@ -383,43 +407,95 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testServiceLoader
+comment|/**      * Checks if the service is reachable (test is performed online) and if      * prefix.cc sends information with the correct content type.      * @return      */
+specifier|private
+name|boolean
+name|checkServiceAvailable
 parameter_list|()
-throws|throws
-name|IOException
 block|{
-comment|// Check if the service is down
-name|PrefixccProvider
-name|pcp
+try|try
+block|{
+name|HttpURLConnection
+name|con
 init|=
-operator|new
+operator|(
+name|HttpURLConnection
+operator|)
 name|PrefixccProvider
-argument_list|(
-literal|10
-argument_list|,
-name|TimeUnit
 operator|.
-name|SECONDS
-argument_list|)
+name|GET_ALL
+operator|.
+name|openConnection
+argument_list|()
 decl_stmt|;
+name|con
+operator|.
+name|setReadTimeout
+argument_list|(
+literal|5000
+argument_list|)
+expr_stmt|;
+comment|//set the max connect& read timeout to 5sec
+name|con
+operator|.
+name|setConnectTimeout
+argument_list|(
+literal|5000
+argument_list|)
+expr_stmt|;
+name|con
+operator|.
+name|connect
+argument_list|()
+expr_stmt|;
+name|String
+name|contentType
+init|=
+name|con
+operator|.
+name|getContentType
+argument_list|()
+decl_stmt|;
+name|IOUtils
+operator|.
+name|closeQuietly
+argument_list|(
+name|con
+operator|.
+name|getInputStream
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|//close the stream
 if|if
 condition|(
-operator|!
-name|pcp
+literal|"text/plain"
 operator|.
-name|isAvailable
-argument_list|()
+name|equalsIgnoreCase
+argument_list|(
+name|contentType
+argument_list|)
 condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+else|else
 block|{
 name|log
 operator|.
 name|info
 argument_list|(
-literal|"Unable to retrieve prefixes from http://prefix.cc ... deactivating "
+literal|"Request to http://prefix.cc ... returned an unexpected "
+operator|+
+literal|"ContentType "
+operator|+
+name|contentType
+operator|+
+literal|" (expected: text/plain) "
+operator|+
+literal|" ... deactivate"
 operator|+
 name|PrefixccProvider
 operator|.
@@ -428,21 +504,14 @@ operator|.
 name|getSimpleName
 argument_list|()
 operator|+
-literal|"ServiceLoader support test"
+literal|" test"
 argument_list|)
 expr_stmt|;
-return|return;
+return|return
+literal|false
+return|;
+comment|//service seams to be down ... skip tests
 block|}
-comment|//this test works only if online
-try|try
-block|{
-name|PrefixccProvider
-operator|.
-name|GET_ALL
-operator|.
-name|getInputStream
-argument_list|()
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -463,10 +532,33 @@ operator|.
 name|getSimpleName
 argument_list|()
 operator|+
-literal|"ServiceLoader support test"
+literal|" test"
 argument_list|)
 expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testServiceLoader
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|//this test works only if online
+if|if
+condition|(
+operator|!
+name|checkServiceAvailable
+argument_list|()
+condition|)
+block|{
 return|return;
+comment|//skip test
 block|}
 comment|//this test for now does not use predefined mappings
 name|URL
