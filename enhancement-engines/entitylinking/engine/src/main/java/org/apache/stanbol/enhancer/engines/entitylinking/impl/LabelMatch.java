@@ -207,6 +207,8 @@ argument_list|,
 name|label
 argument_list|,
 name|span
+argument_list|,
+name|span
 argument_list|)
 expr_stmt|;
 block|}
@@ -233,6 +235,9 @@ name|label
 parameter_list|,
 name|int
 name|labelTokenCount
+parameter_list|,
+name|int
+name|coveredLabelTokenCount
 parameter_list|)
 block|{
 if|if
@@ -318,6 +323,10 @@ condition|(
 name|processableMatchCount
 operator|==
 name|span
+operator|&&
+name|matchCount
+operator|==
+name|coveredLabelTokenCount
 condition|)
 block|{
 name|match
@@ -387,6 +396,9 @@ name|textScore
 operator|=
 name|suggestionMatchScore
 operator|/
+operator|(
+name|double
+operator|)
 name|this
 operator|.
 name|span
@@ -395,6 +407,9 @@ name|labelScore
 operator|=
 name|suggestionMatchScore
 operator|/
+operator|(
+name|double
+operator|)
 name|this
 operator|.
 name|labelTokenCount
@@ -754,28 +769,71 @@ condition|(
 name|arg0
 operator|.
 name|match
-operator|==
+operator|.
+name|ordinal
+argument_list|()
+operator|>=
 name|MATCH
 operator|.
-name|NONE
-operator|||
+name|FULL
+operator|.
+name|ordinal
+argument_list|()
+operator|&&
+comment|//for FULL or EXACT matches
 name|arg1
 operator|.
 name|match
-operator|==
+operator|.
+name|ordinal
+argument_list|()
+operator|>=
 name|MATCH
 operator|.
-name|NONE
-operator|||
-name|arg0
+name|FULL
 operator|.
-name|processableMatchCount
-operator|==
+name|ordinal
+argument_list|()
+condition|)
+block|{
+return|return
 name|arg1
 operator|.
 name|processableMatchCount
+operator|-
+name|arg0
+operator|.
+name|processableMatchCount
+return|;
+comment|//bigger should be first
+block|}
+elseif|else
+if|if
+condition|(
+name|arg0
+operator|.
+name|match
+operator|==
+name|arg1
+operator|.
+name|match
 condition|)
 block|{
+comment|//also if the MATCH type is equals
+return|return
+name|arg1
+operator|.
+name|processableMatchCount
+operator|-
+name|arg0
+operator|.
+name|processableMatchCount
+return|;
+comment|//bigger should be first
+block|}
+else|else
+block|{
+comment|//sort by MATCH type
 return|return
 name|arg1
 operator|.
@@ -793,19 +851,13 @@ argument_list|()
 return|;
 comment|//higher ordinal first
 block|}
-else|else
-block|{
-return|return
-name|arg1
-operator|.
-name|processableMatchCount
-operator|-
-name|arg0
-operator|.
-name|processableMatchCount
-return|;
-comment|//bigger should be first
-block|}
+comment|// OLD IMPLEMENTATION
+comment|//            if(arg0.match == MATCH.NONE || arg1.match == MATCH.NONE ||
+comment|//                    arg0.processableMatchCount == arg1.processableMatchCount){
+comment|//                return arg1.match.ordinal() - arg0.match.ordinal(); //higher ordinal first
+comment|//            } else {
+comment|//                return arg1.processableMatchCount - arg0.processableMatchCount; //bigger should be first
+comment|//            }
 block|}
 block|}
 decl_stmt|;

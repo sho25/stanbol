@@ -1577,6 +1577,22 @@ name|e
 argument_list|)
 throw|;
 block|}
+if|if
+condition|(
+name|log
+operator|.
+name|isInfoEnabled
+argument_list|()
+condition|)
+block|{
+name|entityLinker
+operator|.
+name|logStatistics
+argument_list|(
+name|log
+argument_list|)
+expr_stmt|;
+block|}
 comment|//write results (requires a write lock)
 name|ci
 operator|.

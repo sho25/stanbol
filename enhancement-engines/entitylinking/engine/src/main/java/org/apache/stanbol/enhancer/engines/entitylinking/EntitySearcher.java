@@ -71,6 +71,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|PlainLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|Resource
 import|;
 end_import
@@ -100,7 +116,7 @@ specifier|public
 interface|interface
 name|EntitySearcher
 block|{
-comment|/**      * Lookup Entities for the parsed parameters.      * @param field the field used to search for values in the parsed languages      * @param selectedFields A set of fields that need to be included within the       * returned {@link Representation}. The parsed field needs also to be included      * even if missing in this set. If<code>null</code> only the field needs      * to be included. Other fields MAY also be included.      * @param search the tokens to search for. MUST NOT be<code>null</code>      * @param languages the languages to include in the search       * @param limit The maximum number of resutls of<code>null</code> to use the default      * @return the Entities found for the specified query containing information for      * all selected fields      * @throws EntitySearcherException An exception while searching for concepts      * @throws IllegalArgumentException if the parsed field is<code>null</code>;      * the list with the search terms is<code>null</code> or empty;      */
+comment|/**      * Lookup Entities for the parsed parameters.      * @param field the field used to search for values in the parsed languages      * @param selectedFields A set of fields that need to be included within the       * returned {@link Representation}. The parsed field needs also to be included      * even if missing in this set. If<code>null</code> only the field needs      * to be included. Other fields MAY also be included.      * @param search the tokens to search for. MUST NOT be<code>null</code>      * @param languages the languages to include in the search       * @param limit The maximum number of resutls of<code>null</code> to use the default      * @param offset The offset of the first requested search result      * @return the Entities found for the specified query containing information for      * all selected fields      * @throws EntitySearcherException An exception while searching for concepts      * @throws IllegalArgumentException if the parsed field is<code>null</code>;      * the list with the search terms is<code>null</code> or empty;      */
 name|Collection
 argument_list|<
 name|?
@@ -130,11 +146,14 @@ name|languages
 parameter_list|,
 name|Integer
 name|limit
+parameter_list|,
+name|Integer
+name|offset
 parameter_list|)
 throws|throws
 name|EntitySearcherException
 function_decl|;
-comment|/**      * Lookup an Entity of the linked vocabulary by the id.      * @param id the id      * @param selectedFields A set of fields that need to be included within the       * returned {@link Representation}. Other fields MAY be also included.      * @return the concept or<code>null</code> if not found      * @throws EntitySearcherException on any error while dereferencing the      * Entity with the parsed Id      * @throws IllegalArgumentException if the parsed id is<code>null</code>      */
+comment|/**      * Lookup an Entity of the linked vocabulary by the id.      * @param id the id      * @param selectedFields A set of fields that need to be included within the       * returned {@link Representation}. Other fields MAY be also included.      * @param languages the list of languages for {@link PlainLiteral}s that      * should be included in the returned Entity      * @return the concept or<code>null</code> if not found      * @throws EntitySearcherException on any error while dereferencing the      * Entity with the parsed Id      * @throws IllegalArgumentException if the parsed id is<code>null</code>      */
 name|Entity
 name|get
 parameter_list|(
@@ -146,6 +165,10 @@ argument_list|<
 name|UriRef
 argument_list|>
 name|selectedFields
+parameter_list|,
+name|String
+modifier|...
+name|languages
 parameter_list|)
 throws|throws
 name|EntitySearcherException

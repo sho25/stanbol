@@ -105,6 +105,22 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|TripleCollection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|TypedLiteral
 import|;
 end_import
@@ -312,7 +328,7 @@ decl_stmt|;
 comment|/**      * The data of the Entity. The graph is expected to contain all information      * of the entity by containing {@link Triple}s that use the {@link #uri} as      * {@link Triple#getSubject() subject}      */
 specifier|protected
 specifier|final
-name|MGraph
+name|TripleCollection
 name|data
 decl_stmt|;
 comment|/**      * Constructs a new Entity      * @param uri      * @param data      */
@@ -322,7 +338,7 @@ parameter_list|(
 name|UriRef
 name|uri
 parameter_list|,
-name|MGraph
+name|TripleCollection
 name|data
 parameter_list|)
 block|{
@@ -364,7 +380,7 @@ return|;
 block|}
 specifier|public
 specifier|final
-name|MGraph
+name|TripleCollection
 name|getData
 parameter_list|()
 block|{
