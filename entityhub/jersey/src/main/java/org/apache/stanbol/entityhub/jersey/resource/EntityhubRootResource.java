@@ -341,46 +341,6 @@ name|web
 operator|.
 name|base
 operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
 name|utils
 operator|.
 name|MediaTypeUtil
@@ -883,27 +843,11 @@ name|stanbol
 operator|.
 name|commons
 operator|.
+name|web
+operator|.
 name|viewable
 operator|.
 name|Viewable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|ContextHelper
 import|;
 end_import
 
@@ -1243,7 +1187,91 @@ name|Program
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Component
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Property
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Service
+import|;
+end_import
+
 begin_class
+annotation|@
+name|Component
+annotation|@
+name|Service
+argument_list|(
+name|Object
+operator|.
+name|class
+argument_list|)
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+literal|"javax.ws.rs"
+argument_list|,
+name|boolValue
+operator|=
+literal|true
+argument_list|)
 annotation|@
 name|Path
 argument_list|(
@@ -1324,82 +1352,24 @@ name|DEFAULT_FIND_RESULT_LIMIT
 init|=
 literal|5
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|private
 name|NamespacePrefixService
 name|nsPrefixService
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|private
 name|Entityhub
 name|entityhub
 decl_stmt|;
-comment|// bind the job manager by looking it up from the servlet request context
 specifier|public
 name|EntityhubRootResource
-parameter_list|(
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
+parameter_list|()
 block|{
 name|super
 argument_list|()
-expr_stmt|;
-name|entityhub
-operator|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|entityhub
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|WebApplicationException
-argument_list|(
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Status
-operator|.
-name|NOT_FOUND
-argument_list|)
-operator|.
-name|entity
-argument_list|(
-literal|"The Entityhub Service is currently not active!"
-argument_list|)
-operator|.
-name|build
-argument_list|()
-argument_list|)
-throw|;
-block|}
-name|nsPrefixService
-operator|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|NamespacePrefixService
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1422,15 +1392,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers);
 return|return
 name|res
 operator|.
@@ -1484,15 +1446,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1632,15 +1586,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1669,20 +1615,7 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 name|Entity
 name|entity
 decl_stmt|;
@@ -1754,15 +1687,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1920,15 +1845,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2056,15 +1973,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2100,25 +2009,7 @@ name|ok
 argument_list|()
 decl_stmt|;
 comment|//we need also PUT and DELETE because /entity has full CRUD
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|POST
-argument_list|,
-name|PUT
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers,GET,POST,PUT,DELETE,OPTIONS);
 return|return
 name|res
 operator|.
@@ -2422,20 +2313,7 @@ name|build
 argument_list|()
 return|;
 block|}
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 name|Entity
 name|entity
 decl_stmt|;
@@ -2601,15 +2479,7 @@ name|accepted
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2646,20 +2516,7 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 name|MediaType
 name|accepted
 init|=
@@ -3152,15 +3009,7 @@ operator|.
 name|NOT_MODIFIED
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3224,15 +3073,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3267,15 +3108,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3320,15 +3153,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers);
 return|return
 name|res
 operator|.
@@ -3653,15 +3478,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3952,15 +3769,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers);
 return|return
 name|res
 operator|.
@@ -4014,15 +3823,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4130,20 +3931,7 @@ parameter_list|)
 throws|throws
 name|WebApplicationException
 block|{
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 if|if
 condition|(
 name|query
@@ -4291,15 +4079,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4688,15 +4468,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4730,19 +4502,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers,GET,OPTIONS);
 return|return
 name|res
 operator|.
@@ -4900,15 +4660,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 block|}
 else|else
 block|{
@@ -4941,20 +4693,7 @@ argument_list|()
 return|;
 block|}
 block|}
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 name|Entity
 name|mapping
 decl_stmt|;
@@ -5065,15 +4804,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5107,19 +4838,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers,GET,OPTIONS);
 return|return
 name|res
 operator|.
@@ -5277,15 +4996,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 block|}
 else|else
 block|{
@@ -5318,20 +5029,7 @@ argument_list|()
 return|;
 block|}
 block|}
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 name|Entity
 name|mapping
 decl_stmt|;
@@ -5427,15 +5125,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5469,19 +5159,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers,GET,OPTIONS);
 return|return
 name|res
 operator|.
@@ -5639,15 +5317,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5686,20 +5356,7 @@ argument_list|()
 return|;
 block|}
 block|}
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 name|Collection
 argument_list|<
 name|Entity
@@ -5826,15 +5483,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5869,21 +5518,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|res
-argument_list|,
-name|headers
-argument_list|,
-name|OPTIONS
-argument_list|,
-name|GET
-argument_list|,
-name|POST
-argument_list|)
-expr_stmt|;
+comment|//enableCORS(servletContext, res, headers,OPTIONS,GET,POST);
 return|return
 name|res
 operator|.
@@ -5982,20 +5617,7 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
-name|Entityhub
-name|entityhub
-init|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Entityhub
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-decl_stmt|;
+comment|//Entityhub entityhub = ContextHelper.getServiceFromContext(Entityhub.class, servletContext);
 return|return
 name|handleLDPathRequest
 argument_list|(
@@ -6015,8 +5637,6 @@ argument_list|,
 name|contexts
 argument_list|,
 name|headers
-argument_list|,
-name|servletContext
 argument_list|)
 return|;
 block|}

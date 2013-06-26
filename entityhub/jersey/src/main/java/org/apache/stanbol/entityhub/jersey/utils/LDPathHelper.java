@@ -65,26 +65,6 @@ name|web
 operator|.
 name|base
 operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
 name|utils
 operator|.
 name|MediaTypeUtil
@@ -962,9 +942,6 @@ name|contexts
 parameter_list|,
 name|HttpHeaders
 name|headers
-parameter_list|,
-name|ServletContext
-name|servletContext
 parameter_list|)
 block|{
 name|Collection
@@ -1186,15 +1163,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1340,15 +1309,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
