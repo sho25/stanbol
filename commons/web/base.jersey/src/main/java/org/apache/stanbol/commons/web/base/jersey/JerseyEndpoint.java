@@ -1714,6 +1714,16 @@ name|ServletException
 throws|,
 name|NamespaceException
 block|{
+name|navigationLinks
+operator|.
+name|removeAll
+argument_list|(
+name|webFragment
+operator|.
+name|getNavigationLinks
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|webFragments
 operator|.
 name|remove

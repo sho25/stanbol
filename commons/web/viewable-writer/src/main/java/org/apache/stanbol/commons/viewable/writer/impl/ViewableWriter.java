@@ -667,6 +667,32 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
+literal|"IOException while processing Template '"
+operator|+
+name|templatePath
+operator|+
+literal|"' with Object '"
+operator|+
+name|pojo
+operator|+
+literal|"' (class: "
+operator|+
+name|pojo
+operator|!=
+literal|null
+condition|?
+name|pojo
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+else|:
+literal|null
+operator|+
+literal|")!"
+argument_list|,
 name|e
 argument_list|)
 throw|;
