@@ -572,6 +572,7 @@ name|IndexedMGraph
 argument_list|()
 return|;
 block|}
+comment|/* FAILING die to STANBOL-1130     @Test     public void bNodeConsitency() {         MGraph mGraph = getEmptyMGraph();         final BNode bNode = new BNode() {              @Override             public int hashCode() {                 return -1;             }              @Override             public boolean equals(Object o) {                 return o instanceof BNode;             }                               };                  final BNode bNodeClone = new BNode() {              @Override             public int hashCode() {                 return -1;             }              @Override             public boolean equals(Object o) {                 return o instanceof BNode;              }                               };         mGraph.add(new TripleImpl(bNode, uriRef1, uriRef2));         mGraph.add(new TripleImpl(bNodeClone, uriRef2, uriRef3));         NonLiteral bNodeBack = mGraph.filter(null, uriRef1, uriRef2).next().getSubject();         Assert.assertEquals("The bnode we get back is not equals to the one we added", bNode, bNodeBack);         NonLiteral bNodeBack2 = mGraph.filter(null, uriRef2, uriRef3).next().getSubject();         Assert.assertEquals("The returnned bnodes are no longer equals", bNodeBack, bNodeBack2);         Assert.assertTrue("Not finding a triple when searching with equal bNode", mGraph.filter(bNodeBack, uriRef2, null).hasNext());     }     */
 annotation|@
 name|Test
 specifier|public

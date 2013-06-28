@@ -95,6 +95,24 @@ name|rdf
 operator|.
 name|core
 operator|.
+name|impl
+operator|.
+name|SimpleMGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
 name|serializedform
 operator|.
 name|Parser
@@ -352,12 +370,14 @@ name|BundleContext
 name|context
 parameter_list|)
 block|{
+comment|//Work around because of STANBOL-1130
 name|recipesGraph
 operator|=
 operator|new
-name|IndexedMGraph
+name|SimpleMGraph
 argument_list|()
 expr_stmt|;
+comment|//new IndexedMGraph();
 name|context
 operator|.
 name|addBundleListener
