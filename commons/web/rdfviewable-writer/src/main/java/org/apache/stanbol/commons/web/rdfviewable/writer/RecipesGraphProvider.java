@@ -370,14 +370,12 @@ name|BundleContext
 name|context
 parameter_list|)
 block|{
-comment|//Work around because of STANBOL-1130
 name|recipesGraph
 operator|=
 operator|new
-name|SimpleMGraph
+name|IndexedMGraph
 argument_list|()
 expr_stmt|;
-comment|//new IndexedMGraph();
 name|context
 operator|.
 name|addBundleListener
