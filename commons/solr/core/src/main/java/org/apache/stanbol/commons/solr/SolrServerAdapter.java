@@ -1850,39 +1850,59 @@ name|classLoader
 argument_list|)
 expr_stmt|;
 block|}
-comment|//update the OSGI service for the new Core
-name|ServiceReference
-name|coreRef
+comment|//NOTE: core registration is now done as part of the registration of the
+comment|//      SolrCore to the CoreContainer
+comment|//        ServiceReference coreRef = registerCoreService(coreName,core);
+comment|//        if(old != null){
+comment|//            //cleanup the old core
+comment|//            cleanupSolrCore(old);
+comment|//        }
+comment|//        // persist the new core to have it available on the next start
+comment|//        //server.persist();
+comment|//        //update the OSGI service is now done by the overridden CoreContainer#create(..)
+comment|//        //method
+comment|//        updateServerRegistration();
+comment|//so just get the ServiceReference for the ServiceRegistration
+name|CoreRegistration
+name|reg
 init|=
-name|registerCoreService
+name|registrations
+operator|.
+name|get
 argument_list|(
 name|coreName
-argument_list|,
-name|core
 argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|old
-operator|!=
+name|reg
+operator|==
 literal|null
 condition|)
 block|{
-comment|//cleanup the old core
-name|cleanupSolrCore
+throw|throw
+operator|new
+name|IllegalStateException
 argument_list|(
-name|old
+literal|"No OSGI ServiceRegistration present after "
+operator|+
+literal|"adding SolrCore '"
+operator|+
+name|coreName
+operator|+
+literal|"' to SolrCore!"
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
-comment|// persist the new core to have it available on the next start
-comment|//server.persist();
-comment|//update the OSGI service is now done by the overridden CoreContainer#create(..)
-comment|//method
-comment|//updateServerRegistration();
+else|else
+block|{
 return|return
-name|coreRef
+name|reg
+operator|.
+name|getServiceReference
+argument_list|()
 return|;
+block|}
 block|}
 comment|/**      * Closes the parsed SolrCore      * @param old the core to close      */
 specifier|private
