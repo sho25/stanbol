@@ -102,6 +102,11 @@ name|KEY_ENTITY_POST_PROCESSOR
 init|=
 literal|"entityPostProcessor"
 decl_stmt|;
+name|String
+name|KEY_FAIL_ON_ERROR_LOADING_RESOURCE
+init|=
+literal|"failOnErrorLoadingResource"
+decl_stmt|;
 block|}
 end_interface
 

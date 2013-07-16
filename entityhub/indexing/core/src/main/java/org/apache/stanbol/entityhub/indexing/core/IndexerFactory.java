@@ -20,28 +20,6 @@ package|;
 end_package
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|indexing
-operator|.
-name|core
-operator|.
-name|config
-operator|.
-name|IndexingConfig
-operator|.
-name|DEFAULT_INDEXED_ENTITIES_ID_FILE_NAME
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.

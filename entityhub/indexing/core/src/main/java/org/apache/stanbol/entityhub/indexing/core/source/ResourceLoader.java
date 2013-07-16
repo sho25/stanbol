@@ -1605,17 +1605,19 @@ name|state
 argument_list|)
 expr_stmt|;
 block|}
-comment|//if failOnError is activated we stop the loading on the first
-comment|//error!
 if|if
 condition|(
-name|failOnError
-operator|&&
 name|ResourceState
 operator|.
 name|ERROR
 operator|==
 name|state
+condition|)
+block|{
+comment|//if failOnError is activated we stop the loading on the first error!
+if|if
+condition|(
+name|failOnError
 condition|)
 block|{
 name|String
@@ -1651,6 +1653,20 @@ argument_list|(
 name|msg
 argument_list|)
 throw|;
+block|}
+block|}
+else|else
+block|{
+comment|//if failOnError is de-activated ignore the resource loading error and continue..
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Ignore Error for File {} and continue"
+argument_list|,
+name|file
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 block|}
