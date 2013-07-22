@@ -1223,6 +1223,23 @@ name|NamespaceException
 throws|,
 name|ServletException
 block|{
+if|if
+condition|(
+name|componentContext
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... can not init Jersey Endpoint - Component not yet activated!"
+argument_list|)
+expr_stmt|;
+comment|//throw new IllegalStateException("Null ComponentContext, not activated?");
+return|return;
+block|}
 comment|//temporary workaround for STANBOL-1073
 name|InputStream
 name|in
@@ -1246,23 +1263,6 @@ literal|"text/turtle"
 argument_list|)
 expr_stmt|;
 comment|//end of STANBOL-1073 work around
-if|if
-condition|(
-name|componentContext
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" ... can not init Jersey Endpoint - Component not yet activated!"
-argument_list|)
-expr_stmt|;
-comment|//throw new IllegalStateException("Null ComponentContext, not activated?");
-return|return;
-block|}
 name|shutdownJersey
 argument_list|()
 expr_stmt|;
