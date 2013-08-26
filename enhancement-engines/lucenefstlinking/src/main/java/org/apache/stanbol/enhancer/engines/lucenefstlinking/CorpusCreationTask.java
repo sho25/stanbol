@@ -55,18 +55,6 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|concurrent
-operator|.
-name|ThreadPoolExecutor
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -89,7 +77,7 @@ name|lucene
 operator|.
 name|index
 operator|.
-name|DirectoryReader
+name|IndexReader
 import|;
 end_import
 
@@ -199,8 +187,8 @@ name|fstInfo
 decl_stmt|;
 specifier|private
 specifier|final
-name|SolrCore
-name|core
+name|IndexConfiguration
+name|indexConfig
 decl_stmt|;
 specifier|private
 specifier|final
@@ -210,8 +198,8 @@ decl_stmt|;
 specifier|public
 name|CorpusCreationTask
 parameter_list|(
-name|SolrCore
-name|core
+name|IndexConfiguration
+name|indexConfig
 parameter_list|,
 name|CorpusInfo
 name|fstInfo
@@ -219,7 +207,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|core
+name|indexConfig
 operator|==
 literal|null
 operator|||
@@ -238,9 +226,9 @@ throw|;
 block|}
 name|this
 operator|.
-name|core
+name|indexConfig
 operator|=
-name|core
+name|indexConfig
 expr_stmt|;
 name|this
 operator|.
@@ -265,6 +253,18 @@ name|void
 name|run
 parameter_list|()
 block|{
+if|if
+condition|(
+operator|!
+name|indexConfig
+operator|.
+name|isActive
+argument_list|()
+condition|)
+block|{
+return|return;
+comment|//task cancelled
+block|}
 comment|//check if the FST corpus was enqueued a 2nd time
 if|if
 condition|(
@@ -278,6 +278,14 @@ condition|)
 block|{
 return|return;
 block|}
+name|SolrCore
+name|core
+init|=
+name|indexConfig
+operator|.
+name|getIndex
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|core
@@ -302,6 +310,11 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+name|TaggerFstCorpus
+name|corpus
+init|=
+literal|null
+decl_stmt|;
 name|RefCounted
 argument_list|<
 name|SolrIndexSearcher
@@ -313,6 +326,8 @@ operator|.
 name|getSearcher
 argument_list|()
 decl_stmt|;
+try|try
+block|{
 name|SolrIndexSearcher
 name|searcher
 init|=
@@ -321,19 +336,16 @@ operator|.
 name|get
 argument_list|()
 decl_stmt|;
-name|DirectoryReader
+comment|//we do get the AtomicReader, because TaggerFstCorpus will need it
+comment|//anyways. This prevents to create another SlowCompositeReaderWrapper.
+name|IndexReader
 name|reader
 init|=
 name|searcher
 operator|.
-name|getIndexReader
+name|getAtomicReader
 argument_list|()
 decl_stmt|;
-name|TaggerFstCorpus
-name|corpus
-decl_stmt|;
-try|try
-block|{
 name|log
 operator|.
 name|info
@@ -350,7 +362,10 @@ name|TaggerFstCorpus
 argument_list|(
 name|reader
 argument_list|,
-name|reader
+name|searcher
+operator|.
+name|getIndexReader
+argument_list|()
 operator|.
 name|getVersion
 argument_list|()
@@ -381,36 +396,48 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|Exception
+name|IOException
 name|e
 parameter_list|)
 block|{
-name|log
-operator|.
-name|warn
+throw|throw
+operator|new
+name|IllegalStateException
 argument_list|(
-literal|"Unable to build "
+literal|"Unable to read Information to build "
 operator|+
 name|fstInfo
 operator|+
-literal|"!"
+literal|" from SolrIndex '"
+operator|+
+name|core
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'!"
 argument_list|,
 name|e
 argument_list|)
-expr_stmt|;
-return|return;
+throw|;
 block|}
 finally|finally
 block|{
-comment|//            try {
-comment|//                reader.close();
-comment|//            } catch (IOException e) { /* ignore */ }
 name|searcherRef
 operator|.
 name|decref
 argument_list|()
 expr_stmt|;
+comment|//ensure that we dereference the searcher
 block|}
+if|if
+condition|(
+name|indexConfig
+operator|.
+name|isActive
+argument_list|()
+condition|)
+block|{
 if|if
 condition|(
 name|fstInfo
@@ -497,6 +524,8 @@ name|corpus
 argument_list|)
 expr_stmt|;
 block|}
+comment|//else index configuration no longer active ... ignore the built FST
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -523,7 +552,10 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|core
+name|indexConfig
+operator|.
+name|getIndex
+argument_list|()
 operator|.
 name|getName
 argument_list|()

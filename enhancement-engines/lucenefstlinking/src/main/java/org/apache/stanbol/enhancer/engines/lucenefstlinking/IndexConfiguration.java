@@ -242,6 +242,12 @@ specifier|final
 name|LanguageConfiguration
 name|fstConfig
 decl_stmt|;
+specifier|private
+name|boolean
+name|active
+init|=
+literal|true
+decl_stmt|;
 specifier|public
 name|IndexConfiguration
 parameter_list|(
@@ -637,6 +643,27 @@ parameter_list|()
 block|{
 return|return
 name|entityCacheManager
+return|;
+block|}
+comment|/**      * Deactivates this {@link IndexConfiguration}      */
+specifier|public
+name|void
+name|deactivate
+parameter_list|()
+block|{
+name|active
+operator|=
+literal|false
+expr_stmt|;
+block|}
+comment|/**      * If this {@link IndexConfiguration} is still active      * @return<code>true</code> if still active. Otherwise<code>false</code>      */
+specifier|public
+name|boolean
+name|isActive
+parameter_list|()
+block|{
+return|return
+name|active
 return|;
 block|}
 block|}

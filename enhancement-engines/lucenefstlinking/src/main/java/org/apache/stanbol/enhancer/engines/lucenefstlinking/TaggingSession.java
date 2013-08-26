@@ -659,11 +659,7 @@ name|docAppended
 init|=
 literal|0
 decl_stmt|;
-specifier|private
-specifier|final
-name|ValueSourceAccessor
-name|uniqueKeyCache
-decl_stmt|;
+comment|//private final ValueSourceAccessor uniqueKeyCache;
 comment|//private final Map<Integer,Match> matchPool = new HashMap<Integer,Match>(2048);
 specifier|private
 specifier|final
@@ -1135,11 +1131,7 @@ argument_list|(
 name|searcher
 argument_list|)
 expr_stmt|;
-name|uniqueKeyCache
-operator|=
-literal|null
-expr_stmt|;
-comment|//no longer used.
+comment|//        uniqueKeyCache = null; //no longer used.
 comment|//        uniqueKeyCache = new ValueSourceAccessor(searcher, idSchemaField.getType()
 comment|//            .getValueSource(idSchemaField, null));
 name|fieldLoader
@@ -1449,9 +1441,6 @@ operator|new
 name|CorpusCreationTask
 argument_list|(
 name|config
-operator|.
-name|getIndex
-argument_list|()
 argument_list|,
 name|fstInfo
 argument_list|)

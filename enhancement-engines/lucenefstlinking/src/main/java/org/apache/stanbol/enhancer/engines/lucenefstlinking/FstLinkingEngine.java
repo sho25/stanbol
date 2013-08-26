@@ -1721,7 +1721,6 @@ name|values
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|//thr remaining code is logging only
 if|if
 condition|(
 name|log
@@ -2009,6 +2008,12 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
+name|tags
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+comment|//help the GC
 block|}
 specifier|private
 name|int

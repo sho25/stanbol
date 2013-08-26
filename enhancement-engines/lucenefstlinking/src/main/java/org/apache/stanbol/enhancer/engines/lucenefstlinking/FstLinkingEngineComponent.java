@@ -1977,6 +1977,10 @@ specifier|private
 name|EntityCacheManager
 name|documentCacheFactory
 decl_stmt|;
+specifier|private
+name|IndexConfiguration
+name|indexConfig
+decl_stmt|;
 comment|/**      * Default constructor as used by OSGI. This expects that       * {@link #activate(ComponentContext)} is called before usage      */
 specifier|public
 name|FstLinkingEngineComponent
@@ -2485,15 +2489,33 @@ comment|//    com.google.common.util.concurrent.ThreadFactoryBuilder
 if|if
 condition|(
 name|fstCreatorService
-operator|==
+operator|!=
 literal|null
-operator|||
+operator|&&
+operator|!
 name|fstCreatorService
 operator|.
 name|isTerminated
 argument_list|()
 condition|)
 block|{
+comment|//NOTE: We can not call terminateNow, because to interrupt threads
+comment|//      here would also close FileChannels used by the SolrCore
+comment|//      and produce java.nio.channels.ClosedByInterruptException
+comment|//      exceptions followed by java.nio.channels.ClosedChannelException
+comment|//      on following calls to affected files of the SolrIndex.
+comment|//Because of that we just log a warning and let uncompleted tasks
+comment|//complete!
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"some items in a previouse FST Runtime Creation Threadpool have "
+operator|+
+literal|"still not finished!"
+argument_list|)
+expr_stmt|;
+block|}
 name|fstCreatorService
 operator|=
 name|Executors
@@ -2505,28 +2527,6 @@ argument_list|,
 name|tf
 argument_list|)
 expr_stmt|;
-block|}
-else|else
-block|{
-comment|//still running from a previous activation
-comment|//try to shutdownNow
-name|fstCreatorService
-operator|.
-name|shutdownNow
-argument_list|()
-expr_stmt|;
-name|fstCreatorService
-operator|=
-name|Executors
-operator|.
-name|newFixedThreadPool
-argument_list|(
-name|tpSize
-argument_list|,
-name|tf
-argument_list|)
-expr_stmt|;
-block|}
 comment|//(6) Parse the EntityCache config
 name|int
 name|ecSize
@@ -3001,10 +3001,6 @@ block|{
 return|return;
 comment|//nothing to do
 block|}
-specifier|final
-name|IndexConfiguration
-name|indexConfig
-decl_stmt|;
 name|BundleContext
 name|bundleContext
 init|=
@@ -3021,6 +3017,10 @@ comment|//init one after the other in case of multiple calls
 name|SolrCore
 name|core
 decl_stmt|;
+name|IndexConfiguration
+name|indexConfig
+decl_stmt|;
+comment|// the indexConfig build by this call
 try|try
 block|{
 if|if
@@ -3439,7 +3439,7 @@ argument_list|(
 operator|new
 name|CorpusCreationTask
 argument_list|(
-name|core
+name|indexConfig
 argument_list|,
 name|fstInfo
 argument_list|)
@@ -3498,6 +3498,13 @@ name|setDefaultCorpus
 argument_list|(
 name|defaultCoprous
 argument_list|)
+expr_stmt|;
+comment|//set the index configuration to the field;
+name|this
+operator|.
+name|indexConfig
+operator|=
+name|indexConfig
 expr_stmt|;
 name|FstLinkingEngine
 name|engine
@@ -4585,7 +4592,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"   ... add {} for explicitly configured language"
 argument_list|,
@@ -4773,6 +4780,24 @@ operator|=
 literal|null
 expr_stmt|;
 comment|//rest the field
+block|}
+comment|//deactivate the index configuration if present
+if|if
+condition|(
+name|indexConfig
+operator|!=
+literal|null
+condition|)
+block|{
+name|indexConfig
+operator|.
+name|deactivate
+argument_list|()
+expr_stmt|;
+name|indexConfig
+operator|=
+literal|null
+expr_stmt|;
 block|}
 block|}
 comment|/**      * Internal helper to get th SolrCore from the tracked SolrServer. This      * assumes that tracked SolrServers are of type {@link EmbeddedSolrServer}.      * @param server the SolrServer      * @return the SolrCore or<code>null</code> if<code>null</code> is parsed      * as server.      * @throws IllegalStateException if the parsed {@link SolrServer} is not an      * {@link EmbeddedSolrServer} or it does not contain the configured SolrCore       */
@@ -5035,7 +5060,7 @@ literal|null
 condition|)
 block|{
 comment|//closing the tracker will also cause registered engines to be
-comment|//unregistered as service (see #unregisterEngine())
+comment|//unregistered as service (see #updateEngineRegistration())
 name|solrServerTracker
 operator|.
 name|close
@@ -5053,44 +5078,15 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//cancel not yet started tasks, because with the next activation
-comment|//those might be outdated.
-name|List
-argument_list|<
-name|Runnable
-argument_list|>
-name|canceled
-init|=
+comment|//we MUST NOT call shutdownNow(), because this would close
+comment|//low level Solr FileChannels.
 name|fstCreatorService
 operator|.
-name|shutdownNow
+name|shutdown
 argument_list|()
-decl_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Cancelled FST initialistion tasks because of deactivation:"
-argument_list|)
 expr_stmt|;
-for|for
-control|(
-name|Runnable
-name|r
-range|:
-name|canceled
-control|)
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> {}"
-argument_list|,
-name|r
-argument_list|)
-expr_stmt|;
-block|}
+comment|//do not set NULL, as we want to warn users an re-activation if old
+comment|//threads are still running.
 block|}
 name|indexReference
 operator|=
