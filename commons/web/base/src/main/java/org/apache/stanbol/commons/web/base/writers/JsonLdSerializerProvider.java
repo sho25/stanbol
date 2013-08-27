@@ -261,6 +261,38 @@ name|org
 operator|.
 name|apache
 operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Component
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Service
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|commons
@@ -376,10 +408,19 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implements a<a href="http://json-ld.org/">JSON-LD</a> serialization of a Clerezza  * {@link TripleCollection}.<br>  *  * @scr.component immediate="true"  * @scr.service  *                 interface="org.apache.clerezza.rdf.core.serializedform.SerializingProvider"  */
+comment|/**  * Implements a<a href="http://json-ld.org/">JSON-LD</a> serialization of a Clerezza  * {@link TripleCollection}.<br>  *  */
 end_comment
 
 begin_class
+annotation|@
+name|Component
+annotation|@
+name|Service
+argument_list|(
+name|SerializingProvider
+operator|.
+name|class
+argument_list|)
 annotation|@
 name|SupportedFormat
 argument_list|(
