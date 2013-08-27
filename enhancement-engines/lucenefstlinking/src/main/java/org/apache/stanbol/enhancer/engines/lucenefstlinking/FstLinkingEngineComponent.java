@@ -1261,6 +1261,22 @@ name|LoggerFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|ThreadFactoryBuilder
+import|;
+end_import
+
 begin_comment
 comment|/**  * This is the OSGI component for the {@link FstLinkingEngine}. It is used to  * manage the service configuration, tracks dependencies and handles the   * OSGI life cycle.    * @author Rupert Westenthaler  *  */
 end_comment
@@ -2471,21 +2487,42 @@ operator|=
 name|DEFAULT_FST_THREAD_POOL_SIZE
 expr_stmt|;
 block|}
-comment|//now initialise the ThreadPool (and shutdown the existing one if present)
-comment|//we use the Lucene utils ThreadFactory to have nice names for created threads
-name|ThreadFactory
-name|tf
+comment|//build a ThreadFactoryBuilder for low priority daemon threads that
+comment|//do use a meaningful name
+name|ThreadFactoryBuilder
+name|tfBuilder
 init|=
 operator|new
-name|NamedThreadFactory
+name|ThreadFactoryBuilder
+argument_list|()
+decl_stmt|;
+name|tfBuilder
+operator|.
+name|setDaemon
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+comment|//should be stopped if the VM closes
+name|tfBuilder
+operator|.
+name|setPriority
+argument_list|(
+name|Thread
+operator|.
+name|MIN_PRIORITY
+argument_list|)
+expr_stmt|;
+comment|//low priority
+name|tfBuilder
+operator|.
+name|setNameFormat
 argument_list|(
 name|engineName
 operator|+
-literal|"-FST-RuntimeCreation"
+literal|"-FstRuntimeCreation-thread-%d"
 argument_list|)
-decl_stmt|;
-comment|//TODO: maybe use the more advanced
-comment|//    com.google.common.util.concurrent.ThreadFactoryBuilder
+expr_stmt|;
 if|if
 condition|(
 name|fstCreatorService
@@ -2524,7 +2561,10 @@ name|newFixedThreadPool
 argument_list|(
 name|tpSize
 argument_list|,
-name|tf
+name|tfBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//(6) Parse the EntityCache config

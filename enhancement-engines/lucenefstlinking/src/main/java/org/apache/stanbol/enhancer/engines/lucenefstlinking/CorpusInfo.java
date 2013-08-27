@@ -534,6 +534,8 @@ name|enqueued
 condition|)
 block|{
 comment|//if so
+name|this
+operator|.
 name|enqueued
 operator|=
 operator|-
