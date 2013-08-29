@@ -414,7 +414,7 @@ specifier|final
 name|String
 name|TEST_SOLR_CORE_CONFIGURATION
 init|=
-literal|"dbpedia_43k"
+literal|"dbpedia_26k.solrindex.bz2"
 decl_stmt|;
 specifier|protected
 specifier|static
