@@ -643,19 +643,17 @@ literal|"\"@id\": \"http://dbpedia.org/resource/Paris\""
 argument_list|,
 literal|"\"comment\": {"
 argument_list|,
-literal|"Paris is the capital and largest city in France"
+literal|"Paris is the capital and largest city of France."
 argument_list|,
-literal|"\"homepage\": ["
-argument_list|,
-literal|"http://www.paris.fr"
+literal|"\"homepage\": \"http://www.paris.fr/\""
 argument_list|,
 literal|"\"labels\": ["
 argument_list|,
-literal|"\"@value\": \"Pariisi\""
+literal|"\"@value\": \"Parigi\""
 argument_list|,
 literal|"\"@value\": \"巴黎\""
 argument_list|,
-literal|"\"location\": \"[48.856667,2.350833]\""
+literal|"\"location\": \"[48.8567,2.3508]\""
 argument_list|,
 literal|"\"name\": {"
 argument_list|,
@@ -826,10 +824,6 @@ literal|"name"
 argument_list|,
 literal|"York"
 argument_list|,
-literal|"lang"
-argument_list|,
-literal|"en"
-argument_list|,
 literal|"ldpath"
 argument_list|,
 literal|"@prefix geo :<http://www.w3.org/2003/01/geo/wgs84_pos#> ;"
@@ -852,21 +846,21 @@ argument_list|(
 literal|"text/turtle"
 argument_list|)
 operator|.
-name|assertContentContains
+name|assertContentRegexp
 argument_list|(
 literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
-literal|"<http://dbpedia.org/resource/York>"
-argument_list|,
-literal|"<lat>   \"53.958332\"^^<http://www.w3.org/2001/XMLSchema#double> ."
-argument_list|,
 literal|"<http://dbpedia.org/resource/New_York_City>"
 argument_list|,
-literal|"<lat>   \"40.716667\"^^<http://www.w3.org/2001/XMLSchema#double> ."
+literal|"<lat>.*\"40\\.716667\"\\^\\^<http://www\\.w3\\.org/2001/XMLSchema#double>"
 argument_list|,
 literal|"<http://dbpedia.org/resource/New_York>"
 argument_list|,
-literal|"<lat>   \"43.0\"^^<http://www.w3.org/2001/XMLSchema#double> ."
+literal|"<lat>.*\"43\\.0\"\\^\\^<http://www\\.w3\\.org/2001/XMLSchema#double>"
+argument_list|,
+literal|"<http://dbpedia.org/resource/York>"
+argument_list|,
+literal|"<lat>.*\"53\\.958332\"\\^\\^<http://www\\.w3\\.org/2001/XMLSchema#double>"
 argument_list|)
 expr_stmt|;
 block|}
@@ -903,7 +897,7 @@ name|withFormContent
 argument_list|(
 literal|"name"
 argument_list|,
-literal|"Spinne"
+literal|"Webspinnen"
 argument_list|,
 literal|"lang"
 argument_list|,
@@ -944,6 +938,8 @@ argument_list|,
 literal|"<category>.*<http://dbpedia.org/resource/Category:Arachnids>"
 argument_list|,
 literal|"<category>.*<http://dbpedia.org/resource/Category:Spiders>"
+argument_list|,
+literal|"<others>.*<http://dbpedia.org/resource/Opiliones>"
 argument_list|,
 literal|"<others>.*<http://dbpedia.org/resource/Acari>"
 argument_list|,

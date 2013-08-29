@@ -345,11 +345,11 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
-literal|"\"entity-reference\": \"http://dbpedia.org/resource/London\","
+literal|"entity-reference\": \"http://dbpedia.org/resource/London\""
 argument_list|,
-literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
+literal|"creator\": \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
 argument_list|,
-literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\""
+literal|"creator\": \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\""
 argument_list|)
 expr_stmt|;
 block|}

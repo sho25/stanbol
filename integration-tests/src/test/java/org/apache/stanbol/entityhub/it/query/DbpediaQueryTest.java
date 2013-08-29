@@ -85,6 +85,24 @@ name|servicesapi
 operator|.
 name|defaults
 operator|.
+name|NamespaceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|defaults
+operator|.
 name|SpecialFieldEnum
 import|;
 end_import
@@ -232,14 +250,13 @@ name|asList
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|,
-literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
+literal|"http://dbpedia.org/resource/Paris_Hilton"
 argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//,
-comment|//"http://dbpedia.org/resource/Paris_Hilton"));
+comment|//and more
 name|executeQuery
 argument_list|(
 name|test
@@ -257,6 +274,11 @@ name|IOException
 throws|,
 name|JSONException
 block|{
+comment|//expected:
+comment|// Paris: 16.905037
+comment|// University_of_Paris: 10.565648
+comment|// Paris_Hilton, Salon_(Paris), Paris_M%C3%A9tro, Paris_Opera,
+comment|//    Paris_Saint-Germain_F.C., Paris_Commune, Paris_Masters: 8.452518
 comment|//only the first result
 name|FindQueryTestCase
 name|test
@@ -277,14 +299,21 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
-argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris_Hilton"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
 argument_list|)
 argument_list|)
 decl_stmt|;
+name|test
+operator|.
+name|setLanguage
+argument_list|(
+literal|"en"
+argument_list|)
+expr_stmt|;
 name|test
 operator|.
 name|setLimit
@@ -309,8 +338,6 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
-argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|)
 argument_list|,
@@ -321,14 +348,23 @@ argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris_Hilton"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|test
+operator|.
+name|setLanguage
+argument_list|(
+literal|"en"
 argument_list|)
 expr_stmt|;
 name|test
 operator|.
 name|setLimit
 argument_list|(
-literal|2
+literal|1
 argument_list|)
 expr_stmt|;
 name|test
@@ -355,7 +391,7 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://dbpedia.org/resource/University_of_Paris"
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris_Hilton"
 argument_list|)
@@ -364,7 +400,7 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
+literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
@@ -372,9 +408,16 @@ argument_list|)
 expr_stmt|;
 name|test
 operator|.
+name|setLanguage
+argument_list|(
+literal|"en"
+argument_list|)
+expr_stmt|;
+name|test
+operator|.
 name|setLimit
 argument_list|(
-literal|2
+literal|10
 argument_list|)
 expr_stmt|;
 name|test
@@ -418,9 +461,20 @@ argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris_M%C3%A9tro"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris_Commune"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris-Charles_de_Gaulle_Airport"
 argument_list|)
 argument_list|)
 decl_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|10
+argument_list|)
+expr_stmt|;
 name|executeQuery
 argument_list|(
 name|test
@@ -445,12 +499,19 @@ argument_list|(
 literal|"en"
 argument_list|)
 expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|3
+argument_list|)
+expr_stmt|;
 name|executeQuery
 argument_list|(
 name|test
 argument_list|)
 expr_stmt|;
-comment|//now in Italian
+comment|//now in Italian (expects the same as the query with no language constriants
 name|test
 operator|=
 operator|new
@@ -466,9 +527,11 @@ literal|"http://dbpedia.org/resource/Paris"
 argument_list|,
 literal|"http://dbpedia.org/resource/University_of_Paris"
 argument_list|,
-literal|"http://dbpedia.org/resource/Paris%E2%80%93Roubaix"
+literal|"http://dbpedia.org/resource/Paris_M%C3%A9tro"
 argument_list|,
-literal|"http://dbpedia.org/resource/Dakar_Rally"
+literal|"http://dbpedia.org/resource/Paris_Peace_Conference,_1919"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris-Charles_de_Gaulle_Airport"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -477,6 +540,13 @@ operator|.
 name|setLanguage
 argument_list|(
 literal|"it"
+argument_list|)
+expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|10
 argument_list|)
 expr_stmt|;
 name|executeQuery
@@ -498,9 +568,28 @@ name|asList
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris_Hilton"
 argument_list|,
-literal|"http://dbpedia.org/resource/Paris%E2%80%93Nice"
+literal|"http://dbpedia.org/resource/Paris_Saint-Germain_F.C."
 argument_list|,
-literal|"http://dbpedia.org/resource/Paris,_Texas"
+literal|"http://dbpedia.org/resource/Paris_Opera"
+argument_list|,
+literal|"http://dbpedia.org/resource/Stade_Fran%C3%A7ais"
+argument_list|,
+literal|"http://dbpedia.org/resource/Institut_d'%C3%89tudes_Politiques_de_Paris"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"http://dbpedia.org/resource/Paris"
+argument_list|,
+literal|"http://dbpedia.org/resource/University_of_Paris"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris_M%C3%A9tro"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris_Peace_Conference,_1919"
+argument_list|,
+literal|"http://dbpedia.org/resource/Paris-Charles_de_Gaulle_Airport"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -509,6 +598,13 @@ operator|.
 name|setLanguage
 argument_list|(
 literal|"it"
+argument_list|)
+expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|10
 argument_list|)
 expr_stmt|;
 name|executeQuery
@@ -541,9 +637,9 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://dbpedia.org/resource/CIA"
+literal|"http://dbpedia.org/resource/Central_Intelligence_Agency"
 argument_list|,
-literal|"http://dbpedia.org/resource/CIA_World_Factbook"
+literal|"http://dbpedia.org/resource/The_World_Factbook"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -556,11 +652,26 @@ argument_list|)
 decl_stmt|;
 name|test
 operator|.
+name|setField
+argument_list|(
+literal|"http://dbpedia.org/ontology/surfaceForm"
+argument_list|)
+expr_stmt|;
+name|test
+operator|.
 name|setLanguage
 argument_list|(
 literal|"en"
 argument_list|)
 expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|5
+argument_list|)
+expr_stmt|;
+comment|//there are a lot of those
 name|executeQuery
 argument_list|(
 name|test
@@ -578,12 +689,26 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-literal|"http://dbpedia.org/resource/CIA"
+literal|"http://dbpedia.org/resource/Central_Intelligence_Agency"
 argument_list|,
+literal|"http://dbpedia.org/resource/County_Kerry"
+argument_list|,
+comment|//Ciarraí (county)
+literal|"http://dbpedia.org/resource/Vitamin_C"
+argument_list|,
+comment|//Ciamin
 literal|"http://dbpedia.org/resource/Ciara"
 argument_list|,
-literal|"http://dbpedia.org/resource/CIA_World_Factbook"
+literal|"http://dbpedia.org/resource/The_World_Factbook"
 argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//CIA World Factbook
+name|test
+operator|.
+name|setField
+argument_list|(
+literal|"http://dbpedia.org/ontology/surfaceForm"
 argument_list|)
 expr_stmt|;
 name|test
@@ -593,6 +718,14 @@ argument_list|(
 literal|"en"
 argument_list|)
 expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|10
+argument_list|)
+expr_stmt|;
+comment|//there are a lot of those
 name|executeQuery
 argument_list|(
 name|test
@@ -613,7 +746,9 @@ literal|"http://dbpedia.org/resource/Prototype"
 argument_list|,
 literal|"http://dbpedia.org/resource/Proton"
 argument_list|,
-literal|"http://dbpedia.org/resource/Internet_Protocol"
+literal|"http://dbpedia.org/resource/Hypertext_Transfer_Protocol"
+argument_list|,
+literal|"http://dbpedia.org/resource/File_Transfer_Protocol"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -631,6 +766,14 @@ argument_list|(
 literal|"en"
 argument_list|)
 expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|100
+argument_list|)
+expr_stmt|;
+comment|//there a a lot of those
 name|executeQuery
 argument_list|(
 name|test
@@ -654,7 +797,9 @@ literal|"http://dbpedia.org/resource/Prototype"
 argument_list|,
 literal|"http://dbpedia.org/resource/Proton"
 argument_list|,
-literal|"http://dbpedia.org/resource/Internet_Protocol"
+literal|"http://dbpedia.org/resource/Program_and_System_Information_Protocol"
+argument_list|,
+literal|"http://dbpedia.org/resource/Hypertext_Transfer_Protocol"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -665,6 +810,14 @@ argument_list|(
 literal|"en"
 argument_list|)
 expr_stmt|;
+name|test
+operator|.
+name|setLimit
+argument_list|(
+literal|100
+argument_list|)
+expr_stmt|;
+comment|//there a a lot of those
 name|executeQuery
 argument_list|(
 name|test
@@ -716,7 +869,7 @@ literal|"'http:\\/\\/dbpedia.org\\/ontology\\/deathDate'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '5',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -724,9 +877,9 @@ literal|"'type': 'range', "
 operator|+
 literal|"'field': 'http:\\/\\/dbpedia.org\\/ontology\\/birthDate', "
 operator|+
-literal|"'lowerBound': '1946-01-01T00:00:00.000Z',"
+literal|"'lowerBound': '1946-07-01T00:00:00.000Z',"
 operator|+
-literal|"'upperBound': '1946-12-31T23:59:59.999Z',"
+literal|"'upperBound': '1946-08-31T23:59:59.999Z',"
 operator|+
 literal|"'inclusive': true,"
 operator|+
@@ -738,7 +891,7 @@ literal|"'type': 'reference', "
 operator|+
 literal|"'field': 'http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#type', "
 operator|+
-literal|"'value': 'http:\\/\\/dbpedia.org\\/ontology\\/Person', "
+literal|"'value': 'http:\\/\\/dbpedia.org\\/ontology\\/MusicalArtist', "
 operator|+
 literal|"}]"
 operator|+
@@ -748,12 +901,12 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-comment|//list of expected results
-literal|"http://dbpedia.org/resource/Bill_Clinton"
+comment|//list of expected results (3/5 found)
+literal|"http://dbpedia.org/resource/Linda_Ronstadt"
 argument_list|,
-literal|"http://dbpedia.org/resource/George_W._Bush"
+literal|"http://dbpedia.org/resource/Barry_Gibb"
 argument_list|,
-literal|"http://dbpedia.org/resource/Donald_Trump"
+literal|"http://dbpedia.org/resource/Jimmy_Webb"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -775,7 +928,7 @@ argument_list|(
 name|test
 argument_list|)
 expr_stmt|;
-comment|//cities with more than 1 million inhabitants and an altitude over
+comment|//cities with more than 3 million inhabitants and an altitude over
 comment|//1000 meter
 name|test
 operator|=
@@ -794,7 +947,7 @@ literal|"'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '5',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -802,7 +955,7 @@ literal|"'type': 'range', "
 operator|+
 literal|"'field': 'http:\\/\\/dbpedia.org\\/ontology\\/populationTotal', "
 operator|+
-literal|"'lowerBound': 1000000,"
+literal|"'lowerBound': 3000000,"
 operator|+
 literal|"'inclusive': true,"
 operator|+
@@ -836,9 +989,9 @@ name|asList
 argument_list|(
 literal|"http://dbpedia.org/resource/Mexico_City"
 argument_list|,
-literal|"http://dbpedia.org/resource/Bogot%C3%A1"
+literal|"http://dbpedia.org/resource/Nairobi"
 argument_list|,
-literal|"http://dbpedia.org/resource/Quito"
+literal|"http://dbpedia.org/resource/Kunming"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -885,7 +1038,7 @@ literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '10',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -912,7 +1065,7 @@ literal|"http://dbpedia.org/resource/Frankfurt"
 argument_list|,
 literal|"http://dbpedia.org/resource/Eintracht_Frankfurt"
 argument_list|,
-literal|"http://dbpedia.org/resource/Frankfort,_Kentucky"
+literal|"http://dbpedia.org/resource/Frankfurt_Airport"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -943,7 +1096,7 @@ literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '10',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -967,6 +1120,8 @@ comment|//list of expected results
 literal|"http://dbpedia.org/resource/Frankfurt_Airport"
 argument_list|,
 literal|"http://dbpedia.org/resource/Frankfurt"
+argument_list|,
+literal|"http://dbpedia.org/resource/Maine"
 argument_list|,
 literal|"http://dbpedia.org/resource/Airport"
 argument_list|)
@@ -1081,13 +1236,13 @@ literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '5',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
 literal|"'type': 'value',"
 operator|+
-literal|"'value': '34',"
+literal|"'value': '64',"
 operator|+
 literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
 operator|+
@@ -1102,11 +1257,11 @@ operator|.
 name|asList
 argument_list|(
 comment|//list of expected results
-literal|"http://dbpedia.org/resource/Berlin"
+literal|"http://dbpedia.org/resource/Manchester,_New_Hampshire"
 argument_list|,
-literal|"http://dbpedia.org/resource/Baghdad"
+literal|"http://dbpedia.org/resource/Cornwall,_Ontario"
 argument_list|,
-literal|"http://dbpedia.org/resource/Orlando,_Florida"
+literal|"http://dbpedia.org/resource/Lexington,_Massachusetts"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -1144,7 +1299,7 @@ literal|"'constraints': [{ "
 operator|+
 literal|"'type': 'value',"
 operator|+
-literal|"'value': '34',"
+literal|"'value': '64',"
 operator|+
 comment|//NOTE this is a JSON String!
 literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
@@ -1178,7 +1333,7 @@ literal|"'constraints': [{ "
 operator|+
 literal|"'type': 'value',"
 operator|+
-literal|"'value': 34,"
+literal|"'value': 64,"
 operator|+
 literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
 operator|+
@@ -1191,11 +1346,11 @@ operator|.
 name|asList
 argument_list|(
 comment|//list of expected results
-literal|"http://dbpedia.org/resource/Berlin"
+literal|"http://dbpedia.org/resource/Manchester,_New_Hampshire"
 argument_list|,
-literal|"http://dbpedia.org/resource/Baghdad"
+literal|"http://dbpedia.org/resource/Cornwall,_Ontario"
 argument_list|,
-literal|"http://dbpedia.org/resource/Orlando,_Florida"
+literal|"http://dbpedia.org/resource/Lexington,_Massachusetts"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1325,7 +1480,7 @@ literal|"'constraints': [{ "
 operator|+
 literal|"'type': 'value',"
 operator|+
-literal|"'value': ['34','519'],"
+literal|"'value': ['1288','519'],"
 operator|+
 literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
 operator|+
@@ -1342,11 +1497,11 @@ argument_list|(
 comment|//list of expected results
 literal|"http://dbpedia.org/resource/Munich"
 argument_list|,
-literal|"http://dbpedia.org/resource/Berlin"
-argument_list|,
-literal|"http://dbpedia.org/resource/Baghdad"
+comment|//519
+literal|"http://dbpedia.org/resource/Salt_Lake_City"
 argument_list|)
 argument_list|,
+comment|//1288
 name|Arrays
 operator|.
 name|asList
@@ -1383,7 +1538,7 @@ literal|"'constraints': [{ "
 operator|+
 literal|"'type': 'value',"
 operator|+
-literal|"'value': [34,519],"
+literal|"'value': [1288,519],"
 operator|+
 literal|"'field': 'http:\\/\\/www.w3.org\\/2003\\/01\\/geo\\/wgs84_pos#alt',"
 operator|+
@@ -1398,12 +1553,12 @@ argument_list|(
 comment|//list of expected results
 literal|"http://dbpedia.org/resource/Munich"
 argument_list|,
-literal|"http://dbpedia.org/resource/Berlin"
-argument_list|,
-literal|"http://dbpedia.org/resource/Baghdad"
+comment|//519
+literal|"http://dbpedia.org/resource/Salt_Lake_City"
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//1288
 comment|//now execute the test
 name|executeQuery
 argument_list|(
@@ -1437,7 +1592,7 @@ literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '5',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -1445,7 +1600,7 @@ literal|"'type': 'text',"
 operator|+
 literal|"'patternType': 'wildcard',"
 operator|+
-literal|"'text': ['microbiologist'],"
+literal|"'text': ['physicist'],"
 operator|+
 literal|"'field': 'entityhub-query:fullText'"
 operator|+
@@ -1453,7 +1608,7 @@ literal|"},{"
 operator|+
 literal|"'type': 'reference',"
 operator|+
-literal|"'value': ['dbp-ont:Person'],"
+literal|"'value': ['dbp-ont:Scientist'],"
 operator|+
 literal|"'field': 'rdf:type',"
 operator|+
@@ -1466,7 +1621,15 @@ operator|.
 name|asList
 argument_list|(
 comment|//list of expected results
-literal|"http://dbpedia.org/resource/Louis_Pasteur"
+literal|"http://dbpedia.org/resource/Albert_Einstein"
+argument_list|,
+literal|"http://dbpedia.org/resource/Isaac_Newton"
+argument_list|,
+literal|"http://dbpedia.org/resource/Galileo_Galilei"
+argument_list|,
+literal|"http://dbpedia.org/resource/Nikola_Tesla"
+argument_list|,
+literal|"http://dbpedia.org/resource/Stephen_Hawking"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -1544,7 +1707,7 @@ literal|"http://dbpedia.org/resource/Moscow"
 argument_list|,
 literal|"http://dbpedia.org/resource/Rome"
 argument_list|,
-literal|"http://dbpedia.org/resource/Berlin"
+literal|"http://dbpedia.org/resource/Helsinki"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -1590,7 +1753,7 @@ literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '5',"
+literal|"'limit': '20',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -1619,16 +1782,15 @@ operator|.
 name|asList
 argument_list|(
 comment|//list of expected results
+literal|"http://dbpedia.org/resource/Berlin"
+argument_list|,
+literal|"http://dbpedia.org/resource/Amsterdam"
+argument_list|,
 literal|"http://dbpedia.org/resource/London"
 argument_list|,
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|,
-literal|"http://dbpedia.org/resource/Moscow"
-argument_list|,
 literal|"http://dbpedia.org/resource/Rome"
-argument_list|,
-comment|//now we get Los_Angeles because it has the dbp-ont:City type
-literal|"http://dbpedia.org/resource/Los_Angeles"
 argument_list|)
 argument_list|,
 name|Arrays
@@ -1811,7 +1973,7 @@ literal|"'http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#label'],"
 operator|+
 literal|"'offset': '0',"
 operator|+
-literal|"'limit': '3',"
+literal|"'limit': '10',"
 operator|+
 literal|"'constraints': [{ "
 operator|+
@@ -1840,9 +2002,17 @@ literal|"http://dbpedia.org/resource/Frankfurt_Airport"
 argument_list|,
 literal|"http://dbpedia.org/resource/Frankfurt"
 argument_list|,
-comment|// this query selects Main instead of Airport, as Main has the same label in German and English
-comment|//                     "http://dbpedia.org/resource/Airport"),
-literal|"http://dbpedia.org/resource/Main"
+comment|//NOTE: Main is no longer part of the new default data index
+comment|//      with only 26k (instead of 43k) entities.
+literal|"http://dbpedia.org/resource/Goethe_University_Frankfurt"
+argument_list|,
+literal|"http://dbpedia.org/resource/Frankfurt_(Oder)"
+argument_list|,
+literal|"http://dbpedia.org/resource/FSV_Frankfurt"
+argument_list|,
+literal|"http://dbpedia.org/resource/Eintracht_Frankfurt"
+argument_list|,
+literal|"http://dbpedia.org/resource/1._FFC_Frankfurt"
 argument_list|)
 argument_list|,
 name|Arrays

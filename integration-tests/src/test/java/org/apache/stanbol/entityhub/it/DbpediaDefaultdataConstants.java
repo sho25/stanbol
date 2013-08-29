@@ -138,6 +138,18 @@ operator|+
 literal|"label"
 argument_list|)
 expr_stmt|;
+comment|//the new default data index supports surface forms
+name|required
+operator|.
+name|add
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|dbpediaOnt
+operator|+
+literal|"surfaceForm"
+argument_list|)
+expr_stmt|;
 name|required
 operator|.
 name|add
@@ -149,16 +161,13 @@ operator|+
 literal|"type"
 argument_list|)
 expr_stmt|;
-comment|//TODO: STANBOL-600 change to NamespaceEnum.entityhub as soon as a
-comment|//      new dbpedia default data index is available
-comment|//      This will be done as soon as the next DBpedia release is available
 name|required
 operator|.
 name|add
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|rickModel
+name|entityhub
 operator|+
 literal|"entityRank"
 argument_list|)
@@ -225,6 +234,13 @@ operator|.
 name|add
 argument_list|(
 literal|"http://www.w3.org/2003/01/geo/wgs84_pos#alt"
+argument_list|)
+expr_stmt|;
+name|optional
+operator|.
+name|add
+argument_list|(
+literal|"http://dbpedia.org/ontology/areaTotal"
 argument_list|)
 expr_stmt|;
 name|optional
