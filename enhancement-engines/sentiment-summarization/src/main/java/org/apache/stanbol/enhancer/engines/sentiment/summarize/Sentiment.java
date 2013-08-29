@@ -365,6 +365,19 @@ operator|.
 name|POS_ANNOTATION
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|tags
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|tags
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 for|for
 control|(
 name|Value
@@ -477,6 +490,7 @@ argument_list|(
 name|token
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 specifier|public

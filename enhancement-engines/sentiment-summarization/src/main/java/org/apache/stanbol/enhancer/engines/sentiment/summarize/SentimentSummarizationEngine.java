@@ -3131,6 +3131,10 @@ decl_stmt|;
 if|if
 condition|(
 name|pos
+operator|!=
+literal|null
+operator|&&
+name|pos
 operator|.
 name|getPosHierarchy
 argument_list|()
@@ -3151,6 +3155,10 @@ block|}
 elseif|else
 if|if
 condition|(
+name|pos
+operator|!=
+literal|null
+operator|&&
 name|pos
 operator|.
 name|hasCategory
@@ -3759,6 +3767,10 @@ elseif|else
 if|if
 condition|(
 name|pos
+operator|!=
+literal|null
+operator|&&
+name|pos
 operator|.
 name|hasCategory
 argument_list|(
@@ -3793,6 +3805,10 @@ elseif|else
 if|if
 condition|(
 name|pos
+operator|!=
+literal|null
+operator|&&
+name|pos
 operator|.
 name|hasCategory
 argument_list|(
@@ -3817,7 +3833,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//else return default
+comment|//else (includes pos == null) return default
 name|context
 operator|=
 operator|new
@@ -3935,6 +3951,12 @@ argument_list|)
 decl_stmt|;
 return|return
 name|posAnnotation
+operator|==
+literal|null
+condition|?
+literal|false
+else|:
+name|posAnnotation
 operator|.
 name|value
 argument_list|()
@@ -3978,6 +4000,12 @@ argument_list|)
 decl_stmt|;
 return|return
 name|posAnnotation
+operator|==
+literal|null
+condition|?
+literal|false
+else|:
+name|posAnnotation
 operator|.
 name|value
 argument_list|()
@@ -4017,6 +4045,12 @@ name|POS_ANNOTATION
 argument_list|)
 decl_stmt|;
 return|return
+name|posAnnotation
+operator|==
+literal|null
+condition|?
+literal|false
+else|:
 name|posAnnotation
 operator|.
 name|value
