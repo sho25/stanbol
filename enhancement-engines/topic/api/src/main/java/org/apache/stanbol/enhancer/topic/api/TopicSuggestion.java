@@ -14,8 +14,24 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|api
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|lang
+operator|.
+name|StringUtils
+import|;
+end_import
 
 begin_import
 import|import
@@ -44,20 +60,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|lang
-operator|.
-name|StringUtils
 import|;
 end_import
 

@@ -14,18 +14,10 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|api
 package|;
 end_package
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
 
 begin_import
 import|import
@@ -39,9 +31,21 @@ name|enhancer
 operator|.
 name|topic
 operator|.
+name|api
+operator|.
 name|training
 operator|.
 name|TrainingSetException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
