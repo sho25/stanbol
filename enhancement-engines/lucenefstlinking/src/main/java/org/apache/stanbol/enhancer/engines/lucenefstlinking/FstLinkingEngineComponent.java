@@ -1532,6 +1532,46 @@ name|name
 operator|=
 name|FstLinkingEngineComponent
 operator|.
+name|SOLR_TYPE_FIELD
+argument_list|,
+name|value
+operator|=
+literal|"rdf:type"
+argument_list|)
+block|,
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+name|FstLinkingEngineComponent
+operator|.
+name|SOLR_RANKING_FIELD
+argument_list|,
+name|value
+operator|=
+literal|"entityhub:entityRank"
+argument_list|)
+block|,
+comment|//  @Property(name=REDIRECT_FIELD,value="rdfs:seeAlso"),
+comment|//  @Property(name=REDIRECT_MODE,options={
+comment|//      @PropertyOption(
+comment|//          value='%'+REDIRECT_MODE+".option.ignore",
+comment|//          name="IGNORE"),
+comment|//      @PropertyOption(
+comment|//          value='%'+REDIRECT_MODE+".option.addValues",
+comment|//          name="ADD_VALUES"),
+comment|//      @PropertyOption(
+comment|//              value='%'+REDIRECT_MODE+".option.follow",
+comment|//              name="FOLLOW")
+comment|//      },value="IGNORE"),
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+name|FstLinkingEngineComponent
+operator|.
 name|FST_THREAD_POOL_SIZE
 argument_list|,
 name|intValue
@@ -1555,72 +1595,6 @@ operator|=
 name|FstLinkingEngineComponent
 operator|.
 name|DEFAULT_ENTITY_CACHE_SIZE
-argument_list|)
-block|,
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|FstLinkingEngineComponent
-operator|.
-name|SOLR_TYPE_FIELD
-argument_list|,
-name|value
-operator|=
-literal|"rdf:type"
-argument_list|)
-block|,
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|FstLinkingEngineComponent
-operator|.
-name|SOLR_RANKING_FIELD
-argument_list|,
-name|value
-operator|=
-literal|"entityhub:entityRank"
-argument_list|)
-block|,
-comment|//    @Property(name=REDIRECT_FIELD,value="rdfs:seeAlso"),
-comment|//    @Property(name=REDIRECT_MODE,options={
-comment|//        @PropertyOption(
-comment|//            value='%'+REDIRECT_MODE+".option.ignore",
-comment|//            name="IGNORE"),
-comment|//        @PropertyOption(
-comment|//            value='%'+REDIRECT_MODE+".option.addValues",
-comment|//            name="ADD_VALUES"),
-comment|//        @PropertyOption(
-comment|//                value='%'+REDIRECT_MODE+".option.follow",
-comment|//                name="FOLLOW")
-comment|//        },value="IGNORE"),
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|TYPE_FIELD
-argument_list|,
-name|value
-operator|=
-literal|"rdf:type"
-argument_list|)
-block|,
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|ENTITY_TYPES
-argument_list|,
-name|cardinality
-operator|=
-name|Integer
-operator|.
-name|MAX_VALUE
 argument_list|)
 block|,
 annotation|@
@@ -1699,6 +1673,20 @@ argument_list|,
 name|value
 operator|=
 literal|""
+argument_list|)
+block|,
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+name|ENTITY_TYPES
+argument_list|,
+name|cardinality
+operator|=
+name|Integer
+operator|.
+name|MAX_VALUE
 argument_list|)
 block|,
 annotation|@
@@ -3689,7 +3677,6 @@ argument_list|(
 name|PARAM_FST
 argument_list|)
 decl_stmt|;
-specifier|final
 name|String
 name|indexField
 init|=
@@ -3700,7 +3687,19 @@ argument_list|(
 name|PARAM_FIELD
 argument_list|)
 decl_stmt|;
-specifier|final
+if|if
+condition|(
+name|indexField
+operator|==
+literal|null
+condition|)
+block|{
+comment|//apply the defaults if null
+name|indexField
+operator|=
+name|DEFAULT_FIELD
+expr_stmt|;
+block|}
 name|String
 name|storeField
 init|=
@@ -3711,6 +3710,19 @@ argument_list|(
 name|PARAM_STORE_FIELD
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|storeField
+operator|==
+literal|null
+condition|)
+block|{
+comment|//apply the defaults if null
+name|storeField
+operator|=
+name|indexField
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|fstName
