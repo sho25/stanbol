@@ -51,45 +51,13 @@ name|TEXT_PLAIN
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
+end_comment
 
 begin_import
 import|import static
@@ -489,13 +457,13 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|felix
 operator|.
-name|commons
+name|scr
 operator|.
-name|viewable
+name|annotations
 operator|.
-name|Viewable
+name|Reference
 import|;
 end_import
 
@@ -511,11 +479,15 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|ContextHelper
+name|Viewable
 import|;
 end_import
+
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
 
 begin_import
 import|import
@@ -679,10 +651,14 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|ScopeManager
 name|onm
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|TcManager
 name|tcManager
@@ -696,48 +672,9 @@ name|ServletContext
 name|servletContext
 parameter_list|)
 block|{
-name|this
-operator|.
-name|servletContext
-operator|=
-name|servletContext
-expr_stmt|;
-name|this
-operator|.
-name|onm
-operator|=
-operator|(
-name|ScopeManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|ScopeManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|tcManager
-operator|=
-operator|(
-name|TcManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|TcManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
+comment|//        this.servletContext = servletContext;
+comment|//        this.onm = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class, servletContext);
+comment|//        this.tcManager = (TcManager) ContextHelper.getServiceFromContext(TcManager.class, servletContext);
 block|}
 comment|/**      * RESTful DELETE method that clears the entire scope registry and managed ontology store.      */
 annotation|@
@@ -829,15 +766,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -970,15 +899,7 @@ argument_list|,
 name|mediaType
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1021,15 +942,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers);
 return|return
 name|rb
 operator|.

@@ -53,16 +53,6 @@ begin_import
 import|import
 name|javax
 operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
 name|ws
 operator|.
 name|rs
@@ -223,9 +213,6 @@ decl_stmt|;
 specifier|public
 name|OntologyStatsResource
 parameter_list|(
-name|ServletContext
-name|context
-parameter_list|,
 name|UriInfo
 name|uriInfo
 parameter_list|,
@@ -248,12 +235,7 @@ argument_list|>
 name|handles
 parameter_list|)
 block|{
-name|this
-operator|.
-name|servletContext
-operator|=
-name|context
-expr_stmt|;
+comment|//        this.servletContext = context;
 name|this
 operator|.
 name|uriInfo

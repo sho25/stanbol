@@ -35,25 +35,9 @@ name|TEXT_HTML
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
 
 begin_import
 import|import
@@ -223,13 +207,13 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|felix
 operator|.
-name|commons
+name|scr
 operator|.
-name|viewable
+name|annotations
 operator|.
-name|Viewable
+name|Reference
 import|;
 end_import
 
@@ -245,11 +229,15 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|ContextHelper
+name|Viewable
 import|;
 end_import
+
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
 
 begin_import
 import|import
@@ -354,6 +342,8 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|RegistryManager
 name|regMgr
@@ -364,11 +354,6 @@ name|RegistryManagerResource
 parameter_list|(
 annotation|@
 name|Context
-name|ServletContext
-name|context
-parameter_list|,
-annotation|@
-name|Context
 name|UriInfo
 name|uriInfo
 parameter_list|)
@@ -376,19 +361,7 @@ block|{
 name|super
 argument_list|()
 expr_stmt|;
-name|regMgr
-operator|=
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RegistryManager
-operator|.
-name|class
-argument_list|,
-name|context
-argument_list|)
-expr_stmt|;
+comment|//        regMgr = ContextHelper.getServiceFromContext(RegistryManager.class, context);
 name|this
 operator|.
 name|uriInfo
@@ -446,15 +419,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.

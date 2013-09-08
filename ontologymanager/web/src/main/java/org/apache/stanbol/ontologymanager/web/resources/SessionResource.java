@@ -19,75 +19,25 @@ name|resources
 package|;
 end_package
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|DELETE
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.DELETE;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|GET
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.GET;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|OPTIONS
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.OPTIONS;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|POST
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.POST;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|PUT
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.PUT;
+end_comment
 
 begin_import
 import|import static
@@ -256,46 +206,6 @@ operator|.
 name|Status
 operator|.
 name|NOT_FOUND
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
 import|;
 end_import
 
@@ -941,15 +851,13 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|felix
 operator|.
-name|commons
+name|scr
 operator|.
-name|owl
+name|annotations
 operator|.
-name|util
-operator|.
-name|OWLUtils
+name|Reference
 import|;
 end_import
 
@@ -963,11 +871,17 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|viewable
+name|owl
 operator|.
-name|Viewable
+name|util
+operator|.
+name|OWLUtils
 import|;
 end_import
+
+begin_comment
+comment|//import org.apache.stanbol.commons.viewable.Viewable;
+end_comment
 
 begin_import
 import|import
@@ -981,9 +895,9 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|ContextHelper
+name|Viewable
 import|;
 end_import
 
@@ -1494,6 +1408,18 @@ import|;
 end_import
 
 begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
+
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
+end_comment
+
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
+
+begin_comment
 comment|/**  * The REST resource of an OntoNet {@link Session} whose identifier is known.  *   * @author alexdma  *   */
 end_comment
 
@@ -1521,10 +1447,14 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|ScopeManager
 name|onMgr
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|OntologyProvider
 argument_list|<
@@ -1533,11 +1463,15 @@ argument_list|>
 name|ontologyProvider
 decl_stmt|;
 comment|/*      * Placeholder for the RegistryManager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|RegistryManager
 name|regMgr
 decl_stmt|;
 comment|/*      * Placeholder for the session manager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|SessionManager
 name|sesMgr
@@ -1558,94 +1492,17 @@ literal|"id"
 argument_list|)
 name|String
 name|sessionId
-parameter_list|,
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
 parameter_list|)
 block|{
-name|this
-operator|.
-name|servletContext
-operator|=
-name|servletContext
-expr_stmt|;
-name|this
-operator|.
-name|sesMgr
-operator|=
-operator|(
-name|SessionManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|SessionManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|regMgr
-operator|=
-operator|(
-name|RegistryManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RegistryManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|ontologyProvider
-operator|=
-operator|(
-name|OntologyProvider
-argument_list|<
-name|TcProvider
-argument_list|>
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|OntologyProvider
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|onMgr
-operator|=
-operator|(
-name|ScopeManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|ScopeManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
+comment|//        public SessionResource(@PathParam(value = "id") String sessionId, @Context ServletContext servletContext) {
+comment|//        this.servletContext = servletContext;
+comment|//        this.sesMgr = (SessionManager) ContextHelper.getServiceFromContext(SessionManager.class,
+comment|//            servletContext);
+comment|//        this.regMgr = (RegistryManager) ContextHelper.getServiceFromContext(RegistryManager.class,
+comment|//            servletContext);
+comment|//        this.ontologyProvider = (OntologyProvider<TcProvider>) ContextHelper.getServiceFromContext(
+comment|//            OntologyProvider.class, servletContext);
+comment|//        this.onMgr = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class, servletContext);
 name|session
 operator|=
 name|sesMgr
@@ -1756,15 +1613,7 @@ name|prefix
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1897,15 +1746,7 @@ name|prefix
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2013,15 +1854,7 @@ name|prefix
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2112,15 +1945,7 @@ name|getRequestUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2190,15 +2015,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2287,15 +2104,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2522,15 +2331,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2684,25 +2485,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|POST
-argument_list|,
-name|PUT
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, POST, PUT, DELETE, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -2735,21 +2518,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, DELETE, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -2902,15 +2671,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3118,15 +2879,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3279,15 +3032,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3482,8 +3227,6 @@ argument_list|,
 operator|new
 name|OntologyPrettyPrintResource
 argument_list|(
-name|servletContext
-argument_list|,
 name|uriInfo
 argument_list|,
 name|out
@@ -3524,15 +3267,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3695,15 +3430,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4048,15 +3775,7 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4165,15 +3884,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5506,15 +5217,7 @@ comment|// log.error("Nothing to do with session {}.", session.getID());
 comment|// throw new WebApplicationException(BAD_REQUEST);
 comment|// }
 comment|// rb.header(HttpHeaders.CONTENT_TYPE, TEXT_HTML + "; charset=utf-8");
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 name|log
 operator|.
 name|info

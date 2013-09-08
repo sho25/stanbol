@@ -19,15 +19,9 @@ name|util
 package|;
 end_package
 
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
+begin_comment
+comment|//import javax.servlet.ServletContext;
+end_comment
 
 begin_import
 import|import
@@ -103,9 +97,6 @@ decl_stmt|;
 specifier|public
 name|OntologyPrettyPrintResource
 parameter_list|(
-name|ServletContext
-name|context
-parameter_list|,
 name|UriInfo
 name|uriInfo
 parameter_list|,
@@ -119,12 +110,7 @@ name|result
 operator|=
 name|result
 expr_stmt|;
-name|this
-operator|.
-name|servletContext
-operator|=
-name|context
-expr_stmt|;
+comment|//        this.servletContext = context;
 name|this
 operator|.
 name|uriInfo
@@ -135,9 +121,6 @@ block|}
 specifier|public
 name|OntologyPrettyPrintResource
 parameter_list|(
-name|ServletContext
-name|context
-parameter_list|,
 name|UriInfo
 name|uriInfo
 parameter_list|,
@@ -150,8 +133,6 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|context
-argument_list|,
 name|uriInfo
 argument_list|,
 name|result

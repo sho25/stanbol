@@ -19,75 +19,25 @@ name|resources
 package|;
 end_package
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|DELETE
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.DELETE;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|GET
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.GET;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|OPTIONS
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.OPTIONS;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|POST
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.POST;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|PUT
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.PUT;
+end_comment
 
 begin_import
 import|import static
@@ -261,45 +211,13 @@ name|UNSUPPORTED_MEDIA_TYPE
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
+end_comment
 
 begin_import
 import|import static
@@ -997,6 +915,22 @@ name|org
 operator|.
 name|apache
 operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|commons
@@ -1037,29 +971,17 @@ name|stanbol
 operator|.
 name|commons
 operator|.
+name|web
+operator|.
 name|viewable
 operator|.
 name|Viewable
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|ContextHelper
-import|;
-end_import
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
 
 begin_import
 import|import
@@ -1618,10 +1540,14 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|/*      * Placeholder for the ONManager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|ScopeManager
 name|onm
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|OntologyProvider
 argument_list|<
@@ -1630,6 +1556,8 @@ argument_list|>
 name|ontologyProvider
 decl_stmt|;
 comment|/*      * Placeholder for the RegistryManager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|RegistryManager
 name|regMgr
@@ -1669,69 +1597,13 @@ argument_list|,
 name|scopeId
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|servletContext
-operator|=
-name|servletContext
-expr_stmt|;
-name|this
-operator|.
-name|onm
-operator|=
-operator|(
-name|ScopeManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|ScopeManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|regMgr
-operator|=
-operator|(
-name|RegistryManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RegistryManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|ontologyProvider
-operator|=
-operator|(
-name|OntologyProvider
-argument_list|<
-name|TcProvider
-argument_list|>
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|OntologyProvider
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
+comment|//
+comment|//        this.servletContext = servletContext;
+comment|//        this.onm = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class, servletContext);
+comment|//        this.regMgr = (RegistryManager) ContextHelper.getServiceFromContext(RegistryManager.class,
+comment|//            servletContext);
+comment|//        this.ontologyProvider = (OntologyProvider<TcProvider>) ContextHelper.getServiceFromContext(
+comment|//            OntologyProvider.class, servletContext);
 if|if
 condition|(
 name|scopeId
@@ -1876,15 +1748,7 @@ name|prefix
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2017,15 +1881,7 @@ name|prefix
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2133,15 +1989,7 @@ name|prefix
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2198,15 +2046,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2369,15 +2209,7 @@ argument_list|(
 name|o
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2496,15 +2328,7 @@ argument_list|(
 name|o
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2686,15 +2510,7 @@ argument_list|(
 name|o
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2813,15 +2629,7 @@ argument_list|(
 name|o
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2880,6 +2688,7 @@ name|this
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// TODO move to a dedicated class
 name|rb
 operator|.
 name|header
@@ -2893,15 +2702,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3055,25 +2856,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|POST
-argument_list|,
-name|PUT
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, POST, PUT, DELETE, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -3106,19 +2889,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -3151,19 +2922,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -3196,21 +2955,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, DELETE, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -3452,15 +3197,7 @@ name|o
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3708,15 +3445,7 @@ name|o
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3945,8 +3674,6 @@ argument_list|,
 operator|new
 name|OntologyPrettyPrintResource
 argument_list|(
-name|servletContext
-argument_list|,
 name|uriInfo
 argument_list|,
 name|out
@@ -3987,15 +3714,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4196,15 +3915,7 @@ name|BAD_REQUEST
 argument_list|)
 expr_stmt|;
 comment|// null/blank ontology ID
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4464,15 +4175,7 @@ name|FORBIDDEN
 argument_list|)
 throw|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4603,15 +4306,7 @@ name|INTERNAL_SERVER_ERROR
 argument_list|)
 throw|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5525,15 +5220,7 @@ block|}
 comment|// else throw new WebApplicationException(BAD_REQUEST);
 comment|// rb.header(HttpHeaders.CONTENT_TYPE, TEXT_HTML + "; charset=utf-8");
 comment|// FIXME return an appropriate response e.g. 201
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -6005,15 +5692,7 @@ name|getAbsolutePath
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
