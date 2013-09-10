@@ -463,7 +463,55 @@ name|scr
 operator|.
 name|annotations
 operator|.
+name|Component
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Property
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
 name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Service
 import|;
 end_import
 
@@ -623,6 +671,26 @@ end_comment
 
 begin_class
 annotation|@
+name|Component
+annotation|@
+name|Service
+argument_list|(
+name|Object
+operator|.
+name|class
+argument_list|)
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+literal|"javax.ws.rs"
+argument_list|,
+name|boolValue
+operator|=
+literal|true
+argument_list|)
+annotation|@
 name|Path
 argument_list|(
 literal|"/ontonet/ontology"
@@ -665,17 +733,8 @@ name|tcManager
 decl_stmt|;
 specifier|public
 name|ScopeManagerResource
-parameter_list|(
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
-block|{
-comment|//        this.servletContext = servletContext;
-comment|//        this.onm = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class, servletContext);
-comment|//        this.tcManager = (TcManager) ContextHelper.getServiceFromContext(TcManager.class, servletContext);
-block|}
+parameter_list|()
+block|{     }
 comment|/**      * RESTful DELETE method that clears the entire scope registry and managed ontology store.      */
 annotation|@
 name|DELETE
