@@ -832,7 +832,7 @@ literal|"lat = geo:lat :: xsd:double;"
 argument_list|,
 literal|"limit"
 argument_list|,
-literal|"3"
+literal|"5"
 argument_list|)
 argument_list|)
 operator|.
