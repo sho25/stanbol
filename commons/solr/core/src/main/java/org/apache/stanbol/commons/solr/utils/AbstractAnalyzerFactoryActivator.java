@@ -825,55 +825,20 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-name|AbstractAnalysisFactory
-name|factory
-decl_stmt|;
-try|try
-block|{
-name|factory
-operator|=
-name|service
-operator|.
-name|newInstance
-argument_list|()
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"SPI class of type "
-operator|+
-name|type
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|" with name '"
-operator|+
-name|name
-operator|+
-literal|"' cannot be instantiated. This is likely "
-operator|+
-literal|"due to a misconfiguration of the java class '"
-operator|+
-name|service
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"': "
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
+comment|//as if Solr 4.4. we can no longer create an instance of the Factories
+comment|//as constructors not take the Map<String,String> with the configuration
+comment|//(we do not have any configuration).
+comment|//because of that we register the new RegisteredSolrAnalyzerFactory class
+comment|//instead
+comment|//            AbstractAnalysisFactory factory;
+comment|//            try {
+comment|//                factory = service.newInstance();
+comment|//            } catch (Exception e) {
+comment|//                throw new IllegalArgumentException("SPI class of type "+ type.getName()
+comment|//                    + " with name '"+name+"' cannot be instantiated. This is likely "
+comment|//                    + "due to a misconfiguration of the java class '"
+comment|//                    + service.getName() + "': ", e);
+comment|//            }
 name|Dictionary
 argument_list|<
 name|String
@@ -902,36 +867,34 @@ argument_list|,
 name|name
 argument_list|)
 expr_stmt|;
-name|Version
-name|version
-init|=
-name|factory
-operator|.
-name|getLuceneMatchVersion
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|version
-operator|!=
-literal|null
-condition|)
-block|{
 name|prop
 operator|.
 name|put
 argument_list|(
 name|SolrConstants
 operator|.
-name|PROPERTY_LUCENE_MATCH_VERSION
+name|PROPERTY_ANALYZER_FACTORY_IMPL
 argument_list|,
-name|version
+name|service
 operator|.
-name|name
+name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
+name|prop
+operator|.
+name|put
+argument_list|(
+name|SolrConstants
+operator|.
+name|PROPERTY_ANALYZER_FACTORY_TYPE
+argument_list|,
+name|type
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|//use 0 - bundle id as service ranking. This ensures that if two
 comment|//factories do use the same name the one provided by the bundle with the
 comment|//lower id is used by default
@@ -976,6 +939,7 @@ argument_list|,
 name|name
 argument_list|)
 expr_stmt|;
+comment|//register the AnalyzerFactory
 name|registrations
 operator|.
 name|add
@@ -984,12 +948,25 @@ name|bc
 operator|.
 name|registerService
 argument_list|(
-name|type
+name|RegisteredSolrAnalyzerFactory
+operator|.
+name|class
 operator|.
 name|getName
 argument_list|()
 argument_list|,
-name|factory
+operator|new
+name|RegisteredSolrAnalyzerFactory
+argument_list|<
+name|S
+argument_list|>
+argument_list|(
+name|name
+argument_list|,
+name|type
+argument_list|,
+name|service
+argument_list|)
 argument_list|,
 name|prop
 argument_list|)

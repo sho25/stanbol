@@ -209,6 +209,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|utils
+operator|.
+name|RegisteredSolrAnalyzerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|osgi
 operator|.
 name|framework
@@ -540,7 +558,9 @@ name|bc
 operator|.
 name|getServiceReferences
 argument_list|(
-name|expectedType
+name|RegisteredSolrAnalyzerFactory
+operator|.
+name|class
 operator|.
 name|getName
 argument_list|()
@@ -598,25 +618,24 @@ decl_stmt|;
 if|if
 condition|(
 name|service
-operator|!=
-literal|null
+operator|instanceof
+name|RegisteredSolrAnalyzerFactory
 condition|)
 block|{
+comment|//TODO: we could check the type here
 name|clazz
 operator|=
 operator|(
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|T
-argument_list|>
+operator|(
+name|RegisteredSolrAnalyzerFactory
 operator|)
 name|service
+operator|)
 operator|.
-name|getClass
+name|getFactoryClass
 argument_list|()
 expr_stmt|;
+comment|//we do not use a service so immediately unget it
 name|bc
 operator|.
 name|ungetService
@@ -627,7 +646,6 @@ literal|0
 index|]
 argument_list|)
 expr_stmt|;
-comment|//we return the class and do not use the service
 return|return
 name|clazz
 return|;

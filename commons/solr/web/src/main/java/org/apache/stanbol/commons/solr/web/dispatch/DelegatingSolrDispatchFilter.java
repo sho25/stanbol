@@ -23,16 +23,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|io
-operator|.
-name|IOException
-import|;
-end_import
-
-begin_import
-import|import
 name|javax
 operator|.
 name|servlet
@@ -43,18 +33,6 @@ end_import
 
 begin_import
 import|import
-name|javax
-operator|.
-name|xml
-operator|.
-name|parsers
-operator|.
-name|ParserConfigurationException
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -64,22 +42,6 @@ operator|.
 name|core
 operator|.
 name|CoreContainer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|solr
-operator|.
-name|core
-operator|.
-name|CoreContainer
-operator|.
-name|Initializer
 import|;
 end_import
 
@@ -129,18 +91,6 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|xml
-operator|.
-name|sax
-operator|.
-name|SAXException
-import|;
-end_import
-
 begin_comment
 comment|/**  * A {@link SolrDispatchFilter} that does not create a new {@link CoreContainer}  * on initialisation, but instead delegates to a already existing instance.<p>  * Users of this Class MUST implement two methods<ul>  *<li> {@link #getCoreContainer()}: Called during   * {@link Filter#init(javax.servlet.FilterConfig)} to get the {@link CoreContainer}  * instance to be used for the Servlet filter.  *<li> {@link #ungetCoreContainer()}: Called during the {@link Filter#destroy()}  * method to indicate the the delegate is no longer needed by this Filter  * {@link ServiceReference} provided by {@link #getCoreContainerReference()}  * @author Rupert Westenthaler  *  */
 end_comment
@@ -182,64 +132,6 @@ name|delegate
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * {@link Initializer} implementation that calls the abstract      * {@link #getCoreContainerReference()} method to lookup the {@link ServiceReference}      * to the {@link CoreContainer} used for this dispatch filter      *       */
-specifier|private
-name|Initializer
-name|initialiser
-init|=
-operator|new
-name|Initializer
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|CoreContainer
-name|initialize
-parameter_list|()
-block|{
-comment|//support multiple calls
-if|if
-condition|(
-name|delegate
-operator|!=
-literal|null
-condition|)
-block|{
-name|ungetCoreContainer
-argument_list|()
-expr_stmt|;
-comment|//cleanup current
-block|}
-name|delegate
-operator|=
-name|getCoreContainer
-argument_list|()
-expr_stmt|;
-if|if
-condition|(
-name|delegate
-operator|!=
-literal|null
-condition|)
-block|{
-return|return
-name|delegate
-return|;
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"CoreContainer currently not available"
-argument_list|)
-throw|;
-block|}
-block|}
-block|}
-decl_stmt|;
 comment|/**      * Protected Constructor intended to be overwritten by sub classes      */
 specifier|public
 name|DelegatingSolrDispatchFilter
@@ -252,19 +144,32 @@ block|}
 annotation|@
 name|Override
 specifier|protected
-name|Initializer
-name|createInitializer
+specifier|final
+name|CoreContainer
+name|createCoreContainer
 parameter_list|()
 block|{
-comment|//we do not need to initialise a new CoreContaine. Just get the service
-comment|//via the OSGI environment
+if|if
+condition|(
+name|delegate
+operator|==
+literal|null
+condition|)
+block|{
+name|delegate
+operator|=
+name|getCoreContainer
+argument_list|()
+expr_stmt|;
+block|}
 return|return
-name|initialiser
+name|delegate
 return|;
 block|}
 annotation|@
 name|Override
 specifier|public
+specifier|final
 name|void
 name|destroy
 parameter_list|()
