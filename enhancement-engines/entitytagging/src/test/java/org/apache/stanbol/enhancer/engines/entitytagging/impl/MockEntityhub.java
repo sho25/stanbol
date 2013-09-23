@@ -462,6 +462,14 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|TEST_SOLR_CORE_CONFIGURATION
+init|=
+literal|"dbpedia_26k.solrindex.bz2"
+decl_stmt|;
 specifier|protected
 name|SolrYard
 name|yard
@@ -485,10 +493,9 @@ name|config
 operator|.
 name|setIndexConfigurationName
 argument_list|(
-literal|"dbpedia_43k"
+name|TEST_SOLR_CORE_CONFIGURATION
 argument_list|)
 expr_stmt|;
-comment|//use dbpedia default data for initialisation
 name|config
 operator|.
 name|setAllowInitialisation

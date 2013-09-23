@@ -1464,7 +1464,7 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|4
+literal|3
 argument_list|,
 name|entityAnnotationCount
 argument_list|)
