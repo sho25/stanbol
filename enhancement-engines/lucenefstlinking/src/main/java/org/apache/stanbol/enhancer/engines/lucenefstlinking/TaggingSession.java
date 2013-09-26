@@ -661,7 +661,7 @@ name|SolrIndexSearcher
 argument_list|>
 name|searcherRef
 decl_stmt|;
-comment|/*      * Document Cache and session statistics for the cache      */
+comment|/**      * Document Cache and session statistics for the cache      */
 specifier|private
 name|RefCounted
 argument_list|<
@@ -1075,7 +1075,7 @@ if|if
 condition|(
 name|config
 operator|.
-name|getTypeField
+name|getEncodedTypeField
 argument_list|()
 operator|!=
 literal|null
@@ -1087,7 +1087,7 @@ name|typeField
 operator|=
 name|config
 operator|.
-name|getTypeField
+name|getEncodedTypeField
 argument_list|()
 expr_stmt|;
 name|solrDocfields
@@ -1111,7 +1111,7 @@ if|if
 condition|(
 name|config
 operator|.
-name|getRedirectField
+name|getEncodedRedirectField
 argument_list|()
 operator|!=
 literal|null
@@ -1123,7 +1123,7 @@ name|redirectField
 operator|=
 name|config
 operator|.
-name|getRedirectField
+name|getEncodedRedirectField
 argument_list|()
 expr_stmt|;
 name|solrDocfields
@@ -1147,7 +1147,7 @@ if|if
 condition|(
 name|config
 operator|.
-name|getRankingField
+name|getEncodedRankingField
 argument_list|()
 operator|!=
 literal|null
@@ -1159,7 +1159,7 @@ name|rankingField
 operator|=
 name|config
 operator|.
-name|getRankingField
+name|getEncodedRankingField
 argument_list|()
 expr_stmt|;
 name|solrDocfields
@@ -1179,6 +1179,16 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|config
+operator|.
+name|getEntityCacheManager
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
 name|documentCacheRef
 operator|=
 name|config
@@ -1191,6 +1201,7 @@ argument_list|(
 name|indexVersion
 argument_list|)
 expr_stmt|;
+block|}
 comment|//        uniqueKeyCache = null; //no longer used.
 comment|//        uniqueKeyCache = new ValueSourceAccessor(searcher, idSchemaField.getType()
 comment|//            .getValueSource(idSchemaField, null));
@@ -1237,12 +1248,20 @@ name|decref
 argument_list|()
 expr_stmt|;
 comment|//clean up the Solr index searcher reference
+if|if
+condition|(
+name|documentCacheRef
+operator|!=
+literal|null
+condition|)
+block|{
 name|documentCacheRef
 operator|.
 name|decref
 argument_list|()
 expr_stmt|;
 comment|//clean up the DocumentCache reference
+block|}
 block|}
 comment|/**      * The language of this Session. This is typically the language detected for      * the document.      * @return the language of this Session      */
 specifier|public
@@ -1343,6 +1362,7 @@ return|return
 name|session
 return|;
 block|}
+comment|/**      * Getter for the EntityCache       * @return the cache or<code>null</code> if no one is configured      */
 specifier|public
 name|EntityCache
 name|getDocumentCache
@@ -1350,9 +1370,15 @@ parameter_list|()
 block|{
 return|return
 name|documentCacheRef
+operator|!=
+literal|null
+condition|?
+name|documentCacheRef
 operator|.
 name|get
 argument_list|()
+else|:
+literal|null
 return|;
 block|}
 comment|/**      * The number of Lucene Documents loaded form disc in this session so far      * @return      */
@@ -1823,6 +1849,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|documentCacheRef
+operator|!=
+literal|null
+condition|)
+block|{
 name|this
 operator|.
 name|cache
@@ -1832,6 +1865,16 @@ operator|.
 name|get
 argument_list|()
 expr_stmt|;
+block|}
+else|else
+block|{
+name|this
+operator|.
+name|cache
+operator|=
+literal|null
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -1881,11 +1924,17 @@ block|{
 name|doc
 operator|=
 name|cache
+operator|!=
+literal|null
+condition|?
+name|cache
 operator|.
 name|get
 argument_list|(
 name|ID
 argument_list|)
+else|:
+literal|null
 expr_stmt|;
 if|if
 condition|(
@@ -1928,6 +1977,13 @@ block|}
 name|docLoaded
 operator|++
 expr_stmt|;
+if|if
+condition|(
+name|cache
+operator|!=
+literal|null
+condition|)
+block|{
 name|cache
 operator|.
 name|cache
@@ -1937,6 +1993,7 @@ argument_list|,
 name|doc
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -2365,8 +2422,8 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|Number
-name|num
+name|IndexableField
+name|field
 init|=
 name|doc
 operator|.
@@ -2374,6 +2431,18 @@ name|getField
 argument_list|(
 name|rankingField
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|field
+operator|!=
+literal|null
+condition|)
+block|{
+name|Number
+name|num
+init|=
+name|field
 operator|.
 name|numericValue
 argument_list|()
@@ -2423,12 +2492,10 @@ comment|//num == null
 name|String
 name|value
 init|=
-name|doc
+name|field
 operator|.
-name|get
-argument_list|(
-name|rankingField
-argument_list|)
+name|stringValue
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -2487,6 +2554,7 @@ argument_list|,
 name|ranking
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 return|return
