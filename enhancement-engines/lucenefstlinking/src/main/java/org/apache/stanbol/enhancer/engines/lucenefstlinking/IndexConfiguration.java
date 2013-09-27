@@ -1325,21 +1325,6 @@ operator|.
 name|PARAM_FIELD
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|indexField
-operator|==
-literal|null
-condition|)
-block|{
-comment|//apply the defaults if null
-name|indexField
-operator|=
-name|IndexConfiguration
-operator|.
-name|DEFAULT_FIELD
-expr_stmt|;
-block|}
 name|String
 name|storeField
 init|=
@@ -1359,10 +1344,25 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//apply the defaults if null
+comment|//apply indexField as default if indexField is NOT NULL
 name|storeField
 operator|=
 name|indexField
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|indexField
+operator|==
+literal|null
+condition|)
+block|{
+comment|//apply the defaults if null
+name|indexField
+operator|=
+name|IndexConfiguration
+operator|.
+name|DEFAULT_FIELD
 expr_stmt|;
 block|}
 if|if
@@ -1823,9 +1823,6 @@ argument_list|,
 name|storeFieldName
 argument_list|,
 name|fieldType
-operator|.
-name|getAnalyzer
-argument_list|()
 argument_list|,
 name|fstFile
 argument_list|,
@@ -2270,9 +2267,6 @@ argument_list|,
 name|encodedLangStoreField
 argument_list|,
 name|fieldType
-operator|.
-name|getAnalyzer
-argument_list|()
 argument_list|,
 name|langFstFile
 argument_list|,

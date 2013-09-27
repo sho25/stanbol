@@ -2634,6 +2634,17 @@ name|analyzer
 return|;
 block|}
 specifier|public
+name|Analyzer
+name|getTaggingAnalyzer
+parameter_list|()
+block|{
+return|return
+name|corpusInfo
+operator|.
+name|taggingAnalyzer
+return|;
+block|}
+specifier|public
 name|TaggerFstCorpus
 name|getFst
 parameter_list|()
