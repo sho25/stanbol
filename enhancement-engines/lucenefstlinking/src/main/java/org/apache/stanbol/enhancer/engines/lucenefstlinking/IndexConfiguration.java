@@ -187,6 +187,20 @@ name|apache
 operator|.
 name|lucene
 operator|.
+name|analysis
+operator|.
+name|Analyzer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|lucene
+operator|.
 name|document
 operator|.
 name|Document
@@ -377,6 +391,18 @@ begin_import
 import|import
 name|org
 operator|.
+name|opensextant
+operator|.
+name|solrtexttagger
+operator|.
+name|UnsupportedTokenException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -492,6 +518,20 @@ specifier|private
 name|File
 name|fstDirectory
 decl_stmt|;
+comment|/**      * If alternate tokens (<code>posInc == 0</code>) can be skipped or if such      * tokens should cause an {@link UnsupportedTokenException}.      */
+specifier|private
+name|boolean
+name|skipAltTokens
+decl_stmt|;
+comment|/**      * If alternate tokens (<code>posInc == 0</code>) can be skipped or if such      * tokens should cause an {@link UnsupportedTokenException}.      *<p>       * While enabling this will allow to use FST linking with query time Lucene      * {@link Analyzer}s that emit alternate tokens (e.g. the Kuromoji analyzers      * for Japanese) but it also requires special care with index time       * {@link Analyzer} configurations. If enabled the index time analyzer MUST       * produce all possible tokens emited by the query time analyzer as only if      * all such  combinations are added to the FST model skipped alternate       * tokens can not prevent mentions from being detected.      *<p>      * By default<code>skipAltTokens</code> is enabled for       * {@link FieldEncodingEnum#SolrYard} and deactivated for all other field      * encoding setting. This is because all Solr<code>schema.xml</code> used      * by the Stanbol Entityhub SolrYard ensure the requirement stated above.      * For other Solr configurations users will neet to explicitly activate this.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SKIP_ALT_TOKENS
+init|=
+literal|"enhancer.engines.linking.lucenefst.skipAltTokens"
+decl_stmt|;
 comment|/**      * Property used to configure the FieldName encoding of the SolrIndex. This      * is mainly needed for label fields of different languages (e.g. by using       * the iso language code as prefix/suffix of Solr fields. However this also      * adds support for SolrIndexes encoded as specified by the Stanbol      * Entityhub SolrYard implementation. See {@link FieldEncodingEnum} for       * supported values      */
 specifier|public
 specifier|static
@@ -499,7 +539,7 @@ specifier|final
 name|String
 name|FIELD_ENCODING
 init|=
-literal|"enhancer.engines.linking.solrfst.fieldEncoding"
+literal|"enhancer.engines.linking.lucenefst.fieldEncoding"
 decl_stmt|;
 comment|/**      * The name of the Solr field storing rankings for entities. Entities with a      * higher value are considered as better (more popular).      */
 specifier|public
@@ -508,7 +548,7 @@ specifier|final
 name|String
 name|SOLR_RANKING_FIELD
 init|=
-literal|"enhancer.engines.linking.solrfst.rankingField"
+literal|"enhancer.engines.linking.lucenefst.rankingField"
 decl_stmt|;
 comment|/**      * The name of the Solr field holding the entity type information      */
 specifier|public
@@ -517,7 +557,7 @@ specifier|final
 name|String
 name|SOLR_TYPE_FIELD
 init|=
-literal|"enhancer.engines.linking.solrfst.typeField"
+literal|"enhancer.engines.linking.lucenefst.typeField"
 decl_stmt|;
 comment|/**      * Language configuration defining the language, solr field and the name of the      * FST file. The FST file is looked up using the {@link DataFileProvider}.      */
 specifier|public
@@ -526,7 +566,7 @@ specifier|final
 name|String
 name|FST_CONFIG
 init|=
-literal|"enhancer.engines.linking.solrfst.fstconfig"
+literal|"enhancer.engines.linking.lucenefst.fstconfig"
 decl_stmt|;
 comment|/**      * The folder used to store the FST files. The {@link DEFAULT_FST_FOLDER default} is       * '<code>${solr-data-dir}/fst</code>' - this is '<code>./fst</code>' relative to the      * {@link SolrCore#getDataDir()} of the current SolrCore.      */
 specifier|public
@@ -535,7 +575,7 @@ specifier|final
 name|String
 name|FST_FOLDER
 init|=
-literal|"enhancer.engines.linking.solrfst.fstfolder"
+literal|"enhancer.engines.linking.lucenefst.fstfolder"
 decl_stmt|;
 comment|/**      * The default of the FST folder is '<code>${solr-data-dir}/fst</code>' -       * this is '<code>./fst</code>' relative to the {@link SolrCore#getDataDir()}       * of the current SolrCore.      */
 specifier|public
@@ -679,6 +719,33 @@ name|fieldEncoding
 operator|=
 name|fieldEncoding
 expr_stmt|;
+comment|//In case of a SolrYard we can activate skipAltTokens (see javadoc for
+comment|//#SKIP_ALT_TOKENS for more information)
+if|if
+condition|(
+name|fieldEncoding
+operator|==
+name|FieldEncodingEnum
+operator|.
+name|SolrYard
+condition|)
+block|{
+name|this
+operator|.
+name|skipAltTokens
+operator|=
+literal|true
+expr_stmt|;
+block|}
+else|else
+block|{
+name|this
+operator|.
+name|skipAltTokens
+operator|=
+literal|false
+expr_stmt|;
+block|}
 block|}
 specifier|public
 name|CorpusInfo
@@ -2507,6 +2574,30 @@ block|}
 return|return
 name|fstName
 return|;
+block|}
+specifier|public
+name|boolean
+name|isSkipAltTokens
+parameter_list|()
+block|{
+return|return
+name|skipAltTokens
+return|;
+block|}
+specifier|public
+name|void
+name|setSkipAltTokens
+parameter_list|(
+name|boolean
+name|skipAltTokens
+parameter_list|)
+block|{
+name|this
+operator|.
+name|skipAltTokens
+operator|=
+name|skipAltTokens
+expr_stmt|;
 block|}
 block|}
 end_class

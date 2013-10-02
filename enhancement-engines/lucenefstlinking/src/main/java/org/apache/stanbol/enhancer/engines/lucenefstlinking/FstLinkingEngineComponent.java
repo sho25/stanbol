@@ -1560,7 +1560,7 @@ specifier|final
 name|String
 name|SOLR_CORE
 init|=
-literal|"enhancer.engines.linking.solrfst.solrcore"
+literal|"enhancer.engines.linking.lucenefst.solrcore"
 decl_stmt|;
 comment|/**      * The size of the thread pool used to create FST models (default=1). Creating      * such models does need a lot of memory. Expect values up to 10times of the      * build model. So while this task can easily performed concurrently users need      * to be aware that the process will occupy a lot of heap space (typically several      * GBytes). If heap space is not an issue it is best to configure the value      * based on the CPU cores available on the local host.<p>      * This configuration has only an effect if runtime generation of FST modles      * is enabled (either by default or for some FST by explicitly setting the       * '<code>{@link IndexConfiguration#PARAM_RUNTIME_GENERATION generate}=true</code>' parameter       * for some languages in the {@link IndexConfiguration#FST_CONFIG}.      */
 specifier|public
@@ -1569,7 +1569,7 @@ specifier|final
 name|String
 name|FST_THREAD_POOL_SIZE
 init|=
-literal|"enhancer.engines.linking.solrfst.fstThreadPoolSize"
+literal|"enhancer.engines.linking.lucenefst.fstThreadPoolSize"
 decl_stmt|;
 comment|/**      * The default number of threads used to create FST models (default=1)      */
 specifier|public
@@ -1587,7 +1587,7 @@ specifier|final
 name|String
 name|ENTITY_CACHE_SIZE
 init|=
-literal|"enhancer.engines.linking.solrfst.entityCacheSize"
+literal|"enhancer.engines.linking.lucenefst.entityCacheSize"
 decl_stmt|;
 comment|/**      * The default size of the Entity Cache is set to 65k entities.      */
 specifier|public
@@ -1712,6 +1712,10 @@ decl_stmt|;
 specifier|private
 name|IndexConfiguration
 name|indexConfig
+decl_stmt|;
+specifier|private
+name|Boolean
+name|skipAltTokensConfig
 decl_stmt|;
 comment|/**      * Default constructor as used by OSGI. This expects that       * {@link #activate(ComponentContext)} is called before usage      */
 specifier|public
@@ -2020,6 +2024,55 @@ argument_list|)
 throw|;
 block|}
 block|}
+name|value
+operator|=
+name|properties
+operator|.
+name|get
+argument_list|(
+name|IndexConfiguration
+operator|.
+name|SKIP_ALT_TOKENS
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|value
+operator|instanceof
+name|Boolean
+condition|)
+block|{
+name|skipAltTokensConfig
+operator|=
+operator|(
+operator|(
+name|Boolean
+operator|)
+name|value
+operator|)
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+condition|)
+block|{
+name|skipAltTokensConfig
+operator|=
+operator|new
+name|Boolean
+argument_list|(
+name|value
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+comment|// else no config -> will use the default
 comment|//(4) init the FST configuration
 comment|//We can create the default configuration only here, as it depends on the
 comment|//name of the solrIndex
@@ -2983,6 +3036,21 @@ argument_list|(
 name|documentCacheFactory
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|skipAltTokensConfig
+operator|!=
+literal|null
+condition|)
+block|{
+name|indexConfig
+operator|.
+name|setSkipAltTokens
+argument_list|(
+name|skipAltTokensConfig
+argument_list|)
+expr_stmt|;
+block|}
 comment|//create a new searcher for creating FSTs
 name|boolean
 name|foundCorpus
@@ -3723,6 +3791,10 @@ operator|=
 literal|null
 expr_stmt|;
 name|bundleContext
+operator|=
+literal|null
+expr_stmt|;
+name|skipAltTokensConfig
 operator|=
 literal|null
 expr_stmt|;

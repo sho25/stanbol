@@ -2823,6 +2823,11 @@ argument_list|,
 name|linkableTokenFilter
 argument_list|,
 name|reducer
+argument_list|,
+name|session
+operator|.
+name|isSkipAltTokens
+argument_list|()
 argument_list|)
 block|{
 annotation|@
