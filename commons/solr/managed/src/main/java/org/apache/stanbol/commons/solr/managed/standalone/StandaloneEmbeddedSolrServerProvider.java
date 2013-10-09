@@ -206,7 +206,7 @@ return|;
 block|}
 comment|/**      * Getter for the SolrServer based on the parsed IndexReference. If the      * parsed<code>configName</code> is NOT<code>null</code> than the      * referenced index is created if it does not yet exist.       * @param indexRef the index reference      * @param configName the SolrCore configuration used to create the SolrCore      * on the ManagedSOlrServer      * @return the SolrServer,<code>null</code> if it does not exist and       * configName is not present.      * @throws IllegalStateException if the SolrServer could not be created      * by using the configName on the ManagedSolrServer referenced by       * {@link IndexReference#getServer()}      */
 specifier|public
-name|SolrServer
+name|EmbeddedSolrServer
 name|getSolrServer
 parameter_list|(
 name|IndexReference
