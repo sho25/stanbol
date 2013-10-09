@@ -1781,6 +1781,15 @@ init|(
 name|toInitialise
 init|)
 block|{
+if|if
+condition|(
+operator|!
+name|toInitialise
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 try|try
 block|{
 name|toInitialise
@@ -1796,6 +1805,7 @@ name|e
 parameter_list|)
 block|{
 comment|//year looks like all IndexingSources are initialised!
+block|}
 block|}
 block|}
 block|}
