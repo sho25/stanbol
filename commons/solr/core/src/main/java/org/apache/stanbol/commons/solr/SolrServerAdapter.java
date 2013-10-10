@@ -1778,31 +1778,6 @@ name|coreName
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-operator|!
-name|coreDir
-operator|.
-name|isDirectory
-argument_list|()
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The Core Directory '"
-operator|+
-name|coreDir
-operator|+
-literal|" for the Core '"
-operator|+
-name|coreName
-operator|+
-literal|"' does not exist or is not an directory"
-argument_list|)
-throw|;
-block|}
 name|SolrCore
 name|old
 init|=
@@ -1837,7 +1812,7 @@ name|coreName
 argument_list|,
 name|coreDir
 operator|.
-name|getAbsolutePath
+name|getPath
 argument_list|()
 argument_list|)
 argument_list|)
@@ -4608,14 +4583,7 @@ name|PROPERTY_CORE_DIR
 argument_list|)
 expr_stmt|;
 block|}
-elseif|else
-if|if
-condition|(
-name|directory
-operator|.
-name|isDirectory
-argument_list|()
-condition|)
+else|else
 block|{
 name|coreProperties
 operator|.
@@ -4626,20 +4594,6 @@ argument_list|,
 name|directory
 argument_list|)
 expr_stmt|;
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"The parsed File '"
-operator|+
-name|directory
-operator|+
-literal|"' MUST represent a Directory!"
-argument_list|)
-throw|;
 block|}
 block|}
 specifier|public
