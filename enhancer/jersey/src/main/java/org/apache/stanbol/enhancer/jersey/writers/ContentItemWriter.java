@@ -643,6 +643,24 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|UnsupportedSerializationFormatException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|commons
 operator|.
 name|io
@@ -1273,6 +1291,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+try|try
+block|{
 name|getSerializer
 argument_list|()
 operator|.
@@ -1291,6 +1311,45 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|UnsupportedSerializationFormatException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Response
+operator|.
+name|Status
+operator|.
+name|NOT_ACCEPTABLE
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"The enhancement results cannot be serialized in "
+operator|+
+literal|"the requested media type: "
+operator|+
+name|mediaType
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+operator|.
+name|build
+argument_list|()
+argument_list|)
+throw|;
+block|}
 block|}
 else|else
 block|{
@@ -1345,7 +1404,7 @@ name|entity
 argument_list|(
 literal|"The requested enhancement chain has not created an "
 operator|+
-literal|"version of the parsed content in the reuqest media "
+literal|"version of the parsed content in the request media "
 operator|+
 literal|"type "
 operator|+
