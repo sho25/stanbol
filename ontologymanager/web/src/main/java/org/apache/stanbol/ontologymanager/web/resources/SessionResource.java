@@ -423,6 +423,16 @@ name|java
 operator|.
 name|io
 operator|.
+name|ByteArrayInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
 name|ByteArrayOutputStream
 import|;
 end_import
@@ -790,6 +800,42 @@ operator|.
 name|core
 operator|.
 name|UriInfo
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|jaxrs
+operator|.
+name|utils
+operator|.
+name|form
+operator|.
+name|FormFile
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|jaxrs
+operator|.
+name|utils
+operator|.
+name|form
+operator|.
+name|MultiPartBody
 import|;
 end_import
 
@@ -1413,47 +1459,21 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|BodyPart
-import|;
-end_import
+begin_comment
+comment|//
+end_comment
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataBodyPart
-import|;
-end_import
+begin_comment
+comment|//import com.sun.jersey.multipart.BodyPart;
+end_comment
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataMultiPart
-import|;
-end_import
+begin_comment
+comment|//import com.sun.jersey.multipart.FormDataBodyPart;
+end_comment
+
+begin_comment
+comment|//import com.sun.jersey.multipart.FormDataMultiPart;
+end_comment
 
 begin_comment
 comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
@@ -4107,7 +4127,7 @@ specifier|public
 name|Response
 name|postOntology
 parameter_list|(
-name|FormDataMultiPart
+name|MultiPartBody
 name|data
 parameter_list|,
 annotation|@
@@ -4153,7 +4173,7 @@ name|library
 init|=
 literal|null
 decl_stmt|;
-name|File
+name|FormFile
 name|file
 init|=
 literal|null
@@ -4185,102 +4205,104 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-for|for
-control|(
-name|BodyPart
-name|bpart
-range|:
+comment|//        for (BodyPart bpart : data.getBodyParts()) {
+comment|//            log.debug("Found body part of type {}", bpart.getClass());
+comment|//            if (bpart instanceof FormDataBodyPart) {
+comment|//                FormDataBodyPart dbp = (FormDataBodyPart) bpart;
+comment|//                String name = dbp.getName();
+comment|//                log.debug("Detected form parameter \"{}\".", name);
+comment|//                if (name.equals("file")) {
+comment|//                    file = bpart.getEntityAs(File.class);
+comment|//                } else {
+comment|//                    String value = dbp.getValue();
+comment|//                    if (name.equals("format")&& !value.equals("auto")) {
+comment|//                        log.debug(" -- Expected format : {}", value);
+comment|//                        format = value;
+comment|//                    } else if (name.equals("url")) try {
+comment|//                        URI.create(value); // To throw 400 if malformed.
+comment|//                        location = IRI.create(value);
+comment|//                        log.debug(" -- Will load ontology from URL : {}", location);
+comment|//                    } catch (Exception ex) {
+comment|//                        log.error("Malformed IRI for " + value, ex);
+comment|//                        throw new WebApplicationException(ex, BAD_REQUEST);
+comment|//                    }
+comment|//                    else if (name.equals("library")&& !"null".equals(value)) try {
+comment|//                        log.debug(" -- Library ID : {}", value);
+comment|//                        URI.create(value); // To throw 400 if malformed.
+comment|//                        library = IRI.create(value);
+comment|//                        log.debug(" ---- (is well-formed URI)");
+comment|//                    } catch (Exception ex) {
+comment|//                        log.error("Malformed IRI for " + value, ex);
+comment|//                        throw new WebApplicationException(ex, BAD_REQUEST);
+comment|//                    }
+comment|//                    else if (name.equals("stored")&& !"null".equals(value)) {
+comment|//                        log.info("Request to manage ontology with key {}", value);
+comment|//                        keys.add(value);
+comment|//                    } else if (name.equals("scope")) {
+comment|//                        log.info("Request to append scope \"{}\".", value);
+comment|//                        if (toAppend == null) toAppend = new HashSet<String>();
+comment|//                        toAppend.add(value);
+comment|//                    }
+comment|//                }
+comment|//            }
+comment|//        }
+if|if
+condition|(
 name|data
 operator|.
-name|getBodyParts
-argument_list|()
-control|)
-block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Found body part of type {}"
-argument_list|,
-name|bpart
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|bpart
-operator|instanceof
-name|FormDataBodyPart
-condition|)
-block|{
-name|FormDataBodyPart
-name|dbp
-init|=
-operator|(
-name|FormDataBodyPart
-operator|)
-name|bpart
-decl_stmt|;
-name|String
-name|name
-init|=
-name|dbp
-operator|.
-name|getName
-argument_list|()
-decl_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Detected form parameter \"{}\"."
-argument_list|,
-name|name
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|name
-operator|.
-name|equals
+name|getFormFileParameterValues
 argument_list|(
 literal|"file"
 argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
 condition|)
 block|{
 name|file
 operator|=
-name|bpart
+name|data
 operator|.
-name|getEntityAs
+name|getFormFileParameterValues
 argument_list|(
-name|File
-operator|.
-name|class
+literal|"file"
 argument_list|)
+index|[
+literal|0
+index|]
 expr_stmt|;
 block|}
-else|else
+comment|// else {
+if|if
+condition|(
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"format"
+argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
+condition|)
 block|{
 name|String
 name|value
 init|=
-name|dbp
+name|data
 operator|.
-name|getValue
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|name
-operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"format"
 argument_list|)
-operator|&&
+index|[
+literal|0
+index|]
+decl_stmt|;
+if|if
+condition|(
 operator|!
 name|value
 operator|.
@@ -4290,30 +4312,39 @@ literal|"auto"
 argument_list|)
 condition|)
 block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- Expected format : {}"
-argument_list|,
-name|value
-argument_list|)
-expr_stmt|;
 name|format
 operator|=
 name|value
 expr_stmt|;
 block|}
-elseif|else
+block|}
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"url"
 argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
 condition|)
+block|{
+name|String
+name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"url"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
 try|try
 block|{
 name|URI
@@ -4333,15 +4364,6 @@ argument_list|(
 name|value
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- Will load ontology from URL : {}"
-argument_list|,
-name|location
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -4353,7 +4375,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Malformed IRI for "
+literal|"Malformed IRI for param url "
 operator|+
 name|value
 argument_list|,
@@ -4370,35 +4392,36 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-elseif|else
+block|}
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"library"
 argument_list|)
-operator|&&
-operator|!
-literal|"null"
 operator|.
-name|equals
-argument_list|(
-name|value
-argument_list|)
+name|length
+operator|>
+literal|0
 condition|)
+block|{
+name|String
+name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"library"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
 try|try
 block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- Library ID : {}"
-argument_list|,
-name|value
-argument_list|)
-expr_stmt|;
 name|URI
 operator|.
 name|create
@@ -4416,13 +4439,6 @@ argument_list|(
 name|value
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" ---- (is well-formed URI)"
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -4434,7 +4450,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Malformed IRI for "
+literal|"Malformed IRI for param library "
 operator|+
 name|value
 argument_list|,
@@ -4451,34 +4467,34 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-elseif|else
+block|}
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"stored"
 argument_list|)
-operator|&&
-operator|!
-literal|"null"
 operator|.
-name|equals
-argument_list|(
-name|value
-argument_list|)
+name|length
+operator|>
+literal|0
 condition|)
 block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Request to manage ontology with key {}"
-argument_list|,
+name|String
 name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"stored"
 argument_list|)
-expr_stmt|;
+index|[
+literal|0
+index|]
+decl_stmt|;
 name|keys
 operator|.
 name|add
@@ -4487,17 +4503,33 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-elseif|else
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"scope"
 argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
 condition|)
 block|{
+name|String
+name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"scope"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
 name|log
 operator|.
 name|info
@@ -4513,6 +4545,7 @@ name|toAppend
 operator|==
 literal|null
 condition|)
+block|{
 name|toAppend
 operator|=
 operator|new
@@ -4522,6 +4555,7 @@ name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
+block|}
 name|toAppend
 operator|.
 name|add
@@ -4530,25 +4564,12 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-block|}
-block|}
 name|boolean
 name|fileOk
 init|=
 name|file
 operator|!=
 literal|null
-operator|&&
-name|file
-operator|.
-name|canRead
-argument_list|()
-operator|&&
-name|file
-operator|.
-name|exists
-argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -4652,9 +4673,12 @@ operator|new
 name|BufferedInputStream
 argument_list|(
 operator|new
-name|FileInputStream
+name|ByteArrayInputStream
 argument_list|(
 name|file
+operator|.
+name|getContent
+argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -4793,9 +4817,12 @@ operator|new
 name|BufferedInputStream
 argument_list|(
 operator|new
-name|FileInputStream
+name|ByteArrayInputStream
 argument_list|(
 name|file
+operator|.
+name|getContent
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
