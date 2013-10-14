@@ -63,15 +63,9 @@ name|Type
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
+begin_comment
+comment|//import javax.servlet.ServletContext;
+end_comment
 
 begin_import
 import|import
@@ -97,19 +91,9 @@ name|WebApplicationException
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Context
-import|;
-end_import
+begin_comment
+comment|//import javax.ws.rs.core.Context;
+end_comment
 
 begin_import
 import|import
@@ -250,6 +234,22 @@ operator|.
 name|serializer
 operator|.
 name|RdfJsonSerializingProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Reference
 import|;
 end_import
 
@@ -676,128 +676,35 @@ argument_list|<
 name|Recipe
 argument_list|>
 block|{
-specifier|protected
-name|Serializer
-name|serializer
-decl_stmt|;
-specifier|protected
-name|ServletContext
-name|servletContext
-decl_stmt|;
-specifier|protected
-name|RuleStore
-name|ruleStore
-decl_stmt|;
-specifier|public
-name|RecipeWriter
-parameter_list|(
 annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
-block|{
-name|Logger
-name|log
-init|=
-name|LoggerFactory
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-argument_list|)
+name|Reference
+specifier|protected
+name|Serializer
+name|serializer
 decl_stmt|;
-name|this
-operator|.
-name|servletContext
-operator|=
-name|servletContext
-expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Setting context to "
-operator|+
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|serializer
-operator|=
-operator|(
-name|Serializer
-operator|)
-name|this
-operator|.
-name|servletContext
-operator|.
-name|getAttribute
-argument_list|(
-name|Serializer
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|serializer
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Serializer not found in Servlet context."
-argument_list|)
-expr_stmt|;
-name|serializer
-operator|=
-operator|new
-name|Serializer
-argument_list|()
-expr_stmt|;
-block|}
+comment|//    protected ServletContext servletContext;
+annotation|@
+name|Reference
+specifier|protected
+name|RuleStore
 name|ruleStore
-operator|=
-operator|(
-name|RuleStore
-operator|)
-name|this
-operator|.
-name|servletContext
-operator|.
-name|getAttribute
-argument_list|(
-name|RuleStore
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|serializer
-operator|==
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"RuleStore not found in Servlet context."
-argument_list|)
-expr_stmt|;
-block|}
-block|}
+decl_stmt|;
+comment|//    public RecipeWriter(@Context ServletContext servletContext) {
+comment|//        Logger log = LoggerFactory.getLogger(getClass());
+comment|//        this.servletContext = servletContext;
+comment|//        log.info("Setting context to " + servletContext);
+comment|//        serializer = (Serializer) this.servletContext.getAttribute(Serializer.class.getName());
+comment|//        if (serializer == null) {
+comment|//            log.error("Serializer not found in Servlet context.");
+comment|//            serializer = new Serializer();
+comment|//        }
+comment|//
+comment|//        ruleStore = (RuleStore) this.servletContext.getAttribute(RuleStore.class.getName());
+comment|//
+comment|//        if (serializer == null) {
+comment|//            log.error("RuleStore not found in Servlet context.");
+comment|//        }
+comment|//    }
 annotation|@
 name|Override
 specifier|public

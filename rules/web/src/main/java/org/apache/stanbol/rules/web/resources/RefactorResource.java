@@ -127,45 +127,13 @@ name|NOT_ACCEPTABLE
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
+end_comment
 
 begin_import
 import|import static
@@ -351,15 +319,9 @@ name|URISyntaxException
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
+begin_comment
+comment|//import javax.servlet.ServletContext;
+end_comment
 
 begin_import
 import|import
@@ -529,21 +491,9 @@ name|ResponseBuilder
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Response
-operator|.
-name|Status
-import|;
-end_import
+begin_comment
+comment|//import javax.ws.rs.core.Response.Status;
+end_comment
 
 begin_import
 import|import
@@ -583,15 +533,13 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|felix
 operator|.
-name|commons
+name|scr
 operator|.
-name|owl
+name|annotations
 operator|.
-name|transformation
-operator|.
-name|OWLAPIToClerezzaConverter
+name|Reference
 import|;
 end_import
 
@@ -605,13 +553,17 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|web
+name|owl
 operator|.
-name|base
+name|transformation
 operator|.
-name|ContextHelper
+name|OWLAPIToClerezzaConverter
 import|;
 end_import
+
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
 
 begin_import
 import|import
@@ -974,82 +926,24 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-specifier|protected
-name|Refactorer
-name|refactorer
-decl_stmt|;
-specifier|protected
-name|RuleStore
-name|ruleStore
-decl_stmt|;
-specifier|public
-name|RefactorResource
-parameter_list|(
 annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
-block|{
-name|refactorer
-operator|=
-operator|(
+name|Reference
+specifier|protected
 name|Refactorer
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|Refactorer
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
 name|refactorer
-operator|==
-literal|null
-condition|)
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Refactorer missing in ServletContext"
-argument_list|)
-throw|;
-name|ruleStore
-operator|=
-operator|(
+decl_stmt|;
+annotation|@
+name|Reference
+specifier|protected
 name|RuleStore
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RuleStore
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
 name|ruleStore
-operator|==
-literal|null
-condition|)
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"RuleStore missing in ServletContext"
-argument_list|)
-throw|;
-block|}
+decl_stmt|;
+comment|//    public RefactorResource(@Context ServletContext servletContext) {
+comment|//        refactorer = (Refactorer) ContextHelper.getServiceFromContext(Refactorer.class, servletContext);
+comment|//        if (refactorer == null) throw new IllegalStateException("Refactorer missing in ServletContext");
+comment|//        ruleStore = (RuleStore) ContextHelper.getServiceFromContext(RuleStore.class, servletContext);
+comment|//        if (ruleStore == null) throw new IllegalStateException("RuleStore missing in ServletContext");
+comment|//    }
 comment|/**      * The apply mode allows the client to compose a recipe, by mean of string containg the rules, and apply      * it "on the fly" to the graph in input.      *       * @param recipe      *            String      * @param input      *            InputStream      * @return a Response containing the transformed graph      */
 annotation|@
 name|POST
@@ -1227,15 +1121,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1420,15 +1306,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1557,15 +1435,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1598,15 +1468,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1639,15 +1501,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2001,15 +1855,7 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2220,15 +2066,7 @@ argument_list|,
 name|mediaType
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.

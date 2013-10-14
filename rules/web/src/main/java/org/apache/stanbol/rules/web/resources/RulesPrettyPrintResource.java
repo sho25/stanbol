@@ -19,29 +19,13 @@ name|resources
 package|;
 end_package
 
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
+begin_comment
+comment|//import javax.servlet.ServletContext;
+end_comment
 
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Context
-import|;
-end_import
+begin_comment
+comment|//import javax.ws.rs.core.Context;
+end_comment
 
 begin_import
 import|import
@@ -91,11 +75,6 @@ decl_stmt|;
 specifier|public
 name|RulesPrettyPrintResource
 parameter_list|(
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|,
 name|UriInfo
 name|uriInfo
 parameter_list|,
@@ -115,12 +94,7 @@ name|uriInfo
 operator|=
 name|uriInfo
 expr_stmt|;
-name|this
-operator|.
-name|servletContext
-operator|=
-name|servletContext
-expr_stmt|;
+comment|//        this.servletContext = servletContext;
 block|}
 specifier|public
 name|Object

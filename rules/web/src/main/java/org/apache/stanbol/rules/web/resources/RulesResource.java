@@ -39,45 +39,13 @@ name|TEXT_HTML
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
+end_comment
 
 begin_import
 import|import
@@ -119,15 +87,9 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
+begin_comment
+comment|//import javax.servlet.ServletContext;
+end_comment
 
 begin_import
 import|import
@@ -359,13 +321,13 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|felix
 operator|.
-name|commons
+name|scr
 operator|.
-name|viewable
+name|annotations
 operator|.
-name|Viewable
+name|Reference
 import|;
 end_import
 
@@ -381,11 +343,15 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|ContextHelper
+name|Viewable
 import|;
 end_import
+
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
 
 begin_import
 import|import
@@ -846,61 +812,24 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|private
 name|RuleStore
 name|ruleStore
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|private
 name|RuleAdapterManager
 name|adapterManager
 decl_stmt|;
 comment|/**      * To get the RuleStoreImpl where are stored the rules and the recipes      *       * @param servletContext      *            {To get the context where the REST service is running.}      */
-specifier|public
-name|RulesResource
-parameter_list|(
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
-block|{
-name|this
-operator|.
-name|ruleStore
-operator|=
-operator|(
-name|RuleStore
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RuleStore
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|adapterManager
-operator|=
-operator|(
-name|RuleAdapterManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RuleAdapterManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-block|}
+comment|//    public RulesResource(@Context ServletContext servletContext) {
+comment|//        this.ruleStore = (RuleStore) ContextHelper.getServiceFromContext(RuleStore.class, servletContext);
+comment|//        this.adapterManager = (RuleAdapterManager) ContextHelper.getServiceFromContext(
+comment|//            RuleAdapterManager.class, servletContext);
+comment|//    }
 annotation|@
 name|GET
 annotation|@
@@ -936,15 +865,7 @@ argument_list|,
 name|TEXT_HTML
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -1546,15 +1467,7 @@ name|NOT_ACCEPTABLE
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -1740,8 +1653,6 @@ argument_list|,
 operator|new
 name|RulesPrettyPrintResource
 argument_list|(
-name|servletContext
-argument_list|,
 name|uriInfo
 argument_list|,
 name|recipe
@@ -1870,15 +1781,7 @@ name|NOT_ACCEPTABLE
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -2048,15 +1951,7 @@ name|NOT_ACCEPTABLE
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -2195,15 +2090,7 @@ name|INTERNAL_SERVER_ERROR
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -2567,15 +2454,7 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -2818,15 +2697,7 @@ name|NOT_ACCEPTABLE
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -3247,15 +3118,7 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -3466,15 +3329,7 @@ name|NOT_FOUND
 argument_list|)
 expr_stmt|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|responseBuilder
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, responseBuilder, headers);
 return|return
 name|responseBuilder
 operator|.
@@ -3517,15 +3372,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
