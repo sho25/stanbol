@@ -85,16 +85,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedHashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -311,7 +301,7 @@ name|ModelUtils
 operator|.
 name|addToCollection
 argument_list|(
-name|SparqlQueryUtils
+name|ClerezzaQueryUtils
 operator|.
 name|parseQueryResultsFromMGraph
 argument_list|(
