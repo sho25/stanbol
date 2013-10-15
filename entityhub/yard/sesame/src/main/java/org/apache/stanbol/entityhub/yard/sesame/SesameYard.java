@@ -23,6 +23,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|Closeable
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|ArrayList
@@ -656,7 +666,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the Yard Interface based on a Sesame {@link Repository}.   *<p>  * This is NOT an OSGI component nor service. It is intended to be used by  * Components that do allow users to configure a Repository implementation.  * Such components will than create a SesameYard instance and register it as  * a OSGI service.  *  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the Yard Interface based on a Sesame {@link Repository}.   *<p>  * This is NOT an OSGI component nor service. It is intended to be used by  * Components that do allow users to configure a Repository implementation.  * Such components will than create a SesameYard instance and register it as  * a OSGI service.  *<p>  *<b>NOTE</b> This Yard does not {@link Repository#initialize() initialize}   * nor {@link Repository#shutDown() shutdown} the Sesame repository. Callers  * are responsible for that. This is because this Yard implementation does  * NOT assume exclusive access to the repository. The same repository can be  * used by multiple Yards (e.g. configured for different   * {@link SesameYardConfig#setContexts(String[]) contexts}) or even other  * components.  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -748,52 +758,55 @@ name|CONTEXT_URI
 init|=
 literal|"org.apache.stanbol.entityhub.yard.sesame.contextUri"
 decl_stmt|;
-comment|/**      * The context used by this yard      */
+comment|/**      * The context used by this yard. Parsed from {@link SesameYardConfig#getContexts()}      * if<code>{@link SesameYardConfig#isContextEnabled()} == true</code>      */
 specifier|private
 specifier|final
 name|URI
 index|[]
 name|contexts
 decl_stmt|;
+comment|/**      * The {@link Dataset} similar to {@link #contexts}. Dataset is used for      * SPARQL queries to enforce results to be restricted to the {@link #contexts}      */
 specifier|private
 specifier|final
 name|Dataset
 name|dataset
 decl_stmt|;
+comment|/**      * If inferred triples should be included or not. Configured via      * {@link SesameYardConfig#isIncludeInferred()}      */
 specifier|private
 name|boolean
 name|includeInferred
 decl_stmt|;
+comment|/**      * The {@link Repository} as parsed in the constructor      */
 specifier|private
 specifier|final
 name|Repository
 name|repository
 decl_stmt|;
+comment|/**      * The Entityhub ValueFactory used to create Sesame specific Representations,      * References and Text instances      */
 specifier|private
 specifier|final
 name|RdfValueFactory
 name|valueFactory
 decl_stmt|;
+comment|/**      * The Sesame ValueFactory. Shortcut for {@link Repository#getValueFactory()}.      */
 specifier|private
 specifier|final
 name|ValueFactory
 name|sesameFactory
 decl_stmt|;
-specifier|private
-specifier|final
-name|SesameYardConfig
-name|config
-decl_stmt|;
+comment|/**      * The {@link URI} for {@link RdfResourceEnum#QueryResultSet}      */
 specifier|private
 specifier|final
 name|URI
 name|queryRoot
 decl_stmt|;
+comment|/**      * The {@link URI} for {@link RdfResourceEnum#queryResult}      */
 specifier|private
 specifier|final
 name|URI
 name|queryResult
 decl_stmt|;
+comment|/**      * Constructs a SesameYard for the parsed Repository and configuration.      * @param repo The Repository used by this Yard. The parsed Repository is      * expected to be initialised.      * @param config the configuration for the Yard.       */
 specifier|public
 name|SesameYard
 parameter_list|(
@@ -807,18 +820,59 @@ block|{
 name|super
 argument_list|()
 expr_stmt|;
+if|if
+condition|(
+name|repo
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed repository MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+operator|!
+name|repo
+operator|.
+name|isInitialized
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed repository MUST BE initialised!"
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|repository
 operator|=
 name|repo
 expr_stmt|;
-name|this
-operator|.
+if|if
+condition|(
 name|config
-operator|=
-name|config
-expr_stmt|;
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"The parsed configuration MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|sesameFactory
@@ -2759,12 +2813,14 @@ name|getLimit
 argument_list|(
 name|query
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getDefaultQueryResultNumber
 argument_list|()
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getMaxQueryResultNumber
 argument_list|()
@@ -3210,12 +3266,14 @@ name|getLimit
 argument_list|(
 name|query
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getDefaultQueryResultNumber
 argument_list|()
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getMaxQueryResultNumber
 argument_list|()
@@ -3527,12 +3585,14 @@ name|getLimit
 argument_list|(
 name|query
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getDefaultQueryResultNumber
 argument_list|()
 argument_list|,
-name|config
+name|getConfig
+argument_list|()
 operator|.
 name|getMaxQueryResultNumber
 argument_list|()
