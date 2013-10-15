@@ -498,7 +498,7 @@ argument_list|)
 operator|.
 name|assertStatus
 argument_list|(
-literal|500
+literal|406
 argument_list|)
 expr_stmt|;
 block|}
