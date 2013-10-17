@@ -163,13 +163,16 @@ comment|//INDEXING_COMPLETED_QUEUE_ITEM is anyway null
 annotation|@
 name|SuppressWarnings
 argument_list|(
-literal|"unchecked"
+literal|"rawtypes"
 argument_list|)
 name|QueueItem
 name|INDEXING_COMPLETED_QUEUE_ITEM
 init|=
 operator|new
 name|QueueItem
+argument_list|<
+name|Void
+argument_list|>
 argument_list|(
 literal|null
 argument_list|)

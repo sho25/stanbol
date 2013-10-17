@@ -18,6 +18,30 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|System
+operator|.
+name|exit
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|System
+operator|.
+name|out
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -477,6 +501,19 @@ argument_list|,
 literal|"the char encodinf (default: UTF-8)"
 argument_list|)
 expr_stmt|;
+name|options
+operator|.
+name|addOption
+argument_list|(
+literal|"o"
+argument_list|,
+literal|"outputFilePrefix"
+argument_list|,
+literal|true
+argument_list|,
+literal|"The prefix to add to output files, defaults to \"uf_\""
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**      * @param args      * @throws ParseException       */
 specifier|public
@@ -521,6 +558,57 @@ argument_list|()
 expr_stmt|;
 if|if
 condition|(
+name|line
+operator|.
+name|hasOption
+argument_list|(
+literal|'h'
+argument_list|)
+condition|)
+block|{
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"Processes RDF files to translate blank nodes into prefixed URI nodes."
+argument_list|)
+expr_stmt|;
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"-h/--help: Print this help and exit."
+argument_list|)
+expr_stmt|;
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"-p/--prefix: Required: The prefix to add to blank nodes to make them URIs."
+argument_list|)
+expr_stmt|;
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"-e/--encoding: The text encoding to expect in the RDF, defaults to UTF-8."
+argument_list|)
+expr_stmt|;
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"-o/--outputFilePrefix: The prefix to add to output files, defaults to \"uf_\"."
+argument_list|)
+expr_stmt|;
+name|exit
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
 operator|!
 name|line
 operator|.
@@ -537,8 +625,6 @@ argument_list|(
 literal|"Missing parameter 'prefix' ('p)!"
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
 name|exit
 argument_list|(
 literal|1
@@ -561,7 +647,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"prfix: {} "
+literal|"Using prefix: {} "
 argument_list|,
 name|line
 operator|.
@@ -619,8 +705,6 @@ literal|'e'
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
 name|exit
 argument_list|(
 literal|1
@@ -668,6 +752,22 @@ argument_list|,
 name|charset
 argument_list|,
 name|prefix
+argument_list|,
+name|line
+operator|.
+name|hasOption
+argument_list|(
+literal|'o'
+argument_list|)
+condition|?
+name|line
+operator|.
+name|getOptionValue
+argument_list|(
+literal|'o'
+argument_list|)
+else|:
+literal|"uf_"
 argument_list|)
 decl_stmt|;
 name|urify
@@ -686,6 +786,11 @@ specifier|private
 specifier|final
 name|String
 name|prefix
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|outputFilePrefix
 decl_stmt|;
 specifier|protected
 name|long
@@ -723,6 +828,10 @@ name|charset
 parameter_list|,
 name|String
 name|prefix
+parameter_list|,
+specifier|final
+name|String
+name|outputFilePrefix
 parameter_list|)
 throws|throws
 name|IOException
@@ -738,6 +847,12 @@ operator|.
 name|prefix
 operator|=
 name|prefix
+expr_stmt|;
+name|this
+operator|.
+name|outputFilePrefix
+operator|=
+name|outputFilePrefix
 expr_stmt|;
 name|this
 operator|.
@@ -889,7 +1004,7 @@ name|File
 argument_list|(
 name|path
 argument_list|,
-literal|"uf_"
+name|outputFilePrefix
 operator|+
 name|name
 argument_list|)

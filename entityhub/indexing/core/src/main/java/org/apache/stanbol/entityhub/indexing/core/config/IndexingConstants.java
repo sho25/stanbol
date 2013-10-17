@@ -21,16 +21,6 @@ name|config
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|File
-import|;
-end_import
-
 begin_comment
 comment|/**  * Constants defines/used for Indexing.  * @author Rupert Westenthaler  *  */
 end_comment
