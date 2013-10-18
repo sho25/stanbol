@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to collect {@link Sentiment}s that refer the same   * {@link Sentiment#getAboutness()}  * @author Rupert Westenthaler  */
+comment|/**  * Represents phrases in a sentence that do hold a Sentiment value.  * Phrases are defined by collecting {@link Sentiment}s that refer the same   * {@link Sentiment#getAboutness()}  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -170,6 +170,7 @@ name|sentiment
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Adds a Sentiment to the Phrase      * @param sentiment the sentiment to add      */
 specifier|public
 name|void
 name|addSentiment
@@ -304,12 +305,20 @@ literal|2
 index|]
 return|;
 block|}
+comment|/**      * The Sentence containing this phrase or<code>null</code> if no      * {@link Sentiment} was yet added      * @return the sentence      */
 specifier|public
 name|Sentence
 name|getSentence
 parameter_list|()
 block|{
 return|return
+name|sentiments
+operator|.
+name|isEmpty
+argument_list|()
+condition|?
+literal|null
+else|:
 name|sentiments
 operator|.
 name|get
