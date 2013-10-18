@@ -351,6 +351,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -552,6 +562,26 @@ operator|.
 name|model
 operator|.
 name|Annotation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|engines
+operator|.
+name|dbpspotlight
+operator|.
+name|model
+operator|.
+name|SurfaceForm
 import|;
 end_import
 
@@ -1222,6 +1252,23 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
+name|Map
+argument_list|<
+name|SurfaceForm
+argument_list|,
+name|UriRef
+argument_list|>
+name|surfaceForm2TextAnnotation
+init|=
+operator|new
+name|HashMap
+argument_list|<
+name|SurfaceForm
+argument_list|,
+name|UriRef
+argument_list|>
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|dbpslGraph
@@ -1253,6 +1300,8 @@ argument_list|,
 name|text
 argument_list|,
 name|language
+argument_list|,
+name|surfaceForm2TextAnnotation
 argument_list|)
 expr_stmt|;
 if|if
@@ -1358,11 +1407,16 @@ name|text
 parameter_list|,
 name|Language
 name|language
+parameter_list|,
+name|Map
+argument_list|<
+name|SurfaceForm
+argument_list|,
+name|UriRef
+argument_list|>
+name|surfaceForm2TextAnnotation
 parameter_list|)
 block|{
-comment|//we need to create multiple EntityAnnotations even for the same
-comment|//suggested Entity, as the scores will be different
-comment|//HashMap<Resource, UriRef> entityAnnotationMap = new HashMap<Resource, UriRef>();
 for|for
 control|(
 name|Annotation
@@ -1374,6 +1428,25 @@ block|{
 name|UriRef
 name|textAnnotation
 init|=
+name|surfaceForm2TextAnnotation
+operator|.
+name|get
+argument_list|(
+name|occ
+operator|.
+name|surfaceForm
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|textAnnotation
+operator|==
+literal|null
+condition|)
+block|{
+comment|//not yet written ... create a new
+name|textAnnotation
+operator|=
 name|SpotlightEngineUtils
 operator|.
 name|createTextEnhancement
@@ -1390,11 +1463,19 @@ name|text
 argument_list|,
 name|language
 argument_list|)
-decl_stmt|;
-comment|//			if (entityAnnotationMap.containsKey(occ.uri)) {
-comment|//				model.add(new TripleImpl(entityAnnotationMap.get(occ.uri),
-comment|//						DC_RELATION, textAnnotation));
-comment|//			} else {
+expr_stmt|;
+name|surfaceForm2TextAnnotation
+operator|.
+name|put
+argument_list|(
+name|occ
+operator|.
+name|surfaceForm
+argument_list|,
+name|textAnnotation
+argument_list|)
+expr_stmt|;
+block|}
 name|SpotlightEngineUtils
 operator|.
 name|createEntityAnnotation
@@ -1410,7 +1491,6 @@ argument_list|,
 name|language
 argument_list|)
 expr_stmt|;
-comment|//				entityAnnotationMap.put(occ.uri, entityAnnotation);
 block|}
 block|}
 comment|/** 	 * Sends a POST request to the DBpediaSpotlight endpoint. 	 *  	 * @param text 	 *            a<code>String</code> with the text to be analyzed 	 * @param contentItemUri 	 *            the URI of the content item (only used for logging) 	 * @return a<code>Collection<DBPSLAnnotation></code> with the server 	 *         response 	 * @throws EngineException 	 *             if the request cannot be sent 	 */

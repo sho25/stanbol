@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -115,24 +119,6 @@ name|nlp
 operator|.
 name|model
 operator|.
-name|Section
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|nlp
-operator|.
-name|model
-operator|.
 name|Sentence
 import|;
 end_import
@@ -212,7 +198,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class is used to allow adding negations to sentiments even if the  * sentiment was already assigned to an SentimentInfo. In addition this class  * stores the token for the sentiment AND the tokens causing the negations. No  * support for multiple negations - meaning that the sentiment value is inverted  * if 1..* negations are present.  * @author Rupert Westenthaler  *  */
+comment|/**  * This class is used to represents a {@link Token} that holds a Sentiment in the  * context of a {@link Sentence}. Sentiment might be {@link #addNegate(Token) negated}  * and be {@link #addAbout(Token) assigned} to a Noun or Pronoun via a  * {@link #getVerb() Verb}. The {@link #getStart()} and {@link #getEnd()} values  * return the span selected by this Sentiment. This are the lowest start and  * highest end values of any token related with this sentiment. Those spans are  * used by the {@link SentimentPhrase} class for clustering {@link Sentiment}s  * to phrases.  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -248,21 +234,25 @@ operator|.
 name|Adjective
 argument_list|)
 decl_stmt|;
+comment|/**      * The token holding the sentiment      */
 specifier|private
 specifier|final
 name|Token
 name|token
 decl_stmt|;
+comment|/**      * The (not negated) value of the sentiment      */
 specifier|private
 specifier|final
 name|double
 name|value
 decl_stmt|;
+comment|/**      * The Sentence of the {@link #token}      */
 specifier|private
 specifier|final
 name|Sentence
 name|sentence
 decl_stmt|;
+comment|/**      * List of tokens that negate this sentiment.<code>null</code> if no      * negation was added      */
 specifier|private
 name|List
 argument_list|<
@@ -270,6 +260,7 @@ name|Token
 argument_list|>
 name|negated
 decl_stmt|;
+comment|/**      * The Nouns and/or Pronouns this sentiment is about.<code>null</code> if      * no aboutness is defined      */
 specifier|private
 name|List
 argument_list|<
@@ -277,18 +268,23 @@ name|Token
 argument_list|>
 name|aboutness
 decl_stmt|;
+comment|/**      * The PosTag of the of the {@link #token}      */
 specifier|private
+specifier|final
 name|PosTag
 name|posTag
 decl_stmt|;
+comment|/**      * The start position of this sentiment. This is the lowest start of any      * token added to this sentiment. This field is set by {@link #checkSpan(Token)}      */
 specifier|private
 name|int
 name|start
 decl_stmt|;
+comment|/**      * The end position of this sentiment. This is the highest end of any      * token added to this sentiment. This field is set by {@link #checkSpan(Token)}      */
 specifier|private
 name|int
 name|end
 decl_stmt|;
+comment|/**      * The verb assigning this sentiment to the Nouns and/or Pronouns added      * by {@link #addAbout(Token)}.      */
 specifier|private
 name|Token
 name|verb
@@ -361,6 +357,24 @@ operator|.
 name|POS_ANNOTATION
 argument_list|)
 decl_stmt|;
+name|PosTag
+name|posTag
+init|=
+literal|null
+decl_stmt|;
+if|if
+condition|(
+name|tags
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|tags
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 for|for
 control|(
 name|Value
@@ -475,9 +489,17 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-specifier|public
+name|this
+operator|.
+name|posTag
+operator|=
+name|posTag
+expr_stmt|;
+block|}
+comment|/**      * Adds an Token that negates this Sentiment      * @param token the token      */
+specifier|protected
 name|void
-name|negate
+name|addNegate
 parameter_list|(
 name|Token
 name|token
@@ -558,7 +580,6 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|protected
-specifier|final
 name|void
 name|setVerb
 parameter_list|(
@@ -579,7 +600,6 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|protected
-specifier|final
 name|void
 name|addAbout
 parameter_list|(
@@ -619,7 +639,7 @@ name|noun
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks the {@link #start} {@link #end} values against the span selected      * by the parsed token      * @param token      */
+comment|/**      * Checks the {@link #start} {@link #end} values against the span selected      * by the parsed token.<p>      * This method is called by all others that do add tokens.      * @param token the added token      */
 specifier|private
 name|void
 name|checkSpan
@@ -675,6 +695,7 @@ return|return
 name|posTag
 return|;
 block|}
+comment|/**      * The Sentiment value (considering possible negations)      * @return the sentiment value      */
 specifier|public
 name|double
 name|getValue
@@ -693,6 +714,7 @@ operator|-
 literal|1
 return|;
 block|}
+comment|/**      * The Token holding the sentiment      * @return the token      */
 specifier|public
 name|Token
 name|getToken
@@ -711,6 +733,7 @@ return|return
 name|sentence
 return|;
 block|}
+comment|/**      * The {@link AnalysedText Text}      * @return the text      */
 specifier|public
 name|AnalysedText
 name|getAnalysedText
@@ -723,6 +746,7 @@ name|getContext
 argument_list|()
 return|;
 block|}
+comment|/**      * The tokens negating this Sentiment      * @return the tokens or an empty list if none      */
 specifier|public
 name|List
 argument_list|<
@@ -738,12 +762,16 @@ literal|null
 condition|?
 name|Collections
 operator|.
-name|EMPTY_LIST
+expr|<
+name|Token
+operator|>
+name|emptyList
+argument_list|()
 else|:
 name|negated
 return|;
 block|}
-comment|/**      * The Nouns or Pronoun(s) the Adjectives are about      * @return      */
+comment|/**      * The Nouns or Pronoun(s) the Sentiment is about      * @return the tokens or an empty list if none.      */
 specifier|public
 name|List
 argument_list|<
@@ -759,7 +787,11 @@ literal|null
 condition|?
 name|Collections
 operator|.
-name|EMPTY_LIST
+expr|<
+name|Token
+operator|>
+name|emptyList
+argument_list|()
 else|:
 name|aboutness
 return|;
@@ -774,6 +806,7 @@ return|return
 name|verb
 return|;
 block|}
+comment|/**      * The start position of this sentiment. This is the lowest start of any      * token linked to this sentiment      * @return the start position      */
 specifier|public
 name|int
 name|getStart
@@ -783,6 +816,7 @@ return|return
 name|start
 return|;
 block|}
+comment|/**      * The end position of this sentiment. This is the highest end of any      * token linked to this sentiment      * @return the end position      */
 specifier|public
 name|int
 name|getEnd

@@ -77,27 +77,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Set
 import|;
 end_import
 
@@ -130,22 +110,6 @@ operator|.
 name|namespaceprefix
 operator|.
 name|NamespacePrefixProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|namespaceprefix
-operator|.
-name|NamespacePrefixService
 import|;
 end_import
 
@@ -645,6 +609,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * @param value      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|private
 name|void
 name|parseFilterConfig

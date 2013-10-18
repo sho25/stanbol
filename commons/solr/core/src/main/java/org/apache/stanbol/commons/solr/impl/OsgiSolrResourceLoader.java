@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -198,6 +202,24 @@ operator|.
 name|utils
 operator|.
 name|AbstractAnalyzerFactoryActivator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|commons
+operator|.
+name|solr
+operator|.
+name|utils
+operator|.
+name|RegisteredSolrAnalyzerFactory
 import|;
 end_import
 
@@ -536,7 +558,9 @@ name|bc
 operator|.
 name|getServiceReferences
 argument_list|(
-name|expectedType
+name|RegisteredSolrAnalyzerFactory
+operator|.
+name|class
 operator|.
 name|getName
 argument_list|()
@@ -594,25 +618,24 @@ decl_stmt|;
 if|if
 condition|(
 name|service
-operator|!=
-literal|null
+operator|instanceof
+name|RegisteredSolrAnalyzerFactory
 condition|)
 block|{
+comment|//TODO: we could check the type here
 name|clazz
 operator|=
 operator|(
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|T
-argument_list|>
+operator|(
+name|RegisteredSolrAnalyzerFactory
 operator|)
 name|service
+operator|)
 operator|.
-name|getClass
+name|getFactoryClass
 argument_list|()
 expr_stmt|;
+comment|//we do not use a service so immediately unget it
 name|bc
 operator|.
 name|ungetService
@@ -623,7 +646,6 @@ literal|0
 index|]
 argument_list|)
 expr_stmt|;
-comment|//we return the class and do not use the service
 return|return
 name|clazz
 return|;

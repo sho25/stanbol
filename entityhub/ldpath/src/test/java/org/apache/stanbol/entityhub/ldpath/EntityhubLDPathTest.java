@@ -596,19 +596,21 @@ name|vf
 operator|.
 name|createText
 argument_list|(
-literal|"London is the capital of England and the United Kingdom, "
+literal|"London Listen/ˈlʌndən/ is the capital city of England"
 operator|+
-literal|"the largest metropolitan area in the United Kingdom and the "
+literal|" and the United Kingdom, the largest metropolitan area in the"
 operator|+
-literal|"largest urban zone in the European Union by most measures. "
+literal|" United Kingdom, and the largest urban zone in the European "
 operator|+
-literal|"London has been a major settlement for two millennia, its "
+literal|"Union by most measures. Located on the River Thames, London "
 operator|+
-literal|"history going back to its founding by the Romans, who called "
+literal|"has been a major settlement for two millennia, its history "
 operator|+
-literal|"it Londinium. London's core, the ancient City of London, "
+literal|"going back to its founding by the Romans, who named it "
 operator|+
-literal|"largely retains its square-mile mediaeval boundaries."
+literal|"Londinium. London's ancient core, the City of London, largely "
+operator|+
+literal|"retains its square-mile mediaeval boundaries."
 argument_list|,
 literal|"en"
 argument_list|)
@@ -665,7 +667,7 @@ name|vf
 operator|.
 name|createReference
 argument_list|(
-literal|"http://dbpedia.org/resource/Category:Articles_including_recorded_pronunciations_%28UK_English%29"
+literal|"http://dbpedia.org/resource/Category:Articles_including_recorded_pronunciations_(UK_English)"
 argument_list|)
 argument_list|,
 name|vf
@@ -694,6 +696,20 @@ operator|.
 name|createReference
 argument_list|(
 literal|"http://dbpedia.org/resource/Category:Port_cities_and_towns_in_the_United_Kingdom"
+argument_list|)
+argument_list|,
+name|vf
+operator|.
+name|createReference
+argument_list|(
+literal|"http://dbpedia.org/resource/Category:Arthurian_locations"
+argument_list|)
+argument_list|,
+name|vf
+operator|.
+name|createReference
+argument_list|(
+literal|"http://dbpedia.org/resource/Category:Robin_Hood_locations"
 argument_list|)
 argument_list|)
 argument_list|)

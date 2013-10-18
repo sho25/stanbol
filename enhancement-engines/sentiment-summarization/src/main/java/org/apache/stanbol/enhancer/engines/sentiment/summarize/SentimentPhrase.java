@@ -1,4 +1,8 @@
 begin_unit|revision:0.9.5;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/* * Licensed to the Apache Software Foundation (ASF) under one or more * contributor license agreements.  See the NOTICE file distributed with * this work for additional information regarding copyright ownership. * The ASF licenses this file to You under the Apache License, Version 2.0 * (the "License"); you may not use this file except in compliance with * the License.  You may obtain a copy of the License at * *     http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */
+end_comment
+
 begin_package
 package|package
 name|org
@@ -94,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to collect {@link Sentiment}s that refer the same   * {@link Sentiment#getAboutness()}  * @author Rupert Westenthaler  */
+comment|/**  * Represents phrases in a sentence that do hold a Sentiment value.  * Phrases are defined by collecting {@link Sentiment}s that refer the same   * {@link Sentiment#getAboutness()}  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
@@ -166,6 +170,7 @@ name|sentiment
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Adds a Sentiment to the Phrase      * @param sentiment the sentiment to add      */
 specifier|public
 name|void
 name|addSentiment
@@ -300,12 +305,20 @@ literal|2
 index|]
 return|;
 block|}
+comment|/**      * The Sentence containing this phrase or<code>null</code> if no      * {@link Sentiment} was yet added      * @return the sentence      */
 specifier|public
 name|Sentence
 name|getSentence
 parameter_list|()
 block|{
 return|return
+name|sentiments
+operator|.
+name|isEmpty
+argument_list|()
+condition|?
+literal|null
+else|:
 name|sentiments
 operator|.
 name|get

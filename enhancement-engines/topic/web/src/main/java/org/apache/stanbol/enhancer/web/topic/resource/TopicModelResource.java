@@ -461,6 +461,8 @@ name|enhancer
 operator|.
 name|topic
 operator|.
+name|api
+operator|.
 name|ClassifierException
 import|;
 end_import
@@ -477,6 +479,8 @@ name|enhancer
 operator|.
 name|topic
 operator|.
+name|api
+operator|.
 name|TopicClassifier
 import|;
 end_import
@@ -492,6 +496,8 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|api
 operator|.
 name|training
 operator|.
@@ -510,6 +516,8 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|api
 operator|.
 name|training
 operator|.

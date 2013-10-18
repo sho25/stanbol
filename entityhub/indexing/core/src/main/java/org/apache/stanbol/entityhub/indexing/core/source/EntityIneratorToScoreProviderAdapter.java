@@ -73,7 +73,9 @@ name|indexing
 operator|.
 name|core
 operator|.
-name|EntityScoreProvider
+name|EntityIterator
+operator|.
+name|EntityScore
 import|;
 end_import
 
@@ -91,9 +93,7 @@ name|indexing
 operator|.
 name|core
 operator|.
-name|EntityIterator
-operator|.
-name|EntityScore
+name|EntityScoreProvider
 import|;
 end_import
 

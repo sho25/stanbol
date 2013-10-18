@@ -1013,70 +1013,6 @@ name|enhancer
 operator|.
 name|topic
 operator|.
-name|Batch
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|topic
-operator|.
-name|BatchProcessor
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|topic
-operator|.
-name|ClassificationReport
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|topic
-operator|.
-name|ClassifierException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|topic
-operator|.
 name|ConfiguredSolrCoreTracker
 import|;
 end_import
@@ -1109,6 +1045,96 @@ name|enhancer
 operator|.
 name|topic
 operator|.
+name|UTCTimeStamper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|api
+operator|.
+name|Batch
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|api
+operator|.
+name|BatchProcessor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|api
+operator|.
+name|ClassificationReport
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|api
+operator|.
+name|ClassifierException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|api
+operator|.
 name|TopicClassifier
 import|;
 end_import
@@ -1124,6 +1150,8 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|api
 operator|.
 name|TopicSuggestion
 import|;
@@ -1141,21 +1169,7 @@ name|enhancer
 operator|.
 name|topic
 operator|.
-name|UTCTimeStamper
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|topic
+name|api
 operator|.
 name|training
 operator|.
@@ -1175,23 +1189,7 @@ name|enhancer
 operator|.
 name|topic
 operator|.
-name|training
-operator|.
-name|SolrTrainingSet
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|topic
+name|api
 operator|.
 name|training
 operator|.
@@ -1211,9 +1209,29 @@ name|enhancer
 operator|.
 name|topic
 operator|.
+name|api
+operator|.
 name|training
 operator|.
 name|TrainingSetException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|topic
+operator|.
+name|training
+operator|.
+name|SolrTrainingSet
 import|;
 end_import
 
@@ -1513,22 +1531,22 @@ argument_list|)
 block|,
 comment|// those properties can still be set via a configuration file, but as most users
 comment|// will not use them exclude those from the configuration form
-comment|//        @Property(name = TopicClassificationEngine.SIMILARTITY_FIELD, value = TopicClassificationEngine.DEFAULT_SIMILARTITY_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.CONCEPT_URI_FIELD, value = TopicClassificationEngine.DEFAULT_CONCEPT_URI_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.PRIMARY_TOPIC_URI_FIELD, value = TopicClassificationEngine.DEFAULT_PRIMARY_TOPIC_URI_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.BROADER_FIELD, value = TopicClassificationEngine.DEFAULT_BROADER_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.MODEL_UPDATE_DATE_FIELD, value = TopicClassificationEngine.DEFAULT_MODEL_UPDATE_DATE_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.PRECISION_FIELD, value = TopicClassificationEngine.DEFAULT_PRECISION_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.RECALL_FIELD, value = TopicClassificationEngine.DEFAULT_RECALL_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.ENTRY_ID_FIELD, value = TopicClassificationEngine.DEFAULT_ENTRY_ID_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.MODEL_ENTRY_ID_FIELD, value = TopicClassificationEngine.DEFAULT_MODEL_ENTRY_ID_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.ENTRY_TYPE_FIELD, value = TopicClassificationEngine.DEFAULT_ENTRY_TYPE_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.MODEL_EVALUATION_DATE_FIELD, value = TopicClassificationEngine.DEFAULT_MODEL_EVALUATION_DATE_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.FALSE_NEGATIVES_FIELD, value = TopicClassificationEngine.DEFAULT_FALSE_NEGATIVES_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.FALSE_POSITIVES_FIELD, value = TopicClassificationEngine.DEFAULT_FALSE_POSITIVES_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.POSITIVE_SUPPORT_FIELD, value = TopicClassificationEngine.DEFAULT_POSITIVE_SUPPORT_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.NEGATIVE_SUPPORT_FIELD, value = TopicClassificationEngine.DEFAULT_NEGATIVE_SUPPORT_FIELD),
-comment|//        @Property(name = TopicClassificationEngine.ORDER, intValue = TopicClassificationEngine.DEFAULT_ENGINE_ORDER),
+comment|//             @Property(name = TopicClassificationEngine.SIMILARTITY_FIELD, value = TopicClassificationEngine.DEFAULT_SIMILARTITY_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.CONCEPT_URI_FIELD, value = TopicClassificationEngine.DEFAULT_CONCEPT_URI_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.PRIMARY_TOPIC_URI_FIELD, value = TopicClassificationEngine.DEFAULT_PRIMARY_TOPIC_URI_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.BROADER_FIELD, value = TopicClassificationEngine.DEFAULT_BROADER_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.MODEL_UPDATE_DATE_FIELD, value = TopicClassificationEngine.DEFAULT_MODEL_UPDATE_DATE_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.PRECISION_FIELD, value = TopicClassificationEngine.DEFAULT_PRECISION_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.RECALL_FIELD, value = TopicClassificationEngine.DEFAULT_RECALL_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.ENTRY_ID_FIELD, value = TopicClassificationEngine.DEFAULT_ENTRY_ID_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.MODEL_ENTRY_ID_FIELD, value = TopicClassificationEngine.DEFAULT_MODEL_ENTRY_ID_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.ENTRY_TYPE_FIELD, value = TopicClassificationEngine.DEFAULT_ENTRY_TYPE_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.MODEL_EVALUATION_DATE_FIELD, value = TopicClassificationEngine.DEFAULT_MODEL_EVALUATION_DATE_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.FALSE_NEGATIVES_FIELD, value = TopicClassificationEngine.DEFAULT_FALSE_NEGATIVES_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.FALSE_POSITIVES_FIELD, value = TopicClassificationEngine.DEFAULT_FALSE_POSITIVES_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.POSITIVE_SUPPORT_FIELD, value = TopicClassificationEngine.DEFAULT_POSITIVE_SUPPORT_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.NEGATIVE_SUPPORT_FIELD, value = TopicClassificationEngine.DEFAULT_NEGATIVE_SUPPORT_FIELD),
+comment|//             @Property(name = TopicClassificationEngine.ORDER, intValue = TopicClassificationEngine.DEFAULT_ENGINE_ORDER),
 annotation|@
 name|Property
 argument_list|(
@@ -9112,8 +9130,6 @@ name|getChainNames
 parameter_list|()
 throws|throws
 name|InvalidSyntaxException
-throws|,
-name|ChainException
 block|{
 name|List
 argument_list|<
@@ -9182,6 +9198,8 @@ argument_list|(
 name|ref
 argument_list|)
 decl_stmt|;
+try|try
+block|{
 if|if
 condition|(
 name|chain
@@ -9206,6 +9224,15 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|ChainException
+name|e
+parameter_list|)
+block|{
+comment|// This chain is currently not active ... ignore
 block|}
 block|}
 block|}

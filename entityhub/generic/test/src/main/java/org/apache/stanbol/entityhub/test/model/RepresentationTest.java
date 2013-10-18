@@ -21,9 +21,9 @@ end_package
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -33,9 +33,9 @@ end_import
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -45,9 +45,9 @@ end_import
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -57,9 +57,9 @@ end_import
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -69,9 +69,9 @@ end_import
 
 begin_import
 import|import static
-name|junit
+name|org
 operator|.
-name|framework
+name|junit
 operator|.
 name|Assert
 operator|.
@@ -5152,7 +5152,7 @@ operator|.
 name|getLanguage
 argument_list|()
 operator|.
-name|equals
+name|equalsIgnoreCase
 argument_list|(
 literal|"de"
 argument_list|)
@@ -5162,7 +5162,7 @@ operator|.
 name|getLanguage
 argument_list|()
 operator|.
-name|equals
+name|equalsIgnoreCase
 argument_list|(
 literal|"de-AT"
 argument_list|)

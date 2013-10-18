@@ -21,16 +21,6 @@ name|config
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|File
-import|;
-end_import
-
 begin_comment
 comment|/**  * Constants defines/used for Indexing.  * @author Rupert Westenthaler  *  */
 end_comment
@@ -101,6 +91,11 @@ name|String
 name|KEY_ENTITY_POST_PROCESSOR
 init|=
 literal|"entityPostProcessor"
+decl_stmt|;
+name|String
+name|KEY_FAIL_ON_ERROR_LOADING_RESOURCE
+init|=
+literal|"failOnErrorLoadingResource"
 decl_stmt|;
 block|}
 end_interface

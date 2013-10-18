@@ -1561,7 +1561,7 @@ name|put
 argument_list|(
 name|resource
 operator|.
-name|uri
+name|localName
 argument_list|,
 name|entityAnnotation
 argument_list|)

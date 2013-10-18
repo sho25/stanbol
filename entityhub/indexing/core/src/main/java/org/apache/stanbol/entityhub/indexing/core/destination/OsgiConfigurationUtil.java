@@ -1704,6 +1704,11 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
+name|builder
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 return|return;
 block|}
 name|Jar
@@ -1740,6 +1745,14 @@ name|e
 argument_list|)
 expr_stmt|;
 return|return;
+block|}
+finally|finally
+block|{
+name|builder
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 block|}
 try|try
 block|{

@@ -115,6 +115,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|commons
+operator|.
+name|lang
+operator|.
+name|StringUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|enhancer
@@ -346,7 +360,7 @@ name|textAnnotation
 parameter_list|)
 block|{
 name|String
-name|name
+name|selected
 init|=
 name|EnhancementEngineHelper
 operator|.
@@ -361,7 +375,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|name
+name|selected
 operator|==
 literal|null
 condition|)
@@ -383,13 +397,14 @@ return|return
 literal|null
 return|;
 block|}
+name|String
 name|name
-operator|=
-name|name
+init|=
+name|selected
 operator|.
 name|trim
 argument_list|()
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 name|name
@@ -407,6 +422,39 @@ operator|+
 literal|"an empty Stirng !"
 argument_list|,
 name|textAnnotation
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+comment|// remove punctuation form the search string
+name|name
+operator|=
+name|cleanupKeywords
+argument_list|(
+name|name
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|name
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Unable to process TextAnnotation {} because its selects "
+operator|+
+literal|"an stirng with punktations only (selected: {})!"
+argument_list|,
+name|textAnnotation
+argument_list|,
+name|selected
 argument_list|)
 expr_stmt|;
 return|return
@@ -451,17 +499,13 @@ return|return
 literal|null
 return|;
 block|}
-comment|// remove punctuation form the search string
 return|return
 operator|new
 name|NamedEntity
 argument_list|(
 name|textAnnotation
 argument_list|,
-name|cleanupKeywords
-argument_list|(
 name|name
-argument_list|)
 argument_list|,
 name|type
 argument_list|)

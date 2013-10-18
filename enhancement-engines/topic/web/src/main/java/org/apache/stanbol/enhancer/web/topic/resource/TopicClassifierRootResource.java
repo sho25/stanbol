@@ -22,22 +22,6 @@ package|;
 end_package
 
 begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|MediaType
-operator|.
-name|TEXT_HTML
-import|;
-end_import
-
-begin_import
 import|import
 name|java
 operator|.
@@ -54,6 +38,22 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|javax
+operator|.
+name|ws
+operator|.
+name|rs
+operator|.
+name|core
+operator|.
+name|MediaType
+operator|.
+name|TEXT_HTML
 import|;
 end_import
 
@@ -292,6 +292,8 @@ operator|.
 name|enhancer
 operator|.
 name|topic
+operator|.
+name|api
 operator|.
 name|TopicClassifier
 import|;

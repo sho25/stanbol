@@ -85,6 +85,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Arrays
 import|;
 end_import
@@ -315,10 +325,13 @@ parameter_list|()
 block|{
 comment|/*noinstances*/
 block|}
-comment|/**      * Validates Results of a Query (/find or /query requests) based on the      * data defined by the test case      * @param re the {@link RequestExecutor} used for the test case      * @param test the query test case      * @throws JSONException in case the {@link RequestExecutor#getContent()} are      * no valid JSON. NOTE that the contents are only parsed if the      * {@link QueryTestCase#getExpectedStatus()} is a 2xx status code.      */
+comment|/**      * Validates Results of a Query (/find or /query requests) based on the      * data defined by the test case      * @param re the {@link RequestExecutor} used for the test case      * @param test the query test case      * @throws JSONException in case the {@link RequestExecutor#getContent()} are      * no valid JSON. NOTE that the contents are only parsed if the      * {@link QueryTestCase#getExpectedStatus()} is a 2xx status code.      * @return in case of success the List of result Entity IDs      */
 specifier|public
 specifier|static
-name|void
+name|List
+argument_list|<
+name|String
+argument_list|>
 name|assertQueryResults
 parameter_list|(
 name|RequestExecutor
@@ -329,6 +342,14 @@ name|test
 parameter_list|)
 throws|throws
 name|JSONException
+block|{
+if|if
+condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
 block|{
 name|log
 operator|.
@@ -342,6 +363,7 @@ name|getContent
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 name|re
 operator|.
 name|assertStatus
@@ -369,7 +391,9 @@ name|expectsSuccess
 argument_list|()
 condition|)
 block|{
-return|return;
+return|return
+literal|null
+return|;
 comment|//no further checks for tests that expect failure
 block|}
 name|JSONObject
@@ -384,6 +408,29 @@ name|getContent
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Assert Results: {}"
+argument_list|,
+name|jso
+operator|.
+name|toString
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 name|JSONArray
 name|results
 init|=
@@ -503,6 +550,24 @@ comment|//iterate over the results
 comment|//General NOTE:
 comment|//  use opt**(..) methods to avoid JSON Exception. We want to parse
 comment|//  everything and than do asserts!
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|resultIds
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
+name|results
+operator|.
+name|length
+argument_list|()
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|int
@@ -558,6 +623,13 @@ name|assertNotNull
 argument_list|(
 literal|"ID missing for an Result"
 argument_list|,
+name|id
+argument_list|)
+expr_stmt|;
+name|resultIds
+operator|.
+name|add
+argument_list|(
 name|id
 argument_list|)
 expr_stmt|;
@@ -644,6 +716,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+return|return
+name|resultIds
+return|;
 block|}
 comment|/**      * Asserts that the Query is present in the response and if so returns the      * query      * @param content the returned content      * @return the query as contained in the response      * @throws JSONException on any Error while parsing the JSON query from the      * parsed content      */
 specifier|public

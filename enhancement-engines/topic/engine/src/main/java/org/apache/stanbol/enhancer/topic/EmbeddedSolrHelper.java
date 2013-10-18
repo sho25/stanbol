@@ -161,6 +161,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|solr
+operator|.
+name|core
+operator|.
+name|SolrResourceLoader
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|xml
 operator|.
 name|sax
@@ -420,20 +434,38 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// create the embedded server
+name|SolrResourceLoader
+name|loader
+init|=
+operator|new
+name|SolrResourceLoader
+argument_list|(
+name|solrFolder
+operator|.
+name|getAbsolutePath
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|CoreContainer
 name|coreContainer
 init|=
 operator|new
 name|CoreContainer
 argument_list|(
-name|solrFolder
-operator|.
-name|getAbsolutePath
-argument_list|()
-argument_list|,
-name|solrFile
+name|loader
 argument_list|)
 decl_stmt|;
+comment|//NOTE: with Solr 4.4 we need to call coreContainer.load() otherwise we
+comment|//would be affected by the issue stated at
+comment|//http://mail-archives.apache.org/mod_mbox/lucene-solr-user/201301.mbox/%3CB7B8B36F1A0BE24F842758C318E56E925EB334%40EXCHDB2.na1.ad.group%3E
+comment|//while this was introduced with 4.1 this only affects this code with 4.4
+comment|//as with an API change the methods implicitly calling load() where
+comment|//removed.
+name|coreContainer
+operator|.
+name|load
+argument_list|()
+expr_stmt|;
 name|CoreDescriptor
 name|coreDescriptor
 init|=
@@ -460,6 +492,7 @@ argument_list|(
 name|coreDescriptor
 argument_list|)
 decl_stmt|;
+comment|//        coreContainer.createAndLoad(solrHome, configFile)load();
 name|coreContainer
 operator|.
 name|register

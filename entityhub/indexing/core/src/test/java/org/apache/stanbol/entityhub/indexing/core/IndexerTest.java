@@ -20,6 +20,54 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -115,7 +163,9 @@ name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|Map
+operator|.
+name|Entry
 import|;
 end_import
 
@@ -125,9 +175,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-operator|.
-name|Entry
+name|Set
 import|;
 end_import
 
@@ -299,16 +347,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|After
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|AfterClass
 import|;
 end_import
@@ -350,18 +388,6 @@ operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|*
 import|;
 end_import
 

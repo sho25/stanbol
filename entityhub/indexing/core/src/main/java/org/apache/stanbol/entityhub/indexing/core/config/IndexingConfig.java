@@ -854,20 +854,6 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|DESTINATION_PATH
-init|=
-name|DEFAULT_ROOT_PATH
-operator|+
-name|File
-operator|.
-name|separatorChar
-operator|+
-name|DESTINATION_FOLDER
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|String
 name|DISTRIBUTION_FOLDER
 init|=
 literal|"dist"
@@ -876,21 +862,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|DISTRIBUTION_PATH
-init|=
-name|DEFAULT_ROOT_PATH
-operator|+
-name|File
-operator|.
-name|separatorChar
-operator|+
-name|DISTRIBUTION_FOLDER
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|String
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 init|=
 literal|"indexing.properties"
 decl_stmt|;
@@ -988,7 +960,7 @@ comment|//     * to the {@link File#getCanonicalFile()} counterparts as returned
 comment|//     * {@link #getRootFolder()} ... methods.
 comment|//     */
 comment|//    private final Map<File,File> canonicalDirs = new HashMap<File,File>();
-comment|/**      * The main indexing configuration as parsed form {@link #INDEXING_PROERTIES}      * file within the {@link #configDir}.      */
+comment|/**      * The main indexing configuration as parsed form {@link #INDEXING_PROPERTIES}      * file within the {@link #configDir}.      */
 specifier|private
 specifier|final
 name|Map
@@ -1512,7 +1484,7 @@ name|configuration
 operator|=
 name|loadConfig
 argument_list|(
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 argument_list|,
 literal|true
 argument_list|)
@@ -1540,7 +1512,7 @@ name|IllegalArgumentException
 argument_list|(
 literal|"Indexing Configuration '"
 operator|+
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 operator|+
 literal|"' is missing the required key "
 operator|+
@@ -1573,7 +1545,7 @@ name|IllegalArgumentException
 argument_list|(
 literal|"Invalid Indexing Configuration '"
 operator|+
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 operator|+
 literal|"': The value for the parameter"
 operator|+
@@ -1754,7 +1726,7 @@ name|KEY_INDEX_FIELD_CONFIG
 operator|+
 literal|"' in the '"
 operator|+
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 operator|+
 literal|"' to configure a different one!"
 argument_list|)
@@ -2730,7 +2702,7 @@ name|File
 operator|.
 name|separatorChar
 operator|+
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 argument_list|)
 expr_stmt|;
 block|}
@@ -2744,7 +2716,7 @@ name|File
 operator|.
 name|separatorChar
 operator|+
-name|INDEXING_PROERTIES
+name|INDEXING_PROPERTIES
 expr_stmt|;
 block|}
 name|URL
@@ -3431,6 +3403,63 @@ name|toString
 argument_list|()
 else|:
 literal|null
+return|;
+block|}
+comment|/**      * Getter for the failOnError as configured by the {@link IndexingConstants#KEY_FAIL_ON_ERROR_LOADING_RESOURCE}      * by the main indexing configuration.      * @return the boolean value of the failOnError parameter      */
+specifier|public
+name|boolean
+name|isFailOnError
+parameter_list|()
+block|{
+comment|//by default failOnError is false to continue execution of the indexing tool
+name|boolean
+name|failOnError
+init|=
+literal|false
+decl_stmt|;
+name|Object
+name|value
+init|=
+name|configuration
+operator|.
+name|get
+argument_list|(
+name|IndexingConstants
+operator|.
+name|KEY_FAIL_ON_ERROR_LOADING_RESOURCE
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|value
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|failOnError
+operator|=
+name|Boolean
+operator|.
+name|parseBoolean
+argument_list|(
+name|value
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|failOnError
 return|;
 block|}
 comment|/**      * The {@link ScoreNormaliser} as configured by the {@link IndexingConstants#KEY_SCORE_NORMALIZER}      * by the main indexing configuration.      * @return the configured {@link ScoreNormaliser} or a {@link DefaultNormaliser} if      * this configuration is missing.      */
