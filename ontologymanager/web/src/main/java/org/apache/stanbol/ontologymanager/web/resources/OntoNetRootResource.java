@@ -4957,7 +4957,7 @@ argument_list|(
 operator|new
 name|Viewable
 argument_list|(
-literal|"/imports/409"
+literal|"/imports/409.ftl"
 argument_list|,
 name|this
 argument_list|)
