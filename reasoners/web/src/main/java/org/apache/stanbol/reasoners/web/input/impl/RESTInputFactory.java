@@ -99,11 +99,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
+name|servicesapi
 operator|.
-name|api
+name|scope
 operator|.
-name|ONManager
+name|ScopeManager
 import|;
 end_import
 
@@ -312,7 +312,7 @@ name|RESTInputFactory
 implements|implements
 name|ReasoningServiceInputFactory
 block|{
-name|ONManager
+name|ScopeManager
 name|onm
 decl_stmt|;
 name|SessionManager
@@ -339,7 +339,7 @@ decl_stmt|;
 specifier|public
 name|RESTInputFactory
 parameter_list|(
-name|ONManager
+name|ScopeManager
 name|onm
 parameter_list|,
 name|SessionManager

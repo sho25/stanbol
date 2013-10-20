@@ -35,25 +35,9 @@ name|TEXT_HTML
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
 
 begin_import
 import|import
@@ -112,16 +96,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
 import|;
 end_import
 
@@ -222,6 +196,8 @@ operator|.
 name|stanbol
 operator|.
 name|commons
+operator|.
+name|web
 operator|.
 name|viewable
 operator|.
@@ -389,10 +365,7 @@ specifier|private
 name|UriInfo
 name|info
 decl_stmt|;
-specifier|private
-name|ServletContext
-name|context
-decl_stmt|;
+comment|//    private ServletContext context;
 specifier|private
 name|HttpHeaders
 name|headers
@@ -402,9 +375,6 @@ name|ResponseTaskBuilder
 parameter_list|(
 name|UriInfo
 name|info
-parameter_list|,
-name|ServletContext
-name|context
 parameter_list|,
 name|HttpHeaders
 name|headers
@@ -416,12 +386,7 @@ name|info
 operator|=
 name|info
 expr_stmt|;
-name|this
-operator|.
-name|context
-operator|=
-name|context
-expr_stmt|;
+comment|//        this.context = context;
 name|this
 operator|.
 name|headers
@@ -459,15 +424,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(context, rb, headers);
 return|return
 name|rb
 operator|.
@@ -513,8 +470,6 @@ argument_list|,
 operator|new
 name|ReasoningPrettyResultResource
 argument_list|(
-name|context
-argument_list|,
 name|info
 argument_list|,
 name|out
@@ -535,15 +490,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//            addCORSOrigin(context, rb, headers);
 return|return
 name|rb
 operator|.
@@ -565,15 +512,7 @@ argument_list|(
 name|object
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//            addCORSOrigin(context, rb, headers);
 return|return
 name|rb
 operator|.
@@ -906,8 +845,6 @@ argument_list|,
 operator|new
 name|ReasoningPrettyResultResource
 argument_list|(
-name|context
-argument_list|,
 name|info
 argument_list|,
 literal|"The input is consistent :)"
@@ -928,15 +865,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//                addCORSOrigin(context, rb, headers);
 return|return
 name|rb
 operator|.
@@ -979,15 +908,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//                addCORSOrigin(context, rb, headers);
 name|rb
 operator|.
 name|entity
@@ -1000,8 +921,6 @@ argument_list|,
 operator|new
 name|ReasoningPrettyResultResource
 argument_list|(
-name|context
-argument_list|,
 name|info
 argument_list|,
 literal|"The input is NOT consistent :("
@@ -1043,15 +962,7 @@ argument_list|(
 literal|"The input is consistent :)"
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//                addCORSOrigin(context, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1081,15 +992,7 @@ operator|.
 name|CONFLICT
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|context
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//                addCORSOrigin(context, rb, headers);
 return|return
 name|rb
 operator|.
