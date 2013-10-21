@@ -19,75 +19,25 @@ name|resources
 package|;
 end_package
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|DELETE
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.DELETE;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|GET
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.GET;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|OPTIONS
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.OPTIONS;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|POST
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.POST;
+end_comment
 
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|PUT
-import|;
-end_import
+begin_comment
+comment|//import static javax.ws.rs.HttpMethod.PUT;
+end_comment
 
 begin_import
 import|import static
@@ -256,46 +206,6 @@ operator|.
 name|Status
 operator|.
 name|NOT_FOUND
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|addCORSOrigin
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
-name|CorsHelper
-operator|.
-name|enableCORS
 import|;
 end_import
 
@@ -504,6 +414,16 @@ operator|.
 name|io
 operator|.
 name|BufferedInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|ByteArrayInputStream
 import|;
 end_import
 
@@ -891,6 +811,42 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|jaxrs
+operator|.
+name|utils
+operator|.
+name|form
+operator|.
+name|FormFile
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|jaxrs
+operator|.
+name|utils
+operator|.
+name|form
+operator|.
+name|MultiPartBody
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
@@ -941,15 +897,61 @@ name|org
 operator|.
 name|apache
 operator|.
-name|stanbol
+name|felix
 operator|.
-name|commons
+name|scr
 operator|.
-name|owl
+name|annotations
 operator|.
-name|util
+name|Component
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|OWLUtils
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Property
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Service
 import|;
 end_import
 
@@ -963,11 +965,17 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|viewable
+name|owl
 operator|.
-name|Viewable
+name|util
+operator|.
+name|OWLUtils
 import|;
 end_import
+
+begin_comment
+comment|//import org.apache.stanbol.commons.viewable.Viewable;
+end_comment
 
 begin_import
 import|import
@@ -981,9 +989,9 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|ContextHelper
+name|Viewable
 import|;
 end_import
 
@@ -1451,53 +1459,59 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|BodyPart
-import|;
-end_import
+begin_comment
+comment|//
+end_comment
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataBodyPart
-import|;
-end_import
+begin_comment
+comment|//import com.sun.jersey.multipart.BodyPart;
+end_comment
 
-begin_import
-import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|multipart
-operator|.
-name|FormDataMultiPart
-import|;
-end_import
+begin_comment
+comment|//import com.sun.jersey.multipart.FormDataBodyPart;
+end_comment
+
+begin_comment
+comment|//import com.sun.jersey.multipart.FormDataMultiPart;
+end_comment
+
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
+end_comment
+
+begin_comment
+comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
+end_comment
+
+begin_comment
+comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
+end_comment
 
 begin_comment
 comment|/**  * The REST resource of an OntoNet {@link Session} whose identifier is known.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
+annotation|@
+name|Component
+annotation|@
+name|Service
+argument_list|(
+name|Object
+operator|.
+name|class
+argument_list|)
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+literal|"javax.ws.rs"
+argument_list|,
+name|boolValue
+operator|=
+literal|true
+argument_list|)
 annotation|@
 name|Path
 argument_list|(
@@ -1521,10 +1535,14 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|ScopeManager
 name|onMgr
 decl_stmt|;
+annotation|@
+name|Reference
 specifier|protected
 name|OntologyProvider
 argument_list|<
@@ -1533,11 +1551,15 @@ argument_list|>
 name|ontologyProvider
 decl_stmt|;
 comment|/*      * Placeholder for the RegistryManager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|RegistryManager
 name|regMgr
 decl_stmt|;
 comment|/*      * Placeholder for the session manager to be fetched from the servlet context.      */
+annotation|@
+name|Reference
 specifier|protected
 name|SessionManager
 name|sesMgr
@@ -1548,113 +1570,17 @@ name|session
 decl_stmt|;
 specifier|public
 name|SessionResource
-parameter_list|(
-annotation|@
-name|PathParam
-argument_list|(
-name|value
-operator|=
-literal|"id"
-argument_list|)
-name|String
-name|sessionId
-parameter_list|,
-annotation|@
-name|Context
-name|ServletContext
-name|servletContext
-parameter_list|)
+parameter_list|()
 block|{
-name|this
-operator|.
-name|servletContext
-operator|=
-name|servletContext
-expr_stmt|;
-name|this
-operator|.
-name|sesMgr
-operator|=
-operator|(
-name|SessionManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|SessionManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|regMgr
-operator|=
-operator|(
-name|RegistryManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|RegistryManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|ontologyProvider
-operator|=
-operator|(
-name|OntologyProvider
-argument_list|<
-name|TcProvider
-argument_list|>
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|OntologyProvider
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|onMgr
-operator|=
-operator|(
-name|ScopeManager
-operator|)
-name|ContextHelper
-operator|.
-name|getServiceFromContext
-argument_list|(
-name|ScopeManager
-operator|.
-name|class
-argument_list|,
-name|servletContext
-argument_list|)
-expr_stmt|;
-name|session
-operator|=
-name|sesMgr
-operator|.
-name|getSession
-argument_list|(
-name|sessionId
-argument_list|)
-expr_stmt|;
+comment|//        public SessionResource(@PathParam(value = "id") String sessionId, @Context ServletContext servletContext) {
+comment|//        this.servletContext = servletContext;
+comment|//        this.sesMgr = (SessionManager) ContextHelper.getServiceFromContext(SessionManager.class,
+comment|//            servletContext);
+comment|//        this.regMgr = (RegistryManager) ContextHelper.getServiceFromContext(RegistryManager.class,
+comment|//            servletContext);
+comment|//        this.ontologyProvider = (OntologyProvider<TcProvider>) ContextHelper.getServiceFromContext(
+comment|//            OntologyProvider.class, servletContext);
+comment|//        this.onMgr = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class, servletContext);
 block|}
 annotation|@
 name|GET
@@ -1677,6 +1603,16 @@ specifier|public
 name|Response
 name|asOntologyGraph
 parameter_list|(
+annotation|@
+name|PathParam
+argument_list|(
+name|value
+operator|=
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
 annotation|@
 name|PathParam
 argument_list|(
@@ -1704,6 +1640,15 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -1756,15 +1701,7 @@ name|prefix
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1794,6 +1731,16 @@ parameter_list|(
 annotation|@
 name|PathParam
 argument_list|(
+name|value
+operator|=
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
+annotation|@
+name|PathParam
+argument_list|(
 literal|"scopeid"
 argument_list|)
 name|String
@@ -1818,6 +1765,15 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -1897,15 +1853,7 @@ name|prefix
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -1937,6 +1885,16 @@ parameter_list|(
 annotation|@
 name|PathParam
 argument_list|(
+name|value
+operator|=
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
+annotation|@
+name|PathParam
+argument_list|(
 literal|"scopeid"
 argument_list|)
 name|String
@@ -1961,6 +1919,15 @@ name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -2013,15 +1980,7 @@ name|prefix
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2044,11 +2003,7 @@ argument_list|)
 name|String
 name|sessionId
 parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
+comment|//                                  @Context UriInfo uriInfo,
 annotation|@
 name|Context
 name|HttpHeaders
@@ -2112,15 +2067,7 @@ name|getRequestUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2143,17 +2090,22 @@ argument_list|)
 name|String
 name|sessionId
 parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
+comment|//                                  @Context UriInfo uriInfo,
 annotation|@
 name|Context
 name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -2190,15 +2142,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2220,6 +2164,14 @@ name|Response
 name|emptyPost
 parameter_list|(
 annotation|@
+name|PathParam
+argument_list|(
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
+annotation|@
 name|Context
 name|HttpHeaders
 name|headers
@@ -2230,6 +2182,15 @@ operator|.
 name|debug
 argument_list|(
 literal|" post(no data)"
+argument_list|)
+expr_stmt|;
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
 argument_list|)
 expr_stmt|;
 for|for
@@ -2287,15 +2248,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2470,6 +2423,14 @@ name|Response
 name|getHtmlInfo
 parameter_list|(
 annotation|@
+name|PathParam
+argument_list|(
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
+annotation|@
 name|Context
 name|HttpHeaders
 name|headers
@@ -2478,6 +2439,15 @@ block|{
 name|ResponseBuilder
 name|rb
 decl_stmt|;
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -2522,15 +2492,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2684,25 +2646,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|POST
-argument_list|,
-name|PUT
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, POST, PUT, DELETE, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -2735,21 +2679,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|enableCORS
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|,
-name|GET
-argument_list|,
-name|DELETE
-argument_list|,
-name|OPTIONS
-argument_list|)
-expr_stmt|;
+comment|//        enableCORS(servletContext, rb, headers, GET, DELETE, OPTIONS);
 return|return
 name|rb
 operator|.
@@ -2815,17 +2745,22 @@ argument_list|)
 name|boolean
 name|merge
 parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
+comment|//                                            @Context UriInfo uriInfo,
 annotation|@
 name|Context
 name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -2902,15 +2837,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2974,11 +2901,7 @@ argument_list|)
 name|boolean
 name|merge
 parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
+comment|//                                            @Context UriInfo uriInfo,
 annotation|@
 name|Context
 name|HttpHeaders
@@ -2988,6 +2911,15 @@ block|{
 name|ResponseBuilder
 name|rb
 decl_stmt|;
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -3118,15 +3050,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3192,17 +3116,22 @@ argument_list|)
 name|boolean
 name|merge
 parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
+comment|//                                          @Context UriInfo uriInfo,
 annotation|@
 name|Context
 name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -3279,15 +3208,7 @@ argument_list|(
 name|NOT_FOUND
 argument_list|)
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3482,8 +3403,6 @@ argument_list|,
 operator|new
 name|OntologyPrettyPrintResource
 argument_list|(
-name|servletContext
-argument_list|,
 name|uriInfo
 argument_list|,
 name|out
@@ -3524,15 +3443,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3570,11 +3481,7 @@ argument_list|)
 name|String
 name|ontologyId
 parameter_list|,
-annotation|@
-name|Context
-name|UriInfo
-name|uriInfo
-parameter_list|,
+comment|//                                          @Context UriInfo uriInfo,
 annotation|@
 name|Context
 name|HttpHeaders
@@ -3584,6 +3491,15 @@ block|{
 name|ResponseBuilder
 name|rb
 decl_stmt|;
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -3695,15 +3611,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3747,6 +3655,14 @@ name|InputStream
 name|content
 parameter_list|,
 annotation|@
+name|PathParam
+argument_list|(
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
+annotation|@
 name|Context
 name|HttpHeaders
 name|headers
@@ -3763,6 +3679,15 @@ decl_stmt|;
 name|ResponseBuilder
 name|rb
 decl_stmt|;
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 name|String
 name|mt
 init|=
@@ -4048,15 +3973,7 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4084,11 +4001,28 @@ name|String
 name|iri
 parameter_list|,
 annotation|@
+name|PathParam
+argument_list|(
+literal|"id"
+argument_list|)
+name|String
+name|sessionId
+parameter_list|,
+annotation|@
 name|Context
 name|HttpHeaders
 name|headers
 parameter_list|)
 block|{
+name|session
+operator|=
+name|sesMgr
+operator|.
+name|getSession
+argument_list|(
+name|sessionId
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|session
@@ -4165,15 +4099,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4201,7 +4127,7 @@ specifier|public
 name|Response
 name|postOntology
 parameter_list|(
-name|FormDataMultiPart
+name|MultiPartBody
 name|data
 parameter_list|,
 annotation|@
@@ -4247,7 +4173,7 @@ name|library
 init|=
 literal|null
 decl_stmt|;
-name|File
+name|FormFile
 name|file
 init|=
 literal|null
@@ -4279,102 +4205,104 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-for|for
-control|(
-name|BodyPart
-name|bpart
-range|:
+comment|//        for (BodyPart bpart : data.getBodyParts()) {
+comment|//            log.debug("Found body part of type {}", bpart.getClass());
+comment|//            if (bpart instanceof FormDataBodyPart) {
+comment|//                FormDataBodyPart dbp = (FormDataBodyPart) bpart;
+comment|//                String name = dbp.getName();
+comment|//                log.debug("Detected form parameter \"{}\".", name);
+comment|//                if (name.equals("file")) {
+comment|//                    file = bpart.getEntityAs(File.class);
+comment|//                } else {
+comment|//                    String value = dbp.getValue();
+comment|//                    if (name.equals("format")&& !value.equals("auto")) {
+comment|//                        log.debug(" -- Expected format : {}", value);
+comment|//                        format = value;
+comment|//                    } else if (name.equals("url")) try {
+comment|//                        URI.create(value); // To throw 400 if malformed.
+comment|//                        location = IRI.create(value);
+comment|//                        log.debug(" -- Will load ontology from URL : {}", location);
+comment|//                    } catch (Exception ex) {
+comment|//                        log.error("Malformed IRI for " + value, ex);
+comment|//                        throw new WebApplicationException(ex, BAD_REQUEST);
+comment|//                    }
+comment|//                    else if (name.equals("library")&& !"null".equals(value)) try {
+comment|//                        log.debug(" -- Library ID : {}", value);
+comment|//                        URI.create(value); // To throw 400 if malformed.
+comment|//                        library = IRI.create(value);
+comment|//                        log.debug(" ---- (is well-formed URI)");
+comment|//                    } catch (Exception ex) {
+comment|//                        log.error("Malformed IRI for " + value, ex);
+comment|//                        throw new WebApplicationException(ex, BAD_REQUEST);
+comment|//                    }
+comment|//                    else if (name.equals("stored")&& !"null".equals(value)) {
+comment|//                        log.info("Request to manage ontology with key {}", value);
+comment|//                        keys.add(value);
+comment|//                    } else if (name.equals("scope")) {
+comment|//                        log.info("Request to append scope \"{}\".", value);
+comment|//                        if (toAppend == null) toAppend = new HashSet<String>();
+comment|//                        toAppend.add(value);
+comment|//                    }
+comment|//                }
+comment|//            }
+comment|//        }
+if|if
+condition|(
 name|data
 operator|.
-name|getBodyParts
-argument_list|()
-control|)
-block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Found body part of type {}"
-argument_list|,
-name|bpart
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|bpart
-operator|instanceof
-name|FormDataBodyPart
-condition|)
-block|{
-name|FormDataBodyPart
-name|dbp
-init|=
-operator|(
-name|FormDataBodyPart
-operator|)
-name|bpart
-decl_stmt|;
-name|String
-name|name
-init|=
-name|dbp
-operator|.
-name|getName
-argument_list|()
-decl_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Detected form parameter \"{}\"."
-argument_list|,
-name|name
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|name
-operator|.
-name|equals
+name|getFormFileParameterValues
 argument_list|(
 literal|"file"
 argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
 condition|)
 block|{
 name|file
 operator|=
-name|bpart
+name|data
 operator|.
-name|getEntityAs
+name|getFormFileParameterValues
 argument_list|(
-name|File
-operator|.
-name|class
+literal|"file"
 argument_list|)
+index|[
+literal|0
+index|]
 expr_stmt|;
 block|}
-else|else
+comment|// else {
+if|if
+condition|(
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"format"
+argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
+condition|)
 block|{
 name|String
 name|value
 init|=
-name|dbp
+name|data
 operator|.
-name|getValue
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|name
-operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"format"
 argument_list|)
-operator|&&
+index|[
+literal|0
+index|]
+decl_stmt|;
+if|if
+condition|(
 operator|!
 name|value
 operator|.
@@ -4384,30 +4312,39 @@ literal|"auto"
 argument_list|)
 condition|)
 block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- Expected format : {}"
-argument_list|,
-name|value
-argument_list|)
-expr_stmt|;
 name|format
 operator|=
 name|value
 expr_stmt|;
 block|}
-elseif|else
+block|}
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"url"
 argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
 condition|)
+block|{
+name|String
+name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"url"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
 try|try
 block|{
 name|URI
@@ -4427,15 +4364,6 @@ argument_list|(
 name|value
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- Will load ontology from URL : {}"
-argument_list|,
-name|location
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -4447,7 +4375,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Malformed IRI for "
+literal|"Malformed IRI for param url "
 operator|+
 name|value
 argument_list|,
@@ -4464,35 +4392,36 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-elseif|else
+block|}
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"library"
 argument_list|)
-operator|&&
-operator|!
-literal|"null"
 operator|.
-name|equals
-argument_list|(
-name|value
-argument_list|)
+name|length
+operator|>
+literal|0
 condition|)
+block|{
+name|String
+name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"library"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
 try|try
 block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- Library ID : {}"
-argument_list|,
-name|value
-argument_list|)
-expr_stmt|;
 name|URI
 operator|.
 name|create
@@ -4510,13 +4439,6 @@ argument_list|(
 name|value
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" ---- (is well-formed URI)"
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -4528,7 +4450,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Malformed IRI for "
+literal|"Malformed IRI for param library "
 operator|+
 name|value
 argument_list|,
@@ -4545,34 +4467,34 @@ name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
-elseif|else
+block|}
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"stored"
 argument_list|)
-operator|&&
-operator|!
-literal|"null"
 operator|.
-name|equals
-argument_list|(
-name|value
-argument_list|)
+name|length
+operator|>
+literal|0
 condition|)
 block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Request to manage ontology with key {}"
-argument_list|,
+name|String
 name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"stored"
 argument_list|)
-expr_stmt|;
+index|[
+literal|0
+index|]
+decl_stmt|;
 name|keys
 operator|.
 name|add
@@ -4581,17 +4503,33 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-elseif|else
 if|if
 condition|(
-name|name
+name|data
 operator|.
-name|equals
+name|getTextParameterValues
 argument_list|(
 literal|"scope"
 argument_list|)
+operator|.
+name|length
+operator|>
+literal|0
 condition|)
 block|{
+name|String
+name|value
+init|=
+name|data
+operator|.
+name|getTextParameterValues
+argument_list|(
+literal|"scope"
+argument_list|)
+index|[
+literal|0
+index|]
+decl_stmt|;
 name|log
 operator|.
 name|info
@@ -4607,6 +4545,7 @@ name|toAppend
 operator|==
 literal|null
 condition|)
+block|{
 name|toAppend
 operator|=
 operator|new
@@ -4616,6 +4555,7 @@ name|String
 argument_list|>
 argument_list|()
 expr_stmt|;
+block|}
 name|toAppend
 operator|.
 name|add
@@ -4624,25 +4564,12 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-block|}
-block|}
 name|boolean
 name|fileOk
 init|=
 name|file
 operator|!=
 literal|null
-operator|&&
-name|file
-operator|.
-name|canRead
-argument_list|()
-operator|&&
-name|file
-operator|.
-name|exists
-argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -4746,9 +4673,12 @@ operator|new
 name|BufferedInputStream
 argument_list|(
 operator|new
-name|FileInputStream
+name|ByteArrayInputStream
 argument_list|(
 name|file
+operator|.
+name|getContent
+argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -4887,9 +4817,12 @@ operator|new
 name|BufferedInputStream
 argument_list|(
 operator|new
-name|FileInputStream
+name|ByteArrayInputStream
 argument_list|(
 name|file
+operator|.
+name|getContent
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5506,15 +5439,7 @@ comment|// log.error("Nothing to do with session {}.", session.getID());
 comment|// throw new WebApplicationException(BAD_REQUEST);
 comment|// }
 comment|// rb.header(HttpHeaders.CONTENT_TYPE, TEXT_HTML + "; charset=utf-8");
-name|addCORSOrigin
-argument_list|(
-name|servletContext
-argument_list|,
-name|rb
-argument_list|,
-name|headers
-argument_list|)
-expr_stmt|;
+comment|//        addCORSOrigin(servletContext, rb, headers);
 name|log
 operator|.
 name|info

@@ -759,8 +759,6 @@ argument_list|()
 condition|;
 control|)
 block|{
-try|try
-block|{
 name|ValueTypeParser
 name|vts
 init|=
@@ -826,38 +824,6 @@ name|getType
 argument_list|()
 argument_list|,
 name|vts
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-catch|catch
-parameter_list|(
-name|NoClassDefFoundError
-name|e
-parameter_list|)
-block|{
-comment|//ignore services that can not be loaded
-comment|//e.g. when mixing different version of the stanbol.enhancer.nlp
-comment|//and the stanbol.enhancer.nlp-json module
-comment|//It is better to throw an exception if an Node for the failed
-comment|//ValueTypeParser appears in the JSON as when loading all
-comment|//registered services
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unable to load a ValueTypeParser service because class '"
-operator|+
-name|e
-operator|.
-name|getMessage
-argument_list|()
-operator|+
-literal|" could not be loaded! This may happen if the "
-operator|+
-literal|"classpath mixes different versions of o.a.stanbol.enhancer.nlp* "
-operator|+
-literal|"modules!"
 argument_list|)
 expr_stmt|;
 block|}

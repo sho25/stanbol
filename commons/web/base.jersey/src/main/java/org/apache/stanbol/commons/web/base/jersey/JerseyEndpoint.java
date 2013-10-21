@@ -365,24 +365,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|sun
-operator|.
-name|jersey
-operator|.
-name|spi
-operator|.
-name|container
-operator|.
-name|servlet
-operator|.
-name|ServletContainer
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -459,24 +441,6 @@ name|web
 operator|.
 name|base
 operator|.
-name|DefaultApplication
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|commons
-operator|.
-name|web
-operator|.
-name|base
-operator|.
 name|LinkResource
 import|;
 end_import
@@ -532,6 +496,34 @@ operator|.
 name|base
 operator|.
 name|WebFragment
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|glassfish
+operator|.
+name|jersey
+operator|.
+name|server
+operator|.
+name|ResourceConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|glassfish
+operator|.
+name|jersey
+operator|.
+name|servlet
+operator|.
+name|ServletContainer
 import|;
 end_import
 
@@ -690,6 +682,12 @@ name|Reference
 specifier|private
 name|Parser
 name|parser
+decl_stmt|;
+annotation|@
+name|Reference
+specifier|private
+name|EditableLayoutConfiguration
+name|layoutConfiguration
 decl_stmt|;
 comment|/**      * The origins allowed for multi-host requests      */
 annotation|@
@@ -1230,14 +1228,7 @@ operator|==
 literal|null
 condition|)
 block|{
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" ... can not init Jersey Endpoint - Component not yet activated!"
-argument_list|)
-expr_stmt|;
-comment|//throw new IllegalStateException("Null ComponentContext, not activated?");
+comment|//we have not yet been activated
 return|return;
 block|}
 comment|//temporary workaround for STANBOL-1073
@@ -1263,6 +1254,23 @@ literal|"text/turtle"
 argument_list|)
 expr_stmt|;
 comment|//end of STANBOL-1073 work around
+if|if
+condition|(
+name|componentContext
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... can not init Jersey Endpoint - Component not yet activated!"
+argument_list|)
+expr_stmt|;
+comment|//throw new IllegalStateException("Null ComponentContext, not activated?");
+return|return;
+block|}
 name|shutdownJersey
 argument_list|()
 expr_stmt|;
@@ -1457,7 +1465,12 @@ init|=
 operator|new
 name|ServletContainer
 argument_list|(
+name|ResourceConfig
+operator|.
+name|forApplication
+argument_list|(
 name|app
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|Bundle
@@ -1518,61 +1531,46 @@ name|getBundleContext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|servletContext
+name|layoutConfiguration
 operator|.
-name|setAttribute
+name|setRootUrl
 argument_list|(
-name|BaseStanbolResource
-operator|.
-name|ROOT_URL
-argument_list|,
 name|applicationAlias
 argument_list|)
 expr_stmt|;
-name|servletContext
+comment|//servletContext.setAttribute(BaseStanbolResource.ROOT_URL, applicationAlias);
+name|layoutConfiguration
 operator|.
-name|setAttribute
+name|setStaticResourcesRootUrl
 argument_list|(
-name|BaseStanbolResource
-operator|.
-name|STATIC_RESOURCES_ROOT_URL
-argument_list|,
 name|staticUrlRoot
 argument_list|)
 expr_stmt|;
-name|servletContext
+comment|//servletContext.setAttribute(BaseStanbolResource.STATIC_RESOURCES_ROOT_URL, staticUrlRoot);
+name|layoutConfiguration
 operator|.
-name|setAttribute
+name|setLinkResources
 argument_list|(
-name|BaseStanbolResource
-operator|.
-name|LINK_RESOURCES
-argument_list|,
 name|linkResources
 argument_list|)
 expr_stmt|;
-name|servletContext
+comment|//servletContext.setAttribute(BaseStanbolResource.LINK_RESOURCES, linkResources);
+name|layoutConfiguration
 operator|.
-name|setAttribute
+name|setScriptResources
 argument_list|(
-name|BaseStanbolResource
-operator|.
-name|SCRIPT_RESOURCES
-argument_list|,
 name|scriptResources
 argument_list|)
 expr_stmt|;
-name|servletContext
+comment|//servletContext.setAttribute(BaseStanbolResource.SCRIPT_RESOURCES, scriptResources);
+name|layoutConfiguration
 operator|.
-name|setAttribute
+name|setNavigationsLinks
 argument_list|(
-name|BaseStanbolResource
-operator|.
-name|NAVIGATION_LINKS
-argument_list|,
 name|navigationLinks
 argument_list|)
 expr_stmt|;
+comment|//servletContext.setAttribute(BaseStanbolResource.NAVIGATION_LINKS, navigationLinks);
 name|servletContext
 operator|.
 name|setAttribute

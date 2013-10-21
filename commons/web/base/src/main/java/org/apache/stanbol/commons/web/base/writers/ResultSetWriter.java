@@ -449,6 +449,14 @@ begin_comment
 comment|/**  * MessageBodyWriter for a ResultSet.  * Clerezza does provide such a writer, but it seems to require  * quite a lot of Clerezza dependencies that we don't really need.  */
 end_comment
 
+begin_comment
+comment|//TODO check if clerezza rdf.jaxrs prvoder fits the purpose?
+end_comment
+
+begin_comment
+comment|//make component/service
+end_comment
+
 begin_class
 annotation|@
 name|Provider

@@ -91,11 +91,11 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
+name|servicesapi
 operator|.
-name|api
+name|scope
 operator|.
-name|ONManager
+name|Scope
 import|;
 end_import
 
@@ -113,7 +113,7 @@ name|servicesapi
 operator|.
 name|scope
 operator|.
-name|Scope
+name|ScopeManager
 import|;
 end_import
 
@@ -429,7 +429,7 @@ name|String
 name|sessionId
 decl_stmt|;
 specifier|private
-name|ONManager
+name|ScopeManager
 name|onManager
 decl_stmt|;
 specifier|private
@@ -440,7 +440,7 @@ comment|/**      * Contructor, if the input is a Scope      *       * @param onM
 specifier|public
 name|OntologyManagerInputProvider
 parameter_list|(
-name|ONManager
+name|ScopeManager
 name|onManager
 parameter_list|,
 name|String
@@ -463,7 +463,7 @@ comment|/**      * Constructor, if the input are a Scope and a Session      *   
 specifier|public
 name|OntologyManagerInputProvider
 parameter_list|(
-name|ONManager
+name|ScopeManager
 name|onManager
 parameter_list|,
 name|SessionManager

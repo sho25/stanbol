@@ -1055,7 +1055,9 @@ init|=
 name|uriInfo
 operator|.
 name|getQueryParameters
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 decl_stmt|;
 specifier|final
 name|List
@@ -1212,7 +1214,9 @@ init|=
 name|uriInfo
 operator|.
 name|getQueryParameters
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 decl_stmt|;
 specifier|final
 name|List
