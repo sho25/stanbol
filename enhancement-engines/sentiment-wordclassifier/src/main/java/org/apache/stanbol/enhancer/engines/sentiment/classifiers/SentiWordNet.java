@@ -113,44 +113,6 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|TreeMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|concurrent
-operator|.
-name|locks
-operator|.
-name|ReadWriteLock
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|concurrent
-operator|.
-name|locks
-operator|.
-name|ReentrantReadWriteLock
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
@@ -416,7 +378,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A word classifier for the english language based on SentiWordNet. Reads in a SentiWordNet file and  * represents mappings from word to sentiment score between -1 and 1 in a hashmap.  *<p/>  * Future versions might make use of a disk-based storage of the hashmap to improve memory performance.  *<p/>  * Note that a license for SentiWordNet is required if you intend to use the classifier in commercial  * settings.  *<p/>  * @author Sebastian Schaffert  * @autor Rupert Westenthaler  */
+comment|/**  * A word classifier for the english language based on SentiWordNet. Reads in a SentiWordNet file and  * represents mappings from word to sentiment score between -1 and 1 in a hashmap.  *<p/>  * Future versions might make use of a disk-based storage of the hashmap to improve memory performance.  *<p/>  * Note that a license for SentiWordNet is required if you intend to use the classifier in commercial  * settings.  *<p/>  * @author Sebastian Schaffert  * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
