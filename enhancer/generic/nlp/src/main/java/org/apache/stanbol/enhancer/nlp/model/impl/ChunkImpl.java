@@ -57,6 +57,24 @@ name|Span
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|nlp
+operator|.
+name|model
+operator|.
+name|SpanTypeEnum
+import|;
+end_import
+
 begin_class
 specifier|public
 specifier|final

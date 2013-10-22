@@ -55,27 +55,6 @@ argument_list|<
 name|Span
 argument_list|>
 block|{
-comment|/**      * Enumeration over different types - or roles - spans defined for an      * {@link AnalysedText} may play.      */
-specifier|public
-specifier|static
-enum|enum
-name|SpanTypeEnum
-block|{
-comment|/**          * The Text as a whole          */
-name|Text
-block|,
-comment|/**          * An section of the text (chapter, page, paragraph ...). NOTE: this          * does NOT define types of sections.          */
-name|TextSection
-block|,
-comment|/**          * An Sentence          */
-name|Sentence
-block|,
-comment|/**          * A Chunk (e.g. a Noun Phrase) NOTE: this does NOT define types of          * Chunks          */
-name|Chunk
-block|,
-comment|/**          * A Token (e.g. a noun, verb, punctuation) NOTE: this does NOT define          * types of Tokens          */
-name|Token
-block|;     }
 comment|/**      * The type of the Span      * @return      */
 name|SpanTypeEnum
 name|getType

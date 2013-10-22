@@ -307,7 +307,7 @@ name|nlp
 operator|.
 name|model
 operator|.
-name|Token
+name|SpanTypeEnum
 import|;
 end_import
 
@@ -325,9 +325,7 @@ name|nlp
 operator|.
 name|model
 operator|.
-name|Span
-operator|.
-name|SpanTypeEnum
+name|Token
 import|;
 end_import
 
