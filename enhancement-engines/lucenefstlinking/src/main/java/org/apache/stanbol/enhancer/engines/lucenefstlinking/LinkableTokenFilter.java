@@ -395,8 +395,6 @@ name|nlp
 operator|.
 name|model
 operator|.
-name|Span
-operator|.
 name|SpanTypeEnum
 import|;
 end_import
