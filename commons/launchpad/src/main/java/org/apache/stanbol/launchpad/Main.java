@@ -106,6 +106,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -146,6 +156,15 @@ name|String
 name|NOSECURITYARG
 init|=
 literal|"-no-security"
+decl_stmt|;
+comment|/**      * this      */
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|PRINTHELPARG
+init|=
+literal|"-h"
 decl_stmt|;
 comment|/**      * @param args      */
 specifier|public
@@ -220,6 +239,27 @@ name|args
 argument_list|)
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|argsList
+operator|.
+name|contains
+argument_list|(
+name|PRINTHELPARG
+argument_list|)
+condition|)
+block|{
+name|doHelp
+argument_list|()
+expr_stmt|;
+name|System
+operator|.
+name|exit
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|argsList
@@ -335,6 +375,158 @@ name|size
 argument_list|()
 index|]
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** copied form {@link org.apache.sling.launchpad.app.Main} and extended for Stanbol options */
+specifier|private
+specifier|static
+name|void
+name|doHelp
+parameter_list|()
+block|{
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"usage: "
+operator|+
+name|Main
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|" [ start | stop | status ] [ -j adr ] [ -l loglevel ] [ -f logfile ] [ -c slinghome ] [ -i launchpadhome ] [ -a address ] [ -p port ] [-no-security] { -Dn=v } [ -h ]"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    start         listen for control connection (uses -j)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    stop          terminate running Apache Stanbol (uses -j)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    status        check whether Apache Stanbol is running (uses -j)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -j adr        host and port to use for control connection in the format '[host:]port' (default 127.0.0.1:0)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -l loglevel   the initial loglevel (0..4, FATAL, ERROR, WARN, INFO, DEBUG)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -f logfile    the log file, \"-\" for stdout (default logs/error.log)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -c slinghome  the Stamnol context directory (default stanbol)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -i launchpadhome  the launchpad directory (default slinghome)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -a address    the interfact to bind to (use 0.0.0.0 for any)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -p port       the port to listen to (default 8080)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -r path       the root servlet context path for the http service (default is /)"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -no-security  runs Stanbol without a security manager"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -Dn=v        sets java system property 'n' to value 'v'"
+argument_list|)
+expr_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"    -h            prints this usage message"
 argument_list|)
 expr_stmt|;
 block|}
