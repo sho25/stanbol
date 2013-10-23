@@ -619,6 +619,42 @@ name|org
 operator|.
 name|apache
 operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|UnsupportedFormatException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|UnsupportedSerializationFormatException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|commons
 operator|.
 name|io
@@ -903,6 +939,26 @@ name|JSONObject
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_class
 annotation|@
 name|Component
@@ -935,6 +991,18 @@ argument_list|<
 name|ContentItem
 argument_list|>
 block|{
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|ContentItemWriter
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|/**      * The "multipart/*" wilrcard      */
 specifier|private
 specifier|static
@@ -1235,6 +1303,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+try|try
+block|{
 name|getSerializer
 argument_list|()
 operator|.
@@ -1253,6 +1323,34 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|UnsupportedSerializationFormatException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
+literal|"The enhancement results "
+operator|+
+literal|"cannot be serialized in the requested media type: "
+operator|+
+name|mediaType
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|Response
+operator|.
+name|Status
+operator|.
+name|NOT_ACCEPTABLE
+argument_list|)
+throw|;
+block|}
 block|}
 else|else
 block|{
@@ -1292,33 +1390,20 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
-name|UNSUPPORTED_MEDIA_TYPE
-argument_list|)
-operator|.
-name|entity
-argument_list|(
 literal|"The requested enhancement chain has not created an "
 operator|+
-literal|"version of the parsed content in the reuqest media "
-operator|+
-literal|"type "
+literal|"version of the parsed content in the reuqest media type "
 operator|+
 name|mediaType
 operator|.
 name|toString
 argument_list|()
-argument_list|)
+argument_list|,
+name|Response
 operator|.
-name|build
-argument_list|()
+name|Status
+operator|.
+name|UNSUPPORTED_MEDIA_TYPE
 argument_list|)
 throw|;
 block|}
@@ -1639,37 +1724,19 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|e
+literal|"The specified RDF format '"
+operator|+
+name|rdfFormatString
+operator|+
+literal|"' (used to serialize all RDF parts of "
+operator|+
+literal|"multipart MIME responses) is not a well formated MIME type"
 argument_list|,
-name|Response
-operator|.
-name|status
-argument_list|(
 name|Response
 operator|.
 name|Status
 operator|.
 name|BAD_REQUEST
-argument_list|)
-operator|.
-name|entity
-argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"The specified RDF format '%s' (used "
-operator|+
-literal|" to serialize all RDF parts of multipart MIME responses)"
-operator|+
-literal|" is not a well formated MIME type"
-argument_list|,
-name|rdfFormatString
-argument_list|)
-argument_list|)
-operator|.
-name|build
-argument_list|()
 argument_list|)
 throw|;
 block|}
@@ -1929,36 +1996,37 @@ name|JSONException
 name|e
 parameter_list|)
 block|{
+name|String
+name|message
+init|=
+literal|"Unable to convert EnhancementProperties "
+operator|+
+literal|"to JSON (values : "
+operator|+
+name|properties
+operator|+
+literal|")!"
+decl_stmt|;
+name|log
+operator|.
+name|error
+argument_list|(
+name|message
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|e
+name|message
 argument_list|,
-name|Response
-operator|.
-name|status
-argument_list|(
 name|Response
 operator|.
 name|Status
 operator|.
 name|INTERNAL_SERVER_ERROR
-argument_list|)
-operator|.
-name|entity
-argument_list|(
-literal|"Unable to convert EnhancementProperties to "
-operator|+
-literal|"JSON (values : "
-operator|+
-name|properties
-operator|+
-literal|")!"
-argument_list|)
-operator|.
-name|build
-argument_list|()
 argument_list|)
 throw|;
 block|}
@@ -2766,32 +2834,21 @@ throw|throw
 operator|new
 name|WebApplicationException
 argument_list|(
-name|e
-argument_list|,
-name|Response
-operator|.
-name|status
-argument_list|(
-name|Response
-operator|.
-name|Status
-operator|.
-name|BAD_REQUEST
-argument_list|)
-operator|.
-name|entity
-argument_list|(
-literal|"The parsed outputContent parameter "
+literal|"The parsed outputContent "
+operator|+
+literal|"parameter "
 operator|+
 name|includeMediaTypeStrings
 operator|+
 literal|" contain an "
 operator|+
 literal|"illegal formated MediaType!"
-argument_list|)
+argument_list|,
+name|Response
 operator|.
-name|build
-argument_list|()
+name|Status
+operator|.
+name|BAD_REQUEST
 argument_list|)
 throw|;
 block|}
