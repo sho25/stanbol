@@ -3809,8 +3809,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-try|try
-block|{
+specifier|final
 name|UpdateRequest
 name|update
 init|=
@@ -3839,6 +3838,28 @@ argument_list|(
 name|inputDocs
 argument_list|)
 expr_stmt|;
+try|try
+block|{
+name|AccessController
+operator|.
+name|doPrivileged
+argument_list|(
+operator|new
+name|PrivilegedExceptionAction
+argument_list|<
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Object
+name|run
+parameter_list|()
+throws|throws
+name|IOException
+throws|,
+name|SolrServerException
+block|{
 name|update
 operator|.
 name|process
@@ -3857,39 +3878,13 @@ name|commit
 argument_list|()
 expr_stmt|;
 block|}
+return|return
+literal|null
+return|;
 block|}
-catch|catch
-parameter_list|(
-name|SolrServerException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|YardException
-argument_list|(
-literal|"Exception while adding Documents to the Solr Server!"
-argument_list|,
-name|e
+block|}
 argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|YardException
-argument_list|(
-literal|"Unable to access Solr server"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
+expr_stmt|;
 name|long
 name|ready
 init|=
@@ -3927,6 +3922,77 @@ name|created
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|PrivilegedActionException
+name|pae
+parameter_list|)
+block|{
+if|if
+condition|(
+name|pae
+operator|.
+name|getException
+argument_list|()
+operator|instanceof
+name|SolrServerException
+condition|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Exception while adding Documents to the Solr Server!"
+argument_list|,
+name|pae
+operator|.
+name|getException
+argument_list|()
+argument_list|)
+throw|;
+block|}
+elseif|else
+if|if
+condition|(
+name|pae
+operator|.
+name|getException
+argument_list|()
+operator|instanceof
+name|IOException
+condition|)
+block|{
+throw|throw
+operator|new
+name|YardException
+argument_list|(
+literal|"Unable to access SolrServer"
+argument_list|,
+name|pae
+operator|.
+name|getException
+argument_list|()
+argument_list|)
+throw|;
+block|}
+else|else
+block|{
+throw|throw
+name|RuntimeException
+operator|.
+name|class
+operator|.
+name|cast
+argument_list|(
+name|pae
+operator|.
+name|getException
+argument_list|()
+argument_list|)
+throw|;
+block|}
+block|}
 return|return
 name|added
 return|;
@@ -4010,9 +4076,21 @@ argument_list|)
 decl_stmt|;
 comment|//NOTE: Do not use DocumentBoost, because FieldBoost will override
 comment|//      document boosts and are not multiplied with with document boosts
-comment|//        if(documentBoost != null){
-comment|//            inputDocument.setDocumentBoost(documentBoost);
-comment|//        }
+if|if
+condition|(
+name|documentBoost
+operator|!=
+literal|null
+condition|)
+block|{
+name|inputDocument
+operator|.
+name|setDocumentBoost
+argument_list|(
+name|documentBoost
+argument_list|)
+expr_stmt|;
+block|}
 for|for
 control|(
 name|Iterator
@@ -4838,7 +4916,9 @@ throw|throw
 operator|new
 name|YardException
 argument_list|(
-literal|"Error while searching for alredy present documents before executing the actual update for the parsed Representations"
+literal|"Error while searching for alredy present documents "
+operator|+
+literal|"before executing the actual update for the parsed Representations"
 argument_list|,
 name|e
 argument_list|)
@@ -5126,7 +5206,9 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Processed updateRequest for %d documents (%d in index | %d updated) in %dms (checked %dms|created %dms| stored%dms)"
+literal|"Processed updateRequest for %d documents (%d in index "
+operator|+
+literal|"| %d updated) in %dms (checked %dms|created %dms| stored%dms)"
 argument_list|,
 name|numDocs
 argument_list|,
