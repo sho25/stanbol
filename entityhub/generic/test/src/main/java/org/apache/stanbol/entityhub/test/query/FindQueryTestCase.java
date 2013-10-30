@@ -254,6 +254,16 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+comment|//find queries use application/x-www-form-urlencoded
+name|this
+operator|.
+name|setHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**      * @return the language      */
 specifier|public
