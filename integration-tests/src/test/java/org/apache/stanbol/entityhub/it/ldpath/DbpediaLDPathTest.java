@@ -161,6 +161,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"ldpath"
@@ -200,6 +207,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"ldpath"
@@ -231,6 +245,13 @@ operator|.
 name|buildPostRequest
 argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
 argument_list|)
 operator|.
 name|withFormContent
@@ -276,6 +297,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"context"
@@ -315,6 +343,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"context"
@@ -346,6 +381,13 @@ operator|.
 name|buildPostRequest
 argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
 argument_list|)
 operator|.
 name|withFormContent
@@ -391,6 +433,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"context"
@@ -425,6 +474,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"context"
@@ -457,6 +513,13 @@ operator|.
 name|buildPostRequest
 argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
 argument_list|)
 operator|.
 name|withFormContent
@@ -501,6 +564,13 @@ operator|.
 name|buildPostRequest
 argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
 argument_list|)
 operator|.
 name|withFormContent
@@ -556,6 +626,13 @@ argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
 argument_list|)
 operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
 name|withFormContent
 argument_list|(
 literal|"context"
@@ -599,6 +676,13 @@ operator|.
 name|buildPostRequest
 argument_list|(
 literal|"/entityhub/site/dbpedia/ldpath"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
 argument_list|)
 operator|.
 name|withFormContent
@@ -685,6 +769,13 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
 literal|"Accept"
 argument_list|,
 literal|"text/turtle"
@@ -745,6 +836,13 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
 literal|"Accept"
 argument_list|,
 literal|"text/turtle"
@@ -785,8 +883,11 @@ argument_list|(
 literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
 literal|"<http://dbpedia.org/resource/Vienna>"
-argument_list|,
-literal|"<name_de> \"Wien\"@de ."
+argument_list|)
+operator|.
+name|assertContentRegexp
+argument_list|(
+literal|"<name_de>\\s+\"Wien\"@de"
 argument_list|)
 expr_stmt|;
 block|}
@@ -809,6 +910,13 @@ operator|.
 name|buildPostRequest
 argument_list|(
 literal|"/entityhub/site/dbpedia/find"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
 argument_list|)
 operator|.
 name|withHeader
@@ -888,6 +996,13 @@ argument_list|)
 operator|.
 name|withHeader
 argument_list|(
+literal|"Content-Type"
+argument_list|,
+literal|"application/x-www-form-urlencoded"
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
 literal|"Accept"
 argument_list|,
 literal|"text/turtle"
@@ -933,7 +1048,7 @@ name|assertContentRegexp
 argument_list|(
 literal|"<http://stanbol.apache.org/ontology/entityhub/query#score>"
 argument_list|,
-literal|"<name>  \"Spider\"@en ;"
+literal|"<name>\\s+\"Spider\"@en ;"
 argument_list|,
 literal|"<category>.*<http://dbpedia.org/resource/Category:Arachnids>"
 argument_list|,
@@ -1205,11 +1320,11 @@ argument_list|,
 literal|"<http://dbpedia.org/resource/Cologne>"
 argument_list|,
 comment|//now some values based on the LDPath
-literal|"<name>  \"Koblenz\"@en"
+literal|"<name>\\s+\"Koblenz\"@en"
 argument_list|,
-literal|"<lat>   \"50.359722\""
+literal|"<lat>\\s+\"50.359722\""
 argument_list|,
-literal|"<long>  \"7.597778\""
+literal|"<long>\\s+\"7.597778\""
 argument_list|,
 literal|"<type>.*<http://www.w3.org/2002/07/owl#Thing>"
 argument_list|,
@@ -1217,7 +1332,7 @@ literal|"<type>.*<http://www.opengis.net/gml/_Feature>"
 argument_list|,
 literal|"<type>.*<http://dbpedia.org/ontology/Town>"
 argument_list|,
-literal|"<population> 314926"
+literal|"<population>\\s+314926"
 argument_list|)
 expr_stmt|;
 block|}

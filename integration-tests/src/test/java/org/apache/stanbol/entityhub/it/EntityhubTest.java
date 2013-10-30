@@ -1824,6 +1824,23 @@ name|Assert
 operator|.
 name|assertTrue
 argument_list|(
+literal|"Unable to add '"
+operator|+
+name|entry
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'! Status:"
+operator|+
+name|re
+operator|.
+name|getResponse
+argument_list|()
+operator|.
+name|getStatusLine
+argument_list|()
+argument_list|,
 name|status
 operator|==
 literal|200
