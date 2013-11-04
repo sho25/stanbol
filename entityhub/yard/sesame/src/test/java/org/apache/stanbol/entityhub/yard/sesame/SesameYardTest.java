@@ -669,6 +669,16 @@ argument_list|,
 name|bnode1
 argument_list|)
 expr_stmt|;
+name|con
+operator|.
+name|commit
+argument_list|()
+expr_stmt|;
+name|con
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 name|Yard
 name|yard
 init|=
