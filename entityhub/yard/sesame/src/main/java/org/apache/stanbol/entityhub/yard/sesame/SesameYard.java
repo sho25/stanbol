@@ -1467,6 +1467,7 @@ name|object
 operator|instanceof
 name|BNode
 operator|&&
+operator|!
 name|visited
 operator|.
 name|contains
