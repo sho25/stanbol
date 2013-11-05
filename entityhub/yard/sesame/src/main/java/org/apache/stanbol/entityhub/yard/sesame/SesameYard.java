@@ -3036,6 +3036,15 @@ name|YardException
 throws|,
 name|QueryEvaluationException
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> execute FieldQuery: {}"
+argument_list|,
+name|fieldQuery
+argument_list|)
+expr_stmt|;
 name|String
 name|sparqlQueryString
 init|=
@@ -3054,6 +3063,15 @@ operator|.
 name|Sesame
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" - SPARQL Query: {}"
+argument_list|,
+name|sparqlQueryString
+argument_list|)
+expr_stmt|;
 name|TupleQuery
 name|sparqlOuery
 decl_stmt|;
@@ -3622,6 +3640,17 @@ operator|new
 name|TreeModel
 argument_list|()
 decl_stmt|;
+name|RdfValueFactory
+name|valueFactory
+init|=
+operator|new
+name|RdfValueFactory
+argument_list|(
+name|model
+argument_list|,
+name|sesameFactory
+argument_list|)
+decl_stmt|;
 name|List
 argument_list|<
 name|Representation
@@ -3795,12 +3824,30 @@ name|subject
 argument_list|,
 name|property
 argument_list|,
-name|value
+name|result
+operator|.
+name|getValue
+argument_list|(
+name|binding
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 comment|//else no mapping for the query.getRootVariableName()
 block|}
+comment|//create a representation and add it to the results
+name|representations
+operator|.
+name|add
+argument_list|(
+name|valueFactory
+operator|.
+name|createRdfRepresentation
+argument_list|(
+name|subject
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 comment|//ignore non URI results
 block|}
