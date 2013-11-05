@@ -4036,7 +4036,7 @@ name|queryString
 operator|.
 name|append
 argument_list|(
-literal|"regex(str("
+literal|"regex(str(?"
 argument_list|)
 operator|.
 name|append
@@ -4046,7 +4046,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|",\""
+literal|"),\""
 argument_list|)
 expr_stmt|;
 name|addGrammarEscapedValue
@@ -4709,26 +4709,28 @@ comment|// query.setConstraint(SpecialFieldEnum.fullText.getUri(), new TextConst
 comment|// "text value","anothertest","some more values"),true));
 comment|// query.setConstraint("urn:field2a", new TextConstraint(":-]"));
 comment|// //tests escaping of REGEX
-comment|// query.setConstraint("urn:field3", new TextConstraint("language text","en"));
 name|query
 operator|.
 name|setConstraint
 argument_list|(
-literal|"urn:field4"
+literal|"urn:field3"
 argument_list|,
 operator|new
 name|TextConstraint
 argument_list|(
-literal|"multi language text"
+literal|"language text"
+argument_list|,
+name|PatternType
+operator|.
+name|wildcard
+argument_list|,
+literal|true
 argument_list|,
 literal|"en"
-argument_list|,
-literal|"de"
-argument_list|,
-literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//query.setConstraint("urn:field4", new TextConstraint("multi language text", "en", "de", null));
 comment|// query.setConstraint("urn:field5", new
 comment|// TextConstraint("wildcar*",PatternType.wildcard,false,"en","de"));
 comment|// query.addSelectedField("urn:field5");
@@ -4740,25 +4742,7 @@ comment|// query.setConstraint("urn:field9", new RangeConstraint((int)5, (int)10
 comment|// query.setConstraint("urn:field10", new RangeConstraint((int)5, (int)10, false));
 comment|// query.setConstraint("urn:field11", new RangeConstraint(null, (int)10, true));
 comment|// query.setConstraint("urn:field12", new RangeConstraint((int)5, null, true));
-name|query
-operator|.
-name|setConstraint
-argument_list|(
-literal|"urn:field12"
-argument_list|,
-operator|new
-name|RangeConstraint
-argument_list|(
-operator|new
-name|Date
-argument_list|()
-argument_list|,
-literal|null
-argument_list|,
-literal|true
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|//query.setConstraint("urn:field12", new RangeConstraint(new Date(), null, true));
 comment|// query.addSelectedField("urn:field2a");
 comment|// query.addSelectedField("urn:field3");
 name|query
