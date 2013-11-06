@@ -1305,6 +1305,8 @@ name|createRepresentationGraph
 argument_list|(
 name|con
 argument_list|,
+name|valueFactory
+argument_list|,
 name|uri
 argument_list|)
 return|;
@@ -1317,13 +1319,16 @@ return|;
 comment|//not found
 block|}
 block|}
-comment|/**      * Extracts the triples that belong to the {@link Representation} with the      * parsed id from the Sesame repository.      * @param con the repository connection      * @param uri the subject of the Representation to extract      * @return the representation with the extracted data.      * @throws RepositoryException       */
+comment|/**      * Extracts the triples that belong to the {@link Representation} with the      * parsed id from the Sesame repository.      * @param con the repository connection      * @param valueFactory the {@link RdfValueFactory} to use      * @param uri the subject of the Representation to extract      * @return the representation with the extracted data.      * @throws RepositoryException       */
 specifier|protected
 name|RdfRepresentation
 name|createRepresentationGraph
 parameter_list|(
 name|RepositoryConnection
 name|con
+parameter_list|,
+name|RdfValueFactory
+name|valueFactory
 parameter_list|,
 name|URI
 name|uri
@@ -2847,6 +2852,10 @@ name|String
 argument_list|>
 name|ids
 init|=
+name|limit
+operator|>
+literal|0
+condition|?
 operator|new
 name|ArrayList
 argument_list|<
@@ -2855,6 +2864,13 @@ argument_list|>
 argument_list|(
 name|limit
 argument_list|)
+else|:
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
 decl_stmt|;
 while|while
 condition|(
@@ -3338,6 +3354,10 @@ name|Representation
 argument_list|>
 name|representations
 init|=
+name|limit
+operator|>
+literal|0
+condition|?
 operator|new
 name|ArrayList
 argument_list|<
@@ -3346,6 +3366,13 @@ argument_list|>
 argument_list|(
 name|limit
 argument_list|)
+else|:
+operator|new
+name|ArrayList
+argument_list|<
+name|Representation
+argument_list|>
+argument_list|()
 decl_stmt|;
 while|while
 condition|(
@@ -3383,17 +3410,22 @@ operator|instanceof
 name|URI
 condition|)
 block|{
+comment|//copy all data to the model and create the representation
+name|RdfRepresentation
+name|rep
+init|=
 name|createRepresentationGraph
 argument_list|(
 name|con
+argument_list|,
+name|valueFactory
 argument_list|,
 operator|(
 name|URI
 operator|)
 name|value
 argument_list|)
-expr_stmt|;
-comment|//copy all data to the model
+decl_stmt|;
 name|model
 operator|.
 name|add
@@ -3410,15 +3442,7 @@ name|representations
 operator|.
 name|add
 argument_list|(
-name|valueFactory
-operator|.
-name|createRdfRepresentation
-argument_list|(
-operator|(
-name|URI
-operator|)
-name|value
-argument_list|)
+name|rep
 argument_list|)
 expr_stmt|;
 block|}
@@ -3657,6 +3681,10 @@ name|Representation
 argument_list|>
 name|representations
 init|=
+name|limit
+operator|>
+literal|0
+condition|?
 operator|new
 name|ArrayList
 argument_list|<
@@ -3665,6 +3693,13 @@ argument_list|>
 argument_list|(
 name|limit
 argument_list|)
+else|:
+operator|new
+name|ArrayList
+argument_list|<
+name|Representation
+argument_list|>
+argument_list|()
 decl_stmt|;
 name|Map
 argument_list|<
