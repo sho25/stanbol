@@ -309,7 +309,7 @@ name|entityhub
 operator|.
 name|query
 operator|.
-name|clerezza
+name|sparql
 operator|.
 name|SparqlFieldQuery
 import|;
@@ -327,7 +327,7 @@ name|entityhub
 operator|.
 name|query
 operator|.
-name|clerezza
+name|sparql
 operator|.
 name|SparqlFieldQueryFactory
 import|;
@@ -345,11 +345,9 @@ name|entityhub
 operator|.
 name|query
 operator|.
-name|clerezza
+name|sparql
 operator|.
-name|SparqlQueryUtils
-operator|.
-name|EndpointTypeEnum
+name|SparqlEndpointTypeEnum
 import|;
 end_import
 
@@ -447,20 +445,6 @@ name|factory
 operator|=
 literal|"org.apache.stanbol.entityhub.searcher.VirtuosoSearcherFactory"
 argument_list|,
-name|policy
-operator|=
-name|ConfigurationPolicy
-operator|.
-name|REQUIRE
-argument_list|,
-comment|// the
-comment|// queryUri
-comment|// and
-comment|// the
-comment|// SPARQL
-comment|// Endpoint
-comment|// are
-comment|// required
 name|specVersion
 operator|=
 literal|"1.1"
@@ -533,9 +517,9 @@ argument_list|)
 decl_stmt|;
 name|query
 operator|.
-name|setEndpointType
+name|setSparqlEndpointType
 argument_list|(
-name|EndpointTypeEnum
+name|SparqlEndpointTypeEnum
 operator|.
 name|Virtuoso
 argument_list|)
@@ -740,9 +724,9 @@ argument_list|)
 decl_stmt|;
 name|query
 operator|.
-name|setEndpointType
+name|setSparqlEndpointType
 argument_list|(
-name|EndpointTypeEnum
+name|SparqlEndpointTypeEnum
 operator|.
 name|Virtuoso
 argument_list|)

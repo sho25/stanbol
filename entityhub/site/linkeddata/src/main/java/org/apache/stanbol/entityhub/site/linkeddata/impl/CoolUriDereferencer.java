@@ -305,13 +305,6 @@ name|factory
 operator|=
 literal|"org.apache.stanbol.entityhub.dereferencer.CoolUriDereferencerFactory"
 argument_list|,
-name|policy
-operator|=
-name|ConfigurationPolicy
-operator|.
-name|REQUIRE
-argument_list|,
-comment|//the baseUri is required!
 name|specVersion
 operator|=
 literal|"1.1"
