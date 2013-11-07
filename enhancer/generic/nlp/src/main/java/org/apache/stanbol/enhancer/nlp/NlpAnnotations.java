@@ -49,7 +49,7 @@ name|nlp
 operator|.
 name|dependency
 operator|.
-name|DependencyFeatures
+name|DependencyRelation
 import|;
 end_import
 
@@ -311,19 +311,19 @@ decl_stmt|;
 comment|/** 	 * {@link Annotation} representing the grammatical relations a word has with 	 * other words in the sentence. Typically used on {@link Token}s. 	 *<p> 	 */
 name|Annotation
 argument_list|<
-name|DependencyFeatures
+name|DependencyRelation
 argument_list|>
 name|DEPENDENCY_ANNOTATION
 init|=
 operator|new
 name|Annotation
 argument_list|<
-name|DependencyFeatures
+name|DependencyRelation
 argument_list|>
 argument_list|(
 literal|"stanbol.enhancer.nlp.dependency"
 argument_list|,
-name|DependencyFeatures
+name|DependencyRelation
 operator|.
 name|class
 argument_list|)
