@@ -23,6 +23,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|net
+operator|.
+name|ConnectException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|ArrayList
@@ -465,6 +475,19 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> before {}#waitForServerReady()"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|// initialize instance request builder and HTTP client
 name|builder
 operator|=
@@ -493,6 +516,13 @@ condition|(
 name|serverReady
 condition|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... server already marked as ready!"
+argument_list|)
+expr_stmt|;
 return|return;
 block|}
 comment|// Timeout for readiness test
@@ -677,6 +707,13 @@ argument_list|)
 expr_stmt|;
 comment|// A test path is in the form path:substring or just path, in which case
 comment|// we don't check that the content contains the substring
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" - check serverReady Paths"
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|String
@@ -685,6 +722,15 @@ range|:
 name|testPaths
 control|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> path: {}"
+argument_list|,
+name|p
+argument_list|)
+expr_stmt|;
 specifier|final
 name|String
 index|[]
@@ -733,6 +779,24 @@ name|serverBaseUrl
 operator|+
 name|path
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> url: {}"
+argument_list|,
+name|url
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> content: {}"
+argument_list|,
+name|substring
+argument_list|)
+expr_stmt|;
 specifier|final
 name|HttpGet
 name|get
@@ -775,6 +839,25 @@ operator|+
 literal|2
 control|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> header: {}:{}"
+argument_list|,
+name|s
+index|[
+name|i
+index|]
+argument_list|,
+name|s
+index|[
+name|i
+operator|+
+literal|1
+index|]
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|s
@@ -840,6 +923,15 @@ literal|null
 decl_stmt|;
 try|try
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> execute: {}"
+argument_list|,
+name|get
+argument_list|)
+expr_stmt|;
 name|HttpResponse
 name|response
 init|=
@@ -850,6 +942,15 @@ argument_list|(
 name|get
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> response: {}"
+argument_list|,
+name|response
+argument_list|)
+expr_stmt|;
 name|entity
 operator|=
 name|response
@@ -880,20 +981,30 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Got "
-operator|+
+literal|"Got {} at {} - will retry"
+argument_list|,
 name|status
-operator|+
-literal|" at "
-operator|+
+argument_list|,
 name|url
-operator|+
-literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
 name|readyLoop
 continue|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Got {} at {} - will retry"
+argument_list|,
+name|status
+argument_list|,
+name|url
+argument_list|)
+expr_stmt|;
 block|}
 if|if
 condition|(
@@ -913,11 +1024,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"No entity returned for "
-operator|+
+literal|"No entity returned for {} - will retry"
+argument_list|,
 name|url
-operator|+
-literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
@@ -950,26 +1059,38 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Returned content for "
+literal|"Returned content for {}  does not contain "
 operator|+
+literal|"{} - will retry"
+argument_list|,
 name|url
-operator|+
-literal|" does not contain "
-operator|+
+argument_list|,
 name|substring
-operator|+
-literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
 name|readyLoop
 continue|;
 block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Returned content for {}  contains {} - ready"
+argument_list|,
+name|url
+argument_list|,
+name|substring
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 catch|catch
 parameter_list|(
-name|HttpHostConnectException
+name|ConnectException
 name|e
 parameter_list|)
 block|{
@@ -977,11 +1098,17 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Got HttpHostConnectException at "
-operator|+
+literal|"Got {} at {} - will retry"
+argument_list|,
+name|e
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|,
 name|url
-operator|+
-literal|" - will retry"
 argument_list|)
 expr_stmt|;
 continue|continue
@@ -1005,16 +1132,16 @@ expr_stmt|;
 block|}
 block|}
 block|}
-name|serverReady
-operator|=
-literal|true
-expr_stmt|;
 name|log
 operator|.
 name|info
 argument_list|(
 literal|"Got expected content for all configured requests, server is ready"
 argument_list|)
+expr_stmt|;
+name|serverReady
+operator|=
+literal|true
 expr_stmt|;
 block|}
 if|if
