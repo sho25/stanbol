@@ -385,7 +385,55 @@ name|scr
 operator|.
 name|annotations
 operator|.
+name|Component
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Property
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
 name|Reference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|Service
 import|;
 end_import
 
@@ -817,6 +865,26 @@ end_comment
 
 begin_class
 annotation|@
+name|Component
+annotation|@
+name|Service
+argument_list|(
+name|Object
+operator|.
+name|class
+argument_list|)
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+literal|"javax.ws.rs"
+argument_list|,
+name|boolValue
+operator|=
+literal|true
+argument_list|)
+annotation|@
 name|Path
 argument_list|(
 literal|"/rules"
@@ -858,6 +926,11 @@ comment|//        this.ruleStore = (RuleStore) ContextHelper.getServiceFromConte
 comment|//        this.adapterManager = (RuleAdapterManager) ContextHelper.getServiceFromContext(
 comment|//            RuleAdapterManager.class, servletContext);
 comment|//    }
+class|class
+name|RulesResourceResultData
+extends|extends
+name|ResultData
+block|{              }
 annotation|@
 name|GET
 annotation|@
@@ -887,7 +960,9 @@ name|Viewable
 argument_list|(
 literal|"index"
 argument_list|,
-name|this
+operator|new
+name|RulesResourceResultData
+argument_list|()
 argument_list|)
 argument_list|,
 name|TEXT_HTML
