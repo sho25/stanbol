@@ -229,6 +229,24 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|reasoners
+operator|.
+name|web
+operator|.
+name|resources
+operator|.
+name|ReasoningResult
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|coode
 operator|.
 name|owlapi
@@ -361,37 +379,30 @@ name|getClass
 argument_list|()
 argument_list|)
 decl_stmt|;
-specifier|private
-name|UriInfo
-name|info
-decl_stmt|;
+comment|//    private UriInfo info;
 comment|//    private ServletContext context;
+comment|//    private HttpHeaders headers;
 specifier|private
-name|HttpHeaders
-name|headers
+name|ReasoningResult
+name|result
 decl_stmt|;
+comment|//    public ResponseTaskBuilder(UriInfo info, HttpHeaders headers) {
+comment|//        this.info = info;
+comment|////        this.context = context;
+comment|//        this.headers = headers;
+comment|//    }
 specifier|public
 name|ResponseTaskBuilder
 parameter_list|(
-name|UriInfo
-name|info
-parameter_list|,
-name|HttpHeaders
-name|headers
+name|ReasoningResult
+name|reasoningPrettyResultResource
 parameter_list|)
 block|{
 name|this
 operator|.
-name|info
+name|result
 operator|=
-name|info
-expr_stmt|;
-comment|//        this.context = context;
-name|this
-operator|.
-name|headers
-operator|=
-name|headers
+name|reasoningPrettyResultResource
 expr_stmt|;
 block|}
 comment|/**      * This is special, in case of task CHECK      *       * @param output      * @return      */
@@ -455,6 +466,15 @@ argument_list|(
 name|object
 argument_list|)
 decl_stmt|;
+name|this
+operator|.
+name|result
+operator|.
+name|setResult
+argument_list|(
+name|out
+argument_list|)
+expr_stmt|;
 name|ResponseBuilder
 name|rb
 init|=
@@ -467,13 +487,7 @@ name|Viewable
 argument_list|(
 literal|"result"
 argument_list|,
-operator|new
-name|ReasoningPrettyResultResource
-argument_list|(
-name|info
-argument_list|,
-name|out
-argument_list|)
+name|result
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -720,7 +734,10 @@ name|MediaType
 argument_list|>
 name|mediaTypes
 init|=
-name|headers
+name|result
+operator|.
+name|getHeaders
+argument_list|()
 operator|.
 name|getAcceptableMediaTypes
 argument_list|()
@@ -830,6 +847,13 @@ argument_list|(
 literal|"The input is consistent"
 argument_list|)
 expr_stmt|;
+name|result
+operator|.
+name|setResult
+argument_list|(
+literal|"The input is consistent :)"
+argument_list|)
+expr_stmt|;
 name|ResponseBuilder
 name|rb
 init|=
@@ -842,13 +866,7 @@ name|Viewable
 argument_list|(
 literal|"result"
 argument_list|,
-operator|new
-name|ReasoningPrettyResultResource
-argument_list|(
-name|info
-argument_list|,
-literal|"The input is consistent :)"
-argument_list|)
+name|result
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -909,6 +927,13 @@ literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
 comment|//                addCORSOrigin(context, rb, headers);
+name|result
+operator|.
+name|setResult
+argument_list|(
+literal|"The input is NOT consistent :("
+argument_list|)
+expr_stmt|;
 name|rb
 operator|.
 name|entity
@@ -918,13 +943,7 @@ name|Viewable
 argument_list|(
 literal|"result"
 argument_list|,
-operator|new
-name|ReasoningPrettyResultResource
-argument_list|(
-name|info
-argument_list|,
-literal|"The input is NOT consistent :("
-argument_list|)
+name|result
 argument_list|)
 argument_list|)
 expr_stmt|;
