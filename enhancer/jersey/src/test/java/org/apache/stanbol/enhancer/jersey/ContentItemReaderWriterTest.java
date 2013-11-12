@@ -1434,7 +1434,9 @@ argument_list|(
 literal|"boundary"
 argument_list|)
 argument_list|,
-literal|"contentItem"
+name|ContentItemWriter
+operator|.
+name|CONTENT_ITEM_BOUNDARY
 argument_list|)
 expr_stmt|;
 name|assertNotNull
@@ -1512,15 +1514,9 @@ index|[]
 block|{
 literal|"--"
 operator|+
-name|contentType
+name|ContentItemWriter
 operator|.
-name|getParameters
-argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|"boundary"
-argument_list|)
+name|CONTENT_ITEM_BOUNDARY
 block|,
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=\"urn:test\""
 block|,
@@ -1530,21 +1526,19 @@ literal|"<rdf:type rdf:resource=\"urn:types:Document\"/>"
 block|,
 literal|"--"
 operator|+
-name|contentType
+name|ContentItemWriter
 operator|.
-name|getParameters
-argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|"boundary"
-argument_list|)
+name|CONTENT_ITEM_BOUNDARY
 block|,
 literal|"Content-Disposition: form-data; name=\"content\""
 block|,
-literal|"Content-Type: multipart/alternate; boundary=contentParts; charset=UTF-8"
+literal|"Content-Type: multipart/alternate; boundary=contentParts"
 block|,
-literal|"--contentParts"
+literal|"--"
+operator|+
+name|ContentItemWriter
+operator|.
+name|CONTENT_PARTS_BOUNDERY
 block|,
 literal|"Content-Disposition: form-data; name=\"urn:test_main\""
 block|,
@@ -1552,7 +1546,11 @@ literal|"Content-Type: text/html; charset=UTF-8"
 block|,
 literal|"This is a<b>ContentItem</b> to<i>Mime Multipart</i> test!"
 block|,
-literal|"--contentParts"
+literal|"--"
+operator|+
+name|ContentItemWriter
+operator|.
+name|CONTENT_PARTS_BOUNDERY
 block|,
 literal|"Content-Disposition: form-data; name=\"run:text:text\""
 block|,
@@ -1560,19 +1558,19 @@ literal|"Content-Type: text/plain; charset=UTF-8"
 block|,
 literal|"This is a ContentItem to Mime Multipart test!"
 block|,
-literal|"--contentParts--"
+literal|"--"
+operator|+
+name|ContentItemWriter
+operator|.
+name|CONTENT_PARTS_BOUNDERY
+operator|+
+literal|"--"
 block|,
 literal|"--"
 operator|+
-name|contentType
+name|ContentItemWriter
 operator|.
-name|getParameters
-argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|"boundary"
-argument_list|)
+name|CONTENT_ITEM_BOUNDARY
 block|,
 literal|"Content-Disposition: form-data; name=\""
 operator|+
@@ -1587,15 +1585,9 @@ literal|"Content-Type: application/json; charset=UTF-8"
 block|,
 literal|"--"
 operator|+
-name|contentType
+name|ContentItemWriter
 operator|.
-name|getParameters
-argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|"boundary"
-argument_list|)
+name|CONTENT_ITEM_BOUNDARY
 block|,
 literal|"Content-Disposition: form-data; name=\""
 operator|+
@@ -1612,15 +1604,9 @@ literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/ex
 block|,
 literal|"--"
 operator|+
-name|contentType
+name|ContentItemWriter
 operator|.
-name|getParameters
-argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|"boundary"
-argument_list|)
+name|CONTENT_ITEM_BOUNDARY
 operator|+
 literal|"--"
 block|}
@@ -1645,6 +1631,12 @@ argument_list|)
 decl_stmt|;
 name|assertTrue
 argument_list|(
+literal|"content does not contain '"
+operator|+
+name|test
+operator|+
+literal|"'!"
+argument_list|,
 name|index
 operator|>=
 literal|0
@@ -1801,6 +1793,9 @@ name|toString
 argument_list|(
 name|contentItem
 operator|.
+name|getBlob
+argument_list|()
+operator|.
 name|getStream
 argument_list|()
 argument_list|,
@@ -1815,6 +1810,9 @@ operator|.
 name|toString
 argument_list|(
 name|ci
+operator|.
+name|getBlob
+argument_list|()
 operator|.
 name|getStream
 argument_list|()

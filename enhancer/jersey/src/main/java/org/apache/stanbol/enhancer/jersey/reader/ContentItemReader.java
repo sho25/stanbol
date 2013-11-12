@@ -121,6 +121,16 @@ name|java
 operator|.
 name|io
 operator|.
+name|ByteArrayInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
 name|IOException
 import|;
 end_import
@@ -203,16 +213,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URLEncoder
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|ArrayList
@@ -275,7 +275,29 @@ name|java
 operator|.
 name|util
 operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+operator|.
+name|Entry
 import|;
 end_import
 
@@ -934,6 +956,118 @@ init|=
 name|getContentItemId
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|log
+operator|.
+name|isTraceEnabled
+argument_list|()
+condition|)
+block|{
+comment|//NOTE: enabling TRACE level logging will copy the parsed content
+comment|//      into a BYTE array
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Parse ContentItem from"
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"  - MediaType: {}"
+argument_list|,
+name|mediaType
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"  - Headers:"
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|header
+range|:
+name|httpHeaders
+operator|.
+name|entrySet
+argument_list|()
+control|)
+block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"      {}: {}"
+argument_list|,
+name|header
+operator|.
+name|getKey
+argument_list|()
+argument_list|,
+name|header
+operator|.
+name|getValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+name|byte
+index|[]
+name|content
+init|=
+name|IOUtils
+operator|.
+name|toByteArray
+argument_list|(
+name|entityStream
+argument_list|)
+decl_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"content: \n{}"
+argument_list|,
+operator|new
+name|String
+argument_list|(
+name|content
+argument_list|,
+literal|"UTF-8"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|IOUtils
+operator|.
+name|closeQuietly
+argument_list|(
+name|entityStream
+argument_list|)
+expr_stmt|;
+name|entityStream
+operator|=
+operator|new
+name|ByteArrayInputStream
+argument_list|(
+name|content
+argument_list|)
+expr_stmt|;
+block|}
 name|Set
 argument_list|<
 name|String
@@ -957,6 +1091,13 @@ name|MULTIPART
 argument_list|)
 condition|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" - parse Multipart MIME ContentItem"
+argument_list|)
+expr_stmt|;
 comment|//try to read ContentItem from "multipart/from-data"
 name|MGraph
 name|metadata
@@ -1961,7 +2102,7 @@ name|ciUri
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a ContentItem      * @param id the ID or<code>null</code> if not known      * @param metadata the metadata or<code>null</code> if not parsed. NOTE that      * if<code>id == null</code> also<code>metadata == null</code> and       *<code>id != null</code> also<code>metadata != null</code>.      * @param content the {@link FileItemStream} of the MIME part representing      * the content. If {@link FileItemStream#getContentType()} is compatible with      * "multipart/*" than this will further parse for multiple parsed content      * version. In any other case the contents of the parsed {@link FileItemStream}      * will be directly add as content for the {@link ContentItem} created by      * this method.      * @param parsedContentParts used to add the IDs of parsed contentParts       * @return the created content item      * @throws IOException on any error while accessing the contents of the parsed      * {@link FileItemStream}      * @throws FileUploadException if the parsed contents are not correctly      * encoded Multipoart MIME      */
+comment|/**      * Creates a ContentItem      * @param id the ID or<code>null</code> if not known      * @param metadata the metadata or<code>null</code> if not parsed. NOTE that      * if<code>id == null</code> also<code>metadata == null</code> and       *<code>id != null</code> also<code>metadata != null</code>.      * @param content the {@link FileItemStream} of the MIME part representing      * the content. If {@link FileItemStream#getContentType()} is compatible with      * "multipart/*" than this will further parse for multiple parsed content      * version. In any other case the contents of the parsed {@link FileItemStream}      * will be directly add as content for the {@link ContentItem} created by      * this method.      * @param parsedContentParts used to add the IDs of parsed contentParts       * @return the created content item      * @throws IOException on any error while accessing the contents of the parsed      * {@link FileItemStream}      * @throws FileUploadException if the parsed contents are not correctly      * encoded Multipart MIME      */
 specifier|private
 name|ContentItem
 name|createContentItem
@@ -2020,6 +2161,13 @@ name|partContentType
 argument_list|)
 condition|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"  - multiple (alternate) ContentParts"
+argument_list|)
+expr_stmt|;
 comment|//multiple contentParts are parsed
 name|FileItemIterator
 name|contentPartIterator
@@ -2067,11 +2215,11 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"create ContentItem {} for content (type:{})"
+literal|"  - create ContentItem {} for content (type:{})"
 argument_list|,
 name|id
 argument_list|,
-name|content
+name|fis
 operator|.
 name|getContentType
 argument_list|()
@@ -2105,6 +2253,18 @@ expr_stmt|;
 block|}
 else|else
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"  - create Blob for content (type:{})"
+argument_list|,
+name|fis
+operator|.
+name|getContentType
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|Blob
 name|blob
 init|=
@@ -2183,7 +2343,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"  ... add Blob {} to ContentItem {} with content (type:{})"
+literal|"    ... add Blob {} to ContentItem {} with content (type:{})"
 argument_list|,
 operator|new
 name|Object
@@ -2228,7 +2388,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"create ContentItem {} for content (type:{})"
+literal|"  - create ContentItem {} for content (type:{})"
 argument_list|,
 name|id
 argument_list|,
