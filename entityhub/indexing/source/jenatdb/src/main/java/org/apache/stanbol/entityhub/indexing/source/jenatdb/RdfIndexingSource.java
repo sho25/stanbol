@@ -703,6 +703,24 @@ name|sparql
 operator|.
 name|core
 operator|.
+name|DatasetGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|sparql
+operator|.
+name|core
+operator|.
 name|Var
 import|;
 end_import
@@ -2613,6 +2631,17 @@ return|return
 literal|null
 return|;
 block|}
+block|}
+comment|/**      * Getter for the Jena TDB {@link DatasetGraph} used as source      * @return the indexingDataset      */
+specifier|public
+specifier|final
+name|DatasetGraphTDB
+name|getIndexingDataset
+parameter_list|()
+block|{
+return|return
+name|indexingDataset
+return|;
 block|}
 comment|/**      * Processes a {@link Node} and adds the according value to the parsed      * Representation.      * @param value The node to convert to an value for the Representation      * @param source the representation (MUST NOT be<code>null</code>      * @param field the field (MUST NOT be<code>null</code>)      */
 specifier|private
