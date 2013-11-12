@@ -603,12 +603,32 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"before {}#checkEngineReady"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|// Check only once per test run
 if|if
 condition|(
 name|enginesReady
 condition|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"   ... engines already marked as ready"
+argument_list|)
+expr_stmt|;
 return|return;
 block|}
 comment|// If we timed out previously, don't waste time checking again
@@ -646,6 +666,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> checking for Enhancer services: "
+argument_list|)
+expr_stmt|;
 name|executor
 operator|.
 name|execute
@@ -678,6 +705,15 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 name|assertEngines
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"  ... enpoint '{}' is ready"
+argument_list|,
+name|endpoint
 argument_list|)
 expr_stmt|;
 comment|/*  List of expected referencedSites could also be made                   *  configurable via system properties, but we don't expect it                   *  to change often.                   */
@@ -713,6 +749,15 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 literal|"http:\\\\/\\\\/.*\\\\/entityhub\\\\/site\\\\/dbpedia\\\\/"
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"  ... entityhub DBpedia referencedSite is ready"
+argument_list|,
+name|endpoint
 argument_list|)
 expr_stmt|;
 comment|//also assert that the SolrYard for the dbpedia site is fully

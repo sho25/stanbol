@@ -157,6 +157,38 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedHashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+operator|.
+name|Entry
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -351,11 +383,7 @@ name|apache
 operator|.
 name|http
 operator|.
-name|entity
-operator|.
-name|mime
-operator|.
-name|FormBodyPart
+name|HttpEntity
 import|;
 end_import
 
@@ -369,9 +397,21 @@ name|http
 operator|.
 name|entity
 operator|.
-name|mime
+name|ByteArrayEntity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|HttpMultipart
+name|apache
+operator|.
+name|http
+operator|.
+name|entity
+operator|.
+name|ContentType
 import|;
 end_import
 
@@ -403,7 +443,7 @@ name|entity
 operator|.
 name|mime
 operator|.
-name|MultipartEntity
+name|MultipartEntityBuilder
 import|;
 end_import
 
@@ -422,6 +462,24 @@ operator|.
 name|content
 operator|.
 name|AbstractContentBody
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|http
+operator|.
+name|entity
+operator|.
+name|mime
+operator|.
+name|content
+operator|.
+name|ByteArrayBody
 import|;
 end_import
 
@@ -1163,19 +1221,15 @@ name|assertContentContains
 argument_list|(
 literal|"--contentItem"
 argument_list|,
-literal|"--contentItem--"
-argument_list|,
 literal|"Content-Disposition: form-data; name=\"content\""
 argument_list|,
-literal|"Content-Type: multipart/alternate; boundary=contentParts; charset=UTF-8"
+literal|"Content-Type: multipart/alternate; boundary=contentParts-"
 argument_list|,
 literal|"Content-Type: text/plain; charset=UTF-8"
 argument_list|,
 literal|"Content-Type: text/html"
 argument_list|,
 literal|"--contentParts"
-argument_list|,
-literal|"--contentParts--"
 argument_list|)
 operator|.
 name|assertContentContains
@@ -1196,6 +1250,10 @@ argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:content-item-sha1-.*"
+argument_list|,
+literal|"--contentItem-.*--"
+argument_list|,
+literal|"--contentParts-.*--"
 argument_list|,
 comment|//and the expected enhancements in the metadata
 literal|"http://purl.org/dc/terms/creator.*LanguageDetectionEnhancementEngine"
@@ -1301,19 +1359,15 @@ name|assertContentContains
 argument_list|(
 literal|"--contentItem"
 argument_list|,
-literal|"--contentItem--"
-argument_list|,
 literal|"Content-Disposition: form-data; name=\"content\""
 argument_list|,
-literal|"Content-Type: multipart/alternate; boundary=contentParts; charset=UTF-8"
+literal|"Content-Type: multipart/alternate; boundary=contentParts-"
 argument_list|,
 literal|"Content-Type: text/plain; charset=UTF-8"
 argument_list|,
 literal|"Content-Type: text/html"
 argument_list|,
 literal|"--contentParts"
-argument_list|,
-literal|"--contentParts--"
 argument_list|)
 operator|.
 name|assertContentContains
@@ -1330,6 +1384,10 @@ operator|.
 name|assertContentRegexp
 argument_list|(
 comment|//MUST contain
+literal|"--contentItem-.*--"
+argument_list|,
+literal|"--contentParts-.*--"
+argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
 argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:content-item-sha1-.*"
@@ -1442,17 +1500,13 @@ name|assertContentContains
 argument_list|(
 literal|"--contentItem"
 argument_list|,
-literal|"--contentItem--"
-argument_list|,
 literal|"Content-Disposition: form-data; name=\"content\""
 argument_list|,
-literal|"Content-Type: multipart/alternate; boundary=contentParts; charset=UTF-8"
+literal|"Content-Type: multipart/alternate; boundary=contentParts-"
 argument_list|,
 literal|"Content-Type: text/plain; charset=UTF-8"
 argument_list|,
 literal|"--contentParts"
-argument_list|,
-literal|"--contentParts--"
 argument_list|)
 operator|.
 name|assertContentContains
@@ -1462,6 +1516,10 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
+literal|"--contentItem-.*--"
+argument_list|,
+literal|"--contentParts-.*--"
+argument_list|,
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=.*"
 argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
@@ -1571,17 +1629,13 @@ name|assertContentContains
 argument_list|(
 literal|"--contentItem"
 argument_list|,
-literal|"--contentItem--"
-argument_list|,
 literal|"Content-Disposition: form-data; name=\"content\""
 argument_list|,
-literal|"Content-Type: multipart/alternate; boundary=contentParts; charset=UTF-8"
+literal|"Content-Type: multipart/alternate; boundary=contentParts-"
 argument_list|,
 literal|"Content-Type: text/plain; charset=UTF-8"
 argument_list|,
 literal|"--contentParts"
-argument_list|,
-literal|"--contentParts--"
 argument_list|)
 operator|.
 name|assertContentContains
@@ -1591,6 +1645,10 @@ argument_list|)
 operator|.
 name|assertContentRegexp
 argument_list|(
+literal|"--contentItem-.*--"
+argument_list|,
+literal|"--contentParts-.*--"
+argument_list|,
 literal|"Content-Disposition: form-data; name=\"metadata\"; filename=.*"
 argument_list|,
 literal|"Content-Disposition: form-data; name=\"urn:tika:text:.*"
@@ -1699,8 +1757,6 @@ name|assertContentContains
 argument_list|(
 literal|"--contentItem"
 argument_list|,
-literal|"--contentItem--"
-argument_list|,
 literal|"Content-Disposition: form-data; name=\"http://stanbol.apache.org/ontology/enhancer/executionmetadata#ChainExecution\""
 argument_list|,
 literal|"Content-Type: application/rdf+xml; charset=UTF-8"
@@ -1712,6 +1768,11 @@ argument_list|,
 literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionmetadata#EngineExecution\"/>"
 argument_list|,
 literal|"<rdf:type rdf:resource=\"http://stanbol.apache.org/ontology/enhancer/executionmetadata#ChainExecution\"/>"
+argument_list|)
+operator|.
+name|assertContentRegexp
+argument_list|(
+literal|"--contentItem-.*--"
 argument_list|)
 operator|.
 name|getContent
@@ -1745,80 +1806,70 @@ name|TEXT_CONTENT
 operator|+
 literal|"\nIt is a secret, that the city of Berlin is the capital of Germany since 1990."
 decl_stmt|;
-comment|//The multipart entity for the contentItem
-name|MultipartEntity
-name|contentItem
+comment|//The multipartBuilder used to construct the contentItem for the contentItem
+name|MultipartEntityBuilder
+name|ciBuilder
 init|=
-operator|new
-name|MultipartEntity
-argument_list|(
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-name|UTF8
-argument_list|)
-decl_stmt|;
-comment|//The multipart/alternate mime part for the parsed content versions
-name|HttpMultipart
-name|content
-init|=
-operator|new
-name|HttpMultipart
-argument_list|(
-literal|"alternate"
-argument_list|,
-name|UTF8
-argument_list|,
-literal|"contentParts"
-argument_list|)
-decl_stmt|;
-comment|//add the content part to the contentItem
-name|contentItem
+name|MultipartEntityBuilder
 operator|.
-name|addPart
+name|create
+argument_list|()
+decl_stmt|;
+name|String
+name|boundary
+init|=
+literal|"contentItem-47jjksnbue73fnis"
+decl_stmt|;
+name|ciBuilder
+operator|.
+name|setBoundary
 argument_list|(
-literal|"content"
-argument_list|,
-comment|//the name MUST BE "content"
-operator|new
-name|MultipartContentBody
-argument_list|(
-name|content
-argument_list|)
+name|boundary
 argument_list|)
 expr_stmt|;
-comment|//now add the content (ordering is important, because the first
-comment|//part will be assumed the original document and all following are
-comment|//assumed alternate - transformed - versions
-name|content
-operator|.
-name|addBodyPart
-argument_list|(
+comment|//use a small extension to deal with multipart/alternate
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|ContentBody
+argument_list|>
+name|alternates
+init|=
 operator|new
-name|FormBodyPart
+name|LinkedHashMap
+argument_list|<
+name|String
+argument_list|,
+name|ContentBody
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|alternates
+operator|.
+name|put
 argument_list|(
 literal|"http://www.example.com/test.html"
 argument_list|,
-comment|//the id of the content
 operator|new
 name|StringBody
 argument_list|(
 name|HTML_CONTENT
 argument_list|,
-literal|"text/html"
-argument_list|,
+name|ContentType
+operator|.
+name|TEXT_HTML
+operator|.
+name|withCharset
+argument_list|(
 name|UTF8
 argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|content
+name|alternates
 operator|.
-name|addBodyPart
-argument_list|(
-operator|new
-name|FormBodyPart
+name|put
 argument_list|(
 literal|"http://www.example.com/test.txt"
 argument_list|,
@@ -1827,9 +1878,35 @@ name|StringBody
 argument_list|(
 name|extraTextConent
 argument_list|,
-literal|"text/plain"
-argument_list|,
+name|ContentType
+operator|.
+name|TEXT_PLAIN
+operator|.
+name|withCharset
+argument_list|(
 name|UTF8
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|ciBuilder
+operator|.
+name|addPart
+argument_list|(
+literal|"content"
+argument_list|,
+operator|new
+name|MultipartContentBody
+argument_list|(
+name|alternates
+argument_list|,
+literal|"contentParts"
+argument_list|,
+name|ContentType
+operator|.
+name|create
+argument_list|(
+literal|"multipart/alternate"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1858,7 +1935,10 @@ argument_list|)
 operator|.
 name|withEntity
 argument_list|(
-name|contentItem
+name|ciBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|)
 argument_list|)
 operator|.
@@ -1935,51 +2015,44 @@ argument_list|,
 name|rdfContentType
 argument_list|)
 decl_stmt|;
-name|MultipartEntity
-name|contentItem
+name|MultipartEntityBuilder
+name|ciBuilder
 init|=
-operator|new
-name|MultipartEntity
-argument_list|(
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-name|UTF8
-argument_list|)
-decl_stmt|;
-comment|//first the content -> illegal
-name|contentItem
+name|MultipartEntityBuilder
 operator|.
-name|addPart
+name|create
+argument_list|()
+decl_stmt|;
+name|ciBuilder
+operator|.
+name|addTextBody
 argument_list|(
 literal|"content"
 argument_list|,
-comment|//the name MUST BE "content"
-operator|new
-name|StringBody
-argument_list|(
 name|HTML_CONTENT
 argument_list|,
-literal|"text/html"
-argument_list|,
+name|ContentType
+operator|.
+name|TEXT_HTML
+operator|.
+name|withCharset
+argument_list|(
 name|UTF8
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//after that the metadata
-name|contentItem
+name|ciBuilder
 operator|.
-name|addPart
+name|addTextBody
 argument_list|(
 literal|"metadata"
 argument_list|,
-comment|//the name MUST BE "metadata"
-operator|new
-name|StringBody
-argument_list|(
 name|rdfContent
 argument_list|,
+name|ContentType
+operator|.
+name|create
+argument_list|(
 name|rdfContentType
 argument_list|,
 name|UTF8
@@ -2010,7 +2083,10 @@ argument_list|)
 operator|.
 name|withEntity
 argument_list|(
-name|contentItem
+name|ciBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|)
 argument_list|)
 operator|.
@@ -2075,32 +2151,26 @@ argument_list|,
 name|rdfContentType
 argument_list|)
 decl_stmt|;
-name|MultipartEntity
-name|contentItem
+name|MultipartEntityBuilder
+name|ciBuilder
 init|=
-operator|new
-name|MultipartEntity
-argument_list|(
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-name|UTF8
-argument_list|)
-decl_stmt|;
-comment|//after that the metadata
-name|contentItem
+name|MultipartEntityBuilder
 operator|.
-name|addPart
+name|create
+argument_list|()
+decl_stmt|;
+name|ciBuilder
+operator|.
+name|addTextBody
 argument_list|(
 literal|"metadata"
 argument_list|,
-comment|//the name MUST BE "metadata"
-operator|new
-name|StringBody
-argument_list|(
 name|rdfContent
 argument_list|,
+name|ContentType
+operator|.
+name|create
+argument_list|(
 name|rdfContentType
 argument_list|,
 name|UTF8
@@ -2131,7 +2201,10 @@ argument_list|)
 operator|.
 name|withEntity
 argument_list|(
-name|contentItem
+name|ciBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|)
 argument_list|)
 operator|.
@@ -2322,6 +2395,13 @@ argument_list|,
 name|user
 argument_list|)
 expr_stmt|;
+name|String
+name|rdfContentType
+init|=
+name|SupportedFormat
+operator|.
+name|RDF_XML
+decl_stmt|;
 name|ByteArrayOutputStream
 name|out
 init|=
@@ -2337,9 +2417,7 @@ name|out
 argument_list|,
 name|metadata
 argument_list|,
-name|SupportedFormat
-operator|.
-name|RDF_XML
+name|rdfContentType
 argument_list|)
 expr_stmt|;
 name|String
@@ -2356,39 +2434,38 @@ argument_list|,
 name|UTF8
 argument_list|)
 decl_stmt|;
-comment|//The multipart entity for the contentItem
-name|MultipartEntity
-name|contentItem
+name|MultipartEntityBuilder
+name|ciBuilder
 init|=
-operator|new
-name|MultipartEntity
-argument_list|(
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-name|UTF8
-argument_list|)
+name|MultipartEntityBuilder
+operator|.
+name|create
+argument_list|()
 decl_stmt|;
-comment|//the "metadata" MUST BE the first element
+comment|//add the metadata
 comment|/*          * NOTE: We need here to override the getFilename, because this MUST          *       BE the URI of the ContentItem. This is important, because the          *       Metadata do contain triples about that ContentItem and therefore          *       it MUST BE assured that the URI of the ContentItem created by          *       the Stanbol Enhancer is the same of as the URI used in the          *       Metadata!          */
-name|contentItem
+name|ciBuilder
 operator|.
 name|addPart
 argument_list|(
 literal|"metadata"
 argument_list|,
-comment|//the name MUST BE "metadata"
 operator|new
 name|StringBody
 argument_list|(
 name|rdfContent
 argument_list|,
-name|SupportedFormat
+name|ContentType
 operator|.
-name|RDF_XML
-argument_list|,
+name|create
+argument_list|(
+name|rdfContentType
+argument_list|)
+operator|.
+name|withCharset
+argument_list|(
 name|UTF8
+argument_list|)
 argument_list|)
 block|{
 annotation|@
@@ -2410,22 +2487,21 @@ block|}
 block|}
 argument_list|)
 expr_stmt|;
-comment|//Add the Content
-comment|/*          * NOTE: If we only parse a single content than we can also directly          *       add it with the name "content". This means that the useage of          *       a "multipart/alternate" container is in such cases optional.          */
-name|contentItem
+comment|//add the content
+name|ciBuilder
 operator|.
-name|addPart
+name|addTextBody
 argument_list|(
 literal|"content"
 argument_list|,
-comment|//the name MUST BE "content"
-operator|new
-name|StringBody
-argument_list|(
 name|HTML_CONTENT
 argument_list|,
-literal|"text/html"
-argument_list|,
+name|ContentType
+operator|.
+name|TEXT_HTML
+operator|.
+name|withCharset
+argument_list|(
 name|UTF8
 argument_list|)
 argument_list|)
@@ -2455,7 +2531,10 @@ argument_list|)
 operator|.
 name|withEntity
 argument_list|(
-name|contentItem
+name|ciBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|)
 argument_list|)
 operator|.
@@ -2667,9 +2746,8 @@ return|return
 name|ta
 return|;
 block|}
-comment|/**      * Supports sending multipart mime as {@link ContentBody}.      * TODO: maybe move such utilities to an own Multipart ContentItem      * utility module      * @author Rupert Westenthaler      *      */
+comment|/**      * Supports sending multipart mime as {@link ContentBody}.      * @author Rupert Westenthaler      *      */
 specifier|private
-specifier|static
 class|class
 name|MultipartContentBody
 extends|extends
@@ -2680,41 +2758,52 @@ implements|,
 name|ContentDescriptor
 block|{
 specifier|private
-name|HttpMultipart
-name|multipart
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|ContentBody
+argument_list|>
+name|parts
+decl_stmt|;
+specifier|private
+name|String
+name|boundary
 decl_stmt|;
 specifier|public
 name|MultipartContentBody
 parameter_list|(
-name|HttpMultipart
-name|multipart
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|ContentBody
+argument_list|>
+name|parts
+parameter_list|,
+name|String
+name|boundary
+parameter_list|,
+name|ContentType
+name|contentType
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"multipart/%s; boundary=%s"
-argument_list|,
-name|multipart
-operator|.
-name|getSubType
-argument_list|()
-argument_list|,
-name|multipart
-operator|.
-name|getBoundary
-argument_list|()
-argument_list|)
+name|contentType
 argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|multipart
+name|parts
 operator|=
-name|multipart
+name|parts
+expr_stmt|;
+name|this
+operator|.
+name|boundary
+operator|=
+name|boundary
 expr_stmt|;
 block|}
 annotation|@
@@ -2725,10 +2814,39 @@ name|getCharset
 parameter_list|()
 block|{
 return|return
-name|multipart
+name|UTF8
 operator|.
-name|getCharset
+name|toString
 argument_list|()
+return|;
+comment|//no charset for multipart parts
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getMimeType
+parameter_list|()
+block|{
+return|return
+operator|new
+name|StringBuilder
+argument_list|(
+name|super
+operator|.
+name|getMimeType
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|"; boundary="
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|boundary
+argument_list|)
 operator|.
 name|toString
 argument_list|()
@@ -2754,11 +2872,11 @@ name|long
 name|getContentLength
 parameter_list|()
 block|{
+comment|//not known as we would need to count the content length AND
+comment|//the length of the different mime headers.
 return|return
-name|multipart
-operator|.
-name|getTotalLength
-argument_list|()
+operator|-
+literal|1
 return|;
 block|}
 annotation|@
@@ -2784,7 +2902,62 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-name|multipart
+name|MultipartEntityBuilder
+name|builder
+init|=
+name|MultipartEntityBuilder
+operator|.
+name|create
+argument_list|()
+decl_stmt|;
+name|builder
+operator|.
+name|setBoundary
+argument_list|(
+name|boundary
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|ContentBody
+argument_list|>
+name|part
+range|:
+name|parts
+operator|.
+name|entrySet
+argument_list|()
+control|)
+block|{
+name|builder
+operator|.
+name|addPart
+argument_list|(
+name|part
+operator|.
+name|getKey
+argument_list|()
+argument_list|,
+name|part
+operator|.
+name|getValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+name|HttpEntity
+name|entity
+init|=
+name|builder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|entity
 operator|.
 name|writeTo
 argument_list|(
