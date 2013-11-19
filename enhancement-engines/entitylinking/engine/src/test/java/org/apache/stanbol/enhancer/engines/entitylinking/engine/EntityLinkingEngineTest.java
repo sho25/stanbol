@@ -3300,6 +3300,14 @@ operator|.
 name|EMPTY_SET
 argument_list|)
 expr_stmt|;
+name|tpc
+operator|.
+name|setIgnoreChunksState
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+comment|//to emulate pre STANBOL-1211
 name|EntityLinkerConfig
 name|config
 init|=

@@ -214,6 +214,34 @@ comment|/**      * The number of matchable Tokens enclosed by this Chunk      */
 name|int
 name|matchableCount
 decl_stmt|;
+comment|/**      * The start position of the first matchable {@link Token} within this      * chunk      */
+name|int
+name|matchableStart
+init|=
+operator|-
+literal|1
+decl_stmt|;
+comment|/**      * The start char offset of the first matchable {@link Token} within this chunk      */
+name|int
+name|matchableStartCharIndex
+init|=
+operator|-
+literal|1
+decl_stmt|;
+comment|/**      * The end position of the last matchable {@link Token} within this chunk      */
+name|int
+name|matchableEnd
+init|=
+operator|-
+literal|1
+decl_stmt|;
+comment|/**      * The end char offset of the last matchable {@link Token} within this chunk      */
+name|int
+name|matchableEndCharIndex
+init|=
+operator|-
+literal|1
+decl_stmt|;
 comment|/**      * constructs and initializes the meta data for the parsed {@link Chunk}      * @param chunk      */
 specifier|public
 name|ChunkData
@@ -430,6 +458,46 @@ parameter_list|()
 block|{
 return|return
 name|endToken
+return|;
+block|}
+comment|/**      * The index of the first matchable Token within the {@link Chunk} or      *<code>-1</code> if none      * @return      */
+specifier|public
+name|int
+name|getMatchableStart
+parameter_list|()
+block|{
+return|return
+name|matchableStart
+return|;
+block|}
+comment|/**      * The index of the last matchable Token within the {@link Chunk} or      *<code>-1</code> if none      * @return      */
+specifier|public
+name|int
+name|getMatchableEnd
+parameter_list|()
+block|{
+return|return
+name|matchableEnd
+return|;
+block|}
+comment|/**      * The char index of the start character of the first matchable {@link Token}      * within the {@link Chunk} or<code>-1</code> if none.      * @return      */
+specifier|public
+name|int
+name|getMatchableStartChar
+parameter_list|()
+block|{
+return|return
+name|matchableStartCharIndex
+return|;
+block|}
+comment|/**      * the char indes of the end character of the last matchable {@link Token}      * within the {@link Chunk} or<code>-1</code> if none      * @return      */
+specifier|public
+name|int
+name|getMatchableEndChar
+parameter_list|()
+block|{
+return|return
+name|matchableEndCharIndex
 return|;
 block|}
 block|}
