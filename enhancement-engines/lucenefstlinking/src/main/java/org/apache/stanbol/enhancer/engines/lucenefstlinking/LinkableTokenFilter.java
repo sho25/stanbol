@@ -658,14 +658,14 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
-name|TokenData
+name|LinkableTokenContext
 argument_list|>
 name|linkableTokens
 init|=
 operator|new
 name|LinkedList
 argument_list|<
-name|TokenData
+name|LinkableTokenContext
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1581,7 +1581,16 @@ name|linkableTokens
 operator|.
 name|add
 argument_list|(
+operator|new
+name|LinkableTokenContext
+argument_list|(
 name|token
+argument_list|,
+name|sectionData
+operator|.
+name|getTokens
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1597,15 +1606,22 @@ name|lpc
 operator|.
 name|isIgnoreChunks
 argument_list|()
-comment|//matchable token
 operator|&&
+comment|//matchable token
 name|token
 operator|.
 name|inChunk
 operator|!=
 literal|null
 operator|&&
-comment|//in chunks with two ore more
+comment|//in processable chunks with more
+name|token
+operator|.
+name|inChunk
+operator|.
+name|isProcessable
+operator|&&
+comment|//as two matchable tokens
 name|token
 operator|.
 name|inChunk
@@ -1621,7 +1637,16 @@ name|linkableTokens
 operator|.
 name|add
 argument_list|(
+operator|new
+name|LinkableTokenContext
+argument_list|(
 name|token
+argument_list|,
+name|sectionData
+operator|.
+name|getTokens
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1659,8 +1684,8 @@ index|[]
 name|head
 parameter_list|)
 block|{
-name|TokenData
-name|linkableToken
+name|LinkableTokenContext
+name|linkableTokenContext
 decl_stmt|;
 for|for
 control|(
@@ -1700,7 +1725,7 @@ operator|.
 name|getEndOffset
 argument_list|()
 decl_stmt|;
-name|linkableToken
+name|linkableTokenContext
 operator|=
 name|linkableTokens
 operator|.
@@ -1718,10 +1743,12 @@ argument_list|)
 expr_stmt|;
 while|while
 condition|(
-name|linkableToken
+name|linkableTokenContext
 operator|!=
 literal|null
 operator|&&
+name|linkableTokenContext
+operator|.
 name|linkableToken
 operator|.
 name|token
@@ -1739,7 +1766,7 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
-name|linkableToken
+name|linkableTokenContext
 operator|=
 name|linkableTokens
 operator|.
@@ -1758,10 +1785,12 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|linkableToken
+name|linkableTokenContext
 operator|==
 literal|null
 operator|||
+name|linkableTokenContext
+operator|.
 name|linkableToken
 operator|.
 name|token
@@ -1816,6 +1845,23 @@ block|}
 else|else
 block|{
 comment|//if the tag overlaps a linkable token
+name|TokenData
+name|linkableToken
+init|=
+name|linkableTokenContext
+operator|.
+name|linkableToken
+decl_stmt|;
+name|List
+argument_list|<
+name|TokenData
+argument_list|>
+name|tokens
+init|=
+name|linkableTokenContext
+operator|.
+name|context
+decl_stmt|;
 name|ChunkData
 name|cd
 init|=
@@ -1887,17 +1933,6 @@ name|int
 name|match
 init|=
 literal|0
-decl_stmt|;
-name|List
-argument_list|<
-name|TokenData
-argument_list|>
-name|tokens
-init|=
-name|sectionData
-operator|.
-name|getTokens
-argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -2005,7 +2040,7 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isTraceEnabled
 argument_list|()
 condition|)
 block|{
@@ -2019,7 +2054,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|" - reduce tag {}[{},{}] because it does only match "
 operator|+
@@ -2068,7 +2103,7 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isTraceEnabled
 argument_list|()
 condition|)
 block|{
@@ -2082,7 +2117,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|" + keep tag {}[{},{}] matching {} of {} "
 operator|+
@@ -2131,7 +2166,7 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isTraceEnabled
 argument_list|()
 condition|)
 block|{
@@ -2145,7 +2180,7 @@ argument_list|()
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|" + keep tag {}[{},{}] for matchable Chunk {}[{},{}]"
 argument_list|,
@@ -2187,7 +2222,7 @@ if|if
 condition|(
 name|log
 operator|.
-name|isDebugEnabled
+name|isTraceEnabled
 argument_list|()
 condition|)
 block|{
@@ -2208,7 +2243,7 @@ argument_list|)
 decl_stmt|;
 name|log
 operator|.
-name|debug
+name|trace
 argument_list|(
 literal|" + keep tag {}"
 argument_list|,
@@ -2217,6 +2252,49 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
+block|}
+comment|/**      * Holds the context for a linkable {@link Token}s. This ensures that the      * list of Tokens of the current {@link Section} (typically a {@link Sentence})       * is still available even if the {@link LinkableTokenFilter#sectionData} does hold      * already tokens for the next section.<p>      * This is necessary as {@link LinkableTokenFilter#reduce(TagLL[])} can      * be called for the previous sentence in cases where a Tag cluster includes      * the last {@link Token} of a {@link Section}.      * @author Rupert Westenthaler      *      */
+specifier|private
+specifier|static
+class|class
+name|LinkableTokenContext
+block|{
+specifier|final
+name|TokenData
+name|linkableToken
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|TokenData
+argument_list|>
+name|context
+decl_stmt|;
+name|LinkableTokenContext
+parameter_list|(
+name|TokenData
+name|linkableToken
+parameter_list|,
+name|List
+argument_list|<
+name|TokenData
+argument_list|>
+name|context
+parameter_list|)
+block|{
+name|this
+operator|.
+name|linkableToken
+operator|=
+name|linkableToken
+expr_stmt|;
+name|this
+operator|.
+name|context
+operator|=
+name|context
+expr_stmt|;
 block|}
 block|}
 block|}
