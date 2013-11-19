@@ -2284,6 +2284,19 @@ name|matchLabel
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|match
+operator|.
+name|getScore
+argument_list|()
+operator|>=
+name|elConfig
+operator|.
+name|getMinMatchScore
+argument_list|()
+condition|)
+block|{
 name|log
 operator|.
 name|trace
@@ -2305,6 +2318,22 @@ argument_list|(
 name|match
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|" ... filtered because match score< {}"
+argument_list|,
+name|elConfig
+operator|.
+name|getMinMatchScore
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -2781,6 +2810,11 @@ operator|.
 name|getLanguage
 argument_list|()
 argument_list|)
+argument_list|,
+name|elConfig
+operator|.
+name|getMinChunkMatchScore
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//we use two TagClusterReducer implementations.

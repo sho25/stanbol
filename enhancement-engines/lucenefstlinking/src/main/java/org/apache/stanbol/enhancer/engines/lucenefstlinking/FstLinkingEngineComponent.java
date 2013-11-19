@@ -603,6 +603,22 @@ name|org
 operator|.
 name|apache
 operator|.
+name|felix
+operator|.
+name|scr
+operator|.
+name|annotations
+operator|.
+name|ReferenceCardinality
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|lucene
 operator|.
 name|document
@@ -1620,6 +1636,13 @@ decl_stmt|;
 comment|/**      * used to resolve '{prefix}:{local-name}' used within the engines configuration      */
 annotation|@
 name|Reference
+argument_list|(
+name|cardinality
+operator|=
+name|ReferenceCardinality
+operator|.
+name|OPTIONAL_UNARY
+argument_list|)
 specifier|protected
 name|NamespacePrefixService
 name|prefixService
