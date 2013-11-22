@@ -1810,6 +1810,7 @@ argument_list|>
 implements|implements
 name|ServiceProperties
 block|{
+comment|/**      * first of the post processing engines (note STANBOL-1218)      */
 specifier|private
 specifier|static
 specifier|final
@@ -1820,7 +1821,7 @@ name|ServiceProperties
 operator|.
 name|ORDERING_POST_PROCESSING
 operator|+
-literal|90
+literal|80
 decl_stmt|;
 specifier|private
 specifier|static
