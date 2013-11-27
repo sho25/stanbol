@@ -467,6 +467,8 @@ implements|implements
 name|EnhancementEngine
 implements|,
 name|ServiceProperties
+implements|,
+name|DereferenceConstants
 block|{
 specifier|private
 specifier|final
@@ -600,6 +602,12 @@ operator|.
 name|dereferencer
 operator|=
 name|dereferencer
+expr_stmt|;
+comment|//init the defautl ordering
+name|setEngineOrdering
+argument_list|(
+name|DEFAULT_ENGINE_ORDERING
+argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Setter for the offline mode. This method is typically called of      * {@link OfflineMode} is injected to the component registering an instance      * of this Engine implementation      * @param mode the offline mode      */

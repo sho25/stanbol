@@ -72,6 +72,38 @@ name|t
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+name|DereferenceException
+parameter_list|(
+name|UriRef
+name|entity
+parameter_list|,
+name|String
+name|reason
+parameter_list|)
+block|{
+name|super
+argument_list|(
+literal|"Unable to dereference Entity "
+operator|+
+name|entity
+operator|+
+operator|(
+name|reason
+operator|!=
+literal|null
+condition|?
+literal|": "
+operator|+
+name|reason
+else|:
+literal|""
+operator|)
+operator|+
+literal|"!"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
