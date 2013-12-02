@@ -1497,6 +1497,10 @@ name|log
 operator|.
 name|isDebugEnabled
 argument_list|()
+operator|&&
+name|dereferencedCount
+operator|>
+literal|0
 condition|)
 block|{
 name|log
