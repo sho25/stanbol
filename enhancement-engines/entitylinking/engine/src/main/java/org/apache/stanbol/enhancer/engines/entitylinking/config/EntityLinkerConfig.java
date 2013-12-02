@@ -613,7 +613,9 @@ name|MAX_SEARCH_TOKEN_DISTANCE
 init|=
 literal|"enhancer.engines.linking.maxSearchTokenDistance"
 decl_stmt|;
-comment|/**      * Adds the dereference feature (STANBOL-333) also to this engine.      * This will be replaced by STANBOL-336.       */
+comment|/**      * Adds the dereference feature (STANBOL-333) also to this engine.      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -622,7 +624,9 @@ name|DEREFERENCE_ENTITIES
 init|=
 literal|"enhancer.engines.linking.dereference"
 decl_stmt|;
-comment|/**      * Allows to add a list of fields that are included when dereferencing Entities      */
+comment|/**      * Allows to add a list of fields that are included when dereferencing Entities      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -1175,14 +1179,16 @@ name|DEFAULT_MIN_TOKEN_SCORE
 init|=
 literal|0.7f
 decl_stmt|;
-comment|/**      * By default Entities are dereferenced      */
+comment|/**      * By default Entities are dereferenced. Default chanted to<code>false</code>      * as this is now deprecated      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
 name|boolean
 name|DEFAULT_DEREFERENCE_ENTITIES_STATE
 init|=
-literal|true
+literal|false
 decl_stmt|;
 comment|/**      * The default value for the state if entities that would have the same score      * should get their score slightly changed to ensure that entities with an      * higher ranking (popularity) do have an higher score.      */
 specifier|public
@@ -3327,6 +3333,24 @@ name|isDereferenceEntitiesEnabled
 argument_list|()
 condition|)
 block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"DereferenceEntities is deprecated for the Engine. Please use the "
+operator|+
+literal|"EntityhubDereferenceEngine instead (see STANBOL-1223 for details)"
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|linkerConfig
+operator|.
+name|isDereferenceEntitiesEnabled
+argument_list|()
+condition|)
+block|{
 name|value
 operator|=
 name|configuration
@@ -5298,7 +5322,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**      * Setter for the dereference entities state.      * @param state the state or<code>null</code> to set the      * default.      */
+comment|/**      * Setter for the dereference entities state.      * @param state the state or<code>null</code> to set the      * default.      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
 end_comment
 
 begin_function
@@ -5341,7 +5365,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**      * Getter for the dereference entities state      * @return<code>true</code> if enabled otherwise<code>false</code>      */
+comment|/**      * Getter for the dereference entities state      * @return<code>true</code> if enabled otherwise<code>false</code>      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
 end_comment
 
 begin_function
@@ -5357,7 +5381,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**      * Getter for all fields that need to be selected based on the      * current EntityLinker configuration. This includes<ul>      *<li> {@link #getNameField()}      *<li> {@link #getTypeField()}      *<li> {@link #getRedirectField()} if {@link #getRedirectProcessingMode()}       * != {@link RedirectProcessingMode#IGNORE}      *<li> {@link #getDereferencedFields()} if {@link #isDereferenceEntitiesEnabled()}      *</ul>      * @return the selected fields for queries against the linked vocabulary.      */
+comment|/**      * Getter for all fields that need to be selected based on the      * current EntityLinker configuration. This includes<ul>      *<li> {@link #getNameField()}      *<li> {@link #getTypeField()}      *<li> {@link #getRedirectField()} if {@link #getRedirectProcessingMode()}       * != {@link RedirectProcessingMode#IGNORE}      *<li> {@link #getDereferencedFields()} if {@link #isDereferenceEntitiesEnabled()}      *</ul>      * @return the selected fields for queries against the linked vocabulary.      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
 end_comment
 
 begin_function

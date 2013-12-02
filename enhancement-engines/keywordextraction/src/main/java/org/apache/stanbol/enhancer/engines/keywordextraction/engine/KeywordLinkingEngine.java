@@ -1636,7 +1636,7 @@ init|=
 literal|"org.apache.stanbol.enhancer.engines.keywordextraction.minTokenMatchFactor"
 decl_stmt|;
 comment|//  public static final String ENABLE_CHUNKER = "org.apache.stanbol.enhancer.engines.keywordextraction.enableChunker";
-comment|/**      * Adds the dereference feature (STANBOL-333) also to this engine.      * This will be replaced by STANBOL-336.       */
+comment|/**      * Adds the dereference feature (STANBOL-333) also to this engine.      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
 specifier|public
 specifier|static
 specifier|final
@@ -1645,16 +1645,16 @@ name|DEREFERENCE_ENTITIES
 init|=
 literal|"org.apache.stanbol.enhancer.engines.keywordextraction.dereference"
 decl_stmt|;
-comment|/**      * The default state to dereference entities set to<code>true</code>.      */
+comment|/**      * The default state to dereference entities set to<code>false</code> as      * this is now a deprecated feature.      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
 specifier|public
 specifier|static
 specifier|final
 name|boolean
 name|DEFAULT_DEREFERENCE_ENTITIES_STATE
 init|=
-literal|true
+literal|false
 decl_stmt|;
-comment|/**      * Allows to add a list of fields that are included when dereferencing Entities      */
+comment|/**      * Allows to add a list of fields that are included when dereferencing Entities      * @deprecated Use a Dereference Engine instead (STANBOL-336)      */
 specifier|public
 specifier|static
 specifier|final
@@ -3229,6 +3229,21 @@ block|{
 name|dereferenceEntitiesState
 operator|=
 name|DEFAULT_DEREFERENCE_ENTITIES_STATE
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|dereferenceEntitiesState
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"DereferenceEntities is deprecated. Please use the Entityhub"
+operator|+
+literal|"DereferenceEngine instead (see STANBOL-1223 for details)"
+argument_list|)
 expr_stmt|;
 block|}
 if|if

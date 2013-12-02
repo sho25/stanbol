@@ -1176,14 +1176,17 @@ name|NAME_FIELD
 init|=
 literal|"org.apache.stanbol.enhancer.engines.entitytagging.nameField"
 decl_stmt|;
-comment|/**      * Use the RDFS label as default      */
+comment|/**      * Use the RDFS label as default      * @deprecated Use a dereference engine instead (STANBOL-336)      */
+annotation|@
+name|Deprecated
 annotation|@
 name|Property
 argument_list|(
 name|boolValue
 operator|=
-literal|true
+literal|false
 argument_list|)
+comment|//changed default to false
 specifier|public
 specifier|static
 specifier|final
@@ -1301,11 +1304,12 @@ name|numSuggestions
 init|=
 literal|3
 decl_stmt|;
+comment|/**      * Changed default to<code>false</code> now that this feature is deprecated      * (STANBOL-336).      */
 specifier|protected
 name|boolean
 name|dereferenceEntities
 init|=
-literal|true
+literal|false
 decl_stmt|;
 comment|/**      * The {@link OfflineMode} is used by Stanbol to indicate that no external service should be referenced.      * For this engine that means it is necessary to check if the used {@link Site} can operate offline or      * not.      *       * @see #enableOfflineMode(OfflineMode)      * @see #disableOfflineMode(OfflineMode)      */
 annotation|@
@@ -1784,6 +1788,23 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|this
+operator|.
+name|dereferenceEntities
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"DereferenceEntities is deprecated for this Enigne. Please use "
+operator|+
+literal|"the EntityhubDereferenceEngine instead (see STANBOL-1223 for details)"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Deactivate
