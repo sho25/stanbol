@@ -19,6 +19,54 @@ name|dereference
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|Language
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|PlainLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|Triple
+import|;
+end_import
+
 begin_comment
 comment|/**  * Define configuration parameters for Dereference engines  * @author Rupert Westenthaler  *  */
 end_comment
@@ -28,6 +76,30 @@ specifier|public
 interface|interface
 name|DereferenceConstants
 block|{
+comment|/**      * Property that allows to enable/disable the filtering of {@link Triple}s      * with {@link PlainLiteral} {@link Triple#getObject() objects} based on      * their {@link Language}. Languages that need to be dereferenced are      * parsed to the {@link EntityDereferencer} via the      * {@link DereferenceContext#getContentLanguages()}. If empty no languages      * MUST BE filtered.<p>      * If both this and {@link #FILTER_ACCEPT_LANGUAGES} are enabled the filter      * should use the union of the two sets available via       * {@link DereferenceContext#getLanguages()}.      */
+name|String
+name|FILTER_CONTENT_LANGUAGES
+init|=
+literal|"enhancer.engine.dereference.filterContentlanguages"
+decl_stmt|;
+comment|/**      * By default {@link #FILTER_CONTENT_LANGUAGES} is deactivated      */
+name|boolean
+name|DEFAULT_FILTER_CONTENT_LANGUAGES
+init|=
+literal|false
+decl_stmt|;
+comment|/**      * Property that allows to enable/disable the filtering of {@link Triple}s      * with {@link PlainLiteral} {@link Triple#getObject() objects} based on      * their {@link Language}. Languages that need to be dereferenced are      * parsed to the {@link EntityDereferencer} via the      * {@link DereferenceContext#getAcceptLanguages()}. If empty no languages      * MUST BE filtered.<p>      * If both this and {@link #FILTER_CONTENT_LANGUAGES} are enabled the filter      * should use the union of the two sets available via       * {@link DereferenceContext#getLanguages()}.      */
+name|String
+name|FILTER_ACCEPT_LANGUAGES
+init|=
+literal|"enhancer.engine.dereference.filterAcceptlanguages"
+decl_stmt|;
+comment|/**      * By default {@link #FILTER_ACCEPT_LANGUAGES} is activated      */
+name|boolean
+name|DEFAULT_FILTER_ACCEPT_LANGUAGES
+init|=
+literal|true
+decl_stmt|;
 comment|/**      * Property used to configure the fields that should be dereferenced.<p>      * DereferenceEngines need to support a list of URIs but may also support more      * complex syntax (such as the Entityhub FiedMapping). However parsing a      * list of properties URIs MUST BE still valid.<p>      * Support for Namespace prefixes via the Stanbol Namespace Prefix Service      * is optional. If unknown prefixes are used or prefixes are not supported      * the Engine is expected to throw a       * {@link org.osgi.service.cm.ConfigurationException} during activation      */
 name|String
 name|DEREFERENCE_ENTITIES_FIELDS
