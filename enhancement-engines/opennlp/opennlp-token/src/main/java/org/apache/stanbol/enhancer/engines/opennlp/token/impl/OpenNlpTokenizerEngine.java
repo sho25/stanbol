@@ -635,6 +635,11 @@ name|metatype
 operator|=
 literal|true
 argument_list|,
+name|configurationFactory
+operator|=
+literal|true
+argument_list|,
+comment|//allow multiple instances
 name|policy
 operator|=
 name|ConfigurationPolicy
