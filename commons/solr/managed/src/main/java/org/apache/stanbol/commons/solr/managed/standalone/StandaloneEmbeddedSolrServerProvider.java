@@ -406,6 +406,10 @@ expr_stmt|;
 block|}
 if|if
 condition|(
+name|coreName
+operator|!=
+literal|null
+operator|&&
 operator|!
 name|server
 operator|.
