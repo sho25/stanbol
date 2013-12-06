@@ -796,13 +796,19 @@ decl_stmt|;
 name|Repository
 name|repository
 decl_stmt|;
+name|boolean
+name|shutdownRepository
+init|=
+literal|false
+decl_stmt|;
+comment|//if we need to shutdown the repo
 comment|//protected RepositoryConnection connection;
 comment|/**      * Default Constructor. Expects that the config is parsed by calling      * {@link #setConfiguration(Map)}      */
 specifier|public
 name|RdfIndexingSource
 parameter_list|()
 block|{}
-comment|/**      *       * @param repository      * @param contexts      */
+comment|/**      * Constructs a {@link RdfIndexingSource} for the parsed parameters. This      * expects that {@link #setConfiguration(Map)} is not called      * @param repository      * @param contexts      */
 specifier|public
 name|RdfIndexingSource
 parameter_list|(
@@ -838,30 +844,13 @@ name|isInitialized
 argument_list|()
 condition|)
 block|{
-try|try
-block|{
-name|repository
-operator|.
-name|initialize
-argument_list|()
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|RepositoryException
-name|e
-parameter_list|)
-block|{
 throw|throw
 operator|new
 name|IllegalStateException
 argument_list|(
-literal|"Unable to Initialise the parsed Repository"
-argument_list|,
-name|e
+literal|"Parsed Repository is not initialized"
 argument_list|)
 throw|;
-block|}
 block|}
 name|this
 operator|.
@@ -1178,6 +1167,11 @@ operator|.
 name|initialize
 argument_list|()
 expr_stmt|;
+name|shutdownRepository
+operator|=
+literal|true
+expr_stmt|;
+comment|//we created it, so we do shut it down
 block|}
 catch|catch
 parameter_list|(
@@ -2054,6 +2048,11 @@ name|ungetEntityDataProviderConnection
 argument_list|()
 expr_stmt|;
 comment|//finally shutdown the repository
+if|if
+condition|(
+name|shutdownRepository
+condition|)
+block|{
 try|try
 block|{
 name|repository
@@ -2078,6 +2077,59 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+block|}
+specifier|public
+specifier|final
+name|boolean
+name|isFollowBNodeState
+parameter_list|()
+block|{
+return|return
+name|followBNodeState
+return|;
+block|}
+specifier|public
+specifier|final
+name|void
+name|setFollowBNodeState
+parameter_list|(
+name|boolean
+name|followBNodeState
+parameter_list|)
+block|{
+name|this
+operator|.
+name|followBNodeState
+operator|=
+name|followBNodeState
+expr_stmt|;
+block|}
+specifier|public
+specifier|final
+name|boolean
+name|isIncludeInferred
+parameter_list|()
+block|{
+return|return
+name|includeInferred
+return|;
+block|}
+specifier|public
+specifier|final
+name|void
+name|setIncludeInferred
+parameter_list|(
+name|boolean
+name|includeInferred
+parameter_list|)
+block|{
+name|this
+operator|.
+name|includeInferred
+operator|=
+name|includeInferred
+expr_stmt|;
 block|}
 annotation|@
 name|Override
