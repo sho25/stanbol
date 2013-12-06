@@ -678,12 +678,16 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
+specifier|private
+name|BundleContext
+name|bundleContext
+decl_stmt|;
 comment|/**      * OSGI constructor<b> DO NOT USE</b> outside of an OSGI environment as this      * will not initialise the {@link NamespacePrefixProvider} using the      * {@link ServiceLoader} utility!      */
 specifier|public
 name|StanbolNamespacePrefixService
 parameter_list|()
 block|{}
-comment|/**      * Constructs an Stanbol NamespacePrefixService and initialises other      * {@link NamespacePrefixProvider} implementations using the      * Java {@link ServiceLoader} utility.      * @param mappingFile the mapping file used to manage local mappings. If      *<code>null</code> no local mappings are supported.      * @throws IOException      */
+comment|/**      * Constructs an Stanbol NamespacePrefixService and initialises other      * {@link NamespacePrefixProvider} implementations using the      * Java {@link ServiceLoader} utility.      * @param mappingFile the mapping file used to manage local mappings. If      *<code>null</code> no president local mappings are supported.      * @throws IOException      */
 specifier|public
 name|StanbolNamespacePrefixService
 parameter_list|(
@@ -731,6 +735,23 @@ argument_list|(
 name|NamespacePrefixProvider
 operator|.
 name|class
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Imports tab separated prefix mappings from the parsed Stream      * @param in      * @throws IOException      */
+specifier|public
+name|void
+name|importPrefixMappings
+parameter_list|(
+name|InputStream
+name|in
+parameter_list|)
+throws|throws
+name|IOException
+block|{
+name|readPrefixMappings
+argument_list|(
+name|in
 argument_list|)
 expr_stmt|;
 block|}
@@ -799,19 +820,17 @@ name|FileNotFoundException
 throws|,
 name|IOException
 block|{
-specifier|final
-name|BundleContext
-name|bc
-init|=
+name|bundleContext
+operator|=
 name|ctx
 operator|.
 name|getBundleContext
 argument_list|()
-decl_stmt|;
+expr_stmt|;
 comment|//(1) read the mappings
 name|mappingsFile
 operator|=
-name|bc
+name|bundleContext
 operator|.
 name|getDataFile
 argument_list|(
@@ -837,15 +856,19 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//else no mappings yet ... nothing todo
+block|}
+comment|/**      *       */
+specifier|private
+name|void
+name|openTracker
+parameter_list|()
+block|{
 name|providersTracker
 operator|=
 operator|new
 name|ServiceTracker
 argument_list|(
-name|ctx
-operator|.
-name|getBundleContext
-argument_list|()
+name|bundleContext
 argument_list|,
 name|NamespacePrefixProvider
 operator|.
@@ -871,7 +894,7 @@ name|Object
 name|service
 parameter_list|)
 block|{
-name|bc
+name|bundleContext
 operator|.
 name|ungetService
 argument_list|(
@@ -914,7 +937,7 @@ block|{
 name|Object
 name|service
 init|=
-name|bc
+name|bundleContext
 operator|.
 name|getService
 argument_list|(
@@ -934,7 +957,7 @@ argument_list|)
 condition|)
 block|{
 comment|//we need not to track this instance
-name|bc
+name|bundleContext
 operator|.
 name|ungetService
 argument_list|(
@@ -960,16 +983,6 @@ name|providersTracker
 operator|.
 name|open
 argument_list|()
-expr_stmt|;
-name|ctx
-operator|.
-name|getBundleContext
-argument_list|()
-operator|.
-name|getDataFile
-argument_list|(
-name|PREFIX_MAPPINGS
-argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Expected to be called only during activation      * @param in      * @throws IOException      */
@@ -1342,6 +1355,13 @@ condition|)
 block|{
 if|if
 condition|(
+name|mappingsFile
+operator|!=
+literal|null
+condition|)
+block|{
+if|if
+condition|(
 operator|!
 name|mappingsFile
 operator|.
@@ -1349,19 +1369,26 @@ name|isFile
 argument_list|()
 condition|)
 block|{
+if|if
+condition|(
+operator|!
 name|mappingsFile
 operator|.
 name|createNewFile
 argument_list|()
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|mappingsFile
-operator|!=
-literal|null
 condition|)
 block|{
+throw|throw
+operator|new
+name|IOException
+argument_list|(
+literal|"Unable to create mapping file "
+operator|+
+name|mappingsFile
+argument_list|)
+throw|;
+block|}
+block|}
 name|writePrefixMappings
 argument_list|(
 operator|new
@@ -1580,12 +1607,42 @@ name|__sortedProviderRef
 decl_stmt|;
 if|if
 condition|(
-name|providersTracker
+name|bundleContext
 operator|!=
 literal|null
 condition|)
 block|{
 comment|//OSGI variant
+if|if
+condition|(
+name|providersTracker
+operator|==
+literal|null
+condition|)
+block|{
+comment|//lazy initialisation of the service tracker
+synchronized|synchronized
+init|(
+name|this
+init|)
+block|{
+if|if
+condition|(
+name|providersTracker
+operator|==
+literal|null
+operator|&&
+name|bundleContext
+operator|!=
+literal|null
+condition|)
+block|{
+name|openTracker
+argument_list|()
+expr_stmt|;
+block|}
+block|}
+block|}
 comment|//the check for the size ensures that registered/unregistered services
 comment|//are not overlooked when that happens during this method is executed
 comment|//by an other thread.
@@ -1799,6 +1856,10 @@ name|ComponentContext
 name|ctx
 parameter_list|)
 block|{
+name|bundleContext
+operator|=
+literal|null
+expr_stmt|;
 if|if
 condition|(
 name|providersTracker
