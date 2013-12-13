@@ -1282,7 +1282,7 @@ expr_stmt|;
 block|}
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"> process FST config for {} (FST dir: {})"
 argument_list|,
@@ -1350,7 +1350,7 @@ decl_stmt|;
 comment|//(0) get basic parameters of the default configuration
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|" - default config"
 argument_list|)

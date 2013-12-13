@@ -2865,6 +2865,21 @@ name|SolrServer
 name|server
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... updateEngineRegistration for {}: {}"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|,
+name|engineName
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|reference
@@ -2924,6 +2939,7 @@ decl_stmt|;
 comment|// the indexConfig build by this call
 try|try
 block|{
+comment|//try to init - finally unregisterEngine
 if|if
 condition|(
 name|bundleContext
@@ -2988,6 +3004,13 @@ literal|null
 condition|)
 block|{
 comment|//no SolrCore
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"   - SolrCore not yet present"
+argument_list|)
+expr_stmt|;
 return|return;
 comment|//NOTE: unregistering is done in finally block
 block|}
@@ -3075,56 +3098,59 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//create a new searcher for creating FSTs
-name|boolean
-name|foundCorpus
-decl_stmt|;
-try|try
-block|{
-name|foundCorpus
-operator|=
+if|if
+condition|(
+operator|!
 name|indexConfig
 operator|.
 name|activate
 argument_list|()
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|RuntimeException
-name|e
-parameter_list|)
-block|{
-comment|//in case of any excpetion
-name|unregisterEngine
-argument_list|()
-expr_stmt|;
-comment|//unregister current engine and clean up
-throw|throw
-name|e
-throw|;
-comment|//re-throw
-block|}
-if|if
-condition|(
-operator|!
-name|foundCorpus
 condition|)
 block|{
 name|unregisterEngine
 argument_list|()
 expr_stmt|;
 comment|//unregister current engine and clean up
-throw|throw
-operator|new
-name|IllegalStateException
+name|log
+operator|.
+name|error
 argument_list|(
-literal|"Processing of the FST configuration "
+literal|"Processing of the FST configuration was not successfull "
 operator|+
-literal|"was not successfull for any language. See WARN level loggings "
-operator|+
-literal|"for more details!"
+literal|"for any language. See WARN level loggings for more details!"
 argument_list|)
-throw|;
+expr_stmt|;
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"  ... FstLinkingEnigne wiht name {} will not be registered!"
+operator|+
+literal|"Please check the FST config of the engine corresponds with "
+operator|+
+literal|"available fields in the configured SolrCore {} (dir: {})"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|engineName
+block|,
+name|core
+operator|.
+name|getName
+argument_list|()
+block|,
+name|core
+operator|.
+name|getCoreDescriptor
+argument_list|()
+operator|.
+name|getInstanceDir
+argument_list|()
+block|}
+argument_list|)
+expr_stmt|;
 block|}
 else|else
 block|{
@@ -3225,7 +3251,7 @@ block|}
 finally|finally
 block|{
 comment|//in any case (even an Exception) ensure that the current
-comment|//engine registration is unregistered and the currentyl used
+comment|//engine registration is unregistered and the currently used
 comment|//SolrCore is unregistered!
 name|unregisterEngine
 argument_list|()
@@ -3372,6 +3398,23 @@ name|getName
 argument_list|()
 block|}
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... register {}: {}"
+argument_list|,
+name|engine
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|,
+name|engineName
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|engineRegistration
@@ -3558,6 +3601,15 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... unregister Lucene FSTLinkingEngine {}"
+argument_list|,
+name|engineName
+argument_list|)
+expr_stmt|;
 name|engineRegistration
 operator|.
 name|unregister
@@ -3761,6 +3813,21 @@ name|ComponentContext
 name|ctx
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... deactivate {}: {}"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|,
+name|engineName
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|solrServerTracker
