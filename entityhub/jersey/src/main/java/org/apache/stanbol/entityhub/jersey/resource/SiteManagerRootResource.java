@@ -1497,6 +1497,9 @@ operator|.
 name|ok
 argument_list|(
 name|referencedSites
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|rb
