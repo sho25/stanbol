@@ -136,7 +136,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link QueryResultList} implementation for Sesame. This provides  * access to the Sesame {@link Model} holding the dat. Mainly for the use of  * Sesame specific RDF serializer.  *   * @author Rupert Westenthaler  *  * @param<T>  */
+comment|/**  * {@link QueryResultList} implementation for Sesame. This provides  * access to the Sesame {@link Model} holding the data. Mainly for the use of  * Sesame specific RDF serializer.  *   * @author Rupert Westenthaler  *  * @param<T>  */
 end_comment
 
 begin_class
