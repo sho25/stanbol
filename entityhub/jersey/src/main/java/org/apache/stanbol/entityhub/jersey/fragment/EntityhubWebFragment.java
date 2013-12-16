@@ -221,23 +221,9 @@ name|WebFragment
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|jersey
-operator|.
-name|writers
-operator|.
-name|JettisonWriter
-import|;
-end_import
+begin_comment
+comment|//import org.apache.stanbol.entityhub.jersey.writers.JettisonWriter;
+end_comment
 
 begin_import
 import|import
@@ -372,15 +358,7 @@ comment|//      A message body writer for Java class org.codehaus.jettison.json.
 comment|//     and Java type class org.codehaus.jettison.json.JSONArray, and MIME media
 comment|//     type application/json was not found
 comment|//     As a workaround I have implemented this small workaround!
-name|classes
-operator|.
-name|add
-argument_list|(
-name|JettisonWriter
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
+comment|//classes.add(JettisonWriter.class);
 return|return
 name|classes
 return|;
@@ -491,7 +469,9 @@ literal|"entityhub"
 argument_list|,
 literal|"/entityhub"
 argument_list|,
-literal|null
+literal|"The Entityhub allows to manage controlled vocabularies (e.g. used "
+operator|+
+literal|"for EntityLinking by the Stanbol Enhancer Component)"
 argument_list|,
 literal|30
 argument_list|)

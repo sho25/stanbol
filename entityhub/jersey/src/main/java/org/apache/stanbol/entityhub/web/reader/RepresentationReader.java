@@ -13,9 +13,9 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|jersey
+name|web
 operator|.
-name|parsers
+name|reader
 package|;
 end_package
 
