@@ -908,6 +908,13 @@ argument_list|(
 name|reference
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|service
+operator|!=
+literal|null
+condition|)
+block|{
 name|serializerLock
 operator|.
 name|writeLock
@@ -1001,6 +1008,7 @@ operator|.
 name|unlock
 argument_list|()
 expr_stmt|;
+block|}
 block|}
 return|return
 name|service
