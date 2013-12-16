@@ -747,6 +747,21 @@ operator|.
 name|X_TURTLE
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|MediaType
+name|N_TRIPLE_TYPE
+init|=
+name|MediaType
+operator|.
+name|valueOf
+argument_list|(
+name|SupportedFormat
+operator|.
+name|N_TRIPLE
+argument_list|)
+decl_stmt|;
 comment|/**      * Read-only list of the supported RDF formats      */
 specifier|public
 specifier|static
@@ -770,6 +785,8 @@ argument_list|,
 name|JSONLD_TYPE
 argument_list|,
 name|N3_TYPE
+argument_list|,
+name|N_TRIPLE_TYPE
 argument_list|,
 name|RDF_JSON_TYPE
 argument_list|,
