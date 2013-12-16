@@ -245,6 +245,15 @@ specifier|private
 name|MediaTypeUtil
 parameter_list|()
 block|{}
+comment|/**      * JSON-LD now uses<code>application/ld+json</code>      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|JSON_LD
+init|=
+literal|"application/ld+json"
+decl_stmt|;
 comment|/**      * Unmodifiable Set with the Media Types supported RDF serializations      */
 specifier|public
 specifier|static
@@ -270,6 +279,8 @@ operator|.
 name|asList
 argument_list|(
 name|APPLICATION_JSON
+argument_list|,
+name|JSON_LD
 argument_list|,
 name|RDF_XML
 argument_list|,
