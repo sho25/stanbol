@@ -2717,6 +2717,15 @@ name|Object
 name|service
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... SolrCore for {} was removed!"
+argument_list|,
+name|indexReference
+argument_list|)
+expr_stmt|;
 name|updateEngineRegistration
 argument_list|(
 name|solrServerTracker
@@ -2750,6 +2759,15 @@ name|Object
 name|service
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... SolrCore for {} was updated!"
+argument_list|,
+name|indexReference
+argument_list|)
+expr_stmt|;
 name|updateEngineRegistration
 argument_list|(
 name|solrServerTracker
@@ -2809,6 +2827,15 @@ expr_stmt|;
 block|}
 else|else
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... SolrCore for {} becomes available!"
+argument_list|,
+name|indexReference
+argument_list|)
+expr_stmt|;
 name|updateEngineRegistration
 argument_list|(
 name|reference
@@ -3008,7 +3035,17 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"   - SolrCore not yet present"
+literal|"   - SolrCore {} present"
+argument_list|,
+name|this
+operator|.
+name|solrCore
+operator|==
+literal|null
+condition|?
+literal|"not yet"
+else|:
+literal|"no longer"
 argument_list|)
 expr_stmt|;
 return|return;
@@ -3107,13 +3144,9 @@ name|activate
 argument_list|()
 condition|)
 block|{
-name|unregisterEngine
-argument_list|()
-expr_stmt|;
-comment|//unregister current engine and clean up
 name|log
 operator|.
-name|error
+name|warn
 argument_list|(
 literal|"Processing of the FST configuration was not successfull "
 operator|+
@@ -3122,13 +3155,13 @@ argument_list|)
 expr_stmt|;
 name|log
 operator|.
-name|error
+name|warn
 argument_list|(
-literal|"  ... FstLinkingEnigne wiht name {} will not be registered!"
+literal|"  ... FstLinkingEnigne wiht name {} will be registered but"
 operator|+
-literal|"Please check the FST config of the engine corresponds with "
+literal|"be inactive as there seam to be no data for linking available"
 operator|+
-literal|"available fields in the configured SolrCore {} (dir: {})"
+literal|"in the SolrCore {} (dir: {})"
 argument_list|,
 operator|new
 name|Object
@@ -3333,6 +3366,13 @@ argument_list|(
 name|defaultLanguage
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|defaultCoprous
+operator|!=
+literal|null
+condition|)
+block|{
 name|log
 operator|.
 name|info
@@ -3353,6 +3393,19 @@ argument_list|(
 name|defaultCoprous
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"  ... no corpus for default language {} available"
+argument_list|,
+name|defaultCoprous
+argument_list|)
+expr_stmt|;
+block|}
 comment|//set the index configuration to the field;
 name|this
 operator|.

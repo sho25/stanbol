@@ -1231,6 +1231,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+comment|//(1) check if the language is enabled by the config
 if|if
 condition|(
 name|language
@@ -1254,6 +1255,56 @@ operator|.
 name|debug
 argument_list|(
 literal|"Engine {} ignores ContentItem {} becuase language {} is not condigured."
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|getName
+argument_list|()
+block|,
+name|ci
+operator|.
+name|getUri
+argument_list|()
+block|,
+name|language
+block|}
+argument_list|)
+expr_stmt|;
+return|return
+name|CANNOT_ENHANCE
+return|;
+block|}
+comment|//(2) check if we have a FST model for the language
+if|if
+condition|(
+name|indexConfig
+operator|.
+name|getCorpus
+argument_list|(
+name|language
+argument_list|)
+operator|==
+literal|null
+operator|&&
+comment|//for the language
+name|indexConfig
+operator|.
+name|getDefaultCorpus
+argument_list|()
+operator|==
+literal|null
+condition|)
+block|{
+comment|//a default model
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Engine {} ignores ContentItem {} becuase no FST modles for language {} "
+operator|+
+literal|"are available"
 argument_list|,
 operator|new
 name|Object
