@@ -179,6 +179,28 @@ name|apache
 operator|.
 name|stanbol
 operator|.
+name|commons
+operator|.
+name|web
+operator|.
+name|base
+operator|.
+name|utils
+operator|.
+name|MediaTypeUtil
+operator|.
+name|JSON_LD
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
 name|enhancer
 operator|.
 name|jersey
@@ -985,6 +1007,8 @@ argument_list|(
 name|value
 operator|=
 block|{
+name|JSON_LD
+block|,
 name|APPLICATION_JSON
 block|,
 name|N3
