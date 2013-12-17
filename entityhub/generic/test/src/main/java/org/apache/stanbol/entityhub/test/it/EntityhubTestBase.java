@@ -387,15 +387,92 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//this ensures that all sites are initialized
-comment|//No longer needed with STANBOL-996
-comment|//                for(String referencedSite : referencedSites){
-comment|//	                re = executor.execute(
-comment|//	                        builder.buildGetRequest("/entityhub/site/"+referencedSite +
-comment|//	                        		"/entity?id=urn:does:not:exist:f82js95xsig39s.23987")
-comment|//	                        .withHeader("Accept", "application/json"));
-comment|//	                re.assertStatus(404);
-comment|//                }
+comment|//this ensures that JSON and RDF serializer services are up and running
+for|for
+control|(
+name|String
+name|referencedSite
+range|:
+name|referencedSites
+control|)
+block|{
+name|re
+operator|=
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildGetRequest
+argument_list|(
+literal|"/entityhub/site/"
+operator|+
+name|referencedSite
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"application/json"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//check JSON serializer
+name|re
+operator|.
+name|assertStatus
+argument_list|(
+literal|200
+argument_list|)
+expr_stmt|;
+name|re
+operator|.
+name|assertContentType
+argument_list|(
+literal|"application/json"
+argument_list|)
+expr_stmt|;
+name|re
+operator|=
+name|executor
+operator|.
+name|execute
+argument_list|(
+name|builder
+operator|.
+name|buildGetRequest
+argument_list|(
+literal|"/entityhub/site/"
+operator|+
+name|referencedSite
+argument_list|)
+operator|.
+name|withHeader
+argument_list|(
+literal|"Accept"
+argument_list|,
+literal|"application/rdf+xml"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|//check RDF serializer
+name|re
+operator|.
+name|assertStatus
+argument_list|(
+literal|200
+argument_list|)
+expr_stmt|;
+name|re
+operator|.
+name|assertContentType
+argument_list|(
+literal|"application/rdf+xml"
+argument_list|)
+expr_stmt|;
+block|}
 name|log
 operator|.
 name|info
