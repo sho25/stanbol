@@ -312,14 +312,6 @@ specifier|private
 name|NameBasedServiceTrackingState
 name|nameTracker
 decl_stmt|;
-specifier|private
-name|boolean
-name|initialised
-decl_stmt|;
-specifier|private
-name|boolean
-name|open
-decl_stmt|;
 comment|/**      * Protected constructor intended to be used by subclasses that do not want      * to compete the initialisation as part of construction(e.g.      * implementations of the {@link EnhancementEngineManager} interface the       * follow the OSGI component model).<p>      * Users that use this constructor MUST make sure to call      * {@link #initEngineTracker(BundleContext, Set, ServiceTrackerCustomizer).       * Note that initEngineTracker method does NOT call {@link #open()}.<p>      * Access to the internal state is provided by the protected getters for the      * {@link ServiceTracker} and the {@link NameBasedServiceTrackingState} and      * the public {@link #getTrackedEngines()} method.      */
 specifier|protected
 name|EnginesTracker
@@ -473,6 +465,8 @@ literal|null
 condition|)
 block|{
 comment|//if this is a re-initialisation
+name|nameTracker
+operator|.
 name|close
 argument_list|()
 expr_stmt|;
@@ -818,63 +812,18 @@ argument_list|)
 throw|;
 block|}
 block|}
-name|initialised
-operator|=
-literal|true
-expr_stmt|;
 block|}
-comment|/**      * Starts tracking based on the configuration parsed in the constructor      * @return       */
+comment|/**      * Starts tracking based on the configuration parsed in the constructor      */
 specifier|public
-name|NameBasedServiceTrackingState
-name|getNameTracker
+name|void
+name|open
 parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|initialised
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"EngiensTracker was not initialised or is already closed!"
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-operator|!
-name|open
-condition|)
-block|{
-synchronized|synchronized
-init|(
-name|this
-init|)
-block|{
-if|if
-condition|(
-operator|!
-name|open
-condition|)
 block|{
 name|nameTracker
 operator|.
 name|open
 argument_list|()
 expr_stmt|;
-name|open
-operator|=
-literal|true
-expr_stmt|;
-block|}
-block|}
-block|}
-return|return
-name|nameTracker
-return|;
 block|}
 comment|/**      * Closes this tracker      */
 specifier|public
@@ -882,14 +831,6 @@ name|void
 name|close
 parameter_list|()
 block|{
-name|open
-operator|=
-literal|false
-expr_stmt|;
-name|initialised
-operator|=
-literal|false
-expr_stmt|;
 name|nameTracker
 operator|.
 name|close
@@ -961,8 +902,7 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getReference
 argument_list|(
@@ -1020,8 +960,7 @@ argument_list|)
 throw|;
 block|}
 return|return
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getReference
 argument_list|(
@@ -1088,8 +1027,7 @@ name|ServiceReference
 argument_list|>
 name|refs
 init|=
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getReferences
 argument_list|(
@@ -1146,8 +1084,7 @@ name|getActiveEngineNames
 parameter_list|()
 block|{
 return|return
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getNames
 argument_list|()
@@ -1165,8 +1102,7 @@ name|getActiveEngineReferences
 parameter_list|()
 block|{
 return|return
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getActive
 argument_list|()
@@ -1201,8 +1137,7 @@ else|:
 operator|(
 name|EnhancementEngine
 operator|)
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getService
 argument_list|(
@@ -1223,8 +1158,7 @@ return|return
 operator|(
 name|EnhancementEngine
 operator|)
-name|getNameTracker
-argument_list|()
+name|nameTracker
 operator|.
 name|getService
 argument_list|(
@@ -1240,8 +1174,7 @@ name|getEngineTrackingState
 parameter_list|()
 block|{
 return|return
-name|getNameTracker
-argument_list|()
+name|nameTracker
 return|;
 block|}
 block|}

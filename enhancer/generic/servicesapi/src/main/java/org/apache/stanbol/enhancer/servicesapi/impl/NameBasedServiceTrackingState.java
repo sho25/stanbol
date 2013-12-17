@@ -635,19 +635,19 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
-specifier|final
 name|Object
 name|service
 decl_stmt|;
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|" ... adding service {}"
 argument_list|,
 name|reference
 argument_list|)
 expr_stmt|;
+comment|//try { //NOT sure if we should catch exceptions here
 if|if
 condition|(
 name|customizer
@@ -677,6 +677,12 @@ name|reference
 argument_list|)
 expr_stmt|;
 block|}
+comment|//} catch(RuntimeException e){
+comment|//    log.warn(" ... unable to get Service for Reference: " + reference
+comment|//        + " because a " + e.getClass().getSimpleName() + " with message: "
+comment|//        + e.getMessage());
+comment|//    return null;
+comment|//}
 return|return
 name|service
 return|;

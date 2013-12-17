@@ -953,6 +953,11 @@ block|}
 block|}
 argument_list|)
 expr_stmt|;
+name|chainTracker
+operator|.
+name|open
+argument_list|()
+expr_stmt|;
 block|}
 annotation|@
 name|Deactivate
