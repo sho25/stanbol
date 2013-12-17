@@ -810,11 +810,6 @@ argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
-name|tracker
-operator|.
-name|open
-parameter_list|()
-constructor_decl|;
 block|}
 end_class
 
