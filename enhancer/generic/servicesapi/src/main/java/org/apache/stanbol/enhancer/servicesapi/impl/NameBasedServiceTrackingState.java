@@ -239,6 +239,26 @@ name|ServiceTrackerCustomizer
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Used to manage the state of ServiceReferences for services that are   * accessed based on the value of a specific property.<p>  * This can be used to track both {@link EnhancementEngine}s as well as  * {@link Chain}s.<p>  * This implementation supports the use of {@link #readLock()} on returned  * values. Also the<code>null</code> as value for the parsed name property.  *   * @author Rupert Westenthaler  *  */
 end_comment
@@ -252,6 +272,20 @@ name|ServiceTracker
 implements|implements
 name|ServiceTrackerCustomizer
 block|{
+specifier|private
+specifier|final
+name|Logger
+name|log
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|NameBasedServiceTrackingState
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|//    /**
 comment|//     * Allows to forward to an other customiser after this class has finished
 comment|//     * his work
@@ -605,6 +639,15 @@ specifier|final
 name|Object
 name|service
 decl_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" ... adding service {}"
+argument_list|,
+name|reference
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|customizer
