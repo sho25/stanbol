@@ -265,7 +265,7 @@ name|assertContentContains
 argument_list|(
 literal|"<rdf:Description rdf:about=\"http://dbpedia.org/resource/Paris\">"
 argument_list|,
-literal|"<rdfs:label xml:lang=\"en\">Paris</rdfs:label>"
+literal|"<rdf:type rdf:resource=\"http://dbpedia.org/ontology/Place\"/>"
 argument_list|)
 expr_stmt|;
 comment|//now test the default Accept
