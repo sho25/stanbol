@@ -252,31 +252,57 @@ specifier|final
 name|String
 name|jsonCorefCheckObama
 init|=
-literal|"{\n"
+literal|"{"
 operator|+
-literal|"    \"type\" : \"Token\",\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"    \"start\" : 0,\n"
+literal|"    \"type\" : \"Token\","
 operator|+
-literal|"    \"end\" : 5,\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"    \"stanbol.enhancer.nlp.coref\" : {\n"
+literal|"    \"start\" : 0,"
 operator|+
-literal|"      \"isRepresentative\" : true,\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"      \"mentions\" : [ {\n"
+literal|"    \"end\" : 5,"
 operator|+
-literal|"        \"type\" : \"Token\",\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"        \"start\" : 21,\n"
+literal|"    \"stanbol.enhancer.nlp.coref\" : {"
 operator|+
-literal|"        \"end\" : 23\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"      } ],\n"
+literal|"      \"isRepresentative\" : true,"
 operator|+
-literal|"      \"class\" : \"org.apache.stanbol.enhancer.nlp.coref.CorefFeature\"\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"    }\n"
+literal|"      \"mentions\" : [ {"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"        \"type\" : \"Token\","
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"        \"start\" : 21,"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"        \"end\" : 23"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"      } ],"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"      \"class\" : \"org.apache.stanbol.enhancer.nlp.coref.CorefFeature\""
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"    }"
+operator|+
+name|LINE_SEPARATOR
 operator|+
 literal|"  }"
 decl_stmt|;
@@ -286,31 +312,57 @@ specifier|final
 name|String
 name|jsonCorefCheckHe
 init|=
-literal|"{\n"
+literal|"{"
 operator|+
-literal|"    \"type\" : \"Token\",\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"    \"start\" : 21,\n"
+literal|"    \"type\" : \"Token\","
 operator|+
-literal|"    \"end\" : 23,\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"    \"stanbol.enhancer.nlp.coref\" : {\n"
+literal|"    \"start\" : 21,"
 operator|+
-literal|"      \"isRepresentative\" : false,\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"      \"mentions\" : [ {\n"
+literal|"    \"end\" : 23,"
 operator|+
-literal|"        \"type\" : \"Token\",\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"        \"start\" : 0,\n"
+literal|"    \"stanbol.enhancer.nlp.coref\" : {"
 operator|+
-literal|"        \"end\" : 5\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"      } ],\n"
+literal|"      \"isRepresentative\" : false,"
 operator|+
-literal|"      \"class\" : \"org.apache.stanbol.enhancer.nlp.coref.CorefFeature\"\n"
+name|LINE_SEPARATOR
 operator|+
-literal|"    }\n"
+literal|"      \"mentions\" : [ {"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"        \"type\" : \"Token\","
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"        \"start\" : 0,"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"        \"end\" : 5"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"      } ],"
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"      \"class\" : \"org.apache.stanbol.enhancer.nlp.coref.CorefFeature\""
+operator|+
+name|LINE_SEPARATOR
+operator|+
+literal|"    }"
+operator|+
+name|LINE_SEPARATOR
 operator|+
 literal|"  }"
 decl_stmt|;
