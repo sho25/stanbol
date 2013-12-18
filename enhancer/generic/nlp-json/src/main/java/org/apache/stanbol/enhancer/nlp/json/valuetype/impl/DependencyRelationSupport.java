@@ -464,10 +464,6 @@ name|relation
 operator|.
 name|isDependent
 argument_list|()
-condition|?
-literal|"true"
-else|:
-literal|"false"
 operator|)
 argument_list|)
 expr_stmt|;

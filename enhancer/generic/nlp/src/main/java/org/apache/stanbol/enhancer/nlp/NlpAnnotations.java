@@ -31,7 +31,7 @@ name|nlp
 operator|.
 name|coref
 operator|.
-name|CorefTag
+name|CorefFeature
 import|;
 end_import
 
@@ -331,19 +331,19 @@ decl_stmt|;
 comment|/** 	 * {@link Annotation} representing all the words which are a 	 * mention/reference of a given word. Typically used on {@link Token}s. 	 *<p> 	 */
 name|Annotation
 argument_list|<
-name|CorefTag
+name|CorefFeature
 argument_list|>
 name|COREF_ANNOTATION
 init|=
 operator|new
 name|Annotation
 argument_list|<
-name|CorefTag
+name|CorefFeature
 argument_list|>
 argument_list|(
 literal|"stanbol.enhancer.nlp.coref"
 argument_list|,
-name|CorefTag
+name|CorefFeature
 operator|.
 name|class
 argument_list|)

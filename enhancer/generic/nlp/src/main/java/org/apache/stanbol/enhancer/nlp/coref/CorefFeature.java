@@ -57,46 +57,21 @@ name|Span
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|nlp
-operator|.
-name|model
-operator|.
-name|tag
-operator|.
-name|Tag
-import|;
-end_import
-
 begin_comment
-comment|/**  * Represents a coreference resolution tag attached to a {@link Token}. It  * contains information about other {@link Token}s which refer to the  * aforementioned {@link Token}.  *   * @author Cristian Petroaca  *   */
+comment|/**  * Represents a coreference resolution feature attached to a {@link Token}. It  * contains information about other {@link Token}s which refer to the  * aforementioned {@link Token}.  *   * @author Cristian Petroaca  *   */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|CorefTag
-extends|extends
-name|Tag
-argument_list|<
-name|CorefTag
-argument_list|>
+name|CorefFeature
 block|{
-comment|/** 	 * Shows whether the {@link Token} to which this tag is attached is the 	 * representative metion in the chain. 	 */
+comment|/** 	 * Shows whether the {@link Token} to which this object is attached is the 	 * representative mention in the chain. 	 */
 specifier|private
 name|boolean
 name|isRepresentative
 decl_stmt|;
-comment|/** 	 * A set of {@link Token}s representing metions of the {@link Token} to 	 * which this tag is attached. 	 */
+comment|/** 	 * A set of {@link Token}s representing metions of the {@link Token} to 	 * which this object is attached. 	 */
 specifier|private
 name|Set
 argument_list|<
@@ -105,13 +80,11 @@ argument_list|>
 name|mentions
 decl_stmt|;
 specifier|public
-name|CorefTag
+name|CorefFeature
 parameter_list|()
 block|{
 name|this
 argument_list|(
-literal|null
-argument_list|,
 literal|false
 argument_list|,
 name|Collections
@@ -130,7 +103,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|CorefTag
+name|CorefFeature
 parameter_list|(
 name|boolean
 name|isRepresentative
@@ -138,8 +111,6 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-literal|null
-argument_list|,
 name|isRepresentative
 argument_list|,
 name|Collections
@@ -158,7 +129,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|CorefTag
+name|CorefFeature
 parameter_list|(
 name|boolean
 name|isRepresentative
@@ -170,37 +141,6 @@ argument_list|>
 name|mentions
 parameter_list|)
 block|{
-name|this
-argument_list|(
-literal|null
-argument_list|,
-name|isRepresentative
-argument_list|,
-name|mentions
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|CorefTag
-parameter_list|(
-name|String
-name|tag
-parameter_list|,
-name|boolean
-name|isRepresentative
-parameter_list|,
-name|Set
-argument_list|<
-name|Span
-argument_list|>
-name|mentions
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|tag
-argument_list|)
-expr_stmt|;
 name|this
 operator|.
 name|isRepresentative
@@ -214,7 +154,7 @@ operator|=
 name|mentions
 expr_stmt|;
 block|}
-comment|/** 	 * Getter whether the {@link Token} to which this tag is attached is the 	 * representative mention in the chain. 	 *  	 * @return the representative state 	 */
+comment|/** 	 * Getter whether the {@link Token} to which this object is attached is the 	 * representative mention in the chain. 	 *  	 * @return the representative state 	 */
 specifier|public
 name|boolean
 name|isRepresentative
@@ -226,7 +166,7 @@ operator|.
 name|isRepresentative
 return|;
 block|}
-comment|/** 	 * Getter for the set of {@link Token}s representing mentions of the 	 * {@link Token} to which this tag is attached. 	 *  	 * @return 	 */
+comment|/** 	 * Getter for the set of {@link Token}s representing mentions of the 	 * {@link Token} to which this object is attached. 	 *  	 * @return 	 */
 specifier|public
 name|Set
 argument_list|<
@@ -247,12 +187,6 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|super
-operator|.
-name|hashCode
-argument_list|()
-operator|+
-operator|(
 operator|(
 name|this
 operator|.
@@ -269,7 +203,6 @@ name|hashCode
 argument_list|()
 else|:
 literal|0
-operator|)
 return|;
 block|}
 specifier|public
@@ -281,17 +214,10 @@ name|obj
 parameter_list|)
 block|{
 return|return
-name|super
-operator|.
-name|equals
-argument_list|(
-name|obj
-argument_list|)
-operator|&&
 operator|(
 name|obj
 operator|instanceof
-name|CorefTag
+name|CorefFeature
 operator|)
 operator|&&
 operator|(
@@ -303,7 +229,7 @@ name|equals
 argument_list|(
 operator|(
 operator|(
-name|CorefTag
+name|CorefFeature
 operator|)
 name|obj
 operator|)
