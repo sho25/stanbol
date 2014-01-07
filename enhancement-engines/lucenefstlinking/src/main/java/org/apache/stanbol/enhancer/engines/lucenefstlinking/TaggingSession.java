@@ -785,6 +785,15 @@ argument_list|(
 name|language
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> language Corpus: {}"
+argument_list|,
+name|langCorpusInfo
+argument_list|)
+expr_stmt|;
 name|CorpusInfo
 name|defaultCorpusInfo
 init|=
@@ -793,6 +802,15 @@ operator|.
 name|getDefaultCorpus
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> default Corpus: {}"
+argument_list|,
+name|defaultCorpusInfo
+argument_list|)
+expr_stmt|;
 comment|//obtain the Solr Document Id field
 name|SchemaField
 name|idSchemaField
