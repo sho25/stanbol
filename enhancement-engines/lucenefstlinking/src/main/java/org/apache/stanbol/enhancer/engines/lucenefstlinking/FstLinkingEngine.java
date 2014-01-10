@@ -2866,6 +2866,11 @@ name|elConfig
 operator|.
 name|getMinChunkMatchScore
 argument_list|()
+argument_list|,
+name|elConfig
+operator|.
+name|getMinFoundTokens
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//we use two TagClusterReducer implementations.
@@ -2878,11 +2883,11 @@ init|=
 operator|new
 name|ChainedTagClusterReducer
 argument_list|(
-name|linkableTokenFilter
-argument_list|,
 name|TagClusterReducer
 operator|.
 name|LONGEST_DOMINANT_RIGHT
+argument_list|,
+name|linkableTokenFilter
 argument_list|)
 decl_stmt|;
 specifier|final

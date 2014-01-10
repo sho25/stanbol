@@ -674,6 +674,11 @@ specifier|private
 name|double
 name|minChunkMatchScore
 decl_stmt|;
+comment|/**      * The minimum amount of matched (matchable) Tokens so that an Entity is      * considered. Only used within processable chunks      */
+specifier|private
+name|int
+name|minFoundTokens
+decl_stmt|;
 specifier|protected
 name|LinkableTokenFilter
 parameter_list|(
@@ -691,6 +696,9 @@ name|lpc
 parameter_list|,
 name|double
 name|minChunkMatchScore
+parameter_list|,
+name|int
+name|minFoundTokens
 parameter_list|)
 block|{
 name|super
@@ -835,6 +843,12 @@ operator|.
 name|minChunkMatchScore
 operator|=
 name|minChunkMatchScore
+expr_stmt|;
+name|this
+operator|.
+name|minFoundTokens
+operator|=
+name|minFoundTokens
 expr_stmt|;
 block|}
 annotation|@
@@ -1835,7 +1849,7 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|"> reduce tag {}"
+literal|"> reduce tag {} - no overlapp with linkable token"
 argument_list|,
 name|tagSequence
 argument_list|)
@@ -2028,6 +2042,10 @@ name|num
 operator|)
 operator|<
 name|minChunkMatchScore
+operator|&&
+name|match
+operator|<
+name|minFoundTokens
 condition|)
 block|{
 name|tag
@@ -2056,7 +2074,7 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|" - reduce tag {}[{},{}] because it does only match "
+literal|" - reduce tag {}[{},{}] - does only match "
 operator|+
 literal|"{} of {} of matchable Chunk {}[{},{}]"
 argument_list|,
@@ -2119,7 +2137,7 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|" + keep tag {}[{},{}] matching {} of {} "
+literal|" + keep tag {}[{},{}] - matches {} of {} "
 operator|+
 literal|"matchable Tokens for matchable Chunk {}[{},{}]"
 argument_list|,
@@ -2182,7 +2200,7 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|" + keep tag {}[{},{}] for matchable Chunk {}[{},{}]"
+literal|" + keep tag {}[{},{}] - matches whole Chunk {}[{},{}]"
 argument_list|,
 operator|new
 name|Object
@@ -2218,6 +2236,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+elseif|else
 if|if
 condition|(
 name|log
@@ -2245,7 +2264,7 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|" + keep tag {}"
+literal|" + keep tag {} - not in processable chunk"
 argument_list|,
 name|tagSequence
 argument_list|)

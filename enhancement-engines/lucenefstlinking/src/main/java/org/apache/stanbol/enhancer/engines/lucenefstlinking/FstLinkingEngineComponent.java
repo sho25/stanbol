@@ -1614,6 +1614,15 @@ name|DEFAULT_ENTITY_CACHE_SIZE
 init|=
 literal|65536
 decl_stmt|;
+comment|/**      * Changed default for the {@link EntityLinkerConfig#MIN_FOUND_TOKENS} property.      * This Engine uses<code>2</code> as default. While the {@link EntityLinkerConfig}      * currently sets the default to<code>1</code>      */
+specifier|private
+specifier|static
+specifier|final
+name|Integer
+name|FST_DEFAULT_MIN_FOUND_TOKENS
+init|=
+literal|2
+decl_stmt|;
 specifier|private
 specifier|final
 name|Logger
@@ -1911,6 +1920,18 @@ argument_list|(
 name|properties
 argument_list|)
 expr_stmt|;
+comment|//change default for EntityLinkerConfig.MIN_FOUND_TOKENS
+name|value
+operator|=
+name|properties
+operator|.
+name|get
+argument_list|(
+name|EntityLinkerConfig
+operator|.
+name|MIN_FOUND_TOKENS
+argument_list|)
+expr_stmt|;
 name|entityLinkerConfig
 operator|=
 name|EntityLinkerConfig
@@ -1922,6 +1943,23 @@ argument_list|,
 name|prefixService
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|value
+operator|==
+literal|null
+condition|)
+block|{
+comment|//no MIN_FOUND_TOKENS config present
+comment|//manually set the default to the value used by this engine
+name|entityLinkerConfig
+operator|.
+name|setMinFoundTokens
+argument_list|(
+name|FST_DEFAULT_MIN_FOUND_TOKENS
+argument_list|)
+expr_stmt|;
+block|}
 comment|//(2) parse the configured IndexReference
 name|value
 operator|=
