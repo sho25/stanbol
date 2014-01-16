@@ -83,6 +83,11 @@ name|Object
 name|version
 parameter_list|)
 function_decl|;
+comment|/**      * Called if the EntityCacheManager is no longer used      */
+name|void
+name|close
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
