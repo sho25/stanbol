@@ -574,12 +574,7 @@ name|CorefFeature
 argument_list|(
 literal|true
 argument_list|,
-name|Collections
-operator|.
-name|unmodifiableSet
-argument_list|(
 name|obamaMentions
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -621,12 +616,7 @@ name|CorefFeature
 argument_list|(
 literal|false
 argument_list|,
-name|Collections
-operator|.
-name|unmodifiableSet
-argument_list|(
 name|heMentions
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

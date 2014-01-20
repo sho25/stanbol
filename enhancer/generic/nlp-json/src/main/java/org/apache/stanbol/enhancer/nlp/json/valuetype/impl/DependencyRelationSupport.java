@@ -361,7 +361,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|RELATION_IS_DEPENDEE_TAG
+name|RELATION_IS_DEPENDENT_TAG
 init|=
 literal|"isDependent"
 decl_stmt|;
@@ -457,7 +457,7 @@ name|jDependencyRelation
 operator|.
 name|put
 argument_list|(
-name|RELATION_IS_DEPENDEE_TAG
+name|RELATION_IS_DEPENDENT_TAG
 argument_list|,
 operator|(
 name|relation
@@ -660,7 +660,7 @@ name|jDependencyRelation
 operator|.
 name|path
 argument_list|(
-name|RELATION_IS_DEPENDEE_TAG
+name|RELATION_IS_DEPENDENT_TAG
 argument_list|)
 decl_stmt|;
 if|if

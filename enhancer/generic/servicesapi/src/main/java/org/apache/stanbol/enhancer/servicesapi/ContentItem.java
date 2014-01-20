@@ -101,12 +101,12 @@ name|UriRef
 name|getUri
 parameter_list|()
 function_decl|;
-comment|/**      * The binary content stream. Shortcut for      *<code>{@link #getBlob()}{@link Blob#getStream() .getStream()}</code>      * @return the InputStream      */
+comment|/**      * The binary content stream. Shortcut for      *<code>{@link #getBlob()}{@link Blob#getStream() .getStream()}</code>      * @return the InputStream      * @deprecated use<code>{@link #getBlob()}{@link Blob#getStream() .getStream()}</code>      * instead      */
 name|InputStream
 name|getStream
 parameter_list|()
 function_decl|;
-comment|/**      * The MimeType. Shortcut for      *<code>{@link #getBlob()}{@link Blob#getMimeType() .getMimeType()}</code>.      * @return the MimeType as string      */
+comment|/**      * The MimeType. Shortcut for      *<code>{@link #getBlob()}{@link Blob#getMimeType() .getMimeType()}</code>.      * @return the MimeType as string      * @deprecated use<code>{@link #getBlob()}{@link Blob#getMimeType() .getMimeType()}</code>      * instead      */
 name|String
 name|getMimeType
 parameter_list|()

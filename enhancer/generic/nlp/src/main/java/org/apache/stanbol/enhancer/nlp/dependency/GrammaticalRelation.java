@@ -222,6 +222,12 @@ argument_list|(
 name|Object
 argument_list|)
 operator|,
+comment|/** 	 * The "discourse element" grammatical relation. This is used for interjections and 	 * other discourse particles and elements (which are not clearly linked to the structure 	 * of the sentence, except in an expressive way). We generally follow the 	 * guidelines of what the Penn Treebanks count as an INTJ.  They 	 * define this to include: interjections (oh, uh-huh, Welcome), fillers (um, ah), 	 * and discourse markers (well, like, actually, but not: you know). 	 * We also use it for emoticons. 	 */
+name|Discourse
+argument_list|(
+name|Modifier
+argument_list|)
+operator|,
 comment|/** 	 * This relation captures an existential&quot;there&quot;. The main verb of 	 * the clause is the governor. Example : There is a ghost in the room Result 	 * : expl(is, There) 	 */
 name|Expletive
 argument_list|(

@@ -33,20 +33,6 @@ name|org
 operator|.
 name|apache
 operator|.
-name|commons
-operator|.
-name|io
-operator|.
-name|FilenameUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
 name|stanbol
 operator|.
 name|enhancer
@@ -260,7 +246,7 @@ literal|"      \"tag\" : \"nsubj\","
 operator|+
 name|LINE_SEPARATOR
 operator|+
-literal|"      \"relationType\" : 32,"
+literal|"      \"relationType\" : 33,"
 operator|+
 name|LINE_SEPARATOR
 operator|+
@@ -320,7 +306,7 @@ literal|"      \"tag\" : \"root\","
 operator|+
 name|LINE_SEPARATOR
 operator|+
-literal|"      \"relationType\" : 56,"
+literal|"      \"relationType\" : 57,"
 operator|+
 name|LINE_SEPARATOR
 operator|+
@@ -352,7 +338,7 @@ literal|"      \"tag\" : \"nsubj\","
 operator|+
 name|LINE_SEPARATOR
 operator|+
-literal|"      \"relationType\" : 32,"
+literal|"      \"relationType\" : 33,"
 operator|+
 name|LINE_SEPARATOR
 operator|+
