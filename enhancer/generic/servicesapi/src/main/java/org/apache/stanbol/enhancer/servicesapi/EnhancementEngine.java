@@ -60,7 +60,7 @@ name|ENHANCE_ASYNC
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * Indicate if this engine can enhance supplied ContentItem, and if it      * suggests enhancing it synchronously or asynchronously. The      * {@link EnhancementJobManager} can force sync/async mode if desired, it is      * just a suggestion from the engine.      *<p>      * This method is expected to execute fast and MUST NOT change the parsed      * {@link ContentItem}. It is called with a read lock on the ContentItem.      *<p>      *<b>NOTE:</b> Returning {@link #CANNOT_ENHANCE} will cause the       * {@link EnhancementJobManager} to skip the execution of this Engine. If      * an {@link EngineException} is thrown the executed {@link Chain} will      * fail (unless this engine is marked as OPTIONAL).      *      * @param ci The ContentItem to enhance      * @param context The enhancement context: Request specific parameters      *      * @throws EngineException if the introspecting process of the content item      *             fails      */
+comment|/**      * Indicate if this engine can enhance supplied ContentItem, and if it      * suggests enhancing it synchronously or asynchronously. The      * {@link EnhancementJobManager} can force sync/async mode if desired, it is      * just a suggestion from the engine.      *<p>      * This method is expected to execute fast and MUST NOT change the parsed      * {@link ContentItem}. It is called with a read lock on the ContentItem.      *<p>      *<b>NOTE:</b> Returning {@link #CANNOT_ENHANCE} will cause the       * {@link EnhancementJobManager} to skip the execution of this Engine. If      * an {@link EngineException} is thrown the executed {@link Chain} will      * fail (unless this engine is marked as OPTIONAL).      *      * @param ci The ContentItem to enhance      * @throws EngineException if the introspecting process of the content item      *             fails      */
 name|int
 name|canEnhance
 parameter_list|(
@@ -70,8 +70,7 @@ parameter_list|)
 throws|throws
 name|EngineException
 function_decl|;
-comment|//int canEnhance(ContentItem ci, Map<String,Object> context) throws EngineException;
-comment|/**      * Compute enhancements for supplied ContentItem. The results of the process      * are expected to be stored in the {@link ContentItem#getMetadata() metadata       * of the content item} or by adding/modifying any contentPart.<p>      * Engines that do support {@link #ENHANCE_ASYNC} are required to use the      * {@link ContentItem#getLock()} to acquire read/write locks when reading/      * modifying information of the {@link ContentItem}. For Engines that that      * do use {@link #ENHANCE_SYNCHRONOUS} the {@link EnhancementJobManager}      * is responsible to acquire a write lock before calling this method.       *<p>      *<b>NOTE</b>: If an EnhancementEngine can not extract any information it      * is expected to return. In case an error is encountered during processing      * an {@link EngineException} need to be thrown.      *      * @param ci The ContentItem to enhance      * @param context The enhancement context: Request specific parameters      *      * @throws EngineException if the underlying process failed to work as      *             expected      */
+comment|/**      * Compute enhancements for supplied ContentItem. The results of the process      * are expected to be stored in the {@link ContentItem#getMetadata() metadata       * of the content item} or by adding/modifying any contentPart.<p>      * Engines that do support {@link #ENHANCE_ASYNC} are required to use the      * {@link ContentItem#getLock()} to acquire read/write locks when reading/      * modifying information of the {@link ContentItem}. For Engines that that      * do use {@link #ENHANCE_SYNCHRONOUS} the {@link EnhancementJobManager}      * is responsible to acquire a write lock before calling this method.       *<p>      *<b>NOTE</b>: If an EnhancementEngine can not extract any information it      * is expected to return. In case an error is encountered during processing      * an {@link EngineException} need to be thrown.      *      * @param ci The ContentItem to enhance      * @throws EngineException if the underlying process failed to work as      *             expected      */
 name|void
 name|computeEnhancements
 parameter_list|(
@@ -81,7 +80,6 @@ parameter_list|)
 throws|throws
 name|EngineException
 function_decl|;
-comment|//void computeEnhancements(ContentItem ci, Map<String,Object> context) throws EngineException;
 comment|/**      * Getter for the name of this EnhancementEngine instance as configured      * by {@link #PROPERTY_NAME}      * @return the name      */
 name|String
 name|getName
