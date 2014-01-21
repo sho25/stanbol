@@ -888,6 +888,12 @@ name|PosChunkerEngine
 operator|.
 name|CONFIG_LANGUAGES
 argument_list|,
+name|cardinality
+operator|=
+name|Integer
+operator|.
+name|MAX_VALUE
+argument_list|,
 name|value
 operator|=
 block|{
@@ -1109,6 +1115,8 @@ name|PhraseTypeDefinition
 name|VERB_PHRASE_TYPE
 decl_stmt|;
 comment|//TODO: maybe move this to PhraseTypeDefinition
+comment|//TODO: this might be language specific
+comment|//TODO: make configurable
 static|static
 block|{
 name|PhraseTypeDefinition
@@ -1136,26 +1144,31 @@ operator|.
 name|Adjective
 argument_list|)
 expr_stmt|;
-comment|//continuation types are nouns, adpositions , pronouns, determiner, adjectives and punctations
-comment|//optionally one could also allow Adverbs, PronounOrDeterminer
+comment|//prefix types are the same as start types (e.g. "the nice trip")
+name|nounPD
+operator|.
+name|addPrefixType
+argument_list|(
+name|LexicalCategory
+operator|.
+name|PronounOrDeterminer
+argument_list|,
+name|LexicalCategory
+operator|.
+name|Adjective
+argument_list|)
+expr_stmt|;
+comment|//continuation types are nouns and punctations.
+comment|//NOTE: Adverbs are excluded to avoid phrases like "the nice trip last week"
 name|nounPD
 operator|.
 name|addContinuationType
 argument_list|(
 name|LexicalCategory
 operator|.
-name|Adjective
-argument_list|,
-name|LexicalCategory
-operator|.
-name|Adposition
-argument_list|,
-name|LexicalCategory
-operator|.
 name|Punctuation
 argument_list|)
 expr_stmt|;
-comment|//LexicalCategory.PronounOrDeterminer, LexicalCategory.Adverb, );
 comment|//end types are the same as start terms
 name|nounPD
 operator|.
@@ -1595,20 +1608,9 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|log
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
-name|logChunks
-argument_list|(
-name|at
-argument_list|)
-expr_stmt|;
-block|}
+comment|//        if(log.isTraceEnabled()){
+comment|//            logChunks(at);
+comment|//        }
 block|}
 annotation|@
 name|Override
@@ -1626,203 +1628,28 @@ return|return
 name|SERVICE_PROPERTIES
 return|;
 block|}
-specifier|private
-name|void
-name|logChunks
-parameter_list|(
-name|AnalysedText
-name|at
-parameter_list|)
-block|{
-name|Iterator
-argument_list|<
-name|Span
-argument_list|>
-name|it
-init|=
-name|at
-operator|.
-name|getEnclosed
-argument_list|(
-name|EnumSet
-operator|.
-name|of
-argument_list|(
-name|SpanTypeEnum
-operator|.
-name|Sentence
-argument_list|,
-name|SpanTypeEnum
-operator|.
-name|Chunk
-argument_list|)
-argument_list|)
-decl_stmt|;
-while|while
-condition|(
-name|it
-operator|.
-name|hasNext
-argument_list|()
-condition|)
-block|{
-name|Span
-name|span
-init|=
-name|it
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|span
-operator|.
-name|getType
-argument_list|()
-operator|==
-name|SpanTypeEnum
-operator|.
-name|Chunk
-condition|)
-block|{
-name|Value
-argument_list|<
-name|PhraseTag
-argument_list|>
-name|phraseAnno
-init|=
-name|span
-operator|.
-name|getAnnotation
-argument_list|(
-name|PHRASE_ANNOTATION
-argument_list|)
-decl_stmt|;
-name|log
-operator|.
-name|trace
-argument_list|(
-literal|"> {} Phrase: {} {}"
-argument_list|,
-operator|new
-name|Object
-index|[]
-block|{
-name|phraseAnno
-operator|!=
-literal|null
-condition|?
-name|phraseAnno
-operator|.
-name|value
-argument_list|()
-operator|.
-name|getTag
-argument_list|()
-else|:
-literal|"unknown"
-block|,
-name|span
-block|,
-name|span
-operator|.
-name|getSpan
-argument_list|()
-block|}
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|trace
-argument_list|(
-literal|"  Tokens: "
-argument_list|)
-expr_stmt|;
-name|int
-name|i
-init|=
-literal|1
-decl_stmt|;
-for|for
-control|(
-name|Iterator
-argument_list|<
-name|Token
-argument_list|>
-name|tokens
-init|=
-operator|(
-operator|(
-name|Chunk
-operator|)
-name|span
-operator|)
-operator|.
-name|getTokens
-argument_list|()
-init|;
-name|tokens
-operator|.
-name|hasNext
-argument_list|()
-condition|;
-name|i
-operator|++
-control|)
-block|{
-name|Token
-name|token
-init|=
-name|tokens
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
-name|log
-operator|.
-name|trace
-argument_list|(
-literal|"    {}. {}{}"
-argument_list|,
-operator|new
-name|Object
-index|[]
-block|{
-name|i
-block|,
-name|token
-operator|.
-name|getSpan
-argument_list|()
-block|,
-name|token
-operator|.
-name|getAnnotations
-argument_list|(
-name|NlpAnnotations
-operator|.
-name|POS_ANNOTATION
-argument_list|)
-block|}
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|trace
-argument_list|(
-literal|"--- {}"
-argument_list|,
-name|span
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-block|}
+comment|//logging is now done by the PhraseBuilder
+comment|//    private void logChunks(AnalysedText at){
+comment|//        Iterator<Span> it = at.getEnclosed(EnumSet.of(SpanTypeEnum.Sentence, SpanTypeEnum.Chunk));
+comment|//        while(it.hasNext()){
+comment|//            Span span = it.next();
+comment|//            if(span.getType() == SpanTypeEnum.Chunk){
+comment|//                Value<PhraseTag> phraseAnno = span.getAnnotation(PHRASE_ANNOTATION);
+comment|//                log.trace("> {} Phrase: {} {}", new Object[]{
+comment|//                    phraseAnno != null ? phraseAnno.value().getTag() : "unknown",
+comment|//                    span, span.getSpan()});
+comment|//                log.trace("  Tokens: ");
+comment|//                int i = 1;
+comment|//                for(Iterator<Token> tokens = ((Chunk)span).getTokens(); tokens.hasNext();i++){
+comment|//                    Token token = tokens.next();
+comment|//                    log.trace("    {}. {}{}", new Object[]{i,token.getSpan(),
+comment|//                            token.getAnnotations(NlpAnnotations.POS_ANNOTATION)});
+comment|//                }
+comment|//            } else {
+comment|//                log.trace("--- {}",span);
+comment|//            }
+comment|//        }
+comment|//    }
 comment|/**      * Activate and read the properties. Configures and initialises a ChunkerHelper for each language configured in      * CONFIG_LANGUAGES.      *      * @param ce the {@link org.osgi.service.component.ComponentContext}      */
 annotation|@
 name|Activate
