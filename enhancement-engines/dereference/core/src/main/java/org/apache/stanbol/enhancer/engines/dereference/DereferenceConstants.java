@@ -112,6 +112,29 @@ name|DEREFERENCE_ENTITIES_LDPATH
 init|=
 literal|"enhancer.engines.dereference.ldpath"
 decl_stmt|;
+comment|/** 	 * A URI prefix checked for entity URIs. Only entities that do match any of the 	 * parsed prefixes or {@link #URI_PATTERN} will be dereferenced. If no  	 * pattern nor prefixes are configured all entities will be dereferenced.  	 * This has lower priority as {@link #FALLBACK_MODE}. 	 * @see #FALLBACK_MODE 	 */
+name|String
+name|URI_PREFIX
+init|=
+literal|"enhancer.engines.dereference.uriPrefix"
+decl_stmt|;
+comment|/** 	 * Regex pattern applied to entity URIs. Only entities that do match any of 	 * the configured {@link #URI_PREFIX} or pattern will be dereferenced.  	 * If no pattern nor prefixes are configured all entities will be dereferenced. 	 * This has lower priority as {@link #FALLBACK_MODE}. 	 * @see #FALLBACK_MODE 	 */
+name|String
+name|URI_PATTERN
+init|=
+literal|"enhancer.engines.dereference.uriPattern"
+decl_stmt|;
+comment|/**      * If fallback mode is activated a dereference engine will not try to      * dereference entities for those there are already triples added to the      * enhancement results.      */
+name|String
+name|FALLBACK_MODE
+init|=
+literal|"enhancer.engines.dereference.fallback"
+decl_stmt|;
+name|boolean
+name|DEFAULT_FALLBACK_MODE
+init|=
+literal|true
+decl_stmt|;
 block|}
 end_interface
 
