@@ -677,6 +677,21 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|/**      * Logger for the {@link EnhancementJobManager} interface. This is used      * to log statistics about execution times for enhancement jobs      */
+specifier|private
+specifier|final
+name|Logger
+name|enhancementJobManager
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|EnhancementJobManager
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -1449,6 +1464,19 @@ operator|+
 literal|")"
 argument_list|)
 throw|;
+block|}
+else|else
+block|{
+comment|//log infos about the execution times to the enhancementJobManager
+name|EnhancementJobHandler
+operator|.
+name|logExecutionTimes
+argument_list|(
+name|enhancementJobManager
+argument_list|,
+name|job
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 comment|/** 	 * Logs the ExecutionMetadata  	 * @param job 	 */
