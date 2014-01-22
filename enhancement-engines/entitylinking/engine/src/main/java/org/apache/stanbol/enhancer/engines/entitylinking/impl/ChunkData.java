@@ -71,6 +71,22 @@ name|enhancer
 operator|.
 name|nlp
 operator|.
+name|NlpAnnotations
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|nlp
+operator|.
 name|model
 operator|.
 name|AnalysedText
@@ -169,6 +185,24 @@ name|PhraseTag
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|nlp
+operator|.
+name|pos
+operator|.
+name|LexicalCategory
+import|;
+end_import
+
 begin_comment
 comment|/**   * Represents a Chunk (group of tokens) used as context for EntityLinking.  * Typically a single {@link ChunkData#chunk} is used, but in case of  * overlapping and {@link ChunkData#isProcessable processable} chunks  * multiple {@link Chunk}s might be merged to a single {@link ChunkData}  * instance. In such cases {@link ChunkData#chunk} represents the  * first and {@link ChunkData#merged} the last of the merged chunks.<p>  * {@link ChunkData#startToken} and {@link ChunkData#endToken} represent  * the covered [start,end) {@link Token} indices relative to the current  * sections (typically a {@link Sentence}). {@link ChunkData#getStartChar()}  * and {@link ChunkData#getEndChar()} are the absolute [start,end) character  * indices within the {@link AnalysedText#getSpan()}  */
 end_comment
@@ -186,6 +220,12 @@ name|DEFAULT_PROCESSABLE_STATE
 init|=
 literal|true
 decl_stmt|;
+comment|/** if this Chunk represents a Named Entity **/
+specifier|protected
+specifier|final
+name|boolean
+name|isNamedEntity
+decl_stmt|;
 comment|/** if the Chunk is processable */
 specifier|public
 specifier|final
@@ -197,10 +237,6 @@ specifier|public
 specifier|final
 name|Chunk
 name|chunk
-decl_stmt|;
-comment|/**       * In case multiple overlapping and processable {@link Chunk}s the      * section selected by the chunks are merged. While {@link #chunk}      * holds the original chunk (the first) this variable holds the      * last merged one. Enclosed chunks (in case more than two are      * merged) are not available via this class, but can be retrieved      * by iterating over the {@link AnalysedText} content part.      */
-name|Chunk
-name|merged
 decl_stmt|;
 comment|/** the start token index relative to the current section (sentence) */
 name|int
@@ -376,6 +412,47 @@ break|break;
 block|}
 comment|// else probability to low for exclusion
 block|}
+comment|//fallback for NER chunks in case Noun Phrases are processible and a NER
+comment|//annotation is present for the parsed chunk.
+name|isNamedEntity
+operator|=
+name|chunk
+operator|.
+name|getAnnotation
+argument_list|(
+name|NlpAnnotations
+operator|.
+name|NER_ANNOTATION
+argument_list|)
+operator|!=
+literal|null
+expr_stmt|;
+if|if
+condition|(
+name|process
+operator|==
+literal|null
+operator|&&
+name|isNamedEntity
+operator|&&
+name|tpc
+operator|.
+name|getProcessedPhraseCategories
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+name|LexicalCategory
+operator|.
+name|Noun
+argument_list|)
+condition|)
+block|{
+name|process
+operator|=
+literal|true
+expr_stmt|;
+block|}
 name|isProcessable
 operator|=
 name|process
@@ -400,23 +477,14 @@ name|getStart
 argument_list|()
 return|;
 block|}
-comment|/**      * Getter for the end character position of the text selected by      * possible multiple {@link #merged} chunks.      * @return the end character position considering possible {@link #merged}      * chunks.      */
+comment|/**      * Getter for the end character position of the text      * @return the end character position      */
 specifier|public
 name|int
 name|getEndChar
 parameter_list|()
 block|{
 return|return
-name|merged
-operator|==
-literal|null
-condition|?
 name|chunk
-operator|.
-name|getEnd
-argument_list|()
-else|:
-name|merged
 operator|.
 name|getEnd
 argument_list|()
@@ -430,6 +498,15 @@ parameter_list|()
 block|{
 return|return
 name|isProcessable
+return|;
+block|}
+specifier|public
+name|boolean
+name|isNamedEntity
+parameter_list|()
+block|{
+return|return
+name|isNamedEntity
 return|;
 block|}
 comment|/**      * Getter for the number of matchable tokens contained in this chunk      * @return The number of matchable tokens contained in this chunk      */
