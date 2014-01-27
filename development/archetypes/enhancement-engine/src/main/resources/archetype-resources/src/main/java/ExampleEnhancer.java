@@ -608,6 +608,38 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|/**      * Configuration property for option 1      */
+annotation|@
+name|Property
+argument_list|(
+name|value
+operator|=
+name|ExampleEnhancer
+operator|.
+name|DEFAULT_OPTION1_VALUE
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|EXAMPLE_CONFIG_OPTION1
+init|=
+literal|"${package}.option1"
+decl_stmt|;
+comment|/**      * The default value for EXAMPLE_CONFIG_OPTION1      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|DEFAULT_OPTION1_VALUE
+init|=
+literal|"value1"
+decl_stmt|;
+comment|/**      * The value of option1      */
+specifier|private
+name|String
+name|option1
+decl_stmt|;
 comment|/**      * TODO: change to fit your engine. See constants defined in the       * ServiceProperties class      */
 specifier|protected
 specifier|static
@@ -675,6 +707,47 @@ name|getProperties
 argument_list|()
 decl_stmt|;
 comment|//TODO: parse custom properties
+comment|//As Example we parse EXAMPLE_CONFIG_OPTION1 form the config
+name|Object
+name|value
+init|=
+name|properties
+operator|.
+name|get
+argument_list|(
+name|EXAMPLE_CONFIG_OPTION1
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|value
+operator|==
+literal|null
+operator|||
+name|value
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|option1
+operator|=
+name|DEFAULT_OPTION1_VALUE
+expr_stmt|;
+block|}
+else|else
+block|{
+name|option1
+operator|=
+name|value
+operator|.
+name|toString
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Deactivate
@@ -703,6 +776,10 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//TODO: reset fields to default, close resources ...
+name|option1
+operator|=
+literal|null
+expr_stmt|;
 name|super
 operator|.
 name|deactivate
@@ -710,6 +787,7 @@ argument_list|(
 name|context
 argument_list|)
 expr_stmt|;
+comment|//call deactivate on the super class
 block|}
 comment|/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -       * ServiceProperties interface method      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -       */
 comment|/**      * ServiceProperties are currently only used for automatic ordering of the       * execution of EnhancementEngines (e.g. by the WeightedChain implementation).      * Default ordering means that the engine is called after all engines that      * use a value< {@link ServiceProperties#ORDERING_CONTENT_EXTRACTION}      * and>= {@link ServiceProperties#ORDERING_EXTRACTION_ENHANCEMENT}.      */
