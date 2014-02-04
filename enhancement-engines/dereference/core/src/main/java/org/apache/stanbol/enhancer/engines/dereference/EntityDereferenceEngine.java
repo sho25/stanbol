@@ -2051,6 +2051,13 @@ argument_list|)
 operator|-
 literal|2
 decl_stmt|;
+if|if
+condition|(
+name|prefixPos
+operator|>=
+literal|0
+condition|)
+block|{
 name|String
 name|prefix
 init|=
@@ -2063,10 +2070,6 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|prefixPos
-operator|>=
-literal|0
-operator|&&
 name|entityUri
 operator|.
 name|startsWith
@@ -2099,6 +2102,18 @@ argument_list|(
 literal|"  ... no match for prefix {}"
 argument_list|,
 name|prefix
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+comment|//try configured regex pattern
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"  ... no prefix matches"
 argument_list|)
 expr_stmt|;
 block|}
