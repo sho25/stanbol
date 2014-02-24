@@ -983,6 +983,12 @@ operator|.
 name|isLinkable
 condition|)
 block|{
+name|activeChunk
+operator|.
+name|hasLinkable
+operator|=
+literal|true
+expr_stmt|;
 comment|//ignore matchableCount in Chunks with linkable Tokens
 name|activeChunk
 operator|.

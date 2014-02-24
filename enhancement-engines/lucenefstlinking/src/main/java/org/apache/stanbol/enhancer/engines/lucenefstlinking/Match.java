@@ -508,6 +508,7 @@ operator|=
 name|score
 expr_stmt|;
 block|}
+comment|/**      * The score       * @return the score      */
 specifier|public
 name|double
 name|getScore

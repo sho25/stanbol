@@ -246,6 +246,12 @@ comment|/** the end token index relative to the current section (sentence) */
 name|int
 name|endToken
 decl_stmt|;
+comment|/**      * If this chunk has a linkable token      */
+name|boolean
+name|hasLinkable
+init|=
+literal|false
+decl_stmt|;
 comment|/**      * The number of matchable Tokens enclosed by this Chunk      */
 name|int
 name|matchableCount
@@ -507,6 +513,16 @@ parameter_list|()
 block|{
 return|return
 name|isNamedEntity
+return|;
+block|}
+comment|/**      * If this chunk covers a linkable token      * @return      */
+specifier|public
+name|boolean
+name|hasLinkable
+parameter_list|()
+block|{
+return|return
+name|hasLinkable
 return|;
 block|}
 comment|/**      * Getter for the number of matchable tokens contained in this chunk      * @return The number of matchable tokens contained in this chunk      */
