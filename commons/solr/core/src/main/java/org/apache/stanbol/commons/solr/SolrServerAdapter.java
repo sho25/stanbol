@@ -2402,6 +2402,7 @@ operator|!=
 literal|null
 return|;
 block|}
+comment|/**      * The Name of the registered {@link CoreContainer}      * @return      */
 specifier|public
 name|String
 name|getServerName
@@ -2418,6 +2419,38 @@ operator|.
 name|getProperty
 argument_list|(
 name|PROPERTY_SERVER_NAME
+argument_list|)
+decl_stmt|;
+return|return
+name|value
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|value
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
+comment|/**      * The Directory of the registered {@link CoreContainer}      * @return      */
+specifier|public
+name|String
+name|getServerDir
+parameter_list|()
+block|{
+name|Object
+name|value
+init|=
+name|serverRegistration
+operator|.
+name|getReference
+argument_list|()
+operator|.
+name|getProperty
+argument_list|(
+name|PROPERTY_SERVER_DIR
 argument_list|)
 decl_stmt|;
 return|return
