@@ -1792,11 +1792,6 @@ specifier|private
 name|FieldEncodingEnum
 name|fieldEncoding
 decl_stmt|;
-comment|/**      * Cache used for Lucene {@link Document}s recently loaded from the index.      * The size can be configured by using the {@link #ENTITY_CACHE_SIZE}      * configuration parameter.      * @see #ENTITY_CACHE_SIZE      * @see #DEFAULT_ENTITY_CACHE_SIZE      */
-specifier|private
-name|EntityCacheManager
-name|documentCacheFactory
-decl_stmt|;
 specifier|private
 name|IndexConfiguration
 name|indexConfig
@@ -1804,6 +1799,11 @@ decl_stmt|;
 specifier|private
 name|Boolean
 name|skipAltTokensConfig
+decl_stmt|;
+comment|/**      * The size of the EntityCache (<code>0</code> ... means deactivated)      */
+specifier|private
+name|int
+name|entityCacheSize
 decl_stmt|;
 comment|/**      * Default constructor as used by OSGI. This expects that       * {@link #activate(ComponentContext)} is called before usage      */
 specifier|public
@@ -2562,7 +2562,7 @@ argument_list|)
 expr_stmt|;
 comment|//(6) Parse the EntityCache config
 name|int
-name|ecSize
+name|entityCacheSize
 decl_stmt|;
 name|value
 operator|=
@@ -2580,7 +2580,7 @@ operator|instanceof
 name|Number
 condition|)
 block|{
-name|ecSize
+name|entityCacheSize
 operator|=
 operator|(
 operator|(
@@ -2603,7 +2603,7 @@ condition|)
 block|{
 try|try
 block|{
-name|ecSize
+name|entityCacheSize
 operator|=
 name|Integer
 operator|.
@@ -2653,7 +2653,7 @@ block|}
 block|}
 else|else
 block|{
-name|ecSize
+name|entityCacheSize
 operator|=
 operator|-
 literal|1
@@ -2661,7 +2661,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|ecSize
+name|entityCacheSize
 operator|==
 literal|0
 condition|)
@@ -2673,39 +2673,36 @@ argument_list|(
 literal|" ... EntityCache deactivated"
 argument_list|)
 expr_stmt|;
-name|documentCacheFactory
+name|this
+operator|.
+name|entityCacheSize
 operator|=
-literal|null
+name|entityCacheSize
 expr_stmt|;
 block|}
 else|else
 block|{
-name|int
-name|size
-init|=
-name|ecSize
+name|this
+operator|.
+name|entityCacheSize
+operator|=
+name|entityCacheSize
 operator|<
 literal|0
 condition|?
 name|DEFAULT_ENTITY_CACHE_SIZE
 else|:
-name|ecSize
-decl_stmt|;
+name|entityCacheSize
+expr_stmt|;
 name|log
 operator|.
 name|info
 argument_list|(
-literal|" ... create EntityCache (size: {})"
+literal|" ... EntityCache enabled (size: {})"
 argument_list|,
-name|size
-argument_list|)
-expr_stmt|;
-name|documentCacheFactory
-operator|=
-operator|new
-name|FastLRUCacheManager
-argument_list|(
-name|size
+name|this
+operator|.
+name|entityCacheSize
 argument_list|)
 expr_stmt|;
 block|}
@@ -2827,9 +2824,10 @@ name|info
 argument_list|(
 literal|" ... SolrCore for {} was removed!"
 argument_list|,
-name|indexReference
+name|reference
 argument_list|)
 expr_stmt|;
+comment|//try to get an other serviceReference from the tracker
 name|updateEngineRegistration
 argument_list|(
 name|solrServerTracker
@@ -2921,25 +2919,28 @@ condition|)
 block|{
 name|log
 operator|.
-name|warn
+name|info
 argument_list|(
-literal|"Multiple SolrServer for IndexLocation {} available!"
+literal|"Multiple SolrCores for name {}! Will update engine "
+operator|+
+literal|"with the newly added {}!"
 argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|solrCore
+operator|.
+name|getName
+argument_list|()
+block|,
 name|indexReference
+block|,
+name|reference
+block|}
 argument_list|)
 expr_stmt|;
 block|}
-else|else
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... SolrCore for {} becomes available!"
-argument_list|,
-name|indexReference
-argument_list|)
-expr_stmt|;
 name|updateEngineRegistration
 argument_list|(
 name|reference
@@ -2947,7 +2948,6 @@ argument_list|,
 name|server
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|server
 return|;
@@ -3045,8 +3045,9 @@ operator|==
 literal|null
 condition|)
 block|{
+comment|//unregisterEngine(); //unregister existing
 return|return;
-comment|//nothing to do
+comment|//and return
 block|}
 name|BundleContext
 name|bundleContext
@@ -3216,13 +3217,26 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//set the DocumentCacheFactory
+if|if
+condition|(
+name|entityCacheSize
+operator|>
+literal|0
+condition|)
+block|{
 name|indexConfig
 operator|.
 name|setEntityCacheManager
 argument_list|(
-name|documentCacheFactory
+operator|new
+name|FastLRUCacheManager
+argument_list|(
+name|entityCacheSize
+argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+comment|//else no entityCache is used
 if|if
 condition|(
 name|skipAltTokensConfig
@@ -3798,6 +3812,18 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... unregister SolrCore {}"
+argument_list|,
+name|solrServer
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|solrServer
 operator|.
 name|close
@@ -3820,11 +3846,55 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... deactivate IndexingConfiguration"
+argument_list|)
+expr_stmt|;
 name|indexConfig
 operator|.
 name|deactivate
 argument_list|()
 expr_stmt|;
+comment|//close the EntityCacheManager (if present
+name|EntityCacheManager
+name|cacheManager
+init|=
+name|indexConfig
+operator|.
+name|getEntityCacheManager
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|cacheManager
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" ... deactivate {}"
+argument_list|,
+name|cacheManager
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|cacheManager
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
 name|indexConfig
 operator|=
 literal|null
@@ -4037,23 +4107,10 @@ name|entityLinkerConfig
 operator|=
 literal|null
 expr_stmt|;
-if|if
-condition|(
-name|documentCacheFactory
-operator|!=
-literal|null
-condition|)
-block|{
-name|documentCacheFactory
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-comment|//ensure that old caches are cleared
-block|}
-name|documentCacheFactory
+name|entityCacheSize
 operator|=
-literal|null
+operator|-
+literal|1
 expr_stmt|;
 name|bundleContext
 operator|=
@@ -4063,6 +4120,95 @@ name|skipAltTokensConfig
 operator|=
 literal|null
 expr_stmt|;
+comment|//NOTE: just to be sure that all the engine is unregistered and to
+comment|//      100% make sure that there are no refs to unregistered SolrCores!
+comment|//      this also include IndexConfiguration instances that does refer
+comment|//      FST models for the closed SolrCore. Using old models will cause
+comment|//      FST and SolrCore to be out of sync if a new SolrCore with updated
+comment|//      data will become available
+name|boolean
+name|unregisterFailier
+init|=
+literal|false
+decl_stmt|;
+if|if
+condition|(
+name|engineRegistration
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Engine is still registered after deactivating Engine! Will "
+operator|+
+literal|"explicitly perform required clean-up, but please report "
+operator|+
+literal|"this as a Bug for the Lucene FST Linking Engine!"
+argument_list|)
+expr_stmt|;
+name|unregisterFailier
+operator|=
+literal|true
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|solrCore
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"SolrCore used for linking was not closed! Will "
+operator|+
+literal|"explicitly perform required clean-up, but please report "
+operator|+
+literal|"this as a Bug for the Lucene FST Linking Engine!"
+argument_list|)
+expr_stmt|;
+name|unregisterFailier
+operator|=
+literal|true
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|indexConfig
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"FST Configuration was not not reset! Will "
+operator|+
+literal|"explicitly perform required clean-up, but please report "
+operator|+
+literal|"this as a Bug for the Lucene FST Linking Engine!"
+argument_list|)
+expr_stmt|;
+name|unregisterFailier
+operator|=
+literal|true
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|unregisterFailier
+condition|)
+block|{
+name|unregisterEngine
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 comment|/**      * {@link StrSubstitutor} {@link StrLookup} implementation used for      * determining the directory for storing FST files based on the configured      * {@link IndexConfiguration#FST_FOLDER} configuration.      * @author Rupert Westenthaler      *      */
 specifier|private
