@@ -65,9 +65,11 @@ end_import
 
 begin_import
 import|import
-name|at
+name|org
 operator|.
-name|newmedialab
+name|apache
+operator|.
+name|marmotta
 operator|.
 name|ldpath
 operator|.
@@ -81,9 +83,11 @@ end_import
 
 begin_import
 import|import
-name|at
+name|org
 operator|.
-name|newmedialab
+name|apache
+operator|.
+name|marmotta
 operator|.
 name|ldpath
 operator|.
@@ -104,7 +108,7 @@ specifier|public
 specifier|abstract
 class|class
 name|ContentItemFunction
-implements|implements
+extends|extends
 name|SelectorFunction
 argument_list|<
 name|Resource
@@ -163,6 +167,9 @@ name|Resource
 argument_list|>
 name|backend
 parameter_list|,
+name|Resource
+name|context
+parameter_list|,
 name|Collection
 argument_list|<
 name|Resource
@@ -187,6 +194,8 @@ operator|(
 name|ContentItemBackend
 operator|)
 name|backend
+argument_list|,
+name|context
 argument_list|,
 name|args
 argument_list|)
@@ -233,6 +242,9 @@ parameter_list|(
 name|ContentItemBackend
 name|backend
 parameter_list|,
+name|Resource
+name|context
+parameter_list|,
 name|Collection
 argument_list|<
 name|Resource
@@ -243,16 +255,10 @@ parameter_list|)
 function_decl|;
 annotation|@
 name|Override
-specifier|public
+specifier|protected
 name|String
-name|getPathExpression
-parameter_list|(
-name|RDFBackend
-argument_list|<
-name|Resource
-argument_list|>
-name|backend
-parameter_list|)
+name|getLocalName
+parameter_list|()
 block|{
 return|return
 name|name

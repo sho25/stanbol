@@ -21,22 +21,6 @@ end_package
 
 begin_import
 import|import static
-name|at
-operator|.
-name|newmedialab
-operator|.
-name|ldpath
-operator|.
-name|util
-operator|.
-name|Collections
-operator|.
-name|concat
-import|;
-end_import
-
-begin_import
-import|import static
 name|org
 operator|.
 name|apache
@@ -185,6 +169,40 @@ name|org
 operator|.
 name|apache
 operator|.
+name|marmotta
+operator|.
+name|ldpath
+operator|.
+name|api
+operator|.
+name|backend
+operator|.
+name|RDFBackend
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|marmotta
+operator|.
+name|ldpath
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|enhancer
@@ -267,22 +285,6 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|at
-operator|.
-name|newmedialab
-operator|.
-name|ldpath
-operator|.
-name|api
-operator|.
-name|functions
-operator|.
-name|SelectorFunction
-import|;
-end_import
-
 begin_comment
 comment|/**  * Provides access to the contents stored in {@link Blob}s added as content parts  * to a contentItem.<p>  *   * @author Rupert Westenthaler  *  */
 end_comment
@@ -293,11 +295,6 @@ class|class
 name|ContentFunction
 extends|extends
 name|ContentItemFunction
-implements|implements
-name|SelectorFunction
-argument_list|<
-name|Resource
-argument_list|>
 block|{
 name|Logger
 name|log
@@ -341,6 +338,9 @@ parameter_list|(
 name|ContentItemBackend
 name|backend
 parameter_list|,
+name|Resource
+name|context
+parameter_list|,
 name|Collection
 argument_list|<
 name|Resource
@@ -364,7 +364,6 @@ operator|.
 name|getContentItem
 argument_list|()
 decl_stmt|;
-comment|//        Collection<Resource> contexts = args[0];
 name|Set
 argument_list|<
 name|String
@@ -391,21 +390,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//TODO: Wait for ld-path to parse the context
-comment|//      http://code.google.com/p/ldpath/issues/detail?id=7
-comment|//                //1. check if the first parameter is the context
-comment|//                if(!args[0].isEmpty()&& backend.isURI(args[0].iterator().next())){
-comment|//                    contexts = args[0];
-comment|//                    if(args.length> 1){ // cut the context from the args
-comment|//                        Collection<Resource>[] tmp = new Collection[args.length-1];
-comment|//                        System.arraycopy(args, 0, tmp, 0, tmp.length);
-comment|//                        args = tmp;
-comment|//                    } else {
-comment|//                        args = new Collection[]{};
-comment|//                    }
-comment|//                } else { //use the ContentItem as context
-comment|//                    contexts = java.util.Collections.singleton((Resource)ci.getUri());
-comment|//                }
 name|mimeTypes
 operator|=
 operator|new
@@ -423,6 +407,8 @@ name|Resource
 argument_list|>
 name|params
 init|=
+name|Collections
+operator|.
 name|concat
 argument_list|(
 name|args
@@ -704,6 +690,28 @@ block|}
 block|}
 return|return
 name|result
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getSignature
+parameter_list|()
+block|{
+return|return
+literal|"content = fn:content({content-resource},{media-type},{media-type2},.., {media-typeN})"
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getDescription
+parameter_list|()
+block|{
+return|return
+literal|"Provides access to the Content stored in Blobs of the ContentItem"
 return|;
 block|}
 block|}

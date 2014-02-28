@@ -119,22 +119,6 @@ name|Yard
 import|;
 end_import
 
-begin_import
-import|import
-name|at
-operator|.
-name|newmedialab
-operator|.
-name|ldpath
-operator|.
-name|api
-operator|.
-name|backend
-operator|.
-name|RDFBackend
-import|;
-end_import
-
 begin_comment
 comment|/**  * Uses the {@link IndexingDestination#getYard()} as LDPath {@link RDFBackend}  * for the execution of configured LDPath statements.<p>  *<b>NOTE</b> in contrast to the {@link LdpathProcessor} this implementation  * is not limited to a subset of ldpath programs.<p>  * Typical use cases of this processor include:<ul>  *<li> indexing transitive closures (e.g. "  *<code>skos:broaderTransitive = (skos:broader)*</code>")  *<li> collecting labels of referenced entities to be used for disambiguation  *   (e.g. use lables of linked concepts in a SKOS concept scheme :   *   "<code><urn:disambiguate.label> = *[rdf:type is skos:Concept]/(skos:prefLabel | skos:altLabel)<code>")  *<li> advanced indexing rules that need paths longer than one (e.g. adding  *   labels of redirects pointing to an entity   *   "<code> rdfs:label = rdfs:label | (^rdfs:seeAlso/rdfs:label)</code>")  *</ul>  *<p>  * The focus on post-processing allows an easy configuration as the  * data source needs not to be configured, but is directly retrieved from  * the {@link IndexingDestination}. Note that this also means that if this   * processor is not used in the post-processing state results are unpredictable  * as they will depend on the indexing order of the entities!  *   * @author Rupert Westenthaler  *  */
 end_comment

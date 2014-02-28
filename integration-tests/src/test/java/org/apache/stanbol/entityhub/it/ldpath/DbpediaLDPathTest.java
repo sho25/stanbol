@@ -490,7 +490,7 @@ argument_list|,
 comment|//unknown namespace prefix
 literal|"ldpath"
 argument_list|,
-literal|"name = dct:subject :: xsd:anyURI;"
+literal|"name = nonexistendWkTzK:localName :: xsd:anyURI;"
 argument_list|)
 argument_list|)
 operator|.

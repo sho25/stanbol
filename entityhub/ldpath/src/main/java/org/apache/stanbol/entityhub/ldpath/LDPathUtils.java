@@ -67,22 +67,6 @@ name|UnsupportedEncodingException
 import|;
 end_import
 
-begin_import
-import|import
-name|at
-operator|.
-name|newmedialab
-operator|.
-name|ldpath
-operator|.
-name|model
-operator|.
-name|programs
-operator|.
-name|Program
-import|;
-end_import
-
 begin_class
 specifier|public
 class|class
