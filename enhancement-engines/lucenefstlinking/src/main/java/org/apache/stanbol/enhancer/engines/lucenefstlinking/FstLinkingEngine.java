@@ -2553,11 +2553,20 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//adapt score based on entity ranking
+if|if
+condition|(
+name|elConfig
+operator|.
+name|isRankEqualScoresBasedOnEntityRankings
+argument_list|()
+condition|)
+block|{
 name|adaptScoresForEntityRankings
 argument_list|(
 name|suggestions
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 if|if
 condition|(
