@@ -2447,12 +2447,16 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+operator|(
 name|suggestions
 operator|.
 name|size
 argument_list|()
 operator|>
 name|maxSuggestions
+operator|+
+literal|1
+operator|)
 operator|&&
 name|elConfig
 operator|.
