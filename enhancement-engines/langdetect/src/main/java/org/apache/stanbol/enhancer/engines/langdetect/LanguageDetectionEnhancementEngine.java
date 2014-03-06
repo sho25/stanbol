@@ -1298,6 +1298,43 @@ name|LangDetectException
 name|e
 parameter_list|)
 block|{
+name|Enum
+argument_list|<
+name|?
+argument_list|>
+name|errorCode
+init|=
+operator|(
+name|Enum
+argument_list|<
+name|?
+argument_list|>
+operator|)
+name|e
+operator|.
+name|getCode
+argument_list|()
+decl_stmt|;
+comment|//NOTE: https://code.google.com/p/language-detection/issues/detail?id=49
+comment|//ErrorCode enumeration is not visible. This engine wants to silently
+comment|//ignore " 0 - NoTextError" and "5 - CantDetectError"
+if|if
+condition|(
+name|errorCode
+operator|.
+name|ordinal
+argument_list|()
+operator|!=
+literal|0
+operator|&&
+name|errorCode
+operator|.
+name|ordinal
+argument_list|()
+operator|!=
+literal|5
+condition|)
+block|{
 name|StringBuilder
 name|msg
 init|=
@@ -1347,6 +1384,39 @@ literal|"..."
 argument_list|)
 expr_stmt|;
 block|}
+name|msg
+operator|.
+name|append
+argument_list|(
+literal|" (Error Code: "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|errorCode
+operator|.
+name|ordinal
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" - "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|errorCode
+operator|.
+name|name
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|")"
+argument_list|)
+expr_stmt|;
 throw|throw
 operator|new
 name|EngineException
@@ -1363,6 +1433,19 @@ argument_list|,
 name|e
 argument_list|)
 throw|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"No text to detect the language from present in ContentItem "
+argument_list|,
+name|ci
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 comment|// add language to metadata
 if|if
