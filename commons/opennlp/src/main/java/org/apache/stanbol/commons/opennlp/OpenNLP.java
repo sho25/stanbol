@@ -775,10 +775,7 @@ operator|=
 operator|new
 name|TokenizerME
 argument_list|(
-name|getTokenizerModel
-argument_list|(
-name|language
-argument_list|)
+name|model
 argument_list|)
 expr_stmt|;
 block|}
@@ -870,7 +867,7 @@ block|}
 comment|/**      * Getter for the "part-of-speech" model for the parsed language.      * If the model is not yet available a new one is built. The required data      * are loaded by using the {@link DataFileProvider} service.        * @param language the language      * @return the model or<code>null</code> if no model data are found      * @throws InvalidFormatException in case the found model data are in the wrong format      * @throws IOException on any error while reading the model data      */
 specifier|public
 name|POSModel
-name|getPartOfSpeachModel
+name|getPartOfSpeechModel
 parameter_list|(
 name|String
 name|language
@@ -1019,7 +1016,7 @@ block|{
 name|POSModel
 name|posModel
 init|=
-name|getPartOfSpeachModel
+name|getPartOfSpeechModel
 argument_list|(
 name|language
 argument_list|)

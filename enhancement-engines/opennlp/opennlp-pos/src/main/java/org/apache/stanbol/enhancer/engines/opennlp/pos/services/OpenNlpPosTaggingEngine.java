@@ -2616,7 +2616,7 @@ name|model
 operator|=
 name|openNLP
 operator|.
-name|getPartOfSpeachModel
+name|getPartOfSpeechModel
 argument_list|(
 name|language
 argument_list|)

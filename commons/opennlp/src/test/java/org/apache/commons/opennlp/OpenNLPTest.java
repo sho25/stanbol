@@ -463,7 +463,7 @@ name|model
 init|=
 name|openNLP
 operator|.
-name|getPartOfSpeachModel
+name|getPartOfSpeechModel
 argument_list|(
 literal|"en"
 argument_list|)
@@ -507,7 +507,7 @@ name|model
 init|=
 name|openNLP
 operator|.
-name|getPartOfSpeachModel
+name|getPartOfSpeechModel
 argument_list|(
 literal|"ru"
 argument_list|)
