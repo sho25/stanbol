@@ -857,12 +857,13 @@ comment|// This throws no WebApplicationException, because "field" is an
 comment|// optional parameter and callers of this method MUST provide an
 comment|// valid default value in case the request does not provide any or
 comment|// valid data.
+throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
 literal|"The parsed search \"field\" MUST NOT be NULL nor EMPTY"
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 else|else
 block|{
