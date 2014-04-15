@@ -265,9 +265,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ContentItemHelper
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|ContentItemHelper
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 specifier|final

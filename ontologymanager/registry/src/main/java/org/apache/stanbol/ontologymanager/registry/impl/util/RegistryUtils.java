@@ -371,9 +371,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|RegistryUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|RegistryUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

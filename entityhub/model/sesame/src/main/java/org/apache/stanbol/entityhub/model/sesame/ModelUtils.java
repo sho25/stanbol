@@ -175,9 +175,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ModelUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|ModelUtils
+parameter_list|()
+block|{}
 comment|/**      * Transforms typed literals with datatype {@link XMLSchema#STRING} to      * {@link Text} instances as required by some {@link Representation}      * methods. This transformer is usually used in front of the      * {@link ModelUtils#VALUE_TRANSFORMER}.<p>      *<b>NOTE</b> that input values other as String literals are NOT transformed!      */
 specifier|protected
 specifier|static

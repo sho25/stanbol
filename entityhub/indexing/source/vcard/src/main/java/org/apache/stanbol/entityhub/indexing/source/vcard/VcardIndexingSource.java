@@ -2136,6 +2136,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|final
 class|class
 name|VCardIterator
 implements|implements

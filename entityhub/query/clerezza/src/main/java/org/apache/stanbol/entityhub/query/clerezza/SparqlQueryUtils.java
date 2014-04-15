@@ -129,6 +129,11 @@ specifier|final
 class|class
 name|SparqlQueryUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|SparqlQueryUtils
+parameter_list|()
+block|{}
 comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#queryResult}      *       * @see ClerezzaQueryUtils#FIELD_QUERY_RESULT      */
 annotation|@
 name|Deprecated

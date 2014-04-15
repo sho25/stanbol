@@ -128,6 +128,7 @@ name|LinkedEntity
 block|{
 comment|/**      * An mention of an linked entity within the text      * @author Rupert Westenthaler      *      */
 specifier|public
+specifier|final
 class|class
 name|Occurrence
 block|{

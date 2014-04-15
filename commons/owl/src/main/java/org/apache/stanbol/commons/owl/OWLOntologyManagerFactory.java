@@ -119,9 +119,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OWLOntologyManagerFactory
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OWLOntologyManagerFactory
+parameter_list|()
+block|{}
 comment|/**      *       * @param localDirs      *            . If null or empty, no offline support will be added      * @return      */
 specifier|public
 specifier|static

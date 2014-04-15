@@ -99,9 +99,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|SWRL
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|SWRL
+parameter_list|()
+block|{}
 comment|/**      *<p>      * The RDF model that holds the vocabulary terms      *</p>      */
 specifier|private
 specifier|static

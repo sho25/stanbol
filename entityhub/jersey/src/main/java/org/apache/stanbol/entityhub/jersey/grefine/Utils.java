@@ -51,9 +51,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Utils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|Utils
+parameter_list|()
+block|{}
 comment|/**      * Compares two strings (after {@link StringUtils#trim(String) trimming}       * by using the Levenshtein's Edit Distance of the two      * strings. Does not return the {@link Integer} number of changes but      *<code>1-(changes/maxStringSizeAfterTrim)</code><p>      * @param s1 the first string      * @param s2 the second string      * @return the distance      * @throws IllegalArgumentException if any of the two parsed strings is NULL      */
 specifier|public
 specifier|static

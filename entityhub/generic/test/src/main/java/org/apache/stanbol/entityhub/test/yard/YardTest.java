@@ -6349,6 +6349,7 @@ expr_stmt|;
 block|}
 comment|/**      * Class representing the test data for the {@link FieldQuery} tests added      * by STANBOL-1202      *       * @author Rupert Westenthaler      *      */
 specifier|protected
+specifier|final
 class|class
 name|FieldQueryTestData
 block|{

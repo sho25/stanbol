@@ -425,9 +425,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|EnhancementRDFUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|EnhancementRDFUtils
+parameter_list|()
+block|{}
 comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param suggestion      *            the entity suggestion      * @param nameField the field used to extract the name      * @param lang the preferred language to include or<code>null</code> if none      */
 specifier|public
 specifier|static

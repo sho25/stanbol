@@ -147,9 +147,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|SWRLLiteralBuilder
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|SWRLLiteralBuilder
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 name|SWRLLiteralArgument

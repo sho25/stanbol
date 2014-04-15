@@ -2613,6 +2613,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
+specifier|final
 class|class
 name|EnhancementJobObserver
 block|{

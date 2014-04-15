@@ -137,9 +137,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Main
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|Main
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 specifier|final

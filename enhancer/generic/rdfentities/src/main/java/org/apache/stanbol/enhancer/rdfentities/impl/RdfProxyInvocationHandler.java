@@ -2325,6 +2325,7 @@ end_comment
 
 begin_class
 specifier|private
+specifier|final
 class|class
 name|RdfProxyPropertyCollection
 parameter_list|<

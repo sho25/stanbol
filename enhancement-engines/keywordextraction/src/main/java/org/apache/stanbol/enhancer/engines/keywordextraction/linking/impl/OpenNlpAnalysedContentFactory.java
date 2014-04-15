@@ -464,6 +464,7 @@ return|;
 block|}
 comment|/**      * Implementation of the {@link AnalysedContent} based on OpenNLP and the      * {@link TextAnalyzer} component      * @author Rupert Westenthaler      *      */
 specifier|private
+specifier|final
 class|class
 name|OpenNlpAnalysedContent
 implements|implements

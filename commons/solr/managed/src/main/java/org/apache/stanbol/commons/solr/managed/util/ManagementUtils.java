@@ -291,9 +291,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ManagementUtils
 block|{
+comment|/**      * Private constructor to restrict instantiation      */
+specifier|private
+name|ManagementUtils
+parameter_list|()
+block|{}
 comment|/**      * The logger      */
 specifier|private
 specifier|static

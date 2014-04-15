@@ -295,9 +295,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OntologyUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OntologyUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 name|String

@@ -133,9 +133,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|UserUtil
 block|{
+comment|/**     * Restrict instantiation     */
+specifier|private
+name|UserUtil
+parameter_list|()
+block|{}
 comment|/** 	 * 	 * @return the name of user which is associated to the  	 *<code>AccessControlContext</code> of the current thread. 	 */
 specifier|public
 specifier|static

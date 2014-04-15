@@ -257,9 +257,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OWLUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OWLUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 name|int

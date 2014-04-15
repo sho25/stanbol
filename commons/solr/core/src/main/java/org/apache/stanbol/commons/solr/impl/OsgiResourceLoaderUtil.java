@@ -187,10 +187,16 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OsgiResourceLoaderUtil
 block|{
-comment|/*      * static members form the SolrResourceLoader that are not visible to this      * class      */
+comment|/**     * Restrict instantiation     */
+specifier|private
+name|OsgiResourceLoaderUtil
+parameter_list|()
+block|{}
+comment|/*         * static members form the SolrResourceLoader that are not visible to this         * class         */
 specifier|static
 specifier|final
 name|String

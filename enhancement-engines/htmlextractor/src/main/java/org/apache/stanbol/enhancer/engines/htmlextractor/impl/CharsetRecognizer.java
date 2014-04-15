@@ -139,9 +139,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|CharsetRecognizer
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|CharsetRecognizer
+parameter_list|()
+block|{}
 comment|/**      * This contains the logger.      */
 specifier|private
 specifier|static

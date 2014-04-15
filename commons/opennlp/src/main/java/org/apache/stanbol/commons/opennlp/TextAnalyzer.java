@@ -1478,6 +1478,7 @@ block|}
 block|}
 comment|/**      * @deprecated replaced by STANBOL-733 (stanbol nlp processing module      */
 specifier|public
+specifier|final
 class|class
 name|AnalysedText
 block|{
@@ -2304,6 +2305,7 @@ return|;
 block|}
 comment|/**          * @deprecated replaced by STANBOL-733 (stanbol nlp processing module          */
 specifier|public
+specifier|final
 class|class
 name|Token
 block|{
@@ -2691,6 +2693,7 @@ block|}
 block|}
 comment|/**          * @deprecated replaced by STANBOL-733 (stanbol nlp processing module          */
 specifier|public
+specifier|final
 class|class
 name|Chunk
 block|{

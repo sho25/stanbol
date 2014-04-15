@@ -25,9 +25,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OWL2Constants
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OWL2Constants
+parameter_list|()
+block|{}
 comment|/**      * The namespace for the OWL language vocabulary.      */
 specifier|public
 specifier|static

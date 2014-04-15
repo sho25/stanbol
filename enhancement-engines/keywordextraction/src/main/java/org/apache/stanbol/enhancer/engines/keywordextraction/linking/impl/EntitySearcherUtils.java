@@ -119,9 +119,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|EntitySearcherUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|EntitySearcherUtils
+parameter_list|()
+block|{}
 comment|/**      * Validated the parsed parameter as parsed to       * {@link EntitySearcher#lookup(String, Set, List, String...)}      * and creates a fieldQuery for the parsed parameter      * @param field      * @param includeFields      * @param search      * @param languages      * @return      */
 specifier|public
 specifier|final

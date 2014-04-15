@@ -239,9 +239,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ClerezzaRDFUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|ClerezzaRDFUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

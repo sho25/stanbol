@@ -257,9 +257,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|JenaToClerezzaConverter
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|JenaToClerezzaConverter
+parameter_list|()
+block|{}
 comment|/** 	 *  	 * Converts a Jena {@link Model} to an {@link ArrayList} of Clerezza triples (instances of class {@link Triple}). 	 *  	 * @param model {@link Model} 	 * @return an {@link ArrayList} that contains the generated Clerezza triples (see {@link Triple})  	 */
 specifier|public
 specifier|static

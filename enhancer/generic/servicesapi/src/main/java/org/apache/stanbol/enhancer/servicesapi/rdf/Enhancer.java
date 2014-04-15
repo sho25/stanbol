@@ -37,9 +37,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Enhancer
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|Enhancer
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 specifier|final

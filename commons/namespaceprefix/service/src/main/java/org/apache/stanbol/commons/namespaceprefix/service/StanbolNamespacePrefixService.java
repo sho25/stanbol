@@ -2461,6 +2461,7 @@ return|;
 block|}
 comment|/**      * Internally used to mimic ServiceReferences when used outside OSGI      * @param<T>      */
 specifier|private
+specifier|final
 class|class
 name|NonOsgiServiceRef
 parameter_list|<

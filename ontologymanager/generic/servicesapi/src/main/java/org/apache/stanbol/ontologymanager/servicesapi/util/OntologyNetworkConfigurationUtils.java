@@ -249,9 +249,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OntologyNetworkConfigurationUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OntologyNetworkConfigurationUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 name|OWLDataFactory

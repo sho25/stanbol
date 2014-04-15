@@ -463,9 +463,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|EnhancementEngineHelper
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|EnhancementEngineHelper
+parameter_list|()
+block|{}
 comment|/**      * The maximum size of the prefix/suffix for the selection context      * @since 0.11.0      */
 specifier|public
 specifier|static

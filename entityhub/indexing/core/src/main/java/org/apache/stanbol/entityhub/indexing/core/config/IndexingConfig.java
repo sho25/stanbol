@@ -5101,6 +5101,7 @@ name|configs
 return|;
 block|}
 specifier|private
+specifier|final
 class|class
 name|ConfigEntry
 block|{

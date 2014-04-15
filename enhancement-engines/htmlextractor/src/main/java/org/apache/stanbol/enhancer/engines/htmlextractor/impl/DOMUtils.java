@@ -353,7 +353,12 @@ specifier|final
 class|class
 name|DOMUtils
 block|{
-comment|/**     * This prints the specified node and all of its children to a PrintStream.    *     * @param node a DOM<code>Node</code>    */
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|DOMUtils
+parameter_list|()
+block|{}
+comment|/**    * This prints the specified node and all of its children to a PrintStream.    *     * @param node a DOM<code>Node</code>    */
 specifier|public
 specifier|static
 name|void

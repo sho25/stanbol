@@ -107,9 +107,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|DOMBuilder
 block|{
+comment|/**    * Restrict instantiation    */
+specifier|private
+name|DOMBuilder
+parameter_list|()
+block|{}
 comment|/**    * Returns a W3C DOM that exposes the same content as the supplied Jsoup document into a W3C DOM.    * @param jsoupDocument The Jsoup document to convert.    * @return A W3C Document.    */
 specifier|public
 specifier|static

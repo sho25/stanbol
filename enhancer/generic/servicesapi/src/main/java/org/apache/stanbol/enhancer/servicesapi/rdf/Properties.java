@@ -57,9 +57,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Properties
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|Properties
+parameter_list|()
+block|{}
 comment|/**      * The canonical way to give the type of a resource. It is very common that      * the target of this property is an owl:Class such as the ones defined is      * {@link OntologyClass}      */
 specifier|public
 specifier|static

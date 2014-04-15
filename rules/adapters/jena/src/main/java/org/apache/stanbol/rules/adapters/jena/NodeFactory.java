@@ -129,9 +129,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|NodeFactory
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|NodeFactory
+parameter_list|()
+block|{}
 comment|/**      * The argument is converted to a Jena {@link Node}      *       * @param argument      *            any Object      * @return the {@link Node}      */
 specifier|public
 specifier|static

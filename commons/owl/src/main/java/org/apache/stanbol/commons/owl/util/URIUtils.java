@@ -65,9 +65,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|URIUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|URIUtils
+parameter_list|()
+block|{}
 comment|/**      * Converts a UriRef to an IRI.      *       * @param uri      *            the UriRef to convert      * @return the IRI form of the UriRef      */
 specifier|public
 specifier|static

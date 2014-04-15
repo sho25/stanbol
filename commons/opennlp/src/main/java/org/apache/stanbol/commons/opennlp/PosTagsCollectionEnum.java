@@ -842,6 +842,7 @@ block|}
 comment|/**      * Internally used as key for a Map that mapps POS tag collection sets       * based on Language and {@link PosTypeCollectionType}      * @author Rupert Westenthaler      *      */
 specifier|private
 specifier|static
+specifier|final
 class|class
 name|CollectionType
 block|{

@@ -357,10 +357,16 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ODPRegistryCacheManager
 block|{
-comment|/** 	 *  	 */
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|ODPRegistryCacheManager
+parameter_list|()
+block|{}
+comment|/** 	  * 	  */
 specifier|private
 specifier|static
 specifier|final

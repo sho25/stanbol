@@ -267,9 +267,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|ScopeSetRenderer
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|ScopeSetRenderer
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 name|OWLDataFactory

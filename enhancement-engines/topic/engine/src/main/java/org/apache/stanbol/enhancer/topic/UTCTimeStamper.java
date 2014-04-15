@@ -73,9 +73,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|UTCTimeStamper
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|UTCTimeStamper
+parameter_list|()
+block|{}
 specifier|protected
 specifier|static
 specifier|final

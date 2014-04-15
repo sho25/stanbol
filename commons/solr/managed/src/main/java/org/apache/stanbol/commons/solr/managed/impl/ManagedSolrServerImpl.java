@@ -5436,6 +5436,7 @@ extends|extends
 name|Thread
 block|{
 specifier|private
+specifier|final
 class|class
 name|IndexActionInfo
 block|{

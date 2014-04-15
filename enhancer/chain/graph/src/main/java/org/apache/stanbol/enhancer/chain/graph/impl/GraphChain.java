@@ -1948,6 +1948,7 @@ end_comment
 
 begin_class
 specifier|private
+specifier|final
 class|class
 name|ListConfigExecutionPlan
 implements|implements

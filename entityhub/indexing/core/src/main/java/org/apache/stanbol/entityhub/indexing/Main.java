@@ -143,9 +143,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Main
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|Main
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

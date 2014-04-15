@@ -1351,6 +1351,7 @@ decl_stmt|;
 comment|/**      * Allows nicely formatted logging of mapped properties      * @author Rupert Westenthaler      *      */
 specifier|protected
 specifier|static
+specifier|final
 class|class
 name|MappingLogger
 block|{

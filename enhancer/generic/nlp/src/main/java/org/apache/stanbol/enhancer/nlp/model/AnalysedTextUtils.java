@@ -327,9 +327,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|AnalysedTextUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|AnalysedTextUtils
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

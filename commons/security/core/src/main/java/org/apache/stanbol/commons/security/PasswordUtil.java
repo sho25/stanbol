@@ -53,9 +53,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|PasswordUtil
 block|{
+comment|/**     * Restrict instantiation     */
+specifier|private
+name|PasswordUtil
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

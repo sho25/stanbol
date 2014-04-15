@@ -43,9 +43,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|BundleInstallerConstants
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|BundleInstallerConstants
+parameter_list|()
+block|{}
 comment|/**      * The name of the header field used for the       *<a href="http://www.aqute.biz/Snippets/Extender"> The OSGi extender       * pattern</a>.      */
 specifier|public
 specifier|static

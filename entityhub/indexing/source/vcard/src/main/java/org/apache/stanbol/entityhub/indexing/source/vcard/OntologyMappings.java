@@ -77,9 +77,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|OntologyMappings
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OntologyMappings
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 specifier|final
@@ -235,6 +241,7 @@ decl_stmt|;
 comment|/**      * Defines mapping information for vCard properties as used as       * values for the {@link Map} defined as static members of the parent      * {@link OntologyMappings} class.<p>      * The keys {@link OntologyMappings#VCARD_PERSON} and      * {@link OntologyMappings#VCARD_ORGANIZATION} can be used to specify the      *<code>rdf:type</code> used for imported Persons and Organisations.<p>      * The<code>uri</code> is a required parameter and specifies the      * property of the Ontology used to store the values of the mapped vcard      * property.<p>      * For object properties the creation of sub-mappings and an inverse relation      * is supported. The created sub-resource will be linked the the resource      * of the vCard object by the<code>uri</code> property. If a mapping for      * {@link OntologyMappings#RDF_TYPE} is present fir sub-mappings this is used      * as<code>rdf:type</code> value for sub-resources<p>      * To specify that sub-values of a vCard property should be directly      * added to the resource of the vCard object one needs to add a      *<code>null</code> mapping for the parent and than add the mappings for      * the sub-properties also directly to this mappings.<br>      * Here an example for the vCard "N" element:<p>      *<pre><code>      *     mappings.put("N",null); //add null mapping for the parent      *     mappings.put("N_FAMILY", new Mapping("http:schema.org/familyName");      *     mappings.put("N_GIVEN", new Mapping("http:schema.org/givenName");      *</code></pre>      * @author Rupert Westenthaler      */
 specifier|public
 specifier|static
+specifier|final
 class|class
 name|Mapping
 block|{

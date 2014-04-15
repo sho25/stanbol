@@ -23,9 +23,15 @@ begin_class
 annotation|@
 name|Deprecated
 specifier|public
+specifier|final
 class|class
 name|OntologyConstants
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|OntologyConstants
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 specifier|final

@@ -77,9 +77,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|NamespaceMappingUtils
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|NamespaceMappingUtils
+parameter_list|()
+block|{}
 comment|/**      * This pattern checks for invalid chars within an prefix.      * The used pattern is<code>[^a-zA-Z0-9\-_]</code>. Meaning that prefixes      * are allows to include alpha numeric characters including '-' and '_'      */
 specifier|private
 specifier|static

@@ -649,9 +649,15 @@ end_import
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|LDPathHelper
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|LDPathHelper
+parameter_list|()
+block|{}
 specifier|private
 specifier|static
 specifier|final

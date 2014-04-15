@@ -153,9 +153,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|Constants
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|Constants
+parameter_list|()
+block|{}
 comment|/**      * set of part of speech tags as defined in the {@link ToStringUtil} class.      * Descriptions are taken from the       *<a herf="http://lucene-gosen.googlecode.com/svn/trunk/example/stoptags_ja.txt">      * Gosen Pos Tag Documentation</a> as the Tag Set used by Kuromoji does       * exactly match those used by Gosen.      */
 specifier|public
 specifier|static

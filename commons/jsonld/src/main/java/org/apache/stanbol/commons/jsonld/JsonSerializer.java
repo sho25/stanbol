@@ -81,9 +81,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|JsonSerializer
 block|{
+comment|/**      * Restrict instantiation      */
+specifier|private
+name|JsonSerializer
+parameter_list|()
+block|{}
 specifier|public
 specifier|static
 name|String
