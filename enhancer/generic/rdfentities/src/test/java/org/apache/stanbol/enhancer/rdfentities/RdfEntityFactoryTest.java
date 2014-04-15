@@ -1548,23 +1548,15 @@ name|TestRdfEntity
 operator|.
 name|class
 argument_list|,
-operator|new
-name|Class
-argument_list|<
-name|?
-argument_list|>
-index|[]
-block|{
 name|SubTestRdfEntity
 operator|.
 name|class
-operator|,
+argument_list|,
 name|TestRdfEntity2
 operator|.
 name|class
-block|}
-block|)
-function|;
+argument_list|)
+decl_stmt|;
 name|TestRdfEntity
 name|entity3
 init|=
@@ -1868,9 +1860,6 @@ operator|)
 argument_list|)
 expr_stmt|;
 block|}
-end_class
-
-begin_function
 specifier|private
 specifier|static
 name|Set
@@ -1964,13 +1953,7 @@ return|return
 name|typeStrings
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**      * Interface to test primitive Datatypes and Uri links.      *      * @author westei      */
-end_comment
-
-begin_interface
 annotation|@
 name|Rdf
 argument_list|(
@@ -2291,13 +2274,7 @@ name|uriRef
 parameter_list|)
 function_decl|;
 block|}
-end_interface
-
-begin_comment
 comment|/**      * Interface to test relations to other RdfEntities.      *      * @author westei      */
-end_comment
-
-begin_interface
 annotation|@
 name|Rdf
 argument_list|(
@@ -2368,13 +2345,7 @@ name|entities
 parameter_list|)
 function_decl|;
 block|}
-end_interface
-
-begin_comment
 comment|/**      * Interface to test extends relations between Interfaces.      *      * @author westei      */
-end_comment
-
-begin_interface
 annotation|@
 name|Rdf
 argument_list|(
@@ -2414,20 +2385,11 @@ name|entity2
 parameter_list|)
 function_decl|;
 block|}
-end_interface
-
-begin_comment
 comment|//    public static void main(String[] args) throws Exception{
-end_comment
-
-begin_comment
 comment|//        new RdfEntityFactoryTest().testTypeStatements();
-end_comment
-
-begin_comment
 comment|//    }
-end_comment
+block|}
+end_class
 
-unit|}
 end_unit
 

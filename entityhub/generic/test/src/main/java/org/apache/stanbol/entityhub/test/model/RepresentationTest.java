@@ -5892,11 +5892,6 @@ argument_list|(
 name|field
 argument_list|,
 name|NL_TEST_string
-argument_list|,
-operator|new
-name|String
-index|[]
-block|{}
 argument_list|)
 expr_stmt|;
 name|textSet
@@ -6697,11 +6692,6 @@ operator|.
 name|removeAllNaturalText
 argument_list|(
 name|field
-argument_list|,
-operator|new
-name|String
-index|[]
-block|{}
 argument_list|)
 expr_stmt|;
 name|Iterator
