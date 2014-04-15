@@ -843,15 +843,17 @@ comment|//if not found in the content
 comment|//set some random numbers for start/end
 name|start
 operator|=
-operator|(
+call|(
 name|int
-operator|)
+call|)
+argument_list|(
 name|Math
 operator|.
 name|random
 argument_list|()
 operator|*
 literal|100
+argument_list|)
 expr_stmt|;
 block|}
 name|testAnnotation
