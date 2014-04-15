@@ -2960,6 +2960,8 @@ literal|null
 condition|)
 block|{
 name|includeString
+operator|=
+name|includeString
 operator|.
 name|trim
 argument_list|()

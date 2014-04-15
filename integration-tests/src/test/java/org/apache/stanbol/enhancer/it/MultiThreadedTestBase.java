@@ -1914,11 +1914,6 @@ block|{
 name|UriRef
 name|property
 decl_stmt|;
-name|propertyString
-operator|.
-name|trim
-argument_list|()
-expr_stmt|;
 if|if
 condition|(
 literal|"*"
@@ -3165,6 +3160,9 @@ operator|.
 name|propertyString
 operator|=
 name|propertyString
+operator|.
+name|trim
+argument_list|()
 expr_stmt|;
 block|}
 block|}
