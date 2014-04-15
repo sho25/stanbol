@@ -263,6 +263,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|commons
+operator|.
+name|lang
+operator|.
+name|StringEscapeUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|felix
 operator|.
 name|scr
@@ -1605,7 +1619,12 @@ name|println
 argument_list|(
 literal|"Unable to perform benchmark on EnhancementChain '"
 operator|+
+name|StringEscapeUtils
+operator|.
+name|escapeHtml
+argument_list|(
 name|chainName
+argument_list|)
 operator|+
 literal|"' because no chain with that name is active!"
 argument_list|)
