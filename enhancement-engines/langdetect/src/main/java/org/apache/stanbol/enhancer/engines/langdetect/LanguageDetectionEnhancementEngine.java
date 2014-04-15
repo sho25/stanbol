@@ -1304,12 +1304,6 @@ name|?
 argument_list|>
 name|errorCode
 init|=
-operator|(
-name|Enum
-argument_list|<
-name|?
-argument_list|>
-operator|)
 name|e
 operator|.
 name|getCode

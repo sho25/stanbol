@@ -600,12 +600,7 @@ control|(
 name|RegistryItem
 name|child
 range|:
-operator|(
-operator|(
-name|RegistryItem
-operator|)
 name|item
-operator|)
 operator|.
 name|getChildren
 argument_list|()

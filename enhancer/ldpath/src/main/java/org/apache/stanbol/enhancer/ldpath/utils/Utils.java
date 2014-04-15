@@ -247,14 +247,6 @@ name|parseSelector
 argument_list|(
 name|path
 argument_list|,
-operator|(
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-operator|)
 literal|null
 argument_list|)
 return|;

@@ -3688,9 +3688,6 @@ name|parseFrom
 argument_list|(
 name|results
 argument_list|,
-operator|(
-name|UriRef
-operator|)
 name|contentItemUri
 argument_list|)
 decl_stmt|;

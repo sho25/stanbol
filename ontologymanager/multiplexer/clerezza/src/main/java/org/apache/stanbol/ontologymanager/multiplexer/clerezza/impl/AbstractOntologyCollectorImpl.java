@@ -3608,9 +3608,6 @@ name|o
 decl_stmt|;
 name|o
 operator|=
-operator|(
-name|OWLOntology
-operator|)
 name|ontologyProvider
 operator|.
 name|getStoredOntology

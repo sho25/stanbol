@@ -449,9 +449,6 @@ name|appendChild
 argument_list|(
 name|createValueElement
 argument_list|(
-operator|(
-name|Resource
-operator|)
 name|solutionMap
 operator|.
 name|get
@@ -747,12 +744,7 @@ name|doc
 operator|.
 name|createTextNode
 argument_list|(
-operator|(
-operator|(
-name|BNode
-operator|)
 name|resource
-operator|)
 operator|.
 name|toString
 argument_list|()

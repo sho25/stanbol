@@ -471,9 +471,6 @@ literal|0
 expr_stmt|;
 name|tmp
 operator|=
-operator|(
-name|Integer
-operator|)
 name|ref2
 operator|.
 name|getProperty
@@ -510,9 +507,6 @@ condition|)
 block|{
 name|tmp
 operator|=
-operator|(
-name|Long
-operator|)
 name|ref1
 operator|.
 name|getProperty
@@ -545,9 +539,6 @@ name|MAX_VALUE
 decl_stmt|;
 name|tmp
 operator|=
-operator|(
-name|Long
-operator|)
 name|ref2
 operator|.
 name|getProperty

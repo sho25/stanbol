@@ -349,9 +349,6 @@ decl_stmt|;
 name|ClauseEntry
 name|iObjectClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo

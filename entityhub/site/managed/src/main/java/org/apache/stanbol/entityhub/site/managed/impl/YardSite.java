@@ -679,9 +679,6 @@ operator|.
 name|getUri
 argument_list|()
 argument_list|,
-operator|(
-name|Object
-operator|)
 name|Boolean
 operator|.
 name|TRUE

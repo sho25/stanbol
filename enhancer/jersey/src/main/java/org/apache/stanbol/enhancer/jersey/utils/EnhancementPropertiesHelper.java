@@ -779,9 +779,6 @@ name|enhancementProperties
 parameter_list|)
 block|{
 return|return
-operator|(
-name|String
-operator|)
 name|get
 argument_list|(
 name|enhancementProperties

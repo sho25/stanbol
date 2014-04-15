@@ -1021,9 +1021,6 @@ block|{
 name|SolrYardConfig
 name|config
 init|=
-operator|(
-name|SolrYardConfig
-operator|)
 name|this
 operator|.
 name|config
@@ -1118,9 +1115,6 @@ block|{
 name|SolrYardConfig
 name|config
 init|=
-operator|(
-name|SolrYardConfig
-operator|)
 name|this
 operator|.
 name|config

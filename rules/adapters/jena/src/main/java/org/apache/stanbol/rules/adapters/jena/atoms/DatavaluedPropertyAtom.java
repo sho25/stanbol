@@ -307,9 +307,6 @@ decl_stmt|;
 name|ClauseEntry
 name|argument2ClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo
@@ -324,9 +321,6 @@ decl_stmt|;
 name|ClauseEntry
 name|argument1ClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo
@@ -341,9 +335,6 @@ decl_stmt|;
 name|ClauseEntry
 name|datatypePropertyClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo

@@ -540,9 +540,6 @@ literal|null
 condition|?
 literal|"http://spotlight.dbpedia.org/rest/candidates"
 else|:
-operator|(
-name|String
-operator|)
 name|System
 operator|.
 name|getProperty

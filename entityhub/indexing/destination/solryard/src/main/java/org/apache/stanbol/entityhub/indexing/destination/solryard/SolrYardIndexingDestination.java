@@ -4357,12 +4357,6 @@ control|(
 name|File
 name|file
 range|:
-operator|(
-name|Collection
-argument_list|<
-name|File
-argument_list|>
-operator|)
 name|FileUtils
 operator|.
 name|listFiles

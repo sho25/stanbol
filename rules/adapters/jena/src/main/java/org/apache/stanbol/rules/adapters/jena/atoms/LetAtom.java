@@ -375,9 +375,6 @@ decl_stmt|;
 name|ClauseEntry
 name|parameterClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo
@@ -392,9 +389,6 @@ decl_stmt|;
 name|ClauseEntry
 name|variableClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo

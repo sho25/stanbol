@@ -314,9 +314,6 @@ name|valueFactory
 operator|.
 name|createReference
 argument_list|(
-operator|(
-name|UriRef
-operator|)
 name|value
 argument_list|)
 return|;
@@ -334,9 +331,6 @@ name|valueFactory
 operator|.
 name|createText
 argument_list|(
-operator|(
-name|Literal
-operator|)
 name|value
 argument_list|)
 return|;

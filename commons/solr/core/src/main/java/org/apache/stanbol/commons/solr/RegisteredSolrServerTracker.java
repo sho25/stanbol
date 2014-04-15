@@ -910,9 +910,6 @@ literal|null
 condition|?
 literal|null
 else|:
-operator|(
-name|SolrServer
-operator|)
 name|getService
 argument_list|(
 name|ref

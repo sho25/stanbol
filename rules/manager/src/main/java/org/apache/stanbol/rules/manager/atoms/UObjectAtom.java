@@ -179,12 +179,7 @@ literal|1
 case|:
 name|argumentString
 operator|=
-operator|(
-operator|(
-name|Integer
-operator|)
 name|argument
-operator|)
 operator|.
 name|toString
 argument_list|()

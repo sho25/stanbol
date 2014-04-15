@@ -2279,9 +2279,6 @@ name|Sentence
 case|:
 name|context
 operator|=
-operator|(
-name|Sentence
-operator|)
 name|context
 expr_stmt|;
 break|break;

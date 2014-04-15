@@ -826,12 +826,6 @@ name|ruleAdapters
 operator|.
 name|put
 argument_list|(
-operator|(
-name|Class
-argument_list|<
-name|?
-argument_list|>
-operator|)
 name|ruleAdapter
 operator|.
 name|getExportClass

@@ -4212,9 +4212,6 @@ operator|.
 name|getText
 argument_list|()
 argument_list|,
-operator|(
-name|String
-operator|)
 literal|null
 argument_list|,
 literal|"en"

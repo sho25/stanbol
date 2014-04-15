@@ -328,10 +328,6 @@ expr_stmt|;
 block|}
 block|}
 return|return
-operator|(
-name|Span
-index|[]
-operator|)
 name|tokens
 operator|.
 name|toArray

@@ -1829,12 +1829,7 @@ block|{
 name|String
 name|sessionId
 init|=
-operator|(
-operator|(
-name|UriRef
-operator|)
 name|candidate
-operator|)
 operator|.
 name|getUnicodeString
 argument_list|()

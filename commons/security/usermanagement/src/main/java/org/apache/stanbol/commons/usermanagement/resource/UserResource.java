@@ -1622,9 +1622,6 @@ comment|//     if (userTriples.hasNext()) {
 name|NonLiteral
 name|userNode
 init|=
-operator|(
-name|NonLiteral
-operator|)
 name|userTriples
 operator|.
 name|next

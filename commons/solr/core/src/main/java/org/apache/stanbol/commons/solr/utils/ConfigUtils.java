@@ -1125,12 +1125,6 @@ name|ZipArchiveEntry
 argument_list|>
 name|entries
 init|=
-operator|(
-name|Enumeration
-argument_list|<
-name|ZipArchiveEntry
-argument_list|>
-operator|)
 name|archive
 operator|.
 name|getEntries
@@ -2619,12 +2613,6 @@ name|ZipArchiveEntry
 argument_list|>
 name|entries
 init|=
-operator|(
-name|Enumeration
-argument_list|<
-name|ZipArchiveEntry
-argument_list|>
-operator|)
 name|archive
 operator|.
 name|getEntries

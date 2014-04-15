@@ -624,9 +624,6 @@ literal|null
 condition|?
 literal|"http://spotlight.dbpedia.org/rest/annotate"
 else|:
-operator|(
-name|String
-operator|)
 name|System
 operator|.
 name|getProperty

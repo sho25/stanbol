@@ -3587,9 +3587,6 @@ name|UriRef
 argument_list|(
 name|URI_PREFIX
 operator|+
-operator|(
-name|int
-operator|)
 name|count
 operator|*
 name|random

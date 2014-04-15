@@ -3033,9 +3033,6 @@ block|{
 name|String
 name|line
 init|=
-operator|(
-name|String
-operator|)
 name|lines
 operator|.
 name|next

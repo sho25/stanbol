@@ -645,12 +645,7 @@ argument_list|()
 operator|.
 name|getStoredOntology
 argument_list|(
-operator|(
-operator|(
-name|RegistryOntology
-operator|)
 name|child
-operator|)
 operator|.
 name|getIRI
 argument_list|()
@@ -757,12 +752,7 @@ argument_list|()
 operator|.
 name|getStoredOntology
 argument_list|(
-operator|(
-operator|(
-name|RegistryOntology
-operator|)
 name|child
-operator|)
 operator|.
 name|getIRI
 argument_list|()

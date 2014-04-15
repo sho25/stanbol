@@ -459,9 +459,6 @@ operator|)
 operator|.
 name|compareTo
 argument_list|(
-operator|(
-name|Comparable
-operator|)
 name|score1
 argument_list|)
 return|;

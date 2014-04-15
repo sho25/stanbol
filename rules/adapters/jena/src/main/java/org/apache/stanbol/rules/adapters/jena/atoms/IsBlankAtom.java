@@ -321,9 +321,6 @@ decl_stmt|;
 name|ClauseEntry
 name|argumentClauseEntry
 init|=
-operator|(
-name|ClauseEntry
-operator|)
 name|adapter
 operator|.
 name|adaptTo

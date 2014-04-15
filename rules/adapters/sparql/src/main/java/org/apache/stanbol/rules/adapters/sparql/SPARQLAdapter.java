@@ -768,9 +768,6 @@ name|sparqlObjects
 operator|.
 name|add
 argument_list|(
-operator|(
-name|SPARQLNot
-operator|)
 name|tmp
 argument_list|)
 expr_stmt|;
@@ -787,9 +784,6 @@ name|sparqlObjects
 operator|.
 name|add
 argument_list|(
-operator|(
-name|SPARQLComparison
-operator|)
 name|tmp
 argument_list|)
 expr_stmt|;

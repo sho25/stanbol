@@ -354,12 +354,7 @@ block|{
 name|ContentItem
 name|ci
 init|=
-operator|(
-operator|(
-name|ContentItemBackend
-operator|)
 name|backend
-operator|)
 operator|.
 name|getContentItem
 argument_list|()

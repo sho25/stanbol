@@ -185,9 +185,6 @@ name|argumentSPARQL
 operator|=
 literal|"\""
 operator|+
-operator|(
-name|String
-operator|)
 name|argument
 operator|+
 literal|"\"^^<http://www.w3.org/2001/XMLSchema#string>"
@@ -198,12 +195,7 @@ literal|1
 case|:
 name|argumentSPARQL
 operator|=
-operator|(
-operator|(
-name|Integer
-operator|)
 name|argument
-operator|)
 operator|.
 name|toString
 argument_list|()

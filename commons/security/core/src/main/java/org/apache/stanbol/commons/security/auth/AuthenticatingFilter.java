@@ -1175,9 +1175,6 @@ name|request
 argument_list|,
 name|response
 argument_list|,
-operator|(
-name|SecurityException
-operator|)
 name|cause
 operator|.
 name|getCause

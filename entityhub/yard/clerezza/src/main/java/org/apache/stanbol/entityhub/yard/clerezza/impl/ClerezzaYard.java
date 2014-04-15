@@ -1959,9 +1959,6 @@ name|source
 operator|.
 name|filter
 argument_list|(
-operator|(
-name|NonLiteral
-operator|)
 name|node
 argument_list|,
 literal|null
@@ -3231,9 +3228,6 @@ name|tcManager
 operator|.
 name|executeSparqlQuery
 argument_list|(
-operator|(
-name|SelectQuery
-operator|)
 name|sparqlQuery
 argument_list|,
 name|graph

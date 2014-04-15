@@ -200,9 +200,6 @@ name|Graph
 condition|)
 name|bindRootOntology
 argument_list|(
-operator|(
-name|Graph
-operator|)
 name|graph
 argument_list|)
 expr_stmt|;

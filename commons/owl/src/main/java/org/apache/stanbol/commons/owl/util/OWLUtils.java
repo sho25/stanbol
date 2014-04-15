@@ -550,9 +550,6 @@ name|graph
 operator|.
 name|filter
 argument_list|(
-operator|(
-name|UriRef
-operator|)
 name|subj
 argument_list|,
 operator|new

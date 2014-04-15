@@ -349,12 +349,6 @@ argument_list|)
 expr_stmt|;
 name|configLines
 operator|=
-operator|(
-name|List
-argument_list|<
-name|String
-argument_list|>
-operator|)
 name|IOUtils
 operator|.
 name|readLines
