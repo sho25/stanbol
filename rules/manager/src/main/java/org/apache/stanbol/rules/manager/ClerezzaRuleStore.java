@@ -1419,7 +1419,7 @@ name|stanbolSyntax
 operator|.
 name|indexOf
 argument_list|(
-literal|"["
+literal|'['
 argument_list|)
 decl_stmt|;
 name|int
@@ -1429,7 +1429,7 @@ name|stanbolSyntax
 operator|.
 name|indexOf
 argument_list|(
-literal|"]"
+literal|']'
 argument_list|)
 decl_stmt|;
 name|stanbolSyntax
