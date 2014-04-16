@@ -1375,7 +1375,7 @@ specifier|static
 parameter_list|<
 name|T
 parameter_list|>
-name|LinkedHashMap
+name|Map
 argument_list|<
 name|UriRef
 argument_list|,

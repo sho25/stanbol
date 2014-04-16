@@ -61,6 +61,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -269,7 +279,7 @@ block|{}
 comment|/** 	 *  	 * Converts a Jena {@link Model} to an {@link ArrayList} of Clerezza triples (instances of class {@link Triple}). 	 *  	 * @param model {@link Model} 	 * @return an {@link ArrayList} that contains the generated Clerezza triples (see {@link Triple})  	 */
 specifier|public
 specifier|static
-name|ArrayList
+name|List
 argument_list|<
 name|Triple
 argument_list|>

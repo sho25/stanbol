@@ -77,6 +77,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -313,7 +323,7 @@ name|class
 argument_list|)
 decl_stmt|;
 specifier|private
-name|HashMap
+name|Map
 argument_list|<
 name|String
 argument_list|,
@@ -322,7 +332,7 @@ argument_list|>
 name|registry
 decl_stmt|;
 specifier|private
-name|HashSet
+name|Set
 argument_list|<
 name|String
 argument_list|>
@@ -1137,7 +1147,7 @@ throw|;
 block|}
 block|}
 specifier|public
-name|HashMap
+name|Map
 argument_list|<
 name|String
 argument_list|,
@@ -1154,7 +1164,7 @@ specifier|public
 name|void
 name|setRegistry
 parameter_list|(
-name|HashMap
+name|Map
 argument_list|<
 name|String
 argument_list|,
@@ -1186,7 +1196,7 @@ specifier|public
 name|void
 name|setActiveExtractors
 parameter_list|(
-name|HashSet
+name|Set
 argument_list|<
 name|String
 argument_list|>

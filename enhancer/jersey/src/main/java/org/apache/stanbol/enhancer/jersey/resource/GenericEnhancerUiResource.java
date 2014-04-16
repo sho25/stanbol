@@ -637,14 +637,14 @@ name|Serializer
 name|serializer
 decl_stmt|;
 specifier|private
-name|LinkedHashSet
+name|Set
 argument_list|<
 name|ExecutionNode
 argument_list|>
 name|_executionNodes
 decl_stmt|;
 specifier|private
-name|LinkedHashSet
+name|Set
 argument_list|<
 name|ExecutionNode
 argument_list|>

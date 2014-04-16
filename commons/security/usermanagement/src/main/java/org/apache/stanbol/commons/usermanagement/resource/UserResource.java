@@ -4947,7 +4947,7 @@ expr_stmt|;
 block|}
 comment|/**      * convenience - used for buffering      *      * @param subject      * @param predicate      * @param object      * @return      */
 specifier|private
-name|ArrayList
+name|List
 argument_list|<
 name|Triple
 argument_list|>

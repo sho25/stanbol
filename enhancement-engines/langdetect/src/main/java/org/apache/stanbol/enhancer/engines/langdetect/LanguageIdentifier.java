@@ -400,7 +400,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|ArrayList
+name|List
 argument_list|<
 name|Language
 argument_list|>

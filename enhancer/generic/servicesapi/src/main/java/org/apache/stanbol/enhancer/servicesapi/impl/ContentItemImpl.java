@@ -216,7 +216,7 @@ decl_stmt|;
 comment|/**      * Holds the content parts of this ContentItem      */
 specifier|private
 specifier|final
-name|LinkedHashMap
+name|Map
 argument_list|<
 name|UriRef
 argument_list|,

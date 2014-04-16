@@ -671,7 +671,7 @@ operator|-
 literal|1
 decl_stmt|;
 specifier|private
-name|HashMap
+name|Map
 argument_list|<
 name|List
 argument_list|<

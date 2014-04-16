@@ -1522,7 +1522,7 @@ name|ChainExecution
 name|chainExecution
 decl_stmt|;
 specifier|private
-name|ArrayList
+name|List
 argument_list|<
 name|org
 operator|.

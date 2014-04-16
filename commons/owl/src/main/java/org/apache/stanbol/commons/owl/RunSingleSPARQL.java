@@ -165,7 +165,7 @@ name|OntModel
 name|jenamodel
 decl_stmt|;
 specifier|private
-name|HashMap
+name|Map
 argument_list|<
 name|String
 argument_list|,
@@ -243,14 +243,6 @@ name|this
 operator|.
 name|sparqlprefix
 operator|=
-operator|(
-name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-operator|)
 name|map
 expr_stmt|;
 while|while
@@ -358,7 +350,7 @@ parameter_list|(
 name|OWLOntology
 name|owl
 parameter_list|,
-name|HashMap
+name|Map
 argument_list|<
 name|String
 argument_list|,
@@ -481,7 +473,7 @@ block|}
 block|}
 comment|/**      * To get the prefix mapping      *      * @return {Return a prefix mapping.}      */
 specifier|public
-name|HashMap
+name|Map
 argument_list|<
 name|String
 argument_list|,
