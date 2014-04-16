@@ -95,16 +95,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Date
 import|;
 end_import
@@ -428,14 +418,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|String
-name|XSD_DATE_TIME
-init|=
-literal|"http://www.w3.org/2001/XMLSchema#dateTime"
-decl_stmt|;
+comment|//private static final String XSD_DATE_TIME = "http://www.w3.org/2001/XMLSchema#dateTime";
 comment|//private static final DateFormat DATE_FORMAT = new W3CDateFormat();
 specifier|private
 name|SparqlQueryUtils
@@ -3262,143 +3245,30 @@ operator|.
 name|none
 condition|)
 block|{
-if|if
-condition|(
-name|constraint
-operator|.
-name|isCaseSensitive
-argument_list|()
-condition|)
-block|{
-name|boolean
-name|first
-init|=
-literal|true
-decl_stmt|;
-if|if
-condition|(
-name|constraint
-operator|.
-name|getTexts
-argument_list|()
-operator|.
-name|size
-argument_list|()
-operator|>
-literal|1
-condition|)
-block|{
-name|queryString
-operator|.
-name|append
-argument_list|(
-literal|'('
-argument_list|)
-expr_stmt|;
-comment|//start language filter group (STANBOL-1204)
-block|}
-for|for
-control|(
-name|String
-name|textConstraint
-range|:
-name|constraint
-operator|.
-name|getTexts
-argument_list|()
-control|)
-block|{
-if|if
-condition|(
-name|first
-condition|)
-block|{
-name|first
-operator|=
-literal|false
-expr_stmt|;
-block|}
-else|else
-block|{
-name|queryString
-operator|.
-name|append
-argument_list|(
-literal|" || "
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|textConstraint
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|textConstraint
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-name|queryString
-operator|.
-name|append
-argument_list|(
-literal|"(str("
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|var
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|") = \""
-argument_list|)
-expr_stmt|;
-name|addGrammarEscapedValue
-argument_list|(
-name|queryString
-argument_list|,
-name|textConstraint
-argument_list|)
-expr_stmt|;
-name|queryString
-operator|.
-name|append
-argument_list|(
-literal|"\")"
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-if|if
-condition|(
-name|constraint
-operator|.
-name|getTexts
-argument_list|()
-operator|.
-name|size
-argument_list|()
-operator|>
-literal|1
-condition|)
-block|{
-name|queryString
-operator|.
-name|append
-argument_list|(
-literal|')'
-argument_list|)
-expr_stmt|;
-comment|//end language filter group (STANBOL-1204)
-block|}
-block|}
-else|else
-block|{
+comment|//as we want to match also single words in labels
+comment|//we need also to use regex instead of string matching
+comment|//in case of case sensitive matches (STANBOL-1277)
+comment|//                        if (constraint.isCaseSensitive()) {
+comment|//                            boolean first = true;
+comment|//                            if(constraint.getTexts().size()> 1){
+comment|//                                queryString.append('('); //start language filter group (STANBOL-1204)
+comment|//                            }
+comment|//                            for (String textConstraint : constraint.getTexts()) {
+comment|//                                if (first) {
+comment|//                                    first = false;
+comment|//                                } else {
+comment|//                                    queryString.append(" || ");
+comment|//                                }
+comment|//                                if (textConstraint != null&& !textConstraint.isEmpty()) {
+comment|//                                    queryString.append("(str(").append(var).append(") = \"");
+comment|//                                    addGrammarEscapedValue(queryString, textConstraint);
+comment|//                                    queryString.append("\")");
+comment|//                                }
+comment|//                            }
+comment|//                            if(constraint.getTexts().size()> 1){
+comment|//                                queryString.append(')'); //end language filter group (STANBOL-1204)
+comment|//                            }
+comment|//                        } else {
 name|Collection
 argument_list|<
 name|String
@@ -3450,7 +3320,7 @@ name|add
 argument_list|(
 name|PatternUtils
 operator|.
-name|value2Regex
+name|word2Regex
 argument_list|(
 name|textConstraint
 argument_list|)
@@ -3472,7 +3342,7 @@ name|isCaseSensitive
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
+comment|//                        }
 block|}
 elseif|else
 if|if
@@ -3540,11 +3410,9 @@ name|add
 argument_list|(
 name|PatternUtils
 operator|.
-name|wildcardToRegex
+name|wildcardWordToRegex
 argument_list|(
 name|textConstraint
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;
