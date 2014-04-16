@@ -1469,9 +1469,15 @@ operator|.
 name|append
 argument_list|(
 literal|"The parsed Query defines multiple constraints fr the field '"
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|fieldUri
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"'!\n"
 argument_list|)
 expr_stmt|;
@@ -4244,9 +4250,6 @@ operator|new
 name|IllegalArgumentException
 argument_list|(
 name|message
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|e
 argument_list|)

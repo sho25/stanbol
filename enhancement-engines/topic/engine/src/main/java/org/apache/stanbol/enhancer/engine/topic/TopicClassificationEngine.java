@@ -5779,9 +5779,6 @@ operator|.
 name|escapeQueryChars
 argument_list|(
 name|offset
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 operator|+
 literal|" TO *]"

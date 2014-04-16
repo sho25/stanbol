@@ -404,9 +404,6 @@ operator|.
 name|getValue
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|isEmpty
 argument_list|()
 condition|?

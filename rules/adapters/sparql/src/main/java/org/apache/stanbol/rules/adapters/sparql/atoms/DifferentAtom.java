@@ -312,9 +312,6 @@ name|argument1
 operator|=
 name|argument1
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|replace
 argument_list|(
 name|Symbols
@@ -327,9 +324,6 @@ expr_stmt|;
 name|argument2
 operator|=
 name|argument2
-operator|.
-name|toString
-argument_list|()
 operator|.
 name|replace
 argument_list|(

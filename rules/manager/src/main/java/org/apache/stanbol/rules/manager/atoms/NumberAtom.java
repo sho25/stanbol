@@ -62,9 +62,6 @@ parameter_list|()
 block|{
 return|return
 name|numberString
-operator|.
-name|toString
-argument_list|()
 return|;
 block|}
 annotation|@

@@ -3449,12 +3449,7 @@ name|verbs
 operator|.
 name|floorEntry
 argument_list|(
-name|Integer
-operator|.
-name|valueOf
-argument_list|(
 name|floorConjunction
-argument_list|)
 argument_list|)
 expr_stmt|;
 if|if
@@ -3577,12 +3572,7 @@ name|verbs
 operator|.
 name|floorEntry
 argument_list|(
-name|Integer
-operator|.
-name|valueOf
-argument_list|(
 name|ceilingConjunction
-argument_list|)
 argument_list|)
 expr_stmt|;
 if|if

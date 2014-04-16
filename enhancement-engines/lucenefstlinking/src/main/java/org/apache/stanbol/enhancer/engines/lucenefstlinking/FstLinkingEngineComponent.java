@@ -2179,8 +2179,9 @@ condition|)
 block|{
 name|skipAltTokensConfig
 operator|=
-operator|new
 name|Boolean
+operator|.
+name|valueOf
 argument_list|(
 name|value
 operator|.

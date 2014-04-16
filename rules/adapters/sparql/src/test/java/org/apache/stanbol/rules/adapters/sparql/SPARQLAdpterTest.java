@@ -633,9 +633,6 @@ operator|.
 name|debug
 argument_list|(
 name|rule
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|Assert

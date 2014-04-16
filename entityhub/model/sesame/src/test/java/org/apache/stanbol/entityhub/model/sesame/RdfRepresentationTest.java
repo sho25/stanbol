@@ -674,9 +674,6 @@ name|enLiteral
 operator|.
 name|getLanguage
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|enLangageText
 operator|.

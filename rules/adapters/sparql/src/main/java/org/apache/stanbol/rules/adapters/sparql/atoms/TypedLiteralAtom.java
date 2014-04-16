@@ -351,9 +351,6 @@ operator|+
 literal|"^^"
 operator|+
 name|xsdType
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 return|;
 block|}

@@ -636,9 +636,6 @@ operator|.
 name|getSpan
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|indexOf
 argument_list|(
 literal|"enhancer"
@@ -706,9 +703,6 @@ operator|.
 name|getSpan
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|indexOf
 argument_list|(
 literal|"Paris"
@@ -743,9 +737,6 @@ init|=
 name|sent1
 operator|.
 name|getSpan
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 operator|.
 name|indexOf
@@ -873,9 +864,6 @@ operator|.
 name|getSpan
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|indexOf
 argument_list|(
 literal|"Comedian"
@@ -989,9 +977,6 @@ init|=
 name|sent2
 operator|.
 name|getSpan
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 operator|.
 name|indexOf
@@ -1097,9 +1082,6 @@ operator|.
 name|getSpan
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|indexOf
 argument_list|(
 literal|"Texas"
@@ -1108,9 +1090,6 @@ argument_list|,
 name|parisInTexas
 operator|.
 name|getSpan
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 operator|.
 name|indexOf
@@ -1296,9 +1275,6 @@ name|sent
 operator|.
 name|getSpan
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1351,9 +1327,6 @@ name|chunk
 operator|.
 name|getSpan
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1405,9 +1378,6 @@ argument_list|,
 name|token
 operator|.
 name|getSpan
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;

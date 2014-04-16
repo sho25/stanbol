@@ -368,14 +368,10 @@ name|Base64Binary
 argument_list|(
 literal|"base64Binary"
 argument_list|,
-operator|new
 name|byte
-index|[
-literal|0
-index|]
+index|[]
 operator|.
-name|getClass
-argument_list|()
+expr|class
 argument_list|)
 block|,
 name|DateTime

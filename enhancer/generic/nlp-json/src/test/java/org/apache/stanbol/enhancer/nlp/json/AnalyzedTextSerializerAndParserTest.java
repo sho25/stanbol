@@ -1195,9 +1195,6 @@ operator|.
 name|getSpan
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|indexOf
 argument_list|(
 literal|"enhancer"

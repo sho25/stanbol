@@ -1439,9 +1439,6 @@ name|jp
 operator|.
 name|getURI
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1565,9 +1562,6 @@ name|jp
 operator|.
 name|getURI
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1678,9 +1672,6 @@ argument_list|,
 name|jc
 operator|.
 name|getURI
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1914,9 +1905,6 @@ argument_list|,
 name|jp
 operator|.
 name|getURI
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -3017,9 +3005,6 @@ name|jp
 operator|.
 name|getURI
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -3407,9 +3392,6 @@ argument_list|(
 name|subject
 operator|.
 name|getURI
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 argument_list|)
 condition|)

@@ -932,9 +932,6 @@ init|=
 name|parseFieldMapping
 argument_list|(
 name|mappingString
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|nps
 argument_list|)

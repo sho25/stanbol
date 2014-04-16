@@ -1672,9 +1672,6 @@ block|{
 return|return
 name|getID
 argument_list|()
-operator|.
-name|toString
-argument_list|()
 return|;
 block|}
 block|}

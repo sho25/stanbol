@@ -3551,9 +3551,6 @@ name|add
 argument_list|(
 name|sentence
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|trim
 argument_list|()
 argument_list|)

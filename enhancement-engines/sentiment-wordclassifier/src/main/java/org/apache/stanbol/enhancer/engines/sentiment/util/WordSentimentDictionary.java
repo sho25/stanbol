@@ -516,12 +516,7 @@ name|put
 argument_list|(
 name|cat
 argument_list|,
-name|Double
-operator|.
-name|valueOf
-argument_list|(
 name|sentiment
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

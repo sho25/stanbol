@@ -1648,9 +1648,6 @@ operator|new
 name|DuplicateSessionIDException
 argument_list|(
 name|sessionID
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 throw|;
 name|checkSessionLimit

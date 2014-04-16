@@ -415,11 +415,7 @@ name|byte
 index|[]
 name|DATA
 init|=
-operator|new
-name|String
-argument_list|(
 name|TEST_STRING
-argument_list|)
 operator|.
 name|getBytes
 argument_list|(

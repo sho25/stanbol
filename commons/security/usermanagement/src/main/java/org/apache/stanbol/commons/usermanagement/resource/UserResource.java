@@ -2162,17 +2162,35 @@ operator|.
 name|append
 argument_list|(
 literal|"<input class=\"role\" type=\"checkbox\" id=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\" name=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\" value=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\" checked=\"checked\" />"
 argument_list|)
 expr_stmt|;
@@ -2184,17 +2202,35 @@ operator|.
 name|append
 argument_list|(
 literal|"<input class=\"role\" type=\"checkbox\" id=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\" name=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\" value=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\" />"
 argument_list|)
 expr_stmt|;
@@ -2204,13 +2240,25 @@ operator|.
 name|append
 argument_list|(
 literal|"<label for=\""
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\">"
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|role
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"</label>"
 argument_list|)
 expr_stmt|;

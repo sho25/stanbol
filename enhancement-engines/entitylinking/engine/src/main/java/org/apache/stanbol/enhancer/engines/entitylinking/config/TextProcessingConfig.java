@@ -2234,8 +2234,9 @@ name|value
 operator|!=
 literal|null
 condition|?
-operator|new
 name|Boolean
+operator|.
+name|valueOf
 argument_list|(
 name|value
 argument_list|)

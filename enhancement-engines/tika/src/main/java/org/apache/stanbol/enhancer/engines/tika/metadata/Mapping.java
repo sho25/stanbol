@@ -624,13 +624,10 @@ name|XSD
 operator|.
 name|base64Binary
 argument_list|,
-operator|new
 name|byte
 index|[]
-block|{}
 operator|.
-name|getClass
-argument_list|()
+expr|class
 argument_list|)
 expr_stmt|;
 name|map
