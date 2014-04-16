@@ -1694,7 +1694,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Unable to build OSGI Bundle for Indexed Referenced Site "
+literal|"(builder.addClasspath) Unable to build OSGI Bundle for Indexed Referenced Site "
 operator|+
 name|config
 operator|.
@@ -1709,53 +1709,19 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
+comment|//?? why not throwing an exception here ??
 return|return;
 block|}
-name|Jar
-name|jar
-decl_stmt|;
 try|try
 block|{
+name|Jar
 name|jar
-operator|=
+init|=
 name|builder
 operator|.
 name|build
 argument_list|()
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unable to build OSGI Bundle for Indexed Referenced Site "
-operator|+
-name|config
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-name|e
-argument_list|)
-expr_stmt|;
-return|return;
-block|}
-finally|finally
-block|{
-name|builder
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-block|}
-try|try
-block|{
+decl_stmt|;
 name|jar
 operator|.
 name|write
@@ -1790,7 +1756,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Unable to write OSGI Bundle for Indexed Referenced Site "
+literal|"(builder.build) Unable to build OSGI Bundle for Indexed Referenced Site "
 operator|+
 name|config
 operator|.
@@ -1799,6 +1765,16 @@ argument_list|()
 argument_list|,
 name|e
 argument_list|)
+expr_stmt|;
+comment|//?? why not throwing an exception here ??
+return|return;
+block|}
+finally|finally
+block|{
+name|builder
+operator|.
+name|close
+argument_list|()
 expr_stmt|;
 block|}
 block|}
