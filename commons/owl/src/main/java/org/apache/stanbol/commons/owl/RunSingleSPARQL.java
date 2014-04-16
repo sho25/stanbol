@@ -681,10 +681,10 @@ return|return
 name|ok
 return|;
 block|}
-comment|/**      * To run a SPARQL query      *      * @param query {The query string without the declaration of the prefixes.}      * @return {Return a Jena Result Set Object.}      */
+comment|/**     * To create a SPARQL QueryExecution Object     *     * @param query {The query string without the declaration of the prefixes.}     * @return {Return a QueryExecution Object.}     */
 specifier|public
-name|ResultSet
-name|runSPARQL
+name|QueryExecution
+name|createSPARQLQueryExecutionFactory
 parameter_list|(
 name|String
 name|query
@@ -762,9 +762,7 @@ name|query
 expr_stmt|;
 try|try
 block|{
-name|QueryExecution
-name|qexec
-init|=
+return|return
 name|QueryExecutionFactory
 operator|.
 name|create
@@ -773,17 +771,6 @@ name|query
 argument_list|,
 name|jenamodel
 argument_list|)
-decl_stmt|;
-name|ResultSet
-name|results
-init|=
-name|qexec
-operator|.
-name|execSelect
-argument_list|()
-decl_stmt|;
-return|return
-name|results
 return|;
 block|}
 catch|catch

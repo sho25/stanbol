@@ -65,6 +65,22 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|query
+operator|.
+name|QueryExecution
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -699,12 +715,12 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Test of runSPARQL method, of class RunSingleSPARQL.      */
+comment|/**      * Test of testCreateSPARQLQueryExecutionFactory() method, of class RunSingleSPARQL.      */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testRunSPARQL
+name|testCreateSPARQLQueryExecutionFactory
 parameter_list|()
 block|{
 name|Map
@@ -785,15 +801,36 @@ argument_list|,
 name|map
 argument_list|)
 decl_stmt|;
-name|ResultSet
-name|result
+name|QueryExecution
+name|queryExecution
 init|=
 name|instance
 operator|.
-name|runSPARQL
+name|createSPARQLQueryExecutionFactory
 argument_list|(
 name|query
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|queryExecution
+operator|==
+literal|null
+condition|)
+block|{
+name|fail
+argument_list|(
+literal|"Some errors occurred in createSPARQLQueryExecutionFactory of KReSRunSPARQL"
+argument_list|)
+expr_stmt|;
+block|}
+name|ResultSet
+name|result
+init|=
+name|queryExecution
+operator|.
+name|execSelect
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -824,6 +861,11 @@ name|m
 operator|++
 expr_stmt|;
 block|}
+name|queryExecution
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 name|assertEquals
 argument_list|(
 literal|3
@@ -837,7 +879,7 @@ else|else
 block|{
 name|fail
 argument_list|(
-literal|"Some errors occur in runSPARQL of KReSRunSPARQL"
+literal|"Some errors occur in createSPARQLQueryExecutionFactory of KReSRunSPARQL"
 argument_list|)
 expr_stmt|;
 block|}
