@@ -75,8 +75,7 @@ literal|"components"
 block|,
 literal|"configMgr"
 block|,
-literal|"config"
-block|,
+comment|//"config", No longer available with Felix Webconsole 4.2.2
 literal|"licenses"
 block|,
 literal|"logs"
