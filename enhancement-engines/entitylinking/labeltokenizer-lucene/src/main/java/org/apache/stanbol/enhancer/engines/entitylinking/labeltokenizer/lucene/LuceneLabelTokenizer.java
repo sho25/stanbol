@@ -1201,7 +1201,7 @@ name|DEFAULT_CLASS_NAME_CONFIG
 operator|.
 name|equals
 argument_list|(
-name|value
+name|filterConfigLine
 argument_list|)
 condition|)
 block|{
