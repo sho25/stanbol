@@ -2371,7 +2371,7 @@ name|XSD
 operator|.
 name|string
 argument_list|,
-literal|"Stereo"
+literal|"Mono"
 argument_list|)
 expr_stmt|;
 name|verifyValue
