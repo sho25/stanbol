@@ -3962,6 +3962,15 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|//refresh the policy so it will recheck the permissions
+name|Policy
+operator|.
+name|getPolicy
+argument_list|()
+operator|.
+name|refresh
+argument_list|()
+expr_stmt|;
 comment|// showSystem();
 name|URI
 name|pageUri
