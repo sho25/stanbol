@@ -1262,6 +1262,17 @@ name|UriRef
 argument_list|>
 argument_list|()
 decl_stmt|;
+for|for
+control|(
+name|UriRef
+name|referenceProperty
+range|:
+name|config
+operator|.
+name|getEntityReferences
+argument_list|()
+control|)
+block|{
 name|Iterator
 argument_list|<
 name|Triple
@@ -1274,7 +1285,7 @@ name|filter
 argument_list|(
 literal|null
 argument_list|,
-name|ENHANCER_ENTITY_REFERENCE
+name|referenceProperty
 argument_list|,
 literal|null
 argument_list|)
@@ -1371,9 +1382,11 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|"  ... schedule Entity {}"
+literal|"  ... schedule Entity {} (referenced-by: {})"
 argument_list|,
 name|entityReference
+argument_list|,
+name|referenceProperty
 argument_list|)
 expr_stmt|;
 block|}
@@ -1391,11 +1404,14 @@ name|log
 operator|.
 name|trace
 argument_list|(
-literal|" ... ignore Entity {}"
+literal|" ... ignore Entity {} (referenced-by: {})"
 argument_list|,
 name|entityReferences
+argument_list|,
+name|referenceProperty
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}

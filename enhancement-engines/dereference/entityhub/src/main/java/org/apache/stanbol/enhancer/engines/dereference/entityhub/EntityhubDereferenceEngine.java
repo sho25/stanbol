@@ -950,6 +950,8 @@ operator|new
 name|DereferenceEngineConfig
 argument_list|(
 name|properties
+argument_list|,
+name|prefixService
 argument_list|)
 decl_stmt|;
 name|log
