@@ -27,48 +27,6 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|HttpMethod
-operator|.
-name|GET
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|OPTIONS
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|HttpMethod
-operator|.
-name|POST
-import|;
-end_import
-
-begin_import
-import|import static
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
 name|core
 operator|.
 name|MediaType
@@ -366,16 +324,6 @@ operator|.
 name|util
 operator|.
 name|TreeSet
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
 import|;
 end_import
 
@@ -709,9 +657,13 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|viewable
+name|web
 operator|.
-name|Viewable
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
 import|;
 end_import
 
@@ -727,11 +679,9 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|resource
-operator|.
-name|BaseStanbolResource
+name|Viewable
 import|;
 end_import
 

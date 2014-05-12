@@ -25,16 +25,6 @@ begin_import
 import|import
 name|javax
 operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
 name|ws
 operator|.
 name|rs
@@ -64,20 +54,6 @@ operator|.
 name|rs
 operator|.
 name|WebApplicationException
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|Context
 import|;
 end_import
 

@@ -175,16 +175,6 @@ begin_import
 import|import
 name|javax
 operator|.
-name|servlet
-operator|.
-name|ServletContext
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
 name|ws
 operator|.
 name|rs
@@ -403,9 +393,13 @@ name|stanbol
 operator|.
 name|commons
 operator|.
-name|viewable
+name|web
 operator|.
-name|Viewable
+name|base
+operator|.
+name|resource
+operator|.
+name|BaseStanbolResource
 import|;
 end_import
 
@@ -421,11 +415,9 @@ name|commons
 operator|.
 name|web
 operator|.
-name|base
+name|viewable
 operator|.
-name|resource
-operator|.
-name|BaseStanbolResource
+name|Viewable
 import|;
 end_import
 
