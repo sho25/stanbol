@@ -340,7 +340,7 @@ comment|//check for JSON-LD (the default content type
 operator|.
 name|assertContentType
 argument_list|(
-literal|"application/json"
+literal|"application/ld+json"
 argument_list|)
 operator|.
 name|assertContentRegexp
