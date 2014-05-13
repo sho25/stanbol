@@ -36,6 +36,15 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
+specifier|private
+name|EnhancementEngine
+name|enhancementEngine
+decl_stmt|;
+specifier|private
+name|ContentItem
+name|contentItem
+decl_stmt|;
+comment|/**      *       * @param message      * @deprecated use the constructor with {@link EnhancementEngine} and       * {@link ContentItem} instead      */
 specifier|public
 name|EngineException
 parameter_list|(
@@ -49,6 +58,7 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      *       * @param message      * @param cause      * @deprecated use the constructor with {@link EnhancementEngine} and       * {@link ContentItem} instead      */
 specifier|public
 name|EngineException
 parameter_list|(
@@ -67,6 +77,7 @@ name|cause
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      *       * @param cause      * @deprecated use the constructor with {@link EnhancementEngine} and       * {@link ContentItem} instead      */
 specifier|public
 name|EngineException
 parameter_list|(
@@ -162,6 +173,38 @@ argument_list|,
 name|cause
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|enhancementEngine
+operator|=
+name|ee
+expr_stmt|;
+name|this
+operator|.
+name|contentItem
+operator|=
+name|ci
+expr_stmt|;
+block|}
+comment|/**      * The EnhancementEngine parsed to the Exception      * @return      * @since 0.12.1      */
+specifier|public
+name|EnhancementEngine
+name|getEnhancementEngine
+parameter_list|()
+block|{
+return|return
+name|enhancementEngine
+return|;
+block|}
+comment|/**      * The ContentITem parsed to the Exception      * @return      * @since 0.12.1      */
+specifier|public
+name|ContentItem
+name|getContentItem
+parameter_list|()
+block|{
+return|return
+name|contentItem
+return|;
 block|}
 block|}
 end_class

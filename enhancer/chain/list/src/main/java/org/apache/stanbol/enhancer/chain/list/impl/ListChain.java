@@ -37,6 +37,26 @@ name|helper
 operator|.
 name|ConfigUtils
 operator|.
+name|getEnhancementProperties
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ConfigUtils
+operator|.
 name|getState
 import|;
 end_import
@@ -438,17 +458,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Chain implementation takes a list of engines names as input   * and uses the "org.apache.stanbol.enhancer.engine.order " metadata provided by   * such engines to calculate the ExecutionGraph.<p>  *   * Similar the current WeightedJobManager implementation Engines would be  * dependent to each other based on decreasing order values. Engines with the   * same order value would could be executed in parallel.<p>  *   * This implementation is targeted for easy configuration - just a list of the   * engine names contained within a chain - but has limited possibilities to   * control the execution order within an chain. However it is expected   * that it provides enough flexibility for most of the usage scenarios.<p>  *   * This engine also supports the definition of additional parameters for  * Enhancement Engines. The syntax is the same as used by BND tools:   *<pre><code>  *&lt;engineName&gt;;&ltparam-name&gt=&ltparam-value&gt  *&lt;engineName&gt;;&ltparam-name&gt  *</code></pre>  * Parameter without value are interpreted as enabled boolean switch<p>  *   * Currently this Chain implementation supports the following Parameter:<ul>  *<li> optional: Boolean switch that allows to define that the execution of this  * engine is not required.  *</ul>  *   * @author Rupert Westenthaler  *  */
+comment|/**  * This Chain implementation takes a list of engines names as input   * and uses the "org.apache.stanbol.enhancer.engine.order " metadata provided by   * such engines to calculate the ExecutionGraph.<p>  *   * Similar the current WeightedJobManager implementation Engines would be  * dependent to each other based on decreasing order values. Engines with the   * same order value would could be executed in parallel.<p>  *   * This implementation is targeted for easy configuration - just a list of the   * engine names contained within a chain - but has limited possibilities to   * control the execution order within an chain. However it is expected   * that it provides enough flexibility for most of the usage scenarios.<p>  *   * This engine also supports the definition of additional parameters for  * Enhancement Engines. The syntax is the same as used by BND tools:   *<pre><code>  *&lt;engineName&gt;;&ltparam-name&gt=&ltparam-value&gt  *&lt;engineName&gt;;&ltparam-name&gt  *</code></pre>  * Parameter without value are interpreted as enabled boolean switch<p>  *   * Currently this Chain implementation supports the following Parameter:<ul>  *<li> optional: Boolean switch that allows to define that the execution of this  * engine is not required.  *</ul>  *   *<i>NOTE:</i> Since<code>0.12.1</code> this supports EnhancementProperties  * as described by<a href="https://issues.apache.org/jira/browse/STANBOL-488"></a>  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
 annotation|@
 name|Component
 argument_list|(
-name|inherit
-operator|=
-literal|true
-argument_list|,
 name|configurationFactory
 operator|=
 literal|true
@@ -487,6 +503,20 @@ operator|=
 name|ListChain
 operator|.
 name|PROPERTY_ENGINE_LIST
+argument_list|,
+name|cardinality
+operator|=
+literal|1000
+argument_list|)
+block|,
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+name|AbstractChain
+operator|.
+name|PROPERTY_CHAIN_PROPERTIES
 argument_list|,
 name|cardinality
 operator|=
@@ -742,6 +772,9 @@ name|ep
 argument_list|,
 name|getName
 argument_list|()
+argument_list|,
+name|getChainProperties
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|log
@@ -874,6 +907,14 @@ operator|.
 name|singleton
 argument_list|(
 name|last
+argument_list|)
+argument_list|,
+name|getEnhancementProperties
+argument_list|(
+name|parsed
+operator|.
+name|getValue
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;

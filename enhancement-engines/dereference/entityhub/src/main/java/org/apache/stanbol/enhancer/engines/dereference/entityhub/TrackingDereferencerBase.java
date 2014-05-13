@@ -479,24 +479,6 @@ name|stanbol
 operator|.
 name|entityhub
 operator|.
-name|ldpath
-operator|.
-name|backend
-operator|.
-name|AbstractBackend
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
 name|model
 operator|.
 name|clerezza
@@ -644,42 +626,6 @@ operator|.
 name|model
 operator|.
 name|ValueFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|query
-operator|.
-name|FieldQuery
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|servicesapi
-operator|.
-name|query
-operator|.
-name|QueryResultList
 import|;
 end_import
 
@@ -1450,79 +1396,13 @@ argument_list|>
 name|parseBackend
 init|=
 operator|new
-name|AbstractBackend
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|protected
-name|QueryResultList
+name|ParseBackend
 argument_list|<
-name|String
+name|T
 argument_list|>
-name|query
-parameter_list|(
-name|FieldQuery
-name|query
-parameter_list|)
-throws|throws
-name|EntityhubException
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
 argument_list|(
-literal|"Not expected to be called"
-argument_list|)
-throw|;
-block|}
-annotation|@
-name|Override
-specifier|protected
-name|ValueFactory
-name|getValueFactory
-parameter_list|()
-block|{
-return|return
 name|valueFactory
-return|;
-block|}
-annotation|@
-name|Override
-specifier|protected
-name|Representation
-name|getRepresentation
-parameter_list|(
-name|String
-name|id
-parameter_list|)
-throws|throws
-name|EntityhubException
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Not expected to be called"
 argument_list|)
-throw|;
-block|}
-annotation|@
-name|Override
-specifier|protected
-name|FieldQuery
-name|createQuery
-parameter_list|()
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"Not expected to be called"
-argument_list|)
-throw|;
-block|}
-block|}
 decl_stmt|;
 comment|//NOTE: calling execute(..) an this parseLdPath or even the
 comment|//ldpathProgram will result in UnsupportedOperationException
@@ -1677,6 +1557,38 @@ return|return
 name|dereferencedFields
 return|;
 block|}
+comment|/**      * Getter for the FieldMapper used for the {@link #getDereferencedFields()}      * @return the fieldMapper or<code>null</code> of the dereferenced fields      * are set      */
+specifier|public
+name|FieldMapper
+name|getFieldMapper
+parameter_list|()
+block|{
+return|return
+name|fieldMapper
+return|;
+block|}
+comment|/**      * Getter for the LDPath {@link Program} parsed form the      * {@link #getLdPath}      * @return      */
+specifier|public
+name|Program
+argument_list|<
+name|Object
+argument_list|>
+name|getLdPathProgram
+parameter_list|()
+block|{
+return|return
+name|ldpathProgram
+return|;
+block|}
+specifier|public
+name|ValueFactory
+name|getValueFactory
+parameter_list|()
+block|{
+return|return
+name|valueFactory
+return|;
+block|}
 comment|/**      * Starts the tracking by calling {@link ServiceTracker#open()}      */
 specifier|public
 name|void
@@ -1767,7 +1679,7 @@ name|Lock
 name|writeLock
 parameter_list|,
 name|DereferenceContext
-name|derefContext
+name|dc
 parameter_list|)
 throws|throws
 name|DereferenceException
@@ -1803,6 +1715,14 @@ literal|"service is currently not available"
 argument_list|)
 throw|;
 block|}
+name|EntityhubDereferenceContext
+name|derefContext
+init|=
+operator|(
+name|EntityhubDereferenceContext
+operator|)
+name|dc
+decl_stmt|;
 name|Representation
 name|rep
 decl_stmt|;
@@ -1855,6 +1775,27 @@ operator|.
 name|getLanguages
 argument_list|()
 decl_stmt|;
+specifier|final
+name|FieldMapper
+name|fieldMapper
+init|=
+name|derefContext
+operator|.
+name|getFieldMapper
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Program
+argument_list|<
+name|Object
+argument_list|>
+name|ldpathProgram
+init|=
+name|derefContext
+operator|.
+name|getProgram
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|rep
@@ -1872,10 +1813,16 @@ name|ldpathProgram
 operator|==
 literal|null
 operator|&&
+operator|(
+name|langs
+operator|==
+literal|null
+operator|||
 name|langs
 operator|.
 name|isEmpty
 argument_list|()
+operator|)
 condition|)
 block|{
 name|copyAll
@@ -1913,6 +1860,8 @@ name|uri
 argument_list|,
 name|rep
 argument_list|,
+name|fieldMapper
+argument_list|,
 name|langs
 argument_list|,
 name|graph
@@ -1938,6 +1887,8 @@ argument_list|(
 name|service
 argument_list|)
 argument_list|,
+name|ldpathProgram
+argument_list|,
 name|langs
 argument_list|,
 name|graph
@@ -1958,7 +1909,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Executes the {@link #ldpathProgram} using the parsed URI as context and      * writes the the results to the parsed Graph      * @param uri the context      * @param rdfBackend the RdfBackend the LDPath program is executed on      * @param langs the set of languages to dereference      * @param graph the graph to store the results      * @param writeLock the write lock for the graph      * @throws DereferenceException on any {@link EntityhubException} while      * executing the LDPath program      */
+comment|/**      * Executes the {@link #ldpathProgram} using the parsed URI as context and      * writes the the results to the parsed Graph      * @param uri the context      * @param rdfBackend the RdfBackend the LDPath program is executed on      * @param ldpathProgram The {@link Program} parsed via the dereference context      * @param langs the set of languages to dereference      * @param graph the graph to store the results      * @param writeLock the write lock for the graph      * @throws DereferenceException on any {@link EntityhubException} while      * executing the LDPath program      */
 specifier|private
 name|void
 name|copyLdPath
@@ -1971,6 +1922,12 @@ argument_list|<
 name|Object
 argument_list|>
 name|rdfBackend
+parameter_list|,
+name|Program
+argument_list|<
+name|Object
+argument_list|>
+name|ldpathProgram
 parameter_list|,
 name|Set
 argument_list|<
@@ -2317,7 +2274,7 @@ return|return
 name|rdfBackend
 return|;
 block|}
-comment|/**      * Applies the field mappings to the representation and stores the results      * in the graph      * @param uri the uri of the entity to dereference      * @param rep the data for the entity as in the entityhub      * @param langs the set of languages to dereference      * @param graph the graph to store the mapping results      * @param writeLock the write lock for the graph      */
+comment|/**      * Applies the field mappings to the representation and stores the results      * in the graph      * @param uri the uri of the entity to dereference      * @param rep the data for the entity as in the entityhub      * @param fieldMapper the {@link FieldMapper} parsed from the dereference context      * @param langs the set of languages to dereference      * @param graph the graph to store the mapping results      * @param writeLock the write lock for the graph      */
 specifier|private
 name|void
 name|copyMapped
@@ -2327,6 +2284,9 @@ name|uri
 parameter_list|,
 name|Representation
 name|rep
+parameter_list|,
+name|FieldMapper
+name|fieldMapper
 parameter_list|,
 name|Set
 argument_list|<
@@ -2341,91 +2301,18 @@ name|Lock
 name|writeLock
 parameter_list|)
 block|{
-comment|//init the fieldMapper
-name|FieldMapper
-name|fieldMapper
-decl_stmt|;
-if|if
-condition|(
-operator|!
-name|langs
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-comment|//if we need to filter for specific languages
-comment|//we need to modify the field and add a global filter for the
-comment|//languages. NOTE that the field might be null. In that case we
-comment|//need just filter literals by language
-comment|//TODO: maybe cache fieldMappers for sets of languages
-name|fieldMapper
-operator|=
-name|this
-operator|.
-name|fieldMapper
-operator|!=
-literal|null
-condition|?
-name|this
-operator|.
-name|fieldMapper
-operator|.
-name|clone
-argument_list|()
-else|:
-operator|new
-name|DefaultFieldMapperImpl
-argument_list|(
-name|ValueConverterFactory
-operator|.
-name|getDefaultInstance
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|fieldMapper
-operator|.
-name|addMapping
-argument_list|(
-operator|new
-name|FieldMapping
-argument_list|(
-operator|new
-name|TextConstraint
-argument_list|(
-operator|(
-name|String
-operator|)
-literal|null
-argument_list|,
-name|langs
-operator|.
-name|toArray
-argument_list|(
-operator|new
-name|String
-index|[
-name|graph
-operator|.
-name|size
-argument_list|()
-index|]
-argument_list|)
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|//just use the fieldMapper as parsed in the config
-name|fieldMapper
-operator|=
-name|this
-operator|.
-name|fieldMapper
-expr_stmt|;
-block|}
+comment|//NOTE: The fieldMapper parsed via the context does already have a
+comment|//      filter for the parsed languages. Because of that the old code
+comment|//      adding such a language filter is no longer needed
+comment|//        FieldMapper fieldMapper;
+comment|//        if(!langs.isEmpty()){ //if we need to filter for specific languages
+comment|//            fieldMapper = this.fieldMapper != null ? this.fieldMapper.clone() :
+comment|//                new DefaultFieldMapperImpl(ValueConverterFactory.getDefaultInstance());
+comment|//            fieldMapper.addMapping(new FieldMapping(new TextConstraint(
+comment|//                (String)null, langs.toArray(new String[langs.size()]))));
+comment|//        } else { //just use the fieldMapper as parsed in the config
+comment|//            fieldMapper = this.fieldMapper;
+comment|//        }
 comment|//execute the field mappings
 name|writeLock
 operator|.

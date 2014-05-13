@@ -53,6 +53,26 @@ name|helper
 operator|.
 name|ConfigUtils
 operator|.
+name|getEnhancementProperties
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ConfigUtils
+operator|.
 name|getParameters
 import|;
 end_import
@@ -762,17 +782,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Chain implementation that allows to configure the execution graph. Two ways  * to configure the graph are supported:<ol>  *<li> Configuration by pointing to an RDF file containing the execution graph.  * The name of the file needs to be provided by {@link #PROPERTY_GRAPH_RESOURCE}.  * The file is tracked by using the {@link DataFileListener} service. Typically  * users will need to copy this file to the /datafiles directory of the  * Stanbol Environment. However datafiles may be also provided by other means  * such as bundles or even the default configuration of the Stanbol Environment.  *<li> Configuration directly provided by the properties of a component instance.  * The {@link #PROPERTY_CHAIN_LIST} is used for this option. See the java doc for  * this property for details on the syntax. Users that want to use this option  * MUST make sure that {@link #PROPERTY_GRAPH_RESOURCE} is not present or  * empty. Otherwise the {@link #PROPERTY_CHAIN_LIST} will be ignored regardless  * if the graph resource is available or not.  *</ol>  * TODO: Maybe split this up into two chains - one for each configuration  * possibility.  *   * @author Rupert Westenthaler  */
+comment|/**  * Chain implementation that allows to configure the execution graph. Two ways  * to configure the graph are supported:<ol>  *<li> Configuration by pointing to an RDF file containing the execution graph.  * The name of the file needs to be provided by {@link #PROPERTY_GRAPH_RESOURCE}.  * The file is tracked by using the {@link DataFileListener} service. Typically  * users will need to copy this file to the /datafiles directory of the  * Stanbol Environment. However datafiles may be also provided by other means  * such as bundles or even the default configuration of the Stanbol Environment.  *<li> Configuration directly provided by the properties of a component instance.  * The {@link #PROPERTY_CHAIN_LIST} is used for this option. See the java doc for  * this property for details on the syntax. Users that want to use this option  * MUST make sure that {@link #PROPERTY_GRAPH_RESOURCE} is not present or  * empty. Otherwise the {@link #PROPERTY_CHAIN_LIST} will be ignored regardless  * if the graph resource is available or not.  *</ol>  *<i>NOTE:</i> Since<code>0.12.1</code> this supports EnhancementProperties  * as described by<a href="https://issues.apache.org/jira/browse/STANBOL-488"></a>  *   * @author Rupert Westenthaler  */
 end_comment
 
 begin_class
 annotation|@
 name|Component
 argument_list|(
-name|inherit
-operator|=
-literal|true
-argument_list|,
 name|configurationFactory
 operator|=
 literal|true
@@ -1370,6 +1386,9 @@ operator|new
 name|ListConfigExecutionPlan
 argument_list|(
 name|config
+argument_list|,
+name|getChainProperties
+argument_list|()
 argument_list|)
 expr_stmt|;
 end_expr_stmt
@@ -1986,6 +2005,14 @@ argument_list|>
 argument_list|>
 argument_list|>
 name|config
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|chainProperties
 parameter_list|)
 block|{
 if|if
@@ -2081,6 +2108,8 @@ name|graph
 argument_list|,
 name|getName
 argument_list|()
+argument_list|,
+name|chainProperties
 argument_list|)
 decl_stmt|;
 comment|//caches the String name -> {NonLiteral node, List<Stirng> dependsOn} mappings
@@ -2163,6 +2192,14 @@ literal|"optional"
 argument_list|)
 argument_list|,
 literal|null
+argument_list|,
+name|getEnhancementProperties
+argument_list|(
+name|node
+operator|.
+name|getValue
+argument_list|()
+argument_list|)
 argument_list|)
 block|,
 name|node

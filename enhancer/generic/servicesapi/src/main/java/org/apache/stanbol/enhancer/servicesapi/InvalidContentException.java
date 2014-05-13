@@ -36,6 +36,9 @@ name|serialVersionUID
 init|=
 literal|1L
 decl_stmt|;
+comment|/**      *       * @param message      * @deprecated All EngineExceptions should parse the Engine and the       * ContentItem      */
+annotation|@
+name|Deprecated
 specifier|public
 name|InvalidContentException
 parameter_list|(
@@ -49,6 +52,9 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      *       * @param message      * @param cause      * @deprecated All EngineExceptions should parse the Engine and the       * ContentItem      */
+annotation|@
+name|Deprecated
 specifier|public
 name|InvalidContentException
 parameter_list|(
@@ -67,6 +73,7 @@ name|cause
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * A EngineException caused by an invalid ContentItem      * @param ee the enhancement engine      * @param ci the content item      * @param cause the root cause      */
 specifier|public
 name|InvalidContentException
 parameter_list|(
@@ -80,42 +87,48 @@ name|Throwable
 name|cause
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"'%s' failed to process invalid content item '%s'"
-operator|+
-literal|" with type '%s': %s"
-argument_list|,
 name|ee
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getSimpleName
-argument_list|()
 argument_list|,
 name|ci
-operator|.
-name|getUri
-argument_list|()
-operator|.
-name|getUnicodeString
-argument_list|()
 argument_list|,
-name|ci
-operator|.
-name|getMimeType
-argument_list|()
+literal|null
 argument_list|,
 name|cause
-operator|.
-name|getMessage
-argument_list|()
 argument_list|)
+expr_stmt|;
+block|}
+comment|/**      *       * @param ee the enhancement engine      * @param ci the content item      * @param message a custom message why the parsed content item was invalid      * @param cause the root cause      * @since 0.12.1      */
+specifier|public
+name|InvalidContentException
+parameter_list|(
+name|EnhancementEngine
+name|ee
+parameter_list|,
+name|ContentItem
+name|ci
+parameter_list|,
+name|String
+name|message
+parameter_list|,
+name|Throwable
+name|cause
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|ee
+argument_list|,
+name|ci
+argument_list|,
+name|message
+operator|==
+literal|null
+condition|?
+literal|"Invalid ContentItem"
+else|:
+name|message
 argument_list|,
 name|cause
 argument_list|)

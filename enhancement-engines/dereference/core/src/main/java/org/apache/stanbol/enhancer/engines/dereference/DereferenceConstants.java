@@ -154,10 +154,23 @@ name|FALLBACK_MODE
 init|=
 literal|"enhancer.engines.dereference.fallback"
 decl_stmt|;
+comment|/**      * By default {@link #FALLBACK_MODE} is enabled      */
 name|boolean
 name|DEFAULT_FALLBACK_MODE
 init|=
 literal|true
+decl_stmt|;
+comment|/**      * Parameter allowing users to define a list of languages to be dereferenced.      * An empty string is used for literals that do not have an language tag.      */
+name|String
+name|DEREFERENCE_ENTITIES_LANGUAGES
+init|=
+literal|"enhancer.engines.dereference.languages"
+decl_stmt|;
+comment|/**      * Language key used for configuring literals without language tag      */
+name|String
+name|NO_LANGUAGE_KEY
+init|=
+literal|"none"
 decl_stmt|;
 block|}
 end_interface
