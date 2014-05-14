@@ -31,7 +31,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|ENHANCEMENT_PROPERTIES_URI
 import|;
@@ -51,7 +51,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|OUTPUT_CONTENT
 import|;
@@ -71,7 +71,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|OUTPUT_CONTENT_PART
 import|;
@@ -91,7 +91,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|PARSED_CONTENT_URIS
 import|;
@@ -111,7 +111,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|RDF_FORMAT
 import|;
@@ -131,27 +131,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
-operator|.
-name|getEnhancementProperties
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|getOutputContent
 import|;
@@ -171,9 +151,29 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|getParsedContentURIs
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ContentItemHelper
+operator|.
+name|initRequestPropertiesContentPart
 import|;
 end_import
 
@@ -1071,7 +1071,7 @@ name|Object
 argument_list|>
 name|properties
 init|=
-name|getEnhancementProperties
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
@@ -1151,6 +1151,8 @@ argument_list|(
 name|em
 argument_list|,
 literal|"testChain"
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|writeExecutionNode
@@ -1162,6 +1164,8 @@ argument_list|,
 literal|"testEngine"
 argument_list|,
 literal|true
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|)
@@ -2076,13 +2080,20 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|properties
+name|reqProp
 init|=
-name|getEnhancementProperties
+name|ContentItemHelper
+operator|.
+name|getRequestPropertiesContentPart
 argument_list|(
 name|ci
 argument_list|)
 decl_stmt|;
+name|assertNotNull
+argument_list|(
+name|reqProp
+argument_list|)
+expr_stmt|;
 comment|//the parsed value MUST BE overridden by the two content parts parsed
 name|assertEquals
 argument_list|(
@@ -2090,7 +2101,7 @@ name|expectedParsedContentIds
 argument_list|,
 name|getParsedContentURIs
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2102,7 +2113,7 @@ name|outputContent
 init|=
 name|getOutputContent
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 decl_stmt|;
 name|assertEquals

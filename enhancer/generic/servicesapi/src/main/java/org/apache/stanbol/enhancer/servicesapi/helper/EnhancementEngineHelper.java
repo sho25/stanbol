@@ -3626,7 +3626,7 @@ name|epContentPart
 init|=
 name|ContentItemHelper
 operator|.
-name|getEnhancementPropertiesContentPart
+name|getRequestPropertiesContentPart
 argument_list|(
 name|ci
 argument_list|)

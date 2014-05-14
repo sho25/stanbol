@@ -35,26 +35,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Map
 import|;
 end_import
@@ -200,17 +180,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines Constants and utilities for using EnhancementProperties  */
+comment|/**  * Defines Constants and utilities for using request scoped EnhancementProperties.  * Especially those internally used by the enhancer.jersey module.<p>  * This replaces the {@link EnhancementPropertiesHelper}  * @since 0.12.1  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 block|{
 specifier|private
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 parameter_list|()
 block|{
 comment|/* no instances allowed*/
@@ -235,7 +215,7 @@ name|OMIT_METADATA
 init|=
 literal|"stanbol.enhancer.web.omitMetadata"
 decl_stmt|;
-comment|/**      * {@link Set Set&lt;String&gt;} containing all the URIs of the      * {@link ContentItem#getPart(UriRef, Class) ContentParts} representing       * RDF data (compatible to Clerezza {@link TripleCollection}). If the       * returned set contains '*' than all such content parts need to be returned.<p>      * NOTE: This can also be used to include the EnhancementProperties      * as "applciation/json" in the Response by adding this      * {@link EnhancementPropertiesHelper#ENHANCEMENT_PROPERTIES_URI uri}.      */
+comment|/**      * {@link Set Set&lt;String&gt;} containing all the URIs of the      * {@link ContentItem#getPart(UriRef, Class) ContentParts} representing       * RDF data (compatible to Clerezza {@link TripleCollection}). If the       * returned set contains '*' than all such content parts need to be returned.<p>      * NOTE: This can also be used to include the Request Properties      * as "applciation/json" in the Response by adding this      * {@link RequestPropertiesHelper#ENHANCEMENT_PROPERTIES_URI uri}.      */
 specifier|public
 specifier|static
 specifier|final
@@ -289,30 +269,6 @@ name|PARSED_CONTENT_URIS
 init|=
 literal|"stanbol.enhancer.web.parsedContentURIs"
 decl_stmt|;
-comment|/**      * Inits (get or creates) the content part holding the EnhancementProperties      * @param ci the contentItem MUST NOT be NULL      * @return the enhancement properties      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link ContentItem}.      * @see ContentItemHelper#initEnhancementPropertiesContentPart(ContentItem)      */
-specifier|public
-specifier|static
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-name|getEnhancementProperties
-parameter_list|(
-name|ContentItem
-name|ci
-parameter_list|)
-block|{
-return|return
-name|ContentItemHelper
-operator|.
-name|initEnhancementPropertiesContentPart
-argument_list|(
-name|ci
-argument_list|)
-return|;
-block|}
 specifier|private
 specifier|static
 name|Object
@@ -324,20 +280,20 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|,
 name|String
 name|key
 parameter_list|)
 block|{
 return|return
-name|enhancementProperties
+name|reqProp
 operator|==
 literal|null
 condition|?
 literal|null
 else|:
-name|enhancementProperties
+name|reqProp
 operator|.
 name|get
 argument_list|(
@@ -345,7 +301,7 @@ name|key
 argument_list|)
 return|;
 block|}
-comment|/**      * Getter for the value of the parsed type for a given key.      * @param enhancementProperties the enhancement properties      * @param key the key      * @param type the type MUST NOT be<code>null</code>      * @return the values      * @throws ClassCastException if the value is not compatible to the      * parsed type      */
+comment|/**      * Getter for the value of the parsed type for a given key.      * @param reqProp the request properties      * @param key the key      * @param type the type MUST NOT be<code>null</code>      * @return the values or<code>null</code> if the parsed request properties      * where<code>null</code> or the parsed key was not present.      * @throws ClassCastException if the value is not compatible to the      * parsed type      * @throws NullPointerException if the parsed key or type is<code>null</code>      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -365,7 +321,7 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|,
 name|String
 name|key
@@ -379,6 +335,17 @@ parameter_list|)
 block|{
 if|if
 condition|(
+name|reqProp
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+if|if
+condition|(
 name|type
 operator|==
 literal|null
@@ -386,9 +353,24 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|IllegalArgumentException
+name|NullPointerException
 argument_list|(
 literal|"The parsed type MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|key
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed key MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
@@ -397,7 +379,7 @@ name|value
 init|=
 name|get
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|key
 argument_list|)
@@ -440,7 +422,7 @@ throw|throw
 operator|new
 name|ClassCastException
 argument_list|(
-literal|"EnhancementProperties value for key '"
+literal|"RequestProperties value for key '"
 operator|+
 name|key
 operator|+
@@ -458,7 +440,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Getter for the boolean state based on the value of the parsed key.      * If the value is not of type {@link Boolean} the       * {@link Boolean#parseBoolean(String)} is used on the {@link Object#toString()}      * method of the value.      * @param enhancementProperties the enhancementProperties      * @param key the key      * @return the state      */
+comment|/**      * Getter for the boolean state based on the value of the parsed key.      * If the value is not of type {@link Boolean} the       * {@link Boolean#parseBoolean(String)} is used on the {@link Object#toString()}      * method of the value.      * @param reqProp the request properties      * @param key the key      * @return the state.<code>false</code> if the parsed request property      * map was<code>null</code> or the key was not present.      * @throw {@link NullPointerException} if<code>null</code> is parsed as key      */
 specifier|public
 specifier|static
 name|boolean
@@ -470,18 +452,48 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|,
 name|String
 name|key
 parameter_list|)
+block|{
+if|if
+condition|(
+name|key
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"The parsed key MUST NOT be NULL!"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|reqProp
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|Boolean
+operator|.
+name|FALSE
+return|;
+block|}
+else|else
 block|{
 name|Object
 name|state
 init|=
 name|get
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|key
 argument_list|)
@@ -518,6 +530,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+block|}
+comment|/**      * Checks the request properties for the {@link #OMIT_PARSED_CONTENT} state      */
 specifier|public
 specifier|static
 name|boolean
@@ -529,18 +543,19 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
 name|getState
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|OMIT_PARSED_CONTENT
 argument_list|)
 return|;
 block|}
+comment|/**      * Checks the request properties for the {@link #INCLUDE_EXECUTION_METADATA} state      */
 specifier|public
 specifier|static
 name|boolean
@@ -552,18 +567,19 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
 name|getState
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|INCLUDE_EXECUTION_METADATA
 argument_list|)
 return|;
 block|}
+comment|/**      * Checks the request properties for the {@link #OMIT_METADATA} state      */
 specifier|public
 specifier|static
 name|boolean
@@ -575,19 +591,19 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
 name|getState
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|OMIT_METADATA
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param enhancementProperties      * @return      * @throws ClassCastException if the value is not an Set      */
+comment|/**      * Getter for the {@link #PARSED_CONTENT_URIS}      * @param reqProp      * @return      * @throws ClassCastException if the value is not a {@link Collection}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -607,7 +623,7 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
@@ -619,7 +635,7 @@ argument_list|>
 operator|)
 name|get
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|PARSED_CONTENT_URIS
 argument_list|,
@@ -629,7 +645,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param enhancementProperties      * @return      * @throws ClassCastException if the value is not an {@link Set}      */
+comment|/**      * Getter for the {@link #OUTPUT_CONTENT_PART}      * @param reqProp      * @return      * @throws ClassCastException if the value is not an {@link Collection}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -649,7 +665,7 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
@@ -661,7 +677,7 @@ argument_list|>
 operator|)
 name|get
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|OUTPUT_CONTENT_PART
 argument_list|,
@@ -671,7 +687,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param enhancementProperties      * @return      * @throws ClassCastException if the value is not an {@link Collections}      */
+comment|/**      * Getter for the {@link #OUTPUT_CONTENT}      * @param reqProp      * @return      * @throws ClassCastException if the value is not a {@link Collection}      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -691,7 +707,7 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
@@ -703,7 +719,7 @@ argument_list|>
 operator|)
 name|get
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|OUTPUT_CONTENT
 argument_list|,
@@ -713,7 +729,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param enhancementProperties      * @return      * @throws ClassCastException if the value is not an {@link Collections}      */
+comment|/**      * Getter for the {@link #RDF_FORMAT}      * @param reqProp      * @return      * @throws ClassCastException if the value is not a {@link String}      */
 specifier|public
 specifier|static
 name|String
@@ -725,13 +741,13 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 parameter_list|)
 block|{
 return|return
 name|get
 argument_list|(
-name|enhancementProperties
+name|reqProp
 argument_list|,
 name|RDF_FORMAT
 argument_list|,

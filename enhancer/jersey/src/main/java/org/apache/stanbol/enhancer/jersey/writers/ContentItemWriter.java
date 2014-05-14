@@ -97,7 +97,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|ENHANCEMENT_PROPERTIES_URI
 import|;
@@ -117,27 +117,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
-operator|.
-name|getEnhancementProperties
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|getOutputContent
 import|;
@@ -157,7 +137,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|getOutputContentParts
 import|;
@@ -177,7 +157,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|getParsedContentURIs
 import|;
@@ -197,7 +177,27 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
+operator|.
+name|getRdfFormat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|jersey
+operator|.
+name|utils
+operator|.
+name|RequestPropertiesHelper
 operator|.
 name|isOmitMetadata
 import|;
@@ -217,7 +217,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|isOmitParsedContent
 import|;
@@ -867,24 +867,6 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|EnhancementPropertiesHelper
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
 name|servicesapi
 operator|.
 name|Blob
@@ -904,6 +886,24 @@ operator|.
 name|servicesapi
 operator|.
 name|ContentItem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ContentItemHelper
 import|;
 end_import
 
@@ -1356,9 +1356,11 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|properties
+name|reqProp
 init|=
-name|getEnhancementProperties
+name|ContentItemHelper
+operator|.
+name|getRequestPropertiesContentPart
 argument_list|(
 name|ci
 argument_list|)
@@ -1368,7 +1370,7 @@ name|omitMetadata
 init|=
 name|isOmitMetadata
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 decl_stmt|;
 if|if
@@ -1819,11 +1821,9 @@ decl_stmt|;
 name|String
 name|rdfFormatString
 init|=
-name|EnhancementPropertiesHelper
-operator|.
 name|getRdfFormat
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 decl_stmt|;
 if|if
@@ -1983,7 +1983,7 @@ condition|(
 operator|!
 name|isOmitMetadata
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 condition|)
 block|{
@@ -2034,7 +2034,7 @@ name|filterBlobs
 argument_list|(
 name|ci
 argument_list|,
-name|properties
+name|reqProp
 argument_list|)
 decl_stmt|;
 comment|//(3.b) Serialise the filtered
@@ -2184,7 +2184,7 @@ name|includeContentParts
 init|=
 name|getIncludedContentPartURIs
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 decl_stmt|;
 if|if
@@ -2194,7 +2194,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//(4) serialise EnhancementProperties
+comment|//(4) serialise the Request Properties
 if|if
 condition|(
 name|includeContentParts
@@ -2222,7 +2222,7 @@ name|object
 operator|=
 name|toJson
 argument_list|(
-name|properties
+name|reqProp
 argument_list|)
 expr_stmt|;
 block|}
@@ -2235,11 +2235,11 @@ block|{
 name|String
 name|message
 init|=
-literal|"Unable to convert EnhancementProperties "
+literal|"Unable to convert Request Properties "
 operator|+
 literal|"to JSON (values : "
 operator|+
-name|properties
+name|reqProp
 operator|+
 literal|")!"
 decl_stmt|;

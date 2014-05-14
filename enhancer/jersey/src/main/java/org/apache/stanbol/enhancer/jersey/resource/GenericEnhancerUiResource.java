@@ -911,6 +911,8 @@ block|{
 name|enhance
 argument_list|(
 name|ci
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|enhancementException

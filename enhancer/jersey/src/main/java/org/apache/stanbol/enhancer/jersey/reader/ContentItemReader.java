@@ -49,7 +49,7 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|ENHANCEMENT_PROPERTIES_URI
 import|;
@@ -69,29 +69,9 @@ name|jersey
 operator|.
 name|utils
 operator|.
-name|EnhancementPropertiesHelper
+name|RequestPropertiesHelper
 operator|.
 name|PARSED_CONTENT_URIS
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|enhancer
-operator|.
-name|jersey
-operator|.
-name|utils
-operator|.
-name|EnhancementPropertiesHelper
-operator|.
-name|getEnhancementProperties
 import|;
 end_import
 
@@ -680,6 +660,24 @@ operator|.
 name|servicesapi
 operator|.
 name|ContentItemFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|servicesapi
+operator|.
+name|helper
+operator|.
+name|ContentItemHelper
 import|;
 end_import
 
@@ -1366,7 +1364,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//parse the enhancementProperties
+comment|//parse the RequestProperties
 if|if
 condition|(
 name|contentItem
@@ -1393,7 +1391,7 @@ name|entity
 argument_list|(
 literal|"Multipart MIME parts for "
 operator|+
-literal|"EnhancementProperties MUST BE after the "
+literal|"Request Properties MUST BE after the "
 operator|+
 literal|"MIME parts for 'metadata' AND 'content'"
 argument_list|)
@@ -1444,7 +1442,7 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"EnhancementProperties (Multipart MIME parts"
+literal|"Request Properties (Multipart MIME parts"
 operator|+
 literal|"with the name '"
 operator|+
@@ -1501,16 +1499,18 @@ name|String
 argument_list|,
 name|Object
 argument_list|>
-name|enhancementProperties
+name|reqProp
 init|=
-name|getEnhancementProperties
+name|ContentItemHelper
+operator|.
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
 decl_stmt|;
 try|try
 block|{
-name|enhancementProperties
+name|reqProp
 operator|.
 name|putAll
 argument_list|(
@@ -1560,7 +1560,7 @@ argument_list|)
 operator|.
 name|entity
 argument_list|(
-literal|"Unable to parse EnhancementProperties from"
+literal|"Unable to parse Request Properties from"
 operator|+
 literal|"Multipart MIME parts with the name 'properties'!"
 argument_list|)
@@ -1877,7 +1877,9 @@ name|Object
 argument_list|>
 name|ep
 init|=
-name|getEnhancementProperties
+name|ContentItemHelper
+operator|.
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)

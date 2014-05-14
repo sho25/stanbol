@@ -1463,7 +1463,7 @@ name|ep
 init|=
 name|ContentItemHelper
 operator|.
-name|initEnhancementPropertiesContentPart
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
@@ -1600,7 +1600,7 @@ name|ep
 init|=
 name|ContentItemHelper
 operator|.
-name|initEnhancementPropertiesContentPart
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
@@ -1742,7 +1742,7 @@ name|ep
 init|=
 name|ContentItemHelper
 operator|.
-name|initEnhancementPropertiesContentPart
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
@@ -2034,7 +2034,7 @@ name|ep
 init|=
 name|ContentItemHelper
 operator|.
-name|initEnhancementPropertiesContentPart
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
@@ -3566,7 +3566,7 @@ name|ep
 init|=
 name|ContentItemHelper
 operator|.
-name|initEnhancementPropertiesContentPart
+name|initRequestPropertiesContentPart
 argument_list|(
 name|contentItem
 argument_list|)
