@@ -1399,22 +1399,6 @@ argument_list|,
 name|DEFAULT_SOLR_INDEX_DIRECTORY
 argument_list|)
 decl_stmt|;
-name|File
-name|distDirectory
-init|=
-operator|new
-name|File
-argument_list|(
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"user.dir"
-argument_list|)
-argument_list|,
-literal|"dist"
-argument_list|)
-decl_stmt|;
 comment|//init the solr directory and validate the parsed values
 name|File
 index|[]
@@ -1427,8 +1411,6 @@ argument_list|,
 name|solrConfig
 argument_list|,
 name|managedDirectory
-argument_list|,
-name|distDirectory
 argument_list|)
 decl_stmt|;
 name|this
@@ -1507,9 +1489,6 @@ name|solrConfig
 parameter_list|,
 name|File
 name|managedDirectory
-parameter_list|,
-name|File
-name|distDirectory
 parameter_list|)
 block|{
 name|File
@@ -1614,26 +1593,6 @@ condition|)
 block|{
 comment|//if absolute
 comment|//-> assume an already configured Solr index
-if|if
-condition|(
-name|distDirectory
-operator|==
-literal|null
-condition|)
-block|{
-comment|//check that a dist dir is configured
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"In case the Solr index location"
-operator|+
-literal|"points to a local directory the Distribution Directory"
-operator|+
-literal|"MUST NOT BE NULL!"
-argument_list|)
-throw|;
-block|}
 name|solrIndexLocation
 operator|=
 name|parsedSolrLocationFile
@@ -1778,45 +1737,6 @@ operator|=
 literal|null
 expr_stmt|;
 comment|//no configuration parsed
-block|}
-block|}
-comment|//for all local indexes configure the distribution file names
-if|if
-condition|(
-name|distDirectory
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|distDirectory
-operator|.
-name|isDirectory
-argument_list|()
-condition|)
-block|{
-if|if
-condition|(
-operator|!
-name|distDirectory
-operator|.
-name|mkdirs
-argument_list|()
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Unable to create distribution "
-operator|+
-literal|"Directory"
-operator|+
-name|distDirectory
-operator|.
-name|getAbsolutePath
-argument_list|()
-argument_list|)
-throw|;
 block|}
 block|}
 name|solrIndexArchive
@@ -2284,11 +2204,6 @@ argument_list|,
 name|solrConfig
 argument_list|,
 name|managedDirectory
-argument_list|,
-name|indexingConfig
-operator|.
-name|getDistributionFolder
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|this
@@ -3919,6 +3834,72 @@ operator|!=
 literal|null
 condition|)
 block|{
+comment|//first check if the distribution folder needs to be created and is valid
+name|File
+name|distFolder
+init|=
+name|indexingConfig
+operator|.
+name|getDistributionFolder
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|distFolder
+operator|.
+name|exists
+argument_list|()
+condition|)
+block|{
+if|if
+condition|(
+operator|!
+name|distFolder
+operator|.
+name|mkdirs
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to create distribution folder "
+operator|+
+name|distFolder
+operator|.
+name|getAbsolutePath
+argument_list|()
+argument_list|)
+throw|;
+block|}
+block|}
+elseif|else
+if|if
+condition|(
+operator|!
+name|distFolder
+operator|.
+name|isDirectory
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Distribution folder"
+operator|+
+name|distFolder
+operator|.
+name|getAbsolutePath
+argument_list|()
+operator|+
+literal|"is not a Directory!"
+argument_list|)
+throw|;
+block|}
 comment|//zip the index and copy it over to distribution
 name|log
 operator|.
