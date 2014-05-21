@@ -1821,7 +1821,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|ehprop
+name|ehp
 operator|+
 name|enhprop
 operator|.

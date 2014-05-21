@@ -128,7 +128,7 @@ literal|"http://stanbol.apache.org/ontology/disambiguation/disambiguation#"
 argument_list|)
 block|,
 comment|/**      * Namespace used for EnhancementProperties      * @since 0.12.1      */
-name|ehprop
+name|ehp
 argument_list|(
 literal|"http://stanbol.apache.org/ontology/enhancementproperties#"
 argument_list|)

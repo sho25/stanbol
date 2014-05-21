@@ -195,16 +195,16 @@ parameter_list|()
 block|{
 comment|/* no instances allowed*/
 block|}
-comment|/**      * @see ContentItemHelper#ENHANCEMENT_PROPERTIES_URI      */
+comment|/**      * @see ContentItemHelper#REQUEST_PROPERTIES_URI      */
 specifier|public
 specifier|static
 specifier|final
 name|UriRef
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 init|=
 name|ContentItemHelper
 operator|.
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 decl_stmt|;
 comment|/**      * Boolean switch parsed as {@link QueryParam} tha allows to deactivate the      * inclusion of the {@link ContentItem#getMetadata()} in the Response      */
 specifier|public
@@ -215,7 +215,7 @@ name|OMIT_METADATA
 init|=
 literal|"stanbol.enhancer.web.omitMetadata"
 decl_stmt|;
-comment|/**      * {@link Set Set&lt;String&gt;} containing all the URIs of the      * {@link ContentItem#getPart(UriRef, Class) ContentParts} representing       * RDF data (compatible to Clerezza {@link TripleCollection}). If the       * returned set contains '*' than all such content parts need to be returned.<p>      * NOTE: This can also be used to include the Request Properties      * as "applciation/json" in the Response by adding this      * {@link RequestPropertiesHelper#ENHANCEMENT_PROPERTIES_URI uri}.      */
+comment|/**      * {@link Set Set&lt;String&gt;} containing all the URIs of the      * {@link ContentItem#getPart(UriRef, Class) ContentParts} representing       * RDF data (compatible to Clerezza {@link TripleCollection}). If the       * returned set contains '*' than all such content parts need to be returned.<p>      * NOTE: This can also be used to include the Request Properties      * as "applciation/json" in the Response by adding this      * {@link RequestPropertiesHelper#REQUEST_PROPERTIES_URI uri}.      */
 specifier|public
 specifier|static
 specifier|final

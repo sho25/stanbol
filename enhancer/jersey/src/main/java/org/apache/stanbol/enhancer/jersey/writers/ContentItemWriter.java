@@ -99,7 +99,7 @@ name|utils
 operator|.
 name|RequestPropertiesHelper
 operator|.
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 import|;
 end_import
 
@@ -2206,7 +2206,7 @@ name|includeContentParts
 operator|.
 name|contains
 argument_list|(
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 operator|.
 name|getUnicodeString
 argument_list|()
@@ -2270,7 +2270,7 @@ name|entityBuilder
 operator|.
 name|addTextBody
 argument_list|(
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 operator|.
 name|getUnicodeString
 argument_list|()

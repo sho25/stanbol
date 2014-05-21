@@ -402,7 +402,13 @@ name|key
 argument_list|(
 literal|"http://rdf.freebase.com/key/"
 argument_list|)
-block|;
+block|,
+comment|/**      * The EnhancementProperties namespace as introduced by<a       * href="https://issues.apache.org/jira/browse/STANBOL-488">STANBOL-488</<>      */
+name|ehp
+argument_list|(
+literal|"http://stanbol.apache.org/ontology/enhancementproperties#"
+argument_list|)
+block|,     ;
 specifier|private
 name|String
 name|namespace

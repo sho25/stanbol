@@ -2214,7 +2214,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|ehprop
+name|ehp
 operator|+
 name|PROPERTY_MAX_SUGGESTIONS
 argument_list|)
@@ -2227,7 +2227,7 @@ name|UriRef
 argument_list|(
 name|NamespaceEnum
 operator|.
-name|ehprop
+name|ehp
 operator|+
 name|PROPERTY_DEREFERENCE_LANGUAGES
 argument_list|)

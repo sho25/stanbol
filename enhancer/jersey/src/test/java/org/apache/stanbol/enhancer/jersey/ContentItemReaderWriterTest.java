@@ -33,7 +33,7 @@ name|utils
 operator|.
 name|RequestPropertiesHelper
 operator|.
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 import|;
 end_import
 
@@ -1556,7 +1556,7 @@ name|CONTENT_ITEM_BOUNDARY
 block|,
 literal|"Content-Disposition: form-data; name=\""
 operator|+
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 operator|.
 name|getUnicodeString
 argument_list|()

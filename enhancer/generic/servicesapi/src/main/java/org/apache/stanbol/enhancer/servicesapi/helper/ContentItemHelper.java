@@ -1670,12 +1670,27 @@ argument_list|()
 return|;
 block|}
 comment|/*      * EnhancementProperties support for 0.12 (see STANBOL-1280)       */
-comment|/**      * URI used to register an {@link ContentItem#getPart(int, Class) contentPart}      * of the type {@link Map Map&lt;String,Objext&gt;} containing the      * EnhancementEngine properties<p>      */
+comment|/**      * URI used to register an {@link ContentItem#getPart(int, Class) contentPart}      * of the type {@link Map Map&lt;String,Objext&gt;} containing the      * EnhancementEngine properties<p>      * @since 0.12.1      */
 specifier|public
 specifier|static
 specifier|final
 name|UriRef
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
+init|=
+operator|new
+name|UriRef
+argument_list|(
+literal|"urn:apache.org:stanbol.enhancer:request.properties"
+argument_list|)
+decl_stmt|;
+comment|/**      * URI used to register the {@link #REQUEST_PROPERTIES_URI} until      *<code>0.12.0</code>      */
+annotation|@
+name|Deprecated
+specifier|private
+specifier|static
+specifier|final
+name|UriRef
+name|WEB_ENHANCEMENT_PROPERTIES_URI
 init|=
 operator|new
 name|UriRef
@@ -1736,7 +1751,7 @@ name|ci
 operator|.
 name|getPart
 argument_list|(
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 argument_list|,
 name|Map
 operator|.
@@ -1750,9 +1765,32 @@ name|NoSuchPartException
 name|e
 parameter_list|)
 block|{
+comment|//fallback to support pre 0.12.1 modules (remove with 1.0.0)
+try|try
+block|{
+return|return
+name|ci
+operator|.
+name|getPart
+argument_list|(
+name|WEB_ENHANCEMENT_PROPERTIES_URI
+argument_list|,
+name|Map
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|NoSuchPartException
+name|e2
+parameter_list|)
+block|{
 return|return
 literal|null
 return|;
+block|}
 block|}
 finally|finally
 block|{
@@ -1769,7 +1807,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Initialises the ContentPart holding the request scoped EnhancementProperties.      * If the content part is already present it will just return the existing. If      * not it will register an empty one. The content part is registered with      * the URI {@link #ENHANCEMENT_PROPERTIES_URI}      * @param ci the contentItem MUST NOT be NULL      * @return the enhancement properties      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link ContentItem}.      */
+comment|/**      * Initialises the ContentPart holding the request scoped EnhancementProperties.      * If the content part is already present it will just return the existing. If      * not it will register an empty one. The content part is registered with      * the URI {@link #REQUEST_PROPERTIES_URI}      * @param ci the contentItem MUST NOT be NULL      * @return the enhancement properties      * @throws IllegalArgumentException if<code>null</code> is parsed as {@link ContentItem}.      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1831,7 +1869,7 @@ name|ci
 operator|.
 name|getPart
 argument_list|(
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 argument_list|,
 name|Map
 operator|.
@@ -1891,7 +1929,7 @@ name|ci
 operator|.
 name|getPart
 argument_list|(
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 argument_list|,
 name|Map
 operator|.
@@ -1905,6 +1943,41 @@ name|NoSuchPartException
 name|e
 parameter_list|)
 block|{
+comment|//fallback to support pre 0.12.1 modules (remove with 1.0.0)
+try|try
+block|{
+comment|//NOTE: if the old is present we register it also with the new URI
+name|enhancementProperties
+operator|=
+name|ci
+operator|.
+name|getPart
+argument_list|(
+name|WEB_ENHANCEMENT_PROPERTIES_URI
+argument_list|,
+name|Map
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|NoSuchPartException
+name|e2
+parameter_list|)
+block|{
+comment|/*ignore*/
+block|}
+comment|//END fallback
+if|if
+condition|(
+name|enhancementProperties
+operator|==
+literal|null
+condition|)
+block|{
+comment|//the old is not present
 name|enhancementProperties
 operator|=
 operator|new
@@ -1916,11 +1989,13 @@ name|Object
 argument_list|>
 argument_list|()
 expr_stmt|;
+comment|//create
+block|}
 name|ci
 operator|.
 name|addPart
 argument_list|(
-name|ENHANCEMENT_PROPERTIES_URI
+name|REQUEST_PROPERTIES_URI
 argument_list|,
 name|enhancementProperties
 argument_list|)
