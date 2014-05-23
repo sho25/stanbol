@@ -615,6 +615,10 @@ decl_stmt|;
 if|if
 condition|(
 name|tokens
+operator|!=
+literal|null
+operator|&&
+name|tokens
 operator|.
 name|length
 operator|>
@@ -730,6 +734,41 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// else confidence to low
+block|}
+elseif|else
+if|if
+condition|(
+name|tokens
+operator|==
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unable to tokenize \"{}\"@{} via tokenizer {} (class: {})!"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|selectedText
+block|,
+name|language
+block|,
+name|tokenizer
+block|,
+name|tokenizer
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+block|}
+argument_list|)
+expr_stmt|;
 block|}
 comment|//else ignore Tokens with a single token
 block|}
