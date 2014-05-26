@@ -194,12 +194,11 @@ argument_list|)
 block|,
 name|dcTerms
 argument_list|(
-literal|"dc"
+literal|"dct"
 argument_list|,
 literal|"http://purl.org/dc/terms/"
 argument_list|)
 block|,
-comment|// Entityhub prefers DC-Terms, therefore use the "dc" prefix for the terms name space
 name|foaf
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/"
@@ -408,7 +407,38 @@ name|ehp
 argument_list|(
 literal|"http://stanbol.apache.org/ontology/enhancementproperties#"
 argument_list|)
-block|,     ;
+block|,
+comment|/*      * Added several mappings form prefix.cc for namespaces defined above      */
+comment|/**      * Alternative to {@link #dcElements}      */
+name|dce
+argument_list|(
+literal|"http://purl.org/dc/elements/1.1/"
+argument_list|)
+block|,
+comment|/**      * Alternative for {@link #dbpedia_ont}      */
+name|dbo
+argument_list|(
+literal|"http://dbpedia.org/ontology/"
+argument_list|)
+block|,
+comment|/**      * DBpedia resources      */
+name|dbr
+argument_list|(
+literal|"http://dbpedia.org/resource/"
+argument_list|)
+block|,
+comment|/**      * Alternative to {@link #dbpediaProp}      */
+name|dbp
+argument_list|(
+literal|"http://dbpedia.org/property/"
+argument_list|)
+block|,
+comment|/**      * Alternative to {@link #geonames}      */
+name|gn
+argument_list|(
+literal|"http://www.geonames.org/ontology#"
+argument_list|)
+block|;
 specifier|private
 name|String
 name|namespace
