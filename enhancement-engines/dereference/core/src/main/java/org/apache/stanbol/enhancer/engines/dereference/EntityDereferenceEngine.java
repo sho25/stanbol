@@ -1391,12 +1391,13 @@ name|UriRef
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|//since STANBOL-1334 the list of properties that refer to entities can be configured
 for|for
 control|(
 name|UriRef
 name|referenceProperty
 range|:
-name|config
+name|derefContext
 operator|.
 name|getEntityReferences
 argument_list|()
@@ -1535,7 +1536,7 @@ name|trace
 argument_list|(
 literal|" ... ignore Entity {} (referenced-by: {})"
 argument_list|,
-name|entityReferences
+name|entityReference
 argument_list|,
 name|referenceProperty
 argument_list|)

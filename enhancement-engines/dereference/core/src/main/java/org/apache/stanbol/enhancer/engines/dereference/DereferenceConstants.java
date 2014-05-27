@@ -21,6 +21,26 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -64,6 +84,22 @@ operator|.
 name|core
 operator|.
 name|Triple
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
 import|;
 end_import
 
@@ -123,6 +159,27 @@ name|String
 name|ENTITY_REFERENCES
 init|=
 literal|"enhancer.engines.dereference.references"
+decl_stmt|;
+comment|/**      * By default the {@link Properties#ENTITY_REFERENCES} is used for      * dereferencing entities.      * @since 0.12.1 (<a href="https://issues.apache.org/jira/browse/STANBOL-1334">STANBOL-1334</a>)      */
+name|Set
+argument_list|<
+name|UriRef
+argument_list|>
+name|DEFAULT_ENTITY_REFERENCES
+init|=
+name|Collections
+operator|.
+name|unmodifiableSet
+argument_list|(
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+name|Properties
+operator|.
+name|ENHANCER_ENTITY_REFERENCE
+argument_list|)
+argument_list|)
 decl_stmt|;
 comment|/**      * Property used to configure the fields that should be dereferenced.<p>      * DereferenceEngines need to support a list of URIs but may also support more      * complex syntax (such as the Entityhub FiedMapping). However parsing a      * list of properties URIs MUST BE still valid.<p>      * Support for Namespace prefixes via the Stanbol Namespace Prefix Service      * is optional. If unknown prefixes are used or prefixes are not supported      * the Engine is expected to throw a       * {@link org.osgi.service.cm.ConfigurationException} during activation      */
 name|String
