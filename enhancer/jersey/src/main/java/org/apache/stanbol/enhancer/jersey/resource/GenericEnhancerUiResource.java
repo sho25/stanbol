@@ -858,6 +858,50 @@ operator|+
 name|content
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|content
+operator|==
+literal|null
+condition|)
+block|{
+comment|//(STANBOL-1349) parsing content using
+comment|// 'application/x-www-form-urlencoded' is not (officially) supported.
+comment|// ... unofficial it can be done by adding the content as value to the
+comment|//     content parameter
+throw|throw
+operator|new
+name|WebApplicationException
+argument_list|(
+name|Response
+operator|.
+name|status
+argument_list|(
+name|Response
+operator|.
+name|Status
+operator|.
+name|UNSUPPORTED_MEDIA_TYPE
+argument_list|)
+operator|.
+name|entity
+argument_list|(
+literal|"Parsing Content as 'application/x-www-form-urlencoded' is not supported!"
+operator|+
+literal|"Please directly POST the content and set the 'Content-Type' "
+operator|+
+literal|"header to the media type of the parsed content. 'application/"
+operator|+
+literal|"octet-stream' SHOULD BE used if the media type of the parsed "
+operator|+
+literal|"content is not known.\n"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+argument_list|)
+throw|;
+block|}
 name|ContentItem
 name|ci
 init|=
