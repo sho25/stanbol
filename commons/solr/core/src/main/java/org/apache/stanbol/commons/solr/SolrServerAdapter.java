@@ -351,16 +351,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
-operator|.
-name|IOException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|text
 operator|.
 name|SimpleDateFormat
@@ -484,18 +474,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|xml
-operator|.
-name|parsers
-operator|.
-name|ParserConfigurationException
 import|;
 end_import
 
@@ -873,18 +851,6 @@ name|LoggerFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|xml
-operator|.
-name|sax
-operator|.
-name|SAXException
-import|;
-end_import
-
 begin_comment
 comment|/**  * This Class 'wraps' a Solr {@link CoreContainer} with all its registered   * {@link SolrCore}s and registers them as OSGI services. It therefore adapts  * the components framework as used by Apache Solr to the OSGI.<p>  * This class itself is no OSGI component, but is intended to be used by  * other classes that allow to register/manage Solr {@link CoreContainer}  * running within the same JVM.<p>  * Properties set for CoreContainers are:<ul>  *<li> {@link SolrConstants#PROPERTY_SERVER_NAME}: The name assigned to  * the SolrServer as parsed by {@link SolrServerProperties#getServerName()}. If  * not defined than the directory of the SolrServer is used as name  *<li> {@link SolrConstants#PROPERTY_SERVER_DIR} the directory of the   * {@link CoreContainer} (SolrHome)  *<li> {@link SolrConstants#PROPERTY_SOLR_XML_NAME}: the name of the  * 'solr.xml' file  *<li> {@link SolrConstants#PROPERTY_SERVER_RANKING}: The   * {@link Constants#SERVICE_RANKING} for the {@link CoreContainer} used for all  * its core if not overridden.    *</ul>  *<p>  * Properties set for {@link SolrCore}s are:<ul>  *<li> The {@link SolrConstants#PROPERTY_SERVER_NAME name} and   * {@link SolrConstants#PROPERTY_SERVER_DIR dir} of the   * {@link CoreContainer} this {@link SolrCore} is part of  *<li> {@link SolrConstants#PROPERTY_CORE_NAME}: The name this SolrCore  * is registered with the CoreContainer.  *<li> {@link SolrConstants#PROPERTY_CORE_DIR}: The   * {@link CoreDescriptor#getInstanceDir() instance directory} of this SolrCore.  * By default this is '{@link SolrConstants#PROPERTY_SERVER_DIR CoreContainer.dir}/  * {@link SolrConstants#PROPERTY_CORE_NAME SolrCore.name}'  *<li> The {@link SolrConstants#PROPERTY_CORE_SCHEMA} and   * {@link SolrConstants#PROPERTY_CORE_SOLR_CONF} holding the names of the  * according core configuration files.  *<li> The {@link SolrConstants#PROPERTY_CORE_DATA_DIR} and  * {@link SolrConstants#PROPERTY_CORE_INDEX_DIR}.  *<li> The {@link SolrConstants#PROPERTY_CORE_RANKING}: the   * {@link Constants#SERVICE_RANKING} for the {@link SolrCore}. If not set the  * service ranking of the {@link CoreContainer} is used.  *</ul>  *<p>  *<b>Notes:</b><ul>  *<li>{@link CoreContainer} does not provide Events for changes in its configuration.  * Therefore the OSGI service registration for the CoreContainer can only be  * assured if the interface of this Class is used to change the state of the  * CoreContainer.  *<li> {@link SolrCore}s allow to register a {@link CloseHook} to get notified if a  * SolrCore is closed. Therefore this implementation can assure that closed  * {@link SolrCore}s are also unregistered as OSGI services.  *</ul>  *   * @author Rupert Westenthaler  *  */
 end_comment
@@ -1135,7 +1101,7 @@ comment|//If we want to delete SolrCores from Disc, this can be done here!
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Creates and Initialise a Solr {@link CoreContainer} based on the provided      * {@link SolrServerProperties} and registers it and all its configured       * {@link SolrCore}s as OSGI services by using the provided {@link BundleContext}.      * @throws SAXException On any error while parsing the solr.xml file used to       * initialise the {@link CoreContainer}      * @throws IOException On any error while accessing the solr.xml used to       * initialise the {@link CoreContainer} or the home directory for the       * {@link CoreContainer}      * @throws ParserConfigurationException Configuration error of the XML parser      * @throws IllegalArgumentException if any of the parsed parameters is      *<code>null</code> or the {@link SolrServerProperties} do not contain a      * valid value for the {@link SolrConstants#PROPERTY_SERVER_DIR}       * property.      */
+comment|/**      * Creates and Initialise a Solr {@link CoreContainer} based on the provided      * {@link SolrServerProperties} and registers it and all its configured       * {@link SolrCore}s as OSGI services by using the provided {@link BundleContext}.      * @throws SAXException On any error while parsing the solr.xml file used to       * initialise the {@link CoreContainer}      * @throws SolrException if the Solr {@link CoreContainer} could not be       * created.      * @throws IllegalArgumentException if any of the parsed parameters is      *<code>null</code> or the {@link SolrServerProperties} do not contain a      * valid value for the {@link SolrConstants#PROPERTY_SERVER_DIR}       * property.      */
 specifier|public
 name|SolrServerAdapter
 parameter_list|(
@@ -1146,12 +1112,6 @@ parameter_list|,
 name|SolrServerProperties
 name|parsedServerProperties
 parameter_list|)
-throws|throws
-name|ParserConfigurationException
-throws|,
-name|IOException
-throws|,
-name|SAXException
 block|{
 if|if
 condition|(
@@ -1653,7 +1613,7 @@ expr_stmt|;
 block|}
 comment|//else core already removed -> nothing to do
 block|}
-comment|/**      * Reloads a SolrCore e.g. to apply a change in its configuration      * @param name the name of the Core to reload      * @return The ServiceReference to the SolrCore.      * @throws ParserConfigurationException if the XML parser could not be configured      * @throws IOException indicated an error related to accessing the configured resource      * @throws SAXException indicated an formatting error in the xml configuration files.      */
+comment|/**      * Reloads a SolrCore e.g. to apply a change in its configuration      * @param name the name of the Core to reload      * @return The ServiceReference to the SolrCore.      * @throws SolrException if the Core could not be reloaded      */
 specifier|public
 name|void
 name|reloadCore
@@ -1661,12 +1621,6 @@ parameter_list|(
 name|String
 name|name
 parameter_list|)
-throws|throws
-name|ParserConfigurationException
-throws|,
-name|IOException
-throws|,
-name|SAXException
 block|{
 comment|//try to reload
 name|log
@@ -1826,7 +1780,7 @@ name|updateServerRegistration
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Registers a SolrCore based on the parsed configuration. If a SolrCore      * with the same name as provided by the configuration is already present      * it will be replace by this one.      * @param parsedCoreConfig The configuration.      * @return The ServiceReference to the SolrCore.      * @throws ParserConfigurationException if the XML parser could not be configured      * @throws IOException indicated an error related to accessing the configured resource      * @throws SAXException indicated an formatting error in the xml configuration files.      */
+comment|/**      * Registers a SolrCore based on the parsed configuration. If a SolrCore      * with the same name as provided by the configuration is already present      * it will be replace by this one.      * @param parsedCoreConfig The configuration.      * @return The ServiceReference to the SolrCore.      * @throws SolrException If the core could not be registered      */
 specifier|public
 name|ServiceReference
 name|registerCore
@@ -1834,12 +1788,6 @@ parameter_list|(
 name|SolrCoreProperties
 name|parsedCoreConfig
 parameter_list|)
-throws|throws
-name|ParserConfigurationException
-throws|,
-name|IOException
-throws|,
-name|SAXException
 block|{
 name|SolrCoreProperties
 name|coreConfig
@@ -1915,11 +1863,7 @@ name|coreName
 argument_list|)
 expr_stmt|;
 block|}
-name|SolrCore
-name|old
-init|=
-literal|null
-decl_stmt|;
+comment|//SolrCore old = null;
 name|ClassLoader
 name|classLoader
 init|=
@@ -1958,8 +1902,7 @@ comment|//CloseHook is now appied by the overridden registerCore(..) method
 comment|//of the wrapped CoreContainer!
 comment|//core.addCloseHook(closeHook);
 comment|// parse ture as third argument to avoid closing the current core for now
-name|old
-operator|=
+comment|//old =
 name|server
 operator|.
 name|register

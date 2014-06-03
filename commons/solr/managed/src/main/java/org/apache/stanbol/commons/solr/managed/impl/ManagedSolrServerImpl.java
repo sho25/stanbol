@@ -569,6 +569,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|solr
+operator|.
+name|common
+operator|.
+name|SolrException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|commons
@@ -1648,66 +1662,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ParserConfigurationException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Unable to initialise the XML parser "
-operator|+
-literal|"for parsing the SolrServer Configuration for Server '"
-operator|+
-name|serverProperties
-operator|.
-name|getServerName
-argument_list|()
-operator|+
-literal|"' (dir="
-operator|+
-name|serverProperties
-operator|.
-name|getServerDir
-argument_list|()
-operator|+
-literal|")!"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|ConfigurationException
-argument_list|(
-name|PROPERTY_SERVER_DIR
-argument_list|,
-literal|"Unable to initialise "
-operator|+
-literal|"a SolrServer based on the Directory '"
-operator|+
-name|serverProperties
-operator|.
-name|getServerDir
-argument_list|()
-operator|+
-literal|"'!"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|SAXException
+name|SolrException
 name|e
 parameter_list|)
 block|{
@@ -4335,23 +4290,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ParserConfigurationException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Unable to configure XML parser"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
+name|SolrException
 name|e
 parameter_list|)
 block|{
@@ -4363,39 +4302,9 @@ name|String
 operator|.
 name|format
 argument_list|(
-literal|"Unable to access the SolrCore configuration for index "
+literal|"Unable to activate the SolrCore configuration for index "
 operator|+
 literal|"'%s' of managed SolrServer '%s'"
-argument_list|,
-name|metadata
-operator|.
-name|getIndexName
-argument_list|()
-argument_list|,
-name|serverName
-argument_list|)
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|SAXException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|SAXException
-argument_list|(
-name|String
-operator|.
-name|format
-argument_list|(
-literal|"Unable to parse SolrCore configuration for  index '%s' of "
-operator|+
-literal|"managed SolrServer '%s'"
 argument_list|,
 name|metadata
 operator|.
