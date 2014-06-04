@@ -1856,10 +1856,6 @@ name|ComponentContext
 name|ctx
 parameter_list|)
 block|{
-name|bundleContext
-operator|=
-literal|null
-expr_stmt|;
 if|if
 condition|(
 name|providersTracker
@@ -1878,6 +1874,10 @@ literal|null
 expr_stmt|;
 block|}
 name|mappingsFile
+operator|=
+literal|null
+expr_stmt|;
+name|bundleContext
 operator|=
 literal|null
 expr_stmt|;
