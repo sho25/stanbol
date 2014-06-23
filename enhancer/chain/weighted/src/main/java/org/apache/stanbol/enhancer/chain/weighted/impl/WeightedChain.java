@@ -1077,52 +1077,6 @@ parameter_list|()
 throws|throws
 name|ChainException
 block|{
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|>
-name|chainScopedEnhancementProperties
-init|=
-operator|new
-name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|>
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|getChainProperties
-argument_list|()
-operator|!=
-literal|null
-condition|)
-block|{
-name|chainScopedEnhancementProperties
-operator|.
-name|put
-argument_list|(
-literal|null
-argument_list|,
-name|getChainProperties
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
 name|List
 argument_list|<
 name|EnhancementEngine
@@ -1262,10 +1216,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|//        if(!missingEngines.isEmpty()){
-comment|//            throw new ChainException("This Chain is missing the following " +
-comment|//            		"required Engines "+missingEngines);
-comment|//        }
 return|return
 name|calculateExecutionPlan
 argument_list|(
@@ -1278,7 +1228,7 @@ name|optionalEngines
 argument_list|,
 name|missingEngines
 argument_list|,
-name|chainScopedEnhancementProperties
+name|chainScopedEnhProps
 argument_list|)
 return|;
 block|}
