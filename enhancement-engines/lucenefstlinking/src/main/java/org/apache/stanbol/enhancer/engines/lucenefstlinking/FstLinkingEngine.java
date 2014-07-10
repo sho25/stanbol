@@ -2893,11 +2893,11 @@ init|=
 operator|new
 name|ChainedTagClusterReducer
 argument_list|(
+name|linkableTokenFilter
+argument_list|,
 name|TagClusterReducer
 operator|.
-name|LONGEST_DOMINANT_RIGHT
-argument_list|,
-name|linkableTokenFilter
+name|ALL
 argument_list|)
 decl_stmt|;
 specifier|final
