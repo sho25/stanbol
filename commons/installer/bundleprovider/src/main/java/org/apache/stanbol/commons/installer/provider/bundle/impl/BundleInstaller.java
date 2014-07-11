@@ -808,7 +808,7 @@ name|Dictionary
 argument_list|<
 name|String
 argument_list|,
-name|Object
+name|String
 argument_list|>
 name|headers
 init|=
@@ -817,7 +817,7 @@ name|Dictionary
 argument_list|<
 name|String
 argument_list|,
-name|Object
+name|String
 argument_list|>
 operator|)
 name|bundle
