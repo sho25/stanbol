@@ -2110,9 +2110,8 @@ name|ClientProtocolException
 condition|)
 block|{
 comment|//force re-initialisation upon error
-name|serviceInitialised
-operator|=
-literal|false
+name|setRESTfulNlpAnalysisServiceUnavailable
+argument_list|()
 expr_stmt|;
 throw|throw
 operator|new
@@ -2141,9 +2140,8 @@ name|IOException
 condition|)
 block|{
 comment|//force re-initialisation upon error
-name|serviceInitialised
-operator|=
-literal|false
+name|setRESTfulNlpAnalysisServiceUnavailable
+argument_list|()
 expr_stmt|;
 throw|throw
 operator|new
@@ -2279,7 +2277,10 @@ name|Sentence
 case|:
 name|context
 operator|=
-name|context
+operator|(
+name|Sentence
+operator|)
+name|span
 expr_stmt|;
 break|break;
 default|default:
@@ -3034,9 +3035,11 @@ argument_list|(
 literal|20
 argument_list|)
 expr_stmt|;
-comment|//initially set the language config to validate the config
-comment|//but reset to the default as this is done in the
-comment|//    #initRESTfulNlpAnalysisService(..) method
+comment|//NOTE: The list of supported languages is the combination of the
+comment|//      languages enabled by the configuration (#languageConfig) and the
+comment|//      languages supported by the RESTful NLP Analysis Service
+comment|//      (#supportedLanguages)
+comment|//init the language configuration with the engine configuration
 name|languageConfig
 operator|.
 name|setConfiguration
@@ -3044,12 +3047,6 @@ argument_list|(
 name|config
 argument_list|)
 expr_stmt|;
-name|languageConfig
-operator|.
-name|setDefault
-argument_list|()
-expr_stmt|;
-comment|//reset to the default
 name|httpClient
 operator|=
 operator|new
@@ -3206,6 +3203,22 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**      * to be called after handling an exception while calling the remote service      * that indicates that the service is no longer available.      */
+specifier|private
+name|void
+name|setRESTfulNlpAnalysisServiceUnavailable
+parameter_list|()
+block|{
+name|serviceInitialised
+operator|=
+literal|false
+expr_stmt|;
+name|supportedLanguages
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**      * initialises the RESRfulNlpAnalysis if not yet done.      */
 specifier|private
 name|boolean
@@ -3285,16 +3298,37 @@ parameter_list|()
 throws|throws
 name|IOException
 block|{
-return|return
-name|httpClient
-operator|.
-name|execute
-argument_list|(
+name|HttpGet
+name|request
+init|=
 operator|new
 name|HttpGet
 argument_list|(
 name|analysisServiceUrl
 argument_list|)
+decl_stmt|;
+name|request
+operator|.
+name|setHeader
+argument_list|(
+name|HttpHeaders
+operator|.
+name|ACCEPT
+argument_list|,
+name|ContentType
+operator|.
+name|APPLICATION_JSON
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return
+name|httpClient
+operator|.
+name|execute
+argument_list|(
+name|request
 argument_list|,
 operator|new
 name|BasicResponseHandler
@@ -3324,22 +3358,9 @@ operator|.
 name|getException
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|serviceInitialised
-condition|)
-block|{
-comment|//reset the language config if the service get unavailable
-name|languageConfig
-operator|.
-name|setDefault
+name|setRESTfulNlpAnalysisServiceUnavailable
 argument_list|()
 expr_stmt|;
-name|serviceInitialised
-operator|=
-literal|false
-expr_stmt|;
-block|}
 if|if
 condition|(
 name|e
@@ -3374,42 +3395,11 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|//for the correct language configuration we need to combine the parsed
-comment|//language configuration with the languages supported by the
-comment|//RESTful NLP Analysis Service
-comment|//set the parsed config
-try|try
-block|{
-name|languageConfig
-operator|.
-name|setConfiguration
-argument_list|(
-name|config
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|ConfigurationException
-name|e
-parameter_list|)
-block|{
-comment|//the config was already checked in the activate method ... so this
-comment|//should never happen
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-name|e
-operator|.
-name|getMessage
-argument_list|()
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-comment|//parse the supported languages
+comment|//NOTE: The list of supported languages is the combination of the
+comment|//      languages enabled by the configuration (#languageConfig) and the
+comment|//      languages supported by the RESTful NLP Analysis Service
+comment|//      (#supportedLanguages)
+comment|//parse the supported languages from the initialization response
 name|StringTokenizer
 name|st
 init|=
