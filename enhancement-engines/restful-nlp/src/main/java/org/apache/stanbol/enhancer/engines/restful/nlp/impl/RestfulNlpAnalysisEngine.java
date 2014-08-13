@@ -3106,9 +3106,10 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-name|initRESTfulNlpAnalysisService
-argument_list|()
-expr_stmt|;
+comment|//STANBOL-1389: deactivated initialization during activation as this can create
+comment|//issues in cases where Stanbol and the NLP service do run in the same
+comment|//servlet container.
+comment|//initRESTfulNlpAnalysisService();
 name|value
 operator|=
 name|config
