@@ -55,26 +55,6 @@ name|clerezza
 operator|.
 name|MockOsgiContext
 operator|.
-name|reset
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|sources
-operator|.
-name|clerezza
-operator|.
-name|MockOsgiContext
-operator|.
 name|tcManager
 import|;
 end_import
@@ -326,9 +306,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|reset
-argument_list|()
-expr_stmt|;
+comment|//nothing to do
 block|}
 specifier|private
 name|String
@@ -458,9 +436,7 @@ name|void
 name|cleanup
 parameter_list|()
 block|{
-name|reset
-argument_list|()
-expr_stmt|;
+comment|//nothing to do
 block|}
 comment|/*      * If the format is specificed and correct, the ontology source should be created as expected.      */
 annotation|@
