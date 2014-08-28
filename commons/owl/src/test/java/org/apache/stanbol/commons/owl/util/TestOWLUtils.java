@@ -326,8 +326,9 @@ specifier|static
 name|Parser
 name|parser
 init|=
-operator|new
 name|Parser
+operator|.
+name|getInstance
 argument_list|()
 decl_stmt|;
 annotation|@
@@ -352,15 +353,7 @@ name|SimpleTcProvider
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|parser
-operator|.
-name|bindParsingProvider
-argument_list|(
-operator|new
-name|JenaParserProvider
-argument_list|()
-argument_list|)
-expr_stmt|;
+comment|//parser.bindParsingProvider(new JenaParserProvider());
 block|}
 specifier|private
 name|Logger
