@@ -1137,27 +1137,10 @@ block|{
 comment|//init the RDF parser
 name|rdfParser
 operator|=
-operator|new
 name|Parser
-argument_list|()
-expr_stmt|;
-name|rdfParser
 operator|.
-name|bindParsingProvider
-argument_list|(
-operator|new
-name|JenaParserProvider
+name|getInstance
 argument_list|()
-argument_list|)
-expr_stmt|;
-name|rdfParser
-operator|.
-name|bindParsingProvider
-argument_list|(
-operator|new
-name|RdfJsonParsingProvider
-argument_list|()
-argument_list|)
 expr_stmt|;
 comment|//init theTestData
 block|}
