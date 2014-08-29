@@ -424,7 +424,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Verifies the correct setup of ontology registries.  */
+comment|/**  * Verifies the correct setup of ontology registries. As these objects are virtually unaware of the OSGi  * environment, the context is constructed using plain Java objects.  */
 end_comment
 
 begin_class
@@ -514,8 +514,9 @@ argument_list|()
 argument_list|,
 name|offline
 argument_list|,
-operator|new
 name|Parser
+operator|.
+name|getInstance
 argument_list|()
 argument_list|)
 argument_list|,

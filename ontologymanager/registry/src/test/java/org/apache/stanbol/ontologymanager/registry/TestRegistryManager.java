@@ -49,24 +49,6 @@ name|registry
 operator|.
 name|MockOsgiContext
 operator|.
-name|reset
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|registry
-operator|.
-name|MockOsgiContext
-operator|.
 name|tcManager
 import|;
 end_import
@@ -514,6 +496,8 @@ argument_list|(
 name|configuration
 argument_list|)
 expr_stmt|;
+name|MockOsgiContext
+operator|.
 name|reset
 argument_list|()
 expr_stmt|;
@@ -547,6 +531,8 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|MockOsgiContext
+operator|.
 name|reset
 argument_list|()
 expr_stmt|;
