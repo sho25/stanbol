@@ -45,6 +45,22 @@ name|hpl
 operator|.
 name|jena
 operator|.
+name|graph
+operator|.
+name|NodeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
 name|sparql
 operator|.
 name|core
@@ -126,6 +142,26 @@ operator|.
 name|binding
 operator|.
 name|Binding1
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|sparql
+operator|.
+name|engine
+operator|.
+name|binding
+operator|.
+name|BindingFactory
 import|;
 end_import
 
@@ -296,10 +332,13 @@ argument_list|,
 literal|""
 argument_list|)
 decl_stmt|;
+comment|//STANBOL-621: Binding1 has no longer a public constructor
+comment|//b = new Binding1(binding, Var.alloc(ref), NodeFactory.createURI(argumentString));
 name|b
 operator|=
-operator|new
-name|Binding1
+name|BindingFactory
+operator|.
+name|binding
 argument_list|(
 name|binding
 argument_list|,
@@ -310,7 +349,7 @@ argument_list|(
 name|ref
 argument_list|)
 argument_list|,
-name|Node
+name|NodeFactory
 operator|.
 name|createURI
 argument_list|(
