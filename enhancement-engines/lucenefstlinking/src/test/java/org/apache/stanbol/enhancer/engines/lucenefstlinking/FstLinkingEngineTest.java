@@ -73,6 +73,26 @@ name|stanbol
 operator|.
 name|enhancer
 operator|.
+name|engines
+operator|.
+name|lucenefstlinking
+operator|.
+name|FstLinkingEngine
+operator|.
+name|FISE_ORIGIN
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
 name|servicesapi
 operator|.
 name|rdf
@@ -1372,6 +1392,14 @@ specifier|public
 specifier|static
 specifier|final
 name|String
+name|TEST_ORIGIN
+init|=
+literal|"texst.origin"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
 name|TEST_SOLR_CORE_CONFIGURATION
 init|=
 literal|"dbpedia_26k.solrindex.bz2"
@@ -1818,6 +1846,17 @@ literal|"entityhub:entityRank"
 argument_list|)
 expr_stmt|;
 comment|//fstConfig.setEntityCacheManager(new FastLRUCacheManager(2048));
+name|fstConfig
+operator|.
+name|setOrigin
+argument_list|(
+operator|new
+name|PlainLiteralImpl
+argument_list|(
+name|TEST_ORIGIN
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|//activate the FST config
 name|fstConfig
 operator|.
@@ -2985,6 +3024,26 @@ literal|" ... found"
 argument_list|)
 expr_stmt|;
 block|}
+comment|//assert origin
+name|assertEquals
+argument_list|(
+name|TEST_ORIGIN
+argument_list|,
+name|EnhancementEngineHelper
+operator|.
+name|getString
+argument_list|(
+name|ci
+operator|.
+name|getMetadata
+argument_list|()
+argument_list|,
+name|entityAnnotation
+argument_list|,
+name|FISE_ORIGIN
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|//            Assert.assertTrue("fise:referenced-entity " + entityUri +
 comment|//                " not expected (expected: "+expectedEntities+")",
 comment|//                suggestedEntities.remove(entityUri.getUnicodeString()) ||

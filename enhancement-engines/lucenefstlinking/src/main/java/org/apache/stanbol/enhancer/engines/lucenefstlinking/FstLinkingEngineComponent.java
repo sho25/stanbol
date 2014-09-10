@@ -339,6 +339,26 @@ begin_import
 import|import
 name|java
 operator|.
+name|net
+operator|.
+name|URI
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|URISyntaxException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Arrays
@@ -436,6 +456,72 @@ operator|.
 name|concurrent
 operator|.
 name|Executors
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|Literal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|Resource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|UriRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|impl
+operator|.
+name|PlainLiteralImpl
 import|;
 end_import
 
@@ -1634,6 +1720,15 @@ name|SOLR_CORE
 init|=
 literal|"enhancer.engines.linking.lucenefst.solrcore"
 decl_stmt|;
+comment|/**      * The origin information for all Entities provided by the configured SolrCore and      * FST. Origin information are added to all<code>fise:EntityAnnotation</code>      * by using the<code>fise:origin</code> property. Configured values can be both      * {@link UriRef URI}s or {@link Literal}s. Configured Strings are checked if      * they are valid {@link URI}s and  {@link URI#isAbsolute() absolute}. If not      * a {@link Literal} is parsed.      */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|ORIGIN
+init|=
+literal|"enhancer.engines.linking.lucenefst.origin"
+decl_stmt|;
 comment|/**      * The size of the thread pool used to create FST models (default=1). Creating      * such models does need a lot of memory. Expect values up to 10times of the      * build model. So while this task can easily performed concurrently users need      * to be aware that the process will occupy a lot of heap space (typically several      * GBytes). If heap space is not an issue it is best to configure the value      * based on the CPU cores available on the local host.<p>      * This configuration has only an effect if runtime generation of FST modles      * is enabled (either by default or for some FST by explicitly setting the       * '<code>{@link IndexConfiguration#PARAM_RUNTIME_GENERATION generate}=true</code>' parameter       * for some languages in the {@link IndexConfiguration#FST_CONFIG}.      */
 specifier|public
 specifier|static
@@ -1697,6 +1792,11 @@ comment|/**      * the name for the EnhancementEngine registered by this compone
 specifier|private
 name|String
 name|engineName
+decl_stmt|;
+comment|/**      * The origin information of Entities.      */
+specifier|private
+name|Resource
+name|origin
 decl_stmt|;
 comment|/**      * used to resolve '{prefix}:{local-name}' used within the engines configuration      */
 annotation|@
@@ -2191,7 +2291,150 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// else no config -> will use the default
-comment|//(4) init the FST configuration
+comment|//(4) parse Origin information
+name|value
+operator|=
+name|properties
+operator|.
+name|get
+argument_list|(
+name|ORIGIN
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|value
+operator|instanceof
+name|Resource
+condition|)
+block|{
+name|origin
+operator|=
+operator|(
+name|Resource
+operator|)
+name|origin
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|value
+operator|instanceof
+name|String
+condition|)
+block|{
+try|try
+block|{
+name|URI
+name|originUri
+init|=
+operator|new
+name|URI
+argument_list|(
+operator|(
+name|String
+operator|)
+name|value
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|originUri
+operator|.
+name|isAbsolute
+argument_list|()
+condition|)
+block|{
+name|origin
+operator|=
+operator|new
+name|UriRef
+argument_list|(
+operator|(
+name|String
+operator|)
+name|value
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|origin
+operator|=
+operator|new
+name|PlainLiteralImpl
+argument_list|(
+operator|(
+name|String
+operator|)
+name|value
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|URISyntaxException
+name|e
+parameter_list|)
+block|{
+name|origin
+operator|=
+operator|new
+name|PlainLiteralImpl
+argument_list|(
+operator|(
+name|String
+operator|)
+name|value
+argument_list|)
+expr_stmt|;
+block|}
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" - origin: {}"
+argument_list|,
+name|origin
+argument_list|)
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+condition|)
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Values of the {} property MUST BE of type Resource or String "
+operator|+
+literal|"(parsed: {} (type:{}))"
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+name|ORIGIN
+block|,
+name|value
+block|,
+name|value
+operator|.
+name|getClass
+argument_list|()
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+comment|//else no ORIGIN information provided
+comment|//(5) init the FST configuration
 comment|//We can create the default configuration only here, as it depends on the
 comment|//name of the solrIndex
 name|String
@@ -2369,7 +2612,7 @@ literal|")!"
 argument_list|)
 throw|;
 block|}
-comment|//(5) Create the ThreadPool used for the runtime creation of FST models
+comment|//(6) Create the ThreadPool used for the runtime creation of FST models
 name|value
 operator|=
 name|properties
@@ -2561,7 +2804,7 @@ name|build
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//(6) Parse the EntityCache config
+comment|//(7) Parse the EntityCache config
 name|int
 name|entityCacheSize
 decl_stmt|;
@@ -2707,7 +2950,7 @@ name|entityCacheSize
 argument_list|)
 expr_stmt|;
 block|}
-comment|//(7) parse the Entity type field
+comment|//(8) parse the Entity type field
 name|value
 operator|=
 name|properties
@@ -2754,7 +2997,7 @@ name|trim
 argument_list|()
 expr_stmt|;
 block|}
-comment|//(8) parse the Entity Ranking field
+comment|//(9) parse the Entity Ranking field
 name|value
 operator|=
 name|properties
@@ -2791,7 +3034,7 @@ name|trim
 argument_list|()
 expr_stmt|;
 block|}
-comment|//(9) start tracking the SolrCore
+comment|//(10) start tracking the SolrCore
 try|try
 block|{
 name|solrServerTracker
@@ -3202,6 +3445,13 @@ literal|null
 argument_list|)
 expr_stmt|;
 comment|//TODO add support
+name|indexConfig
+operator|.
+name|setOrigin
+argument_list|(
+name|origin
+argument_list|)
+expr_stmt|;
 comment|//NOTE: the FST cofnig is processed even if the SolrCore has not changed
 comment|//      because their might be config changes and/or new FST files in the
 comment|//      FST directory of the SolrCore.

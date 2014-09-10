@@ -935,6 +935,22 @@ operator|+
 literal|"entity-ranking"
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|FISE_ORIGIN
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"origin"
+argument_list|)
+decl_stmt|;
 specifier|private
 specifier|final
 name|LiteralFactory
@@ -4129,6 +4145,36 @@ name|textAnnotation
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|//write origin information
+if|if
+condition|(
+name|indexConfig
+operator|.
+name|getOrigin
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+name|metadata
+operator|.
+name|add
+argument_list|(
+operator|new
+name|TripleImpl
+argument_list|(
+name|entityAnnotation
+argument_list|,
+name|FISE_ORIGIN
+argument_list|,
+name|indexConfig
+operator|.
+name|getOrigin
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|//TODO: add origin information of the EntiySearcher
 comment|//                for(Entry<UriRef,Collection<Resource>> originInfo : entitySearcher.getOriginInformation().entrySet()){
 comment|//                    for(Resource value : originInfo.getValue()){

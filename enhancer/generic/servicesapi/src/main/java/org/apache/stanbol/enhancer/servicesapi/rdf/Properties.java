@@ -563,6 +563,23 @@ operator|+
 literal|"confidence-level"
 argument_list|)
 decl_stmt|;
+comment|/**      * The origin can be used to reference the vocabulary (dataset, thesaurus,       * ontology, ...) the Entity {@link #ENHANCER_ENTITY_REFERENCE referenced}      * by a<code>{@link TechnicalClasses#ENHANCER_ENTITYANNOTATION fise:EntiyAnnotation}</code>      * originates from.      * @since 0.12.1 (STANBOL-????)      */
+specifier|public
+specifier|static
+specifier|final
+name|UriRef
+name|ENHANCER_ORIGIN
+init|=
+operator|new
+name|UriRef
+argument_list|(
+name|NamespaceEnum
+operator|.
+name|fise
+operator|+
+literal|"origin"
+argument_list|)
+decl_stmt|;
 comment|/**      * Internet Media Type of a content item.      *       * @deprecated dc:FileFormat does not exist      */
 annotation|@
 name|Deprecated
