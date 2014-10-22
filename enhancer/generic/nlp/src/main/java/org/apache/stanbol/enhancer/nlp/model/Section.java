@@ -74,6 +74,26 @@ argument_list|>
 name|types
 parameter_list|)
 function_decl|;
+comment|/**      * Iterates over all enclosed Span within the parsed window. Only Spans      * with on of the parsed types are returned.       *<p>       * The parsed window (start/end indexes) are relative to the section. If      * the parsed window exceeds the Section the window adapted to the section.      * This means that this method will never return Spans outside the section.      *<p>      * Returned Iterators MUST NOT throw {@link ConcurrentModificationException}      * but consider additions of Spans.      * @param types the {@link SpanTypeEnum types} of Spans included      * @param startOffset the start offset relative to the start position of this {@link Section}      * @param endOffset the end offset relative to the start position of this {@link Section}.      * @return sorted iterator over the selected Spans.      * @since 0.12.1      */
+name|Iterator
+argument_list|<
+name|Span
+argument_list|>
+name|getEnclosed
+parameter_list|(
+name|Set
+argument_list|<
+name|SpanTypeEnum
+argument_list|>
+name|types
+parameter_list|,
+name|int
+name|startOffset
+parameter_list|,
+name|int
+name|endOffset
+parameter_list|)
+function_decl|;
 comment|/**      * Adds an Token relative to this Sentence      * @param start the start of the token relative to the sentence      * @param end      * @return      */
 name|Token
 name|addToken
