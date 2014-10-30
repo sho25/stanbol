@@ -453,25 +453,11 @@ index|[]
 block|{}
 expr_stmt|;
 comment|//set to empty -> if global than map nothing
-block|}
-elseif|else
-if|if
-condition|(
-name|this
-operator|.
-name|usesWildcard
-condition|)
-block|{
-name|mappedTo
-operator|=
-operator|new
-name|String
-index|[]
-block|{
-literal|null
-block|}
-expr_stmt|;
-comment|//wildcard always maps the selected field 1:1
+comment|//NOTE: FieldMappings do now allow to map a Wildcard to an other field
+comment|//      This is e.g. usefull for collecting all Literal values in a field
+comment|//      holding the disambiguation context.
+comment|//        } else if(this.usesWildcard){
+comment|//            mappedTo = new String[]{null}; //wildcard always maps the selected field 1:1
 block|}
 elseif|else
 if|if

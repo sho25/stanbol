@@ -2256,6 +2256,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**      * Converts String values to {@link Text} (without an language tag. Does      * NOT convert any other values such as {@link Number}s or {@link Reference}s      * @author Rupert Westenthaler      *      */
 specifier|public
 specifier|static
 class|class
@@ -2304,7 +2305,13 @@ operator|)
 name|value
 return|;
 block|}
-else|else
+elseif|else
+if|if
+condition|(
+name|value
+operator|instanceof
+name|String
+condition|)
 block|{
 return|return
 name|valueFactory
@@ -2313,6 +2320,13 @@ name|createText
 argument_list|(
 name|value
 argument_list|)
+return|;
+block|}
+else|else
+block|{
+comment|//do not convert other values
+return|return
+literal|null
 return|;
 block|}
 block|}
@@ -2333,6 +2347,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/**      * Converts any value to {@link String} by using the {@link #toString()}      * method of the parsed value      * @author Rupert Westenthaler      *      */
 specifier|public
 specifier|static
 class|class
