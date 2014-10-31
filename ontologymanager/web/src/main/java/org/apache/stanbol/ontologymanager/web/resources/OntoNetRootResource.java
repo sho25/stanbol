@@ -597,7 +597,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|File
+name|BufferedInputStream
 import|;
 end_import
 
@@ -607,7 +607,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|FileInputStream
+name|ByteArrayInputStream
 import|;
 end_import
 
@@ -638,6 +638,42 @@ operator|.
 name|net
 operator|.
 name|URI
+import|;
+end_import
+
+begin_comment
+comment|//import com.sun.jersey.api.view.ImplicitProduces;
+end_comment
+
+begin_comment
+comment|//import com.sun.jersey.multipart.BodyPart;
+end_comment
+
+begin_comment
+comment|//import com.sun.jersey.multipart.FormDataBodyPart;
+end_comment
+
+begin_comment
+comment|//import com.sun.jersey.multipart.FormDataMultiPart;
+end_comment
+
+begin_import
+import|import
+name|java
+operator|.
+name|security
+operator|.
+name|AccessController
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|security
+operator|.
+name|PrivilegedAction
 import|;
 end_import
 
@@ -1641,24 +1677,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|web
-operator|.
-name|util
-operator|.
-name|OntologyStatsResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|semanticweb
 operator|.
 name|owlapi
@@ -1816,43 +1834,7 @@ import|;
 end_import
 
 begin_comment
-comment|//import com.sun.jersey.api.view.ImplicitProduces;
-end_comment
-
-begin_comment
-comment|//import com.sun.jersey.multipart.BodyPart;
-end_comment
-
-begin_comment
-comment|//import com.sun.jersey.multipart.FormDataBodyPart;
-end_comment
-
-begin_comment
-comment|//import com.sun.jersey.multipart.FormDataMultiPart;
-end_comment
-
-begin_import
-import|import
-name|java
-operator|.
-name|security
-operator|.
-name|AccessController
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|security
-operator|.
-name|PrivilegedAction
-import|;
-end_import
-
-begin_comment
-comment|/**  * Provides the basic HTTP methods for storing and managing ontologies  * regardless of them belonging to a specific network, scope or session.  *  * @author anuzzolese, alexdma  *  */
+comment|/**  * Provides the basic HTTP methods for storing and managing ontologies regardless of them belonging to a  * specific network, scope or session.  *   * @author anuzzolese, alexdma  *   */
 end_comment
 
 begin_class
@@ -1881,7 +1863,7 @@ name|Path
 argument_list|(
 literal|"/ontonet"
 argument_list|)
-comment|//@ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
+comment|// @ImplicitProduces(MediaType.TEXT_HTML + ";qs=2")
 specifier|public
 class|class
 name|OntoNetRootResource
@@ -1936,15 +1918,15 @@ block|{
 name|super
 argument_list|()
 expr_stmt|;
-comment|//        this.servletContext = servletContext;
-comment|//        this.ontologyProvider = (OntologyProvider<?>) ContextHelper.getServiceFromContext(
-comment|//                OntologyProvider.class, servletContext);
-comment|//        this.onManager = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class,
-comment|//                servletContext);
-comment|//        this.sessionManager = (SessionManager) ContextHelper.getServiceFromContext(SessionManager.class,
-comment|//                servletContext);
-comment|//        this.registryManager = (RegistryManager) ContextHelper.getServiceFromContext(RegistryManager.class,
-comment|//                servletContext);
+comment|// this.servletContext = servletContext;
+comment|// this.ontologyProvider = (OntologyProvider<?>) ContextHelper.getServiceFromContext(
+comment|// OntologyProvider.class, servletContext);
+comment|// this.onManager = (ScopeManager) ContextHelper.getServiceFromContext(ScopeManager.class,
+comment|// servletContext);
+comment|// this.sessionManager = (SessionManager) ContextHelper.getServiceFromContext(SessionManager.class,
+comment|// servletContext);
+comment|// this.registryManager = (RegistryManager) ContextHelper.getServiceFromContext(RegistryManager.class,
+comment|// servletContext);
 block|}
 comment|/*      * TODO before implementing removal, we need OWL dependency checks. Also, this is quite a strong method      * and would be best implemented with RESTful authentication.      */
 comment|// @DELETE
@@ -1966,7 +1948,7 @@ operator|.
 name|ok
 argument_list|()
 decl_stmt|;
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2062,7 +2044,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2197,7 +2179,7 @@ name|NOT_FOUND
 argument_list|)
 expr_stmt|;
 block|}
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -2217,8 +2199,8 @@ name|OWLOntologyID
 name|ontologyId
 parameter_list|)
 block|{
-comment|//TODO use rdfViewable instead of Vieable to make separation of
-comment|//presentation and application logic cleaner
+comment|// TODO use rdfViewable instead of Vieable to make separation of
+comment|// presentation and application logic cleaner
 return|return
 name|AccessController
 operator|.
@@ -2881,8 +2863,8 @@ name|OWLOntologyID
 name|ontologyId
 parameter_list|)
 block|{
-comment|//TODO use rdfViewable instead of Vieable to make separation of
-comment|//presentation and application logic cleaner
+comment|// TODO use rdfViewable instead of Vieable to make separation of
+comment|// presentation and application logic cleaner
 return|return
 name|AccessController
 operator|.
@@ -3072,7 +3054,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3124,7 +3106,7 @@ name|class
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -3140,10 +3122,10 @@ argument_list|>
 name|getOntologies
 parameter_list|()
 block|{
-comment|//As this method is invoked from the template it would be too late
-comment|//to handle AccessControlExceptionS
-comment|//TODO use rdfViewable instead of Vieable to make separation of
-comment|//presentation and application logic cleaner
+comment|// As this method is invoked from the template it would be too late
+comment|// to handle AccessControlExceptionS
+comment|// TODO use rdfViewable instead of Vieable to make separation of
+comment|// presentation and application logic cleaner
 return|return
 name|AccessController
 operator|.
@@ -3245,10 +3227,10 @@ argument_list|>
 name|getOrphans
 parameter_list|()
 block|{
-comment|//As this method is invoked from the template it would be too late
-comment|//to handle AccessControlExceptionS
-comment|//TODO use rdfViewable instead of Vieable to make separation of
-comment|//presentation and application logic cleaner
+comment|// As this method is invoked from the template it would be too late
+comment|// to handle AccessControlExceptionS
+comment|// TODO use rdfViewable instead of Vieable to make separation of
+comment|// presentation and application logic cleaner
 return|return
 name|AccessController
 operator|.
@@ -3792,8 +3774,8 @@ name|OWLOntologyID
 name|ontologyId
 parameter_list|)
 block|{
-comment|//TODO use rdfViewable instead of Vieable to make separation of
-comment|//presentation and application logic cleaner
+comment|// TODO use rdfViewable instead of Vieable to make separation of
+comment|// presentation and application logic cleaner
 return|return
 name|AccessController
 operator|.
@@ -4025,7 +4007,7 @@ name|o
 argument_list|)
 expr_stmt|;
 block|}
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4033,7 +4015,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * Gets the ontology with the given identifier in its version managed by the      * session.      *      * @param sessionId the session identifier.      * @param ontologyId the ontology identifier.      * @param uriInfo      * @param headers      * @return the requested managed ontology, or {@link Status#NOT_FOUND} if      * either the sessionn does not exist, or the if the ontology either does      * not exist or is not managed.      */
+comment|/**      * Gets the ontology with the given identifier in its version managed by the session.      *       * @param sessionId      *            the session identifier.      * @param ontologyId      *            the ontology identifier.      * @param uriInfo      * @param headers      * @return the requested managed ontology, or {@link Status#NOT_FOUND} if either the sessionn does not      *         exist, or the if the ontology either does not exist or is not managed.      */
 annotation|@
 name|GET
 annotation|@
@@ -4194,7 +4176,7 @@ name|o
 argument_list|)
 expr_stmt|;
 block|}
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4301,7 +4283,7 @@ argument_list|(
 name|mGraph
 argument_list|)
 expr_stmt|;
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4384,7 +4366,7 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// rb.header(HttpHeaders.CONTENT_TYPE, TEXT_HTML + "; charset=utf-8");
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -4427,7 +4409,8 @@ name|location
 init|=
 literal|null
 decl_stmt|;
-name|File
+name|byte
+index|[]
 name|file
 init|=
 literal|null
@@ -4467,9 +4450,6 @@ condition|)
 block|{
 name|file
 operator|=
-operator|new
-name|File
-argument_list|(
 name|data
 operator|.
 name|getFormFileParameterValues
@@ -4480,9 +4460,8 @@ index|[
 literal|0
 index|]
 operator|.
-name|getFileName
+name|getContent
 argument_list|()
-argument_list|)
 expr_stmt|;
 block|}
 comment|// else {
@@ -4745,13 +4724,9 @@ literal|null
 operator|&&
 name|file
 operator|.
-name|canRead
-argument_list|()
-operator|&&
-name|file
-operator|.
-name|exists
-argument_list|()
+name|length
+operator|>
+literal|0
 condition|)
 block|{
 comment|/*              * Because the ontology provider's load method could fail after only one attempt without resetting              * the stream, we might have to do that ourselves.              */
@@ -4870,9 +4845,13 @@ name|InputStream
 name|content
 init|=
 operator|new
-name|FileInputStream
+name|BufferedInputStream
+argument_list|(
+operator|new
+name|ByteArrayInputStream
 argument_list|(
 name|file
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// ClerezzaOWLUtils.guessOntologyID(new FileInputStream(file), Parser.getInstance(), f);
@@ -4981,9 +4960,13 @@ block|{
 name|content
 operator|=
 operator|new
-name|FileInputStream
+name|BufferedInputStream
+argument_list|(
+operator|new
+name|ByteArrayInputStream
 argument_list|(
 name|file
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|key
@@ -5488,7 +5471,7 @@ return|return
 name|rb
 return|;
 block|}
-comment|/**      * Helper method to make sure a ResponseBuilder is created on every      * conditions, so that it is then possible to enable CORS on it afterwards.      *      * @param ontologyId      * @return      */
+comment|/**      * Helper method to make sure a ResponseBuilder is created on every conditions, so that it is then      * possible to enable CORS on it afterwards.      *       * @param ontologyId      * @return      */
 specifier|protected
 name|ResponseBuilder
 name|performShowOntology
@@ -5800,7 +5783,7 @@ name|headers
 argument_list|)
 decl_stmt|;
 comment|// rb.header(HttpHeaders.CONTENT_TYPE, TEXT_HTML + "; charset=utf-8");
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5864,7 +5847,7 @@ operator|+
 literal|"; charset=utf-8"
 argument_list|)
 expr_stmt|;
-comment|//addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 return|return
 name|rb
 operator|.
@@ -5872,7 +5855,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * POSTs an ontology content as application/x-www-form-urlencoded      *      * @param content      * @param headers      * @return      */
+comment|/**      * POSTs an ontology content as application/x-www-form-urlencoded      *       * @param content      * @param headers      * @return      */
 annotation|@
 name|POST
 annotation|@
@@ -6169,7 +6152,7 @@ name|UNSUPPORTED_MEDIA_TYPE
 argument_list|)
 expr_stmt|;
 block|}
-comment|//        addCORSOrigin(servletContext, rb, headers);
+comment|// addCORSOrigin(servletContext, rb, headers);
 name|Response
 name|r
 init|=
@@ -6260,7 +6243,7 @@ argument_list|>
 name|handles
 parameter_list|)
 block|{
-comment|//            this.servletContext = context;
+comment|// this.servletContext = context;
 name|this
 operator|.
 name|uriInfo
