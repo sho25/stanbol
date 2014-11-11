@@ -2089,6 +2089,11 @@ init|=
 literal|null
 decl_stmt|;
 comment|//parse the uri parameter manually from the request URI
+name|String
+name|source
+init|=
+literal|null
+decl_stmt|;
 if|if
 condition|(
 name|query
@@ -2174,6 +2179,10 @@ argument_list|,
 literal|"UTF-8"
 argument_list|)
 expr_stmt|;
+name|source
+operator|=
+literal|"'uri' parameter"
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -2192,6 +2201,33 @@ comment|//should never happen
 block|}
 block|}
 block|}
+block|}
+if|if
+condition|(
+name|ciUri
+operator|==
+literal|null
+condition|)
+block|{
+comment|//try to get the URI from the Content-Location header
+name|ciUri
+operator|=
+name|headers
+operator|.
+name|getRequestHeaders
+argument_list|()
+operator|.
+name|getFirst
+argument_list|(
+name|HttpHeaders
+operator|.
+name|CONTENT_LOCATION
+argument_list|)
+expr_stmt|;
+name|source
+operator|=
+literal|"'Content-Location' header"
+expr_stmt|;
 block|}
 if|if
 condition|(
@@ -2226,7 +2262,9 @@ name|ciUri
 operator|+
 literal|"' is not a valid URI. Please check the value "
 operator|+
-literal|"of the 'uri' parameter"
+literal|"of the "
+operator|+
+name|source
 argument_list|,
 name|Response
 operator|.
