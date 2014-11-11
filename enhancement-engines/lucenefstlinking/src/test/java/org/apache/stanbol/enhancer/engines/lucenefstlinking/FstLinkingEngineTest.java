@@ -2399,6 +2399,10 @@ name|FstLinkingEngine
 argument_list|(
 literal|"proper-noun-linking"
 argument_list|,
+name|LinkingModeEnum
+operator|.
+name|LINKABLE_TOKEN
+argument_list|,
 name|fstConfig
 argument_list|,
 name|tpc
@@ -2547,6 +2551,10 @@ operator|new
 name|FstLinkingEngine
 argument_list|(
 literal|"proper-noun-linking"
+argument_list|,
+name|LinkingModeEnum
+operator|.
+name|LINKABLE_TOKEN
 argument_list|,
 name|fstConfig
 argument_list|,
