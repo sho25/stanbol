@@ -737,11 +737,10 @@ comment|//or more precisly, anybody who can read the content-graph
 name|TcAccessController
 name|tca
 init|=
-operator|new
-name|TcAccessController
-argument_list|(
 name|tcManager
-argument_list|)
+operator|.
+name|getTcAccessController
+argument_list|()
 decl_stmt|;
 name|tca
 operator|.
