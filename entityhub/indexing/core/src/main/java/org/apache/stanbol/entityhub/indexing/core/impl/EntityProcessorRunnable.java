@@ -276,6 +276,48 @@ name|processors
 expr_stmt|;
 if|if
 condition|(
+name|log
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Entity Processors:"
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|EntityProcessor
+name|ep
+range|:
+name|processors
+control|)
+block|{
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"  - {} (type: {})"
+argument_list|,
+name|ep
+argument_list|,
+name|ep
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+if|if
+condition|(
 name|keys
 operator|==
 literal|null
@@ -372,6 +414,15 @@ operator|.
 name|getItem
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"> process {}"
+argument_list|,
+name|processed
+argument_list|)
+expr_stmt|;
 name|EntityProcessor
 name|processor
 init|=
@@ -395,6 +446,15 @@ name|it
 operator|.
 name|next
 argument_list|()
+expr_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"   - with {}"
+argument_list|,
+name|processor
+argument_list|)
 expr_stmt|;
 name|processed
 operator|=
@@ -433,6 +493,13 @@ expr_stmt|;
 block|}
 else|else
 block|{
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"   - done"
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|String

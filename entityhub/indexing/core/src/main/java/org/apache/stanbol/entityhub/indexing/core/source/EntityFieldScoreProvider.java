@@ -152,6 +152,15 @@ operator|=
 name|DEFAULT_FIELD_NAME
 expr_stmt|;
 block|}
+else|else
+block|{
+name|this
+operator|.
+name|fieldName
+operator|=
+name|fieldName
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override
