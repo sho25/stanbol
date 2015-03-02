@@ -230,6 +230,11 @@ end_comment
 begin_class
 annotation|@
 name|Component
+argument_list|(
+name|immediate
+operator|=
+literal|true
+argument_list|)
 annotation|@
 name|Service
 argument_list|(
@@ -614,6 +619,8 @@ name|Bundle
 name|bundle
 parameter_list|)
 block|{
+try|try
+block|{
 return|return
 name|bundle
 operator|.
@@ -624,6 +631,40 @@ argument_list|)
 operator|!=
 literal|null
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|NullPointerException
+name|e
+parameter_list|)
+block|{
+comment|//sometimes this call caused a
+comment|//java.lang.NullPointerException
+comment|//    at org.apache.felix.framework.BundleRevisionImpl.getResourceLocal(BundleRevisionImpl.java:495)
+comment|//    at org.apache.felix.framework.BundleWiringImpl.findClassOrResourceByDelegation(BundleWiringImpl.java:1472)
+comment|//    at org.apache.felix.framework.BundleWiringImpl.getResourceByDelegation(BundleWiringImpl.java:1400)
+comment|//    at org.apache.felix.framework.Felix.getBundleResource(Felix.java:1600)
+comment|//    at org.apache.felix.framework.BundleImpl.getResource(BundleImpl.java:639)
+comment|//    at org.apache.stanbol.commons.freemarker.impl.BundleTemplateLoader.containsTemplates(BundleTemplateLoader.java:117)
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|" ... unable to check for Path "
+operator|+
+name|TEMPLATES_PATH_IN_BUNDLES
+operator|+
+literal|" in Bundle "
+operator|+
+name|bundle
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
 block|}
 block|}
 end_class
