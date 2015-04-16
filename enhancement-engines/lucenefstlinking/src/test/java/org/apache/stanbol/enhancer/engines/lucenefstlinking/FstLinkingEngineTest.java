@@ -2408,6 +2408,8 @@ argument_list|,
 name|tpc
 argument_list|,
 name|elc
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|processConentItem
@@ -2561,6 +2563,8 @@ argument_list|,
 name|tpc
 argument_list|,
 name|elc
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|processConentItem
