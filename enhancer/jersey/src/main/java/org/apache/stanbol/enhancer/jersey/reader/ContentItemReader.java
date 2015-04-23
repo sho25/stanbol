@@ -2445,7 +2445,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//we set the confidence to 1.0
+comment|//we set the confidence to 1.0^^xsd:double
 name|m
 operator|.
 name|add
@@ -2461,7 +2461,7 @@ name|lf
 operator|.
 name|createTypedLiteral
 argument_list|(
-name|Float
+name|Double
 operator|.
 name|valueOf
 argument_list|(
