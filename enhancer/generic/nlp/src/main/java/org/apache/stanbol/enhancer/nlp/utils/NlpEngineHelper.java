@@ -840,7 +840,7 @@ return|return
 name|at
 return|;
 block|}
-comment|/**      * Getter for the language of the content      * @param ci the ContentItem      * @param exception<code>false</code> id used in {@link #canEnhance(ContentItem)}      * and<code>true</code> when called from {@link #computeEnhancements(ContentItem)}      * @return the AnalysedText or<code>null</code> if not found.      * @throws IllegalStateException if exception is<code>true</code> and the      * language could not be retrieved from the parsed {@link ContentItem}.      */
+comment|/**      * Getter for the "<code>plain/text</code>" content part      * @param ci the ContentItem      * @param exception<code>false</code> id used in {@link #canEnhance(ContentItem)}      * and<code>true</code> when called from {@link #computeEnhancements(ContentItem)}      * @return the AnalysedText or<code>null</code> if not found.      * @throws IllegalStateException if exception is<code>true</code> and the      * language could not be retrieved from the parsed {@link ContentItem}.      */
 specifier|public
 specifier|static
 name|Entry
