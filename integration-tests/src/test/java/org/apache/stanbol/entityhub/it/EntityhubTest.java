@@ -1750,6 +1750,8 @@ argument_list|(
 name|f
 argument_list|)
 decl_stmt|;
+try|try
+block|{
 for|for
 control|(
 name|Enumeration
@@ -1780,6 +1782,15 @@ operator|.
 name|nextElement
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" - uploading {} to entityhub"
+argument_list|,
+name|entry
+argument_list|)
+expr_stmt|;
 name|RequestExecutor
 name|re
 init|=
@@ -1849,6 +1860,15 @@ name|status
 operator|==
 literal|304
 argument_list|)
+expr_stmt|;
+block|}
+block|}
+finally|finally
+block|{
+name|archive
+operator|.
+name|close
+argument_list|()
 expr_stmt|;
 block|}
 name|testFindNameQuery
