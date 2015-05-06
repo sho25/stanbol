@@ -1978,23 +1978,28 @@ throw|;
 block|}
 catch|catch
 parameter_list|(
-name|Exception
+name|RuntimeException
 name|e
 parameter_list|)
 block|{
+comment|//NOTE: Clerezza seams not to provide specific exceptions on
+comment|//      parsing errors. Hence the catch for all RuntimeException
 name|String
 name|message
 init|=
-literal|"Unable to create the Parser for the supported format "
+literal|"Unable to parse the provided RDF data (format: "
 operator|+
 name|content
 operator|.
 name|getMediaType
 argument_list|()
 operator|+
-literal|" ("
+literal|", message: "
 operator|+
 name|e
+operator|.
+name|getMessage
+argument_list|()
 operator|+
 literal|")"
 decl_stmt|;
@@ -2017,7 +2022,7 @@ name|status
 argument_list|(
 name|Status
 operator|.
-name|INTERNAL_SERVER_ERROR
+name|BAD_REQUEST
 argument_list|)
 operator|.
 name|entity
