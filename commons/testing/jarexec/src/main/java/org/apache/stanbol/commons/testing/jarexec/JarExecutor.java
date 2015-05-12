@@ -20,6 +20,22 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|commons
+operator|.
+name|lang
+operator|.
+name|StringUtils
+operator|.
+name|isBlank
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -167,9 +183,7 @@ name|apache
 operator|.
 name|commons
 operator|.
-name|exec
-operator|.
-name|util
+name|lang
 operator|.
 name|StringUtils
 import|;
@@ -454,9 +468,10 @@ argument_list|)
 decl_stmt|;
 name|serverPort
 operator|=
+name|isBlank
+argument_list|(
 name|portStr
-operator|==
-literal|null
+argument_list|)
 condition|?
 name|DEFAULT_PORT
 else|:
@@ -487,9 +502,10 @@ argument_list|)
 decl_stmt|;
 name|jarFolderPath
 operator|=
+name|isBlank
+argument_list|(
 name|jarFolderPath
-operator|==
-literal|null
+argument_list|)
 condition|?
 name|DEFAULT_JAR_FOLDER
 else|:
@@ -517,9 +533,10 @@ argument_list|)
 decl_stmt|;
 name|jarNameRegexp
 operator|=
+name|isBlank
+argument_list|(
 name|jarNameRegexp
-operator|==
-literal|null
+argument_list|)
 condition|?
 name|DEFAULT_JAR_NAME_REGEXP
 else|:

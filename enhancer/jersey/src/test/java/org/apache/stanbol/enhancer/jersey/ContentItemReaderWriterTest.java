@@ -627,42 +627,6 @@ name|clerezza
 operator|.
 name|rdf
 operator|.
-name|jena
-operator|.
-name|parser
-operator|.
-name|JenaParserProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|jena
-operator|.
-name|serializer
-operator|.
-name|JenaSerializerProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
 name|ontologies
 operator|.
 name|RDF
@@ -912,10 +876,6 @@ operator|.
 name|LoggerFactory
 import|;
 end_import
-
-begin_comment
-comment|//import com.sun.jersey.core.util.StringKeyIgnoreCaseMultivaluedMap;
-end_comment
 
 begin_class
 specifier|public
@@ -1259,7 +1219,6 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|//StringKeyIgnoreCaseMultivaluedMap<Object>();
 name|ciWriter
 operator|.
 name|writeTo
@@ -1477,7 +1436,11 @@ name|CONTENT_ITEM_BOUNDARY
 block|,
 literal|"Content-Disposition: form-data; name=\"content\""
 block|,
-literal|"Content-Type: multipart/alternate; boundary=contentParts"
+literal|"Content-Type: multipart/alternate; boundary="
+operator|+
+name|ContentItemWriter
+operator|.
+name|CONTENT_PARTS_BOUNDERY
 block|,
 literal|"--"
 operator|+
@@ -1556,6 +1519,13 @@ operator|+
 literal|"--"
 block|}
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"> Validate Multipart Mime:"
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|String
@@ -1576,15 +1546,24 @@ argument_list|)
 decl_stmt|;
 name|assertTrue
 argument_list|(
-literal|"content does not contain '"
+literal|"Unable to find: '"
 operator|+
 name|test
 operator|+
-literal|"'!"
+literal|"' in multipart mime!"
 argument_list|,
 name|index
 operator|>=
 literal|0
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" - found '{}'"
+argument_list|,
+name|test
 argument_list|)
 expr_stmt|;
 name|multipartMime
@@ -1738,9 +1717,6 @@ name|toString
 argument_list|(
 name|contentItem
 operator|.
-name|getBlob
-argument_list|()
-operator|.
 name|getStream
 argument_list|()
 argument_list|,
@@ -1755,9 +1731,6 @@ operator|.
 name|toString
 argument_list|(
 name|ci
-operator|.
-name|getBlob
-argument_list|()
 operator|.
 name|getStream
 argument_list|()

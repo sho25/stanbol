@@ -863,6 +863,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|http
+operator|.
+name|message
+operator|.
+name|BasicNameValuePair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|stanbol
 operator|.
 name|enhancer
@@ -3162,79 +3176,50 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|contentType
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|parts
-operator|=
-name|parts
-expr_stmt|;
-name|this
-operator|.
-name|boundary
-operator|=
-name|boundary
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getCharset
-parameter_list|()
-block|{
-return|return
-literal|null
-return|;
-comment|//no charset for multipart parts
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getMimeType
-parameter_list|()
-block|{
-return|return
-operator|new
-name|StringBuilder
-argument_list|(
-name|super
-operator|.
-name|getMimeType
-argument_list|()
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|"; boundary="
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|boundary
-argument_list|)
-operator|.
-name|toString
-argument_list|()
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
 name|ContentType
-name|getContentType
-parameter_list|()
-block|{
-return|return
-name|super
 operator|.
-name|getContentType
+name|create
+argument_list|(
+name|contentType
+operator|.
+name|getMimeType
 argument_list|()
-return|;
+argument_list|,
+operator|new
+name|BasicNameValuePair
+argument_list|(
+literal|"boundary"
+argument_list|,
+name|boundary
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|parts
+operator|=
+name|parts
+expr_stmt|;
+name|this
+operator|.
+name|boundary
+operator|=
+name|boundary
+expr_stmt|;
 block|}
+comment|//        @Override
+comment|//        public String getCharset() {
+comment|//            return null; //no charset for multipart parts
+comment|//        }
+comment|//        @Override
+comment|//        public String getMimeType() {
+comment|//            String mime = new StringBuilder(super.getMimeType()).append("; boundary=")
+comment|//                    .append(boundary).toString();
+comment|//            log.info("!!! {}",mime);
+comment|//            return mime;
+comment|//
+comment|//        }
 annotation|@
 name|Override
 specifier|public

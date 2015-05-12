@@ -19,26 +19,6 @@ name|resources
 package|;
 end_package
 
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.DELETE;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.GET;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.OPTIONS;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.POST;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.PUT;
-end_comment
-
 begin_import
 import|import static
 name|javax
@@ -1037,26 +1017,6 @@ name|stanbol
 operator|.
 name|ontologymanager
 operator|.
-name|ontonet
-operator|.
-name|api
-operator|.
-name|scope
-operator|.
-name|OntologyScope
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
 name|registry
 operator|.
 name|api
@@ -1512,18 +1472,6 @@ operator|.
 name|LoggerFactory
 import|;
 end_import
-
-begin_comment
-comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
-end_comment
-
-begin_comment
-comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
-end_comment
-
-begin_comment
-comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
-end_comment
 
 begin_comment
 comment|/**  * The REST resource of an OntoNet {@link OntologyScope} whose identifier is known.  *   * @author alexdma  *   */

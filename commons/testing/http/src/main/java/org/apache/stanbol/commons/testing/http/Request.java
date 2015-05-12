@@ -79,7 +79,7 @@ name|client
 operator|.
 name|methods
 operator|.
-name|HttpUriRequest
+name|HttpRequestBase
 import|;
 end_import
 
@@ -108,17 +108,12 @@ name|Request
 block|{
 specifier|private
 specifier|final
-name|HttpUriRequest
+name|HttpRequestBase
 name|request
 decl_stmt|;
-specifier|private
-name|String
-name|username
-decl_stmt|;
-specifier|private
-name|String
-name|password
-decl_stmt|;
+comment|//configure on unit test level
+comment|//    private String username;
+comment|//    private String password;
 specifier|private
 name|boolean
 name|redirects
@@ -127,7 +122,7 @@ literal|true
 decl_stmt|;
 name|Request
 parameter_list|(
-name|HttpUriRequest
+name|HttpRequestBase
 name|r
 parameter_list|)
 block|{
@@ -137,7 +132,7 @@ name|r
 expr_stmt|;
 block|}
 specifier|public
-name|HttpUriRequest
+name|HttpRequestBase
 name|getRequest
 parameter_list|()
 block|{
@@ -164,33 +159,6 @@ name|name
 argument_list|,
 name|value
 argument_list|)
-expr_stmt|;
-return|return
-name|this
-return|;
-block|}
-specifier|public
-name|Request
-name|withCredentials
-parameter_list|(
-name|String
-name|username
-parameter_list|,
-name|String
-name|password
-parameter_list|)
-block|{
-name|this
-operator|.
-name|username
-operator|=
-name|username
-expr_stmt|;
-name|this
-operator|.
-name|password
-operator|=
-name|password
 expr_stmt|;
 return|return
 name|this
@@ -498,24 +466,12 @@ return|return
 name|this
 return|;
 block|}
-specifier|public
-name|String
-name|getUsername
-parameter_list|()
-block|{
-return|return
-name|username
-return|;
-block|}
-specifier|public
-name|String
-name|getPassword
-parameter_list|()
-block|{
-return|return
-name|password
-return|;
-block|}
+comment|//    public String getUsername() {
+comment|//        return username;
+comment|//    }
+comment|//    public String getPassword() {
+comment|//        return password;
+comment|//    }
 specifier|public
 name|boolean
 name|getRedirects

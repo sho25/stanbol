@@ -19,26 +19,6 @@ name|resources
 package|;
 end_package
 
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.DELETE;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.GET;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.OPTIONS;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.POST;
-end_comment
-
-begin_comment
-comment|//import static javax.ws.rs.HttpMethod.PUT;
-end_comment
-
 begin_import
 import|import static
 name|javax
@@ -443,26 +423,6 @@ name|java
 operator|.
 name|io
 operator|.
-name|File
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|FileInputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 import|;
 end_import
@@ -544,16 +504,6 @@ operator|.
 name|util
 operator|.
 name|TreeSet
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|servlet
-operator|.
-name|ServletContext
 import|;
 end_import
 
@@ -786,20 +736,6 @@ operator|.
 name|Response
 operator|.
 name|Status
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|core
-operator|.
-name|UriInfo
 import|;
 end_import
 
@@ -1458,34 +1394,6 @@ operator|.
 name|LoggerFactory
 import|;
 end_import
-
-begin_comment
-comment|//
-end_comment
-
-begin_comment
-comment|//import com.sun.jersey.multipart.BodyPart;
-end_comment
-
-begin_comment
-comment|//import com.sun.jersey.multipart.FormDataBodyPart;
-end_comment
-
-begin_comment
-comment|//import com.sun.jersey.multipart.FormDataMultiPart;
-end_comment
-
-begin_comment
-comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.addCORSOrigin;
-end_comment
-
-begin_comment
-comment|//import static org.apache.stanbol.commons.web.base.CorsHelper.enableCORS;
-end_comment
-
-begin_comment
-comment|//import org.apache.stanbol.commons.web.base.ContextHelper;
-end_comment
 
 begin_comment
 comment|/**  * The REST resource of an OntoNet {@link Session} whose identifier is known.  *   * @author alexdma  *   */

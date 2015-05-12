@@ -202,10 +202,6 @@ operator|=
 name|ConfigurationPolicy
 operator|.
 name|OPTIONAL
-argument_list|,
-name|metatype
-operator|=
-literal|true
 argument_list|)
 annotation|@
 name|Service

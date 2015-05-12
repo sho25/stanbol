@@ -170,10 +170,6 @@ argument_list|(
 name|immediate
 operator|=
 literal|true
-argument_list|,
-name|metatype
-operator|=
-literal|true
 argument_list|)
 annotation|@
 name|Service
@@ -221,7 +217,13 @@ name|super
 argument_list|(
 name|Collections
 operator|.
-name|EMPTY_MAP
+expr|<
+name|String
+argument_list|,
+name|String
+operator|>
+name|emptyMap
+argument_list|()
 argument_list|)
 expr_stmt|;
 for|for

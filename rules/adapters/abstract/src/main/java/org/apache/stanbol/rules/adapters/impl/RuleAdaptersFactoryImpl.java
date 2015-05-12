@@ -288,10 +288,6 @@ argument_list|(
 name|immediate
 operator|=
 literal|true
-argument_list|,
-name|metatype
-operator|=
-literal|true
 argument_list|)
 annotation|@
 name|Service
