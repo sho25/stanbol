@@ -1419,6 +1419,18 @@ argument_list|)
 expr_stmt|;
 end_expr_stmt
 
+begin_expr_stmt
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" - register DataFileTracker for {}"
+argument_list|,
+name|nameFinderModelNames
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
 begin_for
 for|for
 control|(
@@ -1540,6 +1552,15 @@ name|model
 decl_stmt|;
 try|try
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" - NER model {} is now available ..."
+argument_list|,
+name|resourceName
+argument_list|)
+expr_stmt|;
 name|model
 operator|=
 name|openNLP
@@ -1571,7 +1592,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"register custom NameFinderModel from resource: {} for language: {} to {} (name:{})"
+literal|" - registered custom NameFinderModel from resource: {} for language: {} to {} (name:{})"
 argument_list|,
 operator|new
 name|Object
@@ -1661,7 +1682,9 @@ name|warn
 argument_list|(
 literal|"Error while loading custom TokenNameFinderModel model from resource "
 operator|+
-literal|" resourceName. This model will NOT be available for the "
+name|resourceName
+operator|+
+literal|". This model will NOT be available for the "
 operator|+
 name|getClass
 argument_list|()
@@ -1692,7 +1715,9 @@ name|warn
 argument_list|(
 literal|"Error while loading custom TokenNameFinderModel model from resource "
 operator|+
-literal|" resourceName. This model will NOT be available for the "
+name|resourceName
+operator|+
+literal|". This model will NOT be available for the "
 operator|+
 name|getClass
 argument_list|()
