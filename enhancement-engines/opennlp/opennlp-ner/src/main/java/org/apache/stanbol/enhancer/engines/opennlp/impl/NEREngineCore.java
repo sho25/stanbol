@@ -1928,6 +1928,15 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|occurrence
+operator|.
+name|confidence
+operator|!=
+literal|null
+condition|)
+block|{
 name|g
 operator|.
 name|add
@@ -1950,6 +1959,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|occurrence
@@ -3709,11 +3719,43 @@ name|getEnd
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|//NOTE: With OpenNLP 1.6 the probability is now stored in the span
+name|double
+name|prob
+init|=
+name|nameSpans
+index|[
+name|j
+index|]
+operator|.
+name|getProb
+argument_list|()
+decl_stmt|;
+comment|//prob == 0.0 := unspecified
 name|Double
 name|confidence
 init|=
-literal|1.0
+name|prob
+operator|!=
+literal|0.0
+condition|?
+name|Double
+operator|.
+name|valueOf
+argument_list|(
+name|prob
+argument_list|)
+else|:
+literal|null
 decl_stmt|;
+if|if
+condition|(
+name|confidence
+operator|==
+literal|null
+condition|)
+block|{
+comment|//fall back to the old if it is not set.
 for|for
 control|(
 name|int
@@ -3741,12 +3783,39 @@ name|k
 operator|++
 control|)
 block|{
-name|confidence
+name|prob
 operator|*=
 name|probs
 index|[
 name|k
 index|]
+expr_stmt|;
+block|}
+name|confidence
+operator|=
+name|Double
+operator|.
+name|valueOf
+argument_list|(
+name|prob
+argument_list|)
+expr_stmt|;
+block|}
+elseif|else
+if|if
+condition|(
+name|confidence
+operator|<
+literal|0.5d
+condition|)
+block|{
+comment|//It looks like as if preceptron based models do return
+comment|//invalid probabilities. As it is expected the Named Entities
+comment|//with a probability< 50% are not even returned by finder.find(..)
+comment|//we will just ignore confidence values< 0.5 here
+name|confidence
+operator|=
+literal|null
 expr_stmt|;
 block|}
 name|int
