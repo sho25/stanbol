@@ -374,8 +374,20 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+if|if
+condition|(
+name|corpus
+operator|.
+name|getPhrases
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+comment|//the FST is not empty
 try|try
 block|{
+comment|//NOTE saving an empty corpus results in a NPE
 name|corpus
 operator|.
 name|save
@@ -412,6 +424,19 @@ operator|+
 literal|"!"
 argument_list|,
 name|e
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"FST for {} is empty ... no FST will be stored"
+argument_list|,
+name|corpusInfo
 argument_list|)
 expr_stmt|;
 block|}
