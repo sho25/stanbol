@@ -337,6 +337,9 @@ decl_stmt|;
 specifier|public
 name|FinishedEntityDaemon
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|BlockingQueue
 argument_list|<
 name|QueueItem
@@ -358,7 +361,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"Indexing: Finished Entity Logger Deamon"
+name|name
 argument_list|,
 name|IndexerConstants
 operator|.

@@ -941,9 +941,17 @@ specifier|private
 name|OutputStream
 name|indexedEntityIdOutputStream
 decl_stmt|;
+comment|/**      * The name of the index this indexer creates (used for logging)      */
+specifier|private
+name|String
+name|name
+decl_stmt|;
 specifier|public
 name|IndexerImpl
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|EntityIterator
 name|entityIterator
 parameter_list|,
@@ -974,6 +982,8 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
+name|name
+argument_list|,
 name|normaliser
 argument_list|,
 name|indexingDestination
@@ -1036,6 +1046,9 @@ block|}
 specifier|public
 name|IndexerImpl
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|EntityDataIterable
 name|dataIterable
 parameter_list|,
@@ -1066,6 +1079,8 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
+name|name
+argument_list|,
 name|normaliser
 argument_list|,
 name|indexingDestination
@@ -1134,6 +1149,9 @@ block|}
 specifier|protected
 name|IndexerImpl
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|ScoreNormaliser
 name|normaliser
 parameter_list|,
@@ -1156,6 +1174,12 @@ argument_list|>
 name|entityPostProcessors
 parameter_list|)
 block|{
+name|this
+operator|.
+name|name
+operator|=
+name|name
+expr_stmt|;
 if|if
 condition|(
 name|indexingDestination
@@ -1590,7 +1614,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Initialisation started ..."
+literal|"{}: initialisation started ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 block|}
@@ -1844,7 +1870,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Initialisation completed"
+literal|"initialisation completed for {}"
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|setState
@@ -1929,7 +1957,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"start initialisation ..."
+literal|"{}: start initialisation ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|initialiseIndexing
@@ -1939,7 +1969,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"  ... initialisation completed"
+literal|"  ... initialisation completed for {}"
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 comment|//if now the state is an unsupported one it indicates that
@@ -1981,7 +2013,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"start indexing ..."
+literal|"{}: start indexing ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|indexEntities
@@ -1991,14 +2025,18 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"  ... indexing completed"
+literal|"  ... indexing completed for {}"
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|log
 operator|.
 name|info
 argument_list|(
-literal|"start post-processing ..."
+literal|"{}: start post-processing ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|postProcessEntities
@@ -2008,14 +2046,18 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"  ... post-processing finished ..."
+literal|"  ... post-processing finished for {}"
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|log
 operator|.
 name|info
 argument_list|(
-literal|"start finalisation...."
+literal|"{}: start finalisation...."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 name|finaliseIndexing
@@ -2025,7 +2067,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"  ...finalisation completed"
+literal|"  ... finalisation completed for {}"
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 block|}
@@ -2203,7 +2247,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"PostProcessing started ..."
+literal|"{}: PostProcessing started ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 block|}
@@ -2488,7 +2534,9 @@ comment|//(1) the daemon reading from the IndexingSources
 name|String
 name|entitySourceReaderName
 init|=
-literal|"Post-processing: Entity Reader Deamon"
+name|name
+operator|+
+literal|": post-processing: Entity Reader Deamon"
 decl_stmt|;
 name|activeIndexingDeamons
 operator|.
@@ -2523,7 +2571,9 @@ argument_list|(
 operator|new
 name|EntityProcessorRunnable
 argument_list|(
-literal|"Post-processing: Entity Processor Deamon"
+name|name
+operator|+
+literal|": post-processing: Entity Processor Deamon"
 argument_list|,
 name|indexedEntityQueue
 argument_list|,
@@ -2555,7 +2605,9 @@ argument_list|(
 operator|new
 name|EntityPersisterRunnable
 argument_list|(
-literal|"Indexing: Entity Perstisting Deamon"
+name|name
+operator|+
+literal|": Entity Perstisting Deamon"
 argument_list|,
 name|processedEntityQueue
 argument_list|,
@@ -2582,6 +2634,10 @@ argument_list|(
 operator|new
 name|FinishedEntityDaemon
 argument_list|(
+name|name
+operator|+
+literal|": Finished Entity Logger Deamon"
+argument_list|,
 name|finishedEntityQueue
 argument_list|,
 operator|-
@@ -2602,6 +2658,10 @@ argument_list|(
 operator|new
 name|EntityErrorLoggerDaemon
 argument_list|(
+name|name
+operator|+
+literal|": Entity Error Logging Daemon"
+argument_list|,
 name|errorEntityQueue
 argument_list|,
 name|log
@@ -2898,7 +2958,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"finalisation started ..."
+literal|"{}: finalisation started ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 block|}
@@ -3142,7 +3204,9 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Indexing started ..."
+literal|"{}: indexing started ..."
+argument_list|,
+name|name
 argument_list|)
 expr_stmt|;
 block|}
@@ -3277,7 +3341,9 @@ comment|//(1) the daemon reading from the IndexingSources
 name|String
 name|entitySourceReaderName
 init|=
-literal|"Indexing: Entity Source Reader Deamon"
+name|name
+operator|+
+literal|": Entity Source Reader Deamon"
 decl_stmt|;
 if|if
 condition|(
@@ -3344,7 +3410,9 @@ argument_list|(
 operator|new
 name|EntityProcessorRunnable
 argument_list|(
-literal|"Indexing: Entity Processor Deamon"
+name|name
+operator|+
+literal|": Entity Processor Deamon"
 argument_list|,
 name|indexedEntityQueue
 argument_list|,
@@ -3373,7 +3441,9 @@ argument_list|(
 operator|new
 name|EntityPersisterRunnable
 argument_list|(
-literal|"Indexing: Entity Perstisting Deamon"
+name|name
+operator|+
+literal|": Entity Perstisting Deamon"
 argument_list|,
 name|processedEntityQueue
 argument_list|,
@@ -3400,6 +3470,10 @@ argument_list|(
 operator|new
 name|FinishedEntityDaemon
 argument_list|(
+name|name
+operator|+
+literal|": Finished Entity Logger Deamon"
+argument_list|,
 name|finishedEntityQueue
 argument_list|,
 operator|-
@@ -3419,6 +3493,10 @@ argument_list|(
 operator|new
 name|EntityErrorLoggerDaemon
 argument_list|(
+name|name
+operator|+
+literal|": Entity Error Logging Daemon"
+argument_list|,
 name|errorEntityQueue
 argument_list|,
 name|log

@@ -314,6 +314,14 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//get the mode based on the configured IndexingComponents
+name|String
+name|name
+init|=
+name|config
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
 name|EntityDataIterable
 name|dataIterable
 init|=
@@ -559,6 +567,8 @@ operator|=
 operator|new
 name|IndexerImpl
 argument_list|(
+name|name
+argument_list|,
 name|dataIterable
 argument_list|,
 name|scoreProvider
@@ -599,6 +609,8 @@ operator|=
 operator|new
 name|IndexerImpl
 argument_list|(
+name|name
+argument_list|,
 name|idIterator
 argument_list|,
 name|dataProvider
@@ -660,6 +672,11 @@ operator|=
 operator|new
 name|IndexerImpl
 argument_list|(
+name|config
+operator|.
+name|getName
+argument_list|()
+argument_list|,
 name|dataIterable
 argument_list|,
 operator|new
@@ -729,6 +746,9 @@ specifier|public
 name|Indexer
 name|create
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|EntityIterator
 name|idIterator
 parameter_list|,
@@ -752,6 +772,8 @@ return|return
 operator|new
 name|IndexerImpl
 argument_list|(
+name|name
+argument_list|,
 name|idIterator
 argument_list|,
 name|dataProvider
@@ -772,6 +794,9 @@ specifier|public
 name|Indexer
 name|create
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|EntityIterator
 name|idIterator
 parameter_list|,
@@ -810,7 +835,7 @@ name|createTempFile
 argument_list|(
 literal|"ind-ent-ids"
 argument_list|,
-literal|"zip"
+literal|".zip"
 argument_list|)
 expr_stmt|;
 name|tmp
@@ -841,6 +866,8 @@ return|return
 operator|new
 name|IndexerImpl
 argument_list|(
+name|name
+argument_list|,
 name|idIterator
 argument_list|,
 name|dataProvider
@@ -861,6 +888,9 @@ specifier|public
 name|Indexer
 name|create
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|EntityDataIterable
 name|dataIterable
 parameter_list|,
@@ -884,6 +914,8 @@ return|return
 operator|new
 name|IndexerImpl
 argument_list|(
+name|name
+argument_list|,
 name|dataIterable
 argument_list|,
 name|scoreProvider
@@ -904,6 +936,9 @@ specifier|public
 name|Indexer
 name|create
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|EntityDataIterable
 name|dataIterable
 parameter_list|,
@@ -942,7 +977,7 @@ name|createTempFile
 argument_list|(
 literal|"ind-ent-ids"
 argument_list|,
-literal|"zip"
+literal|".zip"
 argument_list|)
 expr_stmt|;
 name|tmp
@@ -973,6 +1008,8 @@ return|return
 operator|new
 name|IndexerImpl
 argument_list|(
+name|name
+argument_list|,
 name|dataIterable
 argument_list|,
 name|scoreProvider

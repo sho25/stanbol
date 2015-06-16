@@ -63,6 +63,9 @@ decl_stmt|;
 specifier|public
 name|EntityErrorLoggerDaemon
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|BlockingQueue
 argument_list|<
 name|QueueItem
@@ -78,7 +81,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"Indexer: Entity Error Logging Daemon"
+name|name
 argument_list|,
 name|IndexerConstants
 operator|.
