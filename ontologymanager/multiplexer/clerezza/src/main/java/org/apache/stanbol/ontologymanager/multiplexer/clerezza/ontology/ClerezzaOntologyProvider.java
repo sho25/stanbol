@@ -519,6 +519,20 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|locks
+operator|.
+name|Lock
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -676,6 +690,24 @@ operator|.
 name|access
 operator|.
 name|EntityAlreadyExistsException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|access
+operator|.
+name|LockableMGraph
 import|;
 end_import
 
@@ -1204,6 +1236,24 @@ operator|.
 name|ontology
 operator|.
 name|OntologyHandleException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|ontologymanager
+operator|.
+name|servicesapi
+operator|.
+name|ontology
+operator|.
+name|OntologyLoadingException
 import|;
 end_import
 
@@ -2100,22 +2150,6 @@ argument_list|(
 literal|"Cannot build a UriRef resource on an anonymous public key!"
 argument_list|)
 throw|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Searching for a meta graph entry for public key:"
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" -- {}"
-argument_list|,
-name|publicKey
-argument_list|)
-expr_stmt|;
 name|UriRef
 name|match
 init|=
@@ -2353,15 +2387,6 @@ comment|// Found
 block|}
 block|}
 block|}
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Matching UriRef in graph : {}"
-argument_list|,
-name|match
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|match
@@ -2576,6 +2601,15 @@ name|graphName
 parameter_list|)
 block|{
 comment|// Logical mappings first.
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"GRAPH NAME {}"
+argument_list|,
+name|graphName
+argument_list|)
+expr_stmt|;
 name|Iterator
 argument_list|<
 name|Triple
@@ -3187,7 +3221,20 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|// I expect a concurrent modification exception here, but we can deal with it later.
+comment|// To avoid concurrent modification exceptions
+name|Collection
+argument_list|<
+name|Triple
+argument_list|>
+name|removeUs
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|Triple
+argument_list|>
+argument_list|()
+decl_stmt|;
 while|while
 condition|(
 name|it
@@ -3195,14 +3242,21 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
-name|graph
+name|removeUs
 operator|.
-name|remove
+name|add
 argument_list|(
 name|it
 operator|.
 name|next
 argument_list|()
+argument_list|)
+expr_stmt|;
+name|graph
+operator|.
+name|removeAll
+argument_list|(
+name|removeUs
 argument_list|)
 expr_stmt|;
 block|}
@@ -3261,6 +3315,14 @@ specifier|static
 specifier|final
 name|boolean
 name|_RESOLVE_IMPORTS_DEFAULT
+init|=
+literal|true
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|boolean
+name|_MISSING_IMPORTS_FAIL_DEFAULT
 init|=
 literal|true
 decl_stmt|;
@@ -3478,6 +3540,25 @@ name|boolean
 name|resolveImports
 init|=
 name|_RESOLVE_IMPORTS_DEFAULT
+decl_stmt|;
+annotation|@
+name|Property
+argument_list|(
+name|name
+operator|=
+name|OntologyProvider
+operator|.
+name|MISSING_IMPORTS_FAIL
+argument_list|,
+name|boolValue
+operator|=
+name|_MISSING_IMPORTS_FAIL_DEFAULT
+argument_list|)
+specifier|protected
+name|boolean
+name|failMissingImports
+init|=
+name|_MISSING_IMPORTS_FAIL_DEFAULT
 decl_stmt|;
 comment|/*      * Do not use SCR reference here: this might be different from the registered WeightedTcProvider services      * : when supplied, it overrides TcManager      */
 specifier|private
@@ -3815,6 +3896,37 @@ block|{
 name|resolveImports
 operator|=
 name|_RESOLVE_IMPORTS_DEFAULT
+expr_stmt|;
+comment|// Should be already assigned though
+block|}
+try|try
+block|{
+name|failMissingImports
+operator|=
+call|(
+name|Boolean
+call|)
+argument_list|(
+name|configuration
+operator|.
+name|get
+argument_list|(
+name|OntologyProvider
+operator|.
+name|MISSING_IMPORTS_FAIL
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|ex
+parameter_list|)
+block|{
+name|failMissingImports
+operator|=
+name|_MISSING_IMPORTS_FAIL_DEFAULT
 expr_stmt|;
 comment|// Should be already assigned though
 block|}
@@ -4231,6 +4343,8 @@ name|OWLOntologyID
 argument_list|>
 name|level1Imports
 parameter_list|)
+throws|throws
+name|OntologyHandleException
 block|{
 name|log
 operator|.
@@ -4311,6 +4425,13 @@ name|hasNext
 argument_list|()
 condition|)
 return|return;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Import list follows:"
+argument_list|)
+expr_stmt|;
 name|Iterator
 argument_list|<
 name|Triple
@@ -4356,6 +4477,15 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" * {}"
+argument_list|,
+name|obj
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|obj
@@ -4385,6 +4515,60 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"   ... with key {}"
+argument_list|,
+name|key
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|key
+operator|==
+literal|null
+condition|)
+block|{
+if|if
+condition|(
+name|failMissingImports
+condition|)
+throw|throw
+operator|new
+name|OntologyHandleException
+argument_list|(
+literal|"Failed to retrieve storage key for ontology "
+operator|+
+name|obj
+operator|+
+literal|". To prevent these exceptions from being thrown, please unset property "
+operator|+
+literal|"'org.apache.stanbol.ontologymanager.ontonet.failOnMissingImports'"
+argument_list|)
+throw|;
+else|else
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"null key for {}!"
+argument_list|,
+name|obj
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Will ignore since 'failOnMissingImports' is unset."
+argument_list|)
+expr_stmt|;
+continue|continue;
+block|}
+block|}
 comment|// TODO this will not be needed when getKey() and getPublicKey() return the proper public key.
 name|OWLOntologyID
 name|oid
@@ -4436,6 +4620,34 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Unexpected type for resource {}."
+argument_list|,
+name|obj
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|" ... Expected {}, found {}"
+argument_list|,
+name|UriRef
+operator|.
+name|class
+argument_list|,
+name|obj
+operator|.
+name|getClass
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 block|}
@@ -7532,6 +7744,18 @@ name|sup
 argument_list|)
 expr_stmt|;
 block|}
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Will try {} supported formats"
+argument_list|,
+name|formats
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|String
@@ -7623,10 +7847,25 @@ continue|continue;
 block|}
 catch|catch
 parameter_list|(
+name|OntologyLoadingException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|OntologyLoadingException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
 name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// From here we should only be expecting parser-specific exceptions.
 name|log
 operator|.
 name|debug
@@ -7647,9 +7886,27 @@ argument_list|(
 literal|"All parsers failed, giving up."
 argument_list|)
 expr_stmt|;
-return|return
-literal|null
-return|;
+name|log
+operator|.
+name|error
+argument_list|(
+literal|"Failing location was<{}>"
+argument_list|,
+name|location
+argument_list|)
+expr_stmt|;
+throw|throw
+operator|new
+name|OntologyLoadingException
+argument_list|(
+literal|"Failed to parse an ontology from location<"
+operator|+
+name|location
+operator|+
+literal|">"
+argument_list|)
+throw|;
+comment|// return null;
 block|}
 annotation|@
 name|Override
@@ -8612,6 +8869,7 @@ operator|+
 name|alias
 expr_stmt|;
 block|}
+comment|// Resolve imports.
 comment|// Do this AFTER registering the ontology, otherwise import cycles will cause infinite loops.
 if|if
 condition|(
@@ -8619,6 +8877,60 @@ name|resolveImports
 condition|)
 block|{
 comment|// Scan resources of type owl:Ontology, but only get the first.
+name|NonLiteral
+name|ontologySubject
+init|=
+literal|null
+decl_stmt|;
+name|List
+argument_list|<
+name|UriRef
+argument_list|>
+name|importTargets
+init|=
+operator|new
+name|LinkedList
+argument_list|<
+name|UriRef
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|Lock
+name|l
+init|=
+literal|null
+decl_stmt|;
+comment|// There could be locking iterators...
+if|if
+condition|(
+name|targetGraph
+operator|instanceof
+name|LockableMGraph
+condition|)
+block|{
+name|l
+operator|=
+operator|(
+operator|(
+name|LockableMGraph
+operator|)
+name|targetGraph
+operator|)
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|readLock
+argument_list|()
+expr_stmt|;
+name|l
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+block|}
+try|try
+block|{
 name|Iterator
 argument_list|<
 name|Triple
@@ -8647,18 +8959,8 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
-block|{
-comment|// Scan import statements for the one owl:Ontology considered.
-name|Iterator
-argument_list|<
-name|Triple
-argument_list|>
-name|it2
-init|=
-name|targetGraph
-operator|.
-name|filter
-argument_list|(
+name|ontologySubject
+operator|=
 name|it
 operator|.
 name|next
@@ -8666,6 +8968,22 @@ argument_list|()
 operator|.
 name|getSubject
 argument_list|()
+expr_stmt|;
+if|if
+condition|(
+name|ontologySubject
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// Scan import statements for the one owl:Ontology considered.
+name|it
+operator|=
+name|targetGraph
+operator|.
+name|filter
+argument_list|(
+name|ontologySubject
 argument_list|,
 name|OWL
 operator|.
@@ -8673,10 +8991,10 @@ name|imports
 argument_list|,
 literal|null
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 while|while
 condition|(
-name|it2
+name|it
 operator|.
 name|hasNext
 argument_list|()
@@ -8685,7 +9003,7 @@ block|{
 name|Resource
 name|obj
 init|=
-name|it2
+name|it
 operator|.
 name|next
 argument_list|()
@@ -8693,32 +9011,57 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Resolving import target {}"
-argument_list|,
-name|obj
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|obj
 operator|instanceof
 name|UriRef
 condition|)
-try|try
-block|{
-comment|// TODO try locals first
-name|UriRef
-name|target
-init|=
+name|importTargets
+operator|.
+name|add
+argument_list|(
 operator|(
 name|UriRef
 operator|)
 name|obj
-decl_stmt|;
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+finally|finally
+block|{
+if|if
+condition|(
+name|l
+operator|!=
+literal|null
+condition|)
+name|l
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+block|}
+for|for
+control|(
+name|UriRef
+name|importTgt
+range|:
+name|importTargets
+control|)
+try|try
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"Resolving import target {}"
+argument_list|,
+name|importTgt
+argument_list|)
+expr_stmt|;
 name|OWLOntologyID
 name|id
 init|=
@@ -8729,7 +9072,7 @@ name|IRI
 operator|.
 name|create
 argument_list|(
-name|target
+name|importTgt
 operator|.
 name|getUnicodeString
 argument_list|()
@@ -8760,31 +9103,33 @@ name|RuntimeException
 argument_list|(
 literal|"Cannot load imported ontology "
 operator|+
-name|obj
+name|importTgt
 operator|+
 literal|" while Stanbol is in offline mode."
 argument_list|)
 throw|;
 comment|// TODO manage origins for imported ontologies too?
+try|try
+block|{
+name|IRI
+name|irimp
+init|=
+name|IRI
+operator|.
+name|create
+argument_list|(
+name|importTgt
+operator|.
+name|getUnicodeString
+argument_list|()
+argument_list|)
+decl_stmt|;
 name|OWLOntologyID
 name|id2
 init|=
 name|loadInStore
 argument_list|(
-name|IRI
-operator|.
-name|create
-argument_list|(
-operator|(
-operator|(
-name|UriRef
-operator|)
-name|obj
-operator|)
-operator|.
-name|getUnicodeString
-argument_list|()
-argument_list|)
+name|irimp
 argument_list|,
 literal|null
 argument_list|,
@@ -8805,18 +9150,39 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Import {} resolved."
-argument_list|,
-name|obj
+literal|"<== SUCCESS"
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OntologyLoadingException
+name|e
+parameter_list|)
+block|{
 name|log
 operator|.
-name|debug
+name|warn
 argument_list|(
-literal|""
+literal|"<== FAIL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|failMissingImports
+condition|)
+throw|throw
+name|e
+throw|;
+else|else
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Import from IRI<{}> failed, but will not abort due to permissive failed import handling set for this ontology provider."
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -8850,7 +9216,7 @@ name|warn
 argument_list|(
 literal|"Failed to parse format for resource "
 operator|+
-name|obj
+name|importTgt
 argument_list|,
 name|e
 argument_list|)
@@ -8869,14 +9235,12 @@ name|warn
 argument_list|(
 literal|"Failed to load ontology from resource "
 operator|+
-name|obj
+name|importTgt
 argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
 comment|// / XXX configure to continue?
-block|}
-block|}
 block|}
 block|}
 name|log
@@ -9457,6 +9821,8 @@ name|OWLOntologyID
 argument_list|>
 argument_list|()
 decl_stmt|;
+try|try
+block|{
 name|fillImportsReverse
 argument_list|(
 name|keymap
@@ -9471,6 +9837,21 @@ argument_list|,
 name|lvl1
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|OntologyHandleException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|OWLOntologyCreationException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
 comment|// If not set to merge (either by policy of by force), adopt the set import policy.
 if|if
 condition|(

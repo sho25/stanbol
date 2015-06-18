@@ -670,31 +670,7 @@ argument_list|(
 name|f
 argument_list|)
 expr_stmt|;
-comment|// The non-preferred supported formats on the tail in any order
-for|for
-control|(
-name|String
-name|f
-range|:
-name|supported
-control|)
-if|if
-condition|(
-operator|!
-name|result
-operator|.
-name|contains
-argument_list|(
-name|f
-argument_list|)
-condition|)
-name|result
-operator|.
-name|add
-argument_list|(
-name|f
-argument_list|)
-expr_stmt|;
+comment|/*         // The non-preferred supported formats on the tail in any order         for (String f : supported)             if (!result.contains(f)) result.add(f);         */
 return|return
 name|result
 return|;

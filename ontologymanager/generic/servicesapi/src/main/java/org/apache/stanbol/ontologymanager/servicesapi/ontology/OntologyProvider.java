@@ -286,6 +286,13 @@ name|RESOLVE_IMPORTS
 init|=
 literal|"org.apache.stanbol.ontologymanager.ontonet.resolveImports"
 decl_stmt|;
+comment|/**      * The key used to configure the default import failure policy for this provider.      */
+specifier|public
+name|String
+name|MISSING_IMPORTS_FAIL
+init|=
+literal|"org.apache.stanbol.ontologymanager.ontonet.failOnMissingImports"
+decl_stmt|;
 name|boolean
 name|addAlias
 parameter_list|(
