@@ -7870,9 +7870,35 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"FAILURE format {} (parse error). Will try next one."
+literal|"FAILURE format {} (most likely a parse error). Will try next one."
 argument_list|,
 name|currentFormat
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Logged exception was a {} : {}"
+argument_list|,
+name|e
+operator|.
+name|getClass
+argument_list|()
+argument_list|,
+name|e
+operator|.
+name|getLocalizedMessage
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|trace
+argument_list|(
+literal|"Stack trace follows:"
+argument_list|,
+name|e
 argument_list|)
 expr_stmt|;
 continue|continue;
