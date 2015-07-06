@@ -503,6 +503,19 @@ argument_list|>
 name|config
 parameter_list|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"> configure {}"
+argument_list|,
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|IndexingConfig
 name|indexingConfig
 init|=
@@ -559,15 +572,6 @@ argument_list|(
 name|DEFAULT_FIELD
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"Using default Field {}"
-argument_list|,
-name|field
-argument_list|)
-expr_stmt|;
 block|}
 else|else
 block|{
@@ -583,16 +587,16 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 name|log
 operator|.
 name|info
 argument_list|(
-literal|"configured Field: {}"
+literal|" - field: {}"
 argument_list|,
 name|field
 argument_list|)
 expr_stmt|;
-block|}
 name|value
 operator|=
 name|config
@@ -600,6 +604,13 @@ operator|.
 name|get
 argument_list|(
 name|PARAM_VALUES
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|" - filters:"
 argument_list|)
 expr_stmt|;
 name|parseFilterConfig
@@ -844,6 +855,13 @@ literal|"*"
 argument_list|)
 condition|)
 block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"    - includeAll"
+argument_list|)
+expr_stmt|;
 name|includeAll
 operator|=
 literal|true
@@ -978,7 +996,59 @@ argument_list|(
 name|uri
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"    - {} {}"
+argument_list|,
+name|exclude
+condition|?
+literal|"exclude"
+else|:
+literal|"include"
+argument_list|,
+name|uri
+operator|.
+name|isEmpty
+argument_list|()
+condition|?
+literal|"<empty>"
+else|:
+name|uri
+argument_list|)
+expr_stmt|;
 block|}
+block|}
+comment|//if only excludes are configured add the include all
+if|if
+condition|(
+operator|!
+name|includeAll
+operator|&&
+operator|!
+name|exclude
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|included
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"    - includeAll (because only exclusions are configured"
+argument_list|)
+expr_stmt|;
+name|includeAll
+operator|=
+literal|true
+expr_stmt|;
 block|}
 block|}
 comment|/**      * @param entry      * @return      */
