@@ -907,11 +907,13 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"\"@id\": \"http://dbpedia.org/resource/Paris\","
+literal|"\"@id\" : \"http://dbpedia.org/resource/Paris\","
 block|,
-literal|"\"@id\": \"http://dbpedia.org/resource/Bob_Marley\","
+literal|"\"@id\" : \"http://dbpedia.org/resource/Bob_Marley\","
 block|,
-literal|"\"dc:creator\": \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\","
+literal|"\"http://purl.org/dc/terms/creator\" : [ {"
+block|,
+literal|"\"@value\" : \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\""
 block|}
 decl_stmt|;
 name|String
@@ -971,7 +973,7 @@ literal|200
 argument_list|)
 comment|//metadata as JSONLD
 operator|.
-name|assertContentRegexp
+name|assertContentContains
 argument_list|(
 name|jsonLDMetadataTests
 argument_list|)
@@ -1032,7 +1034,7 @@ literal|200
 argument_list|)
 comment|//metadata as JSONLD
 operator|.
-name|assertContentRegexp
+name|assertContentContains
 argument_list|(
 name|jsonLDMetadataTests
 argument_list|)
@@ -1093,7 +1095,7 @@ literal|200
 argument_list|)
 comment|//metadata as JSONLD
 operator|.
-name|assertContentRegexp
+name|assertContentContains
 argument_list|(
 name|jsonLDMetadataTests
 argument_list|)

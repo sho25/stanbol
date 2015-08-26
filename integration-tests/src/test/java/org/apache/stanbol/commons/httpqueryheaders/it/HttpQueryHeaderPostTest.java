@@ -343,13 +343,17 @@ argument_list|(
 literal|"application/ld+json"
 argument_list|)
 operator|.
-name|assertContentRegexp
+name|assertContentContains
 argument_list|(
-literal|"entity-reference\": \"http://dbpedia.org/resource/London\""
+literal|"\"http://fise.iks-project.eu/ontology/entity-reference\" : [ {"
 argument_list|,
-literal|"creator\": \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
+literal|"\"@id\" : \"http://dbpedia.org/resource/London\""
 argument_list|,
-literal|"creator\": \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\""
+literal|"\"http://purl.org/dc/terms/creator\" : [ {"
+argument_list|,
+literal|"\"@value\" : \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
+argument_list|,
+literal|"\"@value\" : \"org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine\""
 argument_list|)
 expr_stmt|;
 block|}

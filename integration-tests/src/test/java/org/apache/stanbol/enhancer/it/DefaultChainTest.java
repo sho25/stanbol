@@ -142,12 +142,12 @@ operator|new
 name|String
 index|[]
 block|{
-literal|"application/json"
+literal|"application/ld+json"
 block|,
-literal|"application/json"
+literal|"application/ld+json"
 block|,
-comment|//now JSON LD uses application/json
-literal|"\"creator\": \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\","
+comment|//now JSON LD uses application/ld+json
+literal|"\"@value\" : \"org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine\""
 block|,
 literal|"application/rdf+xml"
 block|,

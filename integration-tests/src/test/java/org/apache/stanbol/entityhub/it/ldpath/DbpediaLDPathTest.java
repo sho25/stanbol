@@ -596,13 +596,13 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"\"@id\": \"http://dbpedia.org/resource/London\""
+literal|"\"@id\" : \"http://dbpedia.org/resource/London\""
 argument_list|,
-literal|"\"@value\": \"London\""
+literal|"\"@value\" : \"London\""
 argument_list|,
-literal|"\"@id\": \"http://dbpedia.org/resource/Paris\""
+literal|"\"@id\" : \"http://dbpedia.org/resource/Paris\""
 argument_list|,
-literal|"\"@value\": \"Paris\""
+literal|"\"@value\" : \"Paris\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -652,9 +652,9 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"{"
+literal|"["
 argument_list|,
-literal|"}"
+literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -723,25 +723,29 @@ argument_list|)
 operator|.
 name|assertContentContains
 argument_list|(
-literal|"\"@id\": \"http://dbpedia.org/resource/Paris\""
+literal|"\"@id\" : \"http://dbpedia.org/resource/Paris\""
 argument_list|,
-literal|"\"comment\": {"
+literal|"\"comment\" : [ {"
 argument_list|,
 literal|"Paris is the capital and largest city of France."
 argument_list|,
-literal|"\"homepage\": \"http://www.paris.fr/\""
+literal|"\"homepage\" : [ {"
 argument_list|,
-literal|"\"labels\": ["
+literal|"\"@id\" : \"http://www.paris.fr/\""
 argument_list|,
-literal|"\"@value\": \"Parigi\""
+literal|"\"labels\" : [ {"
 argument_list|,
-literal|"\"@value\": \"巴黎\""
+literal|"\"@value\" : \"Parigi\""
 argument_list|,
-literal|"\"location\": \"[48.8567,2.3508]\""
+literal|"\"@value\" : \"巴黎\""
 argument_list|,
-literal|"\"name\": {"
+literal|"\"location\" : [ {"
 argument_list|,
-literal|"\"@value\": \"Paris\""
+literal|"\"@value\" : \"[48.8567,2.3508]\""
+argument_list|,
+literal|"\"name\" : [ {"
+argument_list|,
+literal|"\"@value\" : \"Paris\""
 argument_list|)
 expr_stmt|;
 block|}
