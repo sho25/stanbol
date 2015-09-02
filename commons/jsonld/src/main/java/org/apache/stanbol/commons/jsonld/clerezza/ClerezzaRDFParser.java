@@ -696,7 +696,7 @@ return|return
 operator|new
 name|StringBuilder
 argument_list|(
-literal|"_:"
+literal|"_:b"
 argument_list|)
 operator|.
 name|append
