@@ -1682,11 +1682,6 @@ operator|+
 literal|".*.fst"
 argument_list|)
 decl_stmt|;
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unchecked"
-argument_list|)
 name|Iterator
 argument_list|<
 name|File

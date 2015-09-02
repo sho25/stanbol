@@ -2015,8 +2015,8 @@ comment|//does correctly call SolrCore#close() on each retrieved SolrCore this
 comment|//assumption will be true in most Situations.
 comment|//        if(!old.isClosed()){
 comment|//            log.warn("Old SolrCore was not Closed correctly - this indicates that some other" +
-comment|//            		"components calling CoreContainer#getSolrCore() has not colled SolrCore#close()" +
-comment|//            		"after using it.");
+comment|//                  "components calling CoreContainer#getSolrCore() has not colled SolrCore#close()" +
+comment|//                  "after using it.");
 comment|//            log.warn("To avoid memory leaks this will call SolrCore#close() until closed");
 comment|//            int i=0;
 comment|//            for(;!old.isClosed();i++){
@@ -2067,6 +2067,36 @@ argument_list|(
 name|name
 argument_list|)
 decl_stmt|;
+comment|//NOTE: we register the new before unregistering the old to allow
+comment|//      uninterrupted usage of this core by components.
+name|current
+operator|=
+operator|new
+name|CoreRegistration
+argument_list|(
+name|name
+argument_list|,
+name|core
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"   ... register {}"
+argument_list|,
+name|current
+argument_list|)
+expr_stmt|;
+name|registrations
+operator|.
+name|put
+argument_list|(
+name|name
+argument_list|,
+name|current
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|old
@@ -2101,35 +2131,7 @@ name|unregister
 argument_list|()
 expr_stmt|;
 block|}
-name|current
-operator|=
-operator|new
-name|CoreRegistration
-argument_list|(
-name|name
-argument_list|,
-name|core
-argument_list|)
-expr_stmt|;
-name|registrations
-operator|.
-name|put
-argument_list|(
-name|name
-argument_list|,
-name|current
-argument_list|)
-expr_stmt|;
 block|}
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"   ... register {}"
-argument_list|,
-name|current
-argument_list|)
-expr_stmt|;
 return|return
 name|current
 operator|.

@@ -3642,6 +3642,20 @@ name|reference
 argument_list|)
 expr_stmt|;
 comment|//try to get an other serviceReference from the tracker
+if|if
+condition|(
+name|reference
+operator|.
+name|equals
+argument_list|(
+name|FstLinkingEngineComponent
+operator|.
+name|this
+operator|.
+name|indexReference
+argument_list|)
+condition|)
+block|{
 name|updateEngineRegistration
 argument_list|(
 name|solrServerTracker
@@ -3652,6 +3666,17 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"  - removed SolrCore was not used for FST linking"
+argument_list|)
+expr_stmt|;
+block|}
 name|super
 operator|.
 name|removedService
@@ -3910,6 +3935,32 @@ name|this
 operator|.
 name|bundleContext
 decl_stmt|;
+comment|//We need to keep the old configuration vars for unregistering the
+comment|//current engine (see #unregisterEngine(..) method)
+name|ServiceRegistration
+argument_list|<
+name|?
+argument_list|>
+name|oldEngineRegistration
+init|=
+name|this
+operator|.
+name|engineRegistration
+decl_stmt|;
+name|SolrCore
+name|oldSolrCore
+init|=
+name|this
+operator|.
+name|solrCore
+decl_stmt|;
+name|IndexConfiguration
+name|oldIndexConfig
+init|=
+name|this
+operator|.
+name|indexConfig
+decl_stmt|;
 synchronized|synchronized
 init|(
 name|this
@@ -3937,34 +3988,6 @@ comment|//already deactivated
 return|return;
 comment|//NOTE: unregistering is done in finally block
 block|}
-if|if
-condition|(
-name|reference
-operator|!=
-literal|null
-condition|)
-block|{
-if|if
-condition|(
-name|reference
-operator|.
-name|equals
-argument_list|(
-name|this
-operator|.
-name|solrServerReference
-argument_list|)
-condition|)
-block|{
-comment|//use the current core
-name|core
-operator|=
-name|solrCore
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|//get the SolrCore from the EmbeddedSolrServer
 name|core
 operator|=
 name|getSolrCore
@@ -3972,16 +3995,6 @@ argument_list|(
 name|server
 argument_list|)
 expr_stmt|;
-block|}
-block|}
-else|else
-block|{
-comment|//SolrCore not available
-name|core
-operator|=
-literal|null
-expr_stmt|;
-block|}
 if|if
 condition|(
 name|core
@@ -4010,7 +4023,27 @@ expr_stmt|;
 return|return;
 comment|//NOTE: unregistering is done in finally block
 block|}
-comment|//else - we do have a SolrCore
+else|else
+block|{
+comment|//- we do have a SolrCore
+name|log
+operator|.
+name|info
+argument_list|(
+literal|"    - solrCore (name: {} | indexDir: {}"
+argument_list|,
+name|core
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|core
+operator|.
+name|getIndexDir
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 comment|//File fstDir = new File(dataDir,"fst");
 comment|//now collect the FST configuration
 name|indexConfig
@@ -4259,16 +4292,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-block|}
-finally|finally
-block|{
-comment|//in any case (even an Exception) ensure that the current
-comment|//engine registration is unregistered and the currently used
-comment|//SolrCore is unregistered!
-name|unregisterEngine
-argument_list|()
-expr_stmt|;
-block|}
 comment|//check if we need to create some FST files
 for|for
 control|(
@@ -4385,20 +4408,6 @@ name|defaultCoprous
 argument_list|)
 expr_stmt|;
 block|}
-comment|//check if the old configuration is still present
-if|if
-condition|(
-name|this
-operator|.
-name|engineRegistration
-operator|!=
-literal|null
-condition|)
-block|{
-name|unregisterEngine
-argument_list|()
-expr_stmt|;
-block|}
 comment|//create the new configuration
 comment|//set the newly configured instances to the fields
 name|this
@@ -4495,6 +4504,22 @@ argument_list|,
 name|engineMetadata
 argument_list|)
 expr_stmt|;
+block|}
+finally|finally
+block|{
+comment|//in any case (even an Exception) ensure that the current
+comment|//engine registration is unregistered and the currently used
+comment|//SolrCore is unregistered!
+name|unregisterEngine
+argument_list|(
+name|oldEngineRegistration
+argument_list|,
+name|oldIndexConfig
+argument_list|,
+name|oldSolrCore
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 end_function
@@ -4616,10 +4641,6 @@ name|IOException
 name|e
 parameter_list|)
 block|{
-name|unregisterEngine
-argument_list|()
-expr_stmt|;
-comment|//unregister current engine and clean up
 throw|throw
 operator|new
 name|IllegalStateException
@@ -4649,23 +4670,28 @@ begin_function
 specifier|private
 name|void
 name|unregisterEngine
-parameter_list|()
+parameter_list|(
+name|ServiceRegistration
+argument_list|<
+name|?
+argument_list|>
+name|engineRegistration
+parameter_list|,
+name|IndexConfiguration
+name|indexConfig
+parameter_list|,
+name|SolrCore
+name|solrCore
+parameter_list|)
 block|{
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"> in unregisterEngine() ..."
+literal|"> clean up (old) FSTLinkingEngine instance ..."
 argument_list|)
 expr_stmt|;
 comment|//use local copies for method calls to avoid concurrency issues
-name|ServiceRegistration
-name|engineRegistration
-init|=
-name|this
-operator|.
-name|engineRegistration
-decl_stmt|;
 if|if
 condition|(
 name|engineRegistration
@@ -4696,10 +4722,10 @@ name|IllegalStateException
 name|e
 parameter_list|)
 block|{
-comment|//this is unexpected but can be ignored
+comment|//already unregistered ... can be ignored
 name|log
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Unexpected State: Service for FSTLinkingEngine "
 operator|+
@@ -4725,24 +4751,13 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" ... no engine registration present"
+literal|" ... no (old) engine registration present"
 argument_list|)
 expr_stmt|;
 block|}
-name|solrServerReference
-operator|=
-literal|null
-expr_stmt|;
-name|SolrCore
-name|solrServer
-init|=
-name|this
-operator|.
-name|solrCore
-decl_stmt|;
 if|if
 condition|(
-name|solrServer
+name|solrCore
 operator|!=
 literal|null
 condition|)
@@ -4753,25 +4768,18 @@ name|debug
 argument_list|(
 literal|" ... unregister SolrCore {}"
 argument_list|,
-name|solrServer
+name|solrCore
 operator|.
 name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|solrServer
+name|solrCore
 operator|.
 name|close
 argument_list|()
 expr_stmt|;
 comment|//decrease the reference count!!
-name|this
-operator|.
-name|solrCore
-operator|=
-literal|null
-expr_stmt|;
-comment|//rest the field
 block|}
 else|else
 block|{
@@ -4779,7 +4787,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" ... no SolrCore present"
+literal|" ... no (old) SolrCore present"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4795,7 +4803,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" ... deactivate IndexingConfiguration"
+literal|" ... deactivate (old) IndexingConfiguration"
 argument_list|)
 expr_stmt|;
 name|indexConfig
@@ -4840,10 +4848,6 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-name|indexConfig
-operator|=
-literal|null
-expr_stmt|;
 block|}
 else|else
 block|{
@@ -4851,7 +4855,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" ... no index config present"
+literal|" ... no (old) index config present"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5204,9 +5208,39 @@ name|unregisterFailier
 condition|)
 block|{
 name|unregisterEngine
-argument_list|()
+argument_list|(
+name|this
+operator|.
+name|engineRegistration
+argument_list|,
+name|this
+operator|.
+name|indexConfig
+argument_list|,
+name|this
+operator|.
+name|solrCore
+argument_list|)
 expr_stmt|;
 block|}
+name|this
+operator|.
+name|engineRegistration
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|indexConfig
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|solrCore
+operator|=
+literal|null
+expr_stmt|;
 block|}
 end_function
 
