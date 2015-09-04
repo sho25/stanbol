@@ -3937,6 +3937,7 @@ name|bundleContext
 decl_stmt|;
 comment|//We need to keep the old configuration vars for unregistering the
 comment|//current engine (see #unregisterEngine(..) method)
+specifier|final
 name|ServiceRegistration
 argument_list|<
 name|?
@@ -3947,6 +3948,7 @@ name|this
 operator|.
 name|engineRegistration
 decl_stmt|;
+specifier|final
 name|SolrCore
 name|oldSolrCore
 init|=
@@ -3954,6 +3956,7 @@ name|this
 operator|.
 name|solrCore
 decl_stmt|;
+specifier|final
 name|IndexConfiguration
 name|oldIndexConfig
 init|=
@@ -3961,12 +3964,6 @@ name|this
 operator|.
 name|indexConfig
 decl_stmt|;
-synchronized|synchronized
-init|(
-name|this
-init|)
-block|{
-comment|//init one after the other in case of multiple calls
 name|SolrCore
 name|core
 decl_stmt|;
@@ -3974,6 +3971,12 @@ name|IndexConfiguration
 name|indexConfig
 decl_stmt|;
 comment|// the indexConfig build by this call
+synchronized|synchronized
+init|(
+name|this
+init|)
+block|{
+comment|//init one after the other in case of multiple calls
 try|try
 block|{
 comment|//try to init - finally unregisterEngine
@@ -4725,7 +4728,7 @@ block|{
 comment|//already unregistered ... can be ignored
 name|log
 operator|.
-name|debug
+name|warn
 argument_list|(
 literal|"Unexpected State: Service for FSTLinkingEngine "
 operator|+
@@ -4737,13 +4740,6 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-name|this
-operator|.
-name|engineRegistration
-operator|=
-literal|null
-expr_stmt|;
-comment|//reset the field
 block|}
 else|else
 block|{
