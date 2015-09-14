@@ -563,7 +563,7 @@ operator|+
 literal|"confidence-level"
 argument_list|)
 decl_stmt|;
-comment|/**      * The origin can be used to reference the vocabulary (dataset, thesaurus,       * ontology, ...) the Entity {@link #ENHANCER_ENTITY_REFERENCE referenced}      * by a<code>{@link TechnicalClasses#ENHANCER_ENTITYANNOTATION fise:EntiyAnnotation}</code>      * originates from.      * @since 0.12.1 (STANBOL-????)      */
+comment|/**      * The origin can be used to reference the vocabulary (dataset, thesaurus,       * ontology, ...) the Entity {@link #ENHANCER_ENTITY_REFERENCE referenced}      * by a<code>{@link TechnicalClasses#ENHANCER_ENTITYANNOTATION fise:EntiyAnnotation}</code>      * originates from.      * @since 0.12.1 (STANBOL-1391)      */
 specifier|public
 specifier|static
 specifier|final
