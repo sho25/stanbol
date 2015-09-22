@@ -771,20 +771,11 @@ operator|)
 name|id
 expr_stmt|;
 comment|//validate that the enhancements in the file are valid
-name|EnhancementStructureHelper
-operator|.
-name|validateAllTextAnnotations
-argument_list|(
-name|origEnhancements
-argument_list|,
-name|SINGLE_SENTENCE
-argument_list|,
-literal|null
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-comment|//those do not yet contain fise:selection-prefix/suffix values
+comment|//NOTE: the input data are no longer fully valid to test some features of this engine
+comment|//      because of that this initial test is deactivated
+comment|//        EnhancementStructureHelper.validateAllTextAnnotations(
+comment|//            origEnhancements, SINGLE_SENTENCE, null,
+comment|//            false); //those do not yet contain fise:selection-prefix/suffix values
 comment|//init the engine
 name|engine
 operator|=
