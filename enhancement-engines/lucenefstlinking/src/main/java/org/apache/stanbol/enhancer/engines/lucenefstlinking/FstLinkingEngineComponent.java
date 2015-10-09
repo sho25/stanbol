@@ -3652,7 +3652,7 @@ name|FstLinkingEngineComponent
 operator|.
 name|this
 operator|.
-name|indexReference
+name|solrServerReference
 argument_list|)
 condition|)
 block|{

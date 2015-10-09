@@ -1080,9 +1080,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Server Registration already unregistered "
-argument_list|,
-name|e
+literal|"Not updating Server Registration (already unregistered)"
 argument_list|)
 expr_stmt|;
 block|}
