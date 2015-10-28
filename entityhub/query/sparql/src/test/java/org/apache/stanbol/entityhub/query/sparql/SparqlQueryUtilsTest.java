@@ -336,9 +336,10 @@ argument_list|(
 literal|"'test' \"keyword\""
 argument_list|)
 expr_stmt|;
+comment|//NOTE: changed implementation to remove none word chars
 name|assertEquals
 argument_list|(
-literal|"(\"\\'test\\'\" AND \"\\\"keyword\\\"\")"
+literal|"(\"test\" AND \"keyword\")"
 argument_list|,
 name|SparqlQueryUtils
 operator|.

@@ -95,6 +95,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Date
 import|;
 end_import
@@ -276,6 +286,24 @@ operator|.
 name|query
 operator|.
 name|RangeConstraint
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|entityhub
+operator|.
+name|servicesapi
+operator|.
+name|query
+operator|.
+name|SimilarityConstraint
 import|;
 end_import
 
@@ -1773,6 +1801,11 @@ name|intend
 block|}
 argument_list|)
 expr_stmt|;
+name|boolean
+name|added
+init|=
+literal|true
+decl_stmt|;
 switch|switch
 condition|(
 name|constraint
@@ -1883,8 +1916,10 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Please update this Implementation to support the Constraint Type "
+literal|"Constraint Type '{}' not supported in SPARQL! Constriant {} "
 operator|+
+literal|"will be not included in the query!"
+argument_list|,
 name|fieldConstraint
 operator|.
 name|getValue
@@ -1892,10 +1927,24 @@ argument_list|()
 operator|.
 name|getType
 argument_list|()
+argument_list|,
+name|fieldConstraint
+operator|.
+name|getValue
+argument_list|()
 argument_list|)
+expr_stmt|;
+name|added
+operator|=
+literal|false
 expr_stmt|;
 break|break;
 block|}
+if|if
+condition|(
+name|added
+condition|)
+block|{
 name|queryString
 operator|.
 name|append
@@ -1903,6 +1952,7 @@ argument_list|(
 literal|" . \n"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|// for some endpoints we need to add an additional constraints used for
 comment|// ranking. If sub-queries are used this need to be in the select part
@@ -3662,7 +3712,7 @@ name|constraintText
 operator|.
 name|split
 argument_list|(
-literal|"\\s"
+literal|"\\W+"
 argument_list|)
 decl_stmt|;
 if|if
@@ -3795,13 +3845,15 @@ argument_list|(
 literal|'"'
 argument_list|)
 expr_stmt|;
-name|addGrammarEscapedValue
-argument_list|(
 name|textQuery
-argument_list|,
+operator|.
+name|append
+argument_list|(
 name|word
 argument_list|)
 expr_stmt|;
+comment|//escapes are no longer needed with the "\W" regex tokenizer
+comment|//addGrammarEscapedValue(textQuery, word);
 name|textQuery
 operator|.
 name|append
@@ -5126,15 +5178,17 @@ argument_list|,
 operator|new
 name|TextConstraint
 argument_list|(
-literal|"language text"
+literal|"\"quote"
 argument_list|,
 name|PatternType
 operator|.
-name|wildcard
+name|none
 argument_list|,
 literal|true
 argument_list|,
 literal|"en"
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5151,6 +5205,28 @@ comment|// query.setConstraint("urn:field10", new RangeConstraint((int)5, (int)1
 comment|// query.setConstraint("urn:field11", new RangeConstraint(null, (int)10, true));
 comment|// query.setConstraint("urn:field12", new RangeConstraint((int)5, null, true));
 comment|//query.setConstraint("urn:field12", new RangeConstraint(new Date(), null, true));
+name|query
+operator|.
+name|setConstraint
+argument_list|(
+literal|"urn:similarity"
+argument_list|,
+operator|new
+name|SimilarityConstraint
+argument_list|(
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+literal|"This is a test"
+argument_list|)
+argument_list|,
+name|DataTypeEnum
+operator|.
+name|Text
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// query.addSelectedField("urn:field2a");
 comment|// query.addSelectedField("urn:field3");
 name|query
