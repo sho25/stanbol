@@ -3980,6 +3980,26 @@ comment|//init one after the other in case of multiple calls
 try|try
 block|{
 comment|//try to init - finally unregisterEngine
+comment|//reset the old field values
+name|this
+operator|.
+name|engineRegistration
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|indexConfig
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|solrCore
+operator|=
+literal|null
+expr_stmt|;
+comment|//now we can update the engines configuration
 if|if
 condition|(
 name|bundleContext
@@ -4012,9 +4032,7 @@ name|info
 argument_list|(
 literal|"   - SolrCore {} present"
 argument_list|,
-name|this
-operator|.
-name|solrCore
+name|oldSolrCore
 operator|==
 literal|null
 condition|?
