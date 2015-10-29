@@ -1846,11 +1846,17 @@ name|fieldMapper
 operator|!=
 literal|null
 operator|||
+operator|(
+name|langs
+operator|!=
+literal|null
+operator|&&
 operator|!
 name|langs
 operator|.
 name|isEmpty
 argument_list|()
+operator|)
 condition|)
 block|{
 comment|//this considers speficied fields and included languages
