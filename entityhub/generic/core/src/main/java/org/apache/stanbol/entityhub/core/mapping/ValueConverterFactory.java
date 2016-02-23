@@ -1963,6 +1963,9 @@ else|else
 block|{
 try|try
 block|{
+comment|//For converting we only accept absolute URIs
+if|if
+condition|(
 operator|new
 name|URI
 argument_list|(
@@ -1971,8 +1974,12 @@ operator|.
 name|toString
 argument_list|()
 argument_list|)
-expr_stmt|;
-comment|//just for validating the string
+operator|.
+name|isAbsolute
+argument_list|()
+condition|)
+block|{
+empty_stmt|;
 return|return
 name|valueFactory
 operator|.
@@ -1981,6 +1988,13 @@ argument_list|(
 name|value
 argument_list|)
 return|;
+block|}
+else|else
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 catch|catch
 parameter_list|(
