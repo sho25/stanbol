@@ -271,6 +271,24 @@ name|engines
 operator|.
 name|dbpspotlight
 operator|.
+name|TestDefaults
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|stanbol
+operator|.
+name|enhancer
+operator|.
+name|engines
+operator|.
+name|dbpspotlight
+operator|.
 name|model
 operator|.
 name|SurfaceForm
@@ -455,6 +473,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Assume
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Before
 import|;
 end_import
@@ -507,6 +535,8 @@ begin_class
 specifier|public
 class|class
 name|DBPSpotlightSpotEnhancementTest
+implements|implements
+name|TestDefaults
 block|{
 comment|/** 	 * This contains the logger. 	 */
 specifier|private
@@ -540,7 +570,7 @@ argument_list|)
 operator|==
 literal|null
 condition|?
-literal|"http://spotlight.dbpedia.org/rest/spot"
+name|DEFAULT_SPL_URL
 else|:
 name|System
 operator|.
@@ -597,6 +627,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|Assume
+operator|.
+name|assumeNotNull
+argument_list|(
+name|SPL_URL
+argument_list|)
+expr_stmt|;
 comment|//and the enhancement engine instance
 name|dbpslight
 operator|=
@@ -607,6 +644,8 @@ operator|new
 name|URL
 argument_list|(
 name|SPL_URL
+operator|+
+literal|"/spot"
 argument_list|)
 argument_list|,
 literal|null
