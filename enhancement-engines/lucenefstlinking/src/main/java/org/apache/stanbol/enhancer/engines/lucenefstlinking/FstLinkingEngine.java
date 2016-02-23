@@ -225,16 +225,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Collection
 import|;
 end_import
@@ -1355,55 +1345,17 @@ name|CANNOT_ENHANCE
 return|;
 block|}
 comment|//(2) check if we have a FST model for the language
-if|if
-condition|(
-name|indexConfig
-operator|.
-name|getCorpus
-argument_list|(
-name|language
-argument_list|)
-operator|==
-literal|null
-operator|&&
-comment|//for the language
-name|indexConfig
-operator|.
-name|getDefaultCorpus
-argument_list|()
-operator|==
-literal|null
-condition|)
-block|{
-comment|//a default model
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Engine {} ignores ContentItem {} becuase no FST modles for language {} "
-operator|+
-literal|"are available"
-argument_list|,
-operator|new
-name|Object
-index|[]
-block|{
-name|getName
-argument_list|()
-block|,
-name|ci
-operator|.
-name|getUri
-argument_list|()
-block|,
-name|language
-block|}
-argument_list|)
-expr_stmt|;
-return|return
-name|CANNOT_ENHANCE
-return|;
-block|}
+comment|//NOTE: as STANBOL-1448 the index configuration is Solr index version
+comment|//      dependent. This means that we can not use informations of the
+comment|//      current IndexConfiguration to check if we have an FST model for
+comment|//      the language of the requested document. Those information might
+comment|//      be already out dated.
+comment|//        if(indexConfig.getCorpus(language) == null&&  //for the language
+comment|//        		indexConfig.getDefaultCorpus() == null){ //a default model
+comment|//            log.debug("Engine {} ignores ContentItem {} becuase no FST modles for language {} "
+comment|//            		+ "are available", new Object[] {getName(), ci.getUri(), language});
+comment|//                return CANNOT_ENHANCE;
+comment|//        }
 comment|// we need a detected language, the AnalyzedText contentPart with
 comment|// Tokens.
 name|AnalysedText

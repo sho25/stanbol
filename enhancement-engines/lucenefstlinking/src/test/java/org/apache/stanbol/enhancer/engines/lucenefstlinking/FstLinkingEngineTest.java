@@ -1817,6 +1817,8 @@ argument_list|,
 name|FieldEncodingEnum
 operator|.
 name|SolrYard
+argument_list|,
+literal|""
 argument_list|)
 expr_stmt|;
 name|fstConfig

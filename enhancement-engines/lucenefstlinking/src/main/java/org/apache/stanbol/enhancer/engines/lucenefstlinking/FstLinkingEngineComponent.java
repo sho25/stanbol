@@ -471,6 +471,18 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|Future
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -994,6 +1006,18 @@ operator|.
 name|servicesapi
 operator|.
 name|ServiceProperties
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|opensextant
+operator|.
+name|solrtexttagger
+operator|.
+name|TaggerFstCorpus
 import|;
 end_import
 
@@ -4077,6 +4101,11 @@ argument_list|,
 name|core
 argument_list|,
 name|fieldEncoding
+argument_list|,
+name|entityLinkerConfig
+operator|.
+name|getDefaultLanguage
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|indexConfig
@@ -4167,46 +4196,40 @@ name|skipAltTokensConfig
 argument_list|)
 expr_stmt|;
 block|}
-comment|//create a new searcher for creating FSTs
-if|if
-condition|(
-operator|!
+comment|//activate the index configuration
+try|try
+block|{
+comment|//this will init the FST directory if necessary so we might run
+comment|//into IOExceptions
 name|indexConfig
 operator|.
 name|activate
 argument_list|()
-condition|)
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Processing of the FST configuration was not successfull "
-operator|+
-literal|"for any language. See WARN level loggings for more details!"
-argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"  ... FstLinkingEnigne wiht name {} will be registered but"
-operator|+
-literal|"be inactive as there seam to be no data for linking available"
-operator|+
-literal|"in the SolrCore {} (dir: {})"
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
 block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Unable to activate Index for FST Linking Engine '"
+operator|+
 name|engineName
-block|,
+operator|+
+literal|"' (solrCore: "
+operator|+
 name|core
 operator|.
 name|getName
 argument_list|()
-block|,
+operator|+
+literal|", instanceDir: "
+operator|+
 name|core
 operator|.
 name|getCoreDescriptor
@@ -4214,13 +4237,13 @@ argument_list|()
 operator|.
 name|getInstanceDir
 argument_list|()
-block|}
+operator|+
+literal|")!"
+argument_list|,
+name|e
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
-else|else
-block|{
-comment|//some FST corpora initialised
 if|if
 condition|(
 name|log
@@ -4312,7 +4335,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-block|}
 comment|//check if we need to create some FST files
 for|for
 control|(
@@ -4342,9 +4364,27 @@ name|allowCreation
 condition|)
 block|{
 comment|//create a task on the FST corpus creation service
+name|fstInfo
+operator|.
+name|corpusLock
+operator|.
+name|writeLock
+argument_list|()
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+try|try
+block|{
+name|Future
+argument_list|<
+name|TaggerFstCorpus
+argument_list|>
+name|enqueued
+init|=
 name|fstCreatorService
 operator|.
-name|execute
+name|submit
 argument_list|(
 operator|new
 name|CorpusCreationTask
@@ -4354,82 +4394,30 @@ argument_list|,
 name|fstInfo
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|fstInfo
+operator|.
+name|enqueued
+argument_list|(
+name|enqueued
+argument_list|)
 expr_stmt|;
 block|}
-block|}
-comment|//set the default linking corpora
-name|String
-name|defaultLanguage
-init|=
-name|entityLinkerConfig
+finally|finally
+block|{
+name|fstInfo
 operator|.
-name|getDefaultLanguage
+name|corpusLock
+operator|.
+name|writeLock
 argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|defaultLanguage
-operator|==
-literal|null
-condition|)
-block|{
-name|defaultLanguage
-operator|=
-literal|""
-expr_stmt|;
-comment|//FST uses an empty string for the default
-block|}
-name|CorpusInfo
-name|defaultCoprous
-init|=
-name|indexConfig
 operator|.
-name|getCorpus
-argument_list|(
-name|defaultLanguage
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|defaultCoprous
-operator|!=
-literal|null
-condition|)
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|" ... set '{}' as default FST Corpus: {}"
-argument_list|,
-name|defaultCoprous
-operator|.
-name|language
-argument_list|,
-name|defaultCoprous
-argument_list|)
-expr_stmt|;
-name|indexConfig
-operator|.
-name|setDefaultCorpus
-argument_list|(
-name|defaultCoprous
-argument_list|)
+name|unlock
+argument_list|()
 expr_stmt|;
 block|}
-else|else
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"  ... no corpus for default language {} available"
-argument_list|,
-name|defaultCoprous
-argument_list|)
-expr_stmt|;
 block|}
-comment|//create the new configuration
+block|}
 comment|//set the newly configured instances to the fields
 name|this
 operator|.
