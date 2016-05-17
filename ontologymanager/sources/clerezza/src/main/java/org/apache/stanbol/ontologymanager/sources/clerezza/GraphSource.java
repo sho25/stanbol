@@ -27,9 +27,25 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
+name|ImmutableGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
 operator|.
 name|Graph
 import|;
@@ -43,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -59,27 +75,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TripleCollection
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -156,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An {@link OntologyInputSource} that gets ontologies from either a stored {@link TripleCollection}, or its  * identifier and an optionally supplied triple collection manager.  *   * @author alexdma  *   */
+comment|/**  * An {@link OntologyInputSource} that gets ontologies from either a stored {@link Graph}, or its  * identifier and an optionally supplied triple collection manager.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -166,7 +166,7 @@ name|GraphSource
 extends|extends
 name|AbstractClerezzaGraphInputSource
 block|{
-comment|/**      * Creates a new input source by querying the default triple collection manager for a graph named with the      * supplied<code>graphId</code>. A {@link UriRef} that represents the graph name will also be set as the      * graph origin.      *       * @param graphId      *            the graph ID.      * @throws NullPointerException      *             if there is no default triple collection manager available.      * @throws org.apache.clerezza.rdf.core.access.NoSuchEntityException      *             if no such graph can be found.      */
+comment|/**      * Creates a new input source by querying the default triple collection manager for a graph named with the      * supplied<code>graphId</code>. A {@link IRI} that represents the graph name will also be set as the      * graph origin.      *       * @param graphId      *            the graph ID.      * @throws NullPointerException      *             if there is no default triple collection manager available.      * @throws org.apache.clerezza.rdf.core.access.NoSuchEntityException      *             if no such graph can be found.      */
 specifier|public
 name|GraphSource
 parameter_list|(
@@ -177,18 +177,18 @@ block|{
 name|this
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|graphId
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Wraps the supplied<code>graph</code> into a new input source. No origin will be set.      *       * @param graph      *            the RDF graph      * @throws IllegalArgumentException      *             if<code>graph</code> is neither a {@link Graph} nor a {@link MGraph}.      */
+comment|/**      * Wraps the supplied<code>graph</code> into a new input source. No origin will be set.      *       * @param graph      *            the RDF graph      * @throws IllegalArgumentException      *             if<code>graph</code> is neither a {@link ImmutableGraph} nor a {@link Graph}.      */
 specifier|public
 name|GraphSource
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -196,7 +196,7 @@ if|if
 condition|(
 name|graph
 operator|instanceof
-name|Graph
+name|ImmutableGraph
 condition|)
 name|bindRootOntology
 argument_list|(
@@ -208,18 +208,18 @@ if|if
 condition|(
 name|graph
 operator|instanceof
-name|MGraph
+name|Graph
 condition|)
 name|bindRootOntology
 argument_list|(
 operator|(
 operator|(
-name|MGraph
+name|Graph
 operator|)
 name|graph
 operator|)
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -228,7 +228,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"GraphSource supports only Graph and MGraph types. "
+literal|"GraphSource supports only ImmutableGraph and Graph types. "
 operator|+
 name|graph
 operator|.
@@ -248,7 +248,7 @@ comment|/**      * Creates a new input source by querying the default triple col
 specifier|public
 name|GraphSource
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphId
 parameter_list|)
 block|{
@@ -267,7 +267,7 @@ comment|/**      * Creates a new input source by querying the supplied triple co
 specifier|public
 name|GraphSource
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphId
 parameter_list|,
 name|TcProvider
@@ -278,7 +278,7 @@ name|this
 argument_list|(
 name|tcProvider
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 name|graphId
 argument_list|)

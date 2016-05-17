@@ -171,9 +171,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -203,11 +203,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -219,9 +219,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -235,11 +235,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -251,11 +251,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -269,11 +271,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -629,7 +633,7 @@ name|Map
 argument_list|<
 name|SpanTypeEnum
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|SPAN_TYPE_TO_SSO_TYPE
 decl_stmt|;
@@ -639,7 +643,7 @@ name|Map
 argument_list|<
 name|SpanTypeEnum
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|mapping
 init|=
@@ -648,7 +652,7 @@ name|EnumMap
 argument_list|<
 name|SpanTypeEnum
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|SpanTypeEnum
@@ -724,7 +728,7 @@ name|Map
 argument_list|<
 name|LexicalCategory
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|LEXICAL_TYPE_TO_PHRASE_TYPE
 decl_stmt|;
@@ -739,7 +743,7 @@ name|Map
 argument_list|<
 name|LexicalCategory
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|mapping
 init|=
@@ -748,7 +752,7 @@ name|EnumMap
 argument_list|<
 name|LexicalCategory
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|LexicalCategory
@@ -765,7 +769,7 @@ operator|.
 name|Noun
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|olia
 operator|+
@@ -782,7 +786,7 @@ operator|.
 name|Verb
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|olia
 operator|+
@@ -799,7 +803,7 @@ operator|.
 name|Adjective
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|olia
 operator|+
@@ -816,7 +820,7 @@ operator|.
 name|Adverb
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|olia
 operator|+
@@ -833,7 +837,7 @@ operator|.
 name|Conjuction
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|olia
 operator|+
@@ -851,14 +855,14 @@ name|mapping
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a NIF2.0 Fragment URI using the parsed base URI and the start/end      * indexes.      * @param base the base URI      * @param start the start position. If<code>&lt; 0</code> than zero is added.      * @param end the end position or values&lt; 1 when open ended.      * @return the NIF 2.0 Fragment URI      * @throws IllegalArgumentException if<code>null</code> is parsed as base      * {@link UriRef} or the end position is&gt;=0 but&lt= the parsed start      * position.      */
+comment|/**      * Creates a NIF2.0 Fragment URI using the parsed base URI and the start/end      * indexes.      * @param base the base URI      * @param start the start position. If<code>&lt; 0</code> than zero is added.      * @param end the end position or values&lt; 1 when open ended.      * @return the NIF 2.0 Fragment URI      * @throws IllegalArgumentException if<code>null</code> is parsed as base      * {@link IRI} or the end position is&gt;=0 but&lt= the parsed start      * position.      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|getNifFragmentURI
 parameter_list|(
-name|UriRef
+name|IRI
 name|base
 parameter_list|,
 name|int
@@ -961,7 +965,7 @@ block|}
 comment|//else open ended ...
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|sb
 operator|.
@@ -973,10 +977,10 @@ block|}
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|getNifRFC5147URI
 parameter_list|(
-name|UriRef
+name|IRI
 name|base
 parameter_list|,
 name|int
@@ -1070,7 +1074,7 @@ block|}
 comment|//else select the whole string ...
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|sb
 operator|.
@@ -1111,10 +1115,10 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|getNifHashURI
 parameter_list|(
-name|UriRef
+name|IRI
 name|base
 parameter_list|,
 name|int
@@ -1346,7 +1350,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|sb
 operator|.
@@ -1525,13 +1529,13 @@ specifier|static
 name|void
 name|writePos
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Annotated
 name|annotated
 parameter_list|,
-name|UriRef
+name|IRI
 name|segmentUri
 parameter_list|)
 block|{
@@ -1695,10 +1699,10 @@ specifier|static
 name|void
 name|setOliaConf
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|segmentUri
 parameter_list|,
 name|Value
@@ -1797,13 +1801,13 @@ specifier|static
 name|void
 name|writePhrase
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Annotated
 name|annotated
 parameter_list|,
-name|UriRef
+name|IRI
 name|segmentUri
 parameter_list|)
 block|{
@@ -1829,7 +1833,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|phraseTypeUri
 init|=
 name|LEXICAL_TYPE_TO_PHRASE_TYPE

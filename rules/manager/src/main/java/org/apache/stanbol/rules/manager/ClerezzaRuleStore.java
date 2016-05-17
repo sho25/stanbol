@@ -119,9 +119,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -135,11 +135,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -151,9 +151,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -167,11 +167,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -183,11 +183,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -253,11 +253,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -271,11 +273,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -421,7 +425,7 @@ name|rdf
 operator|.
 name|utils
 operator|.
-name|UnionMGraph
+name|UnionGraph
 import|;
 end_import
 
@@ -776,7 +780,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class provides an implementation of the {@link RuleStore} based on Clerezza.<br/>  * Recipe are managed as {@link TripleCollection} graphs.<br/>  * The vocabulary used in these graphs is provided by {@link Symbols}.  *   * @author elvio  * @author anuzzolese  *   */
+comment|/**  * This class provides an implementation of the {@link RuleStore} based on Clerezza.<br/>  * Recipe are managed as {@link Graph} graphs.<br/>  * The vocabulary used in these graphs is provided by {@link Symbols}.  *   * @author elvio  * @author anuzzolese  *   */
 end_comment
 
 begin_class
@@ -850,7 +854,7 @@ decl_stmt|;
 specifier|private
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|recipes
 decl_stmt|;
@@ -1083,11 +1087,11 @@ operator|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|tripleCollection
 init|=
 literal|null
@@ -1098,10 +1102,10 @@ name|tripleCollection
 operator|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeIndexLocation
 argument_list|)
@@ -1118,10 +1122,10 @@ name|tripleCollection
 operator|=
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeIndexLocation
 argument_list|)
@@ -1136,11 +1140,11 @@ range|:
 name|tripleCollection
 control|)
 block|{
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|triple
 operator|.
@@ -1179,7 +1183,7 @@ specifier|public
 name|Recipe
 name|createRecipe
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|,
 name|String
@@ -1188,17 +1192,17 @@ parameter_list|)
 throws|throws
 name|AlreadyExistingRecipeException
 block|{
-name|TripleCollection
+name|Graph
 name|tripleCollection
 decl_stmt|;
 try|try
 block|{
-comment|// create the MGraph in the TcManager
+comment|// create the Graph in the TcManager
 name|tripleCollection
 operator|=
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|recipeID
 argument_list|)
@@ -1238,21 +1242,21 @@ operator|.
 name|Recipe
 argument_list|)
 decl_stmt|;
-name|TripleCollection
-name|recipeIndexTripleCollection
+name|Graph
+name|recipeIndexGraph
 init|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeIndexLocation
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|recipeIndexTripleCollection
+name|recipeIndexGraph
 operator|.
 name|add
 argument_list|(
@@ -1298,7 +1302,7 @@ argument_list|(
 name|descriptionTriple
 argument_list|)
 expr_stmt|;
-name|recipeIndexTripleCollection
+name|recipeIndexGraph
 operator|.
 name|add
 argument_list|(
@@ -1364,7 +1368,7 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 name|recipe
@@ -1372,12 +1376,12 @@ operator|.
 name|getRecipeID
 argument_list|()
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|tripleCollection
 init|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|recipeID
 argument_list|)
@@ -1623,7 +1627,7 @@ return|return
 name|recipe
 return|;
 block|}
-comment|/**      *       * Parse the set of rules provided by the rulesStream parameter as Stanbol syntax rules and add them to      * the Recipe in the store.<br/>      * The recipe is a {@link TripleCollection} managed by the {@link TcManager}.      *       *       * @param recipe      *            {@link Recipe} the recipe      * @param rulesStream      *            {@link InputStream} the rule in Stanbol syntax      *       * @return the recipe with the new rule.      */
+comment|/**      *       * Parse the set of rules provided by the rulesStream parameter as Stanbol syntax rules and add them to      * the Recipe in the store.<br/>      * The recipe is a {@link Graph} managed by the {@link TcManager}.      *       *       * @param recipe      *            {@link Recipe} the recipe      * @param rulesStream      *            {@link InputStream} the rule in Stanbol syntax      *       * @return the recipe with the new rule.      */
 annotation|@
 name|Override
 specifier|public
@@ -1649,7 +1653,7 @@ operator|+
 name|recipe
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 name|recipe
@@ -1747,7 +1751,7 @@ name|String
 name|description
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 name|recipe
@@ -1851,7 +1855,7 @@ specifier|public
 name|Recipe
 name|getRecipe
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|)
 throws|throws
@@ -1868,19 +1872,19 @@ operator|+
 name|recipeID
 argument_list|)
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|recipeGraph
 init|=
 literal|null
 decl_stmt|;
-comment|/**          * Throw a NoSuchRecipeException in case of the TcManager throws a NoSuchEntityException with respect          * to UriRef representing the recipe.          */
+comment|/**          * Throw a NoSuchRecipeException in case of the TcManager throws a NoSuchEntityException with respect          * to IRI representing the recipe.          */
 try|try
 block|{
 name|recipeGraph
 operator|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|recipeID
 argument_list|)
@@ -2073,7 +2077,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|nameResource
 init|=
 name|solutionMapping
@@ -2083,7 +2087,7 @@ argument_list|(
 literal|"ruleName"
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|bodyResource
 init|=
 name|solutionMapping
@@ -2093,7 +2097,7 @@ argument_list|(
 literal|"ruleBody"
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|headResource
 init|=
 name|solutionMapping
@@ -2316,7 +2320,7 @@ name|Override
 specifier|public
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|listRecipeIDs
 parameter_list|()
@@ -2345,7 +2349,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|recipeID
 range|:
 name|recipes
@@ -2414,7 +2418,7 @@ specifier|public
 name|boolean
 name|removeRecipe
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|)
 throws|throws
@@ -2425,7 +2429,7 @@ try|try
 block|{
 name|tcManager
 operator|.
-name|deleteTripleCollection
+name|deleteGraph
 argument_list|(
 name|recipeID
 argument_list|)
@@ -2445,15 +2449,15 @@ name|e
 argument_list|)
 throw|;
 block|}
-name|TripleCollection
-name|recipeIndexTripleCollection
+name|Graph
+name|recipeIndexGraph
 init|=
 name|tcManager
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeIndexLocation
 argument_list|)
@@ -2476,7 +2480,7 @@ operator|.
 name|Recipe
 argument_list|)
 decl_stmt|;
-name|recipeIndexTripleCollection
+name|recipeIndexGraph
 operator|.
 name|remove
 argument_list|(
@@ -2531,12 +2535,12 @@ name|Rule
 name|rule
 parameter_list|)
 block|{
-name|TripleCollection
+name|Graph
 name|tripleCollection
 init|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|recipe
 operator|.
@@ -2652,7 +2656,7 @@ parameter_list|(
 name|Recipe
 name|recipe
 parameter_list|,
-name|UriRef
+name|IRI
 name|ruleID
 parameter_list|)
 throws|throws
@@ -2672,7 +2676,7 @@ name|Override
 specifier|public
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|listRuleIDs
 parameter_list|(
@@ -2727,7 +2731,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|TripleCollection
+name|Graph
 name|exportRecipe
 parameter_list|(
 name|Recipe
@@ -2741,7 +2745,7 @@ block|{
 return|return
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|recipe
 operator|.
@@ -2810,15 +2814,15 @@ literal|"\", \"i\"))"
 operator|+
 literal|"}"
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|tripleCollection
 init|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeIndexLocation
 argument_list|)
@@ -2877,11 +2881,11 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|solutionMapping
 operator|.
@@ -3021,19 +3025,19 @@ literal|"}"
 decl_stmt|;
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|recipeIDs
 init|=
 name|listRecipeIDs
 argument_list|()
 decl_stmt|;
-name|TripleCollection
+name|Graph
 index|[]
 name|tripleCollections
 init|=
 operator|new
-name|TripleCollection
+name|Graph
 index|[
 name|recipeIDs
 operator|.
@@ -3065,7 +3069,7 @@ index|]
 operator|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|recipeIDs
 operator|.
@@ -3076,11 +3080,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|UnionMGraph
-name|unionMGraph
+name|UnionGraph
+name|unionGraph
 init|=
 operator|new
-name|UnionMGraph
+name|UnionGraph
 argument_list|(
 name|tripleCollections
 argument_list|)
@@ -3119,7 +3123,7 @@ name|executeSparqlQuery
 argument_list|(
 name|query
 argument_list|,
-name|unionMGraph
+name|unionGraph
 argument_list|)
 decl_stmt|;
 while|while
@@ -3138,11 +3142,11 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|solutionMapping
 operator|.
@@ -3151,11 +3155,11 @@ argument_list|(
 literal|"recipe"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ruleID
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|solutionMapping
 operator|.
@@ -3318,19 +3322,19 @@ literal|"}"
 decl_stmt|;
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|recipeIDs
 init|=
 name|listRecipeIDs
 argument_list|()
 decl_stmt|;
-name|TripleCollection
+name|Graph
 index|[]
 name|tripleCollections
 init|=
 operator|new
-name|TripleCollection
+name|Graph
 index|[
 name|recipeIDs
 operator|.
@@ -3362,7 +3366,7 @@ index|]
 operator|=
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|recipeIDs
 operator|.
@@ -3373,11 +3377,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|UnionMGraph
-name|unionMGraph
+name|UnionGraph
+name|unionGraph
 init|=
 operator|new
-name|UnionMGraph
+name|UnionGraph
 argument_list|(
 name|tripleCollections
 argument_list|)
@@ -3416,7 +3420,7 @@ name|executeSparqlQuery
 argument_list|(
 name|query
 argument_list|,
-name|unionMGraph
+name|unionGraph
 argument_list|)
 decl_stmt|;
 while|while
@@ -3435,11 +3439,11 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|recipeID
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|solutionMapping
 operator|.
@@ -3448,11 +3452,11 @@ argument_list|(
 literal|"recipe"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ruleID
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|solutionMapping
 operator|.

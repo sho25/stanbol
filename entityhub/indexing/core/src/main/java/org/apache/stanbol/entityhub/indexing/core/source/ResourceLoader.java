@@ -1558,7 +1558,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Unable to move loaded Resource {} to imported Directory! "
+literal|"Unable to move loaded RDFTerm {} to imported Directory! "
 operator|+
 literal|"Please move the file manually to {}!"
 argument_list|,
@@ -1623,7 +1623,7 @@ block|{
 name|String
 name|msg
 init|=
-literal|"Error while loading Resource "
+literal|"Error while loading RDFTerm "
 operator|+
 name|file
 decl_stmt|;

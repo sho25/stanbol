@@ -103,11 +103,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -119,11 +119,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -135,9 +135,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -151,11 +151,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|LiteralFactory
+name|Graph
 import|;
 end_import
 
@@ -167,11 +167,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -183,11 +183,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -199,25 +199,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -231,11 +215,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -247,29 +231,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|LockableMGraph
+name|IRI
 import|;
 end_import
 
@@ -317,13 +283,31 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|TripleImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
 operator|.
-name|impl
-operator|.
-name|TripleImpl
+name|LiteralFactory
 import|;
 end_import
 
@@ -579,7 +563,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1004,7 +988,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the Yard Interface based on a RDF Triple Store. This  * Implementation uses Clerezza as RDF Framework. The actual Triple Store used  * to store the data depends on the configuration of Clerezza.<p>  * This implementation uses {@link LockableMGraph} interface for write locks  * when updating the graph. SPARQL queries are not within a write lock.<p>  *  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the Yard Interface based on a RDF Triple Store. This  * Implementation uses Clerezza as RDF Framework. The actual Triple Store used  * to store the data depends on the configuration of Clerezza.<p>  * This implementation uses {@link LockableGraph} interface for write locks  * when updating the graph. SPARQL queries are not within a write lock.<p>  *  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -1143,20 +1127,20 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Property used to mark empty Representations managed by this Graph. This is      * needed to workaround the fact, that the Entityhub supports the storage of      * empty Representations but this Yard uses the search for any outgoing      * relation (triple with the id of the representation as Subject) for the       * implementation of {@link #isRepresentation(String)}. Therefore for an      * empty Representation {@link #isRepresentation(String)} would return false      * even if the representation was {@link #store(Representation)} previously.      *<p>      * Adding the Triple<br>      *<code> ?representationId<{@value #MANAGED_REPRESENTATION}> true^^xsd:boolean</code>      *<br> for any empty Representation avoids this unwanted behaviour.      */
+comment|/**      * Property used to mark empty Representations managed by this ImmutableGraph. This is      * needed to workaround the fact, that the Entityhub supports the storage of      * empty Representations but this Yard uses the search for any outgoing      * relation (triple with the id of the representation as Subject) for the       * implementation of {@link #isRepresentation(String)}. Therefore for an      * empty Representation {@link #isRepresentation(String)} would return false      * even if the representation was {@link #store(Representation)} previously.      *<p>      * Adding the Triple<br>      *<code> ?representationId<{@value #MANAGED_REPRESENTATION}> true^^xsd:boolean</code>      *<br> for any empty Representation avoids this unwanted behaviour.      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|MANAGED_REPRESENTATION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:org.apache.stanbol:entityhub.yard:rdf.clerezza:managesRepresentation"
 argument_list|)
 decl_stmt|;
-comment|/**      * Property used to optionally configure the URI of the Clerezza Graph.      * This graph will be looked up by using {@link TcManager#getTriples(UriRef).<p>      * Note that if the returned RDF graph is of instance Graph the write/delete      * operations of this implementations will not work.      */
+comment|/**      * Property used to optionally configure the URI of the Clerezza ImmutableGraph.      * This graph will be looked up by using {@link TcManager#getTriples(IRI).<p>      * Note that if the returned RDF graph is of instance ImmutableGraph the write/delete      * operations of this implementations will not work.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1185,7 +1169,7 @@ name|FALSE
 argument_list|)
 decl_stmt|;
 comment|//public static final String YARD_URI_PREFIX = "urn:org.apache.stanbol:entityhub.yard:rdf.clerezza:";
-comment|//    public static final UriRef REPRESENTATION = new UriRef(RdfResourceEnum.Representation.getUri());
+comment|//    public static final IRI REPRESENTATION = new IRI(RdfResourceEnum.Representation.getUri());
 comment|//    protected ComponentContext context;
 comment|//    protected Dictionary<String,?> properties;
 annotation|@
@@ -1195,11 +1179,11 @@ name|TcManager
 name|tcManager
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|yardGraphUri
 decl_stmt|;
 specifier|private
-name|TripleCollection
+name|Graph
 name|graph
 decl_stmt|;
 specifier|private
@@ -1210,7 +1194,11 @@ specifier|private
 name|ComponentContext
 name|context
 decl_stmt|;
-comment|//private LockableMGraph graph;
+specifier|private
+name|boolean
+name|immutable
+decl_stmt|;
+comment|//private LockableGraph graph;
 specifier|public
 name|ClerezzaYard
 parameter_list|()
@@ -1392,7 +1380,7 @@ operator|.
 name|yardGraphUri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|yardUri
 operator|.
@@ -1412,17 +1400,46 @@ expr_stmt|;
 block|}
 try|try
 block|{
+try|try
+block|{
 name|this
 operator|.
 name|graph
 operator|=
 name|tcManager
 operator|.
-name|getTriples
+name|getImmutableGraph
 argument_list|(
 name|yardGraphUri
 argument_list|)
 expr_stmt|;
+name|immutable
+operator|=
+literal|true
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|NoSuchEntityException
+name|e
+parameter_list|)
+block|{
+name|this
+operator|.
+name|graph
+operator|=
+name|tcManager
+operator|.
+name|getGraph
+argument_list|(
+name|yardGraphUri
+argument_list|)
+expr_stmt|;
+name|immutable
+operator|=
+literal|false
+expr_stmt|;
+block|}
 name|log
 operator|.
 name|info
@@ -1437,24 +1454,6 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-operator|(
-name|graph
-operator|instanceof
-name|LockableMGraph
-operator|)
-condition|)
-block|{
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"> NOTE: this ClerezzaYard is read-only"
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 catch|catch
 parameter_list|(
@@ -1482,7 +1481,7 @@ name|graph
 operator|=
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|yardGraphUri
 argument_list|)
@@ -1589,7 +1588,7 @@ argument_list|()
 operator|.
 name|registerService
 argument_list|(
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|.
@@ -1733,7 +1732,7 @@ return|return
 name|getRepresentation
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -1742,13 +1741,13 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Internally used to create Representations for URIs      * @param uri the uri      * @param check if<code>false</code> than there is no check if the URI      *     refers to a Resource in the graph that is of type {@link #REPRESENTATION}      * @return the Representation      */
+comment|/**      * Internally used to create Representations for URIs      * @param uri the uri      * @param check if<code>false</code> than there is no check if the URI      *     refers to a RDFTerm in the graph that is of type {@link #REPRESENTATION}      * @return the Representation      */
 specifier|protected
 specifier|final
 name|Representation
 name|getRepresentation
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|boolean
@@ -1775,7 +1774,7 @@ name|uri
 argument_list|)
 condition|)
 block|{
-name|MGraph
+name|Graph
 name|nodeGraph
 init|=
 name|createRepresentationGraph
@@ -1855,21 +1854,9 @@ specifier|final
 name|Lock
 name|readLock
 decl_stmt|;
-if|if
-condition|(
-name|graph
-operator|instanceof
-name|LockableMGraph
-condition|)
-block|{
 name|readLock
 operator|=
-operator|(
-operator|(
-name|LockableMGraph
-operator|)
 name|graph
-operator|)
 operator|.
 name|getLock
 argument_list|()
@@ -1882,27 +1869,19 @@ operator|.
 name|lock
 argument_list|()
 expr_stmt|;
-block|}
-else|else
-block|{
-name|readLock
-operator|=
-literal|null
-expr_stmt|;
-block|}
 return|return
 name|readLock
 return|;
 block|}
-comment|/**      * Extracts the triples that belong to the {@link Representation} with the      * parsed id from the parsed graph. The graph is not modified and changes      * in the returned graph will not affect the parsed graph.      * @param id the {@link UriRef} node representing the id of the Representation.      * @param graph the Graph to extract the representation from      * @return the extracted graph.      */
+comment|/**      * Extracts the triples that belong to the {@link Representation} with the      * parsed id from the parsed graph. The graph is not modified and changes      * in the returned graph will not affect the parsed graph.      * @param id the {@link IRI} node representing the id of the Representation.      * @param graph the ImmutableGraph to extract the representation from      * @return the extracted graph.      */
 specifier|protected
-name|MGraph
+name|Graph
 name|createRepresentationGraph
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -1912,7 +1891,7 @@ argument_list|(
 name|graph
 argument_list|,
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 argument_list|,
 name|id
@@ -1920,35 +1899,35 @@ argument_list|,
 operator|new
 name|HashSet
 argument_list|<
-name|BNode
+name|BlankNode
 argument_list|>
 argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Recursive Method internally doing all the work for       * {@link #createRepresentationGraph(UriRef, TripleCollection)}      * @param source The graph to extract the Representation (source)      * @param target The graph to store the extracted triples (target)      * @param node the current node. Changes in recursive calls as it follows      * @param visited holding all the visited BNodes to avoid cycles. Other nodes       * need not be added because this implementation would not follow it anyway      * outgoing relations if the object is a {@link BNode} instance.      * @return the target graph (for convenience)      */
+comment|/**      * Recursive Method internally doing all the work for       * {@link #createRepresentationGraph(IRI, Graph)}      * @param source The graph to extract the Representation (source)      * @param target The graph to store the extracted triples (target)      * @param node the current node. Changes in recursive calls as it follows      * @param visited holding all the visited BlankNodes to avoid cycles. Other nodes       * need not be added because this implementation would not follow it anyway      * outgoing relations if the object is a {@link BlankNode} instance.      * @return the target graph (for convenience)      */
 specifier|private
-name|MGraph
+name|Graph
 name|extractRepresentation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|source
 parameter_list|,
-name|MGraph
+name|Graph
 name|target
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 parameter_list|,
 name|Set
 argument_list|<
-name|BNode
+name|BlankNode
 argument_list|>
 name|visited
 parameter_list|)
 block|{
 comment|//we need all the outgoing relations and also want to follow bNodes until
-comment|//the next UriRef. However we are not interested in incoming relations!
+comment|//the next IRI. However we are not interested in incoming relations!
 name|Iterator
 argument_list|<
 name|Triple
@@ -1989,7 +1968,7 @@ argument_list|(
 name|triple
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|object
 init|=
 name|triple
@@ -2001,7 +1980,7 @@ if|if
 condition|(
 name|object
 operator|instanceof
-name|BNode
+name|BlankNode
 condition|)
 block|{
 comment|//add first and than follow because there might be a triple such as
@@ -2011,7 +1990,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|BNode
+name|BlankNode
 operator|)
 name|object
 argument_list|)
@@ -2023,7 +2002,7 @@ argument_list|,
 name|target
 argument_list|,
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|object
 argument_list|,
@@ -2082,7 +2061,7 @@ return|return
 name|isRepresentation
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -2095,7 +2074,7 @@ specifier|final
 name|boolean
 name|isRepresentation
 parameter_list|(
-name|UriRef
+name|IRI
 name|resource
 parameter_list|)
 block|{
@@ -2144,11 +2123,11 @@ literal|"The parsed Representation id MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-name|UriRef
+name|IRI
 name|resource
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -2219,39 +2198,10 @@ parameter_list|()
 throws|throws
 name|YardException
 block|{
-specifier|final
-name|Lock
-name|writeLock
-decl_stmt|;
 if|if
 condition|(
-name|graph
-operator|instanceof
-name|LockableMGraph
+name|immutable
 condition|)
-block|{
-name|writeLock
-operator|=
-operator|(
-operator|(
-name|LockableMGraph
-operator|)
-name|graph
-operator|)
-operator|.
-name|getLock
-argument_list|()
-operator|.
-name|writeLock
-argument_list|()
-expr_stmt|;
-name|writeLock
-operator|.
-name|lock
-argument_list|()
-expr_stmt|;
-block|}
-else|else
 block|{
 throw|throw
 operator|new
@@ -2270,6 +2220,25 @@ literal|"' is read-only!"
 argument_list|)
 throw|;
 block|}
+specifier|final
+name|Lock
+name|writeLock
+decl_stmt|;
+name|writeLock
+operator|=
+name|graph
+operator|.
+name|getLock
+argument_list|()
+operator|.
+name|writeLock
+argument_list|()
+expr_stmt|;
+name|writeLock
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
 return|return
 name|writeLock
 return|;
@@ -2689,11 +2658,11 @@ name|getId
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|id
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|representation
 operator|.
@@ -2972,7 +2941,7 @@ init|=
 operator|new
 name|AdaptingIterator
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
 name|String
 argument_list|>
@@ -2980,7 +2949,7 @@ argument_list|(
 operator|new
 name|Iterator
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 block|{
@@ -3000,7 +2969,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Resource
+name|RDFTerm
 name|next
 parameter_list|()
 block|{
@@ -3038,7 +3007,7 @@ argument_list|,
 operator|new
 name|Resource2StringAdapter
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 argument_list|,
@@ -3317,7 +3286,7 @@ name|Representation
 argument_list|>
 argument_list|()
 block|{
-comment|/**                      * Adapter that gets the rootVariable of the Query (selecting the ID)                      * and creates a Representation for it.                      * @param solution a solution of the query                      * @param type the type (no generics here)                      * @return the representation or<code>null</code> if result is                      * not an UriRef or there is no Representation for the result.                      */
+comment|/**                      * Adapter that gets the rootVariable of the Query (selecting the ID)                      * and creates a Representation for it.                      * @param solution a solution of the query                      * @param type the type (no generics here)                      * @return the representation or<code>null</code> if result is                      * not an IRI or there is no Representation for the result.                      */
 annotation|@
 name|Override
 specifier|public
@@ -3334,7 +3303,7 @@ argument_list|>
 name|type
 parameter_list|)
 block|{
-name|Resource
+name|RDFTerm
 name|resource
 init|=
 name|solution
@@ -3351,7 +3320,7 @@ if|if
 condition|(
 name|resource
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 try|try
@@ -3360,7 +3329,7 @@ return|return
 name|getRepresentation
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|resource
 argument_list|,
@@ -3581,20 +3550,20 @@ name|graph
 argument_list|)
 decl_stmt|;
 specifier|final
-name|MGraph
+name|Graph
 name|resultGraph
 decl_stmt|;
 if|if
 condition|(
 name|resultObject
 operator|instanceof
-name|MGraph
+name|Graph
 condition|)
 block|{
 name|resultGraph
 operator|=
 operator|(
-name|MGraph
+name|Graph
 operator|)
 name|resultObject
 expr_stmt|;
@@ -3604,13 +3573,13 @@ if|if
 condition|(
 name|resultObject
 operator|instanceof
-name|Graph
+name|ImmutableGraph
 condition|)
 block|{
 name|resultGraph
 operator|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 expr_stmt|;
 name|resultGraph
@@ -3618,7 +3587,7 @@ operator|.
 name|addAll
 argument_list|(
 operator|(
-name|Graph
+name|ImmutableGraph
 operator|)
 name|resultObject
 argument_list|)
@@ -3632,7 +3601,7 @@ name|error
 argument_list|(
 literal|"Unable to create "
 operator|+
-name|MGraph
+name|Graph
 operator|.
 name|class
 operator|+

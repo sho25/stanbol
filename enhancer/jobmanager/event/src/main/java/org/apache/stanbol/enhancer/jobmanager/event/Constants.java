@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -122,7 +122,7 @@ name|PROPERTY_JOB_MANAGER
 init|=
 literal|"stanbol.enhancer.jobmanager.event.job"
 decl_stmt|;
-comment|/**      * Property used to provide the {@link NonLiteral} describing the      * {@link ExecutionMetadata#EXECUTION} instance      */
+comment|/**      * Property used to provide the {@link BlankNodeOrIRI} describing the      * {@link ExecutionMetadata#EXECUTION} instance      */
 name|String
 name|PROPERTY_EXECUTION
 init|=

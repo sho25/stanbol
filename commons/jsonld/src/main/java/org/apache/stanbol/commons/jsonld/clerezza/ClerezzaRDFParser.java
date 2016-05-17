@@ -43,11 +43,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -59,9 +59,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -75,9 +75,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -91,11 +91,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -107,11 +107,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -123,25 +123,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -155,11 +139,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -171,27 +155,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -252,7 +220,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Converts a Clerezza {@link TripleCollection} to the {@link RDFDataset} used  * by the {@link JsonLdProcessor}  *   * @author Rupert Westenthaler  *  */
+comment|/**  * Converts a Clerezza {@link Graph} to the {@link RDFDataset} used  * by the {@link JsonLdProcessor}  *   * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -293,7 +261,7 @@ literal|0
 expr_stmt|;
 name|Map
 argument_list|<
-name|BNode
+name|BlankNode
 argument_list|,
 name|String
 argument_list|>
@@ -302,7 +270,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|BNode
+name|BlankNode
 argument_list|,
 name|String
 argument_list|>
@@ -322,7 +290,7 @@ if|if
 condition|(
 name|input
 operator|instanceof
-name|TripleCollection
+name|Graph
 condition|)
 block|{
 for|for
@@ -332,7 +300,7 @@ name|t
 range|:
 operator|(
 operator|(
-name|TripleCollection
+name|Graph
 operator|)
 name|input
 operator|)
@@ -371,7 +339,7 @@ name|t
 parameter_list|,
 name|Map
 argument_list|<
-name|BNode
+name|BlankNode
 argument_list|,
 name|String
 argument_list|>
@@ -407,7 +375,7 @@ name|bNodeMap
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Resource
+name|RDFTerm
 name|object
 init|=
 name|t
@@ -444,24 +412,13 @@ specifier|final
 name|String
 name|datatype
 decl_stmt|;
-if|if
-condition|(
-name|object
-operator|instanceof
-name|TypedLiteral
-condition|)
-block|{
-name|language
-operator|=
-literal|null
-expr_stmt|;
 name|datatype
 operator|=
 name|getResourceValue
 argument_list|(
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|object
 operator|)
@@ -472,26 +429,12 @@ argument_list|,
 name|bNodeMap
 argument_list|)
 expr_stmt|;
-block|}
-elseif|else
-if|if
-condition|(
-name|object
-operator|instanceof
-name|PlainLiteral
-condition|)
-block|{
-comment|//we use RDF 1.1 literals so we do set the RDF_LANG_STRING datatype
-name|datatype
-operator|=
-name|RDF_LANG_STRING
-expr_stmt|;
 name|Language
 name|l
 init|=
 operator|(
 operator|(
-name|PlainLiteral
+name|Literal
 operator|)
 name|object
 operator|)
@@ -520,25 +463,6 @@ operator|.
 name|toString
 argument_list|()
 expr_stmt|;
-block|}
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"Unknown Literal class "
-operator|+
-name|object
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-throw|;
 block|}
 name|result
 operator|.
@@ -572,7 +496,7 @@ argument_list|,
 name|getResourceValue
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|object
 argument_list|,
@@ -599,12 +523,12 @@ specifier|private
 name|String
 name|getResourceValue
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|nl
 parameter_list|,
 name|Map
 argument_list|<
-name|BNode
+name|BlankNode
 argument_list|,
 name|String
 argument_list|>
@@ -627,13 +551,13 @@ if|if
 condition|(
 name|nl
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 return|return
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|nl
 operator|)
@@ -647,7 +571,7 @@ if|if
 condition|(
 name|nl
 operator|instanceof
-name|BNode
+name|BlankNode
 condition|)
 block|{
 name|String
@@ -684,7 +608,7 @@ operator|.
 name|put
 argument_list|(
 operator|(
-name|BNode
+name|BlankNode
 operator|)
 name|nl
 argument_list|,
@@ -714,7 +638,7 @@ throw|throw
 operator|new
 name|IllegalStateException
 argument_list|(
-literal|"Unknwon NonLiteral type "
+literal|"Unknwon BlankNodeOrIRI type "
 operator|+
 name|nl
 operator|.

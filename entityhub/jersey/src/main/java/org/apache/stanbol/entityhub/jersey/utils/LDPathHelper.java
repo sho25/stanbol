@@ -253,11 +253,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -379,7 +379,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -734,7 +734,7 @@ decl_stmt|;
 comment|/**      * Executes the LDPath program on the contexts stored in the backend and      * returns the result as an RDF graph       * @param contexts the contexts to execute the program on      * @param ldpath the LDPath program to execute      * @param backend the {@link RDFBackend} to use      * @return The results stored within an RDF graph      * @throws LDPathParseException if the parsed LDPath program is invalid      */
 specifier|private
 specifier|static
-name|MGraph
+name|Graph
 name|executeLDPath
 parameter_list|(
 name|RDFBackend
@@ -755,11 +755,11 @@ parameter_list|)
 throws|throws
 name|LDPathParseException
 block|{
-name|MGraph
+name|Graph
 name|data
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 name|RdfValueFactory
@@ -823,7 +823,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/*          * NOTE: We do not need to process the Representations returned by          * EntityhubLDPath#exdecute, because the RdfValueFactory used uses          * the local variable "MGraph data" to backup all created          * RdfRepresentation. Because of this all converted data will be          * automatically added the MGraph. The only thing we need to do is to          * wrap the MGraph in the response.          */
+comment|/*          * NOTE: We do not need to process the Representations returned by          * EntityhubLDPath#exdecute, because the RdfValueFactory used uses          * the local variable "Graph data" to backup all created          * RdfRepresentation. Because of this all converted data will be          * automatically added the Graph. The only thing we need to do is to          * wrap the Graph in the response.          */
 for|for
 control|(
 name|String
@@ -1228,7 +1228,7 @@ name|build
 argument_list|()
 return|;
 block|}
-name|MGraph
+name|Graph
 name|data
 decl_stmt|;
 try|try

@@ -353,9 +353,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -385,11 +385,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -401,11 +401,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -417,9 +417,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -433,11 +433,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -449,11 +449,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -467,11 +469,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -489,7 +493,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1175,11 +1179,11 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|NAME
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1191,11 +1195,11 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|TYPE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1207,11 +1211,11 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|REDIRECT
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1245,18 +1249,18 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//add some terms to the searcher
-name|MGraph
+name|Graph
 name|graph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:PatrickMarshall"
 argument_list|)
@@ -1313,7 +1317,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:Geologist"
 argument_list|)
@@ -1349,7 +1353,7 @@ argument_list|,
 name|TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1372,7 +1376,7 @@ argument_list|,
 name|REDIRECT
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:redirect:Geologist"
 argument_list|)
@@ -1396,7 +1400,7 @@ comment|//a redirect
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:redirect:Geologist"
 argument_list|)
@@ -1432,7 +1436,7 @@ argument_list|,
 name|TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1459,7 +1463,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:NewZealand"
 argument_list|)
@@ -1516,7 +1520,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:UniversityOfOtago"
 argument_list|)
@@ -1573,7 +1577,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:University"
 argument_list|)
@@ -1609,7 +1613,7 @@ argument_list|,
 name|TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1636,7 +1640,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:Otago"
 argument_list|)
@@ -1694,7 +1698,7 @@ comment|//add a 2nd Otago (Place and University
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:Otago_Texas"
 argument_list|)
@@ -1770,7 +1774,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test:UniversityOfOtago_Texas"
 argument_list|)
@@ -3051,7 +3055,7 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -4052,18 +4056,18 @@ expr_stmt|;
 comment|//validate the enhancement results
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -4160,7 +4164,7 @@ name|numEntityAnnotations
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Similar to {@link EnhancementStructureHelper#validateAllEntityAnnotations(org.apache.clerezza.rdf.core.TripleCollection, Map)}      * but in addition checks fise:confidence [0..1] and entityhub:site properties      * @param ci      * @param expectedValues      * @return      */
+comment|/**      * Similar to {@link EnhancementStructureHelper#validateAllEntityAnnotations(org.apache.clerezza.commons.rdf.Graph, Map)}      * but in addition checks fise:confidence [0..1] and entityhub:site properties      * @param ci      * @param expectedValues      * @return      */
 specifier|private
 specifier|static
 name|int
@@ -4171,9 +4175,9 @@ name|ci
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -4211,11 +4215,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityAnnotationIterator
 operator|.
@@ -4271,11 +4275,11 @@ comment|//            assertTrue("fise:confidence MUST BE>= 0 (value= '"+confide
 comment|//                    +"',entityAnnotation "+entityAnnotation+")",
 comment|//                    0.0<= confidence.doubleValue());
 comment|//Test the entityhub:site property (STANBOL-625)
-name|UriRef
+name|IRI
 name|ENTITYHUB_SITE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -4318,7 +4322,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|siteResource
 init|=
 name|entitySiteIterator

@@ -109,11 +109,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -296,7 +296,7 @@ name|BundleContext
 name|context
 decl_stmt|;
 specifier|private
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 decl_stmt|;
 specifier|private
@@ -477,7 +477,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws

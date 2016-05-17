@@ -419,7 +419,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Resource {} found: {}"
+literal|"RDFTerm {} found: {}"
 argument_list|,
 operator|(
 name|resource

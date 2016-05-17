@@ -35,11 +35,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -58,8 +58,8 @@ name|PROPERTY_NAME
 init|=
 literal|"stanbol.enhancer.chain.name"
 decl_stmt|;
-comment|/**      * Getter for the execution plan reflecting the current configuration of this      * Chain. The returned {@link Graph} is read only and MUST NOT be changed if       * the configuration of this Chain changes. This means that the Chain MUST       * create a new Graph instance if the execution plan changes as a result of       * a change in the configuration. It MUST NOT change any execution plan       * parsed to other components by the getExecutionPlan() method.      * @return the execution plan as defined by the       *<code>http://stanbol.apache.org/ontology/enhancer/executionplan#</code>      * schema.      * @throws ChainException If the execution plan can not be created. Typically      * the case of the Chain requires runtime information to determine the      * execution plan.      */
-name|Graph
+comment|/**      * Getter for the execution plan reflecting the current configuration of this      * Chain. The returned {@link ImmutableGraph} is read only and MUST NOT be changed if       * the configuration of this Chain changes. This means that the Chain MUST       * create a new ImmutableGraph instance if the execution plan changes as a result of       * a change in the configuration. It MUST NOT change any execution plan       * parsed to other components by the getExecutionPlan() method.      * @return the execution plan as defined by the       *<code>http://stanbol.apache.org/ontology/enhancer/executionplan#</code>      * schema.      * @throws ChainException If the execution plan can not be created. Typically      * the case of the Chain requires runtime information to determine the      * execution plan.      */
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws

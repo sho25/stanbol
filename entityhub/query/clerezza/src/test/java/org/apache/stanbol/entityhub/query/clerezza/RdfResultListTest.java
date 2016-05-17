@@ -57,11 +57,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -73,11 +73,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -89,13 +89,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -107,11 +111,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -129,7 +135,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -310,11 +316,11 @@ name|RdfRepresentation
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|Graph
 name|resultGraph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 name|RdfValueFactory
@@ -326,11 +332,11 @@ argument_list|(
 name|resultGraph
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|resultListNode
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -340,11 +346,11 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|resultProperty
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.

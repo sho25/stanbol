@@ -1231,14 +1231,14 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testBNodeSupport
+name|testBlankNodeSupport
 parameter_list|()
 block|{
 name|log
 operator|.
 name|info
 argument_list|(
-literal|" --- testBNodeSupport ---"
+literal|" --- testBlankNodeSupport ---"
 argument_list|)
 expr_stmt|;
 name|String
@@ -1366,7 +1366,7 @@ expr_stmt|;
 block|}
 comment|//check if all entities where indexed
 comment|//Expected are 3 entities First France from france.rdf
-comment|//and two from BNode Entities in bnode.nt
+comment|//and two from BlankNode Entities in bnode.nt
 name|assertEquals
 argument_list|(
 name|String

@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -62,20 +62,6 @@ operator|.
 name|util
 operator|.
 name|RuleList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
 import|;
 end_import
 
@@ -100,11 +86,11 @@ parameter_list|)
 throws|throws
 name|NoSuchRuleInRecipeException
 function_decl|;
-comment|/**      * Get the rule of the recipe identified by the rule ID. The rule is returned as a {@link Rule} object.      *       * @param ruleID      *            {@link UriRef}      * @return the object that represents a {@link Rule}      */
+comment|/**      * Get the rule of the recipe identified by the rule ID. The rule is returned as a {@link Rule} object.      *       * @param ruleID      *            {@link IRI}      * @return the object that represents a {@link Rule}      */
 name|Rule
 name|getRule
 parameter_list|(
-name|UriRef
+name|IRI
 name|ruleID
 parameter_list|)
 throws|throws
@@ -115,15 +101,15 @@ name|RuleList
 name|getRuleList
 parameter_list|()
 function_decl|;
-comment|/**      * Get the list of rule IDs contained in the recipe.      *       * @return the List of {@link UriRef}.      */
+comment|/**      * Get the list of rule IDs contained in the recipe.      *       * @return the List of {@link IRI}.      */
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|listRuleIDs
 parameter_list|()
 function_decl|;
-comment|/**      * Get the list of rule names contained in the recipe.      *       * @return the List of {@link UriRef}.      */
+comment|/**      * Get the list of rule names contained in the recipe.      *       * @return the List of {@link IRI}.      */
 name|List
 argument_list|<
 name|String
@@ -131,8 +117,8 @@ argument_list|>
 name|listRuleNames
 parameter_list|()
 function_decl|;
-comment|/**      * Get the ID of the recipe in the {@link RuleStore}.      *       * @return the {@link UriRef} expressing the recipe's ID.      */
-name|UriRef
+comment|/**      * Get the ID of the recipe in the {@link RuleStore}.      *       * @return the {@link IRI} expressing the recipe's ID.      */
+name|IRI
 name|getRecipeID
 parameter_list|()
 function_decl|;

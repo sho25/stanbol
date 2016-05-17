@@ -751,7 +751,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -4046,7 +4046,7 @@ operator|new
 name|RdfValueFactory
 argument_list|(
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 argument_list|)
 decl_stmt|;

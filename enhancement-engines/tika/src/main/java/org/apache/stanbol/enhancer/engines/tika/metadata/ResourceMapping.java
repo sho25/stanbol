@@ -89,11 +89,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -105,11 +105,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -121,11 +121,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -137,11 +137,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -153,13 +153,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -171,11 +175,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -253,7 +259,7 @@ block|{
 name|this
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontProperty
 argument_list|)
@@ -284,7 +290,7 @@ block|{
 name|this
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontProperty
 argument_list|)
@@ -300,7 +306,7 @@ block|}
 specifier|public
 name|ResourceMapping
 parameter_list|(
-name|UriRef
+name|IRI
 name|ontProperty
 parameter_list|,
 name|Mapping
@@ -323,7 +329,7 @@ block|}
 specifier|public
 name|ResourceMapping
 parameter_list|(
-name|UriRef
+name|IRI
 name|ontProperty
 parameter_list|,
 name|Mapping
@@ -618,10 +624,10 @@ specifier|public
 name|boolean
 name|apply
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
 name|Metadata
@@ -633,11 +639,11 @@ name|added
 init|=
 literal|false
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|s
 init|=
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 decl_stmt|;
 name|mappingLogger
@@ -662,11 +668,11 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|MGraph
+name|Graph
 name|g
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 for|for

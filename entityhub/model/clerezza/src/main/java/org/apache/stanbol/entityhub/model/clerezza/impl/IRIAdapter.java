@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -120,14 +120,14 @@ end_import
 begin_class
 specifier|public
 class|class
-name|UriRefAdapter
+name|IRIAdapter
 parameter_list|<
 name|A
 parameter_list|>
 implements|implements
 name|Adapter
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|A
 argument_list|>
@@ -141,7 +141,7 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|UriRefAdapter
+name|IRIAdapter
 operator|.
 name|class
 argument_list|)
@@ -158,7 +158,7 @@ specifier|final
 name|A
 name|adapt
 parameter_list|(
-name|UriRef
+name|IRI
 name|value
 parameter_list|,
 name|Class
@@ -206,7 +206,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Unable to parse an URI for UriRef "
+literal|"Unable to parse an URI for IRI "
 operator|+
 name|value
 argument_list|,
@@ -257,7 +257,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Unable to parse an URL for UriRef "
+literal|"Unable to parse an URL for IRI "
 operator|+
 name|value
 argument_list|,
@@ -296,13 +296,13 @@ name|type
 operator|.
 name|equals
 argument_list|(
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|)
 condition|)
 block|{
-comment|//Who converts UriRef -> UriRef ^
+comment|//Who converts IRI -> IRI ^
 return|return
 operator|(
 name|A
@@ -320,7 +320,7 @@ name|type
 operator|+
 literal|" is not a supported target type for "
 operator|+
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|)

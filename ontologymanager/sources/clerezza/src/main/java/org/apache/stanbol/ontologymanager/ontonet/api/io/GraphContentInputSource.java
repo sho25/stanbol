@@ -39,11 +39,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -122,7 +122,7 @@ name|GraphContentInputSource
 implements|implements
 name|OntologyInputSource
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 block|{
 specifier|public

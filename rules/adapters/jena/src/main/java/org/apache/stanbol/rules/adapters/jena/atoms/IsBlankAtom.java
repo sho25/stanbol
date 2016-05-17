@@ -244,7 +244,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * It adapts a IsBlankAtom to the isBNode functor of Jena.  *   * @author anuzzolese  *   */
+comment|/**  *   * It adapts a IsBlankAtom to the isBlankNode functor of Jena.  *   * @author anuzzolese  *   */
 end_comment
 
 begin_class
@@ -397,7 +397,7 @@ operator|)
 operator|new
 name|Functor
 argument_list|(
-literal|"isBNode"
+literal|"isBlankNode"
 argument_list|,
 name|nodes
 argument_list|,

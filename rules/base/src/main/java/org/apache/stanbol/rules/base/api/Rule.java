@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -66,8 +66,8 @@ name|Rule
 extends|extends
 name|Adaptable
 block|{
-comment|/**      * Gets the ID of the rule.      *       * @return the {@link UriRef} representing the name of the rule.      */
-name|UriRef
+comment|/**      * Gets the ID of the rule.      *       * @return the {@link IRI} representing the name of the rule.      */
+name|IRI
 name|getRuleID
 parameter_list|()
 function_decl|;

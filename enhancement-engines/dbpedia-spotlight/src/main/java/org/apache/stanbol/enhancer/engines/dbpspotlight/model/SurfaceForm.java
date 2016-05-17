@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|//import org.apache.clerezza.rdf.core.Resource;
+comment|//import org.apache.clerezza.commons.rdf.RDFTerm;
 end_comment
 
 begin_comment

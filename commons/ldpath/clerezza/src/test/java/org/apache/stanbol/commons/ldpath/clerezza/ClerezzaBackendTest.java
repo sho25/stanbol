@@ -249,11 +249,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -265,11 +265,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -281,11 +281,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -401,7 +401,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -496,10 +496,10 @@ name|NS_DBO
 init|=
 literal|"http://dbpedia.org/ontology/"
 decl_stmt|;
-comment|//private static final UriRef SKOS_CONCEPT = new UriRef(NS_SKOS+"Concept");
+comment|//private static final IRI SKOS_CONCEPT = new IRI(NS_SKOS+"Concept");
 specifier|private
 specifier|static
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 specifier|private
@@ -509,7 +509,7 @@ decl_stmt|;
 specifier|private
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|ldpath
 decl_stmt|;
@@ -534,7 +534,7 @@ comment|//NOTE(rw): the new third parameter is the base URI used to resolve rela
 name|graph
 operator|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 expr_stmt|;
 name|InputStream
@@ -674,14 +674,14 @@ condition|)
 block|{
 name|Configuration
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|config
 init|=
 operator|new
 name|Configuration
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -708,7 +708,7 @@ operator|=
 operator|new
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|backend
@@ -725,17 +725,17 @@ parameter_list|()
 throws|throws
 name|LDPathParseException
 block|{
-name|UriRef
+name|IRI
 name|nationalChampionship
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://cv.iptc.org/newscodes/subjectcode/15073031"
 argument_list|)
 decl_stmt|;
 comment|//this program tests:
-comment|// * UriRef transformers
+comment|// * IRI transformers
 comment|// * #listSubjects(..) implementation
 comment|// * #listObjects(..)  implementation
 name|Map
@@ -763,14 +763,14 @@ argument_list|)
 decl_stmt|;
 name|Set
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expected
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|Arrays
@@ -778,13 +778,13 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://cv.iptc.org/newscodes/subjectcode/15000000"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://cv.iptc.org/newscodes/subjectcode/15073000"
 argument_list|)
@@ -823,7 +823,7 @@ name|assertTrue
 argument_list|(
 name|concept
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -859,11 +859,11 @@ parameter_list|()
 throws|throws
 name|LDPathParseException
 block|{
-name|UriRef
+name|IRI
 name|nationalChampionship
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://cv.iptc.org/newscodes/subjectcode/15073031"
 argument_list|)
@@ -973,11 +973,11 @@ parameter_list|()
 throws|throws
 name|LDPathParseException
 block|{
-name|UriRef
+name|IRI
 name|hallein
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Hallein"
 argument_list|)

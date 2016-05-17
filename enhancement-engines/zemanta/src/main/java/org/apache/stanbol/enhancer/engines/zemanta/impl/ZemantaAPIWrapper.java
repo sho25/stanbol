@@ -129,9 +129,25 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
+name|ImmutableGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
 operator|.
 name|Graph
 import|;
@@ -145,29 +161,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -228,7 +232,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class wraps the Zemanta API into one method.  * Zemanta is able to return RDF-XML so parsing the response into  * a Graph object is simple.  *  * @author michaelmarth  * @author westei (Rupert Westenthaler)  */
+comment|/**  * This class wraps the Zemanta API into one method.  * Zemanta is able to return RDF-XML so parsing the response into  * a ImmutableGraph object is simple.  *  * @author michaelmarth  * @author westei (Rupert Westenthaler)  */
 end_comment
 
 begin_class
@@ -277,7 +281,7 @@ name|key
 expr_stmt|;
 block|}
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|enhance
 parameter_list|(
 name|String
@@ -294,7 +298,7 @@ argument_list|(
 name|textToAnalyze
 argument_list|)
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|zemantaResponseGraph
 init|=
 name|parseResponse
@@ -682,7 +686,7 @@ name|data
 return|;
 block|}
 specifier|private
-name|Graph
+name|ImmutableGraph
 name|parseResponse
 parameter_list|(
 name|InputStream
@@ -697,11 +701,11 @@ name|JenaParserProvider
 argument_list|()
 decl_stmt|;
 comment|//NOTE(rw): the new third parameter is the base URI used to resolve relative paths
-name|MGraph
+name|Graph
 name|g
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|jenaParserProvider
@@ -734,7 +738,7 @@ expr_stmt|;
 return|return
 name|g
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 return|;
 block|}

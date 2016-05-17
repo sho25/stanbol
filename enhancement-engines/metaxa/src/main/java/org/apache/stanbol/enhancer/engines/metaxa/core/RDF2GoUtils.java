@@ -161,7 +161,7 @@ name|model
 operator|.
 name|node
 operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -256,7 +256,7 @@ range|:
 name|model
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|stmt

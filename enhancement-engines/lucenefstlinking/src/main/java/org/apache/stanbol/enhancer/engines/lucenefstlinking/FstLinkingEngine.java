@@ -327,9 +327,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -343,9 +343,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -375,11 +375,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -391,9 +391,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -407,11 +407,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -423,11 +423,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -441,11 +443,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -994,11 +998,11 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_ENTITY_RANKING
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1010,11 +1014,11 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FISE_ORIGIN
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3017,7 +3021,7 @@ name|filterByNamedEntityType
 parameter_list|(
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|eTypes
 parameter_list|,
@@ -3129,7 +3133,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|typeUri
 init|=
 name|eTypes
@@ -3172,14 +3176,14 @@ name|filterEntityByType
 parameter_list|(
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|entityTypes
 parameter_list|)
 block|{
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -3192,7 +3196,7 @@ argument_list|()
 decl_stmt|;
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -3221,7 +3225,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|type
 init|=
 name|entityTypes
@@ -4364,7 +4368,7 @@ name|language
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -4382,14 +4386,14 @@ control|)
 block|{
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|textAnnotations
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|tags
@@ -4443,7 +4447,7 @@ argument_list|,
 name|startLiteral
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 literal|null
@@ -4504,7 +4508,7 @@ block|{
 name|textAnnotation
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -4687,7 +4691,7 @@ block|}
 comment|//add dc:types (even to existing)
 for|for
 control|(
-name|UriRef
+name|IRI
 name|dcType
 range|:
 name|getDcTypes
@@ -4736,7 +4740,7 @@ name|getSuggestions
 argument_list|()
 control|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -4782,7 +4786,7 @@ argument_list|,
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|match
 operator|.
@@ -4794,7 +4798,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|type
 range|:
 name|match
@@ -4895,8 +4899,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//TODO: add origin information of the EntiySearcher
-comment|//                for(Entry<UriRef,Collection<Resource>> originInfo : entitySearcher.getOriginInformation().entrySet()){
-comment|//                    for(Resource value : originInfo.getValue()){
+comment|//                for(Entry<IRI,Collection<RDFTerm>> originInfo : entitySearcher.getOriginInformation().entrySet()){
+comment|//                    for(RDFTerm value : originInfo.getValue()){
 comment|//                        metadata.add(new TripleImpl(entityAnnotation,
 comment|//                            originInfo.getKey(),value));
 comment|//                    }
@@ -4958,7 +4962,7 @@ comment|/**      * Retrieves all {@link EntitySearcher#getEncodedTypeField()} va
 specifier|private
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getDcTypes
 parameter_list|(
@@ -4990,14 +4994,14 @@ return|;
 block|}
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|conceptTypes
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -5041,7 +5045,7 @@ for|for
 control|(
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|types
 init|=
@@ -5072,9 +5076,9 @@ empty_stmt|;
 block|}
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|typeMappings
 init|=
@@ -5085,26 +5089,26 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|dcTypes
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|conceptType
 range|:
 name|conceptTypes
 control|)
 block|{
-name|UriRef
+name|IRI
 name|dcType
 init|=
 name|typeMappings

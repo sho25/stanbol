@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -43,11 +43,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -59,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -130,25 +130,25 @@ specifier|public
 interface|interface
 name|Refactorer
 block|{
-comment|/**      * Fetch the mgraph with the selected uri from the storage.      *       * @param uriRef      *            {@link UriRef}      * @return the {@link MGraph}.      */
-name|MGraph
+comment|/**      * Fetch the mgraph with the selected uri from the storage.      *       * @param uriRef      *            {@link IRI}      * @return the {@link Graph}.      */
+name|Graph
 name|getRefactoredDataSet
 parameter_list|(
-name|UriRef
+name|IRI
 name|uriRef
 parameter_list|)
 function_decl|;
-comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetID}      * identifies dataset to which apply the refactoring. {@code refactoredDataSetID} identifies the new      * refactored dataset in the store. {@code recipeID} identifies the ID of the recipe in the      * {@link RuleStore},      *       * @param refactoredDataSetID      *            {@link UriRef}      * @param datasetID      *            {@link UriRef}      * @param recipeIRI      *            {@link UriRef}      */
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetID}      * identifies dataset to which apply the refactoring. {@code refactoredDataSetID} identifies the new      * refactored dataset in the store. {@code recipeID} identifies the ID of the recipe in the      * {@link RuleStore},      *       * @param refactoredDataSetID      *            {@link IRI}      * @param datasetID      *            {@link IRI}      * @param recipeIRI      *            {@link IRI}      */
 name|void
 name|graphRefactoring
 parameter_list|(
-name|UriRef
+name|IRI
 name|refactoredOntologyID
 parameter_list|,
-name|UriRef
+name|IRI
 name|datasetID
 parameter_list|,
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|)
 throws|throws
@@ -156,14 +156,14 @@ name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 function_decl|;
-comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetURI      *            {@link UriRef}      * @param recipe      *            {@link UriRef}      * @return the refactored {@link MGraph}      * @throws RefactoringException      * @throws NoSuchRecipeException      */
-name|TripleCollection
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetURI      *            {@link IRI}      * @param recipe      *            {@link IRI}      * @return the refactored {@link Graph}      * @throws RefactoringException      * @throws NoSuchRecipeException      */
+name|Graph
 name|graphRefactoring
 parameter_list|(
-name|UriRef
+name|IRI
 name|datasetID
 parameter_list|,
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|)
 throws|throws
@@ -171,11 +171,11 @@ name|RefactoringException
 throws|,
 name|NoSuchRecipeException
 function_decl|;
-comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetID      *            {@link TripleCollection}      * @param recipe      *            {@link Recipe}      * @return the refactored {@link TripleCollection}      * @throws SemionRefactoringException      * @throws NoSuchRecipeException      */
-name|TripleCollection
+comment|/**      * The refactoring is perfomed by the {@code Refactorer} by invoking this method. The {@code datasetURI}      * is the URI of an RDF graph in KReS and the {@code recipe} is the recipe that needs to be applied to RDF      * graph in order to obtain the refactoring.      *       * @param datasetID      *            {@link Graph}      * @param recipe      *            {@link Recipe}      * @return the refactored {@link Graph}      * @throws SemionRefactoringException      * @throws NoSuchRecipeException      */
+name|Graph
 name|graphRefactoring
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|dataset
 parameter_list|,
 name|Recipe

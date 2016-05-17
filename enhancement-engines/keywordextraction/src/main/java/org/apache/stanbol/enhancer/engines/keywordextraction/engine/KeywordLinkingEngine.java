@@ -161,9 +161,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -177,9 +177,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -209,11 +209,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -225,11 +225,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -241,11 +241,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -259,11 +261,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -2144,7 +2148,7 @@ throw|;
 block|}
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2489,7 +2493,7 @@ name|language
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -2507,14 +2511,14 @@ control|)
 block|{
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|textAnnotations
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|linkedEntity
@@ -2538,7 +2542,7 @@ name|getOccurrences
 argument_list|()
 control|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -2686,7 +2690,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|dcType
 range|:
 name|linkedEntity
@@ -2726,7 +2730,7 @@ name|getSuggestions
 argument_list|()
 control|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -2818,7 +2822,7 @@ operator|.
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|suggestion
 operator|.
@@ -2872,7 +2876,7 @@ operator|.
 name|ENHANCER_ENTITY_TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|suggestionTypes
 operator|.
@@ -2913,7 +2917,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|textAnnotation
 range|:
 name|textAnnotations
@@ -2948,7 +2952,7 @@ argument_list|(
 name|entityAnnotation
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -3018,7 +3022,7 @@ name|ci
 argument_list|)
 decl_stmt|;
 comment|//        if(lang != null){
-comment|//        MGraph metadata = ci.getMetadata();
+comment|//        Graph metadata = ci.getMetadata();
 comment|//        Iterator<Triple> langaugeEnhancementCreatorTriples =
 comment|//            metadata.filter(null, Properties.DC_CREATOR, LANG_ID_ENGINE_NAME);
 comment|//        if(langaugeEnhancementCreatorTriples.hasNext()){
@@ -4950,11 +4954,11 @@ continue|continue
 name|configs
 continue|;
 block|}
-name|UriRef
+name|IRI
 name|targetUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|targetType
 argument_list|)
@@ -5002,7 +5006,7 @@ argument_list|(
 name|sourceType
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|old
 init|=
 name|linkerConfig

@@ -505,11 +505,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -521,11 +521,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -537,11 +537,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -553,13 +553,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -571,11 +575,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -920,7 +926,7 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test"
 argument_list|)
@@ -956,7 +962,7 @@ operator|.
 name|addPart
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"run:text:text"
 argument_list|)
@@ -984,7 +990,7 @@ operator|new
 name|TripleImpl
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:test"
 argument_list|)
@@ -994,7 +1000,7 @@ operator|.
 name|type
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:types:Document"
 argument_list|)
@@ -1075,7 +1081,7 @@ argument_list|,
 literal|"application/rdf+xml"
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|em
 init|=
 name|initExecutionMetadataContentPart
@@ -1083,7 +1089,7 @@ argument_list|(
 name|contentItem
 argument_list|)
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|ep
 init|=
 name|createExecutionPlan
@@ -1630,11 +1636,11 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//assert metadata
-name|MGraph
+name|Graph
 name|copy
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|copy
@@ -1729,7 +1735,7 @@ name|Iterator
 argument_list|<
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1757,7 +1763,7 @@ name|Iterator
 argument_list|<
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1810,7 +1816,7 @@ condition|)
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1823,7 +1829,7 @@ argument_list|()
 decl_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1934,7 +1940,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//validate ExecutionMetadata
-name|MGraph
+name|Graph
 name|executionMetadata
 init|=
 name|contentItem
@@ -1945,12 +1951,12 @@ name|ExecutionMetadata
 operator|.
 name|CHAIN_EXECUTION
 argument_list|,
-name|MGraph
+name|Graph
 operator|.
 name|class
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|readExecutionMetadata
 init|=
 name|ci
@@ -1961,7 +1967,7 @@ name|ExecutionMetadata
 operator|.
 name|CHAIN_EXECUTION
 argument_list|,
-name|MGraph
+name|Graph
 operator|.
 name|class
 argument_list|)

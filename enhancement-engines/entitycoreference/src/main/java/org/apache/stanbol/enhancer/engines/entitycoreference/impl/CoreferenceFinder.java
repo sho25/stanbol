@@ -137,11 +137,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1302,7 +1302,7 @@ operator|.
 name|getNerChunks
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|nerType
 init|=
 name|ner
@@ -1381,7 +1381,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|npNerType
 init|=
 name|npNer
@@ -1688,7 +1688,7 @@ operator|.
 name|lookupEntityType
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|typeUri
 argument_list|)
@@ -1800,7 +1800,7 @@ operator|.
 name|addEntityType
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|typeUri
 argument_list|)

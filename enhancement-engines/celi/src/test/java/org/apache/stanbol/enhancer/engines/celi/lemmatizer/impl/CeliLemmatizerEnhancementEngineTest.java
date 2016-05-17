@@ -337,11 +337,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -353,11 +353,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -369,25 +369,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -401,11 +385,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -417,11 +401,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|IRI
 import|;
 end_import
 
@@ -433,11 +417,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -449,11 +433,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -467,11 +453,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1089,18 +1077,18 @@ expr_stmt|;
 comment|//validate enhancement
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1173,7 +1161,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|lemmaTextAnnotation
 init|=
 name|lemmaTextAnnotationIterator
@@ -1186,11 +1174,11 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
-literal|"TextAnnoations MUST BE UriRefs!"
+literal|"TextAnnoations MUST BE IRIs!"
 argument_list|,
 name|lemmaTextAnnotation
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|assertFalse
@@ -1212,7 +1200,7 @@ name|getMetadata
 argument_list|()
 argument_list|,
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|lemmaTextAnnotation
 argument_list|,
@@ -1341,18 +1329,18 @@ expr_stmt|;
 comment|//validate enhancements
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1431,11 +1419,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|textAnnotationIterator
 operator|.
@@ -1520,10 +1508,10 @@ specifier|private
 name|int
 name|validateLemmaFormProperty
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|textAnnotation
 parameter_list|,
 name|String
@@ -1577,7 +1565,7 @@ block|{
 name|lemmaFormCount
 operator|++
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|lemmaForms
 init|=
 name|lemmaFormsIterator
@@ -1590,11 +1578,11 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
-literal|"Lemma Forms value are expected of type PlainLiteral"
+literal|"Lemma Forms value are expected of type Literal"
 argument_list|,
 name|lemmaForms
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertFalse
@@ -1603,7 +1591,7 @@ literal|"Lemma forms MUST NOT be empty"
 argument_list|,
 operator|(
 operator|(
-name|PlainLiteral
+name|Literal
 operator|)
 name|lemmaForms
 operator|)
@@ -1621,7 +1609,7 @@ literal|"Language of the Lemma Form literal MUST BE not null"
 argument_list|,
 operator|(
 operator|(
-name|PlainLiteral
+name|Literal
 operator|)
 name|lemmaForms
 operator|)
@@ -1638,7 +1626,7 @@ name|lang
 argument_list|,
 operator|(
 operator|(
-name|PlainLiteral
+name|Literal
 operator|)
 name|lemmaForms
 operator|)
@@ -1660,10 +1648,10 @@ specifier|private
 name|void
 name|validateMorphoFeatureProperty
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|textAnnotation
 parameter_list|)
 block|{
@@ -1707,7 +1695,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|morphoFeature
 init|=
 name|morphoFeatureIterator
@@ -1724,7 +1712,7 @@ literal|"Morpho Feature value are expected of typed literal"
 argument_list|,
 name|morphoFeature
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|String
@@ -1732,7 +1720,7 @@ name|feature
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|morphoFeature
 operator|)
@@ -1843,7 +1831,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|morphoFeature
 init|=
 name|morphoFeatureIterator
@@ -1860,7 +1848,7 @@ literal|"Morpho Feature value are expected of typed literal"
 argument_list|,
 name|morphoFeature
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|String
@@ -1868,7 +1856,7 @@ name|feature
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|morphoFeature
 operator|)
@@ -1979,7 +1967,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|morphoFeature
 init|=
 name|morphoFeatureIterator
@@ -1996,7 +1984,7 @@ literal|"Morpho Feature value are expected of typed literal"
 argument_list|,
 name|morphoFeature
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|String
@@ -2004,7 +1992,7 @@ name|feature
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|morphoFeature
 operator|)
@@ -2115,7 +2103,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|morphoFeature
 init|=
 name|morphoFeatureIterator
@@ -2128,11 +2116,11 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
-literal|"Lemma Forms value are expected of type PlainLiteral"
+literal|"Lemma Forms value are expected of type Literal"
 argument_list|,
 name|morphoFeature
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertFalse
@@ -2141,7 +2129,7 @@ literal|"Lemma forms MUST NOT be empty"
 argument_list|,
 operator|(
 operator|(
-name|PlainLiteral
+name|Literal
 operator|)
 name|morphoFeature
 operator|)
@@ -2158,7 +2146,7 @@ name|feature
 init|=
 operator|(
 operator|(
-name|PlainLiteral
+name|Literal
 operator|)
 name|morphoFeature
 operator|)

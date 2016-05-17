@@ -133,11 +133,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -244,7 +244,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
 decl_stmt|;
@@ -255,7 +255,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|mappings
 init|=
@@ -264,7 +264,7 @@ name|TreeMap
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -311,7 +311,7 @@ name|mappings
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Holds the configured {@link NerTag}s - the mappings from the      * named entity name to the {@link UriRef} type used for the      *<code>dc:type</code> value for<code>fise:TextAnnotation</code>s      */
+comment|/**      * Holds the configured {@link NerTag}s - the mappings from the      * named entity name to the {@link IRI} type used for the      *<code>dc:type</code> value for<code>fise:TextAnnotation</code>s      */
 specifier|private
 name|TagSet
 argument_list|<
@@ -401,7 +401,7 @@ name|Entry
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|mapping
 range|:
@@ -819,7 +819,7 @@ parameter_list|(
 name|String
 name|namedEntityType
 parameter_list|,
-name|UriRef
+name|IRI
 name|dcType
 parameter_list|)
 block|{

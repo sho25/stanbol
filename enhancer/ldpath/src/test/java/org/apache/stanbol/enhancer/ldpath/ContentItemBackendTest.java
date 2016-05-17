@@ -199,9 +199,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -231,11 +231,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -247,11 +247,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -263,9 +263,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -279,11 +279,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|IRI
 import|;
 end_import
 
@@ -295,45 +295,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -345,11 +317,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -465,7 +439,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -736,7 +710,7 @@ decl_stmt|;
 specifier|private
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|ldpath
 decl_stmt|;
@@ -759,7 +733,7 @@ name|JenaParserProvider
 argument_list|()
 decl_stmt|;
 comment|//create the content Item with the HTML content
-name|MGraph
+name|Graph
 name|rdfData
 init|=
 name|parseRdfData
@@ -769,7 +743,7 @@ argument_list|,
 literal|"metadata.rdf.zip"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|contentItemId
 init|=
 literal|null
@@ -801,7 +775,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -823,13 +797,13 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|contentItemId
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -955,7 +929,7 @@ operator|.
 name|addPart
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ci
 operator|.
@@ -1007,7 +981,7 @@ block|}
 comment|/**      * @param parser      * @return      * @throws IOException      */
 specifier|protected
 specifier|static
-name|MGraph
+name|Graph
 name|parseRdfData
 parameter_list|(
 name|ParsingProvider
@@ -1019,11 +993,11 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-name|MGraph
+name|Graph
 name|rdfData
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 name|InputStream
@@ -1197,7 +1171,7 @@ operator|=
 operator|new
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|backend
@@ -1221,7 +1195,7 @@ name|LDPathParseException
 block|{
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -1262,7 +1236,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|result
@@ -1396,7 +1370,7 @@ operator|.
 name|getBytes
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 init|=
 name|ContentItemHelper
@@ -1424,14 +1398,14 @@ literal|"text/plain; charset=UTF-8"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|tc
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|literal
 init|=
 name|LiteralFactory
@@ -1444,11 +1418,11 @@ argument_list|(
 literal|"Michael Jackson"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|subject
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"dummyUri"
 argument_list|)
@@ -1463,7 +1437,7 @@ argument_list|(
 name|subject
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/givenName"
 argument_list|)
@@ -1477,7 +1451,7 @@ operator|.
 name|addPart
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uri
 operator|.
@@ -1503,14 +1477,14 @@ argument_list|)
 decl_stmt|;
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|ldPath
 init|=
 operator|new
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|ciBackend
@@ -1523,7 +1497,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -1567,7 +1541,7 @@ literal|"fn:textAnnotation(.)/fise:selected-text"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -1632,7 +1606,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -1718,7 +1692,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|result
@@ -1768,7 +1742,7 @@ literal|"fn:textAnnotation()/fise:selected-text"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -1833,7 +1807,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -1919,7 +1893,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|result
@@ -1969,7 +1943,7 @@ literal|"fn:entityAnnotation(.)/fise:entity-reference"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -2012,14 +1986,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|Arrays
@@ -2027,25 +2001,25 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Bob_Marley"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Centre_Georges_Pompidou"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris,_Texas"
 argument_list|)
@@ -2054,7 +2028,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -2064,7 +2038,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -2146,7 +2120,7 @@ operator|.
 name|contains
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Bob_Marley"
 argument_list|)
@@ -2170,7 +2144,7 @@ literal|"fn:entityAnnotation()/fise:entity-reference"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -2213,14 +2187,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|Arrays
@@ -2228,25 +2202,25 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Bob_Marley"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Centre_Georges_Pompidou"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris,_Texas"
 argument_list|)
@@ -2255,7 +2229,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -2265,7 +2239,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -2347,7 +2321,7 @@ operator|.
 name|contains
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Bob_Marley"
 argument_list|)
@@ -2371,7 +2345,7 @@ literal|"fn:enhancement(.)"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -2414,7 +2388,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -2424,7 +2398,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -2481,7 +2455,7 @@ operator|==
 literal|3
 argument_list|)
 expr_stmt|;
-comment|//        assertTrue(result.contains(new UriRef("http://dbpedia.org/resource/Bob_Marley")));
+comment|//        assertTrue(result.contains(new IRI("http://dbpedia.org/resource/Bob_Marley")));
 name|path
 operator|=
 literal|"fn:enhancement(.)/dc:language"
@@ -2525,7 +2499,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|result
@@ -2575,7 +2549,7 @@ literal|"fn:enhancement()"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -2618,7 +2592,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -2628,7 +2602,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -2685,7 +2659,7 @@ operator|==
 literal|3
 argument_list|)
 expr_stmt|;
-comment|//        assertTrue(result.contains(new UriRef("http://dbpedia.org/resource/Bob_Marley")));
+comment|//        assertTrue(result.contains(new IRI("http://dbpedia.org/resource/Bob_Marley")));
 name|path
 operator|=
 literal|"fn:enhancement()/dc:language"
@@ -2729,7 +2703,7 @@ operator|==
 literal|1
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|result
@@ -2786,7 +2760,7 @@ literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Place]/fn:suggestion(.)"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -2833,7 +2807,7 @@ init|=
 literal|null
 decl_stmt|;
 comment|//stores the lowest confidence suggestion for the 2nd part of this test
-name|UriRef
+name|IRI
 name|lowestConfidenceSuggestion
 init|=
 literal|null
@@ -2844,7 +2818,7 @@ literal|"fise:confidence :: xsd:double"
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -2854,7 +2828,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -2912,7 +2886,7 @@ expr_stmt|;
 name|lowestConfidenceSuggestion
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -2929,7 +2903,7 @@ literal|"fn:textAnnotation(.)[dc:type is dbpedia-ont:Place]/fn:suggestion(.,\"2\
 expr_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result2
 init|=
@@ -3016,7 +2990,7 @@ literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Place]/fn:suggestion()"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -3063,7 +3037,7 @@ init|=
 literal|null
 decl_stmt|;
 comment|//stores the lowest confidence suggestion for the 2nd part of this test
-name|UriRef
+name|IRI
 name|lowestConfidenceSuggestion
 init|=
 literal|null
@@ -3074,7 +3048,7 @@ literal|"fise:confidence :: xsd:double"
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -3084,7 +3058,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -3142,7 +3116,7 @@ expr_stmt|;
 name|lowestConfidenceSuggestion
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -3159,7 +3133,7 @@ literal|"fn:textAnnotation()[dc:type is dbpedia-ont:Place]/fn:suggestion(\"2\")"
 expr_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result2
 init|=
@@ -3243,7 +3217,7 @@ literal|"fn:textAnnotation(.)/fn:suggestedEntity(.,\"1\")"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -3286,14 +3260,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|Arrays
@@ -3301,13 +3275,13 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Bob_Marley"
 argument_list|)
@@ -3316,7 +3290,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -3326,7 +3300,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -3407,7 +3381,7 @@ expr_stmt|;
 name|assertEquals
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
@@ -3442,7 +3416,7 @@ literal|"fn:textAnnotation()/fn:suggestedEntity(\"1\")"
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
@@ -3485,14 +3459,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|Arrays
@@ -3500,13 +3474,13 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Bob_Marley"
 argument_list|)
@@ -3515,7 +3489,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|result
@@ -3525,7 +3499,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|log
@@ -3606,7 +3580,7 @@ expr_stmt|;
 name|assertEquals
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/resource/Paris"
 argument_list|)

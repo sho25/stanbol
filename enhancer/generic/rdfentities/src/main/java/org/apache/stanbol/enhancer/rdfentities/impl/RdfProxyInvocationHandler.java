@@ -183,22 +183,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|LiteralFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|NoConvertorException
 import|;
 end_import
@@ -211,11 +195,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -227,11 +211,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -243,9 +227,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -259,11 +243,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|IRI
 import|;
 end_import
 
@@ -275,11 +259,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -291,13 +275,31 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
+name|utils
+operator|.
 name|TripleImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|LiteralFactory
 import|;
 end_import
 
@@ -495,7 +497,7 @@ name|LiteralFactory
 name|literalFactory
 decl_stmt|;
 specifier|protected
-name|NonLiteral
+name|BlankNodeOrIRI
 name|rdfNode
 decl_stmt|;
 specifier|private
@@ -515,7 +517,7 @@ parameter_list|(
 name|SimpleRdfEntityFactory
 name|factory
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|rdfNode
 parameter_list|,
 name|Class
@@ -547,10 +549,10 @@ name|literalFactory
 operator|=
 name|literalFactory
 expr_stmt|;
-comment|//TODO If slow implement this by directly using the MGraph Interface!
+comment|//TODO If slow implement this by directly using the Graph Interface!
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|nodeTypes
 init|=
@@ -560,7 +562,7 @@ name|Properties
 operator|.
 name|RDF_TYPE
 argument_list|,
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|)
@@ -678,11 +680,11 @@ block|{             }
 else|else
 block|{
 comment|//check of the type statement is present
-name|UriRef
+name|IRI
 name|typeRef
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|classAnnotation
 operator|.
@@ -957,7 +959,7 @@ literal|"Invoked Method does not have an Rdf annotation!"
 argument_list|)
 throw|;
 block|}
-name|UriRef
+name|IRI
 name|property
 decl_stmt|;
 if|if
@@ -986,7 +988,7 @@ block|{
 name|property
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|rdf
 operator|.
@@ -1480,7 +1482,7 @@ parameter_list|>
 name|T
 name|getValue
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Class
@@ -1518,7 +1520,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|result
 init|=
 name|results
@@ -1533,7 +1535,7 @@ if|if
 condition|(
 name|result
 operator|instanceof
-name|NonLiteral
+name|BlankNodeOrIRI
 condition|)
 block|{
 if|if
@@ -1557,7 +1559,7 @@ operator|.
 name|getProxy
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|result
 argument_list|,
@@ -1575,17 +1577,17 @@ return|;
 block|}
 else|else
 block|{
-comment|//check result for UriRef and types UriRef, URI or URL
+comment|//check result for IRI and types IRI, URI or URL
 if|if
 condition|(
 name|result
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 if|if
 condition|(
-name|UriRef
+name|IRI
 operator|.
 name|class
 operator|.
@@ -1626,7 +1628,7 @@ name|URI
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|result
 operator|)
@@ -1654,7 +1656,7 @@ name|class
 operator|+
 literal|" for "
 operator|+
-name|UriRef
+name|IRI
 operator|.
 name|class
 operator|+
@@ -1662,7 +1664,7 @@ literal|" value="
 operator|+
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|result
 operator|)
@@ -1697,7 +1699,7 @@ name|URL
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|result
 operator|)
@@ -1725,7 +1727,7 @@ name|class
 operator|+
 literal|" for "
 operator|+
-name|UriRef
+name|IRI
 operator|.
 name|class
 operator|+
@@ -1733,7 +1735,7 @@ literal|" value="
 operator|+
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|result
 operator|)
@@ -1773,7 +1775,7 @@ literal|" and property "
 operator|+
 name|property
 operator|+
-literal|"! (Subclass of RdfEntity, UriRef, URI or URL is expected for NonLiteral Values)"
+literal|"! (Subclass of RdfEntity, IRI, URI or URL is expected for BlankNodeOrIRI Values)"
 argument_list|)
 throw|;
 block|}
@@ -1807,7 +1809,7 @@ literal|" and property "
 operator|+
 name|property
 operator|+
-literal|"! (Subclass of RdfEntity expected as type for NonLiteral values that are no instanceof UriRef)"
+literal|"! (Subclass of RdfEntity expected as type for BlankNodeOrIRI values that are no instanceof IRI)"
 argument_list|)
 throw|;
 block|}
@@ -1823,7 +1825,7 @@ argument_list|(
 name|type
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|result
 argument_list|)
@@ -1847,7 +1849,7 @@ name|T
 argument_list|>
 name|getValues
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Class
@@ -1874,7 +1876,7 @@ specifier|private
 name|void
 name|setValue
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Object
@@ -1898,7 +1900,7 @@ specifier|private
 name|void
 name|setValues
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Collection
@@ -1931,7 +1933,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|protected
-name|Resource
+name|RDFTerm
 name|getRdfResource
 parameter_list|(
 name|Object
@@ -1944,13 +1946,13 @@ if|if
 condition|(
 name|value
 operator|instanceof
-name|Resource
+name|RDFTerm
 condition|)
 block|{
-comment|//if the parsed object is already a Resource
+comment|//if the parsed object is already a RDFTerm
 return|return
 operator|(
-name|Resource
+name|RDFTerm
 operator|)
 name|value
 return|;
@@ -1988,7 +1990,7 @@ block|{
 comment|//or URI links
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|value
 operator|.
@@ -2008,7 +2010,7 @@ block|{
 comment|//or URL links
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|value
 operator|.
@@ -2035,14 +2037,14 @@ specifier|private
 name|boolean
 name|addValue
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Object
 name|value
 parameter_list|)
 block|{
-name|Resource
+name|RDFTerm
 name|rdfValue
 decl_stmt|;
 try|try
@@ -2106,14 +2108,14 @@ specifier|private
 name|boolean
 name|removeValue
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Object
 name|value
 parameter_list|)
 block|{
-name|Resource
+name|RDFTerm
 name|rdfValue
 decl_stmt|;
 try|try
@@ -2177,7 +2179,7 @@ specifier|private
 name|void
 name|removeValues
 parameter_list|(
-name|UriRef
+name|IRI
 name|proptery
 parameter_list|)
 block|{
@@ -2224,7 +2226,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * We need this class to apply changes in the collection to the MGraph.      * This collection implementation is a stateless wrapper over the      * triples selected by the subject,property pair over the MGraph!<br>      * Default implementation of {@link AbstractCollection} are very poor      * performance. Because of that this class overrides some methods      * already implemented by its abstract super class.      * @author westei      *      * @param<T>      */
+comment|/**      * We need this class to apply changes in the collection to the Graph.      * This collection implementation is a stateless wrapper over the      * triples selected by the subject,property pair over the Graph!<br>      * Default implementation of {@link AbstractCollection} are very poor      * performance. Because of that this class overrides some methods      * already implemented by its abstract super class.      * @author westei      *      * @param<T>      */
 specifier|private
 specifier|final
 class|class
@@ -2238,10 +2240,10 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|//private final NonLiteral resource;
+comment|//private final BlankNodeOrIRI resource;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|property
 decl_stmt|;
 specifier|private
@@ -2275,7 +2277,7 @@ decl_stmt|;
 specifier|private
 name|RdfProxyPropertyCollection
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Class
@@ -2332,7 +2334,7 @@ argument_list|)
 expr_stmt|;
 name|uriRef
 operator|=
-name|UriRef
+name|IRI
 operator|.
 name|class
 operator|.
@@ -2406,7 +2408,7 @@ name|T
 name|next
 parameter_list|()
 block|{
-name|Resource
+name|RDFTerm
 name|value
 init|=
 name|results
@@ -2432,7 +2434,7 @@ operator|.
 name|getProxy
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|value
 argument_list|,
@@ -2465,7 +2467,7 @@ name|URI
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 operator|)
@@ -2493,7 +2495,7 @@ name|class
 operator|+
 literal|" for "
 operator|+
-name|UriRef
+name|IRI
 operator|.
 name|class
 operator|+
@@ -2501,7 +2503,7 @@ literal|" value="
 operator|+
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 operator|)
@@ -2529,7 +2531,7 @@ name|URL
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 operator|)
@@ -2557,7 +2559,7 @@ name|class
 operator|+
 literal|" for "
 operator|+
-name|UriRef
+name|IRI
 operator|.
 name|class
 operator|+
@@ -2565,7 +2567,7 @@ literal|" value="
 operator|+
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 operator|)
@@ -2599,7 +2601,7 @@ argument_list|(
 name|genericType
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|value
 argument_list|)

@@ -167,11 +167,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -183,11 +183,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -635,7 +635,7 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -717,18 +717,18 @@ argument_list|)
 expr_stmt|;
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;

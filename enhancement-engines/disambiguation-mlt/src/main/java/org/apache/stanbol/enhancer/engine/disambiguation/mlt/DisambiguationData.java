@@ -189,11 +189,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -205,9 +205,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -221,11 +221,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -336,11 +336,11 @@ comment|/**      * Stores the URIs of fise:EntityAnnnotation as key and the fise
 specifier|public
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|suggestionMap
@@ -348,11 +348,11 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 argument_list|()
@@ -395,7 +395,7 @@ comment|/**      * List of all fise:textAnnotations that can be used for disambi
 specifier|public
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|SavedEntity
 argument_list|>
@@ -404,7 +404,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|SavedEntity
 argument_list|>
@@ -424,7 +424,7 @@ name|ContentItem
 name|ci
 parameter_list|)
 block|{
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -466,11 +466,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|it
 operator|.
@@ -482,7 +482,7 @@ argument_list|()
 decl_stmt|;
 comment|// TODO: rwesten: do we really want to ignore fise:TextAnnotations that link to
 comment|// to an other one (typically two TextAnnotations that select the exact same text)
-comment|// if (graph.filter(uri, new UriRef(NamespaceEnum.dc + "relation"), null).hasNext()) {
+comment|// if (graph.filter(uri, new IRI(NamespaceEnum.dc + "relation"), null).hasNext()) {
 comment|// continue;
 comment|// }
 name|SavedEntity
@@ -547,7 +547,7 @@ control|)
 block|{
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|textAnnotations
 init|=
@@ -575,7 +575,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 expr_stmt|;

@@ -125,11 +125,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -141,11 +141,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -331,19 +331,19 @@ name|Override
 specifier|public
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|apply
 parameter_list|(
 name|ContentItemBackend
 name|backend
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|context
 parameter_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 modifier|...
 name|args
@@ -398,7 +398,7 @@ for|for
 control|(
 name|Iterator
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|params
 init|=
@@ -419,7 +419,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|param
 init|=
 name|params
@@ -482,7 +482,7 @@ block|}
 block|}
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 decl_stmt|;
@@ -513,7 +513,7 @@ else|else
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -642,7 +642,7 @@ operator|.
 name|singleton
 argument_list|(
 operator|(
-name|Resource
+name|RDFTerm
 operator|)
 name|lf
 operator|.

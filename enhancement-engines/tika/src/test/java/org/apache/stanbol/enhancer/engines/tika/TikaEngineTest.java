@@ -347,9 +347,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -379,11 +379,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -395,11 +395,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -411,41 +411,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|PlainLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -459,27 +427,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -988,7 +940,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1136,7 +1088,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1404,7 +1356,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1551,7 +1503,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1698,7 +1650,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1847,7 +1799,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1955,13 +1907,13 @@ expr_stmt|;
 comment|//no check the extracted metadata!
 comment|//DC
 comment|//STANBOL-757: dc:date no longer added by Tika 1.2 (dc:created is still present)
-comment|//verifyValue(ci, new UriRef(NamespaceEnum.dc+"date"), XSD.dateTime,"2010-09-06T09:25:34Z");
+comment|//verifyValue(ci, new IRI(NamespaceEnum.dc+"date"), XSD.dateTime,"2010-09-06T09:25:34Z");
 name|verifyValue
 argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1976,13 +1928,13 @@ literal|"message/rfc822"
 argument_list|)
 expr_stmt|;
 comment|//STANBOL-757: dc:subject no longer added by Tika1.2 (dc:title is used instead)
-comment|//verifyValue(ci, new UriRef(NamespaceEnum.dc+"subject"), null,"[jira] Commented: (TIKA-461) RFC822 messages not parsed");
+comment|//verifyValue(ci, new IRI(NamespaceEnum.dc+"subject"), null,"[jira] Commented: (TIKA-461) RFC822 messages not parsed");
 name|verifyValue
 argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2001,7 +1953,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2020,7 +1972,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2042,7 +1994,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2063,7 +2015,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2082,7 +2034,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2101,7 +2053,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2116,7 +2068,7 @@ literal|"Julien Nioche (JIRA)<jira@apache.org>"
 argument_list|)
 expr_stmt|;
 comment|//STANBOL-757: This was present with Tika 1.1 because its mapping from dc:subject
-comment|//        verifyValue(ci, new UriRef(NamespaceEnum.media+"hasKeyword"),null,"[jira] Commented: (TIKA-461) RFC822 messages not parsed");
+comment|//        verifyValue(ci, new IRI(NamespaceEnum.media+"hasKeyword"),null,"[jira] Commented: (TIKA-461) RFC822 messages not parsed");
 comment|//Nepomuk Message
 name|String
 name|message
@@ -2128,7 +2080,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|message
 operator|+
@@ -2145,7 +2097,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|message
 operator|+
@@ -2209,7 +2161,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2290,15 +2242,15 @@ name|xhtmlBlob
 argument_list|)
 expr_stmt|;
 comment|//Test AudioTrack metadata
-name|NonLiteral
+name|BlankNodeOrIRI
 name|audioTrack
 init|=
-name|verifyNonLiteral
+name|verifyBlankNodeOrIRI
 argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2320,7 +2272,7 @@ operator|.
 name|type
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2330,7 +2282,7 @@ literal|"MediaFragment"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2340,7 +2292,7 @@ literal|"Track"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2358,7 +2310,7 @@ argument_list|,
 name|audioTrack
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2381,7 +2333,7 @@ argument_list|,
 name|audioTrack
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2404,7 +2356,7 @@ argument_list|,
 name|audioTrack
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2473,7 +2425,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2554,15 +2506,15 @@ name|xhtmlBlob
 argument_list|)
 expr_stmt|;
 comment|//Test AudioTrack metadata
-name|NonLiteral
+name|BlankNodeOrIRI
 name|audioTrack
 init|=
-name|verifyNonLiteral
+name|verifyBlankNodeOrIRI
 argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2584,7 +2536,7 @@ operator|.
 name|type
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2594,7 +2546,7 @@ literal|"MediaFragment"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2604,7 +2556,7 @@ literal|"Track"
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2622,7 +2574,7 @@ argument_list|,
 name|audioTrack
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2645,7 +2597,7 @@ argument_list|,
 name|audioTrack
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2668,7 +2620,7 @@ argument_list|,
 name|audioTrack
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2705,12 +2657,12 @@ argument_list|(
 literal|">>> testGEOMetadata<<<"
 argument_list|)
 expr_stmt|;
-comment|//first validate Media Resource Ontology
-name|UriRef
+comment|//first validate Media RDFTerm Ontology
+name|IRI
 name|hasLocation
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2719,11 +2671,11 @@ operator|+
 literal|"hasLocation"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|locationLatitude
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2732,11 +2684,11 @@ operator|+
 literal|"locationLatitude"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|locationLongitude
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2745,7 +2697,7 @@ operator|+
 literal|"locationLongitude"
 argument_list|)
 decl_stmt|;
-comment|//UriRef locationAltitude = new UriRef(NamespaceEnum.media+"locationAltitude");
+comment|//IRI locationAltitude = new IRI(NamespaceEnum.media+"locationAltitude");
 name|ContentItem
 name|ci
 init|=
@@ -2810,7 +2762,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -2833,13 +2785,13 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|)
 expr_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|location
 init|=
-name|verifyNonLiteral
+name|verifyBlankNodeOrIRI
 argument_list|(
 name|ci
 argument_list|,
@@ -2879,11 +2831,11 @@ literal|"-54.1234"
 argument_list|)
 expr_stmt|;
 comment|//second the GEO ont
-name|UriRef
+name|IRI
 name|lat
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2892,11 +2844,11 @@ operator|+
 literal|"lat"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|lon
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -2986,7 +2938,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3005,7 +2957,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3024,7 +2976,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3043,7 +2995,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3062,7 +3014,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3081,7 +3033,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3100,7 +3052,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3121,7 +3073,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3140,7 +3092,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3214,7 +3166,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3231,7 +3183,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3248,7 +3200,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3267,7 +3219,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3286,7 +3238,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3305,7 +3257,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3322,7 +3274,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3341,7 +3293,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3360,7 +3312,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3379,7 +3331,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3398,7 +3350,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3417,7 +3369,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3436,7 +3388,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3455,7 +3407,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3474,7 +3426,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|exif
 operator|+
@@ -3494,7 +3446,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3515,7 +3467,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3536,7 +3488,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3555,7 +3507,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3576,7 +3528,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3600,7 +3552,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3619,7 +3571,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3640,7 +3592,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3661,7 +3613,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3737,7 +3689,7 @@ argument_list|(
 name|ci
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:tika.apache.org:tika:xmpDM:logComment"
 argument_list|)
@@ -3800,7 +3752,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -4009,7 +3961,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -4108,7 +4060,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -4442,18 +4394,18 @@ expr_stmt|;
 block|}
 comment|/*      * Internal helper methods       */
 specifier|private
-name|NonLiteral
-name|verifyNonLiteral
+name|BlankNodeOrIRI
+name|verifyBlankNodeOrIRI
 parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|)
 block|{
 return|return
-name|verifyNonLiteral
+name|verifyBlankNodeOrIRI
 argument_list|(
 name|ci
 argument_list|,
@@ -4468,16 +4420,16 @@ return|;
 block|}
 specifier|private
 specifier|static
-name|NonLiteral
-name|verifyNonLiteral
+name|BlankNodeOrIRI
+name|verifyBlankNodeOrIRI
 parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|)
 block|{
@@ -4509,7 +4461,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -4532,28 +4484,28 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|)
 expr_stmt|;
 return|return
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|r
 return|;
 block|}
 specifier|private
 specifier|static
-name|UriRef
+name|IRI
 name|verifyValue
 parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|UriRef
+name|IRI
 name|value
 parameter_list|)
 block|{
@@ -4575,19 +4527,19 @@ return|;
 block|}
 specifier|private
 specifier|static
-name|UriRef
+name|IRI
 name|verifyValue
 parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|UriRef
+name|IRI
 name|value
 parameter_list|)
 block|{
@@ -4619,7 +4571,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -4642,7 +4594,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -4654,7 +4606,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 return|;
@@ -4667,10 +4619,10 @@ parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|UriRef
+name|IRI
 name|dataType
 parameter_list|,
 name|String
@@ -4705,13 +4657,13 @@ parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|UriRef
+name|IRI
 name|dataType
 parameter_list|,
 name|String
@@ -4748,7 +4700,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -4770,34 +4722,17 @@ expr_stmt|;
 if|if
 condition|(
 name|dataType
-operator|==
+operator|!=
 literal|null
 condition|)
 block|{
-name|assertTrue
-argument_list|(
-name|r
-operator|instanceof
-name|PlainLiteral
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-name|assertTrue
-argument_list|(
-name|r
-operator|instanceof
-name|TypedLiteral
-argument_list|)
-expr_stmt|;
 name|assertEquals
 argument_list|(
 name|dataType
 argument_list|,
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|r
 operator|)
@@ -4859,7 +4794,7 @@ name|class
 argument_list|,
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|r
 operator|)
@@ -4903,10 +4838,10 @@ parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|UriRef
+name|IRI
 name|dataType
 parameter_list|,
 name|String
@@ -4943,13 +4878,13 @@ parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|UriRef
+name|IRI
 name|dataType
 parameter_list|,
 name|String
@@ -5031,7 +4966,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -5053,7 +4988,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 block|}
@@ -5063,7 +4998,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|TypedLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -5072,7 +5007,7 @@ name|dataType
 argument_list|,
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|r
 operator|)
@@ -5119,20 +5054,20 @@ specifier|private
 specifier|static
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|verifyValues
 parameter_list|(
 name|ContentItem
 name|ci
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 modifier|...
 name|references
 parameter_list|)
@@ -5167,14 +5102,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|expected
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|(
 name|Arrays
@@ -5187,14 +5122,14 @@ argument_list|)
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|found
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|(
 name|expected
@@ -5211,7 +5146,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -5226,7 +5161,7 @@ name|assertTrue
 argument_list|(
 name|r
 operator|instanceof
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -5244,7 +5179,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|r
 argument_list|)

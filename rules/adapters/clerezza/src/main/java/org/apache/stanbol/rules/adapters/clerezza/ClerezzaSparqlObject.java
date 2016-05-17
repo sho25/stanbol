@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *   * This object represents either a {@link TriplePattern} or an {@link Expression} or a {@link UriRef}  * internally to the Clerezza adpter.  *   * @author anuzzolese  *   */
+comment|/**  *   * This object represents either a {@link TriplePattern} or an {@link Expression} or a {@link IRI}  * internally to the Clerezza adpter.  *   * @author anuzzolese  *   */
 end_comment
 
 begin_class
@@ -93,7 +93,7 @@ name|Expression
 name|expression
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|uriRef
 decl_stmt|;
 specifier|public
@@ -127,7 +127,7 @@ block|}
 specifier|public
 name|ClerezzaSparqlObject
 parameter_list|(
-name|UriRef
+name|IRI
 name|uriRef
 parameter_list|)
 block|{
@@ -138,7 +138,7 @@ operator|=
 name|uriRef
 expr_stmt|;
 block|}
-comment|/**      * It returns the actual Clerezza value.<br/>      *       * It can be:      *<ul>      *<li>a {@link TriplePattern}      *<li>an {@link Expression}      *<li>a {@link UriRef}      *       * @return the object that can be in turn a {@link TriplePattern}, an {@link Expression}, and a      *         {@link UriRef}      */
+comment|/**      * It returns the actual Clerezza value.<br/>      *       * It can be:      *<ul>      *<li>a {@link TriplePattern}      *<li>an {@link Expression}      *<li>a {@link IRI}      *       * @return the object that can be in turn a {@link TriplePattern}, an {@link Expression}, and a      *         {@link IRI}      */
 specifier|public
 name|Object
 name|getClerezzaObject

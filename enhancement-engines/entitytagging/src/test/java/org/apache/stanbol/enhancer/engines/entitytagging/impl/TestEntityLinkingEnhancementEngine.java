@@ -435,9 +435,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -467,11 +467,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -483,11 +483,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -499,9 +499,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -515,11 +515,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|IRI
 import|;
 end_import
 
@@ -531,27 +531,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -565,11 +551,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1191,7 +1179,7 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:iks-project:enhancer:text:content-item:person"
 argument_list|)
@@ -1283,7 +1271,7 @@ parameter_list|,
 name|String
 name|context
 parameter_list|,
-name|UriRef
+name|IRI
 name|type
 parameter_list|)
 block|{
@@ -1340,7 +1328,7 @@ operator|.
 name|getProxy
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:iks-project:enhancer:test:text-annotation:"
 operator|+
@@ -1358,7 +1346,7 @@ operator|.
 name|setCreator
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:iks-project:enhancer:test:dummyEngine"
 argument_list|)
@@ -1681,18 +1669,18 @@ parameter_list|)
 block|{
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1776,11 +1764,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityAnnotationIterator
 operator|.
@@ -1816,11 +1804,11 @@ comment|//            assertTrue("fise:confidence MUST BE>= 0 (value= '"+confide
 comment|//                    +"',entityAnnotation "+entityAnnotation+")",
 comment|//                    0.0<= confidence.doubleValue());
 comment|//Test the entityhub:site property (STANBOL-625)
-name|UriRef
+name|IRI
 name|ENTITYHUB_SITE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -1864,7 +1852,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|siteResource
 init|=
 name|entitySiteIterator

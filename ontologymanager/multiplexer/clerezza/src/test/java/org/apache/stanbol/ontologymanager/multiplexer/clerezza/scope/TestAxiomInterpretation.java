@@ -91,11 +91,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -318,14 +318,14 @@ argument_list|(
 name|custSrc
 argument_list|)
 expr_stmt|;
-name|Graph
+name|ImmutableGraph
 name|g
 init|=
 name|scope
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,

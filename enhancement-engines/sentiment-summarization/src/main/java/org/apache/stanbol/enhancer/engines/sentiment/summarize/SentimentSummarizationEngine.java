@@ -269,9 +269,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -301,11 +301,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -317,11 +317,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -333,11 +333,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -351,11 +353,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1170,11 +1174,11 @@ comment|/**      * The property used to write the sum of all positive classified
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|POSITIVE_SENTIMENT_PROPERTY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1187,11 +1191,11 @@ comment|/**      * The property used to write the sum of all negative classified
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|NEGATIVE_SENTIMENT_PROPERTY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1204,11 +1208,11 @@ comment|/**      * The sentiment of the section (sum of positive and negative cl
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SENTIMENT_PROPERTY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1221,11 +1225,11 @@ comment|/**      * The dc:type value used for fise:TextAnnotations indicating a 
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SENTIMENT_TYPE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1238,11 +1242,11 @@ comment|/**      * The dc:Type value sued for the sentiment annotation of the wh
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DOCUMENT_SENTIMENT_TYPE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -4312,7 +4316,7 @@ name|lang
 parameter_list|)
 block|{
 comment|// TODO Auto-generated method stub
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -4497,7 +4501,7 @@ condition|(
 name|writeSentimentPhrases
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|enh
 init|=
 name|createTextEnhancement
@@ -4777,7 +4781,7 @@ name|SENTIMENT_TYPE
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|ssoType
 init|=
 name|NIFHelper
@@ -4944,7 +4948,7 @@ block|{
 return|return;
 comment|//nothing to do
 block|}
-name|UriRef
+name|IRI
 name|enh
 init|=
 name|createTextEnhancement
@@ -4954,7 +4958,7 @@ argument_list|,
 name|this
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -5258,7 +5262,7 @@ name|SENTIMENT_TYPE
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|ssoType
 init|=
 name|NIFHelper

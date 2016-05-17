@@ -1965,7 +1965,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"request for Resource {} (folder: {})"
+literal|"request for RDFTerm {} (folder: {})"
 argument_list|,
 name|fileName
 argument_list|,
@@ -1987,7 +1987,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"> rquested Resource present"
+literal|"> rquested RDFTerm present"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2010,7 +2010,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"> rquested Resource copied from Classpath "
+literal|"> rquested RDFTerm copied from Classpath "
 argument_list|)
 expr_stmt|;
 block|}
@@ -2020,7 +2020,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"> rquested Resource not found"
+literal|"> rquested RDFTerm not found"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2739,7 +2739,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"No '{}' found via classpath. Loading Resource via"
+literal|"No '{}' found via classpath. Loading RDFTerm via"
 operator|+
 literal|"the classpath is deactivated."
 argument_list|,

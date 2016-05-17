@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -122,7 +122,7 @@ name|name
 block|,
 name|schema
 block|,;
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 comment|/**      * Creates n new entity of this Enum by using the parsed namespace and      * local name.      *      * @param ns    The namespace or<code>null</code> to use the default      * @param local The local name or<code>null</code> to use the default      */
@@ -138,7 +138,7 @@ block|{
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 operator|(
 name|ns
@@ -205,9 +205,9 @@ name|getUnicodeString
 argument_list|()
 return|;
 block|}
-comment|/**      * The URI of the element of this Enum.      *      * @return the URI of the element as Clerezza UriRef      */
+comment|/**      * The URI of the element of this Enum.      *      * @return the URI of the element as Clerezza IRI      */
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{

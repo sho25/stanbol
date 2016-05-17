@@ -25,11 +25,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -70,7 +70,7 @@ block|}
 specifier|public
 name|NoSuchPartException
 parameter_list|(
-name|UriRef
+name|IRI
 name|partUri
 parameter_list|)
 block|{

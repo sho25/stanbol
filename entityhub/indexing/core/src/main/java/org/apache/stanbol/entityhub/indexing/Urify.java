@@ -1064,7 +1064,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Resource: {}"
+literal|"RDFTerm: {}"
 argument_list|,
 name|resource
 argument_list|)

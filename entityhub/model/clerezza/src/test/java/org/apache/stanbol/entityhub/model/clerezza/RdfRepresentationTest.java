@@ -135,11 +135,47 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|Language
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Literal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|PlainLiteralImpl
 import|;
 end_import
 
@@ -156,56 +192,6 @@ operator|.
 name|core
 operator|.
 name|LiteralFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|PlainLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|PlainLiteralImpl
 import|;
 end_import
 
@@ -365,7 +351,7 @@ return|return
 name|valueFactory
 return|;
 block|}
-comment|/*--------------------------------------------------------------------------      * Additional Tests for special Features of the Clerezza based implementation      *       * This includes mainly support for additional types like PlainLiteral,      * TypedLiteral, UriRefs. The conversion to such types as well as getter for      * such types.      *--------------------------------------------------------------------------      */
+comment|/*--------------------------------------------------------------------------      * Additional Tests for special Features of the Clerezza based implementation      *       * This includes mainly support for additional types like PlainLiteral,      * TypedLiteral, IRIs. The conversion to such types as well as getter for      * such types.      *--------------------------------------------------------------------------      */
 comment|/**      * {@link PlainLiteral} is used for natural language text in the Clerezza      * RDF API. This tests if adding {@link PlainLiteral}s to the      * {@link Representation#add(String, Object)} method makes them available      * as {@link Text} instances via the {@link Representation} API (e.g.       * {@link Representation#get(String, String...)}).      */
 annotation|@
 name|Test
@@ -379,7 +365,7 @@ name|field
 init|=
 literal|"urn:test.RdfRepresentation:test.field"
 decl_stmt|;
-name|PlainLiteral
+name|Literal
 name|noLangLiteral
 init|=
 operator|new
@@ -388,7 +374,7 @@ argument_list|(
 literal|"A plain literal without Language"
 argument_list|)
 decl_stmt|;
-name|PlainLiteral
+name|Literal
 name|enLiteral
 init|=
 operator|new
@@ -403,7 +389,7 @@ literal|"en"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|PlainLiteral
+name|Literal
 name|deLiteral
 init|=
 operator|new
@@ -418,7 +404,7 @@ literal|"de"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|PlainLiteral
+name|Literal
 name|deATLiteral
 init|=
 operator|new
@@ -435,7 +421,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|PlainLiteral
+name|Literal
 argument_list|>
 name|plainLiterals
 init|=
@@ -622,7 +608,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|PlainLiteral
+name|Literal
 name|plainLiteral
 range|:
 name|plainLiterals
@@ -699,7 +685,7 @@ name|field
 init|=
 literal|"urn:test.RdfRepresentation:test.field"
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|stringLiteral
 init|=
 name|literalFactory
@@ -710,7 +696,7 @@ literal|"This is a stirng value"
 argument_list|)
 decl_stmt|;
 comment|//also add an integer to test that other typed literals are not used as texts
-name|TypedLiteral
+name|Literal
 name|integerLiteral
 init|=
 name|literalFactory
@@ -869,7 +855,7 @@ name|integerValue
 init|=
 literal|5
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|integerLiteral
 init|=
 name|literalFactory
@@ -886,7 +872,7 @@ operator|new
 name|Date
 argument_list|()
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|dateLiteeral
 init|=
 name|literalFactory
@@ -903,7 +889,7 @@ name|Math
 operator|.
 name|PI
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|doubleLiteral
 init|=
 name|literalFactory
@@ -918,7 +904,7 @@ name|stringValue
 init|=
 literal|"This is a string literal value"
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|stringLiteral
 init|=
 name|literalFactory
@@ -938,7 +924,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|TypedLiteral
+name|Literal
 argument_list|>
 name|typedLiterals
 init|=
@@ -967,7 +953,7 @@ expr_stmt|;
 comment|//now check that such values are available via TypedLiteral
 name|Iterator
 argument_list|<
-name|TypedLiteral
+name|Literal
 argument_list|>
 name|typedLiteralValues
 init|=
@@ -977,7 +963,7 @@ name|get
 argument_list|(
 name|field
 argument_list|,
-name|TypedLiteral
+name|Literal
 operator|.
 name|class
 argument_list|)

@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -82,7 +82,7 @@ name|id
 operator|=
 literal|"http://fise.iks-project.eu/ontology/entity-reference"
 argument_list|)
-name|UriRef
+name|IRI
 name|getEntityReference
 parameter_list|()
 function_decl|;
@@ -96,7 +96,7 @@ argument_list|)
 name|void
 name|setEntityReference
 parameter_list|(
-name|UriRef
+name|IRI
 name|reference
 parameter_list|)
 function_decl|;
@@ -134,7 +134,7 @@ literal|"http://fise.iks-project.eu/ontology/entity-type"
 argument_list|)
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getEntityTypes
 parameter_list|()

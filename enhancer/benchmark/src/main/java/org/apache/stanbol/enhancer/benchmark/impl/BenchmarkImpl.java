@@ -57,11 +57,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -237,7 +237,7 @@ name|String
 name|inputText
 decl_stmt|;
 specifier|private
-name|Graph
+name|ImmutableGraph
 name|graph
 decl_stmt|;
 specifier|private
@@ -431,7 +431,7 @@ return|;
 block|}
 comment|/** @inheritDoc */
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getGraph
 parameter_list|(
 name|EnhancementJobManager
@@ -532,7 +532,7 @@ operator|.
 name|getMetadata
 argument_list|()
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 expr_stmt|;
 block|}

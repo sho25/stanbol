@@ -65,11 +65,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -81,13 +81,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -192,7 +196,7 @@ specifier|public
 specifier|static
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|EMPTY_BACKEND
 decl_stmt|;
@@ -201,7 +205,7 @@ specifier|public
 specifier|static
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|getEmptyBackend
 parameter_list|()
@@ -219,7 +223,7 @@ operator|new
 name|ClerezzaBackend
 argument_list|(
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -232,7 +236,7 @@ specifier|public
 specifier|static
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|parseSelector
 parameter_list|(
@@ -255,7 +259,7 @@ specifier|public
 specifier|static
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|parseSelector
 parameter_list|(
@@ -275,14 +279,14 @@ name|ParseException
 block|{
 name|LdPathParser
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|parser
 init|=
 operator|new
 name|LdPathParser
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|getEmptyBackend

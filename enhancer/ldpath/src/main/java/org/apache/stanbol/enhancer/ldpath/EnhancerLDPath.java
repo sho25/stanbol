@@ -205,11 +205,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -421,7 +421,7 @@ specifier|private
 specifier|static
 name|Configuration
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|CONFIG
 decl_stmt|;
@@ -431,7 +431,7 @@ specifier|static
 specifier|final
 name|Configuration
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|getConfig
 parameter_list|()
@@ -448,7 +448,7 @@ operator|=
 operator|new
 name|DefaultConfiguration
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -495,7 +495,7 @@ name|path
 decl_stmt|;
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|selector
 decl_stmt|;
@@ -554,7 +554,7 @@ argument_list|,
 operator|new
 name|PathFunction
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 literal|"textAnnotation"
@@ -618,7 +618,7 @@ argument_list|,
 operator|new
 name|PathFunction
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 literal|"entityAnnotation"
@@ -682,7 +682,7 @@ argument_list|,
 operator|new
 name|PathFunction
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 literal|"topicAnnotation"
@@ -746,7 +746,7 @@ argument_list|,
 operator|new
 name|PathFunction
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 literal|"enhancement"
@@ -759,7 +759,7 @@ comment|//Suggested EntityAnnotations for Text/TopicAnnotations
 comment|//(1) to select the suggestions
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|linkedEntityAnnotations
 decl_stmt|;
@@ -815,7 +815,7 @@ block|}
 comment|//(2) to select the confidence value of Enhancements
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|confidenceSelector
 decl_stmt|;
@@ -881,7 +881,7 @@ comment|//The suggestion and confidence selectors can be the same as above,
 comment|//but we need an additional result selector
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|entityReferenceSelector
 decl_stmt|;

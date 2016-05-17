@@ -403,9 +403,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -419,11 +419,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -435,11 +435,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -451,11 +451,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1463,7 +1465,7 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|entityAnnotationMap
 init|=
@@ -1472,11 +1474,11 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 name|ci
@@ -1492,7 +1494,7 @@ range|:
 name|occs
 control|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|SpotlightEngineUtils
@@ -1539,7 +1541,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|SpotlightEngineUtils
@@ -1629,7 +1631,7 @@ parameter_list|(
 name|String
 name|text
 parameter_list|,
-name|UriRef
+name|IRI
 name|contentItemUri
 parameter_list|)
 throws|throws

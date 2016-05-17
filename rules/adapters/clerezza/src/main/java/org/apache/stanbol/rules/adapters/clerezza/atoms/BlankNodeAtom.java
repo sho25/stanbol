@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -391,7 +391,7 @@ operator|new
 name|UriRefOrVariable
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subjectCSO
 operator|.
@@ -405,7 +405,7 @@ operator|new
 name|UriRefOrVariable
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|predicateCSO
 operator|.
@@ -419,7 +419,7 @@ operator|new
 name|ResourceOrVariable
 argument_list|(
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 argument_list|)
 expr_stmt|;

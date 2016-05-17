@@ -79,11 +79,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -435,7 +435,7 @@ specifier|private
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|types
 decl_stmt|;
@@ -492,7 +492,7 @@ name|suggestions
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|types
 parameter_list|)
@@ -547,7 +547,7 @@ name|suggestions
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|types
 parameter_list|)
@@ -601,7 +601,7 @@ comment|/**      * Getter for read only list of types      * @return the types  
 specifier|public
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getTypes
 parameter_list|()

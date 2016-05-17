@@ -25,11 +25,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -106,7 +106,7 @@ parameter_list|(
 name|Recipe
 name|recipe
 parameter_list|,
-name|UriRef
+name|IRI
 name|ruleID
 parameter_list|,
 name|String

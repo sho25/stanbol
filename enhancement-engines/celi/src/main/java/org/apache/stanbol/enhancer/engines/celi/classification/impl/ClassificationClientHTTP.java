@@ -227,11 +227,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -914,7 +914,7 @@ operator|-
 literal|1
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|modelConcept
 init|=
 name|selectClassificationClass
@@ -973,7 +973,7 @@ return|;
 block|}
 comment|/**      * TopicClassifications require only a single fise:entity-reference.      * However the CELI classification service delivers<p>      *<code><pre>      *<ns2:label>[Organisation HockeyTeam SportsTeam]</ns2:label>      *</pre></code>      * because of that this method needs to select one of the labels.<p>      * This method currently selects the 2nd token if there are more than one      * concept suggestions included. NOTE that the whole literal is used as      * fise:entity-label!      * @param classificationLabels the label string      * @return the selected label      */
 specifier|private
-name|UriRef
+name|IRI
 name|selectClassificationClass
 parameter_list|(
 name|String
@@ -1056,7 +1056,7 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.

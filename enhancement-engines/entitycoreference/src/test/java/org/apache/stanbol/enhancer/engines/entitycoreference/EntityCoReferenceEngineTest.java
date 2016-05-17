@@ -155,11 +155,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -171,11 +171,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -187,11 +187,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -205,11 +207,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -927,7 +931,7 @@ name|SPATIAL_TEXT
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -935,7 +939,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|textEnhancement
 init|=
 name|EnhancementEngineHelper
@@ -1002,7 +1006,7 @@ argument_list|)
 expr_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>

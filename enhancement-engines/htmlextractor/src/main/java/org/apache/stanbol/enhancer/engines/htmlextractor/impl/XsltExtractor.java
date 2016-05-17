@@ -221,11 +221,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -237,11 +237,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -561,7 +561,7 @@ name|Object
 argument_list|>
 name|params
 parameter_list|,
-name|MGraph
+name|Graph
 name|result
 parameter_list|)
 throws|throws
@@ -688,7 +688,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|graph
 init|=
 name|rdfParser

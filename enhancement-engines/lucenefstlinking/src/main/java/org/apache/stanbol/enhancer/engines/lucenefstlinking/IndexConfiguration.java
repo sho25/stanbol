@@ -167,9 +167,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -183,11 +183,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -199,11 +199,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -627,9 +627,9 @@ specifier|private
 name|File
 name|fstDirectory
 decl_stmt|;
-comment|/**      * The origin is added to<code>fise:TextAnnotation</code> created for      * linked Entities. It is intended to be used for providing a reference to      * dataset of the Entity. Both {@link UriRef URI}s and {@link Literal}s can      * be used here      */
+comment|/**      * The origin is added to<code>fise:TextAnnotation</code> created for      * linked Entities. It is intended to be used for providing a reference to      * dataset of the Entity. Both {@link IRI URI}s and {@link Literal}s can      * be used here      */
 specifier|private
-name|Resource
+name|RDFTerm
 name|origin
 decl_stmt|;
 comment|/**      * If alternate tokens (<code>posInc == 0</code>) can be skipped or if such      * tokens should cause an {@link UnsupportedTokenException}.      */
@@ -1422,7 +1422,7 @@ specifier|public
 name|void
 name|setOrigin
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|origin
 parameter_list|)
 block|{
@@ -1435,7 +1435,7 @@ expr_stmt|;
 block|}
 comment|/**      * The Origin of the dataset or<code>null</code> if not defined. The      * origin can be used to specify the dataset where the Entities described by      * the configured FST originate from. If can be both an URI (e.g.       *<code>http://dbpedia.org</code>) or an literal "<code>dbpedia</code>").      * If present the origin is added to any<code>fise:TextAnnotation</code>      * created by the FstLinkingEngine with the property<code>fise:origin</code>      *       * @return the origin or<code>null</code> if none is configured      */
 specifier|public
-name|Resource
+name|RDFTerm
 name|getOrigin
 parameter_list|()
 block|{

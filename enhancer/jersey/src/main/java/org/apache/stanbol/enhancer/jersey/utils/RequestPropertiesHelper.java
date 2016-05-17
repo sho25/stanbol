@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -199,7 +199,7 @@ comment|/**      * @see ContentItemHelper#REQUEST_PROPERTIES_URI      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|REQUEST_PROPERTIES_URI
 init|=
 name|ContentItemHelper
@@ -215,7 +215,7 @@ name|OMIT_METADATA
 init|=
 literal|"stanbol.enhancer.web.omitMetadata"
 decl_stmt|;
-comment|/**      * {@link Set Set&lt;String&gt;} containing all the URIs of the      * {@link ContentItem#getPart(UriRef, Class) ContentParts} representing       * RDF data (compatible to Clerezza {@link TripleCollection}). If the       * returned set contains '*' than all such content parts need to be returned.<p>      * NOTE: This can also be used to include the Request Properties      * as "applciation/json" in the Response by adding this      * {@link RequestPropertiesHelper#REQUEST_PROPERTIES_URI uri}.      */
+comment|/**      * {@link Set Set&lt;String&gt;} containing all the URIs of the      * {@link ContentItem#getPart(IRI, Class) ContentParts} representing       * RDF data (compatible to Clerezza {@link Graph}). If the       * returned set contains '*' than all such content parts need to be returned.<p>      * NOTE: This can also be used to include the Request Properties      * as "applciation/json" in the Response by adding this      * {@link RequestPropertiesHelper#REQUEST_PROPERTIES_URI uri}.      */
 specifier|public
 specifier|static
 specifier|final
@@ -242,7 +242,7 @@ name|OUTPUT_CONTENT
 init|=
 literal|"stanbol.enhancer.web.outputContent"
 decl_stmt|;
-comment|/**      * This allows to copy the {@link ExecutionMetadata} and {@link ExecutionPlan}      * data stored in a {@link ContentItem#getPart(UriRef, Class) contentPart} with      * the URI {@link ExecutionMetadata#CHAIN_EXECUTION} over to the      * {@link ContentItem#getMetadata() metadata} of the content item.<p>      * This feature is intended to allow users to retrieve such meta information      * without the need to use parse Multipart MIME responses.      */
+comment|/**      * This allows to copy the {@link ExecutionMetadata} and {@link ExecutionPlan}      * data stored in a {@link ContentItem#getPart(IRI, Class) contentPart} with      * the URI {@link ExecutionMetadata#CHAIN_EXECUTION} over to the      * {@link ContentItem#getMetadata() metadata} of the content item.<p>      * This feature is intended to allow users to retrieve such meta information      * without the need to use parse Multipart MIME responses.      */
 specifier|public
 specifier|static
 specifier|final
@@ -260,7 +260,7 @@ name|RDF_FORMAT
 init|=
 literal|"stanbol.enhancer.web.rdfFormat"
 decl_stmt|;
-comment|/**      * {@link Set Set&lt;String&gt;} containing all the {@link UriRef}s of       * {@link ContentItem#getPart(int, Class) ContentItem.getPart}(uri,{@link Blob})      * that where parsed with the request.      */
+comment|/**      * {@link Set Set&lt;String&gt;} containing all the {@link IRI}s of       * {@link ContentItem#getPart(int, Class) ContentItem.getPart}(uri,{@link Blob})      * that where parsed with the request.      */
 specifier|public
 specifier|static
 specifier|final

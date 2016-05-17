@@ -187,11 +187,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -203,11 +203,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -219,11 +219,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -235,11 +235,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -255,7 +255,7 @@ name|rdf
 operator|.
 name|utils
 operator|.
-name|UnionMGraph
+name|UnionGraph
 import|;
 end_import
 
@@ -342,7 +342,7 @@ name|ContentItemBackend
 implements|implements
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 block|{
 specifier|private
@@ -364,9 +364,9 @@ specifier|static
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|EMPTY_INCLUDED
 init|=
@@ -392,9 +392,9 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|included
 decl_stmt|;
@@ -414,7 +414,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a {@link RDFBackend} over the {@link ContentItem#getMetadata()      * metadata} and all {@link ContentItem#getPart(int, Class) content parts}      * compatible to {@link TripleCollection}       * @param ci the content item      * @param includeAdditionalMetadata if<code>true</code> the {@link RDFBackend}      * will also include RDF data stored in content parts      */
+comment|/**      * Creates a {@link RDFBackend} over the {@link ContentItem#getMetadata()      * metadata} and all {@link ContentItem#getPart(int, Class) content parts}      * compatible to {@link Graph}       * @param ci the content item      * @param includeAdditionalMetadata if<code>true</code> the {@link RDFBackend}      * will also include RDF data stored in content parts      */
 specifier|public
 name|ContentItemBackend
 parameter_list|(
@@ -435,7 +435,7 @@ name|getContentParts
 argument_list|(
 name|ci
 argument_list|,
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 argument_list|)
@@ -443,7 +443,7 @@ argument_list|)
 else|:
 name|EMPTY_INCLUDED
 expr_stmt|;
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 if|if
@@ -464,12 +464,12 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|TripleCollection
+name|Graph
 index|[]
 name|tcs
 init|=
 operator|new
-name|TripleCollection
+name|Graph
 index|[
 name|included
 operator|.
@@ -516,7 +516,7 @@ expr_stmt|;
 name|graph
 operator|=
 operator|new
-name|UnionMGraph
+name|UnionGraph
 argument_list|(
 name|tcs
 argument_list|)
@@ -549,7 +549,7 @@ name|readLock
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates a {@link RDFBackend} over the {@link ContentItem#getMetadata()      * metadata} and RDF data stored in content parts with the parsed URIs.      * If no content part for a parsed URI exists or its type is not compatible      * to {@link TripleCollection} it will be not included.      * @param ci the content item      * @param includedMetadata the URIs for the content parts to include      */
+comment|/**      * Creates a {@link RDFBackend} over the {@link ContentItem#getMetadata()      * metadata} and RDF data stored in content parts with the parsed URIs.      * If no content part for a parsed URI exists or its type is not compatible      * to {@link Graph} it will be not included.      * @param ci the content item      * @param includedMetadata the URIs for the content parts to include      */
 specifier|public
 name|ContentItemBackend
 parameter_list|(
@@ -558,31 +558,31 @@ name|ci
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|includedMetadata
 parameter_list|)
 block|{
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|included
 init|=
 operator|new
 name|LinkedHashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|ref
 range|:
 name|includedMetadata
@@ -590,7 +590,7 @@ control|)
 block|{
 try|try
 block|{
-name|TripleCollection
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -599,7 +599,7 @@ name|getPart
 argument_list|(
 name|ref
 argument_list|,
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 argument_list|)
@@ -651,7 +651,7 @@ argument_list|(
 name|included
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 if|if
@@ -673,12 +673,12 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|TripleCollection
+name|Graph
 index|[]
 name|tcs
 init|=
 operator|new
-name|TripleCollection
+name|Graph
 index|[
 name|included
 operator|.
@@ -725,7 +725,7 @@ expr_stmt|;
 name|graph
 operator|=
 operator|new
-name|UnionMGraph
+name|UnionGraph
 argument_list|(
 name|tcs
 argument_list|)
@@ -763,14 +763,14 @@ name|Override
 specifier|public
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|listObjects
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|subject
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|property
 parameter_list|)
 block|{
@@ -806,14 +806,14 @@ name|Override
 specifier|public
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|listSubjects
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|property
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|object
 parameter_list|)
 block|{
@@ -858,9 +858,9 @@ comment|/**      * Getter for the read-only map of the content parts included in
 specifier|public
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|getIncludedMetadata
 parameter_list|()
@@ -875,7 +875,7 @@ specifier|public
 name|boolean
 name|isLiteral
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|n
 parameter_list|)
 block|{
@@ -894,7 +894,7 @@ specifier|public
 name|boolean
 name|isURI
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|n
 parameter_list|)
 block|{
@@ -913,7 +913,7 @@ specifier|public
 name|boolean
 name|isBlank
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|n
 parameter_list|)
 block|{
@@ -932,7 +932,7 @@ specifier|public
 name|Locale
 name|getLiteralLanguage
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|n
 parameter_list|)
 block|{
@@ -951,7 +951,7 @@ specifier|public
 name|URI
 name|getLiteralType
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|n
 parameter_list|)
 block|{
@@ -967,7 +967,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Resource
+name|RDFTerm
 name|createLiteral
 parameter_list|(
 name|String
@@ -986,7 +986,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Resource
+name|RDFTerm
 name|createLiteral
 parameter_list|(
 name|String
@@ -1015,7 +1015,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Resource
+name|RDFTerm
 name|createURI
 parameter_list|(
 name|String
@@ -1037,7 +1037,7 @@ specifier|public
 name|String
 name|stringValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1056,7 +1056,7 @@ specifier|public
 name|Double
 name|doubleValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1075,7 +1075,7 @@ specifier|public
 name|Long
 name|longValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1094,7 +1094,7 @@ specifier|public
 name|Boolean
 name|booleanValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1113,7 +1113,7 @@ specifier|public
 name|Date
 name|dateTimeValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1132,7 +1132,7 @@ specifier|public
 name|Date
 name|dateValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1151,7 +1151,7 @@ specifier|public
 name|Date
 name|timeValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1170,7 +1170,7 @@ specifier|public
 name|Float
 name|floatValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1189,7 +1189,7 @@ specifier|public
 name|Integer
 name|intValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1208,7 +1208,7 @@ specifier|public
 name|BigInteger
 name|integerValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{
@@ -1227,7 +1227,7 @@ specifier|public
 name|BigDecimal
 name|decimalValue
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|node
 parameter_list|)
 block|{

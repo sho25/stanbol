@@ -161,11 +161,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -320,7 +320,7 @@ decl_stmt|;
 specifier|private
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|entityReferences
 decl_stmt|;
@@ -619,7 +619,7 @@ comment|/**      * Getter for the list of properties used to refer Entities as c
 specifier|public
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getEntityReferences
 parameter_list|()
@@ -686,7 +686,7 @@ comment|/**      * Parses the URIs for the {@link DereferenceConstants#ENTITY_RE
 specifier|private
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|parseEntityReferences
 parameter_list|()
@@ -695,7 +695,7 @@ name|ConfigurationException
 block|{
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|entityRefPropUris
 decl_stmt|;
@@ -742,7 +742,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|entityProps
@@ -775,7 +775,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getConfiguredUri
 argument_list|(

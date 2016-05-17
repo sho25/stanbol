@@ -846,7 +846,7 @@ name|PARAM_BNODE_STATE
 init|=
 literal|"bnode"
 decl_stmt|;
-comment|/**      * If present, this Parameter allows to convert RDF BNodes to dereferable      * URIs by using {bnode-prefix}{bnode-id} (see       *<a href="https://issues.apache.org/jira/browse/STANBOL-765">STANBOL-765</a>      * for details)      */
+comment|/**      * If present, this Parameter allows to convert RDF BlankNodes to dereferable      * URIs by using {bnode-prefix}{bnode-id} (see       *<a href="https://issues.apache.org/jira/browse/STANBOL-765">STANBOL-765</a>      * for details)      */
 specifier|public
 specifier|static
 specifier|final
@@ -926,7 +926,7 @@ name|String
 name|bnodePrefix
 decl_stmt|;
 comment|//protected to allow direct access in inner classes
-comment|/**      * used for logging a single WARN level entry on the first ignored BNode      */
+comment|/**      * used for logging a single WARN level entry on the first ignored BlankNode      */
 specifier|private
 name|boolean
 name|bnodeIgnored
@@ -2617,7 +2617,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Resource: \n{}"
+literal|"RDFTerm: \n{}"
 argument_list|,
 name|ModelUtils
 operator|.
@@ -3089,7 +3089,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"ignoreing value {} for field {} and Resource {} because it is of an unsupported type!"
+literal|"ignoreing value {} for field {} and RDFTerm {} because it is of an unsupported type!"
 argument_list|,
 operator|new
 name|Object
@@ -3109,7 +3109,7 @@ expr_stmt|;
 block|}
 comment|//end different value node type
 block|}
-comment|/**      * Logs that a BNode was ignored (only the first time). Also debugs the      * ignored triple.      * @param log the logger to use      * @param s subject      * @param p predicate      * @param o object      */
+comment|/**      * Logs that a BlankNode was ignored (only the first time). Also debugs the      * ignored triple.      * @param log the logger to use      * @param s subject      * @param p predicate      * @param o object      */
 specifier|protected
 name|void
 name|logIgnoredBnode
@@ -3743,7 +3743,7 @@ argument_list|)
 decl_stmt|;
 comment|//NOTES:
 comment|// * for URIs we need to check for empty URIs!
-comment|// * STANBOL-765: added support for BNodes
+comment|// * STANBOL-765: added support for BlankNodes
 if|if
 condition|(
 operator|(
@@ -4462,7 +4462,7 @@ return|return
 name|nodes
 return|;
 block|}
-comment|/**      * Since STANBOL-765 BNodes are converted to URIs if a {@link #bnodePrefix}      * is configured. This also means that one needs to expect calls to the      * {@link RDFBackend} interface with transformed Nodes.<p>      * This method ensures that if someone requests an uri {@link Node} for a      * URI that represents a transformed Bnode (when the URI starts with       * {@link #bnodePrefix}) that the according bnode {@link Node} is created      * @param node the node      * @return      */
+comment|/**      * Since STANBOL-765 BlankNodes are converted to URIs if a {@link #bnodePrefix}      * is configured. This also means that one needs to expect calls to the      * {@link RDFBackend} interface with transformed Nodes.<p>      * This method ensures that if someone requests an uri {@link Node} for a      * URI that represents a transformed Bnode (when the URI starts with       * {@link #bnodePrefix}) that the according bnode {@link Node} is created      * @param node the node      * @return      */
 annotation|@
 name|Override
 specifier|public

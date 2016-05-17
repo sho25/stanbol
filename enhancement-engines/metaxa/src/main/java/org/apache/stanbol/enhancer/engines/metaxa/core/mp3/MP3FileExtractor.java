@@ -81,7 +81,7 @@ name|model
 operator|.
 name|node
 operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -790,7 +790,7 @@ operator|.
 name|getModel
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|resource
 init|=
 name|ModelUtil

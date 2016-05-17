@@ -147,11 +147,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -163,11 +163,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -179,11 +179,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|IRI
 import|;
 end_import
 
@@ -195,11 +195,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -492,7 +492,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Collection
 argument_list|<
@@ -504,7 +504,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Collection
 argument_list|<
@@ -2605,10 +2605,10 @@ comment|//we need to convert from MByte/min to kByte/sec
 annotation|@
 name|Override
 specifier|public
-name|Resource
+name|RDFTerm
 name|convert
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|value
 parameter_list|)
 block|{
@@ -2616,7 +2616,7 @@ if|if
 condition|(
 name|value
 operator|instanceof
-name|TypedLiteral
+name|Literal
 operator|&&
 name|XSD
 operator|.
@@ -2626,7 +2626,7 @@ name|equals
 argument_list|(
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|value
 operator|)
@@ -2656,7 +2656,7 @@ operator|.
 name|class
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|value
 argument_list|)
@@ -2698,7 +2698,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//GEO -> Media Resource Ontology
+comment|//GEO -> Media RDFTerm Ontology
 name|mappings
 operator|.
 name|addMapping
@@ -3184,7 +3184,7 @@ specifier|public
 name|void
 name|removePropertyMappings
 parameter_list|(
-name|UriRef
+name|IRI
 name|property
 parameter_list|)
 block|{
@@ -3219,7 +3219,7 @@ name|property
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Applies the registered Ontology Mappings to the parsed metadata and      * context. Mappings are added to the parsed Graph      * @param graph      * @param context      * @param metadata      * @return Set containing the names of mapped keys      */
+comment|/**      * Applies the registered Ontology Mappings to the parsed metadata and      * context. Mappings are added to the parsed ImmutableGraph      * @param graph      * @param context      * @param metadata      * @return Set containing the names of mapped keys      */
 specifier|public
 name|Set
 argument_list|<
@@ -3227,10 +3227,10 @@ name|String
 argument_list|>
 name|apply
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|context
 parameter_list|,
 name|Metadata

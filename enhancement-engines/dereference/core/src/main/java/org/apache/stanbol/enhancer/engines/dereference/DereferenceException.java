@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -53,7 +53,7 @@ decl_stmt|;
 specifier|public
 name|DereferenceException
 parameter_list|(
-name|UriRef
+name|IRI
 name|entity
 parameter_list|,
 name|Throwable
@@ -75,7 +75,7 @@ block|}
 specifier|public
 name|DereferenceException
 parameter_list|(
-name|UriRef
+name|IRI
 name|entity
 parameter_list|,
 name|String

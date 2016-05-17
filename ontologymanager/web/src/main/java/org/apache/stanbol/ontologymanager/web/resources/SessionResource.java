@@ -783,11 +783,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -1587,7 +1587,7 @@ operator|+
 literal|"ontonet/session/"
 argument_list|)
 decl_stmt|;
-comment|// Export to Clerezza Graph, which can be rendered as JSON-LD.
+comment|// Export to Clerezza ImmutableGraph, which can be rendered as JSON-LD.
 name|ResponseBuilder
 name|rb
 init|=
@@ -1599,7 +1599,7 @@ name|session
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -1730,7 +1730,7 @@ name|session
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -2699,7 +2699,7 @@ operator|+
 literal|"ontonet/session/"
 argument_list|)
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|o
 init|=
 name|session
@@ -2713,7 +2713,7 @@ argument_list|(
 name|ontologyId
 argument_list|)
 argument_list|,
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -2873,7 +2873,7 @@ condition|(
 name|merge
 condition|)
 block|{
-name|Graph
+name|ImmutableGraph
 name|g
 init|=
 name|session
@@ -2882,7 +2882,7 @@ name|getOntology
 argument_list|(
 name|id
 argument_list|,
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,

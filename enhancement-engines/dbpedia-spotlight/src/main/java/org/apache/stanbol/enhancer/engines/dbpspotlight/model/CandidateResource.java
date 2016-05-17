@@ -71,11 +71,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|//import org.apache.clerezza.rdf.core.Resource;
+comment|//import org.apache.clerezza.commons.rdf.RDFTerm;
 end_comment
 
 begin_comment
@@ -199,13 +199,13 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 operator|new
 name|StringBuilder

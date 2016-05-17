@@ -229,11 +229,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -245,11 +245,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -456,7 +456,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This is the SPARQL endpoint which is used throughout the Stanbol. It uses {@link BundleContext} to retrive  * {@link TripleCollection} s registered to OSGi environment. To be able to execute SPARQL queries on triple  * collections, they should be registered to the OSGi environment with the following parameters:  *   *<p>  *<ul>  *<li>graph.uri<b>(required)</b> : The URI of the graph. This is the same as used with the TcManager</li>  *<li>service.ranking: If this parameter is not specified, "0" will be used as default value.</li>  *<li>graph.name: The name of the graph. Human readable name intended to be used in the UI</li>  *<li>graph.description: human readable description providing additional information about the RDF graph</li>  *</ul>  *</p>  *   *<p>  * If a uri is not specified, the graph having highest service.ranking value will be chosen.  *</p>  *   */
+comment|/**  * This is the SPARQL endpoint which is used throughout the Stanbol. It uses {@link BundleContext} to retrive  * {@link Graph} s registered to OSGi environment. To be able to execute SPARQL queries on triple  * collections, they should be registered to the OSGi environment with the following parameters:  *   *<p>  *<ul>  *<li>graph.uri<b>(required)</b> : The URI of the graph. This is the same as used with the TcManager</li>  *<li>service.ranking: If this parameter is not specified, "0" will be used as default value.</li>  *<li>graph.name: The name of the graph. Human readable name intended to be used in the UI</li>  *<li>graph.description: human readable description providing additional information about the RDF graph</li>  *</ul>  *</p>  *   *<p>  * If a uri is not specified, the graph having highest service.ranking value will be chosen.  *</p>  *   */
 end_comment
 
 begin_class
@@ -528,7 +528,7 @@ expr_stmt|;
 block|}
 comment|//TODO re-enable
 comment|/*@OPTIONS     public Response handleCorsPreflight(@Context HttpHeaders headers) {         ResponseBuilder res = Response.ok();         enableCORS(servletContext, res, headers);         return res.build();     }*/
-comment|/**      * HTTP GET service to execute SPARQL queries on {@link TripleCollection}s registered to OSGi environment.      * If a<code>null</code>, it is assumed that the request is coming from the HTML interface of SPARQL      * endpoint. Otherwise the query is executed on the triple collection specified by<code>graphUri</code>.      * But, if no graph uri is passed, then the triple collection having highest service.ranking value is      * chosen.      *       * Type of the result is determined according to type of the query such that if the specified query is      * either a<b>describe query</b> or<b>construct query</b>, results are returned in      *<b>application/rdf+xml</b> format, otherwise in<b>pplication/sparql-results+xml</b> format.      *       * @param graphUri      *            the URI of the graph on which the SPARQL query will be executed.      * @param sparqlQuery      *            SPARQL query to be executed      * @return      */
+comment|/**      * HTTP GET service to execute SPARQL queries on {@link Graph}s registered to OSGi environment.      * If a<code>null</code>, it is assumed that the request is coming from the HTML interface of SPARQL      * endpoint. Otherwise the query is executed on the triple collection specified by<code>graphUri</code>.      * But, if no graph uri is passed, then the triple collection having highest service.ranking value is      * chosen.      *       * Type of the result is determined according to type of the query such that if the specified query is      * either a<b>describe query</b> or<b>construct query</b>, results are returned in      *<b>application/rdf+xml</b> format, otherwise in<b>pplication/sparql-results+xml</b> format.      *       * @param graphUri      *            the URI of the graph on which the SPARQL query will be executed.      * @param sparqlQuery      *            SPARQL query to be executed      * @return      */
 annotation|@
 name|GET
 annotation|@
@@ -588,7 +588,7 @@ operator|==
 literal|null
 condition|)
 block|{
-name|populateTripleCollectionList
+name|populateGraphList
 argument_list|(
 name|getServices
 argument_list|(
@@ -621,10 +621,10 @@ name|mediaType
 init|=
 literal|"application/sparql-results+xml"
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|tripleCollection
 init|=
-name|getTripleCollection
+name|getGraph
 argument_list|(
 name|graphUri
 argument_list|)
@@ -659,7 +659,7 @@ if|if
 condition|(
 name|result
 operator|instanceof
-name|TripleCollection
+name|Graph
 condition|)
 block|{
 name|mediaType
@@ -740,7 +740,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * HTTP GET service to execute SPARQL queries on {@link TripleCollection}s registered to OSGi environment.      * For details, see {@link #sparql(String, String, HttpHeaders)}      */
+comment|/**      * HTTP GET service to execute SPARQL queries on {@link Graph}s registered to OSGi environment.      * For details, see {@link #sparql(String, String, HttpHeaders)}      */
 annotation|@
 name|POST
 annotation|@
@@ -797,8 +797,8 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|TripleCollection
-name|getTripleCollection
+name|Graph
+name|getGraph
 parameter_list|(
 name|String
 name|graphUri
@@ -810,7 +810,7 @@ name|Map
 argument_list|<
 name|ServiceReference
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|services
 init|=
@@ -857,13 +857,13 @@ return|;
 block|}
 specifier|private
 name|void
-name|populateTripleCollectionList
+name|populateGraphList
 parameter_list|(
 name|Map
 argument_list|<
 name|ServiceReference
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|services
 parameter_list|)
@@ -905,14 +905,14 @@ argument_list|(
 name|GRAPH_URI
 argument_list|)
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|graphUri
 operator|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|graphUri
 operator|)
@@ -961,7 +961,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|TripleCollectionInfo
+name|GraphInfo
 argument_list|(
 operator|(
 name|String
@@ -989,7 +989,7 @@ name|Map
 argument_list|<
 name|ServiceReference
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|getServices
 parameter_list|(
@@ -1003,7 +1003,7 @@ name|Map
 argument_list|<
 name|ServiceReference
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|registeredGraphs
 init|=
@@ -1012,7 +1012,7 @@ name|LinkedHashMap
 argument_list|<
 name|ServiceReference
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1024,7 +1024,7 @@ name|bundleContext
 operator|.
 name|getServiceReferences
 argument_list|(
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|.
@@ -1076,7 +1076,7 @@ argument_list|(
 name|ref
 argument_list|,
 operator|(
-name|TripleCollection
+name|Graph
 operator|)
 name|bundleContext
 operator|.
@@ -1163,7 +1163,7 @@ name|Constants
 operator|.
 name|OBJECTCLASS
 argument_list|,
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|.
@@ -1198,7 +1198,7 @@ comment|/*      * HTML View      */
 specifier|private
 name|List
 argument_list|<
-name|TripleCollectionInfo
+name|GraphInfo
 argument_list|>
 name|tripleCollections
 init|=
@@ -1207,16 +1207,16 @@ name|ArrayList
 argument_list|<
 name|SparqlEndpointResource
 operator|.
-name|TripleCollectionInfo
+name|GraphInfo
 argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|public
 name|List
 argument_list|<
-name|TripleCollectionInfo
+name|GraphInfo
 argument_list|>
-name|getTripleCollectionList
+name|getGraphList
 parameter_list|()
 block|{
 return|return
@@ -1227,7 +1227,7 @@ return|;
 block|}
 specifier|public
 class|class
-name|TripleCollectionInfo
+name|GraphInfo
 block|{
 specifier|private
 name|String
@@ -1242,7 +1242,7 @@ name|String
 name|graphDescription
 decl_stmt|;
 specifier|public
-name|TripleCollectionInfo
+name|GraphInfo
 parameter_list|(
 name|String
 name|graphUri

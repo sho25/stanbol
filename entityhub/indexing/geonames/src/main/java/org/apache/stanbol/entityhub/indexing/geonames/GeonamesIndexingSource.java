@@ -664,7 +664,7 @@ decl_stmt|;
 specifier|protected
 specifier|static
 class|class
-name|Resource
+name|RDFTerm
 block|{
 specifier|protected
 specifier|final
@@ -677,7 +677,7 @@ name|InputStream
 name|is
 decl_stmt|;
 specifier|protected
-name|Resource
+name|RDFTerm
 parameter_list|(
 name|String
 name|name
@@ -768,7 +768,7 @@ block|}
 specifier|private
 name|List
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|resourceList
 init|=
@@ -777,7 +777,7 @@ name|ArrayList
 argument_list|<
 name|GeonamesIndexingSource
 operator|.
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1054,7 +1054,7 @@ literal|null
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|resource
 range|:
 name|resourceList
@@ -1091,7 +1091,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|Resource
+name|RDFTerm
 argument_list|(
 name|resourceName
 argument_list|,
@@ -1142,7 +1142,7 @@ argument_list|()
 block|{
 name|Iterator
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|resources
 init|=
@@ -1151,7 +1151,7 @@ operator|.
 name|iterator
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 decl_stmt|;
 name|LineIterator
@@ -1240,7 +1240,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Unable to read Resource '"
+literal|"Unable to read RDFTerm '"
 operator|+
 name|r
 operator|.

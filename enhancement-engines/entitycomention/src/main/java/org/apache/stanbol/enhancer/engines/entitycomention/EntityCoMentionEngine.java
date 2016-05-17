@@ -511,9 +511,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -527,9 +527,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -559,11 +559,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -575,11 +575,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -591,11 +591,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -607,9 +607,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -623,11 +623,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -639,11 +639,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -657,11 +659,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1689,14 +1693,14 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|mappedUris
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|linkerConfig
@@ -1710,7 +1714,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|mappedUri
 range|:
 name|mappedUris
@@ -2201,7 +2205,7 @@ name|getDefaultLanguage
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -2211,14 +2215,14 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|textAnnotations
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2262,11 +2266,11 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|UriRef
+name|IRI
 name|ta
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|it
 operator|.
@@ -2437,7 +2441,7 @@ name|language
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|textAnnotations
 parameter_list|)
@@ -2469,7 +2473,7 @@ name|language
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -2481,14 +2485,14 @@ comment|//we MUST adjust the confidence level of existing annotations only once
 comment|//se we need to keep track of those
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|adjustedSuggestions
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2519,14 +2523,14 @@ expr_stmt|;
 comment|//URIs of TextAnnotations for the initial mention of this co-mention
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|initialMentions
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|comention
@@ -2630,7 +2634,7 @@ init|=
 literal|false
 decl_stmt|;
 comment|//search for textAnnotations with the same end
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 literal|null
@@ -2712,7 +2716,7 @@ comment|//metadata.filter(t.getSubject(), RDF_TYPE, ENHANCER_TEXTANNOTATION).has
 name|textAnnotation
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -2811,7 +2815,7 @@ comment|//metadata.filter(t.getSubject(), RDF_TYPE, ENHANCER_TEXTANNOTATION).has
 name|textAnnotation
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -3004,20 +3008,20 @@ block|}
 comment|//now process initial mention(s) for the co-mention
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|dcTypes
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|initialMention
 range|:
 name|initialMentions
@@ -3026,7 +3030,7 @@ block|{
 comment|//get the dc:type(s) of the initial mentions
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|dcTypesIt
 init|=
@@ -3123,7 +3127,7 @@ comment|//mention(s) with the existing one.
 comment|//Get information about the suggestions of the initial mention
 name|Map
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
 name|Double
 argument_list|>
@@ -3132,7 +3136,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
 name|Double
 argument_list|>
@@ -3140,18 +3144,18 @@ argument_list|()
 decl_stmt|;
 name|Map
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|initialSuggestedEntities
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -3192,7 +3196,7 @@ name|suggestions
 argument_list|)
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|suggestion
 init|=
 name|suggestions
@@ -3203,7 +3207,7 @@ operator|.
 name|getSubject
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|suggestedEntity
 init|=
 name|EnhancementEngineHelper
@@ -3307,7 +3311,7 @@ comment|//now we collect existing Suggestions for this TextAnnoation where we ne
 comment|//to adjust the confidence (quite some things to check ....)
 name|Map
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
 name|Double
 argument_list|>
@@ -3316,7 +3320,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
 name|Double
 argument_list|>
@@ -3360,7 +3364,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|existingSuggestion
 init|=
 name|esIt
@@ -3416,7 +3420,7 @@ name|existingSuggestion
 argument_list|)
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|suggestedEntity
 init|=
 name|EnhancementEngineHelper
@@ -3472,7 +3476,7 @@ else|else
 block|{
 comment|// different fise:EntityAnnotation, but same reference Entity
 comment|//we need to check confidences to decide what to do
-name|Resource
+name|RDFTerm
 name|initialSuggestion
 init|=
 name|initialSuggestedEntities
@@ -3635,7 +3639,7 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
 name|Double
 argument_list|>
@@ -3718,7 +3722,7 @@ block|}
 comment|//add the suggestions of the initial mention to this one
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|suggestion
 range|:
 name|initialSuggestions
@@ -3735,7 +3739,7 @@ operator|new
 name|TripleImpl
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|suggestion
 argument_list|,
@@ -3816,7 +3820,7 @@ operator|)
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|existingDcTypesIt
 init|=
@@ -3876,7 +3880,7 @@ condition|)
 block|{
 for|for
 control|(
-name|UriRef
+name|IRI
 name|dcType
 range|:
 name|dcTypes

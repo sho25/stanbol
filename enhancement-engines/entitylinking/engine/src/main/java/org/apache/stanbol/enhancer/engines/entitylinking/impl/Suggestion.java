@@ -105,9 +105,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -121,11 +121,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|IRI
 import|;
 end_import
 
@@ -137,11 +137,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -334,10 +334,10 @@ block|}
 block|}
 comment|/**      * Getter for the best label in the given language      * @param suggestion the suggestion      * @param nameField the field used to search for labels      * @param language the language      * @return the best match or {@link Suggestion#getMatchedLabel()} if non is found      */
 specifier|public
-name|PlainLiteral
+name|Literal
 name|getBestLabel
 parameter_list|(
-name|UriRef
+name|IRI
 name|nameField
 parameter_list|,
 name|String
@@ -352,13 +352,13 @@ argument_list|()
 decl_stmt|;
 comment|//start with the matched label -> so if we do not find a better one
 comment|//we will use the matched!
-name|PlainLiteral
+name|Literal
 name|matchedLabel
 init|=
 name|getMatchedLabel
 argument_list|()
 decl_stmt|;
-name|PlainLiteral
+name|Literal
 name|label
 init|=
 name|matchedLabel
@@ -367,7 +367,7 @@ comment|// 1. check if the returned Entity does has a label -> if not return nul
 comment|// add labels (set only a single label. Use "en" if available!
 name|Iterator
 argument_list|<
-name|PlainLiteral
+name|Literal
 argument_list|>
 name|labels
 init|=
@@ -394,7 +394,7 @@ operator|!
 name|matchFound
 condition|)
 block|{
-name|PlainLiteral
+name|Literal
 name|actLabel
 init|=
 name|labels
@@ -481,7 +481,7 @@ return|;
 block|}
 comment|/**      * Shorthand for {@link #getLabelMatch()}.getMatchedLabel()      * @return the label or<code>null</code> if {@link MATCH#NONE}      */
 specifier|public
-name|PlainLiteral
+name|Literal
 name|getMatchedLabel
 parameter_list|()
 block|{

@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -43,11 +43,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -59,13 +59,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -81,7 +85,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -206,7 +210,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ContentItem implementation that holds a complete copy of the data in  * memory. Internally it uses {@link InMemoryBlob} to store the content and  * an {@link SimpleMGraph} for the metadata.  *<p>  * This implementation can be used independently of any store implementation and  * is suitable for stateless processing.  */
+comment|/**  * ContentItem implementation that holds a complete copy of the data in  * memory. Internally it uses {@link InMemoryBlob} to store the content and  * an {@link SimpleGraph} for the metadata.  *<p>  * This implementation can be used independently of any store implementation and  * is suitable for stateless processing.  */
 end_comment
 
 begin_class
@@ -235,7 +239,7 @@ block|{
 name|this
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 literal|null
 argument_list|,
@@ -251,7 +255,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      *       * @param id      * @param content      * @param mimeType      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(UriRef, ContentSource)}      * with a {@link StringSource} instead.      */
+comment|/**      *       * @param id      * @param content      * @param mimeType      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(IRI, ContentSource)}      * with a {@link StringSource} instead.      */
 specifier|public
 name|InMemoryContentItem
 parameter_list|(
@@ -281,7 +285,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(UriRef, ContentSource)}      * with a {@link ByteArraySource} instead.      */
+comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(IRI, ContentSource)}      * with a {@link ByteArraySource} instead.      */
 specifier|public
 name|InMemoryContentItem
 parameter_list|(
@@ -312,7 +316,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(UriRef, ContentSource,MGraph)}      * with a {@link ByteArraySource} instead.      */
+comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(IRI, ContentSource,Graph)}      * with a {@link ByteArraySource} instead.      */
 specifier|public
 name|InMemoryContentItem
 parameter_list|(
@@ -326,7 +330,7 @@ parameter_list|,
 name|String
 name|mimeType
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -337,7 +341,7 @@ operator|!=
 literal|null
 condition|?
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uriString
 argument_list|)
@@ -356,11 +360,11 @@ name|metadata
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(UriRef, ContentSource,MGraph)}      * with a {@link StringSource} instead.      */
+comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(IRI, ContentSource,Graph)}      * with a {@link StringSource} instead.      */
 specifier|public
 name|InMemoryContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|uriRef
 parameter_list|,
 name|String
@@ -386,11 +390,11 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(UriRef, ContentSource,MGraph)}      * with a {@link ByteArraySource} instead.      */
+comment|/**      *       * @param id      * @param content      * @param mimetype      * @deprecated use {@link InMemoryContentItemFactory#createContentItem(IRI, ContentSource,Graph)}      * with a {@link ByteArraySource} instead.      */
 specifier|public
 name|InMemoryContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|byte
@@ -400,7 +404,7 @@ parameter_list|,
 name|String
 name|mimeType
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -429,7 +433,7 @@ parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -440,7 +444,7 @@ operator|!=
 literal|null
 condition|?
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uriString
 argument_list|)
@@ -456,13 +460,13 @@ block|}
 specifier|protected
 name|InMemoryContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -488,7 +492,7 @@ operator|==
 literal|null
 condition|?
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 else|:
 name|metadata

@@ -35,11 +35,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -51,11 +51,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -86,7 +86,7 @@ function_decl|;
 comment|/** Set of subjects that match our TripleMatcherGroup */
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getMatchingSubjects
 parameter_list|()

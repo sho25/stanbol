@@ -77,9 +77,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -93,11 +93,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -255,7 +255,7 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getTypes
 parameter_list|()
@@ -272,7 +272,7 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getRedirects
 parameter_list|()
@@ -610,7 +610,7 @@ block|)
 enum|,
 name|type
 argument_list|(
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|,
@@ -619,7 +619,7 @@ argument_list|)
 operator|,
 name|redirect
 argument_list|(
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|,

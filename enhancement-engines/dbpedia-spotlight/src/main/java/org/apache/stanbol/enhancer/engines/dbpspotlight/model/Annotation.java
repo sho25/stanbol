@@ -111,11 +111,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -127,11 +127,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -224,7 +224,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|Resource
+name|RDFTerm
 name|uri
 decl_stmt|;
 comment|//TODO: change this to a list with the parsed types
@@ -493,7 +493,7 @@ name|getElementsByTagName
 argument_list|(
 name|xmlDoc
 argument_list|,
-literal|"Resource"
+literal|"RDFTerm"
 argument_list|)
 decl_stmt|;
 name|Collection
@@ -552,7 +552,7 @@ operator|.
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|node
 operator|.

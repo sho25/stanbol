@@ -77,9 +77,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -109,11 +109,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -125,11 +125,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -141,11 +141,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -315,7 +315,7 @@ name|clerezza
 operator|.
 name|impl
 operator|.
-name|UriRef2ReferenceAdapter
+name|IRI2ReferenceAdapter
 import|;
 end_import
 
@@ -335,7 +335,7 @@ name|clerezza
 operator|.
 name|impl
 operator|.
-name|UriRefAdapter
+name|IRIAdapter
 import|;
 end_import
 
@@ -519,10 +519,10 @@ block|}
 specifier|protected
 name|RdfRepresentation
 parameter_list|(
-name|UriRef
+name|IRI
 name|resource
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -541,7 +541,7 @@ expr_stmt|;
 block|}
 comment|/**      * Getter for the read only view onto the RDF data of this representation.      *      * @return The RDF graph of this Representation      */
 specifier|public
-name|TripleCollection
+name|Graph
 name|getRdfGraph
 parameter_list|()
 block|{
@@ -552,8 +552,8 @@ name|getGraph
 argument_list|()
 return|;
 block|}
-comment|//    protected UriRef getRepresentationType(){
-comment|//        Iterator<UriRef> it = this.graphNode.getUriRefObjects(REPRESENTATION_TYPE_PROPERTY);
+comment|//    protected IRI getRepresentationType(){
+comment|//        Iterator<IRI> it = this.graphNode.getIRIObjects(REPRESENTATION_TYPE_PROPERTY);
 comment|//        return it.hasNext()?it.next():null;
 comment|//    }
 annotation|@
@@ -616,11 +616,11 @@ literal|"NULL values are not supported by Representations"
 argument_list|)
 throw|;
 block|}
-name|UriRef
-name|fieldUriRef
+name|IRI
+name|fieldIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -664,7 +664,7 @@ if|if
 condition|(
 name|current
 operator|instanceof
-name|Resource
+name|RDFTerm
 condition|)
 block|{
 comment|//native support for Clerezza types!
@@ -672,10 +672,10 @@ name|graphNode
 operator|.
 name|addProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
-name|Resource
+name|RDFTerm
 operator|)
 name|current
 argument_list|)
@@ -694,7 +694,7 @@ name|graphNode
 operator|.
 name|addProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
 operator|(
@@ -703,7 +703,7 @@ operator|)
 name|current
 operator|)
 operator|.
-name|getUriRef
+name|getIRI
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -720,10 +720,10 @@ name|graphNode
 operator|.
 name|addProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 operator|(
 operator|(
@@ -751,7 +751,7 @@ name|graphNode
 operator|.
 name|addProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
 operator|(
@@ -775,7 +775,7 @@ condition|)
 block|{
 name|addNaturalText
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
 operator|(
@@ -804,7 +804,7 @@ block|{
 comment|//else add an typed Literal!
 name|addTypedLiteral
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 name|current
 argument_list|)
@@ -816,7 +816,7 @@ specifier|private
 name|void
 name|addTypedLiteral
 parameter_list|(
-name|UriRef
+name|IRI
 name|field
 parameter_list|,
 name|Object
@@ -969,13 +969,13 @@ operator|.
 name|addProperty
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|reference
 argument_list|)
@@ -1051,7 +1051,7 @@ operator|.
 name|addNaturalText
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -1066,7 +1066,7 @@ specifier|private
 name|void
 name|addNaturalText
 parameter_list|(
-name|UriRef
+name|IRI
 name|field
 parameter_list|,
 name|String
@@ -1188,18 +1188,18 @@ literal|"The parsed field MUST NOT be Empty"
 argument_list|)
 throw|;
 block|}
-name|UriRef
-name|fieldUriRef
+name|IRI
+name|fieldIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|Resource
+name|RDFTerm
 operator|.
 name|class
 operator|.
@@ -1221,7 +1221,7 @@ name|graphNode
 operator|.
 name|getObjects
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|)
 argument_list|,
 name|type
@@ -1233,9 +1233,9 @@ comment|//     someone parsed String.class he rather assumes that he gets only s
 comment|//     values and not also string representations for Dates, Integer ...
 comment|//
 comment|//        } else if(type.equals(String.class)){ //support to convert anything to String
-comment|//            return (Iterator<T>) new AdaptingIterator<Resource,String>(
-comment|//                    graphNode.getObjects(fieldUriRef),
-comment|//                    new Resource2StringAdapter<Resource>(),
+comment|//            return (Iterator<T>) new AdaptingIterator<RDFTerm,String>(
+comment|//                    graphNode.getObjects(fieldIRI),
+comment|//                    new Resource2StringAdapter<RDFTerm>(),
 comment|//                    String.class);
 block|}
 elseif|else
@@ -1265,20 +1265,20 @@ return|return
 operator|new
 name|AdaptingIterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|T
 argument_list|>
 argument_list|(
 name|graphNode
 operator|.
-name|getUriRefObjects
+name|getIRIObjects
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|)
 argument_list|,
 operator|new
-name|UriRefAdapter
+name|IRIAdapter
 argument_list|<
 name|T
 argument_list|>
@@ -1311,20 +1311,20 @@ operator|)
 operator|new
 name|AdaptingIterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Reference
 argument_list|>
 argument_list|(
 name|graphNode
 operator|.
-name|getUriRefObjects
+name|getIRIObjects
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef2ReferenceAdapter
+name|IRI2ReferenceAdapter
 argument_list|()
 argument_list|,
 name|Reference
@@ -1365,7 +1365,7 @@ name|graphNode
 operator|.
 name|getLiterals
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|)
 argument_list|,
 operator|new
@@ -1397,7 +1397,7 @@ name|graphNode
 operator|.
 name|getLiterals
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|)
 argument_list|,
 operator|new
@@ -1463,24 +1463,24 @@ return|return
 operator|new
 name|AdaptingIterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Reference
 argument_list|>
 argument_list|(
 name|graphNode
 operator|.
-name|getUriRefObjects
+name|getIRIObjects
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef2ReferenceAdapter
+name|IRI2ReferenceAdapter
 argument_list|()
 argument_list|,
 name|Reference
@@ -1548,7 +1548,7 @@ operator|.
 name|getLiterals
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -1616,7 +1616,7 @@ return|return
 operator|new
 name|AdaptingIterator
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
 name|Object
 argument_list|>
@@ -1626,7 +1626,7 @@ operator|.
 name|getObjects
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -1635,7 +1635,7 @@ argument_list|,
 operator|new
 name|Resource2ValueAdapter
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 argument_list|,
@@ -1708,7 +1708,7 @@ operator|.
 name|getLiterals
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -1743,7 +1743,7 @@ return|return
 operator|new
 name|AdaptingIterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|String
 argument_list|>
@@ -1756,7 +1756,7 @@ argument_list|,
 operator|new
 name|Resource2StringAdapter
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 argument_list|,
@@ -2118,15 +2118,15 @@ name|getUnicodeString
 argument_list|()
 return|;
 block|}
-comment|/**      * Getter for the UriRef representing the ID of this Representation.      * @return The UriRef representing the ID of this Representation.      */
+comment|/**      * Getter for the IRI representing the ID of this Representation.      * @return The IRI representing the ID of this Representation.      */
 specifier|public
-name|UriRef
+name|IRI
 name|getNode
 parameter_list|()
 block|{
 return|return
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|graphNode
 operator|.
@@ -2204,11 +2204,11 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-name|UriRef
-name|fieldUriRef
+name|IRI
+name|fieldIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -2250,7 +2250,7 @@ if|if
 condition|(
 name|current
 operator|instanceof
-name|Resource
+name|RDFTerm
 condition|)
 block|{
 comment|//native support for Clerezza types!
@@ -2258,10 +2258,10 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
-name|Resource
+name|RDFTerm
 operator|)
 name|current
 argument_list|)
@@ -2280,7 +2280,7 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
 operator|(
@@ -2289,7 +2289,7 @@ operator|)
 name|current
 operator|)
 operator|.
-name|getUriRef
+name|getIRI
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -2306,10 +2306,10 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 operator|(
 operator|(
@@ -2337,7 +2337,7 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 operator|(
 operator|(
@@ -2390,7 +2390,7 @@ block|{
 comment|//else add an typed Literal!
 name|removeTypedLiteral
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 name|current
 argument_list|)
@@ -2472,13 +2472,13 @@ operator|.
 name|deleteProperty
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|reference
 argument_list|)
@@ -2489,7 +2489,7 @@ specifier|protected
 name|void
 name|removeTypedLiteral
 parameter_list|(
-name|UriRef
+name|IRI
 name|field
 parameter_list|,
 name|Object
@@ -2658,11 +2658,11 @@ literal|null
 block|}
 expr_stmt|;
 block|}
-name|UriRef
-name|fieldUriRef
+name|IRI
+name|fieldIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -2679,7 +2679,7 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 name|RdfResourceUtils
 operator|.
@@ -2705,7 +2705,7 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 name|RdfResourceUtils
 operator|.
@@ -2765,7 +2765,7 @@ operator|.
 name|deleteProperties
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -2821,11 +2821,11 @@ block|}
 comment|//        if(languages == null || languages.length == 0){
 comment|//            languages = new String []{null};
 comment|//        }
-name|UriRef
-name|fieldUriRef
+name|IRI
+name|fieldIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|field
 argument_list|)
@@ -2860,7 +2860,7 @@ name|graphNode
 operator|.
 name|getLiterals
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|)
 argument_list|,
 operator|new
@@ -2905,7 +2905,7 @@ name|graphNode
 operator|.
 name|deleteProperty
 argument_list|(
-name|fieldUriRef
+name|fieldIRI
 argument_list|,
 name|l
 argument_list|)

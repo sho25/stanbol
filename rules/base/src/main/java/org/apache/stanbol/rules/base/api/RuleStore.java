@@ -47,11 +47,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -63,11 +63,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -126,11 +126,11 @@ name|RECIPE_INDEX_LOCATION
 init|=
 literal|"org.apache.stanbol.rules.base.recipe_index"
 decl_stmt|;
-comment|/**      * Create a new recipe in the Rule Store.<br/>      * The recipe is identified and described by the first and the second parameter respectively.<br/>      * The description is optional and a null value can be in case passed.<br/>      * This method returns a {@link Recipe} object, which is the representation of a recipe of rules in      * Stanbol.<br/>      * If some error occurs during the creation of the recipe a {@link RecipeConstructionException} is thrown.      *       * @param recipeID      *            {@link UriRef}      * @param recipeDescription      *            {@link String}      * @return a {@link Recipe}      * @throws AlreadyExistingRecipeException      */
+comment|/**      * Create a new recipe in the Rule Store.<br/>      * The recipe is identified and described by the first and the second parameter respectively.<br/>      * The description is optional and a null value can be in case passed.<br/>      * This method returns a {@link Recipe} object, which is the representation of a recipe of rules in      * Stanbol.<br/>      * If some error occurs during the creation of the recipe a {@link RecipeConstructionException} is thrown.      *       * @param recipeID      *            {@link IRI}      * @param recipeDescription      *            {@link String}      * @return a {@link Recipe}      * @throws AlreadyExistingRecipeException      */
 name|Recipe
 name|createRecipe
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|,
 name|String
@@ -194,14 +194,14 @@ parameter_list|)
 throws|throws
 name|NoSuchRuleInRecipeException
 function_decl|;
-comment|/**      * It returns the rule in a recipe selected by ID.<br/>      *       * @param recipe      *            {@link Recipe}      * @param ruleID      *            {@link UriRef}      * @return {@link Rule}      * @throws NoSuchRuleInRecipeException      */
+comment|/**      * It returns the rule in a recipe selected by ID.<br/>      *       * @param recipe      *            {@link Recipe}      * @param ruleID      *            {@link IRI}      * @return {@link Rule}      * @throws NoSuchRuleInRecipeException      */
 name|Rule
 name|getRule
 parameter_list|(
 name|Recipe
 name|recipe
 parameter_list|,
-name|UriRef
+name|IRI
 name|ruleID
 parameter_list|)
 throws|throws
@@ -215,10 +215,10 @@ name|Recipe
 name|recipe
 parameter_list|)
 function_decl|;
-comment|/**      * It returns the {@link List} or rules' identifiers ({@link UriRef}).      *       * @param recipe      *            {@link Recipe}      * @return {@link List} of {@link UriRef}      */
+comment|/**      * It returns the {@link List} or rules' identifiers ({@link IRI}).      *       * @param recipe      *            {@link Recipe}      * @return {@link List} of {@link IRI}      */
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|listRuleIDs
 parameter_list|(
@@ -237,11 +237,11 @@ name|Recipe
 name|recipe
 parameter_list|)
 function_decl|;
-comment|/**      * It returns a {@link Recipe} object identified in the store by the recipe's identifier provided as      * parameter.<br/>      * If the recipe's identifier does not exist in the store a {@link NoSuchRecipeException} is thrown.<br/>      * If some error occurs while generating the recipe object a {@link RecipeConstructionException} is      * thrown.      *       * @param recipeID      *            {@link UriRef}      * @return {@link Recipe}      * @throws NoSuchRecipeException      * @throws RecipeConstructionException      */
+comment|/**      * It returns a {@link Recipe} object identified in the store by the recipe's identifier provided as      * parameter.<br/>      * If the recipe's identifier does not exist in the store a {@link NoSuchRecipeException} is thrown.<br/>      * If some error occurs while generating the recipe object a {@link RecipeConstructionException} is      * thrown.      *       * @param recipeID      *            {@link IRI}      * @return {@link Recipe}      * @throws NoSuchRecipeException      * @throws RecipeConstructionException      */
 name|Recipe
 name|getRecipe
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|)
 throws|throws
@@ -249,10 +249,10 @@ name|NoSuchRecipeException
 throws|,
 name|RecipeConstructionException
 function_decl|;
-comment|/**      * It returns a list of existing recipes' IDs in the store.<br/>      *       * @return {@link List} of {@link UriRef}      */
+comment|/**      * It returns a list of existing recipes' IDs in the store.<br/>      *       * @return {@link List} of {@link IRI}      */
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|listRecipeIDs
 parameter_list|()
@@ -266,11 +266,11 @@ name|NoSuchRecipeException
 throws|,
 name|RecipeConstructionException
 function_decl|;
-comment|/**      * It removes the recipe identified by the ID passed as parameter.<br/>      * If any problem occurs during the elimination of the recipe from the store a      * {@link RecipeEliminationException} is thrown.      *       * @param recipeID      *            {@link UriRef}      * @return<code>true</code> if the recipe has been removed, false otherwise.      * @throws RecipeEliminationException      */
+comment|/**      * It removes the recipe identified by the ID passed as parameter.<br/>      * If any problem occurs during the elimination of the recipe from the store a      * {@link RecipeEliminationException} is thrown.      *       * @param recipeID      *            {@link IRI}      * @return<code>true</code> if the recipe has been removed, false otherwise.      * @throws RecipeEliminationException      */
 name|boolean
 name|removeRecipe
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|)
 throws|throws
@@ -297,8 +297,8 @@ name|Rule
 name|rule
 parameter_list|)
 function_decl|;
-comment|/**      * It allows to export recipes as Clerezza's {@link TripleCollection} objects.      *       * @param recipe      * @return      * @throws NoSuchRecipeException      */
-name|TripleCollection
+comment|/**      * It allows to export recipes as Clerezza's {@link Graph} objects.      *       * @param recipe      * @return      * @throws NoSuchRecipeException      */
+name|Graph
 name|exportRecipe
 parameter_list|(
 name|Recipe

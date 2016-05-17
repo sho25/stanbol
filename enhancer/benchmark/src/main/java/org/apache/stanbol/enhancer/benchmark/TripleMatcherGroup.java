@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -61,11 +61,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -88,14 +88,14 @@ name|boolean
 name|isExpectGroup
 parameter_list|()
 function_decl|;
-comment|/** Return the set of UriRef that match all      *  TripleMatcher in this group for supplied Graph      */
+comment|/** Return the set of IRI that match all      *  TripleMatcher in this group for supplied ImmutableGraph      */
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getMatchingSubjects
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|g
 parameter_list|)
 function_decl|;

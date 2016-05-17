@@ -45,7 +45,7 @@ name|IRI
 name|getDefaultNamespace
 parameter_list|()
 function_decl|;
-comment|/**      * Returns a string (assumed to be unique in the system) that identifies this resource. For instance, a      * parent IRI of the base IRIs for the ontologies within an ontology space. Naming schemes are      * implementation-dependent.<br>      *<br>      * Note that in general a named resource is not aware of its uniqueness. It is not even implied that      * objects of different types cannot have the same ID. These aspects should be ensured by registries,      * indexers etc.<br>      *<br>      * XXX check if a type other than String (e.g. URI, IRI, UriRef) should be used.      *       * @return an identifier for this resource.      */
+comment|/**      * Returns a string (assumed to be unique in the system) that identifies this resource. For instance, a      * parent IRI of the base IRIs for the ontologies within an ontology space. Naming schemes are      * implementation-dependent.<br>      *<br>      * Note that in general a named resource is not aware of its uniqueness. It is not even implied that      * objects of different types cannot have the same ID. These aspects should be ensured by registries,      * indexers etc.<br>      *<br>      * XXX check if a type other than String (e.g. URI, IRI, IRI) should be used.      *       * @return an identifier for this resource.      */
 name|String
 name|getID
 parameter_list|()

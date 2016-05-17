@@ -157,11 +157,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -173,11 +173,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -189,9 +189,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -205,11 +205,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -221,11 +221,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -387,7 +387,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1097,20 +1097,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntology
 import|;
 end_import
@@ -1262,6 +1248,14 @@ parameter_list|(
 name|InputStream
 name|content
 parameter_list|,
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|physicalIri
 parameter_list|)
@@ -1755,7 +1749,7 @@ argument_list|)
 expr_stmt|;
 comment|// Retrieve and filter the metadata graph for entities recognized by the engines.
 specifier|final
-name|MGraph
+name|Graph
 name|metadataGraph
 init|=
 name|ci
@@ -1766,16 +1760,16 @@ decl_stmt|,
 name|signaturesGraph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 comment|// FIXME the Stanbol Enhancer vocabulary should be retrieved from somewhere in the enhancer API.
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_ENTITY_REFERENCE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/entity-reference"
 argument_list|)
@@ -1806,7 +1800,7 @@ argument_list|()
 condition|)
 block|{
 comment|// Get the entity URI
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|tripleIt
@@ -1823,7 +1817,7 @@ operator|!
 operator|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 block|{
@@ -1831,7 +1825,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Invalid UriRef for entity reference {}. Skipping."
+literal|"Invalid IRI for entity reference {}. Skipping."
 argument_list|,
 name|obj
 argument_list|)
@@ -1844,7 +1838,7 @@ name|entityReference
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -1870,7 +1864,7 @@ name|isEntityHubUsed
 argument_list|()
 condition|)
 block|{
-name|MGraph
+name|Graph
 name|result
 init|=
 name|populateWithEntity
@@ -1907,7 +1901,7 @@ try|try
 block|{
 name|OntologyInputSource
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 name|source
 init|=
@@ -1921,6 +1915,14 @@ argument_list|(
 name|entityReference
 argument_list|)
 argument_list|,
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -2042,7 +2044,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|engineConfiguration
 operator|.
@@ -2077,7 +2079,7 @@ argument_list|,
 name|ontology
 argument_list|)
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|tc
 init|=
 name|refactorer
@@ -2086,7 +2088,7 @@ name|graphRefactoring
 argument_list|(
 name|OWLAPIToClerezzaConverter
 operator|.
-name|owlOntologyToClerezzaMGraph
+name|owlOntologyToClerezzaGraph
 argument_list|(
 name|ontology
 argument_list|)
@@ -2094,7 +2096,7 @@ argument_list|,
 name|recipe
 argument_list|)
 decl_stmt|;
-comment|/*              * ontology = refactorer .ontologyRefactoring(ontology,              * IRI.create(engineConfiguration.getRecipeId()));              */
+comment|/*              * ontology = refactorer .ontologyRefactoring(ontology,              * org.semanticweb.owlapi.model.IRI.create(engineConfiguration.getRecipeId()));              */
 comment|/*              * The newly generated ontology is converted to Clarezza format and then added os substitued to              * the old mGraph.              */
 if|if
 condition|(
@@ -2264,10 +2266,10 @@ operator|.
 name|getStore
 argument_list|()
 operator|.
-name|deleteTripleCollection
+name|deleteGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|key
 argument_list|)
@@ -2368,11 +2370,11 @@ name|context
 parameter_list|)
 block|{
 comment|// Deactivation clears all the rules and releases OntoNet resources.
-name|UriRef
+name|IRI
 name|recipeId
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|engineConfiguration
 operator|.
@@ -2557,13 +2559,13 @@ expr_stmt|;
 block|}
 comment|/**      * Fetch the OWLOntology containing the graph associated to an entity from Linked Data. It uses the Entity      * Hub for accessing LOD and fetching entities.      *       * @param entityURI      *            {@link String}      * @return the {@link OWLOntology} of the entity      */
 specifier|private
-name|MGraph
+name|Graph
 name|populateWithEntity
 parameter_list|(
 name|String
 name|entityURI
 parameter_list|,
-name|MGraph
+name|Graph
 name|target
 parameter_list|)
 block|{
@@ -2576,7 +2578,7 @@ argument_list|,
 name|entityURI
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|target
@@ -2586,7 +2588,7 @@ condition|?
 name|target
 else|:
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 comment|// Query the Entity Hub
@@ -2682,7 +2684,7 @@ name|RefactorEnhancementEngineConf
 name|engineConfiguration
 parameter_list|)
 block|{
-comment|// IRI dulcifierScopeIRI = IRI.create((String) context.getProperties().get(SCOPE));
+comment|// IRI dulcifierScopeIRI = org.semanticweb.owlapi.model.IRI.create((String) context.getProperties().get(SCOPE));
 name|String
 name|scopeId
 init|=
@@ -2794,6 +2796,14 @@ operator|.
 name|createOWLOntologyManager
 argument_list|()
 decl_stmt|;
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|physicalIRI
 init|=
@@ -2828,6 +2838,14 @@ try|try
 block|{
 name|physicalIRI
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -2989,7 +3007,7 @@ operator|.
 name|createRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeId
 argument_list|)

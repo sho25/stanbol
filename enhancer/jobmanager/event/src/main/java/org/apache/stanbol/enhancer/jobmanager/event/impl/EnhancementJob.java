@@ -449,9 +449,25 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
+name|ImmutableGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
 operator|.
 name|Graph
 import|;
@@ -465,11 +481,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -481,27 +497,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|NonLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -726,13 +726,13 @@ decl_stmt|;
 comment|/**      * The read only executionPlan      */
 specifier|private
 specifier|final
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 decl_stmt|;
-comment|/**      * The read/write able execution metadata. Also accessible via      * {@link ContentItem#getPart(UriRef, Class)} with the URI      * {@link ExecutionMetadata#CHAIN_EXECUTION}      */
+comment|/**      * The read/write able execution metadata. Also accessible via      * {@link ContentItem#getPart(IRI, Class)} with the URI      * {@link ExecutionMetadata#CHAIN_EXECUTION}      */
 specifier|private
 specifier|final
-name|MGraph
+name|Graph
 name|executionMetadata
 decl_stmt|;
 comment|/**      * Map with the em:Execution nodes of the em:ChainExecution for this      * ContentItem. Values are are ep:ExecutionNodes of the ep:ExecutionPlan      */
@@ -744,13 +744,13 @@ decl_stmt|;
 comment|/**      * The em:ChainExecution for this {@link ContentItem}      */
 specifier|private
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|chainExecutionNode
 decl_stmt|;
 comment|/**      * The ep:ExecutionPlan for this {@link ContentItem}      */
 specifier|private
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionPlanNode
 decl_stmt|;
 comment|/**      * The name of the {@link Chain} used to enhance this {@link ContentItem}.      */
@@ -770,14 +770,14 @@ specifier|private
 specifier|final
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|completed
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -785,7 +785,7 @@ comment|/**      * Unmodifiable and final set of completed executables. Replaced
 specifier|private
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|completedExec
 init|=
@@ -799,14 +799,14 @@ specifier|private
 specifier|final
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|running
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -814,7 +814,7 @@ comment|/**      * Unmodifiable and final set of running executables. Replaced b
 specifier|private
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|runningExec
 init|=
@@ -827,11 +827,11 @@ comment|/**      * Unmodifiable and final set of executable em:Execution nodes. 
 specifier|private
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executable
 decl_stmt|;
-comment|/**      * Used to store any {@link Exception} parsed with the call to      * {@link #setFailed(NonLiteral, EnhancementEngine, Exception)} causing the      * enhancement process to fail. This Exception is typically re-thrown by the      * {@link EnhancementJobManager#enhanceContent(ContentItem, Chain)} method.      * @see #getError()      */
+comment|/**      * Used to store any {@link Exception} parsed with the call to      * {@link #setFailed(BlankNodeOrIRI, EnhancementEngine, Exception)} causing the      * enhancement process to fail. This Exception is typically re-thrown by the      * {@link EnhancementJobManager#enhanceContent(ContentItem, Chain)} method.      * @see #getError()      */
 specifier|private
 name|Exception
 name|error
@@ -848,7 +848,7 @@ parameter_list|,
 name|String
 name|chainName
 parameter_list|,
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 parameter_list|,
 name|boolean
@@ -1008,7 +1008,7 @@ name|checkExecutable
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates an EnhancemenJob based on already existing execution metadata present      * for a ContentItem.      * @param contentItem the ContentItem with an already existing content part      * containing an {@link MGraph} with all required execution metadata and the       * execution plan.      * @throws IllegalArgumentException if the parsed {@link ContentItem} does      * not provide the required data to (re)initialise the EnhancementJob.      */
+comment|/**      * Creates an EnhancemenJob based on already existing execution metadata present      * for a ContentItem.      * @param contentItem the ContentItem with an already existing content part      * containing an {@link Graph} with all required execution metadata and the       * execution plan.      * @throws IllegalArgumentException if the parsed {@link ContentItem} does      * not provide the required data to (re)initialise the EnhancementJob.      */
 specifier|public
 name|EnhancementJob
 parameter_list|(
@@ -1071,7 +1071,7 @@ name|ExecutionMetadata
 operator|.
 name|CHAIN_EXECUTION
 argument_list|,
-name|MGraph
+name|Graph
 operator|.
 name|class
 argument_list|)
@@ -1108,7 +1108,7 @@ name|executionPlan
 operator|=
 name|executionMetadata
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 expr_stmt|;
 name|chainExecutionNode
@@ -1237,9 +1237,9 @@ block|}
 comment|//the executionPlan is part of the execution metadata
 name|Map
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executionsMap
 init|=
@@ -1263,9 +1263,9 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executionEntry
 range|:
@@ -1275,7 +1275,7 @@ name|entrySet
 argument_list|()
 control|)
 block|{
-name|UriRef
+name|IRI
 name|status
 init|=
 name|getReference
@@ -1398,18 +1398,18 @@ expr_stmt|;
 block|}
 comment|/**      * Getter for the ep:ExecutionNode linked to a em:Execution      * @return the ep:ExecutionNode instance      * @throws IllegalArgumentException if the parsed em:Execution is not      * part of the execution metadata of this enhancement job      */
 specifier|public
-name|NonLiteral
+name|BlankNodeOrIRI
 name|getExecutionNode
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 parameter_list|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|executionsMap
 operator|.
@@ -1441,18 +1441,18 @@ return|;
 block|}
 comment|/**      * Getter for the em:Execution linked to a ep:ExecutionNode      * @return the em:Execution instance       * @throws IllegalArgumentException if the parsed ep:ExecutionNode is not      * part of the execution plan of this enhancement job      */
 specifier|public
-name|NonLiteral
+name|BlankNodeOrIRI
 name|getExecution
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 parameter_list|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|executionsMap
 operator|.
@@ -1485,7 +1485,7 @@ block|}
 comment|/**      * The used execution plan for processing the {@link ContentItem}      *       * @return the executionPlan      */
 specifier|public
 specifier|final
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 block|{
@@ -1533,7 +1533,7 @@ comment|/**      * Getter for a read only view over the currently running execut
 specifier|public
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getRunning
 parameter_list|()
@@ -1589,7 +1589,7 @@ comment|/**      * Getter for a read only view over the completed execution.    
 specifier|public
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getCompleted
 parameter_list|()
@@ -1646,7 +1646,7 @@ specifier|public
 name|void
 name|setCompleted
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 parameter_list|)
 block|{
@@ -1670,7 +1670,7 @@ operator|.
 name|lock
 argument_list|()
 expr_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 init|=
 name|getExecutionNode
@@ -1752,12 +1752,12 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Internally used to update the state kept in {@link #completed} and      * {@link #running} and {@link #executable} after an execution was set to      * {@link #setCompleted(NonLiteral) completed} or       * {@link #setFailed(NonLiteral, EnhancementEngine, Exception) failed}.<p>      * This method expects to be called within an active {@link #writeLock}.      * @param executionNode the ep:ExecutionNode linked to the em:Execution that      * finished.       */
+comment|/**      * Internally used to update the state kept in {@link #completed} and      * {@link #running} and {@link #executable} after an execution was set to      * {@link #setCompleted(BlankNodeOrIRI) completed} or       * {@link #setFailed(BlankNodeOrIRI, EnhancementEngine, Exception) failed}.<p>      * This method expects to be called within an active {@link #writeLock}.      * @param executionNode the ep:ExecutionNode linked to the em:Execution that      * finished.       */
 specifier|private
 name|void
 name|setNodeCompleted
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 parameter_list|)
 block|{
@@ -1783,7 +1783,7 @@ argument_list|)
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|dependsOn
 init|=
@@ -1956,7 +1956,7 @@ specifier|public
 name|void
 name|setRunning
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 parameter_list|)
 block|{
@@ -1975,7 +1975,7 @@ literal|"The parsed em:Execution instance MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 init|=
 name|getExecutionNode
@@ -2005,7 +2005,7 @@ argument_list|)
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|dependsOn
 init|=
@@ -2320,14 +2320,14 @@ parameter_list|()
 block|{
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|runningExec
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|(
 name|running
@@ -2338,7 +2338,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 range|:
 name|running
@@ -2375,14 +2375,14 @@ parameter_list|()
 block|{
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|completedExec
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|(
 name|completed
@@ -2393,7 +2393,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 range|:
 name|completed
@@ -2430,7 +2430,7 @@ parameter_list|()
 block|{
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executeableNodes
 init|=
@@ -2499,7 +2499,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 range|:
 name|executeableNodes
@@ -2583,14 +2583,14 @@ else|else
 block|{
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executable
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|(
 name|executeableNodes
@@ -2601,7 +2601,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|exeutableNode
 range|:
 name|executeableNodes
@@ -2670,7 +2670,7 @@ comment|/**      * Getter for the executable nodes.      * @return the nodes tha
 specifier|public
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getExecutable
 parameter_list|()
@@ -2796,7 +2796,7 @@ specifier|public
 name|void
 name|setFailed
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 parameter_list|,
 name|EnhancementEngine
@@ -2821,7 +2821,7 @@ literal|"The parsed em:Execution instance MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 init|=
 name|getExecutionNode
@@ -3225,7 +3225,7 @@ block|}
 block|}
 comment|/**      * Getter for the ExecutionMetadata.      * @return the execution metadata.      */
 specifier|public
-name|MGraph
+name|Graph
 name|getExecutionMetadata
 parameter_list|()
 block|{

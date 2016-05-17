@@ -49,11 +49,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -404,7 +404,7 @@ operator|new
 name|FunctionCall
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"<http://www.w3.org/2005/xpath-functions#ends-with>"
 argument_list|)

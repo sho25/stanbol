@@ -39,11 +39,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -127,7 +127,7 @@ expr_stmt|;
 block|}
 comment|/**      * Getter for the {@link ClerezzaYard#GRAPH_URI} property      * @return the graph URI or<code>null</code> if non is configured      */
 specifier|public
-name|UriRef
+name|IRI
 name|getGraphUri
 parameter_list|()
 block|{
@@ -147,12 +147,12 @@ if|if
 condition|(
 name|value
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 return|return
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 return|;
@@ -167,7 +167,7 @@ condition|)
 block|{
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|value
 operator|.
@@ -188,7 +188,7 @@ specifier|public
 name|void
 name|setGraphUri
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|)
 block|{

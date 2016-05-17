@@ -415,11 +415,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -431,11 +431,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -447,9 +447,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -463,11 +463,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -479,11 +479,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -497,11 +499,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -910,7 +914,7 @@ name|FeatureClass
 argument_list|,
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|FEATURE_CLASS_CONCEPT_MAPPINGS
@@ -924,7 +928,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|FEATURE_TYPE_CONCEPT_MAPPINGS
@@ -1019,11 +1023,11 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|CONCEPT_GEONAMES_FEATURE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1113,7 +1117,7 @@ name|FeatureClass
 argument_list|,
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|mappings
@@ -1125,7 +1129,7 @@ name|FeatureClass
 argument_list|,
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 argument_list|(
@@ -1148,14 +1152,14 @@ control|)
 block|{
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|conceptMappings
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1186,11 +1190,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//now add additional mappings to the dbpedia Ontology
-name|UriRef
+name|IRI
 name|populatedPlace
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1215,7 +1219,7 @@ argument_list|(
 name|populatedPlace
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1242,7 +1246,7 @@ argument_list|(
 name|populatedPlace
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1263,7 +1267,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1283,7 +1287,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1303,7 +1307,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1323,7 +1327,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1348,7 +1352,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|typeMappings
@@ -1360,14 +1364,14 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|lakeTypes
 init|=
@@ -1376,7 +1380,7 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1528,11 +1532,11 @@ argument_list|,
 name|lakeTypes
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|stream
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1541,7 +1545,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|canalTypes
 init|=
@@ -1552,7 +1556,7 @@ argument_list|(
 name|stream
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1643,7 +1647,7 @@ argument_list|)
 expr_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|riverTypes
 init|=
@@ -1654,7 +1658,7 @@ argument_list|(
 name|stream
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1808,7 +1812,7 @@ argument_list|)
 expr_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|caveTypes
 init|=
@@ -1817,7 +1821,7 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1863,7 +1867,7 @@ argument_list|)
 expr_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|countryTypes
 init|=
@@ -1872,7 +1876,7 @@ operator|.
 name|asList
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1889,11 +1893,11 @@ argument_list|,
 name|countryTypes
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|settlement
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1902,7 +1906,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|cityTypes
 init|=
@@ -1913,7 +1917,7 @@ argument_list|(
 name|settlement
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -1923,7 +1927,7 @@ argument_list|)
 decl_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|villageTypes
 init|=
@@ -1934,7 +1938,7 @@ argument_list|(
 name|settlement
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dbpedia_ont
 operator|+
@@ -2386,7 +2390,7 @@ parameter_list|)
 throws|throws
 name|EngineException
 block|{
-name|UriRef
+name|IRI
 name|contentItemId
 init|=
 name|ci
@@ -2394,7 +2398,7 @@ operator|.
 name|getUri
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -2418,7 +2422,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|name2placeEnhancementMap
@@ -2430,7 +2434,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 argument_list|()
@@ -2460,7 +2464,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|placeEnhancement
 init|=
 name|iterator
@@ -2539,7 +2543,7 @@ else|else
 block|{
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|placeEnhancements
 init|=
@@ -2562,7 +2566,7 @@ operator|=
 operator|new
 name|ArrayList
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -2658,7 +2662,7 @@ name|String
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|entry
@@ -2838,7 +2842,7 @@ expr_stmt|;
 comment|/*                          * NOTE: If score is not present all suggestions are                          * added as enhancements to the metadata of the content                          * item.                          */
 block|}
 comment|//write the enhancement!
-name|NonLiteral
+name|BlankNodeOrIRI
 name|locationEnhancement
 init|=
 name|writeEntityEnhancement
@@ -3117,15 +3121,15 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Writes an entity enhancement for the content item in the parsed graph      * based on the parsed toponym.      *      * @param contentItemId The id of the contentItem      * @param graph The graph used to write the triples      * @param literalFactory the literal factory used to create literals      * @param toponym the toponym      * @param relatedEnhancements related enhancements      * @param requiresEnhancements required enhancements      * @param defaultScore the score used as default id not present. This is      * used to parse the score of the Toponym if this method is used to add a      * parent Toponym.      *      * @return The UriRef of the created entity enhancement      */
+comment|/**      * Writes an entity enhancement for the content item in the parsed graph      * based on the parsed toponym.      *      * @param contentItemId The id of the contentItem      * @param graph The graph used to write the triples      * @param literalFactory the literal factory used to create literals      * @param toponym the toponym      * @param relatedEnhancements related enhancements      * @param requiresEnhancements required enhancements      * @param defaultScore the score used as default id not present. This is      * used to parse the score of the Toponym if this method is used to add a      * parent Toponym.      *      * @return The IRI of the created entity enhancement      */
 specifier|private
-name|UriRef
+name|IRI
 name|writeEntityEnhancement
 parameter_list|(
-name|UriRef
+name|IRI
 name|contentItemId
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|LiteralFactory
@@ -3136,13 +3140,13 @@ name|toponym
 parameter_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|relatedEnhancements
 parameter_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|requiresEnhancements
 parameter_list|,
@@ -3150,11 +3154,11 @@ name|Double
 name|score
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|entityRef
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://sws.geonames.org/"
 operator|+
@@ -3183,7 +3187,7 @@ operator|+
 name|featureClass
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -3207,7 +3211,7 @@ condition|)
 block|{
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|related
 range|:
 name|relatedEnhancements
@@ -3239,7 +3243,7 @@ condition|)
 block|{
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|requires
 range|:
 name|requiresEnhancements
@@ -3358,21 +3362,21 @@ block|}
 comment|//now get all the entity types for the results
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|entityTypes
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//first based on the feature class
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|featureClassTypes
 init|=
@@ -3409,7 +3413,7 @@ argument_list|()
 decl_stmt|;
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|featureCodeTypes
 init|=
@@ -3441,7 +3445,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3461,7 +3465,7 @@ expr_stmt|;
 comment|//finally add the type triples to the enhancement
 for|for
 control|(
-name|UriRef
+name|IRI
 name|entityType
 range|:
 name|entityTypes

@@ -117,11 +117,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -133,11 +133,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -149,11 +149,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -167,13 +169,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -185,11 +191,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -457,23 +465,23 @@ decl_stmt|;
 comment|/**      * The {@link ContentItem#getUri() ID} used for testing      */
 specifier|private
 specifier|static
-name|UriRef
+name|IRI
 name|ID
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.example.com/content-items#12345"
 argument_list|)
 decl_stmt|;
-comment|/**      * Graph used to test of parsed metadata are preserved      */
+comment|/**      * ImmutableGraph used to test of parsed metadata are preserved      */
 specifier|private
 specifier|static
-name|MGraph
+name|Graph
 name|METADATA
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 static|static
@@ -669,7 +677,7 @@ argument_list|,
 literal|null
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -699,7 +707,7 @@ argument_list|,
 literal|null
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -755,7 +763,7 @@ argument_list|(
 literal|null
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -873,7 +881,7 @@ argument_list|,
 name|TEST_CS
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -942,7 +950,7 @@ argument_list|,
 name|TEST_CS
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1039,7 +1047,7 @@ argument_list|,
 name|TEST_CS
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1112,7 +1120,7 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 literal|null
 argument_list|,
@@ -1139,14 +1147,14 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 literal|null
 argument_list|,
 name|TEST_CS
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1220,7 +1228,7 @@ argument_list|(
 name|TEST_CR
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;

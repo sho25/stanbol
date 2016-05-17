@@ -93,11 +93,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -109,11 +109,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -251,7 +253,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|//private static final UriRef ciUri = new UriRef("http://example.org/");
+comment|//private static final IRI ciUri = new IRI("http://example.org/");
 specifier|private
 specifier|static
 specifier|final
@@ -318,11 +320,11 @@ name|getUri
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|partUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://foo/"
 argument_list|)
@@ -359,7 +361,7 @@ name|getUri
 argument_list|()
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://example.org/ontology#hasPart"
 argument_list|)
@@ -381,7 +383,7 @@ argument_list|(
 name|partUri
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://example.org/ontology#isPartOf"
 argument_list|)
@@ -440,7 +442,7 @@ expr_stmt|;
 name|assertEquals
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ci
 operator|.
@@ -497,7 +499,7 @@ operator|.
 name|getPart
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://foo/nonexisting"
 argument_list|)
@@ -624,7 +626,7 @@ operator|.
 name|addPart
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://foo/"
 argument_list|)
@@ -658,7 +660,7 @@ argument_list|(
 name|contentSource
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|mainPart
 init|=
 name|ci
@@ -843,7 +845,7 @@ operator|.
 name|removePart
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:does.not.exist:and.can.not.be.removed"
 argument_list|)
@@ -899,11 +901,11 @@ argument_list|(
 name|contentSource
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:content.part:remove.test"
 argument_list|)
@@ -1009,11 +1011,11 @@ argument_list|(
 name|contentSource
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:content.part:remove.test"
 argument_list|)
@@ -1052,7 +1054,7 @@ name|i
 operator|++
 control|)
 block|{
-name|UriRef
+name|IRI
 name|partUri
 init|=
 name|ci

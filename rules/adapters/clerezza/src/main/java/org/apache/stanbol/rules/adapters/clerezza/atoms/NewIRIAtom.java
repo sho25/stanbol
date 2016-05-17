@@ -244,7 +244,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * It adapts any NewIRIAtom to the BIND built in call in Clerezza for creating new UriRef resources binding  * the value to a variable.  *   * @author anuzzolese  *   */
+comment|/**  * It adapts any NewIRIAtom to the BIND built in call in Clerezza for creating new IRI resources binding  * the value to a variable.  *   * @author anuzzolese  *   */
 end_comment
 
 begin_class

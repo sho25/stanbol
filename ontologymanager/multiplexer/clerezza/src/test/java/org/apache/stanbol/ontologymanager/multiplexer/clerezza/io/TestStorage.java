@@ -165,11 +165,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -181,9 +181,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -197,11 +197,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -351,20 +351,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntology
 import|;
 end_import
@@ -467,7 +453,7 @@ operator|.
 name|getStore
 argument_list|()
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|size
@@ -527,7 +513,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|iri
 range|:
 name|ontologyProvider
@@ -535,7 +521,7 @@ operator|.
 name|getStore
 argument_list|()
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 control|)
 block|{
@@ -551,11 +537,11 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|entity
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|Constants
 operator|.
@@ -568,7 +554,7 @@ operator|.
 name|truffles
 argument_list|)
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|ctx
 init|=
 operator|new
@@ -581,7 +567,7 @@ operator|.
 name|getStore
 argument_list|()
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 name|iri
 argument_list|)
@@ -626,7 +612,7 @@ operator|.
 name|getStore
 argument_list|()
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|isEmpty
@@ -668,6 +654,14 @@ init|=
 operator|new
 name|RootOntologySource
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create

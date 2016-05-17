@@ -811,7 +811,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1382,7 +1382,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Resource to provide a REST API for the {@link SiteManager}  *<p/>  * TODO: add description  */
+comment|/**  * RDFTerm to provide a REST API for the {@link SiteManager}  *<p/>  * TODO: add description  */
 end_comment
 
 begin_class
@@ -4746,7 +4746,7 @@ operator|new
 name|RdfValueFactory
 argument_list|(
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 argument_list|)
 decl_stmt|;

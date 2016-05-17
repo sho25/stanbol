@@ -139,9 +139,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -171,11 +171,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -187,11 +187,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -203,11 +203,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -221,11 +223,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -894,11 +898,11 @@ comment|//TODO: replace this with a reald ontology
 specifier|private
 specifier|final
 specifier|static
-name|UriRef
+name|IRI
 name|SENTIMENT_PROPERTY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1250,7 +1254,7 @@ name|Token
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -1258,7 +1262,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|base
 init|=
 name|ci
@@ -1280,7 +1284,7 @@ expr_stmt|;
 try|try
 block|{
 comment|//write the context
-name|UriRef
+name|IRI
 name|text
 init|=
 name|writeSpan
@@ -1332,17 +1336,17 @@ argument_list|(
 name|activeTypes
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|sentence
 init|=
 literal|null
 decl_stmt|;
-name|UriRef
+name|IRI
 name|phrase
 init|=
 literal|null
 decl_stmt|;
-name|UriRef
+name|IRI
 name|word
 init|=
 literal|null
@@ -1370,7 +1374,7 @@ argument_list|()
 decl_stmt|;
 comment|//TODO: filter Spans based on additional requirements
 comment|//(1) write generic information about the span
-name|UriRef
+name|IRI
 name|current
 init|=
 name|writeSpan
@@ -1832,15 +1836,15 @@ name|ORDERING_POST_PROCESSING
 argument_list|)
 return|;
 block|}
-comment|/**      * Writes basic information of the parsed span by using NIF 1.0 including the      * {@link SsoOntology} Sentence/Phrase/Word type based on       * the {@link Span#getType()}<p>      * As {@link AnalysedText} is based on the plain text version of the ContentItem      * this uses the {@link StringOntology#OffsetBasedString} notation.<p>      *<i>NOTE:</i> This DOES NOT write string relations, lemma, pos ... information      * that might be stored as {@link Annotation} with the parsed {@link Span}.      * @param graph the graph to add the triples      * @param base the base URI      * @param text the {@link AnalysedText}      * @param language the {@link Language} or<code>null</code> if not known      * @param span the {@link Span} to write.      * @return the {@link UriRef} representing the parsed {@link Span} in the      * graph      */
+comment|/**      * Writes basic information of the parsed span by using NIF 1.0 including the      * {@link SsoOntology} Sentence/Phrase/Word type based on       * the {@link Span#getType()}<p>      * As {@link AnalysedText} is based on the plain text version of the ContentItem      * this uses the {@link StringOntology#OffsetBasedString} notation.<p>      *<i>NOTE:</i> This DOES NOT write string relations, lemma, pos ... information      * that might be stored as {@link Annotation} with the parsed {@link Span}.      * @param graph the graph to add the triples      * @param base the base URI      * @param text the {@link AnalysedText}      * @param language the {@link Language} or<code>null</code> if not known      * @param span the {@link Span} to write.      * @return the {@link IRI} representing the parsed {@link Span} in the      * graph      */
 specifier|public
-name|UriRef
+name|IRI
 name|writeSpan
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|base
 parameter_list|,
 name|AnalysedText
@@ -1853,7 +1857,7 @@ name|Span
 name|span
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|segment
 init|=
 name|Nif20Helper

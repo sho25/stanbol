@@ -181,11 +181,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -197,11 +197,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -213,11 +213,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -305,11 +305,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -391,7 +393,7 @@ name|rdf
 operator|.
 name|utils
 operator|.
-name|UnionMGraph
+name|UnionGraph
 import|;
 end_import
 
@@ -503,7 +505,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -697,11 +699,11 @@ name|tcManager
 decl_stmt|;
 comment|/**      * This is the name of the graph in which we "log" the requests      */
 specifier|private
-name|UriRef
+name|IRI
 name|REQUEST_LOG_GRAPH_NAME
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://example.org/resource-resolver-log.graph"
 argument_list|)
@@ -727,7 +729,7 @@ try|try
 block|{
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|REQUEST_LOG_GRAPH_NAME
 argument_list|)
@@ -818,7 +820,7 @@ argument_list|(
 literal|"iri"
 argument_list|)
 specifier|final
-name|UriRef
+name|IRI
 name|iri
 parameter_list|,
 annotation|@
@@ -856,32 +858,32 @@ decl_stmt|;
 comment|//The URI at which this service was accessed accessed, this will be the
 comment|//central serviceUri in the response
 specifier|final
-name|UriRef
+name|IRI
 name|serviceUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|resourcePath
 argument_list|)
 decl_stmt|;
 comment|//the in memory graph to which the triples for the response are added
 specifier|final
-name|MGraph
+name|Graph
 name|responseGraph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 comment|//A union graph containing both the response specif triples as well
 comment|//as the log-graph
 specifier|final
-name|UnionMGraph
+name|UnionGraph
 name|resultGraph
 init|=
 operator|new
-name|UnionMGraph
+name|UnionGraph
 argument_list|(
 name|responseGraph
 argument_list|,
@@ -928,7 +930,7 @@ argument_list|,
 operator|new
 name|PlainLiteralImpl
 argument_list|(
-literal|"A Resource Resolver"
+literal|"A RDFTerm Resolver"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -980,15 +982,15 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      * Add the description of a serviceUri to the specified MGraph using SiteManager.      * The description includes the metadata provided by the SiteManager.      *       */
+comment|/**      * Add the description of a serviceUri to the specified Graph using SiteManager.      * The description includes the metadata provided by the SiteManager.      *       */
 specifier|private
 name|void
 name|addResourceDescription
 parameter_list|(
-name|UriRef
+name|IRI
 name|iri
 parameter_list|,
-name|MGraph
+name|Graph
 name|mGraph
 parameter_list|)
 block|{
@@ -1079,7 +1081,7 @@ name|void
 name|logRequest
 parameter_list|(
 specifier|final
-name|UriRef
+name|IRI
 name|iri
 parameter_list|,
 specifier|final
@@ -1108,7 +1110,7 @@ name|run
 parameter_list|()
 block|{
 specifier|final
-name|MGraph
+name|Graph
 name|logGraph
 init|=
 name|getRequestLogGraph
@@ -1121,7 +1123,7 @@ operator|new
 name|GraphNode
 argument_list|(
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 argument_list|,
 name|logGraph
@@ -1183,16 +1185,16 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This returns the existing MGraph for the log .      *       * @return the MGraph to which the requests are logged      */
+comment|/**      * This returns the existing Graph for the log .      *       * @return the Graph to which the requests are logged      */
 specifier|private
-name|MGraph
+name|Graph
 name|getRequestLogGraph
 parameter_list|()
 block|{
 return|return
 name|tcManager
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|REQUEST_LOG_GRAPH_NAME
 argument_list|)

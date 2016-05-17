@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -53,9 +53,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -246,15 +246,15 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#queryResult}      *       * @see RdfResourceEnum.fieldQueryResult      */
+comment|/**      * {@link IRI} constant for {@link RdfResourceEnum#queryResult}      *       * @see RdfResourceEnum.fieldQueryResult      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FIELD_QUERY_RESULT
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -264,15 +264,15 @@ name|getUri
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#QueryResultSet}      *       * @see RdfResourceEnum.FieldQueryResultSet      */
+comment|/**      * {@link IRI} constant for {@link RdfResourceEnum#QueryResultSet}      *       * @see RdfResourceEnum.FieldQueryResultSet      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FIELD_QUERY_RESULT_SET
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -289,10 +289,10 @@ name|Iterator
 argument_list|<
 name|RdfRepresentation
 argument_list|>
-name|parseQueryResultsFromMGraph
+name|parseQueryResultsFromGraph
 parameter_list|(
 specifier|final
-name|TripleCollection
+name|Graph
 name|resultGraph
 parameter_list|)
 block|{
@@ -357,7 +357,7 @@ argument_list|>
 name|type
 parameter_list|)
 block|{
-name|Resource
+name|RDFTerm
 name|object
 init|=
 name|value
@@ -381,7 +381,7 @@ if|if
 condition|(
 name|object
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 return|return
@@ -390,7 +390,7 @@ operator|.
 name|createRdfRepresentation
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|object
 argument_list|,
@@ -408,7 +408,7 @@ literal|"Unable to create representation for FieldQueryResult "
 operator|+
 name|object
 operator|+
-literal|" because this Resource is not of Type UriRef (type: "
+literal|" because this RDFTerm is not of Type IRI (type: "
 operator|+
 name|object
 operator|.

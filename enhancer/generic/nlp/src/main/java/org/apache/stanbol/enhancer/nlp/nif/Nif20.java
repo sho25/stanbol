@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -276,7 +276,7 @@ name|NAMESPACE
 init|=
 literal|"http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#"
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 specifier|private
@@ -286,7 +286,7 @@ block|{
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NAMESPACE
 operator|+
@@ -306,7 +306,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{

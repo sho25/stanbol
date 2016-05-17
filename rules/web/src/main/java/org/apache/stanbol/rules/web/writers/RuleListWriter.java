@@ -159,11 +159,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -1755,12 +1755,12 @@ name|RDF_JSON
 argument_list|)
 condition|)
 block|{
-name|TripleCollection
+name|Graph
 name|mGraph
 init|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|owlOntologyToClerezzaMGraph
+name|owlOntologyToClerezzaGraph
 argument_list|(
 name|ontology
 argument_list|)

@@ -167,11 +167,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -183,11 +183,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -313,7 +313,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -925,13 +925,13 @@ specifier|protected
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -959,7 +959,7 @@ parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -1769,7 +1769,7 @@ block|}
 block|}
 comment|/**      * Utility that returns the ID for a FileContentItem based on      * {@link FileBlob#getSha1()}.<p>      * This method is part of the {@link FileContentItemFactory} because it      * is used in the super(..) call of the {@link FileContentItem}. Normally      * it would be a static method of the inner class (what is a similar scope      * as a non static method in the outer class).      * @param blob the blob      * @return the id      * @throws IllegalArgumentException if the parsed {@link Blob} or the      * prefix is<code>null</code>      * @throws IllegalStateException if the parsed blob is not an {@link FileBlob}      */
 specifier|protected
-name|UriRef
+name|IRI
 name|getDefaultUri
 parameter_list|(
 name|Blob
@@ -1818,7 +1818,7 @@ condition|)
 block|{
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|prefix
 operator|+
@@ -1872,13 +1872,13 @@ block|{
 specifier|public
 name|FileContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -1904,7 +1904,7 @@ operator|==
 literal|null
 condition|?
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 else|:
 name|metadata
@@ -1920,7 +1920,7 @@ parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -1940,7 +1940,7 @@ operator|==
 literal|null
 condition|?
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 else|:
 name|metadata

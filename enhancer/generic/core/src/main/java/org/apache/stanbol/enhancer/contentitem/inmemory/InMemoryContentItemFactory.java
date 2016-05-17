@@ -57,11 +57,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -73,11 +73,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -368,13 +368,13 @@ specifier|protected
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -402,7 +402,7 @@ parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{

@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -61,21 +61,21 @@ interface|interface
 name|CoMentionConstants
 block|{
 comment|/**      * The {@link EntityLinkerConfig#NAME_FIELD} uri internally used by the      * {@link EntityCoMentionEngine}.      */
-name|UriRef
+name|IRI
 name|CO_MENTION_LABEL_FIELD
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:org.stanbol:enhander.engine.entitycomention:co-mention-label"
 argument_list|)
 decl_stmt|;
 comment|/**      * The {@link EntityLinkerConfig#TYPE_FIELD} uri internally used by the      * {@link EntityCoMentionEngine}.      */
-name|UriRef
+name|IRI
 name|CO_MENTION_TYPE_FIELD
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:org.stanbol:enhander.engine.entitycomention:co-mention-type"
 argument_list|)

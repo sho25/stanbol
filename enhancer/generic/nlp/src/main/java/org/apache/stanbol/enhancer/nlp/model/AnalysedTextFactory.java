@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -132,7 +132,7 @@ operator|new
 name|AnalysedTextFactoryImpl
 argument_list|()
 decl_stmt|;
-comment|/**      * Creates an {@link AnalysedText} instance for the parsed {@link Blob}      * and registers itself as       * {@link ContentItem#addPart(org.apache.clerezza.rdf.core.UriRef, Object)       * ContentPart} with the {@link UriRef} {@link AnalysedText#ANALYSED_TEXT_URI}      * to the parsed {@link ContentItem}.<p>      * If already a ContentPart with the given UriRef is registered this       * Method will throw an {@link IllegalStateException}.      * @param ci the ContentItem to register the created {@link AnalysedText} instance      * @param blob the analysed {@link Blob}      * @return the created {@link AnalysedText}      * @throws IllegalArgumentException of<code>null</code> is parsed as      * ContentItem or Blob      * @throws IllegalStateException if there is already an ContentPart is      * registered for {@link AnalysedText#ANALYSED_TEXT_URI} with the parsed      * ContentItem.      * @throws IOException on any error while reading data from the parsed blob      */
+comment|/**      * Creates an {@link AnalysedText} instance for the parsed {@link Blob}      * and registers itself as       * {@link ContentItem#addPart(org.apache.clerezza.commons.rdf.IRI, Object)       * ContentPart} with the {@link IRI} {@link AnalysedText#ANALYSED_TEXT_URI}      * to the parsed {@link ContentItem}.<p>      * If already a ContentPart with the given IRI is registered this       * Method will throw an {@link IllegalStateException}.      * @param ci the ContentItem to register the created {@link AnalysedText} instance      * @param blob the analysed {@link Blob}      * @return the created {@link AnalysedText}      * @throws IllegalArgumentException of<code>null</code> is parsed as      * ContentItem or Blob      * @throws IllegalStateException if there is already an ContentPart is      * registered for {@link AnalysedText#ANALYSED_TEXT_URI} with the parsed      * ContentItem.      * @throws IOException on any error while reading data from the parsed blob      */
 specifier|public
 specifier|final
 name|AnalysedText

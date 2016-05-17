@@ -37,9 +37,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -53,11 +53,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -90,12 +90,12 @@ name|operator
 decl_stmt|;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|predicateUri
 decl_stmt|;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|objectUri
 decl_stmt|;
 comment|/** Build from a line supplied by the parser.      *  Format is PREDICATE_URI OPERATOR ARGUMENTS,       */
@@ -143,7 +143,7 @@ block|}
 name|predicateUri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|parts
 index|[
@@ -171,7 +171,7 @@ block|{
 name|objectUri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|parts
 index|[

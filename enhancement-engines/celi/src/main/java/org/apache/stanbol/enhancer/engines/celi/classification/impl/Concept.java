@@ -31,11 +31,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -51,7 +51,7 @@ name|label
 decl_stmt|;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 specifier|private
@@ -65,7 +65,7 @@ parameter_list|(
 name|String
 name|label
 parameter_list|,
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|Double
@@ -113,7 +113,7 @@ name|label
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{

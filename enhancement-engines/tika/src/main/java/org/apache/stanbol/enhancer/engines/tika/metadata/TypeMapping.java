@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -74,7 +74,7 @@ block|{
 name|this
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|type
 argument_list|)
@@ -84,7 +84,7 @@ block|}
 specifier|public
 name|TypeMapping
 parameter_list|(
-name|UriRef
+name|IRI
 modifier|...
 name|types
 parameter_list|)

@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -108,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * It adapts any ResourceAtom to UriRef resource in Clerezza.  *   * @author anuzzolese  *   */
+comment|/**  * It adapts any ResourceAtom to IRI resource in Clerezza.  *   * @author anuzzolese  *   */
 end_comment
 
 begin_class
@@ -178,11 +178,11 @@ operator|.
 name|toUnquotedString
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uriRef
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|unquotedURI
 argument_list|)

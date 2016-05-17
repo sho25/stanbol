@@ -77,9 +77,25 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
+name|ImmutableGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
 operator|.
 name|Graph
 import|;
@@ -93,11 +109,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -109,27 +125,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TripleCollection
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -199,7 +199,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -278,7 +278,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An ontology input source that returns a Clerezza {@link TripleCollection} ({@link Graph} or {@link MGraph})  * after parsing its serialized content from an input stream.  *   * @author alexdma  *   */
+comment|/**  * An ontology input source that returns a Clerezza {@link Graph} ({@link ImmutableGraph} or {@link Graph})  * after parsing its serialized content from an input stream.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -497,11 +497,11 @@ name|formatIdentifier
 argument_list|)
 expr_stmt|;
 comment|// TODO guess/lookahead the ontology ID and use it in the graph name.
-name|UriRef
+name|IRI
 name|name
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 comment|/* "ontonet" + "::" + */
 name|getClass
@@ -518,7 +518,7 @@ name|currentTimeMillis
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|graph
 init|=
 literal|null
@@ -534,12 +534,12 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// Graph directly stored in the TcProvider prior to using the source
+comment|// ImmutableGraph directly stored in the TcProvider prior to using the source
 name|graph
 operator|=
 name|tcProvider
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|name
 argument_list|)
@@ -562,7 +562,7 @@ comment|// In memory graph, will most likely have to be copied afterwards.
 name|graph
 operator|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 expr_stmt|;
 name|bindPhysicalOrigin
@@ -623,7 +623,7 @@ operator|.
 name|parse
 argument_list|(
 operator|(
-name|MGraph
+name|Graph
 operator|)
 name|graph
 argument_list|,
@@ -640,7 +640,7 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"Graph parsed, has {} triples"
+literal|"ImmutableGraph parsed, has {} triples"
 argument_list|,
 name|graph
 operator|.
@@ -777,7 +777,7 @@ condition|)
 block|{
 name|tcProvider
 operator|.
-name|deleteTripleCollection
+name|deleteGraph
 argument_list|(
 name|name
 argument_list|)

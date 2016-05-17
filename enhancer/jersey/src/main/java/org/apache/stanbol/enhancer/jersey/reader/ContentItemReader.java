@@ -643,11 +643,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|LiteralFactory
+name|Graph
 import|;
 end_import
 
@@ -659,11 +659,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|IRI
 import|;
 end_import
 
@@ -675,27 +675,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -709,13 +695,31 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|TripleImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
 operator|.
-name|impl
-operator|.
-name|TripleImpl
+name|LiteralFactory
 import|;
 end_import
 
@@ -911,7 +915,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1282,7 +1286,7 @@ name|contentItem
 init|=
 literal|null
 decl_stmt|;
-name|UriRef
+name|IRI
 name|contentItemId
 init|=
 name|getContentItemId
@@ -1431,7 +1435,7 @@ literal|" - parse Multipart MIME ContentItem"
 argument_list|)
 expr_stmt|;
 comment|//try to read ContentItem from "multipart/from-data"
-name|MGraph
+name|Graph
 name|metadata
 init|=
 literal|null
@@ -1549,7 +1553,7 @@ block|{
 name|contentItemId
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|fis
 operator|.
@@ -1561,7 +1565,7 @@ block|}
 name|metadata
 operator|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 expr_stmt|;
 try|try
@@ -1993,11 +1997,11 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
-name|MGraph
+name|Graph
 name|graph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 try|try
@@ -2071,11 +2075,11 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
-name|UriRef
+name|IRI
 name|contentPartId
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|fis
 operator|.
@@ -2297,7 +2301,7 @@ name|String
 name|lang
 parameter_list|)
 block|{
-name|MGraph
+name|Graph
 name|m
 init|=
 name|ci
@@ -2305,11 +2309,11 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|la
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:enhancement-"
 operator|+
@@ -2474,7 +2478,7 @@ expr_stmt|;
 block|}
 comment|/**      * tries to retrieve the ContentItem from the 'uri' query parameter of the      * {@link #request}.      * @return the parsed URI or<code>null</code> if none      */
 specifier|private
-name|UriRef
+name|IRI
 name|getContentItemId
 parameter_list|()
 block|{
@@ -2716,7 +2720,7 @@ condition|?
 literal|null
 else|:
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ciUri
 argument_list|)
@@ -3076,10 +3080,10 @@ specifier|private
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|,
 name|FileItemStream
@@ -3256,7 +3260,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|contentPartId
 init|=
 literal|null
@@ -3283,7 +3287,7 @@ block|{
 name|contentPartId
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|fis
 operator|.
@@ -3299,7 +3303,7 @@ comment|//TODO maybe we should throw an exception instead
 name|contentPartId
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:contentpart:"
 operator|+

@@ -93,11 +93,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|LiteralFactory
+name|Graph
 import|;
 end_import
 
@@ -109,11 +109,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|RDFTerm
 import|;
 end_import
 
@@ -125,25 +125,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -157,11 +141,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|IRI
 import|;
 end_import
 
@@ -173,11 +157,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -207,13 +191,31 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|TripleImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
 operator|.
-name|impl
-operator|.
-name|TripleImpl
+name|LiteralFactory
 import|;
 end_import
 
@@ -277,20 +279,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologyID
 import|;
 end_import
@@ -324,7 +312,7 @@ class|class
 name|MetaGraphManager
 block|{
 specifier|private
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 specifier|private
@@ -349,7 +337,7 @@ parameter_list|(
 name|TcManager
 name|tcManager
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -367,7 +355,7 @@ name|graph
 expr_stmt|;
 block|}
 specifier|protected
-name|UriRef
+name|IRI
 name|buildResource
 parameter_list|(
 specifier|final
@@ -385,12 +373,20 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot build a UriRef resource on a null public key!"
+literal|"Cannot build a IRI resource on a null public key!"
 argument_list|)
 throw|;
-comment|// The UriRef is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional?)
+comment|// The IRI is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional?)
 comment|// XXX should versionIRI also include the version IRI set by owners? Currently not
 comment|// Remember not to sanitize logical identifiers.
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 init|=
@@ -416,7 +412,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot build a UriRef resource on an anonymous public key!"
+literal|"Cannot build a IRI resource on an anonymous public key!"
 argument_list|)
 throw|;
 name|log
@@ -435,7 +431,7 @@ argument_list|,
 name|publicKey
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|match
 init|=
 literal|null
@@ -448,7 +444,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|oiri
 init|=
 name|lf
@@ -456,7 +452,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontologyIri
 operator|.
@@ -465,7 +461,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|viri
 init|=
 name|versionIri
@@ -479,7 +475,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|versionIri
 operator|.
@@ -514,7 +510,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|it
@@ -536,7 +532,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" -- Resource : {}"
+literal|" -- RDFTerm : {}"
 argument_list|,
 name|subj
 argument_list|)
@@ -547,7 +543,7 @@ operator|!
 operator|(
 name|subj
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 block|{
@@ -578,7 +574,7 @@ operator|new
 name|TripleImpl
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|,
@@ -599,7 +595,7 @@ expr_stmt|;
 name|match
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 expr_stmt|;
@@ -629,7 +625,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|,
@@ -663,7 +659,7 @@ expr_stmt|;
 name|match
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 expr_stmt|;
@@ -676,7 +672,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Matching UriRef in graph : {}"
+literal|"Matching IRI in graph : {}"
 argument_list|,
 name|match
 argument_list|)
@@ -689,7 +685,7 @@ literal|null
 condition|)
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OntologyUtils
 operator|.
@@ -713,11 +709,11 @@ name|OWLOntologyID
 name|publicKey
 parameter_list|)
 block|{
-name|UriRef
-name|publicKeyUriRef
+name|IRI
+name|publicKeyIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OntologyUtils
 operator|.
@@ -733,7 +729,7 @@ name|graph
 operator|.
 name|filter
 argument_list|(
-name|publicKeyUriRef
+name|publicKeyIRI
 argument_list|,
 name|RDF
 operator|.
@@ -754,7 +750,7 @@ name|graph
 operator|.
 name|filter
 argument_list|(
-name|publicKeyUriRef
+name|publicKeyIRI
 argument_list|,
 name|OWL
 operator|.
@@ -785,7 +781,7 @@ name|object
 parameter_list|)
 block|{
 comment|// For now add both owl:sameAs statements
-name|UriRef
+name|IRI
 name|suben
 init|=
 name|buildResource
@@ -879,6 +875,14 @@ name|tHasViri
 init|=
 literal|null
 decl_stmt|;
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIRI
 init|=
@@ -894,7 +898,7 @@ operator|.
 name|getVersionIRI
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|entry
 init|=
 name|buildResource
@@ -938,7 +942,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontologyIRI
 operator|.
@@ -968,7 +972,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|versionIri
 operator|.

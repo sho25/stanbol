@@ -121,11 +121,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -137,11 +137,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -153,13 +153,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -357,7 +361,7 @@ parameter_list|,
 name|String
 name|mimeType
 parameter_list|,
-name|MGraph
+name|Graph
 name|result
 parameter_list|)
 throws|throws
@@ -669,11 +673,11 @@ name|mimeType
 init|=
 literal|"text/html"
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|file
 operator|.
@@ -684,11 +688,11 @@ name|toString
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|container
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|inst

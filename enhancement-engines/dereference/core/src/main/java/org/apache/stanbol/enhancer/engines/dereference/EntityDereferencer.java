@@ -63,11 +63,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -79,11 +79,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -140,14 +140,14 @@ name|ExecutorService
 name|getExecutor
 parameter_list|()
 function_decl|;
-comment|/**      * Dereferences the Entity with the parsed {@link UriRef} by copying the      * data to the parsed graph      * @param graph the graph to add the dereferenced entity       * @param entity the uri of the Entity to dereference      * @param writeLock The writeLock for the graph. Dereferences MUST require      * a<code>{@link Lock#lock() writeLock#lock()}</code>  before adding       * dereferenced data to the parsed graph. This is essential for using multiple       * threads  to dereference Entities. Failing to do so will cause      * {@link ConcurrentModificationException}s in this implementations or      * other components (typically other {@link EnhancementEngine}s) accessing the      * same graph.      * @param dereferenceContext Context information for the {@link EntityDereferencer}      * such as the {@link OfflineMode} state, possible languages of the content and      * requested languages in the Enhancement request.      * @return if the entity was dereferenced      * @throws DereferenceException on any error while dereferencing the      * requested Entity      */
+comment|/**      * Dereferences the Entity with the parsed {@link IRI} by copying the      * data to the parsed graph      * @param graph the graph to add the dereferenced entity       * @param entity the uri of the Entity to dereference      * @param writeLock The writeLock for the graph. Dereferences MUST require      * a<code>{@link Lock#lock() writeLock#lock()}</code>  before adding       * dereferenced data to the parsed graph. This is essential for using multiple       * threads  to dereference Entities. Failing to do so will cause      * {@link ConcurrentModificationException}s in this implementations or      * other components (typically other {@link EnhancementEngine}s) accessing the      * same graph.      * @param dereferenceContext Context information for the {@link EntityDereferencer}      * such as the {@link OfflineMode} state, possible languages of the content and      * requested languages in the Enhancement request.      * @return if the entity was dereferenced      * @throws DereferenceException on any error while dereferencing the      * requested Entity      */
 name|boolean
 name|dereference
 parameter_list|(
-name|UriRef
+name|IRI
 name|entity
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Lock

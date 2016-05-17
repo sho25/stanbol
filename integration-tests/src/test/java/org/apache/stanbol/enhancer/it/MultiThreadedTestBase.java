@@ -257,9 +257,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -273,11 +273,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -289,9 +289,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -305,11 +305,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -321,11 +321,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -337,13 +337,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -621,7 +625,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -886,7 +890,7 @@ name|PROPERTY_CHAIN
 init|=
 literal|"stanbol.it.multithreadtest.chain"
 decl_stmt|;
-comment|/**      * The reference to the test data. Can be a File, a Resource available via the      * Classpath or an URL. This also supports compressed files. In case of ZIP      * only the first entry is processed.      */
+comment|/**      * The reference to the test data. Can be a File, a RDFTerm available via the      * Classpath or an URL. This also supports compressed files. In case of ZIP      * only the first entry is processed.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1696,7 +1700,7 @@ name|Assert
 operator|.
 name|assertNotNull
 argument_list|(
-literal|"Unable to detect MediaType for Resource '"
+literal|"Unable to detect MediaType for RDFTerm '"
 operator|+
 name|name
 operator|+
@@ -1767,11 +1771,11 @@ name|propertyString
 parameter_list|)
 block|{
 specifier|final
-name|SimpleMGraph
+name|SimpleGraph
 name|graph
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 try|try
@@ -1863,7 +1867,7 @@ operator|==
 literal|null
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|property
 decl_stmt|;
 if|if
@@ -1894,7 +1898,7 @@ block|{
 name|property
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceMappingUtils
 operator|.
@@ -1938,7 +1942,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|value
 init|=
 name|it
@@ -3669,10 +3673,10 @@ parameter_list|(
 name|Request
 name|request
 parameter_list|,
-name|UriRef
+name|IRI
 name|contentItemUri
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|results
 parameter_list|,
 name|Long
@@ -4253,11 +4257,11 @@ literal|null
 expr_stmt|;
 return|return;
 block|}
-name|IndexedMGraph
+name|IndexedGraph
 name|graph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 try|try
@@ -4318,7 +4322,7 @@ literal|"Enhancement Results do not caontain a single Enhancement"
 argument_list|)
 throw|;
 block|}
-name|Resource
+name|RDFTerm
 name|contentItemUri
 init|=
 name|ciIt
@@ -4335,7 +4339,7 @@ operator|!
 operator|(
 name|contentItemUri
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 block|{
@@ -4343,7 +4347,7 @@ throw|throw
 operator|new
 name|IllegalStateException
 argument_list|(
-literal|"ContentItem URI is not an UriRef but an instance of "
+literal|"ContentItem URI is not an IRI but an instance of "
 operator|+
 name|contentItemUri
 operator|.
@@ -4362,7 +4366,7 @@ argument_list|(
 name|request
 argument_list|,
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|contentItemUri
 argument_list|,

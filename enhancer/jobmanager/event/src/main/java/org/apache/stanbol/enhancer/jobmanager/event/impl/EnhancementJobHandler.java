@@ -265,27 +265,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -1041,11 +1025,11 @@ argument_list|(
 name|PROPERTY_JOB_MANAGER
 argument_list|)
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|event
 operator|.
@@ -1268,7 +1252,7 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|runningNode
 range|:
 name|job
@@ -1350,7 +1334,7 @@ parameter_list|(
 name|EnhancementJob
 name|job
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|execution
 parameter_list|)
 block|{
@@ -1937,7 +1921,7 @@ literal|false
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executable
 range|:
 name|job
@@ -2568,7 +2552,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|completedExec
 range|:
 name|job
@@ -2602,7 +2586,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|runningExec
 range|:
 name|job
@@ -2636,7 +2620,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executeable
 range|:
 name|job

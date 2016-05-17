@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -66,7 +66,7 @@ name|NerTag
 argument_list|>
 block|{
 specifier|private
-name|UriRef
+name|IRI
 name|type
 decl_stmt|;
 specifier|public
@@ -88,7 +88,7 @@ parameter_list|(
 name|String
 name|tag
 parameter_list|,
-name|UriRef
+name|IRI
 name|type
 parameter_list|)
 block|{
@@ -106,7 +106,7 @@ expr_stmt|;
 block|}
 comment|/**      * The<code>dc:type</code> of the Named Entity      * @return the<code>dc:type</code> of the Named Entity      * as also used by the<code>fise:TextAnnotation</code>      */
 specifier|public
-name|UriRef
+name|IRI
 name|getType
 parameter_list|()
 block|{

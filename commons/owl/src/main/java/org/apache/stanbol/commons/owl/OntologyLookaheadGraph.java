@@ -35,11 +35,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -51,11 +51,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -67,9 +67,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -83,11 +83,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -99,13 +99,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -186,9 +190,9 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|OntologyLookaheadMGraph
+name|OntologyLookaheadGraph
 extends|extends
-name|SimpleMGraph
+name|SimpleGraph
 block|{
 specifier|private
 name|Logger
@@ -203,7 +207,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|ontologyIRI
 init|=
 literal|null
@@ -232,11 +236,11 @@ init|=
 literal|10
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|versionIriProperty
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OWL2Constants
 operator|.
@@ -244,7 +248,7 @@ name|OWL_VERSION_IRI
 argument_list|)
 decl_stmt|;
 specifier|public
-name|OntologyLookaheadMGraph
+name|OntologyLookaheadGraph
 parameter_list|()
 block|{
 name|this
@@ -258,7 +262,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|OntologyLookaheadMGraph
+name|OntologyLookaheadGraph
 parameter_list|(
 name|int
 name|maxTriples
@@ -282,7 +286,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|OntologyLookaheadMGraph
+name|OntologyLookaheadGraph
 parameter_list|(
 name|int
 name|maxTriples
@@ -356,7 +360,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|s
 init|=
 name|it
@@ -371,13 +375,13 @@ if|if
 condition|(
 name|s
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|ontologyIRI
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|s
 expr_stmt|;
@@ -421,7 +425,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|o
 init|=
 name|it
@@ -436,13 +440,13 @@ if|if
 condition|(
 name|o
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|versionIRI
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|o
 expr_stmt|;
@@ -471,7 +475,7 @@ name|offset
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getOntologyIRI
 parameter_list|()
 block|{
@@ -489,7 +493,7 @@ name|tripleCount
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getVersionIRI
 parameter_list|()
 block|{

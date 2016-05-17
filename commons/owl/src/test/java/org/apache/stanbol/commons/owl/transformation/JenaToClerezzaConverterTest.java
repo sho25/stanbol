@@ -47,11 +47,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -63,11 +63,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -79,9 +79,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -95,11 +95,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -111,13 +111,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -129,11 +133,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -194,22 +200,6 @@ operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|hp
-operator|.
-name|hpl
-operator|.
-name|jena
-operator|.
-name|graph
-operator|.
-name|Graph
 import|;
 end_import
 
@@ -371,7 +361,7 @@ name|model
 decl_stmt|;
 specifier|private
 specifier|static
-name|MGraph
+name|Graph
 name|mGraph
 decl_stmt|;
 specifier|private
@@ -481,25 +471,25 @@ comment|/* 		 * Set-up the Clerezza model for the test. 		 * As before simply ad
 name|mGraph
 operator|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 expr_stmt|;
-name|UriRef
+name|IRI
 name|knowsInClerezza
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ns
 operator|+
 literal|"knows"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|rdfType
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RDF
 operator|.
@@ -509,33 +499,33 @@ operator|+
 literal|"type"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|foafPersonInClerezza
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|foaf
 operator|+
 literal|"Person"
 argument_list|)
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|andreaNuzzoleseInClerezza
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ns
 operator|+
 literal|"AndreaNuzzolese"
 argument_list|)
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|enricoDagaInClerezza
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ns
 operator|+
@@ -605,21 +595,31 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMGraphToJenaGraph
+name|testGraphToJenaGraph
 parameter_list|()
 block|{
-comment|/* 		 * Convert the MGraph to a Jena Graph. 		 */
+comment|/* 		 * Convert the Graph to a Jena ImmutableGraph. 		 */
+name|com
+operator|.
+name|hp
+operator|.
+name|hpl
+operator|.
+name|jena
+operator|.
+name|graph
+operator|.
 name|Graph
 name|jGraph
 init|=
 name|JenaToClerezzaConverter
 operator|.
-name|clerezzaMGraphToJenaGraph
+name|clerezzaGraphToJenaGraph
 argument_list|(
 name|mGraph
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Print all the triples contained in the Jena Graph. 		 */
+comment|/* 		 * Print all the triples contained in the Jena ImmutableGraph. 		 */
 name|ExtendedIterator
 argument_list|<
 name|com
@@ -689,16 +689,16 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMGraphToJenaModel
+name|testGraphToJenaModel
 parameter_list|()
 block|{
-comment|/* 		 * Convert the MGraph to a Jena Model. 		 */
+comment|/* 		 * Convert the Graph to a Jena Model. 		 */
 name|Model
 name|model
 init|=
 name|JenaToClerezzaConverter
 operator|.
-name|clerezzaMGraphToJenaModel
+name|clerezzaGraphToJenaModel
 argument_list|(
 name|mGraph
 argument_list|)
@@ -744,21 +744,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testModelToMGraph
+name|testModelToGraph
 parameter_list|()
 block|{
-comment|/* 		 * Convert the Jena Model to a Clerezza MGraph. 		 */
-name|MGraph
+comment|/* 		 * Convert the Jena Model to a Clerezza Graph. 		 */
+name|Graph
 name|mGraph
 init|=
 name|JenaToClerezzaConverter
 operator|.
-name|jenaModelToClerezzaMGraph
+name|jenaModelToClerezzaGraph
 argument_list|(
 name|model
 argument_list|)
 decl_stmt|;
-comment|/* 		 * Print all the triples contained in the Clerezza MGraph. 		 */
+comment|/* 		 * Print all the triples contained in the Clerezza Graph. 		 */
 name|Iterator
 argument_list|<
 name|Triple

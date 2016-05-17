@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -101,11 +101,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -117,11 +117,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -133,11 +133,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -167,17 +169,17 @@ block|{
 specifier|private
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|values
 decl_stmt|;
 specifier|public
 name|ConstantMapping
 parameter_list|(
-name|UriRef
+name|IRI
 name|ontProperty
 parameter_list|,
-name|Resource
+name|RDFTerm
 modifier|...
 name|values
 parameter_list|)
@@ -256,10 +258,10 @@ specifier|public
 name|boolean
 name|apply
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
 name|Metadata
@@ -268,7 +270,7 @@ parameter_list|)
 block|{
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|value
 range|:
 name|values

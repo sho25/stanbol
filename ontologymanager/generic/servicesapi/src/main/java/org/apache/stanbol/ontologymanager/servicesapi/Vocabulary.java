@@ -25,11 +25,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -44,20 +44,6 @@ operator|.
 name|apibinding
 operator|.
 name|OWLManager
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
 import|;
 end_import
 
@@ -198,7 +184,7 @@ specifier|final
 name|String
 name|_SHORT_GRAPH
 init|=
-literal|"Graph"
+literal|"ImmutableGraph"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -423,6 +409,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -433,15 +427,15 @@ name|_SHORT_APPENDED_TO
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>isAppendedTo</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>isAppendedTo</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|APPENDED_TO_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -459,6 +453,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -469,15 +471,15 @@ name|_SHORT_DEPENDS_ON
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>dependsOn</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>dependsOn</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DEPENDS_ON_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -495,6 +497,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -505,22 +515,22 @@ name|_SHORT_ENTRY
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Entry</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>Entry</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENTRY_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
 name|_SHORT_ENTRY
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Graph</tt>.      */
+comment|/**      * The OWL<b>class</b><tt>ImmutableGraph</tt>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -531,6 +541,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -541,15 +559,15 @@ name|_SHORT_GRAPH
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Graph</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>ImmutableGraph</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|GRAPH_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -567,6 +585,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -577,15 +603,15 @@ name|_SHORT_HAS_APPENDED
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>hasAppended</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>hasAppended</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_APPENDED_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -603,6 +629,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -613,15 +647,15 @@ name|_SHORT_HAS_DEPENDENT
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>datatype property</b><tt>hasDependent</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>datatype property</b><tt>hasDependent</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_DEPENDENT_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -639,6 +673,14 @@ name|__df
 operator|.
 name|getOWLDataProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -649,15 +691,15 @@ name|_SHORT_HAS_ONTOLOGY_IRI
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>datatype property</b><tt>hasOntologyIRI</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>datatype property</b><tt>hasOntologyIRI</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_ONTOLOGY_IRI_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -675,6 +717,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -685,15 +735,15 @@ name|_SHORT_HAS_SPACE_CORE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>hasCoreSpace</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>hasCoreSpace</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_SPACE_CORE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -711,6 +761,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -721,22 +779,22 @@ name|_SHORT_HAS_SPACE_CUSTOM
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>hasCustomSpace</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>hasCustomSpace</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_SPACE_CUSTOM_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
 name|_SHORT_HAS_SPACE_CUSTOM
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>hasStatus</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>hasStatus</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
@@ -747,6 +805,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -761,11 +827,11 @@ comment|/**      * The OWL<b>object property</b><tt>hasStatus</tt>.      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_STATUS_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -783,6 +849,14 @@ name|__df
 operator|.
 name|getOWLDataProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -793,15 +867,15 @@ name|_SHORT_HAS_VERSION_IRI
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>datatype property</b><tt>hasVersionIRI</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>datatype property</b><tt>hasVersionIRI</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_VERSION_IRI_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -819,6 +893,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -840,6 +922,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -850,15 +940,15 @@ name|_SHORT_IS_MANAGED_BY_CORE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>isManagedByCore</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>isManagedByCore</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|IS_MANAGED_BY_CORE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -876,6 +966,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -886,30 +984,30 @@ name|_SHORT_IS_MANAGED_BY_CUSTOM
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>isManagedByCustom</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>isManagedByCustom</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|IS_MANAGED_BY_CUSTOM_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
 name|_SHORT_IS_MANAGED_BY_CUSTOM
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>isManagedBy</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>isManagedBy</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|IS_MANAGED_BY_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -927,6 +1025,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -937,15 +1043,15 @@ name|_SHORT_IS_SPACE_CORE_OF
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>isCoreSpaceOf</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>isCoreSpaceOf</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|IS_SPACE_CORE_OF_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -963,6 +1069,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -973,15 +1087,15 @@ name|_SHORT_IS_SPACE_CUSTOM_OF
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>isCustomSpaceOf</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>isCustomSpaceOf</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|IS_SPACE_CUSTOM_OF_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -999,6 +1113,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1020,6 +1142,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1030,15 +1160,15 @@ name|_SHORT_MANAGES_IN_CORE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>managesInCore</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>managesInCore</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|MANAGES_IN_CORE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1056,6 +1186,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1066,30 +1204,30 @@ name|_SHORT_MANAGES_IN_CUSTOM
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>managesInCustom</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>managesInCustom</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|MANAGES_IN_CUSTOM_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
 name|_SHORT_MANAGES_IN_CUSTOM
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>manages</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>manages</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|MANAGES_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1107,6 +1245,14 @@ name|__df
 operator|.
 name|getOWLObjectProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1117,15 +1263,15 @@ name|_SHORT_MAPS_TO_GRAPH
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>object property</b><tt>mapsToGraph</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>object property</b><tt>mapsToGraph</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|MAPS_TO_GRAPH_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1143,6 +1289,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1153,15 +1307,15 @@ name|_SHORT_PRIMARY_ENTRY
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>PrimaryEntry</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>PrimaryEntry</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|PRIMARY_ENTRY_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1179,6 +1333,14 @@ name|__df
 operator|.
 name|getOWLDataProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1189,15 +1351,15 @@ name|_SHORT_RETRIEVED_FROM
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>datatype property</b><tt>retrievedFrom</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>datatype property</b><tt>retrievedFrom</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|RETRIEVED_FROM_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1215,6 +1377,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1225,15 +1395,15 @@ name|_SHORT_SCOPE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Scope</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>Scope</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SCOPE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1251,6 +1421,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1261,15 +1439,15 @@ name|_SHORT_SESSION
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Session</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>Session</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SESSION_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1287,6 +1465,14 @@ name|__df
 operator|.
 name|getOWLDataProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1297,15 +1483,15 @@ name|_SHORT_SIZE_IN_AXIOMS
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>datatype property</b><tt>hasSizeInAxioms</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>datatype property</b><tt>hasSizeInAxioms</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SIZE_IN_AXIOMS_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1323,6 +1509,14 @@ name|__df
 operator|.
 name|getOWLDataProperty
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1333,15 +1527,15 @@ name|_SHORT_SIZE_IN_TRIPLES
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>datatype property</b><tt>hasSizeInTriples</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>datatype property</b><tt>hasSizeInTriples</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SIZE_IN_TRIPLES_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1359,6 +1553,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1369,15 +1571,15 @@ name|_SHORT_SPACE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Space</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>Space</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|SPACE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1395,6 +1597,14 @@ name|__df
 operator|.
 name|getOWLClass
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1416,6 +1626,14 @@ name|__df
 operator|.
 name|getOWLNamedIndividual
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1426,15 +1644,15 @@ name|_SHORT_STATUS_ACTIVE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>individual</b><tt>Status.ACTIVE</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>individual</b><tt>Status.ACTIVE</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|STATUS_ACTIVE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
@@ -1452,6 +1670,14 @@ name|__df
 operator|.
 name|getOWLNamedIndividual
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1462,30 +1688,30 @@ name|_SHORT_STATUS_INACTIVE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>individual</b><tt>Status.INACTIVE</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>individual</b><tt>Status.INACTIVE</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|STATUS_INACTIVE_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+
 name|_SHORT_STATUS_INACTIVE
 argument_list|)
 decl_stmt|;
-comment|/**      * The OWL<b>class</b><tt>Status</tt> (in UriRef form).      */
+comment|/**      * The OWL<b>class</b><tt>Status</tt> (in IRI form).      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|STATUS_URIREF
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_ONTONET
 operator|+

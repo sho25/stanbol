@@ -209,11 +209,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -241,11 +241,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -257,11 +257,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -273,9 +273,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -289,11 +289,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -305,11 +305,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -323,11 +325,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -2816,7 +2820,7 @@ name|EngineException
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2997,7 +3001,7 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -3045,11 +3049,11 @@ name|e
 argument_list|)
 throw|;
 block|}
-name|UriRef
+name|IRI
 name|precision
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3058,11 +3062,11 @@ operator|+
 literal|"classifier/precision"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|recall
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3071,11 +3075,11 @@ operator|+
 literal|"classifier/recall"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|f1
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -3106,7 +3110,7 @@ expr_stmt|;
 try|try
 block|{
 comment|// Global text annotation to attach all the topic annotation to it.
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -3157,7 +3161,7 @@ range|:
 name|topics
 control|)
 block|{
-name|UriRef
+name|IRI
 name|enhancement
 init|=
 name|EnhancementEngineHelper
@@ -3256,7 +3260,7 @@ operator|.
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|topic
 operator|.
@@ -9243,13 +9247,13 @@ specifier|public
 name|int
 name|importConceptsFromGraph
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|conceptClass
 parameter_list|,
-name|UriRef
+name|IRI
 name|broaderProperty
 parameter_list|)
 throws|throws
@@ -9316,17 +9320,17 @@ operator|.
 name|getSubject
 argument_list|()
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 block|{
 continue|continue;
 block|}
-name|UriRef
+name|IRI
 name|conceptUri
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|conceptTriple
 operator|.
@@ -9380,7 +9384,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|node2
 init|=
 name|broaderIterator
@@ -9395,7 +9399,7 @@ if|if
 condition|(
 name|node2
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|broaderConcepts
@@ -9404,7 +9408,7 @@ name|add
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|node2
 operator|)

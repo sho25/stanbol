@@ -155,11 +155,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -349,7 +349,7 @@ decl_stmt|;
 specifier|private
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|entityReferences
 decl_stmt|;
@@ -567,7 +567,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|getConfig
@@ -627,7 +627,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceMappingUtils
 operator|.
@@ -1472,7 +1472,7 @@ begin_function
 specifier|public
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getEntityReferences
 parameter_list|()

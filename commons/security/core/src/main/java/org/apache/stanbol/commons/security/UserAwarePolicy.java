@@ -221,11 +221,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -237,11 +237,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -253,11 +253,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -269,9 +269,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -285,11 +285,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -301,11 +301,29 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
+name|Literal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -539,7 +557,7 @@ operator|.
 name|SYSTEM_GRAPH_FILTER
 argument_list|)
 specifier|private
-name|MGraph
+name|Graph
 name|systemGraph
 decl_stmt|;
 comment|/** 	 * Stores the mapping between a String describing the permission and the 	 * described<code>Permission</code> object. 	 */
@@ -915,7 +933,7 @@ parameter_list|)
 throws|throws
 name|UserUnregisteredException
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|user
 init|=
 name|getUserByName
@@ -963,11 +981,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|anotherRole
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|roleTriples
 operator|.
@@ -994,7 +1012,7 @@ expr_stmt|;
 block|}
 name|Iterator
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|baseRoles
 init|=
@@ -1036,7 +1054,7 @@ name|result
 return|;
 block|}
 specifier|private
-name|NonLiteral
+name|BlankNodeOrIRI
 name|getUserByName
 parameter_list|(
 name|String
@@ -1101,7 +1119,7 @@ name|String
 argument_list|>
 name|getPermissionEntriesOfAUser
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|user
 parameter_list|,
 name|String
@@ -1127,7 +1145,7 @@ if|if
 condition|(
 name|user
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 synchronized|synchronized
@@ -1152,7 +1170,7 @@ operator|.
 name|getPermissions
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|user
 argument_list|)
@@ -1173,13 +1191,13 @@ name|String
 argument_list|>
 name|getPermissionEntriesOfARole
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|role
 parameter_list|,
 name|String
 name|userName
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|user
 parameter_list|)
 block|{
@@ -1234,7 +1252,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|BNode
+name|BlankNode
 operator|)
 name|permsForRole
 operator|.
@@ -1259,11 +1277,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|PlainLiteralImpl
+name|Literal
 name|permissionEntry
 init|=
 operator|(
-name|PlainLiteralImpl
+name|Literal
 operator|)
 name|javaPermForRole
 operator|.
@@ -1319,11 +1337,11 @@ block|}
 specifier|private
 name|Iterator
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getResourcesOfType
 parameter_list|(
-name|UriRef
+name|IRI
 name|type
 parameter_list|)
 block|{
@@ -1351,7 +1369,7 @@ return|return
 operator|new
 name|Iterator
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 block|{
@@ -1372,7 +1390,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|NonLiteral
+name|BlankNodeOrIRI
 name|next
 parameter_list|()
 block|{

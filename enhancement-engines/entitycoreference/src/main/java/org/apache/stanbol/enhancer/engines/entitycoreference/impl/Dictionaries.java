@@ -99,11 +99,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -205,7 +205,7 @@ begin_class
 class|class
 name|Dictionaries
 block|{
-comment|/**      * Contains the list of place adjectivals in the form: language -> adjectival -> UriRef -> adjectival ->      * UriRef There are Places that have multiple adjectivals so in this map there are adjectivals that point      * to the same UriRef but that ensures a fast lookup.      */
+comment|/**      * Contains the list of place adjectivals in the form: language -> adjectival -> IRI -> adjectival ->      * IRI There are Places that have multiple adjectivals so in this map there are adjectivals that point      * to the same IRI but that ensures a fast lookup.      */
 specifier|private
 name|Map
 argument_list|<
@@ -215,7 +215,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|placeAdjectivalsMap
@@ -257,7 +257,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|languagePlaceAdjMap
 init|=
@@ -348,11 +348,11 @@ index|[
 literal|1
 index|]
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ref
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|entityUriBase
 operator|+
@@ -510,7 +510,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|langPlaceAdjectivalsMap
 init|=

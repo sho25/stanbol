@@ -103,11 +103,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -119,11 +119,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -135,11 +135,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -205,7 +205,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -573,10 +573,10 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|rdfData
 init|=
 name|parser
@@ -590,7 +590,7 @@ operator|.
 name|DEFAULT_RDF_CONTENT_TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getBaseUri
 argument_list|()
@@ -601,13 +601,13 @@ if|if
 condition|(
 name|rdfData
 operator|instanceof
-name|MGraph
+name|Graph
 condition|)
 block|{
 name|graph
 operator|=
 operator|(
-name|MGraph
+name|Graph
 operator|)
 name|rdfData
 expr_stmt|;
@@ -617,7 +617,7 @@ block|{
 name|graph
 operator|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|(
 name|rdfData
 argument_list|)

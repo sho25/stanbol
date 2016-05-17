@@ -34,11 +34,11 @@ comment|//
 end_comment
 
 begin_comment
-comment|//import org.apache.clerezza.rdf.core.Graph;
+comment|//import org.apache.clerezza.commons.rdf.ImmutableGraph;
 end_comment
 
 begin_comment
-comment|//import org.apache.clerezza.rdf.core.NonLiteral;
+comment|//import org.apache.clerezza.commons.rdf.BlankNodeOrIRI;
 end_comment
 
 begin_comment
@@ -99,7 +99,7 @@ comment|//     * @param node
 comment|//     * @param message
 comment|//     * @param cause
 comment|//     */
-comment|//    public ChainException(Graph executionPlan, NonLiteral node, String message, Throwable cause){
+comment|//    public ChainException(ImmutableGraph executionPlan, BlankNodeOrIRI node, String message, Throwable cause){
 comment|//        super(String.format("Unable to execute node {} (engine: {} | optional : {}" +
 comment|//        		" | dependsOn : {}) because of: {}",
 comment|//            node,getEngine(executionPlan, node),

@@ -49,11 +49,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -65,11 +65,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -169,7 +169,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -351,11 +351,11 @@ return|return
 literal|null
 return|;
 block|}
-name|UriRef
+name|IRI
 name|reference
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uri
 argument_list|)
@@ -484,11 +484,11 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|MGraph
+name|Graph
 name|rdfData
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|(
 name|parser
 operator|.
@@ -499,7 +499,7 @@ argument_list|,
 name|format
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getBaseUri
 argument_list|()
@@ -534,7 +534,7 @@ operator|.
 name|createRdfRepresentation
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uri
 argument_list|)

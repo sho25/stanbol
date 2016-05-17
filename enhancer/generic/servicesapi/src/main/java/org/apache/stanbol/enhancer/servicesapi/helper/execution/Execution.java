@@ -59,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -75,11 +75,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -91,11 +91,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -151,7 +151,7 @@ argument_list|>
 block|{
 specifier|protected
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 decl_stmt|;
 specifier|private
@@ -161,12 +161,12 @@ name|executionNode
 decl_stmt|;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|status
 decl_stmt|;
 specifier|protected
 specifier|final
-name|TripleCollection
+name|Graph
 name|graph
 decl_stmt|;
 specifier|private
@@ -195,10 +195,10 @@ parameter_list|(
 name|ChainExecution
 name|parent
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 parameter_list|)
 block|{
@@ -220,7 +220,7 @@ name|node
 operator|=
 name|node
 expr_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 init|=
 name|ExecutionMetadataHelper
@@ -341,7 +341,7 @@ block|}
 comment|/**      * The Status of the execution      * @return the status      */
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getStatus
 parameter_list|()
 block|{

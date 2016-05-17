@@ -93,11 +93,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -109,11 +109,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -125,9 +125,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -141,11 +141,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -157,13 +157,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -448,11 +452,11 @@ argument_list|,
 name|parser
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|String
@@ -532,7 +536,7 @@ argument_list|(
 name|model
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"file://"
 operator|+
@@ -540,7 +544,7 @@ name|testFile
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NIE_NS
 operator|+
@@ -570,11 +574,11 @@ argument_list|,
 name|parser
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|String
@@ -654,7 +658,7 @@ argument_list|(
 name|model
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"file://"
 operator|+
@@ -662,7 +666,7 @@ name|testFile
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NIE_NS
 operator|+
@@ -692,11 +696,11 @@ argument_list|,
 name|parser
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|String
@@ -776,7 +780,7 @@ argument_list|(
 name|model
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"file://"
 operator|+
@@ -784,7 +788,7 @@ name|testFile
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NIE_NS
 operator|+
@@ -814,11 +818,11 @@ argument_list|,
 name|parser
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|String
@@ -886,7 +890,7 @@ argument_list|)
 expr_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|roots
 init|=
@@ -914,7 +918,7 @@ argument_list|(
 name|model
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"file://"
 operator|+
@@ -922,7 +926,7 @@ name|testFile
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NIE_NS
 operator|+
@@ -977,7 +981,7 @@ specifier|private
 name|void
 name|printTriples
 parameter_list|(
-name|MGraph
+name|Graph
 name|model
 parameter_list|)
 block|{

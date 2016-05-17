@@ -273,22 +273,6 @@ name|rdf
 operator|.
 name|core
 operator|.
-name|Literal
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
 name|LiteralFactory
 import|;
 end_import
@@ -301,11 +285,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -317,9 +301,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -333,11 +317,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -349,11 +333,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -525,11 +509,11 @@ name|String
 name|name
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|type
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 specifier|private
@@ -548,7 +532,7 @@ comment|/**      * Map with the suggestion. The key is the URI of the fise:Entit
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Suggestion
 argument_list|>
@@ -557,7 +541,7 @@ init|=
 operator|new
 name|LinkedHashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Suggestion
 argument_list|>
@@ -568,7 +552,7 @@ specifier|private
 name|String
 name|site
 decl_stmt|;
-comment|/**      * private constructor only used by {@link #createFromTextAnnotation(TripleCollection, NonLiteral)}      */
+comment|/**      * private constructor only used by {@link #createFromTextAnnotation(Graph, BlankNodeOrIRI)}      */
 specifier|private
 name|SavedEntity
 parameter_list|()
@@ -579,10 +563,10 @@ specifier|static
 name|SavedEntity
 name|createFromTextAnnotation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|)
 block|{
@@ -850,11 +834,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|suggestions
 operator|.
@@ -1130,7 +1114,7 @@ block|}
 comment|/**      * Getter for the type      *       * @return the type      */
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getType
 parameter_list|()
 block|{
@@ -1205,7 +1189,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{
@@ -1267,7 +1251,7 @@ specifier|public
 name|Suggestion
 name|getSuggestion
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|)
 block|{

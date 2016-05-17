@@ -575,11 +575,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -591,11 +591,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1554,7 +1554,7 @@ block|{
 comment|//  (2) return a single content part
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2037,7 +2037,7 @@ name|List
 argument_list|<
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2082,7 +2082,7 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2310,9 +2310,9 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|entry
 range|:
@@ -2320,7 +2320,7 @@ name|getContentParts
 argument_list|(
 name|ci
 argument_list|,
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 argument_list|)
@@ -2684,7 +2684,7 @@ name|List
 argument_list|<
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2708,7 +2708,7 @@ name|List
 argument_list|<
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2752,7 +2752,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -2776,7 +2776,7 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -3352,7 +3352,7 @@ implements|,
 name|ContentDescriptor
 block|{
 specifier|private
-name|TripleCollection
+name|Graph
 name|graph
 decl_stmt|;
 specifier|private
@@ -3369,7 +3369,7 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|,
 name|MediaType

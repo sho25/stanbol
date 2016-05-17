@@ -996,7 +996,7 @@ comment|// WebApplicationException is "lost" and the user will get an
 comment|// 500 with no comment and HTML content type :(
 comment|// As a workaround one could use a wrapping object as generic type
 comment|// that parses the error and than throw the Exception within the
-comment|// Resource using this MessageBodyReader
+comment|// RDFTerm using this MessageBodyReader
 throw|throw
 operator|new
 name|WebApplicationException

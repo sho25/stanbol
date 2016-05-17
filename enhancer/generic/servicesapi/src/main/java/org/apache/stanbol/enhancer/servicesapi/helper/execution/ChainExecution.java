@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -126,10 +126,10 @@ decl_stmt|;
 specifier|public
 name|ChainExecution
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 parameter_list|)
 block|{
@@ -142,7 +142,7 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|ep
 init|=
 name|ExecutionMetadataHelper

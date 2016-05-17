@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -47,11 +47,11 @@ class|class
 name|CalaisEntityOccurrence
 block|{
 specifier|public
-name|Resource
+name|RDFTerm
 name|id
 decl_stmt|;
 specifier|public
-name|Resource
+name|RDFTerm
 name|type
 decl_stmt|;
 specifier|public

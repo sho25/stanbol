@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -90,21 +90,21 @@ init|=
 literal|30
 decl_stmt|;
 comment|/**      * Concept used to annotate sentiment expressions within text      *  TODO: Find standard ontology for reference or check if it is OK to define new properties in the FISE namespace      */
-name|UriRef
+name|IRI
 name|SENTIMENT_EXPRESSION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/Sentiment Expression"
 argument_list|)
 decl_stmt|;
 comment|/**      * Datatype property (targets double literals) used to represent the polarity of a sentiment expression      *  TODO: Find standard ontology for reference or check if it is OK to define new properties in the FISE namespace      */
-name|UriRef
+name|IRI
 name|HAS_SENTIMENT_EXPRESSION_POLARITY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/hasSentimentPolarityValue"
 argument_list|)

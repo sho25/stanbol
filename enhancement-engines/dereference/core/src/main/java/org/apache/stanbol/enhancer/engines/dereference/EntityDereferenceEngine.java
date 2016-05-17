@@ -245,11 +245,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -261,11 +261,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -277,11 +277,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -293,9 +293,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -309,11 +309,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1180,7 +1180,7 @@ name|DereferenceContext
 name|derefContext
 decl_stmt|;
 specifier|final
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -1190,14 +1190,14 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|referencedEntities
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1236,7 +1236,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|langAnno
 range|:
 name|EnhancementEngineHelper
@@ -1380,21 +1380,21 @@ comment|//parse the referenced entities from the graph
 comment|//(2) read all Entities we need to dereference from the parsed contentItem
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|checked
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//since STANBOL-1334 the list of properties that refer to entities can be configured
 for|for
 control|(
-name|UriRef
+name|IRI
 name|referenceProperty
 range|:
 name|derefContext
@@ -1436,7 +1436,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|entityReference
 init|=
 name|triple
@@ -1449,7 +1449,7 @@ condition|(
 operator|(
 name|entityReference
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 operator|&&
 comment|//only URIs
@@ -1458,7 +1458,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityReference
 argument_list|)
@@ -1467,7 +1467,7 @@ comment|//do not check a URI twice
 name|chekcFallbackMode
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityReference
 argument_list|,
@@ -1478,7 +1478,7 @@ comment|//fallback mode
 name|checkURI
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityReference
 argument_list|)
@@ -1493,7 +1493,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityReference
 argument_list|)
@@ -1602,14 +1602,14 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|failedEntities
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1654,7 +1654,7 @@ comment|//schedule all entities to dereference
 for|for
 control|(
 specifier|final
-name|UriRef
+name|IRI
 name|entity
 range|:
 name|referencedEntities
@@ -1822,7 +1822,7 @@ block|{
 comment|//dereference using the current thread
 for|for
 control|(
-name|UriRef
+name|IRI
 name|entity
 range|:
 name|referencedEntities
@@ -2056,10 +2056,10 @@ specifier|protected
 name|boolean
 name|chekcFallbackMode
 parameter_list|(
-name|UriRef
+name|IRI
 name|entityReference
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -2092,7 +2092,7 @@ specifier|protected
 name|boolean
 name|checkURI
 parameter_list|(
-name|UriRef
+name|IRI
 name|entity
 parameter_list|)
 block|{
@@ -2375,11 +2375,11 @@ name|Boolean
 argument_list|>
 block|{
 specifier|final
-name|UriRef
+name|IRI
 name|entity
 decl_stmt|;
 specifier|final
-name|MGraph
+name|Graph
 name|metadata
 decl_stmt|;
 specifier|final
@@ -2399,10 +2399,10 @@ name|future
 decl_stmt|;
 name|DereferenceJob
 parameter_list|(
-name|UriRef
+name|IRI
 name|entity
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|,
 name|Lock

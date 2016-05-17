@@ -2123,7 +2123,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Resource {} ignored: Not an Vcard file."
+literal|"RDFTerm {} ignored: Not an Vcard file."
 argument_list|,
 name|resourceName
 argument_list|)
@@ -4104,7 +4104,7 @@ literal|null
 condition|)
 block|{
 comment|//create new Representation for the Organisation
-comment|//Note: this is an Entity and no sub-Resource!
+comment|//Note: this is an Entity and no sub-RDFTerm!
 name|String
 name|orgEntityId
 init|=

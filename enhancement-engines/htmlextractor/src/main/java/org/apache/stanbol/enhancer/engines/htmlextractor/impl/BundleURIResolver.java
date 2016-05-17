@@ -273,7 +273,7 @@ name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"Resource: "
+literal|"RDFTerm: "
 operator|+
 name|resource
 argument_list|)

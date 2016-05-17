@@ -271,11 +271,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -287,11 +287,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1543,7 +1543,7 @@ argument_list|)
 name|String
 name|broaderPropertyUri
 parameter_list|,
-name|Graph
+name|ImmutableGraph
 name|graph
 parameter_list|,
 annotation|@
@@ -1554,14 +1554,14 @@ parameter_list|)
 throws|throws
 name|ClassifierException
 block|{
-name|UriRef
+name|IRI
 name|conceptClass
 init|=
 name|OntologicalClasses
 operator|.
 name|SKOS_CONCEPT
 decl_stmt|;
-name|UriRef
+name|IRI
 name|broaderProperty
 init|=
 name|Properties
@@ -1584,7 +1584,7 @@ block|{
 name|conceptClass
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|conceptClassUri
 argument_list|)
@@ -1606,7 +1606,7 @@ block|{
 name|broaderProperty
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|broaderPropertyUri
 argument_list|)

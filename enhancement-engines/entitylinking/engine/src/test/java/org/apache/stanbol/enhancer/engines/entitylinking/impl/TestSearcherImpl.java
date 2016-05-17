@@ -149,11 +149,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -165,11 +165,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|IRI
 import|;
 end_import
 
@@ -181,11 +181,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -197,11 +197,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -288,7 +290,7 @@ name|EntitySearcher
 block|{
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|nameField
 decl_stmt|;
 specifier|private
@@ -327,7 +329,7 @@ decl_stmt|;
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Entity
 argument_list|>
@@ -336,7 +338,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Entity
 argument_list|>
@@ -345,11 +347,11 @@ decl_stmt|;
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|>
 name|originInfo
@@ -360,7 +362,7 @@ parameter_list|(
 name|String
 name|siteId
 parameter_list|,
-name|UriRef
+name|IRI
 name|nameField
 parameter_list|,
 name|LabelTokenizer
@@ -388,7 +390,7 @@ operator|.
 name|singletonMap
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -400,7 +402,7 @@ argument_list|,
 operator|(
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 operator|)
 name|Collections
@@ -408,7 +410,7 @@ operator|.
 name|singleton
 argument_list|(
 operator|(
-name|Resource
+name|RDFTerm
 operator|)
 operator|new
 name|PlainLiteralImpl
@@ -441,7 +443,7 @@ argument_list|)
 expr_stmt|;
 name|Iterator
 argument_list|<
-name|PlainLiteral
+name|Literal
 argument_list|>
 name|labels
 init|=
@@ -460,7 +462,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|PlainLiteral
+name|Literal
 name|label
 init|=
 name|labels
@@ -544,12 +546,12 @@ specifier|public
 name|Entity
 name|get
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|includeFields
 parameter_list|,
@@ -580,12 +582,12 @@ name|Entity
 argument_list|>
 name|lookup
 parameter_list|(
-name|UriRef
+name|IRI
 name|field
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|includeFields
 parameter_list|,
@@ -790,11 +792,11 @@ name|Override
 specifier|public
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|>
 name|getOriginInformation

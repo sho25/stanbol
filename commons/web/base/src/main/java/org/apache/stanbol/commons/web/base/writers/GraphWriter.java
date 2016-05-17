@@ -381,11 +381,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -525,7 +525,7 @@ name|GraphWriter
 implements|implements
 name|MessageBodyWriter
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 block|{
 comment|/**      * The media type for JSON-LD (<code>application/ld+json</code>)      */
@@ -718,7 +718,7 @@ name|getSubtype
 argument_list|()
 decl_stmt|;
 return|return
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|.
@@ -739,7 +739,7 @@ specifier|public
 name|long
 name|getSize
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|t
 parameter_list|,
 name|Class
@@ -768,7 +768,7 @@ specifier|public
 name|void
 name|writeTo
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|t
 parameter_list|,
 name|Class

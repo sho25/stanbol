@@ -205,11 +205,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -253,11 +253,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -285,11 +285,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -301,11 +301,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -317,11 +317,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|IRI
 import|;
 end_import
 
@@ -333,11 +333,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|Literal
 import|;
 end_import
 
@@ -349,27 +349,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -383,29 +369,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|TripleImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TypedLiteralImpl
 import|;
@@ -506,7 +476,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used as value for Apache Tika {@link Metadata} mappings. Holds the  * ontology property as {@link UriRef} and optionally a Tika {@link Property}.  * Later can be used to parse the correct datatype for values contained in the  * {@link Metadata}  *   * @author westei  *  */
+comment|/**  * Used as value for Apache Tika {@link Metadata} mappings. Holds the  * ontology property as {@link IRI} and optionally a Tika {@link Property}.  * Later can be used to parse the correct datatype for values contained in the  * {@link Metadata}  *   * @author westei  *  */
 end_comment
 
 begin_class
@@ -541,13 +511,13 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/**      * List with allowed DataTypes.<ul>      *<li><code>null</code> is used for {@link PlainLiteral}s      *<li> {@link XSD} datatyoes are used for {@link TypedLiteral}s      *<li> {@link RDFS#Resource} is used for {@link NonLiteral} values. Note      * that only {@link UriRef} is supported, because for Tika {@link BNode}s      * do not make sense.      *</ul>      */
+comment|/**      * List with allowed DataTypes.<ul>      *<li><code>null</code> is used for {@link PlainLiteral}s      *<li> {@link XSD} datatyoes are used for {@link TypedLiteral}s      *<li> {@link RDFS#RDFTerm} is used for {@link BlankNodeOrIRI} values. Note      * that only {@link IRI} is supported, because for Tika {@link BlankNode}s      * do not make sense.      *</ul>      */
 specifier|public
 specifier|static
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|ONT_TYPES
 decl_stmt|;
@@ -557,7 +527,7 @@ specifier|static
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Class
 argument_list|<
@@ -571,7 +541,7 @@ block|{
 comment|//use a linked HasSetMap to have the nice ordering (mainly for logging)
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Class
 argument_list|<
@@ -583,7 +553,7 @@ init|=
 operator|new
 name|LinkedHashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Class
 argument_list|<
@@ -799,7 +769,7 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-comment|//Data Types for NonLiteral values
+comment|//Data Types for BlankNodeOrIRI values
 name|map
 operator|.
 name|put
@@ -837,7 +807,7 @@ comment|//XSD.token,XSD.unsignedByte,XSD.unsignedInt,XSD.unsignedLong,XSD.unsign
 block|}
 specifier|protected
 specifier|final
-name|UriRef
+name|IRI
 name|ontProperty
 decl_stmt|;
 specifier|protected
@@ -848,7 +818,7 @@ decl_stmt|;
 comment|/**      * Getter for the OntologyProperty for this mapping      * @return the ontProperty      */
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getOntologyProperty
 parameter_list|()
 block|{
@@ -868,16 +838,16 @@ parameter_list|()
 function_decl|;
 specifier|protected
 specifier|final
-name|UriRef
+name|IRI
 name|ontType
 decl_stmt|;
 specifier|protected
 name|Mapping
 parameter_list|(
-name|UriRef
+name|IRI
 name|ontProperty
 parameter_list|,
-name|UriRef
+name|IRI
 name|ontType
 parameter_list|)
 block|{
@@ -894,10 +864,10 @@ block|}
 specifier|protected
 name|Mapping
 parameter_list|(
-name|UriRef
+name|IRI
 name|ontProperty
 parameter_list|,
-name|UriRef
+name|IRI
 name|ontType
 parameter_list|,
 name|Converter
@@ -965,25 +935,25 @@ operator|=
 name|converter
 expr_stmt|;
 block|}
-comment|/**      * Applies this mapping based on the parsed {@link Metadata} and stores the       * results to {@link MGraph}      * @param graph the Graph to store the mapping results      * @param subject the subject (context) to add the mappings      * @param metadata the metadata used for applying the mapping      * @return<code>true</code> if the mapping could be applied based on the      * parsed data. Otherwise<code>false</code>. This is intended to be used      * by components that need to check if required mappings could be applied.      */
+comment|/**      * Applies this mapping based on the parsed {@link Metadata} and stores the       * results to {@link Graph}      * @param graph the ImmutableGraph to store the mapping results      * @param subject the subject (context) to add the mappings      * @param metadata the metadata used for applying the mapping      * @return<code>true</code> if the mapping could be applied based on the      * parsed data. Otherwise<code>false</code>. This is intended to be used      * by components that need to check if required mappings could be applied.      */
 specifier|public
 specifier|abstract
 name|boolean
 name|apply
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
 name|Metadata
 name|metadata
 parameter_list|)
 function_decl|;
-comment|/**      * Converts the parsed value based on the mapping information to an RDF      * {@link Resource}. Optionally supports also validation if the parsed      * value is valid for the {@link Mapping#ontType ontology type} specified by      * the parsed mapping.      * @param value the value      * @param mapping the mapping      * @param validate       * @return the {@link Resource} or<code>null</code> if the parsed value is      *<code>null</code> or {@link String#isEmpty() empty}.      * @throws IllegalArgumentException if the parsed {@link Mapping} is       *<code>null</code>      */
+comment|/**      * Converts the parsed value based on the mapping information to an RDF      * {@link RDFTerm}. Optionally supports also validation if the parsed      * value is valid for the {@link Mapping#ontType ontology type} specified by      * the parsed mapping.      * @param value the value      * @param mapping the mapping      * @param validate       * @return the {@link RDFTerm} or<code>null</code> if the parsed value is      *<code>null</code> or {@link String#isEmpty() empty}.      * @throws IllegalArgumentException if the parsed {@link Mapping} is       *<code>null</code>      */
 specifier|protected
-name|Resource
+name|RDFTerm
 name|toResource
 parameter_list|(
 name|String
@@ -1016,7 +986,7 @@ literal|null
 return|;
 comment|//ignore null and empty values
 block|}
-name|Resource
+name|RDFTerm
 name|object
 decl_stmt|;
 if|if
@@ -1062,7 +1032,7 @@ block|}
 name|object
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|value
 argument_list|)
@@ -1252,7 +1222,7 @@ argument_list|(
 name|clazz
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|object
 argument_list|)
@@ -1355,19 +1325,19 @@ block|{
 specifier|private
 name|List
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|subjects
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|predicate
 decl_stmt|;
 specifier|private
@@ -1449,16 +1419,16 @@ specifier|protected
 name|void
 name|log
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|predicate
 parameter_list|,
 name|String
 name|prop
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|object
 parameter_list|)
 block|{
@@ -1646,10 +1616,10 @@ specifier|static
 interface|interface
 name|Converter
 block|{
-name|Resource
+name|RDFTerm
 name|convert
 parameter_list|(
-name|Resource
+name|RDFTerm
 name|value
 parameter_list|)
 function_decl|;

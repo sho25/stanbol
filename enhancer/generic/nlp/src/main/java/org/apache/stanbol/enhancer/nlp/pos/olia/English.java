@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -158,7 +158,7 @@ argument_list|(
 literal|"olia.annotationModel"
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://purl.org/olia/penn.owl"
 argument_list|)
@@ -174,7 +174,7 @@ argument_list|(
 literal|"olia.linkingModel"
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://purl.org/olia/penn-link.rdf"
 argument_list|)

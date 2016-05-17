@@ -169,9 +169,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -185,9 +185,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -217,11 +217,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -233,11 +233,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -249,11 +249,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -265,11 +265,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -283,11 +285,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -434,10 +438,10 @@ specifier|private
 name|EnhancementRDFUtils
 parameter_list|()
 block|{}
-comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the MGraph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param suggestion      *            the entity suggestion      * @param nameField the field used to extract the name      * @param lang the preferred language to include or<code>null</code> if none      */
+comment|/**      * @param literalFactory      *            the LiteralFactory to use      * @param graph      *            the Graph to use      * @param contentItemId      *            the contentItemId the enhancement is extracted from      * @param relatedEnhancements      *            enhancements this textAnnotation is related to      * @param suggestion      *            the entity suggestion      * @param nameField the field used to extract the name      * @param lang the preferred language to include or<code>null</code> if none      */
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|writeEntityAnnotation
 parameter_list|(
 name|EnhancementEngine
@@ -446,15 +450,15 @@ parameter_list|,
 name|LiteralFactory
 name|literalFactory
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|contentItemId
 parameter_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|relatedEnhancements
 parameter_list|,
@@ -662,7 +666,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Now create the entityAnnotation
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -679,7 +683,7 @@ decl_stmt|;
 comment|// first relate this entity annotation to the text annotation(s)
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|enhancement
 range|:
 name|relatedEnhancements
@@ -701,11 +705,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|UriRef
+name|IRI
 name|entityUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|rep
 operator|.
@@ -815,7 +819,7 @@ argument_list|,
 name|ENHANCER_ENTITY_TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|types
 operator|.
@@ -853,7 +857,7 @@ argument_list|(
 name|entityAnnotation
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.

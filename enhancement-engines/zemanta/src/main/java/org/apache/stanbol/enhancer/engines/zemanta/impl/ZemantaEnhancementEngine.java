@@ -481,9 +481,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -513,11 +513,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -529,11 +529,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -545,25 +545,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|PlainLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -577,11 +561,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -593,11 +577,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -609,11 +593,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -627,13 +613,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -645,11 +635,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1400,7 +1392,7 @@ name|EngineException
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1513,7 +1505,7 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -1521,7 +1513,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ciId
 init|=
 name|ci
@@ -1530,11 +1522,11 @@ name|getUri
 argument_list|()
 decl_stmt|;
 comment|//we need to store the results of Zemanta in an temp graph
-name|MGraph
+name|Graph
 name|results
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|ZemantaAPIWrapper
@@ -1662,13 +1654,13 @@ specifier|protected
 name|void
 name|processCategories
 parameter_list|(
-name|MGraph
+name|Graph
 name|results
 parameter_list|,
-name|MGraph
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|ciId
 parameter_list|)
 block|{
@@ -1695,7 +1687,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//add the root Text annotation as soon as the first TopicAnnotation is added.
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 literal|null
@@ -1708,7 +1700,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|category
 init|=
 name|categories
@@ -1748,7 +1740,7 @@ name|confidence
 argument_list|)
 expr_stmt|;
 comment|//now we need to follow the Target link
-name|UriRef
+name|IRI
 name|target
 init|=
 name|EnhancementEngineHelper
@@ -1775,7 +1767,7 @@ literal|null
 condition|)
 block|{
 comment|//first check the used categorisation
-name|UriRef
+name|IRI
 name|categorisationScheme
 init|=
 name|EnhancementEngineHelper
@@ -1876,7 +1868,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//now write the TopicAnnotation
-name|UriRef
+name|IRI
 name|categoryEnhancement
 init|=
 name|createTopicEnhancement
@@ -1947,7 +1939,7 @@ argument_list|,
 name|ENHANCER_ENTITY_REFERENCE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|DMOZ_BASE_URL
 operator|+
@@ -2100,16 +2092,16 @@ specifier|protected
 name|void
 name|processRecognition
 parameter_list|(
-name|MGraph
+name|Graph
 name|results
 parameter_list|,
-name|MGraph
+name|Graph
 name|enhancements
 parameter_list|,
 name|String
 name|text
 parameter_list|,
-name|UriRef
+name|IRI
 name|ciId
 parameter_list|)
 block|{
@@ -2143,7 +2135,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|recognition
 init|=
 name|recognitions
@@ -2213,7 +2205,7 @@ argument_list|)
 expr_stmt|;
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|textAnnotations
 init|=
@@ -2244,7 +2236,7 @@ argument_list|)
 expr_stmt|;
 comment|//second we need to create the EntityAnnotation that represent the
 comment|//recognition
-name|NonLiteral
+name|BlankNodeOrIRI
 name|object
 init|=
 name|EnhancementEngineHelper
@@ -2278,14 +2270,14 @@ comment|//TODO: can we create an EntityAnnotation with several referred entities
 comment|//      Should we use the owl:sameAs to decide that!
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|sameAsSet
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2293,7 +2285,7 @@ for|for
 control|(
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|sameAs
 init|=
@@ -2340,7 +2332,7 @@ comment|//now parse the targets and look if there are others than the one
 comment|//merged by using sameAs
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|targets
 init|=
@@ -2374,7 +2366,7 @@ argument_list|()
 condition|)
 block|{
 comment|//the entityRef is the URL of the target
-name|UriRef
+name|IRI
 name|entity
 init|=
 name|targets
@@ -2391,7 +2383,7 @@ operator|+
 name|entity
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|targetType
 init|=
 name|EnhancementEngineHelper
@@ -2551,7 +2543,7 @@ comment|//TODO: targetTypes are not parsed by Zemanta, therefore we can not set
 comment|//      any entity types!
 block|}
 comment|//create the entityEnhancement
-name|UriRef
+name|IRI
 name|entityEnhancement
 init|=
 name|EnhancementEngineHelper
@@ -2595,7 +2587,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|relatedTextAnnotation
 range|:
 name|textAnnotations
@@ -2619,7 +2611,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|UriRef
+name|IRI
 name|entity
 range|:
 name|sameAsSet
@@ -2668,10 +2660,10 @@ specifier|static
 name|Double
 name|parseConfidence
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|tc
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|resource
 parameter_list|)
 block|{
@@ -2754,17 +2746,17 @@ comment|/**      * This Methods searches/creates text annotations for anchor poi
 specifier|private
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|processTextAnnotation
 parameter_list|(
-name|MGraph
+name|Graph
 name|enhancements
 parameter_list|,
 name|String
 name|text
 parameter_list|,
-name|UriRef
+name|IRI
 name|ciId
 parameter_list|,
 name|String
@@ -2776,14 +2768,14 @@ parameter_list|)
 block|{
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|textAnnotations
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2811,7 +2803,7 @@ name|Integer
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|existingTextAnnotationsMap
@@ -2855,7 +2847,7 @@ control|)
 block|{
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|existingTextAnnotations
 init|=
@@ -2885,7 +2877,7 @@ block|}
 else|else
 block|{
 comment|//we need to create an new one!
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -3154,12 +3146,12 @@ name|Integer
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|searchExistingTextAnnotations
 parameter_list|(
-name|MGraph
+name|Graph
 name|enhancements
 parameter_list|,
 name|Literal
@@ -3189,7 +3181,7 @@ name|Integer
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|existingTextAnnotationsMap
@@ -3201,7 +3193,7 @@ name|Integer
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 argument_list|()
@@ -3214,7 +3206,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 init|=
 name|textAnnotationsIterator
@@ -3273,7 +3265,7 @@ condition|)
 block|{
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|textAnnotationList
 init|=
@@ -3296,7 +3288,7 @@ operator|=
 operator|new
 name|ArrayList
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 expr_stmt|;

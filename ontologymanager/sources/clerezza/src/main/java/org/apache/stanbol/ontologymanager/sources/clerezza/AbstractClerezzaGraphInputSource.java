@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -110,7 +110,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of an {@link OntologyInputSource} that returns {@link TripleCollection} objects as  * ontologies.  *   * Subclasses must implement the {@link #getImports(boolean)} method, as the availability of imported  * ontologies might depend on the input source being able to access the {@link TcManager} where they are  * stored.  *   * @author alexdma  *   */
+comment|/**  * Default implementation of an {@link OntologyInputSource} that returns {@link Graph} objects as  * ontologies.  *   * Subclasses must implement the {@link #getImports(boolean)} method, as the availability of imported  * ontologies might depend on the input source being able to access the {@link TcManager} where they are  * stored.  *   * @author alexdma  *   */
 end_comment
 
 begin_class
@@ -121,7 +121,7 @@ name|AbstractClerezzaGraphInputSource
 extends|extends
 name|AbstractGenericInputSource
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 block|{
 specifier|protected
@@ -142,7 +142,7 @@ specifier|protected
 name|void
 name|bindRootOntology
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|ontology
 parameter_list|)
 block|{

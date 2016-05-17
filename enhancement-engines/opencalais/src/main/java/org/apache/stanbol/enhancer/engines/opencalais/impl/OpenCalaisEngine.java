@@ -433,11 +433,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -449,9 +449,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -465,9 +465,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -497,11 +497,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -513,11 +513,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -529,11 +529,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -545,9 +545,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -561,11 +561,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -595,11 +595,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -613,13 +615,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -631,11 +637,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1335,9 +1343,9 @@ comment|/**      * a map for mapping Calais classes to other classes (e.g. from 
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|calaisTypeMap
 decl_stmt|;
@@ -1475,9 +1483,9 @@ block|}
 specifier|public
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|getCalaisTypeMap
 parameter_list|()
@@ -1492,9 +1500,9 @@ name|setCalaisTypeMap
 parameter_list|(
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|calaisTypeMap
 parameter_list|)
@@ -1664,7 +1672,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|entry
 index|[
@@ -1673,7 +1681,7 @@ index|]
 argument_list|)
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|entry
 index|[
@@ -1812,7 +1820,7 @@ name|EngineException
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1893,7 +1901,7 @@ name|e
 argument_list|)
 throw|;
 block|}
-name|MGraph
+name|Graph
 name|calaisModel
 init|=
 name|getCalaisAnalysis
@@ -2094,18 +2102,18 @@ block|}
 comment|//TODO create TextEnhancement (form, start, end, type?) and EntityAnnotation (id, name, type)
 name|HashMap
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|entityAnnotationMap
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2117,7 +2125,7 @@ range|:
 name|occs
 control|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -2129,7 +2137,7 @@ argument_list|,
 name|this
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 name|ci
@@ -2391,7 +2399,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//                UriRef entityAnnotation = EnhancementEngineHelper.createEntityEnhancement(ci, this);
+comment|//                IRI entityAnnotation = EnhancementEngineHelper.createEntityEnhancement(ci, this);
 comment|//                entityAnnotationMap.put(occ.id, entityAnnotation);
 comment|//                model.add(new TripleImpl(entityAnnotation, DC_RELATION, textAnnotation));
 comment|//                model.add(new TripleImpl(entityAnnotation, ENHANCER_ENTITY_LABEL, occ.name));
@@ -2401,9 +2409,9 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Retrieves the annotations from OpenCalais as RDF/XML. From that an MGraph is created.      *      * @param text the text to send to OpenCalais      *      * @return an MGraph with all annotations      *      * @throws EngineException      */
+comment|/**      * Retrieves the annotations from OpenCalais as RDF/XML. From that an Graph is created.      *      * @param text the text to send to OpenCalais      *      * @return an Graph with all annotations      *      * @throws EngineException      */
 specifier|public
-name|MGraph
+name|Graph
 name|getCalaisAnalysis
 parameter_list|(
 name|String
@@ -2456,7 +2464,7 @@ literal|"</c:processingDirectives>"
 operator|+
 literal|"</c:params>"
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 literal|null
@@ -2651,9 +2659,9 @@ return|return
 name|model
 return|;
 block|}
-comment|/**      * Parses an InputStream of RDF data and produces an MGraph from them      *      * @param in The InputStream of RDF data      * @param format the format of the RDF data      *      * @return the resulting MGraph or null if the RDF serialization format is not supported by the parser      */
+comment|/**      * Parses an InputStream of RDF data and produces an Graph from them      *      * @param in The InputStream of RDF data      * @param format the format of the RDF data      *      * @return the resulting Graph or null if the RDF serialization format is not supported by the parser      */
 specifier|public
-name|MGraph
+name|Graph
 name|readModel
 parameter_list|(
 name|InputStream
@@ -2684,7 +2692,7 @@ name|format
 argument_list|)
 condition|)
 block|{
-name|Graph
+name|ImmutableGraph
 name|graph
 init|=
 name|parser
@@ -2696,11 +2704,11 @@ argument_list|,
 name|format
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|(
 name|graph
 argument_list|)
@@ -2730,7 +2738,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the MGraph representing the Calais data      *      * @return a Collection of entity information      * @throws EngineException on a {@link ParseException} while processing the      * Sparql query.      */
+comment|/**      * Extracts the relevant entity information from the Calais RDF data.      * The entities and the relted information is extracted by a Sparql query.      *      * @param model the Graph representing the Calais data      *      * @return a Collection of entity information      * @throws EngineException on a {@link ParseException} while processing the      * Sparql query.      */
 specifier|public
 name|Collection
 argument_list|<
@@ -2738,7 +2746,7 @@ name|CalaisEntityOccurrence
 argument_list|>
 name|queryModel
 parameter_list|(
-name|MGraph
+name|Graph
 name|model
 parameter_list|)
 throws|throws
@@ -2867,7 +2875,7 @@ operator|new
 name|CalaisEntityOccurrence
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|disambiguated
 init|=
 name|row
@@ -2947,7 +2955,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|mappedType
 init|=
 name|calaisTypeMap
@@ -3592,9 +3600,9 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 expr_stmt|;

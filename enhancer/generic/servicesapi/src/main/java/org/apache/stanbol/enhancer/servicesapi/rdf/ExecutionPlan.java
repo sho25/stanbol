@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines the {@link UriRef}s for all classes and properties defined by the  * Stanbol Enhancer Execution Plan ontology.  *  */
+comment|/**  * Defines the {@link IRI}s for all classes and properties defined by the  * Stanbol Enhancer Execution Plan ontology.  *  */
 end_comment
 
 begin_class
@@ -71,11 +71,11 @@ comment|/**      * The Class ep:ExecutionPlan      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|EXECUTION_PLAN
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -88,11 +88,11 @@ comment|/**      * The property ep:chain linking an {@link #EXECUTION_PLAN} to t
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|CHAIN
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -105,11 +105,11 @@ comment|/**      * the property ep:hasExecutionNode linking an {@link #EXECUTION
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|HAS_EXECUTION_NODE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -122,11 +122,11 @@ comment|/**      * The Class ep:ExecutionMode      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|EXECUTION_NODE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -139,11 +139,11 @@ comment|/**      * The property ep:engine linking an {@link #EXECUTION_NODE} wit
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENGINE
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -156,11 +156,11 @@ comment|/**      * The property ep:dependsOn defining the list of other {@link #
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DEPENDS_ON
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -173,11 +173,11 @@ comment|/**      * The property ep:optional that can be used to define that the 
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|OPTIONAL
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.

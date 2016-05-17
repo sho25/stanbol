@@ -39,11 +39,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -55,11 +55,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|IRI
 import|;
 end_import
 
@@ -71,27 +71,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TripleCollection
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|Literal
 import|;
 end_import
 
@@ -204,7 +188,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link Entity} implementation used by the {@link EntityCoMentionEngine}. It  * overrides the {@link #getText(UriRef)} and {@link #getReferences(UriRef)}  * methods to use the a different labelField if   * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} is parsed as parameter.  * This allows the {@link EntityLinker} to use different properties for different  * Entities when linking against the {@link InMemoryEntityIndex}.  * @author Rupert Westenthaler  *  */
+comment|/**  * {@link Entity} implementation used by the {@link EntityCoMentionEngine}. It  * overrides the {@link #getText(IRI)} and {@link #getReferences(IRI)}  * methods to use the a different labelField if   * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} is parsed as parameter.  * This allows the {@link EntityLinker} to use different properties for different  * Entities when linking against the {@link InMemoryEntityIndex}.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -217,13 +201,13 @@ block|{
 comment|/**      * The label field of this Entity      */
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|nameField
 decl_stmt|;
 comment|/**      * The type field of this Entity      */
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|typeField
 decl_stmt|;
 comment|/**      * The start/end char indexes char index of the first mention      */
@@ -257,20 +241,20 @@ operator|.
 name|hashCode
 argument_list|()
 decl_stmt|;
-comment|/**      * Creates a new MentionEntity for the parsed parameters      * @param uri the {@link UriRef} of the Entity       * @param data the {@link MGraph} with the data for the Entity      * @param labelField the {@link UriRef} of the property holding the      * labels of this Entity. This property will be used for all calls to      * {@link #getText(UriRef)} and {@link #getReferences(UriRef)} if      * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} is parsed as parameter      * @param span the start/end char indexes of the mention      */
+comment|/**      * Creates a new MentionEntity for the parsed parameters      * @param uri the {@link IRI} of the Entity       * @param data the {@link Graph} with the data for the Entity      * @param labelField the {@link IRI} of the property holding the      * labels of this Entity. This property will be used for all calls to      * {@link #getText(IRI)} and {@link #getReferences(IRI)} if      * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} is parsed as parameter      * @param span the start/end char indexes of the mention      */
 specifier|public
 name|EntityMention
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|data
 parameter_list|,
-name|UriRef
+name|IRI
 name|labelField
 parameter_list|,
-name|UriRef
+name|IRI
 name|typeField
 parameter_list|,
 name|Integer
@@ -377,17 +361,17 @@ operator|=
 name|span
 expr_stmt|;
 block|}
-comment|/**      * Wrapps the parsed Entity and redirects calls to       * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} to the parsed labelField      * @param entity the Entity to wrap      * @param labelField the {@link UriRef} of the property holding the      * labels of this Entity. This property will be used for all calls to      * {@link #getText(UriRef)} and {@link #getReferences(UriRef)} if      * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} is parsed as parameter      * @param index the char index of the initial mention in the document      */
+comment|/**      * Wrapps the parsed Entity and redirects calls to       * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} to the parsed labelField      * @param entity the Entity to wrap      * @param labelField the {@link IRI} of the property holding the      * labels of this Entity. This property will be used for all calls to      * {@link #getText(IRI)} and {@link #getReferences(IRI)} if      * {@link CoMentionConstants#CO_MENTION_LABEL_FIELD} is parsed as parameter      * @param index the char index of the initial mention in the document      */
 specifier|public
 name|EntityMention
 parameter_list|(
 name|Entity
 name|entity
 parameter_list|,
-name|UriRef
+name|IRI
 name|labelField
 parameter_list|,
-name|UriRef
+name|IRI
 name|typeField
 parameter_list|,
 name|Integer
@@ -420,11 +404,11 @@ name|Override
 specifier|public
 name|Iterator
 argument_list|<
-name|PlainLiteral
+name|Literal
 argument_list|>
 name|getText
 parameter_list|(
-name|UriRef
+name|IRI
 name|field
 parameter_list|)
 block|{
@@ -504,11 +488,11 @@ name|Override
 specifier|public
 name|Iterator
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getReferences
 parameter_list|(
-name|UriRef
+name|IRI
 name|field
 parameter_list|)
 block|{
@@ -635,7 +619,7 @@ return|;
 block|}
 comment|/**      * The field used to obtain the names of the entities. For EntityMentions      * this is set on a per instance base, as the field my differ between      * different {@link EntityMention}s      * @return the field (property) used to obtain the labels of this mention      * @see EntityLinkerConfig#getNameField()      */
 specifier|public
-name|UriRef
+name|IRI
 name|getNameField
 parameter_list|()
 block|{
@@ -645,7 +629,7 @@ return|;
 block|}
 comment|/**      * The field used to obtain the types of entities. For EntityMentions      * this is set on a per instance base, as the field my differ between      * different {@link EntityMention}s      * @return the field (property) used to obtain the type of this mention      * @see EntityLinkerConfig#getTypeField()      */
 specifier|public
-name|UriRef
+name|IRI
 name|getTypeField
 parameter_list|()
 block|{

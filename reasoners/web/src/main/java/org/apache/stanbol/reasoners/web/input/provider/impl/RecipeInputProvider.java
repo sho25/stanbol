@@ -81,11 +81,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -555,7 +555,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeId
 argument_list|)
@@ -892,7 +892,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeId
 argument_list|)

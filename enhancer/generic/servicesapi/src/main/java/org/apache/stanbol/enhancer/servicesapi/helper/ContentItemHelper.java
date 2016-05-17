@@ -189,11 +189,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -338,7 +338,7 @@ comment|// server.
 comment|/**      * Check that ContentItem#getId returns a valid URI or make an urn out of      * it.      */
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|ensureUri
 parameter_list|(
 name|ContentItem
@@ -387,7 +387,7 @@ expr_stmt|;
 block|}
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uri
 argument_list|)
@@ -681,7 +681,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|makeDefaultUrn
 parameter_list|(
 name|Blob
@@ -702,7 +702,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|makeDefaultUrn
 parameter_list|(
 name|InputStream
@@ -720,7 +720,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|makeDefaultUrn
 parameter_list|(
 name|byte
@@ -743,7 +743,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|makeDefaultUri
 parameter_list|(
 name|String
@@ -767,7 +767,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|makeDefaultUri
 parameter_list|(
 name|String
@@ -793,7 +793,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|makeDefaultUri
 parameter_list|(
 name|String
@@ -874,7 +874,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|baseUri
 operator|+
@@ -1171,12 +1171,12 @@ return|return
 name|parsed
 return|;
 block|}
-comment|/**      * Searches an {@link ContentItem#getPart(UriRef, Class) content part}      * of the type {@link Blob} with one of the the parsed mimeTypes.<p>      * NOTE:<ul>      *<li> MimeTypes are converted to lower case before compared with      * the entries of the parsed set. Therefore it is important that the parsed      * set only contains lower case values!      *<li> A read lock on the parsed {@link ContentItem} is applied while      * searching for a fitting {@link Blob}      *</ul><p>      * In contrast to the contentPart related methods of the {@link ContentItem}      * this method does NOT throw {@link NoSuchPartException}.      * @param ci the contentITem      * @param mimeTypes List of possible mimeTypes      * @return the {@link UriRef URI} and the {@link Blob content} of the content       * part or<code>null</code> if not found      * @throws IllegalArgumentException If the parsed {@link ContentItem} is      *<code>null</code> or the parsed Set with the mimeTypes is<code>null</code>      * or {@link Set#isEmpty() empty}.      */
+comment|/**      * Searches an {@link ContentItem#getPart(IRI, Class) content part}      * of the type {@link Blob} with one of the the parsed mimeTypes.<p>      * NOTE:<ul>      *<li> MimeTypes are converted to lower case before compared with      * the entries of the parsed set. Therefore it is important that the parsed      * set only contains lower case values!      *<li> A read lock on the parsed {@link ContentItem} is applied while      * searching for a fitting {@link Blob}      *</ul><p>      * In contrast to the contentPart related methods of the {@link ContentItem}      * this method does NOT throw {@link NoSuchPartException}.      * @param ci the contentITem      * @param mimeTypes List of possible mimeTypes      * @return the {@link IRI URI} and the {@link Blob content} of the content       * part or<code>null</code> if not found      * @throws IllegalArgumentException If the parsed {@link ContentItem} is      *<code>null</code> or the parsed Set with the mimeTypes is<code>null</code>      * or {@link Set#isEmpty() empty}.      */
 specifier|public
 specifier|static
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1227,7 +1227,7 @@ literal|"The parsed Set with mime type  MUST NOT be NULL nor empty!"
 argument_list|)
 throw|;
 block|}
-name|UriRef
+name|IRI
 name|cpUri
 init|=
 literal|null
@@ -1369,7 +1369,7 @@ literal|null
 return|;
 comment|// not found
 block|}
-comment|/**      * Returns a Map with the current content parts of the parsed type. future       * changes to the contentParts of the content item will NOT be reflected      * within the returned map. The ordering of the {@link Iterator}s over the       * returned map is consistent with the ordering of the contentPart within the      * {@link ContentItem}.<p> When parsing {@link Object} as class the number      * of the element will be equals to the index of that content part.<p>      * In contrast to the contentPart related methods of the {@link ContentItem}      * this method does NOT throw {@link NoSuchPartException}.      * @param ci the content item      * @param clazz the class of the content part      * @return the Map with the {@link UriRef id}s and the content as entries.      */
+comment|/**      * Returns a Map with the current content parts of the parsed type. future       * changes to the contentParts of the content item will NOT be reflected      * within the returned map. The ordering of the {@link Iterator}s over the       * returned map is consistent with the ordering of the contentPart within the      * {@link ContentItem}.<p> When parsing {@link Object} as class the number      * of the element will be equals to the index of that content part.<p>      * In contrast to the contentPart related methods of the {@link ContentItem}      * this method does NOT throw {@link NoSuchPartException}.      * @param ci the content item      * @param clazz the class of the content part      * @return the Map with the {@link IRI id}s and the content as entries.      */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1377,7 +1377,7 @@ name|T
 parameter_list|>
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|T
 argument_list|>
@@ -1410,7 +1410,7 @@ throw|;
 block|}
 name|LinkedHashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|T
 argument_list|>
@@ -1419,13 +1419,13 @@ init|=
 operator|new
 name|LinkedHashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|T
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|cpUri
 init|=
 literal|null
@@ -1674,11 +1674,11 @@ comment|/**      * URI used to register an {@link ContentItem#getPart(int, Class
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|REQUEST_PROPERTIES_URI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:apache.org:stanbol.enhancer:request.properties"
 argument_list|)
@@ -1689,11 +1689,11 @@ name|Deprecated
 specifier|private
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|WEB_ENHANCEMENT_PROPERTIES_URI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:apache.org:stanbol.web:enhancement.properties"
 argument_list|)

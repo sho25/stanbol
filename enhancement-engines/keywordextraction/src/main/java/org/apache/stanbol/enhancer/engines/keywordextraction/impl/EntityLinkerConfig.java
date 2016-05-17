@@ -103,11 +103,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -323,7 +323,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
 decl_stmt|;
@@ -334,7 +334,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|mappings
 init|=
@@ -343,7 +343,7 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -494,22 +494,22 @@ operator|.
 name|DBPEDIA_ORGANISATION
 argument_list|)
 expr_stmt|;
-comment|//        UriRef DRUG = new UriRef(NamespaceEnum.drugbank+"drugs");
+comment|//        IRI DRUG = new IRI(NamespaceEnum.drugbank+"drugs");
 comment|//        mappings.put(DRUG.getUnicodeString(), DRUG);
 comment|//        mappings.put(NamespaceEnum.dbpediaOnt+"Drug", DRUG);
 comment|//        mappings.put(NamespaceEnum.dailymed+"drugs", DRUG);
 comment|//        mappings.put(NamespaceEnum.sider+"drugs", DRUG);
 comment|//        mappings.put(NamespaceEnum.tcm+"Medicine", DRUG);
 comment|//
-comment|//        UriRef DISEASE = new UriRef(NamespaceEnum.diseasome+"diseases");
+comment|//        IRI DISEASE = new IRI(NamespaceEnum.diseasome+"diseases");
 comment|//        mappings.put(DISEASE.getUnicodeString(), DISEASE);
 comment|//        mappings.put(NamespaceEnum.linkedct+"condition", DISEASE);
 comment|//        mappings.put(NamespaceEnum.tcm+"Disease", DISEASE);
 comment|//
-comment|//        UriRef SIDE_EFFECT = new UriRef(NamespaceEnum.sider+"side_effects");
+comment|//        IRI SIDE_EFFECT = new IRI(NamespaceEnum.sider+"side_effects");
 comment|//        mappings.put(SIDE_EFFECT.getUnicodeString(), SIDE_EFFECT);
 comment|//
-comment|//        UriRef INGREDIENT = new UriRef(NamespaceEnum.dailymed+"ingredients");
+comment|//        IRI INGREDIENT = new IRI(NamespaceEnum.dailymed+"ingredients");
 comment|//        mappings.put(INGREDIENT.getUnicodeString(), INGREDIENT);
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
 operator|=
@@ -586,7 +586,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|typeMappings
 decl_stmt|;
@@ -595,7 +595,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|unmodTypeMappings
 decl_stmt|;
@@ -606,7 +606,7 @@ name|redirectProcessingMode
 decl_stmt|;
 comment|/**      * the default DC Type      */
 specifier|private
-name|UriRef
+name|IRI
 name|defaultDcType
 decl_stmt|;
 specifier|private
@@ -702,7 +702,7 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
@@ -1027,7 +1027,7 @@ expr_stmt|;
 block|}
 comment|/**      * Removes the mapping for the parsed concept type      * @param conceptType the concept type to remove the mapping      * @return the previously mapped dc:type value or<code>null</code> if      * no mapping for the parsed concept type was present      */
 specifier|public
-name|UriRef
+name|IRI
 name|removeTypeMapping
 parameter_list|(
 name|String
@@ -1043,15 +1043,15 @@ name|conceptType
 argument_list|)
 return|;
 block|}
-comment|/**      *       * @param conceptType the type of the concept or<code>null</code> to      * add the default dc:type mapping. See also {@link #setDefaultDcType(UriRef)}      * @param dcType the dc:type for the parsed concept type      * @return the previously mapped dc:type value if an existing mapping      * was updated or<code>null</code> if a new mapping was added.      */
+comment|/**      *       * @param conceptType the type of the concept or<code>null</code> to      * add the default dc:type mapping. See also {@link #setDefaultDcType(IRI)}      * @param dcType the dc:type for the parsed concept type      * @return the previously mapped dc:type value if an existing mapping      * was updated or<code>null</code> if a new mapping was added.      */
 specifier|public
-name|UriRef
+name|IRI
 name|setTypeMapping
 parameter_list|(
 name|String
 name|conceptType
 parameter_list|,
-name|UriRef
+name|IRI
 name|dcType
 parameter_list|)
 block|{
@@ -1078,7 +1078,7 @@ literal|null
 condition|)
 block|{
 comment|//handle setting of the default dc:type value
-name|UriRef
+name|IRI
 name|oldDefault
 init|=
 name|getDefaultDcType
@@ -1109,7 +1109,7 @@ specifier|public
 name|void
 name|setDefaultDcType
 parameter_list|(
-name|UriRef
+name|IRI
 name|defaultDcType
 parameter_list|)
 block|{
@@ -1122,7 +1122,7 @@ expr_stmt|;
 block|}
 comment|/**      * The default type for Entities if no {@link #getTypeMappings() type mapping}      * is present.<code>null</code> means that no type should be set if no      * explicit mapping exists      * @return the defaultDcType      */
 specifier|public
-name|UriRef
+name|IRI
 name|getDefaultDcType
 parameter_list|()
 block|{
@@ -1162,7 +1162,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|getTypeMappings
 parameter_list|()

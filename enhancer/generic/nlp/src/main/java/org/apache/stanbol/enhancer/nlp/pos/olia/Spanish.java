@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -155,7 +155,7 @@ argument_list|(
 literal|"olia.annotationModel"
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://purl.org/olia/parole_es_cat.owl"
 argument_list|)
@@ -163,7 +163,7 @@ argument_list|)
 expr_stmt|;
 comment|// NO linking model
 comment|//        PAROLE.getProperties().put("olia.linkingModel",
-comment|//            new UriRef("http://purl.org/olia/???"));
+comment|//            new IRI("http://purl.org/olia/???"));
 name|PAROLE
 operator|.
 name|addTag

@@ -501,7 +501,7 @@ throw|throw
 operator|new
 name|IOException
 argument_list|(
-literal|"Unable to load Resource '"
+literal|"Unable to load RDFTerm '"
 operator|+
 name|resource
 operator|+

@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -56,9 +56,9 @@ specifier|private
 name|int
 name|endIdx
 decl_stmt|;
-comment|/**      * The {@link UriRef} in the {@link SiteManager} or {@link Entityhub} that this place adjectival points      * to.      */
+comment|/**      * The {@link IRI} in the {@link SiteManager} or {@link Entityhub} that this place adjectival points      * to.      */
 specifier|private
-name|UriRef
+name|IRI
 name|placeUri
 decl_stmt|;
 specifier|public
@@ -70,7 +70,7 @@ parameter_list|,
 name|int
 name|endIdx
 parameter_list|,
-name|UriRef
+name|IRI
 name|placeUri
 parameter_list|)
 block|{
@@ -94,7 +94,7 @@ name|placeUri
 expr_stmt|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getPlaceUri
 parameter_list|()
 block|{

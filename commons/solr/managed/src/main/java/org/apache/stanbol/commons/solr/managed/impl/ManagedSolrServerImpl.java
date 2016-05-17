@@ -4985,7 +4985,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Unable to open ArchiveInputStream for Resource '"
+literal|"Unable to open ArchiveInputStream for RDFTerm '"
 operator|+
 name|archive
 operator|+
@@ -5169,7 +5169,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Unable to open ArchiveInputStream for Resource '"
+literal|"Unable to open ArchiveInputStream for RDFTerm '"
 operator|+
 name|resourceName
 operator|+

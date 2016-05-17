@@ -113,11 +113,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -129,11 +129,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -335,7 +335,7 @@ decl_stmt|;
 specifier|private
 name|OntologyInputSource
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 name|src
 decl_stmt|;
@@ -389,7 +389,7 @@ name|getOrigin
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|o
 init|=
 name|src
@@ -511,7 +511,7 @@ literal|0
 argument_list|,
 name|tcp
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|size
@@ -523,7 +523,7 @@ name|before
 init|=
 name|tcp
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|size
@@ -552,7 +552,7 @@ literal|1
 argument_list|,
 name|tcp
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|size
@@ -586,7 +586,7 @@ name|before
 init|=
 name|tcManager
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|size
@@ -615,7 +615,7 @@ literal|1
 argument_list|,
 name|tcManager
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|size
@@ -734,31 +734,31 @@ comment|//
 comment|// @Test
 comment|// public void testGraphContentSource() throws Exception {
 comment|// // Make sure the tc manager has been reset
-comment|// assertEquals(1, tcManager.listTripleCollections().size());
+comment|// assertEquals(1, tcManager.listGraphs().size());
 comment|//
 comment|// OntologyProvider<TcProvider> provider = new ClerezzaOntologyProvider(tcManager,
 comment|// new OfflineConfigurationImpl(new Hashtable<String,Object>()), parser);
-comment|// int tcs = tcManager.listTripleCollections().size();
+comment|// int tcs = tcManager.listGraphs().size();
 comment|// InputStream content = TestClerezzaInputSources.class
 comment|// .getResourceAsStream("/ontologies/droppedcharacters.owl");
 comment|// OntologyInputSource<?> src = new GraphContentInputSource(content, SupportedFormat.RDF_XML,
 comment|// ontologyProvider.getStore(), parser);
 comment|//
-comment|// log.info("After input source creation, TcManager has {} graphs. ", tcManager.listTripleCollections()
+comment|// log.info("After input source creation, TcManager has {} graphs. ", tcManager.listGraphs()
 comment|// .size());
-comment|// for (UriRef name : tcManager.listTripleCollections())
+comment|// for (IRI name : tcManager.listGraphs())
 comment|// log.info("-- {} (a {})", name, tcManager.getTriples(name).getClass().getSimpleName());
-comment|// assertEquals(tcs + 1, tcManager.listTripleCollections().size());
+comment|// assertEquals(tcs + 1, tcManager.listGraphs().size());
 comment|// Space spc = new CoreSpaceImpl(TestClerezzaInputSources.class.getSimpleName(),
 comment|// IRI.create("http://stanbol.apache.org/ontologies/"), provider);
 comment|// spc.addOntology(src);
-comment|// log.info("After addition to space, TcManager has {} graphs. ", tcManager.listTripleCollections()
+comment|// log.info("After addition to space, TcManager has {} graphs. ", tcManager.listGraphs()
 comment|// .size());
 comment|//
-comment|// for (UriRef name : tcManager.listTripleCollections())
+comment|// for (IRI name : tcManager.listGraphs())
 comment|// log.info("-- {} (a {})", name, tcManager.getTriples(name).getClass().getSimpleName());
 comment|// // Adding the ontology from the same storage should not create new graphs
-comment|// assertEquals(tcs + 1, tcManager.listTripleCollections().size());
+comment|// assertEquals(tcs + 1, tcManager.listGraphs().size());
 comment|//
 comment|// }
 annotation|@
@@ -770,11 +770,11 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|Locations
 operator|.
@@ -802,7 +802,7 @@ name|parse
 argument_list|(
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|uri
 argument_list|)
@@ -819,7 +819,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|Locations
 operator|.
@@ -846,7 +846,7 @@ name|parse
 argument_list|(
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|uri
 argument_list|)
@@ -863,7 +863,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|Locations
 operator|.
@@ -890,7 +890,7 @@ name|parse
 argument_list|(
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|uri
 argument_list|)
@@ -910,7 +910,7 @@ operator|new
 name|GraphSource
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|Locations
 operator|.
@@ -934,10 +934,10 @@ name|getRootOntology
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// Set<TripleCollection> imported = gis.getImports(false);
+comment|// Set<Graph> imported = gis.getImports(false);
 comment|// // Number of stored graphs minus the importing one minus the reserved graph = imported graphs
-comment|// assertEquals(tcManager.listTripleCollections().size() - 2, imported.size());
-comment|// for (TripleCollection g : imported)
+comment|// assertEquals(tcManager.listGraphs().size() - 2, imported.size());
+comment|// for (Graph g : imported)
 comment|// assertNotNull(g);
 block|}
 block|}

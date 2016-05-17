@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -101,47 +101,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|LockableMGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|LockableMGraphWrapper
+name|IRI
 import|;
 end_import
 
@@ -194,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**   * A generic ContentItem implementation that takes the uri, main content part  * and the graph used to store the metadata as parameter.  *<p>  * This content item consisting initially of a single blob.   * Subclasses don't have to care about multi-parts aspects of content item.   * By inheriting from this class the ability for clients to add additional parts   * is ensured.   *<p>  * Even through this class does implement the full {@link ContentItem} interface  * it is marked as abstract and has only a protected constructor because it is  * not intended that users directly instantiate it. The intended usage is to  * create subclasses that instantiate ContentItmes with specific combinations  * of {@link Blob} nad {@link MGraph} implementations.<p>  * Examples are:<ul>  *<li>The {@link InMemoryContentItem} intended for in-memory  * storage of ContentItems during the stateless enhancement workflow  *<li> The {@link WebContentItem} that allows to create a ContentItem from an   * URI.  *</ul>  * TODO (rwesten): check if we want this to be an abstract class or if there are  * reasons to have a general purpose ContentItem implementation  */
+comment|/**   * A generic ContentItem implementation that takes the uri, main content part  * and the graph used to store the metadata as parameter.  *<p>  * This content item consisting initially of a single blob.   * Subclasses don't have to care about multi-parts aspects of content item.   * By inheriting from this class the ability for clients to add additional parts   * is ensured.   *<p>  * Even through this class does implement the full {@link ContentItem} interface  * it is marked as abstract and has only a protected constructor because it is  * not intended that users directly instantiate it. The intended usage is to  * create subclasses that instantiate ContentItmes with specific combinations  * of {@link Blob} nad {@link Graph} implementations.<p>  * Examples are:<ul>  *<li>The {@link InMemoryContentItem} intended for in-memory  * storage of ContentItems during the stateless enhancement workflow  *<li> The {@link WebContentItem} that allows to create a ContentItem from an   * URI.  *</ul>  * TODO (rwesten): check if we want this to be an abstract class or if there are  * reasons to have a general purpose ContentItem implementation  */
 end_comment
 
 begin_class
@@ -218,7 +182,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Object
 argument_list|>
@@ -227,7 +191,7 @@ init|=
 operator|new
 name|LinkedHashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Object
 argument_list|>
@@ -236,18 +200,18 @@ decl_stmt|;
 comment|/** 	 * The uri of the ContentItem 	 */
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 comment|/** 	 * The uri of the main content part (the {@link Blob} parsed with the constructor) 	 */
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|mainBlobUri
 decl_stmt|;
 specifier|private
 specifier|final
-name|LockableMGraph
+name|Graph
 name|metadata
 decl_stmt|;
 specifier|protected
@@ -263,13 +227,13 @@ decl_stmt|;
 specifier|protected
 name|ContentItemImpl
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|Blob
 name|main
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 block|{
@@ -329,7 +293,7 @@ operator|.
 name|mainBlobUri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uri
 operator|.
@@ -350,36 +314,12 @@ argument_list|,
 name|main
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|metadata
-operator|instanceof
-name|LockableMGraph
-condition|)
-block|{
 name|this
 operator|.
 name|metadata
 operator|=
-operator|(
-name|LockableMGraph
-operator|)
 name|metadata
 expr_stmt|;
-block|}
-else|else
-block|{
-name|this
-operator|.
-name|metadata
-operator|=
-operator|new
-name|LockableMGraphWrapper
-argument_list|(
-name|metadata
-argument_list|)
-expr_stmt|;
-block|}
 comment|//init the read and write lock
 name|this
 operator|.
@@ -411,7 +351,7 @@ argument_list|()
 expr_stmt|;
 comment|//Better parse the Blob in the Constructor than calling a public
 comment|//method on a may be not fully initialised instance
-comment|//parts.put(new UriRef(uri.getUnicodeString()+"_main"), getBlob());
+comment|//parts.put(new IRI(uri.getUnicodeString()+"_main"), getBlob());
 block|}
 annotation|@
 name|Override
@@ -428,7 +368,7 @@ name|getLock
 argument_list|()
 return|;
 block|}
-comment|/** 	 * Final getter retrieving the Blob via {@link #getPart(UriRef, Class)} 	 * with<code>{@link #getUri()}+{@link #MAIN_BLOB_SUFFIX}</code> 	 */
+comment|/** 	 * Final getter retrieving the Blob via {@link #getPart(IRI, Class)} 	 * with<code>{@link #getUri()}+{@link #MAIN_BLOB_SUFFIX}</code> 	 */
 annotation|@
 name|Override
 specifier|public
@@ -511,7 +451,7 @@ parameter_list|>
 name|T
 name|getPart
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|Class
@@ -613,7 +553,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|UriRef
+name|IRI
 name|getPartUri
 parameter_list|(
 name|int
@@ -640,7 +580,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Object
 argument_list|>
@@ -736,7 +676,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Object
 argument_list|>
@@ -833,7 +773,7 @@ specifier|public
 name|Object
 name|addPart
 parameter_list|(
-name|UriRef
+name|IRI
 name|uriRef
 parameter_list|,
 name|Object
@@ -959,7 +899,7 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
-name|UriRef
+name|IRI
 name|partUri
 init|=
 name|getPartUri
@@ -990,7 +930,7 @@ specifier|public
 name|void
 name|removePart
 parameter_list|(
-name|UriRef
+name|IRI
 name|uriRef
 parameter_list|)
 block|{
@@ -1016,7 +956,7 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
-name|UriRef
+name|IRI
 name|mainContentPartUri
 init|=
 name|parts
@@ -1085,7 +1025,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{
@@ -1096,7 +1036,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|LockableMGraph
+name|Graph
 name|getMetadata
 parameter_list|()
 block|{

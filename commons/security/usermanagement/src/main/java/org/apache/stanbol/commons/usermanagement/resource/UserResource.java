@@ -25,37 +25,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|ByteArrayInputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|IOException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|OutputStream
 import|;
 end_import
 
@@ -185,18 +155,6 @@ name|ws
 operator|.
 name|rs
 operator|.
-name|DefaultValue
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
 name|FormParam
 import|;
 end_import
@@ -282,18 +240,6 @@ operator|.
 name|rs
 operator|.
 name|QueryParam
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|ws
-operator|.
-name|rs
-operator|.
-name|WebApplicationException
 import|;
 end_import
 
@@ -405,11 +351,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -421,11 +367,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -437,9 +383,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -453,11 +399,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -469,11 +415,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -485,41 +431,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|PlainLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -533,11 +447,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -549,11 +463,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -565,29 +479,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|LockableMGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -601,11 +499,15 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
+operator|.
+name|simple
 operator|.
 name|SimpleGraph
 import|;
@@ -619,29 +521,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|SimpleMGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -826,40 +712,6 @@ operator|.
 name|utils
 operator|.
 name|GraphNode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|utils
-operator|.
-name|MGraphUtils
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|utils
-operator|.
-name|MGraphUtils
-operator|.
-name|NoSuchSubGraphException
 import|;
 end_import
 
@@ -1061,7 +913,7 @@ operator|.
 name|SYSTEM_GRAPH_FILTER
 argument_list|)
 specifier|private
-name|LockableMGraph
+name|Graph
 name|systemGraph
 decl_stmt|;
 annotation|@
@@ -1089,11 +941,11 @@ operator|new
 name|GraphNode
 argument_list|(
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 argument_list|,
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1126,7 +978,7 @@ argument_list|(
 literal|"users/{username}"
 argument_list|)
 specifier|public
-name|TripleCollection
+name|Graph
 name|getUserContext
 parameter_list|(
 annotation|@
@@ -1158,7 +1010,7 @@ block|{
 comment|// a kludge
 return|return
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 return|;
 block|}
@@ -1273,7 +1125,7 @@ operator|.
 name|TURTLE
 argument_list|)
 specifier|public
-name|TripleCollection
+name|Graph
 name|getUserRoles
 parameter_list|(
 annotation|@
@@ -1287,7 +1139,7 @@ parameter_list|)
 throws|throws
 name|UnsupportedEncodingException
 block|{
-name|MGraph
+name|Graph
 name|rolesGraph
 init|=
 name|getUserRolesGraph
@@ -1511,7 +1363,7 @@ specifier|public
 name|Response
 name|changeUser
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|inputGraph
 parameter_list|)
 block|{
@@ -1576,7 +1428,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|changeNode
 init|=
 name|changeTriple
@@ -1629,7 +1481,7 @@ name|userName
 argument_list|)
 decl_stmt|;
 comment|//     if (userTriples.hasNext()) {
-name|NonLiteral
+name|BlankNodeOrIRI
 name|userNode
 init|=
 name|userTriples
@@ -1640,11 +1492,11 @@ operator|.
 name|getSubject
 argument_list|()
 decl_stmt|;
-name|UriRef
-name|predicateUriRef
+name|IRI
+name|predicateIRI
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|inputGraph
 operator|.
@@ -1685,7 +1537,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|oldValue
 init|=
 literal|null
@@ -1708,7 +1560,7 @@ operator|.
 name|getObject
 argument_list|()
 expr_stmt|;
-comment|// Triple oldTriple = systemGraph.filter(null, predicateUriRef,
+comment|// Triple oldTriple = systemGraph.filter(null, predicateIRI,
 comment|// oldValue).next();
 name|Iterator
 argument_list|<
@@ -1722,7 +1574,7 @@ name|filter
 argument_list|(
 name|userNode
 argument_list|,
-name|predicateUriRef
+name|predicateIRI
 argument_list|,
 name|oldValue
 argument_list|)
@@ -1744,7 +1596,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-name|Resource
+name|RDFTerm
 name|newValue
 init|=
 name|inputGraph
@@ -1773,7 +1625,7 @@ name|TripleImpl
 argument_list|(
 name|userNode
 argument_list|,
-name|predicateUriRef
+name|predicateIRI
 argument_list|,
 name|newValue
 argument_list|)
@@ -2006,7 +1858,7 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|rolesGraph
 init|=
 name|getUserRolesGraph
@@ -2380,7 +2232,7 @@ argument_list|)
 name|String
 name|userName
 parameter_list|,
-name|Graph
+name|ImmutableGraph
 name|inputGraph
 parameter_list|)
 block|{
@@ -2511,7 +2363,7 @@ name|Context
 name|UriInfo
 name|uriInfo
 parameter_list|,
-name|Graph
+name|ImmutableGraph
 name|inputGraph
 parameter_list|)
 block|{
@@ -2534,7 +2386,7 @@ operator|.
 name|Agent
 argument_list|)
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|userNode
 init|=
 name|agents
@@ -2729,7 +2581,7 @@ name|String
 name|userName
 parameter_list|)
 block|{
-name|Resource
+name|RDFTerm
 name|userResource
 init|=
 name|getNamedUser
@@ -2751,7 +2603,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|userResource
 argument_list|,
@@ -2824,7 +2676,7 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
-comment|// Graph context = getNamedUser(userName).getNodeContext();
+comment|// ImmutableGraph context = getNamedUser(userName).getNodeContext();
 name|Lock
 name|writeLock
 init|=
@@ -2915,7 +2767,7 @@ specifier|public
 name|Response
 name|deleteUser
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|inputGraph
 parameter_list|)
 block|{
@@ -3343,7 +3195,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|role
 init|=
 name|roleIterator
@@ -3483,7 +3335,7 @@ name|String
 name|roleName
 parameter_list|)
 block|{
-name|Resource
+name|RDFTerm
 name|roleResource
 init|=
 name|getNamedRole
@@ -3505,7 +3357,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|roleResource
 argument_list|,
@@ -3768,11 +3620,11 @@ name|String
 name|comment
 parameter_list|)
 block|{
-name|BNode
+name|BlankNode
 name|subject
 init|=
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 decl_stmt|;
 name|GraphNode
@@ -3856,11 +3708,11 @@ argument_list|>
 name|permissions
 parameter_list|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|roleResource
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|roleNode
 operator|.
@@ -4269,7 +4121,7 @@ operator|.
 name|mbox
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"mailto:"
 operator|+
@@ -4278,11 +4130,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|NonLiteral
+name|BlankNodeOrIRI
 name|userResource
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|userNode
 operator|.
@@ -4623,7 +4475,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|permissionResource
 init|=
 name|triple
@@ -4721,7 +4573,7 @@ block|}
 block|}
 comment|/**      * Provides a graph containing Role triples associated with a given user      *      * @param userName      * @return roles graph      */
 specifier|private
-name|MGraph
+name|Graph
 name|getUserRolesGraph
 parameter_list|(
 name|String
@@ -4738,7 +4590,7 @@ argument_list|)
 decl_stmt|;
 name|Iterator
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|functionIterator
 init|=
@@ -4751,11 +4603,11 @@ operator|.
 name|has_function
 argument_list|)
 decl_stmt|;
-name|SimpleMGraph
+name|SimpleGraph
 name|rolesGraph
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 while|while
@@ -4791,7 +4643,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|functionNode
 operator|.
@@ -4825,7 +4677,7 @@ name|next
 argument_list|()
 decl_stmt|;
 comment|// rolesGraph.add(roleTriple);
-name|NonLiteral
+name|BlankNodeOrIRI
 name|roleNode
 init|=
 name|roleTriple
@@ -4873,11 +4725,11 @@ name|String
 name|newUserName
 parameter_list|)
 block|{
-name|BNode
+name|BlankNode
 name|subject
 init|=
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 decl_stmt|;
 name|GraphNode
@@ -4943,7 +4795,7 @@ specifier|private
 name|void
 name|clearRoles
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|userResource
 parameter_list|)
 block|{
@@ -4972,13 +4824,13 @@ name|Triple
 argument_list|>
 name|filterToArray
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|,
-name|UriRef
+name|IRI
 name|predicate
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|object
 parameter_list|)
 block|{
@@ -5091,11 +4943,11 @@ operator|==
 literal|null
 condition|)
 block|{
-name|UriRef
-name|roleUriRef
+name|IRI
+name|roleIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|rolesBase
 operator|+
@@ -5107,7 +4959,7 @@ operator|=
 operator|new
 name|GraphNode
 argument_list|(
-name|roleUriRef
+name|roleIRI
 argument_list|,
 name|systemGraph
 argument_list|)
@@ -5148,7 +5000,7 @@ name|SIOC
 operator|.
 name|has_function
 argument_list|,
-name|roleUriRef
+name|roleIRI
 argument_list|)
 expr_stmt|;
 block|}
@@ -5206,7 +5058,7 @@ operator|new
 name|GraphNode
 argument_list|(
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 argument_list|,
 name|systemGraph
@@ -5286,7 +5138,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|userNode
 operator|.
@@ -5327,11 +5179,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|permissionNode
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|existingPermissions
 operator|.
@@ -5425,7 +5277,7 @@ specifier|private
 name|void
 name|clearPermissions
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 parameter_list|)
 block|{
@@ -5502,11 +5354,11 @@ argument_list|(
 name|permissionTriple
 argument_list|)
 expr_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|permissionNode
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|permissionTriple
 operator|.
@@ -5607,7 +5459,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|resource
 init|=
 name|triples
@@ -5640,7 +5492,7 @@ parameter_list|(
 name|GraphNode
 name|userNode
 parameter_list|,
-name|UriRef
+name|IRI
 name|predicate
 parameter_list|,
 name|String
@@ -5658,7 +5510,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|userNode
 operator|.
@@ -5683,7 +5535,7 @@ name|Triple
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|oldObject
 init|=
 literal|null
@@ -5749,7 +5601,7 @@ block|}
 comment|// filter appears to see plain literals and xsd:strings as differerent
 comment|// so not
 comment|// userNode.addPropertyValue(predicate, newValue);
-name|PlainLiteral
+name|Literal
 name|newObject
 init|=
 operator|new
@@ -5795,10 +5647,10 @@ parameter_list|(
 name|GraphNode
 name|userNode
 parameter_list|,
-name|UriRef
+name|IRI
 name|predicate
 parameter_list|,
-name|UriRef
+name|IRI
 name|newValue
 parameter_list|)
 block|{
@@ -5813,7 +5665,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|userNode
 operator|.
@@ -5872,7 +5724,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|oldValue
 init|=
 name|triple
@@ -6035,7 +5887,7 @@ name|GraphNode
 argument_list|>
 name|getResourcesOfType
 parameter_list|(
-name|UriRef
+name|IRI
 name|type
 parameter_list|)
 block|{

@@ -49,11 +49,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -65,11 +65,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -81,13 +81,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -141,7 +145,7 @@ class|class
 name|TripleMatcherGroupImplTest
 block|{
 specifier|private
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 annotation|@
@@ -154,7 +158,7 @@ block|{
 name|graph
 operator|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 expr_stmt|;
 name|graph
@@ -287,7 +291,7 @@ name|getMatchingSubjects
 argument_list|(
 name|graph
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 argument_list|)
 operator|.
@@ -321,7 +325,7 @@ expr_stmt|;
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|actual
 init|=
@@ -331,14 +335,14 @@ name|getMatchingSubjects
 argument_list|(
 name|graph
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|expected
 init|=

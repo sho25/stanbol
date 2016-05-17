@@ -491,9 +491,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -507,9 +507,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -523,11 +523,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -539,11 +539,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -555,9 +555,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -571,11 +571,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -587,11 +587,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -605,11 +607,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1186,7 +1190,7 @@ name|Hashtable
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|textAnnotationsMap
 decl_stmt|;
@@ -1451,7 +1455,7 @@ name|ci
 argument_list|)
 decl_stmt|;
 comment|// Retrieve the existing text annotations (requires read lock)
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -1624,18 +1628,18 @@ parameter_list|)
 block|{
 name|HashMap
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|entityAnnotationMap
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1661,7 +1665,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|textAnnotationsMap
@@ -1673,7 +1677,7 @@ operator|.
 name|surfaceForm
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 name|ci
@@ -1681,7 +1685,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -1797,7 +1801,7 @@ argument_list|,
 name|ENHANCER_ENTITY_TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|it
 operator|.
@@ -1842,7 +1846,7 @@ parameter_list|,
 name|String
 name|xmlTextAnnotations
 parameter_list|,
-name|UriRef
+name|IRI
 name|contentItemUri
 parameter_list|)
 throws|throws
@@ -2379,7 +2383,7 @@ parameter_list|(
 name|String
 name|text
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -2397,7 +2401,7 @@ name|Hashtable
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -2446,11 +2450,11 @@ condition|;
 control|)
 block|{
 comment|// Triple tAnnotation = it.next();
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|it
 operator|.

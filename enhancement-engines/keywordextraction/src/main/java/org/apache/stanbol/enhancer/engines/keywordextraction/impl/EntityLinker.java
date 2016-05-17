@@ -129,11 +129,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1306,7 +1306,7 @@ comment|/**      * Retrieves all {@link EntitySearcher#getTypeField()} values of
 specifier|private
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getLinkedEntityTypes
 parameter_list|(
@@ -1383,7 +1383,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|typeMappings
 init|=
@@ -1394,14 +1394,14 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|dcTypes
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1413,7 +1413,7 @@ range|:
 name|conceptTypes
 control|)
 block|{
-name|UriRef
+name|IRI
 name|dcType
 init|=
 name|typeMappings

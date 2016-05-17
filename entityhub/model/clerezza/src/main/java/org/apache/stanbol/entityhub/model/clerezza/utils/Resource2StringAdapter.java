@@ -29,9 +29,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -61,11 +61,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Needed because UriRefs and Literals use the RDF representation for the  * toString Method  *  * @author Rupert Westenthaler  *  * @param<T>  */
+comment|/**  * Needed because IRIs and Literals use the RDF representation for the  * toString Method  *  * @author Rupert Westenthaler  *  * @param<T>  */
 end_comment
 
 begin_class
@@ -100,7 +100,7 @@ name|Resource2StringAdapter
 parameter_list|<
 name|T
 extends|extends
-name|Resource
+name|RDFTerm
 parameter_list|>
 implements|implements
 name|Adapter
@@ -143,13 +143,13 @@ if|if
 condition|(
 name|value
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 return|return
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 operator|)

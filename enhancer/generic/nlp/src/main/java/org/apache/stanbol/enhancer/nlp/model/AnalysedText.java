@@ -47,11 +47,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides access to NLP processing results of the<code>text/plain</code>  * {@link Blob} of an ContentItem. Intended to be  * {@link ContentItem#addPart(org.apache.clerezza.rdf.core.UriRef, Object) added  * as ContentPart} by using {@link #ANALYSED_TEXT_URI}.  * @see ContentItem#addPart(UriRef, Object)  */
+comment|/**  * Provides access to NLP processing results of the<code>text/plain</code>  * {@link Blob} of an ContentItem. Intended to be  * {@link ContentItem#addPart(org.apache.clerezza.commons.rdf.IRI, Object) added  * as ContentPart} by using {@link #ANALYSED_TEXT_URI}.  * @see ContentItem#addPart(IRI, Object)  */
 end_comment
 
 begin_interface
@@ -98,15 +98,15 @@ name|AnalysedText
 extends|extends
 name|Section
 block|{
-comment|/**      * The {@link UriRef} used to register the {@link AnalysedText} instance      * as {@link ContentItem#addPart(org.apache.clerezza.rdf.core.UriRef, Object)       * ContentPart} to the {@link ContentItem}      */
+comment|/**      * The {@link IRI} used to register the {@link AnalysedText} instance      * as {@link ContentItem#addPart(org.apache.clerezza.commons.rdf.IRI, Object)       * ContentPart} to the {@link ContentItem}      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ANALYSED_TEXT_URI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:stanbol.enhancer:nlp.analysedText"
 argument_list|)

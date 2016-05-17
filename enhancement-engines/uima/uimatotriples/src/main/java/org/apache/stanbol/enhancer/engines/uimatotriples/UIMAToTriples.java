@@ -123,11 +123,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -139,11 +139,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -155,11 +155,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -173,11 +175,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1202,11 +1206,11 @@ argument_list|()
 decl_stmt|;
 try|try
 block|{
-name|UriRef
-name|uimaUriRef
+name|IRI
+name|uimaIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uimaUri
 argument_list|)
@@ -1236,7 +1240,7 @@ name|ci
 operator|.
 name|getPart
 argument_list|(
-name|uimaUriRef
+name|uimaIRI
 argument_list|,
 name|FeatureStructureListHolder
 operator|.
@@ -1420,7 +1424,7 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -1432,7 +1436,7 @@ argument_list|,
 name|this
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -1481,7 +1485,7 @@ argument_list|,
 name|DC_TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uriRefStr
 argument_list|)
@@ -1695,11 +1699,11 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|UriRef
+name|IRI
 name|predicate
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|predRefStr
 argument_list|)

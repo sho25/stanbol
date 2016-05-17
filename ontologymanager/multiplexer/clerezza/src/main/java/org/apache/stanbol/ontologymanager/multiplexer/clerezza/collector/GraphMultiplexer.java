@@ -383,11 +383,111 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|Literal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|BlankNodeOrIRI
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|RDFTerm
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Triple
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|IRI
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|TripleImpl
 import|;
 end_import
 
@@ -404,120 +504,6 @@ operator|.
 name|core
 operator|.
 name|LiteralFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|NonLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Triple
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|TripleImpl
 import|;
 end_import
 
@@ -783,20 +769,6 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologyID
 import|;
 end_import
@@ -828,7 +800,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|MGraphMultiplexer
+name|GraphMultiplexer
 implements|implements
 name|Multiplexer
 block|{
@@ -885,13 +857,13 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
-name|MGraph
+name|Graph
 name|meta
 decl_stmt|;
 specifier|public
-name|MGraphMultiplexer
+name|GraphMultiplexer
 parameter_list|(
-name|MGraph
+name|Graph
 name|metaGraph
 parameter_list|)
 block|{
@@ -908,11 +880,19 @@ name|OWLOntologyID
 name|buildPublicKey
 parameter_list|(
 specifier|final
-name|UriRef
+name|IRI
 name|resource
 parameter_list|)
 block|{
 comment|// TODO desanitize?
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|oiri
 init|=
@@ -947,7 +927,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -962,17 +942,25 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|oiri
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -990,6 +978,14 @@ name|Literal
 condition|)
 name|oiri
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1042,7 +1038,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -1057,17 +1053,25 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|viri
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -1085,6 +1089,14 @@ name|Literal
 condition|)
 name|viri
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1125,9 +1137,9 @@ name|viri
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an {@link UriRef} out of an {@link OWLOntologyID}, so it can be used as an identifier. This      * does NOT necessarily correspond to the UriRef that identifies the stored graph. In order to obtain      * that, check the objects of any MAPS_TO_GRAPH assertions.      *       * @param publicKey      * @return      */
+comment|/**      * Creates an {@link IRI} out of an {@link OWLOntologyID}, so it can be used as an identifier. This      * does NOT necessarily correspond to the IRI that identifies the stored graph. In order to obtain      * that, check the objects of any MAPS_TO_GRAPH assertions.      *       * @param publicKey      * @return      */
 specifier|protected
-name|UriRef
+name|IRI
 name|buildResource
 parameter_list|(
 specifier|final
@@ -1145,12 +1157,20 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot build a UriRef resource on a null public key!"
+literal|"Cannot build a IRI resource on a null public key!"
 argument_list|)
 throw|;
-comment|// The UriRef is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional?)
+comment|// The IRI is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional?)
 comment|// XXX should versionIRI also include the version IRI set by owners? Currently not
 comment|// Remember not to sanitize logical identifiers.
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 init|=
@@ -1176,7 +1196,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot build a UriRef resource on an anonymous public key!"
+literal|"Cannot build a IRI resource on an anonymous public key!"
 argument_list|)
 throw|;
 name|log
@@ -1195,7 +1215,7 @@ argument_list|,
 name|publicKey
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|match
 init|=
 literal|null
@@ -1208,7 +1228,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|oiri
 init|=
 name|lf
@@ -1216,7 +1236,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontologyIri
 operator|.
@@ -1225,7 +1245,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|viri
 init|=
 name|versionIri
@@ -1239,7 +1259,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|versionIri
 operator|.
@@ -1274,7 +1294,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|it
@@ -1296,7 +1316,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" -- Resource : {}"
+literal|" -- RDFTerm : {}"
 argument_list|,
 name|subj
 argument_list|)
@@ -1307,7 +1327,7 @@ operator|!
 operator|(
 name|subj
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 block|{
@@ -1338,7 +1358,7 @@ operator|new
 name|TripleImpl
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|,
@@ -1359,7 +1379,7 @@ expr_stmt|;
 name|match
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 expr_stmt|;
@@ -1389,7 +1409,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|,
@@ -1423,7 +1443,7 @@ expr_stmt|;
 name|match
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 expr_stmt|;
@@ -1436,7 +1456,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Matching UriRef in graph : {}"
+literal|"Matching IRI in graph : {}"
 argument_list|,
 name|match
 argument_list|)
@@ -1449,7 +1469,7 @@ literal|null
 condition|)
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OntologyUtils
 operator|.
@@ -1468,7 +1488,7 @@ specifier|private
 name|void
 name|checkHandle
 parameter_list|(
-name|UriRef
+name|IRI
 name|candidate
 parameter_list|,
 name|Set
@@ -1541,7 +1561,7 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|rScope
 decl_stmt|;
 name|Iterator
@@ -1727,7 +1747,7 @@ operator|!
 operator|(
 name|rScope
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 throw|throw
@@ -1744,7 +1764,7 @@ name|scopeId
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|rScope
 operator|)
@@ -1932,7 +1952,7 @@ range|:
 name|aliases
 control|)
 block|{
-name|UriRef
+name|IRI
 name|dep
 init|=
 name|buildResource
@@ -2125,7 +2145,7 @@ range|:
 name|aliases
 control|)
 block|{
-name|UriRef
+name|IRI
 name|dep
 init|=
 name|buildResource
@@ -2158,7 +2178,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2182,7 +2202,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|dependencies
 operator|.
@@ -2191,7 +2211,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 argument_list|)
@@ -2227,7 +2247,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|sub
 init|=
 name|it
@@ -2251,7 +2271,7 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|dependencies
 operator|.
@@ -2260,7 +2280,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 argument_list|)
@@ -2307,7 +2327,7 @@ name|OWLOntologyID
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|dep
 init|=
 name|buildResource
@@ -2354,7 +2374,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|sub
 init|=
 name|it
@@ -2378,7 +2398,7 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|dependents
 operator|.
@@ -2387,7 +2407,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 argument_list|)
@@ -2423,7 +2443,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2447,7 +2467,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|dependents
 operator|.
@@ -2456,7 +2476,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 argument_list|)
@@ -2528,7 +2548,7 @@ range|:
 name|aliases
 control|)
 block|{
-name|UriRef
+name|IRI
 name|ontologyId
 init|=
 name|buildResource
@@ -2562,7 +2582,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|sub
 init|=
 name|it
@@ -2577,12 +2597,12 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|checkHandle
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 argument_list|,
@@ -2626,7 +2646,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2641,12 +2661,12 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|checkHandle
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 argument_list|,
@@ -2671,7 +2691,7 @@ return|;
 comment|// throw new UnsupportedOperationException("Not implemented yet.");
 block|}
 specifier|private
-name|UriRef
+name|IRI
 name|getIRIforScope
 parameter_list|(
 name|String
@@ -2681,7 +2701,7 @@ block|{
 comment|// Use the Stanbol-internal namespace, so that the whole configuration can be ported.
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_STANBOL_INTERNAL
 operator|+
@@ -2696,7 +2716,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|UriRef
+name|IRI
 name|getIRIforSession
 parameter_list|(
 name|Session
@@ -2706,7 +2726,7 @@ block|{
 comment|// Use the Stanbol-internal namespace, so that the whole configuration can be ported.
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_STANBOL_INTERNAL
 operator|+
@@ -2724,7 +2744,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|UriRef
+name|IRI
 name|getIRIforSpace
 parameter_list|(
 name|OntologySpace
@@ -2734,7 +2754,7 @@ block|{
 comment|// Use the Stanbol-internal namespace, so that the whole configuration can be ported.
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_STANBOL_INTERNAL
 operator|+
@@ -2786,7 +2806,7 @@ return|return
 name|buildPublicKey
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|stringForm
 argument_list|)
@@ -2843,7 +2863,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2858,7 +2878,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|result
 operator|.
@@ -2867,7 +2887,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 argument_list|)
@@ -2888,7 +2908,7 @@ name|OWLOntologyID
 name|publicKey
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|subj
 init|=
 name|buildResource
@@ -2921,7 +2941,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -3034,7 +3054,7 @@ name|OWLOntologyID
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ont
 init|=
 name|buildResource
@@ -3071,7 +3091,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -3086,7 +3106,7 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|aliases
 operator|.
@@ -3095,7 +3115,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 argument_list|)
@@ -3131,7 +3151,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -3146,7 +3166,7 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|aliases
 operator|.
@@ -3155,7 +3175,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 argument_list|)
@@ -3233,11 +3253,11 @@ name|shortName
 operator|+
 literal|"/"
 expr_stmt|;
-name|UriRef
+name|IRI
 name|c
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_STANBOL_INTERNAL
 operator|+
@@ -3249,10 +3269,10 @@ name|getID
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|u
 init|=
-comment|// new UriRef(prefix + "::" + keymap.buildResource(addedOntology).getUnicodeString());
+comment|// new IRI(prefix + "::" + keymap.buildResource(addedOntology).getUnicodeString());
 comment|// keymap.getMapping(addedOntology);
 name|buildResource
 argument_list|(
@@ -3386,7 +3406,7 @@ literal|"--<none>"
 argument_list|)
 expr_stmt|;
 comment|// Add both inverse triples. This graph has to be traversed efficiently, no need for reasoners.
-name|UriRef
+name|IRI
 name|predicate1
 init|=
 literal|null
@@ -3651,11 +3671,11 @@ name|shortName
 operator|+
 literal|"/"
 expr_stmt|;
-name|UriRef
+name|IRI
 name|c
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|_NS_STANBOL_INTERNAL
 operator|+
@@ -3698,7 +3718,7 @@ range|:
 name|aliases
 control|)
 block|{
-name|UriRef
+name|IRI
 name|u
 init|=
 name|buildResource
@@ -3744,7 +3764,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|UriRef
+name|IRI
 name|property
 init|=
 name|it
@@ -3818,7 +3838,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|UriRef
+name|IRI
 name|property
 init|=
 name|it
@@ -3988,7 +4008,7 @@ argument_list|,
 name|dependency
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|depy
 init|=
 name|buildResource
@@ -4027,7 +4047,7 @@ range|:
 name|aliases
 control|)
 block|{
-name|UriRef
+name|IRI
 name|dep
 init|=
 name|buildResource
@@ -4156,7 +4176,7 @@ name|scopeId
 parameter_list|)
 block|{
 specifier|final
-name|UriRef
+name|IRI
 name|sessionur
 init|=
 name|getIRIforSession
@@ -4185,14 +4205,14 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"UriRefs for scope and session cannot be null."
+literal|"IRIs for scope and session cannot be null."
 argument_list|)
 throw|;
 if|if
 condition|(
 name|meta
 operator|instanceof
-name|MGraph
+name|Graph
 condition|)
 synchronized|synchronized
 init|(
@@ -4265,7 +4285,7 @@ name|scopeId
 parameter_list|)
 block|{
 specifier|final
-name|UriRef
+name|IRI
 name|sessionur
 init|=
 name|getIRIforSession
@@ -4294,14 +4314,14 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"UriRefs for scope and session cannot be null."
+literal|"IRIs for scope and session cannot be null."
 argument_list|)
 throw|;
 if|if
 condition|(
 name|meta
 operator|instanceof
-name|MGraph
+name|Graph
 condition|)
 synchronized|synchronized
 init|(
@@ -4483,7 +4503,7 @@ argument_list|,
 name|dependency
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|dep
 init|=
 name|buildResource
@@ -4538,7 +4558,7 @@ name|scope
 parameter_list|)
 block|{
 specifier|final
-name|UriRef
+name|IRI
 name|scopeur
 init|=
 name|getIRIforScope
@@ -4550,7 +4570,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|UriRef
+name|IRI
 name|coreur
 init|=
 name|getIRIforSpace
@@ -4562,7 +4582,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|UriRef
+name|IRI
 name|custur
 init|=
 name|getIRIforSpace
@@ -4730,7 +4750,7 @@ init|=
 literal|false
 decl_stmt|;
 specifier|final
-name|UriRef
+name|IRI
 name|scopeur
 init|=
 name|getIRIforScope
@@ -4742,7 +4762,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|UriRef
+name|IRI
 name|coreur
 init|=
 name|getIRIforSpace
@@ -4754,7 +4774,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|UriRef
+name|IRI
 name|custur
 init|=
 name|getIRIforSpace
@@ -5131,7 +5151,7 @@ name|session
 parameter_list|)
 block|{
 specifier|final
-name|UriRef
+name|IRI
 name|sesur
 init|=
 name|getIRIforSession
@@ -5200,7 +5220,7 @@ init|=
 literal|false
 decl_stmt|;
 specifier|final
-name|UriRef
+name|IRI
 name|sessionur
 init|=
 name|getIRIforSession

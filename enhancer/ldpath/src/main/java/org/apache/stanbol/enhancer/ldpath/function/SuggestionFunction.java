@@ -101,11 +101,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -226,7 +226,7 @@ name|SuggestionFunction
 extends|extends
 name|SelectorFunction
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 block|{
 specifier|private
@@ -238,7 +238,7 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|>
 name|SUGGESTION_COMPARATOR
@@ -250,7 +250,7 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|>
 argument_list|()
@@ -265,7 +265,7 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|e1
 parameter_list|,
@@ -273,7 +273,7 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|e2
 parameter_list|)
@@ -383,7 +383,7 @@ specifier|private
 specifier|final
 name|IntTransformer
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|intTransformer
 decl_stmt|;
@@ -391,7 +391,7 @@ specifier|private
 specifier|final
 name|StringTransformer
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|stringTransformer
 decl_stmt|;
@@ -399,7 +399,7 @@ specifier|private
 specifier|final
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|suggestionSelector
 decl_stmt|;
@@ -407,7 +407,7 @@ specifier|private
 specifier|final
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|confidenceSelector
 decl_stmt|;
@@ -415,7 +415,7 @@ specifier|private
 specifier|final
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|resultSelector
 decl_stmt|;
@@ -427,13 +427,13 @@ name|name
 parameter_list|,
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|suggestionSelector
 parameter_list|,
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|confidenceSelector
 parameter_list|)
@@ -458,19 +458,19 @@ name|name
 parameter_list|,
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|suggestionSelector
 parameter_list|,
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|confidenceSelector
 parameter_list|,
 name|NodeSelector
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|resultSelector
 parameter_list|)
@@ -480,7 +480,7 @@ operator|=
 operator|new
 name|IntTransformer
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -489,7 +489,7 @@ operator|=
 operator|new
 name|StringTransformer
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -573,23 +573,23 @@ name|Override
 specifier|public
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|apply
 parameter_list|(
 specifier|final
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|backend
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|context
 parameter_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 modifier|...
 name|args
@@ -604,7 +604,7 @@ literal|0
 decl_stmt|;
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|contexts
 init|=
@@ -644,13 +644,13 @@ operator|=
 operator|new
 name|ArrayList
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|args
@@ -731,14 +731,14 @@ argument_list|)
 decl_stmt|;
 name|List
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -757,7 +757,7 @@ name|result
 argument_list|)
 expr_stmt|;
 comment|//        } else {
-comment|//            for(Resource context : args[0]){
+comment|//            for(RDFTerm context : args[0]){
 comment|//                processAnnotations(backend, singleton(context),
 comment|//                    limit, missingConfidenceMode, result);
 comment|//            }
@@ -774,13 +774,13 @@ parameter_list|(
 specifier|final
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|backend
 parameter_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|annotations
 parameter_list|,
@@ -793,7 +793,7 @@ name|missingConfidenceMode
 parameter_list|,
 name|List
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|result
 parameter_list|)
@@ -804,7 +804,7 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|>
 name|suggestions
@@ -816,14 +816,14 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|annotation
 range|:
 name|annotations
@@ -832,7 +832,7 @@ block|{
 comment|//NOTE: no Path Tracking support possible for selectors wrapped in functions
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|suggestion
 range|:
 name|suggestionSelector
@@ -851,7 +851,7 @@ control|)
 block|{
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|cs
 init|=
@@ -974,7 +974,7 @@ name|Entry
 argument_list|<
 name|Double
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|suggestion
 range|:
@@ -1041,13 +1041,13 @@ parameter_list|(
 specifier|final
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|backend
 parameter_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 index|[]
 name|args
@@ -1191,7 +1191,7 @@ comment|//     * @param backend
 comment|//     * @param args
 comment|//     * @return
 comment|//     */
-comment|//    private String parseParamProcessingMode(final RDFBackend<Resource> backend, Collection<Resource>[] args, int index) {
+comment|//    private String parseParamProcessingMode(final RDFBackend<RDFTerm> backend, Collection<RDFTerm>[] args, int index) {
 comment|//        final String processingMode;
 comment|//        if(args.length> index&& !args[index].isEmpty()){
 comment|//            String mode = stringTransformer.transform(backend, args[index].iterator().next());
@@ -1217,13 +1217,13 @@ parameter_list|(
 specifier|final
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|backend
 parameter_list|,
 name|Collection
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 index|[]
 name|args
@@ -1255,7 +1255,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|value
 init|=
 name|args

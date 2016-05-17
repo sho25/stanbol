@@ -97,11 +97,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -113,11 +113,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -133,7 +133,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -214,7 +214,7 @@ name|Chain
 block|{
 specifier|private
 specifier|final
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 decl_stmt|;
 specifier|private
@@ -291,11 +291,11 @@ argument_list|()
 operator|+
 literal|"Chain"
 expr_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 name|writeExecutionNode
@@ -327,14 +327,14 @@ name|executionPlan
 operator|=
 name|graph
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 expr_stmt|;
 block|}
 annotation|@
 name|Override
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws

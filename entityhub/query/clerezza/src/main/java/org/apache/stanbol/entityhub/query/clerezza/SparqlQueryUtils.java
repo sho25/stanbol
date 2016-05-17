@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -53,11 +53,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -134,30 +134,30 @@ specifier|private
 name|SparqlQueryUtils
 parameter_list|()
 block|{}
-comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#queryResult}      *       * @see ClerezzaQueryUtils#FIELD_QUERY_RESULT      */
+comment|/**      * {@link IRI} constant for {@link RdfResourceEnum#queryResult}      *       * @see ClerezzaQueryUtils#FIELD_QUERY_RESULT      */
 annotation|@
 name|Deprecated
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FIELD_QUERY_RESULT
 init|=
 name|ClerezzaQueryUtils
 operator|.
 name|FIELD_QUERY_RESULT
 decl_stmt|;
-comment|/**      * {@link UriRef} constant for {@link RdfResourceEnum#QueryResultSet}      *       * @see ClerezzaQueryUtils#FIELD_QUERY_RESULT_SET      */
+comment|/**      * {@link IRI} constant for {@link RdfResourceEnum#QueryResultSet}      *       * @see ClerezzaQueryUtils#FIELD_QUERY_RESULT_SET      */
 annotation|@
 name|Deprecated
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FIELD_QUERY_RESULT_SET
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -609,7 +609,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * @param query      * @param resultGraph      * @return      * @see ClerezzaQueryUtils#parseQueryResultsFromMGraph(TripleCollection)      */
+comment|/**      * @param query      * @param resultGraph      * @return      * @see ClerezzaQueryUtils#parseQueryResultsFromGraph(Graph)      */
 annotation|@
 name|Deprecated
 specifier|public
@@ -618,17 +618,17 @@ name|Iterator
 argument_list|<
 name|RdfRepresentation
 argument_list|>
-name|parseQueryResultsFromMGraph
+name|parseQueryResultsFromGraph
 parameter_list|(
 specifier|final
-name|TripleCollection
+name|Graph
 name|resultGraph
 parameter_list|)
 block|{
 return|return
 name|ClerezzaQueryUtils
 operator|.
-name|parseQueryResultsFromMGraph
+name|parseQueryResultsFromGraph
 argument_list|(
 name|resultGraph
 argument_list|)

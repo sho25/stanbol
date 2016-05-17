@@ -59,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -75,11 +75,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -91,11 +91,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -107,9 +107,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -123,11 +123,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -139,11 +139,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -916,7 +918,7 @@ name|HashMap
 argument_list|<
 name|BlankNode
 argument_list|,
-name|BNode
+name|BlankNode
 argument_list|>
 name|blankNodeMap
 init|=
@@ -925,7 +927,7 @@ name|HashMap
 argument_list|<
 name|BlankNode
 argument_list|,
-name|BNode
+name|BlankNode
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -956,11 +958,11 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|MetaxaEngine
 operator|.
@@ -974,11 +976,11 @@ argument_list|,
 name|blankNodeMap
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|MetaxaEngine
 operator|.
@@ -992,7 +994,7 @@ argument_list|,
 name|blankNodeMap
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|object
 init|=
 name|MetaxaEngine

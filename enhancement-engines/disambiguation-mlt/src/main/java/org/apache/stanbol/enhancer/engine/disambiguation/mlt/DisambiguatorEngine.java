@@ -227,11 +227,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -243,9 +243,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -259,11 +259,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -275,11 +275,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1182,7 +1184,7 @@ name|textContent
 decl_stmt|;
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1252,7 +1254,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -1809,11 +1811,11 @@ comment|// by the #confidenceWeight. So if not a single suggestion do match with
 comment|// the disambiguation result the ambiguation is kept but the overall
 comment|// fise:confidence values are reduced by #confidenceWeight (ensured to be
 comment|// less than 1)
-comment|// protected List<Triple> unchangedConfidences(List<UriRef> subsumed,
-comment|// MGraph graph,
+comment|// protected List<Triple> unchangedConfidences(List<IRI> subsumed,
+comment|// Graph graph,
 comment|// List<Triple> loseConfidence) {
 comment|// for (int i = 0; i< subsumed.size(); i++) {
-comment|// UriRef uri = subsumed.get(i);
+comment|// IRI uri = subsumed.get(i);
 comment|// Iterator<Triple> confidenceTriple = graph.filter(uri, ENHANCER_CONFIDENCE, null);
 comment|// while (confidenceTriple.hasNext()) {
 comment|// loseConfidence.remove(confidenceTriple.next());
@@ -1964,11 +1966,11 @@ operator|=
 name|score
 expr_stmt|;
 block|}
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|guess
 operator|.
@@ -2170,13 +2172,13 @@ comment|/*      * Checks if there is any common elements amongst the ambiguation
 comment|// NOTE (rwesten): now done as part of the disambiguateSuggestions(..)
 comment|// method.
 comment|// protected boolean intersectionCheck(List<Suggestion> matches,
-comment|// List<UriRef> subsumed,
-comment|// MGraph graph,
+comment|// List<IRI> subsumed,
+comment|// Graph graph,
 comment|// String contentLangauge) {
 comment|// for (int i = 0; i< subsumed.size(); i++) {
-comment|// UriRef uri = subsumed.get(i);
+comment|// IRI uri = subsumed.get(i);
 comment|//
-comment|// UriRef uri1 = EnhancementEngineHelper.getReference(graph, uri, new UriRef(NamespaceEnum.fise
+comment|// IRI uri1 = EnhancementEngineHelper.getReference(graph, uri, new IRI(NamespaceEnum.fise
 comment|// + "entity-reference"));
 comment|//
 comment|// String selectedText = EnhancementEngineHelper.getString(graph, uri, ENHANCER_ENTITY_LABEL);
@@ -2523,16 +2525,16 @@ comment|// NOTE (rwesten): intersection is calculated as part of the disambiguat
 comment|// method. Results are stored in the Suggestions (member of SavedEntiy) and
 comment|// than written back to the EnhancementStructure in a separate step
 comment|// protected List<Triple> intersection(List<Suggestion> matches,
-comment|// List<UriRef> subsumed,
-comment|// MGraph graph,
+comment|// List<IRI> subsumed,
+comment|// Graph graph,
 comment|// List<Triple> gainConfidence,
 comment|// String contentLangauge) {
 comment|//
 comment|// for (int i = 0; i< subsumed.size(); i++) {
 comment|// boolean matchFound = false;
-comment|// UriRef uri = subsumed.get(i);
+comment|// IRI uri = subsumed.get(i);
 comment|//
-comment|// UriRef uri1 = EnhancementEngineHelper.getReference(graph, uri, new UriRef(NamespaceEnum.fise
+comment|// IRI uri1 = EnhancementEngineHelper.getReference(graph, uri, new IRI(NamespaceEnum.fise
 comment|// + "entity-reference"));
 comment|//
 comment|// for (int j = 0; j< matches.size(); j++) {
@@ -2543,8 +2545,8 @@ comment|// if (suggestName != null&& uri1 != null
 comment|//&& suggestName.compareToIgnoreCase(uri1.getUnicodeString()) == 0) {
 comment|// Triple confidenceTriple = new TripleImpl(uri, ENHANCER_CONFIDENCE, LiteralFactory
 comment|// .getInstance().createTypedLiteral(suggestion.getScore()));
-comment|// Triple contributorTriple = new TripleImpl((UriRef) confidenceTriple.getSubject(),
-comment|// new UriRef(NamespaceEnum.dc + "contributor"), LiteralFactory.getInstance()
+comment|// Triple contributorTriple = new TripleImpl((IRI) confidenceTriple.getSubject(),
+comment|// new IRI(NamespaceEnum.dc + "contributor"), LiteralFactory.getInstance()
 comment|// .createTypedLiteral(this.getClass().getName()));
 comment|// gainConfidence.add(confidenceTriple);
 comment|// gainConfidence.add(contributorTriple);
@@ -2555,7 +2557,7 @@ comment|//
 comment|// if (!matchFound) {
 comment|// Triple confidenceTriple = new TripleImpl(uri, ENHANCER_CONFIDENCE, LiteralFactory
 comment|// .getInstance().createTypedLiteral(0.0));
-comment|// Triple contributorTriple = new TripleImpl((UriRef) confidenceTriple.getSubject(), new UriRef(
+comment|// Triple contributorTriple = new TripleImpl((IRI) confidenceTriple.getSubject(), new IRI(
 comment|// NamespaceEnum.dc + "contributor"), LiteralFactory.getInstance().createTypedLiteral(
 comment|// this.getClass().getName()));
 comment|// gainConfidence.add(confidenceTriple);
@@ -2570,7 +2572,7 @@ specifier|protected
 name|void
 name|removeOldConfidenceFromGraph
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|List
@@ -2622,7 +2624,7 @@ specifier|protected
 name|void
 name|applyDisambiguationResults
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|DisambiguationData
@@ -2802,24 +2804,24 @@ block|}
 comment|/**      * This creates a 'clone' of the fise:EntityAnnotation where the original does no longer have a      * dc:relation to the parsed fise:TextAnnotation and the created clone does only have a dc:relation to the      * parsed fise:TextAnnotation.      *<p>      * This is required by disambiguation because other engines typically only create a single      * fise:EntityAnnotation instance if several fise:TextAnnotation do have the same fise:selected-text      * values. So for a text that multiple times mentions the same Entity (e.g. "Paris") there will be      * multiple fise:TextAnnotations selecting the different mentions of that Entity, but there will be only a      * single set of suggestions - fise:EntityAnnotations (e.g. "Paris, France" and "Paris, Texas"). Now lets      * assume a text like      *       *<pre>      *     Paris is the capital of France and it is worth a visit for sure. But      *     one can also visit Paris without leaving the United States as there      *     is also a city with the same name in Texas.      *</pre>      *       * Entity Disambiguation need to be able to have different fise:confidence values for the first and second      * mention of Paris and this is only possible of the fise:TextAnnotations of those mentions do NOT refer      * to the same set of fise:EntityAnnotations.      *<p>      * This methods accomplished exactly that as it      *<ul>      *<li>creates a clone of a fise:EntityAnnotation      *<li>removes the dc:relation link to the 2nd mention of Paris from the original      *<li>only adds the dc:relation of the end mention to the clone      *</ul>      * So in the end you will have two fise:EntityAnnotation      *<ul>      *<li>the original fise:EntityAnnotation with dc:relation to all fise:TextAnnotations other than the 2nd      * mention (the one this method was called for)      *<li>the cloned fise:EntityAnnnotation with a dc:relation to the 2nd mention.      *</ul>      *       * @param graph      * @param entityAnnotation      * @param textAnnotation      * @return      */
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|cloneTextAnnotation
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|entityAnnotation
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|copy
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:enhancement-"
 operator|+

@@ -87,11 +87,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1611,7 +1611,7 @@ operator|new
 name|RuleImpl
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ruleStorePrefix
 operator|+

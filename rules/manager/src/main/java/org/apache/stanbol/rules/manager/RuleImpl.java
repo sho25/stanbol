@@ -25,11 +25,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -119,7 +119,7 @@ implements|implements
 name|Rule
 block|{
 specifier|private
-name|UriRef
+name|IRI
 name|ruleID
 decl_stmt|;
 specifier|private
@@ -149,7 +149,7 @@ decl_stmt|;
 specifier|public
 name|RuleImpl
 parameter_list|(
-name|UriRef
+name|IRI
 name|ruleID
 parameter_list|,
 name|String
@@ -575,7 +575,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|UriRef
+name|IRI
 name|getRuleID
 parameter_list|()
 block|{

@@ -57,11 +57,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -83,11 +83,11 @@ comment|/**      * Type used for all enhancement created by Stanbol Enhancer    
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_ENHANCEMENT
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -100,11 +100,11 @@ comment|/**      * Type used for annotations on Text created by Stanbol Enhancer
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_TEXTANNOTATION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -117,11 +117,11 @@ comment|/**      * Type used for annotations of named entities. This type is int
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_ENTITYANNOTATION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -134,11 +134,11 @@ comment|/**      * Type used for annotations documents. This type is intended   
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_TOPICANNOTATION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -153,11 +153,11 @@ name|Deprecated
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_EXTRACTION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://iks-project.eu/ns/enhancer/extraction/Extraction"
 argument_list|)
@@ -168,11 +168,11 @@ name|Deprecated
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ANNOTEA_ANNOTATION
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.w3.org/2000/10/annotation-ns#Annotation"
 argument_list|)
@@ -181,11 +181,11 @@ comment|/**      * To be used to type the URI of the content item being annotate
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FOAF_DOCUMENT
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -198,11 +198,11 @@ comment|/**      * Used to indicate, that an EntityAnnotation describes an Categ
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|ENHANCER_CATEGORY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -215,11 +215,11 @@ comment|/**      * DC terms Linguistic System is the type used as Range for the 
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DCTERMS_LINGUISTIC_SYSTEM
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -232,11 +232,11 @@ comment|/**      * The confidence level of {@link #ENHANCER_ENHANCEMENT}s      *
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|FNHANCER_CONFIDENCE_LEVEL
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -261,7 +261,7 @@ name|uncertain
 block|;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 specifier|private
@@ -283,7 +283,7 @@ expr_stmt|;
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -316,7 +316,7 @@ return|;
 block|}
 block|;
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{
@@ -329,7 +329,7 @@ specifier|static
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|CONFIDENCE_LEVEL_ENUM
 argument_list|>
@@ -350,7 +350,7 @@ static|static
 block|{
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|CONFIDENCE_LEVEL_ENUM
 argument_list|>
@@ -359,7 +359,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|TechnicalClasses
 operator|.
@@ -441,13 +441,13 @@ name|us
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Getter for the fise:ConfidenceLevel instance for the {@link UriRef}          * @param uri the URI          * @return the fise:ConfidenceLevel instance or<code>null</code> if the          * parsed URI is not one of the four defined instances          */
+comment|/**          * Getter for the fise:ConfidenceLevel instance for the {@link IRI}          * @param uri the URI          * @return the fise:ConfidenceLevel instance or<code>null</code> if the          * parsed URI is not one of the four defined instances          */
 specifier|public
 specifier|static
 name|CONFIDENCE_LEVEL_ENUM
 name|getConfidenceLevel
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|)
 block|{
@@ -460,7 +460,7 @@ name|uri
 argument_list|)
 return|;
 block|}
-comment|/**          * Getter for the fise:ConfidenceLevel instance for the {@link UriRef}          * @param uri the URI string          * @return the fise:ConfidenceLevel instance or<code>null</code> if the          * parsed URI is not one of the four defined instances          */
+comment|/**          * Getter for the fise:ConfidenceLevel instance for the {@link IRI}          * @param uri the URI string          * @return the fise:ConfidenceLevel instance or<code>null</code> if the          * parsed URI is not one of the four defined instances          */
 specifier|public
 specifier|static
 name|CONFIDENCE_LEVEL_ENUM

@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -101,11 +101,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -202,7 +202,7 @@ argument_list|)
 decl_stmt|;
 specifier|private
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|entity
 decl_stmt|;
 specifier|private
@@ -212,19 +212,19 @@ name|name
 decl_stmt|;
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|type
 decl_stmt|;
 specifier|private
 name|NamedEntity
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|entity
 parameter_list|,
 name|String
 name|name
 parameter_list|,
-name|UriRef
+name|IRI
 name|type
 parameter_list|)
 block|{
@@ -250,7 +250,7 @@ block|}
 comment|/**      * Getter for the Node providing the information about that entity      * @return the entity      */
 specifier|public
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|getEntity
 parameter_list|()
 block|{
@@ -272,7 +272,7 @@ block|}
 comment|/**      * Getter for the type      * @return the type      */
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getType
 parameter_list|()
 block|{
@@ -352,10 +352,10 @@ specifier|static
 name|NamedEntity
 name|createFromTextAnnotation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|textAnnotation
 parameter_list|)
 block|{
@@ -461,7 +461,7 @@ return|return
 literal|null
 return|;
 block|}
-name|UriRef
+name|IRI
 name|type
 init|=
 name|EnhancementEngineHelper

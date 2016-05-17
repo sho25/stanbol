@@ -121,11 +121,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -137,9 +137,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -1813,7 +1813,7 @@ literal|"active. Please configure a Chain or enable the default chain"
 argument_list|)
 throw|;
 block|}
-name|Graph
+name|ImmutableGraph
 name|ep
 decl_stmt|;
 try|try

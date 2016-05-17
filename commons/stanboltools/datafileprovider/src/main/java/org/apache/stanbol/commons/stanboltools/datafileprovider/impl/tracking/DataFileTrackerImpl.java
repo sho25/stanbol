@@ -968,7 +968,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|//maybe this was the first added Resource
+comment|//maybe this was the first added RDFTerm
 name|startTracking
 argument_list|()
 expr_stmt|;

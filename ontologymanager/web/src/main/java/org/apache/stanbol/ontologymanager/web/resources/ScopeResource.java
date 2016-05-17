@@ -811,11 +811,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -827,11 +827,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -1661,7 +1661,7 @@ operator|+
 literal|"ontonet/ontology/"
 argument_list|)
 decl_stmt|;
-comment|// Export to Clerezza Graph, which can be rendered as JSON-LD.
+comment|// Export to Clerezza ImmutableGraph, which can be rendered as JSON-LD.
 name|ResponseBuilder
 name|rb
 init|=
@@ -1673,7 +1673,7 @@ name|scope
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -1794,7 +1794,7 @@ name|scope
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -2154,14 +2154,14 @@ operator|+
 literal|"ontonet/ontology/"
 argument_list|)
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|o
 init|=
 name|space
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -2473,14 +2473,14 @@ operator|+
 literal|"ontonet/ontology/"
 argument_list|)
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|o
 init|=
 name|space
 operator|.
 name|export
 argument_list|(
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -3108,7 +3108,7 @@ operator|+
 literal|"ontonet/ontology/"
 argument_list|)
 decl_stmt|;
-name|Graph
+name|ImmutableGraph
 name|o
 init|=
 literal|null
@@ -3153,7 +3153,7 @@ name|getOntology
 argument_list|(
 name|id
 argument_list|,
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -3193,7 +3193,7 @@ name|getOntology
 argument_list|(
 name|id
 argument_list|,
-name|Graph
+name|ImmutableGraph
 operator|.
 name|class
 argument_list|,
@@ -5772,7 +5772,7 @@ if|if
 condition|(
 name|o
 operator|instanceof
-name|TripleCollection
+name|Graph
 condition|)
 name|src
 operator|=
@@ -5780,7 +5780,7 @@ operator|new
 name|GraphSource
 argument_list|(
 operator|(
-name|TripleCollection
+name|Graph
 operator|)
 name|o
 argument_list|)

@@ -159,11 +159,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -175,11 +175,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -191,11 +191,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -207,11 +207,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -223,9 +223,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -239,11 +239,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -255,11 +255,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -273,13 +275,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -291,11 +297,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -944,11 +952,11 @@ comment|/**      * Plain text content of a content item.       */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|NIE_PLAINTEXTCONTENT
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1660,7 +1668,7 @@ name|unlock
 argument_list|()
 expr_stmt|;
 block|}
-comment|// Convert the RDF2go model to a Clerezza Graph and also extract
+comment|// Convert the RDF2go model to a Clerezza ImmutableGraph and also extract
 comment|// the extracted plain text from the model
 if|if
 condition|(
@@ -1730,7 +1738,7 @@ name|HashMap
 argument_list|<
 name|BlankNode
 argument_list|,
-name|BNode
+name|BlankNode
 argument_list|>
 name|blankNodeMap
 init|=
@@ -1739,7 +1747,7 @@ name|HashMap
 argument_list|<
 name|BlankNode
 argument_list|,
-name|BNode
+name|BlankNode
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1787,11 +1795,11 @@ decl_stmt|;
 comment|//used to detect if some text was extracted
 try|try
 block|{
-name|MGraph
+name|Graph
 name|g
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 comment|//first add to a temporary graph
@@ -1914,11 +1922,11 @@ condition|(
 name|includeText
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|asClerezzaResource
 argument_list|(
@@ -1930,11 +1938,11 @@ argument_list|,
 name|blankNodeMap
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|asClerezzaResource
 argument_list|(
@@ -1946,7 +1954,7 @@ argument_list|,
 name|blankNodeMap
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|object
 init|=
 name|asClerezzaResource
@@ -1980,11 +1988,11 @@ block|}
 else|else
 block|{
 comment|//add metadata to the metadata of the contentItem
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subject
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|asClerezzaResource
 argument_list|(
@@ -1996,11 +2004,11 @@ argument_list|,
 name|blankNodeMap
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|asClerezzaResource
 argument_list|(
@@ -2012,7 +2020,7 @@ argument_list|,
 name|blankNodeMap
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|object
 init|=
 name|asClerezzaResource
@@ -2145,11 +2153,11 @@ name|textExtracted
 condition|)
 block|{
 comment|//add plain text to the content item
-name|UriRef
+name|IRI
 name|blobUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:metaxa:plain-text:"
 operator|+
@@ -2174,13 +2182,13 @@ block|}
 end_function
 
 begin_comment
-comment|/**      * Converts the given RDF2Go node into a corresponding Clerezza object.      *      * @param node a {@link Node}      * @return a {@link Resource}      */
+comment|/**      * Converts the given RDF2Go node into a corresponding Clerezza object.      *      * @param node a {@link Node}      * @return a {@link RDFTerm}      */
 end_comment
 
 begin_function
 specifier|public
 specifier|static
-name|Resource
+name|RDFTerm
 name|asClerezzaResource
 parameter_list|(
 name|Node
@@ -2190,7 +2198,7 @@ name|HashMap
 argument_list|<
 name|BlankNode
 argument_list|,
-name|BNode
+name|BlankNode
 argument_list|>
 name|blankNodeMap
 parameter_list|)
@@ -2204,7 +2212,7 @@ condition|)
 block|{
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|node
 operator|.
@@ -2224,7 +2232,7 @@ operator|instanceof
 name|BlankNode
 condition|)
 block|{
-name|BNode
+name|BlankNode
 name|bNode
 init|=
 name|blankNodeMap
@@ -2244,7 +2252,7 @@ block|{
 name|bNode
 operator|=
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 expr_stmt|;
 name|blankNodeMap
@@ -2290,7 +2298,7 @@ name|getValue
 argument_list|()
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|dtl
 operator|.

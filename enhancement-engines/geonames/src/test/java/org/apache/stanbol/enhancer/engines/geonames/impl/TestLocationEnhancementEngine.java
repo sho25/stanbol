@@ -235,11 +235,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -251,11 +251,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -684,7 +684,7 @@ operator|.
 name|createContentItem
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -711,7 +711,7 @@ parameter_list|,
 name|String
 name|context
 parameter_list|,
-name|UriRef
+name|IRI
 name|type
 parameter_list|)
 block|{
@@ -768,7 +768,7 @@ operator|.
 name|getProxy
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:org.apache:stanbol.enhancer:test:text-annotation:person"
 argument_list|)
@@ -783,7 +783,7 @@ operator|.
 name|setCreator
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"urn:org.apache:stanbol.enhancer:test:dummyEngine"
 argument_list|)
@@ -962,18 +962,18 @@ return|return;
 block|}
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;

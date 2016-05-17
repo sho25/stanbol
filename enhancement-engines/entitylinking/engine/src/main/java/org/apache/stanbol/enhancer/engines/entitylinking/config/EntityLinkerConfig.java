@@ -149,11 +149,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -711,11 +711,11 @@ comment|/**      * Default value for {@link #getNameField()} (rdfs:label)      *
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DEFAULT_NAME_FIELD
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.w3.org/2000/01/rdf-schema#label"
 argument_list|)
@@ -724,11 +724,11 @@ comment|/**      * Default value for {@link #getTypeField()} (rdf:type)      */
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DEFAULT_TYPE_FIELD
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 argument_list|)
@@ -737,11 +737,11 @@ comment|/**      * Default value for {@link #getRedirectField()} (rdf:seeAlso)  
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|DEFAULT_REDIRECT_FIELD
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.w3.org/2000/01/rdf-schema#seeAlso"
 argument_list|)
@@ -812,9 +812,9 @@ specifier|static
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
 decl_stmt|;
@@ -823,18 +823,18 @@ block|{
 comment|//the default mappings for the three types used by the Stanbol Enhancement Structure
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|mappings
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -856,7 +856,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://dbpedia.org/ontology/Newspaper"
 argument_list|)
@@ -871,7 +871,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://schema.org/Organization"
 argument_list|)
@@ -900,7 +900,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://xmlns.com/foaf/0.1/Person"
 argument_list|)
@@ -915,7 +915,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://schema.org/Person"
 argument_list|)
@@ -943,7 +943,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://schema.org/Place"
 argument_list|)
@@ -958,7 +958,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.opengis.net/gml/_Feature"
 argument_list|)
@@ -981,22 +981,22 @@ operator|.
 name|SKOS_CONCEPT
 argument_list|)
 expr_stmt|;
-comment|//        UriRef DRUG = new UriRef(NamespaceEnum.drugbank+"drugs");
+comment|//        IRI DRUG = new IRI(NamespaceEnum.drugbank+"drugs");
 comment|//        mappings.put(DRUG.getUnicodeString(), DRUG);
 comment|//        mappings.put(NamespaceEnum.dbpediaOnt+"Drug", DRUG);
 comment|//        mappings.put(NamespaceEnum.dailymed+"drugs", DRUG);
 comment|//        mappings.put(NamespaceEnum.sider+"drugs", DRUG);
 comment|//        mappings.put(NamespaceEnum.tcm+"Medicine", DRUG);
 comment|//
-comment|//        UriRef DISEASE = new UriRef(NamespaceEnum.diseasome+"diseases");
+comment|//        IRI DISEASE = new IRI(NamespaceEnum.diseasome+"diseases");
 comment|//        mappings.put(DISEASE.getUnicodeString(), DISEASE);
 comment|//        mappings.put(NamespaceEnum.linkedct+"condition", DISEASE);
 comment|//        mappings.put(NamespaceEnum.tcm+"Disease", DISEASE);
 comment|//
-comment|//        UriRef SIDE_EFFECT = new UriRef(NamespaceEnum.sider+"side_effects");
+comment|//        IRI SIDE_EFFECT = new IRI(NamespaceEnum.sider+"side_effects");
 comment|//        mappings.put(SIDE_EFFECT.getUnicodeString(), SIDE_EFFECT);
 comment|//
-comment|//        UriRef INGREDIENT = new UriRef(NamespaceEnum.dailymed+"ingredients");
+comment|//        IRI INGREDIENT = new IRI(NamespaceEnum.dailymed+"ingredients");
 comment|//        mappings.put(INGREDIENT.getUnicodeString(), INGREDIENT);
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
 operator|=
@@ -1082,18 +1082,18 @@ comment|/**      * Holds the mappings of rdf:type used by concepts to dc:type va
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|typeMappings
 decl_stmt|;
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|unmodTypeMappings
 decl_stmt|;
@@ -1104,25 +1104,25 @@ name|redirectProcessingMode
 decl_stmt|;
 comment|/**      * the default DC Type      */
 specifier|private
-name|UriRef
+name|IRI
 name|defaultDcType
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|nameField
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|redirectField
 decl_stmt|;
 specifier|private
-name|UriRef
+name|IRI
 name|typeField
 decl_stmt|;
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -1131,7 +1131,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -1140,7 +1140,7 @@ decl_stmt|;
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -1149,7 +1149,7 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -1164,21 +1164,21 @@ decl_stmt|;
 specifier|private
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|dereferencedFields
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|private
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|__selectedFields
 decl_stmt|;
@@ -1315,9 +1315,9 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|DEFAULT_ENTITY_TYPE_MAPPINGS
@@ -1481,7 +1481,7 @@ operator|.
 name|setNameField
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -1603,7 +1603,7 @@ operator|.
 name|setTypeField
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -1663,7 +1663,7 @@ operator|.
 name|setRedirectField
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -3217,11 +3217,11 @@ continue|continue
 name|configs
 continue|;
 block|}
-name|UriRef
+name|IRI
 name|targetUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|targetType
 argument_list|)
@@ -3267,7 +3267,7 @@ argument_list|(
 name|sourceType
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|old
 init|=
 name|linkerConfig
@@ -3501,7 +3501,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -3566,7 +3566,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -3615,7 +3615,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -4183,11 +4183,11 @@ literal|")!"
 argument_list|)
 throw|;
 block|}
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|getFullName
 argument_list|(
@@ -4397,7 +4397,7 @@ end_comment
 begin_function
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getNameField
 parameter_list|()
 block|{
@@ -4417,7 +4417,7 @@ specifier|final
 name|void
 name|setNameField
 parameter_list|(
-name|UriRef
+name|IRI
 name|nameField
 parameter_list|)
 block|{
@@ -4443,7 +4443,7 @@ specifier|public
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getDereferencedFields
 parameter_list|()
@@ -4461,7 +4461,7 @@ end_comment
 begin_function
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getRedirectField
 parameter_list|()
 block|{
@@ -4481,7 +4481,7 @@ specifier|final
 name|void
 name|setRedirectField
 parameter_list|(
-name|UriRef
+name|IRI
 name|redirectField
 parameter_list|)
 block|{
@@ -4505,7 +4505,7 @@ end_comment
 begin_function
 specifier|public
 specifier|final
-name|UriRef
+name|IRI
 name|getTypeField
 parameter_list|()
 block|{
@@ -4525,7 +4525,7 @@ specifier|final
 name|void
 name|setTypeField
 parameter_list|(
-name|UriRef
+name|IRI
 name|typeField
 parameter_list|)
 block|{
@@ -4773,22 +4773,22 @@ block|}
 end_function
 
 begin_comment
-comment|/* REMOVED because getTypemappings.remove(conceptType) can be used anyway      * Removes the mapping for the parsed concept type      * @param conceptType the concept type to remove the mapping      * @return the previously mapped dc:type value or<code>null</code> if      * no mapping for the parsed concept type was present     public UriRef removeTypeMapping(UriRef conceptType){         return typeMappings.remove(conceptType);     }      */
+comment|/* REMOVED because getTypemappings.remove(conceptType) can be used anyway      * Removes the mapping for the parsed concept type      * @param conceptType the concept type to remove the mapping      * @return the previously mapped dc:type value or<code>null</code> if      * no mapping for the parsed concept type was present     public IRI removeTypeMapping(IRI conceptType){         return typeMappings.remove(conceptType);     }      */
 end_comment
 
 begin_comment
-comment|/**      *       * @param conceptType the type of the concept or<code>null</code> to      * add the default dc:type mapping. See also {@link #setDefaultDcType(UriRef)}      * @param dcType the dc:type for the parsed concept type      * @return the previously mapped dc:type value if an existing mapping      * was updated or<code>null</code> if a new mapping was added.      */
+comment|/**      *       * @param conceptType the type of the concept or<code>null</code> to      * add the default dc:type mapping. See also {@link #setDefaultDcType(IRI)}      * @param dcType the dc:type for the parsed concept type      * @return the previously mapped dc:type value if an existing mapping      * was updated or<code>null</code> if a new mapping was added.      */
 end_comment
 
 begin_function
 specifier|public
-name|UriRef
+name|IRI
 name|setTypeMapping
 parameter_list|(
 name|String
 name|conceptType
 parameter_list|,
-name|UriRef
+name|IRI
 name|dcType
 parameter_list|)
 block|{
@@ -4811,7 +4811,7 @@ condition|?
 literal|null
 else|:
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|conceptType
 argument_list|)
@@ -4828,7 +4828,7 @@ literal|null
 condition|)
 block|{
 comment|//handle setting of the default dc:type value
-name|UriRef
+name|IRI
 name|oldDefault
 init|=
 name|getDefaultDcType
@@ -4849,7 +4849,7 @@ operator|.
 name|put
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|conceptType
 argument_list|)
@@ -4870,7 +4870,7 @@ specifier|public
 name|void
 name|setDefaultDcType
 parameter_list|(
-name|UriRef
+name|IRI
 name|defaultDcType
 parameter_list|)
 block|{
@@ -4889,7 +4889,7 @@ end_comment
 
 begin_function
 specifier|public
-name|UriRef
+name|IRI
 name|getDefaultDcType
 parameter_list|()
 block|{
@@ -4949,9 +4949,9 @@ begin_function
 specifier|public
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|getTypeMappings
 parameter_list|()
@@ -5607,7 +5607,7 @@ begin_function
 specifier|public
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getSelectedFields
 parameter_list|()
@@ -5621,14 +5621,14 @@ condition|)
 block|{
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|fields
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -5801,7 +5801,7 @@ specifier|final
 name|void
 name|addBlacklistType
 parameter_list|(
-name|UriRef
+name|IRI
 name|type
 parameter_list|,
 name|Integer
@@ -5842,7 +5842,7 @@ specifier|final
 name|void
 name|addWhitelistType
 parameter_list|(
-name|UriRef
+name|IRI
 name|type
 parameter_list|,
 name|Integer
@@ -5952,7 +5952,7 @@ specifier|public
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>
@@ -5974,7 +5974,7 @@ specifier|public
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Integer
 argument_list|>

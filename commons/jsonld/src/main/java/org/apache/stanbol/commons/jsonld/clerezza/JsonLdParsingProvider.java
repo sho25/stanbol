@@ -47,11 +47,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -63,11 +63,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -172,20 +172,6 @@ operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|github
-operator|.
-name|jsonldjava
-operator|.
-name|clerezza
-operator|.
-name|ClerezzaTripleCallback
 import|;
 end_import
 
@@ -281,7 +267,7 @@ specifier|public
 name|void
 name|parse
 parameter_list|(
-name|MGraph
+name|Graph
 name|target
 parameter_list|,
 name|InputStream
@@ -290,11 +276,11 @@ parameter_list|,
 name|String
 name|formatIdentifier
 parameter_list|,
-name|UriRef
+name|IRI
 name|baseUri
 parameter_list|)
 block|{
-comment|//The callback will add parsed triples to the target MGraph
+comment|//The callback will add parsed triples to the target Graph
 name|ClerezzaTripleCallback
 name|ctc
 init|=
@@ -304,7 +290,7 @@ argument_list|()
 decl_stmt|;
 name|ctc
 operator|.
-name|setMGraph
+name|setGraph
 argument_list|(
 name|target
 argument_list|)

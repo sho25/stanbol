@@ -237,9 +237,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -253,9 +253,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -285,11 +285,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -301,11 +301,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -317,11 +317,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -335,11 +337,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1005,11 +1009,11 @@ comment|// TODO: check if it is OK to define new properties in the FISE namespac
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|hasLemmaForm
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://fise.iks-project.eu/ontology/hasLemmaForm"
 argument_list|)
@@ -1515,7 +1519,7 @@ throw|;
 block|}
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1632,7 +1636,7 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -1691,7 +1695,7 @@ parameter_list|,
 name|String
 name|language
 parameter_list|,
-name|MGraph
+name|Graph
 name|g
 parameter_list|)
 throws|throws
@@ -1823,7 +1827,7 @@ name|mFeatures
 control|)
 block|{
 comment|// Create a text annotation for each interpretation produced by the morphological analyzer
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -1997,7 +2001,7 @@ parameter_list|,
 name|String
 name|language
 parameter_list|,
-name|MGraph
+name|Graph
 name|g
 parameter_list|)
 throws|throws
@@ -2086,7 +2090,7 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
-name|UriRef
+name|IRI
 name|textEnhancement
 init|=
 name|EnhancementEngineHelper

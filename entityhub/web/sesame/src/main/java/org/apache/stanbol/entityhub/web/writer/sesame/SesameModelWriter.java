@@ -1564,7 +1564,7 @@ operator|new
 name|LinkedHashModel
 argument_list|()
 expr_stmt|;
-comment|//create a new Graph
+comment|//create a new ImmutableGraph
 for|for
 control|(
 name|Object

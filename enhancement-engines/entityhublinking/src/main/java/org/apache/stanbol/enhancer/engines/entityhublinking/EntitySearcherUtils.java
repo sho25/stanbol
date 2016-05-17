@@ -67,11 +67,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -230,12 +230,12 @@ parameter_list|(
 name|FieldQueryFactory
 name|factory
 parameter_list|,
-name|UriRef
+name|IRI
 name|field
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|includeFields
 parameter_list|,
@@ -349,7 +349,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|UriRef
+name|IRI
 name|select
 range|:
 name|includeFields

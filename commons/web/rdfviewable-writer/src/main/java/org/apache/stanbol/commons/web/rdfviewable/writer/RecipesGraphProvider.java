@@ -59,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -75,11 +75,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -211,7 +211,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -328,13 +328,13 @@ name|class
 argument_list|)
 decl_stmt|;
 specifier|private
-name|MGraph
+name|Graph
 name|recipesGraph
 init|=
 literal|null
 decl_stmt|;
 specifier|public
-name|TripleCollection
+name|Graph
 name|getRecipesGraph
 parameter_list|()
 block|{
@@ -355,7 +355,7 @@ block|{
 name|recipesGraph
 operator|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 expr_stmt|;
 name|context

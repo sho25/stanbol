@@ -365,11 +365,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1373,7 +1373,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeID
 argument_list|)
@@ -1401,7 +1401,7 @@ argument_list|(
 name|recipe
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ruleID
 argument_list|)
@@ -1675,7 +1675,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeID
 argument_list|)
@@ -1703,7 +1703,7 @@ argument_list|(
 name|recipe
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ruleID
 argument_list|)
@@ -1978,7 +1978,7 @@ operator|.
 name|createRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipeID
 argument_list|)
@@ -2379,7 +2379,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipe
 argument_list|)
@@ -2395,7 +2395,7 @@ argument_list|(
 name|rcp
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|rule
 argument_list|)
@@ -2511,7 +2511,7 @@ operator|.
 name|removeRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipe
 argument_list|)
@@ -2758,7 +2758,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipe
 argument_list|)
@@ -2993,7 +2993,7 @@ operator|.
 name|getRecipe
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|recipe
 argument_list|)

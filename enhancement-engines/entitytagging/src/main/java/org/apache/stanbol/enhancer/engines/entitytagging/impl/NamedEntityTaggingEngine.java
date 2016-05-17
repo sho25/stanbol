@@ -183,11 +183,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -199,11 +199,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -215,9 +215,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -231,11 +231,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1960,7 +1960,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -1983,7 +1983,7 @@ name|NamedEntity
 argument_list|,
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|textAnnotations
@@ -1995,7 +1995,7 @@ name|NamedEntity
 argument_list|,
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 argument_list|()
@@ -2055,11 +2055,11 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|UriRef
+name|IRI
 name|uri
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|it
 operator|.
@@ -2115,14 +2115,14 @@ comment|// This is a first occurrence, collect any subsumed
 comment|// annotations
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|subsumed
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2159,7 +2159,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|it2
 operator|.
@@ -2234,7 +2234,7 @@ name|NamedEntity
 argument_list|,
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|>
 name|entry
@@ -2376,7 +2376,7 @@ control|)
 block|{
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|subsumed
 init|=
@@ -2392,14 +2392,14 @@ argument_list|)
 decl_stmt|;
 name|List
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|annotationsToRelate
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|(
 name|subsumed
@@ -2575,7 +2575,7 @@ name|namedEntity
 parameter_list|,
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|subsumedAnnotations
 parameter_list|,

@@ -373,9 +373,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -389,11 +389,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1256,7 +1256,7 @@ name|Map
 argument_list|<
 name|SurfaceForm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|surfaceForm2TextAnnotation
 init|=
@@ -1265,7 +1265,7 @@ name|HashMap
 argument_list|<
 name|SurfaceForm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1412,7 +1412,7 @@ name|Map
 argument_list|<
 name|SurfaceForm
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 name|surfaceForm2TextAnnotation
 parameter_list|)
@@ -1425,7 +1425,7 @@ range|:
 name|occs
 control|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|surfaceForm2TextAnnotation
@@ -1504,7 +1504,7 @@ parameter_list|(
 name|String
 name|text
 parameter_list|,
-name|UriRef
+name|IRI
 name|contentItemUri
 parameter_list|)
 throws|throws

@@ -47,11 +47,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -63,11 +63,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -79,11 +79,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -234,11 +234,11 @@ argument_list|()
 decl_stmt|;
 specifier|private
 specifier|static
-name|UriRef
+name|IRI
 name|entityRanking
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|RdfResourceEnum
 operator|.
@@ -256,7 +256,7 @@ name|rep
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|fields
 parameter_list|,
@@ -270,7 +270,7 @@ block|{
 name|super
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|rep
 operator|.
@@ -315,10 +315,10 @@ name|lf
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts {@link Representation}s to RDF ({@link TripleCollection}) and      * also filter literals with languages other than the parsed one      * @param rep      * @param languages      * @return      */
+comment|/**      * Converts {@link Representation}s to RDF ({@link Graph}) and      * also filter literals with languages other than the parsed one      * @param rep      * @param languages      * @return      */
 specifier|private
 specifier|static
-name|TripleCollection
+name|Graph
 name|toGraph
 parameter_list|(
 name|Representation
@@ -326,7 +326,7 @@ name|rep
 parameter_list|,
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|includeFields
 parameter_list|,

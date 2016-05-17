@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -462,7 +462,7 @@ if|if
 condition|(
 name|arg1
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|subject
@@ -471,7 +471,7 @@ operator|new
 name|UriRefOrVariable
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|arg1
 argument_list|)
@@ -512,7 +512,7 @@ if|if
 condition|(
 name|dt
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|predicate
@@ -521,7 +521,7 @@ operator|new
 name|UriRefOrVariable
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|dt
 argument_list|)
@@ -562,7 +562,7 @@ if|if
 condition|(
 name|dt
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|object
@@ -571,7 +571,7 @@ operator|new
 name|UriRefOrVariable
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|arg2
 argument_list|)

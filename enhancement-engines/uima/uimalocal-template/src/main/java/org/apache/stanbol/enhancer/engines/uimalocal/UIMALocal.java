@@ -149,11 +149,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1123,7 +1123,7 @@ name|EngineException
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1305,11 +1305,11 @@ argument_list|,
 name|typeName
 argument_list|)
 decl_stmt|;
-name|UriRef
-name|uimaUriRef
+name|IRI
+name|uimaIRI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uimaUri
 argument_list|)
@@ -1336,7 +1336,7 @@ name|ci
 operator|.
 name|getPart
 argument_list|(
-name|uimaUriRef
+name|uimaIRI
 argument_list|,
 name|FeatureStructureListHolder
 operator|.
@@ -1369,7 +1369,7 @@ name|ci
 operator|.
 name|addPart
 argument_list|(
-name|uimaUriRef
+name|uimaIRI
 argument_list|,
 name|holder
 argument_list|)

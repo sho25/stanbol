@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -58,10 +58,10 @@ specifier|public
 enum|enum
 name|StringOntology
 block|{
-comment|/**      * The URI of this String was created with the URI Recipe Context-Hash, see      * http://aksw.org/Projects/NIF#context-hash-nif-uri-recipe.      *       * @see NIFHelper#getNifHashURI(UriRef, int, int, String)      */
+comment|/**      * The URI of this String was created with the URI Recipe Context-Hash, see      * http://aksw.org/Projects/NIF#context-hash-nif-uri-recipe.      *       * @see NIFHelper#getNifHashURI(IRI, int, int, String)      */
 name|ContextHashBasedString
 block|,
-comment|/**      * A document is a string that can be considered a closed unit content-wise. In NIF a document is given an      * URL that references the String of the document. Furthermore a document can have several sources. It can      * be a string, a HTML document, a PDF document, text file or any other arbitrary string. The uri denoting      * the actual document should be able to reproduce that document, i.e. either the string is directly      * included via the property sourceString or an url can be given that contains the string via the property      * sourceUrl. Depending on the feedback, this might also become the Graph URI or a subclass of      * owl:Ontology      */
+comment|/**      * A document is a string that can be considered a closed unit content-wise. In NIF a document is given an      * URL that references the String of the document. Furthermore a document can have several sources. It can      * be a string, a HTML document, a PDF document, text file or any other arbitrary string. The uri denoting      * the actual document should be able to reproduce that document, i.e. either the string is directly      * included via the property sourceString or an url can be given that contains the string via the property      * sourceUrl. Depending on the feedback, this might also become the ImmutableGraph URI or a subclass of      * owl:Ontology      */
 name|Document
 block|,
 comment|/**      * The URI of this String was created with the URI Recipe Context-Hash, see      * http://aksw.org/Projects/NIF#offset-nif-uri-recipe      */
@@ -107,7 +107,7 @@ name|NAMESPACE
 init|=
 literal|"http://nlp2rdf.lod2.eu/schema/string/"
 decl_stmt|;
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 specifier|private
@@ -117,7 +117,7 @@ block|{
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NAMESPACE
 operator|+
@@ -137,7 +137,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{

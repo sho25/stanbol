@@ -507,11 +507,107 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|Literal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|BlankNodeOrIRI
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|RDFTerm
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Triple
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|IRI
 import|;
 end_import
 
@@ -528,134 +624,6 @@ operator|.
 name|core
 operator|.
 name|LiteralFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|NonLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|PlainLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Triple
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TripleCollection
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
 import|;
 end_import
 
@@ -837,7 +805,7 @@ specifier|static
 name|int
 name|validateAllTextAnnotations
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
 name|String
@@ -845,9 +813,9 @@ name|content
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -876,7 +844,7 @@ specifier|static
 name|int
 name|validateAllTextAnnotations
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
 name|String
@@ -884,9 +852,9 @@ name|content
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|,
@@ -939,11 +907,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|textAnnotationIterator
 operator|.
@@ -975,16 +943,16 @@ return|return
 name|textAnnotationCount
 return|;
 block|}
-comment|/**      * Validates the parsed TextAnnotation with a fise:selected-text. This      * method also validates rules defined by fise:Enhancement by calling      * {@link #validateEnhancement(TripleCollection, UriRef, Map)}<p>      * NOTE: this method MUST NOT be used to validate fise:TextAnnotations that      * do NOT select a part of the text - meaning TextAnnotations about the      * whole parsed content.      * @param enhancements the enhancements graph containing the text annotation      * @param textAnnotation the TextAnnotation to validate      * @param content the enhanced content      * @param expectedValues expected values (properties for the values are used as keys)      */
+comment|/**      * Validates the parsed TextAnnotation with a fise:selected-text. This      * method also validates rules defined by fise:Enhancement by calling      * {@link #validateEnhancement(Graph, IRI, Map)}<p>      * NOTE: this method MUST NOT be used to validate fise:TextAnnotations that      * do NOT select a part of the text - meaning TextAnnotations about the      * whole parsed content.      * @param enhancements the enhancements graph containing the text annotation      * @param textAnnotation the TextAnnotation to validate      * @param content the enhanced content      * @param expectedValues expected values (properties for the values are used as keys)      */
 specifier|public
 specifier|static
 name|void
 name|validateTextAnnotation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|,
 name|String
@@ -992,9 +960,9 @@ name|content
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -1019,10 +987,10 @@ specifier|static
 name|void
 name|validateTextAnnotation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|,
 name|String
@@ -1030,9 +998,9 @@ name|content
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|,
@@ -1090,7 +1058,7 @@ literal|null
 argument_list|)
 decl_stmt|;
 comment|// check if the selected text is added (or not)
-name|Resource
+name|RDFTerm
 name|selectedTextResource
 decl_stmt|;
 if|if
@@ -1122,7 +1090,7 @@ literal|")"
 argument_list|,
 name|selectedTextResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|Literal
@@ -1185,7 +1153,7 @@ expr_stmt|;
 comment|//no selected text
 block|}
 comment|//check against an expected value
-name|Resource
+name|RDFTerm
 name|expectedSelectedText
 init|=
 name|expectedValues
@@ -1260,7 +1228,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|Resource
+name|RDFTerm
 name|selectionHeadResource
 decl_stmt|;
 if|if
@@ -1292,7 +1260,7 @@ literal|")"
 argument_list|,
 name|selectionHeadResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|Literal
@@ -1392,7 +1360,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|Resource
+name|RDFTerm
 name|selectionTailResource
 decl_stmt|;
 if|if
@@ -1424,7 +1392,7 @@ literal|")"
 argument_list|,
 name|selectionTailResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|Literal
@@ -1518,7 +1486,7 @@ literal|null
 operator|)
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|selectionContextResource
 decl_stmt|;
 comment|// test if context is added
@@ -1593,7 +1561,7 @@ literal|")"
 argument_list|,
 name|selectionContextResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 comment|//check that the content contains the context
@@ -1743,7 +1711,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-name|Resource
+name|RDFTerm
 name|expectedSelectionContext
 init|=
 name|expectedValues
@@ -1808,10 +1776,10 @@ literal|null
 argument_list|)
 decl_stmt|;
 comment|//start end is optional, but if start is present, that also end needs to be set
-name|TypedLiteral
+name|Literal
 name|startPosLiteral
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|endPosLiteral
 decl_stmt|;
 if|if
@@ -1827,7 +1795,7 @@ comment|//      (e.g. see STANBOL-617) in those cases adding the text of the
 comment|//      whole section is not feasible.
 comment|//assertNotNull("If fise:start is present the fise:selection-context MUST also be present (uri: "+textAnnotation+")!",
 comment|//    selectionContextResource);
-name|Resource
+name|RDFTerm
 name|resource
 init|=
 name|startPosIterator
@@ -1863,13 +1831,13 @@ literal|")!"
 argument_list|,
 name|resource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|startPosLiteral
 operator|=
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|resource
 expr_stmt|;
@@ -1972,13 +1940,13 @@ literal|")"
 argument_list|,
 name|resource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|endPosLiteral
 operator|=
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|resource
 expr_stmt|;
@@ -2115,7 +2083,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-name|Resource
+name|RDFTerm
 name|expectedStartPos
 init|=
 name|expectedValues
@@ -2144,7 +2112,7 @@ name|startPosLiteral
 argument_list|)
 expr_stmt|;
 block|}
-name|Resource
+name|RDFTerm
 name|expectedEndPos
 init|=
 name|expectedValues
@@ -2229,7 +2197,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|selectionPrefixResource
 init|=
 name|selectionPrefixIterator
@@ -2250,7 +2218,7 @@ literal|")"
 argument_list|,
 name|selectionPrefixResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|prefixLiteral
@@ -2371,7 +2339,7 @@ argument_list|()
 condition|)
 block|{
 comment|// test if the selected text is part of the TEXT_TO_TEST
-name|Resource
+name|RDFTerm
 name|selectionSuffixResource
 init|=
 name|selectionSuffixIterator
@@ -2392,7 +2360,7 @@ literal|")"
 argument_list|,
 name|selectionSuffixResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|suffixLiteral
@@ -2667,16 +2635,16 @@ name|selectedTextResource
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Validates the correctness of fise:TextAnnotations that annotate the language       * of the text as defined by       *<a href="https://issues.apache.org/jira/browse/STANBOL-613">STANBOL-613</a><p>      * Called by {@link #validateTextAnnotation(TripleCollection, UriRef, String, Map)}      * @param enhancements      * @param textAnnotation      */
+comment|/**      * Validates the correctness of fise:TextAnnotations that annotate the language       * of the text as defined by       *<a href="https://issues.apache.org/jira/browse/STANBOL-613">STANBOL-613</a><p>      * Called by {@link #validateTextAnnotation(Graph, IRI, String, Map)}      * @param enhancements      * @param textAnnotation      */
 specifier|private
 specifier|static
 name|void
 name|validateLanguageAnnotations
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|)
 block|{
@@ -2706,7 +2674,7 @@ argument_list|()
 condition|)
 block|{
 comment|//a language annotation
-name|Resource
+name|RDFTerm
 name|dcLanguageResource
 init|=
 name|dcLanguageIterator
@@ -2723,7 +2691,7 @@ literal|"The dc:language value MUST BE a PlainLiteral"
 argument_list|,
 name|dcLanguageResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -2832,7 +2800,7 @@ comment|//assert that the created TextAnnotation is correctly returned by the
 comment|//EnhancementEngineHelper methods
 name|List
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|languageAnnotation
 init|=
@@ -2917,19 +2885,19 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Validates that fise:TextAnnotations with the dc:type dbp-ont:Person,      * dbp-ont:Organisation and dbp-ont:Place do have a      * fise:selected-text value (this implicitly also checks that      * fise:selection-context, fise:start and fise:end are defined!<p>      * Called by {@link #validateTextAnnotation(TripleCollection, UriRef, String, Map)}      * @param enhancements      * @param textAnnotation      * @param selectedTextResource the fise:selected-text value      */
+comment|/**      * Validates that fise:TextAnnotations with the dc:type dbp-ont:Person,      * dbp-ont:Organisation and dbp-ont:Place do have a      * fise:selected-text value (this implicitly also checks that      * fise:selection-context, fise:start and fise:end are defined!<p>      * Called by {@link #validateTextAnnotation(Graph, IRI, String, Map)}      * @param enhancements      * @param textAnnotation      * @param selectedTextResource the fise:selected-text value      */
 specifier|private
 specifier|static
 name|void
 name|validateNERAnnotations
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|,
-name|Resource
+name|RDFTerm
 name|selectedTextResource
 parameter_list|)
 block|{
@@ -2966,7 +2934,7 @@ operator|!
 name|isNERAnnotation
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|dcTypeValue
 init|=
 name|dcTypeIterator
@@ -3032,14 +3000,14 @@ specifier|static
 name|int
 name|validateAllEntityAnnotations
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -3086,11 +3054,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|entityAnnotationIterator
 operator|.
@@ -3118,23 +3086,23 @@ return|return
 name|entityAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if a fise:EntityAnnotation is valid. NOTE that this also validates      * all fise:Enhancement related requirements by calling      * {@link #validateEnhancement(TripleCollection, UriRef, Map)}      * @param enhancements the enhancements graph      * @param entityAnnotation the entity annotation to validate      * @param expectedValues expected values (properties for the values are used as keys)      */
+comment|/**      * Checks if a fise:EntityAnnotation is valid. NOTE that this also validates      * all fise:Enhancement related requirements by calling      * {@link #validateEnhancement(Graph, IRI, Map)}      * @param enhancements the enhancements graph      * @param entityAnnotation the entity annotation to validate      * @param expectedValues expected values (properties for the values are used as keys)      */
 specifier|public
 specifier|static
 name|void
 name|validateEntityAnnotation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|entityAnnotation
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -3176,11 +3144,11 @@ block|{
 comment|// test if the referred annotations are text annotations or
 comment|// the referenced annotations is a fise:EntityAnnotation AND also a
 comment|// dc:requires link is defined (STANBOL-766)
-name|UriRef
+name|IRI
 name|referredTextAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|relationToTextAnnotationIterator
 operator|.
@@ -3274,7 +3242,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedReferencedEntity
 init|=
 name|expectedValues
@@ -3293,7 +3261,7 @@ argument_list|()
 condition|)
 block|{
 comment|//check possible multiple references
-name|Resource
+name|RDFTerm
 name|entityReferenceResource
 init|=
 name|entityReferenceIterator
@@ -3311,7 +3279,7 @@ literal|"fise:entity-reference value MUST BE of URIs"
 argument_list|,
 name|entityReferenceResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if
@@ -3376,7 +3344,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedEntityLabel
 init|=
 name|expectedValues
@@ -3394,7 +3362,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|entityLabelResource
 init|=
 name|entityLabelIterator
@@ -3415,7 +3383,7 @@ literal|")!"
 argument_list|,
 name|entityLabelResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 if|if
@@ -3469,7 +3437,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedEntityType
 init|=
 name|expectedValues
@@ -3489,7 +3457,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|entityTypeResource
 init|=
 name|entityTypeIterator
@@ -3506,7 +3474,7 @@ literal|"fise:entity-type values MUST BE URIs"
 argument_list|,
 name|entityTypeResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if
@@ -3552,23 +3520,23 @@ name|expectedValues
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Validates all fise:Enhancement related properties and values. NOTE that      * this method is called by {@link #validateEntityAnnotation(TripleCollection, UriRef, Map)}      * and {@link #validateTextAnnotation(TripleCollection, UriRef, String)}.      * @param enhancements the enhancements graph      * @param enhancement the fise:Enhancement to validate      * @param expectedValues expected values (properties for the values are used as keys)      */
+comment|/**      * Validates all fise:Enhancement related properties and values. NOTE that      * this method is called by {@link #validateEntityAnnotation(Graph, IRI, Map)}      * and {@link #validateTextAnnotation(Graph, IRI, String)}.      * @param enhancements the enhancements graph      * @param enhancement the fise:Enhancement to validate      * @param expectedValues expected values (properties for the values are used as keys)      */
 specifier|public
 specifier|static
 name|void
 name|validateEnhancement
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|enhancement
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -3635,7 +3603,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|creatorResource
 init|=
 name|creatorIterator
@@ -3662,18 +3630,18 @@ literal|"')!"
 argument_list|,
 name|creatorResource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 operator|||
 name|creatorResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
 name|creatorResource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 condition|)
 block|{
 name|assertEquals
@@ -3686,7 +3654,7 @@ name|string
 argument_list|,
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|creatorResource
 operator|)
@@ -3696,7 +3664,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|Resource
+name|RDFTerm
 name|expectedCreator
 init|=
 name|expectedValues
@@ -3736,7 +3704,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|//validate the optional contributor
-name|Resource
+name|RDFTerm
 name|expectedContributor
 init|=
 name|expectedValues
@@ -3775,7 +3743,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|contributorResource
 init|=
 name|contributorIterator
@@ -3788,7 +3756,7 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
-literal|"Creator MUST BE an TypedLiteral or an UriRef (found '"
+literal|"Creator MUST BE an TypedLiteral or an IRI (found '"
 operator|+
 name|contributorResource
 operator|.
@@ -3802,18 +3770,18 @@ literal|"')!"
 argument_list|,
 name|contributorResource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 operator|||
 name|contributorResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
 name|contributorResource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 condition|)
 block|{
 name|assertEquals
@@ -3826,7 +3794,7 @@ name|string
 argument_list|,
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|contributorResource
 operator|)
@@ -3898,7 +3866,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|createdResource
 init|=
 name|createdIterator
@@ -3915,7 +3883,7 @@ literal|"Creation date MUST be a typed Literal"
 argument_list|,
 name|createdResource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -3930,7 +3898,7 @@ name|equals
 argument_list|(
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|createdResource
 operator|)
@@ -3955,7 +3923,7 @@ operator|.
 name|class
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|createdResource
 argument_list|)
@@ -4035,7 +4003,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|modDateResurce
 init|=
 name|modDateIterator
@@ -4052,7 +4020,7 @@ literal|"Creation date MUST be a typed Literal"
 argument_list|,
 name|modDateResurce
 operator|instanceof
-name|TypedLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -4067,7 +4035,7 @@ name|equals
 argument_list|(
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|modDateResurce
 operator|)
@@ -4092,7 +4060,7 @@ operator|.
 name|class
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|modDateResurce
 argument_list|)
@@ -4153,7 +4121,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|extractedResource
 init|=
 name|extractedIterator
@@ -4166,7 +4134,7 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
-literal|"Creator MUST BE an UriRef (found '"
+literal|"Creator MUST BE an IRI (found '"
 operator|+
 name|extractedResource
 operator|.
@@ -4180,10 +4148,10 @@ literal|"')!"
 argument_list|,
 name|extractedResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedExtractedFrom
 init|=
 name|expectedValues
@@ -4250,7 +4218,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|relatedResource
 init|=
 name|relatedIterator
@@ -4267,7 +4235,7 @@ literal|"dc:relation values MUST BE URIs"
 argument_list|,
 name|relatedResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|Iterator
@@ -4281,7 +4249,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|relatedResource
 argument_list|,
@@ -4330,7 +4298,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|requiredResource
 init|=
 name|requiresIterator
@@ -4347,7 +4315,7 @@ literal|"dc:requires values MUST BE URIs"
 argument_list|,
 name|requiredResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|Iterator
@@ -4361,7 +4329,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|requiredResource
 argument_list|,
@@ -4424,7 +4392,7 @@ argument_list|()
 condition|)
 block|{
 comment|//confidence is optional
-name|Resource
+name|RDFTerm
 name|confidenceResource
 init|=
 name|confidenceIterator
@@ -4441,7 +4409,7 @@ literal|"fise:confidence value MUST BE a TypedLiteral"
 argument_list|,
 name|confidenceResource
 operator|instanceof
-name|TypedLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -4456,7 +4424,7 @@ name|equals
 argument_list|(
 operator|(
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|confidenceResource
 operator|)
@@ -4481,7 +4449,7 @@ operator|.
 name|class
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|confidenceResource
 argument_list|)
@@ -4548,7 +4516,7 @@ name|doubleValue
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedConfidence
 init|=
 name|expectedValues
@@ -4614,7 +4582,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedDcType
 init|=
 name|expectedValues
@@ -4635,7 +4603,7 @@ argument_list|()
 condition|)
 block|{
 comment|//dc:type is optional
-name|Resource
+name|RDFTerm
 name|dcTypeResource
 init|=
 name|dcTypeIterator
@@ -4652,7 +4620,7 @@ literal|"dc:type values MUST BE URIs"
 argument_list|,
 name|dcTypeResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if
@@ -4707,7 +4675,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedConfidenceValue
 init|=
 name|expectedValues
@@ -4727,7 +4695,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|confidenceLevelResource
 init|=
 name|confidenceLevelIterator
@@ -4746,7 +4714,7 @@ name|confidenceLevelResource
 argument_list|,
 name|confidenceLevelResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 name|assertNotNull
@@ -4768,7 +4736,7 @@ operator|.
 name|getConfidenceLevel
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|confidenceLevelResource
 argument_list|)
@@ -4821,14 +4789,14 @@ specifier|static
 name|int
 name|validateAllTopicAnnotations
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -4875,11 +4843,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|topicAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|topicAnnotationIterator
 operator|.
@@ -4907,23 +4875,23 @@ return|return
 name|topicAnnotationCount
 return|;
 block|}
-comment|/**      * Checks if a fise:TopicAnnotation is valid as defined by       *<a herf="https://issues.apache.org/jira/browse/STANBOL-617">STANBOL-617</a>.       * NOTE that this also validates all fise:Enhancement related requirements by       * calling {@link #validateEnhancement(TripleCollection, UriRef, Map)}      * @param enhancements the enhancements graph      * @param topicAnnotation the topic annotation to validate      * @param expectedValues expected values (properties for the values are used as keys)      */
+comment|/**      * Checks if a fise:TopicAnnotation is valid as defined by       *<a herf="https://issues.apache.org/jira/browse/STANBOL-617">STANBOL-617</a>.       * NOTE that this also validates all fise:Enhancement related requirements by       * calling {@link #validateEnhancement(Graph, IRI, Map)}      * @param enhancements the enhancements graph      * @param topicAnnotation the topic annotation to validate      * @param expectedValues expected values (properties for the values are used as keys)      */
 specifier|public
 specifier|static
 name|void
 name|validateTopicAnnotation
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|enhancements
 parameter_list|,
-name|UriRef
+name|IRI
 name|topicAnnotation
 parameter_list|,
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 parameter_list|)
@@ -4999,11 +4967,11 @@ argument_list|()
 condition|)
 block|{
 comment|// test if the referred annotations are text annotations
-name|UriRef
+name|IRI
 name|referredTextAnnotation
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|relationToTextAnnotationIterator
 operator|.
@@ -5050,7 +5018,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedReferencedEntity
 init|=
 name|expectedValues
@@ -5069,7 +5037,7 @@ argument_list|()
 condition|)
 block|{
 comment|//check possible multiple references
-name|Resource
+name|RDFTerm
 name|entityReferenceResource
 init|=
 name|entityReferenceIterator
@@ -5087,7 +5055,7 @@ literal|"fise:entity-reference value MUST BE of URIs"
 argument_list|,
 name|entityReferenceResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if
@@ -5152,7 +5120,7 @@ name|hasNext
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedEntityLabel
 init|=
 name|expectedValues
@@ -5170,7 +5138,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|entityLabelResource
 init|=
 name|entityLabelIterator
@@ -5191,7 +5159,7 @@ literal|")!"
 argument_list|,
 name|entityLabelResource
 operator|instanceof
-name|PlainLiteral
+name|Literal
 argument_list|)
 expr_stmt|;
 if|if
@@ -5245,7 +5213,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|expectedEntityType
 init|=
 name|expectedValues
@@ -5265,7 +5233,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|entityTypeResource
 init|=
 name|entityTypeIterator
@@ -5282,7 +5250,7 @@ literal|"fise:entity-type values MUST BE URIs"
 argument_list|,
 name|entityTypeResource
 operator|instanceof
-name|UriRef
+name|IRI
 argument_list|)
 expr_stmt|;
 if|if

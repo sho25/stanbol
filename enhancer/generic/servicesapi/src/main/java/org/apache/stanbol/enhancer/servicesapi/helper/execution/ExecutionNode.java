@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -81,12 +81,12 @@ class|class
 name|ExecutionNode
 block|{
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 decl_stmt|;
 specifier|private
 specifier|final
-name|TripleCollection
+name|Graph
 name|ep
 decl_stmt|;
 specifier|private
@@ -102,10 +102,10 @@ decl_stmt|;
 specifier|public
 name|ExecutionNode
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 parameter_list|)
 block|{

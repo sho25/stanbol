@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -108,7 +108,7 @@ block|}
 specifier|public
 name|GraphSource
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -121,7 +121,7 @@ block|}
 specifier|public
 name|GraphSource
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphId
 parameter_list|)
 block|{
@@ -134,7 +134,7 @@ block|}
 specifier|public
 name|GraphSource
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphId
 parameter_list|,
 name|TcProvider

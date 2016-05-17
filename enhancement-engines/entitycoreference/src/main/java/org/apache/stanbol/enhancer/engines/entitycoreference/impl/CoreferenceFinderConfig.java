@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -147,7 +147,7 @@ comment|/**      * The Uris for spatial properties for the NER to be inspected w
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Set
 argument_list|<
@@ -160,7 +160,7 @@ comment|/**      * The Uris for org membership properties for the NER to be insp
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Set
 argument_list|<
@@ -214,7 +214,7 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Set
 argument_list|<
@@ -230,7 +230,7 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Set
 argument_list|<
@@ -520,7 +520,7 @@ name|String
 argument_list|>
 name|getSpatialAttributes
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|)
 block|{
@@ -543,7 +543,7 @@ name|String
 argument_list|>
 name|getOrgMembershipAttributes
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|)
 block|{

@@ -943,7 +943,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"> installable Resource {}"
+literal|"> installable RDFTerm {}"
 argument_list|,
 name|url
 argument_list|)

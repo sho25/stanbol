@@ -135,11 +135,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -151,11 +151,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -167,11 +167,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -201,11 +201,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -528,9 +530,9 @@ argument_list|(
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 argument_list|)
@@ -640,7 +642,7 @@ argument_list|,
 name|in
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 name|calaisExtractor
@@ -749,18 +751,18 @@ argument_list|)
 expr_stmt|;
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -898,7 +900,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|model
 decl_stmt|;
 try|try

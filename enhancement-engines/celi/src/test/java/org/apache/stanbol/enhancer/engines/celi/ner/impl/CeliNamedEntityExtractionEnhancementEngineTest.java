@@ -137,11 +137,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -153,11 +153,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -169,11 +169,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -187,11 +189,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -787,18 +791,18 @@ argument_list|)
 expr_stmt|;
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 name|expectedValues
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -940,23 +944,23 @@ comment|//fails again - deactivated as it only tests a server side bug and does
 comment|//not directly test any thing related to this engine implementation
 comment|//this.testInput(CeliNamedEntityExtractionEnhancementEngineTest.TEXT_fr2, "fr");
 block|}
-comment|//	private int checkAllEntityAnnotations(MGraph g) {
+comment|//	private int checkAllEntityAnnotations(Graph g) {
 comment|//		Iterator<Triple> entityAnnotationIterator = g.filter(null, RDF_TYPE, ENHANCER_ENTITYANNOTATION);
 comment|//		int entityAnnotationCount = 0;
 comment|//		while (entityAnnotationIterator.hasNext()) {
-comment|//			UriRef entityAnnotation = (UriRef) entityAnnotationIterator.next().getSubject();
+comment|//			IRI entityAnnotation = (IRI) entityAnnotationIterator.next().getSubject();
 comment|//			entityAnnotationCount++;
 comment|//		}
 comment|//		return entityAnnotationCount;
 comment|//	}
 comment|//
-comment|//	private int checkAllTextAnnotations(MGraph g, String content) {
+comment|//	private int checkAllTextAnnotations(Graph g, String content) {
 comment|//		Iterator<Triple> textAnnotationIterator = g.filter(null, RDF_TYPE, ENHANCER_TEXTANNOTATION);
 comment|//		// test if a textAnnotation is present
 comment|//		assertTrue(textAnnotationIterator.hasNext());
 comment|//		int textAnnotationCount = 0;
 comment|//		while (textAnnotationIterator.hasNext()) {
-comment|//			UriRef textAnnotation = (UriRef) textAnnotationIterator.next().getSubject();
+comment|//			IRI textAnnotation = (IRI) textAnnotationIterator.next().getSubject();
 comment|//			textAnnotationCount++;
 comment|//		}
 comment|//		return textAnnotationCount;

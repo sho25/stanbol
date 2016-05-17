@@ -57,11 +57,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -73,9 +73,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -89,11 +89,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -260,7 +260,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of the {@link ContentItemFactory} that requires only  * the three abstract methods<ul>  *<li> {@link #createBlob(ContentSource)}  *<li> {@link #createContentItem(String, Blob, MGraph)}  *<li> {@link #createContentItem(UriRef, Blob, MGraph)}  *</ul> to be overridden.<p>  * Implementers should NOTE that {@link #createBlob(ContentSource)} will be  * called to create the main {@link Blob} instance for a contentItem before  * the {@link ContentItem} itself is instantiated. If this is a problem, than  * this abstract super class can not be used.  *   * @author Rupert Westenthaler  * @since 0.9.1-incubating  */
+comment|/**  * Abstract implementation of the {@link ContentItemFactory} that requires only  * the three abstract methods<ul>  *<li> {@link #createBlob(ContentSource)}  *<li> {@link #createContentItem(String, Blob, Graph)}  *<li> {@link #createContentItem(IRI, Blob, Graph)}  *</ul> to be overridden.<p>  * Implementers should NOTE that {@link #createBlob(ContentSource)} will be  * called to create the main {@link Blob} instance for a contentItem before  * the {@link ContentItem} itself is instantiated. If this is a problem, than  * this abstract super class can not be used.  *   * @author Rupert Westenthaler  * @since 0.9.1-incubating  */
 end_comment
 
 begin_class
@@ -346,7 +346,7 @@ return|return
 name|createContentItem
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 literal|null
 argument_list|,
@@ -390,7 +390,7 @@ specifier|final
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|ContentSource
@@ -442,7 +442,7 @@ parameter_list|(
 name|ContentReference
 name|reference
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 throws|throws
@@ -467,7 +467,7 @@ return|return
 name|createContentItem
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|reference
 operator|.
@@ -497,7 +497,7 @@ parameter_list|,
 name|ContentSource
 name|source
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 throws|throws
@@ -554,13 +554,13 @@ specifier|final
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|ContentSource
 name|source
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 throws|throws
@@ -601,13 +601,13 @@ specifier|abstract
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 function_decl|;
@@ -623,7 +623,7 @@ parameter_list|,
 name|Blob
 name|blob
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 function_decl|;

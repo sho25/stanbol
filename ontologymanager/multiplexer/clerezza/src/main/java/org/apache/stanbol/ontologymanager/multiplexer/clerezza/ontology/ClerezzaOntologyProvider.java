@@ -519,29 +519,15 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|concurrent
-operator|.
-name|locks
-operator|.
-name|Lock
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -555,11 +541,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|LiteralFactory
+name|Graph
 import|;
 end_import
 
@@ -571,11 +557,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -587,11 +573,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|RDFTerm
 import|;
 end_import
 
@@ -603,25 +589,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|Resource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -635,43 +605,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|TripleCollection
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -690,24 +628,6 @@ operator|.
 name|access
 operator|.
 name|EntityAlreadyExistsException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|access
-operator|.
-name|LockableMGraph
 import|;
 end_import
 
@@ -755,13 +675,31 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|TripleImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
 operator|.
-name|impl
-operator|.
-name|TripleImpl
+name|LiteralFactory
 import|;
 end_import
 
@@ -1005,7 +943,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1129,7 +1067,7 @@ name|clerezza
 operator|.
 name|collector
 operator|.
-name|MGraphMultiplexer
+name|GraphMultiplexer
 import|;
 end_import
 
@@ -1236,24 +1174,6 @@ operator|.
 name|ontology
 operator|.
 name|OntologyHandleException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|ontologymanager
-operator|.
-name|servicesapi
-operator|.
-name|ontology
-operator|.
-name|OntologyLoadingException
 import|;
 end_import
 
@@ -1386,20 +1306,6 @@ operator|.
 name|model
 operator|.
 name|AddImport
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
-name|IRI
 import|;
 end_import
 
@@ -1593,7 +1499,7 @@ class|class
 name|OntologyToTcMapper
 block|{
 specifier|private
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 name|OntologyToTcMapper
@@ -1612,11 +1518,11 @@ argument_list|(
 literal|"TcProvider cannot be null"
 argument_list|)
 throw|;
-name|UriRef
+name|IRI
 name|graphId
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|metaGraphId
 argument_list|)
@@ -1627,7 +1533,7 @@ name|graph
 operator|=
 name|store
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|graphId
 argument_list|)
@@ -1643,7 +1549,7 @@ name|graph
 operator|=
 name|store
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|graphId
 argument_list|)
@@ -1656,7 +1562,7 @@ parameter_list|(
 name|OWLOntologyID
 name|ontologyReference
 parameter_list|,
-name|UriRef
+name|IRI
 name|graphName
 parameter_list|)
 block|{
@@ -1691,6 +1597,14 @@ name|tHasViri
 init|=
 literal|null
 decl_stmt|;
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIRI
 init|=
@@ -1706,7 +1620,7 @@ operator|.
 name|getVersionIRI
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|entry
 init|=
 name|buildResource
@@ -1762,7 +1676,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontologyIRI
 operator|.
@@ -1792,7 +1706,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|versionIri
 operator|.
@@ -1847,7 +1761,7 @@ name|OWLOntologyID
 name|buildPublicKey
 parameter_list|(
 specifier|final
-name|UriRef
+name|IRI
 name|resource
 parameter_list|)
 block|{
@@ -1860,6 +1774,14 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|oiri
 init|=
@@ -1894,12 +1816,12 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|s
 init|=
 literal|null
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -1914,13 +1836,13 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|s
 operator|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -1930,7 +1852,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|TypedLiteral
+name|Literal
 condition|)
 name|s
 operator|=
@@ -1938,18 +1860,26 @@ name|lf
 operator|.
 name|createObject
 argument_list|(
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|obj
 argument_list|)
 expr_stmt|;
 name|oiri
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -1997,12 +1927,12 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|s
 init|=
 literal|null
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2017,13 +1947,13 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|s
 operator|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -2033,7 +1963,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|TypedLiteral
+name|Literal
 condition|)
 name|s
 operator|=
@@ -2041,18 +1971,26 @@ name|lf
 operator|.
 name|createObject
 argument_list|(
-name|UriRef
+name|IRI
 operator|.
 name|class
 argument_list|,
 operator|(
-name|TypedLiteral
+name|Literal
 operator|)
 name|obj
 argument_list|)
 expr_stmt|;
 name|viri
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -2088,21 +2026,21 @@ name|viri
 argument_list|)
 return|;
 block|}
-comment|/**          * Creates an {@link UriRef} out of an {@link OWLOntologyID}, so it can be used as a storage key for          * the graph.          *           * @param ontologyReference          * @return          */
-name|UriRef
+comment|/**          * Creates an {@link IRI} out of an {@link OWLOntologyID}, so it can be used as a storage key for          * the graph.          *           * @param ontologyReference          * @return          */
+name|IRI
 name|buildResource
 parameter_list|(
 name|OWLOntologyID
 name|publicKey
 parameter_list|)
 block|{
-comment|/*              * The UriRef is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional e.g.              * the string form of OWLOntologyID objects?)              */
-name|TripleCollection
+comment|/*              * The IRI is of the form ontologyIRI[:::versionIRI] (TODO use something less conventional e.g.              * the string form of OWLOntologyID objects?)              */
+name|Graph
 name|meta
 init|=
 name|getMetaGraph
 argument_list|(
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 argument_list|)
@@ -2117,11 +2055,19 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot build a UriRef resource on a null public key!"
+literal|"Cannot build a IRI resource on a null public key!"
 argument_list|)
 throw|;
 comment|// XXX should versionIRI also include the version IRI set by owners? Currently not
 comment|// Remember not to sanitize logical identifiers.
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 init|=
@@ -2147,10 +2093,26 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot build a UriRef resource on an anonymous public key!"
+literal|"Cannot build a IRI resource on an anonymous public key!"
 argument_list|)
 throw|;
-name|UriRef
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Searching for a meta graph entry for public key:"
+argument_list|)
+expr_stmt|;
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|" -- {}"
+argument_list|,
+name|publicKey
+argument_list|)
+expr_stmt|;
+name|IRI
 name|match
 init|=
 literal|null
@@ -2163,7 +2125,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|oiri
 init|=
 name|lf
@@ -2171,7 +2133,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontologyIri
 operator|.
@@ -2180,7 +2142,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|viri
 init|=
 name|versionIri
@@ -2194,7 +2156,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|versionIri
 operator|.
@@ -2229,7 +2191,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|it
@@ -2251,7 +2213,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" -- Resource : {}"
+literal|" -- RDFTerm : {}"
 argument_list|,
 name|subj
 argument_list|)
@@ -2262,7 +2224,7 @@ operator|!
 operator|(
 name|subj
 operator|instanceof
-name|UriRef
+name|IRI
 operator|)
 condition|)
 block|{
@@ -2293,7 +2255,7 @@ operator|new
 name|TripleImpl
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|,
@@ -2314,7 +2276,7 @@ expr_stmt|;
 name|match
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 expr_stmt|;
@@ -2344,7 +2306,7 @@ operator|.
 name|filter
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|,
@@ -2378,7 +2340,7 @@ expr_stmt|;
 name|match
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 expr_stmt|;
@@ -2387,6 +2349,15 @@ comment|// Found
 block|}
 block|}
 block|}
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"Matching IRI in graph : {}"
+argument_list|,
+name|match
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|match
@@ -2396,7 +2367,7 @@ condition|)
 block|{
 return|return
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OntologyUtils
 operator|.
@@ -2414,7 +2385,7 @@ name|match
 return|;
 block|}
 block|}
-name|UriRef
+name|IRI
 name|getMapping
 parameter_list|(
 name|OWLOntologyID
@@ -2423,14 +2394,14 @@ parameter_list|)
 block|{
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|aliases
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2466,7 +2437,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|UriRef
+name|IRI
 name|alias
 range|:
 name|aliases
@@ -2498,7 +2469,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2513,11 +2484,11 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 return|return
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 return|;
@@ -2533,7 +2504,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|alias
 operator|.
@@ -2564,7 +2535,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2579,11 +2550,11 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 return|return
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 return|;
@@ -2596,20 +2567,11 @@ block|}
 name|OWLOntologyID
 name|getReverseMapping
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphName
 parameter_list|)
 block|{
 comment|// Logical mappings first.
-name|log
-operator|.
-name|info
-argument_list|(
-literal|"GRAPH NAME {}"
-argument_list|,
-name|graphName
-argument_list|)
-expr_stmt|;
 name|Iterator
 argument_list|<
 name|Triple
@@ -2635,7 +2597,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it
@@ -2650,13 +2612,13 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 return|return
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 argument_list|)
@@ -2673,7 +2635,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|graphName
 operator|.
@@ -2704,7 +2666,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|it
@@ -2719,13 +2681,13 @@ if|if
 condition|(
 name|subj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 return|return
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|)
@@ -2741,6 +2703,14 @@ name|OWLOntologyID
 argument_list|>
 name|getVersions
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 parameter_list|)
@@ -2779,7 +2749,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-name|TypedLiteral
+name|Literal
 name|iri
 init|=
 name|lf
@@ -2787,7 +2757,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|ontologyIri
 operator|.
@@ -2823,7 +2793,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|sub
 init|=
 name|it
@@ -2838,7 +2808,7 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|keys
 operator|.
@@ -2847,7 +2817,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 argument_list|)
@@ -2881,7 +2851,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|sub
 init|=
 name|it
@@ -2896,7 +2866,7 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|keys
 operator|.
@@ -2905,7 +2875,7 @@ argument_list|(
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 argument_list|)
@@ -2919,10 +2889,18 @@ block|}
 name|void
 name|mapLocator
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|locator
 parameter_list|,
-name|UriRef
+name|IRI
 name|graphName
 parameter_list|)
 block|{
@@ -3033,7 +3011,7 @@ operator|.
 name|createTypedLiteral
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|locator
 operator|.
@@ -3105,7 +3083,7 @@ range|:
 name|aliases
 control|)
 block|{
-name|UriRef
+name|IRI
 name|ontologyId
 init|=
 name|buildResource
@@ -3221,20 +3199,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|// To avoid concurrent modification exceptions
-name|Collection
-argument_list|<
-name|Triple
-argument_list|>
-name|removeUs
-init|=
-operator|new
-name|HashSet
-argument_list|<
-name|Triple
-argument_list|>
-argument_list|()
-decl_stmt|;
+comment|// I expect a concurrent modification exception here, but we can deal with it later.
 while|while
 condition|(
 name|it
@@ -3242,21 +3207,14 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
-name|removeUs
+name|graph
 operator|.
-name|add
+name|remove
 argument_list|(
 name|it
 operator|.
 name|next
 argument_list|()
-argument_list|)
-expr_stmt|;
-name|graph
-operator|.
-name|removeAll
-argument_list|(
-name|removeUs
 argument_list|)
 expr_stmt|;
 block|}
@@ -3266,7 +3224,7 @@ parameter_list|(
 name|OWLOntologyID
 name|ontologyReference
 parameter_list|,
-name|UriRef
+name|IRI
 name|graphName
 parameter_list|)
 block|{
@@ -3315,14 +3273,6 @@ specifier|static
 specifier|final
 name|boolean
 name|_RESOLVE_IMPORTS_DEFAULT
-init|=
-literal|true
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|boolean
-name|_MISSING_IMPORTS_FAIL_DEFAULT
 init|=
 literal|true
 decl_stmt|;
@@ -3541,25 +3491,6 @@ name|resolveImports
 init|=
 name|_RESOLVE_IMPORTS_DEFAULT
 decl_stmt|;
-annotation|@
-name|Property
-argument_list|(
-name|name
-operator|=
-name|OntologyProvider
-operator|.
-name|MISSING_IMPORTS_FAIL
-argument_list|,
-name|boolValue
-operator|=
-name|_MISSING_IMPORTS_FAIL_DEFAULT
-argument_list|)
-specifier|protected
-name|boolean
-name|failMissingImports
-init|=
-name|_MISSING_IMPORTS_FAIL_DEFAULT
-decl_stmt|;
 comment|/*      * Do not use SCR reference here: this might be different from the registered WeightedTcProvider services      * : when supplied, it overrides TcManager      */
 specifier|private
 name|TcProvider
@@ -3597,11 +3528,11 @@ name|?
 argument_list|>
 index|[]
 block|{
-name|MGraph
+name|Graph
 operator|.
 name|class
 operator|,
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|,
@@ -3833,7 +3764,7 @@ expr_stmt|;
 name|descriptor
 operator|=
 operator|new
-name|MGraphMultiplexer
+name|GraphMultiplexer
 argument_list|(
 name|keymap
 operator|.
@@ -3899,37 +3830,6 @@ name|_RESOLVE_IMPORTS_DEFAULT
 expr_stmt|;
 comment|// Should be already assigned though
 block|}
-try|try
-block|{
-name|failMissingImports
-operator|=
-call|(
-name|Boolean
-call|)
-argument_list|(
-name|configuration
-operator|.
-name|get
-argument_list|(
-name|OntologyProvider
-operator|.
-name|MISSING_IMPORTS_FAIL
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|ex
-parameter_list|)
-block|{
-name|failMissingImports
-operator|=
-name|_MISSING_IMPORTS_FAIL_DEFAULT
-expr_stmt|;
-comment|// Should be already assigned though
-block|}
 name|Object
 name|importPolicy
 init|=
@@ -3973,6 +3873,14 @@ expr_stmt|;
 block|}
 comment|// TODO replace with DataFileProvider ?
 specifier|final
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 index|[]
 name|offlineResources
@@ -3988,6 +3896,14 @@ condition|)
 block|{
 name|List
 argument_list|<
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 argument_list|>
 name|paths
@@ -4010,6 +3926,14 @@ operator|.
 name|toArray
 argument_list|(
 operator|new
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 index|[
 literal|0
@@ -4021,6 +3945,14 @@ else|else
 name|offlineResources
 operator|=
 operator|new
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 index|[
 literal|0
@@ -4032,6 +3964,14 @@ else|else
 name|offlineResources
 operator|=
 operator|new
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 index|[
 literal|0
@@ -4343,8 +4283,6 @@ name|OWLOntologyID
 argument_list|>
 name|level1Imports
 parameter_list|)
-throws|throws
-name|OntologyHandleException
 block|{
 name|log
 operator|.
@@ -4377,7 +4315,7 @@ name|importing
 argument_list|)
 expr_stmt|;
 comment|// Get the graph and explore its imports
-name|TripleCollection
+name|Graph
 name|graph
 comment|// store.getTriples(importing);
 init|=
@@ -4388,7 +4326,7 @@ operator|(
 name|importing
 operator|)
 argument_list|,
-name|MGraph
+name|Graph
 operator|.
 name|class
 argument_list|,
@@ -4425,13 +4363,6 @@ name|hasNext
 argument_list|()
 condition|)
 return|return;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Import list follows:"
-argument_list|)
-expr_stmt|;
 name|Iterator
 argument_list|<
 name|Triple
@@ -4466,7 +4397,7 @@ argument_list|()
 condition|)
 block|{
 comment|// obj is the *original* import target
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it2
@@ -4477,20 +4408,11 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|" * {}"
-argument_list|,
-name|obj
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 comment|// Right now getKey() is returning the "private" storage ID
@@ -4499,13 +4421,21 @@ name|key
 init|=
 name|getKey
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -4515,60 +4445,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"   ... with key {}"
-argument_list|,
-name|key
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|key
-operator|==
-literal|null
-condition|)
-block|{
-if|if
-condition|(
-name|failMissingImports
-condition|)
-throw|throw
-operator|new
-name|OntologyHandleException
-argument_list|(
-literal|"Failed to retrieve storage key for ontology "
-operator|+
-name|obj
-operator|+
-literal|". To prevent these exceptions from being thrown, please unset property "
-operator|+
-literal|"'org.apache.stanbol.ontologymanager.ontonet.failOnMissingImports'"
-argument_list|)
-throw|;
-else|else
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"null key for {}!"
-argument_list|,
-name|obj
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Will ignore since 'failOnMissingImports' is unset."
-argument_list|)
-expr_stmt|;
-continue|continue;
-block|}
-block|}
 comment|// TODO this will not be needed when getKey() and getPublicKey() return the proper public key.
 name|OWLOntologyID
 name|oid
@@ -4578,7 +4454,7 @@ operator|.
 name|getReverseMapping
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|key
 argument_list|)
@@ -4620,34 +4496,6 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-else|else
-block|{
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Unexpected type for resource {}."
-argument_list|,
-name|obj
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|" ... Expected {}, found {}"
-argument_list|,
-name|UriRef
-operator|.
-name|class
-argument_list|,
-name|obj
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-expr_stmt|;
 block|}
 block|}
 block|}
@@ -4707,6 +4555,14 @@ specifier|public
 name|String
 name|getKey
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 parameter_list|)
@@ -4753,7 +4609,7 @@ specifier|public
 parameter_list|<
 name|O
 extends|extends
-name|TripleCollection
+name|Graph
 parameter_list|>
 name|O
 name|getMetaGraph
@@ -4768,7 +4624,7 @@ block|{
 if|if
 condition|(
 operator|!
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|.
@@ -4783,7 +4639,7 @@ name|IllegalArgumentException
 argument_list|(
 literal|"Only subtypes of "
 operator|+
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|+
@@ -4796,10 +4652,10 @@ name|O
 operator|)
 name|store
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|metaGraphId
 argument_list|)
@@ -4824,7 +4680,7 @@ operator|.
 name|getReverseMapping
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|storageKey
 argument_list|)
@@ -4897,15 +4753,15 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|final
-name|TripleCollection
+name|Graph
 name|meta
 init|=
 name|store
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|metaGraphId
 argument_list|)
@@ -4950,7 +4806,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|sub
 init|=
 name|ta
@@ -4962,7 +4818,7 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|String
@@ -4970,7 +4826,7 @@ name|s
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 operator|)
@@ -5048,7 +4904,7 @@ argument_list|>
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|UriRef
+name|IRI
 name|core_ur
 init|=
 literal|null
@@ -5057,7 +4913,7 @@ name|custom_ur
 init|=
 literal|null
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|r
 decl_stmt|;
 comment|// Check core space
@@ -5100,12 +4956,12 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|core_ur
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -5147,12 +5003,12 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|core_ur
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -5194,12 +5050,12 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|custom_ur
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -5241,12 +5097,12 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|custom_ur
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -5290,7 +5146,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 name|t
@@ -5315,7 +5171,7 @@ operator|.
 name|getObject
 argument_list|()
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|coreOntologies
 operator|.
@@ -5331,7 +5187,7 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -5340,7 +5196,7 @@ argument_list|()
 argument_list|)
 comment|// FIXME must be very
 comment|// temporary!
-comment|// ((UriRef) t.getObject()).getUnicodeString()
+comment|// ((IRI) t.getObject()).getUnicodeString()
 argument_list|)
 expr_stmt|;
 block|}
@@ -5375,7 +5231,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 name|t
@@ -5400,7 +5256,7 @@ operator|.
 name|getSubject
 argument_list|()
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|coreOntologies
 operator|.
@@ -5416,7 +5272,7 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -5425,7 +5281,7 @@ argument_list|()
 argument_list|)
 comment|// FIXME must be very
 comment|// temporary!
-comment|// ((UriRef) t.getSubject()).getUnicodeString()
+comment|// ((IRI) t.getSubject()).getUnicodeString()
 argument_list|)
 expr_stmt|;
 block|}
@@ -5468,7 +5324,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 name|t
@@ -5493,7 +5349,7 @@ operator|.
 name|getObject
 argument_list|()
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|customOntologies
 operator|.
@@ -5509,7 +5365,7 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -5518,7 +5374,7 @@ argument_list|()
 argument_list|)
 comment|// FIXME must be very
 comment|// temporary!
-comment|// ((UriRef) t.getObject()).getUnicodeString()
+comment|// ((IRI) t.getObject()).getUnicodeString()
 argument_list|)
 expr_stmt|;
 block|}
@@ -5553,7 +5409,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|predicate
 init|=
 name|t
@@ -5578,7 +5434,7 @@ operator|.
 name|getSubject
 argument_list|()
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|customOntologies
 operator|.
@@ -5594,7 +5450,7 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|t
 operator|.
@@ -5603,7 +5459,7 @@ argument_list|()
 argument_list|)
 comment|// FIXME must be very
 comment|// temporary!
-comment|// ((UriRef) t.getSubject()).getUnicodeString()
+comment|// ((IRI) t.getSubject()).getUnicodeString()
 argument_list|)
 expr_stmt|;
 block|}
@@ -5674,7 +5530,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|sub
 init|=
 name|ta
@@ -5686,14 +5542,14 @@ if|if
 condition|(
 name|sub
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|ses_ur
 init|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 decl_stmt|;
@@ -5702,7 +5558,7 @@ name|s
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|sub
 operator|)
@@ -5815,7 +5671,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it2
@@ -5830,7 +5686,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|sessionOntologies
 operator|.
@@ -5846,12 +5702,12 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 argument_list|)
 comment|// FIXME must be very temporary!
-comment|// ((UriRef) obj).getUnicodeString()
+comment|// ((IRI) obj).getUnicodeString()
 argument_list|)
 expr_stmt|;
 block|}
@@ -5881,7 +5737,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|it2
@@ -5896,7 +5752,7 @@ if|if
 condition|(
 name|subj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|sessionOntologies
 operator|.
@@ -5912,12 +5768,12 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 argument_list|)
 comment|// FIXME must be very temporary!
-comment|// ((UriRef) subj).getUnicodeString()
+comment|// ((IRI) subj).getUnicodeString()
 argument_list|)
 expr_stmt|;
 block|}
@@ -5947,7 +5803,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|subj
 init|=
 name|it2
@@ -5962,7 +5818,7 @@ if|if
 condition|(
 name|subj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|String
@@ -5970,7 +5826,7 @@ name|s1
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|subj
 operator|)
@@ -6053,7 +5909,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
 name|it2
@@ -6068,7 +5924,7 @@ if|if
 condition|(
 name|obj
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|String
@@ -6076,7 +5932,7 @@ name|s1
 init|=
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|obj
 operator|)
@@ -6174,7 +6030,7 @@ name|OWLOntologyID
 name|ontologyId
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|ur
 init|=
 name|keymap
@@ -6251,6 +6107,14 @@ parameter_list|>
 name|O
 name|getStoredOntology
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|reference
 parameter_list|,
@@ -6286,6 +6150,14 @@ parameter_list|>
 name|O
 name|getStoredOntology
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|reference
 parameter_list|,
@@ -6473,7 +6345,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * In this implementation the identifier is the Graph Name (e.g. ontonet::blabla)      */
+comment|/**      * In this implementation the identifier is the ImmutableGraph Name (e.g. ontonet::blabla)      */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -6607,15 +6479,15 @@ operator|+
 name|supported
 argument_list|)
 throw|;
-name|TripleCollection
+name|Graph
 name|tc
 init|=
 name|store
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|identifier
 argument_list|)
@@ -6631,10 +6503,10 @@ return|return
 literal|null
 return|;
 comment|/*          * The ontology provider itself does not wrap the returned object into an in-memory graph, therefore          * any direct modifications will be propagated. Collectors should wrap them, though. To change this          * behaviour, uncomment the line below.          */
-comment|// tc = new SimpleMGraph(tc);
+comment|// tc = new SimpleGraph(tc);
 if|if
 condition|(
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|.
@@ -6643,7 +6515,7 @@ argument_list|(
 name|returnType
 argument_list|)
 operator|||
-name|MGraph
+name|Graph
 operator|.
 name|class
 operator|.
@@ -6684,7 +6556,7 @@ operator|)
 name|toOWLOntology
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|identifier
 argument_list|)
@@ -6744,6 +6616,14 @@ specifier|public
 name|boolean
 name|hasOntology
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 parameter_list|)
@@ -6855,7 +6735,7 @@ name|Status
 operator|.
 name|NO_MATCH
 return|;
-name|UriRef
+name|IRI
 name|graphName
 init|=
 name|keymap
@@ -6880,7 +6760,7 @@ if|if
 condition|(
 name|store
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|contains
@@ -6998,17 +6878,17 @@ argument_list|(
 name|publicKey
 argument_list|)
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|meta
 init|=
 name|getMetaGraph
 argument_list|(
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ont
 init|=
 name|keymap
@@ -7020,14 +6900,14 @@ argument_list|)
 decl_stmt|;
 name|Set
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|resources
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -7115,7 +6995,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|Resource
+name|RDFTerm
 name|r
 range|:
 name|resources
@@ -7124,7 +7004,7 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|OWLOntologyID
@@ -7135,7 +7015,7 @@ operator|.
 name|buildPublicKey
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 argument_list|)
@@ -7257,7 +7137,7 @@ name|getPublicKeys
 argument_list|()
 control|)
 block|{
-name|UriRef
+name|IRI
 name|graphName
 init|=
 name|keymap
@@ -7276,7 +7156,7 @@ operator|||
 operator|!
 name|store
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|contains
@@ -7361,6 +7241,14 @@ name|OWLOntologyID
 argument_list|>
 name|listVersions
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 parameter_list|)
@@ -7446,7 +7334,7 @@ argument_list|,
 name|formatIdentifier
 argument_list|)
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|rdfData
 init|=
 name|parser
@@ -7485,6 +7373,14 @@ name|OWLOntologyID
 name|loadInStore
 parameter_list|(
 specifier|final
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|ontologyIri
 parameter_list|,
@@ -7526,6 +7422,14 @@ argument_list|(
 literal|"Ontology IRI cannot be null."
 argument_list|)
 throw|;
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|location
 init|=
@@ -7744,18 +7648,6 @@ name|sup
 argument_list|)
 expr_stmt|;
 block|}
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Will try {} supported formats"
-argument_list|,
-name|formats
-operator|.
-name|size
-argument_list|()
-argument_list|)
-expr_stmt|;
 for|for
 control|(
 name|String
@@ -7847,58 +7739,17 @@ continue|continue;
 block|}
 catch|catch
 parameter_list|(
-name|OntologyLoadingException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|OntologyLoadingException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
 name|Exception
 name|e
 parameter_list|)
 block|{
-comment|// From here we should only be expecting parser-specific exceptions.
 name|log
 operator|.
 name|debug
 argument_list|(
-literal|"FAILURE format {} (most likely a parse error). Will try next one."
+literal|"FAILURE format {} (parse error). Will try next one."
 argument_list|,
 name|currentFormat
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|debug
-argument_list|(
-literal|"Logged exception was a {} : {}"
-argument_list|,
-name|e
-operator|.
-name|getClass
-argument_list|()
-argument_list|,
-name|e
-operator|.
-name|getLocalizedMessage
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|log
-operator|.
-name|trace
-argument_list|(
-literal|"Stack trace follows:"
-argument_list|,
-name|e
 argument_list|)
 expr_stmt|;
 continue|continue;
@@ -7912,27 +7763,9 @@ argument_list|(
 literal|"All parsers failed, giving up."
 argument_list|)
 expr_stmt|;
-name|log
-operator|.
-name|error
-argument_list|(
-literal|"Failing location was<{}>"
-argument_list|,
-name|location
-argument_list|)
-expr_stmt|;
-throw|throw
-operator|new
-name|OntologyLoadingException
-argument_list|(
-literal|"Failed to parse an ontology from location<"
-operator|+
-name|location
-operator|+
-literal|">"
-argument_list|)
-throw|;
-comment|// return null;
+return|return
+literal|null
+return|;
 block|}
 annotation|@
 name|Override
@@ -7981,14 +7814,14 @@ operator|.
 name|currentTimeMillis
 argument_list|()
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|targetGraph
 decl_stmt|;
 comment|// The final graph
-name|TripleCollection
+name|Graph
 name|rdfData
 decl_stmt|;
-comment|// The supplied ontology converted to TripleCollection
+comment|// The supplied ontology converted to Graph
 if|if
 condition|(
 name|ontology
@@ -8001,7 +7834,7 @@ name|rdfData
 operator|=
 name|OWLAPIToClerezzaConverter
 operator|.
-name|owlOntologyToClerezzaMGraph
+name|owlOntologyToClerezzaGraph
 argument_list|(
 operator|(
 name|OWLOntology
@@ -8015,14 +7848,14 @@ if|if
 condition|(
 name|ontology
 operator|instanceof
-name|TripleCollection
+name|Graph
 condition|)
 block|{
 comment|// This might be in memory or in persistent storage.
 name|rdfData
 operator|=
 operator|(
-name|TripleCollection
+name|Graph
 operator|)
 name|ontology
 expr_stmt|;
@@ -8034,7 +7867,7 @@ name|UnsupportedOperationException
 argument_list|(
 literal|"This ontology provider can only accept objects assignable to "
 operator|+
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 operator|+
@@ -8053,7 +7886,7 @@ init|=
 literal|null
 decl_stmt|;
 comment|/*          * Compute aliases          */
-name|UriRef
+name|IRI
 name|graphName
 init|=
 literal|null
@@ -8074,6 +7907,14 @@ decl_stmt|;
 comment|// Priority aliases.
 name|List
 argument_list|<
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 argument_list|>
 name|sources
@@ -8081,6 +7922,14 @@ init|=
 operator|new
 name|ArrayList
 argument_list|<
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 argument_list|>
 argument_list|()
@@ -8270,6 +8119,14 @@ if|if
 condition|(
 name|ref
 operator|instanceof
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 condition|)
 block|{
@@ -8278,6 +8135,14 @@ operator|.
 name|add
 argument_list|(
 operator|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|)
 name|ref
@@ -8298,7 +8163,7 @@ if|if
 condition|(
 name|ref
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 if|if
@@ -8311,7 +8176,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Graph name already assigned as {}. Skipping."
+literal|"ImmutableGraph name already assigned as {}. Skipping."
 argument_list|,
 name|graphName
 argument_list|)
@@ -8321,7 +8186,7 @@ block|{
 name|graphName
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|ref
 expr_stmt|;
@@ -8393,6 +8258,14 @@ literal|null
 condition|)
 comment|// No overrides, no extracted ID.
 block|{
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|z
 decl_stmt|;
@@ -8425,6 +8298,14 @@ literal|null
 condition|)
 name|z
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -8439,6 +8320,14 @@ else|else
 comment|// Extrema ratio : compute a timestamped primary key.
 name|z
 operator|=
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
@@ -8483,7 +8372,7 @@ literal|null
 operator|&&
 name|store
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|contains
@@ -8500,12 +8389,12 @@ decl_stmt|;
 comment|// Any failed check will abort the scan.
 comment|// Check if the extracted ontology ID matches that of the supplied graph.
 comment|// XXX note that anonymous ontologies should be considered a match... or should they not?
-name|TripleCollection
+name|Graph
 name|tc
 init|=
 name|store
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 name|graphName
 argument_list|)
@@ -8547,7 +8436,7 @@ name|condition
 operator|&&
 name|rdfData
 operator|instanceof
-name|TripleCollection
+name|Graph
 condition|)
 name|condition
 operator|&=
@@ -8581,7 +8470,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Graph with ID {} already in store. Default action is to skip storage."
+literal|"ImmutableGraph with ID {} already in store. Default action is to skip storage."
 argument_list|,
 name|graphName
 argument_list|)
@@ -8590,7 +8479,7 @@ name|targetGraph
 operator|=
 name|store
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 name|graphName
 argument_list|)
@@ -8673,7 +8562,7 @@ expr_stmt|;
 name|graphName
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|URIUtils
 operator|.
@@ -8698,7 +8587,7 @@ name|targetGraph
 operator|=
 name|store
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|graphName
 argument_list|)
@@ -8726,7 +8615,7 @@ name|targetGraph
 operator|=
 name|store
 operator|.
-name|getMGraph
+name|getGraph
 argument_list|(
 name|graphName
 argument_list|)
@@ -8736,7 +8625,7 @@ name|targetGraph
 operator|=
 name|store
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|graphName
 argument_list|)
@@ -8823,7 +8712,7 @@ argument_list|)
 decl_stmt|;
 name|getMetaGraph
 argument_list|(
-name|MGraph
+name|Graph
 operator|.
 name|class
 argument_list|)
@@ -8837,6 +8726,14 @@ block|}
 comment|// Add aliases.
 for|for
 control|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|source
 range|:
@@ -8895,7 +8792,6 @@ operator|+
 name|alias
 expr_stmt|;
 block|}
-comment|// Resolve imports.
 comment|// Do this AFTER registering the ontology, otherwise import cycles will cause infinite loops.
 if|if
 condition|(
@@ -8903,60 +8799,6 @@ name|resolveImports
 condition|)
 block|{
 comment|// Scan resources of type owl:Ontology, but only get the first.
-name|NonLiteral
-name|ontologySubject
-init|=
-literal|null
-decl_stmt|;
-name|List
-argument_list|<
-name|UriRef
-argument_list|>
-name|importTargets
-init|=
-operator|new
-name|LinkedList
-argument_list|<
-name|UriRef
-argument_list|>
-argument_list|()
-decl_stmt|;
-name|Lock
-name|l
-init|=
-literal|null
-decl_stmt|;
-comment|// There could be locking iterators...
-if|if
-condition|(
-name|targetGraph
-operator|instanceof
-name|LockableMGraph
-condition|)
-block|{
-name|l
-operator|=
-operator|(
-operator|(
-name|LockableMGraph
-operator|)
-name|targetGraph
-operator|)
-operator|.
-name|getLock
-argument_list|()
-operator|.
-name|readLock
-argument_list|()
-expr_stmt|;
-name|l
-operator|.
-name|lock
-argument_list|()
-expr_stmt|;
-block|}
-try|try
-block|{
 name|Iterator
 argument_list|<
 name|Triple
@@ -8985,8 +8827,18 @@ operator|.
 name|hasNext
 argument_list|()
 condition|)
-name|ontologySubject
-operator|=
+block|{
+comment|// Scan import statements for the one owl:Ontology considered.
+name|Iterator
+argument_list|<
+name|Triple
+argument_list|>
+name|it2
+init|=
+name|targetGraph
+operator|.
+name|filter
+argument_list|(
 name|it
 operator|.
 name|next
@@ -8994,22 +8846,6 @@ argument_list|()
 operator|.
 name|getSubject
 argument_list|()
-expr_stmt|;
-if|if
-condition|(
-name|ontologySubject
-operator|!=
-literal|null
-condition|)
-block|{
-comment|// Scan import statements for the one owl:Ontology considered.
-name|it
-operator|=
-name|targetGraph
-operator|.
-name|filter
-argument_list|(
-name|ontologySubject
 argument_list|,
 name|OWL
 operator|.
@@ -9017,19 +8853,19 @@ name|imports
 argument_list|,
 literal|null
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 while|while
 condition|(
-name|it
+name|it2
 operator|.
 name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|obj
 init|=
-name|it
+name|it2
 operator|.
 name|next
 argument_list|()
@@ -9037,68 +8873,51 @@ operator|.
 name|getObject
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|obj
-operator|instanceof
-name|UriRef
-condition|)
-name|importTargets
-operator|.
-name|add
-argument_list|(
-operator|(
-name|UriRef
-operator|)
-name|obj
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-block|}
-finally|finally
-block|{
-if|if
-condition|(
-name|l
-operator|!=
-literal|null
-condition|)
-name|l
-operator|.
-name|unlock
-argument_list|()
-expr_stmt|;
-block|}
-for|for
-control|(
-name|UriRef
-name|importTgt
-range|:
-name|importTargets
-control|)
-try|try
-block|{
 name|log
 operator|.
 name|info
 argument_list|(
 literal|"Resolving import target {}"
 argument_list|,
-name|importTgt
+name|obj
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|obj
+operator|instanceof
+name|IRI
+condition|)
+try|try
+block|{
+comment|// TODO try locals first
+name|IRI
+name|target
+init|=
+operator|(
+name|IRI
+operator|)
+name|obj
+decl_stmt|;
 name|OWLOntologyID
 name|id
 init|=
 operator|new
 name|OWLOntologyID
 argument_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|.
 name|create
 argument_list|(
-name|importTgt
+name|target
 operator|.
 name|getUnicodeString
 argument_list|()
@@ -9129,33 +8948,39 @@ name|RuntimeException
 argument_list|(
 literal|"Cannot load imported ontology "
 operator|+
-name|importTgt
+name|obj
 operator|+
 literal|" while Stanbol is in offline mode."
 argument_list|)
 throw|;
 comment|// TODO manage origins for imported ontologies too?
-try|try
-block|{
-name|IRI
-name|irimp
-init|=
-name|IRI
-operator|.
-name|create
-argument_list|(
-name|importTgt
-operator|.
-name|getUnicodeString
-argument_list|()
-argument_list|)
-decl_stmt|;
 name|OWLOntologyID
 name|id2
 init|=
 name|loadInStore
 argument_list|(
-name|irimp
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
+name|IRI
+operator|.
+name|create
+argument_list|(
+operator|(
+operator|(
+name|IRI
+operator|)
+name|obj
+operator|)
+operator|.
+name|getUnicodeString
+argument_list|()
+argument_list|)
 argument_list|,
 literal|null
 argument_list|,
@@ -9176,39 +9001,18 @@ name|log
 operator|.
 name|info
 argument_list|(
-literal|"<== SUCCESS"
+literal|"Import {} resolved."
+argument_list|,
+name|obj
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OntologyLoadingException
-name|e
-parameter_list|)
-block|{
 name|log
 operator|.
-name|warn
+name|debug
 argument_list|(
-literal|"<== FAIL"
+literal|""
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|failMissingImports
-condition|)
-throw|throw
-name|e
-throw|;
-else|else
-name|log
-operator|.
-name|warn
-argument_list|(
-literal|"Import from IRI<{}> failed, but will not abort due to permissive failed import handling set for this ontology provider."
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 else|else
 block|{
@@ -9242,7 +9046,7 @@ name|warn
 argument_list|(
 literal|"Failed to parse format for resource "
 operator|+
-name|importTgt
+name|obj
 argument_list|,
 name|e
 argument_list|)
@@ -9261,12 +9065,14 @@ name|warn
 argument_list|(
 literal|"Failed to load ontology from resource "
 operator|+
-name|importTgt
+name|obj
 argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
 comment|// / XXX configure to continue?
+block|}
+block|}
 block|}
 block|}
 name|log
@@ -9362,7 +9168,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|UriRef
+name|IRI
 name|graphName
 init|=
 name|keymap
@@ -9392,7 +9198,7 @@ comment|// remove metadata
 comment|// Now the actual deletion
 name|store
 operator|.
-name|deleteTripleCollection
+name|deleteGraph
 argument_list|(
 name|graphName
 argument_list|)
@@ -9451,6 +9257,14 @@ specifier|public
 name|void
 name|setLocatorMapping
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|locator
 parameter_list|,
@@ -9515,6 +9329,14 @@ specifier|public
 name|void
 name|setLocatorMapping
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|locator
 parameter_list|,
@@ -9545,13 +9367,13 @@ condition|(
 operator|!
 name|store
 operator|.
-name|listTripleCollections
+name|listGraphs
 argument_list|()
 operator|.
 name|contains
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|key
 argument_list|)
@@ -9600,7 +9422,7 @@ argument_list|(
 name|locator
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|key
 argument_list|)
@@ -9687,7 +9509,7 @@ specifier|protected
 name|OWLOntology
 name|toOWLOntology
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphName
 parameter_list|,
 name|boolean
@@ -9707,7 +9529,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|" -- Graph name : {}"
+literal|" -- ImmutableGraph name : {}"
 argument_list|,
 name|graphName
 argument_list|)
@@ -9731,6 +9553,14 @@ argument_list|(
 name|Collections
 operator|.
 expr|<
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 operator|>
 name|emptySet
@@ -9751,17 +9581,17 @@ name|OWLOntologyID
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|TripleCollection
+name|Graph
 name|graph
 init|=
 name|store
 operator|.
-name|getTriples
+name|getGraph
 argument_list|(
 name|graphName
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|ontologyId
 init|=
 literal|null
@@ -9796,7 +9626,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|nl
 init|=
 name|itt
@@ -9811,12 +9641,12 @@ if|if
 condition|(
 name|nl
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 name|ontologyId
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|nl
 expr_stmt|;
@@ -9847,8 +9677,6 @@ name|OWLOntologyID
 argument_list|>
 argument_list|()
 decl_stmt|;
-try|try
-block|{
 name|fillImportsReverse
 argument_list|(
 name|keymap
@@ -9863,21 +9691,6 @@ argument_list|,
 name|lvl1
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|OntologyHandleException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|OWLOntologyCreationException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
 comment|// If not set to merge (either by policy of by force), adopt the set import policy.
 if|if
 condition|(
@@ -10078,11 +9891,11 @@ name|o
 return|;
 block|}
 comment|// FIXME when there's more than one ontology, this way of merging them seems inefficient...
-name|TripleCollection
+name|Graph
 name|tempGraph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 comment|// The set of triples that will be excluded from the merge
@@ -10119,7 +9932,7 @@ argument_list|)
 condition|)
 block|{
 comment|// Get the triples
-name|TripleCollection
+name|Graph
 name|imported
 init|=
 comment|// store.getTriples(ref);
@@ -10130,7 +9943,7 @@ argument_list|(
 name|ref
 argument_list|)
 argument_list|,
-name|MGraph
+name|Graph
 operator|.
 name|class
 argument_list|,
@@ -10167,7 +9980,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|subj
 init|=
 name|remove

@@ -59,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -111,11 +111,11 @@ class|class
 name|NIFHelperTest
 block|{
 specifier|static
-name|UriRef
+name|IRI
 name|base
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://stanbol.apache.org/test/nif/nif-helper"
 argument_list|)
@@ -138,7 +138,7 @@ operator|.
 name|assertEquals
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|base
 operator|.
@@ -277,11 +277,11 @@ argument_list|,
 literal|"MD5"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|expected
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|base
 operator|.

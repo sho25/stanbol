@@ -1517,7 +1517,7 @@ name|log
 operator|.
 name|error
 argument_list|(
-literal|"Unable to process Solr Index Archive from Resource "
+literal|"Unable to process Solr Index Archive from RDFTerm "
 operator|+
 name|registeredResource
 operator|.

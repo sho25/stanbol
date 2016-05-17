@@ -299,11 +299,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -315,11 +315,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -331,9 +331,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -347,11 +347,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -485,7 +485,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -1867,22 +1867,22 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|processed
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 try|try
@@ -2064,7 +2064,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|resource
 init|=
 name|st
@@ -2079,7 +2079,7 @@ if|if
 condition|(
 name|resource
 operator|instanceof
-name|UriRef
+name|IRI
 operator|&&
 name|processed
 operator|.
@@ -2096,7 +2096,7 @@ name|put
 argument_list|(
 operator|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|resource
 operator|)
@@ -2109,7 +2109,7 @@ operator|.
 name|createRdfRepresentation
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|resource
 argument_list|,

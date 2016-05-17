@@ -489,9 +489,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -505,11 +505,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -521,11 +521,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -537,11 +537,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -1641,7 +1643,7 @@ name|SOLR_CORE
 init|=
 literal|"enhancer.engines.linking.lucenefst.solrcore"
 decl_stmt|;
-comment|/**      * The origin information for all Entities provided by the configured SolrCore and      * FST. Origin information are added to all<code>fise:EntityAnnotation</code>      * by using the<code>fise:origin</code> property. Configured values can be both      * {@link UriRef URI}s or {@link Literal}s. Configured Strings are checked if      * they are valid {@link URI}s and  {@link URI#isAbsolute() absolute}. If not      * a {@link Literal} is parsed.      */
+comment|/**      * The origin information for all Entities provided by the configured SolrCore and      * FST. Origin information are added to all<code>fise:EntityAnnotation</code>      * by using the<code>fise:origin</code> property. Configured values can be both      * {@link IRI URI}s or {@link Literal}s. Configured Strings are checked if      * they are valid {@link URI}s and  {@link URI#isAbsolute() absolute}. If not      * a {@link Literal} is parsed.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1734,7 +1736,7 @@ name|engineName
 decl_stmt|;
 comment|/**      * The origin information of Entities.      */
 specifier|private
-name|Resource
+name|RDFTerm
 name|origin
 decl_stmt|;
 comment|/**      * used to resolve '{prefix}:{local-name}' used within the engines configuration      */
@@ -2452,13 +2454,13 @@ if|if
 condition|(
 name|value
 operator|instanceof
-name|Resource
+name|RDFTerm
 condition|)
 block|{
 name|origin
 operator|=
 operator|(
-name|Resource
+name|RDFTerm
 operator|)
 name|origin
 expr_stmt|;
@@ -2496,7 +2498,7 @@ block|{
 name|origin
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 operator|(
 name|String
@@ -2560,7 +2562,7 @@ name|log
 operator|.
 name|warn
 argument_list|(
-literal|"Values of the {} property MUST BE of type Resource or String "
+literal|"Values of the {} property MUST BE of type RDFTerm or String "
 operator|+
 literal|"(parsed: {} (type:{}))"
 argument_list|,

@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -85,13 +85,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -184,7 +188,7 @@ name|setUp
 parameter_list|()
 block|{
 specifier|final
-name|Graph
+name|ImmutableGraph
 name|graph
 init|=
 name|Parser
@@ -213,7 +217,7 @@ operator|new
 name|PermissionDefinitions
 argument_list|(
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|(
 name|graph
 operator|.

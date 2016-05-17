@@ -181,11 +181,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -197,11 +197,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -213,11 +213,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -379,7 +381,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -717,22 +719,22 @@ decl_stmt|;
 comment|//The URI at which this service was accessed accessed, this will be the
 comment|//central serviceUri in the response
 specifier|final
-name|UriRef
+name|IRI
 name|serviceUri
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|resourcePath
 argument_list|)
 decl_stmt|;
 comment|//the in memory graph to which the triples for the response are added
 specifier|final
-name|MGraph
+name|Graph
 name|responseGraph
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
 comment|//This GraphNode represents the service within our result graph
@@ -957,7 +959,7 @@ expr_stmt|;
 block|}
 comment|//this contains the enhancement results
 specifier|final
-name|MGraph
+name|Graph
 name|resultGraph
 init|=
 name|contentItem
@@ -967,7 +969,7 @@ argument_list|()
 decl_stmt|;
 comment|//this is the IRI assigned to the subitted content
 specifier|final
-name|UriRef
+name|IRI
 name|contentIri
 init|=
 name|contentItem

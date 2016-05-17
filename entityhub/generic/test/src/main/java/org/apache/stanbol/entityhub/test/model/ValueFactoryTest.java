@@ -382,7 +382,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUriReference
+name|testIRIerence
 parameter_list|()
 throws|throws
 name|URISyntaxException

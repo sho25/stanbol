@@ -39,11 +39,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|PlainLiteral
+name|Literal
 import|;
 end_import
 
@@ -146,7 +146,7 @@ init|=
 literal|0
 decl_stmt|;
 specifier|private
-name|PlainLiteral
+name|Literal
 name|label
 decl_stmt|;
 specifier|private
@@ -188,7 +188,7 @@ parameter_list|,
 name|int
 name|span
 parameter_list|,
-name|PlainLiteral
+name|Literal
 name|label
 parameter_list|)
 block|{
@@ -230,7 +230,7 @@ parameter_list|,
 name|float
 name|tokenMatchScore
 parameter_list|,
-name|PlainLiteral
+name|Literal
 name|label
 parameter_list|,
 name|int
@@ -534,7 +534,7 @@ return|;
 block|}
 comment|/**      * The actual label of the {@link #getResult() result} that produced the      * based match for the given search tokens.      * @return the label      */
 specifier|public
-name|PlainLiteral
+name|Literal
 name|getMatchedLabel
 parameter_list|()
 block|{

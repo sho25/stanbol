@@ -69,9 +69,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -101,11 +101,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -117,9 +117,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -133,11 +133,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -198,12 +198,12 @@ class|class
 name|PermissionDefinitions
 block|{
 specifier|private
-name|MGraph
+name|Graph
 name|systemGraph
 decl_stmt|;
 name|PermissionDefinitions
 parameter_list|(
-name|MGraph
+name|Graph
 name|systeGraph
 parameter_list|)
 block|{
@@ -247,7 +247,7 @@ operator|.
 name|filter
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|location
 argument_list|)
@@ -267,11 +267,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|user
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|ownerTriples
 operator|.
@@ -317,12 +317,12 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/** 	 * Look for all permissions of a role and add them to a list. 	 * And if the role has another role, then execute this function recursively, 	 * until all permissions are found. 	 *  	 * @param role	a<code>NonLiteral</code> which is either a user or a role 	 * @param permInfoList	a list with all the added permissions of this bundle 	 */
+comment|/** 	 * Look for all permissions of a role and add them to a list. 	 * And if the role has another role, then execute this function recursively, 	 * until all permissions are found. 	 *  	 * @param role	a<code>BlankNodeOrIRI</code> which is either a user or a role 	 * @param permInfoList	a list with all the added permissions of this bundle 	 */
 specifier|private
 name|void
 name|lookForPermissions
 parameter_list|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|role
 parameter_list|,
 name|List
@@ -359,11 +359,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|permission
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|permissionTriples
 operator|.
@@ -462,11 +462,11 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|anotherRole
 init|=
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|roleTriples
 operator|.

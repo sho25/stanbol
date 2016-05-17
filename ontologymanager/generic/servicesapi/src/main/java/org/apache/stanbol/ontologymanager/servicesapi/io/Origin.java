@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -63,26 +63,12 @@ name|owlapi
 operator|.
 name|model
 operator|.
-name|IRI
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|semanticweb
-operator|.
-name|owlapi
-operator|.
-name|model
-operator|.
 name|OWLOntologyID
 import|;
 end_import
 
 begin_comment
-comment|/**  * A wrapper class for whatever can be used for physically referencing a resource (typically an ontology).  * Currently the supported types are:  *<ul>  *<li> {@link IRI}, which is interpreted as the physical location of the resource.  *<li> {@link OWLOntologyID}, which is interpreted as the public key of an ontology already stored by Stanbol.  *<li> {@link UriRef}, which is interpreted as the name of a graph to be retrieved from an underlying Clerezza  * store (typically a {@link TcProvider}).  *</ul>  *   * @author alexdma  *   * @param<R>  *            the resource reference.  */
+comment|/**  * A wrapper class for whatever can be used for physically referencing a resource (typically an ontology).  * Currently the supported types are:  *<ul>  *<li> {@link IRI}, which is interpreted as the physical location of the resource.  *<li> {@link OWLOntologyID}, which is interpreted as the public key of an ontology already stored by Stanbol.  *<li> {@link IRI}, which is interpreted as the name of a graph to be retrieved from an underlying Clerezza  * store (typically a {@link TcProvider}).  *</ul>  *   * @author alexdma  *   * @param<R>  *            the resource reference.  */
 end_comment
 
 begin_class
@@ -98,10 +84,26 @@ specifier|public
 specifier|static
 name|Origin
 argument_list|<
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 argument_list|>
 name|create
 parameter_list|(
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 name|physicalURL
 parameter_list|)
@@ -110,6 +112,14 @@ return|return
 operator|new
 name|Origin
 argument_list|<
+name|org
+operator|.
+name|semanticweb
+operator|.
+name|owlapi
+operator|.
+name|model
+operator|.
 name|IRI
 argument_list|>
 argument_list|(
@@ -146,11 +156,11 @@ specifier|public
 specifier|static
 name|Origin
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|create
 parameter_list|(
-name|UriRef
+name|IRI
 name|graphName
 parameter_list|)
 block|{
@@ -158,7 +168,7 @@ return|return
 operator|new
 name|Origin
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|(
 name|graphName

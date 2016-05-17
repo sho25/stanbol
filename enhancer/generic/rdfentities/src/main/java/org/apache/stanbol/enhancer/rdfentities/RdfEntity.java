@@ -25,11 +25,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -41,11 +41,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -57,11 +57,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -74,8 +74,8 @@ specifier|public
 interface|interface
 name|RdfEntity
 block|{
-comment|/**      * Getter for the RDF node represented by the Proxy.      *      * @return the node representing the proxy. Typically an {@link UriRef} but      * could be also a {@link BNode}      */
-name|NonLiteral
+comment|/**      * Getter for the RDF node represented by the Proxy.      *      * @return the node representing the proxy. Typically an {@link IRI} but      * could be also a {@link BlankNode}      */
+name|BlankNodeOrIRI
 name|getId
 parameter_list|()
 function_decl|;

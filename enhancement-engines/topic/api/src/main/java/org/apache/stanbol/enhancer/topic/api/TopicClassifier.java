@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -43,11 +43,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -336,13 +336,13 @@ comment|/**      * Initialize the concept hierarchy of the model using the provi
 name|int
 name|importConceptsFromGraph
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|graph
 parameter_list|,
-name|UriRef
+name|IRI
 name|conceptClass
 parameter_list|,
-name|UriRef
+name|IRI
 name|broaderProperty
 parameter_list|)
 throws|throws

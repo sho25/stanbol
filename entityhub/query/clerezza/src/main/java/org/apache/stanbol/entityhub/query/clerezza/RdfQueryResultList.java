@@ -107,11 +107,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -230,7 +230,7 @@ name|results
 decl_stmt|;
 specifier|private
 specifier|final
-name|MGraph
+name|Graph
 name|resultGraph
 decl_stmt|;
 specifier|public
@@ -239,7 +239,7 @@ parameter_list|(
 name|FieldQuery
 name|query
 parameter_list|,
-name|MGraph
+name|Graph
 name|resultGraph
 parameter_list|)
 block|{
@@ -269,7 +269,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Parameter \"MGraph resultGraph\" MUST NOT be NULL"
+literal|"Parameter \"Graph resultGraph\" MUST NOT be NULL"
 argument_list|)
 throw|;
 block|}
@@ -303,7 +303,7 @@ name|addToCollection
 argument_list|(
 name|ClerezzaQueryUtils
 operator|.
-name|parseQueryResultsFromMGraph
+name|parseQueryResultsFromGraph
 argument_list|(
 name|resultGraph
 argument_list|)
@@ -487,10 +487,10 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/**      * Getter for the RDF Graph holding the Results of the Query      * @return the RDF Graph with the Results      */
+comment|/**      * Getter for the RDF ImmutableGraph holding the Results of the Query      * @return the RDF ImmutableGraph with the Results      */
 specifier|public
 specifier|final
-name|MGraph
+name|Graph
 name|getResultGraph
 parameter_list|()
 block|{

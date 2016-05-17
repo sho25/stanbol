@@ -191,11 +191,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -207,11 +207,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -713,7 +713,7 @@ specifier|private
 specifier|static
 name|OntologyInputSource
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 name|minorSrc
 decl_stmt|,
@@ -738,7 +738,7 @@ specifier|private
 specifier|static
 name|OntologyInputSource
 argument_list|<
-name|TripleCollection
+name|Graph
 argument_list|>
 name|getLocalSource
 parameter_list|(
@@ -808,7 +808,7 @@ name|ScopeRegistryImpl
 argument_list|()
 decl_stmt|;
 comment|// This one is created from scratch
-name|MGraph
+name|Graph
 name|ont2
 init|=
 name|ClerezzaOWLUtils
@@ -828,7 +828,7 @@ name|GraphSource
 argument_list|(
 name|ont2
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1178,7 +1178,7 @@ if|if
 condition|(
 name|o
 operator|instanceof
-name|TripleCollection
+name|Graph
 condition|)
 name|logicalId
 operator|=
@@ -1187,7 +1187,7 @@ operator|.
 name|extractOntologyID
 argument_list|(
 operator|(
-name|TripleCollection
+name|Graph
 operator|)
 name|o
 argument_list|)

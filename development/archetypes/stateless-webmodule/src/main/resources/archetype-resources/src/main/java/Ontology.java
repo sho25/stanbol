@@ -43,11 +43,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -64,11 +64,11 @@ comment|/**      * Resources of this type handle HTTP POST requests with a multi
 specifier|public
 specifier|static
 specifier|final
-name|UriRef
+name|IRI
 name|MultiEnhancer
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://example.org/service-description${symbol_pound}MultiEnhancer"
 argument_list|)

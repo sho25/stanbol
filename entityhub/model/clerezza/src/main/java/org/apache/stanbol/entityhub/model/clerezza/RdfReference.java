@@ -27,11 +27,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -64,7 +64,7 @@ name|Cloneable
 block|{
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 specifier|protected
@@ -113,7 +113,7 @@ operator|.
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|reference
 argument_list|)
@@ -123,7 +123,7 @@ block|}
 specifier|protected
 name|RdfReference
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|)
 block|{
@@ -187,8 +187,8 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|UriRef
-name|getUriRef
+name|IRI
+name|getIRI
 parameter_list|()
 block|{
 return|return
@@ -209,7 +209,7 @@ operator|new
 name|RdfReference
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|uri
 operator|.

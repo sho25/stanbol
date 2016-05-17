@@ -379,11 +379,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|BNode
+name|BlankNode
 import|;
 end_import
 
@@ -395,11 +395,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -411,9 +411,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -427,27 +427,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|LiteralFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -475,11 +459,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -491,11 +475,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -507,9 +491,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -523,11 +507,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -539,11 +523,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TypedLiteral
+name|IRI
 import|;
 end_import
 
@@ -555,27 +539,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|UriRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -589,13 +559,31 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|impl
+operator|.
+name|utils
+operator|.
+name|TripleImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
 name|rdf
 operator|.
 name|core
 operator|.
-name|impl
-operator|.
-name|TripleImpl
+name|LiteralFactory
 import|;
 end_import
 
@@ -611,7 +599,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -790,18 +778,18 @@ parameter_list|()
 block|{
 comment|/* Do not allow instances of utility classes*/
 block|}
-comment|/**      * Writes all triples for an ep:ExecutionNode to the parsed {@link MGraph}.      * An {@link BNode} is use for representing the execution node resource.      * @param graph the graph to write the triples. MUST NOT be empty      * @param epNode the NonLiteral representing the ep:ExecutionPlan      * @param engineName the name of the engine. MUST NOT be<code>null</code> nor empty      * @param optional if the execution of this node is optional or required      * @param dependsOn other nodes that MUST BE executed before this one. Parse       *<code>null</code> or an empty set if none.      * @return the resource representing the added ep:ExecutionNode.      * @deprecated use {@link #writeExecutionNode(MGraph, NonLiteral, String, boolean, Set, Map)}      * with<code>null</code> as last parameter      */
+comment|/**      * Writes all triples for an ep:ExecutionNode to the parsed {@link Graph}.      * An {@link BlankNode} is use for representing the execution node resource.      * @param graph the graph to write the triples. MUST NOT be empty      * @param epNode the BlankNodeOrIRI representing the ep:ExecutionPlan      * @param engineName the name of the engine. MUST NOT be<code>null</code> nor empty      * @param optional if the execution of this node is optional or required      * @param dependsOn other nodes that MUST BE executed before this one. Parse       *<code>null</code> or an empty set if none.      * @return the resource representing the added ep:ExecutionNode.      * @deprecated use {@link #writeExecutionNode(Graph, BlankNodeOrIRI, String, boolean, Set, Map)}      * with<code>null</code> as last parameter      */
 annotation|@
 name|Deprecated
 specifier|public
 specifier|static
-name|NonLiteral
+name|BlankNodeOrIRI
 name|writeExecutionNode
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|epNode
 parameter_list|,
 name|String
@@ -812,7 +800,7 @@ name|optional
 parameter_list|,
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|dependsOn
 parameter_list|)
@@ -834,16 +822,16 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Writes all triples for an ep:ExecutionNode to the parsed {@link MGraph}.      * An {@link BNode} is use for representing the execution node resource.      * @param graph the graph to write the triples. MUST NOT be empty      * @param epNode the NonLiteral representing the ep:ExecutionPlan      * @param engineName the name of the engine. MUST NOT be<code>null</code> nor empty      * @param optional if the execution of this node is optional or required      * @param dependsOn other nodes that MUST BE executed before this one. Parse       *<code>null</code> or an empty set if none.      * @param enhProps the EnhancementProperties for this ExecutionNode or      *<code>null</code> if none      * @return the resource representing the added ep:ExecutionNode.      * @since 0.12.1      */
+comment|/**      * Writes all triples for an ep:ExecutionNode to the parsed {@link Graph}.      * An {@link BlankNode} is use for representing the execution node resource.      * @param graph the graph to write the triples. MUST NOT be empty      * @param epNode the BlankNodeOrIRI representing the ep:ExecutionPlan      * @param engineName the name of the engine. MUST NOT be<code>null</code> nor empty      * @param optional if the execution of this node is optional or required      * @param dependsOn other nodes that MUST BE executed before this one. Parse       *<code>null</code> or an empty set if none.      * @param enhProps the EnhancementProperties for this ExecutionNode or      *<code>null</code> if none      * @return the resource representing the added ep:ExecutionNode.      * @since 0.12.1      */
 specifier|public
 specifier|static
-name|NonLiteral
+name|BlankNodeOrIRI
 name|writeExecutionNode
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|epNode
 parameter_list|,
 name|String
@@ -854,7 +842,7 @@ name|optional
 parameter_list|,
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|dependsOn
 parameter_list|,
@@ -878,7 +866,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"The parsed MGraph MUST NOT be NULL!"
+literal|"The parsed Graph MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
@@ -917,11 +905,11 @@ literal|"The ep:ExecutionPlan instance MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 init|=
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 decl_stmt|;
 name|graph
@@ -982,7 +970,7 @@ condition|)
 block|{
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|dependend
 range|:
 name|dependsOn
@@ -1048,15 +1036,15 @@ return|return
 name|node
 return|;
 block|}
-comment|/**      * Creates an ExecutionPlan for the parsed chainName in the parsed Graph      * @param graph the graph      * @param chainName the chain name      * @return the node representing the ex:ExecutionPlan      * @deprecated use {@link #createExecutionPlan(MGraph, String, Map)} with      * parsing<code>null</code> as last parameter      */
+comment|/**      * Creates an ExecutionPlan for the parsed chainName in the parsed ImmutableGraph      * @param graph the graph      * @param chainName the chain name      * @return the node representing the ex:ExecutionPlan      * @deprecated use {@link #createExecutionPlan(Graph, String, Map)} with      * parsing<code>null</code> as last parameter      */
 annotation|@
 name|Deprecated
 specifier|public
 specifier|static
-name|NonLiteral
+name|BlankNodeOrIRI
 name|createExecutionPlan
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|String
@@ -1074,13 +1062,13 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an ExecutionPlan for the parsed chainName in the parsed Graph      * @param graph the graph      * @param chainName the chain name      * @param enhProps the map with the enhancement properties defined for the      * chain or<code>null</code> if none      * @return the node representing the ex:ExecutionPlan      * @since 0.12.1      */
+comment|/**      * Creates an ExecutionPlan for the parsed chainName in the parsed ImmutableGraph      * @param graph the graph      * @param chainName the chain name      * @param enhProps the map with the enhancement properties defined for the      * chain or<code>null</code> if none      * @return the node representing the ex:ExecutionPlan      * @since 0.12.1      */
 specifier|public
 specifier|static
-name|NonLiteral
+name|BlankNodeOrIRI
 name|createExecutionPlan
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|String
@@ -1106,7 +1094,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"The parsed MGraph MUST NOT be NULL!"
+literal|"The parsed Graph MUST NOT be NULL!"
 argument_list|)
 throw|;
 block|}
@@ -1130,11 +1118,11 @@ literal|"The parsed Chain name MUST NOT be NULL nor empty!"
 argument_list|)
 throw|;
 block|}
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 init|=
 operator|new
-name|BNode
+name|BlankNode
 argument_list|()
 decl_stmt|;
 name|graph
@@ -1186,35 +1174,35 @@ return|return
 name|node
 return|;
 block|}
-comment|/**      * Evaluates the parsed {@link Graph execution plan} and the set of already executed      * {@link ExecutionPlan#EXECUTION_NODE ep:ExecutionNode}s to find the next      * nodes that can be executed.       * @param executionPlan the execution plan      * @param executed the already executed {@link ExecutionPlan#EXECUTION_NODE node}s      * or an empty set to determine the nodes to start the execution.      * @return the set of nodes that can be executed next or an empty set if      * there are no more nodes to execute.      */
+comment|/**      * Evaluates the parsed {@link ImmutableGraph execution plan} and the set of already executed      * {@link ExecutionPlan#EXECUTION_NODE ep:ExecutionNode}s to find the next      * nodes that can be executed.       * @param executionPlan the execution plan      * @param executed the already executed {@link ExecutionPlan#EXECUTION_NODE node}s      * or an empty set to determine the nodes to start the execution.      * @return the set of nodes that can be executed next or an empty set if      * there are no more nodes to execute.      */
 specifier|public
 specifier|static
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getExecutable
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|,
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executed
 parameter_list|)
 block|{
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executeable
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1244,7 +1232,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 init|=
 name|nodes
@@ -1338,7 +1326,7 @@ annotation|@
 name|Deprecated
 specifier|public
 specifier|static
-name|Graph
+name|ImmutableGraph
 name|calculateExecutionPlan
 parameter_list|(
 name|String
@@ -1381,7 +1369,7 @@ block|}
 comment|/**      * Creates an execution plan based on the       * {@link ServiceProperties#ENHANCEMENT_ENGINE_ORDERING} of the parsed      * EnhancementEngines. NOTE that the parsed list is modified as it is sorted by      * using the {@link EnhancementEngineHelper#EXECUTION_ORDER_COMPARATOR}.<p>      * A second parameter with the set of optional engines can be used to define      * what {@link ExecutionPlan#EXECUTION_NODE} in the execution plan should be       * marked as {@link ExecutionPlan#OPTIONAL}.      * @param chainName the name of the Chain to build the execution plan for      * @param availableEngines the list of engines      * @param optional the names of optional engines.      * @param missing the names of missing engines      * @param enhProps chain scoped enhancement properties. The key of the outer      * map are the name of the engine or<code>null</code> for the chain. The      * inner map uses the property as key and the value(s) as value. Multiple      * values can be parsed as {@link Collection}. Single values will be      * converted to RDF {@link TypedLiteral}s by using the {@link LiteralFactory}.      * For types not supported by the LiteralFactory the<code>toString()</code>      * method will be used.<code>null</code> can be parsed if no enhancement      * properties are present.      * @return the execution plan      * @since 0.12.1      */
 specifier|public
 specifier|static
-name|Graph
+name|ImmutableGraph
 name|calculateExecutionPlan
 parameter_list|(
 name|String
@@ -1450,14 +1438,14 @@ argument_list|)
 expr_stmt|;
 comment|//now we have all required and possible also optional engines
 comment|//  -> build the execution plan
-name|MGraph
+name|Graph
 name|ep
 init|=
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|epNode
 init|=
 name|createExecutionPlan
@@ -1487,7 +1475,7 @@ literal|null
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|prev
 init|=
@@ -1495,14 +1483,14 @@ literal|null
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|current
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1524,7 +1512,7 @@ argument_list|(
 name|name
 argument_list|)
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 init|=
 name|writeExecutionNode
@@ -1617,7 +1605,7 @@ operator|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -1628,7 +1616,7 @@ expr_stmt|;
 block|}
 try|try
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 init|=
 name|writeExecutionNode
@@ -1706,7 +1694,7 @@ block|}
 return|return
 name|ep
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 return|;
 block|}
@@ -1716,10 +1704,10 @@ specifier|static
 name|void
 name|writeEnhancementProperties
 parameter_list|(
-name|MGraph
+name|Graph
 name|ep
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 parameter_list|,
 name|String
@@ -1817,7 +1805,7 @@ argument_list|,
 name|node
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1849,13 +1837,13 @@ specifier|static
 name|void
 name|writeEnhancementProperty
 parameter_list|(
-name|MGraph
+name|Graph
 name|ep
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|epNode
 parameter_list|,
-name|UriRef
+name|IRI
 name|property
 parameter_list|,
 name|Object
@@ -2040,7 +2028,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Utility that checks if the parsed graph contains a valid execution      * plan. This method is intended to be used by components that need to      * ensure that an parsed graph contains a valid execution plan.<p>      * This especially checks:<ul>      *<li> if for all {@link ExecutionPlan#EXECUTION_NODE}s      *<li> if they define a unary and valid value for the      * {@link ExecutionPlan#ENGINE} property and      *<li> if all {@link ExecutionPlan#DEPENDS_ON} values do actually point      * to an other execution node in the parsed graph      *<ul><p>      * This method does not modify the parsed graph. Therefore it is save      * to parse a {@link Graph} object.<p>      * TODO: There is no check for cycles implemented yet.      * @param the graph to check      * @return the engine names referenced by the validated execution plan-      * @throws ChainException      */
+comment|/**      * Utility that checks if the parsed graph contains a valid execution      * plan. This method is intended to be used by components that need to      * ensure that an parsed graph contains a valid execution plan.<p>      * This especially checks:<ul>      *<li> if for all {@link ExecutionPlan#EXECUTION_NODE}s      *<li> if they define a unary and valid value for the      * {@link ExecutionPlan#ENGINE} property and      *<li> if all {@link ExecutionPlan#DEPENDS_ON} values do actually point      * to an other execution node in the parsed graph      *<ul><p>      * This method does not modify the parsed graph. Therefore it is save      * to parse a {@link ImmutableGraph} object.<p>      * TODO: There is no check for cycles implemented yet.      * @param the graph to check      * @return the engine names referenced by the validated execution plan-      * @throws ChainException      */
 specifier|public
 specifier|static
 name|Set
@@ -2049,7 +2037,7 @@ name|String
 argument_list|>
 name|validateExecutionPlan
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|)
 throws|throws
@@ -2087,11 +2075,11 @@ argument_list|()
 decl_stmt|;
 name|Map
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|nodeDependencies
@@ -2099,11 +2087,11 @@ init|=
 operator|new
 name|HashMap
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 argument_list|()
@@ -2117,7 +2105,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 init|=
 name|executionNodeIt
@@ -2241,14 +2229,14 @@ argument_list|)
 expr_stmt|;
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|dependsOn
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2278,7 +2266,7 @@ argument_list|()
 condition|;
 control|)
 block|{
-name|Resource
+name|RDFTerm
 name|o
 init|=
 name|t
@@ -2293,7 +2281,7 @@ if|if
 condition|(
 name|o
 operator|instanceof
-name|NonLiteral
+name|BlankNodeOrIRI
 condition|)
 block|{
 name|dependsOn
@@ -2301,7 +2289,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|o
 argument_list|)
@@ -2347,11 +2335,11 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|,
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|>
 name|entry
@@ -2374,7 +2362,7 @@ condition|)
 block|{
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|dependent
 range|:
 name|entry
@@ -2427,27 +2415,27 @@ specifier|public
 specifier|static
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getDependend
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 parameter_list|)
 block|{
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|dependend
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2471,14 +2459,14 @@ name|addDependend
 parameter_list|(
 name|Collection
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|collection
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 parameter_list|)
 block|{
@@ -2511,7 +2499,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|it
 operator|.
@@ -2529,10 +2517,10 @@ specifier|static
 name|boolean
 name|isOptional
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 parameter_list|)
 block|{
@@ -2572,10 +2560,10 @@ specifier|static
 name|String
 name|getEngine
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|executionPlan
 parameter_list|,
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionNode
 parameter_list|)
 block|{
@@ -2602,7 +2590,7 @@ parameter_list|(
 name|EnhancementEngineManager
 name|engineManager
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|ep
 parameter_list|)
 block|{
@@ -2621,20 +2609,20 @@ argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|visited
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executeable
 decl_stmt|;
@@ -2651,7 +2639,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|NonLiteral
+name|BlankNodeOrIRI
 name|node
 range|:
 name|executeable
@@ -2719,10 +2707,10 @@ block|}
 comment|/**      * Getter for the {@link ExecutionPlan#EXECUTION_PLAN} node of an execution      * plan for the given chainNmame. This method is handy for components that      * need to get an execution plan for a graph that might potentially contain      * more than a single execution plan.      * @param graph the graph      * @param chainName the chain name      * @return the node or<code>null</code> if not found      */
 specifier|public
 specifier|static
-name|NonLiteral
+name|BlankNodeOrIRI
 name|getExecutionPlan
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|,
 name|String
@@ -2815,15 +2803,15 @@ specifier|public
 specifier|static
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|getExecutionNodes
 parameter_list|(
-name|TripleCollection
+name|Graph
 name|ep
 parameter_list|,
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|executionPlanNode
 parameter_list|)
 block|{
@@ -2859,14 +2847,14 @@ throw|;
 block|}
 name|Set
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 name|executionNodes
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|NonLiteral
+name|BlankNodeOrIRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2903,7 +2891,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|node
 init|=
 name|t
@@ -2915,7 +2903,7 @@ if|if
 condition|(
 name|node
 operator|instanceof
-name|NonLiteral
+name|BlankNodeOrIRI
 condition|)
 block|{
 name|executionNodes
@@ -2923,7 +2911,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|node
 argument_list|)
@@ -2939,7 +2927,7 @@ literal|"The value of the "
 operator|+
 name|HAS_EXECUTION_NODE
 operator|+
-literal|" property MUST BE a NonLiteral (triple: "
+literal|" property MUST BE a BlankNodeOrIRI (triple: "
 operator|+
 name|t
 operator|+

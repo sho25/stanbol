@@ -347,9 +347,25 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
+name|ImmutableGraph
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
 operator|.
 name|Graph
 import|;
@@ -363,11 +379,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -379,29 +395,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|NonLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -413,11 +417,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -896,7 +902,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Property used to configure the Graph by using the line based       * representation with the following Syntax:      *<code><pre>      *&lt;engineName&gt;;&lt;parm1&gt;=&lt;value1&gt;,&lt;value2&gt;;&lt;parm2&gt;=&lt;value1&gt;...      *</pre></code>      * Note that this property is ignored in case {@link #PROPERTY_GRAPH_RESOURCE}      * is defined.      *<p>      * Example:      *<code><pre>      *   metaxa      *   langId;dependsOn=metaxa      *   ner;dependsOn=langId      *   zemanta;optional      *   dbpedia-linking;dependsOn=ner      *   geonames;optional;dependsOn=ner      *   refactor;dependsOn=geonames,dbpedia-linking,zemanta      *</pre></code>       */
+comment|/**      * Property used to configure the ImmutableGraph by using the line based       * representation with the following Syntax:      *<code><pre>      *&lt;engineName&gt;;&lt;parm1&gt;=&lt;value1&gt;,&lt;value2&gt;;&lt;parm2&gt;=&lt;value1&gt;...      *</pre></code>      * Note that this property is ignored in case {@link #PROPERTY_GRAPH_RESOURCE}      * is defined.      *<p>      * Example:      *<code><pre>      *   metaxa      *   langId;dependsOn=metaxa      *   ner;dependsOn=langId      *   zemanta;optional      *   dbpedia-linking;dependsOn=ner      *   geonames;optional;dependsOn=ner      *   refactor;dependsOn=geonames,dbpedia-linking,zemanta      *</pre></code>       */
 specifier|public
 specifier|static
 specifier|final
@@ -1282,7 +1288,7 @@ name|ConfigurationException
 argument_list|(
 name|PROPERTY_CHAIN_LIST
 argument_list|,
-literal|"The list based configuration of a Graph Chain MUST BE "
+literal|"The list based configuration of a ImmutableGraph Chain MUST BE "
 operator|+
 literal|"configured as a Array or Collection of Strings (parsed: "
 operator|+
@@ -1301,7 +1307,7 @@ operator|)
 operator|+
 literal|"). NOTE you can also "
 operator|+
-literal|"configure the Graph by pointing to a resource with the graph as"
+literal|"configure the ImmutableGraph by pointing to a resource with the graph as"
 operator|+
 literal|"value of the property '"
 operator|+
@@ -1507,7 +1513,7 @@ begin_function
 annotation|@
 name|Override
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws
@@ -1564,7 +1570,7 @@ name|resourceData
 decl_stmt|;
 comment|/**          * The execution Plan. Use the {@link #resourceName} to sync access.<p>          * The executionPlan is parsed and validated within          * {@link #updateExecutionPlan()}          */
 specifier|private
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 decl_stmt|;
 comment|/**          * The referenced engine names. Use the {@link #resourceName} to sync           * access.<p>          * This variable is initialised in {@link #updateExecutionPlan()}          */
@@ -1575,7 +1581,7 @@ name|String
 argument_list|>
 name|engineNames
 decl_stmt|;
-comment|/**          * Parser used to parse the RDF {@link Graph} from the {@link InputStream}          * provided to the {@link #available(String, InputStream)} method by the          * {@link DataFileTracker}.          */
+comment|/**          * Parser used to parse the RDF {@link ImmutableGraph} from the {@link InputStream}          * provided to the {@link #available(String, InputStream)} method by the          * {@link DataFileTracker}.          */
 specifier|private
 specifier|final
 name|String
@@ -1792,7 +1798,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws
@@ -1989,7 +1995,7 @@ name|Chain
 block|{
 specifier|private
 specifier|final
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 decl_stmt|;
 specifier|private
@@ -2106,14 +2112,14 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
-name|NonLiteral
+name|BlankNodeOrIRI
 name|epNode
 init|=
 name|createExecutionPlan
@@ -2126,7 +2132,7 @@ argument_list|,
 name|chainProperties
 argument_list|)
 decl_stmt|;
-comment|//caches the String name -> {NonLiteral node, List<Stirng> dependsOn} mappings
+comment|//caches the String name -> {BlankNodeOrIRI node, List<Stirng> dependsOn} mappings
 name|Map
 argument_list|<
 name|String
@@ -2314,7 +2320,7 @@ operator|new
 name|TripleImpl
 argument_list|(
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|info
 operator|.
@@ -2329,7 +2335,7 @@ operator|.
 name|DEPENDS_ON
 argument_list|,
 operator|(
-name|NonLiteral
+name|BlankNodeOrIRI
 operator|)
 name|targetInfo
 index|[
@@ -2377,14 +2383,14 @@ name|executionPlan
 operator|=
 name|graph
 operator|.
-name|getGraph
+name|getImmutableGraph
 argument_list|()
 expr_stmt|;
 block|}
 annotation|@
 name|Override
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws

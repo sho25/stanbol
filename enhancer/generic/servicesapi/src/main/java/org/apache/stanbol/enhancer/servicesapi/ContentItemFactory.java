@@ -55,11 +55,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -71,9 +71,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -87,11 +87,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -131,7 +131,7 @@ comment|/**      * Creates a new ContentItem for the passed id and content sourc
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|ContentSource
@@ -140,7 +140,7 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
-comment|/**      * Creates a new ContentItem for the passed id and content source.      * @param prefix the URI prefix used generate the URI of the content item.      * Note the only a generated ID will be added to the passed prefix. So passed      * values should typically end with an separator char (e.g. '/', '#', ':').      * Implementors might want to use      * {@link ContentItemHelper#streamDigest(InputStream, java.io.OutputStream, String)      * for generating an ID while reading the data from the ContentSource.<p>      * The content provided by the {@link ContentSource} is consumed by the      * this method and stored as {@link Blob} with the returned {@link ContentItem}.      * In addition implementors need to ensure that this {@link Blob} is also      * used by the {@link ContentItem#getBlob()}, {@link ContentItem#getStream()},      * and {@link ContentItem#getMimeType()} methods.<p>      * Callers can safely close any resource related to the parsed {@link ContentSource}      * method after this method returns.      * @param source The content source      * @param metadata an {@link MGraph} with the metadata or<code>null</code>      * if none. Implementation are free to use the passed instance or to generate       * a new one. However they MUST ensure that all {@link Triple}s contained by       * the passed graph are also added to the {@link ContentItem#getMetadata()       * metadata} of the returned ContentItem.      * @return the {@link ContentItem} with a passed/generated id and the passed      * content as content-part of type {@link Blob} at index<code>0</code>      * @throws IllegalArgumentException if<code>null</code> is passed as content      * source, the content source is already consumed or the      * passed prefix is<code>null</code>.      * @throws IOException on any error while reading the content from the       * content source.      */
+comment|/**      * Creates a new ContentItem for the passed id and content source.      * @param prefix the URI prefix used generate the URI of the content item.      * Note the only a generated ID will be added to the passed prefix. So passed      * values should typically end with an separator char (e.g. '/', '#', ':').      * Implementors might want to use      * {@link ContentItemHelper#streamDigest(InputStream, java.io.OutputStream, String)      * for generating an ID while reading the data from the ContentSource.<p>      * The content provided by the {@link ContentSource} is consumed by the      * this method and stored as {@link Blob} with the returned {@link ContentItem}.      * In addition implementors need to ensure that this {@link Blob} is also      * used by the {@link ContentItem#getBlob()}, {@link ContentItem#getStream()},      * and {@link ContentItem#getMimeType()} methods.<p>      * Callers can safely close any resource related to the parsed {@link ContentSource}      * method after this method returns.      * @param source The content source      * @param metadata an {@link Graph} with the metadata or<code>null</code>      * if none. Implementation are free to use the passed instance or to generate       * a new one. However they MUST ensure that all {@link Triple}s contained by       * the passed graph are also added to the {@link ContentItem#getMetadata()       * metadata} of the returned ContentItem.      * @return the {@link ContentItem} with a passed/generated id and the passed      * content as content-part of type {@link Blob} at index<code>0</code>      * @throws IllegalArgumentException if<code>null</code> is passed as content      * source, the content source is already consumed or the      * passed prefix is<code>null</code>.      * @throws IOException on any error while reading the content from the       * content source.      */
 name|ContentItem
 name|createContentItem
 parameter_list|(
@@ -150,23 +150,23 @@ parameter_list|,
 name|ContentSource
 name|source
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
-comment|/**      * Creates a new ContentItem for the passed id and content source.      * @param id the id for the ContentItem or<code>null</code> to generate an id.      * If<code>null</code> is passed as ID, implementors might want to use      * {@link ContentItemHelper#streamDigest(InputStream, java.io.OutputStream, String)      * for generating an ID while reading the data from the ContentSource.<p>      * The content provided by the {@link ContentSource} is consumed by the      * this method and stored as {@link Blob} with the returned {@link ContentItem}.      * In addition implementors need to ensure that this {@link Blob} is also      * used by the {@link ContentItem#getBlob()}, {@link ContentItem#getStream()},      * and {@link ContentItem#getMimeType()} methods.<p>      * Callers can safely close any resource related to the parsed {@link ContentSource}      * method after this method returns.      * @param source The content source      * @param metadata an {@link MGraph} with the metadata or<code>null</code>      * if none. Implementation are free to use the passed instance or to generate       * a new one. However they MUST ensure that all {@link Triple}s contained by       * the passed graph are also added to the {@link ContentItem#getMetadata()       * metadata} of the returned ContentItem.      * @return the {@link ContentItem} with a passed/generated id and the passed      * content as content-part of type {@link Blob} at index<code>0</code>      * @throws IllegalArgumentException if<code>null</code> is passed as content      * source, the content source is already consumed or the      * passed id is not<code>null</code> but empty.      * @throws IOException on any error while reading the content from the       * content source.      */
+comment|/**      * Creates a new ContentItem for the passed id and content source.      * @param id the id for the ContentItem or<code>null</code> to generate an id.      * If<code>null</code> is passed as ID, implementors might want to use      * {@link ContentItemHelper#streamDigest(InputStream, java.io.OutputStream, String)      * for generating an ID while reading the data from the ContentSource.<p>      * The content provided by the {@link ContentSource} is consumed by the      * this method and stored as {@link Blob} with the returned {@link ContentItem}.      * In addition implementors need to ensure that this {@link Blob} is also      * used by the {@link ContentItem#getBlob()}, {@link ContentItem#getStream()},      * and {@link ContentItem#getMimeType()} methods.<p>      * Callers can safely close any resource related to the parsed {@link ContentSource}      * method after this method returns.      * @param source The content source      * @param metadata an {@link Graph} with the metadata or<code>null</code>      * if none. Implementation are free to use the passed instance or to generate       * a new one. However they MUST ensure that all {@link Triple}s contained by       * the passed graph are also added to the {@link ContentItem#getMetadata()       * metadata} of the returned ContentItem.      * @return the {@link ContentItem} with a passed/generated id and the passed      * content as content-part of type {@link Blob} at index<code>0</code>      * @throws IllegalArgumentException if<code>null</code> is passed as content      * source, the content source is already consumed or the      * passed id is not<code>null</code> but empty.      * @throws IOException on any error while reading the content from the       * content source.      */
 name|ContentItem
 name|createContentItem
 parameter_list|(
-name|UriRef
+name|IRI
 name|id
 parameter_list|,
 name|ContentSource
 name|source
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 throws|throws
@@ -182,14 +182,14 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
-comment|/**      * Creates a new ContentItem for the passed {@link ContentReference}. The      * {@link ContentReference#getReference()} is used as ID for the content      * item. Implementations might choose to {@link ContentReference#dereference()      * dereference}      * the reference at creation if needed.      * @param reference the reference to the content      * @param metadata an {@link MGraph} with the metadata or<code>null</code>      * if none. Implementation are free to use the passed instance or to generate       * a new one. However they MUST ensure that all {@link Triple}s contained by       * the passed graph are also added to the {@link ContentItem#getMetadata()       * metadata} of the returned ContentItem.      * @return the {@link ContentItem} with the {@link ContentReference#getReference()}      * as ID.      * @throws IOException if the implementation {@link ContentReference#dereference()      * dereferences} the {@link ContentReference} during creation and this action      * fails.      * @throws IllegalArgumentException if the passed {@link ContentReference}      * is<code>null</code>.      */
+comment|/**      * Creates a new ContentItem for the passed {@link ContentReference}. The      * {@link ContentReference#getReference()} is used as ID for the content      * item. Implementations might choose to {@link ContentReference#dereference()      * dereference}      * the reference at creation if needed.      * @param reference the reference to the content      * @param metadata an {@link Graph} with the metadata or<code>null</code>      * if none. Implementation are free to use the passed instance or to generate       * a new one. However they MUST ensure that all {@link Triple}s contained by       * the passed graph are also added to the {@link ContentItem#getMetadata()       * metadata} of the returned ContentItem.      * @return the {@link ContentItem} with the {@link ContentReference#getReference()}      * as ID.      * @throws IOException if the implementation {@link ContentReference#dereference()      * dereferences} the {@link ContentReference} during creation and this action      * fails.      * @throws IllegalArgumentException if the passed {@link ContentReference}      * is<code>null</code>.      */
 name|ContentItem
 name|createContentItem
 parameter_list|(
 name|ContentReference
 name|reference
 parameter_list|,
-name|MGraph
+name|Graph
 name|metadata
 parameter_list|)
 throws|throws

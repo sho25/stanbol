@@ -442,7 +442,7 @@ name|log
 operator|.
 name|debug
 argument_list|(
-literal|"Import Resource {}"
+literal|"Import RDFTerm {}"
 argument_list|,
 name|resourceName
 argument_list|)

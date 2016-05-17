@@ -45,11 +45,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -157,7 +157,7 @@ implements|implements
 name|Recipe
 block|{
 specifier|private
-name|UriRef
+name|IRI
 name|recipeID
 decl_stmt|;
 specifier|private
@@ -176,7 +176,7 @@ comment|/**      * Create a new {@code RecipeImpl} from a set of rule expressed 
 specifier|public
 name|RecipeImpl
 parameter_list|(
-name|UriRef
+name|IRI
 name|recipeID
 parameter_list|,
 name|String
@@ -226,7 +226,7 @@ name|ruleList
 return|;
 block|}
 specifier|public
-name|UriRef
+name|IRI
 name|getRecipeID
 parameter_list|()
 block|{
@@ -533,7 +533,7 @@ specifier|public
 name|Rule
 name|getRule
 parameter_list|(
-name|UriRef
+name|IRI
 name|ruleID
 parameter_list|)
 throws|throws
@@ -628,21 +628,21 @@ name|Override
 specifier|public
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|listRuleIDs
 parameter_list|()
 block|{
 name|List
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|ruleIDs
 init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;

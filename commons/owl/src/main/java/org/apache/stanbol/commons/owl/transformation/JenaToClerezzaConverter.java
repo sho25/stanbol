@@ -77,25 +77,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -109,13 +93,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -262,7 +250,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class provides static methods to convert:  *   *<ul>  *<li> a Jena Model (see {@link Model}) to a list of Clerezza triples (see {@link Triple})  *<li> a Jena Model to a Clerezza MGraph (see {@link MGraph})  *<li> a Clerezza MGraph a Jena Model  *<li> a Clerezza MGraph a Jena Graph (see {@link Graph}}  *</ul>  *   *   * @author andrea.nuzzolese  *  */
+comment|/**  * This class provides static methods to convert:  *   *<ul>  *<li> a Jena Model (see {@link Model}) to a list of Clerezza triples (see {@link Triple})  *<li> a Jena Model to a Clerezza Graph (see {@link Graph})  *<li> a Clerezza Graph a Jena Model  *<li> a Clerezza Graph a Jena ImmutableGraph (see {@link ImmutableGraph}}  *</ul>  *   *   * @author andrea.nuzzolese  *  */
 end_comment
 
 begin_class
@@ -302,10 +290,20 @@ name|Triple
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
 name|mGraph
 init|=
-name|jenaModelToClerezzaMGraph
+name|jenaModelToClerezzaGraph
 argument_list|(
 name|model
 argument_list|)
@@ -349,11 +347,21 @@ return|return
 name|clerezzaTriples
 return|;
 block|}
-comment|/** 	 *  	 * Converts a Jena {@link Model} to Clerezza {@link MGraph}. 	 *  	 * @param model {@link Model} 	 * @return the equivalent Clerezza {@link MGraph}. 	 */
+comment|/** 	 *  	 * Converts a Jena {@link Model} to Clerezza {@link Graph}. 	 *  	 * @param model {@link Model} 	 * @return the equivalent Clerezza {@link Graph}. 	 */
 specifier|public
 specifier|static
-name|MGraph
-name|jenaModelToClerezzaMGraph
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
+name|jenaModelToClerezzaGraph
 parameter_list|(
 name|Model
 name|model
@@ -392,11 +400,21 @@ operator|new
 name|JenaParserProvider
 argument_list|()
 decl_stmt|;
-name|MGraph
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
 name|mGraph
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|parser
@@ -418,13 +436,23 @@ return|return
 name|mGraph
 return|;
 block|}
-comment|/** 	 * Converts a Clerezza {@link MGraph} to a Jena {@link Model}. 	 *  	 * @param mGraph {@link MGraph} 	 * @return the equivalent Jena {@link Model}. 	 */
+comment|/** 	 * Converts a Clerezza {@link Graph} to a Jena {@link Model}. 	 *  	 * @param mGraph {@link Graph} 	 * @return the equivalent Jena {@link Model}. 	 */
 specifier|public
 specifier|static
 name|Model
-name|clerezzaMGraphToJenaModel
+name|clerezzaGraphToJenaModel
 parameter_list|(
-name|MGraph
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
 name|mGraph
 parameter_list|)
 block|{
@@ -488,7 +516,7 @@ return|return
 name|jenaModel
 return|;
 block|}
-comment|/** 	 * Converts a Clerezza {@link MGraph} to a Jena {@link Graph}. 	 *  	 * @param mGraph {@link MGraph} 	 * @return the equivalent Jena {@link Graph}. 	 */
+comment|/** 	 * Converts a Clerezza {@link Graph} to a Jena {@link ImmutableGraph}. 	 *  	 * @param mGraph {@link Graph} 	 * @return the equivalent Jena {@link ImmutableGraph}. 	 */
 specifier|public
 specifier|static
 name|com
@@ -502,16 +530,26 @@ operator|.
 name|graph
 operator|.
 name|Graph
-name|clerezzaMGraphToJenaGraph
+name|clerezzaGraphToJenaGraph
 parameter_list|(
-name|MGraph
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|commons
+operator|.
+name|rdf
+operator|.
+name|Graph
 name|mGraph
 parameter_list|)
 block|{
 name|Model
 name|jenaModel
 init|=
-name|clerezzaMGraphToJenaModel
+name|clerezzaGraphToJenaModel
 argument_list|(
 name|mGraph
 argument_list|)

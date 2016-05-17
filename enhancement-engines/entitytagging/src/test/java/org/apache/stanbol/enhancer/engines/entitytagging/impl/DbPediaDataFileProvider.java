@@ -165,7 +165,7 @@ throw|throw
 operator|new
 name|IOException
 argument_list|(
-literal|"Resource '"
+literal|"RDFTerm '"
 operator|+
 name|resource
 operator|+

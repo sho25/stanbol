@@ -35,11 +35,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -152,8 +152,8 @@ parameter_list|)
 throws|throws
 name|EnhancementException
 function_decl|;
-comment|/** Return the enhanced Graph of our input text */
-name|Graph
+comment|/** Return the enhanced ImmutableGraph of our input text */
+name|ImmutableGraph
 name|getGraph
 parameter_list|(
 name|EnhancementJobManager

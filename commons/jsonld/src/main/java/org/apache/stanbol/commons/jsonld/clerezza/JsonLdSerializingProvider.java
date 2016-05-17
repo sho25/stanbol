@@ -129,11 +129,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -798,7 +798,7 @@ parameter_list|(
 name|OutputStream
 name|serializedGraph
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|tc
 parameter_list|,
 name|String

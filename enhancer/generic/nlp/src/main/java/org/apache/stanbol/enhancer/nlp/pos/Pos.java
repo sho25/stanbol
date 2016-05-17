@@ -127,11 +127,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1902,7 +1902,7 @@ end_decl_stmt
 begin_decl_stmt
 specifier|private
 specifier|final
-name|UriRef
+name|IRI
 name|uri
 decl_stmt|;
 end_decl_stmt
@@ -1961,7 +1961,7 @@ operator|.
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OLIA_NAMESPACE
 operator|+
@@ -2083,7 +2083,7 @@ operator|.
 name|uri
 operator|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|OLIA_NAMESPACE
 operator|+
@@ -2262,7 +2262,7 @@ end_function
 
 begin_function
 specifier|public
-name|UriRef
+name|IRI
 name|getUri
 parameter_list|()
 block|{

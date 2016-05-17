@@ -41,18 +41,6 @@ name|framework
 operator|.
 name|Assert
 operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|junit
-operator|.
-name|framework
-operator|.
-name|Assert
-operator|.
 name|assertNotNull
 import|;
 end_import
@@ -66,16 +54,6 @@ operator|.
 name|Assert
 operator|.
 name|assertTrue
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Collections
 import|;
 end_import
 
@@ -139,11 +117,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -155,9 +133,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -171,25 +149,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|MGraph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
+name|commons
 operator|.
 name|rdf
-operator|.
-name|core
 operator|.
 name|Triple
 import|;
@@ -203,11 +165,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -219,11 +181,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -253,11 +215,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -271,13 +235,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -289,33 +257,15 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|rdf
-operator|.
-name|core
-operator|.
-name|impl
-operator|.
-name|graphmatching
-operator|.
-name|GraphMatcher
 import|;
 end_import
 
@@ -348,24 +298,6 @@ operator|.
 name|ontologies
 operator|.
 name|SKOS
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|stanbol
-operator|.
-name|entityhub
-operator|.
-name|core
-operator|.
-name|model
-operator|.
-name|InMemoryValueFactory
 import|;
 end_import
 
@@ -472,7 +404,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit tests for testing {@link ClerezzaYard} initialisation and usage in   * cases the configured {@link ClerezzaYardConfig#getGraphUri()} points to  * already existing Clerezza {@link MGraph}s and {@link Graph} instances.<p>  * This basically tests features added with STANBOL-662 and STANBOL-663  * @author Rupert Westenthaler  *  */
+comment|/**  * Unit tests for testing {@link ClerezzaYard} initialisation and usage in   * cases the configured {@link ClerezzaYardConfig#getGraphUri()} points to  * already existing Clerezza {@link Graph}s and {@link ImmutableGraph} instances.<p>  * This basically tests features added with STANBOL-662 and STANBOL-663  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -512,39 +444,39 @@ specifier|static
 specifier|final
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|entityData
 init|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|private
 specifier|static
-name|UriRef
+name|IRI
 name|READ_ONLY_GRAPH_URI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.test.org/read-only-grpah"
 argument_list|)
 decl_stmt|;
 specifier|private
 specifier|static
-name|UriRef
+name|IRI
 name|READ_WRITEGRAPH_URI
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.test.org/read-write-grpah"
 argument_list|)
@@ -579,12 +511,12 @@ operator|.
 name|getInstance
 argument_list|()
 expr_stmt|;
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|tcManager
 operator|.
-name|createMGraph
+name|createGraph
 argument_list|(
 name|READ_WRITEGRAPH_URI
 argument_list|)
@@ -592,7 +524,7 @@ decl_stmt|;
 comment|//add the test data to the MGrpah
 for|for
 control|(
-name|TripleCollection
+name|Graph
 name|tc
 range|:
 name|entityData
@@ -612,7 +544,7 @@ block|}
 comment|//create the read only graph
 name|tcManager
 operator|.
-name|createGraph
+name|createImmutableGraph
 argument_list|(
 name|READ_ONLY_GRAPH_URI
 argument_list|,
@@ -640,7 +572,7 @@ name|readWriteConfig
 operator|.
 name|setDescription
 argument_list|(
-literal|"Tests config with pre-existing MGraph"
+literal|"Tests config with pre-existing Graph"
 argument_list|)
 expr_stmt|;
 name|readWriteConfig
@@ -678,7 +610,7 @@ name|readOnlyYardConfig
 operator|.
 name|setDescription
 argument_list|(
-literal|"Tests config with pre-existing Graph"
+literal|"Tests config with pre-existing ImmutableGraph"
 argument_list|)
 expr_stmt|;
 name|readOnlyYardConfig
@@ -709,9 +641,9 @@ for|for
 control|(
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|entity
 range|:
@@ -1021,9 +953,9 @@ name|yard
 parameter_list|,
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
-name|TripleCollection
+name|Graph
 argument_list|>
 name|entity
 parameter_list|)
@@ -1072,7 +1004,7 @@ operator|instanceof
 name|RdfRepresentation
 argument_list|)
 expr_stmt|;
-name|TripleCollection
+name|Graph
 name|repGraph
 init|=
 operator|(
@@ -1168,20 +1100,20 @@ name|void
 name|initTestData
 parameter_list|()
 block|{
-name|UriRef
+name|IRI
 name|entity1
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.test.org/entity1"
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|entity1Data
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|entity1Data
@@ -1258,18 +1190,18 @@ argument_list|,
 name|entity1Data
 argument_list|)
 expr_stmt|;
-name|MGraph
+name|Graph
 name|entity2Data
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|entity2
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://www.test.org/entity2"
 argument_list|)
@@ -1376,14 +1308,14 @@ parameter_list|()
 block|{
 name|tcManager
 operator|.
-name|deleteTripleCollection
+name|deleteGraph
 argument_list|(
 name|READ_ONLY_GRAPH_URI
 argument_list|)
 expr_stmt|;
 name|tcManager
 operator|.
-name|deleteTripleCollection
+name|deleteGraph
 argument_list|(
 name|READ_WRITEGRAPH_URI
 argument_list|)

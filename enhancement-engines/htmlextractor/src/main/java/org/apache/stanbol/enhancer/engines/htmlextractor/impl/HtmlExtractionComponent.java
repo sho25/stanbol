@@ -39,11 +39,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -85,7 +85,7 @@ name|Object
 argument_list|>
 name|params
 parameter_list|,
-name|MGraph
+name|Graph
 name|result
 parameter_list|)
 throws|throws

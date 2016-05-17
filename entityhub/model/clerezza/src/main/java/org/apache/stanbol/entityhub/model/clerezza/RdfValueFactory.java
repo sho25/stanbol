@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -53,9 +53,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -69,11 +69,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -85,11 +85,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -101,11 +101,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -117,13 +117,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -139,7 +143,7 @@ name|commons
 operator|.
 name|indexedgraph
 operator|.
-name|IndexedMGraph
+name|IndexedGraph
 import|;
 end_import
 
@@ -223,7 +227,7 @@ return|;
 block|}
 comment|/**      * If not<code>null</code> all {@link RdfRepresentation} created by this      * instance will use this graph.      */
 specifier|private
-name|MGraph
+name|Graph
 name|graph
 decl_stmt|;
 specifier|private
@@ -240,7 +244,7 @@ comment|/**      * This allows to create an instance that uses the same graph fo
 specifier|public
 name|RdfValueFactory
 parameter_list|(
-name|MGraph
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -284,7 +288,7 @@ if|if
 condition|(
 name|value
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 return|return
@@ -292,7 +296,7 @@ operator|new
 name|RdfReference
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|value
 argument_list|)
@@ -442,7 +446,7 @@ return|return
 name|createRdfRepresentation
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|id
 argument_list|)
@@ -452,7 +456,7 @@ operator|==
 literal|null
 condition|?
 operator|new
-name|IndexedMGraph
+name|IndexedGraph
 argument_list|()
 else|:
 name|graph
@@ -460,15 +464,15 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * {@link RdfRepresentation} specific create Method based on an existing      * RDF Graph.      *      * @param node The node of the node used for the representation. If this      *     node is not part of the parsed graph, the resulting representation      *     will be empty      * @param graph the graph.      * @return The representation based on the state of the parsed graph      */
+comment|/**      * {@link RdfRepresentation} specific create Method based on an existing      * RDF ImmutableGraph.      *      * @param node The node of the node used for the representation. If this      *     node is not part of the parsed graph, the resulting representation      *     will be empty      * @param graph the graph.      * @return The representation based on the state of the parsed graph      */
 specifier|public
 name|RdfRepresentation
 name|createRdfRepresentation
 parameter_list|(
-name|UriRef
+name|IRI
 name|node
 parameter_list|,
-name|TripleCollection
+name|Graph
 name|graph
 parameter_list|)
 block|{
@@ -512,7 +516,7 @@ name|graph
 argument_list|)
 return|;
 block|}
-comment|/**      * Extracts the Graph for {@link RdfRepresentation} or creates a {@link Graph}      * for all other implementations of {@link Representation}.      *      * @param representation the representation      * @return the read only RDF Graph.      */
+comment|/**      * Extracts the ImmutableGraph for {@link RdfRepresentation} or creates a {@link ImmutableGraph}      * for all other implementations of {@link Representation}.      *      * @param representation the representation      * @return the read only RDF ImmutableGraph.      */
 specifier|public
 name|RdfRepresentation
 name|toRdfRepresentation

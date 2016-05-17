@@ -162,7 +162,7 @@ argument_list|,
 literal|""
 argument_list|)
 block|,
-comment|/** 	 * Resource Description Framework 	 */
+comment|/** 	 * RDFTerm Description Framework 	 */
 name|RDF
 argument_list|(
 literal|"rdf"

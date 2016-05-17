@@ -191,11 +191,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -638,7 +638,7 @@ name|Object
 argument_list|()
 decl_stmt|;
 specifier|private
-name|Graph
+name|ImmutableGraph
 name|executionPlan
 init|=
 literal|null
@@ -1014,7 +1014,7 @@ begin_function
 annotation|@
 name|Override
 specifier|public
-name|Graph
+name|ImmutableGraph
 name|getExecutionPlan
 parameter_list|()
 throws|throws
@@ -1071,7 +1071,7 @@ end_comment
 
 begin_function
 specifier|private
-name|Graph
+name|ImmutableGraph
 name|createExecutionPlan
 parameter_list|()
 throws|throws

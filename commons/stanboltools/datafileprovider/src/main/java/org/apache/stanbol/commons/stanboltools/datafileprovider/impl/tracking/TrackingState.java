@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Internally used to manage {@link DataFileListener} and the state of  * tracked DataFiles.<p>  * Note that different {@link DataFileListener}s may have different {@link STATE}  * for the same Resource (e.g. if a new {@link DataFileListener} is registered  * for a resource it will start with {@link STATE#UNKNOWN} while all the other  * Listeners will be in the state of the resource (either {@link STATE#AVAILABLE}  * or {@link STATE#UNAVAILABLE}). Only after the next tracking the newly added  * {@link DataFileListener} will get fired and be updated to the current state  * of the Resource.<p>  * This model will also allow to introduce an ERROR state that could be used  * to manage that some {@link DataFileListener} where not able to consume a  * current version of a data file.  * @author Rupert Westenthaler  *  */
+comment|/**  * Internally used to manage {@link DataFileListener} and the state of  * tracked DataFiles.<p>  * Note that different {@link DataFileListener}s may have different {@link STATE}  * for the same RDFTerm (e.g. if a new {@link DataFileListener} is registered  * for a resource it will start with {@link STATE#UNKNOWN} while all the other  * Listeners will be in the state of the resource (either {@link STATE#AVAILABLE}  * or {@link STATE#UNAVAILABLE}). Only after the next tracking the newly added  * {@link DataFileListener} will get fired and be updated to the current state  * of the RDFTerm.<p>  * This model will also allow to introduce an ERROR state that could be used  * to manage that some {@link DataFileListener} where not able to consume a  * current version of a data file.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class

@@ -501,9 +501,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -517,9 +517,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Literal
 import|;
@@ -549,11 +549,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -565,11 +565,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -581,11 +581,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|PlainLiteralImpl
 import|;
@@ -599,11 +601,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -1077,7 +1081,7 @@ name|EngineException
 block|{
 name|Entry
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Blob
 argument_list|>
@@ -1413,7 +1417,7 @@ block|}
 comment|/**      * Creates a fise:TextAnnotation for the parsed parameters and      * adds it the the {@link ContentItem#getMetadata()}.<p>      * This method assumes a write lock on the parsed content item.      * @param occ the SurfaceForm      * @param engine the Engine      * @param ci the ContentITem      * @param content the content       * @param lang the language of the content or<code>null</code>      * @return the URI of the created fise:TextAnnotation      */
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|createTextEnhancement
 parameter_list|(
 name|SurfaceForm
@@ -1432,7 +1436,7 @@ name|Language
 name|lang
 parameter_list|)
 block|{
-name|MGraph
+name|Graph
 name|model
 init|=
 name|ci
@@ -1440,7 +1444,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|textAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -1555,7 +1559,7 @@ argument_list|,
 name|DC_TYPE
 argument_list|,
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|occ
 operator|.
@@ -1604,7 +1608,7 @@ block|}
 comment|/** 	 * Creates a fise:EntityAnnotation for the parsed parameters and      * adds it the the {@link ContentItem#getMetadata()}.<p>      * This method assumes a write lock on the parsed content item. 	 * @param resource the candidate resource 	 * @param engine the engine 	 * @param ci the content item 	 * @param textAnnotation the fise:TextAnnotation to dc:relate the 	 * created fise:EntityAnnotation 	 * @return the URI of the created fise:TextAnnotation 	 */
 specifier|public
 specifier|static
-name|UriRef
+name|IRI
 name|createEntityAnnotation
 parameter_list|(
 name|CandidateResource
@@ -1616,11 +1620,11 @@ parameter_list|,
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|)
 block|{
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -1632,7 +1636,7 @@ argument_list|,
 name|engine
 argument_list|)
 decl_stmt|;
-name|MGraph
+name|Graph
 name|model
 init|=
 name|ci
@@ -1834,14 +1838,14 @@ parameter_list|,
 name|ContentItem
 name|ci
 parameter_list|,
-name|UriRef
+name|IRI
 name|textAnnotation
 parameter_list|,
 name|Language
 name|language
 parameter_list|)
 block|{
-name|MGraph
+name|Graph
 name|model
 init|=
 name|ci
@@ -1849,7 +1853,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|entityAnnotation
 init|=
 name|EnhancementEngineHelper
@@ -1935,11 +1939,11 @@ name|getTypeNames
 argument_list|()
 control|)
 block|{
-name|UriRef
+name|IRI
 name|annotationType
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|type
 argument_list|)

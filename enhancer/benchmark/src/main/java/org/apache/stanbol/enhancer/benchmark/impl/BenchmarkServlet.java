@@ -203,11 +203,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -720,7 +720,7 @@ specifier|public
 name|String
 name|format
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|g
 parameter_list|,
 name|String
@@ -860,7 +860,7 @@ name|put
 argument_list|(
 literal|"class.resource.loader.description"
 argument_list|,
-literal|"Velocity Classpath Resource Loader"
+literal|"Velocity Classpath RDFTerm Loader"
 argument_list|)
 expr_stmt|;
 name|config

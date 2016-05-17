@@ -87,11 +87,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -103,11 +103,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|NonLiteral
+name|BlankNodeOrIRI
 import|;
 end_import
 
@@ -119,9 +119,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -135,11 +135,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -289,11 +289,11 @@ name|Override
 specifier|public
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getMatchingSubjects
 parameter_list|(
-name|Graph
+name|ImmutableGraph
 name|g
 parameter_list|)
 block|{
@@ -309,7 +309,7 @@ return|return
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 return|;
@@ -318,7 +318,7 @@ comment|// For all matchers, find the set of subjects that match
 comment|// and compute the intersection of those sets
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|intersection
 init|=
@@ -335,14 +335,14 @@ block|{
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|s
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -386,7 +386,7 @@ argument_list|)
 condition|)
 block|{
 specifier|final
-name|NonLiteral
+name|BlankNodeOrIRI
 name|n
 init|=
 name|t
@@ -398,7 +398,7 @@ if|if
 condition|(
 name|n
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|s
@@ -406,7 +406,7 @@ operator|.
 name|add
 argument_list|(
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|n
 argument_list|)
@@ -414,7 +414,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// TODO do we need to handle non-UriRef subjects?
+comment|// TODO do we need to handle non-IRI subjects?
 block|}
 block|}
 block|}

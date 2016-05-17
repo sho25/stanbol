@@ -169,9 +169,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -201,11 +201,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -217,11 +217,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -233,11 +233,13 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
+operator|.
+name|utils
 operator|.
 name|TripleImpl
 import|;
@@ -873,11 +875,11 @@ comment|//TODO: replace this with a reald ontology
 specifier|private
 specifier|final
 specifier|static
-name|UriRef
+name|IRI
 name|SENTIMENT_PROPERTY
 init|=
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|NamespaceEnum
 operator|.
@@ -1098,7 +1100,7 @@ name|Token
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|metadata
 init|=
 name|ci
@@ -1106,7 +1108,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|UriRef
+name|IRI
 name|base
 init|=
 name|ci
@@ -1140,17 +1142,17 @@ argument_list|(
 name|activeTypes
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|sentence
 init|=
 literal|null
 decl_stmt|;
-name|UriRef
+name|IRI
 name|phrase
 init|=
 literal|null
 decl_stmt|;
-name|UriRef
+name|IRI
 name|word
 init|=
 literal|null
@@ -1178,7 +1180,7 @@ argument_list|()
 decl_stmt|;
 comment|//TODO: filter Spans based on additional requirements
 comment|//(1) write generic information about the span
-name|UriRef
+name|IRI
 name|current
 init|=
 name|writeSpan

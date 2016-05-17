@@ -37,11 +37,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -53,11 +53,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -118,7 +118,7 @@ specifier|private
 specifier|final
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|matchingSubjects
 decl_stmt|;
@@ -127,7 +127,7 @@ parameter_list|(
 name|TripleMatcherGroup
 name|tmg
 parameter_list|,
-name|Graph
+name|ImmutableGraph
 name|graph
 parameter_list|)
 block|{
@@ -303,7 +303,7 @@ name|Override
 specifier|public
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getMatchingSubjects
 parameter_list|()

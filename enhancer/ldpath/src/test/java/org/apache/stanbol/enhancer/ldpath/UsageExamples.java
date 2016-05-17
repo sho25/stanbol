@@ -169,11 +169,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -185,11 +185,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -201,9 +201,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Triple
 import|;
@@ -217,11 +217,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -540,7 +540,7 @@ decl_stmt|;
 specifier|private
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|ldpath
 decl_stmt|;
@@ -568,7 +568,7 @@ name|JenaParserProvider
 argument_list|()
 decl_stmt|;
 comment|//create the content Item with the HTML content
-name|MGraph
+name|Graph
 name|rdfData
 init|=
 name|parseRdfData
@@ -578,7 +578,7 @@ argument_list|,
 literal|"example.rdf.zip"
 argument_list|)
 decl_stmt|;
-name|UriRef
+name|IRI
 name|contentItemId
 init|=
 literal|null
@@ -610,7 +610,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|Resource
+name|RDFTerm
 name|r
 init|=
 name|it
@@ -632,13 +632,13 @@ if|if
 condition|(
 name|r
 operator|instanceof
-name|UriRef
+name|IRI
 condition|)
 block|{
 name|contentItemId
 operator|=
 operator|(
-name|UriRef
+name|IRI
 operator|)
 name|r
 expr_stmt|;
@@ -762,7 +762,7 @@ operator|=
 operator|new
 name|LDPath
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|backend
@@ -835,7 +835,7 @@ argument_list|)
 expr_stmt|;
 name|Program
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|personProgram
 init|=
@@ -917,7 +917,7 @@ name|execute
 parameter_list|(
 name|Program
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|personProgram
 parameter_list|)
@@ -1102,7 +1102,7 @@ argument_list|)
 expr_stmt|;
 name|Program
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|personProgram
 init|=
@@ -1230,7 +1230,7 @@ argument_list|)
 expr_stmt|;
 name|Program
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|personProgram
 init|=
@@ -1336,7 +1336,7 @@ argument_list|)
 expr_stmt|;
 name|Program
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|personProgram
 init|=

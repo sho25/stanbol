@@ -29,11 +29,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -94,17 +94,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Adapter that converts Clerezza {@link UriRef} instances to {@link Reference}s.  * The {@link RdfValueFactory} is used to create {@link Reference} instances.  * @author Rupert Westenthaler  *  */
+comment|/**  * Adapter that converts Clerezza {@link IRI} instances to {@link Reference}s.  * The {@link RdfValueFactory} is used to create {@link Reference} instances.  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|UriRef2ReferenceAdapter
+name|IRI2ReferenceAdapter
 implements|implements
 name|Adapter
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Reference
 argument_list|>
@@ -126,7 +126,7 @@ specifier|final
 name|Reference
 name|adapt
 parameter_list|(
-name|UriRef
+name|IRI
 name|value
 parameter_list|,
 name|Class

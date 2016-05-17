@@ -127,11 +127,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1767,7 +1767,7 @@ operator|new
 name|RecipeImpl
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 literal|"http://sssw.org/2012/rules/"
 argument_list|)

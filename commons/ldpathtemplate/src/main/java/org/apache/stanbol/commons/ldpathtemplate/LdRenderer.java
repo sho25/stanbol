@@ -65,11 +65,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Resource
+name|RDFTerm
 import|;
 end_import
 
@@ -278,7 +278,7 @@ comment|//A GraphNode backend could be graph unspecific, so the same engine coul
 comment|//reused, possibly being signifantly more performant (caching, etc.)
 name|RDFBackend
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|backend
 init|=
@@ -291,7 +291,7 @@ name|getGraph
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|Resource
+name|RDFTerm
 name|context
 init|=
 name|node
@@ -301,14 +301,14 @@ argument_list|()
 decl_stmt|;
 name|TemplateEngine
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 name|engine
 init|=
 operator|new
 name|TemplateEngine
 argument_list|<
-name|Resource
+name|RDFTerm
 argument_list|>
 argument_list|(
 name|backend

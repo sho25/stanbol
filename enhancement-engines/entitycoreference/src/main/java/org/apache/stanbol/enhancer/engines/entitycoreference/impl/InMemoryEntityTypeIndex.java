@@ -59,11 +59,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -80,7 +80,7 @@ comment|/**      * The index having as key the Uri of the class and the value th
 specifier|private
 name|Map
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Map
 argument_list|<
@@ -103,7 +103,7 @@ operator|=
 operator|new
 name|HashMap
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|,
 name|Map
 argument_list|<
@@ -126,7 +126,7 @@ name|String
 argument_list|>
 name|lookupEntityType
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|String
@@ -176,7 +176,7 @@ specifier|public
 name|void
 name|addEntityType
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|String

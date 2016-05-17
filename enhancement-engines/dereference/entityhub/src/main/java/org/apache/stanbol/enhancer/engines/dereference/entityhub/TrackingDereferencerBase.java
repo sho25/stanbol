@@ -187,9 +187,9 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|Language
 import|;
@@ -203,11 +203,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -219,11 +219,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -235,13 +235,17 @@ name|apache
 operator|.
 name|clerezza
 operator|.
-name|rdf
+name|commons
 operator|.
-name|core
+name|rdf
 operator|.
 name|impl
 operator|.
-name|SimpleMGraph
+name|utils
+operator|.
+name|simple
+operator|.
+name|SimpleGraph
 import|;
 end_import
 
@@ -1669,10 +1673,10 @@ specifier|final
 name|boolean
 name|dereference
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Lock
@@ -1915,12 +1919,12 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Executes the {@link #ldpathProgram} using the parsed URI as context and      * writes the the results to the parsed Graph      * @param uri the context      * @param rdfBackend the RdfBackend the LDPath program is executed on      * @param ldpathProgram The {@link Program} parsed via the dereference context      * @param langs the set of languages to dereference      * @param graph the graph to store the results      * @param writeLock the write lock for the graph      * @throws DereferenceException on any {@link EntityhubException} while      * executing the LDPath program      */
+comment|/**      * Executes the {@link #ldpathProgram} using the parsed URI as context and      * writes the the results to the parsed ImmutableGraph      * @param uri the context      * @param rdfBackend the RdfBackend the LDPath program is executed on      * @param ldpathProgram The {@link Program} parsed via the dereference context      * @param langs the set of languages to dereference      * @param graph the graph to store the results      * @param writeLock the write lock for the graph      * @throws DereferenceException on any {@link EntityhubException} while      * executing the LDPath program      */
 specifier|private
 name|void
 name|copyLdPath
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|RDFBackend
@@ -1941,7 +1945,7 @@ name|String
 argument_list|>
 name|langs
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Lock
@@ -1963,11 +1967,11 @@ argument_list|)
 decl_stmt|;
 comment|//create the representation that stores results in an intermediate
 comment|//graph (we do not want partial results on an error
-name|MGraph
+name|Graph
 name|ldPathResults
 init|=
 operator|new
-name|SimpleMGraph
+name|SimpleGraph
 argument_list|()
 decl_stmt|;
 name|RdfRepresentation
@@ -1982,7 +1986,7 @@ argument_list|,
 name|ldPathResults
 argument_list|)
 decl_stmt|;
-comment|//execute the LDPath Program and write results to the RDF Graph
+comment|//execute the LDPath Program and write results to the RDF ImmutableGraph
 try|try
 block|{
 for|for
@@ -2285,7 +2289,7 @@ specifier|private
 name|void
 name|copyMapped
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|Representation
@@ -2300,7 +2304,7 @@ name|String
 argument_list|>
 name|langs
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Lock
@@ -2388,13 +2392,13 @@ specifier|private
 name|void
 name|copyAll
 parameter_list|(
-name|UriRef
+name|IRI
 name|uri
 parameter_list|,
 name|Representation
 name|rep
 parameter_list|,
-name|MGraph
+name|Graph
 name|graph
 parameter_list|,
 name|Lock

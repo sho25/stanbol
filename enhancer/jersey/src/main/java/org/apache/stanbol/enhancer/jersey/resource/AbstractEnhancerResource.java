@@ -531,11 +531,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|MGraph
+name|Graph
 import|;
 end_import
 
@@ -547,11 +547,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|TripleCollection
+name|Graph
 import|;
 end_import
 
@@ -563,11 +563,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -1290,14 +1290,14 @@ condition|)
 block|{
 name|Set
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|outputContentParts
 init|=
 operator|new
 name|HashSet
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -1348,7 +1348,7 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|UriRef
+name|IRI
 argument_list|(
 name|contentPartUri
 argument_list|)
@@ -1545,7 +1545,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|MGraph
+name|Graph
 name|graph
 init|=
 name|ci
@@ -1589,7 +1589,7 @@ name|ExecutionMetadata
 operator|.
 name|CHAIN_EXECUTION
 argument_list|,
-name|TripleCollection
+name|Graph
 operator|.
 name|class
 argument_list|)

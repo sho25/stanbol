@@ -47,11 +47,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|UriRef
+name|IRI
 import|;
 end_import
 
@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Interface represents a Stanbol Enhancer enhancement.  *<p>  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  *     MGraph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *    String enhancementId = "http://wwww.example.com/iks-project/enhancer/example-enhancement";  *    UriRef enhancementNode = new UriRef(enhancementId);  *    Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *    enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
+comment|/**  * This Interface represents a Stanbol Enhancer enhancement.  *<p>  * To create an instance of this interface use the following code  *<code><pre>  *  ContentItem ci;  *     Graph graph = ci.getMetadata();  *  RdfEntityFactory factory = RdfEntityFactory.createInstance(graph);  *    String enhancementId = "http://wwww.example.com/iks-project/enhancer/example-enhancement";  *    IRI enhancementNode = new IRI(enhancementId);  *    Enhancement enhancement = factory.getProxy(enhancementNode, Enhancement.class);  *    enhancement.setCreator("Rupert Westenthaler");  *  enhancement.setCreated(new Date());  *  ...  *</pre></code>  *  * @author Rupert Westenthaler  */
 end_comment
 
 begin_interface
@@ -112,7 +112,7 @@ name|id
 operator|=
 literal|"http://purl.org/dc/terms/creator"
 argument_list|)
-name|UriRef
+name|IRI
 name|getCreator
 parameter_list|()
 function_decl|;
@@ -126,7 +126,7 @@ argument_list|)
 name|void
 name|setCreator
 parameter_list|(
-name|UriRef
+name|IRI
 name|creator
 parameter_list|)
 function_decl|;
@@ -166,7 +166,7 @@ literal|"http://purl.org/dc/terms/type"
 argument_list|)
 name|Collection
 argument_list|<
-name|UriRef
+name|IRI
 argument_list|>
 name|getDcType
 parameter_list|()
@@ -203,7 +203,7 @@ name|id
 operator|=
 literal|"http://fise.iks-project.eu/ontology/extracted-from"
 argument_list|)
-name|UriRef
+name|IRI
 name|getExtractedFrom
 parameter_list|()
 function_decl|;
@@ -217,7 +217,7 @@ argument_list|)
 name|void
 name|setExtractedFrom
 parameter_list|(
-name|UriRef
+name|IRI
 name|contentItem
 parameter_list|)
 function_decl|;

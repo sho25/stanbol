@@ -258,7 +258,7 @@ argument_list|(
 name|resourcePath
 argument_list|)
 decl_stmt|;
-comment|//log.debug("Resource {} found: {}", (dataFile == null ? "NOT" : ""), resourcePath);
+comment|//log.debug("RDFTerm {} found: {}", (dataFile == null ? "NOT" : ""), resourcePath);
 return|return
 name|dataFile
 return|;

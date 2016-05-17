@@ -199,11 +199,11 @@ name|apache
 operator|.
 name|clerezza
 operator|.
+name|commons
+operator|.
 name|rdf
 operator|.
-name|core
-operator|.
-name|Graph
+name|ImmutableGraph
 import|;
 end_import
 
@@ -1402,7 +1402,7 @@ name|JenaParserProvider
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Graph
+name|ImmutableGraph
 name|graph
 init|=
 name|parser
