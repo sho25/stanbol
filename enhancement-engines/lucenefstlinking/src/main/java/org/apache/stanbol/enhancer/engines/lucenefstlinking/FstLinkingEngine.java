@@ -1734,6 +1734,18 @@ name|e
 argument_list|)
 throw|;
 block|}
+if|if
+condition|(
+operator|!
+name|session
+operator|.
+name|hasCorpus
+argument_list|()
+condition|)
+block|{
+comment|//no corpus available for processing the request
+return|return;
+block|}
 name|long
 name|taggingStart
 init|=

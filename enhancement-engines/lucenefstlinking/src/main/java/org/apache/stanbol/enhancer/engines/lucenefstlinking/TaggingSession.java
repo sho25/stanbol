@@ -885,31 +885,6 @@ comment|//obtain the language specific fields for the session
 if|if
 condition|(
 name|langCorpusInfo
-operator|==
-literal|null
-operator|&&
-name|defaultCorpusInfo
-operator|==
-literal|null
-condition|)
-block|{
-comment|//this should not happen, because the canEnhance method of the
-comment|//engine should  already reject such calls
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"No FST Corpus configured for language '"
-operator|+
-name|language
-operator|+
-literal|"' and also no default FST Corpus is present.!"
-argument_list|)
-throw|;
-block|}
-if|if
-condition|(
-name|langCorpusInfo
 operator|!=
 literal|null
 condition|)
@@ -3036,6 +3011,22 @@ name|config
 operator|.
 name|isSkipAltTokens
 argument_list|()
+return|;
+block|}
+comment|/**      * If this session has a FST corpus for tagging      * @return<code>true</code> if a language and/or a default corpus is available.      *<code>false</code> if both are<code>null</code>      */
+specifier|public
+name|boolean
+name|hasCorpus
+parameter_list|()
+block|{
+return|return
+name|langCorpus
+operator|!=
+literal|null
+operator|||
+name|defaultCorpus
+operator|!=
+literal|null
 return|;
 block|}
 block|}
