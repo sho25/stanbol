@@ -3786,6 +3786,26 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+if|if
+condition|(
+name|inputDocs
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|//empty data sent ... nothing to do
+name|log
+operator|.
+name|debug
+argument_list|(
+literal|"strore called with empty collection of Representations"
+argument_list|)
+expr_stmt|;
+return|return
+name|representations
+return|;
+block|}
 name|long
 name|created
 init|=
