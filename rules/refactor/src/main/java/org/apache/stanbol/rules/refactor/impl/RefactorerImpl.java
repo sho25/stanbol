@@ -93,22 +93,6 @@ name|commons
 operator|.
 name|rdf
 operator|.
-name|Graph
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|clerezza
-operator|.
-name|commons
-operator|.
-name|rdf
-operator|.
 name|IRI
 import|;
 end_import
@@ -646,12 +630,6 @@ decl_stmt|;
 annotation|@
 name|Reference
 specifier|protected
-name|WeightedTcProvider
-name|weightedTcProvider
-decl_stmt|;
-annotation|@
-name|Reference
-specifier|protected
 name|RuleAdapterManager
 name|ruleAdapterManager
 decl_stmt|;
@@ -660,13 +638,10 @@ specifier|public
 name|RefactorerImpl
 parameter_list|()
 block|{      }
-comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      *       * @param weightedTcProvider      * @param serializer      * @param tcManager      * @param semionManager      * @param ruleStore      * @param kReSReasoner      * @param configuration      */
+comment|/**      * Basic constructor to be used if outside of an OSGi environment. Invokes default constructor.      *       * @param serializer      * @param tcManager      * @param semionManager      * @param ruleStore      * @param kReSReasoner      * @param configuration      */
 specifier|public
 name|RefactorerImpl
 parameter_list|(
-name|WeightedTcProvider
-name|weightedTcProvider
-parameter_list|,
 name|TcManager
 name|tcManager
 parameter_list|,
@@ -687,12 +662,6 @@ parameter_list|)
 block|{
 name|this
 argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|weightedTcProvider
-operator|=
-name|weightedTcProvider
 expr_stmt|;
 name|this
 operator|.
@@ -881,12 +850,6 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|weightedTcProvider
-operator|=
-literal|null
-expr_stmt|;
-name|this
-operator|.
 name|tcManager
 operator|=
 literal|null
@@ -909,7 +872,7 @@ name|uriRef
 parameter_list|)
 block|{
 return|return
-name|weightedTcProvider
+name|tcManager
 operator|.
 name|getGraph
 argument_list|(
@@ -932,7 +895,7 @@ block|{
 name|Graph
 name|graph
 init|=
-name|weightedTcProvider
+name|tcManager
 operator|.
 name|getGraph
 argument_list|(

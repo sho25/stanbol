@@ -1322,6 +1322,15 @@ argument_list|,
 name|value
 argument_list|)
 expr_stmt|;
+name|log
+operator|.
+name|warn
+argument_list|(
+literal|"Stacktrace:"
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 return|return
