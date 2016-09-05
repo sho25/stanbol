@@ -18,6 +18,26 @@ package|;
 end_package
 
 begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|clerezza
+operator|.
+name|rdf
+operator|.
+name|core
+operator|.
+name|serializedform
+operator|.
+name|SupportedFormat
+operator|.
+name|TEXT_RDF_NT
+import|;
+end_import
+
+begin_import
 import|import
 name|java
 operator|.
@@ -748,6 +768,22 @@ operator|.
 name|N_TRIPLE
 argument_list|)
 decl_stmt|;
+comment|/**      * Support for the deprecated<code>text/rdf+nt</code> media type      */
+specifier|public
+specifier|static
+specifier|final
+name|MediaType
+name|TEXT_RDF_NT
+init|=
+name|MediaType
+operator|.
+name|valueOf
+argument_list|(
+name|SupportedFormat
+operator|.
+name|TEXT_RDF_NT
+argument_list|)
+decl_stmt|;
 comment|/**      * Read-only list of the supported RDF formats      */
 specifier|public
 specifier|static
@@ -779,6 +815,8 @@ argument_list|,
 name|RDF_XML_TYPE
 argument_list|,
 name|X_TURTLE_TYPE
+argument_list|,
+name|TEXT_RDF_NT
 argument_list|)
 argument_list|)
 decl_stmt|;
