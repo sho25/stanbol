@@ -159,7 +159,7 @@ comment|//we need not test the extraction results here
 comment|//only that the Enhancer REST API works also with engines!
 literal|"<http://purl.org/dc/terms/format> \"image/jpeg\""
 argument_list|,
-literal|"<http://www.w3.org/ns/ma-ont#hasKeyword> \"serbor\" ."
+literal|"<http://www.w3.org/ns/ma-ont#hasKeyword> \"serbor\""
 argument_list|,
 literal|"<http://www.semanticdesktop.org/ontologies/2007/05/10/nexif#isoSpeedRatings> \"400\""
 argument_list|)
