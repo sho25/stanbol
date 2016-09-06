@@ -70,7 +70,7 @@ operator|=
 name|graphNode
 expr_stmt|;
 block|}
-comment|/**      * With this version of the constructor the rendering specification is prefixed with      * the slash-separated package name of the given Class.      *       */
+comment|/**      * With this version of the constructor the rendering specification is prefixed with      * the slash-separated package name of the given Class.      *       * @param renderingSpecification the rendering specification      * @param graphNode the graphNode with the actual content      * @param clazz class which package name will be used as prefix      *       */
 specifier|public
 name|RdfViewable
 parameter_list|(

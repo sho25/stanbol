@@ -28,7 +28,7 @@ specifier|public
 class|class
 name|Viewable
 block|{
-comment|/**      * This uses the class name of Pojo to prefix the template      *       * @param templatePath the templatePath      * @param graphNode the graphNode with the actual content      */
+comment|/**      * This uses the class name of Pojo to prefix the template      *       * @param templatePath the templatePath      * @param pojo the graphNode with the actual content      */
 specifier|public
 name|Viewable
 parameter_list|(
@@ -51,7 +51,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * With this version of the constructor the templatePath is prefixed with      * the slash-separated class name of clazz.      *       */
+comment|/**      * With this version of the constructor the templatePath is prefixed with      * the slash-separated class name of clazz.      *      * @param templatePath the templatePath      * @param pojo the graphNode with the actual content      * @param clazz class which package name will be used as prefix       *       */
 specifier|public
 name|Viewable
 parameter_list|(

@@ -456,7 +456,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This is the SPARQL endpoint which is used throughout the Stanbol. It uses {@link BundleContext} to retrive  * {@link Graph} s registered to OSGi environment. To be able to execute SPARQL queries on triple  * collections, they should be registered to the OSGi environment with the following parameters:  *   *<p>  *<ul>  *<li>graph.uri<b>(required)</b> : The URI of the graph. This is the same as used with the TcManager</li>  *<li>service.ranking: If this parameter is not specified, "0" will be used as default value.</li>  *<li>graph.name: The name of the graph. Human readable name intended to be used in the UI</li>  *<li>graph.description: human readable description providing additional information about the RDF graph</li>  *</ul>  *</p>  *   *<p>  * If a uri is not specified, the graph having highest service.ranking value will be chosen.  *</p>  *   */
+comment|/**  * This is the SPARQL endpoint which is used throughout the Stanbol. It uses {@link BundleContext} to retrive  * {@link Graph} s registered to OSGi environment. To be able to execute SPARQL queries on triple  * collections, they should be registered to the OSGi environment with the following parameters:  *   *<ul>  *<li>graph.uri<b>(required)</b> : The URI of the graph. This is the same as used with the TcManager</li>  *<li>service.ranking: If this parameter is not specified, "0" will be used as default value.</li>  *<li>graph.name: The name of the graph. Human readable name intended to be used in the UI</li>  *<li>graph.description: human readable description providing additional information about the RDF graph</li>  *</ul>  *   *<p>  * If a uri is not specified, the graph having highest service.ranking value will be chosen.  *</p>  *   */
 end_comment
 
 begin_class
@@ -528,7 +528,7 @@ expr_stmt|;
 block|}
 comment|//TODO re-enable
 comment|/*@OPTIONS     public Response handleCorsPreflight(@Context HttpHeaders headers) {         ResponseBuilder res = Response.ok();         enableCORS(servletContext, res, headers);         return res.build();     }*/
-comment|/**      * HTTP GET service to execute SPARQL queries on {@link Graph}s registered to OSGi environment.      * If a<code>null</code>, it is assumed that the request is coming from the HTML interface of SPARQL      * endpoint. Otherwise the query is executed on the triple collection specified by<code>graphUri</code>.      * But, if no graph uri is passed, then the triple collection having highest service.ranking value is      * chosen.      *       * Type of the result is determined according to type of the query such that if the specified query is      * either a<b>describe query</b> or<b>construct query</b>, results are returned in      *<b>application/rdf+xml</b> format, otherwise in<b>pplication/sparql-results+xml</b> format.      *       * @param graphUri      *            the URI of the graph on which the SPARQL query will be executed.      * @param sparqlQuery      *            SPARQL query to be executed      * @return      */
+comment|/**      * HTTP GET service to execute SPARQL queries on {@link Graph}s registered to OSGi environment.      * If a<code>null</code>, it is assumed that the request is coming from the HTML interface of SPARQL      * endpoint. Otherwise the query is executed on the triple collection specified by<code>graphUri</code>.      * But, if no graph uri is passed, then the triple collection having highest service.ranking value is      * chosen.      *       * Type of the result is determined according to type of the query such that if the specified query is      * either a<b>describe query</b> or<b>construct query</b>, results are returned in      *<b>application/rdf+xml</b> format, otherwise in<b>pplication/sparql-results+xml</b> format.      *       * @param graphUri      *            the URI of the graph on which the SPARQL query will be executed.      * @param sparqlQuery      *            SPARQL query to be executed      * @param headers      *            HTTP request Headers      * @throws InvalidSyntaxException Invalid SPARQL Syntax Exception      * @return Http Response       */
 annotation|@
 name|GET
 annotation|@
@@ -740,7 +740,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * HTTP GET service to execute SPARQL queries on {@link Graph}s registered to OSGi environment.      * For details, see {@link #sparql(String, String, HttpHeaders)}      */
+comment|/**      * HTTP GET service to execute SPARQL queries on {@link Graph}s registered to OSGi environment.      * For details, see {@link #sparql(String, String, HttpHeaders)}      *      * @param graphUri      *            the URI of the graph on which the SPARQL query will be executed.      * @param sparqlQuery      *            SPARQL query to be executed      * @param headers      *            HTTP request Headers      * @throws InvalidSyntaxException Invalid SPARQL Syntax Exception      * @return Http Response       */
 annotation|@
 name|POST
 annotation|@

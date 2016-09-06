@@ -322,7 +322,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link Graph} implementation that uses indexes for<ul>  *<li> subject, predicate, object [SPO]  *<li> predicate, object, subject [POS]  *<li> object, subject, predicate [OSP]  *</ul>  * Indexes are maintained in {@link TreeSet}s with according {@link Comparator}  * instances ({@link #spoComparator}, {@link #posComparator} ,  * {@link #ospComparator}). {@link RDFTerm}s are compared first using the  * {@link RDFTerm#hashCode()} and only if this matches by using  * {@link RDFTerm}{@link #toString()}  * .<p>  * The {@link #filter(BlankNodeOrIRI, IRI, RDFTerm)} implementation is based on  * {@link TreeSet#subSet(Object, Object)}. All Iterators returned directly  * operate on top of one of the internal indexes.  *<p>  * This class is not public, implementations should use {@link IndexedGraph} or  * {@link IndexedGraph}.  *  * @author rwesten  */
+comment|/**  * {@link Graph} implementation that uses indexes for<ul>  *<li> subject, predicate, object [SPO]  *<li> predicate, object, subject [POS]  *<li> object, subject, predicate [OSP]  *</ul>  * Indexes are maintained in {@link TreeSet}s with according {@link Comparator}  * instances ({@link #spoComparator}, {@link #posComparator} ,  * {@link #ospComparator}). {@link RDFTerm}s are compared first using the  * {@link RDFTerm}#hashCode() and only if this matches by using  * {@link RDFTerm}{@link #toString()}  * .<p>  * The {@link #filter(BlankNodeOrIRI, IRI, RDFTerm)} implementation is based on  * {@link TreeSet#subSet(Object, Object)}. All Iterators returned directly  * operate on top of one of the internal indexes.  *<p>  * This class is not public, implementations should use {@link IndexedGraph} or  * {@link IndexedGraph}.  *  * @author rwesten  */
 end_comment
 
 begin_class
@@ -780,7 +780,7 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates a {@link IndexedGraph} using the passed iterator, the iterator is      * consumed before the constructor returns      *      * @param iterator      */
+comment|/**      * Creates a {@link IndexedGraph} using the passed iterator, the iterator is      * consumed before the constructor returns      *      * @param iterator Triple Iterator      */
 specifier|public
 name|IndexedGraph
 parameter_list|(
@@ -817,7 +817,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Creates a {@link IndexedGraph} for the specified collection of triples,      * subsequent modification of baseSet do not affect the created instance.      *      * @param iterable over triples      */
+comment|/**      * Creates a {@link IndexedGraph} for the specified collection of triples,      * subsequent modification of baseSet do not affect the created instance.      *      * @param baseCollection collection of triples      */
 specifier|public
 name|IndexedGraph
 parameter_list|(
@@ -1691,7 +1691,7 @@ else|:
 literal|1
 return|;
 block|}
-comment|/**      * Compares Resources to correctly sort them within the index.<p>      * Sort criteria are:<ol>      *<li> URIs are sorted by the {@link IRI#getUnicodeString()} unicode      * string)      *<li> Literals      *<ol>      *<li> sort by the {@link Literal#getLexicalForm() lixical form}      *<li> sort by {@link PlainLiteral#getLanguage() language}      * (<code>null</code> value first)      *<li> sort by {@link TypedLiteral#getDataType() type} (<code>null</code>      * value fist      *</ol>      *<li> BlankNode      *<ol>      *<li> sorted by their      * {@link System#identityHashCode(Object) Object hasCode}      *<li> on hasCode conflicts (same hasCode but not equals) a random order is      * chosen and kept in the parsed conflictsMap      *</ol>      *</ol>      *<b>NOTEs</b><ul>      *<li> parsed {@link RDFTerm} are not required to correctly implement      * {@link Object#hashCode() hashCode} and      * {@link Object#equals(Object) equals}      *<li> parsed {@link IRI} and {@link BlankNode} and {@link Literal} MUST      * NOT extend/implement any of the other classes/interfaces. This means that      * an {@link IRI} MUST NOT implement {@link BlankNode} nor {@link Literal}      *<li> parsed {@link Literal}s MAY implement {@link PlainLiteral} AND      * {@link TypedLiteral}. This allows wrappers over frameworks that do not      * distinguish between those two literal types to be used with the      * {@link IndexedGraph}.      *</ul>      *      * @param a the first resource to compare      * @param b the second resource to compare      * @param confictsMap the map used to resolve BlankNodes with hasCode      * conflicts      * @return      */
+comment|/**      * Compares Resources to correctly sort them within the index.<p>      * Sort criteria are:<ol>      *<li> URIs are sorted by the {@link IRI#getUnicodeString()} unicode      * string)      *<li> Literals      *<ol>      *<li> sort by the {@link Literal#getLexicalForm() lixical form}      *<li> sort by {@link Literal#getLanguage() language}      * (<code>null</code> value first)      *<li> sort by {@link Literal#getDataType() type} (<code>null</code>      * value fist      *</ol>      *<li> BlankNode      *<ol>      *<li> sorted by their      * {@link System#identityHashCode(Object) Object hasCode}      *<li> on hasCode conflicts (same hasCode but not equals) a random order is      * chosen and kept in the parsed conflictsMap      *</ol>      *</ol>      *<b>NOTEs</b><ul>      *<li> parsed {@link RDFTerm} are not required to correctly implement      * {@link Object#hashCode() hashCode} and      * {@link Object#equals(Object) equals}      *<li> parsed {@link IRI} and {@link BlankNode} and {@link Literal} MUST      * NOT extend/implement any of the other classes/interfaces. This means that      * an {@link IRI} MUST NOT implement {@link BlankNode} nor {@link Literal}      *<li> parsed {@link Literal}s MAY implement PlainLiteral AND      * TypedLiteral. This allows wrappers over frameworks that do not      * distinguish between those two literal types to be used with the      * {@link IndexedGraph}.      *</ul>      *      * @param a the first resource to compare      * @param b the second resource to compare      * @param confictsMap the map used to resolve BlankNodes with hasCode      * conflicts      * @return       */
 specifier|protected
 specifier|static
 name|int

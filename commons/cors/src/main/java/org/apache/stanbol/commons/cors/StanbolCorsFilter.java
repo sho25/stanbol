@@ -182,7 +182,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Wraps a {@link CorsFilter} in order to provide CORS support.  * @author Cristian Petroaca  *  */
+comment|/**  * Wraps a {@link CORSFilter} in order to provide CORS support.  * @author Cristian Petroaca  *  */
 end_comment
 
 begin_class

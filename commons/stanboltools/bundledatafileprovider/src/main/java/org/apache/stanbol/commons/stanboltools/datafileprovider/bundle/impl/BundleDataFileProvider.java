@@ -178,7 +178,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link DataFileProvider} interface that uses the  * {@link Bundle#getResource(String)} method to load data files. This  * method uses the Bundle classpath to search for resource.<p>  * Note that this provider searches only the resources within this bundle. The  * bundle classpath is NOT used!<p>  * Users should use the {@link #close()} method to remove listeners and free up  * resources.  * @author Rupert Westenthaler  *  */
+comment|/**  * Implementation of the {@link DataFileProvider} interface that uses the  * {@link Bundle#getResource(String)} method to load data files. This  * method uses the Bundle classpath to search for resource.<p>  * Note that this provider searches only the resources within this bundle. The  * bundle classpath is NOT used!<p>  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -213,7 +213,7 @@ name|String
 argument_list|>
 name|searchPaths
 decl_stmt|;
-comment|/**      * Creates a {@link DataFileProvider} that uses the {@link Bundle} to lookup      * data files in the directories specified by the parsed relatives path.      * @param bundleContext the bundle context used to initialise this DataFileProvider      * @param searchPaths the relative paths to the directories used to search      * for requested data files. The parsed paths are searches in the provided      * order. Parsed paths are normalised by adding missing {@link File#separator}      * to its end. if<code>null</code> or an empty list is parsed data files are      * searched relative to the root folder of the bundle. Adding an empty      * String or the<code>null</code> element allows to search the root folder in      * addition to other paths.      */
+comment|/**      * Creates a {@link DataFileProvider} that uses the {@link Bundle} to lookup      * data files in the directories specified by the parsed relatives path.      * @param bundle the bundle context used to initialise this DataFileProvider      * @param searchPaths the relative paths to the directories used to search      * for requested data files. The parsed paths are searches in the provided      * order. Parsed paths are normalised by adding missing {@link File#separator}      * to its end. if<code>null</code> or an empty list is parsed data files are      * searched relative to the root folder of the bundle. Adding an empty      * String or the<code>null</code> element allows to search the root folder in      * addition to other paths.      */
 specifier|public
 name|BundleDataFileProvider
 parameter_list|(
