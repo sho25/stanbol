@@ -254,7 +254,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Finds classes by using {@link RegisteredSolrAnalyzerFactory} with a       * filter over {@link SolrConstants#PROPERTY_ANALYZER_FACTORY_NAME}.      * @param bc the {@link BundleContext} used for the search      * @param cname the cname as parsed to {@link SolrResourceLoader#findClass(String, Class, String...)}      * @param expectedType the expected type as parsed to {@link SolrResourceLoader#findClass(String, Class, String...)}      * @param subpackages the subpackages as parsed to {@link SolrResourceLoader#findClass(String, Class, String...)}      * @return the class      */
+comment|/**      * Finds classes by using {@link RegisteredSolrAnalyzerFactory} with a       * filter over {@link SolrConstants#PROPERTY_ANALYZER_FACTORY_NAME}.      * @param<T> This is the type parameter      * @param bc the {@link BundleContext} used for the search      * @param cname the cname as parsed to {@link SolrResourceLoader#findClass(String, Class, String...)}      * @param expectedType the expected type as parsed to {@link SolrResourceLoader#findClass(String, Class, String...)}      * @param subpackages the subpackages as parsed to {@link SolrResourceLoader#findClass(String, Class, String...)}      * @return the class      */
 specifier|public
 specifier|static
 parameter_list|<

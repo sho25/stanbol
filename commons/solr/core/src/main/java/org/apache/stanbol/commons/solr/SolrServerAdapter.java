@@ -1099,7 +1099,7 @@ comment|//If we want to delete SolrCores from Disc, this can be done here!
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Creates and Initialise a Solr {@link CoreContainer} based on the provided      * {@link SolrServerProperties} and registers it and all its configured       * {@link SolrCore}s as OSGI services by using the provided {@link BundleContext}.      * @throws SAXException On any error while parsing the solr.xml file used to       * initialise the {@link CoreContainer}      * @throws SolrException if the Solr {@link CoreContainer} could not be       * created.      * @throws IllegalArgumentException if any of the parsed parameters is      *<code>null</code> or the {@link SolrServerProperties} do not contain a      * valid value for the {@link SolrConstants#PROPERTY_SERVER_DIR}       * property.      */
+comment|/**      * Creates and Initialise a Solr {@link CoreContainer} based on the provided      * {@link SolrServerProperties} and registers it and all its configured       * {@link SolrCore}s as OSGI services by using the provided {@link BundleContext}.      * initialise the {@link CoreContainer}      * @param context Bundle Context      * @param parsedServerProperties Solr Core properties      * @throws SolrException if the Solr {@link CoreContainer} could not be       * created.      * @throws IllegalArgumentException if any of the parsed parameters is      *<code>null</code> or the {@link SolrServerProperties} do not contain a      * valid value for the {@link SolrConstants#PROPERTY_SERVER_DIR}       * property.      */
 specifier|public
 name|SolrServerAdapter
 parameter_list|(
@@ -1611,7 +1611,7 @@ expr_stmt|;
 block|}
 comment|//else core already removed -> nothing to do
 block|}
-comment|/**      * Reloads a SolrCore e.g. to apply a change in its configuration      * @param name the name of the Core to reload      * @return The ServiceReference to the SolrCore.      * @throws SolrException if the Core could not be reloaded      */
+comment|/**      * Reloads a SolrCore e.g. to apply a change in its configuration      * @param name the name of the Core to reload      */
 specifier|public
 name|void
 name|reloadCore
@@ -2023,7 +2023,7 @@ comment|//            }
 comment|//            log.warn("   ... called SolrCore#close() {} times before closed",i);
 comment|//        }
 block|}
-comment|/**      * Registers a {@link SolrCore} as OSGI service with the some additional      * metadata allowing other components to explicitly register for this      * SolrCore      * @param name the name of the core      * @param core the Core or<code>null</code> if not available. If       *<code>null</code> is parsed the {@link SolrCore} will be looked up by      * using the {@link #server}. This is mainly to do not increase the      * {@link SolrCore#getOpenCount()}.      */
+comment|/**      * Registers a {@link SolrCore} as OSGI service with the some additional      * metadata allowing other components to explicitly register for this      * SolrCore      * @param name the name of the core      * @param core the Core or<code>null</code> if not available. If       *<code>null</code> is parsed the {@link SolrCore} will be looked up by      * using the {@link #server}. This is mainly to do not increase the      * {@link SolrCore#getOpenCount()}.      * @return the registered service      */
 specifier|protected
 name|ServiceReference
 name|registerCoreService
@@ -2345,7 +2345,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/**      * The Name of the registered {@link CoreContainer}      * @return      */
+comment|/**      * The Name of the registered {@link CoreContainer}      * @return server name      */
 specifier|public
 name|String
 name|getServerName
@@ -2377,7 +2377,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * The Directory of the registered {@link CoreContainer}      * @return      */
+comment|/**      * The Directory of the registered {@link CoreContainer}      * @return Server Directory name      */
 specifier|public
 name|String
 name|getServerDir
@@ -4306,7 +4306,7 @@ else|:
 name|SOLR_XML_NAME
 return|;
 block|}
-comment|/**          * Setter for the file name of the "solr.xml". If<code>null</code> or          * an empty string is parsed the value will be reset to the default          * {@link SolrConstants#SOLR_XML_NAME}          * @param solrXmlName          */
+comment|/**          * Setter for the file name of the "solr.xml". If<code>null</code> or          * an empty string is parsed the value will be reset to the default          * {@link SolrConstants#SOLR_XML_NAME}          * @param solrXmlName Solr Config File Name          */
 specifier|public
 name|void
 name|setSorlXml

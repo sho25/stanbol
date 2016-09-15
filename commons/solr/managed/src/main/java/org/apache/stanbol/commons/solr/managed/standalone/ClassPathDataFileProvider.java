@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility that allows to use the {@link DataFileProvider} to lookup   * solrindex archives outside of OSGI.<p>  * Usage:<ul>  *<li> {@link ServiceLoader} is used to search for DataFileProviders outside of  * OSGI. So make sure to have a default constructor and provide the required  * "org.apache.stanbol.commons.stanboltools.datafileprovider.DataFileProvider" files  * within the "META-INF/services" within your jar.  *<li> An instance of this class will load datafiles found within   * {@link #INDEX_BASE_PATH} ("solr/core/"). If you do not want to register an own  * {@link DataFileProvider} implementation with the {@link ServiceLoader} utility  * copy the files to this directory.  *<li> To register server our own datafile you might want to consider to extend  * this implementation by calling the protected constructor with two parameters.  * and parsing the path to your data files as second parameter. Do not forget to  * register your DataFileProvider with the {@link ServiceLoader} utility.  * @author Rupert Westenthaler  *  */
+comment|/**  * Utility that allows to use the {@link DataFileProvider} to lookup   * solrindex archives outside of OSGI.<p>  * Usage:<ul>  *<li> {@link ServiceLoader} is used to search for DataFileProviders outside of  * OSGI. So make sure to have a default constructor and provide the required  * "org.apache.stanbol.commons.stanboltools.datafileprovider.DataFileProvider" files  * within the "META-INF/services" within your jar.  *<li> An instance of this class will load datafiles found within   * {@link #INDEX_BASE_PATH} ("solr/core/"). If you do not want to register an own  * {@link DataFileProvider} implementation with the {@link ServiceLoader} utility  * copy the files to this directory.  *<li> To register server our own datafile you might want to consider to extend  * this implementation by calling the protected constructor with two parameters.  * and parsing the path to your data files as second parameter. Do not forget to  * register your DataFileProvider with the {@link ServiceLoader} utility.</ul>  * @author Rupert Westenthaler  *  */
 end_comment
 
 begin_class
@@ -183,7 +183,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a DataFileProvider that loads SolrIndexConfigurations via the      * classpath relative to {@value #INDEX_BASE_PATH}.      * @param bundleSymbolicName the symbolic name of the bundle to accept      * requests from or<code>null</code> to accept any request.      */
+comment|/**      * Creates a DataFileProvider that loads SolrIndexConfigurations via the      * classpath relative to {@value #INDEX_BASE_PATH}.      * @param bundleSymbolicName the symbolic name of the bundle to accept      * @param path classpath      * requests from or<code>null</code> to accept any request.      */
 specifier|protected
 name|ClassPathDataFileProvider
 parameter_list|(

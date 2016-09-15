@@ -310,7 +310,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Read the mappings form the parsed map      * @param mappings      */
+comment|/**      * Read the mappings form the parsed map      * @param mappings Mappings      */
 specifier|public
 name|NamespacePrefixProviderImpl
 parameter_list|(

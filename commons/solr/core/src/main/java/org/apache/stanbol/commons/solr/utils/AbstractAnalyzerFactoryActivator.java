@@ -606,7 +606,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Helper class that registers Lucene 4 {@link AbstractAnalysisFactory} instances      * with the OSGI service registry.      *<p>      * It uses the {@link SPIClassIterator} to load instances from the provided      * {@link ClassLoader}. Note that only factories noted in<code>META-INF/serivces</code>      * files embedded within the current module will be found and registered.      * This means that this code needs typically be used in the Bundle Activator for       * all modules providing Solr analyzer factories.           * @param bc The BundleContext used to register the services      * @param classloader the classloader of the current modlue      * @param type the type of the Factories to register      * @return the ServiceRegistrations for the found factories      */
+comment|/**      * Helper class that registers Lucene 4 {@link AbstractAnalysisFactory} instances      * with the OSGI service registry.      *<p>      * It uses the {@link SPIClassIterator} to load instances from the provided      * {@link ClassLoader}. Note that only factories noted in<code>META-INF/serivces</code>      * files embedded within the current module will be found and registered.      * This means that this code needs typically be used in the Bundle Activator for       * all modules providing Solr analyzer factories.      * @param<S> the type class           * @param bc The BundleContext used to register the services      * @param classloader the classloader of the current modlue      * @param type the type of the Factories to register      * @return the ServiceRegistrations for the found factories      */
 specifier|protected
 parameter_list|<
 name|S

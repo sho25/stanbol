@@ -656,7 +656,7 @@ return|return
 name|DEFAULT_SERVER_NAME
 return|;
 block|}
-comment|/**      * Shutdowns the default server      * @return      */
+comment|/**      * Shutdowns the default server      */
 specifier|public
 specifier|static
 name|void

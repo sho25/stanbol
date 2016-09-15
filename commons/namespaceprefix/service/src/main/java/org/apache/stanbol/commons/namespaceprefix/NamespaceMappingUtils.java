@@ -379,7 +379,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Uses the {@link NamespacePrefixService#PREFIX_VALIDATION_PATTERN} to check      * if the parsed prefix is valid      * @param prefix the prefix to check      * @return<code>true</code> if valid. Othervise<code>false</code>      */
+comment|/**      * Uses the NamespacePrefixService#PREFIX_VALIDATION_PATTERN to check      * if the parsed prefix is valid      * @param prefix the prefix to check      * @return<code>true</code> if valid. Othervise<code>false</code>      */
 specifier|public
 specifier|static
 name|boolean
@@ -501,7 +501,7 @@ operator|>
 literal|0
 return|;
 block|}
-comment|/**      * Utility intended to be used during activate of OSGI components that support      * the use of '{prefix}:{localname}' in its configurations. The      * {@link NamespacePrefixService} is assumed as optional so that users can      * use<code>ReferenceCardinality.OPTIONAL_UNARY</code> to inject the service.      *<p>      * Here is an example      *<code><pre>      *     @Reference(cardinality=ReferenceCardinality.OPTIONAL_UNARY)      *     protected NamespacePrefixService nps;      *</pre></code>      * @param nps the {@link NamespacePrefixService} or<code>null</code> if not      * available      * @param property the configuration property (used for creating {@link ConfigurationException}s)      * @param value configured value. Might be both a '{prefix}:{localname}' or the full URI.      * @return the full URI      * @throws ConfigurationException if the conversion was not possible because      * the {@link #nsPrefixService} is<code>null</code> or the prefix is       * unknown to the service      */
+comment|/**      * Utility intended to be used during activate of OSGI components that support      * the use of '{prefix}:{localname}' in its configurations. The      * {@link NamespacePrefixService} is assumed as optional so that users can      * use<code>ReferenceCardinality.OPTIONAL_UNARY</code> to inject the service.      *<p>      * Here is an example      *<code>      *     Reference(cardinality=ReferenceCardinality.OPTIONAL_UNARY)      *     protected NamespacePrefixService nps;      *</code>      * @param nps the {@link NamespacePrefixService} or<code>null</code> if not      * available      * @param property the configuration property (used for creating {@link ConfigurationException}s)      * @param value configured value. Might be both a '{prefix}:{localname}' or the full URI.      * @return the full URI      * @throws ConfigurationException if the conversion was not possible because      * the prefix is<code>null</code> or the prefix is       * unknown to the service      */
 specifier|public
 specifier|static
 name|String
@@ -615,7 +615,7 @@ name|value
 return|;
 block|}
 block|}
-comment|/**      * Utility intended to be used to by components that do allow the use of      * '{prefix}:{localname}' in its configurations. The {@link NamespacePrefixService}      * is considered optional.        * @param nps the {@link NamespacePrefixService} or<code>null</code> if not      * available      * @param value configured value. Might be both a '{prefix}:{localname}' or the full URI.      * @return the full URI      * @throws IllegalArgumentException if the conversion was not possible because      * the {@link #nsPrefixService} is<code>null</code> or the prefix is       * unknown to the service      */
+comment|/**      * Utility intended to be used to by components that do allow the use of      * '{prefix}:{localname}' in its configurations. The {@link NamespacePrefixService}      * is considered optional.        * @param nps the {@link NamespacePrefixService} or<code>null</code> if not      * available      * @param value configured value. Might be both a '{prefix}:{localname}' or the full URI.      * @return the full URI      * @throws IllegalArgumentException if the conversion was not possible because      * the prefix is<code>null</code> or the prefix is       * unknown to the service      */
 specifier|public
 specifier|static
 name|String

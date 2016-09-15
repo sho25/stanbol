@@ -738,7 +738,7 @@ operator|!
 name|isFile
 return|;
 block|}
-comment|/**      * Checks if the referenced index could be on the parsed server      * @param serverName      * @return      */
+comment|/**      * Checks if the referenced index could be on the parsed server      * @param serverName Server Name to be checked      * @return True if the serverName is consistent with the parsed server       */
 specifier|public
 name|boolean
 name|checkServer
@@ -866,7 +866,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Getter for the {@link Filter} that can be used to track the      * {@link CoreContainer} referenced by this IndexReference. If no      * server is defined. This will track all {@link CoreContainer} instances.      * Note that the {@link CoreContainer} with the highest       * {@link Constants#SERVICE_RANKING} is expected to be the default server      */
+comment|/**      * Getter for the {@link Filter} that can be used to track the      * {@link CoreContainer} referenced by this IndexReference. If no      * server is defined. This will track all {@link CoreContainer} instances.      * Note that the {@link CoreContainer} with the highest       * {@link Constants#SERVICE_RANKING} is expected to be the default server      * @return Filter string      */
 specifier|public
 name|String
 name|getServerFilter

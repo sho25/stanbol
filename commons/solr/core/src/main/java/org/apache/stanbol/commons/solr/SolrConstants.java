@@ -211,7 +211,7 @@ name|PROPERTY_SOLR_SERVER
 operator|+
 literal|".dir"
 decl_stmt|;
-comment|/**      * the name of the solr.xml file defining the configuration for the Solr      * Server. If not defined {@link #SOLR_XML_NAME} is used as default<p>      */
+comment|/**      * the name of the solr.xml file defining the configuration for the Solr      * Server. If not defined {@link #SOLR_XML_NAME} is used as default      */
 specifier|public
 specifier|static
 specifier|final

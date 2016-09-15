@@ -386,7 +386,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This Utility provides Methods that copy a configuration from a {@link Bundle} and copy it to a directory.  *<p>  * This is currently used by the {@link RegisteredSolrServerProvider} to initialise the internally managed  * {@link EmbeddedSolrServer} and/or to add additional cores. There are always two variants of the methods.  * The one taking a bundle as parameter is supposed to be used when running within an OSGI environment. The  * variant taking a Class object works outside of an OSGI environment.  *   * @author Rupert Westenthaler  *   */
+comment|/**  * This Utility provides Methods that copy a configuration from a {@link Bundle} and copy it to a directory.  *<p>  * This is currently used by the RegisteredSolrServerProvider to initialise the internally managed  * {@link EmbeddedSolrServer} and/or to add additional cores. There are always two variants of the methods.  * The one taking a bundle as parameter is supposed to be used when running within an OSGI environment. The  * variant taking a Class object works outside of an OSGI environment.  *   * @author Rupert Westenthaler  *   */
 end_comment
 
 begin_class
