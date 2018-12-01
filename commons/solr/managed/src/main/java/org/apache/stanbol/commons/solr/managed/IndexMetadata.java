@@ -867,10 +867,6 @@ condition|(
 name|archive
 operator|!=
 literal|null
-operator|&&
-name|archive
-operator|!=
-literal|null
 condition|)
 block|{
 if|if
@@ -928,12 +924,6 @@ name|SYNCHRONIZED
 argument_list|)
 decl_stmt|;
 return|return
-name|value
-operator|==
-literal|null
-condition|?
-literal|false
-else|:
 name|Boolean
 operator|.
 name|parseBoolean

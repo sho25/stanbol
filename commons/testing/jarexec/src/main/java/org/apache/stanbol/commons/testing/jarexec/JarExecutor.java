@@ -381,6 +381,7 @@ name|serverPort
 return|;
 block|}
 specifier|public
+specifier|synchronized
 specifier|static
 name|JarExecutor
 name|getInstance
@@ -398,20 +399,6 @@ operator|==
 literal|null
 condition|)
 block|{
-synchronized|synchronized
-init|(
-name|JarExecutor
-operator|.
-name|class
-init|)
-block|{
-if|if
-condition|(
-name|instance
-operator|==
-literal|null
-condition|)
-block|{
 name|instance
 operator|=
 operator|new
@@ -420,8 +407,6 @@ argument_list|(
 name|config
 argument_list|)
 expr_stmt|;
-block|}
-block|}
 block|}
 return|return
 name|instance
